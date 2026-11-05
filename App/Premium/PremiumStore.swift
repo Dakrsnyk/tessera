@@ -88,13 +88,38 @@ final class PremiumStore {
         }
     }
 
-    /// Syncs with the App Store, then reports whether Premium was found.
-    func restore() async -> Bool {
+    /// What « Restaurer mes achats » found.
+    enum RestoreOutcome: Equatable {
+        case restored
+        case notFound
+        /// The person closed the Apple Account sign-in: nothing to say.
+        case cancelled
+        /// The App Store could not be reached (no connection, server): « nothing found » would be false.
+        case failed
+    }
+
+    /// Syncs with the App Store, then reports whether Premium was found. Premium found in the purchases already on
+    /// the iPhone counts even when the sync failed.
+    func restore() async -> RestoreOutcome {
         isRestoring = true
         defer { isRestoring = false }
-        try? await AppStore.sync()
+        var syncError: Error?
+        do { try await AppStore.sync() } catch { syncError = error }
         await refreshEntitlements()
-        return model?.isPremium ?? false
+        if model?.isPremium ?? false { return .restored }
+        guard let syncError else { return .notFound }
+        if let storeError = syncError as? StoreKitError, case .userCancelled = storeError { return .cancelled }
+        return .failed
+    }
+
+    /// The message shown after a restore; nil when the person cancelled.
+    static func message(for outcome: RestoreOutcome) -> String? {
+        switch outcome {
+        case .restored: tr("Ton accès Premium est rétabli.")
+        case .notFound: tr("Aucun achat Premium trouvé pour ce compte Apple.")
+        case .cancelled: nil
+        case .failed: tr("L'App Store n'a pas pu être joint. Vérifie ta connexion, puis réessaie.")
+        }
     }
 
     func refreshEntitlements() async {

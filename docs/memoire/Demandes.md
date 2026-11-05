@@ -211,7 +211,7 @@ Objectif : lancer Ardane, viser 100 000 $ CAD de chiffre d'affaires annuel ; ven
 - [ ] 12.P (Chef + ios-developer, P1, après 12.R) Conformité : CGU propres ou EULA Apple décidé, politique à jour d'après les pratiques réelles, inventaire des données et fournisseurs, réponses « App Privacy » prêtes, essai annuel et « 3 widgets gratuits » alignés (décision de l'utilisateur sur l'essai annuel).
 - [ ] 12.G (qa-tester, sonnet, P1, après 12.C) Passe de tests en mode gratuit (voir « À FAIRE AVANT la version publique ») + non-régression `[daily]`.
 - [ ] 12.E (Chef, P2) Pack « entreprise individuelle » : étapes REQ, TPS/TVQ (seuil 30 000 $, inscription volontaire), W-8BEN, banque, suivi des revenus Apple et des justificatifs, coûts sourcés. Actions de l'utilisateur : immatriculation (41 $), banque, CPA.
-- [ ] 12.A (Chef, P2, après 12.P) Pack App Store Connect : contrat Paid Apps, 3 produits (identifiants de `Config/Tessera.storekit`), localisations FR/EN, fiche, mots-clés, classification, captures, notes pour la revue, test sandbox. Actions de l'utilisateur : signatures, banque, saisie sous son compte.
+- [ ] 12.A (Chef, P2, après 12.P) Pack App Store Connect : contrat Paid Apps, 3 produits (identifiants de `Config/Ardane.storekit`), localisations FR/EN, fiche, mots-clés, classification, captures, notes pour la revue, test sandbox. Actions de l'utilisateur : signatures, banque, saisie sous son compte.
 - [ ] 12.T (Chef, P3, accord explicite requis) TestFlight public sans Premium, soumission, suivi des refus, publication.
 - [ ] 12.M (Chef, P3) Lancement : ASO, premiers utilisateurs, suivi financier (ventes, remboursements, trésorerie).
 

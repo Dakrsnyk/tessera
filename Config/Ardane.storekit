@@ -8,7 +8,7 @@
       "internalID": "6740000003",
       "localizations": [
         {
-          "description": "Tout Ardane Premium, pour toujours : un seul paiement, sans renouvellement.",
+          "description": "Tout Premium pour toujours. Un seul paiement.",
           "displayName": "Premium à vie",
           "locale": "fr_CA"
         }
@@ -44,7 +44,7 @@
           },
           "localizations": [
             {
-              "description": "Tout Ardane Premium, chaque mois. 7 jours gratuits pour commencer.",
+              "description": "Tout Premium, chaque mois. Essai de 7 jours.",
               "displayName": "Premium mensuel",
               "locale": "fr_CA"
             }
@@ -69,7 +69,7 @@
           },
           "localizations": [
             {
-              "description": "Tout Ardane Premium pendant un an. 7 jours gratuits pour commencer.",
+              "description": "Tout Premium pendant un an. Essai de 7 jours.",
               "displayName": "Premium annuel",
               "locale": "fr_CA"
             }

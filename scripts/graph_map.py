@@ -271,7 +271,7 @@ MODULES = [
      "features": [
          "Informations de la personne et données demandées là où un widget les utilise.",
          "Rappels intelligents (séance, repas, factures), notifications locales.",
-         "Icône de l'app (20 icônes, Premium ; Corail et l'icône en place restent), style de l'app (10 styles `AppStyleID`, clair/sombre).",
+         "Icône de l'app (20 icônes, Premium ; l'icône principale « Turquoise », le logo depuis le 2026-11-05, et l'icône en place restent gratuites), style de l'app (10 styles `AppStyleID`, clair/sombre).",
          "Sauvegarde et import, aide (tutoriel), note de l'app.",
      ],
      "sources": ["App/Screens/Profile/ProfileView.swift", "App/Screens/Profile/ProfileTopics.swift", "App/Screens/Profile/DataItemViews.swift",
@@ -280,7 +280,7 @@ MODULES = [
      "links": [("Donnees-et-stockage", "sauvegarde"), ("Services-externes", "UserNotifications"), ("Onboarding-et-tutoriel", "aide")]},
     {"file": "Onboarding-et-tutoriel", "title": "Lancement, premier lancement et tutoriel", "zone": "interface",
      "role": "L'écran de lancement (le logo), les questions du premier lancement et la visite guidée.",
-     "features": ["Écran de lancement : les deux moitiés du A.", "Premier lancement : style de l'app, profil, centres d'intérêt.", "Tutoriel par étapes au-dessus de l'app."],
+     "features": ["Écran de lancement : les deux moitiés du A sur le dégradé du logo (`ArdaneMark`, turquoise #17B3D0 vers bleu roi #1D4E9E depuis le 2026-11-05 ; aussi sur l'écran Premium, le premier lancement et l'accueil).", "Premier lancement : style de l'app, profil, centres d'intérêt.", "Tutoriel par étapes au-dessus de l'app."],
      "sources": ["App/Screens/Launch/LaunchView.swift", "App/Screens/Onboarding/OnboardingView.swift", "App/Screens/Tutorial/Tutorial.swift", "App/Screens/Tutorial/TutorialOverlay.swift"],
      "links": [("Profil-et-reglages", "le tutoriel se relance depuis l'aide"), ("Noyau-AppModel", "")]},
     {"file": "Services-externes", "title": "Services externes et frameworks Apple", "zone": "services",

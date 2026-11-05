@@ -30,21 +30,38 @@ struct LaunchView: View {
 }
 
 /// The app mark, as on the icon: an A in two halves split by a narrow gap, white and pale ice blue on the
-/// Saphir gradient (the light blue 68B5F5 of the dark theme down to the Saphir blue 245B8F). With `settled` false the halves wait outside the frame, and slide in from each side
-/// when it turns true. With a `tint` (tinted Home Screens), the halves take that color, without ground.
+/// logo's gradient, turquoise 17B3D0 at the top down to royal blue 1D4E9E (since 2026-11-05; Saphir before).
+/// With `settled` false the halves wait outside the frame, and slide in from each side when it turns true.
+/// With a `tint` (tinted Home Screens), the halves take that color, without ground.
 struct ArdaneMark: View {
     var size: CGFloat
     var settled = true
     var tint: Color?
 
-    static let sapphireLight = Color(hex: "68B5F5")
-    static let sapphireDeep = Color(hex: "245B8F")
+    static let brandTop = Color(hex: "17B3D0")
+    static let brandBottom = Color(hex: "1D4E9E")
     static let ice = Color(hex: "D6E9FA")
+    /// The icon's gradient (`scripts/logo_degrade_clair.py --cyan`, variant H): mixed in OKLab, so the middle
+    /// stops are given rather than left to a plain RGB mix, along the icon's axis (mostly downward, a little
+    /// to the right: the top-left corner is the start, the bottom-right corner the end).
+    static var gradient: LinearGradient {
+        LinearGradient(
+            stops: [
+                .init(color: brandTop, location: 0),
+                .init(color: Color(hex: "189AC4"), location: 0.25),
+                .init(color: Color(hex: "1A80B8"), location: 0.5),
+                .init(color: Color(hex: "1C67AB"), location: 0.75),
+                .init(color: brandBottom, location: 1),
+            ],
+            startPoint: .topLeading,
+            endPoint: UnitPoint(x: 0.32, y: 1.18)
+        )
+    }
 
     var body: some View {
         ZStack {
             if tint == nil {
-                LinearGradient(colors: [Self.sapphireLight, Self.sapphireDeep], startPoint: .topLeading, endPoint: .bottomTrailing)
+                Self.gradient
             }
             half(.left, tint ?? .white, order: 0)
             half(.right, tint?.opacity(0.6) ?? Self.ice, order: 1)

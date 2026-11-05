@@ -460,8 +460,7 @@ struct ProfileView: View {
             }
             Button {
                 Task {
-                    let found = await premium.restore()
-                    restoreMessage = found ? tr("Ton accès Premium est rétabli.") : tr("Aucun achat Premium trouvé pour ce compte Apple.")
+                    restoreMessage = PremiumStore.message(for: await premium.restore())
                 }
             } label: {
                 HStack {

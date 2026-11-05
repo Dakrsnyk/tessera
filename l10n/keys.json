@@ -119,7 +119,7 @@
  "%@ %@, puis %@": {
   "placeholders": 3,
   "uses": [
-   "App/Premium/PremiumStore.swift:174: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
+   "App/Premium/PremiumStore.swift:199: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
   ]
  },
  "%@ (copie)": {
@@ -222,7 +222,7 @@
  "%@ : gratuit %@, Premium %@": {
   "placeholders": 3,
   "uses": [
-   "App/Premium/PaywallView.swift:221: .accessibilityLabel(Text(tr(\"\\(title) : gratuit \\(free), Premium \\(premium)\")))"
+   "App/Premium/PaywallView.swift:226: .accessibilityLabel(Text(tr(\"\\(title) : gratuit \\(free), Premium \\(premium)\")))"
   ]
  },
  "%@ L · %@/L · %@ km%@": {
@@ -476,19 +476,19 @@
  "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:287: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
+   "App/Premium/PaywallView.swift:292: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
   ]
  },
  "%@ débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:289: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
+   "App/Premium/PaywallView.swift:294: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
   ]
  },
  "%@ débités une seule fois. Premium à vie, sans abonnement ni renouvellement.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:291: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
+   "App/Premium/PaywallView.swift:296: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
   ]
  },
  "%@ dépensés · %@ avant la fin du mois": {
@@ -544,7 +544,7 @@
  "%@ exercices avec démonstration, technique et alternatives": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:158: (.exercises, \"books.vertical.fill\", tr(\"Toute la bibliothèque d'exercices\"), tr(\"\\(ExerciseLibrary.all.count) exercices avec démonstration, technique et alternatives\")),"
+   "App/Premium/PaywallView.swift:163: (.exercises, \"books.vertical.fill\", tr(\"Toute la bibliothèque d'exercices\"), tr(\"\\(ExerciseLibrary.all.count) exercices avec démonstration, technique et alternatives\")),"
   ]
  },
  "%@ exercices avec leur démonstration, leur technique, leurs alternatives et tes performances sur chacun. Tes séances et tes propres exercices restent gratuits.": {
@@ -822,7 +822,7 @@
  "%@ par an": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PremiumStore.swift:181: case (.year, 1): tr(\"\\(price) par an\")"
+   "App/Premium/PremiumStore.swift:206: case (.year, 1): tr(\"\\(price) par an\")"
   ]
  },
  "%@ par jour sur %@ %@": {
@@ -836,8 +836,8 @@
   "uses": [
    "App/Core/DataItems.swift:416: case .monthlyBudget: return tr(\"\\(TF.money(budget.monthlyBudget, currency)) par mois\")",
    "App/Core/DataItems.swift:422: case .businessGoal: return tr(\"\\(TF.money(business.monthlyGoal, currency)) par mois\")",
-   "App/Premium/PaywallView.swift:273: return tr(\"\\(product.displayPrice) par mois\")",
-   "App/Premium/PremiumStore.swift:180: case (.month, 1): tr(\"\\(price) par mois\")"
+   "App/Premium/PaywallView.swift:278: return tr(\"\\(product.displayPrice) par mois\")",
+   "App/Premium/PremiumStore.swift:205: case (.month, 1): tr(\"\\(price) par mois\")"
   ]
  },
  "%@ par mois jusqu'au %@": {
@@ -849,7 +849,7 @@
  "%@ par période": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PremiumStore.swift:183: default: tr(\"\\(price) par période\")"
+   "App/Premium/PremiumStore.swift:208: default: tr(\"\\(price) par période\")"
   ]
  },
  "%@ par semaine": {
@@ -857,7 +857,7 @@
   "uses": [
    "App/Core/DataItems.swift:395: case .weeklyWorkouts: return tr(\"\\(fitness.weeklyGoal) par semaine\")",
    "App/Core/DataItems.swift:406: case .focusGoal: return tr(\"\\(Fmt.hours(productivity.weeklyFocusGoalHours)) par semaine\")",
-   "App/Premium/PremiumStore.swift:182: case (.week, 1): tr(\"\\(price) par semaine\")",
+   "App/Premium/PremiumStore.swift:207: case (.week, 1): tr(\"\\(price) par semaine\")",
    "App/Screens/Home/MyInfoSection.swift:27: add(\"workouts\", \"calendar\", tr(\"Séances\"), profile.knows(.weeklyWorkouts) ? tr(\"\\(fitness.weeklyGoal) par semaine\") : nil)"
   ]
  },
@@ -877,13 +877,13 @@
  "%@ pour 12 mois": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:271: return tr(\"\\(product.displayPrice) pour 12 mois\")"
+   "App/Premium/PaywallView.swift:276: return tr(\"\\(product.displayPrice) pour 12 mois\")"
   ]
  },
  "%@ pour 12 mois, soit %@ par mois": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/PaywallView.swift:270: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
+   "App/Premium/PaywallView.swift:275: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
   ]
  },
  "%@ prêts à poser d'un coup, avec leurs styles.": {
@@ -924,7 +924,7 @@
  "%@ styles en plus": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:156: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…\")),"
+   "App/Premium/PaywallView.swift:161: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…\")),"
   ]
  },
  "%@ suivis cette semaine, dont %@ dans ta cible. Belle constance !": {
@@ -1112,7 +1112,7 @@
  "%@ · %@ g · ≈ %@ kcal": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:260: Text(tr(\"\\(suggestion.food.name) · \\(TF.int(suggestion.grams)) g · ≈ \\(TF.int(suggestion.totals.kcal)) kcal\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:261: Text(tr(\"\\(suggestion.food.name) · \\(TF.int(suggestion.grams)) g · ≈ \\(TF.int(suggestion.totals.kcal)) kcal\"))"
   ]
  },
  "%@ · %@ km": {
@@ -1173,7 +1173,7 @@
  "%@ · P %@ · G %@ · L %@": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:440: return tr(\"\\(kcal) · P \\(protein) · G \\(carbs) · L \\(fat)\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:441: return tr(\"\\(kcal) · P \\(protein) · G \\(carbs) · L \\(fat)\")"
   ]
  },
  "%@ · aujourd'hui": {
@@ -1369,7 +1369,7 @@
  "%@, une seule fois, sans abonnement": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:275: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
+   "App/Premium/PaywallView.swift:280: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
   ]
  },
  "%@, vers le %@": {
@@ -1381,7 +1381,7 @@
  "%@. Rien n'est débité pendant l'essai. Renouvellement automatique %@, annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/PaywallView.swift:283: return tr(\"\\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \\(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.\")"
+   "App/Premium/PaywallView.swift:288: return tr(\"\\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \\(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.\")"
   ]
  },
  "%@/%@ aujourd'hui": {
@@ -2180,7 +2180,7 @@
  "Abonnement actif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:490: return tr(\"Abonnement actif\")"
+   "App/Screens/Profile/ProfileView.swift:489: return tr(\"Abonnement actif\")"
   ]
  },
  "Abonnement · ": {
@@ -2284,7 +2284,7 @@
  "Accès à vie": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:485: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
+   "App/Screens/Profile/ProfileView.swift:484: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
   ]
  },
  "Accélère progressivement si tu veux.": {
@@ -2812,7 +2812,7 @@
    "App/Components/StylePicker.swift:167: Text(tr(\"Ajouter\"))",
    "App/Screens/Explore/StoreMagazine.swift:565: Text(tr(\"Ajouter\"))",
    "App/Screens/Home/DailySection.swift:1162: Text(tr(\"Ajouter\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:265: Button(tr(\"Ajouter\")) {"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:266: Button(tr(\"Ajouter\")) {"
   ]
  },
  "Ajouter (maillot, cadeaux…)": {
@@ -2836,7 +2836,7 @@
  "Ajouter au journal": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:328: Text(tr(\"Ajouter au journal\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:329: Text(tr(\"Ajouter au journal\"))"
   ]
  },
  "Ajouter au montant épargné": {
@@ -3173,7 +3173,7 @@
  "Aliment perso": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:540: case .custom: return tr(\"Aliment perso\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:546: case .custom: return tr(\"Aliment perso\")",
    "App/Screens/Spaces/NutritionSpace.swift:213: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
    "App/Screens/Spaces/NutritionSpace.swift:620: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty, onSave: save) {"
   ]
@@ -3767,8 +3767,8 @@
  "Ardane Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:72: Text(tr(\"Ardane Premium\"))",
-   "App/Premium/PaywallView.swift:103: Text(tr(\"Ardane Premium\"))",
+   "App/Premium/PaywallView.swift:77: Text(tr(\"Ardane Premium\"))",
+   "App/Premium/PaywallView.swift:108: Text(tr(\"Ardane Premium\"))",
    "App/Screens/Home/HomeView.swift:178: Text(tr(\"Ardane Premium\"))",
    "App/Screens/Profile/ProfileView.swift:372: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
   ]
@@ -4264,14 +4264,13 @@
  "Aucun achat Premium trouvé pour ce compte Apple.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:330: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
-   "App/Screens/Profile/ProfileView.swift:464: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
+   "App/Premium/PremiumStore.swift:119: case .notFound: tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
   ]
  },
  "Aucun aliment n'est assez sûr pour être ajouté seul : confirme-les plus bas.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:304: Text(tr(\"Aucun aliment n'est assez sûr pour être ajouté seul : confirme-les plus bas.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:305: Text(tr(\"Aucun aliment n'est assez sûr pour être ajouté seul : confirme-les plus bas.\"))"
   ]
  },
  "Aucun compte à créer": {
@@ -4598,7 +4597,7 @@
  "Aurore boréale": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:46: AppIconChoice(asset: \"ArdaneIcon-Aurora\", title: tr(\"Aurore boréale\")),",
+   "App/Core/AppIcons.swift:47: AppIconChoice(asset: \"ArdaneIcon-Aurora\", title: tr(\"Aurore boréale\")),",
    "App/Screens/Explore/HomeSetups.swift:178: case .aurora: tr(\"Aurore boréale\")"
   ]
  },
@@ -4729,7 +4728,7 @@
  "Autorisée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:498: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
+   "App/Screens/Profile/ProfileView.swift:497: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
   ]
  },
  "Autre": {
@@ -5225,7 +5224,7 @@
  "Beurre ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:411: case .butter: tr(\"Beurre ?\")"
+   "Shared/Domains/ScanRecap.swift:414: case .butter: tr(\"Beurre ?\")"
   ]
  },
  "Beurre d'amande": {
@@ -5288,7 +5287,7 @@
  "Bienvenue dans Ardane Premium !": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:383: message = tr(\"Bienvenue dans Ardane Premium !\")"
+   "App/Premium/PaywallView.swift:388: message = tr(\"Bienvenue dans Ardane Premium !\")"
   ]
  },
  "Bienvenue, %@ !": {
@@ -7040,7 +7039,7 @@
  "Changer d'icône": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:87: localizedTitle: tr(\"Changer d'icône\"),",
+   "App/Core/AppIcons.swift:88: localizedTitle: tr(\"Changer d'icône\"),",
    "App/Screens/Profile/AppIconPicker.swift:53: Button(tr(\"Changer d'icône\")) {"
   ]
  },
@@ -7183,7 +7182,7 @@
  "Chargement des offres…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:227: ProgressView(tr(\"Chargement des offres…\"))"
+   "App/Premium/PaywallView.swift:232: ProgressView(tr(\"Chargement des offres…\"))"
   ]
  },
  "Chargement des états financiers…": {
@@ -7738,7 +7737,7 @@
  "Classique": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:32: AppIconChoice(asset: \"ArdaneIcon-Classic\", title: tr(\"Classique\")),",
+   "App/Core/AppIcons.swift:33: AppIconChoice(asset: \"ArdaneIcon-Classic\", title: tr(\"Classique\")),",
    "Shared/Model/WidgetStyle.swift:359: TypePreset(id: \"classic\", name: tr(\"Classique\"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),"
   ]
  },
@@ -7827,7 +7826,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:96: return tr(\"Code-barres ou aliments\")",
-   "App/Screens/Spaces/NutritionSpace.swift:740: .navigationTitle(tr(\"Code-barres ou aliments\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:739: .navigationTitle(tr(\"Code-barres ou aliments\"))"
   ]
  },
  "Coins arrondis classiques.": {
@@ -8169,7 +8168,7 @@
  "Conditions": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:371: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
+   "App/Premium/PaywallView.swift:376: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
   ]
  },
  "Conditions d'utilisation": {
@@ -8182,7 +8181,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:929: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
-   "App/Premium/PaywallView.swift:372: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
+   "App/Premium/PaywallView.swift:377: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
    "App/Screens/Profile/ProfileView.swift:197: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
  },
@@ -8287,7 +8286,7 @@
   "placeholders": 0,
   "uses": [
    "App/Components/PermissionExplainer.swift:219: Text(tr(\"Continuer\"))",
-   "App/Premium/PaywallView.swift:353: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Premium/PaywallView.swift:358: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
    "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:68: Text(tr(\"Continuer\")).frame(maxWidth: .infinity, minHeight: 44)",
    "App/Screens/Onboarding/OnboardingView.swift:108: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
   ]
@@ -8356,7 +8355,7 @@
  "Corail": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:31: AppIconChoice(asset: \"ArdaneIcon-Corail\", title: tr(\"Corail\")),",
+   "App/Core/AppIcons.swift:32: AppIconChoice(asset: \"ArdaneIcon-Corail\", title: tr(\"Corail\")),",
    "App/Screens/Explore/HomeSetups.swift:356: id: \"corail\", name: tr(\"Corail\"), tagline: tr(\"Ton budget en grandes formes colorées.\"),",
    "Shared/Model/PhotoQuote.swift:74: QuotePalette(id: \"coral\", name: tr(\"Corail\"), backgroundHex: \"F26B5B\", textHex: \"FFF8F2\"),",
    "Shared/Model/StyleColors.swift:75: make(\"coral\", tr(\"Corail\"), background: [\"FFF1EC\"], panel: \"FFDFD4\", text: \"3B1A12\", secondary: \"9A6A5E\","
@@ -8630,7 +8629,7 @@
  "Couleurs": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:202: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:207: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
    "App/Screens/Editor/StudioComponents.swift:23: case .colors: tr(\"Couleurs\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:418: Text(tr(\"Couleurs\")).font(.subheadline.weight(.semibold))"
   ]
@@ -8644,7 +8643,7 @@
  "Couleurs de l'app": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:195: comparisonRow(tr(\"Couleurs de l'app\"), free: \"1\", premium: \"\\(AppStyleID.allCases.count)\")"
+   "App/Premium/PaywallView.swift:200: comparisonRow(tr(\"Couleurs de l'app\"), free: \"1\", premium: \"\\(AppStyleID.allCases.count)\")"
   ]
  },
  "Couleurs du style": {
@@ -10471,7 +10470,7 @@
  "Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:310: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:311: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))",
    "App/Screens/Spaces/NutritionSpace.swift:290: Text(tr(\"Données Open Food Facts (ODbL), saisies par la communauté : vérifie l'étiquette.\"))"
   ]
  },
@@ -10770,8 +10769,8 @@
  "Débloqué en mode test": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:479: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }",
-   "App/Screens/Profile/ProfileView.swift:482: if !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
+   "App/Screens/Profile/ProfileView.swift:478: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }",
+   "App/Screens/Profile/ProfileView.swift:481: if !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
   ]
  },
  "Début": {
@@ -11947,7 +11946,7 @@
  "Essai gratuit": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:260: if store.introDescription(for: product) != nil { return tr(\"Essai gratuit\") }"
+   "App/Premium/PaywallView.swift:265: if store.introDescription(for: product) != nil { return tr(\"Essai gratuit\") }"
   ]
  },
  "Essaie un autre filtre.": {
@@ -11965,7 +11964,7 @@
  "Essayer %@ jours gratuits": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:353: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))"
+   "App/Premium/PaywallView.swift:358: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))"
   ]
  },
  "Essayer avec un exemple": {
@@ -11983,7 +11982,7 @@
  "Estimation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:536: if isEstimate { return tr(\"Estimation\") }"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:542: if isEstimate { return tr(\"Estimation\") }"
   ]
  },
  "Estimation selon la durée des séances et ton poids": {
@@ -12001,19 +12000,19 @@
  "Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:301: Text(tr(\"Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:302: Text(tr(\"Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.\"))"
   ]
  },
  "Et avec Premium, tout le reste :": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:141: Text(tr(\"Et avec Premium, tout le reste :\"))"
+   "App/Premium/PaywallView.swift:146: Text(tr(\"Et avec Premium, tout le reste :\"))"
   ]
  },
  "Et les polices Serif et Mono": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:159: (.photo, \"photo\", tr(\"Fonds photo, couleurs libres\"), tr(\"Et les polices Serif et Mono\")),"
+   "App/Premium/PaywallView.swift:164: (.photo, \"photo\", tr(\"Fonds photo, couleurs libres\"), tr(\"Et les polices Serif et Mono\")),"
   ]
  },
  "Ethereum": {
@@ -12115,7 +12114,7 @@
  "Exercices": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:200: comparisonRow(tr(\"Exercices\"), free: \"—\", premium: \"\\(ExerciseLibrary.all.count)\")",
+   "App/Premium/PaywallView.swift:205: comparisonRow(tr(\"Exercices\"), free: \"—\", premium: \"\\(ExerciseLibrary.all.count)\")",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:134: .navigationTitle(onPick == nil ? tr(\"Exercices\") : tr(\"Ajouter un exercice\"))",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:450: premiumRow(symbol: \"list.bullet\", title: tr(\"Exercices\"),",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:471: MiniSectionTitle(title: tr(\"Exercices\"))"
@@ -12993,13 +12992,13 @@
  "Fonds et polices": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:203: comparisonRow(tr(\"Fonds et polices\"), free: \"—\", premium: \"✓\")"
+   "App/Premium/PaywallView.swift:208: comparisonRow(tr(\"Fonds et polices\"), free: \"—\", premium: \"✓\")"
   ]
  },
  "Fonds photo, couleurs libres": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:159: (.photo, \"photo\", tr(\"Fonds photo, couleurs libres\"), tr(\"Et les polices Serif et Mono\")),"
+   "App/Premium/PaywallView.swift:164: (.photo, \"photo\", tr(\"Fonds photo, couleurs libres\"), tr(\"Et les polices Serif et Mono\")),"
   ]
  },
  "Force": {
@@ -13812,7 +13811,7 @@
  "Gratuit": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:188: Text(tr(\"Gratuit\")).frame(width: 72)",
+   "App/Premium/PaywallView.swift:193: Text(tr(\"Gratuit\")).frame(width: 72)",
    "App/Screens/Editor/StudioPanels.swift:194: subtitle: { $0.isPremium ? nil : tr(\"Gratuit\") },",
    "App/Screens/Explore/StoreShowcase.swift:60: subtitle: theme.isPremium ? tr(\"Premium\") : tr(\"Gratuit\")"
   ]
@@ -13930,7 +13929,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:90: case .habits: tr(\"Habitudes\")",
-   "App/Premium/PaywallView.swift:199: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:204: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
    "App/Screens/Content/HabitsView.swift:69: .navigationTitle(tr(\"Habitudes\"))",
    "App/Screens/Home/DailyLayoutEditor.swift:166: case .habits: (tr(\"Habitudes\"), \"repeat\", \"7FA33A\")"
   ]
@@ -14287,7 +14286,7 @@
  "Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:157: (.history, \"chart.bar.xaxis\", tr(\"Statistiques détaillées\"), tr(\"Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes hab"
+   "App/Premium/PaywallView.swift:162: (.history, \"chart.bar.xaxis\", tr(\"Statistiques détaillées\"), tr(\"Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes hab"
   ]
  },
  "Hollow hold": {
@@ -14432,7 +14431,7 @@
  "Huile de cuisson ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:410: case .oil: tr(\"Huile de cuisson ?\")"
+   "Shared/Domains/ScanRecap.swift:413: case .oil: tr(\"Huile de cuisson ?\")"
   ]
  },
  "Hydratation": {
@@ -14521,8 +14520,8 @@
  "Ignorer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:270: Button(tr(\"Ignorer\")) {",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:385: Button(tr(\"Ignorer\"), action: onDismiss)"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:271: Button(tr(\"Ignorer\")) {",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:386: Button(tr(\"Ignorer\"), action: onDismiss)"
   ]
  },
  "Il affiche tes événements des 48 prochaines heures, directement depuis le calendrier de ton iPhone.": {
@@ -15385,6 +15384,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/NutritionTiles.swift:129: let letters = (tr(\"P\", context: \"protein\"), tr(\"G\", context: \"carbs\"), tr(\"L\", context: \"fat\"))"
+  ]
+ },
+ "L'App Store n'a pas pu être joint. Vérifie ta connexion, puis réessaie.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PremiumStore.swift:121: case .failed: tr(\"L'App Store n'a pas pu être joint. Vérifie ta connexion, puis réessaie.\")"
   ]
  },
  "L'accueil « %@ »": {
@@ -16750,13 +16755,13 @@
  "Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:156: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…\")),"
+   "App/Premium/PaywallView.swift:161: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…\")),"
   ]
  },
  "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal. L'achat à vie est un paiement unique, sans renouvellement.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:366: Text(tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abo"
+   "App/Premium/PaywallView.swift:371: Text(tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abo"
   ]
  },
  "Les bras accompagnent en rythme.": {
@@ -17032,7 +17037,7 @@
  "Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:307: Text(tr(\"Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:308: Text(tr(\"Les portions estimées d'après une photo ne sont pas des mesures : ajuste-les.\"))"
   ]
  },
  "Les rappels ci-dessous partent une fois les notifications autorisées.": {
@@ -18190,13 +18195,13 @@
  "Merci ! Tous les widgets et tous les styles sont débloqués.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:302: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
+   "App/Premium/PaywallView.swift:307: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
   ]
  },
  "Merci pour ton soutien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:491: default: return tr(\"Merci pour ton soutien\")"
+   "App/Screens/Profile/ProfileView.swift:490: default: return tr(\"Merci pour ton soutien\")"
   ]
  },
  "Mercredi": {
@@ -20553,7 +20558,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:509: .accessibilityLabel(Text(tr(\"Options de \\(saved.name)\")))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:482: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:488: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
   ]
  },
  "Opérations": {
@@ -20828,7 +20833,7 @@
  "Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:155: (.packs, \"bag.fill\", tr(\"Tous les packs\"), tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\")),"
+   "App/Premium/PaywallView.swift:160: (.packs, \"bag.fill\", tr(\"Tous les packs\"), tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\")),"
   ]
  },
  "Packs, collections, fonds d'écran.": {
@@ -20852,7 +20857,7 @@
  "Paiement unique": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:262: if product.id == PremiumConfiguration.lifetimeID { return tr(\"Paiement unique\") }"
+   "App/Premium/PaywallView.swift:267: if product.id == PremiumConfiguration.lifetimeID { return tr(\"Paiement unique\") }"
   ]
  },
  "Pain blanc": {
@@ -21121,7 +21126,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:114: Text(tr(\"Pas encore demandée\"))",
-   "App/Screens/Profile/ProfileView.swift:500: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
+   "App/Screens/Profile/ProfileView.swift:499: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
   ]
  },
  "Pas encore fait": {
@@ -21537,7 +21542,7 @@
  "Peut-être sur la photo": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:380: Text(item.isTentative ? tr(\"Peut-être sur la photo\") : tr(\"peu sûr\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:381: Text(item.isTentative ? tr(\"Peut-être sur la photo\") : tr(\"peu sûr\"))"
   ]
  },
  "Phase de lune": {
@@ -21596,7 +21601,7 @@
  "Photos et citations": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:198: comparisonRow(tr(\"Photos et citations\"), free: \"∞\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:203: comparisonRow(tr(\"Photos et citations\"), free: \"∞\", premium: \"∞\")",
    "App/Screens/MiniApps/MiniApp.swift:18: case .photos: tr(\"Photos et citations\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:81: .navigationTitle(tr(\"Photos et citations\"))",
    "Shared/Model/WidgetKind.swift:38: case .memories: tr(\"Photos et citations\")"
@@ -22866,7 +22871,7 @@
   "uses": [
    "App/Components/UIComponents.swift:101: if !compact { Text(tr(\"Premium\")) }",
    "App/Components/UIComponents.swift:108: .accessibilityLabel(Text(tr(\"Premium\")))",
-   "App/Premium/PaywallView.swift:189: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
+   "App/Premium/PaywallView.swift:194: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
    "App/Screens/Editor/EditorView.swift:244: let premium = tr(\"Premium\")"
   ]
  },
@@ -23542,8 +23547,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:193: NumberRow(title: tr(\"Quantité\"), value: $grams, unit: \"g\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:517: .accessibilityLabel(tr(\"Quantité\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:520: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:523: .accessibilityLabel(tr(\"Quantité\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:526: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
    "App/Screens/Spaces/MoneySpaces.swift:111: NumberRow(title: holding.kind == .cash ? tr(\"Montant\") : tr(\"Quantité\"), value: $holding.quantity)"
   ]
  },
@@ -23901,7 +23906,7 @@
  "Records, volume, bénéfice, MRR, devoirs, vol, carburant…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:153: (.widgets, \"square.stack.3d.up.fill\", tr(\"Tous les widgets des espaces\"), tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\")),"
+   "App/Premium/PaywallView.swift:158: (.widgets, \"square.stack.3d.up.fill\", tr(\"Tous les widgets des espaces\"), tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\")),"
   ]
  },
  "Rectangle": {
@@ -24031,7 +24036,7 @@
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:110: Label(tr(\"Refusée\"), systemImage: \"xmark.circle.fill\")",
    "App/Screens/Profile/ProfileView.swift:128: if notificationStatus == tr(\"Refusée\") {",
-   "App/Screens/Profile/ProfileView.swift:499: case .denied: notificationStatus = tr(\"Refusée\")"
+   "App/Screens/Profile/ProfileView.swift:498: case .denied: notificationStatus = tr(\"Refusée\")"
   ]
  },
  "Regard droit devant.": {
@@ -24209,8 +24214,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:73: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:470: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:506: .accessibilityHint(tr(\"Remplacer\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:476: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:512: .accessibilityHint(tr(\"Remplacer\"))"
   ]
  },
  "Remplacer tes données par cette sauvegarde ?": {
@@ -24271,7 +24276,7 @@
  "Renouvellement le %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:488: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
+   "App/Screens/Profile/ProfileView.swift:487: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
   ]
  },
  "Renseigné": {
@@ -24529,7 +24534,7 @@
  "Restauration…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:333: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/PaywallView.swift:338: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer": {
@@ -24541,13 +24546,13 @@
  "Restaurer les achats": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:468: Text(tr(\"Restaurer les achats\"))"
+   "App/Screens/Profile/ProfileView.swift:467: Text(tr(\"Restaurer les achats\"))"
   ]
  },
  "Restaurer mes achats": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:333: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/PaywallView.swift:338: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer une sauvegarde": {
@@ -25565,7 +25570,7 @@
  "Réessayer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:238: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
+   "App/Premium/PaywallView.swift:243: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Business/BusinessSources.swift:264: Button(tr(\"Réessayer\")) { attempt += 1 }",
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:136: prominentButton(tr(\"Réessayer\")) {",
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:149: prominentButton(tr(\"Réessayer\")) {"
@@ -26048,7 +26053,6 @@
  "Saphir": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:30: AppIconChoice(asset: main, title: tr(\"Saphir\")),",
    "Shared/Model/Settings.swift:11: case .sapphire: tr(\"Saphir\")"
   ]
  },
@@ -26073,7 +26077,7 @@
  "Sauce ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:412: case .sauce: tr(\"Sauce ?\")"
+   "Shared/Domains/ScanRecap.swift:415: case .sauce: tr(\"Sauce ?\")"
   ]
  },
  "Sauce BBQ": {
@@ -27071,8 +27075,8 @@
  "Statistiques détaillées": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:157: (.history, \"chart.bar.xaxis\", tr(\"Statistiques détaillées\"), tr(\"Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes hab",
-   "App/Premium/PaywallView.swift:201: comparisonRow(tr(\"Statistiques détaillées\"), free: \"—\", premium: \"✓\")"
+   "App/Premium/PaywallView.swift:162: (.history, \"chart.bar.xaxis\", tr(\"Statistiques détaillées\"), tr(\"Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes hab",
+   "App/Premium/PaywallView.swift:206: comparisonRow(tr(\"Statistiques détaillées\"), free: \"—\", premium: \"✓\")"
   ]
  },
  "Statut « à payer », « prévu » ou « en attente » dans le fichier.": {
@@ -27160,7 +27164,7 @@
  "Styles": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:196: comparisonRow(tr(\"Styles\"), free: \"\\(ThemeCatalog.free.count)\", premium: \"\\(ThemeCatalog.all.count)\")",
+   "App/Premium/PaywallView.swift:201: comparisonRow(tr(\"Styles\"), free: \"\\(ThemeCatalog.free.count)\", premium: \"\\(ThemeCatalog.all.count)\")",
    "App/Screens/Explore/ExploreView.swift:32: case .styles: tr(\"Styles\")"
   ]
  },
@@ -29421,14 +29425,13 @@
  "Ton accès Premium est rétabli.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:330: message = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")",
-   "App/Screens/Profile/ProfileView.swift:464: restoreMessage = found ? tr(\"Ton accès Premium est rétabli.\") : tr(\"Aucun achat Premium trouvé pour ce compte Apple.\")"
+   "App/Premium/PremiumStore.swift:118: case .restored: tr(\"Ton accès Premium est rétabli.\")"
   ]
  },
  "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:385: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
+   "App/Premium/PaywallView.swift:390: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
   ]
  },
  "Ton activité": {
@@ -29501,7 +29504,7 @@
  "Ton habitude": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:455: Text(tr(\"Ton habitude\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:458: Text(tr(\"Ton habitude\"))"
   ]
  },
  "Ton horaire": {
@@ -30073,13 +30076,13 @@
  "Tous les packs": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:155: (.packs, \"bag.fill\", tr(\"Tous les packs\"), tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\")),"
+   "App/Premium/PaywallView.swift:160: (.packs, \"bag.fill\", tr(\"Tous les packs\"), tr(\"Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…\")),"
   ]
  },
  "Tous les widgets des espaces": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:153: (.widgets, \"square.stack.3d.up.fill\", tr(\"Tous les widgets des espaces\"), tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\")),"
+   "App/Premium/PaywallView.swift:158: (.widgets, \"square.stack.3d.up.fill\", tr(\"Tous les widgets des espaces\"), tr(\"Records, volume, bénéfice, MRR, devoirs, vol, carburant…\")),"
   ]
  },
  "Tous les widgets et tous les styles": {
@@ -30091,7 +30094,7 @@
  "Tous les widgets, tous les styles, sans limite.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:74: Text(tr(\"Tous les widgets, tous les styles, sans limite.\"))"
+   "App/Premium/PaywallView.swift:79: Text(tr(\"Tous les widgets, tous les styles, sans limite.\"))"
   ]
  },
  "Tous tes widgets enregistrés : modifie-les dans le Studio, duplique-les, ajoute-les à ton écran ou réunis-en plusieurs en un seul.": {
@@ -30271,7 +30274,7 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallContext.swift:69: title: tr(\"Toute la bibliothèque d'exercices\"),",
-   "App/Premium/PaywallView.swift:158: (.exercises, \"books.vertical.fill\", tr(\"Toute la bibliothèque d'exercices\"), tr(\"\\(ExerciseLibrary.all.count) exercices avec démonstration, technique et alternatives\")),",
+   "App/Premium/PaywallView.swift:163: (.exercises, \"books.vertical.fill\", tr(\"Toute la bibliothèque d'exercices\"), tr(\"\\(ExerciseLibrary.all.count) exercices avec démonstration, technique et alternatives\")),",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:59: Text(tr(\"Toute la bibliothèque d'exercices\"))"
   ]
  },
@@ -30517,7 +30520,7 @@
  "Tu profites de Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:300: Text(tr(\"Tu profites de Premium\"))"
+   "App/Premium/PaywallView.swift:305: Text(tr(\"Tu profites de Premium\"))"
   ]
  },
  "Tu retrouveras tout dans Profil › Autorisations.": {
@@ -30550,6 +30553,12 @@
    "Shared/Model/WorldCities.swift:32: WorldCity(id: \"Europe/Istanbul\", name: tr(\"Istanbul\"), country: tr(\"Turquie\")),"
   ]
  },
+ "Turquoise": {
+  "placeholders": 0,
+  "uses": [
+   "App/Core/AppIcons.swift:31: AppIconChoice(asset: main, title: tr(\"Turquoise\")),"
+  ]
+ },
  "Turquoise profond, chiffres nets": {
   "placeholders": 0,
   "uses": [
@@ -30574,7 +30583,7 @@
  "Types de widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:194: comparisonRow(tr(\"Types de widgets\"), free: \"\\(WidgetKind.freeKinds.count)\", premium: \"\\(WidgetKind.offered.count)\")"
+   "App/Premium/PaywallView.swift:199: comparisonRow(tr(\"Types de widgets\"), free: \"\\(WidgetKind.freeKinds.count)\", premium: \"\\(WidgetKind.offered.count)\")"
   ]
  },
  "Typo": {
@@ -31313,31 +31322,31 @@
  "Verre ambre": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:42: AppIconChoice(asset: \"ArdaneIcon-Amber\", title: tr(\"Verre ambre\")),"
+   "App/Core/AppIcons.swift:43: AppIconChoice(asset: \"ArdaneIcon-Amber\", title: tr(\"Verre ambre\")),"
   ]
  },
  "Verre améthyste": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:41: AppIconChoice(asset: \"ArdaneIcon-Amethyst\", title: tr(\"Verre améthyste\")),"
+   "App/Core/AppIcons.swift:42: AppIconChoice(asset: \"ArdaneIcon-Amethyst\", title: tr(\"Verre améthyste\")),"
   ]
  },
  "Verre bleu": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:37: AppIconChoice(asset: \"ArdaneIcon-Blue\", title: tr(\"Verre bleu\")),"
+   "App/Core/AppIcons.swift:38: AppIconChoice(asset: \"ArdaneIcon-Blue\", title: tr(\"Verre bleu\")),"
   ]
  },
  "Verre classique": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:33: AppIconChoice(asset: \"ArdaneIcon-GlassBlack\", title: tr(\"Verre classique\")),"
+   "App/Core/AppIcons.swift:34: AppIconChoice(asset: \"ArdaneIcon-GlassBlack\", title: tr(\"Verre classique\")),"
   ]
  },
  "Verre corail": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:39: AppIconChoice(asset: \"ArdaneIcon-Coral\", title: tr(\"Verre corail\")),"
+   "App/Core/AppIcons.swift:40: AppIconChoice(asset: \"ArdaneIcon-Coral\", title: tr(\"Verre corail\")),"
   ]
  },
  "Verre dépoli et reflets": {
@@ -31349,31 +31358,31 @@
  "Verre forêt": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:48: AppIconChoice(asset: \"ArdaneIcon-Forest\", title: tr(\"Verre forêt\")),"
+   "App/Core/AppIcons.swift:49: AppIconChoice(asset: \"ArdaneIcon-Forest\", title: tr(\"Verre forêt\")),"
   ]
  },
  "Verre framboise": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:44: AppIconChoice(asset: \"ArdaneIcon-Raspberry\", title: tr(\"Verre framboise\")),"
+   "App/Core/AppIcons.swift:45: AppIconChoice(asset: \"ArdaneIcon-Raspberry\", title: tr(\"Verre framboise\")),"
   ]
  },
  "Verre graphite": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:49: AppIconChoice(asset: \"ArdaneIcon-Graphite\", title: tr(\"Verre graphite\")),"
+   "App/Core/AppIcons.swift:50: AppIconChoice(asset: \"ArdaneIcon-Graphite\", title: tr(\"Verre graphite\")),"
   ]
  },
  "Verre jade": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:35: AppIconChoice(asset: \"ArdaneIcon-Jade\", title: tr(\"Verre jade\")),"
+   "App/Core/AppIcons.swift:36: AppIconChoice(asset: \"ArdaneIcon-Jade\", title: tr(\"Verre jade\")),"
   ]
  },
  "Verre lagon": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:43: AppIconChoice(asset: \"ArdaneIcon-Lagoon\", title: tr(\"Verre lagon\")),"
+   "App/Core/AppIcons.swift:44: AppIconChoice(asset: \"ArdaneIcon-Lagoon\", title: tr(\"Verre lagon\")),"
   ]
  },
  "Verre liquide et reflets": {
@@ -31385,37 +31394,37 @@
  "Verre minuit": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:45: AppIconChoice(asset: \"ArdaneIcon-Midnight\", title: tr(\"Verre minuit\")),"
+   "App/Core/AppIcons.swift:46: AppIconChoice(asset: \"ArdaneIcon-Midnight\", title: tr(\"Verre minuit\")),"
   ]
  },
  "Verre nuit": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:36: AppIconChoice(asset: \"ArdaneIcon-Night\", title: tr(\"Verre nuit\")),"
+   "App/Core/AppIcons.swift:37: AppIconChoice(asset: \"ArdaneIcon-Night\", title: tr(\"Verre nuit\")),"
   ]
  },
  "Verre océan": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:38: AppIconChoice(asset: \"ArdaneIcon-Ocean\", title: tr(\"Verre océan\")),"
+   "App/Core/AppIcons.swift:39: AppIconChoice(asset: \"ArdaneIcon-Ocean\", title: tr(\"Verre océan\")),"
   ]
  },
  "Verre rouge": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:34: AppIconChoice(asset: \"ArdaneIcon-RedGlass\", title: tr(\"Verre rouge\")),"
+   "App/Core/AppIcons.swift:35: AppIconChoice(asset: \"ArdaneIcon-RedGlass\", title: tr(\"Verre rouge\")),"
   ]
  },
  "Verre sakura": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:47: AppIconChoice(asset: \"ArdaneIcon-Sakura\", title: tr(\"Verre sakura\")),"
+   "App/Core/AppIcons.swift:48: AppIconChoice(asset: \"ArdaneIcon-Sakura\", title: tr(\"Verre sakura\")),"
   ]
  },
  "Verre émeraude": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:40: AppIconChoice(asset: \"ArdaneIcon-Emerald\", title: tr(\"Verre émeraude\")),"
+   "App/Core/AppIcons.swift:41: AppIconChoice(asset: \"ArdaneIcon-Emerald\", title: tr(\"Verre émeraude\")),"
   ]
  },
  "Verrouiller les genoux en haut.": {
@@ -31566,7 +31575,7 @@
  "Vise un code-barres ou ton assiette": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/NutritionSpace.swift:696: Text(tr(\"Vise un code-barres ou ton assiette\"))"
+   "App/Screens/Spaces/NutritionSpace.swift:695: Text(tr(\"Vise un code-barres ou ton assiette\"))"
   ]
  },
  "Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.": {
@@ -31845,7 +31854,7 @@
  "Vérifié": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:538: case .builtin, .nutrientFile: return tr(\"Vérifié\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:544: case .builtin, .nutrientFile: return tr(\"Vérifié\")"
   ]
  },
  "Vérité et réconciliation": {
@@ -31927,13 +31936,13 @@
  "Widgets enregistrés": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:197: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
+   "App/Premium/PaywallView.swift:202: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
   ]
  },
  "Widgets intelligents": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:154: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
+   "App/Premium/PaywallView.swift:159: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
   ]
  },
  "Widgets lancés par iOS": {
@@ -32307,13 +32316,13 @@
  "chaque année": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:282: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
+   "App/Premium/PaywallView.swift:287: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
   ]
  },
  "chaque mois": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:282: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
+   "App/Premium/PaywallView.swift:287: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
   ]
  },
  "choisi": {
@@ -32982,7 +32991,7 @@
  "jour gratuit": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PremiumStore.swift:174: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
+   "App/Premium/PremiumStore.swift:199: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
   ]
  },
  "jour noté": {
@@ -33019,7 +33028,7 @@
  "jours gratuits": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PremiumStore.swift:174: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
+   "App/Premium/PremiumStore.swift:199: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
   ]
  },
  "jours notés": {
@@ -33530,7 +33539,7 @@
  "peu sûr": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:380: Text(item.isTentative ? tr(\"Peut-être sur la photo\") : tr(\"peu sûr\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:381: Text(item.isTentative ? tr(\"Peut-être sur la photo\") : tr(\"peu sûr\"))",
    "Shared/Domains/ScanRecap.swift:68: return isLowConfidence ? tr(\"peu sûr\") : tr(\"assez sûr\")"
   ]
  },
@@ -34246,7 +34255,7 @@
  "« Maintenant » change selon le moment, et les analyses résument ta journée": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:154: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
+   "App/Premium/PaywallView.swift:159: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
   ]
  },
  "· exemple": {
@@ -35349,7 +35358,7 @@
  "≈ %@–%@ kcal": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:252: return tr(\"≈ \\(TF.int(rounded.low))–\\(TF.int(rounded.high)) kcal\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:253: return tr(\"≈ \\(TF.int(rounded.low))–\\(TF.int(rounded.high)) kcal\")"
   ]
  }
 }

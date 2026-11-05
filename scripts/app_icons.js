@@ -1,4 +1,4 @@
-// The app icons: the main icon (Saphir, the Ardane logo) and the alternates the person can pick in
+// The app icons: the main icon (Turquoise, the Ardane logo) and the alternates the person can pick in
 // « Icône de l'app ». Each icon is drawn in SVG and rendered by Chromium to 1024 × 1024 PNGs, light
 // and tinted: the icons stay light when the iPhone is in Dark Mode (app_icons_install.py puts the
 // light picture in both slots).
@@ -21,8 +21,10 @@ const glass = (base, a, b, c) => ({ bg: mesh(base, [[a, 12, 92, 65], [b, 95, 8, 
 
 // Asset name → look. Keep in sync with AppIconChoice.all (App/Core/AppIcons.swift).
 const icons = {
-  // Saphir, the main icon since 2026-10-30 (the former default, Corail, is now the first alternate).
-  "ArdaneIcon": { bg: "linear-gradient(160deg, #4E9BE0, #1B4A7A)", left: ["#FFFFFF", "#FFFFFF"], right: ["#D6E9FA", "#D6E9FA"] },
+  // Turquoise, the main icon since 2026-11-05 (turquoise to royal blue, mixed in OKLab: variant H of
+  // docs/marque/logo-degrade-cyan; the asset was made by scripts/logo_degrade_clair.py --cyan). Saphir
+  // (#4E9BE0 → #1B4A7A) from 2026-10-30; the former default before it, Corail, is the first alternate.
+  "ArdaneIcon": { bg: "linear-gradient(160deg in oklab, #17B3D0, #1D4E9E)", left: ["#FFFFFF", "#FFFFFF"], right: ["#D6E9FA", "#D6E9FA"] },
   "ArdaneIcon-Corail": { bg: "linear-gradient(160deg, #FF7A59, #D9246A)", left: ["#FFFFFF", "#FFFFFF"], right: ["#FFE0CC", "#FFE0CC"] },
   "ArdaneIcon-Classic": { bg: "linear-gradient(135deg, #FBF8F3, #EAE3D8)", left: ["#F04B4D", "#F5782C"], right: ["#2B2223", "#0E0C0C"] },
   // Glass on white: glossy halves, black and cyan.

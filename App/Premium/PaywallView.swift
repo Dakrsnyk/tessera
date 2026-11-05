@@ -61,6 +61,11 @@ struct PaywallView: View {
             .task {
                 if store.products.isEmpty { await store.loadProducts() }
             }
+            // The yearly offer is chosen first; when the App Store does not give it (yet), the first offer it gives,
+            // so the button is never left off without a word.
+            .onChange(of: store.products.map(\.id), initial: true) { _, ids in
+                if !ids.contains(selectedID), let first = ids.first { selectedID = first }
+            }
         }
     }
 
@@ -325,9 +330,9 @@ struct PaywallView: View {
             }
             Button {
                 Task {
-                    let found = await store.restore()
-                    didPurchase = found
-                    message = found ? tr("Ton accès Premium est rétabli.") : tr("Aucun achat Premium trouvé pour ce compte Apple.")
+                    let outcome = await store.restore()
+                    didPurchase = outcome == .restored
+                    message = PremiumStore.message(for: outcome)
                 }
             } label: {
                 Text(store.isRestoring ? tr("Restauration…") : tr("Restaurer mes achats"))
