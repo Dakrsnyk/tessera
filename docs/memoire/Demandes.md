@@ -239,6 +239,7 @@ Retour : [[Memoire]]
 ## À faire
 
 - [ ] **Scanner alimentaire : mission « 90 / 80 / 90 »** (demandée le 2026-11-04) : pause et sauvegarde (fait, `docs/memoire/Reprise-scanner-2026-11-04.md`), audit, recherche approfondie, comparaison, plan d'action en 7 phases (livré le 2026-11-04 : `docs/scanner/Plan-scanner-90-80-90-2026-11-04.md`, **validé le 2026-11-05** ; phase 1 faite le 2026-11-05 : Build 330 interne sur TestFlight, tests verts au Build 331 ; phase 2 : segmenteur Small sur Kaggle à partir du 2026-11-07). Inclut : ajout automatique au-dessus d'un seuil de confiance garanti, écran de scan agrandi « Code-barres ou aliments » (maquette), audit du poids de l'app.
+- [x] **Deux erreurs d'affichage du Build 330** (demandées le 2026-11-05, captures de l'iPhone) : cadre de scan trop court (250 pt au lieu d'environ 444) et voile coupé au-dessus des boutons ; « Estimation » écrasé lettre par lettre à côté de « Ton habitude » ; en plus, « 209,95 g » arrondi au gramme. Fait le 2026-11-05 (compilation au Build 332, version interne au Build 333).
 - [ ] Premium Nutrition : « Faire mes repas » sous le compteur calorique (questionnaire de goûts, budget, magasin, liste de courses d'un seul magasin, provenance et date des prix) (§6).
 
 ## Idées pour plus tard
