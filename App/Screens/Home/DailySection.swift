@@ -66,6 +66,8 @@ struct DailySection: View {
     @State private var dragOffset: CGSize = .zero
     /// Where the finger took the dragged card, from its top left corner.
     @State private var grab: CGPoint = .zero
+    /// Where the finger took the dragged card, in the « daily-grid » space.
+    @State private var dragStart: CGPoint = .zero
     @State private var frames: [String: CGRect] = [:]
     @State private var lastSwap = Date.distantPast
     private var steps: StepCounter { .shared }
@@ -240,22 +242,24 @@ struct DailySection: View {
         withAnimation(moveAnimation) { model.updateSettings { $0.dailyOrder = ids } }
     }
 
-    /// The finger moves the card (the long press worked): it follows the finger, and takes the place of the card
-    /// it is over, the others slide aside.
-    private func dragChanged(_ tile: DailyBrief.Tile, _ drag: DragGesture.Value?, movable: [String]) {
-        enterEditing()
-        guard let drag, let layout = frames[tile.id] else { return }
+    /// The finger moves the card (it was held): it follows the finger, and takes the place of the card it is over,
+    /// the others slide aside.
+    private func dragChanged(_ tile: DailyBrief.Tile, _ drag: DailyCardDrag, movable: [String]) {
+        guard editing, let layout = frames[tile.id] else { return }
         if draggingID != tile.id {
             draggingID = tile.id
             liveOrder = movable
-            grab = CGPoint(x: drag.startLocation.x - layout.minX, y: drag.startLocation.y - layout.minY)
+            grab = drag.grab
+            dragStart = CGPoint(x: layout.minX + drag.grab.x, y: layout.minY + drag.grab.y)
             dragOffset = .zero
             Haptics.tap()
         }
-        dragOffset = CGSize(width: drag.location.x - grab.x - layout.minX, height: drag.location.y - grab.y - layout.minY)
+        // In the « daily-grid » space: where the finger took the card, plus how far it went.
+        let location = CGPoint(x: dragStart.x + drag.translation.width, y: dragStart.y + drag.translation.height)
+        dragOffset = CGSize(width: location.x - grab.x - layout.minX, height: location.y - grab.y - layout.minY)
         guard Date().timeIntervalSince(lastSwap) > 0.25,
               let order = liveOrder,
-              let target = DailyLayoutRules.target(at: drag.location, frames: frames, excluding: tile.id),
+              let target = DailyLayoutRules.target(at: location, frames: frames, excluding: tile.id),
               order.contains(target) else { return }
         let next = DailyLayoutRules.moved(order, id: tile.id, onto: target)
         guard next != order else { return }

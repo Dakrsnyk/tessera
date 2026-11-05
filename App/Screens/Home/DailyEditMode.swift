@@ -12,8 +12,8 @@ struct DailyEditHandlers {
     var moveAfter: () -> Void
     var remove: () -> Void
     var organize: () -> Void
-    /// The long press worked (nil drag) or the finger moves (drag, in the « daily-grid » space).
-    var drag: (DragGesture.Value?) -> Void
+    /// The card was held (zero translation) or the finger moves (`DailyHoldToMove`).
+    var drag: (DailyCardDrag) -> Void
     var drop: () -> Void
 }
 
@@ -96,6 +96,8 @@ struct DailyEditableCard<Content: View>: View {
                 // Editing: the card is only a thing to move, its buttons and its link do nothing.
                 .allowsHitTesting(!editing)
                 .overlay { if editing { Color.clear.contentShape(Rectangle()).onTapGesture {} } }
+                // Hold half a second then drag moves the card; a swipe scrolls Home (UIKit, see `DailyHoldToMove`).
+                .overlay { if editing, canMoveBefore || canMoveAfter { DailyHoldToMove(onMove: handlers.drag, onDrop: handlers.drop) } }
                 .overlay(alignment: .topTrailing) { sizeButton }
                 .overlay(alignment: .topLeading) { removeButton }
                 .rotationEffect(.degrees(shaking ? (wiggle ? 0.9 : -0.9) : 0))
@@ -119,16 +121,6 @@ struct DailyEditableCard<Content: View>: View {
         // A tap, a swipe of the pages and the scroll of Home work exactly as before.
         // No menu at all in the edit mode (not even an empty one), so it can never hold the press that moves the card.
         .modifier(DailyCardMenu(isOn: !editing, handlers: handlers))
-        // In the edit mode the card's content takes no touch: hold then drag moves the card.
-        .simultaneousGesture(
-            LongPressGesture(minimumDuration: 0.25)
-                .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .named("daily-grid")))
-                .onChanged { value in
-                    if case .second(true, let drag) = value { handlers.drag(drag) }
-                }
-                .onEnded { _ in handlers.drop() },
-            including: editing ? .all : .none
-        )
         .accessibilityElement(children: .contain)
         .accessibilityAction(named: Text(tr("Retirer de Mon Quotidien"))) { handlers.remove() }
         .modifier(DailyMoveActions(canGrow: canGrow, canShrink: canShrink, canBefore: canMoveBefore, canAfter: canMoveAfter,
