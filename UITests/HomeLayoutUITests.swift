@@ -23,10 +23,14 @@ extension ProfileUITests {
 
         let card = app.descendants(matching: .any)["daily-nutrition"].firstMatch
         XCTAssertTrue(card.waitForExistence(timeout: 12), "Carte Nutrition absente")
+        // As on the Home Screen: a long press opens the card's menu, « Organiser… » makes the cards wiggle.
         card.press(forDuration: 1.2)
+        let organize = app.buttons["Organiser…"]
+        XCTAssertTrue(organize.waitForExistence(timeout: 5), "L'appui long n'ouvre pas le menu de la carte")
+        organize.tap()
 
         let done = app.buttons["daily-edit-done"]
-        XCTAssertTrue(done.waitForExistence(timeout: 5), "L'appui long n'ouvre pas le mode édition")
+        XCTAssertTrue(done.waitForExistence(timeout: 5), "« Organiser… » n'ouvre pas le mode édition")
         let shrink = app.buttons["daily-shrink-nutrition"]
         XCTAssertTrue(shrink.waitForExistence(timeout: 5), "Pas de « − » sur la carte large")
         shrink.tap()

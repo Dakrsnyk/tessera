@@ -113,12 +113,13 @@ struct DailyEditableCard<Content: View>: View {
         .zIndex(isDragging ? 1 : 0)
         .onChange(of: shaking) { _, on in wiggle = on }
         .onAppear { wiggle = shaking }
-        // Outside the edit mode only a plain long press (a tap, a swipe of the card's pages and the scroll of Home
-        // work exactly as before); in the edit mode, hold then drag moves the card.
-        .simultaneousGesture(
-            LongPressGesture(minimumDuration: 0.4).onEnded { _ in handlers.drag(nil) },
-            including: editing ? .none : .all
-        )
+        // Outside the edit mode, as on the iPhone Home Screen: a long press opens the card's menu, whose « Organiser… »
+        // starts the edit mode (« Modifier l'écran d'accueil »). A system menu, because the card's pages are a scroll
+        // view that keeps a plain long press for itself (the edit mode never started in the UI test, Build 338).
+        // A tap, a swipe of the pages and the scroll of Home work exactly as before.
+        // No menu at all in the edit mode (not even an empty one), so it can never hold the press that moves the card.
+        .modifier(DailyCardMenu(isOn: !editing, handlers: handlers))
+        // In the edit mode the card's content takes no touch: hold then drag moves the card.
         .simultaneousGesture(
             LongPressGesture(minimumDuration: 0.25)
                 .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .named("daily-grid")))
@@ -194,5 +195,26 @@ private struct DailyMoveActions: ViewModifier {
             .accessibilityAction(named: Text(tr("Agrandir"))) { if canGrow { handlers.grow() } }
             .accessibilityAction(named: Text(tr("Rétrécir"))) { if canShrink { handlers.shrink() } }
             .accessibilityAction(named: Text(tr("Organiser…"))) { if !editing { handlers.organize() } }
+    }
+}
+
+/// The menu of a card outside the edit mode: « Organiser… » (the edit mode) and « Retirer de Mon Quotidien ».
+private struct DailyCardMenu: ViewModifier {
+    let isOn: Bool
+    let handlers: DailyEditHandlers
+
+    func body(content: Content) -> some View {
+        if isOn {
+            content.contextMenu {
+                Button(action: handlers.organize) {
+                    Label(tr("Organiser…"), systemImage: "arrow.up.arrow.down")
+                }
+                Button(role: .destructive, action: handlers.remove) {
+                    Label(tr("Retirer de Mon Quotidien"), systemImage: "minus.circle")
+                }
+            }
+        } else {
+            content
+        }
     }
 }
