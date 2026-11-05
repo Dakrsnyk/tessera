@@ -94,6 +94,14 @@ final class ScanPendingTests: XCTestCase {
         let item = try XCTUnwrap(waiting.pending.first)
         let id = try XCTUnwrap(waiting.confirm(item.id))
         XCTAssertEqual(waiting.lines.first { $0.id == id }?.grams, 87)
+
+        // Une alternative garde sa portion usuelle ; la quantité proposée retenue pour l'apprentissage est arrondie.
+        var replaced = ScanRecap(photoProposals: [proposal("weak", grams: 87.6, confidence: 0.6)])
+        let pending = try XCTUnwrap(replaced.pending.first)
+        replaced.confirm(pending.id, with: food("other", serving: 75))
+        let other = try XCTUnwrap(replaced.lines.first)
+        XCTAssertEqual(other.grams, 75)
+        XCTAssertEqual(other.initialGrams, 88)
     }
 
     func testConfirmOfAnUnknownItemChangesNothing() {
