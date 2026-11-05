@@ -13741,12 +13741,6 @@
    "App/Screens/Spaces/NutritionSpace.swift:99: HintRow(text: tr(\"Glisse un aliment vers la gauche pour l'ajouter aux favoris. Le widget Ajout rapide les propose d'une touche.\"))"
   ]
  },
- "Glisse une carte pour la déplacer. + et − changent sa taille.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/DailySection.swift:106: Text(tr(\"Glisse une carte pour la déplacer. + et − changent sa taille.\"))"
-  ]
- },
  "Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui.": {
   "placeholders": 0,
   "uses": [
@@ -17926,6 +17920,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/Profile.swift:183: case .maintain: tr(\"Maintien\")"
+  ]
+ },
+ "Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Home/DailySection.swift:106: Text(tr(\"Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille.\"))"
   ]
  },
  "Maison": {

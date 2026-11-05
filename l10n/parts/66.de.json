@@ -1,5 +1,4 @@
 {
- "Glisse une carte pour la déplacer. + et − changent sa taille.": "Zieh eine Karte, um sie zu verschieben. + und − ändern ihre Größe.",
  "Cartes masquées et disposition automatique": "Ausgeblendete Karten und automatische Anordnung",
  "Déplacer avant": "Davor verschieben",
  "Déplacer après": "Danach verschieben",
@@ -7,5 +6,6 @@
  "Rétrécir": "Verkleinern",
  "Agrandir %@": "%@ vergrößern",
  "Rétrécir %@": "%@ verkleinern",
- "Retirer %@ de Mon Quotidien": "%@ aus Mein Tag entfernen"
+ "Retirer %@ de Mon Quotidien": "%@ aus Mein Tag entfernen",
+ "Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille.": "Halte eine Karte gedrückt und ziehe sie, um sie zu verschieben. + und − ändern ihre Größe."
 }

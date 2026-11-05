@@ -43,7 +43,7 @@ enum ScheduleImportMerge {
             }
             let isDuplicate = result.slots.contains {
                 $0.kind == .course && $0.courseID == courseID && $0.date == nil
-                    && $0.weekday == item.weekday && $0.startMinute == item.startMinute && $0.endMinute == item.endMinute
+                    && $0.weekdays.contains(item.weekday) && $0.startMinute == item.startMinute && $0.endMinute == item.endMinute
             }
             guard !isDuplicate else { continue }
             result.slots.append(ClassSlot(courseID: courseID, weekday: item.weekday, startMinute: item.startMinute, endMinute: item.endMinute,

@@ -39,7 +39,7 @@ struct StudentSpaceSections: View {
                         Circle().fill(Color(hex: state.colorHex(of: slot))).frame(width: 8, height: 8)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(state.title(of: slot)).foregroundStyle(Color.primary)
-                            Text("\(slot.date.map(Fmt.longDay) ?? weekdayNames[safe: slot.weekday - 1] ?? "") · \(minuteText(slot.startMinute))–\(minuteText(slot.endMinute))\(slot.room.isEmpty ? "" : " · \(slot.room)")")
+                            Text("\(slot.date.map(Fmt.longDay) ?? slot.weekdaysText) · \(minuteText(slot.startMinute))–\(minuteText(slot.endMinute))\(slot.room.isEmpty ? "" : " · \(slot.room)")")
                                 .font(.caption)
                                 .foregroundStyle(Color.secondary)
                         }

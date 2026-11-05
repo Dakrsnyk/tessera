@@ -104,7 +104,16 @@ struct ClassSlot: Codable, Hashable, Identifiable {
     /// (a day it was cancelled included).
     func falls(on day: Date) -> Bool {
         if let date { return DateMath.isSameDay(date, day) }
-        return WeekdayRepeat.occurs(on: day, weekdays: [weekday] + extraWeekdays)
+        return WeekdayRepeat.occurs(on: day, weekdays: weekdays)
+    }
+
+    /// Every ISO weekday of a weekly entry, Monday first: `weekday` and the days added to it.
+    var weekdays: [Int] { WeekdayRepeat.normalized([weekday] + extraWeekdays) }
+
+    /// The day or days of a weekly entry, as read: « Lundi », or « Tous les lundis et mercredis ».
+    var weekdaysText: String {
+        let days = weekdays
+        return days.count > 1 ? WeekdayRepeat.summary(days) : WeekdayRepeat.name(of: weekday)
     }
 
     /// Whether a weekly entry is cancelled on that day.
@@ -525,7 +534,10 @@ enum StudentMath {
 
     /// Minutes of class a week for a course, from the timetable.
     static func weeklyClassMinutes(_ state: StudentState, course: UUID) -> Int {
-        state.slots.filter { $0.courseID == course && $0.date == nil }.reduce(0) { $0 + max(0, $1.endMinute - $1.startMinute) }
+        // A slot repeated on several days (« lundi et mercredi ») counts once per day.
+        state.slots.filter { $0.courseID == course && $0.date == nil }.reduce(0) {
+            $0 + max(0, $1.endMinute - $1.startMinute) * $1.weekdays.count
+        }
     }
 
     /// Share of the course's grade already evaluated (sum of the weights, up to 100 %).

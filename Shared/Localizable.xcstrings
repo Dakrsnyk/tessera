@@ -102320,53 +102320,6 @@
         }
       }
     },
-    "Glisse une carte pour la déplacer. + et − changent sa taille.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zieh eine Karte, um sie zu verschieben. + und − ändern ihre Größe."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Drag a card to move it. + and − change its size."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arrastra una tarjeta para moverla. + y − cambian su tamaño."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Glisse une carte pour la déplacer. + et − changent sa taille."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trascina una scheda per spostarla. + e − ne cambiano la dimensione."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カードをドラッグして移動します。+ と − でサイズを変えられます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Arraste um cartão para movê-lo. + e − mudam o tamanho dele."
-          }
-        }
-      }
-    },
     "Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui.": {
       "extractionState": "manual",
       "localizations": {
@@ -133900,6 +133853,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Manutenção"
+          }
+        }
+      }
+    },
+    "Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Halte eine Karte gedrückt und ziehe sie, um sie zu verschieben. + und − ändern ihre Größe."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hold a card, then drag it to move it. + and − change its size."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantén pulsada una tarjeta y arrástrala para moverla. + y − cambian su tamaño."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tieni premuta una scheda, poi trascinala per spostarla. + e − ne cambiano la dimensione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カードを長押ししてからドラッグすると移動できます。＋と−でサイズを変えられます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantenha um cartão pressionado e arraste-o para movê-lo. + e − mudam o tamanho."
           }
         }
       }

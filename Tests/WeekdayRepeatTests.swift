@@ -84,4 +84,18 @@ final class WeekdayRepeatTests: XCTestCase {
         let odd = #"{"weekday":2,"extraWeekdays":[9,4,4,0],"startMinute":480,"endMinute":540}"#
         XCTAssertEqual(try JSONDecoder().decode(ClassSlot.self, from: Data(odd.utf8)).extraWeekdays, [4])
     }
+
+    /// A class on Monday and Wednesday: two hours a week, and an import of its Wednesday is not added again.
+    func testARepeatedSlotCountsEachDayAndIsNotImportedTwice() {
+        let course = UUID()
+        var slot = ClassSlot(courseID: course, weekday: 1, startMinute: 480, endMinute: 540)
+        slot.extraWeekdays = [3]
+        XCTAssertEqual(slot.weekdays, [1, 3])
+        XCTAssertFalse(slot.weekdaysText.isEmpty)
+        var state = StudentState()
+        state.slots = [slot]
+        XCTAssertEqual(StudentMath.weeklyClassMinutes(state, course: course), 120)
+        let single = ClassSlot(courseID: course, weekday: 2, startMinute: 480, endMinute: 540)
+        XCTAssertEqual(single.weekdays, [2])
+    }
 }

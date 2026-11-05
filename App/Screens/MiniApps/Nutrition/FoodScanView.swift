@@ -369,8 +369,6 @@ struct FoodScanView: View {
             paywall = .photoScanLimit
             return
         }
-        // One analysis is counted when it starts (a barcode never is).
-        if !model.isPremium { model.update(\.nutrition) { $0.photoScansUsed += 1 } }
         stage = .analyzing
         do {
             let analysis = try await MealAnalysisConfig.makeAnalyzer().analyzeMeal(image)
@@ -379,6 +377,9 @@ struct FoodScanView: View {
                 stage = .photoFailed(.nothingFound)
                 return
             }
+            // A free analysis is counted only when it found something (a failure or « nothing found » is free;
+            // a barcode never counts).
+            if !model.isPremium { model.update(\.nutrition) { $0.photoScansUsed += 1 } }
             recap = analysis.recap
             zoneHints = analysis.zoneHints
             source = .photo

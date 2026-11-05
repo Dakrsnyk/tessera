@@ -103,7 +103,7 @@ struct DailySection: View {
                 if editing { editBar }
             }
             if editing {
-                Text(tr("Glisse une carte pour la déplacer. + et − changent sa taille."))
+                Text(tr("Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

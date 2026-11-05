@@ -1,5 +1,4 @@
 {
- "Glisse une carte pour la déplacer. + et − changent sa taille.": "Trascina una scheda per spostarla. + e − ne cambiano la dimensione.",
  "Cartes masquées et disposition automatique": "Schede nascoste e disposizione automatica",
  "Déplacer avant": "Sposta prima",
  "Déplacer après": "Sposta dopo",
@@ -7,5 +6,6 @@
  "Rétrécir": "Riduci",
  "Agrandir %@": "Ingrandisci %@",
  "Rétrécir %@": "Riduci %@",
- "Retirer %@ de Mon Quotidien": "Rimuovi %@ da La mia giornata"
+ "Retirer %@ de Mon Quotidien": "Rimuovi %@ da La mia giornata",
+ "Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille.": "Tieni premuta una scheda, poi trascinala per spostarla. + e − ne cambiano la dimensione."
 }

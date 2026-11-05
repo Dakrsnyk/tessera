@@ -422,7 +422,7 @@ struct StudiesCoursePage: View {
             ForEach(Array(slots.enumerated()), id: \.element.id) { index, slot in
                 if index > 0 { MiniDivider() }
                 Button { sheet = .slot(slot) } label: {
-                    MiniRow(symbol: "clock", colorHex: course.colorHex, title: Studies.weekdayNames[slot.weekday - 1],
+                    MiniRow(symbol: "clock", colorHex: course.colorHex, title: slot.weekdaysText,
                             detail: slot.room.isEmpty ? nil : tr("Salle \(slot.room)"),
                             value: "\(Studies.minuteText(slot.startMinute))–\(Studies.minuteText(slot.endMinute))", showsChevron: false)
                 }

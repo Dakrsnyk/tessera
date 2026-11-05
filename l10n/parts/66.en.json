@@ -1,5 +1,4 @@
 {
- "Glisse une carte pour la déplacer. + et − changent sa taille.": "Drag a card to move it. + and − change its size.",
  "Cartes masquées et disposition automatique": "Hidden cards and automatic layout",
  "Déplacer avant": "Move before",
  "Déplacer après": "Move after",
@@ -7,5 +6,6 @@
  "Rétrécir": "Shrink",
  "Agrandir %@": "Enlarge %@",
  "Rétrécir %@": "Shrink %@",
- "Retirer %@ de Mon Quotidien": "Remove %@ from My Day"
+ "Retirer %@ de Mon Quotidien": "Remove %@ from My Day",
+ "Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille.": "Hold a card, then drag it to move it. + and − change its size."
 }

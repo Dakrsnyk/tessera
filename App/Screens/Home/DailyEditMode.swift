@@ -113,23 +113,25 @@ struct DailyEditableCard<Content: View>: View {
         .zIndex(isDragging ? 1 : 0)
         .onChange(of: shaking) { _, on in wiggle = on }
         .onAppear { wiggle = shaking }
+        // Outside the edit mode only a plain long press (a tap, a swipe of the card's pages and the scroll of Home
+        // work exactly as before); in the edit mode, hold then drag moves the card.
         .simultaneousGesture(
-            LongPressGesture(minimumDuration: 0.35)
+            LongPressGesture(minimumDuration: 0.4).onEnded { _ in handlers.drag(nil) },
+            including: editing ? .none : .all
+        )
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 0.25)
                 .sequenced(before: DragGesture(minimumDistance: 0, coordinateSpace: .named("daily-grid")))
                 .onChanged { value in
                     if case .second(true, let drag) = value { handlers.drag(drag) }
                 }
-                .onEnded { _ in handlers.drop() }
+                .onEnded { _ in handlers.drop() },
+            including: editing ? .all : .none
         )
         .accessibilityElement(children: .contain)
-        .accessibilityActions {
-            if canMoveBefore { Button(tr("Déplacer avant"), action: handlers.moveBefore) }
-            if canMoveAfter { Button(tr("Déplacer après"), action: handlers.moveAfter) }
-            if canGrow { Button(tr("Agrandir"), action: handlers.grow) }
-            if canShrink { Button(tr("Rétrécir"), action: handlers.shrink) }
-            Button(tr("Retirer de Mon Quotidien"), action: handlers.remove)
-            if !editing { Button(tr("Organiser…"), action: handlers.organize) }
-        }
+        .accessibilityAction(named: Text(tr("Retirer de Mon Quotidien"))) { handlers.remove() }
+        .modifier(DailyMoveActions(canGrow: canGrow, canShrink: canShrink, canBefore: canMoveBefore, canAfter: canMoveAfter,
+                                   handlers: handlers, editing: editing))
     }
 
     private var shaking: Bool { editing && !isDragging && !reduceMotion }
@@ -172,5 +174,25 @@ struct DailyEditableCard<Content: View>: View {
             .overlay(Circle().stroke(.white.opacity(0.85), lineWidth: 1.5))
             .frame(width: 44, height: 44)
             .contentShape(Rectangle())
+    }
+}
+
+/// The VoiceOver actions of a card: move before or after, enlarge or shrink (only those that apply), and
+/// « Organiser… » outside the edit mode.
+private struct DailyMoveActions: ViewModifier {
+    let canGrow: Bool
+    let canShrink: Bool
+    let canBefore: Bool
+    let canAfter: Bool
+    let handlers: DailyEditHandlers
+    let editing: Bool
+
+    func body(content: Content) -> some View {
+        content
+            .accessibilityAction(named: Text(tr("Déplacer avant"))) { if canBefore { handlers.moveBefore() } }
+            .accessibilityAction(named: Text(tr("Déplacer après"))) { if canAfter { handlers.moveAfter() } }
+            .accessibilityAction(named: Text(tr("Agrandir"))) { if canGrow { handlers.grow() } }
+            .accessibilityAction(named: Text(tr("Rétrécir"))) { if canShrink { handlers.shrink() } }
+            .accessibilityAction(named: Text(tr("Organiser…"))) { if !editing { handlers.organize() } }
     }
 }
