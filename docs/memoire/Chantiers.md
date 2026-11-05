@@ -166,3 +166,8 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
   - vues multiples écartées (aucun gain) ;
   - segmenteur Small poussé automatiquement sur Kaggle au renouvellement du quota (2026-11-07 0 h 10 UTC, tâche de fond de la session ; si elle n'a pas tourné : `kaggle kernels push -p scripts/ml/kaggle/segmenter --accelerator NvidiaTeslaT4`).
 - Suite : segmenteur Small après le renouvellement du quota GPU (7 novembre) pour la découpe, affinage de bout en bout pour les grammes, intégration des grammes par l'assiette dans l'app (mode expérimental) puis repas pesés (22.6).
+
+## Série du 2026-11-05 : logo turquoise, Entreprise, Mon Quotidien, Premium, Planning (chantier 23 de [[Demandes]])
+- Fait : logo H partout (Build 335) et sur ardane.app ; import CSV d'Entreprise réparé et réservé à Premium ; Mon Quotidien façon écran d'accueil (appui long → « Organiser… » → cartes qui tremblent, glisser, + / −, « OK ») ; horaire importé ou scanné en Premium (ajouter ou remplacer) ; 10 analyses de plat gratuites ; « Répéter » par jours dans Planning ; correctifs de sécurité sans accord requis. Tests : Build 339, 1 277 tests réussis, aucun échec (deux passages de correction : Builds 337 et 338).
+- Livraison : `[interne]` après le Build 339 (le Build 336 interne avait été annulé par un push pendant son exécution).
+- Reste : visuels App Store et campagne au nouveau logo ; points de sécurité qui demandent l'accord (workflow, ruleset, chiffrement de `~/ardane-signing`) ; actions de l'utilisateur (dépôt privé, marque, contrat App Store Connect, comptable, banque).
