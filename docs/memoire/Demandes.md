@@ -238,6 +238,7 @@ Retour : [[Memoire]]
 
 ## À faire
 
+- [ ] **Scanner alimentaire : mission « 90 / 80 / 90 »** (demandée le 2026-11-04) : pause et sauvegarde (fait, `docs/memoire/Reprise-scanner-2026-11-04.md`), audit, recherche approfondie, comparaison, plan d'action en 7 phases (livré le 2026-11-04 : `docs/scanner/Plan-scanner-90-80-90-2026-11-04.md`, **en attente de ta validation** ; rien n'est modifié avant). Inclut : ajout automatique au-dessus d'un seuil de confiance garanti, écran de scan agrandi « Code-barres ou aliments » (maquette), audit du poids de l'app.
 - [ ] Premium Nutrition : « Faire mes repas » sous le compteur calorique (questionnaire de goûts, budget, magasin, liste de courses d'un seul magasin, provenance et date des prix) (§6).
 
 ## Idées pour plus tard
