@@ -41,6 +41,71 @@ extension ProfileUITests {
         XCTAssertFalse(app.buttons["daily-grow-nutrition"].exists, "Le « + » reste hors du mode édition")
     }
 
+    /// Edit mode: a card held half a second then dragged onto its neighbour takes its place (and back, so the
+    /// order the other tests see is unchanged), and a quick swipe over a card scrolls Home instead of lifting it
+    /// (remark of 2026-11-05 on Build 340, `DailyHoldToMove`).
+    func testDailyEditModeMovesHeldCardsAndScrollsOnSwipe() throws {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA", "-screenshotScreen", "home"]
+        app.launch()
+        addTeardownBlock { app.terminate() }
+
+        let nutrition = app.descendants(matching: .any)["daily-nutrition"].firstMatch
+        XCTAssertTrue(nutrition.waitForExistence(timeout: 12), "Carte Nutrition absente")
+        nutrition.press(forDuration: 1.2)
+        let organize = app.buttons["Organiser…"]
+        XCTAssertTrue(organize.waitForExistence(timeout: 5), "L'appui long n'ouvre pas le menu de la carte")
+        organize.tap()
+        let done = app.buttons["daily-edit-done"]
+        XCTAssertTrue(done.waitForExistence(timeout: 5), "« Organiser… » n'ouvre pas le mode édition")
+        Thread.sleep(forTimeInterval: 0.6)
+
+        let screen = app.windows.firstMatch.frame
+        /// Away from the top and the bottom of the screen, where Home would scroll by itself under a held card.
+        func inMiddle(_ frame: CGRect) -> Bool {
+            frame.midY > screen.height * 0.22 && frame.midY < screen.height * 0.68
+        }
+        /// Reading order of two cards: by row, then left to right (the wiggle tilts a frame by a few points).
+        func comesBefore(_ a: CGRect, _ b: CGRect) -> Bool {
+            abs(a.minY - b.minY) < 20 ? a.minX < b.minX : a.minY < b.minY
+        }
+        let others = ["daily-planning", "daily-workout", "daily-habits", "daily-steps", "daily-budget"]
+            .map { app.descendants(matching: .any)[$0].firstMatch }
+            .filter { $0.exists && inMiddle($0.frame) }
+        guard inMiddle(nutrition.frame), let neighbour = others.min(by: {
+            abs($0.frame.midY - nutrition.frame.midY) < abs($1.frame.midY - nutrition.frame.midY)
+        }) else {
+            throw XCTSkip("Pas deux cartes au milieu de l'écran sur ce simulateur : \(nutrition.frame)")
+        }
+        let nutritionFirst = comesBefore(nutrition.frame, neighbour.frame)
+
+        /// Holds the Nutrition card, drags it onto the neighbour, waits for the drop.
+        func moveNutritionOntoNeighbour() {
+            let from = nutrition.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+            let to = neighbour.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+            from.press(forDuration: 0.9, thenDragTo: to, withVelocity: .slow, thenHoldForDuration: 0.6)
+            Thread.sleep(forTimeInterval: 1.0)
+        }
+
+        moveNutritionOntoNeighbour()
+        XCTAssertNotEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst,
+                          "La carte maintenue puis glissée ne prend pas la place de sa voisine : \(nutrition.frame) / \(neighbour.frame)")
+        XCTAssertTrue(done.exists, "Le déplacement a fermé le mode édition")
+        moveNutritionOntoNeighbour()
+        XCTAssertEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst, "La carte ne revient pas à sa place")
+
+        // A quick swipe up over the card: Home scrolls, nothing is lifted or moved.
+        let top = nutrition.frame.minY
+        let start = nutrition.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let end = start.withOffset(CGVector(dx: 0, dy: -240))
+        start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .default, thenHoldForDuration: 0.1)
+        Thread.sleep(forTimeInterval: 1.0)
+        XCTAssertLessThan(nutrition.frame.minY, top - 60, "Un balayage sur une carte ne fait pas défiler l'accueil en mode édition")
+        XCTAssertEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst, "Le balayage a déplacé une carte")
+        XCTAssertTrue(done.exists, "Le balayage a fermé le mode édition")
+    }
+
     private func assertHomeStaysFixed(language: String, locale: String, file: StaticString = #filePath, line: UInt = #line) {
         continueAfterFailure = false
         let app = XCUIApplication()
