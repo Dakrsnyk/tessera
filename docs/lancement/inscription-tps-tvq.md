@@ -40,6 +40,30 @@ Le NEQ (2282741356) est un autre numéro : il vient du Registraire et il est dé
    - responsable des services électroniques (clicSÉQUR) : **toi**.
 4. **Suivi :** le service **« Suivi de l'inscription d'une entreprise en démarrage »** donne le numéro d'identification, le numéro de dossier et le numéro de compte TPS. Des lettres de confirmation arrivent par la poste. Le délai de traitement n'est pas affiché sur le site (rien vérifié).
 
+## Si l'identification en ligne échoue : formulaire LM-1 (2023-11)
+Cas vécu le 2026-11-06 : le message « Nous ne sommes pas en mesure de vous identifier » est apparu. La demande en ligne continue, mais il faut y joindre le LM-1 rempli et signé, dans la case « Type de document : Formulaire Demande d'inscription (LM-1) ». Le fichier doit être en PDF, JPEG ou TIFF et peser moins de 2 Mo. Aucun autre document n'est exigé pour une entreprise individuelle qui signe elle-même.
+
+| Partie du LM-1 | Réponse pour Ardane |
+|---|---|
+| Fichiers | Cocher **TPS** et **TVQ** seulement |
+| NEQ / NE | NEQ 2282741356 ; NE fédéral : vide |
+| Langue | français |
+| 1. Particulier en affaires | Nom et prénoms comme sur l'avis de cotisation ; NAS (toi) ; **numéro d'avis de cotisation obligatoire** (l'un des deux plus récents avis de Revenu Québec) ; nom commercial « Ardane » |
+| 1.1 / 1.2 | Adresse du domicile ; 1.2 vide (même adresse) |
+| 1.3 | Cellulaire ; début des activités : 2026-11-04 (ou la date donnée au Registraire) ; clôture de l'exercice : vide (31 décembre) |
+| 2 | Ne pas remplir |
+| 3. Correspondance | « X » sur la ligne « TPS et TVQ », colonne « Adresse du domicile » |
+| 4.1 | « Conception, développement et vente d'une application mobile pour iPhone (Ardane), distribuée par l'App Store d'Apple : téléchargement gratuit et abonnements numériques. » Colonnes SCIAN/CAE : vides (réservées) |
+| 4.2 | **Non** partout |
+| 5.1.1 | Date d'entrée en vigueur de la TPS : la date de la demande ; TVQ : vide (même date). Une date de plus de 30 jours dans le passé exige des preuves. |
+| 5.1.2 | Estimation honnête des ventes au Canada sur 12 mois (sous 30 000 $) |
+| 5.1.3 | Rien à cocher : la fréquence **annuelle** est attribuée d'office jusqu'à 1 500 000 $ |
+| 5.2, 6 | Vides |
+| 7. Dépôt direct | Vide pour l'instant (compte d'entreprise pas encore ouvert) |
+| 8. Signature | Nom en majuscules, signature, fonction « Propriétaire », date |
+
+Le LM-1 rempli porte la mention « Protégé B » : ne l'envoyer à personne d'autre que Revenu Québec, et ne pas le mettre dans ce dépôt.
+
 ## Après
 - [ ] Noter les deux numéros dans tes papiers (pas dans ce dépôt) et garder les lettres.
 - [ ] App Store Connect › Business › Tax Forms › Canada : saisir le numéro TPS puis le numéro TVQ ; télécharger la copie du FP-2506-V et du GST506.
