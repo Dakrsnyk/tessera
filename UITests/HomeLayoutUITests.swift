@@ -51,9 +51,9 @@ extension ProfileUITests {
         app.launch()
         addTeardownBlock { app.terminate() }
 
-        let nutrition = app.descendants(matching: .any)["daily-nutrition"].firstMatch
-        XCTAssertTrue(nutrition.waitForExistence(timeout: 12), "Carte Nutrition absente")
-        nutrition.press(forDuration: 1.2)
+        let nutritionCard = app.descendants(matching: .any)["daily-nutrition"].firstMatch
+        XCTAssertTrue(nutritionCard.waitForExistence(timeout: 12), "Carte Nutrition absente")
+        nutritionCard.press(forDuration: 1.2)
         let organize = app.buttons["Organiser…"]
         XCTAssertTrue(organize.waitForExistence(timeout: 5), "L'appui long n'ouvre pas le menu de la carte")
         organize.tap()
@@ -61,20 +61,29 @@ extension ProfileUITests {
         XCTAssertTrue(done.waitForExistence(timeout: 5), "« Organiser… » n'ouvre pas le mode édition")
         Thread.sleep(forTimeInterval: 0.6)
 
+        // Each card is found by its « × » (top left corner of the card, outside its pages): the identifiers of the
+        // cards' contents sit inside their horizontal pages and can be off screen (Build 343).
         let screen = app.windows.firstMatch.frame
+        func corner(_ id: String) -> XCUIElement { app.buttons["daily-remove-\(id)"] }
+        let nutrition = corner("nutrition")
+        XCTAssertTrue(nutrition.waitForExistence(timeout: 5), "Pas de « × » sur la carte Nutrition en mode édition")
         /// Away from the top and the bottom of the screen, where Home would scroll by itself under a held card.
         func inMiddle(_ frame: CGRect) -> Bool {
-            frame.midY > screen.height * 0.22 && frame.midY < screen.height * 0.68
+            frame.minY > screen.height * 0.18 && frame.minY < screen.height * 0.6
         }
-        /// Reading order of two cards: by row, then left to right (the wiggle tilts a frame by a few points).
+        /// Reading order of two cards from their corners: by row, then left to right (the wiggle tilts a little).
         func comesBefore(_ a: CGRect, _ b: CGRect) -> Bool {
             abs(a.minY - b.minY) < 20 ? a.minX < b.minX : a.minY < b.minY
         }
-        let others = ["daily-planning", "daily-workout", "daily-habits", "daily-steps", "daily-budget"]
-            .map { app.descendants(matching: .any)[$0].firstMatch }
+        /// A point well inside the card, away from its « × » and its « + » / « − ».
+        func inside(_ corner: XCUIElement) -> XCUICoordinate {
+            corner.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: 66, dy: 76))
+        }
+        let others = ["planning", "workout", "habits", "steps", "budget", "priorities", "reminders"]
+            .map(corner)
             .filter { $0.exists && inMiddle($0.frame) }
         guard inMiddle(nutrition.frame), let neighbour = others.min(by: {
-            abs($0.frame.midY - nutrition.frame.midY) < abs($1.frame.midY - nutrition.frame.midY)
+            abs($0.frame.minY - nutrition.frame.minY) < abs($1.frame.minY - nutrition.frame.minY)
         }) else {
             throw XCTSkip("Pas deux cartes au milieu de l'écran sur ce simulateur : \(nutrition.frame)")
         }
@@ -82,9 +91,7 @@ extension ProfileUITests {
 
         /// Holds the Nutrition card, drags it onto the neighbour, waits for the drop.
         func moveNutritionOntoNeighbour() {
-            let from = nutrition.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-            let to = neighbour.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
-            from.press(forDuration: 0.9, thenDragTo: to, withVelocity: .slow, thenHoldForDuration: 0.6)
+            inside(nutrition).press(forDuration: 0.9, thenDragTo: inside(neighbour), withVelocity: .slow, thenHoldForDuration: 0.6)
             Thread.sleep(forTimeInterval: 1.0)
         }
 
@@ -97,7 +104,7 @@ extension ProfileUITests {
 
         // A quick swipe up over the card: Home scrolls, nothing is lifted or moved.
         let top = nutrition.frame.minY
-        let start = nutrition.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        let start = inside(nutrition)
         let end = start.withOffset(CGVector(dx: 0, dy: -240))
         start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .default, thenHoldForDuration: 0.1)
         Thread.sleep(forTimeInterval: 1.0)
