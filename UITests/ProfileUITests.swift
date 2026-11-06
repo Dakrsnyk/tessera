@@ -329,9 +329,15 @@ final class ProfileUITests: XCTestCase {
                 start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
                 drags += 1
             }
+            // The row slows down after a drag: a tap during that time can miss the chip (Build 344, once).
+            if drags > 0 { Thread.sleep(forTimeInterval: 0.8) }
             chip.tap()
-            let selected = expectation(for: NSPredicate(format: "isSelected == true"), evaluatedWith: chip)
-            XCTAssertEqual(XCTWaiter.wait(for: [selected], timeout: 4), .completed, "Le widget \(index) ne s'ouvre pas")
+            var selected = expectation(for: NSPredicate(format: "isSelected == true"), evaluatedWith: chip)
+            if XCTWaiter.wait(for: [selected], timeout: 4) != .completed {
+                chip.tap()
+                selected = expectation(for: NSPredicate(format: "isSelected == true"), evaluatedWith: chip)
+                XCTAssertEqual(XCTWaiter.wait(for: [selected], timeout: 4), .completed, "Le widget \(index) ne s'ouvre pas")
+            }
         }
         snapshot("pack-studio-last")
         tapButton("Enregistrer les 6 widgets")
