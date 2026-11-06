@@ -67,7 +67,7 @@ Le LM-1 rempli porte la mention « Protégé B » : ne l'envoyer à personne d'a
 ## État
 - **2026-11-06, 16 h 01 : demande transmise en ligne** (service « Inscription d'une entreprise en démarrage »), avec le LM-1 signé en pièce jointe. L'accusé de réception et son numéro de référence sont chez l'utilisateur ; ne pas les mettre dans ce dépôt, qui est public.
 - **Cause de l'échec de l'identification en ligne :** l'adresse au dossier de Revenu Québec n'était pas à jour (ancienne adresse). Mettre l'adresse à jour dans « Mon dossier pour les citoyens » avant toute autre démarche en ligne.
-- **En attente :** les lettres de Revenu Québec avec les numéros TPS (`RT0001`) et TVQ (`TQ0001`). Suivi : service « Suivi de l'inscription d'une entreprise en démarrage ». Délai non publié.
+- **En attente :** les lettres de Revenu Québec avec les numéros TPS (`RT0001`) et TVQ (`TQ0001`). Suivi : service « Suivi de l'inscription d'une entreprise en démarrage », qui affiche le numéro de compte TPS dès qu'il est attribué. Délai : aucun délai officiel (la page « Nos délais de traitement » de Revenu Québec ne cite pas les inscriptions, vérifié le 2026-11-06) ; un site tiers parle de « quelques jours » en ligne, mais le LM-1 passe par un traitement manuel. Sans nouvelle après environ 4 semaines : appeler la ligne des entreprises de Revenu Québec, 1 800 567-4692.
 
 ## Après
 - [ ] Noter les deux numéros dans tes papiers (pas dans ce dépôt) et garder les lettres.
