@@ -191,6 +191,11 @@ struct TileView: View {
         return false
     }
 
+    private var isTimer: Bool {
+        if case .timer = tile.visual { return true }
+        return false
+    }
+
     /// The week's schedule fills the height the widget leaves (no empty half below it); the other charts keep their own.
     private var fillsHeight: Bool { tile.visual.isSchedule }
 
@@ -340,8 +345,10 @@ struct TileView: View {
             VStack(spacing: 8) {
                 Spacer(minLength: 0)
                 if hasVisual {
+                    // The rest bar is a thin line: it doesn't take the height of a chart, so the bar and
+                    // the buttons of « Prochaine série » and « Repos » fit the smallest medium widget.
                     visual(compact: true)
-                        .frame(height: 44)
+                        .frame(height: isTimer ? 10 : 44)
                 }
                 TileButtonsColumn(buttons: Array(tile.buttons.prefix(3)), context: context)
             }
@@ -981,17 +988,36 @@ struct TileButtonsRow: View {
     }
 }
 
+/// The buttons beside the figure of a medium widget: one line per button with text, and the small
+/// icon-only ones (the fitness back arrow, « Passer la série ») on the last line, before the main action.
+/// One line each, « Série faite », the arrow and « Passer » were taller than the widget: its title and
+/// its last line were cut off.
 struct TileButtonsColumn: View {
     let buttons: [TileButton]
     let context: RenderContext
 
     var body: some View {
+        let icons = buttons.filter(\.isIconOnly)
+        let texts = buttons.filter { !$0.isIconOnly }
         VStack(spacing: 6) {
-            ForEach(Array(buttons.enumerated()), id: \.offset) { pair in
-                TileActionButton(action: pair.element.action, isEnabled: context.isInteractive) {
-                    TileButtonLabel(button: pair.element, style: context.style, iconOnly: pair.element.isIconOnly)
+            ForEach(Array(texts.dropLast().enumerated()), id: \.offset) { pair in
+                button(pair.element, expands: true)
+            }
+            HStack(spacing: 6) {
+                ForEach(Array(icons.enumerated()), id: \.offset) { pair in
+                    // Alone (no button with text), the icons share the width as before.
+                    button(pair.element, expands: texts.isEmpty)
+                }
+                if let last = texts.last {
+                    button(last, expands: true)
                 }
             }
+        }
+    }
+
+    private func button(_ button: TileButton, expands: Bool) -> some View {
+        TileActionButton(action: button.action, isEnabled: context.isInteractive) {
+            TileButtonLabel(button: button, style: context.style, expands: expands, iconOnly: button.isIconOnly)
         }
     }
 }

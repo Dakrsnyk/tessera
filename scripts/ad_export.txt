@@ -294,33 +294,33 @@ widget lock-timetable-rect kind=timetable family=rect scale=4
 widget lock-tasks-rect kind=tasks family=rect scale=4
 # Variantes sombres de la publicité principale (fond noir)
 widget calories-m-dark kind=caloriesLeft family=medium scale=3 theme=dark scheme=dark
-widget nextSet-m-dark kind=nextSet family=medium scale=3 theme=dark scheme=dark
+widget nextSet-m-dark kind=nextSet family=medium scale=3 theme=dark scheme=dark render=snapshot
 widget budgetLeft-m-dark kind=budgetLeft family=medium scale=3 theme=dark scheme=dark
 
 # --- Chantier 19.6 : 4 identités d'écran d'accueil (palettes réelles de l'app : Minuit bleu sombre, Cerise rouge sombre, Néon rose et violet sombre, Graphite blanc argenté) ---
 widget id-blue-macros-m kind=macros family=medium scale=3 palette=midnight scheme=dark
-widget id-blue-nextSet-m kind=nextSet family=medium scale=3 palette=midnight scheme=dark
+widget id-blue-nextSet-m kind=nextSet family=medium scale=3 palette=midnight scheme=dark render=snapshot
 widget id-blue-budgetLeft-s kind=budgetLeft family=small scale=4 palette=midnight scheme=dark
 widget id-blue-priorities-s kind=priorities family=small scale=4 palette=midnight scheme=dark
 widget id-blue-calories-s kind=caloriesLeft family=small scale=4 palette=midnight scheme=dark
 widget id-blue-habits-m kind=habits family=medium scale=3 palette=midnight scheme=dark
 widget id-blue-weekView-m kind=weekView family=medium scale=3 palette=midnight scheme=dark
 widget id-red-macros-m kind=macros family=medium scale=3 palette=cherry scheme=dark
-widget id-red-nextSet-m kind=nextSet family=medium scale=3 palette=cherry scheme=dark
+widget id-red-nextSet-m kind=nextSet family=medium scale=3 palette=cherry scheme=dark render=snapshot
 widget id-red-budgetLeft-s kind=budgetLeft family=small scale=4 palette=cherry scheme=dark
 widget id-red-priorities-s kind=priorities family=small scale=4 palette=cherry scheme=dark
 widget id-red-calories-s kind=caloriesLeft family=small scale=4 palette=cherry scheme=dark
 widget id-red-habits-m kind=habits family=medium scale=3 palette=cherry scheme=dark
 widget id-red-weekView-m kind=weekView family=medium scale=3 palette=cherry scheme=dark
 widget id-pink-macros-m kind=macros family=medium scale=3 palette=neon scheme=dark
-widget id-pink-nextSet-m kind=nextSet family=medium scale=3 palette=neon scheme=dark
+widget id-pink-nextSet-m kind=nextSet family=medium scale=3 palette=neon scheme=dark render=snapshot
 widget id-pink-budgetLeft-s kind=budgetLeft family=small scale=4 palette=neon scheme=dark
 widget id-pink-priorities-s kind=priorities family=small scale=4 palette=neon scheme=dark
 widget id-pink-calories-s kind=caloriesLeft family=small scale=4 palette=neon scheme=dark
 widget id-pink-habits-m kind=habits family=medium scale=3 palette=neon scheme=dark
 widget id-pink-weekView-m kind=weekView family=medium scale=3 palette=neon scheme=dark
 widget id-silver-macros-m kind=macros family=medium scale=3 palette=mono
-widget id-silver-nextSet-m kind=nextSet family=medium scale=3 palette=mono
+widget id-silver-nextSet-m kind=nextSet family=medium scale=3 palette=mono render=snapshot
 widget id-silver-budgetLeft-s kind=budgetLeft family=small scale=4 palette=mono
 widget id-silver-priorities-s kind=priorities family=small scale=4 palette=mono
 widget id-silver-calories-s kind=caloriesLeft family=small scale=4 palette=mono
