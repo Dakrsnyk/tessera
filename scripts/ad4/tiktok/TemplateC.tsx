@@ -17,7 +17,7 @@ export type SpecC = {
   music?: string;
   hook: { title: string; subtitle: string; vo: string };
   pages: PageC[];
-  styles: { homes: string[]; caption: string; vo: string; premium: boolean };
+  styles: { homes: string[]; caption: string; caption2?: string; vo: string; premium: boolean };
   end: { line: string; sub: string; vo: string };
   /** Length of each voice line in seconds (vo/<id>.json, written by vo_tiktok.py). */
   voLen: Record<string, number>;
@@ -180,7 +180,8 @@ const Styles: React.FC<{ st: SpecC["styles"] }> = ({ st }) => {
           </div>
         );
       })}
-      <Caption text={st.caption} y={140} at={4} size={60} />
+      <Caption text={st.caption} y={110} at={4} size={70} />
+      {st.caption2 && <Caption text={st.caption2} y={218} at={12} size={50} dark />}
       {st.premium && <PremiumTag y={1580} />}
     </AbsoluteFill>
   );

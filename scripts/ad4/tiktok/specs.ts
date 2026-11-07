@@ -76,8 +76,11 @@ export const C_WIDGETS: SpecC = {
     },
   ],
   styles: {
-    homes: ["home-hero-aurore", "home-hero-neon", "home-hero-etudes", "home-hero-espace", "home-hero-crepuscule", "home-profile-athlete", "home-hero-graphite"],
-    caption: "mix shapes, styles & wallpapers",
+    // Only Home Screens whose widgets are whole: the hero-* setups and profile-athlete carry the medium Next set widget,
+    // whose title and last line are cut in the kit (reported by the user on 2026-11-06). home-neon is left out: it shows a crypto widget.
+    homes: ["home-jade", "home-crepuscule", "home-botanique", "home-pastel", "home-corail", "home-ocean", "home-creme"],
+    caption: "customize it all",
+    caption2: "shapes, styles & wallpapers",
     vo: "styles",
     premium: true,
   },
