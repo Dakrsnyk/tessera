@@ -112,3 +112,8 @@ schedule,timetable,planner,budget,calorie,macro,habit,tracker,workout,study,home
 
 ### Other fields
 Same as French: Support URL https://ardane.app/support.html, Marketing URL https://ardane.app, Copyright `2026 Ardane`.
+
+## Bannières « Header » et « Search Results » (2026-11-07)
+- Choix de l'utilisateur : proposition 1 (style des captures : fond crème #F6F4EF, Archivo 900, Instrument Serif italique), titre « Ardane », sous-titre « Your widgets. Your way. » / « Tes widgets. À ta façon. », deux iPhone (home-creme, home-hero-light) et six widgets réels en lévitation (Papier, Luxe, Néon, Aurore, Éditorial).
+- Fichiers : `~/ardane-tools/film/out/store-banners/Ardane-Header-{EN,FR}-3840x1646.png` et `Ardane-SearchResults-{EN,FR}-3840x2560.png` (RGB, sans transparence ; widgets de `kit2026/<langue>`). Source : `~/ardane-tools/film/src/store/banner.tsx`, image 8 (`npx remotion still src/store/banner.tsx Banner-<header|search>-<en|fr> <sortie> --frame=8`).
+- Zone toujours visible (mesurée sur le gabarit d'Apple, non publiée par Apple) : 1646×661 au centre du Header, 2168×1030 au centre de Search Results ; vérifier avec Preview dans App Store Connect.
