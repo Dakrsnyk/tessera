@@ -1,0 +1,2 @@
+Exécution de référence du chantier 24 (audit prépublication), lancée le 2026-11-07 sans changement de code.
+Ce fichier non Markdown existe pour déclencher la CI : le workflow ignore les commits qui ne touchent que des .md.
