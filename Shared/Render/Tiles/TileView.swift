@@ -235,7 +235,9 @@ struct TileView: View {
     }
 
     private func visual(compact: Bool) -> some View {
+        // The values written on a chart (end value, change, bar values) are amounts on money widgets.
         TileVisualView(visual: tile.visual, context: context, compact: compact, ringHex: tile.ringHex)
+            .privacySensitive(tile.isSensitive)
             .styleDepth(s)
     }
 
@@ -1112,7 +1114,6 @@ struct TileVisualView: View {
             }
         case let .bars(values, labels, highlight):
             BarsChart(values: values, labels: compact ? [] : labels, highlight: highlight, style: s)
-                .privacySensitive(tile.isSensitive)
         case let .line(values):
             LineChart(values: values, style: s)
         case let .segments(segments):
@@ -1149,9 +1150,7 @@ struct TileVisualView: View {
         switch visual.chartFamily {
         case .series:
             let values = visual.seriesValues ?? []
-            // The values written on the chart (end value, change, bar values) are amounts on money widgets.
             series(kind, values: values)
-                .privacySensitive(tile.isSensitive)
         case .progress:
             progress(kind, value: visual.progressValue ?? 0)
         case .segments:
