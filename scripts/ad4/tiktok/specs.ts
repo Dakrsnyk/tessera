@@ -146,3 +146,22 @@ export const W1_WORKOUT: SpecW = {
   vo: { hook: "hook", build: "build", train: "train", widget: "widget", lock: "lock", end: "end" },
   voLen: voW1,
 };
+
+// ------------------------------------------------------------------------------------------------ étudiant, style cahier (2026-11-06)
+// Planning › Import my schedule from a photo of the paper schedule; the week; the student's Home Screen pages.
+import type { SpecS } from "./TemplateS";
+import voS1 from "./vo/S1-student-notebook.json";
+
+export const S1_STUDENT: SpecS = {
+  id: "S1-student-notebook",
+  template: "S",
+  captions: {
+    hook: ["my whole semester", "from 1 photo"],
+    snap: ["snap the schedule"],
+    import: ["read on my iPhone"],
+    week: ["every class + room"],
+    home: ["next class, next exam"],
+  },
+  vo: { hook: "hook", snap: "snap", import: "import", week: "week", home: "home", end: "end" },
+  voLen: voS1,
+};

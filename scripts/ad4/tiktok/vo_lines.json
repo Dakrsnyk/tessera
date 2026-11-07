@@ -38,5 +38,13 @@
   "widget": "Then add a widget that follows the exercise you're on.",
   "lock": "And on your Lock Screen, your rest timer runs live. Tap Set done, no need to unlock.",
   "end": "Ardane. Your whole life. One place."
+ },
+ "S1-student-notebook": {
+  "hook": "Back to school tip: my whole semester, from one photo.",
+  "snap": "I take a picture of my class schedule.",
+  "import": "Ardane reads it right on my iPhone. I check the classes, and add them.",
+  "week": "Every class, every room, in my week.",
+  "home": "And my next class and my next exam are right on my Home Screen.",
+  "end": "Ardane. Your whole life. One place."
  }
 }

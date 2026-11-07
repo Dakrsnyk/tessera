@@ -93,7 +93,8 @@ const PartView: React.FC<{ part: PartW; spec: SpecW }> = ({ part, spec }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   if (part === "end") return <End />;
-  const bg = <AbsoluteFill style={{ background: "linear-gradient(180deg, #07101C 0%, #1D4E9E 100%)" }} />;
+  // red gradient behind the phone (asked on 2026-11-06), from the Fitness red of the app (#E5484D, « Set done »)
+  const bg = <AbsoluteFill style={{ background: "linear-gradient(180deg, #1A0406 0%, #6E1116 55%, #C2333A 100%)" }} />;
   if (part === "hook") {
     const rise = spring({ frame: f - 10, fps, config: { damping: 16, stiffness: 90 } });
     return (
