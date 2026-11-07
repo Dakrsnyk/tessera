@@ -6,6 +6,9 @@
 
 # Pub Planning (2026-11-07) : l'horaire de la semaine seul en Grand dans le constructeur, puis le Studio sur ce widget
 # (Style : Clair, puis Sombre à l'accent cyan du fond Océan). En tête de liste (limite de 60 min de l'étape Ad kit).
+# Premier lancement après l'export : l'app n'est pas encore dessinée au bout de 6 s (écran blanc, run 42359896678),
+# d'où une capture de mise en route jetable avant les vraies.
+warmup spaces
 creator-student-large creator-student -screenshotCreatorFormat large -screenshotCreatorKinds timetable
 studio-tt-light studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme light -screenshotStudioAccent 3FC8E0
 studio-tt-dark studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme dark -screenshotStudioAccent 3FC8E0
