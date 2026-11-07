@@ -11,8 +11,8 @@
 # Style de l'app : Saphir (-screenshotStyle sapphire), langue : AD_LANG (fr par défaut, en avec [adkit-en]).
 # Échelles : 4 pour un petit widget (680 px), 3 pour moyen / grand (1 092 px de large), 4 pour l'écran verrouillé.
 
-# --- En tête : nextSet moyen en disposition Verticale (thème Éditorial) : titre, chiffre, légende, puis boutons ;
-# détail et barre seulement s'ils tiennent (le Build 354 s'est arrêté après 3 éléments, avant cette ligne) ---
+# --- En tête : nextSet moyen en disposition Verticale (thème Éditorial) : titre, chiffre, légende, puis boutons,
+# ni détail ni barre (choix fixe, sans ViewThatFits depuis le Build 355 : il figeait l'app au Build 354) ---
 widget nextSet-m-editorial kind=nextSet family=medium scale=3 theme=editorial render=snapshot
 
 # --- Pub Planning (2026-11-07) : l'horaire de la semaine en Grand, sombre à l'accent cyan, et l'écran d'accueil
