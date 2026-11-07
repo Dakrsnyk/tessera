@@ -294,6 +294,7 @@ widget lock-timetable-rect kind=timetable family=rect scale=4
 widget lock-tasks-rect kind=tasks family=rect scale=4
 # Variantes sombres de la publicité principale (fond noir)
 widget calories-m-dark kind=caloriesLeft family=medium scale=3 theme=dark scheme=dark
+# nextSet moyen : render=snapshot, sinon ImageRenderer laisse la barre de repos (ProgressView) en rectangle jaune.
 widget nextSet-m-dark kind=nextSet family=medium scale=3 theme=dark scheme=dark render=snapshot
 widget budgetLeft-m-dark kind=budgetLeft family=medium scale=3 theme=dark scheme=dark
 
