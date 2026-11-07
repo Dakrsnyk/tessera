@@ -122,7 +122,7 @@ final class PremiumStoreKitTests: XCTestCase {
 
             let latest = await Transaction.latest(for: PremiumConfiguration.lifetimeID)
             let transaction = try XCTUnwrap(latest?.unsafePayloadValue, "The purchase left a transaction")
-            _ = try await session.refundTransaction(UInt(transaction.id))
+            try session.refundTransaction(identifier: UInt(transaction.id))
             await store.refreshEntitlements()
 
             XCTAssertFalse(model.premium.isActive, "A refunded purchase no longer unlocks Premium")
