@@ -11,6 +11,8 @@ export const PAPER = "#FBF8F0";
 const LINE = "#C9D8EE";
 const MARGIN = "#E9A3A3";
 export const PEN = "#2747A8";
+/** Planning is blue: its highlighter is cyan (rule of 2026-11-06: each ad in its mini-app's colours). */
+export const HIGHLIGHT = "rgba(64,214,232,0.75)";
 const ACCENT = "#3366FF";
 const GREY = "#7C838E";
 const INK = "#10151C";
@@ -38,7 +40,7 @@ export const Marker: React.FC<{ text: string; f: number; at?: number; y: number;
   return (
     <div style={{ position: "absolute", left: 0, right: 0, top: y, display: "flex", justifyContent: "center", transform: `rotate(${rot}deg)`, opacity: o }}>
       <div style={{ position: "relative", padding: "0 18px" }}>
-        <div style={{ position: "absolute", left: 0, top: size * 0.42, height: size * 0.62, width: `${sweep * 100}%`, background: "rgba(255,226,64,0.85)", borderRadius: 8 }} />
+        <div style={{ position: "absolute", left: 0, top: size * 0.42, height: size * 0.62, width: `${sweep * 100}%`, background: HIGHLIGHT, borderRadius: 8 }} />
         <div style={{ position: "relative", fontFamily: FONT, fontWeight: 900, fontSize: size, color: INK, whiteSpace: "nowrap", fontVariationSettings: `"opsz" 32` }}>{text}</div>
       </div>
     </div>

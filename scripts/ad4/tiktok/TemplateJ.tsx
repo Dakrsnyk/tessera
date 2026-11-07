@@ -7,12 +7,15 @@ import React from "react";
 import { AbsoluteFill, Audio, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Caption, cap, clamp, FONT, FPS, H, out, PremiumTag, W } from "./lib";
 import { CH, CW, HomeBase, ICON, Landing, PHOTO, PhotoScan, PhotoSummary, Tap } from "./journey/Screens";
+import { SKINS, SkinId } from "./skins";
 
 export type PartKey = "hook" | "open" | "scan" | "custom" | "place" | "end";
 export type SpecJ = {
   id: string;
   template: "J";
   framing: "full" | "phone" | "photo";
+  /** Visual world of the « phone » framing (skins.tsx); « kitchen » = Nutrition orange. */
+  skin?: SkinId;
   music?: string;
   /** Voice line per part (keys of vo_lines.json) and on-screen caption per part. */
   vo: Record<PartKey, string>;
@@ -142,7 +145,7 @@ const Phone: React.FC<{ part: PartKey; f: number; spec: SpecJ; y?: number }> = (
       height: PH + 24,
       borderRadius: 96,
       background: "#0E0F12",
-      boxShadow: "0 50px 90px rgba(0,0,0,0.5), 0 0 0 3px rgba(255,255,255,0.12)",
+      boxShadow: SKINS[spec.skin ?? "brand"].phoneShadow,
     }}
   >
     <div style={{ position: "absolute", left: 12, top: 12, width: PW, height: PH, borderRadius: 84, overflow: "hidden", background: "#000" }}>
@@ -160,7 +163,8 @@ const STEPS: { key: PartKey; label: string }[] = [
   { key: "place", label: "Place" },
 ];
 
-const Steps: React.FC<{ part: PartKey }> = ({ part }) => {
+const Steps: React.FC<{ part: PartKey; skin: SkinId }> = ({ part, skin }) => {
+  const c = SKINS[skin].chip;
   const idx = STEPS.findIndex((s) => s.key === part);
   return (
     <div style={{ position: "absolute", top: 150, left: 0, right: 0, display: "flex", justifyContent: "center", gap: 14 }}>
@@ -172,9 +176,10 @@ const Steps: React.FC<{ part: PartKey }> = ({ part }) => {
             fontWeight: 700,
             fontSize: 34,
             padding: "12px 22px",
-            borderRadius: 30,
-            color: i === idx ? "#07101C" : "rgba(255,255,255,0.7)",
-            background: i === idx ? "#fff" : "rgba(255,255,255,0.12)",
+            borderRadius: c.radius,
+            textTransform: c.upper ? "uppercase" : "none",
+            color: i === idx ? c.onText : c.offText,
+            background: i === idx ? c.on : c.off,
           }}
         >
           {i + 1} {s.label}
@@ -186,21 +191,31 @@ const Steps: React.FC<{ part: PartKey }> = ({ part }) => {
 
 const PhoneFrame: React.FC<{ part: PartKey; f: number; spec: SpecJ }> = ({ part, f, spec }) => {
   const { fps } = useVideoConfig();
+  const id = spec.skin ?? "brand";
+  const skin = SKINS[id];
   const rise = part === "hook" ? spring({ frame: f - 10, fps, config: { damping: 16, stiffness: 90 } }) : 1;
   return (
-    <AbsoluteFill style={{ background: "linear-gradient(180deg, #07101C 0%, #1D4E9E 100%)" }}>
+    <AbsoluteFill>
+      <skin.Background />
       {part === "hook" ? (
         <>
-          <div style={{ position: "absolute", top: 260 - (1 - rise) * 0, left: 60, right: 60, textAlign: "center", fontFamily: FONT, fontWeight: 800, fontSize: 100, lineHeight: 1.05, color: "#fff", fontVariationSettings: `"opsz" 32`, opacity: interpolate(f, [0, 8], [0, 1], clamp) }}>
-            {spec.captions.hook}
-          </div>
-          <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, transform: `translateY(${(1 - rise) * 1200 + 260}px)` }}>
-            <Phone part="hook" f={f} spec={spec} />
-          </div>
+          <skin.Title text={spec.captions.hook ?? ""} f={f} />
+          {id === "kitchen" ? (
+            // the lunch, as a polaroid taped on the recipe card
+            <div style={{ position: "absolute", left: 160, top: 560, width: 760, padding: "34px 34px 120px", background: "#fff", boxShadow: "0 24px 50px rgba(120,60,0,0.25)", transform: `rotate(${-4 + 4 * (1 - rise)}deg) translateY(${(1 - rise) * 900}px)` }}>
+              <Img src={staticFile(PHOTO)} style={{ width: 692, height: 692, objectFit: "cover" }} />
+              <div style={{ position: "absolute", left: 0, right: 0, bottom: 34, textAlign: "center", fontFamily: FONT, fontWeight: 700, fontSize: 46, color: "#B35F00" }}>lunch, 12:30</div>
+              <div style={{ position: "absolute", left: 280, top: -30, width: 200, height: 60, background: "rgba(236,226,196,0.85)", transform: "rotate(3deg)" }} />
+            </div>
+          ) : (
+            <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, transform: `translateY(${(1 - rise) * 1200 + 260}px)` }}>
+              <Phone part="hook" f={f} spec={spec} />
+            </div>
+          )}
         </>
       ) : (
         <>
-          <Steps part={part} />
+          <Steps part={part} skin={id} />
           <Phone part={part} f={f} spec={spec} />
         </>
       )}
@@ -252,7 +267,7 @@ const End: React.FC = () => {
 
 const PartView: React.FC<{ part: PartKey; spec: SpecJ }> = ({ part, spec }) => {
   const f = useCurrentFrame();
-  if (part === "end") return <End />;
+  if (part === "end") return spec.framing === "phone" ? React.createElement(SKINS[spec.skin ?? "brand"].End) : <End />;
   const line = spec.captions[part];
   const premium = part === "custom" || part === "place";
   return (
