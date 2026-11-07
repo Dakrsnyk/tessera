@@ -46,6 +46,8 @@ struct TileRow: Hashable, Identifiable {
     var isDone: Bool? = nil
     var action: TileAction? = nil
     var isHighlighted = false
+    /// The value is an amount of money: iOS hides it while the iPhone is locked (see `Tile.isSensitive`).
+    var isSensitive = false
 }
 
 struct TileSegment: Hashable {
@@ -138,6 +140,10 @@ struct Tile: Hashable {
     var lockColumns: [TileRow] = []
     /// The ring's own color when the person picked no chart color (the calorie ring is orange). Not used without colors.
     var ringHex: String? = nil
+    /// The figures are amounts of money (Budget, Placements, Mon entreprise, Sociétés cotées): the values
+    /// are marked `privacySensitive`, so iOS hides them on the Lock Screen and in StandBy while the iPhone
+    /// is locked. Titles and icons stay. Set by `TileFactory.make`.
+    var isSensitive = false
 
     static func empty(_ title: String, symbol: String, message: String, emptySymbol: String? = nil) -> Tile {
         var tile = Tile(title: title, symbol: symbol)

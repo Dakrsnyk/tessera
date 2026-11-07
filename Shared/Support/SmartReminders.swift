@@ -56,7 +56,8 @@ enum SmartReminders {
             }
         }
 
-        // Bills: at 9:00 the day before each one due over the period.
+        // Bills: at 9:00 the day before each one due over the period. No amount in the text: a notification
+        // is read on the Lock Screen.
         if settings.remindsBills, let horizon = calendar.date(byAdding: .day, value: days, to: today) {
             for bill in budget.bills {
                 var due = bill.nextDue(after: now)
@@ -65,7 +66,7 @@ enum SmartReminders {
                     if let eve = calendar.date(byAdding: .day, value: -1, to: due), let date = at(eve, hour: 9), date > now {
                         result.append(Reminder(id: prefix + "bill." + bill.id.uuidString + "." + DateMath.dayKey(due),
                                                title: tr("\(bill.name) demain"),
-                                               body: tr("\(TF.money(bill.amount, settings.currencyCode, decimals: 2)) à payer demain."), date: date))
+                                               body: tr("À payer demain."), date: date))
                     }
                     guard let next = calendar.date(byAdding: .day, value: 1, to: due) else { break }
                     due = bill.nextDue(after: next)

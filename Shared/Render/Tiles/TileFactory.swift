@@ -4,6 +4,23 @@ import WidgetKit
 /// Builds the tile of every mini-app widget from the payload, at the entry's date.
 enum TileFactory {
     static func make(_ context: RenderContext) -> Tile {
+        var tile = build(context)
+        tile.isSensitive = isSensitive(context.design.kind)
+        return tile
+    }
+
+    /// Amounts of money are hidden while the iPhone is locked: the widgets of Budget, Placements,
+    /// Mon entreprise and Sociétés cotées, the Money dashboard and the finance analysis. Public market
+    /// figures that hold none of the person's money (the crypto price, the market) stay readable.
+    static func isSensitive(_ kind: WidgetKind) -> Bool {
+        switch kind.category {
+        case .finance, .business, .markets: return true
+        case .investing: return kind != .crypto && kind != .marketOverview
+        default: return kind == .moneyDashboard || kind == .aiFinance
+        }
+    }
+
+    private static func build(_ context: RenderContext) -> Tile {
         let kind = context.design.kind
         switch kind.category {
         case .time: return TimeTiles.make(context)

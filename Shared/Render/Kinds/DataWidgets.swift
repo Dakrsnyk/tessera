@@ -149,6 +149,7 @@ struct MoneyFlowWidgetView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .widgetAccentable()
+                    .privacySensitive()
                 if context.isSmall {
                     Spacer(minLength: 0)
                     Text(todayText(today, mode: mode, currency: currency))
@@ -156,10 +157,12 @@ struct MoneyFlowWidgetView: View {
                         .foregroundStyle(color)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
+                        .privacySensitive()
                     if s.showsDetails {
                         Text(tr("\(Fmt.money(abs(summary.perDay(mode)) * MoneySummary.daysPerMonth, currency: currency, decimals: 0)) / mois"))
                             .font(s.text(11))
                             .foregroundStyle(s.secondary)
+                            .privacySensitive()
                     }
                 } else {
                     Spacer(minLength: 0)
@@ -169,6 +172,7 @@ struct MoneyFlowWidgetView: View {
                         Text(todayText(today, mode: mode, currency: currency, short: true))
                             .font(s.text(15, .semibold).monospacedDigit())
                             .foregroundStyle(color)
+                            .privacySensitive()
                     }
                     BarView(progress: summary.dayFraction, color: color, track: s.track, height: 6)
                     if s.showsDetails {
@@ -177,6 +181,7 @@ struct MoneyFlowWidgetView: View {
                             .foregroundStyle(s.secondary)
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
+                            .privacySensitive()
                     }
                     if context.isLarge {
                         breakdown(summary: summary, money: money, mode: mode, currency: currency)
@@ -251,6 +256,7 @@ struct MoneyFlowWidgetView: View {
             Text(value)
                 .font(s.text(14, .semibold).monospacedDigit())
                 .foregroundStyle(color)
+                .privacySensitive()
         }
     }
 }

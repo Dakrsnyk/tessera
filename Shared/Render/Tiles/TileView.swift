@@ -10,7 +10,21 @@ struct TileView: View {
 
     init(tile: Tile, context: RenderContext) {
         // The parts the person hid are gone before anything is laid out.
-        self.tile = context.style.filtered(tile)
+        var shown = context.style.filtered(tile)
+        // The lines of a money widget hold amounts: they are hidden too while the iPhone is locked.
+        if shown.isSensitive {
+            shown.rows = shown.rows.map { row in
+                var copy = row
+                copy.isSensitive = true
+                return copy
+            }
+            shown.lockColumns = shown.lockColumns.map { row in
+                var copy = row
+                copy.isSensitive = true
+                return copy
+            }
+        }
+        self.tile = shown
         self.context = context
     }
 
@@ -143,6 +157,7 @@ struct TileView: View {
         }
         .styleDepth(s)
         .widgetAccentable()
+        .privacySensitive(tile.isSensitive)
     }
 
     @ViewBuilder private func captionText(lines: Int) -> some View {
@@ -154,6 +169,7 @@ struct TileView: View {
                 .multilineTextAlignment(s.textAlignment)
                 // The sign already says it: VoiceOver doesn't read the arrow's name before the figure.
                 .accessibilityLabel(Text(caption.replacingOccurrences(of: "▲ ", with: "").replacingOccurrences(of: "▼ ", with: "")))
+                .privacySensitive(tile.isSensitive)
         }
     }
 
@@ -163,6 +179,7 @@ struct TileView: View {
                 .font(s.text(11, .medium))
                 .foregroundStyle(s.secondary)
                 .lineLimit(2)
+                .privacySensitive(tile.isSensitive)
         }
     }
 
@@ -261,6 +278,7 @@ struct TileView: View {
                         .font(s.text(11))
                         .foregroundStyle(s.secondary)
                         .lineLimit(2)
+                        .privacySensitive(tile.isSensitive)
                         .minimumScaleFactor(0.85)
                         .multilineTextAlignment(.center)
                 }
@@ -622,6 +640,7 @@ struct TileView: View {
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.5)
                                     .styleDepth(s)
+                                    .privacySensitive(tile.isSensitive)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -658,6 +677,7 @@ struct TileView: View {
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
                         .fixedSize()
+                        .privacySensitive(tile.isSensitive)
                 }
             }
             TileRowsView(rows: rows(context.isSmall ? 4 : (context.isLarge ? 10 : 4)), context: context, compact: context.isSmall)
@@ -802,6 +822,7 @@ struct TileView: View {
                     .foregroundStyle(stat.color ?? s.numberColor)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
+                    .privacySensitive(tile.isSensitive)
             }
         }
     }
@@ -875,6 +896,7 @@ struct TileRowsView: View {
                         .lineLimit(1)
                         .fixedSize()
                         .layoutPriority(1)
+                        .privacySensitive(row.isSensitive)
                 }
             }
             if let progress = row.progress {
@@ -1090,6 +1112,7 @@ struct TileVisualView: View {
             }
         case let .bars(values, labels, highlight):
             BarsChart(values: values, labels: compact ? [] : labels, highlight: highlight, style: s)
+                .privacySensitive(tile.isSensitive)
         case let .line(values):
             LineChart(values: values, style: s)
         case let .segments(segments):
@@ -1126,7 +1149,9 @@ struct TileVisualView: View {
         switch visual.chartFamily {
         case .series:
             let values = visual.seriesValues ?? []
+            // The values written on the chart (end value, change, bar values) are amounts on money widgets.
             series(kind, values: values)
+                .privacySensitive(tile.isSensitive)
         case .progress:
             progress(kind, value: visual.progressValue ?? 0)
         case .segments:
@@ -1658,6 +1683,7 @@ struct TileAccessoryView: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .padding(.horizontal, 3)
+                    .privacySensitive(tile.isSensitive)
             }
             .gaugeStyle(.accessoryCircular)
             .widgetAccentable()
@@ -1671,6 +1697,7 @@ struct TileAccessoryView: View {
                         .font(.system(size: 16, weight: .semibold, design: .rounded))
                         .minimumScaleFactor(0.5)
                         .lineLimit(1)
+                        .privacySensitive(tile.isSensitive)
                 }
                 .padding(4)
                 .widgetAccentable()
@@ -1709,6 +1736,7 @@ struct TileAccessoryView: View {
                                 .widgetAccentable()
                             Text(column.value ?? "")
                                 .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                .privacySensitive(column.isSensitive)
                         }
                         .lineLimit(1)
                         .minimumScaleFactor(0.6)
@@ -1762,12 +1790,14 @@ struct TileAccessoryView: View {
                     .font(.system(.body, design: .rounded).weight(.semibold))
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
+                    .privacySensitive(tile.isSensitive)
             }
             if let caption = tile.empty?.message ?? tile.caption {
                 Text(caption)
                     .font(.caption)
                     .lineLimit(tile.empty == nil && !tile.value.isEmpty ? 1 : 3)
                     .minimumScaleFactor(0.75)
+                    .privacySensitive(tile.isSensitive && tile.empty == nil)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -1775,6 +1805,7 @@ struct TileAccessoryView: View {
 
     private var inline: some View {
         Label(tile.inline ?? "\(tile.title) · \(tile.value)\(tile.unit.map { " " + $0 } ?? "")", systemImage: tile.symbol)
+            .privacySensitive(tile.isSensitive)
     }
 }
 

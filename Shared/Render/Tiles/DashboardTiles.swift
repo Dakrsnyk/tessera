@@ -62,10 +62,10 @@ enum DashboardTiles {
         guard !budget.expenses.isEmpty || knowsBudget else { return nil }
         guard knowsBudget else {
             let spent = BudgetMath.spentToday(budget, at: context.date)
-            return TileRow(id: "budget", title: tr("Dépensé aujourd'hui"), value: TF.money(spent, context.settings.currencyCode), symbol: "creditcard")
+            return TileRow(id: "budget", title: tr("Dépensé aujourd'hui"), value: TF.money(spent, context.settings.currencyCode), symbol: "creditcard", isSensitive: true)
         }
         let perDay = BudgetMath.perDayLeft(budget, at: context.date)
-        return TileRow(id: "budget", title: tr("Budget du jour"), value: TF.money(perDay, context.settings.currencyCode), symbol: "creditcard")
+        return TileRow(id: "budget", title: tr("Budget du jour"), value: TF.money(perDay, context.settings.currencyCode), symbol: "creditcard", isSensitive: true)
     }
 
     static func workoutRow(_ context: RenderContext) -> TileRow? {
