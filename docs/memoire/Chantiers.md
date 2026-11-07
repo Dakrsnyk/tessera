@@ -164,7 +164,7 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
   - récapitulatif en deux groupes (lignes ≥ 0,80 ou habitude ; « À confirmer » pour le reste et les zones « peut-être » 0,20-0,30, jamais ajoutées seules) ;
   - outil de banc `scripts/ml/bench_sets.py` ; agent `ml-engineer` ;
   - vues multiples écartées (aucun gain) ;
-  - segmenteur Small poussé automatiquement sur Kaggle au renouvellement du quota (2026-11-07 0 h 10 UTC, tâche de fond de la session ; si elle n'a pas tourné : `kaggle kernels push -p scripts/ml/kaggle/segmenter --accelerator NvidiaTeslaT4`).
+  - segmenteur Small **poussé sur Kaggle le 2026-11-07 à 0 h 16 UTC** (version 3 du carnet `darksnyk/ardane-food-segmenter`, en cours d'entraînement) ; à relancer seulement s'il échoue : `kaggle kernels push -p scripts/ml/kaggle/segmenter --accelerator NvidiaTeslaT4`.
 - Suite : segmenteur Small après le renouvellement du quota GPU (7 novembre) pour la découpe, affinage de bout en bout pour les grammes, intégration des grammes par l'assiette dans l'app (mode expérimental) puis repas pesés (22.6).
 
 ## Série du 2026-11-05 : logo turquoise, Entreprise, Mon Quotidien, Premium, Planning (chantier 23 de [[Demandes]])
