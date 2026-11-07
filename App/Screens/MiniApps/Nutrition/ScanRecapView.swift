@@ -469,13 +469,17 @@ private struct ScanLineRow: View {
                             Text(tr("Ton habitude"))
                                 .font(.caption)
                                 .foregroundStyle(Color.secondary)
+                                .lineLimit(1)
                                 .padding(.vertical, 3)
+                                .fixedSize()
                         }
                         if let word = line.confidenceWord {
                             Text(word)
                                 .font(.caption)
                                 .foregroundStyle(line.isLowConfidence ? Color.orange : Color.secondary)
+                                .lineLimit(1)
                                 .padding(.vertical, 3)
+                                .fixedSize()
                         }
                     }
                     .accessibilityElement(children: .combine)
@@ -576,11 +580,18 @@ private struct ScanBadge: View {
     }
 
     var body: some View {
-        Label(label, systemImage: symbol)
-            .font(.caption.weight(.semibold))
-            .foregroundStyle(tint)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 3)
-            .background(tint.opacity(0.15), in: Capsule())
+        // Built by hand and fixed to its natural size: a `Label` squeezed by its row turned « Estimation » into a
+        // tall capsule of one invisible letter per line, with only its icon showing (seen on the iPhone).
+        HStack(spacing: 4) {
+            Image(systemName: symbol)
+            Text(label)
+                .lineLimit(1)
+        }
+        .font(.caption.weight(.semibold))
+        .foregroundStyle(tint)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 3)
+        .background(tint.opacity(0.15), in: Capsule())
+        .fixedSize()
     }
 }
