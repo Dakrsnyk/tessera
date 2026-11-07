@@ -11,6 +11,10 @@
 # Style de l'app : Saphir (-screenshotStyle sapphire), langue : AD_LANG (fr par défaut, en avec [adkit-en]).
 # Échelles : 4 pour un petit widget (680 px), 3 pour moyen / grand (1 092 px de large), 4 pour l'écran verrouillé.
 
+# --- En tête : nextSet moyen en disposition Verticale (thème Éditorial) : titre, chiffre, légende, puis boutons ;
+# détail et barre seulement s'ils tiennent (le Build 354 s'est arrêté après 3 éléments, avant cette ligne) ---
+widget nextSet-m-editorial kind=nextSet family=medium scale=3 theme=editorial render=snapshot
+
 # --- Pub Planning (2026-11-07) : l'horaire de la semaine en Grand, sombre à l'accent cyan, et l'écran d'accueil
 # « planning » (réservé aux pubs : HomeSetupCatalog.adOnly) : le widget sur 2/3 de l'écran, 2 rangées d'apps, fond Océan ---
 widget timetable-l-planning kind=timetable family=large scale=3 theme=dark accent=3FC8E0 scheme=dark
@@ -302,8 +306,6 @@ widget lock-tasks-rect kind=tasks family=rect scale=4
 widget calories-m-dark kind=caloriesLeft family=medium scale=3 theme=dark scheme=dark
 # nextSet moyen : render=snapshot, sinon ImageRenderer laisse la barre de repos (ProgressView) en rectangle jaune.
 widget nextSet-m-dark kind=nextSet family=medium scale=3 theme=dark scheme=dark render=snapshot
-# nextSet moyen en disposition Verticale (thème Éditorial) : titre, chiffre, légende, puis boutons ; détail et barre seulement s'ils tiennent.
-widget nextSet-m-editorial kind=nextSet family=medium scale=3 theme=editorial render=snapshot
 widget budgetLeft-m-dark kind=budgetLeft family=medium scale=3 theme=dark scheme=dark
 
 # --- Chantier 19.6 : 4 identités d'écran d'accueil (palettes réelles de l'app : Minuit bleu sombre, Cerise rouge sombre, Néon rose et violet sombre, Graphite blanc argenté) ---
