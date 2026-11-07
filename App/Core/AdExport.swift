@@ -67,13 +67,13 @@ enum AdExport {
         switch job.type {
         case "widget": return try await widget(job)
         case "setupwidgets": return try await setupWidgets(job)
-        case "home": return try screen(SetupHomeScreen(setup: storeSetup(job)), job)
-        case "lock": return try screen(SetupLockScreen(setup: storeSetup(job)), job)
+        case "home": return try await screen(SetupHomeScreen(setup: storeSetup(job)), job)
+        case "lock": return try await screen(SetupLockScreen(setup: storeSetup(job)), job)
         case "wall":
             guard let raw = job.string("wall"), let wallpaper = SetupWallpaper(rawValue: raw) else {
                 throw AdFailure("unknown wallpaper « \(job.string("wall") ?? "") »")
             }
-            return try screen(SetupWallpaperView(wallpaper: wallpaper), job)
+            return try await screen(SetupWallpaperView(wallpaper: wallpaper), job)
         case "icons": return try icons(job)
         case "live": return try await live(job)
         case "demo": return try await demo(job)
@@ -229,7 +229,14 @@ enum AdExport {
     }
 
     /// A whole screen of the Store (402 × 874 pt, 1 206 × 2 622 px at scale 3).
-    private static func screen<V: View>(_ view: V, _ job: AdJob) throws -> AdOutcome {
+    /// With `render=snapshot`, a real snapshot first: the rest bar of « Prochaine série » is a ProgressView,
+    /// which ImageRenderer leaves as a yellow box.
+    private static func screen<V: View>(_ view: V, _ job: AdJob) async throws -> AdOutcome {
+        if job.string("render") == "snapshot" {
+            let (drawn, renderer) = await picture(view, width: SetupScreen.size.width, height: SetupScreen.size.height, scale: job.scale(3), snapshot: true)
+            try save(drawn, "\(job.name).png")
+            return AdOutcome(files: 1, note: renderer)
+        }
         try autoreleasepool {
             let rendered = image(view, width: SetupScreen.size.width, height: SetupScreen.size.height, scale: job.scale(3), opaque: true)
             try save(rendered, "\(job.name).png")
@@ -261,7 +268,8 @@ enum AdExport {
             )
             .environment(\.colorScheme, scheme)
             let file = "\(job.name)-\(index).png"
-            let (drawn, renderer) = await picture(view, width: size.width, height: size.height, scale: scale, snapshot: widget.family.isAccessory)
+            let usesSnapshot = widget.family.isAccessory || job.string("render") == "snapshot"
+            let (drawn, renderer) = await picture(view, width: size.width, height: size.height, scale: scale, snapshot: usesSnapshot)
             do {
                 try save(drawn, file)
             } catch {
