@@ -24,6 +24,7 @@ import WidgetKit
 ///   from `from` to `to`.
 /// - `demo <name> exercise= [view=<index or name>] [fps=] [w= h=] [scale=] [bg=clear|card|fill] [scheme=] [accent=]`:
 ///   the exercise demonstration drawn by `DemoRenderer` at exact times (frame / fps), and `<name>.json`.
+/// Any job also takes `courses=forest|forestSage`: the demo courses in the greens of a Home Screen (StudentState.adCourseColors).
 @MainActor
 enum AdExport {
     static var documents: URL { FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] }
@@ -64,6 +65,12 @@ enum AdExport {
     }
 
     private static func perform(_ job: AdJob) async throws -> AdOutcome {
+        // `courses=forest`: the demo courses drawn in other colors for this job only (StudentState.adCourseColors).
+        if let name = job.string("courses") {
+            guard let colors = StudentState.adCourseColors(named: name) else { throw AdFailure("unknown course colors « \(name) »") }
+            StudentState.adCourseColors = colors
+        }
+        defer { StudentState.adCourseColors = nil }
         switch job.type {
         case "widget": return try await widget(job)
         case "setupwidgets": return try await setupWidgets(job)

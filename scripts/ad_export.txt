@@ -15,11 +15,14 @@
 # ni détail ni barre (choix fixe, sans ViewThatFits depuis le Build 355 : il figeait l'app au Build 354) ---
 widget nextSet-m-editorial kind=nextSet family=medium scale=3 theme=editorial render=snapshot
 
-# --- Pub Planning (2026-11-07) : l'horaire de la semaine en Grand, sombre à l'accent cyan, et l'écran d'accueil
-# « planning » (réservé aux pubs : HomeSetupCatalog.adOnly) : le widget sur 2/3 de l'écran, 2 rangées d'apps, fond Océan ---
-widget timetable-l-planning kind=timetable family=large scale=3 theme=dark accent=3FC8E0 scheme=dark
-home home-planning setup=planning scale=3
-lock lock-planning setup=planning scale=3
+# --- Pub Planning (2026-11-07) : l'horaire de la semaine en Grand dans le style « Forêt » (sombre, accent vert 7FA33A,
+# cours en verts : courses=forest, ou forestSage en variante) et l'écran d'accueil « planning » (réservé aux pubs :
+# HomeSetupCatalog.adOnly) : le widget sur 2/3 de l'écran, 2 rangées d'apps, fond et icônes de « Forêt » ---
+widget timetable-l-planning kind=timetable family=large scale=3 theme=dark accent=7FA33A scheme=dark courses=forest
+home home-planning setup=planning scale=3 courses=forest
+lock lock-planning setup=planning scale=3 courses=forest
+widget timetable-l-planning-sage kind=timetable family=large scale=3 theme=dark accent=7FA33A scheme=dark courses=forestSage
+home home-planning-sage setup=planning scale=3 courses=forestSage
 
 # --- Macros (moyen) : 14 styles, 4 thèmes complets, 2 palettes ---
 widget macros-m-light kind=macros family=medium scale=3 theme=light

@@ -279,9 +279,33 @@ struct StudentState: Codable, Hashable {
 
     /// Its color: the course's for a class, the kind's for another event.
     func colorHex(of slot: ClassSlot) -> String {
-        if let chosen = slot.colorHex, !chosen.isEmpty { return chosen }
-        return slot.kind == .course ? (course(slot.courseID)?.colorHex ?? ScheduleKind.course.colorHex) : slot.kind.colorHex
+        let hex: String
+        if let chosen = slot.colorHex, !chosen.isEmpty {
+            hex = chosen
+        } else {
+            hex = slot.kind == .course ? (course(slot.courseID)?.colorHex ?? ScheduleKind.course.colorHex) : slot.kind.colorHex
+        }
+        #if DEBUG
+        if let swapped = Self.adCourseColors?[hex.uppercased()] { return swapped }
+        #endif
+        return hex
     }
+
+    #if DEBUG
+    /// Ad captures only (`-screenshotCourseColors forest`, export `courses=forest`): the demo courses drawn in other
+    /// colors, so the schedule matches the Home Screen it lands on (the Planning ad, in the greens of « Forêt »).
+    /// Only how they are drawn: the saved courses keep their colors.
+    static var adCourseColors: [String: String]?
+
+    /// The demo courses' colors (SampleData: math, biology, history, English) and what they become.
+    static func adCourseColors(named name: String) -> [String: String]? {
+        switch name {
+        case "forest": ["3366FF": "3F7A3A", "D6409F": "6E9A2E", "F2A33A": "8A8F3A", "1E9E75": "2F6B55"]
+        case "forestSage": ["3366FF": "2E6B47", "D6409F": "7FA33A", "F2A33A": "4F8A3C", "1E9E75": "5B8C74"]
+        default: nil
+        }
+    }
+    #endif
 
     func course(_ id: UUID?) -> Course? {
         guard let id else { return nil }

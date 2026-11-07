@@ -27,6 +27,8 @@ enum ScreenshotMode {
         model.setDebugPremium(screen != "paywall" && screen != "setups-free")
         // `-screenshotStyle ocean -screenshotAppearance dark`: the app style to capture with (default otherwise).
         let defaults = UserDefaults.standard
+        // Ads: `-screenshotCourseColors forest`, the demo courses drawn in the greens of a Home Screen.
+        StudentState.adCourseColors = defaults.string(forKey: "screenshotCourseColors").flatMap(StudentState.adCourseColors(named:))
         model.updateSettings {
             $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(named:)) ?? .sapphire
             $0.appearance = defaults.string(forKey: "screenshotAppearance").flatMap(AppearanceMode.init(rawValue:)) ?? .system

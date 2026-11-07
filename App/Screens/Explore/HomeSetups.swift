@@ -504,14 +504,15 @@ enum HomeSetupCatalog {
 
     /// Test builds only: Home Screens drawn for the ads, not in the Store (scripts/ad_export.txt, `home … setup=<id>`).
     /// « planning » (TikTok ad, 2026-11-07): the week's timetable in large over two thirds of the screen and two rows of
-    /// apps, on the ocean wallpaper, in the manner of « Forêt » (dark widget, accent and icons in the wallpaper's colours).
+    /// apps, in the style of « Forêt » (its pine wallpaper, its icons, a dark widget with its green accent; the courses
+    /// in greens too with the export's `courses=forest`).
     static let adOnly: [HomeSetup] = [
         HomeSetup(
-            id: "planning", name: tr("Océan"), tagline: tr("L'eau, le ciel et tes habitudes, en bleu profond."),
-            tags: [.dark, .study], wallpaper: .ocean,
-            icons: .solid(background: "0E2A3F", symbol: "8FE9FF"),
+            id: "planning", name: tr("Forêt"), tagline: tr("Ton mois d'entraînement, à l'ombre des pins."),
+            tags: [.dark, .study], wallpaper: .forest,
+            icons: .solid(background: "1E3326", symbol: "A8D08D"),
             rows: [
-                .widgets([large(.timetable, .dark, "3FC8E0")]),
+                .widgets([large(.timetable, .dark, "7FA33A")]),
                 .apps([.books, .notes, .calendar, .reminders]),
                 .apps([.files, .photos, .music, .weather]),
             ],

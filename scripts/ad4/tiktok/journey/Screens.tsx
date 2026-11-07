@@ -45,10 +45,10 @@ export const CREME: HomeTheme = { src: "home-creme", wall: "kit/wall-cream.png",
 export const GRAPHITE: HomeTheme = { src: "home-graphite", wall: "kit/wall-graphite.png", label: "#fff" };
 /** Planning: ocean blue / cyan. */
 export const OCEAN: HomeTheme = { src: "home-ocean", wall: "kit/wall-ocean.png", label: "#fff" };
-/** Planning (2026-11-07): the ad-only setup « planning » (home-planning: the week's timetable in large, dark with a cyan
- * accent, over two thirds of the screen, then two rows of apps), on the same ocean wallpaper (checked pixel by pixel):
+/** Planning (2026-11-07): the ad-only setup « planning » (home-planning: the week's timetable in large, in the style of
+ * « Forêt », over two thirds of the screen, then two rows of apps), on the pine wallpaper of « Forêt » (checked pixel by pixel):
  * the widget and its label (y 204 to 1 398) are freed so the widget made in the Studio lands there. */
-export const PLANNING: HomeTheme = { src: "home-planning", wall: "kit/wall-ocean.png", label: "#fff", freed: { y: 192, h: 1222 } };
+export const PLANNING: HomeTheme = { src: "home-planning", wall: "kit/wall-forest.png", label: "#fff", freed: { y: 192, h: 1222 } };
 export const SLOT_LARGE: [number, number, number, number] = [57, 204, 1092, 1146];
 
 export const HomeBase: React.FC<{ filled?: React.ReactNode; free?: "top" | "middle"; theme?: HomeTheme }> = ({ filled, free = "top", theme = JADE }) => {

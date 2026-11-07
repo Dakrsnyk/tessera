@@ -1,11 +1,11 @@
 // Template S « étudiant » (2026-11-06), school-notebook style: a student photographs the paper class schedule, Ardane reads
 // it on the iPhone (Planning › Import my schedule), every class lands in the week, then the Home Screen pages of a student
-// (weekly schedule; next class, next exam, apps). Lined paper, tape, highlighter titles, blue-pen doodles.
+// (weekly schedule; next class, next exam, apps). Lined paper, tape, highlighter titles, pen doodles, all in forest green (2026-11-07).
 import React from "react";
 import { AbsoluteFill, Audio, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { cap, clamp, FONT, FPS, PremiumTag, W } from "./lib";
 import { CH, CW, Tap } from "./journey/Screens";
-import { Doodle, ImportFlow, Marker, Notebook, PaperSchedule, Tape } from "./journey/School";
+import { Doodle, ImportFlow, Marker, Notebook, PaperSchedule, PEN, Tape } from "./journey/School";
 import { BuilderFlow, builderEnd, BuilderPlan, PushIn, StudioShot, StudioShots } from "./journey/Create";
 import { HomeBase, Landing, PLANNING, SLOT_LARGE } from "./journey/Screens";
 
@@ -23,8 +23,10 @@ const LEAD = 0.25;
 const ORDER: PartS[] = ["hook", "snap", "import", "week", "create", "home", "end"];
 
 /** The mechanic of every ad (2026-11-06), for the Planning ad (2026-11-07): Create tab → Planning · studies → Large
- * (the week's timetable alone, creator-student-large) → the real Studio on that widget, Light then Dark with the cyan
- * accent of the ocean wallpaper (studio-tt-light, studio-tt-dark) → the same widget fills two thirds of the Home Screen. */
+ * (the week's timetable alone, creator-student-large) → the real Studio on that widget, Light then Dark with the green
+ * accent of « Forêt » (studio-tt-light, studio-tt-dark; courses in greens) → the same widget fills two thirds of the
+ * « Forêt » Home Screen. The user's rule (2026-11-07): the iPhone shown and every widget in forest green, no blue; the
+ * app itself keeps its own colour in the Studio. */
 const STU_BUILDER: BuilderPlan = { space: "student", large: [963, 726], tapCustomize: [603, 2394] };
 const STU_END = builderEnd(STU_BUILDER);
 const STU_SHOTS: StudioShot[] = [
@@ -32,7 +34,7 @@ const STU_SHOTS: StudioShot[] = [
   { at: 22, src: "studio-tt-dark", tap: [975, 1770] },
 ];
 const STU_SAVE = 50;
-/** The week's timetable in large, dark with the cyan accent of the ocean wallpaper (export timetable-l-planning). */
+/** The week's timetable in large, in the style of « Forêt »: dark, green accent, courses in greens (export timetable-l-planning). */
 const HOME_WIDGET = "timetable-l-planning";
 const MIN: Record<PartS, number> = { hook: 2.6, snap: 2.0, import: 5.6, week: 2.6, create: (STU_END + STU_SAVE + 10) / FPS, home: 3.4, end: 2.8 };
 const TAIL: Record<PartS, number> = { hook: 0.3, snap: 0.3, import: 0.3, week: 0.4, create: 0.3, home: 0.5, end: 0.6 };
@@ -126,7 +128,7 @@ const PartView: React.FC<{ part: PartS; spec: SpecS }> = ({ part, spec }) => {
         </div>
         <div style={{ position: "absolute", top: 830, left: 0, right: 0, textAlign: "center", fontFamily: FONT, fontWeight: 900, fontSize: 96, letterSpacing: 6, color: "#10151C", opacity: a }}>ARDANE</div>
         <Marker text="Your whole life. One place." f={f} at={8} y={980} size={64} rot={-1.5} />
-        <div style={{ position: "absolute", top: 1140, left: 0, right: 0, textAlign: "center", fontFamily: FONT, fontWeight: 700, fontSize: 44, color: "#2747A8", opacity: interpolate(f, [14, 22], [0, 1], clamp) }}>Coming soon to the App Store</div>
+        <div style={{ position: "absolute", top: 1140, left: 0, right: 0, textAlign: "center", fontFamily: FONT, fontWeight: 700, fontSize: 44, color: PEN, opacity: interpolate(f, [14, 22], [0, 1], clamp) }}>Coming soon to the App Store</div>
       </AbsoluteFill>
     );
   }
@@ -175,10 +177,10 @@ const PartView: React.FC<{ part: PartS; spec: SpecS }> = ({ part, spec }) => {
       {part === "home" && (
         <>
           <Phone f={f}>
-            <HomeBase theme={PLANNING} filled={<Landing f={f} fps={fps} widget={HOME_WIDGET} slot={SLOT_LARGE} glow="64,214,232" />} />
+            <HomeBase theme={PLANNING} filled={<Landing f={f} fps={fps} widget={HOME_WIDGET} slot={SLOT_LARGE} glow="127,163,58" />} />
           </Phone>
           {/* a hand-drawn bracket along the widget: two thirds of the screen, the whole week */}
-          <Doodle f={f} at={40} dur={14} d="M 878 512 C 912 512 898 610 903 705 C 906 765 913 786 936 792 C 913 798 906 818 903 878 C 898 975 912 1072 878 1072" width={12} color="#1491B8" />
+          <Doodle f={f} at={40} dur={14} d="M 878 512 C 912 512 898 610 903 705 C 906 765 913 786 936 792 C 913 798 906 818 903 878 C 898 975 912 1072 878 1072" width={12} color={PEN} />
         </>
       )}
       <Titles lines={spec.captions[part]} f={f} />

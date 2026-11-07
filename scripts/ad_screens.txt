@@ -5,13 +5,17 @@
 # qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
 
 # Pub Planning (2026-11-07) : l'horaire de la semaine seul en Grand dans le constructeur, puis le Studio sur ce widget
-# (Style : Clair, puis Sombre à l'accent cyan du fond Océan). En tête de liste (limite de 60 min de l'étape Ad kit).
+# (Style : Clair, puis Sombre à l'accent vert de « Forêt »), les cours en verts (-screenshotCourseColors forest, ou
+# forestSage en variante -sage). En tête de liste (limite de 60 min de l'étape Ad kit).
 # Premier lancement après l'export : l'app n'est pas encore dessinée au bout de 6 s (écran blanc, run 42359896678),
 # d'où une capture de mise en route jetable avant les vraies.
 warmup spaces
-creator-student-large creator-student -screenshotCreatorFormat large -screenshotCreatorKinds timetable
-studio-tt-light studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme light -screenshotStudioAccent 3FC8E0
-studio-tt-dark studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme dark -screenshotStudioAccent 3FC8E0
+creator-student-large creator-student -screenshotCreatorFormat large -screenshotCreatorKinds timetable -screenshotCourseColors forest
+studio-tt-light studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme light -screenshotStudioAccent 7FA33A -screenshotCourseColors forest
+studio-tt-dark studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme dark -screenshotStudioAccent 7FA33A -screenshotCourseColors forest
+creator-student-large-sage creator-student -screenshotCreatorFormat large -screenshotCreatorKinds timetable -screenshotCourseColors forestSage
+studio-tt-light-sage studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme light -screenshotStudioAccent 7FA33A -screenshotCourseColors forestSage
+studio-tt-dark-sage studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme dark -screenshotStudioAccent 7FA33A -screenshotCourseColors forestSage
 
 # Onglet Créer et constructeur « Crée ton widget » d'un espace, pour la mécanique des pubs TikTok (2026-11-06) :
 # taille Petit par défaut, puis Moyen (les widgets habituels de l'espace côte à côte), puis le Studio ouvert sur ce widget.

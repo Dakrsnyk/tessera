@@ -8,11 +8,11 @@ import { cap, clamp, FONT, out } from "../lib";
 import { CH, CW, Tap } from "./Screens";
 
 export const PAPER = "#FBF8F0";
-const LINE = "#C9D8EE";
+const LINE = "#CFDDC6";
 const MARGIN = "#E9A3A3";
-export const PEN = "#2747A8";
-/** Planning is blue: its highlighter is cyan (rule of 2026-11-06: each ad in its mini-app's colours). */
-export const HIGHLIGHT = "rgba(64,214,232,0.75)";
+export const PEN = "#2E5E34";
+/** Forest green (2026-11-07): the Planning ad is in the style of the « Forêt » Home Screen, no blue (ruled lines, pen, highlighter). */
+export const HIGHLIGHT = "rgba(168,214,114,0.8)";
 const ACCENT = "#3366FF";
 const GREY = "#7C838E";
 const INK = "#10151C";
