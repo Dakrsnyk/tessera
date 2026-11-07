@@ -123,6 +123,7 @@ spaces-lock-end spaces-lock -screenshotScroll bottom
 
 # Onglet Créer et constructeur « Crée ton widget » d'un espace, pour la mécanique des pubs TikTok (2026-11-06) :
 # taille Petit par défaut, puis Moyen (les widgets habituels de l'espace côte à côte), puis le Studio ouvert sur ce widget.
+# Le Studio s'ouvre 0,9 s après le constructeur (-screenshotCreatorStudio) : la capture, prise à 6 s, le montre ouvert.
 spaces spaces
 creator-fitness creator-fitness
 creator-fitness-medium creator-fitness -screenshotCreatorFormat medium
