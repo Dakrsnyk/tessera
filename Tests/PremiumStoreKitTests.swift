@@ -122,8 +122,11 @@ final class PremiumStoreKitTests: XCTestCase {
 
             let latest = await Transaction.latest(for: PremiumConfiguration.lifetimeID)
             let transaction = try XCTUnwrap(latest?.unsafePayloadValue, "The purchase left a transaction")
-            try session.refundTransaction(identifier: UInt(transaction.id))
-            await store.refreshEntitlements()
+            try await session.refundTransaction(identifier: UInt(transaction.id))
+            _ = await eventually {
+                await store.refreshEntitlements()
+                return !model.premium.isActive
+            }
 
             XCTAssertFalse(model.premium.isActive, "A refunded purchase no longer unlocks Premium")
             XCTAssertNil(model.premium.productID)
@@ -146,7 +149,10 @@ final class PremiumStoreKitTests: XCTestCase {
             XCTAssertFalse(model.premium.hasPurchase(at: expiration.addingTimeInterval(PremiumState.gracePeriod + 1)))
 
             try await session.expireSubscription(productIdentifier: PremiumConfiguration.monthlyID)
-            await store.refreshEntitlements()
+            _ = await eventually {
+                await store.refreshEntitlements()
+                return !model.premium.isActive
+            }
 
             XCTAssertFalse(model.premium.isActive, "An expired subscription is no longer an entitlement")
             XCTAssertNil(model.premium.productID)
@@ -217,5 +223,15 @@ final class PremiumStoreKitTests: XCTestCase {
 
             XCTAssertFalse(store.isIntroEligible, "Once subscribed, neither the monthly nor the yearly plan has a trial")
         }
+    }
+
+    /// StoreKit's test session applies a refund, an expiration or a purchase a moment later: the condition is
+    /// asked again for up to five seconds (never a weaker check, only time for the App Store to answer).
+    private func eventually(_ condition: () async -> Bool) async -> Bool {
+        for _ in 0..<50 {
+            if await condition() { return true }
+            try? await Task.sleep(nanoseconds: 100_000_000)
+        }
+        return await condition()
     }
 }

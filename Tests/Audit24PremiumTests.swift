@@ -76,7 +76,10 @@ final class Audit24PremiumTests: XCTestCase {
 
         // Bought outside the store's own purchase (another device, the App Store): nothing recomputed yet.
         _ = try await session.buyProduct(identifier: PremiumConfiguration.monthlyID)
-        await store.refreshIntroEligibility()
+        _ = await eventually {
+            await store.refreshIntroEligibility()
+            return !store.isIntroEligible
+        }
 
         XCTAssertFalse(store.isIntroEligible, "The paywall must not promise a trial that is gone")
         XCTAssertNil(store.trialDays(for: try XCTUnwrap(store.yearly)))
@@ -104,5 +107,15 @@ final class Audit24PremiumTests: XCTestCase {
 
     func testTermsLinkIsTheHostedPage() {
         XCTAssertEqual(PremiumConfiguration.termsURL.absoluteString, "https://ardane.app/terms.html")
+    }
+
+    /// StoreKit's test session applies a refund, an expiration or a purchase a moment later: the condition is
+    /// asked again for up to five seconds (never a weaker check, only time for the App Store to answer).
+    private func eventually(_ condition: () async -> Bool) async -> Bool {
+        for _ in 0..<50 {
+            if await condition() { return true }
+            try? await Task.sleep(nanoseconds: 100_000_000)
+        }
+        return await condition()
     }
 }

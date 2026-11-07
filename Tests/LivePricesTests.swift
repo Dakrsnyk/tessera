@@ -212,9 +212,18 @@ final class LivePricesTests: XCTestCase {
 
         // Manual prices only: no day move, the total gain as before, the disclaimer alone.
         data.prices = PriceBook()
+        data.portfolio.holdings[0].manualPrice = 60_000
+        data.portfolio.holdings[1].manualPrice = 32
         let manual = MoneyTiles.portfolio(data, currency: "USD", clock: clock, isLarge: false)
         XCTAssertEqual(manual.footnote, MoneyTiles.disclaimer)
         XCTAssertNil(manual.detail)
+
+        // No price at all (neither live nor manual): valued at the price paid, and the widget says so (audit 24, M-17).
+        data.portfolio.holdings[0].manualPrice = nil
+        data.portfolio.holdings[1].manualPrice = nil
+        let unpriced = MoneyTiles.portfolio(data, currency: "USD", clock: clock, isLarge: false)
+        XCTAssertNotEqual(unpriced.footnote, MoneyTiles.disclaimer, "A value counted at the price paid is not shown as a real one")
+        XCTAssertTrue(unpriced.footnote?.hasPrefix(MoneyTiles.disclaimer) ?? false)
     }
 
     func testStockWidgetShowsTheMoveSinceTheClose() {

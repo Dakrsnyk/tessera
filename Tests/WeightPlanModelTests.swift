@@ -156,10 +156,12 @@ final class WeightPlanModelTests: XCTestCase {
         setSafePlan(model)
         XCTAssertTrue(model.acceptWeightPlan(now: now))
         XCTAssertNotEqual(model.nutrition.goals.kcal, standardGoals(model).kcal)
-        // A pregnancy answer: the calculation goes back to the one of before, and nothing can be applied.
+        // A pregnancy answer: the plan stops, nothing can be applied, and the automatic calculation keeps no
+        // deficit either (audit 24, N-04: the safety rules of the weight goal now bound it too): maintenance.
         model.update(\.profile) { $0.lifeStage = .pregnant }
         XCTAssertNil(model.inForceWeightPlanKcal)
-        XCTAssertEqual(model.nutrition.goals.kcal, standardGoals(model).kcal, accuracy: 0.5)
+        let maintenance = NutritionCalculator.goals(sex: .male, age: model.age ?? 35, heightCm: 180, weightKg: 100, activity: .active, goal: .maintain)
+        XCTAssertEqual(model.nutrition.goals.kcal, maintenance.kcal, accuracy: 0.5)
         XCTAssertFalse(model.acceptWeightPlan(now: now))
     }
 

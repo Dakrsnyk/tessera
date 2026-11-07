@@ -192,9 +192,11 @@ final class PremiumStore {
             guard let date = transaction.expirationDate else { continue }
             let now = Date()
             var end = date
+            let status = await transaction.subscriptionStatus
+            // Ended early (expired or revoked by the App Store before its date): no access, whatever the date says.
+            if let state = status?.state, state == .expired || state == .revoked { continue }
             if date <= now {
                 // Past its date: kept only during the billing grace period (the App Store keeps access then).
-                let status = await transaction.subscriptionStatus
                 guard Self.subscriptionGrantsAccess(expiration: date, now: now, renewalState: status?.state) else { continue }
                 if let status, case let .verified(info) = status.renewalInfo, let graceEnd = info.gracePeriodExpirationDate {
                     end = max(end, graceEnd)
