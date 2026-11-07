@@ -196,14 +196,6 @@ struct TileView: View {
         return false
     }
 
-    /// A visual that is only a line: the rest bar, a progress bar.
-    private var hasThinBar: Bool {
-        switch tile.visual {
-        case .timer, .bar: return true
-        default: return false
-        }
-    }
-
     /// The week's schedule fills the height the widget leaves (no empty half below it); the other charts keep their own.
     private var fillsHeight: Bool { tile.visual.isSchedule }
 
@@ -407,40 +399,21 @@ struct TileView: View {
     }
 
     /// A medium widget with buttons (« Prochaine série », « Repos », a counter…): the title, the figure and
-    /// its caption, then the buttons, as in the small widget; the detail and a thin bar only where they fit.
-    /// Stacked as in the other sizes, the chart (42 pt) and the buttons were taller than the widget: its title
-    /// and its last line were cut off, even on the largest iPhone (the Éditorial theme is vertical).
+    /// one line of caption, then the buttons, as in the small widget (no chart, no detail: they don't fit
+    /// the smallest iPhone, 148 pt high). Stacked as in the other sizes, the chart (42 pt) and the buttons were
+    /// taller than the widget: its title and its last line were cut off (the Éditorial theme is vertical).
+    /// A fixed choice, not a ViewThatFits: the app stopped responding on screens with many widgets (Build 354).
     private var verticalMediumWithButtons: some View {
         VStack(alignment: s.horizontalAlignment, spacing: 4 * sp) {
             headerBlock
-            // From the fullest to the barest: the smallest iPhone, the airy density or a big title keep the last ones.
-            ViewThatFits(in: .vertical) {
-                verticalFigure(detail: true, bar: true)
-                verticalFigure(detail: true, bar: false)
-                verticalFigure(detail: false, bar: false)
-                verticalFigure(detail: false, bar: false, tight: true)
-                verticalFigure(detail: false, bar: false, tight: true, caption: false)
+            VStack(alignment: s.horizontalAlignment, spacing: 2 * sp) {
+                if hasValue { valueText(tile.value.count > 7 ? 24 : 28) }
+                captionText(lines: 1)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: s.alignment == .center ? .top : .topLeading)
+            Spacer(minLength: 0)
             buttonsRow(3)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: s.alignment == .center ? .top : .topLeading)
-    }
-
-    /// The figure and its caption, with the detail and the thin bar (the rest, a session's progress) when asked;
-    /// `tight`: a smaller figure and one line of caption.
-    private func verticalFigure(detail: Bool, bar: Bool, tight: Bool = false, caption: Bool = true) -> some View {
-        let size: CGFloat = tight ? 24 : 28
-        return VStack(alignment: s.horizontalAlignment, spacing: 2 * sp) {
-            if hasValue { valueText(tile.value.count > 7 ? size * 0.85 : size) }
-            if caption { captionText(lines: tight ? 1 : 2) }
-            if detail { detailText }
-            if bar && hasThinBar {
-                visual(compact: true)
-                    .frame(height: 6)
-                    .padding(.top, 2)
-            }
-        }
     }
 
     private var verticalStack: some View {
