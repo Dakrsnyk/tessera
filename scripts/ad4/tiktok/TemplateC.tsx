@@ -86,9 +86,10 @@ const usePop = (k: number) => {
 };
 
 const WidgetTile: React.FC<{ t: Extract<Tile, { kind: "widget" }>; k: number }> = ({ t, k }) => {
-  const f = useF();
+  // a captured countdown runs on the real clock (one capture per second), even when the page is sped up
+  const f = useCurrentFrame();
   const { s, float } = usePop(k);
-  const src = t.seq ? `${t.src}-${String(Math.floor((f / FPS) * t.seq.fps) % t.seq.count).padStart(3, "0")}` : t.src;
+  const src = t.seq ? `${t.src}-${String(Math.min(t.seq.count - 1, Math.floor((f / FPS) * t.seq.fps))).padStart(3, "0")}` : t.src;
   return (
     <Img
       src={cap(src)}

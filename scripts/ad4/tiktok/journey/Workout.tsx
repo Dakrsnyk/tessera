@@ -3,7 +3,7 @@
 // « Today's workout » widget in the Studio and place it on the Home Screen, then the Live Activity on the Lock Screen.
 import React from "react";
 import { Img, interpolate } from "remotion";
-import { cap, clamp, FONT, out } from "../lib";
+import { cap, clamp, FONT, FPS, out } from "../lib";
 import { CH, CW, HomeBase, Landing, SLOT_MIDDLE, Tap } from "./Screens";
 
 const seq = (name: string, i: number, n: number) => `${name}-${String(Math.min(n - 1, Math.max(0, i))).padStart(4, "0")}`;
@@ -29,8 +29,9 @@ export const BuildScreen: React.FC<{ f: number }> = ({ f }) => {
             height: 652,
             borderRadius: 56,
             overflow: "hidden",
-            background: "#000",
-            boxShadow: "0 20px 50px rgba(0,0,0,0.25)",
+            // the light demo, on the light background of the exercise sheet (ex-1: rgb 243,243,245)
+            background: "rgb(243,243,245)",
+            boxShadow: "0 16px 40px rgba(0,0,0,0.12)",
             opacity: demoIn,
             transform: `scale(${0.94 + 0.06 * demoIn})`,
           }}
@@ -103,14 +104,14 @@ export const WidgetScreen: React.FC<{ f: number; fps: number }> = ({ f, fps }) =
   );
 };
 
-/** Lock Screen: the Live Activity of the session (real captures): rest counting down, « Set done » pressed without
+/** Lock Screen: the Live Activity of the session (real captures, one per second: 1:00 → 0:45, then 2:00 → 1:50): rest counting down, « Set done » pressed without
  * unlocking, the set is checked and the next rest starts. */
 export const LOCK = "lock-minuit";
 const LA = { x: 45, y: 1640, w: 1116, h: 465 };
 export const LockScreen: React.FC<{ f: number; done?: number }> = ({ f, done = 44 }) => {
   const DONE = done; // frame of the « Set done » touch (synced with the voice by the template)
   const appear = interpolate(f, [0, 10], [0, 1], { ...clamp, easing: out });
-  const frame = f < DONE ? seq3("live-rest-real", Math.floor((f * 16) / DONE), 16) : seq3("live-afterset-real", Math.floor((f - DONE) / 3), 11);
+  const frame = f < DONE ? seq3("live-rest-real", Math.floor(f / FPS), 16) : seq3("live-afterset-real", Math.floor((f - DONE) / FPS), 11);
   return (
     <div style={{ position: "absolute", width: CW, height: CH, overflow: "hidden" }}>
       <Img src={cap(LOCK)} style={{ position: "absolute", width: CW, height: CH }} />

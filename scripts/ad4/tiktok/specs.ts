@@ -48,7 +48,7 @@ export const C_WIDGETS: SpecC = {
       label: "Training",
       vo: "i2",
       tiles: [
-        { kind: "widget", src: "live-rest-real", x: 110, y: 430, w: 860, seq: { count: 16, fps: 4 } },
+        { kind: "widget", src: "live-rest-real", x: 110, y: 430, w: 860, seq: { count: 16, fps: 1 } },
         { kind: "widget", src: "nextSet-s-light", x: 110, y: 818, w: 415 },
         {
           kind: "lock", x: 555, y: 818, w: 415, h: 415, wall: "wall-nebula.png",
