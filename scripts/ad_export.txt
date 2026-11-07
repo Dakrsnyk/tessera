@@ -4,7 +4,7 @@
 #   <type> <nom> clé=valeur…   (une valeur avec des espaces : %20)
 # widget : kind family=small|medium|large|rect|circular|inline theme preset palette accent recolor template
 #          scheme=light|dark ink=HEX scale render=image|snapshot
-# setupwidgets / home / lock : setup [wall] · wall : wall · icons : setup
+# setupwidgets / home / lock : setup [wall] [render=snapshot : vraie capture, pour la barre de repos de nextSet moyen] · wall : wall · icons : setup
 # live : state=rest|paused|ready rest | from to · paused · routine exercise set sets load done total restTotal
 #        bg=real|night|clear scheme w radius scale
 # demo : exercise view (indice ou nom : Profil, 3/4…) fps w h scale bg=clear|card|fill scheme accent
@@ -217,21 +217,21 @@ demo demo-pull-up exercise=pull-up view=3/4 fps=60 w=402 h=236 scale=3 bg=clear 
 # --- Film principal « THE OPENING » (docs/memoire/campagne-v2/Concept-THE-OPENING.md §5.1) ---
 # Accueil héros : de vrais widgets sur un vrai décor du Store (fond, dock et icônes du décor), dessiné par
 # l'accueil du Store lui-même. Un univers par décor : Aurore (début), Espace, Études, Néon, Graphite, Crépuscule (fin).
-home home-hero-aurore setup=aurore rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=aurora
-setupwidgets setup-hero-aurore setup=aurore rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=aurora
-home home-hero-espace setup=espace rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=space
-setupwidgets setup-hero-espace setup=espace rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=space
+home home-hero-aurore setup=aurore rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=aurora render=snapshot
+setupwidgets setup-hero-aurore setup=aurore rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=aurora render=snapshot
+home home-hero-espace setup=espace rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=space render=snapshot
+setupwidgets setup-hero-espace setup=espace rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=space render=snapshot
 icons icons-espace setup=espace scale=4
-home home-hero-etudes setup=etudes rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=paper
-setupwidgets setup-hero-etudes setup=etudes rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=paper
+home home-hero-etudes setup=etudes rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=paper render=snapshot
+setupwidgets setup-hero-etudes setup=etudes rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=paper render=snapshot
 icons icons-etudes setup=etudes scale=4
-home home-hero-neon setup=neon rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=neon
-setupwidgets setup-hero-neon setup=neon rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=neon
-home home-hero-graphite setup=graphite rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=minimal
-setupwidgets setup-hero-graphite setup=graphite rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=minimal
+home home-hero-neon setup=neon rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=neon render=snapshot
+setupwidgets setup-hero-neon setup=neon rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=neon render=snapshot
+home home-hero-graphite setup=graphite rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=minimal render=snapshot
+setupwidgets setup-hero-graphite setup=graphite rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small theme=minimal render=snapshot
 icons icons-graphite setup=graphite scale=4
-home home-hero-crepuscule setup=crepuscule rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small
-setupwidgets setup-hero-crepuscule setup=crepuscule rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small
+home home-hero-crepuscule setup=crepuscule rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small render=snapshot
+setupwidgets setup-hero-crepuscule setup=crepuscule rows=macros.medium|nextSet.medium|budgetLeft.small+priorities.small render=snapshot
 # Argent (plan 19) : les deux widgets dans le style du Crépuscule, du même passage.
 widget spendingByCategory-m-crepuscule kind=spendingByCategory family=medium scale=3 theme=glass accent=F2588F scheme=dark
 # Démonstrations pour le noir : schéma sombre (trait clair), le développé couché plus grand (porté à ~1 500 px).
@@ -261,17 +261,17 @@ widget quickFood-m-space kind=quickFood family=medium scale=3 theme=space scheme
 home home-free3 setup=graphite rows=macros.medium|nextSet.small+priorities.small theme=minimal
 setupwidgets setup-free3 setup=graphite rows=macros.medium|nextSet.small+priorities.small theme=minimal
 # Trois profils (publicité Widgets, plan P5) et écran complet (principale P7, Lifestyle P8, Courte 3)
-home home-profile-athlete setup=neon rows=nextSet.medium|todaysWorkout.medium|macros.small+trainingStreak.small theme=neon
-setupwidgets setup-profile-athlete setup=neon rows=nextSet.medium|todaysWorkout.medium|macros.small+trainingStreak.small theme=neon
+home home-profile-athlete setup=neon rows=nextSet.medium|todaysWorkout.medium|macros.small+trainingStreak.small theme=neon render=snapshot
+setupwidgets setup-profile-athlete setup=neon rows=nextSet.medium|todaysWorkout.medium|macros.small+trainingStreak.small theme=neon render=snapshot
 home home-profile-student setup=etudes rows=timetable.large|upNext.small+priorities.small theme=paper
 setupwidgets setup-profile-student setup=etudes rows=timetable.large|upNext.small+priorities.small theme=paper
 home home-profile-minimal setup=graphite rows=clock.medium|priorities.small+budgetLeft.small theme=minimal
 setupwidgets setup-profile-minimal setup=graphite rows=clock.medium|priorities.small+budgetLeft.small theme=minimal
 # Les accueils « complete » sont Premium : mention « Avec Premium ».
-home home-complete-aurore setup=aurore rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=aurora
-setupwidgets setup-complete-aurore setup=aurore rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=aurora
-home home-complete-espace setup=espace rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=space
-setupwidgets setup-complete-espace setup=espace rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=space
+home home-complete-aurore setup=aurore rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=aurora render=snapshot
+setupwidgets setup-complete-aurore setup=aurore rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=aurora render=snapshot
+home home-complete-espace setup=espace rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=space render=snapshot
+setupwidgets setup-complete-espace setup=espace rows=macros.medium|nextSet.medium|weekView.medium|budgetLeft.small+priorities.small theme=space render=snapshot
 # Écrans verrouillés assortis aux profils
 lock lock-graphite setup=graphite scale=3
 lock lock-espace setup=espace scale=3
