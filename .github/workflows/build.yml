@@ -67,11 +67,26 @@ jobs:
       INTERNE: ${{ contains(github.event.head_commit.message, '[interne]') }}
       BOTH_TESTFLIGHT_TAGS: ${{ contains(github.event.head_commit.message, '[interne]') && contains(github.event.head_commit.message, '[testflight]') }}
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: maxim-lobanov/setup-xcode@v1
+      # Pinned by commit (v4.4.0, what @v4 ran). The token is not left in .git/config: the only pushes
+      # (ci-report) pass it explicitly, and no third-party code runs in this job any more.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          xcode-version: latest-stable
+          persist-credentials: false
+
+      # The newest stable Xcode of the runner, chosen without a third-party action (this job decrypts the
+      # signing certificate and the App Store Connect key).
+      - name: Select Xcode
+        run: |
+          # The image links plain version names (Xcode_26.0.app…) to betas and release candidates: links are
+          # skipped, and so is any Xcode whose license says beta.
+          XCODE=$(for app in /Applications/Xcode_*.app; do
+              [ -d "$app" ] && [ ! -L "$app" ] || continue
+              /usr/libexec/PlistBuddy -c "Print :licenseType" "$app/Contents/Resources/LicenseInfo.plist" 2>/dev/null | grep -qi beta && continue
+              echo "$app"
+            done | grep -viE "beta|release_candidate" | sort -V | tail -1)
+          [ -n "$XCODE" ] || { echo "::error::Aucun Xcode stable dans /Applications"; exit 1; }
+          echo "Xcode: $XCODE"
+          sudo xcode-select -s "$XCODE/Contents/Developer"
 
       - name: Show toolchain
         run: xcodebuild -version
@@ -127,7 +142,9 @@ jobs:
           security import "$RUNNER_TEMP/dist.p12" -k "$KEYCHAIN" -P "$DIST_P12_PASSWORD" -T /usr/bin/codesign -T /usr/bin/security
           security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$KC_PASS" "$KEYCHAIN" > /dev/null
           security list-keychains -d user -s "$KEYCHAIN" $(security list-keychains -d user | tr -d '"')
-          security find-identity -v -p codesigning "$KEYCHAIN" | tee -a testflight.txt
+          # Only the count goes to the public report: the identity line carries the legal name, the Team ID
+          # and the certificate fingerprint.
+          echo "signing identities: $(security find-identity -v -p codesigning "$KEYCHAIN" | grep -c 'Apple Distribution')" | tee -a testflight.txt
           # The two App Store profiles, under their UUID (both folders: Xcode 16+ reads the second one).
           for pair in "PROFILE_APP_BASE64:Ardane App Store" "PROFILE_WIDGETS_BASE64:Ardane Widgets App Store"; do
             var=${pair%%:*}; expected=${pair#*:}
@@ -135,7 +152,7 @@ jobs:
             security cms -D -i "$RUNNER_TEMP/profile.mobileprovision" > "$RUNNER_TEMP/profile.plist"
             uuid=$(/usr/libexec/PlistBuddy -c "Print :UUID" "$RUNNER_TEMP/profile.plist")
             name=$(/usr/libexec/PlistBuddy -c "Print :Name" "$RUNNER_TEMP/profile.plist")
-            echo "profile: $name ($uuid), expires $(/usr/libexec/PlistBuddy -c 'Print :ExpirationDate' "$RUNNER_TEMP/profile.plist")" | tee -a testflight.txt
+            echo "profile: $name, expires $(/usr/libexec/PlistBuddy -c 'Print :ExpirationDate' "$RUNNER_TEMP/profile.plist")" | tee -a testflight.txt
             [ "$name" = "$expected" ] || { echo "::error::Le profil s'appelle « $name », attendu « $expected »" | tee -a testflight.txt; exit 1; }
             for dir in "$HOME/Library/MobileDevice/Provisioning Profiles" "$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"; do
               mkdir -p "$dir"; cp "$RUNNER_TEMP/profile.mobileprovision" "$dir/$uuid.mobileprovision"
@@ -166,11 +183,24 @@ jobs:
           # Proof from the binary itself: « … en mode test » is compiled only with DEBUG or INTERNAL_PREMIUM.
           APP=$(find build/Ardane.xcarchive/Products/Applications -maxdepth 1 -name "*.app" | head -1)
           EXE="$APP/$(/usr/libexec/PlistBuddy -c 'Print :CFBundleExecutable' "$APP/Info.plist")"
+          WIDGETS_EXE="$APP/PlugIns/ArdaneWidgets.appex/ArdaneWidgets"
+          for bin in "$EXE" "$WIDGETS_EXE"; do
+            [ -f "$bin" ] || { echo "::error::Binaire introuvable : $(basename "$bin")" | tee -a testflight.txt; exit 1; }
+          done
           if [ "$INTERNE" = "true" ]; then
             grep -a -q "en mode test" "$EXE" || { echo "::error::Premium non débloqué dans la version interne" | tee -a testflight.txt; exit 1; }
           else
-            ! grep -a -q "en mode test" "$EXE" || { echo "::error::Déblocage Premium trouvé dans une version [testflight] normale" | tee -a testflight.txt; exit 1; }
+            # A public version: no Premium unlock in the app NOR in the widget extension.
+            for bin in "$EXE" "$WIDGETS_EXE"; do
+              ! grep -a -q "en mode test" "$bin" || { echo "::error::Déblocage Premium trouvé dans une version [testflight] normale ($(basename "$bin"))" | tee -a testflight.txt; exit 1; }
+              ! grep -a -q -E "DebugPremium|debugPremiumDisabled" "$bin" || { echo "::error::Code de déblocage de test dans une version [testflight] normale ($(basename "$bin"))" | tee -a testflight.txt; exit 1; }
+            done
           fi
+          # Never in any signed build, internal or public: the screenshot, gallery and ad-kit code (DEBUG only).
+          for bin in "$EXE" "$WIDGETS_EXE"; do
+            ! grep -a -q -E "ScreenshotMode|WidgetGalleryView|SetupGalleryView|MarketingView|AdExport" "$bin" || { echo "::error::Code de capture ou de pub (DEBUG) dans la version signée ($(basename "$bin"))" | tee -a testflight.txt; exit 1; }
+          done
+          echo "binary checks: passed" | tee -a testflight.txt
           cat > build/ExportOptions.plist <<PLIST
           <?xml version="1.0" encoding="UTF-8"?>
           <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -857,8 +887,8 @@ jobs:
             echo "---- errors ----"
             python3 scripts/check_swift.py 2>&1 | tail -40 || true
             python3 scripts/l10n_catalog.py sync 2>&1 | tail -45 || true
-            grep -hE "error:" sim.log device.log release.log archive.log export.log 2>/dev/null | sort -u | head -500 || true
-            [ -f export.log ] && { echo "---- testflight export ----"; tail -60 export.log; } || true
+            grep -hE "error:" sim.log device.log release.log archive.log export.log 2>/dev/null | sort -u | head -500               | sed -E 's/((Apple|iPhone|iOS) (Distribution|Development|Developer)): [^"]*/\1: <hidden>/g; s/([Tt]eam ID "?)[A-Z0-9]{10}/\1<hidden>/g' || true
+            [ -f export.log ] && { echo "---- testflight export ----"; tail -60 export.log               | sed -E 's/((Apple|iPhone|iOS) (Distribution|Development|Developer)): [^"]*/\1: <hidden>/g; s/([Tt]eam ID "?)[A-Z0-9]{10}/\1<hidden>/g'; } || true
             echo "---- tests ----"
             grep -hE "Test Case .*(passed|failed)|error:|XCTAssert|TEST (SUCCEEDED|FAILED)" test.log 2>/dev/null | head -400 || true
             if [ -f stack-onone.log ]; then
@@ -892,6 +922,9 @@ jobs:
           git clone -q --depth 1 --filter=blob:none --no-checkout --branch ci-report "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" previous-report 2>/dev/null \
             && (cd previous-report && git sparse-checkout set history >/dev/null 2>&1 && git checkout -q >/dev/null 2>&1) || true
           if [ -d previous-report/history ]; then mkdir -p report/history && cp -R previous-report/history/. report/history/; fi
+          # Reports written before 2026-11-07 carried the signing identity (legal name, Team ID, fingerprint) and
+          # the profile UUIDs: removed from the copies kept in history/.
+          [ -d report/history ] && find report/history -name report.txt -exec sed -i '' -E '/Apple Distribution:/d; s/^(profile: [^(]*) \([0-9A-Fa-f-]{36}\),/\1,/' {} + || true
           RUNDIR="report/history/$(date -u +%F)-run$(printf '%06d' ${{ github.run_number }})"
           mkdir -p "$RUNDIR" && cp report/report.txt "$RUNDIR"/
           [ -d testshots ] && find testshots -maxdepth 1 -type f \( -name '*.txt' -o -name '*.json' \) -exec cp {} "$RUNDIR"/ \; 2>/dev/null || true
