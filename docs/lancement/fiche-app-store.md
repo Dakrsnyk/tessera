@@ -117,3 +117,38 @@ Same as French: Support URL https://ardane.app/support.html, Marketing URL https
 - Choix de l'utilisateur : proposition 1 (style des captures : fond crème #F6F4EF, Archivo 900, Instrument Serif italique), titre « Ardane », sous-titre « Your widgets. Your way. » / « Tes widgets. À ta façon. », deux iPhone (home-creme, home-hero-light) et six widgets réels en lévitation (Papier, Luxe, Néon, Aurore, Éditorial).
 - Fichiers : `~/ardane-tools/film/out/store-banners/Ardane-Header-{EN,FR}-3840x1646.png` et `Ardane-SearchResults-{EN,FR}-3840x2560.png` (RGB, sans transparence ; widgets de `kit2026/<langue>`). Source : `~/ardane-tools/film/src/store/banner.tsx`, image 8 (`npx remotion still src/store/banner.tsx Banner-<header|search>-<en|fr> <sortie> --frame=8`).
 - Zone toujours visible (mesurée sur le gabarit d'Apple, non publiée par Apple) : 1646×661 au centre du Header, 2168×1030 au centre de Search Results ; vérifier avec Preview dans App Store Connect.
+
+## App Review Information (2026-11-07)
+- Sign-in required : décoché (aucun compte dans Ardane).
+- Contact : nom, téléphone et courriel de l'utilisateur, saisis par lui (visibles seulement par Apple ; jamais dans ce dépôt).
+- Attachment : rien.
+- Notes (anglais, vérifiées contre le code : permissions de `project.pbxproj`, services réseau de `Shared/`, limites gratuites, action Raccourcis `App/Intents/ApplePayIntent.swift`, Live Activity d'étude dans `StudiesApp.swift`) :
+
+```
+Ardane is a widgets and mini-apps app. There is no account and no sign-in: all data stays on the device (App Group shared with the widget extension). The app starts empty; widget previews show sample data until the user enters their own.
+
+HOW TO TEST
+1. Open the Create tab, pick a mini-app (for example Nutrition), choose a size, tap "Customize widget" to open the Studio (theme, style, colors), then "Save widget".
+2. On the Home Screen, touch and hold, tap Edit > Add Widget, search "Ardane" and add the widget. Lock Screen widgets are added the same way from the Lock Screen.
+3. Live Activities: start a workout in Fitness, or a study session in Planning · studies.
+
+IN-APP PURCHASES (Ardane Premium)
+- Monthly and yearly auto-renewable subscriptions, and a one-time lifetime purchase.
+- Free version: 3 saved widgets, 5 habits and 10 dish photo analyses. Premium unlocks every widget, style and pack, unlimited habits, schedule import from a photo or PDF, detailed stats and unlimited dish analyses.
+- The Premium screen opens from any locked item (for example a Premium style in the Studio, or a sixth habit). It shows the prices, "Restore purchases", and links to the Terms of Use and Privacy Policy.
+
+PERMISSIONS (optional, asked only when the feature is used)
+- Camera: scan a food barcode, photograph a dish, or photograph a class schedule.
+- Calendars: show upcoming events in the Upcoming widget and in Planning.
+- Motion & Fitness: steps, distance and floors for My Day.
+- Photos (add only): save the wallpapers chosen in the Store.
+
+NETWORK SERVICES (only the search query is sent, never personal data)
+- Open Food Facts and USDA FoodData Central: food data from a barcode or a search.
+- CoinGecko: crypto prices. SEC EDGAR: official figures of listed companies.
+- Stripe (optional, My business mini-app): only if the user connects their own restricted read-only key, kept in the Keychain. Not needed for the review.
+
+OTHER
+- Shortcuts: the "Add an Apple Pay expense" action can be used in a Shortcuts "Transaction" automation to log Apple Pay purchases in Budget. Optional.
+- Nutrition estimates are for information only and are not medical advice.
+```
