@@ -497,6 +497,30 @@ enum HomeSetupCatalog {
         all.first { $0.id == id }
     }
 
+    #if DEBUG
+    private static func large(_ kind: WidgetKind, _ theme: ThemeID, _ accent: String) -> SetupWidget {
+        SetupWidget(kind: kind, family: .systemLarge, theme: theme, accent: accent)
+    }
+
+    /// Test builds only: Home Screens drawn for the ads, not in the Store (scripts/ad_export.txt, `home … setup=<id>`).
+    /// « planning » (TikTok ad, 2026-11-07): the week's timetable in large over two thirds of the screen and two rows of
+    /// apps, on the ocean wallpaper, in the manner of « Forêt » (dark widget, accent and icons in the wallpaper's colours).
+    static let adOnly: [HomeSetup] = [
+        HomeSetup(
+            id: "planning", name: tr("Océan"), tagline: tr("L'eau, le ciel et tes habitudes, en bleu profond."),
+            tags: [.dark, .study], wallpaper: .ocean,
+            icons: .solid(background: "0E2A3F", symbol: "8FE9FF"),
+            rows: [
+                .widgets([large(.timetable, .dark, "3FC8E0")]),
+                .apps([.books, .notes, .calendar, .reminders]),
+                .apps([.files, .photos, .music, .weather]),
+            ],
+            dock: [.phone, .messages, .web, .camera],
+            lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.nextClass), circular(.nextExam)])
+        ),
+    ]
+    #endif
+
     /// The Home Screens of the themed worlds, in the order of their packs.
     static var themed: [HomeSetup] {
         ["espace", "mars", "nature", "botanique", "vagues"].compactMap(setup)

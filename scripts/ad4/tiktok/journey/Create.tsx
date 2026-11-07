@@ -18,6 +18,8 @@ export type BuilderPlan = {
   tapTile: P;
   /** The « Medium » size (the builder then shows its medium preview). */
   medium?: P;
+  /** Or the « Large » size: creator-<space>-large (the week's timetable alone, -screenshotCreatorKinds timetable). */
+  large?: P;
   /** « Customize widget ». */
   tapCustomize: P;
 };
@@ -25,7 +27,7 @@ export type BuilderPlan = {
 const SHEET = 14;
 const TILE = 27;
 const MEDIUM = 38;
-export const builderEnd = (p: BuilderPlan) => (p.medium ? 60 : 48);
+export const builderEnd = (p: BuilderPlan) => (p.medium || p.large ? 60 : 48);
 
 const Full: React.FC<{ src: string }> = ({ src }) => <Img src={cap(src)} style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH }} />;
 
@@ -33,7 +35,9 @@ const Full: React.FC<{ src: string }> = ({ src }) => <Img src={cap(src)} style={
 export const BuilderFlow: React.FC<{ f: number; plan: BuilderPlan }> = ({ f, plan }) => {
   const end = builderEnd(plan);
   const sheet = interpolate(f, [SHEET, SHEET + 9], [0, 1], { ...clamp, easing: out });
-  const builder = plan.medium && f >= MEDIUM + 3 ? `creator-${plan.space}-medium` : `creator-${plan.space}`;
+  const size = plan.large ? "large" : plan.medium ? "medium" : null;
+  const sizeTap = plan.large ?? plan.medium;
+  const builder = size && f >= MEDIUM + 3 ? `creator-${plan.space}-${size}` : `creator-${plan.space}`;
   return (
     <div style={{ position: "absolute", width: CW, height: CH, overflow: "hidden", background: "#000" }}>
       <Full src="spaces" />
@@ -44,7 +48,7 @@ export const BuilderFlow: React.FC<{ f: number; plan: BuilderPlan }> = ({ f, pla
         </div>
       )}
       <Tap f={f} at={TILE} x={plan.tapTile[0]} y={plan.tapTile[1]} />
-      {plan.medium && <Tap f={f} at={MEDIUM} x={plan.medium[0]} y={plan.medium[1]} />}
+      {sizeTap && <Tap f={f} at={MEDIUM} x={sizeTap[0]} y={sizeTap[1]} />}
       <Tap f={f} at={end - 6} x={plan.tapCustomize[0]} y={plan.tapCustomize[1]} />
     </div>
   );

@@ -249,8 +249,21 @@ enum ScreenshotMode {
             } else if screen.hasPrefix("studio-") {
                 let section = String(screen.dropFirst(7))
                 // « studio-note »: a widget without a chart; « studio-main-… »: the colors with a main color picked.
-                let kind: WidgetKind = section == "chart" ? .nutritionWeek : (section == "note" ? .note : .macros)
+                // Ads: the Studio on another widget, size, style and accent (-screenshotStudioKind timetable
+                // -screenshotStudioFormat large -screenshotStudioTheme dark -screenshotStudioAccent 3FC8E0).
+                let defaults = UserDefaults.standard
+                let kind: WidgetKind = defaults.string(forKey: "screenshotStudioKind").flatMap { WidgetKind(rawValue: $0) }
+                    ?? (section == "chart" ? .nutritionWeek : (section == "note" ? .note : .macros))
                 var design = WidgetDesign(kind: kind, themeID: .modern, accentHex: "2F8F7A", format: .medium)
+                if let raw = defaults.string(forKey: "screenshotStudioFormat"), let format = WidgetFormat(rawValue: raw) {
+                    design.format = format
+                }
+                if let raw = defaults.string(forKey: "screenshotStudioTheme"), let theme = ThemeID(rawValue: raw) {
+                    design.themeID = theme
+                }
+                if let accent = defaults.string(forKey: "screenshotStudioAccent") {
+                    design.accentHex = accent
+                }
                 if section.hasPrefix("main-") {
                     let theme = ThemeID(rawValue: String(section.dropFirst(5))) ?? .neon
                     design.themeID = theme

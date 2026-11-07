@@ -11,6 +11,12 @@
 # Style de l'app : Saphir (-screenshotStyle sapphire), langue : AD_LANG (fr par défaut, en avec [adkit-en]).
 # Échelles : 4 pour un petit widget (680 px), 3 pour moyen / grand (1 092 px de large), 4 pour l'écran verrouillé.
 
+# --- Pub Planning (2026-11-07) : l'horaire de la semaine en Grand, sombre à l'accent cyan, et l'écran d'accueil
+# « planning » (réservé aux pubs : HomeSetupCatalog.adOnly) : le widget sur 2/3 de l'écran, 2 rangées d'apps, fond Océan ---
+widget timetable-l-planning kind=timetable family=large scale=3 theme=dark accent=3FC8E0 scheme=dark
+home home-planning setup=planning scale=3
+lock lock-planning setup=planning scale=3
+
 # --- Macros (moyen) : 14 styles, 4 thèmes complets, 2 palettes ---
 widget macros-m-light kind=macros family=medium scale=3 theme=light
 widget macros-m-dark kind=macros family=medium scale=3 theme=dark scheme=dark

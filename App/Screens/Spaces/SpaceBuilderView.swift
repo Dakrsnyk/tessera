@@ -157,6 +157,11 @@ struct SpaceBuilderView: View {
                 } else if defaults.bool(forKey: "screenshotCreatorMulti") {
                     selection = Array(kinds.prefix(3))
                 }
+                // Ads: the widgets chosen by name (-screenshotCreatorKinds timetable), e.g. the week's timetable alone in large.
+                if let raw = defaults.string(forKey: "screenshotCreatorKinds") {
+                    let chosen = raw.split(separator: ",").compactMap { WidgetKind(rawValue: String($0)) }
+                    if !chosen.isEmpty { selection = chosen }
+                }
                 if defaults.bool(forKey: "screenshotCreatorStudio") {
                     // Once the creator is on screen and its size applied.
                     Task { @MainActor in

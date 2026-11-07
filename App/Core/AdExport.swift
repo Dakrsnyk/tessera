@@ -192,7 +192,7 @@ enum AdExport {
     /// row by `+`, each `kind.family`), in `theme=` and `accent=`, else the style of the setup's first widget.
     /// The film's hero Home Screen: real widgets on a real setup, drawn by the Store's own Home Screen.
     private static func storeSetup(_ job: AdJob) throws -> HomeSetup {
-        guard let id = job.string("setup"), let base = HomeSetupCatalog.setup(id) else {
+        guard let id = job.string("setup"), let base = HomeSetupCatalog.setup(id) ?? HomeSetupCatalog.adOnly.first(where: { $0.id == id }) else {
             throw AdFailure("unknown setup « \(job.string("setup") ?? "") »")
         }
         var wallpaper = base.wallpaper

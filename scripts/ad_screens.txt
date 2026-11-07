@@ -4,6 +4,12 @@
 # Les tranches -screenshotScroll 0 … 1 (-sNN) se recollent hors ligne en une image haute : seules les pages
 # qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
 
+# Pub Planning (2026-11-07) : l'horaire de la semaine seul en Grand dans le constructeur, puis le Studio sur ce widget
+# (Style : Clair, puis Sombre à l'accent cyan du fond Océan). En tête de liste (limite de 60 min de l'étape Ad kit).
+creator-student-large creator-student -screenshotCreatorFormat large -screenshotCreatorKinds timetable
+studio-tt-light studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme light -screenshotStudioAccent 3FC8E0
+studio-tt-dark studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme dark -screenshotStudioAccent 3FC8E0
+
 # Onglet Créer et constructeur « Crée ton widget » d'un espace, pour la mécanique des pubs TikTok (2026-11-06) :
 # taille Petit par défaut, puis Moyen (les widgets habituels de l'espace côte à côte), puis le Studio ouvert sur ce widget.
 # En tête de liste : l'étape Ad kit s'arrête à 60 min et coupe la fin de la liste (Build 350).
