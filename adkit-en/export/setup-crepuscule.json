@@ -1,0 +1,91 @@
+{
+  "setup" : "crepuscule",
+  "shadow" : "Home Screen widgets: black 20 %, radius 8 pt, y 3 pt (not in the PNG)",
+  "wallpaper" : "sunset",
+  "widgets" : [
+    {
+      "accent" : "F2588F",
+      "family" : "small",
+      "file" : "setup-crepuscule-0.png",
+      "height" : 680,
+      "index" : 0,
+      "kind" : "moonPhase",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "glass",
+      "width" : 680
+    },
+    {
+      "accent" : "F2588F",
+      "family" : "small",
+      "file" : "setup-crepuscule-1.png",
+      "height" : 680,
+      "index" : 1,
+      "kind" : "countdown",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "countdown-holidays",
+      "theme" : "glass",
+      "width" : 680
+    },
+    {
+      "accent" : "F2588F",
+      "family" : "medium",
+      "file" : "setup-crepuscule-2.png",
+      "height" : 510,
+      "index" : 2,
+      "kind" : "calendar",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 3,
+      "template" : "",
+      "theme" : "glass",
+      "width" : 1092
+    },
+    {
+      "accent" : "F2588F",
+      "family" : "small",
+      "file" : "setup-crepuscule-3.png",
+      "height" : 680,
+      "index" : 3,
+      "kind" : "note",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "note-quote",
+      "theme" : "glass",
+      "width" : 680
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "rect",
+      "file" : "setup-crepuscule-4.png",
+      "height" : 304,
+      "index" : 4,
+      "kind" : "progress",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "progress-day",
+      "theme" : "minimal",
+      "width" : 688
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "circular",
+      "file" : "setup-crepuscule-5.png",
+      "height" : 288,
+      "index" : 5,
+      "kind" : "countdown",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "countdown-holidays",
+      "theme" : "minimal",
+      "width" : 288
+    }
+  ]
+}

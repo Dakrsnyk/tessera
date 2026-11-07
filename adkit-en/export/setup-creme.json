@@ -1,0 +1,91 @@
+{
+  "setup" : "creme",
+  "shadow" : "Home Screen widgets: black 8 %, radius 8 pt, y 3 pt (not in the PNG)",
+  "wallpaper" : "cream",
+  "widgets" : [
+    {
+      "accent" : "F2A33A",
+      "family" : "medium",
+      "file" : "setup-creme-0.png",
+      "height" : 510,
+      "index" : 0,
+      "kind" : "progress",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 3,
+      "template" : "progress-year",
+      "theme" : "light",
+      "width" : 1092
+    },
+    {
+      "accent" : "F2A33A",
+      "family" : "small",
+      "file" : "setup-creme-1.png",
+      "height" : 680,
+      "index" : 1,
+      "kind" : "weekView",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "",
+      "theme" : "light",
+      "width" : 680
+    },
+    {
+      "accent" : "F2A33A",
+      "family" : "small",
+      "file" : "setup-creme-2.png",
+      "height" : 680,
+      "index" : 2,
+      "kind" : "note",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "note-quote",
+      "theme" : "light",
+      "width" : 680
+    },
+    {
+      "accent" : "F2A33A",
+      "family" : "small",
+      "file" : "setup-creme-3.png",
+      "height" : 680,
+      "index" : 3,
+      "kind" : "countdown",
+      "place" : "home",
+      "renderer" : "image",
+      "scale" : 4,
+      "template" : "countdown-holidays",
+      "theme" : "light",
+      "width" : 680
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "rect",
+      "file" : "setup-creme-4.png",
+      "height" : 304,
+      "index" : 4,
+      "kind" : "progress",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "progress-year",
+      "theme" : "minimal",
+      "width" : 688
+    },
+    {
+      "accent" : "2F8F7A",
+      "family" : "circular",
+      "file" : "setup-creme-5.png",
+      "height" : 288,
+      "index" : 5,
+      "kind" : "countdown",
+      "place" : "lock",
+      "renderer" : "snapshot",
+      "scale" : 4,
+      "template" : "countdown-holidays",
+      "theme" : "minimal",
+      "width" : 288
+    }
+  ]
+}

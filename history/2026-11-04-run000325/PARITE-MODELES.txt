@@ -1,0 +1,7 @@
+PARITE 01-pomme.jpg : réf 1 zones, app 1 ; appariées 1 ; écart de score max 0.002 ; même 1er aliment 1/1 ; entier : réf mfr:apple 0.787 / app mfr:apple 0.781
+PARITE 11-cheeseburger-frites.jpg : réf 4 zones, app 4 ; appariées 3 ; écart de score max 0.041 ; même 1er aliment 2/3 ; entier : réf mfr:chips-french-fries 0.901 / app mfr:chips-french-fries 0.903
+PARITE 14-pates-bolognaise.jpg : réf 2 zones, app 2 ; appariées 2 ; écart de score max 0.095 ; même 1er aliment 2/2 ; entier : réf mfr:pasta-linguini-parpadelle-tagliatelle 0.759 / app mfr:pasta-linguini-parpadelle-tagliatelle 0.722
+PARITE 15-salade-jardin.jpg : réf 6 zones, app 7 ; appariées 5 ; écart de score max 0.052 ; même 1er aliment 5/5 ; entier : réf mfr:mixed-vegetables 0.112 / app mfr:caprese-salad-tomato-mozzarella 0.117
+PARITE 21-fish-and-chips.jpg : réf 2 zones, app 2 ; appariées 2 ; écart de score max 0.009 ; même 1er aliment 2/2 ; entier : réf mfr:chips-french-fries 0.722 / app mfr:chips-french-fries 0.702
+PARITE 24-curry-riz.jpg : réf 3 zones, app 4 ; appariées 2 ; écart de score max 0.080 ; même 1er aliment 2/2 ; entier : réf mfr:chicken-curry-cream-coconut-milk-curry-spices-paste 0.591 / app mfr:chicken-curry-cream-coconut-milk-curry-spices-paste 0.520
+PARITE-TOTAL zones appariées 15/18 (83 %) ; écart de score moyen 0.023 ; même 1er aliment 14/15 (93 %) ; même étiquette sur la photo entière 5/6

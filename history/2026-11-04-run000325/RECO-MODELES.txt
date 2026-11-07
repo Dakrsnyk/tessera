@@ -1,0 +1,50 @@
+RECO-MODELE 01-pomme.jpg [single]: zones [builtin.apple 0.76 (score 0.94)] ; propositions [Pomme] ; attendu ["pomme"] ; OK
+RECO-MODELE 02-oeuf-au-plat.jpg [single]: zones [builtin.egg 0.61 (score 0.51), builtin.pepper 0.42 (score 0.39), builtin.pork 0.88 (score 0.36), cnf.6786 0.62 (score 0.36), builtin.egg 0.47 (score 0.32)] ; propositions [Filet de porc cuit, Trempette, base de fromage à la crème, Œuf, Poivron] ; attendu ["oeuf"] ; RATÉ
+RECO-MODELE 03-pain.jpg [single]: zones [builtin.bread 0.56 (score 0.89)] ; propositions [Pain blanc] ; attendu ["pain"] ; OK
+RECO-MODELE 04-riz.jpg [single]: zones [builtin.rice 0.83 (score 0.91)] ; propositions [Riz blanc cuit] ; attendu ["riz"] ; OK
+RECO-MODELE 05-poulet-roti.jpg [single]: zones [builtin.lettuce 0.35 (score 0.44), builtin.chickenthigh 0.77 (score 0.36), cnf.1587 0.98 (score 0.32), cnf.1587 0.97 (score 0.31)] ; propositions [Citron, cru, sans pelure, Cuisse de poulet cuite, Laitue] ; attendu ["poulet"] ; OK
+RECO-MODELE 06-frites.jpg [single]: zones [builtin.fries 0.67 (score 0.96)] ; propositions [Frites] ; attendu ["frites"] ; OK
+RECO-MODELE 07-orange.jpg [single]: zones [builtin.orange 0.47 (score 0.92)] ; propositions [Orange] ; attendu ["orange"] ; OK
+RECO-MODELE 08-fraises.jpg [single]: zones [builtin.strawberries 0.95 (score 0.84)] ; propositions [Fraises] ; attendu ["fraise"] ; OK
+RECO-MODELE 09-pizza.jpg [composite]: zones [builtin.pizza 0.54 (score 0.82), cnf.212 0.85 (score 0.31)] ; propositions [Épices, basilic, frais, Pizza fromage] ; attendu ["pizza"] ; OK
+RECO-MODELE 10-hamburger.jpg [composite]: zones [builtin.burger 0.82 (score 0.50), builtin.burger 0.81 (score 0.46)] ; propositions [Hamburger] ; attendu ["hamburger"] ; OK
+RECO-MODELE 11-cheeseburger-frites.jpg [composite]: zones [builtin.fries 0.99 (score 0.47), builtin.burger 0.22 (score 0.39), builtin.lettuce 0.56 (score 0.32), cnf.3695 0.21 (score 0.31)] ; propositions [Frites, Laitue, Hamburger, Pain, oeufs (challa)] ; attendu ["hamburger"] ; OK
+RECO-MODELE 12-sandwich.jpg [composite]: zones [builtin.wholebread 0.35 (score 0.59), cnf.2338 0.57 (score 0.42), builtin.cheddar 0.86 (score 0.34), builtin.cheddar 0.68 (score 0.31)] ; propositions [Cheddar, Marinades, cornichons sûrs, Pain de blé entier] ; attendu ["sandwich"] ; OK
+RECO-MODELE 13-spaghetti-sauce.jpg [composite]: zones [builtin.pasta 0.39 (score 0.51), builtin.pasta 0.59 (score 0.48), cnf.212 0.46 (score 0.32)] ; propositions [Pâtes cuites, Épices, basilic, frais] ; attendu ["spaghetti"] ; OK
+RECO-MODELE 14-pates-bolognaise.jpg [composite]: zones [builtin.pasta 0.96 (score 0.70), mfr:bolognaise-sauce 0.70 (score 0.31)] ; propositions [Pâtes cuites] ; attendu ["pates", "pâtes", "spaghetti"] ; OK
+RECO-MODELE 15-salade-jardin.jpg [composite]: zones [builtin.tomato 0.82 (score 0.43), cnf.2380 0.88 (score 0.42), cnf.2380 0.87 (score 0.40), cnf.2350 0.98 (score 0.39), builtin.banana 0.49 (score 0.33), builtin.banana 0.32 (score 0.33), builtin.tomato 0.80 (score 0.30)] ; propositions [Fenouil, bulbe, cru, Carotte, crue, Tomate, Banane] ; attendu ["salade"] ; OK
+RECO-MODELE 16-salade-cesar.jpg [composite]: zones [cnf.428 0.27 (score 0.46), cnf.428 0.30 (score 0.40)] ; propositions [Vinaigrette, huile et vinaigre, faite maison] ; attendu ["salade"] ; RATÉ
+RECO-MODELE 17-poutine.jpg [composite]: zones [builtin.fries 0.94 (score 0.37), builtin.fries 0.95 (score 0.35), builtin.fries 0.81 (score 0.34)] ; propositions [Frites] ; attendu ["poutine"] ; OK
+RECO-MODELE 18-soupe.jpg [composite]: zones [builtin.lentils 0.35 (score 0.41), builtin.lentils 0.38 (score 0.39)] ; propositions [Lentilles cuites] ; attendu ["soupe"] ; RATÉ
+RECO-MODELE 19-sushi.jpg [composite]: zones [builtin.salmon 0.39 (score 0.72), builtin.sushi 0.60 (score 0.36), builtin.butter 0.11 (score 0.33)] ; propositions [Sushis (maki), Saumon cuit] ; attendu ["sushi"] ; OK
+RECO-MODELE 20-pancakes.jpg [composite]: zones [builtin.pancake 0.86 (score 0.50)] ; propositions [Crêpe épaisse (pancake)] ; attendu ["pancake", "crepe", "crêpe"] ; OK
+RECO-MODELE 21-fish-and-chips.jpg [composite]: zones [builtin.fries 0.86 (score 0.45), builtin.fries 0.95 (score 0.45)] ; propositions [Frites] ; attendu ["poisson", "fish"] ; OK
+RECO-MODELE 22-omelette.jpg [composite]: zones [builtin.omelette 0.93 (score 0.45), builtin.omelette 0.93 (score 0.43)] ; propositions [Omelette nature] ; attendu ["omelette"] ; OK
+RECO-MODELE 23-tacos.jpg [composite]: zones [builtin.tortilla 0.19 (score 0.40), builtin.soup 0.24 (score 0.39), cnf.2443 0.73 (score 0.38), builtin.rice 0.82 (score 0.35), builtin.rice 0.82 (score 0.34), cnf.2443 0.66 (score 0.33)] ; propositions [Riz blanc cuit, Radis, cru, Soupe aux légumes, Tortilla de blé] ; attendu ["taco", "tacos"] ; RATÉ
+RECO-MODELE 24-curry-riz.jpg [composite]: zones [builtin.rice 0.87 (score 0.46), builtin.butterchicken 0.36 (score 0.42), builtin.potato 0.39 (score 0.33), builtin.potato 0.47 (score 0.31)] ; propositions [Riz blanc cuit, Pomme de terre cuite, Poulet au beurre] ; attendu ["curry"] ; OK
+RECO-MODELE 25-ramen.jpg [composite]: zones [builtin.soup 0.66 (score 0.46), builtin.sunflowerseeds 0.12 (score 0.41), builtin.steak 0.90 (score 0.36), cnf.2214 0.14 (score 0.35), builtin.egg 1.00 (score 0.32)] ; propositions [Œuf, Steak de surlonge cuit, Soupe aux légumes] ; attendu ["ramen", "nouilles"] ; OK
+RECO-MODELE 26-tourtiere.jpg [composite]: zones [builtin.applepie 0.54 (score 0.56)] ; propositions [Tarte aux pommes] ; attendu ["tourtiere", "tourtière"] ; OK
+RECO-MODELE 27-pate-chinois.jpg [composite]: zones [builtin.lettuce 0.59 (score 0.45), builtin.lettuce 0.56 (score 0.34), builtin.lasagna 0.23 (score 0.34), builtin.lentils 0.29 (score 0.33)] ; propositions [Laitue, Lentilles cuites, Lasagne à la viande] ; attendu ["pate chinois", "pâté chinois"] ; OK
+RECO-MODELE 28-lasagne.jpg [composite]: zones [builtin.lasagna 0.96 (score 0.64)] ; propositions [Lasagne à la viande] ; attendu ["lasagne"] ; OK
+RECO-MODELE 29-steak-frites.jpg [plate]: zones [builtin.fries 0.99 (score 0.43), builtin.fries 0.99 (score 0.41), builtin.steak 0.71 (score 0.37)] ; propositions [Frites, Steak de surlonge cuit] ; attendu ["steak", "boeuf"] ; OK
+RECO-MODELE 30-saumon-asperges-riz.jpg [plate]: zones [builtin.asparagus 0.25 (score 0.54), builtin.asparagus 0.95 (score 0.42), builtin.salmon 0.25 (score 0.42), builtin.asparagus 0.75 (score 0.40), builtin.asparagus 0.85 (score 0.37), cnf.2394 0.19 (score 0.32)] ; propositions [Asperges, Saumon cuit, Ail, cru] ; attendu ["saumon"] ; OK
+RECO-MODELE 31-poulet-legumes.jpg [plate]: zones [builtin.broccoli 0.77 (score 0.56), builtin.pepper 0.68 (score 0.43)] ; propositions [Brocoli, Poivron] ; attendu ["poulet"] ; RATÉ
+RECO-MODELE 32-assiette-repas.jpg [plate]: zones [builtin.tomato 0.31 (score 0.38), builtin.steak 0.66 (score 0.31)] ; propositions [Steak de surlonge cuit, Tomate] ; attendu ["viande", "boeuf", "poulet"] ; RATÉ
+RECO-MODELE 33-porc-patate-douce.jpg [plate]: zones [builtin.pork 0.69 (score 0.41), cnf.1001 0.75 (score 0.41), cnf.2380 0.45 (score 0.31)] ; propositions [Sauce, boeuf, conserve, Filet de porc cuit, Carotte, crue] ; attendu ["porc"] ; OK
+RECO-MODELE 34-petit-dej-oeufs.jpg [breakfast]: zones [builtin.cauliflower 0.40 (score 0.42), builtin.mushrooms 0.93 (score 0.39), builtin.mushrooms 0.93 (score 0.38), builtin.cauliflower 0.45 (score 0.31), builtin.bread 0.41 (score 0.30)] ; propositions [Champignons, Chou-fleur, Pain blanc] ; attendu ["oeuf"] ; OK
+RECO-MODELE 35-petit-dej-cereales.jpg [breakfast]: zones [cnf.4458 0.55 (score 0.84)] ; propositions [Pâtes, nouilles aux oeufs, enrichies, cuites] ; attendu ["cereales", "céréales"] ; RATÉ
+RECO-MODELE 36-petit-dej-croissant.jpg [breakfast]: zones [builtin.coffee 0.85 (score 0.52), builtin.latte 0.38 (score 0.42), builtin.brownie 0.25 (score 0.38), builtin.brownie 0.35 (score 0.37), builtin.coffee 0.32 (score 0.33), builtin.coffee 0.82 (score 0.31)] ; propositions [Café noir, Café latte, Brownie] ; attendu ["croissant"] ; OK
+RECO-MODELE 37-petit-dej-yogourt.jpg [breakfast]: zones [cnf.1230 0.43 (score 0.59), builtin.granola 0.42 (score 0.50)] ; propositions [Céréale, prête-à-manger, alpen (muesli), Weetabix, Granola] ; attendu ["yogourt", "yaourt"] ; OK
+RECO-MODELE 38-gateau-chocolat.jpg [dessert]: zones [cnf.2567 0.24 (score 0.50), cnf.2567 0.23 (score 0.49)] ; propositions [Noix, noisettes, avelines ou coudres, séchées] ; attendu ["gateau", "gâteau"] ; RATÉ
+RECO-MODELE 39-creme-glacee.jpg [dessert]: zones [builtin.icecream 0.18 (score 0.42), builtin.icecream 0.32 (score 0.33)] ; propositions [Crème glacée] ; attendu ["creme glacee", "crème glacée", "glace"] ; OK
+RECO-MODELE 40-tarte-pommes.jpg [dessert]: zones [builtin.applepie 0.24 (score 0.53)] ; propositions [Tarte aux pommes] ; attendu ["tarte"] ; OK
+RECO-MODELE 41-brownie.jpg [dessert]: zones [builtin.brownie 0.40 (score 0.91)] ; propositions [Brownie] ; attendu ["brownie"] ; OK
+RECO-MODELE 42-beigne.jpg [dessert]: zones [builtin.cookie 0.34 (score 0.89)] ; propositions [Biscuit aux brisures] ; attendu ["beigne", "donut"] ; RATÉ
+RECO-MODELE 43-biscuits.jpg [dessert]: zones [builtin.cookie 0.90 (score 0.49), builtin.milkchocolate 0.85 (score 0.32)] ; propositions [Biscuit aux brisures, Chocolat au lait] ; attendu ["biscuit", "cookie"] ; OK
+RECO-MODELE 44-cheesecake.jpg [dessert]: zones [builtin.applepie 0.34 (score 0.41), builtin.applepie 0.47 (score 0.41)] ; propositions [Tarte aux pommes] ; attendu ["cheesecake", "gateau"] ; RATÉ
+RECO-MODELE-TAUX global: 34/44 (77 %) ; photos avec zones 44/44
+RECO-MODELE-TAUX breakfast: 3/4 (75 %)
+RECO-MODELE-TAUX composite: 17/20 (85 %)
+RECO-MODELE-TAUX dessert: 4/7 (57 %)
+RECO-MODELE-TAUX plate: 3/5 (60 %)
+RECO-MODELE-TAUX single: 7/8 (88 %)

@@ -1,0 +1,101 @@
+Command line invocation:
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug -destination id=8F571767-87A3-448E-AF82-29C992EC2D5E -derivedDataPath build/sim -testLanguage en -testRegion CA -resultBundlePath adkit-results/testAdScheduleImport.xcresult "-only-testing:ArdaneUITests/AdShotsUITests/testAdScheduleImport" ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    ARCHS = arm64
+    CODE_SIGNING_ALLOWED = NO
+    ONLY_ACTIVE_ARCH = YES
+
+Writing result bundle at path:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdScheduleImport.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:8F571767-87A3-448E-AF82-29C992EC2D5E, OS:26.2, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:8F571767-87A3-448E-AF82-29C992EC2D5E, OS:26.2, name:iPhone 16 Pro }
+2026-11-07 16:44:44.695813+0000 ArdaneUITests-Runner[376:244856] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-11-07 16:44:50.370.
+Test Suite 'ArdaneUITests.xctest' started at 2026-11-07 16:44:50.373.
+Test Suite 'AdShotsUITests' started at 2026-11-07 16:44:50.373.
+Test Case '-[ArdaneUITests.AdShotsUITests testAdScheduleImport]' started.
+    t =     0.02s Start Test at 2026-11-07 16:44:50.396
+    t =     0.18s Set Up
+    t =     0.19s Open com.dakrsnyk.ardane
+    t =     0.20s     Launch com.dakrsnyk.ardane
+    t =    10.13s         Setting up automation session
+    t =    12.69s         Wait for com.dakrsnyk.ardane to idle
+    t =    19.08s Waiting 12.0s for "week-timetable" Other to exist
+    t =    20.10s     Checking `Expect predicate `existsNoRetry == 1` for object "week-timetable" Other`
+    t =    20.10s         Checking existence of `"week-timetable" Other`
+    t =    21.75s Waiting 6.0s for "planning-import-schedule" Button to exist
+    t =    22.77s     Checking `Expect predicate `existsNoRetry == 1` for object "planning-import-schedule" Button`
+    t =    22.77s         Checking existence of `"planning-import-schedule" Button`
+    t =    22.88s Find the "planning-import-schedule" Button
+    t =    23.04s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.50] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    23.04s     Wait for com.dakrsnyk.ardane to idle
+    t =    23.05s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    23.14s     Check for interrupting elements affecting "Ardane" Application
+    t =    23.26s     Synthesize event
+    t =    23.27s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    23.37s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    23.46s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    23.54s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    23.65s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    24.92s     Wait for com.dakrsnyk.ardane to idle
+    t =    25.59s Find the "planning-import-schedule" Button
+    t =    25.79s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.50] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    25.79s     Wait for com.dakrsnyk.ardane to idle
+    t =    25.97s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    26.07s     Check for interrupting elements affecting "Ardane" Application
+    t =    26.15s     Synthesize event
+    t =    26.16s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    26.23s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    26.31s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    26.38s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    26.49s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    27.73s     Wait for com.dakrsnyk.ardane to idle
+    t =    27.80s Find the "planning-import-schedule" Button
+    t =    28.00s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.50] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    28.00s     Wait for com.dakrsnyk.ardane to idle
+    t =    28.79s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    29.00s     Check for interrupting elements affecting "Ardane" Application
+    t =    29.14s     Synthesize event
+    t =    29.14s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    29.25s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    29.51s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    30.02s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    30.26s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    31.64s     Wait for com.dakrsnyk.ardane to idle
+    t =    31.80s Find the "planning-import-schedule" Button
+    t =    32.07s Find the "planning-import-schedule" Button
+    t =    32.27s Tap "planning-import-schedule" Button
+    t =    32.27s     Wait for com.dakrsnyk.ardane to idle
+    t =    32.28s     Find the "planning-import-schedule" Button
+    t =    32.41s     Check for interrupting elements affecting "planning-import-schedule" Button
+    t =    32.53s     Synthesize event
+    t =    32.83s     Wait for com.dakrsnyk.ardane to idle
+    t =    33.34s Waiting 8.0s for "schedule-import-photo" Button to exist
+    t =    34.36s     Checking `Expect predicate `existsNoRetry == 1` for object "schedule-import-photo" Button`
+    t =    34.37s         Checking existence of `"schedule-import-photo" Button`
+    t =    36.14s ADSHOT app-planning-import
+ADSHOT app-planning-import
+    t =    36.47s Added attachment named 'ADSHOT app-planning-import'
+    t =    38.34s Tear Down
+    t =    38.34s     Terminate com.dakrsnyk.ardane:1098
+Test Case '-[ArdaneUITests.AdShotsUITests testAdScheduleImport]' passed (39.725 seconds).
+Test Suite 'AdShotsUITests' passed at 2026-11-07 16:45:30.111.
+	 Executed 1 test, with 0 failures (0 unexpected) in 39.725 (39.738) seconds
+Test Suite 'ArdaneUITests.xctest' passed at 2026-11-07 16:45:30.111.
+	 Executed 1 test, with 0 failures (0 unexpected) in 39.725 (39.739) seconds
+Test Suite 'Selected tests' passed at 2026-11-07 16:45:30.113.
+	 Executed 1 test, with 0 failures (0 unexpected) in 39.725 (39.742) seconds
+2026-11-07 16:45:30.836 xcodebuild[98236:240403] [MT] IDETestOperationsObserverDebug: 54.258 elapsed -- Testing started completed.
+2026-11-07 16:45:30.837 xcodebuild[98236:240403] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-07 16:45:30.837 xcodebuild[98236:240403] [MT] IDETestOperationsObserverDebug: 54.258 sec, +54.258 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdScheduleImport.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

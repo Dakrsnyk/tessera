@@ -1,0 +1,78 @@
+run: 317
+commit: aab839158aa6bf70952a3b064e780c1f6c9425c5
+static: success
+simulator: failure
+device: skipped
+tests: skipped
+ipa: not published
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped
+---- errors ----
+OK: 3238 memberwise calls checked, 98 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 5586 texts in the code, 0 not in the catalog, 0 untranslated, 0 unused in the catalog
+/Users/runner/work/tessera/tessera/Tests/ScannerGeometryTests.swift:47:13: error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+---- tests ----
+privacy manifest: app yes, widget yes
+alternate app icons in the app: 19
+---- widget extension bundle ----
+ArdaneWidgets
+de.lproj
+en.lproj
+es.lproj
+fr.lproj
+Info.plist
+it.lproj
+ja.lproj
+Metadata.appintents
+PrivacyInfo.xcprivacy
+pt-BR.lproj
+extract.actionsdata
+version.json
+ExtractAppIntentsMetadata (in target 'ArdaneWidgets' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'Ardane' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'ArdaneUITests' from project 'Ardane')
+---- last lines ----
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCUIAutomation.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestCore.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTest.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTAutomationSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/Testing.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+Touch /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /usr/bin/touch -c /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+** TEST BUILD FAILED **
+
+
+The following build commands failed:
+	SwiftCompile normal arm64 Compiling\ ProfileMatrixTests.swift,\ ProfileTests.swift,\ QuickTaskTests.swift,\ QuotidienAndLockScreenTests.swift,\ ReactivityTests.swift,\ RemovedWeatherTests.swift,\ ReviewPromptSmartTests.swift,\ ScanAccuracyTests.swift,\ ScanLearningTests.swift,\ ScanMetricsTests.swift,\ ScannerConfidenceTests.swift,\ ScannerGeometryTests.swift,\ ScannerMassTests.swift,\ ScannerVolumeTests.swift,\ ScanRecapTests.swift,\ ScheduleAmbiguityTests.swift,\ ScheduleEvaluationTests.swift,\ ScheduleGlanceTests.swift,\ ScheduleImportTests.swift,\ ScheduleParserLayoutsTests.swift,\ ScheduleParserMoreLayoutsTests.swift,\ ScheduleParserTests.swift,\ ScheduleRealOCRTests.swift /Users/runner/work/tessera/tessera/Tests/ProfileMatrixTests.swift /Users/runner/work/tessera/tessera/Tests/ProfileTests.swift /Users/runner/work/tessera/tessera/Tests/QuickTaskTests.swift /Users/runner/work/tessera/tessera/Tests/QuotidienAndLockScreenTests.swift /Users/runner/work/tessera/tessera/Tests/ReactivityTests.swift /Users/runner/work/tessera/tessera/Tests/RemovedWeatherTests.swift /Users/runner/work/tessera/tessera/Tests/ReviewPromptSmartTests.swift /Users/runner/work/tessera/tessera/Tests/ScanAccuracyTests.swift /Users/runner/work/tessera/tessera/Tests/ScanLearningTests.swift /Users/runner/work/tessera/tessera/Tests/ScanMetricsTests.swift /Users/runner/work/tessera/tessera/Tests/ScannerConfidenceTests.swift /Users/runner/work/tessera/tessera/Tests/ScannerGeometryTests.swift /Users/runner/work/tessera/tessera/Tests/ScannerMassTests.swift /Users/runner/work/tessera/tessera/Tests/ScannerVolumeTests.swift /Users/runner/work/tessera/tessera/Tests/ScanRecapTests.swift /Users/runner/work/tessera/tessera/Tests/ScheduleAmbiguityTests.swift /Users/runner/work/tessera/tessera/Tests/ScheduleEvaluationTests.swift /Users/runner/work/tessera/tessera/Tests/ScheduleGlanceTests.swift /Users/runner/work/tessera/tessera/Tests/ScheduleImportTests.swift /Users/runner/work/tessera/tessera/Tests/ScheduleParserLayoutsTests.swift /Users/runner/work/tessera/tessera/Tests/ScheduleParserMoreLayoutsTests.swift /Users/runner/work/tessera/tessera/Tests/ScheduleParserTests.swift /Users/runner/work/tessera/tessera/Tests/ScheduleRealOCRTests.swift (in target 'ArdaneTests' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Tests/ScannerGeometryTests.swift (in target 'ArdaneTests' from project 'Ardane')
+	Building project Ardane for testing with scheme Ardane
+(3 failures)

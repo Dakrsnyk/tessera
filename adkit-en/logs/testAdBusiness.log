@@ -1,0 +1,157 @@
+Command line invocation:
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug -destination id=8F571767-87A3-448E-AF82-29C992EC2D5E -derivedDataPath build/sim -testLanguage en -testRegion CA -resultBundlePath adkit-results/testAdBusiness.xcresult "-only-testing:ArdaneUITests/AdShotsUITests/testAdBusiness" ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    ARCHS = arm64
+    CODE_SIGNING_ALLOWED = NO
+    ONLY_ACTIVE_ARCH = YES
+
+Writing result bundle at path:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdBusiness.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:8F571767-87A3-448E-AF82-29C992EC2D5E, OS:26.2, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:8F571767-87A3-448E-AF82-29C992EC2D5E, OS:26.2, name:iPhone 16 Pro }
+2026-11-07 16:43:11.266507+0000 ArdaneUITests-Runner[95037:232440] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-11-07 16:43:15.188.
+Test Suite 'ArdaneUITests.xctest' started at 2026-11-07 16:43:15.189.
+Test Suite 'AdShotsUITests' started at 2026-11-07 16:43:15.189.
+Test Case '-[ArdaneUITests.AdShotsUITests testAdBusiness]' started.
+    t =     0.00s Start Test at 2026-11-07 16:43:15.190
+    t =     0.15s Set Up
+    t =     0.17s Open com.dakrsnyk.ardane
+    t =     0.18s     Launch com.dakrsnyk.ardane
+    t =    10.47s         Setting up automation session
+    t =    13.63s         Wait for com.dakrsnyk.ardane to idle
+    t =    20.13s Waiting 12.0s for "business-hero" Other to exist
+    t =    21.17s     Checking `Expect predicate `existsNoRetry == 1` for object "business-hero" Other`
+    t =    21.17s         Checking existence of `"business-hero" Other`
+    t =    23.31s ADSHOT app-business-hero
+ADSHOT app-business-hero
+    t =    23.63s Added attachment named 'ADSHOT app-business-hero'
+    t =    25.51s Waiting 6.0s for "business-choose-kpis" Button to exist
+    t =    26.55s     Checking `Expect predicate `existsNoRetry == 1` for object "business-choose-kpis" Button`
+    t =    26.55s         Checking existence of `"business-choose-kpis" Button`
+    t =    26.65s Find the "business-choose-kpis" Button
+    t =    26.79s Find the "business-choose-kpis" Button
+    t =    26.92s Tap "business-choose-kpis" Button
+    t =    26.92s     Wait for com.dakrsnyk.ardane to idle
+    t =    26.92s     Find the "business-choose-kpis" Button
+    t =    27.01s     Check for interrupting elements affecting "business-choose-kpis" Button
+    t =    27.13s     Synthesize event
+    t =    27.46s     Wait for com.dakrsnyk.ardane to idle
+    t =    28.14s Waiting 8.0s for "kpi-visitors" Button to exist
+    t =    29.18s     Checking `Expect predicate `existsNoRetry == 1` for object "kpi-visitors" Button`
+    t =    29.19s         Checking existence of `"kpi-visitors" Button`
+    t =    29.49s Tap "kpi-visitors" Button
+    t =    29.49s     Wait for com.dakrsnyk.ardane to idle
+    t =    29.50s     Find the "kpi-visitors" Button
+    t =    29.71s     Check for interrupting elements affecting "kpi-visitors" Button
+    t =    29.88s     Synthesize event
+    t =    30.19s     Wait for com.dakrsnyk.ardane to idle
+    t =    31.10s Waiting 4.0s for "OK" Button to exist
+    t =    32.15s     Checking `Expect predicate `existsNoRetry == 1` for object "OK" Button`
+    t =    32.15s         Checking existence of `"OK" Button`
+    t =    32.35s Tap "OK" Button
+    t =    32.35s     Wait for com.dakrsnyk.ardane to idle
+    t =    32.35s     Find the "OK" Button
+    t =    32.48s     Check for interrupting elements affecting "OK" Button
+    t =    32.62s     Synthesize event
+    t =    32.95s     Wait for com.dakrsnyk.ardane to idle
+    t =    35.19s ADSHOT app-business-kpis
+ADSHOT app-business-kpis
+    t =    35.35s Added attachment named 'ADSHOT app-business-kpis'
+    t =    37.40s Waiting 6.0s for "business-sales" Button to exist
+    t =    38.42s     Checking `Expect predicate `existsNoRetry == 1` for object "business-sales" Button`
+    t =    38.42s         Checking existence of `"business-sales" Button`
+    t =    38.52s Find the "business-sales" Button
+    t =    38.63s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.50] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    38.63s     Wait for com.dakrsnyk.ardane to idle
+    t =    38.63s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    38.70s     Check for interrupting elements affecting "Ardane" Application
+    t =    38.79s     Synthesize event
+    t =    38.79s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    38.87s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    38.93s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    38.98s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    39.05s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    40.28s     Wait for com.dakrsnyk.ardane to idle
+    t =    40.94s Find the "business-sales" Button
+    t =    41.07s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.50] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    41.07s     Wait for com.dakrsnyk.ardane to idle
+    t =    41.07s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    41.16s     Check for interrupting elements affecting "Ardane" Application
+    t =    41.29s     Synthesize event
+    t =    41.30s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    41.61s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    41.72s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    41.81s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    41.90s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    43.17s     Wait for com.dakrsnyk.ardane to idle
+    t =    44.22s Find the "business-sales" Button
+    t =    44.37s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.50] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    44.37s     Wait for com.dakrsnyk.ardane to idle
+    t =    44.38s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    44.46s     Check for interrupting elements affecting "Ardane" Application
+    t =    44.56s     Synthesize event
+    t =    44.57s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    44.64s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    44.72s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    44.77s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    44.86s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    46.12s     Wait for com.dakrsnyk.ardane to idle
+    t =    46.78s Find the "business-sales" Button
+    t =    46.99s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.50] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    46.99s     Wait for com.dakrsnyk.ardane to idle
+    t =    47.17s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    47.25s     Check for interrupting elements affecting "Ardane" Application
+    t =    47.32s     Synthesize event
+    t =    47.33s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    47.41s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    47.49s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    47.58s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    47.67s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    48.91s     Wait for com.dakrsnyk.ardane to idle
+    t =    48.92s Find the "business-sales" Button
+    t =    49.07s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.50] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    49.07s     Wait for com.dakrsnyk.ardane to idle
+    t =    49.07s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    49.17s     Check for interrupting elements affecting "Ardane" Application
+    t =    49.28s     Synthesize event
+    t =    49.28s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    49.36s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    49.45s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    49.53s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    49.64s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    50.92s     Wait for com.dakrsnyk.ardane to idle
+    t =    51.22s Find the "business-sales" Button
+    t =    51.37s Find the "business-sales" Button
+    t =    51.53s Tap "business-sales" Button
+    t =    51.53s     Wait for com.dakrsnyk.ardane to idle
+    t =    51.54s     Find the "business-sales" Button
+    t =    51.83s     Check for interrupting elements affecting "business-sales" Button
+    t =    51.96s     Synthesize event
+    t =    52.32s     Wait for com.dakrsnyk.ardane to idle
+    t =    54.09s ADSHOT app-business-sales
+ADSHOT app-business-sales
+    t =    54.48s Added attachment named 'ADSHOT app-business-sales'
+    t =    56.30s Tear Down
+    t =    56.30s     Terminate com.dakrsnyk.ardane:95810
+Test Case '-[ArdaneUITests.AdShotsUITests testAdBusiness]' passed (57.521 seconds).
+Test Suite 'AdShotsUITests' passed at 2026-11-07 16:44:12.721.
+	 Executed 1 test, with 0 failures (0 unexpected) in 57.521 (57.532) seconds
+Test Suite 'ArdaneUITests.xctest' passed at 2026-11-07 16:44:12.725.
+	 Executed 1 test, with 0 failures (0 unexpected) in 57.521 (57.537) seconds
+Test Suite 'Selected tests' passed at 2026-11-07 16:44:12.729.
+	 Executed 1 test, with 0 failures (0 unexpected) in 57.521 (57.540) seconds
+2026-11-07 16:44:13.673 xcodebuild[93354:228383] [MT] IDETestOperationsObserverDebug: 70.376 elapsed -- Testing started completed.
+2026-11-07 16:44:13.674 xcodebuild[93354:228383] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-07 16:44:13.674 xcodebuild[93354:228383] [MT] IDETestOperationsObserverDebug: 70.376 sec, +70.376 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdBusiness.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

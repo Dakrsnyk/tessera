@@ -1,0 +1,91 @@
+Command line invocation:
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug -destination id=8F571767-87A3-448E-AF82-29C992EC2D5E -derivedDataPath build/sim -testLanguage en -testRegion CA -resultBundlePath adkit-results/testAdNutritionAdd-dark.xcresult "-only-testing:ArdaneUITests/AdShotsUITests/testAdNutritionAdd" ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    ARCHS = arm64
+    CODE_SIGNING_ALLOWED = NO
+    ONLY_ACTIVE_ARCH = YES
+
+Writing result bundle at path:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdNutritionAdd-dark.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:8F571767-87A3-448E-AF82-29C992EC2D5E, OS:26.2, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:8F571767-87A3-448E-AF82-29C992EC2D5E, OS:26.2, name:iPhone 16 Pro }
+2026-11-07 16:48:29.429839+0000 ArdaneUITests-Runner[10211:267506] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-11-07 16:48:33.327.
+Test Suite 'ArdaneUITests.xctest' started at 2026-11-07 16:48:33.327.
+Test Suite 'AdShotsUITests' started at 2026-11-07 16:48:33.328.
+Test Case '-[ArdaneUITests.AdShotsUITests testAdNutritionAdd]' started.
+    t =     0.00s Start Test at 2026-11-07 16:48:33.329
+    t =     0.17s Set Up
+    t =     0.19s Open com.dakrsnyk.ardane
+    t =     0.19s     Launch com.dakrsnyk.ardane
+    t =     8.10s         Setting up automation session
+    t =    10.61s         Wait for com.dakrsnyk.ardane to idle
+    t =    19.03s Waiting 12.0s for "nutrition-hero" Other to exist
+    t =    20.08s     Checking `Expect predicate `existsNoRetry == 1` for object "nutrition-hero" Other`
+    t =    20.08s         Checking existence of `"nutrition-hero" Other`
+    t =    21.91s ADSHOT nut-0-dark
+ADSHOT nut-0-dark
+    t =    22.11s Added attachment named 'ADSHOT nut-0-dark'
+    t =    24.12s Waiting 6.0s for "nutrition-search" Button to exist
+    t =    25.16s     Checking `Expect predicate `existsNoRetry == 1` for object "nutrition-search" Button`
+    t =    25.16s         Checking existence of `"nutrition-search" Button`
+    t =    25.35s Find the "nutrition-search" Button
+    t =    25.60s Find the "nutrition-search" Button
+    t =    25.72s Tap "nutrition-search" Button
+    t =    25.72s     Wait for com.dakrsnyk.ardane to idle
+    t =    25.73s     Find the "nutrition-search" Button
+    t =    25.82s     Check for interrupting elements affecting "nutrition-search" Button
+    t =    25.93s     Synthesize event
+    t =    26.26s     Wait for com.dakrsnyk.ardane to idle
+    t =    28.37s ADSHOT nut-1-dark
+ADSHOT nut-1-dark
+    t =    28.65s Added attachment named 'ADSHOT nut-1-dark'
+    t =    30.58s Waiting 8.0s for "food-row" Button to exist
+    t =    31.63s     Checking `Expect predicate `existsNoRetry == 1` for object "food-row" Button`
+    t =    31.63s         Checking existence of `"food-row" Button`
+    t =    32.01s Find the "food-row" Button
+    t =    32.26s Find the "food-row" Button
+    t =    32.52s Tap "food-row" Button
+    t =    32.52s     Wait for com.dakrsnyk.ardane to idle
+    t =    32.53s     Find the "food-row" Button
+    t =    32.73s     Check for interrupting elements affecting "food-row" Button
+    t =    32.90s     Synthesize event
+    t =    33.25s     Wait for com.dakrsnyk.ardane to idle
+    t =    35.32s ADSHOT nut-2-dark
+ADSHOT nut-2-dark
+    t =    35.52s Added attachment named 'ADSHOT nut-2-dark'
+    t =    37.54s Waiting 6.0s for Button (First Match) to exist
+    t =    38.54s     Checking `Expect predicate `existsNoRetry == 1` for object Button (First Match)`
+    t =    38.55s         Checking existence of `Button (First Match)`
+    t =    38.71s Tap Button (First Match)
+    t =    38.71s     Wait for com.dakrsnyk.ardane to idle
+    t =    38.75s     Find the Button (First Match)
+    t =    38.93s     Check for interrupting elements affecting "Save" Button
+    t =    39.30s     Synthesize event
+    t =    39.63s     Wait for com.dakrsnyk.ardane to idle
+    t =    43.03s ADSHOT nut-3-dark
+ADSHOT nut-3-dark
+    t =    43.25s Added attachment named 'ADSHOT nut-3-dark'
+    t =    45.25s Tear Down
+    t =    45.25s     Terminate com.dakrsnyk.ardane:10863
+Test Case '-[ArdaneUITests.AdShotsUITests testAdNutritionAdd]' passed (46.708 seconds).
+Test Suite 'AdShotsUITests' passed at 2026-11-07 16:49:20.037.
+	 Executed 1 test, with 0 failures (0 unexpected) in 46.708 (46.710) seconds
+Test Suite 'ArdaneUITests.xctest' passed at 2026-11-07 16:49:20.038.
+	 Executed 1 test, with 0 failures (0 unexpected) in 46.708 (46.711) seconds
+Test Suite 'Selected tests' passed at 2026-11-07 16:49:20.040.
+	 Executed 1 test, with 0 failures (0 unexpected) in 46.708 (46.712) seconds
+2026-11-07 16:49:21.337 xcodebuild[8322:263255] [MT] IDETestOperationsObserverDebug: 63.574 elapsed -- Testing started completed.
+2026-11-07 16:49:21.337 xcodebuild[8322:263255] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-07 16:49:21.337 xcodebuild[8322:263255] [MT] IDETestOperationsObserverDebug: 63.574 sec, +63.574 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdNutritionAdd-dark.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

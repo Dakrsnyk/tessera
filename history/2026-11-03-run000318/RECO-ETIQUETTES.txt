@@ -1,0 +1,41 @@
+OK  pizza -> Pizza fromage [Pizza]
+OK  sandwich -> Pain blanc [Sandwich]
+OK  club_sandwich -> Pain blanc [Club sandwich]
+OK  hamburger -> Bœuf haché mi-maigre cuit [Hamburger]
+OK  hot_dog -> Pain blanc [Hot-dog]
+OK  french_fries -> Frites
+OK  spaghetti -> Pâtes cuites [Spaghetti]
+OK  pasta -> Pâtes cuites [Pâtes à la sauce]
+OK  lasagna -> Lasagne à la viande [Lasagne]
+OK  caesar_salad -> Salade César [Salade César]
+OK  salad -> Salade du jardin (sans vinaigrette) [Salade composée]
+OK  rice -> Riz blanc cuit
+OK  fried_rice -> Riz frit
+OK  sushi -> Sushis (maki) [Sushis]
+OK  poutine -> Poutine [Poutine]
+OK  bacon_and_eggs -> Œuf [Déjeuner œufs et bacon]
+OK  pancake -> Crêpe épaisse (pancake) [Crêpes]
+OK  soup -> Soupe aux légumes [Soupe]
+OK  shepherds_pie -> Pâté chinois [Pâté chinois]
+OK  fish_and_chips -> Morue cuite [Poisson-frites]
+OK  chicken -> Poitrine de poulet cuite
+OK  steak -> Steak de surlonge cuit
+OK  salmon -> Saumon cuit
+OK  egg -> Œuf
+OK  bread -> Pain blanc
+OK  banana -> Banane
+OK  apple -> Pomme
+OK  strawberry -> Fraises
+OK  coffee -> Café noir
+OK  ice_cream -> Crème glacée
+OK  pie -> Tarte aux pommes
+OK  cheese -> Cheddar
+OK  yogurt -> Yogourt aux fruits
+OK  milk -> Lait 2 %
+OK  donut -> Beigne glacé
+OK  cookie -> Biscuit aux brisures
+OK  soda -> Boisson gazeuse
+OK  beer -> Bière
+OK  taco -> Tacos au bœuf
+OK  bacon -> Bacon cuit
+40 / 40 étiquettes avec l'aliment attendu en premier (table intégrée seule)

@@ -1,0 +1,169 @@
+Application, 0x104185fc0, pid: 36905, label: 'Ardane' <App element pid: 36905>
+  Window (Main), 0x10416cf80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4469135872.4>
+    Other, 0x104192be0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4468086816.5>
+      Other, 0x104192d00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4468088896.6>
+        Other, 0x104173f20, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4469132944.7>
+          Other, 0x10416e700, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4465866400.8>
+            Other, 0x104174960, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4465269808.9>
+              Other, 0x104174a80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4469185440.10>
+                Other, 0x10416e0d0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4469244416.12>
+                  Other, 0x10416e1f0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4465486336.15>
+                    Other, 0x1041a7060, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4594078352.18>
+                      Other, 0x1041a7180, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4469727776.21>
+                        Other, 0x104174ef0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4580437712.27>
+                          NavigationBar, 0x104175010, {{0.0, 62.0}, {402.0, 54.0}}, identifier: 'Nutrition' <AX element pid: 36905, elementOrHash.elementID: 4468066864.35>
+                            Button, 0x10418c0a0, {{16.0, 62.0}, {44.0, 44.0}}, identifier: 'BackButton', label: 'Précédent' <AX element pid: 36905, elementOrHash.elementID: 105553141382528.386>
+                            StaticText, 0x10418c1c0, {{166.0, 73.7}, {70.0, 20.7}}, label: 'Nutrition' <AX element pid: 36905, elementOrHash.elementID: 4875110272.387>
+                          Other, 0x10416dc80, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4580440560.36>
+                            Other, 0x10416dda0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4580719872.47>
+                              Other, 0x10417f2b0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4857249120.388>
+                                Other, 0x10417f3d0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4580154848.389>
+                                  ScrollView, 0x10417f4f0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4492554240.390>
+                                    Other, 0x10417f610, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4594787952.391>
+                                      Other, 0x10417f730, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 36905, elementOrHash.elementID: 4857329088.395>
+                                      Other, 0x10417f850, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 36905, elementOrHash.elementID: 4857372672.396>
+                                    Other, 0x10417f970, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4594787536.392>
+                                      Other, 0x10417fa90, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 36905, elementOrHash.elementID: 4857372112.397>
+                                        Image, 0x10417fbb0, {{-120.0, 731.0}, {642.0, 286.0}}, identifier: 'AdditionalDimmingOverlay' <AX element pid: 36905, elementOrHash.elementID: 4857171440.420>
+                                        Other, 0x10417fcd0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 36905, elementOrHash.elementID: 4857213184.421>
+                                          Other, 0x10417fdf0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 36905, elementOrHash.elementID: 4857213840.487>
+                                        Other, 0x10417ff10, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 36905, elementOrHash.elementID: 4857712416.422>
+                                          Other, 0x10417e5c0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 36905, elementOrHash.elementID: 4857713056.488>
+                                          Other, 0x10417e6e0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 36905, elementOrHash.elementID: 4857733344.489>
+                                    Other, 0x10417e800, {{0.0, 116.0}, {402.0, 1322.3}} <AX element pid: 36905, elementOrHash.elementID: 4874848832.393>
+                                      Other, 0x10417e920, {{20.0, 120.0}, {362.0, 106.3}}, identifier: 'week-card' <AX element pid: 36905, elementOrHash.elementID: 4464879120.398>
+                                        Button, 0x10417ea40, {{20.0, 120.0}, {40.0, 36.0}}, identifier: 'chevron.left', label: 'Semaine précédente' <AX element pid: 36905, elementOrHash.elementID: 4465856576.423>
+                                        StaticText, 0x10417eb60, {{62.0, 129.0}, {103.0, 18.0}}, label: 'Cette semaine' <AX element pid: 36905, elementOrHash.elementID: 4579750976.424>
+                                        Button, 0x10417ec80, {{167.0, 120.0}, {40.0, 36.0}}, identifier: 'week-next', label: 'Semaine suivante', Disabled <AX element pid: 36905, elementOrHash.elementID: 4465816000.425>
+                                        Button, 0x104295350, {{20.0, 156.0}, {49.0, 70.3}}, identifier: 'week-day-2026-11-02', label: 'Lundi 2 novembre' <AX element pid: 36905, elementOrHash.elementID: 4465340032.426>
+                                          StaticText, 0x10429c280, {{40.8, 164.0}, {7.3, 14.3}}, label: 'L' <AX element pid: 36905, elementOrHash.elementID: 4579962400.490>
+                                          StaticText, 0x1042a34d0, {{38.0, 183.3}, {13.0, 24.0}}, label: '2' <AX element pid: 36905, elementOrHash.elementID: 4579644848.491>
+                                        Button, 0x1042bd330, {{72.0, 156.0}, {49.3, 70.3}}, identifier: 'week-day-2026-11-03', label: 'Mardi 3 novembre' <AX element pid: 36905, elementOrHash.elementID: 4580136000.427>
+                                          StaticText, 0x104296700, {{91.2, 164.0}, {11.0, 14.3}}, label: 'M' <AX element pid: 36905, elementOrHash.elementID: 4464881792.492>
+                                          StaticText, 0x1042b4930, {{90.2, 183.3}, {13.0, 24.0}}, label: '3' <AX element pid: 36905, elementOrHash.elementID: 4465518416.493>
+                                        Button, 0x104275be0, {{124.3, 156.0}, {49.0, 70.3}}, identifier: 'week-day-2026-11-04', label: 'Mercredi 4 novembre' <AX element pid: 36905, elementOrHash.elementID: 4579690976.428>
+                                          StaticText, 0x1042b26d0, {{143.3, 164.0}, {11.0, 14.3}}, label: 'M' <AX element pid: 36905, elementOrHash.elementID: 4579655728.494>
+                                          StaticText, 0x1042bb7b0, {{142.3, 183.3}, {13.0, 24.0}}, label: '4' <AX element pid: 36905, elementOrHash.elementID: 4579449936.495>
+                                        Button, 0x1042b6b90, {{176.3, 156.0}, {49.3, 70.3}}, identifier: 'week-day-2026-11-05', label: 'Jeudi 5 novembre', Selected <AX element pid: 36905, elementOrHash.elementID: 4580018256.429>
+                                          StaticText, 0x10428de50, {{197.3, 164.0}, {7.3, 14.3}}, label: 'J' <AX element pid: 36905, elementOrHash.elementID: 4579512128.496>
+                                          StaticText, 0x1042a9440, {{194.5, 183.3}, {13.0, 24.0}}, label: '5' <AX element pid: 36905, elementOrHash.elementID: 4579754640.497>
+                                        Button, 0x1042b53b0, {{228.7, 156.0}, {49.0, 70.3}}, identifier: 'week-day-2026-11-06', label: 'Vendredi 6 novembre', Disabled <AX element pid: 36905, elementOrHash.elementID: 4579932784.430>
+                                          StaticText, 0x1042b8ae0, {{248.8, 164.0}, {8.7, 14.3}}, label: 'V', Disabled <AX element pid: 36905, elementOrHash.elementID: 4465565264.498>
+                                          StaticText, 0x1042bc550, {{246.7, 183.3}, {13.0, 24.0}}, label: '6', Disabled <AX element pid: 36905, elementOrHash.elementID: 4580026032.499>
+                                        Button, 0x1042b5de0, {{280.7, 156.0}, {49.3, 70.3}}, identifier: 'week-day-2026-11-07', label: 'Samedi 7 novembre', Disabled <AX element pid: 36905, elementOrHash.elementID: 4579946016.431>
+                                          StaticText, 0x1042bbb20, {{301.2, 164.0}, {8.3, 14.3}}, label: 'S', Disabled <AX element pid: 36905, elementOrHash.elementID: 4465872736.500>
+                                          StaticText, 0x1042a1a30, {{298.8, 183.3}, {13.0, 24.0}}, label: '7', Disabled <AX element pid: 36905, elementOrHash.elementID: 4579884752.501>
+                                        Button, 0x104273cb0, {{333.0, 156.0}, {49.0, 70.3}}, identifier: 'week-day-2026-11-08', label: 'Dimanche 8 novembre', Disabled <AX element pid: 36905, elementOrHash.elementID: 4465662176.432>
+                                          StaticText, 0x104275510, {{353.0, 164.0}, {9.0, 14.3}}, label: 'D', Disabled <AX element pid: 36905, elementOrHash.elementID: 4580007088.502>
+                                          StaticText, 0x1042b0040, {{351.0, 183.3}, {13.0, 24.0}}, label: '8', Disabled <AX element pid: 36905, elementOrHash.elementID: 4580007520.503>
+                                      Other, 0x10429dde0, {{20.0, 238.3}, {362.0, 112.0}}, identifier: 'nutrition-hero' <AX element pid: 36905, elementOrHash.elementID: 4465616304.399>
+                                        StaticText, 0x104289070, {{39.0, 272.7}, {74.0, 31.3}}, label: '1 676' <AX element pid: 36905, elementOrHash.elementID: 4579720336.433>
+                                        StaticText, 0x1042b5730, {{42.2, 304.0}, {67.7, 12.0}}, label: 'kcal restantes' <AX element pid: 36905, elementOrHash.elementID: 4579664384.434>
+                                        StaticText, 0x1042991d0, {{152.0, 247.3}, {53.7, 14.3}}, label: 'Protéines' <AX element pid: 36905, elementOrHash.elementID: 4579882336.435>
+                                        StaticText, 0x1042a8350, {{337.0, 250.7}, {45.0, 10.3}}, label: '99 / 156 g' <AX element pid: 36905, elementOrHash.elementID: 4579759648.436>
+                                        StaticText, 0x1042ac4e0, {{152.0, 282.7}, {49.3, 14.3}}, label: 'Glucides' <AX element pid: 36905, elementOrHash.elementID: 4579760080.437>
+                                        StaticText, 0x104271a70, {{331.3, 286.0}, {50.7, 10.3}}, label: '110 / 317 g' <AX element pid: 36905, elementOrHash.elementID: 4579764640.438>
+                                        StaticText, 0x104281bf0, {{152.0, 318.0}, {40.7, 14.3}}, label: 'Lipides' <AX element pid: 36905, elementOrHash.elementID: 4579765072.439>
+                                        StaticText, 0x1042702a0, {{343.0, 321.3}, {39.0, 10.3}}, label: '13 / 82 g' <AX element pid: 36905, elementOrHash.elementID: 4465615872.440>
+                                      Button, 0x1042b3ed0, {{20.0, 398.3}, {362.0, 50.0}}, identifier: 'nutrition-search', label: 'Ajouter un aliment' <AX element pid: 36905, elementOrHash.elementID: 4579456656.400>
+                                        Image, 0x1042b45d0, {{117.3, 416.3}, {14.3, 14.3}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 36905, elementOrHash.elementID: 4465851648.441>
+                                        StaticText, 0x10429ffe0, {{117.3, 413.2}, {169.3, 20.3}}, label: 'Ajouter un aliment' <AX element pid: 36905, elementOrHash.elementID: 4579456224.442>
+                                      StaticText, 0x104277b60, {{32.0, 470.3}, {58.3, 24.0}}, label: 'Repas' <AX element pid: 36905, elementOrHash.elementID: 4579753712.401>
+                                      Button, 0x1042a6620, {{34.0, 508.3}, {294.0, 52.7}}, identifier: 'meal-breakfast', label: 'Déjeuner, 3 aliments, 335 kcal' <AX element pid: 36905, elementOrHash.elementID: 4580051264.402>
+                                        Image, 0x10428e1a0, {{41.7, 525.7}, {21.0, 18.0}}, identifier: 'sunrise', label: 'Lever Du Soleil' <AX element pid: 36905, elementOrHash.elementID: 4580045744.443>
+                                        StaticText, 0x1042aa920, {{82.0, 516.3}, {72.0, 20.3}}, label: 'Déjeuner' <AX element pid: 36905, elementOrHash.elementID: 4580046176.444>
+                                        StaticText, 0x1042bc200, {{82.0, 538.7}, {58.7, 14.3}}, label: '3 aliments' <AX element pid: 36905, elementOrHash.elementID: 4580046608.445>
+                                        StaticText, 0x1042bc8e0, {{244.7, 525.7}, {61.7, 18.0}}, label: '335 kcal' <AX element pid: 36905, elementOrHash.elementID: 4580047040.446>
+                                        Image, 0x1042aba90, {{320.7, 529.3}, {6.7, 11.0}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 36905, elementOrHash.elementID: 4580047472.447>
+                                      Button, 0x10427a430, {{339.7, 526.3}, {17.0, 17.0}}, identifier: 'plus.circle.fill', label: 'Ajouter au déjeuner' <AX element pid: 36905, elementOrHash.elementID: 4580043488.403>
+                                      Button, 0x1042b9f90, {{34.0, 561.3}, {294.0, 52.7}}, identifier: 'meal-lunch', label: 'Dîner, 3 aliments, 516 kcal' <AX element pid: 36905, elementOrHash.elementID: 4580034304.404>
+                                        Image, 0x1042874c0, {{43.7, 579.3}, {16.7, 16.7}}, identifier: 'sun.max', label: 'Ensoleillé' <AX element pid: 36905, elementOrHash.elementID: 4580040016.448>
+                                        StaticText, 0x104273940, {{82.0, 569.3}, {42.7, 20.3}}, label: 'Dîner' <AX element pid: 36905, elementOrHash.elementID: 4580040448.449>
+                                        StaticText, 0x1042b37e0, {{82.0, 591.7}, {58.7, 14.3}}, label: '3 aliments' <AX element pid: 36905, elementOrHash.elementID: 4580040880.450>
+                                        StaticText, 0x1042713a0, {{244.7, 578.7}, {61.7, 18.0}}, label: '516 kcal' <AX element pid: 36905, elementOrHash.elementID: 4580041312.451>
+                                        Image, 0x1042a24d0, {{320.7, 582.3}, {6.7, 11.0}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 36905, elementOrHash.elementID: 4580030512.452>
+                                      Button, 0x10426d9a0, {{339.7, 579.3}, {17.0, 17.0}}, identifier: 'plus.circle.fill', label: 'Ajouter au dîner' <AX element pid: 36905, elementOrHash.elementID: 4580059024.405>
+                                      Button, 0x10427ca30, {{34.0, 614.3}, {294.0, 52.7}}, identifier: 'meal-dinner', label: 'Souper, Rien noté' <AX element pid: 36905, elementOrHash.elementID: 4579718864.406>
+                                        Image, 0x10426fbb0, {{45.3, 632.7}, {15.3, 16.3}}, identifier: 'moon.stars', label: 'Nuit Claire' <AX element pid: 36905, elementOrHash.elementID: 4579967568.453>
+                                        StaticText, 0x1042b2a40, {{82.0, 622.3}, {57.3, 20.3}}, label: 'Souper' <AX element pid: 36905, elementOrHash.elementID: 4579966432.454>
+                                        StaticText, 0x1042b91f0, {{82.0, 644.7}, {53.3, 14.3}}, label: 'Rien noté' <AX element pid: 36905, elementOrHash.elementID: 4579717328.455>
+                                        Image, 0x1042b30f0, {{320.7, 635.3}, {6.7, 11.0}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 36905, elementOrHash.elementID: 4579717760.456>
+                                      Button, 0x1042a70e0, {{339.7, 632.3}, {17.0, 17.0}}, identifier: 'plus.circle.fill', label: 'Ajouter au souper' <AX element pid: 36905, elementOrHash.elementID: 4580021584.407>
+                                      Button, 0x104287f00, {{34.0, 667.3}, {294.0, 52.7}}, identifier: 'meal-snack', label: 'Collation, 1 aliment, 103 kcal' <AX element pid: 36905, elementOrHash.elementID: 4579930752.408>
+                                        Image, 0x10427f6c0, {{43.3, 684.7}, {18.3, 18.3}}, identifier: 'carrot', label: 'carrot' <AX element pid: 36905, elementOrHash.elementID: 4580022016.457>
+                                        StaticText, 0x1042ae3e0, {{82.0, 675.3}, {70.3, 20.3}}, label: 'Collation' <AX element pid: 36905, elementOrHash.elementID: 4580067696.458>
+                                        StaticText, 0x1042b3480, {{82.0, 697.7}, {50.3, 14.3}}, label: '1 aliment' <AX element pid: 36905, elementOrHash.elementID: 4580068128.459>
+                                        StaticText, 0x10429ad70, {{244.7, 684.7}, {61.7, 18.0}}, label: '103 kcal' <AX element pid: 36905, elementOrHash.elementID: 4580068560.460>
+                                        Image, 0x10428fdf0, {{320.7, 688.3}, {6.7, 11.0}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 36905, elementOrHash.elementID: 4580068992.461>
+                                      Button, 0x10426f1a0, {{339.7, 685.3}, {17.0, 17.0}}, identifier: 'plus.circle.fill', label: 'Ajouter au collation' <AX element pid: 36905, elementOrHash.elementID: 4579931648.409>
+                                      Button, 0x1042bbe70, {{34.0, 750.0}, {333.3, 56.7}}, identifier: 'nutrition-nutrients', label: 'Tous les nutriments, Fibres 6 g · sucres 40 g · sodium 381 mg' <AX element pid: 36905, elementOrHash.elementID: 4579954144.410>
+                                        Image, 0x1042958f0, {{44.0, 771.3}, {16.3, 14.0}}, identifier: 'leaf.fill', label: 'Feuille' <AX element pid: 36905, elementOrHash.elementID: 4579934400.462>
+                                        StaticText, 0x10423c990, {{82.0, 760.0}, {152.7, 20.3}}, label: 'Tous les nutriments' <AX element pid: 36905, elementOrHash.elementID: 4579934832.463>
+                                        StaticText, 0x1042a1430, {{82.0, 782.3}, {230.7, 14.3}}, label: 'Fibres 6 g · sucres 40 g · sodium 381 mg' <AX element pid: 36905, elementOrHash.elementID: 4579950592.464>
+                                        Image, 0x1042ce9f0, {{360.7, 773.0}, {6.7, 11.0}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 36905, elementOrHash.elementID: 4579951024.465>
+                                      Button, 0x1042d0490, {{20.0, 832.7}, {362.0, 98.3}}, identifier: 'nutrition-insight', label: 'Des idées pour la suite de ta journée, Voir des idées' <AX element pid: 36905, elementOrHash.elementID: 4579942432.411>
+                                        Image, 0x1042ea530, {{44.3, 850.0}, {13.3, 23.0}}, identifier: 'lightbulb.fill', label: 'Ampoule' <AX element pid: 36905, elementOrHash.elementID: 4579956656.466>
+                                        StaticText, 0x1042ea650, {{78.0, 848.7}, {207.7, 42.3}}, label: 'Des idées pour la suite de ta journée' <AX element pid: 36905, elementOrHash.elementID: 4579957088.467>
+                                        StaticText, 0x1042c2d50, {{78.0, 897.0}, {100.3, 18.0}}, label: 'Voir des idées' <AX element pid: 36905, elementOrHash.elementID: 4579957520.468>
+                                      StaticText, 0x1042c2e70, {{32.0, 953.0}, {210.0, 24.0}}, label: 'Calories de la semaine' <AX element pid: 36905, elementOrHash.elementID: 4579944000.412>
+                                      Other, 0x1042b0e00, {{36.0, 990.0}, {330.0, 71.6}}, label: 'Calories de la semaine' <AX element pid: 36905, elementOrHash.elementID: 4579738016.413>
+                                        StaticText, 0x1042b0f20, {{53.0, 1048.3}, {6.3, 13.3}}, label: 'L' <AX element pid: 36905, elementOrHash.elementID: 4579692976.469>
+                                        StaticText, 0x1042cffe0, {{99.4, 1048.3}, {10.0, 13.3}}, label: 'M' <AX element pid: 36905, elementOrHash.elementID: 4579693408.470>
+                                        StaticText, 0x1042d0100, {{147.7, 1048.3}, {10.0, 13.3}}, label: 'M' <AX element pid: 36905, elementOrHash.elementID: 4579693840.471>
+                                        StaticText, 0x1042d6c40, {{198.0, 1048.3}, {6.0, 13.3}}, label: 'J' <AX element pid: 36905, elementOrHash.elementID: 4579578672.472>
+                                        StaticText, 0x1042d6d60, {{245.5, 1048.3}, {7.7, 13.3}}, label: 'V' <AX element pid: 36905, elementOrHash.elementID: 4579579104.473>
+                                        StaticText, 0x1042d1a30, {{293.9, 1048.3}, {7.3, 13.3}}, label: 'S' <AX element pid: 36905, elementOrHash.elementID: 4579579536.474>
+                                        StaticText, 0x1042d1b50, {{341.7, 1048.3}, {8.3, 13.3}}, label: 'D' <AX element pid: 36905, elementOrHash.elementID: 4579737584.475>
+                                      StaticText, 0x1042d1c70, {{36.0, 1085.0}, {324.7, 18.0}}, label: 'Moyenne 1 612 kcal · 0 jour sur 4 dans l'objectif' <AX element pid: 36905, elementOrHash.elementID: 4579739984.414>
+                                      Button, 0x1042d1d90, {{34.0, 1145.0}, {334.0, 56.7}}, identifier: 'nutrition-history', label: 'Historique, Moyennes, tendances et poids' <AX element pid: 36905, elementOrHash.elementID: 4579867360.415>
+                                        Image, 0x1042d1eb0, {{43.3, 1166.3}, {17.3, 14.0}}, identifier: 'chart.bar.xaxis', label: 'chart.bar.xaxis' <AX element pid: 36905, elementOrHash.elementID: 4579740416.476>
+                                        StaticText, 0x1042d1fd0, {{82.0, 1155.0}, {80.7, 20.3}}, label: 'Historique' <AX element pid: 36905, elementOrHash.elementID: 4579740848.477>
+                                        StaticText, 0x1042d20f0, {{82.0, 1177.3}, {172.7, 14.3}}, label: 'Moyennes, tendances et poids' <AX element pid: 36905, elementOrHash.elementID: 4579741280.478>
+                                        Image, 0x1042d2210, {{360.7, 1168.0}, {6.7, 11.0}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 36905, elementOrHash.elementID: 4579741712.479>
+                                      Button, 0x1042cf9a0, {{34.0, 1202.0}, {334.0, 56.7}}, identifier: 'nutrition-saved', label: 'Mes repas, Des repas enregistrés, à reprendre d'une touche, 1' <AX element pid: 36905, elementOrHash.elementID: 4580055040.416>
+                                        Image, 0x1042cfac0, {{46.7, 1222.3}, {10.7, 16.3}}, identifier: 'bookmark.fill', label: 'Signet' <AX element pid: 36905, elementOrHash.elementID: 4580019184.480>
+                                        StaticText, 0x1042cfbe0, {{82.0, 1212.0}, {81.0, 20.3}}, label: 'Mes repas' <AX element pid: 36905, elementOrHash.elementID: 4580019616.481>
+                                        StaticText, 0x1042d3b00, {{82.0, 1234.3}, {220.0, 14.3}}, label: 'Des repas enregistrés, à reprendre d'une touche' <AX element pid: 36905, elementOrHash.elementID: 4580053072.482>
+                                        StaticText, 0x1042d3c20, {{336.7, 1221.3}, {9.7, 18.0}}, label: '1' <AX element pid: 36905, elementOrHash.elementID: 4580053504.483>
+                                        Image, 0x1042d3d40, {{360.7, 1225.0}, {6.7, 11.0}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 36905, elementOrHash.elementID: 4580053936.484>
+                                      StaticText, 0x1042d3e60, {{20.0, 1284.7}, {302.0, 33.7}}, label: 'Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL).' <AX element pid: 36905, elementOrHash.elementID: 4580150480.417>
+                                      Button, 0x1042d3f80, {{20.0, 1340.3}, {362.0, 58.0}}, identifier: 'miniapp-settings-edit', label: 'Mes paramètres' <AX element pid: 36905, elementOrHash.elementID: 4580152448.418>
+                                        Image, 0x1042d26b0, {{130.7, 1361.3}, {16.3, 16.3}}, identifier: 'gearshape', label: 'gearshape' <AX element pid: 36905, elementOrHash.elementID: 4580150912.485>
+                                        StaticText, 0x1042d27d0, {{20.0, 1340.3}, {362.0, 58.0}}, label: 'Mes paramètres' <AX element pid: 36905, elementOrHash.elementID: 4580152016.486>
+                                    Other, 0x1042d28f0, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Barre de défilement verticale, 2 pages', value: 0 % <AX element pid: 36905, elementOrHash.elementID: 4579894848.394>
+                                      Other, 0x1042d2a10, {{396.0, 119.0}, {3.0, 384.3}} <AX element pid: 36905, elementOrHash.elementID: 4580012432.419>
+                                    Other, 0x1042d2b30, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Barre de défilement verticale, 2 pages', value: 0 % <AX element pid: 36905, elementOrHash.elementID: 4579894848.394>
+                                      Other, 0x1042d2c50, {{396.0, 119.0}, {3.0, 384.3}} <AX element pid: 36905, elementOrHash.elementID: 4580012432.419>
+                          Other, 0x1042d2d70, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4580446320.37>
+                            Other, 0x1042d2e90, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4580449104.48>
+              Other, 0x1042d2fb0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4465330944.11>
+                Other, 0x1042d30d0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 36905, elementOrHash.elementID: 4469179728.13>
+                  TabBar, 0x1042d31f0, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Barre d’onglets' <AX element pid: 36905, elementOrHash.elementID: 4465469536.16>
+                    Other, 0x1042d3310, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 36905, elementOrHash.elementID: 4468079568.19>
+                      Other, 0x1042d3430, {{21.0, 791.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4469275792.22>
+                      Other, 0x1042d3550, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 36905, elementOrHash.elementID: 4468079984.23>
+                        Button, 0x1042d3670, {{25.0, 795.0}, {102.3, 54.0}}, identifier: 'square.grid.2x2', label: 'Accueil', Selected <AX element pid: 36905, elementOrHash.elementID: 4488793088.28>
+                          Image, 0x1042cee10, {{63.0, 802.3}, {27.0, 25.0}}, identifier: 'square.grid.2x2.fill', label: 'grille 2x2' <AX element pid: 36905, elementOrHash.elementID: 4469203136.38>
+                        Button, 0x1042cef30, {{108.2, 795.0}, {102.3, 54.0}}, identifier: 'plus.square.on.square', label: 'Créer' <AX element pid: 36905, elementOrHash.elementID: 4480172544.29>
+                          Image, 0x1042cf050, {{144.2, 800.7}, {30.3, 29.7}}, identifier: 'plus.square.fill.on.square.fill', label: 'dupliquer' <AX element pid: 36905, elementOrHash.elementID: 4468208784.39>
+                        Button, 0x1042ea930, {{191.4, 795.0}, {102.3, 54.0}}, identifier: 'bag', label: 'Store' <AX element pid: 36905, elementOrHash.elementID: 4488797696.30>
+                          Image, 0x1042eaa50, {{229.4, 801.3}, {26.3, 27.0}}, identifier: 'bag.fill', label: 'cabas' <AX element pid: 36905, elementOrHash.elementID: 4469209344.40>
+                        Button, 0x1042eab70, {{274.7, 795.0}, {102.3, 54.0}}, identifier: 'rectangle.stack', label: 'Mes widgets' <AX element pid: 36905, elementOrHash.elementID: 4488831488.31>
+                          Image, 0x1042eac90, {{310.7, 800.0}, {30.0, 31.3}}, identifier: 'rectangle.stack.fill', label: 'Album' <AX element pid: 36905, elementOrHash.elementID: 4469237696.41>
+                      Other, 0x1042eadb0, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4468149808.24>
+                        Other, 0x1042eaed0, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4465480208.32>
+                          Other, 0x1042eaff0, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4469179312.42>
+                          Other, 0x1042eb110, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4465480752.43>
+                            Other, 0x1042eb230, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4465483552.49>
+                              Other, 0x1042eb350, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4465484480.54>
+                                Other, 0x1042eb470, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4465485920.59>
+                              Other, 0x1042eb590, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4465481216.55>
+                            Other, 0x1042eb6b0, {{25.0, 795.0}, {102.3, 54.0}} <AX element pid: 36905, elementOrHash.elementID: 4465483136.50>
+                Other, 0x1042eb7d0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4465145728.14>
+                  Other, 0x1042eb8f0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4465796432.17>
+                    Other, 0x1042eba10, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4579277152.20>
+                      Other, 0x1042ebb30, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4579281568.25>
+                        Other, 0x1042ebc50, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4465883648.33>
+                          Other, 0x1042ebd70, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4579304416.44>
+                      Other, 0x1042ebe90, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4465884128.26>
+                        Other, 0x1042ebfb0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 36905, elementOrHash.elementID: 4465560544.34>

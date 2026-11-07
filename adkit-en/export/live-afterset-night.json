@@ -1,0 +1,62 @@
+{
+  "background" : "night",
+  "fps" : 1,
+  "frames" : [
+    {
+      "file" : "live-afterset-night-000.png",
+      "index" : 0,
+      "rest" : 120
+    },
+    {
+      "file" : "live-afterset-night-001.png",
+      "index" : 1,
+      "rest" : 119
+    },
+    {
+      "file" : "live-afterset-night-002.png",
+      "index" : 2,
+      "rest" : 118
+    },
+    {
+      "file" : "live-afterset-night-003.png",
+      "index" : 3,
+      "rest" : 117
+    },
+    {
+      "file" : "live-afterset-night-004.png",
+      "index" : 4,
+      "rest" : 116
+    },
+    {
+      "file" : "live-afterset-night-005.png",
+      "index" : 5,
+      "rest" : 115
+    },
+    {
+      "file" : "live-afterset-night-006.png",
+      "index" : 6,
+      "rest" : 114
+    },
+    {
+      "file" : "live-afterset-night-007.png",
+      "index" : 7,
+      "rest" : 113
+    },
+    {
+      "file" : "live-afterset-night-008.png",
+      "index" : 8,
+      "rest" : 112
+    },
+    {
+      "file" : "live-afterset-night-009.png",
+      "index" : 9,
+      "rest" : 111
+    },
+    {
+      "file" : "live-afterset-night-010.png",
+      "index" : 10,
+      "rest" : 110
+    }
+  ],
+  "state" : "rest"
+}

@@ -1,0 +1,87 @@
+{
+  "background" : "real",
+  "fps" : 1,
+  "frames" : [
+    {
+      "file" : "live-rest-real-000.png",
+      "index" : 0,
+      "rest" : 60
+    },
+    {
+      "file" : "live-rest-real-001.png",
+      "index" : 1,
+      "rest" : 59
+    },
+    {
+      "file" : "live-rest-real-002.png",
+      "index" : 2,
+      "rest" : 58
+    },
+    {
+      "file" : "live-rest-real-003.png",
+      "index" : 3,
+      "rest" : 57
+    },
+    {
+      "file" : "live-rest-real-004.png",
+      "index" : 4,
+      "rest" : 56
+    },
+    {
+      "file" : "live-rest-real-005.png",
+      "index" : 5,
+      "rest" : 55
+    },
+    {
+      "file" : "live-rest-real-006.png",
+      "index" : 6,
+      "rest" : 54
+    },
+    {
+      "file" : "live-rest-real-007.png",
+      "index" : 7,
+      "rest" : 53
+    },
+    {
+      "file" : "live-rest-real-008.png",
+      "index" : 8,
+      "rest" : 52
+    },
+    {
+      "file" : "live-rest-real-009.png",
+      "index" : 9,
+      "rest" : 51
+    },
+    {
+      "file" : "live-rest-real-010.png",
+      "index" : 10,
+      "rest" : 50
+    },
+    {
+      "file" : "live-rest-real-011.png",
+      "index" : 11,
+      "rest" : 49
+    },
+    {
+      "file" : "live-rest-real-012.png",
+      "index" : 12,
+      "rest" : 48
+    },
+    {
+      "file" : "live-rest-real-013.png",
+      "index" : 13,
+      "rest" : 47
+    },
+    {
+      "file" : "live-rest-real-014.png",
+      "index" : 14,
+      "rest" : 46
+    },
+    {
+      "file" : "live-rest-real-015.png",
+      "index" : 15,
+      "rest" : 45
+    }
+  ],
+  "state" : "rest"
+}

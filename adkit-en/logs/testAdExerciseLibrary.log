@@ -1,0 +1,136 @@
+Command line invocation:
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug -destination id=8F571767-87A3-448E-AF82-29C992EC2D5E -derivedDataPath build/sim -testLanguage en -testRegion CA -resultBundlePath adkit-results/testAdExerciseLibrary.xcresult "-only-testing:ArdaneUITests/AdShotsUITests/testAdExerciseLibrary" ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO
+
+Build settings from command line:
+    ARCHS = arm64
+    CODE_SIGNING_ALLOWED = NO
+    ONLY_ACTIVE_ARCH = YES
+
+Writing result bundle at path:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdExerciseLibrary.xcresult
+
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:8F571767-87A3-448E-AF82-29C992EC2D5E, OS:26.2, name:iPhone 16 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:8F571767-87A3-448E-AF82-29C992EC2D5E, OS:26.2, name:iPhone 16 Pro }
+2026-11-07 16:40:56.356984+0000 ArdaneUITests-Runner[88462:216510] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-11-07 16:41:01.071.
+Test Suite 'ArdaneUITests.xctest' started at 2026-11-07 16:41:01.072.
+Test Suite 'AdShotsUITests' started at 2026-11-07 16:41:01.072.
+Test Case '-[ArdaneUITests.AdShotsUITests testAdExerciseLibrary]' started.
+    t =     0.00s Start Test at 2026-11-07 16:41:01.073
+    t =     0.10s Set Up
+    t =     0.14s Open com.dakrsnyk.ardane
+    t =     0.14s     Launch com.dakrsnyk.ardane
+    t =     9.58s         Setting up automation session
+    t =    12.52s         Wait for com.dakrsnyk.ardane to idle
+    t =    22.07s Waiting 12.0s for SearchField (First Match) to exist
+    t =    23.10s     Checking `Expect predicate `existsNoRetry == 1` for object SearchField (First Match)`
+    t =    23.10s         Checking existence of `SearchField (First Match)`
+    t =    25.10s ADSHOT lib-0
+ADSHOT lib-0
+    t =    25.28s Added attachment named 'ADSHOT lib-0'
+    t =    27.31s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.40] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    27.31s     Wait for com.dakrsnyk.ardane to idle
+    t =    27.31s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    27.69s     Check for interrupting elements affecting "Ardane" Application
+    t =    27.96s     Synthesize event
+    t =    27.97s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    28.08s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    28.17s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    28.32s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    28.48s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    30.39s     Wait for com.dakrsnyk.ardane to idle
+    t =    31.78s ADSHOT lib-1
+ADSHOT lib-1
+    t =    31.96s Added attachment named 'ADSHOT lib-1'
+    t =    33.99s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.40] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    33.99s     Wait for com.dakrsnyk.ardane to idle
+    t =    33.99s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    34.21s     Check for interrupting elements affecting "Ardane" Application
+    t =    34.41s     Synthesize event
+    t =    34.42s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    34.55s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    34.67s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    34.85s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    34.97s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    36.66s     Wait for com.dakrsnyk.ardane to idle
+    t =    37.68s ADSHOT lib-2
+ADSHOT lib-2
+    t =    37.95s Added attachment named 'ADSHOT lib-2'
+    t =    39.89s Press Target Application 'com.dakrsnyk.ardane'[0.50, 0.70] for 0.1 seconds, then drag to Target Application 'com.dakrsnyk.ardane'[0.50, 0.40] with velocity of 250.00 pixels per second, and then hold for 0.1 seconds 
+    t =    39.89s     Wait for com.dakrsnyk.ardane to idle
+    t =    39.90s     Find the Target Application 'com.dakrsnyk.ardane'
+    t =    40.10s     Check for interrupting elements affecting "Ardane" Application
+    t =    40.32s     Synthesize event
+    t =    40.33s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    40.42s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    40.53s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    40.63s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    40.76s         Find the Target Application 'com.dakrsnyk.ardane'
+    t =    42.39s     Wait for com.dakrsnyk.ardane to idle
+    t =    44.35s ADSHOT lib-3
+ADSHOT lib-3
+    t =    44.66s Added attachment named 'ADSHOT lib-3'
+    t =    46.56s Terminate com.dakrsnyk.ardane:89491
+    t =    50.64s Open com.dakrsnyk.ardane
+    t =    50.64s     Launch com.dakrsnyk.ardane
+    t =    52.25s         Setting up automation session
+    t =    54.69s         Wait for com.dakrsnyk.ardane to idle
+    t =    59.16s Waiting 12.0s for "exercise-demo-canvas" Any to exist
+    t =    60.23s     Checking `Expect predicate `existsNoRetry == 1` for object "exercise-demo-canvas" Any`
+    t =    60.23s         Checking existence of `"exercise-demo-canvas" Any`
+    t =    67.86s Waiting 3.0s for "exercise-demo-view-1" Button to exist
+    t =    68.90s     Checking `Expect predicate `existsNoRetry == 1` for object "exercise-demo-view-1" Button`
+    t =    68.90s         Checking existence of `"exercise-demo-view-1" Button`
+    t =    70.55s Find the "exercise-demo-view-1" Button
+    t =    71.03s Tap "exercise-demo-view-1" Button
+    t =    71.03s     Wait for com.dakrsnyk.ardane to idle
+    t =    71.04s     Find the "exercise-demo-view-1" Button
+    t =    71.35s     Check for interrupting elements affecting "exercise-demo-view-1" Button
+    t =    71.55s     Synthesize event
+    t =    71.98s     Wait for com.dakrsnyk.ardane to idle
+    t =    73.65s ADSHOT ex-0
+ADSHOT ex-0
+    t =    73.98s Added attachment named 'ADSHOT ex-0'
+    t =    75.85s Terminate com.dakrsnyk.ardane:91031
+    t =    76.93s Open com.dakrsnyk.ardane
+    t =    76.93s     Launch com.dakrsnyk.ardane
+    t =    78.18s         Setting up automation session
+    t =    81.08s         Wait for com.dakrsnyk.ardane to idle
+    t =    89.17s Waiting 12.0s for "exercise-demo-canvas" Any to exist
+    t =    90.22s     Checking `Expect predicate `existsNoRetry == 1` for object "exercise-demo-canvas" Any`
+    t =    90.23s         Checking existence of `"exercise-demo-canvas" Any`
+    t =    91.55s Waiting 3.0s for "exercise-demo-view-1" Button to exist
+    t =    92.60s     Checking `Expect predicate `existsNoRetry == 1` for object "exercise-demo-view-1" Button`
+    t =    92.60s         Checking existence of `"exercise-demo-view-1" Button`
+    t =    92.99s Find the "exercise-demo-view-1" Button
+    t =    93.48s Tap "exercise-demo-view-1" Button
+    t =    93.48s     Wait for com.dakrsnyk.ardane to idle
+    t =    93.51s     Find the "exercise-demo-view-1" Button
+    t =    93.75s     Check for interrupting elements affecting "exercise-demo-view-1" Button
+    t =    93.91s     Synthesize event
+    t =    94.27s     Wait for com.dakrsnyk.ardane to idle
+    t =    95.89s ADSHOT ex-1
+ADSHOT ex-1
+    t =    96.21s Added attachment named 'ADSHOT ex-1'
+    t =    98.10s Terminate com.dakrsnyk.ardane:91920
+    t =    99.15s Tear Down
+    t =    99.15s     Terminate com.dakrsnyk.ardane:0
+Test Case '-[ArdaneUITests.AdShotsUITests testAdExerciseLibrary]' passed (99.350 seconds).
+Test Suite 'AdShotsUITests' passed at 2026-11-07 16:42:40.424.
+	 Executed 1 test, with 0 failures (0 unexpected) in 99.350 (99.351) seconds
+Test Suite 'ArdaneUITests.xctest' passed at 2026-11-07 16:42:40.424.
+	 Executed 1 test, with 0 failures (0 unexpected) in 99.350 (99.352) seconds
+Test Suite 'Selected tests' passed at 2026-11-07 16:42:40.426.
+	 Executed 1 test, with 0 failures (0 unexpected) in 99.350 (99.355) seconds
+2026-11-07 16:42:41.231 xcodebuild[87415:214170] [MT] IDETestOperationsObserverDebug: 115.241 elapsed -- Testing started completed.
+2026-11-07 16:42:41.231 xcodebuild[87415:214170] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-07 16:42:41.231 xcodebuild[87415:214170] [MT] IDETestOperationsObserverDebug: 115.241 sec, +115.241 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/work/tessera/tessera/adkit-results/testAdExerciseLibrary.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started

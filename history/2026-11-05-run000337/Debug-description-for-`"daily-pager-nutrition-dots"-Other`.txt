@@ -1,0 +1,30 @@
+Attributes: Other, 0x104172460, {{181.0, 859.7}, {40.0, 6.0}}, identifier: 'daily-pager-nutrition-dots', label: 'Vue 1 sur 3 : Aujourd'hui'
+Element subtree:
+ →Other, 0x104172460, {{181.0, 859.7}, {40.0, 6.0}}, identifier: 'daily-pager-nutrition-dots', label: 'Vue 1 sur 3 : Aujourd'hui'
+Path to element:
+ →Application, 0x104170a50, pid: 96054, label: 'Ardane'
+  ↳Window (Main), 0x104168cc0, {{inf, inf}, {0.0, 0.0}}
+   ↳Other, 0x10416c5b0, {{inf, inf}, {0.0, 0.0}}
+    ↳Other, 0x104171260, {{inf, inf}, {0.0, 0.0}}
+     ↳Other, 0x104171380, {{inf, inf}, {0.0, 0.0}}
+      ↳Other, 0x1041714a0, {{inf, inf}, {0.0, 0.0}}
+       ↳Other, 0x104167e70, {{inf, inf}, {0.0, 0.0}}
+        ↳Other, 0x1041690e0, {{inf, inf}, {0.0, 0.0}}
+         ↳Other, 0x104171a40, {{inf, inf}, {0.0, 0.0}}
+          ↳Other, 0x1041715c0, {{inf, inf}, {0.0, 0.0}}
+           ↳Other, 0x1041716e0, {{inf, inf}, {0.0, 0.0}}
+            ↳Other, 0x104171800, {{inf, inf}, {0.0, 0.0}}
+             ↳Other, 0x104171920, {{inf, inf}, {0.0, 0.0}}
+              ↳Other, 0x104171b60, {{inf, inf}, {0.0, 0.0}}
+               ↳Other, 0x104171c80, {{inf, inf}, {0.0, 0.0}}
+                ↳Other, 0x104171da0, {{inf, inf}, {0.0, 0.0}}
+                 ↳Other, 0x104171ec0, {{inf, inf}, {0.0, 0.0}}
+                  ↳ScrollView, 0x104171fe0, {{inf, inf}, {0.0, 0.0}}
+                   ↳Other, 0x104172100, {{inf, inf}, {0.0, 0.0}}
+                    ↳Other, 0x104172220, {{inf, inf}, {0.0, 0.0}}, identifier: 'daily-section'
+                     ↳Other, 0x104172340, {{inf, inf}, {0.0, 0.0}}
+                      ↳Other, 0x104172460, {{181.0, 859.7}, {40.0, 6.0}}, identifier: 'daily-pager-nutrition-dots', label: 'Vue 1 sur 3 : Aujourd'hui'
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  ↪︎Find: Descendants matching type Any
+    ↪︎Find: Elements matching predicate '"daily-pager-nutrition-dots" IN identifiers'

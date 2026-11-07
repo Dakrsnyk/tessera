@@ -1,0 +1,995 @@
+getpwuid_r did not find a match for uid 501
+Timestamp               Ty Process[PID:TID]
+2026-11-05 13:28:32.622 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:28:35.306 E  chronod[3026:13bdc] [com.apple.chrono:widgetPowerlog] Could not unwrap telemetryID of current activity
+2026-11-05 13:28:35.776 E  chronod[3026:13bdd] [com.apple.imageio:chronod] writeImageAtIndex:1094: ⭕️ ERROR: 'chronod' is trying to save an opaque image (87x87) with 'AlphaPremulLast'. This would unnecessarily increase the file size and will double (!!!) the required memory when decoding the image --> ignoring alpha.
+2026-11-05 13:28:35.891 E  chronod[3026:13bdd] [com.apple.chrono:replication-verbose] Failed to request replication of icons: [com.apple.shortcuts, com.apple.news] - ChronoCore.ReplicationService.ReplicationServiceError.missingLocalIcon(com.apple.shortcuts)
+2026-11-05 13:28:35.897 E  chronod[3026:13bdd] [com.apple.chrono:replication-verbose] Failed to request replication of icons: [com.apple.shortcuts, com.apple.news] - ChronoCore.ReplicationService.ReplicationServiceError.missingLocalIcon(com.apple.shortcuts)
+2026-11-05 13:28:36.515 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:28:36.954 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:28:37.445 E  chronod[3026:13bdd] [com.apple.chrono:replication-verbose] Failed to request replication of icons: [com.apple.shortcuts] - ChronoCore.ReplicationService.ReplicationServiceError.missingLocalIcon(com.apple.shortcuts)
+2026-11-05 13:28:37.467 E  chronod[3026:13bdd] [com.apple.chrono:replication-verbose] Failed to request replication of icons: [com.apple.shortcuts] - ChronoCore.ReplicationService.ReplicationServiceError.missingLocalIcon(com.apple.shortcuts)
+2026-11-05 13:28:37.687 E  chronod[3026:13bde] [com.apple.chrono:widgetPowerlog] Could not unwrap telemetryID of current activity
+2026-11-05 13:28:38.777 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:28:39.030 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:28:39.783 E  chronod[3026:13be1] [com.apple.chrono:widgetPowerlog] Could not unwrap telemetryID of current activity
+2026-11-05 13:28:42.172 E  chronod[3026:5674] [com.apple.chrono:widgetPowerlog] Could not unwrap telemetryID of current activity
+2026-11-05 13:28:42.995 E  chronod[3026:13bd3] [com.apple.imageio:chronod] writeImageAtIndex:1094: ⭕️ ERROR: 'chronod' is trying to save an opaque image (87x87) with 'AlphaPremulLast'. This would unnecessarily increase the file size and will double (!!!) the required memory when decoding the image --> ignoring alpha.
+2026-11-05 13:28:43.451 E  chronod[3026:13bdd] [com.apple.chrono:widgetPowerlog] Could not unwrap telemetryID of current activity
+2026-11-05 13:28:44.292 E  chronod[3026:13bdc] [com.apple.chrono:widgetPowerlog] Could not unwrap telemetryID of current activity
+2026-11-05 13:30:42.892 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:30:42.930 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:30:43.214 E  chronod[3026:14fec] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000173a700; extensionIdentity: com.apple.Batteries::com.apple.Batteries.BatteriesAvocadoWidgetExtension; kind: BatteriesAvocadoWidget; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:30:46.669 E  chronod[3026:17019] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000171d400; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:30:46.671 E  chronod[3026:16b4a] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000172e440; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemMedium; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:36:17.662 E  chronod[3026:20453] [com.apple.chrono:session] [com.apple.ScreenTimeWidgetApplication.ScreenTimeWidgetExtension] Unable to create new WidgetExtensionSession because begin request watchdogged after 15.000000s
+2026-11-05 13:36:17.662 E  chronod[3026:20baf] [com.apple.chrono:session] [com.apple.Batteries.BatteriesAvocadoWidgetExtension] Unable to create new WidgetExtensionSession because begin request watchdogged after 15.000000s
+2026-11-05 13:36:17.662 E  chronod[3026:20bae] [com.apple.chrono:session] [com.apple.Maps.GeneralMapsWidget] Unable to create new WidgetExtensionSession because begin request watchdogged after 15.000000s
+2026-11-05 13:36:17.671 E  chronod[3026:20bae] [com.apple.chrono:timeline.store] [com.apple.Batteries::com.apple.Batteries.BatteriesAvocadoWidgetExtension:BatteriesAvocadoWidget] No extension session
+2026-11-05 13:36:17.671 E  chronod[3026:20baf] [com.apple.chrono:timeline.store] [com.apple.ScreenTimeWidgetApplication::com.apple.ScreenTimeWidgetApplication.ScreenTimeWidgetExtension:com.apple.ScreenTimeWidgetApplication:7227504733474769685] No extension session
+2026-11-05 13:36:17.674 E  chronod[3026:20bb1] [com.apple.chrono:timeline.store] [com.apple.Maps::com.apple.Maps.GeneralMapsWidget:com.apple.Maps] No extension session
+2026-11-05 13:36:17.690 E  chronod[3026:20453] [com.apple.chrono:timeline.store] Task [28] [com.apple.Batteries::com.apple.Batteries.BatteriesAvocadoWidgetExtension:BatteriesAvocadoWidget] Reload failed; next attempt due at 2026-11-05T13:35:42Z: CHSErrorDomain (1050) Error Domain=CHSErrorDomain Code=1050 "timelineReloadFailed" UserInfo={NSDebugDescription=timelineReloadFailed}
+2026-11-05 13:36:17.691 E  chronod[3026:20453] [com.apple.chrono:timeline.store] Task [22] [com.apple.ScreenTimeWidgetApplication::com.apple.ScreenTimeWidgetApplication.ScreenTimeWidgetExtension:com.apple.ScreenTimeWidgetApplication:7227504733474769685] Reload failed; next attempt due at 2026-11-05T13:35:02Z: CHSErrorDomain (1050) Error Domain=CHSErrorDomain Code=1050 "timelineReloadFailed" UserInfo={NSDebugDescription=timelineReloadFailed}
+2026-11-05 13:36:17.692 E  chronod[3026:20453] [com.apple.chrono:timeline.store] Task [29] [com.apple.Maps::com.apple.Maps.GeneralMapsWidget:com.apple.Maps] Reload failed; next attempt due at 2026-11-05T13:35:46Z: CHSErrorDomain (1050) Error Domain=CHSErrorDomain Code=1050 "timelineReloadFailed" UserInfo={NSDebugDescription=timelineReloadFailed}
+2026-11-05 13:36:21.284 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:36:21.303 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:36:21.343 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:36:21.730 E  chronod[3026:20baf] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000173a700; extensionIdentity: com.apple.Batteries::com.apple.Batteries.BatteriesAvocadoWidgetExtension; kind: BatteriesAvocadoWidget; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:36:21.937 E  chronod[3026:20bb1] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000172e700; extensionIdentity: com.apple.ScreenTimeWidgetApplication::com.apple.ScreenTimeWidgetApplication.ScreenTimeWidgetExtension; kind: com.apple.ScreenTimeWidgetApplication; family: systemLarge; intentHash: 7227504733474769685; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:36:25.642 E  chronod[3026:20bb2] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000171d400; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:36:25.643 E  chronod[3026:20bb2] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000172e440; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemMedium; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:41:41.616 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:41:41.668 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:41:42.073 E  chronod[3026:2a0ce] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000173a700; extensionIdentity: com.apple.Batteries::com.apple.Batteries.BatteriesAvocadoWidgetExtension; kind: BatteriesAvocadoWidget; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:41:45.432 E  chronod[3026:2a0c3] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000171d400; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:41:45.433 E  chronod[3026:2a0c3] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000172e440; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemMedium; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:43:16.823 E  chronod[3026:3eb2] [com.apple.chrono:relevance] ChronoServices request to invalidate relevance for com.apple.Health-NanoMenstrualCyclesWidgetExtension
+2026-11-05 13:43:16.965 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:43:17.050 E  chronod[3026:5673] [com.apple.chrono:widgetPowerlog] Could not unwrap telemetryID of current activity
+2026-11-05 13:43:22.082 E  chronod[3026:5673] [com.apple.siri:Utility] AFIsDeviceGreymatterEligible Missing entitlements for os_eligibility lookup
+2026-11-05 13:43:29.460 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:43:30.035 E  chronod[3026:3eb2] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000175cf00; extensionIdentity: com.apple.mobilecal::com.apple.mobilecal.CalendarWidgetExtension; kind: com.apple.CalendarWidget.CalendarUpNextWidget; family: systemSmall; intentHash: 2474718758988609311; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:43:31.212 E  chronod[3026:2cf90] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000175cf00; extensionIdentity: com.apple.mobilecal::com.apple.mobilecal.CalendarWidgetExtension; kind: com.apple.CalendarWidget.CalendarUpNextWidget; family: systemSmall; intentHash: 2474718758988609311; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:43:34.658 E  chronod[3026:3eb2] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000175cf00; extensionIdentity: com.apple.mobilecal::com.apple.mobilecal.CalendarWidgetExtension; kind: com.apple.CalendarWidget.CalendarUpNextWidget; family: systemSmall; intentHash: 2474718758988609311; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:45:37.874 E  chronod[3026:30f85] [com.apple.chrono:descriptor] Requested to add extension, but purging instead because we shouldn't cache it: <WidgetExtension - identifier: com.dakrsnyk.ardane::com.dakrsnyk.ardane.widgets, version: 1, containerVersion: 1, lastModifiedDate: 2026-11-05T13:45:02Z isInternal: false> - isInternal? false
+2026-11-05 13:45:37.877 E  chronod[3026:3014] [com.apple.BaseBoard:Common] -[_BSSqlitePreparedSimpleStatement executeWithBindings:resultRowHandler:error:]_block_invoke: received extended error 787 (constraint failed) executing statement 'REPLACE INTO ReloadState (
+    BundleID,
+    Kind,
+    DateReloadRequested
+)
+VALUES (
+    @binding1,
+    @binding2,
+    @binding3
+);'
+2026-11-05 13:45:37.899 E  chronod[3026:3014] [com.apple.chrono:reloadService] Error setting last requested reload date for key: <_ReloadStateKey: extensionBundleIdentifier=com.dakrsnyk.ardane.widgets, kind=all>: Error Domain=com.apple.baseboard.bssqlite Code=19 "constraint failed" UserInfo={NSLocalizedDescription=constraint failed, NSLocalizedFailureReason=FOREIGN KEY constraint failed}
+2026-11-05 13:45:37.908 E  chronod[3026:3014] [com.apple.BaseBoard:Common] -[_BSSqlitePreparedSimpleStatement executeWithBindings:resultRowHandler:error:]_block_invoke: received extended error 787 (constraint failed) executing statement 'REPLACE INTO ReloadState (
+    BundleID,
+    Kind,
+    DateReloadRequested
+)
+VALUES (
+    @binding1,
+    @binding2,
+    @binding3
+);'
+2026-11-05 13:45:37.916 E  chronod[3026:3014] [com.apple.chrono:reloadService] Error setting last requested reload date for key: <_ReloadStateKey: extensionBundleIdentifier=com.dakrsnyk.ardane.widgets, kind=all>: Error Domain=com.apple.baseboard.bssqlite Code=19 "constraint failed" UserInfo={NSLocalizedDescription=constraint failed, NSLocalizedFailureReason=FOREIGN KEY constraint failed}
+2026-11-05 13:45:38.437 E  chronod[3026:2cfe0] [com.apple.imageio:chronod] writeImageAtIndex:1094: ⭕️ ERROR: 'chronod' is trying to save an opaque image (87x87) with 'AlphaPremulLast'. This would unnecessarily increase the file size and will double (!!!) the required memory when decoding the image --> ignoring alpha.
+2026-11-05 13:45:43.320 Df ArdaneWidgets[85093:3109c] [com.apple.extensionkit:default] Extension `/Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/Containers/Bundle/Application/869A2A7B-EBD3-4AD3-919C-7937504EDABB/Ardane.app/PlugIns/ArdaneWidgets.appex/ArdaneWidgets` of type: `1` launched.
+2026-11-05 13:45:43.466 Df ArdaneWidgets[85093:3109c] [com.apple.extensionkit:launch] Extension Type: 'service' : <ExtensionFoundation._EXRunningExtension: 0x600002c00080>
+2026-11-05 13:45:43.467 Df ArdaneWidgets[85093:3109c] [com.apple.runningboard:connection] Initializing connection
+2026-11-05 13:45:43.467 Df ArdaneWidgets[85093:3109c] [com.apple.runningboard:process] Removing all cached process handles
+2026-11-05 13:45:43.467 Df ArdaneWidgets[85093:3113c] [com.apple.runningboard:connection] Sending handshake request attempt #1 to server
+2026-11-05 13:45:43.467 Df ArdaneWidgets[85093:3113c] [com.apple.runningboard:connection] Creating connection to com.apple.runningboard
+2026-11-05 13:45:43.467 Df ArdaneWidgets[85093:3113c] [com.apple.xpc:connection] [0x1026051c0] activating connection: mach=true listener=false peer=false name=com.apple.runningboard
+2026-11-05 13:45:43.469 Df ArdaneWidgets[85093:3113c] [com.apple.runningboard:connection] Handshake succeeded
+2026-11-05 13:45:43.469 Df ArdaneWidgets[85093:3113c] [com.apple.runningboard:connection] Identity resolved as xpcservice<com.dakrsnyk.ardane.widgets([osservice<com.apple.chronod>:3026])>{vt hash: 29079444}[uuid:A4476773-F227-43C0-B367-112DE23FBEBB]{definition:com.dakrsnyk.ardane.widgets[extension][client]}
+2026-11-05 13:45:43.476 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102704740] activating connection: mach=true listener=false peer=false name=com.apple.lsd.mapdb
+2026-11-05 13:45:43.491 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] main [WidgetBundle]
+2026-11-05 13:45:43.496 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] extension launched
+2026-11-05 13:45:43.500 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x1025059c0] activating connection: mach=true listener=false peer=false name=com.apple.cfprefsd.daemon
+2026-11-05 13:45:43.504 A  ArdaneWidgets[85093:3109c] (libsystem_containermanager.dylib) container_create_or_lookup_app_group_path_by_app_group_identifier
+2026-11-05 13:45:43.504 Df ArdaneWidgets[85093:3109c] [com.apple.containermanager:xpc] Requesting app group container lookup; identifier = group.com.dakrsnyk.tessera, euid = 501, uid = 501, platform = 7
+2026-11-05 13:45:43.508 E  ArdaneWidgets[85093:3109c] [com.apple.containermanager:unspecified] container_create_or_lookup_app_group_path_by_app_group_identifier: client is not entitled
+2026-11-05 13:45:43.515 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102605920] activating connection: mach=true listener=false peer=false name=com.apple.pasteboard.pasted
+2026-11-05 13:45:43.515 Df ArdaneWidgets[85093:3109c] [com.apple.Pasteboard:Pasteboard] Retrieving pasteboard named com.dakrsnyk.tessera.diagnostics, create if needed: NO
+2026-11-05 13:45:43.533 Df ArdaneWidgets[85093:3109c] [com.apple.Pasteboard:Pasteboard] ...retrieving pasteboard named com.dakrsnyk.tessera.diagnostics completed successfully.
+2026-11-05 13:45:43.538 Df ArdaneWidgets[85093:3109c] [com.apple.Pasteboard:Pasteboard] Retrieving pasteboard named com.dakrsnyk.tessera.diagnostics, create if needed: NO
+2026-11-05 13:45:43.538 Df ArdaneWidgets[85093:3109c] [com.apple.Pasteboard:Pasteboard] ...retrieving pasteboard named com.dakrsnyk.tessera.diagnostics completed successfully.
+2026-11-05 13:45:43.547 A  ArdaneWidgets[85093:3109c] (CoreFoundation) Loading Preferences From User Session CFPrefsD
+2026-11-05 13:45:43.548 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Locale token: aSHSfDpaK2Xr+O03r4oPJj3ufh0=
+2026-11-05 13:45:43.572 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] WidgetHost - Optional(WidgetKit.ResolvedWidgetBundleHost)
+2026-11-05 13:45:43.578 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x1027056c0] readying connection: mach=false listener=true peer=false name=com.dakrsnyk.ardane.widgets
+2026-11-05 13:45:43.583 Df ArdaneWidgets[85093:3109c] [com.apple.BoardServices:Bootstrap] initializing domain XPCService
+2026-11-05 13:45:43.584 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x1027056c0] activating connection: mach=false listener=true peer=false name=com.dakrsnyk.ardane.widgets
+2026-11-05 13:45:43.585 Df ArdaneWidgets[85093:3113c] [com.apple.BoardServices:XPCErrors] [S:1] Alloc XPCServiceListener:85093:com.dakrsnyk.ardane.widgets:A4476773-F227-43C0-B367-112DE23FBEBB
+2026-11-05 13:45:43.585 Df ArdaneWidgets[85093:3113c] [com.apple.xpc:connection] [0x102705b10] activating connection: mach=false listener=false peer=true name=com.dakrsnyk.ardane.widgets.peer[3026].0x102705b10
+2026-11-05 13:45:43.587 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:45:43.606 Df ArdaneWidgets[85093:3113c] [com.apple.chrono:widget] =+= getAllCurrentDescriptors(completion:) - locale: en_US (fixed en_US)
+2026-11-05 13:45:43.816 Df ArdaneWidgets[85093:3109c] (libMobileGestalt.dylib) No persisted cache on this platform.
+2026-11-05 13:45:45.602 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:45:45.658 E  chronod[3026:31034] [com.apple.appintents:Metadata] Failed to register com.apple.AdaptiveMusicApp: Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c4cea0 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.658 E  chronod[3026:31034] [com.apple.siri:Intents] -[INCWidgetIntentProvider _provideAppIntentWithOptions:completionHandler:]_block_invoke Failed to load default values for <LNFullyQualifiedActionIdentifier: 0x600000255ae0, bundleIdentifier: com.apple.AdaptiveMusicApp, actionIdentifier: SelectSleepPlaylistIntent> widget intent: Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c4cea0 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.658 E  chronod[3026:31034] [com.apple.chrono:descriptor] Unable to resolve default intent (appintent:SelectSleepPlaylistIntent) for extension: com.apple.AdaptiveMusicApp.AdaptiveMusicControl - Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c4cea0 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.675 E  chronod[3026:31034] [com.apple.appintents:Metadata] Failed to register com.apple.AdaptiveMusicApp: Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c71c80 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.676 E  chronod[3026:31034] [com.apple.siri:Intents] -[INCWidgetIntentProvider _provideAppIntentWithOptions:completionHandler:]_block_invoke Failed to load default values for <LNFullyQualifiedActionIdentifier: 0x6000002689c0, bundleIdentifier: com.apple.AdaptiveMusicApp, actionIdentifier: SelectChillPlaylistIntent> widget intent: Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c71c80 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.676 E  chronod[3026:31034] [com.apple.chrono:descriptor] Unable to resolve default intent (appintent:SelectChillPlaylistIntent) for extension: com.apple.AdaptiveMusicApp.AdaptiveMusicControl - Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c71c80 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.698 E  chronod[3026:31034] [com.apple.appintents:Metadata] Failed to register com.apple.AdaptiveMusicApp: Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c69b30 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.699 E  chronod[3026:31034] [com.apple.siri:Intents] -[INCWidgetIntentProvider _provideAppIntentWithOptions:completionHandler:]_block_invoke Failed to load default values for <LNFullyQualifiedActionIdentifier: 0x600000268420, bundleIdentifier: com.apple.AdaptiveMusicApp, actionIdentifier: SelectProductivityPlaylistIntent> widget intent: Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c69b30 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.699 E  chronod[3026:31034] [com.apple.chrono:descriptor] Unable to resolve default intent (appintent:SelectProductivityPlaylistIntent) for extension: com.apple.AdaptiveMusicApp.AdaptiveMusicControl - Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c69b30 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.714 E  chronod[3026:31034] [com.apple.appintents:Metadata] Failed to register com.apple.AdaptiveMusicApp: Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c5f120 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.715 E  chronod[3026:31034] [com.apple.siri:Intents] -[INCWidgetIntentProvider _provideAppIntentWithOptions:completionHandler:]_block_invoke Failed to load default values for <LNFullyQualifiedActionIdentifier: 0x60000026b9a0, bundleIdentifier: com.apple.AdaptiveMusicApp, actionIdentifier: SelectWellbeingPlaylistIntent> widget intent: Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c5f120 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:45.715 E  chronod[3026:31034] [com.apple.chrono:descriptor] Unable to resolve default intent (appintent:SelectWellbeingPlaylistIntent) for extension: com.apple.AdaptiveMusicApp.AdaptiveMusicControl - Error Domain=LNMetadataProviderErrorDomain Code=9000 "LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty" UserInfo={NSLocalizedDescription=LinkMetadata.BundleMetadataExtractionError.aggregateMetadataIsEmpty, NSUnderlyingError=0x600000c5f120 {Error Domain=LinkMetadata.BundleMetadataExtractionError Code=1 "(null)"}}
+2026-11-05 13:45:53.387 Df ArdaneWidgets[85093:3113d] [com.apple.xpc:connection] [0x102705b10] invalidated because the client process (pid 3026) either cancelled the connection or exited
+2026-11-05 13:45:53.387 E  ArdaneWidgets[85093:3113d] [com.apple.BoardServices:XPCErrors] [S:1] Error received: Connection invalidated.
+2026-11-05 13:45:53.414 Df ArdaneWidgets[85093:3113d] [com.apple.BoardServices:XPCErrors] [S:2] Alloc XPCServiceListener:85093:com.dakrsnyk.ardane.widgets:A4476773-F227-43C0-B367-112DE23FBEBB
+2026-11-05 13:45:53.415 Df ArdaneWidgets[85093:3113d] [com.apple.xpc:connection] [0x1026057b0] activating connection: mach=false listener=false peer=true name=com.dakrsnyk.ardane.widgets.peer[3026].0x1026057b0
+2026-11-05 13:45:53.417 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:45:53.481 Df ArdaneWidgets[85093:3113c] [com.apple.chrono:placeholder] Batch begin (pl-ffc1ff) - locale: en_US (fixed en_US)
+2026-11-05 13:45:53.579 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:45:53.593 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_QxgH0n/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:45:54.264 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:45:58.842 Df ArdaneWidgets[85093:3113d] [com.apple.BoardServices:XPCErrors] [C:3] Alloc com.apple.frontboard.systemappservices
+2026-11-05 13:45:58.843 Df ArdaneWidgets[85093:3113d] [com.apple.xpc:connection] [0x10270faa0] activating connection: mach=false listener=false peer=false name=(anonymous)
+2026-11-05 13:45:58.986 Df ArdaneWidgets[85093:3109c] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x102516a20> for initial
+2026-11-05 13:45:58.988 Df ArdaneWidgets[85093:3109c] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x102516a20> for CADisplay KVO
+2026-11-05 13:45:59.027 Df ArdaneWidgets[85093:3109c] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 1, category name = (null)
+2026-11-05 13:45:59.034 Df ArdaneWidgets[85093:3109c] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 0, category name = (null)
+2026-11-05 13:45:59.265 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:45:59.353 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:45:59.778 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886354
+2026-11-05 13:46:01.494 Df ArdaneWidgets[85093:3113c] [com.apple.xpc:connection] [0x102716410] activating connection: mach=true listener=false peer=false name=com.apple.fontservicesd
+2026-11-05 13:46:02.146 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.147 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886354
+2026-11-05 13:46:02.343 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.344 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886354
+2026-11-05 13:46:02.350 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.350 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886354
+2026-11-05 13:46:02.388 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryRectangular - success.
+2026-11-05 13:46:02.388 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_wtHOzS/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:02.403 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:02.403 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.403 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886362
+2026-11-05 13:46:02.577 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.577 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886362
+2026-11-05 13:46:02.582 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.583 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.583 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886362
+2026-11-05 13:46:02.655 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.661 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886362
+2026-11-05 13:46:02.866 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryCircular - success.
+2026-11-05 13:46:02.867 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryInline - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_Xm9NfV/accessoryInline----342.00w--36.00h--0.00r--0f--0.00t-0.00l-0.00b0.00t.chrono-timeline
+2026-11-05 13:46:02.878 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:02.879 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.880 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886363
+2026-11-05 13:46:02.891 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.892 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886363
+2026-11-05 13:46:02.897 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.918 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886363
+2026-11-05 13:46:02.940 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:02.941 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886363
+2026-11-05 13:46:02.971 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryInline - success.
+2026-11-05 13:46:02.971 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Batch ended (pl-ffc1ff) - success
+2026-11-05 13:46:02.972 Df ArdaneWidgets[85093:3109c] [com.apple.BackBoard:Display] [FBSDisplaySource 1-1] silently connecting raw configuration: <FBSDisplayConfiguration: 0x600003d28780; Main; mode: "402x874@3x 60Hz p3 SDR">
+2026-11-05 13:46:03.089 Df ArdaneWidgets[85093:3113c] [com.apple.chrono:placeholder] Batch begin (pl-ea4af0) - locale: en_US (fixed en_US)
+2026-11-05 13:46:03.232 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.lock.scan-food:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_Jtybg6/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:03.236 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:03.238 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.270 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.361 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.361 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.380 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.382 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.391 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.lock.scan-food:accessoryRectangular - success.
+2026-11-05 13:46:03.391 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.lock.scan-food:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_6gjBAQ/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:03.392 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:03.394 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.404 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.408 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.409 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.413 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.414 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.610 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.lock.scan-food:accessoryCircular - success.
+2026-11-05 13:46:03.611 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.fitness:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_Euc66u/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:03.624 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:03.625 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:03.626 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextSet accessoryRectangular at 1793886364
+2026-11-05 13:46:03.874 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("8DE21F33-9560-4F01-92E9-474C0036AC0F:0:3")))
+2026-11-05 13:46:03.882 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102523d40] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:04.107 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102523d40] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:04.109 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:04.621 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:04.621 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextSet accessoryRectangular at 1793886364
+2026-11-05 13:46:04.622 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("8DE21F33-9560-4F01-92E9-474C0036AC0F:0:3")))
+2026-11-05 13:46:04.622 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x10253cab0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:04.629 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x10253cab0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:04.629 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:04.652 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:04.733 Df ArdaneWidgets[85093:315af] [com.apple.xpc:connection] [0x10270faa0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:04.735 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("8DE21F33-9560-4F01-92E9-474C0036AC0F:0:3")))
+2026-11-05 13:46:04.735 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102625830] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:04.740 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102625830] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:04.741 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:04.742 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:04.743 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextSet accessoryRectangular at 1793886364
+2026-11-05 13:46:04.746 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("8DE21F33-9560-4F01-92E9-474C0036AC0F:0:3")))
+2026-11-05 13:46:04.747 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102508950] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:04.757 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102508950] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:04.757 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:04.790 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:04.791 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("8DE21F33-9560-4F01-92E9-474C0036AC0F:0:3")))
+2026-11-05 13:46:04.791 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102625310] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:04.797 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102625310] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:04.797 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:04.800 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:04.800 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextSet accessoryRectangular at 1793886364
+2026-11-05 13:46:04.806 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("8DE21F33-9560-4F01-92E9-474C0036AC0F:0:3")))
+2026-11-05 13:46:04.806 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102537af0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:04.815 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102537af0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:04.815 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:04.838 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.fitness:accessoryRectangular - success.
+2026-11-05 13:46:04.838 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.fitness:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_b2n4lW/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:04.851 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:04.852 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:04.854 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render trainingStreak accessoryCircular at 1793886365
+2026-11-05 13:46:04.910 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:04.910 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render trainingStreak accessoryCircular at 1793886365
+2026-11-05 13:46:04.943 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.043 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.105 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render trainingStreak accessoryCircular at 1793886365
+2026-11-05 13:46:05.129 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.131 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render trainingStreak accessoryCircular at 1793886365
+2026-11-05 13:46:05.155 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.fitness:accessoryCircular - success.
+2026-11-05 13:46:05.156 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_jqZsAN/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.168 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.170 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.171 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886365
+2026-11-05 13:46:05.275 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.281 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886365
+2026-11-05 13:46:05.362 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.363 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.364 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886365
+2026-11-05 13:46:05.369 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.371 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.371 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886365
+2026-11-05 13:46:05.423 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryRectangular - success.
+2026-11-05 13:46:05.423 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_ZgZvzn/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.476 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.477 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.477 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886365
+2026-11-05 13:46:05.486 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.486 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886365
+2026-11-05 13:46:05.490 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.490 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.491 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886365
+2026-11-05 13:46:05.494 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.495 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886365
+2026-11-05 13:46:05.499 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryCircular - success.
+2026-11-05 13:46:05.499 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryInline - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_jtjfJZ/accessoryInline----342.00w--36.00h--0.00r--0f--0.00t-0.00l-0.00b0.00t.chrono-timeline
+2026-11-05 13:46:05.504 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.505 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.505 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886365
+2026-11-05 13:46:05.509 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.510 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886365
+2026-11-05 13:46:05.515 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.517 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886365
+2026-11-05 13:46:05.538 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.539 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.540 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886365
+2026-11-05 13:46:05.553 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryInline - success.
+2026-11-05 13:46:05.553 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Batch ended (pl-ea4af0) - success
+2026-11-05 13:46:05.633 Df ArdaneWidgets[85093:3113d] [com.apple.chrono:placeholder] Batch begin (pl-0adf18) - locale: en_US (fixed en_US)
+2026-11-05 13:46:05.633 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_hTXdVF/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.644 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.644 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.644 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886366
+2026-11-05 13:46:05.653 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.653 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886366
+2026-11-05 13:46:05.659 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.661 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.661 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886366
+2026-11-05 13:46:05.665 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.665 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryRectangular at 1793886366
+2026-11-05 13:46:05.669 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryRectangular - success.
+2026-11-05 13:46:05.669 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_xFqNij/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.675 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.676 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.677 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886366
+2026-11-05 13:46:05.686 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.687 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886366
+2026-11-05 13:46:05.693 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.695 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.695 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886366
+2026-11-05 13:46:05.702 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.703 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryCircular at 1793886366
+2026-11-05 13:46:05.708 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryCircular - success.
+2026-11-05 13:46:05.708 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.travel:accessoryInline - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_iUqHJe/accessoryInline----342.00w--36.00h--0.00r--0f--0.00t-0.00l-0.00b0.00t.chrono-timeline
+2026-11-05 13:46:05.713 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.714 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.714 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886366
+2026-11-05 13:46:05.716 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.716 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886366
+2026-11-05 13:46:05.718 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.719 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.719 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886366
+2026-11-05 13:46:05.721 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.721 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.721 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tripCountdown accessoryInline at 1793886366
+2026-11-05 13:46:05.724 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.travel:accessoryInline - success.
+2026-11-05 13:46:05.724 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.fitness:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_QWJkIB/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.729 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.730 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.730 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render trainingStreak accessoryCircular at 1793886366
+2026-11-05 13:46:05.737 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.738 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render trainingStreak accessoryCircular at 1793886366
+2026-11-05 13:46:05.744 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.744 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.745 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render trainingStreak accessoryCircular at 1793886366
+2026-11-05 13:46:05.749 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.749 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render trainingStreak accessoryCircular at 1793886366
+2026-11-05 13:46:05.753 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.fitness:accessoryCircular - success.
+2026-11-05 13:46:05.753 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.fitness:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_g2ngzv/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.758 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.759 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.759 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextSet accessoryRectangular at 1793886366
+2026-11-05 13:46:05.760 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("27B8CD8C-798F-424C-A7A9-445DBBC9343C:0:3")))
+2026-11-05 13:46:05.761 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102733e90] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:05.776 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102733e90] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:05.778 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:05.785 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.787 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextSet accessoryRectangular at 1793886366
+2026-11-05 13:46:05.790 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("27B8CD8C-798F-424C-A7A9-445DBBC9343C:0:3")))
+2026-11-05 13:46:05.790 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x10260b9e0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:05.803 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x10260b9e0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:05.803 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:05.808 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.809 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("27B8CD8C-798F-424C-A7A9-445DBBC9343C:0:3")))
+2026-11-05 13:46:05.809 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102733d40] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:05.814 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102733d40] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:05.814 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:05.816 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.816 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextSet accessoryRectangular at 1793886366
+2026-11-05 13:46:05.818 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("27B8CD8C-798F-424C-A7A9-445DBBC9343C:0:3")))
+2026-11-05 13:46:05.818 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102738d00] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:05.826 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102738d00] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:05.826 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:05.836 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.836 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextSet accessoryRectangular at 1793886366
+2026-11-05 13:46:05.837 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Execution] Prepared expected to String(Optional("27B8CD8C-798F-424C-A7A9-445DBBC9343C:0:3")))
+2026-11-05 13:46:05.837 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102742280] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:46:05.843 Df ArdaneWidgets[85093:3109c] [com.apple.xpc:connection] [0x102742280] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:46:05.843 Df ArdaneWidgets[85093:3109c] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:46:05.860 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.fitness:accessoryRectangular - success.
+2026-11-05 13:46:05.860 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.car:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_cXdye9/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.867 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.868 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.869 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextService accessoryRectangular at 1793886366
+2026-11-05 13:46:05.887 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.887 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextService accessoryRectangular at 1793886366
+2026-11-05 13:46:05.896 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.897 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.897 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextService accessoryRectangular at 1793886366
+2026-11-05 13:46:05.902 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.902 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextService accessoryRectangular at 1793886366
+2026-11-05 13:46:05.907 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.car:accessoryRectangular - success.
+2026-11-05 13:46:05.907 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.lock.scan-food:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_DtDzi1/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.908 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.910 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.918 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.921 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.923 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.926 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.lock.scan-food:accessoryCircular - success.
+2026-11-05 13:46:05.927 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.lock.scan-food:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_izOA3S/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:05.927 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.928 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.936 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.940 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.942 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.945 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.lock.scan-food:accessoryRectangular - success.
+2026-11-05 13:46:05.945 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.student:accessoryInline - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_Asq9lJ/accessoryInline----342.00w--36.00h--0.00r--0f--0.00t-0.00l-0.00b0.00t.chrono-timeline
+2026-11-05 13:46:05.952 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:05.953 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.953 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render timetable accessoryInline at 1793886366
+2026-11-05 13:46:05.968 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.968 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render timetable accessoryInline at 1793886366
+2026-11-05 13:46:05.971 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.971 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render timetable accessoryInline at 1793886366
+2026-11-05 13:46:05.979 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.980 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:05.980 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render timetable accessoryInline at 1793886366
+2026-11-05 13:46:05.992 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.student:accessoryInline - success.
+2026-11-05 13:46:05.995 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.student:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_sWokXu/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:06.011 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.012 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.012 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextExam accessoryCircular at 1793886366
+2026-11-05 13:46:06.046 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.047 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextExam accessoryCircular at 1793886366
+2026-11-05 13:46:06.056 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.059 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.059 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextExam accessoryCircular at 1793886366
+2026-11-05 13:46:06.064 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.066 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.067 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render nextExam accessoryCircular at 1793886366
+2026-11-05 13:46:06.082 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.student:accessoryCircular - success.
+2026-11-05 13:46:06.082 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.student:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_dsA2Cz/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:06.089 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.090 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.090 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render timetable accessoryRectangular at 1793886366
+2026-11-05 13:46:06.101 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.102 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render timetable accessoryRectangular at 1793886366
+2026-11-05 13:46:06.109 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.110 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render timetable accessoryRectangular at 1793886366
+2026-11-05 13:46:06.123 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.124 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render timetable accessoryRectangular at 1793886366
+2026-11-05 13:46:06.134 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.student:accessoryRectangular - success.
+2026-11-05 13:46:06.134 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Batch ended (pl-0adf18) - success
+2026-11-05 13:46:06.246 Df ArdaneWidgets[85093:315e0] [com.apple.chrono:placeholder] Batch begin (pl-62dcda) - locale: en_US (fixed en_US)
+2026-11-05 13:46:06.247 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.quick:systemSmall - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_j0fnHE/systemSmall----362.00w-362.00h-61.54r-Tn6sO9CitMMwhKHLblDHDpkaeW#5YIIyMlalJkwBIzU=.chrono-timeline
+2026-11-05 13:46:06.247 A  ArdaneWidgets[85093:3109c] (libsystem_containermanager.dylib) container_create_or_lookup_app_group_path_by_app_group_identifier
+2026-11-05 13:46:06.247 Df ArdaneWidgets[85093:3109c] [com.apple.containermanager:xpc] Requesting app group container lookup; identifier = group.com.dakrsnyk.tessera, euid = 501, uid = 501, platform = 7
+2026-11-05 13:46:06.249 E  ArdaneWidgets[85093:3109c] [com.apple.containermanager:unspecified] container_create_or_lookup_app_group_path_by_app_group_identifier: client is not entitled
+2026-11-05 13:46:06.265 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.267 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.267 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886366
+2026-11-05 13:46:06.311 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.312 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886366
+2026-11-05 13:46:06.320 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.321 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.339 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.340 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886366
+2026-11-05 13:46:06.342 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.343 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886366
+2026-11-05 13:46:06.349 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.349 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886366
+2026-11-05 13:46:06.365 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.371 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886366
+2026-11-05 13:46:06.377 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.377 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.384 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.385 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886366
+2026-11-05 13:46:06.388 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.388 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886366
+2026-11-05 13:46:06.399 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.quick:systemSmall - success.
+2026-11-05 13:46:06.399 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.quick:systemLarge - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_rZGa08/systemLarge----349.67w-365.00h-27.94r-1VTNgEwDUstZ1uS6fX0#4whja22jdasM+9uwBap5KvY=.chrono-timeline
+2026-11-05 13:46:06.408 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.409 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.409 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886366
+2026-11-05 13:46:06.413 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.414 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.420 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.420 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886366
+2026-11-05 13:46:06.424 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.424 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886366
+2026-11-05 13:46:06.428 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.431 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.435 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.436 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886366
+2026-11-05 13:46:06.440 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.440 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886366
+2026-11-05 13:46:06.445 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.quick:systemLarge - success.
+2026-11-05 13:46:06.445 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.quick:systemMedium - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_7AIGCO/systemMedium----349.67w-164.33h-27.94r-1VTNgEwDUstZ1uS6fX0#4whja22jdasM+9uwBap5KvY=.chrono-timeline
+2026-11-05 13:46:06.452 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.453 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.453 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886366
+2026-11-05 13:46:06.458 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.459 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.463 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.463 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886366
+2026-11-05 13:46:06.477 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.478 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886366
+2026-11-05 13:46:06.490 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.493 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.499 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.500 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886366
+2026-11-05 13:46:06.504 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.504 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886366
+2026-11-05 13:46:06.508 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.quick:systemMedium - success.
+2026-11-05 13:46:06.508 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.quick:systemSmall - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_q7Oxsa/systemSmall----164.33w-164.33h-27.94r-1VTNgEwDUstZ1uS6fX0#4whja22jdasM+9uwBap5KvY=.chrono-timeline
+2026-11-05 13:46:06.515 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.517 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.517 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.522 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.528 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.528 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.536 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.540 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.546 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.547 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.547 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.555 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.556 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.557 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.557 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.558 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.565 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.576 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.576 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.580 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.581 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.581 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.588 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.589 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.595 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.596 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.597 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.598 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.599 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.619 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.quick:systemSmall - success.
+2026-11-05 13:46:06.620 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Batch ended (pl-62dcda) - success
+2026-11-05 13:46:06.682 Df ArdaneWidgets[85093:3113d] [com.apple.chrono:placeholder] Batch begin (pl-9d7cf9) - locale: en_US (fixed en_US)
+2026-11-05 13:46:06.682 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.upNext:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_CWJRgc/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:06.687 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.689 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.689 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render upNext accessoryRectangular at 1793886367
+2026-11-05 13:46:06.785 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.786 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render upNext accessoryRectangular at 1793886367
+2026-11-05 13:46:06.792 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.792 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render upNext accessoryRectangular at 1793886367
+2026-11-05 13:46:06.800 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.801 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render upNext accessoryRectangular at 1793886367
+2026-11-05 13:46:06.805 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.upNext:accessoryRectangular - success.
+2026-11-05 13:46:06.805 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.tasks:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_fVZHRE/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:06.807 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.808 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.808 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tasks accessoryRectangular at 1793886367
+2026-11-05 13:46:06.821 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.822 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tasks accessoryRectangular at 1793886367
+2026-11-05 13:46:06.824 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.825 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tasks accessoryRectangular at 1793886367
+2026-11-05 13:46:06.827 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.827 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.828 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render tasks accessoryRectangular at 1793886367
+2026-11-05 13:46:06.832 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.tasks:accessoryRectangular - success.
+2026-11-05 13:46:06.832 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.quick:systemSmall - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_UiC1be/systemSmall----362.00w-362.00h-61.54r-Tn6sO9CitMMwhKHLblDHDpkaeW#5YIIyMlalJkwBIzU=.chrono-timeline
+2026-11-05 13:46:06.840 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.840 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.840 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.843 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.844 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.846 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.847 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.856 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.856 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.863 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.863 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.864 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.870 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.870 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.871 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.876 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.877 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.877 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.882 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.883 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.892 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.893 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.898 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.898 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.899 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:06.904 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.quick:systemSmall - success.
+2026-11-05 13:46:06.905 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.quick:systemLarge - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_DGaII3/systemLarge----349.67w-365.00h-27.94r-1VTNgEwDUstZ1uS6fX0#4whja22jdasM+9uwBap5KvY=.chrono-timeline
+2026-11-05 13:46:06.913 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.914 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.914 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886367
+2026-11-05 13:46:06.923 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.923 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.927 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.927 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886367
+2026-11-05 13:46:06.931 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.932 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886367
+2026-11-05 13:46:06.939 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.943 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.947 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.947 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886367
+2026-11-05 13:46:06.975 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.975 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemLarge at 1793886367
+2026-11-05 13:46:06.980 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.quick:systemLarge - success.
+2026-11-05 13:46:06.980 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.quick:systemMedium - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_mBqwfP/systemMedium----349.67w-164.33h-27.94r-1VTNgEwDUstZ1uS6fX0#4whja22jdasM+9uwBap5KvY=.chrono-timeline
+2026-11-05 13:46:06.986 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:06.987 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.987 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886367
+2026-11-05 13:46:06.990 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.990 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.993 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.993 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886367
+2026-11-05 13:46:06.997 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:06.997 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886367
+2026-11-05 13:46:07.000 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.003 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.005 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.006 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886367
+2026-11-05 13:46:07.008 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.009 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemMedium at 1793886367
+2026-11-05 13:46:07.012 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.quick:systemMedium - success.
+2026-11-05 13:46:07.012 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.quick:systemSmall - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_iRIZOl/systemSmall----164.33w-164.33h-27.94r-1VTNgEwDUstZ1uS6fX0#4whja22jdasM+9uwBap5KvY=.chrono-timeline
+2026-11-05 13:46:07.019 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.019 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.020 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.020 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.023 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.027 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.028 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.032 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.032 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.032 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.036 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.039 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.039 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.041 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.042 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.042 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.045 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.046 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.057 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.057 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.060 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.061 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.061 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.064 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.067 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.068 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.073 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.074 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.074 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render note systemSmall at 1793886367
+2026-11-05 13:46:07.077 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.quick:systemSmall - success.
+2026-11-05 13:46:07.077 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.business:accessoryInline - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_hhTZs5/accessoryInline----342.00w--36.00h--0.00r--0f--0.00t-0.00l-0.00b0.00t.chrono-timeline
+2026-11-05 13:46:07.093 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.094 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.094 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueToday accessoryInline at 1793886367
+2026-11-05 13:46:07.111 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.111 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueToday accessoryInline at 1793886367
+2026-11-05 13:46:07.114 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.114 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueToday accessoryInline at 1793886367
+2026-11-05 13:46:07.121 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.121 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.122 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueToday accessoryInline at 1793886367
+2026-11-05 13:46:07.125 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.business:accessoryInline - success.
+2026-11-05 13:46:07.125 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.business:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_xROEwv/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.131 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.131 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.132 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueGoal accessoryCircular at 1793886367
+2026-11-05 13:46:07.158 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.159 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueGoal accessoryCircular at 1793886367
+2026-11-05 13:46:07.167 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.170 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.171 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueGoal accessoryCircular at 1793886367
+2026-11-05 13:46:07.175 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.176 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueGoal accessoryCircular at 1793886367
+2026-11-05 13:46:07.181 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.business:accessoryCircular - success.
+2026-11-05 13:46:07.181 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.business:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_ohbAQu/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.189 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.190 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.190 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueGoal accessoryRectangular at 1793886367
+2026-11-05 13:46:07.203 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.203 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueGoal accessoryRectangular at 1793886367
+2026-11-05 13:46:07.208 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.209 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.209 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueGoal accessoryRectangular at 1793886367
+2026-11-05 13:46:07.215 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.217 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.217 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render revenueGoal accessoryRectangular at 1793886367
+2026-11-05 13:46:07.221 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.business:accessoryRectangular - success.
+2026-11-05 13:46:07.221 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.habitsPlus:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_JYENSy/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.238 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.238 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.239 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render habitStreak accessoryCircular at 1793886367
+2026-11-05 13:46:07.247 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.248 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render habitStreak accessoryCircular at 1793886367
+2026-11-05 13:46:07.258 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.263 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.263 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render habitStreak accessoryCircular at 1793886367
+2026-11-05 13:46:07.268 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.269 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render habitStreak accessoryCircular at 1793886367
+2026-11-05 13:46:07.275 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.habitsPlus:accessoryCircular - success.
+2026-11-05 13:46:07.275 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Batch ended (pl-9d7cf9) - success
+2026-11-05 13:46:07.348 Df ArdaneWidgets[85093:3113d] [com.apple.chrono:placeholder] Batch begin (pl-8e42d6) - locale: en_US (fixed en_US)
+2026-11-05 13:46:07.348 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.nutrition:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_nFzhD7/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.354 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.354 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.354 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryCircular at 1793886367
+2026-11-05 13:46:07.375 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.376 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryCircular at 1793886367
+2026-11-05 13:46:07.384 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.386 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.386 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryCircular at 1793886367
+2026-11-05 13:46:07.392 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.394 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.394 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryCircular at 1793886367
+2026-11-05 13:46:07.404 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.nutrition:accessoryCircular - success.
+2026-11-05 13:46:07.404 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.nutrition:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_QJzDAd/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.410 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.411 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.411 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryRectangular at 1793886367
+2026-11-05 13:46:07.425 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.425 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryRectangular at 1793886367
+2026-11-05 13:46:07.434 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.434 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryRectangular at 1793886367
+2026-11-05 13:46:07.441 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.441 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryRectangular at 1793886367
+2026-11-05 13:46:07.446 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.nutrition:accessoryRectangular - success.
+2026-11-05 13:46:07.446 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.nutrition:accessoryInline - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_Mn60NK/accessoryInline----342.00w--36.00h--0.00r--0f--0.00t-0.00l-0.00b0.00t.chrono-timeline
+2026-11-05 13:46:07.453 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.455 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.455 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryInline at 1793886367
+2026-11-05 13:46:07.458 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.459 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryInline at 1793886367
+2026-11-05 13:46:07.462 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.462 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryInline at 1793886367
+2026-11-05 13:46:07.466 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.466 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryInline at 1793886367
+2026-11-05 13:46:07.472 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.nutrition:accessoryInline - success.
+2026-11-05 13:46:07.472 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Batch ended (pl-8e42d6) - success
+2026-11-05 13:46:07.509 Df ArdaneWidgets[85093:3113d] [com.apple.chrono:placeholder] Batch begin (pl-63a80a) - locale: en_US (fixed en_US)
+2026-11-05 13:46:07.510 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.nutrition:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_lvY2o4/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.517 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.517 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.517 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryCircular at 1793886368
+2026-11-05 13:46:07.524 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.524 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryCircular at 1793886368
+2026-11-05 13:46:07.530 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.530 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryCircular at 1793886368
+2026-11-05 13:46:07.540 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.540 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryCircular at 1793886368
+2026-11-05 13:46:07.546 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.nutrition:accessoryCircular - success.
+2026-11-05 13:46:07.546 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.nutrition:accessoryInline - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_DxoVMf/accessoryInline----342.00w--36.00h--0.00r--0f--0.00t-0.00l-0.00b0.00t.chrono-timeline
+2026-11-05 13:46:07.552 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.553 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.554 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryInline at 1793886368
+2026-11-05 13:46:07.560 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.560 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryInline at 1793886368
+2026-11-05 13:46:07.563 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.564 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryInline at 1793886368
+2026-11-05 13:46:07.566 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.567 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryInline at 1793886368
+2026-11-05 13:46:07.571 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.nutrition:accessoryInline - success.
+2026-11-05 13:46:07.571 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.nutrition:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_Om4Oc5/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.576 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.576 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.577 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryRectangular at 1793886368
+2026-11-05 13:46:07.581 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.581 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryRectangular at 1793886368
+2026-11-05 13:46:07.588 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.592 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.592 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryRectangular at 1793886368
+2026-11-05 13:46:07.599 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.603 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.603 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render caloriesLeft accessoryRectangular at 1793886368
+2026-11-05 13:46:07.614 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.nutrition:accessoryRectangular - success.
+2026-11-05 13:46:07.614 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.budget:accessoryRectangular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_ux5vMc/accessoryRectangular----162.00w-72.00h-0.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.620 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.621 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.622 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render budgetLeft accessoryRectangular at 1793886368
+2026-11-05 13:46:07.634 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.635 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render budgetLeft accessoryRectangular at 1793886368
+2026-11-05 13:46:07.643 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.647 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.648 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render budgetLeft accessoryRectangular at 1793886368
+2026-11-05 13:46:07.652 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.653 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.653 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render budgetLeft accessoryRectangular at 1793886368
+2026-11-05 13:46:07.658 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.budget:accessoryRectangular - success.
+2026-11-05 13:46:07.658 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.budget:accessoryCircular - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_ung1G8/accessoryCircular----72.00w-72.00h-36.00r-tw0N5Ubrzh67JnTcbyMa8gRaBPsvEXdUc4wO04hotJo=.chrono-timeline
+2026-11-05 13:46:07.669 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.670 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.670 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render savingsGoal accessoryCircular at 1793886368
+2026-11-05 13:46:07.690 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.690 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render savingsGoal accessoryCircular at 1793886368
+2026-11-05 13:46:07.694 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.695 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.696 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render savingsGoal accessoryCircular at 1793886368
+2026-11-05 13:46:07.701 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.703 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.703 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render savingsGoal accessoryCircular at 1793886368
+2026-11-05 13:46:07.709 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.budget:accessoryCircular - success.
+2026-11-05 13:46:07.710 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request began for tessera.group.budget:accessoryInline - to archive: /Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/tmp/com.apple.chrono/NSIRD_chronod_nFGWYF/accessoryInline----342.00w--36.00h--0.00r--0f--0.00t-0.00l-0.00b0.00t.chrono-timeline
+2026-11-05 13:46:07.715 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Archive deployment version: DeploymentVersion(base: SwiftUI.ArchivedViewInput.DeploymentVersion(rawValue: 2))
+2026-11-05 13:46:07.716 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.716 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render budgetLeft accessoryInline at 1793886368
+2026-11-05 13:46:07.727 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.727 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render budgetLeft accessoryInline at 1793886368
+2026-11-05 13:46:07.731 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.731 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render budgetLeft accessoryInline at 1793886368
+2026-11-05 13:46:07.736 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.736 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:widget] Supports content layers? true, archiveVersion=3
+2026-11-05 13:46:07.737 Df ArdaneWidgets[85093:3109c] [com.dakrsnyk.tessera.widgets:timeline] render budgetLeft accessoryInline at 1793886368
+2026-11-05 13:46:07.744 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Request ended for tessera.group.budget:accessoryInline - success.
+2026-11-05 13:46:07.744 Df ArdaneWidgets[85093:3109c] [com.apple.chrono:placeholder] Batch ended (pl-63a80a) - success
+2026-11-05 13:47:01.782 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:47:01.827 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:47:01.929 E  chronod[3026:32bcc] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000173a700; extensionIdentity: com.apple.Batteries::com.apple.Batteries.BatteriesAvocadoWidgetExtension; kind: BatteriesAvocadoWidget; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:47:06.433 E  chronod[3026:32bf1] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000171d400; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:47:06.434 E  chronod[3026:32bf1] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000172e440; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemMedium; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:49:23.460 Df ArdaneWidgets[94401:36739] [com.apple.extensionkit:default] Extension `/Users/runner/Library/Developer/CoreSimulator/Devices/CB833DA5-BA4E-42BE-B82D-C1E0C39A3C02/data/Containers/Bundle/Application/869A2A7B-EBD3-4AD3-919C-7937504EDABB/Ardane.app/PlugIns/ArdaneWidgets.appex/ArdaneWidgets` of type: `1` launched.
+2026-11-05 13:49:23.555 Df ArdaneWidgets[94401:36739] [com.apple.extensionkit:launch] Extension Type: 'service' : <ExtensionFoundation._EXRunningExtension: 0x600002c00080>
+2026-11-05 13:49:23.555 Df ArdaneWidgets[94401:36739] [com.apple.runningboard:connection] Initializing connection
+2026-11-05 13:49:23.558 Df ArdaneWidgets[94401:36739] [com.apple.runningboard:process] Removing all cached process handles
+2026-11-05 13:49:23.558 Df ArdaneWidgets[94401:367c8] [com.apple.runningboard:connection] Sending handshake request attempt #1 to server
+2026-11-05 13:49:23.559 Df ArdaneWidgets[94401:367c8] [com.apple.runningboard:connection] Creating connection to com.apple.runningboard
+2026-11-05 13:49:23.559 Df ArdaneWidgets[94401:367c8] [com.apple.xpc:connection] [0x1048056c0] activating connection: mach=true listener=false peer=false name=com.apple.runningboard
+2026-11-05 13:49:23.562 Df ArdaneWidgets[94401:367c8] [com.apple.runningboard:connection] Handshake succeeded
+2026-11-05 13:49:23.562 Df ArdaneWidgets[94401:367c8] [com.apple.runningboard:connection] Identity resolved as xpcservice<com.dakrsnyk.ardane.widgets([osservice<com.apple.chronod>:3026])>{vt hash: 29079444}[uuid:FA35E5D7-4EDF-40B1-88F4-2BEF4E91699B]{definition:com.dakrsnyk.ardane.widgets[extension][client]}
+2026-11-05 13:49:23.569 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104805ac0] activating connection: mach=true listener=false peer=false name=com.apple.lsd.mapdb
+2026-11-05 13:49:23.574 Df ArdaneWidgets[94401:36739] [com.apple.chrono:widget] main [WidgetBundle]
+2026-11-05 13:49:23.576 Df ArdaneWidgets[94401:36739] [com.dakrsnyk.tessera.widgets:timeline] extension launched
+2026-11-05 13:49:23.579 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f06840] activating connection: mach=true listener=false peer=false name=com.apple.cfprefsd.daemon
+2026-11-05 13:49:23.583 A  ArdaneWidgets[94401:36739] (libsystem_containermanager.dylib) container_create_or_lookup_app_group_path_by_app_group_identifier
+2026-11-05 13:49:23.583 Df ArdaneWidgets[94401:36739] [com.apple.containermanager:xpc] Requesting app group container lookup; identifier = group.com.dakrsnyk.tessera, euid = 501, uid = 501, platform = 7
+2026-11-05 13:49:23.589 E  ArdaneWidgets[94401:36739] [com.apple.containermanager:unspecified] container_create_or_lookup_app_group_path_by_app_group_identifier: client is not entitled
+2026-11-05 13:49:23.598 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x1048061f0] activating connection: mach=true listener=false peer=false name=com.apple.pasteboard.pasted
+2026-11-05 13:49:23.598 Df ArdaneWidgets[94401:36739] [com.apple.Pasteboard:Pasteboard] Retrieving pasteboard named com.dakrsnyk.tessera.diagnostics, create if needed: NO
+2026-11-05 13:49:23.610 Df ArdaneWidgets[94401:36739] [com.apple.Pasteboard:Pasteboard] ...retrieving pasteboard named com.dakrsnyk.tessera.diagnostics completed successfully.
+2026-11-05 13:49:23.613 Df ArdaneWidgets[94401:36739] [com.apple.Pasteboard:Pasteboard] Retrieving pasteboard named com.dakrsnyk.tessera.diagnostics, create if needed: NO
+2026-11-05 13:49:23.614 Df ArdaneWidgets[94401:36739] [com.apple.Pasteboard:Pasteboard] ...retrieving pasteboard named com.dakrsnyk.tessera.diagnostics completed successfully.
+2026-11-05 13:49:23.616 A  ArdaneWidgets[94401:36739] (CoreFoundation) Loading Preferences From User Session CFPrefsD
+2026-11-05 13:49:23.616 Df ArdaneWidgets[94401:36739] [com.apple.chrono:widget] Locale token: aSHSfDpaK2Xr+O03r4oPJj3ufh0=
+2026-11-05 13:49:23.625 Df ArdaneWidgets[94401:36739] [com.apple.chrono:widget] WidgetHost - Optional(WidgetKit.ResolvedWidgetBundleHost)
+2026-11-05 13:49:23.631 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f04100] readying connection: mach=false listener=true peer=false name=com.dakrsnyk.ardane.widgets
+2026-11-05 13:49:23.641 Df ArdaneWidgets[94401:36739] [com.apple.BoardServices:Bootstrap] initializing domain XPCService
+2026-11-05 13:49:23.642 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f04100] activating connection: mach=false listener=true peer=false name=com.dakrsnyk.ardane.widgets
+2026-11-05 13:49:23.643 Df ArdaneWidgets[94401:367c8] [com.apple.BoardServices:XPCErrors] [S:1] Alloc XPCServiceListener:94401:com.dakrsnyk.ardane.widgets:FA35E5D7-4EDF-40B1-88F4-2BEF4E91699B
+2026-11-05 13:49:23.644 Df ArdaneWidgets[94401:367c8] [com.apple.xpc:connection] [0x103e06090] activating connection: mach=false listener=false peer=true name=com.dakrsnyk.ardane.widgets.peer[3026].0x103e06090
+2026-11-05 13:49:23.655 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:49:23.684 Df ArdaneWidgets[94401:367c8] [com.apple.chrono:activity] Batch begin (sp-20d45f) - locale: en_US (fixed en_US)
+2026-11-05 13:49:23.996 Df ArdaneWidgets[94401:36739] (libMobileGestalt.dylib) No persisted cache on this platform.
+2026-11-05 13:49:24.296 A  ArdaneWidgets[94401:36739] (libsystem_containermanager.dylib) container_create_or_lookup_app_group_path_by_app_group_identifier
+2026-11-05 13:49:24.296 Df ArdaneWidgets[94401:36739] [com.apple.containermanager:xpc] Requesting app group container lookup; identifier = group.com.dakrsnyk.tessera, euid = 501, uid = 501, platform = 7
+2026-11-05 13:49:24.296 E  ArdaneWidgets[94401:36739] [com.apple.containermanager:unspecified] container_create_or_lookup_app_group_path_by_app_group_identifier: client is not entitled
+2026-11-05 13:49:24.335 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x1048087b0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:24.419 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x1048087b0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:24.421 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CancelWorkoutIntent
+2026-11-05 13:49:24.465 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:0")))
+2026-11-05 13:49:24.466 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f0a980] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:24.485 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f0a980] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:24.485 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:49:24.533 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:0")))
+2026-11-05 13:49:24.534 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f0a980] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:24.546 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f0a980] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:24.546 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:49:24.583 Df ArdaneWidgets[94401:367c8] [com.apple.BoardServices:XPCErrors] [C:2] Alloc com.apple.frontboard.systemappservices
+2026-11-05 13:49:24.583 Df ArdaneWidgets[94401:367c8] [com.apple.xpc:connection] [0x10480ac80] activating connection: mach=false listener=false peer=false name=(anonymous)
+2026-11-05 13:49:24.610 Df ArdaneWidgets[94401:36739] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x10480b0f0> for initial
+2026-11-05 13:49:24.611 Df ArdaneWidgets[94401:36739] [com.apple.UIKit:UIScreen] Evaluated capturing state as 0 on <UIScreen: 0x10480b0f0> for CADisplay KVO
+2026-11-05 13:49:24.612 Df ArdaneWidgets[94401:36739] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 1, category name = (null)
+2026-11-05 13:49:24.613 Df ArdaneWidgets[94401:36739] [com.apple.Accessibility:AXSupportCommon] Read CategoryName: per-app = 0, category name = (null)
+2026-11-05 13:49:24.647 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e0f500] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:24.655 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e0f500] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:24.655 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CancelWorkoutIntent
+2026-11-05 13:49:24.656 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:0")))
+2026-11-05 13:49:24.656 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e0f500] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:24.668 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e0f500] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:24.668 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:49:24.669 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:0")))
+2026-11-05 13:49:24.669 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x1048106c0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:24.678 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x1048106c0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:24.678 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:49:24.814 Df ArdaneWidgets[94401:367c8] [com.apple.xpc:connection] [0x103e0de40] activating connection: mach=true listener=false peer=false name=com.apple.fontservicesd
+2026-11-05 13:49:25.983 Df ArdaneWidgets[94401:36739] [com.apple.chrono:activity] Batch end (sp-20d45f) - success
+2026-11-05 13:49:26.113 Df ArdaneWidgets[94401:36739] [com.apple.BackBoard:Display] [FBSDisplaySource 1-1] silently connecting raw configuration: <FBSDisplayConfiguration: 0x600003d3c000; Main; mode: "402x874@3x 60Hz p3 SDR">
+2026-11-05 13:49:26.120 Df ArdaneWidgets[94401:367c9] [com.apple.chrono:activity] Batch begin (sp-2678dd) - locale: en_US (fixed en_US)
+2026-11-05 13:49:26.127 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e1e010] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.136 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e1e010] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.136 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CancelWorkoutIntent
+2026-11-05 13:49:26.171 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:0")))
+2026-11-05 13:49:26.172 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x10480e470] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.179 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x10480e470] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.179 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:49:26.221 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:0")))
+2026-11-05 13:49:26.221 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f14080] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.231 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f14080] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.232 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:49:26.277 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f14080] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.284 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f14080] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.284 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CancelWorkoutIntent
+2026-11-05 13:49:26.285 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:0")))
+2026-11-05 13:49:26.286 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x10480e470] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.294 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x10480e470] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.295 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:49:26.295 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:0")))
+2026-11-05 13:49:26.295 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e0dc00] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.306 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e0dc00] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.306 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:49:26.799 Df ArdaneWidgets[94401:36739] [com.apple.chrono:activity] Batch end (sp-2678dd) - success
+2026-11-05 13:49:26.827 Df ArdaneWidgets[94401:36823] [com.apple.chrono:activity] Batch begin (sp-e8156c) - locale: en_US (fixed en_US)
+2026-11-05 13:49:26.831 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:26.832 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.839 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.839 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for UndoSetIntent
+2026-11-05 13:49:26.881 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.898 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.898 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for PauseRestIntent
+2026-11-05 13:49:26.928 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:26.928 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e51a90] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.934 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e51a90] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.934 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:49:26.935 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:26.936 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e293d0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.947 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e293d0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.947 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:49:26.951 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:26.951 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e293d0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.959 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e293d0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.959 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for UndoSetIntent
+2026-11-05 13:49:26.960 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.971 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.971 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for PauseRestIntent
+2026-11-05 13:49:26.972 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:26.972 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:26.983 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:26.983 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:49:27.008 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:27.008 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:27.016 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f3a790] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:27.016 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:49:28.243 Df ArdaneWidgets[94401:36739] [com.apple.chrono:activity] Batch end (sp-e8156c) - success
+2026-11-05 13:49:28.285 Df ArdaneWidgets[94401:36823] [com.apple.chrono:activity] Batch begin (sp-9d7974) - locale: en_US (fixed en_US)
+2026-11-05 13:49:28.290 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:28.290 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e51a90] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:28.307 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e51a90] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:28.307 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for UndoSetIntent
+2026-11-05 13:49:28.308 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104832ec0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:28.314 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104832ec0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:28.314 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for PauseRestIntent
+2026-11-05 13:49:28.314 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:28.315 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104832ec0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:28.323 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104832ec0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:28.323 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:49:28.323 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:28.323 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f134c0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:28.338 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f134c0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:28.338 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:49:28.341 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:28.341 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f45a80] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:28.353 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f45a80] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:28.353 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for UndoSetIntent
+2026-11-05 13:49:28.353 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e06540] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:28.365 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e06540] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:28.365 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for PauseRestIntent
+2026-11-05 13:49:28.366 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:28.366 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104832ec0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:28.431 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104832ec0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:28.431 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:49:28.432 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:49:28.458 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f45a80] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:49:28.470 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f45a80] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:49:28.470 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:49:29.711 Df ArdaneWidgets[94401:36739] [com.apple.chrono:activity] Batch end (sp-9d7974) - success
+2026-11-05 13:51:17.458 Df ArdaneWidgets[94401:36823] [com.apple.xpc:connection] [0x103e06090] invalidated because the client process (pid 3026) either cancelled the connection or exited
+2026-11-05 13:51:17.460 E  ArdaneWidgets[94401:36823] [com.apple.BoardServices:XPCErrors] [S:1] Error received: Connection invalidated.
+2026-11-05 13:51:17.460 Df ArdaneWidgets[94401:39a08] [com.apple.BoardServices:XPCErrors] [S:3] Alloc XPCServiceListener:94401:com.dakrsnyk.ardane.widgets:FA35E5D7-4EDF-40B1-88F4-2BEF4E91699B
+2026-11-05 13:51:17.466 Df ArdaneWidgets[94401:39a08] [com.apple.xpc:connection] [0x103f08a20] activating connection: mach=false listener=false peer=true name=com.dakrsnyk.ardane.widgets.peer[3026].0x103f08a20
+2026-11-05 13:51:17.469 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:51:17.478 Df ArdaneWidgets[94401:36823] [com.apple.xpc:connection] [0x10480ac80] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:51:17.483 Df ArdaneWidgets[94401:39a08] [com.apple.chrono:activity] Batch begin (sp-b8163c) - locale: en_US (fixed en_US)
+2026-11-05 13:51:17.497 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:51:17.512 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x10480e470] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:51:17.599 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x10480e470] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:51:17.600 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for UndoSetIntent
+2026-11-05 13:51:17.605 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:51:17.606 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f134c0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:51:17.619 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f134c0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:51:17.619 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:51:17.621 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:51:17.622 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f134c0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:51:17.643 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f134c0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:51:17.644 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:51:17.709 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:51:17.709 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f134c0] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:51:17.729 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103f134c0] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:51:17.729 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for UndoSetIntent
+2026-11-05 13:51:17.735 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:51:17.735 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104833470] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:51:17.751 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x104833470] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:51:17.751 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for SkipSetIntent
+2026-11-05 13:51:17.752 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Execution] Prepared expected to String(Optional("0FB61B13-F0E5-4C4D-902D-950DC9DB9E85:0:1")))
+2026-11-05 13:51:17.752 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e1c230] activating connection: mach=true listener=false peer=false name=com.apple.linkd.autoShortcut
+2026-11-05 13:51:17.881 Df ArdaneWidgets[94401:36739] [com.apple.xpc:connection] [0x103e1c230] invalidated because the current process cancelled the connection by calling xpc_connection_cancel()
+2026-11-05 13:51:17.881 Df ArdaneWidgets[94401:36739] [com.apple.appintents:Metadata] Failed to fetch metadata for CompleteSetIntent
+2026-11-05 13:51:19.264 Df ArdaneWidgets[94401:36739] [com.apple.chrono:activity] Batch end (sp-b8163c) - success
+2026-11-05 13:52:21.708 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:52:21.754 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:52:21.808 E  chronod[3026:0] [com.apple.os_debug_log:] assertion failed: 24H232 23C54: libxpc.dylib + 56152 [5D3B42DD-89E9-36F1-8E20-F4BBF2B7644E]: 0x87
+2026-11-05 13:52:22.027 E  chronod[3026:3b3de] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000173a700; extensionIdentity: com.apple.Batteries::com.apple.Batteries.BatteriesAvocadoWidgetExtension; kind: BatteriesAvocadoWidget; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:52:22.172 E  chronod[3026:3b3d0] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000172e700; extensionIdentity: com.apple.ScreenTimeWidgetApplication::com.apple.ScreenTimeWidgetApplication.ScreenTimeWidgetExtension; kind: com.apple.ScreenTimeWidgetApplication; family: systemLarge; intentHash: 7227504733474769685; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:52:25.881 E  chronod[3026:3b3d1] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000171d400; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemSmall; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:52:25.888 E  chronod[3026:3b3d1] [com.apple.duetexpertd.atx:timeline] ATXInfoTimelineDonationClient: Error reloading timeline for widget <CHSWidget: 0x60000172e440; extensionIdentity: com.apple.Maps::com.apple.Maps.GeneralMapsWidget; kind: com.apple.Maps; family: systemMedium; intentHash: 0; activityIdentifier: 0x0> - Error Domain=NSCocoaErrorDomain Code=4099 "The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process." UserInfo={NSDebugDescription=The connection to service named com.apple.proactive.infoSuggestion.xpc was invalidated: Connection init failed at lookup with error 3 - No such process.}
+2026-11-05 13:52:53.859 E  chronod[3026:3b3d1] [com.apple.appintents:Connection] [com.dakrsnyk.ardane] XPC connection has been interrupted

@@ -1,0 +1,7 @@
+SCAN-PRECISION 2026-11-03
+Plateforme : SIMULATEUR (iPhone17,1, iOS 26.2)
+
+AUCUNE MESURE DE PRÉCISION N'A ÉTÉ PRODUITE.
+Raison : aucun fichier Tests/Fixtures/WeighedMeals/meals.json : aucun repas pesé n'a été fourni.
+Sans repas pesé (photo + poids lu sur une balance de cuisine), aucun chiffre de précision n'existe : aucun n'est donné ici.
+Procédure : docs/scanner/Protocole-mesure.md ; format du jeu : Tests/Fixtures/WeighedMeals/README.md.

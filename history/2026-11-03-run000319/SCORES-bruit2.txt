@@ -1,0 +1,21 @@
+SCORE omnivox-session bruit=2 P=0.81 R=0.76 jour=1.00 debut=0.67 fin=0.67 titre=0.57 salle=0.79 E=0.74 attendus=7.00 lus=7.67
+SCORE omnivox-bloc-3-rangees bruit=2 P=0.70 R=0.71 jour=1.00 debut=0.67 fin=1.00 titre=0.38 salle=0.71 E=0.75 attendus=7.00 lus=7.67
+SCORE outaouais-encadre bruit=2 P=0.84 R=0.56 jour=0.95 debut=0.38 fin=0.54 titre=0.31 salle=0.59 E=0.55 attendus=15.00 lus=9.33
+SCORE semaine-calendrier bruit=2 P=0.90 R=1.00 jour=1.00 debut=1.00 fin=0.89 titre=0.89 salle=0.72 E=0.90 attendus=6.00 lus=6.67
+SCORE grille-ecole-periodes bruit=2 P=0.89 R=0.89 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=0.94 E=0.99 attendus=6.00 lus=6.00
+SCORE grille-transposee bruit=2 P=1.00 R=0.90 jour=1.00 debut=1.00 fin=1.00 titre=0.93 salle=1.00 E=0.99 attendus=7.00 lus=6.33
+SCORE liste-jour-par-jour bruit=2 P=1.00 R=0.87 jour=0.87 debut=1.00 fin=1.00 titre=0.76 salle=0.82 E=0.89 attendus=5.00 lus=4.33
+SCORE tableau-jour-debut-fin bruit=2 P=0.93 R=0.93 jour=1.00 debut=1.00 fin=1.00 titre=0.93 salle=1.00 E=0.99 attendus=5.00 lus=5.00
+SCORE universite-cm-td-tp bruit=2 P=1.00 R=0.93 jour=1.00 debut=1.00 fin=1.00 titre=0.78 salle=0.93 E=0.94 attendus=5.00 lus=4.67
+SCORE japonais-1限 bruit=2 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=0.93 salle=0.93 E=0.97 attendus=5.00 lus=5.00
+SCORE allemand-24h bruit=2 P=0.94 R=0.94 jour=1.00 debut=1.00 fin=1.00 titre=0.94 salle=1.00 E=0.99 attendus=6.00 lus=6.00
+SCORE anglais-12h bruit=2 P=0.93 R=0.83 jour=1.00 debut=1.00 fin=0.93 titre=0.93 salle=1.00 E=0.97 attendus=6.00 lus=5.33
+SCORE deux-salles bruit=2 P=0.93 R=0.87 jour=1.00 debut=1.00 fin=0.92 titre=0.92 salle=0.83 E=0.93 attendus=5.00 lus=4.67
+SCORE pauses-grille-ecole bruit=2 P=0.95 R=0.90 jour=0.94 debut=1.00 fin=1.00 titre=0.89 salle=1.00 E=0.97 attendus=7.00 lus=6.67
+SCORE creneaux-libres-fr bruit=2 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=5.00 lus=5.00
+SCORE creneaux-libres-en bruit=2 P=1.00 R=0.78 jour=1.00 debut=1.00 fin=1.00 titre=0.89 salle=1.00 E=0.98 attendus=3.00 lus=2.33
+SCORE week-end bruit=2 P=1.00 R=0.93 jour=0.87 debut=1.00 fin=1.00 titre=0.92 salle=1.00 E=0.96 attendus=5.00 lus=4.67
+SCORE omnivox-session-sans-sonde bruit=2 P=1.00 R=0.81 jour=1.00 debut=0.94 fin=0.89 titre=0.61 salle=0.83 E=0.86 attendus=7.00 lus=5.67
+SCORE omnivox-bloc-3-rangees-sans-sonde bruit=2 P=0.95 R=0.90 jour=0.94 debut=0.74 fin=0.69 titre=0.79 salle=0.84 E=0.80 attendus=7.00 lus=6.67
+SCORE outaouais-encadre-sans-sonde bruit=2 P=0.72 R=0.53 jour=1.00 debut=0.33 fin=0.33 titre=0.33 salle=0.58 E=0.52 attendus=15.00 lus=10.00
+SCORE-MOYENNE bruit=2 P=0.93 R=0.85 jour=0.98 debut=0.89 fin=0.89 titre=0.79 salle=0.88 E=0.88 pages=20 graines=3
