@@ -25,6 +25,7 @@ export const C_WIDGETS: SpecC = {
   id: "C-widgets",
   template: "C",
   voLen: voC,
+  introSpeed: 1.15, // asked by the user on 2026-11-06: from the start up to the styles carousel
   hook: { title: "3 widget sets", subtitle: "that run my whole day", vo: "hook" },
   pages: [
     {

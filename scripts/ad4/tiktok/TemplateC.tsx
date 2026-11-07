@@ -1,7 +1,7 @@
 // Template C « Top 3 » (v2, 2026-11-06): a hook, then one numbered page per theme with several widgets of different
 // shapes (small, medium, Lock Screen circular / rectangular / inline, Live Activity), then a carousel of complete Home
 // Screens in several widget styles and wallpapers, then the end card. Voice: the base ads' voice (vo_tiktok.py).
-import React from "react";
+import React, { createContext, useContext } from "react";
 import { AbsoluteFill, Audio, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Caption, cap, clamp, FONT, FPS, H, out, PremiumTag, W } from "./lib";
 
@@ -21,6 +21,8 @@ export type SpecC = {
   end: { line: string; sub: string; vo: string };
   /** Length of each voice line in seconds (vo/<id>.json, written by vo_tiktok.py). */
   voLen: Record<string, number>;
+  /** Speed of the hook and the numbered pages, picture and voice together (1.15 asked on 2026-11-06); the carousel and the end stay at 1. */
+  introSpeed?: number;
 };
 
 const CREAM = "#F6F3EC";
@@ -28,14 +30,19 @@ const INK = "#141418";
 const BLUE = "#1D4E9E";
 const LEAD = 0.25; // the voice starts this long after the cut
 
+/** Playback speed of the part being drawn: every animation of the hook and the pages reads its frame through useF(). */
+const Speed = createContext(1);
+const useF = () => useCurrentFrame() * useContext(Speed);
+
 /** Every part of the ad with its start and length in frames (the voice sets the rhythm). */
 export const timeline = (s: SpecC) => {
   const sec = (vo: string, min: number, tail: number) => Math.max(min, (s.voLen[vo] ?? 0) + LEAD + tail);
-  const parts: { key: string; vo: string; dur: number }[] = [
-    { key: "hook", vo: s.hook.vo, dur: sec(s.hook.vo, 2.4, 0.4) },
-    ...s.pages.map((p, i) => ({ key: `page${i}`, vo: p.vo, dur: sec(p.vo, 3.6, 0.5) })),
-    { key: "styles", vo: s.styles.vo, dur: sec(s.styles.vo, 4.8, 1.3) },
-    { key: "end", vo: s.end.vo, dur: sec(s.end.vo, 3.0, 0.8) },
+  const fast = s.introSpeed ?? 1;
+  const parts: { key: string; vo: string; dur: number; speed: number }[] = [
+    { key: "hook", vo: s.hook.vo, dur: sec(s.hook.vo, 2.4, 0.4) / fast, speed: fast },
+    ...s.pages.map((p, i) => ({ key: `page${i}`, vo: p.vo, dur: sec(p.vo, 3.6, 0.5) / fast, speed: fast })),
+    { key: "styles", vo: s.styles.vo, dur: sec(s.styles.vo, 4.8, 1.3), speed: 1 },
+    { key: "end", vo: s.end.vo, dur: sec(s.end.vo, 3.0, 0.8), speed: 1 },
   ];
   let from = 0;
   return parts.map((p) => {
@@ -58,7 +65,7 @@ const text = (size: number, weight: number, color = INK): React.CSSProperties =>
 });
 
 const Hook: React.FC<{ hook: SpecC["hook"] }> = ({ hook }) => {
-  const f = useCurrentFrame();
+  const f = useF();
   const { fps } = useVideoConfig();
   const a = spring({ frame: f, fps, config: { damping: 13, stiffness: 180 } });
   const b = spring({ frame: f - 8, fps, config: { damping: 15, stiffness: 160 } });
@@ -72,14 +79,14 @@ const Hook: React.FC<{ hook: SpecC["hook"] }> = ({ hook }) => {
 
 /** Pop-in of the k-th tile of a page. */
 const usePop = (k: number) => {
-  const f = useCurrentFrame();
+  const f = useF();
   const { fps } = useVideoConfig();
   const s = spring({ frame: f - 8 - k * 6, fps, config: { damping: 13, stiffness: 170, mass: 0.7 } });
   return { s, float: Math.sin((f + k * 9) / 16) * 4 };
 };
 
 const WidgetTile: React.FC<{ t: Extract<Tile, { kind: "widget" }>; k: number }> = ({ t, k }) => {
-  const f = useCurrentFrame();
+  const f = useF();
   const { s, float } = usePop(k);
   const src = t.seq ? `${t.src}-${String(Math.floor((f / FPS) * t.seq.fps) % t.seq.count).padStart(3, "0")}` : t.src;
   return (
@@ -126,7 +133,7 @@ const LockTile: React.FC<{ t: Extract<Tile, { kind: "lock" }>; k: number }> = ({
 };
 
 const Page: React.FC<{ n: number; page: PageC }> = ({ n, page }) => {
-  const f = useCurrentFrame();
+  const f = useF();
   const { fps } = useVideoConfig();
   const num = spring({ frame: f, fps, config: { damping: 12, stiffness: 200 } });
   const lab = interpolate(f, [3, 11], [0, 1], { ...clamp, easing: out });
@@ -208,19 +215,25 @@ const End: React.FC<{ end: SpecC["end"] }> = ({ end }) => {
 export const TemplateC: React.FC<{ spec: SpecC }> = ({ spec }) => {
   const { durationInFrames } = useVideoConfig();
   const tl = timeline(spec);
-  const voAt = tl.map((p) => ({ start: p.from + Math.round(LEAD * FPS), end: p.from + Math.round((LEAD + (spec.voLen[p.vo] ?? 0)) * FPS) }));
+  const voAt = tl.map((p) => {
+    const start = p.from + Math.round((LEAD * FPS) / p.speed);
+    return { start, end: start + Math.round(((spec.voLen[p.vo] ?? 0) * FPS) / p.speed) };
+  });
   /** 0 → 1 while the voice speaks, with 6-frame ramps so the music dips smoothly under it. */
   const duck = (fr: number) => Math.max(0, ...voAt.map((v) => interpolate(fr, [v.start - 8, v.start - 2, v.end + 2, v.end + 10], [0, 1, 1, 0], clamp)));
   return (
     <AbsoluteFill style={{ background: CREAM }}>
       {tl.map((p, i) => (
         <Sequence key={p.key} from={p.from} durationInFrames={p.frames}>
+          <Speed.Provider value={p.speed}>
           {p.key === "hook" && <Hook hook={spec.hook} />}
           {p.key.startsWith("page") && <Page n={i} page={spec.pages[i - 1]} />}
           {p.key === "styles" && <Styles st={spec.styles} />}
           {p.key === "end" && <End end={spec.end} />}
-          <Sequence from={Math.round(LEAD * FPS)}>
-            <Audio src={staticFile(`tiktok/vo/${spec.id}-${p.vo}.wav`)} volume={1} />
+          </Speed.Provider>
+          <Sequence from={Math.round((LEAD * FPS) / p.speed)}>
+            {/* the voice is sped up with the picture (pitch kept by the renderer's time-stretch) */}
+            <Audio src={staticFile(`tiktok/vo/${spec.id}-${p.vo}.wav`)} volume={1} playbackRate={p.speed} />
           </Sequence>
         </Sequence>
       ))}
