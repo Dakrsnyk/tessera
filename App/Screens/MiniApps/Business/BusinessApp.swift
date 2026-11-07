@@ -289,6 +289,7 @@ struct BusinessAppView: View {
                             .lineStyle(StrokeStyle(lineWidth: 2.5))
                     }
                 }
+                .accessibilityLabel(tr("Chiffre d'affaires cumulé"))
                 .chartXAxisLabel(period == .year ? tr("Mois") : tr("Jour"))
                 .frame(height: 180)
                 .card()
@@ -480,8 +481,8 @@ struct KPIPicker: View {
                             HStack(spacing: 12) {
                                 Image(systemName: kpi.symbol).frame(width: 24).foregroundStyle(Color(hex: BusinessFormat.accentHex))
                                 VStack(alignment: .leading, spacing: 2) {
-                                    Text(kpi.title).foregroundStyle(.primary)
-                                    Text(explanation(kpi)).font(.caption).foregroundStyle(.secondary)
+                                    Text(kpi.title).foregroundStyle(Color.primary)
+                                    Text(explanation(kpi)).font(.caption).foregroundStyle(Color.secondary)
                                 }
                                 Spacer()
                                 Image(systemName: model.business.pinnedKPIs.contains(kpi) ? "checkmark.circle.fill" : "circle")

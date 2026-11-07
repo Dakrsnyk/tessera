@@ -543,6 +543,7 @@ struct ApplyStyleSheet: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @State private var selection: Set<UUID> = []
+    @State private var paywall: PaywallContext?
 
     var body: some View {
         NavigationStack {
@@ -580,13 +581,19 @@ struct ApplyStyleSheet: View {
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(tr("Appliquer (\(selection.count))")) {
-                        let count = model.apply(style, to: selection)
-                        if count > 0 { Haptics.success() }
-                        dismiss()
+                        switch model.applyOrAskPremium(style, to: selection) {
+                        case .applied(let count):
+                            if count > 0 { Haptics.success() }
+                            dismiss()
+                        case .needsPremium(let restyled):
+                            // A Premium look on a free plan: nothing changed, the paywall shows the widgets as they would look.
+                            paywall = PaywallContext.designs(restyled)
+                        }
                     }
                     .disabled(selection.isEmpty)
                 }
             }
+            .sheet(item: $paywall) { PaywallView(context: $0) }
         }
     }
 }

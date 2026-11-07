@@ -113,7 +113,7 @@ private struct MiniFloatingButton: View {
         } label: {
             Label(action.title, systemImage: action.symbol)
                 .font(.headline)
-                .foregroundStyle(Color.white)
+                .foregroundStyle(Color.readableInk(on: action.colorHex))
                 .padding(.horizontal, 24)
                 .frame(minHeight: 50)
                 .background(Color(hex: action.colorHex), in: Capsule())

@@ -161,7 +161,7 @@ struct MyWidgetsView: View {
                 Text(tr("Les widgets qui les affichent sur ton écran d'accueil reviendront au modèle par défaut."))
             }
             .sheet(isPresented: $showsFusion) {
-                if let merged = Fusion.merge(orderedSelection) {
+                if let merged = Fusion.merge(orderedSelection, copiesBackground: false) {
                     FusionSheet(designs: orderedSelection, merged: merged) { keepsOriginals in
                         startFusion(merged: merged, keepsOriginals: keepsOriginals)
                     }
@@ -445,7 +445,10 @@ struct MyWidgetsView: View {
                 paywall = merged.usesPremiumFeatures && !model.isPremium ? PaywallContext.designs([merged]) : PaywallContext.designLimit
                 return
             }
-            fusionRun = FusionRun(sources: sources, merged: merged, mergedPayload: model.payload(for: merged), keepsOriginals: keepsOriginals)
+            // The merged widget gets its own copy of the background photo: the originals' file goes with them.
+            var owned = merged
+            owned.background = Fusion.ownBackground(of: merged.background)
+            fusionRun = FusionRun(sources: sources, merged: owned, mergedPayload: model.payload(for: owned), keepsOriginals: keepsOriginals)
         }
     }
 

@@ -105,7 +105,7 @@ enum ThemeCatalog {
             id: .minimal, name: tr("Minimal"), tagline: tr("Suit le mode clair ou sombre"), isPremium: false,
             background: .solid(.adaptive(light: "FFFFFF", dark: "1C1C1E")),
             primary: .adaptive(light: "111114", dark: "F5F5F7"),
-            secondary: .adaptive(light: "8A8A8E", dark: "98989F"),
+            secondary: .adaptive(light: "757579", dark: "98989F"),
             tint: .accent, panel: .adaptive(light: "F2F2F4", dark: "2A2A2D"),
             fontDesign: .default, numberWeight: .semibold, titleWeight: .semibold,
             uppercaseLabels: true, isDarkSurface: nil
@@ -113,7 +113,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .light, name: tr("Clair"), tagline: tr("Toujours lumineux"), isPremium: false,
             background: .solid(.fixed("F5F5F2")),
-            primary: .fixed("16171A"), secondary: .fixed("7C7D82"),
+            primary: .fixed("16171A"), secondary: .fixed("6E6F73"),
             tint: .accent, panel: .fixed("E9E9E4"),
             fontDesign: .default, numberWeight: .medium, titleWeight: .semibold,
             uppercaseLabels: true, isDarkSurface: false
@@ -137,7 +137,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .glass, name: tr("Verre"), tagline: tr("Translucide et lumineux"), isPremium: true,
             background: .gradient(["6A85E0", "9C7FD6", "D98FB6"]),
-            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.74),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.88),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.18),
             fontDesign: .rounded, numberWeight: .semibold, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: true
@@ -145,7 +145,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .aurora, name: tr("Aurore"), tagline: tr("Un dégradé bleu nuit vers turquoise"), isPremium: true,
             background: .gradient(["1C2566", "2A6F9B", "3FB5A3"]),
-            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.72),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.88),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.14),
             fontDesign: .default, numberWeight: .bold, titleWeight: .semibold,
             uppercaseLabels: true, isDarkSurface: true
@@ -169,7 +169,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .retro, name: tr("Rétro"), tagline: tr("Papier chaud et typo ronde"), isPremium: true,
             background: .solid(.fixed("F1E4C8")),
-            primary: .fixed("2A1E14"), secondary: .fixed("8A6F55"),
+            primary: .fixed("2A1E14"), secondary: .fixed("78614A"),
             tint: .fixed("D4532A"), panel: .fixed("E6D5B1"),
             fontDesign: .rounded, numberWeight: .heavy, titleWeight: .bold,
             uppercaseLabels: true, isDarkSurface: false
@@ -186,7 +186,7 @@ enum ThemeCatalog {
             id: .typography, name: tr("Typo"), tagline: tr("De grands chiffres, en serif"), isPremium: true,
             background: .solid(.adaptive(light: "FFFFFF", dark: "0E0E10")),
             primary: .adaptive(light: "0E0E10", dark: "FAFAFA"),
-            secondary: .adaptive(light: "85858A", dark: "8E8E93"),
+            secondary: .adaptive(light: "75757A", dark: "8E8E93"),
             tint: .accent, panel: .adaptive(light: "F1F1F1", dark: "1D1D20"),
             fontDesign: .serif, numberWeight: .black, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: nil
@@ -213,7 +213,7 @@ enum ThemeCatalog {
             id: .modern, name: tr("Moderne"), tagline: tr("Net, doux, pastilles d'icônes"), isPremium: false,
             background: .solid(.adaptive(light: "FFFFFF", dark: "17181B")),
             primary: .adaptive(light: "101114", dark: "F4F4F6"),
-            secondary: .adaptive(light: "84858B", dark: "9A9BA1"),
+            secondary: .adaptive(light: "74757B", dark: "9A9BA1"),
             tint: .accent, panel: .adaptive(light: "F1F2F5", dark: "24262B"),
             fontDesign: .default, numberWeight: .bold, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: nil,
@@ -223,7 +223,7 @@ enum ThemeCatalog {
             id: .card, name: tr("Carte"), tagline: tr("Le contenu posé sur une carte"), isPremium: false,
             background: .solid(.adaptive(light: "E9ECF1", dark: "0B0C0F")),
             primary: .adaptive(light: "15171C", dark: "F2F3F5"),
-            secondary: .adaptive(light: "7D828C", dark: "979BA3"),
+            secondary: .adaptive(light: "656A73", dark: "979BA3"),
             tint: .accent, panel: .adaptive(light: "FFFFFF", dark: "1E2026"),
             fontDesign: .default, numberWeight: .semibold, titleWeight: .semibold,
             uppercaseLabels: true, isDarkSurface: nil,
@@ -233,7 +233,7 @@ enum ThemeCatalog {
             id: .soft, name: tr("Doux"), tagline: tr("Formes rondes, tons tendres"), isPremium: false,
             background: .solid(.adaptive(light: "F6F1FA", dark: "201C27")),
             primary: .adaptive(light: "2E2438", dark: "F3EEF8"),
-            secondary: .adaptive(light: "8D7F99", dark: "A99DB5"),
+            secondary: .adaptive(light: "776883", dark: "A99DB5"),
             tint: .accent, panel: .adaptive(light: "ECE3F4", dark: "2E2838"),
             fontDesign: .rounded, numberWeight: .semibold, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: nil,
@@ -243,7 +243,7 @@ enum ThemeCatalog {
             id: .compact, name: tr("Compact"), tagline: tr("Plus d'infos, moins d'espace"), isPremium: false,
             background: .solid(.adaptive(light: "FFFFFF", dark: "141416")),
             primary: .adaptive(light: "111114", dark: "F5F5F7"),
-            secondary: .adaptive(light: "8A8A8E", dark: "98989F"),
+            secondary: .adaptive(light: "757579", dark: "98989F"),
             tint: .accent, panel: .adaptive(light: "F2F2F4", dark: "232326"),
             fontDesign: .default, numberWeight: .semibold, titleWeight: .semibold,
             uppercaseLabels: true, isDarkSurface: nil,
@@ -293,7 +293,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .editorial, name: tr("Éditorial"), tagline: tr("Serif, papier et capitales"), isPremium: true,
             background: .solid(.fixed("F7F3EA")),
-            primary: .fixed("151412"), secondary: .fixed("7A746A"),
+            primary: .fixed("151412"), secondary: .fixed("736E64"),
             tint: .accent, panel: .fixed("ECE6D8"),
             fontDesign: .serif, numberWeight: .regular, titleWeight: .medium,
             uppercaseLabels: true, isDarkSurface: false,
@@ -306,7 +306,7 @@ enum ThemeCatalog {
             id: .magazine, name: tr("Magazine"), tagline: tr("Un grand chiffre, comme une une"), isPremium: true,
             background: .solid(.adaptive(light: "FFFFFF", dark: "111111")),
             primary: .adaptive(light: "0D0D0D", dark: "FAFAFA"),
-            secondary: .adaptive(light: "7F7F7F", dark: "8F8F8F"),
+            secondary: .adaptive(light: "757575", dark: "8F8F8F"),
             tint: .accent, panel: .adaptive(light: "F2F2F2", dark: "1F1F1F"),
             fontDesign: .serif, numberWeight: .black, titleWeight: .bold,
             uppercaseLabels: true, isDarkSurface: nil,
@@ -394,7 +394,7 @@ enum ThemeCatalog {
             id: .pastel, name: tr("Pastel"), tagline: tr("Couleurs de dragée"), isPremium: true,
             background: .solid(.adaptive(light: "FFF1E6", dark: "2B2422")),
             primary: .adaptive(light: "4A3B35", dark: "F6EAE3"),
-            secondary: .adaptive(light: "9C8A82", dark: "B8A69E"),
+            secondary: .adaptive(light: "7D6B63", dark: "B8A69E"),
             tint: .accent, panel: .adaptive(light: "FDE2D0", dark: "3A302C"),
             fontDesign: .rounded, numberWeight: .bold, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: nil,
@@ -403,7 +403,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .paper, name: tr("Papier"), tagline: tr("Papier crème et encre"), isPremium: true,
             background: .solid(.fixed("F4EFE6")),
-            primary: .fixed("2B2B2B"), secondary: .fixed("7C766C"),
+            primary: .fixed("2B2B2B"), secondary: .fixed("716C63"),
             tint: .fixed("B23A2E"), panel: .fixed("EAE3D6"),
             fontDesign: .serif, numberWeight: .semibold, titleWeight: .medium,
             uppercaseLabels: false, isDarkSurface: false,
@@ -433,7 +433,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .vapor, name: tr("Vapor"), tagline: tr("Rose et bleu rétro-futur"), isPremium: true,
             background: .gradient(["FF6AD5", "8795E8"]),
-            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.8),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.88),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.2),
             fontDesign: .rounded, numberWeight: .heavy, titleWeight: .bold,
             uppercaseLabels: true, isDarkSurface: true,
@@ -451,7 +451,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .mist, name: tr("Brume"), tagline: tr("Pâle, léger, presque translucide"), isPremium: true,
             background: .gradient(["F8FAFD", "DCE3EC"]),
-            primary: .fixed("1E2833"), secondary: .fixed("6B7785"),
+            primary: .fixed("1E2833"), secondary: .fixed("5B6571"),
             tint: .accent, panel: .fixed("FFFFFF", 0.6),
             fontDesign: .default, numberWeight: .light, titleWeight: .medium,
             uppercaseLabels: false, isDarkSurface: false,
@@ -463,7 +463,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .dawn, name: tr("Aube"), tagline: tr("Pêche et corail d'un lever de soleil"), isPremium: true,
             background: .gradient(["FFB88C", "DE6262"]),
-            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.82),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.88),
             tint: .fixed("FFFFFF"), panel: .fixed("FFFFFF", 0.18),
             fontDesign: .rounded, numberWeight: .heavy, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: true,
@@ -482,7 +482,7 @@ enum ThemeCatalog {
             id: .forest, name: tr("Sous-bois"), tagline: tr("Mousse, papier et titres à empattements"), isPremium: false,
             background: .solid(.adaptive(light: "EEF3EA", dark: "18221B")),
             primary: .adaptive(light: "1F3324", dark: "E6EFE3"),
-            secondary: .adaptive(light: "5E7462", dark: "A3B8A6"),
+            secondary: .adaptive(light: "5D7361", dark: "A3B8A6"),
             tint: .accent, panel: .adaptive(light: "DDE8D8", dark: "243328"),
             fontDesign: .serif, numberWeight: .semibold, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: nil,
@@ -492,7 +492,7 @@ enum ThemeCatalog {
             id: .blossom, name: tr("Cerisier"), tagline: tr("Rose tendre, formes rondes"), isPremium: true,
             background: .solid(.adaptive(light: "FFF0F3", dark: "2A1A1F")),
             primary: .adaptive(light: "4B2530", dark: "FBE7EC"),
-            secondary: .adaptive(light: "A07380", dark: "C9A0AB"),
+            secondary: .adaptive(light: "90626F", dark: "C9A0AB"),
             tint: .accent, panel: .adaptive(light: "FFDCE4", dark: "3A242B"),
             fontDesign: .rounded, numberWeight: .bold, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: nil,
@@ -513,7 +513,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .dune, name: tr("Dune"), tagline: tr("Sable chaud, grain et serif"), isPremium: true,
             background: .gradient(["F3E3C3", "D9B98A"]),
-            primary: .fixed("3B2A17"), secondary: .fixed("7A6043"),
+            primary: .fixed("3B2A17"), secondary: .fixed("5D4933"),
             tint: .accent, panel: .fixed("FFFFFF", 0.35),
             fontDesign: .serif, numberWeight: .medium, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: false,
@@ -522,7 +522,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .glacier, name: tr("Glacier"), tagline: tr("Bleu de glace, net et lumineux"), isPremium: false,
             background: .gradient(["E0F2FF", "A7C7E7"]),
-            primary: .fixed("0F2A44"), secondary: .fixed("4A6A88"),
+            primary: .fixed("0F2A44"), secondary: .fixed("3A536B"),
             tint: .accent, panel: .fixed("FFFFFF", 0.5),
             fontDesign: .rounded, numberWeight: .semibold, titleWeight: .medium,
             uppercaseLabels: false, isDarkSurface: false,
@@ -547,7 +547,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .space, name: tr("Espace"), tagline: tr("Argent lunaire, poussière d'étoiles et nuit profonde"), isPremium: true,
             background: .gradient(["9AA0AD", "3E4250", "0E0F15"]),
-            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.78),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.88),
             tint: .fixed("E9ECF5"), panel: .fixed("FFFFFF", 0.12),
             fontDesign: .default, numberWeight: .semibold, titleWeight: .semibold,
             uppercaseLabels: true, isDarkSurface: true,
@@ -578,7 +578,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .botanical, name: tr("Botanique"), tagline: tr("Vert tendre, feuilles et serif de serre"), isPremium: true,
             background: .gradient(["EFF5E6", "CFE3C4"]),
-            primary: .fixed("1F3A24"), secondary: .fixed("557A5B"),
+            primary: .fixed("1F3A24"), secondary: .fixed("48684E"),
             tint: .fixed("3E7B4F"), panel: .fixed("FFFFFF", 0.55),
             fontDesign: .serif, numberWeight: .medium, titleWeight: .semibold,
             uppercaseLabels: false, isDarkSurface: false,
@@ -603,7 +603,7 @@ enum ThemeCatalog {
         WidgetTheme(
             id: .heroic, name: tr("Héroïque"), tagline: tr("Bleu héroïque, cape rouge, éclat doré"), isPremium: true,
             background: .gradient(["2E63E6", "0E2A80"]),
-            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.8),
+            primary: .fixed("FFFFFF"), secondary: .fixed("FFFFFF", 0.88),
             tint: .fixed("FFD23F"), panel: .fixed("E53935", 0.24),
             fontDesign: .default, numberWeight: .heavy, titleWeight: .bold,
             uppercaseLabels: true, isDarkSurface: true,

@@ -223,6 +223,8 @@ struct StudiesAppView: View {
                         .foregroundStyle(.secondary)
                 }
                 ProgressView(value: progress).tint(Color(hex: accentHex))
+                    .accessibilityLabel(tr("Session"))
+                    .accessibilityValue(Fmt.percent(progress))
             }
             .card(padding: 14)
         }
@@ -301,6 +303,8 @@ struct NextClassCard: View {
                         .foregroundStyle(.secondary)
                     if isNow {
                         ProgressView(value: now.timeIntervalSince(next.start), total: max(1, next.end.timeIntervalSince(next.start)))
+                            .accessibilityLabel(tr("Progression"))
+                            .accessibilityValue(Fmt.percent(min(1, max(0, now.timeIntervalSince(next.start) / max(1, next.end.timeIntervalSince(next.start))))))
                             .tint(Color(hex: hex))
                     }
                 }
@@ -390,7 +394,7 @@ struct ExamRow: View {
         let days = DateMath.daysBetween(now, exam.date)
         HStack(spacing: 12) {
             VStack(spacing: 0) {
-                Text(days <= 0 ? "Auj." : "J-\(days)")
+                Text(days <= 0 ? tr("Auj.") : tr("J-\(days)"))
                     .font(.headline.weight(.bold))
                     .foregroundStyle(days <= 3 ? Color(hex: "E5484D") : Color(hex: course?.colorHex ?? Studies.accentHex))
                     .monospacedDigit()
@@ -413,7 +417,7 @@ struct ExamRow: View {
     }
 
     private func detail(course: Course?) -> String {
-        var parts = [Fmt.shortDay(exam.date) + " à " + Fmt.time(exam.date, uses24Hour: true)]
+        var parts = [tr("\(Fmt.shortDay(exam.date)) à \(Fmt.time(exam.date, uses24Hour: true))")]
         if !exam.room.isEmpty { parts.append(exam.room) }
         if let course, exam.date > now {
             let studied = StudentMath.studyMinutes(state, course: course.id, from: now.addingTimeInterval(-14 * 86_400), to: now)

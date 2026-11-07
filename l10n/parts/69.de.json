@@ -1,0 +1,9 @@
+{
+ "Synchronisation partielle : %@ opérations lues, les plus anciennes de la période n'ont pas pu l'être. Le chiffre d'affaires peut être sous-estimé.": "Teilweise synchronisiert: %@ Vorgänge gelesen, die ältesten des Zeitraums konnten nicht gelesen werden. Der Umsatz kann zu niedrig angezeigt sein.",
+ "Repos terminé": "Pause vorbei",
+ "Prêt pour la prochaine série.": "Bereit für den nächsten Satz.",
+ "dépensés ce mois-ci · budget à définir": "diesen Monat ausgegeben · Budget festlegen",
+ "Dépensé ce mois-ci : %@": "Diesen Monat ausgegeben: %@",
+ "prix à renseigner": "Preis eintragen",
+ "Sans prix : compté au prix payé": "Ohne Preis: zum gezahlten Preis gerechnet"
+}

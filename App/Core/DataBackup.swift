@@ -62,9 +62,19 @@ enum DataBackup {
     }
 
     /// Replaces the data of this iPhone by the backup's; a file the backup doesn't have is emptied.
+    /// The count of free dish analyses (`photoScansUsed`) never goes down: the larger of this iPhone's and the
+    /// backup's is kept, so a backup can't give the free analyses back.
     static func restore(_ archive: Archive, store: SharedStore = .shared) {
+        let photoScansUsed = store.state(NutritionState.self).photoScansUsed
         for file in files {
             store.setRawData(archive.files[file.rawValue], for: file)
+        }
+        if photoScansUsed > 0 {
+            var nutrition = store.state(NutritionState.self)
+            if nutrition.photoScansUsed < photoScansUsed {
+                nutrition.photoScansUsed = photoScansUsed
+                store.save(nutrition)
+            }
         }
         for (name, data) in archive.images {
             ImageStore.restore(data, named: name)

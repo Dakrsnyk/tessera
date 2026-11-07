@@ -99,6 +99,21 @@ struct TaskItem: Codable, Identifiable, Hashable {
         notes = c.value(.notes, "")
     }
 
+    /// The task as the editor saves it. « Échéance » switched on without touching the picker (which shows
+    /// today without writing it) still gets that date, so it isn't lost nor its repeat; switched off, the
+    /// due date, the time and the repeat go.
+    func normalizedForSave(hasDue: Bool, now: Date = Date()) -> TaskItem {
+        var result = self
+        if hasDue {
+            if result.due == nil { result.due = result.hasTime ? now : DateMath.startOfDay(now) }
+        } else {
+            result.due = nil
+            result.hasTime = false
+            result.repeats = .never
+        }
+        return result
+    }
+
     func isOverdue(at now: Date = Date()) -> Bool {
         guard !isDone, let due else { return false }
         return hasTime ? due < now : DateMath.startOfDay(due) < DateMath.startOfDay(now)
@@ -119,6 +134,31 @@ struct Habit: Codable, Identifiable, Hashable {
     var completedDays: [String] = []
     var reminderHour: Int?
     var reminderMinute: Int?
+
+    enum CodingKeys: String, CodingKey { case id, name, symbol, colorHex, completedDays, reminderHour, reminderMinute }
+
+    init(id: UUID = UUID(), name: String, symbol: String, colorHex: String, completedDays: [String] = [], reminderHour: Int? = nil, reminderMinute: Int? = nil) {
+        self.id = id
+        self.name = name
+        self.symbol = symbol
+        self.colorHex = colorHex
+        self.completedDays = completedDays
+        self.reminderHour = reminderHour
+        self.reminderMinute = reminderMinute
+    }
+
+    /// Tolerant decoding: a missing or unreadable field takes its default instead of losing the habit
+    /// (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        name = c.value(.name, "")
+        symbol = c.value(.symbol, "checkmark.circle")
+        colorHex = c.value(.colorHex, "3366FF")
+        completedDays = c.value(.completedDays, [])
+        reminderHour = c.optional(.reminderHour)
+        reminderMinute = c.optional(.reminderMinute)
+    }
 
     func isDone(on date: Date) -> Bool {
         completedDays.contains(DateMath.dayKey(date))
@@ -278,8 +318,8 @@ struct ContentState: Codable, Hashable {
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
-        tasks = (try? c.decodeIfPresent([TaskItem].self, forKey: .tasks)) ?? []
-        habits = (try? c.decodeIfPresent([Habit].self, forKey: .habits)) ?? []
+        tasks = c.value(.tasks, [])
+        habits = c.value(.habits, [])
         hydration = (try? c.decodeIfPresent(HydrationState.self, forKey: .hydration)) ?? HydrationState()
         focus = (try? c.decodeIfPresent(FocusSession.self, forKey: .focus)) ?? FocusSession()
         money = (try? c.decodeIfPresent(MoneyState.self, forKey: .money)) ?? MoneyState()

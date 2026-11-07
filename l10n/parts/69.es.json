@@ -1,0 +1,9 @@
+{
+ "Synchronisation partielle : %@ opérations lues, les plus anciennes de la période n'ont pas pu l'être. Le chiffre d'affaires peut être sous-estimé.": "Sincronización parcial: %@ operaciones leídas, las más antiguas del periodo no se pudieron leer. Los ingresos pueden estar subestimados.",
+ "Repos terminé": "Descanso terminado",
+ "Prêt pour la prochaine série.": "Listo para la siguiente serie.",
+ "dépensés ce mois-ci · budget à définir": "gastados este mes · presupuesto por definir",
+ "Dépensé ce mois-ci : %@": "Gastado este mes: %@",
+ "prix à renseigner": "precio por indicar",
+ "Sans prix : compté au prix payé": "Sin precio: se cuenta al precio pagado"
+}

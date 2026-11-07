@@ -227,6 +227,18 @@ extension WorkoutSession {
     /// A set done or passed that « Annuler la dernière série » can take back.
     var hasSteps: Bool { !sets.isEmpty || !skipped.isEmpty }
 
+    /// A session with no step (set done or passed) for this long is abandoned, not under way: 3 hours is longer
+    /// than any rest between two sets, so a real workout never reaches it.
+    static let idleLimit: TimeInterval = 3 * 3600
+
+    /// The last sign of life: the last set done or passed, the start of the session before any.
+    var lastActivity: Date { lastStepDate ?? start }
+
+    /// Whether nothing happened for `idleLimit`: the session was left (app killed, forgotten), it is not in progress.
+    func isIdle(at date: Date) -> Bool {
+        date.timeIntervalSince(lastActivity) > Self.idleLimit
+    }
+
     /// « Passer »: the set now is passed (not done: no reps, no load, never counted) and the session
     /// moves on, without rest: the next set, the next exercise after the last set of one, the end
     /// after the last set of the session. Returns false when there is no set to pass.
@@ -378,15 +390,43 @@ struct FitnessState: Codable, Hashable {
                                 catchUpFor: missedDay.map(DateMath.startOfDay))
     }
 
+    /// The history keeps this many sessions. Records, volume and progress all derive from it, so the cap is far
+    /// beyond what is lived (about 10 years at 4 sessions a week): nothing is lost in practice.
+    static let historyLimit = 2000
+
+    /// Archives the session in progress (dropped when no set was done). A session left idle ends at its last
+    /// step, so the hours of inactivity never count in its duration; sets are all kept.
     mutating func finishActive(at date: Date) {
         guard var session = active else { return }
         if !session.sets.isEmpty {
-            session.end = session.end ?? date
+            session.end = session.end ?? (session.isIdle(at: date) ? session.lastActivity : date)
             session.restEndsAt = nil
             history.append(session)
-            if history.count > 300 { history.removeFirst(history.count - 300) }
+            if history.count > Self.historyLimit { history.removeFirst(history.count - Self.historyLimit) }
         }
         active = nil
+    }
+
+    /// Closes the session in progress when it was left idle (see `WorkoutSession.idleLimit`): archived at its
+    /// last step when it has sets, dropped when it has none. Returns true when it was closed.
+    @discardableResult
+    mutating func closeIdleSession(at date: Date) -> Bool {
+        guard let session = active, session.isIdle(at: date) else { return false }
+        finishActive(at: date)
+        return true
+    }
+
+    /// « Passer cet exercice »: the exercise now is passed with its sets left. The session that ends so goes to
+    /// the history (when a set was done), like the last « Série faite » or « Passer ». `expected`: where the
+    /// button was drawn; a second tap on a drawing out of date is ignored. Returns true when it moved.
+    @discardableResult
+    mutating func skipExercise(at date: Date, expecting expected: WorkoutPosition? = nil) -> Bool {
+        if let expected, expected != position { return false }
+        guard var session = active, !session.isFinished, session.currentExercise != nil else { return false }
+        session.skipExercise(at: date)
+        active = session
+        if session.isFinished { finishActive(at: date) }
+        return true
     }
 
     /// How long after its last set a session finished by that set can still be taken back.
@@ -428,6 +468,8 @@ struct FitnessState: Codable, Hashable {
     /// of an older version): no check. Returns true when the button changed the workout.
     @discardableResult
     mutating func press(_ button: WorkoutButton, expecting expected: WorkoutPosition?, at date: Date) -> Bool {
+        // A session left behind is closed first: a tap on an old drawing then does nothing instead of resuming it.
+        closeIdleSession(at: date)
         if let expected, expected != position { return false }
         switch button {
         case .completeSet: return completeNextSet(at: date)
@@ -507,6 +549,7 @@ struct FitnessState: Codable, Hashable {
     /// Logs one set from a widget or the app, starting today's routine if needed. Returns true when a set was logged.
     @discardableResult
     mutating func completeNextSet(at date: Date) -> Bool {
+        closeIdleSession(at: date)
         if active == nil || active?.isFinished == true, let planned = routine(for: date) {
             startSession(planned, at: date)
         }

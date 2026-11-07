@@ -77,10 +77,8 @@ struct StudentSpaceSections: View {
         Section(tr("Devoirs")) {
             ForEach(state.assignments.sorted { $0.due < $1.due }) { item in
                 HStack {
-                    Button {
+                    CheckCircleButton(isDone: item.isDone, label: item.title, doneColor: .accentColor, todoColor: .accentColor, font: .body) {
                         model.update(\.student) { $0.toggleAssignment(item.id) }
-                    } label: {
-                        Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle").foregroundStyle(.tint)
                     }
                     .buttonStyle(.pressable)
                     Button { sheets?.open { AssignmentEditor(assignment: item) } } label: {

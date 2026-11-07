@@ -509,7 +509,8 @@ enum OpenFoodFacts {
                 sodiumMg: per100("sodium").map { $0 * 1_000 } ?? per100("salt").map { $0 * 400 },
                 cholesterolMg: per100("cholesterol").map { $0 * 1_000 },
                 micros: OpenFoodFacts.micros(per100),
-                unknownMacros: unknown.isEmpty ? nil : unknown
+                unknownMacros: unknown.isEmpty ? nil : unknown,
+                fiberUnknown: per100("fiber") == nil ? true : nil
             )
         }
     }
@@ -668,7 +669,8 @@ enum OpenFoodFacts {
         if let food = product.item(barcode: barcode) { return .food(food) }
         guard let name = product.name else { return .unknown }
         return .partial(FoodItem(id: "off.\(barcode)", name: name, brand: product.brand, kcal: 0, protein: 0, carbs: 0, fat: 0,
-                                 fiber: 0, servingGrams: 100, servingName: "100 g", source: .custom, barcode: barcode))
+                                 fiber: 0, servingGrams: 100, servingName: "100 g", source: .custom, barcode: barcode,
+                                 fiberUnknown: true))
     }
 
     /// The URL of a barcode in API v3, or nil when it isn't made of digits.

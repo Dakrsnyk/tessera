@@ -25,6 +25,8 @@ struct FitnessSpaceSections: View {
                         .foregroundStyle(Color(hex: "E5484D"))
                     }
                     ProgressView(value: Double(active.sets.count), total: Double(max(1, active.totalSets)))
+                        .accessibilityLabel(tr("Progression"))
+                        .accessibilityValue(tr("\(active.sets.count)/\(active.totalSets) séries"))
                         .tint(Color(hex: "E5484D"))
                 }
                 .padding(.vertical, 4)

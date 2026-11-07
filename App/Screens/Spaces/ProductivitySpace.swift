@@ -67,6 +67,8 @@ struct ProductivitySpaceSections: View {
                             Text(Fmt.percent(project.progress)).foregroundStyle(Color.secondary).monospacedDigit()
                         }
                         ProgressView(value: project.progress).tint(Color(hex: project.colorHex))
+                            .accessibilityLabel(project.name)
+                            .accessibilityValue(Fmt.percent(project.progress))
                     }
                 }
             }
@@ -237,11 +239,9 @@ struct ProjectEditor: View {
             Section(tr("Tâches")) {
                 ForEach($project.tasks) { $task in
                     HStack {
-                        Button {
+                        CheckCircleButton(isDone: task.isDone, label: task.title, doneColor: Color.primary, todoColor: Color.primary, font: .body) {
                             task.isDone.toggle()
                             task.completedAt = task.isDone ? Date() : nil
-                        } label: {
-                            Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
                         }
                         .buttonStyle(.pressable)
                         TextField(tr("Tâche"), text: $task.title)

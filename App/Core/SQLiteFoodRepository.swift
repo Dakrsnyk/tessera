@@ -263,7 +263,8 @@ final class SQLiteFoodRepository: FoodRepository {
             servingGrams: serving.grams, servingName: serving.name, source: .nutrientFile, barcode: nil,
             sugars: values[FoodNutrientCode.sugars], saturatedFat: values[FoodNutrientCode.saturatedFat],
             sodiumMg: values[FoodNutrientCode.sodium], cholesterolMg: values[FoodNutrientCode.cholesterol],
-            micros: micros.isEmpty ? nil : micros, unknownMacros: unknown.isEmpty ? nil : unknown)
+            micros: micros.isEmpty ? nil : micros, unknownMacros: unknown.isEmpty ? nil : unknown,
+            fiberUnknown: values[FoodNutrientCode.fibre] == nil ? true : nil)
     }
 
     // MARK: Portions, densities, yields

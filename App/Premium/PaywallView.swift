@@ -59,7 +59,12 @@ struct PaywallView: View {
                 Text(message ?? "")
             }
             .task {
-                if store.products.isEmpty { await store.loadProducts() }
+                if store.products.isEmpty {
+                    await store.loadProducts()
+                } else {
+                    // Each opening: the trial may have been claimed since (another device, a purchase).
+                    await store.refreshIntroEligibility()
+                }
             }
             // The yearly offer is chosen first; when the App Store does not give it (yet), the first offer it gives,
             // so the button is never left off without a word.

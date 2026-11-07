@@ -14,6 +14,8 @@ struct NutritionMealPage: View {
     @State private var namingSave = false
     @State private var saveName = ""
     @State private var loggedSaved: SavedMeal?
+    /// The earlier meals already taken again from this page: their button is off (a double tap is one meal).
+    @State private var resumedMeals: Set<String> = []
 
     private var accentHex: String { MiniApp.nutrition.colorHex }
 
@@ -26,9 +28,9 @@ struct NutritionMealPage: View {
             Section {
                 HStack(spacing: 0) {
                     stat(tr("Calories"), TF.int(totals.kcal), "kcal")
-                    stat(tr("Protéines"), TF.int(totals.protein), "g")
-                    stat(tr("Glucides"), TF.int(totals.carbs), "g")
-                    stat(tr("Lipides"), TF.int(totals.fat), "g")
+                    stat(tr("Protéines"), totals.marked(TF.int(totals.protein), incomplete: totals.isIncomplete), "g")
+                    stat(tr("Glucides"), totals.marked(TF.int(totals.carbs), incomplete: totals.isIncomplete), "g")
+                    stat(tr("Lipides"), totals.marked(TF.int(totals.fat), incomplete: totals.isIncomplete), "g")
                 }
                 .padding(.vertical, 6)
             } header: {
@@ -47,7 +49,9 @@ struct NutritionMealPage: View {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(entry.food.displayName).foregroundStyle(Color.primary).lineLimit(1)
-                                Text("\(TF.int(entry.grams)) g · P \(TF.int(entry.totals.protein)) · G \(TF.int(entry.totals.carbs)) · L \(TF.int(entry.totals.fat))")
+                                let line = entry.totals
+                                let mark = line.isIncomplete ? NutritionTotals.minimumMarker : ""
+                                Text("\(TF.int(entry.grams)) g · P \(mark)\(TF.int(line.protein)) · G \(mark)\(TF.int(line.carbs)) · L \(mark)\(TF.int(line.fat))")
                                     .font(.caption)
                                     .foregroundStyle(Color.secondary)
                             }
@@ -91,6 +95,7 @@ struct NutritionMealPage: View {
                 Section {
                     ForEach(previous) { past in
                         Button {
+                            guard resumedMeals.insert(past.id).inserted else { return }
                             Haptics.tap()
                             let items = past.items
                             model.update(\.nutrition) { $0.log(items, meal: meal, on: day) }
@@ -192,18 +197,18 @@ struct EntryEditor: View {
             Section {
                 NumberRow(title: tr("Quantité"), value: $grams, unit: "g")
                     .accessibilityIdentifier("entry-grams")
-                Stepper(tr("Ajuster de 10 g"), value: $grams, in: 0...5_000, step: 10)
+                Stepper(tr("Ajuster de 10 g"), value: $grams, in: 0...NutritionState.maxGrams, step: 10)
                 Picker(tr("Repas"), selection: $meal) {
                     ForEach(MealType.allCases) { Text($0.title).tag($0) }
                 }
             }
             Section(tr("Apport")) {
                 ValueRow(title: tr("Calories"), value: tr("\(TF.int(totals.kcal)) kcal"))
-                ValueRow(title: tr("Protéines"), value: "\(TF.decimal(totals.protein, 1)) g")
-                ValueRow(title: tr("Glucides"), value: "\(TF.decimal(totals.carbs, 1)) g")
-                ValueRow(title: tr("Lipides"), value: "\(TF.decimal(totals.fat, 1)) g")
+                ValueRow(title: tr("Protéines"), value: totals.marked("\(TF.decimal(totals.protein, 1)) g", incomplete: totals.isIncomplete))
+                ValueRow(title: tr("Glucides"), value: totals.marked("\(TF.decimal(totals.carbs, 1)) g", incomplete: totals.isIncomplete))
+                ValueRow(title: tr("Lipides"), value: totals.marked("\(TF.decimal(totals.fat, 1)) g", incomplete: totals.isIncomplete))
                 if model.isPremium {
-                    ValueRow(title: tr("Fibres"), value: "\(TF.decimal(totals.fiber, 1)) g")
+                    ValueRow(title: tr("Fibres"), value: totals.marked("\(TF.decimal(totals.fiber, 1)) g", incomplete: totals.isFiberIncomplete))
                 } else {
                     NutrientLockRow()
                 }
@@ -225,6 +230,14 @@ struct EntryEditor: View {
         .onAppear {
             grams = entry.grams
             meal = entry.meal
+        }
+        // The field takes anything typed: the quantity stays inside the limits of the log (1 to 5 000 g).
+        .onChange(of: grams) { _, value in
+            if value.isNaN {
+                grams = 0
+            } else if value > NutritionState.maxGrams {
+                grams = NutritionState.maxGrams
+            }
         }
     }
 
@@ -257,11 +270,11 @@ struct NutritionNutrientsPage: View {
         List {
             Section {
                 row(tr("Calories"), totals.kcal, goal: known.kcal ? goals.kcal : nil, unit: "kcal", hex: NutritionColors.caloriesHex)
-                row(tr("Protéines"), totals.protein, goal: known.protein ? goals.protein : nil, unit: "g", hex: NutritionColors.proteinHex)
-                row(tr("Glucides"), totals.carbs, goal: known.carbs ? goals.carbs : nil, unit: "g", hex: NutritionColors.carbsHex)
-                row(tr("Lipides"), totals.fat, goal: known.fat ? goals.fat : nil, unit: "g", hex: NutritionColors.fatHex)
+                row(tr("Protéines"), totals.protein, goal: known.protein ? goals.protein : nil, unit: "g", hex: NutritionColors.proteinHex, incomplete: totals.isIncomplete)
+                row(tr("Glucides"), totals.carbs, goal: known.carbs ? goals.carbs : nil, unit: "g", hex: NutritionColors.carbsHex, incomplete: totals.isIncomplete)
+                row(tr("Lipides"), totals.fat, goal: known.fat ? goals.fat : nil, unit: "g", hex: NutritionColors.fatHex, incomplete: totals.isIncomplete)
                 if premium {
-                    row(tr("Fibres"), totals.fiber, goal: model.shownNutritionTarget(.fiber, recommended: recommended), unit: "g", hex: "7FA33A")
+                    row(tr("Fibres"), totals.fiber, goal: model.shownNutritionTarget(.fiber, recommended: recommended), unit: "g", hex: "7FA33A", incomplete: totals.isFiberIncomplete)
                 }
             } header: {
                 Text(tr("Objectifs"))
@@ -302,12 +315,12 @@ struct NutritionNutrientsPage: View {
         .onAppear { model.followCalculatedNutritionGoals() }
     }
 
-    private func row(_ title: String, _ value: Double, goal: Double?, unit: String, hex: String) -> some View {
+    private func row(_ title: String, _ value: Double, goal: Double?, unit: String, hex: String, incomplete: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Text(title)
                 Spacer()
-                Text(goal.map { "\(TF.int(value)) / \(TF.int($0)) \(unit)" } ?? "\(TF.int(value)) \(unit)")
+                Text((incomplete ? NutritionTotals.minimumMarker : "") + (goal.map { "\(TF.int(value)) / \(TF.int($0)) \(unit)" } ?? "\(TF.int(value)) \(unit)"))
                     .foregroundStyle(Color.secondary)
                     .monospacedDigit()
             }
@@ -571,6 +584,7 @@ struct NutritionHistoryPage: View {
                         }
                 }
             }
+            .accessibilityLabel(tr("Calories par jour"))
             .frame(height: 200)
             .card()
         }

@@ -1,0 +1,9 @@
+{
+ "Synchronisation partielle : %@ opérations lues, les plus anciennes de la période n'ont pas pu l'être. Le chiffre d'affaires peut être sous-estimé.": "Sincronizzazione parziale: %@ operazioni lette, le più vecchie del periodo non è stato possibile leggerle. Il fatturato potrebbe essere sottostimato.",
+ "Repos terminé": "Recupero finito",
+ "Prêt pour la prochaine série.": "Pronto per la prossima serie.",
+ "dépensés ce mois-ci · budget à définir": "spesi questo mese · budget da impostare",
+ "Dépensé ce mois-ci : %@": "Speso questo mese: %@",
+ "prix à renseigner": "prezzo da inserire",
+ "Sans prix : compté au prix payé": "Senza prezzo: conteggiato al prezzo pagato"
+}

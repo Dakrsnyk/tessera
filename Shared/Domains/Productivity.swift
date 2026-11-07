@@ -40,6 +40,19 @@ struct ProjectTask: Codable, Hashable, Identifiable {
     var title: String
     var isDone = false
     var completedAt: Date?
+
+    enum CodingKeys: String, CodingKey { case id, title, isDone, completedAt }
+}
+
+extension ProjectTask {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        title = c.value(.title, "")
+        isDone = c.value(.isDone, false)
+        completedAt = c.optional(.completedAt)
+    }
 }
 
 struct Project: Codable, Hashable, Identifiable {
@@ -48,6 +61,8 @@ struct Project: Codable, Hashable, Identifiable {
     var colorHex: String = "3366FF"
     var deadline: Date?
     var tasks: [ProjectTask] = []
+
+    enum CodingKeys: String, CodingKey { case id, name, colorHex, deadline, tasks }
 
     var doneCount: Int { tasks.filter(\.isDone).count }
     var remaining: [ProjectTask] { tasks.filter { !$0.isDone } }
@@ -60,11 +75,35 @@ struct Project: Codable, Hashable, Identifiable {
     }
 }
 
+extension Project {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        name = c.value(.name, "")
+        colorHex = c.value(.colorHex, "3366FF")
+        deadline = c.optional(.deadline)
+        tasks = c.value(.tasks, [])
+    }
+}
+
 struct Deadline: Codable, Hashable, Identifiable {
     var id = UUID()
     var title: String
     /// Exact moment of the deadline (date and time).
     var date: Date
+
+    enum CodingKeys: String, CodingKey { case id, title, date }
+}
+
+extension Deadline {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        title = c.value(.title, "")
+        date = c.value(.date, Date())
+    }
 }
 
 /// A tap counter: coffees, push-ups, pages… Daily counters restart at midnight.
@@ -79,6 +118,8 @@ struct CounterItem: Codable, Hashable, Identifiable {
     var total: Int = 0
     var dayKey: String?
 
+    enum CodingKeys: String, CodingKey { case id, name, symbol, colorHex, step, goal, resetsDaily, total, dayKey }
+
     func value(on date: Date) -> Int {
         guard resetsDaily else { return total }
         return dayKey == DateMath.dayKey(date) ? total : 0
@@ -91,10 +132,40 @@ struct CounterItem: Codable, Hashable, Identifiable {
     }
 }
 
+extension CounterItem {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        name = c.value(.name, "")
+        symbol = c.value(.symbol, "plus.circle")
+        colorHex = c.value(.colorHex, "3366FF")
+        step = c.value(.step, 1)
+        goal = c.optional(.goal)
+        resetsDaily = c.value(.resetsDaily, true)
+        total = c.value(.total, 0)
+        dayKey = c.optional(.dayKey)
+    }
+}
+
 /// A Focus session, logged when it starts (and shortened if stopped early).
 struct FocusLog: Codable, Hashable {
     var start: Date
     var minutes: Int
+
+    enum CodingKeys: String, CodingKey { case start, minutes }
+
+    init(start: Date, minutes: Int) {
+        self.start = start
+        self.minutes = minutes
+    }
+
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        start = c.value(.start, Date())
+        minutes = c.value(.minutes, 0)
+    }
 }
 
 struct ProductivityState: Codable, Hashable {

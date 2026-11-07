@@ -205,7 +205,7 @@ private struct GuideStep: View {
         HStack(alignment: .top, spacing: 12) {
             Text("\(number)")
                 .font(.subheadline.weight(.bold))
-                .foregroundStyle(Color.white)
+                .foregroundStyle(Color.readableInk(on: colorHex))
                 .frame(width: 28, height: 28)
                 .background(Color(hex: colorHex), in: Circle())
                 .accessibilityHidden(true)

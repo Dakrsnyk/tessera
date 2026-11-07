@@ -31,6 +31,7 @@ struct CarFuelPage: View {
                             .foregroundStyle(Color(hex: Car.fuelHex))
                             .symbol(.circle)
                     }
+                    .accessibilityLabel(tr("Consommation"))
                     .chartYScale(domain: .automatic(includesZero: false))
                     .frame(height: 140)
                     .card()
@@ -44,6 +45,7 @@ struct CarFuelPage: View {
                             .foregroundStyle(Color(hex: Car.accentHex))
                             .symbol(.circle)
                     }
+                    .accessibilityLabel(tr("Prix au litre"))
                     .chartYScale(domain: .automatic(includesZero: false))
                     .frame(height: 120)
                     .card()
@@ -99,6 +101,7 @@ struct CarMileagePage: View {
                             .foregroundStyle(Color(hex: Car.accentHex).gradient)
                             .cornerRadius(3)
                     }
+                    .accessibilityLabel(tr("Kilomètres par mois"))
                     .chartXAxis {
                         AxisMarks(values: .stride(by: .month)) { _ in
                             AxisValueLabel(format: .dateTime.month(.abbreviated), centered: true)
@@ -146,7 +149,7 @@ struct CarMaintenancePage: View {
                     Button { sheet = .service(status.item) } label: {
                         VStack(alignment: .leading, spacing: 4) {
                             ServiceStatusRow(status: status)
-                            Text(lastText(status.item)).font(.caption).foregroundStyle(.secondary)
+                            Text(lastText(status.item)).font(.caption).foregroundStyle(Color.secondary)
                         }
                         .padding(.vertical, 4)
                     }
@@ -212,8 +215,8 @@ struct CarDeadlinesPage: View {
                         HStack(spacing: 12) {
                             Image(systemName: deadline.symbol).frame(width: 24).foregroundStyle(days <= 14 ? Color(hex: Car.alertHex) : Color(hex: Car.accentHex))
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(deadline.title).foregroundStyle(.primary)
-                                Text(Fmt.format(deadline.date, template: "EEEEdMMMMyyyy").capitalizedFirst).font(.caption).foregroundStyle(.secondary)
+                                Text(deadline.title).foregroundStyle(Color.primary)
+                                Text(Fmt.format(deadline.date, template: "EEEEdMMMMyyyy").capitalizedFirst).font(.caption).foregroundStyle(Color.secondary)
                             }
                             Spacer()
                             Text(days < 0 ? tr("passée") : (days == 0 ? tr("aujourd'hui") : "J-\(days)"))
@@ -276,6 +279,7 @@ struct CarCostsPage: View {
                             BarMark(x: .value("Montant", share.value), stacking: .normalized)
                                 .foregroundStyle(Color(hex: share.hex))
                         }
+                        .accessibilityLabel(tr("Par mois"))
                         .chartXAxis(.hidden)
                         .frame(height: 16)
                         .clipShape(Capsule())

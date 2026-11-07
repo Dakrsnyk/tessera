@@ -69,6 +69,9 @@ enum PortfolioMath {
         let gain: Double
         /// The live change in percent: over 24 hours for crypto, since the previous close for stocks and ETFs.
         let change24h: Double?
+        /// True when no live price and no price entered by the person exists: the position is counted at what
+        /// was paid (a gain of zero that measures nothing) and must be shown as « price to enter ».
+        var isEstimated = false
 
         var period: PriceChange.Period { holding.kind == .crypto ? .day24h : .session }
     }
@@ -76,13 +79,21 @@ enum PortfolioMath {
     static func positions(_ state: PortfolioState, prices: PriceBook) -> [Position] {
         state.holdings.map { holding in
             let price: Double
+            var estimated = false
             if holding.kind == .cash {
                 price = 1
+            } else if let live = prices.prices[holding.symbol], live > 0 {
+                // A price of zero is a missing reading, not a price.
+                price = live
+            } else if let manual = holding.manualPrice {
+                price = manual
             } else {
-                price = prices.prices[holding.symbol] ?? holding.manualPrice ?? (holding.quantity > 0 ? holding.costBasis / holding.quantity : 0)
+                price = holding.quantity > 0 ? holding.costBasis / holding.quantity : 0
+                estimated = holding.quantity > 0
             }
             let value = holding.kind == .cash ? holding.quantity : price * holding.quantity
-            return Position(holding: holding, price: price, value: value, gain: value - holding.costBasis, change24h: prices.changes[holding.symbol])
+            return Position(holding: holding, price: price, value: value, gain: value - holding.costBasis,
+                            change24h: estimated ? nil : prices.changes[holding.symbol], isEstimated: estimated)
         }
     }
 
@@ -92,6 +103,8 @@ enum PortfolioMath {
         let dayChange: Double
         /// At least one position has a live change; otherwise `dayChange` says nothing.
         var hasDayChange = false
+        /// How many positions are counted at what was paid, for lack of a price (their gain is zero by construction).
+        var estimatedCount = 0
         var gain: Double { value - cost }
         var gainPercent: Double? { cost > 0 ? gain / cost : nil }
 
@@ -110,7 +123,7 @@ enum PortfolioMath {
             let previous = position.value / (1 + (position.change24h ?? 0) / 100)
             return total + (position.value - previous)
         }
-        return Summary(value: value, cost: cost, dayChange: dayChange, hasDayChange: !moving.isEmpty)
+        return Summary(value: value, cost: cost, dayChange: dayChange, hasDayChange: !moving.isEmpty, estimatedCount: positions.filter(\.isEstimated).count)
     }
 
     /// The period of the day's move: 24 hours when only crypto moved, otherwise the stock market's day.
@@ -196,6 +209,8 @@ enum MarketService {
             stored.quotesFetchedAt = now
             SharedStore.shared.write(stored, to: .markets)
         }
+        // Quotes kept in another currency (changed while offline) are never shown as the current one.
+        guard stored.currency == currency else { return [] }
         return ids.compactMap { id -> CoinQuote? in
             guard var quote = stored.quotes[id] else { return nil }
             if quote.fetchedAt == nil { quote.fetchedAt = stored.quotesFetchedAt }
@@ -236,21 +251,41 @@ enum MarketService {
         return result
     }
 
+    /// Adds a price quoted in `currency` to the book, converted into `home` with the reference rates. Without a
+    /// rate the price is left out (the position then falls back to its entered price or its cost, and says so):
+    /// never an amount in one currency labelled with another. Returns whether it was added.
+    @discardableResult
+    static func add(price: Double, change: Double, for symbol: String, quotedIn currency: String, to book: inout PriceBook, home: String, rates: FXRates?) -> Bool {
+        guard price > 0, let value = TravelMath.convert(price, from: currency.uppercased(), to: home.uppercased(), rates: rates), value > 0 else { return false }
+        book.prices[symbol] = value
+        book.changes[symbol] = change
+        return true
+    }
+
+    /// The prices of the holdings in the currency of the app (`currencyCode`): crypto quotes come in
+    /// `cryptoCurrency`, stocks (Finnhub, US listings) in USD, both converted with the ECB reference rates.
     static func priceBook(for state: PortfolioState, allowNetwork: Bool, now: Date = Date()) async -> PriceBook {
         var book = PriceBook()
         var times: [Date?] = []
+        let settings = SharedStore.shared.settings
+        let home = settings.currencyCode.uppercased()
+        let cryptoCurrency = settings.cryptoCurrency.uppercased()
         let coinIDs = state.holdings.filter { $0.kind == .crypto }.map(\.symbol)
-        for quote in await coinQuotes(coinIDs, allowNetwork: allowNetwork, now: now) {
-            book.prices[quote.id] = quote.price
-            book.changes[quote.id] = quote.change24h
-            times.append(quote.fetchedAt)
-        }
+        let coins = await coinQuotes(coinIDs, allowNetwork: allowNetwork, now: now)
         let tickers = state.holdings.filter { $0.kind == .stock || $0.kind == .etf }.map(\.symbol)
-        for (symbol, quote) in await stockQuotes(tickers, allowNetwork: allowNetwork, now: now) {
-            book.prices[symbol] = quote.price
-            book.changes[symbol] = quote.changePercent
-            // The time of the price: Friday's close stays Friday's on a Sunday.
-            times.append(quote.priceTime)
+        let stocks = await stockQuotes(tickers, allowNetwork: allowNetwork, now: now)
+        let needsRates = (!coins.isEmpty && cryptoCurrency != home) || (!stocks.isEmpty && home != "USD")
+        let rates = needsRates ? await FXService.rates(base: home, allowNetwork: allowNetwork, now: now) : nil
+        for quote in coins {
+            if add(price: quote.price, change: quote.change24h, for: quote.id, quotedIn: cryptoCurrency, to: &book, home: home, rates: rates) {
+                times.append(quote.fetchedAt)
+            }
+        }
+        for (symbol, quote) in stocks {
+            if add(price: quote.price, change: quote.changePercent, for: symbol, quotedIn: "USD", to: &book, home: home, rates: rates) {
+                // The time of the price: Friday's close stays Friday's on a Sunday.
+                times.append(quote.priceTime)
+            }
         }
         book.fetchedAt = LivePrices.oldest(times)
         return book
@@ -284,8 +319,10 @@ enum MarketService {
             let current_price: Double?
             let price_change_percentage_24h: Double?
         }
-        return try JSONDecoder().decode([Row].self, from: data).map {
-            CoinQuote(id: $0.id, symbol: $0.symbol.uppercased(), name: $0.name, price: $0.current_price ?? 0, change24h: $0.price_change_percentage_24h ?? 0, fetchedAt: now)
+        // A row without a price (`null`) is left out: a price of zero would be taken for a real one.
+        return try JSONDecoder().decode([Row].self, from: data).compactMap { row in
+            guard let price = row.current_price, price > 0 else { return nil }
+            return CoinQuote(id: row.id, symbol: row.symbol.uppercased(), name: row.name, price: price, change24h: row.price_change_percentage_24h ?? 0, fetchedAt: now)
         }
     }
 

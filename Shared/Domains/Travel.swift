@@ -140,11 +140,20 @@ struct TravelState: Codable, Hashable {
         }
     }
 
-    /// Removes a trip with what belongs only to it (its expenses and checklist).
+    /// Removes a trip with what belongs only to it: its expenses, its checklist, and the flights, stays and
+    /// activities that fall in its dates (they have no trip identifier) unless another trip covers them too.
     mutating func deleteTrip(_ id: UUID) {
+        let span = trips.first { $0.id == id }.map { TravelMath.window($0) }
         trips.removeAll { $0.id == id }
         expenses.removeAll { $0.tripID == id }
         checklist.removeAll { $0.tripID == id }
+        guard let span else { return }
+        let others = trips.map { TravelMath.window($0) }
+        flights.removeAll { flight in span.contains(flight.departure) && !others.contains { $0.contains(flight.departure) } }
+        activities.removeAll { activity in span.contains(activity.date) && !others.contains { $0.contains(activity.date) } }
+        stays.removeAll { stay in
+            span.start < stay.checkOut && stay.checkIn < span.end && !others.contains { stay.checkIn < $0.end && stay.checkOut > $0.start }
+        }
     }
 }
 

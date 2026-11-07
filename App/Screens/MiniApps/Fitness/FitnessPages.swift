@@ -7,6 +7,8 @@ import SwiftUI
 struct FitnessProgramPage: View {
     @Environment(AppModel.self) private var model
     @State private var editing: Routine?
+    /// Sessions of the program swiped to delete, once confirmed.
+    @State private var deletingRoutines: [UUID] = []
 
     private var accentHex: String { MiniApp.fitness.colorHex }
     private let dayNames = [tr("Lundi"), tr("Mardi"), tr("Mercredi"), tr("Jeudi"), tr("Vendredi"), tr("Samedi"), tr("Dimanche")]
@@ -71,7 +73,7 @@ struct FitnessProgramPage: View {
                     }
                 }
                 .onDelete { offsets in
-                    model.update(\.fitness) { $0.routines.remove(atOffsets: offsets) }
+                    deletingRoutines = offsets.compactMap { state.routines[safe: $0]?.id }
                 }
                 Button {
                     editing = Routine(name: "", exercises: [ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0)])
@@ -95,6 +97,15 @@ struct FitnessProgramPage: View {
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $editing) { routine in
             RoutineEditor(routine: routine)
+        }
+        .confirmationDialog(tr("Supprimer cette séance du programme ?"), isPresented: Binding(get: { !deletingRoutines.isEmpty }, set: { if !$0 { deletingRoutines = [] } }), titleVisibility: .visible) {
+            Button(tr("Supprimer"), role: .destructive) {
+                let ids = deletingRoutines
+                model.update(\.fitness) { $0.routines.removeAll { ids.contains($0.id) } }
+                deletingRoutines = []
+            }
+        } message: {
+            Text(tr("Les séances déjà faites restent dans l'historique."))
         }
     }
 
@@ -291,6 +302,7 @@ struct FitnessProgressPage: View {
                                         .cornerRadius(3)
                                 }
                             }
+                            .accessibilityLabel(tr("Volume par semaine"))
                             .frame(height: 170)
                             .card()
                         }
@@ -430,6 +442,7 @@ struct FitnessActivityPage: View {
                                     .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
                             }
                         }
+                        .accessibilityLabel(tr("7 derniers jours"))
                         .frame(height: 180)
                         .card()
                     }

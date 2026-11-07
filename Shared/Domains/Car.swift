@@ -97,7 +97,7 @@ enum CarMath {
         guard let month = DateMath.calendar.dateInterval(of: .month, for: date) else { return nil }
         let points = odometerPoints(state)
         guard let latest = points.last(where: { $0.date <= date }) else { return nil }
-        let start = points.last(where: { $0.date < month.start }) ?? points.first(where: { month.contains($0.date) })
+        let start = points.last(where: { $0.date < month.start }) ?? points.first(where: { month.holds($0.date) })
         guard let base = start else { return nil }
         return max(0, latest.km - base.km)
     }
@@ -122,7 +122,7 @@ enum CarMath {
     }
 
     static func fuelSpent(_ state: CarState, in interval: DateInterval) -> Double {
-        state.fills.filter { interval.contains($0.date) }.reduce(0) { $0 + $1.total }
+        state.fills.filter { interval.holds($0.date) }.reduce(0) { $0 + $1.total }
     }
 
     /// Average fuel spending per month over the last three months (or since the first fill-up).

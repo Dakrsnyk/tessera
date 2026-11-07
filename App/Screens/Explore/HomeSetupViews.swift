@@ -769,6 +769,17 @@ struct HomeSetupSheet: View {
     }
 
     private func saveWallpaper() {
+        // The wallpaper of a Premium setup is Premium too (same rule as the wallpaper collection).
+        if needsPremium {
+            dismiss()
+            router.showPaywall(PaywallContext(
+                symbol: "photo.fill",
+                title: tr("Les fonds d'écran Premium"),
+                detail: tr("Les plus beaux fonds d'écran du Store sont dans Premium : enregistre-les dans Photos, à la taille de ton iPhone."),
+                perk: .styles
+            ))
+            return
+        }
         wallpaperState = .saving
         Task { @MainActor in
             let status = await PHPhotoLibrary.requestAuthorization(for: .addOnly)

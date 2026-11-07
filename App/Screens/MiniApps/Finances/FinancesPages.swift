@@ -156,9 +156,9 @@ struct FinancesTransactionsPage: View {
                     Button { sheet = income.fixedID.flatMap { fixedSheet($0, state: state) } ?? .income(income) } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(income.label).foregroundStyle(.primary)
+                                Text(income.label).foregroundStyle(Color.primary)
                                 Text(income.fixedID == nil ? Fmt.shortDay(income.date) : tr("\(Fmt.shortDay(income.date)) · revenu fixe"))
-                                    .font(.caption).foregroundStyle(.secondary)
+                                    .font(.caption).foregroundStyle(Color.secondary)
                             }
                             Spacer()
                             Text("+\(TF.money(income.amount, currency, decimals: 2))").monospacedDigit().foregroundStyle(Color(hex: Finances.incomeHex))
@@ -181,20 +181,20 @@ struct FinancesTransactionsPage: View {
                 .frame(width: 24)
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
-                    Text(expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note).foregroundStyle(.primary)
+                    Text(expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note).foregroundStyle(Color.primary)
                     // Received through the Apple Pay automation, and its category still to check.
                     if expense.source == .applePay { ApplePayMark() }
                     if expense.needsReview == true { ReviewBadge() }
                 }
                 if expense.fixedID != nil {
                     Label(tr("Dépense fixe · \(category?.name ?? tr("Sans catégorie"))"), systemImage: "repeat")
-                        .font(.caption).foregroundStyle(.secondary)
+                        .font(.caption).foregroundStyle(Color.secondary)
                 } else if !expense.note.isEmpty, let category {
-                    Text(category.name).font(.caption).foregroundStyle(.secondary)
+                    Text(category.name).font(.caption).foregroundStyle(Color.secondary)
                 }
             }
             Spacer()
-            Text(TF.money(expense.amount, currency, decimals: 2)).monospacedDigit().foregroundStyle(.primary)
+            Text(TF.money(expense.amount, currency, decimals: 2)).monospacedDigit().foregroundStyle(Color.primary)
         }
     }
 
@@ -408,6 +408,7 @@ struct FinancesCategoriesPage: View {
                         .foregroundStyle(Color(hex: spend.colorHex))
                         .cornerRadius(3)
                 }
+                .accessibilityLabel(tr("Dépenses"))
                 .chartBackground { _ in
                     VStack(spacing: 2) {
                         Text(TF.money(total, currency)).font(.title2.weight(.bold)).monospacedDigit()
@@ -493,13 +494,13 @@ struct FinancesBillsPage: View {
                         HStack(spacing: 12) {
                             Image(systemName: item.bill.symbol).frame(width: 24).foregroundStyle(item.days <= 2 ? Color(hex: Finances.overHex) : Color(hex: Finances.accentHex))
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(item.bill.name).foregroundStyle(.primary)
+                                Text(item.bill.name).foregroundStyle(Color.primary)
                                 Text("\(item.bill.isSubscription ? tr("Abonnement · ") : "")\(item.bill.period.title.lowercased()) · \(TF.relativeDay(item.due, from: now))")
                                     .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                    .foregroundStyle(Color.secondary)
                             }
                             Spacer()
-                            Text(TF.money(item.bill.amount, currency, decimals: 2)).monospacedDigit().foregroundStyle(.primary)
+                            Text(TF.money(item.bill.amount, currency, decimals: 2)).monospacedDigit().foregroundStyle(Color.primary)
                         }
                     }
                 }
@@ -528,6 +529,8 @@ struct FinancesBillsPage: View {
 struct FinancesSavingsPage: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: FinanceSheet?
+    @State private var pendingGoal: UUID?
+    @State private var pendingAccount: UUID?
 
     private var currency: String { model.settings.currencyCode }
 
@@ -547,7 +550,7 @@ struct FinancesSavingsPage: View {
                         .buttonStyle(.pressable)
                         .contextMenu {
                             Button(role: .destructive) {
-                                model.update(\.budget) { $0.goals.removeAll { $0.id == goal.id } }
+                                pendingGoal = goal.id
                             } label: {
                                 Label(tr("Supprimer"), systemImage: "trash")
                             }
@@ -575,6 +578,14 @@ struct FinancesSavingsPage: View {
         .navigationTitle(tr("Épargne"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
+        .confirmDelete($pendingGoal, title: tr("Supprimer cet objectif ?"), button: tr("Supprimer l'objectif"),
+                       message: tr("Cette action ne peut pas être annulée.")) { id in
+            model.update(\.budget) { $0.goals.removeAll { $0.id == id } }
+        }
+        .confirmDelete($pendingAccount, title: tr("Supprimer ce compte ?"), button: tr("Supprimer le compte"),
+                       message: tr("Cette action ne peut pas être annulée.")) { id in
+            model.update(\.budget) { $0.removeAccount(id) }
+        }
     }
 
     private func accounts(state: BudgetState) -> some View {
@@ -589,6 +600,7 @@ struct FinancesSavingsPage: View {
                         .foregroundStyle(Color(hex: Finances.accentHex).opacity(0.12).gradient)
                         .interpolationMethod(.catmullRom)
                 }
+                .accessibilityLabel(tr("Valeur nette"))
                 .chartYScale(domain: .automatic(includesZero: false))
                 .frame(height: 150)
                 .card()
@@ -605,7 +617,7 @@ struct FinancesSavingsPage: View {
                     .buttonStyle(.pressable)
                     .contextMenu {
                         Button(role: .destructive) {
-                            model.update(\.budget) { $0.removeAccount(account.id) }
+                            pendingAccount = account.id
                         } label: {
                             Label(tr("Supprimer"), systemImage: "trash")
                         }
@@ -683,6 +695,7 @@ struct FinancesTrendsPage: View {
                         .position(by: .value("Type", bar.series))
                         .cornerRadius(3)
                 }
+                .accessibilityLabel(tr("Par mois"))
                 .chartForegroundStyleScale([tr("Revenus"): Color(hex: Finances.incomeHex), tr("Dépenses"): Color(hex: Finances.accentHex).opacity(0.55)])
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .month)) { _ in

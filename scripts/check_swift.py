@@ -238,16 +238,30 @@ def check_kinds():
 def check_release_safety():
     guarded = ["DebugPremium", "isDebugPremiumOn", "setDebugPremium", "ScreenshotMode", "WidgetGalleryView", "SetupGalleryView", "MarketingView", "SignedEntitlements", "StudioGalleryView",
                "AdExport", "ScanFrameScreenshot", "ScanFrameScreenshotStage"]
+    # Each level: [code here is DEBUG only, its #else is DEBUG only]. Only `#if DEBUG` (or `DEBUG && …`) guards
+    # its branch and only `#if !DEBUG` guards its #else; any other condition guards neither (the #else of
+    # `#if os(iOS)` is not DEBUG), and an #elseif is judged on its own condition.
+    def debug_only(condition):
+        return re.search(r"(?<![!\w])DEBUG\b", condition) is not None and "||" not in condition
+
+    def not_debug_only(condition):
+        return re.fullmatch(r"\s*!\s*DEBUG\s*", condition) is not None
+
     for path, text in FILES.items():
         depth_stack = []
         for number, line in enumerate(text.splitlines(), 1):
             stripped = line.strip()
+            if stripped.startswith("#elseif"):
+                if depth_stack:
+                    depth_stack[-1] = [debug_only(stripped[len("#elseif"):].split("//")[0]), False]
+                continue
             if stripped.startswith("#if"):
-                depth_stack.append("DEBUG" in stripped and "!" not in stripped)
+                condition = stripped[len("#if"):].split("//")[0]
+                depth_stack.append([debug_only(condition), not_debug_only(condition)])
                 continue
             if stripped.startswith("#else"):
                 if depth_stack:
-                    depth_stack[-1] = not depth_stack[-1]
+                    depth_stack[-1] = [depth_stack[-1][1], False]
                 continue
             if stripped.startswith("#endif"):
                 if depth_stack:
@@ -255,7 +269,7 @@ def check_release_safety():
                 continue
             code = stripped.split("//")[0]
             for name in guarded:
-                if re.search(r"\b" + name + r"\b", code) and not any(depth_stack):
+                if re.search(r"\b" + name + r"\b", code) and not any(level[0] for level in depth_stack):
                     problems.append(f"{os.path.relpath(path, ROOT)}:{number}: {name} used outside #if DEBUG")
 
 
@@ -320,9 +334,44 @@ def check_app_icons():
     return len(assets)
 
 
+def check_button_label_tint():
+    """In a Button with the default style, `.foregroundStyle(.primary|.secondary|.tertiary)` is the accent color
+    (washed out), not black or gray. Use `Color.primary` / `Color.secondary`, `.buttonStyle(...)` or `.tint(.primary)`."""
+    label_style = re.compile(r"\.foregroundStyle\(\.(primary|secondary|tertiary|quaternary)\)")
+    for path, text in FILES.items():
+        rel = os.path.relpath(path, ROOT)
+        if not rel.startswith("App" + os.sep):
+            continue
+        lines = strip_comments(text).splitlines()
+        for index, line in enumerate(lines):
+            match = re.search(r"\bButton\b\s*(\([^)]*\))?\s*\{", line)
+            if not match:
+                continue
+            depth, started, end = 0, False, index
+            while end < len(lines) and end - index < 80:
+                segment = lines[end][match.start():] if end == index else lines[end]
+                for char in segment:
+                    if char == "{":
+                        depth, started = depth + 1, True
+                    elif char == "}":
+                        depth -= 1
+                if started and depth <= 0:
+                    break
+                end += 1
+            body = "\n".join(lines[index:end + 1])
+            tail, cursor = [lines[end].split("}")[-1]] if end < len(lines) else [], end + 1
+            while cursor < len(lines) and lines[cursor].strip().startswith(".") and cursor - end < 12:
+                tail.append(lines[cursor])
+                cursor += 1
+            modifiers = "\n".join(tail)
+            if label_style.search(body) and "buttonStyle" not in modifiers and "tint(" not in modifiers and "buttonStyle" not in body:
+                problems.append(f"{rel}:{index + 1}: Button with .foregroundStyle(.primary/.secondary) and no buttonStyle: the text turns accent-colored (use Color.primary / Color.secondary)")
+
+
 checked = check_memberwise()
 kinds = check_kinds()
 check_release_safety()
+check_button_label_tint()
 check_internal_premium()
 check_privacy_manifest()
 icons = check_app_icons()

@@ -14,6 +14,8 @@ struct ArdaneApp: App {
     @Environment(\.scenePhase) private var scenePhase
 
     init() {
+        // A Stripe key left in the keychain by an earlier installation goes with the rest of the data.
+        SecretStore.forgetIfFreshInstall(hasSavedData: SharedStore.shared.hasSavedData)
         // The encouragements show as a banner while the app is open too.
         NotificationPresenter.install()
         // A workout or food button accepted outside the app's screens (its intent runs here): a light
@@ -57,6 +59,9 @@ struct ArdaneApp: App {
                     if phase == .active {
                         // The iPhone is unlocked: older files become readable on the Lock Screen too.
                         Task.detached(priority: .utility) { SharedStore.shared.relaxFileProtection() }
+                        // Kept on the first activation too: when iOS started the app in the background before the first
+                        // unlock, `AppModel.init` could not read the protected files, and saving that empty state would
+                        // replace the person's data.
                         model.reloadFromDisk()
                         model.countOpen()
                         #if DEBUG

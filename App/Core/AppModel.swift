@@ -137,6 +137,9 @@ final class AppModel {
     /// Changes one mini-app's data, saves it for the widgets and refreshes them.
     func update<T: StoredState>(_ keyPath: ReferenceWritableKeyPath<AppModel, T>, _ change: (inout T) -> Void) {
         var value = self[keyPath: keyPath]
+        // Nutrition: a widget (quick add) may have written since the app last read it; the change starts from
+        // the saved file, so it never writes an older state over it. A file that can't be read leaves memory as is.
+        if T.self == NutritionState.self, let saved = store.read(T.self, from: T.file) { value = saved }
         let before = value
         change(&value)
         self[keyPath: keyPath] = value
@@ -297,10 +300,10 @@ final class AppModel {
         if updated.name.trimmed.isEmpty { updated.name = updated.kind.title }
         if let index = designs.firstIndex(where: { $0.id == updated.id }) {
             let previous = designs[index]
-            if case let .photo(old) = previous.background, previous.background != updated.background {
-                ImageStore.delete(named: old)
-            }
             designs[index] = updated
+            if case .photo = previous.background, previous.background != updated.background {
+                deleteImages(of: [previous], keeping: designs)
+            }
         } else {
             designs.insert(updated, at: 0)
         }
@@ -309,10 +312,26 @@ final class AppModel {
         scheduleWidgetReload()
     }
 
+    /// The files of the photo store a widget holds: its photo background, its photos and the ones of its parts.
+    static func imageFiles(of design: WidgetDesign) -> Set<String> {
+        var files = Set(design.options.photos.map(\.file))
+        if case let .photo(name) = design.background { files.insert(name) }
+        for part in design.options.parts { files.formUnion(part.options.photos.map(\.file)) }
+        return files
+    }
+
+    /// Deletes the photo files of removed widgets, except any file a widget that stays still refers to
+    /// (widgets made together can share a photo).
+    private func deleteImages(of removed: [WidgetDesign], keeping remaining: [WidgetDesign]) {
+        let kept = remaining.reduce(into: Set<String>()) { $0.formUnion(Self.imageFiles(of: $1)) }
+        for design in removed {
+            for file in Self.imageFiles(of: design) where !kept.contains(file) { ImageStore.delete(named: file) }
+        }
+    }
+
     func delete(_ design: WidgetDesign) {
         designs.removeAll { $0.id == design.id }
-        if case let .photo(name) = design.background { ImageStore.delete(named: name) }
-        for photo in design.options.photos { ImageStore.delete(named: photo.file) }
+        deleteImages(of: [design], keeping: designs)
         store.designs = designs
         NotificationScheduler.cancelCountdownReminder(for: design.id)
         scheduleWidgetReload()
@@ -322,12 +341,10 @@ final class AppModel {
     func delete(_ designsToDelete: [WidgetDesign]) {
         let ids = Set(designsToDelete.map(\.id))
         guard !ids.isEmpty else { return }
-        for design in designs where ids.contains(design.id) {
-            if case let .photo(name) = design.background { ImageStore.delete(named: name) }
-            for photo in design.options.photos { ImageStore.delete(named: photo.file) }
-            NotificationScheduler.cancelCountdownReminder(for: design.id)
-        }
+        let removed = designs.filter { ids.contains($0.id) }
         designs.removeAll { ids.contains($0.id) }
+        deleteImages(of: removed, keeping: designs)
+        for design in removed { NotificationScheduler.cancelCountdownReminder(for: design.id) }
         store.designs = designs
         scheduleWidgetReload()
     }
@@ -406,13 +423,43 @@ final class AppModel {
         store.save(StyleLibrary(styles: savedStyles))
     }
 
-    /// Gives saved widgets a saved look, their content untouched. Returns how many changed.
+    /// Whether this saved look uses Premium and the plan is free: it can't be given to widgets (the view then
+    /// shows the paywall). A look that stays free applies as before.
+    func needsPremium(_ style: SavedStyle) -> Bool {
+        !isPremium && style.applied(to: WidgetDesign(kind: .note)).usesPremiumFeatures
+    }
+
+    /// What the sheet « Appliquer » gets: the look given, or Premium asked for (nothing changed).
+    enum StyleApplication {
+        case applied(Int)
+        /// The widgets as they would look, to show on the paywall.
+        case needsPremium([WidgetDesign])
+    }
+
+    /// Gives the look to the widgets chosen, all or none: without Premium, a look that would add a Premium
+    /// feature to one of them changes nothing and asks for Premium instead (never zero widgets in silence).
+    func applyOrAskPremium(_ style: SavedStyle, to ids: Set<UUID>) -> StyleApplication {
+        let chosen = designs.filter { ids.contains($0.id) }
+        let blocked = chosen.filter { addsPremium(style.applied(to: $0), to: $0) }
+        guard blocked.isEmpty else { return .needsPremium(blocked.map { style.applied(to: $0) }) }
+        return .applied(apply(style, to: ids))
+    }
+
+    /// Whether a restyled widget has a Premium feature the original didn't have, on a free plan.
+    private func addsPremium(_ restyled: WidgetDesign, to original: WidgetDesign) -> Bool {
+        !isPremium && !Set(restyled.premiumFeatures).isSubset(of: original.premiumFeatures)
+    }
+
+    /// Gives saved widgets a saved look, their content untouched. Returns how many changed. Without Premium, a
+    /// widget never receives a look that uses it (nothing changes for it).
     @discardableResult
     func apply(_ style: SavedStyle, to ids: Set<UUID>) -> Int {
         var changed = 0
         for index in designs.indices where ids.contains(designs[index].id) {
             let restyled = style.applied(to: designs[index])
             guard restyled != designs[index] else { continue }
+            // A Premium feature the widget didn't already have (its own Premium kind, say, stays what it is).
+            if addsPremium(restyled, to: designs[index]) { continue }
             designs[index] = restyled
             designs[index].updatedAt = Date()
             changed += 1
@@ -441,6 +488,15 @@ final class AppModel {
     }
 
     var canAddHabit: Bool { isPremium || content.habits.count < Self.freeHabitLimit }
+
+    /// The one way to add a habit: refused (nothing added, false) past the free limit without Premium. The
+    /// views that add one open the paywall (`PaywallContext.habitLimit`) on a refusal.
+    @discardableResult
+    func addHabit(_ habit: Habit) -> Bool {
+        guard canAddHabit else { return false }
+        updateContent { $0.habits.append(habit) }
+        return true
+    }
 
     // MARK: Settings
 
@@ -473,7 +529,11 @@ final class AppModel {
     // MARK: Premium
 
     func updatePremium(_ state: PremiumState) {
-        guard state != premium else { return }
+        // Only the date of the last check changed (the store stamps it at every activation): nothing is written
+        // and the widgets aren't reloaded for it. Nothing reads that date.
+        var comparable = state
+        comparable.verifiedAt = premium.verifiedAt
+        guard comparable != premium else { return }
         premium = state
         store.premium = state
         AppStyle.current = AppStyle.style(settings.appStyle, isPremium: isPremium)
@@ -651,14 +711,18 @@ final class AppModel {
         scheduleWidgetReload()
     }
 
-    /// Erases everything the user created. Premium status is kept (it belongs to the App Store account).
+    /// Erases everything the user created. Premium status is kept (it belongs to the App Store account), and so
+    /// is the count of the free dish analyses (`photoScansUsed`): erasing the data never gives them back.
     func resetAllData() {
+        let photoScansUsed = nutrition.photoScansUsed
         // The Stripe key lives in the keychain, outside the shared files: it goes with the data.
         SecretStore.delete(StripeSync.keychainAccount)
         for design in designs {
             if case let .photo(name) = design.background { ImageStore.delete(named: name) }
             for photo in design.options.photos { ImageStore.delete(named: photo.file) }
         }
+        // Every photo of the store, the ones no widget holds any more too.
+        for name in ImageStore.allNames() { ImageStore.delete(named: name) }
         designs = []
         content = ContentState()
         var fresh = AppSettings()
@@ -676,8 +740,20 @@ final class AppModel {
         store.content = content
         store.settings = settings
         store.remove(.crypto)
-        for file in [StoreFile.nutrition, .fitness, .budget, .business, .portfolio, .following, .student, .travel, .car, .productivity, .life, .markets, .companies, .fx, .insights] {
+        for file in [StoreFile.nutrition, .fitness, .budget, .business, .portfolio, .following, .student, .travel, .car, .productivity, .life, .markets, .companies, .fx, .insights, .styles] {
             store.remove(file)
+        }
+        // The copies of damaged files are the person's data too.
+        store.removeRecovery()
+        // « Mes styles », the steps of the days already seen, how often each mini-app was opened, the ones taken
+        // off Home, the favorite setups, and the icon of the Home Screen: all of it belongs to the person.
+        savedStyles = []
+        UserDefaults.standard.removeObject(forKey: StepCounter.historyKey)
+        for key in ["miniAppOpens", "miniAppsHidden", SetupFavorites.key] {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+        if AppIconSwitcher.current != AppIconChoice.main {
+            Task { _ = await AppIconSwitcher.apply(AppIconChoice(asset: AppIconChoice.main, title: "")) }
         }
         // What the scanner learned of the person's own plates (visual memory of validated zones) goes too.
         PersonalFoodMemoryStore.clear()
@@ -688,6 +764,10 @@ final class AppModel {
         profile = freshProfile
         store.save(profile)
         nutrition = NutritionState()
+        if photoScansUsed > 0 {
+            nutrition.photoScansUsed = photoScansUsed
+            store.save(nutrition)
+        }
         fitness = FitnessState()
         budget = BudgetState()
         business = BusinessState()
@@ -884,9 +964,9 @@ extension AppModel {
             goals[target] = fresh[target]
         }
         if goals != nutrition.goals {
-            nutrition.goals = goals
-            store.save(nutrition)
-            scheduleWidgetReload()
+            // Through `update`, which starts again from the saved file: a quick add made from a widget since
+            // the last read is kept (saving the copy in memory would write over it).
+            update(\.nutrition) { $0.goals = goals }
         }
         // Calculated from the person's own body: every widget counts them as theirs, and they keep following
         // the calculation once given (the mode is kept, not guessed again).
@@ -910,8 +990,9 @@ extension AppModel {
             typed = typed ?? accepted
             goal = aim.calculatorGoal
         }
-        return NutritionCalculator.goals(sex: sex, age: age, heightCm: height, weightKg: weight,
-                                         activity: nutritionActivity, goal: goal, kcal: typed)
+        // Within the safety bounds (a minor, a pregnancy, a low body mass index, the calories floor, the ranges).
+        return NutritionSafety.goals(sex: sex, age: age, heightCm: height, weightKg: weight,
+                                     activity: nutritionActivity, goal: goal, kcal: typed)
     }
 
     // MARK: Weight plan (chantier 15)
@@ -1084,9 +1165,13 @@ extension AppModel {
         profile.calculatedActivity ?? activityFromWorkouts ?? .light
     }
 
-    /// The aim of the calculation: the nutrition aim, else the one of the sport goal, else maintaining.
+    /// The aim of the calculation: the nutrition aim, else the one of the sport goal, else maintaining. A loss
+    /// or a gain only where it is safe for the body known (`NutritionSafety.allowedGoal`): maintaining otherwise.
     var nutritionGoal: NutritionCalculator.Goal {
-        (profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim ?? .maintain).calculatorGoal
+        let requested = (profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim ?? .maintain).calculatorGoal
+        guard let height = profile.heightCm, let weight = profile.weightKg else { return requested }
+        return NutritionSafety.allowedGoal(requested, heightCm: height, weightKg: weight,
+                                           isMinor: profile.isMinor(birthday: life.birthday), lifeStage: profile.lifeStage)
     }
 
     func setWeeklyWorkouts(_ count: Int) {
@@ -1146,7 +1231,7 @@ extension AppModel {
     /// sex are known.
     func calculatedNutritionGoals(activity: NutritionCalculator.Activity) -> NutritionGoals? {
         guard let age, let height = profile.heightCm, let weight = profile.weightKg, let sex = profile.calculatorSex else { return nil }
-        return NutritionCalculator.goals(sex: sex, age: age, heightCm: height, weightKg: weight, activity: activity, goal: nutritionGoal)
+        return NutritionSafety.goals(sex: sex, age: age, heightCm: height, weightKg: weight, activity: activity, goal: nutritionGoal)
     }
 
     /// The activity level that goes with the workouts per week, when the user gave them.

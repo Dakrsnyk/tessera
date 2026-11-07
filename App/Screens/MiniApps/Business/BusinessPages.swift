@@ -59,11 +59,11 @@ struct BusinessSalesPage: View {
                     Button { sheet = .sale(sale) } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(Fmt.shortDay(sale.date)).foregroundStyle(.primary)
-                                Text(saleDetail(sale)).font(.caption).foregroundStyle(.secondary)
+                                Text(Fmt.shortDay(sale.date)).foregroundStyle(Color.primary)
+                                Text(saleDetail(sale)).font(.caption).foregroundStyle(Color.secondary)
                             }
                             Spacer()
-                            Text(TF.money(sale.amount, currency, decimals: 2)).monospacedDigit().foregroundStyle(.primary)
+                            Text(TF.money(sale.amount, currency, decimals: 2)).monospacedDigit().foregroundStyle(Color.primary)
                         }
                     }
                     .accessibilityIdentifier("sale-row")
@@ -95,11 +95,11 @@ struct BusinessSalesPage: View {
                     Button { sheet = .cost(cost) } label: {
                         HStack {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(cost.label).foregroundStyle(.primary)
-                                Text(Fmt.shortDay(cost.date)).font(.caption).foregroundStyle(.secondary)
+                                Text(cost.label).foregroundStyle(Color.primary)
+                                Text(Fmt.shortDay(cost.date)).font(.caption).foregroundStyle(Color.secondary)
                             }
                             Spacer()
-                            Text("−\(TF.money(cost.amount, currency, decimals: 2))").monospacedDigit().foregroundStyle(.primary)
+                            Text("−\(TF.money(cost.amount, currency, decimals: 2))").monospacedDigit().foregroundStyle(Color.primary)
                         }
                     }
                 }
@@ -179,6 +179,7 @@ struct BusinessResultsPage: View {
                             .symbol(.circle)
                     }
                 }
+                .accessibilityLabel(tr("Par mois"))
                 .chartForegroundStyleScale([tr("Chiffre d'affaires"): Color(hex: BusinessFormat.accentHex), tr("Dépenses"): Color(hex: "8A8A8E").opacity(0.5), tr("Bénéfice"): Color(hex: BusinessFormat.goodHex)])
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .month)) { _ in
@@ -262,6 +263,7 @@ struct BusinessRecurringPage: View {
                     AreaMark(x: .value("Mois", snapshot.month, unit: .month), y: .value("MRR", snapshot.mrr))
                         .foregroundStyle(Color(hex: "1E9E75").opacity(0.12).gradient)
                 }
+                .accessibilityLabel(tr("MRR"))
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .month)) { _ in
                         AxisValueLabel(format: .dateTime.month(.abbreviated), centered: true)
@@ -337,6 +339,7 @@ struct BusinessMetricsPage: View {
                             .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
                     }
                 }
+                .accessibilityLabel(metric.name)
                 .chartYScale(domain: .automatic(includesZero: false))
                 .frame(height: 120)
             }

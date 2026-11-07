@@ -144,6 +144,7 @@ struct DailyLayoutEditor: View {
                 Image(systemName: isHidden ? "eye.slash" : "eye")
                     .foregroundStyle(isHidden ? Color.secondary : Color.accentColor)
                     .frame(width: 32, height: 32)
+                    .tapAreaOutset(6)
             }
             .buttonStyle(.pressable)
             .accessibilityLabel(Text(isHidden ? tr("Afficher \(info.title)") : tr("Masquer \(info.title)")))

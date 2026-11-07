@@ -12,8 +12,11 @@ struct LossyList<Element: Decodable>: Decodable {
             if let element = try? container.decode(Element.self) {
                 elements.append(element)
             } else {
+                // Reported so the store keeps a copy of the file before the next save leaves the element out
+                // (a removed widget kind, like the weather ones, only costs one copy).
+                LossyDecoding.noteLoss()
                 // A failed element is not consumed: skip it with a value that accepts anything.
-                _ = try? container.decode(Skipped.self)
+                if (try? container.decode(Skipped.self)) == nil { break }
             }
         }
         self.elements = elements

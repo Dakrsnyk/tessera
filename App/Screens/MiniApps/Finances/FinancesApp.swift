@@ -214,16 +214,24 @@ struct FinancesAppView: View {
     private func hero(state: BudgetState, now: Date, at: Date) -> some View {
         let spent = BudgetMath.spentThisMonth(state, throughDay: day, now: now)
         let remaining = BudgetMath.remaining(state, throughDay: day, now: now)
-        let over = remaining < 0
+        // The default 2 000 is not a budget the person gave: without one, show what was spent, not a made-up remainder.
+        let knowsBudget = model.profile.knows(.monthlyBudget)
+        let over = knowsBudget && remaining < 0
         let comparison = BudgetMath.monthToDate(state, at: at)
         return VStack(alignment: .leading, spacing: 10) {
-            MiniHero(label: over ? tr("Dépassé ce mois-ci") : tr("Reste ce mois-ci"),
-                     value: TF.money(abs(remaining), currency),
-                     caption: heroDetail(state: state, spent: spent, remaining: remaining, now: now))
-            trend(state: state, now: now, over: over)
+            if knowsBudget {
+                MiniHero(label: over ? tr("Dépassé ce mois-ci") : tr("Reste ce mois-ci"),
+                         value: TF.money(abs(remaining), currency),
+                         caption: heroDetail(state: state, spent: spent, remaining: remaining, now: now))
+                trend(state: state, now: now, over: over)
+            } else {
+                MiniHero(label: tr("Dépensé ce mois-ci"),
+                         value: TF.money(spent, currency),
+                         caption: tr("Budget à définir pour savoir ce qu'il te reste"))
+            }
             HStack {
                 Button { sheet = .budget } label: {
-                    Text(tr("Budget \(TF.money(state.monthlyBudget, currency))"))
+                    Text(knowsBudget ? tr("Budget \(TF.money(state.monthlyBudget, currency))") : tr("Définir mon budget"))
                         .font(.caption.weight(.semibold))
                         .padding(.horizontal, 12)
                         .frame(minHeight: 44)
@@ -611,6 +619,8 @@ struct CategoryBar: View {
             }
             if let ratio = status.ratio {
                 ProgressView(value: min(1, ratio))
+                    .accessibilityLabel(tr("Progression"))
+                    .accessibilityValue(Fmt.percent(min(1, ratio)))
                     .tint(status.isOver ? Color(hex: Finances.overHex) : Color(hex: hex))
             }
         }
@@ -635,6 +645,8 @@ struct GoalProgressRow: View {
                 Text(Fmt.percent(goal.progress)).font(.subheadline.weight(.bold)).foregroundStyle(Color(hex: Finances.incomeHex)).monospacedDigit()
             }
             ProgressView(value: goal.progress).tint(Color(hex: Finances.incomeHex))
+                .accessibilityLabel(goal.name)
+                .accessibilityValue(Fmt.percent(goal.progress))
             Text(detail).font(.caption).foregroundStyle(.secondary)
         }
     }
@@ -772,6 +784,7 @@ private struct BalanceChartCard: View {
                     .symbolSize(70)
             }
         }
+        .accessibilityLabel(tr("Solde"))
         .chartXAxis {
             AxisMarks(values: .automatic(desiredCount: 4)) { _ in
                 AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))

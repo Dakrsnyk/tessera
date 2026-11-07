@@ -67,21 +67,26 @@ struct Bill: Codable, Hashable, Identifiable {
 
     var monthlyCost: Double { period == .monthly ? amount : amount / 12 }
 
+    /// The first due date from `date` (included). Every date is computed from the original billing day
+    /// (`anchorDate + k periods`, held to the last day of a short month), never from the previous date:
+    /// a bill of the 31st falls on Feb 28, then Mar 31, as `BudgetMath.paymentDates` counts it.
     func nextDue(after date: Date) -> Date {
         let cal = DateMath.calendar
         let today = DateMath.startOfDay(date)
-        var due = DateMath.startOfDay(anchorDate)
+        let start = DateMath.startOfDay(anchorDate)
         let step: Calendar.Component = period == .monthly ? .month : .year
+        func due(_ k: Int) -> Date? { cal.date(byAdding: step, value: k, to: start) }
+        var k = (cal.dateComponents([step], from: start, to: today).value(for: step) ?? 0) - 1
         var guardCount = 0
-        while due < today, guardCount < 600 {
-            due = cal.date(byAdding: step, value: 1, to: due) ?? today
+        while guardCount < 1_200, let candidate = due(k), candidate < today {
+            k += 1
             guardCount += 1
         }
-        while guardCount < 600, let previous = cal.date(byAdding: step, value: -1, to: due), previous >= today {
-            due = previous
+        while guardCount < 1_200, let previous = due(k - 1), previous >= today {
+            k -= 1
             guardCount += 1
         }
-        return due
+        return due(k) ?? today
     }
 }
 
@@ -278,16 +283,14 @@ struct BudgetState: Codable, Hashable {
         return categories.first { $0.id == id }
     }
 
+    /// Nothing is ever deleted behind the person's back: the history stays whole (the balance chart and the
+    /// « Solde de départ » count every operation since their start date).
     mutating func add(_ expense: Expense) {
         expenses.append(expense)
-        let cutoff = expense.date.addingTimeInterval(-400 * 86_400)
-        expenses.removeAll { $0.date < cutoff }
     }
 
     mutating func addIncome(_ income: IncomeEntry) {
         incomes.append(income)
-        let cutoff = income.date.addingTimeInterval(-800 * 86_400)
-        incomes.removeAll { $0.date < cutoff }
     }
 
     /// Replaces an expense (same id) or adds it.
@@ -341,6 +344,12 @@ struct BudgetState: Codable, Hashable {
     }
 }
 
+extension DateInterval {
+    /// Half-open membership [start, end): an instant exactly at the end belongs to the next period only,
+    /// so a day-less operation dated 00:00 on the 1st counts in one month, not two. (`contains` is closed.)
+    func holds(_ date: Date) -> Bool { date >= start && date < end }
+}
+
 enum BudgetMath {
     static func monthInterval(_ date: Date) -> DateInterval {
         DateMath.calendar.dateInterval(of: .month, for: date) ?? DateInterval(start: date, duration: 1)
@@ -349,7 +358,7 @@ enum BudgetMath {
     /// What was spent in the interval: the expenses noted, and the payments of the fixed expenses
     /// (bills, fixed costs) on their dates up to now. A payment also noted by hand counts once.
     static func expenses(_ state: BudgetState, in interval: DateInterval, now: Date = Date()) -> [Expense] {
-        let noted = state.expenses.filter { interval.contains($0.date) }
+        let noted = state.expenses.filter { interval.holds($0.date) }
         let fixed = fixedExpenses(state, in: interval, now: now).filter { payment in
             !state.expenses.contains { isSamePayment($0.amount, $0.date, payment.amount, payment.date) && ($0.categoryID == payment.categoryID || folded($0.note) == folded(payment.note)) }
         }
@@ -439,7 +448,7 @@ enum BudgetMath {
     static func monthThroughDay(_ day: Date, now: Date = Date()) -> DateInterval {
         let month = monthInterval(day)
         guard DateMath.startOfDay(day) < DateMath.startOfDay(now) else { return month }
-        return DateInterval(start: month.start, end: DateMath.nextMidnight(after: day).addingTimeInterval(-1))
+        return DateInterval(start: month.start, end: DateMath.nextMidnight(after: day))
     }
 
     /// What was spent from the start of the month of `day` to the end of `day` (fixed payments included).
@@ -543,7 +552,7 @@ enum BudgetMath {
     /// What came in: the incomes noted, and the fixed incomes on their dates up to now (one also
     /// noted by hand counts once).
     static func incomes(_ state: BudgetState, in interval: DateInterval, now: Date = Date()) -> [IncomeEntry] {
-        let noted = state.incomes.filter { interval.contains($0.date) }
+        let noted = state.incomes.filter { interval.holds($0.date) }
         var fixed: [IncomeEntry] = []
         for item in state.fixedFlows where item.isIncome {
             for date in paymentDates(from: item.date ?? state.fixedFlowsStart ?? now, every: item.period.step, in: interval, until: now)
@@ -582,7 +591,7 @@ enum BudgetMath {
         let from = min(first, opening?.day ?? first)
         let to = max(last, opening?.day ?? last)
         guard let stop = calendar.date(byAdding: .day, value: 1, to: to) else { return [] }
-        let interval = DateInterval(start: from, end: stop.addingTimeInterval(-1))
+        let interval = DateInterval(start: from, end: stop)
         var change: [String: Double] = [:]
         for income in incomes(state, in: interval, now: now) {
             change[DateMath.dayKey(income.date), default: 0] += income.amount
@@ -729,7 +738,7 @@ enum BudgetMath {
         let today = DateMath.startOfDay(now)
         let first = DateMath.startOfDay(state.openingBalance == nil ? start : (state.openingDate ?? start))
         guard first <= today, let stop = calendar.date(byAdding: .day, value: 1, to: today) else { return [] }
-        let interval = DateInterval(start: first, end: stop.addingTimeInterval(-1))
+        let interval = DateInterval(start: first, end: stop)
         // Oldest first to add up; on the same day, in the order of the hour, incomes first.
         var movements: [(kind: StatementLine.Kind, date: Date, amount: Double, order: Int)] = []
         for income in incomes(state, in: interval, now: now) {

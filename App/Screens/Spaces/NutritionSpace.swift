@@ -28,6 +28,8 @@ struct NutritionSpaceSections: View {
                 }
                 if known.kcal {
                     ProgressView(value: min(1, totals.kcal / max(1, state.goals.kcal)))
+                        .accessibilityLabel(tr("Calories"))
+                        .accessibilityValue(Fmt.percent(min(1, totals.kcal / max(1, state.goals.kcal))))
                         .tint(Color(hex: "FF6B57"))
                 }
                 ForEach(NutritionTiles.macroRows(totals, goals: state.goals, known: known)) { row in
@@ -460,7 +462,7 @@ struct FoodLogSheet: View {
         let totals = food.nutrients(grams: grams)
         let known = NutritionTiles.Targets(model.profile)
         let left = model.nutrition.goals.kcal - NutritionMath.totals(model.nutrition, on: day).kcal - totals.kcal
-        SheetForm(title: food.name, canSave: grams > 0, dismissesOnSave: onDone == nil, onSave: save) {
+        SheetForm(title: food.name, canSave: grams > 0 && grams <= NutritionState.maxGrams, dismissesOnSave: onDone == nil, onSave: save) {
             Section {
                 VStack(alignment: .leading, spacing: 4) {
                     if let brand = food.brand, !brand.isEmpty {
@@ -492,11 +494,11 @@ struct FoodLogSheet: View {
             }
             Section(tr("Apport")) {
                 ValueRow(title: tr("Calories"), value: tr("\(TF.int(totals.kcal)) kcal"))
-                ValueRow(title: tr("Protéines"), value: "\(TF.decimal(totals.protein, 1)) g")
-                ValueRow(title: tr("Glucides"), value: "\(TF.decimal(totals.carbs, 1)) g")
-                ValueRow(title: tr("Lipides"), value: "\(TF.decimal(totals.fat, 1)) g")
+                ValueRow(title: tr("Protéines"), value: totals.marked("\(TF.decimal(totals.protein, 1)) g", incomplete: totals.isIncomplete))
+                ValueRow(title: tr("Glucides"), value: totals.marked("\(TF.decimal(totals.carbs, 1)) g", incomplete: totals.isIncomplete))
+                ValueRow(title: tr("Lipides"), value: totals.marked("\(TF.decimal(totals.fat, 1)) g", incomplete: totals.isIncomplete))
                 if model.isPremium {
-                    ValueRow(title: tr("Fibres"), value: "\(TF.decimal(totals.fiber, 1)) g")
+                    ValueRow(title: tr("Fibres"), value: totals.marked("\(TF.decimal(totals.fiber, 1)) g", incomplete: totals.isFiberIncomplete))
                 } else {
                     NutrientLockRow()
                 }
@@ -509,6 +511,14 @@ struct FoodLogSheet: View {
         .onAppear {
             grams = food.servingGrams > 0 ? food.servingGrams : 100
             meal = presetMeal ?? .current()
+        }
+        // The field takes anything typed: the quantity stays inside the limits of the log (1 to 5 000 g).
+        .onChange(of: grams) { _, value in
+            if value.isNaN {
+                grams = 0
+            } else if value > NutritionState.maxGrams {
+                grams = NutritionState.maxGrams
+            }
         }
     }
 
@@ -599,6 +609,7 @@ struct CustomFoodEditor: View {
     var draft: FoodItem? = nil
     var onCreate: (FoodItem) -> Void
     @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
     @State private var name = ""
     @State private var kcal: Double = 0
     @State private var protein: Double = 0
@@ -615,9 +626,21 @@ struct CustomFoodEditor: View {
     @State private var potassiumMg: Double?
     @State private var calciumMg: Double?
     @State private var ironMg: Double?
+    @State private var confirming = false
+
+    /// What forbids saving (a negative or impossible value), if anything.
+    private var blocking: CustomFoodValidation.Problem? {
+        if !serving.isFinite || serving <= 0 || serving > NutritionState.maxGrams { return .outOfRange }
+        return CustomFoodValidation.blockingProblem(kcal: kcal, protein: protein, carbs: carbs, fat: fat, fiber: fiber)
+    }
+
+    /// What the person has to confirm (0 kcal, an energy far from the macros), if anything.
+    private var warning: CustomFoodValidation.Problem? {
+        CustomFoodValidation.warning(kcal: kcal, protein: protein, carbs: carbs, fat: fat)
+    }
 
     var body: some View {
-        SheetForm(title: tr("Aliment perso"), canSave: !name.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: tr("Aliment perso"), canSave: !name.trimmed.isEmpty && blocking == nil, dismissesOnSave: false, onSave: save) {
             Section {
                 TextField(tr("Nom"), text: $name)
                 NumberRow(title: tr("Portion"), value: $serving, unit: "g")
@@ -628,7 +651,7 @@ struct CustomFoodEditor: View {
                          : tr("Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette."))
                 }
             }
-            Section(tr("Pour 100 g")) {
+            Section {
                 NumberRow(title: tr("Calories"), value: $kcal, unit: "kcal")
                 NumberRow(title: tr("Protéines"), value: $protein, unit: "g")
                 NumberRow(title: tr("Glucides"), value: $carbs, unit: "g")
@@ -646,14 +669,36 @@ struct CustomFoodEditor: View {
                 } else {
                     NutrientLockRow()
                 }
+            } header: {
+                Text(tr("Pour 100 g"))
+            } footer: {
+                if let message = CustomFoodEditForm.message(for: blocking) {
+                    Text(message).foregroundStyle(Color.red)
+                }
             }
         }
         .onAppear {
             if let draft, name.isEmpty { name = draft.name }
         }
+        .alert(tr("Enregistrer quand même ?"), isPresented: $confirming) {
+            Button(tr("Annuler"), role: .cancel) {}
+            Button(tr("Enregistrer")) { commit() }
+        } message: {
+            Text(CustomFoodEditForm.message(for: warning) ?? "")
+        }
     }
 
     private func save() {
+        guard blocking == nil, !name.trimmed.isEmpty else { return }
+        if warning != nil {
+            confirming = true
+        } else {
+            commit()
+        }
+    }
+
+    private func commit() {
+        guard blocking == nil else { return }
         let micros = Micronutrients(potassiumMg: potassiumMg, calciumMg: calciumMg, ironMg: ironMg, transFat: transFat)
         let food = FoodItem(id: "custom.\(UUID().uuidString)", name: name.trimmed, brand: draft?.brand, kcal: kcal, protein: protein, carbs: carbs, fat: fat, fiber: fiber,
                             servingGrams: max(1, serving), servingName: "\(TF.int(serving)) g", source: .custom, barcode: draft?.barcode,
@@ -661,6 +706,7 @@ struct CustomFoodEditor: View {
                             micros: micros.isEmpty ? nil : micros)
         model.update(\.nutrition) { $0.customFoods.insert(food, at: 0) }
         onCreate(food)
+        dismiss()
     }
 }
 

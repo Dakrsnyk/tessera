@@ -1,6 +1,7 @@
 import AppIntents
 import Foundation
 import SwiftUI
+import UserNotifications
 #if canImport(ActivityKit)
 import ActivityKit
 #endif
@@ -49,7 +50,8 @@ extension WorkoutActivityAttributes: ActivityAttributes {}
 enum WorkoutLiveActivity {
     /// What the Live Activity shows for this state, or nil when no session is in progress.
     static func content(for state: FitnessState, now: Date = Date(), unitSystem: UnitSystem = .metric) -> (WorkoutActivityAttributes, WorkoutActivityAttributes.ContentState)? {
-        guard let session = state.active, !session.isFinished, let exercise = session.currentExercise else { return nil }
+        // A session left idle (see `WorkoutSession.idleLimit`) is not in progress: no Live Activity for it.
+        guard let session = state.active, !session.isFinished, !session.isIdle(at: now), let exercise = session.currentExercise else { return nil }
         let load = exercise.weight > 0
             ? tr("\(exercise.reps) × \(Units.loadText(kilograms: exercise.weight, in: unitSystem))")
             : tr("\(exercise.reps) répétitions")
@@ -85,10 +87,17 @@ enum WorkoutLiveActivity {
         }
         #endif
         guard let (attributes, content) = Self.content(for: state, now: now, unitSystem: SharedStore.shared.settings.unitSystem) else {
+            RestNotifier.cancel()
             for activity in running {
                 await activity.end(nil, dismissalPolicy: .immediate)
             }
             return
+        }
+        // The alert at the end of the rest follows the rest: set when it runs, gone when it is passed, paused or over.
+        if let restEnd = content.restEnd {
+            await RestNotifier.schedule(end: restEnd, now: now)
+        } else {
+            RestNotifier.cancel()
         }
         // At the end of the rest the activity is drawn again: « Prêt » replaces the countdown.
         let activityContent = ActivityContent(state: content, staleDate: content.restEnd)
@@ -105,6 +114,40 @@ enum WorkoutLiveActivity {
             _ = try? Activity.request(attributes: attributes, content: activityContent, pushType: nil)
         }
         #endif
+    }
+}
+
+/// The local notification that ends the rest between two sets (screen locked, phone in a pocket). One fixed
+/// identifier: scheduling again replaces it, and `WorkoutLiveActivity.sync` (called after every change of the
+/// workout, from the app, a widget or the Lock Screen) sets or cancels it. It only uses the permission the
+/// person already gave; the Fitness session screen asks for it, with the usual explanation.
+enum RestNotifier {
+    static let identifier = "tessera.rest.end"
+
+    /// Seconds before the alert, nil when the rest is already over (nothing to schedule).
+    static func interval(until end: Date, now: Date = Date()) -> TimeInterval? {
+        let seconds = end.timeIntervalSince(now)
+        return seconds > 1 ? seconds : nil
+    }
+
+    static func schedule(end: Date, now: Date = Date()) async {
+        let center = UNUserNotificationCenter.current()
+        guard let seconds = interval(until: end, now: now) else {
+            cancel()
+            return
+        }
+        let settings = await center.notificationSettings()
+        guard settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional else { return }
+        let content = UNMutableNotificationContent()
+        content.title = tr("Repos terminé")
+        content.body = tr("Prêt pour la prochaine série.")
+        content.sound = .default
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
+        try? await center.add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
+    }
+
+    static func cancel() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [identifier])
     }
 }
 

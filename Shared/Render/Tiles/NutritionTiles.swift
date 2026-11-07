@@ -63,9 +63,11 @@ enum NutritionTiles {
     /// `compact` drops the unit so the macro names stay readable in small widgets. A macro without a target
     /// shows what was eaten, with no bar.
     static func macroRows(_ totals: NutritionTotals, goals: NutritionGoals, compact: Bool = false, known: Targets = Targets(all: true)) -> [TileRow] {
+        // A food of the total lacks a macro: the figure is a minimum, marked « ≥ ».
+        let mark = totals.isIncomplete ? NutritionTotals.minimumMarker : ""
         func value(_ eaten: Double, _ goal: Double, _ knowsGoal: Bool) -> String {
-            guard knowsGoal else { return compact ? TF.int(eaten) : "\(TF.int(eaten)) g" }
-            return compact ? "\(TF.int(eaten))/\(TF.int(goal))" : "\(TF.int(eaten)) / \(TF.int(goal)) g"
+            guard knowsGoal else { return mark + (compact ? TF.int(eaten) : "\(TF.int(eaten)) g") }
+            return mark + (compact ? "\(TF.int(eaten))/\(TF.int(goal))" : "\(TF.int(eaten)) / \(TF.int(goal)) g")
         }
         func progress(_ eaten: Double, _ goal: Double, _ knowsGoal: Bool) -> Double? {
             knowsGoal ? eaten / max(1, goal) : nil
@@ -127,12 +129,13 @@ enum NutritionTiles {
             TileSegment(label: tr("Lipides"), value: totals.fat * 9, colorHex: NutritionColors.fatHex),
         ])
         let letters = (tr("P", context: "protein"), tr("G", context: "carbs"), tr("L", context: "fat"))
-        tile.inline = "\(letters.0) \(TF.int(totals.protein)) · \(letters.1) \(TF.int(totals.carbs)) · \(letters.2) \(TF.int(totals.fat))"
+        let mark = totals.isIncomplete ? NutritionTotals.minimumMarker : ""
+        tile.inline = "\(letters.0) \(mark)\(TF.int(totals.protein)) · \(letters.1) \(mark)\(TF.int(totals.carbs)) · \(letters.2) \(mark)\(TF.int(totals.fat))"
         // On the Lock Screen: the three macros, each with its bar (the calories have their own widget).
         tile.lockColumns = [
-            TileRow(id: "p", title: letters.0, value: "\(TF.int(totals.protein)) g", progress: known.protein ? totals.protein / max(1, state.goals.protein) : nil),
-            TileRow(id: "c", title: letters.1, value: "\(TF.int(totals.carbs)) g", progress: known.carbs ? totals.carbs / max(1, state.goals.carbs) : nil),
-            TileRow(id: "f", title: letters.2, value: "\(TF.int(totals.fat)) g", progress: known.fat ? totals.fat / max(1, state.goals.fat) : nil),
+            TileRow(id: "p", title: letters.0, value: "\(mark)\(TF.int(totals.protein)) g", progress: known.protein ? totals.protein / max(1, state.goals.protein) : nil),
+            TileRow(id: "c", title: letters.1, value: "\(mark)\(TF.int(totals.carbs)) g", progress: known.carbs ? totals.carbs / max(1, state.goals.carbs) : nil),
+            TileRow(id: "f", title: letters.2, value: "\(mark)\(TF.int(totals.fat)) g", progress: known.fat ? totals.fat / max(1, state.goals.fat) : nil),
         ]
         return tile
     }
@@ -141,25 +144,28 @@ enum NutritionTiles {
         let totals = NutritionMath.totals(state, on: now)
         guard known else {
             var tile = Tile(title: tr("Protéines"), symbol: "bolt.heart")
-            tile.value = TF.int(totals.protein)
+            let mark = totals.isIncomplete ? NutritionTotals.minimumMarker : ""
+            tile.value = mark + TF.int(totals.protein)
             tile.unit = "g"
             tile.caption = tr("mangées aujourd'hui")
             tile.detail = targetHint
-            tile.shortValue = TF.int(totals.protein)
-            tile.inline = tr("\(TF.int(totals.protein)) g de protéines aujourd'hui")
+            tile.shortValue = mark + TF.int(totals.protein)
+            tile.inline = tr("\(mark + TF.int(totals.protein)) g de protéines aujourd'hui")
             return tile
         }
         let goal = max(1, state.goals.protein)
         let left = max(0, goal - totals.protein)
         var tile = Tile(title: tr("Protéines"), symbol: "bolt.heart")
-        tile.value = TF.int(left)
+        // The proteins eaten are a minimum when a food lacks them, so what is left is a maximum: « ≤ ».
+        let mark = totals.isIncomplete ? "≤ " : ""
+        tile.value = mark + TF.int(left)
         tile.unit = "g"
         tile.caption = left == 0 ? tr("Objectif atteint") : tr("à trouver sur \(TF.int(goal)) g")
         tile.visual = .ring(totals.protein / goal)
         tile.ringHex = NutritionColors.proteinHex
         tile.gauge = totals.protein / goal
-        tile.shortValue = TF.int(left)
-        tile.inline = tr("\(TF.int(left)) g de protéines restantes")
+        tile.shortValue = mark + TF.int(left)
+        tile.inline = tr("\(mark + TF.int(left)) g de protéines restantes")
         return tile
     }
 

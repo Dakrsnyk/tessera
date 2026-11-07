@@ -38,7 +38,26 @@ enum NotificationScheduler {
         components.hour = hour
         components.minute = minute
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: true)
-        center.add(UNNotificationRequest(identifier: habitID(habit.id), content: content, trigger: trigger))
+        add([UNNotificationRequest(identifier: habitID(habit.id), content: content, trigger: trigger)])
+    }
+
+    // MARK: Global ceiling
+
+    /// iOS keeps 64 pending notifications and silently drops the others.
+    static let pendingLimit = NotificationEngine.systemLimit
+
+    /// How many requests can still be added to `pending` waiting ones without passing the ceiling.
+    static func room(pending: Int) -> Int { max(0, pendingLimit - pending) }
+
+    /// Adds the requests the ceiling leaves room for (the first ones, so the soonest when sorted).
+    private static func add(_ requests: [UNNotificationRequest]) {
+        guard !requests.isEmpty else { return }
+        Task {
+            let pending = await center.pendingNotificationRequests().count
+            for request in requests.prefix(room(pending: pending)) {
+                try? await center.add(request)
+            }
+        }
     }
 
     static func cancelHabitReminder(_ id: UUID) {
@@ -54,25 +73,43 @@ enum NotificationScheduler {
 
     // MARK: Countdown
 
-    private static func countdownID(_ id: UUID) -> String { "tessera.countdown.\(id.uuidString)" }
+    /// The identifier of a countdown's reminder: the widget's own, or one per part of a combined widget.
+    static func countdownID(_ id: UUID, part: Int? = nil) -> String {
+        let base = "tessera.countdown.\(id.uuidString)"
+        return part.map { "\(base).\($0)" } ?? base
+    }
 
-    /// A reminder at 9:00 on the day of a countdown, when the design asks for it.
+    /// A combined widget holds at most eight parts: the identifiers to take back for a design.
+    private static func countdownIDs(for id: UUID) -> [String] {
+        [countdownID(id)] + (0..<8).map { countdownID(id, part: $0) }
+    }
+
+    /// The reminders a design asks for: at 9:00 on the day of each countdown (the widget itself, or each
+    /// countdown part of a combined widget), when its option is on and the day is still ahead.
+    static func countdownRequests(for design: WidgetDesign, now: Date = Date()) -> [UNNotificationRequest] {
+        let isCombo = design.isCombo
+        return design.partDesigns.enumerated().compactMap { (index: Int, part: WidgetDesign) -> UNNotificationRequest? in
+            guard part.kind == .countdown, part.options.countdownMode == .until, part.options.countdownReminder else { return nil }
+            var components = DateMath.calendar.dateComponents([.year, .month, .day], from: part.options.countdownDate)
+            components.hour = 9
+            guard let fireDate = DateMath.calendar.date(from: components), fireDate > now else { return nil }
+            let content = UNMutableNotificationContent()
+            content.title = part.options.countdownTitle.trimmed.isEmpty ? tr("C'est le grand jour") : part.options.countdownTitle
+            content.body = tr("Le jour J est arrivé.")
+            content.sound = .default
+            let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+            return UNNotificationRequest(identifier: countdownID(design.id, part: isCombo ? index : nil), content: content, trigger: trigger)
+        }
+    }
+
+    /// The reminders of a design's countdowns, replaced by what its options ask for now.
     static func syncCountdownReminder(for design: WidgetDesign) {
-        center.removePendingNotificationRequests(withIdentifiers: [countdownID(design.id)])
-        guard design.kind == .countdown, design.options.countdownMode == .until, design.options.countdownReminder else { return }
-        var components = DateMath.calendar.dateComponents([.year, .month, .day], from: design.options.countdownDate)
-        components.hour = 9
-        guard let fireDate = DateMath.calendar.date(from: components), fireDate > Date() else { return }
-        let content = UNMutableNotificationContent()
-        content.title = design.options.countdownTitle.trimmed.isEmpty ? tr("C'est le grand jour") : design.options.countdownTitle
-        content.body = tr("Le jour J est arrivé.")
-        content.sound = .default
-        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-        center.add(UNNotificationRequest(identifier: countdownID(design.id), content: content, trigger: trigger))
+        center.removePendingNotificationRequests(withIdentifiers: countdownIDs(for: design.id))
+        add(countdownRequests(for: design))
     }
 
     static func cancelCountdownReminder(for id: UUID) {
-        center.removePendingNotificationRequests(withIdentifiers: [countdownID(id)])
+        center.removePendingNotificationRequests(withIdentifiers: countdownIDs(for: id))
     }
 
     static func cancelAll() {

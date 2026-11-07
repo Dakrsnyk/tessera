@@ -108,7 +108,7 @@ struct ExerciseLibraryPage: View {
                                 Text("\(ExerciseLibrary.all.filter { ExerciseLibrary.Filters(group: group).allows($0) }.count)")
                                     .foregroundStyle(Color.secondary)
                                     .monospacedDigit()
-                                Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
+                                Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(Color.secondary.opacity(0.55))
                             }
                         }
                     }

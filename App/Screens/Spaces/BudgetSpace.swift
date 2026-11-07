@@ -19,6 +19,8 @@ struct BudgetSpaceSections: View {
                     .font(.subheadline)
                     .foregroundStyle(Color.secondary)
                 ProgressView(value: min(1, BudgetMath.spentThisMonth(state, at: now) / max(1, state.monthlyBudget)))
+                    .accessibilityLabel(tr("Dépensé"))
+                    .accessibilityValue(Fmt.percent(min(1, BudgetMath.spentThisMonth(state, at: now) / max(1, state.monthlyBudget))))
                     .tint(Color(hex: "2F8F7A"))
             }
             .padding(.vertical, 4)
@@ -122,6 +124,8 @@ struct BudgetSpaceSections: View {
                             Text("\(TF.money(goal.saved, currency)) / \(TF.money(goal.target, currency))").foregroundStyle(Color.secondary).monospacedDigit()
                         }
                         ProgressView(value: goal.progress)
+                            .accessibilityLabel(goal.name)
+                            .accessibilityValue(Fmt.percent(goal.progress))
                     }
                 }
             }

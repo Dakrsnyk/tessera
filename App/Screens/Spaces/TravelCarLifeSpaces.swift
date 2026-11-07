@@ -201,7 +201,7 @@ struct FlightEditor: View {
     @State var flight: Flight
 
     var body: some View {
-        SheetForm(title: tr("Vol"), canSave: !flight.number.trimmed.isEmpty, onSave: save) {
+        SheetForm(title: tr("Vol"), canSave: !flight.number.trimmed.isEmpty && (flight.arrival.map { $0 > flight.departure } ?? true), onSave: save) {
             TextField(tr("Numéro de vol (AC 870…)"), text: $flight.number).textInputAutocapitalization(.characters)
             TextField(tr("Départ (YUL)"), text: $flight.from).textInputAutocapitalization(.characters)
             TextField(tr("Arrivée (CDG)"), text: $flight.to).textInputAutocapitalization(.characters)
@@ -306,6 +306,8 @@ struct CarSpaceSections: View {
                                 .monospacedDigit()
                         }
                         ProgressView(value: min(1, status.used)).tint(status.used >= 0.9 ? .orange : .accentColor)
+                            .accessibilityLabel(status.item.name)
+                            .accessibilityValue(Fmt.percent(min(1, status.used)))
                     }
                 }
                 .swipeActions {
@@ -461,8 +463,12 @@ struct ServiceEditor: View {
             NumberRow(title: tr("Tous les"), value: Binding(get: { service.intervalKm ?? 0 }, set: { service.intervalKm = $0 > 0 ? $0 : nil }), unit: tr("km"))
             IntRow(title: tr("ou tous les"), value: Binding(get: { service.intervalMonths ?? 0 }, set: { service.intervalMonths = $0 > 0 ? $0 : nil }), unit: tr("mois"))
             NumberRow(title: tr("Dernier au compteur"), value: Binding(get: { service.lastKm ?? 0 }, set: { service.lastKm = $0 > 0 ? $0 : nil }), unit: tr("km"))
-            DatePicker(tr("Dernière fois"), selection: Binding(get: { service.lastDate ?? Date() }, set: { service.lastDate = $0 }), displayedComponents: .date)
-                .environment(\.locale, Fmt.locale)
+            // The date shown is always the date saved: without « Déjà fait », no date is shown nor kept.
+            Toggle(tr("Déjà fait"), isOn: Binding(get: { service.lastDate != nil }, set: { service.lastDate = $0 ? (service.lastDate ?? Date()) : nil }))
+            if let lastDate = service.lastDate {
+                DatePicker(tr("Dernière fois"), selection: Binding(get: { lastDate }, set: { service.lastDate = $0 }), displayedComponents: .date)
+                    .environment(\.locale, Fmt.locale)
+            }
             NumberRow(title: tr("Coût habituel"), value: $service.cost, unit: model.settings.currencyCode)
         }
     }
@@ -503,15 +509,30 @@ struct CarDeadlineEditor: View {
 
 struct LifeSpaceSections: View {
     @Environment(AppModel.self) private var model
+    @State private var askingBirthday = false
+    @State private var birthdayDraft = Calendar.current.date(byAdding: .year, value: -30, to: Date()) ?? Date()
 
     var body: some View {
         let now = Date()
         let life = model.life
         Section {
+            // No date is made up: switching on only asks for the real one, saved by « Enregistrer la date ».
             Toggle(tr("Afficher mon anniversaire"), isOn: Binding(
-                get: { life.birthday != nil },
-                set: { on in model.update(\.life) { $0.birthday = on ? ($0.birthday ?? Holidays.make(1995, 1, 1)) : nil } }
+                get: { life.birthday != nil || askingBirthday },
+                set: { on in
+                    askingBirthday = on && life.birthday == nil
+                    if !on { model.update(\.life) { $0.birthday = nil } }
+                }
             ))
+            if life.birthday == nil, askingBirthday {
+                DatePicker(tr("Date de naissance"), selection: $birthdayDraft, in: ...now, displayedComponents: .date)
+                    .environment(\.locale, Fmt.locale)
+                Button(tr("Enregistrer la date")) {
+                    let chosen = birthdayDraft
+                    model.update(\.life) { $0.birthday = chosen }
+                    askingBirthday = false
+                }
+            }
             if let birthday = life.birthday {
                 DatePicker(tr("Date de naissance"), selection: Binding(get: { birthday }, set: { date in model.update(\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)
                     .environment(\.locale, Fmt.locale)

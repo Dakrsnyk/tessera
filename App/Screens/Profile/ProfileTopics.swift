@@ -242,6 +242,7 @@ struct TopicForm: View {
     @State private var newTask = ""
     @State private var newHabit = ""
     @State private var asksBody = false
+    @State private var paywall: PaywallContext?
 
     var body: some View {
         VStack(spacing: 12) {
@@ -259,6 +260,7 @@ struct TopicForm: View {
         .onAppear {
             if model.age == nil || profile.heightCm == nil || profile.weightKg == nil { asksBody = true }
         }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
     }
 
     // MARK: Shared answers
@@ -550,8 +552,11 @@ struct TopicForm: View {
     @ViewBuilder private var wellbeing: some View {
         QuestionCard(title: tr("Une habitude à suivre"), detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, tr("habitude suivie"), tr("habitudes suivies"))) {
             quickAdd(placeholder: tr("Ex. : méditer, lire, marcher"), text: $newHabit, identifier: "first-habit") {
-                guard model.canAddHabit else { return }
-                model.updateContent { $0.habits.append(Habit(name: newHabit.trimmed, symbol: "checkmark.circle", colorHex: "7FA33A")) }
+                // At the free limit: the paywall opens and the text typed stays.
+                guard model.addHabit(Habit(name: newHabit.trimmed, symbol: "checkmark.circle", colorHex: "7FA33A")) else {
+                    paywall = .habitLimit
+                    return
+                }
                 newHabit = ""
             }
         }

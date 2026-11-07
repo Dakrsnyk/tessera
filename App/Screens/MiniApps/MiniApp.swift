@@ -377,9 +377,12 @@ struct MiniActionButton: View {
         Button { tapGuard.run(action) } label: {
             Label(title, systemImage: symbol)
                 .font(.headline)
-                .foregroundStyle(isProminent ? Color.white : Color(hex: colorHex))
-                .lineLimit(1)
+                .foregroundStyle(isProminent ? Color.readableInk(on: colorHex) : Color(hex: colorHex))
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
                 .minimumScaleFactor(0.8)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
                 .frame(maxWidth: .infinity, minHeight: 50)
                 .background(isProminent ? Color(hex: colorHex) : Color(hex: colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
@@ -453,6 +456,7 @@ struct DaySwitcher: View {
                 Image(systemName: "chevron.left")
                     .font(.subheadline.weight(.bold))
                     .frame(width: 40, height: 36)
+                    .tapAreaOutset(4)
             }
             .accessibilityLabel(Text(tr("Jour précédent")))
             Button {
@@ -478,6 +482,7 @@ struct DaySwitcher: View {
                     Image(systemName: "arrow.uturn.backward")
                         .font(.caption.weight(.bold))
                         .frame(width: 32, height: 36)
+                        .tapAreaOutset(6)
                 }
                 .accessibilityLabel(Text(tr("Revenir à aujourd'hui")))
                 .transition(.scale.combined(with: .opacity))
@@ -488,6 +493,7 @@ struct DaySwitcher: View {
                 Image(systemName: "chevron.right")
                     .font(.subheadline.weight(.bold))
                     .frame(width: 40, height: 36)
+                    .tapAreaOutset(4)
             }
             .disabled(isToday && !allowsFuture)
             .accessibilityLabel(Text(tr("Jour suivant")))

@@ -158,6 +158,7 @@ struct HabitEditor: View {
     @State private var reminderTime: Date
     @State private var notificationsDenied = false
     @State private var showsNotificationExplainer = false
+    @State private var paywall: PaywallContext?
     let isNew: Bool
 
     static let symbols = [
@@ -189,11 +190,13 @@ struct HabitEditor: View {
                             } label: {
                                 Image(systemName: symbol)
                                     .font(.system(size: 18, weight: .semibold))
-                                    .foregroundStyle(habit.symbol == symbol ? .white : Color(hex: habit.colorHex))
+                                    .foregroundStyle(habit.symbol == symbol ? Color.readableInk(on: habit.colorHex) : Color(hex: habit.colorHex))
                                     .frame(width: 46, height: 46)
                                     .background(Circle().fill(habit.symbol == symbol ? Color(hex: habit.colorHex) : Color(hex: habit.colorHex).opacity(0.12)))
                             }
                             .buttonStyle(.pressable)
+                            .accessibilityLabel(tr("Icône \((Self.symbols.firstIndex(of: symbol) ?? 0) + 1)"))
+                            .accessibilityAddTraits(habit.symbol == symbol ? .isSelected : [])
                         }
                     }
                     .padding(.vertical, 6)
@@ -255,6 +258,7 @@ struct HabitEditor: View {
                 }
             }
             .permissionSheet(.notifications, isPresented: $showsNotificationExplainer, request: requestNotifications, onDismiss: applyNotificationState)
+            .sheet(item: $paywall) { PaywallView(context: $0) }
         }
     }
 
@@ -278,12 +282,15 @@ struct HabitEditor: View {
             saved.reminderHour = nil
             saved.reminderMinute = nil
         }
-        model.updateContent { content in
-            if let index = content.habits.firstIndex(where: { $0.id == saved.id }) {
-                content.habits[index] = saved
-            } else {
-                content.habits.append(saved)
+        if model.content.habits.contains(where: { $0.id == saved.id }) {
+            // An existing habit stays editable, whatever the plan.
+            model.updateContent { content in
+                if let index = content.habits.firstIndex(where: { $0.id == saved.id }) { content.habits[index] = saved }
             }
+        } else if !model.addHabit(saved) {
+            // At the free limit: nothing is added, the paywall opens (the form stays open, the text kept).
+            paywall = .habitLimit
+            return
         }
         NotificationScheduler.syncHabitReminder(saved)
         dismiss()

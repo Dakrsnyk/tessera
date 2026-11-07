@@ -7,12 +7,14 @@ enum NutritionSheet: Identifiable {
     case search(MealType?, Date)
     case scan(Date)
     case goals
+    case customFoods
 
     var id: String {
         switch self {
         case let .search(meal, day): "search-\(meal?.rawValue ?? "any")-\(DateMath.dayKey(day))"
         case let .scan(day): "scan-\(DateMath.dayKey(day))"
         case .goals: "goals"
+        case .customFoods: "custom-foods"
         }
     }
 }
@@ -23,6 +25,9 @@ struct NutritionAppView: View {
     @Environment(AppModel.self) private var model
     @State private var day: Date
     @State private var sheet: NutritionSheet?
+    @Environment(\.scenePhase) private var scenePhase
+    /// The day the screen was last active: when the app wakes on a later day and the screen showed that day, it follows.
+    @State private var activeOn = Date()
 
     init(day: Date = Date()) {
         _day = State(initialValue: day)
@@ -55,11 +60,17 @@ struct NutritionAppView: View {
             MiniAppInfoSection(app: .nutrition)
         }
         .navigationTitle(tr("Nutrition"))
+        .onChange(of: scenePhase) { _, phase in
+            guard phase == .active else { return }
+            if DateMath.isSameDay(day, activeOn), !DateMath.isSameDay(activeOn, Date()) { day = Date() }
+            activeOn = Date()
+        }
         .sheet(item: $sheet) { sheet in
             switch sheet {
             case let .search(meal, day): FoodSearchView(presetMeal: meal, day: day)
             case let .scan(day): FoodSearchView(startsWithScanner: true, day: day)
             case .goals: MiniAppInfoSheet(app: .nutrition)
+            case .customFoods: CustomFoodsView()
             }
         }
     }
@@ -126,7 +137,9 @@ struct NutritionAppView: View {
     private func nutrientsRow(totals: NutritionTotals) -> some View {
         let sugars = totals.sugars.map { tr(" · sucres \(TF.int($0)) g") } ?? ""
         let sodium = totals.sodiumMg.map { tr(" · sodium \(TF.int($0)) mg") } ?? ""
-        let fibres = tr("Fibres \(TF.int(totals.fiber)) g\(sugars)\(sodium)")
+        // The same key as before (« Fibres %@ g%@%@ »): the marker joins the number, so every language keeps its text.
+        let fiberText = (totals.isFiberIncomplete ? NutritionTotals.minimumMarker : "") + TF.int(totals.fiber)
+        let fibres = tr("Fibres \(fiberText) g\(sugars)\(sodium)")
         let detail: String? = model.isPremium ? fibres : nil
         return MiniRowsCard {
             NavigationLink(value: HomeRoute.page(.nutritionNutrients(day))) {
@@ -271,6 +284,16 @@ struct NutritionAppView: View {
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("nutrition-saved")
+            if !state.customFoods.isEmpty {
+                MiniDivider()
+                Button {
+                    sheet = .customFoods
+                } label: {
+                    MiniRow(symbol: "pencil.and.list.clipboard", colorHex: accentHex, title: tr("Mes aliments"), detail: tr("Corriger ou supprimer tes aliments personnels"), value: "\(state.customFoods.count)")
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("nutrition-custom-foods")
+            }
         }
     }
 }
@@ -306,9 +329,9 @@ struct CalorieHero: View {
             }
             .frame(width: 112, height: 112)
             VStack(spacing: 12) {
-                MacroGauge(name: tr("Protéines"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: NutritionColors.proteinHex)
-                MacroGauge(name: tr("Glucides"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: NutritionColors.carbsHex)
-                MacroGauge(name: tr("Lipides"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: NutritionColors.fatHex)
+                MacroGauge(name: tr("Protéines"), eaten: totals.protein, goal: known.protein ? goals.protein : nil, hex: NutritionColors.proteinHex, incomplete: totals.isIncomplete)
+                MacroGauge(name: tr("Glucides"), eaten: totals.carbs, goal: known.carbs ? goals.carbs : nil, hex: NutritionColors.carbsHex, incomplete: totals.isIncomplete)
+                MacroGauge(name: tr("Lipides"), eaten: totals.fat, goal: known.fat ? goals.fat : nil, hex: NutritionColors.fatHex, incomplete: totals.isIncomplete)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -323,6 +346,8 @@ struct MacroGauge: View {
     let eaten: Double
     let goal: Double?
     let hex: String
+    /// True when a food of the total lacks this macro: the figure is a minimum, shown with « ≥ ».
+    var incomplete = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
@@ -332,7 +357,7 @@ struct MacroGauge: View {
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
                 Spacer(minLength: 4)
-                Text(goal.map { "\(TF.int(eaten)) / \(TF.int($0)) g" } ?? "\(TF.int(eaten)) g")
+                Text((incomplete ? NutritionTotals.minimumMarker : "") + (goal.map { "\(TF.int(eaten)) / \(TF.int($0)) g" } ?? "\(TF.int(eaten)) g"))
                     .font(.caption.weight(.semibold))
                     .monospacedDigit()
                     .lineLimit(1)

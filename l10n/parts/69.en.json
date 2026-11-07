@@ -1,0 +1,9 @@
+{
+ "Synchronisation partielle : %@ opérations lues, les plus anciennes de la période n'ont pas pu l'être. Le chiffre d'affaires peut être sous-estimé.": "Partial sync: %@ transactions read, the oldest ones in the period couldn't be. Revenue may be underestimated.",
+ "Repos terminé": "Rest over",
+ "Prêt pour la prochaine série.": "Ready for the next set.",
+ "dépensés ce mois-ci · budget à définir": "spent this month · budget to set",
+ "Dépensé ce mois-ci : %@": "Spent this month: %@",
+ "prix à renseigner": "price to enter",
+ "Sans prix : compté au prix payé": "No price: counted at the price paid"
+}

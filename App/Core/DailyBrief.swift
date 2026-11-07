@@ -450,7 +450,7 @@ enum DailyBrief {
         let state = input.fitness
         let now = input.now
         guard !state.routines.isEmpty else { return nil }
-        if let active = state.active, !active.isFinished, DateMath.isSameDay(active.start, now), let exercise = active.currentExercise {
+        if let active = state.active, !active.isFinished, !active.isIdle(at: now), let exercise = active.currentExercise {
             return Workout(
                 name: active.routineName,
                 exercises: active.exercises.map(\.name),

@@ -37,6 +37,8 @@ struct FoodScanView: View {
     @State private var camera = ScanCameraHandle()
     @State private var pickedPhoto: PhotosPickerItem?
     @State private var isCapturing = false
+    /// The barcode of a saved personal food just shown: Open Food Facts may know the product too, one tap away.
+    @State private var offerOpenFoodFacts: String?
     @State private var paywall: PaywallContext?
 
     private enum PhotoProblem {
@@ -81,6 +83,14 @@ struct FoodScanView: View {
                                 Image(systemName: "camera").frame(minWidth: 44, minHeight: 44)
                             }
                             .accessibilityLabel(tr("Scanner à nouveau"))
+                        }
+                        if let code = offerOpenFoodFacts {
+                            ToolbarItem(placement: .secondaryAction) {
+                                Button(tr("Voir la fiche Open Food Facts")) {
+                                    stage = .looking(code)
+                                    Task { await lookup(code, skippingSaved: true) }
+                                }
+                            }
                         }
                     }
                 }
@@ -295,10 +305,13 @@ struct FoodScanView: View {
     /// an 8-digit code). Every outcome shows something: the recap, or what to do next: product not found, service
     /// busy (429, 503) or no connection.
     @MainActor
-    private func lookup(_ code: String) async {
+    private func lookup(_ code: String, skippingSaved: Bool = false) async {
+        offerOpenFoodFacts = nil
         let mine = model.nutrition.customFoods + model.nutrition.favorites + model.nutrition.recentFoods
-        if let known = mine.first(where: { $0.barcode.map(OpenFoodFacts.barcodeForms)?.contains(code) == true }) {
+        if !skippingSaved, let known = mine.first(where: { $0.barcode.map(OpenFoodFacts.barcodeForms)?.contains(code) == true }) {
             showRecap(of: known)
+            // A personal food stays first, but its sheet does not hide the one of Open Food Facts.
+            if known.source == .custom { offerOpenFoodFacts = code }
             return
         }
         do {
@@ -392,6 +405,7 @@ struct FoodScanView: View {
     private func rescan() {
         recap = ScanRecap()
         zoneHints = []
+        offerOpenFoodFacts = nil
         stage = .camera
     }
 

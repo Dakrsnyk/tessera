@@ -114,6 +114,11 @@ enum NutrientFile {
                       let kcal = number(row[3]) else { return nil }
                 let name = french ? fr : en
                 let serving = number(row[12]) ?? 100
+                // A macronutrient or fibre the table does not give is unknown, not zero: 0 is stored but flagged.
+                var unknown = Set<MacroField>()
+                if number(row[4]) == nil { unknown.insert(.protein) }
+                if number(row[5]) == nil { unknown.insert(.carbs) }
+                if number(row[6]) == nil { unknown.insert(.fat) }
                 let food = FoodItem(
                     id: "cnf.\(Int(id))", name: name, brand: nil, kcal: kcal,
                     protein: number(row[4]) ?? 0, carbs: number(row[5]) ?? 0, fat: number(row[6]) ?? 0, fiber: number(row[7]) ?? 0,
@@ -121,7 +126,8 @@ enum NutrientFile {
                     servingName: ((french ? row[13] : row[14]) as? String) ?? "100 g",
                     source: .nutrientFile, barcode: nil,
                     sugars: number(row[8]), saturatedFat: number(row[9]), sodiumMg: number(row[10]), cholesterolMg: number(row[11]),
-                    micros: micros(row))
+                    micros: micros(row), unknownMacros: unknown.isEmpty ? nil : unknown,
+                    fiberUnknown: number(row[7]) == nil ? true : nil)
                 return Entry(food: food, shownWords: words(name), shownName: FoodDatabase.normalized(name), otherWords: words(french ? en : fr))
             }
         }

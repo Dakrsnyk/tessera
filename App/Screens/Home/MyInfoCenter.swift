@@ -126,7 +126,7 @@ private struct AreaBadge: View {
         VStack(spacing: 5) {
             Image(systemName: area.symbol)
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.readableInk(on: area.colorHex))
                 .frame(width: 42, height: 42)
                 .background(Color(hex: area.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             Text(area.title)
@@ -224,7 +224,7 @@ private struct AreaRow: View {
         HStack(spacing: 12) {
             Image(systemName: area.symbol)
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.readableInk(on: area.colorHex))
                 .frame(width: 32, height: 32)
                 .background(Color(hex: area.colorHex), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
             VStack(alignment: .leading, spacing: 2) {

@@ -4,7 +4,7 @@ Un fichier par domaine, écrit par l'agent qui l'a audité, puis vérifié par l
 
 | Fichier | Domaine | Agent |
 |---|---|---|
-| `securite.md` | Secrets, réseau, Keychain, ATS, entitlements, CI, signature | security-reviewer |
+| (hors dépôt) | Secrets, réseau, Keychain, ATS, entitlements, CI, signature : le rapport détaillé décrit des scénarios d'attaque et l'emplacement des clés de signature, il reste donc sur le PC de l'utilisateur (`~/ardane-tools/audits-prives/securite-2026-11-07.md`), jamais dans ce dépôt public | security-reviewer |
 | `confidentialite-conformite.md` | Données réelles vs politique, App Privacy, permissions, lois, règles Apple, checklist App Store Connect | research-architect |
 | `nutrition.md` | Nutrition et scanner | code-reviewer |
 | `fitness-habitudes-planning-accueil.md` | Fitness, Habitudes, Productivité, Planning · études, Mon Quotidien | code-reviewer |

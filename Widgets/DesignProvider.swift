@@ -34,7 +34,8 @@ struct DesignProvider: AppIntentTimelineProvider {
             // The widget gallery shows each kind at its best, with example content.
             return DesignEntry(date: now, design: design, isSaved: false, payload: SamplePayload.make(for: design, now: now), isPremium: true)
         }
-        let payload = await PayloadLoader.load(for: design, allowNetwork: true, now: now)
+        // In the gallery's preview, no network wait: the data on hand is enough.
+        let payload = await PayloadLoader.load(for: design, allowNetwork: !context.isPreview, now: now)
         return DesignEntry(date: now, design: design, isSaved: isSaved, payload: payload, isPremium: SharedStore.shared.premium.isPremium(at: now))
     }
 

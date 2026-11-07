@@ -18,13 +18,15 @@ struct FitnessSessionPage: View {
     @State private var confirmFinish = false
     /// « Annuler la séance » once sets were logged: asked first, they would be lost.
     @State private var confirmCancel = false
+    /// The explanation before the notification prompt (the rest alert), shown once when a first rest starts.
+    @State private var asksNotifications = false
 
     private var accentHex: String { MiniApp.fitness.colorHex }
 
     var body: some View {
         let state = model.fitness
         Group {
-            if let session = state.active, !session.isFinished, let exercise = session.currentExercise {
+            if let session = state.active, !session.isFinished, !session.isIdle(at: Date()), let exercise = session.currentExercise {
                 live(session: session, exercise: exercise, state: state)
             } else {
                 chooser(state: state)
@@ -38,7 +40,7 @@ struct FitnessSessionPage: View {
         .sheet(item: $editingSet) { set in
             SetEditor(set: set)
         }
-        .sheet(isPresented: $picking) {
+        .sheet(isPresented: $picking, onDismiss: dropEmptySession) {
             NavigationStack {
                 ExerciseLibraryPage { picked in
                     let template = FitnessMath.sessionTemplate(for: picked, model.fitness)
@@ -55,12 +57,36 @@ struct FitnessSessionPage: View {
                 }
             }
         }
-        .sheet(isPresented: $writing) {
+        .sheet(isPresented: $writing, onDismiss: dropEmptySession) {
             SessionExerciseForm { template in
                 model.update(\.fitness) { $0.active?.append(template) }
             }
         }
         .sheet(item: $paywall) { PaywallView(context: $0) }
+        .permissionSheet(.notifications, isPresented: $asksNotifications, request: requestNotifications) { _ in
+            // Allowed now: the alert of the rest under way is set right away.
+            let fitness = model.fitness
+            Task { await WorkoutLiveActivity.sync(fitness) }
+        }
+    }
+
+    /// « Séance libre » closed without choosing an exercise: the empty session goes away instead of staying « en cours ».
+    private func dropEmptySession() {
+        guard let active = model.fitness.active, active.exercises.isEmpty, !active.hasSteps else { return }
+        model.update(\.fitness) { $0.cancelActive() }
+    }
+
+    private func requestNotifications() async {
+        _ = await NotificationScheduler.requestAuthorization()
+    }
+
+    /// Once, when a first rest starts and notifications were never asked: the explanation, then the system prompt.
+    /// Already allowed or refused: nothing (a refusal is respected, the rest then ends without an alert).
+    private func offerRestAlert() {
+        Task {
+            guard await AppPermission.notifications.currentState() == .notDetermined else { return }
+            _ = await AppPermission.notifications.requestOrExplain(isPresented: $asksNotifications, request: requestNotifications)
+        }
     }
 
     /// The library: picking from it is Premium.
@@ -88,6 +114,7 @@ struct FitnessSessionPage: View {
 
     private func live(session: WorkoutSession, exercise: ExerciseTemplate, state: FitnessState) -> some View {
         let now = Date()
+        let expectedPosition = state.position
         // What was lifted last time is the exercise's data: Premium.
         let last: FitnessMath.ExerciseSession? = exercise.info.flatMap { known in
             guard model.canOpenExercise(known.id) else { return nil }
@@ -110,6 +137,8 @@ struct FitnessSessionPage: View {
                     .foregroundStyle(.secondary)
             }
             ProgressView(value: Double(session.sets.count), total: Double(max(1, session.totalSets)))
+                .accessibilityLabel(tr("Progression"))
+                .accessibilityValue(tr("\(session.sets.count)/\(session.totalSets) séries"))
                 .tint(Color(hex: accentHex))
 
             // The exercise now.
@@ -150,29 +179,12 @@ struct FitnessSessionPage: View {
                         weight = Units.steppedLoad(kilograms: weight, direction: 1, in: model.settings.unitSystem)
                     }
                 }
-                if let rest = session.restEndsAt, rest > now {
-                    HStack {
-                        Label {
-                            Text(timerInterval: now...rest, countsDown: true).monospacedDigit()
-                        } icon: {
-                            Image(systemName: "hourglass")
-                        }
-                        .font(.title3.weight(.semibold))
-                        .foregroundStyle(Color(hex: accentHex))
-                        Spacer()
-                        Button {
-                            model.update(\.fitness) { $0.pauseRest(at: Date()) }
-                        } label: {
-                            Image(systemName: "pause.fill")
-                        }
-                        .accessibilityLabel(Text(tr("Mettre le repos en pause")))
-                        Button(tr("Passer le repos")) {
-                            model.update(\.fitness) { $0.skipRest() }
-                        }
-                        .font(.subheadline.weight(.semibold))
+                if let rest = session.restEndsAt {
+                    // Redrawn every second: at zero the countdown gives way to « Prêt » instead of staying at 0:00.
+                    TimelineView(.periodic(from: now, by: 1)) { context in
+                        restRow(until: rest, at: context.date)
                     }
-                    .padding(12)
-                    .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .task(id: rest) { await signalRestEnd(rest) }
                 } else if let paused = session.restPausedRemaining {
                     HStack {
                         Label(tr("Repos en pause · \(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))"), systemImage: "pause.circle")
@@ -219,9 +231,13 @@ struct FitnessSessionPage: View {
                     .frame(maxWidth: .infinity)
                     .accessibilityIdentifier("session-undo-set")
                 }
+                // Drawn for this position: a second tap on the same drawing is ignored (it would pass two exercises).
                 Button(tr("Passer cet exercice")) {
-                    model.update(\.fitness) { $0.active?.skipExercise(at: Date()) }
+                    var accepted = false
+                    model.update(\.fitness) { accepted = $0.skipExercise(at: Date(), expecting: expectedPosition) }
+                    if accepted { Haptics.tap() }
                 }
+                .accessibilityIdentifier("session-skip-exercise")
                 .font(.subheadline)
                 .frame(maxWidth: .infinity)
             }
@@ -289,6 +305,50 @@ struct FitnessSessionPage: View {
         }
     }
 
+    /// The rest between two sets: the countdown, then « Prêt » once it is over (the alert is `RestNotifier`).
+    @ViewBuilder
+    private func restRow(until rest: Date, at date: Date) -> some View {
+        let running = rest > date
+        HStack {
+            Label {
+                if running {
+                    Text(timerInterval: date...rest, countsDown: true).monospacedDigit()
+                } else {
+                    Text(tr("Prêt"))
+                }
+            } icon: {
+                Image(systemName: running ? "hourglass" : "checkmark.circle")
+            }
+            .font(.title3.weight(.semibold))
+            .foregroundStyle(Color(hex: accentHex))
+            Spacer()
+            if running {
+                Button {
+                    model.update(\.fitness) { $0.pauseRest(at: Date()) }
+                } label: {
+                    Image(systemName: "pause.fill")
+                }
+                .accessibilityLabel(Text(tr("Mettre le repos en pause")))
+                Button(tr("Passer le repos")) {
+                    model.update(\.fitness) { $0.skipRest() }
+                }
+                .font(.subheadline.weight(.semibold))
+            }
+        }
+        .padding(12)
+        .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+    }
+
+    /// In the app, the end of the rest is felt (the screen stays open): a haptic at the instant. Locked or in the
+    /// background, the notification does it. Cancelled with the rest (skipped, paused, set done).
+    private func signalRestEnd(_ rest: Date) async {
+        let wait = rest.timeIntervalSinceNow
+        guard wait > 0 else { return }
+        try? await Task.sleep(for: .seconds(wait))
+        guard !Task.isCancelled else { return }
+        await MainActor.run { Haptics.success() }
+    }
+
     /// Drops the session in progress: never in the history, nor in the week, streak or records.
     private func cancelSession() {
         Haptics.tap()
@@ -320,6 +380,7 @@ struct FitnessSessionPage: View {
         }
         // Light and once, for a set really logged.
         if accepted { Haptics.tap() }
+        if accepted, model.fitness.active?.restEndsAt != nil { offerRestAlert() }
     }
 
     private func adjuster(title: String, value: String, minus: @escaping () -> Void, plus: @escaping () -> Void) -> some View {
@@ -327,8 +388,9 @@ struct FitnessSessionPage: View {
             Text(title).font(.caption).foregroundStyle(.secondary)
             HStack(spacing: 4) {
                 Button(action: minus) {
-                    Image(systemName: "minus").font(.headline).frame(width: 36, height: 36)
+                    Image(systemName: "minus").font(.headline).tapTarget()
                 }
+                .accessibilityLabel(tr("Diminuer : \(title)"))
                 Text(value)
                     .font(.headline)
                     .monospacedDigit()
@@ -336,8 +398,9 @@ struct FitnessSessionPage: View {
                     .minimumScaleFactor(0.7)
                     .frame(maxWidth: .infinity)
                 Button(action: plus) {
-                    Image(systemName: "plus").font(.headline).frame(width: 36, height: 36)
+                    Image(systemName: "plus").font(.headline).tapTarget()
                 }
+                .accessibilityLabel(tr("Augmenter : \(title)"))
             }
             .foregroundStyle(Color(hex: accentHex))
         }

@@ -1,0 +1,23 @@
+﻿id,Date,Type,Description,Montant,Statut
+T-001,2026-11-01,Vente,Commande boutique,120.00,Réussi
+T-002,2026-11-02,Vente,Commande en ligne,80.50,Réussi
+T-003,2026-11-02,Frais,Frais Stripe,5.00,Réussi
+T-010,2026-10-03,Vente,Commande 1001,250.00,Réussi
+T-011,2026-10-05,Vente,Commande 1002,99.99,Réussi
+T-012,2026-10-08,Vente,Commande 1003,400.00,Réussi
+T-013,2026-10-10,Remboursement,Remboursement commande 1002,99.99,Réussi
+T-014,2026-10-12,Vente,Commande 1004,1250.75,Réussi
+T-015,2026-10-15,Dépense,Hébergement,45.00,Réussi
+T-016,2026-10-15,Dépense,Publicité,300.00,Réussi
+T-017,2026-10-18,Frais,Frais Stripe,38.20,Réussi
+T-018,2026-10-20,Vente,Paiement refusé,75.25,Échoué
+T-019,2026-10-22,Virement,Versement vers la banque,1500.00,Réussi
+T-020,2026-10-25,Vente,Facture client à payer,310.00,À payer
+T-030,2026-09-04,Vente,Commande 0901,500.00,Réussi
+T-031,2026-09-09,Vente,Commande 0902,600.00,Réussi
+T-032,2026-09-14,Vente,Commande 0903,700.00,Réussi
+T-033,2026-09-20,Dépense,Logiciel,120.00,Réussi
+T-034,2026-09-27,Dépense,Loyer coworking,600.00,Réussi
+T-040,,Vente,Ligne sans date,50.00,Réussi
+T-041,2026-09-28,Vente,Ligne sans montant,,Réussi
+T-031,2026-09-09,Vente,Commande 0902 (doublon du même id),600.00,Réussi

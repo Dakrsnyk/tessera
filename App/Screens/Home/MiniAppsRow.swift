@@ -172,7 +172,7 @@ struct MiniAppsRow: View {
         VStack(alignment: .leading, spacing: 8) {
             Image(systemName: app.symbol)
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(Color.readableInk(on: app.colorHex))
                 .frame(width: 34, height: 34)
                 .background(app.color, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
             Text(app.title).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
@@ -239,12 +239,12 @@ struct AllMiniAppsSheet: View {
             HStack(spacing: 12) {
                 Image(systemName: app.symbol)
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color.readableInk(on: app.colorHex))
                     .frame(width: 32, height: 32)
                     .background(app.color, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
-                Text(app.title).foregroundStyle(.primary)
+                Text(app.title).foregroundStyle(Color.primary)
                 Spacer()
-                Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
+                Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(Color.secondary.opacity(0.55))
             }
         }
         .accessibilityIdentifier("all-apps-\(app.rawValue)")

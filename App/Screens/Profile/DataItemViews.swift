@@ -49,6 +49,7 @@ struct DataItemRow: View {
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
     @State private var newText = ""
     @State private var asksMotion = false
+    @State private var paywall: PaywallContext?
     private var stepCounter: StepCounter { .shared }
 
     private func readSteps() async {
@@ -61,7 +62,7 @@ struct DataItemRow: View {
             HStack(alignment: .top, spacing: 10) {
                 Image(systemName: item.symbol)
                     .font(.system(size: 13, weight: .semibold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color.readableInk(on: item.area.colorHex))
                     .frame(width: 30, height: 30)
                     .background(Color(hex: item.area.colorHex), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
                 VStack(alignment: .leading, spacing: 2) {
@@ -94,6 +95,7 @@ struct DataItemRow: View {
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("data-\(item.rawValue)")
         .permissionSheet(.motion, isPresented: $asksMotion, request: readSteps)
+        .sheet(item: $paywall) { PaywallView(context: $0) }
     }
 
     // MARK: Editors
@@ -141,8 +143,10 @@ struct DataItemRow: View {
         case .habits:
             VStack(spacing: 8) {
                 quickAdd(tr("Ex. : méditer, lire, marcher"), identifier: "data-new-habit") {
-                    guard model.canAddHabit else { return }
-                    model.updateContent { $0.habits.append(Habit(name: newText.trimmed, symbol: "checkmark.circle", colorHex: "7FA33A")) }
+                    // At the free limit: the paywall opens and the text typed stays.
+                    if model.addHabit(Habit(name: newText.trimmed, symbol: "checkmark.circle", colorHex: "7FA33A")) { return true }
+                    paywall = .habitLimit
+                    return false
                 }
                 if model.isFilled(.habits) { link(tr("Gérer mes habitudes")) { HabitsView() } }
             }
@@ -150,6 +154,7 @@ struct DataItemRow: View {
             VStack(spacing: 8) {
                 quickAdd(tr("Ex. : appeler le garage"), identifier: "data-new-task") {
                     model.updateContent { $0.tasks.append(TaskItem(title: newText.trimmed)) }
+                    return true
                 }
                 if model.isFilled(.tasks) { link(tr("Gérer mes tâches")) { TasksView() } }
             }
@@ -375,18 +380,17 @@ struct DataItemRow: View {
         .accessibilityAddTraits(isOn ? .isSelected : [])
     }
 
-    private func quickAdd(_ placeholder: String, identifier: String, add: @escaping () -> Void) -> some View {
+    /// `add` returns whether the item was added: the field is emptied only then.
+    private func quickAdd(_ placeholder: String, identifier: String, add: @escaping () -> Bool) -> some View {
         HStack(spacing: 8) {
             ProfileTextField(placeholder: placeholder, text: $newText, identifier: identifier)
                 .onSubmit {
                     guard !newText.trimmed.isEmpty else { return }
-                    add()
-                    newText = ""
+                    if add() { newText = "" }
                 }
             Button {
                 guard !newText.trimmed.isEmpty else { return }
-                add()
-                newText = ""
+                if add() { newText = "" }
             } label: {
                 Image(systemName: "plus")
                     .font(.headline)

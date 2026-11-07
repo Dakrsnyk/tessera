@@ -45,7 +45,13 @@ struct FitnessAppView: View {
             MiniAppInfoSection(app: .fitness)
         }
         .navigationTitle(tr("Fitness"))
-        .task { await steps.refreshWeek() }
+        .task {
+            // A session left behind (app killed, forgotten) is closed at its last set, not left « en cours ».
+            if model.fitness.active?.isIdle(at: Date()) == true {
+                model.update(\.fitness) { $0.closeIdleSession(at: Date()) }
+            }
+            await steps.refreshWeek()
+        }
         .sheet(item: $editing) { routine in
             RoutineEditor(routine: routine)
         }
@@ -59,7 +65,7 @@ struct FitnessAppView: View {
     /// another day (sessions done, one caught up, one planned, a rest day).
     private func dayContent(state: FitnessState, now: Date) -> FitnessDayContent {
         if DateMath.isSameDay(day, now) {
-            let active = state.active.flatMap { $0.isFinished ? nil : $0 }
+            let active = state.active.flatMap { $0.isFinished || $0.isIdle(at: now) ? nil : $0 }
             if let active, active.currentExercise != nil { return .running(active) }
             if let doneToday = FitnessMath.sessions(state).filter({ DateMath.isSameDay($0.start, now) && $0.isFinished }).last {
                 return .done(doneToday)
@@ -95,6 +101,8 @@ struct FitnessAppView: View {
             MiniHero(label: active.isCatchUp ? tr("Rattrapage en cours") : tr("Séance en cours"),
                      value: active.routineName, caption: runningCaption(active))
             ProgressView(value: Double(active.sets.count), total: Double(max(1, active.totalSets)))
+                .accessibilityLabel(tr("Progression"))
+                .accessibilityValue(tr("\(active.sets.count)/\(active.totalSets) séries"))
                 .tint(Color.primary)
         case .done(let session):
             MiniHero(label: session.isCatchUp ? tr("Séance rattrapée") : tr("Séance faite"),
@@ -254,7 +262,7 @@ struct FitnessAppView: View {
                 .font(.title3)
                 .foregroundStyle(.secondary)
                 .frame(width: 36, height: 30)
-                .contentShape(Rectangle())
+                .tapAreaOutset(7)
         }
         .accessibilityLabel(Text(tr("Supprimer la séance")))
         .accessibilityIdentifier("fitness-delete-session")

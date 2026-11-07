@@ -62,7 +62,7 @@ enum ProvisioningProfile {
     }
 }
 
-enum StoreFile: String {
+enum StoreFile: String, CaseIterable {
     case designs, content, settings, premium, crypto
     // Mini-apps (V2), one file each so a widget writing one domain never touches another.
     case nutrition, fitness, budget, business, portfolio, following, student, travel, car, productivity, life
@@ -136,11 +136,21 @@ final class SharedStore {
     func read<T: Decodable>(_ type: T.Type, from file: StoreFile) -> T? {
         lock.lock(); defer { lock.unlock() }
         guard let data = try? Data(contentsOf: url(file)) else { return nil }
-        return try? decoder.decode(T.self, from: data)
+        _ = LossyDecoding.takeLosses()
+        let value = try? decoder.decode(T.self, from: data)
+        // A file that does not decode, or decodes with losses, is copied before anything can replace it.
+        // A loss noted by another decoding at the same time only costs one extra copy.
+        if value == nil || LossyDecoding.takeLosses() > 0 {
+            StoreRecovery.keepCopy(of: data, named: file.rawValue, in: directory)
+        }
+        return value
     }
 
     func write<T: Encodable>(_ value: T, to file: StoreFile) {
         lock.lock(); defer { lock.unlock() }
+        // Safe for a healthy file: a file that can't be read now (protected before the first unlock) can't
+        // be written either under the same protection class, so nothing legitimate is refused here.
+        guard !isUnreadable(file) else { return }
         guard let data = try? encoder.encode(value) else { return }
         try? data.write(to: url(file), options: Self.writingOptions)
     }
@@ -156,6 +166,18 @@ final class SharedStore {
     func remove(_ file: StoreFile) {
         lock.lock(); defer { lock.unlock() }
         try? FileManager.default.removeItem(at: url(file))
+    }
+
+    /// Whether any data file was ever saved here: a file that exists counts even while it can't be read
+    /// (before the first unlock), so an update is never taken for a fresh install.
+    var hasSavedData: Bool {
+        StoreFile.allCases.contains { FileManager.default.fileExists(atPath: url($0).path) }
+    }
+
+    /// Removes the copies of damaged files kept in `Recovery` (« Effacer toutes mes données » leaves nothing).
+    func removeRecovery() {
+        lock.lock(); defer { lock.unlock() }
+        try? FileManager.default.removeItem(at: directory.appendingPathComponent(StoreRecovery.folderName, isDirectory: true))
     }
 
     /// The file as saved, untouched: what a backup carries.
@@ -205,7 +227,10 @@ final class SharedStore {
     func updateContent(_ change: (inout ContentState) -> Void) {
         updateLock.lock(); defer { updateLock.unlock() }
         guard !isUnreadable(.content) else { return }
-        var value = content
+        let saved = read(ContentState.self, from: .content)
+        // Damaged (a copy is kept in Recovery): left as it is, like `update`.
+        if saved == nil, FileManager.default.fileExists(atPath: url(.content).path) { return }
+        var value = saved ?? ContentState()
         change(&value)
         content = value
     }
@@ -225,7 +250,11 @@ final class SharedStore {
     func update<T: StoredState>(_ type: T.Type, _ change: (inout T) -> Void) -> Bool {
         updateLock.lock(); defer { updateLock.unlock() }
         guard !isUnreadable(T.file) else { return false }
-        var value = state(T.self)
+        let saved = read(T.self, from: T.file)
+        // A file that exists but does not decode is left as it is (`read` has kept a copy in Recovery):
+        // a widget button must never write a default state, plus its change, over the person's data.
+        if saved == nil, FileManager.default.fileExists(atPath: url(T.file).path) { return false }
+        var value = saved ?? T()
         change(&value)
         write(value, to: T.file)
         return true

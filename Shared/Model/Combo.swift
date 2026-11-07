@@ -123,7 +123,9 @@ enum Fusion {
     }
 
     /// The merged widget, in the look of the first selected widget.
-    static func merge(_ designs: [WidgetDesign]) -> WidgetDesign? {
+    /// `copiesBackground: false` is for a preview that may be built many times and then dropped: it
+    /// leaves the photo file shared, so no copy is left behind (see `ownBackground`).
+    static func merge(_ designs: [WidgetDesign], copiesBackground: Bool = true) -> WidgetDesign? {
         guard let result = result(for: designs), let first = designs.first, let lead = result.parts.first else { return nil }
         var options = DesignOptions()
         options.parts = result.parts
@@ -132,7 +134,7 @@ enum Fusion {
             kind: lead.kind,
             themeID: first.themeID,
             accentHex: first.accentHex,
-            background: first.background,
+            background: copiesBackground ? ownBackground(of: first.background) : first.background,
             font: first.font,
             showsTitle: first.showsTitle,
             showsDetails: first.showsDetails,
@@ -140,6 +142,17 @@ enum Fusion {
             options: options,
             format: result.format
         )
+    }
+
+    /// A background photo is copied under a new name: deleting the original widgets (which erases their
+    /// photo file) must never take the merged widget's background with it. Without a readable file the
+    /// merged widget takes the theme's background rather than pointing at a file that is about to go.
+    static func ownBackground(of background: BackgroundStyle) -> BackgroundStyle {
+        guard case let .photo(name) = background else { return background }
+        guard let data = ImageStore.data(named: name) else { return .theme }
+        let copy = "\(UUID().uuidString).jpg"
+        ImageStore.restore(data, named: copy)
+        return ImageStore.data(named: copy) == nil ? .theme : .photo(copy)
     }
 
     /// What a widget shows: its kind, and only the options that kind uses. Every widget carries all the

@@ -11,6 +11,16 @@ struct StudiesTimetablePage: View {
     @State private var weekday = min(5, FitnessMath.isoWeekday(Date()))
     /// 0: this week, 1: the next one, -1: the last one…
     @State private var weekOffset = 0
+    /// A weekly entry whose whole series is to delete, once confirmed (all its weeks go).
+    @State private var deletingSeries: UUID?
+    /// A single occurrence or a one-time event to delete, once confirmed.
+    @State private var pendingOccurrence: OccurrenceTarget?
+    @State private var pendingEvent: UUID?
+
+    private struct OccurrenceTarget {
+        let slot: UUID
+        let start: Date
+    }
 
     private var week: [Date] {
         DateMath.week(containing: DateMath.calendar.date(byAdding: .weekOfYear, value: weekOffset, to: Date()) ?? Date())
@@ -39,6 +49,24 @@ struct StudiesTimetablePage: View {
                 }
                 .accessibilityIdentifier("timetable-add")
             }
+        }
+        // `presenting:` hands the entry to the button: the dialog may reset `deletingSeries` before the action runs.
+        .confirmationDialog(tr("Supprimer toute la série ?"), isPresented: Binding(get: { deletingSeries != nil }, set: { if !$0 { deletingSeries = nil } }),
+                            titleVisibility: .visible, presenting: deletingSeries) { id in
+            Button(tr("Supprimer toute la série"), role: .destructive) {
+                model.update(\.student) { $0.deleteSeries(slot: id) }
+                deletingSeries = nil
+            }
+        } message: { _ in
+            Text(tr("Toutes les semaines de cette entrée disparaissent de l'horaire."))
+        }
+        .confirmDelete($pendingOccurrence, title: tr("Supprimer cette occurrence ?"), button: tr("Supprimer uniquement cette occurrence"),
+                       message: tr("Les autres semaines restent dans l'horaire.")) { target in
+            model.update(\.student) { $0.deleteOccurrence(slot: target.slot, on: target.start) }
+        }
+        .confirmDelete($pendingEvent, title: tr("Supprimer cet événement ?"), button: tr("Supprimer"),
+                       message: tr("Cette action ne peut pas être annulée.")) { id in
+            model.update(\.student) { $0.deleteSeries(slot: id) }
         }
         .navigationTitle(tr("Horaire"))
         .navigationBarTitleDisplayMode(.inline)
@@ -120,18 +148,18 @@ struct StudiesTimetablePage: View {
             }
             if slot.date == nil {
                 Button(role: .destructive) {
-                    model.update(\.student) { $0.deleteOccurrence(slot: slot.id, on: entry.start) }
+                    pendingOccurrence = OccurrenceTarget(slot: slot.id, start: entry.start)
                 } label: {
                     Label(tr("Supprimer uniquement cette occurrence"), systemImage: "trash")
                 }
                 Button(role: .destructive) {
-                    model.update(\.student) { $0.deleteSeries(slot: slot.id) }
+                    deletingSeries = slot.id
                 } label: {
                     Label(tr("Supprimer toute la série"), systemImage: "trash.fill")
                 }
             } else {
                 Button(role: .destructive) {
-                    model.update(\.student) { $0.deleteSeries(slot: slot.id) }
+                    pendingEvent = slot.id
                 } label: {
                     Label(tr("Supprimer"), systemImage: "trash")
                 }
@@ -248,6 +276,8 @@ struct TimetableGrid: View {
 struct StudiesCoursesPage: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: StudiesSheet?
+    /// Courses swiped to delete, once confirmed (their slots leave the timetable).
+    @State private var deletingCourses: [UUID] = []
 
     var body: some View {
         let state = model.student
@@ -261,8 +291,7 @@ struct StudiesCoursesPage: View {
                     .accessibilityIdentifier("course-row")
                 }
                 .onDelete { offsets in
-                    let ids = offsets.map { state.courses[$0].id }
-                    model.update(\.student) { student in ids.forEach { student.deleteCourse($0) } }
+                    deletingCourses = offsets.map { state.courses[$0].id }
                 }
                 Button { sheet = .course(Course(name: "")) } label: { Label(tr("Nouveau cours"), systemImage: "plus") }
                     .accessibilityIdentifier("courses-new")
@@ -286,6 +315,16 @@ struct StudiesCoursesPage: View {
         .navigationTitle(tr("Cours"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
+        // `presenting:` hands the courses to the button: the dialog may empty `deletingCourses` before the action runs.
+        .confirmationDialog(tr("Supprimer ce cours ?"), isPresented: Binding(get: { !deletingCourses.isEmpty }, set: { if !$0 { deletingCourses = [] } }),
+                            titleVisibility: .visible, presenting: deletingCourses) { ids in
+            Button(tr("Supprimer le cours"), role: .destructive) {
+                model.update(\.student) { student in ids.forEach { student.deleteCourse($0) } }
+                deletingCourses = []
+            }
+        } message: { _ in
+            Text(tr("Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours."))
+        }
     }
 
     private func courseDetail(_ course: Course, hours: Double) -> String {
@@ -687,6 +726,8 @@ struct StudiesGradesPage: View {
                 Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
             }
             ProgressView(value: min(100, average), total: 100).tint(Color(hex: course.colorHex))
+                .accessibilityLabel(course.name)
+                .accessibilityValue("\(TF.decimal(average, 1)) %")
             Text(tr("\(TF.int(evaluated)) % de la note finale évalué")).font(.caption).foregroundStyle(.secondary)
         }
         .padding(.vertical, 10)
@@ -728,12 +769,15 @@ struct StudiesRevisionPage: View {
             MiniSectionTitle(title: tr("Cette semaine"), detail: tr("\(Fmt.minutes(studied)) sur \(Fmt.hours(state.weeklyStudyGoalHours))"))
             VStack(alignment: .leading, spacing: 12) {
                 ProgressView(value: min(studied, state.weeklyStudyGoalHours * 60), total: max(1, state.weeklyStudyGoalHours * 60))
+                    .accessibilityLabel(tr("Cette semaine"))
+                    .accessibilityValue(tr("\(Fmt.minutes(studied)) sur \(Fmt.hours(state.weeklyStudyGoalHours))"))
                     .tint(Color(hex: accentHex))
                 Chart(points) { point in
                     BarMark(x: .value("Jour", point.date, unit: .day), y: .value("Minutes", point.value))
                         .foregroundStyle(Color(hex: accentHex).gradient)
                         .cornerRadius(3)
                 }
+                .accessibilityLabel(tr("Cette semaine"))
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .day)) { _ in
                         AxisValueLabel(format: .dateTime.weekday(.narrow), centered: true)
@@ -775,6 +819,7 @@ struct StudiesRevisionPage: View {
                         .foregroundStyle(Color.secondary)
                         .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
                 }
+                .accessibilityLabel(tr("6 dernières semaines"))
                 .frame(height: 150)
                 .card()
             }

@@ -12,7 +12,8 @@ enum SecretStore {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: service,
             kSecAttrAccount as String: account,
-            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly,
+            // Only read by the app on screen (the widgets never use it): unlocked, and never carried to another device.
+            kSecAttrAccessible as String: kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
             kSecValueData as String: Data(value.utf8),
         ]
         return SecItemAdd(query as CFDictionary, nil) == errSecSuccess
@@ -39,6 +40,21 @@ enum SecretStore {
         ]
         SecItemDelete(query as CFDictionary)
     }
+
+    /// The keychain outlives the app, the person's data doesn't: on a fresh install (no data file in the App
+    /// Group yet), a key left by an earlier installation is removed, as the privacy policy says. An update
+    /// keeps it: its data files exist, readable or not (a launch before the first unlock still sees them).
+    static func forgetIfFreshInstall(hasSavedData: Bool) {
+        let checked = "secrets.installChecked"
+        guard !UserDefaults.standard.bool(forKey: checked) else { return }
+        if !hasSavedData {
+            delete(StripeSync.keychainAccount)
+        } else if let key = read(StripeSync.keychainAccount) {
+            // Saved again once, so a key kept by an older version moves to the stricter access class.
+            _ = save(key, for: StripeSync.keychainAccount)
+        }
+        UserDefaults.standard.set(true, forKey: checked)
+    }
 }
 
 /// Business ← Stripe, read-only, straight from the iPhone to Stripe (no server in between, nothing sent to
@@ -53,12 +69,38 @@ enum StripeSync {
     static let keychainAccount = "stripe.restrictedKey"
     /// The first sync reads a year back; the next ones from the day before the last transaction read.
     static let firstSyncDays = 365
+    /// Reads every page until Stripe has no more, at most `maxPages` (100 pages of 100 = 10 000 transactions;
+    /// Stripe gives the newest first). `isComplete` is false when the limit
+    /// was reached with more to read: what came is the newest part, the oldest is missing.
+    nonisolated static func fetchAll(maxPages: Int = 100,
+                                     page: (String?) async throws -> StripeTransactions.Page) async throws -> (transactions: [StripeTransactions.Transaction], isComplete: Bool) {
+        var transactions: [StripeTransactions.Transaction] = []
+        var after: String?
+        for _ in 0..<max(1, maxPages) {
+            let result = try await page(after)
+            transactions += result.data
+            guard result.hasMore, let last = result.data.last else { return (transactions, true) }
+            after = last.id
+        }
+        return (transactions, false)
+    }
+
+    /// Where the next sync starts from. Only a complete read moves it forward to the newest transaction read:
+    /// after a partial one the older ones were never read, so it stays where it was and they are asked again.
+    nonisolated static func nextSyncedUntil(previous: Date?, newest: Date?, isComplete: Bool) -> Date? {
+        guard isComplete, let newest else { return previous }
+        return max(newest, previous ?? newest)
+    }
 
     enum Failure: Error, Equatable {
         case notRestrictedKey, refused, missingPermission, network, server(Int), unreadable
         /// No exchange rate for these currencies (offline, not published by the ECB, or none for the day),
         /// with why: nothing was added.
         case rates([String], message: String)
+        /// The pages ran out before the end of the period: `read` transactions came, the oldest ones didn't.
+        case partial(read: Int)
+        /// The link was restored from a backup but the key stays on the other iPhone (keychain, this device only).
+        case keyMissing
 
         var message: String {
             switch self {
@@ -69,6 +111,8 @@ enum StripeSync {
             case let .server(code): tr("Stripe ne répond pas correctement (erreur \(code)). Réessaie plus tard.")
             case .unreadable: tr("La réponse de Stripe n'a pas pu être lue.")
             case let .rates(_, message): message
+            case .keyMissing: tr("Clé absente de cet iPhone : reconnecte Stripe.")
+            case let .partial(read): tr("Synchronisation partielle : \(read) opérations lues, les plus anciennes de la période n'ont pas pu l'être. Le chiffre d'affaires peut être sous-estimé.")
             }
         }
     }
@@ -92,8 +136,10 @@ enum StripeSync {
         }
         let failure = await sync(model: model)
         // Connected all the same: the card tells about the missing rates and offers to sync without conversion.
-        if case .rates? = failure { return nil }
-        return failure
+        switch failure {
+        case .rates?, .partial?: return nil
+        default: return failure
+        }
     }
 
     /// Reads the transactions since the last sync and merges them (no double: same id, same entry). The
@@ -103,20 +149,23 @@ enum StripeSync {
     /// are still converted, and an entry converted before stays converted).
     @discardableResult
     static func sync(model: AppModel, now: Date = Date(), convertsCurrencies: Bool = true) async -> Failure? {
-        guard let key = SecretStore.read(keychainAccount), let link = model.business.connections.stripe else { return nil }
+        guard let link = model.business.connections.stripe else { return nil }
+        guard let key = SecretStore.read(keychainAccount) else {
+            // Never a card that looks connected while nothing syncs.
+            let failure = Failure.keyMissing
+            model.update(\.business) { state in state.connections.stripe?.lastError = failure.message }
+            return failure
+        }
         let calendar = DateMath.calendar
         // Whole days from the day before the last transaction read: each day's fees are counted in full.
         let since = link.syncedUntil.flatMap { calendar.date(byAdding: .day, value: -1, to: DateMath.startOfDay($0)) }
             ?? calendar.date(byAdding: .day, value: -firstSyncDays, to: DateMath.startOfDay(now)) ?? now
         var transactions: [StripeTransactions.Transaction] = []
-        var after: String?
+        var isComplete = true
         do {
-            for _ in 0..<30 {
-                let result = try await page(key: key, since: since, after: after, limit: 100)
-                transactions += result.data
-                guard result.hasMore, let last = result.data.last else { break }
-                after = last.id
-            }
+            let fetched = try await fetchAll { after in try await page(key: key, since: since, after: after, limit: 100) }
+            transactions = fetched.transactions
+            isComplete = fetched.isComplete
         } catch {
             let failure = (error as? Failure) ?? .network
             model.update(\.business) { state in
@@ -155,11 +204,13 @@ enum StripeSync {
             return failure
         }
         let newest = dates.max()
+        let complete = isComplete
+        let readCount = transactions.count
         model.update(\.business) { state in
             let result = state.merge(batch)
             guard var link = state.connections.stripe else { return }
             link.lastSync = now
-            link.lastError = nil
+            link.lastError = complete ? nil : Failure.partial(read: readCount).message
             link.lastResult = result
             // A currency the ECB doesn't publish will never have a rate: once chosen, kept as Stripe gives it.
             let keeps = kept.union(chosen.filter { !FXService.currencies.contains($0) })
@@ -168,10 +219,10 @@ enum StripeSync {
             // What this sync converted, for the card (never a note left over from before).
             let converted = batch.convertedCurrencies.subtracting([home])
             link.convertedCurrencies = converted.isEmpty ? nil : converted.sorted()
-            if let newest { link.syncedUntil = max(newest, link.syncedUntil ?? newest) }
+            link.syncedUntil = nextSyncedUntil(previous: link.syncedUntil, newest: newest, isComplete: complete)
             state.connections.stripe = link
         }
-        return nil
+        return complete ? nil : .partial(read: readCount)
     }
 
     /// Forgets the key (and, if asked, what Stripe brought). The entries typed by hand stay.

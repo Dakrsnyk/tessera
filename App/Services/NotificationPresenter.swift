@@ -21,9 +21,15 @@ final class NotificationPresenter: NSObject, UNUserNotificationCenterDelegate {
         }
     }
 
-    /// A tap opens the app, as without a delegate.
+    /// A tap opens the app on the screen the notification is about (a mini-app, a countdown's widget…):
+    /// the link goes through `AppOpenRequests`, which the app reads (also at launch) and hands to `Router.handle`.
+    /// A notification with no screen of its own just opens the app, as without a delegate.
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == UNNotificationDefaultActionIdentifier,
+           let link = NotificationRoute.link(for: response.notification.request.identifier) {
+            Task { @MainActor in AppOpenRequests.shared.pending = link }
+        }
         completionHandler()
     }
 }

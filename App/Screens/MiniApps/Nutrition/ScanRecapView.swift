@@ -26,6 +26,7 @@ struct ScanRecapView: View {
     @State private var meal: MealType = .current()
     @State private var picker: FoodPickPurpose?
     @State private var isSaving = false
+    @State private var alreadyAdded = false
     /// Suggested lines the person turned down for this recap.
     @State private var dismissedSuggestions: Set<String> = []
 
@@ -150,6 +151,8 @@ struct ScanRecapView: View {
                 }
             }
 
+            // Sans effet (aucun service) et absent de la politique de confidentialité : visible en DEBUG seulement.
+            #if DEBUG
             if source == .photo {
                 Section {
                     Toggle(tr("Contribuer à l'amélioration"), isOn: Binding(
@@ -161,10 +164,14 @@ struct ScanRecapView: View {
                     Text(tr("Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans."))
                 }
             }
+            #endif
         }
         .styledList()
         .scrollDismissesKeyboard(.interactively)
         .onAppear { meal = presetMeal ?? .current() }
+        .alert(tr("Déjà ajouté à l'instant"), isPresented: $alreadyAdded) {
+            Button(tr("OK"), role: .cancel) {}
+        }
         .safeAreaInset(edge: .bottom) { confirmBar }
         .toolbar {
             ToolbarItemGroup(placement: .keyboard) {
@@ -352,10 +359,14 @@ struct ScanRecapView: View {
         let snapshot = recap
         var logged = 0
         model.update(\.nutrition) { logged = snapshot.commit(into: &$0, meal: chosen, at: date, window: window) }
-        if logged > 0 {
-            Haptics.tap()
-            rememberZones(of: snapshot, at: Date())
+        guard logged > 0 else {
+            // Nothing was added (the same food within two seconds): say so instead of closing as if it was.
+            isSaving = false
+            alreadyAdded = true
+            return
         }
+        Haptics.tap()
+        rememberZones(of: snapshot, at: Date())
         onDone()
     }
 }

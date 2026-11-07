@@ -7,6 +7,20 @@ struct Course: Codable, Hashable, Identifiable {
     var teacher: String = ""
     /// Credits (or coefficient) used to weight the overall average.
     var credits: Double = 3
+
+    enum CodingKeys: String, CodingKey { case id, name, colorHex, teacher, credits }
+}
+
+extension Course {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        name = c.value(.name, "")
+        colorHex = c.value(.colorHex, "D6409F")
+        teacher = c.value(.teacher, "")
+        credits = c.value(.credits, 3)
+    }
 }
 
 /// What an entry of the week's schedule is: chosen by the person when adding it.
@@ -192,6 +206,20 @@ struct Exam: Codable, Hashable, Identifiable {
     var title: String
     var date: Date
     var room: String = ""
+
+    enum CodingKeys: String, CodingKey { case id, courseID, title, date, room }
+}
+
+extension Exam {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        courseID = c.optional(.courseID)
+        title = c.value(.title, "")
+        date = c.value(.date, Date())
+        room = c.value(.room, "")
+    }
 }
 
 struct Assignment: Codable, Hashable, Identifiable {
@@ -200,6 +228,20 @@ struct Assignment: Codable, Hashable, Identifiable {
     var title: String
     var due: Date
     var isDone = false
+
+    enum CodingKeys: String, CodingKey { case id, courseID, title, due, isDone }
+}
+
+extension Assignment {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        courseID = c.optional(.courseID)
+        title = c.value(.title, "")
+        due = c.value(.due, Date())
+        isDone = c.value(.isDone, false)
+    }
 }
 
 struct Grade: Codable, Hashable, Identifiable {
@@ -212,6 +254,21 @@ struct Grade: Codable, Hashable, Identifiable {
     var weight: Double = 10
 
     var ratio: Double { maxScore > 0 ? score / maxScore : 0 }
+
+    enum CodingKeys: String, CodingKey { case id, courseID, title, score, maxScore, weight }
+}
+
+extension Grade {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        courseID = c.optional(.courseID)
+        title = c.value(.title, "")
+        score = c.value(.score, 0)
+        maxScore = c.value(.maxScore, 100)
+        weight = c.value(.weight, 10)
+    }
 }
 
 /// A flashcard reviewed with a Leitner schedule: a known card moves up a box and comes back later.
@@ -222,12 +279,39 @@ struct Flashcard: Codable, Hashable, Identifiable {
     var back: String
     var box: Int = 1
     var due = Date()
+
+    enum CodingKeys: String, CodingKey { case id, deck, front, back, box, due }
+}
+
+extension Flashcard {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = c.value(.id, UUID())
+        deck = c.value(.deck, tr("Général"))
+        front = c.value(.front, "")
+        back = c.value(.back, "")
+        box = c.value(.box, 1)
+        due = c.value(.due, Date())
+    }
 }
 
 struct StudySession: Codable, Hashable {
     var date: Date
     var minutes: Int
     var courseID: UUID?
+
+    enum CodingKeys: String, CodingKey { case date, minutes, courseID }
+}
+
+extension StudySession {
+    /// Tolerant decoding: a missing field takes its default (the encoded format is unchanged).
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        date = c.value(.date, Date())
+        minutes = c.value(.minutes, 0)
+        courseID = c.optional(.courseID)
+    }
 }
 
 struct StudentState: Codable, Hashable {

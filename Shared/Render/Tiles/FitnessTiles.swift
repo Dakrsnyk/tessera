@@ -53,7 +53,7 @@ enum FitnessTiles {
     /// The small « Passer » next to « Série faite » during a session: the set shown is passed, not
     /// counted. Last in the list: dropped where only two buttons fit.
     static func skipButton(_ state: FitnessState) -> TileButton? {
-        guard let active = state.active, !active.isFinished, active.currentExercise != nil else { return nil }
+        guard let active = state.active, !active.isFinished, !active.isIdle(at: Date()), active.currentExercise != nil else { return nil }
         return TileButton(title: tr("Passer la série"), symbol: "forward.fill", action: .skipSet(state.position), isIconOnly: true)
     }
 
@@ -68,7 +68,7 @@ enum FitnessTiles {
     static func todaysWorkout(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
         guard let routine = state.routine(for: now) else { return .empty(tr("Séance du jour"), symbol: "figure.strengthtraining.traditional", message: hint) }
         let doneToday = FitnessMath.sessions(state).contains { DateMath.isSameDay($0.start, now) && $0.isFinished }
-        let active = state.active.flatMap { $0.isFinished ? nil : $0 }
+        let active = state.active.flatMap { $0.isFinished || $0.isIdle(at: now) ? nil : $0 }
         let planned = state.isScheduled(now)
         var tile = Tile(title: planned ? tr("Séance du jour") : tr("Prochaine séance"), symbol: "figure.strengthtraining.traditional")
         tile.value = active?.routineName ?? routine.name
@@ -99,7 +99,7 @@ enum FitnessTiles {
     }
 
     static func nextSet(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
-        let active = state.active.flatMap { $0.isFinished ? nil : $0 }
+        let active = state.active.flatMap { $0.isFinished || $0.isIdle(at: now) ? nil : $0 }
         guard let exercise = active?.currentExercise ?? state.routine(for: now)?.exercises.first else {
             return .empty(tr("Prochaine série"), symbol: "arrow.forward.circle.fill", message: hint)
         }
@@ -121,7 +121,7 @@ enum FitnessTiles {
     }
 
     static func restTimer(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
-        let active = state.active.flatMap { $0.isFinished ? nil : $0 }
+        let active = state.active.flatMap { $0.isFinished || $0.isIdle(at: now) ? nil : $0 }
         var tile = Tile(title: tr("Repos"), symbol: "timer")
         if let active, let rest = active.restEndsAt, rest > now {
             let start = min(active.sets.last?.date ?? now, now)

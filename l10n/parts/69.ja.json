@@ -1,0 +1,9 @@
+{
+ "Synchronisation partielle : %@ opérations lues, les plus anciennes de la période n'ont pas pu l'être. Le chiffre d'affaires peut être sous-estimé.": "一部のみ同期しました。%@件の取引を読み込みましたが、期間内の古い取引は読み込めませんでした。売上が実際より少なく表示される場合があります。",
+ "Repos terminé": "休憩終了",
+ "Prêt pour la prochaine série.": "次のセットの準備はOKです。",
+ "dépensés ce mois-ci · budget à définir": "今月の支出 · 予算未設定",
+ "Dépensé ce mois-ci : %@": "今月の支出：%@",
+ "prix à renseigner": "価格を入力",
+ "Sans prix : compté au prix payé": "価格なし：支払価格で計算"
+}

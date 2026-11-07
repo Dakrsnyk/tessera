@@ -107,6 +107,18 @@ struct NotificationLog: Codable, Hashable {
 enum NotificationEngine {
     static let prefix = SmartReminders.prefix + "n."
 
+    /// iOS keeps 64 pending local notifications (the soonest) and silently drops the others.
+    static let systemLimit = 64
+    /// Room left for what other code adds between two plannings (an encouragement, the end of a Focus,
+    /// a habit or a countdown reminder): the plan never takes the last places.
+    static let reservedRoom = 4
+
+    /// The soonest candidates that fit under the ceiling, given the notifications pending outside the plan.
+    static func capped(_ plan: [Candidate], pendingOutside: Int) -> [Candidate] {
+        let room = max(0, systemLimit - reservedRoom - pendingOutside)
+        return Array(plan.sorted { $0.date < $1.date }.prefix(room))
+    }
+
     enum Kind: String, Hashable {
         case lunch, calories, protein, nutritionWeek, hydration
         case habitsLeft, habitStreak, habitRecord, habitsWeek
@@ -252,11 +264,15 @@ enum NotificationEngine {
     /// intent run in another process can still write at the same time (a rare race, the last write wins;
     /// `SmartReminders.sync` then removes any pending request outside the plan). The entries still waiting
     /// from the last planning are replaced.
-    static func commit(_ inputs: Inputs, now: Date = Date(), defaults: UserDefaults = NotificationLog.defaults) -> [Candidate] {
+    /// `pendingOutside` (the notifications waiting that are not the plan's) keeps the whole under iOS's
+    /// ceiling: only what is kept is written in the history, so the daily count stays true.
+    static func commit(_ inputs: Inputs, now: Date = Date(), defaults: UserDefaults = NotificationLog.defaults,
+                       pendingOutside: Int = 0) -> [Candidate] {
         lock.withLock {
             var log = NotificationLog.load(defaults)
             log.entries.removeAll { $0.date > now }
-            let list = plan(inputs, log: log, encouragements: EncouragementLog.load(defaults), now: now)
+            let list = capped(plan(inputs, log: log, encouragements: EncouragementLog.load(defaults), now: now),
+                              pendingOutside: pendingOutside)
             for candidate in list {
                 log.entries.append(NotificationLog.Entry(id: candidate.id, categoryName: candidate.category.rawValue, date: candidate.date))
             }
@@ -264,6 +280,16 @@ enum NotificationEngine {
             log.entries.removeAll { $0.date < cutoff }
             log.save(defaults)
             return list
+        }
+    }
+
+    /// Takes back from the history the entries iOS refused to plan (`center.add` failed).
+    static func forget(ids: Set<String>, defaults: UserDefaults = NotificationLog.defaults) {
+        guard !ids.isEmpty else { return }
+        lock.withLock {
+            var log = NotificationLog.load(defaults)
+            log.entries.removeAll { ids.contains($0.id) }
+            log.save(defaults)
         }
     }
 

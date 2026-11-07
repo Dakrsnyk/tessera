@@ -16,7 +16,7 @@ enum MoneyTiles {
         case .savingsGoal: return savings(data.budget, target: target, now: now, currency: currency)
         case .netWorth: return netWorth(data.budget, now: now, currency: currency)
         case .subscriptions: return subscriptions(data.budget, currency: currency)
-        case .quickExpense: return quickExpense(data.budget, now: now, currency: currency)
+        case .quickExpense: return quickExpense(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget))
         case .portfolio: return portfolio(data, currency: currency, clock: clock, isLarge: context.isLarge)
         case .allocation: return allocation(data, currency: currency)
         case .topMover: return topMover(data, currency: currency, clock: clock, isLarge: context.isLarge)
@@ -190,7 +190,7 @@ enum MoneyTiles {
         return tile
     }
 
-    static func quickExpense(_ state: BudgetState, now: Date, currency: String) -> Tile {
+    static func quickExpense(_ state: BudgetState, now: Date, currency: String, knowsBudget: Bool = true) -> Tile {
         let today = BudgetMath.spentToday(state, at: now)
         guard !state.quickExpenses.isEmpty else {
             return .empty(tr("Dépense rapide"), symbol: "cart.badge.plus", message: tr("Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget."))
@@ -204,7 +204,8 @@ enum MoneyTiles {
         tile.rows = state.quickExpenses.prefix(4).map { quick in
             TileRow(id: quick.id.uuidString, title: quick.name, value: TF.money(quick.amount, currency, decimals: 2), symbol: "plus.circle.fill", action: .quickExpense(quick.id.uuidString))
         }
-        tile.detail = tr("Reste du mois : \(TF.money(BudgetMath.remaining(state, at: now), currency))")
+        tile.detail = knowsBudget ? tr("Reste du mois : \(TF.money(BudgetMath.remaining(state, at: now), currency))")
+            : tr("Dépensé ce mois-ci : \(TF.money(BudgetMath.spentThisMonth(state, at: now), currency))")
         return tile
     }
 
@@ -243,11 +244,15 @@ enum MoneyTiles {
                 id: position.holding.id.uuidString,
                 title: position.holding.name,
                 value: TF.money(position.value, currency),
-                detail: position.change24h.map { PriceChange.text($0, position.period, arrow: false) },
+                // No price at all: counted at what was paid, and said so rather than shown as a measured gain.
+                detail: position.isEstimated ? tr("prix à renseigner") : position.change24h.map { PriceChange.text($0, position.period, arrow: false) },
                 colorHex: position.holding.kind.colorHex
             )
         }
         tile.footnote = priceNote(data.prices.fetchedAt, clock: clock, isLarge: isLarge)
+        if summary.estimatedCount > 0 {
+            tile.footnote = [tile.footnote, tr("Sans prix : compté au prix payé")].compactMap { $0 }.joined(separator: " · ")
+        }
         tile.inline = tr("Portefeuille \(TF.money(summary.value, currency))")
         return tile
     }

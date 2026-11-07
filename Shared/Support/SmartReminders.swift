@@ -82,14 +82,18 @@ enum SmartReminders {
     static func sync(_ inputs: NotificationEngine.Inputs, now: Date = Date(),
                      defaults: UserDefaults = NotificationLog.defaults) async {
         let center = UNUserNotificationCenter.current()
-        let planned = await center.pendingNotificationRequests().map(\.identifier).filter { $0.hasPrefix(prefix) }
+        let pending = await center.pendingNotificationRequests().map(\.identifier)
+        let planned = pending.filter { $0.hasPrefix(prefix) }
+        // What waits outside this plan (habits, countdowns, encouragements, Focus) takes room under iOS's 64.
+        let outside = pending.count - planned.count
         center.removePendingNotificationRequests(withIdentifiers: planned)
         let status = await center.notificationSettings().authorizationStatus
         guard status == .authorized || status == .provisional || status == .ephemeral else {
             NotificationEngine.forgetPending(now: now, defaults: defaults)
             return
         }
-        let plan = NotificationEngine.commit(inputs, now: now, defaults: defaults)
+        let plan = NotificationEngine.commit(inputs, now: now, defaults: defaults, pendingOutside: outside)
+        var refused = Set<String>()
         for candidate in plan {
             let content = UNMutableNotificationContent()
             content.title = candidate.title
@@ -98,8 +102,13 @@ enum SmartReminders {
             content.threadIdentifier = prefix + candidate.category.rawValue
             let parts = DateMath.calendar.dateComponents([.year, .month, .day, .hour, .minute], from: candidate.date)
             let trigger = UNCalendarNotificationTrigger(dateMatching: parts, repeats: false)
-            try? await center.add(UNNotificationRequest(identifier: candidate.id, content: content, trigger: trigger))
+            do {
+                try await center.add(UNNotificationRequest(identifier: candidate.id, content: content, trigger: trigger))
+            } catch {
+                refused.insert(candidate.id)
+            }
         }
+        NotificationEngine.forget(ids: refused, defaults: defaults)
         // Hardening: a concurrent sync (another process) may have left requests outside this plan.
         let keep = Set(plan.map(\.id))
         let stray = await center.pendingNotificationRequests().map(\.identifier).filter { $0.hasPrefix(prefix) && !keep.contains($0) }
@@ -119,5 +128,54 @@ enum SmartReminders {
         inputs.student = store.state(StudentState.self)
         inputs.profile = store.state(UserProfile.self)
         await sync(inputs)
+    }
+}
+
+/// Where a tap on a notification leads, from its identifier (the ones of the scheduler, the smart
+/// reminders and the encouragements): an existing deep link, opened with `Router.handle`.
+enum NotificationRoute {
+    static func link(for identifier: String) -> DeepLink? {
+        // A countdown: its widget (one identifier per part of a combined widget: « …<uuid>.<part> »).
+        let countdown = "tessera.countdown."
+        if identifier.hasPrefix(countdown) {
+            let rest = identifier.dropFirst(countdown.count)
+            return UUID(uuidString: String(rest.prefix(36))).map { DeepLink.design($0) }
+        }
+        if identifier.hasPrefix("tessera.habit.") { return .space(Space.habits.rawValue) }
+        if identifier.hasPrefix(Encouragements.prefix) {
+            let rest = identifier.dropFirst(Encouragements.prefix.count)
+            let kind = rest.split(separator: ".").first.map(String.init) ?? ""
+            switch Encouragements.Kind(rawValue: kind) {
+            case .meal, .calorieGoal: return .space(Space.nutrition.rawValue)
+            case .workout, .weeklyWorkouts: return .space(Space.fitness.rawValue)
+            case .longStudy, .weeklyStudy: return .space(Space.student.rawValue)
+            case .habitStreak: return .space(Space.habits.rawValue)
+            default: return nil
+            }
+        }
+        if identifier.hasPrefix(SmartReminders.prefix + "bill.") { return .space(Space.budget.rawValue) }
+        if identifier.hasPrefix(SmartReminders.prefix + "workout.") { return .space(Space.fitness.rawValue) }
+        if identifier.hasPrefix(SmartReminders.prefix + "meals.") { return .space(Space.nutrition.rawValue) }
+        if identifier.hasPrefix(NotificationEngine.prefix) {
+            // « tessera.smart.n.<kind>.<day>… »
+            let rest = identifier.dropFirst(NotificationEngine.prefix.count)
+            let kind = rest.split(separator: ".").first.map(String.init) ?? ""
+            guard let kindValue = NotificationEngine.Kind(rawValue: kind) else { return nil }
+            switch kindValue {
+            case .lunch, .calories, .protein, .nutritionWeek, .hydration, .legacyMeals:
+                return .space(Space.nutrition.rawValue)
+            case .habitsLeft, .habitStreak, .habitRecord, .habitsWeek:
+                return .space(Space.habits.rawValue)
+            case .sessionsLeft, .steps, .nextSession, .fitnessWeek, .legacyWorkout, .weightProgress, .goalsWeek, .weekStart:
+                return .space(Space.fitness.rawValue)
+            case .classSoon, .eventTomorrow, .busyTomorrow:
+                return .space(Space.student.rawValue)
+            case .tasksLeft:
+                return .tasks
+            case .legacyBill:
+                return .space(Space.budget.rawValue)
+            }
+        }
+        return nil
     }
 }

@@ -392,13 +392,15 @@ struct ServiceStatusRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
-                Text(status.item.name).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                Text(status.item.name).font(.subheadline.weight(.semibold)).foregroundStyle(Color.primary)
                 Spacer()
                 Text(Car.remaining(status))
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(status.used >= 1 ? Color(hex: Car.alertHex) : Color.secondary)
             }
             ProgressView(value: min(1, status.used))
+                .accessibilityLabel(status.item.name)
+                .accessibilityValue(Fmt.percent(min(1, status.used)))
                 .tint(status.used >= 1 ? Color(hex: Car.alertHex) : (status.used >= 0.85 ? Color.orange : Color(hex: "3366FF")))
         }
     }

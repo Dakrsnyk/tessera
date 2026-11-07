@@ -159,6 +159,8 @@ struct TravelBudgetPage: View {
             Text(TF.money(spending.total, currency)).font(.system(size: 38, weight: .bold, design: .rounded)).monospacedDigit()
             if let budget = trip.budget, budget > 0 {
                 ProgressView(value: min(1, spending.total / budget)).tint(spending.total > budget ? Color(hex: "E5484D") : Color(hex: Travel.accentHex))
+                    .accessibilityLabel(tr("Dépensé"))
+                    .accessibilityValue(Fmt.percent(min(1, spending.total / budget)))
                 Text(spending.total > budget ? tr("Dépassé de \(TF.money(spending.total - budget, currency)) sur \(TF.money(budget, currency))") : tr("Il reste \(TF.money(budget - spending.total, currency)) sur \(TF.money(budget, currency))"))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
@@ -191,16 +193,28 @@ struct TravelBudgetPage: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .card()
-        .onAppear { budgetText = trip.budget.map { TF.int($0) } ?? "" }
+        .onAppear { budgetText = trip.budget.map { TripBudgetText.format($0) } ?? "" }
         .onChange(of: budgetText) { _, _ in saveBudget() }
     }
 
+    /// Saves what the person typed, read with the same formatter that wrote it. A text that can't be read
+    /// (still being typed) or that gives the amount already saved changes nothing: opening the page never
+    /// rewrites the budget.
     private func saveBudget() {
-        let value = Double(budgetText.replacingOccurrences(of: ",", with: ".").filter { "0123456789.".contains($0) })
         let id = tripID
+        let typed = budgetText.trimmingCharacters(in: .whitespaces)
+        let value: Double?
+        if typed.isEmpty {
+            value = nil
+        } else if let parsed = TripBudgetText.parse(typed) {
+            value = parsed > 0 ? parsed : nil
+        } else {
+            return
+        }
+        guard model.travel.trips.first(where: { $0.id == id })?.budget != value else { return }
         model.update(\.travel) { state in
             guard let index = state.trips.firstIndex(where: { $0.id == id }) else { return }
-            state.trips[index].budget = (value ?? 0) > 0 ? value : nil
+            state.trips[index].budget = value
         }
     }
 
@@ -213,6 +227,7 @@ struct TravelBudgetPage: View {
                     SectorMark(angle: .value("Montant", share.amount), innerRadius: .ratio(0.6), angularInset: 1.5)
                         .foregroundStyle(Color(hex: share.kind.colorHex))
                 }
+                .accessibilityLabel(tr("Par type"))
                 .frame(width: 110, height: 110)
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(shares) { share in
@@ -301,5 +316,39 @@ struct TravelChecklistPage: View {
         let id = tripID
         model.update(\.travel) { $0.checklist.append(ChecklistItem(tripID: id, title: title)) }
         newItem = ""
+    }
+}
+
+/// The trip budget field: the number is written and read with the same formatter (`Fmt.locale`), never with
+/// `Double(String)` on a formatted text (« 2,500 » is 2500 in English, 2.5 for `Double`).
+enum TripBudgetText {
+    private static func formatter(_ locale: Locale) -> NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.locale = locale
+        formatter.numberStyle = .decimal
+        return formatter
+    }
+
+    /// The amount as the field shows it: no thousands separator, the locale's decimal mark.
+    static func format(_ value: Double, locale: Locale = Fmt.locale) -> String {
+        let formatter = formatter(locale)
+        formatter.usesGroupingSeparator = false
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 4
+        return formatter.string(from: NSNumber(value: value)) ?? ""
+    }
+
+    /// The amount of a text typed or formatted in `locale`; nil when it isn't a number.
+    static func parse(_ text: String, locale: Locale = Fmt.locale) -> Double? {
+        let formatter = formatter(locale)
+        // Spaces (also the non-breaking ones of French) and the locale's thousands mark are dropped.
+        var cleaned = text.filter { !$0.isWhitespace }
+        if let grouping = formatter.groupingSeparator, !grouping.isEmpty { cleaned = cleaned.replacingOccurrences(of: grouping, with: "") }
+        if let value = formatter.number(from: cleaned)?.doubleValue, value.isFinite { return value }
+        // A keyboard that types the other decimal mark ("." where the locale uses ",").
+        let decimal = formatter.decimalSeparator ?? "."
+        let swapped = cleaned.replacingOccurrences(of: ".", with: decimal).replacingOccurrences(of: ",", with: decimal)
+        if let value = formatter.number(from: swapped)?.doubleValue, value.isFinite { return value }
+        return nil
     }
 }

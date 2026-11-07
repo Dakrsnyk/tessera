@@ -122,7 +122,7 @@ Same as French: Support URL https://ardane.app/support.html, Marketing URL https
 - Sign-in required : décoché (aucun compte dans Ardane).
 - Contact : nom, téléphone et courriel de l'utilisateur, saisis par lui (visibles seulement par Apple ; jamais dans ce dépôt).
 - Attachment : rien.
-- Notes (anglais, vérifiées contre le code : permissions de `project.pbxproj`, services réseau de `Shared/`, limites gratuites, action Raccourcis `App/Intents/ApplePayIntent.swift`, Live Activity d'étude dans `StudiesApp.swift`) :
+- Notes (anglais ; corrigées le 2026-11-07 après l'audit de confidentialité P-07 : USDA est hors ligne, l'horaire passe par le sélecteur de photos, Frankfurter ajouté, mention 5.1.1(ix) ; vérifiées contre le code : permissions de `project.pbxproj`, services réseau de `Shared/`, limites gratuites, action Raccourcis `App/Intents/ApplePayIntent.swift`, Live Activity d'étude dans `StudiesApp.swift`) :
 
 ```
 Ardane is a widgets and mini-apps app. There is no account and no sign-in: all data stays on the device (App Group shared with the widget extension). The app starts empty; widget previews show sample data until the user enters their own.
@@ -138,17 +138,18 @@ IN-APP PURCHASES (Ardane Premium)
 - The Premium screen opens from any locked item (for example a Premium style in the Studio, or a sixth habit). It shows the prices, "Restore purchases", and links to the Terms of Use and Privacy Policy.
 
 PERMISSIONS (optional, asked only when the feature is used)
-- Camera: scan a food barcode, photograph a dish, or photograph a class schedule.
+- Camera: scan a food barcode or photograph a dish. A class schedule is imported with the system photo picker or from a PDF (no permission needed).
 - Calendars: show upcoming events in the Upcoming widget and in Planning.
 - Motion & Fitness: steps, distance and floors for My Day.
 - Photos (add only): save the wallpapers chosen in the Store.
 
 NETWORK SERVICES (only the search query is sent, never personal data)
-- Open Food Facts and USDA FoodData Central: food data from a barcode or a search.
-- CoinGecko: crypto prices. SEC EDGAR: official figures of listed companies.
+- Open Food Facts: food data from a barcode or a search. The USDA FoodData Central and Canadian Nutrient File tables are built into the app and work offline.
+- CoinGecko: crypto prices. Frankfurter: currency exchange rates. SEC EDGAR: official figures of listed companies.
 - Stripe (optional, My business mini-app): only if the user connects their own restricted read-only key, kept in the Keychain. Not needed for the review.
 
 OTHER
 - Shortcuts: the "Add an Apple Pay expense" action can be used in a Shortcuts "Transaction" automation to log Apple Pay purchases in Budget. Optional.
 - Nutrition estimates are for information only and are not medical advice.
+- Ardane provides no banking, financial or medical service: budgeting and nutrition are personal organization tools, and all data stays on the device.
 ```

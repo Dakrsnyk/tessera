@@ -121,13 +121,14 @@ struct TaskRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            Button {
+            CheckCircleButton(
+                isDone: task.isDone,
+                label: task.title,
+                doneColor: Color(hex: MiniApp.planning.colorHex),
+                todoColor: Color(hex: task.priority.colorHex ?? "8A8A8E")
+            ) {
                 Haptics.tap()
                 withAnimation { model.updateContent { $0.toggleTask(task.id) } }
-            } label: {
-                Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
-                    .font(.title3)
-                    .foregroundStyle(task.isDone ? Color(hex: MiniApp.planning.colorHex) : Color(hex: task.priority.colorHex ?? "8A8A8E"))
             }
             .buttonStyle(.borderless)
             .accessibilityIdentifier("task-toggle")
@@ -341,9 +342,15 @@ struct PlanningHabitsPage: View {
     @Environment(AppModel.self) private var model
     @State private var editing: Habit?
     @State private var creating = false
+    @State private var paywall: PaywallContext?
 
     /// The day the habits are checked for (a habit forgotten yesterday can still be checked).
     @State private var day = Date()
+
+    /// The editor opens while the free plan has room (`canAddHabit`, the rule of `addHabit`); else the paywall.
+    private func startCreating() {
+        if model.canAddHabit { creating = true } else { paywall = .habitLimit }
+    }
 
     var body: some View {
         let now = day
@@ -354,7 +361,7 @@ struct PlanningHabitsPage: View {
             }
             if habits.isEmpty {
                 EmptyStateView(symbol: "repeat", title: tr("Tes habitudes"), message: tr("Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir."), actionTitle: tr("Ajouter une habitude")) {
-                    creating = true
+                    startCreating()
                 }
                 .card()
             } else {
@@ -371,7 +378,7 @@ struct PlanningHabitsPage: View {
                     .miniCard()
                 }
                 Button {
-                    creating = true
+                    startCreating()
                 } label: {
                     Label(tr("Ajouter une habitude"), systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
                 }
@@ -383,6 +390,7 @@ struct PlanningHabitsPage: View {
         .navigationBarTitleDisplayMode(.large)
         .sheet(isPresented: $creating) { HabitEditor(habit: Habit(name: "", symbol: "checkmark", colorHex: "7FA33A"), isNew: true) }
         .sheet(item: $editing) { HabitEditor(habit: $0, isNew: false) }
+        .sheet(item: $paywall) { PaywallView(context: $0) }
     }
 
     /// The detailed statistics (Premium): how regular each habit is over 30 and 90 days, and its best streak.
@@ -467,6 +475,7 @@ struct PlanningFocusPage: View {
                             .cornerRadius(3)
                     }
                 }
+                .accessibilityLabel(tr("Cette semaine"))
                 .frame(height: 160)
                 .card()
             }
@@ -491,5 +500,7 @@ struct PlanningFocusPage: View {
             $0.focus.endDate = nil
         }
         model.update(\.productivity) { $0.logFocusStop(at: now) }
+        // A session stopped early: its « focus over » alert must not come later (like the widget's Stop button).
+        FocusNotifier.cancel()
     }
 }

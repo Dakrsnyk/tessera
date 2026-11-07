@@ -211,11 +211,17 @@ enum DashboardTiles {
         let now = context.date
         let state = context.payload.domains.budget
         let currency = context.settings.currencyCode
-        let remaining = BudgetMath.remaining(state, at: now)
         var tile = Tile(title: tr("Argent"), symbol: "dollarsign.circle")
-        tile.value = TF.money(remaining, currency)
-        tile.trend = remaining < 0 ? false : nil
-        tile.caption = tr("reste ce mois · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency))/jour")
+        if context.payload.domains.knows(.monthlyBudget) {
+            let remaining = BudgetMath.remaining(state, at: now)
+            tile.value = TF.money(remaining, currency)
+            tile.trend = remaining < 0 ? false : nil
+            tile.caption = tr("reste ce mois · \(TF.money(BudgetMath.perDayLeft(state, at: now), currency))/jour")
+        } else {
+            // No budget given: what was spent, never a remainder of a made-up budget.
+            tile.value = TF.money(BudgetMath.spentThisMonth(state, at: now), currency)
+            tile.caption = tr("dépensés ce mois-ci · budget à définir")
+        }
         var rows = [TileRow(id: "today", title: tr("Dépensé aujourd'hui"), value: TF.money(BudgetMath.spentToday(state, at: now), currency, decimals: 2), symbol: "cart")]
         if let bill = BudgetMath.upcomingBills(state, at: now, within: 31).first {
             let cents = bill.bill.amount.rounded() == bill.bill.amount ? 0 : 2

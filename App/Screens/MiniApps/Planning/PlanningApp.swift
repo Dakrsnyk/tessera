@@ -437,13 +437,8 @@ struct TaskEditor: View {
     }
 
     private func save() {
-        var saved = task
+        var saved = task.normalizedForSave(hasDue: hasDue)
         saved.title = saved.title.trimmed
-        if !hasDue {
-            saved.due = nil
-            saved.hasTime = false
-            saved.repeats = .never
-        }
         model.updateContent { content in
             if let index = content.tasks.firstIndex(where: { $0.id == saved.id }) {
                 content.tasks[index] = saved

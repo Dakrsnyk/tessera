@@ -195,11 +195,14 @@ enum BusinessMath {
         case .year: component = .year
         }
         let start = DateMath.calendar.date(byAdding: component, value: -1, to: current.start) ?? current.start
-        return DateInterval(start: start, duration: max(1, date.timeIntervalSince(current.start)))
+        // Never past the end of the previous period (it ends where the current one starts): on the 31st, a shorter
+        // previous month must not spill into the days of the current one.
+        let end = min(start.addingTimeInterval(max(1, date.timeIntervalSince(current.start))), current.start)
+        return DateInterval(start: start, end: max(start, end))
     }
 
     static func sales(_ state: BusinessState, in interval: DateInterval) -> [SalesEntry] {
-        state.sales.filter { interval.contains($0.date) }
+        state.sales.filter { interval.holds($0.date) }
     }
 
     static func revenue(_ state: BusinessState, in interval: DateInterval) -> Double {
@@ -222,7 +225,7 @@ enum BusinessMath {
     }
 
     static func costs(_ state: BusinessState, in interval: DateInterval) -> Double {
-        state.expenses.filter { interval.contains($0.date) }.reduce(0) { $0 + $1.amount }
+        state.expenses.filter { interval.holds($0.date) }.reduce(0) { $0 + $1.amount }
     }
 
     struct Profit: Hashable {

@@ -43,6 +43,8 @@ struct WidgetStudio: View {
     @State private var index = 0
     @State private var family: WidgetFamily
     @State private var paywall: PaywallContext?
+    /// A double tap on « Enregistrer » saves once (not two celebrations and two flights).
+    @State private var saveGuard = TapGuard()
     @State private var confirmDiscard = false
     @State private var confirmDelete = false
     @State private var photoItem: PhotosPickerItem?
@@ -662,6 +664,10 @@ struct WidgetStudio: View {
     // MARK: Actions
 
     private func save() {
+        saveGuard.run { performSave() }
+    }
+
+    private func performSave() {
         // In the free plan, the new widgets within the limit (the Studio showed the others locked).
         let saved = savedDesigns
         if needsPremium || saved.isEmpty {

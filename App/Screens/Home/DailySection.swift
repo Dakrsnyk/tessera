@@ -544,9 +544,9 @@ private struct NutritionDayTile: View {
                         }
                     }
                     VStack(spacing: 6) {
-                        compactMacro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex)
-                        compactMacro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex)
-                        compactMacro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex)
+                        compactMacro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex, incomplete: nutrition.eaten.isIncomplete)
+                        compactMacro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex, incomplete: nutrition.eaten.isIncomplete)
+                        compactMacro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex, incomplete: nutrition.eaten.isIncomplete)
                     }
                 }
                 .contentShape(Rectangle())
@@ -559,7 +559,7 @@ private struct NutritionDayTile: View {
                 } label: {
                     Image(systemName: "barcode.viewfinder")
                         .font(.subheadline.weight(.bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color.readableInk(on: "F08A24"))
                         .frame(width: 44, height: 34)
                         .background(accent, in: Capsule())
                 }
@@ -588,7 +588,7 @@ private struct NutritionDayTile: View {
     }
 
     /// A macro on one line: its colour, its name, eaten over the target; a thin bar under it.
-    private func compactMacro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String) -> some View {
+    private func compactMacro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String, incomplete: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 5) {
                 Circle().fill(Color(hex: hex)).frame(width: 6, height: 6)
@@ -597,7 +597,7 @@ private struct NutritionDayTile: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.75)
                 Spacer(minLength: 4)
-                Text(goal.map { "\(TF.int(eaten))/\(TF.int($0))" } ?? "\(TF.int(eaten)) g")
+                Text((incomplete ? NutritionTotals.minimumMarker : "") + (goal.map { "\(TF.int(eaten))/\(TF.int($0))" } ?? "\(TF.int(eaten)) g"))
                     .font(.caption2)
                     .monospacedDigit()
                     .foregroundStyle(.secondary)
@@ -652,9 +652,9 @@ private struct NutritionDayTile: View {
                             .lineLimit(1)
                             .minimumScaleFactor(0.7)
                     }
-                    macro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex)
-                    macro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex)
-                    macro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex)
+                    macro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex, incomplete: nutrition.eaten.isIncomplete)
+                    macro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex, incomplete: nutrition.eaten.isIncomplete)
+                    macro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex, incomplete: nutrition.eaten.isIncomplete)
                 }
             }
             .contentShape(Rectangle())
@@ -667,7 +667,7 @@ private struct NutritionDayTile: View {
                 } label: {
                     Label(tr("Scanner"), systemImage: "barcode.viewfinder")
                         .font(.subheadline.weight(.bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color.readableInk(on: "F08A24"))
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                         .padding(.horizontal, 8)
@@ -705,12 +705,12 @@ private struct NutritionDayTile: View {
         nutrition.foods == 0 ? tr("Rien noté") : Fmt.plural(nutrition.meals, tr("repas", context: "one"), tr("repas"))
     }
 
-    private func macro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String) -> some View {
+    private func macro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String, incomplete: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack {
                 Text(name).font(.caption.weight(.semibold))
                 Spacer()
-                Text(goal.map { "\(TF.int(eaten))/\(TF.int($0)) g" } ?? "\(TF.int(eaten)) g")
+                Text((incomplete ? NutritionTotals.minimumMarker : "") + (goal.map { "\(TF.int(eaten))/\(TF.int($0)) g" } ?? "\(TF.int(eaten)) g"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .monospacedDigit()
@@ -867,6 +867,7 @@ private struct WorkoutDayTile: View {
                     .foregroundStyle(Color(hex: "E5484D"))
                     .frame(width: 28, height: 24)
                     .background(Color(hex: "E5484D").opacity(0.14), in: Capsule())
+                    .tapAreaOutset(10)
             }
             .buttonStyle(.pressable)
             .accessibilityLabel(Text(label))
@@ -1201,6 +1202,8 @@ private struct PrioritiesDayTile: View {
                         }
                     }
                     .buttonStyle(.pressable)
+                    .accessibilityValue(item.isDone ? tr("Fait") : tr("À faire"))
+                    .accessibilityAddTraits(item.isDone ? .isSelected : [])
                 }
                 quickAdd
             }
@@ -1235,14 +1238,14 @@ private struct PrioritiesDayTile: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .frame(width: 28, height: 28)
-                        .contentShape(Rectangle())
+                        .tapAreaOutset(4)
                 } else {
                     Label(tr("Mes tâches réalisées"), systemImage: "checkmark.circle")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                         .frame(minHeight: 28)
-                        .contentShape(Rectangle())
+                        .contentShape(Rectangle().inset(by: -8))
                 }
             }
             .buttonStyle(.pressable)
@@ -1256,7 +1259,7 @@ private struct PrioritiesDayTile: View {
                     .font(.caption2.weight(.bold))
                     .foregroundStyle(.secondary)
                     .frame(width: 28, height: 28)
-                    .contentShape(Rectangle())
+                    .tapAreaOutset(4)
             }
             .buttonStyle(.pressable)
             .accessibilityLabel(Text(tr("Top 3")))
@@ -1398,7 +1401,7 @@ private struct AddCategorySheet: View {
                                     .frame(width: 30, height: 30)
                                     .background(Color(hex: category.colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
                                 Text(category.title)
-                                    .foregroundStyle(.primary)
+                                    .foregroundStyle(Color.primary)
                                     .lineLimit(1)
                                 Spacer(minLength: 8)
                                 Image(systemName: "plus.circle")

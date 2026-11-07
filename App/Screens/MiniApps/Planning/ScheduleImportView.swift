@@ -488,6 +488,8 @@ struct ScheduleImportView: View {
             if UTType(filenameExtension: url.pathExtension)?.conforms(to: .pdf) == true {
                 return await slotsOrFailure(from: .pdf(url))
             }
+            // A file from Files can be anything: an image over 30 MB is not loaded into memory at all.
+            if let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize, size > 30_000_000 { return .unreadable }
             guard let data = try? Data(contentsOf: url), let image = UIImage(data: data) else { return .unreadable }
             return await slotsOrFailure(from: .image(image))
         }

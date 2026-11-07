@@ -33,6 +33,9 @@ struct FoodItem: Codable, Hashable, Identifiable {
     /// that means « unknown », never « none »: the totals that include this food are marked incomplete.
     /// Nil (or empty): everything is known, which is also the case of every food saved before this existed.
     var unknownMacros: Set<MacroField>? = nil
+    /// True when the source did not give the fibre (the `fiber` above is then a 0 that means « unknown »).
+    /// Nil (or false): the fibre is known, which is also the case of every food saved before this existed.
+    var fiberUnknown: Bool? = nil
 
     var displayName: String {
         guard let brand, !brand.isEmpty else { return name }
@@ -46,6 +49,8 @@ struct FoodItem: Codable, Hashable, Identifiable {
     var knownProtein: Double? { unknownMacros?.contains(.protein) == true ? nil : protein }
     var knownCarbs: Double? { unknownMacros?.contains(.carbs) == true ? nil : carbs }
     var knownFat: Double? { unknownMacros?.contains(.fat) == true ? nil : fat }
+    /// The fibre per 100 g, or nil when the source did not give it.
+    var knownFiber: Double? { fiberUnknown == true ? nil : fiber }
 
     func nutrients(grams: Double) -> NutritionTotals {
         let factor = grams / 100
@@ -54,7 +59,8 @@ struct FoodItem: Codable, Hashable, Identifiable {
             sugars: sugars.map { $0 * factor }, saturatedFat: saturatedFat.map { $0 * factor },
             sodiumMg: sodiumMg.map { $0 * factor }, cholesterolMg: cholesterolMg.map { $0 * factor },
             micros: micros.map { $0.scaled(factor) } ?? Micronutrients(),
-            isIncomplete: hasUnknownMacros
+            isIncomplete: hasUnknownMacros,
+            isFiberIncomplete: fiberUnknown == true
         )
     }
 }
@@ -425,6 +431,15 @@ struct NutritionTotals: Hashable {
     /// True when a food in the sum has a macronutrient the source did not give: the macros are then a
     /// minimum, not the real total.
     var isIncomplete = false
+    /// True when a food in the sum has no fibre value (the fibre is then a minimum). Kept apart from
+    /// `isIncomplete`, which is about the macros and the calories.
+    var isFiberIncomplete = false
+
+    /// The marker put before a figure that is only a minimum (an unknown value counted as 0).
+    static let minimumMarker = "≥ "
+
+    /// A figure of a macro with the marker when the total is incomplete.
+    func marked(_ text: String, incomplete: Bool) -> String { incomplete ? Self.minimumMarker + text : text }
 
     /// Salt from sodium (1 g of sodium is 2.5 g of salt, the conversion on nutrition labels).
     var saltG: Double? { sodiumMg.map { $0 * 2.5 / 1_000 } }
@@ -442,7 +457,8 @@ struct NutritionTotals: Hashable {
             sugars: add(lhs.sugars, rhs.sugars), saturatedFat: add(lhs.saturatedFat, rhs.saturatedFat),
             sodiumMg: add(lhs.sodiumMg, rhs.sodiumMg), cholesterolMg: add(lhs.cholesterolMg, rhs.cholesterolMg),
             micros: lhs.micros + rhs.micros,
-            isIncomplete: lhs.isIncomplete || rhs.isIncomplete
+            isIncomplete: lhs.isIncomplete || rhs.isIncomplete,
+            isFiberIncomplete: lhs.isFiberIncomplete || rhs.isFiberIncomplete
         )
     }
 }
@@ -707,7 +723,18 @@ struct NutritionState: Codable, Hashable {
         photoScansUsed = max(0, c.value(.photoScansUsed, 0))
     }
 
-    mutating func log(_ food: FoodItem, grams: Double, meal: MealType, at date: Date = Date(), origin: EntryOrigin? = nil) {
+    /// The quantity limits, in grams (the same as the scan summary): typed or stored, a quantity is kept inside.
+    static let minGrams = 1.0
+    static let maxGrams = 5_000.0
+
+    /// A quantity inside the limits, or nil when it is not a usable number (NaN, zero or negative).
+    static func safeGrams(_ grams: Double) -> Double? {
+        guard !grams.isNaN, grams > 0 else { return nil }
+        return Swift.min(grams, maxGrams)
+    }
+
+    mutating func log(_ food: FoodItem, grams rawGrams: Double, meal: MealType, at date: Date = Date(), origin: EntryOrigin? = nil) {
+        guard let grams = Self.safeGrams(rawGrams) else { return }
         entries.append(FoodEntry(date: date, meal: meal, food: food, grams: grams, origin: origin))
         recentFoods.removeAll { $0.id == food.id }
         recentFoods.insert(food, at: 0)
@@ -734,12 +761,33 @@ struct NutritionState: Codable, Hashable {
     /// The same food, another quantity or another meal.
     mutating func updateEntry(_ id: UUID, grams: Double? = nil, meal: MealType? = nil) {
         guard let index = entries.firstIndex(where: { $0.id == id }) else { return }
-        if let grams, grams > 0 { entries[index].grams = grams }
+        if let grams, let safe = Self.safeGrams(grams) { entries[index].grams = safe }
         if let meal { entries[index].meal = meal }
     }
 
     mutating func deleteEntry(_ id: UUID) {
         entries.removeAll { $0.id == id }
+    }
+
+    /// Replaces a personal food by its corrected version (same id), also in the favorites and the recent foods
+    /// that hold a copy of it. The entries already logged keep their own copy. False (nothing changed) when the
+    /// food is not a personal one of the list or its values are refused.
+    @discardableResult
+    mutating func updateCustomFood(_ food: FoodItem) -> Bool {
+        guard let index = customFoods.firstIndex(where: { $0.id == food.id }),
+              CustomFoodValidation.blockingProblem(for: food) == nil else { return false }
+        customFoods[index] = food
+        if let favorite = favorites.firstIndex(where: { $0.id == food.id }) { favorites[favorite] = food }
+        if let recent = recentFoods.firstIndex(where: { $0.id == food.id }) { recentFoods[recent] = food }
+        return true
+    }
+
+    /// Removes a personal food, and its copies in the favorites and the recent foods (the barcode scan reads
+    /// the three lists). The entries already logged are kept.
+    mutating func deleteCustomFood(_ id: String) {
+        customFoods.removeAll { $0.id == id }
+        favorites.removeAll { $0.id == id }
+        recentFoods.removeAll { $0.id == id }
     }
 
     /// Logs every food of a saved meal (or of an earlier meal) into one meal of a day.
@@ -769,6 +817,43 @@ struct NutritionState: Codable, Hashable {
     }
 
     func isFavorite(_ food: FoodItem) -> Bool { favorites.contains { $0.id == food.id } }
+}
+
+/// The checks on the values (per 100 g) of a personal food: some are refused, some only need the person's word.
+enum CustomFoodValidation {
+    enum Problem: Equatable {
+        /// A value below zero or not a number: refused.
+        case negative
+        /// More than 900 kcal or more than 100 g of a nutrient per 100 g, or more than 100 g of macros: refused.
+        case outOfRange
+        /// 0 kcal (plausible for water, not for the rest): the person confirms.
+        case zeroEnergy
+        /// The energy is far from 4 per g of protein and carbohydrates plus 9 per g of fat: the person confirms.
+        case energyMismatch
+    }
+
+    static let maxKcalPer100 = 900.0
+    static let maxGramsPer100 = 100.0
+
+    /// The problem that forbids saving, if any.
+    static func blockingProblem(kcal: Double, protein: Double, carbs: Double, fat: Double, fiber: Double = 0) -> Problem? {
+        let values = [kcal, protein, carbs, fat, fiber]
+        if values.contains(where: { !$0.isFinite || $0 < 0 }) { return .negative }
+        if kcal > maxKcalPer100 || [protein, carbs, fat, fiber].contains(where: { $0 > maxGramsPer100 }) { return .outOfRange }
+        if protein + carbs + fat > maxGramsPer100 + 0.5 { return .outOfRange }
+        return nil
+    }
+
+    static func blockingProblem(for food: FoodItem) -> Problem? {
+        blockingProblem(kcal: food.kcal, protein: food.protein, carbs: food.carbs, fat: food.fat, fiber: food.fiber)
+    }
+
+    /// What the person has to confirm before saving, if anything (call it when nothing blocks).
+    static func warning(kcal: Double, protein: Double, carbs: Double, fat: Double) -> Problem? {
+        if kcal == 0 { return .zeroEnergy }
+        if !FoodEnergyCheck.isConsistent(kcal: kcal, protein: protein, carbs: carbs, fat: fat) { return .energyMismatch }
+        return nil
+    }
 }
 
 enum NutritionMath {
@@ -859,7 +944,7 @@ extension NutritionMath {
         var result: [PastMeal] = []
         for key in byDay.keys.sorted(by: >) {
             guard let entries = byDay[key]?.sorted(by: { $0.date < $1.date }), let first = entries.first else { continue }
-            let signature = entries.map { "\($0.food.id)@\(Int($0.grams))" }
+            let signature = entries.map { "\($0.food.id)@\(Int(safely: $0.grams))" }
             guard seen.insert(signature).inserted else { continue }
             result.append(PastMeal(day: first.date, meal: meal, items: entries.map { SavedMeal.Item(food: $0.food, grams: $0.grams) }))
             if result.count >= limit { break }
@@ -907,7 +992,8 @@ extension NutritionMath {
         let tracked = zip(days, dayTotals).filter { pair in !NutritionMath.entries(state, on: pair.0).isEmpty }.map { $0.1 }
         let count = Double(max(tracked.count, 1))
         let sum = tracked.reduce(NutritionTotals()) { $0 + $1 }
-        let averages = NutritionTotals(kcal: sum.kcal / count, protein: sum.protein / count, carbs: sum.carbs / count, fat: sum.fat / count, fiber: sum.fiber / count)
+        let averages = NutritionTotals(kcal: sum.kcal / count, protein: sum.protein / count, carbs: sum.carbs / count, fat: sum.fat / count, fiber: sum.fiber / count,
+                                      isIncomplete: sum.isIncomplete, isFiberIncomplete: sum.isFiberIncomplete)
         let goal = state.goals.kcal
         let onTarget = tracked.filter { goal > 0 && abs($0.kcal - goal) <= goal * 0.1 }.count
         return PeriodStats(days: days, kcalPerDay: dayTotals.map { $0.kcal }, trackedDays: tracked.count, averages: averages, daysOnTarget: onTarget, goal: goal)
