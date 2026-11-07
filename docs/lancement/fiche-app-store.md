@@ -59,3 +59,56 @@ horaire,emploi du temps,budget,calories,macros,habitudes,sport,études,dépenses
 - Copyright : `2026 Ardane` (nom d'entreprise immatriculé ; Apple ajoute le ©).
 - Routing App Coverage File, App Clip, iMessage App : rien (Ardane n'est pas une app de navigation, n'a ni App Clip ni extension iMessage).
 - Build : seulement une version envoyée par `[testflight]` ; une `[interne]` est « Internal Only » et ne peut pas être soumise.
+
+## English (U.S.) — langue principale recommandée (marché visé par la campagne TikTok)
+
+### Subtitle (30)
+Custom widgets & mini-apps
+
+### Promotional Text (170)
+Your week, meals, budget and habits as widgets in your style. Set them up in seconds: no account, no ads, no tracking.
+
+### Description (4,000)
+Ardane brings your everyday mini-apps together and turns them into widgets that look like you, for your Home Screen and Lock Screen.
+
+Pick a mini-app, choose your widget's size, then style it in the Studio: colors, backgrounds, fonts. Your iPhone looks like you, and what matters stays in sight.
+
+12 MINI-APPS IN ONE
+• Planning · studies: your weekly schedule, classes, exams, grades and flashcards. Add classes by hand, or import your schedule from a photo or a PDF (Premium).
+• Nutrition: meals, calories and macros. Unlimited barcode scans and food search; a photo of a dish gives an estimate to double-check.
+• Fitness: workouts, sets and records, with explained exercises.
+• Habits: your habits and streaks at a glance.
+• Budget: expenses, bills and savings.
+• Investments: stocks, ETFs, crypto and cash.
+• My business: revenue and key metrics.
+• Public companies: official figures for listed companies.
+• Productivity: tasks, priorities, projects and counters.
+• Travel: flights, hotels and activities.
+• Car: fill-ups, maintenance and costs.
+• My life: birthday, holidays and profile.
+
+WIDGETS THAT LOOK LIKE YOU
+• Small, medium and large widgets, plus Lock Screen widgets.
+• Buttons in some widgets, so you can act without opening the app.
+• Live Activities for your workouts and study sessions.
+• The Studio: themes, colors, backgrounds and fonts, with a live preview.
+• Complete Home Screen setups to recreate and themed packs: Student, Athlete, Traveler…
+
+YOUR DATA STAYS YOURS
+No account, no ads, no tracking. What you enter is stored on your iPhone.
+
+ARDANE PREMIUM
+The free version includes 3 saved widgets, 5 habits and 10 dish photo analyses. Premium unlocks every widget and style, the packs, unlimited habits, schedule import, detailed stats and unlimited dish analyses.
+
+Premium is available as a monthly or yearly subscription, or as a one-time purchase. Payment is charged to your Apple Account. The subscription renews automatically unless it is canceled at least 24 hours before the end of the current period. Manage or cancel it in your App Store account settings.
+
+Ardane's nutrition estimates are for information only and are not a substitute for advice from a health professional.
+
+Terms of Use: https://ardane.app/terms.html
+Privacy Policy: https://ardane.app/privacy.html
+
+### Keywords (100)
+schedule,timetable,planner,budget,calorie,macro,habit,tracker,workout,study,home screen,aesthetic
+
+### Other fields
+Same as French: Support URL https://ardane.app/support.html, Marketing URL https://ardane.app, Copyright `2026 Ardane`.
