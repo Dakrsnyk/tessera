@@ -132,3 +132,17 @@ export const J3_PHOTO: SpecJ = {
   final: FINAL_J,
   voLen: voJ3,
 };
+
+// ------------------------------------------------------------------------------------------------ séance de musculation (2026-11-06)
+// Proposal 2 framing: library → set → medium workout widget on the Home Screen → Live Activity on the Lock Screen.
+import type { SpecW } from "./TemplateW";
+import voW1 from "./vo/W1-workout-phone.json";
+
+export const W1_WORKOUT: SpecW = {
+  id: "W1-workout-phone",
+  template: "W",
+  hook: "From the library to your Lock Screen",
+  steps: { build: "Build", train: "Train", widget: "Widget", lock: "Lock Screen" },
+  vo: { hook: "hook", build: "build", train: "train", widget: "widget", lock: "lock", end: "end" },
+  voLen: voW1,
+};

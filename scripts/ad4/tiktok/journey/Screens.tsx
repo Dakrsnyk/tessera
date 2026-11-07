@@ -30,13 +30,16 @@ const split = Easing.bezier(0.16, 1, 0.3, 1);
 export const HOME = "home-jade";
 const WALL = "kit/wall-jade.png";
 export const SLOT: [number, number, number, number] = [57, 204, 1092, 510];
+/** The Fitness « Today's workout » M row of the same Home Screen (freed for the workout ad). */
+export const SLOT_MIDDLE: [number, number, number, number] = [57, 813, 1092, 510];
+const FREED = { top: { y: 192, h: 606 }, middle: { y: 800, h: 598 } };
 export const ICON = { x: 374, y: 1713, s: 186 };
 
-export const HomeBase: React.FC<{ filled?: React.ReactNode }> = ({ filled }) => (
+export const HomeBase: React.FC<{ filled?: React.ReactNode; free?: "top" | "middle" }> = ({ filled, free = "top" }) => (
   <div style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH, overflow: "hidden" }}>
     <Img src={cap(HOME)} style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH }} />
-    <div style={{ position: "absolute", left: 0, top: 192, width: CW, height: 606, overflow: "hidden" }}>
-      <Img src={staticFile(WALL)} style={{ position: "absolute", left: 0, top: -192, width: CW, height: CH }} />
+    <div style={{ position: "absolute", left: 0, top: FREED[free].y, width: CW, height: FREED[free].h, overflow: "hidden" }}>
+      <Img src={staticFile(WALL)} style={{ position: "absolute", left: 0, top: -FREED[free].y, width: CW, height: CH }} />
     </div>
     <Img src={staticFile("store/ardane-icon.png")} style={{ position: "absolute", left: ICON.x, top: ICON.y, width: ICON.s, height: ICON.s, borderRadius: 44 }} />
     {filled}
@@ -44,12 +47,12 @@ export const HomeBase: React.FC<{ filled?: React.ReactNode }> = ({ filled }) => 
 );
 
 /** The customized widget flying in and landing on the free row, then its « Ardane » label. */
-export const Landing: React.FC<{ f: number; fps: number; widget: string }> = ({ f, fps, widget }) => {
+export const Landing: React.FC<{ f: number; fps: number; widget: string; slot?: [number, number, number, number] }> = ({ f, fps, widget, slot = SLOT }) => {
   const s = spring({ frame: f - 6, fps, config: { damping: 12, stiffness: 120, mass: 0.8 } });
   const o = interpolate(f, [6, 12], [0, 1], clamp);
   const label = interpolate(f, [26, 34], [0, 1], clamp);
   const glow = interpolate(f, [24, 34, 60], [0, 1, 0], clamp);
-  const [x, y, w, h] = SLOT;
+  const [x, y, w, h] = slot;
   return (
     <>
       <div

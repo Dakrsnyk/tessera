@@ -30,5 +30,13 @@
   "custom": "Then I make the widget mine. New style, new colors.",
   "place": "And it goes on my Home Screen, right next to my workout.",
   "end": "Ardane. Your whole life. One place."
+ },
+ "W1-workout-phone": {
+  "hook": "From the exercise library to your Lock Screen.",
+  "build": "Build your workout from the library, with an animated demo for each move.",
+  "train": "Start the session and log each set in one tap.",
+  "widget": "Then add a widget that follows the exercise you're on.",
+  "lock": "And on your Lock Screen, your rest timer runs live. Tap Set done, no need to unlock.",
+  "end": "Ardane. Your whole life. One place."
  }
 }
