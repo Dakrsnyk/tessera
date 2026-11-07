@@ -1,12 +1,11 @@
-// The ads themselves: one entry = one TikTok. A new ad is a new entry (captures by name, texts, durations).
+// The ads themselves: one entry = one TikTok. A new ad is a new entry (captures by name, texts, voice lines).
 import type { SpecA } from "./TemplateA";
 import type { SpecC } from "./TemplateC";
+import voC from "./vo/C-widgets.json";
 
 /** Widget rectangles on the real Home Screens (px of the 1206 x 2622 capture, src/lib/kit.ts of the campaign). */
 const MACROS: [number, number, number, number] = [57, 204, 1092, 510];
 const NEXTSET_M: [number, number, number, number] = [57, 813, 1092, 510];
-const SMALL_L: [number, number, number, number] = [57, 813, 510, 510];
-const SMALL_R: [number, number, number, number] = [638, 813, 510, 510];
 
 export const A_WIDGETS: SpecA = {
   id: "A-widgets",
@@ -20,16 +19,67 @@ export const A_WIDGETS: SpecA = {
   ],
 };
 
+// Layout grid of a page (1080 x 1920): a full-width row at y 430, a row of two at y ~860, a Lock Screen strip at y ~1307.
+// Every widget kind on the pages is a FREE kind in the light style (Faits-verifies.md §1); the Premium styles are in the carousel.
 export const C_WIDGETS: SpecC = {
   id: "C-widgets",
   template: "C",
-  source: "home-free3",
-  hook: { title: "3 widgets", subtitle: "I check 20 times a day", note: "(no app to open)", dur: 2.2 },
-  items: [
-    { label: "Calories & macros", rect: MACROS },
-    { label: "Next set", rect: SMALL_L },
-    { label: "Today's top 3", rect: SMALL_R },
+  voLen: voC,
+  hook: { title: "3 widget sets", subtitle: "that run my whole day", vo: "hook" },
+  pages: [
+    {
+      label: "Food",
+      vo: "i1",
+      tiles: [
+        { kind: "widget", src: "macros-m-light", x: 110, y: 430, w: 860 },
+        { kind: "widget", src: "calories-s-light", x: 110, y: 862, w: 415 },
+        {
+          kind: "lock", x: 555, y: 862, w: 415, h: 415, wall: "wall-midnight.png",
+          parts: [
+            { src: "lock-caloriesLeft-circular", x: 117, y: 62, w: 180 },
+            { src: "lock-caloriesLeft-inline", x: 27, y: 300, w: 360 },
+          ],
+        },
+        { kind: "lock", x: 110, y: 1307, w: 860, h: 240, wall: "wall-ocean.png", parts: [{ src: "lock-macros-rect", x: 210, y: 30, w: 440 }] },
+      ],
+    },
+    {
+      label: "Training",
+      vo: "i2",
+      tiles: [
+        { kind: "widget", src: "live-rest-real", x: 110, y: 430, w: 860, seq: { count: 16, fps: 4 } },
+        { kind: "widget", src: "nextSet-s-light", x: 110, y: 818, w: 415 },
+        {
+          kind: "lock", x: 555, y: 818, w: 415, h: 415, wall: "wall-nebula.png",
+          parts: [
+            { src: "lock-trainingStreak-circular", x: 122, y: 50, w: 170 },
+            { src: "lock-nextSet-rect", x: 22, y: 236, w: 370 },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Money & my day",
+      vo: "i3",
+      tiles: [
+        { kind: "widget", src: "habits-m-light", x: 110, y: 430, w: 860 },
+        { kind: "widget", src: "budgetLeft-s-light", x: 110, y: 862, w: 415 },
+        { kind: "widget", src: "priorities-s-light", x: 555, y: 862, w: 415 },
+        {
+          kind: "lock", x: 110, y: 1307, w: 860, h: 240, wall: "wall-graphite.png",
+          parts: [
+            { src: "lock-habitStreak-circular", x: 110, y: 44, w: 180 },
+            { src: "lock-tasks-rect", x: 330, y: 32, w: 420 },
+          ],
+        },
+      ],
+    },
   ],
-  itemDur: 2.4,
-  end: { focusY: 0.4, caption: "all 3 come from one app: Ardane", sub: "coming soon on the App Store", dur: 2.6 },
+  styles: {
+    homes: ["home-hero-aurore", "home-hero-neon", "home-hero-etudes", "home-hero-espace", "home-hero-crepuscule", "home-profile-athlete", "home-hero-graphite"],
+    caption: "mix shapes, styles & wallpapers",
+    vo: "styles",
+    premium: true,
+  },
+  end: { line: "Your whole life. One place.", sub: "Coming soon to the App Store", vo: "end" },
 };
