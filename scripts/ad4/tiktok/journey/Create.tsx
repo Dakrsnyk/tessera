@@ -14,8 +14,8 @@ export type BuilderPlan = {
   space: "fitness" | "student" | "nutrition" | "budget";
   /** The card of the space on the Create tab; without it (card further down the list), a tap on the Create tab. */
   tapSpace?: P;
-  /** The widget chosen in the grid of the builder. */
-  tapTile: P;
+  /** The widget chosen in the grid of the builder (none when the size alone selects it: the week's timetable in large). */
+  tapTile?: P;
   /** The « Medium » size (the builder then shows its medium preview). */
   medium?: P;
   /** Or the « Large » size: creator-<space>-large (the week's timetable alone, -screenshotCreatorKinds timetable). */
@@ -37,7 +37,10 @@ export const BuilderFlow: React.FC<{ f: number; plan: BuilderPlan }> = ({ f, pla
   const sheet = interpolate(f, [SHEET, SHEET + 9], [0, 1], { ...clamp, easing: out });
   const size = plan.large ? "large" : plan.medium ? "medium" : null;
   const sizeTap = plan.large ?? plan.medium;
-  const builder = size && f >= MEDIUM + 3 ? `creator-${plan.space}-${size}` : `creator-${plan.space}`;
+  // Large: the size first (the week's timetable is only in the large grid), then the widget.
+  const sizeAt = plan.large ? TILE : MEDIUM;
+  const tileAt = plan.large ? MEDIUM : TILE;
+  const builder = size && f >= sizeAt + 3 ? `creator-${plan.space}-${size}` : `creator-${plan.space}`;
   return (
     <div style={{ position: "absolute", width: CW, height: CH, overflow: "hidden", background: "#000" }}>
       <Full src="spaces" />
@@ -47,8 +50,8 @@ export const BuilderFlow: React.FC<{ f: number; plan: BuilderPlan }> = ({ f, pla
           <Full src={builder} />
         </div>
       )}
-      <Tap f={f} at={TILE} x={plan.tapTile[0]} y={plan.tapTile[1]} />
-      {sizeTap && <Tap f={f} at={MEDIUM} x={sizeTap[0]} y={sizeTap[1]} />}
+      {plan.tapTile && <Tap f={f} at={tileAt} x={plan.tapTile[0]} y={plan.tapTile[1]} />}
+      {sizeTap && <Tap f={f} at={sizeAt} x={sizeTap[0]} y={sizeTap[1]} />}
       <Tap f={f} at={end - 6} x={plan.tapCustomize[0]} y={plan.tapCustomize[1]} />
     </div>
   );
@@ -107,6 +110,28 @@ export const StudioStep: React.FC<{ f: number; base: "studio-style" | "studio-th
         return <Tap key={s.w} f={f} at={s.at - 2} x={p.x + 250} y={p.y + 117} />;
       })}
       <Tap f={f} at={saveAt} x={603} y={2393} />
+    </div>
+  );
+};
+
+export type StudioShot = { at: number; src: string; tap?: P };
+
+/** The real Studio, capture by capture (studio-tt-light, studio-tt-dark: the ad's widget, size and accent, scripts/ad_screens.txt):
+ * a tap on a choice, then its real capture fades in; « Save widget » at `saveAt`. */
+export const StudioShots: React.FC<{ f: number; shots: StudioShot[]; saveAt: number; save?: P }> = ({ f, shots, saveAt, save = [603, 2393] }) => {
+  let k = 0;
+  shots.forEach((s, i) => {
+    if (f >= s.at) k = i;
+  });
+  const fade = k > 0 ? interpolate(f, [shots[k].at, shots[k].at + 6], [0, 1], clamp) : 1;
+  return (
+    <div style={{ position: "absolute", width: CW, height: CH, overflow: "hidden" }}>
+      {k > 0 && <Full src={shots[k - 1].src} />}
+      <div style={{ position: "absolute", width: CW, height: CH, opacity: fade }}>
+        <Full src={shots[k].src} />
+      </div>
+      {shots.map((s) => (s.tap ? <Tap key={s.src} f={f} at={s.at - 2} x={s.tap[0]} y={s.tap[1]} /> : null))}
+      <Tap f={f} at={saveAt} x={save[0]} y={save[1]} />
     </div>
   );
 };

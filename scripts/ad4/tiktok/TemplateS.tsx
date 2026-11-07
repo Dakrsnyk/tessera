@@ -6,8 +6,8 @@ import { AbsoluteFill, Audio, Img, interpolate, Sequence, spring, staticFile, us
 import { cap, clamp, FONT, FPS, PremiumTag, W } from "./lib";
 import { CH, CW, Tap } from "./journey/Screens";
 import { Doodle, ImportFlow, Marker, Notebook, PaperSchedule, Tape } from "./journey/School";
-import { BuilderFlow, builderEnd, BuilderPlan, PushIn, StudioChoice, StudioStep } from "./journey/Create";
-import { HomeBase, Landing, OCEAN } from "./journey/Screens";
+import { BuilderFlow, builderEnd, BuilderPlan, PushIn, StudioShot, StudioShots } from "./journey/Create";
+import { HomeBase, Landing, PLANNING, SLOT_LARGE } from "./journey/Screens";
 
 export type PartS = "hook" | "snap" | "import" | "week" | "create" | "home" | "end";
 export type SpecS = {
@@ -22,18 +22,18 @@ export type SpecS = {
 const LEAD = 0.25;
 const ORDER: PartS[] = ["hook", "snap", "import", "week", "create", "home", "end"];
 
-/** The mechanic of every ad (2026-11-06): Create tab → Planning · studies → Next class + Next exam (Medium) → the Studio
- * themes (the real builder preview of that widget; its Midnight and Ocean versions are drawn with the colours of those
- * themes, taken from the real exports macros-m-preset-*) → the widget lands on an ocean-blue Home Screen. */
-const STU_BUILDER: BuilderPlan = { space: "student", tapTile: [594, 2145], medium: [600, 726], tapCustomize: [603, 2394] };
+/** The mechanic of every ad (2026-11-06), for the Planning ad (2026-11-07): Create tab → Planning · studies → Large
+ * (the week's timetable alone, creator-student-large) → the real Studio on that widget, Light then Dark with the cyan
+ * accent of the ocean wallpaper (studio-tt-light, studio-tt-dark) → the same widget fills two thirds of the Home Screen. */
+const STU_BUILDER: BuilderPlan = { space: "student", large: [963, 726], tapCustomize: [603, 2394] };
 const STU_END = builderEnd(STU_BUILDER);
-const STU_THEMES: StudioChoice[] = [
-  { at: 0, w: "x-student-combo", name: "Light", tag: "Free" },
-  { at: 18, w: "x-student-combo-midnight", name: "Midnight", tag: "Premium" },
-  { at: 36, w: "x-student-combo-ocean", name: "Ocean", tag: "Premium" },
+const STU_SHOTS: StudioShot[] = [
+  { at: 0, src: "studio-tt-light" },
+  { at: 22, src: "studio-tt-dark", tap: [975, 1770] },
 ];
-const STU_SAVE = 56;
-const STU_FINAL = "x-student-combo-ocean";
+const STU_SAVE = 50;
+/** The week's timetable in large, dark with the cyan accent of the ocean wallpaper (export timetable-l-planning). */
+const HOME_WIDGET = "timetable-l-planning";
 const MIN: Record<PartS, number> = { hook: 2.6, snap: 2.0, import: 5.6, week: 2.6, create: (STU_END + STU_SAVE + 10) / FPS, home: 3.4, end: 2.8 };
 const TAIL: Record<PartS, number> = { hook: 0.3, snap: 0.3, import: 0.3, week: 0.4, create: 0.3, home: 0.5, end: 0.6 };
 
@@ -167,7 +167,7 @@ const PartView: React.FC<{ part: PartS; spec: SpecS }> = ({ part, spec }) => {
             <BuilderFlow f={f} plan={STU_BUILDER} />
           ) : (
             <PushIn f={f - STU_END} under={<BuilderFlow f={STU_END - 1} plan={STU_BUILDER} />}>
-              <StudioStep f={f - STU_END} base="studio-theme" choices={STU_THEMES} saveAt={STU_SAVE} />
+              <StudioShots f={f - STU_END} shots={STU_SHOTS} saveAt={STU_SAVE} />
             </PushIn>
           )}
         </Phone>
@@ -175,10 +175,10 @@ const PartView: React.FC<{ part: PartS; spec: SpecS }> = ({ part, spec }) => {
       {part === "home" && (
         <>
           <Phone f={f}>
-            <HomeBase theme={OCEAN} filled={<Landing f={f} fps={fps} widget={STU_FINAL} glow="64,214,232" />} />
+            <HomeBase theme={PLANNING} filled={<Landing f={f} fps={fps} widget={HOME_WIDGET} slot={SLOT_LARGE} glow="64,214,232" />} />
           </Phone>
-          {/* circles the Next exam half of the widget, in cyan (Planning) so it reads on the ocean wallpaper */}
-          <Doodle f={f} at={44} dur={14} d="M 730 455 C 930 455 935 800 705 800 C 420 800 400 465 750 462" width={12} color="#2BD4EA" />
+          {/* a hand-drawn bracket along the widget: two thirds of the screen, the whole week */}
+          <Doodle f={f} at={40} dur={14} d="M 878 512 C 912 512 898 610 903 705 C 906 765 913 786 936 792 C 913 798 906 818 903 878 C 898 975 912 1072 878 1072" width={12} color="#1491B8" />
         </>
       )}
       <Titles lines={spec.captions[part]} f={f} />

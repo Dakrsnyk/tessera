@@ -37,7 +37,7 @@ export const ICON = { x: 374, y: 1713, s: 186 };
 
 /** A real Home Screen in the colours of a mini-app (rule of 2026-11-06), its top row freed with its own wallpaper (pairs
  * checked pixel by pixel). `icon`: where the Ardane icon is drawn (over an app of the capture, whose label becomes « Ardane »). */
-export type HomeTheme = { src: string; wall: string; icon?: { x: number; y: number; s: number }; relabel?: string; label: string };
+export type HomeTheme = { src: string; wall: string; icon?: { x: number; y: number; s: number }; relabel?: string; label: string; freed?: { y: number; h: number } };
 export const JADE: HomeTheme = { src: HOME, wall: WALL, icon: ICON, label: "#fff" };
 /** Nutrition: cream (the Weather app of the capture becomes Ardane). */
 export const CREME: HomeTheme = { src: "home-creme", wall: "kit/wall-cream.png", icon: { x: 920, y: 1713, s: 186 }, relabel: "#54402B", label: "#54402B" };
@@ -45,14 +45,20 @@ export const CREME: HomeTheme = { src: "home-creme", wall: "kit/wall-cream.png",
 export const GRAPHITE: HomeTheme = { src: "home-graphite", wall: "kit/wall-graphite.png", label: "#fff" };
 /** Planning: ocean blue / cyan. */
 export const OCEAN: HomeTheme = { src: "home-ocean", wall: "kit/wall-ocean.png", label: "#fff" };
+/** Planning (2026-11-07): the ad-only setup « planning » (home-planning: the week's timetable in large, dark with a cyan
+ * accent, over two thirds of the screen, then two rows of apps), on the same ocean wallpaper (checked pixel by pixel):
+ * the widget and its label (y 204 to 1 398) are freed so the widget made in the Studio lands there. */
+export const PLANNING: HomeTheme = { src: "home-planning", wall: "kit/wall-ocean.png", label: "#fff", freed: { y: 192, h: 1222 } };
+export const SLOT_LARGE: [number, number, number, number] = [57, 204, 1092, 1146];
 
 export const HomeBase: React.FC<{ filled?: React.ReactNode; free?: "top" | "middle"; theme?: HomeTheme }> = ({ filled, free = "top", theme = JADE }) => {
   const ic = theme.icon;
+  const fr = theme.freed ?? FREED[free];
   return (
     <div style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH, overflow: "hidden" }}>
       <Img src={cap(theme.src)} style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH }} />
-      <div style={{ position: "absolute", left: 0, top: FREED[free].y, width: CW, height: FREED[free].h, overflow: "hidden" }}>
-        <Img src={staticFile(theme.wall)} style={{ position: "absolute", left: 0, top: -FREED[free].y, width: CW, height: CH }} />
+      <div style={{ position: "absolute", left: 0, top: fr.y, width: CW, height: fr.h, overflow: "hidden" }}>
+        <Img src={staticFile(theme.wall)} style={{ position: "absolute", left: 0, top: -fr.y, width: CW, height: CH }} />
       </div>
       {ic && theme.relabel && (
         // the label of the covered app, replaced by « Ardane » on its own wallpaper
