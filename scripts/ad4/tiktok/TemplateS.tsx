@@ -5,9 +5,11 @@ import React from "react";
 import { AbsoluteFill, Audio, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { cap, clamp, FONT, FPS, PremiumTag, W } from "./lib";
 import { CH, CW, Tap } from "./journey/Screens";
-import { Doodle, ImportFlow, Marker, Notebook, PaperSchedule, StudentHomes, Tape } from "./journey/School";
+import { Doodle, ImportFlow, Marker, Notebook, PaperSchedule, Tape } from "./journey/School";
+import { BuilderFlow, builderEnd, BuilderPlan, PushIn, StudioChoice, StudioStep } from "./journey/Create";
+import { HomeBase, Landing, OCEAN } from "./journey/Screens";
 
-export type PartS = "hook" | "snap" | "import" | "week" | "home" | "end";
+export type PartS = "hook" | "snap" | "import" | "week" | "create" | "home" | "end";
 export type SpecS = {
   id: string;
   template: "S";
@@ -18,9 +20,22 @@ export type SpecS = {
 };
 
 const LEAD = 0.25;
-const ORDER: PartS[] = ["hook", "snap", "import", "week", "home", "end"];
-const MIN: Record<PartS, number> = { hook: 2.6, snap: 2.0, import: 5.6, week: 2.6, home: 3.8, end: 2.8 };
-const TAIL: Record<PartS, number> = { hook: 0.3, snap: 0.3, import: 0.3, week: 0.4, home: 0.5, end: 0.6 };
+const ORDER: PartS[] = ["hook", "snap", "import", "week", "create", "home", "end"];
+
+/** The mechanic of every ad (2026-11-06): Create tab → Planning · studies → Next class + Next exam (Medium) → the Studio
+ * themes (the real builder preview of that widget; its Midnight and Ocean versions are drawn with the colours of those
+ * themes, taken from the real exports macros-m-preset-*) → the widget lands on an ocean-blue Home Screen. */
+const STU_BUILDER: BuilderPlan = { space: "student", tapTile: [594, 2145], medium: [600, 726], tapCustomize: [603, 2394] };
+const STU_END = builderEnd(STU_BUILDER);
+const STU_THEMES: StudioChoice[] = [
+  { at: 0, w: "x-student-combo", name: "Light", tag: "Free" },
+  { at: 18, w: "x-student-combo-midnight", name: "Midnight", tag: "Premium" },
+  { at: 36, w: "x-student-combo-ocean", name: "Ocean", tag: "Premium" },
+];
+const STU_SAVE = 56;
+const STU_FINAL = "x-student-combo-ocean";
+const MIN: Record<PartS, number> = { hook: 2.6, snap: 2.0, import: 5.6, week: 2.6, create: (STU_END + STU_SAVE + 10) / FPS, home: 3.4, end: 2.8 };
+const TAIL: Record<PartS, number> = { hook: 0.3, snap: 0.3, import: 0.3, week: 0.4, create: 0.3, home: 0.5, end: 0.6 };
 
 export const timelineS = (s: SpecS) => {
   let from = 0;
@@ -146,17 +161,28 @@ const PartView: React.FC<{ part: PartS; spec: SpecS }> = ({ part, spec }) => {
           <Doodle f={f} at={14} d="M 880 1380 l 40 50 l 90 -120" width={14} />
         </>
       )}
+      {part === "create" && (
+        <Phone f={f}>
+          {f < STU_END ? (
+            <BuilderFlow f={f} plan={STU_BUILDER} />
+          ) : (
+            <PushIn f={f - STU_END} under={<BuilderFlow f={STU_END - 1} plan={STU_BUILDER} />}>
+              <StudioStep f={f - STU_END} base="studio-theme" choices={STU_THEMES} saveAt={STU_SAVE} />
+            </PushIn>
+          )}
+        </Phone>
+      )}
       {part === "home" && (
         <>
           <Phone f={f}>
-            <StudentHomes f={f} swipeAt={38} />
+            <HomeBase theme={OCEAN} filled={<Landing f={f} fps={fps} widget={STU_FINAL} glow="64,214,232" />} />
           </Phone>
-          {/* circles the Next exam widget of the second page */}
-          <Doodle f={f} at={54} dur={14} d="M 700 470 C 860 470 880 760 690 770 C 500 780 520 480 720 476" width={10} />
+          {/* circles the Next exam half of the widget, in cyan (Planning) so it reads on the ocean wallpaper */}
+          <Doodle f={f} at={44} dur={14} d="M 730 455 C 930 455 935 800 705 800 C 420 800 400 465 750 462" width={12} color="#2BD4EA" />
         </>
       )}
       <Titles lines={spec.captions[part]} f={f} />
-      {part === "import" && <PremiumTag y={1760} />}
+      {(part === "import" || part === "create") && <PremiumTag y={1760} />}
     </AbsoluteFill>
   );
 };

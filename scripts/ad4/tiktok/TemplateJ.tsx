@@ -6,7 +6,8 @@
 import React from "react";
 import { AbsoluteFill, Audio, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { Caption, cap, clamp, FONT, FPS, H, out, PremiumTag, W } from "./lib";
-import { CH, CW, HomeBase, ICON, Landing, PHOTO, PhotoScan, PhotoSummary, Tap } from "./journey/Screens";
+import { CH, CREME, CW, HomeBase, ICON, JADE, Landing, PHOTO, PhotoScan, PhotoSummary, Tap } from "./journey/Screens";
+import { BuilderFlow, builderEnd, BuilderPlan, PushIn, StudioChoice, StudioStep } from "./journey/Create";
 import { SKINS, SkinId } from "./skins";
 
 export type PartKey = "hook" | "open" | "scan" | "custom" | "place" | "end";
@@ -22,8 +23,21 @@ export type SpecJ = {
   captions: Partial<Record<PartKey, string>>;
   /** The widget style the user ends on (Studio capture + the matching widget export). */
   final: { studio: string; widget: string };
+  /** The mechanic of every ad (2026-11-06): Create tab → Nutrition → builder → Studio, on a cream Home Screen. */
+  create?: boolean;
   voLen: Record<string, number>;
 };
+
+/** Create tab → Nutrition → « Calories » (left of the day, after the scan) → « Customize widget ». */
+const NUT_BUILDER: BuilderPlan = { space: "nutrition", tapSpace: [420, 1790], tapTile: [255, 2145], tapCustomize: [603, 2394] };
+const NUT_END = builderEnd(NUT_BUILDER);
+const NUT_STYLES: StudioChoice[] = [
+  { at: 0, w: "calories-m-aurora", name: "Aurora", tag: "Premium" },
+  { at: 18, w: "calories-m-dark", name: "Dark", tag: "Free" },
+  { at: 34, w: "calories-m-light", name: "Light", tag: "Free" },
+];
+const NUT_SAVE = 54;
+export const NUT_FINAL = "calories-m-light";
 
 const LEAD = 0.25;
 /** Shortest length of each part (s): what its own animation needs. */
@@ -34,7 +48,8 @@ const ORDER: PartKey[] = ["hook", "open", "scan", "custom", "place", "end"];
 export const timelineJ = (s: SpecJ) => {
   let from = 0;
   return ORDER.map((key) => {
-    const d = Math.round(Math.max(MIN[key], (s.voLen[s.vo[key]] ?? 0) + LEAD + TAIL[key]) * FPS);
+    const min = key === "custom" && s.create ? (NUT_END + NUT_SAVE + 10) / FPS : MIN[key];
+    const d = Math.round(Math.max(min, (s.voLen[s.vo[key]] ?? 0) + LEAD + TAIL[key]) * FPS);
     const r = { key, from, frames: d };
     from += d;
     return r;
@@ -53,7 +68,9 @@ const STUDIO = (final: string) => [
 /** The app screen of a part at its local frame f (capture px). Also where the camera should look (0–1 of the height). */
 const AppScreen: React.FC<{ part: PartKey; f: number; spec: SpecJ }> = ({ part, f, spec }) => {
   const { fps } = useVideoConfig();
-  if (part === "hook") return <HomeBase />;
+  const theme = spec.create ? CREME : JADE;
+  const ic = theme.icon ?? ICON;
+  if (part === "hook") return <HomeBase theme={theme} />;
   if (part === "open") {
     // tap the Ardane icon, the app grows out of it, My Day, tap the Nutrition card, Nutrition, tap « Add a food »
     const grow = interpolate(f, [8, 20], [0, 1], { ...clamp, easing: out });
@@ -61,14 +78,14 @@ const AppScreen: React.FC<{ part: PartKey; f: number; spec: SpecJ }> = ({ part, 
     const nutrition = f >= 40;
     return (
       <div style={{ position: "absolute", width: CW, height: CH, overflow: "hidden", background: "#000" }}>
-        <HomeBase />
-        <Tap f={f} at={4} x={ICON.x + ICON.s / 2} y={ICON.y + ICON.s / 2} />
+        <HomeBase theme={theme} />
+        <Tap f={f} at={4} x={ic.x + ic.s / 2} y={ic.y + ic.s / 2} />
         {inApp && (
           <div
             style={{
               position: "absolute",
               inset: 0,
-              transformOrigin: `${ICON.x + ICON.s / 2}px ${ICON.y + ICON.s / 2}px`,
+              transformOrigin: `${ic.x + ic.s / 2}px ${ic.y + ic.s / 2}px`,
               transform: `scale(${0.12 + 0.88 * grow})`,
               borderRadius: 120 * (1 - grow) + 10,
               overflow: "hidden",
@@ -93,6 +110,14 @@ const AppScreen: React.FC<{ part: PartKey; f: number; spec: SpecJ }> = ({ part, 
       </div>
     );
   }
+  if (part === "custom" && spec.create) {
+    if (f < NUT_END) return <BuilderFlow f={f} plan={NUT_BUILDER} />;
+    return (
+      <PushIn f={f - NUT_END} under={<BuilderFlow f={NUT_END - 1} plan={NUT_BUILDER} />}>
+        <StudioStep f={f - NUT_END} base="studio-style" choices={NUT_STYLES} saveAt={NUT_SAVE} />
+      </PushIn>
+    );
+  }
   if (part === "custom") {
     const steps = STUDIO(spec.final.studio);
     let k = 0;
@@ -111,7 +136,13 @@ const AppScreen: React.FC<{ part: PartKey; f: number; spec: SpecJ }> = ({ part, 
       </div>
     );
   }
-  if (part === "place") return <HomeBase filled={<Landing f={f} fps={fps} widget={spec.final.widget} />} />;
+  if (part === "place")
+    return (
+      <HomeBase
+        theme={theme}
+        filled={<Landing f={f} fps={fps} widget={spec.create ? NUT_FINAL : spec.final.widget} label={theme.label} glow={spec.create ? "255,149,0" : undefined} />}
+      />
+    );
   return null;
 };
 
@@ -159,7 +190,7 @@ const Phone: React.FC<{ part: PartKey; f: number; spec: SpecJ; y?: number }> = (
 const STEPS: { key: PartKey; label: string }[] = [
   { key: "open", label: "Open" },
   { key: "scan", label: "Scan" },
-  { key: "custom", label: "Customize" },
+  { key: "custom", label: "Create" },
   { key: "place", label: "Place" },
 ];
 

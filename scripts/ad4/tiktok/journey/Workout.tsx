@@ -3,8 +3,9 @@
 // « Today's workout » widget in the Studio and place it on the Home Screen, then the Live Activity on the Lock Screen.
 import React from "react";
 import { Img, interpolate } from "remotion";
-import { cap, clamp, FONT, FPS, out } from "../lib";
-import { CH, CW, HomeBase, Landing, SLOT_MIDDLE, Tap } from "./Screens";
+import { cap, clamp, FPS, out } from "../lib";
+import { CH, CW, GRAPHITE, HomeBase, Landing, Tap } from "./Screens";
+import { BuilderFlow, builderEnd, BuilderPlan, PushIn, StudioChoice, StudioStep } from "./Create";
 
 const seq = (name: string, i: number, n: number) => `${name}-${String(Math.min(n - 1, Math.max(0, i))).padStart(4, "0")}`;
 const seq3 = (name: string, i: number, n: number) => `${name}-${String(Math.min(n - 1, Math.max(0, i))).padStart(3, "0")}`;
@@ -54,53 +55,31 @@ export const TrainScreen: React.FC<{ f: number }> = ({ f }) => (
   </div>
 );
 
-/** The workout widget in the Studio: the real editor (header, preview, sizes, tabs) with the real exports of the
- * « Today's workout » widget in four styles; then « Save widget » and the widget lands on the Home Screen. */
-const STYLES = [
+/** The workout widget, with the mechanic of every ad: Create tab → Fitness → the builder (« Today's workout », the widget
+ * that follows the exercise) → « Customize widget » → the real Studio with the real exports of that widget in four styles →
+ * « Save widget » → it lands on a black and grey Home Screen (colours of Fitness). */
+export const FIT_BUILDER: BuilderPlan = { space: "fitness", tapSpace: [420, 1000], tapTile: [258, 2120], tapCustomize: [603, 2390] };
+const B_END = builderEnd(FIT_BUILDER);
+const STYLES: StudioChoice[] = [
   { at: 0, w: "todaysWorkout-m-light", name: "Light", tag: "Free" },
   { at: 18, w: "todaysWorkout-m-aurora", name: "Aurora", tag: "Premium" },
   { at: 34, w: "todaysWorkout-m-liquidGlass", name: "Liquid Glass", tag: "Premium" },
   { at: 50, w: "todaysWorkout-m-dark", name: "Dark", tag: "Free" },
 ];
 export const WIDGET_FINAL = "todaysWorkout-m-dark";
-export const SAVE_AT = 72;
-export const HOME_AT = 82;
-
-const Tile: React.FC<{ w: string; name: string; tag: string; x: number; y: number; on: boolean }> = ({ w, name, tag, x, y, on }) => (
-  <div style={{ position: "absolute", left: x, top: y, width: 500 }}>
-    <div style={{ width: 500, height: 234, borderRadius: 34, padding: 10, boxSizing: "border-box", border: on ? "6px solid #2A5D93" : "6px solid transparent" }}>
-      <Img src={cap(w)} style={{ width: "100%", height: "100%" }} />
-    </div>
-    <div style={{ textAlign: "center", fontFamily: FONT, fontWeight: on ? 700 : 500, fontSize: 34, color: "#1B2430", marginTop: 8 }}>{name}</div>
-    <div style={{ textAlign: "center", fontFamily: FONT, fontWeight: 400, fontSize: 28, color: "#8A94A0" }}>{tag}</div>
-  </div>
-);
+export const SAVE_AT = 70;
+export const HOME_AT = 80;
+/** Frames of the whole widget part before the landing settles (builder + Studio + 50 frames on the Home Screen). */
+export const WIDGET_FRAMES = B_END + HOME_AT + 50;
 
 export const WidgetScreen: React.FC<{ f: number; fps: number }> = ({ f, fps }) => {
-  if (f >= HOME_AT) return <HomeBase free="middle" filled={<Landing f={f - HOME_AT} fps={fps} widget={WIDGET_FINAL} slot={SLOT_MIDDLE} />} />;
-  let k = 0;
-  STYLES.forEach((s, i) => {
-    if (f >= s.at) k = i;
-  });
-  const swap = k > 0 ? interpolate(f, [STYLES[k].at, STYLES[k].at + 6], [0, 1], clamp) : 1;
+  if (f < B_END) return <BuilderFlow f={f} plan={FIT_BUILDER} />;
+  const g = f - B_END;
+  if (g >= HOME_AT) return <HomeBase theme={GRAPHITE} filled={<Landing f={g - HOME_AT} fps={fps} widget={WIDGET_FINAL} glow="229,72,77" />} />;
   return (
-    <div style={{ position: "absolute", width: CW, height: CH, overflow: "hidden" }}>
-      <Img src={cap("studio-style")} style={{ position: "absolute", width: CW, height: CH }} />
-      {/* the preview: the macros example of the capture is covered, the workout widget takes its place */}
-      <div style={{ position: "absolute", left: 110, top: 432, width: 986, height: 478, borderRadius: 60, background: "rgb(217,225,232)" }} />
-      {k > 0 && <Img src={cap(STYLES[k - 1].w)} style={{ position: "absolute", left: 128, top: 448, width: 952, height: 444 }} />}
-      <Img src={cap(STYLES[k].w)} style={{ position: "absolute", left: 128, top: 448, width: 952, height: 444, opacity: swap, filter: "drop-shadow(0 12px 24px rgba(0,0,0,0.12))" }} />
-      {/* the style choices, with the same widget */}
-      <div style={{ position: "absolute", left: 0, top: 1370, width: CW, height: 900, background: "rgb(233,239,245)" }}>
-        {STYLES.map((s, i) => (
-          <Tile key={s.w} w={s.w} name={s.name} tag={s.tag} x={i % 2 ? 640 : 66} y={i < 2 ? 30 : 450} on={i === k} />
-        ))}
-      </div>
-      <Tap f={f} at={16} x={890} y={1520} />
-      <Tap f={f} at={32} x={316} y={1940} />
-      <Tap f={f} at={48} x={890} y={1940} />
-      <Tap f={f} at={SAVE_AT} x={603} y={2393} />
-    </div>
+    <PushIn f={g} under={<BuilderFlow f={B_END - 1} plan={FIT_BUILDER} />}>
+      <StudioStep f={g} base="studio-style" choices={STYLES} saveAt={SAVE_AT} />
+    </PushIn>
   );
 };
 

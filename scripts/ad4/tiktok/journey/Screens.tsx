@@ -35,19 +35,47 @@ export const SLOT_MIDDLE: [number, number, number, number] = [57, 813, 1092, 510
 const FREED = { top: { y: 192, h: 606 }, middle: { y: 800, h: 598 } };
 export const ICON = { x: 374, y: 1713, s: 186 };
 
-export const HomeBase: React.FC<{ filled?: React.ReactNode; free?: "top" | "middle" }> = ({ filled, free = "top" }) => (
-  <div style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH, overflow: "hidden" }}>
-    <Img src={cap(HOME)} style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH }} />
-    <div style={{ position: "absolute", left: 0, top: FREED[free].y, width: CW, height: FREED[free].h, overflow: "hidden" }}>
-      <Img src={staticFile(WALL)} style={{ position: "absolute", left: 0, top: -FREED[free].y, width: CW, height: CH }} />
+/** A real Home Screen in the colours of a mini-app (rule of 2026-11-06), its top row freed with its own wallpaper (pairs
+ * checked pixel by pixel). `icon`: where the Ardane icon is drawn (over an app of the capture, whose label becomes « Ardane »). */
+export type HomeTheme = { src: string; wall: string; icon?: { x: number; y: number; s: number }; relabel?: string; label: string };
+export const JADE: HomeTheme = { src: HOME, wall: WALL, icon: ICON, label: "#fff" };
+/** Nutrition: cream (the Weather app of the capture becomes Ardane). */
+export const CREME: HomeTheme = { src: "home-creme", wall: "kit/wall-cream.png", icon: { x: 920, y: 1713, s: 186 }, relabel: "#54402B", label: "#54402B" };
+/** Fitness: black and grey. */
+export const GRAPHITE: HomeTheme = { src: "home-graphite", wall: "kit/wall-graphite.png", label: "#fff" };
+/** Planning: ocean blue / cyan. */
+export const OCEAN: HomeTheme = { src: "home-ocean", wall: "kit/wall-ocean.png", label: "#fff" };
+
+export const HomeBase: React.FC<{ filled?: React.ReactNode; free?: "top" | "middle"; theme?: HomeTheme }> = ({ filled, free = "top", theme = JADE }) => {
+  const ic = theme.icon;
+  return (
+    <div style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH, overflow: "hidden" }}>
+      <Img src={cap(theme.src)} style={{ position: "absolute", left: 0, top: 0, width: CW, height: CH }} />
+      <div style={{ position: "absolute", left: 0, top: FREED[free].y, width: CW, height: FREED[free].h, overflow: "hidden" }}>
+        <Img src={staticFile(theme.wall)} style={{ position: "absolute", left: 0, top: -FREED[free].y, width: CW, height: CH }} />
+      </div>
+      {ic && theme.relabel && (
+        // the label of the covered app, replaced by « Ardane » on its own wallpaper
+        <div style={{ position: "absolute", left: ic.x - 70, top: ic.y + ic.s + 2, width: ic.s + 140, height: 58, overflow: "hidden" }}>
+          <Img src={staticFile(theme.wall)} style={{ position: "absolute", left: -(ic.x - 70), top: -(ic.y + ic.s + 2), width: CW, height: CH }} />
+          <div style={{ position: "absolute", left: 0, top: 8, width: ic.s + 140, textAlign: "center", fontFamily: FONT, fontWeight: 500, fontSize: 36, color: theme.relabel }}>Ardane</div>
+        </div>
+      )}
+      {ic && <Img src={staticFile("store/ardane-icon.png")} style={{ position: "absolute", left: ic.x, top: ic.y, width: ic.s, height: ic.s, borderRadius: 44 }} />}
+      {filled}
     </div>
-    <Img src={staticFile("store/ardane-icon.png")} style={{ position: "absolute", left: ICON.x, top: ICON.y, width: ICON.s, height: ICON.s, borderRadius: 44 }} />
-    {filled}
-  </div>
-);
+  );
+};
 
 /** The customized widget flying in and landing on the free row, then its « Ardane » label. */
-export const Landing: React.FC<{ f: number; fps: number; widget: string; slot?: [number, number, number, number] }> = ({ f, fps, widget, slot = SLOT }) => {
+export const Landing: React.FC<{ f: number; fps: number; widget: string; slot?: [number, number, number, number]; glow?: string; label?: string }> = ({
+  f,
+  fps,
+  widget,
+  slot = SLOT,
+  glow: glowRgb = "120,230,255",
+  label: labelColor = "#fff",
+}) => {
   const s = spring({ frame: f - 6, fps, config: { damping: 12, stiffness: 120, mass: 0.8 } });
   const o = interpolate(f, [6, 12], [0, 1], clamp);
   const label = interpolate(f, [26, 34], [0, 1], clamp);
@@ -68,9 +96,9 @@ export const Landing: React.FC<{ f: number; fps: number; widget: string; slot?: 
         }}
       >
         <Img src={cap(widget)} style={{ width: w, height: h }} />
-        <div style={{ position: "absolute", inset: -6, borderRadius: 72, boxShadow: `0 0 60px 10px rgba(120,230,255,${0.55 * glow})` }} />
+        <div style={{ position: "absolute", inset: -6, borderRadius: 72, boxShadow: `0 0 60px 10px rgba(${glowRgb},${0.55 * glow})` }} />
       </div>
-      <div style={{ position: "absolute", left: 0, top: y + h + 22, width: CW, textAlign: "center", fontFamily: FONT, fontWeight: 500, fontSize: 36, color: "#fff", opacity: label, textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}>
+      <div style={{ position: "absolute", left: 0, top: y + h + 22, width: CW, textAlign: "center", fontFamily: FONT, fontWeight: 500, fontSize: 36, color: labelColor, opacity: label, textShadow: labelColor === "#fff" ? "0 1px 6px rgba(0,0,0,0.4)" : "none" }}>
         Ardane
       </div>
     </>

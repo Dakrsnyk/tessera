@@ -5,7 +5,7 @@ import React from "react";
 import { AbsoluteFill, Audio, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { clamp, FONT, FPS, H, PremiumTag, W } from "./lib";
 import { CH, CW } from "./journey/Screens";
-import { BuildScreen, FitnessHome, LockScreen, TrainScreen, WidgetScreen } from "./journey/Workout";
+import { BuildScreen, FitnessHome, LockScreen, TrainScreen, WIDGET_FRAMES, WidgetScreen } from "./journey/Workout";
 import { SKINS, SkinId } from "./skins";
 
 export type PartW = "hook" | "build" | "train" | "widget" | "lock" | "end";
@@ -23,7 +23,7 @@ export type SpecW = {
 
 const LEAD = 0.25;
 const ORDER: PartW[] = ["hook", "build", "train", "widget", "lock", "end"];
-const MIN: Record<PartW, number> = { hook: 2.4, build: 4.9, train: 2.4, widget: 4.6, lock: 3.6, end: 2.8 };
+const MIN: Record<PartW, number> = { hook: 2.4, build: 4.9, train: 2.4, widget: WIDGET_FRAMES / FPS, lock: 3.6, end: 2.8 };
 const TAIL: Record<PartW, number> = { hook: 0.3, build: 0.3, train: 0.3, widget: 0.4, lock: 0.5, end: 0.6 };
 /** Plans that show Premium: the full exercise library (and its demos), the Premium widget styles. */
 const PREMIUM: PartW[] = ["build", "widget"];

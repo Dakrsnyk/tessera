@@ -19,8 +19,8 @@
   "hook": "From your plate to your Home Screen.",
   "open": "Open Ardane, then Nutrition.",
   "scan": "Snap your plate. Ardane finds the food and counts the calories, right on your iPhone.",
-  "custom": "Make the widget yours. Pick a style, pick your colors.",
-  "place": "Then drop it on your Home Screen, next to your workout.",
+  "custom": "Then in Create, pick your widget, and make it your style.",
+  "place": "Drop it on your Home Screen. Every meal, at a glance.",
   "end": "Ardane. Your whole life. One place."
  },
  "J3-journey-photo": {
@@ -35,7 +35,7 @@
   "hook": "From the exercise library to your Lock Screen.",
   "build": "Build your workout from the library, with an animated demo for each move.",
   "train": "Start the session and log each set in one tap.",
-  "widget": "Then add a widget that follows the exercise you're on.",
+  "widget": "Then in Create, pick the widget that follows your exercise, and make it your style.",
   "lock": "And on your Lock Screen, your rest timer runs live. Tap Set done, no need to unlock.",
   "end": "Ardane. Your whole life. One place."
  },
@@ -44,7 +44,8 @@
   "snap": "I take a picture of my class schedule.",
   "import": "Ardane reads it right on my iPhone. I check the classes, and add them.",
   "week": "Every class, every room, in my week.",
-  "home": "And my next class and my next exam are right on my Home Screen.",
+  "create": "Then in Create, I pick my widgets, and give them my style.",
+  "home": "My next class and my next exam, right on my Home Screen.",
   "end": "Ardane. Your whole life. One place."
  }
 }

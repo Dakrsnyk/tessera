@@ -122,6 +122,7 @@ export const J2_PHONE: SpecJ = {
   vo: VO_J,
   captions: { hook: "From your plate to your Home Screen" },
   final: FINAL_J,
+  create: true,
   voLen: voJ2,
 };
 export const J3_PHOTO: SpecJ = {
@@ -162,8 +163,9 @@ export const S1_STUDENT: SpecS = {
     snap: ["snap the schedule"],
     import: ["read on my iPhone"],
     week: ["every class + room"],
+    create: ["pick it, style it"],
     home: ["next class, next exam"],
   },
-  vo: { hook: "hook", snap: "snap", import: "import", week: "week", home: "home", end: "end" },
+  vo: { hook: "hook", snap: "snap", import: "import", week: "week", create: "create", home: "home", end: "end" },
   voLen: voS1,
 };

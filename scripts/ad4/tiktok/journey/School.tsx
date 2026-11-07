@@ -48,11 +48,11 @@ export const Marker: React.FC<{ text: string; f: number; at?: number; y: number;
 };
 
 /** A hand-drawn blue-pen stroke (SVG path) that draws itself. */
-export const Doodle: React.FC<{ d: string; f: number; at: number; dur?: number; w?: number; h?: number; x?: number; y?: number; width?: number }> = ({ d, f, at, dur = 12, w = 1080, h = 1920, x = 0, y = 0, width = 9 }) => {
+export const Doodle: React.FC<{ d: string; f: number; at: number; dur?: number; w?: number; h?: number; x?: number; y?: number; width?: number; color?: string }> = ({ d, f, at, dur = 12, w = 1080, h = 1920, x = 0, y = 0, width = 9, color = PEN }) => {
   const p = interpolate(f, [at, at + dur], [0, 1], { ...clamp, easing: out });
   return (
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} style={{ position: "absolute", left: x, top: y, overflow: "visible" }}>
-      <path d={d} fill="none" stroke={PEN} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray="1" strokeDashoffset={1 - p} />
+      <path d={d} fill="none" stroke={color} strokeWidth={width} strokeLinecap="round" strokeLinejoin="round" pathLength={1} strokeDasharray="1" strokeDashoffset={1 - p} />
     </svg>
   );
 };
