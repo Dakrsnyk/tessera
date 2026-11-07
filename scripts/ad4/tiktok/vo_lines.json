@@ -6,5 +6,29 @@
   "i3": "Three. Money and my day. Budget, habits, and my top three.",
   "styles": "Then customize it all. Mix the shapes, pick a style, and match your wallpaper.",
   "end": "Ardane. Your whole life. One place."
+ },
+ "J1-journey-full": {
+  "hook": "My Home Screen knows what I just ate.",
+  "open": "I open Ardane, then Nutrition.",
+  "scan": "One photo of my plate, and it finds the food and the calories, right on my iPhone.",
+  "custom": "Then I make the widget mine. New style, new colors.",
+  "place": "And it goes on my Home Screen, right next to my workout.",
+  "end": "Ardane. Your whole life. One place."
+ },
+ "J2-journey-phone": {
+  "hook": "From your plate to your Home Screen.",
+  "open": "Open Ardane, then Nutrition.",
+  "scan": "Snap your plate. Ardane finds the food and counts the calories, right on your iPhone.",
+  "custom": "Make the widget yours. Pick a style, pick your colors.",
+  "place": "Then drop it on your Home Screen, next to your workout.",
+  "end": "Ardane. Your whole life. One place."
+ },
+ "J3-journey-photo": {
+  "hook": "I scanned my lunch. Look where it ended up.",
+  "open": "I open Ardane, then Nutrition.",
+  "scan": "One photo of my plate, and it finds the food and the calories, right on my iPhone.",
+  "custom": "Then I make the widget mine. New style, new colors.",
+  "place": "And it goes on my Home Screen, right next to my workout.",
+  "end": "Ardane. Your whole life. One place."
  }
 }

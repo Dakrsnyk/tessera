@@ -87,3 +87,48 @@ export const C_WIDGETS: SpecC = {
   },
   end: { line: "Your whole life. One place.", sub: "Coming soon to the App Store", vo: "end" },
 };
+
+// ------------------------------------------------------------------------------------------------ « parcours » (2026-11-06)
+// Open Ardane → Nutrition → scan a dish → customize the Macros widget → place it next to the Fitness widget (M).
+// Three framings of the same journey, to choose from.
+import type { SpecJ } from "./TemplateJ";
+import voJ1 from "./vo/J1-journey-full.json";
+import voJ2 from "./vo/J2-journey-phone.json";
+import voJ3 from "./vo/J3-journey-photo.json";
+
+const VO_J = { hook: "hook", open: "open", scan: "scan", custom: "custom", place: "place", end: "end" } as const;
+const FINAL_J = { studio: "studio-preset-ocean", widget: "macros-m-preset-ocean" };
+const POV_CAPTIONS = {
+  open: "open Ardane, then Nutrition",
+  scan: "1 photo = the foods + the calories",
+  custom: "make the widget mine",
+  place: "right next to my workout",
+};
+
+export const J1_FULL: SpecJ = {
+  id: "J1-journey-full",
+  template: "J",
+  framing: "full",
+  vo: VO_J,
+  captions: { hook: "POV: my Home Screen knows what I just ate", ...POV_CAPTIONS },
+  final: FINAL_J,
+  voLen: voJ1,
+};
+export const J2_PHONE: SpecJ = {
+  id: "J2-journey-phone",
+  template: "J",
+  framing: "phone",
+  vo: VO_J,
+  captions: { hook: "From your plate to your Home Screen" },
+  final: FINAL_J,
+  voLen: voJ2,
+};
+export const J3_PHOTO: SpecJ = {
+  id: "J3-journey-photo",
+  template: "J",
+  framing: "photo",
+  vo: VO_J,
+  captions: { hook: "I scanned my lunch. Look where it ended up.", ...POV_CAPTIONS },
+  final: FINAL_J,
+  voLen: voJ3,
+};
