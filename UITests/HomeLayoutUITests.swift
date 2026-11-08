@@ -41,7 +41,7 @@ extension ProfileUITests {
         XCTAssertFalse(app.buttons["daily-grow-nutrition"].exists, "Le « + » reste hors du mode édition")
     }
 
-    /// The Habits card across the whole width (request of 2026-11-08): one row a habit, its ring of today and its
+    /// The Habits card across the whole width (request of 2026-11-08, Build 372): one row a habit, its ring of today and its
     /// last days as small squares, like the medium Habits widget; next to another card, its rings as before. The rows
     /// sit in the card's link, so the test reads what VoiceOver says: each row gives its habit's regularity, which only
     /// the card across the width says. The size is applied once the app has started (`ScreenshotMode`), hence the
