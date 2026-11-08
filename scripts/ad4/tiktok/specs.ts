@@ -19,11 +19,15 @@ export const A_WIDGETS: SpecA = {
   ],
 };
 
+/** Upbeat music of the ads (music_tiktok.py, 2026-11-08), instead of the calm lifestyle score. */
+const MUSIC_UPBEAT = "tiktok/music-entrain.wav";
+
 // Layout grid of a page (1080 x 1920): a full-width row at y 430, a row of two at y ~860, a Lock Screen strip at y ~1307.
 // Every widget kind on the pages is a FREE kind in the light style (Faits-verifies.md §1); the Premium styles are in the carousel.
 export const C_WIDGETS: SpecC = {
   id: "C-widgets",
   template: "C",
+  music: MUSIC_UPBEAT,
   voLen: voC,
   introSpeed: 1.15, // asked by the user on 2026-11-06: from the start up to the styles carousel
   // hook as a question, then its answer (2026-11-08); the former title « 3 widget sets / that run my whole day » is the promise under it
@@ -145,6 +149,7 @@ import voW1 from "./vo/W1-workout-phone.json";
 export const W1_WORKOUT: SpecW = {
   id: "W1-workout-phone",
   template: "W",
+  music: MUSIC_UPBEAT,
   // hook as a question, then its answer (2026-11-08; before: « From the library to your Lock Screen »)
   hook: "Want to level up your workouts?",
   answer: { text: "Meet Ardane", vo: "hook2" },
@@ -162,6 +167,7 @@ import voS1 from "./vo/S1-student-notebook.json";
 export const S1_STUDENT: SpecS = {
   id: "S1-student-notebook",
   template: "S",
+  music: MUSIC_UPBEAT,
   captions: {
     // hook as a question, then its answer (2026-11-08; before: « my whole semester / from 1 photo »)
     hook: ["don't know how to", "manage your schedule?"],
