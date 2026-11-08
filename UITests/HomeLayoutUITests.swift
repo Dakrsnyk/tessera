@@ -43,7 +43,8 @@ extension ProfileUITests {
 
     /// Edit mode: a card held half a second then dragged onto its neighbour takes its place (and back, so the
     /// order the other tests see is unchanged), and a quick swipe over a card scrolls Home instead of lifting it
-    /// (remark of 2026-11-05 on Build 340, `DailyHoldToMove`).
+    /// (remark of 2026-11-05 on Build 340, `DailyHoldToMove`). The neighbour is the left half card of the row under
+    /// the wide Nutrition card: dropped there, the card changed the order without moving on screen until Build 366.
     func testDailyEditModeMovesHeldCardsAndScrollsOnSwipe() throws {
         continueAfterFailure = false
         let app = XCUIApplication()

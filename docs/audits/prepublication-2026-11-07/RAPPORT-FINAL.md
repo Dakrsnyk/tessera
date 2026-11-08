@@ -38,6 +38,7 @@ Toutes les exécutions sont sur la CI (Xcode 26.3, build 17C529, simulateur iOS 
 | 42421136593 | `[daily] [release]` | logique 1 361 / 1 361 ; interface 29 / 31 ; Release sans déverrouillage de test | voir les 2 échecs ci-dessous |
 | 42429465658 | version interne | Build 364 signé et envoyé sur TestFlight ; contrôles des binaires réussis ; « Internal Only » confirmé | installé par l'utilisateur pour les tests de la section G |
 | 42430789992 | `[daily]` | logique **1 362 / 1 362** ; interface **31 / 31** | les 2 échecs ci-dessous réussissent ; le second cachait un vrai défaut, corrigé ensuite |
+| 42437604175 | version interne | Build 366 (correctif « Organiser ») signé et envoyé sur TestFlight ; une identité de signature ; contrôles des binaires réussis ; « Internal Only » confirmé | à tester sur l'iPhone (section G, point 10) |
 
 Les 5 échecs du `[unit]` :
 - `WeightPlanModelTests` : pendant une grossesse, le calcul automatique garde désormais le maintien (garde-fou N-04). Le test attend ce maintien.
@@ -232,4 +233,4 @@ Voir `confidentialite-conformite.md` §8 (champ par champ) et `docs/lancement/fi
 - Vérifiée en CI (run 42421136593, Build 363) : la version Release, en configuration App Store, compile pour le simulateur. Les binaires de l'app et de l'extension ne contiennent ni le déverrouillage de test ni les écrans de capture : 0 trouvé.
 - La version Release signée et envoyée sur TestFlight (`[testflight]`) n'est produite qu'avec l'accord explicite de l'utilisateur. Elle sera la version à choisir dans App Store Connect › Build.
 - La version interne Premium (`[interne]`) suit la règle du projet : elle est envoyée après chaque série de corrections, pour les tests sur l'iPhone. Apple la bloque pour l'App Store et les testeurs externes.
-- Dernière version interne vérifiée : Build 364 (run 42429465658), signée avec une seule identité. Archive, export et contrôles des binaires de l'app et de l'extension réussis ; étiquette « Internal Only » confirmée par l'API d'Apple. Le rapport public de la CI ne contient ni l'identité de signature ni l'identifiant des profils.
+- Dernière version interne vérifiée : Build 366 (run 42437604175, correctif « Organiser »), comme le Build 364 (run 42429465658) avant elle, signée avec une seule identité. Archive, export et contrôles des binaires de l'app et de l'extension réussis ; étiquette « Internal Only » confirmée par l'API d'Apple. Le rapport public de la CI ne contient ni l'identité de signature ni l'identifiant des profils.
