@@ -201,4 +201,5 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
   - puis une ligne par habitude (5 au plus) : anneau du jour, nom, derniers jours en petits carrés (aujourd'hui en dernier), avec les règles du widget Habitudes (`HabitHeatmap`) ;
   - à demi-largeur à côté d'une autre carte, rien ne change.
 - Test d'interface `testDailyHabitsCardShowsARowOfDaysPerHabitWhenWide` (mode capture `home-habits-wide`, capture `profile-daily-habits-wide`). Relu par code-reviewer, sans bloquant.
+- Version interne (commit 0243bd38, run 42513932293) : non lancée, le dépôt est privé et le compte n'a pas de minutes macOS (« spending limit »). À relancer (`gh run rerun 42513932293`) une fois le budget réglé ou le dépôt rendu public.
 - Reste : version interne, puis `[daily]` (test et capture), puis l'iPhone.
