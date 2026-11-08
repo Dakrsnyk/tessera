@@ -35,7 +35,7 @@ struct DailyPager<Content: View>: View {
             .overlay(alignment: .top) {
                 if editing {
                     // « Organiser… »: the card is moved, never swiped, so its view stays still and fills the card. The
-                    // paging scroll of the card held for the menu stopped 40 points between two views (Build 366).
+                    // paging scroll of the card held for the menu stopped 40 points between two views (Builds 365 to 367).
                     content(page)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 } else {

@@ -46,7 +46,7 @@ extension ProfileUITests {
     /// (remark of 2026-11-05 on Build 340, `DailyHoldToMove`). The neighbour is the left half card of the row under
     /// the wide Nutrition card: dropped there, the card changed the order without moving on screen until Build 366.
     /// All along, the view of the Nutrition card fills the card: the card held for the menu showed its first view
-    /// 40 points to the left, the next one showing at its right edge, in the edit mode until Build 366.
+    /// 40 points to the left, the next one showing at its right edge, in the edit mode until Build 368.
     func testDailyEditModeMovesHeldCardsAndScrollsOnSwipe() throws {
         continueAfterFailure = false
         let app = XCUIApplication()
