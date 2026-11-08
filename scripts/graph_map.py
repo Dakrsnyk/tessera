@@ -262,7 +262,7 @@ MODULES = [
     {"file": "Premium-et-abonnements", "title": "Premium et abonnements", "zone": "metier",
      "role": "Achats StoreKit 2 : l'App Store fait foi, le résultat est mis en cache pour l'extension. Le paywall s'ouvre sur ce que la personne a touché.",
      "features": [
-         "Produits (`Config/Ardane.storekit`) : `com.dakrsnyk.ardane.premium.lifetime` (achat unique), `.monthly` et `.yearly` (abonnements).",
+         "Produits vendus au lancement : `com.dakrsnyk.ardane.premium.monthly` et `.yearly`, abonnements avec essai gratuit de 7 jours. L'achat unique `.lifetime` reste demandé par le code et dans `Config/Ardane.storekit` (tests), mais n'est pas créé dans App Store Connect (décision du 2026-11-08) ; la page Premium ne liste que les offres qui existent, sa mention légale aussi.",
          "Paywall contextuel (`PaywallContext`) : widget, limite de widgets ou d'habitudes, historique, écran d'accueil, pack.",
          "Limites gratuites (3 widgets, photos et citations illimitées, 5 habitudes), accents gratuits (`Palette`), cadenas Premium (`PremiumLock`).",
          "Premium depuis le 2026-10-15 : statistiques détaillées de chaque mini-app, toute la bibliothèque d'exercices et leurs données, tous les nutriments sauf calories, protéines, glucides et lipides, l'icône de l'app (l'icône en place est gardée) ; les données ne sont jamais effacées.",

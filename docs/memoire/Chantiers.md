@@ -189,4 +189,5 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Version interne Build 368 (commit 04f6a867, run 42444945759) : vue fixe en mode « Organiser », contrôles réussis, « Internal Only » confirmé.
 - Run 42446155983 (Build 369, sans Premium) : 1 370 tests logiques réussis sur 1 370 ; interface 30 sur 31. Vue fixe confirmée (mesure aux 4 moments). Échec intermittent de `testMonQuotidienOpensAMiniApp` (déjà au run 337) : course avec la remise à zéro des vues en mode capture ; le test attend maintenant « Vue 1 sur 3 ».
 - 2026-11-08 : pas d'achat à vie au lancement (décision de l'utilisateur) : mention légale conditionnelle, fiche, notes et guide mis à jour.
-- Reste : version interne de ces deux changements, puis `[daily]` ; tests manuels de la section G sur l'iPhone ; actions de l'utilisateur (contrat Paid Apps, DSA, 3 produits, questionnaires, dépôt privé, clés de signature, réglages GitHub) ; `[testflight]` seulement sur son accord.
+- Version interne Build 370 (commit 24c73e36, run 42451125218) : sans achat à vie, contrôles réussis, « Internal Only » confirmé.
+- Reste : `[daily]` de ces deux changements ; tests manuels de la section G sur l'iPhone ; actions de l'utilisateur (contrat Paid Apps, DSA, 3 produits, questionnaires, dépôt privé, clés de signature, réglages GitHub) ; `[testflight]` seulement sur son accord.
