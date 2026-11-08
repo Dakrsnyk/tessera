@@ -8,14 +8,14 @@
 
 ## A. État général
 
-| Élément | Avant (run 42409228969, commit 6fad886f) | Après les corrections (runs 42421136593 Build 363 à 42446155983 Build 369) |
+| Élément | Avant (run 42409228969, commit 6fad886f) | Après les corrections (runs 42421136593 Build 363 à 42452111696 Build 371) |
 |---|---|---|
 | Compilation de l'app et de l'extension (simulateur et iPhone non signé) | réussie | réussie |
 | Version Release (configuration App Store, simulateur) | réussie | réussie (Build 363) ; déverrouillage de test trouvé dans les binaires de l'app et de l'extension : **0** |
 | Version interne signée (TestFlight, Premium débloqué) | — | Builds 364, 366, 368 et 370 : archive, export et contrôles des binaires réussis ; « Internal Only » confirmé par l'API d'Apple |
-| Tests logiques | 1 241 réussis / 1 241 | **1 370 réussis / 1 370** (+129, Builds 367 et 369) |
-| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **31 réussis / 31** (Builds 365 et 367), après correction des défauts qu'ils avaient révélés (section A.2) ; Build 369 : 30 / 31, un échec intermittent déjà vu au run 337, test corrigé (A.2, point 4) |
-| Contrôles statiques (`check_swift.py`) et traductions | réussis | réussis ; 5 679 textes, 0 absent du catalogue, 0 non traduit, 0 inutilisé |
+| Tests logiques | 1 241 réussis / 1 241 | **1 370 réussis / 1 370** (+129, Builds 367, 369 et 371) |
+| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **31 réussis / 31** (Builds 365, 367 et 371), après correction des défauts qu'ils avaient révélés (section A.2) ; Build 369 : 30 / 31, un échec intermittent déjà vu au run 337, test corrigé puis réussi au Build 371 (A.2, point 4) |
+| Contrôles statiques (`check_swift.py`) et traductions | réussis | réussis ; 5 680 textes, 0 absent du catalogue, 0 non traduit, 0 inutilisé (Build 371) |
 | Tests non exécutés | aucun test ignoré ; les tests de pub et de vidéo ne font pas partie de `[daily]` | idem |
 | Couverture de code | non mesurée (la CI ne produit pas de rapport de couverture) | non mesurée |
 
@@ -43,6 +43,7 @@ Toutes les exécutions sont sur la CI (Xcode 26.3, build 17C529, simulateur iOS 
 | 42444945759 | version interne | Build 368 (vue fixe en mode « Organiser ») signé et envoyé sur TestFlight ; une identité de signature ; contrôles des binaires réussis ; « Internal Only » confirmé | à tester sur l'iPhone (section G, point 10) |
 | 42446155983 | `[daily]` | logique **1 370 / 1 370** ; interface **30 / 31** : le glisser réussit avec la mesure d'alignement aux 4 moments ; `testMonQuotidienOpensAMiniApp` échoue | vue fixe confirmée ; l'échec est intermittent et ancien (point 4 ci-dessous) |
 | 42451125218 | version interne | Build 370 (sans achat à vie, test solide) signé et envoyé sur TestFlight ; une identité de signature ; contrôles des binaires réussis ; « Internal Only » confirmé | à tester sur l'iPhone (section G) |
+| 42452111696 | `[daily]` | logique **1 370 / 1 370** ; interface **31 / 31**, dont `testMonQuotidienOpensAMiniApp` et le glisser avec sa mesure d'alignement ; traductions : 5 680 textes, aucun manquant ni inutilisé | retrait de l'achat à vie compilé et vérifié sans Premium (Build 371) ; test du point 4 réussi |
 
 Les 5 échecs du `[unit]` :
 - `WeightPlanModelTests` : pendant une grossesse, le calcul automatique garde désormais le maintien (garde-fou N-04). Le test attend ce maintien.
@@ -84,7 +85,7 @@ Les 2 échecs d'interface du run 42421136593 :
    - Constat : « La mini-app Nutrition doit s'ouvrir » aux runs 337 (2026-11-05, avant ces corrections) et 42446155983 ; réussi aux runs 338, 359, 363, 365 et 367. À l'échec, l'app est sur l'accueil, carte Nutrition alignée sur sa première vue.
    - Cause probable (la CI n'a gardé ni vidéo ni capture) : le test précédent laisse la carte sur « Repas », et `-screenshotScreen home` ne la remet sur sa première vue qu'après le premier affichage. Le test prenait le premier lien touchable des deux premières vues, parfois avant ce retour : le lien glissait sous le toucher. Ce retour n'existe qu'en mode capture, pas pour un utilisateur.
    - Correction du test : il attend « Vue 1 sur 3 » avant de toucher la carte, et garde une capture si Nutrition ne s'ouvre pas. Ce qu'il vérifie ne change pas.
-   - À confirmer par les runs suivants.
+   - Réussi au run 42452111696 (Build 371). Un seul passage ne prouve pas que l'intermittence a disparu : à surveiller aux prochains `[daily]`.
 
 ## B. Résultats par domaine
 
@@ -102,7 +103,7 @@ Constats, puis corrections :
 | Confidentialité et conformité | 3 de processus / 5 / 10 | P-04, P-05, P-06, P-07 | — | `confidentialite-conformite.md` |
 | Sécurité | 0 critique / 1 élevé / 2 moyens / 7 faibles | S-05 (script), S-07, S-08, S-09 | — | hors dépôt (voir C) |
 
-En tout : 161 constats, plus deux défauts du mode « Organiser » trouvés par les tests d'interface et leurs captures. Le nombre de tests logiques exécutés passe de 1 241 à 1 361 (+120), puis 1 362 avec le test de l'alerte de repos, puis 1 370 avec les 8 tests du déplacement des cartes (vérifié au run 42438964850).
+En tout : 161 constats, plus deux défauts du mode « Organiser » trouvés par les tests d'interface et leurs captures. Le nombre de tests logiques exécutés passe de 1 241 à 1 361 (+120), puis 1 362 avec le test de l'alerte de repos, puis 1 370 avec les 8 tests du déplacement des cartes (vérifié aux runs 42438964850, 42446155983 et 42452111696).
 
 ## C. Sécurité et confidentialité
 
@@ -197,7 +198,7 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 ### Encore ouverts
 - Chiffrement et remplacement des clés de signature.
 - Réglages GitHub : ruleset de `main`, actions limitées et épinglées.
-- Les deux correctifs du mode « Organiser » sur l'iPhone (G, point 10) ; le test corrigé du point 4 de A.2 à confirmer par la CI.
+- Les deux correctifs du mode « Organiser » sur l'iPhone (G, point 10). Le test corrigé du point 4 de A.2 a réussi au run 42452111696 ; à surveiller.
 
 ### Facultatifs (après le lancement)
 - Tests de performance en CI (R-01), budget de taille des modèles (R-04), fichier `cnf-foods.json` en double (R-03).
@@ -219,6 +220,7 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
    - Essai sur le mensuel, annulation dans Réglages, puis l'annuel (l'essai ne doit plus être proposé).
    - Restauration après une réinstallation.
    - Le paywall ne propose l'essai qu'une seule fois.
+   - La page Premium ne propose que le mensuel et l'annuel, et sa mention légale ne parle pas d'achat à vie (décision du 2026-11-08). Les captures de la CI ne montrent que le haut de la page ; le texte légal se vérifie ici.
 6. **Mode gratuit.** Limite de 3 widgets, 5 habitudes (le « + » ouvre Premium), 10 analyses, styles verrouillés, Studio (« Autres widgets »).
 7. **Données.**
    - Installer la nouvelle version PAR-DESSUS l'ancienne : toutes les données restent.
@@ -241,15 +243,19 @@ Voir `confidentialite-conformite.md` §8 (champ par champ) et `docs/lancement/fi
   - bannières Header et Search Results ;
   - notes pour l'examinateur, version corrigée ;
   - URL d'assistance et de confidentialité, copyright ;
-  - réponses App Privacy et âge recommandées.
+  - réponses App Privacy et âge recommandées ;
+  - 8 captures iPhone 6,9 pouces (1320 × 2868, en anglais), à déposer dans l'ordre 1 à 8 : `pub/Ardane_AppStore_Design/23_BigTitle_B_final/Publication_1320x2868/` (hors dépôt).
+- Saisie en cours par l'utilisateur le 2026-11-08, d'après ses captures :
+  - les 2 abonnements Premium, chacun avec son essai d'une semaine (pas d'achat à vie) ;
+  - confidentialité de l'app ;
+  - tarifs et disponibilité (tous les pays sauf la Chine continentale) ;
+  - informations sur l'app, classification **9+** confirmée.
 - À faire :
-  - contrat Paid Apps ;
-  - 2 abonnements Premium, chacun avec son essai d'une semaine ;
-  - prix et pays (UE ou non) ;
-  - questionnaires ;
+  - déclaration DSA (statut de commerçant), par l'utilisateur ;
+  - page de la version 1.0 : textes de la fiche, captures, URL, copyright, notes pour l'examinateur, « Manually release this version » ;
+  - contrat Paid Apps, formulaires fiscaux, compte bancaire ;
   - captures en français (facultatives) ;
-  - choix du build ;
-  - « Manually release this version ».
+  - choix du build `[testflight]` (sur accord) et ajout des 2 abonnements à la version, puis soumission.
 
 ## I. Build Release
 - Vérifiée en CI (run 42421136593, Build 363) : la version Release, en configuration App Store, compile pour le simulateur. Les binaires de l'app et de l'extension ne contiennent ni le déverrouillage de test ni les écrans de capture : 0 trouvé.
