@@ -273,6 +273,16 @@ Retour : [[Memoire]]
 - [ ] **Scanner alimentaire : mission « 90 / 80 / 90 »** (demandée le 2026-11-04) : pause et sauvegarde (fait, `docs/memoire/Reprise-scanner-2026-11-04.md`), audit, recherche approfondie, comparaison, plan d'action en 7 phases (livré le 2026-11-04 : `docs/scanner/Plan-scanner-90-80-90-2026-11-04.md`, **validé le 2026-11-05** ; phase 1 faite le 2026-11-05 : Build 330 interne sur TestFlight, tests verts au Build 331 ; phase 2 : segmenteur Small sur Kaggle à partir du 2026-11-07). Inclut : ajout automatique au-dessus d'un seuil de confiance garanti, écran de scan agrandi « Code-barres ou aliments » (maquette), audit du poids de l'app.
 - [x] **Deux erreurs d'affichage du Build 330** (demandées le 2026-11-05, captures de l'iPhone) : cadre de scan trop court (250 pt au lieu d'environ 444) et voile coupé au-dessus des boutons ; « Estimation » écrasé lettre par lettre à côté de « Ton habitude » ; en plus, « 209,95 g » arrondi au gramme. Fait le 2026-11-05 (compilation au Build 332, version interne au Build 333, tests verts au Build 334 : 1 211 tests, aucun échec).
 - [x] **Retirer l'achat à vie** (demandé le 2026-11-08, pendant la saisie d'App Store Connect ; fait le 2026-11-08) : seulement le mensuel et l'annuel avec essai de 7 jours. Mention légale de la page Premium sans l'achat à vie quand il n'existe pas (traduite dans les 6 langues), fiche App Store, notes pour l'examinateur et guide Premium mis à jour. Confirmé par la CI : run 42452111696 (Build 371, sans Premium), compilation, 1 370 tests logiques et 31 tests d'interface réussis, traductions complètes. Le produit n'est jamais créé dans App Store Connect. Le texte légal se vérifie à l'œil sur la version `[testflight]` (rapport final, section G, point 5).
+- [ ] **Finances : connecter sa banque, ou mieux suivre ses dépenses qu'avec Apple Pay seul** (demandé le 2026-11-08, pendant la pause de la soumission). Réponse du 2026-11-08, choix de l'utilisateur attendu :
+  - **Connexion directe déconseillée pour l'instant :**
+    - l'open banking canadien n'est pas en service (consultation de la Banque du Canada sur l'accréditation jusqu'au 2026-12-08, sans date de lancement) ;
+    - un agrégateur (Plaid, Flinks) exige un serveur, un coût par compte connecté et un examen de sécurité, et ferait passer App Privacy à des données financières collectées ;
+    - risque de refus 5.1.1(ix) avec un compte Apple individuel (entreprise individuelle) ;
+    - FinanceKit : États-Unis et Royaume-Uni seulement, catégorie Finance exigée.
+  - **Proposé, tout sur l'iPhone :**
+    1. import des relevés CSV et OFX (Desjardins les fournit dans AccèsD sur le Web), en réutilisant le lecteur CSV de Mon entreprise, avec détection des doublons (Apple Pay compris) et les catégories apprises ;
+    2. alertes de la banque par texto, passées à Ardane par l'automatisation Raccourcis « Message » ;
+    3. scan des reçus.
 - [ ] Premium Nutrition : « Faire mes repas » sous le compteur calorique (questionnaire de goûts, budget, magasin, liste de courses d'un seul magasin, provenance et date des prix) (§6).
 
 ## Idées pour plus tard
