@@ -16,6 +16,8 @@ export type SpecC = {
   template: "C";
   music?: string;
   hook: { title: string; subtitle: string; vo: string };
+  /** The hook as a question (hook.title), then its answer (« Meet Ardane », asked on 2026-11-08) with the app icon and `sub`. */
+  answer?: { text: string; vo: string; sub?: string };
   pages: PageC[];
   styles: { homes: string[]; caption: string; caption2?: string; vo: string; premium: boolean };
   end: { line: string; sub: string; vo: string };
@@ -34,12 +36,29 @@ const LEAD = 0.25; // the voice starts this long after the cut
 const Speed = createContext(1);
 const useF = () => useCurrentFrame() * useContext(Speed);
 
+/** With an answer, the question starts at once and the answer follows a short beat later; the hook keeps its former
+ * length (2026-11-08: the hook improves, the ad does not get longer). */
+const HOOK_LEAD = 0.1;
+const HOOK_GAP = 0.1;
+const HOOK_TAIL = 0.17;
+
+/** The voice lines of a part and when each starts (s of the part's own time, before its speed). */
+const voicesC = (s: SpecC, key: string, vo: string) =>
+  key === "hook" && s.answer
+    ? [
+        { vo: s.hook.vo, at: HOOK_LEAD },
+        { vo: s.answer.vo, at: HOOK_LEAD + (s.voLen[s.hook.vo] ?? 0) + HOOK_GAP },
+      ]
+    : [{ vo, at: LEAD }];
+
 /** Every part of the ad with its start and length in frames (the voice sets the rhythm). */
 export const timeline = (s: SpecC) => {
   const sec = (vo: string, min: number, tail: number) => Math.max(min, (s.voLen[vo] ?? 0) + LEAD + tail);
   const fast = s.introSpeed ?? 1;
+  const answer = voicesC(s, "hook", s.hook.vo)[1];
+  const hookSec = answer ? Math.max(2.4, answer.at + (s.voLen[answer.vo] ?? 0) + HOOK_TAIL) : sec(s.hook.vo, 2.4, 0.4);
   const parts: { key: string; vo: string; dur: number; speed: number }[] = [
-    { key: "hook", vo: s.hook.vo, dur: sec(s.hook.vo, 2.4, 0.4) / fast, speed: fast },
+    { key: "hook", vo: s.hook.vo, dur: hookSec / fast, speed: fast },
     ...s.pages.map((p, i) => ({ key: `page${i}`, vo: p.vo, dur: sec(p.vo, 3.6, 0.5) / fast, speed: fast })),
     { key: "styles", vo: s.styles.vo, dur: sec(s.styles.vo, 4.8, 1.3), speed: 1 },
     { key: "end", vo: s.end.vo, dur: sec(s.end.vo, 3.0, 0.8), speed: 1 },
@@ -73,6 +92,45 @@ const Hook: React.FC<{ hook: SpecC["hook"] }> = ({ hook }) => {
     <AbsoluteFill style={{ background: CREAM, alignItems: "center", justifyContent: "center", paddingBottom: 300 }}>
       <div style={{ ...text(150, 900), transform: `scale(${1.25 - 0.25 * a})`, opacity: Math.min(1, a * 2) }}>{hook.title}</div>
       <div style={{ ...text(76, 700), marginTop: 26, maxWidth: 900, transform: `translateY(${(1 - b) * 40}px)`, opacity: b }}>{hook.subtitle}</div>
+    </AbsoluteFill>
+  );
+};
+
+/** The hook as a question and its answer (2026-11-08): the question's words punch in with the voice, then it moves up
+ * and shrinks while the app icon pops, « Meet Ardane » and the ad's promise (`sub`) come in under it. */
+const HookQA: React.FC<{ spec: SpecC }> = ({ spec }) => {
+  const f = useF();
+  const { fps } = useVideoConfig();
+  const [q, a] = voicesC(spec, "hook", spec.hook.vo);
+  const answer = spec.answer!;
+  const qFrames = (spec.voLen[q.vo] ?? 1) * FPS;
+  const at = Math.round(a.at * FPS) - 2;
+  const words = spec.hook.title.split(" ");
+  const word = (i: number) => {
+    const t0 = q.at * FPS + (i * qFrames * 0.8) / words.length;
+    return interpolate(f, [t0, t0 + 4], [0, 1], clamp);
+  };
+  const up = spring({ frame: f - at, fps, config: { damping: 16, stiffness: 140 } });
+  const pop = spring({ frame: f - at, fps, config: { damping: 12, stiffness: 180 } });
+  const sub = spring({ frame: f - at - 7, fps, config: { damping: 15, stiffness: 160 } });
+  return (
+    <AbsoluteFill style={{ background: CREAM }}>
+      <div style={{ position: "absolute", left: 70, right: 70, top: interpolate(up, [0, 1], [640, 250]), transform: `scale(${1 - 0.22 * up})`, transformOrigin: "50% 0" }}>
+        <div style={text(112, 900)}>
+          {words.map((w, i) => (
+            <span key={i} style={{ display: "inline-block", opacity: word(i), transform: `scale(${1.25 - 0.25 * word(i)})`, marginRight: i < words.length - 1 ? "0.26em" : 0 }}>
+              {w}
+            </span>
+          ))}
+        </div>
+      </div>
+      {f >= at && (
+        <>
+          <Img src={staticFile("store/ardane-icon.png")} style={{ position: "absolute", left: W / 2 - 115, top: 700, width: 230, height: 230, borderRadius: 52, transform: `scale(${1.3 - 0.3 * pop})`, opacity: Math.min(1, pop * 2), boxShadow: "0 24px 50px rgba(29,78,158,0.28)" }} />
+          <div style={{ position: "absolute", top: 975, left: 0, right: 0, ...text(104, 900, BLUE), opacity: Math.min(1, pop * 2) }}>{answer.text}</div>
+          {answer.sub && <div style={{ position: "absolute", top: 1112, left: 40, right: 40, ...text(50, 700), opacity: sub, transform: `translateY(${(1 - sub) * 30}px)` }}>{answer.sub}</div>}
+        </>
+      )}
     </AbsoluteFill>
   );
 };
@@ -216,10 +274,12 @@ const End: React.FC<{ end: SpecC["end"] }> = ({ end }) => {
 export const TemplateC: React.FC<{ spec: SpecC }> = ({ spec }) => {
   const { durationInFrames } = useVideoConfig();
   const tl = timeline(spec);
-  const voAt = tl.map((p) => {
-    const start = p.from + Math.round((LEAD * FPS) / p.speed);
-    return { start, end: start + Math.round(((spec.voLen[p.vo] ?? 0) * FPS) / p.speed) };
-  });
+  const voAt = tl.flatMap((p) =>
+    voicesC(spec, p.key, p.vo).map((v) => {
+      const start = p.from + Math.round((v.at * FPS) / p.speed);
+      return { start, end: start + Math.round(((spec.voLen[v.vo] ?? 0) * FPS) / p.speed) };
+    }),
+  );
   /** 0 → 1 while the voice speaks, with 6-frame ramps so the music dips smoothly under it. */
   const duck = (fr: number) => Math.max(0, ...voAt.map((v) => interpolate(fr, [v.start - 8, v.start - 2, v.end + 2, v.end + 10], [0, 1, 1, 0], clamp)));
   return (
@@ -227,15 +287,17 @@ export const TemplateC: React.FC<{ spec: SpecC }> = ({ spec }) => {
       {tl.map((p, i) => (
         <Sequence key={p.key} from={p.from} durationInFrames={p.frames}>
           <Speed.Provider value={p.speed}>
-          {p.key === "hook" && <Hook hook={spec.hook} />}
+          {p.key === "hook" && (spec.answer ? <HookQA spec={spec} /> : <Hook hook={spec.hook} />)}
           {p.key.startsWith("page") && <Page n={i} page={spec.pages[i - 1]} />}
           {p.key === "styles" && <Styles st={spec.styles} />}
           {p.key === "end" && <End end={spec.end} />}
           </Speed.Provider>
-          <Sequence from={Math.round((LEAD * FPS) / p.speed)}>
-            {/* the voice is sped up with the picture (pitch kept by the renderer's time-stretch) */}
-            <Audio src={staticFile(`tiktok/vo/${spec.id}-${p.vo}.wav`)} volume={1} playbackRate={p.speed} />
-          </Sequence>
+          {voicesC(spec, p.key, p.vo).map((v) => (
+            <Sequence key={v.vo} from={Math.round((v.at * FPS) / p.speed)}>
+              {/* the voice is sped up with the picture (pitch kept by the renderer's time-stretch) */}
+              <Audio src={staticFile(`tiktok/vo/${spec.id}-${v.vo}.wav`)} volume={1} playbackRate={p.speed} />
+            </Sequence>
+          ))}
         </Sequence>
       ))}
       <Audio

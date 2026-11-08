@@ -10,8 +10,10 @@ export type SkinId = "brand" | "gym" | "kitchen";
 export type Skin = {
   /** Background of every phone shot. */
   Background: React.FC;
-  /** Hook title (big, top). */
-  Title: React.FC<{ text: string; f: number }>;
+  /** Hook title (big, top). `reveal`: the words appear one by one over that many frames, with the voice (2026-11-08). */
+  Title: React.FC<{ text: string; f: number; reveal?: number }>;
+  /** Answer to the hook's question (« Meet Ardane », 2026-11-08), with the app icon; `f` counts from its entrance. */
+  Answer?: React.FC<{ text: string; f: number; y: number }>;
   chip: { on: string; onText: string; off: string; offText: string; radius: number; upper: boolean };
   phoneShadow: string;
   End: React.FC;
@@ -50,12 +52,36 @@ const GymBg: React.FC = () => (
     <AbsoluteFill style={{ background: "radial-gradient(ellipse 900px 1300px at 540px 900px, transparent 40%, rgba(0,0,0,0.75) 100%)" }} />
   </AbsoluteFill>
 );
-const GymTitle: React.FC<{ text: string; f: number }> = ({ text, f }) => {
+const GymTitle: React.FC<{ text: string; f: number; reveal?: number }> = ({ text, f, reveal }) => {
   const s = interpolate(f, [0, 8], [0, 1], clamp);
+  const words = text.split(" ");
+  // each word punches in when the voice reaches it (evenly over `reveal` frames); without `reveal`, the whole title at once
+  const word = (i: number) => (reveal ? interpolate(f, [(i * reveal) / words.length, (i * reveal) / words.length + 4], [0, 1], clamp) : 1);
   return (
-    <div style={{ position: "absolute", top: 230, left: 50, right: 50, transform: `skewX(-10deg) translateX(${(1 - s) * -60}px)`, opacity: s }}>
-      <div style={{ ...t(108, 900, "#fff"), lineHeight: 0.98, textTransform: "uppercase", letterSpacing: -2, fontVariationSettings: `"opsz" 32` }}>{text}</div>
-      <div style={{ margin: "26px auto 0", width: 220 * s, height: 14, background: RED }} />
+    <div style={{ position: "absolute", top: reveal ? 200 : 230, left: 50, right: 50, transform: `skewX(-10deg) translateX(${(1 - s) * -60}px)`, opacity: s }}>
+      <div style={{ ...t(reveal ? 100 : 108, 900, "#fff"), lineHeight: 0.98, textTransform: "uppercase", letterSpacing: -2, fontVariationSettings: `"opsz" 32` }}>
+        {reveal
+          ? words.map((w, i) => (
+              <span key={i} style={{ display: "inline-block", opacity: word(i), transform: `scale(${1.25 - 0.25 * word(i)})`, marginRight: i < words.length - 1 ? "0.24em" : 0 }}>
+                {w}
+              </span>
+            ))
+          : text}
+      </div>
+      <div style={{ margin: "26px auto 0", width: 220 * (reveal ? word(words.length - 1) : s), height: 14, background: RED }} />
+    </div>
+  );
+};
+/** « MEET ARDANE » on a red slab, the app icon on its left, punching in like a gym poster stamp. */
+const GymAnswer: React.FC<{ text: string; f: number; y: number }> = ({ text, f, y }) => {
+  const { fps } = useVideoConfig();
+  const s = spring({ frame: f, fps, config: { damping: 12, stiffness: 190 } });
+  return (
+    <div style={{ position: "absolute", top: y, left: 0, right: 0, display: "flex", justifyContent: "center", opacity: interpolate(f, [0, 3], [0, 1], clamp), transform: `skewX(-10deg) scale(${1.35 - 0.35 * s})` }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 24, background: RED, padding: "16px 40px 16px 18px", borderRadius: 10, boxShadow: "0 24px 60px rgba(229,72,77,0.4)" }}>
+        <Img src={staticFile("store/ardane-icon.png")} style={{ width: 108, height: 108, borderRadius: 25, transform: "skewX(10deg)" }} />
+        <div style={{ ...t(86, 900, "#fff"), textTransform: "uppercase", letterSpacing: 1, whiteSpace: "nowrap", fontVariationSettings: `"opsz" 32` }}>{text}</div>
+      </div>
     </div>
   );
 };
@@ -132,6 +158,7 @@ export const SKINS: Record<SkinId, Skin> = {
   gym: {
     Background: GymBg,
     Title: GymTitle,
+    Answer: GymAnswer,
     chip: { on: RED, onText: "#fff", off: "#1E1E21", offText: "#8E8E94", radius: 8, upper: true },
     phoneShadow: `0 50px 90px rgba(0,0,0,0.7), 0 0 0 3px rgba(229,72,77,0.55), 0 0 90px rgba(229,72,77,0.22)`,
     End: GymEnd,

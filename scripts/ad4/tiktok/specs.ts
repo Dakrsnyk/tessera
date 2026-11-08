@@ -26,7 +26,9 @@ export const C_WIDGETS: SpecC = {
   template: "C",
   voLen: voC,
   introSpeed: 1.15, // asked by the user on 2026-11-06: from the start up to the styles carousel
-  hook: { title: "3 widget sets", subtitle: "that run my whole day", vo: "hook" },
+  // hook as a question, then its answer (2026-11-08); the former title « 3 widget sets / that run my whole day » is the promise under it
+  hook: { title: "Too many apps to run your day?", subtitle: "", vo: "hook" },
+  answer: { text: "Meet Ardane", vo: "hook2", sub: "3 widget sets that run my whole day" },
   pages: [
     {
       label: "Food",
@@ -143,7 +145,9 @@ import voW1 from "./vo/W1-workout-phone.json";
 export const W1_WORKOUT: SpecW = {
   id: "W1-workout-phone",
   template: "W",
-  hook: "From the library to your Lock Screen",
+  // hook as a question, then its answer (2026-11-08; before: « From the library to your Lock Screen »)
+  hook: "Want to level up your workouts?",
+  answer: { text: "Meet Ardane", vo: "hook2" },
   skin: "gym",
   steps: { build: "Build", train: "Train", widget: "Widget", lock: "Lock Screen" },
   vo: { hook: "hook", build: "build", train: "train", widget: "widget", lock: "lock", end: "end" },
@@ -159,13 +163,15 @@ export const S1_STUDENT: SpecS = {
   id: "S1-student-notebook",
   template: "S",
   captions: {
-    hook: ["my whole semester", "from 1 photo"],
+    // hook as a question, then its answer (2026-11-08; before: « my whole semester / from 1 photo »)
+    hook: ["don't know how to", "manage your schedule?"],
     snap: ["snap the schedule"],
     import: ["read on my iPhone"],
     week: ["every class + room"],
     create: ["go Large,", "match my wallpaper"],
     home: ["my whole week", "on my Home Screen"],
   },
+  answer: { text: "Ardane is here for you", vo: "hook2" },
   vo: { hook: "hook", snap: "snap", import: "import", week: "week", create: "create", home: "home", end: "end" },
   voLen: voS1,
 };

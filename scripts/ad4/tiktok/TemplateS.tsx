@@ -15,6 +15,8 @@ export type SpecS = {
   template: "S";
   music?: string;
   captions: Record<Exclude<PartS, "end">, string[]>;
+  /** The hook as a question (captions.hook), then its answer (« Ardane is here for you. », asked on 2026-11-08). */
+  answer?: { text: string; vo: string };
   vo: Record<PartS, string>;
   voLen: Record<string, number>;
 };
@@ -39,10 +41,24 @@ const HOME_WIDGET = "timetable-l-planning";
 const MIN: Record<PartS, number> = { hook: 2.6, snap: 2.0, import: 5.6, week: 2.6, create: (STU_END + STU_SAVE + 10) / FPS, home: 3.4, end: 2.8 };
 const TAIL: Record<PartS, number> = { hook: 0.3, snap: 0.3, import: 0.3, week: 0.4, create: 0.3, home: 0.5, end: 0.6 };
 
+/** With an answer, the question starts almost at once and the answer follows a short beat later (2026-11-08). */
+const HOOK_LEAD = 0.15;
+const HOOK_GAP = 0.15;
+
+/** The voice lines of a part and when each starts (s from the part's start). */
+const voicesS = (s: SpecS, key: PartS) =>
+  key === "hook" && s.answer
+    ? [
+        { vo: s.vo.hook, at: HOOK_LEAD },
+        { vo: s.answer.vo, at: HOOK_LEAD + (s.voLen[s.vo.hook] ?? 0) + HOOK_GAP },
+      ]
+    : [{ vo: s.vo[key], at: LEAD }];
+
 export const timelineS = (s: SpecS) => {
   let from = 0;
   return ORDER.map((key) => {
-    const d = Math.round(Math.max(MIN[key], (s.voLen[s.vo[key]] ?? 0) + LEAD + TAIL[key]) * FPS);
+    const last = voicesS(s, key).slice(-1)[0];
+    const d = Math.round(Math.max(MIN[key], last.at + (s.voLen[last.vo] ?? 0) + TAIL[key]) * FPS);
     const r = { key, from, frames: d };
     from += d;
     return r;
@@ -114,6 +130,31 @@ const Titles: React.FC<{ lines: string[]; f: number }> = ({ lines, f }) => (
   </>
 );
 
+/** The hook as a question and its answer (2026-11-08): the question's lines are highlighted as the voice says them, then
+ * « Ardane is here for you » under the paper schedule, with the app icon taped above it like a sticker. */
+const HookQA: React.FC<{ spec: SpecS; f: number }> = ({ spec, f }) => {
+  const { fps } = useVideoConfig();
+  const [q, a] = voicesS(spec, "hook");
+  const lines = spec.captions.hook;
+  const qFrames = (spec.voLen[q.vo] ?? 1) * FPS;
+  const answerAt = Math.round(a.at * FPS) - 2;
+  const pop = spring({ frame: f - answerAt, fps, config: { damping: 12, stiffness: 170 } });
+  return (
+    <>
+      {lines.map((l, i) => (
+        <Marker key={l} text={l} f={f} at={Math.round(q.at * FPS + (i * qFrames * 0.5) / Math.max(1, lines.length - 1))} y={140 + i * 100} size={72} rot={i % 2 ? 1.5 : -2} />
+      ))}
+      {f >= answerAt && (
+        <div style={{ position: "absolute", left: W / 2 - 120, top: 1270, transform: `rotate(-5deg) scale(${1.4 - 0.4 * pop})`, opacity: Math.min(1, pop * 2) }}>
+          <Img src={staticFile("store/ardane-icon.png")} style={{ width: 240, height: 240, borderRadius: 54, boxShadow: "0 16px 32px rgba(0,0,0,0.25)" }} />
+          <Tape x={40} y={-26} rot={-8} w={170} />
+        </div>
+      )}
+      {f >= answerAt && spec.answer && <Marker text={spec.answer.text} f={f} at={answerAt + 3} y={1560} size={80} rot={-1.5} />}
+    </>
+  );
+};
+
 const PartView: React.FC<{ part: PartS; spec: SpecS }> = ({ part, spec }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -183,7 +224,7 @@ const PartView: React.FC<{ part: PartS; spec: SpecS }> = ({ part, spec }) => {
           <Doodle f={f} at={40} dur={14} d="M 878 512 C 912 512 898 610 903 705 C 906 765 913 786 936 792 C 913 798 906 818 903 878 C 898 975 912 1072 878 1072" width={12} color={PEN} />
         </>
       )}
-      <Titles lines={spec.captions[part]} f={f} />
+      {part === "hook" && spec.answer ? <HookQA spec={spec} f={f} /> : <Titles lines={spec.captions[part]} f={f} />}
       {(part === "import" || part === "create") && <PremiumTag y={1760} />}
     </AbsoluteFill>
   );
@@ -192,19 +233,23 @@ const PartView: React.FC<{ part: PartS; spec: SpecS }> = ({ part, spec }) => {
 export const TemplateS: React.FC<{ spec: SpecS }> = ({ spec }) => {
   const { durationInFrames } = useVideoConfig();
   const tl = timelineS(spec);
-  const voAt = tl.map((p) => {
-    const start = p.from + Math.round(LEAD * FPS);
-    return { start, end: start + Math.round((spec.voLen[spec.vo[p.key]] ?? 0) * FPS) };
-  });
+  const voAt = tl.flatMap((p) =>
+    voicesS(spec, p.key).map((v) => {
+      const start = p.from + Math.round(v.at * FPS);
+      return { start, end: start + Math.round((spec.voLen[v.vo] ?? 0) * FPS) };
+    }),
+  );
   const duck = (fr: number) => Math.max(0, ...voAt.map((v) => interpolate(fr, [v.start - 8, v.start - 2, v.end + 2, v.end + 10], [0, 1, 1, 0], clamp)));
   return (
     <AbsoluteFill style={{ background: "#FBF8F0" }}>
       {tl.map((p) => (
         <Sequence key={p.key} from={p.from} durationInFrames={p.frames}>
           <PartView part={p.key} spec={spec} />
-          <Sequence from={Math.round(LEAD * FPS)}>
-            <Audio src={staticFile(`tiktok/vo/${spec.id}-${spec.vo[p.key]}.wav`)} volume={1} />
-          </Sequence>
+          {voicesS(spec, p.key).map((v) => (
+            <Sequence key={v.vo} from={Math.round(v.at * FPS)}>
+              <Audio src={staticFile(`tiktok/vo/${spec.id}-${v.vo}.wav`)} volume={1} />
+            </Sequence>
+          ))}
         </Sequence>
       ))}
       <Audio

@@ -1,6 +1,7 @@
 {
  "C-widgets": {
-  "hook": "Three widget sets that run my whole day.",
+  "hook": "Too many apps to run your day?",
+  "hook2": "Meet Ardane.",
   "i1": "One. Food. Calories and macros, on my Home Screen and my Lock Screen.",
   "i2": "Two. Training. My next set, my streak, and a live rest timer.",
   "i3": "Three. Money and my day. Budget, habits, and my top three.",
@@ -32,7 +33,8 @@
   "end": "Ardane. Your whole life. One place."
  },
  "W1-workout-phone": {
-  "hook": "From the exercise library to your Lock Screen.",
+  "hook": "Want to level up your workouts?",
+  "hook2": "Meet Ardane.",
   "build": "Build your workout from the library, with an animated demo for each move.",
   "train": "Start the session and log each set in one tap.",
   "widget": "Then in Create, pick the widget that follows your exercise, and make it your style.",
@@ -40,7 +42,8 @@
   "end": "Ardane. Your whole life. One place."
  },
  "S1-student-notebook": {
-  "hook": "Back to school tip: my whole semester, from one photo.",
+  "hook": "Don't know how to manage your schedule?",
+  "hook2": "Ardane is here for you.",
   "snap": "I take a picture of my class schedule.",
   "import": "Ardane reads it right on my iPhone. I check the classes, and add them.",
   "week": "Every class, every room, in my week.",

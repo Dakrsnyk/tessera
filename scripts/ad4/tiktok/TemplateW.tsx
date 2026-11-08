@@ -14,6 +14,8 @@ export type SpecW = {
   template: "W";
   music?: string;
   hook: string;
+  /** The hook as a question, then its answer (« Meet Ardane. », asked on 2026-11-08): shown and said right after the question. */
+  answer?: { text: string; vo: string };
   /** Visual world (skins.tsx); « gym » = Fitness red / black / grey. */
   skin?: SkinId;
   steps: Record<"build" | "train" | "widget" | "lock", string>;
@@ -28,10 +30,24 @@ const TAIL: Record<PartW, number> = { hook: 0.3, build: 0.3, train: 0.3, widget:
 /** Plans that show Premium: the full exercise library (and its demos), the Premium widget styles. */
 const PREMIUM: PartW[] = ["build", "widget"];
 
+/** With an answer, the question starts almost at once and the answer follows a short beat later (2026-11-08). */
+const HOOK_LEAD = 0.15;
+const HOOK_GAP = 0.15;
+
+/** The voice lines of a part and when each starts (s from the part's start). */
+const voicesW = (s: SpecW, key: PartW) =>
+  key === "hook" && s.answer
+    ? [
+        { vo: s.vo.hook, at: HOOK_LEAD },
+        { vo: s.answer.vo, at: HOOK_LEAD + (s.voLen[s.vo.hook] ?? 0) + HOOK_GAP },
+      ]
+    : [{ vo: s.vo[key], at: LEAD }];
+
 export const timelineW = (s: SpecW) => {
   let from = 0;
   return ORDER.map((key) => {
-    const d = Math.round(Math.max(MIN[key], (s.voLen[s.vo[key]] ?? 0) + LEAD + TAIL[key]) * FPS);
+    const last = voicesW(s, key).slice(-1)[0];
+    const d = Math.round(Math.max(MIN[key], last.at + (s.voLen[last.vo] ?? 0) + TAIL[key]) * FPS);
     const r = { key, from, frames: d };
     from += d;
     return r;
@@ -85,12 +101,16 @@ const PartView: React.FC<{ part: PartW; spec: SpecW }> = ({ part, spec }) => {
   if (part === "end") return <skin.End />;
   const bg = <skin.Background />;
   if (part === "hook") {
-    const rise = spring({ frame: f - 10, fps, config: { damping: 16, stiffness: 90 } });
+    // with an answer: the question alone, word by word with the voice, then « Meet Ardane » and the phone rises under it
+    const [q, a] = voicesW(spec, "hook");
+    const answerAt = spec.answer && a ? Math.round(a.at * FPS) - 2 : null;
+    const rise = spring({ frame: f - (answerAt ?? 10), fps, config: { damping: 16, stiffness: 90 } });
     return (
       <AbsoluteFill>
         {bg}
-        <skin.Title text={spec.hook} f={f} />
-        <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, transform: `translateY(${(1 - rise) * 1200 + 300}px)` }}>
+        <skin.Title text={spec.hook} f={f} reveal={answerAt !== null ? Math.round((q.at + 0.8 * (spec.voLen[q.vo] ?? 1)) * FPS) : undefined} />
+        {answerAt !== null && skin.Answer && spec.answer && f >= answerAt && <skin.Answer text={spec.answer.text} f={f - answerAt} y={590} />}
+        <div style={{ position: "absolute", left: 0, top: 0, width: W, height: H, transform: `translateY(${(1 - rise) * 1200 + (answerAt !== null ? 520 : 300)}px)` }}>
           <Phone shadow={skin.phoneShadow}>
             <FitnessHome />
           </Phone>
@@ -117,19 +137,23 @@ const PartView: React.FC<{ part: PartW; spec: SpecW }> = ({ part, spec }) => {
 export const TemplateW: React.FC<{ spec: SpecW }> = ({ spec }) => {
   const { durationInFrames } = useVideoConfig();
   const tl = timelineW(spec);
-  const voAt = tl.map((p) => {
-    const start = p.from + Math.round(LEAD * FPS);
-    return { start, end: start + Math.round((spec.voLen[spec.vo[p.key]] ?? 0) * FPS) };
-  });
+  const voAt = tl.flatMap((p) =>
+    voicesW(spec, p.key).map((v) => {
+      const start = p.from + Math.round(v.at * FPS);
+      return { start, end: start + Math.round((spec.voLen[v.vo] ?? 0) * FPS) };
+    }),
+  );
   const duck = (fr: number) => Math.max(0, ...voAt.map((v) => interpolate(fr, [v.start - 8, v.start - 2, v.end + 2, v.end + 10], [0, 1, 1, 0], clamp)));
   return (
     <AbsoluteFill style={{ background: "#000" }}>
       {tl.map((p) => (
         <Sequence key={p.key} from={p.from} durationInFrames={p.frames}>
           <PartView part={p.key} spec={spec} />
-          <Sequence from={Math.round(LEAD * FPS)}>
-            <Audio src={staticFile(`tiktok/vo/${spec.id}-${spec.vo[p.key]}.wav`)} volume={1} />
-          </Sequence>
+          {voicesW(spec, p.key).map((v) => (
+            <Sequence key={v.vo} from={Math.round(v.at * FPS)}>
+              <Audio src={staticFile(`tiktok/vo/${spec.id}-${v.vo}.wav`)} volume={1} />
+            </Sequence>
+          ))}
         </Sequence>
       ))}
       <Audio
