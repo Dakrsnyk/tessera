@@ -131,6 +131,28 @@ final class Audit24FitnessPlanningTests: XCTestCase {
         XCTAssertNil(RestNotifier.interval(until: t0.addingTimeInterval(-5), now: t0))
     }
 
+    /// Seen on the CI (UI test of the session): « Plus tard » left nothing behind, so the explanation of the
+    /// notifications came back over the session at every set. The app offers it on its own: once only.
+    func testRestAlertIsOfferedOnceWhateverTheAnswer() throws {
+        let suite = "Audit24RestAlertOffer"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defaults.removePersistentDomain(forName: suite)
+        defer { defaults.removePersistentDomain(forName: suite) }
+
+        // First rest, notifications never asked: offered.
+        XCTAssertFalse(RestAlertOffer.wasMade(defaults: defaults))
+        XCTAssertTrue(RestAlertOffer.shouldOffer(state: .notDetermined, alreadyOffered: RestAlertOffer.wasMade(defaults: defaults)))
+        RestAlertOffer.markMade(defaults: defaults)
+
+        // Next sets, « Plus tard » answered (still not decided): not offered again.
+        XCTAssertTrue(RestAlertOffer.wasMade(defaults: defaults))
+        XCTAssertFalse(RestAlertOffer.shouldOffer(state: .notDetermined, alreadyOffered: RestAlertOffer.wasMade(defaults: defaults)))
+
+        // Already allowed or refused: never offered, even the first time.
+        XCTAssertFalse(RestAlertOffer.shouldOffer(state: .granted, alreadyOffered: false))
+        XCTAssertFalse(RestAlertOffer.shouldOffer(state: .denied, alreadyOffered: false))
+    }
+
     // MARK: F-05 · records beyond 300 sessions
 
     func testRecordsSurviveBeyondThreeHundredSessions() {

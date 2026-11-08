@@ -80,11 +80,20 @@ struct FitnessSessionPage: View {
         _ = await NotificationScheduler.requestAuthorization()
     }
 
-    /// Once, when a first rest starts and notifications were never asked: the explanation, then the system prompt.
-    /// Already allowed or refused: nothing (a refusal is respected, the rest then ends without an alert).
+    /// Once ever, when a rest starts and notifications were never asked: the explanation, then the system prompt.
+    /// Whatever the answer (« Plus tard » included), it is not offered again at the next sets: the reminders of the
+    /// settings stay the way to turn notifications on. Already allowed or refused: nothing (a refusal is respected,
+    /// the rest then ends without an alert).
     private func offerRestAlert() {
+        #if DEBUG
+        // Captures of the test build (`-screenshotScreen`): no sheet over the session in the ads and the videos.
+        if UserDefaults.standard.string(forKey: "screenshotScreen") != nil { return }
+        #endif
+        guard !RestAlertOffer.wasMade() else { return }
         Task {
-            guard await AppPermission.notifications.currentState() == .notDetermined else { return }
+            let state = await AppPermission.notifications.currentState()
+            guard RestAlertOffer.shouldOffer(state: state, alreadyOffered: RestAlertOffer.wasMade()) else { return }
+            RestAlertOffer.markMade()
             _ = await AppPermission.notifications.requestOrExplain(isPresented: $asksNotifications, request: requestNotifications)
         }
     }
@@ -619,5 +628,24 @@ struct SetEditor: View {
                 }
             }
         }
+    }
+}
+
+/// The alert at the end of a rest is offered by the app on its own, when a set is logged (not on a tap on a
+/// reminder switch): once only, whatever the answer, so « Plus tard » is not asked again at every set.
+enum RestAlertOffer {
+    static let key = "restAlertOffered"
+
+    /// Offered only while notifications were never asked and this offer was never made.
+    static func shouldOffer(state: PermissionState, alreadyOffered: Bool) -> Bool {
+        state == .notDetermined && !alreadyOffered
+    }
+
+    static func wasMade(defaults: UserDefaults = .standard) -> Bool {
+        defaults.bool(forKey: key)
+    }
+
+    static func markMade(defaults: UserDefaults = .standard) {
+        defaults.set(true, forKey: key)
     }
 }

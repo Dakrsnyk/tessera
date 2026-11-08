@@ -11,6 +11,8 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 - L'étape de tests finit par `|| true` : un job vert ne veut pas dire que les tests passent. Lire `report.txt` (« Test Case .*failed », « error: »).
 - La branche `ci-report` est réécrite à chaque run : seul le dernier rapport est gardé. Copier ce dont on a besoin aussitôt.
 - Les fichiers produits pendant une session cloud de Claude (rapports, PNG, vidéos) disparaissent avec la session : ce qui doit durer va dans le dépôt.
+- Une fiche que l'app ouvre d'elle-même après une action (explication d'une permission à la première série, 2026-11-07) recouvre l'écran des tests d'interface et des captures de pub : la retenir une seule fois quelle que soit la réponse (« Plus tard » ne marque rien dans `PermissionMemory`) et ne pas l'ouvrir en mode capture (`screenshotScreen`, sous `#if DEBUG`).
+- Les tests d'interface d'un même run partagent les données du simulateur : `ScreenshotMode.seed` ne remet la démo que s'il n'y a aucun widget, et une séance laissée en cours ou une carte de Mon Quotidien redimensionnée par un test change l'écran des suivants (piste de l'échec du test du mode « Organiser » depuis le 2026-11-07).
 
 ## Code et données
 - Ne pas régénérer `ExerciseDemos.json` sur Windows sans vérifier (export différent, encodage cp1252 sans `PYTHONUTF8=1`).

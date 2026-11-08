@@ -8,11 +8,13 @@
 
 ## A. État général
 
-| Élément | Avant (run 42409228969, commit 6fad886f) | Après les corrections |
+| Élément | Avant (run 42409228969, commit 6fad886f) | Après les corrections (run 42421136593, commit 0ae2ef8d, Build 363) |
 |---|---|---|
-| Compilation de l'app et de l'extension (simulateur) | réussie | réussie : run 42415997352 (`[check]`), une seule erreur, dans un test, corrigée ensuite |
-| Tests logiques | 1 241 réussis / 1 241 | voir section A.2 (run `[unit]`) |
-| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec (`testDailyEditModeMovesHeldCardsAndScrollsOnSwipe`) | voir section A.2 (run `[daily]`) |
+| Compilation de l'app et de l'extension (simulateur et iPhone non signé) | réussie | réussie |
+| Version Release (configuration App Store, simulateur) | réussie | réussie ; déverrouillage de test trouvé dans les binaires de l'app et de l'extension : **0** |
+| Tests logiques | 1 241 réussis / 1 241 | **1 361 réussis / 1 361** (+120) |
+| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **29 réussis, 2 échecs** : un nouveau, corrigé ensuite (section A.2), et l'ancien |
+| Contrôles statiques (`check_swift.py`) et traductions | réussis | réussis ; 5 679 textes, 0 absent du catalogue, 0 non traduit, 0 inutilisé |
 | Tests non exécutés | aucun test ignoré ; les tests de pub et de vidéo ne font pas partie de `[daily]` | idem |
 | Couverture de code | non mesurée (la CI ne produit pas de rapport de couverture) | non mesurée |
 
@@ -25,7 +27,34 @@ Le Chef a coordonné 10 audits en parallèle :
 Il a ensuite lancé 7 équipes de corrections et 5 relectures indépendantes (`code-reviewer`), plus une passe de traduction. Chaque correction a été relue par un autre agent que son auteur. Les points bloquants des relectures ont été corrigés par le Chef.
 
 ### A.2 Résultats des tests après corrections
-(complété à la fin des exécutions `[unit]` et `[daily]`)
+Toutes les exécutions sont sur la CI (Xcode 26.3, build 17C529, simulateur iOS 26.2). Les comptes viennent du journal complet de chaque run, pas du rapport tronqué.
+
+| Run | Tag | Résultat | Suite donnée |
+|---|---|---|---|
+| 42415997352 | `[check]` | une erreur de compilation, dans un test (étiquette `identifier:` de `SKTestSession.refundTransaction`) | corrigée |
+| 42416753618 | `[unit]` | 1 353 réussis, 5 échecs | corrigés sans affaiblir les tests (détail ci-dessous) |
+| 42419753127 | `[daily] [release]` | erreur de compilation : le masquage des graphiques d'argent posé dans une vue sans accès à la tuile | masquage déplacé sur la vue du visuel, depuis la tuile |
+| 42421136593 | `[daily] [release]` | logique 1 361 / 1 361 ; interface 29 / 31 ; Release sans déverrouillage de test | voir les 2 échecs ci-dessous |
+
+Les 5 échecs du `[unit]` :
+- `WeightPlanModelTests` : pendant une grossesse, le calcul automatique garde désormais le maintien (garde-fou N-04). Le test attend ce maintien.
+- `LivePricesTests` : le cas « prix manuels seulement » reçoit ses prix manuels. Une position sans aucun prix est signalée (M-17).
+- 3 tests StoreKit : un abonnement que l'App Store déclare expiré ou révoqué ne donne plus accès. Les tests attendent (5 s au plus) que la session de test applique le remboursement, l'expiration ou l'achat. Les vérifications restent les mêmes.
+
+Les 2 échecs d'interface du run 42421136593 :
+1. **`MiniAppUITests.testASessionKeepsItsPlaceWhenTheSheetOpens` : nouveau, causé par l'audit, corrigé.**
+   - Constat : la fiche qui explique l'alerte de fin de repos (ajoutée par F-04) s'ouvrait à la première série et recouvrait la séance.
+   - Cause : « Plus tard » ne retenait rien, donc la fiche serait revenue après chaque série.
+   - Correction (`RestAlertOffer`, `FitnessSession.swift`) : l'offre est faite une seule fois par installation, quelle que soit la réponse. Elle n'est jamais faite si les notifications sont déjà accordées ou refusées, ni dans les captures de la version de test (pubs, vidéos, tests d'interface).
+   - Test ajouté : `testRestAlertIsOfferedOnceWhateverTheAnswer`. Relu par `code-reviewer` : aucun bloquant.
+   - À confirmer par le prochain run de tests, et sur l'iPhone (section G, point 3).
+2. **`ProfileUITests.testDailyEditModeMovesHeldCardsAndScrollsOnSwipe` : ancien, présent avant l'audit, cause non établie.**
+   - Le glisser simulé par XCUITest ne fait pas changer de place la carte maintenue sur le simulateur.
+   - Il passait au Build 344 (run 42140979318, commit a500c8dc). Il échoue depuis l'état de référence (run 42409228969, commit 6fad886f), avant toute correction de l'audit, avec le même Xcode 26.3.
+   - Entre ces deux commits, aucune ligne de Mon Quotidien ni du geste n'a changé. Seuls ont changé le rendu de deux widgets, des réglages de capture pour les pubs, et le test du Studio, qui s'exécute juste avant celui-ci.
+   - Piste la plus probable : l'état laissé par les tests précédents. Les données restent d'un test à l'autre sur le simulateur, dont une séance laissée en cours. La carte Nutrition, large, est alors glissée sur une voisine placée en dessous.
+   - Le geste a été validé à la main par l'utilisateur sur l'iPhone (Build 342). Deux captures (avant et après le glisser) ont été ajoutées au test pour le prochain run.
+   - À revérifier sur l'iPhone (section G, point 10).
 
 ## B. Résultats par domaine
 
@@ -43,7 +72,7 @@ Constats, puis corrections :
 | Confidentialité et conformité | 3 de processus / 5 / 10 | P-04, P-05, P-06, P-07 | — | `confidentialite-conformite.md` |
 | Sécurité | 0 critique / 1 élevé / 2 moyens / 7 faibles | S-05 (script), S-07, S-08, S-09 | — | hors dépôt (voir C) |
 
-En tout : 161 constats et 116 nouveaux tests logiques, dans 14 fichiers.
+En tout : 161 constats. Le nombre de tests logiques exécutés passe de 1 241 à 1 361 (+120), puis 1 362 avec le test de l'alerte de repos.
 
 ## C. Sécurité et confidentialité
 
@@ -55,14 +84,21 @@ Aucun secret n'a été trouvé, ni dans le code, ni dans les 491 commits, ni dan
 
 Le rapport détaillé décrit des scénarios d'attaque. Il est gardé hors de ce dépôt public : `~/ardane-tools/audits-prives/securite-2026-11-07.md`.
 
-Risques restants, qui attendent toutes l'accord de l'utilisateur :
-1. **Élevé.** Le dépôt est public. D'anciens commits de `ci-report` contiennent des versions de test avec Premium débloqué. Corrections : dépôt privé (CI payante), puis purge par le support GitHub.
-2. **Moyen.** Le workflow a des permissions larges, des actions tierces épinglées par étiquette et aucune protection de `main`.
-3. **Moyen.** Les clés de signature sont en clair sur le PC. Il faut les chiffrer, puis les remplacer.
-4. **Faibles.**
-   - L'identité de signature est publiée dans `ci-report`.
-   - Le contrôle du binaire `[testflight]` est partiel.
-   - Les widgets financiers sont visibles sur l'écran verrouillé.
+Risques et suites, après les décisions de l'utilisateur du 2026-11-07 :
+1. **Élevé, ouvert.** Le dépôt est public, par choix de l'utilisateur pendant les corrections. D'anciens commits de `ci-report` contiennent des versions de test avec Premium débloqué. Suite : dépôt privé (CI payante), puis purge de `ci-report` par le support GitHub.
+2. **Moyen, corrigé en partie.**
+   - Fait : le workflow est durci.
+     - Checkout épinglé par commit (v4.4.0), sans jeton gardé dans `.git/config`.
+     - Plus aucune action tierce : Xcode est choisi par `xcode-select`.
+   - Reste : `contents: write` (nécessaire pour publier le rapport et les versions de test), et aucune protection de `main`.
+   - Réglages GitHub proposés à l'utilisateur : ruleset « Restrict deletions » et « Block force pushes » ; actions limitées à GitHub, épinglage SHA exigé.
+3. **Moyen, ouvert.** Les clés de signature sont en clair sur le PC. Il faut les chiffrer, puis les remplacer.
+4. **Faibles, corrigés.**
+   - L'identité de signature est retirée du rapport public et des anciens rapports `history/`. Elle reste dans les anciens commits de `ci-report`, voir le point 1.
+   - Le contrôle des versions TestFlight couvre maintenant l'app et l'extension de widgets. Un binaire absent fait échouer le contrôle.
+   - Les montants d'argent des widgets sont masqués quand l'iPhone est verrouillé (`.privacySensitive`). Le rappel de facture n'affiche plus de montant.
+
+La version de test Debug (IPA, Premium débloqué) est gardée, par décision de l'utilisateur.
 
 ### Confidentialité
 - Aucune photo de repas ne quitte l'iPhone : c'est prouvé par le code (Vision et Core ML locaux, aucun envoi).
@@ -72,9 +108,9 @@ Risques restants, qui attendent toutes l'accord de l'utilisateur :
   - l'effacement incomplet ;
   - la clé Stripe qui restait après la désinstallation ;
   - les notes pour l'examinateur, qui étaient fausses.
-- Écarts restants, sur décision de l'utilisateur :
-  - le texte de la politique publiée (widgets actualisés en arrière-plan, clé Stripe) ;
-  - le statut de « commerçant » dans l'UE (DSA) ;
+- Politique de confidentialité publiée corrigée sur ardane.app : version 3.1 du 7 novembre 2026, en français et en anglais. Elle couvre les widgets de prix actualisés seuls et la clé Stripe effacée à la réinstallation.
+- Écarts restants :
+  - lancement partout, Union européenne comprise, par décision de l'utilisateur : la déclaration de « commerçant » (DSA) est obligatoire dans App Store Connect › Business ; adresse, téléphone et courriel sont affichés publiquement dans l'UE ;
   - le vendeur individuel face à la règle 5.1.1(ix), argumentée dans les notes de revue ;
   - les points pour un juriste (§5 de `confidentialite-conformite.md`).
 
@@ -111,17 +147,22 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 
 ### Bloquants pour la soumission (hors code, action de l'utilisateur)
 - Contrat Paid Apps actif : banque, formulaire fiscal américain, TPS/TVQ.
+- Déclaration de commerçant (DSA), obligatoire pour l'UE : adresse, téléphone et courriel publics.
 - Les 3 produits Premium créés dans App Store Connect et joints à la version 1.0.
-- Questionnaires App Privacy et Age Rating remplis.
-- Une version publique `[testflight]` à jour, choisie dans Build, après les tests manuels de la section G.
+- Questionnaires App Privacy (« Data Not Collected ») et Age Rating (9+) remplis.
+- Une version publique `[testflight]` à jour, choisie dans Build, après les tests manuels de la section G. Elle n'est produite qu'avec l'accord explicite de l'utilisateur.
 
-### Importants (décision de l'utilisateur attendue)
-- `.privacySensitive` sur les montants d'argent de l'écran verrouillé, et retrait du montant des factures dans les notifications.
-- Lancement avec ou sans l'Union européenne (DSA).
-- Correction de 2 phrases de la politique sur ardane.app.
-- Dépôt privé avec CI payante, et purge de `ci-report`.
-- Durcissement du workflow.
+### Décisions de l'utilisateur du 2026-11-07, appliquées
+- Montants d'argent masqués sur l'écran verrouillé, et rappel de facture sans montant : fait (commit ba3317fb, 3 tests).
+- Lancement partout, UE comprise : déclaration DSA à faire (ci-dessus).
+- Politique de ardane.app corrigée : fait (version 3.1, publiée).
+- Dépôt laissé public le temps des corrections : à repasser en privé ensuite, puis purge de `ci-report`.
+- Workflow durci, version de test Debug gardée avec Premium débloqué : fait (commit c9e83807).
+
+### Encore ouverts
 - Chiffrement et remplacement des clés de signature.
+- Réglages GitHub : ruleset de `main`, actions limitées et épinglées.
+- Test d'interface du mode « Organiser » (glisser simulé), voir A.2.
 
 ### Facultatifs (après le lancement)
 - Tests de performance en CI (R-01), budget de taille des modèles (R-04), fichier `cnf-foods.json` en double (R-03).
@@ -133,6 +174,7 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 1. **Widgets sur le vrai écran d'accueil.** Petit, moyen et grand ; écran verrouillé ; boutons (habitude, ajout rapide, série faite). Après un redémarrage de l'iPhone, les widgets doivent retrouver leurs données une fois l'iPhone déverrouillé.
 2. **Live Activities.** Séance de sport (repos, série suivante, fin), puis session d'étude.
 3. **Notifications.**
+   - À la première série d'une première séance, une fiche explique l'alerte de fin de repos. Après « Plus tard », elle ne revient pas aux séries suivantes.
    - La fin de repos arrive quand l'app est en arrière-plan.
    - Arrêter une session de concentration annule sa fin.
    - Les rappels de compte à rebours arrivent.
@@ -149,6 +191,8 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
    - « Effacer toutes mes données » ne laisse rien. Une réinstallation n'a plus de clé Stripe.
 8. **Affichage.** Mode sombre, grande taille de texte, VoiceOver (cases à cocher, graphiques), iPhone en anglais (nouveaux textes).
 9. **Couleurs modifiées.** Les boutons orange de Nutrition sont en texte foncé, et les textes secondaires des thèmes Carte, Dune et Glacier sont plus foncés : valider le rendu.
+10. **Mon Quotidien, mode « Organiser ».** Maintenir une carte puis la glisser sur sa voisine : elle prend sa place. Un balayage rapide fait défiler sans rien déplacer. Le test d'interface de ce geste échoue sur le simulateur (A.2).
+11. **Scanner : récapitulatif.** Un aliment incertain affiche l'étiquette « Estimation » sur une ligne, avec son icône (défaut vu sur l'iPhone, corrigé dans le commit 3835af0f).
 
 ## H. Checklist App Store Connect
 Voir `confidentialite-conformite.md` §8 (champ par champ) et `docs/lancement/fiche-app-store.md`.
@@ -168,6 +212,6 @@ Voir `confidentialite-conformite.md` §8 (champ par champ) et `docs/lancement/fi
   - « Manually release this version ».
 
 ## I. Build Release
-- La compilation simulateur passe.
-- La version Release signée (`[testflight]`) n'est produite qu'avec l'accord explicite de l'utilisateur.
-- La version interne Premium (`[interne]`) suit la règle du projet, après la validation des tests.
+- Vérifiée en CI (run 42421136593, Build 363) : la version Release, en configuration App Store, compile pour le simulateur. Les binaires de l'app et de l'extension ne contiennent ni le déverrouillage de test ni les écrans de capture : 0 trouvé.
+- La version Release signée et envoyée sur TestFlight (`[testflight]`) n'est produite qu'avec l'accord explicite de l'utilisateur. Elle sera la version à choisir dans App Store Connect › Build.
+- La version interne Premium (`[interne]`) suit la règle du projet : elle est envoyée après chaque série de corrections, pour les tests sur l'iPhone. Apple la bloque pour l'App Store et les testeurs externes.

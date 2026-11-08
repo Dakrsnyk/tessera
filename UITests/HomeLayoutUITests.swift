@@ -94,10 +94,20 @@ extension ProfileUITests {
             inside(nutrition).press(forDuration: 0.9, thenDragTo: inside(neighbour), withVelocity: .slow, thenHoldForDuration: 0.6)
             Thread.sleep(forTimeInterval: 1.0)
         }
+        /// The screen around the first drag, kept in the CI report: this test fails on the simulator since
+        /// 2026-11-07 while the gesture was validated on the iPhone (Build 342) and its code has not changed.
+        func keep(_ name: String) {
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = "profile-\(name)"
+            shot.lifetime = .keepAlways
+            add(shot)
+        }
 
+        keep("daily-edit-before-drag")
         moveNutritionOntoNeighbour()
+        keep("daily-edit-after-drag")
         XCTAssertNotEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst,
-                          "La carte maintenue puis glissée ne prend pas la place de sa voisine : \(nutrition.frame) / \(neighbour.frame)")
+                          "La carte maintenue puis glissée ne prend pas la place de sa voisine (\(neighbour.identifier)) : \(nutrition.frame) / \(neighbour.frame)")
         XCTAssertTrue(done.exists, "Le déplacement a fermé le mode édition")
         moveNutritionOntoNeighbour()
         XCTAssertEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst, "La carte ne revient pas à sa place")
