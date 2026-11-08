@@ -14,7 +14,7 @@
 | Version Release (configuration App Store, simulateur) | réussie | réussie (Build 363) ; déverrouillage de test trouvé dans les binaires de l'app et de l'extension : **0** |
 | Version interne signée (TestFlight, Premium débloqué) | — | Builds 364, 366, 368 et 370 : archive, export et contrôles des binaires réussis ; « Internal Only » confirmé par l'API d'Apple |
 | Tests logiques | 1 241 réussis / 1 241 | **1 370 réussis / 1 370** (+129, Builds 367, 369 et 371) |
-| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **31 réussis / 31** (Builds 365, 367 et 371), après correction des défauts qu'ils avaient révélés (section A.2) ; Build 369 : 30 / 31, un échec intermittent déjà vu au run 337, test corrigé puis réussi au Build 371 (A.2, point 4) |
+| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **31 réussis / 31** (Builds 365, 367 et 371), après correction des défauts qu'ils avaient révélés (section A.2) ; Build 369 : 30 / 31, un échec intermittent déjà vu au run 337, test corrigé puis réussi au Build 371 (A.2, point 4) ; après l'audit, **32 / 32** au Build 373 avec le test de la carte Habitudes en grand |
 | Contrôles statiques (`check_swift.py`) et traductions | réussis | réussis ; 5 680 textes, 0 absent du catalogue, 0 non traduit, 0 inutilisé (Build 371) |
 | Tests non exécutés | aucun test ignoré ; les tests de pub et de vidéo ne font pas partie de `[daily]` | idem |
 | Couverture de code | non mesurée (la CI ne produit pas de rapport de couverture) | non mesurée |
@@ -44,6 +44,8 @@ Toutes les exécutions sont sur la CI (Xcode 26.3, build 17C529, simulateur iOS 
 | 42446155983 | `[daily]` | logique **1 370 / 1 370** ; interface **30 / 31** : le glisser réussit avec la mesure d'alignement aux 4 moments ; `testMonQuotidienOpensAMiniApp` échoue | vue fixe confirmée ; l'échec est intermittent et ancien (point 4 ci-dessous) |
 | 42451125218 | version interne | Build 370 (sans achat à vie, test solide) signé et envoyé sur TestFlight ; une identité de signature ; contrôles des binaires réussis ; « Internal Only » confirmé | à tester sur l'iPhone (section G) |
 | 42452111696 | `[daily]` | logique **1 370 / 1 370** ; interface **31 / 31**, dont `testMonQuotidienOpensAMiniApp` et le glisser avec sa mesure d'alignement ; traductions : 5 680 textes, aucun manquant ni inutilisé | retrait de l'achat à vie compilé et vérifié sans Premium (Build 371) ; test du point 4 réussi |
+| 42513932293 | version interne | après l'audit : Build 372 (carte Habitudes en grand, demande du 2026-11-08) signé et envoyé sur TestFlight ; une identité de signature ; contrôles des binaires réussis ; « Internal Only » confirmé | à tester sur l'iPhone |
+| 42515654242 | `[daily]` | logique **1 370 / 1 370** ; interface **32 / 32**, dont le nouveau test de la carte Habitudes en grand et `testMonQuotidienOpensAMiniApp` | carte vérifiée sans Premium (Build 373), capture conforme ; test du point 4 réussi une deuxième fois |
 
 Les 5 échecs du `[unit]` :
 - `WeightPlanModelTests` : pendant une grossesse, le calcul automatique garde désormais le maintien (garde-fou N-04). Le test attend ce maintien.
@@ -85,7 +87,7 @@ Les 2 échecs d'interface du run 42421136593 :
    - Constat : « La mini-app Nutrition doit s'ouvrir » aux runs 337 (2026-11-05, avant ces corrections) et 42446155983 ; réussi aux runs 338, 359, 363, 365 et 367. À l'échec, l'app est sur l'accueil, carte Nutrition alignée sur sa première vue.
    - Cause probable (la CI n'a gardé ni vidéo ni capture) : le test précédent laisse la carte sur « Repas », et `-screenshotScreen home` ne la remet sur sa première vue qu'après le premier affichage. Le test prenait le premier lien touchable des deux premières vues, parfois avant ce retour : le lien glissait sous le toucher. Ce retour n'existe qu'en mode capture, pas pour un utilisateur.
    - Correction du test : il attend « Vue 1 sur 3 » avant de toucher la carte, et garde une capture si Nutrition ne s'ouvre pas. Ce qu'il vérifie ne change pas.
-   - Réussi au run 42452111696 (Build 371). Un seul passage ne prouve pas que l'intermittence a disparu : à surveiller aux prochains `[daily]`.
+   - Réussi aux runs 42452111696 (Build 371) et 42515654242 (Build 373). Deux passages ne prouvent pas que l'intermittence a disparu : à surveiller aux prochains `[daily]`.
 
 ## B. Résultats par domaine
 
@@ -198,7 +200,7 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 ### Encore ouverts
 - Chiffrement et remplacement des clés de signature.
 - Réglages GitHub : ruleset de `main`, actions limitées et épinglées.
-- Les deux correctifs du mode « Organiser » sur l'iPhone (G, point 10). Le test corrigé du point 4 de A.2 a réussi au run 42452111696 ; à surveiller.
+- Les deux correctifs du mode « Organiser » sur l'iPhone (G, point 10). Le test corrigé du point 4 de A.2 a réussi aux runs 42452111696 et 42515654242 ; à surveiller.
 
 ### Facultatifs (après le lancement)
 - Tests de performance en CI (R-01), budget de taille des modèles (R-04), fichier `cnf-foods.json` en double (R-03).

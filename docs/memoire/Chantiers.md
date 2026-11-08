@@ -203,4 +203,5 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Test d'interface `testDailyHabitsCardShowsARowOfDaysPerHabitWhenWide` (mode capture `home-habits-wide`, capture `profile-daily-habits-wide`). Relu par code-reviewer, sans bloquant.
 - Version interne (commit 0243bd38, run 42513932293) : non lancée, le dépôt est privé et le compte n'a pas de minutes macOS (« spending limit »). À relancer (`gh run rerun 42513932293`) une fois le budget réglé ou le dépôt rendu public.
 - Version interne Build 372 (même run, relancé une fois le dépôt redevenu public) : une identité de signature, contrôles des binaires réussis, « Internal Only » confirmé.
-- Reste : `[daily]` (test et capture), puis l'iPhone.
+- Run 42515654242 (Build 373, sans Premium, commit ee144c03) : 1 370 tests logiques sur 1 370, interface 32 sur 32, dont le nouveau test ; `testMonQuotidienOpensAMiniApp` réussi une deuxième fois de suite. Capture `profile-daily-habits-wide` : 4 habitudes, 14 jours chacune, aujourd'hui en dernier, carrés alignés d'une ligne à l'autre.
+- Reste : l'avis de l'utilisateur sur l'iPhone (Build 372).
