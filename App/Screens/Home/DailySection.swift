@@ -231,6 +231,7 @@ struct DailySection: View {
             DailyTileView(tile: tile)
                 .frame(maxWidth: .infinity)
                 .environment(\.dailyCompact, compact)
+                .environment(\.dailyEditing, editing)
                 .environment(\.dailyCardActions, actions)
         }
     }
@@ -345,6 +346,18 @@ extension EnvironmentValues {
     var dailyCompact: Bool {
         get { self[DailyCompactKey.self] }
         set { self[DailyCompactKey.self] = newValue }
+    }
+}
+
+private struct DailyEditingKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    /// « Mon Quotidien » in its edit mode (« Organiser… »): the cards are moved and resized, never swiped.
+    var dailyEditing: Bool {
+        get { self[DailyEditingKey.self] }
+        set { self[DailyEditingKey.self] = newValue }
     }
 }
 

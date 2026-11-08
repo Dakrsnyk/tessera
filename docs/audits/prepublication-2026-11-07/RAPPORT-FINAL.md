@@ -8,13 +8,13 @@
 
 ## A. État général
 
-| Élément | Avant (run 42409228969, commit 6fad886f) | Après les corrections (runs 42421136593 Build 363, 42429465658 Build 364, 42430789992 Build 365) |
+| Élément | Avant (run 42409228969, commit 6fad886f) | Après les corrections (runs 42421136593 Build 363 à 42438964850 Build 367) |
 |---|---|---|
 | Compilation de l'app et de l'extension (simulateur et iPhone non signé) | réussie | réussie |
 | Version Release (configuration App Store, simulateur) | réussie | réussie (Build 363) ; déverrouillage de test trouvé dans les binaires de l'app et de l'extension : **0** |
-| Version interne signée (TestFlight, Premium débloqué) | — | Build 364 : archive, export et contrôles des binaires réussis ; « Internal Only » confirmé par l'API d'Apple |
-| Tests logiques | 1 241 réussis / 1 241 | **1 362 réussis / 1 362** (+121, Build 365) |
-| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **31 réussis / 31** (Build 365), après correction des 2 défauts qu'ils avaient révélés (section A.2) |
+| Version interne signée (TestFlight, Premium débloqué) | — | Builds 364 et 366 : archive, export et contrôles des binaires réussis ; « Internal Only » confirmé par l'API d'Apple |
+| Tests logiques | 1 241 réussis / 1 241 | **1 370 réussis / 1 370** (+129, Build 367) |
+| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **31 réussis / 31** (Builds 365 et 367), après correction des défauts qu'ils avaient révélés (section A.2) |
 | Contrôles statiques (`check_swift.py`) et traductions | réussis | réussis ; 5 679 textes, 0 absent du catalogue, 0 non traduit, 0 inutilisé |
 | Tests non exécutés | aucun test ignoré ; les tests de pub et de vidéo ne font pas partie de `[daily]` | idem |
 | Couverture de code | non mesurée (la CI ne produit pas de rapport de couverture) | non mesurée |
@@ -39,6 +39,7 @@ Toutes les exécutions sont sur la CI (Xcode 26.3, build 17C529, simulateur iOS 
 | 42429465658 | version interne | Build 364 signé et envoyé sur TestFlight ; contrôles des binaires réussis ; « Internal Only » confirmé | installé par l'utilisateur pour les tests de la section G |
 | 42430789992 | `[daily]` | logique **1 362 / 1 362** ; interface **31 / 31** | les 2 échecs ci-dessous réussissent ; le second cachait un vrai défaut, corrigé ensuite |
 | 42437604175 | version interne | Build 366 (correctif « Organiser ») signé et envoyé sur TestFlight ; une identité de signature ; contrôles des binaires réussis ; « Internal Only » confirmé | à tester sur l'iPhone (section G, point 10) |
+| 42438964850 | `[daily]` | logique **1 370 / 1 370**, dont les 8 nouveaux tests ; interface **31 / 31**, dont le glisser sur la carte de gauche | correctif « Organiser » confirmé ; les captures montrent un autre défaut, corrigé ensuite (point 3 ci-dessous) |
 
 Les 5 échecs du `[unit]` :
 - `WeightPlanModelTests` : pendant une grossesse, le calcul automatique garde désormais le maintien (garde-fou N-04). Le test attend ce maintien.
@@ -64,10 +65,18 @@ Les 2 échecs d'interface du run 42421136593 :
      - VoiceOver vise le voisin tel qu'il est vu à l'écran, ou le suivant quand la carte ne peut pas le dépasser.
    - Tests :
      - 8 tests logiques ajoutés, dont la vérification de chaque lâcher et de chaque déplacement VoiceOver dans 6 grilles mixtes ;
-     - le test d'interface vise désormais toujours la carte de gauche ;
-     - il appuie sur les pages de la carte et non sur sa première page. XCUITest faisait défiler cette page à moitié quand un autre test laissait la carte sur « Repas », d'où une carte décalée sur les captures.
+     - le test d'interface vise désormais toujours la carte de gauche, en appuyant sur les pages de la carte.
    - Vérifié avant l'envoi par une simulation en Python des mêmes règles : 67 200 lâchers et 28 000 déplacements VoiceOver aléatoires. La carte finit toujours dans la ligne visée, ou rien ne change. Relu par `code-reviewer`.
-   - À confirmer par la CI (run suivant ce commit) et sur l'iPhone (section G, point 10).
+   - Confirmé au run 42438964850 : les 8 tests logiques et le test d'interface réussissent. Sur les captures, la grande carte passe sous la ligne visée. Reste l'iPhone (section G, point 10).
+3. **Pages de la carte décalées en mode « Organiser » : vu sur les captures, vrai défaut de l'app, corrigé.**
+   - Constat : sur les captures des runs 42430789992 et 42438964850, la carte maintenue pour ouvrir le menu montre sa première vue décalée de 40 points vers la gauche. La vue suivante apparaît au bord droit. 40 points, c'est l'écart entre la largeur de l'écran et celle de la carte. Hors mode « Organiser », toutes les captures sont alignées.
+   - Mon explication précédente était fausse (XCUITest qui aurait fait défiler la carte) : le décalage est identique au pixel près, que le test appuie sur la première vue ou sur les pages.
+   - Cause probable (impossible à observer sans Mac) : entrer dans le mode et en sortir recrée la carte, car le menu de l'appui long y est retiré. Recréée pendant la fermeture du menu, la carte avait un instant des vues plus larges qu'elle. Le retour sur la première vue, sans repère, a aligné le bord droit de cette vue, et le décalage est resté.
+   - Correction (`DailyPager.swift`, `DailySection.swift`) :
+     - en mode « Organiser », la carte affiche sa vue du moment, fixe, sans défilement ; elle ne se balaie pas dans ce mode ;
+     - partout ailleurs, une vue choisie par l'app (vue gardée, VoiceOver) se place contre le bord gauche de la carte (`anchor: .leading`).
+   - Test : le test d'interface mesure l'alignement au lancement, en mode « Organiser », après les deux glisser et après « OK ». Il échoue au-delà de 8 points et garde deux captures de plus.
+   - À confirmer par la CI et sur l'iPhone (section G, point 10).
 
 ## B. Résultats par domaine
 
@@ -85,7 +94,7 @@ Constats, puis corrections :
 | Confidentialité et conformité | 3 de processus / 5 / 10 | P-04, P-05, P-06, P-07 | — | `confidentialite-conformite.md` |
 | Sécurité | 0 critique / 1 élevé / 2 moyens / 7 faibles | S-05 (script), S-07, S-08, S-09 | — | hors dépôt (voir C) |
 
-En tout : 161 constats, plus le défaut du mode « Organiser » trouvé par les tests d'interface. Le nombre de tests logiques exécutés passe de 1 241 à 1 361 (+120), puis 1 362 avec le test de l'alerte de repos (vérifié), puis 1 370 attendus avec les 8 tests du déplacement des cartes.
+En tout : 161 constats, plus deux défauts du mode « Organiser » trouvés par les tests d'interface et leurs captures. Le nombre de tests logiques exécutés passe de 1 241 à 1 361 (+120), puis 1 362 avec le test de l'alerte de repos, puis 1 370 avec les 8 tests du déplacement des cartes (vérifié au run 42438964850).
 
 ## C. Sécurité et confidentialité
 
@@ -155,7 +164,10 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 6. **Plantages et blocages.** Plus de plantage sur une quantité énorme, plus de séance « en cours » sans fin, plus de bouton « + » sans effet.
 7. **Accessibilité.** Zones tactiles de 44 pt, VoiceOver, contrastes, confirmations de suppression.
 8. **Sécurité.** Clé Stripe plus stricte et effacée à une installation neuve, image plafonnée, contrôle Release plus strict.
-9. **Trouvés par les tests d'interface (section A.2).** La fiche de l'alerte de repos ne s'offre plus qu'une fois. Une carte large glissée sur la carte de gauche de la ligne du dessous change maintenant vraiment de place.
+9. **Trouvés par les tests d'interface (section A.2).**
+   - La fiche de l'alerte de repos ne s'offre plus qu'une fois.
+   - Une carte large glissée sur la carte de gauche de la ligne du dessous change maintenant vraiment de place.
+   - En mode « Organiser », la vue d'une carte à plusieurs vues reste dans la carte, au lieu de s'arrêter 40 points entre deux vues.
 
 ## F. Restes
 
@@ -176,7 +188,7 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 ### Encore ouverts
 - Chiffrement et remplacement des clés de signature.
 - Réglages GitHub : ruleset de `main`, actions limitées et épinglées.
-- Confirmation par la CI du correctif du mode « Organiser » (A.2), puis sur l'iPhone (G, point 10).
+- Confirmation par la CI du correctif des vues décalées en mode « Organiser » (A.2, point 3), puis des deux correctifs du mode sur l'iPhone (G, point 10).
 
 ### Facultatifs (après le lancement)
 - Tests de performance en CI (R-01), budget de taille des modèles (R-04), fichier `cnf-foods.json` en double (R-03).
@@ -206,6 +218,7 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 8. **Affichage.** Mode sombre, grande taille de texte, VoiceOver (cases à cocher, graphiques), iPhone en anglais (nouveaux textes).
 9. **Couleurs modifiées.** Les boutons orange de Nutrition sont en texte foncé, et les textes secondaires des thèmes Carte, Dune et Glacier sont plus foncés : valider le rendu.
 10. **Mon Quotidien, mode « Organiser ».**
+    - Ouvrir le mode par un appui long sur la grande carte Nutrition, puis « Organiser… » : sa vue remplit la carte, sans cercle coupé à gauche ni vue suivante au bord droit (A.2, point 3). Pareil après « OK ».
     - Maintenir la grande carte Nutrition, puis la glisser sur la petite carte de **gauche** de la ligne du dessous : elle passe sous cette ligne. Avant la correction, rien ne bougeait (A.2).
     - La remonter de la même façon.
     - Deux petites cartes côte à côte échangent leur place.

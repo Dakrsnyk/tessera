@@ -45,6 +45,8 @@ extension ProfileUITests {
     /// order the other tests see is unchanged), and a quick swipe over a card scrolls Home instead of lifting it
     /// (remark of 2026-11-05 on Build 340, `DailyHoldToMove`). The neighbour is the left half card of the row under
     /// the wide Nutrition card: dropped there, the card changed the order without moving on screen until Build 366.
+    /// All along, the view of the Nutrition card fills the card: the card held for the menu showed its first view
+    /// 40 points to the left, the next one showing at its right edge, in the edit mode until Build 366.
     func testDailyEditModeMovesHeldCardsAndScrollsOnSwipe() throws {
         continueAfterFailure = false
         let app = XCUIApplication()
@@ -52,10 +54,30 @@ extension ProfileUITests {
         app.launch()
         addTeardownBlock { app.terminate() }
 
-        // The card's pages, always on screen: its first page can be off screen (another test leaves the card on
-        // « Repas »), and a press on it made XCUITest scroll the pages half way.
+        /// The screen at a given moment, kept in the CI report.
+        func keep(_ name: String) {
+            let shot = XCTAttachment(screenshot: app.screenshot())
+            shot.name = "profile-\(name)"
+            shot.lifetime = .keepAlways
+            add(shot)
+        }
+        /// Each moment the first view of the Nutrition card is away from the middle of the card (its dots are centred
+        /// under it): about zero when the view fills the card, 40 points when it stopped between two views.
+        var shifted: [String] = []
+        func notePageShift(_ moment: String) {
+            let page = app.descendants(matching: .any)["daily-nutrition"].firstMatch
+            let dots = app.descendants(matching: .any)["daily-pager-nutrition-dots"].firstMatch
+            guard page.exists, dots.exists else { return shifted.append("\(moment) : carte introuvable") }
+            let shift = page.frame.midX - dots.frame.midX
+            if abs(shift) > 8 { shifted.append("\(moment) : \(Int(shift.rounded())) pt") }
+        }
+
+        // The card's pages: on screen whichever view the card shows (its first view is off screen when another is kept).
         let nutritionCard = app.descendants(matching: .any)["daily-pager-nutrition"].firstMatch
         XCTAssertTrue(nutritionCard.waitForExistence(timeout: 12), "Carte Nutrition absente")
+        Thread.sleep(forTimeInterval: 0.8)
+        notePageShift("au lancement")
+        keep("daily-edit-launch")
         nutritionCard.press(forDuration: 1.2)
         let organize = app.buttons["Organiser…"]
         XCTAssertTrue(organize.waitForExistence(timeout: 5), "L'appui long n'ouvre pas le menu de la carte")
@@ -63,6 +85,7 @@ extension ProfileUITests {
         let done = app.buttons["daily-edit-done"]
         XCTAssertTrue(done.waitForExistence(timeout: 5), "« Organiser… » n'ouvre pas le mode édition")
         Thread.sleep(forTimeInterval: 0.6)
+        notePageShift("en mode Organiser")
 
         // Each card is found by its « × » (top left corner of the card, outside its pages): the identifiers of the
         // cards' contents sit inside their horizontal pages and can be off screen (Build 343).
@@ -100,13 +123,6 @@ extension ProfileUITests {
             inside(nutrition).press(forDuration: 0.9, thenDragTo: inside(neighbour), withVelocity: .slow, thenHoldForDuration: 0.6)
             Thread.sleep(forTimeInterval: 1.0)
         }
-        /// The screen around the first drag, kept in the CI report.
-        func keep(_ name: String) {
-            let shot = XCTAttachment(screenshot: app.screenshot())
-            shot.name = "profile-\(name)"
-            shot.lifetime = .keepAlways
-            add(shot)
-        }
 
         keep("daily-edit-before-drag")
         moveNutritionOntoNeighbour()
@@ -116,6 +132,7 @@ extension ProfileUITests {
         XCTAssertTrue(done.exists, "Le déplacement a fermé le mode édition")
         moveNutritionOntoNeighbour()
         XCTAssertEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst, "La carte ne revient pas à sa place")
+        notePageShift("après les deux glisser")
 
         // A quick swipe up over the card: Home scrolls, nothing is lifted or moved.
         let top = nutrition.frame.minY
@@ -126,6 +143,14 @@ extension ProfileUITests {
         XCTAssertLessThan(nutrition.frame.minY, top - 60, "Un balayage sur une carte ne fait pas défiler l'accueil en mode édition")
         XCTAssertEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst, "Le balayage a déplacé une carte")
         XCTAssertTrue(done.exists, "Le balayage a fermé le mode édition")
+
+        // « OK »: the cards stop wiggling and the Nutrition card shows its view in place, ready to be swiped again.
+        done.tap()
+        XCTAssertTrue(done.waitForNonExistence(timeout: 5), "« OK » ne ferme pas le mode édition")
+        Thread.sleep(forTimeInterval: 0.8)
+        notePageShift("après « OK »")
+        keep("daily-edit-done")
+        XCTAssertTrue(shifted.isEmpty, "La vue de la carte Nutrition ne remplit pas la carte (\(shifted.joined(separator: " ; ")))")
     }
 
     private func assertHomeStaysFixed(language: String, locale: String, file: StaticString = #filePath, line: UInt = #line) {

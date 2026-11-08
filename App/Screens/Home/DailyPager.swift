@@ -13,6 +13,7 @@ struct DailyPager<Content: View>: View {
     @ViewBuilder let content: (Int) -> Content
     @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dailyEditing) private var editing
     /// The page on screen, driven by the paging scroll.
     @State private var position: Int?
 
@@ -32,21 +33,29 @@ struct DailyPager<Content: View>: View {
             .hidden()
             .accessibilityHidden(true)
             .overlay(alignment: .top) {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 0) {
-                        ForEach(0..<count, id: \.self) { index in
-                            content(index)
-                                .frame(maxHeight: .infinity, alignment: .top)
-                                .containerRelativeFrame(.horizontal)
-                                .id(index)
+                if editing {
+                    // « Organiser… »: the card is moved, never swiped, so its view stays still and fills the card. The
+                    // paging scroll of the card held for the menu stopped 40 points between two views (Build 366).
+                    content(page)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                } else {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 0) {
+                            ForEach(0..<count, id: \.self) { index in
+                                content(index)
+                                    .frame(maxHeight: .infinity, alignment: .top)
+                                    .containerRelativeFrame(.horizontal)
+                                    .id(index)
+                            }
                         }
+                        .scrollTargetLayout()
                     }
-                    .scrollTargetLayout()
+                    .scrollTargetBehavior(.paging)
+                    // A view chosen by the app (the one kept, VoiceOver) starts at the card's left edge, never half way.
+                    .scrollPosition(id: $position, anchor: .leading)
+                    .scrollDisabled(count < 2)
+                    .accessibilityIdentifier("daily-pager-\(id)")
                 }
-                .scrollTargetBehavior(.paging)
-                .scrollPosition(id: $position)
-                .scrollDisabled(count < 2)
-                .accessibilityIdentifier("daily-pager-\(id)")
             }
             dots
         }
