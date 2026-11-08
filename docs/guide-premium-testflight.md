@@ -11,31 +11,26 @@ App Store Connect, compte titulaire (Account Holder) :
 3. **Bank Accounts** › **Add Bank Account** › Canada › devise CAD, type de compte, numéros › titulaire exactement comme à la banque › cocher l'accord › **Add**.
 4. Attendre que **Paid Apps**, **Tax Forms** et **Bank Accounts** soient **Active**. Avant cela, l'app ne reçoit aucun produit : la page Premium dit « Les offres ne sont pas encore disponibles. ».
 
-## Étape 2 — Créer les 3 produits (identifiants exactement comme dans le code)
+## Étape 2 — Créer les 2 abonnements (identifiants exactement comme dans le code)
 
 Dans **Apps › Ardane** (Bundle ID `com.dakrsnyk.ardane`) › barre latérale **Monetization**. Un identifiant de produit ne se modifie ni ne se réutilise jamais : vérifier lettre par lettre avant **Create**.
 
-**Achat à vie** — **In-App Purchases** › (+) › **Non-Consumable**
-- Reference Name : `Premium à vie` · Product ID : `com.dakrsnyk.ardane.premium.lifetime` › **Create**.
-- **Availability** : tous les pays · **Price Schedule** › **Add Pricing** › Canada › 99,99 $.
-- **Localization** › français (Canada) puis anglais : nom (2 à 30 caractères) et description (45 au plus).
-- **Review Information** : une capture de la page Premium de l'app › **Save**.
-- **Family Sharing** : ne l'activer que si tu le veux vraiment (irréversible).
+**Pas d'achat à vie au lancement** (décision de l'utilisateur du 2026-11-08) : ne pas créer `com.dakrsnyk.ardane.premium.lifetime`, et surtout pas pour le supprimer ensuite (un identifiant supprimé ne se réutilise jamais). Le code le demande toujours à l'App Store : s'il est créé un jour (non consommable, 99,99 $, « Premium à vie » / « Tout Premium pour toujours. Un seul paiement. », « Lifetime Premium » / « All of Premium, forever. One payment. »), la page Premium l'affichera avec sa mention légale, sans mise à jour de l'app.
 
 **Abonnements** — **Subscriptions** › (+) › nom du groupe `Ardane Premium` › **Create**
 - Dans le groupe : **Display Name and Description** › **Add** › langues, nom visible (ex. « Ardane Premium »). Oubli le plus fréquent : sans cela, les abonnements restent bloqués.
 - **Mensuel** : **Create** › Product ID `com.dakrsnyk.ardane.premium.monthly` › durée **1 month** › prix 6,99 $ › pays › nom et description › capture › **Save**.
 - **Annuel** : Product ID `com.dakrsnyk.ardane.premium.yearly` › durée **1 year** › 59,99 $ › même chose.
 - **Essai gratuit de 7 jours, sur le mensuel ET sur l'annuel** (c'est ce que l'app affiche : « 7 jours gratuits… rien n'est débité » ; corrigé le 2026-11-05, l'ancienne offre « Pay as you go 3 mois à 4,99 $ » n'existe pas dans le code) : pour chacun des deux abonnements › **Subscription Prices** › **View all Subscription Pricing** › **Set up Introductory Offer** › tous les pays › date de début › type **Free**, durée **1 week** › **Confirm** (non modifiable ensuite). L'essai ne se prend qu'une fois par groupe.
-- **Textes à saisir** (identiques au fichier `Config/Ardane.storekit`) : à vie « Premium à vie » / « Tout Premium pour toujours. Un seul paiement. » (45 caractères au plus) ; mensuel « Premium mensuel » / « Tout Premium, chaque mois. Essai de 7 jours. » ; annuel « Premium annuel » / « Tout Premium pendant un an. Essai de 7 jours. » (55 au plus). Anglais : « Lifetime Premium » / « All of Premium, forever. One payment. » ; « Premium Monthly » / « All of Premium, billed monthly. 7-day trial. » ; « Premium Yearly » / « All of Premium for a year. 7-day trial. ». Niveaux du groupe : annuel 1, mensuel 2.
+- **Textes à saisir** (identiques au fichier `Config/Ardane.storekit` ; en anglais, en français (Canada) et en français (France)) : mensuel « Premium mensuel » / « Tout Premium, chaque mois. Essai de 7 jours. » ; annuel « Premium annuel » / « Tout Premium pendant un an. Essai de 7 jours. » (55 au plus). Anglais : « Lifetime Premium » / « All of Premium, forever. One payment. » ; « Premium Monthly » / « All of Premium, billed monthly. 7-day trial. » ; « Premium Yearly » / « All of Premium for a year. 7-day trial. ». Niveaux du groupe : annuel 1, mensuel 2.
 
 **Ne pas cliquer « Add for Review »** : ce n'est utile que pour la sortie sur l'App Store. Attendre jusqu'à 1 h.
 
 ## Étape 3 — Tester toi-même
 
-1. Ouvrir Ardane installée par TestFlight › page Premium : les 3 prix doivent s'afficher.
+1. Ouvrir Ardane installée par TestFlight › page Premium : les 2 prix doivent s'afficher.
 2. Tester d'abord le **mensuel** (offre de lancement), puis l'annuler : Profil › « Gérer l'abonnement ». Dans TestFlight, un abonnement se renouvelle **chaque jour, 6 fois au plus**, puis s'arrête (environ une semaine), même l'annuel.
-3. Acheter **« à vie » en dernier** : avec ton vrai compte Apple, cet achat de test ne peut pas être effacé ; Premium restera actif sur toutes tes versions TestFlight et tu ne reverras plus la page d'achat.
+3. Les abonnements de test s'arrêtent seuls : pour revoir la page d'achat, attendre la fin des renouvellements ou annuler.
 4. « Restaurer mes achats » et une réinstallation retrouvent l'achat.
 
 ## Étape 4 — Faire tester des amis
@@ -58,7 +53,7 @@ Préférer des **testeurs externes** (lien ou courriel). Des testeurs internes d
 > Salut ! Tu peux tester Ardane avant sa sortie :
 > 1. Installe l'app **TestFlight** depuis l'App Store (iPhone en iOS 17 ou plus).
 > 2. Ouvre ce lien sur ton iPhone : [lien public] › **Accepter** › **Installer**.
-> 3. Pour avoir Premium : dans Ardane, ouvre Premium et choisis **« À vie »**. La fenêtre d'Apple affiche un prix, mais **rien n'est débité** : c'est une version de test. Les abonnements de test s'arrêtent seuls après une semaine, le « à vie » reste.
+> 3. Pour avoir Premium : dans Ardane, ouvre Premium et choisis **l'annuel** ou **le mensuel**. La fenêtre d'Apple affiche un prix, mais **rien n'est débité** : c'est une version de test. Les abonnements de test s'arrêtent seuls après environ une semaine ; il suffit alors de reprendre un abonnement.
 > 4. Pour me faire un retour : fais une capture d'écran dans l'app, touche la vignette, puis choisis l'option de commentaire bêta (ou ouvre TestFlight › Ardane › Envoyer un commentaire bêta).
 > Ton achat de test ne sera pas repris dans la version de l'App Store.
 

@@ -31,6 +31,7 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 
 - 2026-10-26 : scanner alimentaire SANS envoi hors de l'appareil (photos analysées sur l'iPhone ; `OnlineMealAnalyzer` désactivé) ; toute option cloud = décision explicite + mise à jour de PRIVACY.md, du libellé caméra et du manifeste (consigné ici le 2026-11-02, la décision n'était que dans Demandes.md).
 - 2026-11-02 (chantier 22, `docs/scanner/Decision-technique.md`) : quantités par assiette de référence + aire du masque + densité (tous iPhone), LiDAR en mode expérimental seulement ; reconnaissance v2 DINOv2 + segmentation RF-DETR-Seg entraînées sur MyFoodRepo (CC BY 4.0) ; base nutritionnelle FCÉN 2026 + USDA, jamais de fusion de valeurs entre sources ; Open Food Facts en ligne seulement (API v3, recherche explicite) ; aucune précision annoncée sans repas pesés ; ancien pipeline gardé en secours.
+- 2026-11-08 (décision de l'utilisateur) : pas d'achat à vie au lancement, seulement Premium mensuel (6,99 $) et annuel (59,99 $), chacun avec un essai gratuit de 7 jours. `com.dakrsnyk.ardane.premium.lifetime` n'est pas créé dans App Store Connect (jamais créé puis supprimé : l'identifiant serait perdu) ; le code le demande toujours, donc le créer plus tard l'affiche sans mise à jour (mention légale conditionnelle dans `PaywallView`).
 
 ## Publicité
 - Une seule publicité exceptionnelle plutôt que plusieurs ordinaires ; seulement des fonctionnalités qui existent vraiment, montrées avec de vrais éléments de l'app.

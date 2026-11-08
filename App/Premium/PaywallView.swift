@@ -373,7 +373,11 @@ struct PaywallView: View {
 
     private var legal: some View {
         VStack(spacing: 10) {
-            Text(tr("Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal. L'achat à vie est un paiement unique, sans renouvellement."))
+            // The lifetime purchase is mentioned only when the App Store offers it (none at launch, decision of 2026-11-08):
+            // creating it later in App Store Connect shows it here with its sentence, without an update of the app.
+            Text(store.lifetime == nil
+                 ? tr("Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal.")
+                 : tr("Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal. L'achat à vie est un paiement unique, sans renouvellement."))
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)

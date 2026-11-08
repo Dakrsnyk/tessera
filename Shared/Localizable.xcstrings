@@ -126713,6 +126713,53 @@
         }
       }
     },
+    "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnements verlängern sich automatisch, sofern sie nicht mindestens 24 Stunden vor Ende des laufenden Zeitraums gekündigt werden. Die Zahlung wird deinem Apple-Account belastet. Du kannst das Abo in den Einstellungen deines App-Store-Accounts verwalten oder kündigen. Die kostenlose Testphase gilt nur einmal pro Account; wird sie nicht mindestens 24 Stunden vor Ablauf gekündigt, wird das Abo zum regulären Preis abgerechnet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscriptions renew automatically unless canceled at least 24 hours before the end of the current period. Payment is charged to your Apple account. You can manage or cancel your subscription in your App Store account settings. The free trial applies once per account; if it is not canceled at least 24 hours before it ends, the subscription is charged at the regular price."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las suscripciones se renuevan automáticamente salvo que se cancelen al menos 24 horas antes del final del periodo en curso. El pago se carga en tu cuenta de Apple. Puedes gestionar o cancelar la suscripción en los ajustes de tu cuenta del App Store. La prueba gratuita se aplica una sola vez por cuenta; si no se cancela al menos 24 horas antes de que termine, la suscripción se cobra al precio normal."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli abbonamenti si rinnovano automaticamente, a meno che non vengano annullati almeno 24 ore prima della fine del periodo in corso. Il pagamento viene addebitato sul tuo account Apple. Puoi gestire o annullare l'abbonamento nelle impostazioni del tuo account App Store. La prova gratuita vale una sola volta per account; se non viene annullata almeno 24 ore prima della fine, l'abbonamento viene addebitato al prezzo normale."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスクリプションは、現在の期間が終了する24時間以上前に解約しない限り、自動的に更新されます。お支払いはApple IDに請求されます。サブスクリプションはApp Storeのアカウント設定で管理・解約できます。無料トライアルはアカウントにつき1回のみで、終了の24時間以上前に解約しない場合は通常価格で課金されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As assinaturas são renovadas automaticamente, a menos que sejam canceladas pelo menos 24 horas antes do fim do período atual. O pagamento é cobrado na sua conta Apple. Você pode gerenciar ou cancelar a assinatura nos ajustes da sua conta da App Store. O teste grátis vale uma única vez por conta; se não for cancelado pelo menos 24 horas antes do fim, a assinatura é cobrada pelo preço normal."
+          }
+        }
+      }
+    },
     "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal. L'achat à vie est un paiement unique, sans renouvellement.": {
       "extractionState": "manual",
       "localizations": {
