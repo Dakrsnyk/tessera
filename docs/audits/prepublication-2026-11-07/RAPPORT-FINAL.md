@@ -183,8 +183,8 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 ### Bloquants pour la soumission (hors code, action de l'utilisateur)
 - Contrat Paid Apps actif : banque, formulaire fiscal américain, TPS/TVQ.
 - Déclaration de commerçant (DSA), obligatoire pour l'UE : adresse, téléphone et courriel publics.
-- Les 2 abonnements Premium (mensuel et annuel, essai de 7 jours) créés dans App Store Connect et joints à la version 1.0. Pas d'achat à vie au lancement (décision du 2026-11-08).
-- Questionnaires App Privacy (« Data Not Collected ») et Age Rating (9+) remplis.
+- Les 2 abonnements Premium (mensuel et annuel, essai de 7 jours) joints à la version 1.0. Saisis par l'utilisateur le 2026-11-08 ; ils se joignent à la version au moment de la soumission. Pas d'achat à vie au lancement (décision du 2026-11-08).
+- Questionnaires App Privacy (« Data Not Collected ») et Age Rating (9+) : remplis par l'utilisateur le 2026-11-08, d'après ses messages et ses captures (9+ confirmé).
 - Une version publique `[testflight]` à jour, choisie dans Build, après les tests manuels de la section G. Elle n'est produite qu'avec l'accord explicite de l'utilisateur.
 
 ### Décisions de l'utilisateur du 2026-11-07, appliquées
