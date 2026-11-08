@@ -66,9 +66,14 @@ enum ScreenshotMode {
                 try? await Task.sleep(for: .milliseconds(900))
                 router.storePath = [.setups]
             }
-        case "home":
+        case "home", "home-habits-wide":
             router.tab = .home
-            model.updateSettings { $0.dailyCardPages = [:] }
+            // `home-habits-wide`: the Habits card across the whole width (a row of days a habit). `home` puts it back
+            // to its own size, so the tests after the one that widened it see Home as before.
+            model.updateSettings { settings in
+                settings.dailyCardPages = [:]
+                settings.dailyWide["habits"] = screen == "home-habits-wide" ? true : nil
+            }
         case "home-pages":
             // « Mon Quotidien » with every card swiped to its second view.
             router.tab = .home

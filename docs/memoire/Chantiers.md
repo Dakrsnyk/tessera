@@ -193,3 +193,12 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Run 42452111696 (Build 371, sans Premium, commit 8587d486) : 1 370 tests logiques réussis sur 1 370, interface 31 sur 31 ; `testMonQuotidienOpensAMiniApp` réussi (une fois : à surveiller) ; retrait de l'achat à vie compilé ; traductions : 5 680 textes, aucun manquant.
 - App Store Connect, saisie de l'utilisateur le 2026-11-08 : 2 abonnements avec essai d'une semaine, confidentialité, tarifs et disponibilité (sans la Chine continentale), classification 9+. Les 8 captures 6,9 pouces sont prêtes (`pub/Ardane_AppStore_Design/23_BigTitle_B_final/Publication_1320x2868/`, hors dépôt).
 - Reste : tests manuels de la section G sur l'iPhone ; actions de l'utilisateur (DSA, page de la version 1.0 avec les captures, contrat Paid Apps, banque, dépôt privé, clés de signature, réglages GitHub) ; `[testflight]` seulement sur son accord.
+
+## Mon Quotidien : habitudes en petits carrés sur la carte large — 2026-11-08
+- Demande de l'utilisateur : sur la carte Habitudes affichée en grand, une rangée de petits carrés par habitude.
+- Fait (`HabitsDayTile` dans `DailySection.swift`) :
+  - sur toute la largeur, le compte et la série sur une ligne ;
+  - puis une ligne par habitude (5 au plus) : anneau du jour, nom, derniers jours en petits carrés (aujourd'hui en dernier), avec les règles du widget Habitudes (`HabitHeatmap`) ;
+  - à demi-largeur à côté d'une autre carte, rien ne change.
+- Test d'interface `testDailyHabitsCardShowsARowOfDaysPerHabitWhenWide` (mode capture `home-habits-wide`, capture `profile-daily-habits-wide`). Relu par code-reviewer, sans bloquant.
+- Reste : version interne, puis `[daily]` (test et capture), puis l'iPhone.

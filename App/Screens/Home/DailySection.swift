@@ -1033,6 +1033,12 @@ private struct HabitsDayTile: View {
     let done: Int
     let items: [DailyBrief.Check]
     @Environment(AppModel.self) private var model
+    @Environment(\.dailyCompact) private var compact
+    /// The height of a habit's row on the wide card, with the text size.
+    @ScaledMetric(relativeTo: .subheadline) private var rowHeight: CGFloat = 20
+
+    /// The habits shown, the others counted (« +2 »).
+    private static let limit = 5
 
     /// The longest run of days in a row among the habits (nothing shown without one).
     private var streak: Int { items.map(\.streak).max() ?? 0 }
@@ -1041,49 +1047,119 @@ private struct HabitsDayTile: View {
 
     var body: some View {
         DayCard(title: tr("Habitudes"), symbol: "repeat", colorHex: "5C8424", route: .page(.planningHabits)) {
-            // One ring a habit, in its own color: full with a check when done today.
-            HStack(spacing: 6) {
-                ForEach(items.prefix(5)) { item in
-                    let color = Color(hex: item.colorHex ?? "7FA33A")
-                    ZStack {
-                        Circle().strokeBorder(color, lineWidth: 2.5)
-                        if item.isDone {
-                            Circle().fill(color)
-                            Image(systemName: "checkmark")
-                                .font(.system(size: 10, weight: .heavy))
-                                .foregroundStyle(.white)
-                        }
+            if compact {
+                // One ring a habit, in its own color: full with a check when done today.
+                HStack(spacing: 6) {
+                    ForEach(items.prefix(Self.limit)) { item in
+                        ring(item, size: 22)
                     }
-                    .frame(width: 22, height: 22)
+                    if items.count > Self.limit { more }
                 }
-                if items.count > 5 {
-                    Text("+\(items.count - 5)")
-                        .font(.caption.weight(.semibold))
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Text(names))
+                count
+                if streak > 0 {
+                    streakText
+                } else {
+                    Text(names)
+                        .font(.caption)
                         .foregroundStyle(.secondary)
+                        .lineLimit(2)
                 }
-            }
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel(Text(names))
-            HStack(alignment: .firstTextBaseline, spacing: 2) {
-                Text("\(done)")
-                    .font(.title.weight(.bold))
-                Text("/\(items.count)")
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
-            }
-            if streak > 0 {
-                Text(tr("Série de \(Fmt.plural(streak, tr("jour"), tr("jours")))"))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(2)
             } else {
-                Text(names)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(2)
+                // The whole width (request of 2026-11-08): one row a habit, its ring of today and its last days as
+                // small squares, like the medium Habits widget.
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    count
+                    Spacer(minLength: 8)
+                    if streak > 0 { streakText }
+                }
+                VStack(alignment: .leading, spacing: 7) {
+                    ForEach(items.prefix(Self.limit)) { item in
+                        row(item)
+                    }
+                    if items.count > Self.limit { more }
+                }
             }
         }
         .accessibilityIdentifier("daily-habits")
+    }
+
+    /// Today's state of a habit, in its own color: a ring, full with a check when done.
+    private func ring(_ item: DailyBrief.Check, size: CGFloat) -> some View {
+        let color = Color(hex: item.colorHex ?? "7FA33A")
+        return ZStack {
+            Circle().strokeBorder(color, lineWidth: 2.5)
+            if item.isDone {
+                Circle().fill(color)
+                Image(systemName: "checkmark")
+                    .font(.system(size: size * 0.45, weight: .heavy))
+                    .foregroundStyle(.white)
+            }
+        }
+        .frame(width: size, height: size)
+    }
+
+    private var count: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 2) {
+            Text("\(done)")
+                .font(.title.weight(.bold))
+            Text("/\(items.count)")
+                .font(.headline)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    private var streakText: some View {
+        Text(tr("Série de \(Fmt.plural(streak, tr("jour"), tr("jours")))"))
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .lineLimit(2)
+    }
+
+    private var more: some View {
+        Text("+\(items.count - Self.limit)")
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(.secondary)
+    }
+
+    /// One habit across the card: its ring of today, its name, then its last days, today last, as many small squares
+    /// as the width holds (done in the habit's color, not done faint), the same way as the Habits widget.
+    private func row(_ item: DailyBrief.Check) -> some View {
+        let color = Color(hex: item.colorHex ?? "7FA33A")
+        let habit = model.content.habits.first { $0.id.uuidString == item.id }
+        let ringSize = min(rowHeight, 22)
+        return GeometryReader { proxy in
+            let nameWidth = min(max(proxy.size.width * 0.32, 64), 140)
+            let gridWidth = max(0, proxy.size.width - ringSize - nameWidth - 16)
+            HStack(spacing: 8) {
+                ring(item, size: ringSize)
+                Text(item.title)
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .frame(width: nameWidth, alignment: .leading)
+                if let habit, gridWidth > 0 {
+                    // Cells of 12 points at most: one row of recent days, never the weeks of seven rows.
+                    let days = HabitHeatmap.layout(width: gridWidth, height: 12).columns
+                    HabitHeatmapGrid(columns: HabitHeatmap.recent(for: habit, days: days),
+                                     doneColor: color, emptyColor: color.opacity(0.16))
+                        .frame(width: gridWidth, alignment: .leading)
+                }
+            }
+            .frame(width: proxy.size.width, height: proxy.size.height, alignment: .leading)
+        }
+        .frame(height: rowHeight)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(label(item, habit: habit)))
+    }
+
+    /// What VoiceOver says of a row: the habit (checked when done today) and its regularity over 30 days, as the
+    /// Habits widget says it.
+    private func label(_ item: DailyBrief.Check, habit: Habit?) -> String {
+        let name = item.isDone ? "\(item.title) ✓" : item.title
+        guard let habit, let rate = HabitHeatmap.rate(of: habit) else { return name }
+        return "\(name), \(tr("Régularité")) : \(Fmt.percent(rate))"
     }
 }
 

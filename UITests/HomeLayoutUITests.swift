@@ -41,6 +41,77 @@ extension ProfileUITests {
         XCTAssertFalse(app.buttons["daily-grow-nutrition"].exists, "Le « + » reste hors du mode édition")
     }
 
+    /// The Habits card across the whole width (request of 2026-11-08): one row a habit, its ring of today and its
+    /// last days as small squares, like the medium Habits widget; next to another card, its rings as before. The rows
+    /// sit in the card's link, so the test reads what VoiceOver says: each row gives its habit's regularity, which only
+    /// the card across the width says. The size is applied once the app has started (`ScreenshotMode`), hence the
+    /// waits. `-screenshotScreen home` then puts the card back to its own size for the next tests.
+    func testDailyHabitsCardShowsARowOfDaysPerHabitWhenWide() {
+        continueAfterFailure = false
+        var app = XCUIApplication()
+        addTeardownBlock { app.terminate() }
+
+        func open(_ screen: String) -> XCUIElement {
+            app = XCUIApplication()
+            app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA", "-screenshotScreen", screen]
+            app.launch()
+            let card = app.descendants(matching: .any)["daily-habits"].firstMatch
+            XCTAssertTrue(card.waitForExistence(timeout: 12), "Carte Habitudes absente (\(screen))")
+            return card
+        }
+        /// Short, slow drags in the side margin (no card takes them) until the whole card is between the top of the
+        /// page and the tab bar, for the capture.
+        func bringIntoView(_ card: XCUIElement) {
+            let height = app.frame.height > 100 ? app.frame.height : 874
+            let width = app.frame.width > 100 ? app.frame.width : 402
+            let top = height * 0.12
+            let bottom = height - 120
+            var drags = 0
+            while (card.frame.minY < top || card.frame.maxY > bottom) && drags < 12 {
+                let goesUp = card.frame.maxY > bottom
+                let distance = min(260, goesUp ? card.frame.maxY - bottom + 40 : top - card.frame.minY + 40)
+                let from = goesUp ? height * 0.7 : height * 0.3
+                let origin = app.coordinate(withNormalizedOffset: .zero)
+                let start = origin.withOffset(CGVector(dx: width * 0.02, dy: from))
+                let end = origin.withOffset(CGVector(dx: width * 0.02, dy: goesUp ? from - distance : from + distance))
+                start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.2)
+                drags += 1
+            }
+        }
+
+        /// Whether the card spans the width of the page (wide, or a half card alone on its row, laid out the same way).
+        func spansTheWidth(_ card: XCUIElement) -> Bool {
+            card.frame.width > (app.frame.width > 100 ? app.frame.width : 402) * 0.6
+        }
+        func waitUntil(_ seconds: TimeInterval, _ condition: () -> Bool) {
+            let deadline = Date().addingTimeInterval(seconds)
+            while !condition() && Date() < deadline { Thread.sleep(forTimeInterval: 0.3) }
+        }
+
+        let wide = open("home-habits-wide")
+        waitUntil(8) { wide.label.contains("Régularité") }
+        bringIntoView(wide)
+        Thread.sleep(forTimeInterval: 0.5)
+        let shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "profile-daily-habits-wide"
+        shot.lifetime = .keepAlways
+        add(shot)
+        XCTAssertTrue(spansTheWidth(wide), "La carte Habitudes ne prend pas toute la largeur (\(Int(wide.frame.width)) pt)")
+        XCTAssertTrue(wide.label.contains("Régularité"), "La carte Habitudes large n'a pas une ligne par habitude : \(wide.label)")
+        app.terminate()
+
+        // Back to its own size: half of the width, next to another card (rings), or alone on its row (rows).
+        let half = open("home")
+        // Alone on its row the card spans the width either way: a moment for `home` to apply its size first.
+        Thread.sleep(forTimeInterval: 1.5)
+        waitUntil(8) { !spansTheWidth(half) }
+        if spansTheWidth(half) {
+            XCTAssertTrue(half.label.contains("Régularité"), "Seule sur sa ligne, la carte Habitudes n'a pas une ligne par habitude : \(half.label)")
+        } else {
+            XCTAssertFalse(half.label.contains("Régularité"), "La carte Habitudes à demi-largeur a changé : \(half.label)")
+        }
+    }
+
     /// Edit mode: a card held half a second then dragged onto its neighbour takes its place (and back, so the
     /// order the other tests see is unchanged), and a quick swipe over a card scrolls Home instead of lifting it
     /// (remark of 2026-11-05 on Build 340, `DailyHoldToMove`). The neighbour is the left half card of the row under
