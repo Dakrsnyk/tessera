@@ -70,6 +70,9 @@ struct DailySection: View {
     @State private var dragStart: CGPoint = .zero
     @State private var frames: [String: CGRect] = [:]
     @State private var lastSwap = Date.distantPast
+    /// The cards that changed rows at the last move of the drag: not taken again until the finger leaves them
+    /// (`DailyLayoutRules.changedRows`).
+    @State private var settled: Set<String> = []
     private var steps: StepCounter { .shared }
 
     var body: some View {
@@ -117,10 +120,13 @@ struct DailySection: View {
             if !tiles.isEmpty {
                 let wides = tiles.map { DailyLayoutRules.size(of: $0, wide: settings.dailyWide) == .wide }
                 let paired = Set(DailyLayoutRules.rows(wides: wides).filter { $0.count > 1 }.flatMap { $0 }.map { tiles[$0].id })
-                let movable = tiles.filter(DailyLayoutRules.isMovable).map(\.id)
+                let wideIDs = Set(zip(tiles, wides).filter { $0.1 }.map { $0.0.id })
+                // As they are read on screen: « before » and « after » are the neighbours the person sees.
+                let movable = DailyLayoutRules.readingOrder(tiles.filter(DailyLayoutRules.isMovable).map(\.id),
+                                                            isWide: { wideIDs.contains($0) })
                 DailyGridLayout(wides: wides) {
                     ForEach(tiles) { tile in
-                        gridCard(tile, compact: paired.contains(tile.id), movable: movable, wide: settings.dailyWide)
+                        gridCard(tile, compact: paired.contains(tile.id), movable: movable, wideIDs: wideIDs, wide: settings.dailyWide)
                     }
                 }
                 .coordinateSpace(name: "daily-grid")
@@ -198,18 +204,19 @@ struct DailySection: View {
 
     /// What a card does in edit mode and for VoiceOver. Every change is saved at once, in the same settings as the
     /// layout editor.
-    private func gridCard(_ tile: DailyBrief.Tile, compact: Bool, movable: [String], wide: [String: Bool]) -> some View {
+    private func gridCard(_ tile: DailyBrief.Tile, compact: Bool, movable: [String], wideIDs: Set<String>,
+                          wide: [String: Bool]) -> some View {
         let actions = cardActions(tile)
         let dragging = draggingID == tile.id
         let canMove = DailyLayoutRules.isMovable(tile)
         let handlers = DailyEditHandlers(
             grow: { resize(tile, to: .wide) },
             shrink: { resize(tile, to: .half) },
-            moveBefore: { moveByRank(tile, movable: movable, by: -1) },
-            moveAfter: { moveByRank(tile, movable: movable, by: 1) },
+            moveBefore: { moveByRank(tile, movable: movable, wideIDs: wideIDs, by: -1) },
+            moveAfter: { moveByRank(tile, movable: movable, wideIDs: wideIDs, by: 1) },
             remove: actions.remove,
             organize: actions.organize,
-            drag: { drag in if canMove { dragChanged(tile, drag, movable: movable) } },
+            drag: { drag in if canMove { dragChanged(tile, drag, movable: movable, wideIDs: wideIDs) } },
             drop: { dropCard() }
         )
         return DailyEditableCard(
@@ -235,16 +242,18 @@ struct DailySection: View {
         }
     }
 
-    private func moveByRank(_ tile: DailyBrief.Tile, movable: [String], by delta: Int) {
-        guard DailyLayoutRules.canMove(movable, id: tile.id, by: delta) else { return }
+    /// VoiceOver « Déplacer avant » / « Déplacer après »: the card goes where its neighbour on screen is, the way a drop
+    /// onto that neighbour would put it (a wide card trades rows with the two half cards under it).
+    private func moveByRank(_ tile: DailyBrief.Tile, movable: [String], wideIDs: Set<String>, by delta: Int) {
+        let ids = DailyLayoutRules.moved(movable, id: tile.id, by: delta, isWide: { wideIDs.contains($0) })
+        guard ids != movable else { return }
         Haptics.tap()
-        let ids = DailyLayoutRules.moved(movable, id: tile.id, by: delta)
         withAnimation(moveAnimation) { model.updateSettings { $0.dailyOrder = ids } }
     }
 
     /// The finger moves the card (it was held): it follows the finger, and takes the place of the card it is over,
     /// the others slide aside.
-    private func dragChanged(_ tile: DailyBrief.Tile, _ drag: DailyCardDrag, movable: [String]) {
+    private func dragChanged(_ tile: DailyBrief.Tile, _ drag: DailyCardDrag, movable: [String], wideIDs: Set<String>) {
         guard editing, let layout = frames[tile.id] else { return }
         if draggingID != tile.id {
             draggingID = tile.id
@@ -252,18 +261,25 @@ struct DailySection: View {
             grab = drag.grab
             dragStart = CGPoint(x: layout.minX + drag.grab.x, y: layout.minY + drag.grab.y)
             dragOffset = .zero
+            settled = []
             Haptics.tap()
         }
         // In the « daily-grid » space: where the finger took the card, plus how far it went.
         let location = CGPoint(x: dragStart.x + drag.translation.width, y: dragStart.y + drag.translation.height)
         dragOffset = CGSize(width: location.x - grab.x - layout.minX, height: location.y - grab.y - layout.minY)
+        let found = DailyLayoutRules.target(at: location, frames: frames, excluding: tile.id)
+        // Over a card that just made room: nothing until the finger leaves it. Anywhere else, every card counts again.
+        if let found, settled.contains(found) { return }
+        settled = []
         guard Date().timeIntervalSince(lastSwap) > 0.25,
               let order = liveOrder,
-              let target = DailyLayoutRules.target(at: location, frames: frames, excluding: tile.id),
+              let target = found,
               order.contains(target) else { return }
-        let next = DailyLayoutRules.moved(order, id: tile.id, onto: target)
+        let isWide: (String) -> Bool = { wideIDs.contains($0) }
+        let next = DailyLayoutRules.moved(order, id: tile.id, onto: target, isWide: isWide)
         guard next != order else { return }
         lastSwap = Date()
+        settled = DailyLayoutRules.changedRows(from: order, to: next, isWide: isWide).subtracting([tile.id])
         withAnimation(moveAnimation) { liveOrder = next }
     }
 

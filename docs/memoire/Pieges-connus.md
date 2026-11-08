@@ -12,7 +12,12 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 - La branche `ci-report` est réécrite à chaque run : seul le dernier rapport est gardé. Copier ce dont on a besoin aussitôt.
 - Les fichiers produits pendant une session cloud de Claude (rapports, PNG, vidéos) disparaissent avec la session : ce qui doit durer va dans le dépôt.
 - Une fiche que l'app ouvre d'elle-même après une action (explication d'une permission à la première série, 2026-11-07) recouvre l'écran des tests d'interface et des captures de pub : la retenir une seule fois quelle que soit la réponse (« Plus tard » ne marque rien dans `PermissionMemory`) et ne pas l'ouvrir en mode capture (`screenshotScreen`, sous `#if DEBUG`).
-- Les tests d'interface d'un même run partagent les données du simulateur : `ScreenshotMode.seed` ne remet la démo que s'il n'y a aucun widget, et une séance laissée en cours ou une carte de Mon Quotidien redimensionnée par un test change l'écran des suivants (piste de l'échec du test du mode « Organiser » depuis le 2026-11-07).
+- Les tests d'interface d'un même run partagent les données du simulateur : `ScreenshotMode.seed` ne remet la démo que s'il n'y a aucun widget, et une séance laissée en cours, une carte redimensionnée ou laissée sur une autre page par un test change l'écran des suivants.
+- Un test d'interface qui touche un élément hors de l'écran (première page d'une carte à pages laissée sur une autre) fait défiler XCUITest à moitié : toucher un élément toujours visible (`daily-pager-<carte>`).
+- Un test d'interface qui réussit et échoue tour à tour sans changement de code n'est pas forcément « instable » : chercher ce qui varie (heure, balancement, données partagées). Le test « Organiser » cachait ainsi un vrai défaut (ligne suivante).
+
+## Mon Quotidien (grille)
+- Une petite carte qui attend sa partenaire est dessinée APRÈS la carte large qui la suit (`rows(wides:)`) : un changement de rang peut ne rien changer à l'écran. Tout déplacement passe par l'ordre de lecture et `DailyLayoutRules.moved(_:id:onto:isWide:)` (la carte prend la ligne visée, sinon rien), jamais par un simple rang (2026-11-07).
 
 ## Code et données
 - Ne pas régénérer `ExerciseDemos.json` sur Windows sans vérifier (export différent, encodage cp1252 sans `PYTHONUTF8=1`).

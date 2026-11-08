@@ -81,7 +81,7 @@ MODULES = [
          "Cartes du jour (nutrition, séance, habitudes, À ne pas oublier, planning, budget, Top 3…), classées selon le moment de la journée.",
          "Cartes à plusieurs vues (balayage), disposition à la main par le petit « + » de l'en-tête (ordre, demi ou large, masquer) ; « Mes données » n'est plus en haut (« Mes informations » est en bas).",
          "La carte Planning ouvre la mini-app Planning (création d'événement en touchant une heure libre).",
-         "Mon Quotidien comme l'écran d'accueil d'iOS : appui long sur une carte → « Organiser… », les cartes tremblent, balayer fait défiler, maintenir une demi-seconde puis glisser déplace la carte (appui long d'UIKit, défilement automatique près des bords : `DailyHoldToMove`), + / − pour la taille, « OK » pour finir (`DailyEditMode`, règles dans `DailyLayoutRules`).",
+         "Mon Quotidien comme l'écran d'accueil d'iOS : appui long sur une carte → « Organiser… », les cartes tremblent, balayer fait défiler, maintenir une demi-seconde puis glisser déplace la carte (appui long d'UIKit, défilement automatique près des bords : `DailyHoldToMove`), + / − pour la taille, « OK » pour finir (`DailyEditMode`, règles dans `DailyLayoutRules`). Une carte lâchée sur une autre prend sa ligne à l'écran (ordre de lecture ; une carte large et la paire de petites cartes voisine échangent leurs lignes), VoiceOver « Déplacer avant / après » de même.",
          "« Mes informations » : complétude du profil et chaque domaine suivi d'un coup d'œil.",
          "`MiniAppsRow.swift` est présent mais le type `MiniAppsRow` n'est instancié nulle part.",
      ],

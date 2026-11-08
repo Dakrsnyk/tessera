@@ -51,7 +51,9 @@ extension ProfileUITests {
         app.launch()
         addTeardownBlock { app.terminate() }
 
-        let nutritionCard = app.descendants(matching: .any)["daily-nutrition"].firstMatch
+        // The card's pages, always on screen: its first page can be off screen (another test leaves the card on
+        // « Repas »), and a press on it made XCUITest scroll the pages half way.
+        let nutritionCard = app.descendants(matching: .any)["daily-pager-nutrition"].firstMatch
         XCTAssertTrue(nutritionCard.waitForExistence(timeout: 12), "Carte Nutrition absente")
         nutritionCard.press(forDuration: 1.2)
         let organize = app.buttons["Organiser…"]
@@ -82,8 +84,11 @@ extension ProfileUITests {
         let others = ["planning", "workout", "habits", "steps", "budget", "priorities", "reminders"]
             .map(corner)
             .filter { $0.exists && inMiddle($0.frame) }
-        guard inMiddle(nutrition.frame), let neighbour = others.min(by: {
-            abs($0.frame.minY - nutrition.frame.minY) < abs($1.frame.minY - nutrition.frame.minY)
+        // The nearest row, its LEFT card: the wide card dropped onto it changed the order without moving anything on
+        // screen (2026-11-07), while the right card worked; the wiggle chose one or the other at random.
+        guard inMiddle(nutrition.frame), let neighbour = others.min(by: { a, b in
+            let da = abs(a.frame.minY - nutrition.frame.minY), db = abs(b.frame.minY - nutrition.frame.minY)
+            return abs(da - db) < 20 ? a.frame.minX < b.frame.minX : da < db
         }) else {
             throw XCTSkip("Pas deux cartes au milieu de l'écran sur ce simulateur : \(nutrition.frame)")
         }
@@ -94,8 +99,7 @@ extension ProfileUITests {
             inside(nutrition).press(forDuration: 0.9, thenDragTo: inside(neighbour), withVelocity: .slow, thenHoldForDuration: 0.6)
             Thread.sleep(forTimeInterval: 1.0)
         }
-        /// The screen around the first drag, kept in the CI report: this test fails on the simulator since
-        /// 2026-11-07 while the gesture was validated on the iPhone (Build 342) and its code has not changed.
+        /// The screen around the first drag, kept in the CI report.
         func keep(_ name: String) {
             let shot = XCTAttachment(screenshot: app.screenshot())
             shot.name = "profile-\(name)"

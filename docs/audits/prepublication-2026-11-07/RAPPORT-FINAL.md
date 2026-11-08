@@ -8,12 +8,13 @@
 
 ## A. État général
 
-| Élément | Avant (run 42409228969, commit 6fad886f) | Après les corrections (run 42421136593, commit 0ae2ef8d, Build 363) |
+| Élément | Avant (run 42409228969, commit 6fad886f) | Après les corrections (runs 42421136593 Build 363, 42429465658 Build 364, 42430789992 Build 365) |
 |---|---|---|
 | Compilation de l'app et de l'extension (simulateur et iPhone non signé) | réussie | réussie |
-| Version Release (configuration App Store, simulateur) | réussie | réussie ; déverrouillage de test trouvé dans les binaires de l'app et de l'extension : **0** |
-| Tests logiques | 1 241 réussis / 1 241 | **1 361 réussis / 1 361** (+120) |
-| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **29 réussis, 2 échecs** : un nouveau, corrigé ensuite (section A.2), et l'ancien |
+| Version Release (configuration App Store, simulateur) | réussie | réussie (Build 363) ; déverrouillage de test trouvé dans les binaires de l'app et de l'extension : **0** |
+| Version interne signée (TestFlight, Premium débloqué) | — | Build 364 : archive, export et contrôles des binaires réussis ; « Internal Only » confirmé par l'API d'Apple |
+| Tests logiques | 1 241 réussis / 1 241 | **1 362 réussis / 1 362** (+121, Build 365) |
+| Tests d'interface (`[daily]` : MiniApp, Studio, Profil) | 30 réussis, 1 échec | **31 réussis / 31** (Build 365), après correction des 2 défauts qu'ils avaient révélés (section A.2) |
 | Contrôles statiques (`check_swift.py`) et traductions | réussis | réussis ; 5 679 textes, 0 absent du catalogue, 0 non traduit, 0 inutilisé |
 | Tests non exécutés | aucun test ignoré ; les tests de pub et de vidéo ne font pas partie de `[daily]` | idem |
 | Couverture de code | non mesurée (la CI ne produit pas de rapport de couverture) | non mesurée |
@@ -35,6 +36,8 @@ Toutes les exécutions sont sur la CI (Xcode 26.3, build 17C529, simulateur iOS 
 | 42416753618 | `[unit]` | 1 353 réussis, 5 échecs | corrigés sans affaiblir les tests (détail ci-dessous) |
 | 42419753127 | `[daily] [release]` | erreur de compilation : le masquage des graphiques d'argent posé dans une vue sans accès à la tuile | masquage déplacé sur la vue du visuel, depuis la tuile |
 | 42421136593 | `[daily] [release]` | logique 1 361 / 1 361 ; interface 29 / 31 ; Release sans déverrouillage de test | voir les 2 échecs ci-dessous |
+| 42429465658 | version interne | Build 364 signé et envoyé sur TestFlight ; contrôles des binaires réussis ; « Internal Only » confirmé | installé par l'utilisateur pour les tests de la section G |
+| 42430789992 | `[daily]` | logique **1 362 / 1 362** ; interface **31 / 31** | les 2 échecs ci-dessous réussissent ; le second cachait un vrai défaut, corrigé ensuite |
 
 Les 5 échecs du `[unit]` :
 - `WeightPlanModelTests` : pendant une grossesse, le calcul automatique garde désormais le maintien (garde-fou N-04). Le test attend ce maintien.
@@ -47,14 +50,23 @@ Les 2 échecs d'interface du run 42421136593 :
    - Cause : « Plus tard » ne retenait rien, donc la fiche serait revenue après chaque série.
    - Correction (`RestAlertOffer`, `FitnessSession.swift`) : l'offre est faite une seule fois par installation, quelle que soit la réponse. Elle n'est jamais faite si les notifications sont déjà accordées ou refusées, ni dans les captures de la version de test (pubs, vidéos, tests d'interface).
    - Test ajouté : `testRestAlertIsOfferedOnceWhateverTheAnswer`. Relu par `code-reviewer` : aucun bloquant.
-   - À confirmer par le prochain run de tests, et sur l'iPhone (section G, point 3).
-2. **`ProfileUITests.testDailyEditModeMovesHeldCardsAndScrollsOnSwipe` : ancien, présent avant l'audit, cause non établie.**
-   - Le glisser simulé par XCUITest ne fait pas changer de place la carte maintenue sur le simulateur.
-   - Il passait au Build 344 (run 42140979318, commit a500c8dc). Il échoue depuis l'état de référence (run 42409228969, commit 6fad886f), avant toute correction de l'audit, avec le même Xcode 26.3.
-   - Entre ces deux commits, aucune ligne de Mon Quotidien ni du geste n'a changé. Seuls ont changé le rendu de deux widgets, des réglages de capture pour les pubs, et le test du Studio, qui s'exécute juste avant celui-ci.
-   - Piste la plus probable : l'état laissé par les tests précédents. Les données restent d'un test à l'autre sur le simulateur, dont une séance laissée en cours. La carte Nutrition, large, est alors glissée sur une voisine placée en dessous.
-   - Le geste a été validé à la main par l'utilisateur sur l'iPhone (Build 342). Deux captures (avant et après le glisser) ont été ajoutées au test pour le prochain run.
-   - À revérifier sur l'iPhone (section G, point 10).
+   - Confirmé au run 42430789992 : le test réussit, et la capture de la séance ne montre plus la fiche. Reste à voir sur l'iPhone (section G, point 3).
+2. **`ProfileUITests.testDailyEditModeMovesHeldCardsAndScrollsOnSwipe` : ancien, cause trouvée, vrai défaut de l'app, corrigé.**
+   - Constat : réussi aux runs 42140979318 et 42430789992, échoué aux runs 42409228969 et 42421136593, sans aucun changement du code du geste.
+   - Cause : une carte large est seule sur sa ligne, les petites vont par deux, et une petite carte qui attend sa partenaire est dessinée après la carte large qui la suit. Glisser la grande carte Nutrition sur la petite carte de **gauche** de la ligne du dessous changeait l'ordre, mais l'écran restait identique. Tant que le doigt restait dessus, l'ordre basculait en plus toutes les 0,25 s. Sur la carte de **droite**, le déplacement fonctionnait.
+   - Pourquoi le test alternait : il choisissait la plus proche des deux cartes, et le balancement du mode « Organiser » décale leur « × » d'une fraction de point. Les deux échecs visent la carte de gauche (x = 14,6).
+   - Même défaut pour VoiceOver : « Déplacer après » sur la carte large ne changeait rien à l'écran.
+   - Correction (`DailyLayoutRules.moved(_:id:onto:isWide:)`, `DailySection.swift`) :
+     - la carte lâchée prend la ligne de la carte visée ; si un simple changement de rang ne suffit pas, les deux lignes s'échangent ;
+     - si aucun ordre ne peut la montrer à cette place (une petite carte seule reste après les cartes larges), rien ne change ;
+     - pendant le glisser, une carte qui vient de changer de ligne n'est plus visée tant que le doigt ne l'a pas quittée. Cela évite un va-et-vient quand une carte large est moins haute que la ligne de petites cartes ; ce défaut existait déjà avec la carte de droite (vu à la relecture) ;
+     - VoiceOver vise le voisin tel qu'il est vu à l'écran, ou le suivant quand la carte ne peut pas le dépasser.
+   - Tests :
+     - 8 tests logiques ajoutés, dont la vérification de chaque lâcher et de chaque déplacement VoiceOver dans 6 grilles mixtes ;
+     - le test d'interface vise désormais toujours la carte de gauche ;
+     - il appuie sur les pages de la carte et non sur sa première page. XCUITest faisait défiler cette page à moitié quand un autre test laissait la carte sur « Repas », d'où une carte décalée sur les captures.
+   - Vérifié avant l'envoi par une simulation en Python des mêmes règles : 67 200 lâchers et 28 000 déplacements VoiceOver aléatoires. La carte finit toujours dans la ligne visée, ou rien ne change. Relu par `code-reviewer`.
+   - À confirmer par la CI (run suivant ce commit) et sur l'iPhone (section G, point 10).
 
 ## B. Résultats par domaine
 
@@ -72,7 +84,7 @@ Constats, puis corrections :
 | Confidentialité et conformité | 3 de processus / 5 / 10 | P-04, P-05, P-06, P-07 | — | `confidentialite-conformite.md` |
 | Sécurité | 0 critique / 1 élevé / 2 moyens / 7 faibles | S-05 (script), S-07, S-08, S-09 | — | hors dépôt (voir C) |
 
-En tout : 161 constats. Le nombre de tests logiques exécutés passe de 1 241 à 1 361 (+120), puis 1 362 avec le test de l'alerte de repos.
+En tout : 161 constats, plus le défaut du mode « Organiser » trouvé par les tests d'interface. Le nombre de tests logiques exécutés passe de 1 241 à 1 361 (+120), puis 1 362 avec le test de l'alerte de repos (vérifié), puis 1 370 attendus avec les 8 tests du déplacement des cartes.
 
 ## C. Sécurité et confidentialité
 
@@ -142,6 +154,7 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 6. **Plantages et blocages.** Plus de plantage sur une quantité énorme, plus de séance « en cours » sans fin, plus de bouton « + » sans effet.
 7. **Accessibilité.** Zones tactiles de 44 pt, VoiceOver, contrastes, confirmations de suppression.
 8. **Sécurité.** Clé Stripe plus stricte et effacée à une installation neuve, image plafonnée, contrôle Release plus strict.
+9. **Trouvés par les tests d'interface (section A.2).** La fiche de l'alerte de repos ne s'offre plus qu'une fois. Une carte large glissée sur la carte de gauche de la ligne du dessous change maintenant vraiment de place.
 
 ## F. Restes
 
@@ -162,7 +175,7 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
 ### Encore ouverts
 - Chiffrement et remplacement des clés de signature.
 - Réglages GitHub : ruleset de `main`, actions limitées et épinglées.
-- Test d'interface du mode « Organiser » (glisser simulé), voir A.2.
+- Confirmation par la CI du correctif du mode « Organiser » (A.2), puis sur l'iPhone (G, point 10).
 
 ### Facultatifs (après le lancement)
 - Tests de performance en CI (R-01), budget de taille des modèles (R-04), fichier `cnf-foods.json` en double (R-03).
@@ -191,7 +204,11 @@ Chaque correction a son problème, sa cause, ses fichiers et son test : voir les
    - « Effacer toutes mes données » ne laisse rien. Une réinstallation n'a plus de clé Stripe.
 8. **Affichage.** Mode sombre, grande taille de texte, VoiceOver (cases à cocher, graphiques), iPhone en anglais (nouveaux textes).
 9. **Couleurs modifiées.** Les boutons orange de Nutrition sont en texte foncé, et les textes secondaires des thèmes Carte, Dune et Glacier sont plus foncés : valider le rendu.
-10. **Mon Quotidien, mode « Organiser ».** Maintenir une carte puis la glisser sur sa voisine : elle prend sa place. Un balayage rapide fait défiler sans rien déplacer. Le test d'interface de ce geste échoue sur le simulateur (A.2).
+10. **Mon Quotidien, mode « Organiser ».**
+    - Maintenir la grande carte Nutrition, puis la glisser sur la petite carte de **gauche** de la ligne du dessous : elle passe sous cette ligne. Avant la correction, rien ne bougeait (A.2).
+    - La remonter de la même façon.
+    - Deux petites cartes côte à côte échangent leur place.
+    - Un balayage rapide fait défiler sans rien déplacer.
 11. **Scanner : récapitulatif.** Un aliment incertain affiche l'étiquette « Estimation » sur une ligne, avec son icône (défaut vu sur l'iPhone, corrigé dans le commit 3835af0f).
 
 ## H. Checklist App Store Connect
@@ -215,3 +232,4 @@ Voir `confidentialite-conformite.md` §8 (champ par champ) et `docs/lancement/fi
 - Vérifiée en CI (run 42421136593, Build 363) : la version Release, en configuration App Store, compile pour le simulateur. Les binaires de l'app et de l'extension ne contiennent ni le déverrouillage de test ni les écrans de capture : 0 trouvé.
 - La version Release signée et envoyée sur TestFlight (`[testflight]`) n'est produite qu'avec l'accord explicite de l'utilisateur. Elle sera la version à choisir dans App Store Connect › Build.
 - La version interne Premium (`[interne]`) suit la règle du projet : elle est envoyée après chaque série de corrections, pour les tests sur l'iPhone. Apple la bloque pour l'App Store et les testeurs externes.
+- Dernière version interne vérifiée : Build 364 (run 42429465658), signée avec une seule identité. Archive, export et contrôles des binaires de l'app et de l'extension réussis ; étiquette « Internal Only » confirmée par l'API d'Apple. Le rapport public de la CI ne contient ni l'identité de signature ni l'identifiant des profils.

@@ -72,6 +72,60 @@ enum DailyLayoutRules {
         return result
     }
 
+    /// The ids in the order they are read on screen: row after row, left to right. A half card waiting for its
+    /// partner is drawn after the wide cards that follow it (`rows(wides:)`), so this order draws exactly the same
+    /// grid, written as it is seen. The moves of the edit mode start from it.
+    static func readingOrder(_ ids: [String], isWide: (String) -> Bool) -> [String] {
+        rows(wides: ids.map(isWide)).flatMap { row in row.map { ids[$0] } }
+    }
+
+    /// The ids once the card `id` was dropped onto `target`: it takes the target's row on screen, the others make
+    /// room. Taking the target's rank is not always enough, since the rows are not the ranks: a wide card put just
+    /// before the first half card of the row under it is still drawn above that row (the half card waits for its
+    /// partner), so nothing moved on screen and the order swung back and forth while the finger stayed there (CI,
+    /// 2026-11-07). The card's row and the target's row then change places. When no order puts the card in that row
+    /// (a half card alone is always drawn after the wide cards), nothing changes.
+    static func moved(_ ids: [String], id: String, onto target: String, isWide: (String) -> Bool) -> [String] {
+        let order = readingOrder(ids, isWide: isWide)
+        let lines = rows(wides: order.map(isWide)).map { row in row.map { order[$0] } }
+        guard id != target,
+              let from = lines.firstIndex(where: { $0.contains(id) }),
+              let goal = lines.firstIndex(where: { $0.contains(target) }) else { return ids }
+        let plain = moved(order, id: id, onto: target)
+        if line(of: id, in: plain, isWide: isWide) == goal { return plain }
+        var traded = lines
+        traded.swapAt(from, goal)
+        let swapped = traded.flatMap { $0 }
+        return swapped != order && line(of: id, in: swapped, isWide: isWide) == goal ? swapped : ids
+    }
+
+    /// VoiceOver « Déplacer avant » (-1) / « Déplacer après » (+1): the card goes onto its nearest neighbour on screen in
+    /// that direction that it can really pass (a half card alone cannot go over a wide card, the next one is tried);
+    /// nothing changes when there is none.
+    static func moved(_ ids: [String], id: String, by delta: Int, isWide: (String) -> Bool) -> [String] {
+        let order = readingOrder(ids, isWide: isWide)
+        guard delta != 0, let index = order.firstIndex(of: id) else { return ids }
+        var step = index + delta.signum()
+        while order.indices.contains(step) {
+            let result = moved(order, id: id, onto: order[step], isWide: isWide)
+            if result != order { return result }
+            step += delta.signum()
+        }
+        return ids
+    }
+
+    /// The row on screen of the card `id` (nil: not there).
+    static func line(of id: String, in ids: [String], isWide: (String) -> Bool) -> Int? {
+        rows(wides: ids.map(isWide)).firstIndex { row in row.contains { ids[$0] == id } }
+    }
+
+    /// The cards drawn in another row once `order` became `next`. While a card is dragged, these just made room and
+    /// can end under the finger (a wide card shorter than the row of half cards it traded with): the drag does not
+    /// take them again until the finger leaves them, so nothing swings back and forth.
+    static func changedRows(from order: [String], to next: [String], isWide: (String) -> Bool) -> Set<String> {
+        Set(next.filter { line(of: $0, in: order, isWide: isWide) != line(of: $0, in: next, isWide: isWide) })
+    }
+
     /// The id whose frame holds the point (the card under the finger), leaving out the one dragged.
     static func target(at point: CGPoint, frames: [String: CGRect], excluding dragged: String) -> String? {
         frames.first { $0.key != dragged && $0.value.contains(point) }?.key
