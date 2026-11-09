@@ -12,6 +12,12 @@
       "runtimeExecutable": "node",
       "runtimeArgs": ["../ardane-hq/server/server.js"],
       "port": 4317
+    },
+    {
+      "name": "qg-essai",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["../ardane-hq/tests/manual/hub-essai.mjs"],
+      "port": 4399
     }
   ]
 }

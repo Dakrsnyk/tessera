@@ -210,4 +210,8 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Demande : équipe marketing d'agents IA autonome, de la veille à la publication et aux mesures, avec validation humaine avant toute publication et tableau de bord central.
 - Fait : audit et plan (`docs/marketing/Plan-departement-marketing-2026-11-08.md`), 4 recherches web (API des plateformes, outils de production, hébergement 24/7, publicité payante), maquette de l'écran de validation. Rien n'est construit.
 - Choix proposés : étendre le QG `ardane-hq` plutôt que créer un second système ; 8 agents ; publication par un module de code lié à l'empreinte de la version approuvée ; TikTok et YouTube en semi-automatique au départ.
-- Reste : les 5 décisions de l'utilisateur (25.D), puis la phase 1.
+- 2026-11-08, décisions de l'utilisateur : plan validé, fonctionnement permanent sur un serveur, comptes Instagram et TikTok existants, dépôt privé autorisé, premier test payant de 50 $ CA (fiche `docs/marketing/Boost-01-2026-11-08.md`, lancé par lui).
+- Phase 1 faite (`ardane-hq` commit 1488778, 228 tests sur 229) : planificateur, tables de veille, Marketing Hub à 9 sections vérifié contre le vrai serveur, 3 nouveaux agents, base de connaissances à jour, QG compatible Linux.
+- Sécurité : audit fait ; 7 conditions avant tout déploiement sur un serveur (25.S). Rien n'a été essayé sur un vrai serveur.
+- Trouvé en route : la pub Fitness W1 dit « no need to unlock », jamais vérifié sur iPhone (25.F) ; les conditions du site parlent encore de l'achat à vie (25.T).
+- Reste : phase 2 (veille et idées : brancher les résultats des agents sur les tables, premières planifications réelles) ; mode serveur ; résultats du boost dans 5 jours.
