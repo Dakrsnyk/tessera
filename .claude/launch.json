@@ -18,6 +18,12 @@
       "runtimeExecutable": "node",
       "runtimeArgs": ["../ardane-hq/tests/manual/hub-essai.mjs"],
       "port": 4399
+    },
+    {
+      "name": "qg-essai-reel",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["../ardane-hq/tests/manual/hub-essai.mjs", "--reel"],
+      "port": 4399
     }
   ]
 }

@@ -214,4 +214,6 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Phase 1 faite (`ardane-hq` commit 1488778, 228 tests sur 229) : planificateur, tables de veille, Marketing Hub à 9 sections vérifié contre le vrai serveur, 3 nouveaux agents, base de connaissances à jour, QG compatible Linux.
 - Sécurité : audit fait ; 7 conditions avant tout déploiement sur un serveur (25.S). Rien n'a été essayé sur un vrai serveur.
 - Trouvé en route : la pub Fitness W1 dit « no need to unlock », jamais vérifié sur iPhone (25.F) ; les conditions du site parlent encore de l'achat à vie (25.T).
-- Reste : phase 2 (veille et idées : brancher les résultats des agents sur les tables, premières planifications réelles) ; mode serveur ; résultats du boost dans 5 jours.
+- Phase 2 codée le 2026-11-08 (`ardane-hq` commit 02d5b8b, 258 tests réussis sur 259, 1 sauté) : résultats des agents lus et validés, règle de variété, 4 planifications recommandées, données dans les consignes, aucune délégation pour une mission planifiée. Hub en noir, blanc et gris avec vert, orange et rouge pour les états.
+- Essai réel non fait : depuis une session Claude, le `claude` lancé par le QG est refusé à l'authentification. À faire par l'utilisateur depuis son QG.
+- Reste : essai réel de la veille par l'utilisateur ; mode serveur (7 conditions de sécurité) ; phase 3 (création et production) ; résultats du boost dans 5 jours.
