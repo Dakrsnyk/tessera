@@ -205,3 +205,9 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Version interne Build 372 (même run, relancé une fois le dépôt redevenu public) : une identité de signature, contrôles des binaires réussis, « Internal Only » confirmé.
 - Run 42515654242 (Build 373, sans Premium, commit ee144c03) : 1 370 tests logiques sur 1 370, interface 32 sur 32, dont le nouveau test ; `testMonQuotidienOpensAMiniApp` réussi une deuxième fois de suite. Capture `profile-daily-habits-wide` : 4 habitudes, 14 jours chacune, aujourd'hui en dernier, carrés alignés d'une ligne à l'autre.
 - Reste : l'avis de l'utilisateur sur l'iPhone (Build 372).
+
+## Chantier 25 : département marketing intelligent (Ardane Marketing Hub) — 2026-11-08
+- Demande : équipe marketing d'agents IA autonome, de la veille à la publication et aux mesures, avec validation humaine avant toute publication et tableau de bord central.
+- Fait : audit et plan (`docs/marketing/Plan-departement-marketing-2026-11-08.md`), 4 recherches web (API des plateformes, outils de production, hébergement 24/7, publicité payante), maquette de l'écran de validation. Rien n'est construit.
+- Choix proposés : étendre le QG `ardane-hq` plutôt que créer un second système ; 8 agents ; publication par un module de code lié à l'empreinte de la version approuvée ; TikTok et YouTube en semi-automatique au départ.
+- Reste : les 5 décisions de l'utilisateur (25.D), puis la phase 1.
