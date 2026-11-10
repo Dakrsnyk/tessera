@@ -110,6 +110,26 @@ Décision : la meilleure configuration compatible avec la politique actuelle (ri
 - [ ] 10.D (utilisateur, facultatif) Jeu de photos libres de droits ou de TES repas pour mesurer la reconnaissance en CI (étiquettes lues par Vision imprimées en pièce jointe) : aucune photo protégée n'est ajoutée au dépôt.
 
 
+### Chantier 28 : plateformes Instagram et TikTok, fiabilité de production, autonomie des agents (demandé le 2026-11-10)
+Mission de l'utilisateur (texte complet dans la conversation du 2026-11-10) : YouTube sort de la publication (Instagram et TikTok seulement, données anciennes gardées, YouTube reste permis pour la veille) ; corriger les erreurs de création des ressources à leur origine ; nouvelles tentatives automatiques bornées, y compris après un échec de vérification, sans tout recommencer ; demandes en langage naturel ; suivi des tentatives dans le dashboard ; tout l'existant préservé ; tests avec échecs simulés. « Je veux des résultats réellement opérationnels, pas uniquement un rapport. »
+
+Audit du 2026-11-10 (base réelle du QG, depuis le 2026-10-30) :
+- 18 blocages de cycle : 10 « concept renvoyé 3 fois » (Vérif), 5 « fiche refusée » pour un détail de forme (vignette trop longue × 2, étiquette trop longue, type de plan inconnu), 2 « l'agent n'a rien fait avancer », 2 « Studio n'a pas réussi la fiche en 3 essais ». Un blocage arrête tout jusqu'à un clic sur « Réessayer l'étape ».
+- 6 missions en échec : 4 session Claude expirée (configuration : intervention humaine), 2 limite de session atteinte (à reprendre après l'heure indiquée).
+- 5 captures CI ratées sur 11 (CI en échec ou annulée, enregistreur figé, enregistrement trop lourd) : aucune relance automatique.
+- 1 rendu en échec (fichier du kit non chargé) : second essai automatique ajouté le 2026-11-10.
+- 52 concepts renvoyés sur 56 : la boucle Plume → Vérif renvoie presque tout.
+- YouTube : 1 concept sur 56 (la pub en cours), choisi par Plume ; aucune version ni publication YouTube. Aucune connexion API Instagram ou TikTok n'existe : la publication est manuelle (l'utilisateur publie, le QG garde la trace).
+
+Tâches :
+- [ ] 28.1 Plateformes : publication limitée à Instagram et TikTok (serveur, formulaires, consignes de Plume) ; une pub d'une autre plateforme reste lisible et se soumet sur TikTok ; hashtags, légende et appel à l'action par défaut propres à chaque plateforme.
+- [ ] 28.2 Fiches refusées pour un détail de forme : un texte libre trop long est raccourci au lieu de faire refuser la fiche ; tout autre refus est renvoyé à l'agent avec sa raison exacte.
+- [ ] 28.3 Reprise automatique : après un blocage récupérable (fiche refusée, agent qui n'avance pas, mission en échec passagère, capture CI ratée, rendu en échec), nouvelle tentative de la SEULE étape concernée, avec délai croissant, nombre maximal réglable, historique ; arrêt net et raison exacte pour ce qui demande une intervention (session expirée, facturation, ressource à produire, limite atteinte).
+- [ ] 28.4 Dashboard : pour chaque pub, tentatives faites et restantes, dernier problème, correction entreprise, état de la nouvelle tentative, historique des erreurs et des reprises (événements réels).
+- [ ] 28.5 Demandes en langage naturel depuis le Hub : comprendre la demande, retrouver la pub, lancer les actions existantes (créer, modifier, relancer, expliquer un blocage) ; jamais de publication sans validation.
+- [ ] 28.6 Tests : échecs simulés (génération, vérification), reprise ciblée, erreur non récupérable, limite atteinte, plateformes, validation avant publication ; non-régression complète.
+- [ ] 28.7 Rapport : ce qui est corrigé et prouvé, ce qui ne l'est pas.
+
 ### Chantier 26 : refonte du dashboard marketing en studio de production (demandé le 2026-11-10)
 Mission prioritaire de l'utilisateur : « On améliore le cockpit, pas le moteur de l'avion. » Refondre l'interface du Marketing Hub d'`ardane-hq` en studio professionnel de création publicitaire : identité monochrome (noir, blanc, gris, esprit Apple ; plus de bleu dominant ni de grandes surfaces orange ; vert, rouge, orange discrets pour les statuts seulement), navigation de logiciel SaaS, fiche de chaque pub avec sa vraie progression, journal réel du travail des agents, livrables et versions, demandes et refus compacts, commandes reliées au vrai moteur, cycles et automatisations lisibles, intelligence marketing. Exigences absolues : rien de simulé (« Information indisponible » quand la donnée manque, aucun pourcentage artificiel, aucun bouton sans action réelle), TOUT l'existant préservé (agents, cycles, pilote, captures CI, rendu, validation, données), refonte réellement implémentée et testée, rapport final. Détail complet dans la conversation du 2026-11-10.
 
