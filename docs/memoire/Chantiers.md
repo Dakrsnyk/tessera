@@ -217,6 +217,8 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Fait ensuite le même jour (commits 985030b, 6540c2b) : demande de modification sur une pub arrêtée par Vérif ; questions des agents au PDG (`@@QUESTION`, table `mk_questions`, schéma 11).
 - Reste (28.5 à 28.7) : demandes en langage naturel depuis le Hub ; relance automatique d'une capture CI ratée ; changement de méthode en cas d'échec répété ; boucle Plume → Vérif (52 concepts renvoyés sur 56) non traitée.
 - Pub « Your timetable is a PDF. Fix that. » : après « Oui, retire-le », aperçus prêts à 15 h 51 (21,4 s, plan « scan » en place) ; refusés par l'utilisateur à 16 h 01 avec une nouvelle demande (styles du planning) ; arrêtée à 16 h 04 sur trois ressources à produire (Demandes 28.10).
+- 2026-11-10, atelier (28.12) : création automatique d'un nouveau type de plan du rendu faite (`ardane-hq` commit dde81c3, 363 tests, 362 réussis, 1 ignoré) ; QG redémarré avec. Écran de l'app : en attente de l'accord du PDG (voir Demandes 28.12). Les six styles du planning Large sont au catalogue.
+- Reste à faire après accord : la filière « écran de l'app » de l'atelier (fichier réservé `AdScreens.swift`, commit `[video]` borné, retrait automatique si la CI ne compile pas), ses tests et son audit sécurité.
 
 ## Chantier 26 : Marketing Hub refondu en studio de production — 2026-11-10 (fait, `ardane-hq` commit 4d1fb75)
 - Demande : interface professionnelle monochrome, suivi réel de chaque pub de l'idée à la publication, sans toucher au moteur (« on améliore le cockpit, pas le moteur »).
