@@ -206,6 +206,12 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Run 42515654242 (Build 373, sans Premium, commit ee144c03) : 1 370 tests logiques sur 1 370, interface 32 sur 32, dont le nouveau test ; `testMonQuotidienOpensAMiniApp` réussi une deuxième fois de suite. Capture `profile-daily-habits-wide` : 4 habitudes, 14 jours chacune, aujourd'hui en dernier, carrés alignés d'une ligne à l'autre.
 - Reste : l'avis de l'utilisateur sur l'iPhone (Build 372).
 
+## Chantier 26 : Marketing Hub refondu en studio de production — 2026-11-10 (fait, `ardane-hq` commit 4d1fb75)
+- Demande : interface professionnelle monochrome, suivi réel de chaque pub de l'idée à la publication, sans toucher au moteur (« on améliore le cockpit, pas le moteur »).
+- Fait : 8 espaces (Vue d'ensemble, Studio de production, Campagnes et publicités, Agents, Validations, Automatisations, Intelligence, Historique) ; fiche de chaque pub (12 étapes calculées sur les données réelles, journal des agents, livrables et versions, demandes, commandes) ; historique complet des demandes et archive des brouillons ; les 9 anciennes sections sont relogées en onglets.
+- Non branché, et affiché comme tel : mesures de performance (étape 12, « Résultats »), publication directe, pause d'une seule pub.
+- Suite possible : phases 5 et 6 du chantier 25 (publication directe, mesures), qui rempliront les étapes 11 et 12.
+
 ## Chantier 25 : département marketing intelligent (Ardane Marketing Hub) — 2026-11-08
 - Demande : équipe marketing d'agents IA autonome, de la veille à la publication et aux mesures, avec validation humaine avant toute publication et tableau de bord central.
 - Fait : audit et plan (`docs/marketing/Plan-departement-marketing-2026-11-08.md`), 4 recherches web (API des plateformes, outils de production, hébergement 24/7, publicité payante), maquette de l'écran de validation. Rien n'est construit.
