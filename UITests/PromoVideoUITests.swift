@@ -35,12 +35,22 @@ final class PromoVideoUITests: XCTestCase {
         start.press(forDuration: 0.08, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.15)
     }
 
-    /// One quick stride down the page (captures of the marketing HQ): a fast drag of 45 % of the screen, held at the end so the
-    /// page does not keep gliding. Few, short moves keep the recording small (GitHub refuses a file over 100 MB).
+    /// One quick stride down the page (captures of the marketing HQ): a fast drag of 30 % of the screen, held at the end so the
+    /// page does not keep gliding. Short enough for two still frames in a row to share most of the page (the stitching needs
+    /// the overlap: a header that fades what passes under it, a floating button, hide a part of each frame), quick enough to
+    /// keep the recording small (GitHub refuses a file over 100 MB).
     private func stride() {
-        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.75))
-        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.30))
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.72))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.42))
         start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .fast, thenHoldForDuration: 0.3)
+    }
+
+    /// Waits until the app really shows its screen, then holds still. On a slow simulator `launch()` can return seconds before
+    /// anything is drawn (2026-11-10: the first stride left before the top of the Finances page was ever filmed).
+    private func settle(_ seconds: TimeInterval) {
+        _ = app.wait(for: .runningForeground, timeout: 20)
+        _ = app.staticTexts.firstMatch.waitForExistence(timeout: 20)
+        pause(seconds)
     }
 
     /// A capture asked by the marketing HQ (ardane-hq, server/captures.js writes UITests/CapturePlan.swift), played BEFORE the
@@ -48,17 +58,30 @@ final class PromoVideoUITests: XCTestCase {
     /// weighed 198 MB, then 105 MB, on 2026-11-10). The screen is opened, held still, then scrolled in quick strides with a
     /// still moment after each (the still frames are stitched into one tall image, renderer/stitch_scroll.py). The simulator's
     /// Home Screen shows before and after: that is how the capture is cut out of the recording.
+    /// The demo data is written in the language of the launch that creates it, and the scenes run in French: a capture in
+    /// another language first opens the app as a new person (`home-fresh` clears the demo data, the next launch writes it again
+    /// in its own language), and clears it again afterwards so that the scene gets its French data back. These short launches
+    /// follow each other without going back to the simulator's Home Screen (2.5 s each: never mistaken for the capture, held 6 s).
     private func playCapture(_ index: Int) {
         guard index < CapturePlan.items.count else { return }
         let item = CapturePlan.items[index]
+        let foreign = item.language != "fr"
         pause(2)
+        if foreign {
+            launch("home-fresh", language: item.language)
+            settle(2.5)
+        }
         launch(item.screen, language: item.language)
-        pause(5)
+        settle(6)
         for _ in 0..<item.steps {
             stride()
             pause(0.8)
         }
         pause(1.5)
+        if foreign {
+            launch("home-fresh")
+            settle(2.5)
+        }
         app.terminate()
         pause(4)
     }
