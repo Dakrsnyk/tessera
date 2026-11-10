@@ -16,9 +16,9 @@ final class PromoVideoUITests: XCTestCase {
 
     // MARK: Helpers
 
-    private func launch(_ screen: String, _ extra: [String] = []) {
+    private func launch(_ screen: String, _ extra: [String] = [], language: String = "fr") {
         app = XCUIApplication()
-        app.launchArguments = ["-AppleLanguages", "(fr)", "-AppleLocale", "fr_CA", "-screenshotScreen", screen] + extra
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", "\(language)_CA", "-screenshotScreen", screen] + extra
         app.launch()
     }
 
@@ -213,6 +213,17 @@ final class PromoVideoUITests: XCTestCase {
         for _ in 0..<4 {
             scroll(distance: 0.3)
             pause(1.2)
+        }
+        pause(1)
+        // The whole page in English, top to bottom, in small steps with a still moment after each (2026-11-10): the still
+        // frames of this part are stitched into one tall image of the Store (ardane-hq, renderer/stitch_scroll.py), which
+        // the ads then scroll in one smooth pass.
+        app.terminate()
+        launch("store", language: "en")
+        pause(4)
+        for _ in 0..<26 {
+            scroll(distance: 0.24)
+            pause(0.9)
         }
         pause(1)
     }
