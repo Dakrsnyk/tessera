@@ -552,6 +552,29 @@ struct ScheduleImportView: View {
     }
 }
 
+#if DEBUG
+extension ScheduleImportView {
+    /// Test builds (`-screenshotScreen app-planning-import-reading | app-planning-import-review`): the screen held on its
+    /// reading step (nothing is read), or on its check step with the classes of the demo timetable (SampleData.student),
+    /// all ticked and none in doubt, sorted as a real import sorts them.
+    init(demoReading: Bool) {
+        self.init()
+        if demoReading {
+            _stage = State(initialValue: .reading)
+        } else {
+            let state = SampleData.student(now: Date())
+            let found = state.slots.compactMap { slot -> ImportedSlot? in
+                guard let course = state.courses.first(where: { $0.id == slot.courseID }) else { return nil }
+                return ImportedSlot(weekday: slot.weekday, startMinute: slot.startMinute, endMinute: slot.endMinute,
+                                    title: course.name, room: slot.room.isEmpty ? nil : slot.room)
+            }
+            _slots = State(initialValue: found.sorted { ($0.weekday, $0.startMinute, $0.endMinute) < ($1.weekday, $1.startMinute, $1.endMinute) })
+            _stage = State(initialValue: .review)
+        }
+    }
+}
+#endif
+
 /// The look of a field read with a doubt: a soft alert background, a thin outline and a small warning mark in the corner.
 /// The structure is the same whether the field is flagged or not (only the colours change), so that a text field keeps
 /// its focus while the person types and the mark goes away.

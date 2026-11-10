@@ -111,6 +111,12 @@ enum ScreenshotMode {
             // read from its barcode (« Vérifié »), `scan-recap-photo` a dish guessed from a photo (« Estimation »).
             router.tab = .home
             return .gallery(screen)
+        case "app-planning-import-pick", "app-planning-import-reading", "app-planning-import-review":
+            // « Importer mon horaire » on its first step (choose a photo or a PDF), held on its reading step, or on its
+            // check step with the demo timetable (ScheduleImportView, shown alone by WidgetGalleryView): the photo
+            // picker cannot be driven by a test.
+            router.tab = .home
+            return .gallery(screen)
         case "nutrition-plan":
             // The weight goal recap (WeightPlanSummaryView, chantier 15): lose 6 kg, the calculation not yet
             // accepted. The demo person is back to the sample profile at the next capture (see above).
@@ -437,6 +443,10 @@ struct WidgetGalleryView: View {
         // The screens of the ad kit that are not in a mini-app's page list (see `NutritionScreenshotStage`).
         if mode == "scan-recap" || mode == "scan-recap-photo" || mode == "nutrition-plan" {
             NutritionScreenshotStage(mode: mode)
+        } else if mode == "app-planning-import-pick" {
+            ScheduleImportView()
+        } else if mode == "app-planning-import-reading" || mode == "app-planning-import-review" {
+            ScheduleImportView(demoReading: mode == "app-planning-import-reading")
         } else {
             grid
         }
