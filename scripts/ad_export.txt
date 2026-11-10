@@ -358,3 +358,7 @@ widget timetable-l-pastel kind=timetable family=large scale=3 theme=pastel
 widget timetable-l-blossom kind=timetable family=large scale=3 theme=blossom
 widget timetable-l-modern kind=timetable family=large scale=3 theme=modern
 widget timetable-l-business kind=timetable family=large scale=3 theme=business
+# --- Demande cj-759eb385 du QG marketing
+widget priorities-s-blossom kind=priorities family=small scale=4 theme=blossom
+widget priorities-s-modern kind=priorities family=small scale=4 theme=modern
+widget priorities-s-business kind=priorities family=small scale=4 theme=business
