@@ -129,6 +129,11 @@ enum ScreenshotMode {
             router.tab = .home
             Task { @MainActor in await AdExport.run() }
         default:
+            // A demo screen added for an ad by the workshop of the marketing HQ (`AdScreens`), shown alone.
+            if screen.hasPrefix(AdScreens.prefix) {
+                router.tab = .home
+                return .gallery(screen)
+            }
             if screen.hasPrefix("gallery") || screen.hasPrefix("marketing") { return .gallery(screen) }
             // Steps of the first launch (the flow picks the step itself, see `OnboardingView`).
             if screen.hasPrefix("onboarding-") { return .onboarding }
@@ -447,6 +452,8 @@ struct WidgetGalleryView: View {
             ScheduleImportView()
         } else if mode == "app-planning-import-reading" || mode == "app-planning-import-review" {
             ScheduleImportView(demoReading: mode == "app-planning-import-reading")
+        } else if mode.hasPrefix(AdScreens.prefix) {
+            AdScreens.view(named: mode)
         } else {
             grid
         }

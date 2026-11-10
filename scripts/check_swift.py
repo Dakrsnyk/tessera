@@ -237,7 +237,7 @@ def check_kinds():
 
 def check_release_safety():
     guarded = ["DebugPremium", "isDebugPremiumOn", "setDebugPremium", "ScreenshotMode", "WidgetGalleryView", "SetupGalleryView", "MarketingView", "SignedEntitlements", "StudioGalleryView",
-               "AdExport", "ScanFrameScreenshot", "ScanFrameScreenshotStage"]
+               "AdExport", "ScanFrameScreenshot", "ScanFrameScreenshotStage", "AdScreens"]
     # Each level: [code here is DEBUG only, its #else is DEBUG only]. Only `#if DEBUG` (or `DEBUG && …`) guards
     # its branch and only `#if !DEBUG` guards its #else; any other condition guards neither (the #else of
     # `#if os(iOS)` is not DEBUG), and an #elseif is judged on its own condition.
