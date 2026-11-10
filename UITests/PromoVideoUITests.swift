@@ -35,6 +35,14 @@ final class PromoVideoUITests: XCTestCase {
         start.press(forDuration: 0.08, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.15)
     }
 
+    /// One quick stride down the page (captures of the marketing HQ): a fast drag of 45 % of the screen, held at the end so the
+    /// page does not keep gliding. Few, short moves keep the recording small (GitHub refuses a file over 100 MB).
+    private func stride() {
+        let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.75))
+        let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.30))
+        start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .fast, thenHoldForDuration: 0.3)
+    }
+
     /// Taps an element once it is there and on screen (scrolling down a little if needed).
     @discardableResult
     private func tap(_ element: XCUIElement, timeout: TimeInterval = 6) -> Bool {
@@ -217,13 +225,16 @@ final class PromoVideoUITests: XCTestCase {
             launch(item.screen, language: item.language)
             pause(5)
             for _ in 0..<item.steps {
-                scroll(distance: 0.24)
-                pause(0.9)
+                stride()
+                pause(0.8)
             }
             pause(1.5)
             app.terminate()
             pause(4)
         }
+        // The Store scene itself only when the HQ asked for nothing: GitHub refuses a file over 100 MB, and the recording
+        // of four pages plus this scene weighed 198 MB (2026-11-10).
+        guard CapturePlan.items.isEmpty else { return }
         launch("store")
         pause(2.5)
         for _ in 0..<4 {
