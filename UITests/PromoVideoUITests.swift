@@ -206,24 +206,29 @@ final class PromoVideoUITests: XCTestCase {
         pause(1.5)
     }
 
-    /// The Store: ready-made Home Screens and packs.
+    /// The captures asked by the marketing HQ, then the Store (ready-made Home Screens and packs).
     func testVideoStore() {
+        // Captures asked by the marketing HQ (ardane-hq, server/captures.js writes UITests/CapturePlan.swift): each screen is
+        // opened, held still, then scrolled in small steps with a still moment after each (the still frames are stitched into
+        // one tall image, renderer/stitch_scroll.py). Between two captures the simulator's Home Screen shows for a few
+        // seconds: that is how the recording is cut.
+        pause(2)
+        for item in CapturePlan.items {
+            launch(item.screen, language: item.language)
+            pause(5)
+            for _ in 0..<item.steps {
+                scroll(distance: 0.24)
+                pause(0.9)
+            }
+            pause(1.5)
+            app.terminate()
+            pause(4)
+        }
         launch("store")
         pause(2.5)
         for _ in 0..<4 {
             scroll(distance: 0.3)
             pause(1.2)
-        }
-        pause(1)
-        // The whole page in English, top to bottom, in small steps with a still moment after each (2026-11-10): the still
-        // frames of this part are stitched into one tall image of the Store (ardane-hq, renderer/stitch_scroll.py), which
-        // the ads then scroll in one smooth pass.
-        app.terminate()
-        launch("store", language: "en")
-        pause(4)
-        for _ in 0..<26 {
-            scroll(distance: 0.24)
-            pause(0.9)
         }
         pause(1)
     }
