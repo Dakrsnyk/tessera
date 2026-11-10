@@ -598,6 +598,9 @@ jobs:
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.VIDEO == 'true'
         continue-on-error: true
         timeout-minutes: 45
+        env:
+          # Read as an environment variable, never pasted into the script (a commit message is free text).
+          HEAD_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           xcrun simctl bootstatus "$DEVICE" -b
           xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
@@ -615,14 +618,42 @@ jobs:
             RPID=$!
             until grep -qE "$1\]' (passed|failed)" "$LOG" || ! kill -0 $XPID 2>/dev/null; do sleep 0.2; done
             kill -INT $RPID 2>/dev/null || true
+            # The recorder sometimes never returns after SIGINT (2026-11-10: twice it froze on the first scene, the step
+            # timed out after 45 minutes and nothing was filmed). It gets 3 s to close its file; then the display is
+            # nudged (the recorder closes its file on a new frame: dark then light again, after the scene); after
+            # 15 s in all it is killed, so one frozen recording costs one scene, never the whole step.
+            gone() { ! kill -0 "$1" 2>/dev/null; }
+            for _ in $(seq 1 15); do gone $RPID && break; sleep 0.2; done
+            if ! gone $RPID; then
+              xcrun simctl ui "$DEVICE" appearance dark || true
+              xcrun simctl ui "$DEVICE" appearance light || true
+              for _ in $(seq 1 60); do gone $RPID && break; sleep 0.2; done
+            fi
+            if ! gone $RPID; then
+              echo "recorder frozen on $1: killed"
+              kill -KILL $RPID 2>/dev/null || true
+              pkill -KILL -f "recordVideo" 2>/dev/null || true
+            fi
             wait $RPID 2>/dev/null || true
+            # The test run gets one minute to finish after its test ended, then it is killed too.
+            for _ in $(seq 1 300); do gone $XPID && break; sleep 0.2; done
+            if ! gone $XPID; then echo "xcodebuild still running after $1: killed"; kill -KILL $XPID 2>/dev/null || true; fi
             wait $XPID 2>/dev/null || true
             ls -lh "videos/$1.mp4" 2>/dev/null || echo "no video for $1"
           }
-          for scene in testVideoLaunch testVideoMonQuotidien testVideoPlanning testVideoFitness testVideoNutrition testVideoStudio testVideoFinances testVideoStore testVideoIcons; do
+          SCENES="testVideoLaunch testVideoMonQuotidien testVideoPlanning testVideoFitness testVideoNutrition testVideoStudio testVideoFinances testVideoStore testVideoIcons"
+          # A capture asked by the marketing HQ (ardane-hq writes UITests/CapturePlan.swift and says so in its commit
+          # message): only the four scenes that play a capture, in the order of the plan, and no asset export. About
+          # 25 minutes less than the nine scenes.
+          CAPTURES_ONLY=false
+          case "$HEAD_MESSAGE" in
+            *"par le QG marketing"*) CAPTURES_ONLY=true; SCENES="testVideoStore testVideoIcons testVideoStudio testVideoPlanning" ;;
+          esac
+          for scene in $SCENES; do
             record $scene
           done
           ls -lh videos
+          if [ "$CAPTURES_ONLY" = true ]; then exit 0; fi
           # The pieces of the videos drawn by the app (scripts/ad_assets.txt): screens, and elements
           # rendered on white then black for difference matting.
           xcrun simctl install "$DEVICE" build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
