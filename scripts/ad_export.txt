@@ -350,3 +350,11 @@ widget weekView-m-liquidGlass kind=weekView family=medium scale=3 theme=liquidGl
 widget todaysWorkout-m-liquidGlass kind=todaysWorkout family=medium scale=3 theme=liquidGlass scheme=dark
 widget habits-m-liquidGlass kind=habits family=medium scale=3 theme=liquidGlass scheme=dark
 # fond d'écran : un wall monochrome « photo » (noir et blanc, texture douce) pour la config Glass : wall-mono-photo (à créer/exporter, 1206 x 2622)
+# --- Styles du widget emploi du temps (PDG, 2026-11-10 : « présenter plusieurs styles de planning », le même emploi du temps,
+# seule l'apparence change). Styles réels de l'app (Shared/Theme/Theme.swift) : Minimal, Dark, Pastel, Blossom, Modern, Business.
+widget timetable-l-minimal kind=timetable family=large scale=3 theme=minimal
+widget timetable-l-dark kind=timetable family=large scale=3 theme=dark scheme=dark
+widget timetable-l-pastel kind=timetable family=large scale=3 theme=pastel
+widget timetable-l-blossom kind=timetable family=large scale=3 theme=blossom
+widget timetable-l-modern kind=timetable family=large scale=3 theme=modern
+widget timetable-l-business kind=timetable family=large scale=3 theme=business
