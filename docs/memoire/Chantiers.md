@@ -214,7 +214,9 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 
 ## Chantier 28 : Instagram et TikTok, reprise automatique, autonomie — 2026-11-10 (EN COURS, `ardane-hq` commit ec00dd8)
 - Fait : publication limitée à Instagram et TikTok ; reprise automatique bornée du cycle et du rendu (`Autopilot.recover`, `cycle.block`, réglage `recovery_config`, historique `recovery_log`) ; suivi des tentatives dans la fiche de la pub ; fiches refusées pour un détail de forme tolérées ou renvoyées à l'agent avec la raison.
+- Fait ensuite le même jour (commits 985030b, 6540c2b) : demande de modification sur une pub arrêtée par Vérif ; questions des agents au PDG (`@@QUESTION`, table `mk_questions`, schéma 11).
 - Reste (28.5 à 28.7) : demandes en langage naturel depuis le Hub ; relance automatique d'une capture CI ratée ; changement de méthode en cas d'échec répété ; boucle Plume → Vérif (52 concepts renvoyés sur 56) non traitée.
+- Pub « Your timetable is a PDF. Fix that. » : après « Oui, retire-le », aperçus prêts à 15 h 51 (21,4 s, plan « scan » en place) ; refusés par l'utilisateur à 16 h 01 avec une nouvelle demande (styles du planning) ; arrêtée à 16 h 04 sur trois ressources à produire (Demandes 28.10).
 
 ## Chantier 26 : Marketing Hub refondu en studio de production — 2026-11-10 (fait, `ardane-hq` commit 4d1fb75)
 - Demande : interface professionnelle monochrome, suivi réel de chaque pub de l'idée à la publication, sans toucher au moteur (« on améliore le cockpit, pas le moteur »).
