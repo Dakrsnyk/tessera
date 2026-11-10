@@ -43,6 +43,26 @@ final class PromoVideoUITests: XCTestCase {
         start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .fast, thenHoldForDuration: 0.3)
     }
 
+    /// A capture asked by the marketing HQ (ardane-hq, server/captures.js writes UITests/CapturePlan.swift), played BEFORE the
+    /// scene, one capture per scene so each recording stays well under GitHub's 100 MB per file (four pages in one recording
+    /// weighed 198 MB, then 105 MB, on 2026-11-10). The screen is opened, held still, then scrolled in quick strides with a
+    /// still moment after each (the still frames are stitched into one tall image, renderer/stitch_scroll.py). The simulator's
+    /// Home Screen shows before and after: that is how the capture is cut out of the recording.
+    private func playCapture(_ index: Int) {
+        guard index < CapturePlan.items.count else { return }
+        let item = CapturePlan.items[index]
+        pause(2)
+        launch(item.screen, language: item.language)
+        pause(5)
+        for _ in 0..<item.steps {
+            stride()
+            pause(0.8)
+        }
+        pause(1.5)
+        app.terminate()
+        pause(4)
+    }
+
     /// Taps an element once it is there and on screen (scrolling down a little if needed).
     @discardableResult
     private func tap(_ element: XCUIElement, timeout: TimeInterval = 6) -> Bool {
@@ -90,6 +110,7 @@ final class PromoVideoUITests: XCTestCase {
 
     /// Planning: the week as a table, a day picked, the next week and back.
     func testVideoPlanning() {
+        playCapture(3)
         launch("app-planning")
         let table = app.otherElements["week-timetable"]
         guard table.waitForExistence(timeout: 12) else { return }
@@ -160,6 +181,7 @@ final class PromoVideoUITests: XCTestCase {
 
     /// The Studio: one widget, styles after styles, then palettes.
     func testVideoStudio() {
+        playCapture(2)
         launch("studio-content")
         guard app.buttons["studio-theme"].waitForExistence(timeout: 15) else { return }
         pause(1.5)
@@ -206,6 +228,7 @@ final class PromoVideoUITests: XCTestCase {
 
     /// « Icône de l'app »: the icons to choose from, read slowly.
     func testVideoIcons() {
+        playCapture(1)
         launch("icons")
         pause(2.5)
         scroll(distance: 0.25)
@@ -214,27 +237,9 @@ final class PromoVideoUITests: XCTestCase {
         pause(1.5)
     }
 
-    /// The captures asked by the marketing HQ, then the Store (ready-made Home Screens and packs).
+    /// The Store: ready-made Home Screens and packs (after the first capture asked by the marketing HQ, if any).
     func testVideoStore() {
-        // Captures asked by the marketing HQ (ardane-hq, server/captures.js writes UITests/CapturePlan.swift): each screen is
-        // opened, held still, then scrolled in small steps with a still moment after each (the still frames are stitched into
-        // one tall image, renderer/stitch_scroll.py). Between two captures the simulator's Home Screen shows for a few
-        // seconds: that is how the recording is cut.
-        pause(2)
-        for item in CapturePlan.items {
-            launch(item.screen, language: item.language)
-            pause(5)
-            for _ in 0..<item.steps {
-                stride()
-                pause(0.8)
-            }
-            pause(1.5)
-            app.terminate()
-            pause(4)
-        }
-        // The Store scene itself only when the HQ asked for nothing: GitHub refuses a file over 100 MB, and the recording
-        // of four pages plus this scene weighed 198 MB (2026-11-10).
-        guard CapturePlan.items.isEmpty else { return }
+        playCapture(0)
         launch("store")
         pause(2.5)
         for _ in 0..<4 {
