@@ -224,6 +224,12 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - 2026-11-10, 21 h 20 : essai réel de la filière écran RÉUSSI (écran « ad-studies-timetable », capture au catalogue). Le même soir : plus d'arrêt « demande au Chef » (`ardane-hq` 6bd5cec), plan « themedhome » créé par l'atelier à la demande de Studio, pub « Your timetable is a PDF » passée de « bloquée » à « aperçus à valider » (six écrans d'accueil, un par style).
 - En cours le 2026-11-10 au soir : cours du planning aux teintes de chaque style (28.14) : run `[adkit-en]` 42945544073 (commit 1f3da420) ; à la fin, ranger les six images (`scratchpad/six_palettes.py <commit> --install`, sinon refaire à la main : copier `adkit-en/export/timetable-l-<style>.png` de la branche `ci-report` dans le kit) puis refaire les aperçus (`POST /api/marketing/concepts/cn-067ced398d/render`).
 
+## Chantier 29 : centre de pilotage marketing autonome — nuit du 2026-11-10 au 2026-11-11 (EN COURS, `ardane-hq` 518bbbd et suivants)
+- Barre de demande en langage naturel (`server/intent.js`), Forge (`server/forge.js`, agents Prisme et Regard), images générées sur GPU Kaggle (`server/forge-ai.js`), critique des aperçus (`server/video-critic.js`), analyse des contenus viraux, onglets Tendances, Création, Tâches et erreurs. Guide : `ardane-hq/docs/GUIDE-departement-marketing.md`.
+- Essais réels sur instance d'essai : visuel de 5,4 à 6,4 en 6 tours (arrêt au plafond d'essai de 3 $) ; script 6,8 ; storyboard avec fonds générés 7. Aucun n'a atteint l'objectif 8,2 à ces petits plafonds.
+- Stockage de la Forge : fichiers dans `workspace/forge`, aucune table ajoutée à la base de production.
+- CI : mode `[adkit-img]`, 18 min 24 s mesurées contre 82 min.
+
 ## Chantier 26 : Marketing Hub refondu en studio de production — 2026-11-10 (fait, `ardane-hq` commit 4d1fb75)
 - Demande : interface professionnelle monochrome, suivi réel de chaque pub de l'idée à la publication, sans toucher au moteur (« on améliore le cockpit, pas le moteur »).
 - Fait : 8 espaces (Vue d'ensemble, Studio de production, Campagnes et publicités, Agents, Validations, Automatisations, Intelligence, Historique) ; fiche de chaque pub (12 étapes calculées sur les données réelles, journal des agents, livrables et versions, demandes, commandes) ; historique complet des demandes et archive des brouillons ; les 9 anciennes sections sont relogées en onglets.
