@@ -374,3 +374,6 @@ home home-planning-rose setup=planning-rose scale=3 courses=rose
 home home-planning-sand setup=planning-sand scale=3 courses=sand
 home home-planning-graphite setup=planning-graphite scale=3 courses=mono
 only home-planning-ocean home-planning-night home-planning-rose home-planning-sand home-planning-graphite
+# --- Demande cj-32a8f8e0 du QG marketing
+widget habits-l-paper kind=habits family=large scale=3 theme=paper
+only habits-l-paper
