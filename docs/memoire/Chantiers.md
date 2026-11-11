@@ -229,6 +229,8 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 - Essais réels sur instance d'essai : visuel de 5,4 à 6,4 en 6 tours (arrêt au plafond d'essai de 3 $) ; script 6,8 ; storyboard avec fonds générés 7. Aucun n'a atteint l'objectif 8,2 à ces petits plafonds.
 - Stockage de la Forge : fichiers dans `workspace/forge`, aucune table ajoutée à la base de production.
 - CI : mode `[adkit-img]`, 18 min 24 s mesurées contre 82 min.
+- Nuit du 2026-11-11 : essai de bout en bout réel réussi (veille → vidéo finale, 9 min, 1,74 $, données temporaires) ; 5 créations réelles prêtes à valider, meilleure note 7,2 (Prisme reçoit désormais sa meilleure fiche : 6,6 → 7,2 sur la même demande). Pub « Your timetable is a PDF » : nouveaux aperçus avec les six écrans planning, en attente du PDG. Compte rendu : `ardane-hq/docs/COMPTE-RENDU-2026-11-11.md`.
+- Reste : serveur 24 h/24 (compte, paiement, clé API par le PDG), mesures des pubs publiées, génération vidéo par IA, dépôt tessera à repasser en privé.
 
 ## Chantier 26 : Marketing Hub refondu en studio de production — 2026-11-10 (fait, `ardane-hq` commit 4d1fb75)
 - Demande : interface professionnelle monochrome, suivi réel de chaque pub de l'idée à la publication, sans toucher au moteur (« on améliore le cockpit, pas le moteur »).
