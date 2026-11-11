@@ -521,27 +521,30 @@ enum HomeSetupCatalog {
         ),
     ] + planningHarmonies
 
-    /// « planning » in other color harmonies (ad of 2026-11-10: « the same screen, only the colors change »): the same
-    /// large timetable over two thirds of the screen, the same two rows of apps and dock, the same dark widget with its
-    /// square blocks; only the wallpaper, the icons, the accent and (export's `courses=`) the courses change.
+    /// « planning » in other color harmonies (ad of 2026-11-10: « the same screen, only the colors change […] the place
+    /// of the widget and the wallpaper change too, one common style per iPhone »): the same large timetable over two
+    /// thirds of the screen, the same two rows of apps and dock, the same dark widget with its square blocks. Each one
+    /// has its own wallpaper, its icons, its accent and (export's `courses=`) its courses, all in one harmony, and the
+    /// widget sits at the top, in the middle or at the bottom (`place`: the row it takes among the three).
     private static var planningHarmonies: [HomeSetup] {
-        let looks: [(id: String, name: String, wallpaper: SetupWallpaper, background: String, symbol: String, accent: String)] = [
-            ("planning-ocean", tr("Océan"), .ocean, "12304A", "8FD3F4", "4AA3D8"),
-            ("planning-night", tr("Nuit étoilée"), .midnight, "13203A", "B8C4F0", "8C9EFF"),
-            ("planning-rose", tr("Brume pastel"), .pastel, "5A2A45", "FFC2DB", "E0719B"),
-            ("planning-sand", tr("Dunes"), .dunes, "4A2616", "F2C79A", "D08A4E"),
-            ("planning-graphite", tr("Graphite"), .graphite, "1C1C1E", "E5E5EA", "AEAEB2"),
+        let looks: [(id: String, name: String, wallpaper: SetupWallpaper, background: String, symbol: String, accent: String, place: Int)] = [
+            ("planning-ocean", tr("Océan"), .ocean, "12304A", "8FD3F4", "4AA3D8", 1),
+            ("planning-night", tr("Nuit étoilée"), .midnight, "13203A", "B8C4F0", "8C9EFF", 2),
+            ("planning-rose", tr("Brume pastel"), .pastel, "5A2A45", "FFC2DB", "E0719B", 0),
+            ("planning-sand", tr("Dunes"), .dunes, "4A2616", "F2C79A", "D08A4E", 1),
+            ("planning-graphite", tr("Graphite"), .graphite, "1C1C1E", "E5E5EA", "AEAEB2", 2),
         ]
         return looks.map { look in
-            HomeSetup(
+            var rows: [SetupRow] = [
+                .apps([.books, .notes, .calendar, .reminders]),
+                .apps([.files, .photos, .music, .weather]),
+            ]
+            rows.insert(.widgets([large(.timetable, .dark, look.accent)]), at: look.place)
+            return HomeSetup(
                 id: look.id, name: look.name, tagline: tr("Ton mois d'entraînement, à l'ombre des pins."),
                 tags: [.dark, .study], wallpaper: look.wallpaper,
                 icons: .solid(background: look.background, symbol: look.symbol),
-                rows: [
-                    .widgets([large(.timetable, .dark, look.accent)]),
-                    .apps([.books, .notes, .calendar, .reminders]),
-                    .apps([.files, .photos, .music, .weather]),
-                ],
+                rows: rows,
                 dock: [.phone, .messages, .web, .camera],
                 lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.nextClass), circular(.nextExam)])
             )
