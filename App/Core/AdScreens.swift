@@ -14,6 +14,10 @@ enum AdScreens {
     static func view(named name: String) -> some View {
         switch name {
         // ATELIER:BEGIN
+        case "ad-studies-timetable":
+            NavigationStack {
+                StudiesTimetablePage()
+            }
         // ATELIER:END
         default:
             // A name the HQ has not added: said on screen, so that a capture never passes for a real screen.
