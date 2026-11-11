@@ -24,7 +24,7 @@ import WidgetKit
 ///   from `from` to `to`.
 /// - `demo <name> exercise= [view=<index or name>] [fps=] [w= h=] [scale=] [bg=clear|card|fill] [scheme=] [accent=]`:
 ///   the exercise demonstration drawn by `DemoRenderer` at exact times (frame / fps), and `<name>.json`.
-/// Any job also takes `courses=forest|forestSage|ink|mono|peach|rose|indigo|steel`: the demo courses in the tones of a
+/// Any job also takes `courses=forest|forestSage|ink|mono|peach|rose|indigo|steel|ocean|sand`: the demo courses in the tones of a
 /// Home Screen or of a widget style (StudentState.adCourseColors).
 @MainActor
 enum AdExport {

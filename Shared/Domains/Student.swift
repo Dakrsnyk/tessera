@@ -394,6 +394,9 @@ struct StudentState: Codable, Hashable {
         case "rose": ["3366FF": "D6608C", "D6409F": "B565A7", "F2A33A": "E88BA8", "1E9E75": "9D6BC9"]
         case "indigo": ["3366FF": "4F46E5", "D6409F": "6366F1", "F2A33A": "818CF8", "1E9E75": "3730A3"]
         case "steel": ["3366FF": "4A6FA5", "D6409F": "6C8EBF", "F2A33A": "5578A8", "1E9E75": "7F9CC6"]
+        // The « planning » Home Screen in other color harmonies (HomeSetupCatalog.planningHarmonies).
+        case "ocean": ["3366FF": "2F6FA8", "D6409F": "3FA7C4", "F2A33A": "2E8C8C", "1E9E75": "4F86C6"]
+        case "sand": ["3366FF": "B5652F", "D6409F": "D08A4E", "F2A33A": "A9744F", "1E9E75": "C9955E"]
         default: nil
         }
     }

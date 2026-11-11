@@ -366,3 +366,11 @@ widget priorities-s-modern kind=priorities family=small scale=4 theme=modern
 widget priorities-s-business kind=priorities family=small scale=4 theme=business
 # --- 2026-11-10 : les six styles du planning Large, cours aux teintes du style (courses=…) ; ce run ne rend qu'eux
 only timetable-l-minimal timetable-l-dark timetable-l-pastel timetable-l-blossom timetable-l-modern timetable-l-business
+# --- 2026-11-10 (soir) : l'écran d'accueil « planning » (Forêt) décliné en cinq harmonies de couleurs : même disposition,
+# mêmes formes, seuls le fond, les icônes, l'accent et les cours changent (demande du PDG) ; ce run ne rend qu'eux
+home home-planning-ocean setup=planning-ocean scale=3 courses=ocean
+home home-planning-night setup=planning-night scale=3 courses=indigo
+home home-planning-rose setup=planning-rose scale=3 courses=rose
+home home-planning-sand setup=planning-sand scale=3 courses=sand
+home home-planning-graphite setup=planning-graphite scale=3 courses=mono
+only home-planning-ocean home-planning-night home-planning-rose home-planning-sand home-planning-graphite

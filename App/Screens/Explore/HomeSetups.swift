@@ -519,7 +519,34 @@ enum HomeSetupCatalog {
             dock: [.phone, .messages, .web, .camera],
             lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.nextClass), circular(.nextExam)])
         ),
-    ]
+    ] + planningHarmonies
+
+    /// « planning » in other color harmonies (ad of 2026-11-10: « the same screen, only the colors change »): the same
+    /// large timetable over two thirds of the screen, the same two rows of apps and dock, the same dark widget with its
+    /// square blocks; only the wallpaper, the icons, the accent and (export's `courses=`) the courses change.
+    private static var planningHarmonies: [HomeSetup] {
+        let looks: [(id: String, name: String, wallpaper: SetupWallpaper, background: String, symbol: String, accent: String)] = [
+            ("planning-ocean", tr("Océan"), .ocean, "12304A", "8FD3F4", "4AA3D8"),
+            ("planning-night", tr("Nuit étoilée"), .midnight, "13203A", "B8C4F0", "8C9EFF"),
+            ("planning-rose", tr("Brume pastel"), .pastel, "5A2A45", "FFC2DB", "E0719B"),
+            ("planning-sand", tr("Dunes"), .dunes, "4A2616", "F2C79A", "D08A4E"),
+            ("planning-graphite", tr("Graphite"), .graphite, "1C1C1E", "E5E5EA", "AEAEB2"),
+        ]
+        return looks.map { look in
+            HomeSetup(
+                id: look.id, name: look.name, tagline: tr("Ton mois d'entraînement, à l'ombre des pins."),
+                tags: [.dark, .study], wallpaper: look.wallpaper,
+                icons: .solid(background: look.background, symbol: look.symbol),
+                rows: [
+                    .widgets([large(.timetable, .dark, look.accent)]),
+                    .apps([.books, .notes, .calendar, .reminders]),
+                    .apps([.files, .photos, .music, .weather]),
+                ],
+                dock: [.phone, .messages, .web, .camera],
+                lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.nextClass), circular(.nextExam)])
+            )
+        }
+    }
     #endif
 
     /// The Home Screens of the themed worlds, in the order of their packs.
