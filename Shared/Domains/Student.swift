@@ -386,6 +386,14 @@ struct StudentState: Codable, Hashable {
         switch name {
         case "forest": ["3366FF": "3F7A3A", "D6409F": "6E9A2E", "F2A33A": "8A8F3A", "1E9E75": "2F6B55"]
         case "forestSage": ["3366FF": "2E6B47", "D6409F": "7FA33A", "F2A33A": "4F8A3C", "1E9E75": "5B8C74"]
+        // One palette per widget style (2026-11-10: the courses in the tones of the style they are shown in; never a
+        // near-white block, the text on a block is white).
+        case "ink": ["3366FF": "1C1C1E", "D6409F": "48484A", "F2A33A": "6E6E73", "1E9E75": "8E8E93"]
+        case "mono": ["3366FF": "6E6E73", "D6409F": "8E8E93", "F2A33A": "48484A", "1E9E75": "5C5C61"]
+        case "peach": ["3366FF": "E0957B", "D6409F": "C97B84", "F2A33A": "D4A373", "1E9E75": "A98467"]
+        case "rose": ["3366FF": "D6608C", "D6409F": "B565A7", "F2A33A": "E88BA8", "1E9E75": "9D6BC9"]
+        case "indigo": ["3366FF": "4F46E5", "D6409F": "6366F1", "F2A33A": "818CF8", "1E9E75": "3730A3"]
+        case "steel": ["3366FF": "4A6FA5", "D6409F": "6C8EBF", "F2A33A": "5578A8", "1E9E75": "7F9CC6"]
         default: nil
         }
     }

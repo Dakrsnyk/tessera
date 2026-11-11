@@ -24,7 +24,8 @@ import WidgetKit
 ///   from `from` to `to`.
 /// - `demo <name> exercise= [view=<index or name>] [fps=] [w= h=] [scale=] [bg=clear|card|fill] [scheme=] [accent=]`:
 ///   the exercise demonstration drawn by `DemoRenderer` at exact times (frame / fps), and `<name>.json`.
-/// Any job also takes `courses=forest|forestSage`: the demo courses in the greens of a Home Screen (StudentState.adCourseColors).
+/// Any job also takes `courses=forest|forestSage|ink|mono|peach|rose|indigo|steel`: the demo courses in the tones of a
+/// Home Screen or of a widget style (StudentState.adCourseColors).
 @MainActor
 enum AdExport {
     static var documents: URL { FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0] }
@@ -36,10 +37,17 @@ enum AdExport {
         try? files.createDirectory(at: folder, withIntermediateDirectories: true)
         try? files.removeItem(at: folder.appendingPathComponent("done.txt"))
         let text = (try? String(contentsOf: documents.appendingPathComponent("ad_export.txt"), encoding: .utf8)) ?? ""
-        let jobs = text.components(separatedBy: .newlines)
+        let rows = text.components(separatedBy: .newlines)
             .map { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty && !$0.hasPrefix("#") }
+        // `only a b c`: this run renders these pieces alone, so that a request for three new widgets does not render
+        // the two hundred others again (an hour of CI). The last such line wins; `only all` renders everything.
+        let only = rows.last { $0.hasPrefix("only ") }
+            .map { Set($0.dropFirst(5).split(separator: " ").map(String.init)) }
+            .flatMap { $0.contains("all") ? nil : $0 }
+        let jobs = rows.filter { !$0.hasPrefix("only ") }
             .map(AdJob.init)
+            .filter { only?.contains($0.name) ?? true }
         // The demo data, the app style and the first layout settle before the first picture.
         try? await Task.sleep(for: .seconds(3))
         var lines: [String] = []

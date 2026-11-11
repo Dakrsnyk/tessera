@@ -10,6 +10,8 @@
 # demo : exercise view (indice ou nom : Profil, 3/4…) fps w h scale bg=clear|card|fill scheme accent
 # Style de l'app : Saphir (-screenshotStyle sapphire), langue : AD_LANG (fr par défaut, en avec [adkit-en]).
 # Échelles : 4 pour un petit widget (680 px), 3 pour moyen / grand (1 092 px de large), 4 pour l'écran verrouillé.
+# « only a b c » : ce run ne rend QUE ces pièces (la dernière ligne « only » compte) ; « only all » : tout le kit (une heure).
+# Le QG marketing en ajoute une à chaque demande, pour ne pas refaire les 214 pièces. Avant un run [adkit] complet : finir la liste par « only all ».
 
 # --- En tête : nextSet moyen en disposition Verticale (thème Éditorial) : titre, chiffre, légende, puis boutons,
 # ni détail ni barre (choix fixe, sans ViewThatFits depuis le Build 355 : il figeait l'app au Build 354) ---
@@ -352,13 +354,15 @@ widget habits-m-liquidGlass kind=habits family=medium scale=3 theme=liquidGlass 
 # fond d'écran : un wall monochrome « photo » (noir et blanc, texture douce) pour la config Glass : wall-mono-photo (à créer/exporter, 1206 x 2622)
 # --- Styles du widget emploi du temps (PDG, 2026-11-10 : « présenter plusieurs styles de planning », le même emploi du temps,
 # seule l'apparence change). Styles réels de l'app (Shared/Theme/Theme.swift) : Minimal, Dark, Pastel, Blossom, Modern, Business.
-widget timetable-l-minimal kind=timetable family=large scale=3 theme=minimal
-widget timetable-l-dark kind=timetable family=large scale=3 theme=dark scheme=dark
-widget timetable-l-pastel kind=timetable family=large scale=3 theme=pastel
-widget timetable-l-blossom kind=timetable family=large scale=3 theme=blossom
-widget timetable-l-modern kind=timetable family=large scale=3 theme=modern
-widget timetable-l-business kind=timetable family=large scale=3 theme=business
+widget timetable-l-minimal kind=timetable family=large scale=3 theme=minimal courses=ink
+widget timetable-l-dark kind=timetable family=large scale=3 theme=dark scheme=dark courses=mono
+widget timetable-l-pastel kind=timetable family=large scale=3 theme=pastel courses=peach
+widget timetable-l-blossom kind=timetable family=large scale=3 theme=blossom courses=rose
+widget timetable-l-modern kind=timetable family=large scale=3 theme=modern courses=indigo
+widget timetable-l-business kind=timetable family=large scale=3 theme=business courses=steel
 # --- Demande cj-759eb385 du QG marketing
 widget priorities-s-blossom kind=priorities family=small scale=4 theme=blossom
 widget priorities-s-modern kind=priorities family=small scale=4 theme=modern
 widget priorities-s-business kind=priorities family=small scale=4 theme=business
+# --- 2026-11-10 : les six styles du planning Large, cours aux teintes du style (courses=…) ; ce run ne rend qu'eux
+only timetable-l-minimal timetable-l-dark timetable-l-pastel timetable-l-blossom timetable-l-modern timetable-l-business
