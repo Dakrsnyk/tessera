@@ -75,14 +75,18 @@ enum SamplePayload {
                 TaskItem(title: tr("Lire 20 pages")),
             ]
         case .habits:
-            // Today and the days before it, never days still ahead.
-            let recent = (0..<7).map { offset in
-                DateMath.dayKey(DateMath.calendar.date(byAdding: .day, value: -offset, to: now) ?? now)
+            // Today and the days before it, never days still ahead. About six months of history with a few missed days, so the
+            // large widget (one square per day) looks lived-in in previews and ads instead of nearly empty (2026-11-11).
+            // Every habit is done today; the first missed day sets each streak (4, 1 and 2 days).
+            let history: ((Int) -> Bool) -> [String] = { missed in
+                (0..<182).filter { !missed($0) }.map { offset in
+                    DateMath.dayKey(DateMath.calendar.date(byAdding: .day, value: -offset, to: now) ?? now)
+                }
             }
             payload.content.habits = [
-                Habit(name: tr("Méditer"), symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: Array(recent.prefix(4))),
-                Habit(name: tr("Sport"), symbol: "figure.run", colorHex: "FF6B57", completedDays: [recent[0], recent[2]]),
-                Habit(name: tr("Lecture"), symbol: "book.fill", colorHex: "2F8F7A", completedDays: Array(recent.prefix(3))),
+                Habit(name: tr("Méditer"), symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: history { $0 % 9 == 4 || $0 % 13 == 7 }),
+                Habit(name: tr("Sport"), symbol: "figure.run", colorHex: "FF6B57", completedDays: history { $0 % 3 == 1 || $0 % 10 == 5 }),
+                Habit(name: tr("Lecture"), symbol: "book.fill", colorHex: "2F8F7A", completedDays: history { $0 % 6 == 2 || $0 % 17 == 11 }),
             ]
         case .hydration:
             payload.content.hydration.add(5, on: now)
