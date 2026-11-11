@@ -58,7 +58,11 @@ jobs:
       ADKIT: ${{ contains(github.event.head_commit.message, '[adkit]') }}
       # [adkit-en] is the same kit in English (Canada), written in report/adkit-en so the French kit is kept.
       # Not together with [adkit]: if both are there, only the English kit is made.
-      ADKIT_EN: ${{ contains(github.event.head_commit.message, '[adkit-en]') }}
+      ADKIT_EN: ${{ contains(github.event.head_commit.message, '[adkit-en]') || contains(github.event.head_commit.message, '[adkit-img]') }}
+      # [adkit-img] is the English kit reduced to the pieces the app exports itself (scripts/ad_export.txt, in
+      # report/adkit-en/export): the played scenes (shots/) and the still screens (screens/) are skipped. For a
+      # few new widgets or screens, with a last « only … » line in the list (see App/Core/AdExport.swift).
+      ADKIT_IMG: ${{ contains(github.event.head_commit.message, '[adkit-img]') }}
       # [testflight] signs a Release build with the Apple Developer account and uploads it to TestFlight
       # (no simulator build, no tests, no test IPA). Secrets: see scripts/signing/README.md.
       # [interne] does the same with Premium unlocked (INTERNAL_PREMIUM), uploaded « TestFlight Internal
@@ -744,13 +748,17 @@ jobs:
             xcrun simctl launch "$DEVICE" com.dakrsnyk.ardane "${ARGS[@]}" -screenshotScreen home < /dev/null > /dev/null || true
             sleep 8
           }
-          for scene in testAdFitnessSession testAdNutritionAdd testAdFinancesPeriods testAdStudio testAdPlanning testAdHabits testAdExerciseLibrary testAdBusiness testAdScheduleImport; do
+          LIGHT_SCENES="testAdFitnessSession testAdNutritionAdd testAdFinancesPeriods testAdStudio testAdPlanning testAdHabits testAdExerciseLibrary testAdBusiness testAdScheduleImport"
+          DARK_SCENES="testAdFitnessSession testAdNutritionAdd testAdPlanning testAdHabits testAdExerciseLibrary testAdStudio"
+          # [adkit-img]: no played scene at all, only the export of part 3.
+          if [ "$ADKIT_IMG" = "true" ]; then LIGHT_SCENES=""; DARK_SCENES=""; echo "adkit: images only, no played scenes"; fi
+          for scene in $LIGHT_SCENES; do
             run_scene "$scene"
           done
           # The main film shows the app in Dark appearance, floating in black: its scenes again, in dark
           # (shots <name>-dark), from the same demo data as the light ones.
-          fresh_install
-          for scene in testAdFitnessSession testAdNutritionAdd testAdPlanning testAdHabits testAdExerciseLibrary testAdStudio; do
+          [ "$ADKIT_IMG" = "true" ] || fresh_install
+          for scene in $DARK_SCENES; do
             run_scene "$scene" dark
           done
           python3 - <<'PY' || true
@@ -780,10 +788,12 @@ jobs:
             cp scripts/ad_export.txt "$DATA/Documents/ad_export.txt"
             xcrun simctl terminate "$DEVICE" com.dakrsnyk.ardane < /dev/null 2>/dev/null || true
             xcrun simctl launch "$DEVICE" com.dakrsnyk.ardane "${ARGS[@]}" -screenshotScreen export < /dev/null > /dev/null || true
+            EXPORT_T0=$SECONDS
             for i in $(seq 1 600); do
               [ -f "$DATA/Documents/export/done.txt" ] && break
               sleep 2
             done
+            echo "export: waited $((SECONDS - EXPORT_T0)) s, $SECONDS s since the step began"
             [ -f "$DATA/Documents/export/done.txt" ] || echo "export: no done.txt after 20 minutes (progress.txt has what was done)" > $KIT/export-timeout.txt
             cp -R "$DATA/Documents/export/." $KIT/export/ 2>/dev/null || true
             echo "export: $(ls $KIT/export | wc -l | tr -d ' ') files"
@@ -801,8 +811,9 @@ jobs:
             xcrun simctl io "$DEVICE" screenshot --type=png "$KIT/screens/$1.png" < /dev/null > /dev/null 2>&1 || true
           }
           SCREENS=()
-          while IFS= read -r line; do SCREENS+=("$line"); done < <(grep -vE '^[[:space:]]*(#|$)' scripts/ad_screens.txt)
-          for line in "${SCREENS[@]}"; do
+          # [adkit-img]: no still screen either (the list stays empty).
+          [ "$ADKIT_IMG" = "true" ] || while IFS= read -r line; do SCREENS+=("$line"); done < <(grep -vE '^[[:space:]]*(#|$)' scripts/ad_screens.txt)
+          for line in ${SCREENS[@]+"${SCREENS[@]}"}; do
             read -r -a PARTS <<< "$line"
             [ "${#PARTS[@]}" -ge 2 ] && screen_shot "${PARTS[@]}"
           done
@@ -904,7 +915,7 @@ jobs:
             echo "marketing: ${{ steps.marketing.outcome }}"
             echo "videos: ${{ steps.videos.outcome }}"
             ls -l videos/*.mp4 2>/dev/null || true
-            echo "adkit: ${{ steps.adkit.outcome }}"
+            echo "adkit: ${{ steps.adkit.outcome }}$([ "$ADKIT_IMG" = "true" ] && echo ' (images only: export, no shots, no screens)')"
             for KITDIR in adkit adkit-en; do
             if [ -d $KITDIR ]; then
               echo "$KITDIR: $(find $KITDIR/shots -name '*.png' 2>/dev/null | wc -l | tr -d ' ') shots ($(find $KITDIR/attachments -name '*.png' 2>/dev/null | wc -l | tr -d ' ') in-test copies), $(find $KITDIR/screens -name '*.png' 2>/dev/null | wc -l | tr -d ' ') screens, $(find $KITDIR/export -type f 2>/dev/null | wc -l | tr -d ' ') export files"
