@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { ArdaneLogo } from "../components/ArdaneLogo";
 import { C, INTER } from "../lib/brand";
 import { AppIcon, HomeScreen } from "./Home";
@@ -10,15 +10,17 @@ import { BEFORE, iconXY, rectOf, SCREENS, SH, SW } from "./screens";
 // → balayage de lumière → Finance (Marine et or) → les trois téléphones côte à côte → carte de fin.
 export const FPS_AA = 30;
 export const T = {
+  // calé sur la musique (music_aa.py, 120 BPM : une mesure = 60 images) : drop à 120, morphing qui retombe sur 240,
+  // balayage sur 300, carte de fin sur l'impact de 480
   before: 0,
-  swipe: 92,
-  s1: 118,
-  morph: 196,
-  s2: 226,
+  swipe: 96,
+  s1: 120,
+  morph: 210,
+  s2: 240,
   sweep: 300,
-  s3: 328,
+  s3: 330,
   lineup: 402,
-  end: 474,
+  end: 480,
   total: 540,
 };
 
@@ -89,7 +91,7 @@ const Caption: React.FC<{ text: string; f: number; at: number; until: number; y?
 };
 
 /** Apparition échelonnée des widgets puis des icônes d'un écran. */
-const stagger = (f: number, start: number) => (i: number) => p(f, start + i * 5, start + i * 5 + 18, out);
+const stagger = (f: number, start: number) => (i: number) => p(f, start + i * 7.5, start + i * 7.5 + 18, out); // une double croche à 120 BPM
 
 /** Morphing Sport → Organisation : chaque widget glisse vers sa nouvelle place et change de taille, les icônes changent de coin,
  *  le fond se remplace de haut en bas. MAP : widget de l'écran Sport → widget de l'écran Organisation. */
@@ -152,8 +154,8 @@ export const AvantApresFilm: React.FC = () => {
   const cardX = (1080 - SW * CARD) / 2;
 
   // ---- l'écran au centre (avant → Sport → Organisation → Finance) ----
-  const swipe = p(f, T.swipe, T.s1 + 4);
-  const morph = p(f, T.morph, T.s2 + 4);
+  const swipe = p(f, T.swipe, T.s1);
+  const morph = p(f, T.morph, T.s2);
   const sweep = p(f, T.sweep, T.s3 + 2, Easing.bezier(0.5, 0, 0.25, 1));
   const lineup = p(f, T.lineup, T.lineup + 34);
   const endP = p(f, T.end, T.end + 26);
@@ -169,7 +171,7 @@ export const AvantApresFilm: React.FC = () => {
           <Img src={staticFile(BEFORE)} style={{ width: SW, height: SH, display: "block", filter: "saturate(0.9)" }} />
         </div>
         <div style={{ position: "absolute", inset: 0, transform: `translateX(${(1 - swipe) * SW}px)` }}>
-          <HomeScreen screen={s1} wallX={(1 - swipe) * -320} enter={stagger(f, T.swipe + 6)} />
+          <HomeScreen screen={s1} wallX={(1 - swipe) * -320} enter={stagger(f, T.swipe + 14)} />
         </div>
       </>
     );
@@ -226,6 +228,7 @@ export const AvantApresFilm: React.FC = () => {
   const endY = mix(0, -150, endP);
   return (
     <AbsoluteFill style={{ background: "#000" }}>
+      <Audio src={staticFile("avantapres/music-aa.wav")} />
       <Ambient walls={ambient} />
       <div style={{ position: "absolute", inset: 0, transform: `translateY(${endY}px)`, opacity: 1 - 0.25 * endP }}>
         {lineup > 0 && (
