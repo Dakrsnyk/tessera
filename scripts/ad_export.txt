@@ -377,3 +377,31 @@ only home-planning-ocean home-planning-night home-planning-rose home-planning-sa
 # --- Demande cj-32a8f8e0 du QG marketing
 widget habits-l-paper kind=habits family=large scale=3 theme=paper
 only habits-l-paper
+# --- 2026-11-11 : pub « Voici ton téléphone… et voici le mien » (avant / après), visuels jamais montrés dans une pub.
+# Écran Sport et nutrition « Volt » : style Sport (noir, jaune fluo) ; écran Organisation « Glacier » (bleu de glace) ;
+# écran Finance et entreprise « Marine et or » : style Business, accent or. Données de démo de l'app.
+widget todaysWorkout-m-sport kind=todaysWorkout family=medium scale=3 theme=sport
+widget weeklyVolume-m-sport kind=weeklyVolume family=medium scale=3 theme=sport
+widget workoutMonth-m-sport kind=workoutMonth family=medium scale=3 theme=sport
+widget fitnessDashboard-m-sport kind=fitnessDashboard family=medium scale=3 theme=sport
+widget calories-s-sport kind=caloriesLeft family=small scale=4 theme=sport
+widget macros-s-sport kind=macros family=small scale=4 theme=sport
+widget personalRecords-s-sport kind=personalRecords family=small scale=4 theme=sport
+widget upNext-l-glacier kind=upNext family=large scale=3 theme=glacier
+widget calendar-l-glacier kind=calendar family=large scale=3 theme=glacier
+widget myDay-l-glacier kind=myDay family=large scale=3 theme=glacier
+widget habitWeek-m-glacier kind=habitWeek family=medium scale=3 theme=glacier
+widget tasks-s-glacier kind=tasks family=small scale=4 theme=glacier
+widget habits-s-glacier kind=habits family=small scale=4 theme=glacier
+widget habitRate-s-glacier kind=habitRate family=small scale=4 theme=glacier
+widget progress-s-glacier kind=progress family=small scale=4 theme=glacier
+widget mrr-s-business kind=mrr family=small scale=4 theme=business accent=E5B567
+widget mrr-m-business kind=mrr family=medium scale=3 theme=business accent=E5B567
+widget revenueTrend-m-business kind=revenueTrend family=medium scale=3 theme=business accent=E5B567
+widget revenueTrend-l-business kind=revenueTrend family=large scale=3 theme=business accent=E5B567
+widget businessDashboard-m-business kind=businessDashboard family=medium scale=3 theme=business accent=E5B567
+widget profit-s-business kind=profit family=small scale=4 theme=business accent=E5B567
+widget revenueGoal-s-business kind=revenueGoal family=small scale=4 theme=business accent=E5B567
+widget budgetLeft-s-business kind=budgetLeft family=small scale=4 theme=business accent=E5B567
+widget spendingByCategory-m-business kind=spendingByCategory family=medium scale=3 theme=business accent=E5B567
+only todaysWorkout-m-sport weeklyVolume-m-sport workoutMonth-m-sport fitnessDashboard-m-sport calories-s-sport macros-s-sport personalRecords-s-sport upNext-l-glacier calendar-l-glacier myDay-l-glacier habitWeek-m-glacier tasks-s-glacier habits-s-glacier habitRate-s-glacier progress-s-glacier mrr-s-business mrr-m-business revenueTrend-m-business revenueTrend-l-business businessDashboard-m-business profit-s-business revenueGoal-s-business budgetLeft-s-business spendingByCategory-m-business
