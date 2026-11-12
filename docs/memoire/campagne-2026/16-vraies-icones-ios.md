@@ -24,3 +24,10 @@ Demande : chaque pub (films du dépôt tessera ET pubs du QG ardane-hq) montre d
 - Chaque case libre de la grille peut recevoir une vraie app, jamais deux fois la même sur un écran (Dock compris). Mieux vaut quelques cases vides en bas qu'un écran surchargé.
 - Pas de coque d'iPhone dessinée (règle d'Apple : aucune imitation d'appareil). On montre l'écran seul, coins arrondis (rayon 165 px de capture), avec une ombre.
 - Les captures d'écran d'accueil ENTIÈRES de l'app (`home-*`, `setup-*`) ont les icônes du kit incrustées : on ne les montre plus telles quelles. On recompose : fond `wall-*` + widgets du kit (mêmes fichiers qu'avant) + vraies icônes.
+
+## État (2026-11-11, soir)
+- Code fait dans le dépôt tessera (films : `scripts/ad2/film/src`). Module central `lib/iosHome.ts` : grille, `toIOS`, `iosFill` (Dock fixe Messages, Safari, Photos, Settings ; les 6 autres apps dans les cases libres, dans l'ordre du thème des widgets), `drawIosChrome` (canevas) et `lib/IosChromeDom.tsx` (HTML). Branchés : `v5/lib` (ChromeL, gridfill, HomeL, HomeScroll), `v5/part2` (Chrome, Home), `v4` (composeHome, Homes, Process, series/HomesS), `ad26/Phone.tsx` (HomeCompose, homeRect), `lib/kit.ts` (HERO_WIDGETS, DOCK, dockIcon).
+- Captures recomposées : composition `src/ioshome` + `scripts/ad2/ios_homes.sh` → `public/ioshome/<lang>/home-hero-*.png` et `home-crepuscule.png` ; `kit.ts` et `ad26/kit26.ts` les servent sous l'ancien nom. À relancer si le kit ou `iosHome.ts` change.
+- Libellés : blancs avec ombre sur fond sombre, gris foncé sur fond très clair (papier) : illisibles sinon.
+- Copie de travail : NE PAS lancer `film_sync.py import` (il efface `ads/`, `hq/`, `lifestyle/`, `store/`, `tiktok/` et le Root de ~/ardane-tools/film) ; copier fichier par fichier (`~/ardane-tools/sync_ios.sh`).
+- Planche avant / après envoyée : `pub/film2026/check/planche-vraies-icones.png`. Re-rendu de toutes les pubs : PAS fait ; le PDG a demandé à la place de refaire seulement la pub principale (note 17).
