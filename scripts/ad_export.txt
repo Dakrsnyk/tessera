@@ -413,3 +413,12 @@ widget mrr-s-businessw kind=mrr family=small scale=4 theme=business accent=E9EEF
 widget budgetLeft-s-businessw kind=budgetLeft family=small scale=4 theme=business accent=E9EEF5
 widget spendingByCategory-m-businessw kind=spendingByCategory family=medium scale=3 theme=business accent=E9EEF5
 only upNext-m-glacier revenueTrend-l-businessw revenueTrend-m-businessw mrr-s-businessw budgetLeft-s-businessw spendingByCategory-m-businessw
+# --- 2026-11-11 (fin) : grands widgets pour la pub avant / après (le grand « ventes sur 30 jours » laisse une moitié vide)
+widget businessDashboard-l-businessw kind=businessDashboard family=large scale=3 theme=business accent=E9EEF5
+widget spendingByCategory-l-businessw kind=spendingByCategory family=large scale=3 theme=business accent=E9EEF5
+widget businessKPIs-l-businessw kind=businessKPIs family=large scale=3 theme=business accent=E9EEF5
+widget fitnessDashboard-l-sport kind=fitnessDashboard family=large scale=3 theme=sport
+widget weeklyVolume-l-sport kind=weeklyVolume family=large scale=3 theme=sport
+widget workoutMonth-l-sport kind=workoutMonth family=large scale=3 theme=sport
+widget nutritionWeek-m-sport kind=nutritionWeek family=medium scale=3 theme=sport
+only businessDashboard-l-businessw spendingByCategory-l-businessw businessKPIs-l-businessw fitnessDashboard-l-sport weeklyVolume-l-sport workoutMonth-l-sport nutritionWeek-m-sport
