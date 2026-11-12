@@ -405,3 +405,11 @@ widget revenueGoal-s-business kind=revenueGoal family=small scale=4 theme=busine
 widget budgetLeft-s-business kind=budgetLeft family=small scale=4 theme=business accent=E5B567
 widget spendingByCategory-m-business kind=spendingByCategory family=medium scale=3 theme=business accent=E5B567
 only todaysWorkout-m-sport weeklyVolume-m-sport workoutMonth-m-sport fitnessDashboard-m-sport calories-s-sport macros-s-sport personalRecords-s-sport upNext-l-glacier calendar-l-glacier myDay-l-glacier habitWeek-m-glacier tasks-s-glacier habits-s-glacier habitRate-s-glacier progress-s-glacier mrr-s-business mrr-m-business revenueTrend-m-business revenueTrend-l-business businessDashboard-m-business profit-s-business revenueGoal-s-business budgetLeft-s-business spendingByCategory-m-business
+# --- 2026-11-11 (suite) : agenda moyen Glacier, et Business avec un accent blanc (l'or donnait des barres olive sur le marine)
+widget upNext-m-glacier kind=upNext family=medium scale=3 theme=glacier
+widget revenueTrend-l-businessw kind=revenueTrend family=large scale=3 theme=business accent=E9EEF5
+widget revenueTrend-m-businessw kind=revenueTrend family=medium scale=3 theme=business accent=E9EEF5
+widget mrr-s-businessw kind=mrr family=small scale=4 theme=business accent=E9EEF5
+widget budgetLeft-s-businessw kind=budgetLeft family=small scale=4 theme=business accent=E9EEF5
+widget spendingByCategory-m-businessw kind=spendingByCategory family=medium scale=3 theme=business accent=E9EEF5
+only upNext-m-glacier revenueTrend-l-businessw revenueTrend-m-businessw mrr-s-businessw budgetLeft-s-businessw spendingByCategory-m-businessw
