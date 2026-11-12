@@ -79,7 +79,7 @@ export const SCREENS: Screen[] = [
   },
   {
     id: "glacier",
-    title: "Organisation",
+    title: "Organization",
     wall: A + "wall-aa-glacier.png",
     darkWall: false,
     widgets: [
@@ -117,7 +117,51 @@ export const SCREENS: Screen[] = [
     glass: "rgba(20,34,60,0.45)",
     accent: "#E5B567",
   },
+  {
+    id: "rose",
+    title: "Wellness",
+    wall: A + "wall-aa-rose.png",
+    darkWall: false,
+    widgets: [
+      { file: K + "mealsToday-m-blossom.png", size: "m", c: 0, r: 1 },
+      { file: K + "countdown-s-blossom.png", size: "s", c: 0, r: 3 },
+      { file: K + "birthday-s-blossom.png", size: "s", c: 2, r: 3 },
+    ],
+    icons: [
+      { name: "Photos", c: 0, r: 0 },
+      { name: "Health", c: 1, r: 0 },
+      { name: "Calendar", c: 2, r: 0 },
+      { name: "Reminders", c: 3, r: 0 },
+      { name: "Maps", c: 0, r: 5 },
+      { name: "News", c: 1, r: 5 },
+      { name: "Wallet", c: 2, r: 5 },
+      { name: "Settings", c: 3, r: 5 },
+    ],
+    dock: ["Messages", "Safari"],
+    glass: "rgba(255,240,246,0.28)",
+    accent: "#F0508A",
+  },
+  {
+    id: "emerald",
+    title: "Travel",
+    wall: A + "wall-aa-emerald.png",
+    darkWall: true,
+    widgets: [
+      { file: K + "flight-m-forest.png", size: "m", c: 0, r: 0 },
+      { file: K + "tripCountdown-s-forest.png", size: "s", c: 0, r: 2 },
+      { file: K + "hotel-s-forest.png", size: "s", c: 2, r: 2 },
+      { file: K + "localTime-s-forest.png", size: "s", c: 0, r: 4 },
+      { file: K + "currency-s-forest.png", size: "s", c: 2, r: 4 },
+    ],
+    icons: [],
+    dock: ["Maps", "Wallet", "Photos", "Messages"],
+    glass: "rgba(10,60,42,0.42)",
+    accent: "#34D399",
+  },
 ];
+
+/** Point de la plongée (écran Finance → Bien-être) : le centre du grand tableau de bord, en px de capture. */
+export const DIVE_AT: [number, number] = [604, 821];
 
 /** L'écran « avant » : la vraie capture de l'écran d'accueil du simulateur iOS (étape CI [ios-home]). */
 export const BEFORE = A + "ios-home-light-fixed.png";

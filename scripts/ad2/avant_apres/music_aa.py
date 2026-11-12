@@ -1,13 +1,13 @@
-"""Musique originale de la pub « Voici ton téléphone… et voici le mien » (18 s, 120 BPM, ré majeur), synthétisée en code :
+"""Musique originale de la pub « Voici ton téléphone… et voici le mien » (25 s, 120 BPM, ré majeur), synthétisée en code :
 aucun échantillon, aucune musique de tiers, aucun timbre « ding » (ni cloche, ni glockenspiel, ni sinus aigu qui décroît).
 
 Calée sur le montage (30 i/s, une mesure = 2 s = 60 images, voir T dans src/avantapres/Film.tsx) :
   0–4 s    l'iPhone « avant » : motif étouffé, mono, filtré, un peu terne ; souffle qui monte de 3 à 4 s
   4 s      DROP pile à l'arrivée de l'écran Sport : kick, clap, charleston, basse, accords supersaw pompés, arpège pluck
-  7–8 s    souffle descendant pendant le morphing des widgets, retombée sur la mesure de 8 s
-  10 s     balayage de lumière : nappe de souffle aérien, filtre qui s'ouvre
-  14–16 s  montée (roulement de claps, souffle) vers la carte de fin
-  16 s     impact, accord final tenu sous le logo, fin propre à 18 s
+  7–8 s    souffle descendant pendant le morphing des widgets ; 10 s balayage de lumière (nappe aérienne)
+  13–14 s  plongée dans le tableau de bord (souffle qui monte, petit impact) ; 16 s pile de cartes ; 19 s les cinq écrans
+  20–22 s  montée (roulement de claps, souffle) ; 22 s impact et accord final tenu sous le logo, fin à 25 s
+Écrit aussi mix-aa.wav : la même musique avec la voix (VOICE, enregistrée par ardane-hq/renderer/vo_hq.py), -7 dB sous la voix.
 
     ~/ardane-tools/venv/Scripts/python.exe -X utf8 scripts/ad2/avant_apres/music_aa.py   # écrit ~/ardane-tools/film/public/avantapres/music-aa.wav
 """
@@ -21,7 +21,9 @@ SR = 48000
 BPM = 120
 BEAT = 60 / BPM
 BAR = 4 * BEAT
-LEN = 18.0
+LEN = 25.0
+DROP = 4.0  # arrivée de l'écran Sport (image 120)
+END = 22.0  # carte de fin (image 660)
 N = int(LEN * SR)
 OUT = os.path.join(os.path.expanduser("~"), "ardane-tools", "film", "public", "avantapres", "music-aa.wav")
 rng = np.random.default_rng(2026)
@@ -228,16 +230,14 @@ def compose():
     fx.add(noise_rise(1.1, 400, 11000, 0.5), 2.9, 0.9)
     fx.add(whoosh(0.8), 3.25, 0.55)
 
-    # 4–16 s : la partie lumineuse, 6 mesures (accords d'une mesure, ré majeur)
-    prog = [
-        (["G3", "B3", "D4", "F#4"], "G1", ["G4", "B4", "D5", "F#5"]),
-        (["D3", "F#3", "A3", "E4"], "F#1", ["F#4", "A4", "D5", "E5"]),
-        (["E3", "G3", "B3", "D4", "F#4"], "E1", ["E4", "G4", "B4", "F#5"]),
-        (["B2", "D3", "F#3", "A3"], "B1", ["B4", "D5", "F#5", "A5"]),
-        (["G3", "B3", "D4", "F#4"], "G1", ["G4", "B4", "D5", "F#5"]),
-        (["A3", "D4", "E4", "A4"], "A1", ["A4", "D5", "E5", "A5"]),
-    ]
-    start = 4.0
+    # 4–22 s : la partie lumineuse, 9 mesures (accords d'une mesure, ré majeur) ; la 9e est la montée vers la fin
+    G = (["G3", "B3", "D4", "F#4"], "G1", ["G4", "B4", "D5", "F#5"])
+    D = (["D3", "F#3", "A3", "E4"], "F#1", ["F#4", "A4", "D5", "E5"])
+    E = (["E3", "G3", "B3", "D4", "F#4"], "E1", ["E4", "G4", "B4", "F#5"])
+    B = (["B2", "D3", "F#3", "A3"], "B1", ["B4", "D5", "F#5", "A5"])
+    A = (["A3", "D4", "E4", "A4"], "A1", ["A4", "D5", "E5", "A5"])
+    prog = [G, D, E, B, G, D, E, B, A]
+    start = DROP
     for b, (chord, root, arp) in enumerate(prog):
         t0 = start + b * BAR
         last = b == len(prog) - 1
@@ -275,8 +275,7 @@ def compose():
             music.add(lp(p, 3000), at + 3 * BEAT / 4, 0.16, 0.6)
             music.add(lp(p, 2200), at + 6 * BEAT / 4, 0.08, -0.6)
 
-    # impact du drop
-    fx.add(impact(), 4.0, 0.55)
+    fx.add(impact(), DROP, 0.55)
     # morphing des widgets (7 → 8 s) : souffle descendant, retombée sur 8 s
     fx.add(whoosh(1.0, down=True), 7.05, 0.6)
     fx.add(hat(open_=True), 8.0, 0.8)
@@ -284,44 +283,85 @@ def compose():
     air = hp(rng.normal(0, 1, int(2.2 * SR)), 6000) * np.sin(np.pi * np.linspace(0, 1, int(2.2 * SR))) ** 2 * 0.12
     fx.add(reverb(air, 1.5, 0.5), 9.6, 0.8)
     fx.add(whoosh(0.9), 9.6, 0.4)
-    # alignement des trois téléphones (13,4 s) : petit souffle
-    fx.add(whoosh(0.7), 13.1, 0.35)
+    # plongée dans un widget (13 → 14 s) : souffle qui monte, petit impact à l'arrivée sur l'écran Rose
+    fx.add(noise_rise(1.0, 600, 10000, 0.4), 13.0, 0.8)
+    fx.add(impact(), 14.0, 0.28)
+    # pile de cartes (16 → 17 s) : souffle latéral
+    fx.add(whoosh(1.0), 15.9, 0.55, 0.2)
+    # alignement des cinq écrans (19 s) : souffle
+    fx.add(whoosh(0.9), 18.9, 0.45, -0.2)
     # montée vers la carte de fin : roulement de claps qui accélère + souffle
-    rolls = np.concatenate([np.arange(14.0, 15.0, BEAT / 2), np.arange(15.0, 15.5, BEAT / 4), np.arange(15.5, 16.0, BEAT / 8)])
+    rolls = np.concatenate([np.arange(END - 2.0, END - 1.0, BEAT / 2), np.arange(END - 1.0, END - 0.5, BEAT / 4), np.arange(END - 0.5, END, BEAT / 8)])
     for k, at in enumerate(rolls):
         drums.add(clap(), at, 0.25 + 0.5 * k / len(rolls), 0.0)
-    fx.add(noise_rise(2.0, 300, 12000, 0.55), 14.0, 0.9)
-    # 16 s : impact et accord final tenu (ré add9), fin à 18 s
-    fx.add(impact(), 16.0, 0.75)
-    drums.add(kick(1.2), 16.0, 1.0)
-    final = supersaw(["D3", "A3", "D4", "E4", "F#4", "A4"], 1.7, cutoff=4800, att=0.005, rel=0.3)
-    tail = np.linspace(1, 0, len(final)) ** 1.2
-    music.add(final * tail[:, None], 16.0, 0.8)
-    music.add(bass("D1", 1.8) * np.linspace(1, 0, int(1.8 * SR)), 16.0, 0.7)
+    fx.add(noise_rise(2.0, 300, 12000, 0.55), END - 2.0, 0.9)
+    # END : impact et accord final tenu (ré add9) sous le logo, jusqu'à la fin
+    fx.add(impact(), END, 0.75)
+    drums.add(kick(1.2), END, 1.0)
+    hold = LEN - END - 0.1
+    final = supersaw(["D3", "A3", "D4", "E4", "F#4", "A4"], hold, cutoff=4800, att=0.005, rel=0.1)
+    tail = np.linspace(1, 0, len(final)) ** 1.1
+    music.add(final * tail[:, None], END, 0.8)
+    music.add(bass("D1", hold) * np.linspace(1, 0, int(hold * SR)), END, 0.7)
 
     mus = music.stereo() * duck[:, None]
     mus = reverb(mus, 1.8, 0.22)[:N]
     fxs = reverb(fx.stereo(), 2.4, 0.3)[:N]
     drm = drums.stereo()
     body = drm * 0.9 + mus * 0.85
-    # avant 4 s : son étroit (mono), sans aigus, un peu plus bas — l'iPhone banal ; après : large et brillant.
+    # avant le drop : son étroit (mono), sans aigus — l'iPhone banal ; après : large et brillant.
     # Le souffle de montée (fx) n'est pas filtré : c'est lui qui ouvre vers le drop.
-    pre = int(4.0 * SR)
+    pre = int(DROP * SR)
     m = body[:pre].mean(1, keepdims=True)
     body[:pre] = lp(m * np.ones((1, 2)), 2400) * 1.6
     mix = body + fxs * 0.8
-    # fondu de fin et mastering : compression douce, plafond -1 dBFS
-    fade = np.ones(N)
-    fade[-int(0.25 * SR):] = np.linspace(1, 0, int(0.25 * SR))
-    mix *= fade[:, None]
     mix = np.tanh(mix * 1.15) / np.tanh(1.15)
-    mix *= 10 ** (-1.0 / 20) / np.max(np.abs(mix))
-    return mix
+    return mix / np.max(np.abs(mix)) * 0.8
+
+
+# La voix (Kokoro af_heart, enregistrée par ardane-hq/renderer/vo_hq.py dans avantapres/vo/) : le texte de l'écran, dit au
+# moment où il apparaît (T de Film.tsx, en secondes).
+VOICE = [("v0", 0.5), ("v1", 2.9), ("p1", 4.45), ("p2", 8.25), ("p3", 11.25), ("p4", 14.3), ("p5", 17.3), ("v2", 20.3), ("v3", 22.45)]
+VO_DIR = os.path.join(os.path.dirname(OUT), "vo")
+MIX_OUT = os.path.join(os.path.dirname(OUT), "mix-aa.wav")
+
+
+def with_voice(music):
+    """Voix au centre, la musique s'efface de 7 dB sous elle (attaque 60 ms, relâche 250 ms) ; plafond -1 dBFS."""
+    vo = np.zeros(N)
+    for key, at in VOICE:
+        v, sr = sf.read(os.path.join(VO_DIR, key + ".wav"))
+        assert sr == SR, (key, sr)
+        v = v if v.ndim == 1 else v.mean(1)
+        i = int(at * SR)
+        m = min(len(v), N - i)
+        vo[i:i + m] += v[:m]
+    vo = hp(vo, 90) * (0.5 / max(1e-9, np.max(np.abs(vo))))
+    active = (np.abs(vo) > 0.01).astype(float)
+    win = int(0.25 * SR)
+    hold = np.convolve(active, np.ones(win), "same") > 0
+    target = np.where(hold, 10 ** (-7 / 20), 1.0)
+    g = np.empty(N)
+    g[0] = 1.0
+    a_att, a_rel = np.exp(-1 / (0.06 * SR)), np.exp(-1 / (0.25 * SR))
+    for k in range(1, N):
+        a = a_att if target[k] < g[k - 1] else a_rel
+        g[k] = target[k] + (g[k - 1] - target[k]) * a
+    mix = music * g[:, None] + vo[:, None] * 1.0
+    fade = np.ones(N)
+    fade[-int(0.4 * SR):] = np.linspace(1, 0, int(0.4 * SR))
+    mix *= fade[:, None]
+    return mix * (10 ** (-1.0 / 20) / np.max(np.abs(mix)))
 
 
 if __name__ == "__main__":
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     y = compose()
-    sf.write(OUT, y.astype(np.float32), SR, subtype="PCM_24")
-    rms = 20 * np.log10(np.sqrt(np.mean(y ** 2)))
-    print(f"ok {OUT} {len(y) / SR:.2f} s, RMS {rms:.1f} dB")
+    fade = np.ones(N)
+    fade[-int(0.4 * SR):] = np.linspace(1, 0, int(0.4 * SR))
+    music_only = y * fade[:, None] * (10 ** (-1.0 / 20) / np.max(np.abs(y)))
+    sf.write(OUT, music_only.astype(np.float32), SR, subtype="PCM_24")
+    full = with_voice(y)
+    sf.write(MIX_OUT, full.astype(np.float32), SR, subtype="PCM_24")
+    for name, z in (("musique", music_only), ("mix voix", full)):
+        print(f"ok {name} {len(z) / SR:.2f} s, RMS {20 * np.log10(np.sqrt(np.mean(z ** 2))):.1f} dB")

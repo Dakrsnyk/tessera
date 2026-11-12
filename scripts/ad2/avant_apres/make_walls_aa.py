@@ -83,9 +83,32 @@ def marine():
     return finish(img, 13, 0.01)
 
 
+def rose():
+    img = gradient([(0, "F4B3CB"), (0.4, "E07AA3"), (0.75, "C04F82"), (1, "8E2C5E")])
+    warp = (noise(460, 21) - 0.5) * 0.10 + (noise(170, 22) - 0.5) * 0.03
+    white, peach = rgb("FFF3F7"), rgb("FFC7B0")
+    for (c, a, f, p, w, k, t, col) in [(0.20, 0.06, 0.42, 0.1, 0.06, 0.40, -0.18, white), (0.43, 0.05, 0.50, 0.5, 0.03, 0.30, -0.15, peach),
+                                        (0.66, 0.07, 0.38, 0.8, 0.09, 0.25, -0.20, white), (0.86, 0.05, 0.46, 0.3, 0.025, 0.35, -0.14, peach)]:
+        g = ribbon(c, a, f, p, w, warp, t)[..., None]
+        img = img * (1 - g * k) + col * g * k
+    return finish(img, 23, 0.008)
+
+
+def emerald():
+    img = gradient([(0, "05261B"), (0.5, "0A4532"), (1, "021A11")])
+    warp = (noise(500, 31) - 0.5) * 0.09 + (noise(190, 32) - 0.5) * 0.02
+    jade, mint = rgb("1F7A57"), rgb("5EEAB4")
+    for (c, a, f, p, w, k, t, col) in [(0.30, 0.07, 0.40, 0.2, 0.11, 0.55, 0.22, jade), (0.315, 0.07, 0.40, 0.2, 0.010, 0.75, 0.22, mint),
+                                        (0.72, 0.06, 0.36, 0.6, 0.13, 0.50, 0.18, jade), (0.70, 0.06, 0.36, 0.6, 0.008, 0.65, 0.18, mint),
+                                        (0.52, 0.04, 0.5, 0.9, 0.006, 0.30, 0.20, mint)]:
+        g = ribbon(c, a, f, p, w, warp, t)[..., None]
+        img = img * (1 - g * k) + col * g * k if col is mint else img + g * k * col
+    return finish(img, 33, 0.01)
+
+
 if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
-    for name, fn in [("wall-aa-volt", volt), ("wall-aa-glacier", glacier), ("wall-aa-marine", marine)]:
+    for name, fn in [("wall-aa-volt", volt), ("wall-aa-glacier", glacier), ("wall-aa-marine", marine), ("wall-aa-rose", rose), ("wall-aa-emerald", emerald)]:
         im = fn()
         im = im.filter(ImageFilter.GaussianBlur(1.2))
         im.save(os.path.join(OUT, name + ".png"))

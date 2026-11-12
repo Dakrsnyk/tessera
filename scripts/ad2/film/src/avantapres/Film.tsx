@@ -3,15 +3,16 @@ import { AbsoluteFill, Audio, Easing, Img, interpolate, staticFile, useCurrentFr
 import { ArdaneLogo } from "../components/ArdaneLogo";
 import { C, INTER } from "../lib/brand";
 import { AppIcon, HomeScreen } from "./Home";
-import { BEFORE, iconXY, rectOf, SCREENS, SH, SW } from "./screens";
+import { BEFORE, DIVE_AT, iconXY, rectOf, SCREENS, SH, SW } from "./screens";
 
-// « Voici ton téléphone… et voici le mien » — 1080 x 1920, 30 i/s, 18 s.
+// « Voici ton téléphone… et voici le mien » — 1080 x 1920, 30 i/s, 25 s, voix et musique (mix-aa.wav).
 // Avant (vraie capture iOS) → glissement de page → Sport (Volt) → morphing des widgets → Organisation (Glacier)
-// → balayage de lumière → Finance (Marine et or) → les trois téléphones côte à côte → carte de fin.
+// → balayage de lumière → Finance (Marine) → plongée dans un widget → Bien-être (Rose) → pile de cartes → Voyage (Émeraude)
+// → les cinq écrans → carte de fin.
 export const FPS_AA = 30;
 export const T = {
-  // calé sur la musique (music_aa.py, 120 BPM : une mesure = 60 images) : drop à 120, morphing qui retombe sur 240,
-  // balayage sur 300, carte de fin sur l'impact de 480
+  // calé sur la musique (music_aa.py, 120 BPM : une mesure = 60 images) : drop à 120, chaque écran arrive sur une mesure,
+  // carte de fin sur l'impact de 660
   before: 0,
   swipe: 96,
   s1: 120,
@@ -19,9 +20,13 @@ export const T = {
   s2: 240,
   sweep: 300,
   s3: 330,
-  lineup: 402,
-  end: 480,
-  total: 540,
+  dive: 390,
+  s4: 420,
+  stack: 480,
+  s5: 510,
+  lineup: 570,
+  end: 660,
+  total: 750,
 };
 
 const CARD = 0.6; // échelle de l'écran dans la vidéo (1206 x 2622 → 724 x 1573)
@@ -150,13 +155,15 @@ const Morph: React.FC<{ t: number }> = ({ t }) => {
 
 export const AvantApresFilm: React.FC = () => {
   const f = useCurrentFrame();
-  const [s1, s2, s3] = SCREENS;
+  const [s1, s2, s3, s4, s5] = SCREENS;
   const cardX = (1080 - SW * CARD) / 2;
 
-  // ---- l'écran au centre (avant → Sport → Organisation → Finance) ----
+  // ---- l'écran au centre : avant → Sport → Organisation → Finance → Bien-être → Voyage ----
   const swipe = p(f, T.swipe, T.s1);
   const morph = p(f, T.morph, T.s2);
   const sweep = p(f, T.sweep, T.s3 + 2, Easing.bezier(0.5, 0, 0.25, 1));
+  const dive = p(f, T.dive, T.s4, Easing.bezier(0.55, 0, 0.3, 1));
+  const stack = p(f, T.stack, T.s5 + 4, Easing.bezier(0.5, 0, 0.2, 1));
   const lineup = p(f, T.lineup, T.lineup + 34);
   const endP = p(f, T.end, T.end + 26);
 
@@ -177,7 +184,7 @@ export const AvantApresFilm: React.FC = () => {
     );
   } else if (f < T.sweep) {
     center = morph < 1 ? <Morph t={morph} /> : <HomeScreen screen={s2} />;
-  } else {
+  } else if (f < T.dive) {
     const edge = mix(-0.25, 1.25, sweep); // bord du balayage, en fraction de largeur (diagonale)
     const poly = `polygon(${(edge - 0.25) * 100}% 0, 200% 0, 200% 100%, ${(edge + 0.25) * 100}% 100%)`;
     center = (
@@ -205,52 +212,92 @@ export const AvantApresFilm: React.FC = () => {
         )}
       </>
     );
+  } else {
+    // plongée : on entre dans le grand widget de l'écran Finance, l'écran Bien-être s'ouvre derrière
+    const [fx0, fy0] = DIVE_AT;
+    const zoom = 1 + 2.4 * dive;
+    const goneA = interpolate(dive, [0.35, 0.75], [1, 0], clamp);
+    const inB = interpolate(dive, [0.45, 1], [0, 1], { ...clamp, easing: out });
+    center = (
+      <>
+        <div style={{ position: "absolute", inset: 0, transform: `scale(${1.22 - 0.22 * inB})`, opacity: inB, filter: `blur(${(1 - inB) * 14}px)` }}>
+          <HomeScreen screen={s4} enter={stagger(f, T.dive + 18)} />
+        </div>
+        {goneA > 0 && (
+          <div style={{ position: "absolute", inset: 0, transformOrigin: `${fx0}px ${fy0}px`, transform: `scale(${zoom})`, opacity: goneA, filter: `blur(${dive * 10}px)` }}>
+            <HomeScreen screen={s3} />
+          </div>
+        )}
+      </>
+    );
   }
 
-  // ---- alignement final : trois écrans côte à côte ----
-  const small = 0.27;
+  // ---- alignement final : cinq écrans, 3 en haut, 2 en bas ----
+  const small = 0.255;
   const gap = 26;
-  const rowW = 3 * SW * small + 2 * gap;
-  const rowX = (1080 - rowW) / 2;
-  const rowY = 560;
-  const slot = (k: number) => rowX + k * (SW * small + gap);
+  const cw = SW * small;
+  const chh = SH * small;
+  const top = 420;
+  const slots: [number, number][] = [
+    [(1080 - 3 * cw - 2 * gap) / 2, top],
+    [(1080 - cw) / 2, top],
+    [(1080 + cw) / 2 + gap, top],
+    [540 - cw - gap / 2, top + chh + gap],
+    [540 + gap / 2, top + chh + gap],
+  ];
   const centerScale = mix(CARD * push, small, lineup);
-  const centerX = mix(cardX + (SW * CARD * (1 - push)) / 2, slot(2), lineup);
-  const centerY = mix(CARD_TOP + (SH * CARD * (1 - push)) / 2, rowY, lineup);
+  const centerX = mix(cardX + (SW * CARD * (1 - push)) / 2, slots[4][0], lineup);
+  const centerY = mix(CARD_TOP + (SH * CARD * (1 - push)) / 2, slots[4][1], lineup);
+  // la pile de cartes : l'écran Voyage attend derrière (plus petit), l'écran Bien-être s'envole vers le haut
+  const stacked = f >= T.stack;
+  const behind = stacked ? mix(0.86, 1, interpolate(stack, [0.15, 1], [0, 1], clamp)) : 1;
 
   const ambient = [
     { src: BEFORE, o: 1 - swipe },
     { src: s1.wall, o: f < T.morph ? swipe : 1 - morph },
     { src: s2.wall, o: f < T.sweep ? morph : 1 - sweep },
-    { src: s3.wall, o: sweep },
+    { src: s3.wall, o: f < T.dive ? sweep : 1 - dive },
+    { src: s4.wall, o: f < T.stack ? dive : 1 - stack },
+    { src: s5.wall, o: stack },
   ];
 
-  const endY = mix(0, -150, endP);
+  const centerContent = stacked ? <HomeScreen screen={s5} enter={stagger(f, T.stack + 14)} /> : center;
+  const cScale = centerScale * (0.96 + 0.04 * enterCard) * behind;
+  const cX = centerX + (SW * centerScale * (1 - behind)) / 2;
+  const cY = centerY + (1 - enterCard) * 40 + (SH * centerScale * (1 - behind)) / 2;
+
   return (
     <AbsoluteFill style={{ background: "#000" }}>
-      <Audio src={staticFile("avantapres/music-aa.wav")} />
+      <Audio src={staticFile("avantapres/mix-aa.wav")} />
       <Ambient walls={ambient} />
-      <div style={{ position: "absolute", inset: 0, transform: `translateY(${endY}px)`, opacity: 1 - 0.25 * endP }}>
-        {lineup > 0 && (
-          <>
-            <Card x={slot(0)} y={rowY + (1 - p(f, T.lineup + 10, T.lineup + 40, out)) * 420} scale={small} opacity={p(f, T.lineup + 10, T.lineup + 30)}>
-              <HomeScreen screen={s1} />
-            </Card>
-            <Card x={slot(1)} y={rowY + (1 - p(f, T.lineup + 4, T.lineup + 34, out)) * 420} scale={small} opacity={p(f, T.lineup + 4, T.lineup + 24)}>
-              <HomeScreen screen={s2} />
-            </Card>
-          </>
-        )}
-        <Card x={centerX} y={centerY + (1 - enterCard) * 40} scale={centerScale * (0.96 + 0.04 * enterCard)} opacity={enterCard}>
-          {center}
+      <div style={{ position: "absolute", inset: 0, transformOrigin: "540px 300px", transform: `scale(${1 - 0.06 * endP})`, opacity: 1 - 0.85 * endP, filter: `blur(${endP * 8}px)` }}>
+        {lineup > 0 &&
+          [s1, s2, s3, s4].map((sc, k) => {
+            const d = [16, 12, 8, 4][k];
+            const e = p(f, T.lineup + d, T.lineup + d + 30, out);
+            return (
+              <Card key={sc.id} x={slots[k][0]} y={slots[k][1] + (1 - e) * 380} scale={small} opacity={p(f, T.lineup + d, T.lineup + d + 18)}>
+                <HomeScreen screen={sc} />
+              </Card>
+            );
+          })}
+        <Card x={cX} y={cY} scale={cScale} opacity={enterCard * (stacked ? interpolate(stack, [0, 0.3], [0.6, 1], clamp) : 1)}>
+          {centerContent}
         </Card>
+        {stacked && stack < 1 && (
+          <Card x={cardX + stack * 60} y={CARD_TOP - stack * 1900} scale={CARD * (1 - 0.12 * stack)} opacity={1 - interpolate(stack, [0.7, 1], [0, 1], clamp)}>
+            <div style={{ position: "absolute", inset: 0, transform: `rotate(${-stack * 4}deg)` }}>
+              <HomeScreen screen={s4} />
+            </div>
+          </Card>
+        )}
       </div>
 
       <Caption text="This is your phone…" f={f} at={8} until={T.swipe + 6} />
       <Caption text="…and this is mine." f={f} at={T.swipe + 10} until={T.lineup + 2} />
       {SCREENS.map((sc, k) => {
-        const a = [T.s1 - 6, T.s2 - 4, T.s3 - 6][k];
-        const b = [T.morph + 6, T.sweep + 4, T.lineup + 2][k];
+        const a = [T.s1 - 6, T.s2 - 4, T.s3 - 6, T.s4 - 6, T.s5 - 6][k];
+        const b = [T.morph + 6, T.sweep + 4, T.dive + 4, T.stack + 4, T.lineup + 2][k];
         const o = p(f, a, a + 12, out) * (1 - p(f, b - 8, b));
         return o > 0 ? (
           <div key={sc.id} style={{ position: "absolute", left: 0, right: 0, top: 214, display: "flex", justifyContent: "center", opacity: o }}>
@@ -260,7 +307,7 @@ export const AvantApresFilm: React.FC = () => {
           </div>
         ) : null;
       })}
-      <Caption text="Your widgets. Your way." f={f} at={T.lineup + 14} until={T.end + 8} y={300} size={72} />
+      <Caption text="Your widgets. Your way." f={f} at={T.lineup + 14} until={T.end + 8} y={250} size={72} />
 
       {/* mention Premium : beaucoup de ces widgets et styles sont « With Premium » */}
       <div
@@ -278,13 +325,13 @@ export const AvantApresFilm: React.FC = () => {
         Some widgets and styles With Premium
       </div>
 
-      {/* carte de fin */}
+      {/* carte de fin, sur les cinq écrans assombris */}
       {endP > 0 && (
         <AbsoluteFill style={{ opacity: endP }}>
-          <ArdaneLogo size={190} cx={540} cy={1290} tile={1} glow={0} />
-          <div style={{ position: "absolute", left: 0, right: 0, top: 1410, textAlign: "center", color: C.type1, letterSpacing: -1, ...font(700, 74) }}>Ardane</div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 1515, textAlign: "center", color: C.type2, ...font(500, 38) }}>Coming soon to the App Store</div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 1590, textAlign: "center", color: C.type3, ...font(500, 28) }}>
+          <ArdaneLogo size={200} cx={540} cy={860} tile={1} glow={0} />
+          <div style={{ position: "absolute", left: 0, right: 0, top: 990, textAlign: "center", color: C.type1, letterSpacing: -1, ...font(700, 80) }}>Ardane</div>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 1100, textAlign: "center", color: C.type2, ...font(500, 40) }}>Coming soon to the App Store</div>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 1180, textAlign: "center", color: C.type2, ...font(500, 30) }}>
             Some widgets and styles With Premium
           </div>
         </AbsoluteFill>
@@ -293,7 +340,7 @@ export const AvantApresFilm: React.FC = () => {
   );
 };
 
-/** Aperçu fixe d'un écran (PNG pour validation) : `which` = before | volt | glacier | marine. */
+/** Aperçu fixe d'un écran (PNG pour validation) : `which` = before | volt | glacier | marine | rose | emerald. */
 export const AvantApresStill: React.FC<{ which: string }> = ({ which }) => {
   const s = SCREENS.find((x) => x.id === which);
   return (

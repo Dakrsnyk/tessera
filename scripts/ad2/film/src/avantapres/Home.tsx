@@ -169,7 +169,9 @@ export const HomeScreen: React.FC<{
           </div>
           <div style={{ ...glassStyle(screen.glass, 120), left: 52, top: GRID.dockTop, width: 1100, height: 304 }} />
           {screen.dock.map((name, i) => {
-            const [x] = iconXY(i, 0);
+            // 4 icônes : les colonnes de la grille ; moins : centrées, 264 px d'écart (mesuré sur la vraie capture)
+            const n = screen.dock.length;
+            const x = n === 4 ? iconXY(i, 0)[0] : SW / 2 - GRID.icon / 2 + (i - (n - 1) / 2) * 264;
             return <AppIcon key={name} name={name} x={x} y={GRID.dockIconTop} label={false} />;
           })}
         </>
