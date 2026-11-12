@@ -422,3 +422,21 @@ widget weeklyVolume-l-sport kind=weeklyVolume family=large scale=3 theme=sport
 widget workoutMonth-l-sport kind=workoutMonth family=large scale=3 theme=sport
 widget nutritionWeek-m-sport kind=nutritionWeek family=medium scale=3 theme=sport
 only businessDashboard-l-businessw spendingByCategory-l-businessw businessKPIs-l-businessw fitnessDashboard-l-sport weeklyVolume-l-sport workoutMonth-l-sport nutritionWeek-m-sport
+# --- 2026-11-11 (soir) : pub avant / après, deux écrans de plus demandés par le PDG : Rose « Bien-être » (style Cerisier,
+# accent rose) et Émeraude « Voyage » (style Sous-bois sombre, accent émeraude). Widgets jamais montrés dans une pub.
+widget quote-m-blossom kind=quote family=medium scale=3 theme=blossom accent=F0508A
+widget hydration-s-blossom kind=hydration family=small scale=4 theme=blossom accent=F0508A
+widget countdown-s-blossom kind=countdown family=small scale=4 theme=blossom accent=F0508A
+widget birthday-s-blossom kind=birthday family=small scale=4 theme=blossom accent=F0508A
+widget moonPhase-s-blossom kind=moonPhase family=small scale=4 theme=blossom accent=F0508A
+widget mealsToday-m-blossom kind=mealsToday family=medium scale=3 theme=blossom accent=F0508A
+widget quote-m-soft kind=quote family=medium scale=3 theme=soft accent=F0508A
+widget tripCountdown-s-forest kind=tripCountdown family=small scale=4 theme=forest scheme=dark accent=34D399
+widget localTime-s-forest kind=localTime family=small scale=4 theme=forest scheme=dark accent=34D399
+widget currency-s-forest kind=currency family=small scale=4 theme=forest scheme=dark accent=34D399
+widget tripProgress-s-forest kind=tripProgress family=small scale=4 theme=forest scheme=dark accent=34D399
+widget hotel-s-forest kind=hotel family=small scale=4 theme=forest scheme=dark accent=34D399
+widget flight-m-forest kind=flight family=medium scale=3 theme=forest scheme=dark accent=34D399
+widget nextActivity-m-forest kind=nextActivity family=medium scale=3 theme=forest scheme=dark accent=34D399
+widget worldClock-m-forest kind=worldClock family=medium scale=3 theme=forest scheme=dark accent=34D399
+only quote-m-blossom hydration-s-blossom countdown-s-blossom birthday-s-blossom moonPhase-s-blossom mealsToday-m-blossom quote-m-soft tripCountdown-s-forest localTime-s-forest currency-s-forest tripProgress-s-forest hotel-s-forest flight-m-forest nextActivity-m-forest worldClock-m-forest
