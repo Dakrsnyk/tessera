@@ -1,0 +1,74 @@
+run: 362
+commit: c9e83807e32bd7192ee0b4c1a71339fcfc03e7cf
+static: success
+simulator: failure
+device: skipped
+tests: skipped
+ipa: not published
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped
+---- errors ----
+OK: 3357 memberwise calls checked, 98 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 5679 texts in the code, 0 not in the catalog, 0 untranslated, 0 unused in the catalog
+/Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileView.swift:1115:35: error: cannot find 'tile' in scope
+/Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileView.swift:1154:35: error: cannot find 'tile' in scope
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+---- tests ----
+privacy manifest: app yes, widget yes
+alternate app icons in the app: 19
+---- widget extension bundle ----
+de.lproj
+en.lproj
+es.lproj
+fr.lproj
+Info.plist
+it.lproj
+ja.lproj
+PrivacyInfo.xcprivacy
+pt-BR.lproj
+ExtractAppIntentsMetadata (in target 'ArdaneUITests' from project 'Ardane')
+---- last lines ----
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestCore.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTest.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTAutomationSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/Testing.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+Touch /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /usr/bin/touch -c /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+** TEST BUILD FAILED **
+
+
+The following build commands failed:
+	SwiftCompile normal arm64 Compiling\ PhotoQuoteWidgets.swift,\ ProductivityWidgets.swift,\ TimeWidgets.swift,\ BusinessTiles.swift,\ CarTiles.swift,\ DashboardTiles.swift,\ FitnessTiles.swift,\ HabitHeatmap.swift,\ MoneyTiles.swift,\ NutritionTiles.swift,\ ProductivityTiles.swift,\ StudentTiles.swift,\ Tile.swift,\ ArdaneWidgetsBundle.swift,\ DesignProvider.swift,\ DesignWidgets.swift,\ QuickWidget.swift,\ ScanFoodWidgets.swift,\ StudyLiveActivityWidget.swift,\ WidgetLog.swift,\ WorkoutLiveActivityWidget.swift,\ TileFactory.swift,\ TileView.swift,\ TimeTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/PhotoQuoteWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/ProductivityWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/TimeWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/BusinessTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/CarTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/DashboardTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/FitnessTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/HabitHeatmap.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/MoneyTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/NutritionTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/ProductivityTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/StudentTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/Tile.swift /Users/runner/work/tessera/tessera/Widgets/ArdaneWidgetsBundle.swift /Users/runner/work/tessera/tessera/Widgets/DesignProvider.swift /Users/runner/work/tessera/tessera/Widgets/DesignWidgets.swift /Users/runner/work/tessera/tessera/Widgets/QuickWidget.swift /Users/runner/work/tessera/tessera/Widgets/ScanFoodWidgets.swift /Users/runner/work/tessera/tessera/Widgets/StudyLiveActivityWidget.swift /Users/runner/work/tessera/tessera/Widgets/WidgetLog.swift /Users/runner/work/tessera/tessera/Widgets/WorkoutLiveActivityWidget.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileFactory.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileView.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TimeTiles.swift (in target 'ArdaneWidgets' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileView.swift (in target 'ArdaneWidgets' from project 'Ardane')
+	SwiftCompile normal arm64 Compiling\ WidgetDesign.swift,\ WidgetGroup.swift,\ WidgetKind.swift,\ WidgetStyle.swift,\ WorldCities.swift,\ DataWidgets.swift,\ PhotoQuoteWidgets.swift,\ ProductivityWidgets.swift,\ TimeWidgets.swift,\ BusinessTiles.swift,\ CarTiles.swift,\ DashboardTiles.swift,\ FitnessTiles.swift,\ HabitHeatmap.swift,\ MoneyTiles.swift,\ NutritionTiles.swift,\ ProductivityTiles.swift,\ StudentTiles.swift,\ Tile.swift,\ TileFactory.swift,\ TileView.swift,\ TimeTiles.swift,\ TravelTiles.swift,\ AccentedRendering.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetDesign.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetGroup.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetKind.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetStyle.swift /Users/runner/work/tessera/tessera/Shared/Model/WorldCities.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/DataWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/PhotoQuoteWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/ProductivityWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/TimeWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/BusinessTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/CarTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/DashboardTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/FitnessTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/HabitHeatmap.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/MoneyTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/NutritionTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/ProductivityTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/StudentTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/Tile.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileFactory.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileView.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TimeTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TravelTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/AccentedRendering.swift (in target 'Ardane' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileView.swift (in target 'Ardane' from project 'Ardane')
+	Ld /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.app/PlugIns/ArdaneTests.xctest/ArdaneTests normal (in target 'ArdaneTests' from project 'Ardane')
+	Building project Ardane for testing with scheme Ardane
+(6 failures)

@@ -1,0 +1,3 @@
+liste | propre | lignes 22 | créneaux 8 | attendus 8 | corrects 8
+liste | flou | lignes 22 | créneaux 8 | attendus 8 | corrects 8
+liste | incline | lignes 22 | créneaux 8 | attendus 8 | corrects 8

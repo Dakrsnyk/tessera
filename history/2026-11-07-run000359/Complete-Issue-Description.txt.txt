@@ -1,0 +1,1 @@
+XCTAssertNotEqual failed: ("true") is equal to ("true") - La carte maintenue puis glissée ne prend pas la place de sa voisine : (14.960272789001465, 212.7421875, 44.685691833496094, 44.685699462890625) / (14.6023530960083, 421.7552490234375, 44.585548400878906, 44.585540771484375)

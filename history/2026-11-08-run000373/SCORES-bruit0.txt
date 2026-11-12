@@ -1,0 +1,21 @@
+SCORE omnivox-session bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=7.00 lus=7.00
+SCORE omnivox-bloc-3-rangees bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=7.00 lus=7.00
+SCORE outaouais-encadre bruit=0 P=0.93 R=0.93 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=15.00 lus=15.00
+SCORE semaine-calendrier bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=6.00 lus=6.00
+SCORE grille-ecole-periodes bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=6.00 lus=6.00
+SCORE grille-transposee bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=7.00 lus=7.00
+SCORE liste-jour-par-jour bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=5.00 lus=5.00
+SCORE tableau-jour-debut-fin bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=5.00 lus=5.00
+SCORE universite-cm-td-tp bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=5.00 lus=5.00
+SCORE japonais-1限 bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=5.00 lus=5.00
+SCORE allemand-24h bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=6.00 lus=6.00
+SCORE anglais-12h bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=6.00 lus=6.00
+SCORE deux-salles bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=5.00 lus=5.00
+SCORE pauses-grille-ecole bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=7.00 lus=7.00
+SCORE creneaux-libres-fr bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=5.00 lus=5.00
+SCORE creneaux-libres-en bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=3.00 lus=3.00
+SCORE week-end bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=5.00 lus=5.00
+SCORE omnivox-session-sans-sonde bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=7.00 lus=7.00
+SCORE omnivox-bloc-3-rangees-sans-sonde bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 attendus=7.00 lus=7.00
+SCORE outaouais-encadre-sans-sonde bruit=0 P=1.00 R=1.00 jour=1.00 debut=0.93 fin=1.00 titre=0.93 salle=1.00 E=0.97 attendus=15.00 lus=15.00
+SCORE-MOYENNE bruit=0 P=1.00 R=1.00 jour=1.00 debut=1.00 fin=1.00 titre=1.00 salle=1.00 E=1.00 pages=20 graines=1

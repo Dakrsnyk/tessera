@@ -1,0 +1,21 @@
+run: 398
+commit: 4cd9685cde2aae272a2b8e5906e7de13eacf7a5f
+static: success
+simulator: skipped
+device: skipped
+tests: skipped
+ipa: not published
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped
+---- errors ----
+OK: 3361 memberwise calls checked, 98 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 5680 texts in the code, 0 not in the catalog, 0 untranslated, 0 unused in the catalog
+---- tests ----
+privacy manifest: app MISSING, widget MISSING
+alternate app icons in the app: 0
+---- widget extension bundle ----
+---- last lines ----

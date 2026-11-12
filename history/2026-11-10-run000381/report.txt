@@ -1,0 +1,61 @@
+run: 381
+commit: 7293862d9c6ab6d65843d7d1c6a76a5ecc8c1ee8
+static: success
+simulator: cancelled
+device: skipped
+tests: skipped
+ipa: not published
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped
+---- errors ----
+OK: 3358 memberwise calls checked, 98 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 5680 texts in the code, 0 not in the catalog, 0 untranslated, 0 unused in the catalog
+---- tests ----
+privacy manifest: app MISSING, widget MISSING
+alternate app icons in the app: 0
+---- widget extension bundle ----
+---- last lines ----
+    /bin/mkdir -p /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.app/PlugIns
+
+MkDir /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.app (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /bin/mkdir -p /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
+
+MkDir /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.app/Frameworks (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /bin/mkdir -p /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.app/Frameworks
+
+ProcessInfoPlistFile /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/Info.plist /Users/runner/work/tessera/tessera/Config/Widgets-Info.plist (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-infoPlistUtility /Users/runner/work/tessera/tessera/Config/Widgets-Info.plist -producttype com.apple.product-type.app-extension -expandbuildsettings -format binary -platform iphonesimulator -o /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/Info.plist
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/PrivacyInfo.xcprivacy /Users/runner/work/tessera/tessera/Shared/PrivacyInfo.xcprivacy (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/PrivacyInfo.xcprivacy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CompileXCStrings /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ /Users/runner/work/tessera/tessera/Shared/Localizable.xcstrings (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcstringstool compile --output-directory /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build /Users/runner/work/tessera/tessera/Shared/Localizable.xcstrings
+
+CopyStringsFile /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/pt-BR.lproj/Localizable.strings /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/pt-BR.lproj/Localizable.strings (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copyStrings --validate --outputencoding binary --outfilename Localizable.strings --outdir /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/pt-BR.lproj -- /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/pt-BR.lproj/Localizable.strings
+/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/pt-BR.lproj/Localizable.strings:1:1: note: detected encoding of input file as Unicode (UTF-8) (in target 'ArdaneWidgets' from project 'Ardane')
+
+CopyStringsFile /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/ja.lproj/Localizable.strings /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ja.lproj/Localizable.strings (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copyStrings --validate --outputencoding binary --outfilename Localizable.strings --outdir /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/ja.lproj -- /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ja.lproj/Localizable.strings
+/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ja.lproj/Localizable.strings:1:1: note: detected encoding of input file as Unicode (UTF-8) (in target 'ArdaneWidgets' from project 'Ardane')
+
+CopyStringsFile /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/it.lproj/Localizable.strings /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/it.lproj/Localizable.strings (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copyStrings --validate --outputencoding binary --outfilename Localizable.strings --outdir /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/it.lproj -- /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/it.lproj/Localizable.strings
+/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/it.lproj/Localizable.strings:1:1: note: detected encoding of input file as Unicode (UTF-8) (in target 'ArdaneWidgets' from project 'Ardane')
+
+SwiftDriver ArdaneWidgets normal arm64 com.apple.xcode.tools.swift.compiler (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-SwiftDriver -- /Applications/Xcode_26.3.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc -module-name ArdaneWidgets -O -enforce-exclusivity\=checked @/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.SwiftFileList -DDEBUG -enable-bare-slash-regex -enable-experimental-feature DebugDescriptionMacro -sdk /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.2.sdk -target arm64-apple-ios17.0-simulator -g -module-cache-path /Users/runner/work/tessera/tessera/build/sim/ModuleCache.noindex -Xfrontend -serialize-debugging-options -application-extension -profile-coverage-mapping -profile-generate -enable-testing -Xcc -D_LIBCPP_HARDENING_MODE\=_LIBCPP_HARDENING_MODE_DEBUG -swift-version 5 -I /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator -F /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator -emit-localized-strings -emit-localized-strings-path /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64 -c -j3 -enable-batch-mode -incremental -Xcc -ivfsstatcache -Xcc /Users/runner/work/tessera/tessera/build/sim/SDKStatCaches.noindex/iphonesimulator26.2-23C57-dc75598d0054f22ec865fa860f139d72e244bd9a5feaf902f95f61bf06266e52.sdkstatcache -output-file-map /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets-OutputFileMap.json -use-frontend-parseable-output -save-temps -no-color-diagnostics -explicit-module-build -module-cache-path /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/SwiftExplicitPrecompiledModules -clang-scanner-module-cache-path /Users/runner/work/tessera/tessera/build/sim/ModuleCache.noindex -sdk-module-cache-path /Users/runner/work/tessera/tessera/build/sim/ModuleCache.noindex -serialize-diagnostics -emit-dependencies -emit-module -emit-module-path /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.swiftmodule -validate-clang-modules-once -clang-build-session-file /Users/runner/work/tessera/tessera/build/sim/ModuleCache.noindex/Session.modulevalidation -Xcc -I/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/swift-overrides.hmap -emit-const-values -Xfrontend -const-gather-protocols-file -Xfrontend /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets_const_extract_protocols.json -Xcc -iquote -Xcc /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ArdaneWidgets-generated-files.hmap -Xcc -I/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ArdaneWidgets-own-target-headers.hmap -Xcc -I/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ArdaneWidgets-all-target-headers.hmap -Xcc -iquote -Xcc /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ArdaneWidgets-project-headers.hmap -Xcc -I/Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/include -Xcc -I/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/DerivedSources-normal/arm64 -Xcc -I/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/DerivedSources/arm64 -Xcc -I/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/DerivedSources -Xcc -DDEBUG\=1 -emit-objc-header -emit-objc-header-path /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets-Swift.h -working-directory /Users/runner/work/tessera/tessera -experimental-emit-module-separately -disable-cmo

@@ -1,0 +1,3 @@
+semaine | propre | lignes 40 | créneaux 8 | attendus 8 | corrects 8
+semaine | flou | lignes 40 | créneaux 8 | attendus 8 | corrects 8
+semaine | incline | lignes 40 | créneaux 8 | attendus 8 | corrects 8
