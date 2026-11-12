@@ -24,6 +24,9 @@ BAR = 4 * BEAT
 LEN = 25.0
 DROP = 4.0  # arrivée de l'écran Sport (image 120)
 END = 22.0  # carte de fin (image 660)
+# Arpège pluck aigu (les « ding » entendus par le PDG) : -6 dB depuis la v5 du 2026-11-12 ; 0 redonne la v4.
+ARP_DB = -6.0
+ARP = 10 ** (ARP_DB / 20)
 N = int(LEN * SR)
 OUT = os.path.join(os.path.expanduser("~"), "ardane-tools", "film", "public", "avantapres", "music-aa.wav")
 rng = np.random.default_rng(2026)
@@ -271,9 +274,9 @@ def compose():
             n = arp[(s * 3) % len(arp)] if b % 2 else arp[s % len(arp)]
             p = pluck(n, 0.2, bright=4200 + 600 * (b >= 3))
             at = t0 + s * BEAT / 4
-            music.add(p, at, 0.42, -0.35)
-            music.add(lp(p, 3000), at + 3 * BEAT / 4, 0.16, 0.6)
-            music.add(lp(p, 2200), at + 6 * BEAT / 4, 0.08, -0.6)
+            music.add(p, at, 0.42 * ARP, -0.35)
+            music.add(lp(p, 3000), at + 3 * BEAT / 4, 0.16 * ARP, 0.6)
+            music.add(lp(p, 2200), at + 6 * BEAT / 4, 0.08 * ARP, -0.6)
 
     fx.add(impact(), DROP, 0.55)
     # morphing des widgets (7 → 8 s) : souffle descendant, retombée sur 8 s
