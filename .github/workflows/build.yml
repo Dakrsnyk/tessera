@@ -63,6 +63,10 @@ jobs:
       # report/adkit-en/export): the played scenes (shots/) and the still screens (screens/) are skipped. For a
       # few new widgets or screens, with a last « only … » line in the list (see App/Core/AdExport.swift).
       ADKIT_IMG: ${{ contains(github.event.head_commit.message, '[adkit-img]') }}
+      # [ios-home] photographs the simulator's real Home Screen (Apple's own icons, dock and status bar at 9:41, full
+      # bars and battery), in light then dark appearance, into report/ios-home: the « before » screen of the ads and the
+      # Apple icons mixed with Ardane's widgets. No app build, no tests, no IPA.
+      IOSHOME: ${{ contains(github.event.head_commit.message, '[ios-home]') }}
       # [testflight] signs a Release build with the Apple Developer account and uploads it to TestFlight
       # (no simulator build, no tests, no test IPA). Secrets: see scripts/signing/README.md.
       # [interne] does the same with Premium unlocked (INTERNAL_PREMIUM), uploaded « TestFlight Internal
@@ -100,7 +104,7 @@ jobs:
         run: python3 scripts/check_swift.py
 
       - name: Boot a simulator early
-        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true' || env.STACK == 'true' || env.VIDEO == 'true' || env.ADKIT == 'true' || env.ADKIT_EN == 'true'
+        if: env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true' || env.MARKETING == 'true' || env.STACK == 'true' || env.VIDEO == 'true' || env.ADKIT == 'true' || env.ADKIT_EN == 'true' || env.IOSHOME == 'true'
         continue-on-error: true
         run: |
           DEVICE=$(xcrun simctl list devices available -j | python3 -c "
@@ -117,6 +121,23 @@ jobs:
           echo "Simulator: $(xcrun simctl list devices | grep $DEVICE)"
           echo "DEVICE=$DEVICE" >> "$GITHUB_ENV"
           xcrun simctl boot "$DEVICE" || true
+
+      - name: Real iOS Home Screen
+        if: env.IOSHOME == 'true' && env.DEVICE != ''
+        continue-on-error: true
+        timeout-minutes: 15
+        run: |
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
+          mkdir -p ioshome
+          sleep 20
+          for look in light dark; do
+            xcrun simctl ui "$DEVICE" appearance $look || true
+            sleep 8
+            xcrun simctl io "$DEVICE" screenshot --type=png "ioshome/ios-home-$look.png" < /dev/null || true
+          done
+          xcrun simctl list devices | grep "$DEVICE" > ioshome/device.txt || true
+          ls -l ioshome
 
       - name: TestFlight signing (certificate and provisioning profiles)
         id: tfsign
@@ -234,7 +255,7 @@ jobs:
 
       - name: Build for the simulator
         id: sim
-        if: steps.static.outcome == 'success' && env.TESTFLIGHT != 'true'
+        if: steps.static.outcome == 'success' && env.TESTFLIGHT != 'true' && env.IOSHOME != 'true'
         run: |
           set -o pipefail
           # Keep compiling the other files and targets after an error, so one run lists every error.
@@ -957,6 +978,7 @@ jobs:
           [ -d adkit ] && mkdir -p report/adkit && cp -R adkit/. report/adkit/ 2>/dev/null || true
           [ -d adkit-en ] && mkdir -p report/adkit-en && cp -R adkit-en/. report/adkit-en/ 2>/dev/null || true
           [ -d testshots ] && mkdir -p report/tests && cp testshots/* report/tests/ 2>/dev/null || true
+          [ -d ioshome ] && mkdir -p report/ios-home && cp ioshome/* report/ios-home/ 2>/dev/null || true
           [ -d stackreports ] && mkdir -p report/stack && cp -R stackreports/* report/stack/ 2>/dev/null || true
           # Dated history of the text reports: ci-report is rebuilt from scratch at every run, so the previous
           # history/ folder is fetched alone (partial, sparse clone: never the heavy kits) and this run's
