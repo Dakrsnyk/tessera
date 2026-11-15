@@ -128,3 +128,37 @@ Règle de construction : les couleurs des mini-apps partent du jeu de référenc
 - **Couleur forte dans une mini-app** : Nutrition `#7B6F68` · Fitness `#7F6A72` · Planning `#657387` · Habitudes `#667667` · Finances `#5F7675`.
 - **Contrastes** : blanc sur principale 16,9:1 · encre sur panneau 18,7:1 · secondaire sur panneau 6,5:1 et sur fond 6,0:1 · principale sur sa teinte 12,7:1.
 - **Formes** : rayon des panneaux 20 · pastilles d'icône carrées arrondies.
+
+## Mode sombre (2026-11-15)
+
+Calculé par `tokensDark` dans `cristal.js`, sur les règles de `Shared/Theme/AppStyle.swift` : fond = la teinte à 5,5 % de clarté, panneau à 11,5 %, couleur d'action = la version claire de la teinte dans l'app. Sable, Graphite et Monochrome sont des teintes nouvelles : leur couleur d'action sombre est une proposition.
+
+| Déclinaison | Fond | Panneau | Action | Texte sur l'action | Texte | Texte secondaire | Nappe 1 | Nappe 2 |
+|---|---|---|---|---|---|---|---|---|
+| Saphir | `#080E14` | `#131E28` | `#68B5F5` | `#09121B` | `#F7FBFF` | `#A5ABB2` | `#183743` | `#15314D` |
+| Lavande | `#0D0814` | `#1B1328` | `#B69AFF` | `#10091B` | `#FBFAFF` | `#AAA7B2` | `#392048` | `#372257` |
+| Rose poudré | `#14080C` | `#28131B` | `#FF83B2` | `#1B090F` | `#FFF9FB` | `#B2A6AA` | `#552927` | `#5A1D33` |
+| Sauge | `#0C1408` | `#1A2813` | `#B8D987` | `#0F1B09` | `#FBFDF9` | `#AAB0A6` | `#304838` | `#293D1F` |
+| Océan | `#081314` | `#132628` | `#45DDE0` | `#09191B` | `#F6FDFD` | `#A4B0B0` | `#0F2B48` | `#043F43` |
+| Sable | `#140F08` | `#281F13` | `#E3C08A` | `#1B1309` | `#FEFCF9` | `#B1ACA6` | `#4E402C` | `#43331C` |
+| Graphite | `#0D0E0F` | `#1B1D20` | `#B4C0D0` | `#101114` | `#FBFCFD` | `#AAACAD` | `#363A40` | `#232830` |
+| Pêche | `#140C08` | `#281B13` | `#FFB454` | `#1B1009` | `#FFFBF6` | `#B2AAA4` | `#5A3D28` | `#542911` |
+| Forêt | `#081412` | `#132824` | `#65D5BC` | `#091B17` | `#F7FDFC` | `#A5B0AE` | `#29433D` | `#133C34` |
+| Monochrome | `#0E0E0E` | `#1D1D1D` | `#F2F2F4` | `#121212` | `#FEFEFE` | `#ADADAD` | `#36373A` | `#333539` |
+
+Couleurs des mini-apps en sombre (éclaircies jusqu'à 5:1 au moins sur un panneau) :
+
+| Déclinaison | Nutrition | Fitness | Planning | Habitudes | Finances | Top 3 | Pas |
+|---|---|---|---|---|---|---|---|
+| Saphir | `#CD8648` | `#E4717A` | `#6199E1` | `#66A741` | `#41A789` | `#8E98AA` | `#42A3AE` |
+| Lavande | `#C28157` | `#D66F83` | `#6590DA` | `#699D51` | `#4A9D8E` | `#8D90AC` | `#4A9AAF` |
+| Rose poudré | `#CA804E` | `#DF6E7A` | `#6C90D4` | `#709D48` | `#4F9D87` | `#9390A4` | `#509AA8` |
+| Sauge | `#C08C53` | `#D27B7C` | `#6A9ACE` | `#66A245` | `#50A787` | `#8E99A2` | `#51A3A6` |
+| Océan | `#BD8C59` | `#D07B84` | `#5A97D7` | `#5FA34A` | `#3FA389` | `#8296A7` | `#3FA0AB` |
+| Sable | `#C2844A` | `#D57274` | `#6993C8` | `#6E9E45` | `#4F9E7F` | `#8E929B` | `#509B9E` |
+| Graphite | `#BB916E` | `#C9848E` | `#769DCE` | `#7AA569` | `#63A597` | `#939CAC` | `#63A3AE` |
+| Pêche | `#C98347` | `#DD7074` | `#6A93CD` | `#6F9F41` | `#4F9F80` | `#93929E` | `#4F9DA1` |
+| Forêt | `#BD8B58` | `#D07B80` | `#659AD4` | `#69A752` | `#4BA78C` | `#8495A3` | `#4BA4AB` |
+| Monochrome | `#B0AAA8` | `#B4A6B1` | `#9DAEC3` | `#9EB0A7` | `#98B0B3` | `#A5ADB9` | `#98AFBA` |
+
+Contrastes mesurés sur un panneau : texte Saphir 16,2:1 · Lavande 17,3:1 · Rose poudré 16,8:1 (15:1 et plus partout) ; texte secondaire de 6,9:1 à 7,6:1 ; couleur d'action de 7,6:1 à 15,1:1 ; texte sur un bouton plein de 8,4:1 à 16,8:1.

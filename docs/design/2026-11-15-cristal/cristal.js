@@ -5,7 +5,7 @@
    - Déclaratif : <i data-i="fork"></i> icône · <div data-u="ring" data-p=".49" data-sw="9"></div> · data-u="meter|bars|spark|week|dots7|hab|wsel"
      · <span data-v="journee.kcal.left"></span> · <img data-w="calories-s-light"> (vrai export de widget) · <div data-pal="saphir"></div> (palette).
    - <div class="phone t-lavande" data-screen="homeA"></div> : accueil « Équilibrée » complet, généré (Screens.homeA).
-   - Contrôles : ?check (texte coupé en rouge) · ?w375 · ?t=lavande (re-teinte toute la planche) · ?dump (jetons et contrastes dans <pre id="boxes">). */
+   - Contrôles : ?check (texte coupé en rouge) · ?w375 · ?t=lavande (re-teinte toute la planche) · ?mode=dark (mode sombre) · ?dump (jetons et contrastes dans <pre id="boxes">). */
 
 /* ---------- couleurs ---------- */
 const C = {
@@ -70,7 +70,7 @@ function themeCss() {
   return THEMES.map((t) => { const k = tokens(t), c = k.cats, pr = C.rgb(t.panel || '#FFFFFF').join(',');
     return `.t-${t.id}{--bg:${k.bg};--wash:${t.wash(t).join(',')};--ink:${k.ink};--ink2:${k.ink2};--rule:${k.rule};--rule2:${k.rule2};--primary:${k.primary};--on-primary:#fff;`
       + `--secondary:${k.secondary};--accent:${k.accent};--tint:${k.tint};--tint2:${k.tint2};--track:${k.track};--grid:${k.grid};--go:${k.go};--dot:${k.dot};`
-      + `--glass:rgba(${pr},.55);--panel:rgba(${pr},.80);--panel2:rgba(${pr},.5);--sheet:${k.sheet};--well:${k.well};--well2:${k.well2};--sh:${C.rgb(t.primary).join(' ')};--ok:${k.ok};`
+      + `--card:${k.panelSolid};--glass:rgba(${pr},.55);--panel:rgba(${pr},.80);--panel2:rgba(${pr},.5);--sheet:${k.sheet};--well:${k.well};--well2:${k.well2};--sh:${C.rgb(t.primary).join(' ')};--ok:${k.ok};`
       + `--r:${t.r || 26}px;--chip-r:${t.chipR || '50%'};--chip-mix:${t.gray > .5 ? 10 : 13}%;`
       + `--c-nut:${c.nut};--c-fit:${c.fit};--c-pla:${c.pla};--c-hab:${c.hab};--c-bud:${c.bud};--c-pro:${c.pro};--c-pas:${c.pas};--c-prot:${c.prot};--c-gluc:${c.gluc};--c-lip:${c.lip};`
       + ['nut', 'fit', 'pla', 'hab', 'bud', 'pro', 'pas'].map((x) => `--cs-${x}:${k.cs[x]};`).join('')
@@ -78,7 +78,39 @@ function themeCss() {
     + '\n' + ['nut', 'fit', 'pla', 'hab', 'bud', 'pro', 'pas', 'prot', 'gluc', 'lip'].map((k) => `[data-c="${k}"]{--c:var(--c-${k});--cs:var(--cs-${k}, var(--c-${k}))}`).join('')
     + ['cours', 'travail', 'rdv', 'seance', 'tache'].map((k) => `[data-ev="${k}"]{--c:var(--ev-${k})}`).join('');
 }
-document.head.insertAdjacentHTML('beforeend', `<style id="themes">${themeCss()}</style>`);
+/* ---------- mode sombre ----------
+   Mêmes règles que l'app (Shared/Theme/AppStyle.swift) : fond = la teinte à 5,5 % de clarté, carte à 11,5 %, couleur d'action claire
+   (accentDark de la teinte de l'app), encre sombre sur un bouton plein quand sa couleur est claire. Classe .dk sur .phone (ou ?mode=dark). */
+const DARK = { saphir: '#68B5F5', lavande: '#B69AFF', rose: '#FF83B2', sauge: '#B8D987', ocean: '#45DDE0', sable: '#E3C08A', graphite: '#B4C0D0', peche: '#FFB454', foret: '#65D5BC', mono: '#F2F2F4' };
+C.hsl = (hex) => { const [r, g, b] = C.rgb(hex).map((v) => v / 255), hi = Math.max(r, g, b), lo = Math.min(r, g, b), l = (hi + lo) / 2, d = hi - lo;
+  if (!d) return { h: 0, s: 0, l }; const s = d / (1 - Math.abs(2 * l - 1)); let h = hi === r ? ((g - b) / d) % 6 : hi === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; if (h < 0) h += 360; return { h, s, l }; };
+C.fromHsl = (h, s, l) => { const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = l - c / 2;
+  const p = [[c, x, 0], [x, c, 0], [0, c, x], [0, x, c], [x, 0, c], [c, 0, x]][Math.floor(h / 60) % 6]; return C.hex(p.map((v) => (v + m) * 255)); };
+// éclaircit jusqu'à atteindre le contraste voulu sur un fond sombre
+C.lift = (h, bg, min) => { let k = 0; while (C.cr(h, bg) < min && k++ < 40) h = C.mix(h, '#FFFFFF', 0.05); return h; };
+function tokensDark(t) {
+  const hue = C.hsl(t.primary).h, sat = t.gray ? (t.gray > .5 ? 0 : .22) : 1;       // teintes neutres : presque sans couleur
+  const bg = C.fromHsl(hue, .45 * sat, .055), card = C.fromHsl(hue, .35 * sat, .115), primary = DARK[t.id];
+  const onPrimary = C.lum(primary) > .35 ? C.fromHsl(hue, .5 * sat, .07) : '#FFFFFF';
+  const ink = C.mix('#FFFFFF', primary, .05), ink2 = C.mix(ink, card, .36), gray = '#9AA3B0';
+  const cat = (k) => { let c = C.mix(CATS0[k], t.primary, t.cat || 0); if (t.gray) c = C.mix(c, gray, t.gray); return C.lift(C.mix(c, '#FFFFFF', .16), card, 5.0); };
+  const o = { bg, card, ink, ink2, primary, onPrimary, secondary: C.lift(t.secondary, card, 4.5), accent: C.lift(t.accent, card, 4.5),
+    rule: C.mix(card, '#FFFFFF', .10), rule2: C.mix(card, '#FFFFFF', .22), tint: C.mix(card, primary, .16), tint2: C.mix(card, primary, .24), track: C.mix(card, '#FFFFFF', .13), grid: C.mix(card, '#FFFFFF', .07),
+    go: C.mix(ink2, card, .35), dot: C.mix(card, '#FFFFFF', .24), panelSolid: card, sheet: C.mix(card, '#FFFFFF', .03), well: C.mix(bg, '#FFFFFF', .06), well2: C.mix(bg, primary, .10),
+    na: C.mix(bg, t.gray > .5 ? '#8A8F98' : t.secondary, .32), nb: C.mix(bg, t.gray > .5 ? '#5E636C' : t.primary, .46), ok: '#5FD3A0', cats: {}, cs: {} };
+  Object.keys(CATS0).forEach((k) => { o.cats[k] = cat(k); o.cs[k] = o.cats[k]; });
+  return o;
+}
+function themeCssDark() {
+  return THEMES.map((t) => { const k = tokensDark(t), c = k.cats, pr = C.rgb(k.card).join(',');
+    return `.dk.t-${t.id}{color-scheme:dark;--bg:${k.bg};--card:${k.card};--wash:${t.wash({ ...t, na: k.na, nb: k.nb }).join(',')};--ink:${k.ink};--ink2:${k.ink2};--rule:${k.rule};--rule2:${k.rule2};--primary:${k.primary};--on-primary:${k.onPrimary};`
+      + `--secondary:${k.secondary};--accent:${k.accent};--tint:${k.tint};--tint2:${k.tint2};--track:${k.track};--grid:${k.grid};--go:${k.go};--dot:${k.dot};`
+      + `--glass:rgba(255,255,255,.09);--panel:rgba(${pr},.84);--panel2:rgba(${pr},.5);--sheet:${k.sheet};--well:${k.well};--well2:${k.well2};--sh:0 0 0;--ok:${k.ok};`
+      + `--c-nut:${c.nut};--c-fit:${c.fit};--c-pla:${c.pla};--c-hab:${c.hab};--c-bud:${c.bud};--c-pro:${c.pro};--c-pas:${c.pas};--c-prot:${c.prot};--c-gluc:${c.gluc};--c-lip:${c.lip};`
+      + ['nut', 'fit', 'pla', 'hab', 'bud', 'pro', 'pas'].map((x) => `--cs-${x}:${k.cs[x]};`).join('')
+      + `--ev-cours:${c.pla};--ev-travail:${c.travail};--ev-rdv:${c.rdv};--ev-seance:${c.fit};--ev-tache:${c.pro};}`; }).join('\n');
+}
+document.head.insertAdjacentHTML('beforeend', `<style id="themes">${themeCss()}\n${themeCssDark()}</style>`);
 
 /* ---------- icônes au trait (24 × 24) ---------- */
 const P = {
@@ -262,6 +294,7 @@ const Cristal = {
     const q = new URLSearchParams(location.search);
     if (q.get('y')) { document.documentElement.style.overflow = 'hidden'; document.body.style.marginTop = (-q.get('y')) + 'px'; }   // rendu par bandes (render.py)
     if (q.get('t')) document.querySelectorAll('.phone, body, main, .col, .row').forEach((el) => { el.className = el.className.split(' ').map((c) => (/^t-[a-z]+$/.test(c) ? 't-' + q.get('t') : c)).join(' '); });
+    if (q.get('mode') === 'dark') document.querySelectorAll('.phone, .spec').forEach((el) => el.classList.add('dk'));
     document.querySelectorAll('[data-screen]').forEach((ph) => { const [fn, arg] = ph.dataset.screen.split(':');
       ph.innerHTML = `<div class="scr">${Screens[fn](arg)}</div>`; if (!ph.dataset.time && arg) ph.dataset.time = DAY[arg].time; if (!ph.dataset.time) ph.dataset.time = DAY.journee.time; });
     document.querySelectorAll('[data-pal]').forEach((el) => { el.innerHTML = paletteHtml(el.dataset.pal, el.dataset.mode); });

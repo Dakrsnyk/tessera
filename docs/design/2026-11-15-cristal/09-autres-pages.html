@@ -127,6 +127,18 @@
   .p9-n .t { display: inline-block; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 5px; border-radius: 4px; margin-left: 4px; white-space: nowrap; }
   .p9-n ul { margin: 6px 0 0 18px; } .p9-n li { margin-top: 5px; font-size: 13px; }
   .p9-3 .col { width: 560px; }
+  /* mode sombre (?mode=dark) : ce qui était écrit en blanc ou en clair dans cette planche */
+  .dk .p9-buy { background: color-mix(in srgb, var(--card) 92%, transparent); }
+  .dk .p9-menu .bad, .dk .p9-menu .bad i { color: #FF8A80; }
+  .dk .p9-acts u.on, .dk .p9-cat .on u, .dk .p9-cat u em, .dk .p9-plan .pastille, .dk .p9-plan.on .rd, .dk .p9-chk { color: var(--on-primary); }
+  .dk .p9-cat .on u em { background: var(--on-primary); color: var(--primary); }
+  .dk .p9-chk.lk { background: #4A3B12; color: #F2D27A; }
+  .dk.p9-org .o-x { color: var(--bg); }
+  .dk.p9-org .o-sz { background: var(--card); border-color: rgba(255,255,255,.14); }
+  .dk .p9-pv { border-color: rgba(255,255,255,.12); }
+  .dk .p9-pv .pa { background: rgba(255,255,255,.13); box-shadow: none; }
+  .dk .p9-pv .pc { background: rgba(255,255,255,.55); } .dk .p9-pv .pd { background: rgba(255,255,255,.28); }
+  .dk .p9-void .big0 { color: var(--primary); }
   .p9-3 .col .nm { margin-bottom: 4px; }
 </style>
 </head>
@@ -265,7 +277,9 @@ ph6.insertAdjacentHTML('beforeend', `<div class="dim"></div>
 
 /* ----- Profil ----- */
 const APPS = [['Cobalt', '244FC1'], ['Saphir', '245B8F'], ['Bleu glacier', '398FA8'], ['Aqua', '008C95'], ['Jade', '268577'], ['Pistache', '718C42'], ['Olive', '77752B'], ['Ambre', 'B86A13'], ['Rubis', 'C62845'], ['Rose', 'C04472'], ['Orchidée', '9854B8'], ['Améthyste', '6841A5']];
-const pv = (name, p, o = {}) => { const h = '#' + p, b = o.bg || C.mix(h, '#FFFFFF', .94), n1 = o.na || C.mix(h, '#FFFFFF', .68), n2 = o.nb || C.mix(h, '#FFFFFF', .80);
+const DK = new URLSearchParams(location.search).get('mode') === 'dark';   // en sombre, chaque mini-aperçu montre la teinte la nuit
+const pv = (name, p, o = {}) => { let h = '#' + p, b = o.bg || C.mix(h, '#FFFFFF', .94), n1 = o.na || C.mix(h, '#FFFFFF', .68), n2 = o.nb || C.mix(h, '#FFFFFF', .80);
+  if (DK) { const hue = C.hsl(h).h, s = o.sat == null ? 1 : o.sat; b = C.fromHsl(hue, .45 * s, .055); n1 = C.mix(b, h, .55); n2 = C.mix(b, h, .34); h = o.dark || C.lift(h, C.fromHsl(hue, .35 * s, .115), 7); }
   const sel = name === 'Saphir', badge = o.nw ? '' : sel ? '<span class="p9-chk"><i data-i="check"></i></span>' : '<span class="p9-chk lk"><i data-i="lock"></i></span>';
   return `<div class="p9-t${sel ? ' sel' : ''}${o.nw ? ' nw' : ''}"><div class="p9-pv" style="background:${blob(n1, 50, 50, 56, 8)},${blob(n2, 54, 54, 6, 62)},${b}"><span class="pc"></span><span class="pd"></span><span class="pa"></span><span class="pb" style="background:${h}"></span>${badge}</div><b>${name}</b></div>`; };
 const ph7 = document.getElementById('ph7'); ph7.classList.add('p9-sbfix');
@@ -278,7 +292,7 @@ ph7.insertAdjacentHTML('beforeend', `<div class="dim"></div>
       <div class="h3" style="margin:0 2px 12px">Couleur de l'app</div>
       <div class="p9-grid">${APPS.map((a) => pv(a[0], a[1])).join('')}</div>
       <div style="display:flex;align-items:center;gap:8px;margin:14px 2px 6px"><span class="tag d" style="min-width:0">Nouvelles</span><span class="s">3 teintes neutres, Premium</span></div>
-      <div class="p9-grid">${['sable', 'graphite', 'mono'].map((id) => { const t = th(id); return pv(t.name, t.primary.slice(1), { bg: t.bg, na: t.na, nb: t.nb, nw: 1 }); }).join('')}</div>
+      <div class="p9-grid">${['sable', 'graphite', 'mono'].map((id) => { const t = th(id); return pv(t.name, t.primary.slice(1), { bg: t.bg, na: t.na, nb: t.nb, nw: 1, sat: id === 'mono' ? 0 : id === 'graphite' ? .22 : 1, dark: DARK[id] }); }).join('')}</div>
       <div class="h3" style="margin:14px 2px 8px">Mode</div>
       <div class="seg"><span class="on">Auto</span><span>Clair</span><span>Sombre</span></div>
     </article>

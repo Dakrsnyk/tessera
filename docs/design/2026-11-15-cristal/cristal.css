@@ -317,3 +317,31 @@ i[data-i] svg { width: 100%; height: 100%; stroke-width: var(--sw); }
 .wt span { display: block; font-size: 12px; color: var(--ink2); }
 /* avec une action flottante, le contenu qui défile s'efface plus haut : rien ne dépasse autour de la capsule */
 .phone:has(.fab) .edge { height: 204px; background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 0%, transparent), color-mix(in srgb, var(--bg) 92%, transparent) 22%, var(--bg) 31%); }
+
+/* ================= mode sombre (.dk sur .phone, jetons écrits par cristal.js : tokensDark) =================
+   Même structure qu'en clair. Ce qui change : fond presque noir teinté, nappes profondes, panneaux sombres à liseré discret,
+   verre fumé, couleur d'action claire avec encre sombre sur les boutons pleins, ombres noires. */
+.dk .gl, .dk .tabbar { border-color: rgba(255,255,255,.14); box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 10px 28px rgba(0,0,0,.36); }
+.dk .pn { border-color: rgba(255,255,255,.07); box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 8px 24px rgba(0,0,0,.28); }
+.dk .pn.flat { box-shadow: none; border-color: transparent; }
+.dk .x-ava { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.16); box-shadow: none; }
+.dk .ico { background: color-mix(in srgb, var(--c) 20%, var(--card)); }
+.dk .btnP { box-shadow: inset 0 1px 0 rgba(255,255,255,.22); }
+.dk .btnG { background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.14); }
+.dk .seg span.on { background: rgba(255,255,255,.16); box-shadow: none; }
+.dk .chip { border-color: rgba(255,255,255,.08); } .dk .chip.on { border-color: transparent; }
+.dk .nb.lock { background: rgba(255,255,255,.10); }
+.dk .u-spark .d { fill: var(--card); }
+.dk .u-dots > span > i, .dk .u-hab > span { color: var(--bg); }
+.dk .u-week .ev { background: color-mix(in srgb, var(--c) 26%, var(--card)); }
+.dk .wsel .d.on, .dk .wsel .d.on b { color: var(--on-primary); } .dk .wsel .d.on.mk u { background: var(--on-primary); }
+.dk.phone.app::after { background: radial-gradient(130% 100% at 50% 0%, color-mix(in srgb, var(--c) 22%, transparent) 0%, color-mix(in srgb, var(--c) 0%, transparent) 100%); }
+.dk.phone.app .scr, .dk.phone.app .fab, .dk.phone.app .sheet { --tint: color-mix(in srgb, var(--cs) 16%, var(--card)); --tint2: color-mix(in srgb, var(--cs) 24%, var(--card)); }
+.dk .fab { color: var(--on-primary); box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 10px 24px rgba(0,0,0,.4); }
+.dk .prem { background: #4A3B12; color: #F2D27A; }
+.dk .segs span { background: rgba(255,255,255,.16); } .dk .segs span.f { background: var(--primary); }
+.dk .dim { background: rgba(0,0,0,.56); }
+.dk .sheet { box-shadow: 0 -10px 40px rgba(0,0,0,.5); }
+.dk .sizes .on u, .dk .thumbs .on img, .dk .dots u.on { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--primary); }
+.dk .dots u { border-color: rgba(255,255,255,.12); }
+.dk .mini .apps u { background: rgba(255,255,255,.10); }

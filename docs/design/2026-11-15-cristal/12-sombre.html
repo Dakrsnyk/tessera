@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — 12 · Le mode sombre</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  .nm em { font-style: normal; font-weight: 700; color: #1E5B34; background: #DDF0E4; border-radius: 4px; padding: 2px 6px; margin-left: 6px; letter-spacing: .04em; }
+  .nm em.p { color: #6B4E0A; background: #F6E7C1; } .nm em.n { color: #4A2F9A; background: #ECE7FA; }
+  .d12-t { width: 100%; border-collapse: collapse; font: 500 12.5px/1.3 Inter, sans-serif; }
+  .d12-t th { text-align: left; font-weight: 700; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--bink2); padding: 0 8px 6px 0; }
+  .d12-t td { padding: 6px 8px 6px 0; border-top: 1px solid #E3E9F1; white-space: nowrap; }
+  .d12-t td:first-child { font-weight: 700; }
+  .d12-t u { display: inline-block; width: 18px; height: 18px; border-radius: 6px; vertical-align: -4px; margin-right: 6px; border: 1px solid rgba(11,18,32,.18); text-decoration: none; }
+  .d12-t code { font: 600 11.5px Consolas, monospace; color: #3B4A60; }
+  .d12-n ul { margin: 6px 0 0 18px; } .d12-n li { margin-top: 5px; font-size: 13.5px; line-height: 1.42; }
+</style>
+</head>
+<body style="--bw:2316px">
+<main class="bd">
+  <header class="bd-head"><div class="num">12</div><div><h1>Le mode sombre de Cristal</h1>
+    <p style="max-width:1300px">Demandé le 2026-11-15, à dessiner avant de coder. La structure ne change pas : mêmes cartes, mêmes tailles, mêmes gestes. Le fond devient presque noir, teinté par la couleur de l'app ; les deux nappes restent, en profondeur ; les panneaux s'éclaircissent d'un cran au lieu de porter une ombre ; la couleur d'action devient claire, et le texte posé dessus devient sombre. Les réglages Auto, Clair et Sombre de l'app restent ceux d'aujourd'hui.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <h2 class="sec" style="margin-top:0">Saphir, la déclinaison gratuite : clair et sombre côte à côte</h2>
+  <p class="secp">Le même accueil et la même journée (jeudi 12 novembre, 13 h 20), puis l'entrée de Créer et la feuille d'enregistrement.</p>
+  <div class="row">
+    <div class="col"><div class="nm">Accueil · clair</div><div class="phone t-saphir" data-screen="homeA:journee"></div>
+      <div class="cap"><h4>La référence validée</h4><p>Fond clair bleuté à deux nappes, panneaux blancs, couleur d'action bleu acier.</p></div></div>
+    <div class="col"><div class="nm">Accueil · sombre</div><div class="phone t-saphir dk" data-screen="homeA:journee"></div>
+      <div class="cap"><h4>Le même écran la nuit</h4><p>Fond bleu nuit, nappes profondes, panneaux un cran plus clairs que le fond. La carte « Maintenant » reste la seule en verre. Le bouton plein est bleu clair avec un texte sombre.</p></div></div>
+    <div class="col"><div class="nm">Créer · entrée · sombre</div>
+      <div class="phone t-saphir dk" data-time="13:20" data-tab="1"><div class="scr">
+        <div class="nv"><span class="sp"></span><span class="rb gl off"><i data-i="undo"></i></span><span class="rb gl off"><i data-i="redo"></i></span></div>
+        <div class="x-title" style="margin-top:-2px">Créer</div>
+        <div class="stage" style="height:264px;margin-top:10px"><img class="w" data-w="calories-s-light" style="width:164px;margin-top:-44px" alt="">
+          <div class="ctl"><span class="pill gl"><i data-i="grid"></i>Changer de widget</span><span class="pill ic gl"><i data-i="eye"></i></span></div></div>
+        <div class="tools"><div class="on"><i data-i="resize"></i>Taille</div><div><i data-i="lines"></i>Contenu</div><div><i data-i="palette"></i>Thème</div><div><i data-i="pencil"></i>Style</div><div><i data-i="drop"></i>Couleurs</div><div><i data-i="image"></i>Fond</div></div>
+        <article class="pn cd" style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="h3">Taille</span><span class="m">Calories · Nutrition</span></div>
+          <div class="sizes" style="margin-top:14px">
+            <div class="on"><u style="width:44px;height:44px"></u><b>Petit</b></div><div><u style="width:72px;height:34px"></u><b>Moyen</b></div>
+            <div><u style="width:72px;height:72px"></u><b>Grand</b></div><div><u style="width:60px;height:26px;border-radius:13px"></u><b>Verrouillé</b></div></div>
+        </article>
+        <div class="btnP lg" style="margin-top:12px">Enregistrer le widget</div>
+      </div></div>
+      <div class="cap"><h4>Le widget garde son propre style</h4><p>L'app passe en sombre, pas le widget : il reste dans le style choisi (ici « Clair »), comme sur l'écran d'accueil de l'iPhone.</p></div></div>
+    <div class="col"><div class="nm">Créer · thème · sombre</div>
+      <div class="phone t-saphir dk" data-time="13:20" data-tab="1"><div class="scr">
+        <div class="nv"><span class="sp"></span><span class="rb gl pr"><i data-i="undo"></i></span><span class="rb gl off"><i data-i="redo"></i></span></div>
+        <div class="x-title" style="margin-top:-2px">Créer</div>
+        <div class="stage" style="height:264px;margin-top:10px"><img class="w" data-w="calories-s-dark" style="width:164px;margin-top:-44px" alt="">
+          <div class="ctl"><span class="pill gl"><i data-i="grid"></i>Changer de widget</span><span class="pill ic gl"><i data-i="eye"></i></span></div></div>
+        <div class="tools"><div><i data-i="resize"></i>Taille</div><div><i data-i="lines"></i>Contenu</div><div class="on"><i data-i="palette"></i>Thème</div><div><i data-i="pencil"></i>Style</div><div><i data-i="drop"></i>Couleurs</div><div><i data-i="image"></i>Fond</div></div>
+        <article class="pn cd" style="margin-top:12px">
+          <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="h3">Thème</span><span class="link" style="font-size:15px">Tous</span></div>
+          <div class="thumbs" style="margin-top:12px">
+            <div><img data-w="calories-s-light" alt=""><b>Clair</b></div><div class="on"><img data-w="calories-s-dark" alt=""><b>Sombre</b></div>
+            <div><img data-w="calories-s-paper" alt=""><b><i data-i="lock"></i>Papier</b></div><div><img data-w="calories-s-editorial" alt=""><b><i data-i="lock"></i>Éditorial</b></div>
+            <div><img data-w="calories-s-ocean" alt=""><b><i data-i="lock"></i>Océan</b></div></div>
+        </article>
+        <div class="btnP lg" style="margin-top:12px">Enregistrer le widget</div>
+      </div></div>
+      <div class="cap"><h4>Choix marqué par un anneau clair</h4><p>L'élément choisi garde son anneau, dans la couleur d'action claire. Le cadenas Premium reste.</p></div></div>
+    <div class="col"><div class="nm">Créer · enregistré · sombre</div>
+      <div class="phone t-saphir dk" data-time="13:20" data-tab="none"><div class="scr">
+        <div class="nv"></div><div class="x-title" style="margin-top:-2px">Créer</div>
+        <div class="stage" style="height:264px;margin-top:10px"><img class="w" data-w="calories-s-dark" style="width:164px;margin-top:-44px" alt=""></div>
+      </div><div class="dim"></div>
+      <div class="sheet"><div class="grab"></div>
+        <div style="display:flex;gap:14px;align-items:center"><img data-w="calories-s-dark" style="width:76px;height:76px;border-radius:18px" alt="">
+          <div><div class="h2">« Calories » est prêt</div><span class="okl" style="margin-top:4px"><i data-i="check"></i>Enregistré dans Mes widgets</span></div></div>
+        <div class="seg" style="margin-top:16px"><span class="on">Écran d'accueil</span><span>Écran verrouillé</span></div>
+        <div class="x-lab" style="margin:16px 0 2px">Pour l'ajouter, 3 étapes</div>
+        <div class="step"><span class="n">1</span><span>Appuie longuement sur un espace vide de l'écran d'accueil.</span></div>
+        <div class="step"><span class="n">2</span><span>Touche « Modifier » en haut, puis « Ajouter un widget ».</span></div>
+        <div class="step"><span class="n">3</span><span>Cherche « Ardane », puis « Mes widgets » : « Calories » est dans la taille Petit.</span></div>
+        <div class="info" style="margin-top:6px"><i data-i="info"></i><span>iOS ne laisse aucune app poser un widget à ta place.</span></div>
+        <div class="btnP lg" style="margin-top:14px">Compris</div>
+      </div></div>
+      <div class="cap"><h4>Les feuilles sont opaques</h4><p>Une feuille sombre, pleine, sur un voile noir. Le texte de confirmation garde sa coche : l'état ne repose pas sur la couleur seule.</p></div></div>
+  </div>
+
+  <h2 class="sec">Les dix déclinaisons en sombre</h2>
+  <p class="secp">Chaque déclinaison garde sa personnalité la nuit : le fond prend sa teinte, les nappes aussi, et la couleur d'action est la version claire déjà utilisée par l'app pour cette teinte.</p>
+  <div class="row" id="r1"></div>
+  <div class="row" id="r2" style="margin-top:34px"></div>
+
+  <div class="row" style="margin-top:34px;--gap:28px">
+    <div class="note d12-n" style="width:620px;flex:none"><h4>Les règles du sombre</h4>
+      <ul><li><b>Fond</b> : la teinte de l'app à 5,5 % de clarté (presque noir, jamais noir pur), avec les deux nappes au même endroit qu'en clair.</li>
+        <li><b>Panneaux</b> : la teinte à 11,5 % de clarté, liseré blanc très discret, plus d'ombre claire. <b>Verre</b> : voile blanc à 9 %, flou, réservé comme en clair à ce qui flotte.</li>
+        <li><b>Couleur d'action</b> : la version claire de la teinte (celle que l'app utilise déjà en sombre). Sur un bouton plein, le texte devient sombre.</li>
+        <li><b>Couleurs des mini-apps</b> : éclaircies jusqu'à 5:1 au moins sur un panneau ; leur pastille d'icône est un voile de leur couleur.</li>
+        <li><b>Texte</b> : principal à 15:1 et plus, secondaire à 6,9:1 et plus, couleur d'action à 7,6:1 et plus sur un panneau.</li>
+        <li><b>Widgets</b> : inchangés. Chaque widget garde son style, clair ou sombre, quel que soit le mode de l'app.</li>
+        <li><b>Premium</b> : le badge or passe en or sombre (fond #4A3B12, texte #F2D27A), comme dans l'app actuelle.</li></ul></div>
+    <div class="note" style="flex:1"><h4>Codes HEX du sombre</h4>
+      <table class="d12-t" id="tab"></table>
+      <p style="margin-top:10px;color:#4E5A6B;font-size:12.5px">Sable, Graphite et Monochrome sont des teintes nouvelles (à développer) : leur couleur d'action sombre est proposée ici. Pour les sept autres, c'est celle de l'app actuelle.</p></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script>
+const col = (t) => `<div class="col"><div class="nm">${t.name}<em class="${t.free ? '' : t.isNew ? 'n' : 'p'}">${t.free ? 'Gratuite' : t.isNew ? 'Teinte nouvelle' : 'Premium'}</em></div>
+  <div class="phone t-${t.id} dk" data-screen="homeA:journee"></div></div>`;
+document.getElementById('r1').innerHTML = THEMES.slice(0, 5).map(col).join('');
+document.getElementById('r2').innerHTML = THEMES.slice(5).map(col).join('');
+const sw = (c) => `<u style="background:${c}"></u><code>${c}</code>`;
+document.getElementById('tab').innerHTML = '<tr><th>Déclinaison</th><th>Fond</th><th>Panneau</th><th>Action</th><th>Texte sur l\'action</th><th>Texte</th><th>Texte secondaire</th><th>Nappe 1</th><th>Nappe 2</th></tr>'
+  + THEMES.map((t) => { const k = tokensDark(t); return `<tr><td>${t.name}</td><td>${sw(k.bg)}</td><td>${sw(k.card)}</td><td>${sw(k.primary)}</td><td>${sw(k.onPrimary)}</td><td>${sw(k.ink)}</td><td>${sw(k.ink2)}</td><td>${sw(k.na)}</td><td>${sw(k.nb)}</td></tr>`; }).join('');
+Cristal.init();
+</script>
+</body>
+</html>

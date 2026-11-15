@@ -21,8 +21,13 @@ Sources HTML dans ce dossier, images dans `pub/rapports/design-2026-11-15-crista
 | 9 | `09-autres-pages.html` | Mes widgets, Premium, Profil, mode Organiser | 6 |
 | 10 | `10-palettes.html` | les 10 palettes complètes et les règles graphiques | — |
 | 11 | `11-store.html` | le Store : mise en page actuelle, habillage Cristal ; captures de l'app en comparaison | 9 |
+| 12 | `12-sombre.html` | le mode sombre : Saphir clair et sombre côte à côte, Créer en sombre, les 10 déclinaisons en sombre, règles et codes HEX | 15 |
 
 Autres fichiers : `GUIDE.md` (règles du système et recette de rendu), `palettes.md` (tous les codes HEX), `inventaire/` (ce que l'app affiche aujourd'hui, relevé dans le code : fait foi), `cristal.css` et `cristal.js` (base commune), `render.py` et `make_pdf.py` (rendu), `store_crops.py` (découpe les vignettes du Store dans les captures de l'app, vers `pub/rapports/design-2026-11-15-cristal/store-src/`).
+
+Toute planche se rend aussi en sombre avec `--query mode=dark` (classe `.dk`, jetons de `tokensDark` dans `cristal.js`).
+
+Accord de l'utilisateur pour la phase 2 le 2026-11-15, avec trois consignes : dessiner le mode sombre avant de coder (planche 12), fond du compte gratuit = celui de Cristal « Équilibrée » (Saphir), ne rien dessiner ni développer qui n'existe pas dans l'app.
 
 ## Le système en cinq lignes
 1. Fond clair avec deux nappes de couleur floues.
@@ -66,7 +71,7 @@ Autres fichiers : `GUIDE.md` (règles du système et recette de rendu), `palette
 2. **Créer** : garder la composition à plusieurs widgets dans « Taille » (recommandé) ; montrer le guide d'ajout après chaque enregistrement ou seulement les premières fois ; développer ou non « Sur mon écran ».
 3. **Créer** : où vont « Photos et citations » et l'entrée « écran verrouillé », aujourd'hui dans la liste des espaces (proposition : dans la feuille « Changer de widget »).
 4. **Planning** : la carte « Prochain événement ».
-5. **Mode sombre** : il n'est pas dessiné (la demande portait sur le clair). L'app a les réglages Auto, Clair et Sombre : il faut le dessiner avant de coder, sinon l'app serait incohérente la nuit.
+5. **Mode sombre** : dessiné le 2026-11-15 à la demande de l'utilisateur (planche 12). Règles : fond = la teinte à 5,5 % de clarté, panneaux à 11,5 %, verre fumé, couleur d'action claire (celle de l'app en sombre) avec texte sombre sur les boutons pleins, widgets inchangés.
 
 ## Recommandation
 - **Couleurs** : Saphir gratuite ; les 11 teintes Premium actuelles habillées par la même règle ; ajouter Sable et Graphite comme nouveautés Premium ; garder Monochrome en réserve.
@@ -76,7 +81,7 @@ Autres fichiers : `GUIDE.md` (règles du système et recette de rendu), `palette
 
 ## Limites
 - Maquettes rendues sur ordinateur avec la police Inter ; sur iPhone, SF Pro change un peu les largeurs.
-- Le mode sombre et les très grandes tailles de texte ne sont pas dessinés.
+- Les très grandes tailles de texte ne sont pas dessinées. En sombre, les vignettes des packs du Store restent celles des captures claires.
 - Plusieurs vignettes de la planche Créer sont des exports de remplacement (thèmes, widgets Nutrition sans export) ; c'est indiqué sous les écrans.
 - Les prix de la page Premium sont des exemples : les vrais viennent de l'App Store.
 - Planche 11 : les vignettes viennent des captures de l'app du 31 octobre, prises avec Premium débloqué (donc sans badge ni cadenas Premium) ; la carte de saison est une capture entière, avec la police de l'app.
