@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct ProductivitySpaceSections: View {
+    @Environment(\.appStyle) private var style
     @Environment(AppModel.self) private var model
     @State private var newPriority = ""
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
@@ -61,12 +62,12 @@ struct ProductivitySpaceSections: View {
                 } label: {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack {
-                            Circle().fill(Color(hex: project.colorHex)).frame(width: 10, height: 10)
+                            Circle().fill(style.cristal.category(project.colorHex)).frame(width: 10, height: 10)
                             Text(project.name).foregroundStyle(Color.primary)
                             Spacer()
                             Text(Fmt.percent(project.progress)).foregroundStyle(Color.secondary).monospacedDigit()
                         }
-                        ProgressView(value: project.progress).tint(Color(hex: project.colorHex))
+                        ProgressView(value: project.progress).tint(style.cristal.category(project.colorHex))
                             .accessibilityLabel(project.name)
                             .accessibilityValue(Fmt.percent(project.progress))
                     }
@@ -124,7 +125,7 @@ struct ProductivitySpaceSections: View {
                         Image(systemName: "plus.circle.fill").font(.title3)
                     }
                     .buttonStyle(.pressable)
-                    .foregroundStyle(Color(hex: counter.colorHex))
+                    .foregroundStyle(style.cristal.category(counter.colorHex))
                     .accessibilityLabel(Text(tr("Ajouter à \(counter.name)")))
                 }
             }
@@ -205,6 +206,7 @@ struct CompletedPrioritiesView: View {
                 }
             }
         }
+        .styledList()
         .navigationTitle(tr("Mes tâches réalisées"))
         .navigationBarTitleDisplayMode(.inline)
         .accessibilityIdentifier("completed-priorities")

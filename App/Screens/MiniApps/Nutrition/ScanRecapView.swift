@@ -23,6 +23,8 @@ struct ScanRecapView: View {
     /// Called once the foods are in the journal.
     let onDone: () -> Void
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
     @State private var meal: MealType = .current()
     @State private var picker: FoodPickPurpose?
     @State private var isSaving = false
@@ -73,7 +75,7 @@ struct ScanRecapView: View {
                         } label: {
                             Label(tr("Remplacer"), systemImage: "arrow.triangle.2.circlepath")
                         }
-                        .tint(.orange)
+                        .tint(palette.category("F08A24"))
                     }
                 }
                 Button {
@@ -293,7 +295,7 @@ struct ScanRecapView: View {
         }
         ForEach(NutritionTiles.macroRows(after, goals: state.goals, known: known)) { row in
             HStack {
-                Circle().fill(Color(hex: row.colorHex ?? "999999")).frame(width: 8, height: 8)
+                Circle().fill(palette.category(row.colorHex ?? "999999")).frame(width: 8, height: 8)
                 Text(row.title)
                 Spacer()
                 Text(row.value ?? "").foregroundStyle(Color.secondary).monospacedDigit()
@@ -381,6 +383,8 @@ private struct ScanPendingRow: View {
     let alternatives: [FoodItem]
     let onPick: (FoodItem) -> Void
     let onDismiss: () -> Void
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -391,7 +395,7 @@ private struct ScanPendingRow: View {
                         .fixedSize(horizontal: false, vertical: true)
                     Text(item.isTentative ? tr("Peut-être sur la photo") : tr("peu sûr"))
                         .font(.caption)
-                        .foregroundStyle(Color.orange)
+                        .foregroundStyle(palette.strong("F08A24"))
                 }
                 Spacer(minLength: 0)
                 Button(tr("Ignorer"), action: onDismiss)
@@ -411,10 +415,10 @@ private struct ScanPendingRow: View {
                         .font(.footnote.weight(.medium))
                         .padding(.horizontal, 12)
                         .frame(maxWidth: 240, minHeight: 44)
-                        .background(Color.secondary.opacity(0.12), in: Capsule())
+                        .background(palette.tintColor, in: Capsule())
                         .overlay {
                             if item.isTentative {
-                                Capsule().strokeBorder(Color.orange, style: StrokeStyle(lineWidth: 1.5, dash: [5, 4]))
+                                Capsule().strokeBorder(palette.category("F08A24"), style: StrokeStyle(lineWidth: 1.5, dash: [5, 4]))
                             }
                         }
                         .contentShape(Capsule())
@@ -439,6 +443,8 @@ private struct ScanLineRow: View {
     let onGrams: (Double) -> Void
     let onReplace: () -> Void
     let onRemove: () -> Void
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     /// Calories and macros of the line: a range for a guess (« ≈ 420–560 kcal »), « ? » for a macronutrient
     /// the source did not give (never a zero made up).
@@ -476,7 +482,7 @@ private struct ScanLineRow: View {
                         if let word = line.confidenceWord {
                             Text(word)
                                 .font(.caption)
-                                .foregroundStyle(line.isLowConfidence ? Color.orange : Color.secondary)
+                                .foregroundStyle(line.isLowConfidence ? palette.strong("F08A24") : Color.secondary)
                                 .lineLimit(1)
                                 .padding(.vertical, 3)
                                 .fixedSize()
@@ -519,7 +525,7 @@ private struct ScanLineRow: View {
                             .font(.footnote.weight(.medium))
                             .padding(.horizontal, 12)
                             .frame(maxWidth: 240, minHeight: 44)
-                            .background(Color.secondary.opacity(0.12), in: Capsule())
+                            .background(palette.tintColor, in: Capsule())
                             .contentShape(Capsule())
                         }
                         .buttonStyle(.borderless)
@@ -534,7 +540,7 @@ private struct ScanLineRow: View {
                     .multilineTextAlignment(.trailing)
                     .frame(width: 84, height: 44)
                     .padding(.horizontal, 8)
-                    .background(Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .background(palette.wellColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     .accessibilityLabel(tr("Quantité"))
                 Text(verbatim: "g").foregroundStyle(Color.secondary)
                 Spacer(minLength: 0)
@@ -552,6 +558,8 @@ private struct ScanLineRow: View {
 private struct ScanBadge: View {
     let isEstimate: Bool
     let source: FoodSource
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private var label: String {
         if isEstimate { return tr("Estimation") }
@@ -571,13 +579,16 @@ private struct ScanBadge: View {
         }
     }
 
-    private var tint: Color {
-        if isEstimate { return .orange }
+    /// The hex of the badge, translated into Cristal for the fill (`category`) and the text (`strong`).
+    private var tintHex: String {
+        if isEstimate { return "F08A24" }
         switch source {
-        case .builtin, .nutrientFile: return .green
-        case .openFoodFacts, .custom: return .blue
+        case .builtin, .nutrientFile: return "7FA33A"
+        case .openFoodFacts, .custom: return "3366FF"
         }
     }
+
+    private var tint: Color { palette.category(tintHex) }
 
     var body: some View {
         // Built by hand and fixed to its natural size: a `Label` squeezed by its row turned « Estimation » into a
@@ -588,7 +599,7 @@ private struct ScanBadge: View {
                 .lineLimit(1)
         }
         .font(.caption.weight(.semibold))
-        .foregroundStyle(tint)
+        .foregroundStyle(palette.strong(tintHex))
         .padding(.horizontal, 8)
         .padding(.vertical, 3)
         .background(tint.opacity(0.15), in: Capsule())

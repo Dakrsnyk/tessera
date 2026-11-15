@@ -420,6 +420,7 @@ struct FoodScanView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding(24)
+        .cristalScreen()
         .accessibilityElement(children: .combine)
     }
 
@@ -445,13 +446,16 @@ struct ScanMessageView<Actions: View>: View {
     let message: String
     var detail: String? = nil
     @ViewBuilder let actions: () -> Actions
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
                 Image(systemName: symbol)
-                    .font(.system(size: 46))
+                    .font(.system(size: 36))
                     .foregroundStyle(Color.secondary)
+                    .frame(width: 88, height: 88)
+                    .background(CristalPalette.of(style.id).tintColor, in: Circle())
                     .accessibilityHidden(true)
                 Text(title)
                     .font(.title3.weight(.semibold))
@@ -474,6 +478,7 @@ struct ScanMessageView<Actions: View>: View {
             }
             .padding(24)
         }
+        .cristalScreen()
     }
 }
 

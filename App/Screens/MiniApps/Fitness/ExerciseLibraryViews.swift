@@ -26,6 +26,8 @@ struct ExerciseLibraryPage: View {
     @State private var info: ExerciseInfo?
     @State private var creating = false
     @State private var paywall: PaywallContext?
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     init(onPick: ((ExerciseInfo) -> Void)? = nil) {
         self.onPick = onPick
@@ -129,7 +131,7 @@ struct ExerciseLibraryPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: accentHex))
+        .tint(palette.fitnessText)
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: tr("Développé, squat, dos, haltères…"))
         .navigationTitle(onPick == nil ? tr("Exercices") : tr("Ajouter un exercice"))
         .navigationBarTitleDisplayMode(onPick == nil ? .large : .inline)
@@ -190,7 +192,7 @@ struct ExerciseLibraryPage: View {
             .foregroundStyle(isActive ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.primary))
             .padding(.horizontal, 14)
             .frame(minHeight: 36)
-            .background(isActive ? AnyShapeStyle(Color(hex: accentHex)) : AnyShapeStyle(.cardFill), in: Capsule())
+            .background(isActive ? AnyShapeStyle(palette.fitnessText) : AnyShapeStyle(.cardFill), in: Capsule())
         }
     }
 
@@ -245,7 +247,7 @@ struct ExerciseLibraryPage: View {
             } label: {
                 Image(systemName: "info.circle")
                     .font(.title3)
-                    .foregroundStyle(Color(hex: accentHex))
+                    .foregroundStyle(palette.fitnessText)
             }
             .buttonStyle(.borderless)
             .accessibilityLabel(Text(tr("Fiche de \(exercise.name)")))
@@ -257,7 +259,7 @@ struct ExerciseLibraryPage: View {
             } label: {
                 Label(isFavorite ? tr("Retirer") : tr("Favori"), systemImage: isFavorite ? "star.slash" : "star")
             }
-            .tint(.orange)
+            .tint(palette.category("F2A33A"))
         }
     }
 }
@@ -312,6 +314,8 @@ struct ExerciseDetailView: View {
     @State private var addedToSession = false
     @State private var alternative: ExerciseInfo?
     @State private var paywall: PaywallContext?
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     /// The session in progress, if any: « Ajouter » puts the exercise straight into it.
     private var activeSession: WorkoutSession? {
@@ -329,9 +333,9 @@ struct ExerciseDetailView: View {
                 ExerciseDemoView(exercise: exercise, colorHex: accentHex)
                     .frame(maxWidth: .infinity)
                 HStack(spacing: 6) {
-                    Circle().fill(Color(hex: accentHex)).frame(width: 7, height: 7)
+                    Circle().fill(palette.fitness).frame(width: 7, height: 7)
                     Text(tr("Muscles principaux"))
-                    Circle().fill(Color(hex: accentHex).opacity(0.45)).frame(width: 7, height: 7)
+                    Circle().fill(palette.fitness.opacity(0.45)).frame(width: 7, height: 7)
                         .padding(.leading, 6)
                     Text(tr("secondaires"))
                 }
@@ -364,9 +368,9 @@ struct ExerciseDetailView: View {
                         HStack(alignment: .firstTextBaseline, spacing: 10) {
                             Text("\(index + 1)")
                                 .font(.caption.weight(.bold))
-                                .foregroundStyle(.white)
+                                .foregroundStyle(.onAccent)
                                 .frame(width: 20, height: 20)
-                                .background(Color(hex: accentHex), in: Circle())
+                                .background(palette.fitnessText, in: Circle())
                             Text(step).fixedSize(horizontal: false, vertical: true)
                         }
                     }
@@ -426,7 +430,7 @@ struct ExerciseDetailView: View {
                     HStack(spacing: 10) {
                         Label(tr("Ajouté à « \(session.routineName) »"), systemImage: "checkmark.circle.fill")
                             .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(Color(hex: accentHex))
+                            .foregroundStyle(palette.fitnessText)
                             .lineLimit(1)
                         Spacer(minLength: 8)
                         if !inSheet {
@@ -447,7 +451,7 @@ struct ExerciseDetailView: View {
                     .padding(.vertical, 10)
                 }
             }
-            .background(.bar)
+            .background(.cardFill)
         }
         .navigationTitle(exercise.name)
         .navigationBarTitleDisplayMode(.inline)
@@ -499,7 +503,7 @@ struct ExerciseDetailView: View {
             .font(.caption.weight(.semibold))
             .padding(.horizontal, 10)
             .padding(.vertical, 5)
-            .background(Color.secondary.opacity(0.12), in: Capsule())
+            .background(palette.wellColor, in: Capsule())
     }
 
     private func muscleLine(_ title: String, _ muscles: [Muscle], strong: Bool) -> some View {
@@ -515,7 +519,7 @@ struct ExerciseDetailView: View {
         VStack(alignment: .leading, spacing: 10) {
             Label(title, systemImage: symbol)
                 .font(.headline)
-                .foregroundStyle(Color(hex: accentHex))
+                .foregroundStyle(palette.fitnessText)
             content()
                 .font(.body)
         }
@@ -526,7 +530,7 @@ struct ExerciseDetailView: View {
         VStack(alignment: .leading, spacing: 8) {
             ForEach(items, id: \.self) { item in
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
-                    Image(systemName: symbol).font(.caption.weight(.bold)).foregroundStyle(Color(hex: hex))
+                    Image(systemName: symbol).font(.caption.weight(.bold)).foregroundStyle(palette.category(hex))
                     Text(item).fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -566,10 +570,10 @@ struct ExerciseDetailView: View {
                         Chart {
                             ForEach(history) { session in
                                 LineMark(x: .value("Date", session.date), y: .value("Charge", session.topWeight))
-                                    .foregroundStyle(Color(hex: accentHex))
+                                    .foregroundStyle(palette.fitness)
                                     .interpolationMethod(.monotone)
                                 PointMark(x: .value("Date", session.date), y: .value("Charge", session.topWeight))
-                                    .foregroundStyle(Color(hex: accentHex))
+                                    .foregroundStyle(palette.fitness)
                                     .symbolSize(24)
                             }
                         }

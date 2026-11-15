@@ -16,6 +16,8 @@ struct NutritionMealPage: View {
     @State private var loggedSaved: SavedMeal?
     /// The earlier meals already taken again from this page: their button is off (a double tap is one meal).
     @State private var resumedMeals: Set<String> = []
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private var accentHex: String { MiniApp.nutrition.colorHex }
 
@@ -73,7 +75,7 @@ struct NutritionMealPage: View {
                         } label: {
                             Label(tr("Favori"), systemImage: "star")
                         }
-                        .tint(.orange)
+                        .tint(palette.category("F08A24"))
                     }
                 }
                 Button {
@@ -148,7 +150,7 @@ struct NutritionMealPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: accentHex))
+        .tint(palette.strong(accentHex))
         .navigationTitle(meal.title)
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $editing) { entry in
@@ -258,6 +260,8 @@ struct EntryEditor: View {
 struct NutritionNutrientsPage: View {
     let day: Date
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     var body: some View {
         let state = model.nutrition
@@ -325,7 +329,7 @@ struct NutritionNutrientsPage: View {
                     .monospacedDigit()
             }
             if let goal {
-                BarView(progress: value / max(1, goal), color: Color(hex: hex), track: Color(hex: hex).opacity(0.15), height: 6)
+                BarView(progress: value / max(1, goal), color: palette.category(hex), track: palette.category(hex).opacity(0.15), height: 6)
             }
         }
         .padding(.vertical, 4)
@@ -349,19 +353,19 @@ struct NutritionNutrientsPage: View {
                         .foregroundStyle(Color.secondary)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
-                        .background(Color.secondary.opacity(0.15), in: Capsule())
+                        .background(palette.tintColor, in: Capsule())
                 }
                 Spacer()
                 if let value {
                     Text(goal.map { "\(nutrient.number(value)) / \(nutrient.number($0)) \(nutrient.unit)" } ?? nutrient.format(value))
-                        .foregroundStyle(isOver ? Color(hex: MiniStyle.alertHex) : Color.secondary)
+                        .foregroundStyle(isOver ? palette.strong(MiniStyle.alertHex) : Color.secondary)
                         .monospacedDigit()
                 } else {
                     Text(tr("Non disponible")).foregroundStyle(Color.secondary)
                 }
             }
             if let value, let goal, goal > 0 {
-                let color = isLimit ? (isOver ? Color(hex: MiniStyle.alertHex) : Color(hex: "8A8A8E")) : Color(hex: "7FA33A")
+                let color = isLimit ? (isOver ? palette.category(MiniStyle.alertHex) : palette.category("6B7280")) : palette.category("7FA33A")
                 BarView(progress: value / goal, color: color, track: (isLimit ? Color.secondary : color).opacity(0.15), height: 6)
             }
         }
@@ -487,6 +491,8 @@ struct NutritionHistoryPage: View {
     @State private var period: Period = .week
     @State private var customStart = DateMath.calendar.date(byAdding: .day, value: -13, to: Date()) ?? Date()
     @State private var customEnd = Date()
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private var accentHex: String { MiniApp.nutrition.colorHex }
 
@@ -572,7 +578,7 @@ struct NutritionHistoryPage: View {
             Chart {
                 ForEach(DayValue.list(stats.days, stats.kcalPerDay)) { item in
                     BarMark(x: .value("Jour", item.date, unit: .day), y: .value("kcal", item.value))
-                        .foregroundStyle(Color(hex: accentHex).gradient)
+                        .foregroundStyle(palette.category(accentHex).gradient)
                         .cornerRadius(3)
                 }
                 if known.kcal {
@@ -604,7 +610,7 @@ struct NutritionHistoryPage: View {
                     HStack(spacing: 2) {
                         ForEach(parts) { part in
                             Rectangle()
-                                .fill(Color(hex: part.hex))
+                                .fill(palette.category(part.hex))
                                 .frame(width: max(2, (geo.size.width - 4) * part.share))
                         }
                     }
@@ -614,7 +620,7 @@ struct NutritionHistoryPage: View {
                 HStack {
                     ForEach(parts) { part in
                         HStack(spacing: 5) {
-                            Circle().fill(Color(hex: part.hex)).frame(width: 8, height: 8)
+                            Circle().fill(palette.category(part.hex)).frame(width: 8, height: 8)
                             Text("\(part.name) \(Fmt.percent(part.share))")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
@@ -655,10 +661,10 @@ struct NutritionHistoryPage: View {
             Chart {
                 ForEach(weights, id: \.date) { point in
                     LineMark(x: .value("Date", point.date), y: .value(system.weightUnit, point.value), series: .value("Série", "poids"))
-                        .foregroundStyle(Color(hex: accentHex))
+                        .foregroundStyle(palette.category(accentHex))
                         .interpolationMethod(.catmullRom)
                     PointMark(x: .value("Date", point.date), y: .value(system.weightUnit, point.value))
-                        .foregroundStyle(Color(hex: accentHex))
+                        .foregroundStyle(palette.category(accentHex))
                         .symbolSize(20)
                 }
                 ForEach(smoothed, id: \.date) { point in
@@ -726,6 +732,8 @@ private struct MacroShare: Identifiable {
 struct NutritionSavedMealsPage: View {
     @Environment(AppModel.self) private var model
     @State private var logged: SavedMeal?
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     var body: some View {
         let saved = model.nutrition.savedMeals
@@ -762,7 +770,7 @@ struct NutritionSavedMealsPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: MiniApp.nutrition.colorHex))
+        .tint(palette.strong(MiniApp.nutrition.colorHex))
         .navigationTitle(tr("Mes repas"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $logged) { meal in

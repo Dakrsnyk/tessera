@@ -17,6 +17,8 @@ struct FitnessAppView: View {
     private var steps: StepCounter { .shared }
     /// The explanation before the Motion prompt of the system.
     @State private var asksMotion = false
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private var accentHex: String { MiniApp.fitness.colorHex }
 
@@ -197,7 +199,7 @@ struct FitnessAppView: View {
             } label: {
                 Label(tr("Faire une séance quand même"), systemImage: "play.circle")
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color(hex: accentHex))
+                    .foregroundStyle(Color.accentColor)
             }
             .accessibilityIdentifier("fitness-start-anyway")
         case .sessions(let done):
@@ -245,7 +247,7 @@ struct FitnessAppView: View {
         NavigationLink(value: HomeRoute.page(.fitnessSessionDetail(id))) {
             Text(tr("Voir le détail"))
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(Color(hex: accentHex))
+                .foregroundStyle(Color.accentColor)
         }
     }
 
@@ -393,8 +395,8 @@ struct FitnessAppView: View {
             NavigationLink(value: HomeRoute.page(.fitnessActivity)) {
                 HStack(spacing: 16) {
                     ZStack {
-                        RingView(progress: goal.map { Double(count) / Double(max(1, $0)) } ?? 0, lineWidth: 8, color: Color(hex: MiniStyle.stepsHex), track: Color(hex: MiniStyle.stepsHex).opacity(0.15))
-                        Image(systemName: "figure.walk").font(.title3).foregroundStyle(Color(hex: MiniStyle.stepsHex))
+                        RingView(progress: goal.map { Double(count) / Double(max(1, $0)) } ?? 0, lineWidth: 8, color: palette.category(MiniStyle.stepsHex), track: palette.category(MiniStyle.stepsHex).opacity(0.15))
+                        Image(systemName: "figure.walk").font(.title3).foregroundStyle(palette.category(MiniStyle.stepsHex))
                     }
                     .frame(width: 64, height: 64)
                     VStack(alignment: .leading, spacing: 3) {
@@ -505,6 +507,13 @@ struct FitnessAppView: View {
         }
         .contentShape(Rectangle())
     }
+}
+
+extension CristalPalette {
+    /// La couleur de Fitness traduite en Cristal : `fitness` pour une pastille, un graphique, un fond ;
+    /// `fitnessText` pour du texte dans cette couleur.
+    var fitness: Color { category(MiniApp.fitness.colorHex) }
+    var fitnessText: Color { strong(MiniApp.fitness.colorHex) }
 }
 
 /// How a routine reads and lasts.

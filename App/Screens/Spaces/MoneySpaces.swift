@@ -3,6 +3,7 @@ import SwiftUI
 // MARK: - Portefeuille
 
 struct PortfolioSpaceSections: View {
+    @Environment(\.appStyle) private var style
     @Environment(AppModel.self) private var model
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
@@ -29,7 +30,7 @@ struct PortfolioSpaceSections: View {
                     sheets?.open { HoldingEditor(holding: position.holding) }
                 } label: {
                     HStack {
-                        Circle().fill(Color(hex: position.holding.kind.colorHex)).frame(width: 9, height: 9)
+                        Circle().fill(style.cristal.category(position.holding.kind.colorHex)).frame(width: 9, height: 9)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(position.holding.name).foregroundStyle(Color.primary)
                             Text("\(TF.quantity(position.holding.quantity)) · \(position.holding.kind.title)")

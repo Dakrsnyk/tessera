@@ -20,6 +20,8 @@ struct FitnessSessionPage: View {
     @State private var confirmCancel = false
     /// The explanation before the notification prompt (the rest alert), shown once when a first rest starts.
     @State private var asksNotifications = false
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private var accentHex: String { MiniApp.fitness.colorHex }
 
@@ -109,7 +111,7 @@ struct FitnessSessionPage: View {
         if model.canOpenExercise(exercise.id) {
             Image(systemName: "info.circle")
                 .font(font)
-                .foregroundStyle(Color(hex: accentHex))
+                .foregroundStyle(palette.fitnessText)
         } else {
             PremiumBadge(compact: true)
         }
@@ -148,7 +150,7 @@ struct FitnessSessionPage: View {
             ProgressView(value: Double(session.sets.count), total: Double(max(1, session.totalSets)))
                 .accessibilityLabel(tr("Progression"))
                 .accessibilityValue(tr("\(session.sets.count)/\(session.totalSets) séries"))
-                .tint(Color(hex: accentHex))
+                .tint(palette.fitnessText)
 
             // The exercise now.
             VStack(alignment: .leading, spacing: 14) {
@@ -156,7 +158,7 @@ struct FitnessSessionPage: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(tr("Série \(session.setIndex + 1) sur \(exercise.sets)"))
                             .font(.caption.weight(.bold))
-                            .foregroundStyle(Color(hex: accentHex))
+                            .foregroundStyle(palette.fitnessText)
                         Text(exercise.name).font(.title2.weight(.bold))
                         if let last, let best = last.best {
                             Text(tr("La dernière fois : \(Units.loadText(kilograms: best.weight, in: model.settings.unitSystem)) × \(best.reps)"))
@@ -198,7 +200,7 @@ struct FitnessSessionPage: View {
                     HStack {
                         Label(tr("Repos en pause · \(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))"), systemImage: "pause.circle")
                             .font(.title3.weight(.semibold))
-                            .foregroundStyle(Color(hex: accentHex))
+                            .foregroundStyle(palette.fitnessText)
                         Spacer()
                         Button(tr("Reprendre")) {
                             model.update(\.fitness) { $0.resumeRest(at: Date()) }
@@ -210,7 +212,7 @@ struct FitnessSessionPage: View {
                         .font(.subheadline.weight(.semibold))
                     }
                     .padding(12)
-                    .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .background(palette.tintColor, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 }
                 MiniActionButton(title: tr("Série faite"), symbol: "checkmark.circle.fill", colorHex: accentHex) {
                     completeSet()
@@ -308,6 +310,7 @@ struct FitnessSessionPage: View {
                 Button(tr("Annuler la séance"), role: .destructive) { cancelSession() }
             }
         }
+        .tint(palette.fitnessText)
         .onAppear { load(exercise) }
         .onChange(of: "\(session.exerciseIndex)-\(session.setIndex)") { _, _ in
             if let current = model.fitness.active?.currentExercise { load(current) }
@@ -329,7 +332,7 @@ struct FitnessSessionPage: View {
                 Image(systemName: running ? "hourglass" : "checkmark.circle")
             }
             .font(.title3.weight(.semibold))
-            .foregroundStyle(Color(hex: accentHex))
+            .foregroundStyle(palette.fitnessText)
             Spacer()
             if running {
                 Button {
@@ -345,7 +348,7 @@ struct FitnessSessionPage: View {
             }
         }
         .padding(12)
-        .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(palette.tintColor, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     /// In the app, the end of the rest is felt (the screen stays open): a haptic at the instant. Locked or in the
@@ -411,11 +414,11 @@ struct FitnessSessionPage: View {
                 }
                 .accessibilityLabel(tr("Augmenter : \(title)"))
             }
-            .foregroundStyle(Color(hex: accentHex))
+            .foregroundStyle(palette.fitnessText)
         }
         .padding(10)
         .frame(maxWidth: .infinity)
-        .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .background(palette.wellColor, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
     private func exerciseRow(_ item: ExerciseTemplate, index: Int, session: WorkoutSession) -> some View {
@@ -425,7 +428,7 @@ struct FitnessSessionPage: View {
         return VStack(alignment: .leading, spacing: 6) {
             HStack {
                 Image(systemName: index < session.exerciseIndex ? "checkmark.circle.fill" : (isCurrent ? "play.circle.fill" : "circle"))
-                    .foregroundStyle(index <= session.exerciseIndex ? Color(hex: accentHex) : .secondary)
+                    .foregroundStyle(index <= session.exerciseIndex ? palette.fitnessText : .secondary)
                 Text(item.name).font(.subheadline.weight(isCurrent ? .semibold : .regular))
                 Spacer()
                 Text(FitnessPlan.setText(item, system: model.settings.unitSystem)).font(.caption).foregroundStyle(.secondary).monospacedDigit()
@@ -451,7 +454,7 @@ struct FitnessSessionPage: View {
                                     .monospacedDigit()
                                     .padding(.horizontal, 10)
                                     .padding(.vertical, 5)
-                                    .background(Color(hex: accentHex).opacity(0.12), in: Capsule())
+                                    .background(palette.fitness.opacity(0.12), in: Capsule())
                             }
                             .buttonStyle(.pressable)
                         }

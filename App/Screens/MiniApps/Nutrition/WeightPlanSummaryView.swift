@@ -9,8 +9,11 @@ import SwiftUI
 struct WeightPlanSummaryView: View {
     var onEdit: (() -> Void)?
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
-    private var accent: Color { Color(hex: MiniApp.nutrition.colorHex) }
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
+    /// The action color of the app (the strong version of its color, as in the other screens of the mini-app).
+    private var accent: Color { palette.strong(MiniApp.nutrition.colorHex) }
     private var system: UnitSystem { model.settings.unitSystem }
 
     var body: some View {
@@ -138,7 +141,7 @@ struct WeightPlanSummaryView: View {
         }
         .padding(10)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .background(palette.wellColor, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .combine)
     }
 
@@ -161,7 +164,7 @@ struct WeightPlanSummaryView: View {
         VStack(alignment: .leading, spacing: 12) {
             Label(tr("Objectif impossible à atteindre de manière sûre"), systemImage: "exclamationmark.triangle.fill")
                 .font(.headline)
-                .foregroundStyle(.orange)
+                .foregroundStyle(palette.strong("F08A24"))
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityIdentifier("weightplan-unsafe-title")
@@ -209,6 +212,7 @@ private struct PlanButton: View {
     let filled: Bool
     let accent: Color
     let action: () -> Void
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         Button(action: action) {
@@ -218,7 +222,7 @@ private struct PlanButton: View {
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: .infinity, minHeight: 44)
                 .padding(.horizontal, 12)
-                .background(filled ? AnyShapeStyle(accent) : AnyShapeStyle(AppFill.screenFill), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .background(filled ? AnyShapeStyle(accent) : AnyShapeStyle(CristalPalette.of(style.id).tintColor), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(.pressable)
     }
@@ -227,10 +231,11 @@ private struct PlanButton: View {
 /// An adjustment the weigh-ins call for: the user accepts it or leaves it for later (nothing changes alone).
 struct WeightPlanAdjustmentCard: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         if let proposal = model.proposedAdjustment() {
-            let accent = Color(hex: MiniApp.nutrition.colorHex)
+            let accent = CristalPalette.of(style.id).strong(MiniApp.nutrition.colorHex)
             VStack(alignment: .leading, spacing: 10) {
                 Label(tr("Ajustement proposé"), systemImage: "arrow.triangle.2.circlepath")
                     .font(.headline)

@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct StudentSpaceSections: View {
+    @Environment(\.appStyle) private var style
     @Environment(AppModel.self) private var model
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
@@ -15,7 +16,7 @@ struct StudentSpaceSections: View {
                     sheets?.open { CourseEditor(course: course) }
                 } label: {
                     HStack {
-                        Circle().fill(Color(hex: course.colorHex)).frame(width: 10, height: 10)
+                        Circle().fill(style.cristal.category(course.colorHex)).frame(width: 10, height: 10)
                         Text(course.name).foregroundStyle(Color.primary)
                         Spacer()
                         if let average = StudentMath.courseAverage(state, course: course.id) {
@@ -36,7 +37,7 @@ struct StudentSpaceSections: View {
                     sheets?.open { SlotEditor(slot: slot) }
                 } label: {
                     HStack {
-                        Circle().fill(Color(hex: state.colorHex(of: slot))).frame(width: 8, height: 8)
+                        Circle().fill(style.cristal.category(state.colorHex(of: slot))).frame(width: 8, height: 8)
                         VStack(alignment: .leading, spacing: 1) {
                             Text(state.title(of: slot)).foregroundStyle(Color.primary)
                             Text("\(slot.date.map(Fmt.longDay) ?? slot.weekdaysText) · \(minuteText(slot.startMinute))–\(minuteText(slot.endMinute))\(slot.room.isEmpty ? "" : " · \(slot.room)")")

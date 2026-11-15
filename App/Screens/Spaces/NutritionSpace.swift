@@ -3,6 +3,7 @@ import Vision
 import VisionKit
 
 struct NutritionSpaceSections: View {
+    @Environment(\.appStyle) private var style
     @Environment(AppModel.self) private var model
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
@@ -34,7 +35,7 @@ struct NutritionSpaceSections: View {
                 }
                 ForEach(NutritionTiles.macroRows(totals, goals: state.goals, known: known)) { row in
                     HStack {
-                        Circle().fill(Color(hex: row.colorHex ?? "999999")).frame(width: 8, height: 8)
+                        Circle().fill(style.cristal.category(row.colorHex ?? "999999")).frame(width: 8, height: 8)
                         Text(row.title).font(.subheadline)
                         Spacer()
                         Text(row.value ?? "").font(.subheadline).foregroundStyle(Color.secondary).monospacedDigit()

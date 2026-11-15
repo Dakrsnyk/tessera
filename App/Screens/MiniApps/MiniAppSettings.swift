@@ -59,6 +59,7 @@ enum CommonSetting: Hashable {
 /// The end of a mini-app screen: one button, « Mes paramètres », that opens what the mini-app uses (the same
 /// answers as « Mes informations », the settings it depends on, its smart reminder) in a sheet.
 struct MiniAppInfoSection: View {
+    @Environment(\.appStyle) private var style
     let app: MiniApp
     @State private var isShowing = false
 
@@ -72,7 +73,7 @@ struct MiniAppInfoSection: View {
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
             .buttonStyle(.bordered)
-            .tint(app.color)
+            .tint(style.cristal.strong(app.colorHex))
             .accessibilityIdentifier("miniapp-settings-edit")
             .sheet(isPresented: $isShowing) {
                 MiniAppInfoSheet(app: app)

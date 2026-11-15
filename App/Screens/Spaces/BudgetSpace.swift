@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct BudgetSpaceSections: View {
+    @Environment(\.appStyle) private var style
     @Environment(AppModel.self) private var model
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
@@ -40,7 +41,7 @@ struct BudgetSpaceSections: View {
                 let category = state.category(expense.categoryID)
                 HStack {
                     Image(systemName: category?.symbol ?? "square.grid.2x2")
-                        .foregroundStyle(Color(hex: category?.colorHex ?? "64748B"))
+                        .foregroundStyle(style.cristal.category(category?.colorHex ?? "64748B"))
                         .frame(width: 22)
                     VStack(alignment: .leading, spacing: 1) {
                         Text(expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note)

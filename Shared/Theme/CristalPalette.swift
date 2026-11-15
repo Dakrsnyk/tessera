@@ -349,3 +349,8 @@ private enum Hx {
         return hex([(p.0 + m) * 255, (p.1 + m) * 255, (p.2 + m) * 255])
     }
 }
+
+extension AppStyle {
+    /// The Cristal tokens of this color (shortcut used by the screens: `style.cristal.category(hex)`).
+    var cristal: CristalPalette { CristalPalette.of(id) }
+}

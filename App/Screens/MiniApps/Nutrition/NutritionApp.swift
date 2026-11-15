@@ -26,6 +26,9 @@ struct NutritionAppView: View {
     @State private var day: Date
     @State private var sheet: NutritionSheet?
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
+    @Environment(\.colorScheme) private var scheme
     /// The day the screen was last active: when the app wakes on a later day and the screen showed that day, it follows.
     @State private var activeOn = Date()
 
@@ -119,7 +122,7 @@ struct NutritionAppView: View {
                         } label: {
                             Image(systemName: "plus.circle.fill")
                                 .font(.body)
-                                .foregroundStyle(Color(hex: accentHex).opacity(0.85))
+                                .foregroundStyle(Color.accentColor)
                                 .frame(width: 40, height: 44)
                         }
                         .buttonStyle(.pressable)
@@ -197,8 +200,9 @@ struct NutritionAppView: View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: symbol)
                 .font(.title3)
-                .foregroundStyle(Color(hex: accentHex))
-                .frame(width: 30)
+                .foregroundStyle(palette.category(accentHex))
+                .frame(width: 36, height: 36)
+                .background(palette.category(accentHex).opacity(scheme == .dark ? 0.20 : 0.13), in: Circle())
             VStack(alignment: .leading, spacing: 4) {
                 Text(title).font(.headline)
                 if let message {
@@ -210,14 +214,15 @@ struct NutritionAppView: View {
                 if let action {
                     Text(action)
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: accentHex))
+                        .foregroundStyle(Color.accentColor)
                         .padding(.top, 2)
                 }
             }
             Spacer(minLength: 0)
         }
         .padding(16)
-        .background(Color(hex: accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: MiniStyle.cardRadius, style: .continuous))
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .miniCard()
     }
 
     // MARK: Trend
@@ -308,12 +313,14 @@ struct CalorieHero: View {
     let goals: NutritionGoals
     let known: NutritionTiles.Targets
     let accentHex: String
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     var body: some View {
         let left = goals.kcal - totals.kcal
         HStack(spacing: 20) {
             ZStack {
-                RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 10, color: left < 0 && known.kcal ? Color(hex: MiniStyle.alertHex) : NutritionColors.calories, track: NutritionColors.track)
+                RingView(progress: known.kcal ? totals.kcal / max(1, goals.kcal) : 0, lineWidth: 10, color: left < 0 && known.kcal ? palette.category(MiniStyle.alertHex) : palette.category(NutritionColors.caloriesHex), track: NutritionColors.track)
                 VStack(spacing: 0) {
                     Text(TF.int(known.kcal ? abs(left) : totals.kcal))
                         .font(.system(size: 26, weight: .bold, design: .rounded))
@@ -348,6 +355,8 @@ struct MacroGauge: View {
     let hex: String
     /// True when a food of the total lacks this macro: the figure is a minimum, shown with « ≥ ».
     var incomplete = false
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
@@ -363,7 +372,7 @@ struct MacroGauge: View {
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
             }
-            BarView(progress: goal.map { eaten / max(1, $0) } ?? 0, color: Color(hex: hex), track: NutritionColors.track, height: 4)
+            BarView(progress: goal.map { eaten / max(1, $0) } ?? 0, color: palette.category(hex), track: NutritionColors.track, height: 4)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -376,14 +385,17 @@ private struct MealRow: View {
     let title: String
     var detail: String?
     var value: String?
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         HStack(spacing: 12) {
             Image(systemName: symbol)
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(Color(hex: colorHex))
+                .foregroundStyle(palette.category(colorHex))
                 .frame(width: 36, height: 36)
-                .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .background(palette.category(colorHex).opacity(scheme == .dark ? 0.20 : 0.13), in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.body.weight(.semibold))
@@ -421,6 +433,8 @@ struct WeekBars: View {
     let colorHex: String
     /// The bar drawn in full color (the last one by default).
     var highlighted: Int?
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     var body: some View {
         let top = max(values.max() ?? 0, goal ?? 0, 1)
@@ -437,7 +451,7 @@ struct WeekBars: View {
                     ForEach(Array(values.enumerated()), id: \.offset) { index, value in
                         VStack(spacing: 4) {
                             RoundedRectangle(cornerRadius: 4, style: .continuous)
-                                .fill(Color(hex: colorHex).opacity(index == (highlighted ?? values.count - 1) ? 1 : 0.45))
+                                .fill(palette.category(colorHex).opacity(index == (highlighted ?? values.count - 1) ? 1 : 0.45))
                                 .frame(height: max(3, height * value / top))
                             Text(days.indices.contains(index) ? String(Fmt.weekday(days[index]).prefix(1)) : "")
                                 .font(.caption2)

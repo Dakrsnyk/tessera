@@ -385,19 +385,25 @@ struct MiniActionButton: View {
     let action: () -> Void
     /// A double tap runs the action once (adding an expense, a meal or a set twice is never wanted).
     @State private var tapGuard = TapGuard()
+    @Environment(\.appStyle) private var style
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
+        // Cristal: the mini-app's color, made readable (strong) for the filled button, its ink chosen by contrast.
+        let palette = CristalPalette.of(style.id)
+        let strong = palette.strongHex(colorHex)
+        let fill = scheme == .dark ? strong.dark : strong.light
         Button { tapGuard.run(action) } label: {
             Label(title, systemImage: symbol)
                 .font(.headline)
-                .foregroundStyle(isProminent ? Color.readableInk(on: colorHex) : Color(hex: colorHex))
+                .foregroundStyle(isProminent ? Color.readableInk(on: fill) : palette.strong(colorHex))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
                 .minimumScaleFactor(0.8)
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 12)
                 .padding(.vertical, 6)
                 .frame(maxWidth: .infinity, minHeight: 50)
-                .background(isProminent ? Color(hex: colorHex) : Color(hex: colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .background(isProminent ? Color(hex: fill) : palette.category(colorHex).opacity(scheme == .dark ? 0.20 : 0.13), in: Capsule())
         }
         .buttonStyle(.pressable)
     }
@@ -410,6 +416,7 @@ struct MiniStat: View {
     var unit: String?
     var detail: String?
     var colorHex: String?
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -420,7 +427,7 @@ struct MiniStat: View {
             HStack(alignment: .firstTextBaseline, spacing: 3) {
                 Text(value)
                     .font(.title3.weight(.bold))
-                    .foregroundStyle(colorHex.map { Color(hex: $0) } ?? Color.primary)
+                    .foregroundStyle(colorHex.map { CristalPalette.of(style.id).strong($0) } ?? Color.primary)
                     .monospacedDigit()
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
@@ -458,6 +465,7 @@ struct DaySwitcher: View {
     var colorHex = "F08A24"
     var allowsFuture = false
     @State private var picking = false
+    @Environment(\.appStyle) private var style
 
     private var isToday: Bool { DateMath.isSameDay(day, Date()) }
 
@@ -511,7 +519,7 @@ struct DaySwitcher: View {
             .disabled(isToday && !allowsFuture)
             .accessibilityLabel(Text(tr("Jour suivant")))
         }
-        .foregroundStyle(Color(hex: colorHex))
+        .foregroundStyle(style.cristal.strong(colorHex))
         .cristalGlass(in: Capsule())
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("day-switcher")
@@ -521,7 +529,7 @@ struct DaySwitcher: View {
                            in: allowsFuture ? Date.distantPast...Date.distantFuture : Date.distantPast...Date(),
                            displayedComponents: .date)
                     .datePickerStyle(.graphical)
-                    .tint(Color(hex: colorHex))
+                    .tint(style.cristal.strong(colorHex))
                     .environment(\.locale, Fmt.locale)
                     .padding(.horizontal)
                     .navigationTitle(tr("Choisir une date"))

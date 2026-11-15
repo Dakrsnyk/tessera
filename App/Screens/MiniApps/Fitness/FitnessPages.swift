@@ -9,6 +9,8 @@ struct FitnessProgramPage: View {
     @State private var editing: Routine?
     /// Sessions of the program swiped to delete, once confirmed.
     @State private var deletingRoutines: [UUID] = []
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private var accentHex: String { MiniApp.fitness.colorHex }
     private let dayNames = [tr("Lundi"), tr("Mardi"), tr("Mercredi"), tr("Jeudi"), tr("Vendredi"), tr("Samedi"), tr("Dimanche")]
@@ -40,7 +42,7 @@ struct FitnessProgramPage: View {
                                 .foregroundStyle(Color.primary)
                                 .frame(width: 100, alignment: .leading)
                             Text(planned.isEmpty ? tr("Repos") : planned.map(\.name).joined(separator: " + "))
-                                .foregroundStyle(planned.isEmpty ? Color.secondary : Color(hex: accentHex))
+                                .foregroundStyle(planned.isEmpty ? Color.secondary : palette.fitnessText)
                                 .fontWeight(planned.isEmpty ? .regular : .semibold)
                                 .lineLimit(1)
                             Spacer()
@@ -92,7 +94,7 @@ struct FitnessProgramPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: accentHex))
+        .tint(palette.fitnessText)
         .navigationTitle(tr("Programme"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $editing) { routine in
@@ -129,6 +131,8 @@ struct FitnessHistoryPage: View {
     @Environment(AppModel.self) private var model
     /// The session to delete, once confirmed.
     @State private var deleting: UUID?
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     var body: some View {
         let sessions = FitnessMath.sessions(model.fitness).sorted { $0.start > $1.start }
@@ -149,7 +153,7 @@ struct FitnessHistoryPage: View {
                                     if session.isCatchUp {
                                         Label(tr("Rattrapée"), systemImage: "arrow.uturn.forward")
                                             .font(.caption2.weight(.semibold))
-                                            .foregroundStyle(Color(hex: MiniApp.fitness.colorHex))
+                                            .foregroundStyle(palette.fitnessText)
                                     }
                                     Spacer()
                                     Text(Fmt.shortDay(session.start)).font(.subheadline).foregroundStyle(Color.secondary)
@@ -273,6 +277,8 @@ struct FitnessSessionDetailPage: View {
 /// index along the left edge to jump to one. Premium.
 struct FitnessProgressPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private var accentHex: String { MiniApp.fitness.colorHex }
 
@@ -298,7 +304,7 @@ struct FitnessProgressPage: View {
                             Chart {
                                 ForEach(volumes) { item in
                                     BarMark(x: .value("Semaine", item.date, unit: .weekOfYear), y: .value(model.settings.unitSystem.weightUnit, Units.weightValue(kilograms: item.value, in: model.settings.unitSystem)))
-                                        .foregroundStyle(Color(hex: accentHex).gradient)
+                                        .foregroundStyle(palette.fitness.gradient)
                                         .cornerRadius(3)
                                 }
                             }
@@ -312,7 +318,7 @@ struct FitnessProgressPage: View {
                                 VStack(alignment: .leading, spacing: 6) {
                                     Text(section.letter)
                                         .font(.subheadline.weight(.bold))
-                                        .foregroundStyle(Color(hex: accentHex))
+                                        .foregroundStyle(palette.fitnessText)
                                         .padding(.leading, 4)
                                         .accessibilityAddTraits(.isHeader)
                                     MiniRowsCard {
@@ -390,6 +396,8 @@ struct FitnessActivityPage: View {
     @State private var dayData: StepCounter.Day?
     @State private var asksMotion = false
     @Environment(\.openURL) private var openURL
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private let tint = "12A4B5"
 
@@ -433,7 +441,7 @@ struct FitnessActivityPage: View {
                         Chart {
                             ForEach(steps.week) { day in
                                 BarMark(x: .value("Jour", day.date, unit: .day), y: .value("Pas", day.steps))
-                                    .foregroundStyle(Color(hex: tint).gradient)
+                                    .foregroundStyle(palette.category(tint).gradient)
                                     .cornerRadius(3)
                             }
                             if let goal {

@@ -236,6 +236,7 @@ struct PermissionExplainerView: View {
             .multilineTextAlignment(.center)
             .padding(24)
         }
+        .cristalScreen()
         .opacity(state == nil ? 0 : 1)
         // Not while the system's question is up: closing the sheet then would report « not decided yet ».
         .interactiveDismissDisabled(isWorking)

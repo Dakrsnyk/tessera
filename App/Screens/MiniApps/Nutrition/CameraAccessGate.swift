@@ -24,6 +24,9 @@ struct CameraAccessGate<Content: View>: View {
     @Environment(\.scenePhase) private var scenePhase
     @State private var status = AVCaptureDevice.authorizationStatus(for: .video)
     @State private var isAsking = false
+    @Environment(\.appStyle) private var style
+
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     var body: some View {
         Group {
@@ -47,8 +50,10 @@ struct CameraAccessGate<Content: View>: View {
         ScrollView {
             VStack(spacing: 22) {
                 Image(systemName: "camera.viewfinder")
-                    .font(.system(size: 52, weight: .regular))
+                    .font(.system(size: 40, weight: .regular))
                     .foregroundStyle(Color.accentColor)
+                    .frame(width: 88, height: 88)
+                    .background(palette.tintColor, in: Circle())
                     .accessibilityHidden(true)
                 Text(tr("Utiliser la caméra"))
                     .font(.title2.weight(.bold))
@@ -79,7 +84,7 @@ struct CameraAccessGate<Content: View>: View {
             }
             .padding(24)
         }
-        .background(Color(uiColor: .systemBackground))
+        .cristalScreen()
     }
 
     private func point(symbol: String, title: String, text: String) -> some View {
@@ -87,7 +92,8 @@ struct CameraAccessGate<Content: View>: View {
             Image(systemName: symbol)
                 .font(.title3)
                 .foregroundStyle(Color.accentColor)
-                .frame(width: 30)
+                .frame(width: 36, height: 36)
+                .background(palette.tintColor, in: Circle())
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 3) {
                 Text(title).font(.headline)
@@ -117,8 +123,10 @@ struct CameraAccessGate<Content: View>: View {
         ScrollView {
             VStack(spacing: 18) {
                 Image(systemName: "camera.fill")
-                    .font(.system(size: 48))
+                    .font(.system(size: 36))
                     .foregroundStyle(Color.secondary)
+                    .frame(width: 88, height: 88)
+                    .background(palette.tintColor, in: Circle())
                     .accessibilityHidden(true)
                 Text(tr("Caméra désactivée"))
                     .font(.title3.weight(.semibold))
@@ -147,6 +155,6 @@ struct CameraAccessGate<Content: View>: View {
             }
             .padding(24)
         }
-        .background(Color(uiColor: .systemBackground))
+        .cristalScreen()
     }
 }

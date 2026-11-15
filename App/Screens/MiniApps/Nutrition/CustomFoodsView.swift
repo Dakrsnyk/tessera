@@ -90,6 +90,8 @@ struct CustomFoodEditForm: View {
     @State private var fat: Double = 0
     @State private var loaded = false
     @State private var confirming = false
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     private var blocking: CustomFoodValidation.Problem? {
         if !serving.isFinite || serving <= 0 || serving > NutritionState.maxGrams { return .outOfRange }
@@ -115,7 +117,7 @@ struct CustomFoodEditForm: View {
                 Text(tr("Pour 100 g"))
             } footer: {
                 if let message = Self.message(for: blocking) ?? Self.message(for: warning) {
-                    Text(message).foregroundStyle(blocking == nil ? Color.secondary : Color.red)
+                    Text(message).foregroundStyle(blocking == nil ? Color.secondary : palette.strong(MiniStyle.alertHex))
                 }
             }
         }

@@ -17,6 +17,7 @@ struct ExerciseDemoView: View {
     @State private var startedAt = Date()
     @Environment(\.colorScheme) private var scheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         if let demo = ExerciseDemos.demo(for: exercise.id) {
@@ -60,7 +61,7 @@ struct ExerciseDemoView: View {
                     .accessibilityAddTraits(.isButton)
                     .accessibilityIdentifier("exercise-demo-canvas")
 
-                    PhaseStrip(labels: demo.labels, current: phase.label, accent: Color(hex: colorHex))
+                    PhaseStrip(labels: demo.labels, current: phase.label, accent: CristalPalette.of(style.id).category(colorHex))
                 }
             }
             if demo.views.count > 1 {
@@ -129,6 +130,7 @@ private struct PhaseStrip: View {
 private struct ViewPicker: View {
     let names: [String]
     @Binding var selection: Int
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         HStack(spacing: 6) {
@@ -144,7 +146,7 @@ private struct ViewPicker: View {
                         .padding(.horizontal, 11)
                         .padding(.vertical, 6)
                         .foregroundStyle(selection == index ? Color(uiColor: .systemBackground) : .primary)
-                        .background(selection == index ? Color.primary : Color.secondary.opacity(0.12), in: Capsule())
+                        .background(selection == index ? Color.primary : CristalPalette.of(style.id).wellColor, in: Capsule())
                 }
                 .buttonStyle(.pressable)
                 .accessibilityLabel(Text(tr("Vue \(name)")))
