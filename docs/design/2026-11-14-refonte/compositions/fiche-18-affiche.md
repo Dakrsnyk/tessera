@@ -1,0 +1,12 @@
+# Fiche 18 · Affiche : la typographie suisse
+
+1. **Nom et concept.** Une affiche de l'école suisse : du blanc, du noir, un rouge signal et de très grandes lettres alignées à gauche. La hiérarchie vient de la taille, pas des boîtes : aucune carte, rayon 0.
+2. **Palette.** Fond `#FFFFFF` · encre `#0A0A0A` · secondaire `#5C5C5C` · filet fort `#0A0A0A` (2 pt) · filet léger `#DADADA` (1 pt) · rouge signal `#E10600` · gris de case vide `#8A8A8A` (ajouté, pour les cases d'habitudes non faites).
+3. **Rôles.** Noir : tout le texte et tous les graphiques (aucune couleur de catégorie : une mini-app se reconnaît à son nom et à sa place). Rouge : l'action (boutons « commencer », « série faite »), « maintenant » (étiquette, barre épaisse au-dessus du bloc en cours), la barre de l'onglet actif, le trait de l'heure, la barre du jour dans les histogrammes. Gris `#5C5C5C` : texte secondaire.
+4. **Lettres.** Maquette : Inter 800 à 900 en minuscules, interlettrage très serré (−0,055 em), de 26 à 96 pt pour les chiffres ; Inter 500 pour le texte. iOS : SF Pro (ou Helvetica Neue), `.textCase(.lowercase)`, `.tracking` négatif, `.monospacedDigit()`.
+5. **Composants.** Grille asymétrique : colonne étroite d'étiquettes (66 pt) et colonne large ; une étiquette verticale (la date) le long du bord gauche ; un filet noir de 2 pt ouvre chaque mini-app. Boutons rectangulaires de 44 pt au moins : rouge plein (action) ou contour noir de 2 pt (pause, scanner en icône avec libellé d'accessibilité). Cases à cocher carrées. Onglets à plat sous un filet noir ; onglet actif = barre rouge + gras (jamais la couleur seule).
+6. **Cartes, bordures, ombres.** Aucune carte, aucune ombre, aucun arrondi. Filets : 2 pt noir (début de bloc), 1 pt `#DADADA` (lignes). Contrastes mesurés : encre sur blanc 19,8:1 ; secondaire sur blanc 6,7:1 ; rouge sur blanc et blanc sur rouge 4,97:1 ; secondaire sur gris de bloc de semaine 5,2:1 ; barres passées (noir à 45 %) 3,15:1 ; cases vides `#8A8A8A` 3,5:1.
+7. **Ambiance.** Imprimé, franc, sûr de lui : de très grands chiffres qui frôlent le bord, beaucoup d'air entre des filets, un seul accent.
+
+**Forces.** Lecture immédiate (le chiffre d'abord) et grande identité, très différente des 10 premiers styles.
+**Risques.** Les minuscules et le gras 900 fatiguent sur de longs textes ; sans couleur, les 5 mini-apps ne se distinguent que par leur nom (peu de repères pour un coup d'œil rapide) ; en Dynamic Type très grand, les chiffres de 96 pt doivent se réduire (`minimumScaleFactor`).

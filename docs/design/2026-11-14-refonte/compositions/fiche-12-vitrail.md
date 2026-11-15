@@ -1,0 +1,14 @@
+# Fiche 12 · Vitrail : la couleur en aplats
+
+1. **Nom et concept.** Chaque mini-app est une tuile de couleur pleine, posée à 6 points de ses voisines comme les pièces d'un vitrail, sans bordure ni ombre. On reconnaît la mini-app à sa couleur avant de lire.
+2. **Palette (HEX).** Fond `#FAFAF7` · encre `#16181D` · secondaire (fond clair seulement) `#5A6070` · filet de barre d'onglets `#E2E1D9`. Tuiles : Nutrition `#F6B25C`, Fitness `#F0706F`, Planning `#7FA6F8`, Habitudes `#8CCB6B`, Budget `#5CC7AE`, Top 3 / À ne pas oublier `#D9DCE3`, Pas `#6FD3E0`. Pastille « Maintenant » : `#FAFAF7`.
+3. **Rôle des couleurs.** Une couleur = une mini-app, toujours sur la tuile entière. Aucune couleur ailleurs. L'encre sert au texte, aux graphiques et au seul bouton noir de l'écran. Le secondaire ne sert que hors tuile (« MON QUOTIDIEN », onglets inactifs).
+4. **Lettres.** Maquette : Century Gothic gras (titres, grands chiffres, noms de tuile), Inter 500 à 700 (texte). iOS : Avenir Next Bold et SF Pro. Sur tuile, tout le texte est en encre (hiérarchie par la taille et la graisse, jamais par un gris).
+5. **Composants.** Bouton principal : pilule noire à texte `#FAFAF7`, 44 de haut, un seul par écran (« Commencer », « Série faite »). Bouton secondaire (Scanner, pause, repos) : pilule au contour d'encre de 2. Pastilles : capsules `#FAFAF7` à texte d'encre. Graphiques : anneaux, barres, jauges, courbe en encre sur la couleur. Habitude faite : disque d'encre avec coche. Séance dans la grille du Planning : bloc plein encre (le type se lit à la forme). Onglets : fond `#FAFAF7`, onglet actif = encre, libellé gras et barre de 4 au-dessus.
+6. **Cartes, bordures, ombres.** Tuiles à rayon 26 (32 pour la tuile dominante de E), marges de 6, 6 de gouttière, aucune bordure, aucune ombre. Contrastes mesurés (encre sur tuile) : Nutrition 9,68 · Fitness 6,13 · Planning 7,37 · Habitudes 9,19 · Budget 8,66 · Top 3 12,94 · Pas 10,21. Encre sur fond 16,98 · secondaire sur fond 6,01 · barres passées (encre à 70 %) sur ambre 4,88. Les pistes des anneaux et jauges (encre à 20 %) sont décoratives (1,5:1) : l'état est aussi écrit (« 68/140 g », « 3/5 », coche, texte barré).
+7. **Ambiance.** Joyeuse, graphique, ordonnée : une mosaïque lisible où la couleur classe l'information. Les couleurs ont la même clarté et la même saturation moyenne pour rester harmonieuses.
+
+**Forces :** reconnaissance immédiate par la couleur, contraste très fort partout, rien à ombrer ni à encadrer en SwiftUI.
+**Risques :** beaucoup de couleur pleine d'un coup (bariolé) si l'on ajoute des mini-apps ; le Planning, dont les types d'événements ne peuvent plus se distinguer par la teinte, repose sur le texte et la forme.
+
+Jetons ajustés : aucun changement de valeur ; ajout de la pastille `#FAFAF7` et du filet `#E2E1D9`. SwiftUI : `RoundedRectangle(cornerRadius: 26)` pleine, `Color.primary`-like encre fixe, `Capsule()` noire.

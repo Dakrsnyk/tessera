@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane — compositions d'accueil · 14 Sumi</title>
+<!-- Planche 14 : n'utilise que compo-base.css / compo-base.js + le CSS propre à Sumi (classes préfixées .y…).
+     Rendu : 1400 × 2010, échelle 2. Contrôles : ?check, ?w375. -->
+<link rel="stylesheet" href="compo-base.css">
+<style>
+/* ======================= 14 · SUMI : jetons ======================= */
+body.s14 { --board: #ECE8DF; --bink: #1C1B19; --bink2: #5E5A52;
+  --bg: #F4F1EA; --surface: #FBF9F4; --ink: #1C1B19; --ink2: #66625A; --rule: #D8D3C7; --primary: #1C1B19; --on-primary: #FFFFFF;
+  --track: #E1DCCF; --grid: #E4DFD3; --verm: #C7372F; --line: #9C978B;
+  --c-nut: #C96B2C; --c-fit: #8A4A6B; --c-pla: #3B5B8A; --c-hab: #6E8B3D; --c-bud: #2F6B5E; --c-pro: #66625A; --c-pas: #4F7C86;
+  --c-prot: #8A4A6B; --c-gluc: #9A7B1C; --c-lip: #3B5B8A;
+  --ev-cours: #3B5B8A; --ev-travail: #2F6B5E; --ev-rdv: #C96B2C; --ev-seance: #8A4A6B; --ev-tache: #66625A; --ev-fill: 14%; --ev-r: 1px; --ev-bar: 2px; --wk-now: var(--verm);
+  --ser: Garamond, "Palatino Linotype", Georgia, serif;
+  --sw: 1.6; --edge-h: 0px; --frame: #1C1B19; --lg-bg: #FBF9F4; --lg-rule: #D8D3C7; --lg-r: 2px; --bars-gap: 7px; --bar-r: 0px; --ring-cap: butt; --meter-h: 3px; --meter-r: 0px; }
+
+/* ---------- composants Sumi ---------- */
+.s14 .scr { padding: 0 20px 0 48px; }
+.s14 .scr::before { content: ""; position: absolute; left: 34px; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.s14 .yvd { position: absolute; left: 10px; top: 10px; writing-mode: vertical-rl; transform: rotate(180deg); font: 600 12px Inter, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
+.s14 .ytop { display: flex; justify-content: space-between; align-items: center; height: 42px; }
+.s14 .yk { font: 600 12px Inter, sans-serif; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); }
+.s14 .yava { width: 36px; height: 36px; border: 1px solid var(--ink); border-radius: 50%; display: grid; place-items: center; font: 400 19px var(--ser); }
+.s14 .yt { font: 400 42px/1 var(--ser); letter-spacing: -.01em; margin: 0 0 9px; }
+.s14 .yhr { border-top: 1px solid var(--ink); }
+.s14 .yh1 { border-top: 1px solid var(--rule); }
+.s14 .ysec { padding: 9px 0 10px; }
+.s14 .ylb { display: flex; align-items: center; gap: 7px; height: 24px; font: 600 13px Inter, sans-serif; color: var(--ink); letter-spacing: .01em; white-space: nowrap; }
+.s14 .ylb i[data-i] { font-size: 18px; color: var(--c); }
+.s14 .ylb i.go[data-i] { margin-left: auto; color: var(--ink2); font-size: 16px; }
+.s14 .ylb .pg { display: flex; gap: 4px; margin-left: 4px; }
+.s14 .ylb .pg u { width: 5px; height: 5px; border-radius: 50%; border: 1px solid var(--ink2); text-decoration: none; }
+.s14 .ylb .pg u.on { background: var(--ink); border-color: var(--ink); }
+.s14 .ygrid { display: grid; grid-template-columns: var(--cols, minmax(0,1fr) minmax(0,1fr)); }
+.s14 .ygrid > div { min-width: 0; }
+.s14 .ygrid > div + div { border-left: 1px solid var(--rule); padding-left: 14px; }
+.s14 .ygrid > div:not(:last-child) { padding-right: 14px; }
+.s14 .yn { font: 400 56px/.95 var(--ser); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.s14 .yn small { font: 400 24px var(--ser); color: var(--ink2); letter-spacing: 0; }
+.s14 .ym { font: 400 32px/1 var(--ser); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.s14 .ym small { font: 400 17px var(--ser); color: var(--ink2); }
+.s14 .ys { font: 400 12.5px/1.35 Inter, sans-serif; color: var(--ink2); }
+.s14 .ys.k { font-weight: 600; color: var(--ink); }
+.s14 .yh3 { font: 400 25px/1.1 var(--ser); }
+.s14 .yb { height: 44px; border-radius: 2px; background: var(--ink); color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 16px; font: 600 14.5px Inter, sans-serif; white-space: nowrap; letter-spacing: .01em; }
+.s14 .yb i { font-size: 16px; --sw: 2.2; }
+.s14 .yb2 { height: 44px; border-radius: 2px; border: 1px solid var(--ink); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0 14px; font: 600 14px Inter, sans-serif; white-space: nowrap; }
+.s14 .yb2 i { font-size: 17px; }
+.s14 .ylink { font: 600 12.5px Inter, sans-serif; color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; white-space: nowrap; }
+.s14 .ypill { font: 600 12px Inter, sans-serif; color: var(--ink); white-space: nowrap; }
+/* sceau */
+.s14 .yseal { flex: none; width: 66px; height: 66px; border-radius: 50%; background: var(--verm); color: #fff; display: grid; place-items: center; position: relative; font: 400 12px var(--ser); }
+.s14 .yseal::before { content: ""; position: absolute; inset: 4px; border-radius: 50%; border: 1px solid rgba(255,255,255,.7); }
+.s14 .yseal.lg { width: 84px; height: 84px; font-size: 15px; }
+.s14 .yseal.lg::before { inset: 5px; }
+.s14 .ynow { display: inline-flex; align-items: center; gap: 6px; font: 700 12px Inter, sans-serif; color: var(--verm); white-space: nowrap; }
+.s14 .ynow::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: var(--verm); box-shadow: inset 0 0 0 3px var(--bg), inset 0 0 0 4px var(--verm); }
+.s14 .ynow.s::before { box-shadow: inset 0 0 0 3px var(--surface), inset 0 0 0 4px var(--verm); }
+.s14 .ymac { display: grid; gap: 7px; }
+.s14 .ymac > div { display: grid; grid-template-columns: 1fr auto; row-gap: 3px; font: 400 12.5px Inter, sans-serif; }
+.s14 .ymac span { font-weight: 600; }
+.s14 .ymac em { font-style: normal; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.s14 .ymac .u-meter, .s14 .ymac [data-u] { grid-column: 1 / -1; }
+.s14 .u-hab { --hab: 22px; --hab-gap: 5px; }
+.s14 .u-hab > span { border-width: 1.5px; border-color: var(--line); }
+.s14 .u-hab > span.is-done { border-color: var(--c); }
+.s14 .u-dots { --dot: 18px; }
+.s14 .yseg { display: flex; gap: 5px; margin: 11px 0 12px; }
+.s14 .yseg span { flex: 1; height: 3px; background: var(--track); }
+.s14 .yseg span.f { background: var(--ink); }
+.s14 .yseg span.c { background: repeating-linear-gradient(90deg, var(--verm) 0 6px, transparent 6px 9px); height: 3px; }
+/* lignes */
+.s14 .yli { display: flex; align-items: center; gap: 11px; min-height: 48px; padding: 5px 0; border-top: 1px solid var(--rule); }
+.s14 .yli:first-child { border-top: 0; }
+.s14 .yli .tx { flex: 1; min-width: 0; }
+.s14 .yli b { display: block; font: 600 14.5px Inter, sans-serif; }
+.s14 .yli .ys { display: block; }
+.s14 .yli .r { margin-left: auto; font: 400 13px Inter, sans-serif; color: var(--ink2); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.s14 .yli > i[data-i] { font-size: 19px; color: var(--c); flex: none; }
+.s14 .yli.done b { text-decoration: line-through; color: var(--ink2); font-weight: 500; }
+.s14 .ychk { width: 24px; height: 24px; font-size: 24px !important; flex: none; color: var(--ink2) !important; }
+.s14 .ychk.ok { color: var(--c-hab) !important; }
+.s14 .ytm { width: 50px; font: 400 21px var(--ser); font-variant-numeric: tabular-nums; flex: none; }
+.s14 .yev { width: 2px; align-self: stretch; margin: 6px 0; background: var(--c); flex: none; }
+/* barre d'onglets */
+.s14 .tabbar { background: var(--surface); border-top: 1px solid var(--ink); height: 83px; }
+.s14 .ti { position: relative; padding-top: 9px; font: 500 11px Inter, sans-serif; color: var(--ink2); }
+.s14 .ti.on { color: var(--ink); font-weight: 700; }
+.s14 .ti.on::before { content: ""; position: absolute; top: -1px; left: 50%; width: 30px; margin-left: -15px; height: 3px; background: var(--ink); }
+.s14 .hi { background: var(--ink); }
+
+/* ---------- A · Équilibrée ---------- */
+.s14 .A .ywk { --wk-h: 62px; --wk-gutter: 0px; --wk-gap: 2px; --wk-head: 16px; margin: 6px 0 6px; }
+.s14 .A .ywk .gut, .s14 .A .ywk .u-week > span:first-child { display: none; }
+.s14 .A .ywk .u-week { grid-template-columns: var(--wk-cols); }
+
+/* ---------- B · Quotidien ---------- */
+.s14 .B .yli { min-height: 42px; padding: 3px 0; }
+.s14 .B .yhero { display: grid; grid-template-columns: 66px minmax(0,1fr); column-gap: 14px; align-items: start; padding: 12px 0 0; }
+.s14 .B .yhero .yh3 { font-size: 29px; }
+.s14 .B .yrest { height: 44px; border: 1px solid var(--rule); display: flex; align-items: center; gap: 8px; padding-left: 10px; border-radius: 2px; }
+.s14 .B .yrest small { display: block; font: 600 11px Inter, sans-serif; color: var(--ink2); line-height: 1; }
+.s14 .B .yrest b { display: block; font: 400 24px/1 var(--ser); font-variant-numeric: tabular-nums; }
+.s14 .B .yrest .pz { margin-left: auto; width: 44px; height: 44px; display: grid; place-items: center; font-size: 18px; --sw: 2.4; }
+
+/* ---------- C · Éditoriale ---------- */
+.s14 .C .yt { font-size: 56px; margin-bottom: 8px; }
+.s14 .ylead { font: 400 23px/1.28 var(--ser); margin: 2px 0 12px; text-wrap: pretty; }
+.s14 .ylead u { text-decoration-thickness: 1px; text-underline-offset: 4px; text-decoration-color: var(--verm); }
+.s14 .yrow3 { display: grid; grid-template-columns: 112px minmax(0,1fr); align-items: center; border-top: 1px solid var(--rule); padding: 7px 0; }
+.s14 .yrow3:first-of-type { border-top: 1px solid var(--ink); }
+.s14 .yrow3 .yn { font-size: 44px; }
+.s14 .yrow3 .yn small { font-size: 22px; }
+.s14 .yrow3 .ys b { display: flex; align-items: center; gap: 6px; font: 600 13px Inter, sans-serif; color: var(--ink); }
+.s14 .yrow3 .ys b i { font-size: 16px; color: var(--c); }
+.s14 .C .ywkc { --wk-h: 232px; --wk-gutter: 20px; --wk-head: 18px; --ev-fs: 11px; margin-top: 6px; }
+
+/* ---------- D · Compacte ---------- */
+.s14 .D .yt { font-size: 34px; margin-bottom: 8px; }
+.s14 .ytab > .yr { display: grid; grid-template-columns: 1fr auto; align-items: center; min-height: 50px; border-top: 1px solid var(--rule); padding: 4px 0; }
+.s14 .ytab > .yr:first-child { border-top: 1px solid var(--ink); }
+.s14 .yr .lb { display: flex; align-items: center; gap: 6px; font: 600 12.5px Inter, sans-serif; color: var(--ink2); }
+.s14 .yr .lb i { font-size: 15px; color: var(--c); }
+.s14 .yr .v { font: 400 31px/1.02 var(--ser); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.s14 .yr .v small { font: 400 15px var(--ser); color: var(--ink2); margin-left: 3px; }
+.s14 .yr .x { justify-self: end; }
+.s14 .yr .rg { width: 34px; height: 34px; }
+.s14 .yr .u-hab { --hab: 14px; --hab-gap: 4px; }
+.s14 .yr .u-hab > span { border-width: 1.5px; font-size: 9px; }
+.s14 .yr .u-hab i { --sw: 3; }
+.s14 .D .yhd { display: flex; align-items: baseline; justify-content: space-between; margin: 12px 0 2px; border-top: 1px solid var(--ink); padding-top: 9px; }
+.s14 .D .yhd span { font: 600 13px Inter, sans-serif; white-space: nowrap; }
+.s14 .D .yhd em { font: 400 12.5px Inter, sans-serif; font-style: normal; color: var(--ink2); }
+
+/* ---------- E · Premium ---------- */
+.s14 .E .yt { font-size: 40px; }
+.s14 .E .ydom { display: grid; grid-template-columns: 84px minmax(0,1fr); column-gap: 14px; padding: 13px 0 0; border-top: 1px solid var(--ink); }
+.s14 .E .ydom h2 { font: 400 27px/1.05 var(--ser); margin-top: 3px; white-space: nowrap; }
+.s14 .E .ydom .sub { grid-column: 1 / -1; margin-top: 8px; }
+.s14 .E .ydom .ys { margin-top: 3px; font-variant-numeric: tabular-nums; }
+.s14 .E .ytim { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr auto; align-items: end; margin-top: 8px; }
+.s14 .E .ytim small { display: block; font: 600 12px Inter, sans-serif; color: var(--ink2); }
+.s14 .E .ytim b { display: block; font: 400 66px/.95 var(--ser); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.s14 .E .ytim .pz { width: 52px; height: 52px; border: 1px solid var(--ink); border-radius: 2px; display: grid; place-items: center; font-size: 20px; --sw: 2.4; margin-bottom: 4px; }
+.s14 .E .yseg { grid-column: 1 / -1; margin: 10px 0 11px; }
+.s14 .E .yb { grid-column: 1 / -1; height: 48px; }
+</style>
+</head>
+<body class="s14">
+<main class="cb">
+  <header class="cb-head"><div class="num">14</div><div><h1>Sumi · cinq accueils complets</h1><p>L'encre et le vide utile : papier washi, encre noire, un sceau vermillon pour ce qui compte maintenant. Un filet vertical porte la date, des filets fins remplacent les cartes.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="cb-grid">
+
+  <!-- ============================== A · ÉQUILIBRÉE (13:20) ============================== -->
+  <figure class="cb-cell A" data-compo="A"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="yvd">Jeudi 12 novembre</div>
+    <div class="ytop"><span class="yk">Mon quotidien</span><span class="yava">M</span></div>
+    <div class="yt">Ta journée</div>
+    <section class="ysec yhr" data-c="nut">
+      <div class="ylb"><i data-i="fork"></i>Nutrition<span class="pg"><u class="on"></u><u></u><u></u></span><i class="go" data-i="chev"></i></div>
+      <div class="ygrid" style="--cols:minmax(0,1.05fr) minmax(0,1fr);margin-top:4px">
+        <div><div class="yn">1 122</div><div class="ys">kcal restantes</div><div data-u="meter" data-p=".49" style="margin:8px 0 5px"></div><div class="ys tn">1 078 / 2 200 kcal</div></div>
+        <div class="ymac">
+          <div data-c="prot"><span>Protéines</span><em>68/140 g</em><div data-u="meter" data-p=".486"></div></div>
+          <div data-c="gluc"><span>Glucides</span><em>121/250 g</em><div data-u="meter" data-p=".484"></div></div>
+          <div data-c="lip"><span>Lipides</span><em>34/70 g</em><div data-u="meter" data-p=".486"></div></div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px"><div class="yb2"><i data-i="scan"></i>Scanner</div><span class="ypill">2 repas</span></div>
+    </section>
+    <section class="yhr" style="padding:0">
+      <div class="ygrid" style="--cols:minmax(0,1.15fr) minmax(0,1fr)">
+        <div class="ysec" data-c="fit">
+          <div class="ylb"><i data-i="dumbbell"></i>Séance du jour</div>
+          <span class="ynow s">Maintenant</span>
+          <div class="yh3" style="margin-top:6px">Haut du corps</div>
+          <div class="ys">6 exercices · 18 séries</div>
+          <div class="yb" style="margin-top:9px"><i data-i="play"></i>Commencer</div>
+        </div>
+        <div class="ysec" data-c="hab">
+          <div class="ylb"><i data-i="repeat"></i>Habitudes<i class="go" data-i="chev"></i></div>
+          <div data-u="hab" data-m="journee" style="margin-top:5px"></div>
+          <div class="ym" style="margin-top:12px;font-size:40px">3<small>/5</small></div>
+          <div class="ys">faites aujourd'hui</div>
+          <div class="ys k" style="margin-top:5px">Série de 12 jours</div>
+        </div>
+      </div>
+    </section>
+    <section class="yhr" style="padding:0">
+      <div class="ygrid" style="--cols:minmax(0,1fr) minmax(0,1.1fr)">
+        <div class="ysec" data-c="pla">
+          <div class="ylb"><i data-i="calendar"></i>Planning<i class="go" data-i="chev"></i></div>
+          <div class="ywk" data-u="week" data-o='{"labels":"none","now":"13:20","every":2}'></div>
+          <span class="ylink">Toute la semaine</span>
+        </div>
+        <div class="ysec" data-c="bud">
+          <div class="ylb"><i data-i="wallet"></i>Budget<i class="go" data-i="chev"></i></div>
+          <div class="ym" style="margin-top:4px;font-size:36px">21,68 $</div>
+          <div class="ys">à dépenser par jour d'ici la fin du mois</div>
+          <div data-u="spark" data-m="journee" data-w="132" data-h="28" style="margin-top:6px"></div>
+        </div>
+      </div>
+    </section>
+    <section class="yhr ysec" data-c="pro">
+      <div class="ylb"><i data-i="target"></i>Top 3<span class="ys" style="margin-left:4px">1 sur 3</span></div>
+      <div class="yli done"><i class="ychk ok" data-i="checkc"></i><div class="tx"><b>Rendre le rapport de marketing</b></div></div>
+      <div class="yli"><i class="ychk" data-i="circle"></i><div class="tx"><b>Appeler la banque</b></div></div>
+    </section>
+  </div></div></div></figure>
+
+  <!-- ============================== B · QUOTIDIEN (19:05) ============================== -->
+  <figure class="cb-cell B" data-compo="B"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="yvd">Jeudi 12 novembre</div>
+    <div class="ytop"><span class="yk">Mon quotidien</span><span class="yava">M</span></div>
+    <div class="yt">Ta soirée</div>
+    <section class="yhr" data-c="fit">
+      <div class="yhero">
+        <div class="yseal">Maintenant</div>
+        <div><div class="ys k" style="letter-spacing:.02em">Séance en cours</div><div class="yh3">Développé couché</div><div class="ys" style="margin-top:2px">Haut du corps · Série 2/4 · 10 × 60 kg</div></div>
+      </div>
+      <div class="yseg"><span class="f"></span><span class="c"></span><span></span><span></span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 138px;gap:10px"><div class="yb"><i data-i="check"></i>Série faite</div>
+        <div class="yrest"><div><small>Repos</small><b>0:45</b></div><span class="pz"><i data-i="pause"></i></span></div></div>
+    </section>
+    <section class="yhr" style="margin-top:12px;padding:8px 0 0">
+      <div class="ylb" style="color:var(--ink2);font-weight:600">Mes mini-apps<span class="ylink" style="margin-left:auto">Tout voir</span></div>
+      <div class="yli" data-c="nut"><i data-i="fork"></i><div class="tx"><b>Nutrition</b></div><span class="r">1 520 kcal aujourd'hui</span></div>
+      <div class="yli" data-c="fit"><i data-i="dumbbell"></i><div class="tx"><b>Fitness</b></div><span class="r">Séance en cours</span></div>
+      <div class="yli" data-c="pla"><i data-i="calendar"></i><div class="tx"><b>Planning</b></div><span class="r">3 tâches aujourd'hui</span></div>
+      <div class="yli" data-c="bud"><i data-i="wallet"></i><div class="tx"><b>Finances</b></div><span class="r">412 $ restants</span></div>
+    </section>
+    <section class="yhr" style="margin-top:12px;padding:10px 0 0">
+      <div class="ygrid" style="--cols:minmax(0,1fr) minmax(0,1fr)">
+        <div data-c="nut"><div class="ys k">Ce soir · Nutrition</div><div class="ym" style="margin-top:4px;font-size:44px">680</div><div class="ys">kcal restantes</div></div>
+        <div data-c="hab"><div class="ys k">Habitudes</div><div class="ym" style="margin-top:4px;font-size:44px">4<small>/5</small></div><div data-u="hab" data-m="soiree" style="--hab:16px;--hab-gap:4px;margin:5px 0 4px"></div><div class="ys">Série de 12 jours</div></div>
+      </div>
+    </section>
+    <section class="yhr" style="margin-top:12px;padding:10px 0 0">
+      <div class="ygrid">
+        <div data-c="bud"><div class="ys k">Budget</div><div class="ym" style="margin-top:3px">21,68 $</div><div class="ys">par jour · dépensé aujourd'hui : 14,50 $</div></div>
+        <div data-c="pla"><div class="ys k">À ne pas oublier</div><div class="yh3" style="margin-top:4px;font-size:21px">Facture Internet</div><div class="ys">Demain · 45 $</div></div>
+      </div>
+    </section>
+  </div></div></div></figure>
+
+  <!-- ============================== C · ÉDITORIALE (08:10) ============================== -->
+  <figure class="cb-cell C" data-compo="C"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="yvd">Jeudi 12 novembre</div>
+    <div class="ytop"><span class="yk">Mon quotidien</span><span class="yava">M</span></div>
+    <div class="yt">Ta matinée</div>
+    <p class="ylead">Comptabilité à <u>09:00</u>, séance à <u>18:30</u>, et <u>1 780 kcal</u> devant toi.</p>
+    <div data-c="nut" class="yrow3"><div class="yn">1 780</div><div class="ys"><b><i data-i="fork"></i>Nutrition</b>kcal restantes</div></div>
+    <div data-c="hab" class="yrow3"><div class="yn">1<small>/5</small></div><div class="ys"><b><i data-i="repeat"></i>Habitudes</b>Série de 12 jours</div></div>
+    <div data-c="fit" class="yrow3"><div class="yn">2<small>/4</small></div><div class="ys"><b><i data-i="dumbbell"></i>Fitness</b>Encore 2 séances</div></div>
+    <section class="yhr ysec" data-c="pla" style="padding-bottom:6px">
+      <div class="ylb"><i data-i="calendar"></i>Planning<span class="ylink" style="margin-left:auto">Toute la semaine</span></div>
+      <div class="ywkc" data-u="week" data-o='{"focus":3,"fw":6,"labels":"focus","now":"08:10","to":19.5}'></div>
+    </section>
+    <section class="yhr" data-c="bud" style="display:flex;align-items:center;gap:12px;padding:8px 0">
+      <i data-i="wallet" style="font-size:19px;color:var(--c)"></i><div class="ym" style="font-size:34px">22,45 $</div><div class="ys">à dépenser par jour<br>d'ici la fin du mois</div>
+    </section>
+  </div></div></div></figure>
+
+  <!-- ============================== D · COMPACTE (13:20) ============================== -->
+  <figure class="cb-cell D" data-compo="D"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="yvd">Jeudi 12 novembre</div>
+    <div class="ytop"><span class="yk">Mon quotidien</span><span class="yava">M</span></div>
+    <div class="yt">Ta journée</div>
+    <div class="ytab">
+      <div class="yr" data-c="nut"><div><span class="lb"><i data-i="fork"></i>Kcal restantes</span><span class="v">1 122<small>kcal</small></span></div><div class="x rg" data-u="ring" data-p=".49" data-sw="9"></div></div>
+      <div class="yr" data-c="hab"><div><span class="lb"><i data-i="repeat"></i>Habitudes</span><span class="v">3<small>/5</small></span></div><div class="x" data-u="hab" data-m="journee"></div></div>
+      <div class="yr" data-c="bud"><div><span class="lb"><i data-i="wallet"></i>Par jour</span><span class="v">21,68 $</span></div><div class="x" data-u="spark" data-m="journee" data-w="96" data-h="30"></div></div>
+      <div class="yr" data-c="pas"><div><span class="lb"><i data-i="steps"></i>Pas</span><span class="v">5 480<small>/ 8 000</small></span></div><div class="x" style="width:72px" data-u="meter" data-p=".685"></div></div>
+    </div>
+    <div class="yhd"><span>Séance du jour</span><em>2/4 cette semaine</em></div>
+    <div class="yli" data-c="fit" style="border:0;padding-right:0"><i data-i="dumbbell"></i><div class="tx"><b>Haut du corps</b><span class="ys">6 exercices · 18 séries</span></div><div class="yb" style="padding:0 12px"><i data-i="play"></i>Commencer</div></div>
+    <div class="yhd"><span>Planning du jour</span><span class="ylink">Toute la semaine</span></div>
+    <div class="yli" data-ev="rdv" style="border:0"><span class="ytm">14:00</span><span class="yev"></span><div class="tx"><b>Réunion projet</b><span class="ys">Local 3.12</span></div></div>
+    <div class="yli" data-ev="rdv"><span class="ytm">16:30</span><span class="yev"></span><div class="tx"><b>Dentiste</b></div></div>
+    <div class="yli" data-ev="seance"><span class="ytm">18:30</span><span class="yev"></span><div class="tx"><b>Séance Haut du corps</b></div></div>
+    <div class="yhd"><span>Top 3 <em style="margin-left:6px">1 sur 3</em></span><span class="ylink">Ajouter une tâche</span></div>
+    <div class="yli done" style="border:0"><i class="ychk ok" data-i="checkc"></i><div class="tx"><b>Rendre le rapport de marketing</b></div></div>
+    <div class="yli"><i class="ychk" data-i="circle"></i><div class="tx"><b>Appeler la banque</b></div></div>
+  </div></div></div></figure>
+
+  <!-- ============================== E · PREMIUM (19:05) ============================== -->
+  <figure class="cb-cell E" data-compo="E"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="yvd">Jeudi 12 novembre</div>
+    <div class="ytop"><span class="yk">Mon quotidien</span><span class="yava">M</span></div>
+    <div class="yt">Ta soirée</div>
+    <section class="ydom" data-c="fit">
+      <div class="yseal lg">Maintenant</div>
+      <div><div class="ys k">Séance en cours</div><h2>Développé couché</h2></div>
+      <div class="ys sub">Haut du corps · Série 2/4 · 10 × 60 kg</div>
+      <div class="ytim"><div><small>Repos</small><b>0:45</b></div><span class="pz"><i data-i="pause"></i></span></div>
+      <div class="yseg"><span class="f"></span><span class="c"></span><span></span><span></span></div>
+      <div class="yb"><i data-i="check"></i>Série faite</div>
+    </section>
+    <section class="yhr" style="margin-top:12px;padding-top:9px">
+      <div class="ygrid">
+        <div data-c="nut"><div class="ylb"><i data-i="fork"></i>Nutrition</div><div class="ym" style="font-size:42px">680</div><div class="ys">kcal restantes</div><div data-u="meter" data-p=".69" style="margin:6px 0 4px"></div><div class="ys tn">1 520 / 2 200 kcal</div></div>
+        <div data-c="hab"><div class="ylb"><i data-i="repeat"></i>Habitudes</div><div class="ym" style="font-size:42px">4<small>/5</small></div><div class="ys">Série de 12 jours</div><div data-u="hab" data-m="soiree" style="--hab:16px;--hab-gap:4px;margin-top:8px"></div></div>
+      </div>
+    </section>
+    <section class="yhr" style="margin-top:11px">
+      <div class="yli" data-c="bud"><i data-i="wallet"></i><div class="tx"><b>21,68 $ par jour</b><span class="ys">Dépensé aujourd'hui : 14,50 $</span></div></div>
+      <div class="yli" data-c="pas"><i data-i="steps"></i><div class="tx"><b>7 360 / 8 000 pas</b></div><div style="width:76px" data-u="meter" data-p=".92"></div></div>
+      <div class="yli" data-c="pro"><i data-i="target"></i><div class="tx"><b>Top 3 : 2 sur 3</b><span class="ys">Reste : Réviser le chapitre 4</span></div></div>
+      <div class="yli" data-c="pla"><i data-i="calendar"></i><div class="tx"><b>Demain · 10:00</b><span class="ys">Statistiques</span></div></div>
+    </section>
+  </div></div></div></figure>
+
+  <!-- ============================== Légende ============================== -->
+  <aside class="cb-legend" id="legend"></aside>
+  </div>
+</main>
+
+<script src="compo-base.js"></script>
+<script>
+Compo.legend(document.getElementById('legend'), {
+  name: '14 · Sumi',
+  intro: "Papier #F4F1EA, encre #1C1B19, un sceau vermillon #C7372F réservé à « Maintenant » et à l'état en cours. Un filet vertical porte la date ; des filets fins remplacent les cartes ; rayon 2 ; aucune ombre. Chaque état est aussi écrit.",
+  rows: [
+    { k: 'A', w: 'Les cinq mini-apps entre filets, en colonnes de largeurs inégales ; Top 3 suit.',
+      E: ['Nutrition, Séance « Maintenant », Habitudes, Planning demi-largeur, Budget'] },
+    { k: 'B', w: "Le sceau « Maintenant » et la séance, puis un index des mini-apps, puis deux chiffres du soir.",
+      E: ['Séance en cours : série, repos 0:45, pause, « Série faite »'], A: ['« Maintenant » en tête ; index « Mes mini-apps » ; sommaire du soir'] },
+    { k: 'C', w: "Une phrase, trois grands chiffres en pile, puis la semaine avec le jeudi élargi.",
+      E: ['Grille du Planning, Budget'], A: ['Pile de grands chiffres (sommaire) ; jeudi élargi'], D: ['Phrase du jour composée à partir des données'] },
+    { k: 'D', w: "Un tableau à filets : quatre lignes de chiffres, puis trois listes.",
+      E: ['Séance du jour « Commencer », Pas, Top 3'], A: ['Chiffres courts ; liste des prochains événements (14:00)'] },
+    { k: 'E', w: 'Un grand sceau et un minuteur de 66 points, puis deux chiffres et deux lignes.',
+      E: ['Séance en cours, Nutrition, Habitudes, Budget, Pas'], A: ['Sceau dominant ; liste tertiaire'] },
+  ],
+  foot: 'Texte ≥ 4,5:1 · icônes et graphiques ≥ 3:1 · zones tactiles ≥ 44 points · texte ≥ 11 points.',
+});
+document.querySelectorAll('[data-x="lab"]').forEach((el) => { el.outerHTML = U.barsLab(CAL7.lab); });
+Compo.init();
+</script>
+</body>
+</html>
