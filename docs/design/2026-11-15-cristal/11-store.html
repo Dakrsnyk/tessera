@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — 11 · Le Store, même page, habillage Cristal</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* ---- planche 11 : préfixe s11. Le Store garde sa mise en page (ExploreView) : seuls le fond, les lettres,
+     la recherche, les puces, les panneaux et la barre d'onglets passent en Cristal. ---- */
+  .s11 .scr { padding: 0; }
+  /* barre de navigation quand la page a défilé : le fond de l'écran repris tel quel, qui s'efface vers le bas */
+  .s11-nav { position: absolute; z-index: 7; left: 0; right: 0; top: 0; height: 112px; pointer-events: none;
+    background: var(--wash), linear-gradient(var(--bg), var(--bg)); background-size: 393px 852px; background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 88px, transparent 110px); mask-image: linear-gradient(to bottom, #000 0, #000 88px, transparent 110px); }
+  .s11-nav b { position: absolute; left: 0; right: 0; top: 58px; text-align: center; font-size: 17px; font-weight: 700; letter-spacing: -.01em; line-height: 22px; }
+  .s11-title { font-size: 34px; font-weight: 700; letter-spacing: -.025em; line-height: 40px; padding: 0 20px; }
+  .s11-search { margin: 10px 20px 0; height: 44px; border-radius: 22px; display: flex; align-items: center; gap: 9px; padding: 0 16px; color: var(--ink2); font-size: 16px; }
+  .s11-search i { font-size: 18px; color: var(--ink); }
+  .s11-chips { display: flex; gap: 8px; padding: 0 0 0 20px; overflow: hidden; white-space: nowrap; }
+  .s11-chip { flex: none; height: 36px; padding: 0 14px; border-radius: 18px; display: inline-flex; align-items: center; gap: 5px; font-size: 15px; font-weight: 550; color: var(--ink);
+    background: var(--panel); border: 1px solid rgba(255,255,255,.85); box-shadow: inset 0 1px 0 #fff, 0 4px 12px rgb(var(--sh) / .06); }
+  .s11-chip.on { background: var(--primary); color: #fff; border-color: transparent; box-shadow: none; }
+  .s11-chip i { font-size: 14px; --sw: 2.2; }
+  /* en-tête d'allée : filet de la couleur de l'allée, carré plein, titre, phrase, « Tout voir » */
+  .s11-ah { padding: 0 20px; }
+  .s11-ah > u { display: block; height: 2px; margin-bottom: 12px; }
+  .s11-ah .r { display: flex; align-items: center; gap: 12px; }
+  .s11-ah .sq { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; color: #fff; font-size: 20px; --sw: 2.1; flex: none; }
+  .s11-ah .tx { flex: 1; min-width: 0; }
+  .s11-ah b { display: block; font-size: 22px; font-weight: 700; letter-spacing: -.02em; line-height: 27px; }
+  .s11-ah p { font-size: 13px; line-height: 17.5px; color: var(--ink2); margin-top: 2px; }
+  .s11-all { flex: none; display: inline-flex; align-items: center; gap: 2px; font-size: 15px; font-weight: 650; color: var(--primary); white-space: nowrap; }
+  .s11-all i { font-size: 13px; --sw: 2.8; }
+  .s11-sh { display: flex; align-items: center; justify-content: space-between; padding: 0 20px; font-size: 15px; font-weight: 650; color: var(--ink2); line-height: 20px; }
+  .s11-row { display: flex; gap: 14px; padding: 2px 0 2px 20px; overflow: hidden; align-items: flex-start; }
+  .s11-card { flex: none; }
+  .s11-card img { display: block; }
+  .s11-card img.cr { box-shadow: 0 1px 2px rgb(var(--sh) / .08), 0 6px 16px rgb(var(--sh) / .10); }
+  .s11-card img.wimg { filter: drop-shadow(0 1px 2px rgb(var(--sh) / .10)) drop-shadow(0 6px 12px rgb(var(--sh) / .10)); }
+  .s11-nm { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .s11-nm .tx { min-width: 0; flex: 1; }
+  .s11-nm b { display: block; font-size: 15px; font-weight: 650; line-height: 20px; white-space: nowrap; overflow: hidden; }
+  .s11-nm .s { display: block; font-size: 12px; line-height: 16px; color: var(--ink2); white-space: nowrap; overflow: hidden; }
+  .s11-tap { flex: none; height: 17px; padding: 0 5px; border-radius: 9px; display: inline-flex; align-items: center; background: var(--tint2); color: var(--primary); font-size: 11px; --sw: 2.4; }
+  .s11-hrt { flex: none; width: 34px; height: 34px; display: grid; place-items: center; font-size: 19px; color: var(--ink2); --sw: 2; align-self: flex-start; margin-top: -6px; }
+  /* écran d'accueil de la semaine */
+  .s11-hero { margin: 0 20px; height: 360px; border-radius: 30px; padding: 20px; display: flex; align-items: flex-end; gap: 14px; background-size: cover; background-position: center; color: #fff; overflow: hidden; }
+  .s11-hero .l { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+  .s11-hero .k { font-size: 12px; font-weight: 700; letter-spacing: .09em; line-height: 16px; opacity: .85; }
+  .s11-hero b { font-size: 30px; font-weight: 700; letter-spacing: -.02em; line-height: 36px; }
+  .s11-hero p { font-size: 15px; line-height: 20px; opacity: .88; }
+  .s11-hero .sp { flex: 1; }
+  .s11-hero small { font-size: 12px; font-weight: 550; line-height: 16px; opacity: .85; }
+  .s11-hero .inst { margin-top: 4px; padding: 9px 18px; border-radius: 999px; background: #fff; color: #000; font-size: 15px; font-weight: 700; line-height: 20px; }
+  .s11-hero .shot { width: 146px; height: 317px; border-radius: 18px; object-fit: cover; flex: none; box-shadow: 0 0 0 1px rgba(255,255,255,.3), 0 10px 18px rgba(0,0,0,.35); }
+  /* style de la semaine */
+  .s11-week { margin: 16px 20px 0; padding: 16px; }
+  .s11-week .ws { display: flex; gap: 10px; justify-content: center; }
+  .s11-week .ws img { width: 88px; height: 88px; border-radius: 20px; display: block; }
+  .s11-week .wr { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+  .s11-week .k { font-size: 12px; font-weight: 700; letter-spacing: .09em; line-height: 16px; color: var(--primary); }
+  .s11-week b { display: block; font-size: 22px; font-weight: 700; letter-spacing: -.02em; line-height: 28px; margin-top: 2px; }
+  .s11-week p { font-size: 15px; line-height: 20px; color: var(--ink2); margin-top: 2px; }
+  .s11-week .go { font-size: 14px; --sw: 2.8; }
+  /* écrans d'accueil */
+  .s11-shot { width: 150px; height: 326px; border-radius: 18px; object-fit: cover; box-shadow: 0 0 0 1px rgba(11,18,32,.08), 0 5px 10px rgba(0,0,0,.14); }
+  /* fonds d'écran */
+  .s11-wp { width: 112px; }
+  .s11-wp img { width: 112px; outline: 1px solid rgba(11,18,32,.12); outline-offset: -1px; }
+  .s11-wp span { display: block; margin-top: 6px; font-size: 12px; font-weight: 550; line-height: 16px; color: var(--ink2); white-space: nowrap; }
+  /* écran verrouillé */
+  .s11-lk { height: 150px; border-radius: 22px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; }
+  .s11-lk b { font-size: 34px; font-weight: 600; line-height: 40px; color: rgba(255,255,255,.92); letter-spacing: -.01em; }
+  /* packs */
+  .s11-pk { width: 250px; }
+  .s11-pk .ln { display: flex; align-items: center; gap: 10px; margin-top: 12px; }
+  .s11-pk .ln img { width: 32px; height: 32px; border-radius: 9px; }
+  .s11-pk .ln .tx { flex: 1; min-width: 0; }
+  .s11-pk .ln b { display: block; font-size: 15px; font-weight: 650; line-height: 20px; white-space: nowrap; overflow: hidden; }
+  .s11-pk .ln .s { display: block; font-size: 12px; line-height: 16px; color: var(--ink2); white-space: nowrap; overflow: hidden; }
+  .s11-get { flex: none; padding: 6px 14px; border-radius: 999px; font-size: 15px; font-weight: 700; line-height: 20px; color: var(--primary); background: color-mix(in srgb, var(--primary) 12%, transparent); }
+  .s11-pk > p { margin-top: 12px; font-size: 12px; line-height: 16px; color: var(--ink2); }
+  /* styles */
+  .s11-sg { display: grid; grid-template-rows: 104px 104px; grid-auto-flow: column; grid-auto-columns: 76px; gap: 14px 12px; padding: 0 0 0 20px; overflow: hidden; }
+  .s11-sw { text-align: center; }
+  .s11-sw u { width: 76px; height: 76px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; box-shadow: inset 0 0 0 1px rgba(11,18,32,.08); }
+  .s11-sw u em { font-style: normal; font-size: 24px; line-height: 28px; }
+  .s11-sw u i { display: block; width: 26px; height: 4px; border-radius: 2px; }
+  .s11-sw span { display: block; margin-top: 6px; font-size: 12px; line-height: 16px; color: var(--ink2); white-space: nowrap; }
+  /* fiche d'un écran d'accueil */
+  .s11-sheet { top: 58px; padding: 8px 20px 0; overflow: hidden; }
+  .s11-sbfix .sb { z-index: 50; }
+  .s11-snav { display: flex; align-items: center; height: 44px; }
+  .s11-snav a { width: 80px; font-size: 16px; font-weight: 550; color: var(--primary); }
+  .s11-snav b { flex: 1; text-align: center; font-size: 17px; font-weight: 700; }
+  .s11-snav span { width: 80px; display: flex; justify-content: flex-end; font-size: 22px; color: var(--ink); --sw: 2; }
+  .s11-buy { position: absolute; z-index: 45; left: 0; right: 0; bottom: 0; padding: 10px 20px 34px; background: color-mix(in srgb, var(--sheet) 96%, transparent); }
+  /* comparaison */
+  .s11-cmp { display: flex; gap: 22px; margin: 9px; }
+  .s11-cmp figure { width: 150px; }
+  .s11-cmp img { width: 150px; height: 326px; display: block; border-radius: 18px; box-shadow: 0 0 0 1px rgba(11,18,32,.10), 0 8px 18px rgba(11,18,32,.14); }
+  .s11-cmp figcaption { font: 600 12px/1.3 Inter, sans-serif; color: var(--bink2); margin-top: 8px; }
+  .s11-n ul { margin: 6px 0 0 18px; } .s11-n li { margin-top: 5px; font-size: 13px; }
+</style>
+</head>
+<body style="--bw:2316px">
+<main class="bd">
+  <header class="bd-head"><div class="num">11</div><div><h1>Le Store : même page, habillage Cristal</h1>
+    <p style="max-width:1300px">Demande du 2026-11-15 : garder le fonctionnement et l'affichage du Store tels qu'ils sont, et n'adapter que le style. La page reste celle de l'app : mêmes huit allées dans le même ordre, mêmes en-têtes colorés, mêmes cartes aux mêmes tailles, mêmes rangées qui défilent. Les vignettes (packs, combinés, fonds d'écran, widgets) sont reprises des captures de l'app du 31 octobre. Thème Saphir.</p></div>
+    <span class="badge">Maquette · vignettes reprises de l'app</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Haut de page</div>
+      <div class="phone t-saphir s11" id="s1" data-time="9:41" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Titre, recherche, allées, « À la une »</h4><p>Comme aujourd'hui : grand titre, recherche, puces qui mènent à chaque allée, puis l'en-tête de la première allée et la collection de saison quand il y en a une (ici Halloween, reprise de la capture).</p>
+        <ul><li><span class="tag e">Existe</span><span>Tout l'écran, à la même place</span></li>
+        <li><span class="tag a">À adapter</span><span>Fond clair à nappes, recherche en verre, puces en panneau, barre d'onglets Cristal</span></li></ul></div></div>
+    <div class="col"><div class="nm">2 · « À la une », suite</div>
+      <div class="phone t-saphir s11" id="s2" data-time="9:41" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Écran, style et widgets de la semaine</h4><p>La grande carte « écran d'accueil de la semaine » avec son bouton « Installer », la carte « Style de la semaine », puis la rangée « À découvrir cette semaine ». Rien ne bouge.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les trois blocs, leurs textes, leurs tailles</span></li>
+        <li><span class="tag a">À adapter</span><span>La carte du style devient un panneau Cristal ; titre « Store » sur le fond qui s'efface</span></li></ul></div></div>
+    <div class="col"><div class="nm">3 · Écrans d'accueil</div>
+      <div class="phone t-saphir s11" id="s3" data-time="9:41" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Une rangée d'écrans complets</h4><p>Cartes de 150 points en forme d'iPhone, nom, mots-clés, cœur pour les favoris, « Tout voir ». Puis l'allée « Fonds d'écran » et ses filtres.</p>
+        <ul><li><span class="tag e">Existe</span><span>Cartes, favoris, « Tout voir », filtres des fonds d'écran</span></li>
+        <li><span class="tag a">À adapter</span><span>Lettres et couleur d'action seulement</span></li></ul></div></div>
+    <div class="col"><div class="nm">4 · Fonds d'écran</div>
+      <div class="phone t-saphir s11" id="s4" data-time="9:41" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Une rangée par ambiance</h4><p>Mer et vagues, Noir et blanc, Dégradés doux, puis Nuit et orage, Forêt et brume, Cosmos plus bas. Vignettes en forme d'écran, « Tout voir » par ambiance.</p>
+        <ul><li><span class="tag e">Existe</span><span>Toutes les rangées et leurs vignettes</span></li>
+        <li><span class="tag a">À adapter</span><span>Lettres et couleur d'action seulement</span></li></ul></div></div>
+    <div class="col"><div class="nm">5 · Widgets</div>
+      <div class="phone t-saphir s11" id="s5" data-time="9:41" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Incontournables et écran verrouillé</h4><p>Deux rangées : les widgets à essayer d'abord (le premier en taille moyenne), puis ceux de l'écran verrouillé sur leur fond dégradé avec l'heure. Un toucher ouvre le Studio, comme aujourd'hui.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les deux rangées, le badge « interactif »</span></li>
+        <li><span class="tag a">À adapter</span><span>Badge « interactif » dans la couleur d'action</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">6 · Combinés</div>
+      <div class="phone t-saphir s11" id="s6" data-time="9:41" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Moyens, puis grands</h4><p>Une rangée de combinés moyens (140 points de haut), une rangée de grands (250 points), le nom et « 2 widgets · Fitness » dessous, « Tout voir » en haut.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les deux rangées et « Tout voir »</span></li>
+        <li><span class="tag a">À adapter</span><span>Lettres et couleur d'action seulement</span></li></ul></div></div>
+    <div class="col"><div class="nm">7 · Packs et packs thématiques</div>
+      <div class="phone t-saphir s11" id="s7" data-time="9:41" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>L'éventail de trois widgets</h4><p>Chaque pack garde son éventail sur sa couleur, son icône, son style, sa phrase et le bouton « Obtenir ». Les packs thématiques suivent, avec leurs écrans d'accueil assortis.</p>
+        <ul><li><span class="tag e">Existe</span><span>Cartes de pack, « Obtenir », feuille du pack au toucher</span></li>
+        <li><span class="tag a">À adapter</span><span>« Obtenir » dans la couleur d'action de la déclinaison</span></li></ul></div></div>
+    <div class="col"><div class="nm">8 · Styles, fin de page</div>
+      <div class="phone t-saphir s11" id="s8" data-time="9:41" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Les 57 styles sur deux lignes</h4><p>Les écrans assortis aux packs thématiques, puis l'allée « Styles » : une pastille « Aa » par style, dans sa police et ses couleurs. Toucher un style filtre le Store, comme aujourd'hui.</p>
+        <ul><li><span class="tag e">Existe</span><span>Grille de styles, filtre par style</span></li>
+        <li><span class="tag a">À adapter</span><span>Lettres seulement</span></li></ul></div></div>
+    <div class="col"><div class="nm">9 · Fiche d'un écran d'accueil</div>
+      <div class="phone t-saphir s11 s11-sbfix" id="s9" data-time="9:41" data-tab="none"><div class="scr"></div></div>
+      <div class="cap"><h4>Ce qu'un toucher ouvre</h4><p>La feuille actuelle : « Fermer », le nom, le cœur, l'aperçu en grand, le choix Écran d'accueil / Écran verrouillé, et le bouton fixe en bas. Plus bas, sans changement : la phrase, les mots-clés, « 5 widgets inclus », le fond d'écran à enregistrer.</p>
+        <ul><li><span class="tag e">Existe</span><span>Toute la feuille ; celle d'un pack suit le même modèle</span></li>
+        <li><span class="tag a">À adapter</span><span>Feuille opaque Cristal, bouton plein en capsule</span></li></ul></div></div>
+    <div class="col"><div class="nm">Ce qui change, ce qui reste</div><div class="note s11-n" style="margin:9px">
+      <h4>Ce qui change (le style)</h4>
+      <ul><li>Le fond : clair, avec les deux nappes de la déclinaison choisie.</li>
+        <li>Les lettres : mêmes tailles et graisses que sur le reste de Cristal.</li>
+        <li>La recherche en verre, les puces et la carte « Style de la semaine » en panneau.</li>
+        <li>La barre d'onglets en capsule de verre ; « Tout voir », « Obtenir » et le badge « interactif » dans la couleur d'action.</li></ul>
+      <h4 style="margin-top:14px">Ce qui reste (tout le reste)</h4>
+      <ul><li>Les huit allées, leur ordre, leurs couleurs, leur filet et leur carré d'icône.</li>
+        <li>Chaque carte à sa taille : écran 150, fond d'écran 112, pack 250, combinés 140 et 250, style 76.</li>
+        <li>La recherche, les filtres, les favoris, les feuilles, le Studio au toucher.</li>
+        <li>Le badge et le cadenas Premium, en or, aux mêmes endroits (absents ici : captures prises avec Premium débloqué).</li>
+        <li>Aucun prix dans le Store.</li></ul></div></div>
+  </div>
+
+  <h2 class="sec">Pour comparer : le Store aujourd'hui</h2>
+  <p class="secp">Captures de l'app du 31 octobre, aux mêmes endroits de la page que les écrans 1, 2, 4, 6, 7 et 8. La dernière a été prise pendant une transition, d'où son voile blanc.</p>
+  <div class="s11-cmp">
+    <figure><img data-w="setups" alt=""><figcaption>Écran 1 · haut de page</figcaption></figure>
+    <figure><img data-w="store-at-0.12" alt=""><figcaption>Écran 2 · À la une</figcaption></figure>
+    <figure><img data-w="store-at-0.36" alt=""><figcaption>Écran 4 · Fonds d'écran</figcaption></figure>
+    <figure><img data-w="store-at-0.72" alt=""><figcaption>Écran 6 · Combinés</figcaption></figure>
+    <figure><img data-w="store-at-0.84" alt=""><figcaption>Écran 7 · Packs</figcaption></figure>
+    <figure><img data-w="store-end" alt=""><figcaption>Écran 8 · Styles</figcaption></figure>
+  </div>
+</main>
+
+<script src="cristal.js"></script>
+<script>
+Object.assign(P, {
+  globe: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',
+  box: 'M4 8l8-4 8 4v8l-8 4-8-4zM4 8l8 4 8-4M12 12v8',
+  split: 'M5 4h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zM12 4v16M4 12h16',
+  waves: 'M3 8c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 13c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0',
+  half: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 3v18',
+  storm: 'M7 16a4 4 0 0 1 .5-8 5 5 0 0 1 9.6 1.2A3.5 3.5 0 0 1 17 16M12 13l-2 4h3l-2 4',
+  tree: 'M12 3l5 7h-3l4 6H6l4-6H7zM12 16v5',
+});
+/* vignettes découpées dans les captures de l'app (hors dépôt, voir README) */
+const SRC = '../../../pub/rapports/design-2026-11-15-cristal/store-src/';
+/* les huit allées : symbole, couleur, titre, phrase, « Tout voir » (ExploreView.StoreAisle) */
+const A = {
+  featured: ['star', 'F2A33A', 'À la une', 'La sélection de la semaine : un écran, un style et des widgets à découvrir.', 0],
+  screens: ['phone', '3366FF', 'Écrans d\'accueil', 'Des écrans d\'accueil complets : widgets et fond d\'écran assortis.', 1],
+  wallpapers: ['image', '0F9BB0', 'Fonds d\'écran', 'Des fonds d\'écran dessinés pour Ardane : mer, noir et blanc, dégradés, nuit, forêt et cosmos.', 0],
+  widgets: ['grid', '2F8F7A', 'Widgets', 'Un widget à la fois, rangé par thème : temps, santé, argent…', 0],
+  combos: ['split', '6D4AE8', 'Combinés', 'Plusieurs widgets réunis en un seul, prêts à poser.', 1],
+  packs: ['box', 'E5484D', 'Packs', 'Des ensembles de widgets pour un usage : études, sport, voyage…', 1],
+  themes: ['globe', '1E88C8', 'Packs thématiques', 'Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d\'accueil assorti.', 0],
+  styles: ['palette', 'D6409F', 'Styles', 'Le même widget dans chaque style : choisis l\'allure qui te plaît.', 0],
+};
+const all = '<a class="s11-all">Tout voir<i data-i="chev"></i></a>';
+const head = (k) => { const a = A[k];
+  return `<div class="s11-ah"><u style="background:#${a[1]}80"></u><div class="r"><span class="sq" style="background:#${a[1]}"><i data-i="${a[0]}"></i></span><div class="tx"><b>${a[2]}</b><p>${a[3]}</p></div>${a[4] ? all : ''}</div></div>`; };
+const shelf = (t, more, st = '') => `<div class="s11-sh" style="${st}"><span>${t}</span>${more ? all : ''}</div>`;
+const nm = (n, s, extra = '') => `<div class="s11-nm"><div class="tx"><b>${n}</b>${s ? `<span class="s">${s}</span>` : ''}</div>${extra}</div>`;
+const crop = (f, w, h, r, st = '') => `<img class="cr" src="${SRC}${f}.png" style="width:${w}px;height:${h}px;border-radius:${r};${st}" alt="">`;
+const tap = '<span class="s11-tap"><i data-i="hand"></i></span>';
+const heart = '<span class="s11-hrt"><i data-i="heart"></i></span>';
+const nav = '<div class="s11-nav"><b>Store</b></div>';
+const fadeTop = '-webkit-mask-image:linear-gradient(to bottom,transparent,#000 12px);mask-image:linear-gradient(to bottom,transparent,#000 12px);';
+const fadeBot = '-webkit-mask-image:linear-gradient(to top,transparent,#000 16px);mask-image:linear-gradient(to top,transparent,#000 16px);';
+const put = (id, html, scrolled = true) => { const ph = document.getElementById(id); ph.querySelector('.scr').innerHTML = html; if (scrolled) ph.insertAdjacentHTML('beforeend', nav); };
+
+/* 1 · haut de page */
+const chips = `<div class="s11-chips">${Object.values(A).map((a) => `<span class="s11-chip"><i data-i="${a[0]}"></i>${a[2]}</span>`).join('')}</div>`;
+put('s1', `<div style="height:56px"></div><div class="s11-title">Store</div>
+  <div class="s11-search gl"><i data-i="search"></i>Écrans, packs, lune, bitcoin…</div>
+  <div style="margin-top:16px">${chips}</div>
+  <div style="margin-top:26px">${head('featured')}</div>
+  <div class="s11-card" style="margin:16px 16px 0">${crop('saison', 361, 398, '28px 28px 0 0', 'box-shadow:none;' + fadeBot)}</div>`, false);
+
+/* 2 · À la une, suite */
+const hero = `<div class="s11-hero" style="background-image:linear-gradient(135deg,rgba(0,0,0,.55),rgba(0,0,0,.05)),url('${KIT}wall-jade.png')">
+  <div class="l"><span class="k">ÉCRAN D'ACCUEIL<br>DE LA SEMAINE</span><b>Botanique</b><p>Un carnet de serre : habitudes, eau, calendrier et notes.</p><span class="sp"></span>
+    <small>5 widgets · fond d'écran assorti</small><span class="inst">Installer</span></div>
+  <img class="shot" src="${KIT}home-botanique.png" alt=""></div>`;
+put('s2', `<div style="margin-top:-133px">${hero}</div>
+  <article class="pn s11-week"><div class="ws"><img src="${SRC}bota1.png" alt=""><img src="${SRC}bota2.png" alt=""><img src="${SRC}bota3.png" alt=""></div>
+    <div class="wr"><div style="flex:1;min-width:0"><span class="k">STYLE DE LA SEMAINE</span><b>Botanique</b><p>Vert tendre, feuilles et serif de serre</p></div><i class="go" data-i="chev"></i></div></article>
+  <div style="margin-top:16px">${shelf('À découvrir cette semaine')}</div>
+  <div class="s11-row" style="margin-top:8px">
+    <div class="s11-card" style="width:320px">${crop('pomodoro', 320, 148, '22px')}${nm('Pomodoro', 'Focus', tap)}</div>
+    <div class="s11-card" style="width:150px">${crop('serie', 46, 148, '22px 0 0 22px')}${nm('Série de suivi', 'Nutrition')}</div></div>
+  <div style="margin-top:44px">${head('screens')}</div>`);
+
+/* 3 · Écrans d'accueil, début des fonds d'écran */
+const setup = (id, name, tags, st = '') => `<div class="s11-card" style="width:150px"><img class="s11-shot" src="${KIT}home-${id}.png" style="${st}" alt="">${nm(name, tags, heart)}</div>`;
+const WCAT = [['waves', 'Mer et vagues'], ['half', 'Noir et blanc'], ['sun', 'Dégradés doux'], ['storm', 'Nuit et orage'], ['tree', 'Forêt et brume'], ['sparkles', 'Cosmos']];
+const wchips = `<div class="s11-chips"><span class="s11-chip on">Tous</span>${WCAT.map((c) => `<span class="s11-chip"><i data-i="${c[0]}"></i>${c[1]}</span>`).join('')}</div>`;
+put('s3', `<div style="margin-top:64px">${head('screens')}</div>
+  <div class="s11-row" style="margin-top:20px;padding-bottom:6px">${setup('creme', 'Crème', '#clair #minimal')}${setup('aurore', 'Aurore', '#coloré #sombre')}${setup('graphite', 'Graphite', '#sombre #minimal')}</div>
+  <div style="margin-top:44px">${head('wallpapers')}</div>
+  <div style="margin-top:16px">${wchips}</div>
+  ${shelf('Mer et vagues', 1, 'margin-top:20px;min-height:44px')}`);
+
+/* 4 · Fonds d'écran */
+const wall = (f, h, name, r = '14px', st = '') => `<div class="s11-card s11-wp">${crop(f, 112, h, r, 'box-shadow:none;' + st)}<span>${name}</span></div>`;
+put('s4', `<div class="s11-row" style="margin-top:42px;gap:12px">${[1, 2, 3].map((k) => wall('mer' + k, 117, 'Mer et vagues ' + k, '0 0 14px 14px', fadeTop)).join('')}</div>
+  ${shelf('Noir et blanc', 1, 'margin-top:20px;min-height:44px')}
+  <div class="s11-row" style="margin-top:8px;gap:12px">${[1, 2, 3].map((k) => wall('nb' + k, 245, 'Noir et blanc ' + k)).join('')}</div>
+  ${shelf('Dégradés doux', 1, 'margin-top:20px;min-height:44px')}
+  <div class="s11-row" style="margin-top:8px;gap:12px">${[1, 2, 3].map((k) => wall('doux' + k, 136, '', '14px 14px 0 0', fadeBot)).join('')}</div>`);
+
+/* 5 · Widgets */
+const lock = (g, f, w, iw, ih, title, extra = '') => `<div class="s11-card" style="width:${w}px"><div class="s11-lk" style="background:linear-gradient(135deg,#${g[0]},#${g[1]})"><b>9:41</b><img src="${KIT}lock-${f}.png" style="width:${iw}px;height:${ih}px" alt=""></div>${nm(title, '', extra)}</div>`;
+put('s5', `<div style="margin-top:64px">${head('widgets')}</div>
+  <div style="margin-top:16px">${shelf('Incontournables')}</div>
+  <div class="s11-row" style="margin-top:8px">
+    <div class="s11-card" style="width:321px"><img class="wimg" data-w="clock-m-minimal" style="width:321px;height:150px" alt="">${nm('Heure', 'Horloge')}</div>
+    <div class="s11-card" style="width:150px"><img class="wimg" data-w="tasks-s-light" style="width:150px;height:150px" alt="">${nm('Aujourd\'hui', 'Tâches', tap)}</div></div>
+  <div style="margin-top:16px">${shelf('Écran verrouillé')}</div>
+  <div class="s11-row" style="margin-top:8px">${lock(['16302A', '2F8F7A'], 'caloriesLeft-circular', 132, 72, 72, 'Calories restantes')}${lock(['2B0B4F', '7A1C7A'], 'tasks-rect', 212, 163, 72, 'Tâches', tap)}${lock(['1B1B1D', '3A3A3F'], 'habitStreak-circular', 132, 72, 72, 'Série')}</div>
+  <div style="margin-top:44px">${head('combos')}</div>`);
+
+/* 6 · Combinés */
+const combo = (f, w, h, name, sub, r = '24px') => `<div class="s11-card" style="width:${w}px">${crop(f, w, h, r)}${nm(name, sub)}</div>`;
+put('s6', `<div style="margin-top:50px">${head('combos')}</div>
+  <div class="s11-row" style="margin-top:16px">${combo('combo-m1', 300, 140, 'Séance et régularité', '2 widgets · Fitness')}${combo('combo-m2', 68, 140, 'Série et repos', '2 widgets · Fitness', '24px 0 0 24px')}</div>
+  <div class="s11-row" style="margin-top:16px">${combo('combo-l1', 238, 250, 'Salle de sport', '4 widgets · Fitness')}${combo('combo-l2', 130, 250, 'Séance et volume', '2 widgets · Fitness', '24px 0 0 24px')}</div>
+  <div style="margin-top:44px">${head('packs')}</div>`);
+
+/* 7 · Packs et packs thématiques */
+const pack = (fan, w, h, r, st, ic, name, style, line) => `<div class="s11-card s11-pk">${crop(fan, w, h, r, 'box-shadow:none;' + st)}
+  ${name ? `<div class="ln">${ic ? `<img src="${SRC}${ic}.png" alt="">` : ''}<div class="tx"><b>${name}</b><span class="s">${style}</span></div><span class="s11-get">Obtenir</span></div><p>${line}</p>` : ''}</div>`;
+put('s7', `<div class="s11-row" style="margin-top:42px">${pack('fan-retro', 250, 84, '0 0 22px 22px', fadeTop, 'ic-retro', 'Rétro', 'Style Rétro', 'Papier chaud et typo ronde, pour tous les jours.')}${pack('fan-salle', 118, 84, '0 0 0 22px', fadeTop, 'ic-salle', 'Salle de sport', 'Style Futuriste', 'Séance, volume, records et mois d\'entraînement.')}</div>
+  <div class="s11-row" style="margin-top:16px">${pack('fan-sportif', 250, 150, '22px', '', 'ic-sportif', 'Sportif', 'Style Sombre', 'Séance, séries, repos, calories et protéines.')}${pack('fan-couleurs', 118, 150, '22px 0 0 22px', '', 'ic-couleurs', 'Couleurs vives', 'Style Couleur', 'Ta couleur en plein fond, sur six widgets.')}</div>
+  <div style="margin-top:44px">${head('themes')}</div>
+  <div class="s11-row" style="margin-top:16px">${pack('fan-espace', 250, 125, '22px 22px 0 0', fadeBot)}${pack('fan-mars', 118, 125, '22px 0 0 0', fadeBot)}</div>`);
+
+/* 8 · Styles, fin de page */
+const F = { def: 'Inter, sans-serif', serif: 'Georgia, "Times New Roman", serif', round: '"Arial Rounded MT Bold", "Nunito", Inter, sans-serif', mono: 'Consolas, "Courier New", monospace' };
+const STY = [ // deux lignes, colonne par colonne (LazyHGrid) : le style de la semaine d'abord, puis l'ordre du catalogue
+  ['Botanique', 'linear-gradient(135deg,#EFF5E6,#CFE3C4)', '1F3A24', '3E7B4F', F.serif, 500], ['Minimal', '#FFFFFF', '111114', '2F8F7A', F.def, 600],
+  ['Clair', '#F5F5F2', '16171A', '2F8F7A', F.def, 500], ['Sombre', '#101114', 'F2F2F4', '2F8F7A', F.def, 600],
+  ['Monochrome', '#000000', 'FFFFFF', 'FFFFFF', F.def, 300], ['Verre', 'linear-gradient(135deg,#6A85E0,#9C7FD6,#D98FB6)', 'FFFFFF', 'FFFFFF', F.round, 600],
+  ['Aurore', 'linear-gradient(135deg,#1C2566,#2A6F9B,#3FB5A3)', 'FFFFFF', 'FFFFFF', F.def, 700], ['Élégant', '#13203A', 'F3EBDD', 'C8A15A', F.serif, 400],
+  ['Digital', '#0A0F0B', '7CFFA0', '7CFFA0', F.mono, 500], ['Rétro', '#F1E4C8', '2A1E14', 'D4532A', F.round, 800],
+];
+put('s8', `<div class="s11-row" style="margin-top:-172px;padding-bottom:6px">${setup('espace', 'Espace', '#sombre #minimal')}${setup('mars', 'Mars', '#sombre #coloré')}${setup('nature', 'Nature', '#sombre #bien-être')}</div>
+  <div style="margin-top:44px">${head('styles')}</div>
+  ${shelf('Touche un style pour voir tous ses widgets.', 0, 'margin-top:16px')}
+  <div class="s11-sg" style="margin-top:8px">${STY.map((s) => `<div class="s11-sw"><u style="background:${s[1]}"><em style="color:#${s[2]};font-family:${s[4]};font-weight:${s[5]}">Aa</em><i style="background:#${s[3]}"></i></u><span>${s[0]}</span></div>`).join('')}</div>`);
+
+/* 9 · fiche d'un écran d'accueil (HomeSetupSheet) */
+put('s9', '', false);
+document.getElementById('s9').insertAdjacentHTML('beforeend', `<div class="dim"></div>
+  <div class="sheet s11-sheet"><div class="grab"></div>
+    <div class="s11-snav"><a>Fermer</a><b>Botanique</b><span><i data-i="heart"></i></span></div>
+    <div style="display:grid;justify-items:center;padding:18px 0"><img src="${KIT}home-botanique.png" style="width:236px;height:513px;border-radius:28px;object-fit:cover;display:block;box-shadow:0 0 0 1px rgba(11,18,32,.08),0 8px 16px rgba(0,0,0,.18)" alt=""></div>
+    <div class="seg" style="max-width:300px;margin:14px auto 0"><span class="on">Écran d'accueil</span><span>Écran verrouillé</span></div>
+    <div class="s11-buy"><div class="btnP lg" style="height:50px;border-radius:25px">Ajouter les 5 widgets</div></div>
+  </div>`);
+
+Cristal.init();
+</script>
+</body>
+</html>

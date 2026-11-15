@@ -2,6 +2,8 @@
 
 Choix de l'utilisateur le 2026-11-15 : **Cristal « Équilibrée »** (style n° 17 de l'exploration) pour l'accueil et toute l'app, **C1 « Atelier »** pour l'onglet Créer. Cette phase ne contient que des maquettes : l'app n'est pas modifiée. La phase 2 (codage et TestFlight) ne commence qu'après son accord explicite.
 
+Retour de l'utilisateur le 2026-11-15 : tout lui convient sauf le Store. Il veut y garder le fonctionnement et l'affichage actuels et n'adapter que le style (lettres, fond). La planche 11 remplace donc les deux écrans du Store de la planche 9.
+
 ## Les planches
 Sources HTML dans ce dossier, images dans `pub/rapports/design-2026-11-15-cristal/` (hors dépôt).
 
@@ -16,10 +18,11 @@ Sources HTML dans ce dossier, images dans `pub/rapports/design-2026-11-15-crista
 | 6 | `06-planning.html` | mini-app Planning, avec Études | 7 |
 | 7 | `07-habitudes.html` | page Habitudes | 7 |
 | 8 | `08-creer-atelier.html` | Créer « Atelier » : le parcours complet | 12 |
-| 9 | `09-autres-pages.html` | Store, Mes widgets, Premium, Profil, mode Organiser | 8 |
+| 9 | `09-autres-pages.html` | Mes widgets, Premium, Profil, mode Organiser | 6 |
 | 10 | `10-palettes.html` | les 10 palettes complètes et les règles graphiques | — |
+| 11 | `11-store.html` | le Store : mise en page actuelle, habillage Cristal ; captures de l'app en comparaison | 9 |
 
-Autres fichiers : `GUIDE.md` (règles du système et recette de rendu), `palettes.md` (tous les codes HEX), `inventaire/` (ce que l'app affiche aujourd'hui, relevé dans le code : fait foi), `cristal.css` et `cristal.js` (base commune), `render.py` et `make_pdf.py` (rendu).
+Autres fichiers : `GUIDE.md` (règles du système et recette de rendu), `palettes.md` (tous les codes HEX), `inventaire/` (ce que l'app affiche aujourd'hui, relevé dans le code : fait foi), `cristal.css` et `cristal.js` (base commune), `render.py` et `make_pdf.py` (rendu), `store_crops.py` (découpe les vignettes du Store dans les captures de l'app, vers `pub/rapports/design-2026-11-15-cristal/store-src/`).
 
 ## Le système en cinq lignes
 1. Fond clair avec deux nappes de couleur floues.
@@ -44,6 +47,7 @@ Autres fichiers : `GUIDE.md` (règles du système et recette de rendu), `palette
 - Fitness : « Encore 2 séances » sous la tuile Séances.
 - Créer : arrivée directe dans le Studio avec un widget proposé ; « Taille » devient le premier outil ; le constructeur actuel passe dans la feuille « Changer de widget » ; « Combiner » (2 widgets en moyen, jusqu'à 4 en grand) se règle dans Taille ; le guide d'ajout s'affiche après l'enregistrement.
 - Profil : chaque couleur de l'app montre un mini-aperçu au lieu d'un rond.
+- Store : habillage seul. La mise en page d'`ExploreView` ne change pas (huit allées, en-têtes colorés, cartes aux mêmes tailles) ; seuls changent le fond, les lettres, la recherche (verre), les puces et la carte « Style de la semaine » (panneau), la barre d'onglets, et la couleur d'action de « Tout voir », « Obtenir » et du badge « interactif ».
 
 **À développer**
 - Créer : l'aperçu « Sur mon écran » (le widget parmi des icônes, à l'échelle).
@@ -68,11 +72,12 @@ Autres fichiers : `GUIDE.md` (règles du système et recette de rendu), `palette
 - **Couleurs** : Saphir gratuite ; les 11 teintes Premium actuelles habillées par la même règle ; ajouter Sable et Graphite comme nouveautés Premium ; garder Monochrome en réserve.
 - **Accueil** : la composition « Équilibrée » par défaut. Les profils ne demandent pas d'écran nouveau : l'app classe déjà les cartes selon l'heure et les intérêts, et le mode Organiser existe.
 - **Créer** : C1 complet, avec le constructeur dans la feuille « Changer de widget » et le guide d'ajout après chaque enregistrement tant que le widget n'a jamais été posé.
-- **Ordre de codage proposé pour la phase 2** : (0) dessiner le mode sombre ; (1) les fondations (nappes, panneau, verre, barre d'onglets) et l'accueil ; (2) le cadre commun des mini-apps, qui habille les cinq d'un coup ; (3) Créer « Atelier » ; (4) Store, Mes widgets, Premium, Profil ; (5) accessibilité (Réduire la transparence, grandes tailles de texte) et teintes nouvelles. Une version de test interne à chaque étape.
+- **Ordre de codage proposé pour la phase 2** : (0) dessiner le mode sombre ; (1) les fondations (nappes, panneau, verre, barre d'onglets) et l'accueil ; (2) le cadre commun des mini-apps, qui habille les cinq d'un coup ; (3) Créer « Atelier » ; (4) Mes widgets, Premium, Profil, et l'habillage du Store ; (5) accessibilité (Réduire la transparence, grandes tailles de texte) et teintes nouvelles. Une version de test interne à chaque étape.
 
 ## Limites
 - Maquettes rendues sur ordinateur avec la police Inter ; sur iPhone, SF Pro change un peu les largeurs.
 - Le mode sombre et les très grandes tailles de texte ne sont pas dessinés.
 - Plusieurs vignettes de la planche Créer sont des exports de remplacement (thèmes, widgets Nutrition sans export) ; c'est indiqué sous les écrans.
 - Les prix de la page Premium sont des exemples : les vrais viennent de l'App Store.
+- Planche 11 : les vignettes viennent des captures de l'app du 31 octobre, prises avec Premium débloqué (donc sans badge ni cadenas Premium) ; la carte de saison est une capture entière, avec la police de l'app.
 - Les chiffres ajoutés à la journée d'exemple (opérations, aliments, séries par habitude) sont inventés pour la maquette et cohérents entre eux.
