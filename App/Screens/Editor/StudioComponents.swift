@@ -3,7 +3,7 @@ import WidgetKit
 
 /// The Widget Studio's sections, in the order a widget is usually made.
 enum StudioSection: String, CaseIterable, Identifiable {
-    case content, theme, style, colors, background, border, chart, density, myStyles
+    case size, content, theme, style, colors, background, border, chart, density, myStyles
     var id: String { rawValue }
 
     /// Also accepts the names of sections from earlier versions (« Thèmes »).
@@ -17,6 +17,7 @@ enum StudioSection: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
+        case .size: tr("Taille")
         case .content: tr("Contenu")
         case .theme: tr("Thème")
         case .style: tr("Style")
@@ -31,6 +32,7 @@ enum StudioSection: String, CaseIterable, Identifiable {
 
     var symbol: String {
         switch self {
+        case .size: "aspectratio"
         case .content: "square.text.square"
         case .theme: "sparkles"
         case .style: "swatchpalette"
@@ -288,18 +290,6 @@ struct StudioStage: View {
                         .font(.caption2.weight(.medium))
                         .foregroundStyle(.white.opacity(0.85))
                         .padding(.bottom, 6)
-                }
-            }
-
-            if design.families.count > 1 {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 8) {
-                        ForEach(design.families, id: \.self) { item in
-                            FilterChip(title: item.shortTitle, symbol: item.isAccessory ? "lock.iphone" : nil, isSelected: family == item) {
-                                family = item
-                            }
-                        }
-                    }
                 }
             }
         }

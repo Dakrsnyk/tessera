@@ -387,6 +387,10 @@ final class ProfileUITests: XCTestCase {
         XCTAssertTrue(next.waitForExistence(timeout: 15), "Le créateur n'a pas de bouton pour passer au Studio")
         XCTAssertTrue(app.segmentedControls.buttons["Moyen"].isSelected)
         next.tap()
+        // Créer opens its Studio on « Taille »: the widgets of the combined widget are in « Contenu ».
+        let content = app.buttons["studio-content"]
+        XCTAssertTrue(content.waitForExistence(timeout: 10), "Le Studio n'est pas ouvert")
+        content.tap()
         let part = app.buttons["part-caloriesLeft"]
         XCTAssertTrue(part.waitForExistence(timeout: 10), "Réglages par widget absents du Studio")
         // The page scrolls under « Enregistrer le widget »: the button must be above that bar, not just « hittable »

@@ -64,6 +64,8 @@ struct WidgetStudio: View {
     @State private var photos = StudioPhotoSession()
     /// The widget inside a combined widget whose settings page is open.
     @State private var openedPart: Int?
+    /// « Réunir avec un autre widget » (Taille): the space's widget creator, over the Studio.
+    @State private var combining = false
 
     private let isNew: Bool
     private let originals: [WidgetDesign]
@@ -75,6 +77,7 @@ struct WidgetStudio: View {
         _designs = State(initialValue: designs)
         _family = State(initialValue: request.design.displayFormat.family)
         _backgroundTab = State(initialValue: BackgroundKind(request.design.background))
+        // The content, except where the request says (Créer opens on « Taille »).
         _section = State(initialValue: request.section.flatMap(StudioSection.init(name:)) ?? .content)
         _sharesLook = State(initialValue: designs.count > 1 && designs.dropFirst().allSatisfy { $0.withLook(of: designs[0]) == $0 })
         isNew = request.isNew
@@ -176,6 +179,14 @@ struct WidgetStudio: View {
                 Text(tr("Les widgets qui l'affichent reviendront au modèle par défaut."))
             }
             .sheet(item: $paywall) { PaywallView(context: $0) }
+            .sheet(isPresented: $combining) {
+                if let space = combineSpace {
+                    SpaceBuilderView(
+                        space: space, format: design.displayFormat == .small ? .medium : design.displayFormat,
+                        selection: design.partDesigns.map(\.kind), combines: true, onChoose: combine
+                    )
+                }
+            }
     }
 
     private func observed<Content: View>(_ content: Content, sections: [StudioSection]) -> some View {
@@ -193,6 +204,26 @@ struct WidgetStudio: View {
             .onChange(of: sharesLook) { _, shares in
                 if shares { shareLook() }
             }
+    }
+
+    /// The space whose widgets a new widget can be reunited with (none: no « Combiner »).
+    private var combineSpace: Space? {
+        design.kind.space ?? design.partDesigns.compactMap { $0.kind.space }.first
+    }
+
+    private var canCombine: Bool {
+        isNew && combineSpace != nil && (designs.count == 1 || design.isCombo)
+    }
+
+    /// The widgets picked in the creator replace the widget, in its look (one step of the history).
+    private func combine(_ chosen: [WidgetDesign]) {
+        guard !chosen.isEmpty else { return }
+        let lead = design
+        combining = false
+        withAnimation { designs = chosen.map { $0.withLook(of: lead) } }
+        index = 0
+        sharesLook = chosen.count > 1
+        showCurrent()
     }
 
     private func prepareOthers() async {
@@ -311,6 +342,8 @@ struct WidgetStudio: View {
 
     @ViewBuilder private func sectionContent(_ input: StudioInput) -> some View {
         switch section {
+        case .size:
+            StudioSizePanel(design: edited, family: $family, isNew: isNew, onCombine: canCombine ? { combining = true } : nil)
         case .content:
             if !model.hasOwnData(for: design) && !design.dataItems.isEmpty {
                 Text(tr("Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes."))
@@ -682,6 +715,9 @@ struct WidgetStudio: View {
         guard value != designs else { return }
         restored = value
         withAnimation(.easeInOut(duration: 0.2)) { designs = value }
+        // A step may have had another number of widgets (« Réunir »).
+        index = min(index, value.count - 1)
+        showCurrent()
     }
 
     // MARK: Actions
@@ -704,9 +740,11 @@ struct WidgetStudio: View {
             model.celebrate()
             // The new widgets glide into « Mes widgets » as the Studio closes.
             router.saveFlight = SaveFlight(designs: saved, source: previewFrame)
-            if !isPushed && designs.count == 1 {
-                router.lastSavedName = design.name
-                router.lastSavedID = design.id
+            // The « Ajouter à l'écran d'accueil » guide after each of the first three saves, wherever the Studio was opened from.
+            if model.settings.addGuideCount < 3 {
+                model.updateSettings { $0.addGuideCount += 1 }
+                router.lastSavedName = designs.count == 1 ? design.name : nil
+                router.lastSavedID = designs.count == 1 ? design.id : nil
                 router.showsAddGuideAfterEditor = true
             }
         } else {

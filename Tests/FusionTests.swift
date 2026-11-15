@@ -119,6 +119,14 @@ final class FusionTests: XCTestCase {
         }
     }
 
+    /// « Changer de widget »: one widget, picked from an empty selection, at its small size or alone in medium.
+    func testChangingWidgetPicksOneWidgetAtItsOwnSize() throws {
+        let empty = BuilderSelection.Choice(format: .small, selection: [])
+        XCTAssertEqual(BuilderSelection.toggled(empty, .caloriesLeft), .init(format: .small, selection: [.caloriesLeft]))
+        let noSmall = try XCTUnwrap(WidgetKind.offered.first { !BuilderSelection.hasSmall($0) && $0.families.contains(.systemMedium) })
+        XCTAssertEqual(BuilderSelection.toggled(empty, noSmall), .init(format: .medium, selection: [noSmall]))
+    }
+
     func testCombinedWidgetLoadsWhatEachPartNeeds() throws {
         let merged = try XCTUnwrap(Fusion.merge([small(.budgetLeft), small(.savingsGoal)]))
         XCTAssertTrue(merged.dataNeeds.isSuperset(of: DataNeeds.needs(for: .budgetLeft)))

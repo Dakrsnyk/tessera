@@ -32,7 +32,7 @@ struct CreateView: View {
             SpacesView(onChoose: use)
         }
         .sheet(item: $combining) { space in
-            SpaceBuilderView(space: space, onChoose: use)
+            SpaceBuilderView(space: space, combines: true, onChoose: use)
         }
         .onAppear {
             if request == nil { propose() }
@@ -46,7 +46,7 @@ struct CreateView: View {
     private func propose() {
         request = EditorRequest(
             design: SpaceCatalog.proposal(for: model.profile.preferredSpaces, isPremium: model.isPremium),
-            isNew: true
+            isNew: true, section: StudioSection.size.rawValue
         )
     }
 
@@ -55,7 +55,7 @@ struct CreateView: View {
         guard !designs.isEmpty else { return }
         combining = nil
         changing = false
-        request = EditorRequest(designs: designs, isNew: true)
+        request = EditorRequest(designs: designs, isNew: true, section: StudioSection.size.rawValue)
     }
 
     private func openRequestedCreator() {

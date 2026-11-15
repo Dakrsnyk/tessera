@@ -13,6 +13,8 @@ struct SpacesView: View {
     /// A photo or quote widget being made (a sheet over this one: the app's own sheets can't open over it).
     @State private var photoDraft: PhotoQuoteDraft?
     @State private var paywall: PaywallContext?
+    /// How many photo and quote widgets there were when the editor opened: more when it closes = saved.
+    @State private var photoCountBefore = 0
     /// Nil shows every space.
     @State private var universe: SpaceUniverse?
     /// The « Écran verrouillé » category: Lock Screen widgets instead of the spaces.
@@ -32,10 +34,6 @@ struct SpacesView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
-                    Text(tr("Choisis un univers, puis la taille de ton widget."))
-                        .font(.subheadline)
-                        .foregroundStyle(Color.secondary)
-                        .padding(.horizontal, 20)
                     universeFilter
                     if showsLockScreen {
                         LockScreenCreator(onChoose: onChoose)
@@ -77,7 +75,10 @@ struct SpacesView: View {
             .sheet(item: $creating) { space in
                 SpaceBuilderView(space: space, onChoose: onChoose)
             }
-            .sheet(item: $photoDraft) { draft in
+            .sheet(item: $photoDraft, onDismiss: {
+                // Saved: this sheet closes too (the widget flies to « Mes widgets »); cancelled: it stays.
+                if model.photoQuoteDesigns.count > photoCountBefore { dismiss() }
+            }) { draft in
                 PhotoQuoteEditor(draft: draft)
             }
             .sheet(item: $paywall) { PaywallView(context: $0) }
@@ -125,6 +126,7 @@ struct SpacesView: View {
     private func startPhotoQuote(_ kind: WidgetKind) {
         let draft = PhotoQuoteDraft.blank(kind)
         if model.canSave(adding: [draft.design]) {
+            photoCountBefore = model.photoQuoteDesigns.count
             photoDraft = draft
         } else {
             paywall = .designLimit

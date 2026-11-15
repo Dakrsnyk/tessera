@@ -327,6 +327,62 @@ struct StudioColorsPanel: View {
     }
 }
 
+// MARK: - Taille
+
+/// « Taille »: the size shown (and, for a widget not saved yet, the size it is made at), and for a new
+/// widget of a space the way to reunite it with others in one.
+struct StudioSizePanel: View {
+    @Binding var design: WidgetDesign
+    @Binding var family: WidgetFamily
+    /// A saved widget only previews its other sizes; a new one really changes size.
+    let isNew: Bool
+    /// « Réunir avec un autre widget », when this widget can be combined.
+    var onCombine: (() -> Void)?
+
+    var body: some View {
+        StudioGroup(title: tr("Taille")) {
+            VStack(alignment: .leading, spacing: 10) {
+                FlowLayout(spacing: 8) {
+                    ForEach(design.families, id: \.self) { item in
+                        FilterChip(title: item.shortTitle, symbol: item.isAccessory ? "lock.iphone" : nil, isSelected: family == item) {
+                            Haptics.tap()
+                            family = item
+                            if isNew, !design.isCombo, let format = WidgetFormat(item) { design.format = format }
+                        }
+                    }
+                }
+                if isNew, let format = WidgetFormat(family) {
+                    Text(format.hint)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
+        }
+        if let onCombine {
+            StudioGroup(title: tr("Combiner")) {
+                VStack(alignment: .leading, spacing: 10) {
+                    ForEach(Array(design.partDesigns.enumerated()), id: \.offset) { pair in
+                        Text("\(pair.offset + 1) · \(pair.element.name)")
+                            .font(.subheadline)
+                    }
+                    Button {
+                        Haptics.tap()
+                        onCombine()
+                    } label: {
+                        Label(tr("Réunir avec un autre widget"), systemImage: "square.on.square")
+                            .font(.subheadline.weight(.semibold))
+                            .frame(minHeight: 32)
+                    }
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.capsule)
+                    .accessibilityIdentifier("size-combine")
+                }
+            }
+        }
+    }
+}
+
 // MARK: - Bordure
 
 struct StudioBorderPanel: View {

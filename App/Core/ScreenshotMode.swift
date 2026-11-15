@@ -36,6 +36,8 @@ enum ScreenshotMode {
             $0.hasCompletedProfileSetup = true
             // The tour follows the first questions; every other capture starts without it.
             $0.hasSeenTutorial = !screen.hasPrefix("onboarding")
+            // Captures and tests start with no guide shown after a save (a counter left by an earlier run would change them).
+            $0.addGuideCount = 0
         }
         // The first launch starts with nothing about the user (a topic page, with the interest that leads to it).
         // Every other capture shows « Mes informations » filled in, whatever an earlier capture left.

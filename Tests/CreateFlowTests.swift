@@ -12,6 +12,16 @@ final class CreateFlowTests: XCTestCase {
         }
     }
 
+    /// The guide after a save is counted in the settings: an old file without the count starts at zero.
+    func testTheAddGuideCountIsKeptAndDefaultsToZero() throws {
+        let old = try JSONDecoder().decode(AppSettings.self, from: Data(#"{"hasCompletedOnboarding":true}"#.utf8))
+        XCTAssertEqual(old.addGuideCount, 0)
+        var settings = AppSettings()
+        settings.addGuideCount = 2
+        let again = try JSONDecoder().decode(AppSettings.self, from: JSONEncoder().encode(settings))
+        XCTAssertEqual(again.addGuideCount, 2)
+    }
+
     func testTheProposalFallsBackToTheCaloriesLeft() {
         XCTAssertEqual(SpaceCatalog.proposal(for: [], isPremium: false).kind, .caloriesLeft)
         XCTAssertEqual(SpaceCatalog.proposal(for: [.markets], isPremium: false).kind, .caloriesLeft)

@@ -14,7 +14,10 @@ struct SpaceBuilderView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.appStyle) private var style
 
-    @State private var format: WidgetFormat = .small
+    /// Reunite widgets (the Studio's « Taille »): the size is chosen and several widgets can be picked.
+    /// Otherwise (« Changer de widget »): one widget, at the size it has by default.
+    let combines: Bool
+    @State private var format: WidgetFormat
     /// Selected widgets, in the order they were picked.
     @State private var selection: [WidgetKind]
     /// Test builds: the size or selection asked for by a capture is applied once, not again on coming
@@ -26,12 +29,14 @@ struct SpaceBuilderView: View {
     private let themeID: ThemeID
     private let accentHex: String
 
-    init(space: Space, onChoose: @escaping ([WidgetDesign]) -> Void) {
+    init(space: Space, format: WidgetFormat = .small, selection: [WidgetKind]? = nil, combines: Bool = false, onChoose: @escaping ([WidgetDesign]) -> Void) {
         self.space = space
         self.onChoose = onChoose
-        let first = SpaceCatalog.preset(for: space, format: .small).first ?? .note
+        self.combines = combines
+        let first = selection?.first ?? SpaceCatalog.preset(for: space, format: .small).first ?? .note
         let base = Self.design(for: first)
-        _selection = State(initialValue: [first])
+        _format = State(initialValue: format)
+        _selection = State(initialValue: selection.flatMap { $0.isEmpty ? nil : $0 } ?? [first])
         themeID = base.themeID
         accentHex = base.accentHex
     }
@@ -174,10 +179,12 @@ struct SpaceBuilderView: View {
             VStack(alignment: .leading, spacing: 2) {
                 Text(tr("Crée ton widget"))
                     .font(.title3.weight(.semibold))
-                Text(tr("Choisis une taille et tes widgets, puis personnalise-les dans le Studio."))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
+                if combines {
+                    Text(tr("Choisis une taille et tes widgets, puis personnalise-les dans le Studio."))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
         }
         .padding(.top, 8)
@@ -185,22 +192,18 @@ struct SpaceBuilderView: View {
 
     private var formatPicker: some View {
         VStack(alignment: .leading, spacing: 8) {
+            if combines {
             Picker(tr("Taille"), selection: Binding(get: { format }, set: { setFormat($0) })) {
                 ForEach(WidgetFormat.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
-            Text(formatHint)
+            }
+            if combines || format == .small {
+            Text(format.hint)
                 .font(.footnote)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-        }
-    }
-
-    private var formatHint: String {
-        switch format {
-        case .small: tr("L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.")
-        case .medium: tr("Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.")
-        case .large: tr("Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.")
+            }
         }
     }
 
@@ -352,6 +355,7 @@ struct SpaceBuilderView: View {
         .opacity(isAvailable ? 1 : 0.6)
         .animation(.spring(response: 0.3, dampingFraction: 0.75), value: isSelected)
         .accessibilityLabel(Text(kind.title))
+        .accessibilityIdentifier("builder-kind-\(kind.rawValue)")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
@@ -387,7 +391,10 @@ struct SpaceBuilderView: View {
     private func toggle(_ kind: WidgetKind) {
         Haptics.tap()
         withAnimation(.spring(response: 0.32, dampingFraction: 0.82)) {
-            let next = BuilderSelection.toggled(.init(format: format, selection: selection), kind)
+            // « Changer de widget »: no size to choose, several small widgets can be picked; after a widget
+            // with no small size (alone in medium), the next pick starts again from small.
+            let from = (combines || format == .small) ? BuilderSelection.Choice(format: format, selection: selection) : .init(format: .small, selection: [])
+            let next = BuilderSelection.toggled(from, kind)
             format = next.format
             selection = next.selection
         }

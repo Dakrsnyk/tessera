@@ -23,6 +23,15 @@ enum WidgetFormat: String, Codable, CaseIterable, Identifiable {
         }
     }
 
+    /// What the size is for, said under the size choice (the space creator and the Studio's « Taille »).
+    var hint: String {
+        switch self {
+        case .small: tr("L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.")
+        case .medium: tr("Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.")
+        case .large: tr("Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.")
+        }
+    }
+
     init?(_ family: WidgetFamily) {
         switch family {
         case .systemSmall: self = .small

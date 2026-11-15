@@ -93,6 +93,8 @@ struct AppSettings: Codable, Hashable {
     var hasCompletedProfileSetup = false
     /// The step-by-step tutorial shown after the first questions has been seen (or skipped).
     var hasSeenTutorial = false
+    /// Widgets saved with the « Ajouter à l'écran d'accueil » guide shown after them: only the first three get it.
+    var addGuideCount = 0
     /// Opens of the app (at most one every few hours), for the rating request.
     var openCount = 0
     var lastCountedOpen: Date?
@@ -149,7 +151,7 @@ struct AppSettings: Codable, Hashable {
     enum CodingKeys: String, CodingKey {
         case uses24HourClock, currencyCode, cryptoCurrency
         case hasCompletedOnboarding, hydrationReminders
-        case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial
+        case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial, addGuideCount
         case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
         case dailyOrder, dailyHidden, dailyWide, dailyAdded
         case remindsWorkout, remindsMeals, remindsBills, workoutReminderHour, mealReminderHour
@@ -174,6 +176,7 @@ struct AppSettings: Codable, Hashable {
         hasCompletedProfileSetup = (try? c.decodeIfPresent(Bool.self, forKey: .hasCompletedProfileSetup)) ?? false
         // Installs from before the tutorial: those who already know the app aren't shown it (Réglages has it).
         hasSeenTutorial = (try? c.decodeIfPresent(Bool.self, forKey: .hasSeenTutorial)) ?? hasCompletedOnboarding
+        addGuideCount = (try? c.decodeIfPresent(Int.self, forKey: .addGuideCount)) ?? 0
         openCount = (try? c.decodeIfPresent(Int.self, forKey: .openCount)) ?? 0
         lastCountedOpen = try? c.decodeIfPresent(Date.self, forKey: .lastCountedOpen)
         reviewRequestedVersion = try? c.decodeIfPresent(String.self, forKey: .reviewRequestedVersion)

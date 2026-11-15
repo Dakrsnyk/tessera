@@ -34,13 +34,13 @@ final class StudioUITests: XCTestCase {
     /// Scrolls the Studio's settings until the button is on screen (the settings go back to the top each time
     /// another widget is chosen) and returns it. A choice below the fold keeps its old accessibility state.
     @discardableResult
-    private func reveal(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) -> XCUIElement {
+    private func reveal(_ identifier: String, bottomMargin: CGFloat = 125, file: StaticString = #filePath, line: UInt = #line) -> XCUIElement {
         let button = app.buttons[identifier].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(identifier) » introuvable", file: file, line: line)
         let height = app.frame.height > 200 ? app.frame.height : 874
         // Reachable: on screen and not under the save bar at the bottom (the toolbar arrows are at the top).
         func reachable() -> Bool {
-            button.isHittable && (button.frame.maxY < height - 125 || button.frame.maxY < 140)
+            button.isHittable && (button.frame.maxY < height - bottomMargin || button.frame.maxY < 140)
         }
         var swipes = 0
         while !reachable() && swipes < 12 {
@@ -53,6 +53,49 @@ final class StudioUITests: XCTestCase {
             swipes += 1
         }
         return button
+    }
+
+    /// Créer opens on the Studio, on « Taille »: Moyen, then « Réunir avec un autre widget » adds a widget to it.
+    func testCreateCombinesWidgetsFromTheSizeSection() {
+        launch(["-screenshotScreen", "spaces"])
+        let size = app.buttons["studio-size"]
+        XCTAssertTrue(size.waitForExistence(timeout: 15), "Créer n'ouvre pas le Studio")
+        XCTAssertTrue(size.isSelected, "Créer ouvre sur Taille")
+        let medium = app.buttons["Moyen"].firstMatch
+        XCTAssertTrue(medium.waitForExistence(timeout: 8), "Taille Moyen absente")
+        medium.tap()
+        // In the tab, the save bar sits above the tab bar: more room under the buttons.
+        let combine = reveal("size-combine", bottomMargin: 210)
+        combine.tap()
+        let next = app.buttons["creator-continue"]
+        XCTAssertTrue(next.waitForExistence(timeout: 8), "Le constructeur de Taille n'est pas ouvert")
+        // A second widget of the space: the first cell that is not the one already picked.
+        let cells = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'builder-kind-'"))
+        XCTAssertTrue(cells.firstMatch.waitForExistence(timeout: 8), "Aucun widget dans le constructeur")
+        let other = cells.allElementsBoundByIndex.first { !$0.isSelected && $0.isHittable }
+        XCTAssertNotNil(other, "Aucun autre widget à réunir")
+        other?.tap()
+        next.tap()
+        // Back in the Studio, on « Taille »: the content holds the widgets of the combined widget.
+        XCTAssertTrue(app.buttons["studio-content"].waitForExistence(timeout: 10), "Le Studio n'est pas revenu")
+        app.buttons["studio-content"].tap()
+        XCTAssertTrue(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'part-'")).firstMatch.waitForExistence(timeout: 8), "Le widget ajouté n'est pas dans le widget combiné")
+        XCTAssertTrue(next.waitForNonExistence(timeout: 8), "La feuille est restée ouverte")
+        snapshot("create-combine")
+    }
+
+    /// A save in Créer shows the add guide once the widget has flown away; closing it leaves the Studio on a new proposal.
+    func testSavingInCreateShowsTheAddGuideThenStaysInCreate() {
+        launch(["-screenshotScreen", "spaces"])
+        XCTAssertTrue(app.buttons["create-change"].waitForExistence(timeout: 15), "Créer n'ouvre pas sur le Studio")
+        let save = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Enregistrer")).firstMatch
+        XCTAssertTrue(save.waitForExistence(timeout: 8), "Bouton Enregistrer absent")
+        save.tap()
+        let understood = app.buttons["Compris"]
+        XCTAssertTrue(understood.waitForExistence(timeout: 15), "Le guide d'ajout n'apparaît pas après l'enregistrement")
+        understood.tap()
+        XCTAssertTrue(app.buttons["create-change"].waitForExistence(timeout: 8), "Créer ne revient pas sur le Studio")
+        snapshot("create-after-save")
     }
 
     /// Créer opens on the Studio with a widget proposed; « Changer de widget » opens the catalogue, and a
@@ -74,7 +117,7 @@ final class StudioUITests: XCTestCase {
         snapshot("create-atelier")
     }
 
-    private static let sections = ["content", "theme", "style", "colors", "background", "border", "chart", "density", "myStyles"]
+    private static let sections = ["size", "content", "theme", "style", "colors", "background", "border", "chart", "density", "myStyles"]
 
     /// The sections are in a horizontal bar that centers the section chosen: going one section at a
     /// time, the next one is always on screen.
@@ -161,7 +204,7 @@ final class StudioUITests: XCTestCase {
     func testEverySectionOpens() {
         launch(["-screenshotScreen", "studio-content"])
         XCTAssertTrue(app.textFields["widget-name"].waitForExistence(timeout: 15))
-        for name in ["theme", "style", "colors", "background", "border", "chart", "density", "myStyles", "content"] {
+        for name in ["size", "theme", "style", "colors", "background", "border", "chart", "density", "myStyles", "content"] {
             section(name)
             XCTAssertTrue(app.buttons["studio-\(name)"].isSelected, "La section \(name) ne s'ouvre pas")
             XCTAssertEqual(app.state, .runningForeground, "Section \(name)")

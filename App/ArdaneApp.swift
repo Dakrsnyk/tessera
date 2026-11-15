@@ -104,17 +104,7 @@ struct RootView: View {
             MainTabView()
                 .scaleEffect(revealed ? 1 : 0.94)
                 .opacity(revealed ? 1 : 0)
-                .sheet(item: $router.editor, onDismiss: {
-                    if router.showsAddGuideAfterEditor {
-                        router.showsAddGuideAfterEditor = false
-                        // After the widget's flight into « Mes widgets », so the guide doesn't hide it.
-                        let delay = router.saveFlight == nil ? 0 : 1.4
-                        Task { @MainActor in
-                            try? await Task.sleep(for: .seconds(delay))
-                            router.isAddGuidePresented = true
-                        }
-                    }
-                }) { request in
+                .sheet(item: $router.editor) { request in
                     EditorView(request: request)
                 }
                 .sheet(item: $router.photoQuoteDraft) { draft in
@@ -201,7 +191,14 @@ struct RootView: View {
             }
 
             if let flight = router.saveFlight {
-                SaveFlightOverlay(flight: flight) { router.saveFlight = nil }
+                SaveFlightOverlay(flight: flight) {
+                    router.saveFlight = nil
+                    // The guide comes once the widget has landed in « Mes widgets » (the first three saves only).
+                    if router.showsAddGuideAfterEditor {
+                        router.showsAddGuideAfterEditor = false
+                        router.isAddGuidePresented = true
+                    }
+                }
                     .id(flight.id)
                     .zIndex(3)
             }
