@@ -98,6 +98,8 @@ struct WidgetStudio: View {
     private var exceedsFreeLimit: Bool { isNew && savedDesigns.count < designs.count }
 
     private var title: String {
+        // In the Créer tab the Studio is the tab itself: it carries the tab's name, as in the « Atelier » design.
+        if onChangeWidget != nil { return tr("Créer") }
         if !isNew { return tr("Studio") }
         return designs.count > 1 ? tr("Nouveaux widgets") : tr("Nouveau widget")
     }

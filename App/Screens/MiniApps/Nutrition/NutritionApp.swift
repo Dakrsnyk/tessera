@@ -48,7 +48,10 @@ struct NutritionAppView: View {
             // The band: the week selector (the only day picker of the screen), then the essential figure of the
             // chosen day, calories left and macros, straight on the band.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { weekMark($0, state: state, known: known) })
+            // The figure of the day floats on glass, like the essential figure of the other mini-apps.
             CalorieHero(totals: totals, goals: state.goals, known: known, accentHex: accentHex)
+                .padding(16)
+                .cristalGlass(in: RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
         } sheet: {
             // The sheet, by importance: the two actions, the meals, the idea of the moment, the week's
             // calories, history and saved meals, the note, the settings last.

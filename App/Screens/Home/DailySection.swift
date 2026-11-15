@@ -458,39 +458,53 @@ private struct DayHeader: View {
 
     var body: some View {
         let tint = style.cristal.category(colorHex)
-        HStack(spacing: 8) {
+        let hasDots = (pager?.count ?? 0) > 1
+        // The header never cuts its title or its tag: in a narrow card it first drops the chevron, then tightens,
+        // and only as a last resort hides the page dots (the swipe and VoiceOver keep working without them).
+        ViewThatFits(in: .horizontal) {
+            row(tint, dots: hasDots, chevron: showsChevron, compact: false, flexible: false)
+            row(tint, dots: hasDots, chevron: false, compact: false, flexible: false)
+            row(tint, dots: hasDots, chevron: false, compact: true, flexible: false)
+            row(tint, dots: false, chevron: false, compact: true, flexible: true)
+        }
+        .modifier(HeaderLabel(label: badge.map { "\(title), \($0)" }))
+    }
+
+    private func row(_ tint: Color, dots: Bool, chevron: Bool, compact: Bool, flexible: Bool) -> some View {
+        HStack(spacing: compact ? 6 : 8) {
             Image(systemName: symbol)
-                .font(.system(size: 15, weight: .semibold))
+                .font(.system(size: compact ? 13 : 15, weight: .semibold))
                 .foregroundStyle(tint)
-                .frame(width: 30, height: 30)
+                .frame(width: compact ? 26 : 30, height: compact ? 26 : 30)
                 .background(tint.opacity(scheme == .dark ? 0.20 : 0.13), in: Circle())
             if let badge {
-                if let pager, pager.count > 1 { DailyPagerDots(info: pager) }
+                if dots, let pager { DailyPagerDots(info: pager) }
                 Spacer(minLength: 0)
                 Text(badge)
-                    .font(.caption.weight(.bold))
+                    .font((compact ? Font.caption2 : Font.caption).weight(.bold))
                     .foregroundStyle(.onAccent)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                    .padding(.horizontal, 12)
-                    .frame(minHeight: 24)
+                    .minimumScaleFactor(flexible ? 0.7 : 1)
+                    .fixedSize(horizontal: !flexible, vertical: false)
+                    .padding(.horizontal, compact ? 8 : 12)
+                    .frame(minHeight: compact ? 22 : 24)
                     .background(Color.accentColor, in: Capsule())
             } else {
                 Text(title)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color.primary)
                     .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                if let pager, pager.count > 1 { DailyPagerDots(info: pager) }
+                    .minimumScaleFactor(flexible ? 0.7 : 1)
+                    .fixedSize(horizontal: !flexible, vertical: false)
+                if dots, let pager { DailyPagerDots(info: pager) }
                 Spacer(minLength: 0)
-                if showsChevron {
+                if chevron {
                     Image(systemName: "chevron.right")
                         .font(.caption.weight(.bold))
                         .foregroundStyle(Color.secondary.opacity(0.6))
                 }
             }
         }
-        .modifier(HeaderLabel(label: badge.map { "\(title), \($0)" }))
     }
 }
 

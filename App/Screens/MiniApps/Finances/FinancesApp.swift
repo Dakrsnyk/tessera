@@ -256,7 +256,7 @@ struct FinancesAppView: View {
         .accessibilityIdentifier("finances-hero")
     }
 
-    /// The small white curve under the figure: what was left of the budget at the end of each day of the month,
+    /// The small curve under the figure, in the color of Finances: what was left of the budget at the end of each day of the month,
     /// up to the chosen day. Nothing is drawn until the budget has moved.
     @ViewBuilder
     private func trend(state: BudgetState, now: Date, over: Bool) -> some View {
@@ -264,7 +264,7 @@ struct FinancesAppView: View {
         if values.count >= 2, let high = values.max(), let low = values.min(), high > low {
             Chart(Array(values.enumerated()), id: \.offset) { item in
                 LineMark(x: .value("Jour", item.offset), y: .value("Reste", item.element))
-                    .foregroundStyle(over ? CristalPalette.of(style.id).category(Finances.overHex) : Color.primary)
+                    .foregroundStyle(CristalPalette.of(style.id).category(over ? Finances.overHex : Finances.accentHex))
                     .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
                     .interpolationMethod(.monotone)
             }
