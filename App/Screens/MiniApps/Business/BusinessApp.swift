@@ -110,6 +110,7 @@ enum BusinessFormat {
 /// and the revenue curve; then sales and costs, results, recurring revenue; the settings last.
 struct BusinessAppView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var period: BusinessPeriod = .month
     @State private var sheet: BusinessSheet?
     @State private var day = Date()
@@ -220,7 +221,7 @@ struct BusinessAppView: View {
             HStack {
                 MiniSectionTitle(title: tr("Indicateurs"))
                 Button { sheet = .kpis } label: {
-                    Text(tr("Choisir")).font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: accentHex))
+                    Text(tr("Choisir")).font(.subheadline.weight(.semibold)).foregroundStyle(Color.accentColor)
                 }
                 .accessibilityIdentifier("business-choose-kpis")
             }
@@ -285,7 +286,7 @@ struct BusinessAppView: View {
                     }
                     ForEach(points.filter { $0.current != nil }) { point in
                         LineMark(x: .value("Jour", point.index), y: .value("Actuel", point.current ?? 0), series: .value("Série", tr("Actuel")))
-                            .foregroundStyle(Color(hex: accentHex))
+                            .foregroundStyle(CristalPalette.of(style.id).category(accentHex))
                             .lineStyle(StrokeStyle(lineWidth: 2.5))
                     }
                 }
@@ -304,7 +305,7 @@ struct BusinessAppView: View {
     private func legend(_ title: String, hex: String, dashed: Bool) -> some View {
         HStack(spacing: 6) {
             Capsule()
-                .stroke(Color(hex: hex), style: StrokeStyle(lineWidth: 2, dash: dashed ? [3, 3] : []))
+                .stroke(CristalPalette.of(style.id).category(hex), style: StrokeStyle(lineWidth: 2, dash: dashed ? [3, 3] : []))
                 .frame(width: 18, height: 2)
             Text(title).font(.caption).foregroundStyle(.secondary)
         }
@@ -349,6 +350,7 @@ struct BusinessAppView: View {
 
 /// A row of the Signature style: an icon in a tinted rounded square, a title, a detail, a value and a chevron.
 private struct BusinessRow: View {
+    @Environment(\.appStyle) private var style
     let symbol: String
     let colorHex: String
     let title: String
@@ -357,12 +359,13 @@ private struct BusinessRow: View {
     var showsChevron = true
 
     var body: some View {
+        let tint = CristalPalette.of(style.id).category(colorHex)
         HStack(spacing: 12) {
             Image(systemName: symbol)
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(Color(hex: colorHex))
+                .foregroundStyle(tint)
                 .frame(width: 36, height: 36)
-                .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
+                .background(tint.opacity(0.14), in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.body.weight(.semibold))
@@ -396,6 +399,7 @@ private struct BusinessRow: View {
 
 /// An indicator: its value for the period and how it moved.
 struct KPITile: View {
+    @Environment(\.appStyle) private var style
     let kpi: BusinessKPI
     let comparison: BusinessMath.Comparison
     let currency: String
@@ -414,7 +418,7 @@ struct KPITile: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
             if let change {
-                Text(change.text).font(.caption.weight(.semibold)).foregroundStyle(Color(hex: change.hex))
+                Text(change.text).font(.caption.weight(.semibold)).foregroundStyle(CristalPalette.of(style.id).strong(change.hex))
             } else {
                 Text(note ?? (comparison.current == nil ? tr("pas encore de données") : tr("rien avant"))).font(.caption).foregroundStyle(.tertiary)
             }
@@ -427,15 +431,17 @@ struct KPITile: View {
 
 /// A metric followed by hand: its latest value, its change and its target.
 struct MetricRow: View {
+    @Environment(\.appStyle) private var style
     let metric: CustomMetric
 
     var body: some View {
+        let tint = CristalPalette.of(style.id).category("F2A33A")
         HStack(spacing: 12) {
             Image(systemName: "gauge.with.dots.needle.33percent")
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(Color(hex: "F2A33A"))
+                .foregroundStyle(tint)
                 .frame(width: 36, height: 36)
-                .background(Color(hex: "F2A33A").opacity(0.16), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
+                .background(tint.opacity(0.14), in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(metric.name).font(.body.weight(.medium)).foregroundStyle(.primary).lineLimit(1)
                 Text(detail).font(.caption).foregroundStyle(.secondary).lineLimit(1)
@@ -446,7 +452,7 @@ struct MetricRow: View {
                     .font(.subheadline.weight(.bold))
                     .monospacedDigit()
                 if let change = BusinessFormat.change(metric.change, higherIsBetter: metric.higherIsBetter) {
-                    Text(change.text).font(.caption.weight(.semibold)).foregroundStyle(Color(hex: change.hex))
+                    Text(change.text).font(.caption.weight(.semibold)).foregroundStyle(CristalPalette.of(style.id).strong(change.hex))
                 }
             }
         }
@@ -467,6 +473,7 @@ struct MetricRow: View {
 /// Which indicators the dashboard shows.
 struct KPIPicker: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
@@ -479,7 +486,7 @@ struct KPIPicker: View {
                             model.update(\.business) { $0.togglePinned(kpi) }
                         } label: {
                             HStack(spacing: 12) {
-                                Image(systemName: kpi.symbol).frame(width: 24).foregroundStyle(Color(hex: BusinessFormat.accentHex))
+                                Image(systemName: kpi.symbol).frame(width: 24).foregroundStyle(CristalPalette.of(style.id).category(BusinessFormat.accentHex))
                                 VStack(alignment: .leading, spacing: 2) {
                                     Text(kpi.title).foregroundStyle(Color.primary)
                                     Text(explanation(kpi)).font(.caption).foregroundStyle(Color.secondary)
@@ -487,7 +494,7 @@ struct KPIPicker: View {
                                 Spacer()
                                 Image(systemName: model.business.pinnedKPIs.contains(kpi) ? "checkmark.circle.fill" : "circle")
                                     .font(.title3)
-                                    .foregroundStyle(model.business.pinnedKPIs.contains(kpi) ? Color(hex: BusinessFormat.accentHex) : Color.secondary)
+                                    .foregroundStyle(model.business.pinnedKPIs.contains(kpi) ? CristalPalette.of(style.id).strong(BusinessFormat.accentHex) : Color.secondary)
                             }
                         }
                         .accessibilityIdentifier("kpi-\(kpi.rawValue)")

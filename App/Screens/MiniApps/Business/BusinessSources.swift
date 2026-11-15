@@ -6,6 +6,7 @@ import UniformTypeIdentifiers
 /// The last sync, its result and its error are always shown.
 struct BusinessSourcesCard: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var connecting = false
     @State private var importing = false
     @State private var preview: BusinessImportPreview?
@@ -31,7 +32,7 @@ struct BusinessSourcesCard: View {
                         if let error = stripe.lastError {
                             Label(error, systemImage: "exclamationmark.triangle.fill")
                                 .font(.caption)
-                                .foregroundStyle(Color(hex: BusinessFormat.badHex))
+                                .foregroundStyle(CristalPalette.of(style.id).strong(BusinessFormat.badHex))
                                 .fixedSize(horizontal: false, vertical: true)
                                 .accessibilityIdentifier("stripe-error")
                         }
@@ -242,6 +243,7 @@ struct BusinessImportPreview: Identifiable {
 /// at the ECB rate of their day (one request per currency for the whole period); without the rates, the
 /// person tries again or imports them as they are: never a wrong amount in silence.
 struct BusinessImportSheet: View {
+    @Environment(\.appStyle) private var style
     let preview: BusinessImportPreview
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -342,7 +344,7 @@ struct BusinessImportSheet: View {
                     .accessibilityIdentifier("business-import-unconverted")
                 } footer: {
                     Text(CurrencyConversion.problemMessage(for: converted?.unconverted ?? [], unavailable: history?.unavailable ?? [:]))
-                        .foregroundStyle(Color(hex: BusinessFormat.badHex))
+                        .foregroundStyle(CristalPalette.of(style.id).strong(BusinessFormat.badHex))
                 }
             }
         }
@@ -398,6 +400,7 @@ struct BusinessImportSheet: View {
 /// Connecting Stripe: how to make a restricted key that can only read, then pasting it.
 struct StripeConnectSheet: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
     @State private var key = ""
@@ -427,7 +430,7 @@ struct StripeConnectSheet: View {
                     if let failure {
                         Label(failure.message, systemImage: "exclamationmark.triangle.fill")
                             .font(.footnote)
-                            .foregroundStyle(Color(hex: BusinessFormat.badHex))
+                            .foregroundStyle(CristalPalette.of(style.id).strong(BusinessFormat.badHex))
                     }
                 }
             }

@@ -6,6 +6,7 @@ import SwiftUI
 /// Every fill-up (editable), the price per litre and the consumption between full tanks.
 struct CarFuelPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: CarSheet?
 
     private var currency: String { model.settings.currencyCode }
@@ -28,7 +29,7 @@ struct CarFuelPage: View {
                     MiniSectionTitle(title: tr("Consommation"), detail: CarMath.consumption(state).map { tr("moyenne \(TF.decimal($0, 1)) L/100") })
                     Chart(byFill) { item in
                         LineMark(x: .value("Date", item.fill.date), y: .value("L/100 km", item.perHundred))
-                            .foregroundStyle(Color(hex: Car.fuelHex))
+                            .foregroundStyle(CristalPalette.of(style.id).category(Car.fuelHex))
                             .symbol(.circle)
                     }
                     .accessibilityLabel(tr("Consommation"))
@@ -42,7 +43,7 @@ struct CarFuelPage: View {
                     MiniSectionTitle(title: tr("Prix au litre"), detail: CarMath.lastPricePerLiter(state).map { tr("dernier \(TF.money($0, currency, decimals: 3))") })
                     Chart(Array(fills.reversed())) { fill in
                         LineMark(x: .value("Date", fill.date), y: .value("Prix", fill.pricePerLiter))
-                            .foregroundStyle(Color(hex: Car.accentHex))
+                            .foregroundStyle(CristalPalette.of(style.id).category(Car.accentHex))
                             .symbol(.circle)
                     }
                     .accessibilityLabel(tr("Prix au litre"))
@@ -79,6 +80,7 @@ struct CarFuelPage: View {
 
 struct CarMileagePage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: CarSheet?
 
     var body: some View {
@@ -98,7 +100,7 @@ struct CarMileagePage: View {
                     MiniSectionTitle(title: tr("Kilomètres par mois"))
                     Chart(months) { month in
                         BarMark(x: .value("Mois", month.start, unit: .month), y: .value("km", month.km))
-                            .foregroundStyle(Color(hex: Car.accentHex).gradient)
+                            .foregroundStyle(CristalPalette.of(style.id).category(Car.accentHex).gradient)
                             .cornerRadius(3)
                     }
                     .accessibilityLabel(tr("Kilomètres par mois"))
@@ -137,6 +139,7 @@ struct CarMileagePage: View {
 
 struct CarMaintenancePage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: CarSheet?
 
     var body: some View {
@@ -161,7 +164,7 @@ struct CarMaintenancePage: View {
                         } label: {
                             Label(tr("Fait aujourd'hui"), systemImage: "checkmark")
                         }
-                        .tint(.green)
+                        .tint(CristalPalette.of(style.id).category(MiniStyle.goodHex))
                     }
                     .swipeActions(edge: .trailing) {
                         Button(role: .destructive) {
@@ -182,7 +185,7 @@ struct CarMaintenancePage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: "3366FF"))
+        .tint(CristalPalette.of(style.id).strong("3366FF"))
         .navigationTitle(tr("Entretien"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
@@ -201,6 +204,7 @@ struct CarMaintenancePage: View {
 
 struct CarDeadlinesPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: CarSheet?
 
     var body: some View {
@@ -213,7 +217,7 @@ struct CarDeadlinesPage: View {
                     let days = DateMath.daysBetween(now, deadline.date)
                     Button { sheet = .deadline(deadline) } label: {
                         HStack(spacing: 12) {
-                            Image(systemName: deadline.symbol).frame(width: 24).foregroundStyle(days <= 14 ? Color(hex: Car.alertHex) : Color(hex: Car.accentHex))
+                            Image(systemName: deadline.symbol).frame(width: 24).foregroundStyle(days <= 14 ? CristalPalette.of(style.id).category(Car.alertHex) : CristalPalette.of(style.id).category(Car.accentHex))
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(deadline.title).foregroundStyle(Color.primary)
                                 Text(Fmt.format(deadline.date, template: "EEEEdMMMMyyyy").capitalizedFirst).font(.caption).foregroundStyle(Color.secondary)
@@ -221,7 +225,7 @@ struct CarDeadlinesPage: View {
                             Spacer()
                             Text(days < 0 ? tr("passée") : (days == 0 ? tr("aujourd'hui") : "J-\(days)"))
                                 .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(days <= 14 && days >= 0 ? Color(hex: Car.alertHex) : Color.secondary)
+                                .foregroundStyle(days <= 14 && days >= 0 ? CristalPalette.of(style.id).strong(Car.alertHex) : Color.secondary)
                                 .monospacedDigit()
                         }
                     }
@@ -238,7 +242,7 @@ struct CarDeadlinesPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: Car.alertHex))
+        .tint(CristalPalette.of(style.id).strong(Car.alertHex))
         .navigationTitle(tr("Échéances"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
@@ -250,6 +254,7 @@ struct CarDeadlinesPage: View {
 /// What the car costs each month: fixed costs, fuel (from the fill-ups) and the maintenance budget.
 struct CarCostsPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     private var currency: String { model.settings.currencyCode }
 
@@ -277,7 +282,7 @@ struct CarCostsPage: View {
                     if !shares.isEmpty {
                         Chart(shares) { share in
                             BarMark(x: .value("Montant", share.value), stacking: .normalized)
-                                .foregroundStyle(Color(hex: share.hex))
+                                .foregroundStyle(CristalPalette.of(style.id).category(share.hex))
                         }
                         .accessibilityLabel(tr("Par mois"))
                         .chartXAxis(.hidden)
@@ -286,7 +291,7 @@ struct CarCostsPage: View {
                         HStack(spacing: 12) {
                             ForEach(shares) { share in
                                 HStack(spacing: 4) {
-                                    Circle().fill(Color(hex: share.hex)).frame(width: 8, height: 8)
+                                    Circle().fill(CristalPalette.of(style.id).category(share.hex)).frame(width: 8, height: 8)
                                     Text("\(share.name) \(TF.money(share.value, currency))").font(.caption)
                                 }
                             }

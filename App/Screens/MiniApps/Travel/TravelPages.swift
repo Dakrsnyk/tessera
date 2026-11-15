@@ -7,6 +7,7 @@ import SwiftUI
 struct TravelProgramPage: View {
     let tripID: UUID
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: TravelSheet?
 
     var body: some View {
@@ -45,9 +46,9 @@ struct TravelProgramPage: View {
                 Image(systemName: symbol).font(.headline)
                 Text(title).font(.caption.weight(.semibold)).lineLimit(1).minimumScaleFactor(0.8)
             }
-            .foregroundStyle(Color(hex: Travel.accentHex))
+            .foregroundStyle(CristalPalette.of(style.id).strong(Travel.accentHex))
             .frame(maxWidth: .infinity, minHeight: 56)
-            .background(Color(hex: Travel.accentHex).opacity(0.1), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .background(CristalPalette.of(style.id).tintColor, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
         }
         .buttonStyle(.pressable)
         .accessibilityLabel(Text(tr("Ajouter : \(title)")))
@@ -60,7 +61,7 @@ struct TravelProgramPage: View {
                 Text(Fmt.longDay(day.day).capitalizedFirst).font(.headline)
                 Spacer()
                 if number >= 1 {
-                    Text(tr("Jour \(number)")).font(.caption.weight(.semibold)).foregroundStyle(Color(hex: Travel.accentHex))
+                    Text(tr("Jour \(number)")).font(.caption.weight(.semibold)).foregroundStyle(CristalPalette.of(style.id).strong(Travel.accentHex))
                 }
             }
             MiniRowsCard {
@@ -100,6 +101,7 @@ struct TravelProgramPage: View {
 struct TravelBudgetPage: View {
     let tripID: UUID
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: TravelSheet?
     @State private var budgetText = ""
 
@@ -158,7 +160,7 @@ struct TravelBudgetPage: View {
             Text(tr("Dépensé")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
             Text(TF.money(spending.total, currency)).font(.system(size: 38, weight: .bold, design: .rounded)).monospacedDigit()
             if let budget = trip.budget, budget > 0 {
-                ProgressView(value: min(1, spending.total / budget)).tint(spending.total > budget ? Color(hex: "E5484D") : Color(hex: Travel.accentHex))
+                ProgressView(value: min(1, spending.total / budget)).tint(spending.total > budget ? CristalPalette.of(style.id).category(MiniStyle.alertHex) : CristalPalette.of(style.id).category(Travel.accentHex))
                     .accessibilityLabel(tr("Dépensé"))
                     .accessibilityValue(Fmt.percent(min(1, spending.total / budget)))
                 Text(spending.total > budget ? tr("Dépassé de \(TF.money(spending.total - budget, currency)) sur \(TF.money(budget, currency))") : tr("Il reste \(TF.money(budget - spending.total, currency)) sur \(TF.money(budget, currency))"))
@@ -186,7 +188,7 @@ struct TravelBudgetPage: View {
             if !spending.unconverted.isEmpty {
                 Text(tr("Non converti (taux indisponible) : \(spending.unconverted.map { Fmt.money($0.value, currency: $0.key) }.sorted().joined(separator: ", "))."))
                     .font(.caption)
-                    .foregroundStyle(.orange)
+                    .foregroundStyle(CristalPalette.of(style.id).strong("F2A33A"))
             } else if trip.currencyCode != currency {
                 Text(tr("Montants en \(trip.currencyCode) convertis au taux de référence de la BCE.")).font(.caption2).foregroundStyle(.tertiary)
             }
@@ -225,14 +227,14 @@ struct TravelBudgetPage: View {
             HStack(spacing: 16) {
                 Chart(shares) { share in
                     SectorMark(angle: .value("Montant", share.amount), innerRadius: .ratio(0.6), angularInset: 1.5)
-                        .foregroundStyle(Color(hex: share.kind.colorHex))
+                        .foregroundStyle(CristalPalette.of(style.id).category(share.kind.colorHex))
                 }
                 .accessibilityLabel(tr("Par type"))
                 .frame(width: 110, height: 110)
                 VStack(alignment: .leading, spacing: 6) {
                     ForEach(shares) { share in
                         HStack(spacing: 6) {
-                            Circle().fill(Color(hex: share.kind.colorHex)).frame(width: 8, height: 8)
+                            Circle().fill(CristalPalette.of(style.id).category(share.kind.colorHex)).frame(width: 8, height: 8)
                             Text(share.kind.title).font(.caption)
                             Spacer()
                             Text(TF.money(share.amount, currency)).font(.caption.weight(.semibold)).monospacedDigit()
@@ -250,6 +252,7 @@ struct TravelBudgetPage: View {
 struct TravelChecklistPage: View {
     let tripID: UUID
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var newItem = ""
 
     var body: some View {
@@ -259,7 +262,7 @@ struct TravelChecklistPage: View {
         List {
             Section {
                 HStack(spacing: 12) {
-                    Image(systemName: "plus.circle.fill").font(.title3).foregroundStyle(Color(hex: Travel.accentHex))
+                    Image(systemName: "plus.circle.fill").font(.title3).foregroundStyle(CristalPalette.of(style.id).strong(Travel.accentHex))
                     TextField(tr("Ajouter (maillot, cadeaux…)"), text: $newItem)
                         .submitLabel(.done)
                         .onSubmit(add)
@@ -276,7 +279,7 @@ struct TravelChecklistPage: View {
                             HStack(spacing: 12) {
                                 Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
                                     .font(.title3)
-                                    .foregroundStyle(item.isDone ? Color(hex: "1E9E75") : Color.secondary)
+                                    .foregroundStyle(item.isDone ? CristalPalette.of(style.id).category(MiniStyle.goodHex) : Color.secondary)
                                 Text(item.title)
                                     .strikethrough(item.isDone)
                                     .foregroundStyle(item.isDone ? Color.secondary : Color.primary)
@@ -305,7 +308,7 @@ struct TravelChecklistPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: Travel.accentHex))
+        .tint(CristalPalette.of(style.id).strong(Travel.accentHex))
         .navigationTitle(tr("À ne pas oublier"))
         .navigationBarTitleDisplayMode(.inline)
     }

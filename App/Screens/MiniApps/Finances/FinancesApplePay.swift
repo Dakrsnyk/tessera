@@ -43,13 +43,16 @@ struct ApplePayMark: View {
 
 /// The « À vérifier » pill of an expense whose category was guessed (or is missing).
 struct ReviewBadge: View {
+    @Environment(\.appStyle) private var style
+
     var body: some View {
+        let palette = CristalPalette.of(style.id)
         Text(tr("À vérifier"))
             .font(.caption2.weight(.bold))
-            .foregroundStyle(Color(hex: ApplePayStatus.hex))
+            .foregroundStyle(palette.strong(ApplePayStatus.hex))
             .padding(.horizontal, 7)
             .padding(.vertical, 2)
-            .background(Color(hex: ApplePayStatus.hex).opacity(0.16), in: Capsule())
+            .background(palette.category(ApplePayStatus.hex).opacity(0.14), in: Capsule())
             .fixedSize()
     }
 }
@@ -61,6 +64,7 @@ struct ApplePayGuideView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @Environment(\.openURL) private var openURL
+    @Environment(\.appStyle) private var style
 
     private var accentHex: String { Finances.accentHex }
 
@@ -83,7 +87,8 @@ struct ApplePayGuideView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             .cristalScreen()
-            .environment(\.miniAccent, Color(hex: accentHex))
+            .environment(\.miniAccent, CristalPalette.of(style.id).category(accentHex))
+            .tint(CristalPalette.of(style.id).strong(accentHex))
             .navigationTitle("Apple Pay")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -196,6 +201,7 @@ struct ApplePayGuideView: View {
 
 /// A numbered step: a circle with the number, the sentence, and short lines under it when needed.
 private struct GuideStep: View {
+    @Environment(\.appStyle) private var style
     let number: Int
     let colorHex: String
     let text: String
@@ -205,9 +211,9 @@ private struct GuideStep: View {
         HStack(alignment: .top, spacing: 12) {
             Text("\(number)")
                 .font(.subheadline.weight(.bold))
-                .foregroundStyle(Color.readableInk(on: colorHex))
+                .foregroundStyle(.onAccent)
                 .frame(width: 28, height: 28)
-                .background(Color(hex: colorHex), in: Circle())
+                .background(CristalPalette.of(style.id).strong(colorHex), in: Circle())
                 .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 6) {
                 Text(text)
@@ -218,7 +224,7 @@ private struct GuideStep: View {
                         .font(.subheadline.weight(.semibold))
                         .padding(.horizontal, 10)
                         .padding(.vertical, 6)
-                        .background(Color.primary.opacity(0.06), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .background(CristalPalette.of(style.id).wellColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
@@ -231,17 +237,19 @@ private struct GuideStep: View {
 
 /// An icon and a sentence, for the « Comment ça marche » card.
 private struct GuideInfoLine: View {
+    @Environment(\.appStyle) private var style
     let symbol: String
     let colorHex: String
     let text: String
 
     var body: some View {
+        let tint = CristalPalette.of(style.id).category(colorHex)
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: symbol)
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(Color(hex: colorHex))
+                .foregroundStyle(tint)
                 .frame(width: 30, height: 30)
-                .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+                .background(tint.opacity(0.14), in: Circle())
             Text(text)
                 .font(.subheadline)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -255,6 +263,7 @@ private struct GuideInfoLine: View {
 /// « Règles de commerçants »: the category Ardane learned for each merchant, one per line; a swipe removes one.
 struct MerchantRulesView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     private struct Rule: Identifiable {
         let merchant: String
@@ -307,7 +316,7 @@ struct MerchantRulesView: View {
             }
         }
         .styledList()
-        .tint(Color(hex: Finances.accentHex))
+        .tint(CristalPalette.of(style.id).strong(Finances.accentHex))
         .navigationTitle(tr("Règles de commerçants"))
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -11,6 +11,7 @@ struct BusinessSalesPage: View {
     }
 
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var kind: Kind = .sales
     @State private var sheet: BusinessSheet?
 
@@ -34,7 +35,7 @@ struct BusinessSalesPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: BusinessFormat.accentHex))
+        .tint(CristalPalette.of(style.id).strong(BusinessFormat.accentHex))
         .navigationTitle(tr("Ventes et dépenses"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -135,6 +136,7 @@ struct BusinessSalesPage: View {
 /// Revenue, costs and profit month by month, with the margin and the year so far.
 struct BusinessResultsPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     private var currency: String { model.settings.currencyCode }
 
@@ -180,7 +182,7 @@ struct BusinessResultsPage: View {
                     }
                 }
                 .accessibilityLabel(tr("Par mois"))
-                .chartForegroundStyleScale([tr("Chiffre d'affaires"): Color(hex: BusinessFormat.accentHex), tr("Dépenses"): Color(hex: "8A8A8E").opacity(0.5), tr("Bénéfice"): Color(hex: BusinessFormat.goodHex)])
+                .chartForegroundStyleScale([tr("Chiffre d'affaires"): CristalPalette.of(style.id).category(BusinessFormat.accentHex), tr("Dépenses"): CristalPalette.of(style.id).category("8A8A8E").opacity(0.5), tr("Bénéfice"): CristalPalette.of(style.id).category(BusinessFormat.goodHex)])
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .month)) { _ in
                         AxisValueLabel(format: .dateTime.month(.abbreviated), centered: true)
@@ -231,6 +233,7 @@ struct BusinessResultsPage: View {
 
 struct BusinessRecurringPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: BusinessSheet?
 
     private var currency: String { model.settings.currencyCode }
@@ -258,10 +261,10 @@ struct BusinessRecurringPage: View {
             if snapshots.count >= 2 {
                 Chart(snapshots) { snapshot in
                     LineMark(x: .value("Mois", snapshot.month, unit: .month), y: .value("MRR", snapshot.mrr))
-                        .foregroundStyle(Color(hex: "1E9E75"))
+                        .foregroundStyle(CristalPalette.of(style.id).category("1E9E75"))
                         .symbol(.circle)
                     AreaMark(x: .value("Mois", snapshot.month, unit: .month), y: .value("MRR", snapshot.mrr))
-                        .foregroundStyle(Color(hex: "1E9E75").opacity(0.12).gradient)
+                        .foregroundStyle(CristalPalette.of(style.id).category("1E9E75").opacity(0.12).gradient)
                 }
                 .accessibilityLabel(tr("MRR"))
                 .chartXAxis {
@@ -299,6 +302,7 @@ struct BusinessRecurringPage: View {
 
 struct BusinessMetricsPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: BusinessSheet?
 
     var body: some View {
@@ -331,7 +335,7 @@ struct BusinessMetricsPage: View {
             if values.count >= 2 {
                 Chart(values, id: \.date) { point in
                     LineMark(x: .value("Date", point.date), y: .value(metric.name, point.value))
-                        .foregroundStyle(Color(hex: "F2A33A"))
+                        .foregroundStyle(CristalPalette.of(style.id).category("F2A33A"))
                         .symbol(.circle)
                     if let target = metric.target {
                         RuleMark(y: .value("Objectif", target))
@@ -346,7 +350,7 @@ struct BusinessMetricsPage: View {
             Button { sheet = .metricValue(metric) } label: {
                 Label(tr("Noter une valeur"), systemImage: "plus.circle.fill")
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color(hex: BusinessFormat.accentHex))
+                    .foregroundStyle(CristalPalette.of(style.id).strong(BusinessFormat.accentHex))
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("metric-add-value")

@@ -3,6 +3,7 @@ import SwiftUI
 
 /// Moves between months without leaving the screen.
 struct MonthSwitcher: View {
+    @Environment(\.appStyle) private var style
     @Binding var month: Date
     var colorHex = Finances.accentHex
     /// The oldest day shown (the free plan: the last seven days); earlier months open Premium.
@@ -33,8 +34,8 @@ struct MonthSwitcher: View {
             .disabled(isCurrent)
             .accessibilityLabel(Text(tr("Mois suivant")))
         }
-        .foregroundStyle(Color(hex: colorHex))
-        .background(.cardFill, in: Capsule())
+        .foregroundStyle(CristalPalette.of(style.id).strong(colorHex))
+        .cristalGlass(in: Capsule())
     }
 
     private func move(_ months: Int) {
@@ -56,6 +57,7 @@ struct FinancesTransactionsPage: View {
 
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
+    @Environment(\.appStyle) private var style
     @State private var month = Date()
     @State private var kind: Kind = .expenses
     @State private var categoryID: UUID?
@@ -85,7 +87,7 @@ struct FinancesTransactionsPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: Finances.accentHex))
+        .tint(CristalPalette.of(style.id).strong(Finances.accentHex))
         .navigationTitle(tr("Opérations"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
@@ -142,7 +144,7 @@ struct FinancesTransactionsPage: View {
             HStack {
                 Text(tr("Total du mois"))
                 Spacer()
-                Text(TF.money(all.reduce(0) { $0 + $1.amount }, currency, decimals: 2)).font(.headline).monospacedDigit().foregroundStyle(Color(hex: Finances.incomeHex))
+                Text(TF.money(all.reduce(0) { $0 + $1.amount }, currency, decimals: 2)).font(.headline).monospacedDigit().foregroundStyle(CristalPalette.of(style.id).strong(Finances.incomeHex))
             }
             if all.isEmpty {
                 Text(model.profile.monthlyIncome.map { tr("Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : \(TF.money($0, currency)).") } ?? tr("Aucun revenu noté ce mois-ci."))
@@ -161,7 +163,7 @@ struct FinancesTransactionsPage: View {
                                     .font(.caption).foregroundStyle(Color.secondary)
                             }
                             Spacer()
-                            Text("+\(TF.money(income.amount, currency, decimals: 2))").monospacedDigit().foregroundStyle(Color(hex: Finances.incomeHex))
+                            Text("+\(TF.money(income.amount, currency, decimals: 2))").monospacedDigit().foregroundStyle(CristalPalette.of(style.id).strong(Finances.incomeHex))
                         }
                     }
                 }
@@ -177,7 +179,7 @@ struct FinancesTransactionsPage: View {
         let category = state.category(expense.categoryID)
         return HStack(spacing: 12) {
             Image(systemName: category?.symbol ?? "square.grid.2x2")
-                .foregroundStyle(Color(hex: category?.colorHex ?? "64748B"))
+                .foregroundStyle(CristalPalette.of(style.id).category(category?.colorHex ?? "64748B"))
                 .frame(width: 24)
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
@@ -220,6 +222,7 @@ struct FinancesStatementPage: View {
 
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
+    @Environment(\.appStyle) private var style
     @State private var sheet: FinanceSheet?
 
     private var currency: String { model.settings.currencyCode }
@@ -263,7 +266,7 @@ struct FinancesStatementPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: Finances.accentHex))
+        .tint(CristalPalette.of(style.id).strong(Finances.accentHex))
         .navigationTitle(tr("Relevé"))
         .navigationBarTitleDisplayMode(.large)
         .toolbar {
@@ -287,7 +290,7 @@ struct FinancesStatementPage: View {
                 .foregroundStyle(.secondary)
             Text(TF.money(balance, currency, decimals: 2))
                 .font(.system(size: 34, weight: .bold, design: .rounded))
-                .foregroundStyle(balance < 0 ? Color(hex: Finances.overHex) : Color.primary)
+                .foregroundStyle(balance < 0 ? CristalPalette.of(style.id).strong(Finances.overHex) : Color.primary)
                 .monospacedDigit()
             Text(caption(state: state))
                 .font(.caption)
@@ -312,9 +315,9 @@ struct FinancesStatementPage: View {
         return HStack(spacing: 12) {
             Image(systemName: look.symbol)
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(Color(hex: look.hex))
+                .foregroundStyle(CristalPalette.of(style.id).category(look.hex))
                 .frame(width: 32, height: 32)
-                .background(Color(hex: look.hex).opacity(0.14), in: Circle())
+                .background(CristalPalette.of(style.id).category(look.hex).opacity(0.14), in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(look.title).foregroundStyle(.primary).lineLimit(1)
                 Text(look.detail).font(.caption).foregroundStyle(.secondary).lineLimit(1)
@@ -324,12 +327,12 @@ struct FinancesStatementPage: View {
                 Text(isOpening ? TF.money(line.amount, currency, decimals: 2) : Fmt.signedMoney(line.amount, currency: currency))
                     .font(.body.weight(.semibold))
                     .monospacedDigit()
-                    .foregroundStyle(!isOpening && line.amount > 0 ? Color(hex: Finances.incomeHex) : Color.primary)
+                    .foregroundStyle(!isOpening && line.amount > 0 ? CristalPalette.of(style.id).strong(Finances.incomeHex) : Color.primary)
                 // The balance once this line is counted, as on a bank statement.
                 Text(TF.money(line.balance, currency, decimals: 2))
                     .font(.caption)
                     .monospacedDigit()
-                    .foregroundStyle(line.balance < 0 ? Color(hex: Finances.overHex) : Color.secondary)
+                    .foregroundStyle(line.balance < 0 ? CristalPalette.of(style.id).strong(Finances.overHex) : Color.secondary)
             }
         }
         .contentShape(Rectangle())
@@ -390,6 +393,7 @@ struct FinancesStatementPage: View {
 struct FinancesCategoriesPage: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
+    @Environment(\.appStyle) private var style
     @State private var month = Date()
     @State private var sheet: FinanceSheet?
 
@@ -405,7 +409,7 @@ struct FinancesCategoriesPage: View {
             if total > 0 {
                 Chart(spends, id: \.name) { spend in
                     SectorMark(angle: .value("Montant", spend.amount), innerRadius: .ratio(0.62), angularInset: 1.5)
-                        .foregroundStyle(Color(hex: spend.colorHex))
+                        .foregroundStyle(CristalPalette.of(style.id).category(spend.colorHex))
                         .cornerRadius(3)
                 }
                 .accessibilityLabel(tr("Dépenses"))
@@ -429,7 +433,7 @@ struct FinancesCategoriesPage: View {
                             CategoryBar(status: BudgetMath.CategoryStatus(category: category, spent: spent), currency: currency)
                             Text(limitText(category: category, spent: spent, total: total))
                                 .font(.caption)
-                                .foregroundStyle(category.monthlyLimit > 0 && spent > category.monthlyLimit ? Color(hex: Finances.overHex) : Color.secondary)
+                                .foregroundStyle(category.monthlyLimit > 0 && spent > category.monthlyLimit ? CristalPalette.of(style.id).strong(Finances.overHex) : Color.secondary)
                         }
                         .padding(.vertical, 10)
                         .contentShape(Rectangle())
@@ -440,7 +444,7 @@ struct FinancesCategoriesPage: View {
                 Button { sheet = .category(BudgetCategory(name: "", symbol: "tag", colorHex: "3366FF")) } label: {
                     Label(tr("Nouvelle catégorie"), systemImage: "plus.circle.fill")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: Finances.accentHex))
+                        .foregroundStyle(CristalPalette.of(style.id).strong(Finances.accentHex))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 12)
                 }
@@ -469,6 +473,7 @@ struct FinancesCategoriesPage: View {
 
 struct FinancesBillsPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: FinanceSheet?
 
     private var currency: String { model.settings.currencyCode }
@@ -492,7 +497,7 @@ struct FinancesBillsPage: View {
                 ForEach(all) { item in
                     Button { sheet = .bill(item.bill) } label: {
                         HStack(spacing: 12) {
-                            Image(systemName: item.bill.symbol).frame(width: 24).foregroundStyle(item.days <= 2 ? Color(hex: Finances.overHex) : Color(hex: Finances.accentHex))
+                            Image(systemName: item.bill.symbol).frame(width: 24).foregroundStyle(item.days <= 2 ? CristalPalette.of(style.id).category(Finances.overHex) : CristalPalette.of(style.id).category(Finances.accentHex))
                             VStack(alignment: .leading, spacing: 2) {
                                 Text(item.bill.name).foregroundStyle(Color.primary)
                                 Text("\(item.bill.isSubscription ? tr("Abonnement · ") : "")\(item.bill.period.title.lowercased()) · \(TF.relativeDay(item.due, from: now))")
@@ -517,7 +522,7 @@ struct FinancesBillsPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: Finances.accentHex))
+        .tint(CristalPalette.of(style.id).strong(Finances.accentHex))
         .navigationTitle(tr("Factures"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
@@ -528,6 +533,7 @@ struct FinancesBillsPage: View {
 
 struct FinancesSavingsPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: FinanceSheet?
     @State private var pendingGoal: UUID?
     @State private var pendingAccount: UUID?
@@ -560,7 +566,7 @@ struct FinancesSavingsPage: View {
                     Button { sheet = .goal(SavingsGoal(name: "", target: 1_000, saved: 0, deadline: nil)) } label: {
                         Label(tr("Nouvel objectif"), systemImage: "plus.circle.fill")
                             .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(Color(hex: Finances.incomeHex))
+                            .foregroundStyle(CristalPalette.of(style.id).strong(Finances.incomeHex))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.vertical, 12)
                     }
@@ -594,10 +600,10 @@ struct FinancesSavingsPage: View {
             if state.netWorthHistory.count >= 2 {
                 Chart(state.netWorthHistory, id: \.date) { point in
                     LineMark(x: .value("Date", point.date), y: .value("Valeur nette", point.value))
-                        .foregroundStyle(Color(hex: Finances.accentHex))
+                        .foregroundStyle(CristalPalette.of(style.id).category(Finances.accentHex))
                         .interpolationMethod(.catmullRom)
                     AreaMark(x: .value("Date", point.date), y: .value("Valeur nette", point.value))
-                        .foregroundStyle(Color(hex: Finances.accentHex).opacity(0.12).gradient)
+                        .foregroundStyle(CristalPalette.of(style.id).category(Finances.accentHex).opacity(0.12).gradient)
                         .interpolationMethod(.catmullRom)
                 }
                 .accessibilityLabel(tr("Valeur nette"))
@@ -627,7 +633,7 @@ struct FinancesSavingsPage: View {
                 Button { sheet = .account(Account(name: "", balance: 0)) } label: {
                     Label(tr("Nouveau compte ou dette"), systemImage: "plus.circle.fill")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: Finances.accentHex))
+                        .foregroundStyle(CristalPalette.of(style.id).strong(Finances.accentHex))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 12)
                 }
@@ -643,6 +649,7 @@ struct FinancesSavingsPage: View {
 /// Six months of money in and out, the averages, and this month against the last one.
 struct FinancesTrendsPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     private var currency: String { model.settings.currencyCode }
 
@@ -696,7 +703,7 @@ struct FinancesTrendsPage: View {
                         .cornerRadius(3)
                 }
                 .accessibilityLabel(tr("Par mois"))
-                .chartForegroundStyleScale([tr("Revenus"): Color(hex: Finances.incomeHex), tr("Dépenses"): Color(hex: Finances.accentHex).opacity(0.55)])
+                .chartForegroundStyleScale([tr("Revenus"): CristalPalette.of(style.id).category(Finances.incomeHex), tr("Dépenses"): CristalPalette.of(style.id).category(Finances.accentHex).opacity(0.55)])
                 .chartXAxis {
                     AxisMarks(values: .stride(by: .month)) { _ in
                         AxisValueLabel(format: .dateTime.month(.abbreviated), centered: true)

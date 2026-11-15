@@ -134,6 +134,7 @@ struct OpeningBalanceEditor: View {
 /// a note and the settings last. The figures of the month follow the chosen day (nothing noted after it counts).
 struct FinancesAppView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: FinanceSheet?
     @State private var day = Date()
 
@@ -233,9 +234,10 @@ struct FinancesAppView: View {
                 Button { sheet = .budget } label: {
                     Text(knowsBudget ? tr("Budget \(TF.money(state.monthlyBudget, currency))") : tr("Définir mon budget"))
                         .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
                         .padding(.horizontal, 12)
                         .frame(minHeight: 44)
-                        .background(Color.primary.opacity(0.12), in: Capsule())
+                        .background(CristalPalette.of(style.id).tintColor, in: Capsule())
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.pressable)
@@ -262,7 +264,7 @@ struct FinancesAppView: View {
         if values.count >= 2, let high = values.max(), let low = values.min(), high > low {
             Chart(Array(values.enumerated()), id: \.offset) { item in
                 LineMark(x: .value("Jour", item.offset), y: .value("Reste", item.element))
-                    .foregroundStyle(over ? Color(hex: Finances.overHex) : Color.primary)
+                    .foregroundStyle(over ? CristalPalette.of(style.id).category(Finances.overHex) : Color.primary)
                     .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
                     .interpolationMethod(.monotone)
             }
@@ -417,7 +419,7 @@ struct FinancesAppView: View {
                         HStack {
                             Text(status.count > 4 ? tr("Les \(status.count) catégories") : tr("Détail des catégories"))
                                 .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(Color(hex: accentHex))
+                                .foregroundStyle(Color.accentColor)
                             Spacer()
                             Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
                         }
@@ -545,6 +547,7 @@ struct FinancesAppView: View {
 
 /// A row of the Signature style: an icon in a tinted rounded square, a title, a detail, a value and a chevron.
 private struct FinancesRow: View {
+    @Environment(\.appStyle) private var style
     let symbol: String
     let colorHex: String
     let title: String
@@ -556,12 +559,13 @@ private struct FinancesRow: View {
     var needsReview = false
 
     var body: some View {
+        let tint = CristalPalette.of(style.id).category(colorHex)
         HStack(spacing: 12) {
             Image(systemName: symbol)
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(Color(hex: colorHex))
+                .foregroundStyle(tint)
                 .frame(width: 36, height: 36)
-                .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
+                .background(tint.opacity(0.14), in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
                     Text(title)
@@ -599,29 +603,31 @@ private struct FinancesRow: View {
 
 /// A category of the month: what was spent, against its limit when it has one.
 struct CategoryBar: View {
+    @Environment(\.appStyle) private var style
     let status: BudgetMath.CategoryStatus
     let currency: String
 
     var body: some View {
+        let palette = CristalPalette.of(style.id)
         let hex = status.category.colorHex
         VStack(alignment: .leading, spacing: 5) {
             HStack(spacing: 8) {
                 Image(systemName: status.category.symbol)
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(Color(hex: hex))
+                    .foregroundStyle(palette.category(hex))
                     .frame(width: 18)
                 Text(status.category.name).font(.subheadline.weight(.medium)).foregroundStyle(.primary)
                 Spacer()
                 Text(amountText)
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(status.isOver ? Color(hex: Finances.overHex) : Color.primary)
+                    .foregroundStyle(status.isOver ? palette.strong(Finances.overHex) : Color.primary)
                     .monospacedDigit()
             }
             if let ratio = status.ratio {
                 ProgressView(value: min(1, ratio))
                     .accessibilityLabel(tr("Progression"))
                     .accessibilityValue(Fmt.percent(min(1, ratio)))
-                    .tint(status.isOver ? Color(hex: Finances.overHex) : Color(hex: hex))
+                    .tint(status.isOver ? palette.category(Finances.overHex) : palette.category(hex))
             }
         }
     }
@@ -634,6 +640,7 @@ struct CategoryBar: View {
 
 /// A savings goal: how far along, and what it takes each month to get there in time.
 struct GoalProgressRow: View {
+    @Environment(\.appStyle) private var style
     let goal: SavingsGoal
     let currency: String
 
@@ -642,9 +649,9 @@ struct GoalProgressRow: View {
             HStack {
                 Text(goal.name).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
                 Spacer()
-                Text(Fmt.percent(goal.progress)).font(.subheadline.weight(.bold)).foregroundStyle(Color(hex: Finances.incomeHex)).monospacedDigit()
+                Text(Fmt.percent(goal.progress)).font(.subheadline.weight(.bold)).foregroundStyle(CristalPalette.of(style.id).strong(Finances.incomeHex)).monospacedDigit()
             }
-            ProgressView(value: goal.progress).tint(Color(hex: Finances.incomeHex))
+            ProgressView(value: goal.progress).tint(CristalPalette.of(style.id).category(Finances.incomeHex))
                 .accessibilityLabel(goal.name)
                 .accessibilityValue(Fmt.percent(goal.progress))
             Text(detail).font(.caption).foregroundStyle(.secondary)
@@ -666,6 +673,7 @@ struct GoalProgressRow: View {
 /// the month, three months or the year: from the « Solde de départ » when there is one, otherwise from
 /// zero at the start of the period.
 private struct BalanceChartCard: View {
+    @Environment(\.appStyle) private var style
     let state: BudgetState
     let currency: String
     /// The month stays free; three months and the year are part of the detailed statistics.
@@ -702,7 +710,7 @@ private struct BalanceChartCard: View {
         let now = Date()
         let points = BudgetMath.balanceHistory(state, from: period.start(now), now: now)
         let balance = points.last?.balance ?? 0
-        let color = Color(hex: balance < 0 ? Finances.overHex : Finances.incomeHex)
+        let color = CristalPalette.of(style.id).category(balance < 0 ? Finances.overHex : Finances.incomeHex)
         let dayFormat: Date.FormatStyle = period == .month ? .dateTime.day().month(.abbreviated) : .dateTime.month(.abbreviated)
         let statement = HomeRoute.page(.financesStatement(period.start(now)))
         VStack(alignment: .leading, spacing: 12) {
@@ -753,7 +761,7 @@ private struct BalanceChartCard: View {
                 Label(state.openingBalance == nil ? tr("Ajouter ton solde de départ") : tr("Modifier le solde de départ"),
                       systemImage: state.openingBalance == nil ? "plus.circle.fill" : "pencil")
                     .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color(hex: Finances.accentHex))
+                    .foregroundStyle(Color.accentColor)
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("finances-opening")
@@ -787,13 +795,13 @@ private struct BalanceChartCard: View {
         .accessibilityLabel(tr("Solde"))
         .chartXAxis {
             AxisMarks(values: .automatic(desiredCount: 4)) { _ in
-                AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))
+                AxisGridLine().foregroundStyle(CristalPalette.of(style.id).gridColor)
                 AxisValueLabel(format: dayFormat)
             }
         }
         .chartYAxis {
             AxisMarks(position: .trailing, values: .automatic(desiredCount: 4)) { value in
-                AxisGridLine().foregroundStyle(Color.primary.opacity(0.06))
+                AxisGridLine().foregroundStyle(CristalPalette.of(style.id).gridColor)
                 AxisValueLabel {
                     if let amount = value.as(Double.self) {
                         Text(TF.money(amount, currency))

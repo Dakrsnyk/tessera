@@ -48,6 +48,7 @@ enum Travel {
 /// the currency and the other trips.
 struct TravelAppView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: TravelSheet?
     /// The day of the trip the program tells about.
     @State private var day = Date()
@@ -127,7 +128,7 @@ struct TravelAppView: View {
     /// The start card on the band, with no trip yet (its action is the floating « Nouveau voyage »).
     private var start: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Image(systemName: "airplane.departure").font(.system(size: 28)).foregroundStyle(Color(hex: accentHex))
+            Image(systemName: "airplane.departure").font(.system(size: 28)).foregroundStyle(CristalPalette.of(style.id).category(accentHex))
             Text(tr("Ton prochain voyage")).font(.title3.weight(.bold))
             Text(tr("Ajoute un voyage : compte à rebours, heure sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit."))
                 .font(.subheadline)
@@ -256,7 +257,7 @@ struct TravelAppView: View {
                             }
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
-                            .background(Color(hex: accentHex).opacity(0.08), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            .background(CristalPalette.of(style.id).wellColor, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                         }
                     }
                     Text(tr("Taux de référence de la BCE du \(rates.day) (Frankfurter).")).font(.caption2).foregroundStyle(.tertiary)

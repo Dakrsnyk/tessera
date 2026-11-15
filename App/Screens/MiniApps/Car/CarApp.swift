@@ -63,6 +63,7 @@ private enum CarJournalEntry: Identifiable {
 /// actions, the log of the day picked, the consumption and the cost, what maintenance comes, the deadlines and the pages.
 struct CarAppView: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: CarSheet?
     /// The day the log tells about (it stops at today).
     @State private var day = Date()
@@ -107,7 +108,7 @@ struct CarAppView: View {
 
     private var start: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Image(systemName: "car.fill").font(.system(size: 28)).foregroundStyle(Color(hex: accentHex))
+            Image(systemName: "car.fill").font(.system(size: 28)).foregroundStyle(CristalPalette.of(style.id).category(accentHex))
             Text(tr("Ta voiture, sans surprise")).font(.title3.weight(.bold))
             Text(tr("Note tes pleins et ton kilométrage : consommation, autonomie, coût réel par mois, entretiens et échéances se suivent tout seuls."))
                 .font(.subheadline)
@@ -151,7 +152,7 @@ struct CarAppView: View {
                 Button { sheet = .settings } label: {
                     Label(tr("Indique la taille du réservoir pour voir l'autonomie"), systemImage: "fuelpump")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: Car.fuelHex))
+                        .foregroundStyle(CristalPalette.of(style.id).strong(Car.fuelHex))
                 }
                 .buttonStyle(.pressable)
             }
@@ -387,6 +388,7 @@ struct CarAppView: View {
 
 /// A maintenance item: how much of its interval is used and when it is due.
 struct ServiceStatusRow: View {
+    @Environment(\.appStyle) private var style
     let status: CarMath.ServiceStatus
 
     var body: some View {
@@ -396,12 +398,12 @@ struct ServiceStatusRow: View {
                 Spacer()
                 Text(Car.remaining(status))
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(status.used >= 1 ? Color(hex: Car.alertHex) : Color.secondary)
+                    .foregroundStyle(status.used >= 1 ? CristalPalette.of(style.id).strong(Car.alertHex) : Color.secondary)
             }
             ProgressView(value: min(1, status.used))
                 .accessibilityLabel(status.item.name)
                 .accessibilityValue(Fmt.percent(min(1, status.used)))
-                .tint(status.used >= 1 ? Color(hex: Car.alertHex) : (status.used >= 0.85 ? Color.orange : Color(hex: "3366FF")))
+                .tint(status.used >= 1 ? CristalPalette.of(style.id).category(Car.alertHex) : (status.used >= 0.85 ? CristalPalette.of(style.id).category("F2A33A") : CristalPalette.of(style.id).category("3366FF")))
         }
     }
 }
