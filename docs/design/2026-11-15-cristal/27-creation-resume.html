@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Création de widgets — Les 5 parcours sur une page</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* propre à cette planche : préfixe rs- ; pensée pour être lue sur un iPhone (une colonne, gros texte) */
+  .rs { font-family: Inter, sans-serif; color: #101828; }
+  .rs h2 { font: 800 25px/1.2 Inter, sans-serif; letter-spacing: -.015em; margin: 34px 0 12px; }
+  .rs-box { background: #fff; border: 1px solid #D5DDE8; border-radius: 22px; padding: 20px 22px; }
+  /* tableau des différences */
+  .rs-t { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 14.5px; line-height: 1.35; }
+  .rs-t th { text-align: left; vertical-align: bottom; padding: 0 9px 12px; font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
+  .rs-t th small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #5B6577; margin-bottom: 3px; }
+  .rs-t td { vertical-align: top; padding: 10px 9px; border-top: 1px solid #E3E7EE; }
+  .rs-t td.k { width: 150px; font-weight: 700; color: #35435A; font-size: 13.5px; }
+  .rs-t .rec { background: #EEF3FF; }
+  .rs-t th.rec { border-radius: 14px 14px 0 0; padding-top: 10px; color: #1F3F8F; }
+  .rs-t tr:last-child td.rec { border-radius: 0 0 14px 14px; }
+  .rs-t td b.big { font-size: 22px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .rs-t td b.big small { font-size: 13px; color: #5B6577; font-weight: 600; }
+  .rs-same { margin-top: 14px; padding: 12px 16px; border-radius: 14px; background: #F2F5F9; font-size: 14.5px; line-height: 1.45; }
+  .rs-same b { font-weight: 800; }
+  /* une bande par parcours */
+  .rs-p { background: #fff; border: 1px solid #D5DDE8; border-radius: 26px; padding: 22px 24px 22px; margin-top: 18px; }
+  .rs-p.rec { border: 2.5px solid #2F5BEA; box-shadow: 0 14px 40px rgba(47,91,234,.16); }
+  .rs-h { display: flex; align-items: center; gap: 16px; }
+  .rs-n { flex: none; width: 52px; height: 52px; border-radius: 26px; background: #101828; color: #fff; display: grid; place-items: center; font: 800 25px Inter, sans-serif; }
+  .rs-p.rec .rs-n { background: #2F5BEA; }
+  .rs-h h3 { font-size: 25px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+  .rs-h h3 em { font-style: normal; font-size: 12px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: #fff; background: #2F5BEA; border-radius: 8px; padding: 4px 8px; margin-left: 10px; vertical-align: 4px; }
+  .rs-h p { font-size: 16px; line-height: 1.4; color: #35435A; margin-top: 4px; }
+  .rs-sc { margin-left: auto; flex: none; text-align: center; min-width: 92px; padding: 8px 10px; border-radius: 16px; background: #F2F5F9; }
+  .rs-sc b { display: block; font-size: 32px; font-weight: 800; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .rs-sc small { font-size: 12px; font-weight: 700; color: #5B6577; }
+  .rs-p.rec .rs-sc { background: #2F5BEA; color: #fff; } .rs-p.rec .rs-sc small { color: #DCE6FF; }
+  .rs-shots { display: flex; align-items: flex-start; justify-content: space-between; margin-top: 18px; }
+  .rs-shots figure { margin: 0; width: 236px; }
+  .rs-shots img { display: block; width: 236px; }
+  .rs-shots figcaption { margin-top: 8px; font-size: 14px; line-height: 1.35; font-weight: 650; text-align: center; padding: 0 4px; }
+  .rs-shots figcaption span { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 11px; background: #101828; color: #fff; font-size: 12px; font-weight: 800; margin-right: 5px; vertical-align: 1px; }
+  .rs-p.rec .rs-shots figcaption span { background: #2F5BEA; }
+  .rs-arr { flex: none; width: 26px; margin-top: 230px; color: #8A97AB; }
+  .rs-arr svg { width: 26px; height: 20px; display: block; }
+  .rs-pc { display: grid; grid-template-columns: 1fr 1fr 250px; gap: 18px; margin-top: 18px; }
+  .rs-pc h6 { font-size: 12.5px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 6px; }
+  .rs-pc .plus h6 { color: #1F7A4F; } .rs-pc .minus h6 { color: #A32A1D; }
+  .rs-pc .plus, .rs-pc .minus { border-radius: 16px; padding: 14px 16px; }
+  .rs-pc .plus { background: #EDF8F1; } .rs-pc .minus { background: #FDF0EE; }
+  .rs-pc ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; font-size: 15px; line-height: 1.38; }
+  .rs-pc li { padding-left: 22px; position: relative; }
+  .rs-pc .plus li::before { content: "+"; position: absolute; left: 2px; top: -1px; color: #1F7A4F; font-weight: 800; font-size: 17px; }
+  .rs-pc .minus li::before { content: "–"; position: absolute; left: 2px; top: -1px; color: #A32A1D; font-weight: 800; font-size: 17px; }
+  .rs-meta { display: grid; gap: 8px; align-content: start; }
+  .rs-meta div { border-radius: 14px; background: #F2F5F9; padding: 9px 13px; }
+  .rs-meta small { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #5B6577; }
+  .rs-meta b { font-size: 15px; font-weight: 700; line-height: 1.3; }
+  /* recommandation */
+  .rs-rec { margin-top: 30px; border-radius: 26px; padding: 26px 28px; background: linear-gradient(135deg, #17306F, #2F5BEA); color: #fff; }
+  .rs-rec .k { font-size: 12.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; opacity: .8; }
+  .rs-rec h3 { font-size: 28px; line-height: 1.15; font-weight: 800; letter-spacing: -.02em; margin: 6px 0 12px; }
+  .rs-rec ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: 16px; line-height: 1.45; }
+  .rs-rec li { padding-left: 22px; position: relative; }
+  .rs-rec li::before { content: ""; position: absolute; left: 3px; top: 9px; width: 9px; height: 9px; border-radius: 5px; background: #9DB8FF; }
+  .rs-rec b { font-weight: 800; }
+</style>
+</head>
+<body style="--bw:1240px">
+<main class="bd rs">
+  <header class="bd-head"><div class="num">5</div><div><h1>Les 5 parcours de création, sur une page</h1>
+    <p>Même exemple partout : réunir « Prochaine série » et « Régularité » (Fitness) dans un widget Moyen. Pour chaque parcours : l'idée, 4 vrais écrans, les avantages, les inconvénients et la note sur 100.</p></div>
+    <span class="badge">Maquettes · rien n'est changé dans l'app</span></header>
+
+  <h2 style="margin-top:8px">La différence en un coup d'œil</h2>
+  <div class="rs-box">
+    <table class="rs-t" id="diff"></table>
+    <div class="rs-same"><b>Pareil dans les 5 :</b> les mêmes widgets et les mêmes règles (Moyen = 2 widgets réunis au plus, Grand = 4, du même espace) ; l'aperçu sur l'écran d'accueil avant d'enregistrer ; le guide « Ajouter un widget » à la fin, car iOS ne laisse aucune app poser un widget ; aucune fonction supprimée.</div>
+  </div>
+
+  <h2>Chaque parcours en détail</h2>
+  <div id="bands"></div>
+
+  <div class="rs-rec">
+    <div class="k">Ma recommandation</div>
+    <h3>Le parcours 5 : il démarre aussi vite que le 4 et laisse autant de liberté que le 2</h3>
+    <ul>
+      <li>Il règle le problème d'aujourd'hui : <b>un seul geste pour réunir</b>, le « + » posé sur le widget. Plus de bouton caché, plus de widgets séparés par erreur.</li>
+      <li>Quand un widget ne tient pas, Ardane <b>passe à la taille au-dessus</b> au lieu d'en retirer un sans prévenir.</li>
+      <li>Il garde l'Atelier que tu as validé ; un widget réuni <b>reste modifiable</b> après l'enregistrement.</li>
+      <li>C'est un gros travail : je le livrerais en 4 étapes sur TestFlight, la première répare déjà la combinaison.</li>
+    </ul>
+  </div>
+</main>
+<script>
+const SHOT = (f, k) => `../../../pub/rapports/design-2026-11-15-cristal/ecrans/${f}-0${k}.png`;
+const ARR = '<span class="rs-arr"><svg viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h32M26 4l9 8-9 8"/></svg></span>';
+const REC = 4;
+const P = [
+  { f: '21-creation-guidee', t: 'Guidé, étape par étape', idea: 'Un assistant pose une question par écran, dans l\'ordre : la taille, les widgets, l\'ordre, le style, puis l\'aperçu.', score: 68,
+    shots: [[1, 'Départ : un bouton « Commencer »'], [2, 'Étape 1 : choisir la taille'], [4, 'Étape 2 : 2 widgets réunis'], [5, 'Étape 3 : choisir l\'ordre']],
+    plus: ['Impossible de se perdre : une seule décision à la fois', 'Chaque refus est expliqué au bon moment', 'Grands boutons, tout se fait au pouce'],
+    minus: ['Le plus long : 9 touchers, même pour un besoin simple', 'Les habitués doivent passer toutes les étapes', 'L\'Atelier validé passe derrière un lien'],
+    who: 'Une toute première création', taps: '9 touchers', work: 'Moyen' },
+  { f: '22-creation-studio', t: 'Studio à aperçu permanent', idea: 'Un seul écran : le widget reste en haut et on agit dessus. On touche le « + » posé sur le widget pour en ajouter un.', score: 80,
+    shots: [[1, 'Départ : le Studio, un widget prêt'], [2, 'En Moyen, un « + » apparaît sur le widget'], [4, 'Le 2e widget est posé, on le voit tout de suite'], [5, 'On glisse une partie pour la déplacer']],
+    plus: ['On voit toujours le résultat', 'On réunit directement sur le widget', 'Les 10 outils à un toucher', 'La suite directe de l\'Atelier validé'],
+    minus: ['Dix outils d\'un coup : rien ne dit par où commencer', 'En Grand, les parties sont petites à toucher', 'Aucune idée de départ proposée'],
+    who: 'Ceux qui savent ce qu\'ils veulent', taps: '4 touchers', work: 'Gros' },
+  { f: '23-creation-blocs', t: 'Par blocs', idea: 'Le widget est une grille vide. Chaque information est un bloc qu\'on glisse dans une case.', score: 67,
+    shots: [[1, 'Départ : choisir une grille'], [2, 'Grille vide et tiroir de blocs'], [4, 'On glisse les blocs dans les cases'], [5, 'Déplacer, étirer, corbeille']],
+    plus: ['La grille montre les règles sans texte', 'Déplacer et retirer sont naturels', 'Le plus original des cinq'],
+    minus: ['Glisser-déposer difficile sur un iPhone', 'Fait croire à une liberté qu\'iOS n\'offre pas (pas de bloc haut, pas de taille libre)', 'Le plus éloigné du design validé'],
+    who: 'Les bricoleurs, plutôt sur iPad', taps: '5 gestes', work: 'Gros' },
+  { f: '24-creation-intention', t: 'Par intention', idea: 'On dit ce qu\'on veut garder sous les yeux. Ardane propose 3 widgets déjà réunis, avec tes vraies données.', score: 78,
+    shots: [[1, 'Départ : « Que veux-tu garder sous les yeux ? »'], [2, '3 widgets déjà faits avec tes données'], [4, '« + Séance du jour » : Ardane passe en Grand'], [5, '3 dispositions au choix, sans glisser']],
+    plus: ['Le plus clair : on choisit une phrase', 'Part de tes vraies données', 'Aucun mot de widget à connaître'],
+    minus: ['Peu de liberté sans passer par le Studio', 'Une intention = un seul espace aujourd\'hui', 'Ne répare pas le Studio, où est le problème'],
+    who: 'Débuter et aller vite', taps: '4 touchers', work: 'Moyen' },
+  { f: '25-creation-hybride', t: 'Hybride intelligent', idea: 'Un départ rapide (« Pour toi », « De zéro » ou « D\'un modèle »), puis l\'Atelier où l\'on agit sur le widget, en 3 chapitres : Contenu, Disposition, Style.', score: 86,
+    shots: [[1, 'Départ : « Pour toi », « De zéro », « D\'un modèle »'], [2, 'L\'Atelier s\'ouvre, widget déjà réuni'], [4, 'Ça ne tient pas : Ardane passe en Grand'], [5, 'Disposition : glisser ou plan proposé']],
+    plus: ['Rapide par suggestion, complet par l\'Atelier', 'Un seul geste pour réunir : le « + » sur le widget', 'Ne retire jamais un widget en silence', 'Garde l\'Atelier validé'],
+    minus: ['Deux façons d\'entrer à garder cohérentes', 'Le plus gros travail, à livrer en 4 étapes', 'Un peu moins guidé que le 1 pour un tout premier usage'],
+    who: 'Les débutants comme les habitués', taps: '2 par suggestion · 4 de zéro', work: 'Gros, en 4 livraisons' },
+];
+
+/* tableau des différences */
+const ROWS = [
+  ['Comment on commence', ['Un assistant : « Commencer »', 'Directement dans le Studio, un widget prêt', 'On choisit une grille vide', 'Une phrase : « Suivre mon entraînement »', '« Pour toi », « De zéro » ou « D\'un modèle »']],
+  ['Comment on réunit 2 widgets', ['Dans une grille, à l\'étape 2', 'On touche le « + » posé sur le widget', 'On glisse un bloc dans une case', 'Ardane le fait : widgets déjà réunis', 'Déjà réuni par une suggestion, ou « + » sur le widget']],
+  ['Comment on range', ['Étape « Dans quel ordre ? »', 'On glisse la partie sur l\'aperçu', 'On glisse le bloc ; corbeille pour retirer', '3 dispositions proposées', 'Plan proposé, ou glisser']],
+  ['Où se règle le style', ['Étape 4 ; le reste dans le Studio', 'Les 10 outils, à un toucher', 'Onglet « Style »', '3 ambiances ; le reste dans le Studio', 'Chapitre « Style » : les 8 outils']],
+  ['Touchers pour l\'exemple', P.map((p) => p.taps)],
+  ['Idéal pour', P.map((p) => p.who)],
+  ['Travail pour le coder', P.map((p) => p.work)],
+  ['Note', P.map((p) => `<b class="big">${p.score}<small> / 100</small></b>`)],
+];
+let h = `<tr><th></th>${P.map((p, i) => `<th class="${i === REC ? 'rec' : ''}"><small>Parcours ${i + 1}${i === REC ? ' · conseillé' : ''}</small>${p.t}</th>`).join('')}</tr>`;
+ROWS.forEach(([k, v]) => { h += `<tr><td class="k">${k}</td>${v.map((x, i) => `<td class="${i === REC ? 'rec' : ''}">${x}</td>`).join('')}</tr>`; });
+document.getElementById('diff').innerHTML = h;
+
+/* bandes */
+document.getElementById('bands').innerHTML = P.map((p, i) => `<section class="rs-p${i === REC ? ' rec' : ''}">
+  <div class="rs-h"><span class="rs-n">${i + 1}</span><div><h3>${p.t}${i === REC ? '<em>Conseillé</em>' : ''}</h3><p>${p.idea}</p></div><div class="rs-sc"><b>${p.score}</b><small>sur 100</small></div></div>
+  <div class="rs-shots">${p.shots.map(([k, c], j) => `${j ? ARR : ''}<figure><img src="${SHOT(p.f, k)}" alt=""><figcaption><span>${j + 1}</span>${c}</figcaption></figure>`).join('')}</div>
+  <div class="rs-pc"><div class="plus"><h6>Avantages</h6><ul>${p.plus.map((x) => `<li>${x}</li>`).join('')}</ul></div>
+    <div class="minus"><h6>Inconvénients</h6><ul>${p.minus.map((x) => `<li>${x}</li>`).join('')}</ul></div>
+    <div class="rs-meta"><div><small>Pour qui</small><b>${p.who}</b></div><div><small>Réunir 2 widgets</small><b>${p.taps}</b></div><div><small>Travail pour le coder</small><b>${p.work}</b></div></div></div>
+</section>`).join('');
+
+const q = new URLSearchParams(location.search);
+if (q.get('y')) { document.documentElement.style.overflow = 'hidden'; document.body.style.marginTop = (-q.get('y')) + 'px'; }   // rendu par bandes (render.py)
+</script>
+</body>
+</html>
