@@ -68,7 +68,7 @@ struct PhotoQuotesAppView: View {
                                 .font(.title2.weight(.semibold))
                                 .foregroundStyle(.secondary)
                                 .frame(maxWidth: .infinity, minHeight: 130)
-                                .background(.cardFill, in: RoundedRectangle(cornerRadius: MiniStyle.tileRadius, style: .continuous))
+                                .cristalPanel(radius: MiniStyle.tileRadius)
                         }
                         .buttonStyle(.pressable)
                         .accessibilityLabel(Text(tr("Nouveau widget")))
@@ -265,7 +265,7 @@ struct PhotoQuoteEditor: View {
                             .foregroundStyle(format == option ? Color(hex: accentHex) : Color.primary)
                     }
                     .frame(maxWidth: .infinity, minHeight: 86)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .cristalPanel(radius: 14)
                     .overlay {
                         RoundedRectangle(cornerRadius: 14, style: .continuous)
                             .strokeBorder(format == option ? Color(hex: accentHex) : .clear, lineWidth: 2)

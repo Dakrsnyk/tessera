@@ -91,7 +91,7 @@ struct DataItemRow: View {
             editor
         }
         .padding(14)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .cristalPanel(radius: 18)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("data-\(item.rawValue)")
         .permissionSheet(.motion, isPresented: $asksMotion, request: readSteps)

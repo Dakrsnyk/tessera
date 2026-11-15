@@ -1,39 +1,44 @@
 import SwiftUI
 
-/// A style's thumbnail: its background in light (left) and dark (right), its accent in both.
+/// A color's thumbnail: a mini preview of the Cristal screen in that color (its background with the two washes, a
+/// panel and a pill of its action color), in the mode on screen.
 struct AppStyleSwatch: View {
     let style: AppStyle
     let isSelected: Bool
     var size: CGFloat = 58
     /// A Premium color for a free plan: a padlock on the corner.
     var isLocked = false
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
+        let palette = CristalPalette.of(style.id)
+        let dark = scheme == .dark
+        let primary = Color(hex: palette.hex("primary", dark: dark))
+        let shape = RoundedRectangle(cornerRadius: 18, style: .continuous)
         VStack(spacing: 6) {
-            ZStack {
-                HStack(spacing: 0) {
-                    Color(hex: style.screenLight)
-                    Color(hex: style.screenDark)
+            ZStack(alignment: .topLeading) {
+                Color(hex: palette.hex("bg", dark: dark))
+                RadialGradient(colors: [Color(hex: palette.hex("na", dark: dark)), Color(hex: palette.hex("na", dark: dark)).opacity(0)],
+                               center: .topTrailing, startRadius: 0, endRadius: size)
+                RadialGradient(colors: [Color(hex: palette.hex("nb", dark: dark)), Color(hex: palette.hex("nb", dark: dark)).opacity(0)],
+                               center: .bottomLeading, startRadius: 0, endRadius: size)
+                VStack(alignment: .leading, spacing: 5) {
+                    Capsule().fill(primary).frame(width: 18, height: 6)
+                    RoundedRectangle(cornerRadius: 7, style: .continuous)
+                        .fill(Color(hex: palette.hex("panelSolid", dark: dark)))
+                        .frame(height: 24)
                 }
-                HStack(spacing: 0) {
-                    Color(hex: style.accentLight)
-                    Color(hex: style.accentDark)
-                }
-                .frame(width: size * 0.46, height: size * 0.46)
-                .clipShape(Circle())
-                .overlay { Circle().strokeBorder(Color.black.opacity(0.08), lineWidth: 1) }
+                .padding(9)
             }
-            .frame(width: size, height: size)
-            .clipShape(RoundedRectangle(cornerRadius: size * 0.26, style: .continuous))
-            .overlay {
-                RoundedRectangle(cornerRadius: size * 0.26, style: .continuous)
-                    .strokeBorder(Color.primary.opacity(0.1), lineWidth: 1)
-            }
-            .padding(3)
+            .frame(maxWidth: .infinity)
+            .frame(height: size + 8)
+            .clipShape(shape)
+            .overlay { shape.strokeBorder(Color.primary.opacity(0.1), lineWidth: 1) }
+            .padding(4)
             .overlay {
                 if isSelected {
-                    RoundedRectangle(cornerRadius: size * 0.26 + 3, style: .continuous)
-                        .strokeBorder(Color.accentColor, lineWidth: 2.5)
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .strokeBorder(primary, lineWidth: 2)
                 }
             }
             .overlay(alignment: .topTrailing) {
@@ -41,7 +46,7 @@ struct AppStyleSwatch: View {
                     Image(systemName: "checkmark.circle.fill")
                         .font(.system(size: 17, weight: .semibold))
                         .symbolRenderingMode(.palette)
-                        .foregroundStyle(.onAccent, Color.accentColor)
+                        .foregroundStyle(Color(hex: palette.hex("onPrimary", dark: dark)), primary)
                         .background(Circle().fill(.screenFill).padding(1))
                         .offset(x: 5, y: -5)
                 } else if isLocked {

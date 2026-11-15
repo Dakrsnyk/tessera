@@ -112,6 +112,7 @@ struct TutorialOverlay: View {
             buttons
         }
         .padding(18)
+        // Opaque on purpose: the bubble sits over the dimmed app, a translucent panel would let it show through.
         .background(.cardFill, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
         .overlay {
             RoundedRectangle(cornerRadius: 26, style: .continuous).strokeBorder(Color.primary.opacity(0.06), lineWidth: 1)

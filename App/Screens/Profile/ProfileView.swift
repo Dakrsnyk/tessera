@@ -402,7 +402,7 @@ struct ProfileView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 12)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .cristalPanel(radius: 16)
     }
 
     @ViewBuilder private var birthdayRow: some View {

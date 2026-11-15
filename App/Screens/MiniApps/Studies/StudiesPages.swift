@@ -525,7 +525,7 @@ struct StudiesCoursePage: View {
                 .buttonStyle(.pressable)
             }
             .padding(.horizontal, 14)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .cristalPanel(radius: 20)
         }
     }
 }
@@ -588,7 +588,7 @@ struct StudiesExamsPage: View {
                 }
             }
             .padding(.horizontal, 14)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .cristalPanel(radius: 20)
         }
     }
 }
@@ -684,7 +684,7 @@ struct StudiesGradesPage: View {
                         }
                     }
                     .padding(.horizontal, 14)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .cristalPanel(radius: 20)
                 }
             }
             if !state.grades.isEmpty {

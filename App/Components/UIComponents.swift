@@ -160,8 +160,11 @@ struct EmptyStateView: View {
     var body: some View {
         VStack(spacing: 12) {
             Image(systemName: symbol)
-                .font(.system(size: 40, weight: .light))
+                .font(.system(size: 34, weight: .light))
                 .foregroundStyle(.tint)
+                .frame(width: 84, height: 84)
+                .cristalGlass(in: Circle())
+                .padding(.bottom, 6)
             Text(title)
                 .font(.title3.weight(.semibold))
             Text(message)

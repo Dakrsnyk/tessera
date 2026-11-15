@@ -90,6 +90,19 @@ struct WidgetCarousel<Menu: View>: View {
     }
 }
 
+/// The surface of a round button: the action color when prominent, glass otherwise.
+private struct RoundSurface: ViewModifier {
+    let isProminent: Bool
+
+    @ViewBuilder func body(content: Content) -> some View {
+        if isProminent {
+            content.background(Color.accentColor, in: Circle())
+        } else {
+            content.cristalGlass(in: Circle())
+        }
+    }
+}
+
 /// A round action under the carousel: its symbol in a circle, its name below.
 struct CarouselAction: View {
     let title: String
@@ -105,7 +118,7 @@ struct CarouselAction: View {
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(isProminent ? AnyShapeStyle(.onAccent) : AnyShapeStyle(Color.accentColor))
                     .frame(width: 50, height: 50)
-                    .background(isProminent ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.cardFill), in: Circle())
+                    .modifier(RoundSurface(isProminent: isProminent))
                 Text(title)
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.primary)
@@ -124,6 +137,7 @@ struct CarouselAction: View {
 struct CategoryStrip: View {
     let designs: [WidgetDesign]
     @Binding var filter: WidgetShelfFilter
+    @Environment(\.appStyle) private var style
 
     private struct Option: Identifiable {
         let filter: WidgetShelfFilter
@@ -154,7 +168,7 @@ struct CategoryStrip: View {
             HStack(alignment: .top, spacing: 12) {
                 ForEach(options) { option in
                     let isSelected = filter == option.filter
-                    let color = Color(hex: option.colorHex)
+                    let color = CristalPalette.of(style.id).category(option.colorHex)
                     Button {
                         Haptics.tap()
                         withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) { filter = option.filter }
@@ -162,14 +176,14 @@ struct CategoryStrip: View {
                         VStack(spacing: 6) {
                             Image(systemName: option.symbol)
                                 .font(.system(size: 18, weight: .semibold))
-                                .foregroundStyle(isSelected ? Color.white : color)
+                                .foregroundStyle(isSelected ? AnyShapeStyle(.onAccent) : AnyShapeStyle(color))
                                 .frame(width: 50, height: 50)
-                                .background(isSelected ? AnyShapeStyle(color) : AnyShapeStyle(.cardFill), in: Circle())
+                                .modifier(RoundSurface(isProminent: isSelected))
                                 .overlay(alignment: .topTrailing) {
                                     Text("\(option.count)")
                                         .font(.caption2.weight(.bold))
                                         .monospacedDigit()
-                                        .foregroundStyle(isSelected ? color : Color.secondary)
+                                        .foregroundStyle(isSelected ? Color.accentColor : Color.secondary)
                                         .padding(.horizontal, 5)
                                         .frame(minWidth: 20, minHeight: 20)
                                         .background(.screenFill, in: Capsule())

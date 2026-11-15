@@ -184,7 +184,7 @@ struct MiniAppsRow: View {
         }
         .frame(width: 128, height: 118, alignment: .topLeading)
         .padding(12)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .cristalPanel(radius: 20)
     }
 }
 

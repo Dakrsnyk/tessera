@@ -592,7 +592,7 @@ struct InterestGrid: View {
                             .minimumScaleFactor(0.8)
                     }
                     .frame(maxWidth: .infinity, minHeight: 96)
-                    .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .cristalPanel(radius: 18)
                     .overlay {
                         RoundedRectangle(cornerRadius: 18, style: .continuous)
                             .strokeBorder(isOn ? Color(hex: interest.colorHex) : .clear, lineWidth: 2)

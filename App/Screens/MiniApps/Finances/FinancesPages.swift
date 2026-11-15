@@ -447,7 +447,7 @@ struct FinancesCategoriesPage: View {
                 .buttonStyle(.pressable)
             }
             .padding(.horizontal, 14)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .cristalPanel(radius: 20)
             Text(tr("Touche une catégorie pour changer son nom, sa couleur ou sa limite par mois."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
@@ -568,7 +568,7 @@ struct FinancesSavingsPage: View {
                     .accessibilityIdentifier("goals-new")
                 }
                 .padding(.horizontal, 14)
-                .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                .cristalPanel(radius: 20)
                 if !state.goals.isEmpty {
                     Text(tr("Touche un objectif pour y ajouter un versement ou le supprimer.")).font(.footnote).foregroundStyle(.secondary)
                 }

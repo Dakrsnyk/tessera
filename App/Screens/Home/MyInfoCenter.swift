@@ -209,7 +209,7 @@ struct MyInfoView: View {
                 }
             }
             .padding(.horizontal, 14)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .cristalPanel(radius: 20)
         }
     }
 }
