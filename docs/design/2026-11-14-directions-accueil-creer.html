@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane — directions de design (maquettes)</title>
+<style>
+@font-face { font-family: Inter; src: url(Inter-opsz.woff2) format("woff2"); font-weight: 100 900; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 900px; font-family: Inter, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; color: #0B1220; }
+section.dir { display: none; width: 900px; height: 1190px; padding: 26px 40px 0; position: relative; overflow: hidden; background: #E9ECF1; }
+section.dir.on { display: block; }
+.head { display: flex; justify-content: space-between; align-items: flex-start; height: 86px; }
+.head h1 { font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+.head p { font-size: 14px; color: #5B6675; margin-top: 4px; max-width: 590px; line-height: 1.35; }
+.badge { font-size: 11px; font-weight: 600; padding: 6px 10px; border-radius: 8px; background: #fff; border: 1px solid #D5DBE5; color: #5B6675; white-space: nowrap; }
+.phones { display: flex; gap: 44px; justify-content: center; }
+.col > h3, .strip h4 { font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #5B6675; margin: 0 0 9px 6px; }
+.phone { width: 370px; height: 800px; border-radius: 44px; position: relative; overflow: hidden; box-shadow: 0 0 0 9px #111418, 0 24px 50px rgba(10,20,40,.28); }
+.sb { height: 46px; display: flex; justify-content: space-between; align-items: center; padding: 8px 28px 0; font-weight: 700; font-size: 15px; }
+.sb .isl { position: absolute; left: 50%; top: 10px; width: 104px; height: 28px; margin-left: -52px; border-radius: 16px; background: #000; }
+.sb .bat { width: 24px; height: 11px; border-radius: 3px; border: 1.5px solid currentColor; position: relative; opacity: .9; }
+.sb .bat::after { content: ""; position: absolute; inset: 1.5px; right: 5px; background: currentColor; border-radius: 1px; }
+i[data-i] { display: inline-flex; width: 1em; height: 1em; flex: none; }
+i[data-i] svg { width: 100%; height: 100%; stroke-width: var(--sw, 1.8); }
+.strip { margin-top: 28px; }
+.strip h4 { margin-left: 2px; }
+.cats { display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; }
+.cats em { display: none; font-style: normal; }
+.notes { margin-top: 16px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; font-size: 12.5px; line-height: 1.4; color: #33404F; }
+.notes b { display: block; color: #0B1220; font-size: 13px; margin-bottom: 2px; }
+
+/* ============ A · Clarté ============ */
+.a .phone { background: linear-gradient(180deg, #F5F7FB, #E8ECF3); }
+.a .pad { padding: 0 20px; }
+.a .top { display: flex; justify-content: space-between; align-items: flex-end; margin: 6px 0 4px; }
+.a .date { font-size: 11.5px; font-weight: 700; letter-spacing: .08em; color: #6B7686; text-transform: uppercase; }
+.a .title { font-size: 34px; font-weight: 800; letter-spacing: -.025em; line-height: 1.08; }
+.a .sub { font-size: 14px; color: #6B7686; margin-top: 4px; }
+.a .ava { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(160deg, #17B3D0, #1D4E9E); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+.a .lab { display: flex; justify-content: space-between; align-items: baseline; font-size: 11px; font-weight: 700; letter-spacing: .1em; color: #6B7686; text-transform: uppercase; margin: 16px 2px 8px; }
+.a .lab a { color: #1D4E9E; letter-spacing: 0; text-transform: none; font-size: 12.5px; }
+.a .card { background: #fff; border-radius: 22px; box-shadow: 0 1px 2px rgba(10,20,40,.06), 0 8px 24px rgba(10,20,40,.06); padding: 16px; }
+.a .chip { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; font-size: 18px; color: var(--c); background: color-mix(in srgb, var(--c) 14%, #fff); flex: none; }
+.a .hero .r { display: flex; align-items: center; gap: 10px; }
+.a .hero .k { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--c); }
+.a .hero h5 { font-size: 21px; font-weight: 750; letter-spacing: -.01em; margin: 10px 0 2px; }
+.a .hero p { font-size: 13.5px; color: #6B7686; }
+.a .segs { display: flex; gap: 5px; margin: 12px 0 14px; }
+.a .segs span { flex: 1; height: 5px; border-radius: 3px; background: #E5E9F0; }
+.a .segs span.f { background: var(--c); }
+.a .btn { height: 46px; border-radius: 14px; background: #0B1220; color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+.a .rail { display: flex; gap: 12px; overflow: hidden; margin-right: -20px; padding-bottom: 4px; }
+.a .tile { flex: none; width: 66px; text-align: center; }
+.a .tile .ic { width: 62px; height: 62px; border-radius: 20px; background: #fff; box-shadow: 0 1px 2px rgba(10,20,40,.06), 0 6px 16px rgba(10,20,40,.06); display: grid; place-items: center; font-size: 26px; color: var(--c); margin: 0 auto 6px; }
+.a .tile b { display: block; font-size: 11.5px; font-weight: 650; }
+.a .tile span { font-size: 10.5px; color: #6B7686; white-space: nowrap; }
+.a .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.a .sum { padding: 14px; }
+.a .sum .r { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; color: var(--c); }
+.a .sum .r i { font-size: 16px; }
+.a .sum .n { font-size: 28px; font-weight: 800; letter-spacing: -.02em; margin-top: 8px; }
+.a .sum .s { font-size: 12px; color: #6B7686; }
+.a .sum .bar { height: 5px; border-radius: 3px; background: #E5E9F0; margin-top: 10px; overflow: hidden; }
+.a .sum .bar span { display: block; height: 100%; background: var(--c); border-radius: 3px; }
+.a .tab { position: absolute; left: 14px; right: 14px; bottom: 14px; height: 62px; border-radius: 31px; background: rgba(255,255,255,.94); box-shadow: 0 8px 30px rgba(10,20,40,.16); display: flex; align-items: center; justify-content: space-around; }
+.a .tab div { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; font-weight: 650; color: #6B7686; }
+.a .tab div i { font-size: 22px; }
+.a .tab div.on { color: #1D4E9E; }
+.a .search { height: 44px; border-radius: 14px; background: #fff; display: flex; align-items: center; gap: 10px; padding: 0 14px; color: #8A94A3; font-size: 14.5px; margin: 14px 0 12px; box-shadow: 0 1px 2px rgba(10,20,40,.06); }
+.a .search i { font-size: 18px; }
+.a .chips { display: flex; gap: 8px; overflow: hidden; margin-right: -20px; }
+.a .chips span { flex: none; height: 34px; padding: 0 14px; border-radius: 17px; background: #fff; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 650; }
+.a .chips span.on { background: #0B1220; color: #fff; }
+.a .wrail { display: flex; gap: 12px; overflow: hidden; margin-right: -20px; padding-bottom: 6px; }
+.a .w { flex: none; width: 146px; position: relative; }
+.a .w img { width: 146px; height: 146px; border-radius: 30px; display: block; box-shadow: 0 8px 20px rgba(10,20,40,.10); }
+.a .w .add { position: absolute; right: 8px; top: 8px; width: 30px; height: 30px; border-radius: 50%; background: #0B1220; color: #fff; display: grid; place-items: center; font-size: 15px; box-shadow: 0 2px 8px rgba(0,0,0,.25); --sw: 2.4; }
+.a .w b { display: block; font-size: 12.5px; margin-top: 8px; }
+.a .w span { font-size: 11px; color: #6B7686; }
+.a .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.a .cat { height: 58px; border-radius: 18px; background: #fff; display: flex; align-items: center; gap: 10px; padding: 0 12px; box-shadow: 0 1px 2px rgba(10,20,40,.06); }
+.a .cat b { font-size: 13.5px; font-weight: 700; display: block; }
+.a .cat span { font-size: 10.5px; color: #6B7686; white-space: nowrap; }
+.a .cat .go { margin-left: auto; color: #B3BCC9; font-size: 14px; }
+.a .cats > div { background: #fff; border-radius: 18px; height: 84px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 1px 2px rgba(10,20,40,.06); }
+.a .cats i { width: 36px; height: 36px; padding: 8px; border-radius: 12px; color: var(--c); background: color-mix(in srgb, var(--c) 14%, #fff); }
+.a .cats b { font-size: 11.5px; font-weight: 700; }
+
+/* ============ B · Élan ============ */
+.dir.b { background: #0E0E10; color: #fff; }
+.b { --sw: 2.2; }
+.b .head h1 { color: #fff; }
+.b .head p, .b .col > h3, .b .strip h4 { color: #9A9AA2; }
+.b .notes { color: #C9C9CF; } .b .notes b { color: #fff; }
+.b .badge { background: #1B1B1E; border-color: #2E2E33; color: #9A9AA2; }
+.b .phone { background: #0A0A0B; color: #fff; box-shadow: 0 0 0 9px #2A2A2E, 0 24px 50px rgba(0,0,0,.6); }
+.b .cond { font-family: Bahnschrift, "Arial Narrow", Impact, sans-serif; font-stretch: 75%; font-weight: 700; text-transform: uppercase; }
+.b .pad { padding: 0 18px; }
+.b .date { font-size: 11px; font-weight: 800; letter-spacing: .16em; color: #17B3D0; text-transform: uppercase; margin-top: 4px; }
+.b .title { font-size: 62px; line-height: .92; transform: skewX(-7deg); transform-origin: left bottom; margin: 4px 0 12px; }
+.b .hero { border-radius: 8px; padding: 16px; background: linear-gradient(135deg, #E5484D, #9E1F26); position: relative; overflow: hidden; }
+.b .hero .k { font-size: 10.5px; font-weight: 800; letter-spacing: .16em; }
+.b .hero h5 { font-size: 31px; line-height: 1; margin: 9px 0 4px; }
+.b .hero p { font-size: 11.5px; font-weight: 700; letter-spacing: .1em; opacity: .92; }
+.b .hero .big { position: absolute; right: 14px; top: 8px; font-size: 50px; line-height: 1; opacity: .3; transform: skewX(-7deg); }
+.b .hero .btn { margin-top: 14px; height: 44px; border-radius: 22px; background: #fff; color: #0A0A0B; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 19px; letter-spacing: .04em; }
+.b .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 14px; gap: 10px; }
+.b .stats b { display: block; font-size: 38px; line-height: 1; border-top: 3px solid var(--c); padding-top: 9px; }
+.b .stats span { font-size: 9.5px; font-weight: 800; letter-spacing: .12em; color: #8E8E94; }
+.b .lab { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 800; letter-spacing: .16em; color: #8E8E94; margin: 16px 0 8px; text-transform: uppercase; }
+.b .lab a { color: #fff; }
+.b .rail { display: flex; gap: 10px; overflow: hidden; margin-right: -18px; }
+.b .post { flex: none; width: 112px; height: 128px; border-radius: 8px; background: #151517; border-left: 4px solid var(--c); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; }
+.b .post i { font-size: 24px; color: var(--c); }
+.b .post b { display: block; font-size: 19px; line-height: 1.05; }
+.b .post span { font-size: 9.5px; font-weight: 800; letter-spacing: .1em; color: #8E8E94; white-space: nowrap; }
+.b .todo { display: flex; align-items: baseline; justify-content: space-between; height: 44px; border-bottom: 1px solid #26262A; padding-top: 12px; }
+.b .todo b { font-size: 20px; }
+.b .todo span { font-size: 10px; font-weight: 800; letter-spacing: .12em; color: #8E8E94; }
+.b .tab { position: absolute; left: 0; right: 0; bottom: 0; height: 72px; background: #0A0A0B; border-top: 1px solid #26262A; display: flex; justify-content: space-around; padding-top: 11px; }
+.b .tab div { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 9px; font-weight: 800; letter-spacing: .12em; color: #77777D; text-transform: uppercase; position: relative; }
+.b .tab div i { font-size: 22px; }
+.b .tab div.on { color: #17B3D0; }
+.b .tab div.on::before { content: ""; position: absolute; top: -12px; width: 28px; height: 3px; background: #17B3D0; }
+.b .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin: 2px 0 12px; }
+.b .steps div { font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #77777D; padding-top: 8px; border-top: 3px solid #26262A; }
+.b .steps div.on { color: #fff; border-color: #17B3D0; }
+.b .chips { display: flex; gap: 8px; overflow: hidden; margin-right: -18px; }
+.b .chips span { flex: none; height: 34px; padding: 0 14px; border-radius: 17px; border: 1px solid #2E2E33; display: flex; align-items: center; font-size: 16px; letter-spacing: .04em; color: #C9C9CF; }
+.b .chips span.on { background: #fff; color: #0A0A0B; border-color: #fff; }
+.b .stage { height: 232px; margin-top: 12px; border-radius: 8px; background: radial-gradient(ellipse 230px 60px at 50% 86%, rgba(240,138,0,.38), transparent 70%), #151517; position: relative; display: grid; place-items: center; }
+.b .stage img { width: 290px; border-radius: 24px; box-shadow: 0 0 0 1px #2E2E33, 0 18px 40px rgba(0,0,0,.6); }
+.b .stage .nav { position: absolute; top: 50%; margin-top: -16px; width: 32px; height: 32px; border-radius: 50%; background: #0A0A0B; border: 1px solid #2E2E33; display: grid; place-items: center; font-size: 14px; }
+.b .wname { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; }
+.b .wname b { font-size: 26px; line-height: 1; }
+.b .wname span { font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #8E8E94; }
+.b .sizes { display: flex; gap: 8px; }
+.b .sizes span { width: 64px; height: 44px; border: 1px solid #2E2E33; border-radius: 6px; display: grid; place-items: center; font-size: 20px; }
+.b .sizes span.on { background: #fff; color: #0A0A0B; border-color: #fff; }
+.b .sw { display: flex; gap: 12px; align-items: center; }
+.b .sw span { width: 30px; height: 30px; border-radius: 50%; background: var(--c); border: 1px solid #3A3A40; }
+.b .sw span.on { box-shadow: 0 0 0 2px #0A0A0B, 0 0 0 4px #fff; }
+.b .sw em { font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .14em; color: #8E8E94; margin-left: auto; }
+.b .cta { height: 52px; border-radius: 8px; background: linear-gradient(90deg, #17B3D0, #1D4E9E); display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 22px; letter-spacing: .04em; margin-top: 14px; }
+.b .cats > div { background: #151517; border-left: 4px solid var(--c); border-radius: 8px; height: 84px; padding: 11px 10px; display: flex; flex-direction: column; justify-content: space-between; }
+.b .cats i { font-size: 22px; color: var(--c); }
+.b .cats b { font-family: Bahnschrift, "Arial Narrow", sans-serif; font-stretch: 75%; font-weight: 700; text-transform: uppercase; font-size: 17px; }
+
+/* ============ C · Maison ============ */
+.dir.c { background: #E9E1D3; }
+.c { --sw: 1.25; }
+.c .head p, .c .col > h3, .c .strip h4 { color: #7A7167; }
+.c .badge { background: #F6F1E9; border-color: #D6CCBD; color: #7A7167; }
+.c .phone { background: #F6F1E9; color: #1A1714; box-shadow: 0 0 0 9px #1A1714, 0 24px 50px rgba(60,40,10,.25); }
+.c .ser { font-family: "Sitka Display", "Sitka Heading", "Sitka Text", Constantia, Georgia, serif; font-weight: 400; }
+.c .pad { padding: 0 24px; }
+.c .logo { display: block; width: 24px; height: 24px; border-radius: 7px; margin: 2px auto 7px; }
+.c .mark { text-align: center; font-size: 10.5px; font-weight: 600; letter-spacing: .5em; padding-left: .5em; }
+.c .date { text-align: center; font-size: 9.5px; font-weight: 600; letter-spacing: .24em; color: #8A8178; text-transform: uppercase; margin-top: 16px; }
+.c .title { text-align: center; font-size: 42px; font-style: italic; line-height: 1.1; margin: 2px 0 14px; }
+.c hr { border: 0; border-top: 1px solid #D6CCBD; }
+.c .lab { display: flex; justify-content: space-between; font-size: 9.5px; font-weight: 600; letter-spacing: .24em; color: #8A8178; text-transform: uppercase; margin: 15px 0 10px; }
+.c .hero { border: 1px solid #1A1714; padding: 18px; border-radius: 2px; }
+.c .hero .k { font-size: 9.5px; font-weight: 600; letter-spacing: .22em; color: #8A8178; display: flex; align-items: center; gap: 8px; }
+.c .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c); flex: none; display: inline-block; }
+.c .hero h5 { font-size: 27px; margin: 8px 0 2px; }
+.c .hero p { font-size: 13px; color: #6E665D; }
+.c .hero .btn { margin-top: 14px; height: 42px; display: grid; place-items: center; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; border-radius: 2px; background: #1A1714; color: #F6F1E9; }
+.c .row { display: flex; align-items: center; height: 48px; border-bottom: 1px solid #D6CCBD; gap: 10px; }
+.c .row .no { width: 24px; font-style: italic; color: #8A8178; font-size: 15px; }
+.c .row b { font-size: 20px; }
+.c .row .v { margin-left: auto; font-size: 12px; color: #6E665D; }
+.c .row i { font-size: 13px; color: #B3A998; }
+.c .tab { position: absolute; left: 0; right: 0; bottom: 0; height: 74px; background: #F6F1E9; border-top: 1px solid #D6CCBD; display: flex; justify-content: space-around; padding-top: 12px; }
+.c .tab div { display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 8.5px; font-weight: 600; letter-spacing: .18em; color: #8A8178; text-transform: uppercase; }
+.c .tab div i { font-size: 22px; }
+.c .tab div.on { color: #1A1714; }
+.c .tab div.on::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: #1D4E9E; }
+.c .look { display: grid; grid-template-columns: 118px 1fr; gap: 18px; background: #ECE4D7; padding: 14px 16px; border-radius: 2px; align-items: center; }
+.c .look .ph { width: 118px; height: 248px; border-radius: 18px; border: 1px solid #1A1714; overflow: hidden; background: #000; }
+.c .look .ph img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.c .look .pg { font-size: 9.5px; letter-spacing: .2em; color: #8A8178; margin-bottom: 10px; }
+.c .look h5 { font-size: 30px; font-style: italic; }
+.c .look p { font-size: 12.5px; color: #6E665D; line-height: 1.45; margin: 6px 0 14px; }
+.c .look a { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; border-bottom: 1px solid #1A1714; padding-bottom: 3px; }
+.c .unit { display: flex; align-items: center; gap: 14px; height: 60px; border-bottom: 1px solid #D6CCBD; }
+.c .unit img { height: 42px; border-radius: 9px; box-shadow: 0 0 0 1px #D6CCBD; }
+.c .unit b { font-size: 19px; display: block; }
+.c .unit small { font-size: 9px; font-weight: 600; letter-spacing: .2em; color: #8A8178; text-transform: uppercase; display: flex; align-items: center; gap: 7px; }
+.c .unit .plus { margin-left: auto; width: 30px; height: 30px; border-radius: 50%; border: 1px solid #1A1714; display: grid; place-items: center; font-size: 13px; }
+.c .cats { grid-template-columns: repeat(4, 1fr); gap: 0 26px; border-top: 1px solid #1A1714; }
+.c .cats > div { height: 46px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #D6CCBD; }
+.c .cats em { display: block; width: 20px; font-family: "Sitka Display", Constantia, Georgia, serif; font-style: italic; font-size: 13px; color: #8A8178; }
+.c .cats i { font-size: 18px; color: #1A1714; }
+.c .cats b { font-family: "Sitka Display", "Sitka Heading", Constantia, Georgia, serif; font-weight: 400; font-size: 18px; flex: 1; }
+.c .cats > div::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--c); }
+</style>
+</head>
+<body>
+
+<!-- ============================ A ============================ -->
+<section class="dir a" id="a" data-kcal="1 122">
+  <div class="head">
+    <div><h1>Direction A · Clarté</h1><p>Beaucoup d'air, un grand titre, une seule action mise en avant. Chaque catégorie garde sa couleur, toujours dans la même pastille.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span>
+  </div>
+  <div class="phones">
+    <div class="col"><h3>Accueil</h3>
+      <div class="phone">
+        <div class="sb"><span>9:41</span><div class="isl"></div><span class="bat"></span></div>
+        <div class="pad">
+          <div class="top"><div><div class="date">Dimanche 8 novembre</div><div class="title">Ta soirée</div></div><div class="ava">M</div></div>
+          <div class="lab"><span>Maintenant</span></div>
+          <div class="card hero" style="--c:#E5484D">
+            <div class="r"><div class="chip"><i data-i="dumbbell"></i></div><span class="k">Séance en cours</span></div>
+            <h5>Développé couché</h5><p>Série 4 sur 4 · 8 × 60 kg</p>
+            <div class="segs"><span class="f"></span><span class="f"></span><span class="f"></span><span></span></div>
+            <div class="btn">Série faite</div>
+          </div>
+          <div class="lab"><span>Mes espaces</span><a>Tout voir</a></div>
+          <div class="rail" data-gen="atile,6"></div>
+          <div class="lab"><span>Aujourd'hui</span></div>
+          <div class="two">
+            <div class="card sum" style="--c:#F08A00"><div class="r"><i data-i="fork"></i>Nutrition</div><div class="n">1 122</div><div class="s">kcal restantes</div><div class="bar"><span style="width:49%"></span></div></div>
+            <div class="card sum" style="--c:#5C9A2E"><div class="r"><i data-i="repeat"></i>Habitudes</div><div class="n">3 / 4</div><div class="s">faites aujourd'hui</div><div class="bar"><span style="width:75%"></span></div></div>
+            <div class="card sum" style="--c:#1E9E6A"><div class="r"><i data-i="wallet"></i>Budget</div><div class="n">312 $</div><div class="s">reste du mois</div></div>
+            <div class="card sum" style="--c:#2F6BFF"><div class="r"><i data-i="calendar"></i>Planning</div><div class="n">3 cours</div><div class="s">demain</div></div>
+          </div>
+        </div>
+        <div class="tab"><div class="on"><i data-i="home"></i>Accueil</div><div><i data-i="plus"></i>Créer</div><div><i data-i="bag"></i>Store</div><div><i data-i="grid"></i>Mes widgets</div></div>
+      </div>
+    </div>
+    <div class="col"><h3>Créer</h3>
+      <div class="phone">
+        <div class="sb"><span>9:41</span><div class="isl"></div><span class="bat"></span></div>
+        <div class="pad">
+          <div class="title" style="margin-top:6px">Créer</div><div class="sub">Choisis un espace, ou ajoute une suggestion.</div>
+          <div class="search"><i data-i="search"></i>Rechercher un widget</div>
+          <div class="chips"><span class="on">Tout</span><span><i data-i="lock"></i>Écran verrouillé</span><span>Santé</span><span>Argent</span><span>Temps</span></div>
+          <div class="lab"><span>Pour toi</span><a>Tout voir</a></div>
+          <div class="wrail">
+            <div class="w"><img src="file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/calories-s-light.png" alt=""><div class="add"><i data-i="plus"></i></div><b>Calories restantes</b><span>Nutrition · Petit</span></div>
+            <div class="w"><img src="file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/habitStreak-s-light.png" alt=""><div class="add"><i data-i="plus"></i></div><b>Série</b><span>Habitudes · Petit</span></div>
+            <div class="w"><img src="file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/budgetLeft-s-light.png" alt=""><div class="add"><i data-i="plus"></i></div><b>Reste du mois</b><span>Budget · Petit</span></div>
+          </div>
+          <div class="lab"><span>Tous les espaces</span></div>
+          <div class="grid" data-gen="acat,8"></div>
+        </div>
+        <div class="tab"><div><i data-i="home"></i>Accueil</div><div class="on"><i data-i="plus"></i>Créer</div><div><i data-i="bag"></i>Store</div><div><i data-i="grid"></i>Mes widgets</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="strip"><h4>Toutes les catégories, un seul langage</h4><div class="cats" data-gen="strip,8"></div></div>
+  <div class="notes">
+    <div><b>Une action d'abord</b>La carte « Maintenant » montre la seule chose à faire tout de suite.</div>
+    <div><b>Tes espaces en un geste</b>Une rangée d'icônes ouvre chaque mini-app d'un toucher, sans chercher sa carte.</div>
+    <div><b>Créer sans défiler</b>Recherche, suggestions à ajouter d'un toucher, et toutes les catégories sur un seul écran.</div>
+  </div>
+</section>
+
+<!-- ============================ B ============================ -->
+<section class="dir b" id="b" data-kcal="1 078">
+  <div class="head">
+    <div><h1>Direction B · Élan</h1><p>Noir, titres compacts et chiffres géants : tout se lit en une seconde. Chaque catégorie est une affiche de même forme, sa couleur en lisière.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span>
+  </div>
+  <div class="phones">
+    <div class="col"><h3>Accueil</h3>
+      <div class="phone">
+        <div class="sb"><span>9:41</span><div class="isl"></div><span class="bat"></span></div>
+        <div class="pad">
+          <div class="date">Dim. 08.11</div>
+          <div class="title cond">Ta soirée</div>
+          <div class="hero">
+            <div class="big cond">4/4</div>
+            <div class="k">SÉANCE EN COURS</div>
+            <h5 class="cond">Développé couché</h5><p>SÉRIE 4 SUR 4 · 8 × 60 KG</p>
+            <div class="btn cond">Série faite <i data-i="arrow"></i></div>
+          </div>
+          <div class="stats">
+            <div style="--c:#F08A00"><b class="cond">1 078</b><span>KCAL RESTANTES</span></div>
+            <div style="--c:#5C9A2E"><b class="cond">3/4</b><span>HABITUDES</span></div>
+            <div style="--c:#1E9E6A"><b class="cond">312 $</b><span>RESTE DU MOIS</span></div>
+          </div>
+          <div class="lab"><span>Tes espaces</span><a>Tout voir</a></div>
+          <div class="rail" data-gen="bpost,4"></div>
+          <div class="lab"><span>À ne pas oublier</span></div>
+          <div class="todo"><b class="cond">Rendu du rapport</b><span>MARDI</span></div>
+          <div class="todo"><b class="cond">Loyer</b><span>MERCREDI · 1 250 $</span></div>
+        </div>
+        <div class="tab"><div class="on"><i data-i="home"></i>Accueil</div><div><i data-i="plus"></i>Créer</div><div><i data-i="bag"></i>Store</div><div><i data-i="grid"></i>Mes widgets</div></div>
+      </div>
+    </div>
+    <div class="col"><h3>Créer</h3>
+      <div class="phone">
+        <div class="sb"><span>9:41</span><div class="isl"></div><span class="bat"></span></div>
+        <div class="pad">
+          <div class="title cond" style="margin-top:14px">Créer</div>
+          <div class="steps"><div class="on">01 ESPACE</div><div class="on">02 TAILLE</div><div>03 STYLE</div></div>
+          <div class="chips"><span class="cond on">Nutrition</span><span class="cond">Fitness</span><span class="cond">Habitudes</span><span class="cond">Budget</span><span class="cond">Planning</span></div>
+          <div class="stage"><img src="file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/macros-m-dark.png" alt=""><div class="nav" style="left:8px"><i data-i="chevl"></i></div><div class="nav" style="right:8px"><i data-i="chev"></i></div></div>
+          <div class="wname"><b class="cond">Macros</b><span>NUTRITION · 2 SUR 8</span></div>
+          <div class="lab"><span>Taille</span></div>
+          <div class="sizes"><span class="cond">S</span><span class="cond on">M</span><span class="cond">L</span><span class="cond"><i data-i="lock"></i></span></div>
+          <div class="lab"><span>Style</span></div>
+          <div class="sw"><span style="--c:#F4F4F5"></span><span class="on" style="--c:#151517"></span><span style="--c:linear-gradient(160deg,#17B3D0,#1D4E9E)"></span><span style="--c:#F08A00"></span><span style="--c:#B6F23B"></span><em>SOMBRE</em></div>
+          <div class="cta cond">Ajouter à mon écran <i data-i="arrow"></i></div>
+        </div>
+        <div class="tab"><div><i data-i="home"></i>Accueil</div><div class="on"><i data-i="plus"></i>Créer</div><div><i data-i="bag"></i>Store</div><div><i data-i="grid"></i>Mes widgets</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="strip"><h4>Toutes les catégories, un seul langage</h4><div class="cats" data-gen="strip,8"></div></div>
+  <div class="notes">
+    <div><b>Lecture en une seconde</b>Trois chiffres géants résument la journée ; l'action en cours prend toute la largeur.</div>
+    <div><b>Des affiches, pas des cartes</b>Chaque espace a la même affiche. Seule la lisière de couleur change.</div>
+    <div><b>Un configurateur</b>Espace, taille et style sur un seul écran, comme on personnalise une chaussure.</div>
+  </div>
+</section>
+
+<!-- ============================ C ============================ -->
+<section class="dir c" id="c" data-kcal="1 122">
+  <div class="head">
+    <div><h1>Direction C · Maison</h1><p>Papier ivoire, une seule encre, des filets fins. La couleur de chaque catégorie se réduit à un point : rien ne crie, tout s'accorde.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span>
+  </div>
+  <div class="phones">
+    <div class="col"><h3>Accueil</h3>
+      <div class="phone">
+        <div class="sb"><span>9:41</span><div class="isl"></div><span class="bat"></span></div>
+        <div class="pad">
+          <img class="logo" src="file:///C:/Users/Etudiant/ardane-tools/film/public/store/ardane-icon.png" alt="">
+          <div class="mark">ARDANE</div>
+          <div class="date">Dimanche 8 novembre</div>
+          <div class="title ser">Ta soirée</div>
+          <hr>
+          <div class="lab"><span>En cours</span></div>
+          <div class="hero" style="--c:#E5484D">
+            <div class="k"><em class="dot"></em>FITNESS · SÉANCE</div>
+            <h5 class="ser">Développé couché</h5><p>Série 4 sur 4 — 8 × 60 kg</p>
+            <div class="btn">Valider la série</div>
+          </div>
+          <div class="lab"><span>Sommaire</span><span>8 espaces</span></div>
+          <div data-gen="crow,6"></div>
+        </div>
+        <div class="tab"><div class="on"><i data-i="home"></i>Accueil</div><div><i data-i="plus"></i>Créer</div><div><i data-i="bag"></i>Store</div><div><i data-i="grid"></i>Mes widgets</div></div>
+      </div>
+    </div>
+    <div class="col"><h3>Créer</h3>
+      <div class="phone">
+        <div class="sb"><span>9:41</span><div class="isl"></div><span class="bat"></span></div>
+        <div class="pad">
+          <img class="logo" src="file:///C:/Users/Etudiant/ardane-tools/film/public/store/ardane-icon.png" alt="">
+          <div class="mark">ARDANE</div>
+          <div class="date">Compose ton écran</div>
+          <div class="title ser">L'Atelier</div>
+          <hr>
+          <div class="lab"><span>Collections</span><span>1 / 6</span></div>
+          <div class="look">
+            <div class="ph"><img src="file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/home-foret.png" alt=""></div>
+            <div><div class="pg">ÉCRAN COMPLET</div><h5 class="ser">Forêt</h5><p>Les widgets, les icônes et le fond d'écran, accordés d'un seul geste.</p><a>Découvrir</a></div>
+          </div>
+          <div class="lab"><span>À l'unité</span><span>Tout voir</span></div>
+          <div class="unit" style="--c:#F08A00"><img src="file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/calories-s-paper.png" alt=""><div><b class="ser">Calories restantes</b><small><em class="dot"></em>Nutrition · Petit</small></div><div class="plus"><i data-i="plus"></i></div></div>
+          <div class="unit" style="--c:#2F6BFF"><img src="file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/priorities-s-paper.png" alt=""><div><b class="ser">Top 3 du jour</b><small><em class="dot"></em>Planning · Petit</small></div><div class="plus"><i data-i="plus"></i></div></div>
+          <div class="unit" style="--c:#2F6BFF"><img src="file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/weekView-m-editorial.png" alt=""><div><b class="ser">Ma semaine</b><small><em class="dot"></em>Planning · Moyen</small></div><div class="plus"><i data-i="plus"></i></div></div>
+        </div>
+        <div class="tab"><div><i data-i="home"></i>Accueil</div><div class="on"><i data-i="plus"></i>Créer</div><div><i data-i="bag"></i>Store</div><div><i data-i="grid"></i>Mes widgets</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="strip"><h4>Toutes les catégories, un seul langage</h4><div class="cats" data-gen="strip,8"></div></div>
+  <div class="notes">
+    <div><b>Un sommaire</b>L'accueil devient une table des matières : chaque espace est à un toucher, avec son chiffre du jour.</div>
+    <div><b>Une seule encre</b>Mêmes lettres, mêmes filets partout. La couleur d'un espace n'est plus qu'un point.</div>
+    <div><b>Un atelier</b>Créer propose d'abord des écrans complets déjà accordés, puis les widgets à l'unité.</div>
+  </div>
+</section>
+
+<script>
+const P = {
+  home: 'M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z', plus: 'M12 5v14M5 12h14',
+  bag: 'M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2', grid: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
+  fork: 'M7 3v7a2 2 0 0 0 4 0V3M9 12v9M17 3c-2 2-3 5-3 8h3v10', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12',
+  repeat: 'M17 2l3 3-3 3M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3M20 13v2a4 4 0 0 1-4 4H4',
+  wallet: 'M3 7a2 2 0 0 1 2-2h13v4M3 7v10a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2zM16 14h.01',
+  calendar: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4', plane: 'M3 12l18-8-6 17-3-7z',
+  car: 'M3 15H2v-3l3-1 2-4h8l3 4 4 1v3h-1M9 15h6M5 15a2 2 0 1 0 4 0 2 2 0 1 0-4 0M15 15a2 2 0 1 0 4 0 2 2 0 1 0-4 0M7.5 11H18', briefcase: 'M4 8h16v11H4zM9 8V5h6v3M4 13h16',
+  chev: 'M9 6l6 6-6 6', chevl: 'M15 6l-6 6 6 6', search: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4',
+  lock: 'M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3', arrow: 'M5 12h14M13 6l6 6-6 6',
+};
+// Nom, icône, couleur, valeur du jour (exemple), widgets réels de l'espace.
+const CATS = [
+  ['Nutrition', 'fork', '#F08A00', '1 676 kcal', 'Calories, Macros'], ['Fitness', 'dumbbell', '#E5484D', 'Série 4/4', 'Séance, Repos'],
+  ['Habitudes', 'repeat', '#5C9A2E', '3 sur 4', 'Série, Semaine'], ['Budget', 'wallet', '#1E9E6A', '312 $', 'Reste du mois'],
+  ['Planning', 'calendar', '#2F6BFF', '3 cours', 'Semaine, Top 3'], ['Voyage', 'plane', '#12A5C4', 'J-12', 'Départ, Vol'],
+  ['Auto', 'car', '#6B7686', 'J-20', 'Entretien, Coût'], ['Entreprise', 'briefcase', '#6C5CE7', '+4 %', 'Ventes, Objectif'],
+];
+const no = (k) => String(k + 1).padStart(2, '0');
+const T = {
+  atile: (c) => `<div class="tile" style="--c:${c[2]}"><div class="ic"><i data-i="${c[1]}"></i></div><b>${c[0]}</b><span>${c[3]}</span></div>`,
+  acat: (c) => `<div class="cat" style="--c:${c[2]}"><div class="chip"><i data-i="${c[1]}"></i></div><div><b>${c[0]}</b><span>${c[4]}</span></div><i class="go" data-i="chev"></i></div>`,
+  bpost: (c) => `<div class="post" style="--c:${c[2]}"><i data-i="${c[1]}"></i><div><b class="cond">${c[0]}</b><span>${c[3].toUpperCase()}</span></div></div>`,
+  crow: (c, k) => `<div class="row" style="--c:${c[2]}"><span class="no ser">${no(k)}</span><em class="dot"></em><b class="ser">${c[0]}</b><span class="v">${c[3]}</span><i data-i="chev"></i></div>`,
+  strip: (c, k) => `<div style="--c:${c[2]}"><em>${no(k)}</em><i data-i="${c[1]}"></i><b>${c[0]}</b></div>`,
+};
+document.querySelectorAll('[data-gen]').forEach((el) => { const [t, n] = el.dataset.gen.split(','); const kcal = el.closest('section').dataset.kcal + ' kcal'; el.innerHTML = CATS.slice(0, +n).map((c, k) => T[t](c[0] === 'Nutrition' ? [c[0], c[1], c[2], kcal, c[4]] : c, k)).join(''); });
+document.querySelectorAll('i[data-i]').forEach((e) => { e.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${P[e.dataset.i]}"/></svg>`; });
+document.getElementById(new URLSearchParams(location.search).get('d') || 'a').classList.add('on');
+</script>
+</body>
+</html>
