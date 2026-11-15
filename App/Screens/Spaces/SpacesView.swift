@@ -173,8 +173,8 @@ struct SpacesView: View {
                 .font(.subheadline.weight(.semibold))
                 .padding(.horizontal, 14)
                 .frame(minHeight: 36)
-                .foregroundStyle(isOn ? AnyShapeStyle(Color(.systemBackground)) : AnyShapeStyle(Color.primary))
-                .background(isOn ? AnyShapeStyle(Color.primary) : AnyShapeStyle(AppFill.cardFill), in: Capsule())
+                .foregroundStyle(isOn ? AnyShapeStyle(.onAccent) : AnyShapeStyle(Color.primary))
+                .background(isOn ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(AppFill.cardFill), in: Capsule())
         }
         .buttonStyle(.pressable)
         .accessibilityAddTraits(isOn ? .isSelected : [])
@@ -426,15 +426,17 @@ struct SpaceCard: View {
     let space: Space
     let summary: String
     let widgetCount: Int
+    @Environment(\.appStyle) private var style
 
     var body: some View {
+        let tint = CristalPalette.of(style.id).category(space.colorHex)
         VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Image(systemName: space.symbol)
                     .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(tint)
                     .frame(width: 38, height: 38)
-                    .background(Color(hex: space.colorHex), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
+                    .background(tint.opacity(0.14), in: Circle())
                 Spacer()
                 Text("\(widgetCount)")
                     .font(.caption.weight(.semibold))

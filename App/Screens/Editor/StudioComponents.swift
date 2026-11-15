@@ -48,6 +48,7 @@ enum StudioSection: String, CaseIterable, Identifiable {
 struct StudioSectionBar: View {
     let sections: [StudioSection]
     @Binding var selection: StudioSection
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -59,15 +60,20 @@ struct StudioSectionBar: View {
                             Haptics.tap()
                             withAnimation(.easeInOut(duration: 0.2)) { selection = section }
                         } label: {
-                            HStack(spacing: 5) {
-                                Image(systemName: section.symbol).font(.caption.weight(.semibold))
+                            // A tool: its symbol over its name; the one open sits on a soft tint, in the action color.
+                            VStack(spacing: 4) {
+                                Image(systemName: section.symbol).font(.system(size: 18, weight: .semibold))
                                 Text(section.title)
+                                    .font(.caption2.weight(.semibold))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.8)
                             }
-                            .font(.subheadline.weight(.medium))
-                            .foregroundStyle(isSelected ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.primary))
-                            .padding(.horizontal, 12)
-                            .frame(minHeight: 36)
-                            .background(isSelected ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.cardFill), in: Capsule())
+                            .foregroundStyle(isSelected ? Color.accentColor : Color.secondary)
+                            .padding(.horizontal, 8)
+                            .frame(minWidth: 68, minHeight: 60)
+                            .background(isSelected ? CristalPalette.of(style.id).tint2Color : Color.clear,
+                                        in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                            .contentShape(Rectangle())
                         }
                         .buttonStyle(.pressable)
                         .accessibilityIdentifier("studio-\(section.rawValue)")
@@ -251,23 +257,28 @@ struct StudioStage: View {
     @Binding var family: WidgetFamily
     let payload: WidgetPayload
     var isExample = false
+    @Environment(\.appStyle) private var style
 
     var body: some View {
+        let palette = CristalPalette.of(style.id)
         VStack(spacing: 8) {
             preview
-                .padding(.vertical, 12)
+                .shadow(color: Color.black.opacity(family.isAccessory ? 0 : 0.14), radius: 10, y: 5)
+                // Room for the shadow inside the clipped scene (radius 10, 5 points down).
+                .padding(.top, 12)
+                .padding(.bottom, 16)
                 .animation(.easeInOut(duration: 0.25), value: design)
                 .animation(.easeInOut(duration: 0.2), value: family)
                 .frame(maxWidth: .infinity)
                 .background {
-                    LinearGradient(
-                        colors: family.isAccessory
-                            ? [Color(hex: "1F2A44"), Color(hex: "3B2F5C")]
-                            : [Color(light: "DCE3EA", dark: "1B1F26"), Color(light: "C9D3DD", dark: "11141A")],
-                        startPoint: .topLeading, endPoint: .bottomTrailing
-                    )
+                    // The Lock Screen scene keeps its night backdrop (white caption, one-tint widgets).
+                    if family.isAccessory {
+                        LinearGradient(colors: [Color(hex: "1F2A44"), Color(hex: "3B2F5C")], startPoint: .topLeading, endPoint: .bottomTrailing)
+                    } else {
+                        palette.well2Color
+                    }
                 }
-            .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+            .clipShape(RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
             .overlay(alignment: .topLeading) {
                 if isExample { ExampleBadge().padding(10) }
             }

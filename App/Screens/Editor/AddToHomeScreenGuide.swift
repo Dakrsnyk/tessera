@@ -9,6 +9,7 @@ struct AddToHomeScreenGuide: View {
     var designID: UUID?
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.appStyle) private var style
     @State private var target = 0
 
     /// The widget the guide is about (just saved, or picked in « Mes widgets »).
@@ -87,6 +88,9 @@ struct AddToHomeScreenGuide: View {
                     }
                     .font(.footnote)
                     .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(14)
+                    .background(CristalPalette.of(style.id).wellColor, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
 
                     if target == 1 {
                         Label {
@@ -96,6 +100,9 @@ struct AddToHomeScreenGuide: View {
                         }
                         .font(.footnote)
                         .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(14)
+                        .background(CristalPalette.of(style.id).wellColor, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                     }
                 }
                 .padding(20)

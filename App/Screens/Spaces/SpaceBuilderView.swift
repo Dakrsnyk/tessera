@@ -10,6 +10,7 @@ struct SpaceBuilderView: View {
     let space: Space
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.appStyle) private var style
 
     @State private var format: WidgetFormat = .small
     /// Selected widgets, in the order they were picked.
@@ -180,9 +181,9 @@ struct SpaceBuilderView: View {
         HStack(spacing: 12) {
             Image(systemName: space.symbol)
                 .font(.system(size: 18, weight: .semibold))
-                .foregroundStyle(.white)
+                .foregroundStyle(CristalPalette.of(style.id).category(space.colorHex))
                 .frame(width: 42, height: 42)
-                .background(Color(hex: space.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .background(CristalPalette.of(style.id).category(space.colorHex).opacity(0.14), in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(tr("Crée ton widget"))
                     .font(.title3.weight(.semibold))
@@ -219,17 +220,14 @@ struct SpaceBuilderView: View {
     /// The widget as it will look on the Home Screen, at its real proportions.
     @ViewBuilder private var preview: some View {
         ZStack {
-            LinearGradient(
-                colors: [Color(light: "DCE3EA", dark: "1B1F26"), Color(light: "C9D3DD", dark: "11141A")],
-                startPoint: .topLeading, endPoint: .bottomTrailing
-            )
+            CristalPalette.of(style.id).well2Color
             previewContent
                 .padding(20)
                 .animation(.spring(response: 0.35, dampingFraction: 0.85), value: selection)
                 .animation(.spring(response: 0.35, dampingFraction: 0.85), value: format)
         }
         .frame(maxWidth: .infinity)
-        .clipShape(RoundedRectangle(cornerRadius: 24, style: .continuous))
+        .clipShape(RoundedRectangle(cornerRadius: CristalPalette.of(style.id).radius, style: .continuous))
         .overlay(alignment: .topLeading) {
             if showsExample { ExampleBadge().padding(12) }
         }
@@ -383,7 +381,7 @@ struct SpaceBuilderView: View {
                     .frame(maxWidth: .infinity, minHeight: 50)
             }
             .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.roundedRectangle(radius: 14))
+            .buttonBorderShape(.capsule)
             .disabled(designs.isEmpty)
             .padding(.horizontal, 20)
             .padding(.vertical, 10)

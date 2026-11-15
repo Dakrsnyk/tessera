@@ -124,6 +124,7 @@ struct LockScreenCreator: View {
 /// The steps to put a widget on the Lock Screen.
 struct LockScreenGuide: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.appStyle) private var style
 
     private let steps: [(String, String)] = [
         ("hand.tap", tr("Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».")),
@@ -138,9 +139,10 @@ struct LockScreenGuide: View {
                 ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
                     HStack(alignment: .top, spacing: 12) {
                         Image(systemName: step.0)
-                            .font(.title3)
+                            .font(.system(size: 16, weight: .semibold))
                             .foregroundStyle(Color.accentColor)
-                            .frame(width: 30)
+                            .frame(width: 36, height: 36)
+                            .background(CristalPalette.of(style.id).tint2Color, in: Circle())
                         VStack(alignment: .leading, spacing: 2) {
                             Text(tr("Étape \(index + 1)"))
                                 .font(.caption.weight(.semibold))
@@ -150,13 +152,16 @@ struct LockScreenGuide: View {
                         }
                     }
                     .padding(.vertical, 4)
+                    .listRowBackground(Rectangle().fill(.cardFill))
                 }
                 Section {
                     Text(tr("Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions."))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
+                .listRowBackground(CristalPalette.of(style.id).wellColor)
             }
+            .styledList()
             .navigationTitle(tr("Écran verrouillé"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
