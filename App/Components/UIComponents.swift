@@ -330,6 +330,7 @@ extension WidgetFamily {
 /// Marks a widget that can be used without opening the app (a button, a toggle, the scanner).
 struct InteractiveBadge: View {
     var showsText = false
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         HStack(spacing: 3) {
@@ -340,10 +341,10 @@ struct InteractiveBadge: View {
                     .font(.system(size: 10, weight: .bold))
             }
         }
-        .foregroundStyle(Color(light: "1E5BD6", dark: "8DB4FF"))
+        .foregroundStyle(Color.accentColor)
         .padding(.horizontal, showsText ? 7 : 5)
         .padding(.vertical, 3)
-        .background(Color(light: "E3EDFF", dark: "1D2C4A"), in: Capsule())
+        .background(CristalPalette.of(style.id).tintColor, in: Capsule())
         .accessibilityElement()
         .accessibilityLabel(Text(tr("Interactif")))
     }

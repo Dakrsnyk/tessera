@@ -641,7 +641,7 @@ struct EssentialsList: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 4)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .cristalPanel(radius: 22)
     }
 }
 
@@ -687,7 +687,7 @@ struct CategoryIndex: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 4)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+        .cristalPanel(radius: 22)
     }
 }
 
@@ -831,7 +831,7 @@ struct WeeklyStyleFeature: View {
                 }
             }
             .padding(16)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 26, style: .continuous))
+            .cristalPanel(radius: 26)
         }
         .buttonStyle(.pressable)
         .padding(.horizontal, 20)

@@ -626,10 +626,23 @@ struct FilterChip: View {
             .foregroundStyle(isSelected ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.primary))
             .padding(.horizontal, 14)
             .frame(minHeight: 36)
-            .background(isSelected ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(.cardFill), in: Capsule())
+            .modifier(FilterChipSurface(isSelected: isSelected))
         }
         .buttonStyle(.pressable)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+}
+
+/// The chip's surface: the action color when chosen, a Cristal panel (a capsule at 36 pt) otherwise.
+private struct FilterChipSurface: ViewModifier {
+    let isSelected: Bool
+
+    @ViewBuilder func body(content: Content) -> some View {
+        if isSelected {
+            content.background(Color.accentColor, in: Capsule())
+        } else {
+            content.cristalPanel(radius: 100)   // a capsule at any height (large text)
+        }
     }
 }
 

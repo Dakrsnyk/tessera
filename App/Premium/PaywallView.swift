@@ -405,12 +405,27 @@ struct PaywallView: View {
     }
 }
 
+/// A plan's surface: the chosen one on the soft tint of the action color, the others on a Cristal panel.
+private struct PlanSurface: ViewModifier {
+    let isSelected: Bool
+    let tint: Color
+
+    @ViewBuilder func body(content: Content) -> some View {
+        if isSelected {
+            content.background(tint, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        } else {
+            content.cristalPanel(radius: 18)
+        }
+    }
+}
+
 private struct PlanCard: View {
     let product: Product
     let isSelected: Bool
     let badge: String?
     let subtitle: String
     let action: () -> Void
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         Button(action: action) {
@@ -439,10 +454,10 @@ private struct PlanCard: View {
                 Spacer(minLength: 0)
             }
             .padding(16)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            .modifier(PlanSurface(isSelected: isSelected, tint: CristalPalette.of(style.id).tintColor))
             .overlay {
                 RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .strokeBorder(isSelected ? Color.accentColor : Color.clear, lineWidth: 2)
+                    .strokeBorder(isSelected ? Color.accentColor : Color.clear, lineWidth: 1.5)
             }
         }
         .buttonStyle(.pressable)
