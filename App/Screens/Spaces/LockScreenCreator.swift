@@ -7,6 +7,9 @@ import WidgetKit
 struct LockScreenCreator: View {
     /// A widget chosen: the Créer tab opens it in its Studio.
     let onChoose: ([WidgetDesign]) -> Void
+    /// When given, used instead of `onChoose`: the widget and the Lock Screen shape the card showed, so the
+    /// Studio opens on that shape.
+    var onChooseLock: ((WidgetDesign, WidgetFamily) -> Void)? = nil
     @Environment(AppModel.self) private var model
     @State private var onlyInteractive = false
     @State private var showsGuide = false
@@ -54,7 +57,12 @@ struct LockScreenCreator: View {
                         LazyHStack(alignment: .top, spacing: 14) {
                             ForEach(Array(group.items.enumerated()), id: \.element.id) { pair in
                                 Button {
-                                    onChoose([pair.element.widget.makeDesign()])
+                                    let design = pair.element.widget.makeDesign()
+                                    if let onChooseLock {
+                                        onChooseLock(design, pair.element.widget.family)
+                                    } else {
+                                        onChoose([design])
+                                    }
                                 } label: {
                                     LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
                                 }

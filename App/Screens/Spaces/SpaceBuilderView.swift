@@ -271,6 +271,13 @@ struct SpaceBuilderView: View {
 
     private var widgetsSection: some View {
         EditorSection(title: tr("Widgets"), detail: widgetsDetail) {
+            if separates {
+                Label(tr("Ils seront séparés. Pour les réunir en un seul widget, touche « + » sur le widget dans l'Atelier."), systemImage: "info.circle")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("builder-separate-note")
+            }
             if kinds.contains(where: \.isInteractive) {
                 Toggle(isOn: $onlyInteractive.animation(.snappy)) {
                     HStack(spacing: 6) {
@@ -381,7 +388,11 @@ struct SpaceBuilderView: View {
         .background(.bar)
     }
 
+    /// « Changer de widget » with several widgets picked: they are made apart, not merged.
+    private var separates: Bool { !combines && format == .small && selection.count > 1 }
+
     private var continueTitle: String {
+        if separates { return tr("Créer les \(selection.count) widgets séparés") }
         if format == .small && selection.count > 1 { return tr("Personnaliser les \(selection.count) widgets") }
         return tr("Personnaliser le widget")
     }

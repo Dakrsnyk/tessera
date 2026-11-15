@@ -1,6 +1,7 @@
 import Foundation
 import Observation
 import SwiftUI
+import WidgetKit
 
 struct EditorRequest: Identifiable {
     let id = UUID()
@@ -9,15 +10,18 @@ struct EditorRequest: Identifiable {
     var isNew: Bool
     /// The Studio section to open on (a `StudioSection` raw value), the content by default.
     var section: String? = nil
+    /// The size the Studio opens on (a Lock Screen size from the Lock Screen creator), the widget's own by default.
+    var family: WidgetFamily? = nil
 
-    init(design: WidgetDesign, isNew: Bool, section: String? = nil) {
-        self.init(designs: [design], isNew: isNew, section: section)
+    init(design: WidgetDesign, isNew: Bool, section: String? = nil, family: WidgetFamily? = nil) {
+        self.init(designs: [design], isNew: isNew, section: section, family: family)
     }
 
-    init(designs: [WidgetDesign], isNew: Bool, section: String? = nil) {
+    init(designs: [WidgetDesign], isNew: Bool, section: String? = nil, family: WidgetFamily? = nil) {
         self.designs = designs
         self.isNew = isNew
         self.section = section
+        self.family = family
     }
 
     /// The first widget (a blank note if the list is empty, which a caller should never ask for).

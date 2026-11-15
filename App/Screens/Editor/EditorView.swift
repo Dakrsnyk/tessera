@@ -27,9 +27,11 @@ final class StudioPhotoSession {
     }
 }
 
-/// The Widget Studio: every widget is made and changed here, whether it comes from « Créer », the Store,
-/// a pack or « Mes widgets ». Several widgets made together are edited one after the other and can
-/// share their look. Every change can be undone and redone.
+/// The Widget Studio (« l'Atelier »): every widget is made and changed here, whether it comes from « Créer », the
+/// Store, a pack or « Mes widgets ». Three chapters under the stage: « Contenu » (the size, the widgets inside, what
+/// the widget shows), « Disposition » (how the widgets inside are laid out) and « Style » (the look). The stage acts on
+/// the widget: a touch on a widget inside opens it, « + » adds one. Several widgets made together are edited one
+/// after the other and can share their look. Every change can be undone and redone.
 struct WidgetStudio: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -53,6 +55,10 @@ struct WidgetStudio: View {
     @State private var isImportingPhoto = false
     @State private var backgroundTab: BackgroundKind
     @State private var previewFrame: CGRect = .zero
+    /// The chapter open under the stage, and those already opened (a check on their badge).
+    @State private var chapter: StudioChapter
+    @State private var visitedChapters: Set<StudioChapter>
+    /// The tool open in « Style » (never « Taille » nor « Contenu », which are in the chapter « Contenu »).
     @State private var section: StudioSection
     /// Widgets made together wear the same look while this is on: a change to one goes to all.
     @State private var sharesLook: Bool
@@ -62,10 +68,16 @@ struct WidgetStudio: View {
     @State private var lastChange = Date.distantPast
     @State private var restored: [WidgetDesign]?
     @State private var photos = StudioPhotoSession()
-    /// The widget inside a combined widget whose settings page is open.
-    @State private var openedPart: Int?
-    /// « Réunir avec un autre widget » (Taille): the space's widget creator, over the Studio.
-    @State private var combining = false
+    /// What « Contenu » shows: the widgets inside, one of them, or the choice of a widget to add or put in its place.
+    @State private var partsPanel: StudioPartsPanel = .list
+    /// Where « Fermer » of the choice of a widget goes back to (the list, or the widget it was opened from).
+    @State private var pickerBack: StudioPartsPanel = .list
+    /// After an edit of the widgets inside: the size that changed (with « Annuler »), or why nothing changed.
+    @State private var comboNote: StudioComboNote?
+    /// « Sur mon écran »: the widget on a Home Screen, at its real size.
+    @State private var showsOnMyScreen = false
+    /// « Enregistrer le widget » touched in « Sur mon écran »: saved once it has closed.
+    @State private var savesAfterPreview = false
 
     private let isNew: Bool
     private let originals: [WidgetDesign]
@@ -75,10 +87,18 @@ struct WidgetStudio: View {
         // are ready: never an empty list.
         let designs = request.designs.isEmpty ? [request.design] : request.designs
         _designs = State(initialValue: designs)
-        _family = State(initialValue: request.design.displayFormat.family)
+        // The size the request asks for (a Lock Screen size from its creator) when the widget has it, else its own.
+        var opening = request.design.displayFormat.family
+        if let asked = request.family, request.design.families.contains(asked) { opening = asked }
+        _family = State(initialValue: opening)
         _backgroundTab = State(initialValue: BackgroundKind(request.design.background))
-        // The content, except where the request says (Créer opens on « Taille »).
-        _section = State(initialValue: request.section.flatMap(StudioSection.init(name:)) ?? .content)
+        // « Contenu » (where « Taille » and « Contenu » now are), or « Style » on the tool the request names.
+        var tool: StudioSection?
+        if let asked = request.section.flatMap(StudioSection.init(name:)), asked != .size, asked != .content { tool = asked }
+        let first: StudioChapter = tool == nil ? .content : .style
+        _chapter = State(initialValue: first)
+        _visitedChapters = State(initialValue: [first])
+        _section = State(initialValue: tool ?? .theme)
         _sharesLook = State(initialValue: designs.count > 1 && designs.dropFirst().allSatisfy { $0.withLook(of: designs[0]) == $0 })
         isNew = request.isNew
         originals = designs
@@ -115,13 +135,24 @@ struct WidgetStudio: View {
     private func screen(_ input: StudioInput, sections: [StudioSection]) -> some View {
         VStack(spacing: 0) {
             // Always in view: every change shows at once.
-            StudioStage(design: design, family: $family, payload: payload, isExample: !model.hasOwnData(for: design))
+            stage
                 .padding(.horizontal, 20)
                 .padding(.top, 6)
                 .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
-            if let onChangeWidget { changeWidgetButton(onChangeWidget) }
             if designs.count > 1 { widgetSwitcher }
-            StudioSectionBar(sections: sections, selection: $section)
+            if let comboNote {
+                StudioComboNoteView(note: comboNote, onUndo: undo, onClose: closeNote)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 8)
+                    .transition(.opacity)
+            }
+            StudioChapterBar(selection: $chapter, visited: visitedChapters)
+                .padding(.horizontal, 20)
+                .padding(.top, 10)
+                .padding(.bottom, chapter == .style ? 0 : 8)
+            if chapter == .style {
+                StudioSectionBar(sections: Self.styleTools(sections), selection: $section)
+            }
             Divider()
             settings(input)
         }
@@ -130,6 +161,37 @@ struct WidgetStudio: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { toolbarContent }
+    }
+
+    /// The widget, which the person acts on: a touch on a widget inside opens it (not on the Lock Screen).
+    private var stage: some View {
+        StudioStage(
+            design: design, family: $family, payload: payload, isExample: !model.hasOwnData(for: design),
+            selectedPart: chapter == .content ? shownPanel.partIndex : nil, onPart: stagePartAction
+        ) {
+            stageFooter
+        }
+    }
+
+    private var stagePartAction: ((Int) -> Void)? {
+        if isLockScreen { return nil }
+        return { part in openPart(part) }
+    }
+
+    /// On the stage, under the widget: « Changer de widget » (Créer), « + » while there is room, « Sur mon écran ».
+    private var stageFooter: some View {
+        HStack(spacing: 10) {
+            if let onChangeWidget { changeWidgetButton(onChangeWidget) }
+            Spacer(minLength: 0)
+            if canAddPart {
+                StudioRoundButton(symbol: "plus", title: tr("Ajouter un widget"), identifier: "stage-add") {
+                    openPicker(.adding)
+                }
+            }
+            StudioRoundButton(symbol: "eye", title: tr("Sur mon écran"), identifier: "studio-on-my-screen") {
+                showsOnMyScreen = true
+            }
+        }
     }
 
     /// Créer: the other widgets (every space, photos and quotes, Lock Screen) open in a sheet.
@@ -141,6 +203,8 @@ struct WidgetStudio: View {
             Label(tr("Changer de widget"), systemImage: "square.grid.2x2")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(Color.accentColor)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
                 .padding(.horizontal, 16)
                 .frame(minHeight: 44)
                 .cristalGlass(in: Capsule())
@@ -148,7 +212,6 @@ struct WidgetStudio: View {
         .buttonStyle(.pressable)
         .accessibilityIdentifier("create-change")
         .tutorialTarget(.createSpace)
-        .padding(.top, 8)
     }
 
     private func settings(_ input: StudioInput) -> some View {
@@ -159,13 +222,14 @@ struct WidgetStudio: View {
                 } else if exceedsFreeLimit {
                     limitNotice
                 }
-                sectionContent(input)
+                chapterContent(input)
             }
             .padding(.horizontal, 20)
             .padding(.top, 14)
             .padding(.bottom, 24)
         }
-        .id("\(section.rawValue)-\(index)")
+        // Another chapter, tool, widget of the set or panel: back to the top.
+        .id("\(chapter.rawValue)-\(section.rawValue)-\(index)-\(shownPanel.key)")
         .scrollDismissesKeyboard(.interactively)
         .screenshotScroll()
     }
@@ -181,60 +245,57 @@ struct WidgetStudio: View {
                 Text(tr("Les widgets qui l'affichent reviendront au modèle par défaut."))
             }
             .sheet(item: $paywall) { PaywallView(context: $0) }
-            .sheet(isPresented: $combining) {
-                if let space = combineSpace {
-                    SpaceBuilderView(
-                        space: space, format: design.displayFormat == .small ? .medium : design.displayFormat,
-                        selection: design.partDesigns.map(\.kind), combines: true, onChoose: combine
-                    )
+            .fullScreenCover(isPresented: $showsOnMyScreen, onDismiss: saveAfterPreview) {
+                HomeScreenPreview(design: design, family: family, payload: payload) {
+                    if showsOnMyScreen {
+                        // Still on screen: saved once it has closed.
+                        savesAfterPreview = true
+                        showsOnMyScreen = false
+                    } else {
+                        // It closed itself first.
+                        save()
+                    }
                 }
             }
     }
 
     private func observed<Content: View>(_ content: Content, sections: [StudioSection]) -> some View {
         content
-            .task(id: design.kind) { await model.prepare(design) }
+            .task(id: partKinds) { await model.prepare(design) }
             .task(id: design.options.coinID) { if design.kind == .crypto { await model.prepare(design) } }
             .task { await prepareOthers() }
             .onChange(of: photoItem) { _, item in importPhoto(item) }
             .onChange(of: designs) { old, new in record(from: old, to: new) }
             .onChange(of: design.background) { _, background in backgroundTab = BackgroundKind(background) }
-            .onChange(of: index) { _, _ in showCurrent() }
+            .onChange(of: index) { _, _ in
+                showCurrent()
+                partsPanel = .list
+                comboNote = nil
+            }
+            .onChange(of: chapter) { _, opened in _ = visitedChapters.insert(opened) }
             .onChange(of: sections) { _, shown in
-                if !shown.contains(section) { section = .content }
+                if !shown.contains(section) { section = .theme }
             }
             .onChange(of: sharesLook) { _, shares in
                 if shares { shareLook() }
             }
     }
 
-    /// The space whose widgets a new widget can be reunited with (none: no « Combiner »).
-    private var combineSpace: Space? {
-        design.kind.space ?? design.partDesigns.compactMap { $0.kind.space }.first
-    }
-
-    private var canCombine: Bool {
-        isNew && combineSpace != nil && (designs.count == 1 || design.isCombo)
-    }
-
-    /// The widgets picked in the creator replace the widget, in its look (one step of the history).
-    private func combine(_ chosen: [WidgetDesign]) {
-        guard !chosen.isEmpty else { return }
-        let lead = design
-        combining = false
-        withAnimation { designs = chosen.map { $0.withLook(of: lead) } }
-        index = 0
-        sharesLook = chosen.count > 1
-        showCurrent()
+    /// The kinds drawn (every widget inside of a combined widget): one added is prepared too.
+    private var partKinds: [WidgetKind] {
+        design.isCombo ? design.options.parts.map(\.kind) : [design.kind]
     }
 
     private func prepareOthers() async {
         for other in designs.dropFirst() { await model.prepare(other) }
     }
 
-    /// Another widget of the set chosen: its size and background are shown.
+    /// Another widget of the set chosen, or a step undone: its size and background are shown. A Lock Screen size
+    /// stays while the widget has it (opened from the Lock Screen creator).
     private func showCurrent() {
-        family = design.displayFormat.family
+        if !(family.isAccessory && design.families.contains(family)) {
+            family = design.displayFormat.family
+        }
         backgroundTab = BackgroundKind(design.background)
     }
 
@@ -254,6 +315,11 @@ struct WidgetStudio: View {
     private static func sections(for input: StudioInput) -> [StudioSection] {
         let chart: ChartFamily = input.tile?.visual.chartFamily ?? ChartFamily.none
         return StudioSection.allCases.filter { $0 != .chart || chart != ChartFamily.none }
+    }
+
+    /// The tools of « Style »: every section but « Taille » and « Contenu », which are in the chapter « Contenu ».
+    private static func styleTools(_ sections: [StudioSection]) -> [StudioSection] {
+        sections.filter { $0 != .size && $0 != .content }
     }
 
     @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
@@ -342,11 +408,61 @@ struct WidgetStudio: View {
         return StudioInput(payload: payload, family: gridFamily, tile: tile)
     }
 
-    @ViewBuilder private func sectionContent(_ input: StudioInput) -> some View {
-        switch section {
-        case .size:
-            StudioSizePanel(design: edited, family: $family, isNew: isNew, onCombine: canCombine ? { combining = true } : nil)
+    // MARK: Chapters
+
+    @ViewBuilder private func chapterContent(_ input: StudioInput) -> some View {
+        switch chapter {
         case .content:
+            contentChapter(input)
+        case .layout:
+            layoutChapter
+        case .style:
+            styleTool(input)
+        }
+    }
+
+    /// « Contenu »: the list, one widget inside, or the choice of a widget, in the panel under the stage.
+    @ViewBuilder private func contentChapter(_ input: StudioInput) -> some View {
+        switch shownPanel {
+        case .list:
+            contentList(input)
+        case let .part(part):
+            partDetail(part, input: input)
+        case .adding:
+            kindPicker(replacing: nil)
+        case let .replacing(part):
+            kindPicker(replacing: part)
+        }
+    }
+
+    /// « Suivant › » at the top of « Contenu » and « Disposition ».
+    private var nextLink: StudioPanelLink? {
+        guard let next = chapter.next else { return nil }
+        return StudioPanelLink(title: tr("Suivant"), symbol: "chevron.right", identifier: "studio-next") { goTo(next) }
+    }
+
+    /// The size, the widgets inside (« + » while there is room), then what the widget shows.
+    @ViewBuilder private func contentList(_ input: StudioInput) -> some View {
+        StudioPanelHeader(title: tr("Contenu"), link: nextLink)
+        VStack(alignment: .leading, spacing: 18) {
+            StudioSizePanel(design: edited, family: $family, isNew: isNew, onFormat: comboFormatAction)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("studio-size")
+        StudioPartsList(
+            design: design, parts: parts, payload: input.payload, capacity: partsCapacity, canAdd: canAddPart,
+            onOpen: { openPart($0) }, onAdd: { openPicker(.adding) }
+        )
+        if parts.count > 1 && !isLockScreen {
+            StudioNote(text: tr("Touche une partie du widget pour la changer."), symbol: "hand.tap")
+        }
+        currentContent(input, showsDelete: true)
+    }
+
+    /// What the widget shows: its name, the data it needs, its options (a widget alone; those of the widgets inside
+    /// are in each one's panel), the elements shown, and « Supprimer » for a saved widget.
+    @ViewBuilder private func currentContent(_ input: StudioInput, showsDelete: Bool) -> some View {
+        VStack(alignment: .leading, spacing: 18) {
             if !model.hasOwnData(for: design) && !design.dataItems.isEmpty {
                 Text(tr("Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes."))
                     .font(.footnote)
@@ -358,14 +474,96 @@ struct WidgetStudio: View {
             if !design.dataItems.isEmpty {
                 WidgetDataSection(items: design.dataItems)
             }
-            // A combined widget keeps the options of each widget inside it, set one by one.
-            if design.isCombo {
-                comboPartsSection
-            } else {
+            if !design.isCombo {
                 KindOptionsSection(design: edited)
             }
             StudioElementsPanel(design: edited, tile: input.tile)
-            if !isNew && designs.count == 1 { deleteButton }
+            if showsDelete && !isNew && designs.count == 1 { deleteButton }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("studio-content")
+    }
+
+    /// One widget inside: « Remplacer », « Retirer » (not the last one), its settings (a widget alone: what it shows),
+    /// « Va bien avec », and « Fermer » back to the list.
+    @ViewBuilder private func partDetail(_ part: Int, input: StudioInput) -> some View {
+        if parts.indices.contains(part) {
+            let shown = parts[part]
+            StudioPanelHeader(title: shown.name, detail: partSubtitle(shown))
+            StudioPartActions(
+                canReplace: !isLockScreen, canRemove: parts.count > 1,
+                onReplace: { openPicker(.replacing(part)) }, onRemove: { removePart(part) }
+            )
+            if parts.count > 1 {
+                ComboPartSettingsView(design: edited, index: part)
+            } else {
+                currentContent(input, showsDelete: false)
+            }
+            if !isLockScreen && parts.count < 4 {
+                StudioGoesWellWith(
+                    base: design, kinds: goesWellWith, groupTitle: groupTitle,
+                    onAdd: { addPart($0) }, onShowAll: { openPicker(.adding) }
+                )
+            }
+            closePartButton
+        }
+    }
+
+    private var closePartButton: some View {
+        Button {
+            Haptics.tap()
+            withAnimation(.easeInOut(duration: 0.2)) { partsPanel = .list }
+        } label: {
+            Text(tr("Fermer"))
+                .font(.subheadline.weight(.semibold))
+                .frame(maxWidth: .infinity, minHeight: 44)
+        }
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.capsule)
+        .accessibilityIdentifier("part-close")
+    }
+
+    /// The choice of a widget to add next to the others, or to put in the place of one.
+    @ViewBuilder private func kindPicker(replacing target: Int?) -> some View {
+        let current = parts
+        if let target, current.indices.contains(target) {
+            let replaced = current[target]
+            StudioKindPicker(
+                title: tr("Remplacer \(replaced.name)"), kinds: partCandidates, base: design, currentKind: replaced.kind,
+                refusal: { StudioPartRules.refusal(replacing: target, with: $0, in: current) },
+                identifierPrefix: "replace-kind-",
+                onPick: { kind in
+                    // The same widget again would lose its settings: nothing to replace.
+                    if kind == replaced.kind { closePicker() } else { replacePart(target, with: kind) }
+                },
+                onClose: closePicker
+            )
+        } else {
+            StudioKindPicker(
+                title: tr("Ajouter à côté de \(design.name)"), kinds: partCandidates, base: design, currentKind: nil,
+                refusal: { ComboEditing.refusal(adding: $0, to: current) },
+                identifierPrefix: "add-kind-",
+                onPick: { addPart($0) },
+                onClose: closePicker
+            )
+        }
+    }
+
+    /// « Disposition »: the layouts proposed and the order of the widgets inside.
+    @ViewBuilder private var layoutChapter: some View {
+        StudioPanelHeader(title: tr("Disposition"), link: nextLink)
+        StudioLayoutPanel(
+            parts: parts, isLockScreen: isLockScreen, canAdd: canAddPart,
+            onPlan: { applyPlan($0) }, onMove: { movePart(from: $0, to: $1) }, onAdd: { openPicker(.adding) }
+        )
+    }
+
+    /// « Style »: the tool chosen in the row under the chapters, its panel as before.
+    @ViewBuilder private func styleTool(_ input: StudioInput) -> some View {
+        switch section {
+        case .size, .content:
+            // In the chapter « Contenu », never a tool of « Style ».
+            EmptyView()
         case .theme:
             StudioThemePanel(design: edited, input: input)
         case .style:
@@ -593,52 +791,6 @@ struct WidgetStudio: View {
         }
     }
 
-    /// The widgets inside a combined widget: each keeps its own name and options.
-    private var comboPartsSection: some View {
-        EditorSection(title: tr("Widgets réunis"), detail: tr("Règle chacun")) {
-            VStack(spacing: 0) {
-                ForEach(Array(design.options.parts.enumerated()), id: \.offset) { pair in
-                    if pair.offset > 0 { Divider() }
-                    Button {
-                        openedPart = pair.offset
-                    } label: {
-                        HStack(spacing: 10) {
-                            Image(systemName: pair.element.kind.symbol)
-                                .font(.system(size: 13, weight: .semibold))
-                                .foregroundStyle(Color.accentColor)
-                                .frame(width: 24)
-                            VStack(alignment: .leading, spacing: 1) {
-                                Text(pair.element.name)
-                                    .font(.subheadline.weight(.semibold))
-                                    .foregroundStyle(Color.primary)
-                                    .lineLimit(1)
-                                Text(pair.element.kind.title)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            Text(tr("Régler"))
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                            Image(systemName: "chevron.right")
-                                .font(.caption.weight(.semibold))
-                                .foregroundStyle(.tertiary)
-                        }
-                        .frame(minHeight: 48)
-                        .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.pressable)
-                    .accessibilityIdentifier("part-\(pair.element.kind.rawValue)")
-                }
-            }
-            // A plain button and a destination bound to the index, like the Studio itself is pushed by the
-            // creator: a destination-style NavigationLink with a custom button style didn't open the page in the UI tests.
-            .navigationDestination(item: $openedPart) { index in
-                ComboPartSettingsView(design: edited, index: index)
-            }
-        }
-    }
-
     private var deleteButton: some View {
         Button(role: .destructive) {
             confirmDelete = true
@@ -696,6 +848,8 @@ struct WidgetStudio: View {
         }
         lastChange = now
         future.removeAll()
+        // Another change came after the note's: its « Annuler » would no longer take back what it says.
+        if comboNote != nil { comboNote = nil }
     }
 
     private func undo() {
@@ -714,12 +868,201 @@ struct WidgetStudio: View {
         Haptics.tap()
         // The next change is a new step, however soon it comes.
         lastChange = .distantPast
+        withAnimation(.easeInOut(duration: 0.2)) { comboNote = nil }
         guard value != designs else { return }
         restored = value
         withAnimation(.easeInOut(duration: 0.2)) { designs = value }
-        // A step may have had another number of widgets (« Réunir »).
+        // A step may have had another number of widgets (several made together, or widgets inside).
         index = min(index, value.count - 1)
         showCurrent()
+        // A widget inside that is gone (an addition undone): back to the list.
+        if let open = partsPanel.partIndex, !design.editableParts.indices.contains(open) { partsPanel = .list }
+    }
+
+    // MARK: Widgets inside
+
+    /// The widget being edited as the widgets inside it (one: the widget alone). Only this widget of a set.
+    private var parts: [ComboPart] { design.editableParts }
+
+    /// On the Lock Screen a widget stays alone: no « + », no touch zones, nothing to lay out.
+    private var isLockScreen: Bool { family.isAccessory }
+
+    /// The panel shown: the one asked for, while the widget it is about still exists (else the list).
+    private var shownPanel: StudioPartsPanel {
+        switch partsPanel {
+        case .list:
+            return .list
+        case let .part(part):
+            return parts.indices.contains(part) ? partsPanel : .list
+        case .adding:
+            return isLockScreen ? .list : .adding
+        case let .replacing(part):
+            return !isLockScreen && parts.indices.contains(part) ? partsPanel : .list
+        }
+    }
+
+    /// The widgets that can join this one: its space's, or its catalog category's outside the spaces.
+    private var partCandidates: [WidgetKind] {
+        StudioPartRules.candidates(for: parts.first?.kind ?? design.kind)
+    }
+
+    /// « + »: room for another widget (4 at most) that isn't inside yet, and not on the Lock Screen.
+    private var canAddPart: Bool {
+        guard !isLockScreen, parts.count < 4 else { return false }
+        let inside = Set(parts.map(\.kind))
+        return partCandidates.contains { !inside.contains($0) }
+    }
+
+    /// « N sur M »: what the size holds (1 in small and on the Lock Screen, 2 in medium, 4 in large).
+    private var partsCapacity: Int {
+        if isLockScreen { return 1 }
+        let format = ComboEditing.format(of: parts)
+        return format == .small ? 1 : Composer.maxCount(for: format)
+    }
+
+    private var groupTitle: String {
+        StudioPartRules.groupTitle(for: parts.first?.kind ?? design.kind)
+    }
+
+    /// « Petit · Fitness ».
+    private func partSubtitle(_ part: ComboPart) -> String {
+        let size = isLockScreen ? family.shortTitle : part.size.title
+        return "\(size) · \(groupTitle)"
+    }
+
+    /// « Va bien avec »: three widgets of the space that can be added now, the free ones and the space's usual
+    /// ones first.
+    private var goesWellWith: [WidgetKind] {
+        let current = parts
+        let inside = Set(current.map(\.kind))
+        let presets = StudioPartRules.presets(for: current.first?.kind ?? design.kind)
+        let addable = partCandidates.filter { !inside.contains($0) && ComboEditing.refusal(adding: $0, to: current) == nil }
+        let ranked = addable.enumerated().sorted { a, b in
+            let left = rank(a.element, presets: presets)
+            let right = rank(b.element, presets: presets)
+            return left == right ? a.offset < b.offset : left < right
+        }
+        return ranked.prefix(3).map(\.element)
+    }
+
+    private func rank(_ kind: WidgetKind, presets: [WidgetKind]) -> Int {
+        var rank = presets.contains(kind) ? 0 : 1
+        if kind.isPremium && !model.isPremium { rank += 2 }
+        return rank
+    }
+
+    /// A combined widget: Petit, Moyen, Grand plan its widgets again.
+    private var comboFormatAction: ((WidgetFormat) -> Void)? {
+        guard design.isCombo else { return nil }
+        return { format in changeComboFormat(format) }
+    }
+
+    private func goTo(_ next: StudioChapter) {
+        withAnimation(.easeInOut(duration: 0.2)) { chapter = next }
+    }
+
+    /// A widget inside touched on the stage or in the list: its panel opens (a second touch on the stage closes it).
+    private func openPart(_ part: Int) {
+        let isOpen = chapter == .content && shownPanel == .part(part)
+        withAnimation(.easeInOut(duration: 0.2)) {
+            chapter = .content
+            partsPanel = isOpen ? .list : .part(part)
+        }
+    }
+
+    /// The choice of a widget, in « Contenu »; « Fermer » goes back to the widget it was opened from, or the list.
+    private func openPicker(_ panel: StudioPartsPanel) {
+        var back = StudioPartsPanel.list
+        if chapter == .content, let open = shownPanel.partIndex { back = .part(open) }
+        withAnimation(.easeInOut(duration: 0.2)) {
+            pickerBack = back
+            chapter = .content
+            partsPanel = panel
+        }
+    }
+
+    private func closePicker() {
+        withAnimation(.easeInOut(duration: 0.2)) { partsPanel = pickerBack }
+    }
+
+    private func closeNote() {
+        withAnimation(.easeInOut(duration: 0.2)) { comboNote = nil }
+    }
+
+    private func addPart(_ kind: WidgetKind) {
+        apply(ComboEditing.adding(StudioPartRules.newPart(kind), to: parts), then: .list)
+    }
+
+    private func replacePart(_ part: Int, with kind: WidgetKind) {
+        apply(ComboEditing.replacing(at: part, with: StudioPartRules.newPart(kind), in: parts), then: .part(part))
+    }
+
+    private func removePart(_ part: Int) {
+        apply(ComboEditing.removing(at: part, from: parts), then: .list)
+    }
+
+    private func movePart(from: Int, to: Int) {
+        apply(ComboEditing.moving(from: from, to: to, in: parts), then: .list)
+    }
+
+    /// A layout of « Disposition »: the same widgets, in another order or with another one on a whole row.
+    private func applyPlan(_ plan: [ComboPart]) {
+        let old = ComboEditing.format(of: parts)
+        let now = ComboEditing.format(of: plan)
+        apply(.applied(ComboEditing.Outcome(parts: plan, format: now, resizedFrom: now == old ? nil : old)), then: .list)
+    }
+
+    /// Petit, Moyen or Grand chosen for a combined widget.
+    private func changeComboFormat(_ format: WidgetFormat) {
+        apply(StudioPartRules.resizing(parts, to: format), then: shownPanel, isChosenSize: true)
+    }
+
+    /// One edit of the widgets inside the widget being edited (never the other widgets of a set). Applied, it is
+    /// a step of its own in the history (« Annuler » and the arrows take it back) and the size shown follows, with a
+    /// note when the size changed. Refused, nothing changes and the note says why.
+    private func apply(_ change: ComboEditing.Change, then panel: StudioPartsPanel, isChosenSize: Bool = false) {
+        switch change {
+        case let .refused(reason):
+            withAnimation(.easeInOut(duration: 0.2)) { comboNote = StudioComboNote(text: reason, canUndo: false) }
+        case let .applied(outcome):
+            var after = designs
+            after[index] = design.applying(outcome)
+            guard after != designs else {
+                withAnimation(.easeInOut(duration: 0.2)) { partsPanel = panel }
+                return
+            }
+            past.append(designs)
+            if past.count > 80 { past.removeFirst() }
+            future.removeAll()
+            // `record` skips it (already kept), and the next change is a new step however soon it comes.
+            restored = after
+            lastChange = .distantPast
+            withAnimation(.easeInOut(duration: 0.25)) {
+                designs = after
+                partsPanel = panel
+                comboNote = note(for: outcome, isChosenSize: isChosenSize)
+            }
+            showCurrent()
+        }
+    }
+
+    /// The note when the size changed: « Passé en Grand pour tout afficher… », and for a widget already saved, that
+    /// it must be placed again. A size the person chose needs a word only for a saved widget.
+    private func note(for outcome: ComboEditing.Outcome, isChosenSize: Bool) -> StudioComboNote? {
+        guard let old = outcome.resizedFrom else { return nil }
+        let placeAgain = tr("Déjà posé sur ton écran ? Il faudra le reposer à la nouvelle taille.")
+        if isChosenSize {
+            return isNew ? nil : StudioComboNote(text: placeAgain, canUndo: true)
+        }
+        let resized = StudioPartRules.resizeText(to: outcome.format, from: old, count: outcome.parts.count)
+        return StudioComboNote(text: isNew ? resized : resized + " " + placeAgain, canUndo: true)
+    }
+
+    /// « Enregistrer le widget » in « Sur mon écran »: saved once it has closed (the widget flies from the stage).
+    private func saveAfterPreview() {
+        guard savesAfterPreview else { return }
+        savesAfterPreview = false
+        save()
     }
 
     // MARK: Actions
@@ -775,11 +1118,10 @@ struct WidgetStudio: View {
     }
 }
 
-/// One widget inside a combined widget: its name and options, with its preview in the combined look.
+/// One widget inside a combined widget, in the Studio's panel: its name, its data and its options.
 struct ComboPartSettingsView: View {
     @Binding var design: WidgetDesign
     let index: Int
-    @Environment(AppModel.self) private var model
 
     private var part: Binding<WidgetDesign> {
         Binding(
@@ -799,31 +1141,21 @@ struct ComboPartSettingsView: View {
 
     var body: some View {
         let shown = part.wrappedValue
-        let family: WidgetFamily = shown.kind.families.contains(.systemSmall) ? .systemSmall : .systemMedium
-        ScrollView {
-            VStack(alignment: .leading, spacing: 22) {
-                WidgetPreview(design: shown, family: family, payload: model.previewPayload(for: shown), width: family == .systemSmall ? 170 : 330)
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 8)
-                EditorSection(title: tr("Nom")) {
-                    TextField(tr("Nom du widget"), text: part.name)
-                        .textInputAutocapitalization(.sentences)
-                        .submitLabel(.done)
-                        .padding(12)
-                        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-                }
-                if !shown.dataItems.isEmpty {
-                    WidgetDataSection(items: shown.dataItems)
-                }
-                KindOptionsSection(design: part)
+        // In the panel of the widget open, under the stage that shows it ringed: its own name field (not the
+        // whole widget's « widget-name »), its data and its options.
+        VStack(alignment: .leading, spacing: 18) {
+            EditorSection(title: tr("Nom")) {
+                TextField(tr("Nom du widget"), text: part.name)
+                    .textInputAutocapitalization(.sentences)
+                    .submitLabel(.done)
+                    .padding(12)
+                    .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             }
-            .padding(.horizontal, 20)
-            .padding(.bottom, 24)
+            if !shown.dataItems.isEmpty {
+                WidgetDataSection(items: shown.dataItems)
+            }
+            KindOptionsSection(design: part)
         }
-        .scrollDismissesKeyboard(.interactively)
-        .cristalScreen()
-        .navigationTitle(shown.kind.title)
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

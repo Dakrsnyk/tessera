@@ -46,6 +46,181 @@ enum StudioSection: String, CaseIterable, Identifiable {
     }
 }
 
+/// The Studio's three chapters, in the order a widget is usually made: what it shows (its size and the widgets
+/// inside), how the widgets inside are laid out, and its look (the tools of `StudioSection` but « Taille » and « Contenu »).
+enum StudioChapter: String, CaseIterable, Identifiable {
+    case content, layout, style
+    var id: String { rawValue }
+
+    var number: Int {
+        switch self {
+        case .content: return 1
+        case .layout: return 2
+        case .style: return 3
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .content: return tr("Contenu")
+        case .layout: return tr("Disposition")
+        case .style: return tr("Style")
+        }
+    }
+
+    /// « Suivant › »: the chapter after this one (none after « Style »).
+    var next: StudioChapter? {
+        switch self {
+        case .content: return .layout
+        case .layout: return .style
+        case .style: return nil
+        }
+    }
+}
+
+/// The three chapters under the stage, on glass: a numbered badge each, a check once a chapter has been opened.
+/// The chapter open sits on a light capsule with its number filled (never the color alone).
+struct StudioChapterBar: View {
+    @Binding var selection: StudioChapter
+    let visited: Set<StudioChapter>
+    @Environment(\.appStyle) private var style
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(StudioChapter.allCases) { chapter in
+                item(chapter)
+            }
+        }
+        .padding(4)
+        .cristalGlass(in: Capsule())
+    }
+
+    private func item(_ chapter: StudioChapter) -> some View {
+        let palette = CristalPalette.of(style.id)
+        let isSelected = chapter == selection
+        let isDone = !isSelected && visited.contains(chapter)
+        return Button {
+            Haptics.tap()
+            withAnimation(.easeInOut(duration: 0.2)) { selection = chapter }
+        } label: {
+            HStack(spacing: 6) {
+                badge(chapter, isSelected: isSelected, isDone: isDone, palette: palette)
+                Text(chapter.title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(isSelected ? Color.primary : Color.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
+            .padding(.horizontal, 6)
+            .frame(maxWidth: .infinity, minHeight: 44)
+            .background {
+                if isSelected {
+                    Capsule()
+                        .fill(palette.panelSolidColor)
+                        .shadow(color: Color.black.opacity(0.08), radius: 6, y: 2)
+                }
+            }
+            .contentShape(Capsule())
+        }
+        .buttonStyle(.pressable)
+        .accessibilityLabel(Text(chapter.title))
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+        .accessibilityIdentifier("studio-chapter-\(chapter.rawValue)")
+    }
+
+    @ViewBuilder private func badge(_ chapter: StudioChapter, isSelected: Bool, isDone: Bool, palette: CristalPalette) -> some View {
+        if isDone {
+            Image(systemName: "checkmark")
+                .font(.system(size: 11, weight: .heavy))
+                .foregroundStyle(palette.okColor)
+                .frame(width: 24, height: 24)
+                .background(palette.okColor.opacity(0.18), in: Circle())
+        } else {
+            Text(verbatim: "\(chapter.number)")
+                .font(.footnote.weight(.bold))
+                .monospacedDigit()
+                .foregroundStyle(isSelected ? AnyShapeStyle(.onAccent) : AnyShapeStyle(Color.secondary))
+                .frame(width: 24, height: 24)
+                .background(isSelected ? Color.accentColor : palette.tintColor, in: Circle())
+        }
+    }
+}
+
+/// A link at the top right of a panel (« Suivant › », « Fermer »).
+struct StudioPanelLink {
+    let title: String
+    var symbol: String?
+    let identifier: String
+    let action: () -> Void
+}
+
+/// The title of a chapter's panel, with what it is about on the right, or a link.
+struct StudioPanelHeader: View {
+    let title: String
+    var detail: String?
+    var link: StudioPanelLink?
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Text(title)
+                .font(.title3.weight(.bold))
+                .lineLimit(2)
+                .accessibilityAddTraits(.isHeader)
+            Spacer(minLength: 8)
+            if let detail {
+                Text(detail)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
+            if let link {
+                Button {
+                    Haptics.tap()
+                    link.action()
+                } label: {
+                    HStack(spacing: 3) {
+                        Text(link.title)
+                        if let symbol = link.symbol {
+                            Image(systemName: symbol).font(.subheadline.weight(.bold))
+                        }
+                    }
+                    .font(.headline)
+                    .foregroundStyle(Color.accentColor)
+                    .frame(minHeight: 44)
+                    .contentShape(Rectangle())
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier(link.identifier)
+            }
+        }
+    }
+}
+
+/// A round glass button on the stage (« + », « Sur mon écran »).
+struct StudioRoundButton: View {
+    let symbol: String
+    let title: String
+    let identifier: String
+    let action: () -> Void
+
+    var body: some View {
+        Button {
+            Haptics.tap()
+            action()
+        } label: {
+            Image(systemName: symbol)
+                .font(.system(size: 18, weight: .semibold))
+                .foregroundStyle(Color.accentColor)
+                .frame(width: 44, height: 44)
+                .cristalGlass(in: Circle())
+                .contentShape(Circle())
+        }
+        .buttonStyle(.pressable)
+        .accessibilityLabel(Text(title))
+        .accessibilityIdentifier(identifier)
+    }
+}
+
 /// The row of sections under the preview.
 struct StudioSectionBar: View {
     let sections: [StudioSection]
@@ -253,48 +428,79 @@ struct StudioPreviewTile: View {
     }
 }
 
-/// The widget at the top of the Studio: always in view, updated with every change.
-struct StudioStage: View {
+/// The widget at the top of the Studio: always in view, updated with every change. On a combined widget each
+/// widget inside can be touched (its settings open) and the one open is ringed; the footer holds the stage's
+/// buttons (« Changer de widget », « + », « Sur mon écran »).
+struct StudioStage<Footer: View>: View {
     let design: WidgetDesign
     @Binding var family: WidgetFamily
     let payload: WidgetPayload
-    var isExample = false
+    var isExample: Bool
+    /// The widget inside whose settings are open, ringed on the stage.
+    var selectedPart: Int?
+    /// A touch on a widget inside a combined widget (nil: not touchable, as on the Lock Screen).
+    var onPart: ((Int) -> Void)?
+    let footer: Footer
     @Environment(\.appStyle) private var style
+
+    init(design: WidgetDesign, family: Binding<WidgetFamily>, payload: WidgetPayload, isExample: Bool = false,
+         selectedPart: Int? = nil, onPart: ((Int) -> Void)? = nil, @ViewBuilder footer: () -> Footer) {
+        self.design = design
+        self._family = family
+        self.payload = payload
+        self.isExample = isExample
+        self.selectedPart = selectedPart
+        self.onPart = onPart
+        self.footer = footer()
+    }
 
     var body: some View {
         let palette = CristalPalette.of(style.id)
-        VStack(spacing: 8) {
+        VStack(spacing: 0) {
             preview
                 .shadow(color: Color.black.opacity(family.isAccessory ? 0 : 0.14), radius: 10, y: 5)
+                // Laid exactly over the widget, after the shadow (the rings aren't shadowed).
+                .overlay { zones }
                 // Room for the shadow inside the clipped scene (radius 10, 5 points down).
                 .padding(.top, 12)
-                .padding(.bottom, 16)
+                .padding(.bottom, family.isAccessory ? 6 : 14)
                 .animation(.easeInOut(duration: 0.25), value: design)
                 .animation(.easeInOut(duration: 0.2), value: family)
-                .frame(maxWidth: .infinity)
-                .background {
-                    // The Lock Screen scene keeps its night backdrop (white caption, one-tint widgets).
-                    if family.isAccessory {
-                        LinearGradient(colors: [Color(hex: "1F2A44"), Color(hex: "3B2F5C")], startPoint: .topLeading, endPoint: .bottomTrailing)
-                    } else {
-                        palette.well2Color
-                    }
-                }
-            .clipShape(RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
-            .overlay(alignment: .topLeading) {
-                if isExample { ExampleBadge().padding(10) }
+            if family.isAccessory {
+                Text(tr("Écran verrouillé : iOS affiche les widgets d'une seule teinte."))
+                    .font(.caption2.weight(.medium))
+                    .foregroundStyle(.white.opacity(0.85))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 12)
+                    .padding(.bottom, 8)
             }
-            .overlay(alignment: .bottom) {
-                if family.isAccessory {
-                    Text(tr("Écran verrouillé : iOS affiche les widgets d'une seule teinte."))
-                        .font(.caption2.weight(.medium))
-                        .foregroundStyle(.white.opacity(0.85))
-                        .padding(.bottom, 6)
-                }
+            footer
+                .padding(.horizontal, 12)
+                .padding(.bottom, 12)
+        }
+        .frame(maxWidth: .infinity)
+        .background {
+            // The Lock Screen scene keeps its night backdrop (white caption, one-tint widgets).
+            if family.isAccessory {
+                LinearGradient(colors: [Color(hex: "1F2A44"), Color(hex: "3B2F5C")], startPoint: .topLeading, endPoint: .bottomTrailing)
+            } else {
+                palette.well2Color
             }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
+        .overlay(alignment: .topLeading) {
+            // Over a corner of the widget: the touch goes through to the widget inside.
+            if isExample { ExampleBadge().padding(10).allowsHitTesting(false) }
         }
         .onChange(of: design.kind) { _, _ in
             if !design.families.contains(family) { family = design.families.first ?? .systemSmall }
+        }
+    }
+
+    /// The touch zones of a combined widget's widgets (none for a widget alone or on the Lock Screen).
+    @ViewBuilder private var zones: some View {
+        if let onPart, design.isCombo, !family.isAccessory {
+            StudioStageZones(parts: design.options.parts, family: family, selected: selectedPart, onPart: onPart)
         }
     }
 

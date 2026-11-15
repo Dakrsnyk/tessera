@@ -329,25 +329,29 @@ struct StudioColorsPanel: View {
 
 // MARK: - Taille
 
-/// « Taille »: the size shown (and, for a widget not saved yet, the size it is made at), and for a new
-/// widget of a space the way to reunite it with others in one.
+/// « Taille » (at the top of « Contenu »): the size shown (and, for a widget not saved yet, the size it is made at).
+/// A combined widget offers Petit, Moyen and Grand: the Studio plans its widgets again at the size chosen, or says
+/// why that size can't hold them. Widgets are reunited with « + », no longer from here.
 struct StudioSizePanel: View {
     @Binding var design: WidgetDesign
     @Binding var family: WidgetFamily
     /// A saved widget only previews its other sizes; a new one really changes size.
     let isNew: Bool
-    /// « Réunir avec un autre widget », when this widget can be combined.
-    var onCombine: (() -> Void)?
+    /// A combined widget: the size chosen goes to the Studio, which plans its widgets again (nil for a widget alone).
+    var onFormat: ((WidgetFormat) -> Void)?
+
+    /// A combined widget has one size, but can be planned again at another; a widget alone shows its own.
+    private var choices: [WidgetFamily] {
+        design.isCombo ? WidgetFormat.allCases.map(\.family) : design.families
+    }
 
     var body: some View {
         StudioGroup(title: tr("Taille")) {
             VStack(alignment: .leading, spacing: 10) {
                 FlowLayout(spacing: 8) {
-                    ForEach(design.families, id: \.self) { item in
+                    ForEach(choices, id: \.self) { item in
                         FilterChip(title: item.shortTitle, symbol: item.isAccessory ? "lock.iphone" : nil, isSelected: family == item) {
-                            Haptics.tap()
-                            family = item
-                            if isNew, !design.isCombo, let format = WidgetFormat(item) { design.format = format }
+                            choose(item)
                         }
                     }
                 }
@@ -359,27 +363,16 @@ struct StudioSizePanel: View {
                 }
             }
         }
-        if let onCombine {
-            StudioGroup(title: tr("Combiner")) {
-                VStack(alignment: .leading, spacing: 10) {
-                    ForEach(Array(design.partDesigns.enumerated()), id: \.offset) { pair in
-                        Text("\(pair.offset + 1) · \(pair.element.name)")
-                            .font(.subheadline)
-                    }
-                    Button {
-                        Haptics.tap()
-                        onCombine()
-                    } label: {
-                        Label(tr("Réunir avec un autre widget"), systemImage: "square.on.square")
-                            .font(.subheadline.weight(.semibold))
-                            .frame(minHeight: 32)
-                    }
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.capsule)
-                    .accessibilityIdentifier("size-combine")
-                }
-            }
+    }
+
+    private func choose(_ item: WidgetFamily) {
+        Haptics.tap()
+        if let onFormat, design.isCombo, let format = WidgetFormat(item) {
+            if item != family { onFormat(format) }
+            return
         }
+        family = item
+        if isNew, !design.isCombo, let format = WidgetFormat(item) { design.format = format }
     }
 }
 

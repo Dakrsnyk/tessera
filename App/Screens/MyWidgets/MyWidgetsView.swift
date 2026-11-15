@@ -420,6 +420,15 @@ struct MyWidgetsView: View {
                     .disabled(selectedIDs.isEmpty)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
+                // Two or more chosen that can't merge: say why, in the order they were chosen.
+                if let reason = Fusion.refusal(for: orderedSelection) {
+                    Label(reason, systemImage: "info.circle")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .accessibilityIdentifier("fusion-refusal")
+                }
             }
             .padding(.horizontal, 20)
             .padding(.vertical, 10)

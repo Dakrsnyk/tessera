@@ -5,6 +5,8 @@ import WidgetKit
 /// A widget chosen is handed to `onChoose`; the Créer tab closes the sheet and opens it in its Studio.
 struct SpacesView: View {
     let onChoose: ([WidgetDesign]) -> Void
+    /// A Lock Screen widget chosen, with the shape its card showed (the Studio opens on it). Without it, `onChoose`.
+    var onChooseLock: ((WidgetDesign, WidgetFamily) -> Void)? = nil
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
@@ -36,7 +38,7 @@ struct SpacesView: View {
                 VStack(alignment: .leading, spacing: 14) {
                     universeFilter
                     if showsLockScreen {
-                        LockScreenCreator(onChoose: onChoose)
+                        LockScreenCreator(onChoose: onChoose, onChooseLock: onChooseLock)
                             .transition(.opacity)
                     } else {
                         LazyVStack(spacing: 14) {
