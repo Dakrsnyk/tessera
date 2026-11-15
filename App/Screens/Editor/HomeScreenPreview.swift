@@ -104,7 +104,7 @@ struct HomeScreenPreview: View {
                     .background(Color.white.opacity(0.7), in: Circle())
             }
             .buttonStyle(.pressable)
-            .accessibilityLabel(Text(tr("Retour")))
+            .accessibilityLabel(Text(tr("Retour", context: "back")))
             .accessibilityIdentifier("home-preview-back")
             Text(tr("Sur mon écran"))
                 .font(.headline)

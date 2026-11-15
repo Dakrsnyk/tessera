@@ -211,7 +211,6 @@ struct WidgetStudio: View {
         }
         .buttonStyle(.pressable)
         .accessibilityIdentifier("create-change")
-        .tutorialTarget(.createSpace)
     }
 
     private func settings(_ input: StudioInput) -> some View {
@@ -272,7 +271,14 @@ struct WidgetStudio: View {
                 partsPanel = .list
                 comboNote = nil
             }
-            .onChange(of: chapter) { _, opened in _ = visitedChapters.insert(opened) }
+            .onChange(of: chapter) { _, opened in
+                _ = visitedChapters.insert(opened)
+                // Leaving « Contenu »: its choice and widget panels close (opening a widget or the choice from
+                // elsewhere sets the panel along with the chapter, so only leaving resets it).
+                if opened != .content { partsPanel = .list }
+                // A refusal is stale in another chapter; a note with « Annuler » stays until another change.
+                if let comboNote, !comboNote.canUndo { self.comboNote = nil }
+            }
             .onChange(of: sections) { _, shown in
                 if !shown.contains(section) { section = .theme }
             }
@@ -541,7 +547,7 @@ struct WidgetStudio: View {
         } else {
             StudioKindPicker(
                 title: tr("Ajouter à côté de \(design.name)"), kinds: partCandidates, base: design, currentKind: nil,
-                refusal: { ComboEditing.refusal(adding: $0, to: current) },
+                refusal: { StudioPartRules.refusal(adding: $0, to: current) },
                 identifierPrefix: "add-kind-",
                 onPick: { addPart($0) },
                 onClose: closePicker
@@ -913,11 +919,11 @@ struct WidgetStudio: View {
         return partCandidates.contains { !inside.contains($0) }
     }
 
-    /// « N sur M »: what the size holds (1 in small and on the Lock Screen, 2 in medium, 4 in large).
+    /// « N sur M »: the most the widget can reach (4 while « + » is there, since adding grows the size), else what it
+    /// holds now. 0 on the Lock Screen: no count.
     private var partsCapacity: Int {
-        if isLockScreen { return 1 }
-        let format = ComboEditing.format(of: parts)
-        return format == .small ? 1 : Composer.maxCount(for: format)
+        if isLockScreen { return 0 }
+        return canAddPart ? Composer.maxCount(for: .large) : parts.count
     }
 
     private var groupTitle: String {
@@ -936,7 +942,7 @@ struct WidgetStudio: View {
         let current = parts
         let inside = Set(current.map(\.kind))
         let presets = StudioPartRules.presets(for: current.first?.kind ?? design.kind)
-        let addable = partCandidates.filter { !inside.contains($0) && ComboEditing.refusal(adding: $0, to: current) == nil }
+        let addable = partCandidates.filter { !inside.contains($0) && StudioPartRules.refusal(adding: $0, to: current) == nil }
         let ranked = addable.enumerated().sorted { a, b in
             let left = rank(a.element, presets: presets)
             let right = rank(b.element, presets: presets)
@@ -972,6 +978,7 @@ struct WidgetStudio: View {
 
     /// The choice of a widget, in « Contenu »; « Fermer » goes back to the widget it was opened from, or the list.
     private func openPicker(_ panel: StudioPartsPanel) {
+        alignPreview()
         var back = StudioPartsPanel.list
         if chapter == .content, let open = shownPanel.partIndex { back = .part(open) }
         withAnimation(.easeInOut(duration: 0.2)) {
@@ -989,7 +996,16 @@ struct WidgetStudio: View {
         withAnimation(.easeInOut(duration: 0.2)) { comboNote = nil }
     }
 
+    /// A saved widget's size chips only preview another size; an edit of the widgets inside works on its real size,
+    /// so the preview goes back to it first (else the stage would jump after the edit).
+    private func alignPreview() {
+        guard !isLockScreen else { return }
+        let real = design.displayFormat.family
+        if family != real { family = real }
+    }
+
     private func addPart(_ kind: WidgetKind) {
+        alignPreview()
         apply(ComboEditing.adding(StudioPartRules.newPart(kind), to: parts), then: .list)
     }
 
@@ -1008,8 +1024,9 @@ struct WidgetStudio: View {
     /// A layout of « Disposition »: the same widgets, in another order or with another one on a whole row.
     private func applyPlan(_ plan: [ComboPart]) {
         let old = ComboEditing.format(of: parts)
-        let now = ComboEditing.format(of: plan)
-        apply(.applied(ComboEditing.Outcome(parts: plan, format: now, resizedFrom: now == old ? nil : old)), then: .list)
+        let shown = ComboEditing.inDisplayOrder(plan)
+        let now = ComboEditing.format(of: shown)
+        apply(.applied(ComboEditing.Outcome(parts: shown, format: now, resizedFrom: now == old ? nil : old)), then: .list)
     }
 
     /// Petit, Moyen or Grand chosen for a combined widget.

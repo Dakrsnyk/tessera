@@ -274,9 +274,18 @@ enum ComboEditing {
         return part
     }
 
+    /// The parts in the order they are drawn: row 1 then row 2, left to right (`ComboLayout.rows` groups the small
+    /// ones by rows, whatever their order in the list). The parts as they are when they fill no whole rows.
+    static func inDisplayOrder(_ parts: [ComboPart]) -> [ComboPart] {
+        guard parts.count > 1, let rows = ComboLayout.rows(parts) else { return parts }
+        return rows.flatMap { $0 }
+    }
+
+    /// Every outcome lists its parts in the order they are drawn, so the list and the widget agree.
     private static func outcome(_ parts: [ComboPart], from old: WidgetFormat) -> Outcome {
-        let now = ComboEditing.format(of: parts)
-        return Outcome(parts: parts, format: now, resizedFrom: now == old ? nil : old)
+        let shown = inDisplayOrder(parts)
+        let now = ComboEditing.format(of: shown)
+        return Outcome(parts: shown, format: now, resizedFrom: now == old ? nil : old)
     }
 
     /// Plans these parts (in this order) at the first format of `formats` that works: each part keeps its
@@ -371,12 +380,37 @@ enum ComboEditing {
         var moved = current
         let part = moved.remove(at: from)
         moved.insert(part, at: to)
+        // What is drawn follows the rows, not the list: the move counts only when the part really goes the way asked.
+        var candidates: [Change] = []
         if ComboLayout.rows(moved) != nil {
-            return .applied(outcome(moved, from: old))
+            candidates.append(.applied(outcome(moved, from: old)))
+        } else {
+            // The sizes no longer fill whole rows in this order: plan again, at the same format when possible.
+            let formats: [WidgetFormat] = old == .large ? [.large, .medium] : [.medium, .large]
+            candidates.append(fit(moved, formats: formats, from: old))
         }
-        // The sizes no longer fill whole rows in this order: plan again, at the same format when possible.
-        let formats: [WidgetFormat] = old == .large ? [.large, .medium] : [.medium, .large]
-        return fit(moved, formats: formats, from: old)
+        // The same order of rows would be drawn again (a small one at the end of its row going down…): swap the rows.
+        if let rows = ComboLayout.rows(current), rows.count == 2 {
+            candidates.append(.applied(outcome(Array(rows.reversed().joined()), from: old)))
+        }
+        for candidate in candidates {
+            if case let .applied(result) = candidate, movesAsAsked(part, from: from, to: to, in: result.parts) { return candidate }
+        }
+        if let refused = candidates.first(where: { if case .refused = $0 { return true } else { return false } }) { return refused }
+        return .applied(outcome(current, from: old))
+    }
+
+    /// Whether the part sits further up (`to` < `from`) or further down than it did.
+    private static func movesAsAsked(_ part: ComboPart, from: Int, to: Int, in result: [ComboPart]) -> Bool {
+        guard let now = result.firstIndex(where: { $0.kind == part.kind }) else { return false }
+        return to > from ? now > from : now < from
+    }
+
+    /// Whether « Monter » / « Descendre » moves this widget (false at the ends, or when it would be drawn in the same place).
+    static func canMove(from: Int, to: Int, in current: [ComboPart]) -> Bool {
+        guard current.indices.contains(from), current.indices.contains(to), from != to,
+              case let .applied(result) = moving(from: from, to: to, in: current) else { return false }
+        return movesAsAsked(current[from], from: from, to: to, in: result.parts)
     }
 
     static func arrangements(of current: [ComboPart]) -> [[ComboPart]] {
@@ -418,10 +452,17 @@ enum ComboEditing {
         return seen
     }
 
+    /// Why this widget can't be added, judged with a default part (use `refusal(addingPart:to:)` with the part
+    /// that will really be added).
     static func refusal(adding kind: WidgetKind, to current: [ComboPart]) -> String? {
-        guard !current.isEmpty else { return nil }
         let part = ComboPart(kind: kind, options: DesignOptions(), name: kind.title,
                              size: kind.families.contains(.systemSmall) ? .small : .medium)
+        return refusal(addingPart: part, to: current)
+    }
+
+    /// Why this part can't be added, or nil when it can: judged on the part itself (its options and name).
+    static func refusal(addingPart part: ComboPart, to current: [ComboPart]) -> String? {
+        guard !current.isEmpty else { return nil }
         if case let .refused(reason) = adding(part, to: current) { return reason }
         return nil
     }

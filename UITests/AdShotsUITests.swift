@@ -217,9 +217,14 @@ final class AdShotsUITests: XCTestCase {
     /// The Studio: complete themes, then styles, then palettes, on the same widget.
     func testAdStudio() {
         launch("studio-content")
-        guard app.buttons["studio-theme"].waitForExistence(timeout: 15) else { return }
+        // The Studio opens on « Contenu »; the tools (Thème, Style, Couleurs…) are in the chapter « Style ».
+        let styleChapter = app.buttons["studio-chapter-style"]
+        guard styleChapter.waitForExistence(timeout: 15) else { return }
         pause(1.5)
         shot("studio-content")
+        styleChapter.tap()
+        guard app.buttons["studio-theme"].waitForExistence(timeout: 8) else { return }
+        pause(0.8)
         // « Thème »: the StylePreset grid (preset-<id>).
         if studioSection("theme") {
             for preset in ["midnight", "ocean", "sunset", "cyber", "luxury"] where studioTap("preset-\(preset)") {

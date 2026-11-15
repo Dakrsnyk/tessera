@@ -113,10 +113,14 @@ enum StudioPartRules {
 
     /// Why this widget can't take the place of the widget at `index`, or nil when it can.
     static func refusal(replacing index: Int, with kind: WidgetKind, in parts: [ComboPart]) -> String? {
-        let part = ComboPart(kind: kind, options: DesignOptions(), name: kind.title,
-                             size: kind.families.contains(.systemSmall) ? .small : .medium)
-        if case let .refused(reason) = ComboEditing.replacing(at: index, with: part, in: parts) { return reason }
+        // The part « Remplacer » will really put in (its template's options), not a default one.
+        if case let .refused(reason) = ComboEditing.replacing(at: index, with: newPart(kind), in: parts) { return reason }
         return nil
+    }
+
+    /// Why this widget can't be added to the widgets inside, judged on the part « + » will really add.
+    static func refusal(adding kind: WidgetKind, to parts: [ComboPart]) -> String? {
+        ComboEditing.refusal(addingPart: newPart(kind), to: parts)
     }
 
     /// The widgets inside planned again at the size chosen (Petit, Moyen, Grand of a combined widget) with
@@ -132,6 +136,8 @@ enum StudioPartRules {
             guard slots.count == parts.count else { return .refused(tr("Ces widgets ne tiennent pas ensemble.")) }
             var planned = parts
             for index in planned.indices { planned[index].size = slots[index].size }
+            // In the order drawn, as every outcome of `ComboEditing`.
+            planned = ComboEditing.inDisplayOrder(planned)
             let now = ComboEditing.format(of: planned)
             return .applied(ComboEditing.Outcome(parts: planned, format: now, resizedFrom: now == old ? nil : old))
         case let .invalid(reason):
@@ -286,7 +292,7 @@ struct StudioComboNoteView: View {
 
 // MARK: - Contenu
 
-/// « Dans ce widget · N sur M »: the widgets inside, in order (a touch opens one), and « Ajouter un widget » while
+/// « Dans ce widget · N sur M » (no count when `capacity` is 0): the widgets inside, in order (a touch opens one), and « Ajouter un widget » while
 /// there is room. A widget alone is listed too: it is the first widget of a widget to come.
 struct StudioPartsList: View {
     let design: WidgetDesign
@@ -299,7 +305,7 @@ struct StudioPartsList: View {
     @Environment(\.appStyle) private var style
 
     var body: some View {
-        EditorSection(title: tr("Dans ce widget"), detail: tr("\(parts.count) sur \(capacity)")) {
+        EditorSection(title: tr("Dans ce widget"), detail: capacity > 0 ? tr("\(parts.count) sur \(capacity)") : nil) {
             VStack(spacing: 0) {
                 ForEach(Array(parts.enumerated()), id: \.offset) { pair in
                     if pair.offset > 0 { Divider() }
@@ -623,7 +629,11 @@ struct StudioLayoutPanel: View {
 
     private var single: some View {
         VStack(alignment: .leading, spacing: 12) {
-            StudioNote(text: tr("Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs."), symbol: "square.grid.2x2")
+            if canAdd {
+                StudioNote(text: tr("Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs."), symbol: "square.grid.2x2")
+            } else {
+                StudioNote(text: tr("Ce widget reste seul."), symbol: "square.grid.2x2")
+            }
             if canAdd {
                 Button {
                     Haptics.tap()
@@ -702,10 +712,10 @@ struct StudioLayoutPanel: View {
                 .font(.subheadline.weight(.semibold))
                 .lineLimit(2)
             Spacer(minLength: 4)
-            moveButton(symbol: "chevron.up", title: tr("Monter"), name: part.name, identifier: "part-up-\(index)", isEnabled: index > 0) {
+            moveButton(symbol: "chevron.up", title: tr("Monter"), name: part.name, identifier: "part-up-\(index)", isEnabled: ComboEditing.canMove(from: index, to: index - 1, in: parts)) {
                 onMove(index, index - 1)
             }
-            moveButton(symbol: "chevron.down", title: tr("Descendre"), name: part.name, identifier: "part-down-\(index)", isEnabled: index < parts.count - 1) {
+            moveButton(symbol: "chevron.down", title: tr("Descendre"), name: part.name, identifier: "part-down-\(index)", isEnabled: ComboEditing.canMove(from: index, to: index + 1, in: parts)) {
                 onMove(index, index + 1)
             }
         }

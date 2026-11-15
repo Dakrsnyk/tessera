@@ -146,6 +146,25 @@ final class ComboEditingTests: XCTestCase {
         XCTAssertEqual(outcome.format, .medium)
     }
 
+    func testMovingFollowsTheOrderDrawnNotTheList() throws {
+        let s1 = part(.caloriesLeft), s2 = part(.macros), m3 = part(.mealsToday, .medium)
+        let current = [s1, s2, m3]
+        // Rows are [[S1, S2], [M3]]: dropping S2 after M3 would draw the same widget, so the rows swap instead.
+        let down = try applied(ComboEditing.moving(from: 1, to: 2, in: current))
+        XCTAssertEqual(down.parts.map(\.kind), [.mealsToday, .caloriesLeft, .macros])
+        XCTAssertEqual(down.parts.firstIndex { $0.kind == .macros }, 2)
+        XCTAssertTrue(ComboEditing.canMove(from: 1, to: 2, in: current))
+        let up = try applied(ComboEditing.moving(from: 2, to: 1, in: current))
+        XCTAssertEqual(up.parts.map(\.kind), [.mealsToday, .caloriesLeft, .macros])
+        // Every outcome lists its parts as drawn: the rows flattened.
+        for outcome in [down, up] {
+            XCTAssertEqual(outcome.parts, ComboLayout.rows(outcome.parts)?.flatMap { $0 })
+        }
+        // The first widget can't go up, the last can't go down.
+        XCTAssertFalse(ComboEditing.canMove(from: 0, to: -1, in: current))
+        XCTAssertFalse(ComboEditing.canMove(from: 2, to: 3, in: current))
+    }
+
     func testMovingOutOfRangeIsRefused() {
         XCTAssertTrue(isRefused(ComboEditing.moving(from: 0, to: 5, in: [part(.caloriesLeft), part(.macros)])))
     }

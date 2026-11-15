@@ -387,43 +387,47 @@ final class ProfileUITests: XCTestCase {
         XCTAssertTrue(next.waitForExistence(timeout: 15), "Le créateur n'a pas de bouton pour passer au Studio")
         XCTAssertTrue(app.segmentedControls.buttons["Moyen"].isSelected)
         next.tap()
-        // Créer opens its Studio on « Taille »: the widgets of the combined widget are in « Contenu ».
-        let content = app.buttons["studio-content"]
+        // Créer opens its Studio on « Contenu »: the widgets of the combined widget are listed in « Dans ce widget ».
+        let content = app.descendants(matching: .any)["studio-content"]
         XCTAssertTrue(content.waitForExistence(timeout: 10), "Le Studio n'est pas ouvert")
-        content.tap()
         let part = app.buttons["part-caloriesLeft"]
         XCTAssertTrue(part.waitForExistence(timeout: 10), "Réglages par widget absents du Studio")
-        // The page scrolls under « Enregistrer le widget »: the button must be above that bar, not just « hittable »
-        // (a touch behind the bar lands on it and opens nothing).
+        bringAboveSaveBar(part)
+        part.tap()
+        // The widget's settings open in the same panel (no pushed page): the name of the whole widget
+        // (« widget-name ») leaves, and the widget has its own « Nom du widget » field. Typing before the panel is
+        // open would rename the whole widget.
+        let studioName = app.textFields["widget-name"]
+        let partPanelOpened = waitForDisappearance(studioName)
+        if !partPanelOpened { attachHierarchy("diagnostic-part-settings") }
+        XCTAssertTrue(partPanelOpened, "Le panneau de réglages du widget ne s'ouvre pas")
+        XCTAssertTrue(app.buttons["part-replace"].exists, "« Remplacer » absent du panneau du widget")
+        XCTAssertTrue(app.buttons["part-remove"].exists, "« Retirer » absent d'un widget réuni")
+        let name = app.textFields["Nom du widget"].firstMatch
+        XCTAssertTrue(name.waitForExistence(timeout: 8))
+        name.tap()
+        // Return closes the keyboard, which would hide « Fermer ».
+        name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 30) + "Mes calories\n")
+        snapshot("part-settings")
+        let close = app.buttons["part-close"]
+        XCTAssertTrue(close.waitForExistence(timeout: 8), "« Fermer » absent du panneau du widget")
+        bringAboveSaveBar(close)
+        close.tap()
+        XCTAssertTrue(app.buttons["part-caloriesLeft"].waitForExistence(timeout: 8), "« Fermer » ne revient pas à la liste")
+        XCTAssertTrue(label(of: "part-caloriesLeft").contains("Mes calories"))
+        snapshot("creator-studio")
+    }
+
+    /// The panel scrolls under « Enregistrer le widget »: the element must be above that bar, not just « hittable »
+    /// (a touch behind the bar lands on it and opens nothing).
+    private func bringAboveSaveBar(_ element: XCUIElement) {
         let saveBar = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Enregistrer")).firstMatch
         var swipes = 0
-        while swipes < 10 && (!part.isHittable || (saveBar.exists && part.frame.maxY > saveBar.frame.minY - 4)) {
+        while swipes < 10 && (!element.isHittable || (saveBar.exists && element.frame.maxY > saveBar.frame.minY - 4)) {
             let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.7))
             let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
             start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
             swipes += 1
         }
-        part.tap()
-        // The name of the whole widget (« widget-name ») is on the Studio page; the part's own page has its
-        // own « Nom du widget » field. Typing before the page is open would rename the whole widget.
-        let studioName = app.textFields["widget-name"]
-        if !waitForDisappearance(studioName, timeout: 4) { part.tap() }
-        let partPageOpened = waitForDisappearance(studioName)
-        if !partPageOpened { attachHierarchy("diagnostic-part-settings") }
-        XCTAssertTrue(partPageOpened, "La page de réglages du widget ne s'ouvre pas")
-        let name = app.textFields["Nom du widget"].firstMatch
-        XCTAssertTrue(name.waitForExistence(timeout: 8))
-        name.tap()
-        name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 30) + "Mes calories")
-        snapshot("part-settings")
-        goBack()
-        XCTAssertTrue(label(of: "part-caloriesLeft").contains("Mes calories"))
-        snapshot("creator-studio")
-    }
-
-    private func goBack() {
-        let back = app.navigationBars.buttons.allElementsBoundByIndex.first { $0.isHittable && $0.frame.minX < 60 && $0.label != "Annuler" }
-        XCTAssertNotNil(back, "Bouton retour absent")
-        back?.tap()
     }
 }

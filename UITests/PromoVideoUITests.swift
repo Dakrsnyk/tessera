@@ -206,8 +206,12 @@ final class PromoVideoUITests: XCTestCase {
     func testVideoStudio() {
         playCapture(2)
         launch("studio-content")
-        guard app.buttons["studio-theme"].waitForExistence(timeout: 15) else { return }
+        // The Studio opens on « Contenu »: the tools are in the chapter « Style ».
+        let styleChapter = app.buttons["studio-chapter-style"]
+        guard styleChapter.waitForExistence(timeout: 15) else { return }
         pause(1.5)
+        styleChapter.tap()
+        guard app.buttons["studio-theme"].waitForExistence(timeout: 8) else { return }
         app.buttons["studio-theme"].tap()
         pause(1)
         for theme in ["neon", "luxury", "aurora", "paper", "liquidGlass", "sport"] {

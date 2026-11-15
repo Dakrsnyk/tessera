@@ -20,6 +20,14 @@ struct CreateStartView: View {
     /// A photo or quote widget being made.
     @State private var photoDraft: PhotoQuoteDraft?
     @State private var paywall: PaywallContext?
+    /// « Pour toi »: one ready widget per space, with a stable id (built on appearing and when its inputs change).
+    @State private var forYou: [ForYouItem] = []
+
+    private struct ForYouItem: Identifiable {
+        let space: Space
+        let design: WidgetDesign
+        var id: Space { space }
+    }
 
     init(onOpen: @escaping (EditorRequest) -> Void, onLockScreen: @escaping () -> Void) {
         self.onOpen = onOpen
@@ -30,6 +38,7 @@ struct CreateStartView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 26) {
                 forYouSection
+                    .tutorialTarget(.createSpace)
                 scratchSection
                 modelSection
                 photosSection
@@ -41,6 +50,9 @@ struct CreateStartView: View {
         .screenshotScroll()
         .navigationTitle(tr("Créer"))
         .navigationBarTitleDisplayMode(.large)
+        .onAppear { if forYou.isEmpty { rebuildForYou() } }
+        .onChange(of: model.profile.preferredSpaces) { _, _ in rebuildForYou() }
+        .onChange(of: model.isPremium) { _, _ in rebuildForYou() }
         .sheet(isPresented: $duplicating) {
             DuplicatePicker { design in
                 duplicating = false
@@ -73,14 +85,36 @@ struct CreateStartView: View {
         return copy
     }
 
-    /// The widget a size starts from: the proposal (small), at that size when the widget exists there, else
-    /// small, with its list of widgets ready to receive a « + ».
+    /// The widget a size starts from: the proposal (small) at that size when it exists there, else a widget of the
+    /// spaces that does (a free one first, a Premium one only with Premium), else the proposal in small (the tile
+    /// says so), with its list of widgets ready to receive a « + ».
     private func scratchRequest(_ format: WidgetFormat) -> EditorRequest {
         var design = SpaceCatalog.proposal(for: model.profile.preferredSpaces, isPremium: model.isPremium)
+        if format != .small, !design.kind.families.contains(format.family), let kind = scratchKind(format) {
+            design = SpaceCatalog.design(for: kind)
+            if !model.isPremium { design = design.downgradedForFree() }
+        }
         if format != .small, design.kind.families.contains(format.family) {
             design.format = format
         }
         return Self.request(design: design)
+    }
+
+    /// A widget of the spaces (the favourites first) that exists at this size: a free one first, a Premium one only
+    /// with Premium.
+    private func scratchKind(_ format: WidgetFormat) -> WidgetKind? {
+        let preferred = model.profile.preferredSpaces
+        let spaces = preferred + Space.allCases.filter { !preferred.contains($0) }
+        let found = spaces.flatMap { SpaceCatalog.kinds(in: $0) }.filter { $0.families.contains(format.family) }
+        return found.first { !$0.isPremium } ?? (model.isPremium ? found.first : nil)
+    }
+
+    /// The tile's note when no widget exists at this size for this account, so the Studio opens in small.
+    private func scratchNote(_ format: WidgetFormat) -> String? {
+        guard format != .small else { return nil }
+        let proposal = SpaceCatalog.proposal(for: model.profile.preferredSpaces, isPremium: model.isPremium)
+        if proposal.kind.families.contains(format.family) || scratchKind(format) != nil { return nil }
+        return tr("S'ouvre en Petit")
     }
 
     // MARK: Pour toi
@@ -89,6 +123,12 @@ struct CreateStartView: View {
     private var forYouSpaces: [Space] {
         let preferred = model.profile.preferredSpaces
         return Array((preferred + Space.allCases.filter { !preferred.contains($0) }).prefix(6))
+    }
+
+    /// The compositions are built once (each with its own id, which the previews are prepared for), and again only
+    /// when the favourite spaces or Premium change.
+    private func rebuildForYou() {
+        forYou = forYouSpaces.map { ForYouItem(space: $0, design: SpaceCatalog.startDesign(for: $0, isPremium: model.isPremium)) }
     }
 
     private var forYouSection: some View {
@@ -106,11 +146,10 @@ struct CreateStartView: View {
             .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(alignment: .top, spacing: 14) {
-                    ForEach(forYouSpaces) { space in
-                        let design = SpaceCatalog.startDesign(for: space, isPremium: model.isPremium)
-                        ForYouCard(space: space, design: design) {
+                    ForEach(forYou) { item in
+                        ForYouCard(space: item.space, design: item.design) {
                             Haptics.tap()
-                            onOpen(Self.request(design: design))
+                            onOpen(Self.request(design: item.design))
                         }
                     }
                 }
@@ -135,11 +174,11 @@ struct CreateStartView: View {
                     onOpen(scratchRequest(.small))
                 }
                 .accessibilityIdentifier("create-scratch-small")
-                ScratchTile(title: WidgetFormat.medium.title, shape: .medium) {
+                ScratchTile(title: WidgetFormat.medium.title, shape: .medium, note: scratchNote(.medium)) {
                     onOpen(scratchRequest(.medium))
                 }
                 .accessibilityIdentifier("create-scratch-medium")
-                ScratchTile(title: WidgetFormat.large.title, shape: .large) {
+                ScratchTile(title: WidgetFormat.large.title, shape: .large, note: scratchNote(.large)) {
                     onOpen(scratchRequest(.large))
                 }
                 .accessibilityIdentifier("create-scratch-large")
@@ -257,7 +296,7 @@ private struct ForYouCard: View {
             .contentShape(RoundedRectangle(cornerRadius: 26, style: .continuous))
         }
         .buttonStyle(.pressable)
-        .task(id: space) { await model.prepare(design) }
+        .task(id: design.id) { await model.prepare(design) }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Text(verbatim: "\(design.name), \(subtitle), " + (isPremiumWidget ? tr("Premium") : tr("Gratuit"))))
         .accessibilityHint(Text(tr("Ouvre l'Atelier sur ce widget")))
@@ -292,6 +331,8 @@ private struct ScratchTile: View {
 
     let title: String
     let shape: Silhouette
+    /// Said under the name when the tile doesn't open what it shows (no widget exists at this size).
+    var note: String?
     let action: () -> Void
     @Environment(\.appStyle) private var style
 
@@ -304,11 +345,18 @@ private struct ScratchTile: View {
                 silhouette
                     .frame(height: 54)
                     .accessibilityHidden(true)
-                Text(title)
-                    .font(.footnote.weight(.semibold))
-                    .foregroundStyle(Color.primary)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
+                VStack(spacing: 2) {
+                    Text(title)
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(Color.primary)
+                    if let note {
+                        Text(note)
+                            .font(.caption2)
+                            .foregroundStyle(Color.secondary)
+                    }
+                }
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 4)
