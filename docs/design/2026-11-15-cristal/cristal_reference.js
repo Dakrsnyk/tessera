@@ -1,6 +1,8 @@
 // cristal_reference.js : la formule des jetons Cristal pour les 12 couleurs de l'app, telle que le code Swift doit la reproduire
 // (Shared/Theme/CristalPalette.swift). Écrit Tests/CristalPaletteReference.swift, que les tests comparent au calcul Swift.
 // Usage, depuis la racine du dépôt : node docs/design/2026-11-15-cristal/cristal_reference.js
+// Vérifié par la CI le 2026-11-15 (Build 407) : le calcul Swift retombe sur cette table pour les 12 couleurs, clair et sombre.
+// Après toute modification de cristal.js, relancer ce script et les tests logiques.
 //
 // Règles (décidées le 2026-11-15) :
 // - Chaque couleur de l'app prend la « graine » d'une déclinaison dessinée (THEMES de cristal.js) : fonds, nappes, encres, filets.
