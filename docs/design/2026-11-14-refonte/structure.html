@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane — concepts de structure (Accueil, Créer)</title>
+<!--
+  Planches : ?d=h (3 accueils) · ?d=etats (H1 en 3 états) · ?d=c1 · ?d=c2 · ?d=c3
+  Contrôle de largeur : ajouter &w=375 (iPhone SE / mini) pour vérifier que rien ne casse.
+  Style unique : Saphir évolué, clair (style n° 1 du brief). Widgets = vrais exports de l'app.
+-->
+<style>
+@font-face { font-family: Inter; src: url("file:///C:/Users/Etudiant/ardane-tools/film/public/fonts/Inter-opsz.woff2") format("woff2"); font-weight: 100 900; }
+:root {
+  --bg: #F4F6FA; --surf: #FFFFFF; --ink: #0B1220; --ink2: #566173; --rule: #E3E8F0;
+  --sa: #245B8F; --tint: #E7EEF6; --socle: #E4E9F0; --pw: 393px;
+  --nut: #F08A24; --fit: #E5484D; --pla: #3366FF; --fin: #2F8F7A; --biz: #8C6CFF; --voy: #12A4B5; --car: #6B7280; --pho: #D9608B;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Inter, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; color: var(--ink); font-feature-settings: "tnum" 1; }
+
+/* ---------- planche ---------- */
+section.b { display: none; position: relative; overflow: hidden; background: #E8EBF0; padding: 32px 56px 0; width: 1400px; height: 1250px; }
+section.b#h { height: 1300px; }
+section.b#c2 { width: 1800px; }
+section.b.on { display: block; }
+.bh { display: flex; justify-content: space-between; align-items: flex-start; height: 96px; }
+.bh h1 { font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+.bh p { font-size: 15px; color: #4A5566; margin-top: 6px; max-width: 900px; line-height: 1.4; }
+.badge { font-size: 12px; font-weight: 600; padding: 8px 12px; border-radius: 8px; background: #fff; border: 1px solid #D3D9E3; color: #4A5566; white-space: nowrap; }
+.row { display: flex; gap: 48px; justify-content: center; align-items: flex-start; }
+.col { width: var(--pw); }
+.col > .nm { font-size: 13px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #4A5566; margin: 0 0 14px 4px; height: 16px; }
+.cap { margin: 22px 4px 0; }
+.cap h4 { font-size: 17px; font-weight: 700; }
+.cap p { font-size: 14px; color: #3F4A5A; margin-top: 4px; line-height: 1.4; min-height: 40px; }
+.gest { margin-top: 10px; display: inline-block; line-height: 20px; font-size: 13px; font-weight: 600; color: var(--ink); background: #fff; border: 1px solid #D3D9E3; border-radius: 8px; padding: 6px 10px; }
+.gest b { color: var(--sa); margin: 0 4px; }
+.gest span { color: #566173; font-weight: 500; }
+
+/* ---------- téléphone ---------- */
+.phone { width: var(--pw); height: 852px; border-radius: 55px; position: relative; overflow: hidden; background: var(--bg);
+  box-shadow: 0 0 0 10px #10141B, 0 0 0 11px #3A4150, 0 30px 60px rgba(10,20,40,.22); }
+.sb { position: absolute; top: 0; left: 0; right: 0; height: 54px; display: flex; justify-content: space-between; align-items: center; padding: 6px 34px 0 44px; font-size: 17px; font-weight: 600; z-index: 30; }
+.sb .isl { position: absolute; left: 50%; top: 11px; width: 126px; height: 37px; margin-left: -63px; border-radius: 19px; background: #000; }
+.sb .ri { display: flex; gap: 6px; align-items: center; }
+.sb .bat { width: 25px; height: 12px; border-radius: 4px; border: 1.5px solid currentColor; position: relative; opacity: .9; }
+.sb .bat::after { content: ""; position: absolute; inset: 1.5px; right: 6px; background: currentColor; border-radius: 1.5px; }
+.sb .sig { display: flex; gap: 2px; align-items: flex-end; height: 12px; }
+.sb .sig i { width: 3px; background: currentColor; border-radius: 1px; display: block; }
+.hi { position: absolute; bottom: 8px; left: 50%; width: 134px; margin-left: -67px; height: 5px; border-radius: 3px; background: var(--ink); z-index: 40; }
+.scr { position: absolute; top: 54px; left: 0; right: 0; bottom: 0; padding: 0 20px; overflow: hidden; }
+
+/* ---------- typographie : 5 tailles ---------- */
+.t34 { font-size: 34px; font-weight: 800; letter-spacing: -.025em; line-height: 40px; }
+.t22 { font-size: 22px; font-weight: 700; letter-spacing: -.01em; line-height: 28px; }
+.t17 { font-size: 17px; font-weight: 600; line-height: 22px; }
+.t15 { font-size: 15px; font-weight: 400; line-height: 20px; }
+.t12 { font-size: 12px; font-weight: 600; line-height: 16px; }
+.k { font-size: 12px; font-weight: 700; line-height: 16px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink2); }
+.mut { color: var(--ink2); }
+.lnk { font-size: 15px; font-weight: 600; color: var(--sa); }
+
+/* ---------- icônes au trait ---------- */
+i[data-i] { display: inline-flex; width: 1em; height: 1em; flex: none; }
+i[data-i] svg { width: 100%; height: 100%; stroke-width: var(--sw, 1.8); }
+
+/* ---------- composants ---------- */
+.nav { height: 44px; display: flex; align-items: center; justify-content: space-between; }
+.date { font-size: 15px; font-weight: 600; color: var(--sa); }
+.ava { width: 44px; height: 44px; display: grid; place-items: center; margin-right: -6px; }
+.ava span { width: 32px; height: 32px; border-radius: 50%; background: var(--tint); color: var(--sa); display: grid; place-items: center; font-size: 15px; font-weight: 700; }
+.card { background: var(--surf); border-radius: 22px; box-shadow: 0 1px 2px rgba(11,18,32,.04), 0 4px 16px rgba(11,18,32,.05); }
+.chip { width: 28px; height: 28px; border-radius: 8px; display: grid; place-items: center; font-size: 16px; color: var(--c); background: color-mix(in srgb, var(--c) 14%, #fff); flex: none; }
+.lab { display: flex; justify-content: space-between; align-items: center; height: 20px; margin: 24px 0 8px; }
+.btn { height: 50px; border-radius: 14px; background: var(--sa); color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 17px; font-weight: 600; }
+.btn2 { height: 44px; border-radius: 12px; background: var(--tint); color: var(--sa); display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 15px; font-weight: 600; padding: 0 14px; }
+.btn2.sq { width: 50px; height: 50px; padding: 0; font-size: 20px; flex: none; }
+.tab { position: absolute; left: 16px; right: 16px; bottom: 24px; height: 64px; border-radius: 32px; background: rgba(255,255,255,.94); box-shadow: 0 1px 0 rgba(11,18,32,.04), 0 8px 28px rgba(11,18,32,.14); display: flex; align-items: center; padding: 0 6px; z-index: 20; }
+.tab div { flex: 1; height: 54px; border-radius: 27px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; font-size: 10px; font-weight: 600; color: #5E6878; }
+.tab div i { font-size: 22px; }
+.tab div.on { color: var(--sa); background: var(--tint); }
+.dim { position: absolute; inset: 0; background: rgba(11,18,32,.38); z-index: 25; }
+
+/* ---------- H1 Maintenant ---------- */
+.now { padding: 16px; }
+.now .r { display: flex; align-items: center; gap: 8px; }
+.now .r .go { margin-left: auto; color: #9AA4B2; font-size: 16px; }
+.now h5 { margin: 12px 0 0; }
+.segs { display: flex; gap: 4px; margin: 12px 0 16px; }
+.segs span { flex: 1; height: 4px; border-radius: 2px; background: #E3E8F0; }
+.segs span.f { background: var(--c); }
+.acts { display: flex; gap: 8px; }
+.acts .btn { flex: 1; }
+.rail { display: flex; gap: 8px; margin-right: -20px; overflow: hidden; }
+.tile { flex: none; width: 76px; text-align: center; }
+.tile .ic { width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 8px; display: grid; place-items: center; font-size: 24px; color: var(--c); background: var(--surf); box-shadow: 0 1px 2px rgba(11,18,32,.05), 0 3px 10px rgba(11,18,32,.05); position: relative; }
+.tile b { display: block; font-size: 12px; font-weight: 600; line-height: 16px; }
+.tile span { display: block; font-size: 12px; font-weight: 500; line-height: 16px; color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nut { padding: 16px; }
+.nut .hd, .half .hd { display: flex; align-items: center; gap: 8px; }
+.nut .hd .t12 { margin-left: auto; }
+.nut .bd { display: flex; gap: 16px; align-items: center; margin: 12px 0; }
+.ring { width: 88px; height: 88px; position: relative; flex: none; }
+.ring svg { width: 88px; height: 88px; transform: rotate(-90deg); }
+.ring div { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.macros { flex: 1; display: grid; gap: 8px; }
+.macros .m { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; line-height: 16px; }
+.macros .m span { color: var(--ink2); font-weight: 500; }
+.bar { height: 4px; border-radius: 2px; background: #E9EDF2; margin-top: 4px; overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 2px; background: var(--c); }
+.nut .acts .btn2 { flex: 1; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+.half { padding: 16px; }
+.half .t22 { margin-top: 12px; }
+.empty { border: 1.5px dashed #C4CDD9; background: transparent; box-shadow: none; }
+.dots { display: flex; gap: 6px; justify-content: center; margin-top: 12px; }
+.dots i { width: 6px; height: 6px; border-radius: 3px; background: #CBD3DE; display: block; }
+.dots i.on { width: 16px; background: var(--sa); }
+
+/* ---------- H2 Mosaïque ---------- */
+.mos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.mos img { width: 100%; display: block; border-radius: 22px; box-shadow: 0 0 0 1px rgba(11,18,32,.05), 0 4px 14px rgba(11,18,32,.07); }
+.mos .w2 { grid-column: span 2; }
+
+/* ---------- H3 La Une ---------- */
+.une .kick { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
+.une .kick em { width: 8px; height: 8px; border-radius: 4px; background: var(--fit); display: block; }
+.une h2 { margin-top: 8px; }
+.une p { margin-top: 8px; }
+.une .acts { margin-top: 20px; }
+.list { padding: 0 16px; }
+.list .li { display: flex; align-items: center; gap: 12px; height: 48px; border-bottom: 1px solid var(--rule); }
+.list .li:last-child { border-bottom: 0; }
+.list .li .t17 { flex: none; }
+.list .li .t15 { margin-left: auto; color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.list .li .go { color: #9AA4B2; font-size: 14px; }
+
+/* ---------- états ---------- */
+.inl { position: absolute; top: 0; left: 0; right: 0; z-index: 18; background: rgba(244,246,250,.95); border-bottom: 1px solid var(--rule); padding: 54px 20px 0; }
+.inl .nav { justify-content: center; position: relative; }
+.inl .nav .ava { position: absolute; right: 0; top: 0; }
+.inl .nav .date { position: absolute; left: 0; top: 12px; }
+.dock { display: flex; justify-content: space-between; height: 52px; align-items: center; overflow: hidden; }
+.dock span { width: 44px; height: 44px; display: grid; place-items: center; flex: none; }
+.dock span i { width: 36px; height: 36px; padding: 8px; border-radius: 12px; color: var(--c); background: color-mix(in srgb, var(--c) 14%, #fff); }
+.top3 { padding: 16px 16px 4px; }
+.top3 .ck { display: flex; align-items: center; gap: 12px; height: 44px; border-top: 1px solid var(--rule); }
+.top3 .ck:first-of-type { border-top: 0; }
+.top3 .o { width: 22px; height: 22px; border-radius: 11px; border: 1.8px solid #A9B3C1; flex: none; display: grid; place-items: center; font-size: 14px; color: #fff; }
+.top3 .o.d { background: var(--fin); border-color: var(--fin); }
+.top3 .ck s { color: var(--ink2); }
+.org .card { position: relative; }
+.org .card .fade { opacity: .55; }
+.xb { position: absolute; top: -10px; left: -10px; width: 44px; height: 44px; display: grid; place-items: center; z-index: 3; }
+.xb span { width: 24px; height: 24px; border-radius: 12px; background: #fff; box-shadow: 0 0 0 1px #C9D1DC, 0 2px 6px rgba(11,18,32,.15); display: grid; place-items: center; font-size: 14px; color: var(--ink); }
+.sz { position: absolute; right: 12px; bottom: 12px; display: flex; height: 36px; border-radius: 18px; background: #fff; box-shadow: 0 0 0 1px #C9D1DC; overflow: hidden; z-index: 3; }
+.sz span { width: 44px; display: grid; place-items: center; font-size: 15px; }
+.sz span + span { border-left: 1px solid var(--rule); }
+.grip { position: absolute; right: 12px; top: 12px; font-size: 20px; color: #8792A2; --sw: 2.6; }
+.lift { transform: translate(6px, -6px) scale(1.03); box-shadow: 0 2px 4px rgba(11,18,32,.06), 0 18px 40px rgba(11,18,32,.18) !important; }
+.slot { border: 1.5px dashed #9FB4CC; border-radius: 22px; background: rgba(36,91,143,.05); }
+.pillok { height: 36px; padding: 0 16px; border-radius: 18px; background: var(--sa); color: #fff; font-size: 15px; font-weight: 600; display: grid; place-items: center; }
+
+/* ---------- Créer ---------- */
+.stage { border-radius: 22px; background: var(--socle); position: relative; display: grid; place-items: center; }
+.stage img { display: block; border-radius: 22px; box-shadow: 0 2px 4px rgba(11,18,32,.06), 0 12px 28px rgba(11,18,32,.14); }
+.stage .ctl { position: absolute; left: 12px; right: 12px; bottom: 12px; display: flex; justify-content: space-between; }
+.pill { height: 44px; border-radius: 22px; background: #fff; display: flex; align-items: center; gap: 8px; padding: 0 16px; font-size: 15px; font-weight: 600; color: var(--ink); box-shadow: 0 1px 3px rgba(11,18,32,.08); }
+.pill.ic { width: 44px; padding: 0; justify-content: center; font-size: 20px; }
+.pill.on { background: var(--sa); color: #fff; }
+.tools { display: flex; gap: 4px; margin: 12px -20px 0 0; overflow: hidden; }
+.tools div { flex: none; width: 68px; height: 60px; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 12px; font-weight: 600; color: var(--ink2); }
+.tools div i { font-size: 22px; }
+.tools div.on { background: var(--tint); color: var(--sa); }
+.panel { padding: 16px; margin-top: 12px; }
+.sizes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: end; margin-top: 12px; }
+.sizes div { text-align: center; }
+.sizes div u { display: block; margin: 0 auto 8px; border: 1.8px solid #A9B3C1; border-radius: 10px; background: #F6F8FB; }
+.sizes div.on u { border-color: var(--sa); background: var(--tint); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--sa); }
+.sizes div.on b { color: var(--sa); }
+.sizes b { font-size: 12px; font-weight: 600; display: block; line-height: 16px; }
+.themes { display: flex; gap: 12px; margin: 12px -36px 0 0; overflow: hidden; }
+.themes div { flex: none; width: 72px; text-align: center; }
+.themes img { width: 72px; height: 72px; display: block; border-radius: 16px; }
+.themes div.on img { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--sa); }
+.themes b { display: flex; justify-content: center; align-items: center; gap: 3px; font-size: 12px; font-weight: 600; margin-top: 8px; line-height: 16px; }
+.themes div.on b { color: var(--sa); }
+.themes b i { font-size: 12px; color: var(--ink2); --sw: 2.2; }
+.mini { position: relative; overflow: hidden; border-radius: 22px; background: #D5E0EC; }
+.mini .apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px 0; padding: 18px 14px; }
+.mini .apps div { text-align: center; font-size: 10px; font-weight: 500; color: #24303F; }
+.mini .apps div u { display: grid; place-items: center; width: 46px; height: 46px; margin: 0 auto 4px; border-radius: 12px; background: #fff; font-size: 22px; color: var(--c); }
+.mini .apps .w { grid-column: span 2; grid-row: span 2; }
+.mini .apps .w img { width: 128px; height: 128px; border-radius: 22px; display: block; margin: 0 auto; box-shadow: 0 6px 16px rgba(11,18,32,.18); }
+.seg { display: flex; height: 44px; border-radius: 12px; background: #EEF1F5; padding: 3px; }
+.seg span { flex: 1; border-radius: 9px; display: grid; place-items: center; font-size: 15px; font-weight: 600; color: var(--ink2); }
+.seg span.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgba(11,18,32,.12); }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--surf); border-radius: 28px 28px 0 0; padding: 8px 20px 0; z-index: 30; }
+.sheet .grab { width: 36px; height: 5px; border-radius: 3px; background: #D3D9E2; margin: 0 auto 16px; }
+.done { display: flex; gap: 16px; align-items: center; }
+.done img { width: 76px; height: 76px; border-radius: 18px; display: block; flex: none; box-shadow: 0 0 0 1px rgba(11,18,32,.06); }
+.done .ok { display: inline-flex; align-items: center; gap: 6px; color: #23735F; font-size: 15px; font-weight: 600; }
+.step { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--rule); }
+.step:first-of-type { border-top: 0; }
+.step .n { width: 28px; height: 28px; border-radius: 14px; background: var(--tint); color: var(--sa); font-size: 15px; font-weight: 700; display: grid; place-items: center; flex: none; }
+.step .t15 { padding-top: 4px; }
+.step img { width: 28px; height: 28px; border-radius: 7px; flex: none; margin-top: 0; }
+.note { display: flex; gap: 8px; align-items: flex-start; background: #F4F6FA; border-radius: 12px; padding: 12px; margin-top: 4px; }
+.note i { font-size: 18px; color: var(--sa); margin-top: 1px; }
+.prog { display: flex; gap: 4px; margin-top: 8px; }
+.prog span { flex: 1; height: 4px; border-radius: 2px; background: #D7DEE8; }
+.prog span.f { background: var(--sa); }
+.srch { height: 44px; border-radius: 12px; background: #fff; display: flex; align-items: center; gap: 8px; padding: 0 12px; font-size: 15px; color: #6A7484; box-shadow: 0 0 0 1px var(--rule); }
+.srch i { font-size: 18px; }
+.choice { padding: 0 16px; }
+.choice .li { display: flex; align-items: center; gap: 12px; height: 56px; border-bottom: 1px solid var(--rule); }
+.choice .li:last-child { border-bottom: 0; }
+.choice .li div { flex: 1; min-width: 0; }
+.choice .li .t15 { color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.choice .li .go { color: #9AA4B2; font-size: 14px; }
+.choice .li.on .go { color: var(--sa); font-size: 20px; --sw: 2.4; }
+.fmt { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.fmt > div { background: #fff; border-radius: 18px; padding: 12px; height: 148px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 0 0 1px var(--rule); position: relative; }
+.fmt > div.on { box-shadow: 0 0 0 2px var(--sa); }
+.fmt .vis { flex: 1; display: grid; place-items: center; }
+.fmt .vis img { display: block; border-radius: 12px; }
+.fmt .lb { display: flex; justify-content: space-between; align-items: center; }
+.fmt .lb i { font-size: 18px; color: var(--sa); --sw: 2.4; }
+.fmt .lk { background: #2A3340; border-radius: 12px; width: 100%; height: 72px; display: flex; gap: 8px; align-items: center; justify-content: center; }
+.fmt .lk img { border-radius: 0 !important; }
+.gal { display: flex; gap: 12px; margin-right: -20px; overflow: hidden; }
+.mdl { flex: none; width: 180px; }
+.mdl > img { display: block; border-radius: 22px; box-shadow: 0 0 0 1px rgba(11,18,32,.05), 0 4px 12px rgba(11,18,32,.06); }
+.mdl .t15 { color: var(--ink2); }
+.mdl .acts { margin-top: 8px; }
+.mdl .acts .btn2 { flex: 1; }
+.mdl .acts .btn2.sq { width: 44px; height: 44px; font-size: 18px; background: #fff; box-shadow: 0 0 0 1px #C9D1DC; color: var(--ink); }
+.fchips { display: flex; gap: 8px; margin-right: -20px; overflow: hidden; }
+.fchips span { flex: none; height: 36px; padding: 0 14px; border-radius: 18px; background: #fff; box-shadow: 0 0 0 1px var(--rule); display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 600; }
+.fchips span.on { background: var(--ink); color: #fff; box-shadow: none; }
+.fchips span em { width: 8px; height: 8px; border-radius: 4px; background: var(--c); display: block; }
+.resume { display: flex; align-items: center; gap: 12px; padding: 12px; }
+.resume img { width: 48px; height: 48px; border-radius: 12px; display: block; }
+.resume div { flex: 1; }
+.set { padding: 16px; display: flex; gap: 12px; align-items: center; }
+.set .ims { display: flex; gap: 6px; }
+.set .ims img { height: 56px; border-radius: 10px; display: block; }
+</style>
+</head>
+<body>
+
+<!-- ======================= H : trois accueils ======================= -->
+<section class="b" id="h">
+  <div class="bh"><div><h1>Accueil · trois structures</h1><p>Même style (Saphir évolué, clair), mêmes données, trois façons d'organiser l'écran. Samedi 31 octobre, 9 h 15 : une séance est en cours.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="row">
+    <div class="col"><div class="nm">H1 · Maintenant</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"><span class="date">Samedi 31 octobre</span><span class="ava"><span>M</span></span></div>
+        <div class="k">Mon Quotidien</div>
+        <div class="t34">Ta matinée</div>
+        <div class="card now" style="--c:var(--fit);margin-top:16px">
+          <div class="r"><span class="chip"><i data-i="dumbbell"></i></span><span class="k">Maintenant · séance en cours</span><i class="go" data-i="chev"></i></div>
+          <h5 class="t22">Pompes, série 1 sur 3</h5>
+          <div class="t15 mut">15 répétitions · Full body, 3 séries sur 6</div>
+          <div class="segs"><span class="f"></span><span class="f"></span><span class="f"></span><span></span><span></span><span></span></div>
+          <div class="acts"><span class="btn2 sq"><i data-i="undo"></i></span><span class="btn"><i data-i="check"></i>Série faite</span></div>
+        </div>
+        <div class="lab"><span class="k">Mes mini-apps</span><span class="lnk">Toutes</span></div>
+        <div class="rail" data-gen="tile"></div>
+        <div class="lab"><span class="k">Tes cartes</span><span class="lnk">Organiser</span></div>
+        <div class="card nut" style="--c:var(--nut)">
+          <div class="hd"><span class="chip"><i data-i="fork"></i></span><span class="t17">Nutrition</span><span class="t12 mut">1 078 / 2 200 kcal</span></div>
+          <div class="bd">
+            <div class="ring"><svg viewBox="0 0 88 88"><circle cx="44" cy="44" r="38" fill="none" stroke="#EEF1F5" stroke-width="8"/><circle cx="44" cy="44" r="38" fill="none" stroke="#F08A24" stroke-width="8" stroke-linecap="round" stroke-dasharray="117 239"/></svg><div><span class="t22">1 122</span><span class="t12 mut">restantes</span></div></div>
+            <div class="macros">
+              <div style="--c:#E5484D"><div class="m">Protéines<span>89 / 130 g</span></div><div class="bar"><i style="width:68%"></i></div></div>
+              <div style="--c:#E8B400"><div class="m">Glucides<span>144 / 250 g</span></div><div class="bar"><i style="width:58%"></i></div></div>
+              <div style="--c:#3D7BEA"><div class="m">Lipides<span>16 / 70 g</span></div><div class="bar"><i style="width:23%"></i></div></div>
+            </div>
+          </div>
+          <div class="acts"><span class="btn2"><i data-i="scan"></i>Scanner</span><span class="btn2">3 repas</span></div>
+        </div>
+      </div><div data-tab="0"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Une chose à faire, puis tout le reste</h4><p>La carte « Maintenant » porte l'action du moment ; les 8 mini-apps sont à un toucher ; les cartes de Mon Quotidien suivent.</p>
+        <div class="gest">Ouvrir une mini-app : <b>1 toucher</b> <span>(2 pour les 4 dernières)</span></div></div>
+    </div>
+    <div class="col"><div class="nm">H2 · Mosaïque</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"><span class="date">Samedi 31 octobre</span><span class="ava"><span>M</span></span></div>
+        <div class="k">Mon Quotidien</div>
+        <div class="t34">Ta matinée</div>
+        <div class="mos">
+          <img class="w2" data-w="todaysWorkout-m-light" alt="">
+          <img data-w="calories-s-light" alt=""><img data-w="priorities-s-light" alt="">
+          <img data-w="budgetLeft-s-light" alt=""><img data-w="habitStreak-s-light" alt="">
+          <img class="w2" data-w="upNext-m-light" alt="">
+        </div>
+      </div><div data-tab="0"></div><div class="hi"></div></div>
+      <div class="cap"><h4>L'accueil est fait de widgets</h4><p>Chaque tuile a la forme et le rendu d'un widget. On comprend Ardane en le regardant ; l'appui long propose de le mettre sur l'écran d'accueil.</p>
+        <div class="gest">Ouvrir une mini-app : <b>1 toucher</b> <span>si sa tuile est visible, sinon 2</span></div></div>
+    </div>
+    <div class="col"><div class="nm">H3 · La Une</div>
+      <div class="phone"><div data-sb></div><div class="scr une">
+        <div class="nav"><span class="date">Samedi 31 octobre · Ta matinée</span><span class="ava"><span>M</span></span></div>
+        <div class="kick"><em></em><span class="k">Maintenant · Fitness</span></div>
+        <h2 class="t34">Séance en cours : encore 3 séries.</h2>
+        <p class="t17 mut" style="font-weight:400">Pompes, série 1 sur 3, 15 répétitions.</p>
+        <div class="acts"><span class="btn" style="flex:1"><i data-i="check"></i>Série faite</span><span class="btn2" style="height:50px">Ouvrir</span></div>
+        <div class="lab"><span class="k">Sommaire</span><span class="t12 mut">8 mini-apps</span></div>
+        <div class="card list" data-gen="li"></div>
+      </div><div data-tab="0"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Une phrase, puis un sommaire</h4><p>Une grande « une » change selon le moment ; dessous, une ligne par mini-app avec son chiffre du jour. Peu de cartes, beaucoup de hiérarchie.</p>
+        <div class="gest">Ouvrir une mini-app : <b>1 toucher</b> <span>(les 8 sont visibles)</span></div></div>
+    </div>
+  </div>
+  <div class="cap" style="text-align:center;margin-top:20px"><div class="gest">Aujourd'hui : <b>1 toucher</b> <span>si sa carte est à l'écran ; sinon défiler ; sans carte, il faut d'abord l'ajouter (« Ajouter une catégorie »)</span></div></div>
+</section>
+
+<!-- ======================= États de H1 ======================= -->
+<section class="b" id="etats">
+  <div class="bh"><div><h1>H1 « Maintenant » · trois états</h1><p>Le concept recommandé, au premier lancement, défilé plus bas, puis en mode « Organiser ». Même données que la planche des accueils.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="row">
+    <div class="col"><div class="nm">Premier lancement</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"><span class="date">Samedi 31 octobre</span><span class="ava"><span>M</span></span></div>
+        <div class="k">Mon Quotidien</div>
+        <div class="t34">Ta matinée</div>
+        <div class="card now" style="--c:var(--sa);margin-top:16px">
+          <div class="r"><span class="chip"><i data-i="sparkle"></i></span><span class="k">Pour commencer</span></div>
+          <h5 class="t22">Dis à Ardane ce qui compte pour toi</h5>
+          <div class="t15 mut" style="margin-top:8px">Tes repas, ta séance, tes cours, tes habitudes… Renseigne ce qui te concerne : Ardane réunit chaque jour ce qui compte.</div>
+          <div class="btn" style="margin-top:16px">Ajouter mes informations</div>
+        </div>
+        <div class="lab"><span class="k">Mes mini-apps</span><span class="lnk">Toutes</span></div>
+        <div class="rail" data-gen="tile0"></div>
+        <div class="lab"><span class="k">Tes cartes</span></div>
+        <div class="card half empty" style="--c:var(--nut)"><div class="hd"><span class="chip"><i data-i="fork"></i></span><span class="t17">Nutrition</span><span class="lnk" style="margin-left:auto">Ajouter</span></div><div class="t15 mut" style="margin-top:8px">Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici.</div></div>
+      </div><div data-tab="0"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Rien d'inventé</h4><p>Une seule action principale. Les mini-apps sont visibles dès le début, sans chiffre tant qu'elles sont vides ; les cartes vides invitent à les remplir.</p>
+        <div class="gest">Premier pas : <b>1 toucher</b> <span>« Ajouter mes informations »</span></div></div>
+    </div>
+    <div class="col"><div class="nm">Défilé plus bas</div>
+      <div class="phone"><div data-sb></div>
+        <div class="inl"><div class="nav"><span class="t17">Ta matinée</span><span class="ava"><span>M</span></span></div><div class="dock" data-gen="dock"></div></div>
+        <div class="scr" style="padding-top:104px">
+          <div class="two" style="margin-top:8px">
+            <div class="card half" style="--c:var(--pla)"><div class="hd"><span class="chip"><i data-i="calendar"></i></span><span class="t17">Planning</span></div><div class="t22">10:41</div><div class="t15 mut">Réunion d'équipe</div></div>
+            <div class="card half" style="--c:var(--fin)"><div class="hd"><span class="chip"><i data-i="card"></i></span><span class="t17">Finances</span></div><div class="t22">1 631 $</div><div class="t15 mut">reste ce mois</div></div>
+          </div>
+          <div class="card top3" style="margin-top:12px;--c:var(--pla)">
+            <div class="hd" style="display:flex;gap:8px;align-items:center;margin-bottom:4px"><span class="chip"><i data-i="star"></i></span><span class="t17">Top 3</span><span class="t12 mut" style="margin-left:auto">1 sur 3</span></div>
+            <div class="ck"><span class="o d"><i data-i="check" style="--sw:3"></i></span><s class="t15">Finir la présentation</s></div>
+            <div class="ck"><span class="o"></span><span class="t15">Appeler le comptable</span></div>
+            <div class="ck"><span class="o"></span><span class="t15">30 minutes de sport</span></div>
+          </div>
+          <div class="card half" style="margin-top:12px;--c:var(--pla)">
+            <div class="hd"><span class="chip"><i data-i="repeat"></i></span><span class="t17">Habitudes</span><span class="t12 mut" style="margin-left:auto">2 sur 3</span></div>
+            <div class="t15" style="margin-top:12px">Méditer · <span class="mut">12 jours de suite</span></div>
+          </div>
+          <div class="card half empty" style="margin-top:12px;display:flex;align-items:center;gap:8px;justify-content:center;height:56px;padding:0"><span class="lnk">+ Ajouter une catégorie</span></div>
+          <div class="card half" style="margin-top:12px;display:flex;gap:12px;align-items:center;--c:var(--sa)"><span class="chip"><i data-i="user"></i></span><div><div class="t17">Mes informations</div><div class="t15 mut">Complétées à 70 %</div></div><i data-i="chev" style="margin-left:auto;color:#9AA4B2;font-size:14px"></i></div>
+        </div><div data-tab="0"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Les mini-apps restent à portée</h4><p>En défilant, le titre se réduit et la rangée devient une barre d'icônes fixée en haut : chaque mini-app reste à un toucher.</p>
+        <div class="gest">Ouvrir une mini-app : <b>1 toucher</b> <span>d'où que l'on soit</span></div></div>
+    </div>
+    <div class="col"><div class="nm">Mode « Organiser »</div>
+      <div class="phone"><div data-sb></div><div class="scr org">
+        <div class="nav"><span class="lnk" style="font-weight:400">Disposition</span><span class="t17">Organiser</span><span class="pillok">OK</span></div>
+        <div class="t15 mut" style="margin-top:8px">Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille.</div>
+        <div class="lab" style="margin:16px 0 12px"><span class="k">Mes mini-apps</span><span class="t12 mut">Touche − pour masquer</span></div>
+        <div class="rail" data-gen="tileorg" style="padding-top:12px;margin-top:-12px"></div>
+        <div class="lab"><span class="k">Tes cartes</span><span class="t12 mut"><i data-i="lock" style="font-size:12px"></i> « Maintenant » reste en tête</span></div>
+        <div class="card nut" style="--c:var(--nut);height:132px"><div class="fade"><div class="hd"><span class="chip"><i data-i="fork"></i></span><span class="t17">Nutrition</span></div><div class="t22" style="margin-top:12px">1 122 kcal</div><div class="t15 mut">restantes sur 2 200</div></div><span class="xb"><span><i data-i="x"></i></span></span><i class="grip" data-i="grip"></i><span class="sz"><span>−</span><span>+</span></span></div>
+        <div class="two">
+          <div class="card half lift" style="--c:var(--pla);height:132px"><div class="fade"><div class="hd"><span class="chip"><i data-i="calendar"></i></span><span class="t17">Planning</span></div><div class="t22">10:41</div></div><span class="xb"><span><i data-i="x"></i></span></span><span class="sz"><span>−</span><span>+</span></span></div>
+          <div class="slot" style="height:132px"></div>
+        </div>
+        <div class="two">
+          <div class="card half" style="--c:var(--fin);height:132px"><div class="fade"><div class="hd"><span class="chip"><i data-i="card"></i></span><span class="t17">Finances</span></div><div class="t22">1 631 $</div></div><span class="xb"><span><i data-i="x"></i></span></span><span class="sz"><span>−</span><span>+</span></span></div>
+          <div class="card half" style="--c:var(--pla);height:132px"><div class="fade"><div class="hd"><span class="chip"><i data-i="star"></i></span><span class="t17">Top 3</span></div><div class="t22">1 sur 3</div></div><span class="xb"><span><i data-i="x"></i></span></span><span class="sz"><span>−</span><span>+</span></span></div>
+        </div>
+      </div><div class="hi"></div></div>
+      <div class="cap"><h4>Ranger sans se perdre</h4><p>Un lien « Organiser » visible, en plus de l'appui long. La rangée de mini-apps se range au même endroit ; la place libérée est montrée en pointillés.</p>
+        <div class="gest">Entrer dans Organiser : <b>1 toucher</b> <span>(aujourd'hui : appui long, puis menu)</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= C1 Atelier ======================= -->
+<section class="b" id="c1">
+  <div class="bh"><div><h1>Créer · C1 « Atelier »</h1><p>On arrive directement dans le Studio, avec un widget déjà choisi d'après ses données. L'aperçu reste en haut ; les outils du Studio sont dessous ; « Changer de widget » remplace la liste d'espaces.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="row">
+    <div class="col"><div class="nm">1 · Entrée</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"><span></span><span style="display:flex;gap:0"><span class="ava" style="color:#9AA4B2;font-size:20px;margin:0"><i data-i="undo"></i></span><span class="ava" style="color:#C9D1DC;font-size:20px"><i data-i="redo"></i></span></span></div>
+        <div class="t34" style="margin-top:-4px">Créer</div>
+        <div class="stage" style="height:272px;margin-top:12px"><img data-w="calories-s-light" style="width:170px;margin-top:-40px" alt="">
+          <div class="ctl"><span class="pill"><i data-i="grid"></i>Changer de widget</span><span class="pill ic"><i data-i="eye"></i></span></div></div>
+        <div class="tools" data-gen="tools,0"></div>
+        <div class="card panel">
+          <div style="display:flex;justify-content:space-between"><span class="t17">Taille</span><span class="t15 mut">Calories · Nutrition</span></div>
+          <div class="sizes">
+            <div class="on"><u style="width:44px;height:44px"></u><b>Petit</b></div>
+            <div><u style="width:72px;height:34px"></u><b>Moyen</b></div>
+            <div><u style="width:72px;height:72px"></u><b>Grand</b></div>
+            <div><u style="width:60px;height:26px;border-radius:13px"></u><b>Verrouillé</b></div>
+          </div>
+        </div>
+        <div class="btn" style="margin-top:12px">Enregistrer le widget</div>
+      </div><div data-tab="1"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Un widget est déjà prêt</h4><p>Ardane propose « Calories » parce que tu notes tes repas. Tout se change ici : widget, taille, puis les outils du Studio.</p>
+        <div class="gest">Créer un widget : <b>1 toucher</b> <span>depuis Créer (aujourd'hui : 3)</span></div></div>
+    </div>
+    <div class="col"><div class="nm">2 · Personnalisation</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"><span></span><span style="display:flex"><span class="ava" style="color:var(--sa);font-size:20px;margin:0"><i data-i="undo"></i></span><span class="ava" style="color:#C9D1DC;font-size:20px"><i data-i="redo"></i></span></span></div>
+        <div class="t34" style="margin-top:-4px">Créer</div>
+        <div class="mini" style="height:272px;margin-top:12px">
+          <div class="apps">
+            <div style="--c:var(--pla)"><u><i data-i="calendar"></i></u>Calendrier</div><div style="--c:var(--fin)"><u><i data-i="card"></i></u>Cartes</div>
+            <div class="w"><img data-w="calories-s-dark" alt=""></div>
+            <div style="--c:var(--voy)"><u><i data-i="plane"></i></u>Plans</div><div style="--c:var(--pho)"><u><i data-i="photo"></i></u>Photos</div>
+            <div style="--c:var(--car)"><u><i data-i="clock"></i></u>Horloge</div><div style="--c:var(--nut)"><u><i data-i="fork"></i></u>Recettes</div>
+          </div>
+          <div class="ctl" style="position:absolute;left:12px;right:12px;bottom:12px;display:flex;justify-content:flex-end"><span class="pill on"><i data-i="eye"></i>Sur mon écran</span></div>
+        </div>
+        <div class="tools" data-gen="tools,2"></div>
+        <div class="card panel">
+          <div style="display:flex;justify-content:space-between"><span class="t17">Thème</span><span class="lnk">Tous</span></div>
+          <div class="themes">
+            <div><img data-w="calories-s-light" alt=""><b>Clair</b></div>
+            <div class="on"><img data-w="calories-s-dark" alt=""><b>Sombre</b></div>
+            <div><img data-w="calories-s-paper" alt=""><b><i data-i="lock"></i>Papier</b></div>
+            <div><img data-w="calories-s-editorial" alt=""><b><i data-i="lock"></i>Éditorial</b></div>
+            <div><img data-w="calories-s-ocean" alt=""><b><i data-i="lock"></i>Océan</b></div>
+          </div>
+        </div>
+        <div class="btn" style="margin-top:12px">Enregistrer le widget</div>
+      </div><div data-tab="1"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Les outils du Studio, au même endroit</h4><p>Thème choisi : « Sombre ». « Sur mon écran » montre le widget parmi des icônes, à l'échelle. Le cadenas signale Premium.</p>
+        <div class="gest">Changer de thème : <b>+2 touchers</b> <span>(outil, puis thème)</span></div></div>
+    </div>
+    <div class="col"><div class="nm">3 · Enregistrement</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"></div><div class="t34" style="margin-top:-4px">Créer</div>
+        <div class="stage" style="height:272px;margin-top:12px"><img data-w="calories-s-dark" style="width:170px;margin-top:-40px" alt=""></div>
+      </div><div class="dim"></div>
+      <div data-end="calories-s-dark"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Une fin honnête</h4><p>Le widget est dans Mes widgets. Trois étapes expliquent comment l'ajouter soi-même : iOS ne laisse aucune app le poser.</p>
+        <div class="gest">Puis sur l'écran d'accueil : <b>gestes iOS</b> <span>faits par l'utilisateur</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= C2 Trois gestes ======================= -->
+<section class="b" id="c2">
+  <div class="bh"><div><h1>Créer · C2 « Trois gestes »</h1><p>Trois décisions, une par écran, avec l'aperçu toujours visible. Un toucher sur une réponse passe à la question suivante. Quatre téléphones : les trois questions, puis la fin.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="row" style="gap:36px">
+    <div class="col"><div class="nm">1 · Que veux-tu suivre ?</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div data-steps="1"></div>
+        <div class="stage" style="height:184px;margin-top:12px"><img data-w="calories-s-light" style="width:150px" alt=""></div>
+        <div class="t22" style="margin-top:16px">Que veux-tu suivre ?</div>
+        <div class="srch" style="margin-top:12px"><i data-i="search"></i>Calories, séance, budget…</div>
+        <div class="card choice" style="margin-top:12px">
+          <div class="li on" style="--c:var(--nut)"><span class="chip"><i data-i="fork"></i></span><div><div class="t17">Mes calories</div><div class="t15">1 122 kcal restantes</div></div><i class="go" data-i="check"></i></div>
+          <div class="li" style="--c:var(--fit)"><span class="chip"><i data-i="dumbbell"></i></span><div><div class="t17">Ma séance</div><div class="t15">Full body, 3 séries sur 6</div></div><i class="go" data-i="chev"></i></div>
+          <div class="li" style="--c:var(--fin)"><span class="chip"><i data-i="card"></i></span><div><div class="t17">Mon budget</div><div class="t15">1 631 $ restants</div></div><i class="go" data-i="chev"></i></div>
+          <div class="li" style="--c:var(--pla)"><span class="chip"><i data-i="calendar"></i></span><div><div class="t17">Mon planning</div><div class="t15">Réunion d'équipe à 10:41</div></div><i class="go" data-i="chev"></i></div>
+        </div>
+        <div style="text-align:center;margin-top:12px;height:44px;line-height:44px"><span class="lnk">Voir les 13 espaces</span></div>
+      </div><div data-tab="1"></div><div class="hi"></div></div>
+      <div class="cap"><h4>On part de ses données</h4><p>Les choix montrent la valeur du jour : on reconnaît sa vie, pas un catalogue. Le toucher passe à l'étape 2.</p>
+        <div class="gest">Geste <b>1</b> <span>sur 3</span></div></div>
+    </div>
+    <div class="col"><div class="nm">2 · Quel format ?</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div data-steps="2"></div>
+        <div class="stage" style="height:184px;margin-top:12px"><img data-w="calories-s-light" style="width:150px" alt=""></div>
+        <div class="t22" style="margin-top:16px">Quel format ?</div>
+        <div class="t15 mut" style="margin-top:4px">Aux vraies proportions de l'iPhone.</div>
+        <div class="fmt">
+          <div class="on"><div class="vis"><img data-w="calories-s-light" style="width:84px" alt=""></div><div class="lb"><span class="t17">Petit</span><i data-i="check"></i></div></div>
+          <div><div class="vis"><img data-w="calories-m-light" style="width:100%;max-width:146px" alt=""></div><div class="lb"><span class="t17">Moyen</span></div></div>
+          <div><div class="vis"><div style="width:100px;height:72px;border:1.8px dashed #A9B3C1;border-radius:12px;display:grid;place-items:center" class="t12 mut">jusqu'à 4</div></div><div class="lb"><span class="t17">Grand</span></div></div>
+          <div><div class="vis"><div class="lk"><img data-w="lock-caloriesLeft-circular" style="width:52px" alt=""><img data-w="lock-caloriesLeft-rect" style="width:96px" alt=""></div></div><div class="lb"><span class="t17">Verrouillé</span><i data-i="lock" style="color:var(--ink2);--sw:1.8"></i></div></div>
+        </div>
+      </div><div data-tab="1"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Des silhouettes, pas des mots</h4><p>Chaque format montre le vrai widget à l'échelle, écran verrouillé compris. « Grand » réunit jusqu'à 4 widgets.</p>
+        <div class="gest">Geste <b>2</b> <span>sur 3</span></div></div>
+    </div>
+    <div class="col"><div class="nm">3 · Quel style ?</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div data-steps="3"></div>
+        <div class="stage" style="height:184px;margin-top:12px"><img data-w="calories-s-dark" style="width:150px" alt=""></div>
+        <div class="t22" style="margin-top:16px">Quel style ?</div>
+        <div class="t15 mut" style="margin-top:4px">Un style est proposé d'office : enregistre, ou touche-en un autre.</div>
+        <div class="card panel" style="margin-top:16px">
+          <div class="themes" style="margin-top:0">
+            <div><img data-w="calories-s-light" alt=""><b>Clair</b></div>
+            <div class="on"><img data-w="calories-s-dark" alt=""><b>Sombre</b></div>
+            <div><img data-w="calories-s-paper" alt=""><b><i data-i="lock"></i>Papier</b></div>
+            <div><img data-w="calories-s-luxury" alt=""><b><i data-i="lock"></i>Luxe</b></div>
+            <div><img data-w="calories-s-ocean" alt=""><b><i data-i="lock"></i>Océan</b></div>
+          </div>
+        </div>
+        <div style="text-align:center;height:44px;line-height:44px;margin-top:12px"><span class="lnk">Plus de réglages dans le Studio</span></div>
+        <div class="btn" style="margin-top:28px">Enregistrer le widget</div>
+      </div><div data-tab="1"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Un style, puis enregistrer</h4><p>Les habitués passent au Studio (en haut ou ici). Les autres enregistrent avec le style proposé.</p>
+        <div class="gest">Geste <b>3</b> <span>« Enregistrer » (4 si on change le style)</span></div></div>
+    </div>
+    <div class="col"><div class="nm">4 · Enregistrement</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div data-steps="3"></div>
+        <div class="stage" style="height:184px;margin-top:12px"><img data-w="calories-s-dark" style="width:150px" alt=""></div>
+      </div><div class="dim"></div><div data-end="calories-s-dark"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Même fin que les autres concepts</h4><p>Enregistré dans Mes widgets, puis les trois étapes iOS.</p>
+        <div class="gest">Créer un widget : <b>3 touchers</b> <span>depuis Créer (aujourd'hui : 3)</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= C3 Galerie ======================= -->
+<section class="b" id="c3">
+  <div class="bh"><div><h1>Créer · C3 « Galerie »</h1><p>On part d'un modèle déjà réglé. Chaque modèle a deux actions : « Utiliser » (enregistré tel quel) et « Personnaliser » (le Studio). Le Store garde les écrans complets ; la Galerie montre des widgets.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="row">
+    <div class="col"><div class="nm">1 · Entrée</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"></div>
+        <div class="t34" style="margin-top:-4px">Créer</div>
+        <div class="srch" style="margin-top:12px"><i data-i="search"></i>Rechercher un widget</div>
+        <div class="lab" style="margin-top:20px"><span class="k">Reprendre</span><span class="lnk">Mes widgets</span></div>
+        <div class="card resume"><img data-w="calories-s-paper" alt=""><div><div class="t17">Calories</div><div class="t15 mut">Petit · modifié hier</div></div><i data-i="chev" style="color:#9AA4B2;font-size:14px"></i></div>
+        <div class="lab"><span class="k">Pour toi</span><span class="t12 mut">d'après tes données</span></div>
+        <div class="gal">
+          <div class="mdl"><img data-w="calories-s-light" style="width:180px" alt=""><div class="t17" style="margin-top:8px">Calories restantes</div><div class="t15">Nutrition · Petit</div><div class="acts"><span class="btn2">Utiliser</span><span class="btn2 sq"><i data-i="sliders"></i></span></div></div>
+          <div class="mdl"><img data-w="nextSet-s-light" style="width:180px" alt=""><div class="t17" style="margin-top:8px">Prochaine série</div><div class="t15">Fitness · Petit</div><div class="acts"><span class="btn2">Utiliser</span><span class="btn2 sq"><i data-i="sliders"></i></span></div></div>
+        </div>
+        <div class="lab"><span class="k">Par espace</span><span class="lnk">13 espaces</span></div>
+        <div class="fchips"><span class="on">Tout</span><span style="--c:var(--nut)"><em></em>Nutrition</span><span style="--c:var(--fit)"><em></em>Fitness</span><span style="--c:var(--pla)"><em></em>Planning</span></div>
+      </div><div data-tab="1"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Partir d'un modèle</h4><p>« Reprendre » rouvre le dernier widget ; « Pour toi » suit tes données ; les espaces et les ensembles assortis viennent ensuite.</p>
+        <div class="gest">Créer un widget : <b>1 toucher</b> <span>« Utiliser » (aujourd'hui : 3)</span></div></div>
+    </div>
+    <div class="col"><div class="nm">2 · Personnalisation légère</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"><span class="lnk" style="display:flex;align-items:center;gap:2px;margin-left:-6px"><i data-i="chevl" style="font-size:20px"></i>Créer</span></div>
+        <div class="t22" style="margin-top:4px">Calories restantes</div>
+        <div class="t15 mut">Nutrition · tes calories du jour, mises à jour à chaque repas noté.</div>
+        <div class="stage" style="height:232px;margin-top:16px"><img data-w="calories-s-dark" style="width:170px" alt=""></div>
+        <div class="seg" style="margin-top:16px"><span class="on">Petit</span><span>Moyen</span><span>Verrouillé</span></div>
+        <div class="lab" style="margin-top:20px"><span class="k">Ce modèle dans d'autres styles</span></div>
+        <div class="themes" style="margin-top:0">
+          <div><img data-w="calories-s-light" alt=""><b>Clair</b></div>
+          <div><img data-w="calories-s-paper" alt=""><b><i data-i="lock"></i>Papier</b></div>
+          <div class="on"><img data-w="calories-s-dark" alt=""><b>Sombre</b></div>
+          <div><img data-w="calories-s-luxury" alt=""><b><i data-i="lock"></i>Luxe</b></div>
+          <div><img data-w="calories-s-ocean" alt=""><b><i data-i="lock"></i>Océan</b></div>
+        </div>
+        <div class="acts" style="margin-top:24px"><span class="btn2" style="height:50px;flex:1"><i data-i="sliders"></i>Personnaliser</span><span class="btn" style="flex:1">Utiliser</span></div>
+      </div><div data-tab="1"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Une fiche par modèle</h4><p>Taille et style se changent sans quitter la fiche. « Personnaliser » ouvre le Studio ; « Utiliser » enregistre. Le cadenas signale Premium.</p>
+        <div class="gest">Avec un autre style : <b>3 touchers</b> <span>(modèle, style, Utiliser)</span></div></div>
+    </div>
+    <div class="col"><div class="nm">3 · Enregistrement</div>
+      <div class="phone"><div data-sb></div><div class="scr">
+        <div class="nav"></div><div class="t34" style="margin-top:-4px">Créer</div>
+        <div class="srch" style="margin-top:12px"><i data-i="search"></i>Rechercher un widget</div>
+        <div class="lab" style="margin-top:20px"><span class="k">Reprendre</span></div>
+        <div class="card resume"><img data-w="calories-s-dark" alt=""><div><div class="t17">Calories restantes</div><div class="t15 mut">Petit · à l'instant</div></div></div>
+      </div><div class="dim"></div><div data-end="calories-s-dark"></div><div class="hi"></div></div>
+      <div class="cap"><h4>Même fin, même honnêteté</h4><p>Le widget enregistré passe en tête de « Reprendre ». Les trois étapes iOS s'affichent une fois ; ensuite, un lien suffit.</p>
+        <div class="gest">Puis sur l'écran d'accueil : <b>gestes iOS</b> <span>faits par l'utilisateur</span></div></div>
+    </div>
+  </div>
+</section>
+
+<script>
+const W = 'file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr/';
+const ICON = 'file:///C:/Users/Etudiant/ardane-tools/film/public/store/ardane-icon.png';
+const P = {
+  home: 'M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z', plus: 'M12 5v14M5 12h14', create: 'M5 5h14v14H5zM12 9v6M9 12h6',
+  bag: 'M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2', grid: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
+  fork: 'M7 3v7a2 2 0 0 0 4 0V3M9 12v9M17 3c-2 2-3 5-3 8h3v10', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12',
+  repeat: 'M17 2l3 3-3 3M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3M20 13v2a4 4 0 0 1-4 4H4',
+  card: 'M3 6h18v12H3zM3 10h18M7 15h4', calendar: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4', plane: 'M3 12l18-8-6 17-3-7z',
+  car: 'M3 15H2v-3l3-1 2-4h8l3 4 4 1v3h-1M9 15h6M5 15a2 2 0 1 0 4 0 2 2 0 1 0-4 0M15 15a2 2 0 1 0 4 0 2 2 0 1 0-4 0',
+  briefcase: 'M4 8h16v11H4zM9 8V5h6v3M4 13h16', photo: 'M4 5h16v14H4zM4 16l5-5 4 4 3-3 4 4M15 9h.01',
+  chev: 'M9 6l6 6-6 6', chevl: 'M15 6l-6 6 6 6', search: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4',
+  lock: 'M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3', check: 'M5 12l5 5 9-10', x: 'M7 7l10 10M17 7L7 17',
+  undo: 'M9 14L4 9l5-5M4 9h11a5 5 0 0 1 0 10h-3', redo: 'M15 14l5-5-5-5M20 9H9a5 5 0 0 0 0 10h3',
+  eye: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',
+  sparkle: 'M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z', star: 'M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8z',
+  user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0', clock: 'M12 7v5l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z',
+  grip: 'M9 6h.01M15 6h.01M9 12h.01M15 12h.01M9 18h.01M15 18h.01', info: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 11v6M12 7.5h.01',
+  sliders: 'M4 7h10M18 7h2M4 17h4M12 17h8M14 4v6M8 14v6',
+  size: 'M4 14h6v6H4zM14 4h6v6M20 4l-8 8', content: 'M5 6h14M5 12h14M5 18h9', palette: 'M12 3a9 9 0 1 0 0 18c1 0 1.5-.8 1.5-1.5 0-1.2-1-1.5-1-2.5S13.3 15 14.5 15H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8zM7.5 11h.01M10 7.5h.01M15 7.5h.01',
+  brush: 'M4 20l4-1 11-11-3-3L5 16zM14 6l3 3', drop: 'M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z', layers: 'M12 3l9 5-9 5-9-5zM3 13l9 5 9-5',
+  border: 'M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4', chart: 'M5 20v-6M10 20V9M15 20v-9M20 20V4',
+};
+// Les 8 mini-apps réelles (MiniApp.swift) : nom, icône, couleur, valeur du jour (exemple cohérent avec les widgets).
+const APPS = [
+  ['Nutrition', 'fork', '--nut', '1 122 kcal', '1 122 kcal restantes'], ['Fitness', 'dumbbell', '--fit', '3 sur 6', '3 séries sur 6'],
+  ['Planning', 'calendar', '--pla', '10:41', 'Réunion à 10:41'], ['Finances', 'card', '--fin', '1 631 $', '1 631 $ restants'],
+  ['Business', 'briefcase', '--biz', '2 400 $', '2 400 $ ce mois'], ['Voyage', 'plane', '--voy', 'J-12', 'Japon · J-12'],
+  ['Auto', 'car', '--car', '800 km', 'Vidange dans 800 km'], ['Photos', 'photo', '--pho', '4 photos', '4 photos'],
+];
+const TOOLS = [['Taille', 'size'], ['Contenu', 'content'], ['Thème', 'palette'], ['Style', 'brush'], ['Couleurs', 'drop'], ['Fond', 'layers'], ['Bordure', 'border'], ['Graphique', 'chart'], ['Densité', 'grid'], ['Mes styles', 'star']];
+const G = {
+  tile: (a) => `<div class="tile" style="--c:var(${a[2]})"><div class="ic"><i data-i="${a[1]}"></i></div><b>${a[0]}</b><span>${a[3]}</span></div>`,
+  tile0: (a) => `<div class="tile" style="--c:var(${a[2]})"><div class="ic"><i data-i="${a[1]}"></i></div><b>${a[0]}</b><span>À découvrir</span></div>`,
+  tileorg: (a, k) => `<div class="tile" style="--c:var(${a[2]})"><div class="ic">${k < 7 ? '<span class="xb" style="top:-14px;left:-14px"><span><i data-i="minus"></i></span></span>' : ''}<i data-i="${a[1]}"></i></div><b>${a[0]}</b><span class="mut">${k === 7 ? 'Masquée' : '&nbsp;'}</span></div>`,
+  li: (a) => `<div class="li" style="--c:var(${a[2]})"><span class="chip"><i data-i="${a[1]}"></i></span><span class="t17">${a[0]}</span><span class="t15">${a[4]}</span><i class="go" data-i="chev"></i></div>`,
+  dock: (a) => `<span style="--c:var(${a[2]})"><i data-i="${a[1]}"></i></span>`,
+};
+P.minus = 'M6 12h12';
+P.scan = 'M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M8 12h8';
+const $$ = (s) => document.querySelectorAll(s);
+$$('[data-gen]').forEach((el) => {
+  const [t, sel] = el.dataset.gen.split(',');
+  if (t === 'tools') { el.innerHTML = TOOLS.map((x, k) => `<div class="${k == sel ? 'on' : ''}"><i data-i="${x[1]}"></i>${x[0]}</div>`).join(''); return; }
+  el.innerHTML = APPS.map((a, k) => G[t](a, k)).join('');
+});
+$$('[data-sb]').forEach((el) => { el.outerHTML = `<div class="sb"><span>9:15</span><div class="isl"></div><span class="ri"><span class="sig"><i style="height:4px"></i><i style="height:6px"></i><i style="height:9px"></i><i style="height:12px"></i></span><span class="bat"></span></span></div>`; });
+$$('[data-tab]').forEach((el) => {
+  const on = +el.dataset.tab; const T = [['Accueil', 'home'], ['Créer', 'create'], ['Store', 'bag'], ['Mes widgets', 'grid']];
+  el.outerHTML = `<div class="tab">${T.map((x, k) => `<div class="${k === on ? 'on' : ''}"><i data-i="${x[1]}"></i>${x[0]}</div>`).join('')}</div>`;
+});
+$$('[data-steps]').forEach((el) => {
+  const n = +el.dataset.steps;
+  el.outerHTML = `<div class="nav"><span class="k">Étape ${n} sur 3</span><span class="lnk">Aller au Studio</span></div><div class="prog" style="margin-top:0">${[1, 2, 3].map((k) => `<span class="${k <= n ? 'f' : ''}"></span>`).join('')}</div>`;
+});
+$$('[data-end]').forEach((el) => {
+  el.outerHTML = `<div class="sheet"><div class="grab"></div>
+    <div class="done"><img src="${W}${el.dataset.end}.png" alt=""><div><div class="t22">« Calories » est prêt</div><div class="ok"><i data-i="check"></i>Enregistré dans Mes widgets</div></div></div>
+    <div class="seg" style="margin-top:20px"><span class="on">Écran d'accueil</span><span>Écran verrouillé</span></div>
+    <div class="k" style="margin:20px 0 4px">Pour l'ajouter, 3 étapes</div>
+    <div class="step"><span class="n">1</span><span class="t15">Appuie longuement sur un espace vide de l'écran d'accueil.</span></div>
+    <div class="step"><span class="n">2</span><span class="t15">Touche « Modifier » en haut, puis « Ajouter un widget ».</span></div>
+    <div class="step"><span class="n">3</span><span class="t15">Cherche « Ardane », puis « Mes widgets » : « Calories » est dans la taille Petit.</span><img src="${ICON}" alt=""></div>
+    <div class="note"><i data-i="info"></i><span class="t15 mut">iOS ne laisse aucune app poser un widget à ta place.</span></div>
+    <div class="btn" style="margin:16px 0 0">Compris</div><div style="height:42px"></div></div>`;
+});
+$$('img[data-w]').forEach((e) => { e.src = W + e.dataset.w + '.png'; });
+$$('i[data-i]').forEach((e) => { e.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${P[e.dataset.i] || ''}"/></svg>`; });
+const q = new URLSearchParams(location.search);
+if (q.get('w')) document.documentElement.style.setProperty('--pw', q.get('w') + 'px');
+document.getElementById(q.get('d') || 'h').classList.add('on');
+</script>
+</body>
+</html>

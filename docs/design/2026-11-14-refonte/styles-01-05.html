@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane — directions artistiques 1 à 5 (maquettes)</title>
+<!--
+  Planches : ?d=s1 (Saphir) · s2 (Architecte) · s3 (Carbone) · s4 (Maison) · s5 (Gazette)
+  Chaque style déclare ses jetons en variables CSS sur sa section (.sN) :
+  --bg fond · --surface · --ink encre · --ink2 texte secondaire · --rule filet · --primary principale · --accent
+  --r-card / --r-btn rayons · --hair épaisseur de filet · --f-title / --f-text / --f-num polices.
+  Les couleurs d'espace sont calculées en JS (teinte fixe par espace, saturation et clarté propres au style : SPACE_SL).
+-->
+<style>
+@font-face { font-family: Inter; src: url(Inter-opsz.woff2) format("woff2"); font-weight: 100 900; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { width: 1400px; font-family: Inter, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+section.board { display: none; width: 1400px; height: 1064px; padding: 26px 36px 0; position: relative; overflow: hidden; background: var(--board); color: var(--bink); }
+section.board.on { display: block; }
+.bh { display: flex; align-items: flex-start; gap: 18px; height: 88px; }
+.bh .num { font: 800 48px/0.9 Inter; letter-spacing: -.04em; color: var(--bink); min-width: 70px; }
+.bh h1 { font: 800 30px/1.05 Inter; letter-spacing: -.02em; }
+.bh p { font-size: 14.5px; line-height: 1.38; margin-top: 5px; max-width: 760px; color: var(--bink2); }
+.bh .badge { margin-left: auto; font-size: 11px; font-weight: 600; padding: 6px 10px; border-radius: 6px; border: 1px solid var(--bink2); color: var(--bink2); white-space: nowrap; }
+.bd { display: flex; gap: 30px; }
+.col > h3 { font: 700 11.5px Inter; letter-spacing: .14em; text-transform: uppercase; color: var(--bink2); margin: 0 0 14px 4px; height: 14px; }
+.ph-wrap { padding: 9px; }
+.phone { width: 393px; height: 852px; border-radius: 55px; position: relative; overflow: hidden; background: var(--bg); color: var(--ink); box-shadow: 0 0 0 9px #121417, 0 22px 44px rgba(0,0,0,.20); }
+.sb { position: relative; z-index: 4; height: 54px; display: flex; justify-content: space-between; align-items: center; padding: 4px 34px 0 46px; font: 600 16px Inter; color: var(--ink); }
+.sb .isl { position: absolute; left: 50%; top: 11px; width: 124px; height: 36px; margin-left: -62px; border-radius: 18px; background: #000; }
+.sb .rt { display: flex; align-items: center; gap: 6px; }
+.sb .sig { display: flex; align-items: flex-end; gap: 1.5px; height: 11px; }
+.sb .sig span { width: 3px; background: currentColor; border-radius: 1px; }
+.sb .bat { width: 25px; height: 12px; border-radius: 3.5px; border: 1.2px solid currentColor; position: relative; opacity: .95; }
+.sb .bat::after { content: ""; position: absolute; inset: 1.5px; right: 6px; background: currentColor; border-radius: 1.5px; }
+.hi { position: absolute; z-index: 9; bottom: 8px; left: 50%; width: 134px; margin-left: -67px; height: 5px; border-radius: 3px; background: var(--ink); }
+.scr { position: absolute; top: 54px; left: 0; right: 0; bottom: 0; overflow: hidden; }
+.tabbar { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; height: 83px; display: flex; }
+.ti { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding-top: 7px; gap: 3px; height: 49px; position: relative; }
+i[data-i] { display: inline-flex; width: 1em; height: 1em; flex: none; }
+i[data-i] svg { width: 100%; height: 100%; stroke-width: var(--sw, 1.8); }
+img.w { display: block; }
+.nw { white-space: nowrap; }
+.mono { font-family: Consolas, "Cascadia Mono", monospace; }
+
+/* ---------- fiche ---------- */
+.fiche { width: 442px; height: 870px; border-radius: var(--r-fiche, 18px); background: var(--fbg, var(--surface)); border: 1px solid var(--frule, var(--rule)); color: var(--ink); padding: 18px 20px; overflow: hidden; }
+.fiche h4 { font: 700 10.5px Inter; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); margin: 0 0 9px; display: flex; justify-content: space-between; }
+.fiche h4 + * { margin-bottom: 13px; }
+.pal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px 9px; }
+.pal .sw { font: 500 10px/1.25 Inter; color: var(--ink2); min-width: 0; }
+.pal .sw div { height: 28px; border-radius: var(--r-sw, 8px); border: 1px solid var(--swb, rgba(0,0,0,.12)); margin-bottom: 4px; }
+.pal .sw b { display: block; font-weight: 650; color: var(--ink); font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pal .sw span { font-family: Consolas, monospace; font-size: 10px; }
+.typo > div { display: grid; grid-template-columns: 1fr 132px; align-items: baseline; gap: 10px; padding: 4px 0; border-bottom: 1px solid var(--rule); }
+.typo > div:last-child { border-bottom: 0; }
+.typo small { font: 500 9.5px/1.3 Consolas, monospace; color: var(--ink2); text-align: right; }
+.comp { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+.comp > div > small { display: block; font: 600 9.5px Inter; letter-spacing: .12em; text-transform: uppercase; color: var(--ink2); margin-bottom: 6px; }
+.comp .full { grid-column: 1 / -1; }
+.rowx { display: flex; gap: 8px; align-items: center; flex-wrap: nowrap; }
+.tok { font: 500 10px/1.5 Consolas, monospace; color: var(--ink2); }
+.tok b { color: var(--ink); font-weight: 700; }
+
+/* ======================= 1 · SAPHIR ======================= */
+.s1 { --board: #E6EAF0; --bink: #0B1220; --bink2: #4E5968;
+  --bg: #F4F6FA; --surface: #FFFFFF; --ink: #0B1220; --ink2: #5E6979; --rule: #E3E8F0; --primary: #245B8F; --accent: #17B3D0; --brand2: #1D4E9E;
+  --r-card: 22px; --r-btn: 14px; --hair: 1px; --sw: 1.8; --fbg: #FFFFFF; }
+.s1 .scr { padding: 0 20px; }
+.s1 .top { display: flex; justify-content: space-between; align-items: center; height: 40px; margin-top: 2px; }
+.s1 .date { font-size: 15px; font-weight: 650; color: var(--primary); }
+.s1 .ava { width: 36px; height: 36px; border-radius: 50%; background: var(--surface); border: 1px solid var(--rule); display: grid; place-items: center; font-weight: 700; font-size: 14px; color: var(--primary); box-shadow: 0 1px 2px rgba(11,18,32,.06); }
+.s1 .kick { font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--ink2); margin-top: 6px; }
+.s1 .tTitle, .s1 .title { font-size: 34px; font-weight: 800; letter-spacing: -.025em; line-height: 1.08; }
+.s1 .sec { display: flex; justify-content: space-between; align-items: baseline; margin: 20px 2px 10px; }
+.s1 .sec b, .s1 .tLabel { font-size: 20px; font-weight: 750; letter-spacing: -.01em; }
+.s1 .sec a { font-size: 15px; font-weight: 550; color: var(--primary); }
+.s1 .card { background: var(--surface); border-radius: var(--r-card); box-shadow: 0 1px 2px rgba(11,18,32,.05), 0 6px 18px rgba(11,18,32,.05); }
+.s1 .now { padding: 16px; }
+.s1 .now .r { display: flex; align-items: center; gap: 10px; }
+.s1 .now .k { font-size: 12px; font-weight: 700; letter-spacing: .06em; color: var(--ink2); text-transform: uppercase; }
+.s1 .now .t { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.s1 .now h5 { font-size: 22px; font-weight: 750; letter-spacing: -.015em; margin: 12px 0 2px; }
+.s1 .now p { font-size: 14px; color: var(--ink2); }
+.s1 .segs { display: flex; gap: 5px; margin: 13px 0 14px; }
+.s1 .segs span { flex: 1; height: 6px; border-radius: 3px; background: #E5E9F0; }
+.s1 .segs span.f { background: var(--c); }
+.s1 .btns { display: grid; grid-template-columns: 1fr 104px; gap: 10px; }
+.s1 .btnP { height: 46px; border-radius: var(--r-btn); background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 650; font-size: 16px; }
+.s1 .btnS { height: 46px; border-radius: var(--r-btn); background: #E9F0F7; color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 650; font-size: 16px; padding: 0 16px; }
+.s1 .ico { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; font-size: 18px; color: var(--c); background: color-mix(in srgb, var(--c) 13%, #fff); flex: none; }
+.s1 .apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.s1 .app { text-align: center; }
+.s1 .app .ic { width: 58px; height: 58px; border-radius: 18px; background: var(--surface); box-shadow: 0 1px 2px rgba(11,18,32,.06), 0 4px 12px rgba(11,18,32,.06); display: grid; place-items: center; font-size: 25px; color: var(--c); margin: 0 auto 6px; }
+.s1 .app b { display: block; font-size: 11.5px; font-weight: 650; }
+.s1 .app span { font-size: 10.5px; color: var(--ink2); white-space: nowrap; }
+.s1 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.s1 .scard { padding: 14px; }
+.s1 .scard .r { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 650; }
+.s1 .scard .r i { font-size: 17px; color: var(--c); }
+.s1 .scard .n, .s1 .tNum { font-size: 28px; font-weight: 800; letter-spacing: -.02em; margin-top: 8px; font-variant-numeric: tabular-nums; }
+.s1 .scard .s { font-size: 12px; color: var(--ink2); }
+.s1 .scard .bar { height: 5px; border-radius: 3px; background: #E5E9F0; margin-top: 10px; overflow: hidden; }
+.s1 .scard .bar span { display: block; height: 100%; background: var(--c); border-radius: 3px; }
+.s1 .tText { font-size: 15px; line-height: 1.4; color: var(--ink); }
+.s1 .tabbar { left: 16px; right: 16px; bottom: 24px; height: 62px; border-radius: 31px; background: #FFFFFF; border: 1px solid var(--rule); box-shadow: 0 6px 22px rgba(11,18,32,.10); padding: 5px; align-items: center; }
+.s1 .tdemo { display: flex; height: 62px; border-radius: 31px; background: #fff; border: 1px solid var(--rule); box-shadow: 0 6px 22px rgba(11,18,32,.08); padding: 5px; width: 210px; }
+.s1 .ti { height: 50px; border-radius: 25px; justify-content: center; padding: 0; font-size: 10.5px; font-weight: 600; color: var(--ink2); }
+.s1 .ti i { font-size: 22px; }
+.s1 .ti.on { color: var(--primary); background: #E9F0F7; }
+.s1 .sub { font-size: 15px; color: var(--ink2); margin-top: 4px; }
+.s1 .search { height: 40px; border-radius: 12px; background: #E6EAF1; display: flex; align-items: center; gap: 8px; padding: 0 12px; color: var(--ink2); font-size: 16px; margin: 14px 0 12px; }
+.s1 .search i { font-size: 18px; }
+.s1 .chips { display: flex; gap: 8px; overflow: hidden; margin-right: -20px; }
+.s1 .pill { flex: none; height: 34px; padding: 0 14px; border-radius: 17px; background: var(--surface); border: 1px solid var(--rule); display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.s1 .pill.on { background: var(--primary); border-color: var(--primary); color: #fff; }
+.s1 .wrail { display: flex; gap: 12px; overflow: hidden; margin-right: -20px; }
+.s1 .wi { flex: none; width: 150px; position: relative; }
+.s1 .wi img { width: 150px; height: 150px; filter: drop-shadow(0 6px 12px rgba(11,18,32,.10)); }
+.s1 .wi .add { position: absolute; right: 7px; top: 7px; width: 30px; height: 30px; border-radius: 50%; background: var(--primary); color: #fff; display: grid; place-items: center; font-size: 15px; --sw: 2.4; box-shadow: 0 2px 6px rgba(11,18,32,.25); }
+.s1 .wi b { display: block; font-size: 13px; font-weight: 650; margin-top: 7px; }
+.s1 .wi span { font-size: 11.5px; color: var(--ink2); }
+.s1 .prem { display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 700; color: var(--primary); background: #E9F0F7; border-radius: 6px; padding: 2px 6px; margin-left: 4px; }
+.s1 .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.s1 .sp { height: 60px; border-radius: 16px; background: var(--surface); display: flex; align-items: center; gap: 10px; padding: 0 10px 0 12px; box-shadow: 0 1px 2px rgba(11,18,32,.05); }
+.s1 .sp b { font-size: 14px; font-weight: 650; display: block; }
+.s1 .sp span { font-size: 11px; color: var(--ink2); white-space: nowrap; }
+.s1 .sp span.ico { font-size: 18px; }
+.s1 .sp .go { margin-left: auto; color: #A9B3C1; font-size: 14px; }
+
+/* ======================= 2 · ARCHITECTE ======================= */
+.s2 { --board: #E4E2DD; --bink: #111111; --bink2: #55554F;
+  --bg: #F2F1EE; --surface: #FFFFFF; --ink: #111111; --ink2: #66665F; --rule: #111111; --primary: #245B8F;
+  --r-card: 0px; --r-btn: 0px; --hair: 1px; --sw: 1.4; --r-fiche: 0px; --r-sw: 0px; --fbg: #F2F1EE; --swb: #111; }
+.s2 .hdr { height: 44px; display: flex; align-items: stretch; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.s2 .hdr .l { flex: 1; display: flex; align-items: center; gap: 12px; padding: 0 20px; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; }
+.s2 .hdr .l .d { color: var(--primary); }
+.s2 .hdr .l .sep { width: 1px; height: 12px; background: var(--ink2); }
+.s2 .hdr .u { width: 52px; border-left: 1px solid var(--rule); display: grid; place-items: center; font-size: 20px; }
+.s2 .ttl { padding: 16px 20px 16px; border-bottom: 1px solid var(--rule); }
+.s2 .kick, .s2 .tLabel { font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--ink2); }
+.s2 .title, .s2 .tTitle { font-size: 46px; font-weight: 300; letter-spacing: -.035em; line-height: 1.02; margin-top: 4px; }
+.s2 .sub { font-size: 13.5px; color: var(--ink2); margin-top: 6px; }
+.s2 .lab { height: 30px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; border-bottom: 1px solid var(--rule); font-size: 10.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.s2 .lab span:last-child { color: var(--ink2); display: flex; align-items: center; gap: 7px; }
+.s2 .sq { width: 8px; height: 8px; background: var(--c); flex: none; display: inline-block; }
+.s2 .now { display: grid; grid-template-columns: 1fr 124px; border-bottom: 1px solid var(--rule); }
+.s2 .now .a { padding: 14px 20px; }
+.s2 .now h5 { font-size: 24px; font-weight: 500; letter-spacing: -.02em; }
+.s2 .now p { font-size: 13px; color: var(--ink2); margin-top: 3px; line-height: 1.35; }
+.s2 .now .b { border-left: 1px solid var(--rule); display: grid; place-items: center; }
+.s2 .tNum, .s2 .now .b div { font-size: 50px; font-weight: 200; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.s2 .cells { display: grid; grid-template-columns: repeat(6, 1fr); height: 10px; border-bottom: 1px solid var(--rule); }
+.s2 .cells span + span { border-left: 1px solid var(--rule); }
+.s2 .cells span.f { background: var(--ink); }
+.s2 .btns { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--rule); }
+.s2 .btnP { height: 52px; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
+.s2 .btnS { height: 52px; background: var(--surface); color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; border-left: 1px solid var(--rule); }
+.s2 .fiche .btnS { border: 1px solid var(--rule); }
+.s2 .fiche .btnP, .s2 .fiche .btnS { height: 48px; }
+.s2 .grid4 { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--rule); }
+.s2 .cell { height: 80px; padding: 8px 10px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+.s2 .grid4 .cell:not(:nth-child(4n+1)) { border-left: 1px solid var(--rule); }
+.s2 .grid4 .cell:nth-child(n+5) { border-top: 1px solid var(--rule); }
+.s2 .cell .no { font-size: 9.5px; font-weight: 500; color: var(--ink2); letter-spacing: .08em; }
+.s2 .cell .sq { position: absolute; right: 10px; top: 10px; }
+.s2 .cell i { font-size: 19px; position: absolute; right: 9px; bottom: 27px; display: none; }
+.s2 .cell b { font-size: 11.5px; font-weight: 500; display: block; }
+.s2 .cell em { font-style: normal; font-size: 14px; font-weight: 300; letter-spacing: -.01em; white-space: nowrap; }
+.s2 .ico { width: 44px; height: 44px; border: 1px solid var(--rule); display: grid; place-items: center; font-size: 22px; position: relative; background: var(--surface); }
+.s2 .ico::after { content: ""; position: absolute; right: -1px; top: -1px; width: 8px; height: 8px; background: var(--c); }
+.s2 .trow { height: 46px; display: flex; align-items: center; gap: 10px; padding: 0 20px; border-bottom: 1px solid var(--rule); }
+.s2 .trow .lb { font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+.s2 .trow .v { margin-left: auto; font-size: 24px; font-weight: 300; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.s2 .trow .u { font-size: 11px; color: var(--ink2); margin-left: 4px; }
+.s2 .tText { font-size: 14px; line-height: 1.45; }
+.s2 .tabbar, .s2 .tdemo { background: var(--bg); border-top: 1px solid var(--rule); }
+.s2 .tdemo { display: flex; width: 200px; border: 1px solid var(--rule); }
+.s2 .ti { font-size: 9.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink2); padding-top: 8px; gap: 5px; }
+.s2 .tabbar .ti + .ti, .s2 .tdemo .ti + .ti { border-left: 1px solid var(--rule); }
+.s2 .ti i { font-size: 20px; }
+.s2 .ti.on { background: var(--ink); color: #fff; }
+.s2 .search { height: 48px; display: flex; align-items: center; gap: 10px; padding: 0 20px; border-bottom: 1px solid var(--rule); font-size: 15px; color: var(--ink2); background: var(--surface); }
+.s2 .search i { font-size: 18px; color: var(--ink); }
+.s2 .chips { display: flex; border-bottom: 1px solid var(--rule); overflow: hidden; }
+.s2 .pill { flex: none; height: 44px; padding: 0 16px; display: flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; border-right: 1px solid var(--rule); color: var(--ink); }
+.s2 .pill.on { background: var(--ink); color: #fff; }
+.s2 .fiche .pill { border: 1px solid var(--rule); }
+.s2 .w3 { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--rule); }
+.s2 .w3 > div { padding: 12px 12px 10px; }
+.s2 .w3 > div + div { border-left: 1px solid var(--rule); }
+.s2 .w3 img { width: 106px; height: 106px; margin: 0 auto 8px; }
+.s2 .w3 b { display: block; font-size: 11.5px; font-weight: 500; }
+.s2 .w3 span { font-size: 10.5px; letter-spacing: .02em; color: var(--ink2); display: flex; justify-content: space-between; align-items: center; }
+.s2 .w3 span i { font-size: 14px; color: var(--ink); --sw: 1.8; }
+.s2 .idx { height: 46px; display: flex; align-items: center; gap: 12px; padding: 0 20px; border-bottom: 1px solid var(--rule); }
+.s2 .idx span.no { margin-left: 0; }
+.s2 .idx .no { font-size: 10.5px; color: var(--ink2); width: 18px; font-variant-numeric: tabular-nums; }
+.s2 .idx i { font-size: 18px; }
+.s2 .idx b { font-size: 15px; font-weight: 500; }
+.s2 .idx span { margin-left: auto; font-size: 11px; color: var(--ink2); white-space: nowrap; }
+.s2 .idx .go { margin-left: 4px; font-size: 14px; color: var(--ink); }
+.s2 .acell { width: 98px; height: 80px; border: 1px solid var(--rule); background: var(--bg); }
+
+/* ======================= 3 · CARBONE ======================= */
+.s3 { --board: #05080D; --bink: #E8EEF8; --bink2: #8A97AB;
+  --bg: #0B0F17; --surface: #131A26; --surface2: #1A2333; --ink: #E8EEF8; --ink2: #8A97AB; --rule: #223046; --primary: #4FD3E8; --accent: #68B5F5;
+  --r-card: 14px; --r-btn: 10px; --hair: 1px; --sw: 1.6; --fbg: #0B0F17; --swb: #2E3D56; }
+.s3 .phone { box-shadow: 0 0 0 9px #24282F, 0 22px 44px rgba(0,0,0,.5); }
+.s3 .scr { padding: 0 16px; }
+.s3 .top { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 4px; }
+.s3 .date { font-size: 12.5px; color: var(--primary); letter-spacing: .04em; }
+.s3 .kick, .s3 .tLabel { font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); }
+.s3 .kick { margin-top: 10px; }
+.s3 .title, .s3 .tTitle { font-size: 30px; font-weight: 650; letter-spacing: -.02em; line-height: 1.1; margin-top: 2px; }
+.s3 .ava { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--rule); background: var(--surface); display: grid; place-items: center; font-size: 14px; font-weight: 600; }
+.s3 .lab { display: flex; justify-content: space-between; align-items: center; margin: 18px 2px 8px; font-size: 10.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); }
+.s3 .lab a { color: var(--primary); letter-spacing: .02em; text-transform: none; font-size: 13px; font-weight: 550; }
+.s3 .card { background: var(--surface); border-radius: var(--r-card); box-shadow: inset 0 0 0 1px var(--rule); }
+.s3 .now { padding: 14px; margin-top: 14px; }
+.s3 .now .r { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: .1em; }
+.s3 .now .r .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); }
+.s3 .now .r .k { color: var(--primary); font-weight: 600; }
+.s3 .now .r .g { color: var(--ink2); }
+.s3 .now .r .t { margin-left: auto; color: var(--ink); font-size: 13px; }
+.s3 .now h5 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; margin: 10px 0 2px; }
+.s3 .now p { font-size: 13px; color: var(--ink2); }
+.s3 .gauge { display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px; margin: 12px 0 4px; }
+.s3 .gauge span { height: 8px; border-radius: 2px; background: #1E2A3D; }
+.s3 .gauge span.f { background: var(--c); }
+.s3 .gauge span.c { background: transparent; box-shadow: inset 0 0 0 1px var(--primary); }
+.s3 .ticks { display: grid; grid-template-columns: repeat(6, 1fr); font-size: 10px; color: var(--ink2); margin-bottom: 12px; }
+.s3 .btns { display: grid; grid-template-columns: 1fr 120px; gap: 8px; }
+.s3 .btnP { height: 44px; border-radius: var(--r-btn); background: var(--primary); color: #0B0F17; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 650; font-size: 15px; }
+.s3 .btnS { height: 44px; border-radius: var(--r-btn); box-shadow: inset 0 0 0 1px #34465F; color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 7px; font-weight: 550; font-size: 14px; padding: 0 14px; }
+.s3 .btnS i { color: var(--primary); }
+.s3 .gauges { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.s3 .gg { padding: 10px 6px 9px; text-align: center; }
+.s3 .ring { width: 50px; height: 50px; margin: 0 auto 7px; position: relative; display: grid; place-items: center; }
+.s3 .ring svg.rg { position: absolute; inset: 0; transform: rotate(-90deg); }
+.s3 .ring i { font-size: 19px; color: var(--c); }
+.s3 .gg b { display: block; font-size: 11.5px; font-weight: 600; }
+.s3 .gg span { font-size: 11px; color: var(--ink2); white-space: nowrap; }
+.s3 .list .rw { height: 46px; display: flex; align-items: center; gap: 11px; padding: 0 14px; }
+.s3 .list .rw + .rw { box-shadow: 0 -1px 0 var(--rule); }
+.s3 .list .rw i { font-size: 18px; color: var(--c); }
+.s3 .list .rw .lb { font-size: 14px; }
+.s3 .list .rw .v { margin-left: auto; font-size: 15px; color: var(--ink); }
+.s3 .list .rw .u { font-size: 11.5px; color: var(--ink2); margin-left: 3px; }
+.s3 .ico { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 18px; color: var(--c); background: color-mix(in srgb, var(--c) 10%, #131A26); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 38%, #131A26); flex: none; }
+.s3 .scard { padding: 12px 14px; }
+.s3 .scard .r { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--ink2); }
+.s3 .scard .r i { color: var(--c); font-size: 16px; }
+.s3 .scard .n, .s3 .tNum { font-family: Consolas, monospace; font-size: 30px; letter-spacing: -.02em; margin-top: 6px; color: var(--ink); }
+.s3 .scard .s { font-size: 11.5px; color: var(--ink2); }
+.s3 .tText { font-size: 14.5px; line-height: 1.45; color: var(--ink); }
+.s3 .tabbar, .s3 .tdemo { background: #0B0F17; box-shadow: inset 0 1px 0 var(--rule); }
+.s3 .tdemo { display: flex; width: 200px; border-radius: 10px; box-shadow: inset 0 0 0 1px var(--rule); height: 56px; }
+.s3 .ti { font-size: 10px; font-weight: 600; color: var(--ink2); letter-spacing: .02em; padding-top: 9px; }
+.s3 .ti i { font-size: 22px; }
+.s3 .ti.on { color: var(--primary); }
+.s3 .ti.on::before { content: ""; position: absolute; top: 0; width: 22px; height: 2px; border-radius: 1px; background: var(--primary); }
+.s3 .sub { font-size: 13.5px; color: var(--ink2); margin-top: 4px; }
+.s3 .search { height: 44px; border-radius: 12px; background: var(--surface); box-shadow: inset 0 0 0 1px var(--rule); display: flex; align-items: center; gap: 9px; padding: 0 13px; color: var(--ink2); font-size: 15px; margin: 14px 0 10px; }
+.s3 .search i { font-size: 17px; }
+.s3 .search .k { margin-left: auto; font-size: 11px; color: var(--ink2); }
+.s3 .seg { display: flex; height: 38px; border-radius: 10px; box-shadow: inset 0 0 0 1px var(--rule); padding: 3px; gap: 2px; overflow: hidden; margin-right: -16px; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.s3 .pill { flex: none; height: 32px; padding: 0 12px; border-radius: 7px; display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 550; color: var(--ink2); }
+.s3 .pill.on { background: var(--surface2); color: var(--primary); box-shadow: inset 0 0 0 1px #2E3D56; }
+.s3 .fiche .pill { box-shadow: inset 0 0 0 1px var(--rule); }
+.s3 .fiche .pill.on { box-shadow: inset 0 0 0 1px #2E3D56; }
+.s3 .w2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.s3 .w2 img { width: 174px; height: 174px; }
+.s3 .w2 .cap { display: flex; align-items: center; justify-content: space-between; margin-top: 7px; }
+.s3 .w2 b { display: block; font-size: 13px; font-weight: 600; }
+.s3 .w2 span { font-size: 10.5px; color: var(--ink2); letter-spacing: .06em; }
+.s3 .w2 .add { width: 32px; height: 32px; border-radius: 9px; box-shadow: inset 0 0 0 1px var(--primary); color: var(--primary); display: grid; place-items: center; font-size: 15px; --sw: 2.2; }
+.s3 .prem { font-size: 10.5px; color: var(--accent); display: inline-flex; align-items: center; gap: 4px; }
+.s3 .sl .rw { height: 54px; display: flex; align-items: center; gap: 12px; padding: 0 12px; }
+.s3 .sl .rw + .rw { box-shadow: 0 -1px 0 var(--rule); }
+.s3 .sl b { font-size: 15px; font-weight: 550; display: block; }
+.s3 .sl span { font-size: 11px; color: var(--ink2); }
+.s3 .sl span.ico { font-size: 18px; }
+.s3 .sl .go { margin-left: auto; color: #4A5A73; font-size: 15px; }
+
+/* ======================= 4 · MAISON ======================= */
+.s4 { --board: #E8E0D2; --bink: #1A1714; --bink2: #6F675E;
+  --bg: #F6F1E9; --surface: #FBF8F2; --ink: #1A1714; --ink2: #6F675E; --rule: #D6CCBD; --primary: #1F3A5F; --accent: #B08D57; --mat: #EEE6D9;
+  --r-card: 2px; --r-btn: 2px; --hair: 1px; --sw: 1.25; --r-fiche: 2px; --r-sw: 1px; --fbg: #F6F1E9; --swb: #CFC4B3; }
+.s4 .phone { box-shadow: 0 0 0 9px #1A1714, 0 22px 44px rgba(60,40,10,.22); }
+.s4 .ser, .s4 .title, .s4 .tTitle { font-family: "Sitka Display", "Sitka Heading", Constantia, Georgia, serif; font-weight: 400; }
+.s4 .scr { padding: 0 24px; }
+.s4 .sc, .s4 .tLabel { font-size: 9.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--ink2); }
+.s4 .top { display: flex; justify-content: space-between; align-items: center; height: 40px; }
+.s4 .date { font-family: "Sitka Text", Georgia, serif; font-style: italic; font-size: 15.5px; color: var(--primary); }
+.s4 .ava { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--ink); display: grid; place-items: center; font-family: "Sitka Display", Georgia, serif; font-size: 17px; }
+.s4 .mid { text-align: center; }
+.s4 .kick { margin-top: 8px; }
+.s4 .title, .s4 .tTitle { font-style: italic; font-size: 44px; line-height: 1.08; }
+.s4 .gold { width: 34px; height: 1px; background: var(--accent); margin: 10px auto 18px; }
+.s4 .frame { border: 1px solid var(--ink); border-radius: var(--r-card); padding: 16px 18px 16px; }
+.s4 .frame .k { display: flex; align-items: center; gap: 8px; }
+.s4 .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--c); flex: none; display: inline-block; }
+.s4 .frame h5 { font-family: "Sitka Display", Georgia, serif; font-weight: 400; font-size: 29px; margin: 6px 0 1px; }
+.s4 .frame p { font-size: 13px; color: var(--ink2); }
+.s4 .dash { display: flex; gap: 6px; margin: 13px 0 14px; }
+.s4 .dash span { flex: 1; height: 2px; background: var(--rule); }
+.s4 .dash span.f { background: var(--ink); }
+.s4 .btns { display: flex; align-items: center; gap: 18px; }
+.s4 .btnP { height: 44px; padding: 0 22px; border-radius: var(--r-btn); background: var(--primary); color: #F6F1E9; display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.s4 .btns .btnP { flex: 1; }
+.s4 .btnS { height: 44px; display: flex; align-items: center; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--ink); }
+.s4 .btnS u { text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 3px; }
+.s4 .lab { display: flex; justify-content: space-between; align-items: center; margin: 20px 0 12px; }
+.s4 .lab a { font-size: 9.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; border-bottom: 1px solid var(--ink); padding-bottom: 2px; }
+.s4 .rounds { display: grid; grid-template-columns: repeat(4, 1fr); }
+.s4 .rd { text-align: center; }
+.s4 .ico { width: 58px; height: 58px; border-radius: 50%; border: 1px solid var(--ink); display: grid; place-items: center; font-size: 22px; position: relative; margin: 0 auto; color: var(--ink); }
+.s4 .ico::after { content: ""; position: absolute; right: 3px; top: 3px; width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 2px var(--bg); }
+.s4 .rd span.ico { font-size: 22px; letter-spacing: 0; }
+.s4 .rd b { display: block; font-family: "Sitka Display", Georgia, serif; font-weight: 400; font-size: 15.5px; margin-top: 7px; }
+.s4 .rd span { font-size: 9px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--ink2); white-space: nowrap; }
+.s4 .carnet { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); }
+.s4 .carnet > div { padding: 12px 0 11px; border-bottom: 1px solid var(--rule); }
+.s4 .carnet > div:nth-child(odd) { padding-right: 16px; border-right: 1px solid var(--rule); }
+.s4 .carnet > div:nth-child(even) { padding-left: 16px; }
+.s4 .scard .n, .s4 .tNum { font-family: "Sitka Display", Georgia, serif; font-weight: 400; font-size: 32px; line-height: 1.05; font-variant-numeric: lining-nums; }
+.s4 .scard .s { display: flex; align-items: center; gap: 7px; margin-top: 3px; }
+.s4 .tText { font-size: 14px; line-height: 1.5; }
+.s4 .tabbar, .s4 .tdemo { background: var(--bg); border-top: 1px solid var(--rule); }
+.s4 .tdemo { display: flex; width: 200px; border: 1px solid var(--rule); height: 58px; }
+.s4 .ti { font-size: 8.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--ink2); gap: 5px; padding-top: 9px; }
+.s4 .ti i { font-size: 21px; }
+.s4 .ti.on { color: var(--ink); }
+.s4 .ti.on::after { content: ""; width: 4px; height: 4px; border-radius: 50%; background: var(--primary); position: absolute; bottom: -1px; }
+.s4 .tdemo .ti.on::after { bottom: 2px; }
+.s4 .tdemo .ti { padding-top: 7px; gap: 4px; }
+.s4 .sub { font-size: 13px; color: var(--ink2); text-align: center; margin-top: 2px; }
+.s4 .search { height: 46px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--ink); font-family: "Sitka Text", Georgia, serif; font-style: italic; font-size: 16px; color: var(--ink2); margin-top: 14px; }
+.s4 .search i { font-size: 17px; color: var(--ink); }
+.s4 .chips { display: flex; gap: 22px; overflow: hidden; margin-right: -24px; height: 44px; align-items: center; }
+.s4 .pill { flex: none; font-size: 9.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--ink2); padding: 6px 0 4px; border-bottom: 1px solid transparent; display: flex; align-items: center; gap: 6px; }
+.s4 .pill.on { color: var(--ink); border-bottom: 1.5px solid var(--primary); }
+.s4 .mats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.s4 .mat { background: var(--mat); padding: 14px 14px 0; text-align: center; }
+.s4 .mat img { width: 128px; height: 128px; margin: 0 auto; }
+.s4 .mat b { display: block; font-family: "Sitka Display", Georgia, serif; font-weight: 400; font-size: 16px; margin-top: 9px; }
+.s4 .mat .sc { display: block; font-size: 8.5px; margin-top: 2px; }
+.s4 .mat .add { height: 40px; margin: 6px -14px 0; border-top: 1px solid var(--rule); display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 9.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+.s4 .mat .add i { font-size: 12px; }
+.s4 .cats { display: grid; grid-template-columns: 1fr 1fr; column-gap: 22px; border-top: 1px solid var(--ink); }
+.s4 .cats > div { height: 44px; display: flex; align-items: center; gap: 9px; border-bottom: 1px solid var(--rule); }
+.s4 .cats em:not(.dot) { width: 18px; font-family: "Sitka Display", Georgia, serif; font-style: italic; font-size: 13px; color: var(--ink2); }
+.s4 .cats b { font-family: "Sitka Display", Georgia, serif; font-weight: 400; font-size: 17px; flex: 1; white-space: nowrap; }
+.s4 .prem { font-size: 8.5px; letter-spacing: .2em; color: var(--ink2); }
+
+/* ======================= 5 · GAZETTE ======================= */
+.s5 { --board: #E9E9E4; --bink: #0E0E0E; --bink2: #4F4F4A;
+  --bg: #FAFAF7; --surface: #FFFFFF; --ink: #0E0E0E; --ink2: #5F5F5A; --rule: #0E0E0E; --soft: #CFCFC8; --primary: #1D4E9E;
+  --r-card: 0px; --r-btn: 0px; --hair: 1px; --sw: 1.6; --r-fiche: 0px; --r-sw: 0px; --fbg: #FAFAF7; --swb: #0E0E0E; }
+.s5 .hd, .s5 .title, .s5 .tTitle { font-family: "Sitka Heading", "Sitka Display", Georgia, serif; font-weight: 700; }
+.s5 .scr { padding: 0 18px; }
+.s5 .top { display: flex; justify-content: space-between; align-items: center; height: 40px; }
+.s5 .date { font-size: 13px; font-weight: 700; color: var(--primary); }
+.s5 .top .u { width: 44px; height: 40px; display: grid; place-items: center; font-size: 22px; margin-right: -10px; }
+.s5 .mast { border-top: 3px solid var(--ink); }
+.s5 .mast .r { display: flex; justify-content: space-between; align-items: center; height: 24px; border-bottom: 1px solid var(--ink); }
+.s5 .kick, .s5 .tLabel { font-size: 10.5px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.s5 .it { font-family: "Sitka Text", Georgia, serif; font-style: italic; font-size: 13px; color: var(--ink2); }
+.s5 .title, .s5 .tTitle { font-size: 50px; line-height: 1; letter-spacing: -.015em; padding: 8px 0 9px; }
+.s5 .title { border-bottom: 1px solid var(--ink); }
+.s5 .une { padding: 13px 0 14px; border-bottom: 1px solid var(--ink); }
+.s5 .une .kick { color: var(--primary); }
+.s5 .une h5 { font-family: "Sitka Heading", Georgia, serif; font-weight: 700; font-size: 27px; line-height: 1.06; margin: 6px 0 6px; letter-spacing: -.01em; }
+.s5 .une p { font-size: 14px; line-height: 1.4; color: var(--ink2); }
+.s5 .btns { display: flex; align-items: center; gap: 18px; margin-top: 12px; }
+.s5 .btnP { height: 44px; padding: 0 20px; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; font-weight: 700; }
+.s5 .btnS { height: 44px; display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 650; color: var(--primary); }
+.s5 .btnS u { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.s5 .lab { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 0 4px; }
+.s5 .lab a { font-size: 13px; font-weight: 650; color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.s5 .ix { display: grid; grid-template-columns: 1fr 1fr; column-gap: 0; }
+.s5 .ix > div { height: 43px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--soft); }
+.s5 .ix > div:nth-child(odd) { padding-right: 12px; border-right: 1px solid var(--ink); }
+.s5 .ix > div:nth-child(even) { padding-left: 12px; }
+.s5 .ico { font-family: "Sitka Heading", Georgia, serif; font-weight: 700; font-size: 19px; color: var(--c); width: 18px; text-align: center; }
+.s5 .ix b { font-size: 14px; font-weight: 650; }
+.s5 .ix .ico { margin-left: 0; font-size: 19px; color: var(--c); }
+.s5 .fiche .ix { grid-template-columns: 1fr; width: 100%; }
+.s5 .fiche .ix > div { padding: 0 !important; border-right: 0 !important; height: 40px; }
+.s5 .ix span { margin-left: auto; font-size: 12px; color: var(--ink2); white-space: nowrap; }
+.s5 .breves { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--ink); }
+.s5 .breves > div { padding: 10px 0 0; }
+.s5 .breves > div:first-child { padding-right: 12px; border-right: 1px solid var(--ink); }
+.s5 .breves > div:last-child { padding-left: 12px; }
+.s5 .scard .k { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--ink2); }
+.s5 .scard .n, .s5 .tNum { font-family: "Sitka Heading", Georgia, serif; font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -.01em; }
+.s5 .scard .s { font-size: 12.5px; line-height: 1.4; color: var(--ink); margin-top: 3px; }
+.s5 .tText { font-size: 14.5px; line-height: 1.45; }
+.s5 .tabbar, .s5 .tdemo { background: var(--bg); border-top: 1px solid var(--ink); }
+.s5 .tdemo { display: flex; width: 200px; border: 1px solid var(--ink); height: 56px; }
+.s5 .ti { font-family: "Sitka Text", Georgia, serif; font-size: 11.5px; color: var(--ink2); gap: 3px; padding-top: 8px; }
+.s5 .ti i { font-size: 21px; }
+.s5 .ti.on { color: var(--ink); font-weight: 700; }
+.s5 .ti.on::before { content: ""; position: absolute; top: -1px; left: 18%; right: 18%; height: 3px; background: var(--primary); }
+.s5 .deck { font-size: 14px; color: var(--ink2); padding: 8px 0 12px; }
+.s5 .search { height: 44px; border: 1px solid var(--ink); display: flex; align-items: center; gap: 9px; padding: 0 12px; font-size: 15px; color: var(--ink2); background: var(--surface); }
+.s5 .search i { font-size: 18px; color: var(--ink); }
+.s5 .chips { display: flex; align-items: center; height: 44px; overflow: hidden; margin-right: -18px; border-bottom: 1px solid var(--ink); }
+.s5 .pill { flex: none; font-size: 14px; font-weight: 500; color: var(--ink); padding: 0 12px; height: 18px; display: flex; align-items: center; gap: 5px; border-left: 1px solid var(--soft); }
+.s5 .chips .pill:first-child { padding-left: 0; border-left: 0; }
+.s5 .pill.on { font-weight: 750; color: var(--primary); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 2px; }
+.s5 .lead img { width: 357px; height: 167px; margin-top: 4px; }
+.s5 .lead .cap { display: flex; align-items: baseline; gap: 8px; padding: 7px 0 10px; border-bottom: 1px solid var(--ink); }
+.s5 .lead .cap b { font-family: "Sitka Heading", Georgia, serif; font-weight: 700; font-size: 17px; }
+.s5 .lead .cap span { font-size: 12px; color: var(--ink2); }
+.s5 .lead .cap a { margin-left: auto; font-size: 13.5px; font-weight: 650; color: var(--primary); text-decoration: underline; text-underline-offset: 3px; height: 28px; display: flex; align-items: center; }
+.s5 .prem { font-size: 11px; font-weight: 700; color: var(--ink2); }
+</style>
+</head>
+<body>
+
+<!-- ===================================================================== 1 SAPHIR -->
+<section class="board s1" id="s1">
+  <div class="bh"><div class="num">01</div><div><h1>Saphir</h1><p>L'identité actuelle, resserrée : un fond clair, une seule couleur d'action, chaque chose à sa place. Le dégradé turquoise vers bleu roi reste réservé au logo.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="bd">
+    <div class="col"><h3>Accueil</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="top"><span class="date">Dimanche 8 novembre</span><span class="ava">M</span></div>
+        <div class="kick">MON QUOTIDIEN</div>
+        <div class="title">Ta soirée</div>
+        <div class="sec"><b>Maintenant</b></div>
+        <div class="card now" data-c="fit">
+          <div class="r"><span class="ico"><i data-i="dumbbell"></i></span><span class="k">Séance en cours</span><span class="t">28 min</span></div>
+          <h5>Full body</h5><p>Série 4 sur 6 · Pompes, 15 répétitions</p>
+          <div class="segs"><span class="f"></span><span class="f"></span><span class="f"></span><span></span><span></span><span></span></div>
+          <div class="btns"><div class="btnP"><i data-i="check"></i>Série faite</div><div class="btnS">Ouvrir</div></div>
+        </div>
+        <div class="sec"><b>Mes espaces</b><a>Tout voir</a></div>
+        <div class="apps" data-gen="s1app,4"></div>
+        <div class="sec"><b>Aujourd'hui</b><a>Organiser</a></div>
+        <div class="two">
+          <div class="card scard" data-c="nut"><div class="r"><i data-i="fork"></i>Nutrition</div><div class="n">1 122</div><div class="s">kcal restantes sur 2 200</div><div class="bar"><span style="width:49%"></span></div></div>
+          <div class="card scard" data-c="hab"><div class="r"><i data-i="repeat"></i>Habitudes</div><div class="n">3 / 4</div><div class="s">faites aujourd'hui</div><div class="bar"><span style="width:75%"></span></div></div>
+        </div>
+      </div>
+      <div class="tabbar" data-tab="0"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Créer</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="title" style="margin-top:8px">Créer</div>
+        <div class="sub">Choisis un espace ou pars d'une suggestion.</div>
+        <div class="search"><i data-i="search"></i>Rechercher un widget</div>
+        <div class="chips" data-gen="pills,6"></div>
+        <div class="sec"><b>Pour toi</b><a>Tout voir</a></div>
+        <div class="wrail">
+          <div class="wi"><img class="w" src="KIT/calories-s-light.png" alt=""><div class="add"><i data-i="plus"></i></div><b>Calories restantes</b><span>Nutrition · Petit</span></div>
+          <div class="wi"><img class="w" src="KIT/habitStreak-s-light.png" alt=""><div class="add"><i data-i="plus"></i></div><b>Série d'habitude</b><span>Habitudes · Petit<em class="prem"><i data-i="lock"></i>Premium</em></span></div>
+          <div class="wi"><img class="w" src="KIT/budgetLeft-s-light.png" alt=""><div class="add"><i data-i="plus"></i></div><b>Reste du mois</b><span>Budget · Petit</span></div>
+        </div>
+        <div class="sec"><b>Tous les espaces</b><a>13</a></div>
+        <div class="grid" data-gen="s1sp,8"></div>
+      </div>
+      <div class="tabbar" data-tab="1"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Fiche du style</h3><aside class="fiche" data-fiche="s1"></aside></div>
+  </div>
+</section>
+
+<!-- ===================================================================== 2 ARCHITECTE -->
+<section class="board s2" id="s2">
+  <div class="bh"><div class="num">02</div><div><h1>Architecte</h1><p>Un plan coté : l'écran est une grille de cellules tracées au filet noir, les chiffres sont fins, les étiquettes en capitales espacées. Aucune ombre, aucun arrondi ; le bleu Saphir ne sert qu'à l'action.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="bd">
+    <div class="col"><h3>Accueil</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="hdr"><div class="l"><span class="d">Dim. 8 novembre</span><span class="sep"></span><span>21 h 40</span></div><div class="u"><i data-i="user"></i></div></div>
+        <div class="ttl"><div class="kick">Mon quotidien</div><div class="title">Ta soirée</div></div>
+        <div class="lab" data-c="fit"><span>01 — Maintenant</span><span><em class="sq"></em>Fitness · séance</span></div>
+        <div class="now"><div class="a"><h5>Full body</h5><p>Série 4 sur 6<br>Pompes, 15 répétitions</p></div><div class="b"><div>4/6</div></div></div>
+        <div class="cells"><span class="f"></span><span class="f"></span><span class="f"></span><span></span><span></span><span></span></div>
+        <div class="btns"><div class="btnP">Série faite <i data-i="arrow"></i></div><div class="btnS">Ouvrir</div></div>
+        <div class="lab"><span>02 — Mes espaces</span><span>8</span></div>
+        <div class="grid4" data-gen="s2cell,8"></div>
+        <div class="lab"><span>03 — Aujourd'hui</span><span>Organiser</span></div>
+        <div class="trow" data-c="nut"><em class="sq"></em><span class="lb">Calories restantes</span><span class="v">1 122</span><span class="u">kcal</span></div>
+        <div class="trow" data-c="hab"><em class="sq"></em><span class="lb">Habitudes</span><span class="v">3/4</span></div>
+        <div class="trow" data-c="bud"><em class="sq"></em><span class="lb">Reste du mois</span><span class="v">1 631</span><span class="u">$</span></div>
+      </div>
+      <div class="tabbar" data-tab="0"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Créer</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="hdr"><div class="l"><span class="d">Créer</span><span class="sep"></span><span>13 espaces</span></div><div class="u"><i data-i="user"></i></div></div>
+        <div class="ttl"><div class="kick">Atelier</div><div class="title">Créer</div><div class="sub">Choisis un espace ou pars d'une suggestion.</div></div>
+        <div class="search"><i data-i="search"></i>Rechercher un widget</div>
+        <div class="chips" data-gen="pills,6"></div>
+        <div class="lab"><span>01 — Pour toi</span><span>Tout voir</span></div>
+        <div class="w3">
+          <div><img class="w" src="KIT/calories-s-light.png" alt=""><b>Calories</b><span>Nutrition · S <i data-i="plus"></i></span></div>
+          <div><img class="w" src="KIT/tasks-s-light.png" alt=""><b>Tâches</b><span>Productivité · S <i data-i="plus"></i></span></div>
+          <div><img class="w" src="KIT/budgetLeft-s-light.png" alt=""><b>Reste du mois</b><span>Budget · S <i data-i="lock"></i></span></div>
+        </div>
+        <div class="lab"><span>02 — Espaces</span><span>13</span></div>
+        <div data-gen="s2idx,7"></div>
+      </div>
+      <div class="tabbar" data-tab="1"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Fiche du style</h3><aside class="fiche" data-fiche="s2"></aside></div>
+  </div>
+</section>
+
+<!-- ===================================================================== 3 CARBONE -->
+<section class="board s3" id="s3">
+  <div class="bh"><div class="num">03</div><div><h1>Carbone</h1><p>Un tableau de bord de nuit : des jauges plutôt que des cartes, des chiffres à chasse fixe qui ne bougent pas, des bordures intérieures d'un point. Aucun halo ; le cyan désigne ce qui est actif.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="bd">
+    <div class="col"><h3>Accueil</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="top"><div><div class="date mono">DIM. 08 NOV. · 21:40</div><div class="kick">Mon quotidien</div><div class="title">Ta soirée</div></div><span class="ava">M</span></div>
+        <div class="card now" data-c="fit">
+          <div class="r mono"><span class="dot"></span><span class="k">EN COURS</span><span class="g">FITNESS · SÉANCE</span><span class="t">28:14</span></div>
+          <h5>Full body</h5><p>Série 4 sur 6 · Pompes × 15</p>
+          <div class="gauge"><span class="f"></span><span class="f"></span><span class="f"></span><span class="c"></span><span></span><span></span></div>
+          <div class="ticks mono"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
+          <div class="btns"><div class="btnP"><i data-i="check"></i>Série faite</div><div class="btnS"><i data-i="timer"></i><span class="mono">Repos</span></div></div>
+        </div>
+        <div class="lab"><span>Mes espaces</span><a>Tout voir · 8</a></div>
+        <div class="gauges" data-gen="s3gg,4"></div>
+        <div class="lab"><span>Aujourd'hui</span><a>Organiser</a></div>
+        <div class="card list">
+          <div class="rw" data-c="nut"><i data-i="fork"></i><span class="lb">Calories restantes</span><span class="v mono">1 122</span><span class="u">kcal</span></div>
+          <div class="rw" data-c="hab"><i data-i="repeat"></i><span class="lb">Habitudes</span><span class="v mono">3/4</span></div>
+          <div class="rw" data-c="bud"><i data-i="wallet"></i><span class="lb">Reste du mois</span><span class="v mono">1 631</span><span class="u">$</span></div>
+          <div class="rw" data-c="pla"><i data-i="flag"></i><span class="lb">Loyer</span><span class="v mono" style="font-size:13px;color:var(--ink2)">MARDI</span></div>
+        </div>
+      </div>
+      <div class="tabbar" data-tab="0"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Créer</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="top"><div><div class="date mono">13 ESPACES · 3 WIDGETS GRATUITS</div><div class="title" style="margin-top:8px">Créer</div><div class="sub">Choisis un espace ou pars d'une suggestion.</div></div></div>
+        <div class="search"><i data-i="search"></i>Rechercher un widget</div>
+        <div class="seg" data-gen="pills,6"></div>
+        <div class="lab"><span>Pour toi</span><a>Tout voir</a></div>
+        <div class="w2">
+          <div><img class="w" src="KIT/calories-s-dark.png" alt=""><div class="cap"><div><b>Calories restantes</b><span class="mono">NUTRITION · S</span></div><span class="add"><i data-i="plus"></i></span></div></div>
+          <div><img class="w" src="KIT/restTimer-s-dark.png" alt=""><div class="cap"><div><b>Repos</b><span class="prem mono"><i data-i="lock"></i>PREMIUM</span></div><span class="add"><i data-i="plus"></i></span></div></div>
+        </div>
+        <div class="lab"><span>Espaces</span><a>13</a></div>
+        <div class="card sl" data-gen="s3sp,5"></div>
+      </div>
+      <div class="tabbar" data-tab="1"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Fiche du style</h3><aside class="fiche" data-fiche="s3"></aside></div>
+  </div>
+</section>
+
+<!-- ===================================================================== 4 MAISON -->
+<section class="board s4" id="s4">
+  <div class="bh"><div class="num">04</div><div><h1>Maison</h1><p>Un luxe discret : papier ivoire, une seule encre, des titres en italique et des petites capitales. La couleur d'un espace se réduit à un point ; l'or n'est qu'un filet.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="bd">
+    <div class="col"><h3>Accueil</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="top"><span class="date">Dimanche 8 novembre</span><span class="ava">M</span></div>
+        <div class="mid"><div class="sc kick">Mon quotidien</div><div class="title">Ta soirée</div><div class="gold"></div></div>
+        <div class="frame" data-c="fit">
+          <div class="k sc"><em class="dot"></em>En cours · Fitness</div>
+          <h5>Full body</h5><p>Série 4 sur 6 — Pompes, 15 répétitions</p>
+          <div class="dash"><span class="f"></span><span class="f"></span><span class="f"></span><span></span><span></span><span></span></div>
+          <div class="btns"><div class="btnP">Série faite</div><div class="btnS"><u>Ouvrir</u></div></div>
+        </div>
+        <div class="lab"><span class="sc">Mes espaces</span><a>Tout voir</a></div>
+        <div class="rounds" data-gen="s4rd,4"></div>
+        <div class="lab"><span class="sc">Ce soir</span><a>Organiser</a></div>
+        <div class="carnet">
+          <div class="scard" data-c="nut"><div class="n">1 122</div><div class="s sc"><em class="dot"></em>kcal restantes</div></div>
+          <div class="scard" data-c="hab"><div class="n">3 sur 4</div><div class="s sc"><em class="dot"></em>Habitudes</div></div>
+          <div class="scard" data-c="bud"><div class="n">1 631 $</div><div class="s sc"><em class="dot"></em>Reste du mois</div></div>
+          <div class="scard" data-c="pla"><div class="n" style="font-style:italic">Loyer</div><div class="s sc"><em class="dot"></em>Mardi</div></div>
+        </div>
+      </div>
+      <div class="tabbar" data-tab="0"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Créer</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="top"><span class="date">Compose ton écran</span><span class="sc">13 espaces</span></div>
+        <div class="mid"><div class="title">Créer</div><div class="sub">Choisis un espace ou pars d'une suggestion.</div></div>
+        <div class="search"><i data-i="search"></i>Rechercher un widget</div>
+        <div class="chips" data-gen="pills,6"></div>
+        <div class="lab" style="margin-top:12px"><span class="sc">Pour toi</span><a>Tout voir</a></div>
+        <div class="mats">
+          <div class="mat"><img class="w" src="KIT/calories-s-paper.png" alt=""><b>Calories restantes</b><span class="sc">Nutrition · Petit</span><div class="add"><i data-i="plus"></i>Ajouter</div></div>
+          <div class="mat"><img class="w" src="KIT/priorities-s-paper.png" alt=""><b>Top 3 du jour</b><span class="sc">Productivité · Petit</span><div class="add"><i data-i="lock"></i>Avec Premium</div></div>
+        </div>
+        <div class="lab"><span class="sc">Les espaces</span><a>Tous</a></div>
+        <div class="cats" data-gen="s4cat,6"></div>
+      </div>
+      <div class="tabbar" data-tab="1"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Fiche du style</h3><aside class="fiche" data-fiche="s4"></aside></div>
+  </div>
+</section>
+
+<!-- ===================================================================== 5 GAZETTE -->
+<section class="board s5" id="s5">
+  <div class="bh"><div class="num">05</div><div><h1>Gazette</h1><p>Le journal de ta journée : une « une » pour ce qui compte maintenant, des rubriques numérotées au lieu de cartes, des colonnes et des filets. Une seule couleur d'accompagnement, des liens soulignés.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></div>
+  <div class="bd">
+    <div class="col"><h3>Accueil</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="top"><span class="date">Dimanche 8 novembre</span><span class="u"><i data-i="user"></i></span></div>
+        <div class="mast"><div class="r"><span class="kick">Mon quotidien</span><span class="it">Édition du soir</span></div></div>
+        <div class="title">Ta soirée</div>
+        <div class="une" data-c="fit">
+          <div class="kick">À la une · Fitness</div>
+          <h5>Full body : plus que trois séries</h5>
+          <p>Série 4 sur 6 — Pompes, 15 répétitions. Séance commencée il y a 28 min.</p>
+          <div class="btns"><span class="btnP"><i data-i="check"></i>Série faite</span><span class="btnS"><u>Ouvrir la séance</u> <i data-i="arrow"></i></span></div>
+        </div>
+        <div class="lab"><span class="kick">Rubriques</span><a>Toutes</a></div>
+        <div class="ix" data-gen="s5ix,8"></div>
+        <div class="lab"><span class="kick">Brèves du soir</span><a>Organiser</a></div>
+        <div class="breves">
+          <div class="scard"><div class="k">Nutrition</div><div class="n">1 122</div><div class="s">kcal restantes sur 2 200. Le dîner n'est pas noté.</div></div>
+          <div class="scard"><div class="k">Budget</div><div class="n">1 631 $</div><div class="s">restent ce mois-ci. Loyer à payer mardi.</div></div>
+        </div>
+      </div>
+      <div class="tabbar" data-tab="0"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Créer</h3><div class="ph-wrap"><div class="phone">
+      <div class="sb" data-sb></div>
+      <div class="scr">
+        <div class="top"><span class="date">13 espaces</span><span class="it">3 widgets offerts</span></div>
+        <div class="mast"><div class="r"><span class="kick">Atelier</span><span class="it">Supplément du dimanche</span></div></div>
+        <div class="title" style="border:0;padding-bottom:0">Créer</div>
+        <div class="deck">Choisis un espace ou pars d'une suggestion.</div>
+        <div class="search"><i data-i="search"></i>Rechercher un widget</div>
+        <div class="chips" data-gen="pills,6"></div>
+        <div class="lab"><span class="kick">La sélection</span><a>Tout voir</a></div>
+        <div class="lead"><img class="w" src="KIT/weekView-m-editorial.png" alt=""><div class="cap"><b>Ma semaine</b><span>Habitudes · Moyen</span><a>Ajouter</a></div></div>
+        <div class="lab"><span class="kick">Sommaire des espaces</span><a>Suite</a></div>
+        <div class="ix" data-gen="s5sp,6"></div>
+      </div>
+      <div class="tabbar" data-tab="1"></div><div class="hi"></div>
+    </div></div></div>
+    <div class="col"><h3>Fiche du style</h3><aside class="fiche" data-fiche="s5"></aside></div>
+  </div>
+</section>
+
+<script>
+const KIT = 'file:///C:/Users/Etudiant/ardane-tools/film/public/kit2026/fr';
+const P = {
+  home: 'M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z', plus: 'M12 5v14M5 12h14',
+  bag: 'M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2', grid: 'M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z',
+  fork: 'M7 3v7a2 2 0 0 0 4 0V3M9 12v9M17 3c-2 2-3 5-3 8h3v10', dumbbell: 'M3 9v6M6 6v12M18 6v12M21 9v6M6 12h12',
+  repeat: 'M17 2l3 3-3 3M4 11V9a4 4 0 0 1 4-4h12M7 22l-3-3 3-3M20 13v2a4 4 0 0 1-4 4H4',
+  wallet: 'M3 7a2 2 0 0 1 2-2h13v4M3 7v10a2 2 0 0 0 2 2h15V9H5a2 2 0 0 1-2-2zM16 14h.01',
+  calendar: 'M4 6h16v14H4zM4 10h16M8 3v4M16 3v4', plane: 'M3 12l18-8-6 17-3-7z',
+  car: 'M3 15H2v-3l3-1 2-4h8l3 4 4 1v3h-1M9 15h6M5 15a2 2 0 1 0 4 0 2 2 0 1 0-4 0M15 15a2 2 0 1 0 4 0 2 2 0 1 0-4 0M7.5 11H18', briefcase: 'M4 8h16v11H4zM9 8V5h6v3M4 13h16',
+  chev: 'M9 6l6 6-6 6', chevl: 'M15 6l-6 6 6 6', search: 'M11 4a7 7 0 1 0 0 14 7 7 0 0 0 0-14zM20 20l-4-4',
+  lock: 'M6 11h12v9H6zM8 11V8a4 4 0 0 1 8 0v3', arrow: 'M5 12h14M13 6l6 6-6 6',
+  user: 'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM4 21a8 8 0 0 1 16 0', photo: 'M4 5h16v14H4zM4 16l5-5 4 4 3-3 4 4M15 9h.01',
+  check: 'M5 12.5l4.5 4.5L19 7.5', book: 'M5 4h12a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h12',
+  trend: 'M3 17l6-6 4 4 8-8M15 7h6v6', leaf: 'M5 19C5 11 11 5 20 5c0 9-6 15-14 15zM5 19l7-7', target: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM12 11.5v1',
+  timer: 'M12 8v5l3 2M9 2h6M12 5a8 8 0 1 0 0 16 8 8 0 0 0 0-16z', flag: 'M5 21V4h11l-2 4 2 4H5', bars: 'M5 20V10M12 20V4M19 20v-7',
+};
+// Couleurs d'espace : une teinte par espace, saturation et clarté propres à chaque style.
+const HUE = { nut: 28, fit: 355, hab: 98, bud: 162, pla: 214, voy: 192, aut: 215, ent: 258, pho: 325, pro: 232, etu: 282, vie: 340, pce: 178, mar: 45 };
+// [saturation, contraste visé sur la surface, sens] : même saturation et même contraste perçu pour toutes les teintes d'un style.
+const SPACE_SL = { s1: [68, 3.7, 'd'], s2: [32, 4.6, 'd'], s3: [68, 7.0, 'l'], s4: [30, 3.7, 'd'], s5: [70, 6.2, 'd'] };
+const SURF = { s1: '#FFFFFF', s2: '#FFFFFF', s3: '#131A26', s4: '#FBF8F2', s5: '#FFFFFF' };
+function hsl2hex(h, s, l) { s /= 100; l /= 100; const k = (n) => (n + h / 30) % 12, a = s * Math.min(l, 1 - l);
+  const f = (n) => Math.round(255 * (l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1))))).toString(16).padStart(2, '0');
+  return ('#' + f(0) + f(8) + f(4)).toUpperCase(); }
+const col = (sid, key) => { const [s0, t, dir] = SPACE_SL[sid], s = key === 'aut' ? s0 * .14 : s0; let best = null;
+  if (dir === 'd') { for (let l = 90; l >= 5; l -= .5) { const h = hsl2hex(HUE[key], s, l); if (cr(h, SURF[sid]) >= t) { best = h; break; } } }
+  else { for (let l = 20; l <= 95; l += .5) { const h = hsl2hex(HUE[key], s, l); if (cr(h, SURF[sid]) >= t) { best = h; break; } } }
+  return best; };
+function lum(h) { const c = [1, 3, 5].map((i) => parseInt(h.substr(i, 2), 16) / 255).map((x) => x <= .03928 ? x / 12.92 : ((x + .055) / 1.055) ** 2.4); return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]; }
+const cr = (a, b) => { const x = lum(a), y = lum(b); return (Math.max(x, y) + .05) / (Math.min(x, y) + .05); };
+
+// Mini-apps (accès depuis l'Accueil) : nom, icône, clé couleur, valeur du jour (exemple).
+const APPS = [['Nutrition', 'fork', 'nut', '1 122 kcal', .49], ['Fitness', 'dumbbell', 'fit', '3/6 séries', .5], ['Planning', 'calendar', 'pla', '3 cours', .75], ['Finances', 'wallet', 'bud', '1 631 $', .62],
+  ['Entreprise', 'briefcase', 'ent', '+4 %'], ['Voyage', 'plane', 'voy', 'J-12'], ['Auto', 'car', 'aut', 'J-20'], ['Photos', 'photo', 'pho', 'Citation']];
+// Espaces de Créer (12 + Photos et citations) ; intérêts de l'utilisateur en premier.
+const SPACES = [['Nutrition', 'fork', 'nut', 'Calories, Macros'], ['Fitness', 'dumbbell', 'fit', 'Séance, Repos'], ['Habitudes', 'repeat', 'hab', 'Série, Semaine'], ['Budget', 'wallet', 'bud', 'Reste du mois, Dépenses'],
+  ['Productivité', 'target', 'pro', 'Top 3, Tâches'], ['Études', 'book', 'etu', 'Horaire, À venir'], ['Placements', 'trend', 'pce', 'Objectif d\'épargne'], ['Entreprise', 'briefcase', 'ent', 'Ventes, Objectif'],
+  ['Marchés', 'bars', 'mar', 'Cours, Variation'], ['Voyage', 'plane', 'voy', 'Départ, Vol'], ['Auto', 'car', 'aut', 'Entretien, Coût'], ['Vie', 'leaf', 'vie', 'Année, Compteur'], ['Photos et citations', 'photo', 'pho', 'Photo, Citation']];
+const FILTERS = ['Tout', 'Écran verrouillé', 'Santé', 'Argent', 'Organisation', 'Vie'];
+const no = (k) => String(k + 1).padStart(2, '0');
+const ring = (c, p) => `<svg class="rg" viewBox="0 0 50 50"><circle cx="25" cy="25" r="22" fill="none" stroke="#1E2A3D" stroke-width="3"/>${p != null ? `<circle cx="25" cy="25" r="22" fill="none" stroke="${c}" stroke-width="3" stroke-linecap="round" stroke-dasharray="${(138.2 * p).toFixed(1)} 200"/>` : ''}</svg>`;
+
+const T = {
+  pills: (f, k) => `<span class="pill${k ? '' : ' on'}">${f === 'Écran verrouillé' ? '<i data-i="lock"></i>' : ''}${f}</span>`,
+  s1app: (a) => `<div class="app" data-c="${a[2]}"><div class="ic"><i data-i="${a[1]}"></i></div><b>${a[0]}</b><span>${a[3]}</span></div>`,
+  s1sp: (s) => `<div class="sp" data-c="${s[2]}"><span class="ico"><i data-i="${s[1]}"></i></span><div style="min-width:0"><b>${s[0]}</b><span>${s[3].split(',')[0]}</span></div><i class="go" data-i="chev"></i></div>`,
+  s2cell: (a, k) => `<div class="cell" data-c="${a[2]}"><span class="no">${no(k)}</span><em class="sq"></em><div><b>${a[0]}</b><em>${a[3]}</em></div></div>`,
+  s2idx: (s, k) => `<div class="idx" data-c="${s[2]}"><span class="no">${no(k)}</span><em class="sq"></em><b>${s[0]}</b><span>${s[3]}</span><i class="go" data-i="arrow"></i></div>`,
+  s3gg: (a) => `<div class="card gg" data-c="${a[2]}"><div class="ring">${ring('C', a[4])}<i data-i="${a[1]}"></i></div><b>${a[0]}</b><span class="mono">${a[3]}</span></div>`,
+  s3sp: (s) => `<div class="rw" data-c="${s[2]}"><span class="ico"><i data-i="${s[1]}"></i></span><div><b>${s[0]}</b><span class="mono">${s[3].toUpperCase()}</span></div><i class="go" data-i="chev"></i></div>`,
+  s4rd: (a) => `<div class="rd" data-c="${a[2]}"><span class="ico"><i data-i="${a[1]}"></i></span><b>${a[0]}</b><span>${a[3]}</span></div>`,
+  s4cat: (s, k) => `<div data-c="${s[2]}"><em>${no(k)}</em><b>${s[0]}</b><em class="dot"></em></div>`,
+  s5ix: (a, k) => `<div data-c="${a[2]}"><span class="ico">${k + 1}</span><b>${a[0]}</b><span>${a[3]}</span></div>`,
+  s5sp: (s, k) => `<div data-c="${s[2]}"><span class="ico">${k + 1}</span><b>${s[0]}</b><span>${s[3].split(',')[0]}</span></div>`,
+};
+
+// Fiches : palette (rôle, HEX, usage), typographie, composants, jetons.
+const F = {
+  s1: { pal: [['Fond', '#F4F6FA'], ['Surface', '#FFFFFF'], ['Encre', '#0B1220'], ['Secondaire', '#5E6979'], ['Filet', '#E3E8F0'], ['Principale', '#245B8F'], ['Marque', 'linear-gradient(135deg,#17B3D0,#1D4E9E)', '#17B3D0 → #1D4E9E'], ['Saphir sombre', '#68B5F5', 'mode sombre']],
+    typo: [['tTitle', 'Ta soirée', 'Inter 800 · 34<br>interlettre −2,5 %'], ['tLabel', 'Maintenant', 'Inter 750 · 20<br>en-tête de section'], ['tNum', '1 122', 'Inter 800 · 28<br>chiffres tabulaires'], ['tText', 'Série 4 sur 6 · Pompes', 'Inter 400 · 15<br>secondaire #5E6979']],
+    ico: '<span class="ico" data-c="nut"><i data-i="fork"></i></span><span class="ico" data-c="fit"><i data-i="dumbbell"></i></span><span class="ico" data-c="hab"><i data-i="repeat"></i></span><span class="ico" data-c="bud"><i data-i="wallet"></i></span>',
+    card: '<div class="card scard" data-c="nut" style="width:180px"><div class="r"><i data-i="fork"></i>Nutrition</div><div class="n">1 122</div><div class="s">kcal restantes</div><div class="bar"><span style="width:49%"></span></div></div>',
+    tok: 'rayon carte <b>22</b> · bouton <b>14</b> · pastille <b>17</b> · ombre <b>0 6 18 / 5 %</b> · filet <b>1 pt</b> · trait d\'icône <b>1,8</b> · onglets <b>flottants</b>' },
+  s2: { pal: [['Fond', '#F2F1EE'], ['Surface', '#FFFFFF'], ['Encre', '#111111'], ['Secondaire', '#66665F'], ['Filet', '#111111'], ['Principale', '#245B8F'], ['Inverse', '#111111', 'onglet actif']],
+    typo: [['tTitle', 'Ta soirée', 'Inter 300 · 46<br>interlettre −3,5 %'], ['tLabel', '02 — Mes espaces', 'Inter 600 · 10,5<br>capitales +22 %'], ['tNum', '4/6', 'Inter 200 · 50<br>chiffres tabulaires'], ['tText', 'Série 4 sur 6 · Pompes', 'Inter 400 · 14<br>secondaire #66665F']],
+    ico: '<span class="ico" data-c="nut"><i data-i="fork"></i></span><span class="ico" data-c="fit"><i data-i="dumbbell"></i></span><span class="ico" data-c="hab"><i data-i="repeat"></i></span><span class="ico" data-c="bud"><i data-i="wallet"></i></span>',
+    card: '<div style="display:flex;border:1px solid #111;width:197px;background:#F2F1EE"><div class="cell" data-c="nut" style="width:98px"><span class="no">01</span><em class="sq"></em><div><b>Nutrition</b><em>1 122 kcal</em></div></div><div class="cell" data-c="fit" style="width:98px;border-left:1px solid #111"><span class="no">02</span><em class="sq"></em><div><b>Fitness</b><em>3/6 séries</em></div></div></div>',
+    tok: 'rayon <b>0</b> · filet <b>1 pt encre</b> · ombre <b>aucune</b> · cellule <b>98 × 80</b> · trait d\'icône <b>1,4</b> · onglets <b>cellules, actif inversé</b>' },
+  s3: { pal: [['Fond', '#0B0F17'], ['Surface', '#131A26'], ['Encre', '#E8EEF8'], ['Secondaire', '#8A97AB'], ['Filet', '#223046'], ['Principale', '#4FD3E8'], ['Accent', '#68B5F5'], ['Surface 2', '#1A2333']],
+    typo: [['tTitle', 'Ta soirée', 'Inter 650 · 30<br>interlettre −2 %'], ['tLabel', 'Mes espaces', 'Inter 600 · 10,5<br>capitales +16 %'], ['tNum', '1 122', 'Consolas · 30<br>chasse fixe'], ['tText', 'Série 4 sur 6 · Pompes × 15', 'Inter 400 · 14,5<br>secondaire #8A97AB']],
+    ico: '<span class="ico" data-c="nut"><i data-i="fork"></i></span><span class="ico" data-c="fit"><i data-i="dumbbell"></i></span><span class="ico" data-c="hab"><i data-i="repeat"></i></span><span class="ico" data-c="bud"><i data-i="wallet"></i></span>',
+    card: '<div class="card scard" data-c="nut" style="width:180px"><div class="r"><i data-i="fork"></i>Calories restantes</div><div class="n">1 122</div><div class="s">kcal · 49 % du jour</div></div>',
+    tok: 'rayon carte <b>14</b> · bouton <b>10</b> · bordure <b>intérieure 1 pt</b> · ombre et halo <b>aucun</b> · trait <b>1,6</b> · chiffres <b>chasse fixe</b>' },
+  s4: { pal: [['Fond', '#F6F1E9'], ['Surface', '#FBF8F2'], ['Encre', '#1A1714'], ['Secondaire', '#6F675E'], ['Filet', '#D6CCBD'], ['Principale', '#1F3A5F'], ['Or pâle', '#B08D57', 'filets seulement'], ['Écrin', '#EEE6D9']],
+    typo: [['tTitle', 'Ta soirée', 'Sitka italique · 44'], ['tLabel', 'Mes espaces', 'Inter 600 · 9,5<br>petites capitales +24 %'], ['tNum', '1 122', 'Sitka Display · 32<br>chiffres alignés'], ['tText', 'Série 4 sur 6 — Pompes', 'Inter 400 · 14<br>secondaire #6F675E']],
+    ico: '<span class="ico" data-c="nut"><i data-i="fork"></i></span><span class="ico" data-c="fit"><i data-i="dumbbell"></i></span><span class="ico" data-c="hab"><i data-i="repeat"></i></span>',
+    card: '<div class="frame" data-c="nut" style="padding:12px 14px;width:190px"><div class="k sc"><em class="dot"></em>Nutrition</div><div class="scard"><div class="n" style="font-size:28px">1 122</div><div class="s sc">kcal restantes</div></div></div>',
+    tok: 'rayon <b>2</b> · filet <b>1 pt</b> (encre ou #D6CCBD) · ombre <b>aucune</b> · trait <b>1,25</b> · couleur d\'espace <b>point de 6</b> · onglets <b>petites capitales</b>' },
+  s5: { pal: [['Fond', '#FAFAF7'], ['Surface', '#FFFFFF'], ['Encre', '#0E0E0E'], ['Secondaire', '#5F5F5A'], ['Filet', '#0E0E0E'], ['Accent', '#1D4E9E', 'seule couleur'], ['Filet doux', '#CFCFC8'], ['Inverse', '#0E0E0E', 'bouton']],
+    typo: [['tTitle', 'Ta soirée', 'Sitka Heading 700 · 50'], ['tLabel', 'Rubriques', 'Inter 800 · 10,5<br>capitales +16 %'], ['tNum', '1 631 $', 'Sitka Heading 700 · 32'], ['tText', 'Série 4 sur 6 — Pompes.', 'Inter 400 · 14,5<br>interligne 1,45']],
+    ico: '<div class="ix" style="width:100%"><div data-c="nut"><span class="ico">1</span><b>Nutrition</b><span>1 122 kcal</span></div><div data-c="fit"><span class="ico">2</span><b>Fitness</b><span>3/6</span></div></div>',
+    card: '<div class="breves" style="border:0;grid-template-columns:1fr"><div class="scard" style="padding:0;border:0"><div class="k">Nutrition</div><div class="n">1 122</div><div class="s">kcal restantes sur 2 200.</div></div></div>',
+    tok: 'rayon <b>0</b> · filets <b>3 pt / 1 pt encre</b>, <b>1 pt #CFCFC8</b> · ombre <b>aucune</b> · liens <b>soulignés</b> · rubriques <b>numérotées</b> · trait <b>1,6</b>' },
+};
+const SPN = [['Nutrition', 'nut'], ['Fitness', 'fit'], ['Habitudes', 'hab'], ['Budget', 'bud']];
+function fiche(sid) {
+  const f = F[sid], cs = getComputedStyle(document.getElementById(sid)), surf = cs.getPropertyValue('--surface').trim(), bg = cs.getPropertyValue('--bg').trim();
+  const sw = (n, v, sub) => { const hex = v.startsWith('#') ? v : null;
+    const r = hex ? `${cr(hex, bg).toFixed(1).replace('.', ',')}:1` : '';
+    return `<div class="sw"><div style="background:${v}"></div><b>${n}</b><span>${sub && !hex ? sub : v}</span>${sub && hex ? `<br><span>${sub}</span>` : (hex && !['Fond', 'Surface', 'Filet', 'Filet doux', 'Écrin', 'Surface 2'].includes(n) ? `<br><span>${r} sur fond</span>` : '')}</div>`; };
+  const pal = f.pal.map((p) => sw(p[0], p[1], p[2])).join('') + SPN.map(([n, k]) => { const h = col(sid, k); return `<div class="sw"><div style="background:${h}"></div><b>${n}</b><span>${h}</span><br><span>${cr(h, surf).toFixed(1).replace('.', ',')}:1 surface</span></div>`; }).join('');
+  const typo = f.typo.map(([c, t, s]) => `<div><div class="${c}" style="margin:0;padding:0;border:0">${t}</div><small>${s}</small></div>`).join('');
+  const tab = `<div class="tdemo"><div class="ti on"><i data-i="home"></i>Accueil</div><div class="ti"><i data-i="plus"></i>Créer</div></div>`;
+  return `<h4><span>Palette</span><span>HEX · contraste</span></h4><div class="pal">${pal}</div>
+  <h4><span>Typographie</span></h4><div class="typo">${typo}</div>
+  <h4><span>Composants</span></h4><div class="comp">
+    <div><small>Bouton principal</small><div class="btnP" style="display:flex">Série faite</div></div>
+    <div><small>Bouton secondaire</small><div class="btnS" style="display:flex;justify-content:center">Ouvrir</div></div>
+    <div><small>Pastilles de filtre</small><div class="rowx"><span class="pill on">Tout</span><span class="pill">Santé</span></div></div>
+    <div><small>Icônes d'espace</small><div class="rowx">${f.ico}</div></div>
+    <div><small>Carte</small>${f.card}</div>
+    <div><small>Onglet actif / inactif</small>${tab}</div>
+  </div>
+  <h4><span>Jetons</span></h4><div class="tok">${f.tok}</div>`;
+}
+
+const sid = new URLSearchParams(location.search).get('d') || 's1';
+const sec = document.getElementById(sid); sec.classList.add('on');
+document.querySelectorAll('[data-fiche]').forEach((el) => { if (el.closest('section') === sec) el.innerHTML = fiche(sid); });
+document.querySelectorAll('[data-gen]').forEach((el) => { const [t, n] = el.dataset.gen.split(','); const src = t === 'pills' ? FILTERS : /sp|idx|cat/.test(t) ? SPACES : APPS;
+  el.innerHTML = src.slice(0, +n).map((x, k) => T[t](x, k)).join(''); });
+document.querySelectorAll('[data-sb]').forEach((el) => { el.innerHTML = '<span>21:40</span><div class="isl"></div><span class="rt"><span class="sig"><span style="height:4px"></span><span style="height:6px"></span><span style="height:8px"></span><span style="height:11px"></span></span><span class="bat"></span></span>'; });
+document.querySelectorAll('[data-tab]').forEach((el) => { const on = +el.dataset.tab; el.innerHTML = [['home', 'Accueil'], ['plus', 'Créer'], ['bag', 'Store'], ['grid', 'Mes widgets']].map(([i, l], k) => `<div class="ti${k === on ? ' on' : ''}"><i data-i="${i}"></i>${l}</div>`).join(''); });
+document.querySelectorAll('img.w').forEach((im) => { im.src = im.getAttribute('src').replace('KIT', KIT); });
+document.querySelectorAll('[data-c]').forEach((el) => { el.style.setProperty('--c', col(sid, el.dataset.c)); });
+document.querySelectorAll('svg.rg circle[stroke="C"]').forEach((c) => c.setAttribute('stroke', getComputedStyle(c.closest('[data-c]')).getPropertyValue('--c')));
+document.querySelectorAll('i[data-i]').forEach((e) => { e.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${P[e.dataset.i]}"/></svg>`; });
+</script>
+</body>
+</html>
