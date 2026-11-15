@@ -56,6 +56,8 @@ def main():
                 break
             time.sleep(0.5)
         else:
+            clean()   # même en cas d'échec, ne rien laisser dans le dossier temporaire
+            shutil.rmtree(tmp, ignore_errors=True)
             sys.exit("rendu absent : " + dest)
         time.sleep(0.4)
 
