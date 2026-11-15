@@ -91,11 +91,11 @@ C.lift = (h, bg, min) => { let k = 0; while (C.cr(h, bg) < min && k++ < 40) h = 
 function tokensDark(t) {
   const hue = C.hsl(t.primary).h, sat = t.gray ? (t.gray > .5 ? 0 : .22) : 1;       // teintes neutres : presque sans couleur
   const bg = C.fromHsl(hue, .45 * sat, .055), card = C.fromHsl(hue, .35 * sat, .115), primary = DARK[t.id];
-  const onPrimary = C.lum(primary) > .35 ? C.fromHsl(hue, .5 * sat, .07) : '#FFFFFF';
+  const darkInk = C.fromHsl(hue, .5 * sat, .07), onPrimary = C.cr(darkInk, primary) >= C.cr('#FFFFFF', primary) ? darkInk : '#FFFFFF';
   const ink = C.mix('#FFFFFF', primary, .05), ink2 = C.mix(ink, card, .36), gray = '#9AA3B0';
   const cat = (k) => { let c = C.mix(CATS0[k], t.primary, t.cat || 0); if (t.gray) c = C.mix(c, gray, t.gray); return C.lift(C.mix(c, '#FFFFFF', .16), card, 5.0); };
   const o = { bg, card, ink, ink2, primary, onPrimary, secondary: C.lift(t.secondary, card, 4.5), accent: C.lift(t.accent, card, 4.5),
-    rule: C.mix(card, '#FFFFFF', .10), rule2: C.mix(card, '#FFFFFF', .22), tint: C.mix(card, primary, .16), tint2: C.mix(card, primary, .24), track: C.mix(card, '#FFFFFF', .13), grid: C.mix(card, '#FFFFFF', .07),
+    rule: C.mix(card, '#FFFFFF', .10), rule2: C.mix(card, '#FFFFFF', .22), tint: C.mix(card, primary, .13), tint2: C.mix(card, primary, .19), track: C.mix(card, '#FFFFFF', .13), grid: C.mix(card, '#FFFFFF', .07),
     go: C.mix(ink2, card, .35), dot: C.mix(card, '#FFFFFF', .24), panelSolid: card, sheet: C.mix(card, '#FFFFFF', .03), well: C.mix(bg, '#FFFFFF', .06), well2: C.mix(bg, primary, .10),
     na: C.mix(bg, t.gray > .5 ? '#8A8F98' : t.secondary, .32), nb: C.mix(bg, t.gray > .5 ? '#5E636C' : t.primary, .46), ok: '#5FD3A0', cats: {}, cs: {} };
   Object.keys(CATS0).forEach((k) => { o.cats[k] = cat(k); o.cs[k] = o.cats[k]; });
