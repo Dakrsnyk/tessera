@@ -193,7 +193,7 @@ struct MiniAppInfoSheet: View {
                 .padding(20)
             }
             .scrollDismissesKeyboard(.interactively)
-            .background(.screenGradient)
+            .cristalScreen()
             .navigationTitle(tr("Mes paramètres"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

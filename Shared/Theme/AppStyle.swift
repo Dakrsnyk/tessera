@@ -146,24 +146,26 @@ struct AppFill: ShapeStyle {
 
     let kind: Kind
 
+    /// Since the « Cristal » redesign (2026-11-15) the fills come from the style's Cristal palette
+    /// (`CristalPalette`). `AppStyle` itself is unchanged: Live Activities still read its fields.
     func resolve(in environment: EnvironmentValues) -> AnyShapeStyle {
-        let style = environment.appStyle
+        let palette = CristalPalette.of(environment.appStyle.id)
         let dark = environment.colorScheme == .dark
         switch kind {
-        case .screen: return AnyShapeStyle(Color(hex: dark ? style.screenDark : style.screenLight))
-        case .screenGradient: return AnyShapeStyle(Self.depth(style, dark: dark))
-        case .card: return AnyShapeStyle(Color(hex: dark ? style.cardDark : "FFFFFF"))
-        case .onAccent: return AnyShapeStyle(Color(hex: dark ? style.inkOnDarkAccent : "FFFFFF"))
+        case .screen: return AnyShapeStyle(Color(hex: palette.hex("bg", dark: dark)))
+        case .screenGradient: return AnyShapeStyle(Self.depth(palette, dark: dark))
+        case .card: return AnyShapeStyle(Color(hex: palette.hex("panelSolid", dark: dark)))
+        case .onAccent: return AnyShapeStyle(Color(hex: palette.hex("onPrimary", dark: dark)))
         }
     }
 
-    /// The screen color with depth. Light mode: the style's accent color tints the top, fading into
-    /// the screen color, a little deeper at the bottom. Dark mode: the card color at the top, sinking
-    /// towards black at the bottom.
-    static func depth(_ style: AppStyle, dark: Bool) -> LinearGradient {
-        let base = dark ? style.screenDark : style.screenLight
-        let top = dark ? mix(base, style.cardDark, 0.75) : mix(base, style.accentLight, 0.24)
-        let bottom = dark ? mix(base, "000000", 0.58) : mix(base, "000000", 0.05)
+    /// The Cristal background on a single layer, for the places that need a shape style: the first
+    /// wash tints the top, the second the bottom. Whole screens use `cristalScreen()` (the two washes
+    /// at their place).
+    static func depth(_ palette: CristalPalette, dark: Bool) -> LinearGradient {
+        let base = palette.hex("bg", dark: dark)
+        let top = mix(base, palette.hex("na", dark: dark), 0.55)
+        let bottom = mix(base, palette.hex("nb", dark: dark), 0.45)
         return LinearGradient(colors: [top, Color(hex: base), bottom], startPoint: .top, endPoint: .bottom)
     }
 
@@ -192,17 +194,13 @@ extension View {
     /// Applies the chosen style: accent, backgrounds, font and light or dark mode.
     func appStyle(_ settings: AppSettings, isPremium: Bool = SharedStore.shared.premium.isPremium()) -> some View {
         let style = AppStyle.style(settings.appStyle, isPremium: isPremium)
+        // The action color is the Cristal one: the style's accent, darkened where needed to read on its own tint.
+        let action = CristalPalette.of(style.id).primaryColor
         return self
             .environment(\.appStyle, style)
-            .tint(style.accent)
-            .accentColor(style.accent)
+            .tint(action)
+            .accentColor(action)
             .fontDesign(style.fontDesign)
             .preferredColorScheme(settings.appearance.colorScheme)
-    }
-
-    /// Lists and forms on the style's background instead of the system gray.
-    func styledList() -> some View {
-        scrollContentBackground(.hidden)
-            .background(.screenGradient)
     }
 }

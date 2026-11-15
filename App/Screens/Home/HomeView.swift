@@ -16,7 +16,7 @@ struct HomeView: View {
                     // The tutorial brings what it talks about near the top, above its card.
                     .onChange(of: router.tutorialStep) { _, step in bringIntoView(step, proxy: proxy) }
             }
-            .background(.screenGradient)
+            .cristalScreen()
             .screenshotScroll()
             // Only the profile, at the top right: no title, no search.
             .navigationBarTitleDisplayMode(.inline)

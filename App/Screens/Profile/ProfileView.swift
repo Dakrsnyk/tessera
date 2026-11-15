@@ -63,7 +63,7 @@ struct ProfileView: View {
                             ))
                             .padding(20)
                         }
-                        .background(.screenGradient)
+                        .cristalScreen()
                         .navigationTitle(tr("Centres d'intérêt"))
                     } label: {
                         LabeledContent(tr("Centres d'intérêt"), value: model.profile.interests.isEmpty ? tr("Aucun") : Fmt.plural(model.profile.interests.count, tr("choisi"), tr("choisis")))

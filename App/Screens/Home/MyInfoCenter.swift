@@ -183,7 +183,7 @@ struct MyInfoView: View {
             .padding(.bottom, 32)
         }
         .scrollDismissesKeyboard(.interactively)
-        .background(.screenGradient)
+        .cristalScreen()
         .screenshotScroll()
         .navigationTitle(tr("Mes informations"))
         .navigationBarTitleDisplayMode(.large)

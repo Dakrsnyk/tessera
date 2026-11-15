@@ -121,7 +121,7 @@ struct CardBackground: ViewModifier {
         content
             .padding(padding)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(.cardFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .cristalPanel()
     }
 }
 

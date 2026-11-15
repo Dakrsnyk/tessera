@@ -40,7 +40,7 @@ struct AppIconPicker: View {
             }
             .padding(20)
         }
-        .background(.screenGradient)
+        .cristalScreen()
         .navigationTitle(tr("Icône de l'app"))
         .navigationBarTitleDisplayMode(.inline)
         .task { current = AppIconSwitcher.current }

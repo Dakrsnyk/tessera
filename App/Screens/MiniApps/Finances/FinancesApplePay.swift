@@ -82,7 +82,7 @@ struct ApplePayGuideView: View {
                 .padding(.bottom, 40)
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .background(.screenGradient)
+            .cristalScreen()
             .environment(\.miniAccent, Color(hex: accentHex))
             .navigationTitle("Apple Pay")
             .navigationBarTitleDisplayMode(.inline)

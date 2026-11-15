@@ -520,7 +520,7 @@ struct HomeSetupsView: View {
             }
             .padding(.bottom, 32)
         }
-        .background(.screenGradient)
+        .cristalScreen()
         .navigationTitle(tr("Écrans d'accueil"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $opened) { setup in
@@ -608,7 +608,7 @@ struct HomeSetupSheet: View {
                 }
                 .padding(20)
             }
-            .background(.screenGradient)
+            .cristalScreen()
             .safeAreaInset(edge: .bottom) {
                 Button(action: install) {
                     Text(buttonTitle)

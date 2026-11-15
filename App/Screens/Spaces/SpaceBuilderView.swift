@@ -111,7 +111,7 @@ struct SpaceBuilderView: View {
                 .padding(.bottom, 24)
             }
             .scrollDismissesKeyboard(.interactively)
-            .background(.screenGradient)
+            .cristalScreen()
             .safeAreaInset(edge: .bottom) { continueBar }
             .navigationTitle(space.title)
             .navigationBarTitleDisplayMode(.inline)

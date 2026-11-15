@@ -118,7 +118,7 @@ struct ScheduleImportView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(.screenGradient)
+            .cristalScreen()
             .navigationTitle(tr("Importer mon horaire"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

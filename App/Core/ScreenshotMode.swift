@@ -511,7 +511,7 @@ struct NutritionScreenshotStage: View {
                         WeightPlanSummaryView()
                             .padding(20)
                     }
-                    .background(.screenGradient)
+                    .cristalScreen()
                 } else {
                     ScanRecapView(recap: $recap, source: mode == "scan-recap-photo" ? .photo : .barcode, onDone: {})
                 }

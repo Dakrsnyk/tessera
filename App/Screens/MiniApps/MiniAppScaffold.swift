@@ -61,7 +61,7 @@ struct MiniAppScaffold<Header: View, Sheet: View>: View {
                 }
             }
         }
-        .background(.screenGradient)
+        .cristalScreen()
         .screenshotScroll()
         .overlay(alignment: .bottom) {
             if let action {

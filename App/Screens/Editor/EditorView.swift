@@ -116,7 +116,7 @@ struct WidgetStudio: View {
             Divider()
             settings(input)
         }
-        .background(.screenGradient)
+        .cristalScreen()
         .safeAreaInset(edge: .bottom) { saveBar }
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
@@ -758,7 +758,7 @@ struct ComboPartSettingsView: View {
             .padding(.bottom, 24)
         }
         .scrollDismissesKeyboard(.interactively)
-        .background(.screenGradient)
+        .cristalScreen()
         .navigationTitle(shown.kind.title)
         .navigationBarTitleDisplayMode(.inline)
     }

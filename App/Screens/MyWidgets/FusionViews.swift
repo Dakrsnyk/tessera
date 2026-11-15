@@ -76,7 +76,7 @@ struct FusionSheet: View {
                 }
                 .padding(20)
             }
-            .background(.screenGradient)
+            .cristalScreen()
             .safeAreaInset(edge: .bottom) {
                 Button {
                     onConfirm(keepsOriginals)

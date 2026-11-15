@@ -632,7 +632,7 @@ struct TopicEditorSheet: View {
                 .padding(20)
             }
             .scrollDismissesKeyboard(.interactively)
-            .background(.screenGradient)
+            .cristalScreen()
             .navigationTitle(topic.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -663,7 +663,7 @@ struct InterestsEditorSheet: View {
                 }
                 .padding(20)
             }
-            .background(.screenGradient)
+            .cristalScreen()
             .navigationTitle(tr("Centres d'intérêt"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

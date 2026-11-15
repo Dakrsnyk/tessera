@@ -126,7 +126,7 @@ struct ExploreView: View {
                     }
                 }
             }
-            .background(.screenGradient)
+            .cristalScreen()
             .screenshotScroll()
             .navigationTitle(tr("Store"))
             .navigationDestination(for: StorePage.self) { page in
@@ -714,7 +714,7 @@ struct PackSheet: View {
                 }
                 .padding(20)
             }
-            .background(.screenGradient)
+            .cristalScreen()
             .safeAreaInset(edge: .bottom) {
                 Button {
                     if needsPremium {

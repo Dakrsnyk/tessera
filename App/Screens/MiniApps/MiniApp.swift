@@ -235,7 +235,7 @@ struct MiniAppScroll<Content: View>: View {
             .padding(.top, 6)
             .padding(.bottom, 32)
         }
-        .background(.screenGradient)
+        .cristalScreen()
         .screenshotScroll()
     }
 }

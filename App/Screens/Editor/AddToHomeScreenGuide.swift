@@ -100,7 +100,7 @@ struct AddToHomeScreenGuide: View {
                 }
                 .padding(20)
             }
-            .background(.screenGradient)
+            .cristalScreen()
             .navigationTitle(tr("Ajouter un widget"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

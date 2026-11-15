@@ -119,7 +119,7 @@ struct OnboardingView: View {
                 .background(.screenFill)
             }
         }
-        .background(.screenGradient)
+        .cristalScreen()
     }
 
     private var topBar: some View {

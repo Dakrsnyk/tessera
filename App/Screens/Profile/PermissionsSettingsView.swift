@@ -32,7 +32,7 @@ struct PermissionsSettingsView: View {
             }
             .padding(20)
         }
-        .background(.screenGradient)
+        .cristalScreen()
         .navigationTitle(tr("Autorisations"))
         .navigationBarTitleDisplayMode(.inline)
     }

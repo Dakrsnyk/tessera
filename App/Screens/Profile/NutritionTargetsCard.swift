@@ -108,7 +108,7 @@ struct NutritionTargetsCard: View {
                     WeightPlanSummaryView(onEdit: { showsPlan = false })
                         .padding(20)
                 }
-                .background(.screenGradient)
+                .cristalScreen()
                 .navigationTitle(tr("Ton objectif de poids"))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {

@@ -180,7 +180,7 @@ struct PhotoQuoteEditor: View {
                 .padding(20)
             }
             .scrollDismissesKeyboard(.interactively)
-            .background(.screenGradient)
+            .cristalScreen()
             .navigationTitle(design.kind == .photos ? tr("Widget photo") : tr("Widget citation"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

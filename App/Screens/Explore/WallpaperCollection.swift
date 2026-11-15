@@ -311,7 +311,7 @@ struct WallpaperSheet: View {
                     .padding(.horizontal, 24)
             }
             .padding(.top, 8)
-            .background(.screenGradient)
+            .cristalScreen()
             .safeAreaInset(edge: .bottom) {
                 Button(action: primaryAction) {
                     HStack(spacing: 8) {
