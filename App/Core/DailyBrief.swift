@@ -283,8 +283,8 @@ enum DailyBrief {
         /// Across the dashboard, or half of it.
         var isWide: Bool {
             switch self {
-            // Planning: the week as a table, readable across the dashboard (half of it on demand).
-            case .nutrition, .reminders, .invite, .empty, .planning: true
+            // Planning is half width by default (the design): its week table has a compact form for it.
+            case .nutrition, .reminders, .invite, .empty: true
             default: false
             }
         }

@@ -1,7 +1,44 @@
 import SwiftUI
 
+/// Where a card is among the views of its pager: its header draws the dots from it (`DailyPagerDots`).
+struct DailyPagerInfo: Equatable {
+    let count: Int
+    let page: Int
+}
+
+private struct DailyPagerInfoKey: EnvironmentKey {
+    static let defaultValue: DailyPagerInfo? = nil
+}
+
+extension EnvironmentValues {
+    /// The pager the card is a view of (nil outside a pager).
+    var dailyPager: DailyPagerInfo? {
+        get { self[DailyPagerInfoKey.self] }
+        set { self[DailyPagerInfoKey.self] = newValue }
+    }
+}
+
+/// The dots of a pager, at the right of the title in the card's header (the design): the view on screen is the long one,
+/// in the action color. Only drawn: VoiceOver and the UI tests read the pager's own `daily-pager-*-dots` element.
+struct DailyPagerDots: View {
+    let info: DailyPagerInfo
+    @Environment(\.appStyle) private var style
+
+    var body: some View {
+        HStack(spacing: 4) {
+            ForEach(0..<info.count, id: \.self) { index in
+                Capsule()
+                    .fill(index == info.page ? Color.accentColor : CristalPalette.of(style.id).dotColor)
+                    .frame(width: index == info.page ? 14 : 5, height: 5)
+            }
+        }
+        .animation(.snappy, value: info.page)
+        .accessibilityHidden(true)
+    }
+}
+
 /// A « Mon Quotidien » card with several views: swiping left or right slides to the next or previous
-/// one, dots under the card show where the person is, and the view chosen stays for the next launch.
+/// one, dots in the card's header show where the person is, and the view chosen stays for the next launch.
 /// A native paging scroll the size of the card: the slide follows the finger and stays inside the
 /// card, Home itself never moves sideways, taps and the vertical scroll of Home are untouched.
 /// VoiceOver offers « Vue suivante » / « Vue précédente ».
@@ -21,13 +58,18 @@ struct DailyPager<Content: View>: View {
     private var saved: Int { min(max(0, model.settings.dailyCardPages[id] ?? 0), count - 1) }
     private var page: Int { position ?? saved }
 
+    /// A view of the card, told where it is among the views (its header draws the dots).
+    private func shown(_ index: Int) -> some View {
+        content(index).environment(\.dailyPager, DailyPagerInfo(count: count, page: page))
+    }
+
     var body: some View {
-        VStack(spacing: 7) {
+        VStack(spacing: 0) {
             // Every page, invisible, gives the card the height of its tallest view; the paging
             // scroll on top, exactly the card's size, shows one page at a time.
             ZStack(alignment: .top) {
                 ForEach(0..<count, id: \.self) { index in
-                    content(index)
+                    shown(index)
                 }
             }
             .hidden()
@@ -36,13 +78,13 @@ struct DailyPager<Content: View>: View {
                 if editing {
                     // « Organiser… »: the card is moved, never swiped, so its view stays still and fills the card. The
                     // paging scroll of the card held for the menu stopped 40 points between two views (Builds 365 to 367).
-                    content(page)
+                    shown(page)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
                 } else {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 0) {
                             ForEach(0..<count, id: \.self) { index in
-                                content(index)
+                                shown(index)
                                     .frame(maxHeight: .infinity, alignment: .top)
                                     .containerRelativeFrame(.horizontal)
                                     .id(index)
@@ -57,8 +99,9 @@ struct DailyPager<Content: View>: View {
                     .accessibilityIdentifier("daily-pager-\(id)")
                 }
             }
-            dots
         }
+        // One element for the dots drawn in the header: VoiceOver reads « Vue 1 sur 3 », the tests find it by its identifier.
+        .overlay(alignment: .top) { dotsElement }
         .accessibilityElement(children: .contain)
         .accessibilityAction(named: Text(tr("Vue suivante"))) { go(by: 1) }
         .accessibilityAction(named: Text(tr("Vue précédente"))) { go(by: -1) }
@@ -75,18 +118,12 @@ struct DailyPager<Content: View>: View {
         .onAppear { if position == nil { position = saved } }
     }
 
-    private var dots: some View {
-        HStack(spacing: 6) {
-            ForEach(0..<count, id: \.self) { index in
-                Capsule()
-                    .fill(index == page ? Color.accentColor : CristalPalette.of(style.id).dotColor)
-                    .frame(width: index == page ? 16 : 6, height: 6)
-            }
-        }
-        .animation(.snappy, value: page)
-        .accessibilityElement()
-        .accessibilityLabel(Text(tr("Vue \(page + 1) sur \(count) : \(titles[page])")))
-        .accessibilityIdentifier("daily-pager-\(id)-dots")
+    private var dotsElement: some View {
+        Color.clear
+            .frame(height: 2)
+            .accessibilityElement()
+            .accessibilityLabel(Text(tr("Vue \(page + 1) sur \(count) : \(titles[page])")))
+            .accessibilityIdentifier("daily-pager-\(id)-dots")
     }
 
     private func go(by delta: Int) {

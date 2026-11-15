@@ -8,6 +8,7 @@ struct DailyLayoutEditor: View {
     let available: [DailyBrief.Tile]
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.appStyle) private var style
 
     private var settings: AppSettings { model.settings }
 
@@ -53,7 +54,7 @@ struct DailyLayoutEditor: View {
                             Label {
                                 Text(app.title)
                             } icon: {
-                                Image(systemName: app.symbol).foregroundStyle(Color(hex: app.colorHex))
+                                Image(systemName: app.symbol).foregroundStyle(CristalPalette.of(style.id).category(app.colorHex))
                             }
                         }
                         .accessibilityIdentifier("daily-category-\(app.rawValue)")
@@ -69,7 +70,7 @@ struct DailyLayoutEditor: View {
                         Label {
                             Text(tr("Productivité"))
                         } icon: {
-                            Image(systemName: "checklist").foregroundStyle(Color(hex: "F5A524"))
+                            Image(systemName: "checklist").foregroundStyle(CristalPalette.of(style.id).category("F5A524"))
                         }
                     }
                     .accessibilityIdentifier("daily-category-productivity")
@@ -109,12 +110,13 @@ struct DailyLayoutEditor: View {
     private func row(_ tile: DailyBrief.Tile, isHidden: Bool) -> some View {
         let info = Self.info(tile)
         let wide = settings.dailyWide[tile.id] ?? tile.isWide
+        let tint = CristalPalette.of(style.id).category(info.colorHex)
         return HStack(spacing: 12) {
             Image(systemName: info.symbol)
                 .font(.subheadline.weight(.semibold))
-                .foregroundStyle(Color(hex: info.colorHex))
+                .foregroundStyle(tint)
                 .frame(width: 30, height: 30)
-                .background(Color(hex: info.colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                .background(tint.opacity(0.14), in: Circle())
             Text(info.title)
                 .foregroundStyle(isHidden ? Color.secondary : Color.primary)
                 .lineLimit(1)

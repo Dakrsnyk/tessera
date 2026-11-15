@@ -18,8 +18,9 @@ struct HomeView: View {
             }
             .cristalScreen()
             .screenshotScroll()
-            // Only the profile, at the top right: no title, no search.
+            // No title, no search: the date and the profile sit in a glass capsule at the top of the page, so the bar stays hidden here.
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden, for: .navigationBar)
             .navigationDestination(for: HomeRoute.self) { route in
                 switch route {
                 case let .space(space):
@@ -47,35 +48,44 @@ struct HomeView: View {
                 // « Mon Quotidien » shows today's events when they are available.
                 model.refreshEvents()
             }
-            .toolbar {
-                // The date, on the same line as the profile, in the app style's color.
-                ToolbarItem(placement: .topBarLeading) {
-                    Text(Fmt.longDay(Date()))
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color.accentColor)
-                        .fixedSize()
-                        .accessibilityAddTraits(.isHeader)
-                        .accessibilityIdentifier("home-date")
-                }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        router.isProfilePresented = true
-                    } label: {
-                        ProfileAvatar(name: model.settings.profileName.trimmed, size: 32)
-                            .tutorialTarget(.profile)
-                    }
-                    .accessibilityLabel(Text(tr("Profil et réglages")))
-                }
-            }
         }
+    }
+
+    /// The date and the profile on one glass capsule, the first thing on the page (the design's top bar).
+    private var topCapsule: some View {
+        HStack(spacing: 8) {
+            Text(Fmt.longDay(Date()))
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(Color.primary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                .accessibilityAddTraits(.isHeader)
+                .accessibilityIdentifier("home-date")
+            Spacer(minLength: 8)
+            Button {
+                router.isProfilePresented = true
+            } label: {
+                ProfileAvatar(name: model.settings.profileName.trimmed, size: 36)
+                    .tutorialTarget(.profile)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityLabel(Text(tr("Profil et réglages")))
+        }
+        .padding(.leading, 18)
+        .padding(.trailing, 5)
+        .frame(minHeight: 46)
+        .cristalGlass(in: Capsule())
     }
 
     private var scrollContent: some View {
         ScrollView(.vertical, showsIndicators: true) {
             VStack(alignment: .leading, spacing: 30) {
-                DailySection()
-                    .id(TutorialTarget.daily.rawValue)
-                    .tutorialTarget(.daily)
+                VStack(alignment: .leading, spacing: 18) {
+                    topCapsule
+                    DailySection()
+                        .id(TutorialTarget.daily.rawValue)
+                        .tutorialTarget(.daily)
+                }
                 MyInfoCard()
                     .id(TutorialTarget.info.rawValue)
                     .tutorialTarget(.info)
@@ -173,7 +183,7 @@ struct PremiumBanner: View {
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundStyle(Color.premiumInk)
                     .frame(width: 48, height: 48)
-                    .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                    .background(Color.premiumFill, in: Circle())
                 VStack(alignment: .leading, spacing: 2) {
                     Text(tr("Ardane Premium"))
                         .font(.headline)

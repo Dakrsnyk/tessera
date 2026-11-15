@@ -94,7 +94,7 @@ struct DailySection: View {
         }
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top, spacing: 8) {
-                VStack(alignment: .leading, spacing: 3) {
+                VStack(alignment: .leading, spacing: 2) {
                     Text(tr("Mon Quotidien").uppercased())
                         .font(.caption.weight(.bold))
                         .tracking(1.1)
@@ -183,6 +183,8 @@ struct DailySection: View {
             .buttonStyle(.pressable)
             .accessibilityIdentifier("daily-edit-done")
         }
+        .padding(.horizontal, 4)
+        .cristalGlass(in: Capsule())
     }
 
     private var moveAnimation: Animation {
@@ -442,9 +444,67 @@ private struct DailyTileView: View {
     }
 }
 
-private extension AppStyle {
-    /// The Cristal tokens of this color.
-    var cristal: CristalPalette { CristalPalette.of(id) }
+/// The label of a card: its round pastille, its title and a chevron. The card to do right now shows its « Maintenant » tag
+/// instead of the title (the design), the title staying for VoiceOver.
+private struct DayHeader: View {
+    let title: String
+    let symbol: String
+    let colorHex: String
+    var badge: String? = nil
+    var showsChevron = false
+    @Environment(\.appStyle) private var style
+    @Environment(\.colorScheme) private var scheme
+    @Environment(\.dailyPager) private var pager
+
+    var body: some View {
+        let tint = style.cristal.category(colorHex)
+        HStack(spacing: 8) {
+            Image(systemName: symbol)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(tint)
+                .frame(width: 30, height: 30)
+                .background(tint.opacity(scheme == .dark ? 0.20 : 0.13), in: Circle())
+            if let badge {
+                if let pager, pager.count > 1 { DailyPagerDots(info: pager) }
+                Spacer(minLength: 0)
+                Text(badge)
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(.onAccent)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .padding(.horizontal, 12)
+                    .frame(minHeight: 24)
+                    .background(Color.accentColor, in: Capsule())
+            } else {
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                if let pager, pager.count > 1 { DailyPagerDots(info: pager) }
+                Spacer(minLength: 0)
+                if showsChevron {
+                    Image(systemName: "chevron.right")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(Color.secondary.opacity(0.6))
+                }
+            }
+        }
+        .modifier(HeaderLabel(label: badge.map { "\(title), \($0)" }))
+    }
+}
+
+/// With a tag instead of the title, the header reads as « title, tag » for VoiceOver.
+private struct HeaderLabel: ViewModifier {
+    let label: String?
+
+    @ViewBuilder func body(content: Content) -> some View {
+        if let label {
+            content.accessibilityElement(children: .ignore).accessibilityLabel(Text(label))
+        } else {
+            content
+        }
+    }
 }
 
 /// The frame of a tile: its label on top, the content below, on a Cristal panel (glass for the card to do right now).
@@ -457,38 +517,11 @@ private struct DayCard<Content: View>: View {
     var badge: String? = nil
     @ViewBuilder let content: () -> Content
     @Environment(\.appStyle) private var style
-    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
         let palette = style.cristal
-        let tint = palette.category(colorHex)
         let card = VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 8) {
-                Image(systemName: symbol)
-                    .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(tint)
-                    .frame(width: 30, height: 30)
-                    .background(tint.opacity(scheme == .dark ? 0.20 : 0.13), in: Circle())
-                Text(title)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.primary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
-                Spacer(minLength: 0)
-                if let badge {
-                    Text(badge)
-                        .font(.caption2.weight(.bold))
-                        .foregroundStyle(.onAccent)
-                        .lineLimit(1)
-                        .padding(.horizontal, 10)
-                        .frame(minHeight: 22)
-                        .background(Color.accentColor, in: Capsule())
-                } else if route != nil {
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(Color.secondary.opacity(0.6))
-                }
-            }
+            DayHeader(title: title, symbol: symbol, colorHex: colorHex, badge: badge, showsChevron: route != nil)
             content()
         }
         .padding(14)
@@ -529,10 +562,7 @@ private struct NutritionDayTile: View {
         return VStack(alignment: .leading, spacing: 10) {
             NavigationLink(value: HomeRoute.app(.nutrition)) {
                 VStack(alignment: .leading, spacing: 10) {
-                    Label(tr("Nutrition"), systemImage: "fork.knife")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(style.cristal.strong("F08A24"))
-                        .lineLimit(1)
+                    DayHeader(title: tr("Nutrition"), symbol: "fork.knife", colorHex: "F08A24", showsChevron: true)
                     HStack(spacing: 10) {
                         RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 7, color: nutritionColor, track: NutritionColors.track)
                             .frame(width: 46, height: 46)
@@ -617,72 +647,58 @@ private struct NutritionDayTile: View {
 
     private var wideBody: some View {
         let nutritionColor = style.cristal.category("F08A24")
-        return VStack(alignment: .leading, spacing: 12) {
+        return VStack(alignment: .leading, spacing: 10) {
+            // The label of the card (the pager's dots sit under it).
             NavigationLink(value: HomeRoute.app(.nutrition)) {
-            HStack(alignment: .center, spacing: 14) {
-                ZStack {
-                    RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 10, color: nutritionColor, track: NutritionColors.track)
-                    VStack(spacing: 0) {
-                        if let left = nutrition.kcalLeft {
-                            Text(TF.int(abs(left)))
-                                .font(.title3.weight(.bold))
-                                .monospacedDigit()
-                            Text(left >= 0 ? tr("kcal restantes") : tr("kcal en trop"))
-                                .font(.system(size: 10))
-                                .foregroundStyle(.secondary)
-                        } else {
-                            Text(TF.int(nutrition.eaten.kcal))
-                                .font(.title3.weight(.bold))
-                                .monospacedDigit()
-                            Text(tr("kcal mangées"))
-                                .font(.system(size: 10))
+                DayHeader(title: tr("Nutrition"), symbol: "fork.knife", colorHex: "F08A24", showsChevron: true)
+            }
+            .buttonStyle(.pressable)
+            NavigationLink(value: HomeRoute.app(.nutrition)) {
+                HStack(alignment: .center, spacing: 18) {
+                    ZStack {
+                        RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 9, color: nutritionColor, track: NutritionColors.track)
+                        VStack(spacing: 0) {
+                            if let left = nutrition.kcalLeft {
+                                Text(TF.int(abs(left)))
+                                    .font(.title3.weight(.bold))
+                                    .monospacedDigit()
+                                Text(left >= 0 ? tr("kcal restantes") : tr("kcal en trop"))
+                                    .font(.system(size: 10))
+                                    .foregroundStyle(.secondary)
+                            } else {
+                                Text(TF.int(nutrition.eaten.kcal))
+                                    .font(.title3.weight(.bold))
+                                    .monospacedDigit()
+                                Text(tr("kcal mangées"))
+                                    .font(.system(size: 10))
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .padding(8)
+                    }
+                    .frame(width: 90, height: 90)
+                    VStack(alignment: .leading, spacing: 9) {
+                        if !nutrition.knowsKcal {
+                            Text(tr("Objectif à définir"))
+                                .font(.caption.weight(.semibold))
                                 .foregroundStyle(.secondary)
                         }
+                        macro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex, incomplete: nutrition.eaten.isIncomplete)
+                        macro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex, incomplete: nutrition.eaten.isIncomplete)
+                        macro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex, incomplete: nutrition.eaten.isIncomplete)
                     }
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-                    .padding(8)
                 }
-                .frame(width: 96, height: 96)
-                VStack(alignment: .leading, spacing: 7) {
-                    HStack {
-                        Label(tr("Nutrition"), systemImage: "fork.knife")
-                            .font(.caption.weight(.bold))
-                            .foregroundStyle(style.cristal.strong("F08A24"))
-                            .lineLimit(1)
-                        Spacer(minLength: 4)
-                        Text(nutrition.knowsKcal ? "\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal))" : tr("Objectif à définir"))
-                            .font(.caption.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.7)
-                    }
-                    macro(tr("Protéines"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex, incomplete: nutrition.eaten.isIncomplete)
-                    macro(tr("Glucides"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex, incomplete: nutrition.eaten.isIncomplete)
-                    macro(tr("Lipides"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex, incomplete: nutrition.eaten.isIncomplete)
-                }
-            }
-            .contentShape(Rectangle())
+                .contentShape(Rectangle())
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("daily-nutrition-open")
-            HStack(spacing: 8) {
+            HStack(spacing: 10) {
                 Button {
                     router.isFoodScanPresented = true
                 } label: {
                     Label(tr("Scanner"), systemImage: "barcode.viewfinder")
-                        .font(.subheadline.weight(.bold))
-                        .foregroundStyle(.onAccent)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
-                        .padding(.horizontal, 8)
-                        .frame(maxWidth: .infinity, minHeight: 44)
-                        .background(Color.accentColor, in: Capsule())
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("daily-scan")
-                NavigationLink(value: HomeRoute.app(.nutrition)) {
-                    Text(mealsText)
                         .font(.subheadline.weight(.bold))
                         .foregroundStyle(Color.accentColor)
                         .lineLimit(1)
@@ -690,6 +706,17 @@ private struct NutritionDayTile: View {
                         .padding(.horizontal, 8)
                         .frame(maxWidth: .infinity, minHeight: 44)
                         .background(style.cristal.tintColor, in: Capsule())
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("daily-scan")
+                NavigationLink(value: HomeRoute.app(.nutrition)) {
+                    Text(mealsText)
+                        .font(.subheadline.weight(.bold))
+                        .foregroundStyle(Color.primary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .padding(.horizontal, 6)
+                        .frame(minHeight: 44)
                 }
                 .buttonStyle(.pressable)
             }
@@ -712,15 +739,15 @@ private struct NutritionDayTile: View {
     private func macro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String, incomplete: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack {
-                Text(name).font(.caption.weight(.semibold))
+                Text(name).font(.subheadline.weight(.semibold))
                 Spacer()
                 Text((incomplete ? NutritionTotals.minimumMarker : "") + (goal.map { "\(TF.int(eaten))/\(TF.int($0)) g" } ?? "\(TF.int(eaten)) g"))
-                    .font(.caption)
+                    .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .monospacedDigit()
             }
             if let goal {
-                BarView(progress: eaten / max(1, goal), color: style.cristal.category(hex), track: style.cristal.category(hex).opacity(0.15), height: 5)
+                BarView(progress: eaten / max(1, goal), color: style.cristal.category(hex), track: style.cristal.category(hex).opacity(0.15), height: 6)
             }
         }
     }
@@ -770,6 +797,10 @@ private struct WorkoutDayTile: View {
         DayCard(title: title, symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", route: .space(.fitness), badge: nowBadge) {
             switch workout.stage {
             case .planned:
+                Text(tr("Séance du jour"))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
                 Text(workout.name)
                     .font(.title3.weight(.bold))
                     .lineLimit(2)
@@ -778,12 +809,16 @@ private struct WorkoutDayTile: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer(minLength: 4)
-                actionButton(tr("Commencer")) {
+                actionButton(tr("Commencer"), symbol: "play.fill") {
                     model.update(\.fitness) { state in
                         if let routine = state.routine(for: Date()) { state.startSession(routine, at: Date()) }
                     }
                 }
             case let .inProgress(exercise, set, sets, reps, weight, restEndsAt):
+                Text(tr("Séance en cours"))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
                 Text(exercise)
                     .font(.headline)
                     .lineLimit(1)
@@ -799,7 +834,7 @@ private struct WorkoutDayTile: View {
                                 label: tr("Mettre le repos en pause")) { $0.pauseRest(at: Date()) }
                 }
                 Spacer(minLength: 4)
-                actionButton(tr("Série faite")) {
+                actionButton(tr("Série faite"), symbol: "checkmark") {
                     var accepted = false
                     model.update(\.fitness) { accepted = $0.completeNextSet(at: Date()) }
                     if accepted { Haptics.tap() }
@@ -843,17 +878,16 @@ private struct WorkoutDayTile: View {
         }
     }
 
+    /// The card to do right now: a session in progress, or a planned one from the afternoon on.
     private var nowBadge: String? {
-        if case .planned = workout.stage, isNow { return tr("Maintenant") }
-        return nil
+        isNow ? tr("Maintenant") : nil
     }
 
     private var title: String {
         switch workout.stage {
-        case .inProgress: tr("Séance en cours")
+        case .inProgress, .planned: tr("Séance")
         case .done: tr("Séance du jour")
         case .rest: tr("Sport")
-        case .planned: tr("Séance du jour")
         }
     }
 
@@ -879,9 +913,9 @@ private struct WorkoutDayTile: View {
         }
     }
 
-    private func actionButton(_ title: String, run: @escaping () -> Void) -> some View {
+    private func actionButton(_ title: String, symbol: String, run: @escaping () -> Void) -> some View {
         Button(action: run) {
-            Text(title)
+            Label(title, systemImage: symbol)
                 .font(.subheadline.weight(.bold))
                 .foregroundStyle(.onAccent)
                 .frame(maxWidth: .infinity, minHeight: 44)
@@ -955,6 +989,7 @@ private struct PlanningDayTile: View {
                 if isEmpty { emptyText }
                 WeekTimetable(days: week, hourHeight: 22)
             }
+            if compact { Spacer(minLength: 0) }
             weekLabel
                 .frame(minHeight: compact ? nil : 28)
         }
@@ -1034,9 +1069,16 @@ private struct HabitsDayTile: View {
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(Text(names))
+                    .padding(.top, 4)
                 count
+                Text(tr("faites aujourd'hui"))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                Spacer(minLength: 4)
                 if streak > 0 {
-                    streakText
+                    streakText(bold: true)
                 } else {
                     Text(names)
                         .font(.caption)
@@ -1049,7 +1091,7 @@ private struct HabitsDayTile: View {
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     count
                     Spacer(minLength: 8)
-                    if streak > 0 { streakText }
+                    if streak > 0 { streakText(bold: false) }
                 }
                 VStack(alignment: .leading, spacing: 7) {
                     ForEach(items.prefix(Self.limit)) { item in
@@ -1080,17 +1122,17 @@ private struct HabitsDayTile: View {
     private var count: some View {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
             Text("\(done)")
-                .font(.title.weight(.bold))
+                .font(.largeTitle.weight(.bold))
             Text("/\(items.count)")
-                .font(.headline)
+                .font(.title3.weight(.semibold))
                 .foregroundStyle(.secondary)
         }
     }
 
-    private var streakText: some View {
+    private func streakText(bold: Bool) -> some View {
         Text(tr("Série de \(Fmt.plural(streak, tr("jour"), tr("jours")))"))
-            .font(.caption)
-            .foregroundStyle(.secondary)
+            .font(bold ? Font.caption.weight(.semibold) : Font.caption)
+            .foregroundStyle(bold ? Color.primary : Color.secondary)
             .lineLimit(2)
     }
 
@@ -1149,7 +1191,7 @@ private struct StepsDayTile: View {
         DayCard(title: tr("Pas"), symbol: "figure.walk", colorHex: "12A4B5", route: .page(.fitnessActivity)) {
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text(Fmt.number(steps))
-                    .font(.title2.weight(.bold))
+                    .font(.title.weight(.bold))
                     .monospacedDigit()
                     .minimumScaleFactor(0.7)
                 if let goal {
@@ -1181,8 +1223,8 @@ private struct BudgetDayTile: View {
         DayCard(title: tr("Budget"), symbol: "creditcard.fill", colorHex: "2F8F7A", route: .space(.budget)) {
             if let perDayLeft {
                 Text(TF.money(perDayLeft, currency))
-                    .font(.title2.weight(.bold))
-                    .minimumScaleFactor(0.7)
+                    .font(.title.weight(.bold))
+                    .minimumScaleFactor(0.6)
                     .lineLimit(1)
                 Text(tr("à dépenser par jour d'ici la fin du mois"))
                     .font(.caption)
@@ -1195,9 +1237,10 @@ private struct BudgetDayTile: View {
             // What was really spent the last seven days: no curve while nothing was spent.
             let week = lastSevenDays
             if week.contains(where: { $0 > 0 }) {
+                Spacer(minLength: 4)
                 SparklineShape(values: week)
                     .stroke(style.cristal.category("2F8F7A"), style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
-                    .frame(height: 26)
+                    .frame(height: 40)
                     .accessibilityHidden(true)
             }
         }
@@ -1423,14 +1466,14 @@ private struct InviteCard: View {
                         .foregroundStyle(Color.accentColor)
                         .lineLimit(1)
                         .minimumScaleFactor(0.8)
+                        .padding(.horizontal, 14)
+                        .frame(minHeight: 36)
+                        .background(style.cristal.tintColor, in: Capsule())
                         .layoutPriority(1)
                 }
             }
             .padding(14)
-            .background {
-                RoundedRectangle(cornerRadius: style.cristal.radius, style: .continuous)
-                    .strokeBorder(Color.secondary.opacity(0.35), style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
-            }
+            .cristalPanel(radius: style.cristal.radius)
             .contentShape(Rectangle())
         }
         .buttonStyle(.pressable)
@@ -1451,12 +1494,9 @@ private struct AddCategoryCard: View {
         } label: {
             Image(systemName: "plus")
                 .font(.system(size: 24, weight: .medium))
-                .foregroundStyle(Color.secondary)
+                .foregroundStyle(Color.accentColor)
                 .frame(maxWidth: .infinity, minHeight: 64)
-                .background {
-                    RoundedRectangle(cornerRadius: style.cristal.radius, style: .continuous)
-                        .strokeBorder(Color.secondary.opacity(0.35), style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
-                }
+                .cristalPanel(radius: style.cristal.radius)
                 .contentShape(Rectangle())
         }
         .buttonStyle(.pressable)

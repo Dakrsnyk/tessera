@@ -11,7 +11,7 @@ struct MyInfoCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .firstTextBaseline) {
                 Text(tr("Mes informations"))
-                    .font(.title3.weight(.semibold))
+                    .font(.headline)
                     .accessibilityAddTraits(.isHeader)
                 Spacer()
                 NavigationLink(value: HomeRoute.info) {
@@ -95,7 +95,7 @@ struct MyInfoCard: View {
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
             .buttonStyle(.borderedProminent)
-            .buttonBorderShape(.roundedRectangle(radius: 12))
+            .buttonBorderShape(.capsule)
         }
         .card()
     }
@@ -121,14 +121,16 @@ struct CompletionRing: View {
 private struct AreaBadge: View {
     let area: InfoArea
     let missing: Int
+    @Environment(\.appStyle) private var style
 
     var body: some View {
+        let tint = CristalPalette.of(style.id).category(area.colorHex)
         VStack(spacing: 5) {
             Image(systemName: area.symbol)
                 .font(.system(size: 16, weight: .semibold))
-                .foregroundStyle(Color.readableInk(on: area.colorHex))
+                .foregroundStyle(tint)
                 .frame(width: 42, height: 42)
-                .background(Color(hex: area.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .background(tint.opacity(0.14), in: Circle())
             Text(area.title)
                 .font(.caption2.weight(.semibold))
                 .foregroundStyle(.primary)
@@ -217,16 +219,18 @@ struct MyInfoView: View {
 private struct AreaRow: View {
     let area: InfoArea
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let summaries = area.items.compactMap { item in model.summary(item) }
         let missing = model.missingItems(area.keyItems).count
+        let tint = CristalPalette.of(style.id).category(area.colorHex)
         HStack(spacing: 12) {
             Image(systemName: area.symbol)
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundStyle(Color.readableInk(on: area.colorHex))
+                .foregroundStyle(tint)
                 .frame(width: 32, height: 32)
-                .background(Color(hex: area.colorHex), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+                .background(tint.opacity(0.14), in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(area.title)
                     .font(.body.weight(.medium))

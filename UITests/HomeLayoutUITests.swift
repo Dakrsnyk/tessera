@@ -132,14 +132,14 @@ extension ProfileUITests {
             shot.lifetime = .keepAlways
             add(shot)
         }
-        /// Each moment the first view of the Nutrition card is away from the middle of the card (its dots are centred
-        /// under it): about zero when the view fills the card, 40 points when it stopped between two views.
+        /// Each moment the first view of the Nutrition card is in the middle of the page (the card spans it): about zero when
+        /// the view fills the card, 40 points when it stopped between two views. The dots (in its header) must be there too.
         var shifted: [String] = []
         func notePageShift(_ moment: String) {
             let page = app.descendants(matching: .any)["daily-nutrition"].firstMatch
             let dots = app.descendants(matching: .any)["daily-pager-nutrition-dots"].firstMatch
-            guard page.exists, dots.exists else { return shifted.append("\(moment) : carte introuvable") }
-            let shift = page.frame.midX - dots.frame.midX
+            guard page.exists, dots.exists else { return shifted.append("\(moment) : carte ou points introuvables") }
+            let shift = page.frame.midX - app.windows.firstMatch.frame.midX
             if abs(shift) > 8 { shifted.append("\(moment) : \(Int(shift.rounded())) pt") }
         }
 

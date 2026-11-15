@@ -88,6 +88,7 @@ struct DailyEditableCard<Content: View>: View {
     let handlers: DailyEditHandlers
     @ViewBuilder let content: () -> Content
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.appStyle) private var style
     @State private var wiggle = false
 
     var body: some View {
@@ -98,7 +99,8 @@ struct DailyEditableCard<Content: View>: View {
                 .overlay { if editing { Color.clear.contentShape(Rectangle()).onTapGesture {} } }
                 // Hold half a second then drag moves the card; a swipe scrolls Home (UIKit, see `DailyHoldToMove`).
                 .overlay { if editing, canMoveBefore || canMoveAfter { DailyHoldToMove(onMove: handlers.drag, onDrop: handlers.drop) } }
-                .overlay(alignment: .topTrailing) { sizeButton }
+                .overlay(alignment: .topTrailing) { grip }
+                .overlay(alignment: .bottom) { sizeButton }
                 .overlay(alignment: .topLeading) { removeButton }
                 .rotationEffect(.degrees(shaking ? (wiggle ? 0.9 : -0.9) : 0))
                 .animation(shaking ? .easeInOut(duration: 0.12 + Double(tile.id.utf8.count % 5) * 0.012).repeatForever(autoreverses: true) : nil, value: wiggle)
@@ -129,16 +131,35 @@ struct DailyEditableCard<Content: View>: View {
 
     private var shaking: Bool { editing && !isDragging && !reduceMotion }
 
-    /// « + » for a card that can be wider, « − » for one that can be narrower; none when it has one size.
+    /// The grip at the top right of a card that can be moved (the design): only a sign, the hold-and-drag is the card's.
+    @ViewBuilder private var grip: some View {
+        if editing, canMoveBefore || canMoveAfter {
+            Image(systemName: "line.3.horizontal")
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundStyle(Color.secondary)
+                .padding(14)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+        }
+    }
+
+    /// « + » for a card that can be wider, « − » for one that can be narrower (none when it has one size): a glass pill
+    /// at the bottom edge of the card, in a 44-point touch area.
     @ViewBuilder private var sizeButton: some View {
         if editing, canGrow || canShrink {
             Button {
                 if canGrow { handlers.grow() } else { handlers.shrink() }
             } label: {
-                pastille(canGrow ? "plus" : "minus")
+                Image(systemName: canGrow ? "plus" : "minus")
+                    .font(.system(size: 15, weight: .bold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 60, height: 32)
+                    .cristalGlass(in: Capsule())
+                    .frame(width: 68, height: 44)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .offset(x: 6, y: -6)
+            .offset(y: 22)
             .accessibilityLabel(Text(canGrow ? tr("Agrandir \(title)") : tr("Rétrécir \(title)")))
             .accessibilityIdentifier("daily-\(canGrow ? "grow" : "shrink")-\(tile.id)")
         }
@@ -148,23 +169,24 @@ struct DailyEditableCard<Content: View>: View {
     @ViewBuilder private var removeButton: some View {
         if editing {
             Button(action: handlers.remove) {
-                pastille("xmark", fill: Color(.systemGray))
+                pastille("xmark")
             }
             .buttonStyle(.plain)
-            .offset(x: -6, y: -6)
+            .offset(x: -8, y: -8)
             .accessibilityLabel(Text(tr("Retirer \(title) de Mon Quotidien")))
             .accessibilityIdentifier("daily-remove-\(tile.id)")
         }
     }
 
-    /// A round button 26 points wide in a 44-point touch area.
-    private func pastille(_ symbol: String, fill: Color = .accentColor) -> some View {
-        Image(systemName: symbol)
+    /// A round button 28 points wide in a 44-point touch area: the ink of the page with a cross in the page's color.
+    private func pastille(_ symbol: String) -> some View {
+        let background = CristalPalette.of(style.id).bgColor
+        return Image(systemName: symbol)
             .font(.system(size: 12, weight: .heavy))
-            .foregroundStyle(.white)
-            .frame(width: 26, height: 26)
-            .background(fill, in: Circle())
-            .overlay(Circle().stroke(.white.opacity(0.85), lineWidth: 1.5))
+            .foregroundStyle(background)
+            .frame(width: 28, height: 28)
+            .background(Color.primary, in: Circle())
+            .overlay(Circle().stroke(background, lineWidth: 2))
             .frame(width: 44, height: 44)
             .contentShape(Rectangle())
     }
