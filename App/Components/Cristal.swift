@@ -1,6 +1,6 @@
 import SwiftUI
 
-// Matières de la refonte « Cristal » (cristal.css : .gl, .pn, .dk). Pas encore utilisées par les écrans.
+// Matières de la refonte « Cristal » (cristal.css : .gl, .pn, .dk). Utilisées par `.card()`, `cristalScreen()` et l'Accueil.
 
 /// Fond d'un écran : la couleur `bg` de la graine et ses deux nappes (dégradés radiaux, sans flou, dessinés une fois).
 struct CristalBackdrop: View {
