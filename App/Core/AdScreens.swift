@@ -18,8 +18,6 @@ enum AdScreens {
             NavigationStack {
                 StudiesTimetablePage()
             }
-        case "ad-studio-tt-style":
-            AdStudioStyleView()
         // ATELIER:END
         default:
             // A name the HQ has not added: said on screen, so that a capture never passes for a real screen.
@@ -33,14 +31,5 @@ enum AdScreens {
 }
 
 // ATELIER:VIEWS:BEGIN
-private struct AdStudioStyleView: View {
-    var body: some View {
-        let adDesign = WidgetDesign(kind: .timetable, themeID: .dark, format: .large)
-        let adRequest = EditorRequest(design: adDesign, isNew: true, section: "style")
-        NavigationStack {
-            WidgetStudio(request: adRequest, isPushed: false, onClose: {})
-        }
-    }
-}
 // ATELIER:VIEWS:END
 #endif
