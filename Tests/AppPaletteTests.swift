@@ -10,8 +10,9 @@ final class AppPaletteTests: XCTestCase {
             (.aqua, "008C95", "45DDE0"), (.jade, "268577", "65D5BC"), (.pistachio, "718C42", "B8D987"),
             (.olive, "77752B", "C7C36A"), (.amber, "B86A13", "FFB454"), (.ruby, "C62845", "FF6B81"),
             (.rose, "C04472", "FF83B2"), (.orchid, "9854B8", "D5A0F5"), (.amethyst, "6841A5", "B69AFF"),
+            (.sable, "7B5D34", "E3C08A"), (.slate, "3D4756", "B4C0D0"),
         ]
-        XCTAssertEqual(AppStyle.all.count, 12)
+        XCTAssertEqual(AppStyle.all.count, 14)
         XCTAssertEqual(AppStyleID.allCases, expected.map(\.0))
         for (id, light, dark) in expected {
             let style = AppStyle.style(id)
@@ -44,6 +45,20 @@ final class AppPaletteTests: XCTestCase {
             XCTAssertGreaterThan(AppStyle.luminance(style.cardDark), AppStyle.luminance(style.screenDark), "\(style.id)")
         }
         XCTAssertNotEqual(AppStyle.style(.ruby).screenDark, AppStyle.style(.cobalt).screenDark)
+    }
+
+    func testNewColorsDoNotStealFormerNamesAndGraphiteIsNeutral() {
+        // "sand" and "graphite" saved before 2026-10-27 keep their closest color; the new colors have their own keys.
+        XCTAssertEqual(AppStyleID(named: "sand"), .amber)
+        XCTAssertEqual(AppStyleID(named: "graphite"), .sapphire)
+        XCTAssertEqual(AppStyleID(named: "sable"), .sable)
+        XCTAssertEqual(AppStyleID(named: "slate"), .slate)
+        // Graphite is a neutral: its dark background is much less saturated than Sapphire's.
+        func saturation(_ hex: String) -> Double {
+            let c = ColorMath.rgb(hex)
+            return max(c.r, c.g, c.b) - min(c.r, c.g, c.b)
+        }
+        XCTAssertLessThan(saturation(AppStyle.style(.slate).cardDark), saturation(AppStyle.style(.sapphire).cardDark))
     }
 
     func testTextOnAPastelAccentInDarkModeIsDark() {

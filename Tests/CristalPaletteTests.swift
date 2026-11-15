@@ -59,7 +59,7 @@ final class CristalPaletteTests: XCTestCase {
         for id in AppStyleID.allCases {
             let p = CristalPalette.of(id)
             XCTAssertEqual(p.washes.count, 2, "\(id) : deux nappes")
-            XCTAssertEqual(p.radius, ["lavande", "rose", "peche"].contains(p.seedID) ? 28 : 26, "\(id) : rayon")
+            XCTAssertEqual(p.radius, ["lavande", "rose", "peche"].contains(p.seedID) ? 28 : (p.seedID == "graphite" ? 22 : 26), "\(id) : rayon")
         }
         // Une saisie qui n'est pas un HEX (signe, longueur) se replie sur la couleur d'action au lieu d'être lue de travers.
         let p = CristalPalette.of(.sapphire)

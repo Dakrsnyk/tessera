@@ -1,7 +1,7 @@
-// cristal_reference.js : la formule des jetons Cristal pour les 12 couleurs de l'app, telle que le code Swift doit la reproduire
+// cristal_reference.js : la formule des jetons Cristal pour les couleurs de l'app (14 depuis Sable et Graphite), telle que le code Swift doit la reproduire
 // (Shared/Theme/CristalPalette.swift). Écrit Tests/CristalPaletteReference.swift, que les tests comparent au calcul Swift.
 // Usage, depuis la racine du dépôt : node docs/design/2026-11-15-cristal/cristal_reference.js
-// Vérifié par la CI le 2026-11-15 (Build 407) : le calcul Swift retombe sur cette table pour les 12 couleurs, clair et sombre.
+// Vérifié par la CI le 2026-11-15 (Build 407) : le calcul Swift retombe sur cette table pour les 12 couleurs d'alors, clair et sombre.
 // Après toute modification de cristal.js, relancer ce script et les tests logiques.
 //
 // Règles (décidées le 2026-11-15) :
@@ -16,12 +16,13 @@ const src = fs.readFileSync(path.join(here, 'cristal.js'), 'utf8');
 const doc = { head: { insertAdjacentHTML() {} }, documentElement: { style: {} }, body: { style: {} }, querySelectorAll() { return []; } };
 const { THEMES, tokens, C, CATS0 } = new Function('document', 'location', src + ';return {THEMES,tokens,C,CATS0};')(doc, { search: '' });
 
-// Les 12 couleurs de l'app (Shared/Theme/AppStyle.swift) : accent clair, accent sombre, graine, teinte principale de la graine ?
+// Les 14 couleurs de l'app (Shared/Theme/AppStyle.swift) : accent clair, accent sombre, graine, teinte principale de la graine ?
 const APP = [
   ['cobalt', '244FC1', '7094FF', 'ocean', false], ['sapphire', '245B8F', '68B5F5', 'saphir', true], ['iceBlue', '398FA8', '75DDF5', 'saphir', false],
   ['aqua', '008C95', '45DDE0', 'ocean', true], ['jade', '268577', '65D5BC', 'foret', true], ['pistachio', '718C42', 'B8D987', 'sauge', true],
   ['olive', '77752B', 'C7C36A', 'sauge', false], ['amber', 'B86A13', 'FFB454', 'peche', true], ['ruby', 'C62845', 'FF6B81', 'rose', false],
   ['rose', 'C04472', 'FF83B2', 'rose', true], ['orchid', '9854B8', 'D5A0F5', 'lavande', false], ['amethyst', '6841A5', 'B69AFF', 'lavande', true],
+  ['sable', '7B5D34', 'E3C08A', 'sable', true], ['slate', '3D4756', 'B4C0D0', 'graphite', true],   // Premium, ajoutées le 2026-11-15 (slate s'affiche « Graphite »)
 ];
 const KEYS = ['nut', 'fit', 'pla', 'hab', 'bud', 'pro', 'pas', 'prot', 'gluc', 'lip', 'travail', 'rdv'];
 // assombrit une couleur jusqu'à ce qu'elle se lise sur sa propre teinte (onglet actif, bouton teinté)
@@ -30,10 +31,11 @@ const fitSelf = (h) => { let k = 0; while (C.cr(h, C.mix(h, '#FFFFFF', .86)) < 4
 function palette([id, light, dark, seedId, main]) {
   const seed = THEMES.find((t) => t.id === seedId), primary = main ? seed.primary : fitSelf('#' + light);
   const L = tokens({ ...seed, primary });
-  const hue = C.hsl('#' + light).h, bg = C.fromHsl(hue, .45, .055), card = C.fromHsl(hue, .35, .115), dPrimary = '#' + dark;
-  const darkInk = C.fromHsl(hue, .5, .07), onPrimary = C.cr(darkInk, dPrimary) >= C.cr('#FFFFFF', dPrimary) ? darkInk : '#FFFFFF';   // l'encre la plus lisible (AppStyle met du blanc sur Cobalt et Rubis : 2,8:1)
+  const hue = C.hsl('#' + light).h, sat = seed.gray ? (seed.gray > .5 ? 0 : .22) : 1;   // teintes neutres : fonds presque sans couleur (AppStyle.palette, paramètre saturation)
+  const bg = C.fromHsl(hue, .45 * sat, .055), card = C.fromHsl(hue, .35 * sat, .115), dPrimary = '#' + dark;
+  const darkInk = C.fromHsl(hue, .5 * sat, .07), onPrimary = C.cr(darkInk, dPrimary) >= C.cr('#FFFFFF', dPrimary) ? darkInk : '#FFFFFF';   // l'encre la plus lisible (AppStyle met du blanc sur Cobalt et Rubis : 2,8:1)
   const ink = C.mix('#FFFFFF', dPrimary, .05), ink2 = C.mix(ink, card, .36);
-  const cat = (k) => C.lift(C.mix(C.mix(CATS0[k], primary, seed.cat || 0), '#FFFFFF', .16), card, 5.0);
+  const cat = (k) => { let c = C.mix(CATS0[k], primary, seed.cat || 0); if (seed.gray) c = C.mix(c, '#9AA3B0', seed.gray); return C.lift(C.mix(c, '#FFFFFF', .16), card, 5.0); };
   const D = { bg, na: C.mix(bg, seed.secondary, .32), nb: C.mix(bg, primary, .46), ink, ink2, rule: C.mix(card, '#FFFFFF', .10), rule2: C.mix(card, '#FFFFFF', .22),
     primary: dPrimary, onPrimary, secondary: C.lift(seed.secondary, card, 4.5), accent: C.lift(seed.accent, card, 4.5), tint: C.mix(card, dPrimary, .13), tint2: C.mix(card, dPrimary, .19),
     track: C.mix(card, '#FFFFFF', .13), grid: C.mix(card, '#FFFFFF', .07), go: C.mix(ink2, card, .35), dot: C.mix(card, '#FFFFFF', .24), panelSolid: card, sheet: C.mix(card, '#FFFFFF', .03),
@@ -49,7 +51,7 @@ const hx = (h) => h.replace('#', '').toUpperCase();
 const row = (p) => FIELDS.map((f) => `"${f}": "${hx(p[f])}"`).concat(KEYS.map((k) => `"cat.${k}": "${hx(p.cats[k])}"`), KEYS.map((k) => `"strong.${k}": "${hx(p.cs[k])}"`)).join(', ');
 const all = APP.map(palette);
 const out = `// Fichier écrit par docs/design/2026-11-15-cristal/cristal_reference.js : ne pas modifier à la main.
-// Les jetons Cristal attendus pour les 12 couleurs de l'app, en clair et en sombre, calculés par la formule des maquettes.
+// Les jetons Cristal attendus pour toutes les couleurs de l'app, en clair et en sombre, calculés par la formule des maquettes.
 // CristalPaletteTests compare le calcul Swift (Shared/Theme/CristalPalette.swift) à cette table.
 
 enum CristalPaletteReference {

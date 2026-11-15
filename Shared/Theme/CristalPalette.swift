@@ -27,32 +27,41 @@ struct CristalSeed {
     let track: String
     /// Part de la couleur principale mêlée aux couleurs de catégorie.
     let cat: Double
+    /// Part de gris mêlée aux catégories (teintes neutres), et couleur du panneau clair.
+    let gray: Double
+    let panel: String
     let radius: Double
     /// Nappe 1 (couleur `na`) puis nappe 2 (couleur `nb`).
     let washes: [CristalWash]
 
-    // Pour ajouter Sable ou Graphite plus tard : une graine ici, avec leur `gray` et leur `panel` (absents des 7 graines actuelles).
     static let saphir = CristalSeed(id: "saphir", primary: "245B8F", secondary: "398FA8", accent: "1E9EC0", bg: "EEF3FA", na: "BFEAF2", nb: "C9D8FB",
-                                    ink: "0B1220", ink2: "4E5A6B", rule: "D6DFEB", track: "D3DCE8", cat: 0, radius: 26,
+                                    ink: "0B1220", ink2: "4E5A6B", rule: "D6DFEB", track: "D3DCE8", cat: 0, gray: 0, panel: "FFFFFF", radius: 26,
                                     washes: [CristalWash(rx: 190, ry: 190, x: 333, y: 200), CristalWash(rx: 220, ry: 220, x: 30, y: 640)])
     static let lavande = CristalSeed(id: "lavande", primary: "6841A5", secondary: "9854B8", accent: "A765D6", bg: "F4F1FA", na: "DDD2F8", nb: "F6D6E8",
-                                     ink: "1A1330", ink2: "5A5270", rule: "E1DAEE", track: "DCD4EA", cat: 0.14, radius: 28,
+                                     ink: "1A1330", ink2: "5A5270", rule: "E1DAEE", track: "DCD4EA", cat: 0.14, gray: 0, panel: "FFFFFF", radius: 28,
                                      washes: [CristalWash(rx: 220, ry: 220, x: 50, y: 170), CristalWash(rx: 230, ry: 230, x: 390, y: 560)])
     static let rose = CristalSeed(id: "rose", primary: "AD3561", secondary: "E0705F", accent: "DD6654", bg: "FBF2F4", na: "F9D2DC", nb: "FFDDCC",
-                                  ink: "2A1420", ink2: "6A5560", rule: "F0DEE3", track: "EBD8DE", cat: 0.12, radius: 28,
+                                  ink: "2A1420", ink2: "6A5560", rule: "F0DEE3", track: "EBD8DE", cat: 0.12, gray: 0, panel: "FFFFFF", radius: 28,
                                   washes: [CristalWash(rx: 260, ry: 200, x: 196, y: 70), CristalWash(rx: 220, ry: 220, x: 360, y: 770)])
     static let sauge = CristalSeed(id: "sauge", primary: "4A6E39", secondary: "7DB79E", accent: "3E9E7C", bg: "F2F6EF", na: "D6E8CC", nb: "D2F0E4",
-                                   ink: "152015", ink2: "566355", rule: "DCE6D6", track: "D6E0CF", cat: 0.16, radius: 26,
+                                   ink: "152015", ink2: "566355", rule: "DCE6D6", track: "D6E0CF", cat: 0.16, gray: 0, panel: "FFFFFF", radius: 26,
                                    washes: [CristalWash(rx: 230, ry: 230, x: 30, y: 300), CristalWash(rx: 210, ry: 210, x: 380, y: 640)])
     static let ocean = CristalSeed(id: "ocean", primary: "00727B", secondary: "1F5FB8", accent: "14A9B8", bg: "ECF7F8", na: "B5E9EC", nb: "C5DAF8",
-                                   ink: "07191C", ink2: "48605F", rule: "D2E6E8", track: "CDE0E3", cat: 0.12, radius: 26,
+                                   ink: "07191C", ink2: "48605F", rule: "D2E6E8", track: "CDE0E3", cat: 0.12, gray: 0, panel: "FFFFFF", radius: 26,
                                    washes: [CristalWash(rx: 340, ry: 150, x: 196, y: 190), CristalWash(rx: 230, ry: 230, x: 50, y: 730)])
     static let peche = CristalSeed(id: "peche", primary: "A04C1B", secondary: "F0A56B", accent: "E07B32", bg: "FCF4EC", na: "FFDCC2", nb: "FFE9C6",
-                                   ink: "2A170B", ink2: "6B5747", rule: "F1E0D0", track: "EBDAC9", cat: 0.12, radius: 28,
+                                   ink: "2A170B", ink2: "6B5747", rule: "F1E0D0", track: "EBDAC9", cat: 0.12, gray: 0, panel: "FFFFFF", radius: 28,
                                    washes: [CristalWash(rx: 220, ry: 220, x: 330, y: 150), CristalWash(rx: 240, ry: 240, x: 80, y: 700)])
     static let foret = CristalSeed(id: "foret", primary: "1F6B5C", secondary: "6FA898", accent: "2B9A7C", bg: "EEF5F2", na: "BFE1D4", nb: "CEE8E6",
-                                   ink: "0C1C18", ink2: "4A5F59", rule: "D5E4DE", track: "CFDFD9", cat: 0.14, radius: 26,
+                                   ink: "0C1C18", ink2: "4A5F59", rule: "D5E4DE", track: "CFDFD9", cat: 0.14, gray: 0, panel: "FFFFFF", radius: 26,
                                    washes: [CristalWash(rx: 230, ry: 230, x: 60, y: 180), CristalWash(rx: 220, ry: 220, x: 360, y: 700)])
+    static let sable = CristalSeed(id: "sable", primary: "7B5D34", secondary: "C8A97A", accent: "B5813A", bg: "F8F4EC", na: "EFE0C4", nb: "F6E8D6",
+                                   ink: "241C10", ink2: "665A48", rule: "E8DFCF", track: "E3D9C7", cat: 0.18, gray: 0, panel: "FFFDF9", radius: 26,
+                                   washes: [CristalWash(rx: 230, ry: 230, x: 350, y: 120), CristalWash(rx: 210, ry: 210, x: 20, y: 540)])
+    // La nappe 1 de la maquette est un dégradé linéaire en biais : ici une large nappe radiale en haut à gauche.
+    static let graphite = CristalSeed(id: "graphite", primary: "3D4756", secondary: "8E99A8", accent: "56789F", bg: "F1F3F6", na: "DDE2E9", nb: "E3E8F0",
+                                      ink: "12161C", ink2: "545D6A", rule: "DCE0E7", track: "D5DAE2", cat: 0.10, gray: 0.30, panel: "FFFFFF", radius: 22,
+                                      washes: [CristalWash(rx: 300, ry: 260, x: 60, y: 60), CristalWash(rx: 250, ry: 250, x: 320, y: 800)])
 }
 
 /// Les jetons Cristal d'une couleur de l'app, en clair et en sombre (HEX sans dièse, majuscules).
@@ -66,6 +75,7 @@ struct CristalPalette {
     let washes: [CristalWash]
     /// Base des catégories mêlée à la couleur d'action.
     fileprivate let catMix: Double
+    fileprivate let catGray: Double
 
     static let categoryKeys = ["nut", "fit", "pla", "hab", "bud", "pro", "pas", "prot", "gluc", "lip", "travail", "rdv"]
     static let tokenNames = ["bg", "na", "nb", "ink", "ink2", "rule", "rule2", "primary", "onPrimary", "secondary", "accent", "tint", "tint2",
@@ -128,11 +138,16 @@ struct CristalPalette {
         if let known = Self.translated[key] { return known }
         let base = Self.baseCategory(hex) ?? primaryLight
         let mixed = Hx.mix(base, primaryLight, catMix)
-        let result = (light: Hx.fit(mixed, "FFFFFF", 3.2), dark: Hx.lift(Hx.mix(mixed, "FFFFFF", 0.16), card, 5.0))
+        // Teintes neutres : le gris est l'encre 2 éclaircie en clair, un gris fixe en sombre.
+        let mixedLight = catGray > 0 ? Hx.mix(mixed, Hx.mix(light["ink2"] ?? "000000", "FFFFFF", 0.15), catGray) : mixed
+        let mixedDark = catGray > 0 ? Hx.mix(mixed, Self.darkGray, catGray) : mixed
+        let result = (light: Hx.fit(mixedLight, light["panelSolid"] ?? "FFFFFF", 3.2), dark: Hx.lift(Hx.mix(mixedDark, "FFFFFF", 0.16), card, 5.0))
         Self.translated[key] = result
         return result
     }
 
+    /// Le gris mêlé aux catégories en sombre (tokensDark de cristal.js).
+    private static let darkGray = "9AA3B0"
     private static let translatedLock = NSLock()
     private static var translated: [String: (light: String, dark: String)] = [:]
 
@@ -181,6 +196,8 @@ struct CristalPalette {
         case .rose: return (.rose, true)
         case .orchid: return (.lavande, false)
         case .amethyst: return (.lavande, true)
+        case .sable: return (.sable, true)
+        case .slate: return (.graphite, true)
         }
     }
 
@@ -192,7 +209,9 @@ struct CristalPalette {
         let primary = main ? seed.primary : Hx.fitSelf(style.accentLight)
 
         // Clair (tokens de cristal.js ; panneau blanc).
-        let panel = "FFFFFF"
+        let panel = seed.panel
+        // Teintes neutres : le gris des catégories est l'encre 2 éclaircie (comme tokens() de cristal.js).
+        let gray = Hx.mix(seed.ink2, "FFFFFF", 0.15)
         var l: [String: String] = [
             "bg": seed.bg, "na": seed.na, "nb": seed.nb, "ink": seed.ink, "ink2": seed.ink2, "rule": seed.rule,
             "rule2": Hx.mix(seed.rule, seed.ink2, 0.35), "primary": primary, "onPrimary": "FFFFFF", "secondary": seed.secondary,
@@ -202,7 +221,9 @@ struct CristalPalette {
             "well": Hx.mix(seed.bg, seed.track, 0.35), "well2": Hx.mix(seed.bg, primary, 0.10), "ok": Hx.fit("23835F", panel, 4.5),
         ]
         for k in categoryKeys {
-            let c = Hx.fit(Hx.mix(cats0[k] ?? primary, primary, seed.cat), panel, k == "gluc" ? 3.0 : 3.2)
+            var base = Hx.mix(cats0[k] ?? primary, primary, seed.cat)
+            if seed.gray > 0 { base = Hx.mix(base, gray, seed.gray) }
+            let c = Hx.fit(base, panel, k == "gluc" ? 3.0 : 3.2)
             l["cat." + k] = c
             l["strong." + k] = Hx.fit(c, "FFFFFF", 4.6)
         }
@@ -210,7 +231,9 @@ struct CristalPalette {
         // Sombre : fond, carte et couleur d'action viennent d'AppStyle ; le reste suit cristal_reference.js.
         let bg = style.screenDark, card = style.cardDark, dPrimary = style.accentDark
         let hue = Hx.hue(style.accentLight)
-        let darkInk = Hx.fromHSL(hue, 0.5, 0.07)
+        // A neutral color keeps only part of its hue's saturation, as in AppStyle.palette (Graphite: 0.22).
+        let saturation = seed.gray > 0 ? (seed.gray > 0.5 ? 0 : 0.22) : 1
+        let darkInk = Hx.fromHSL(hue, 0.5 * saturation, 0.07)
         let onPrimary = Hx.contrast(darkInk, dPrimary) >= Hx.contrast("FFFFFF", dPrimary) ? darkInk : "FFFFFF"
         let ink = Hx.mix("FFFFFF", dPrimary, 0.05), ink2 = Hx.mix(ink, card, 0.36)
         var d: [String: String] = [
@@ -223,11 +246,13 @@ struct CristalPalette {
             "well2": Hx.mix(bg, dPrimary, 0.10), "ok": "5FD3A0",
         ]
         for k in categoryKeys {
-            let c = Hx.lift(Hx.mix(Hx.mix(cats0[k] ?? primary, primary, seed.cat), "FFFFFF", 0.16), card, 5.0)
+            var base = Hx.mix(cats0[k] ?? primary, primary, seed.cat)
+            if seed.gray > 0 { base = Hx.mix(base, darkGray, seed.gray) }
+            let c = Hx.lift(Hx.mix(base, "FFFFFF", 0.16), card, 5.0)
             d["cat." + k] = c
             d["strong." + k] = c
         }
-        return CristalPalette(light: l, dark: d, seedID: seed.id, radius: CGFloat(seed.radius), washes: seed.washes, catMix: seed.cat)
+        return CristalPalette(light: l, dark: d, seedID: seed.id, radius: CGFloat(seed.radius), washes: seed.washes, catMix: seed.cat, catGray: seed.gray)
     }
 
     /// Rapport de contraste WCAG entre deux HEX.

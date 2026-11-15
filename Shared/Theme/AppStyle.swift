@@ -36,17 +36,20 @@ struct AppStyle: Identifiable {
         palette(.rose, tr("Tendre et affirmé"), light: "C04472", dark: "FF83B2", fontDesign: .rounded),
         palette(.orchid, tr("Doux et raffiné"), light: "9854B8", dark: "D5A0F5", fontDesign: .rounded),
         palette(.amethyst, tr("Violet profond, pour les couche-tard"), light: "6841A5", dark: "B69AFF"),
+        palette(.sable, tr("Beige chaud, comme du papier"), light: "7B5D34", dark: "E3C08A"),
+        // A neutral color: its backgrounds keep only 22 % of the hue's saturation.
+        palette(.slate, tr("Gris ardoise, sobre et net"), light: "3D4756", dark: "B4C0D0", saturation: 0.22),
     ]
 
     private static func palette(_ id: AppStyleID, _ tagline: String, light: String, dark: String,
-                                fontDesign: Font.Design = .default) -> AppStyle {
+                                fontDesign: Font.Design = .default, saturation: Double = 1) -> AppStyle {
         let hue = hsl(light).h
         return AppStyle(id: id, tagline: tagline, accentLight: light, accentDark: dark,
-                        screenLight: hex(h: hue, s: 0.42, l: 0.945),
-                        screenDark: hex(h: hue, s: 0.45, l: 0.055),
-                        cardDark: hex(h: hue, s: 0.35, l: 0.115),
+                        screenLight: hex(h: hue, s: 0.42 * saturation, l: 0.945),
+                        screenDark: hex(h: hue, s: 0.45 * saturation, l: 0.055),
+                        cardDark: hex(h: hue, s: 0.35 * saturation, l: 0.115),
                         // A light accent in dark mode (pastel) carries dark text, a deep one carries white.
-                        inkOnDarkAccent: luminance(dark) > 0.35 ? hex(h: hue, s: 0.5, l: 0.07) : "FFFFFF",
+                        inkOnDarkAccent: luminance(dark) > 0.35 ? hex(h: hue, s: 0.5 * saturation, l: 0.07) : "FFFFFF",
                         fontDesign: fontDesign)
     }
 

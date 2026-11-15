@@ -36238,49 +36238,49 @@
         }
       }
     },
-    "Avec Premium, choisis la couleur d'Ardane parmi 12 et change-la quand tu veux. Saphir reste gratuit.": {
+    "Avec Premium, choisis la couleur d'Ardane parmi %@ et change-la quand tu veux. Saphir reste gratuit.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mit Premium wählst du die Farbe von Ardane aus 12 und änderst sie jederzeit. Saphir bleibt kostenlos."
+            "value": "Mit Premium wählst du die Farbe von Ardane aus %@ und änderst sie jederzeit. Saphir bleibt kostenlos."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "With Premium, pick Ardane's color from 12 and change it whenever you like. Sapphire stays free."
+            "value": "With Premium, pick Ardane's color from %@ and change it whenever you like. Sapphire stays free."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Con Premium, elige el color de Ardane entre 12 y cámbialo cuando quieras. Zafiro sigue siendo gratis."
+            "value": "Con Premium, elige el color de Ardane entre %@ y cámbialo cuando quieras. Zafiro sigue siendo gratis."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Avec Premium, choisis la couleur d'Ardane parmi 12 et change-la quand tu veux. Saphir reste gratuit."
+            "value": "Avec Premium, choisis la couleur d'Ardane parmi %@ et change-la quand tu veux. Saphir reste gratuit."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Con Premium scegli il colore di Ardane tra 12 e lo cambi quando vuoi. Zaffiro resta gratuito."
+            "value": "Con Premium scegli il colore di Ardane tra %@ e lo cambi quando vuoi. Zaffiro resta gratuito."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Premiumなら、Ardaneのカラーを12色から選んで、いつでも変更できます。サファイアは無料のままです。"
+            "value": "Premiumなら、Ardaneのカラーを%@色から選んで、いつでも変更できます。サファイアは無料のままです。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Com o Premium, escolha a cor do Ardane entre 12 e troque quando quiser. Safira continua grátis."
+            "value": "Com o Premium, escolha a cor do Ardane entre %@ e troque quando quiser. Safira continua grátis."
           }
         }
       }
@@ -38678,6 +38678,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bom trabalho"
+          }
+        }
+      }
+    },
+    "Beige chaud, comme du papier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warmes Beige, wie Papier"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warm beige, like paper"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beige cálido, como el papel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beige chaud, comme du papier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beige caldo, come la carta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "紙のような温かいベージュ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bege quente, como papel"
           }
         }
       }
@@ -104294,6 +104341,53 @@
         }
       }
     },
+    "Gris ardoise, sobre et net": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schiefergrau, schlicht und klar"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Slate gray, sober and crisp"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gris pizarra, sobrio y nítido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gris ardoise, sobre et net"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grigio ardesia, sobrio e netto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すっきり落ち着いたスレートグレー"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cinza ardósia, sóbrio e nítido"
+          }
+        }
+      }
+    },
     "Gris doux, chiffres noirs": {
       "extractionState": "manual",
       "localizations": {
@@ -126619,6 +126713,53 @@
         }
       }
     },
+    "Les %@ autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die anderen %@ App-Farben, Weltraum, Mars, Ozean, Aurora, Elegant, Synthwave…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The other %@ app colors, Space, Mars, Ocean, Aurora, Elegant, Synthwave…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los otros %@ colores de la app, Espacio, Marte, Océano, Aurora, Elegante, Synthwave…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les %@ autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli altri %@ colori dell'app, Spazio, Marte, Oceano, Aurora, Elegante, Synthwave…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほかの%@色のアプリカラー、スペース、マーズ、オーシャン、オーロラ、エレガント、シンセウェイブ…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As outras %@ cores do app, Espaço, Marte, Oceano, Aurora, Elegante, Synthwave…"
+          }
+        }
+      }
+    },
     "Les %@ catégories": {
       "extractionState": "manual",
       "localizations": {
@@ -126662,53 +126803,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "As %@ categorias"
-          }
-        }
-      }
-    },
-    "Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Die anderen 11 App-Farben, Weltraum, Mars, Ozean, Aurora, Elegant, Synthwave…"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The other 11 app colors, Space, Mars, Ocean, Aurora, Elegant, Synthwave…"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Los otros 11 colores de la app, Espacio, Marte, Océano, Aurora, Elegante, Synthwave…"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les 11 autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élégant, Synthwave…"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gli altri 11 colori dell'app, Spazio, Marte, Oceano, Aurora, Elegante, Synthwave…"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ほかの11色のアプリカラー、スペース、マーズ、オーシャン、オーロラ、エレガント、シンセウェイブ…"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As outras 11 cores do app, Espaço, Marte, Oceano, Aurora, Elegante, Synthwave…"
           }
         }
       }
@@ -196273,49 +196367,49 @@
         }
       }
     },
-    "Saphir est offert. Avec Premium, choisis parmi 12 couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
+    "Saphir est offert. Avec Premium, choisis parmi %@ couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saphir ist kostenlos. Mit Premium wählst du aus 12 Farben, jeweils hell und dunkel. Du kannst sie jederzeit in den Einstellungen ändern."
+            "value": "Saphir ist kostenlos. Mit Premium wählst du aus %@ Farben, jeweils hell und dunkel. Du kannst sie jederzeit in den Einstellungen ändern."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sapphire is free. With Premium, choose from 12 colors, each in light and dark. You can change it anytime in Settings."
+            "value": "Sapphire is free. With Premium, choose from %@ colors, each in light and dark. You can change it anytime in Settings."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zafiro es gratis. Con Premium, elige entre 12 colores, cada uno en claro y oscuro. Podrás cambiarlo en cualquier momento en Ajustes."
+            "value": "Zafiro es gratis. Con Premium, elige entre %@ colores, cada uno en claro y oscuro. Podrás cambiarlo en cualquier momento en Ajustes."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saphir est offert. Avec Premium, choisis parmi 12 couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."
+            "value": "Saphir est offert. Avec Premium, choisis parmi %@ couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Zaffiro è gratuito. Con Premium scegli tra 12 colori, ciascuno in chiaro e scuro. Potrai cambiarlo in qualsiasi momento in Impostazioni."
+            "value": "Zaffiro è gratuito. Con Premium scegli tra %@ colori, ciascuno in chiaro e scuro. Potrai cambiarlo in qualsiasi momento in Impostazioni."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "サファイアは無料です。Premiumなら12色から選べ、それぞれライトとダークに対応。設定でいつでも変更できます。"
+            "value": "サファイアは無料です。Premiumなら%@色から選べ、それぞれライトとダークに対応。設定でいつでも変更できます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Safira é grátis. Com o Premium, escolha entre 12 cores, cada uma em claro e escuro. Você pode trocar a qualquer momento em Ajustes."
+            "value": "Safira é grátis. Com o Premium, escolha entre %@ cores, cada uma em claro e escuro. Você pode trocar a qualquer momento em Ajustes."
           }
         }
       }

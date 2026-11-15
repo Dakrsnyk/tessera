@@ -70,7 +70,7 @@ struct AppStyleSwatch: View {
     }
 }
 
-/// The twelve colors, four per row. Picking one applies it right away; only Saphir is free, the others
+/// Every color of the app, four per row. Picking one applies it right away; only Saphir is free, the others
 /// carry a padlock and open the paywall for a free plan.
 struct AppStyleGrid: View {
     @Environment(AppModel.self) private var model
@@ -103,7 +103,7 @@ struct AppStyleGrid: View {
         PaywallContext(
             symbol: "paintpalette.fill",
             title: tr("Toutes les couleurs de l'app"),
-            detail: tr("Avec Premium, choisis la couleur d'Ardane parmi 12 et change-la quand tu veux. Saphir reste gratuit."),
+            detail: tr("Avec Premium, choisis la couleur d'Ardane parmi \(AppStyleID.allCases.count) et change-la quand tu veux. Saphir reste gratuit."),
             perk: .styles
         )
     }

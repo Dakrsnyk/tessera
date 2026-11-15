@@ -2,7 +2,8 @@ import Foundation
 
 /// The look of the app itself (not of the widgets): an accent and matching backgrounds.
 enum AppStyleID: String, Codable, CaseIterable, Identifiable {
-    case cobalt, sapphire, iceBlue, aqua, jade, pistachio, olive, amber, ruby, rose, orchid, amethyst
+    // « sable » and « slate » (shown as Graphite) are not keys of `formerNames`: a saved "sand" or "graphite" keeps its old meaning.
+    case cobalt, sapphire, iceBlue, aqua, jade, pistachio, olive, amber, ruby, rose, orchid, amethyst, sable, slate
     var id: String { rawValue }
 
     var title: String {
@@ -19,6 +20,8 @@ enum AppStyleID: String, Codable, CaseIterable, Identifiable {
         case .rose: tr("Rose")
         case .orchid: tr("Orchidée")
         case .amethyst: tr("Améthyste")
+        case .sable: tr("Sable")
+        case .slate: tr("Graphite")
         }
     }
 
@@ -40,7 +43,7 @@ enum AppStyleID: String, Codable, CaseIterable, Identifiable {
         self = AppStyleID(named: name) ?? .sapphire
     }
 
-    /// The only color of the free plan, and the default one. The eleven others are Premium.
+    /// The only color of the free plan, and the default one. The others are Premium.
     static let free: AppStyleID = .sapphire
 
     var isPremium: Bool { self != Self.free }
