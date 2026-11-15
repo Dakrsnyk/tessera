@@ -440,3 +440,6 @@ widget flight-m-forest kind=flight family=medium scale=3 theme=forest scheme=dar
 widget nextActivity-m-forest kind=nextActivity family=medium scale=3 theme=forest scheme=dark accent=34D399
 widget worldClock-m-forest kind=worldClock family=medium scale=3 theme=forest scheme=dark accent=34D399
 only quote-m-blossom hydration-s-blossom countdown-s-blossom birthday-s-blossom moonPhase-s-blossom mealsToday-m-blossom quote-m-soft tripCountdown-s-forest localTime-s-forest currency-s-forest tripProgress-s-forest hotel-s-forest flight-m-forest nextActivity-m-forest worldClock-m-forest
+# --- Demande cj-8e738099 du QG marketing
+widget priorities-m-light kind=priorities family=medium scale=3 theme=light
+only priorities-m-light
