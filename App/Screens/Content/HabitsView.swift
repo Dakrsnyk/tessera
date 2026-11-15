@@ -88,9 +88,10 @@ struct HabitRow: View {
     let onToggle: () -> Void
     let onEdit: () -> Void
     @Environment(\.horizontalSizeClass) private var sizeClass
+    @Environment(\.appStyle) private var style
 
     var body: some View {
-        let color = Color(hex: habit.colorHex)
+        let color = style.cristal.category(habit.colorHex)
         let done = habit.isDone(on: day)
         let streak = habit.streak()
         let rate = HabitHeatmap.rate(of: habit)
@@ -99,11 +100,11 @@ struct HabitRow: View {
             HStack(spacing: 2) {
                 Button(action: onToggle) {
                     ZStack {
-                        Circle().fill(done ? color : color.opacity(0.14))
+                        Circle().fill(done ? style.cristal.strong(habit.colorHex) : color.opacity(0.14))
                         Circle().strokeBorder(color.opacity(done ? 0 : 0.7), lineWidth: 1.5)
                         Image(systemName: "checkmark")
                             .font(.system(size: 13, weight: .heavy))
-                            .foregroundStyle(done ? Color.white : color.opacity(0.5))
+                            .foregroundStyle(done ? style.onAccent : color.opacity(0.5))
                     }
                     .frame(width: 30, height: 30)
                     .frame(width: 44, height: 44)
@@ -142,7 +143,7 @@ struct HabitRow: View {
             }
             .padding(.leading, 2)
             .padding(.trailing, 12)
-            .background(Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .background(style.cristal.wellColor, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
 
             HabitHeatmapGrid(columns: weeks, doneColor: color, emptyColor: color.opacity(0.16))
         }
@@ -153,6 +154,7 @@ struct HabitRow: View {
 struct HabitEditor: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.appStyle) private var style
     @State private var habit: Habit
     @State private var hasReminder: Bool
     @State private var reminderTime: Date
@@ -190,9 +192,9 @@ struct HabitEditor: View {
                             } label: {
                                 Image(systemName: symbol)
                                     .font(.system(size: 18, weight: .semibold))
-                                    .foregroundStyle(habit.symbol == symbol ? Color.readableInk(on: habit.colorHex) : Color(hex: habit.colorHex))
+                                    .foregroundStyle(habit.symbol == symbol ? style.onAccent : style.cristal.strong(habit.colorHex))
                                     .frame(width: 46, height: 46)
-                                    .background(Circle().fill(habit.symbol == symbol ? Color(hex: habit.colorHex) : Color(hex: habit.colorHex).opacity(0.12)))
+                                    .background(Circle().fill(habit.symbol == symbol ? style.cristal.strong(habit.colorHex) : style.cristal.category(habit.colorHex).opacity(0.13)))
                             }
                             .buttonStyle(.pressable)
                             .accessibilityLabel(tr("Icône \((Self.symbols.firstIndex(of: symbol) ?? 0) + 1)"))

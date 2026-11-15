@@ -57,8 +57,11 @@ struct PlanningCalendarCard: View {
     @Environment(AppModel.self) private var model
     @State private var pinch: CGFloat = 1
     @State private var isPinching = false
+    @Environment(\.appStyle) private var style
 
     private var accentHex: String { MiniApp.planning.colorHex }
+    /// The mini-app's action color (today's mark, the day picked) as Cristal translates it.
+    private var accent: Color { style.cristal.strong(accentHex) }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -111,11 +114,11 @@ struct PlanningCalendarCard: View {
         switch scale {
         case .day:
             WeekTimetable(days: [(day: day, items: Agenda.items(on: day, model: model, events: events))], selected: day, hourHeight: 52, hours: 6...22,
-                          onSelect: select, onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex), showsHeader: false)
+                          onSelect: select, onCreate: create, onOpen: onOpen, accent: accent, showsHeader: false)
         case .week:
             // Without a frame or strip of days: the selector at the top of the screen is the header of the columns.
             WeekTimetable(days: Agenda.week(containing: day, model: model, events: events), selected: day,
-                          onSelect: select, onCreate: create, onOpen: onOpen, accent: Color(hex: accentHex), showsHeader: false)
+                          onSelect: select, onCreate: create, onOpen: onOpen, accent: accent, showsHeader: false)
         case .month:
             monthGrid
         case .year:
@@ -124,7 +127,7 @@ struct PlanningCalendarCard: View {
     }
 
     private var monthGrid: some View {
-        PlanningMonthGrid(month: day, selected: day, accent: Color(hex: accentHex),
+        PlanningMonthGrid(month: day, selected: day, accent: accent,
                           items: { Agenda.items(on: $0, model: model, events: events) },
                           onPick: { date in
                               guard !isPinching else { return }
@@ -229,10 +232,11 @@ private struct MiniMonth: View {
     let marked: Set<String>
     let accentHex: String
     let isCurrent: Bool
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let cells = DateMath.monthGrid(for: month)
-        let accent = Color(hex: accentHex)
+        let accent = style.cristal.strong(accentHex)
         VStack(alignment: .leading, spacing: 4) {
             // The month's name in the accent for the current one, as in Calendar's year.
             Text(Fmt.month(month))
@@ -249,7 +253,7 @@ private struct MiniMonth: View {
                         Text("\(DateMath.calendar.component(.day, from: date))")
                             .font(.system(size: 8, weight: isMarked || isToday ? .bold : .regular))
                             .monospacedDigit()
-                            .foregroundStyle(isToday ? Color.white : (isMarked ? accent : Color.secondary))
+                            .foregroundStyle(isToday ? style.onAccent : (isMarked ? accent : Color.secondary))
                             .frame(maxWidth: .infinity, minHeight: 11)
                             .background(isToday ? accent : Color.clear, in: Circle())
                     } else {
@@ -261,7 +265,7 @@ private struct MiniMonth: View {
         }
         .padding(6)
         .frame(maxWidth: .infinity, alignment: .topLeading)
-        .background(isCurrent ? Color(hex: accentHex).opacity(0.1) : Color.clear, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .background(isCurrent ? style.cristal.category(accentHex).opacity(0.12) : Color.clear, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
         .contentShape(Rectangle())
     }
 }
@@ -276,6 +280,7 @@ struct PlanningMonthGrid: View {
     let accent: Color
     let items: (Date) -> [AgendaItem]
     let onPick: (Date) -> Void
+    @Environment(\.appStyle) private var style
 
     /// A cell of the grid; `inMonth` is false for the days of the weeks that straddle the month.
     struct MonthDay: Identifiable {
@@ -321,7 +326,7 @@ struct PlanningMonthGrid: View {
         let list = items(date)
         let isSelected = DateMath.isSameDay(date, selected)
         let isToday = DateMath.isSameDay(date, now)
-        let ink: Color = isToday ? Color.white : (entry.inMonth ? Color.primary : Color.secondary.opacity(0.7))
+        let ink: Color = isSelected ? style.onAccent : (entry.inMonth ? Color.primary : Color.secondary.opacity(0.7))
         return Button {
             onPick(date)
         } label: {
@@ -333,15 +338,15 @@ struct PlanningMonthGrid: View {
                     .minimumScaleFactor(0.7)
                     .foregroundStyle(ink)
                     .frame(width: 32, height: 32)
-                    .background(isToday ? accent : Color.clear, in: Circle())
+                    .background(isSelected ? accent : Color.clear, in: Circle())
                     .overlay {
-                        if isSelected {
+                        if isToday, !isSelected {
                             Circle().strokeBorder(accent, lineWidth: 2).frame(width: 36, height: 36)
                         }
                     }
                 HStack(spacing: 2) {
                     ForEach(Array(list.prefix(3).enumerated()), id: \.offset) { _, item in
-                        Circle().fill(Color(hex: item.colorHex)).frame(width: 5, height: 5)
+                        Circle().fill(style.cristal.category(item.colorHex)).frame(width: 5, height: 5)
                     }
                 }
                 .frame(height: 5)

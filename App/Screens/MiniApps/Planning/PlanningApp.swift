@@ -20,6 +20,7 @@ struct PlanningAppView: View {
     /// The sheet that reads a photo or a PDF of the timetable.
     @State private var importingSchedule = false
     @Environment(\.openURL) private var openURL
+    @Environment(\.appStyle) private var style
 
     private var accentHex: String { MiniApp.planning.colorHex }
 
@@ -68,7 +69,7 @@ struct PlanningAppView: View {
                     Label(tr("Ajouter les événements de mon calendrier"), systemImage: "calendar.badge.plus")
                         .font(.subheadline.weight(.semibold))
                 }
-                .tint(Color(hex: accentHex))
+                .tint(style.cristal.strong(accentHex))
             }
 
             // Between the planning and the tasks: a photo or a PDF of the timetable becomes classes of the schedule.
@@ -188,7 +189,7 @@ struct PlanningAppView: View {
         VStack(alignment: .leading, spacing: 2) {
             Text("\(count)")
                 .font(.title2.weight(.bold))
-                .foregroundStyle(hex.map { Color(hex: $0) } ?? Color.primary)
+                .foregroundStyle(hex.map { style.cristal.strong($0) } ?? Color.primary)
                 .monospacedDigit()
             Text(title).font(.caption).foregroundStyle(.secondary)
         }
@@ -260,7 +261,7 @@ struct PlanningAppView: View {
                     HStack(spacing: 12) {
                         Image(systemName: "plus.circle")
                             .font(.title3)
-                            .foregroundStyle(Color(hex: accentHex))
+                            .foregroundStyle(style.cristal.strong(accentHex))
                             .frame(width: 34, height: 34)
                         TextField(tr("Ajouter une priorité"), text: $newPriority)
                             .submitLabel(.done)
@@ -332,18 +333,19 @@ struct AgendaRow: View {
     let item: AgendaItem
     var isNow = false
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         HStack(alignment: .center, spacing: 12) {
             Text(item.timeText)
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(isNow ? Color(hex: item.colorHex) : .secondary)
+                .foregroundStyle(isNow ? style.cristal.strong(item.colorHex) : Color.secondary)
                 .monospacedDigit()
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
                 .frame(width: 54, alignment: .leading)
             RoundedRectangle(cornerRadius: 2)
-                .fill(Color(hex: item.colorHex))
+                .fill(style.cristal.category(item.colorHex))
                 .frame(width: 4, height: 34)
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.title)
@@ -363,14 +365,14 @@ struct AgendaRow: View {
                 } label: {
                     Image(systemName: done ? "checkmark.circle.fill" : "circle")
                         .font(.title3)
-                        .foregroundStyle(done ? Color(hex: item.colorHex) : .secondary)
+                        .foregroundStyle(done ? style.cristal.category(item.colorHex) : Color.secondary)
                 }
                 .buttonStyle(.pressable)
                 .accessibilityLabel(Text(done ? tr("Marquer comme à faire") : tr("Marquer comme fait")))
             } else {
                 Image(systemName: item.symbol)
                     .font(.caption)
-                    .foregroundStyle(Color(hex: item.colorHex))
+                    .foregroundStyle(style.cristal.category(item.colorHex))
             }
         }
         .padding(.vertical, 10)

@@ -127,6 +127,7 @@ struct PhotoQuoteDraft: Identifiable {
 struct PhotoQuoteEditor: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.appStyle) private var style
     @State private var design: WidgetDesign
     let isNew: Bool
     @State private var picked: [PhotosPickerItem] = []
@@ -145,6 +146,8 @@ struct PhotoQuoteEditor: View {
     }
 
     private var accentHex: String { MiniApp.photos.colorHex }
+    /// The mini-app's action color as Cristal translates it (fills, rings and text).
+    private var strong: Color { style.cristal.strong(accentHex) }
     private var format: WidgetFormat { design.format ?? .small }
 
     var body: some View {
@@ -164,7 +167,7 @@ struct PhotoQuoteEditor: View {
                     step(3, tr("Le nom")) {
                         TextField(tr("Nom du widget"), text: $design.name)
                             .padding(12)
-                            .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            .cristalPanel(radius: 12)
                             .accessibilityIdentifier("photos-name")
                     }
                     if !isNew {
@@ -237,9 +240,9 @@ struct PhotoQuoteEditor: View {
             HStack(spacing: 8) {
                 Text("\(number)")
                     .font(.caption.weight(.bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(style.onAccent)
                     .frame(width: 22, height: 22)
-                    .background(Color(hex: accentHex), in: Circle())
+                    .background(strong, in: Circle())
                 Text(title).font(.headline)
             }
             content()
@@ -257,18 +260,18 @@ struct PhotoQuoteEditor: View {
                 } label: {
                     VStack(spacing: 8) {
                         RoundedRectangle(cornerRadius: 6, style: .continuous)
-                            .strokeBorder(format == option ? Color(hex: accentHex) : Color.secondary.opacity(0.4), lineWidth: 2)
+                            .strokeBorder(format == option ? strong : Color.secondary.opacity(0.4), lineWidth: 2)
                             .frame(width: size.width / 8, height: size.height / 8)
                             .frame(height: 50)
                         Text(option.title)
                             .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(format == option ? Color(hex: accentHex) : Color.primary)
+                            .foregroundStyle(format == option ? strong : Color.primary)
                     }
                     .frame(maxWidth: .infinity, minHeight: 86)
                     .cristalPanel(radius: 14)
                     .overlay {
                         RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .strokeBorder(format == option ? Color(hex: accentHex) : .clear, lineWidth: 2)
+                            .strokeBorder(format == option ? strong : .clear, lineWidth: 2)
                     }
                 }
                 .buttonStyle(.pressable)
@@ -286,9 +289,9 @@ struct PhotoQuoteEditor: View {
             PhotosPicker(selection: $picked, maxSelectionCount: max(1, PhotoLayout.maxPhotos - photos.count), matching: .images) {
                 Label(photos.isEmpty ? tr("Choisir des photos") : tr("Ajouter des photos"), systemImage: "photo.badge.plus")
                     .font(.headline)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(style.onAccent)
                     .frame(maxWidth: .infinity, minHeight: 50)
-                    .background(Color(hex: accentHex), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .background(strong, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
             }
             .disabled(photos.count >= PhotoLayout.maxPhotos || isLoading)
             .accessibilityIdentifier("photos-pick")
@@ -404,11 +407,11 @@ struct PhotoQuoteEditor: View {
             TextField(tr("Ta citation"), text: Binding(get: { quote.wrappedValue.text }, set: { quote.wrappedValue.text = String($0.prefix(280)) }), axis: .vertical)
                 .lineLimit(3...8)
                 .padding(12)
-                .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .cristalPanel(radius: 12)
                 .accessibilityIdentifier("quote-text")
             TextField(tr("Auteur (facultatif)"), text: quote.author)
                 .padding(12)
-                .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .cristalPanel(radius: 12)
                 .accessibilityIdentifier("quote-author")
             Text(tr("Typographie")).font(.subheadline.weight(.semibold))
             Picker(tr("Typographie"), selection: quote.font) {
@@ -431,7 +434,7 @@ struct PhotoQuoteEditor: View {
                                     .background(Color(hex: palette.backgroundHex), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                                     .overlay {
                                         RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                            .strokeBorder(isOn ? Color(hex: accentHex) : Color.primary.opacity(0.1), lineWidth: isOn ? 2.5 : 1)
+                                            .strokeBorder(isOn ? strong : Color.primary.opacity(0.1), lineWidth: isOn ? 2.5 : 1)
                                     }
                                 Text(palette.name).font(.caption2).foregroundStyle(.secondary)
                             }
@@ -466,7 +469,7 @@ struct PhotoQuoteEditor: View {
                 .font(.subheadline.weight(.semibold))
             }
         }
-        .tint(Color(hex: accentHex))
+        .tint(strong)
     }
 
     /// A photo behind the quote, copied and framed like a photo widget's (it is the widget's only photo), under
@@ -526,7 +529,7 @@ struct PhotoQuoteEditor: View {
                     }
                     .font(.subheadline.weight(.medium))
                     .padding(12)
-                    .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .cristalPanel(radius: 12)
                 }
                 .buttonStyle(.pressable)
                 .disabled(isLoading)

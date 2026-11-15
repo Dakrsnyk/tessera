@@ -7,6 +7,7 @@ import SwiftUI
 /// another: events that happen once show in their week, a weekly one cancelled once shows crossed out.
 struct StudiesTimetablePage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: StudiesSheet?
     @State private var weekday = min(5, FitnessMath.isoWeekday(Date()))
     /// 0: this week, 1: the next one, -1: the last one…
@@ -37,7 +38,7 @@ struct StudiesTimetablePage: View {
                                actionTitle: tr("Ajouter un événement")) {
                     sheet = .slotOn(Studies.newSlot(state), day)
                 }
-                .tint(Color(hex: Studies.accentHex))
+                .tint(style.cristal.strong(Studies.accentHex))
             } else {
                 weekSwitcher(week)
                 TimetableGrid(state: state, week: week, selected: $weekday) { sheet = .slotOn($0.base, $0.start) }
@@ -102,7 +103,7 @@ struct StudiesTimetablePage: View {
             .accessibilityLabel(Text(tr("Semaine suivante")))
             .accessibilityIdentifier("timetable-next-week")
         }
-        .tint(Color(hex: Studies.accentHex))
+        .tint(style.cristal.strong(Studies.accentHex))
         .card(padding: 6)
     }
 
@@ -175,6 +176,7 @@ struct TimetableGrid: View {
     let week: [Date]
     @Binding var selected: Int
     let onTap: (StudentMath.ClassOccurrence) -> Void
+    @Environment(\.appStyle) private var style
 
     private let perMinute: CGFloat = 0.8
     private let letters = ["L", "M", "M", "J", "V", "S", "D"]
@@ -204,9 +206,9 @@ struct TimetableGrid: View {
                                 .font(.subheadline.weight(.bold))
                                 .monospacedDigit()
                         }
-                        .foregroundStyle(day == selected ? Color.white : (day == today ? Color(hex: Studies.accentHex) : Color.primary))
+                        .foregroundStyle(day == selected ? style.onAccent : (day == today ? style.cristal.strong(Studies.accentHex) : Color.primary))
                         .frame(maxWidth: .infinity, minHeight: 38)
-                        .background(day == selected ? Color(hex: Studies.accentHex) : Color.clear, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .background(day == selected ? style.cristal.strong(Studies.accentHex) : Color.clear, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     }
                     .buttonStyle(.pressable)
                 }
@@ -230,7 +232,7 @@ struct TimetableGrid: View {
                 ZStack(alignment: .topLeading) {
                     ForEach(Array(stride(from: first, through: last, by: 60)), id: \.self) { minute in
                         Rectangle()
-                            .fill(Color.primary.opacity(0.08))
+                            .fill(style.cristal.ruleColor)
                             .frame(height: 0.5)
                             .offset(y: CGFloat(minute - first) * perMinute)
                     }
@@ -246,19 +248,23 @@ struct TimetableGrid: View {
     private func column(day: Int, entries: [StudentMath.ClassOccurrence], first: Int, height: CGFloat) -> some View {
         ZStack(alignment: .top) {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .fill(day == selected ? Color(hex: Studies.accentHex).opacity(0.07) : Color.primary.opacity(0.03))
+                .fill(day == selected ? style.cristal.category(Studies.accentHex).opacity(0.08) : style.cristal.wellColor.opacity(0.5))
             ForEach(entries, id: \.slot.id) { entry in
                 let slot = entry.slot
                 let hex = state.colorHex(of: slot)
                 Button { onTap(entry) } label: {
                     Text(TF.shortName(state.title(of: slot), words: 1))
                         .font(.system(size: 9, weight: .semibold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(style.cristal.strong(hex))
                         .lineLimit(2)
                         .minimumScaleFactor(0.7)
-                        .padding(3)
+                        .padding(.leading, 6)
+                        .padding(.vertical, 3)
+                        .padding(.trailing, 2)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        .background(Color(hex: hex), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                        .background(style.cristal.category(hex).opacity(0.2), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+                        .overlay(alignment: .leading) { Rectangle().fill(style.cristal.category(hex)).frame(width: 3) }
+                        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
                 }
                 .buttonStyle(.pressable)
                 .opacity(entry.isCancelled ? 0.35 : 1)
@@ -275,6 +281,7 @@ struct TimetableGrid: View {
 
 struct StudiesCoursesPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: StudiesSheet?
     /// Courses swiped to delete, once confirmed (their slots leave the timetable).
     @State private var deletingCourses: [UUID] = []
@@ -311,7 +318,7 @@ struct StudiesCoursesPage: View {
             .environment(\.locale, Fmt.locale)
         }
         .styledList()
-        .tint(Color(hex: Studies.accentHex))
+        .tint(style.cristal.strong(Studies.accentHex))
         .navigationTitle(tr("Cours"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
@@ -338,7 +345,7 @@ struct StudiesCoursesPage: View {
         let average = StudentMath.courseAverage(state, course: course.id)
         let hours = Double(StudentMath.weeklyClassMinutes(state, course: course.id)) / 60
         return HStack(spacing: 12) {
-            RoundedRectangle(cornerRadius: 3).fill(Color(hex: course.colorHex)).frame(width: 6, height: 38)
+            RoundedRectangle(cornerRadius: 3).fill(style.cristal.category(course.colorHex)).frame(width: 6, height: 38)
             VStack(alignment: .leading, spacing: 2) {
                 Text(course.name).font(.body.weight(.medium))
                 Text(courseDetail(course, hours: hours))
@@ -357,6 +364,7 @@ struct StudiesCoursesPage: View {
 struct StudiesCoursePage: View {
     let courseID: UUID
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @Environment(Router.self) private var router
     @State private var sheet: StudiesSheet?
     @State private var target = 80.0
@@ -517,7 +525,7 @@ struct StudiesCoursePage: View {
                 Button(action: onAdd) {
                     Label(add, systemImage: "plus.circle.fill")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: Studies.accentHex))
+                        .foregroundStyle(style.cristal.strong(Studies.accentHex))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 12)
                         .contentShape(Rectangle())
@@ -534,6 +542,7 @@ struct StudiesCoursePage: View {
 
 struct StudiesExamsPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: StudiesSheet?
 
     var body: some View {
@@ -597,6 +606,7 @@ struct StudiesExamsPage: View {
 
 struct StudiesAssignmentsPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: StudiesSheet?
 
     var body: some View {
@@ -615,7 +625,7 @@ struct StudiesAssignmentsPage: View {
             section(tr("Rendus"), Array(done.prefix(20)), state: state, now: now)
         }
         .styledList()
-        .tint(Color(hex: Studies.accentHex))
+        .tint(style.cristal.strong(Studies.accentHex))
         .navigationTitle(tr("Devoirs"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
@@ -641,6 +651,7 @@ struct StudiesAssignmentsPage: View {
 
 struct StudiesGradesPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: StudiesSheet?
 
     var body: some View {
@@ -651,7 +662,7 @@ struct StudiesGradesPage: View {
                     Text(tr("Moyenne générale")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
                     Text("\(TF.decimal(overall, 1)) %")
                         .font(.system(size: 44, weight: .bold, design: .rounded))
-                        .foregroundStyle(Color(hex: Studies.accentHex))
+                        .foregroundStyle(style.cristal.strong(Studies.accentHex))
                         .monospacedDigit()
                     Text(tr("Pondérée par les crédits de chaque cours.")).font(.caption).foregroundStyle(.secondary)
                 }
@@ -725,7 +736,7 @@ struct StudiesGradesPage: View {
                 Text("\(TF.decimal(average, 1)) %").font(.subheadline.weight(.bold)).monospacedDigit()
                 Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
             }
-            ProgressView(value: min(100, average), total: 100).tint(Color(hex: course.colorHex))
+            ProgressView(value: min(100, average), total: 100).tint(style.cristal.category(course.colorHex))
                 .accessibilityLabel(course.name)
                 .accessibilityValue("\(TF.decimal(average, 1)) %")
             Text(tr("\(TF.int(evaluated)) % de la note finale évalué")).font(.caption).foregroundStyle(.secondary)
@@ -740,6 +751,7 @@ struct StudiesGradesPage: View {
 /// Study time (timer, quick add, the week and the last weeks) and the flashcards to review.
 struct StudiesRevisionPage: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
     @State private var sheet: StudiesSheet?
     @State private var revealed = false
     @State private var openDeck: String?
@@ -771,10 +783,10 @@ struct StudiesRevisionPage: View {
                 ProgressView(value: min(studied, state.weeklyStudyGoalHours * 60), total: max(1, state.weeklyStudyGoalHours * 60))
                     .accessibilityLabel(tr("Cette semaine"))
                     .accessibilityValue(tr("\(Fmt.minutes(studied)) sur \(Fmt.hours(state.weeklyStudyGoalHours))"))
-                    .tint(Color(hex: accentHex))
+                    .tint(style.cristal.category(accentHex))
                 Chart(points) { point in
                     BarMark(x: .value("Jour", point.date, unit: .day), y: .value("Minutes", point.value))
-                        .foregroundStyle(Color(hex: accentHex).gradient)
+                        .foregroundStyle(style.cristal.category(accentHex).gradient)
                         .cornerRadius(3)
                 }
                 .accessibilityLabel(tr("Cette semaine"))
@@ -791,7 +803,7 @@ struct StudiesRevisionPage: View {
                             model.update(\.student) { $0.logStudy(minutes: minutes, courseID: nil) }
                         }
                         .buttonStyle(.bordered)
-                        .tint(Color(hex: accentHex))
+                        .tint(style.cristal.strong(accentHex))
                     }
                 }
                 .accessibilityIdentifier("revision-quick-add")
@@ -812,7 +824,7 @@ struct StudiesRevisionPage: View {
                 Chart {
                     ForEach(history) { week in
                         BarMark(x: .value("Semaine", week.start, unit: .weekOfYear), y: .value("Heures", Double(week.minutes) / 60))
-                            .foregroundStyle(Color(hex: accentHex).gradient)
+                            .foregroundStyle(style.cristal.category(accentHex).gradient)
                             .cornerRadius(3)
                     }
                     RuleMark(y: .value("Objectif", state.weeklyStudyGoalHours))
@@ -867,7 +879,7 @@ struct StudiesRevisionPage: View {
                 Button { sheet = .card(Flashcard(deck: openDeck ?? decks.first?.name ?? tr("Général"), front: "", back: "")) } label: {
                     Label(tr("Nouvelle fiche"), systemImage: "plus.circle.fill")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: accentHex))
+                        .foregroundStyle(style.cristal.strong(accentHex))
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.vertical, 12)
                         .contentShape(Rectangle())
@@ -883,7 +895,7 @@ struct StudiesRevisionPage: View {
 
     private func review(_ card: Flashcard) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text(card.deck.uppercased()).font(.caption2.weight(.bold)).foregroundStyle(Color(hex: "8C6CFF"))
+            Text(card.deck.uppercased()).font(.caption2.weight(.bold)).foregroundStyle(style.cristal.strong("8C6CFF"))
             Text(card.front).font(.title3.weight(.bold)).fixedSize(horizontal: false, vertical: true)
             if revealed {
                 Text(card.back).font(.body).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)

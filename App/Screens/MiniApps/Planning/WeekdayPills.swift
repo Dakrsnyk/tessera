@@ -4,6 +4,7 @@ import SwiftUI
 /// says what they mean under them. No pill on = the event happens once.
 struct WeekdayPills: View {
     @Binding var days: [Int]
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -18,9 +19,9 @@ struct WeekdayPills: View {
                     } label: {
                         Text(WeekdayRepeat.initial(of: weekday))
                             .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(isOn ? Color.white : Color.primary)
+                            .foregroundStyle(isOn ? style.onAccent : Color.primary)
                             .frame(maxWidth: .infinity, minHeight: 36)
-                            .background(isOn ? Color.accentColor : Color.secondary.opacity(0.14), in: Circle())
+                            .background(isOn ? Color.accentColor : style.cristal.tintColor, in: Circle())
                     }
                     .buttonStyle(.borderless)
                     .accessibilityLabel(Text(WeekdayRepeat.name(of: weekday)))

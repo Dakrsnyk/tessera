@@ -53,7 +53,10 @@ struct WeekCard<Content: View>: View {
         self.content = content
     }
 
-    private var accent: Color { Color(hex: colorHex) }
+    @Environment(\.appStyle) private var style
+    /// The mini-app's color as a Cristal category (rings, fills), and its strong version (text, filled rounds).
+    private var accent: Color { style.cristal.category(colorHex) }
+    private var strong: Color { style.cristal.strong(colorHex) }
 
     var body: some View {
         let now = Date()
@@ -83,7 +86,7 @@ struct WeekCard<Content: View>: View {
                         .minimumScaleFactor(0.8)
                 }
             }
-            .tint(accent)
+            .tint(strong)
             VStack(alignment: .leading, spacing: 14) {
                 HStack(spacing: 0) {
                     ForEach(week, id: \.self) { date in
@@ -122,11 +125,11 @@ struct WeekCard<Content: View>: View {
             VStack(spacing: 6) {
                 Text(String(Fmt.weekday(date).prefix(1)).uppercased())
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(isSelected || isToday ? accent : .secondary)
+                    .foregroundStyle(isSelected || isToday ? strong : Color.secondary)
                 ZStack {
                     if state.isDone {
-                        Circle().fill(accent)
-                        Image(systemName: "checkmark").font(.caption.weight(.bold)).foregroundStyle(Color.white)
+                        Circle().fill(strong)
+                        Image(systemName: "checkmark").font(.caption.weight(.bold)).foregroundStyle(style.onAccent)
                     } else if state.isCaughtUp {
                         Circle().fill(accent.opacity(0.16))
                         Circle().strokeBorder(accent.opacity(0.7), lineWidth: 2)
@@ -195,7 +198,7 @@ struct WeekTimetable: View {
     /// False: no strip of days above the table, because a week selector right above it plays that part (see
     /// `fullLeadingInset`). The band of what has no time stays, and a touch on a column picks its day (`onSelect`).
     let showsHeader: Bool
-    @Environment(\.colorScheme) private var scheme
+    @Environment(\.appStyle) private var style
 
     init(days: [(day: Date, items: [AgendaItem])], selected: Date? = nil, compact: Bool = false, hourHeight: CGFloat? = nil,
          hours: ClosedRange<Int> = 8...18, onSelect: ((Date) -> Void)? = nil, onCreate: ((Date, Int) -> Void)? = nil,
@@ -212,8 +215,9 @@ struct WeekTimetable: View {
         self.showsHeader = showsHeader
     }
 
-    /// A color written over its own translucent tint (Calendar's blocks): darker on a light screen, lighter on a dark one.
-    private var inkShift: Double { scheme == .dark ? 0.12 : -0.28 }
+    /// An event's color as a Cristal category (bars, tint), and its strong version for the text written over the tint.
+    private func category(_ hex: String) -> Color { style.cristal.category(hex) }
+    private func strong(_ hex: String) -> Color { style.cristal.strong(hex) }
 
     /// The hours column and the gap between columns of the full table.
     private static let fullGutter: CGFloat = 28
@@ -221,6 +225,9 @@ struct WeekTimetable: View {
     /// Where the first day column of the full table starts: the `leadingInset` a week selector placed right
     /// above it needs, so that its seven days sit exactly over the seven columns (same side margins).
     static let fullLeadingInset: CGFloat = fullGutter + fullSpacing
+
+    /// The « now » line: the alert color of the app, translated.
+    private var nowColor: Color { style.cristal.category(MiniStyle.alertHex) }
 
     private var gutter: CGFloat { compact ? 16 : Self.fullGutter }
     private var spacing: CGFloat { compact ? 2 : Self.fullSpacing }
@@ -266,7 +273,7 @@ struct WeekTimetable: View {
                 ZStack(alignment: .topLeading) {
                     ForEach(Array(stride(from: first, through: last, by: 60)), id: \.self) { minute in
                         Rectangle()
-                            .fill(Color.primary.opacity(compact ? 0.07 : 0.12))
+                            .fill(style.cristal.ruleColor.opacity(compact ? 0.6 : 1))
                             .frame(height: 0.5)
                             .offset(y: CGFloat(minute - first) / 60 * hourHeight)
                     }
@@ -316,7 +323,7 @@ struct WeekTimetable: View {
                     .font(.caption.weight(.bold))
                     .monospacedDigit()
             }
-            .foregroundStyle(isSelected ? Color.white : (isToday ? accent : Color.primary))
+            .foregroundStyle(isSelected ? style.onAccent : (isToday ? accent : Color.primary))
             .frame(maxWidth: .infinity, minHeight: 28)
             .background(isSelected ? accent : (isToday ? accent.opacity(0.12) : Color.clear),
                         in: RoundedRectangle(cornerRadius: 7, style: .continuous))
@@ -333,7 +340,7 @@ struct WeekTimetable: View {
                     .monospacedDigit()
                     .lineLimit(1)
                     .minimumScaleFactor(0.6)
-                    .foregroundStyle(isToday ? Color.white : Color.primary)
+                    .foregroundStyle(isToday ? style.onAccent : Color.primary)
                     .frame(width: 30, height: 30)
                     .background(circle, in: Circle())
             }
@@ -349,16 +356,15 @@ struct WeekTimetable: View {
             ForEach(shown) { item in
                 Group {
                     if compact {
-                        Capsule().fill(Color(hex: item.colorHex)).frame(height: 4)
+                        Capsule().fill(category(item.colorHex)).frame(height: 4)
                     } else {
-                        let color = Color(hex: item.colorHex)
+                        let color = category(item.colorHex)
                         let shape = RoundedRectangle(cornerRadius: 4, style: .continuous)
                         // A touch opens it (a task, a workout of the day) like a block with a time.
                         Button { onOpen?(item) } label: {
                             Text(item.title)
                                 .font(.system(size: 9, weight: .semibold))
-                                .foregroundStyle(color)
-                                .brightness(inkShift)
+                                .foregroundStyle(strong(item.colorHex))
                                 .lineLimit(1)
                                 .padding(.leading, 5)
                                 .padding(.trailing, 2)
@@ -417,7 +423,7 @@ struct WeekTimetable: View {
                 }
                 if !compact, days.count > 1 {
                     Rectangle()
-                        .fill(Color.primary.opacity(0.1))
+                        .fill(style.cristal.ruleColor)
                         .frame(width: 0.5)
                         .frame(maxHeight: .infinity)
                         .allowsHitTesting(false)
@@ -445,15 +451,15 @@ struct WeekTimetable: View {
                         let y: CGFloat = CGFloat(minute - first) / 60 * hourHeight
                         if compact {
                             Rectangle()
-                                .fill(Color.red)
+                                .fill(nowColor)
                                 .frame(height: 1)
                                 .offset(y: y)
                                 .allowsHitTesting(false)
                         } else {
                             // A dot at the start of the line, as in Calendar.
                             HStack(spacing: 0) {
-                                Circle().fill(Color.red).frame(width: 7, height: 7)
-                                Rectangle().fill(Color.red).frame(height: 1.5)
+                                Circle().fill(nowColor).frame(width: 7, height: 7)
+                                Rectangle().fill(nowColor).frame(height: 1.5)
                             }
                             .frame(height: 7)
                             .offset(y: y - 3.5)
@@ -472,10 +478,10 @@ struct WeekTimetable: View {
     private func blockView(_ block: Placed, height: CGFloat) -> some View {
         let shape = RoundedRectangle(cornerRadius: compact ? 2.5 : 5, style: .continuous)
         if compact {
-            shape.fill(Color(hex: block.item.colorHex))
+            shape.fill(category(block.item.colorHex))
                 .opacity(block.item.isDone == true ? 0.45 : 1)
         } else {
-            let color = Color(hex: block.item.colorHex)
+            let color = category(block.item.colorHex)
             let minutes = block.end - block.start
             let lines = Self.lines(height: height, minutes: minutes, hasPlace: block.item.place != nil)
             // Without its place, the block as before the places.
@@ -496,8 +502,7 @@ struct WeekTimetable: View {
                 }
             }
             // Calendar's block: a soft tint of the color, a thin solid bar on the left, the text in the color.
-            .foregroundStyle(color)
-            .brightness(inkShift)
+            .foregroundStyle(strong(block.item.colorHex))
             .padding(.leading, 6)
             .padding(.trailing, 2)
             .padding(.vertical, 2)

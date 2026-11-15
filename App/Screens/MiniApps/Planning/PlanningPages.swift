@@ -24,6 +24,7 @@ struct PlanningTasksPage: View {
     @State private var quickTitle = ""
     /// The day shown by the « Aujourd'hui » filter: any day, before or after.
     @State private var day = Date()
+    @Environment(\.appStyle) private var style
 
     private var accentHex: String { MiniApp.planning.colorHex }
 
@@ -42,7 +43,7 @@ struct PlanningTasksPage: View {
             }
             Section {
                 HStack(spacing: 12) {
-                    Image(systemName: "plus.circle.fill").font(.title3).foregroundStyle(Color(hex: accentHex))
+                    Image(systemName: "plus.circle.fill").font(.title3).foregroundStyle(style.cristal.strong(accentHex))
                     TextField(tr("Ajouter une tâche"), text: $quickTitle)
                         .submitLabel(.done)
                         .onSubmit(addQuick)
@@ -82,7 +83,7 @@ struct PlanningTasksPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: accentHex))
+        .tint(style.cristal.strong(accentHex))
         .navigationTitle(tr("Tâches"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $editing) { TaskEditor(task: $0) }
@@ -118,14 +119,15 @@ struct TaskRow: View {
     let task: TaskItem
     let onEdit: () -> Void
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         HStack(spacing: 12) {
             CheckCircleButton(
                 isDone: task.isDone,
                 label: task.title,
-                doneColor: Color(hex: MiniApp.planning.colorHex),
-                todoColor: Color(hex: task.priority.colorHex ?? "8A8A8E")
+                doneColor: style.cristal.category(MiniApp.planning.colorHex),
+                todoColor: style.cristal.category(task.priority.colorHex ?? "8A8A8E")
             ) {
                 Haptics.tap()
                 withAnimation { model.updateContent { $0.toggleTask(task.id) } }
@@ -140,7 +142,7 @@ struct TaskRow: View {
                     if let detail {
                         Text(detail)
                             .font(.caption)
-                            .foregroundStyle(task.isOverdue() ? Color(hex: "E5484D") : Color.secondary)
+                            .foregroundStyle(task.isOverdue() ? style.cristal.strong(MiniStyle.alertHex) : Color.secondary)
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -172,6 +174,7 @@ struct PlanningWeekPage: View {
     @State private var day = Date()
     @State private var events: [EventSnapshot] = []
     @State private var editors = PlanningEditors()
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let week = Agenda.week(containing: day, model: model, events: events)
@@ -182,7 +185,7 @@ struct PlanningWeekPage: View {
                 editors.create(on: date, at: minute)
             }, onOpen: { item in
                 editors.open(item, on: day, model: model, openURL: openURL) { day = $0 }
-            }, accent: Color(hex: MiniApp.planning.colorHex))
+            }, accent: style.cristal.strong(MiniApp.planning.colorHex))
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: Fmt.longDay(day), detail: items.isEmpty ? nil : Fmt.plural(items.count, tr("élément"), tr("éléments")))
                 if items.isEmpty {
@@ -214,6 +217,7 @@ struct PlanningMonthPage: View {
     @State private var month = Date()
     @State private var selected = Date()
     @State private var events: [EventSnapshot] = []
+    @Environment(\.appStyle) private var style
 
     private var accentHex: String { MiniApp.planning.colorHex }
 
@@ -237,8 +241,8 @@ struct PlanningMonthPage: View {
                 }
                 .accessibilityLabel(Text(tr("Période suivante")))
             }
-            .tint(Color(hex: accentHex))
-            PlanningMonthGrid(month: month, selected: selected, accent: Color(hex: accentHex),
+            .tint(style.cristal.strong(accentHex))
+            PlanningMonthGrid(month: month, selected: selected, accent: style.cristal.strong(accentHex),
                               items: { Agenda.items(on: $0, model: model, events: events) },
                               onPick: { selected = $0 })
                 .card(padding: 12)
@@ -282,6 +286,7 @@ struct PlanningMonthPage: View {
 struct PlanningProjectsPage: View {
     @Environment(AppModel.self) private var model
     @State private var editing: Project?
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let projects = model.productivity.projects
@@ -299,7 +304,7 @@ struct PlanningProjectsPage: View {
                         } label: {
                             HStack(spacing: 12) {
                                 Image(systemName: task.isDone ? "checkmark.circle.fill" : "circle")
-                                    .foregroundStyle(task.isDone ? Color(hex: project.colorHex) : Color.secondary)
+                                    .foregroundStyle(task.isDone ? style.cristal.category(project.colorHex) : Color.secondary)
                                 Text(task.title)
                                     .strikethrough(task.isDone)
                                     .foregroundStyle(task.isDone ? Color.secondary : Color.primary)
@@ -309,7 +314,7 @@ struct PlanningProjectsPage: View {
                     Button(tr("Modifier le projet")) { editing = project }
                 } header: {
                     HStack {
-                        Circle().fill(Color(hex: project.colorHex)).frame(width: 8, height: 8)
+                        Circle().fill(style.cristal.category(project.colorHex)).frame(width: 8, height: 8)
                         Text(project.name)
                         Spacer()
                         Text("\(project.doneCount)/\(project.tasks.count)")
@@ -329,7 +334,7 @@ struct PlanningProjectsPage: View {
             }
         }
         .styledList()
-        .tint(Color(hex: MiniApp.planning.colorHex))
+        .tint(style.cristal.strong(MiniApp.planning.colorHex))
         .navigationTitle(tr("Projets"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $editing) { ProjectEditor(project: $0) }
@@ -346,6 +351,7 @@ struct PlanningHabitsPage: View {
 
     /// The day the habits are checked for (a habit forgotten yesterday can still be checked).
     @State private var day = Date()
+    @Environment(\.appStyle) private var style
 
     /// The editor opens while the free plan has room (`canAddHabit`, the rule of `addHabit`); else the paywall.
     private func startCreating() {
@@ -382,7 +388,7 @@ struct PlanningHabitsPage: View {
                 } label: {
                     Label(tr("Ajouter une habitude"), systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
                 }
-                .tint(Color(hex: "7FA33A"))
+                .tint(style.cristal.strong("7FA33A"))
                 regularity(habits, now: Date())
             }
         }
@@ -430,6 +436,10 @@ struct PlanningHabitsPage: View {
 struct PlanningFocusPage: View {
     @Environment(AppModel.self) private var model
     private let choices = [15, 25, 45, 60, 90]
+    @Environment(\.appStyle) private var style
+    /// The focus color (violet) as Cristal translates it: a fill, and its strong version for text.
+    private var focusFill: Color { style.cristal.category("8C6CFF") }
+    private var focusStrong: Color { style.cristal.strong("8C6CFF") }
 
     var body: some View {
         let now = Date()
@@ -439,7 +449,7 @@ struct PlanningFocusPage: View {
         MiniAppScroll {
             VStack(spacing: 14) {
                 if focus.isRunning(at: now), let end = focus.endDate {
-                    Text(tr("Session en cours")).font(.subheadline.weight(.semibold)).foregroundStyle(Color(hex: "8C6CFF"))
+                    Text(tr("Session en cours")).font(.subheadline.weight(.semibold)).foregroundStyle(focusStrong)
                     Text(timerInterval: now...end, countsDown: true)
                         .font(.system(size: 54, weight: .bold, design: .rounded))
                         .monospacedDigit()
@@ -455,8 +465,8 @@ struct PlanningFocusPage: View {
                                 Text("\(minutes)")
                                     .font(.headline)
                                     .frame(maxWidth: .infinity, minHeight: 50)
-                                    .background(Color(hex: "8C6CFF").opacity(minutes == focus.lastDurationMinutes ? 1 : 0.14), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
-                                    .foregroundStyle(minutes == focus.lastDurationMinutes ? Color.white : Color(hex: "8C6CFF"))
+                                    .background(minutes == focus.lastDurationMinutes ? focusStrong : focusFill.opacity(0.14), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                    .foregroundStyle(minutes == focus.lastDurationMinutes ? style.onAccent : focusStrong)
                             }
                             .buttonStyle(.pressable)
                         }
@@ -471,7 +481,7 @@ struct PlanningFocusPage: View {
                 Chart {
                     ForEach(DayValue.list(DateMath.week(containing: now), week)) { item in
                         BarMark(x: .value("Jour", item.date, unit: .day), y: .value("Minutes", item.value))
-                            .foregroundStyle(Color(hex: "8C6CFF").gradient)
+                            .foregroundStyle(focusFill.gradient)
                             .cornerRadius(3)
                     }
                 }

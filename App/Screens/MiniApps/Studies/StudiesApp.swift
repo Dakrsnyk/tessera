@@ -81,6 +81,7 @@ enum Studies {
 struct StudiesAppView: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: StudiesSheet?
+    @Environment(\.appStyle) private var style
 
     private var accentHex: String { Studies.accentHex }
 
@@ -111,7 +112,7 @@ struct StudiesAppView: View {
         VStack(alignment: .leading, spacing: 14) {
             Image(systemName: "graduationcap.fill")
                 .font(.system(size: 30))
-                .foregroundStyle(Color(hex: accentHex))
+                .foregroundStyle(style.cristal.strong(accentHex))
             Text(tr("Ton année en un coup d'œil"))
                 .font(.title3.weight(.bold))
             Text(tr("Ajoute tes cours : ton horaire, tes devoirs, tes examens et tes notes viendront s'y ranger. Ardane calcule ensuite tes moyennes et ce qu'il te reste à faire."))
@@ -169,7 +170,7 @@ struct StudiesAppView: View {
                         HStack {
                             Text(open.count > 3 ? tr("Voir les \(open.count) devoirs") : tr("Tous les devoirs"))
                                 .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(Color(hex: accentHex))
+                                .foregroundStyle(style.cristal.strong(accentHex))
                             Spacer()
                             Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
                         }
@@ -222,7 +223,7 @@ struct StudiesAppView: View {
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
-                ProgressView(value: progress).tint(Color(hex: accentHex))
+                ProgressView(value: progress).tint(style.cristal.category(accentHex))
                     .accessibilityLabel(tr("Session"))
                     .accessibilityValue(Fmt.percent(progress))
             }
@@ -284,6 +285,7 @@ struct StudiesAppView: View {
 struct NextClassCard: View {
     let state: StudentState
     let now: Date
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         if let next = StudentMath.nextClass(state, at: now) {
@@ -294,7 +296,7 @@ struct NextClassCard: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Label(isNow ? tr("En cours") : tr("Prochain cours"), systemImage: isNow ? "dot.radiowaves.left.and.right" : "clock")
                         .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color(hex: hex))
+                        .foregroundStyle(style.cristal.strong(hex))
                     Text(state.title(of: next.slot))
                         .font(.title2.weight(.bold))
                         .foregroundStyle(.primary)
@@ -305,12 +307,13 @@ struct NextClassCard: View {
                         ProgressView(value: now.timeIntervalSince(next.start), total: max(1, next.end.timeIntervalSince(next.start)))
                             .accessibilityLabel(tr("Progression"))
                             .accessibilityValue(Fmt.percent(min(1, max(0, now.timeIntervalSince(next.start) / max(1, next.end.timeIntervalSince(next.start))))))
-                            .tint(Color(hex: hex))
+                            .tint(style.cristal.category(hex))
                     }
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(16)
-                .background(Color(hex: hex).opacity(0.12), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+                .background(style.cristal.category(hex).opacity(0.12), in: RoundedRectangle(cornerRadius: 22, style: .continuous))
+                .cristalPanel(radius: 22)
             }
             .buttonStyle(.pressable)
             .accessibilityElement(children: .contain)
@@ -340,6 +343,7 @@ struct AssignmentRow: View {
     let now: Date
     let onEdit: () -> Void
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let late = !assignment.isDone && assignment.due < now
@@ -350,7 +354,7 @@ struct AssignmentRow: View {
             } label: {
                 Image(systemName: assignment.isDone ? "checkmark.circle.fill" : "circle")
                     .font(.title3)
-                    .foregroundStyle(assignment.isDone ? Color(hex: Studies.accentHex) : Color(hex: state.course(assignment.courseID)?.colorHex ?? "8A8A8E"))
+                    .foregroundStyle(style.cristal.category(assignment.isDone ? Studies.accentHex : (state.course(assignment.courseID)?.colorHex ?? "8A8A8E")))
             }
             .buttonStyle(.borderless)
             .accessibilityIdentifier("assignment-toggle")
@@ -363,7 +367,7 @@ struct AssignmentRow: View {
                         .foregroundStyle(assignment.isDone ? Color.secondary : Color.primary)
                     Text(state.course(assignment.courseID).map { "\($0.name) · \(dueText)" } ?? dueText)
                         .font(.caption)
-                        .foregroundStyle(late ? Color(hex: "E5484D") : Color.secondary)
+                        .foregroundStyle(late ? style.cristal.strong(MiniStyle.alertHex) : Color.secondary)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .contentShape(Rectangle())
@@ -388,19 +392,21 @@ struct ExamRow: View {
     let exam: Exam
     let state: StudentState
     let now: Date
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let course = state.course(exam.courseID)
         let days = DateMath.daysBetween(now, exam.date)
+        let examHex = days <= 3 ? MiniStyle.alertHex : (course?.colorHex ?? Studies.accentHex)
         HStack(spacing: 12) {
             VStack(spacing: 0) {
                 Text(days <= 0 ? tr("Auj.") : tr("J-\(days)"))
                     .font(.headline.weight(.bold))
-                    .foregroundStyle(days <= 3 ? Color(hex: "E5484D") : Color(hex: course?.colorHex ?? Studies.accentHex))
+                    .foregroundStyle(style.cristal.strong(examHex))
                     .monospacedDigit()
             }
             .frame(width: 52, height: 44)
-            .background((days <= 3 ? Color(hex: "E5484D") : Color(hex: course?.colorHex ?? Studies.accentHex)).opacity(0.12), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            .background(style.cristal.category(examHex).opacity(0.13), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
             VStack(alignment: .leading, spacing: 2) {
                 Text(exam.title)
                     .font(.subheadline.weight(.semibold))
@@ -431,6 +437,7 @@ struct ExamRow: View {
 struct StudyTimerCard: View {
     @Environment(AppModel.self) private var model
     @State private var logged: Int?
+    @Environment(\.appStyle) private var style
 
     private var accentHex: String { Studies.accentHex }
 
@@ -441,7 +448,7 @@ struct StudyTimerCard: View {
                 HStack(alignment: .firstTextBaseline) {
                     Label(state.course(state.timerCourseID)?.name ?? tr("Étude"), systemImage: "timer")
                         .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(Color(hex: accentHex))
+                        .foregroundStyle(style.cristal.strong(accentHex))
                     Spacer()
                     TimelineView(.periodic(from: began, by: 1)) { context in
                         Text(elapsed(from: began, to: context.date))
@@ -489,10 +496,10 @@ struct StudyTimerCard: View {
                     } label: {
                         Label(tr("Démarrer"), systemImage: "play.fill")
                             .font(.subheadline.weight(.bold))
-                            .foregroundStyle(.white)
+                            .foregroundStyle(style.onAccent)
                             .padding(.horizontal, 14)
                             .padding(.vertical, 9)
-                            .background(Color(hex: accentHex), in: Capsule())
+                            .background(style.cristal.strong(accentHex), in: Capsule())
                     }
                     .accessibilityIdentifier("studies-timer-start")
                 }

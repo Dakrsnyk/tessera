@@ -100,7 +100,11 @@ struct ScheduleImportView: View {
     @State private var asksAddOrReplace = false
 
     private var accentHex: String { MiniApp.planning.colorHex }
-    private var accent: Color { Color(hex: accentHex) }
+    @Environment(\.appStyle) private var style
+    /// The mini-app's color as a Cristal category (the mini-apps' accent) and its strong version (action color, text).
+    private var accent: Color { style.cristal.category(accentHex) }
+    private var strong: Color { style.cristal.strong(accentHex) }
+    private var alert: Color { style.cristal.strong(MiniStyle.alertHex) }
 
     var body: some View {
         NavigationStack {
@@ -127,7 +131,7 @@ struct ScheduleImportView: View {
                 }
             }
         }
-        .tint(accent)
+        .tint(strong)
         .environment(\.miniAccent, accent)
         .onChange(of: photoItem) { _, item in
             guard let item else { return }
@@ -187,9 +191,9 @@ struct ScheduleImportView: View {
     private func sourceLabel(_ title: String, symbol: String, isProminent: Bool) -> some View {
         Label(title, systemImage: symbol)
             .font(.headline)
-            .foregroundStyle(isProminent ? Color.white : accent)
+            .foregroundStyle(isProminent ? style.onAccent : strong)
             .frame(maxWidth: .infinity, minHeight: 50)
-            .background(isProminent ? accent : accent.opacity(0.14), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .background(isProminent ? strong : accent.opacity(0.14), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 
     /// 2. The reading, on the iPhone.
@@ -213,7 +217,7 @@ struct ScheduleImportView: View {
         VStack(spacing: 14) {
             Image(systemName: unreadable ? "exclamationmark.triangle.fill" : "doc.text.magnifyingglass")
                 .font(.system(size: 38))
-                .foregroundStyle(accent)
+                .foregroundStyle(strong)
             Text(unreadable ? tr("Impossible de lire ce fichier") : tr("Aucun cours trouvé"))
                 .font(.title3.weight(.bold))
                 .multilineTextAlignment(.center)
@@ -251,7 +255,7 @@ struct ScheduleImportView: View {
                         Label(tr("Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près."),
                               systemImage: "exclamationmark.triangle")
                             .font(.footnote)
-                            .foregroundStyle(Color(hex: MiniStyle.alertHex))
+                            .foregroundStyle(alert)
                             .fixedSize(horizontal: false, vertical: true)
                             .accessibilityIdentifier("schedule-import-doubt-note")
                     }
@@ -357,7 +361,7 @@ struct ScheduleImportView: View {
             if flagged {
                 Label(tr("À vérifier"), systemImage: "exclamationmark.triangle")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(Color(hex: MiniStyle.alertHex))
+                    .foregroundStyle(alert)
                     .accessibilityIdentifier("schedule-import-doubt")
             }
             HStack(spacing: 10) {
@@ -394,7 +398,7 @@ struct ScheduleImportView: View {
             if missingTitle {
                 Label(tr("Donne un nom à ce cours pour pouvoir l'ajouter."), systemImage: "exclamationmark.triangle.fill")
                     .font(.caption)
-                    .foregroundStyle(Color(hex: MiniStyle.alertHex))
+                    .foregroundStyle(alert)
                     .fixedSize(horizontal: false, vertical: true)
                     .accessibilityIdentifier("schedule-import-title-missing")
             }
@@ -413,7 +417,7 @@ struct ScheduleImportView: View {
                 if invalidTime {
                     Label(tr("La fin doit venir après le début."), systemImage: "exclamationmark.triangle.fill")
                         .font(.caption)
-                        .foregroundStyle(Color(hex: MiniStyle.alertHex))
+                        .foregroundStyle(alert)
                 }
                 TextField(tr("Salle (facultatif)"), text: clearing(.room, of: slot, Binding(get: { slot.room.wrappedValue ?? "" },
                                                                                           set: { slot.room.wrappedValue = $0 })))
@@ -426,7 +430,7 @@ struct ScheduleImportView: View {
         .miniCard()
         .overlay(
             RoundedRectangle(cornerRadius: MiniStyle.cardRadius, style: .continuous)
-                .stroke(Color(hex: MiniStyle.alertHex).opacity(flagged ? 0.7 : 0), lineWidth: 1.5)
+                .stroke(alert.opacity(flagged ? 0.7 : 0), lineWidth: 1.5)
         )
         .opacity(value.isSelected ? 1 : 0.6)
     }
@@ -580,9 +584,10 @@ extension ScheduleImportView {
 /// its focus while the person types and the mark goes away.
 private struct UncertainHighlight: ViewModifier {
     let active: Bool
+    @Environment(\.appStyle) private var style
 
     func body(content: Content) -> some View {
-        let alert = Color(hex: MiniStyle.alertHex)
+        let alert = style.cristal.strong(MiniStyle.alertHex)
         let shape = RoundedRectangle(cornerRadius: 10, style: .continuous)
         return content
             .padding(.horizontal, 8)
