@@ -443,3 +443,7 @@ only quote-m-blossom hydration-s-blossom countdown-s-blossom birthday-s-blossom 
 # --- Demande cj-8e738099 du QG marketing
 widget priorities-m-light kind=priorities family=medium scale=3 theme=light
 only priorities-m-light
+# --- Demande cj-b254031f du QG marketing
+widget priorities-m-dark kind=priorities family=medium scale=3 theme=dark scheme=dark
+widget habitStreak-s-paper kind=habitStreak family=small scale=4 theme=paper
+only priorities-m-dark habitStreak-s-paper
