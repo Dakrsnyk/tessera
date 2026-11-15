@@ -8,6 +8,8 @@ import WidgetKit
 /// The space's data stays one tap away.
 struct SpaceBuilderView: View {
     let space: Space
+    /// « Personnaliser »: hands the widgets to the Créer tab, which opens them in its Studio and closes this sheet.
+    let onChoose: ([WidgetDesign]) -> Void
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
     @Environment(\.appStyle) private var style
@@ -15,8 +17,6 @@ struct SpaceBuilderView: View {
     @State private var format: WidgetFormat = .small
     /// Selected widgets, in the order they were picked.
     @State private var selection: [WidgetKind]
-    /// The Studio, pushed over the selection.
-    @State private var customizes = false
     /// Test builds: the size or selection asked for by a capture is applied once, not again on coming
     /// back from « Mes données ».
     @State private var appliedCaptureOptions = false
@@ -26,8 +26,9 @@ struct SpaceBuilderView: View {
     private let themeID: ThemeID
     private let accentHex: String
 
-    init(space: Space) {
+    init(space: Space, onChoose: @escaping ([WidgetDesign]) -> Void) {
         self.space = space
+        self.onChoose = onChoose
         let first = SpaceCatalog.preset(for: space, format: .small).first ?? .note
         let base = Self.design(for: first)
         _selection = State(initialValue: [first])
@@ -37,13 +38,7 @@ struct SpaceBuilderView: View {
 
     private var kinds: [WidgetKind] { SpaceCatalog.kinds(in: space) }
 
-    private static func design(for kind: WidgetKind) -> WidgetDesign {
-        var design = TemplateCatalog.template(for: kind)?.makeDesign() ?? WidgetDesign.starter(for: kind)
-        design.name = kind.title
-        design.background = .theme
-        design.font = .theme
-        return design
-    }
+    private static func design(for kind: WidgetKind) -> WidgetDesign { SpaceCatalog.design(for: kind) }
 
     /// A widget of this space in the creation's look.
     private func styled(_ kind: WidgetKind) -> WidgetDesign {
@@ -132,14 +127,6 @@ struct SpaceBuilderView: View {
                     .accessibilityLabel(Text(tr("Mes données de l'espace \(space.title)")))
                 }
             }
-            // Selection, then editing as in the Studio: the same Studio as « Mes widgets ».
-            // (The destination is built with every update, even hidden: only with widgets to show.)
-            .navigationDestination(isPresented: $customizes) {
-                let designs = self.designs
-                if !designs.isEmpty {
-                    WidgetStudio(request: EditorRequest(designs: designs, isNew: true), isPushed: true) { dismiss() }
-                }
-            }
             .task(id: selection) {
                 for design in designs { await model.prepare(design) }
             }
@@ -167,7 +154,7 @@ struct SpaceBuilderView: View {
                     // Once the creator is on screen and its size applied.
                     Task { @MainActor in
                         try? await Task.sleep(for: .milliseconds(900))
-                        customizes = true
+                        if !designs.isEmpty { onChoose(designs) }
                     }
                 }
             }
@@ -373,7 +360,7 @@ struct SpaceBuilderView: View {
             Divider()
             Button {
                 Haptics.tap()
-                customizes = true
+                if !designs.isEmpty { onChoose(designs) }
             } label: {
                 Label(continueTitle, systemImage: "paintbrush.pointed")
                     .font(.headline)

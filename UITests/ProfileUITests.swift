@@ -415,10 +415,6 @@ final class ProfileUITests: XCTestCase {
         goBack()
         XCTAssertTrue(label(of: "part-caloriesLeft").contains("Mes calories"))
         snapshot("creator-studio")
-        // Back to the selection: the size chosen is kept.
-        goBack()
-        XCTAssertTrue(app.segmentedControls.buttons["Moyen"].waitForExistence(timeout: 5))
-        XCTAssertTrue(app.segmentedControls.buttons["Moyen"].isSelected, "Le format choisi est gardé")
     }
 
     private func goBack() {

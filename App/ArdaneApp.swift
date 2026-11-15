@@ -301,7 +301,7 @@ struct MainTabView: View {
                 .pageEntrance(.home)
                 .tabItem { Label(tr("Accueil"), systemImage: "square.grid.2x2") }
                 .tag(Router.Tab.home)
-            SpacesView()
+            CreateView()
                 .pageEntrance(.spaces)
                 .tabItem { Label(tr("Créer"), systemImage: "plus.square.on.square") }
                 .tag(Router.Tab.spaces)

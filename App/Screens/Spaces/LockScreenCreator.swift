@@ -5,8 +5,9 @@ import WidgetKit
 /// interactive ones marked (a set validated, a habit checked… without unlocking), the workout shown
 /// live during a session, and how to add them.
 struct LockScreenCreator: View {
+    /// A widget chosen: the Créer tab opens it in its Studio.
+    let onChoose: ([WidgetDesign]) -> Void
     @Environment(AppModel.self) private var model
-    @Environment(Router.self) private var router
     @State private var onlyInteractive = false
     @State private var showsGuide = false
 
@@ -53,7 +54,7 @@ struct LockScreenCreator: View {
                         LazyHStack(alignment: .top, spacing: 14) {
                             ForEach(Array(group.items.enumerated()), id: \.element.id) { pair in
                                 Button {
-                                    router.openEditor(pair.element.widget.makeDesign(), isNew: true)
+                                    onChoose([pair.element.widget.makeDesign()])
                                 } label: {
                                     LockShowcaseCard(item: pair.element, index: pair.offset, isPremiumUser: model.isPremium)
                                 }

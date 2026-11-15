@@ -55,6 +55,25 @@ final class StudioUITests: XCTestCase {
         return button
     }
 
+    /// Créer opens on the Studio with a widget proposed; « Changer de widget » opens the catalogue, and a
+    /// widget chosen there comes back to the Studio.
+    func testCreateOpensOnTheStudioAndChangesWidget() {
+        launch(["-screenshotScreen", "spaces"])
+        let change = app.buttons["create-change"]
+        XCTAssertTrue(change.waitForExistence(timeout: 15), "Créer n'ouvre pas sur le Studio")
+        XCTAssertTrue(app.textFields["widget-name"].exists || app.buttons["studio-content"].exists, "Le Studio n'est pas là")
+        change.tap()
+        let card = app.buttons["space-card-nutrition"]
+        XCTAssertTrue(card.waitForExistence(timeout: 8), "Le catalogue n'est pas ouvert")
+        card.tap()
+        let next = app.buttons["creator-continue"]
+        XCTAssertTrue(next.waitForExistence(timeout: 8), "Le constructeur n'est pas ouvert")
+        next.tap()
+        XCTAssertTrue(app.buttons["studio-content"].waitForExistence(timeout: 10), "Le Studio n'est pas revenu")
+        XCTAssertTrue(card.waitForNonExistence(timeout: 8), "La feuille est restée ouverte")
+        snapshot("create-atelier")
+    }
+
     private static let sections = ["content", "theme", "style", "colors", "background", "border", "chart", "density", "myStyles"]
 
     /// The sections are in a horizontal bar that centers the section chosen: going one section at a

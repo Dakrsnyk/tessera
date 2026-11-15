@@ -1,12 +1,18 @@
 import SwiftUI
 import WidgetKit
 
-/// The mini-apps: each space is where the data behind a family of widgets is entered.
+/// « Changer de widget », the sheet of the Créer tab: every space, « Photos et citations » and the Lock Screen.
+/// A widget chosen is handed to `onChoose`; the Créer tab closes the sheet and opens it in its Studio.
 struct SpacesView: View {
+    let onChoose: ([WidgetDesign]) -> Void
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
+    @Environment(\.dismiss) private var dismiss
     /// The space whose widget creator is open.
     @State private var creating: Space?
+    /// A photo or quote widget being made (a sheet over this one: the app's own sheets can't open over it).
+    @State private var photoDraft: PhotoQuoteDraft?
+    @State private var paywall: PaywallContext?
     /// Nil shows every space.
     @State private var universe: SpaceUniverse?
     /// The « Écran verrouillé » category: Lock Screen widgets instead of the spaces.
@@ -23,19 +29,16 @@ struct SpacesView: View {
     }
 
     var body: some View {
-        @Bindable var router = router
-        NavigationStack(path: $router.spacePath) {
-            ScrollViewReader { proxy in
+        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 14) {
                     Text(tr("Choisis un univers, puis la taille de ton widget."))
                         .font(.subheadline)
                         .foregroundStyle(Color.secondary)
                         .padding(.horizontal, 20)
-                        .id("spaces-top")
                     universeFilter
                     if showsLockScreen {
-                        LockScreenCreator()
+                        LockScreenCreator(onChoose: onChoose)
                             .transition(.opacity)
                     } else {
                         LazyVStack(spacing: 14) {
@@ -51,7 +54,6 @@ struct SpacesView: View {
                                     }
                                     .buttonStyle(.pressable)
                                     .accessibilityIdentifier("space-card-\(space.rawValue)")
-                                    .tutorialTarget(.createSpace, when: space == shownSpaces.first)
                                 case .photos:
                                     photosCard
                                 }
@@ -63,34 +65,27 @@ struct SpacesView: View {
                 }
                 .padding(.bottom, 32)
             }
-            .onChange(of: router.tutorialStep) { _, step in
-                if step == .create { withAnimation { proxy.scrollTo("spaces-top", anchor: .top) } }
-            }
-            }
             .cristalScreen()
             .screenshotScroll()
-            .navigationTitle(tr("Créer"))
-            .navigationDestination(for: Space.self) { space in
-                SpaceView(space: space)
+            .navigationTitle(tr("Changer de widget"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(tr("Annuler")) { dismiss() }
+                }
             }
             .sheet(item: $creating) { space in
-                SpaceBuilderView(space: space)
+                SpaceBuilderView(space: space, onChoose: onChoose)
             }
+            .sheet(item: $photoDraft) { draft in
+                PhotoQuoteEditor(draft: draft)
+            }
+            .sheet(item: $paywall) { PaywallView(context: $0) }
             .onAppear {
+                // Opened by a capture on the Lock Screen category (the flag is read by the Créer tab too).
                 if router.showsLockScreenCreator {
                     router.showsLockScreenCreator = false
                     showsLockScreen = true
-                }
-                if let space = router.requestedCreator {
-                    router.requestedCreator = nil
-                    creating = space
-                }
-            }
-            // A category tapped on the Home tab while this tab was already loaded.
-            .onChange(of: router.requestedCreator) { _, space in
-                if let space {
-                    router.requestedCreator = nil
-                    creating = space
                 }
             }
         }
@@ -130,9 +125,9 @@ struct SpacesView: View {
     private func startPhotoQuote(_ kind: WidgetKind) {
         let draft = PhotoQuoteDraft.blank(kind)
         if model.canSave(adding: [draft.design]) {
-            router.photoQuoteDraft = draft
+            photoDraft = draft
         } else {
-            router.showPaywall(.designLimit)
+            paywall = .designLimit
         }
     }
 
@@ -470,6 +465,24 @@ struct SpaceExample {
 }
 
 enum SpaceCatalog {
+    /// A widget of a kind as the space creator and the Créer tab start it: its template, named, on the theme's look.
+    static func design(for kind: WidgetKind) -> WidgetDesign {
+        var design = TemplateCatalog.template(for: kind)?.makeDesign() ?? WidgetDesign.starter(for: kind)
+        design.name = kind.title
+        design.background = .theme
+        design.font = .theme
+        return design
+    }
+
+    /// The small widget Créer opens on: the first free one among the interests' spaces (in order), else
+    /// the calories left. Without Premium, its look is made free too.
+    static func proposal(for spaces: [Space], isPremium: Bool) -> WidgetDesign {
+        let kind = spaces.compactMap { preset(for: $0, format: .small).first }.first { !$0.isPremium } ?? .caloriesLeft
+        var proposed = Self.design(for: kind)
+        proposed.format = .small
+        return isPremium ? proposed : proposed.downgradedForFree()
+    }
+
     /// What the space creator selects first for each size: the key widget in small, two widgets that
     /// complete each other in medium, a dashboard of the space in large (one of them takes a whole row).
     static func preset(for space: Space, format: WidgetFormat) -> [WidgetKind] {

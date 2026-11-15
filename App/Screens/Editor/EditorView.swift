@@ -38,6 +38,8 @@ struct WidgetStudio: View {
     let isPushed: Bool
     /// Closes the Studio, and the flow that opened it, once the widgets are saved or the edit dropped.
     let onClose: () -> Void
+    /// The Créer tab: opens the other widgets. Gives the Studio a « Changer de widget » button under the preview.
+    let onChangeWidget: (() -> Void)?
 
     @State private var designs: [WidgetDesign]
     @State private var index = 0
@@ -66,7 +68,7 @@ struct WidgetStudio: View {
     private let isNew: Bool
     private let originals: [WidgetDesign]
 
-    init(request: EditorRequest, isPushed: Bool, onClose: @escaping () -> Void) {
+    init(request: EditorRequest, isPushed: Bool, onChangeWidget: (() -> Void)? = nil, onClose: @escaping () -> Void) {
         // SwiftUI builds a navigation destination before it is shown, sometimes before the widgets
         // are ready: never an empty list.
         let designs = request.designs.isEmpty ? [request.design] : request.designs
@@ -79,6 +81,7 @@ struct WidgetStudio: View {
         originals = designs
         self.isPushed = isPushed
         self.onClose = onClose
+        self.onChangeWidget = onChangeWidget
     }
 
     private var design: WidgetDesign { designs[index] }
@@ -111,6 +114,7 @@ struct WidgetStudio: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 6)
                 .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
+            if let onChangeWidget { changeWidgetButton(onChangeWidget) }
             if designs.count > 1 { widgetSwitcher }
             StudioSectionBar(sections: sections, selection: $section)
             Divider()
@@ -121,6 +125,25 @@ struct WidgetStudio: View {
         .navigationTitle(title)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { toolbarContent }
+    }
+
+    /// Créer: the other widgets (every space, photos and quotes, Lock Screen) open in a sheet.
+    private func changeWidgetButton(_ action: @escaping () -> Void) -> some View {
+        Button {
+            Haptics.tap()
+            action()
+        } label: {
+            Label(tr("Changer de widget"), systemImage: "square.grid.2x2")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color.accentColor)
+                .padding(.horizontal, 16)
+                .frame(minHeight: 44)
+                .cristalGlass(in: Capsule())
+        }
+        .buttonStyle(.pressable)
+        .accessibilityIdentifier("create-change")
+        .tutorialTarget(.createSpace)
+        .padding(.top, 8)
     }
 
     private func settings(_ input: StudioInput) -> some View {

@@ -440,11 +440,14 @@ final class MiniAppUITests: XCTestCase {
         launch(["-screenshotScreen", "home"])
         let pager = app.descendants(matching: .any)["daily-pager-nutrition"]
         XCTAssertTrue(pager.waitForExistence(timeout: 12), "La carte Nutrition doit pouvoir changer de vue")
+        // The dots are drawn in the card's header; their accessibility element is a thin strip, not meant to be touched:
+        // bring the card itself on screen, then read the dots.
+        reveal(pager, "Carte Nutrition")
         let dots = app.descendants(matching: .any)["daily-pager-nutrition-dots"]
-        reveal(dots, "Points de la carte Nutrition")
+        XCTAssertTrue(dots.waitForExistence(timeout: 4), "Points de la carte Nutrition absents")
         XCTAssertTrue(dots.label.contains("Vue 1 sur 3"), dots.label)
-        // Swipe on the card itself, just above its dots.
-        let card = dots.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0)).withOffset(CGVector(dx: 0, dy: -60))
+        // Swipe on the card itself, in the middle of it (the dots are in its header).
+        let card = pager.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         let left = card.withOffset(CGVector(dx: -80, dy: 0))
         let right = card.withOffset(CGVector(dx: 80, dy: 0))
         right.press(forDuration: 0.05, thenDragTo: left, withVelocity: .fast, thenHoldForDuration: 0)
@@ -464,6 +467,8 @@ final class MiniAppUITests: XCTestCase {
     /// Créer: the Lock Screen category lists its widgets, marks the interactive ones and shows the live workout.
     func testTheLockScreenCategoryShowsItsWidgets() {
         launch(["-screenshotScreen", "spaces"])
+        // Créer opens on the Studio: the other widgets are behind « Changer de widget ».
+        tap(app.buttons["create-change"], "Changer de widget")
         tap(app.buttons["create-lockscreen"], "Écran verrouillé")
         XCTAssertTrue(app.descendants(matching: .any)["lock-creator"].waitForExistence(timeout: 6))
         XCTAssertTrue(app.descendants(matching: .any)["lock-workout-preview"].waitForExistence(timeout: 4), "La séance en direct est présentée")
