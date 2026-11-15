@@ -18,6 +18,8 @@ enum AdScreens {
             NavigationStack {
                 StudiesTimetablePage()
             }
+        case "ad-create-tt-large":
+            SpaceBuilderView(space: .student)
         // ATELIER:END
         default:
             // A name the HQ has not added: said on screen, so that a capture never passes for a real screen.
