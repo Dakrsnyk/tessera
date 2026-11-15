@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane — compositions d'accueil · 03 Carbone</title>
+<!-- Planche des compositions, style Carbone : tableau de bord de nuit, bordures intérieures d'un point, rayon 14, cyan pour l'actif,
+     chiffres en Consolas, jauges circulaires, listes de mesures. N'utilise que compo-base.css / compo-base.js + le CSS propre ci-dessous.
+     Rendu 1400 × 2010, échelle 2. Contrôles : ?check, ?measure, ?w375. -->
+<link rel="stylesheet" href="compo-base.css">
+<style>
+/* ======================= 3 · CARBONE : jetons ======================= */
+body.s3 { --board: #05080D; --bink: #E8EEF8; --bink2: #9AA7BB;
+  --bg: #0B0F17; --surface: #131A26; --surface2: #1A2333; --ink: #E8EEF8; --ink2: #8A97AB; --rule: #223046; --primary: #4FD3E8; --on-primary: #0B0F17;
+  --track: #1E2A3D; --grid: #223046; --wk-now: #4FD3E8; --wk-today: rgba(79,211,232,.07); --empty: #5B6B84;
+  --c-nut: #DE9454; --c-fit: #E98991; --c-pla: #7B9CF5; --c-hab: #5BBA23; --c-bud: #23BA8D; --c-pro: #8A97AB; --c-pas: #4CC2C4;
+  --c-prot: #E98991; --c-gluc: #D9B94A; --c-lip: #68B5F5;
+  --ev-travail: #A58BF2; --ev-rdv: #E27FBE; --ev-fill: 24%; --ev-r: 3px; --ev-bar: 3px;
+  --bar-r: 2px; --bars-gap: 4px; --meter-r: 3px; --meter-h: 5px; --sw: 1.6; --bar-past: 1;
+  --r-card: 14px; --r-btn: 10px; --frame: #24282F; --edge-h: 30px;
+  --lg-bg: #0F1520; --lg-rule: #223046; --lg-r: 14px; }
+.s3 .phone { box-shadow: 0 0 0 9px #24282F, 0 22px 44px rgba(0,0,0,.5); }
+.s3 .cb-head .badge { border-color: #4B5870; }
+.s3 .tag.e { background: #153524; color: #8FE0AE; } .s3 .tag.a { background: #3A2B0E; color: #F0C877; } .s3 .tag.d { background: #2A2352; color: #C4B5FA; }
+.s3 .lg-row .k, .s3 .lg-h { color: #E8EEF8; }
+
+/* ---------- composants Carbone ---------- */
+.s3 .scr { padding: 0 16px; }
+.s3 .mono, .s3 .mono * { font-family: Consolas, "Cascadia Mono", monospace; }
+.s3 .mono { font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.s3 .top { display: flex; justify-content: space-between; align-items: flex-start; margin-top: 4px; }
+.s3 .date { font: 12.5px Consolas, monospace; color: var(--primary); letter-spacing: .04em; margin-top: 3px; }
+.s3 .ava { width: 40px; height: 40px; border-radius: 12px; box-shadow: inset 0 0 0 1px var(--rule); background: var(--surface); display: grid; place-items: center; font-size: 14px; font-weight: 600; }
+.s3 .kick { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); margin-top: 7px; }
+.s3 .title { font-size: 30px; font-weight: 650; letter-spacing: -.02em; line-height: 1.1; margin-top: 1px; }
+.s3 .lab { display: flex; justify-content: space-between; align-items: center; margin: 14px 2px 7px; font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); white-space: nowrap; }
+.s3 .lab a { color: var(--primary); letter-spacing: .02em; text-transform: none; font-size: 13px; font-weight: 550; }
+.s3 .card { background: var(--surface); border-radius: var(--r-card); box-shadow: inset 0 0 0 1px var(--rule); position: relative; min-width: 0; }
+.s3 .cd { padding: 12px 14px; }
+.s3 .stack { display: grid; gap: 8px; }
+.s3 .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.s3 .g2 > .card { display: flex; flex-direction: column; padding: 12px 14px; }
+.s3 .ch { display: flex; align-items: center; gap: 7px; height: 26px; font-size: 12px; color: var(--ink2); }
+.s3 .ch i[data-i] { font-size: 16px; color: var(--c); }
+.s3 .ch b { font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; }
+.s3 .ch .go { margin-left: auto; color: #6E7E97; font-size: 15px; }
+.s3 .ch .nb { margin-left: auto; }
+.s3 .nb { display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 7px; box-shadow: inset 0 0 0 1px var(--primary); color: var(--primary); font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.s3 .nb::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); }
+.s3 .pg { display: flex; gap: 4px; margin-left: 4px; }
+.s3 .pg i { width: 5px; height: 5px; border-radius: 50%; background: #34465F; }
+.s3 .pg i.on { background: var(--primary); }
+.s3 .ico { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font-size: 18px; color: var(--c); background: color-mix(in srgb, var(--c) 10%, #131A26); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 38%, #131A26); flex: none; }
+.s3 .s { font-size: 12px; line-height: 1.35; color: var(--ink2); }
+.s3 .s.k { color: var(--ink); font-weight: 600; }
+.s3 .big { font-family: Consolas, monospace; font-size: 30px; letter-spacing: -.03em; color: var(--ink); line-height: 1.05; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.s3 .big small { font-size: .55em; color: var(--ink2); letter-spacing: 0; margin-left: 1px; }
+.s3 .h3 { font-size: 17px; font-weight: 650; letter-spacing: -.01em; }
+.s3 .btnP { height: 44px; border-radius: var(--r-btn); background: var(--primary); color: #0B0F17; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 650; font-size: 15px; white-space: nowrap; }
+.s3 .btnS { height: 44px; border-radius: var(--r-btn); box-shadow: inset 0 0 0 1px #34465F; color: var(--ink); display: flex; align-items: center; justify-content: center; gap: 7px; font-weight: 550; font-size: 14px; padding: 0 14px; white-space: nowrap; }
+.s3 .btnS i { color: var(--primary); font-size: 17px; }
+.s3 .btnP i { font-size: 17px; --sw: 2.1; }
+.s3 .chip { display: inline-flex; align-items: center; height: 28px; padding: 0 11px; border-radius: 9px; box-shadow: inset 0 0 0 1px var(--rule); font: 12.5px Consolas, monospace; color: var(--ink); white-space: nowrap; }
+.s3 .rgw { position: relative; flex: none; }
+.s3 .rgw .in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.s3 .rgw .in b { font-family: Consolas, monospace; font-size: 19px; font-weight: 400; letter-spacing: -.03em; line-height: 1; color: var(--ink); }
+.s3 .rgw .in small { font-size: 11px; color: var(--ink2); margin-top: 3px; line-height: 1.1; }
+.s3 .rgw .in i[data-i] { font-size: 18px; color: var(--c); }
+.s3 .mac { display: grid; gap: 7px; }
+.s3 .mac > div { display: grid; grid-template-columns: 1fr auto; row-gap: 4px; font-size: 13px; }
+.s3 .mac span { font-weight: 500; }
+.s3 .mac em { font-style: normal; color: var(--ink2); font: 12.5px Consolas, monospace; }
+.s3 .mac .u-meter, .s3 .mac [data-u] { grid-column: 1 / -1; }
+.s3 .link { font-size: 13px; font-weight: 550; color: var(--primary); }
+.s3 .u-hab { --hab: 22px; --hab-gap: 5px; --on-c: #0B0F17; }
+.s3 .u-hab > span { border: 1.5px solid var(--empty); }
+.s3 .u-hab > span.is-done { border-color: var(--c); }
+.s3 .u-hab i { --sw: 2.6; }
+.s3 .u-dots { --dot: 16px; --on-c: #0B0F17; }
+.s3 .u-dots > span > i { border-color: var(--empty); }
+.s3 .u-dots > span.is-done > i { border-color: var(--c); }
+.s3 .u-bars .b > i { background: #5F7088; opacity: 1; }
+.s3 .u-bars .b.is-today > i { background: var(--c); }
+.s3 .u-bars .goal { border-top: 1.5px dashed var(--ink2); }
+.s3 .u-spark .a { opacity: .14; }
+.s3 .u-week .ev { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--c) 40%, #131A26); }
+.s3 .u-week .hd { font-weight: 500; }
+/* lignes de mesures */
+.s3 .ls > .rw { display: flex; align-items: center; gap: 11px; min-height: 44px; padding: 0 14px; }
+.s3 .ls > .rw + .rw { box-shadow: 0 -1px 0 var(--rule); }
+.s3 .rw > i[data-i]:first-child { font-size: 18px; color: var(--c); flex: none; }
+.s3 .rw .lb { font-size: 14px; min-width: 0; }
+.s3 .rw .lb .s { display: block; font-size: 11.5px; }
+.s3 .rw .v { margin-left: auto; font: 15px Consolas, monospace; color: var(--ink); white-space: nowrap; letter-spacing: -.02em; }
+.s3 .rw .v .u { font: 11.5px Inter, sans-serif; color: var(--ink2); margin-left: 3px; letter-spacing: 0; }
+.s3 .rw .go { color: #6E7E97; font-size: 15px; margin-left: auto; }
+.s3 .rw .tm { font: 14px Consolas, monospace; width: 44px; flex: none; color: var(--ink); }
+.s3 .rw .bar { width: 3px; height: 26px; border-radius: 2px; background: var(--c); flex: none; }
+.s3 .rw.done .lb { text-decoration: line-through; color: var(--ink2); }
+.s3 .chk { width: 22px; height: 22px; flex: none; font-size: 22px; color: #6E7E97; }
+.s3 .chk.ok { color: var(--primary); }
+/* jauges en segments */
+.s3 .gauge { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin: 12px 0 4px; }
+.s3 .gauge span { height: 8px; border-radius: 2px; background: #1E2A3D; }
+.s3 .gauge span.f { background: var(--c); }
+.s3 .gauge span.c { background: transparent; box-shadow: inset 0 0 0 1px var(--primary); }
+.s3 .ticks { display: grid; grid-template-columns: repeat(4, 1fr); font: 11px Consolas, monospace; color: var(--ink2); margin-bottom: 12px; }
+/* barre d'onglets */
+.s3 .tabbar { background: #0B0F17; border-top: 0; box-shadow: inset 0 1px 0 var(--rule); }
+.s3 .ti { position: relative; font-size: 11px; font-weight: 600; color: var(--ink2); letter-spacing: .01em; padding-top: 8px; }
+.s3 .ti i { font-size: 22px; }
+.s3 .ti.on { color: var(--primary); }
+.s3 .ti.on::before { content: ""; position: absolute; top: 0; width: 22px; height: 2px; border-radius: 1px; background: var(--primary); }
+.s3 .hi { background: #E8EEF8; }
+.s3 .sb { --sb-ink: #E8EEF8; }
+
+/* ---------- A · Équilibrée ---------- */
+.s3 .A .title { font-size: 28px; }
+.s3 .nutA { display: grid; grid-template-columns: 84px 1fr; gap: 16px; align-items: center; margin: 6px 0 10px; }
+.s3 .nf { display: flex; gap: 10px; align-items: center; }
+.s3 .nf .btnS { flex: 1; }
+.s3 .A .g2 .btnP { margin-top: auto; }
+.s3 .A .fitA .h3 { margin-top: 4px; }
+.s3 .A .habA .big { margin-top: 8px; font-size: 28px; }
+.s3 .A .habA .s.k { margin-top: auto; }
+.s3 .A .wkA { --wk-h: 70px; --wk-gutter: 0px; --wk-gap: 2px; --wk-head: 16px; margin: 6px 0 8px; }
+.s3 .A .wkA .gut, .s3 .A .wkA .u-week > span:first-child { display: none; }
+.s3 .A .wkA .u-week { grid-template-columns: var(--wk-cols); }
+.s3 .A .budA .big { margin-top: 6px; font-size: 25px; }
+.s3 .A .budA .u-spark { margin-top: auto; }
+
+/* ---------- B · Quotidien ---------- */
+.s3 .now { padding: 13px 14px 14px; margin-top: 12px; }
+.s3 .now .r { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.s3 .now .r .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); }
+.s3 .now .r .k { color: var(--primary); font-weight: 600; }
+.s3 .now .r .g { color: var(--ink2); }
+.s3 .now h5 { font-size: 22px; font-weight: 600; letter-spacing: -.01em; margin: 9px 0 2px; }
+.s3 .now p { font-size: 13px; color: var(--ink2); }
+.s3 .now p b { font: 13px Consolas, monospace; color: var(--ink); font-weight: 400; }
+.s3 .btns { display: grid; grid-template-columns: 1fr 138px; gap: 8px; }
+.s3 .rest { height: 44px; border-radius: var(--r-btn); box-shadow: inset 0 0 0 1px #34465F; display: flex; align-items: center; gap: 8px; padding-left: 12px; }
+.s3 .rest small { font-size: 11px; color: var(--ink2); }
+.s3 .rest b { font: 18px Consolas, monospace; font-weight: 400; margin-left: auto; letter-spacing: -.02em; }
+.s3 .rest .pz { width: 44px; height: 44px; display: grid; place-items: center; font-size: 18px; color: var(--primary); --sw: 2.2; }
+.s3 .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.s3 .tile { height: 62px; padding: 0 12px; display: flex; align-items: center; gap: 10px; }
+.s3 .tile .rgw { width: 38px; height: 38px; }
+.s3 .tile .rgw .in i[data-i] { font-size: 16px; }
+.s3 .tile b { display: block; font-size: 13px; font-weight: 600; }
+.s3 .tile span { display: block; font: 11.5px/1.25 Consolas, monospace; color: var(--ink2); }
+.s3 .B .ls { padding: 2px 0; }
+.s3 .B .ls > .rw { min-height: 52px; }
+.s3 .B .rw .u-hab { --hab: 13px; --hab-gap: 3px; margin-left: auto; }
+.s3 .B .rw .u-hab > span { border-width: 1px; font-size: 9px; }
+
+/* ---------- C · Éditoriale ---------- */
+.s3 .C .title { font-size: 36px; letter-spacing: -.03em; }
+.s3 .lead { font-size: 19px; line-height: 1.32; font-weight: 500; letter-spacing: -.01em; margin: 8px 0 13px; text-wrap: pretty; }
+.s3 .lead b { font-family: Consolas, monospace; font-weight: 400; color: var(--primary); letter-spacing: -.03em; }
+.s3 .bigC { display: grid; grid-template-columns: 148px 1fr; gap: 14px; align-items: center; padding: 12px 14px; }
+.s3 .bigC .rgw { width: 148px; height: 148px; }
+.s3 .bigC .rgw .in b { font-size: 31px; }
+.s3 .bigC .u-bars { height: 70px; --bars-gap: 3px; }
+.s3 .bigC .u-bars-lab { --bars-gap: 3px; margin: 4px 0 6px; }
+.s3 .bigC .s { font-size: 12px; }
+.s3 .trio { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.s3 .trio > div { padding: 11px 6px 10px; text-align: center; }
+.s3 .trio .rgw { width: 54px; height: 54px; margin: 0 auto 7px; }
+.s3 .trio b { display: block; font-size: 12.5px; font-weight: 600; }
+.s3 .trio .m { display: block; font: 12.5px Consolas, monospace; color: var(--ink); margin-top: 2px; white-space: nowrap; }
+.s3 .trio .s { white-space: nowrap; font-size: 11px; }
+.s3 .wkC { --wk-h: 150px; --wk-gutter: 20px; --wk-head: 20px; --ev-fs: 11px; --wk-gap: 2px; margin-top: 6px; }
+
+/* ---------- D · Compacte ---------- */
+.s3 .D .title { font-size: 26px; margin-top: 0; }
+.s3 .D .top { align-items: center; }
+.s3 .D .top .tl { display: block; }
+.s3 .gg4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; margin-top: 10px; }
+.s3 .gg { padding: 9px 4px 8px; text-align: center; }
+.s3 .gg .rgw { width: 46px; height: 46px; margin: 0 auto 5px; }
+.s3 .gg .rgw .in b { font-size: 11.5px; letter-spacing: -.04em; }
+.s3 .gg b.n { display: block; font-size: 12px; font-weight: 600; }
+.s3 .gg .m { display: block; font: 11.5px Consolas, monospace; color: var(--ink2); white-space: nowrap; letter-spacing: -.04em; }
+.s3 .srow { display: flex; align-items: center; gap: 11px; padding: 8px 8px 8px 12px; margin-top: 8px; }
+.s3 .srow .tx { flex: 1; min-width: 0; }
+.s3 .srow .tx b { display: block; font-size: 15px; font-weight: 600; }
+.s3 .srow .btnP { height: 44px; padding: 0 14px; font-size: 14px; }
+.s3 .D .lab { margin: 10px 2px 6px; }
+.s3 .D .ls > .rw { min-height: 38px; height: 38px; }
+.s3 .D .rw .lb { font-size: 13.5px; }
+.s3 .meas { display: grid; grid-template-columns: repeat(3, 1fr); }
+.s3 .meas > div { padding: 8px 12px 9px; }
+.s3 .meas > div + div { box-shadow: -1px 0 0 var(--rule); }
+.s3 .meas small { display: block; font-size: 11.5px; color: var(--ink2); }
+.s3 .meas b { display: block; font: 14px Consolas, monospace; font-weight: 400; margin: 2px 0 6px; letter-spacing: -.03em; white-space: nowrap; }
+.s3 .meas b em { font-style: normal; font-size: 11px; color: var(--ink2); }
+
+/* ---------- E · Premium ---------- */
+.s3 .E .title { font-size: 32px; }
+.s3 .dom { margin-top: 10px; padding: 13px 14px 14px; box-shadow: inset 0 0 0 1px #2E3D56; }
+.s3 .dom .r { display: flex; align-items: center; gap: 8px; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+.s3 .dom .r .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); }
+.s3 .dom .r .k { color: var(--primary); font-weight: 600; }
+.s3 .dom .r .g { color: var(--ink2); }
+.s3 .dom .mid { display: grid; grid-template-columns: 112px 1fr; gap: 14px; align-items: center; margin: 12px 0 12px; }
+.s3 .dom .rgw { width: 112px; height: 112px; }
+.s3 .dom .rgw .in b { font-size: 30px; }
+.s3 .dom h2 { font-size: 24px; font-weight: 600; letter-spacing: -.015em; line-height: 1.12; }
+.s3 .dom p { font-size: 13px; color: var(--ink2); margin-top: 3px; }
+.s3 .dom p b { font: 14px Consolas, monospace; font-weight: 400; color: var(--ink); }
+.s3 .dom .rest { height: 56px; margin-bottom: 10px; padding-left: 14px; }
+.s3 .dom .rest b { font-size: 30px; margin-left: 12px; margin-right: auto; }
+.s3 .dom .rest .pz { width: 56px; height: 56px; }
+.s3 .dom .btnP { height: 48px; font-size: 16px; }
+.s3 .E .g2 > .card { padding: 12px 14px 13px; }
+.s3 .E .sec .rgw { width: 76px; height: 76px; margin: 4px 0 8px; }
+.s3 .E .sec .rgw .in b { font-size: 19px; }
+.s3 .E .sec .big { font-size: 34px; margin-top: 6px; }
+.s3 .E .sec .u-hab { margin-top: 10px; --hab: 20px; }
+.s3 .E .ls > .rw { min-height: 40px; }
+</style>
+</head>
+<body class="s3">
+<main class="cb">
+  <header class="cb-head"><div class="num">03</div><div><h1>Carbone · cinq accueils complets</h1><p>Un tableau de bord de nuit : jauges circulaires, listes de mesures, chiffres en chasse fixe, bordures intérieures d'un point. Le cyan désigne ce qui est actif ; les couleurs de catégorie vont aux icônes et aux jauges. Aucun halo.</p></div><span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="cb-grid">
+
+  <!-- ============================== A · ÉQUILIBRÉE (13:20) ============================== -->
+  <figure class="cb-cell A" data-compo="A"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="top"><div><div class="date">JEU. 12 NOV. · 13:20</div><div class="kick">Mon quotidien</div><div class="title">Ta journée</div></div><span class="ava">M</span></div>
+    <div class="stack" style="margin-top:10px">
+      <article class="card cd" data-c="nut">
+        <header class="ch"><i data-i="fork"></i><b>Nutrition</b><span class="pg"><i class="on"></i><i></i><i></i></span><i class="go" data-i="chev"></i></header>
+        <div class="nutA">
+          <div class="rgw" style="width:84px;height:84px"><div data-u="ring" data-p=".49" data-sw="8"></div><div class="in"><b>1 122</b><small>kcal<br>restantes</small></div></div>
+          <div class="mac">
+            <div data-c="prot"><span>Protéines</span><em>68/140 g</em><div data-u="meter" data-p=".486"></div></div>
+            <div data-c="gluc"><span>Glucides</span><em>121/250 g</em><div data-u="meter" data-p=".484"></div></div>
+            <div data-c="lip"><span>Lipides</span><em>34/70 g</em><div data-u="meter" data-p=".486"></div></div>
+          </div>
+        </div>
+        <div class="nf"><div class="btnS"><i data-i="scan"></i>Scanner</div><span class="chip">2 repas</span></div>
+      </article>
+      <div class="g2">
+        <article class="card fitA" data-c="fit">
+          <header class="ch"><i data-i="dumbbell"></i><span class="nb">Maintenant</span></header>
+          <div class="s" style="margin-top:6px;font-weight:600;color:var(--ink)">Séance du jour</div>
+          <div class="h3" style="margin-top:1px">Haut du corps</div>
+          <div class="s">6 exercices · 18 séries</div>
+          <div class="btnP" style="margin-top:8px"><i data-i="play"></i>Commencer</div>
+        </article>
+        <article class="card habA" data-c="hab">
+          <header class="ch"><i data-i="repeat"></i><b>Habitudes</b><i class="go" data-i="chev"></i></header>
+          <div data-u="hab" data-m="journee" style="margin-top:8px"></div>
+          <div class="big">3<small>/5</small></div>
+          <div class="s">faites aujourd'hui</div>
+          <div class="s k">Série de 12 jours</div>
+        </article>
+      </div>
+      <div class="g2">
+        <article class="card" data-c="pla">
+          <header class="ch"><i data-i="calendar"></i><b>Planning</b><i class="go" data-i="chev"></i></header>
+          <div class="wkA" data-u="week" data-o='{"labels":"none","now":"13:20","every":2,"to":19}'></div>
+          <span class="link" style="margin-top:auto">Toute la semaine</span>
+        </article>
+        <article class="card budA" data-c="bud">
+          <header class="ch"><i data-i="wallet"></i><b>Budget</b><i class="go" data-i="chev"></i></header>
+          <div class="big">21,68 $</div>
+          <div class="s">à dépenser par jour d'ici la fin du mois</div>
+          <div data-u="spark" data-m="journee" data-w="140" data-h="34"></div>
+        </article>
+      </div>
+      <article class="card cd" data-c="pro">
+        <header class="ch"><i data-i="target"></i><b>Top 3</b><span class="s" style="margin-left:4px">1 sur 3</span><i class="go" data-i="chev"></i></header>
+        <div class="ls">
+          <div class="rw done"><i class="chk ok" data-i="checkc"></i><span class="lb">Rendre le rapport de marketing</span></div>
+          <div class="rw"><i class="chk" data-i="circle"></i><span class="lb">Appeler la banque</span></div>
+        </div>
+      </article>
+    </div>
+  </div></div></div></figure>
+
+  <!-- ============================== B · QUOTIDIEN (19:05) ============================== -->
+  <figure class="cb-cell B" data-compo="B"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="top"><div><div class="date">JEU. 12 NOV. · 19:05</div><div class="kick">Mon quotidien</div><div class="title">Ta soirée</div></div><span class="ava">M</span></div>
+    <article class="card now" data-c="fit">
+      <div class="r"><span class="dot"></span><span class="k">En cours</span><span class="g">Fitness · séance</span></div>
+      <h5>Développé couché</h5>
+      <p>Haut du corps · Série <b>2/4</b> · <b>10 × 60 kg</b></p>
+      <div class="gauge"><span class="f"></span><span class="c"></span><span></span><span></span></div>
+      <div class="ticks"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <div class="btns"><div class="btnP"><i data-i="check"></i>Série faite</div>
+        <div class="rest"><small>Repos</small><b>0:45</b><span class="pz"><i data-i="pause"></i></span></div></div>
+    </article>
+    <div class="lab"><span>Mes mini-apps</span><a>Tout voir</a></div>
+    <div class="tiles">
+      <div class="card tile" data-c="nut"><div class="rgw"><div data-u="ring" data-p=".69" data-sw="10"></div><div class="in"><i data-i="fork"></i></div></div><div><b>Nutrition</b><span>1 520 kcal<br>aujourd'hui</span></div></div>
+      <div class="card tile" data-c="fit"><div class="rgw"><div data-u="ring" data-p=".5" data-sw="10"></div><div class="in"><i data-i="dumbbell"></i></div></div><div><b>Fitness</b><span>Séance<br>en cours</span></div></div>
+      <div class="card tile" data-c="pla"><div class="rgw"><div data-u="ring" data-p="0" data-sw="10"></div><div class="in"><i data-i="calendar"></i></div></div><div><b>Planning</b><span>3 tâches<br>aujourd'hui</span></div></div>
+      <div class="card tile" data-c="bud"><div class="rgw"><div data-u="ring" data-p=".34" data-sw="10"></div><div class="in"><i data-i="wallet"></i></div></div><div><b>Finances</b><span>412 $<br>restants</span></div></div>
+    </div>
+    <div class="lab"><span>Ce soir</span></div>
+    <article class="card ls">
+      <div class="rw" data-c="nut"><i data-i="fork"></i><span class="lb">680 kcal restantes<span class="s">Prochain repas : souper, environ 680 kcal</span></span><i class="go" data-i="chev"></i></div>
+      <div class="rw" data-c="hab"><i data-i="repeat"></i><span class="lb">Habitudes 4/5<span class="s">Série de 12 jours</span></span><div data-u="hab" data-m="soiree"></div></div>
+      <div class="rw" data-c="bud"><i data-i="wallet"></i><span class="lb">21,68 $ par jour<span class="s">Dépensé aujourd'hui : 14,50 $</span></span><i class="go" data-i="chev"></i></div>
+      <div class="rw" data-c="pla"><i data-i="bell"></i><span class="lb">Facture Internet<span class="s">À ne pas oublier</span></span><span class="v" style="font-size:12.5px">Demain · 45 $</span></div>
+    </article>
+  </div></div></div></figure>
+
+  <!-- ============================== C · ÉDITORIALE (08:10) ============================== -->
+  <figure class="cb-cell C" data-compo="C"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="top"><div><div class="date">JEU. 12 NOV. · 08:10</div><div class="kick">Mon quotidien</div><div class="title">Ta matinée</div></div><span class="ava">M</span></div>
+    <p class="lead">Comptabilité à <b>09:00</b>, séance à <b>18:30</b>, et <b>1 780 kcal</b> devant toi.</p>
+    <div class="stack">
+      <article class="card bigC" data-c="nut">
+        <div class="rgw"><div data-u="ring" data-p=".19" data-sw="9"></div><div class="in"><b>1 780</b><small>kcal restantes</small></div></div>
+        <div><div class="s k" style="margin-bottom:6px">Calories · 7 jours</div><div data-u="bars" data-set="cal7" data-m="matin"></div><div data-x="lab"></div><div class="s">Moyenne : 2 202 kcal</div></div>
+      </article>
+      <div class="trio">
+        <div class="card" data-c="hab"><div class="rgw"><div data-u="ring" data-p=".2" data-sw="9"></div><div class="in"><i data-i="repeat"></i></div></div><b>Habitudes</b><span class="m">1/5</span><span class="s">Série de 12 jours</span></div>
+        <div class="card" data-c="fit"><div class="rgw"><div data-u="ring" data-p=".5" data-sw="9"></div><div class="in"><i data-i="dumbbell"></i></div></div><b>Fitness</b><span class="m">2/4</span><span class="s">Encore 2 séances</span></div>
+        <div class="card" data-c="bud"><div class="rgw"><div data-u="ring" data-p=".36" data-sw="9"></div><div class="in"><i data-i="wallet"></i></div></div><b>Budget</b><span class="m">22,45 $</span><span class="s">par jour</span></div>
+      </div>
+      <article class="card cd" data-c="pla">
+        <header class="ch"><i data-i="calendar"></i><b>Planning</b><span class="link" style="margin-left:auto">Toute la semaine</span></header>
+        <div class="wkC" data-u="week" data-o='{"focus":3,"fw":5,"labels":"focus","now":"08:10","to":19,"long":true}'></div>
+      </article>
+    </div>
+  </div></div></div></figure>
+
+  <!-- ============================== D · COMPACTE (13:20) ============================== -->
+  <figure class="cb-cell D" data-compo="D"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="top"><div><div class="date">JEU. 12 NOV. · 13:20</div><div class="kick" style="margin-top:3px">Mon quotidien</div><div class="title">Ta journée</div></div><span class="ava">M</span></div>
+    <div class="gg4">
+      <div class="card gg" data-c="nut"><div class="rgw"><div data-u="ring" data-p=".49" data-sw="10"></div><div class="in"><b>1 122</b></div></div><b class="n">Restantes</b><span class="m">kcal</span></div>
+      <div class="card gg" data-c="hab"><div class="rgw"><div data-u="ring" data-p=".6" data-sw="10"></div><div class="in"><b>3/5</b></div></div><b class="n">Habitudes</b><span class="m">faites</span></div>
+      <div class="card gg" data-c="bud"><div class="rgw"><div data-u="ring" data-p=".34" data-sw="10"></div><div class="in"><i data-i="wallet"></i></div></div><b class="n">21,68 $</b><span class="m">par jour</span></div>
+      <div class="card gg" data-c="pas"><div class="rgw"><div data-u="ring" data-p=".685" data-sw="10"></div><div class="in"><i data-i="steps"></i></div></div><b class="n">5 480</b><span class="m">/ 8 000 pas</span></div>
+    </div>
+    <article class="card srow" data-c="fit"><span class="ico"><i data-i="dumbbell"></i></span><div class="tx"><b>Haut du corps</b><span class="s">6 exercices · 18 séries<br>2/4 cette semaine</span></div><div class="btnP"><i data-i="play"></i>Commencer</div></article>
+    <div class="lab"><span>Macros · repas</span><span class="chip" style="height:22px;font-size:11.5px">2 repas</span></div>
+    <article class="card meas">
+      <div data-c="prot"><small>Protéines</small><b>68<em>/140 g</em></b><div data-u="meter" data-p=".486"></div></div>
+      <div data-c="gluc"><small>Glucides</small><b>121<em>/250 g</em></b><div data-u="meter" data-p=".484"></div></div>
+      <div data-c="lip"><small>Lipides</small><b>34<em>/70 g</em></b><div data-u="meter" data-p=".486"></div></div>
+    </article>
+    <div class="lab"><span>Planning · aujourd'hui</span><a>Toute la semaine</a></div>
+    <article class="card ls">
+      <div class="rw" data-ev="rdv"><span class="tm">14:00</span><span class="bar"></span><span class="lb">Réunion projet</span><span class="v" style="font:12px Inter,sans-serif;color:var(--ink2)">Local 3.12</span></div>
+      <div class="rw" data-ev="rdv"><span class="tm">16:30</span><span class="bar"></span><span class="lb">Dentiste</span></div>
+      <div class="rw" data-ev="seance"><span class="tm">18:30</span><span class="bar"></span><span class="lb">Séance Haut du corps</span></div>
+    </article>
+    <div class="lab"><span>Top 3 · 1 sur 3</span><a>Ajouter une tâche</a></div>
+    <article class="card ls">
+      <div class="rw done"><i class="chk ok" data-i="checkc"></i><span class="lb">Rendre le rapport de marketing</span></div>
+      <div class="rw"><i class="chk" data-i="circle"></i><span class="lb">Appeler la banque</span></div>
+      <div class="rw"><i class="chk" data-i="circle"></i><span class="lb">Réviser le chapitre 4</span></div>
+    </article>
+    <div class="lab"><span>À ne pas oublier</span></div>
+    <article class="card ls">
+      <div class="rw" data-c="bud"><i data-i="doc"></i><span class="lb">Facture Internet</span><span class="v" style="font-size:12.5px">Demain · 45 $</span></div>
+    </article>
+  </div></div></div></figure>
+
+  <!-- ============================== E · PREMIUM (19:05) ============================== -->
+  <figure class="cb-cell E" data-compo="E"><div class="ph-wrap"><div class="phone"><div class="scr">
+    <div class="top"><div><div class="date">JEU. 12 NOV. · 19:05</div><div class="kick">Mon quotidien</div><div class="title">Ta soirée</div></div><span class="ava">M</span></div>
+    <article class="card dom" data-c="fit">
+      <div class="r"><span class="dot"></span><span class="k">En cours</span><span class="g">Fitness · séance</span></div>
+      <div class="mid">
+        <div class="rgw"><div data-u="ring" data-p=".5" data-sw="9"></div><div class="in"><b>2/4</b><small>série</small></div></div>
+        <div><h2>Développé couché</h2><p>Haut du corps<br><b>10 × 60 kg</b></p></div>
+      </div>
+      <div class="rest"><small>Repos</small><b>0:45</b><span class="pz"><i data-i="pause"></i></span></div>
+      <div class="btnP"><i data-i="check"></i>Série faite</div>
+    </article>
+    <div class="g2" style="margin-top:10px">
+      <article class="card sec" data-c="nut">
+        <header class="ch"><i data-i="fork"></i><b>Nutrition</b></header>
+        <div class="rgw"><div data-u="ring" data-p=".69" data-sw="9"></div><div class="in"><b>680</b></div></div>
+        <div class="s k">kcal restantes</div>
+        <div class="s mono">1 520 / 2 200 kcal</div>
+      </article>
+      <article class="card sec" data-c="hab">
+        <header class="ch"><i data-i="repeat"></i><b>Habitudes</b></header>
+        <div class="big">4<small>/5</small></div>
+        <div data-u="hab" data-m="soiree"></div>
+        <div class="s k" style="margin-top:auto">Série de 12 jours</div>
+      </article>
+    </div>
+    <div class="lab"><span>Le reste de la journée</span></div>
+    <article class="card ls">
+      <div class="rw" data-c="bud"><i data-i="wallet"></i><span class="lb">Par jour</span><span class="v">21,68 $<span class="u">d'ici la fin du mois</span></span></div>
+      <div class="rw" data-c="pla"><i data-i="calendar"></i><span class="lb">Demain · Statistiques</span><span class="v">10:00</span></div>
+      <div class="rw" data-c="pas"><i data-i="steps"></i><span class="lb">Pas</span><span class="v">7 360<span class="u">/ 8 000</span></span></div>
+      <div class="rw" data-c="pro"><i data-i="target"></i><span class="lb">Top 3<span class="s">Reste : Réviser le chapitre 4</span></span><span class="v">2<span class="u">sur 3</span></span></div>
+    </article>
+  </div></div></div></figure>
+
+  <!-- ============================== Légende ============================== -->
+  <aside class="cb-legend" id="legend"></aside>
+  </div>
+</main>
+
+<script src="compo-base.js"></script>
+<script>
+Compo.legend(document.getElementById('legend'), {
+  name: '03 · Carbone',
+  intro: "Un tableau de bord de nuit : fond #0B0F17, surfaces à bordure intérieure d'un point, rayon 14, cyan #4FD3E8 pour l'actif, chiffres en Consolas, jauges circulaires, aucun halo. Chaque état est aussi écrit (« 3/5 », « 1 sur 3 », coche, texte barré).",
+  rows: [
+    { k: 'A', w: 'Les cinq mini-apps à poids presque égal : Nutrition à jauge circulaire en pleine largeur, quatre demi-cartes, puis le Top 3.',
+      E: ['Nutrition, Séance du jour « Maintenant », Habitudes, Planning en demi-largeur, Budget, Top 3'] },
+    { k: 'B', w: "La séance en cours d'abord, puis les mini-apps en tuiles à jauge, puis le soir en liste de mesures.",
+      E: ['Séance en cours : série, repos 0:45, pause, « Série faite »'], A: ['« Maintenant » en tête ; tuiles « Mes mini-apps » au chiffre court ; sommaire « Ce soir »'] },
+    { k: 'C', w: 'Une phrase, une grande jauge de calories avec ses 7 jours, un trio de jauges, la grille de semaine au jeudi élargi.',
+      E: ['Grille du Planning, Calories · 7 jours, Budget'], A: ['Trio de jauges (sommaire) ; jeudi élargi et nommé dans la grille'], D: ['Phrase du jour composée à partir des données'] },
+    { k: 'D', w: "Tout en un coup d'œil : quatre jauges, séance, macros, agenda et Top 3 en listes serrées.",
+      E: ['Séance du jour « Commencer », Pas, Macros, Top 3'], A: ['Jauges au chiffre court ; liste des prochains événements (14:00)'] },
+    { k: 'E', w: 'La séance en cours domine (grande jauge de série, repos en gros chiffres), deux cartes secondaires, puis des lignes de mesures.',
+      E: ['Séance en cours, Nutrition, Habitudes, Budget, Pas, Top 3'], A: ['Carte dominante bordée plus fort ; « Demain 10:00 » tiré du Planning'] },
+  ],
+  foot: 'Texte ≥ 4,5:1 · icônes et graphiques ≥ 3:1 · zones tactiles ≥ 44 points.',
+});
+document.querySelectorAll('[data-x="lab"]').forEach((el) => { el.outerHTML = U.barsLab(CAL7.lab); });
+Compo.init();
+</script>
+</body>
+</html>
