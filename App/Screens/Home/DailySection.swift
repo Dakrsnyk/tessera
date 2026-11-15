@@ -98,9 +98,11 @@ struct DailySection: View {
                     Text(tr("Mon Quotidien").uppercased())
                         .font(.caption.weight(.bold))
                         .tracking(1.1)
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color.secondary)
                     Text(DailyBrief.Moment(now).title)
-                        .font(.title2.weight(.bold))
+                        .font(.largeTitle.weight(.bold))
+                        .lineLimit(2)
+                        .minimumScaleFactor(0.8)
                         .accessibilityAddTraits(.isHeader)
                         .accessibilityIdentifier("daily-title")
                 }
@@ -402,7 +404,7 @@ private struct DailyTileView: View {
     var body: some View {
         switch tile {
         case let .nutrition(nutrition):
-            DailyPager(id: "nutrition", titles: [tr("Aujourd'hui"), tr("Repas"), tr("7 jours")], accentHex: "F08A24") { page in
+            DailyPager(id: "nutrition", titles: [tr("Aujourd'hui"), tr("Repas"), tr("7 jours")]) { page in
                 switch page {
                 case 1: NutritionMealsTile(nutrition: nutrition)
                 case 2: NutritionWeekTile(nutrition: nutrition)
@@ -410,13 +412,13 @@ private struct DailyTileView: View {
                 }
             }
         case let .workout(workout):
-            DailyPager(id: "workout", titles: [tr("Séance"), tr("Semaine")], accentHex: "E5484D") { page in
+            DailyPager(id: "workout", titles: [tr("Séance"), tr("Semaine")]) { page in
                 if page == 1 { WorkoutWeekTile() } else { WorkoutDayTile(workout: workout) }
             }
         case let .planning(items): PlanningDayTile(items: items)
         case let .habits(done, items): HabitsDayTile(done: done, items: items)
         case let .steps(steps, goal):
-            DailyPager(id: "steps", titles: [tr("Aujourd'hui"), tr("7 jours")], accentHex: "12A4B5") { page in
+            DailyPager(id: "steps", titles: [tr("Aujourd'hui"), tr("7 jours")]) { page in
                 if page == 1 { StepsWeekTile(goal: goal) } else { StepsDayTile(steps: steps, goal: goal) }
             }
         case let .budget(spent, perDay): BudgetDayTile(spent: spent, perDayLeft: perDay)
@@ -440,99 +442,73 @@ private struct DailyTileView: View {
     }
 }
 
-/// The frame of a tile: its label on top, the content below, on a card.
+private extension AppStyle {
+    /// The Cristal tokens of this color.
+    var cristal: CristalPalette { CristalPalette.of(id) }
+}
+
+/// The frame of a tile: its label on top, the content below, on a Cristal panel (glass for the card to do right now).
 private struct DayCard<Content: View>: View {
     let title: String
     let symbol: String
     let colorHex: String
-    var isDark = false
     var route: HomeRoute?
-    /// A small tag next to the title (« Maintenant »), and a slightly firmer outline for the card to do right now.
+    /// A tag next to the title (« Maintenant »): the card to do right now, on glass.
     var badge: String? = nil
-    var glows = false
     @ViewBuilder let content: () -> Content
+    @Environment(\.appStyle) private var style
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
-        let tint = Color(hex: colorHex)
-        let shape = RoundedRectangle(cornerRadius: 22, style: .continuous)
+        let palette = style.cristal
+        let tint = palette.category(colorHex)
         let card = VStack(alignment: .leading, spacing: 8) {
-            HStack(spacing: 6) {
+            HStack(spacing: 8) {
                 Image(systemName: symbol)
-                    .font(.system(size: 12, weight: .bold))
-                Text(title.uppercased())
-                    .font(.caption.weight(.bold))
-                    .tracking(0.4)
+                    .font(.system(size: 15, weight: .semibold))
+                    .foregroundStyle(tint)
+                    .frame(width: 30, height: 30)
+                    .background(tint.opacity(scheme == .dark ? 0.20 : 0.13), in: Circle())
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.primary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.8)
                 Spacer(minLength: 0)
                 if let badge {
-                    HStack(spacing: 5) {
-                        Circle().fill(tint).frame(width: 6, height: 6)
-                        Text(badge.uppercased())
-                            .font(.caption2.weight(.heavy))
-                            .tracking(0.6)
-                    }
-                    .padding(.vertical, 3)
-                    .padding(.horizontal, 8)
-                    .background(tint.opacity(0.2), in: Capsule())
+                    Text(badge)
+                        .font(.caption2.weight(.bold))
+                        .foregroundStyle(.onAccent)
+                        .lineLimit(1)
+                        .padding(.horizontal, 10)
+                        .frame(minHeight: 22)
+                        .background(Color.accentColor, in: Capsule())
                 } else if route != nil {
                     Image(systemName: "chevron.right")
-                        .font(.caption2.weight(.bold))
-                        .opacity(0.5)
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(Color.secondary.opacity(0.6))
                 }
             }
-            .foregroundStyle(isDark ? Color(hex: "FF8A8D") : tint)
             content()
         }
         .padding(14)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(isDark ? AnyShapeStyle(Color(hex: "141416")) : AnyShapeStyle(.cardFill), in: shape)
-        .categoryTint(colorHex, emphasized: glows)
 
         if let route {
-            NavigationLink(value: route) { themed(card) }
+            NavigationLink(value: route) { surface(card, radius: palette.radius) }
                 .buttonStyle(.pressable)
         } else {
-            themed(card)
+            surface(card, radius: palette.radius)
                 .accessibilityElement(children: .contain)
         }
     }
 
-    /// A dark tile (the workout) reads white in light mode too.
-    @ViewBuilder private func themed<V: View>(_ view: V) -> some View {
-        if isDark {
-            view.environment(\.colorScheme, .dark)
+    @ViewBuilder private func surface<V: View>(_ view: V, radius: CGFloat) -> some View {
+        if badge != nil {
+            view.cristalGlass(in: RoundedRectangle(cornerRadius: radius, style: .continuous))
         } else {
-            view
+            view.cristalPanel(radius: radius)
         }
-    }
-}
-
-/// The light gradient of a category's color over a card, from the top left, and its thin outline: the
-/// same on every card of Mon Quotidien (no image behind). `emphasized`: a slightly firmer outline.
-private struct CategoryTint: ViewModifier {
-    let colorHex: String
-    var emphasized = false
-    @Environment(\.colorScheme) private var scheme
-
-    func body(content: Content) -> some View {
-        let tint = Color(hex: colorHex)
-        let shape = RoundedRectangle(cornerRadius: 22, style: .continuous)
-        let dark = scheme == .dark
-        content
-            .overlay {
-                shape
-                    .fill(LinearGradient(colors: [tint.opacity(dark ? 0.24 : 0.15), tint.opacity(dark ? 0.08 : 0.05), .clear],
-                                         startPoint: .topLeading, endPoint: .bottomTrailing))
-                    .allowsHitTesting(false)
-            }
-            .overlay { shape.strokeBorder(tint.opacity(emphasized ? 0.4 : 0.2), lineWidth: 1).allowsHitTesting(false) }
-    }
-}
-
-private extension View {
-    func categoryTint(_ colorHex: String, emphasized: Bool = false) -> some View {
-        modifier(CategoryTint(colorHex: colorHex, emphasized: emphasized))
     }
 }
 
@@ -540,6 +516,7 @@ private struct NutritionDayTile: View {
     let nutrition: DailyBrief.Nutrition
     @Environment(Router.self) private var router
     @Environment(\.dailyCompact) private var compact
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         if compact { compactBody } else { wideBody }
@@ -548,16 +525,16 @@ private struct NutritionDayTile: View {
     /// Half width: the ring with what is left beside it, the three macros on one line each, then
     /// the scanner and the meals.
     private var compactBody: some View {
-        let accent = Color(hex: "F08A24")
+        let nutritionColor = style.cristal.category("F08A24")
         return VStack(alignment: .leading, spacing: 10) {
             NavigationLink(value: HomeRoute.app(.nutrition)) {
                 VStack(alignment: .leading, spacing: 10) {
                     Label(tr("Nutrition"), systemImage: "fork.knife")
                         .font(.caption.weight(.bold))
-                        .foregroundStyle(accent)
+                        .foregroundStyle(style.cristal.strong("F08A24"))
                         .lineLimit(1)
                     HStack(spacing: 10) {
-                        RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 7, color: NutritionColors.calories, track: NutritionColors.track)
+                        RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 7, color: nutritionColor, track: NutritionColors.track)
                             .frame(width: 46, height: 46)
                         VStack(alignment: .leading, spacing: 0) {
                             Text(TF.int(abs(nutrition.kcalLeft ?? nutrition.eaten.kcal)))
@@ -588,9 +565,9 @@ private struct NutritionDayTile: View {
                 } label: {
                     Image(systemName: "barcode.viewfinder")
                         .font(.subheadline.weight(.bold))
-                        .foregroundStyle(Color.readableInk(on: "F08A24"))
-                        .frame(width: 44, height: 34)
-                        .background(accent, in: Capsule())
+                        .foregroundStyle(.onAccent)
+                        .frame(width: 44, height: 44)
+                        .background(Color.accentColor, in: Capsule())
                 }
                 .buttonStyle(.pressable)
                 .accessibilityLabel(Text(tr("Scanner")))
@@ -598,20 +575,19 @@ private struct NutritionDayTile: View {
                 NavigationLink(value: HomeRoute.app(.nutrition)) {
                     Text(mealsText)
                         .font(.caption.weight(.bold))
-                        .foregroundStyle(Color(hex: "CF6414"))
+                        .foregroundStyle(Color.accentColor)
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
                         .padding(.horizontal, 6)
-                        .frame(maxWidth: .infinity, minHeight: 34)
-                        .background(accent.opacity(0.14), in: Capsule())
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(style.cristal.tintColor, in: Capsule())
                 }
                 .buttonStyle(.pressable)
             }
         }
         .padding(14)
         .frame(maxHeight: .infinity, alignment: .top)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .categoryTint("F08A24")
+        .cristalPanel()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("daily-nutrition")
     }
@@ -620,7 +596,7 @@ private struct NutritionDayTile: View {
     private func compactMacro(_ name: String, _ eaten: Double, _ goal: Double?, _ hex: String, incomplete: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 5) {
-                Circle().fill(Color(hex: hex)).frame(width: 6, height: 6)
+                Circle().fill(style.cristal.category(hex)).frame(width: 6, height: 6)
                 Text(name)
                     .font(.caption2.weight(.semibold))
                     .lineLimit(1)
@@ -634,18 +610,18 @@ private struct NutritionDayTile: View {
                     .layoutPriority(1)
             }
             if let goal {
-                BarView(progress: eaten / max(1, goal), color: Color(hex: hex), track: Color(hex: hex).opacity(0.15), height: 4)
+                BarView(progress: eaten / max(1, goal), color: style.cristal.category(hex), track: style.cristal.category(hex).opacity(0.15), height: 4)
             }
         }
     }
 
     private var wideBody: some View {
-        let accent = Color(hex: "F08A24")
+        let nutritionColor = style.cristal.category("F08A24")
         return VStack(alignment: .leading, spacing: 12) {
             NavigationLink(value: HomeRoute.app(.nutrition)) {
             HStack(alignment: .center, spacing: 14) {
                 ZStack {
-                    RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 10, color: NutritionColors.calories, track: NutritionColors.track)
+                    RingView(progress: nutrition.knowsKcal ? nutrition.eaten.kcal / max(1, nutrition.goals.kcal) : 0, lineWidth: 10, color: nutritionColor, track: NutritionColors.track)
                     VStack(spacing: 0) {
                         if let left = nutrition.kcalLeft {
                             Text(TF.int(abs(left)))
@@ -672,7 +648,7 @@ private struct NutritionDayTile: View {
                     HStack {
                         Label(tr("Nutrition"), systemImage: "fork.knife")
                             .font(.caption.weight(.bold))
-                            .foregroundStyle(accent)
+                            .foregroundStyle(style.cristal.strong("F08A24"))
                             .lineLimit(1)
                         Spacer(minLength: 4)
                         Text(nutrition.knowsKcal ? "\(TF.int(nutrition.eaten.kcal)) / \(TF.int(nutrition.goals.kcal))" : tr("Objectif à définir"))
@@ -696,24 +672,24 @@ private struct NutritionDayTile: View {
                 } label: {
                     Label(tr("Scanner"), systemImage: "barcode.viewfinder")
                         .font(.subheadline.weight(.bold))
-                        .foregroundStyle(Color.readableInk(on: "F08A24"))
+                        .foregroundStyle(.onAccent)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                         .padding(.horizontal, 8)
-                        .frame(maxWidth: .infinity, minHeight: 38)
-                        .background(accent, in: Capsule())
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(Color.accentColor, in: Capsule())
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("daily-scan")
                 NavigationLink(value: HomeRoute.app(.nutrition)) {
                     Text(mealsText)
                         .font(.subheadline.weight(.bold))
-                        .foregroundStyle(Color(hex: "CF6414"))
+                        .foregroundStyle(Color.accentColor)
                         .lineLimit(1)
                         .minimumScaleFactor(0.7)
                         .padding(.horizontal, 8)
-                        .frame(maxWidth: .infinity, minHeight: 38)
-                        .background(accent.opacity(0.14), in: Capsule())
+                        .frame(maxWidth: .infinity, minHeight: 44)
+                        .background(style.cristal.tintColor, in: Capsule())
                 }
                 .buttonStyle(.pressable)
             }
@@ -724,8 +700,7 @@ private struct NutritionDayTile: View {
             }
         }
         .padding(14)
-        .background(.cardFill, in: RoundedRectangle(cornerRadius: 22, style: .continuous))
-        .categoryTint("F08A24")
+        .cristalPanel()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("daily-nutrition")
     }
@@ -745,7 +720,7 @@ private struct NutritionDayTile: View {
                     .monospacedDigit()
             }
             if let goal {
-                BarView(progress: eaten / max(1, goal), color: Color(hex: hex), track: Color(hex: hex).opacity(0.15), height: 5)
+                BarView(progress: eaten / max(1, goal), color: style.cristal.category(hex), track: style.cristal.category(hex).opacity(0.15), height: 5)
             }
         }
     }
@@ -780,6 +755,7 @@ private struct WorkoutDayTile: View {
     let workout: DailyBrief.Workout
     @Environment(AppModel.self) private var model
     @Environment(\.dailyCardActions) private var cardActions
+    @Environment(\.appStyle) private var style
     /// Today's session recorded by mistake, to delete once confirmed (it can then be done again).
     @State private var deleting: UUID?
 
@@ -791,7 +767,7 @@ private struct WorkoutDayTile: View {
     }
 
     var body: some View {
-        DayCard(title: title, symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", route: .space(.fitness), badge: nowBadge, glows: isNow) {
+        DayCard(title: title, symbol: "figure.strengthtraining.traditional", colorHex: "E5484D", route: .space(.fitness), badge: nowBadge) {
             switch workout.stage {
             case .planned:
                 Text(workout.name)
@@ -834,7 +810,7 @@ private struct WorkoutDayTile: View {
                     .lineLimit(1)
                 Label(tr("Faite · \(Fmt.plural(sets, tr("série"), tr("séries")))"), systemImage: "checkmark.circle.fill")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(Color(hex: "2B9A66"))
+                    .foregroundStyle(style.cristal.okColor)
                 if volume > 0 {
                     Text(tr("\(TF.int(volume)) kg soulevés"))
                         .font(.caption)
@@ -886,16 +862,16 @@ private struct WorkoutDayTile: View {
             time
                 .font(.caption.weight(.semibold))
                 .monospacedDigit()
-                .foregroundStyle(Color(hex: "E5484D"))
+                .foregroundStyle(Color.accentColor)
             Button {
                 Haptics.tap()
                 model.update(\.fitness, change)
             } label: {
                 Image(systemName: symbol)
                     .font(.caption.weight(.bold))
-                    .foregroundStyle(Color(hex: "E5484D"))
+                    .foregroundStyle(Color.accentColor)
                     .frame(width: 28, height: 24)
-                    .background(Color(hex: "E5484D").opacity(0.14), in: Capsule())
+                    .background(style.cristal.tintColor, in: Capsule())
                     .tapAreaOutset(10)
             }
             .buttonStyle(.pressable)
@@ -907,9 +883,9 @@ private struct WorkoutDayTile: View {
         Button(action: run) {
             Text(title)
                 .font(.subheadline.weight(.bold))
-                .foregroundStyle(.white)
-                .frame(maxWidth: .infinity, minHeight: 36)
-                .background(Color(hex: "E5484D"), in: Capsule())
+                .foregroundStyle(.onAccent)
+                .frame(maxWidth: .infinity, minHeight: 44)
+                .background(Color.accentColor, in: Capsule())
         }
         .buttonStyle(.pressable)
     }
@@ -999,7 +975,7 @@ private struct PlanningDayTile: View {
         } label: {
             Label(tr("Relier le calendrier Apple"), systemImage: "calendar.badge.plus")
                 .font(.caption.weight(.semibold))
-                .foregroundStyle(Color(hex: colorHex))
+                .foregroundStyle(Color.accentColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
         }
@@ -1019,7 +995,7 @@ private struct PlanningDayTile: View {
             Image(systemName: "chevron.right").font(.caption2.weight(.bold))
         }
         .font(.caption.weight(.semibold))
-        .foregroundStyle(Color(hex: colorHex))
+        .foregroundStyle(Color.accentColor)
     }
 
     /// The calendar events of the whole week, the days already gone included.
@@ -1034,6 +1010,7 @@ private struct HabitsDayTile: View {
     let items: [DailyBrief.Check]
     @Environment(AppModel.self) private var model
     @Environment(\.dailyCompact) private var compact
+    @Environment(\.appStyle) private var style
     /// The height of a habit's row on the wide card, with the text size.
     @ScaledMetric(relativeTo: .subheadline) private var rowHeight: CGFloat = 20
 
@@ -1087,14 +1064,14 @@ private struct HabitsDayTile: View {
 
     /// Today's state of a habit, in its own color: a ring, full with a check when done.
     private func ring(_ item: DailyBrief.Check, size: CGFloat) -> some View {
-        let color = Color(hex: item.colorHex ?? "7FA33A")
+        let color = style.cristal.category(item.colorHex ?? "7FA33A")
         return ZStack {
             Circle().strokeBorder(color, lineWidth: 2.5)
             if item.isDone {
                 Circle().fill(color)
                 Image(systemName: "checkmark")
                     .font(.system(size: size * 0.45, weight: .heavy))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(style.cristal.panelSolidColor)
             }
         }
         .frame(width: size, height: size)
@@ -1126,7 +1103,7 @@ private struct HabitsDayTile: View {
     /// One habit across the card: its ring of today, its name, then its last days, today last, as many small squares
     /// as the width holds (done in the habit's color, not done faint), the same way as the Habits widget.
     private func row(_ item: DailyBrief.Check) -> some View {
-        let color = Color(hex: item.colorHex ?? "7FA33A")
+        let color = style.cristal.category(item.colorHex ?? "7FA33A")
         let habit = model.content.habits.first { $0.id.uuidString == item.id }
         let ringSize = min(rowHeight, 22)
         return GeometryReader { proxy in
@@ -1166,6 +1143,7 @@ private struct HabitsDayTile: View {
 private struct StepsDayTile: View {
     let steps: Int
     let goal: Int?
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         DayCard(title: tr("Pas"), symbol: "figure.walk", colorHex: "12A4B5", route: .page(.fitnessActivity)) {
@@ -1181,7 +1159,7 @@ private struct StepsDayTile: View {
                 }
             }
             if let goal {
-                BarView(progress: Double(steps) / Double(max(1, goal)), color: Color(hex: "12A4B5"), track: Color(hex: "12A4B5").opacity(0.15), height: 6)
+                BarView(progress: Double(steps) / Double(max(1, goal)), color: style.cristal.category("12A4B5"), track: style.cristal.category("12A4B5").opacity(0.15), height: 6)
             } else {
                 Text(tr("Objectif à définir"))
                     .font(.caption)
@@ -1196,6 +1174,7 @@ private struct BudgetDayTile: View {
     let spent: Double
     let perDayLeft: Double?
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let currency = model.settings.currencyCode
@@ -1217,7 +1196,7 @@ private struct BudgetDayTile: View {
             let week = lastSevenDays
             if week.contains(where: { $0 > 0 }) {
                 SparklineShape(values: week)
-                    .stroke(Color(hex: "2F8F7A"), style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
+                    .stroke(style.cristal.category("2F8F7A"), style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
                     .frame(height: 26)
                     .accessibilityHidden(true)
             }
@@ -1236,6 +1215,7 @@ private struct BudgetDayTile: View {
 
 private struct RemindersDayTile: View {
     let items: [DailyBrief.Reminder]
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         DayCard(title: tr("À ne pas oublier"), symbol: "bell.fill", colorHex: "4B5563") {
@@ -1257,7 +1237,7 @@ private struct RemindersDayTile: View {
         HStack(spacing: 10) {
             Image(systemName: item.symbol)
                 .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(Color(hex: item.colorHex))
+                .foregroundStyle(style.cristal.category(item.colorHex))
                 .frame(width: 20)
             Text(item.title)
                 .font(.subheadline.weight(.semibold))
@@ -1415,15 +1395,17 @@ private struct InviteCard: View {
     let route: HomeRoute
     let identifier: String
     @Environment(\.dynamicTypeSize) private var typeSize
+    @Environment(\.appStyle) private var style
 
     var body: some View {
+        let tint = style.cristal.category(colorHex)
         NavigationLink(value: route) {
             HStack(spacing: 12) {
                 Image(systemName: symbol)
                     .font(.system(size: 15, weight: .semibold))
-                    .foregroundStyle(Color(hex: colorHex))
+                    .foregroundStyle(tint)
                     .frame(width: 34, height: 34)
-                    .background(Color(hex: colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .background(tint.opacity(0.14), in: Circle())
                 VStack(alignment: .leading, spacing: 2) {
                     Text(title)
                         .font(.subheadline.weight(.semibold))
@@ -1446,7 +1428,7 @@ private struct InviteCard: View {
             }
             .padding(14)
             .background {
-                RoundedRectangle(cornerRadius: 22, style: .continuous)
+                RoundedRectangle(cornerRadius: style.cristal.radius, style: .continuous)
                     .strokeBorder(Color.secondary.opacity(0.35), style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
             }
             .contentShape(Rectangle())
@@ -1460,6 +1442,7 @@ private struct InviteCard: View {
 /// Same shape and dashes as the invitation cards, but compact and neutral.
 private struct AddCategoryCard: View {
     let action: () -> Void
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         Button {
@@ -1471,7 +1454,7 @@ private struct AddCategoryCard: View {
                 .foregroundStyle(Color.secondary)
                 .frame(maxWidth: .infinity, minHeight: 64)
                 .background {
-                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                    RoundedRectangle(cornerRadius: style.cristal.radius, style: .continuous)
                         .strokeBorder(Color.secondary.opacity(0.35), style: StrokeStyle(lineWidth: 1, dash: [5, 4]))
                 }
                 .contentShape(Rectangle())
@@ -1488,12 +1471,14 @@ private struct AddCategorySheet: View {
     let categories: [DailyBrief.Category]
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         NavigationStack {
             List {
                 Section {
                     ForEach(categories) { category in
+                        let tint = style.cristal.category(category.colorHex)
                         Button {
                             Haptics.tap()
                             model.updateSettings { DailyCategories.add(category, in: &$0) }
@@ -1502,9 +1487,9 @@ private struct AddCategorySheet: View {
                             HStack(spacing: 12) {
                                 Image(systemName: category.symbol)
                                     .font(.subheadline.weight(.semibold))
-                                    .foregroundStyle(Color(hex: category.colorHex))
+                                    .foregroundStyle(tint)
                                     .frame(width: 30, height: 30)
-                                    .background(Color(hex: category.colorHex).opacity(0.14), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+                                    .background(tint.opacity(0.14), in: Circle())
                                 Text(category.title)
                                     .foregroundStyle(Color.primary)
                                     .lineLimit(1)
@@ -1605,6 +1590,7 @@ private struct NutritionWeekTile: View {
 
 private struct WorkoutWeekTile: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let state = model.fitness
@@ -1627,7 +1613,7 @@ private struct WorkoutWeekTile: View {
                     let day = week.flatMap { DateMath.calendar.date(byAdding: .day, value: offset, to: $0.start) } ?? now
                     let trained = done.contains { DateMath.isSameDay($0.start, day) }
                     Circle()
-                        .fill(trained ? Color(hex: "E5484D") : Color.secondary.opacity(DateMath.isSameDay(day, now) ? 0.45 : 0.18))
+                        .fill(trained ? style.cristal.category("E5484D") : Color.secondary.opacity(DateMath.isSameDay(day, now) ? 0.45 : 0.18))
                         .frame(width: 12, height: 12)
                         .frame(maxWidth: .infinity)
                 }

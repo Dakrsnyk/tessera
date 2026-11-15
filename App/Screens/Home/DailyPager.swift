@@ -9,11 +9,11 @@ struct DailyPager<Content: View>: View {
     /// The card's key in the settings (`AppSettings.dailyCardPages`).
     let id: String
     let titles: [String]
-    let accentHex: String
     @ViewBuilder let content: (Int) -> Content
     @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dailyEditing) private var editing
+    @Environment(\.appStyle) private var style
     /// The page on screen, driven by the paging scroll.
     @State private var position: Int?
 
@@ -79,7 +79,7 @@ struct DailyPager<Content: View>: View {
         HStack(spacing: 6) {
             ForEach(0..<count, id: \.self) { index in
                 Capsule()
-                    .fill(index == page ? Color(hex: accentHex) : Color.secondary.opacity(0.3))
+                    .fill(index == page ? Color.accentColor : CristalPalette.of(style.id).dotColor)
                     .frame(width: index == page ? 16 : 6, height: 6)
             }
         }
@@ -104,6 +104,7 @@ struct DailyWeekBars: View {
     var goal: Double?
     let colorHex: String
     var height: CGFloat = 56
+    @Environment(\.appStyle) private var style
 
     var body: some View {
         let top = max(values.max() ?? 0, goal ?? 0, 1)
@@ -113,7 +114,7 @@ struct DailyWeekBars: View {
                 HStack(alignment: .bottom, spacing: 5) {
                     ForEach(Array(values.enumerated()), id: \.offset) { index, value in
                         RoundedRectangle(cornerRadius: 3, style: .continuous)
-                            .fill(Color(hex: colorHex).opacity(index == values.count - 1 ? 1 : 0.45))
+                            .fill(CristalPalette.of(style.id).category(colorHex).opacity(index == values.count - 1 ? 1 : 0.45))
                             .frame(height: max(3, height * value / top))
                             .frame(maxWidth: .infinity)
                     }
