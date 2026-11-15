@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — 10 · Palettes et règles graphiques</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  .pc { margin: 0 9px; background: #fff; border: 1px solid #D5DDE8; border-radius: 22px; padding: 12px 14px 14px; }
+  .pc h5 { font: 800 19px Inter, sans-serif; letter-spacing: -.015em; margin-top: 12px; }
+  .pc h5 em { font: 700 10.5px Inter, sans-serif; font-style: normal; letter-spacing: .04em; text-transform: uppercase; border-radius: 4px; padding: 2px 6px; margin-left: 6px; vertical-align: 3px; color: #6B4E0A; background: #F6E7C1; }
+  .pc h5 em.f { color: #1E5B34; background: #DDF0E4; } .pc h5 em.n { color: #4A2F9A; background: #ECE7FA; }
+  .pc .ap { font: 500 12.5px/1.4 Inter, sans-serif; color: var(--bink2); margin: 2px 0 10px; }
+  .pc h6 { font: 700 11px Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--bink2); margin: 12px 0 6px; }
+  .pc .cr { font: 500 12px/1.5 Inter, sans-serif; color: var(--bink2); } .pc .cr b { color: var(--bink); font-variant-numeric: tabular-nums; }
+  .spec { position: relative; height: 236px; border-radius: 16px; overflow: hidden; isolation: isolate; background: var(--bg); color: var(--ink); padding: 12px; font-size: 15px; }
+  .spec::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--wash); }
+  .spec .x-top { margin: 0; height: 40px; } .spec .x-ava { width: 30px; height: 30px; font-size: 12px; }
+  .spec .pn { margin-top: 10px; padding: 12px; }
+  .spec .chipsrow { display: flex; gap: 5px; } .spec .chipsrow .ico { width: 26px; height: 26px; font-size: 14px; }
+  .spec .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .spec .btnP, .spec .btnT { height: 40px; font-size: 14px; }
+  .spec .rg { width: 46px; height: 46px; }
+  .spec .line { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  .spec .line .u-meter { flex: 1; }
+  .rules { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 30px 9px 0; }
+  .rules .note li { margin: 4px 0 0 16px; }
+</style>
+</head>
+<body style="--bw:2316px">
+<main class="bd">
+  <header class="bd-head"><div class="num">10</div><div><h1>Palettes et règles graphiques</h1>
+    <p style="max-width:1300px">Les dix palettes complètes, avec leurs codes HEX et leurs contrastes mesurés. Les couleurs des mini-apps partent du même jeu de référence (celui de Saphir) et sont ré-accordées vers la couleur principale de chaque déclinaison, puis assombries au besoin pour rester lisibles sur un panneau (3:1 au moins pour une icône ou un graphique).</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+  <div class="row" id="r1"></div>
+  <div class="row" id="r2" style="margin-top:26px"></div>
+  <div class="rules">
+    <div class="note"><h4>Deux matières</h4><p><b>Verre</b> : blanc à 55 %, flou de 22 points, liseré blanc, reflet d'un point en haut. Réservé à ce qui flotte : barre de la date, boutons ronds, sélecteur de semaine, la carte « Maintenant » (une seule par écran), barre d'onglets.</p><p><b>Panneau</b> : blanc à 80 %, flou léger, ombre teintée très douce. Porte tout le contenu. Les feuilles sont opaques.</p><p>Repli si « Réduire la transparence » est activé : le verre devient un panneau opaque.</p></div>
+    <div class="note"><h4>Couleur</h4><p>Une seule couleur d'action par écran (boutons, liens, onglet actif, « Maintenant »). Les couleurs des mini-apps ne servent qu'aux pastilles d'icône et aux graphiques.</p><p>Dans une mini-app, une nappe de sa couleur éclaire le haut de la page et la couleur d'action devient la sienne (version assombrie, lisible avec du texte blanc).</p><p>Un état ne repose jamais sur la couleur seule : il y a toujours un texte, une coche ou un texte barré.</p></div>
+    <div class="note"><h4>Formes et lettres</h4><p>Panneaux : rayon 26 (20 à 28 selon la déclinaison), marges d'écran de 20, 12 entre deux panneaux. Boutons en capsule de 44 points au moins. Barre d'onglets : capsule de verre flottante de 62 points.</p><p>Lettres : SF Pro sur iPhone (Inter dans les maquettes). Titre d'écran 32 gras ; section 20 ; titre de carte 15 demi-gras ; texte 15 ; secondaire 12,5 à 14 ; grands chiffres 28 ou 44, à chasse fixe.</p></div>
+    <div class="note"><h4>Lisibilité mesurée</h4><p>Texte principal sur panneau : 15:1 et plus. Texte secondaire : 6:1 et plus, sur panneau comme sur fond. Texte blanc sur la couleur d'action : 5,7:1 et plus. Couleur d'action sur sa teinte (onglet actif) : 4,6:1 et plus. Icônes et graphiques des mini-apps : 3:1 et plus.</p><p>Non dessiné : le mode sombre et les très grandes tailles de texte. Ils sont à faire après le choix de la déclinaison.</p></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script>
+const card = (t) => { const k = tokens(t), cr = (a, b) => C.cr(a, b).toFixed(1).replace('.', ',') + ':1';
+  return `<div class="col"><div class="pc">
+    <div class="spec t-${t.id}"><div class="x-top gl"><span class="x-date">Jeudi 12 novembre</span><span class="x-ava">M</span></div>
+      <div class="pn"><div class="chipsrow">${[['nut', 'fork'], ['fit', 'dumbbell'], ['pla', 'calendar'], ['hab', 'repeat'], ['bud', 'wallet'], ['pro', 'list'], ['pas', 'steps']].map(([c, i]) => `<span class="ico" data-c="${c}">${U.ico(i)}</span>`).join('')}<span class="nb" style="margin-left:auto;align-self:center">Maintenant</span></div>
+        <div class="line"><div class="rgw rg" data-c="nut">${U.ring(.49, 12)}</div><div style="flex:1;display:grid;gap:6px"><span data-c="prot">${U.meter(.49)}</span><span data-c="gluc">${U.meter(.62)}</span><span data-c="lip">${U.meter(.38)}</span></div></div>
+        <div class="btns"><div class="btnP">${U.ico('play')}Commencer</div><div class="btnT">${U.ico('scan')}Scanner</div></div></div></div>
+    <h5>${t.name}<em class="${t.free ? 'f' : t.isNew ? 'n' : ''}">${t.free ? 'Gratuite' : t.isNew ? 'Teinte nouvelle' : 'Premium'}</em></h5>
+    <p class="ap">${t.sub}. Couleur de l'app : ${t.app}.</p>
+    <div data-pal="${t.id}"></div>
+    <h6>Contrastes mesurés</h6>
+    <p class="cr">Blanc sur principale <b>${cr('#FFFFFF', k.primary)}</b> · encre sur panneau <b>${cr(k.ink, k.panelSolid)}</b><br>secondaire sur panneau <b>${cr(k.ink2, k.panelSolid)}</b> · sur fond <b>${cr(k.ink2, k.bg)}</b><br>principale sur sa teinte <b>${cr(k.primary, k.tint2)}</b> · accent sur panneau <b>${cr(k.accent, k.panelSolid)}</b></p>
+  </div></div>`; };
+document.getElementById('r1').innerHTML = THEMES.slice(0, 5).map(card).join('');
+document.getElementById('r2').innerHTML = THEMES.slice(5).map(card).join('');
+Cristal.init();
+</script>
+</body>
+</html>

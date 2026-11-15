@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — 3 · Mini-app Nutrition</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* préfixe nu- : propre à cette planche */
+  .nu-hero { border-radius: var(--r); display: grid; grid-template-columns: 112px 1fr; gap: 18px; align-items: center; }
+  .nu-hero .mac { --meter-h: 4px; --meter-r: 2px; gap: 9px; }
+  .nu-add { width: 44px; height: 44px; margin-right: -8px; display: grid; place-items: center; flex: none; }
+  .nu-add u { width: 30px; height: 30px; border-radius: 50%; background: var(--primary); color: #fff; display: grid; place-items: center; font-size: 17px; --sw: 2.4; }
+  .nu-pl { color: var(--primary); }
+  .nu-ins { display: flex; gap: 12px; align-items: flex-start; }
+  .nu-ins b { display: block; font-size: 15px; font-weight: 650; line-height: 1.25; }
+  .nu-ins .s { display: block; margin-top: 3px; }
+  .nu-st { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; padding: 12px 4px 12px; }
+  .nu-st b { display: block; font-size: 22px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+  .nu-st span { display: block; font-size: 12.5px; color: var(--ink2); margin-top: 2px; }
+  .nu-st em { display: block; font-style: normal; font-size: 11.5px; color: var(--ink2); }
+  .nu-cp .li { min-height: 46px; }
+  .nu-sh .chip { padding: 0 11px; }
+  .nu-sh .chips { gap: 6px; }
+  .nu-seg span { font-size: 12px; padding: 0 1px; }
+  .nu-stat { padding: 9px 14px 10px; }
+  .nu-stat b { font-size: 21px; }
+  .nu-stack { display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 2px; }
+  .nu-stack i { display: block; height: 100%; background: var(--c); }
+  .nu-leg { display: flex; justify-content: space-between; margin-top: 8px; font-size: 12.5px; }
+  .nu-leg span { display: flex; align-items: center; gap: 5px; font-weight: 600; }
+  .nu-leg u { width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+  .nu-obj { padding: 4px 16px; }
+  .nu-obj > div { padding: 12px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; row-gap: 7px; }
+  .nu-obj > div:first-child { border-top: 0; }
+  .nu-obj b { font-size: 15px; font-weight: 650; } .nu-obj em { font-style: normal; font-size: 14px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+  .nu-t > div { padding: 8px 0; row-gap: 5px; }
+  .nu-part { font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 8px; background: var(--well); color: var(--ink2); margin-left: 6px; }
+  .nu-obj [data-u] { grid-column: 1 / -1; }
+  .nu-field { height: 44px; border-radius: 22px; background: var(--well); display: flex; align-items: center; gap: 8px; padding: 0 16px; font-size: 16px; }
+  .nu-field i { font-size: 18px; color: var(--ink2); }
+  .nu-qty { display: flex; align-items: center; justify-content: space-between; height: 48px; font-size: 15px; font-weight: 650; border-bottom: 1px solid var(--rule); }
+  .nu-qty u { text-decoration: none; min-width: 74px; height: 36px; border-radius: 12px; background: var(--well); display: flex; align-items: center; justify-content: flex-end; padding: 0 12px; gap: 4px; font-variant-numeric: tabular-nums; }
+  .nu-qty u small { font-size: 13px; color: var(--ink2); font-weight: 600; }
+  .nu-ap { display: grid; grid-template-columns: 1fr auto; font-size: 14px; }
+  .nu-ap > * { padding: 5px 0; border-top: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+  .nu-ap > span:nth-child(odd) { color: var(--ink2); } .nu-ap > b { font-weight: 650; text-align: right; }
+  .nu-note h4 { margin-top: 12px; font-size: 14px; } .nu-note h4:first-child { margin-top: 0; }
+  .nu-note ul { list-style: none; display: grid; gap: 4px; margin-top: 5px; }
+  .nu-note li { display: flex; gap: 7px; align-items: baseline; font-size: 12.5px; line-height: 1.35; }
+  .nu-note code { font: 600 11.5px Consolas, monospace; color: var(--bink2); }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">3</div><div><h1>Mini-app Nutrition</h1>
+    <p>La page qui s'ouvre quand on touche Nutrition, dans le style Cristal : le sélecteur de semaine et la figure du jour flottent en verre sur une nappe douce, tout le reste est posé sur des panneaux. Mêmes blocs, mêmes textes et mêmes fonctions qu'aujourd'hui ; aucune action flottante (Nutrition n'en a pas). Journée d'exemple : jeudi 12 novembre, 13 h 20.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <!-- 1 · page principale, haut -->
+    <div class="col"><div class="nm">1 · Page principale, haut</div>
+      <div class="phone app t-saphir" data-c="nut" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl"><i data-i="chevl"></i></span><span class="sp"></span><span class="t">Nutrition</span><span class="sp"></span><span style="width:44px"></span></div>
+        <div style="margin-top:8px"><div data-u="wsel" data-o='{"sel":3,"marks":[0,1,2,3],"title":"Cette semaine"}'></div></div>
+        <article class="gl cd nu-hero" data-c="nut" style="margin-top:10px">
+          <div class="rgw" style="width:112px;height:112px"><div data-u="ring" data-p=".49" data-sw="9" style="width:100%;height:100%"></div><div class="in"><b style="font-size:26px">1 122</b><small style="font-size:11.5px">kcal<br>restantes</small></div></div>
+          <div class="mac">
+            <div data-c="prot"><span>Protéines</span><em>68 / 140 g</em><span data-u="meter" data-p=".486"></span></div>
+            <div data-c="gluc"><span>Glucides</span><em>121 / 250 g</em><span data-u="meter" data-p=".484"></span></div>
+            <div data-c="lip"><span>Lipides</span><em>34 / 70 g</em><span data-u="meter" data-p=".486"></span></div>
+          </div>
+        </article>
+        <div class="g2" style="margin-top:12px"><div class="btnP"><i data-i="scan"></i>Scanner</div><div class="btnT"><i data-i="search"></i>Rechercher</div></div>
+        <div class="sect"><b>Repas</b></div>
+        <div class="pn ls" id="nuMeals1"></div>
+      </div></div>
+      <div class="cap"><h4>La figure du jour en verre</h4><p>Sélecteur et figure essentielle flottent sur la nappe orange douce ; « Repas » est un panneau. Jeudi 12 est choisi (pilule pleine), les jours notés portent un repère.</p>
+        <ul><li><span class="tag e">Existe</span><span>Anneau, 3 jauges, « Scanner » / « Rechercher », 4 repas avec « + »</span></li>
+        <li><span class="tag a">À adapter</span><span>Repère de jour (anneau ou coche) et fond en verre</span></li></ul></div>
+      <span class="flow"></span></div>
+
+    <!-- 2 · page principale, suite -->
+    <div class="col"><div class="nm">2 · Page principale, suite</div>
+      <div class="phone app t-saphir" data-c="nut" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl"><i data-i="chevl"></i></span><span class="sp"></span><span class="t">Nutrition</span><span class="sp"></span><span style="width:44px"></span></div>
+        <div class="pn ls nu-cp" style="margin-top:10px"><div class="li"><span class="ico sq"><i data-i="leaf"></i></span><div class="tx"><b>Tous les nutriments</b></div><span class="prem"><i data-i="lock"></i>Premium</span><i class="go" data-i="chev"></i></div></div>
+        <article class="pn cd" style="margin-top:10px;padding-top:10px;padding-bottom:12px"><div class="nu-ins"><span class="ico lg"><i data-i="sparkles"></i></span><div><b>Des idées pour la suite de ta journée</b></div></div>
+          <div class="btnT" style="margin-top:8px">Voir des idées<i data-i="chev"></i></div></article>
+        <div class="sect" style="margin-top:12px"><b>Calories de la semaine</b></div>
+        <article class="pn cd" style="padding-top:12px">
+          <div style="height:56px" id="nuWeek"></div><div id="nuWeekLab"></div>
+          <div class="s" style="margin-top:8px;color:var(--ink)">Moyenne 1 877 kcal · 3 jours sur 4 dans l'objectif</div></article>
+        <div class="pn ls nu-cp" style="margin-top:12px">
+          <div class="li"><span class="ico sq"><i data-i="chart"></i></span><div class="tx"><b>Historique</b><span class="s">Moyennes, tendances et poids</span></div><i class="go" data-i="chev"></i></div>
+          <div class="li"><span class="ico sq"><i data-i="fork"></i></span><div class="tx"><b>Mes repas</b><span class="s">Des repas enregistrés, à reprendre d'une touche</span></div><span class="r">3</span><i class="go" data-i="chev"></i></div>
+          <div class="li"><span class="ico sq"><i data-i="pencil"></i></span><div class="tx"><b>Mes aliments</b><span class="s">Corriger ou supprimer tes aliments personnels</span></div><span class="r">2</span><i class="go" data-i="chev"></i></div>
+        </div>
+        <div class="foot" style="margin-top:8px">Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL).</div>
+        <div class="btnO" style="margin-top:10px"><i data-i="gear"></i>Mes paramètres</div>
+      </div></div>
+      <div class="cap"><h4>Les compléments, sans bruit</h4><p>La même page défilée. La ligne verrouillée garde son badge Premium ; la barre du jour reste pleine, les autres à 45 %.</p>
+        <ul><li><span class="tag e">Existe</span><span>Tous les blocs, l'ordre et les textes</span></li>
+        <li><span class="tag a">À adapter</span><span>Feuille calme remplacée par des panneaux</span></li></ul></div>
+      <span class="flow"></span></div>
+
+    <!-- 3 · page d'un repas -->
+    <div class="col"><div class="nm">3 · Page d'un repas</div>
+      <div class="phone app t-saphir" data-c="nut" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl"><i data-i="chevl"></i></span></div>
+        <div class="x-title" style="margin-top:-1px">Dîner</div>
+        <div class="sect" style="margin-top:4px;margin-bottom:6px"><b>Aujourd'hui</b></div>
+        <article class="pn nu-st"><div><b>658</b><span>Calories</span><em>kcal</em></div><div><b>44</b><span>Protéines</span><em>g</em></div><div><b>69</b><span>Glucides</span><em>g</em></div><div><b>22</b><span>Lipides</span><em>g</em></div></article>
+        <div class="sect" style="margin-top:10px;margin-bottom:6px"><b>Aliments</b></div>
+        <div class="pn ls nu-cp">
+          <div class="li"><div class="tx"><b>Poulet grillé</b><span class="s tn">120 g · P 36 · G 0 · L 5</span></div><span class="r"><b style="font-weight:600;color:var(--ink2)">198 kcal</b></span></div>
+          <div class="li"><div class="tx"><b>Riz basmati cuit</b><span class="s tn">200 g · P 5 · G 56 · L 1</span></div><span class="r"><b style="font-weight:600;color:var(--ink2)">260 kcal</b></span></div>
+          <div class="li"><div class="tx"><b>Brocoli à l'huile d'olive</b><span class="s tn">180 g · P 3 · G 13 · L 16</span></div><span class="r"><b style="font-weight:600;color:var(--ink2)">200 kcal</b></span></div>
+          <div class="li nu-pl"><span class="nu-add" style="margin:0 -4px 0 -6px"><u><i data-i="plus"></i></u></span><div class="tx"><b style="color:var(--primary)">Ajouter un aliment</b></div></div>
+        </div>
+        <div class="foot" style="margin-top:6px">Touche un aliment pour changer sa quantité ou le déplacer. Glisse-le pour le supprimer.</div>
+        <div class="sect" style="margin-top:10px;margin-bottom:6px"><b>Reprendre un dîner précédent</b></div>
+        <div class="pn ls nu-cp">
+          <div class="li"><div class="tx"><b>Mer. 11 nov.</b><span class="s">Saumon, Quinoa, Haricots verts</span></div><span class="r">702 kcal</span><span class="nu-add"><u><i data-i="plus"></i></u></span></div>
+          <div class="li"><div class="tx"><b>Mar. 10 nov.</b><span class="s">Pâtes, Sauce tomate, Fromage</span></div><span class="r">689 kcal</span><span class="nu-add"><u><i data-i="plus"></i></u></span></div>
+        </div>
+        <div class="btnT" style="margin-top:10px"><i data-i="plusbox"></i>Enregistrer ce repas</div>
+      </div></div>
+      <div class="cap"><h4>Un repas, en clair</h4><p>Les 4 chiffres du repas, ses aliments, puis les reprises. Sous la ligne de flottaison : « Mes repas », « Enregistrer ce repas » (alerte avec champ « Nom ») et son pied de page.</p>
+        <ul><li><span class="tag e">Existe</span><span>Tout, y compris glisser « Supprimer » / « Favori »</span></li>
+        <li><span class="tag a">À adapter</span><span>Liste système remplacée par des panneaux</span></li></ul></div>
+      <span class="flow"></span></div>
+
+    <!-- 4 · ajouter un aliment -->
+    <div class="col"><div class="nm">4 · Ajouter un aliment</div>
+      <div class="phone app t-saphir" data-c="nut" data-time="13:20" data-tab="none"><div class="scr">
+        <div class="nv"><span class="rb gl"><i data-i="chevl"></i></span><span class="sp"></span><span class="t">Nutrition</span><span class="sp"></span><span style="width:44px"></span></div>
+      </div><div class="dim"></div>
+      <div class="sheet" style="top:46px;z-index:25;padding-bottom:0;overflow:hidden">
+        <div class="grab"></div>
+        <div class="nv" style="margin-top:-6px"><span class="rb txt" style="padding:0 4px">Fermer</span><span class="sp"></span><span class="t">Ajouter un aliment</span><span class="sp"></span><span style="width:56px"></span></div>
+        <div class="nu-field" style="margin-top:6px"><i data-i="search"></i>yogourt</div>
+        <div class="g2" style="margin-top:10px"><div class="btnT"><i data-i="scan"></i>Scanner</div><div class="btnT"><i data-i="pencil"></i>Aliment perso</div></div>
+        <div class="x-lab" style="margin:14px 4px 6px">Résultats</div>
+        <div class="pn flat ls">
+          <div class="li" style="background:var(--tint);margin:0 -10px;padding:6px 10px;border-radius:14px"><div class="tx"><b>Yogourt grec nature</b><span class="s tn">73 kcal / 100 g · P 10 · G 4 · L 2</span></div><i class="go" data-i="chev"></i></div>
+          <div class="li"><div class="tx"><b>Yogourt nature 2 %</b><span class="s tn">61 kcal / 100 g · P 4 · G 5 · L 3</span></div><i class="go" data-i="chev"></i></div>
+        </div>
+      </div>
+      <div class="dim" style="z-index:28;background:rgba(11,18,32,.22)"></div>
+      <div class="sheet nu-sh" style="z-index:30;padding-bottom:30px">
+        <div class="grab"></div>
+        <div class="nv" style="margin-top:-6px"><span class="rb txt" style="padding:0 4px;color:var(--ink2)">Annuler</span><span class="sp"></span><span class="t">Yogourt grec nature</span><span class="sp"></span><span class="rb txt" style="padding:0 4px">Enregistrer</span></div>
+        <div class="s tn" style="margin:2px 2px 6px">Pour 100 g : 73 kcal · protéines 10,0 g · glucides 4,0 g · lipides 2,0 g</div>
+        <div class="nu-qty"><span>Quantité</span><u>175<small>g</small></u></div>
+        <div class="chips" style="margin:10px 0 2px"><span class="chip">½ portion</span><span class="chip on">1 portion</span><span class="chip">2 portions</span><span class="chip">100 g</span></div>
+        <div class="nu-qty" style="margin-top:6px"><span>Repas</span><span style="display:flex;align-items:center;gap:4px;color:var(--primary)">Collation<i data-i="chevd"></i></span></div>
+        <div class="s" style="margin:6px 2px 6px">Après ajout, il te restera 994 kcal.</div>
+        <div class="x-lab" style="margin:8px 2px 2px">Apport</div>
+        <div class="nu-ap"><span>Calories</span><b>128 kcal</b><span>Protéines</span><b>17,5 g</b><span>Glucides</span><b>7,0 g</b><span>Lipides</span><b>3,5 g</b></div>
+        <div class="li" style="min-height:44px;border-top:1px solid var(--rule);padding:4px 0;display:flex;align-items:center;gap:10px"><b style="font-size:14px">Tous les nutriments</b><span class="prem" style="margin-left:auto"><i data-i="lock"></i>Premium</span></div>
+      </div></div>
+      <div class="cap"><h4>Chercher, choisir, ajuster</h4><p>La recherche reste une feuille opaque ; la quantité s'ouvre par-dessus, comme aujourd'hui. Choisir le repas et voir ce qu'il restera avant d'enregistrer.</p>
+        <ul><li><span class="tag e">Existe</span><span>Champ, Scanner, Aliment perso, résultats, quantité, portions, repas, apport</span></li>
+        <li><span class="tag a">À adapter</span><span>Habillage des feuilles (panneaux, capsules)</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <!-- 5 · nutriments -->
+    <div class="col"><div class="nm">5 · Nutriments · Premium</div>
+      <div class="phone app t-saphir" data-c="nut" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl"><i data-i="chevl"></i></span><span class="sp"></span><span class="t">Nutriments</span><span class="sp"></span><span style="width:44px"></span></div>
+        <div class="sect" style="margin-top:8px;margin-bottom:6px"><b>Objectifs</b></div>
+        <article class="pn nu-obj nu-t">
+          <div data-c="nut"><b>Calories</b><em>1 078 / 2 200 kcal</em><span data-u="meter" data-p=".49"></span></div>
+          <div data-c="prot"><b>Protéines</b><em>68 / 140 g</em><span data-u="meter" data-p=".486"></span></div>
+          <div data-c="gluc"><b>Glucides</b><em>121 / 250 g</em><span data-u="meter" data-p=".484"></span></div>
+          <div data-c="lip"><b>Lipides</b><em>34 / 70 g</em><span data-u="meter" data-p=".486"></span></div>
+          <div data-c="hab"><b>Fibres <span class="prem" style="margin-left:6px"><i data-i="crown"></i>Premium</span></b><em>11 / 30 g</em><span data-u="meter" data-p=".37"></span></div>
+        </article>
+        <div class="sect" style="margin-top:10px;margin-bottom:6px"><b>À limiter</b></div>
+        <article class="pn nu-obj nu-t">
+          <div data-c="gluc"><b>Sucres</b><em>28 / 50 g</em><span data-u="meter" data-p=".56"></span></div>
+          <div data-c="gluc"><b>Sodium</b><em>1 240 / 2 300 mg</em><span data-u="meter" data-p=".54"></span></div>
+          <div data-c="gluc"><b>Graisses saturées</b><em>9 / 20 g</em><span data-u="meter" data-p=".45"></span></div>
+        </article>
+        <div class="sect" style="margin-top:10px;margin-bottom:6px"><b>Minéraux</b></div>
+        <article class="pn nu-obj nu-t">
+          <div data-c="hab"><b>Calcium <span class="nu-part">partiel</span></b><em>380 / 1 000 mg</em><span data-u="meter" data-p=".38"></span></div>
+          <div><b>Potassium</b><em>Non disponible</em></div>
+          <div data-c="hab"><b>Fer</b><em>7 / 14 mg</em><span data-u="meter" data-p=".5"></span></div>
+        </article>
+      </div></div>
+      <div class="cap"><h4>Tout le détail, en panneaux</h4><p>Vue Premium : barres vertes, grises ou rouges si une limite est dépassée, pastille « partiel » et « Non disponible » quand la donnée manque. Sans Premium : les 4 objectifs, puis une ligne verrouillée « Tous les nutriments » / « Fibres, sucres, gras, minéraux, vitamines, caféine… » avec son badge (aussi sur l'écran 2).</p>
+        <ul><li><span class="tag e">Existe</span><span>Page, Objectifs, À limiter, groupes, verrou</span></li>
+        <li><span class="tag a">À adapter</span><span>Habillage en panneaux</span></li></ul></div>
+      <span class="flow"></span></div>
+
+    <!-- 6 · historique -->
+    <div class="col"><div class="nm">6 · Historique</div>
+      <div class="phone app t-saphir" data-c="nut" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl"><i data-i="chevl"></i></span></div>
+        <div class="x-title" style="margin-top:-1px">Historique</div>
+        <div class="seg nu-seg" style="margin-top:8px"><span>Aujourd'hui</span><span>Hier</span><span class="on">7 jours</span><span>30 jours</span><span>Période</span></div>
+        <div class="sect" style="margin-top:8px;margin-bottom:6px"><b>Moyennes</b></div>
+        <div class="g2" style="gap:10px">
+          <article class="pn stat nu-stat"><small>Calories</small><b>2 202<em>kcal</em></b><small style="font-weight:500">objectif 2 200</small></article>
+          <article class="pn stat nu-stat" data-c="prot"><small>Protéines</small><b>132<em>g</em></b></article>
+          <article class="pn stat nu-stat" data-c="gluc"><small>Glucides</small><b>262<em>g</em></b></article>
+          <article class="pn stat nu-stat" data-c="lip"><small>Lipides</small><b>69<em>g</em></b></article>
+        </div>
+        <div class="s" style="margin:6px 4px 0">5 jours sur 6 à moins de 10 % de ton objectif</div>
+        <div class="sect" style="margin-top:8px;margin-bottom:6px"><b>Calories par jour</b></div>
+        <article class="pn cd" style="padding:12px 14px"><div style="height:50px" id="nuHist"></div><div id="nuHistLab"></div>
+          <div class="s" style="margin-top:4px;display:flex;align-items:center;gap:6px"><span style="width:16px;border-top:1.5px dashed var(--ink2)"></span>Objectif</div></article>
+        <div class="sect" style="margin-top:8px;margin-bottom:6px"><b>Répartition des calories</b></div>
+        <article class="pn cd" style="padding:12px 14px">
+          <div class="nu-stack"><i data-c="prot" style="width:24%"></i><i data-c="gluc" style="width:48%"></i><i data-c="lip" style="width:28%"></i></div>
+          <div class="nu-leg"><span data-c="prot"><u></u>Protéines 24 %</span><span data-c="gluc"><u></u>Glucides 48 %</span><span data-c="lip"><u></u>Lipides 28 %</span></div></article>
+        <div class="sect" style="margin-top:8px;margin-bottom:6px"><b>Poids</b><span>−0,5 kg</span></div>
+        <article class="pn cd" style="padding:12px 14px"><div id="nuPoids"></div></article>
+      </div></div>
+      <div class="cap"><h4>Un seul segmenté, des graphiques lisibles</h4><p>Vue Premium « 7 jours ». Sans Premium, 7 jours, 30 jours et Période montrent la carte « L'historique détaillé est dans Premium » ; « Aujourd'hui » et « Hier » restent libres. Plus bas : « Jour par jour ».</p>
+        <ul><li><span class="tag e">Existe</span><span>Segmenté, Bilan / Moyennes, graphiques, Poids</span></li>
+        <li><span class="tag a">À adapter</span><span>Segmenté à 5 choix : police 12 ; en très grand texte, bascule en menu</span></li></ul></div>
+      <span class="flow"></span></div>
+
+    <!-- 7 · état vide -->
+    <div class="col"><div class="nm">7 · Première ouverture</div>
+      <div class="phone app t-saphir" data-c="nut" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl"><i data-i="chevl"></i></span><span class="sp"></span><span class="t">Nutrition</span><span class="sp"></span><span style="width:44px"></span></div>
+        <article class="gl cd nu-hero" data-c="nut" style="margin-top:10px">
+          <div class="rgw" style="width:104px;height:104px"><div data-u="ring" data-p="0" data-sw="9" style="width:100%;height:100%"></div><div class="in"><b style="font-size:26px">0</b><small style="font-size:11.5px">kcal<br>mangées</small></div></div>
+          <div class="mac">
+            <div data-c="prot"><span>Protéines</span><em>0 g</em><span data-u="meter" data-p="0"></span></div>
+            <div data-c="gluc"><span>Glucides</span><em>0 g</em><span data-u="meter" data-p="0"></span></div>
+            <div data-c="lip"><span>Lipides</span><em>0 g</em><span data-u="meter" data-p="0"></span></div>
+          </div>
+        </article>
+        <div class="sect" style="margin-top:12px"><b>À remplir</b><span>0 / 2</span></div>
+        <div class="x-stack" style="gap:10px">
+          <article class="pn" style="padding:12px 14px"><div class="nu-ins" style="gap:10px"><span class="ico sq lg"><i data-i="flame"></i></span><div style="flex:1"><b style="font-size:14.5px">Objectif calorique</b><span class="s">Pour savoir ce qu'il te reste à manger aujourd'hui.</span></div><span class="prem" style="background:#FCE8CC;color:#8A4B00">À renseigner</span></div>
+            <div class="btnP" style="margin-top:9px"><i data-i="sparkles"></i>Calculer mes besoins</div></article>
+          <article class="pn" style="padding:12px 14px"><div class="nu-ins" style="gap:10px"><span class="ico sq lg"><i data-i="pie"></i></span><div style="flex:1"><b style="font-size:14.5px">Objectifs de macros</b><span class="s">Pour suivre tes protéines, glucides et lipides.</span></div><span class="prem" style="background:#FCE8CC;color:#8A4B00">À renseigner</span></div>
+            <div class="btnP" style="margin-top:9px"><i data-i="sparkles"></i>Calculer mes besoins</div></article>
+        </div>
+        <div class="g2" style="margin-top:12px"><div class="btnP"><i data-i="scan"></i>Scanner</div><div class="btnT"><i data-i="search"></i>Rechercher</div></div>
+        <div class="sect"><b>Repas</b></div>
+        <div class="pn ls" id="nuMeals7"></div>
+      </div></div>
+      <div class="cap"><h4>Rien de rempli, aucun faux chiffre</h4><p>Page défilée : le sélecteur est passé au-dessus. Plus bas, dans l'ordre : carte « Calcule tes besoins du jour » (« Ton âge, ta taille, ton poids et ton objectif suffisent… », bouton « Calculer »), « Calories de la semaine » avec « Rien de noté cette semaine. », puis les lignes Historique et Mes repas.</p>
+        <ul><li><span class="tag e">Existe</span><span>« À remplir 0 / 2 » (disparaît seule), anneau « kcal mangées », « Rien noté »</span></li></ul></div></div>
+
+    <!-- 8 · légende -->
+    <div class="col"><div class="nm">Légende</div>
+      <div class="note nu-note" style="margin:9px">
+        <h4>Ce qui ne change pas</h4>
+        <p>L'ordre de la page : sélecteur de semaine, figure essentielle, « À remplir » (s'il manque des données), actions, « Repas », compléments (nutriments, idée, semaine, lignes), note, « Mes paramètres » en dernier. Pas d'action flottante, pas d'onglets, un seul segmenté (Historique).</p>
+        <h4>Ce que Cristal change</h4>
+        <ul><li><span class="tag a">Fond</span><span>La bande orange saturée devient une nappe douce de la couleur de la mini-app.</span></li>
+        <li><span class="tag a">Blocs</span><span>La feuille blanche devient des panneaux séparés ; « Repas », semaine, lignes, nutriments.</span></li>
+        <li><span class="tag a">Figure</span><span>Le sélecteur et l'anneau de calories passent en verre.</span></li>
+        <li><span class="tag a">Couleur</span><span>Une seule couleur d'action (celle de la mini-app, lisible avec du blanc) ; rouge, jaune, bleu réservés aux macros.</span></li></ul>
+        <h4>État des éléments</h4>
+        <ul><li><span class="tag e">Existe</span><span>Tous les blocs, textes, états vides et verrous Premium dessinés ici.</span></li>
+        <li><span class="tag a">À adapter</span><span>Habillage : retour rond en verre, verre pour sélecteur et figure, panneaux, capsules de 44 pt, repère de jour du sélecteur.</span></li>
+        <li><span class="tag d">À développer</span><span>Les matières Cristal en SwiftUI (verre, panneau, nappe) dans <code>Shared/Render/</code> ; aucune fonction nouvelle.</span></li></ul>
+        <h4>Fichiers Swift concernés</h4>
+        <p><code>NutritionAppView</code>, <code>CalorieHero</code>, <code>MacroGauge</code>, <code>MealRow</code>, <code>WeekBars</code> ; <code>WeekSelector</code>, <code>MiniAppScaffold</code>, <code>MiniAppToFillSection</code>, <code>MiniRow</code>, <code>MiniStat</code>, <code>MiniSectionTitle</code>, <code>MiniActionButton</code>, <code>MiniFootnote</code> ; <code>NutritionMealPage</code>, <code>NutritionNutrientsPage</code>, <code>NutritionHistoryPage</code>, <code>NutrientLockRow</code> ; <code>FoodSearchView</code>, <code>FoodLogSheet</code>.</p>
+        <p style="margin-top:8px">Même langage, non redessinés ici : Idées, Mes repas, Mes aliments, scanner et récapitulatif, « Mes paramètres ».</p>
+      </div></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script>
+Object.assign(P, {
+  leaf: 'M5 19c0-8 5-13 14-14 0 9-5 14-13 14zM5 19l7-7',
+  sunrise: 'M3 18h18M7 18a5 5 0 0 1 10 0M12 6v3M5.5 10l1.5 1.5M18.5 10L17 11.5',
+  carrot: 'M14 6l4 4-8 10-6-6zM15 3c1 1 1 2 0 3M19 7c1 0 2 0 3 1',
+  pie: 'M12 3a9 9 0 1 0 9 9h-9zM15 3.5A9 9 0 0 1 20.5 9H15z'
+});
+// lignes de repas (page principale et état vide)
+const nuMeal = (n, i, sub, val) => `<div class="li"><span class="ico sq"><i data-i="${i}"></i></span><div class="tx"><b>${n}</b><span class="s">${sub}</span></div>${val ? `<span class="r"><b style="font-weight:600;color:var(--ink2)">${val}</b></span>` : ''}<i class="go" data-i="chev"></i><span class="nu-add" role="button" aria-label="Ajouter au ${n}"><u><i data-i="plus"></i></u></span></div>`;
+document.getElementById('nuMeals1').innerHTML = nuMeal('Déjeuner', 'sunrise', '3 aliments', '420 kcal') + nuMeal('Dîner', 'sun', '3 aliments', '658 kcal') + nuMeal('Souper', 'moon', 'Rien noté') + nuMeal('Collation', 'carrot', 'Rien noté');
+document.getElementById('nuMeals7').innerHTML = nuMeal('Déjeuner', 'sunrise', 'Rien noté') + nuMeal('Dîner', 'sun', 'Rien noté') + nuMeal('Souper', 'moon', 'Rien noté') + nuMeal('Collation', 'carrot', 'Rien noté');
+// graphiques
+const L7 = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+document.getElementById('nuWeek').innerHTML = U.bars([2140, 2310, 1980, 1078, 0, 0, 0], { goal: 2200, today: 3 });
+document.getElementById('nuWeekLab').innerHTML = U.barsLab(L7, 3);
+document.getElementById('nuHist').innerHTML = U.bars(CAL7.past.concat(1078), { goal: 2200 });
+document.getElementById('nuHistLab').innerHTML = U.barsLab(CAL7.lab);
+document.getElementById('nuPoids').innerHTML = `<div data-c="nut" style="display:flex;justify-content:space-between;align-items:center"><span class="big" style="font-size:22px">71,6<small> kg</small></span>${U.spark([60, 56, 53, 53, 44, 36, 28], { w: 170, h: 34 })}</div>`;
+Cristal.init();
+</script>
+</body>
+</html>

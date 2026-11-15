@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — Un accueil, sept usages</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* CSS propre à la planche : préfixe pf- */
+  .pf-row { display: flex; align-items: center; gap: 11px; min-height: 44px; border-top: 1px solid var(--rule); }
+  .pf-row:first-of-type { border-top: 0; }
+  .pf-row .tx { flex: 1; min-width: 0; }
+  .pf-row b { display: block; font-size: 15px; font-weight: 650; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pf-row .r { margin-left: auto; font-size: 13px; color: var(--ink2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .pf-row .chk { width: 26px; height: 26px; font-size: 26px; }
+  .pf-add { display: flex; align-items: center; gap: 8px; height: 44px; border-radius: 22px; padding: 0 14px; background: var(--well); color: var(--ink2); font-size: 14.5px; margin-top: 6px; }
+  .pf-add i { font-size: 18px; }
+  .pf-meal { display: flex; justify-content: space-between; align-items: center; min-height: 27px; font-size: 13.5px; border-top: 1px solid var(--rule); }
+  .pf-meal:first-of-type { border-top: 0; }
+  .pf-meal em { font-style: normal; color: var(--ink2); font-variant-numeric: tabular-nums; }
+  .pf-sq { display: flex; gap: 3px; margin-left: auto; }
+  .pf-sq u { width: 9px; height: 9px; border-radius: 2.5px; background: var(--track); }
+  .pf-sq u.f { background: var(--c, var(--primary)); }
+  .pf-sq u.t { box-shadow: 0 0 0 1.5px var(--ink2); }
+  .pf-pl .u-week .ev { padding: 1px 1px 0 3px; }
+  .pf-pl .u-week .ev b { text-overflow: ellipsis; }
+  .pf-g { display: flex; align-items: center; gap: 12px; }
+  .pf-note h4 { margin-top: 12px; font-size: 14.5px; } .pf-note h4:first-of-type { margin-top: 0; font-size: 17px; }
+  .pf-note ul { list-style: none; display: grid; gap: 5px; margin-top: 6px; }
+  .pf-note li { display: flex; gap: 8px; align-items: baseline; font-size: 13px; line-height: 1.4; }
+  .pf-note .tag { min-width: 78px; }
+  .pf-no { display: inline-block; flex: none; min-width: 78px; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 5px; border-radius: 4px; text-align: center; background: #EEE; color: #555; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">2</div><div><h1>Un accueil, sept usages</h1>
+    <p>Le même système Cristal, sept compositions : chaque profil réordonne, redimensionne et change la vue des cartes que l'app sait déjà afficher, dans sa propre déclinaison de couleur. Une seule carte de verre « Maintenant » par écran, des panneaux pour tout le contenu. Jeudi 12 novembre.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">A · Équilibre quotidien · Saphir</div>
+      <div class="phone t-saphir" data-screen="homeA:journee"></div>
+      <div class="cap"><h4>Équilibre quotidien</h4><p>L'accueil de référence, 13:20 : l'alimentation, la séance du jour, les habitudes, le planning et le budget tiennent ensemble.</p>
+        <ul><li><span class="tag e">Existe</span><span>Cartes Nutrition, Habitudes, Planning, Budget</span></li>
+        <li><span class="tag a">À adapter</span><span>Carte de verre « Maintenant » : la carte la mieux classée du moment, mise en avant</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">B · Sport et performance · Pêche</div>
+      <div class="phone t-peche" data-pf="B" data-time="19:05" data-tab="0"></div>
+      <div class="cap"><h4>Sport et performance</h4><p>19:05 : la séance en cours passe devant. La semaine, les protéines, les pas et les habitudes suivent.</p>
+        <ul><li><span class="tag e">Existe</span><span>Séance en cours (repos, pause, « Série faite »), vue « Cette semaine », Pas, Habitudes</span></li>
+        <li><span class="tag a">À adapter</span><span>« Maintenant » en pleine largeur ; Nutrition avec les protéines en tête (ordre des lignes) ; l'habitude « Boire 2 L d'eau » nommée dans la carte Habitudes</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">C · Organisation et productivité · Graphite</div>
+      <div class="phone t-graphite" data-pf="C" data-time="08:10" data-tab="0"></div>
+      <div class="cap"><h4>Organisation et productivité</h4><p>08:10 : la semaine d'abord, puis les trois priorités. Habitudes et rappels suivent en défilant.</p>
+        <ul><li><span class="tag e">Existe</span><span>Planning plein largeur avec trait de l'heure, Top 3 et « Ajouter une tâche », Habitudes plein largeur, « À ne pas oublier »</span></li>
+        <li><span class="tag a">À adapter</span><span>Planning en carte de verre « Maintenant » (la grille existe déjà)</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">D · Finance et gestion personnelle · Forêt</div>
+      <div class="phone t-foret" data-pf="D" data-time="13:20" data-tab="0"></div>
+      <div class="cap"><h4>Finance et gestion personnelle</h4><p>13:20 : le budget du jour en vedette, puis le mois, le compte, l'épargne et les factures à venir.</p>
+        <ul><li><span class="tag e">Existe</span><span>Budget (par jour, aujourd'hui, courbe), « À ne pas oublier »</span></li>
+        <li><span class="tag a">À adapter</span><span>« Dépensé ce mois » avec barre, « Solde », carte Épargne (existent dans la mini-app Finances) ; « À ne pas oublier » limité aux factures ; Budget en « Maintenant »</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">E · Nutrition et bien-être · Sauge</div>
+      <div class="phone t-sauge" data-pf="E" data-time="13:20" data-tab="0"></div>
+      <div class="cap"><h4>Nutrition et bien-être</h4><p>13:20 : les trois vues de la Nutrition sont posées ensemble, puis les habitudes et les pas.</p>
+        <ul><li><span class="tag e">Existe</span><span>Anneau, macros, Scanner, « 2 repas », prochain repas, « Repas du jour », « Calories · 7 jours », Habitudes, Pas</span></li>
+        <li><span class="tag a">À adapter</span><span>Afficher les vues « Repas » et « 7 jours » à côté de la vue du jour, en demi-largeur ; Nutrition en « Maintenant »</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">F · Études et vie étudiante · Lavande</div>
+      <div class="phone t-lavande" data-pf="F" data-time="08:10" data-tab="0"></div>
+      <div class="cap"><h4>Études et vie étudiante</h4><p>08:10 : le prochain cours, la journée en liste, puis les échéances. Top 3 et grille de la semaine plus bas.</p>
+        <ul><li><span class="tag e">Existe</span><span>« À ne pas oublier », Top 3, grille du Planning, minuteur Focus (15 à 90 min)</span></li>
+        <li><span class="tag a">À adapter</span><span>Liste « Aujourd'hui » des prochains événements ; « Maintenant » = prochain cours ; raccourci « Focus · 25 min » (aujourd'hui, la durée se choisit dans Planning)</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">G · Quotidien minimaliste · Monochrome</div>
+      <div class="phone t-mono" data-pf="G" data-time="08:10" data-tab="0"></div>
+      <div class="cap"><h4>Quotidien minimaliste</h4><p>08:10 : quatre éléments, beaucoup d'air. Sans couleur, la hiérarchie vient des tailles : l'heure du cours, puis l'objectif.</p>
+        <ul><li><span class="tag e">Existe</span><span>Prochain événement, Habitudes (anneaux), Top 3 cochable, calories restantes</span></li>
+        <li><span class="tag a">À adapter</span><span>Première tâche du Top 3 présentée comme « Objectif du jour » ; ligne « kcal restantes » seule</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Légende</div>
+      <div class="note pf-note" style="margin:9px">
+        <h4>Comment lire cette planche</h4>
+        <p><b>Même système, sept usages.</b> Le verre ne sert qu'à ce qui flotte : la barre date et avatar, et la seule carte « Maintenant » de chaque écran. Tout le contenu est en panneaux. Deux tailles de carte : demi-largeur et pleine largeur.</p>
+        <p><b>Rien de neuf dans les cartes.</b> Les sept compositions ne changent que l'ordre, la taille et la vue des cartes existantes. L'app sait déjà les réordonner et les redimensionner (mode Organiser). On ne coche pas une habitude depuis l'accueil ; le Top 3 se coche.</p>
+        <h4>Les trois étiquettes</h4>
+        <ul><li><span class="tag e">Existe</span><span>Déjà dans l'app, à cet endroit, sous cette forme.</span></li>
+        <li><span class="tag a">À adapter</span><span>La donnée ou la fonction existe, mais pas ici ou pas ainsi.</span></li>
+        <li><span class="tag d">À développer</span><span>Rien aujourd'hui. Cette planche en propose un seul : un choix de profil au premier lancement, qui règle d'un coup l'ordre, les tailles, les vues et le thème (aujourd'hui, tout se règle à la main).</span></li></ul>
+        <h4>Cité, mais absent d'Ardane aujourd'hui</h4>
+        <ul><li><span class="pf-no">Non dessiné</span><span>Hydratation chiffrée sur l'accueil : seule l'habitude « Boire 2 L d'eau » (coche oui ou non) existe.</span></li>
+        <li><span class="pf-no">Non dessiné</span><span>Récupération chiffrée, série de jours de sport.</span></li>
+        <li><span class="pf-no">Non dessiné</span><span>Objectifs financiers hors épargne, placements.</span></li></ul>
+        <h4>Lisibilité des thèmes</h4>
+        <p>Les couleurs de catégorie ne servent qu'aux pastilles et aux graphiques ; un état s'écrit toujours (chiffre, coche, texte barré). En Monochrome, presque sans couleur, la hiérarchie repose sur la taille des chiffres.</p>
+      </div></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script>
+/* historique des 7 jours par habitude (6 jours passés ; le 7e carré = aujourd'hui) */
+const H7 = [[1,1,0,1,1,1],[1,0,1,1,0,1],[1,1,1,0,1,1],[1,1,1,1,1,1],[0,1,1,0,1,1]];
+const ICO = (n) => `<span class="ico">${U.ico(n)}</span>`;
+const GO = '<i class="go" data-i="chev"></i>';
+const PG = (on, n = 3) => `<span class="pg">${Array.from({ length: n }, (_, k) => `<i${k + 1 === on ? ' class="on"' : ''}></i>`).join('')}</span>`;
+const NOW = '<span class="nb" style="margin-left:auto">Maintenant</span>';
+const head = (i, t, o = {}) => `<header class="ch">${ICO(i)}<b>${t}</b>${o.pg ? PG(o.pg, o.n) : ''}${o.now ? NOW : GO}</header>`;
+const scrTop = (m) => `<div class="x-top gl"><span class="x-date">${DAY.date}</span><span class="x-ava">${DAY.avatar}</span></div><div class="x-kick">${DAY.kicker}</div><div class="x-title">${DAY[m].title}</div>`;
+const stack = (inner, gap = 12) => `<div class="x-stack" style="margin-top:10px;gap:${gap}px">${inner}</div>`;
+const row = (inner) => `<div class="pf-row">${inner}</div>`;
+const pc = (a) => (a[0] / a[1]).toFixed(3);
+
+const pas = (m, c) => { const s = DAY[m].steps; return `<article class="pn hc" data-c="pas">${head('steps', 'Pas')}<div class="${c ? 'h2' : 'big'} tn" style="margin-top:6px">${U.n(s.n)}<span class="s"> / ${U.n(s.goal)}</span></div>${c ? '' : '<div class="s">pas aujourd&#39;hui</div>'}<div style="margin-top:auto">${U.meter(s.n / s.goal)}</div></article>`; };
+const habHalf = (m, last) => { const d = DAY[m], big = `<span class="big">${d.habits.done}<small>/${d.habits.total}</small></span>`;
+  return last ? `<article class="pn hc" data-c="hab">${head('repeat', 'Habitudes')}<div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">${big}<span class="s">faites</span></div><div class="s" style="margin-top:auto;font-weight:600;color:var(--ink)">${last}</div></article>`
+    : `<article class="pn hc" data-c="hab">${head('repeat', 'Habitudes')}<div style="margin-top:6px">${U.hab(m)}</div><div style="display:flex;align-items:baseline;gap:8px;margin-top:6px">${big}<span class="s">faites</span></div><div class="s" style="margin-top:auto;font-weight:600;color:var(--ink)">Série de ${d.habits.streak} jours</div></article>`; };
+const habFull = (m) => { const d = DAY[m], dn = habDone(m);
+  return `<article class="pn cd" data-c="hab">${head('repeat', 'Habitudes')}<div style="display:flex;align-items:baseline;gap:10px;margin:2px 0 4px"><span class="big">${d.habits.done}<small>/${d.habits.total}</small></span><span class="s">faites aujourd'hui · Série de ${d.habits.streak} jours</span></div>`
+    + HABITS.map((h, k) => row(`<span class="u-hab" style="--hab:22px"><span class="${dn[k] ? 'is-done' : ''}">${dn[k] ? U.ico('check') : ''}</span></span><div class="tx"><b${dn[k] ? '' : ''}>${h.t}</b></div><span class="pf-sq">${H7[k].map((v) => `<u class="${v ? 'f' : ''}"></u>`).join('')}<u class="t${dn[k] ? ' f' : ''}"></u></span>`)).join('') + '</article>'; };
+const top3 = (m, n) => `<article class="pn cd" data-c="pro">${head('list', 'Top 3')}${TOP3.map((t, k) => row(`<i class="chk${k < n ? ' ok' : ''}" data-i="${k < n ? 'checkc' : 'circle'}"></i><div class="tx"><b${k < n ? ' style="text-decoration:line-through;color:var(--ink2);font-weight:550"' : ''}>${t}</b></div>`)).join('')}<div class="pf-add"><i data-i="plus"></i>Ajouter une tâche</div></article>`;
+const remind = (items) => `<article class="pn cd" data-c="pro">${head('bell', 'À ne pas oublier')}${items.map((r) => row(`<span class="ico" data-c="${r.c}">${U.ico(r.i)}</span><div class="tx"><b>${r.t}</b></div><span class="r">${r.due}</span>`)).join('')}</article>`;
+const nut = (m, now) => { const d = DAY[m], k = d.kcal, mc = d.macros;
+  return `<article class="${now ? 'gl mn' : 'pn cd'}" data-c="nut">${head('fork', 'Nutrition', { pg: 1, now })}
+    <div style="display:grid;grid-template-columns:90px 1fr;gap:18px;align-items:center;margin:4px 0 6px"><div class="rgw" style="width:90px;height:90px">${U.ring(k.eaten / k.goal, 9)}<div class="in"><b>${U.n(k.left)}</b><small>kcal<br>restantes</small></div></div>
+    <div class="mac"><div data-c="prot"><span>Protéines</span><em>${mc.p[0]}/${mc.p[1]} g</em>${U.meter(pc(mc.p))}</div><div data-c="gluc"><span>Glucides</span><em>${mc.g[0]}/${mc.g[1]} g</em>${U.meter(pc(mc.g))}</div><div data-c="lip"><span>Lipides</span><em>${mc.l[0]}/${mc.l[1]} g</em>${U.meter(pc(mc.l))}</div></div></div>
+    <div style="display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center"><div class="btnT">${U.ico('scan')}Scanner</div><span class="s" style="font-weight:650;color:var(--ink);padding-right:6px">${d.mealsN} repas</span></div>
+    <div class="s" style="margin-top:8px">Prochain repas : ${d.next}</div></article>`; };
+
+const S = {
+  B() { const d = DAY.soiree, w = d.workout, m = 'soiree';
+    return scrTop(m) + stack(`
+      <article class="gl mn" data-c="fit"><header class="ch">${ICO('dumbbell')}${NOW}</header>
+        <div class="s" style="margin-top:4px;font-weight:600">${w.title} · ${w.prog}</div><div class="h2">${w.ex}</div><div class="s tn">Série ${w.set}/${w.sets} · ${w.reps}</div>
+        <div class="segs" style="margin:8px 0 10px"><span class="f"></span><span class="c"></span><span></span><span></span></div>
+        <div style="display:flex;gap:8px"><div class="btnP" style="flex:1">${U.ico('check')}${w.cta}</div><div class="btnG" style="padding:0 14px">${U.ico('timer')}<span class="tn">Repos ${w.rest}</span></div><div class="btnG" style="width:44px;padding:0" role="button" aria-label="Pause">${U.ico('pause')}</div></div></article>
+      <article class="pn hc" data-c="fit">${head('dumbbell', 'Cette semaine', { pg: 2, n: 2 })}
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin-top:4px"><div><div class="big">${d.week.n}<small>/${d.week.goal} séances</small></div><div class="s" style="font-weight:650;color:var(--ink)">Encore ${d.week.left} séances</div></div>
+          <div>${U.dots7(d.week.done)}</div></div></article>
+      <article class="pn cd" data-c="prot">${head('fork', 'Nutrition', { pg: 1 })}
+        <div style="display:grid;grid-template-columns:1fr auto;align-items:end;gap:10px;margin-top:4px"><div><div class="big">${d.macros.p[0]}<small>/${d.macros.p[1]} g protéines</small></div></div><div style="text-align:right"><div class="h2 tn">${U.n(d.kcal.left)}</div><div class="s">kcal restantes</div></div></div>
+        <div style="margin:4px 0 8px;--meter-h:10px;--meter-r:5px">${U.meter(pc(d.macros.p))}</div>
+        <div class="g2 mac" style="gap:14px"><div data-c="gluc" style="display:grid"><span>Glucides</span><em>${d.macros.g[0]}/${d.macros.g[1]} g</em>${U.meter(pc(d.macros.g))}</div><div data-c="lip" style="display:grid"><span>Lipides</span><em>${d.macros.l[0]}/${d.macros.l[1]} g</em>${U.meter(pc(d.macros.l))}</div></div></article>
+      <div class="g2" style="height:106px">${pas(m, 1)}${habHalf(m, 'Boire 2 L d\'eau : faite')}</div>`, 10); },
+
+  C() { const m = 'matin', d = DAY[m];
+    return scrTop(m) + stack(`
+      <article class="gl mn pf-pl" data-c="pla">${head('calendar', 'Planning', { now: true })}
+        <div style="--wk-h:132px;--wk-gap:2px;--wk-head:16px;--ev-fs:9px;--ev-bar:2px;margin:6px 0 6px">${U.week({ from: 8, to: 19, every: 2, labels: 'all', now: d.time })}</div>
+        <span class="link">Toute la semaine</span></article>
+      ${top3(m, d.top3)}${habFull(m)}${remind(REMIND)}`); },
+
+  D() { const m = 'journee', d = DAY[m], b = d.budget;
+    return scrTop(m) + stack(`
+      <article class="gl mn" data-c="bud">${head('wallet', 'Budget', { now: true })}
+        <div class="huge" style="margin-top:6px">${U.money(b.perDay)}</div><div class="s">à dépenser par jour d'ici la fin du mois</div>
+        <div class="s" style="margin-top:6px;font-weight:650;color:var(--ink)">Dépensé aujourd'hui : ${U.money(b.today)}</div>
+        <div style="margin-top:4px">${U.spark(SPEND7.past.concat(b.today), { w: 325, h: 34 })}</div></article>
+      <article class="pn cd" data-c="bud" style="padding-top:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><span class="s" style="font-weight:600;color:var(--ink)">Dépensé ce mois</span><span class="s tn" style="font-weight:650;color:var(--ink)">${U.money(b.left)} restants</span></div>
+        <div class="big" style="margin:2px 0 8px">${U.money(b.month)}<small> sur ${U.money(b.monthGoal)}</small></div>${U.meter(b.month / b.monthGoal)}</article>
+      <div class="g2" style="height:124px">
+        <article class="pn hc" data-c="bud">${head('card', 'Solde')}<div class="s" style="margin-top:8px">Compte chèques</div><div class="h2 tn" style="margin-top:2px">${U.money(1846.2)}</div></article>
+        <article class="pn hc" data-c="bud">${head('piggy', 'Épargne')}<div class="s" style="margin-top:6px;font-weight:600;color:var(--ink)">Voyage à Lisbonne</div><div class="big">43 %</div><div class="s tn">640 $ sur 1 500 $</div><div style="margin-top:auto">${U.meter(640 / 1500)}</div></article>
+      </div>
+      ${remind([REMIND[0], REMIND[3]])}`); },
+
+  E() { const m = 'journee', d = DAY[m], k = d.kcal;
+    return scrTop(m) + stack(`${nut(m, true)}
+      <div class="g2" style="height:196px">
+        <article class="pn hc" data-c="nut"><header class="ch"><b style="font-size:14px">Repas du jour</b>${PG(2)}</header><div style="margin-top:6px">${d.meals.map((x) => `<div class="pf-meal"><span>${x[0]}</span><em>${x[1] ? x[1] + ' kcal' : '—'}</em></div>`).join('')}</div>
+          <div class="s" style="margin-top:auto;font-weight:650;color:var(--ink)">Total : ${U.n(k.eaten)} / ${U.n(k.goal)} kcal</div></article>
+        <article class="pn hc" data-c="nut"><header class="ch"><b style="font-size:14px">Calories · 7 jours</b></header>
+          <div style="height:84px;margin-top:8px">${U.bars(CAL7.past.concat(k.eaten), { goal: CAL7.goal })}</div>${U.barsLab(CAL7.lab)}
+          <div class="s" style="margin-top:auto">Moyenne : ${U.n(CAL7.avg)} kcal par jour noté</div></article>
+      </div>
+      <div class="g2" style="height:134px">${habHalf(m)}${pas(m)}</div>`); },
+
+  F() { const m = 'matin', d = DAY[m], ev = EVENTS.filter((e) => e.d === TODAY).slice(0, 4);
+    return scrTop(m) + stack(`
+      <article class="gl mn" data-c="pla">${head('calendar', 'Planning', { now: true })}
+        <div class="s" style="margin-top:4px;font-weight:600">Prochain cours</div><div class="h2 tn">09:00 Comptabilité</div><div class="s">B-204</div>
+        <div class="btnT" style="margin-top:10px;width:100%">${U.ico('timer')}Focus · 25 min</div></article>
+      <article class="pn cd" data-c="pla">${head('calendar', 'Aujourd\'hui')}${ev.map((e) => row(`<span class="tm">${e.s}</span><span class="evb" data-ev="${e.ty}"></span><div class="tx"><b>${e.t}</b></div><span class="r">${e.p || ''}</span>`)).join('')}</article>
+      ${remind([REMIND[1], REMIND[2]])}${top3(m, d.top3)}
+      <article class="pn hc pf-pl" data-c="pla">${head('calendar', 'Planning')}<div class="wk0" style="--wk-h:90px;--wk-gap:3px;--wk-head:16px;margin:6px 0">${U.week({ labels: 'none', now: d.time, every: 2 })}</div><span class="link">Toute la semaine</span></article>`); },
+
+  G() { const m = 'matin', d = DAY[m];
+    return scrTop(m) + stack(`
+      <article class="gl mn" data-c="pla" style="padding:14px 18px 20px">${head('calendar', 'Planning', { now: true })}
+        <div class="huge tn" style="font-size:60px;margin-top:20px">09:00</div><div class="h2" style="margin-top:8px;font-size:26px">Comptabilité</div><div class="m" style="margin-top:2px">B-204</div></article>
+      <article class="pn cd" data-c="hab">${head('repeat', 'Habitudes')}
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px"><div class="u-hab" style="--hab:34px;--hab-gap:12px">${habDone(m).map((x) => `<span class="${x ? 'is-done' : ''}">${x ? U.ico('check') : ''}</span>`).join('')}</div><span class="big">${d.habits.done}<small>/${d.habits.total}</small></span></div></article>
+      <article class="pn cd" data-c="pro"><div class="x-lab">Objectif du jour</div>
+        <div style="display:flex;gap:12px;align-items:flex-start;margin-top:10px"><i class="chk" data-i="circle" style="width:28px;height:28px;font-size:28px;margin-top:2px"></i><div class="h2" style="font-size:22px">${TOP3[0]}</div></div></article>
+      <article class="pn flat" data-c="nut" style="display:flex;align-items:center;gap:10px;height:56px;padding:0 16px">${ICO('fork')}<span style="font-size:15px;font-weight:650" class="tn">${U.n(d.kcal.left)} kcal restantes</span><i class="go" data-i="chev"></i></article>`, 18); },
+};
+document.querySelectorAll('[data-pf]').forEach((ph) => { ph.innerHTML = `<div class="scr">${S[ph.dataset.pf]()}</div>`; });
+Cristal.init();
+</script>
+</body>
+</html>

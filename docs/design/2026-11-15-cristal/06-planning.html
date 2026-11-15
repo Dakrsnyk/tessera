@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — Mini-app Planning (avec Études)</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* préfixe pl- : propre à cette planche */
+  .pl-nv .t { position: absolute; left: 0; right: 0; text-align: center; pointer-events: none; }
+  .pl-nv { position: relative; }
+  .pl-red { color: #B8353A; }
+  .pl-sh { font-size: 15px; font-weight: 650; color: var(--ink2); margin: 16px 6px 7px; }
+  .pl-sh.f { margin-top: 12px; }
+  .pl-wk .u-week .ev b { hyphens: auto; -webkit-hyphens: auto; white-space: normal; overflow-wrap: anywhere; overflow: hidden; }
+  .pl-wk .u-week .ev small { white-space: normal; overflow-wrap: anywhere; }
+  .pl-wk .u-week .now { border-top-color: #D6333A; } .pl-wk .u-week .now::before { background: #D6333A; }
+  .pl-wk { position: relative; }
+  .pl-nowt { position: absolute; left: -5px; width: 29px; height: 14px; transform: translateY(-50%); font-size: 9px; font-weight: 800; line-height: 14px; text-align: center; color: #fff; background: #D6333A; border-radius: 4px; }
+  .pl-strip { display: grid; column-gap: 3px; margin-bottom: 5px; }
+  .pl-strip .c { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .pl-strip .p { border-left: 3px solid var(--c); background: color-mix(in srgb, var(--c) 18%, #fff); border-radius: 4px; padding: 1px 3px 1px 4px; font-size: 8.5px; font-weight: 650; line-height: 1.2; overflow-wrap: anywhere; }
+  .pl-strip .p.more { border-left-color: transparent; background: transparent; color: var(--ink2); }
+  .pl-strip .p.dn { text-decoration: line-through; color: var(--ink2); }
+  .pl-seg { margin-top: 10px; }
+  .pl-note { font-size: 12.5px; line-height: 1.4; color: var(--ink2); margin: 8px 4px 0; }
+  /* grille du mois */
+  .pl-mo { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; }
+  .pl-mo .h { text-align: center; font-size: 11.5px; font-weight: 650; color: var(--ink2); height: 22px; line-height: 22px; }
+  .pl-mo .d { height: 40px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 1px; }
+  .pl-mo .d b { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pl-mo .d.o b { color: var(--go); font-weight: 500; }
+  .pl-mo .d.t b { background: var(--primary); color: #fff; font-weight: 700; }
+  .pl-mo .d u { display: flex; gap: 3px; height: 5px; margin-top: -2px; }
+  .pl-mo .d u i { width: 5px; height: 5px; border-radius: 50%; background: var(--c); }
+  .pl-leg { display: flex; flex-wrap: wrap; gap: 4px 12px; margin-top: 6px; font-size: 12px; font-weight: 600; }
+  .pl-leg span { display: inline-flex; align-items: center; gap: 5px; }
+  .pl-leg i { width: 9px; height: 9px; border-radius: 50%; background: var(--c); }
+  /* agenda et tâches */
+  .pl-ag .tm { width: 54px; font-size: 13px; }
+  .pl-ag .tm.j { font-weight: 500; color: var(--ink2); }
+  .pl-ag .evb { height: 34px; }
+  .pl-rd { width: 44px; height: 44px; flex: none; display: grid; place-items: center; font-size: 28px; color: var(--rc, var(--go)); margin-left: -10px; }
+  .pl-rd.ok { color: var(--primary); }
+  .pl-rd.p3 { --rc: #E5484D; } .pl-rd.p2 { --rc: #E08A1E; } .pl-rd.p1 { --rc: #3A8DDE; }
+  .pl-field { display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 16px; border-radius: 26px; font-size: 16px; color: var(--ink2); }
+  .pl-field i { font-size: 26px; color: var(--primary); }
+  .pl-dur { display: flex; gap: 8px; }
+  .pl-dur span { flex: 1; height: 48px; border-radius: 16px; display: grid; place-items: center; font-size: 19px; font-weight: 700; background: var(--tint2); color: var(--primary); font-variant-numeric: tabular-nums; }
+  .pl-dur span.on { background: var(--primary); color: #fff; }
+  .pl-tile { padding: 7px 12px; } .pl-tile b { font-size: 22px; white-space: nowrap; } .pl-tile small:last-child { font-size: 12px; }
+  .pl-leg2 { font-size: 12.3px; line-height: 1.38; }
+  .pl-leg2 h5 { font-size: 13px; font-weight: 800; margin: 12px 0 4px; letter-spacing: .01em; }
+  .pl-leg2 ul { list-style: none; display: grid; gap: 4px; }
+  .pl-leg2 li { display: flex; gap: 7px; align-items: baseline; }
+  .pl-leg2 li > span:last-child { min-width: 0; }
+  .pl-leg2 code { font: 600 11px Consolas, monospace; color: var(--bink2); }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">6</div><div><h1>Mini-app Planning (avec Études)</h1>
+    <p>La vraie page qui s'ouvre quand on touche Planning, habillée Cristal, avec toutes ses fonctions actuelles. Planning n'a pas d'onglets : Calendrier, Tâches, Concentration et Études sont des lignes ou des tuiles qui poussent des pages. Seuls segmentés : « Jour | Semaine | Mois | Année » et le filtre des Tâches. Habitudes : planche 07.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <!-- 1 -->
+    <div class="col"><div class="nm">1 · Page principale, haut</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv pl-nv"><span class="rb gl" aria-label="Retour"><i data-i="chevl"></i></span><span class="t">Planning</span></div>
+        <div data-u="wsel" data-o='{"marks":[0,1,2,3,4,5]}' style="margin-top:8px"></div>
+        <article class="gl mn" style="margin-top:12px">
+          <header class="ch"><span class="ico"><i data-i="calendar"></i></span><b>Prochain événement</b><span class="nb" style="margin-left:auto">dans 40 min</span></header>
+          <div class="h3" style="margin-top:6px">Réunion projet</div>
+          <div class="s tn">14:00 · Local 3.12 · 5 événements aujourd'hui</div>
+          <div class="s" style="margin-top:3px">Ensuite : 16:30 Dentiste · 18:30 Séance Haut du corps</div>
+        </article>
+        <article class="pn" style="margin-top:12px;padding:10px 10px 12px">
+          <div data-pl="strip"></div>
+          <div class="pl-wk" style="--wk-h:178px;--wk-head:16px;--ev-fs:8.5px;--wk-gutter:22px" data-u="week" data-o='{"from":8,"to":20,"every":2,"focus":3,"fw":2.2,"labels":"all","now":"13:20"}'></div>
+          <div class="seg pl-seg"><span>Jour</span><span class="on">Semaine</span><span>Mois</span><span>Année</span></div>
+        </article>
+      </div>
+      <div class="fab"><i data-i="plus"></i>Nouvelle tâche</div></div>
+      <div class="cap"><h4>Haut de la page</h4>
+        <ul>
+          <li><span class="tag e">Existe</span><span>Retour, sélecteur de semaine, calendrier (tableau de la semaine, bande des éléments sans heure, segmenté), « Nouvelle tâche ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Carte de verre « Prochain événement » : Planning n'a aujourd'hui aucun chiffre héros ; la donnée (événements du jour) existe.</span></li>
+          <li><span class="tag a">À adapter</span><span>Jour courant élargi pour lire les noms.</span></li>
+        </ul></div></div>
+
+    <!-- 2 -->
+    <div class="col"><div class="nm">2 · Page principale, suite</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv pl-nv"><span class="rb gl" aria-label="Retour"><i data-i="chevl"></i></span><span class="t">Planning</span></div>
+        <article class="pn" style="margin-top:2px"><div class="ls"><div class="li" style="min-height:52px"><span class="ico sq" data-c="pla"><i data-i="scan"></i></span>
+          <div class="tx"><div style="display:flex;align-items:center;gap:7px"><b style="display:inline">Importer mon horaire</b><span class="prem"><i data-i="crown"></i>Premium</span></div><span class="s">À partir d'une photo ou d'un PDF</span></div><i class="go" data-i="chev"></i></div></div></article>
+        <div class="sect" style="margin:10px 4px 6px"><b>Top 3 du jour</b><span>1/3</span></div>
+        <article class="pn"><div class="ls" style="padding:0 14px 0 16px">
+          <div class="li done" style="min-height:44px;padding:0"><span class="pl-rd ok"><i data-i="checkc"></i></span><div class="tx"><b>Rendre le rapport de marketing</b></div></div>
+          <div class="li" style="min-height:44px;padding:0"><span class="pl-rd"><i data-i="circle"></i></span><div class="tx"><b>Appeler la banque</b></div></div>
+          <div class="li" style="min-height:44px;padding:0"><span class="pl-rd"><i data-i="circle"></i></span><div class="tx"><b>Réviser le chapitre 4</b></div></div></div></article>
+        <div class="sect" style="margin:10px 4px 6px"><b>Tâches</b></div>
+        <div class="g3">
+          <article class="pn stat pl-tile"><small>En retard</small><b class="pl-red">1</b></article>
+          <article class="pn stat pl-tile"><small>Aujourd'hui</small><b>2</b></article>
+          <article class="pn stat pl-tile"><small>À faire</small><b>5</b></article></div>
+        <article class="pn" style="margin-top:10px"><div class="ls" style="padding:0 14px 0 16px">
+          <div class="li" style="min-height:44px;padding:4px 0"><span class="ico sq" data-c="pla"><i data-i="clock"></i></span><div class="tx"><b>Horaire de la semaine</b><span class="s">Cours, travail, rendez-vous et autres événements</span></div><span class="r">14</span><i class="go" data-i="chev"></i></div>
+          <div class="li" style="min-height:44px;padding:4px 0"><span class="ico sq" style="--c:var(--ev-rdv)"><i data-i="graduation"></i></span><div class="tx"><b>Études</b><span class="s">Cours, examens, devoirs, notes et fiches</span></div><i class="go" data-i="chev"></i></div>
+          <div class="li" style="min-height:44px;padding:4px 0"><span class="ico sq" data-c="pla"><i data-i="calendar"></i></span><div class="tx"><b>Semaine</b><span class="s">Tout ce qui t'attend, jour par jour</span></div><i class="go" data-i="chev"></i></div>
+          <div class="li" style="min-height:44px;padding:4px 0"><span class="ico sq" data-c="pla"><i data-i="grid"></i></span><div class="tx"><b>Mois</b><span class="s">Le calendrier du mois</span></div><i class="go" data-i="chev"></i></div>
+          <div class="li" style="min-height:44px;padding:4px 0"><span class="ico sq" data-c="pla"><i data-i="layers"></i></span><div class="tx"><b>Projets</b><span class="s">Tâches regroupées par projet</span></div><span class="r">2</span><i class="go" data-i="chev"></i></div>
+          <div class="li" style="min-height:44px;padding:4px 0"><span class="ico sq" data-c="hab"><i data-i="repeat"></i></span><div class="tx"><b>Habitudes</b><span class="s">Séries et régularité</span></div><span class="r">3/5</span><i class="go" data-i="chev"></i></div>
+          <div class="li" style="min-height:44px;padding:4px 0"><span class="ico sq" style="--c:var(--ev-travail)"><i data-i="timer"></i></span><div class="tx"><b>Concentration</b><span class="s">7,8 h sur 10 h cette semaine</span></div><i class="go" data-i="chev"></i></div></div></article>
+        <div class="btnO" style="margin-top:8px"><i data-i="gear"></i>Mes paramètres</div>
+      </div></div>
+      <div class="cap"><h4>Les blocs sous le calendrier</h4>
+        <ul>
+          <li><span class="tag e">Existe</span><span>Importer mon horaire, Top 3 du jour, tuiles Tâches, les 7 lignes, Mes paramètres (dernier bloc, sous le pli : défilement).</span></li>
+          <li><span class="tag a">À adapter</span><span>Badge Premium sur la ligne d'import : aujourd'hui le verrou n'apparaît qu'à l'ouverture.</span></li>
+        </ul></div></div>
+
+    <!-- 3 -->
+    <div class="col"><div class="nm">3 · Calendrier · Semaine</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv pl-nv"><span class="rb gl" aria-label="Retour"><i data-i="chevl"></i></span><span class="t">Planning</span></div>
+        <div data-u="wsel" data-o='{"marks":[0,1,2,3,4,5]}' style="margin-top:8px"></div>
+        <article class="pn" style="margin-top:12px;padding:10px 10px 12px">
+          <div data-pl="strip"></div>
+          <div class="pl-wk" id="pl-wk3" style="--wk-h:310px;--wk-head:16px;--ev-fs:9px;--wk-gutter:22px" data-u="week" data-o='{"from":8,"to":20,"every":2,"focus":3,"fw":2.3,"labels":"all","sub":true,"now":"13:20"}'></div>
+          <div class="seg pl-seg"><span>Jour</span><span class="on">Semaine</span><span>Mois</span><span>Année</span></div>
+          <p class="pl-note">Touche une heure libre pour créer un événement. Pince avec deux doigts pour voir plus ou moins de temps.</p>
+        </article>
+      </div>
+      </div>
+      <div class="cap"><h4>Tableau de la semaine</h4>
+        <ul>
+          <li><span class="tag e">Existe</span><span>Colonne par jour, blocs à l'heure avec nom, lieu et heure, trait « maintenant », bande sans heure (« +1 »), segmenté, note.</span></li>
+          <li><span class="tag a">À adapter</span><span>Initiales des jours rappelées dans la grille (le sélecteur n'est plus aligné sur les colonnes) ; jeudi élargi ; heure du trait écrite (13:20) ; « Nouvelle tâche » flottante omise ici pour garder la note lisible.</span></li>
+        </ul></div></div>
+
+    <!-- 4 -->
+    <div class="col"><div class="nm">4 · Calendrier · Mois</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv pl-nv"><span class="rb gl" aria-label="Retour"><i data-i="chevl"></i></span><span class="t">Planning</span></div>
+        <article class="pn" style="margin-top:6px;padding:8px 12px 12px">
+          <div style="display:flex;align-items:center;justify-content:space-between;height:44px"><span class="rb pr" aria-label="Mois précédent"><i data-i="chevl"></i></span><span class="h3">Novembre 2026</span><span class="rb pr" aria-label="Mois suivant"><i data-i="chev"></i></span></div>
+          <div id="pl-month"></div>
+          <div class="pl-leg"><span data-ev="cours"><i></i>Cours</span><span data-ev="travail"><i></i>Travail</span><span data-ev="rdv"><i></i>Rendez-vous</span><span data-ev="seance"><i></i>Séance</span></div>
+          <div class="seg pl-seg"><span>Jour</span><span>Semaine</span><span class="on">Mois</span><span>Année</span></div>
+          <p class="pl-note">Touche un jour pour le voir en détail.</p>
+        </article>
+        <div class="sect" style="margin-top:14px"><b>Aujourd'hui</b><span>8 éléments</span></div>
+        <article class="pn pl-ag"><div class="ls" style="padding:0 14px 0 16px">
+          <div class="li" data-ev="cours"><span class="tm">09:00</span><span class="evb"></span><div class="tx"><b>Comptabilité</b><span class="s">Cours · B-204</span></div></div>
+          <div class="li" data-ev="cours"><span class="tm">11:30</span><span class="evb"></span><div class="tx"><b>Travail d'équipe</b><span class="s">Cours · Bibliothèque</span></div></div>
+          <div class="li" data-ev="rdv"><span class="tm">14:00</span><span class="evb"></span><div class="tx"><b>Réunion projet</b><span class="s">Rendez-vous · Local 3.12</span></div></div>
+          <div class="li" data-ev="rdv"><span class="tm">16:30</span><span class="evb"></span><div class="tx"><b>Dentiste</b><span class="s">Rendez-vous</span></div></div>
+          <div class="li" data-ev="seance"><span class="tm">18:30</span><span class="evb"></span><div class="tx"><b>Séance Haut du corps</b><span class="s">Séance · environ 50 min</span></div><i data-i="dumbbell" style="font-size:20px;color:var(--ink2)"></i></div></div></article>
+      </div></div>
+      <div class="cap"><h4>Vue Mois et agenda du jour</h4>
+        <ul>
+          <li><span class="tag e">Existe</span><span>Grille du mois (aujourd'hui en disque, jusqu'à 3 points), segmenté, note, « Agenda du jour » avec heure ou « Journée ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Légende des types sous la grille (nom + point) ; titre du mois avec flèches 44 pt dans la carte (le relevé ne le décrit que pour la page « Mois »).</span></li>
+        </ul></div></div>
+  </div>
+
+  <div class="row">
+    <!-- 5 -->
+    <div class="col"><div class="nm">5 · Tâches</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl" aria-label="Retour"><i data-i="chevl"></i></span></div>
+        <div class="x-title" style="margin-top:4px">Tâches</div>
+        <div class="seg" style="margin-top:12px"><span class="on">À faire</span><span>Aujourd'hui</span><span>À venir</span><span>Terminées</span></div>
+        <div class="pn pl-field" style="margin-top:12px"><i data-i="plusbox"></i>Ajouter une tâche</div>
+        <div class="pl-sh f">En retard</div>
+        <article class="pn"><div class="ls" style="padding:0 14px 0 16px"><div class="li"><span class="pl-rd p3"><i data-i="circle"></i></span><div class="tx"><b>Renouveler la carte étudiante</b><span class="s pl-red">Mer. 11 nov. · priorité haute</span></div></div></div></article>
+        <div class="pl-sh">Aujourd'hui</div>
+        <article class="pn"><div class="ls" style="padding:0 14px 0 16px">
+          <div class="li"><span class="pl-rd p2"><i data-i="circle"></i></span><div class="tx"><b>Appeler la banque</b><span class="s">Aujourd'hui · priorité moyenne</span></div></div>
+          <div class="li"><span class="pl-rd p3"><i data-i="circle"></i></span><div class="tx"><b>Réviser le chapitre 4</b><span class="s">Aujourd'hui · priorité haute</span></div></div></div></article>
+        <div class="pl-sh">Plus tard</div>
+        <article class="pn"><div class="ls" style="padding:0 14px 0 16px"><div class="li"><span class="pl-rd p1"><i data-i="circle"></i></span><div class="tx"><b>Réserver la salle d'étude</b><span class="s">Ven. 13 nov. · priorité basse</span></div></div></div></article>
+        <div class="pl-sh">Sans date</div>
+        <article class="pn"><div class="ls" style="padding:0 14px 0 16px"><div class="li"><span class="pl-rd"><i data-i="circle"></i></span><div class="tx"><b>Ranger le bureau</b></div></div></div></article>
+      </div></div>
+      <div class="cap"><h4>Liste des tâches</h4>
+        <ul>
+          <li><span class="tag e">Existe</span><span>Filtre « À faire | Aujourd'hui | À venir | Terminées », champ d'ajout, sections triées par priorité. La priorité est écrite dans le détail, en plus de la couleur du rond.</span></li>
+          <li><span class="tag e">Existe</span><span>La tâche faite (« Rendre le rapport de marketing ») se lit sous « Terminées » avec « Effacer les tâches terminées ».</span></li>
+        </ul></div></div>
+
+    <!-- 6 -->
+    <div class="col"><div class="nm">6 · Concentration (Focus)</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl" aria-label="Retour"><i data-i="chevl"></i></span></div>
+        <div class="x-title" style="margin-top:4px">Concentration</div>
+        <article class="pn cd" style="margin-top:12px;text-align:center">
+          <div class="h3">Lance une session de concentration</div>
+          <div class="pl-dur" style="margin-top:12px"><span>15</span><span class="on">25</span><span>45</span><span>60</span><span>90</span></div>
+          <div class="s" style="margin-top:8px">minutes</div></article>
+        <div class="x-lab" style="margin:14px 4px 6px">Quand une session tourne, la carte devient</div>
+        <article class="pn cd" style="text-align:center">
+          <div class="s" style="font-weight:650">Session en cours</div>
+          <div class="tn" style="font-size:54px;font-weight:700;letter-spacing:-.03em;line-height:1.1;margin:2px 0 8px">24:36</div>
+          <div class="btnT" style="width:60%;margin:0 auto">Arrêter</div></article>
+        <div class="sect"><b>Cette semaine</b><span class="tn">7,8 h / 10 h</span></div>
+        <article class="pn cd" style="padding-bottom:10px">
+          <div style="height:112px" data-u="bars" data-lab="no" data-vals="[120,130,140,78,0,0,0]" data-o='{"today":3}'></div>
+          <div class="u-bars-lab"><span>L</span><span>M</span><span>M</span><span class="is-today">J</span><span>V</span><span>S</span><span>D</span></div>
+          <div class="s" style="margin-top:6px">Minutes de concentration par jour</div></article>
+      </div></div>
+      <div class="cap"><h4>Un seul décompte</h4>
+        <ul>
+          <li><span class="tag e">Existe</span><span>15 · 25 · 45 · 60 · 90 minutes (dernier choix plein), « Session en cours », « Arrêter », « Cette semaine » en barres. Ni pause ni cycles : pas un Pomodoro.</span></li>
+          <li><span class="tag e">Existe</span><span>Les deux états ne sont jamais ensemble : au repos la carte du haut, en cours le décompte à sa place.</span></li>
+        </ul></div></div>
+
+    <!-- 7 -->
+    <div class="col"><div class="nm">7 · Études</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0"><div class="scr">
+        <div class="nv"><span class="rb gl" aria-label="Retour"><i data-i="chevl"></i></span></div>
+        <div class="x-title" style="margin-top:4px">Études</div>
+        <article class="pn cd" style="margin-top:10px;padding-bottom:12px">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span class="x-lab">Prochain cours</span><span class="nb soft">Demain</span></div>
+          <div class="h2" style="margin-top:4px">Statistiques</div>
+          <div class="s tn" style="margin-top:2px">10:00–11:20 · salle C-015 · M. Roy</div></article>
+        <div class="g3" style="margin-top:10px">
+          <article class="pn stat pl-tile"><small>Moyenne</small><b>78,5 %</b><small>3 notes</small></article>
+          <article class="pn stat pl-tile"><small>Étude</small><b>2 h 30</b><small>sur 10 h</small></article>
+          <article class="pn stat pl-tile"><small>Fiches</small><b>4</b><small>à réviser</small></article></div>
+        <article class="pn" style="margin-top:10px"><div class="ls" style="padding:0 12px 0 16px"><div class="li" style="min-height:60px"><span class="ico sq" style="--c:var(--ev-rdv)"><i data-i="timer"></i></span><div class="tx"><b>Chrono d'étude</b></div><span class="btnP" style="padding:0 16px">Démarrer<i data-i="chevd"></i></span></div></div></article>
+        <div class="sect" style="margin-top:14px"><b>À rendre</b><span>1 devoir</span></div>
+        <article class="pn"><div class="ls" style="padding:0 14px 0 16px"><div class="li"><span class="ico sq" data-c="pla"><i data-i="pencil"></i></span><div class="tx"><b>Devoir : étude de cas</b><span class="s">Marketing · Vendredi</span></div><span class="pl-rd" style="margin-right:-6px"><i data-i="circle"></i></span></div></div></article>
+        <div class="sect" style="margin-top:14px"><b>Examens</b></div>
+        <article class="pn"><div class="ls" style="padding:0 14px 0 16px"><div class="li"><span class="nb soft" style="height:28px;font-size:13px">J-4</span><div class="tx"><b>Examen : Statistiques</b><span class="s">16 nov. à 09:00 · salle B-204 · 2 h révisé</span></div></div></div></article>
+        <div class="sect" style="margin-top:14px"><b>Session</b><span class="tn">fin 18 déc.</span></div>
+        <article class="pn cd"><div style="display:flex;justify-content:space-between;font-size:15px;font-weight:650"><span class="tn">62 %</span></div><div style="margin-top:8px"><span class="u-meter"><i style="width:62%"></i></span></div></article>
+      </div></div>
+      <div class="cap"><h4>Page Études</h4>
+        <ul>
+          <li><span class="tag e">Existe</span><span>Prochain cours, Moyenne / Étude / Fiches, Chrono d'étude, À rendre, Examens (compte à rebours « J-4 »), Session. Sous le pli : Horaire, Cours, Devoirs, Examens, Notes, Révisions.</span></li>
+          <li><span class="tag a">À adapter</span><span>Habillage seulement : la couleur d'action devient celle de Planning (bleu) ; le rose d'Études ne reste que sur les pastilles.</span></li>
+        </ul></div></div>
+
+    <!-- 8 -->
+    <div class="col"><div class="nm">8 · Légende</div>
+      <div class="note pl-leg2" style="margin:9px">
+        <h4>Planning : ce que Cristal change</h4>
+        <h5>Ne change pas</h5>
+        <p>Structure : une page, un calendrier à 4 échelles, des lignes qui poussent des pages. Tous les libellés, le Top 3, les 3 tuiles, les 7 lignes, « Nouvelle tâche », « Importer mon horaire » (Premium) et « Mes paramètres ». Aucun onglet n'est ajouté.</p>
+        <h5>Change</h5>
+        <p>Retour rond en verre, sélecteur de semaine et carte « Prochain événement » en verre (une seule carte de verre par écran), contenu en panneaux, couleur d'action unique, nappe de la couleur de la mini-app, types d'événements toujours nommés en plus de la couleur.</p>
+        <h5>État vide (non dessiné)</h5>
+        <p>Calendrier : tableau sans bloc. Jour libre : « Rien de prévu ce jour-là. » (Semaine : « Libre » ; Mois : « Rien de prévu. »). Top 3 sans élément : seulement le champ « Ajouter une priorité ». Projets : « Regroupe les tâches d'un même projet (un déménagement, un rapport, un voyage) et suis leur avancement. » Examens : « Aucun examen noté. » Études : carte « Ton année en un coup d'œil » + « Ajouter un cours ».</p>
+        <h5>Existe / À adapter / À développer</h5>
+        <ul>
+          <li><span class="tag e">Existe</span><span>Tout le contenu des écrans 2 à 7.</span></li>
+          <li><span class="tag a">À adapter</span><span>Carte « Prochain événement » ; badge Premium sur l'import ; jeudi élargi, initiales et heure du trait ; légende des types et titre du mois (vue Mois) ; couleur d'action d'Études.</span></li>
+          <li><span class="tag d">À développer</span><span>Rien.</span></li>
+        </ul>
+        <h5>N'existe pas (non dessiné)</h5>
+        <p>Sous-tâches, tags, Pomodoro, écriture dans le calendrier Apple (il est lu seulement), onglets Semaine / Mois / Tâches / Habitudes.</p>
+        <h5>Données d'exemple à vérifier</h5>
+        <p>Les 8 éléments de l'agenda, les nombres 14 et 2 des lignes, J-4, la fin de session et les noms propres sont inventés pour la maquette.</p>
+        <h5>Fichiers Swift</h5>
+        <p><code>Planning/PlanningApp.swift</code> · <code>Planning/PlanningCalendar.swift</code> · <code>WeekViews.swift</code> · <code>Planning/PlanningPages.swift</code> · <code>Planning/ScheduleImportView.swift</code> · <code>Studies/StudiesApp.swift</code>, <code>StudiesPages.swift</code> · <code>MiniAppScaffold.swift</code> · <code>WeekSelector.swift</code> · <code>MiniApp.swift</code></p>
+      </div></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script>
+  // bande des éléments sans heure (même grille que le tableau) ; jeudi élargi
+  const fw = 2.3, cols = '22px ' + [1, 1, 1, fw, 1, 1, 1].map((x) => x + 'fr').join(' ');
+  const strip = `<div class="pl-strip" style="grid-template-columns:${cols}"><span></span><span></span><span></span><span></span><div class="c">
+    <span class="p" data-ev="tache">Appeler la banque</span><span class="p" data-ev="tache">Réviser le chapitre 4</span><span class="p more">+1</span></div><span></span><span></span><span></span></div>`;
+  document.querySelectorAll('[data-pl="strip"]').forEach((e) => { e.outerHTML = strip; });
+  // grille du mois : novembre 2026 commence un dimanche (semaine du lundi)
+  const types = { 0: ['cours'], 1: ['cours', 'seance'], 2: ['cours', 'travail'], 3: ['cours', 'rdv', 'seance'], 4: ['cours', 'travail'], 5: ['seance'], 6: [] };
+  let m = '<div class="pl-mo">' + ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d) => `<span class="h">${d}</span>`).join('');
+  for (let k = 0; k < 42; k++) { const n = k - 5, wd = k % 7, other = n < 1 || n > 30, num = n < 1 ? 31 + n : n > 30 ? n - 30 : n;
+    m += `<span class="d${other ? ' o' : ''}${n === 12 ? ' t' : ''}"><b>${num}</b><u>${other ? '' : types[wd].map((t) => `<i data-ev="${t}"></i>`).join('')}</u></span>`; }
+  document.getElementById('pl-month').innerHTML = m + '</div>';
+  Cristal.init();
+  // heure du trait « maintenant » écrite dans la marge (écran 3) : en-tête 16 px + (13:20 − 8:00) / 12 h × 330 px
+  const w3 = document.getElementById('pl-wk3'); w3.insertAdjacentHTML('beforeend', `<span class="pl-nowt" style="top:${16 + 5.3333 / 12 * 310}px">13:20</span>`);
+</script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — Créer · C1 Atelier : le parcours complet</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* propre à cette planche : préfixe ca- */
+  .ca-nv { display: flex; align-items: center; height: 46px; margin-top: 2px; }
+  .ca-nv .sp { flex: 1; }
+  .ca-ttl { font-size: 32px; font-weight: 700; letter-spacing: -.025em; margin-left: 3px; }
+  .ca-nv .rb + .rb { margin-left: 6px; }
+  .ca-stage { height: 218px; margin-top: 6px; }
+  .ca-stage.short { height: 190px; }
+  .ca-ex { position: absolute; left: 12px; top: 12px; height: 24px; padding: 0 10px; border-radius: 12px; display: inline-flex; align-items: center; font-size: 11.5px; font-weight: 700; color: var(--ink2); }
+  .ca-lab { position: absolute; left: 12px; top: 12px; z-index: 2; height: 28px; padding: 0 12px; border-radius: 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--ink); }
+  .ca-wrap { margin-top: 10px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 84%, transparent); mask-image: linear-gradient(#000 84%, transparent); padding-bottom: 6px; }
+  .ca-pan { padding: 14px 16px 16px; }
+  .ca-hd { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .ca-note { font-size: 13px; line-height: 1.4; color: var(--ink2); margin-top: 4px; }
+  .ca-sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: end; margin-top: 12px; }
+  .ca-sizes div { text-align: center; }
+  .ca-sizes u { display: block; margin: 0 auto 6px; border: 1.8px solid var(--rule2); border-radius: 10px; background: var(--well); }
+  .ca-sizes .on u { border-color: var(--primary); background: var(--tint); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary); }
+  .ca-sizes b { font-size: 12.5px; font-weight: 600; display: block; line-height: 16px; } .ca-sizes .on b { color: var(--primary); }
+  .ca-slot { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 10px 6px 6px; border-radius: 16px; background: var(--well); margin-top: 8px; }
+  .ca-slot.add { background: transparent; border: 1.5px dashed var(--rule2); color: var(--primary); font-weight: 650; font-size: 14.5px; justify-content: center; }
+  .ca-slot img { width: 40px; height: 40px; border-radius: 10px; flex: none; }
+  .ca-slot .n { margin-left: auto; width: 24px; height: 24px; border-radius: 12px; background: var(--primary); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; }
+  .ca-row { display: flex; align-items: center; gap: 10px; min-height: 48px; border-top: 1px solid var(--rule); font-size: 15px; }
+  .ca-row:first-child { border-top: 0; }
+  .ca-field { flex: 1; height: 40px; border-radius: 12px; background: var(--well); display: flex; align-items: center; padding: 0 12px; font-size: 15px; }
+  .ca-tg { margin-left: auto; width: 51px; height: 31px; border-radius: 16px; background: var(--track); position: relative; flex: none; }
+  .ca-tg::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+  .ca-tg.on { background: var(--primary); } .ca-tg.on::after { left: 22px; }
+  .ca-g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+  .ca-g3 img { width: 100%; aspect-ratio: 1; border-radius: 18px; display: block; box-shadow: 0 1px 3px rgb(var(--sh) / .10), 0 6px 14px rgb(var(--sh) / .12); }
+  .ca-g3 > div { text-align: center; }
+  .ca-g3 .on img { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
+  .ca-g3 b { display: flex; justify-content: center; align-items: center; gap: 3px; font-size: 12.5px; font-weight: 650; margin-top: 8px; line-height: 16px; white-space: nowrap; }
+  .ca-g3 .on b { color: var(--primary); } .ca-g3 b i { font-size: 12px; color: var(--ink2); --sw: 2.2; }
+  .ca-g3 small { display: block; font-size: 11.5px; color: var(--ink2); line-height: 14px; height: 14px; }
+  .ca-dots { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+  .ca-dots u { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 19px; border: 1px solid rgba(11,18,32,.08); }
+  .ca-dots u.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary); }
+  .ca-dots u.free { background: conic-gradient(#F2588F, #F2A33A, #7FA33A, #3366FF, #8C6CFF, #F2588F); color: #fff; }
+  .ca-chip3 { display: inline-flex; margin-right: -3px; } .ca-chip3 s { width: 16px; height: 16px; border-radius: 50%; margin-right: -5px; border: 1.5px solid #fff; display: block; }
+  .ca-seg5 { display: flex; height: 40px; border-radius: 20px; background: var(--well); padding: 3px; margin-top: 12px; }
+  .ca-seg5 span { flex: 1; border-radius: 17px; display: flex; align-items: center; justify-content: center; gap: 3px; font-size: 12.5px; font-weight: 650; color: var(--ink2); white-space: nowrap; }
+  .ca-seg5 span.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgb(var(--sh) / .16); } .ca-seg5 i { font-size: 11px; --sw: 2.2; }
+  .ca-home { position: absolute; inset: 0; background: radial-gradient(120% 90% at 20% 0%, color-mix(in srgb, var(--primary) 22%, #fff) 0%, transparent 70%), linear-gradient(160deg, color-mix(in srgb, var(--primary) 12%, #E9EEF6), color-mix(in srgb, var(--primary) 30%, #DCE6F3)); }
+  .ca-home .apps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 0; padding: 14px 14px; }
+  .ca-home .apps > div { text-align: center; font-size: 10px; font-weight: 500; color: var(--ink); }
+  .ca-home .apps u { display: grid; place-items: center; width: 40px; height: 40px; margin: 0 auto 3px; border-radius: 10px; background: #fff; font-size: 20px; color: var(--c, var(--primary)); }
+  .ca-home .apps .w { grid-column: span 2; grid-row: span 2; display: grid; place-items: center; }
+  .ca-home .apps .w img { width: 112px; height: 112px; border-radius: 20px; display: block; box-shadow: 0 6px 16px rgb(var(--sh) / .22); }
+  .ca-mock { position: absolute; z-index: 45; pointer-events: none; }
+  .ca-mock img { display: block; width: 100%; border-radius: 22%; box-shadow: 0 10px 22px rgb(var(--sh) / .28); }
+  .ca-anno { position: absolute; z-index: 46; height: 26px; padding: 0 10px 0 4px; border-radius: 13px; background: #0B1220; color: #fff; font-size: 11.5px; font-weight: 650; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  .ca-anno b { width: 18px; height: 18px; border-radius: 9px; background: #fff; color: #0B1220; display: grid; place-items: center; font-size: 11px; }
+  .ca-prs { filter: brightness(.9); }
+  .ca-ph { aspect-ratio: 1; border-radius: 18px; background: var(--panel2); border: 1.5px dashed var(--rule2); display: grid; place-items: center; color: var(--ink2); font-size: 26px; }
+  .ca-cell { position: relative; text-align: center; }
+  .ca-cell img, .ca-cell .ca-ph { width: 100%; aspect-ratio: 1; display: grid; border-radius: 18px; }
+  .ca-cell.on img { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
+  .ca-cell .lt { display: flex; justify-content: center; align-items: center; gap: 3px; margin-top: 6px; font-size: 12.5px; font-weight: 650; line-height: 15px; }
+  .ca-cell .lt i { font-size: 12px; color: var(--ink2); --sw: 2.2; }
+  .ca-cell .lt span { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .ca-cell .pt { position: absolute; top: 6px; right: 6px; width: 22px; height: 22px; border-radius: 11px; background: rgba(255,255,255,.9); border: 1.5px solid var(--rule2); display: grid; place-items: center; font-size: 15px; color: #fff; }
+  .ca-cell.on .pt { background: var(--primary); border-color: var(--primary); }
+  .ca-cell.mt img { width: 100%; aspect-ratio: auto; height: 47px; align-self: center; }
+  .ca-cell .box { aspect-ratio: 1; border-radius: 18px; background: var(--panel2); display: grid; place-items: center; }
+  .ca-cat { display: flex; gap: 14px; margin-top: 8px; }
+  .ca-cat div { width: 60px; text-align: center; font-size: 12px; font-weight: 600; position: relative; }
+  .ca-cat u { display: grid; place-items: center; width: 52px; height: 52px; margin: 0 auto 4px; border-radius: 26px; font-size: 22px; background: var(--panel); border: 1px solid rgba(255,255,255,.9); color: var(--c, var(--ink)); box-shadow: 0 4px 12px rgb(var(--sh) / .08); }
+  .ca-cat .on u { background: var(--primary); color: #fff; }
+  .ca-cat em { position: absolute; top: -2px; right: 2px; min-width: 20px; height: 20px; border-radius: 10px; background: #0B1220; color: #fff; font-style: normal; font-size: 11px; font-weight: 700; display: grid; place-items: center; padding: 0 5px; }
+  .ca-act { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; text-align: center; font-size: 12px; font-weight: 600; }
+  .ca-act u { display: grid; place-items: center; width: 50px; height: 50px; margin: 0 auto 5px; border-radius: 25px; font-size: 21px; }
+  .ca-act .pr u { background: var(--primary); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.28); }
+  .ca-car { position: relative; height: 218px; margin: 0 -20px; overflow: hidden; }
+  .ca-car img { position: absolute; display: block; border-radius: 22%; }
+  .ca-sp { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink2); }
+  .ca-ul { margin: 6px 0 0 16px; padding: 0; display: grid; gap: 3px; } .ca-ul li { font-size: 13px; line-height: 1.38; }
+  .note .ca-ul li { margin: 0; }
+  .note code { font: 600 12px Consolas, monospace; color: #35435A; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">8</div><div><h1>Créer · C1 Atelier : le parcours complet</h1>
+    <p>On arrive directement dans le Studio avec un widget déjà proposé (« Calories », Nutrition, petit). L'aperçu reste en haut, les outils sont dessous, « Enregistrer le widget » est toujours à portée du pouce. L'enregistrement finit par une explication honnête : iOS ne laisse aucune app poser un widget, le guide d'ajout est donc montré à chaque fois. Douze écrans, dans l'ordre du parcours.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Entrée dans Créer</div>
+      <div class="phone t-saphir" id="p1" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Un widget est déjà prêt</h4><p>L'onglet Créer s'ouvre sur le Studio : titre, annuler / rétablir (inactifs), scène d'aperçu, outils, premier panneau (Taille). Le bouton enregistrer reste fixe au-dessus de la barre d'onglets.</p>
+        <ul><li><span class="tag e">Existe</span><span>Scène, « Changer de widget », rangée d'outils, annuler / rétablir, enregistrer</span></li>
+        <li><span class="tag a">À adapter</span><span>Arrivée directe avec un widget proposé ; Taille devient le 1er outil ; bouton œil = « Sur mon écran »</span></li>
+        <li><span class="tag e">Geste</span><span><b>1 toucher</b> (onglet Créer)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">2 · Changer de widget</div>
+      <div class="phone t-saphir" id="p2" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Le constructeur, dans une feuille</h4><p>Filtres par espace, grille de widgets réels, cadenas Premium, badge « Interactif », filtre « Seulement les widgets interactifs ». La taille et la composition ont quitté cette feuille (écran 4).</p>
+        <ul><li><span class="tag e">Existe</span><span>Grille 3 colonnes, cadenas, badge, filtre interactif, note « Interactif : … »</span></li>
+        <li><span class="tag a">À adapter</span><span>Feuille au lieu d'une page ; puces d'espaces ; bouton « Utiliser ce widget » (nouveau)</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (Changer de widget, un widget), facultatif</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">3 · Sur mon écran</div>
+      <div class="phone t-saphir" id="p3" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Le widget parmi des icônes, à l'échelle</h4><p>Le bouton œil remplace la scène par un écran d'accueil : le widget petit occupe 2 × 2 icônes, comme sur l'iPhone. Le retour se fait par le même bouton.</p>
+        <ul><li><span class="tag d">À développer</span><span>Aujourd'hui la scène est un cadre dégradé avec des puces de taille, sans aperçu « sur mon écran »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (facultatif)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">4 · Taille</div>
+      <div class="phone t-saphir" id="p4" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Petit, Moyen, Grand, écran verrouillé</h4><p>L'aperçu passe en moyen. Un réglage « Combiner » reprend la composition du constructeur : 2 widgets réunis en moyen, jusqu'à 4 en grand. (La suite du parcours revient en Petit pour la lisibilité des vignettes.)</p>
+        <ul><li><span class="tag e">Existe</span><span>Les 6 formats de l'aperçu, le Composer et ses règles</span></li>
+        <li><span class="tag a">À adapter</span><span>Taille = premier outil ; « Combiner » dans le panneau</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Moyen)</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Contenu</div>
+      <div class="phone t-saphir" id="p5" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Nom, données, éléments affichés</h4><p>Les réglages réels de « Calories restantes » : « Nom », « Tes données », « Éléments affichés ». Plus bas : « Données de l'espace Nutrition » et la note « Renseignées une fois… ».</p>
+        <ul><li><span class="tag e">Existe</span><span>Panneau Contenu en entier ; gratuit</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Contenu)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">6 · Thème</div>
+      <div class="phone t-saphir" id="p6" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Un thème règle tout d'un coup</h4><p>Les thèmes complets avec leur nom ; le cadenas marque Premium. Choisir un thème verrouillé fait passer le pied en « Débloquer et enregistrer ».</p>
+        <ul><li><span class="tag e">Existe</span><span>Panneau, note, cadenas, pied « Débloquer et enregistrer »</span></li>
+        <li><span class="tag a">À adapter</span><span>Vignettes de remplacement : exports de styles proches, extrait des 16 thèmes (exports de thèmes à produire)</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (Thème, un thème)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">7 · Style</div>
+      <div class="phone t-saphir" id="p7" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>57 styles, 10 gratuits</h4><p>« Gratuit » sous le nom des 10 gratuits, cadenas sur les 47 autres. Extrait de la grille : Sombre, gratuit, garde le widget et le pied « Enregistrer le widget ».</p>
+        <ul><li><span class="tag e">Existe</span><span>Grille d'aperçus, note, « Gratuit », cadenas, « Revenir aux réglages du style »</span></li>
+        <li><span class="tag a">À adapter</span><span>Extrait : seuls les exports existants sont montrés, l'ordre des 57 n'est pas respecté</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (Style, un style)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">8 · Couleurs</div>
+      <div class="phone t-saphir" id="p8" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Une couleur repeint tout le widget</h4><p>8 couleurs principales gratuites de 44 pt (Ambre choisie, celle de l'anneau). Couleur libre, palettes, « Chaque couleur » et « Hausse et baisse » sont Premium.</p>
+        <ul><li><span class="tag e">Existe</span><span>Pastilles, palettes, couleur personnalisée, « Revenir aux couleurs du style »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (Couleurs, une pastille)</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">9 · Les autres outils</div>
+      <div class="phone t-saphir" id="p9" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>La rangée défile : Fond, Bordure…</h4><p>Ici le panneau Fond. Les autres, à droite de la rangée : <b>Bordure</b> (Premium : 7 choix, épaisseur, opacité, couleur), <b>Graphique</b> (seulement si le widget en dessine un : Auto, Anneau, Cercle, Jauge…), <b>Densité</b> (Aéré, Équilibré, Dense ; gratuit), <b>Mes styles</b> (« Enregistrer ce look », « Appliquer »).</p>
+        <ul><li><span class="tag e">Existe</span><span>Les 9 outils réels ; aucun outil Police, Forme, Texte ou Ombre n'est inventé</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (défiler, Fond)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">10 · Enregistrement</div>
+      <div class="phone t-saphir" id="p10" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Le widget s'envole vers « Mes widgets »</h4><p>Il se soulève (1,06×), vole en arc (0,5 s) vers le 4e onglet, rétrécit (0,12×) et s'efface ; vibration légère. Sous « Réduire les animations », seuls l'échelle et le fondu restent. Superposition non interactive, masquée à VoiceOver.</p>
+        <ul><li><span class="tag e">Existe</span><span><code>SaveFlightOverlay</code> : 1 se soulève (1,06×), 2 vole en arc (0,5 s), 3 rétrécit (0,12×) et s'efface</span></li>
+        <li><span class="tag a">À adapter</span><span>Départ depuis l'onglet Créer, pas depuis une feuille</span></li>
+        <li><span class="tag e">Limite</span><span>Gratuit : 3 widgets. Au 4e : « Plus de 3 widgets », « Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés. », pied « Débloquer et enregistrer »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Enregistrer le widget)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">11 · Confirmation et guide d'ajout</div>
+      <div class="phone t-saphir" id="p11" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Une fin honnête</h4><p>« Ajouter un widget » : 5 étapes pour l'écran d'accueil (texte réel), 4 pour l'écran verrouillé (cf. note en bas). Chaque étape a aussi son symbole dans l'app (non redessiné ici).</p>
+        <ul><li><span class="tag e">Existe</span><span>Feuille, segmenté « Emplacement », étapes, note, « Compris »</span></li>
+        <li><span class="tag a">À adapter</span><span>Montré après chaque enregistrement (aujourd'hui seulement depuis le Store et Mes widgets) ; phrase « iOS ne laisse aucune app poser un widget à ta place. » (nouvelle)</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Compris)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">12 · Résultat dans Mes widgets</div>
+      <div class="phone t-saphir" id="p12" data-time="13:20" data-tab="3"></div>
+      <div class="cap"><h4>Le nouveau widget est en tête</h4><p>Tri : le plus récent d'abord. Carrousel, nom, « Catégorie · Taille · i sur N », 4 actions rondes, « Trouver un widget », carte de la limite gratuite. L'onglet n'est pas changé de force ; le vol d'enregistrement suggère l'arrivée.</p>
+        <ul><li><span class="tag e">Existe</span><span>Toute la page : carrousel, « Modifier », « Dupliquer », « Favori », « Ajouter à l'écran », catégories, « Illimité »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (onglet Mes widgets, facultatif)</span></li></ul></div></div>
+  </div>
+
+  <div class="row" style="margin-top:34px">
+    <div class="col"><div class="nm">Le parcours en chiffres</div><div class="note" style="margin:9px">
+      <h4>4 touchers aujourd'hui, 2 demain</h4>
+      <p><b>Aujourd'hui</b> : onglet Créer, carte « Nutrition », « Personnaliser le widget », « Enregistrer le widget » = <b>4 touchers</b> sur 3 écrans, et le guide d'ajout ne s'ouvre pas.</p>
+      <p><b>Demain</b> : onglet Créer, « Enregistrer le widget » = <b>2 touchers</b> ; « Compris » = 3. Chaque réglage coûte 1 toucher pour l'outil, puis 1 pour la valeur.</p>
+      <p><b>Gratuit</b> : 32 widgets, 10 styles, 8 couleurs principales, Contenu, Taille, Densité, Graphique, Fond « Style », 3 widgets enregistrés. <b>Premium</b> : 63 widgets, 47 styles, Fond (Couleur, Dégradé, Verre, Photo), Texture, Bordure, palettes, couleur libre, « Chaque couleur ».</p></div></div>
+    <div class="col"><div class="nm">Guide · écran verrouillé</div><div class="note" style="margin:9px">
+      <h4>4 étapes (segmenté « Écran verrouillé »)</h4>
+      <ol class="ca-ul"><li>Sur l'écran verrouillé, appuie longuement puis touche « Personnaliser »</li><li>Choisis « Écran verrouillé » et touche la zone des widgets</li><li>Ajoute l'essentiel d'une mini-app Ardane (Nutrition, Fitness, Planning, Finances…)</li><li>Touche-le pour choisir ton design</li></ol>
+      <p style="margin-top:8px">Note : « Pour scanner un aliment d'un geste, ajoute « Scanner un aliment » à côté de Nutrition, ou à la place d'un bouton en bas de l'écran verrouillé (iOS 18). Ardane s'ouvre sur le scanner une fois ton iPhone déverrouillé. » Pour l'écran d'accueil : « Pour changer le contenu d'un widget déjà posé : appui long sur le widget, puis « Modifier le widget ». »</p></div></div>
+    <div class="col"><div class="nm">À valider</div><div class="note" style="margin:9px">
+      <h4>Décisions</h4>
+      <ol class="ca-ul"><li><b>Quel widget proposer</b> à l'arrivée : le dernier modifié, le premier de l'espace favori, ou « Calories restantes » ?</li><li><b>Guide après chaque enregistrement</b>, ou seulement les 3 premières fois (puis « Comment ajouter un widget », qui existe) ?</li><li><b>Composition</b> en moyen et en grand par « Combiner » dans Taille, au lieu du choix multiple du constructeur.</li><li><b>Écran verrouillé</b> : Rond / Rectangle / En ligne dans Taille remplace le filtre de Créer.</li><li><b>Où vivent</b> « Mes données » (lien dans Contenu) et « Photos et citations » (son propre éditeur, hors limite gratuite) ?</li><li>Thèmes : <b>aucun n'est sûrement gratuit</b> (à vérifier dans le code).</li></ol></div></div>
+    <div class="col"><div class="nm">Fichiers Swift concernés</div><div class="note" style="margin:9px">
+      <h4>Pour le développement SwiftUI</h4>
+      <p><code>App/ArdaneApp.swift</code> (<code>MainTabView</code> : l'onglet Créer héberge le Studio)<br><code>App/Screens/Spaces/SpacesView.swift</code> (la liste de 13 cartes disparaît)<br><code>SpaceBuilderView.swift</code> (devient la feuille « Changer de widget »)<br><code>Shared/Model/Combo.swift</code> (<code>Composer</code>, « Combiner »)<br><code>App/Screens/Editor/EditorView.swift</code>, <code>StudioComponents.swift</code> (scène, barre d'outils, « Sur mon écran »), <code>StudioPanels.swift</code><br><code>App/Components/SaveFlight.swift</code><br><code>AddToHomeScreenGuide.swift</code><br><code>App/Screens/MyWidgets/MyWidgetsView.swift</code>, <code>WidgetCarousel.swift</code></p>
+      <p>Accessibilité : bouton œil « Sur mon écran », annuler « Retour en arrière », rétablir « Retour en avant », cibles ≥ 44 pt, cadenas annoncé « Premium ».</p></div></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script>
+Object.assign(P, {
+  bookmark: 'M7 4h10v17l-5-4-5 4z', dashed: 'M5 5h3M11 5h3M17 5h2v2M19 11v3M19 17v2h-2M14 19h-3M8 19H5v-2M5 14v-3M5 8V5',
+  swatch: 'M4 4h6v16H4zM10 8l4-4 4 4-8 12M12 20h8',
+});
+const ic = (n) => `<i data-i="${n}"></i>`;
+const TOOLS = [['resize', 'Taille'], ['lines', 'Contenu'], ['sparkles', 'Thème'], ['layers', 'Style'], ['palette', 'Couleurs'], ['image', 'Fond'], ['dashed', 'Bordure'], ['chart', 'Graphique'], ['density', 'Densité'], ['bookmark', 'Mes styles']];
+const tools = (on, shift = 0) => `<div class="tools" style="margin-top:10px">${TOOLS.map(([i, l], k) => `<div${k === on ? ' class="on"' : ''}${k === 0 && shift ? ` style="margin-left:-${shift * 72}px"` : ''}>${ic(i)}${l}</div>`).join('')}</div>`;
+const head = (undo) => `<div class="ca-nv"><span class="ca-ttl">Créer</span><span class="sp"></span><span class="rb gl ${undo ? 'pr' : 'off'}">${ic('undo')}</span><span class="rb gl off">${ic('redo')}</span></div>`;
+const stage = (o) => o.home
+  ? `<div class="stage ca-stage"><div class="ca-home"><div class="apps">
+      <div data-c="pla"><u>${ic('calendar')}</u>Calendrier</div><div data-c="bud"><u>${ic('card')}</u>Cartes</div>
+      <div class="w"><img data-w="${o.img}" alt=""></div>
+      <div data-c="pas"><u>${ic('plane')}</u>Plans</div><div data-c="fit"><u>${ic('image')}</u>Photos</div></div></div>
+      <div class="ctl"><span class="pill gl">${ic('grid')}Changer de widget</span><span class="pill ic on">${ic('eye')}</span></div></div>`
+  : `<div class="stage ca-stage${o.short ? ' short' : ''}"><span class="ca-ex gl">Exemple</span><img class="w" data-w="${o.img}" style="width:${o.w || 130}px;margin-top:${o.mt ?? -40}px" alt="">
+      <div class="ctl"><span class="pill gl">${ic('grid')}Changer de widget</span><span class="pill ic gl">${ic('eye')}</span></div></div>`;
+const wrap = (h, html) => `<div class="ca-wrap" style="height:${h}px"><article class="pn ca-pan">${html}</article></div>`;
+const lockI = '<i data-i="lock"></i>';
+function build(id, o) {
+  const el = document.getElementById(id);
+  el.innerHTML = `<div class="scr">${head(o.undo)}${stage(o)}${tools(o.on, o.shift)}${wrap(o.h || 284, o.panel)}</div>
+    <div class="fab ${o.prs ? 'ca-prs' : ''}">${o.save || 'Enregistrer le widget'}</div>${o.extra || ''}`;
+}
+const hd = (t, r) => `<div class="ca-hd"><span class="h3">${t}</span><span class="m">${r || ''}</span></div>`;
+const sizeShape = (w, h, r) => `<u style="width:${w}px;height:${h}px${r ? `;border-radius:${r}px` : ''}"></u>`;
+const sizesRow = (sel) => `<div class="ca-sizes"><div${sel === 0 ? ' class="on"' : ''}>${sizeShape(44, 44)}<b>Petit</b></div><div${sel === 1 ? ' class="on"' : ''}>${sizeShape(72, 34)}<b>Moyen</b></div><div${sel === 2 ? ' class="on"' : ''}>${sizeShape(60, 60)}<b>Grand</b></div></div>`;
+const lockRow = `<div class="x-lab" style="margin-top:14px">Écran verrouillé</div><div class="ca-sizes" style="margin-top:8px"><div>${sizeShape(44, 44, 22)}<b>Rond</b></div><div>${sizeShape(66, 30, 9)}<b>Rectangle</b></div><div>${sizeShape(66, 18, 9)}<b>En ligne</b></div></div>`;
+
+/* 1 · Entrée */
+build('p1', { img: 'calories-s-light', on: 0, panel: hd('Taille', 'Calories · Nutrition') + sizesRow(0) + lockRow });
+
+/* 2 · Changer de widget (feuille) */
+(() => {
+  const ch = (t, on, lk) => `<span class="chip${on ? ' on' : ''}">${lk ? ic('lock') : ''}${t}</span>`;
+  const cell = (o) => `<div class="ca-cell${o.on ? ' on' : ''}${o.mt ? ' mt' : ''}">${o.img ? (o.mt ? `<div class="box"><img data-w="${o.img}" alt=""></div>` : `<img data-w="${o.img}" alt="">`) : `<div class="ca-ph">${ic(o.i)}</div>`}
+    <span class="pt">${o.on ? ic('check') : ''}</span><div class="lt"><span>${o.t}</span>${o.hand === false ? '' : ic('hand')}${o.lock ? ic('lock') : ''}</div></div>`;
+  const el = document.getElementById('p2');
+  el.innerHTML = `<div class="scr">${head(false)}${stage({ img: 'calories-s-light' })}${tools(0)}</div><div class="dim"></div>
+  <div class="sheet" style="top:70px;padding:8px 20px 0">
+    <div class="grab"></div>
+    <div class="nv" style="margin-top:-6px"><span class="rb txt gl">Annuler</span><span class="sp"></span><span class="t">Changer de widget</span><span class="sp"></span><span class="rb gl">${ic('pencil')}</span></div>
+    <div class="chips" style="margin-top:8px"><span class="chip" style="margin-left:-252px">Tout</span><span class="chip">${ic('lock')}Écran verrouillé</span>${ch('Productivité')}${ch('Habitudes')}${ch('Nutrition', 1)}${ch('Fitness')}${ch('Budget')}</div>
+    <div class="sect" style="margin-top:14px;margin-bottom:6px"><b>Widgets</b><span>1 sélectionné</span></div>
+    <div class="ca-row" style="min-height:44px"><span style="flex:1;font-size:14.5px;line-height:1.25">Seulement les widgets interactifs</span>${ic('hand')}<span class="ca-tg"></span></div>
+    <div class="ca-g3" style="gap:10px 10px;margin-top:8px">
+      ${cell({ img: 'calories-s-light', t: 'Calories restantes', on: 1 })}${cell({ img: 'macros-m-light', mt: 1, t: 'Macros' })}${cell({ i: 'target', t: 'Protéines restantes', lock: 1 })}
+      ${cell({ i: 'list', t: 'Repas du jour', lock: 1 })}${cell({ i: 'bars', t: 'Semaine nutrition', lock: 1 })}${cell({ i: 'flame', t: 'Série de suivi', lock: 1 })}
+      ${cell({ img: 'quickFood-s-light', t: 'Ajout rapide', lock: 1 })}${cell({ i: 'fork', t: 'Prochain repas', lock: 1 })}${cell({ i: 'sparkles', t: 'Conseil nutrition', lock: 1, hand: false })}
+    </div>
+    <div class="s" style="margin:10px 4px 0">Interactif : s'utilise depuis l'écran d'accueil, sans ouvrir l'app (valider, cocher, ajouter, scanner).</div>
+    <div style="position:absolute;left:0;right:0;bottom:0;height:104px;background:linear-gradient(transparent,var(--sheet) 45%)"></div><div class="btnP lg" style="position:absolute;left:20px;right:20px;bottom:34px">Utiliser ce widget</div>
+  </div>`;
+})();
+
+/* 3 · Sur mon écran */
+build('p3', { img: 'calories-s-light', home: true, on: 0, panel: hd('Taille', 'Calories · Nutrition') + sizesRow(0) + lockRow });
+
+/* 4 · Taille, moyen, combiner */
+build('p4', { img: 'calories-m-light', w: 236, mt: -40, short: true, on: 0, h: 332,
+  panel: hd('Taille', 'Calories restantes · Nutrition') + sizesRow(1)
+    + '<div class="ca-note">Plus d\'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.</div>'
+    + `<div class="ca-hd" style="margin-top:12px"><span class="x-lab">Combiner</span><span class="m" style="font-size:12.5px">1 sélectionné · 2 au plus</span></div>`
+    + `<div class="ca-slot"><img data-w="calories-s-light" alt=""><b style="font-size:15px">Calories restantes</b><span class="n">1</span></div>`
+    + `<div class="ca-slot add">${ic('plus')}Réunir avec un autre widget</div>` + lockRow });
+
+/* 5 · Contenu */
+const tg = (t, on) => `<div class="ca-row"><span>${t}</span><span class="ca-tg${on ? ' on' : ''}"></span></div>`;
+build('p5', { img: 'calories-s-light', on: 1, h: 284,
+  panel: `<div class="ca-row" style="min-height:44px;border:0"><span class="h3">Nom</span><span class="ca-field" style="margin-left:6px">Calories</span></div>`
+    + `<div class="ca-hd" style="margin-top:12px"><span class="h3">Tes données</span><span class="m" style="font-size:12.5px">Tout est renseigné</span></div>`
+    + `<div class="ca-slot" style="background:var(--tint)"><span class="ico sq" data-c="nut">${ic('fork')}</span><span style="flex:1;min-width:0"><b style="font-size:14.5px;display:block">Objectifs de macros</b><span class="s tn">2 200 kcal · P 140 g · G 250 g · L 70 g</span></span><span class="chk ok" data-c="nut">${ic('checkc')}</span></div>`
+    + `<div class="h3" style="margin-top:14px">Éléments affichés</div>` + tg('Titre', 1) + tg('Icône', 1) + tg('Valeur principale', 1) + tg('Légende', 1) + tg('Graphique', 1) });
+
+/* 6 · Thème */
+const th = (img, t, on) => `<div${on ? ' class="on"' : ''}><img data-w="${img}" alt=""><b><span>${t}</span>${lockI}</b></div>`;
+build('p6', { img: 'calories-s-dark', on: 2, save: 'Débloquer et enregistrer',
+  panel: hd('Thème') + '<div class="ca-note">Un thème règle tout d\'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget.</div>'
+    + `<div class="ca-g3">${th('calories-s-dark', 'Midnight', 1)}${th('calories-s-light', 'Pure White')}${th('calories-s-ocean', 'Ocean')}${th('calories-s-neon', 'Cyber')}${th('calories-s-luxury', 'Luxury')}${th('calories-s-matteBlack', 'Minimal Black')}</div>` });
+
+/* 7 · Style */
+const st = (img, t, free, on) => `<div${on ? ' class="on"' : ''}><img data-w="${img}" alt=""><b><span>${t}</span>${free ? '' : lockI}</b><small>${free ? 'Gratuit' : ''}</small></div>`;
+build('p7', { img: 'calories-s-dark', on: 3,
+  panel: hd('Style', '57 styles') + '<div class="ca-note">Un style change l\'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent.</div>'
+    + `<div class="ca-g3">${st('calories-s-light', 'Clair', 1)}${st('calories-s-dark', 'Sombre', 1, 1)}${st('calories-s-glass', 'Verre')}${st('calories-s-aurora', 'Aurore')}${st('calories-s-neon', 'Néon')}${st('calories-s-luxury', 'Luxe')}</div>` });
+
+/* 8 · Couleurs */
+const dot = (c, on) => `<u style="background:#${c}" class="${on ? 'on' : ''}">${on ? ic('check') : ''}</u>`;
+build('p8', { img: 'calories-s-dark', on: 4,
+  panel: hd('Couleur principale', 'Ambre') + '<div class="ca-note">Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.</div>'
+    + `<div class="ca-dots">${dot('2F8F7A')}${dot('3366FF')}${dot('FF6B57')}${dot('F2A33A', 1)}${dot('8C6CFF')}${dot('F2588F')}${dot('7FA33A')}${dot('6B7280')}<u class="free">${ic('lock')}</u></div>`
+    + `<div class="ca-hd" style="margin-top:16px"><span class="h3">Palettes</span><span class="prem">${ic('crown')}Premium</span></div><div class="ca-note" style="margin-top:2px">Tout change d'un coup</div>` });
+
+/* 9 · Fond */
+build('p9', { img: 'calories-s-dark', on: 5, shift: 5,
+  panel: hd('Fond') + `<div class="ca-seg5"><span class="on">Style</span><span>${lockI}Couleur</span><span>${lockI}Dégradé</span><span>${lockI}Verre</span><span>${lockI}Photo</span></div>`
+    + '<div class="ca-note">Le fond du style choisi, clair ou sombre selon le style.</div>'
+    + `<div class="ca-hd" style="margin-top:16px"><span class="h3">Texture</span><span class="prem">${ic('crown')}Premium</span></div>`
+    + `<div class="chips" style="margin-top:10px"><span class="chip on">Aucune</span><span class="chip">${lockI}Grain</span><span class="chip">${lockI}Papier</span><span class="chip">${lockI}Points</span></div>` });
+
+/* 10 · Enregistrement */
+build('p10', { img: 'calories-s-dark', on: 4, prs: 1,
+  panel: hd('Couleur principale', 'Ambre') + '<div class="ca-note">Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.</div>'
+    + `<div class="ca-dots">${dot('2F8F7A')}${dot('3366FF')}${dot('FF6B57')}${dot('F2A33A', 1)}${dot('8C6CFF')}${dot('F2588F')}${dot('7FA33A')}${dot('6B7280')}</div>`,
+  extra: `<div class="ca-mock" style="left:124px;top:139px;width:138px"><img data-w="calories-s-dark" alt=""></div>
+    <div class="ca-mock" style="left:212px;top:340px;width:92px;opacity:.7;transform:rotate(5deg)"><img data-w="calories-s-dark" alt=""></div>
+    <div class="ca-mock" style="left:276px;top:560px;width:52px;opacity:.5;transform:rotate(9deg)"><img data-w="calories-s-dark" alt=""></div>
+    <div class="ca-mock" style="left:314px;top:730px;width:22px;opacity:.35"><img data-w="calories-s-dark" alt=""></div>
+    <svg class="ca-mock" style="left:0;top:0;z-index:44" width="393" height="852" viewBox="0 0 393 852" fill="none"><path d="M200 250 C 330 320, 360 560, 325 770" stroke="#0B1220" stroke-opacity=".35" stroke-width="2" stroke-dasharray="4 6"/></svg>
+    <div style="position:absolute;z-index:45;left:284px;top:772px;width:88px;height:54px;border-radius:27px;border:2.5px solid var(--primary);pointer-events:none"></div>
+    <span class="ca-anno" style="left:104px;top:134px;padding:0 4px"><b>1</b></span>
+    <span class="ca-anno" style="left:190px;top:336px;padding:0 4px"><b>2</b></span>
+    <span class="ca-anno" style="left:254px;top:556px;padding:0 4px"><b>3</b></span>` });
+
+/* 11 · Confirmation et guide */
+(() => {
+  const s = (n, t) => `<div class="step" style="padding:9px 0;font-size:14px;line-height:1.36"><span class="n">${n}</span><span>${t}</span></div>`;
+  document.getElementById('p11').innerHTML = `<div class="scr">${head(false)}${stage({ img: 'calories-s-dark' })}</div><div class="dim"></div>
+  <div class="sheet" style="top:40px;padding:8px 20px 0">
+    <div class="grab" style="margin-bottom:6px"></div>
+    <div class="nv" style="height:40px;margin-top:0"><span class="sp"></span><span class="t">Ajouter un widget</span><span class="sp"></span></div>
+    <div style="display:flex;gap:14px;align-items:center;margin-top:4px"><img data-w="calories-s-dark" style="width:64px;height:64px;border-radius:16px;flex:none" alt="">
+      <div><div class="h2" style="font-size:20px">« Calories » est prêt</div><span class="okl" style="margin-top:3px;font-size:14px">${ic('check')}Enregistré dans Mes widgets</span></div></div>
+    <div class="seg" style="margin-top:12px"><span class="on">Écran d'accueil</span><span>Écran verrouillé</span></div>
+    <div style="margin-top:4px">
+      ${s(1, 'Appuie longuement sur un espace vide de l\'écran d\'accueil')}
+      ${s(2, 'Touche « Modifier » en haut, puis « Ajouter un widget »')}
+      ${s(3, 'Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu\'à la taille Petit : « Calories » y est')}
+      ${s(4, 'Ajoute-le : il garde ce widget, même quand tu en crées d\'autres')}
+      ${s(5, 'Une fois ajouté, touche le widget pendant que les icônes bougent pour choisir un autre de tes widgets')}
+    </div>
+    <div class="s" style="margin:4px 2px 8px">Pour changer le contenu d'un widget déjà posé : appui long sur le widget, puis « Modifier le widget ».</div>
+    <div class="info" style="padding:10px 14px">${ic('info')}<span>iOS ne laisse aucune app poser un widget à ta place.</span></div>
+    <div class="btnP lg" style="margin-top:12px">Compris</div>
+  </div>`;
+})();
+
+/* 12 · Mes widgets */
+(() => {
+  const act = (i, t, pr) => `<div${pr ? ' class="pr"' : ''}><u class="${pr ? '' : 'gl'}">${ic(i)}</u>${t}</div>`;
+  document.getElementById('p12').innerHTML = `<div class="scr">
+    <div class="nv"><span class="rb txt gl">Sélectionner</span><span class="sp"></span><span class="rb gl">${ic('info')}</span><span class="rb gl">${ic('plus')}</span></div>
+    <div class="x-title" style="margin-top:-2px">Mes widgets</div>
+    <div class="m" style="margin:2px 4px 0;font-size:13px">3 widgets · glisse pour les faire tourner</div>
+    <div class="ca-car">
+      <img data-w="quickExpense-s-light" style="left:-56px;top:48px;width:132px;opacity:.55;transform:rotate(-7deg)" alt="">
+      <img data-w="savingsGoal-s-light" style="right:-56px;top:48px;width:132px;opacity:.55;transform:rotate(7deg)" alt="">
+      <img data-w="calories-s-dark" style="left:93px;top:14px;width:200px;box-shadow:0 14px 30px rgb(var(--sh) / .3)" alt="">
+    </div>
+    <div style="text-align:center;margin-top:-2px"><div style="font-size:20px;font-weight:700;letter-spacing:-.01em">Calories</div><div class="s tn" style="margin-top:2px">Nutrition · Petit · 1 sur 3</div></div>
+    <div class="ca-act" style="margin-top:12px">${act('pencil', 'Modifier', 1)}${act('copy', 'Dupliquer')}${act('heart', 'Favori')}${act('phone', 'Ajouter à l\'écran')}</div>
+    <div class="x-sec" style="margin:14px 4px 0"><b style="font-size:17px">Trouver un widget</b></div>
+    <div class="ca-cat"><div class="on"><em>3</em><u>${ic('grid')}</u>Tous</div><div data-c="nut"><em>1</em><u>${ic('fork')}</u>Nutrition</div><div data-c="bud"><em>2</em><u>${ic('wallet')}</u>Budget</div></div>
+    <article class="pn cd" style="margin-top:12px;padding:12px 16px"><div class="ca-hd"><span style="font-size:14.5px;font-weight:650">3 sur 3 widgets gratuits</span><span class="link" style="font-size:14px">Illimité</span></div>
+      <span class="u-meter" style="margin:8px 0 6px;--c:var(--primary)"><i style="width:100%"></i></span><span class="s">Photos et citations illimitées</span></article>
+  </div>`;
+})();
+Cristal.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — 1 · Les 10 déclinaisons</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  .pal { margin: 14px 9px 0; background: #fff; border: 1px solid #D5DDE8; border-radius: 16px; padding: 13px 14px 12px; }
+  .pal h5 { font: 800 16px Inter, sans-serif; letter-spacing: -.01em; }
+  .pal .w { font: 400 12.5px/1.4 Inter, sans-serif; color: var(--bink2); margin: 3px 0 9px; min-height: 52px; }
+  .pal .ap { font: 600 11.5px/1.35 Inter, sans-serif; color: var(--bink2); border-top: 1px solid #E3E8F0; margin-top: 9px; padding-top: 8px; }
+  .pal .ap b { color: var(--bink); }
+  .nm em { font-style: normal; font-weight: 700; color: #1E5B34; background: #DDF0E4; border-radius: 4px; padding: 2px 6px; margin-left: 6px; letter-spacing: .04em; }
+  .nm em.p { color: #6B4E0A; background: #F6E7C1; } .nm em.n { color: #4A2F9A; background: #ECE7FA; }
+</style>
+</head>
+<body style="--bw:2316px">
+<main class="bd">
+  <header class="bd-head"><div class="num">1</div><div><h1>Cristal « Équilibrée » · les 10 déclinaisons</h1>
+    <p style="max-width:1300px">Le même accueil et la même journée (jeudi 12 novembre, 13 h 20) dans dix couleurs. La structure ne change pas : verre pour ce qui flotte, panneaux presque opaques pour le contenu, une seule couleur d'action. Ce qui change d'une déclinaison à l'autre : la couleur d'action, les deux nappes du fond et leur place, la teinte des panneaux, l'arrondi, la forme des pastilles d'icône, et les couleurs des mini-apps, ré-accordées pour aller avec l'ensemble. Saphir reste la déclinaison gratuite ; les autres suivent la « Couleur de l'app » Premium qui existe déjà.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+  <div class="row" id="r1"></div>
+  <div class="row" id="r2" style="margin-top:34px"></div>
+</main>
+<script src="cristal.js"></script>
+<script>
+const WHY = {
+  saphir: 'L\'identité d\'Ardane. Nappes turquoise et bleue, panneaux blancs, pastilles rondes.',
+  lavande: 'Calme, pour le soir et l\'étude. Nappes lilas et rose pâle, arrondi un peu plus généreux.',
+  rose: 'Chaleureux sans être sucré. Halo rose en haut de l\'écran, corail en bas ; le corail sert d\'accent.',
+  sauge: 'Naturel et reposant. Deux nappes en diagonale, les couleurs des mini-apps tirées vers le vert.',
+  ocean: 'Frais et net. Une nappe turquoise large, comme un horizon, et un bleu océan en second.',
+  sable: 'Le plus « papeterie de luxe ». Panneaux blanc chaud, pastilles carrées arrondies, accents bronze.',
+  graphite: 'Sobre et professionnel. Voile argent en biais, arrondi plus serré, couleurs des mini-apps adoucies.',
+  peche: 'Lumineux et énergique. Nappes pêche et abricot, action en abricot brûlé.',
+  foret: 'Profond et posé. Vert forêt pour l\'action, eucalyptus et menthe d\'eau pour le fond.',
+  mono: 'Presque sans couleur. Blanc, gris et encre : les mini-apps se reconnaissent à leur icône et à leur nom.' };
+const col = (t) => `<div class="col"><div class="nm">${t.name}<em class="${t.free ? '' : t.isNew ? 'n' : 'p'}">${t.free ? 'Gratuite' : t.isNew ? 'Premium · teinte nouvelle' : 'Premium'}</em></div>
+  <div class="phone t-${t.id}" data-screen="homeA:journee"></div>
+  <div class="pal"><h5>${t.sub}</h5><p class="w">${WHY[t.id]}</p><div data-pal="${t.id}" data-mode="short"></div>
+  <p class="ap">Couleur de l'app correspondante : <b>${t.app}</b></p></div></div>`;
+document.getElementById('r1').innerHTML = THEMES.slice(0, 5).map(col).join('');
+document.getElementById('r2').innerHTML = THEMES.slice(5).map(col).join('');
+Cristal.init();
+</script>
+</body>
+</html>

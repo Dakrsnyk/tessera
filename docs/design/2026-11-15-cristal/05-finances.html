@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — 05 Mini-app Finances</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* préfixe fi- : propre à cette planche */
+  .fi .nv .t { position: absolute; left: 0; right: 0; text-align: center; pointer-events: none; }
+  .fi .nv { position: relative; }
+  .fi .nv .rb { position: relative; z-index: 1; }
+  .fi .wsel .d.next { opacity: .3; }                                   /* Finances bloque le futur */
+  .fi-hero { border-radius: var(--r); padding: 14px 16px 14px; }
+  .fi-amt { font-size: 54px; font-weight: 800; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; margin-top: 6px; }
+  .fi-amt small { font-size: 26px; font-weight: 700; color: var(--ink2); letter-spacing: 0; margin-left: 4px; }
+  .fi-cmp { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 12.5px; color: var(--ink2); }
+  .fi-cmp i { font-size: 14px; flex: none; }
+  .fi-act { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .fi-cat { display: flex; align-items: center; gap: 11px; padding: 6px 0; }
+  .fi-cat .tx { flex: 1; min-width: 0; }
+  .fi-cat .l { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; font-size: 14.5px; font-weight: 650; }
+  .fi-cat .l em { font-style: normal; font-weight: 500; font-size: 13px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+  .fi-cat .u-meter { --meter-h: 7px; }
+  .fi-link { display: flex; align-items: center; justify-content: space-between; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--primary); }
+  .fi-mk { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; color: var(--ink2); }
+  .fi-mk i { font-size: 14px; }
+  .fi-rev { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 9px; border: 1.5px solid var(--rule2); color: var(--ink); margin-left: 4px; }
+  .fi-bal { font-size: 34px; font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1.05; }
+  .fi-chart { position: relative; }
+  .fi-chart svg { display: block; overflow: visible; }
+  .fi-chart text { font: 500 10px Inter, sans-serif; fill: var(--ink2); }
+  .fi-day { font-size: 13px; font-weight: 700; color: var(--ink2); margin: 14px 6px 6px; }
+  .fi-month { display: flex; align-items: center; justify-content: space-between; height: 44px; border-radius: 22px; margin-top: 8px; font-size: 15px; font-weight: 650; }
+  .fi-month i { width: 44px; text-align: center; display: grid; place-items: center; font-size: 18px; color: var(--primary); }
+  .fi-in { background: var(--well); border-radius: 18px; padding: 10px 14px; }
+  .fi-cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 8px; }
+  .fi-cats .chip { height: 44px; border-radius: 22px; justify-content: center; padding: 0 8px; background: var(--panel); border: 1.5px solid var(--rule2); }
+  .fi-cats .chip.on { border-color: transparent; }
+  .fi-val { display: flex; align-items: center; justify-content: space-between; min-height: 44px; }
+  .fi .sheet .rb { background: var(--well); }
+  .fi-pg .li > .tx .s { white-space: normal; }
+  .fi .sect { margin: 14px 4px 6px; }
+  .fi .ls > .li { min-height: 48px; }
+  .fi-cats .chip.on { background: var(--primary); }
+  #ph3 .scr, #ph4 .scr { padding-top: 0; }
+  #ph3 .fi-cat, #ph4 .fi-cat { padding: 3px 0; }
+  #ph3 .fi-link { min-height: 38px; }
+  #ph3 .ls > .li, #ph4 .ls > .li { min-height: 44px; padding: 3px 0; }
+  #ph3 .sect, #ph4 .sect { margin: 10px 4px 5px; }
+  #ph3 article[style*="margin-top:12px"], #ph4 article[style*="margin-top:12px"] { margin-top: 8px !important; }
+  #ph3 .foot { margin-top: 8px; } #ph3 .btnO { margin-top: 8px !important; }
+  #ph4 .fi-act { margin-top: 8px; }
+  .fi-lock { display: inline-flex; align-items: center; gap: 4px; }
+  .fi-lock i { font-size: 12px; --sw: 2.2; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">5</div><div><h1>Mini-app Finances</h1>
+    <p>La page qui s'ouvre quand on touche la carte « Budget » de l'accueil, dans le style Cristal : mêmes blocs, mêmes libellés, mêmes règles Premium que l'app actuelle. Journée d'exemple : jeudi 12 novembre, 13 h 20. Montants à la canadienne ; une dépense porte toujours le signe « − ».</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Page principale, haut</div>
+      <div class="phone app fi t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="ph1"></div>
+      <span class="flow"></span>
+      <div class="cap"><h4>Le héros dit ce qu'il reste</h4>
+        <p>« Reste ce mois-ci » en grand chiffre ; « 21,68 $ par jour » n'est que la légende, comme aujourd'hui. Les jours à venir sont grisés.</p>
+        <ul><li><span class="tag e">Existe</span><span>Sélecteur de semaine, héros, courbe du budget, pastille « Budget 1 200 $ », comparaison, « Dépense » et « Revenu », jour choisi et sa première opération.</span></li>
+          <li><span class="tag a">À adapter</span><span>Bande d'accent remplacée par la nappe jade ; sélecteur et héros en verre ; courbe jade (blanche aujourd'hui).</span></li>
+          <li><span class="tag a">À adapter</span><span>Légende avec centimes (« 21,68 $ ») : l'app arrondit sans doute (à vérifier).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">2 · Page principale, suite</div>
+      <div class="phone app fi t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="ph2"></div>
+      <span class="flow"></span>
+      <div class="cap"><h4>Apple Pay, mois, solde</h4>
+        <p>Ligne Apple Pay, « Ce mois-ci », puis la carte « Solde du compte ». Le défilement continue sous la barre d'onglets.</p>
+        <ul><li><span class="tag e">Existe</span><span>Segmenté Mois / 3 mois / Année : « 3 mois » et « Année » portent un cadenas (Premium), « Mois » est ouvert.</span></li>
+          <li><span class="tag e">Existe</span><span>Légende du solde et « Modifier le solde de départ » ; toucher « Solde du compte » ouvre le Relevé.</span></li>
+          <li><span class="tag a">À adapter</span><span>Segmenté sur sa propre ligne (3 colonnes de 44 pt), pas à côté du titre.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">3 · Page principale, bas</div>
+      <div class="phone app fi t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="ph3"></div>
+      <span class="flow"></span>
+      <div class="cap"><h4>Catégories, factures, épargne, paramètres</h4>
+        <p>Fin de page, défilée. Avec les 3 blocs présents, la liste de pages n'a que « Opérations » et « Dépenses fixes ».</p>
+        <ul><li><span class="tag e">Existe</span><span>Catégories (4 au plus, 3 montrées ici) et « Les 6 catégories », factures (3 au plus, 2 montrées ici), épargne, note, « Mes paramètres ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Pastilles de catégorie, panneaux, bouton de 44 pt ; icône de facture rouge avec « Demain » écrit.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">4 · État vide</div>
+      <div class="phone app fi t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="ph4"></div>
+      <div class="cap"><h4>Aucun budget, aucune opération</h4>
+        <p>Page défilée (le sélecteur de semaine est celui de l'écran 1). Zéros réels, ni courbe ni faux chiffre ; les blocs absents reviennent comme lignes de pages.</p>
+        <ul><li><span class="tag e">Existe</span><span>Textes de l'app : budget à définir, solde vide, « À configurer », six lignes de pages dont « Évolution » (Premium).</span></li>
+          <li><span class="tag a">À adapter</span><span>Détail de « Catégories » non relevé (laissé vide) : à vérifier dans le code.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Ajouter une dépense</div>
+      <div class="phone app fi t-saphir" data-c="bud" data-time="13:20" data-tab="none" id="ph5"></div>
+      <div class="cap"><h4>Une feuille, quatre champs</h4>
+        <p>Montant, Catégorie, Note, Date. Le clavier n'est pas dessiné. « Supprimer la dépense » n'apparaît qu'en modification.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les quatre champs et leurs libellés (feuille « Dépense »). « Revenu » : Montant, Source, Date.</span></li>
+          <li><span class="tag a">À adapter</span><span>Catégorie en 6 puces à toucher au lieu d'un sélecteur ; boutons de la feuille (fermer, « Enregistrer ») à vérifier dans SheetForm.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">6 · Opérations</div>
+      <div class="phone app fi t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="ph6"></div>
+      <div class="cap"><h4>Dépenses et revenus, mois par mois</h4>
+        <p>Page poussée : sélecteur de mois, segmenté Dépenses / Revenus, filtre de catégorie avec le total, une carte par jour.</p>
+        <ul><li><span class="tag e">Existe</span><span>Bouton « + » (Nouvelle dépense / Nouveau revenu), marques Apple Pay et « À vérifier », toucher une ligne = l'éditeur.</span></li>
+          <li><span class="tag e">Existe</span><span>Mois précédents : cadenas dans le sélecteur de mois (Premium). Onglet Revenus : « Total du mois ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">7 · Épargne</div>
+      <div class="phone app fi t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="ph7"></div>
+      <div class="cap"><h4>Objectifs et comptes</h4>
+        <p>Objectif d'épargne avec barre, montants et mensualité nécessaire ; comptes saisis à la main et valeur nette.</p>
+        <ul><li><span class="tag e">Existe</span><span>Objectifs, versements manuels, date limite, courbe de valeur nette, comptes et dettes.</span></li>
+          <li><span class="tag a">À adapter</span><span>Courbe et lignes en panneaux ; la dette s'écrit « Dette » et « − » (le rouge seul ne suffit pas).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Légende</div>
+      <div class="note" style="margin:9px" id="legend">
+        <h4>Ce qui ne change pas</h4>
+        <p>L'ordre des blocs, tous les libellés, la barre « ‹ Finances », « Dépense » et « Revenu » dans la page (pas d'action flottante), les règles Premium (mois courant et 7 jours gratuits), « Mes paramètres » en dernier, aucune connexion bancaire.</p>
+        <h4 style="margin-top:12px">Ce que Cristal change</h4>
+        <p>Fond clair avec nappe jade au lieu de la bande d'accent et de la feuille blanche ; verre pour le sélecteur de semaine et le héros seulement ; blocs en panneaux ; une seule couleur d'action (jade) ; boutons en capsule de 44 pt ; couleurs de catégorie réservées aux pastilles et aux barres ; barre d'onglets en verre.</p>
+        <h4 style="margin-top:12px">Existe / À adapter / À développer</h4>
+        <ul style="list-style:none;display:grid;gap:4px;margin-top:4px">
+          <li style="display:flex;gap:7px"><span class="tag e">Existe</span><span>Tous les blocs, montants, états et verrous dessinés ici.</span></li>
+          <li style="display:flex;gap:7px"><span class="tag a">À adapter</span><span>Habillage (verre, panneaux, jade) ; légende du héros avec centimes ; catégories en puces dans la feuille.</span></li>
+          <li style="display:flex;gap:7px"><span class="tag d">À développer</span><span>Rien : aucune fonction nouvelle n'est dessinée.</span></li></ul>
+        <h4 style="margin-top:12px">N'existe pas (non dessiné)</h4>
+        <p>Placements et bourse ; connexion bancaire ou import de relevé ; objectifs financiers autres que l'épargne (dette à rembourser, achat) ; opérations rattachées à un compte ; plusieurs devises ; « à dépenser par jour » en grand chiffre ; vue Année en barres.</p>
+        <h4 style="margin-top:12px">État vide</h4>
+        <p>Dessiné à l'écran 4. Autres textes : Opérations « Aucune dépense notée pour ce mois. » ; jour sans opération, tuiles à 0,00 $.</p>
+        <h4 style="margin-top:12px">Pages existantes non dessinées</h4>
+        <p>Catégories (anneau de 220 pt, « Nouvelle catégorie »), Factures et abonnements, Relevé (solde après chaque opération), Évolution (Premium : barres sur 6 mois, moyennes), Dépenses fixes, guide Apple Pay, éditeurs de revenu, facture, objectif, compte, budget.</p>
+        <h4 style="margin-top:12px">Fichiers Swift</h4>
+        <p><b>MiniApps/Finances/</b> FinancesApp.swift, FinancesPages.swift ; <b>Spaces/</b> BudgetSpace.swift ; <b>MiniApps/</b> MiniAppScaffold.swift, MiniApp.swift, WeekSelector.swift.</p>
+      </div></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script>
+Object.assign(P, {
+  wave: 'M8.5 9.5a4 4 0 0 1 0 5M12 7a7.5 7.5 0 0 1 0 10M15.5 4.5a11 11 0 0 1 0 15',
+  plusc: 'M12 3.5a8.5 8.5 0 1 0 0 17 8.5 8.5 0 0 0 0-17zM12 8v8M8 12h8',
+});
+const m = (x) => U.money(x).replace(/ /g, ' ');
+const m2 = (x) => x.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d),)/g, ' ') + ' $';
+const neg = (x) => '−' + m2(x);
+const CAT = { epi: ['bag', 'data-c="hab"', 'Épicerie'], res: ['fork', 'data-c="nut"', 'Restos'], tra: ['car', 'data-c="pla"', 'Transport'],
+  sor: ['star', 'data-ev="rdv"', 'Sorties'], mai: ['home', 'data-c="gluc"', 'Maison'], aut: ['grid', 'data-c="pro"', 'Autre'] };
+const ico = (k, cls = 'lg') => `<span class="ico ${cls}" ${CAT[k][1]}><i data-i="${CAT[k][0]}"></i></span>`;
+const nv = (t, right) => `<div class="nv"><span class="rb gl" role="button" aria-label="Retour"><i data-i="chevl"></i></span><span class="sp"></span><span class="t">${t}</span><span class="sp"></span>${right || '<span style="width:44px"></span>'}</div>`;
+const chev = '<i class="go" data-i="chev"></i>';
+const sect = (t, d) => `<div class="sect"><b>${t}</b>${d ? `<span>${d}</span>` : ''}</div>`;
+const gico = (i, st = '') => `<span class="ico lg sq" style="${st}"><i data-i="${i}"></i></span>`;
+
+// courbe en aire : vals, max (axe), labels y (du haut vers le bas), labels x [[valeur 0..1, texte]]
+function area(vals, o) { const W = 321, H = o.h, pl = 46, pw = W - pl, y = (v) => H - v / o.max * H;
+  const pts = vals.map((v, k) => [k / (vals.length - 1) * pw, y(v)]), d = pts.map((p, k) => (k ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+  const last = pts[pts.length - 1];
+  return `<div class="fi-chart" role="img" aria-label="${o.aria}"><svg width="${W}" height="${H + 18}" viewBox="0 0 ${W} ${H + 18}">
+    ${o.yl.map((l, k) => `<line x1="0" x2="${pw}" y1="${(H * k / (o.yl.length - 1)).toFixed(1)}" y2="${(H * k / (o.yl.length - 1)).toFixed(1)}" stroke="var(--grid)" ${k === o.yl.length - 1 ? 'stroke-dasharray="4 3" stroke="var(--rule2)"' : ''}/>
+      <text x="${pw + 8}" y="${(H * k / (o.yl.length - 1) + 3.5).toFixed(1)}">${l}</text>`).join('')}
+    <path d="${d} L${last[0].toFixed(1)} ${H} L0 ${H} Z" fill="var(--c)" opacity=".13"/><path d="${d}" fill="none" stroke="var(--c)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="${last[0].toFixed(1)}" cy="${last[1].toFixed(1)}" r="4" fill="#fff" stroke="var(--c)" stroke-width="2.2"/>
+    ${o.xl.map((x) => `<text x="${(x[0] * pw).toFixed(1)}" y="${H + 14}" text-anchor="${x[0] === 0 ? 'start' : x[0] === 1 ? 'end' : 'middle'}">${x[1]}</text>`).join('')}</svg></div>`; }
+
+const REM = [990, 900, 780, 700, 578.5, 546.5, 546.5, 488.5, 476.5, 435.5, 426.5, 412];            // reste du budget, 1er au 12 novembre
+const BAL = [1274.2, 1184.2, 1064.2, 984.2, 2012.7, 1980.7, 1980.7, 1922.7, 1910.7, 1869.7, 1860.7, 1846.2];  // solde du compte
+const NET = [2090, 2150, 2080, 2310, 2420, 2380, 2640, 2750.8];
+
+const hero = () => `<article class="gl fi-hero"><div class="x-lab">Reste ce mois-ci</div><div class="fi-amt">412<small>$</small></div>
+  <div class="m" style="margin-top:6px;color:var(--ink);font-size:13px">788 $ dépensés · 21,68 $ par jour pendant 19 jours</div>
+  <div style="margin-top:10px" role="img" aria-label="Reste du budget, jour par jour : de 990 $ à 412 $">${U.spark(REM.map((v) => v - 380), { w: 321, h: 40 })}</div>
+  <div style="margin-top:10px"><span class="pill" style="background:var(--tint)"><i data-i="pencil" style="font-size:16px"></i>Budget 1 200 $</span></div>
+  <div class="fi-cmp"><i data-i="down"></i><span>96 $ de moins que le mois dernier à la même date</span></div></article>`;
+const actions = () => `<div class="fi-act"><div class="btnP"><i data-i="minus"></i>Dépense</div><div class="btnT"><i data-i="plus"></i>Revenu</div></div>`;
+const tiles = (d, r) => `<div class="g2"><div class="pn stat"><small>Dépenses du jour</small><b>${d}</b></div><div class="pn stat"><small>Revenus du jour</small><b>${r}</b></div></div>`;
+
+const opToday = `<div class="li">${ico('res')}<div class="tx"><b>Café et sandwich</b><span class="s">Restos · <span class="fi-mk"><i data-i="wave"></i>Apple Pay</span><span class="fi-rev">À vérifier</span></span></div><div class="r"><b>${neg(14.5)}</b></div></div>`;
+const page1 = () => nv('Finances') + U.wsel({ marks: [0, 1, 2, 3] }).replace('class="wsel gl"', 'class="wsel gl" style="margin-top:6px"')
+  + `<div class="x-stack" style="margin-top:12px">${hero()}</div>` + actions() + sect('Jeudi 12 novembre') + tiles(neg(14.5), m2(0)) + `<article class="pn ls" style="margin-top:12px">${opToday}</article>`;
+document.getElementById('ph1').innerHTML = `<div class="scr">${page1()}</div>`;
+
+const solde = `<article class="pn cd"><div class="ch"><b>Solde du compte</b><i class="go" data-i="chev"></i></div>
+  <div class="fi-bal" style="margin-top:2px">${m(1846.2)}</div>
+  <div class="seg" style="margin-top:10px"><span class="on">Mois</span><span><span class="fi-lock">3 mois<i data-i="lock"></i></span></span><span><span class="fi-lock">Année<i data-i="lock"></i></span></span></div>
+  <div style="margin-top:12px">${area(BAL, { h: 104, max: 2500, yl: ['2 500 $', '1 250 $', '0 $'], xl: [[0, '1 nov.'], [.36, '5 nov.'], [.73, '9 nov.'], [1, '12 nov.']], aria: 'Solde du compte du 1er au 12 novembre : de 1 484,20 $ à 1 846,20 $' })}</div>
+  <div class="s" style="margin-top:8px">À partir de 1 484,20 $ le 1 nov., puis tes revenus et tes dépenses, factures et montants fixes compris.</div>
+  <div class="fi-link"><span style="display:flex;gap:6px;align-items:center"><i data-i="pencil" style="font-size:15px"></i>Modifier le solde de départ</span></div></article>`;
+document.getElementById('ph2').innerHTML = `<div class="scr">${nv('Finances')}
+  <div class="x-stack" style="margin-top:10px">
+  <article class="pn ls"><div class="li">${gico('wave', '--c:#9A6508;color:#9A6508;background:#FBEFD9')}<div class="tx"><b>Dépenses Apple Pay automatiques</b><span class="s">Active · dernière dépense il y a 5 min</span></div>${chev}</div></article></div>
+  ${sect('Ce mois-ci')}<article class="pn ls"><div class="li">${gico('down')}<div class="tx"><b>Revenus</b><span class="s">ce mois-ci</span></div><div class="r"><b>${m(1150)}</b></div>${chev}</div></article>
+  <div style="margin-top:12px">${solde}</div></div>`;
+
+const catRow = (k, v, lim) => `<div class="fi-cat" ${CAT[k][1]}>${ico(k)}<div class="tx"><div class="l"><span>${CAT[k][2]}</span><em>${m(v)} / ${m(lim)}</em></div><span class="u-meter"><i style="width:${(v / lim * 100).toFixed(1)}%"></i></span></div></div>`;
+const goal = () => `<div style="padding:4px 0"><div style="display:flex;justify-content:space-between;align-items:baseline"><b style="font-size:15px;font-weight:650">Voyage à Lisbonne</b><b class="tn" style="font-size:14px">43 %</b></div>
+  <span class="u-meter" style="margin:8px 0 6px;--meter-h:7px"><i style="width:42.7%"></i></span>
+  <div class="s">${m(640)} sur ${m(1500)} · ${m(123)} / mois d'ici Juin 2027</div></div>`;
+const bill = (i, t, when, a, hot) => `<div class="li">${gico(i, hot ? '--c:var(--c-fit);color:var(--c-fit);background:color-mix(in srgb,var(--c-fit) 13%,#fff)' : '')}<div class="tx"><b>${t}</b><span class="s">${when}</span></div><div class="r"><b>${m2(a)}</b></div></div>`;
+const pageRow = (i, t, s, extra = '') => `<div class="li">${gico(i)}<div class="tx"><b>${t}</b><span class="s">${s}</span></div>${extra}${chev}</div>`;
+document.getElementById('ph3').innerHTML = `<div class="scr" style="padding-top:4px">
+  ${sect('Catégories', 'Novembre 2026')}<article class="pn cd" style="padding:6px 16px 0">${catRow('epi', 295, 500)}${catRow('mai', 120, 150)}${catRow('res', 118, 200)}
+    <div class="fi-link"><span>Les 6 catégories</span><i data-i="chev"></i></div></article>
+  ${sect('Factures à venir', '162,00 $ en 14 jours')}<article class="pn ls">${bill('doc', 'Internet', 'Demain', 45, true)}${bill('car', 'Assurance auto', 'Dans 5 jours', 62)}</article>
+  ${sect('Épargne')}<article class="pn cd" style="padding:8px 16px">${goal()}</article>
+  <article class="pn ls" style="margin-top:12px">${pageRow('list', 'Opérations', 'Dépenses et revenus, mois par mois')}${pageRow('repeat', 'Dépenses fixes', '410 $ par mois')}</article>
+  <div class="foot">Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.</div>
+  <div class="btnO" style="margin-top:10px"><i data-i="gear"></i>Mes paramètres</div></div>`;
+
+document.getElementById('ph4').innerHTML = `<div class="scr" style="padding-top:4px"><article class="gl fi-hero"><div class="x-lab">Dépensé ce mois-ci</div><div class="fi-amt">0<small>$</small></div>
+    <div class="m" style="margin-top:6px;color:var(--ink)">Budget à définir pour savoir ce qu'il te reste</div>
+    <div class="btnP" style="margin-top:10px"><i data-i="pencil"></i>Définir mon budget</div></article>
+  ${actions()}${sect('Jeudi 12 novembre')}${tiles(m2(0), m2(0))}
+  <article class="pn ls" style="margin-top:12px"><div class="li">${gico('wave', '--c:#9A6508;color:#9A6508;background:#FBEFD9')}<div class="tx"><b>Dépenses Apple Pay automatiques</b><span class="s">À configurer</span></div>${chev}</div></article>
+  <article class="pn cd" style="margin-top:12px;padding:10px 16px 12px"><div class="ch"><b>Solde</b><i class="go" data-i="chev"></i></div><div class="m">Note tes revenus et tes dépenses : ton solde s'affichera ici.</div></article>
+  <article class="pn ls" style="margin-top:12px">${pageRow('list', 'Opérations', 'Dépenses et revenus, mois par mois')}${pageRow('chart', 'Catégories', '')}${pageRow('doc', 'Factures et abonnements', 'Loyer, Internet, abonnements…')}${pageRow('piggy', 'Épargne et comptes', 'Objectifs et valeur nette')}${pageRow('trend', 'Évolution', 'Six mois, moyennes et comparaisons', '<span class="prem"><i data-i="crown"></i>Premium</span>')}${pageRow('repeat', 'Dépenses fixes', 'Loyer, assurances, forfaits…')}</article></div>`;
+
+document.getElementById('ph5').innerHTML = `<div class="scr">${page1()}</div><div class="dim"></div>
+  <div class="sheet"><div class="grab"></div>
+    <div class="nv" style="position:relative"><span class="rb" role="button" aria-label="Fermer"><i data-i="x"></i></span><span class="sp"></span><span class="t" style="position:absolute;left:0;right:0;text-align:center">Dépense</span><span class="sp"></span><span style="width:44px"></span></div>
+    <div class="fi-in" style="margin-top:8px;padding:12px 16px"><div class="x-lab">Montant</div><div class="huge" style="margin-top:4px">18,75<small> $</small><span style="display:inline-block;width:2px;height:38px;background:var(--primary);vertical-align:-6px;margin-left:3px"></span></div></div>
+    <div class="fi-in" style="margin-top:10px"><div class="x-lab">Catégorie</div>
+      <div class="fi-cats">${['epi', 'res', 'tra', 'sor', 'mai', 'aut'].map((k) => `<span class="chip${k === 'epi' ? ' on' : ''}"><i data-i="${CAT[k][0]}"></i>${CAT[k][2]}</span>`).join('')}</div></div>
+    <div class="fi-in fi-val" style="margin-top:10px"><span class="x-lab">Note</span><span style="font-size:15px">Fruits et pain</span></div>
+    <div class="fi-in fi-val" style="margin-top:10px"><span class="x-lab">Date</span><span style="display:flex;gap:8px;align-items:center;font-size:15px;font-weight:600"><i data-i="calendar" style="font-size:18px;color:var(--primary)"></i>Jeudi 12 novembre</span></div>
+    <div class="btnP lg" style="margin-top:14px">Enregistrer</div></div>`;
+
+const day = (t, rows) => `<div class="fi-day">${t}</div><article class="pn ls">${rows}</article>`;
+const op = (k, t, sub, a) => `<div class="li">${ico(k)}<div class="tx"><b>${t}</b><span class="s">${sub}</span></div><div class="r"><b>${neg(a)}</b></div></div>`;
+document.getElementById('ph6').innerHTML = `<div class="scr">${nv('', '<span class="rb gl" role="button" aria-label="Nouvelle dépense"><i data-i="plus"></i></span>')}
+  <div class="x-title" style="margin-top:-2px">Opérations</div>
+  <div class="gl fi-month"><i data-i="chevl"></i><span>Novembre 2026</span><i data-i="chev"></i></div>
+  <div class="seg" style="margin-top:10px"><span class="on">Dépenses</span><span>Revenus</span></div>
+  <article class="pn ls" style="margin-top:10px"><div class="li"><span class="ico lg"><i data-i="filter"></i></span><div class="tx"><b>Toutes les catégories</b></div><div class="r"><b>${m(788)}</b></div><i class="go" data-i="chevd"></i></div></article>
+  ${day('Jeudi 12 novembre', op('res', 'Café et sandwich', 'Restos · <span class="fi-mk"><i data-i="wave"></i>Apple Pay</span><span class="fi-rev">À vérifier</span>', 14.5))}
+  ${day('Mercredi 11 novembre', op('tra', 'Billet d\'autobus', 'Transport', 9))}
+  ${day('Mardi 10 novembre', op('epi', 'IGA', 'Épicerie', 41))}
+  ${day('Lundi 9 novembre', op('sor', 'Cinéma', 'Sorties', 12))}
+  ${day('Dimanche 8 novembre', op('mai', 'Quincaillerie', 'Maison', 58))}</div>`;
+
+document.getElementById('ph7').innerHTML = `<div class="scr">${nv('')}<div class="x-title" style="margin-top:-2px">Épargne</div>
+  ${sect('Objectifs d\'épargne', m(640))}<article class="pn cd" style="padding:10px 16px 4px">${goal()}
+    <div class="fi-link"><span style="display:flex;gap:7px;align-items:center"><i data-i="plusc" style="font-size:20px"></i>Nouvel objectif</span></div></article>
+  <div class="foot">Touche un objectif pour y ajouter un versement ou le supprimer.</div>
+  ${sect('Comptes', 'valeur nette ' + m(2750.8))}<article class="pn cd" style="padding:10px 16px 4px">${area(NET, { h: 84, max: 3000, yl: ['3 000 $', '1 500 $', '0 $'], xl: [[0, '1 oct.'], [.5, '15 oct.'], [1, '12 nov.']], aria: 'Valeur nette : de 2 090 $ à 2 750,80 $' })}</article>
+  <article class="pn ls" style="margin-top:12px">
+    <div class="li">${gico('wallet')}<div class="tx"><b>Compte chèques</b></div><div class="r"><b>${m2(1846.2)}</b></div></div>
+    <div class="li">${gico('piggy')}<div class="tx"><b>Compte épargne</b></div><div class="r"><b>${m2(1120)}</b></div></div>
+    <div class="li">${gico('card', '--c:var(--c-fit);color:var(--c-fit);background:color-mix(in srgb,var(--c-fit) 13%,#fff)')}<div class="tx"><b>Carte de crédit</b><span class="s">Dette</span></div><div class="r"><b>${neg(215.4)}</b></div></div>
+    <div class="li"><span class="ico lg" style="background:none"><i data-i="plusc"></i></span><div class="tx"><b style="color:var(--primary)">Nouveau compte ou dette</b></div></div></article></div>`;
+
+Cristal.init();
+</script>
+</body>
+</html>

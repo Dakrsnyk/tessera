@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — 07 Habitudes</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* préfixe hb- : propre à cette planche */
+  .hb-day { height: 46px; border-radius: 23px; display: flex; align-items: center; justify-content: space-between; padding: 0 1px; margin-top: 10px; }
+  .hb-day .a { width: 44px; height: 44px; display: grid; place-items: center; font-size: 18px; color: var(--primary); }
+  .hb-day .a.off { color: var(--go); opacity: .4; }
+  .hb-day .m { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 650; }
+  .hb-day .m i { font-size: 14px; color: var(--ink2); }
+  .hb-list { display: grid; gap: 12px; margin-top: 12px; }
+  .hb-card { padding: 12px; border-radius: var(--r); }
+  .hb-band { display: flex; align-items: center; gap: 2px; min-height: 48px; padding: 2px 12px 2px 2px; border-radius: 14px; background: var(--well); }
+  .hb-chk { width: 44px; height: 44px; flex: none; display: grid; place-items: center; }
+  .hb-chk u { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; text-decoration: none; font-size: 15px; box-sizing: border-box;
+    background: color-mix(in srgb, var(--c) 14%, transparent); border: 1.5px solid color-mix(in srgb, var(--c) 70%, transparent); color: color-mix(in srgb, var(--c) 50%, transparent); }
+  .hb-chk u i { --sw: 3; }
+  .hb-chk.ok u { background: var(--c); border-color: var(--c); color: #fff; }
+  .hb-chk.pop u { box-shadow: 0 0 0 3px #fff, 0 0 0 5px color-mix(in srgb, var(--c) 45%, transparent); }
+  .hb-tx { flex: 1; min-width: 0; padding-left: 6px; }
+  .hb-tx b { display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 650; white-space: nowrap; }
+  .hb-tx b i { font-size: 14px; color: var(--c); }
+  .hb-tx span { display: block; font-size: 12.5px; color: var(--ink2); margin-top: 1px; white-space: nowrap; }
+  .hb-tx span strong { color: var(--ink); font-weight: 650; }
+  .hb-pc { font-style: normal; font-size: 15px; font-weight: 650; color: var(--ink2); font-variant-numeric: tabular-nums; margin-left: 8px; }
+  .hb-grid { display: grid; grid-template-columns: repeat(26, minmax(0,1fr)); grid-template-rows: repeat(7, auto); grid-auto-flow: column; gap: 2px; margin-top: 8px; }
+  .hb-grid s { aspect-ratio: 1; border-radius: 2.5px; background: color-mix(in srgb, var(--c) 16%, transparent); }
+  .hb-grid s.d { background: var(--c); } .hb-grid s.f { visibility: hidden; }
+  .hb-anno { display: inline-block; margin: 0 0 6px 4px; padding: 3px 9px; border-radius: 6px; background: #0B1220; color: #fff; font: 700 10.5px/1.3 Inter, sans-serif; letter-spacing: .06em; text-transform: uppercase; }
+  /* feuilles : formulaire du HabitEditor */
+  .hb-sh { top: 60px; overflow: hidden; padding-bottom: 0; }
+  .hb-sh .nv { margin-top: 0; }
+  .hb-sh .nv .t { flex: 1; text-align: center; }
+  .hb-sh .rb { background: var(--well); }
+  .hb-sh .rb.txt { background: var(--tint2); }
+  .hb-fl { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink2); margin: 10px 0 5px 6px; }
+  .hb-fp { background: var(--well); border-radius: 20px; padding: 0 14px; }
+  .hb-row { display: flex; align-items: center; justify-content: space-between; min-height: 48px; font-size: 15px; }
+  .hb-row + .hb-row { border-top: 1px solid var(--rule); }
+  .hb-row .v { color: var(--ink2); font-variant-numeric: tabular-nums; }
+  .hb-ics { display: grid; grid-template-columns: repeat(5, 1fr); justify-items: center; row-gap: 8px; padding: 10px 0; }
+  .hb-ics u { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; text-decoration: none; font-size: 20px; color: var(--c); background: color-mix(in srgb, var(--c) 12%, transparent); }
+  .hb-ics u.on { background: var(--c); color: #fff; }
+  .hb-cols { display: grid; grid-template-columns: repeat(5, 1fr); justify-items: center; padding: 0; }
+  .hb-cols u { width: 44px; height: 44px; display: grid; place-items: center; text-decoration: none; }
+  .hb-cols u::before { content: ""; width: 26px; height: 26px; border-radius: 50%; background: var(--c); }
+  .hb-cols u.on::before { box-shadow: 0 0 0 2px var(--well), 0 0 0 4px var(--c); }
+  .hb-sw { width: 51px; height: 31px; border-radius: 16px; background: var(--primary); position: relative; flex: none; }
+  .hb-sw::after { content: ""; position: absolute; right: 2px; top: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+  .hb-del { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; font-size: 15px; font-weight: 650; color: #B42318; }
+  .hb-del i { font-size: 18px; }
+  /* feuille d'offre (PaywallView) */
+  .hb-pw { text-align: center; }
+  .hb-pw .mk { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 650; color: var(--ink2); }
+  .hb-pw .mk u { width: 26px; height: 26px; border-radius: 8px; background: var(--primary); color: #fff; display: grid; place-items: center; text-decoration: none; font-size: 15px; font-weight: 800; }
+  .hb-pw .gt { width: 56px; height: 56px; border-radius: 16px; background: #F6E7C1; color: #6B4E0A; display: grid; place-items: center; font-size: 25px; margin: 12px auto 10px; }
+  .hb-pw h3 { font-size: 28px; font-weight: 700; letter-spacing: -.02em; line-height: 1.12; }
+  .hb-pw p { font-size: 15px; line-height: 1.4; color: var(--ink2); margin-top: 8px; }
+  .hb-perk { display: flex; gap: 12px; text-align: left; padding: 10px 0; border-top: 1px solid var(--rule); }
+  .hb-perk:first-child { border-top: 0; }
+  .hb-perk u { width: 36px; height: 36px; border-radius: 11px; background: #F6E7C1; color: #6B4E0A; display: grid; place-items: center; font-size: 18px; flex: none; text-decoration: none; }
+  .hb-perk b { display: block; font-size: 15px; font-weight: 650; } .hb-perk span { display: block; font-size: 12.5px; line-height: 1.35; color: var(--ink2); margin-top: 1px; }
+  .hb-bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 20px 34px; background: color-mix(in srgb, var(--sheet) 94%, transparent); border-top: 1px solid var(--rule); text-align: center; }
+  .hb-lock { padding: 16px; }
+  .hb-lock .hd { display: flex; align-items: center; gap: 10px; } .hb-lock .hd u { width: 40px; height: 40px; border-radius: 12px; background: #F6E7C1; color: #6B4E0A; display: grid; place-items: center; font-size: 18px; flex: none; text-decoration: none; }
+  .hb-lock .hd b { font-size: 17px; font-weight: 700; line-height: 1.2; }
+  .hb-lock p { font-size: 14.5px; line-height: 1.4; color: var(--ink2); margin: 12px 0; }
+  /* carte d'accueil pleine largeur */
+  .hb-wide { display: grid; grid-template-columns: 108px 1fr; gap: 14px; margin-top: 8px; }
+  .hb-wide .rw { display: flex; align-items: center; gap: 8px; height: 26px; font-size: 14px; font-weight: 600; white-space: nowrap; }
+  .hb-wide .rw u { width: 20px; height: 20px; border-radius: 50%; flex: none; display: grid; place-items: center; text-decoration: none; font-size: 12px; box-sizing: border-box; border: 1.5px solid var(--c); color: transparent; }
+  .hb-wide .rw.ok u { background: var(--c); color: #fff; } .hb-wide .rw.ok u i { --sw: 3.2; }
+  .hb-wide .rw:not(.ok) { color: var(--ink2); }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">7</div><div><h1>Habitudes</h1>
+    <p>Page de Planning (ligne « Habitudes », ouverte aussi par la carte « Habitudes » de l'accueil), sans bande ni poignée : titre large, sélecteur de jour, une carte par habitude, bouton d'ajout, « Régularité ». Mêmes fonctions qu'aujourd'hui. Journée d'exemple : jeudi 12 novembre.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · La page à 13:20</div>
+      <div class="phone app t-saphir" data-c="hab" data-time="13:20" data-tab="0"><div class="scr" id="s1"></div></div>
+      <div class="cap"><h4>Une carte par habitude</h4><p>Retour, titre large, sélecteur de jour, puis les 5 cartes (la 4e se prolonge sous la barre : la page défile). Chaque carte garde le bandeau et la grille de 26 semaines de <code>HabitRow</code>.</p>
+        <ul><li><span class="tag e">Existe</span><span>Rond de 30 pt dans une zone de 44 × 44 : toucher = valider ce jour.</span></li>
+          <li><span class="tag e">Existe</span><span>« Série de 12 jours » et régularité sur 30 jours (« 81 % ») à droite ; toucher le nom = éditeur.</span></li>
+          <li><span class="tag e">Existe</span><span>Grille : 26 semaines, lundi en haut, plein = fait, pâle = non fait, rien = futur.</span></li>
+          <li><span class="tag a">À adapter</span><span>« 3 sur 5 faites aujourd'hui » sous le titre et « Faite » / « À faire » devant la série : l'état ne repose pas sur la couleur seule.</span></li>
+          <li><span class="tag a">À adapter</span><span>Les 7 derniers jours par habitude n'existent pas : c'est la grille de 26 semaines qui en tient lieu.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">2 · Après un toucher, 19:05</div>
+      <div class="phone app t-saphir" data-c="hab" data-time="19:05" data-tab="0"><div class="scr" id="s2"></div></div>
+      <div class="cap"><h4>« Boire 2 L d'eau » vient d'être validée</h4><p>Le rond se remplit, la coche devient blanche, la légende passe à « Faite · Série de 7 jours », le 12 novembre se remplit dans la grille. 4 sur 5.</p>
+        <ul><li><span class="tag e">Existe</span><span>Retour haptique au toucher (<code>Haptics.tap()</code>) ; la série et le pourcentage se recalculent. Un second toucher annule.</span></li>
+          <li><span class="tag a">À adapter</span><span>Liseré autour du rond juste après le toucher : image fixe, aucune animation (Réduire les animations respecté).</span></li>
+          <li><span class="tag e">Existe</span><span>VoiceOver : « Marquer Boire 2 L d'eau comme non fait » (« Valider … » avant).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">3 · Toucher une habitude</div>
+      <div class="phone app t-saphir" data-c="hab" data-time="13:20" data-tab="0"><div class="scr" id="s3"></div><div class="dim"></div>
+        <div class="sheet hb-sh">
+          <div class="grab"></div>
+          <div class="nv"><span class="rb"><i data-i="chevl"></i></span><span class="t">Habitude</span><span class="rb txt">Enregistrer</span></div>
+          <div class="hb-fl">Nom</div><div class="hb-fp"><div class="hb-row"><span>Lecture 20 min</span></div></div>
+          <div class="hb-fl">Icône</div><div class="hb-fp"><div class="hb-ics" id="ics" style="--c:#2F8F7A"></div></div>
+          <div class="hb-fl">Couleur</div><div class="hb-fp"><div class="hb-cols" id="cols"></div></div>
+          <div class="hb-fl" style="margin-top:8px">Rappel</div>
+          <div class="hb-fp"><div class="hb-row"><span>Rappel quotidien</span><span class="hb-sw"></span></div><div class="hb-row"><span>Heure</span><span class="v">20:00</span></div></div>
+          <div class="hb-fp" style="margin-top:8px"><div class="hb-del"><i data-i="trash"></i>Supprimer l'habitude</div></div>
+        </div></div>
+      <div class="cap"><h4>L'éditeur : il n'y a pas de page de détail</h4><p>Dans l'app, toucher une habitude ouvre directement cette feuille (<code>HabitEditor</code>, « Habitude ») : c'est la seule vue par habitude. Série, taux et grille restent sur la carte.</p>
+        <ul><li><span class="tag e">Existe</span><span>Nom, Icône (20 symboles, 5 colonnes, ronds de 46), Couleur (8 teintes, zone de 44), Rappel quotidien + Heure, « Supprimer l'habitude ».</span></li>
+          <li><span class="tag e">Existe</span><span>Retour en flèche (modifier) ; « Annuler » à la place pour « Nouvelle habitude », sans « Supprimer ». « Enregistrer » grisé si le nom est vide.</span></li>
+          <li><span class="tag e">Existe</span><span>Refus des notifications : « Les notifications sont désactivées pour Ardane dans Réglages. »</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">4 · Bas de page : ajouter, Régularité</div>
+      <div class="phone app t-saphir" data-c="hab" data-time="13:20" data-tab="0"><div class="scr" id="s4"></div></div>
+      <div class="cap"><h4>Bouton d'ajout et « Régularité » verrouillée</h4><p>Page défilée : le titre large devient le titre de la barre. Gratuit : une carte « La régularité est dans Premium » à la place des chiffres.</p>
+        <ul><li><span class="tag e">Existe</span><span>« Ajouter une habitude » reste visible à 5 habitudes : c'est le toucher qui ouvre l'offre.</span></li>
+          <li><span class="tag e">Existe</span><span>Carte : « Le taux de réussite de chaque habitude sur 30 et 90 jours, et sa plus longue série. Tes jours cochés restent enregistrés. » ; bouton « Découvrir Premium ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Pastille Premium à côté du titre « Régularité » ; icône et pastille en or, seules touches de cette couleur.</span></li>
+          <li><span class="tag e">Existe</span><span>Avec Premium : une ligne par habitude (« Meilleure série : 12 jours », « 81 % · 74 % ») et « Compté depuis le premier jour coché, sur 30 et 90 jours. »</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Limite gratuite : la 6e habitude</div>
+      <div class="phone app t-saphir" data-c="hab" data-time="13:20" data-tab="0"><div class="scr" id="s5"></div><div class="dim"></div>
+        <div class="sheet hb-sh hb-pw" style="top:96px">
+          <div class="grab"></div>
+          <div class="nv" style="margin-top:-4px"><span class="rb" style="margin-right:auto"><i data-i="x"></i></span><span class="mk" style="margin-right:auto;padding-right:44px"><u>A</u>Ardane Premium</span></div>
+          <div class="gt"><i data-i="repeat"></i></div>
+          <h3>Plus de 5 habitudes</h3>
+          <p>La version gratuite suit 5 habitudes. Avec Premium, suis-en autant que tu veux, sur tes widgets aussi.</p>
+          <div style="text-align:left;font-size:15px;font-weight:650;margin:18px 0 6px">Et avec Premium, tout le reste :</div>
+          <div class="pn" style="padding:4px 14px">
+            <div class="hb-perk"><u><i data-i="layers"></i></u><div><b>Tous les widgets des espaces</b><span>Records, volume, bénéfice, MRR, devoirs, vol, carburant…</span></div></div>
+            <div class="hb-perk"><u><i data-i="sparkles"></i></u><div><b>Widgets intelligents</b><span>« Maintenant » change selon le moment, et les analyses résument ta journée</span></div></div>
+            <div class="hb-perk"><u><i data-i="bag"></i></u><div><b>Tous les packs</b><span>Packs thématiques, collections Halloween et Noël, Étudiant, Sportif, Voyageur…</span></div></div>
+            <div class="hb-perk"><u><i data-i="chart"></i></u><div><b>Statistiques détaillées</b><span>…régularité de tes habitudes</span></div></div>
+          </div>
+          <div class="hb-bar"><div class="btnP lg">Continuer</div><div class="link" style="margin-top:8px;font-weight:500;line-height:32px">Restaurer mes achats</div></div>
+        </div></div>
+      <div class="cap"><h4>Cinq habitudes, une sixième demandée</h4><p>Toucher « Ajouter une habitude » avec 5 habitudes ouvre l'offre au lieu de l'éditeur ; « Enregistrer » d'une nouvelle habitude en fait autant (le texte saisi reste). Une habitude existante reste toujours modifiable.</p>
+        <ul><li><span class="tag e">Existe</span><span>Contexte <code>habitLimit</code> : « Plus de 5 habitudes » + phrase exacte. Aucun cadenas dans les cartes.</span></li>
+          <li><span class="tag e">Existe</span><span>Sous l'en-tête : liste des avantages, offres, tableau comparatif, « Continuer », « Restaurer mes achats » (prix et conditions viennent de l'App Store : non dessinés).</span></li>
+          <li><span class="tag a">À adapter</span><span>Seul l'habillage (feuille opaque, boutons en capsule) ; le logo Ardane est ici un repère.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">6 · État vide</div>
+      <div class="phone app t-saphir" data-c="hab" data-time="13:20" data-tab="0"><div class="scr" id="s6"></div></div>
+      <div class="cap"><h4>Aucune habitude</h4><p>Ni sélecteur de jour, ni « Régularité », ni compte : rien à mesurer, aucun faux chiffre. Un seul geste : « Ajouter une habitude ».</p>
+        <ul><li><span class="tag e">Existe</span><span>Textes exacts : « Tes habitudes » / « Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir. » / « Ajouter une habitude ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Cadre en pointillés (<code>.empty</code>) à la place de la carte ; icône <code>repeat</code> dans une pastille.</span></li>
+          <li><span class="tag e">Existe</span><span>Une habitude neuve : « Pas encore de série », pas de pourcentage, grille entièrement pâle. <code>HabitsView</code> dit : « Aucune habitude pour l'instant ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">7 · La carte de l'accueil</div>
+      <div class="phone t-saphir" data-c="hab" data-time="13:20" data-tab="0"><div class="scr" id="s7"></div></div>
+      <div class="cap"><h4>Demi-largeur et pleine largeur</h4><p>Toucher la carte ouvre la page 1. Le « 3/5 » et la série de 12 jours viennent des mêmes données.</p>
+        <ul><li><span class="tag e">Existe</span><span>Demi-largeur (référence de l'accueil Cristal) : cinq ronds, « 3/5 », « faites aujourd'hui », « Série de 12 jours ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Pleine largeur : les cinq noms, avec rond plein ou vide. Dans cette version la carte entière est le seul toucher.</span></li>
+          <li><span class="tag a">À adapter</span><span>Cocher depuis l'accueil : hors de cette planche.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">8 · Légende</div>
+      <div class="note" style="margin:9px">
+        <h4>Ce qui ne change pas</h4>
+        <p>Chaque fonction, chaque libellé, l'ordre de la page, le rond de 44 pt, la grille de 26 semaines (52 en classe de taille régulière), les couleurs choisies par habitude, la limite de 5, « Régularité » en Premium, le rappel quotidien, la suppression.</p>
+        <h4 style="margin-top:12px">Ce que Cristal change</h4>
+        <p>Navigation : retour rond en verre ; le verre sert seulement au retour, au sélecteur de jour et à la barre d'onglets. Les cartes sont des panneaux, les feuilles opaques. La couleur d'action est l'olive de la page (<b>7FA33A</b>, assombrie pour le contraste) ; la couleur de chaque habitude ne sert qu'au rond, à l'icône et à la grille. Une habitude faite se lit à sa coche pleine et au mot « Faite ».</p>
+        <h4 style="margin-top:12px">Deux versions, un seul habillage</h4>
+        <p><code>PlanningHabitsPage</code> (cette planche) et <code>HabitsView</code> (liste système, depuis Profil, Créer, <code>ArdaneApp</code>) partagent <code>HabitRow</code> et <code>HabitEditor</code> : habiller ces deux-là une fois. <code>HabitsView</code> ajoute « Nouvelle habitude », « Modifier » (réordonner, supprimer au balayage, si plus d'une habitude) et « 3 sur 5 habitudes en version gratuite. ».</p>
+        <h4 style="margin-top:12px">Existe · À adapter · À développer</h4>
+        <p><span class="tag e" style="min-width:0">Existe</span> tout ce qui est tagué ainsi sous les écrans : cartes, grille, série, taux, éditeur, rappel, limite, Régularité, état vide, sélecteur de jour (‹ Aujourd'hui ▾ ›, futur bloqué, « Choisir une date »).<br>
+        <span class="tag a" style="min-width:0">À adapter</span> « 3 sur 5 faites aujourd'hui », mot « Faite » / « À faire », liseré après le toucher, pastille Premium, carte d'accueil pleine largeur, cocher depuis l'accueil (hors planche).<br>
+        <span class="tag d" style="min-width:0">À développer</span> rien dans cette planche.</p>
+        <h4 style="margin-top:12px">N'existe pas, non dessiné</h4>
+        <p>Fréquence (tout est quotidien), objectif chiffré (« 2 L » est un nom), archivage, série globale, page de détail par habitude, vues 7 jours / mois / année, catégories, notes par jour.</p>
+        <h4 style="margin-top:12px">Fichiers Swift</h4>
+        <p><code>MiniApps/Planning/PlanningPages.swift</code> (<code>PlanningHabitsPage</code>) · <code>Content/HabitsView.swift</code> (<code>HabitsView</code>, <code>HabitRow</code>, <code>HabitEditor</code>) · <code>Shared/Render/Tiles/HabitHeatmap.swift</code> · <code>MiniApps/MiniApp.swift</code> (<code>DaySwitcher</code>) · <code>Premium/PremiumLock.swift</code>, <code>PaywallContext.swift</code>, <code>PaywallView.swift</code> · <code>Components/UIComponents.swift</code> (<code>EmptyStateView</code>).</p>
+        <h4 style="margin-top:12px">Nouveaux textes</h4>
+        <p>« 3 sur 5 faites aujourd'hui », « Faite », « À faire » (avec leur séparateur « · »).</p>
+      </div></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script>
+Object.assign(P, {
+  run: 'M15 4.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM8 20l3-5-2.5-3 3-3.5 3 2.5 3 .5M10 8l-3 1.5',
+  yoga: 'M12 5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM12 9v5M5 11l7 1 7-1M8 21l4-7 4 7',
+  brain: 'M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 3 3 3 0 0 0 1.5 2.6A3 3 0 0 0 9 17a3 3 0 0 0 3 3V4a3 3 0 0 0-3 0zM15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 3 3 3 0 0 1-1.5 2.6A3 3 0 0 1 15 17a3 3 0 0 1-3 3',
+  leaf: 'M5 19C5 10 10 5 20 4c0 10-5 15-14 15zM5 19l8-8', bed: 'M3 19V6M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-7v6M7 11.5h.01',
+  cup: 'M5 8h11v6a5 5 0 0 1-5 5H10a5 5 0 0 1-5-5zM16 10h2a2.5 2.5 0 0 1 0 5h-2M4 21h13',
+  note: 'M9 18V6l10-2v12M9 18a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM19 16a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z',
+  brush: 'M20 4L10 14M10 14c-2 0-4 1-4 4 0 1-1 2-2 2 3 1 8 0 8-4a2 2 0 0 0-2-2z',
+  globe: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18',
+  phoneoff: 'M8 3h8a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM9.5 9.5l5 5M14.5 9.5l-5 5',
+  coin: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM14.5 9.5c-.5-1-1.5-1.5-2.5-1.5-1.5 0-2.5.8-2.5 2s1 1.7 2.5 2 2.5.8 2.5 2-1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6.5v1.5M12 16v1.5',
+});
+const nb = '&nbsp;';
+// 5 habitudes : couleurs = 8 teintes de l'app (Palette.freeAccents), série en cours quand la dernière coche date d'hier ou d'aujourd'hui
+const HB = [
+  { t: "Boire 2 L d'eau", ic: 'drop', col: '#3366FF', today: false, S: 6, p: .55, seed: 11 },
+  { t: 'Lecture 20 min', ic: 'book', col: '#2F8F7A', today: true, S: 12, p: .75, seed: 23 },
+  { t: 'Méditation', ic: 'brain', col: '#8C6CFF', today: true, S: 5, p: .6, seed: 37 },
+  { t: 'Vitamines', ic: 'heart', col: '#F2588F', today: true, S: 9, p: .8, seed: 41 },
+  { t: 'Coucher avant 23 h', ic: 'moon', col: '#6B7280', today: false, S: 3, p: .45, seed: 53 },
+];
+const rnd = (s) => () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+HB.forEach((h) => { const r = rnd(h.seed), a = []; const first = h.today ? 0 : 1;   // a[i] = fait il y a i jours
+  for (let i = 0; i <= 178; i++) a[i] = false;
+  for (let i = first; i < first + h.S; i++) a[i] = true;
+  let run = 0; for (let i = first + h.S + 1; i <= 178; i++) { if (run >= 8) { a[i] = false; run = 0; continue; } a[i] = r() < h.p; run = a[i] ? run + 1 : 0; }
+  h.a = a; });
+const streakOf = (a) => { let i = a[0] ? 0 : 1, n = 0; while (a[i]) { n++; i++; } return n; };
+const bestOf = (a) => { let b = 0, n = 0; a.forEach((v) => { n = v ? n + 1 : 0; b = Math.max(b, n); }); return b; };
+const rate = (a, d) => Math.round(a.slice(0, d).filter(Boolean).length / d * 100);
+const pct = (n) => n + nb + '%';
+
+function card(h, o = {}) {
+  const a = h.a.slice(); if (o.done != null) a[0] = o.done; const done = a[0], st = streakOf(a);
+  let cells = ''; for (let c = 0; c < 26; c++) for (let r = 0; r < 7; r++) { const ago = (25 - c) * 7 + 3 - r; cells += `<s class="${ago < 0 ? 'f' : a[ago] ? 'd' : ''}"></s>`; }
+  return `<article class="pn hb-card" style="--c:${h.col}"><div class="hb-band">
+    <span class="hb-chk${done ? ' ok' : ''}${o.pop ? ' pop' : ''}" role="button" aria-label="${done ? 'Marquer ' + h.t + ' comme non fait' : 'Valider ' + h.t}"><u><i data-i="check"></i></u></span>
+    <div class="hb-tx"><b><i data-i="${h.ic}"></i>${h.t}</b><span><strong>${done ? 'Faite' : 'À faire'}</strong> · ${st > 0 ? 'Série de ' + st + ' jours' : 'Pas encore de série'}</span></div>
+    <em class="hb-pc">${pct(rate(a, 30))}</em></div><div class="hb-grid">${cells}</div></article>`;
+}
+const head = (sub) => `<div class="nv"><span class="rb gl"><i data-i="chevl"></i></span></div><div class="x-title" style="margin-top:-2px">Habitudes</div>${sub ? `<div class="x-sub">${sub}</div>` : ''}
+  <div class="hb-day gl"><span class="a"><i data-i="chevl"></i></span><span class="m">Aujourd'hui<i data-i="chevd"></i></span><span class="a off"><i data-i="chev"></i></span></div>`;
+const page = (n, opt = {}) => head(`${n} sur 5 faites aujourd'hui`) + `<div class="hb-list">${HB.map((h, k) => card(h, k === 0 ? opt : {})).join('')}</div>`;
+
+document.getElementById('s1').innerHTML = page(3);
+document.getElementById('s2').innerHTML = page(4, { done: true, pop: true });
+document.getElementById('s3').innerHTML = page(3);
+document.getElementById('s5').innerHTML = page(3);
+
+// 4 · bas de page
+document.getElementById('s4').innerHTML = `<div class="nv"><span class="rb gl"><i data-i="chevl"></i></span><span class="t" style="flex:1;text-align:center;padding-right:52px">Habitudes</span></div>
+  <div class="hb-list" style="margin-top:6px">${card(HB[3])}${card(HB[4])}</div>
+  <div class="btnT" style="margin-top:12px"><i data-i="plus"></i>Ajouter une habitude</div>
+  <div class="sect" style="margin-top:14px"><b>Régularité</b><span class="prem" style="margin-left:auto"><i data-i="lock"></i>Premium</span></div>
+  <article class="pn hb-lock"><div class="hd"><u><i data-i="chart"></i></u><b>La régularité est dans Premium</b></div>
+    <p>Le taux de réussite de chaque habitude sur 30 et 90 jours, et sa plus longue série. Tes jours cochés restent enregistrés.</p>
+    <div class="btnP"><i data-i="sparkles"></i>Découvrir Premium</div></article>`;
+
+// 6 · vide
+document.getElementById('s6').innerHTML = `<div class="nv"><span class="rb gl"><i data-i="chevl"></i></span></div><div class="x-title" style="margin-top:-2px">Habitudes</div>
+  <div class="empty pn" style="margin-top:22px;padding:34px 20px 26px"><span class="ico xl" data-c="hab"><i data-i="repeat"></i></span><b style="font-size:20px;margin-top:6px">Tes habitudes</b>
+    <p>Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir.</p><div class="btnP" style="margin-top:12px"><i data-i="plus"></i>Ajouter une habitude</div></div>`;
+
+// 3 · éditeur : icônes et couleurs
+const SY = ['run', 'steps', 'dumbbell', 'yoga', 'brain', 'book', 'pencil', 'drop', 'leaf', 'bed', 'fork', 'cup', 'note', 'brush', 'globe', 'heart', 'sun', 'moon', 'phoneoff', 'coin'];
+document.getElementById('ics').innerHTML = SY.map((s) => `<u class="${s === 'book' ? 'on' : ''}"><i data-i="${s}"></i></u>`).join('');
+const AC = ['#2F8F7A', '#3366FF', '#FF6B57', '#F2A33A', '#8C6CFF', '#F2588F', '#7FA33A', '#6B7280'];
+document.getElementById('cols').innerHTML = [AC.slice(0, 5), AC.slice(5)].map((r, k) => r.map((c) => `<u class="${c === '#2F8F7A' ? 'on' : ''}" style="--c:${c}"></u>`).join('')).join('');
+
+// 7 · accueil
+const d = DAY.journee;
+document.getElementById('s7').innerHTML = `<div class="x-top gl"><span class="x-date">${DAY.date}</span><span class="x-ava">${DAY.avatar}</span></div>
+  <div class="x-kick">${DAY.kicker}</div><div class="x-title">${d.title}</div>
+  <div class="x-stack" style="margin-top:10px">
+  <div><span class="hb-anno">Demi-largeur</span>
+  <div class="g2" style="height:168px">
+    <article class="pn mn" data-c="fit"><header class="ch"><span class="ico">${U.ico('dumbbell')}</span><b>Séance</b><i class="go" data-i="chev"></i></header>
+      <div class="s" style="margin-top:4px;font-weight:600">Séance du jour</div><div class="h3" style="margin-top:1px">Haut du corps</div><div class="s">6 exercices · 18 séries</div><div class="btnP">${U.ico('play')}Commencer</div></article>
+    <article class="pn hc" data-c="hab"><header class="ch"><span class="ico">${U.ico('repeat')}</span><b>Habitudes</b><i class="go" data-i="chev"></i></header>
+      <div style="margin-top:8px">${U.hab('journee')}</div><div class="big" style="margin-top:8px">3<small>/5</small></div>
+      <div class="s">faites aujourd'hui</div><div class="s" style="margin-top:auto;font-weight:600;color:var(--ink)">Série de 12 jours</div></article></div></div>
+  <div><span class="hb-anno">Pleine largeur</span>
+  <article class="pn cd" data-c="hab"><header class="ch"><span class="ico">${U.ico('repeat')}</span><b>Habitudes</b><i class="go" data-i="chev"></i></header>
+    <div class="hb-wide"><div><div class="big" style="margin-top:2px">3<small>/5</small></div><div class="s">faites aujourd'hui</div><div class="s" style="margin-top:8px;font-weight:600;color:var(--ink)">Série de 12 jours</div></div>
+      <div>${HB.map((h, k) => `<div class="rw${[1, 2, 3].includes(k) ? ' ok' : ''}" style="--c:${h.col}"><u>${U.ico('check')}</u>${h.t}</div>`).join('')}</div></div>
+  </article></div></div>`;
+Cristal.init();
+</script>
+</body>
+</html>

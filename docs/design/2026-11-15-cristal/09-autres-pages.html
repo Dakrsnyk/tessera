@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — 9 · Le reste de l'app dans le même univers</title>
+<link rel="stylesheet" href="cristal.css">
+<style>
+  /* ---- planche 9 : préfixe p9 ---- */
+  .p9-ah { margin: 14px 4px 8px; }
+  .p9-ar { display: flex; align-items: center; gap: 9px; min-height: 30px; }
+  .p9-ar b { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+  .p9-ar a { margin-left: auto; font-size: 14px; font-weight: 600; color: var(--primary); }
+  .p9-ah .s { margin: 3px 0 0 39px; }
+  .p9-search { height: 44px; border-radius: 22px; display: flex; align-items: center; gap: 9px; padding: 0 16px; color: var(--ink2); font-size: 15px; margin-top: 10px; }
+  .p9-search i { font-size: 18px; }
+  .p9-hero { display: flex; gap: 14px; padding: 12px; margin-top: 2px; }
+  .p9-hero .im { width: 80px; height: 100px; border-radius: 18px; overflow: hidden; flex: none; }
+  .p9-hero .im img, .p9-sc .im img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+  .p9-hero .tx { display: flex; flex-direction: column; min-width: 0; flex: 1; padding: 2px 0; }
+  .p9-row { display: flex; gap: 10px; margin-right: -20px; overflow: hidden; }
+  .p9-sc { flex: none; width: 104px; }
+  .p9-sc .im { height: 112px; border-radius: 18px; overflow: hidden; position: relative; box-shadow: 0 6px 16px rgb(var(--sh) / .16); }
+  .p9-sc .nm2 { display: flex; align-items: center; justify-content: space-between; margin-top: 5px; font-size: 13.5px; font-weight: 650; }
+  .p9-sc .nm2 i { font-size: 16px; color: var(--ink2); }
+  .p9-badge { position: absolute; top: 7px; right: 7px; width: 26px; height: 26px; border-radius: 13px; display: grid; place-items: center; background: #F6E7C1; color: #6B4E0A; font-size: 13px; --sw: 2.2; }
+  .p9-wp { flex: none; width: 84px; }
+  .p9-wp .im { height: 104px; border-radius: 16px; position: relative; box-shadow: 0 6px 16px rgb(var(--sh) / .16); }
+  .p9-wp b { display: block; font-size: 11.5px; font-weight: 650; margin-top: 7px; white-space: nowrap; }
+  .p9-wt { flex: none; width: 104px; }
+  .p9-wt img { width: 104px; height: 104px; display: block; border-radius: 20px; box-shadow: 0 6px 16px rgb(var(--sh) / .16); }
+  .p9-wt b { display: block; font-size: 13px; font-weight: 650; margin-top: 7px; white-space: nowrap; }
+  /* Mes widgets */
+  .p9-bar { display: flex; align-items: center; height: 46px; margin-top: 2px; }
+  .p9-bar .sp { flex: 1; }
+  .p9-bar .grp { height: 44px; padding: 0; gap: 0; }
+  .p9-bar .grp > span { width: 44px; font-size: 21px; color: var(--primary); }
+  .p9-bar .pl { height: 44px; padding: 0 18px; border-radius: 22px; display: flex; align-items: center; font-size: 15px; font-weight: 650; color: var(--primary); }
+  .p9-car { position: relative; height: 168px; margin: 10px -20px 0; }
+  .p9-car img { position: absolute; display: block; border-radius: 20px; box-shadow: 0 10px 24px rgb(var(--sh) / .22); }
+  .p9-acts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-top: 8px; }
+  .p9-acts div { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 650; text-align: center; line-height: 1.2; }
+  .p9-acts u { width: 50px; height: 50px; border-radius: 25px; display: grid; place-items: center; font-size: 22px; color: var(--primary); }
+  .p9-acts u.on { background: var(--primary); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.28); }
+  .p9-cat { display: flex; justify-content: space-between; padding: 0 6px; }
+  .p9-cat div { width: 72px; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--ink2); }
+  .p9-cat u { position: relative; width: 50px; height: 50px; border-radius: 25px; display: grid; place-items: center; font-size: 22px; color: var(--primary); }
+  .p9-cat u em { position: absolute; top: -4px; right: -4px; min-width: 20px; height: 20px; border-radius: 10px; background: var(--primary); color: #fff; font-style: normal; font-size: 11.5px; font-weight: 700; display: grid; place-items: center; padding: 0 5px; }
+  .p9-cat .on { color: var(--ink); font-weight: 700; }
+  .p9-cat .on u { background: var(--primary); color: #fff; } .p9-cat .on u em { background: #fff; color: var(--primary); }
+  .p9-lim { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; }
+  .p9-lim .btnT { padding: 0 18px; grid-row: 1 / span 3; grid-column: 2; }
+  /* menu contextuel */
+  .p9-blur { position: absolute; inset: 0; z-index: 20; background: rgba(11,18,32,.30); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+  .p9-lift { position: absolute; z-index: 25; left: 90px; top: 116px; width: 212px; }
+  .p9-lift img { width: 100%; display: block; border-radius: 22px; box-shadow: 0 18px 40px rgba(0,0,0,.32); }
+  .p9-menu { position: absolute; z-index: 25; left: 62px; top: 250px; width: 268px; border-radius: 22px; background: var(--sheet); box-shadow: 0 18px 48px rgba(0,0,0,.28); overflow: hidden; }
+  .p9-menu div { display: flex; align-items: center; gap: 12px; height: 48px; padding: 0 16px; font-size: 16px; font-weight: 500; border-top: 1px solid var(--rule); }
+  .p9-menu div:first-child { border-top: 0; }
+  .p9-menu div i { margin-left: auto; font-size: 19px; color: var(--ink2); }
+  .p9-menu .bad { color: #B3261E; } .p9-menu .bad i { color: #B3261E; }
+  .p9-menu .sub { height: 58px; flex-wrap: wrap; align-content: center; row-gap: 0; }
+  .p9-menu .sub small { flex-basis: 100%; font-size: 12px; color: var(--ink2); margin-top: -18px; display: none; }
+  .p9-menu .nw2 { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 1px; }
+  .p9-menu .nw2 small { font-size: 12px; color: var(--ink2); }
+  /* page vide */
+  .p9-void { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 14px; margin-top: 150px; }
+  .p9-void .big0 { width: 84px; height: 84px; border-radius: 42px; display: grid; place-items: center; font-size: 38px; color: var(--primary); margin-bottom: 18px; }
+  .p9-void h3 { font-size: 22px; font-weight: 700; letter-spacing: -.02em; }
+  .p9-void p { font-size: 15px; line-height: 1.4; color: var(--ink2); margin: 8px 0 22px; }
+  .p9-void .btnP { padding: 0 26px; }
+  /* feuilles pleine hauteur (Premium, Profil) */
+  .p9-top { top: 58px; padding: 8px 20px 0; overflow: hidden; }
+  .p9-sbfix .sb { z-index: 50; }
+  .p9-nav { display: flex; align-items: center; height: 46px; }
+  .p9-nav .t { flex: 1; text-align: center; font-size: 17px; font-weight: 700; }
+  .p9-nav .l { width: 70px; } .p9-nav .r { width: 70px; display: flex; justify-content: flex-end; }
+  .p9-nav .ok { height: 40px; padding: 0 18px; border-radius: 20px; background: var(--tint2); color: var(--primary); font-size: 15px; font-weight: 650; display: flex; align-items: center; }
+  .p9-xb { width: 44px; height: 44px; border-radius: 22px; display: grid; place-items: center; background: var(--tint2); color: var(--primary); font-size: 20px; }
+  .p9-mark { width: 52px; height: 52px; border-radius: 15px; background: linear-gradient(150deg, var(--secondary), var(--primary)); display: grid; place-items: center; box-shadow: 0 6px 14px rgb(var(--sh) / .28); flex: none; }
+  .p9-mark svg { width: 30px; height: 30px; }
+  .p9-perks { padding: 4px 16px; }
+  .p9-perks div { display: flex; align-items: center; gap: 12px; min-height: 31px; font-size: 14.5px; font-weight: 650; border-top: 1px solid var(--rule); }
+  .p9-perks div:first-child { border-top: 0; }
+  .p9-perks i { font-size: 18px; color: var(--primary); }
+  .p9-plan { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 20px; background: var(--panel); border: 1.5px solid var(--rule); }
+  .p9-plan.on { border-color: var(--primary); background: var(--tint); box-shadow: 0 0 0 1px var(--primary); }
+  .p9-plan .rd { width: 24px; height: 24px; border-radius: 12px; border: 2px solid var(--rule2); flex: none; display: grid; place-items: center; color: #fff; font-size: 15px; --sw: 3; }
+  .p9-plan.on .rd { background: var(--primary); border-color: var(--primary); }
+  .p9-plan .tx { flex: 1; min-width: 0; } .p9-plan .tx b { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+  .p9-plan .pastille { height: 24px; padding: 0 10px; border-radius: 12px; background: var(--primary); color: #fff; font-size: 11.5px; font-weight: 700; display: inline-flex; align-items: center; }
+  .p9-buy { position: absolute; z-index: 45; left: 10px; right: 10px; bottom: 14px; border-radius: 32px; padding: 14px 16px 6px; background: rgba(255,255,255,.90); }
+  .p9-buy .terms { font-size: 11.5px; line-height: 1.38; color: var(--ink2); margin-bottom: 10px; }
+  .p9-buy .rest { height: 44px; display: grid; place-items: center; font-size: 14px; font-weight: 600; color: var(--primary); }
+  /* Profil */
+  .p9-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px 8px; }
+  .p9-t { text-align: center; }
+  .p9-pv { position: relative; height: 62px; border-radius: 18px; overflow: hidden; border: 1px solid rgba(11,18,32,.08); }
+  .p9-pv .pa { position: absolute; left: 7px; bottom: 7px; width: 32px; height: 22px; border-radius: 7px; background: rgba(255,255,255,.92); box-shadow: 0 2px 6px rgba(11,18,32,.12); }
+  .p9-pv .pb { position: absolute; right: 7px; bottom: 7px; width: 20px; height: 22px; border-radius: 11px; }
+  .p9-pv .pc { position: absolute; left: 9px; top: 9px; width: 26px; height: 5px; border-radius: 3px; background: rgba(11,18,32,.30); }
+  .p9-pv .pd { position: absolute; left: 9px; top: 18px; width: 16px; height: 4px; border-radius: 2px; background: rgba(11,18,32,.16); }
+  .p9-t.sel .p9-pv { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary); }
+  .p9-t b { display: block; font-size: 11.5px; font-weight: 600; margin-top: 8px; white-space: nowrap; }
+  .p9-t.sel b { color: var(--primary); font-weight: 700; }
+  .p9-chk { position: absolute; top: 5px; right: 5px; width: 20px; height: 20px; border-radius: 10px; display: grid; place-items: center; font-size: 13px; --sw: 3; background: var(--primary); color: #fff; }
+  .p9-chk.lk { background: #F6E7C1; color: #6B4E0A; font-size: 11px; --sw: 2.2; }
+  .p9-t.nw .p9-pv { border: 1.5px dashed var(--rule2); }
+  .p9-me { display: flex; align-items: center; gap: 14px; padding: 4px 4px 0; }
+  .p9-ava { width: 56px; height: 56px; border-radius: 28px; background: linear-gradient(150deg, var(--accent), var(--primary)); color: #fff; display: grid; place-items: center; font-size: 26px; flex: none; }
+  /* organiser */
+  .p9-org article { position: relative; }
+  .p9-org .x-stack > div:nth-child(odd) article:nth-child(odd), .p9-org .x-stack > article:nth-child(odd) { transform: rotate(-.5deg); }
+  .p9-org .x-stack > div:nth-child(even) article:nth-child(even) { transform: rotate(.5deg); }
+  .p9-org .o-x { position: absolute; z-index: 4; left: -7px; top: -7px; width: 28px; height: 28px; border-radius: 14px; background: var(--ink); color: #fff; display: grid; place-items: center; font-size: 15px; --sw: 2.6; border: 2px solid var(--bg); }
+  .p9-org .o-sz { position: absolute; z-index: 4; left: 50%; bottom: -14px; margin-left: -38px; width: 76px; height: 32px; border-radius: 16px; display: flex; align-items: center; justify-content: space-around; color: var(--primary); font-size: 18px; --sw: 2.4; background: rgba(255,255,255,.92); border: 1px solid rgba(255,255,255,.95); box-shadow: 0 6px 16px rgb(var(--sh) / .20); }
+  .p9-org .o-sz u { width: 1px; height: 16px; background: var(--rule2); }
+  .p9-org .o-g { font-size: 20px; color: var(--go); margin-left: auto; display: inline-flex; }
+  .p9-add { height: 56px; border: 1.5px dashed var(--rule2); border-radius: var(--r); display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 16px; font-weight: 650; color: var(--primary); }
+  .p9-add i { font-size: 20px; --sw: 2.2; }
+  /* notes */
+  .p9-n h4 { margin-bottom: 8px; }
+  .p9-n table { width: 100%; border-collapse: collapse; font-size: 12.5px; line-height: 1.35; }
+  .p9-n td { padding: 5px 0; border-top: 1px solid #E3E9F1; vertical-align: top; }
+  .p9-n tr:first-child td { border-top: 0; }
+  .p9-n td:first-child { width: 36%; font-weight: 700; padding-right: 8px; }
+  .p9-n td code { font: 600 11px Consolas, monospace; color: #3B4A60; word-break: break-all; }
+  .p9-n .t { display: inline-block; font-size: 9.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 1px 5px; border-radius: 4px; margin-left: 4px; white-space: nowrap; }
+  .p9-n ul { margin: 6px 0 0 18px; } .p9-n li { margin-top: 5px; font-size: 13px; }
+  .p9-3 .col { width: 560px; }
+  .p9-3 .col .nm { margin-bottom: 4px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">9</div><div><h1>Le reste de l'app dans le même univers</h1>
+    <p>Store, Mes widgets, Premium, Profil et l'Accueil en mode Organiser, habillés en Cristal sans changer leurs fonctions. Les quatre onglets restent : Accueil, Créer, Store, Mes widgets. Thème Saphir, jeudi 12 novembre, 13 h 20.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Store, haut</div>
+      <div class="phone t-saphir" id="ph1" data-time="13:20" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Les huit allées, un habillage commun</h4><p>Même page, même ordre : À la une, Écrans d'accueil, Fonds d'écran, Widgets, Combinés, Packs, Packs thématiques, Styles (les trois dernières sont plus bas). Aucun prix : le cadenas ou le badge seul dit « Premium ».</p>
+        <ul><li><span class="tag e">Existe</span><span>Recherche, puces d'allées, en-têtes d'allée (« Tout voir »), cartes d'écran, fonds, widgets</span></li>
+        <li><span class="tag a">À adapter</span><span>Panneaux presque opaques, puces et recherche en capsule, couleur d'allée limitée à la pastille d'icône</span></li></ul></div></div>
+    <div class="col"><div class="nm">2 · Store, détail d'un écran</div>
+      <div class="phone t-saphir" id="ph2" data-time="13:20" data-tab="2"><div class="scr"></div></div>
+      <div class="cap"><h4>Ce qu'un toucher ouvre vraiment</h4><p>La feuille « écran d'accueil » : choix Accueil / Verrouillé, widgets inclus, fond d'écran à enregistrer dans Photos. Compte gratuit sur un écran Premium : « Débloquer avec Premium » ; abonné : « Ajouter les 4 widgets ». Un pack ouvre une feuille voisine (« Personnaliser et ajouter »).</p>
+        <ul><li><span class="tag e">Existe</span><span>Tous les blocs et boutons de la feuille</span></li>
+        <li><span class="tag a">À adapter</span><span>Feuille opaque Cristal, aperçu et widgets en panneaux, bouton plein en capsule</span></li></ul></div></div>
+    <div class="col"><div class="nm">3 · Mes widgets, rempli</div>
+      <div class="phone t-saphir" id="ph3" data-time="13:20" data-tab="3"><div class="scr"></div></div>
+      <div class="cap"><h4>Carrousel, actions, catégories, limite</h4><p>De haut en bas comme aujourd'hui : compteur, carrousel (appui long = menu), nom et détail du widget central, quatre actions rondes, « Trouver un widget », puis la limite gratuite (3 sur 3 ici).</p>
+        <ul><li><span class="tag e">Existe</span><span>Toute la page ; « Sélectionner » mène à la fusion</span></li>
+        <li><span class="tag a">À adapter</span><span>Boutons du haut en verre, actions et catégories en pastilles, carte de limite en panneau</span></li></ul></div></div>
+    <div class="col"><div class="nm">4 · Mes widgets, actions d'un widget</div>
+      <div class="phone t-saphir" id="ph4" data-time="13:20" data-tab="3"><div class="scr"></div></div>
+      <div class="cap"><h4>Appui long : le menu</h4><p>Les cinq actions réelles du menu : Modifier, Dupliquer, Créer une variante, Favori, Supprimer (confirmation : « Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut. »). Pas de « Renommer » : le nom se change dans le Studio.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les cinq actions du menu</span></li>
+        <li><span class="tag a">À adapter</span><span>« Ajouter à l'écran » (guide en 5 étapes) existe en bouton ; le répéter dans le menu</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Mes widgets, vide</div>
+      <div class="phone t-saphir" id="ph5" data-time="13:20" data-tab="3"><div class="scr"></div></div>
+      <div class="cap"><h4>Aucun widget pour l'instant</h4><p>L'état vide réel : un message, un seul bouton vers le Store (et non Créer). « Sélectionner » n'apparaît pas tant qu'il n'y a aucun widget.</p>
+        <ul><li><span class="tag e">Existe</span><span>Texte, bouton « Ouvrir le Store », aide « ? » et « + »</span></li>
+        <li><span class="tag a">À adapter</span><span>Icône dans un rond de verre, bouton en capsule pleine</span></li></ul></div></div>
+    <div class="col"><div class="nm">6 · Premium</div>
+      <div class="phone t-saphir" id="ph6" data-time="13:20" data-tab="none"><div class="scr"></div></div>
+      <div class="cap"><h4>L'offre, sans fausse promesse</h4><p>Les sept avantages, deux abonnements avec essai gratuit, barre d'achat fixe. <b>Montants d'exemple</b> : 4,99 $ par mois et 29,99 $ par an ; les vrais prix viennent de l'App Store (StoreKit). Le tableau Gratuit / Premium et les mentions légales suivent plus bas, au défilement.</p>
+        <ul><li><span class="tag e">Existe</span><span>Contenu, plans, « Restaurer mes achats », essai</span></li>
+        <li><span class="tag a">À adapter</span><span>Feuille opaque, barre d'achat en verre, couleur d'action unique</span></li></ul></div></div>
+    <div class="col"><div class="nm">7 · Profil : apparence et couleur</div>
+      <div class="phone t-saphir" id="ph7" data-time="13:20" data-tab="none"><div class="scr"></div></div>
+      <div class="cap"><h4>Choisir sa déclinaison Cristal</h4><p>Les 12 teintes actuelles : Saphir gratuite, 11 Premium ; mode Auto / Clair / Sombre. Chaque pastille devient un mini-aperçu (fond, nappe, panneau, bouton). Les déclinaisons Sable, Graphite et Monochrome seraient 3 teintes neutres nouvelles (rangée en pointillés).</p>
+        <ul><li><span class="tag e">Existe</span><span>Grille de 12 teintes, mode, accroche, cadenas</span></li>
+        <li><span class="tag a">À adapter</span><span>Mini-aperçu à la place du rond de couleur</span></li>
+        <li><span class="tag d">À développer</span><span>3 teintes neutres : Sable, Graphite, Monochrome</span></li></ul></div></div>
+    <div class="col"><div class="nm">8 · Accueil, mode Organiser</div>
+      <div class="phone t-saphir p9-org" id="ph8" data-time="13:20" data-tab="0"><div class="scr"></div></div>
+      <div class="cap"><h4>Les cartes en édition</h4><p>Cartes qui tremblent, croix pour retirer, − et + pour la taille, poignée pour déplacer, carte pointillée « Ajouter une catégorie » et « OK ». L'accueil reste celui de la référence.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les quatre gestes et la carte « Ajouter une catégorie »</span></li>
+        <li><span class="tag a">À adapter</span><span>Barre « Organiser » en verre, commandes en pastilles (zone tactile 44 pt)</span></li></ul></div></div>
+  </div>
+
+  <div class="row p9-3" style="margin-top:34px">
+    <div class="col"><div class="nm">Note a</div><div class="note p9-n" style="margin:9px">
+      <h4>Ce qui doit être habillé, écran par écran</h4>
+      <table>
+        <tr><td>Onglets</td><td><code>App/ArdaneApp.swift</code> (MainTabView)<span class="t" style="background:#FBEFD9;color:#774A00">À adapter</span> capsule de verre, onglet actif teinté</td></tr>
+        <tr><td>Accueil</td><td><code>App/Screens/Home/HomeView.swift</code>, <code>DailySection.swift</code><span class="t" style="background:#FBEFD9;color:#774A00">À adapter</span> déjà dessiné (référence)</td></tr>
+        <tr><td>Mini-apps (8)</td><td><code>App/Screens/MiniApps/*</code>, <code>MiniAppScaffold.swift</code>, <code>WeekSelector.swift</code><span class="t" style="background:#FBEFD9;color:#774A00">À adapter</span> structure gardée, nappe et panneaux ; l'échafaudage commun porte l'essentiel</td></tr>
+        <tr><td>Créer, constructeur, Studio</td><td><code>Spaces/SpacesView.swift</code>, <code>SpaceBuilderView.swift</code>, <code>Editor/EditorView.swift</code>, <code>StudioComponents.swift</code>, <code>StudioPanels.swift</code><span class="t" style="background:#FBEFD9;color:#774A00">À adapter</span> le plus long</td></tr>
+        <tr><td>Store</td><td><code>Explore/ExploreView.swift</code>, <code>HomeSetupViews.swift</code>, <code>StoreMagazine.swift</code>, <code>StoreCombos.swift</code>, <code>StoreShowcase.swift</code><span class="t" style="background:#DDF0E4;color:#1E5B34">Habillage</span> cartes et en-têtes</td></tr>
+        <tr><td>Mes widgets</td><td><code>MyWidgets/MyWidgetsView.swift</code>, <code>WidgetCarousel.swift</code>, <code>FusionViews.swift</code><span class="t" style="background:#DDF0E4;color:#1E5B34">Habillage</span></td></tr>
+        <tr><td>Premium</td><td><code>App/Premium/PaywallView.swift</code>, <code>PremiumLock.swift</code><span class="t" style="background:#DDF0E4;color:#1E5B34">Habillage</span></td></tr>
+        <tr><td>Profil, couleur de l'app</td><td><code>Profile/ProfileView.swift</code>, <code>Components/StylePicker.swift</code>, <code>Shared/Theme/AppStyle.swift</code><span class="t" style="background:#FBEFD9;color:#774A00">À adapter</span> mini-aperçus ; <span class="t" style="background:#ECE7FA;color:#4A2F9A">À développer</span> 3 teintes neutres</td></tr>
+        <tr><td>Guide d'ajout</td><td><code>Editor/AddToHomeScreenGuide.swift</code>, <code>LockScreenGuide</code> dans <code>Spaces/LockScreenCreator.swift</code><span class="t" style="background:#DDF0E4;color:#1E5B34">Habillage</span> feuille et étapes</td></tr>
+        <tr><td>Onboarding, tutoriel</td><td><code>Onboarding/OnboardingView.swift</code>, <code>Tutorial/Tutorial.swift</code>, <code>TutorialOverlay.swift</code><span class="t" style="background:#DDF0E4;color:#1E5B34">Habillage</span></td></tr>
+      </table>
+      <p style="margin-top:8px;color:#4E5A6B">Estimation honnête : l'habillage simple passe par les jetons communs (couleurs, rayons, panneaux, capsules) ; « à adapter » demande de toucher la mise en page de la vue. Les 8 mini-apps restent le plus gros volume de modifications.</p></div></div>
+
+    <div class="col"><div class="nm">Note b</div><div class="note p9-n" style="margin:9px">
+      <h4>Ce qui ne bouge pas</h4>
+      <ul>
+        <li><b>StoreKit et les droits Premium</b> : produits, achat, restauration, essai, cadenas et paywalls gardent leur logique ; seul leur habillage change.</li>
+        <li><b>Les widgets et leurs données</b> : rendu des widgets, tailles, catalogue (95 widgets), App Group et <code>SharedStore</code> ne sont pas touchés. Les vignettes de cette planche sont de vrais exports.</li>
+        <li><b>Les App Intents</b> : boutons interactifs, raccourcis, Scanner, Live Activity de la séance.</li>
+        <li><b>La navigation à 4 onglets</b> : Accueil, Créer, Store, Mes widgets, même ordre, mêmes liens profonds.</li>
+        <li><b>La sauvegarde</b> : export et restauration des données, effacement, mêmes écrans et confirmations.</li>
+        <li><b>Les règles gratuit / Premium</b> : 3 widgets enregistrés, 5 habitudes, Saphir seule gratuite (plus les neutres choisies comme Premium).</li>
+        <li>Le <b>mode sombre</b> et les réglages Auto / Clair / Sombre restent ; Cristal dessiné ici est clair seulement.</li>
+      </ul></div></div>
+
+    <div class="col"><div class="nm">Note c</div><div class="note p9-n" style="margin:9px">
+      <h4>Les états non dessinés ici</h4>
+      <ul>
+        <li><b>Onboarding</b> (<code>OnboardingView.swift</code>, <code>PermissionsSetupStep.swift</code>) : pages plein écran avec choix des centres d'intérêt et demandes d'autorisation ; mêmes textes, fond Cristal, panneaux et capsules.</li>
+        <li><b>Tutoriel</b> (<code>TutorialOverlay.swift</code>) : voile et bulles sur l'Accueil ; la bulle devient un panneau de verre, la logique d'étapes ne change pas.</li>
+        <li><b>Accueil au premier lancement</b> : sans donnée, un cadre pointillé « Ajouter mes informations » prend la place de « Mes informations » ; les cartes vides gardent leur cadre pointillé « Ajouter ».</li>
+        <li><b>Hors planche</b> : feuille de fusion, constructeur, guide « Écran verrouillé », alertes (nommer, supprimer) : même feuille opaque, mêmes textes.</li>
+      </ul>
+      <p style="margin-top:10px;color:#4E5A6B">Nouveaux textes : aucun hormis l'étiquette « Couleur de l'app » au-dessus de la grille (signalée À adapter) et la rangée des teintes neutres, qui reste une proposition.</p></div></div>
+  </div>
+</main>
+
+<script src="cristal.js"></script>
+<script>
+Object.assign(P, {
+  help: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM9.6 9.6a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.2 1-1.2 1.8M12 17h.01',
+  sliders: 'M4 7h9M17 7h3M4 17h3M11 17h9M13 5v4M7 15v4', cross: 'M6 6l12 12M18 6L6 18',
+});
+const AD = (f) => KIT + f + '.png';
+const fitc = (h) => C.fit(h, '#FFFFFF', 3.2);
+
+/* ----- Store ----- */
+const AISLES = [
+  ['star', '#F2A33A', 'À la une', 'La sélection de la semaine : un écran, un style et des widgets à découvrir.'],
+  ['phone', '#3366FF', 'Écrans d\'accueil', 'Des écrans d\'accueil complets : widgets et fond d\'écran assortis.'],
+  ['image', '#0F9BB0', 'Fonds d\'écran', 'Des fonds d\'écran dessinés pour Ardane : mer, noir et blanc, dégradés, nuit, forêt et cosmos.'],
+  ['grid', '#2F8F7A', 'Widgets', 'Un widget à la fois, rangé par thème : temps, santé, argent…'],
+  ['layers', '#6D4AE8', 'Combinés', 'Plusieurs widgets réunis en un seul, prêts à poser.'],
+  ['bag', '#E5484D', 'Packs', 'Des ensembles de widgets pour un usage : études, sport, voyage…'],
+  ['sparkles', '#1E88C8', 'Packs thématiques', 'Un univers par pack : espace, Mars, nature, plantes et océan, avec son écran d\'accueil assorti.'],
+  ['palette', '#D6409F', 'Styles', 'Le même widget dans chaque style : choisis l\'allure qui te plaît.'],
+];
+const aisle = (k, more = true) => { const a = AISLES[k];
+  return `<div class="p9-ah"><div class="p9-ar"><span class="ico" style="--c:${fitc(a[1])}"><i data-i="${a[0]}"></i></span><b>${a[2]}</b>${more ? '<a>Tout voir</a>' : ''}</div><div class="s">${a[3]}</div></div>`; };
+const lockB = '<span class="p9-badge"><i data-i="lock"></i></span>';
+const setupCard = (img, name, lk, fav) => `<div class="p9-sc"><div class="im"><img src="${AD('home-' + img)}" alt="">${lk ? lockB : ''}</div><div class="nm2"><span>${name}</span><i data-i="heart" ${fav ? 'style="color:var(--primary)"' : ''}></i></div></div>`;
+const wall = (g, name, lk) => `<div class="p9-wp"><div class="im" style="background:${g}">${lk ? lockB : ''}</div><b>${name}</b></div>`;
+const wt = (w, name) => `<div class="p9-wt"><img data-w="${w}" alt=""><b>${name}</b></div>`;
+function storeTop() {
+  return `<div class="x-title" style="margin-top:2px">Store</div>
+    <div class="p9-search pn flat"><i data-i="search"></i>Écrans, packs, lune, bitcoin…</div>
+    <div class="chips" style="margin-top:8px">${AISLES.map((a) => `<span class="chip"><i data-i="${a[0]}"></i>${a[2]}</span>`).join('')}</div>
+    ${aisle(0, false)}
+    <article class="pn p9-hero"><div class="im"><img src="${AD('home-aurore')}" alt=""></div>
+      <div class="tx"><span class="x-lab">Écran de la semaine</span><div class="h2" style="margin-top:3px">Aurore</div>
+        <div class="s" style="margin-top:3px">Fond d'écran, widgets et écran verrouillé assortis.</div>
+        <span class="prem" style="margin-top:auto;align-self:flex-start"><i data-i="sparkles"></i>Premium</span></div></article>
+    ${aisle(1)}
+    <div class="p9-row">${setupCard('aurore', 'Aurore', 1, 1)}${setupCard('creme', 'Crème', 0, 0)}${setupCard('ocean', 'Océan', 1, 0)}${setupCard('graphite', 'Graphite', 1, 0)}</div>
+    ${aisle(2)}
+    <div class="p9-row">${wall('linear-gradient(160deg,#0E6E8E,#7FD3E6)', 'Mer et vagues', 0)}${wall('linear-gradient(160deg,#111,#E9E9E9)', 'Noir et blanc', 1)}${wall('linear-gradient(160deg,#F6C1D4,#B7C8F8)', 'Dégradés doux', 1)}${wall('linear-gradient(160deg,#10162E,#4B4F7A)', 'Nuit et orage', 0)}${wall('linear-gradient(160deg,#1E5B4A,#A9C9B8)', 'Forêt et brume', 1)}</div>
+    ${aisle(3)}
+    <div class="p9-row">${wt('calories-s-light', 'Calories')}${wt('habitStreak-s-light', 'Série')}${wt('budgetLeft-s-light', 'Reste du mois')}${wt('priorities-s-light', 'Top 3')}</div>`;
+}
+document.querySelector('#ph1 .scr').innerHTML = storeTop();
+
+/* ----- détail d'un écran d'accueil (feuille) ----- */
+document.querySelector('#ph2 .scr').innerHTML = storeTop();
+document.getElementById('ph2').insertAdjacentHTML('beforeend', `<div class="dim"></div>
+  <div class="sheet p9-top" style="top:78px;padding-bottom:0"><div class="grab"></div>
+    <div style="display:flex;align-items:center;gap:10px"><div class="h2">Aurore</div><span class="prem"><i data-i="sparkles"></i>Premium</span><span style="margin-left:auto" class="p9-xb"><i data-i="heart"></i></span></div>
+    <div class="seg" style="margin-top:12px"><span class="on">Accueil</span><span>Verrouillé</span></div>
+    <div style="display:flex;gap:12px;margin-top:12px">
+      <div style="width:136px;height:282px;border-radius:20px;overflow:hidden;flex:none;box-shadow:0 8px 20px rgb(var(--sh) / .2)"><img src="${AD('home-aurore')}" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block" alt=""></div>
+      <div style="flex:1;min-width:0"><div class="x-lab">4 widgets inclus</div>
+        <div style="display:grid;gap:8px;margin-top:8px"><img data-w="calories-m-aurora" style="width:100%;border-radius:16px;display:block;box-shadow:0 6px 14px rgb(var(--sh) / .18)" alt=""><img data-w="habits-m-aurora" style="width:100%;border-radius:16px;display:block;box-shadow:0 6px 14px rgb(var(--sh) / .18)" alt="">
+        <div style="display:flex;gap:8px"><img data-w="trainingStreak-s-aurora" style="width:calc(50% - 4px);border-radius:16px;box-shadow:0 6px 14px rgb(var(--sh) / .18)" alt=""><img data-w="habitStreak-s-aurora" style="width:calc(50% - 4px);border-radius:16px;box-shadow:0 6px 14px rgb(var(--sh) / .18)" alt=""></div></div></div></div>
+    <div class="info" style="margin-top:12px"><i data-i="lock"></i><span>Aussi pour l'écran verrouillé : Calories restantes, Série d'habitudes</span></div>
+    <div class="pn flat" style="margin-top:10px;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:20px"><div style="flex:1;min-width:0"><b style="font-size:14.5px;display:block;white-space:nowrap">Fond d'écran</b><span class="s">Aurore</span></div><span class="btnT" style="height:44px;padding:0 14px;font-size:13.5px">Enregistrer dans Photos</span></div>
+    <div class="btnP lg" style="margin-top:12px"><i data-i="sparkles"></i>Débloquer avec Premium</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px"><span class="link" style="height:44px;display:flex;align-items:center;font-size:14px">Voir comment les ajouter à l'écran</span><span class="link" style="height:44px;display:flex;align-items:center;font-size:15px;color:var(--ink2)">Fermer</span></div>
+  </div>`);
+
+/* ----- Mes widgets ----- */
+const mwBar = (sel) => `<div class="p9-bar">${sel ? '<span class="pl gl">Sélectionner</span>' : ''}<span class="sp"></span><span class="grp gl"><span><i data-i="help"></i></span><span><i data-i="plus"></i></span></span></div>`;
+function mwFull() {
+  return `${mwBar(1)}<div class="x-title" style="margin-top:2px">Mes widgets</div>
+    <div class="x-sub" style="margin-top:2px">3 widgets · glisse pour les faire tourner</div>
+    <div class="p9-car"><img data-w="calories-s-light" style="width:104px;left:-2px;top:34px;transform:rotate(-9deg) scale(.9);opacity:.72" alt="">
+      <img data-w="habitStreak-s-light" style="width:104px;right:-2px;top:34px;transform:rotate(9deg) scale(.9);opacity:.72" alt="">
+      <img data-w="macros-m-light" style="width:212px;left:90px;top:34px;z-index:2" alt=""></div>
+    <div style="text-align:center;margin-top:2px"><div style="font-size:20px;font-weight:700;letter-spacing:-.01em">Macros</div><div class="s" style="font-size:13px;margin-top:1px">Nutrition · Moyen · 2 sur 3</div></div>
+    <div class="p9-acts" style="margin-top:12px"><div><u class="on"><i data-i="sliders"></i></u>Modifier</div><div><u class="gl"><i data-i="copy"></i></u>Dupliquer</div><div><u class="gl"><i data-i="heart"></i></u>Favori</div><div><u class="gl"><i data-i="phone"></i></u>Ajouter à l'écran</div></div>
+    <div class="x-sec" style="margin-top:14px;margin-bottom:8px"><b>Trouver un widget</b></div>
+    <div class="p9-cat"><div class="on"><u class="gl"><i data-i="grid"></i><em>3</em></u>Tous</div><div><u class="gl" style="color:var(--c-nut)"><i data-i="fork"></i><em>2</em></u>Nutrition</div><div><u class="gl" style="color:var(--c-hab)"><i data-i="repeat"></i><em>1</em></u>Habitudes</div></div>
+    <article class="pn cd p9-lim" style="margin-top:14px"><b style="font-size:15px">3 sur 3 widgets gratuits</b><span class="u-meter" style="margin:4px 0"><i style="width:100%"></i></span><span class="s">Photos et citations illimitées</span><span class="btnT">Illimité</span></article>`;
+}
+document.querySelector('#ph3 .scr').innerHTML = mwFull();
+document.querySelector('#ph4 .scr').innerHTML = mwFull();
+document.getElementById('ph4').insertAdjacentHTML('beforeend', `<div class="p9-blur"></div>
+  <div class="p9-lift"><img data-w="macros-m-light" alt=""></div>
+  <div class="p9-menu"><div><span>Modifier</span><i data-i="pencil"></i></div><div><span>Dupliquer</span><i data-i="copy"></i></div><div><span>Créer une variante</span><i data-i="palette"></i></div>
+    <div><span>Favori</span><i data-i="heart"></i></div><div><span class="nw2">Ajouter à l'écran<small>Ouvre le guide pas à pas</small></span><i data-i="phone"></i></div><div class="bad"><span>Supprimer</span><i data-i="trash"></i></div></div>`);
+document.querySelector('#ph5 .scr').innerHTML = `${mwBar(0)}<div class="x-title" style="margin-top:2px">Mes widgets</div>
+  <div class="p9-void"><span class="big0 gl"><i data-i="layers"></i></span><h3>Aucun widget pour l'instant</h3><p>Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.</p><span class="btnP lg">Ouvrir le Store</span></div>`;
+
+/* ----- Premium ----- */
+const perks = [['layers', 'Tous les widgets des espaces'], ['sparkles', 'Widgets intelligents'], ['bag', 'Tous les packs'], ['palette', '47 styles en plus'], ['chart', 'Statistiques détaillées'], ['dumbbell', 'Toute la bibliothèque d\'exercices'], ['image', 'Fonds photo, couleurs libres']];
+document.querySelector('#ph6 .scr').innerHTML = '';
+const ph6 = document.getElementById('ph6'); ph6.classList.add('p9-sbfix');
+ph6.insertAdjacentHTML('beforeend', `<div class="dim"></div>
+  <div class="sheet p9-top"><div class="p9-nav" style="margin-bottom:6px"><span class="p9-xb" style="margin-left:-4px"><i data-i="x"></i></span><span class="t"></span></div>
+    <div style="display:flex;align-items:center;gap:14px;margin-top:-2px"><span class="p9-mark"><svg viewBox="0 0 30 30"><path d="M15 4 L25 26 H20 L15 14.5 L10 26 H5 Z" fill="#fff"/></svg></span>
+      <div><div style="font-size:27px;font-weight:700;letter-spacing:-.025em;line-height:1.1">Ardane Premium</div><div class="s" style="font-size:13px;margin-top:2px">Tous les widgets, tous les styles, sans limite.</div></div></div>
+    <div class="p9-row" style="margin-top:14px"><img data-w="clock-m-minimal" style="height:58px;border-radius:14px" alt=""><img data-w="moneyDashboard-m-light" style="height:58px;border-radius:14px" alt=""><img data-w="weekView-m-aurora" style="height:58px;border-radius:14px" alt=""><img data-w="habits-m-neon" style="height:58px;border-radius:14px" alt=""></div>
+    <article class="pn p9-perks" style="margin-top:14px">${perks.map((p) => `<div><i data-i="${p[0]}"></i>${p[1]}</div>`).join('')}</article>
+    <div style="display:grid;gap:8px;margin-top:14px">
+      <div class="p9-plan"><span class="rd"></span><div class="tx"><b>Mensuel <span class="pastille">Essai gratuit</span></b><span class="s">7 jours gratuits, puis 4,99 $ par mois</span></div></div>
+      <div class="p9-plan on"><span class="rd"><i data-i="check"></i></span><div class="tx"><b>Annuel <span class="pastille">Essai gratuit</span></b><span class="s">7 jours gratuits, puis 29,99 $ par an</span></div></div></div>
+    <div class="p9-buy gl"><div class="terms">Rien n'est débité pendant l'essai. Renouvellement automatique chaque année, annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.</div>
+      <div class="btnP lg">Essayer 7 jours gratuits</div><div class="rest">Restaurer mes achats</div></div>
+  </div>`);
+
+/* ----- Profil ----- */
+const APPS = [['Cobalt', '244FC1'], ['Saphir', '245B8F'], ['Bleu glacier', '398FA8'], ['Aqua', '008C95'], ['Jade', '268577'], ['Pistache', '718C42'], ['Olive', '77752B'], ['Ambre', 'B86A13'], ['Rubis', 'C62845'], ['Rose', 'C04472'], ['Orchidée', '9854B8'], ['Améthyste', '6841A5']];
+const pv = (name, p, o = {}) => { const h = '#' + p, b = o.bg || C.mix(h, '#FFFFFF', .94), n1 = o.na || C.mix(h, '#FFFFFF', .68), n2 = o.nb || C.mix(h, '#FFFFFF', .80);
+  const sel = name === 'Saphir', badge = o.nw ? '' : sel ? '<span class="p9-chk"><i data-i="check"></i></span>' : '<span class="p9-chk lk"><i data-i="lock"></i></span>';
+  return `<div class="p9-t${sel ? ' sel' : ''}${o.nw ? ' nw' : ''}"><div class="p9-pv" style="background:${blob(n1, 50, 50, 56, 8)},${blob(n2, 54, 54, 6, 62)},${b}"><span class="pc"></span><span class="pd"></span><span class="pa"></span><span class="pb" style="background:${h}"></span>${badge}</div><b>${name}</b></div>`; };
+const ph7 = document.getElementById('ph7'); ph7.classList.add('p9-sbfix');
+const th = (id) => THEMES.find((t) => t.id === id);
+ph7.insertAdjacentHTML('beforeend', `<div class="dim"></div>
+  <div class="sheet p9-top"><div class="p9-nav"><span class="l"></span><span class="t">Profil</span><span class="r"><span class="ok">OK</span></span></div>
+    <div class="p9-me"><span class="p9-ava"><i data-i="user"></i></span><div><div style="font-size:20px;font-weight:700;letter-spacing:-.01em">Ton profil</div><div class="s" style="display:flex;align-items:center;gap:5px;margin-top:2px"><i data-i="user" style="font-size:13px"></i>Version gratuite</div></div></div>
+    <div class="x-lab" style="margin:14px 4px 8px">Apparence</div>
+    <article class="pn cd" style="padding:14px 14px 12px">
+      <div class="h3" style="margin:0 2px 12px">Couleur de l'app</div>
+      <div class="p9-grid">${APPS.map((a) => pv(a[0], a[1])).join('')}</div>
+      <div style="display:flex;align-items:center;gap:8px;margin:14px 2px 6px"><span class="tag d" style="min-width:0">Nouvelles</span><span class="s">3 teintes neutres, Premium</span></div>
+      <div class="p9-grid">${['sable', 'graphite', 'mono'].map((id) => { const t = th(id); return pv(t.name, t.primary.slice(1), { bg: t.bg, na: t.na, nb: t.nb, nw: 1 }); }).join('')}</div>
+      <div class="h3" style="margin:14px 2px 8px">Mode</div>
+      <div class="seg"><span class="on">Auto</span><span>Clair</span><span>Sombre</span></div>
+    </article>
+    <div class="foot" style="margin-top:10px">Saphir — Bleu acier, sobre et élégant. Tes widgets gardent chacun leur propre style.</div>
+  </div>`);
+
+/* ----- Accueil, mode Organiser ----- */
+(function () {
+  let h = Screens.homeA('journee'); h = h.slice(h.indexOf('<div class="x-stack"'));
+  const bud = h.match(/<article class="pn hc" data-c="bud">[\s\S]*?<\/article>/)[0];
+  h = h.replace(/<div class="g2" style="height:180px">[\s\S]*<\/div>\s*<\/div>\s*$/, `<div style="height:130px">${bud}</div></div>`);
+  h = h.replace(/<i class="go" data-i="chev"><\/i>/g, '<i class="o-g" data-i="grip"></i>');
+  h = h.replace(/(<article class="[^"]*" data-c="[^"]*">)/g, '$1<span class="o-x"><i data-i="cross"></i></span><span class="o-sz"><i data-i="minus"></i><u></u><i data-i="plus"></i></span>');
+  h = h.replace('<span class="s" style="font-weight:650;color:var(--ink);padding-right:6px">2 repas</span>', '<span class="s" style="font-weight:650;color:var(--ink);padding-right:6px">2 repas</span>');
+  document.querySelector('#ph8 .scr').innerHTML = `<div class="x-top gl"><span class="x-date">Organiser</span><span class="btnP" style="height:38px;padding:0 20px;border-radius:19px;margin-right:-1px">OK</span></div>
+    <div style="margin-top:12px">${h.replace('<div class="x-stack" style="margin-top:10px">', '<div class="x-stack" style="margin-top:0;gap:26px">').replace(/<\/div>\s*$/, '')}
+      <div class="p9-add"><i data-i="plus"></i>Ajouter une catégorie</div></div></div>`;
+})();
+
+Cristal.init();
+</script>
+</body>
+</html>
