@@ -232,6 +232,260 @@ extension WidgetDesign {
     }
 }
 
+/// Editing the widgets inside a widget one step at a time (the Studio's « + », « Retirer », « Remplacer »,
+/// « Monter / Descendre »): pure functions on the parts, following the layout rules of `ComboLayout` and `Composer`.
+/// A widget alone is one part whose `size` is its format.
+enum ComboEditing {
+    /// The result of an edit: the parts (one = a widget alone), the format, and the old format when the size changed.
+    struct Outcome: Equatable {
+        let parts: [ComboPart]
+        let format: WidgetFormat
+        /// The previous format when the size changed (for the « Passé en Grand pour tout afficher » note).
+        let resizedFrom: WidgetFormat?
+    }
+
+    enum Change: Equatable {
+        case applied(Outcome)
+        /// The reason, already translated.
+        case refused(String)
+    }
+
+    /// Same space, or same catalog category for widgets outside the spaces (the rule of `Fusion.category`).
+    static func sameFamily(_ a: WidgetKind, _ b: WidgetKind) -> Bool {
+        Fusion.category(of: a) == Fusion.category(of: b)
+    }
+
+    /// The format the parts are shown at now.
+    static func format(of parts: [ComboPart]) -> WidgetFormat {
+        if parts.count == 1 { return parts[0].size }
+        return ComboLayout.format(parts) ?? .medium
+    }
+
+    /// The part alone, at the medium size when its kind has one, else small (else its first size).
+    private static func alone(_ part: ComboPart) -> ComboPart {
+        var part = part
+        if part.kind.families.contains(.systemMedium) {
+            part.size = .medium
+        } else if part.kind.families.contains(.systemSmall) {
+            part.size = .small
+        } else if part.kind.families.contains(.systemLarge) {
+            part.size = .large
+        }
+        return part
+    }
+
+    private static func outcome(_ parts: [ComboPart], from old: WidgetFormat) -> Outcome {
+        let now = ComboEditing.format(of: parts)
+        return Outcome(parts: parts, format: now, resizedFrom: now == old ? nil : old)
+    }
+
+    /// Plans these parts (in this order) at the first format of `formats` that works: each part keeps its
+    /// options and name, only its size follows the plan.
+    private static func fit(_ parts: [ComboPart], formats: [WidgetFormat], from old: WidgetFormat) -> Change {
+        let kinds = parts.map(\.kind)
+        for format in formats {
+            switch Composer.plan(kinds, format: format) {
+            case .single:
+                guard parts.count == 1 else { continue }
+                var part = parts[0]
+                part.size = format
+                return .applied(outcome([part], from: old))
+            case let .combo(slots):
+                guard slots.count == parts.count else { continue }
+                var planned = parts
+                for index in planned.indices { planned[index].size = slots[index].size }
+                return .applied(outcome(planned, from: old))
+            case .invalid:
+                continue
+            }
+        }
+        if case let .invalid(reason) = Composer.plan(kinds, format: .large) { return .refused(reason) }
+        return .refused(tr("Ces widgets ne tiennent pas ensemble."))
+    }
+
+    static func adding(_ part: ComboPart, to current: [ComboPart]) -> Change {
+        guard let first = current.first else {
+            return .applied(outcome([alone(part)], from: alone(part).size))
+        }
+        let old = format(of: current)
+        if current.contains(where: { Fusion.contentKey($0.kind, $0.options) == Fusion.contentKey(part.kind, part.options) }) {
+            return .refused(tr("Ce widget est déjà dans le widget."))
+        }
+        guard sameFamily(first.kind, part.kind) else {
+            return .refused(tr("Un widget réunit des widgets du même espace."))
+        }
+        guard current.count < 4 else {
+            return .refused(tr("Un grand widget réunit 4 widgets au plus."))
+        }
+        // The smallest size that works; a large widget alone tries to stay large first.
+        let formats: [WidgetFormat] = (current.count == 1 && first.size == .large) ? [.large, .medium] : [.medium, .large]
+        return fit(current + [part], formats: formats, from: old)
+    }
+
+    static func removing(at index: Int, from current: [ComboPart]) -> Change {
+        guard current.indices.contains(index) else { return .refused(tr("Ce widget n'existe plus.")) }
+        guard current.count > 1 else { return .refused(tr("Il reste au moins un widget.")) }
+        let old = format(of: current)
+        var remaining = current
+        remaining.remove(at: index)
+        if remaining.count == 1 {
+            return .applied(outcome([alone(remaining[0])], from: old))
+        }
+        return fit(remaining, formats: [.medium, .large], from: old)
+    }
+
+    static func replacing(at index: Int, with part: ComboPart, in current: [ComboPart]) -> Change {
+        guard current.indices.contains(index) else { return .refused(tr("Ce widget n'existe plus.")) }
+        let old = format(of: current)
+        var others = current
+        others.remove(at: index)
+        if let other = others.first {
+            if others.contains(where: { Fusion.contentKey($0.kind, $0.options) == Fusion.contentKey(part.kind, part.options) }) {
+                return .refused(tr("Ce widget est déjà dans le widget."))
+            }
+            guard sameFamily(other.kind, part.kind) else {
+                return .refused(tr("Un widget réunit des widgets du même espace."))
+            }
+        }
+        var replaced = current
+        replaced[index] = part
+        if replaced.count == 1 {
+            // A widget alone keeps its size when the new one has it.
+            var single = part
+            if part.kind.families.contains(current[0].size.family) {
+                single.size = current[0].size
+            } else {
+                single = alone(part)
+            }
+            return .applied(outcome([single], from: old))
+        }
+        return fit(replaced, formats: old == .large ? [.large] : [.medium, .large], from: old)
+    }
+
+    static func moving(from: Int, to: Int, in current: [ComboPart]) -> Change {
+        guard current.indices.contains(from), current.indices.contains(to) else {
+            return .refused(tr("Ce widget n'existe plus."))
+        }
+        let old = format(of: current)
+        guard from != to else { return .applied(outcome(current, from: old)) }
+        var moved = current
+        let part = moved.remove(at: from)
+        moved.insert(part, at: to)
+        if ComboLayout.rows(moved) != nil {
+            return .applied(outcome(moved, from: old))
+        }
+        // The sizes no longer fill whole rows in this order: plan again, at the same format when possible.
+        let formats: [WidgetFormat] = old == .large ? [.large, .medium] : [.medium, .large]
+        return fit(moved, formats: formats, from: old)
+    }
+
+    static func arrangements(of current: [ComboPart]) -> [[ComboPart]] {
+        guard current.count >= 2, let rows = ComboLayout.rows(current) else { return [current] }
+        var candidates: [[ComboPart]] = [current]
+        func resized(_ part: ComboPart, _ size: WidgetFormat) -> ComboPart {
+            var part = part
+            part.size = size
+            return part
+        }
+        switch (current.count, rows.count) {
+        case (2, 1):
+            // Two small ones side by side.
+            candidates.append([current[1], current[0]])
+        case (2, 2):
+            // Two medium ones, one per row.
+            candidates.append([current[1], current[0]])
+        case (3, 2):
+            // One whole row and two small ones: any part can be the whole row, on top or at the bottom.
+            for wide in current.indices {
+                let others = current.indices.filter { $0 != wide }.map { current[$0] }
+                guard current[wide].kind.families.contains(.systemMedium),
+                      others.allSatisfy({ $0.kind.families.contains(.systemSmall) }) else { continue }
+                let top = [resized(current[wide], .medium)] + others.map { resized($0, .small) }
+                let bottom = others.map { resized($0, .small) } + [resized(current[wide], .medium)]
+                candidates.append(top)
+                candidates.append(bottom)
+            }
+        case (4, 2):
+            // Four small ones: the two rows swapped.
+            candidates.append([current[2], current[3], current[0], current[1]])
+        default:
+            break
+        }
+        var seen: [[ComboPart]] = []
+        for candidate in candidates where !seen.contains(candidate) {
+            seen.append(candidate)
+        }
+        return seen
+    }
+
+    static func refusal(adding kind: WidgetKind, to current: [ComboPart]) -> String? {
+        guard !current.isEmpty else { return nil }
+        let part = ComboPart(kind: kind, options: DesignOptions(), name: kind.title,
+                             size: kind.families.contains(.systemSmall) ? .small : .medium)
+        if case let .refused(reason) = adding(part, to: current) { return reason }
+        return nil
+    }
+}
+
+extension WidgetDesign {
+    /// The parts to edit: those of a combined widget, or the widget alone as one part (at its displayed format).
+    var editableParts: [ComboPart] {
+        if isCombo { return options.parts }
+        return [ComboPart(kind: kind, options: options, name: name, size: displayFormat)]
+    }
+
+    /// The widget with these parts: one part = a widget alone, two or more = a combined widget. Style, colors,
+    /// background… are kept. The name follows the parts until the user changes it.
+    func applying(_ outcome: ComboEditing.Outcome) -> WidgetDesign {
+        func autoName(_ parts: [ComboPart]) -> String { parts.map(\.name).joined(separator: " + ") }
+        var design = self
+        let followsParts = name == autoName(editableParts)
+        if outcome.parts.count == 1, let part = outcome.parts.first {
+            design.kind = part.kind
+            design.options = part.options
+            design.options.parts = []
+            design.format = part.size
+            if followsParts { design.name = part.name }
+        } else if let lead = outcome.parts.first {
+            design.kind = lead.kind
+            design.options.parts = outcome.parts
+            design.format = outcome.format
+            if followsParts { design.name = autoName(outcome.parts) }
+        }
+        return design
+    }
+}
+
+extension Fusion {
+    /// Why these widgets don't merge (another space, a large widget, the same content twice, sizes that don't
+    /// fill a medium or a large widget), or nil when they do.
+    static func refusal(for designs: [WidgetDesign]) -> String? {
+        guard designs.count >= 2, result(for: designs) == nil else { return nil }
+        var parts: [ComboPart] = []
+        for design in designs {
+            if design.isCombo {
+                guard design.displayFormat == .medium else { return tr("Un grand widget est déjà plein : il ne peut pas être réuni.") }
+                parts += design.options.parts
+            } else {
+                let format = design.displayFormat
+                guard format != .large else { return tr("Un grand widget est déjà plein : il ne peut pas être réuni.") }
+                guard design.kind.families.contains(format.family) else {
+                    return tr("\(design.name) n'existe pas dans cette taille.")
+                }
+                parts.append(ComboPart(kind: design.kind, options: design.options, name: design.name, size: format))
+            }
+        }
+        guard Set(parts.map { category(of: $0.kind) }).count == 1 else {
+            return tr("Un widget réunit des widgets du même espace.")
+        }
+        let contents = parts.map { contentKey($0.kind, $0.options) }
+        guard Set(contents).count == contents.count else {
+            return tr("Ce widget est déjà dans le widget.")
+        }
+        return tr("Ces tailles ne remplissent pas un widget moyen ou grand : il faut 2 petits, 2 moyens, 1 moyen et 2 petits, ou 4 petits.")
+    }
+}
+
 /// Building a medium or a large widget from widgets of one category (the space creator):
 /// one widget at that size when it exists there, or several widgets combined.
 enum Composer {
