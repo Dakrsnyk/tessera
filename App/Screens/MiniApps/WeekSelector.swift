@@ -14,8 +14,8 @@ enum WeekDayKind: Equatable {
 
 /// The week selector at the top of every mini-app (the « Signature » style): the seven days of a week side by
 /// side, each with its initial, its date and a dot when it holds something. It sits on the colored band of the
-/// screen: the selected day is a rounded pill (white on a dark screen, the app's color on a light one), today
-/// is outlined, the days gone by are plain and the days to come are dimmed. A tap picks a day, the arrows or a
+/// screen, on a glass card: the selected day is a rounded pill in the mini-app's action color, today's date is
+/// ringed, the days gone by are plain and the days to come are dimmed. A tap picks a day, the arrows or a
 /// swipe go to the week before or after, and the dates come from the real calendar. A mini-app has one
 /// selector: the screen below it tells about the day picked. `mark` tells what a day holds (planned, done,
 /// how far it got). `leadingInset` leaves room on the left for the hours column of a week table placed
@@ -29,8 +29,13 @@ struct WeekSelector: View {
     var leadingInset: CGFloat = 0
     @State private var forward = true
     @Environment(\.colorScheme) private var scheme
+    @Environment(\.appStyle) private var style
 
-    private var accent: Color { Color(hex: colorHex) }
+    /// The mini-app's strong color (the page's action color, `.tint`), as a hex for the current mode: the ink on it is chosen by contrast.
+    private var actionHex: String {
+        let strong = CristalPalette.of(style.id).strongHex(colorHex)
+        return scheme == .dark ? strong.dark : strong.light
+    }
 
     var body: some View {
         let now = Date()
@@ -49,6 +54,10 @@ struct WeekSelector: View {
             .transition(.push(from: forward ? .trailing : .leading))
             .simultaneousGesture(swipe(canGoForward: canGoForward))
         }
+        // Beside a week table (`leadingInset`) the columns must stay under the days: no side margin then.
+        .padding(.horizontal, leadingInset > 0 ? 0 : 8)
+        .padding(.vertical, 4)
+        .cristalGlass(in: RoundedRectangle(cornerRadius: CristalPalette.of(style.id).radius, style: .continuous))
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("week-card")
     }
@@ -93,8 +102,8 @@ struct WeekSelector: View {
 
     // MARK: A day
 
-    private var selectedFill: Color { scheme == .dark ? Color.white : accent }
-    private var selectedInk: Color { scheme == .dark ? accent : Color.white }
+    private var selectedFill: Color { Color(hex: actionHex) }
+    private var selectedInk: Color { Color.readableInk(on: actionHex) }
 
     private func dayButton(_ date: Date, now: Date) -> some View {
         let kind = WeekDayKind.of(date, selected: day, now: now)
@@ -113,6 +122,13 @@ struct WeekSelector: View {
                 Text("\(DateMath.calendar.component(.day, from: date))")
                     .font(.title3.weight(.bold))
                     .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                    // A minimum, not a fixed size: with large text the number grows and the ring around today follows it.
+                    .frame(minWidth: 30, minHeight: 30)
+                    .overlay {
+                        if kind == .today { Circle().strokeBorder(selectedFill, lineWidth: 1.5) }
+                    }
                 // A filled dot: done, caught up or under way; a hollow one: planned.
                 ZStack {
                     if state.isDone || state.isCaughtUp || state.progress > 0 {
@@ -129,10 +145,7 @@ struct WeekSelector: View {
             .frame(maxWidth: .infinity, minHeight: 64)
             .background {
                 if kind == .selected {
-                    RoundedRectangle(cornerRadius: 16, style: .continuous).fill(selectedFill)
-                        .shadow(color: Color.black.opacity(0.18), radius: 10, y: 5)
-                } else if kind == .today {
-                    RoundedRectangle(cornerRadius: 16, style: .continuous).strokeBorder(Color.primary.opacity(0.35), lineWidth: 1.5)
+                    RoundedRectangle(cornerRadius: 18, style: .continuous).fill(selectedFill)
                 }
             }
             .opacity(isBlocked ? 0.3 : (kind == .future ? 0.55 : 1))

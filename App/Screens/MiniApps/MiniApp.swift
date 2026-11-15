@@ -253,7 +253,7 @@ struct MiniSectionTitle: View {
                 Capsule().fill(accent).frame(width: 4, height: 16).alignmentGuide(.firstTextBaseline) { $0[.bottom] - 3 }
             }
             Text(title)
-                .font(.title3.weight(.bold))
+                .font(.headline)
                 .accessibilityAddTraits(.isHeader)
             Spacer()
             if let detail {
@@ -273,14 +273,17 @@ struct MiniRow: View {
     var detail: String?
     var value: String?
     var showsChevron = true
+    @Environment(\.appStyle) private var style
+    @Environment(\.colorScheme) private var scheme
 
     var body: some View {
+        let tint = CristalPalette.of(style.id).category(colorHex)
         HStack(spacing: 12) {
             Image(systemName: symbol)
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(Color(hex: colorHex))
+                .foregroundStyle(tint)
                 .frame(width: 36, height: 36)
-                .background(Color(hex: colorHex).opacity(0.16), in: RoundedRectangle(cornerRadius: 11, style: .continuous))
+                .background(tint.opacity(scheme == .dark ? 0.20 : 0.13), in: Circle())
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .font(.body.weight(.medium))
@@ -339,15 +342,25 @@ enum MiniStyle {
     static let stepsHex = "12A4B5"
 }
 
+/// A Cristal panel whose radius is the palette's minus `inset` (the card: 0, the tile: 4).
+private struct MiniPanel: ViewModifier {
+    let inset: CGFloat
+    @Environment(\.appStyle) private var style
+
+    func body(content: Content) -> some View {
+        content.cristalPanel(radius: CristalPalette.of(style.id).radius - inset)
+    }
+}
+
 extension View {
-    /// The card of the mini-apps: the style's card fill with the shared corner radius.
+    /// The card of the mini-apps: a Cristal panel with the palette's corner radius.
     func miniCard() -> some View {
-        background(.cardFill, in: RoundedRectangle(cornerRadius: MiniStyle.cardRadius, style: .continuous))
+        modifier(MiniPanel(inset: 0))
     }
 
-    /// A smaller tile (a figure, a count) with the shared tile radius.
+    /// A smaller tile (a figure, a count): a Cristal panel, 4 points tighter than the card.
     func miniTile() -> some View {
-        background(.cardFill, in: RoundedRectangle(cornerRadius: MiniStyle.tileRadius, style: .continuous))
+        modifier(MiniPanel(inset: 4))
     }
 }
 
@@ -499,7 +512,7 @@ struct DaySwitcher: View {
             .accessibilityLabel(Text(tr("Jour suivant")))
         }
         .foregroundStyle(Color(hex: colorHex))
-        .background(.cardFill, in: Capsule())
+        .cristalGlass(in: Capsule())
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("day-switcher")
         .sheet(isPresented: $picking) {
