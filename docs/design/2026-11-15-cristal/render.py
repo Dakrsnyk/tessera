@@ -50,7 +50,11 @@ def main():
                         "--user-data-dir=" + prof, "--force-device-scale-factor=%g" % scale, "--window-size=%d,%d" % (bw, height),
                         "--screenshot=" + dest, u], capture_output=True, timeout=300)
         profs.append(prof)   # un profil d'Edge pèse environ 60 Mo : tous sont supprimés en fin de script (clean), sinon le disque se remplit
-        shutil.rmtree(prof, ignore_errors=True)
+        for _ in range(12):  # et dès la fin de chaque prise, en insistant : Edge garde ses fichiers une seconde ou deux, et plusieurs rendus en parallèle remplissaient le disque
+            shutil.rmtree(prof, ignore_errors=True)
+            if not os.path.exists(prof):
+                break
+            time.sleep(0.4)
         for _ in range(80):
             if os.path.exists(dest) and os.path.getsize(dest) > 0:
                 break

@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Création de widgets — Comparaison des cinq parcours et recommandation</title>
+<link rel="stylesheet" href="cristal.css">
+<link rel="stylesheet" href="creation.css">
+<style>
+  /* propre à cette planche : préfixe cp- */
+  .cp-box { background: #fff; border: 1px solid #D5DDE8; border-radius: 18px; padding: 20px 22px; font: 400 13.5px/1.45 Inter, sans-serif; color: #101828; margin: 0 9px; }
+  .cp-box h4 { font-size: 19px; font-weight: 800; letter-spacing: -.012em; margin-bottom: 4px; }
+  .cp-t { border-collapse: separate; border-spacing: 0; width: 100%; font: 400 13px/1.35 Inter, sans-serif; margin-top: 12px; }
+  .cp-t th { text-align: left; vertical-align: bottom; padding: 0 10px 10px; font-size: 14.5px; font-weight: 800; letter-spacing: -.01em; }
+  .cp-t th small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #5B6577; margin-bottom: 2px; }
+  .cp-t th.rec { color: #1F3F8F; }
+  .cp-t td { vertical-align: top; padding: 9px 10px; border-top: 1px solid #E3E7EE; }
+  .cp-t td.c { width: 215px; font-weight: 700; font-size: 13.5px; }
+  .cp-t td.c small { display: block; font-weight: 400; font-size: 12px; color: #5B6577; margin-top: 1px; }
+  .cp-t td .n { display: inline-grid; place-items: center; width: 34px; height: 26px; border-radius: 8px; font: 800 14px Inter, sans-serif; font-variant-numeric: tabular-nums; margin-right: 8px; vertical-align: top; }
+  .cp-t td .w { display: inline-block; width: calc(100% - 48px); font-size: 12.5px; color: #35435A; }
+  .n.a { background: #1F8A5B; color: #fff; } .n.b { background: #D6F0E2; color: #14532F; } .n.m { background: #FBEFD9; color: #774A00; } .n.l { background: #FDE3DF; color: #8E1F14; }
+  .cp-t tr.tot td { border-top: 2px solid #101828; font-size: 15px; font-weight: 800; padding-top: 12px; }
+  .cp-t tr.tot td b { font-size: 26px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; } .cp-t tr.tot td small { font-size: 13px; font-weight: 600; color: #5B6577; }
+  .cp-t td.rec, .cp-t th.rec { background: #F2F6FF; }
+  .cp-t th.rec { border-radius: 14px 14px 0 0; padding-top: 10px; } .cp-t tr.tot td.rec { border-radius: 0 0 14px 14px; padding-bottom: 12px; }
+  .cp-leg { display: flex; gap: 16px; margin-top: 12px; font-size: 12px; color: #5B6577; align-items: center; }
+  .cp-leg .n { display: inline-grid; place-items: center; width: 34px; height: 22px; border-radius: 7px; font: 800 12px Inter, sans-serif; margin-right: 6px; }
+  .cp-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 0 9px; }
+  .cp-card { background: #fff; border: 1px solid #D5DDE8; border-radius: 18px; padding: 16px 16px 18px; font: 400 13px/1.42 Inter, sans-serif; color: #101828; }
+  .cp-card.rec { border: 2px solid #2F5BEA; box-shadow: 0 10px 30px rgba(47,91,234,.14); }
+  .cp-card .k { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #5B6577; }
+  .cp-card h5 { font-size: 16.5px; font-weight: 800; letter-spacing: -.01em; margin: 2px 0 8px; }
+  .cp-card img { display: block; width: 100%; border-radius: 26px; margin-bottom: 12px; }
+  .cp-card h6 { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #5B6577; margin: 10px 0 3px; }
+  .cp-card ul { margin: 0 0 0 4px; padding: 0; list-style: none; display: grid; gap: 4px; }
+  .cp-card li { padding-left: 16px; position: relative; }
+  .cp-card ul.p li::before { content: "+"; position: absolute; left: 0; color: #1F8A5B; font-weight: 800; }
+  .cp-card ul.m li::before { content: "–"; position: absolute; left: 0; color: #C0392B; font-weight: 800; }
+  .cp-card .who { margin-top: 10px; padding: 9px 11px; border-radius: 12px; background: #F4F6FA; font-size: 12.5px; }
+  .cp-rec { margin: 0 9px; border-radius: 22px; padding: 26px 28px; background: linear-gradient(135deg, #17306F, #2F5BEA); color: #fff; font: 400 14.5px/1.5 Inter, sans-serif; display: grid; grid-template-columns: 1.05fr 1fr 1fr; gap: 30px; }
+  .cp-rec .k { font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; opacity: .8; }
+  .cp-rec h3 { font-size: 30px; line-height: 1.1; font-weight: 800; letter-spacing: -.022em; margin: 4px 0 10px; }
+  .cp-rec h5 { font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+  .cp-rec ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+  .cp-rec li { padding-left: 20px; position: relative; }
+  .cp-rec li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 8px; height: 8px; border-radius: 4px; background: #9DB8FF; }
+  .cp-rec b { font-weight: 700; }
+  .cp-3 { display: grid; grid-template-columns: 1.15fr 1fr 1.15fr; gap: 14px; margin: 0 9px; }
+  .cp-3 .cp-box { margin: 0; }
+  .cp-lot { display: grid; grid-template-columns: 62px 1fr; gap: 4px 12px; margin-top: 10px; }
+  .cp-lot b.l { display: grid; place-items: center; height: 26px; border-radius: 8px; background: #E8EEFD; color: #1F3F8F; font-size: 12px; font-weight: 800; }
+  .cp-lot b.l.o { background: #F1F4F9; color: #5B6577; }
+  .cp-q { display: grid; gap: 10px; margin-top: 10px; }
+  .cp-q > div { padding: 11px 13px; border-radius: 14px; background: #F4F6FA; }
+  .cp-q b { font-weight: 700; }
+  .cp-m { border-collapse: collapse; width: 100%; font-size: 12.5px; margin-top: 8px; }
+  .cp-m td { vertical-align: top; padding: 6px 8px 6px 0; border-top: 1px solid #E3E7EE; line-height: 1.38; }
+  .cp-m td:first-child { font-weight: 700; width: 42%; }
+  h2.sec { margin-left: 9px !important; }
+  p.secp { margin-left: 9px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">C</div><div><h1>Comparaison des cinq parcours et recommandation</h1>
+    <p>Chaque parcours est noté sur 10 pour les dix critères demandés, avec la raison de la note. Les notes sont mon jugement à partir des planches et du code actuel ; elles ne viennent pas de tests avec des utilisateurs. Même exemple partout : un widget Moyen qui réunit « Prochaine série » et « Régularité ».</p></div>
+    <span class="badge">Phase 1 · rien n'est changé dans l'app</span></header>
+
+  <div class="cp-box">
+    <h4>Les notes, critère par critère</h4>
+    <table class="cp-t" id="grid"></table>
+    <div class="cp-leg"><span><span class="n a">9</span>très bon (9 ou 10)</span><span><span class="n b">7</span>bon (7 ou 8)</span><span><span class="n m">5</span>moyen (5 ou 6)</span><span><span class="n l">4</span>faible (4 ou moins)</span><span style="margin-left:auto">Touchers comptés une fois l'onglet Créer ouvert, jusqu'au widget Moyen à 2 widgets enregistré, sans le guide d'ajout.</span></div>
+  </div>
+
+  <h2 class="sec">Avantages et inconvénients</h2>
+  <p class="secp">L'écran montré est celui de la combinaison (écran 4 de chaque planche).</p>
+  <div class="cp-5" id="cards"></div>
+
+  <h2 class="sec">Ma recommandation</h2>
+  <div class="cp-rec">
+    <div><div class="k">Parcours conseillé</div><h3>Le parcours 5, hybride : un départ rapide, puis l'Atelier où l'on agit sur le widget</h3>
+      <p>C'est le seul qui sert à la fois la personne qui ouvre Ardane pour la première fois et celle qui veut tout régler. Il n'invente pas une sixième idée : il prend le meilleur des quatre autres et retire leur défaut principal.</p></div>
+    <div><h5>Ce qu'il prend à chacun</h5><ul>
+      <li><b>Au parcours 4</b> : le départ « Pour toi », des widgets déjà réunis avec tes vraies données. Deux touchers suffisent.</li>
+      <li><b>Au parcours 2</b> : l'aperçu toujours visible et l'action directe. C'est le « C1 Atelier » que tu as validé, donc aucune nouvelle identité.</li>
+      <li><b>Au parcours 3</b> : les emplacements visibles. La règle « une ligne = 1 large ou 2 petits » se voit, elle ne s'explique plus.</li>
+      <li><b>Au parcours 1</b> : un ordre conseillé en 3 chapitres (Contenu, Disposition, Style) au lieu de 10 outils d'un coup, sans jamais forcer les étapes.</li></ul></div>
+    <div><h5>Pourquoi lui, et pas le plus simple à coder</h5><ul>
+      <li>Il corrige la cause du problème à la racine : <b>un seul geste pour ajouter un widget</b>, l'emplacement « + » posé sur le widget lui-même. Plus de bouton caché, plus de feuille qui fabrique des widgets séparés.</li>
+      <li>Quand un choix ne tient pas, il <b>propose la taille au-dessus</b> au lieu de retirer un widget en silence.</li>
+      <li>Un widget réuni <b>reste modifiable</b> après l'enregistrement : ajouter, retirer, déplacer.</li>
+      <li>C'est le plus gros chantier avec le parcours 2. Le parcours 4 seul serait plus vite fait, mais il laisse les habitués sans outil et ne corrige pas le Studio.</li></ul></div>
+  </div>
+
+  <h2 class="sec">La suite, si tu valides</h2>
+  <div class="cp-3">
+    <div class="cp-box"><h4>Phase 2, en 4 livraisons</h4>
+      <p>Chaque livraison arrive sur ton iPhone par TestFlight et se teste seule. La première corrige déjà la combinaison.</p>
+      <div class="cp-lot">
+        <b class="l">Lot 1</b><span><b>La combinaison réparée.</b> Emplacement « + » sur l'aperçu, choix sous l'aperçu, refus expliqués, passage en Grand proposé, parties modifiables avant et après l'enregistrement, réglages de chaque partie conservés, et le test automatique de « Réunir » au vert (défauts 1 à 7, 9, 11, 15).</span>
+        <b class="l">Lot 2</b><span><b>Les 3 chapitres et la disposition.</b> Dispositions proposées, déplacement des parties, numéros dans l'ordre réel (défaut 8).</span>
+        <b class="l">Lot 3</b><span><b>L'écran de départ.</b> « Pour toi », « Partir de zéro », « Partir d'un modèle ».</span>
+        <b class="l">Lot 4</b><span><b>« Sur mon écran ».</b> L'aperçu du widget parmi des icônes, avant d'enregistrer.</span>
+        <b class="l o">Option</b><span><b>Mélanger les espaces</b> dans un même widget, et un lien par partie (défauts 12 et 13).</span>
+      </div></div>
+    <div class="cp-box"><h4>Trois décisions pour toi</h4>
+      <div class="cp-q">
+        <div><b>1. Quel parcours ?</b> Je conseille le 5. Tu peux aussi demander un mélange, par exemple le 5 avec le départ en questions du 1.</div>
+        <div><b>2. Mélanger les espaces ?</b> Par exemple « Calories restantes » à côté de « Régularité ». Aujourd'hui l'app l'interdit ; iOS le permet. Chantier moyen. Je conseille oui, après le lot 1.</div>
+        <div><b>3. Par quoi commencer ?</b> Je conseille le lot 1 seul d'abord : il règle ton problème de combinaison sans attendre le reste.</div>
+      </div></div>
+    <div class="cp-box"><h4>Rien n'est supprimé (parcours 5)</h4>
+      <table class="cp-m">
+        <tr><td>Les 95 widgets, 12 espaces</td><td>« Tous les widgets », sous l'aperçu ; filtre « Seulement les widgets interactifs » gardé</td></tr>
+        <tr><td>Petit, Moyen, Grand</td><td>Chapitre Contenu, et « Partir de zéro »</td></tr>
+        <tr><td>Écran verrouillé (Rond, Rectangle, En ligne)</td><td>« Partir de zéro » et Taille ; jamais réuni</td></tr>
+        <tr><td>Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles</td><td>Chapitre Style : les 8 outils actuels, inchangés</td></tr>
+        <tr><td>Options de chaque widget</td><td>Toucher la partie sur l'aperçu</td></tr>
+        <tr><td>Réunir des widgets</td><td>Emplacements « + » ; fusion de Mes widgets gardée, avec la raison d'un refus</td></tr>
+        <tr><td>Plusieurs petits widgets d'un coup</td><td>Gardé, nommé clairement : « Plusieurs widgets séparés »</td></tr>
+        <tr><td>Combinés, packs et écrans du Store</td><td>Store inchangé ; « Partir d'un modèle »</td></tr>
+        <tr><td>Gratuit et Premium</td><td>Cadenas lisible avant le choix ; « Débloquer et enregistrer » ; limite de 3</td></tr>
+        <tr><td>Enregistrer, modifier, dupliquer, supprimer</td><td>Mes widgets inchangé ; la structure devient modifiable</td></tr>
+        <tr><td>Photos et citations</td><td>Accès depuis l'écran de départ, éditeur inchangé</td></tr>
+      </table></div>
+  </div>
+</main>
+<script>
+/* Données de la comparaison : [note, raison] pour les parcours 1 à 5. */
+const HEAD = [['Parcours 1', 'Guidé, étape par étape'], ['Parcours 2', 'Studio à aperçu permanent'], ['Parcours 3', 'Par blocs'], ['Parcours 4', 'Par intention'], ['Parcours 5', 'Hybride intelligent']];
+const ROWS = [
+  ['Simplicité d\'utilisation', 'Combien de choses à comprendre à la fois', [9, 'Une décision par écran'], [6, 'Tout est là, à découvrir seul'], [6, 'Le glisser s\'apprend'], [9, 'On choisit une phrase'], [8, 'Départ simple, Atelier en 3 chapitres']],
+  ['Rapidité de création', 'Touchers pour le widget d\'exemple', [5, '__T1__'], [8, '__T2__'], [6, '__T3__'], [9, '__T4__'], [9, '__T5__']],
+  ['Compréhension immédiate', 'Sait-on quoi faire au premier regard', [9, 'Une question, une réponse'], [7, 'Le « + » se comprend, les outils moins'], [7, 'La grille montre les règles'], [9, 'Le résultat est montré d\'abord'], [8, 'Suggestions puis « + » sur le widget']],
+  ['Facilité de combinaison', 'Réunir 2 à 4 widgets sans se tromper', [7, 'Claire, mais dans une grille à part'], [9, 'Sur le widget lui-même'], [9, 'Les cases disent ce qui tient'], [7, 'Faite par l\'app ; la changer demande d\'ajuster'], [9, '« + » sur le widget et taille proposée']],
+  ['Liberté de personnalisation', 'Accès aux réglages fins', [6, 'Réglages fins derrière un lien'], [10, 'Les 10 outils à un toucher'], [8, 'Outils dans le mode Style'], [5, 'Trois ambiances, le reste dans le Studio'], [9, 'Les 8 outils dans le chapitre Style']],
+  ['Accessibilité pour les débutants', 'Première création sans aide', [10, 'Impossible de se perdre'], [6, 'Beaucoup d\'outils d\'entrée'], [5, 'Grille vide intimidante'], [10, 'Aucune notion de widget à connaître'], [8, 'Suggestions et bulle d\'aide']],
+  ['Puissance pour les utilisateurs avancés', 'Aller vite quand on sait', [4, 'Étapes obligatoires'], [10, 'Accès direct à tout'], [8, 'Contrôle total de la place'], [4, 'Peu de contrôle'], [9, 'Les chapitres se sautent']],
+  ['Qualité de l\'expérience mobile', 'Une main, cibles de 44 points', [8, 'Grands boutons, pouce'], [7, 'Parties fines sur une petite scène'], [5, 'Glisser entre deux zones sur 6 pouces'], [9, 'Seulement des touchers'], [8, 'Touchers d\'abord, glisser en option']],
+  ['Cohérence avec Ardane', 'Cristal et C1 Atelier validés', [6, 'Remplace l\'Atelier par un assistant'], [10, 'C\'est le C1 Atelier'], [5, 'Nouveau modèle d\'écran'], [7, 'Le Studio passe au second plan'], [9, 'L\'Atelier reste le cœur']],
+  ['Potentiel de différenciation', 'Ce que les autres apps n\'ont pas', [4, 'Assistant classique'], [7, 'Agir sur l\'aperçu est rare'], [8, 'Original, mais exigeant'], [9, 'Part de tes vraies données'], [9, 'Suggestions vivantes + action directe']],
+];
+const TOUCH = ['9 touchers, 7 écrans', '4 touchers, 1 écran', '5 gestes, 2 écrans', '4 touchers, 3 écrans', '2 touchers par suggestion, 4 de zéro'];
+const cls = (n) => (n >= 9 ? 'a' : n >= 7 ? 'b' : n >= 5 ? 'm' : 'l');
+const REC = 4;
+let h = `<tr><th></th>${HEAD.map(([k, t], i) => `<th class="${i === REC ? 'rec' : ''}"><small>${k}${i === REC ? ' · conseillé' : ''}</small>${t}</th>`).join('')}</tr>`;
+ROWS.forEach(([c, s, ...v]) => { h += `<tr><td class="c">${c}<small>${s}</small></td>${v.map(([n, w], i) => `<td class="${i === REC ? 'rec' : ''}"><span class="n ${cls(n)}">${n}</span><span class="w">${/^__T/.test(w) ? TOUCH[i] : w}</span></td>`).join('')}</tr>`; });
+const tot = HEAD.map((_, i) => ROWS.reduce((a, r) => a + r[2 + i][0], 0));
+h += `<tr class="tot"><td>Total</td>${tot.map((t, i) => `<td class="${i === REC ? 'rec' : ''}"><b>${t}</b> <small>sur 100</small></td>`).join('')}</tr>`;
+document.getElementById('grid').innerHTML = h;
+
+const SHOTS = '../../../pub/rapports/design-2026-11-15-cristal/ecrans/';
+const CARDS = [
+  ['21-creation-guidee', 'Guidé, étape par étape', ['Personne ne se perd : une question à la fois', 'Les refus sont expliqués au bon moment', 'Cibles larges, tout au pouce'], ['Le plus long : toutes les étapes, même pour un besoin simple', 'Les habitués sont freinés', 'L\'Atelier validé passe derrière un lien'], 'Pour une première création. Chantier moyen.'],
+  ['22-creation-studio', 'Studio à aperçu permanent', ['On voit toujours le résultat', 'On agit sur le widget lui-même', 'Tous les réglages à un toucher', 'C\'est la suite directe du C1 Atelier'], ['Dix outils d\'entrée : rien ne dit par où commencer', 'Parties petites sur la scène en Grand', 'Aucune aide pour l\'idée de départ'], 'Pour ceux qui savent ce qu\'ils veulent. Gros chantier.'],
+  ['23-creation-blocs', 'Par blocs', ['La grille montre les règles sans texte', 'Déplacer et retirer sont naturels', 'Très original'], ['Glisser-déposer difficile sur un iPhone', 'Fait croire à une liberté qu\'iOS n\'offre pas (pas de bloc haut, pas de taille libre)', 'Le plus loin du design validé'], 'Pour les bricoleurs, plutôt sur iPad. Gros chantier.'],
+  ['24-creation-intention', 'Par intention', ['Le plus court et le plus clair', 'Part des vraies données de la personne', 'Aucun vocabulaire de widget à connaître'], ['Peu de liberté sans passer par le Studio', 'Une intention = un espace aujourd\'hui', 'Ne corrige pas le Studio, où le problème se trouve'], 'Pour débuter et pour aller vite. Chantier moyen.'],
+  ['25-creation-hybride', 'Hybride intelligent', ['Rapide par suggestion, complet par l\'Atelier', 'Un seul geste pour réunir : le « + » sur le widget', 'Ne retire jamais un widget en silence', 'Garde le C1 Atelier validé'], ['Deux entrées à garder cohérentes (Créer et Store)', 'Le plus gros chantier, à livrer en 4 lots', 'Moins guidé que le parcours 1 pour un tout premier usage'], 'Pour les débutants comme pour les habitués. Gros chantier.'],
+];
+document.getElementById('cards').innerHTML = CARDS.map(([f, t, p, m, who], i) => `<div class="cp-card${i === REC ? ' rec' : ''}"><img src="${SHOTS}${f}-04.png" alt=""><div class="k">Parcours ${i + 1}${i === REC ? ' · conseillé' : ''}</div><h5>${t}</h5>
+  <h6>Avantages</h6><ul class="p">${p.map((x) => `<li>${x}</li>`).join('')}</ul><h6>Inconvénients</h6><ul class="m">${m.map((x) => `<li>${x}</li>`).join('')}</ul><div class="who">${who}</div></div>`).join('');
+const q = new URLSearchParams(location.search);
+if (q.get('y')) { document.documentElement.style.overflow = 'hidden'; document.body.style.marginTop = (-q.get('y')) + 'px'; }   // rendu par bandes (render.py)
+</script>
+</body>
+</html>

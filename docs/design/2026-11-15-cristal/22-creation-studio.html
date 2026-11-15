@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — Parcours 2 · Studio avec aperçu permanent</title>
+<link rel="stylesheet" href="cristal.css">
+<link rel="stylesheet" href="creation.css">
+<style>
+  /* propre à cette planche : préfixe s2- */
+  .s2-pn .cr-part { min-height: 52px; margin-top: 6px; gap: 8px; }
+  .s2-pn .cr-part img { width: 34px; height: 34px; }
+  .s2-pn .cr-part.sel { box-shadow: inset 0 0 0 2px var(--primary); background: var(--tint); }
+  .s2-pn .cr-part .act { height: 44px; padding: 0 9px; border-radius: 22px; }
+  .s2-pn .cr-part .act.ic { width: 44px; padding: 0; }
+  .s2-pn .cr-part .tx b { font-size: 14px; }
+  .s2-seg { display: grid; gap: 8px; margin-top: 10px; }
+  .s2-opt { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 6px 12px; border-radius: 16px; background: var(--well); font-size: 14.5px; font-weight: 650; }
+  .s2-opt.on { background: var(--tint); box-shadow: inset 0 0 0 2px var(--primary); color: var(--primary); }
+  .s2-opt .cr-rdo { flex: none; }
+  .s2-opt small { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--ink2); }
+  .s2-th { text-align: center; }
+  .s2-th .v { display: grid; place-items: center; padding: 6px; border-radius: 14px; }
+  .s2-th.on .v { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
+  .s2-th b { display: block; margin-top: 8px; font-size: 12.5px; font-weight: 650; line-height: 15px; } .s2-th.on b { color: var(--primary); }
+  .s2-th .cr-cw { border: 1px solid rgba(11,18,32,.10); }
+  .s2-home .cr-grid { top: 120px; }
+  .s2-home .cr-search { display: none; }
+  .s2-top { position: absolute; z-index: 70; left: 14px; right: 14px; top: 56px; height: 48px; border-radius: 24px; display: flex; align-items: center; gap: 10px; padding: 0 5px;
+    background: rgba(255,255,255,.72); -webkit-backdrop-filter: blur(22px) saturate(1.5); backdrop-filter: blur(22px) saturate(1.5); box-shadow: 0 6px 18px rgba(20,24,40,.16), inset 0 0 0 1px rgba(255,255,255,.8); color: #0B1220; }
+  .s2-top .bk { width: 38px; height: 38px; border-radius: 19px; background: #fff; display: grid; place-items: center; font-size: 19px; --sw: 2.4; flex: none; }
+  .s2-top b { font-size: 15px; font-weight: 700; } .s2-top .st { margin-left: auto; margin-right: 12px; font-size: 12.5px; font-weight: 600; color: #3A4659; }
+  .s2-save { position: absolute; z-index: 70; left: 24px; right: 24px; bottom: 124px; height: 54px; border-radius: 27px; background: #0B1220; color: #fff; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 17px; font-weight: 700; box-shadow: 0 10px 26px rgba(11,18,32,.34); }
+  .s2-save i { font-size: 19px; --sw: 2.2; }
+  .s2-nm { height: 44px; border-radius: 14px; background: var(--well); display: flex; align-items: center; padding: 0 12px; font-size: 14px; font-weight: 600; margin-top: 8px; }
+  .note ol, .note ul { margin: 6px 0 0 18px; padding: 0; display: grid; gap: 3px; } .note li { font-size: 13px; line-height: 1.4; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">2</div><div><h1>Parcours 2 · Studio avec aperçu permanent</h1>
+    <p>Un seul écran, jamais de page ni de feuille : le widget reste en scène en haut et on agit sur lui-même. En Moyen ou en Grand, la scène montre les emplacements : une partie posée, un emplacement vide « + Ajouter ». Toucher un emplacement vide ouvre le choix dans le panneau du bas ; toucher une partie la sélectionne. Exemple : Fitness, « Prochaine série » + « Régularité » en Moyen, puis « Séance du jour » en Grand.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Écran de départ</div>
+      <div class="phone t-saphir" id="p1" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Un widget est déjà prêt</h4><p>L'onglet Créer s'ouvre sur le Studio. Outil Taille ouvert, « Prochaine série » en petit.</p>
+        <ul><li><span class="tag e">Existe</span><span>Scène, rangée d'outils, Taille, « Enregistrer le widget »</span></li>
+        <li><span class="tag a">À adapter</span><span>Arrivée directe dans le Studio avec un widget proposé</span></li>
+        <li><span class="tag e">Geste</span><span><b>1 toucher</b> (onglet Créer), puis Moyen</span></li></ul></div><span class="flow"></span></div>
+    <div class="col"><div class="nm">2 · Premier choix</div>
+      <div class="phone t-saphir" id="p2" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Moyen : l'emplacement apparaît dans le widget</h4><p>La scène passe au cadre moyen : la partie 1 et un emplacement vide. Le panneau reste sur Taille.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les 3 tailles, la phrase « Plus d'informations… », la règle 2 au plus</span></li>
+        <li><span class="tag d">À développer</span><span>Emplacement vide dessiné et touchable dans la scène</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Moyen)</span></li></ul></div><span class="flow"></span></div>
+    <div class="col"><div class="nm">3 · Choix des éléments</div>
+      <div class="phone t-saphir" id="p3" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Le choix s'ouvre dans le panneau</h4><p>La scène reste visible, l'emplacement entouré. Seuls les widgets du même espace sont proposés.</p>
+        <ul><li><span class="tag e">Existe</span><span>Grille 3 colonnes, cadenas Premium, règle « même espace »</span></li>
+        <li><span class="tag a">À adapter</span><span>Grille dans le panneau, pas dans une page du constructeur</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (emplacement), <b>+1</b> (Régularité)</span></li></ul></div><span class="flow"></span></div>
+    <div class="col"><div class="nm">4 · Combinaison</div>
+      <div class="phone t-saphir" id="p4" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Les 2 widgets sont réunis</h4><p>La nouvelle partie est entourée. Le panneau liste les parties : « Remplacer » ou retirer. Annuler est actif.</p>
+        <ul><li><span class="tag e">Existe</span><span>Composition, nom par défaut, annuler / rétablir</span></li>
+        <li><span class="tag a">À adapter</span><span>Liste des parties dans le panneau du Studio</span></li>
+        <li><span class="tag e">Geste</span><span><b>+0 toucher</b> (le choix est fait)</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Organisation</div>
+      <div class="phone t-saphir" id="p5" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Grand : on déplace une partie</h4><p>Appui long sur une partie, glisser vers sa nouvelle place. Les schémas de disposition et la liste à poignées font la même chose.</p>
+        <ul><li><span class="tag e">Existe</span><span>Grand = 2 lignes, 1 moyen ou 2 petits par ligne, 4 au plus</span></li>
+        <li><span class="tag d">À développer</span><span>Glisser sur la scène, schémas de disposition, liste à poignées</span></li>
+        <li><span class="tag e">Geste</span><span><b>facultatif</b> : 1 appui long + glisser</span></li></ul></div><span class="flow"></span></div>
+    <div class="col"><div class="nm">6 · Personnalisation</div>
+      <div class="phone t-saphir" id="p6" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Un style pour tout le widget</h4><p>Thème, Style, Couleurs, Fond, Bordure, Densité valent pour l'ensemble. Le contenu se règle partie par partie.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les 10 outils, un seul style par widget</span></li>
+        <li><span class="tag a">À adapter</span><span>Vignettes de thème combinées (couleurs approchées ici) ; toucher une partie ouvre Contenu</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (Thème, une vignette)</span></li></ul></div><span class="flow"></span></div>
+    <div class="col"><div class="nm">7 · Aperçu sur l'écran d'accueil</div>
+      <div class="phone cr-hs t-saphir s2-home" id="p7" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Le widget Grand, à l'échelle</h4><p>Le bouton œil montre le widget parmi les icônes, à sa vraie taille. Retour au Studio d'un toucher.</p>
+        <ul><li><span class="tag d">À développer</span><span>Aperçu « Sur mon écran » pour Moyen et Grand, avec « Enregistrer le widget »</span></li>
+        <li><span class="tag e">Geste</span><span><b>facultatif</b> : 1 toucher (œil)</span></li></ul></div><span class="flow"></span></div>
+    <div class="col"><div class="nm">8 · Enregistrement</div>
+      <div class="phone t-saphir" id="p8" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Une fin honnête</h4><p>« Ajouter un widget » avec les étapes de la taille Grand. Dans Mes widgets, « Modifier » rouvre ce même Studio.</p>
+        <ul><li><span class="tag e">Existe</span><span>Feuille, « Enregistré dans Mes widgets », segmenté, étapes, « Compris »</span></li>
+        <li><span class="tag a">À adapter</span><span>Montrée après chaque enregistrement ; phrase « iOS ne laisse aucune app… »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Enregistrer), <b>+1</b> (Compris)</span></li></ul></div></div>
+  </div>
+
+  <div class="row" style="margin-top:34px">
+    <div class="col"><div class="nm">Le principe</div><div class="note" style="margin:9px">
+      <h4>On agit sur le widget lui-même</h4>
+      <p>Pour qui : celui ou celle qui veut voir ce qu'il fait. Le widget est toujours en haut, jamais caché par une page ou une feuille. Un emplacement vide « + Ajouter » est l'invitation à réunir un deuxième widget ; une partie touchée est entourée et ses réglages s'ouvrent dessous. Une seule fenêtre de travail, de la création à l'enregistrement.</p>
+      <p>Le Studio de la planche 8 est gardé tel quel : rangée d'outils, panneau, « Enregistrer le widget » à portée du pouce, barre d'onglets visible.</p></div></div>
+    <div class="col"><div class="nm">Combiner, en clair</div><div class="note" style="margin:9px">
+      <h4>4 touchers jusqu'au widget enregistré</h4>
+      <ol><li>« Moyen » dans Taille</li><li>L'emplacement « + Ajouter » sur la scène</li><li>« Régularité » dans la grille</li><li>« Enregistrer le widget »</li></ol>
+      <p style="margin-top:8px">Total : <b>4 touchers</b> depuis l'onglet Créer, déjà ouvert sur le Studio (5 avec le toucher de l'onglet). « Compris » dans le guide d'ajout : 1 de plus. Le choix « 2 widgets réunis » est déjà sélectionné ; sinon : +1.</p></div></div>
+    <div class="col"><div class="nm">Où vit chaque fonction existante</div><div class="note" style="margin:9px">
+      <h4>Rien n'est supprimé</h4>
+      <ul><li><b>Tailles</b> et <b>écran verrouillé</b> (Rond, Rectangle, En ligne, 1 seul widget) : outil Taille.</li><li><b>Espaces</b> : la grille d'ajout ne montre que celui du widget ; « Changer de widget » ouvre les 12 espaces.</li><li><b>Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles</b> : rangée d'outils, pour tout le widget.</li><li><b>Options de contenu</b> : Contenu, par partie.</li><li><b>Premium</b> : cadenas sur la partie, pied « Débloquer et enregistrer ».</li><li><b>Enregistrer, Modifier, Supprimer</b> : Mes widgets ; « Modifier » rouvre le Studio.</li><li><b>Photos et citations</b> : son éditeur propre, inchangé.</li></ul></div></div>
+    <div class="col"><div class="nm">Limites dites clairement</div><div class="note" style="margin:9px">
+      <h4>Chantier : gros</h4>
+      <p>Sur un iPhone la scène est petite : les parties d'un widget Grand font environ 90 points, et le glisser demande de la précision. D'où la liste à poignées en double dans le panneau.</p>
+      <p>Même espace seulement aujourd'hui (limite de l'app, pas d'iOS). iOS ne laisse aucune app poser le widget : le guide reste nécessaire.</p>
+      <p>À développer : zones tactiles par partie sur l'aperçu, glisser, structure modifiable après enregistrement, « Sur mon écran » pour Moyen et Grand.</p></div></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script src="creation.js"></script>
+<script>
+const I = CR.ico;
+const $ = (id) => document.getElementById(id);
+const FAB = '<div class="fab">Enregistrer le widget</div>';
+const studio = (id, o) => { $(id).innerHTML = `<div class="scr s2-pn">${CR.head('Créer', { undo: o.undo })}${o.stage}${CR.tools(o.on, 0)}${CR.panel(o.h, o.panel)}</div>${FAB}${o.extra || ''}`; };
+const opt = (t, on, s) => `<div class="s2-opt${on ? ' on' : ''}"><span class="cr-rdo${on ? ' on' : ''}">${on ? I('check') : ''}</span>${t}${s ? `<small>${s}</small>` : ''}</div>`;
+const act = '<span class="act">Remplacer</span><span class="act ic" aria-label="Retirer">' + I('x') + '</span>';
+const TRI = ['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'];
+
+/* 1 */
+studio('p1', { on: 0, h: 262, stage: CR.stage(CR.w('nextSet-s-light', 130)),
+  panel: CR.hd('Taille', 'Prochaine série · Fitness') + CR.sizes(0) + CR.lockSizes(-1) });
+$('p1').insertAdjacentHTML('beforeend', CR.tap(196, 478) + CR.tip(1, 'Touche « Moyen »', 205, 536));
+
+/* 2 */
+studio('p2', { on: 0, h: 274, stage: CR.stage(CR.combo(['nextSet-s', null], { w: 290, sel: 1 }), { h: 240, mt: -90 }),
+  panel: CR.hd('Taille', 'Prochaine série · Fitness') + CR.sizes(1)
+    + `<div class="s2-seg">${opt('1 widget en moyen', 0)}${opt('2 widgets réunis', 1, 'Combiné · 2 widgets')}</div>`
+    + '<div class="cr-note">Plus d\'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.</div>' });
+$('p2').insertAdjacentHTML('beforeend', CR.tap(269, 183) + CR.tip(1, 'Touche « + Ajouter »', 186, 259));
+
+/* 3 */
+studio('p3', { on: 0, h: 298, stage: CR.stage(CR.combo(['nextSet-s', null], { w: 224, sel: 1 }), { h: 200, mt: -40 }),
+  panel: CR.hd('Ajouter à côté de Prochaine série')
+    + '<div class="cr-why" style="margin-top:8px">' + I('info') + '<span>Un widget réunit des infos du même espace : ici, Fitness.</span></div>'
+    + '<div class="cr-g3">' + CR.tile('trainingStreak-s-light') + CR.ph('list', 'Séance du jour') + CR.tile('restTimer-s-light', { lock: 1, hand: 1 })
+    + CR.ph('bars', 'Volume de la semaine', { lock: 1 }) + CR.ph('trophy', 'Records', { lock: 1, off: 1, sub: 'Pas en petit' }) + CR.ph('calendar', 'Mois d\'entraînement', { lock: 1, off: 1, sub: 'Pas en petit' }) + '</div>' });
+$('p3').insertAdjacentHTML('beforeend', CR.tap(86, 556));
+
+/* 4 */
+studio('p4', { on: 0, undo: 1, h: 300, stage: CR.stage(CR.combo(['nextSet-s', 'trainingStreak-s'], { w: 260, sel: 1 }), { h: 200, mt: -34 }),
+  panel: CR.hd('Dans ce widget', '2 sur 2') + CR.part('nextSet-s-light', { right: act })
+    + CR.part('trainingStreak-s-light', { right: act }).replace('cr-part', 'cr-part sel')
+    + '<div class="cr-ok" style="margin-top:10px">' + I('checkc') + '<span>2 widgets réunis côte à côte</span></div>'
+    + '<div class="cr-why" style="margin-top:8px">' + I('info') + '<span>Pour en réunir jusqu\'à 4 : passe en Grand.</span></div>'
+    + '<div class="s2-nm"><span style="color:var(--ink2);margin-right:8px">Nom</span>Prochaine série + Régularité</div>' });
+
+/* 5 */
+studio('p5', { on: 0, h: 292, stage: CR.stage(CR.combo(TRI, { w: 190 }), { h: 222, left: '', right: '', mt: 0 }),
+  panel: CR.hd('Disposition', 'Grand · 3 sur 4')
+    + '<div class="cr-g2" style="margin-top:8px">' + CR.layout([[1], [2, 3]], { on: 1, t: 'Séance en haut' }) + CR.layout([[2, 3], [1]], { t: 'Séance en bas' }) + '</div>'
+    + '<div class="cr-note" style="margin-top:8px">Une ligne = 1 widget large ou 2 petits.</div>'
+    + CR.part('todaysWorkout-m-light', { grip: 1, n: 1, t: 'Séance du jour' }) + CR.part('nextSet-s-light', { grip: 1, n: 2 }) + CR.part('trainingStreak-s-light', { grip: 1, n: 3 }) });
+$('p5').insertAdjacentHTML('beforeend', CR.lift('todaysWorkout-m-light', 214, 246, 120) + CR.arrow(150, 160, 150, 270, { pri: 1, bend: -40 }) + CR.tip(1, 'Appui long, puis glisse', 220, 112));
+
+/* 6 */
+const th = (t, o, on) => `<div class="s2-th${on ? ' on' : ''}"><div class="v">${CR.combo(TRI, Object.assign({ w: 92, cls: 'flat' }, o))}</div><b>${t}</b></div>`;
+studio('p6', { on: 2, h: 262, stage: CR.stage(CR.combo(TRI, { w: 190, sel: 2 }), { h: 262, left: '', right: '', mt: -16 }),
+  panel: CR.hd('Thème', 'Pour tout le widget')
+    + '<div class="cr-g3" style="margin-top:12px">' + th('Clair', {}, 1) + th('Sombre', { dark: 1 }) + th('Bleu', { hue: 58 }) + '</div>'
+    + '<div class="cr-note" style="margin-top:12px">Le style est commun à tout le widget. Touche une partie pour régler son contenu.</div>' });
+$('p6').insertAdjacentHTML('beforeend', CR.tap(243, 273) + CR.tip(1, 'Touche une partie pour régler son contenu', 52, 336, { w: 320 }));
+
+/* 7 */
+$('p7').innerHTML = CR.home({ fmt: 'l', ring: 1, widget: CR.combo(TRI, { w: 338, cls: 'flat' }),
+  extra: `<div class="s2-top"><span class="bk" aria-label="Retour au Studio">${I('chevl')}</span><b>Sur mon écran</b><span class="st">Grand · 3 widgets</span></div>
+    <div class="s2-save">${I('check')}Enregistrer le widget</div>` });
+
+/* 8 */
+(() => {
+  const s = (n, t) => `<div class="step" style="padding:8px 0;font-size:13.5px;line-height:1.34"><span class="n" style="width:26px;height:26px;border-radius:13px">${n}</span><span>${t}</span></div>`;
+  $('p8').innerHTML = `<div class="scr">${CR.head('Créer', {})}${CR.stage(CR.combo(TRI, { w: 190 }), { h: 222, left: '', right: '', mt: 0 })}</div><div class="dim"></div>
+  <div class="sheet" style="top:56px;padding:8px 20px 0">
+    <div class="grab" style="margin-bottom:4px"></div>
+    <div class="nv" style="height:38px;margin-top:0"><span class="sp"></span><span class="t">Ajouter un widget</span><span class="sp"></span></div>
+    <div style="display:flex;gap:14px;align-items:center;margin-top:2px"><div style="flex:none">${CR.combo(TRI, { w: 66, cls: 'flat' })}</div>
+      <div><div class="h2" style="font-size:17px;line-height:1.2">Séance du jour + Prochaine série + Régularité</div><span class="okl" style="margin-top:3px;font-size:13.5px">${I('check')}Enregistré dans Mes widgets</span></div></div>
+    <div class="seg" style="margin-top:10px"><span class="on">Écran d'accueil</span><span>Écran verrouillé</span></div>
+    <div style="margin-top:2px">
+      ${s(1, 'Appuie longuement sur un espace vide de l\'écran d\'accueil')}
+      ${s(2, 'Touche « Modifier » en haut, puis « Ajouter un widget »')}
+      ${s(3, 'Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu\'à la taille Grand : ton widget y est')}
+      ${s(4, 'Ajoute-le : il garde ce widget, même quand tu en crées d\'autres')}
+    </div>
+    <div class="s" style="margin:4px 2px 8px;font-size:13px;line-height:1.38">Dans Mes widgets, « Modifier » rouvre ce même Studio : tu peux encore ajouter, retirer ou déplacer une partie.</div>
+    <div class="info" style="padding:9px 14px">${I('info')}<span>iOS ne laisse aucune app poser un widget à ta place.</span></div>
+    <div class="btnP lg" style="margin-top:12px">Compris</div>
+  </div>`;
+})();
+Cristal.init();
+</script>
+</body>
+</html>

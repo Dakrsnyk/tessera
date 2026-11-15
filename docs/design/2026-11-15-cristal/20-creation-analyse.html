@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Création de widgets — Analyse : pourquoi la combinaison échoue aujourd'hui</title>
+<link rel="stylesheet" href="cristal.css">
+<link rel="stylesheet" href="creation.css">
+<style>
+  /* propre à cette planche : préfixe an- */
+  .an-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .an-comb { margin-top: 12px; }
+  .an-comb .l { font-size: 14px; margin-top: 8px; }
+  .an-btnB { display: inline-flex; align-items: center; gap: 7px; height: 36px; padding: 0 14px; border-radius: 18px; background: var(--well); color: var(--primary); font-size: 14px; font-weight: 650; margin-top: 8px; }
+  .an-btnB i { font-size: 16px; }
+  .an-hdr { display: flex; gap: 12px; align-items: center; margin-top: 4px; }
+  .an-hdr .ico { width: 42px; height: 42px; font-size: 19px; flex: none; }
+  .an-hdr b { font-size: 20px; font-weight: 650; display: block; }
+  .an-prev { height: 132px; border-radius: 22px; background: var(--well2); display: grid; place-items: center; margin-top: 12px; position: relative; }
+  .an-prev.err { border: 1.5px dashed var(--rule2); background: transparent; padding: 0 22px; text-align: center; font-size: 13.5px; line-height: 1.4; color: var(--ink2); }
+  .an-bar { position: absolute; left: 0; right: 0; bottom: 0; padding: 10px 20px 34px; background: var(--sheet); border-top: 1px solid var(--rule); z-index: 3; }
+  .an-bar .btnP.off { opacity: .38; }
+  .an-pick { display: flex; align-items: center; gap: 8px; height: 44px; border-radius: 22px; padding: 4px; margin-top: 10px; }
+  .an-pick .t { height: 36px; min-width: 36px; padding: 0 12px; border-radius: 18px; display: grid; place-items: center; font-size: 14px; font-weight: 700; color: var(--ink2); }
+  .an-pick .t.on { background: var(--primary); color: #fff; }
+  .an-pick .sp { flex: 1; }
+  .an-pick .same { font-size: 13.5px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; padding-right: 6px; }
+  .an-x { position: absolute; z-index: 61; width: 30px; height: 30px; border-radius: 15px; background: #C0392B; color: #fff; display: grid; place-items: center; font-size: 17px; --sw: 3; box-shadow: 0 0 0 2.5px #fff, 0 4px 10px rgba(11,18,32,.3); }
+  .cr-tip.bad { background: #8E1F14; }
+  .an-wide { width: 100%; }
+  .an-t { border-collapse: collapse; width: 100%; font: 400 13px/1.4 Inter, sans-serif; }
+  .an-t th { text-align: left; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: #5B6577; padding: 0 10px 8px; }
+  .an-t td { vertical-align: top; padding: 9px 10px; border-top: 1px solid #E3E7EE; }
+  .an-t td:first-child { font-weight: 800; width: 34px; }
+  .an-t td b { font-weight: 700; }
+  .an-f { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; padding: 2px 7px; border-radius: 5px; white-space: nowrap; }
+  .an-f.i { background: #E4ECFB; color: #1F3F8F; }   /* interface */
+  .an-f.s { background: #FBEFD9; color: #774A00; }   /* logique de sélection */
+  .an-f.c { background: #ECE7FA; color: #4A2F9A; }   /* composition */
+  .an-f.m { background: #FDE3DF; color: #8E1F14; }   /* enregistrement et modification */
+  .an-f.l { background: #E7EBF0; color: #35435A; }   /* limite */
+  .an-g { display: inline-block; min-width: 62px; text-align: center; font-size: 10.5px; font-weight: 700; text-transform: uppercase; padding: 2px 7px; border-radius: 5px; }
+  .an-g.h { background: #C0392B; color: #fff; } .an-g.m { background: #F2A33A; color: #3B2600; } .an-g.b { background: #E7EBF0; color: #35435A; }
+  .an-lays { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; --well: #F1F4F9; --rule2: #C4CCD9; --ink2: #5B6577; --primary: #2F5BEA; --tint: #E8EEFD; }
+  .an-two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+  .an-two h5 { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: #5B6577; margin: 4px 0 4px; }
+  .note ul { margin: 4px 0 0 16px; padding: 0; display: grid; gap: 3px; }
+  .an-proof { display: grid; grid-template-columns: 300px 300px 1fr; gap: 26px; align-items: start; margin-top: 10px; }
+  .an-proof figure { margin: 0; }
+  .an-proof img { display: block; width: 300px; border-radius: 30px; border: 1px solid #D5DDE8; box-shadow: 0 10px 26px rgba(11,18,32,.14); }
+  .an-proof figcaption { font-size: 12.5px; line-height: 1.4; color: #35435A; margin-top: 10px; }
+  .an-proof figcaption b { display: block; font-size: 13.5px; color: #101828; }
+  .an-fail { border-radius: 14px; background: #FDF0EE; border: 1px solid #F3C9C3; padding: 14px 16px; }
+  .an-fail h5 { font-size: 15px; font-weight: 800; color: #8E1F14; margin-bottom: 4px; }
+  .an-fail code { font: 600 12px Consolas, monospace; color: #8E1F14; }
+  .note code { font: 600 12px Consolas, monospace; color: #35435A; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">A</div><div><h1>Analyse · Pourquoi la combinaison échoue aujourd'hui</h1>
+    <p>Relevé dans le code de la version livrée (Build 411). Le moteur de combinaison fonctionne ; c'est le chemin pour y arriver qui trompe. Le bouton le plus visible, « Changer de widget », ne sait pas réunir : il fabrique des widgets séparés, puis fait disparaître le bouton « Réunir ». Les quatre écrans ci-dessous reconstituent ce piège, dans l'ordre.</p></div>
+    <span class="badge">Reconstitution de l'app actuelle · Build 411</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Aujourd'hui : l'outil Taille</div>
+      <div class="phone t-saphir" id="a1" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Le bon bouton est caché</h4><p>« Réunir avec un autre widget » est tout en bas de l'outil Taille, sous le bouton d'enregistrement : il faut faire défiler pour le trouver. Le bouton qui saute aux yeux est « Changer de widget ».</p>
+        <ul><li><span class="tag a">Interface</span><span>Bouton utile sous la ligne de flottaison ; le texte d'aide dit « Choisis-en plusieurs » alors qu'on ne peut rien choisir ici</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">2 · « Changer de widget »</div>
+      <div class="phone t-saphir" id="a2" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>On croit réunir, on fabrique 2 widgets</h4><p>Cette feuille n'a pas de choix de taille : elle reste en Petit. Choisir 2 widgets donne « Personnaliser les 2 widgets », soit deux petits widgets séparés. Rien ne le dit au moment du choix.</p>
+        <ul><li><span class="tag a">Sélection</span><span>La même grille sert à deux usages (plusieurs widgets, ou un widget réuni) sans que l'écran dise lequel</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">3 · Retour dans le Studio</div>
+      <div class="phone t-saphir" id="a3" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>« Réunir » a disparu</h4><p>Avec 2 widgets ouverts, le Studio retire le bloc « Combiner » (il n'apparaît que pour un seul widget). Le pied dit « Enregistrer les 2 widgets ». À ce stade, il n'existe plus aucun moyen de les réunir sans tout recommencer.</p>
+        <ul><li><span class="tag d">Cause nº 1</span><span><code>canCombine</code> exige un seul widget (<code>EditorView.swift</code>, l. 216) ; la feuille est ouverte sans mode « réunir » (<code>SpacesView.swift</code>, l. 76)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">4 · Le vrai chemin, quand on le trouve</div>
+      <div class="phone t-saphir" id="a4" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Des refus sans explication utile</h4><p>Par Taille puis « Réunir », la feuille s'appelle « Crée ton widget » : ni « Réunir », ni le widget de départ. En Moyen, un 3e choix retire le premier sans prévenir. En Grand avec 2 petits widgets : bouton grisé.</p>
+        <ul><li><span class="tag a">Sélection</span><span>Le segment « Petit » reste proposé et renvoie des widgets séparés ; un widget sans petit format efface la sélection</span></li></ul></div></div>
+  </div>
+
+  <div class="row" style="margin-top:34px">
+    <div class="col"><div class="nm">Le diagnostic</div><div class="note" style="margin:9px">
+      <h4>D'où vient le problème</h4>
+      <p><b>1. Interface (cause principale).</b> Deux boutons mènent à la même grille de widgets, mais un seul sait réunir, et c'est le moins visible.</p>
+      <p><b>2. Logique de sélection.</b> Quand un choix ne tient pas, la grille retire ou remplace un widget en silence au lieu d'expliquer.</p>
+      <p><b>3. Composition.</b> L'ordre et la place de chaque widget sont décidés par l'app, sans réglage.</p>
+      <p><b>4. Modification.</b> Une fois enregistré, un widget réuni garde sa structure pour toujours : on ne peut plus ajouter, retirer ni déplacer une partie.</p>
+      <p><b>5. Limites.</b> Certaines sont celles d'iOS, d'autres seulement celles d'Ardane (case de droite).</p>
+      <p style="margin-top:8px"><b>Confirmé par la CI :</b> le premier test automatique de « Réunir » a échoué (preuves plus bas). <b>Non vérifié :</b> je ne sais pas lequel de ces chemins tu as pris sur ton iPhone.</p></div></div>
+
+    <div class="col"><div class="nm">Les règles réelles</div><div class="note" style="margin:9px">
+      <h4>Ce que le moteur sait dessiner</h4>
+      <p>Une ligne = 1 widget large (moyen) ou 2 petits. Moyen = 1 ligne. Grand = 2 lignes.</p>
+      <div class="an-lays" id="lays"></div>
+      <p style="margin-top:10px">Petit et écran verrouillé : 1 seul widget. 2 au plus en Moyen, 4 au plus en Grand. Un seul style pour tout le widget ; le contenu se règle par partie. Une partie Premium rend le widget Premium. Un widget réuni compte pour 1 dans la limite gratuite de 3.</p></div></div>
+
+    <div class="col"><div class="nm">Limites : iOS ou Ardane ?</div><div class="note" style="margin:9px">
+      <h4>Rien n'est caché</h4>
+      <div class="an-two">
+        <div><h5>iOS (on ne peut pas)</h5><ul>
+          <li>3 tailles fixes, pas de taille libre</li><li>Pas de défilement ni de geste dans un widget : seulement des boutons</li><li>Aucune app ne pose un widget à ta place</li><li>Écran verrouillé : minuscule, une seule teinte, donc 1 widget</li></ul></div>
+        <div><h5>Ardane (on peut changer)</h5><ul>
+          <li>Même espace seulement (pas Nutrition + Fitness)</li><li>Lignes seulement, 4 parties au plus</li><li>Structure figée après enregistrement</li><li>Un toucher ouvre l'espace de la 1re partie seulement</li><li>Horloge, Calendrier, Note… jamais dans « Réunir »</li></ul></div>
+      </div></div></div>
+
+    <div class="col"><div class="nm">Ce qui marche déjà</div><div class="note" style="margin:9px">
+      <h4>À garder en phase 2</h4>
+      <ul>
+        <li>Le rendu d'un widget réuni : chaque partie est dessinée comme seule, séparée par un filet.</li>
+        <li>Les règles de tailles (<code>Composer</code>, <code>ComboLayout</code>), pures et testées.</li>
+        <li>Les compositions de départ par espace (<code>SpaceCatalog.preset</code>) et les combinés du Store (une soixantaine).</li>
+        <li>La fusion dans Mes widgets (Sélectionner, puis Fusionner), qui garde les réglages de chaque widget.</li>
+        <li>Les réglages par partie dans Contenu (« Widgets réunis »).</li>
+        <li>Les boutons interactifs gardés dans chaque partie.</li>
+      </ul></div></div>
+  </div>
+
+  <div class="row" style="margin-top:30px"><div class="note an-wide" style="margin:0 9px">
+    <h4>Les preuves : captures réelles et test automatique (CI, Build 412, même code que le Build 411)</h4>
+    <div class="an-proof">
+      <figure><img src="../../../pub/rapports/design-2026-11-15-cristal/ci-412/creer-taille.jpg" alt=""><figcaption><b>Capture réelle · Créer, outil Taille</b>Le bloc « Combiner » commence sous le bouton « Enregistrer le widget » : « Réunir avec un autre widget » n'est pas visible sans défiler.</figcaption></figure>
+      <figure><img src="../../../pub/rapports/design-2026-11-15-cristal/ci-412/reunir-feuille.jpg" alt=""><figcaption><b>Capture réelle · la feuille de choix (Fitness)</b>Titre « Crée ton widget », segment « Petit » proposé, et la grille des widgets arrive en partie cachée derrière le bouton du bas.</figcaption></figure>
+      <div><div class="an-fail"><h5>Le test automatique de « Réunir » échoue</h5>
+        <p><code>testCreateCombinesWidgetsFromTheSizeSection</code> : « Le widget ajouté n'est pas dans le widget combiné ».</p>
+        <p style="margin-top:6px">Le test fait le chemin prévu : Créer, Moyen, « Réunir avec un autre widget », un 2e widget, « Personnaliser le widget ». À l'arrivée, le Studio contient <b>un seul widget</b> (« Séance du jour » en moyen), pas un widget réuni.</p></div>
+        <p style="margin-top:12px"><b>Deux explications possibles</b>, que je n'ai pas encore départagées : le toucher sur le 2e widget tombe sur la barre du bas, car la grille s'ouvre à moitié cachée derrière elle ; ou bien le 2e choix n'est pas pris en compte par la feuille. À la lecture, la logique paraît juste : je penche pour la première. Dans les deux cas l'écran est en cause, et c'est le premier point à régler en phase 2.</p>
+        <p style="margin-top:8px">Les 6 autres tests du Studio passent, dont l'ouverture de Créer, le changement de widget, l'enregistrement avec le guide d'ajout et le réglage de chaque partie d'un widget déjà réuni.</p></div>
+    </div>
+  </div></div>
+
+  <div class="row" style="margin-top:30px"><div class="note an-wide" style="margin:0 9px">
+    <h4>Les défauts relevés, classés</h4>
+    <table class="an-t">
+      <tr><th>Nº</th><th>Défaut</th><th>Famille</th><th>Gravité</th><th>Correction prévue en phase 2</th></tr>
+      <tr><td>1</td><td><b>2 widgets choisis par « Changer de widget » = 2 widgets séparés</b>, et « Réunir » disparaît.</td><td><span class="an-f i">Interface</span></td><td><span class="an-g h">Forte</span></td><td>Un seul chemin pour ajouter un widget : l'emplacement « + » du widget lui-même. « Réunir » reste proposé avec plusieurs widgets ouverts.</td></tr>
+      <tr><td>2</td><td>« Réunir avec un autre widget » est sous le bouton d'enregistrement.</td><td><span class="an-f i">Interface</span></td><td><span class="an-g h">Forte</span></td><td>La combinaison se fait sur l'aperçu, toujours visible.</td></tr>
+      <tr><td>3</td><td>Rouvrir « Réunir » sur un widget déjà réuni <b>efface les réglages</b> de chaque partie (nom, options).</td><td><span class="an-f m">Modification</span></td><td><span class="an-g h">Forte</span></td><td>Bug certain : garder les parties existantes quand leur widget est conservé.</td></tr>
+      <tr><td>4</td><td>En Moyen, un 3e choix <b>retire le premier</b> sans prévenir.</td><td><span class="an-f s">Sélection</span></td><td><span class="an-g h">Forte</span></td><td>Refuser avec la raison, et proposer « Passer en Grand ».</td></tr>
+      <tr><td>5</td><td>Un widget enregistré ne peut plus <b>ajouter, retirer ni déplacer</b> une partie.</td><td><span class="an-f m">Modification</span></td><td><span class="an-g h">Forte</span></td><td>Structure modifiable dans le Studio, avant et après l'enregistrement.</td></tr>
+      <tr><td>6</td><td>Le segment « Petit » dans « Réunir » renvoie des widgets séparés.</td><td><span class="an-f s">Sélection</span></td><td><span class="an-g m">Moyenne</span></td><td>Ne proposer que Moyen et Grand quand on réunit.</td></tr>
+      <tr><td>7</td><td>Un widget sans petit format remplace toute la sélection ; en Grand, 2 petits widgets = bouton grisé.</td><td><span class="an-f s">Sélection</span></td><td><span class="an-g m">Moyenne</span></td><td>Changer de taille tout seul en gardant la sélection, en le disant.</td></tr>
+      <tr><td>8</td><td>L'ordre et le widget « ligne entière » sont choisis par l'app ; les numéros 1-2-3 ne suivent pas l'ordre affiché.</td><td><span class="an-f c">Composition</span></td><td><span class="an-g m">Moyenne</span></td><td>Dispositions proposées + déplacement.</td></tr>
+      <tr><td>9</td><td>La feuille « Réunir » s'appelle « Crée ton widget » et son aperçu n'a pas le style du Studio.</td><td><span class="an-f i">Interface</span></td><td><span class="an-g m">Moyenne</span></td><td>Plus de feuille : le choix se fait sous l'aperçu réel.</td></tr>
+      <tr><td>10</td><td>Fusion impossible dans Mes widgets : le bouton n'apparaît pas, sans raison donnée.</td><td><span class="an-f i">Interface</span></td><td><span class="an-g m">Moyenne</span></td><td>Dire pourquoi : autre espace, widget Grand, doublon, demi-ligne vide.</td></tr>
+      <tr><td>11</td><td>Widget choisi pour l'écran verrouillé : le Studio montre un Petit d'accueil, et « Réunir » le transforme en Moyen.</td><td><span class="an-f s">Sélection</span></td><td><span class="an-g m">Moyenne</span></td><td>Ouvrir sur la forme verrouillée ; pas de « Réunir » pour l'écran verrouillé.</td></tr>
+      <tr><td>12</td><td>Pas de mélange d'espaces ; les widgets hors espace (Horloge, Calendrier, Note, À venir…) ne se réunissent que par le Store ou la fusion.</td><td><span class="an-f l">Limite Ardane</span></td><td><span class="an-g m">Moyenne</span></td><td>À décider : lever la règle « même espace » (faisable, chantier moyen).</td></tr>
+      <tr><td>13</td><td>Toucher un widget réuni sur l'écran d'accueil ouvre l'espace de la 1re partie seulement.</td><td><span class="an-f l">Limite Ardane</span></td><td><span class="an-g b">Faible</span></td><td>Un lien par partie en Moyen et en Grand.</td></tr>
+      <tr><td>14</td><td>Sur un compte gratuit, presque tout 2e widget est Premium et le cadenas est minuscule (9 points).</td><td><span class="an-f i">Interface</span></td><td><span class="an-g b">Faible</span></td><td>Cadenas lisible et annonce avant le choix, pas à l'enregistrement.</td></tr>
+      <tr><td>15</td><td>À l'ouverture de « Réunir », la grille des widgets est en partie cachée derrière le bouton du bas (cause probable de l'échec du test automatique).</td><td><span class="an-f i">Interface</span></td><td><span class="an-g h">Forte</span></td><td>Le choix se fait dans le panneau, sous l'aperçu ; plus de feuille ni de barre par-dessus.</td></tr>
+    </table>
+  </div></div>
+</main>
+<script src="cristal.js"></script>
+<script src="creation.js"></script>
+<script>
+const ic = CR.ico;
+const chip = (t, on, lk) => `<span class="chip${on ? ' on' : ''}">${lk ? ic('lock') : ''}${t}</span>`;
+const combiner = (lines) => `<div class="an-comb"><div class="h3">Combiner</div>${lines.map((l, k) => `<div class="l">${k + 1} · ${l}</div>`).join('')}<span class="an-btnB">${ic('copy')}Réunir avec un autre widget</span></div>`;
+
+/* 1 · Studio actuel, outil Taille : le bouton Réunir est sous la ligne de flottaison */
+document.getElementById('a1').innerHTML = `<div class="scr">${CR.head('Créer')}${CR.stage(CR.w('nextSet-s-light', 130))}${CR.tools(0)}
+  ${CR.panel(240, CR.hd('Taille') + `<div class="an-chips">${chip('Petit', 1)}${chip('Moyen')}${chip('Rectangle', 0, 1)}</div>
+    <div class="cr-note" style="margin-top:10px">L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.</div>` + combiner(['Prochaine série']))}</div>
+  <div class="fab">Enregistrer le widget</div>
+  ${CR.tip(1, 'Le plus visible', 214, 286)}${CR.tip(2, '« Réunir » : caché sous le bouton, il faut défiler', 62, 640, { w: 290 })}`;
+
+/* 2 · Feuille « Changer de widget » : pas de taille, 2 choisis = 2 widgets */
+document.getElementById('a2').innerHTML = `<div class="scr">${CR.head('Créer')}${CR.stage(CR.w('nextSet-s-light', 130))}</div><div class="dim"></div>
+  <div class="sheet" style="top:62px;padding:8px 20px 0">
+    <div class="grab"></div>
+    <div class="nv" style="margin-top:-6px"><span class="rb txt gl">Annuler</span><span class="sp"></span><span class="t">Fitness</span><span class="sp"></span><span class="rb gl">${ic('pencil')}</span></div>
+    <div class="an-hdr"><span class="ico" data-c="fit">${ic('dumbbell')}</span><b>Crée ton widget</b></div>
+    <div class="cr-note" style="margin-top:10px">L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.</div>
+    <div class="sect" style="margin-top:14px;margin-bottom:2px"><b>Widgets</b><span>2 sélectionnés</span></div>
+    <div class="cr-g3">${CR.tile('nextSet-s-light', { on: 1, n: 1, hand: 1 })}${CR.tile('trainingStreak-s-light', { on: 1, n: 2 })}${CR.tile('restTimer-s-light', { hand: 1, lock: 1 })}
+      ${CR.ph('dumbbell', 'Séance du jour')}${CR.ph('bars', 'Volume', { lock: 1 })}${CR.ph('trophy', 'Records', { lock: 1 })}</div>
+    <div class="an-bar"><div class="btnP lg">${ic('pencil')}Personnaliser les 2 widgets</div></div>
+  </div>
+  ${CR.tip(1, 'Pas de choix de taille', 216, 150)}${CR.tip(2, '2 widgets séparés, pas un widget réuni', 70, 708, { w: 290 })}`;
+
+/* 3 · Studio avec 2 widgets : Combiner a disparu */
+document.getElementById('a3').innerHTML = `<div class="scr">${CR.head('Créer')}${CR.stage(CR.w('nextSet-s-light', 130))}
+  <div class="an-pick gl"><span class="t on">1</span><span class="t">2</span><span class="sp"></span><span class="same">Même style<span class="cr-tg on"></span></span></div>
+  ${CR.tools(0)}
+  ${CR.panel(170, CR.hd('Taille') + `<div class="an-chips">${chip('Petit', 1)}${chip('Moyen')}${chip('Rectangle', 0, 1)}</div>
+    <div class="cr-note" style="margin-top:10px">L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.</div>`)}</div>
+  <div class="fab">Enregistrer les 2 widgets</div>
+  <span class="an-x" style="left:30px;top:650px">${ic('x')}</span>${CR.tip(0, 'Le bloc « Combiner » n\'est plus là', 68, 651, { w: 260 }).replace('cr-tip', 'cr-tip bad')}${CR.tip(1, 'Ils restent séparés', 108, 346)}`;
+
+/* 4 · Feuille « Réunir » : segment de taille, refus peu clair */
+document.getElementById('a4').innerHTML = `<div class="scr">${CR.head('Créer')}${CR.stage(CR.w('nextSet-s-light', 130))}</div><div class="dim"></div>
+  <div class="sheet" style="top:62px;padding:8px 20px 0">
+    <div class="grab"></div>
+    <div class="nv" style="margin-top:-6px"><span class="rb txt gl">Annuler</span><span class="sp"></span><span class="t">Fitness</span><span class="sp"></span><span class="rb gl">${ic('pencil')}</span></div>
+    <div class="an-hdr"><span class="ico" data-c="fit">${ic('dumbbell')}</span><span><b>Crée ton widget</b><span class="s" style="display:block;line-height:1.3">Choisis une taille et tes widgets, puis personnalise-les dans le Studio.</span></span></div>
+    <div class="seg" style="margin-top:12px"><span>Petit</span><span>Moyen</span><span class="on">Grand</span></div>
+    <div class="an-prev err">Pour 2 widgets en grand, chacun doit exister en moyen : ajoute un 3e ou un 4e widget.</div>
+    <div class="sect" style="margin-top:12px;margin-bottom:2px"><b>Widgets</b><span>2 sélectionnés · 4 au plus</span></div>
+    <div class="cr-g3">${CR.tile('nextSet-s-light', { on: 1, n: 1, hand: 1 })}${CR.tile('trainingStreak-s-light', { on: 1, n: 2 })}${CR.tile('restTimer-s-light', { hand: 1, lock: 1 })}</div>
+    <div class="an-bar"><div class="btnP lg off">${ic('pencil')}Personnaliser le widget</div></div>
+  </div>
+  ${CR.tip(1, '« Petit » ici = widgets séparés', 34, 268, { w: 250 })}${CR.tip(2, 'Bouton grisé : la solution simple (Moyen) n\'est pas proposée', 44, 706, { w: 310 })}`;
+
+/* schémas des dispositions possibles */
+document.getElementById('lays').innerHTML = CR.layout([[1, 2]], { t: 'Moyen · 2 petits' }) + CR.layout([[1], [2]], { t: 'Grand · 2 larges' }) + CR.layout([[1], [2, 3]], { t: 'Grand · 1 + 2' }) + CR.layout([[1, 2], [3, 4]], { t: 'Grand · 4 petits' });
+Cristal.init();
+</script>
+</body>
+</html>

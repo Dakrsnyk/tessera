@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Cristal — Parcours 5 · Hybride intelligent</title>
+<link rel="stylesheet" href="cristal.css">
+<link rel="stylesheet" href="creation.css">
+<style>
+  /* propre à cette planche : préfixe h5- */
+  .h5-sec { display: flex; justify-content: space-between; align-items: baseline; margin: 14px 4px 8px; }
+  .h5-sec b { font-size: 20px; font-weight: 700; letter-spacing: -.01em; }
+  .h5-sec span { font-size: 12.5px; color: var(--ink2); }
+  .h5-strip { display: flex; gap: 12px; margin: 0 -20px; padding: 0 20px; overflow: hidden; }
+  .h5-card { flex: none; width: 232px; padding: 14px; }
+  .h5-card .t { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; gap: 6px; }
+  .h5-card .t b { font-size: 15px; font-weight: 650; }
+  .h5-card .s { font-size: 12.5px; color: var(--ink2); margin-top: 1px; }
+  .h5-card .cr-cw { box-shadow: 0 1px 3px rgb(var(--sh) / .12), 0 8px 18px rgb(var(--sh) / .14); }
+  .h5-zero { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .h5-zero > div { min-height: 96px; padding: 10px 4px 8px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: space-between; }
+  .h5-zero u { display: grid; place-items: center; border: 1.8px solid var(--rule2); background: var(--well); border-radius: 10px; color: var(--ink2); font-size: 16px; }
+  .h5-zero b { font-size: 12.5px; font-weight: 650; line-height: 15px; }
+  .h5-mod { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 8px 14px 8px 10px; border-radius: 20px; margin-top: 8px; }
+  .h5-mod .ico { flex: none; }
+  .h5-mod .tx { flex: 1; min-width: 0; } .h5-mod .tx b { display: block; font-size: 15px; font-weight: 650; } .h5-mod .tx span { font-size: 12.5px; color: var(--ink2); }
+  .h5-mod > i { font-size: 16px; color: var(--ink2); }
+  .h5-ic { width: 40px; height: 40px; border-radius: 12px; background: var(--tint2); color: var(--primary); display: grid; place-items: center; font-size: 20px; flex: none; }
+  /* chapitres */
+  .h5-ch { display: flex; height: 48px; border-radius: 24px; background: var(--well); padding: 3px; margin-top: 10px; }
+  .h5-ch > div { flex: 1; border-radius: 21px; display: flex; align-items: center; justify-content: center; gap: 6px; font-size: 14px; font-weight: 650; color: var(--ink2); white-space: nowrap; }
+  .h5-ch > div.on { background: #fff; color: var(--ink); box-shadow: 0 1px 3px rgb(var(--sh) / .16); }
+  .h5-ch .n { width: 20px; height: 20px; border-radius: 10px; background: var(--track); color: var(--ink); font-size: 11.5px; font-weight: 700; display: grid; place-items: center; }
+  .h5-ch .on .n { background: var(--primary); color: #fff; }
+  .h5-ch .dn .n { background: var(--ok); color: #fff; } .h5-ch .n i { font-size: 12px; --sw: 3; }
+  .h5-nx { display: inline-flex; align-items: center; min-height: 44px; margin: -14px 0; font-size: 14px; font-weight: 650; color: var(--primary); }
+  .h5-bub { position: absolute; z-index: 60; display: inline-flex; align-items: center; gap: 7px; max-width: 250px; padding: 8px 12px; border-radius: 14px; background: #fff; color: var(--ink); font-size: 12.5px; line-height: 1.3; font-weight: 600; box-shadow: 0 6px 18px rgba(11,18,32,.2), 0 0 0 1px rgba(11,18,32,.06); }
+  .h5-bub i { color: var(--primary); font-size: 16px; flex: none; }
+  .h5-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .h5-btns .btnO { height: 44px; font-size: 14px; background: #fff; }
+  .h5-va { margin-top: 6px; }
+  .h5-va .cr-tile.w img { margin-top: 26px; } .h5-va .cr-tile.w .ck { top: 32px; }
+  .h5-va .cr-tile .ck { display: none; }
+  .h5-all { display: flex; align-items: center; justify-content: space-between; min-height: 44px; margin-top: 4px; font-size: 14px; font-weight: 650; color: var(--primary); }
+  .h5-th { text-align: center; }
+  .h5-th .bx { min-height: 74px; border-radius: 14px; background: var(--well); display: grid; place-items: center; padding: 8px 4px; }
+  .h5-th.on .bx { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); background: var(--tint); }
+  .h5-th b { display: block; margin-top: 8px; font-size: 12.5px; font-weight: 650; } .h5-th.on b { color: var(--primary); }
+  .h5-hs .cr-grid { top: 128px; }
+  .h5-glass { position: absolute; z-index: 50; left: 50%; top: 56px; transform: translateX(-50%); height: 44px; padding: 0 16px 0 6px; border-radius: 22px; display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: 0 4px 14px rgba(11,18,32,.16); color: #0B1220; font-size: 15px; font-weight: 700; white-space: nowrap; }
+  .h5-glass .bk { width: 32px; height: 32px; border-radius: 16px; background: #fff; display: grid; place-items: center; font-size: 17px; }
+  .h5-glass .bk i { --sw: 2.4; }
+  .h5-glass em { font-style: normal; font-weight: 600; font-size: 13px; color: #35435A; }
+  .h5-save { position: absolute; z-index: 50; left: 24px; right: 24px; bottom: 180px; }
+  .h5-ul { margin: 6px 0 0 16px; padding: 0; display: grid; gap: 3px; } .h5-ul li { font-size: 13px; line-height: 1.38; }
+  .note code { font: 600 12px Consolas, monospace; color: #35435A; }
+  .h5-okb { margin: 8px 0 0; }
+  .h5-okb .cr-ok { justify-content: space-between; }
+  .h5-okb .cr-ok > span { flex: 1; }
+  .h5-okb .un { flex: none; display: inline-flex; align-items: center; min-height: 44px; margin: -10px -4px -10px 0; padding: 0 10px; font-weight: 700; color: var(--primary); }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">5</div><div><h1>Parcours 5 · Hybride intelligent</h1>
+    <p>Trois portes d'entrée sur l'onglet Créer (« Pour toi », « Partir de zéro », « Partir d'un modèle »), un seul Atelier derrière. Le widget reste en scène et on agit dessus ; trois chapitres (Contenu, Disposition, Style) guident le débutant, l'habitué saute où il veut. « Va bien avec » propose les bons voisins ; quand ça ne tient pas, Ardane monte d'une taille au lieu de retirer quelque chose.</p></div>
+    <span class="badge">Maquette d'idée · données d'exemple</span></header>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Écran de départ</div>
+      <div class="phone t-saphir" id="p1" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Trois portes, un même Atelier</h4><p>Des compositions prêtes, tirées de tes espaces préférés et de tes vraies données ; sinon, une taille vide ; sinon, un modèle existant.</p>
+        <ul><li><span class="tag a">À adapter</span><span>Écran de départ de Créer (aujourd'hui : liste d'espaces) ; données et widgets existent</span></li>
+        <li><span class="tag d">À développer</span><span>Choix des compositions « Pour toi »</span></li>
+        <li><span class="tag e">Geste</span><span><b>1 toucher</b> sur une carte « Pour toi »</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">2 · Premier choix</div>
+      <div class="phone t-saphir" id="p2" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>L'Atelier s'ouvre avec la composition</h4><p>Moyen, 2 widgets, déjà en scène. Trois chapitres sous l'aperçu ; « Suivant » mène au suivant, un toucher saute directement.</p>
+        <ul><li><span class="tag e">Existe</span><span>Scène, annuler / rétablir, « Changer de widget », Taille, « Enregistrer le widget »</span></li>
+        <li><span class="tag d">À développer</span><span>Sélecteur de chapitres, coches, bulle d'aide de la première fois</span></li>
+        <li><span class="tag e">Geste</span><span><b>0 toucher</b> de plus : on est déjà prêt à enregistrer</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">3 · Choix des éléments</div>
+      <div class="phone t-saphir" id="p3" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>On touche la partie, le panneau suit</h4><p>« Régularité » est entourée sur la scène : « Remplacer », « Retirer », son nom, puis « Va bien avec » (même espace, bonne taille).</p>
+        <ul><li><span class="tag e">Existe</span><span>Nom et options de contenu ; cadenas Premium ; liste des widgets de l'espace</span></li>
+        <li><span class="tag d">À développer</span><span>Sélection d'une partie sur la scène, « Va bien avec »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (la partie, un voisin)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">4 · Combinaison</div>
+      <div class="phone t-saphir" id="p4" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Ça ne tient pas : on monte d'une taille</h4><p>Ajouter « Séance du jour » à 2 petits dépasse le Moyen. Ardane passe en Grand au lieu de retirer un widget ; « Annuler » défait.</p>
+        <ul><li><span class="tag e">Existe</span><span>Règles : Moyen 2 au plus, Grand 4 au plus, une ligne = 1 moyen ou 2 petits</span></li>
+        <li><span class="tag d">À développer</span><span>Passage automatique de taille avec « Annuler » ; au-delà de 3 ici, Séance repasserait en petit</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (« Séance du jour » dans Va bien avec)</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Organisation</div>
+      <div class="phone t-saphir" id="p5" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Glisser sur la scène, ou choisir un plan</h4><p>Chapitre « Disposition » : la scène accepte le glisser direct ; trois plans proposés font la même chose d'un toucher. Une ligne = 1 widget large ou 2 petits.</p>
+        <ul><li><span class="tag e">Existe</span><span>Réordonnancement des parties, règles de lignes</span></li>
+        <li><span class="tag a">À adapter</span><span>Glisser dans la scène ; plans proposés (schémas)</span></li>
+        <li><span class="tag e">Geste</span><span><b>1 toucher</b> (un plan) ou 1 glissement</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">6 · Personnalisation</div>
+      <div class="phone t-saphir" id="p6" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Chapitre « Style » : les outils réels</h4><p>Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles. Trois thèmes montrés sur le widget entier.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les 8 outils et leurs panneaux ; style commun à tout le widget ; aucun outil inventé</span></li>
+        <li><span class="tag a">À adapter</span><span>Rangée regroupée sous « Style » ; « Taille » passe dans Contenu</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (Style, un thème)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">7 · Aperçu sur l'écran d'accueil</div>
+      <div class="phone cr-hs t-saphir h5-hs" id="p7" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Le Grand widget à l'échelle réelle</h4><p>Le bouton œil de la scène ouvre l'écran d'accueil ; retour à l'Atelier d'un toucher ; « Enregistrer le widget » reste à portée.</p>
+        <ul><li><span class="tag d">À développer</span><span>« Sur mon écran » (aujourd'hui : cadre dégradé, sans aperçu à l'échelle)</span></li>
+        <li><span class="tag e">Existe</span><span>Bouton œil, pied « Enregistrer le widget »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (facultatif)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">8 · Enregistrement</div>
+      <div class="phone t-saphir" id="p8" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Une fin honnête, puis on peut revenir</h4><p>Le guide « Ajouter un widget » suit chaque enregistrement. Plus tard, « Modifier » rouvre l'Atelier.</p>
+        <ul><li><span class="tag e">Existe</span><span>Feuille, segmenté, étapes, « Compris » ; vol vers Mes widgets</span></li>
+        <li><span class="tag a">À adapter</span><span>Guide montré après chaque enregistrement ; phrase « iOS ne laisse aucune app… » ; « Modifier » ouvre l'Atelier avec la structure</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (Enregistrer, Compris)</span></li></ul></div></div>
+  </div>
+
+  <div class="row" style="margin-top:34px">
+    <div class="col"><div class="nm">Le principe</div><div class="note" style="margin:9px">
+      <h4>Un départ rapide, un seul Atelier</h4>
+      <p>Chaque parcours a une bonne idée ; celui-ci les assemble. Du <b>parcours 4</b> : le départ par suggestion (« Pour toi »). Du <b>parcours 2</b> : l'aperçu permanent et l'action directe sur la scène. Du <b>parcours 3</b> : les emplacements « + » visibles dans le widget. Du <b>parcours 1</b> : l'ordre conseillé en trois chapitres (Contenu, Disposition, Style), sans l'imposer.</p>
+      <p>Pour qui : un débutant suit « Suivant » ; un habitué ouvre directement le chapitre ou l'outil voulu. Les trois portes (suggestion, zéro, modèle) mènent au même écran, donc on n'apprend qu'une fois.</p></div></div>
+    <div class="col"><div class="nm">Combiner, en clair</div><div class="note" style="margin:9px">
+      <h4>Moyen à 2 widgets : 2 touchers, ou 4</h4>
+      <p><b>Par une suggestion « Pour toi »</b> : onglet Créer, carte « Séance et régularité » (le widget arrive déjà réuni), « Enregistrer le widget » = <b>2 touchers</b> ; « Compris » = 3.</p>
+      <p><b>De zéro</b> : onglet Créer, « Moyen », emplacement « + » dans la scène, un widget de « Va bien avec », « Enregistrer le widget » = <b>4 touchers</b> pour le premier ; le second slot se remplit de la même manière (+2).</p>
+      <p>Un petit rappel des règles : Moyen = 2 petits au plus ; Grand = 4 au plus.</p></div></div>
+    <div class="col"><div class="nm">Où vit chaque fonction existante</div><div class="note" style="margin:9px">
+      <h4>Rien n'est supprimé</h4>
+      <ul class="h5-ul"><li><b>Tailles</b> (Petit, Moyen, Grand) et <b>écran verrouillé</b> (Rond, Rectangle, En ligne) : portes « Partir de zéro » et panneau Taille, au début de Contenu.</li>
+      <li><b>Espaces</b> : « Va bien avec » et « Tous les widgets de Fitness » ; Store pour les combinés.</li>
+      <li><b>Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles</b> : chapitre « Style ».</li>
+      <li><b>Options de contenu</b> (nom, données, éléments affichés) : sur la partie touchée.</li>
+      <li><b>Premium</b> : cadenas sur les tuiles ; pied « Débloquer et enregistrer ».</li>
+      <li><b>Enregistrer</b> : Atelier ; <b>Modifier, Dupliquer, Supprimer</b> : toujours dans Mes widgets.</li>
+      <li><b>Photos et citations</b> : garde son éditeur propre, entrée à placer sous « Partir de zéro » (non dessinée).</li></ul></div></div>
+    <div class="col"><div class="nm">Limites dites clairement</div><div class="note" style="margin:9px">
+      <h4>Chantier : gros</h4>
+      <ul class="h5-ul"><li>Deux manières d'entrer (suggestion, zéro) : il faut qu'elles restent cohérentes avec l'écran de départ.</li>
+      <li>Glisser sur une petite scène est imprécis : on double avec les plans de disposition.</li>
+      <li>Même espace seulement aujourd'hui ; un mélange d'espaces serait <b>À développer</b>.</li>
+      <li>iOS ne laisse aucune app poser un widget : le guide d'ajout reste obligatoire.</li>
+      <li>À écrire : l'Atelier à action directe, l'écran de départ, la structure modifiable après enregistrement, « Sur mon écran ».</li></ul></div></div>
+  </div>
+</main>
+<script src="cristal.js"></script>
+<script src="creation.js"></script>
+<script>
+const ic = CR.ico;
+const $ = (id, html) => { document.getElementById(id).innerHTML = html; };
+const S2 = ['nextSet-s', 'trainingStreak-s'], S3 = ['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'];
+const chap = (on, done = []) => `<div class="h5-ch">${['Contenu', 'Disposition', 'Style'].map((t, k) =>
+  `<div class="${k === on ? 'on' : ''} ${done.includes(k) ? 'dn' : ''}"><span class="n">${done.includes(k) ? ic('check') : k + 1}</span>${t}</div>`).join('')}</div>`;
+const act = (t) => `<span class="act">${t}</span>`;
+const nx = (t = 'Suivant') => `<span class="h5-nx">${t} ›</span>`;
+const studio = (o) => `<div class="scr">${CR.head('Créer', { undo: o.undo })}${o.stage}${chap(o.ch, o.done)}${o.tools || ''}${CR.panel(o.h, o.panel)}</div>
+  <div class="fab">Enregistrer le widget</div>${o.extra || ''}`;
+
+/* 1 · Écran de départ */
+const card = (t, s, parts) => `<article class="pn cd h5-card">${CR.combo(parts, { w: 204 })}<div class="t"><b>${t}</b><span class="cr-free">Gratuit</span></div><div class="s">${s}</div></article>`;
+const zero = (w, h, t, r, i) => `<div class="pn"><u style="width:${w}px;height:${h}px${r ? `;border-radius:${r}px` : ''}">${i ? ic(i) : ''}</u><b>${t}</b></div>`;
+$('p1', `<div class="scr">${CR.head('Créer', { right: '' })}
+  <div class="h5-sec"><b>Pour toi</b><span>Tes espaces préférés</span></div>
+  <div class="h5-strip">${card('Séance et régularité', 'Fitness · Moyen', S2)}${card('Budget du mois', 'Budget · Moyen', ['budgetLeft-s', 'savingsGoal-s'])}</div>
+  <div class="h5-sec"><b>Partir de zéro</b></div>
+  <div class="h5-zero">${zero(34, 34, 'Petit')}${zero(54, 26, 'Moyen')}${zero(44, 44, 'Grand')}${zero(24, 40, 'Écran verrouillé', 8, 'lock')}</div>
+  <div class="h5-sec"><b>Partir d'un modèle</b></div>
+  <div class="pn h5-mod"><span class="h5-ic">${ic('grid')}</span><span class="tx"><b>Un combiné du Store</b><span>Déjà réuni, à ajuster</span></span>${ic('chev')}</div>
+  <div class="pn h5-mod"><span class="h5-ic">${ic('copy')}</span><span class="tx"><b>Dupliquer un de mes widgets</b><span>Depuis Mes widgets</span></span>${ic('chev')}</div>
+</div>${CR.tap(137, 213)}`);
+
+/* 2 · Premier choix */
+$('p2', studio({ stage: CR.stage(CR.combo(S2, { w: 290 }), { h: 262, mt: -112 }), ch: 0, h: 294, undo: 0,
+  panel: CR.hd('Contenu', nx()) + CR.sizes(1) + '<div class="cr-note">Plus d\'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.</div>'
+    + CR.hd('Dans ce widget', '2 sur 2').replace('<div class="cr-hd">', '<div class="cr-hd" style="margin-top:14px">')
+    + CR.part('nextSet-s-light', { grip: 1, n: 1, right: '' }) + CR.part('trainingStreak-s-light', { grip: 1, n: 2, right: '' }),
+  extra: `<span class="h5-bub" style="left:44px;top:258px">${ic('hand')}Touche une partie du widget pour la changer.</span>` }));
+
+/* 3 · Choix des éléments */
+$('p3', studio({ stage: CR.stage(CR.combo(S2, { w: 290, sel: 1 }), { h: 226 }), ch: 0, h: 340,
+  panel: CR.hd('Régularité', 'Petit · Fitness')
+    + `<div class="h5-btns"><span class="btnO">${ic('swap')}Remplacer</span><span class="btnO">${ic('x')}Retirer</span></div>`
+    + '<div class="cr-row" style="margin-top:6px;min-height:44px"><span class="h3">Nom</span><span class="cr-field" style="margin-left:6px">Régularité</span></div>'
+    + CR.hd('Va bien avec', 'Fitness').replace('<div class="cr-hd">', '<div class="cr-hd" style="margin-top:6px">')
+    + `<div class="cr-g3 h5-va">${CR.tile('todaysWorkout-m-light')}${CR.tile('restTimer-s-light', { lock: 1, hand: 0 }).replace('class="lb"', 'class="lb"')}${CR.tile('weeklyVolume-m-light', { lock: 1 })}</div>`
+    + `<div class="h5-all"><span>Tous les widgets de Fitness</span>${ic('chev')}</div>`,
+  extra: `${CR.tap(75, 623)}` }));
+
+/* 4 · Combinaison */
+$('p4', studio({ stage: CR.stage(CR.combo(S3.slice(), { w: 190, sel: 0 }), { h: 238, left: '', right: '', mt: 0 }), ch: 0, undo: 1, h: 330,
+  panel: CR.hd('Dans ce widget', '3 sur 4') + CR.part('todaysWorkout-m-light', { grip: 1, n: 1, right: '' }) + CR.part('nextSet-s-light', { grip: 1, n: 2, right: '' }) + CR.part('trainingStreak-s-light', { grip: 1, n: 3, right: '' })
+    + `<div class="cr-part add">${ic('plus')}Ajouter un 4e widget</div>` }).replace('</div><div class="h5-ch">',
+  `</div><div class="h5-okb"><div class="cr-ok">${ic('check')}<span>Passé en Grand pour tout afficher : 3 widgets réunis.</span><span class="un">Annuler</span></div></div><div class="h5-ch">`));
+</script>
+<script>
+/* 5 · Organisation */
+$('p5', studio({ stage: CR.stage(CR.combo(S3, { w: 190, dim: [2] }), { h: 238, left: '', right: '', mt: 0 }), ch: 1, done: [0], h: 320,
+  panel: CR.hd('Disposition', nx()) + '<div class="cr-note">Glisse une partie sur la scène, ou choisis un plan.</div>'
+    + `<div class="cr-g3" style="margin-top:12px">${CR.layout([['1'], ['2', '3']], { on: 1, t: 'Séance en haut' })}${CR.layout([['2', '3'], ['1']], { t: 'Séance en bas' })}${CR.layout([['2', '3']], { t: 'Moyen, sans la séance' })}</div>`
+    + '<div class="cr-why" style="margin-top:14px">' + ic('info') + '<span>Une ligne = 1 widget large ou 2 petits.</span></div>',
+  extra: `${CR.lift('nextSet-s-light', 228, 248, 92)}${CR.arrow(190, 330, 160, 288, { pri: 1 })}` }));
+
+/* 6 · Personnalisation */
+const th = (parts, t, on, o) => `<div class="h5-th${on ? ' on' : ''}"><div class="bx">${CR.combo(parts, Object.assign({ w: 94, cls: 'flat' }, o))}</div><b>${t}</b></div>`;
+$('p6', studio({ stage: CR.stage(CR.combo(S2, { w: 270 }), { h: 196, mt: -34 }), ch: 2, done: [0, 1], h: 262,
+  tools: CR.tools(0, 0, [['sparkles', 'Thème'], ['layers', 'Style'], ['palette', 'Couleurs'], ['image', 'Fond'], ['frame', 'Bordure'], ['chart', 'Graphique'], ['density', 'Densité'], ['star', 'Mes styles']]),
+  panel: CR.hd('Thème') + `<div class="cr-g3">${th(S2, 'Pure White', 1)}${th(S2, 'Midnight', 0, { dark: 1 })}${th(S2, 'Ocean', 0, { hue: 58 })}</div>`
+    + '<div class="cr-note" style="margin-top:12px">Le style est commun à tout le widget ; le contenu se règle par partie.</div>' }));
+
+/* 7 · Aperçu sur l'écran d'accueil */
+$('p7', CR.home({ fmt: 'l', ring: 1, widget: CR.combo(S3, { w: 338, cls: 'flat' }),
+  extra: `<span class="h5-glass"><span class="bk">${ic('chevl')}</span>Sur mon écran<em>· Grand</em></span>
+    <div class="btnP lg h5-save">Enregistrer le widget</div>` }));
+
+/* 8 · Enregistrement */
+const stp = (n, t) => `<div class="step" style="padding:8px 0;font-size:14px;line-height:1.34"><span class="n">${n}</span><span>${t}</span></div>`;
+$('p8', `<div class="scr">${CR.head('Créer', {})}${CR.stage(CR.combo(S3, { w: 190 }), { h: 238, mt: -38 })}${chap(2, [0, 1])}</div><div class="dim"></div>
+  <div class="sheet" style="top:40px;padding:8px 20px 0"><div class="grab" style="margin-bottom:6px"></div>
+    <div class="nv" style="height:40px;margin-top:0"><span class="sp"></span><span class="t">Ajouter un widget</span><span class="sp"></span></div>
+    <div style="display:flex;gap:14px;align-items:center;margin-top:4px"><div style="width:84px;flex:none">${CR.combo(S3, { w: 84 })}</div>
+      <div><div class="h2" style="font-size:19px">« Mon entraînement »</div><span class="okl" style="margin-top:3px;font-size:14px">${ic('check')}Enregistré dans Mes widgets</span></div></div>
+    <div class="seg" style="margin-top:12px"><span class="on">Écran d'accueil</span><span>Écran verrouillé</span></div>
+    <div style="margin-top:4px">${stp(1, 'Appuie longuement sur un espace vide de l\'écran d\'accueil')}${stp(2, 'Touche « Modifier » en haut, puis « Ajouter un widget »')}${stp(3, 'Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu\'à la taille Grand')}${stp(4, 'Ajoute-le : il garde ce widget, même quand tu en crées d\'autres')}</div>
+    <div class="s" style="margin:4px 2px 8px">Dans Mes widgets, « Modifier » rouvre l'Atelier : tu peux encore ajouter, retirer ou déplacer une partie.</div>
+    <div class="info" style="padding:10px 14px">${ic('info')}<span>iOS ne laisse aucune app poser un widget à ta place.</span></div>
+    <div class="btnP lg" style="margin-top:12px">Compris</div></div>`);
+Cristal.init();
+</script>
+</body>
+</html>

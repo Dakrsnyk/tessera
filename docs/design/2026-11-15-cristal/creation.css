@@ -1,0 +1,156 @@
+/* creation.css : outils communs aux planches 20 à 26 (parcours de création de widgets).
+   S'ajoute à cristal.css. Classes préfixées cr-. Les fonctions JS correspondantes sont dans creation.js (objet CR). */
+
+/* ---------- widget combiné, monté à partir de vrais exports ---------- */
+.cr-cw { --w: 300px; width: var(--w); border-radius: calc(var(--w) * .066); background: #F5F5F2; overflow: hidden; display: flex; flex-direction: column; position: relative; flex: none;
+  box-shadow: 0 2px 4px rgb(var(--sh) / .08), 0 14px 30px rgb(var(--sh) / .20); }
+.cr-cw.m { aspect-ratio: 338 / 158; }
+.cr-cw.l { aspect-ratio: 338 / 354; }
+.cr-cw.s { aspect-ratio: 1; }
+.cr-cw.flat { box-shadow: none; }
+.cr-cw .rw { flex: 1; min-height: 0; display: flex; position: relative; }
+.cr-cw .rw + .rw::before { content: ""; position: absolute; left: 4.2%; right: 4.2%; top: 0; height: 1px; background: rgba(60,60,67,.20); z-index: 2; }
+.cr-cw .ce { flex: 1; min-width: 0; position: relative; display: grid; place-items: center; }
+.cr-cw .ce + .ce::before { content: ""; position: absolute; left: 0; top: 9%; bottom: 9%; width: 1px; background: rgba(60,60,67,.20); z-index: 2; }
+.cr-cw .ce img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* emplacement vide */
+.cr-cw .ce.empty::after { content: ""; position: absolute; inset: 9% 7%; border-radius: calc(var(--w) * .045); border: 1.6px dashed #B9BEC9; background: rgba(255,255,255,.55); }
+.cr-cw .ce.empty > b { position: relative; z-index: 3; display: grid; place-items: center; gap: 3px; font: 650 11.5px/1.2 Inter, sans-serif; color: #5B6577; text-align: center; }
+.cr-cw .ce.empty > b i { font-size: 20px; color: var(--primary); --sw: 2.2; }
+/* emplacement choisi : anneau + pastille */
+.cr-cw .ce.sel::after { content: ""; position: absolute; inset: 3px; border-radius: calc(var(--w) * .052); border: 2.5px solid var(--primary); z-index: 3; pointer-events: none; }
+.cr-cw .ce.dim img { opacity: .32; }
+.cr-cw .ce.new img { animation: none; }
+.cr-cw .ce .n { position: absolute; z-index: 4; left: 7px; top: 7px; width: 20px; height: 20px; border-radius: 10px; background: #0B1220; color: #fff; font: 700 11.5px/20px Inter, sans-serif; text-align: center; }
+.cr-cw .ce .x { position: absolute; z-index: 4; right: 6px; top: 6px; width: 22px; height: 22px; border-radius: 11px; background: #0B1220; color: #fff; display: grid; place-items: center; font-size: 13px; --sw: 2.6; }
+.cr-cw .ce .lk { position: absolute; z-index: 4; right: 7px; top: 7px; width: 22px; height: 22px; border-radius: 11px; background: #F4D58A; color: #5A4310; display: grid; place-items: center; font-size: 12px; --sw: 2.4; }
+/* une pièce soulevée par le doigt (glisser pour réordonner) */
+.cr-lift { position: absolute; z-index: 47; border-radius: 22%; box-shadow: 0 18px 34px rgb(var(--sh) / .34); transform: rotate(-4deg) scale(1.05); background: #F5F5F2; }
+.cr-lift img { display: block; width: 100%; border-radius: 22%; }
+
+/* ---------- écran d'accueil d'iPhone ---------- */
+.phone.cr-hs { background: #DDD; }
+.cr-wall { position: absolute; inset: 0; z-index: 0; background-size: cover; background-position: center; }
+.cr-grid { position: absolute; z-index: 2; left: 27.5px; top: 78px; width: 338px; display: grid; grid-template-columns: repeat(4, 60px); column-gap: 32.67px; grid-auto-rows: 60px; row-gap: 38px; }
+.cr-app { position: relative; width: 60px; height: 60px; }
+.cr-app img { display: block; width: 60px; height: 60px; border-radius: 14px; }
+.cr-app span, .cr-wd > span { position: absolute; left: 50%; top: 100%; transform: translateX(-50%); margin-top: 5px; white-space: nowrap; font: 500 11.5px/14px Inter, sans-serif; color: #1B2231; }
+.cr-hs.night .cr-app span, .cr-hs.night .cr-wd > span { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.45); }
+.cr-hs.night .sb { color: #fff; } .cr-hs.night .hi { background: #fff; }
+.cr-wd { position: relative; display: grid; place-items: center; }
+.cr-wd.s { grid-column: span 2; grid-row: span 2; margin: 0 -2.67px; }
+.cr-wd.m { grid-column: span 4; grid-row: span 2; }
+.cr-wd.l { grid-column: span 4; grid-row: span 4; }
+.cr-wd > img { display: block; width: 100%; border-radius: 22px; box-shadow: 0 8px 22px rgba(20,24,40,.22); }
+.cr-wd .cr-cw { box-shadow: 0 8px 22px rgba(20,24,40,.22); }
+.cr-wd.ring::after { content: ""; position: absolute; inset: -7px; border-radius: 28px; border: 2.5px solid var(--primary); box-shadow: 0 0 0 5px color-mix(in srgb, var(--primary) 22%, transparent); pointer-events: none; }
+.cr-search { position: absolute; z-index: 2; left: 50%; bottom: 122px; transform: translateX(-50%); height: 30px; padding: 0 13px; border-radius: 15px; display: inline-flex; align-items: center; gap: 5px; font: 500 13px Inter, sans-serif; color: #1B2231;
+  background: rgba(255,255,255,.46); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); }
+.cr-search i { font-size: 13px; --sw: 2.4; }
+.cr-dock { position: absolute; z-index: 2; left: 12px; right: 12px; bottom: 12px; height: 94px; border-radius: 38px; display: flex; align-items: center; justify-content: space-between; padding: 0 17px;
+  background: rgba(255,255,255,.40); -webkit-backdrop-filter: blur(24px) saturate(1.4); backdrop-filter: blur(24px) saturate(1.4); }
+.cr-dock img { width: 60px; height: 60px; border-radius: 14px; display: block; }
+.cr-hs .hi { display: none; }
+/* écran verrouillé */
+.cr-lock { position: absolute; inset: 0; z-index: 2; color: #fff; text-align: center; }
+.cr-lock .dt { margin-top: 96px; font: 600 21px Inter, sans-serif; opacity: .92; }
+.cr-lock .hr { font: 700 96px/1 Inter, sans-serif; letter-spacing: -.03em; margin-top: 2px; }
+.cr-lock .wr { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 14px; }
+.cr-lock .wr img { height: 72px; display: block; }
+
+/* ---------- annotations posées sur un téléphone (en absolu dans .phone) ---------- */
+.cr-pin { position: absolute; z-index: 60; width: 24px; height: 24px; border-radius: 12px; background: #0B1220; color: #fff; font: 700 13px/24px Inter, sans-serif; text-align: center; box-shadow: 0 0 0 2.5px #fff, 0 4px 10px rgba(11,18,32,.3); }
+.cr-tip { position: absolute; z-index: 60; min-height: 28px; padding: 5px 11px 5px 5px; border-radius: 14px; background: #0B1220; color: #fff; font: 650 12px/1.25 Inter, sans-serif; display: inline-flex; align-items: center; gap: 7px; box-shadow: 0 6px 16px rgba(11,18,32,.28); max-width: 250px; }
+.cr-tip b { flex: none; width: 18px; height: 18px; border-radius: 9px; background: #fff; color: #0B1220; display: grid; place-items: center; font-size: 11px; font-weight: 700; }
+.cr-tip.nob { padding-left: 11px; }
+.cr-tap { position: absolute; z-index: 59; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: color-mix(in srgb, var(--primary) 22%, transparent); border: 2px solid var(--primary); box-shadow: 0 0 0 7px color-mix(in srgb, var(--primary) 12%, transparent); pointer-events: none; }
+.cr-svg { position: absolute; left: 0; top: 0; z-index: 58; pointer-events: none; overflow: visible; }
+.cr-svg path { fill: none; stroke: #0B1220; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.cr-svg path.d { stroke-dasharray: 2 7; }
+.cr-svg path.p { stroke: var(--primary); }
+
+/* ---------- petits éléments d'interface partagés ---------- */
+.cr-steps { display: flex; align-items: center; gap: 6px; }                      /* fil d'étapes (parcours guidé) */
+.cr-steps span { flex: 1; height: 5px; border-radius: 3px; background: var(--track); }
+.cr-steps span.on { background: var(--primary); }
+.cr-kick { font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink2); }
+.cr-q { font-size: 28px; line-height: 1.12; font-weight: 700; letter-spacing: -.022em; }
+.cr-sub { font-size: 14.5px; line-height: 1.4; color: var(--ink2); }
+.cr-card { border-radius: 22px; padding: 14px; position: relative; }
+.cr-card.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
+.cr-rdo { width: 24px; height: 24px; border-radius: 12px; border: 2px solid var(--rule2); display: grid; place-items: center; color: #fff; font-size: 14px; --sw: 3; flex: none; }
+.cr-rdo.on { background: var(--primary); border-color: var(--primary); }
+.cr-free { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 10px; background: var(--well); color: var(--ink2); font-size: 11px; font-weight: 700; }
+.cr-lockb { display: inline-flex; align-items: center; gap: 3px; height: 20px; padding: 0 8px; border-radius: 10px; background: #F4D58A; color: #5A4310; font-size: 11px; font-weight: 700; }
+.cr-lockb i { font-size: 11px; --sw: 2.4; }
+.cr-tile { position: relative; text-align: center; }
+.cr-tile img { display: block; width: 100%; border-radius: 22%; box-shadow: 0 1px 3px rgb(var(--sh) / .10), 0 6px 14px rgb(var(--sh) / .12); }
+.cr-tile.w img { border-radius: 14%/30%; }
+.cr-tile.on img { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
+.cr-tile.off img { opacity: .38; }
+.cr-tile .ck { position: absolute; top: 6px; right: 6px; width: 24px; height: 24px; border-radius: 12px; background: rgba(255,255,255,.92); border: 1.5px solid var(--rule2); display: grid; place-items: center; font: 700 12.5px Inter, sans-serif; color: #fff; }
+.cr-tile.on .ck { background: var(--primary); border-color: var(--primary); }
+.cr-tile .lb { display: flex; justify-content: center; align-items: center; gap: 3px; margin-top: 7px; font-size: 12.5px; font-weight: 650; line-height: 15px; }
+.cr-tile .lb i { font-size: 12px; color: var(--ink2); --sw: 2.2; }
+.cr-tile small { display: block; font-size: 11.5px; line-height: 14px; color: var(--ink2); }
+.cr-why { display: flex; gap: 8px; align-items: flex-start; padding: 10px 12px; border-radius: 14px; background: var(--well); font-size: 13px; line-height: 1.38; color: var(--ink2); }
+.cr-why i { font-size: 17px; flex: none; margin-top: 1px; color: var(--ink2); }
+.cr-ok { display: flex; gap: 8px; align-items: center; padding: 10px 12px; border-radius: 14px; background: color-mix(in srgb, var(--ok) 12%, #fff); font-size: 13.5px; font-weight: 600; color: var(--ink); }
+.cr-ok i { font-size: 18px; color: var(--ok); flex: none; }
+
+/* ---------- mise en page des planches de parcours ---------- */
+.cr-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 0 9px; }
+.cr-fiche { margin: 9px; }
+.cr-fiche table { border-collapse: collapse; width: 100%; font-size: 13px; }
+.cr-fiche td, .cr-fiche th { text-align: left; vertical-align: top; padding: 6px 8px; border-top: 1px solid #E3E7EE; line-height: 1.38; }
+.cr-fiche th { font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: #5B6577; border-top: 0; }
+.cr-plus li::marker { content: "+  "; color: #1F8A5B; font-weight: 700; }
+.cr-minus li::marker { content: "–  "; color: #C0392B; font-weight: 700; }
+
+/* ---------- Studio « C1 Atelier » (reprend les formes de la planche 8) ---------- */
+.cr-nv { display: flex; align-items: center; gap: 8px; height: 46px; margin-top: 2px; }
+.cr-nv .sp { flex: 1; }
+.cr-ttl { font-size: 32px; font-weight: 700; letter-spacing: -.025em; margin-left: 3px; white-space: nowrap; }
+.cr-ttl.sm { font-size: 20px; letter-spacing: -.015em; }
+.cr-nv .rb + .rb { margin-left: -2px; }
+.cr-stage { margin-top: 6px; }
+.cr-stin { display: grid; place-items: center; position: relative; }
+.cr-lab { position: absolute; left: 12px; top: 12px; z-index: 2; height: 28px; padding: 0 12px; border-radius: 14px; display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--ink); }
+.cr-wrap { margin-top: 10px; overflow: hidden; -webkit-mask-image: linear-gradient(#000 84%, transparent); mask-image: linear-gradient(#000 84%, transparent); padding-bottom: 6px; }
+.cr-pan { padding: 14px 16px 16px; }
+.cr-hd { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.cr-note { font-size: 13px; line-height: 1.4; color: var(--ink2); margin-top: 4px; }
+.cr-sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: end; margin-top: 12px; }
+.cr-sizes div { text-align: center; }
+.cr-sizes u { display: block; margin: 0 auto 6px; border: 1.8px solid var(--rule2); border-radius: 10px; background: var(--well); }
+.cr-sizes .on u { border-color: var(--primary); background: var(--tint); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary); }
+.cr-sizes b { font-size: 12.5px; font-weight: 600; display: block; line-height: 16px; } .cr-sizes .on b { color: var(--primary); }
+.cr-part { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 10px 6px 6px; border-radius: 16px; background: var(--well); margin-top: 8px; }
+.cr-part img { width: 40px; height: 40px; border-radius: 10px; flex: none; object-fit: cover; }
+.cr-part .tx { flex: 1; min-width: 0; } .cr-part .tx b { font-size: 14.5px; font-weight: 650; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cr-part .gr { color: var(--ink2); font-size: 18px; margin: 0 -2px 0 4px; }
+.cr-part .nn { width: 24px; height: 24px; border-radius: 12px; background: var(--primary); color: #fff; font-size: 13px; font-weight: 700; display: grid; place-items: center; flex: none; }
+.cr-part.add { background: transparent; border: 1.5px dashed var(--rule2); color: var(--primary); font-weight: 650; font-size: 14.5px; justify-content: center; }
+.cr-part .act { display: inline-flex; align-items: center; height: 32px; padding: 0 11px; border-radius: 16px; background: #fff; font-size: 12.5px; font-weight: 650; color: var(--ink); flex: none; }
+.cr-part .act.ic { width: 32px; padding: 0; justify-content: center; font-size: 15px; color: var(--ink2); }
+.cr-row { display: flex; align-items: center; gap: 10px; min-height: 48px; border-top: 1px solid var(--rule); font-size: 15px; }
+.cr-row:first-child { border-top: 0; }
+.cr-field { flex: 1; height: 40px; border-radius: 12px; background: var(--well); display: flex; align-items: center; padding: 0 12px; font-size: 15px; }
+.cr-tg { margin-left: auto; width: 51px; height: 31px; border-radius: 16px; background: var(--track); position: relative; flex: none; }
+.cr-tg::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); }
+.cr-tg.on { background: var(--primary); } .cr-tg.on::after { left: 22px; }
+.cr-g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+.cr-g2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+.cr-dots { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+.cr-dots u { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; color: #fff; font-size: 19px; border: 1px solid rgba(11,18,32,.08); }
+.cr-dots u.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary); }
+.cr-ph { aspect-ratio: 1; border-radius: 22%; background: var(--panel2); border: 1.5px dashed var(--rule2); display: grid; place-items: center; color: var(--ink2); font-size: 26px; }
+/* schéma de disposition */
+.cr-lay { text-align: center; }
+.cr-lay .sc { width: 78px; margin: 0 auto; border-radius: 11px; padding: 4px; display: grid; gap: 4px; background: var(--well); border: 1.8px solid var(--rule2); }
+.cr-lay .sc.m { height: 44px; } .cr-lay .sc.l { height: 82px; }
+.cr-lay .sc > div { display: flex; gap: 4px; min-height: 0; }
+.cr-lay .sc span { flex: 1; border-radius: 6px; background: #fff; display: grid; place-items: center; font: 700 11px Inter, sans-serif; color: var(--ink2); }
+.cr-lay.on .sc { border-color: var(--primary); background: var(--tint); box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary); }
+.cr-lay.on .sc span { color: var(--primary); }
+.cr-lay b { display: block; margin-top: 7px; font-size: 12px; font-weight: 600; line-height: 15px; } .cr-lay.on b { color: var(--primary); }
