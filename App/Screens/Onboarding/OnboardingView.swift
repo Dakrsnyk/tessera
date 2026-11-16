@@ -134,16 +134,24 @@ struct OnboardingView: View {
             .opacity(index > 0 ? 1 : 0)
             .disabled(index == 0)
             .accessibilityLabel(Text(tr("Retour", context: "back")))
-            HStack(spacing: 5) {
-                ForEach(personal.indices, id: \.self) { item in
-                    Capsule()
-                        .fill(item <= position ? Color.accentColor : Color.secondary.opacity(0.25))
-                        .frame(height: 5)
+            // Not on the interests step (PDG, 2026-11-16): each interest picked adds its pages, so the bar kept
+            // changing while the person chose. The steps themselves are unchanged.
+            if current == .interests {
+                Spacer(minLength: 0)
+                    .frame(height: 5)
+                    .frame(maxWidth: .infinity)
+            } else {
+                HStack(spacing: 5) {
+                    ForEach(personal.indices, id: \.self) { item in
+                        Capsule()
+                            .fill(item <= position ? Color.accentColor : Color.secondary.opacity(0.25))
+                            .frame(height: 5)
+                    }
                 }
+                .animation(.snappy, value: position)
+                .accessibilityElement()
+                .accessibilityLabel(Text(tr("Étape \(position + 1) sur \(personal.count)")))
             }
-            .animation(.snappy, value: position)
-            .accessibilityElement()
-            .accessibilityLabel(Text(tr("Étape \(position + 1) sur \(personal.count)")))
             Button(tr("Passer"), action: skip)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)

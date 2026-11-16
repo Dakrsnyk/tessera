@@ -153,48 +153,59 @@ final class StudioUITests: XCTestCase {
 
     // MARK: Créer
 
-    /// Créer opens on its start screen: « Pour toi », the four sizes to start from, the models and the photos.
-    func testCreateOpensOnTheStartScreen() {
+    /// Créer starts with the size (« taille d'abord »): Petit, Moyen, Grand and a link to the Lock Screen, nothing else.
+    func testCreateOpensOnTheSizes() {
         launch(["-screenshotScreen", "spaces"])
-        XCTAssertTrue(app.buttons["create-scratch-medium"].waitForExistence(timeout: 15), "Créer n'ouvre pas sur son écran de départ")
-        XCTAssertTrue(element("create-start").exists, "L'écran de départ n'est pas identifié")
-        // Not the Studio: no chapters, no « Changer de widget ».
-        XCTAssertFalse(app.buttons["studio-chapter-content"].exists, "Créer ne doit plus s'ouvrir directement sur le Studio")
-        XCTAssertFalse(app.buttons["create-change"].exists)
-        let forYou = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "create-for-you-"))
-        XCTAssertTrue(forYou.firstMatch.exists, "« Pour toi » ne propose aucun widget")
-        for identifier in ["create-scratch-small", "create-scratch-large", "create-scratch-lock", "create-from-store", "create-duplicate", "create-photos"] {
-            XCTAssertTrue(app.buttons[identifier].waitForExistence(timeout: 5), "« \(identifier) » absent de l'écran de départ")
+        XCTAssertTrue(app.buttons["create-size-medium"].waitForExistence(timeout: 15), "Créer n'ouvre pas sur le choix de la taille")
+        XCTAssertTrue(element("create-start").exists, "La page des tailles n'est pas identifiée")
+        for identifier in ["create-size-small", "create-size-large", "create-lock"] {
+            XCTAssertTrue(app.buttons[identifier].exists, "« \(identifier) » absent de la page des tailles")
         }
+        // Not the Studio: no chapters, no « Changer de widget ».
+        XCTAssertFalse(app.buttons["studio-chapter-content"].exists, "Créer ne doit pas s'ouvrir sur le Studio")
+        XCTAssertFalse(app.buttons["create-change"].exists)
         snapshot("create-start")
     }
 
-    /// A card of « Pour toi » opens the Studio on a ready widget (a new one, on « Contenu »); the back button
-    /// returns to the start screen.
-    func testForYouOpensTheStudioAndBackReturnsToTheStartScreen() {
-        launch(["-screenshotScreen", "spaces"])
-        let card = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "create-for-you-")).firstMatch
-        XCTAssertTrue(card.waitForExistence(timeout: 15), "« Pour toi » ne propose aucun widget")
-        card.tap()
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "La carte n'ouvre pas le Studio")
-        XCTAssertTrue(waitForSelection("studio-chapter-content"), "Le Studio s'ouvre sur « Contenu »")
-        XCTAssertTrue(element("studio-size").exists, "La taille est dans « Contenu »")
-        XCTAssertTrue(element("studio-content").exists, "Le contenu du widget est dans « Contenu »")
-        XCTAssertTrue(app.buttons["create-change"].exists, "« Changer de widget » est sur la scène")
-        XCTAssertTrue(partRows().firstMatch.waitForExistence(timeout: 5), "« Dans ce widget » est vide")
-        goBack()
-        XCTAssertTrue(app.buttons["create-scratch-medium"].waitForExistence(timeout: 8), "Le retour ne ramène pas à l'écran de départ")
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForNonExistence(timeout: 8), "Le Studio est resté ouvert")
+    /// Size, then category, then the widgets: goes to the page of the widgets of a category.
+    private func openPicks(size: String, category: String, file: StaticString = #filePath, line: UInt = #line) {
+        let sizeCard = app.buttons["create-size-\(size)"]
+        XCTAssertTrue(sizeCard.waitForExistence(timeout: 15), "Taille « \(size) » absente", file: file, line: line)
+        sizeCard.tap()
+        reveal("create-category-\(category)", file: file, line: line).tap()
+        XCTAssertTrue(element("create-places").waitForExistence(timeout: 8), "La page des widgets ne s'ouvre pas", file: file, line: line)
     }
 
-    /// From scratch, in Moyen: the Studio opens on one widget; « + » on the stage adds a second one of the space,
-    /// and the two are now one combined widget (two widgets inside, two touch zones on the stage).
-    func testCreateFromScratchThenAddAWidgetCombinesThem() {
+    /// Moyen: the first widget fills the widget, a second one combines them; the others are then refused (2 at most).
+    /// « Personnaliser le widget » opens the Studio on ONE widget with the two inside; back returns to the picks.
+    func testMediumPicksTwoWidgetsIntoOneWidget() {
         launch(["-screenshotScreen", "spaces"])
-        reveal("create-scratch-medium").tap()
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 15), "« Moyen » n'ouvre pas le Studio")
+        openPicks(size: "medium", category: "space-fitness")
+        let go = app.buttons["create-pick-go"]
+        XCTAssertTrue(go.exists, "« Personnaliser le widget » absent en Moyen")
+        XCTAssertFalse(go.isEnabled, "Rien de choisi : pas encore de widget à personnaliser")
+        reveal("create-pick-nextSet", bottomMargin: 210).tap()
+        XCTAssertTrue(waitUntil { go.isEnabled }, "Un seul widget en Moyen fait déjà un widget (sa version moyenne)")
+        reveal("create-pick-trainingStreak", bottomMargin: 210).tap()
+        XCTAssertTrue(waitUntil { self.element("create-places").label.contains("Combiné") }, "Deux widgets : « Combiné · 2 widgets »")
+        XCTAssertFalse(app.buttons["create-pick-todaysWorkout"].isEnabled, "Un 3e widget est refusé en Moyen (2 au plus)")
+        snapshot("create-pick-medium")
+        go.tap()
+        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "« Personnaliser le widget » n'ouvre pas le Studio")
+        XCTAssertTrue(waitUntil { partRows().count == 2 }, "Le Studio n'a pas un seul widget avec les 2 dedans (lignes : \(partRows().count))")
+        goBack()
+        XCTAssertTrue(go.waitForExistence(timeout: 8), "Le retour ne ramène pas aux widgets choisis")
+    }
+
+    /// Petit: one widget; the touch opens the Studio at once. There, « + » still joins a second widget.
+    func testSmallTouchOpensTheStudioThenAddAWidget() {
+        launch(["-screenshotScreen", "spaces"])
+        openPicks(size: "small", category: "space-fitness")
+        XCTAssertFalse(app.buttons["create-pick-go"].exists, "Pas de bouton en Petit : le toucher ouvre le Studio")
+        reveal("create-pick-nextSet", bottomMargin: 210).tap()
+        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "Le toucher en Petit n'ouvre pas le Studio")
         XCTAssertTrue(partRows().firstMatch.waitForExistence(timeout: 8), "« Dans ce widget » est vide")
-        XCTAssertEqual(partRows().count, 1, "Un widget seul : une seule ligne dans « Dans ce widget »")
+        XCTAssertEqual(partRows().count, 1, "Petit : un seul widget")
         let add = app.buttons["stage-add"]
         XCTAssertTrue(add.waitForExistence(timeout: 8), "Le « + » de la scène est absent")
         add.tap()
@@ -203,6 +214,47 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(app.buttons["stage-part-0"].exists && app.buttons["stage-part-1"].exists, "Une zone par widget sur la scène")
         snapshot("create-combine")
     }
+
+    /// A save in Créer shows the add guide once the widget has flown away; closing it leaves Créer on the sizes.
+    func testSavingInCreateShowsTheAddGuideThenStaysInCreate() {
+        launch(["-screenshotScreen", "spaces"])
+        openPicks(size: "small", category: "space-fitness")
+        reveal("create-pick-nextSet", bottomMargin: 210).tap()
+        XCTAssertTrue(app.buttons["create-change"].waitForExistence(timeout: 15), "« Petit » n'ouvre pas le Studio")
+        let save = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Enregistrer")).firstMatch
+        XCTAssertTrue(save.waitForExistence(timeout: 8), "Bouton Enregistrer absent")
+        save.tap()
+        let understood = app.buttons["Compris"]
+        XCTAssertTrue(understood.waitForExistence(timeout: 15), "Le guide d'ajout n'apparaît pas après l'enregistrement")
+        understood.tap()
+        XCTAssertTrue(app.buttons["create-size-medium"].waitForExistence(timeout: 8), "Créer ne revient pas sur le choix de la taille")
+        XCTAssertTrue(app.buttons["create-change"].waitForNonExistence(timeout: 8), "Le Studio est resté ouvert après l'enregistrement")
+        snapshot("create-after-save")
+    }
+
+    /// « Changer de widget » goes back to the categories at the same size; another category's widget comes back to
+    /// the Studio. No sheet that makes separate widgets.
+    func testChangeWidgetGoesBackToTheCategories() {
+        launch(["-screenshotScreen", "spaces"])
+        openPicks(size: "medium", category: "space-fitness")
+        reveal("create-pick-nextSet", bottomMargin: 210).tap()
+        app.buttons["create-pick-go"].tap()
+        let change = app.buttons["create-change"]
+        XCTAssertTrue(change.waitForExistence(timeout: 10), "Le Studio n'est pas ouvert")
+        change.tap()
+        XCTAssertTrue(app.buttons["create-category-space-nutrition"].waitForExistence(timeout: 8) || reveal("create-category-space-nutrition").exists,
+                      "« Changer de widget » ne ramène pas aux catégories")
+        XCTAssertFalse(app.buttons["creator-continue"].exists, "Plus de feuille qui fait des widgets séparés")
+        reveal("create-category-space-nutrition").tap()
+        XCTAssertTrue(element("create-places").waitForExistence(timeout: 8), "La page des widgets ne s'ouvre pas")
+        reveal("create-pick-caloriesLeft", bottomMargin: 210).tap()
+        app.buttons["create-pick-go"].tap()
+        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "Le Studio n'est pas revenu")
+        snapshot("create-atelier")
+    }
+
+
+
 
     /// A ready combined widget (Nutrition, Moyen): « Disposition » reorders its widgets; a third widget makes it
     /// Grand with a note and « Annuler », which takes the addition back.
@@ -298,60 +350,8 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(waitUntil { widget.frame.height > large * 0.95 }, "Le widget ne reprend pas sa taille")
     }
 
-    /// « Dupliquer un de mes widgets »: a widget chosen opens in the Studio as a copy; with nothing to copy, the
-    /// sheet says so.
-    func testDuplicateOpensACopyInTheStudio() {
-        launch(["-screenshotScreen", "spaces"])
-        reveal("create-duplicate").tap()
-        let picks = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "duplicate-pick-"))
-        if !picks.firstMatch.waitForExistence(timeout: 8) {
-            XCTAssertTrue(app.staticTexts["Tu n'as pas encore de widget à copier. Crée-en un, puis reviens ici."].exists, "La feuille de copie est vide sans le dire")
-            return
-        }
-        picks.firstMatch.tap()
-        let name = app.textFields["widget-name"]
-        XCTAssertTrue(name.waitForExistence(timeout: 10), "La copie ne s'ouvre pas dans le Studio")
-        XCTAssertTrue((name.value as? String ?? "").hasSuffix("(copie)"), "La copie porte le nom de l'original : \(name.value as? String ?? "")")
-        snapshot("create-duplicate")
-    }
 
-    /// A save in Créer shows the add guide once the widget has flown away; closing it leaves Créer on its start screen.
-    func testSavingInCreateShowsTheAddGuideThenStaysInCreate() {
-        launch(["-screenshotScreen", "spaces"])
-        reveal("create-scratch-small").tap()
-        XCTAssertTrue(app.buttons["create-change"].waitForExistence(timeout: 15), "« Petit » n'ouvre pas le Studio")
-        let save = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", "Enregistrer")).firstMatch
-        XCTAssertTrue(save.waitForExistence(timeout: 8), "Bouton Enregistrer absent")
-        save.tap()
-        let understood = app.buttons["Compris"]
-        XCTAssertTrue(understood.waitForExistence(timeout: 15), "Le guide d'ajout n'apparaît pas après l'enregistrement")
-        understood.tap()
-        XCTAssertTrue(app.buttons["create-scratch-medium"].waitForExistence(timeout: 8), "Créer ne revient pas sur son écran de départ")
-        XCTAssertTrue(app.buttons["create-change"].waitForNonExistence(timeout: 8), "Le Studio est resté ouvert après l'enregistrement")
-        snapshot("create-after-save")
-    }
 
-    /// A ready widget opens the Studio, « Changer de widget » opens the catalogue, and a widget chosen there comes
-    /// back to the Studio.
-    func testCreateOpensOnTheStudioAndChangesWidget() {
-        launch(["-screenshotScreen", "spaces"])
-        let card = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "create-for-you-")).firstMatch
-        XCTAssertTrue(card.waitForExistence(timeout: 15), "Créer n'ouvre pas sur son écran de départ")
-        card.tap()
-        let change = app.buttons["create-change"]
-        XCTAssertTrue(change.waitForExistence(timeout: 10), "La carte n'ouvre pas le Studio")
-        XCTAssertTrue(app.textFields["widget-name"].exists || element("studio-content").exists, "Le Studio n'est pas là")
-        change.tap()
-        let space = app.buttons["space-card-nutrition"]
-        XCTAssertTrue(space.waitForExistence(timeout: 8), "Le catalogue n'est pas ouvert")
-        space.tap()
-        let next = app.buttons["creator-continue"]
-        XCTAssertTrue(next.waitForExistence(timeout: 8), "Le constructeur n'est pas ouvert")
-        next.tap()
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "Le Studio n'est pas revenu")
-        XCTAssertTrue(space.waitForNonExistence(timeout: 8), "La feuille est restée ouverte")
-        snapshot("create-atelier")
-    }
 
     // MARK: Chapters and tools
 

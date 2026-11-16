@@ -467,8 +467,8 @@ final class MiniAppUITests: XCTestCase {
     /// Créer: the Lock Screen category lists its widgets, marks the interactive ones and shows the live workout.
     func testTheLockScreenCategoryShowsItsWidgets() {
         launch(["-screenshotScreen", "spaces"])
-        // Créer opens on its start screen: « Écran verrouillé » is one of the four sizes to start from.
-        tap(app.buttons["create-scratch-lock"], "Écran verrouillé")
+        // Créer opens on the sizes: « Widget d'écran verrouillé » is the link under them.
+        tap(app.buttons["create-lock"], "Écran verrouillé")
         XCTAssertTrue(app.descendants(matching: .any)["lock-creator"].waitForExistence(timeout: 6))
         XCTAssertTrue(app.descendants(matching: .any)["lock-workout-preview"].waitForExistence(timeout: 4), "La séance en direct est présentée")
         snapshot("lock-creator")

@@ -146,11 +146,15 @@ final class DailyHomeTests: XCTestCase {
 
     func testAppModelStartsWithNothingAndFollowsTheInterests() {
         let model = temporaryModel()
-        XCTAssertTrue(DailyCategories.home(model: model, now: wednesday(9), steps: nil).isEmpty, "A new account without interests: no card")
+        // The week's schedule shows for everyone (PDG, 2026-11-16), empty: the week table, nothing invented.
+        XCTAssertEqual(ids(DailyCategories.home(model: model, now: wednesday(9), steps: nil)), ["planning"],
+                       "A new account without interests: only the week's schedule")
         model.update(\.profile) { $0.interests = [.sport, .nutrition] }
         let tiles = DailyCategories.home(model: model, now: wednesday(9), steps: nil)
-        XCTAssertEqual(ids(tiles), ["nutrition", "workout"])
-        XCTAssertTrue(tiles.allSatisfy(isInvitation), "Nothing invented: empty cards")
+        XCTAssertEqual(ids(tiles), ["nutrition", "workout", "planning"])
+        XCTAssertTrue(tiles.prefix(2).allSatisfy(isInvitation), "Nothing invented: empty cards")
+        guard case let .planning(items) = tiles[2] else { return XCTFail("The schedule follows the meals and the session") }
+        XCTAssertTrue(items.isEmpty, "Nothing planned: an empty week, no made-up item")
     }
 
     func testAppModelPersonalizesAfterTheFirstEntry() {
@@ -159,7 +163,25 @@ final class DailyHomeTests: XCTestCase {
         let tiles = DailyCategories.home(model: model, now: wednesday(9), steps: nil)
         guard case let .nutrition(nutrition)? = tiles.first else { return XCTFail("The calorie target gives the nutrition card first") }
         XCTAssertEqual(nutrition.goals.kcal, 2_200)
-        XCTAssertEqual(tiles.count, 1, "No interest: only what is filled")
+        XCTAssertEqual(ids(tiles), ["nutrition", "planning"], "No interest: what is filled, and the week's schedule")
+    }
+
+    /// The week's schedule is on Mon Quotidien for everyone (PDG, 2026-11-16): after the meals and the session, in
+    /// place of a dotted Planning card, never twice, and off for good once the person removed it.
+    func testTheWeekScheduleShowsForEveryone() {
+        let nutrition = DailyBrief.Tile.empty(.nutrition)
+        let workout = DailyBrief.Tile.empty(.workout)
+        let habits = DailyBrief.Tile.empty(.habits)
+        XCTAssertEqual(ids(DailyCategories.withWeekSchedule([])), ["planning"])
+        XCTAssertEqual(ids(DailyCategories.withWeekSchedule([nutrition, habits, workout])), ["nutrition", "habits", "workout", "planning"],
+                       "Right after the last of the meals and the session")
+        XCTAssertEqual(ids(DailyCategories.withWeekSchedule([habits])), ["planning", "habits"], "First when neither is there")
+        XCTAssertEqual(ids(DailyCategories.withWeekSchedule([nutrition, .empty(.planning)])), ["nutrition", "planning"],
+                       "The week table replaces the dotted Planning card")
+        let planned = DailyBrief.Tile.planning(items: [])
+        XCTAssertEqual(ids(DailyCategories.withWeekSchedule([planned, nutrition])), ["planning", "nutrition"], "Already there: left where it is")
+        let shown = DailyBrief.arranged(DailyCategories.withWeekSchedule([nutrition]), order: [], hidden: ["planning"])
+        XCTAssertEqual(ids(shown), ["nutrition"], "Removed by the person, it stays off")
     }
 
     // MARK: The « + »
@@ -263,7 +285,7 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertTrue(model.profile.knows(.kcalTarget))
         let tiles = DailyBrief.arranged(DailyCategories.home(model: model, now: wednesday(9), steps: nil),
                                         order: model.settings.dailyOrder, hidden: model.settings.dailyHidden)
-        XCTAssertTrue(tiles.isEmpty)
+        XCTAssertEqual(ids(tiles), ["planning"], "Only the week's schedule stays")
         XCTAssertEqual(DailyCategories.addable(shown: tiles).first, .nutrition)
     }
 
@@ -447,7 +469,8 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertEqual(relaunched.settings.dailyHidden, ["workout"])
         let tiles = DailyBrief.arranged(DailyCategories.home(model: relaunched, now: wednesday(9), steps: nil),
                                         order: relaunched.settings.dailyOrder, hidden: relaunched.settings.dailyHidden)
-        XCTAssertEqual(ids(tiles), ["app-car", "nutrition"], "The added card, the interest, the removed one off, in their order")
+        XCTAssertEqual(ids(tiles), ["app-car", "nutrition", "planning"],
+                       "The added card, the interest, the removed one off, in their order, then the week's schedule")
         // Data arriving later doesn't bring the removed card back.
         relaunched.update(\.fitness) { $0.routines = [Routine(name: "Jambes", exercises: [ExerciseTemplate(name: "Squat", sets: 2, reps: 8, weight: 80)], weekdays: [3])] }
         let after = DailyBrief.arranged(DailyCategories.home(model: relaunched, now: wednesday(9), steps: nil),

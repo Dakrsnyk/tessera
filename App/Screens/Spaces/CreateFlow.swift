@@ -600,15 +600,19 @@ private struct CreatePickPage: View {
     }
 }
 
-/// The places of the size: each one taken by a widget (its number) or free (« + »), the count, and the result.
+/// The widget as it will be, live: the first widget alone fills the whole size, a second one splits it (PDG,
+/// 2026-11-16). Before any pick, or while the picks don't make a widget yet, the places of the size (taken or
+/// free) stand in for it. Then the count and the result.
 private struct PlacesCard: View {
     let draft: CreationDraft
     @Environment(\.appStyle) private var style
+    @Environment(AppModel.self) private var model
 
     var body: some View {
         let palette = CristalPalette.of(style.id)
         VStack(spacing: 10) {
-            places(palette: palette)
+            preview(palette: palette)
+                .animation(.easeInOut(duration: 0.25), value: draft.picked)
             HStack(spacing: 8) {
                 HStack(spacing: 4) {
                     ForEach(0..<draft.room, id: \.self) { index in
@@ -638,12 +642,34 @@ private struct PlacesCard: View {
         .accessibilityIdentifier("create-places")
     }
 
+    /// The real widget (the one the Atelier will open), or the places while there is none yet.
+    @ViewBuilder private func preview(palette: CristalPalette) -> some View {
+        if let design = draft.design {
+            WidgetPreview(design: design, family: draft.format.family, payload: model.previewPayload(for: design), width: previewWidth)
+                .shadow(color: .black.opacity(0.14), radius: 10, y: 5)
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+                .transition(.opacity)
+                .id(draft.picked)
+        } else {
+            places(palette: palette)
+        }
+    }
+
+    private var previewWidth: CGFloat {
+        switch draft.format {
+        case .small: 150
+        case .medium: 300
+        case .large: 220
+        }
+    }
+
     /// The outline of the size, its places filled in order with the widgets picked.
     private func places(palette: CristalPalette) -> some View {
         let columns = draft.format == .small ? 1 : 2
         let rows = draft.format == .large ? 2 : 1
         let size = SizeSilhouette.points(draft.format)
-        let width: CGFloat = draft.format == .small ? 110 : (draft.format == .medium ? 250 : 180)
+        let width: CGFloat = previewWidth
         return RoundedRectangle(cornerRadius: 22, style: .continuous)
             .fill(Color.white.opacity(0.95))
             .overlay {

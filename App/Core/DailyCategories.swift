@@ -51,8 +51,23 @@ enum DailyCategories {
         for category in DailyBrief.Category.allCases {
             if let app = category.app, let caption = MiniAppSummary.caption(app, model, now: now) { captions[category] = caption }
         }
-        return DailyBrief.completing(base, appCaptions: captions,
-                                     empty: wanted(input: input, settings: model.settings))
+        let tiles = DailyBrief.completing(base, appCaptions: captions,
+                                          empty: wanted(input: input, settings: model.settings))
+        return withWeekSchedule(tiles)
+    }
+
+    /// The week's schedule shows for everyone, Planning chosen at the start or not (PDG, 2026-11-16): without
+    /// anything planned, the Planning card is the week table itself (not a dotted invitation), right after
+    /// the meals and the session. Removed by the person, it stays off (`DailyBrief.arranged`).
+    static func withWeekSchedule(_ tiles: [DailyBrief.Tile]) -> [DailyBrief.Tile] {
+        var tiles = tiles.filter { tile in
+            if case .empty(.planning) = tile { return false }
+            return true
+        }
+        guard !tiles.contains(where: { $0.id == DailyBrief.Category.planning.tileID }) else { return tiles }
+        let after = tiles.lastIndex { $0.id == "nutrition" || $0.id == "workout" }.map { $0 + 1 } ?? 0
+        tiles.insert(.planning(items: []), at: min(after, tiles.count))
+        return tiles
     }
 
     // MARK: Which categories show

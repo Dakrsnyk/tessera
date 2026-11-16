@@ -15,9 +15,10 @@ struct ExploreView: View {
     @State private var openedSetup: HomeSetup?
     @AppStorage(SetupFavorites.key) private var favoritesRaw = ""
 
-    /// The aisles of the Store, from the week's picks to the styles.
+    /// The aisles of the Store, from the week's picks to the styles. The wallpapers come last but one, just
+    /// above the styles (PDG, 2026-11-16: they are not the heart of Ardane).
     enum StoreAisle: String, CaseIterable, Identifiable {
-        case featured, screens, wallpapers, widgets, combos, packs, themes, styles
+        case featured, screens, widgets, combos, packs, themes, wallpapers, styles
         var id: String { rawValue }
 
         var title: String {

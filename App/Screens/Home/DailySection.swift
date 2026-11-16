@@ -89,6 +89,8 @@ struct DailySection: View {
             switch tile {
             case .invite, .empty, .miniApp(_, caption: nil): false
             case let .priorities(items) where items.isEmpty: false
+            // The week's schedule is there for everyone: empty, it isn't something the person entered.
+            case let .planning(items) where items.isEmpty: false
             default: true
             }
         }
@@ -527,7 +529,7 @@ private struct DayCard<Content: View>: View {
     let symbol: String
     let colorHex: String
     var route: HomeRoute?
-    /// A tag next to the title (« Maintenant »): the card to do right now, on glass.
+    /// A tag next to the title (« Maintenant »): the card to do right now.
     var badge: String? = nil
     @ViewBuilder let content: () -> Content
     @Environment(\.appStyle) private var style
@@ -550,12 +552,10 @@ private struct DayCard<Content: View>: View {
         }
     }
 
-    @ViewBuilder private func surface<V: View>(_ view: V, radius: CGFloat) -> some View {
-        if badge != nil {
-            view.cristalGlass(in: RoundedRectangle(cornerRadius: radius, style: .continuous))
-        } else {
-            view.cristalPanel(radius: radius)
-        }
+    /// The same panel with or without « Maintenant » (PDG, 2026-11-16: only the information changes). The glass
+    /// it used to wear for the card to do now changed its look, and its blur was cut square by the card's pager.
+    private func surface<V: View>(_ view: V, radius: CGFloat) -> some View {
+        view.cristalPanel(radius: radius)
     }
 }
 
