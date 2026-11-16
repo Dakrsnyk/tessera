@@ -104,7 +104,9 @@ struct StudioChapterBar: View {
             withAnimation(.easeInOut(duration: 0.2)) { selection = chapter }
         } label: {
             HStack(spacing: 6) {
+                // Hidden: VoiceOver reads the « checkmark » symbol as selected, and that trait would pass to the button.
                 badge(chapter, isSelected: isSelected, isDone: isDone, palette: palette)
+                    .accessibilityHidden(true)
                 Text(chapter.title)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(isSelected ? Color.primary : Color.secondary)
@@ -124,6 +126,7 @@ struct StudioChapterBar: View {
         }
         .buttonStyle(.pressable)
         .accessibilityLabel(Text(chapter.title))
+        .accessibilityValue(isDone ? Text(tr("Fait")) : Text(verbatim: ""))
         .accessibilityAddTraits(isSelected ? .isSelected : [])
         .accessibilityIdentifier("studio-chapter-\(chapter.rawValue)")
     }

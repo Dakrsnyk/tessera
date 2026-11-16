@@ -41,19 +41,43 @@ final class StudioUITests: XCTestCase {
         let height = app.frame.height > 200 ? app.frame.height : 874
         // Reachable: on screen and not under the save bar at the bottom (the toolbar arrows are at the top).
         func reachable() -> Bool {
-            button.isHittable && (button.frame.maxY < height - bottomMargin || button.frame.maxY < 140)
+            button.exists && button.isHittable && (button.frame.maxY < height - bottomMargin || button.frame.maxY < 140)
         }
         var swipes = 0
+        var lastUp = true
         while !reachable() && swipes < 12 {
-            // A short drag without momentum over the settings, under the fixed preview: up to reach
-            // what is below, down to come back to what scrolled away above.
-            let isAbove = button.frame.midY < height * 0.5
-            let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: isAbove ? 0.55 : 0.72))
-            let end = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: isAbove ? 0.72 : 0.55))
-            start.press(forDuration: 0.05, thenDragTo: end, withVelocity: .slow, thenHoldForDuration: 0.1)
+            // A short drag without momentum inside the settings (in the Studio they sit under the preview, the
+            // chapters and the row of tools; a drag on that row would scroll nothing): up to reach what is below,
+            // down to come back to what scrolled away above.
+            let area = scrollArea(height: height, bottomMargin: bottomMargin)
+            let up: Bool
+            if button.exists {
+                let frame = button.frame
+                up = frame.maxY > area.maxY ? true : (frame.minY < area.minY ? false : frame.midY > area.midY)
+            } else {
+                // A lazy list let it go once it scrolled past: come back the other way.
+                up = !lastUp
+            }
+            let origin = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+            let low = origin.withOffset(CGVector(dx: area.midX, dy: area.minY + area.height * 0.7))
+            let high = origin.withOffset(CGVector(dx: area.midX, dy: area.minY + area.height * 0.3))
+            (up ? low : high).press(forDuration: 0.05, thenDragTo: up ? high : low, withVelocity: .slow, thenHoldForDuration: 0.1)
+            lastUp = up
             swipes += 1
         }
         return button
+    }
+
+    /// The visible part of the page that scrolls: the tallest scroll view, above the save bar.
+    private func scrollArea(height: CGFloat, bottomMargin: CGFloat) -> CGRect {
+        let width = app.frame.width > 100 ? app.frame.width : 402
+        let views = app.scrollViews.allElementsBoundByIndex.filter { $0.frame.height > 120 && $0.frame.width > 200 }
+        guard let tallest = views.max(by: { $0.frame.height < $1.frame.height }) else {
+            return CGRect(x: 0, y: height * 0.5, width: width, height: height * 0.3)
+        }
+        let top = max(tallest.frame.minY, 0)
+        let bottom = min(tallest.frame.maxY, height - bottomMargin)
+        return CGRect(x: max(tallest.frame.minX, 0), y: top, width: min(tallest.frame.width, width), height: max(bottom - top, 80))
     }
 
     // MARK: Helpers of the chapters and of the widgets inside
