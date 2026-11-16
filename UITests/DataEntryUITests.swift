@@ -174,9 +174,27 @@ final class DataEntryUITests: XCTestCase {
         launch(["-screenshotScreen", "editor-v2"])
         let name = app.textFields["widget-name"]
         XCTAssertTrue(name.waitForExistence(timeout: 15), "Éditeur absent")
-        // The field can start under the bottom of the screen: scrolled to as a person would. Scrolling raises the
-        // settings (a spring), so it is touched once it has stopped moving, not where it was.
+        // The field can start under the bottom of the screen. Settings down, the middle of the screen is the large
+        // widget, where a drag scrolls nothing: they are raised by their handle first, as a person would, then
+        // scrolled to the field. The spring of the settings is let settle before the touch.
+        let handle = app.buttons["studio-panel-handle"]
+        if !isReachable(name), handle.waitForExistence(timeout: 5), handle.label == "Agrandir les réglages" {
+            handle.tap()
+            var waited = 0
+            while handle.label != "Agrandir l'aperçu" && waited < 20 {
+                Thread.sleep(forTimeInterval: 0.25)
+                waited += 1
+            }
+            Thread.sleep(forTimeInterval: 0.8)
+        }
         reveal(name, "Nom du widget")
+        // Above the save bar, as for « Données de l'espace » below: a touch under it would save the widget.
+        let screenHeight = app.frame.height.isFinite && app.frame.height > 200 ? app.frame.height : 874
+        var lifts = 0
+        while name.frame.maxY > screenHeight - 160 && lifts < 5 {
+            scrollDownOnce()
+            lifts += 1
+        }
         var last = name.frame
         for _ in 0..<12 {
             Thread.sleep(forTimeInterval: 0.25)
