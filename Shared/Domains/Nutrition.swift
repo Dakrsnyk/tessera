@@ -647,9 +647,6 @@ enum NutritionTarget: String, Codable, CaseIterable, Identifiable {
     /// The value on a food (per 100 g), to know whether a day's total is complete.
     var foodPath: KeyPath<FoodItem, Double?>? { nutrient.foodPath }
 
-    /// The targets that follow the calories when only the calories were typed by hand.
-    var followsCalories: Bool { [.protein, .carbs, .fat, .fiber, .sugars, .saturatedFat, .transFat].contains(self) }
-
     /// The facts widgets read as « the person's own target ».
     var providedFact: ProvidedFact? {
         switch self {

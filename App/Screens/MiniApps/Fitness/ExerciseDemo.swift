@@ -363,8 +363,6 @@ struct DemoPalette {
     private let rgb: [Int: SIMD3<Double>]
     let backgroundRGB: SIMD3<Double>
 
-    static let roleNames = ["ink", "muscle", "muscle2", "frame", "pad", "load", "cable", "floor", "mark", "metal"]
-
     init(scheme: ColorScheme, accentHex: String) {
         let dark = scheme == .dark
         let bg = dark ? "1A1B1E" : "F3F3F5"

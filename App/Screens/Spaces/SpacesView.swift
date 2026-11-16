@@ -421,48 +421,6 @@ extension AppModel {
     }
 }
 
-struct SpaceCard: View {
-    let space: Space
-    let summary: String
-    let widgetCount: Int
-    @Environment(\.appStyle) private var style
-
-    var body: some View {
-        let tint = CristalPalette.of(style.id).category(space.colorHex)
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Image(systemName: space.symbol)
-                    .font(.system(size: 17, weight: .semibold))
-                    .foregroundStyle(tint)
-                    .frame(width: 38, height: 38)
-                    .background(tint.opacity(0.14), in: Circle())
-                Spacer()
-                Text("\(widgetCount)")
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(Color.secondary)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 3)
-                    .background(.screenFill, in: Capsule())
-                    .accessibilityLabel(Text(tr("\(widgetCount) widgets")))
-            }
-            VStack(alignment: .leading, spacing: 2) {
-                Text(space.title)
-                    .font(.headline)
-                    .foregroundStyle(Color.primary)
-                Text(summary)
-                    .font(.caption)
-                    .foregroundStyle(Color.secondary)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .frame(maxWidth: .infinity, minHeight: 118, alignment: .topLeading)
-        .card(padding: 14)
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
-    }
-}
-
 struct SpaceExample {
     let design: WidgetDesign
     let family: WidgetFamily

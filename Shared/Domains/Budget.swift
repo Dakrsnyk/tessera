@@ -688,11 +688,6 @@ enum BudgetMath {
         return (goal.target - goal.saved) / Double(months)
     }
 
-    /// The bills due in the next days, and their total.
-    static func billsTotal(_ state: BudgetState, at date: Date, within days: Int) -> Double {
-        upcomingBills(state, at: date, within: days).reduce(0) { $0 + $1.bill.amount }
-    }
-
     static func billsMonthly(_ state: BudgetState) -> Double {
         state.bills.reduce(0) { $0 + $1.monthlyCost }
     }

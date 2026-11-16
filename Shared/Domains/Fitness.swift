@@ -645,7 +645,6 @@ enum FitnessMath {
         var best: SetLog? { sets.max { FitnessMath.oneRepMax($0) < FitnessMath.oneRepMax($1) } }
         var volume: Double { sets.reduce(0) { $0 + $1.volume } }
         var topWeight: Double { sets.map(\.weight).max() ?? 0 }
-        var totalReps: Int { sets.reduce(0) { $0 + $1.reps } }
     }
 
     static func oneRepMax(_ set: SetLog) -> Double { set.weight * (1 + Double(set.reps) / 30) }

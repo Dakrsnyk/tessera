@@ -339,29 +339,6 @@ enum TextureKind: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-/// A typography preset: several text settings at once.
-struct TypePreset: Identifiable, Hashable {
-    let id: String
-    let name: String
-    let font: FontChoice
-    let numberWeight: WeightChoice
-    let titleWeight: WeightChoice
-    let valueScale: Double
-    let titleCase: TitleCase
-    let tracking: Double
-
-    static let all: [TypePreset] = [
-        TypePreset(id: "system", name: tr("Système"), font: .standard, numberWeight: .semibold, titleWeight: .semibold, valueScale: 1, titleCase: .upper, tracking: 0),
-        TypePreset(id: "display", name: tr("Affiche"), font: .standard, numberWeight: .black, titleWeight: .bold, valueScale: 1.2, titleCase: .upper, tracking: 0.5),
-        TypePreset(id: "light", name: tr("Léger"), font: .standard, numberWeight: .light, titleWeight: .regular, valueScale: 1.1, titleCase: .normal, tracking: 0),
-        TypePreset(id: "friendly", name: tr("Arrondi"), font: .rounded, numberWeight: .bold, titleWeight: .semibold, valueScale: 1, titleCase: .normal, tracking: 0),
-        TypePreset(id: "editorial", name: tr("Éditorial"), font: .serif, numberWeight: .regular, titleWeight: .medium, valueScale: 1.1, titleCase: .upper, tracking: 1.2),
-        TypePreset(id: "classic", name: tr("Classique"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),
-        TypePreset(id: "code", name: tr("Code"), font: .mono, numberWeight: .medium, titleWeight: .medium, valueScale: 0.95, titleCase: .lower, tracking: 0),
-        TypePreset(id: "tech", name: tr("Technique"), font: .mono, numberWeight: .light, titleWeight: .regular, valueScale: 1, titleCase: .upper, tracking: 1.5),
-    ]
-}
-
 /// Two colors, a direction and an intensity: the person's own gradient.
 struct GradientSpec: Codable, Hashable {
     var startHex: String

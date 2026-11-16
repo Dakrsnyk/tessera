@@ -60,35 +60,4 @@ extension AppModel {
         }
         return facts
     }
-
-    /// How many of a topic's main questions are still unanswered.
-    func missingCount(for topic: ProfileTopic) -> Int {
-        let answered: [Bool]
-        switch topic {
-        case .sport:
-            answered = [profile.fitnessGoal != nil, profile.weightKg != nil, profile.heightCm != nil, age != nil, profile.knows(.weeklyWorkouts)]
-        case .nutrition:
-            answered = [profile.knows(.kcalTarget), profile.knows(.proteinTarget), profile.knows(.carbsTarget), profile.knows(.fatTarget)]
-        case .money:
-            answered = [profile.monthlyIncome != nil, profile.knows(.monthlyBudget), profile.monthlySavingsGoal != nil]
-        case .business:
-            answered = [profile.knows(.businessName), profile.knows(.businessGoal)]
-        case .productivity:
-            answered = [!profile.mainGoal.trimmed.isEmpty, profile.dailyWorkHours != nil, profile.knows(.focusGoal)]
-        case .studies:
-            answered = [!profile.studyField.trimmed.isEmpty, profile.weeklyStudyHours != nil]
-        case .car:
-            answered = [profile.knows(.carName), CarMath.odometer(car) != nil]
-        case .wellbeing:
-            answered = [!content.habits.isEmpty]
-        }
-        return answered.filter { !$0 }.count
-    }
-
-    /// The topics « Mes informations » shows: the user's interests first, then any topic they gave values for.
-    var infoTopics: [ProfileTopic] {
-        let chosen = profile.topics
-        let others = ProfileTopic.allCases.filter { !chosen.contains($0) && !facts(for: $0).isEmpty }
-        return chosen + others
-    }
 }

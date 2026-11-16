@@ -117,8 +117,6 @@ enum StripeSync {
         }
     }
 
-    static var isConnected: Bool { SecretStore.read(keychainAccount) != nil }
-
     /// Checks the key with one request, keeps it in the keychain, then syncs.
     static func connect(key raw: String, model: AppModel) async -> Failure? {
         let key = raw.trimmed

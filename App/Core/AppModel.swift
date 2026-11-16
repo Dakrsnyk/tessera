@@ -287,8 +287,6 @@ final class AppModel {
         designs.sorted { ($0.lastUsedAt ?? $0.updatedAt) > ($1.lastUsedAt ?? $1.updatedAt) }
     }
 
-    var favoriteDesigns: [WidgetDesign] { recentDesigns.filter(\.isFavorite) }
-
     func design(id: UUID) -> WidgetDesign? { designs.first { $0.id == id } }
 
     func isSaved(_ design: WidgetDesign) -> Bool { designs.contains { $0.id == design.id } }

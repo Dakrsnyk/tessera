@@ -212,41 +212,6 @@ enum StoreShowcase {
 
 // MARK: - Views
 
-/// A widget of any Home Screen size, at a given height, with its name and look below.
-struct ShowcaseCard: View {
-    let item: ShowcaseItem
-    var height: CGFloat = 150
-    let isPremiumUser: Bool
-
-    var body: some View {
-        let design = item.widget.makeDesign()
-        let width = height * item.widget.family.aspectRatio
-        VStack(alignment: .leading, spacing: 8) {
-            WidgetPreview(design: design, family: item.widget.family, payload: SamplePayload.make(for: design), width: width)
-            HStack(spacing: 6) {
-                VStack(alignment: .leading, spacing: 1) {
-                    Text(item.title)
-                        .font(.subheadline.weight(.semibold))
-                        .foregroundStyle(.primary)
-                        .lineLimit(1)
-                    Text(item.subtitle)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                }
-                Spacer(minLength: 0)
-                if design.usesPremiumFeatures && !isPremiumUser {
-                    PremiumBadge(compact: true)
-                }
-            }
-        }
-        .frame(width: width)
-        .contentShape(Rectangle())
-        .accessibilityElement(children: .combine)
-        .accessibilityHint(Text(tr("Ouvre l'éditeur")))
-    }
-}
-
 /// A Lock Screen widget on a small piece of wallpaper, under the clock.
 struct LockShowcaseCard: View {
     let item: ShowcaseItem

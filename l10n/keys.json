@@ -125,7 +125,7 @@
  "%@ (copie)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:357: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")",
+   "App/Core/AppModel.swift:355: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")",
    "App/Screens/Spaces/CreateStartView.swift:80: copy.name = tr(\"\\(design.name) (copie)\")"
   ]
  },
@@ -146,7 +146,7 @@
  "%@ (variante)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:357: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
+   "App/Core/AppModel.swift:355: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
  "%@ / %@ kcal": {
@@ -1073,12 +1073,6 @@
    "Shared/Render/Tiles/FitnessTiles.swift:245: tile.inline = tr(\"\\(trained.count) séances en \\(Fmt.month(now).lowercased())\")"
   ]
  },
- "%@ widgets": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:446: .accessibilityLabel(Text(tr(\"\\(widgetCount) widgets\")))"
-  ]
- },
  "%@ widgets en plus, %@ styles, analyses et fonds photo.": {
   "placeholders": 2,
   "uses": [
@@ -1096,12 +1090,6 @@
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:50: var summary: String { tr(\"\\(parts.count) widgets · \\(category.title)\") }",
    "App/Screens/Explore/StoreMagazine.swift:213: Text(width == nil ? tr(\"\\(pack.kinds.count) widgets · \\(ThemeCatalog.theme(pack.themeID).name)\") : tr(\"Style \\(ThemeCatalog.theme(pack.themeID).name)\"))"
-  ]
- },
- "%@ widgets · style %@": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:558: Text(tr(\"\\(pack.kinds.count) widgets · style \\(ThemeCatalog.theme(pack.themeID).name)\"))"
   ]
  },
  "%@ · %@": {
@@ -1287,7 +1275,7 @@
   "placeholders": 2,
   "uses": [
    "App/Core/AdExport.swift:390: load: job.string(\"load\") ?? tr(\"\\(8) × \\(60) kg\"),",
-   "App/Core/MarketingShots.swift:135: load: tr(\"\\(8) × \\(60) kg\"),"
+   "App/Core/MarketingShots.swift:134: load: tr(\"\\(8) × \\(60) kg\"),"
   ]
  },
  "%@ à %@": {
@@ -1346,7 +1334,7 @@
  "%@ écrans prêts\nà installer.": {
   "placeholders": 1,
   "uses": [
-   "App/Core/MarketingShots.swift:639: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
+   "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
   ]
  },
  "%@ — %@. Tes widgets gardent chacun leur propre style.": {
@@ -2113,7 +2101,7 @@
  "8 mini-apps,\nune seule app.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:856: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+   "App/Core/MarketingShots.swift:855: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
  "8 × 60 kg": {
@@ -2458,7 +2446,7 @@
  "Activité en direct": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:664: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Activités": {
@@ -2503,12 +2491,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/WeightPlan.swift:61: case .adult: tr(\"Adulte\")"
-  ]
- },
- "Affiche": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/WidgetStyle.swift:355: TypePreset(id: \"display\", name: tr(\"Affiche\"), font: .standard, numberWeight: .black, titleWeight: .bold, valueScale: 1.2, titleCase: .upper, tracking: 0.5),"
   ]
  },
  "Affiche un widget que tu as créé dans Ardane.": {
@@ -2865,9 +2847,9 @@
   "placeholders": 0,
   "uses": [
    "App/Components/StylePicker.swift:172: Text(tr(\"Ajouter\"))",
-   "App/Screens/Explore/StoreMagazine.swift:565: Text(tr(\"Ajouter\"))",
    "App/Screens/Home/DailySection.swift:1478: Text(tr(\"Ajouter\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:275: Button(tr(\"Ajouter\")) {"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:275: Button(tr(\"Ajouter\")) {",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:428: .accessibilityHint(tr(\"Ajouter\"))"
   ]
  },
  "Ajouter (maillot, cadeaux…)": {
@@ -3835,13 +3817,13 @@
  "Arctique": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:721: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:698: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
   ]
  },
  "Ardane": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:178: Text(tr(\"Ardane\"))",
+   "App/Core/MarketingShots.swift:177: Text(tr(\"Ardane\"))",
    "App/Screens/Explore/HomeSetupViews.swift:258: label(tr(\"Ardane\"))",
    "App/Screens/Explore/HomeSetups.swift:136: static let tessera = SetupApp(name: tr(\"Ardane\"), symbol: \"\")",
    "App/Screens/Launch/LaunchView.swift:15: Text(tr(\"Ardane\"))"
@@ -4008,8 +3990,7 @@
  "Arrondi": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:195: case .rounded: tr(\"Arrondi\")",
-   "Shared/Model/WidgetStyle.swift:357: TypePreset(id: \"friendly\", name: tr(\"Arrondi\"), font: .rounded, numberWeight: .bold, titleWeight: .semibold, valueScale: 1, titleCase: .normal, tracking: 0),"
+   "Shared/Model/WidgetStyle.swift:195: case .rounded: tr(\"Arrondi\")"
   ]
  },
  "Arrondie": {
@@ -4371,7 +4352,7 @@
  "Aucun compte à créer": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:940: row(\"person.crop.circle.badge.xmark\", tr(\"Aucun compte à créer\"))"
+   "App/Core/MarketingShots.swift:939: row(\"person.crop.circle.badge.xmark\", tr(\"Aucun compte à créer\"))"
   ]
  },
  "Aucun cours trouvé": {
@@ -4566,7 +4547,7 @@
  "Aucune pub, aucun suivi": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:941: row(\"eye.slash.fill\", tr(\"Aucune pub, aucun suivi\"))"
+   "App/Core/MarketingShots.swift:940: row(\"eye.slash.fill\", tr(\"Aucune pub, aucun suivi\"))"
   ]
  },
  "Aucune règle pour l'instant. Quand tu changes la catégorie d'une dépense Apple Pay, Ardane s'en souvient pour ce commerçant et classe les prochains paiements tout seul.": {
@@ -5272,7 +5253,7 @@
  "Beige chaud, serif élégant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:717: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {"
+   "Shared/Model/WidgetStyle.swift:694: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {"
   ]
  },
  "Beigne glacé": {
@@ -5490,7 +5471,7 @@
  "Blanc pur, noir net, rien de trop": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:673: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
+   "Shared/Model/WidgetStyle.swift:650: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
   ]
  },
  "Bleu abyssal et vagues : les habitudes, le calendrier et la lune.": {
@@ -5538,7 +5519,7 @@
  "Bleu glacier et blanc": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:721: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:698: make(\"arctic\", tr(\"Arctique\"), tr(\"Bleu glacier et blanc\"), theme: .modern, accent: \"2F80ED\", background: .gradient) {"
   ]
  },
  "Bleu héroïque, cape rouge, éclat doré": {
@@ -5550,7 +5531,7 @@
  "Bleu nuit, chiffres fins, lueur discrète": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:667: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:644: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
   ]
  },
  "Bleu profond, net et franc": {
@@ -5691,7 +5672,7 @@
   "uses": [
    "App/Screens/Editor/StudioComponents.swift:26: case .border: tr(\"Bordure\")",
    "App/Screens/Editor/StudioPanels.swift:386: StudioGroup(title: tr(\"Bordure\"), isPremium: !model.isPremium) {",
-   "Shared/Model/WidgetStyle.swift:588: if border != .none { features.append(tr(\"Bordure\")) }"
+   "Shared/Model/WidgetStyle.swift:565: if border != .none { features.append(tr(\"Bordure\")) }"
   ]
  },
  "Bordure lumineuse": {
@@ -5992,7 +5973,7 @@
  "Budget, dépenses, revenus": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:846: (.finances, tr(\"Budget, dépenses, revenus\")),"
+   "App/Core/MarketingShots.swift:845: (.finances, tr(\"Budget, dépenses, revenus\")),"
   ]
  },
  "Buenos Aires": {
@@ -6422,7 +6403,7 @@
  "Calories et macros calculées pour toi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:729: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
+   "App/Core/MarketingShots.swift:728: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
   ]
  },
  "Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures.": {
@@ -6461,7 +6442,7 @@
  "Calories, macros, code-barres": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:843: (.nutrition, tr(\"Calories, macros, code-barres\")),"
+   "App/Core/MarketingShots.swift:842: (.nutrition, tr(\"Calories, macros, code-barres\")),"
   ]
  },
  "Calories, macros, protéines et série de suivi.": {
@@ -7321,7 +7302,7 @@
  "Chaque série\ncompte.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:747: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
+   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
   ]
  },
  "Charge": {
@@ -7930,8 +7911,7 @@
  "Classique": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppIcons.swift:33: AppIconChoice(asset: \"ArdaneIcon-Classic\", title: tr(\"Classique\")),",
-   "Shared/Model/WidgetStyle.swift:359: TypePreset(id: \"classic\", name: tr(\"Classique\"), font: .serif, numberWeight: .black, titleWeight: .semibold, valueScale: 1.15, titleCase: .normal, tracking: 0),"
+   "App/Core/AppIcons.swift:33: AppIconChoice(asset: \"ArdaneIcon-Classic\", title: tr(\"Classique\")),"
   ]
  },
  "Clients": {
@@ -8012,13 +7992,7 @@
  "Cockpit": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:730: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
-  ]
- },
- "Code": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/WidgetStyle.swift:360: TypePreset(id: \"code\", name: tr(\"Code\"), font: .mono, numberWeight: .medium, titleWeight: .medium, valueScale: 0.95, titleCase: .lower, tracking: 0),"
+   "Shared/Model/WidgetStyle.swift:707: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
   ]
  },
  "Code-barres ou aliments": {
@@ -8073,13 +8047,13 @@
  "Collection Halloween": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:699: case .halloween: tr(\"Collection Halloween\")"
+   "App/Screens/Explore/StoreMagazine.swift:523: case .halloween: tr(\"Collection Halloween\")"
   ]
  },
  "Collection de Noël": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:700: case .christmas: tr(\"Collection de Noël\")"
+   "App/Screens/Explore/StoreMagazine.swift:524: case .christmas: tr(\"Collection de Noël\")"
   ]
  },
  "Collections": {
@@ -8379,7 +8353,7 @@
  "Confidentialité": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:929: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
+   "App/Core/MarketingShots.swift:928: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
    "App/Premium/PaywallView.swift:386: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
    "App/Screens/Profile/ProfileView.swift:197: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
@@ -8860,7 +8834,7 @@
  "Couleurs personnalisées": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:585: if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty || !seriesHexes.isEmpty { features.append(tr(\"Couleurs personnalisées\")) }"
+   "Shared/Model/WidgetStyle.swift:562: if colors.contains(where: { $0 != nil }) || !rowColors.isEmpty || !seriesHexes.isEmpty { features.append(tr(\"Couleurs personnalisées\")) }"
   ]
  },
  "Couleurs vives": {
@@ -9371,7 +9345,7 @@
  "Créer un événement ce jour-là": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/WeekViews.swift:414: .accessibilityAction(named: Text(tr(\"Créer un événement ce jour-là\"))) {"
+   "App/Screens/MiniApps/WeekViews.swift:272: .accessibilityAction(named: Text(tr(\"Créer un événement ce jour-là\"))) {"
   ]
  },
  "Créer une séance": {
@@ -9487,7 +9461,7 @@
  "Cyber": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:695: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
+   "Shared/Model/WidgetStyle.swift:672: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
   ]
  },
  "Céleri": {
@@ -10246,7 +10220,7 @@
  "Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:713: case .halloween: tr(\"Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.\")"
+   "App/Screens/Explore/StoreMagazine.swift:537: case .halloween: tr(\"Des packs sombres et mystérieux, inspirés des héros et des nuits d'Halloween. Jusqu'au 31 octobre.\")"
   ]
  },
  "Des repas enregistrés, à reprendre d'une touche": {
@@ -10265,7 +10239,7 @@
  "Des styles\npour tout.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:814: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
+   "App/Core/MarketingShots.swift:813: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
   ]
  },
  "Des sélections de widgets autour d'un thème, d'un format ou d'un style.": {
@@ -10295,7 +10269,7 @@
  "Des widgets sous l'heure, assortis à ton fond.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:798: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
+   "App/Core/MarketingShots.swift:797: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
   ]
  },
  "Des écrans complets : fond d'écran, widgets et écran verrouillé assortis. Touche-en un pour l'installer.": {
@@ -10922,7 +10896,7 @@
  "Du turquoise au bleu profond": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:679: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:656: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
   ]
  },
  "Du verre dépoli teinté de la couleur principale, avec ses reflets. Change la couleur principale pour le teinter.": {
@@ -11197,7 +11171,7 @@
  "Dégradé personnalisé": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:586: if gradient != nil { features.append(tr(\"Dégradé personnalisé\")) }"
+   "Shared/Model/WidgetStyle.swift:563: if gradient != nil { features.append(tr(\"Dégradé personnalisé\")) }"
   ]
  },
  "Dégradés doux": {
@@ -11523,7 +11497,7 @@
  "Dépenses, revenus, catégories.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:832: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
+   "App/Core/MarketingShots.swift:831: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
   ]
  },
  "Dépensé": {
@@ -11641,7 +11615,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/AdExport.swift:387: exercise: job.string(\"exercise\") ?? tr(\"Développé couché\"),",
-   "App/Core/MarketingShots.swift:132: exercise: tr(\"Développé couché\"),",
+   "App/Core/MarketingShots.swift:131: exercise: tr(\"Développé couché\"),",
    "App/Screens/Spaces/LockScreenCreator.swift:108: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),",
    "Shared/Data/SampleData.swift:139: ExerciseTemplate(name: tr(\"Développé couché\"), sets: 4, reps: 8, weight: 60, restSeconds: 120),"
   ]
@@ -11817,7 +11791,7 @@
  "Elles nourrissent tes widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:856: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+   "App/Core/MarketingShots.swift:855: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
  "Emplacement": {
@@ -12922,7 +12896,7 @@
  "Femme": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1076: case .female: tr(\"Femme\")",
+   "Shared/Domains/Nutrition.swift:1073: case .female: tr(\"Femme\")",
    "Shared/Domains/Profile.swift:240: case .female: tr(\"Femme\")"
   ]
  },
@@ -13176,7 +13150,7 @@
  "Finances": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:832: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {",
+   "App/Core/MarketingShots.swift:831: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:175: .navigationTitle(tr(\"Finances\"))",
    "App/Screens/MiniApps/MiniApp.swift:14: case .finances: tr(\"Finances\")",
    "Shared/Domains/Profile.swift:123: case .money: tr(\"Finances\")"
@@ -13315,7 +13289,7 @@
  "Fond, widgets et icônes assortis, en un geste.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:639: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
+   "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))"
   ]
  },
  "Fonds d'urgence": {
@@ -13397,7 +13371,7 @@
  "Forest": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:684: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
+   "Shared/Model/WidgetStyle.swift:661: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
   ]
  },
  "Forme": {
@@ -13994,7 +13968,7 @@
  "Glass": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:707: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
+   "Shared/Model/WidgetStyle.swift:684: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
   ]
  },
  "Glisse le long du mur jusqu'aux cuisses parallèles au sol.": {
@@ -14024,7 +13998,7 @@
  "Glucides": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:734: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: NutritionColors.carbsHex, progress: day.totals.carbs / max(1, day.goals.carbs))",
+   "App/Core/MarketingShots.swift:733: MarketingBubble(value: \"\\(TF.int(day.totals.carbs)) g\", label: tr(\"Glucides\"), colorHex: NutritionColors.carbsHex, progress: day.totals.carbs / max(1, day.goals.carbs))",
    "App/Screens/Home/DailySection.swift:598: compactMacro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex, incomplete: nutrition.eaten.isIncomplete)",
    "App/Screens/Home/DailySection.swift:703: macro(tr(\"Glucides\"), nutrition.eaten.carbs, nutrition.knowsCarbs ? nutrition.goals.carbs : nil, NutritionColors.carbsHex, incomplete: nutrition.eaten.isIncomplete)",
    "App/Screens/Home/MyInfoSection.swift:33: add(\"carbs\", \"leaf\", tr(\"Glucides\"), profile.knows(.carbsTarget) ? \"\\(TF.int(nutrition.goals.carbs)) g\" : nil)"
@@ -14186,7 +14160,7 @@
  "Gris doux, chiffres noirs": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:708: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {"
+   "Shared/Model/WidgetStyle.swift:685: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {"
   ]
  },
  "Groupes accordés": {
@@ -14340,7 +14314,7 @@
  "Hacker": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:726: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
+   "Shared/Model/WidgetStyle.swift:703: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
   ]
  },
  "Halifax": {
@@ -14489,7 +14463,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/AdExport.swift:377: let attributes = WorkoutActivityAttributes(routineName: job.string(\"routine\") ?? tr(\"Haut du corps\"))",
-   "App/Core/MarketingShots.swift:130: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
+   "App/Core/MarketingShots.swift:129: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
    "App/Screens/Spaces/LockScreenCreator.swift:106: let attributes = WorkoutActivityAttributes(routineName: tr(\"Haut du corps\"))",
    "Shared/Data/SampleData.swift:138: let upper = Routine(name: tr(\"Haut du corps\"), exercises: ["
   ]
@@ -14647,7 +14621,7 @@
  "Homme": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1077: case .male: tr(\"Homme\")",
+   "Shared/Domains/Nutrition.swift:1074: case .male: tr(\"Homme\")",
    "Shared/Domains/Profile.swift:241: case .male: tr(\"Homme\")"
   ]
  },
@@ -14713,13 +14687,13 @@
  "Horaire, tâches, habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:845: (.planning, tr(\"Horaire, tâches, habitudes\")),"
+   "App/Core/MarketingShots.swift:844: (.planning, tr(\"Horaire, tâches, habitudes\")),"
   ]
  },
  "Horaire, tâches, habitudes, focus.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:822: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
+   "App/Core/MarketingShots.swift:821: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
   ]
  },
  "Horaires et fréquence": {
@@ -16050,7 +16024,7 @@
  "L'écran\nverrouillé\naussi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:798: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
+   "App/Core/MarketingShots.swift:797: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))"
   ]
  },
  "L'élastique ou la machine allège une partie du poids du corps.": {
@@ -16207,7 +16181,7 @@
  "La magie de Noël": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:707: case .christmas: tr(\"La magie de Noël\")"
+   "App/Screens/Explore/StoreMagazine.swift:531: case .christmas: tr(\"La magie de Noël\")"
   ]
  },
  "La main ne sert qu'à l'équilibre.": {
@@ -17036,7 +17010,7 @@
  "Le repos démarre tout seul.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:664: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à partir de DINOv2 (Meta, licence Apache 2.0) et de RF-DETR (Roboflow, licence Apache 2.0). Les photos restent sur ton iPhone.": {
@@ -17338,7 +17312,7 @@
  "Les héros de la nuit": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:706: case .halloween: tr(\"Les héros de la nuit\")"
+   "App/Screens/Explore/StoreMagazine.swift:530: case .halloween: tr(\"Les héros de la nuit\")"
   ]
  },
  "Les jambes battent en petits mouvements rapides.": {
@@ -17722,7 +17696,7 @@
  "Lipides": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:736: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: NutritionColors.fatHex, progress: day.totals.fat / max(1, day.goals.fat))",
+   "App/Core/MarketingShots.swift:735: MarketingBubble(value: \"\\(TF.int(day.totals.fat)) g\", label: tr(\"Lipides\"), colorHex: NutritionColors.fatHex, progress: day.totals.fat / max(1, day.goals.fat))",
    "App/Screens/Home/DailySection.swift:599: compactMacro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex, incomplete: nutrition.eaten.isIncomplete)",
    "App/Screens/Home/DailySection.swift:704: macro(tr(\"Lipides\"), nutrition.eaten.fat, nutrition.knowsFat ? nutrition.goals.fat : nil, NutritionColors.fatHex, incomplete: nutrition.eaten.isIncomplete)",
    "App/Screens/Home/MyInfoSection.swift:34: add(\"fat\", \"drop\", tr(\"Lipides\"), profile.knows(.fatTarget) ? \"\\(TF.int(nutrition.goals.fat)) g\" : nil)"
@@ -17963,7 +17937,7 @@
  "Luxury": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:701: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),"
+   "Shared/Model/WidgetStyle.swift:678: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),"
   ]
  },
  "Lâcher la barre d'un coup.": {
@@ -18014,12 +17988,6 @@
    "App/Screens/Editor/StudioPanels.swift:72: if tile.caption != nil { Toggle(tr(\"Légende\"), isOn: shown(\"caption\")) }"
   ]
  },
- "Léger": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/WidgetStyle.swift:356: TypePreset(id: \"light\", name: tr(\"Léger\"), font: .standard, numberWeight: .light, titleWeight: .regular, valueScale: 1.1, titleCase: .normal, tracking: 0),"
-  ]
- },
  "Léger buste vers l'avant.": {
   "placeholders": 0,
   "uses": [
@@ -18041,7 +18009,7 @@
  "Légère (1–3 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1088: case .light: tr(\"Légère (1–3 séances)\")"
+   "Shared/Domains/Nutrition.swift:1085: case .light: tr(\"Légère (1–3 séances)\")"
   ]
  },
  "M. Gagnon": {
@@ -18178,7 +18146,7 @@
  "Magenta et cyan, bord lumineux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:695: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
+   "Shared/Model/WidgetStyle.swift:672: make(\"cyber\", tr(\"Cyber\"), tr(\"Magenta et cyan, bord lumineux\"), theme: .neon, accent: \"00F0FF\") {"
   ]
  },
  "Magnésium": {
@@ -18289,7 +18257,7 @@
  "Maintenir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1100: case .maintain: tr(\"Maintenir\")",
+   "Shared/Domains/Nutrition.swift:1097: case .maintain: tr(\"Maintenir\")",
    "Shared/Domains/Profile.swift:219: case .maintain: tr(\"Maintenir\")"
   ]
  },
@@ -18889,7 +18857,7 @@
  "Midnight": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:667: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:644: make(\"midnight\", tr(\"Midnight\"), tr(\"Bleu nuit, chiffres fins, lueur discrète\"), theme: .dark, accent: \"7C9CFF\", background: .gradient) {"
   ]
  },
  "Miel": {
@@ -18901,7 +18869,7 @@
  "Mini-apps": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:856: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))",
+   "App/Core/MarketingShots.swift:855: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))",
    "App/Screens/Home/MiniAppsRow.swift:224: .navigationTitle(tr(\"Mini-apps\"))"
   ]
  },
@@ -18916,7 +18884,7 @@
  "Minimal Black": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:702: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
+   "Shared/Model/WidgetStyle.swift:679: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
   ]
  },
  "Minimal et noir": {
@@ -19091,7 +19059,7 @@
  "Modérée (3–5 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1089: case .moderate: tr(\"Modérée (3–5 séances)\")"
+   "Shared/Domains/Nutrition.swift:1086: case .moderate: tr(\"Modérée (3–5 séances)\")"
   ]
  },
  "Moins d'une minute : rien n'a été noté": {
@@ -19185,7 +19153,7 @@
  "Mon Quotidien": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, budget.\")) {",
+   "App/Core/MarketingShots.swift:761: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, budget.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:99: .navigationTitle(tr(\"Mon Quotidien\"))",
    "App/Screens/Home/DailySection.swift:98: Text(tr(\"Mon Quotidien\").uppercased())",
    "App/Screens/Tutorial/Tutorial.swift:64: case .daily: tr(\"Mon Quotidien\")"
@@ -19233,15 +19201,15 @@
  "Mon repas": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:689: name = c.value(.name, tr(\"Mon repas\"))"
+   "Shared/Domains/Nutrition.swift:686: name = c.value(.name, tr(\"Mon repas\"))"
   ]
  },
  "Mon thème": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:409: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
+   "App/Core/AppModel.swift:407: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
    "App/Screens/Editor/StudioPanels.swift:497: TextField(tr(\"Mon thème\"), text: $newName)",
-   "Shared/Model/WidgetStyle.swift:764: name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr(\"Mon thème\")"
+   "Shared/Model/WidgetStyle.swift:741: name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr(\"Mon thème\")"
   ]
  },
  "Mon âge": {
@@ -19262,7 +19230,7 @@
  "Monochrome": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:708: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {",
+   "Shared/Model/WidgetStyle.swift:685: make(\"monochrome\", tr(\"Monochrome\"), tr(\"Gris doux, chiffres noirs\"), theme: .light, accent: \"3A3A3C\", background: .color(\"E9E9EB\")) {",
    "Shared/Theme/Theme.swift:130: id: .monochrome, name: tr(\"Monochrome\"), tagline: tr(\"Noir, blanc, rien d'autre\"), isPremium: false,"
   ]
  },
@@ -19559,7 +19527,7 @@
  "Moyenne des deux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1078: case .neutral: tr(\"Moyenne des deux\")"
+   "Shared/Domains/Nutrition.swift:1075: case .neutral: tr(\"Moyenne des deux\")"
   ]
  },
  "Moyenne générale": {
@@ -19827,7 +19795,7 @@
  "Noir et jaune fluo, gros chiffres": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:729: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
+   "Shared/Model/WidgetStyle.swift:706: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
   ]
  },
  "Noir et jaune fluo, énergie": {
@@ -19845,7 +19813,7 @@
  "Noir profond et or": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:701: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),",
+   "Shared/Model/WidgetStyle.swift:678: make(\"luxury\", tr(\"Luxury\"), tr(\"Noir profond et or\"), theme: .luxury, accent: \"D4AF37\"),",
    "Shared/Theme/Theme.swift:343: id: .luxury, name: tr(\"Luxe\"), tagline: tr(\"Noir profond et or\"), isPremium: true,"
   ]
  },
@@ -19858,7 +19826,7 @@
  "Noir total, une seule couleur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:702: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
+   "Shared/Model/WidgetStyle.swift:679: make(\"minimal-black\", tr(\"Minimal Black\"), tr(\"Noir total, une seule couleur\"), theme: .monochrome, accent: \"FFFFFF\") {"
   ]
  },
  "Noir, blanc et rien d'autre. L'heure, la journée, la semaine.": {
@@ -20655,7 +20623,7 @@
  "Nutrition": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:729: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {",
+   "App/Core/MarketingShots.swift:728: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:166: case .nutrition: (tr(\"Nutrition\"), \"fork.knife\", \"F08A24\")",
    "App/Screens/Home/DailySection.swift:579: DayHeader(title: tr(\"Nutrition\"), symbol: \"fork.knife\", colorHex: \"F08A24\", showsChevron: true)",
    "App/Screens/Home/DailySection.swift:667: DayHeader(title: tr(\"Nutrition\"), symbol: \"fork.knife\", colorHex: \"F08A24\", showsChevron: true)"
@@ -20671,7 +20639,7 @@
  "Nutrition, sport, planning, budget.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:692: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
+   "App/Core/MarketingShots.swift:691: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
   ]
  },
  "Nébuleuse": {
@@ -20943,7 +20911,7 @@
  "Ocean": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:679: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:656: make(\"ocean\", tr(\"Ocean\"), tr(\"Du turquoise au bleu profond\"), theme: .modern, accent: \"5EE6D0\", background: .gradient) {"
   ]
  },
  "Océan": {
@@ -20989,7 +20957,7 @@
  "Ombre et profondeur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:589: if depth != .none { features.append(tr(\"Ombre et profondeur\")) }"
+   "Shared/Model/WidgetStyle.swift:566: if depth != .none { features.append(tr(\"Ombre et profondeur\")) }"
   ]
  },
  "Omelette nature": {
@@ -21088,7 +21056,7 @@
  "Orange, rose et violet du soir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:690: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:667: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
   ]
  },
  "Orchidée": {
@@ -21305,18 +21273,6 @@
    "App/Screens/Explore/StoreMagazine.swift:235: .accessibilityLabel(Text(tr(\"Pack \\(pack.name), \\(pack.kinds.count) widgets. \\(pack.tagline)\")))"
   ]
  },
- "Pack de la semaine": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:530: Text(tr(\"Pack de la semaine\").uppercased())"
-  ]
- },
- "Pack de la semaine : %@, %@ widgets. %@": {
-  "placeholders": 3,
-  "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:584: .accessibilityLabel(Text(tr(\"Pack de la semaine : \\(pack.name), \\(pack.kinds.count) widgets. \\(pack.tagline)\")))"
-  ]
- },
  "Packs": {
   "placeholders": 0,
   "uses": [
@@ -21340,7 +21296,7 @@
  "Packs, collections, fonds d'écran.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:814: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
+   "App/Core/MarketingShots.swift:813: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {"
   ]
  },
  "Pad thaï": {
@@ -21940,7 +21896,7 @@
  "Perdre doucement": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1099: case .lose: tr(\"Perdre doucement\")"
+   "Shared/Domains/Nutrition.swift:1096: case .lose: tr(\"Perdre doucement\")"
   ]
  },
  "Perdre du poids": {
@@ -22026,7 +21982,7 @@
  "Petites cartes sur ardoise": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:730: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
+   "Shared/Model/WidgetStyle.swift:707: make(\"dashboard\", tr(\"Cockpit\"), tr(\"Petites cartes sur ardoise\"), theme: .dashboard, accent: \"4DA3FF\"),"
   ]
  },
  "Petites cartes, tout d'un coup d'œil": {
@@ -22142,7 +22098,7 @@
  "Photos, collages, citations": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:850: (.photos, tr(\"Photos, collages, citations\")),"
+   "App/Core/MarketingShots.swift:849: (.photos, tr(\"Photos, collages, citations\")),"
   ]
  },
  "Photosynthèse": {
@@ -22243,7 +22199,7 @@
  "Planning": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:822: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {",
+   "App/Core/MarketingShots.swift:821: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {",
    "App/Screens/Home/DailyLayoutEditor.swift:168: case .planning: (tr(\"Planning\"), \"calendar.day.timeline.left\", \"3366FF\")",
    "App/Screens/Home/DailySection.swift:960: DayCard(title: tr(\"Planning\"), symbol: \"calendar.day.timeline.left\", colorHex: colorHex) {",
    "App/Screens/Home/DailySection.swift:965: .accessibilityLabel(Text(tr(\"Planning\")))"
@@ -22305,7 +22261,7 @@
  "Plein, entretien, échéances": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:849: (.car, tr(\"Plein, entretien, échéances\")),"
+   "App/Core/MarketingShots.swift:848: (.car, tr(\"Plein, entretien, échéances\")),"
   ]
  },
  "Pleine": {
@@ -22501,7 +22457,7 @@
  "Plus de 100\nwidgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:905: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
+   "App/Core/MarketingShots.swift:904: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
   ]
  },
  "Plus forte variation": {
@@ -23432,7 +23388,7 @@
  "Prendre du muscle": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1101: case .gain: tr(\"Prendre du muscle\")",
+   "Shared/Domains/Nutrition.swift:1098: case .gain: tr(\"Prendre du muscle\")",
    "Shared/Domains/Profile.swift:220: case .gain: tr(\"Prendre du muscle\")"
   ]
  },
@@ -23743,7 +23699,7 @@
  "Programme, budget, valise": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:848: (.travel, tr(\"Programme, budget, valise\")),"
+   "App/Core/MarketingShots.swift:847: (.travel, tr(\"Programme, budget, valise\")),"
   ]
  },
  "Progresse en amplitude petit à petit.": {
@@ -23800,7 +23756,7 @@
  "Protéines": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:732: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: NutritionColors.proteinHex, progress: day.totals.protein / max(1, day.goals.protein))",
+   "App/Core/MarketingShots.swift:731: MarketingBubble(value: \"\\(TF.int(day.totals.protein)) g\", label: tr(\"Protéines\"), colorHex: NutritionColors.proteinHex, progress: day.totals.protein / max(1, day.goals.protein))",
    "App/Screens/Home/DailySection.swift:597: compactMacro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex, incomplete: nutrition.eaten.isIncomplete)",
    "App/Screens/Home/DailySection.swift:702: macro(tr(\"Protéines\"), nutrition.eaten.protein, nutrition.knowsProtein ? nutrition.goals.protein : nil, NutritionColors.proteinHex, incomplete: nutrition.eaten.isIncomplete)",
    "App/Screens/Home/MyInfoSection.swift:32: add(\"protein\", \"bolt.heart\", tr(\"Protéines\"), profile.knows(.proteinTarget) ? \"\\(TF.int(nutrition.goals.protein)) g\" : nil)"
@@ -23987,7 +23943,7 @@
  "Pure White": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:673: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
+   "Shared/Model/WidgetStyle.swift:650: make(\"pure-white\", tr(\"Pure White\"), tr(\"Blanc pur, noir net, rien de trop\"), theme: .light, accent: \"111114\", background: .color(\"FFFFFF\")) {"
   ]
  },
  "Pâle, léger, presque translucide": {
@@ -24898,7 +24854,7 @@
  "Repas, séance, eau, pas, budget.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, budget.\")) {"
+   "App/Core/MarketingShots.swift:761: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, budget.\")) {"
   ]
  },
  "Repassé en Moyen : %@ widgets réunis.": {
@@ -25893,7 +25849,7 @@
  "Rose poudré et prune": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:712: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
+   "Shared/Model/WidgetStyle.swift:689: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
   ]
  },
  "Rose tendre, formes rondes": {
@@ -26427,7 +26383,7 @@
    "Shared/Model/PhotoQuote.swift:78: QuotePalette(id: \"sand\", name: tr(\"Sable\"), backgroundHex: \"E8D5B5\", textHex: \"3E3020\"),",
    "Shared/Model/Settings.swift:23: case .sable: tr(\"Sable\")",
    "Shared/Model/StyleColors.swift:84: make(\"sand\", tr(\"Sable\"), background: [\"F5EDE1\"], panel: \"E9DAC3\", text: \"3A2A1A\", secondary: \"8C7358\",",
-   "Shared/Model/WidgetStyle.swift:717: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {"
+   "Shared/Model/WidgetStyle.swift:694: make(\"sand\", tr(\"Sable\"), tr(\"Beige chaud, serif élégant\"), theme: .editorial, accent: \"A0522D\", background: .color(\"EFE3CC\")) {"
   ]
  },
  "Sable chaud, grain et serif": {
@@ -26475,7 +26431,7 @@
  "Sakura": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:712: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
+   "Shared/Model/WidgetStyle.swift:689: make(\"sakura\", tr(\"Sakura\"), tr(\"Rose poudré et prune\"), theme: .pastel, accent: \"D0487A\", background: .color(\"FBE4EC\")) {"
   ]
  },
  "Salade César": {
@@ -26605,7 +26561,7 @@
  "Sans compte, sans pub, sans suivi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:929: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
+   "App/Core/MarketingShots.swift:928: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
   ]
  },
  "Sans cours précis": {
@@ -26675,7 +26631,7 @@
  "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:714: case .christmas: tr(\"Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.\")"
+   "App/Screens/Explore/StoreMagazine.swift:538: case .christmas: tr(\"Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.\")"
   ]
  },
  "Sardines en conserve": {
@@ -26814,7 +26770,7 @@
  "Scanne.\nC'est noté.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:729: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
+   "App/Core/MarketingShots.swift:728: MarketingShowcase(eyebrow: tr(\"Nutrition\"), title: tr(\"Scanne.\\nC'est noté.\"), subtitle: tr(\"Calories et macros calculées pour toi.\")) {"
   ]
  },
  "Scanner": {
@@ -26829,7 +26785,7 @@
  "Scanner un aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:738: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
+   "App/Core/MarketingShots.swift:737: MarketingPill(symbol: \"barcode.viewfinder\", text: tr(\"Scanner un aliment\"), colorHex: \"F08A24\")",
    "Shared/Intents/FoodScannerIntent.swift:11: static var title: LocalizedStringResource = \"Scanner un aliment\"",
    "Shared/Intents/FoodScannerIntent.swift:32: .foodScanner: DisplayRepresentation(title: \"Scanner un aliment\"),",
    "Widgets/ScanFoodWidgets.swift:16: .configurationDisplayName(tr(\"Scanner un aliment\"))"
@@ -27009,8 +26965,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:85: .accessibilityLabel(Text(tr(\"Semaine précédente\")))",
    "App/Screens/MiniApps/WeekSelector.swift:72: .accessibilityLabel(Text(tr(\"Semaine précédente\")))",
-   "App/Screens/MiniApps/WeekViews.swift:70: .accessibilityLabel(Text(tr(\"Semaine précédente\")))",
-   "App/Screens/MiniApps/WeekViews.swift:674: .accessibilityLabel(Text(tr(\"Semaine précédente\")))"
+   "App/Screens/MiniApps/WeekViews.swift:532: .accessibilityLabel(Text(tr(\"Semaine précédente\")))"
   ]
  },
  "Semaine suivante": {
@@ -27018,8 +26973,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:103: .accessibilityLabel(Text(tr(\"Semaine suivante\")))",
    "App/Screens/MiniApps/WeekSelector.swift:83: .accessibilityLabel(Text(tr(\"Semaine suivante\")))",
-   "App/Screens/MiniApps/WeekViews.swift:79: .accessibilityLabel(Text(tr(\"Semaine suivante\")))",
-   "App/Screens/MiniApps/WeekViews.swift:678: .accessibilityLabel(Text(tr(\"Semaine suivante\")))"
+   "App/Screens/MiniApps/WeekViews.swift:536: .accessibilityLabel(Text(tr(\"Semaine suivante\")))"
   ]
  },
  "Semaines": {
@@ -27581,7 +27535,7 @@
  "Sport": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:747: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
+   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
    "App/Screens/Home/DailySection.swift:904: case .rest: tr(\"Sport\")",
    "Shared/Data/PayloadLoader.swift:88: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: history { $0 % 3 == 1 || $0 % 10 == 5 }),",
    "Shared/Data/SampleData.swift:44: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: keys([1, 2, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 23, 25, 27])),"
@@ -27668,7 +27622,7 @@
  "Stade": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:729: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
+   "Shared/Model/WidgetStyle.swift:706: make(\"sport\", tr(\"Stade\"), tr(\"Noir et jaune fluo, gros chiffres\"), theme: .sport, accent: \"C6FF00\"),"
   ]
  },
  "Standard": {
@@ -27708,8 +27662,8 @@
   "placeholders": 0,
   "uses": [
    "App/ArdaneApp.swift:307: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }",
-   "App/Core/MarketingShots.swift:639: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
-   "App/Core/MarketingShots.swift:814: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
+   "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
+   "App/Core/MarketingShots.swift:813: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
    "App/Screens/Explore/ExploreView.swift:131: .navigationTitle(tr(\"Store\"))"
   ]
  },
@@ -27734,7 +27688,7 @@
  "Studio": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:776: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {",
+   "App/Core/MarketingShots.swift:775: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {",
    "App/Screens/Editor/EditorView.swift:128: if !isNew { return tr(\"Studio\") }",
    "App/Screens/Tutorial/Tutorial.swift:54: case .studio: tr(\"Studio\")"
   ]
@@ -27771,7 +27725,7 @@
  "Style de la semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/StoreMagazine.swift:812: Text(tr(\"Style de la semaine\").uppercased())"
+   "App/Screens/Explore/StoreMagazine.swift:636: Text(tr(\"Style de la semaine\").uppercased())"
   ]
  },
  "Styles": {
@@ -27784,7 +27738,7 @@
  "Styles, couleurs, photos, polices.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:776: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
+   "App/Core/MarketingShots.swift:775: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
   ]
  },
  "Sucre blanc": {
@@ -27872,7 +27826,7 @@
  "Sunset": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:690: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
+   "Shared/Model/WidgetStyle.swift:667: make(\"sunset\", tr(\"Sunset\"), tr(\"Orange, rose et violet du soir\"), theme: .gradient, accent: \"FF8A5B\", background: .gradient) {"
   ]
  },
  "Super, il te reste %@ kcal pour compléter ta journée.": {
@@ -28311,12 +28265,6 @@
    "Shared/Theme/Theme.swift:532: id: .synthwave, name: tr(\"Synthwave\"), tagline: tr(\"Nuit violette et néon rose\"), isPremium: true,"
   ]
  },
- "Système": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/WidgetStyle.swift:354: TypePreset(id: \"system\", name: tr(\"Système\"), font: .standard, numberWeight: .semibold, titleWeight: .semibold, valueScale: 1, titleCase: .upper, tracking: 0),"
-  ]
- },
  "São Paulo": {
   "placeholders": 0,
   "uses": [
@@ -28428,8 +28376,8 @@
  "Séance, repos, calories et macros.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:712: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
+   "App/Core/MarketingShots.swift:662: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:711: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
   ]
  },
  "Séance, régularité, calories et protéines réunies.": {
@@ -28485,13 +28433,13 @@
  "Séances, repos, records": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:844: (.fitness, tr(\"Séances, repos, records\")),"
+   "App/Core/MarketingShots.swift:843: (.fitness, tr(\"Séances, repos, records\")),"
   ]
  },
  "Séances, repos, records et progrès.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:747: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
+   "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {"
   ]
  },
  "Séances, séries et records": {
@@ -28503,7 +28451,7 @@
  "Sédentaire": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1087: case .sedentary: tr(\"Sédentaire\")"
+   "Shared/Domains/Nutrition.swift:1084: case .sedentary: tr(\"Sédentaire\")"
   ]
  },
  "Sélection": {
@@ -28618,7 +28566,7 @@
  "Série faite ?\nUn geste.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:664: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
+   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Activité en direct\"), title: tr(\"Série faite ?\\nUn geste.\"), subtitle: tr(\"Le repos démarre tout seul.\"))"
   ]
  },
  "Série · %@": {
@@ -28759,7 +28707,7 @@
  "Ta journée,\nen un écran.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:762: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, budget.\")) {"
+   "App/Core/MarketingShots.swift:761: MarketingShowcase(eyebrow: tr(\"Mon Quotidien\"), title: tr(\"Ta journée,\\nen un écran.\"), subtitle: tr(\"Repas, séance, eau, pas, budget.\")) {"
   ]
  },
  "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": {
@@ -28855,7 +28803,7 @@
  "Ta semaine,\nbien en main.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:822: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
+   "App/Core/MarketingShots.swift:821: MarketingShowcase(eyebrow: tr(\"Planning\"), title: tr(\"Ta semaine,\\nbien en main.\"), subtitle: tr(\"Horaire, tâches, habitudes, focus.\")) {"
   ]
  },
  "Ta semaine, ton mois ou ta journée entière.": {
@@ -28891,7 +28839,7 @@
  "Ta vie entière\nen widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:692: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
+   "App/Core/MarketingShots.swift:691: MarketingHeadline(title: tr(\"Ta vie entière\\nen widgets.\"), subtitle: tr(\"Nutrition, sport, planning, budget.\"), showsBrand: true)"
   ]
  },
  "Ta voiture": {
@@ -29095,12 +29043,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Data/SampleData.swift:206: (90, 3, tr(\"Passe mensuelle\"), 1), (22 + Double(back), 3, tr(\"Taxi\"), 18),"
-  ]
- },
- "Technique": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/WidgetStyle.swift:361: TypePreset(id: \"tech\", name: tr(\"Technique\"), font: .mono, numberWeight: .light, titleWeight: .regular, valueScale: 1, titleCase: .upper, tracking: 1.5),"
   ]
  },
  "Tempo (ex. 3-1-1-0)": {
@@ -29373,7 +29315,7 @@
  "Tes données\nrestent à toi.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:929: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
+   "App/Core/MarketingShots.swift:928: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))"
   ]
  },
  "Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.": {
@@ -29791,7 +29733,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:874: EditorSection(title: tr(\"Texture\"), isPremium: !model.isPremium) {",
-   "Shared/Model/WidgetStyle.swift:587: if texture != .none { features.append(tr(\"Texture\")) }"
+   "Shared/Model/WidgetStyle.swift:564: if texture != .none { features.append(tr(\"Texture\")) }"
   ]
  },
  "Thanksgiving": {
@@ -30168,7 +30110,7 @@
  "Ton budget,\nsous contrôle.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:832: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
+   "App/Core/MarketingShots.swift:831: MarketingShowcase(eyebrow: tr(\"Finances\"), title: tr(\"Ton budget,\\nsous contrôle.\"), subtitle: tr(\"Dépenses, revenus, catégories.\")) {"
   ]
  },
  "Ton chiffre d'affaires du mois face à ton objectif.": {
@@ -30452,7 +30394,7 @@
  "Ton écran\nd'accueil,\ndéjà stylé.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))"
+   "App/Core/MarketingShots.swift:637: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))"
   ]
  },
  "Top 3": {
@@ -30621,7 +30563,7 @@
  "Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:577: Text(tr(\"Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.\"))"
+   "App/Screens/Spaces/SpacesView.swift:535: Text(tr(\"Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.\"))"
   ]
  },
  "Touche une catégorie pour changer son nom, sa couleur ou sa limite par mois.": {
@@ -30945,7 +30887,7 @@
  "Tout reste sur ton iPhone": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:939: row(\"iphone\", tr(\"Tout reste sur ton iPhone\"))"
+   "App/Core/MarketingShots.swift:938: row(\"iphone\", tr(\"Tout reste sur ton iPhone\"))"
   ]
  },
  "Tout sélectionner": {
@@ -30972,8 +30914,8 @@
  "Tout, sans\ndéverrouiller.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:712: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
+   "App/Core/MarketingShots.swift:662: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:711: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))"
   ]
  },
  "Toute l'amplitude confortable, sans plier les coudes.": {
@@ -31652,7 +31594,7 @@
  "Un widget,\nmille styles.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:776: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
+   "App/Core/MarketingShots.swift:775: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {"
   ]
  },
  "Un widget, 12 styles": {
@@ -32094,7 +32036,7 @@
  "Ventes, objectifs, MRR": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:847: (.business, tr(\"Ventes, objectifs, MRR\")),"
+   "App/Core/MarketingShots.swift:846: (.business, tr(\"Ventes, objectifs, MRR\")),"
   ]
  },
  "Ventes, objectifs, bénéfice et MRR.": {
@@ -32157,7 +32099,7 @@
  "Verre dépoli et reflets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:707: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
+   "Shared/Model/WidgetStyle.swift:684: make(\"glass\", tr(\"Glass\"), tr(\"Verre dépoli et reflets\"), theme: .liquidGlass, accent: \"5B7FE0\"),"
   ]
  },
  "Verre forêt": {
@@ -32272,7 +32214,7 @@
  "Vert forêt, texture papier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:684: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
+   "Shared/Model/WidgetStyle.swift:661: make(\"forest\", tr(\"Forest\"), tr(\"Vert forêt, texture papier\"), theme: .soft, accent: \"A8D672\", background: .color(\"1E3A2B\")) {"
   ]
  },
  "Vert jade, l'original": {
@@ -32290,7 +32232,7 @@
  "Vert sur noir, lignes de balayage": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:726: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
+   "Shared/Model/WidgetStyle.swift:703: make(\"terminal\", tr(\"Hacker\"), tr(\"Vert sur noir, lignes de balayage\"), theme: .terminal, accent: \"39FF6A\") {"
   ]
  },
  "Vert tendre et naturel": {
@@ -32727,7 +32669,7 @@
  "Widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:905: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
+   "App/Core/MarketingShots.swift:904: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
    "App/Screens/Explore/ExploreView.swift:28: case .widgets: tr(\"Widgets\")",
    "App/Screens/Explore/ExploreView.swift:590: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Spaces/SpaceBuilderView.swift:273: EditorSection(title: tr(\"Widgets\"), detail: widgetsDetail) {"
@@ -32742,7 +32684,7 @@
  "Widgets de l'espace": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:570: Text(tr(\"Widgets de l'espace\"))"
+   "App/Screens/Spaces/SpacesView.swift:528: Text(tr(\"Widgets de l'espace\"))"
   ]
  },
  "Widgets enregistrés": {
@@ -33920,7 +33862,7 @@
  "kcal restantes": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:730: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: NutritionColors.caloriesHex, progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
+   "App/Core/MarketingShots.swift:729: MarketingBubble(value: TF.int(left), label: tr(\"kcal restantes\"), colorHex: NutritionColors.caloriesHex, progress: day.totals.kcal / max(1, day.goals.kcal), size: 118)",
    "App/Screens/Home/DailySection.swift:589: Text(nutrition.kcalLeft.map { $0 >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\") } ?? tr(\"kcal mangées\"))",
    "App/Screens/Home/DailySection.swift:679: Text(left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:332: Text(known.kcal ? (left >= 0 ? tr(\"kcal restantes\") : tr(\"kcal en trop\")) : tr(\"kcal mangées\"))"
@@ -34910,7 +34852,7 @@
  "ta taille": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1157: if profile.heightCm == nil { missing.append(tr(\"ta taille\")) }"
+   "App/Core/AppModel.swift:1155: if profile.heightCm == nil { missing.append(tr(\"ta taille\")) }"
   ]
  },
  "terminée": {
@@ -34928,19 +34870,19 @@
  "ton genre": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1159: if profile.calculatorSex == nil { missing.append(tr(\"ton genre\")) }"
+   "App/Core/AppModel.swift:1157: if profile.calculatorSex == nil { missing.append(tr(\"ton genre\")) }"
   ]
  },
  "ton poids": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1158: if profile.weightKg == nil { missing.append(tr(\"ton poids\")) }"
+   "App/Core/AppModel.swift:1156: if profile.weightKg == nil { missing.append(tr(\"ton poids\")) }"
   ]
  },
  "ton âge": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1156: if age == nil { missing.append(tr(\"ton âge\")) }"
+   "App/Core/AppModel.swift:1154: if age == nil { missing.append(tr(\"ton âge\")) }"
   ]
  },
  "tout est prêt": {
@@ -35659,15 +35601,15 @@
  "Écran d'accueil et écran verrouillé.": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:905: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
+   "App/Core/MarketingShots.swift:904: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))"
   ]
  },
  "Écran verrouillé": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:663: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:712: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
-   "App/Core/MarketingShots.swift:798: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))",
+   "App/Core/MarketingShots.swift:662: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:711: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"Tout, sans\\ndéverrouiller.\"), subtitle: tr(\"Séance, repos, calories et macros.\"))",
+   "App/Core/MarketingShots.swift:797: MarketingHeadline(eyebrow: tr(\"Écran verrouillé\"), title: tr(\"L'écran\\nverrouillé\\naussi.\"), subtitle: tr(\"Des widgets sous l'heure, assortis à ton fond.\"))",
    "App/Screens/Editor/AddToHomeScreenGuide.swift:64: Text(tr(\"Écran verrouillé\")).tag(1)"
   ]
  },
@@ -35686,7 +35628,7 @@
  "Écrans d'accueil": {
   "placeholders": 0,
   "uses": [
-   "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
+   "App/Core/MarketingShots.swift:637: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
    "App/Screens/Explore/ExploreView.swift:26: case .screens: tr(\"Écrans d'accueil\")",
    "App/Screens/Explore/ExploreView.swift:544: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
    "App/Screens/Explore/HomeSetupViews.swift:524: .navigationTitle(tr(\"Écrans d'accueil\"))"
@@ -35707,7 +35649,6 @@
  "Éditorial": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/WidgetStyle.swift:358: TypePreset(id: \"editorial\", name: tr(\"Éditorial\"), font: .serif, numberWeight: .regular, titleWeight: .medium, valueScale: 1.1, titleCase: .upper, tracking: 1.2),",
    "Shared/Theme/Theme.swift:294: id: .editorial, name: tr(\"Éditorial\"), tagline: tr(\"Serif, papier et capitales\"), isPremium: true,"
   ]
  },
@@ -35756,7 +35697,7 @@
  "Élevée (6–7 séances)": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/Nutrition.swift:1090: case .active: tr(\"Élevée (6–7 séances)\")"
+   "Shared/Domains/Nutrition.swift:1087: case .active: tr(\"Élevée (6–7 séances)\")"
   ]
  },
  "Élégance": {

@@ -20,9 +20,6 @@ enum FoodModelError: Error {
 struct FoodModelCandidate: Hashable, Sendable {
     var key: String
     var probability: Double
-
-    /// False for a class with no food in the tables (its key is its label).
-    var isFood: Bool { !key.hasPrefix(FoodModelRecognizer.labelPrefix) }
 }
 
 /// What the classifier says about one square of the photo.

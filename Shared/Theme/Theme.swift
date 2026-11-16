@@ -943,7 +943,6 @@ struct ResolvedStyle {
 
     var horizontalAlignment: HorizontalAlignment { alignment == .center ? .center : .leading }
     var textAlignment: TextAlignment { alignment == .center ? .center : .leading }
-    var frameAlignment: Alignment { alignment == .center ? .center : .leading }
 
     // MARK: Studio
 

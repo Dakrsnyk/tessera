@@ -97,7 +97,6 @@ enum MK {
 
     static let red = Color(hex: "E5383B")
     static let orange = Color(hex: "FF8A3D")
-    static let deepRed = Color(hex: "B3202B")
     static let ink = Color(hex: "1A1516")
     /// The shadows under phones and cards on the light ground.
     static let shadow = Color(hex: "1F2128")
