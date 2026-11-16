@@ -65,7 +65,8 @@ Tous sur la CI GitHub Actions (simulateur iPhone 402 × 874 points, français) ;
 | Run 425 (lots 1 et 2) | `1e47926` | simulateur, iPhone non signé, IPA : OK ; contrôles statiques OK | 1 439 réussis, 12 en échec | voir ci-dessous |
 | Run 426 (lot 3 + tests corrigés) | `a5bb008` | simulateur, iPhone non signé, IPA : OK ; contrôles statiques OK ; traductions : 5 743 textes, 0 manquant, 0 non traduit | 1 449 réussis, 2 en échec | les 2 dans les tests du Studio, côté test (voir ci-dessous) |
 | Version interne Build 427 (Premium, TestFlight) | `cebf414` | Release signée, envoyée, « Internal Only » vérifié | pas de tests (build d'essai) | à essayer sur ton iPhone |
-| Run suivant (2 tests du Studio corrigés) | à venir | | | |
+| Run 428 (2 tests du Studio corrigés) | `e3d0d59` | OK | 1 449 réussis, 3 en échec | le champ « Nom » passe ; 3 autres défauts des tests (ci-dessous) |
+| Run suivant (3 tests corrigés) | à venir | | | |
 
 Les 12 échecs du run 425, tous analysés :
 - 9 tests logiques `ProfileMatrixTests` attendaient l'ancien Mon quotidien (profil vide = aucune carte). La règle a changé à ta demande (horaire de la semaine pour tous) : tests mis à jour, la garantie « rien d'inventé » reste vérifiée (l'horaire vide n'a aucun élément).
@@ -76,6 +77,11 @@ Les 2 échecs du run 426, analysés sur l'arbre d'écran enregistré au moment d
 - `testSettingsRiseAndComeBackDown` : la place des réglages était mesurée pendant le ressort de la montée (haut à 404 points au lieu de 336 une fois arrêtée) ; la montée elle-même est vérifiée juste avant (poignée, widget rapetissé et visible). Le test attend maintenant la fin du mouvement.
 - `testTheStudioChangesTheWidgetAndKeepsItAll` : au lancement, le champ « Nom » est sous le bas de l'écran. L'outil de test le fait défiler lui-même avant de le toucher ; ce défilement fait monter les réglages (comportement voulu) et le toucher tombe à l'ancienne place : le clavier ne s'ouvre pas. Une personne fait défiler puis touche le champ ; le test fait de même. Au run 425, cette étape était passée (aléatoire, selon la vitesse du simulateur).
 - Ce ne sont pas des bugs de l'app : aucune ligne de l'app n'a changé pour ces 2 corrections (seulement `UITests/StudioUITests.swift`).
+
+Les 3 échecs du run 428 (même app qu'au run 426), eux aussi dans les tests :
+- `testSettingsRiseAndComeBackDown` (même valeur deux fois, donc pas une question de vitesse) : les réglages repliés étaient mesurés dans « Contenu » et les réglages montés dans « Style », qui ajoute sa rangée d'outils au-dessus d'eux. Les deux mesures se font maintenant dans « Style ».
+- `testTheEditorAsksForWhatTheWidgetNeeds` : même cause que le champ « Nom » (bouton « Tes données » sous l'écran touché directement) ; les réglages sont montés par la poignée avant le toucher.
+- `testDailyEditModeMovesHeldCardsAndScrollsOnSwipe` : échangée avec la grande carte de l'horaire de la semaine, la carte Nutrition finit tout en bas, son point d'appui sous la barre d'onglets ; le test fait défiler l'accueil avant de la ramener. Conséquence directe de la demande 5 (carte haute), pas un défaut du déplacement des cartes.
 
 Vérifié sur les captures de la CI : barre des intérêts masquée à l'inscription ; carte Planning en grand en tête de Mon quotidien ; carte séance « Maintenant » dans le même panneau que les autres ; page de choix Moyen (1 et 2 numérotés, les autres grisés avec « Un widget moyen réunit 2 widgets au plus »).
 

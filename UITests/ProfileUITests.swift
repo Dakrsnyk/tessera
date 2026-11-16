@@ -297,6 +297,18 @@ final class ProfileUITests: XCTestCase {
         XCTAssertTrue(example.exists, "Sans données, l'aperçu montre un exemple, identifié comme tel")
         snapshot("editor-fresh")
         // The target is calculated from the body, in « Mes infos › Nutrition ».
+        // « Tes données » is below the screen at first: a direct tap scrolls to it, which raises the settings, and
+        // lands where the button was. The settings are raised first (by their handle), then it is touched.
+        let handle = app.buttons["studio-panel-handle"]
+        if handle.waitForExistence(timeout: 5), handle.label == "Agrandir les réglages" {
+            handle.tap()
+            var waited = 0
+            while handle.label != "Agrandir l'aperçu" && waited < 20 {
+                Thread.sleep(forTimeInterval: 0.25)
+                waited += 1
+            }
+            Thread.sleep(forTimeInterval: 0.8)
+        }
         app.buttons["data-kcal"].tap()
         type("30", into: "profile-age")
         type("175", into: "profile-height")

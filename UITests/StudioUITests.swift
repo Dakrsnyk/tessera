@@ -349,10 +349,13 @@ final class StudioUITests: XCTestCase {
         settle(handle)
         let large = widget.frame.height
         let height = app.frame.height > 200 ? app.frame.height : 874
-        let lowered = scrollArea(height: height, bottomMargin: 125)
 
         // A setting changed: the settings rise, the widget stays on screen, smaller.
         section("theme")
+        settle(handle)
+        XCTAssertEqual(handle.label, "Agrandir les réglages", "Ouvrir « Style » ne doit pas faire monter les réglages")
+        // Measured in the same chapter as the raised settings: « Style » adds its row of tools above them.
+        let lowered = scrollArea(height: height, bottomMargin: 125)
         tapButton("preset-midnight")
         XCTAssertTrue(waitUntil { handle.label == "Agrandir l'aperçu" }, "Les réglages ne montent pas quand on change un réglage")
         XCTAssertTrue(waitUntil { widget.frame.height < large * 0.8 }, "Le widget ne rapetisse pas quand les réglages montent")

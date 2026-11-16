@@ -201,7 +201,30 @@ extension ProfileUITests {
         XCTAssertNotEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst,
                           "La carte maintenue puis glissée ne prend pas la place de sa voisine (\(neighbour.identifier)) : \(nutrition.frame) / \(neighbour.frame)")
         XCTAssertTrue(done.exists, "Le déplacement a fermé le mode édition")
-        moveNutritionOntoNeighbour()
+        /// A slow drag in the left margin (no card under the finger, no momentum): Home scrolls by about `distance`.
+        func scrollHome(by distance: CGFloat) {
+            let fromY = distance > 0 ? screen.height * 0.75 : screen.height * 0.3
+            let toY = min(max(fromY - distance, screen.height * 0.15), screen.height * 0.85)
+            let origin = app.coordinate(withNormalizedOffset: .zero)
+            origin.withOffset(CGVector(dx: 12, dy: fromY))
+                .press(forDuration: 0.05, thenDragTo: origin.withOffset(CGVector(dx: 12, dy: toY)), withVelocity: .slow, thenHoldForDuration: 0.3)
+            Thread.sleep(forTimeInterval: 0.6)
+        }
+        // Only when Nutrition went down below its neighbour: otherwise the same move as before.
+        if inMiddle(nutrition.frame) || neighbour.frame.minY > nutrition.frame.minY - 20 {
+            moveNutritionOntoNeighbour()
+        } else {
+            // Swapped with a tall card (the week's schedule), Nutrition ended low: under the tab bar, a hold lifts
+            // nothing. Home is scrolled until it is back in the middle, then the card goes onto the visible part of
+            // its neighbour above, away from the edges where Home scrolls by itself under a held card.
+            let lift = nutrition.frame.minY - screen.height * 0.45
+            scrollHome(by: lift)
+            let targetY = (max(neighbour.frame.minY, screen.height * 0.2) + nutrition.frame.minY) / 2
+            let target = app.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: neighbour.frame.minX + 66, dy: targetY))
+            inside(nutrition).press(forDuration: 0.9, thenDragTo: target, withVelocity: .slow, thenHoldForDuration: 0.6)
+            Thread.sleep(forTimeInterval: 1.0)
+            scrollHome(by: -lift)
+        }
         XCTAssertEqual(comesBefore(nutrition.frame, neighbour.frame), nutritionFirst, "La carte ne revient pas à sa place")
         notePageShift("après les deux glisser")
 
