@@ -104,7 +104,7 @@ def main():
         d = os.path.join(OUT, "ecrans")
         os.makedirs(d, exist_ok=True)
         px = px[:bottom]
-        mask = (np.abs(px - np.array(FRAME)).max(axis=2) <= 5)
+        mask = (np.abs(px - np.array(FRAME, dtype=np.int16)).max(axis=2) <= 5)
         lab, _ = ndimage.label(mask)
         boxes = []
         for sl in ndimage.find_objects(lab):

@@ -1,0 +1,101 @@
+/* parcours.css : nouveau départ de la création (2026-11-15, demande du PDG) — Taille, puis Catégorie, puis Widgets.
+   À charger après cristal.css et creation.css. Préfixe : pc- */
+
+/* ----- 1 · Taille ----- */
+.pc-q { font-size: 24px; font-weight: 750; letter-spacing: -.015em; line-height: 1.15; margin: 6px 4px 4px; }
+.pc-sub { font-size: 14px; color: var(--ink2); margin: 0 4px 12px; line-height: 1.35; }
+.pc-size { display: flex; align-items: center; gap: 14px; padding: 14px 14px 14px 12px; border-radius: 24px; margin-top: 10px; position: relative; }
+.pc-size.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary), 0 10px 24px rgb(var(--sh) / .18); }
+.pc-size .vis { flex: none; width: 150px; display: grid; place-items: center; }
+.pc-size .tx { flex: 1; min-width: 0; }
+.pc-size .tx b { display: block; font-size: 19px; font-weight: 750; letter-spacing: -.01em; }
+.pc-size .tx p { margin: 3px 0 0; font-size: 12.5px; line-height: 1.33; color: var(--ink2); }
+.pc-size .tx .cap2 { display: inline-flex; align-items: center; gap: 5px; margin-top: 7px; height: 24px; padding: 0 9px; border-radius: 12px; background: var(--tint2); color: var(--primary); font-size: 12px; font-weight: 700; }
+.pc-size > i { font-size: 16px; color: var(--ink2); flex: none; }
+.pc-ic4 { display: block; margin-top: 4px; font-size: 11.5px; color: var(--ink2); font-weight: 600; }
+
+/* silhouette à la proportion réelle d'iOS (158 × 158, 338 × 158, 338 × 354), avec ses emplacements */
+.pc-sil { --k: .42; position: relative; background: rgba(255,255,255,.92); box-shadow: 0 1px 3px rgb(var(--sh) / .10), 0 8px 18px rgb(var(--sh) / .16); display: grid; overflow: hidden; }
+.pc-sil.s { width: calc(158px * var(--k)); height: calc(158px * var(--k)); border-radius: 22%; grid-template: 1fr / 1fr; }
+.pc-sil.m { width: calc(338px * var(--k)); height: calc(158px * var(--k)); border-radius: 10%/22%; grid-template: 1fr / 1fr 1fr; }
+.pc-sil.l { width: calc(338px * var(--k)); height: calc(354px * var(--k)); border-radius: 10%; grid-template: 1fr 1fr / 1fr 1fr; }
+.pc-sil > u { display: grid; place-items: center; margin: 5px; border-radius: 9px; border: 1.5px dashed #B9BEC9; background: rgba(238,241,247,.7); color: var(--primary); font-size: 14px; }
+.pc-sil > u i { --sw: 2.4; }
+.pc-sil > u.f { border: 0; background: var(--tint); }
+
+/* rappel de la taille choisie (en-tête des pages 2 et 3) */
+.pc-chosen { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 6px 12px 6px 8px; border-radius: 16px; margin: 4px 0 2px; }
+.pc-chosen .pc-sil { --k: .16; box-shadow: none; border: 1.5px solid var(--rule2); }
+.pc-chosen .pc-sil > u { margin: 2px; border-radius: 3px; border-width: 1px; font-size: 0; }
+.pc-chosen b { font-size: 14.5px; font-weight: 700; }
+.pc-chosen span { font-size: 12.5px; color: var(--ink2); }
+.pc-chosen .ch { margin-left: auto; font-size: 13px; font-weight: 650; color: var(--primary); }
+
+/* ----- 2 · Catégorie ----- */
+.pc-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+.pc-cat { display: flex; align-items: center; gap: 10px; min-height: 58px; padding: 8px 10px; border-radius: 18px; position: relative; }
+.pc-cat .ic { width: 36px; height: 36px; border-radius: 11px; display: grid; place-items: center; font-size: 18px; flex: none; color: #fff; }
+.pc-cat .tx { min-width: 0; } .pc-cat .tx b { display: block; font-size: 13.5px; font-weight: 700; line-height: 16px; } .pc-cat .tx span { font-size: 11.5px; color: var(--ink2); line-height: 14px; }
+.pc-cat.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
+.pc-cat.soon { background: transparent !important; box-shadow: none; border: 1.6px dashed #B9BEC9; }
+.pc-cat.soon .ic { background: #C9CED8 !important; }
+.pc-cat .tg { display: inline-block; margin-top: 2px; font-size: 9.5px; font-weight: 750; letter-spacing: .02em; color: #8A5A00; background: #FDF0CF; border-radius: 6px; padding: 1px 5px; }
+
+/* ----- 3 · Widgets : composition et emplacements ----- */
+.pc-build { padding: 12px 12px 10px; border-radius: 24px; margin-top: 6px; text-align: center; }
+.pc-build .cr-cw { margin: 0 auto; box-shadow: 0 1px 3px rgb(var(--sh) / .12), 0 10px 22px rgb(var(--sh) / .16); }
+.pc-cnt { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.pc-cnt .dots { display: inline-flex; gap: 4px; } .pc-cnt .dots u { width: 10px; height: 10px; border-radius: 5px; background: var(--track); } .pc-cnt .dots u.f { background: var(--primary); }
+.pc-cnt b { font-size: 13.5px; font-weight: 700; }
+.pc-cnt span { font-size: 12.5px; color: var(--ink2); }
+.pc-kind { display: inline-flex; align-items: center; gap: 5px; height: 26px; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 750; }
+.pc-kind.simple { background: #E9EEF7; color: #35435A; }
+.pc-kind.combo { background: var(--primary); color: var(--on-primary); }
+.pc-kind i { font-size: 13px; --sw: 2.4; }
+.pc-pick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 10px; margin-top: 10px; }
+.pc-pick .cr-tile.w { grid-column: span 2; }
+.pc-pick .cr-tile small.why { color: #8A5A00; }
+.pc-go { position: absolute; z-index: 40; left: 20px; right: 20px; bottom: 98px; }
+.pc-go .btnP { height: 52px; border-radius: 26px; font-size: 16.5px; }
+.pc-go .s { text-align: center; font-size: 12px; color: var(--ink2); margin-top: 6px; }
+
+/* ----- Carte des emplacements (page 3) : le widget choisi, découpé en emplacements pleins ou vides ----- */
+.pc-slots { --sw2: 270px; position: relative; margin: 0 auto; background: rgba(255,255,255,.95); box-shadow: 0 1px 3px rgb(var(--sh) / .12), 0 10px 22px rgb(var(--sh) / .16); display: grid; gap: 6px; padding: 7px; }
+.pc-slots.s { width: calc(var(--sw2) * .47); aspect-ratio: 1; border-radius: 22%; grid-template: 1fr / 1fr; }
+.pc-slots.m { width: var(--sw2); aspect-ratio: 338 / 158; border-radius: 10%/22%; grid-template: 1fr / 1fr 1fr; }
+.pc-slots.l { width: calc(var(--sw2) * .72); aspect-ratio: 338 / 354; border-radius: 9%; grid-template: 1fr 1fr / 1fr 1fr; }
+.pc-slots > div { position: relative; min-width: 0; min-height: 0; border-radius: 16px; display: grid; place-items: center; overflow: hidden; }
+.pc-slots > div img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.pc-slots > div.e { border: 1.6px dashed #B9BEC9; background: rgba(238,241,247,.75); color: #5B6577; font: 650 11.5px/1.2 Inter, sans-serif; text-align: center; }
+.pc-slots > div.e b { display: grid; place-items: center; gap: 2px; }
+.pc-slots > div.e i { font-size: 20px; color: var(--primary); --sw: 2.3; }
+.pc-slots > div.ph { background: var(--tint); color: var(--primary); font: 650 11px/1.2 Inter, sans-serif; text-align: center; }
+.pc-slots > div.ph b { display: grid; place-items: center; gap: 4px; }
+.pc-slots > div.ph i { font-size: 22px; }
+.pc-slots > div .n { position: absolute; left: 5px; top: 5px; width: 19px; height: 19px; border-radius: 10px; background: #0B1220; color: #fff; font: 700 11px/19px Inter, sans-serif; text-align: center; z-index: 2; }
+.pc-slots > div .lk { position: absolute; right: 5px; top: 5px; width: 20px; height: 20px; border-radius: 10px; background: #F4D58A; color: #5A4310; display: grid; place-items: center; font-size: 11px; z-index: 2; }
+.pc-res { margin-top: 6px; font-size: 12.5px; line-height: 1.35; color: var(--ink2); text-align: center; }
+.pc-res b { color: var(--ink); font-weight: 650; }
+.pc-cat { min-height: 52px; }
+
+/* ----- Bandeau « Un seul widget à la fin » ----- */
+.pc-rule { display: flex; align-items: flex-end; gap: 26px; padding: 22px 26px 18px; border-radius: 28px; margin: 6px 9px 18px; }
+.pc-rule h3 { margin: 0 0 4px; font-size: 21px; font-weight: 750; letter-spacing: -.01em; }
+.pc-rule .lead { flex: none; width: 250px; align-self: center; }
+.pc-rule .lead p { margin: 0; font-size: 14px; line-height: 1.42; color: var(--ink2); }
+.pc-ex { display: flex; flex-direction: column; align-items: center; gap: 9px; flex: none; }
+.pc-ex .cr-cw, .pc-ex > img { box-shadow: 0 1px 3px rgb(var(--sh) / .12), 0 10px 22px rgb(var(--sh) / .16); }
+.pc-ex .lb { text-align: center; } .pc-ex .lb b { display: block; font-size: 14.5px; font-weight: 750; } .pc-ex .lb span { font-size: 12.5px; color: var(--ink2); }
+.pc-ex.no { position: relative; }
+.pc-ex.no .pair { display: flex; gap: 8px; opacity: .55; }
+.pc-ex.no .bar { position: absolute; left: -6px; right: -6px; top: 44px; height: 4px; border-radius: 2px; background: #D64545; transform: rotate(-14deg); }
+.pc-ex.no .lb b { color: #B42318; }
+.pc-sep { width: 1px; align-self: stretch; background: var(--rule2); flex: none; }
+.cr-tile.on .cr-ph { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
+.cr-tile.off .cr-ph { opacity: .38; }
+
+.cr-tile.off .ck { display: none; }
+.pc-build.tight { padding: 10px 10px 8px; }
+.pc-build.tight .pc-res { margin-top: 3px; }
+.pc-lockl { display: flex; align-items: center; justify-content: center; gap: 7px; min-height: 44px; margin-top: 6px; font-size: 13.5px; font-weight: 650; color: var(--primary); }
+.pc-lockl i { font-size: 16px; } .pc-lockl i:last-child { font-size: 13px; color: var(--ink2); }
