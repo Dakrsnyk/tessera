@@ -406,6 +406,10 @@ final class StudioUITests: XCTestCase {
         // « Disposition »: a widget alone has nothing to lay out, and offers to add one.
         chapter("layout")
         XCTAssertTrue(app.buttons["layout-add"].waitForExistence(timeout: 8), "« Disposition » d'un widget seul propose d'ajouter un widget")
+        // A chapter already seen says « Fait »: it doesn't pass for the chapter open (its check mark is hidden).
+        let seen = app.buttons["studio-chapter-content"]
+        XCTAssertFalse(seen.isSelected, "Un chapitre déjà vu passe pour le chapitre ouvert")
+        XCTAssertEqual(seen.value as? String, "Fait", "Un chapitre déjà vu ne dit pas « Fait »")
         chapter("content")
         XCTAssertTrue(element("studio-size").waitForExistence(timeout: 8))
         // Only what the person asked to keep: no shape, text, icons, layout or depth sections.
