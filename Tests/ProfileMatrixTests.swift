@@ -32,6 +32,15 @@ final class ProfileMatrixTests: XCTestCase {
         return false
     }
 
+    /// The week's schedule with nothing planned: shown to everyone (PDG, 2026-11-16), it holds no figure of the person.
+    private func isEmptyWeek(_ tile: DailyBrief.Tile) -> Bool {
+        if case let .planning(items) = tile { return items.isEmpty }
+        return false
+    }
+
+    /// The categories but the week's schedule, which is never a dotted card (its empty week stands in for it).
+    private var dottedCategories: [DailyBrief.Category] { DailyBrief.Category.defaultOrder.filter { $0 != .planning } }
+
     private func emptyCategories(_ tiles: [DailyBrief.Tile]) -> [DailyBrief.Category] {
         tiles.compactMap { tile in
             if case let .empty(category) = tile { return category }
@@ -153,9 +162,10 @@ final class ProfileMatrixTests: XCTestCase {
         let model = makeModel(.empty)
         XCTAssertTrue(model.profile.interests.isEmpty)
         let shown = tiles(model)
-        XCTAssertTrue(shown.isEmpty, "No interest, no data: no card")
-        XCTAssertTrue(DailyBrief.rows(shown).isEmpty)
-        XCTAssertEqual(DailyCategories.addable(shown: shown), DailyBrief.Category.defaultOrder, "The « + » offers every category")
+        XCTAssertEqual(ids(shown), ["planning"], "No interest, no data: only the week's schedule, for everyone")
+        XCTAssertTrue(shown.allSatisfy(isEmptyWeek), "An empty week: nothing planned is made up")
+        XCTAssertEqual(DailyBrief.rows(shown).count, 1, "The week's schedule across the dashboard")
+        XCTAssertEqual(DailyCategories.addable(shown: shown), dottedCategories, "The « + » offers every other category")
         XCTAssertTrue(DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: nil)).isEmpty)
     }
 
@@ -163,7 +173,8 @@ final class ProfileMatrixTests: XCTestCase {
         let model = makeModel(.empty)
         addEveryCategory(model)
         let shown = tiles(model)
-        XCTAssertEqual(emptyCategories(shown), DailyBrief.Category.defaultOrder)
+        XCTAssertEqual(emptyCategories(shown), dottedCategories, "The week's schedule is its empty week, not a dotted card")
+        XCTAssertTrue(shown.allSatisfy { isEmptyCard($0) || isEmptyWeek($0) }, "Not one card with data")
         XCTAssertEqual(shown.count, DailyBrief.Category.allCases.count, "Only dotted cards, not one card with data")
         XCTAssertEqual(ids(shown), DailyBrief.Category.defaultOrder.map(\.tileID))
         XCTAssertTrue(DailyCategories.addable(shown: shown).isEmpty)
@@ -173,11 +184,12 @@ final class ProfileMatrixTests: XCTestCase {
         let model = makeModel(.partial)
         let shown = tiles(model)
         // Morning: the meals (99), the money noted today (56), then the habits (50); the sport interest has no data yet.
-        XCTAssertEqual(ids(shown), ["nutrition", "budget", "habits", "workout"])
+        XCTAssertEqual(ids(shown), ["nutrition", "budget", "habits", "workout", "planning"], "Then the week's schedule, after the session")
         XCTAssertEqual(emptyCategories(shown), [.workout], "The sport interest waits for a program")
         XCTAssertTrue(shown.prefix(3).allSatisfy { !isEmptyCard($0) }, "Cards with data first")
+        XCTAssertTrue(isEmptyWeek(shown[4]), "Nothing planned: an empty week")
         XCTAssertEqual(DailyCategories.addable(shown: shown),
-                       [.planning, .priorities, .reminders, .steps, .business, .travel, .car],
+                       [.priorities, .reminders, .steps, .business, .travel, .car],
                        "Everything not shown is in the « + », in the default order")
         guard case let .nutrition(nutrition)? = shown.first else { return XCTFail("The calorie target gives the nutrition card") }
         XCTAssertTrue(nutrition.knowsKcal)
@@ -220,7 +232,7 @@ final class ProfileMatrixTests: XCTestCase {
             addEveryCategory(model)
             return emptyCategories(tiles(model, steps: steps(level))).count
         }
-        XCTAssertEqual(counts[0], DailyBrief.Category.allCases.count, "Empty: every category is a dotted card")
+        XCTAssertEqual(counts[0], DailyBrief.Category.allCases.count - 1, "Empty: every category but the week's schedule is a dotted card")
         XCTAssertLessThan(counts[1], counts[0])
         XCTAssertLessThan(counts[2], counts[1])
         XCTAssertEqual(counts[2], 0, "Complete: no dotted card left")
@@ -537,8 +549,9 @@ final class ProfileMatrixTests: XCTestCase {
         model.update(\.budget) { _ = $0.addApplePay(amount: 12.5, merchant: "IGA", card: nil, date: self.now) }
         XCTAssertFalse(model.profile.knows(.monthlyBudget))
         let shown = tiles(model)
-        XCTAssertEqual(ids(shown), ["budget"], "The money really spent today shows")
-        guard case let .budget(spent, perDay)? = shown.first else { return XCTFail("The budget card") }
+        XCTAssertEqual(Set(ids(shown)), ["budget", "planning"], "The money really spent today shows, next to the week's schedule")
+        XCTAssertTrue(shown.filter { $0.id == "planning" }.allSatisfy(isEmptyWeek))
+        guard case let .budget(spent, perDay)? = shown.first(where: { $0.id == "budget" }) else { return XCTFail("The budget card") }
         XCTAssertEqual(spent, 12.5, accuracy: 0.001)
         XCTAssertNil(perDay, "The default amount of the budget is not shown as the person's")
         XCTAssertEqual(model.toFillItems(in: .finances), [.monthlyBudget], "The budget is still asked")
@@ -697,9 +710,9 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertNil(model.life.birthday)
         XCTAssertFalse(model.profile.knows(.kcalTarget), "A default is never the person's own")
         let shown = tiles(model)
-        XCTAssertEqual(Set(ids(shown)), ["nutrition", "workout"])
-        XCTAssertEqual(shown.count, 2)
-        XCTAssertTrue(shown.allSatisfy(isEmptyCard), "Interests without data: dotted cards only")
+        XCTAssertEqual(Set(ids(shown)), ["nutrition", "workout", "planning"])
+        XCTAssertEqual(shown.count, 3)
+        XCTAssertTrue(shown.allSatisfy { isEmptyCard($0) || isEmptyWeek($0) }, "Interests without data: dotted cards and an empty week only")
         XCTAssertTrue(model.toFillItems(in: .fitness).contains(.routines))
         XCTAssertFalse(model.toFillItems(in: .fitness).contains(.weight), "The weight of the old profile counts as given")
         XCTAssertNil(model.calculatedNutritionGoals(activity: .light), "Height and gender are unknown")
@@ -748,10 +761,15 @@ final class ProfileMatrixTests: XCTestCase {
         let before = DataSnapshot(model)
         XCTAssertTrue(ids(tiles(model)).contains("workout"))
         model.updateSettings { DailyCategories.remove(tileID: "workout", in: &$0) }
-        XCTAssertEqual(ids(tiles(model)), ["nutrition", "budget", "habits"])
+        XCTAssertEqual(ids(tiles(model)), ["nutrition", "budget", "habits", "planning"])
         XCTAssertEqual(model.profile.interests, [.nutrition, .sport, .budget], "The interest itself stays")
         XCTAssertEqual(DataSnapshot(model), before)
         XCTAssertEqual(DailyCategories.addable(shown: tiles(model)).first, .workout)
+        // The week's schedule, shown to everyone, can be taken off too: it stays off and the « + » offers it again.
+        model.updateSettings { DailyCategories.remove(tileID: "planning", in: &$0) }
+        XCTAssertEqual(ids(tiles(model)), ["nutrition", "budget", "habits"])
+        XCTAssertEqual(Array(DailyCategories.addable(shown: tiles(model)).prefix(2)), [.workout, .planning])
+        XCTAssertEqual(DataSnapshot(model), before)
     }
 
     // MARK: - (i) No invented figure for the empty profile
@@ -796,9 +814,11 @@ final class ProfileMatrixTests: XCTestCase {
             XCTAssertFalse(MiniAppSummary.hasData(app, model), app.rawValue)
             XCTAssertNil(MiniAppSummary.caption(app, model, now: now), "\(app.rawValue) shows no figure")
         }
-        XCTAssertTrue(tiles(model).isEmpty)
+        XCTAssertEqual(ids(tiles(model)), ["planning"], "Only the week's schedule")
+        XCTAssertTrue(tiles(model).allSatisfy(isEmptyWeek), "An empty week")
         addEveryCategory(model)
-        XCTAssertTrue(emptyCategories(tiles(model)).count == DailyBrief.Category.allCases.count, "Only invitations, with their words and no number")
+        XCTAssertTrue(tiles(model).allSatisfy { isEmptyCard($0) || isEmptyWeek($0) }, "Only invitations, with their words and no number")
+        XCTAssertEqual(emptyCategories(tiles(model)), dottedCategories)
     }
 
     func testPartialProfileShowsNoFigureItDidNotGive() throws {
@@ -806,9 +826,9 @@ final class ProfileMatrixTests: XCTestCase {
         addEveryCategory(model)
         let shown = tiles(model)
         // Only nutrition, the budget of today and the habit carry data; the other cards are dotted.
-        let withData = shown.filter { !isEmptyCard($0) }
+        let withData = shown.filter { !isEmptyCard($0) && !isEmptyWeek($0) }
         XCTAssertEqual(ids(withData), ["nutrition", "budget", "habits"])
-        XCTAssertEqual(emptyCategories(shown).count, DailyBrief.Category.allCases.count - 3)
+        XCTAssertEqual(emptyCategories(shown).count, DailyBrief.Category.allCases.count - 4, "All but the 3 with data and the week's schedule")
         for app in [MiniApp.business, .travel, .car, .fitness, .planning] {
             XCTAssertNil(MiniAppSummary.caption(app, model, now: now), "\(app.rawValue) has nothing to say")
         }

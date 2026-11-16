@@ -446,6 +446,14 @@ final class MiniAppUITests: XCTestCase {
         let dots = app.descendants(matching: .any)["daily-pager-nutrition-dots"]
         XCTAssertTrue(dots.waitForExistence(timeout: 4), "Points de la carte Nutrition absents")
         XCTAssertTrue(dots.label.contains("Vue 1 sur 3"), dots.label)
+        // The whole card above the tab bar (the week's schedule, above it, is tall): a swipe in its middle must
+        // land on the card, not on the bar.
+        let bar = app.tabBars.firstMatch
+        var lifts = 0
+        while bar.exists, pager.frame.maxY > bar.frame.minY - 8, lifts < 4 {
+            scrollDownOnce()
+            lifts += 1
+        }
         // Swipe on the card itself, in the middle of it (the dots are in its header).
         let card = pager.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
         let left = card.withOffset(CGVector(dx: -80, dy: 0))

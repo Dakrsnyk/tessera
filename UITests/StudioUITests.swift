@@ -70,8 +70,21 @@ final class StudioUITests: XCTestCase {
             drag(in: area, up: up)
             lastUp = up
             swipes += 1
+            // A drag in the settings raises them (a spring): touch the button where it ends up, not on its way.
+            settle(button)
         }
         return button
+    }
+
+    /// Waits until the element stops moving (the settings rising or coming back down), at most about 3 seconds.
+    private func settle(_ element: XCUIElement) {
+        var last = element.exists ? element.frame : .zero
+        for _ in 0..<12 {
+            Thread.sleep(forTimeInterval: 0.25)
+            let frame = element.exists ? element.frame : .zero
+            if frame == last { return }
+            last = frame
+        }
     }
 
     /// A short drag without momentum inside an area: up brings what is below, down what is above.
@@ -85,7 +98,14 @@ final class StudioUITests: XCTestCase {
     /// The visible part of the page that scrolls: the tallest scroll view, above the save bar.
     private func scrollArea(height: CGFloat, bottomMargin: CGFloat) -> CGRect {
         let width = app.frame.width > 100 ? app.frame.width : 402
-        let views = app.scrollViews.allElementsBoundByIndex.filter { $0.frame.height > 120 && $0.frame.width > 200 }
+        var views = app.scrollViews.allElementsBoundByIndex.filter { $0.frame.height > 120 && $0.frame.width > 200 }
+        // In the Studio the settings are under the panel's handle; the screen it was opened over (Home, Créer)
+        // also scrolls, across the whole window: only the scroll views below the handle count.
+        let handle = app.buttons["studio-panel-handle"]
+        if handle.exists {
+            let settings = views.filter { $0.frame.minY >= handle.frame.maxY - 4 }
+            if !settings.isEmpty { views = settings }
+        }
         guard let tallest = views.max(by: { $0.frame.height < $1.frame.height }) else {
             return CGRect(x: 0, y: height * 0.5, width: width, height: height * 0.3)
         }
