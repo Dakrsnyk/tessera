@@ -1,0 +1,20 @@
+{
+ "1 ou 2 widgets": "ウィジェット1〜2個",
+ "1 widget": "ウィジェット1個",
+ "1 à 4 widgets": "ウィジェット1〜4個",
+ "Choisi": "選択済み",
+ "Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.": "まずサイズ、次にカテゴリ、そして1つ以上のウィジェットを選びます。それらは1つのウィジェットにまとめられます。そのあとStudioでカスタマイズできます。",
+ "Choisis jusqu'à %@ widgets : ils seront réunis en un seul.": "最大%@個のウィジェットを選べます。1つにまとめられます。",
+ "Heure et date": "時刻と日付",
+ "L'essentiel en un coup d'œil.": "大事なことをひと目で。",
+ "La place de %@ icônes": "アイコン%@個分の大きさ",
+ "Quelle catégorie ?": "どのカテゴリ？",
+ "Quelle taille pour ton widget ?": "ウィジェットのサイズは？",
+ "Touche un widget : l'Atelier s'ouvre aussitôt.": "ウィジェットをタップするとStudioがすぐに開きます。",
+ "Tu pourras y réunir plusieurs widgets d'une même catégorie.": "同じカテゴリの複数のウィジェットをまとめられます。",
+ "Widget d'écran verrouillé": "ロック画面ウィジェット",
+ "Widget simple": "単体ウィジェット",
+ "Widgets de %@": "%@のウィジェット",
+ "place libre : tu peux encore ajouter un widget.": "の空き：まだウィジェットを追加できます。",
+ "places libres : tu peux encore ajouter des widgets.": "の空き：まだウィジェットを追加できます。"
+}

@@ -1,18 +1,19 @@
 import SwiftUI
 import WidgetKit
 
-/// The Créer tab: it opens on its start screen (« Pour toi », « Partir de zéro », « Partir d'un modèle »). The
-/// Studio is pushed on it with the widget chosen; « Changer de widget » opens every other one (spaces, photos
-/// and quotes, Lock Screen) in a sheet, and the one chosen replaces the Studio's widget. After a save the
-/// Studio closes back to the start screen while the widget flies away.
+/// The Créer tab (« taille d'abord », 2026-11-16): a size, then a category, then the widgets of that category made
+/// into one widget (`CreateFlowView`); the Studio is pushed on it with that widget. « Changer de widget » goes back
+/// to the categories at the same size. After a save the Studio closes back to the sizes while the widget flies away.
 struct CreateView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
     /// What the Studio pushed on the start screen is on; nil = the start screen. A new request (new id)
     /// starts the Studio again from zero (history, photo, save guard).
     @State private var route: StudioRoute?
-    /// The sheet of every other widget.
-    @State private var changing = false
+    /// The step of the start (size, category, widgets).
+    @State private var step: CreateStep = .size
+    /// The size of the widget in the Studio: « Changer de widget » goes back to the categories at that size.
+    @State private var openedFormat: WidgetFormat = .medium
     /// « Écran verrouillé » of the start screen: the Lock Screen widgets in a sheet.
     @State private var showsLockScreen = false
     /// Test captures: the full creator of a space, over the start screen (see `openRequestedCreator`).
@@ -29,17 +30,14 @@ struct CreateView: View {
     var body: some View {
         @Bindable var router = router
         NavigationStack(path: $router.spacePath) {
-            CreateStartView(onOpen: open, onLockScreen: { showsLockScreen = true })
+            CreateFlowView(step: $step, onOpen: open, onLockScreen: { showsLockScreen = true })
                 .navigationDestination(for: Space.self) { space in
                     SpaceView(space: space)
                 }
                 .navigationDestination(item: $route) { item in
-                    WidgetStudio(request: item.request, isPushed: true, onChangeWidget: { changing = true }) { closeStudio() }
+                    WidgetStudio(request: item.request, isPushed: true, onChangeWidget: changeWidget) { closeStudio() }
                         .id(item.request.id)
                 }
-        }
-        .sheet(isPresented: $changing) {
-            SpacesView(onChoose: use, onChooseLock: useLock)
         }
         .sheet(isPresented: $showsLockScreen) {
             LockScreenSheet(onChoose: use, onChooseLock: useLock)
@@ -48,7 +46,10 @@ struct CreateView: View {
             SpaceBuilderView(space: space, combines: true, onChoose: use)
         }
         .onAppear {
-            if router.showsLockScreenCreator { changing = true }
+            if router.showsLockScreenCreator {
+                router.showsLockScreenCreator = false
+                showsLockScreen = true
+            }
             openRequestedCreator()
         }
         // A category tapped on the Home tab while this tab was already loaded.
@@ -57,19 +58,26 @@ struct CreateView: View {
 
     /// Pushes the Studio on a request.
     private func open(_ request: EditorRequest) {
+        openedFormat = request.design.displayFormat
         route = StudioRoute(request: request)
     }
 
-    /// The Studio is done (saved or dropped): back to the start screen.
+    /// The Studio is done (saved or dropped): back to the sizes.
     private func closeStudio() {
         route = nil
+        step = .size
+    }
+
+    /// « Changer de widget »: back to the categories, at the size of the widget being made.
+    private func changeWidget() {
+        route = nil
+        step = .category(openedFormat)
     }
 
     /// A widget chosen in a sheet: the sheets close and the Studio opens on it.
     private func use(_ designs: [WidgetDesign]) {
         guard !designs.isEmpty else { return }
         combining = nil
-        changing = false
         showsLockScreen = false
         open(EditorRequest(designs: designs, isNew: true, section: StudioSection.size.rawValue))
     }
@@ -77,7 +85,6 @@ struct CreateView: View {
     /// A Lock Screen widget chosen: the Studio opens on its size, on the Lock Screen shape the card showed.
     private func useLock(_ design: WidgetDesign, _ family: WidgetFamily) {
         combining = nil
-        changing = false
         showsLockScreen = false
         open(EditorRequest(design: design, isNew: true, section: StudioSection.size.rawValue, family: family))
     }

@@ -81,7 +81,7 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         case .info:
             tr("Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps, à tes widgets et à Mon Quotidien.")
         case .create:
-            tr("Choisis un widget prêt dans « Pour toi », ou pars de zéro : Petit, Moyen, Grand ou écran verrouillé. Dans le Studio, « + » réunit plusieurs widgets en un seul.")
+            tr("Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.")
         case .studio:
             tr("Contenu, thème, style, couleurs, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :")
         case .store:

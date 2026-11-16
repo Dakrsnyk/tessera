@@ -1755,6 +1755,12 @@
    "Shared/Domains/FoodDatabase.swift:55: f(\"orange\", tr(\"Orange\"), 47, 0.9, 12, 0.1, 2.4, 150, tr(\"1 orange\"), s: 9.4, sf: 0, na: 0),"
   ]
  },
+ "1 ou 2 widgets": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:371: case .medium: tr(\"1 ou 2 widgets\")"
+  ]
+ },
  "1 petit sac": {
   "placeholders": 0,
   "uses": [
@@ -1917,11 +1923,23 @@
    "Shared/Domains/FoodDatabase.swift:258: f(\"lemonade\", tr(\"Limonade\"), 40, 0.1, 10, 0, 0.1, 250, tr(\"1 verre\"), s: 9.5, sf: 0, na: 4),"
   ]
  },
+ "1 widget": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:370: case .small: tr(\"1 widget\")"
+  ]
+ },
  "1 wrap": {
   "placeholders": 0,
   "uses": [
    "Shared/Domains/FoodDatabase.swift:207: f(\"chickenwrap\", tr(\"Wrap au poulet\"), 210, 12, 20, 9, 2, 250, tr(\"1 wrap\"), s: 2, sf: 2.5, na: 520),",
    "Shared/Domains/FoodDatabase.swift:208: f(\"falafelwrap\", tr(\"Wrap falafel\"), 230, 7, 28, 10, 4, 250, tr(\"1 wrap\"), s: 2.5, sf: 1.5, na: 480),"
+  ]
+ },
+ "1 à 4 widgets": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:372: case .large: tr(\"1 à 4 widgets\")"
   ]
  },
  "1 épi": {
@@ -7607,6 +7625,12 @@
    "Shared/Domains/FoodDatabase.swift:228: f(\"chocolate\", tr(\"Chocolat noir 70 %\"), 598, 7.8, 46, 43, 11, 20, tr(\"2 carrés\"), s: 24, sf: 24, na: 20),"
   ]
  },
+ "Choisi": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:566: .accessibilityValue(Text(number != nil ? tr(\"Choisi\") : (refusal ?? \"\")))"
+  ]
+ },
  "Choisi à l'ajout": {
   "placeholders": 0,
   "uses": [
@@ -7684,10 +7708,22 @@
    "Shared/Model/Combo.swift:564: return .invalid(tr(\"Choisis 1 widget, ou 2 à réunir.\"))"
   ]
  },
+ "Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Tutorial/Tutorial.swift:84: tr(\"Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.\")"
+  ]
+ },
  "Choisis de 1 à 4 widgets.": {
   "placeholders": 0,
   "uses": [
    "Shared/Model/Combo.swift:578: return .invalid(tr(\"Choisis de 1 à 4 widgets.\"))"
+  ]
+ },
+ "Choisis jusqu'à %@ widgets : ils seront réunis en un seul.": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:727: if draft.picked.isEmpty { return tr(\"Choisis jusqu'à \\(draft.room) widgets : ils seront réunis en un seul.\") }"
   ]
  },
  "Choisis l'icône d'Ardane sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».": {
@@ -7754,12 +7790,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MyWidgets/MyWidgetsView.swift:74: message: tr(\"Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.\"),"
-  ]
- },
- "Choisis un widget prêt dans « Pour toi », ou pars de zéro : Petit, Moyen, Grand ou écran verrouillé. Dans le Studio, « + » réunit plusieurs widgets en un seul.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Tutorial/Tutorial.swift:84: tr(\"Choisis un widget prêt dans « Pour toi », ou pars de zéro : Petit, Moyen, Grand ou écran verrouillé. Dans le Studio, « + » réunit plusieurs widgets en un seul.\")"
   ]
  },
  "Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués %@ s'utilisent directement : valider une série, cocher une habitude, ajouter un verre…": {
@@ -7884,8 +7914,8 @@
   "uses": [
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:31: MiniActionButton(title: tr(\"Citation\"), symbol: \"quote.opening\", colorHex: accentHex, isProminent: false) {",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:88: Button(tr(\"Citation\")) { start(.quote) }",
-   "App/Screens/Spaces/CreateStartView.swift:233: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }",
-   "App/Screens/Spaces/SpacesView.swift:123: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }"
+   "App/Screens/Spaces/CreateFlow.swift:209: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }",
+   "App/Screens/Spaces/CreateStartView.swift:233: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }"
   ]
  },
  "Citrouille": {
@@ -8078,6 +8108,7 @@
  "Combiné · %@ widgets": {
   "placeholders": 1,
   "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:711: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))",
    "Shared/Model/Combo.swift:231: isCombo ? tr(\"Combiné · \\(options.parts.count) widgets\") : kind.title"
   ]
  },
@@ -9308,8 +9339,8 @@
   "uses": [
    "App/ArdaneApp.swift:303: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
    "App/Screens/Editor/EditorView.swift:127: if onChangeWidget != nil { return tr(\"Créer\") }",
-   "App/Screens/Spaces/CreateStartView.swift:51: .navigationTitle(tr(\"Créer\"))",
-   "App/Screens/Tutorial/Tutorial.swift:53: case .create: tr(\"Créer\")"
+   "App/Screens/Spaces/CreateFlow.swift:239: case .size: tr(\"Créer\")",
+   "App/Screens/Spaces/CreateStartView.swift:51: .navigationTitle(tr(\"Créer\"))"
   ]
  },
  "Créer cet aliment": {
@@ -9337,9 +9368,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MyWidgets/MyWidgetsView.swift:140: .accessibilityLabel(Text(tr(\"Créer un widget\")))",
+   "App/Screens/Spaces/CreateFlow.swift:207: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {",
    "App/Screens/Spaces/CreateStartView.swift:231: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {",
-   "App/Screens/Spaces/SpacesView.swift:121: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {",
-   "App/Screens/Tutorial/Tutorial.swift:66: case .create: tr(\"Créer un widget\")"
+   "App/Screens/Spaces/SpacesView.swift:121: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {"
   ]
  },
  "Créer un événement ce jour-là": {
@@ -14507,6 +14538,12 @@
    "Shared/Model/Templates.swift:63: WidgetTemplate(id: \"clock-minimal\", name: tr(\"Heure\"), kind: .clock, themeID: .minimal, accentHex: \"2F8F7A\", isFeatured: true),"
   ]
  },
+ "Heure et date": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:38: case .time: tr(\"Heure et date\")"
+  ]
+ },
  "Heure et devise sur place": {
   "placeholders": 0,
   "uses": [
@@ -15899,6 +15936,12 @@
    "Shared/Model/Packs.swift:72: WidgetPack(id: \"calm\", name: tr(\"Minimal\"), tagline: tr(\"L'essentiel en noir et blanc, sans rien de plus.\"), symbol: \"circle.lefthalf.filled\","
   ]
  },
+ "L'essentiel en un coup d'œil.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:362: case .small: tr(\"L'essentiel en un coup d'œil.\")"
+  ]
+ },
  "L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.": {
   "placeholders": 0,
   "uses": [
@@ -16206,6 +16249,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:808: StudioNote(text: tr(\"La photo est réduite pour tenir dans la mémoire limitée des widgets.\"))"
+  ]
+ },
+ "La place de %@ icônes": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:342: Text(tr(\"La place de \\(icons) icônes\"))"
   ]
  },
  "La poitrine arrive à quelques centimètres du sol.": {
@@ -21926,6 +21975,7 @@
  "Personnaliser le widget": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:584: Text(tr(\"Personnaliser le widget\"))",
    "App/Screens/Spaces/SpaceBuilderView.swift:397: return tr(\"Personnaliser le widget\")"
   ]
  },
@@ -22086,7 +22136,7 @@
    "App/Premium/PaywallView.swift:208: comparisonRow(tr(\"Photos et citations\"), free: \"∞\", premium: \"∞\")",
    "App/Screens/MiniApps/MiniApp.swift:18: case .photos: tr(\"Photos et citations\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:81: .navigationTitle(tr(\"Photos et citations\"))",
-   "App/Screens/Spaces/CreateStartView.swift:226: StartRow(symbol: MiniApp.photos.symbol, title: tr(\"Photos et citations\"), subtitle: tr(\"Illimitées, même en gratuit\")) {"
+   "App/Screens/Spaces/CreateFlow.swift:39: case .photos: tr(\"Photos et citations\")"
   ]
  },
  "Photos et citations illimitées": {
@@ -22421,6 +22471,7 @@
  "Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:363: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")",
    "Shared/Model/Combo.swift:30: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")"
   ]
  },
@@ -24058,6 +24109,18 @@
    "App/Screens/Spaces/MoneySpaces.swift:112: NumberRow(title: holding.kind == .cash ? tr(\"Montant\") : tr(\"Quantité\"), value: $holding.quantity)"
   ]
  },
+ "Quelle catégorie ?": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:442: Text(tr(\"Quelle catégorie ?\"))"
+  ]
+ },
+ "Quelle taille pour ton widget ?": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:277: Text(tr(\"Quelle taille pour ton widget ?\"))"
+  ]
+ },
  "Quelques centimètres suffisent.": {
   "placeholders": 0,
   "uses": [
@@ -25286,6 +25349,7 @@
   "uses": [
    "App/Screens/Editor/HomeScreenPreview.swift:107: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
    "App/Screens/Onboarding/OnboardingView.swift:136: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
+   "App/Screens/Spaces/CreateFlow.swift:202: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
    "App/Screens/Spaces/SpaceForms.swift:52: Text(tr(\"Retour\", context: \"back\"))"
   ]
  },
@@ -30560,6 +30624,12 @@
    "App/Screens/Explore/ExploreView.swift:404: Text(tr(\"Touche un style pour voir tous ses widgets.\"))"
   ]
  },
+ "Touche un widget : l'Atelier s'ouvre aussitôt.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:724: if draft.format == .small { return tr(\"Touche un widget : l'Atelier s'ouvre aussitôt.\") }"
+  ]
+ },
  "Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.": {
   "placeholders": 0,
   "uses": [
@@ -31198,6 +31268,12 @@
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:185: MiniFootnote(text: tr(\"Tu pourras vérifier et corriger chaque cours avant de l'ajouter. Rien n'est changé sans ton accord.\"))"
   ]
  },
+ "Tu pourras y réunir plusieurs widgets d'une même catégorie.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:281: Text(tr(\"Tu pourras y réunir plusieurs widgets d'une même catégorie.\"))"
+  ]
+ },
  "Tu profites de Premium": {
   "placeholders": 0,
   "uses": [
@@ -31447,6 +31523,8 @@
  "Un grand widget réunit 4 widgets au plus.": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:115: case .large: return tr(\"Un grand widget réunit 4 widgets au plus.\")",
+   "App/Screens/Spaces/CreateFlow.swift:729: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
    "Shared/Model/Combo.swift:327: return .refused(tr(\"Un grand widget réunit 4 widgets au plus.\"))",
    "Shared/Model/Combo.swift:602: return .invalid(tr(\"Un grand widget réunit 4 widgets au plus.\"))"
   ]
@@ -31526,6 +31604,7 @@
  "Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:364: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")",
    "Shared/Model/Combo.swift:31: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")"
   ]
  },
@@ -31568,6 +31647,8 @@
  "Un widget moyen réunit 2 widgets au plus.": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:114: case .medium: return tr(\"Un widget moyen réunit 2 widgets au plus.\")",
+   "App/Screens/Spaces/CreateFlow.swift:729: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
    "Shared/Model/Combo.swift:573: return .invalid(tr(\"Un widget moyen réunit 2 widgets au plus.\"))"
   ]
  },
@@ -32660,10 +32741,22 @@
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:187: .navigationTitle(design.kind == .photos ? tr(\"Widget photo\") : tr(\"Widget citation\"))"
   ]
  },
+ "Widget d'écran verrouillé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:296: Label(tr(\"Widget d'écran verrouillé\"), systemImage: \"lock.rectangle.on.rectangle\")"
+  ]
+ },
  "Widget photo": {
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:187: .navigationTitle(design.kind == .photos ? tr(\"Widget photo\") : tr(\"Widget citation\"))"
+  ]
+ },
+ "Widget simple": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:711: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))"
   ]
  },
  "Widgets": {
@@ -32679,6 +32772,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetupViews.swift:604: Label(installed == setup.widgets.count ? tr(\"Widgets ajoutés à Mes widgets\") : tr(\"\\(Fmt.plural(installed, tr(\"widget ajouté\"), tr(\"widgets ajoutés\"))) (limite de la version gratuite)\"), systemImage: "
+  ]
+ },
+ "Widgets de %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:523: Text(tr(\"Widgets de \\(category.title)\"))"
   ]
  },
  "Widgets de l'espace": {
@@ -34391,6 +34490,12 @@
    "Shared/Domains/FoodDatabase.swift:297: \"pepper\": [\"poivron\", tr(\"piment doux\")], \"greenbeans\": [\"haricots\"], \"gardensalad\": [tr(\"salade verte\")],"
   ]
  },
+ "place libre : tu peux encore ajouter un widget.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:728: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
+  ]
+ },
  "placement": {
   "placeholders": 0,
   "uses": [
@@ -34403,6 +34508,12 @@
   "uses": [
    "App/Core/DataItems.swift:424: case .holdings: return Fmt.plural(portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))",
    "App/Screens/Spaces/SpacesView.swift:212: return model.portfolio.holdings.isEmpty ? tr(\"Ajoute tes placements\") : Fmt.plural(model.portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))"
+  ]
+ },
+ "places libres : tu peux encore ajouter des widgets.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/CreateFlow.swift:728: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
   ]
  },
  "plein": {

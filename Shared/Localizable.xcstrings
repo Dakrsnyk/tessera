@@ -12926,6 +12926,53 @@
         }
       }
     },
+    "1 ou 2 widgets": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 oder 2 Widgets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 or 2 widgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 o 2 widgets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 ou 2 widgets"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 o 2 widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェット1〜2個"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 ou 2 widgets"
+          }
+        }
+      }
+    },
     "1 petit sac": {
       "extractionState": "manual",
       "localizations": {
@@ -14007,6 +14054,53 @@
         }
       }
     },
+    "1 widget": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 Widget"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 widget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 widget"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 widget"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェット1個"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 widget"
+          }
+        }
+      }
+    },
     "1 wrap": {
       "extractionState": "manual",
       "localizations": {
@@ -14050,6 +14144,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "1 wrap"
+          }
+        }
+      }
+    },
+    "1 à 4 widgets": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 bis 4 Widgets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 to 4 widgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 a 4 widgets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 à 4 widgets"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da 1 a 4 widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェット1〜4個"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1 a 4 widgets"
           }
         }
       }
@@ -56448,6 +56589,53 @@
         }
       }
     },
+    "Choisi": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgewählt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selected"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scelto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択済み"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolhido"
+          }
+        }
+      }
+    },
     "Choisi à l'ajout": {
       "extractionState": "manual",
       "localizations": {
@@ -57012,6 +57200,53 @@
         }
       }
     },
+    "Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle zuerst die Größe, dann die Kategorie, dann ein oder mehrere Widgets: Sie werden zu einem einzigen Widget vereint. Im Studio passt du es danach an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick the size first, then the category, then one or more widgets: they are combined into a single widget. The Studio then lets you customize it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige primero el tamaño, luego la categoría y después uno o varios widgets: se combinan en un solo widget. Luego el Studio sirve para personalizarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli prima la dimensione, poi la categoria, poi uno o più widget: vengono riuniti in un solo widget. Poi lo Studio serve a personalizzarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まずサイズ、次にカテゴリ、そして1つ以上のウィジェットを選びます。それらは1つのウィジェットにまとめられます。そのあとStudioでカスタマイズできます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha primeiro o tamanho, depois a categoria e depois um ou mais widgets: eles são reunidos em um só widget. Depois, o Studio serve para personalizá-lo."
+          }
+        }
+      }
+    },
     "Choisis de 1 à 4 widgets.": {
       "extractionState": "manual",
       "localizations": {
@@ -57055,6 +57290,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha de 1 a 4 widgets."
+          }
+        }
+      }
+    },
+    "Choisis jusqu'à %@ widgets : ils seront réunis en un seul.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle bis zu %@ Widgets: Sie werden zu einem vereint."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick up to %@ widgets: they will be combined into one."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige hasta %@ widgets: se combinarán en uno solo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis jusqu'à %@ widgets : ils seront réunis en un seul."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli fino a %@ widget: saranno riuniti in uno solo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最大%@個のウィジェットを選べます。1つにまとめられます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha até %@ widgets: eles serão reunidos em um só."
           }
         }
       }
@@ -57572,53 +57854,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha um modelo na Loja, personalize e salve. Ele vai aparecer aqui."
-          }
-        }
-      }
-    },
-    "Choisis un widget prêt dans « Pour toi », ou pars de zéro : Petit, Moyen, Grand ou écran verrouillé. Dans le Studio, « + » réunit plusieurs widgets en un seul.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wähle ein fertiges Widget unter „Für dich“ oder fang bei null an: Klein, Mittel, Groß oder Sperrbildschirm. Im Studio kombiniert „+“ mehrere Widgets zu einem."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick a ready-made widget in “For you”, or start from scratch: Small, Medium, Large or Lock Screen. In the Studio, “+” combines several widgets into one."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elige un widget listo en «Para ti», o empieza desde cero: Pequeño, Mediano, Grande o pantalla bloqueada. En el Studio, «+» combina varios widgets en uno solo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisis un widget prêt dans « Pour toi », ou pars de zéro : Petit, Moyen, Grand ou écran verrouillé. Dans le Studio, « + » réunit plusieurs widgets en un seul."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scegli un widget pronto in «Per te», o parti da zero: Piccolo, Medio, Grande o schermata di blocco. Nello Studio, «+» unisce più widget in uno solo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「あなたへ」から完成済みのウィジェットを選ぶか、ゼロから始めましょう（小・中・大・ロック画面）。スタジオでは「+」で複数のウィジェットを1つにまとめられます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolha um widget pronto em “Para você” ou comece do zero: Pequeno, Médio, Grande ou Tela Bloqueada. No Studio, “+” combina vários widgets em um só."
           }
         }
       }
@@ -107819,6 +108054,53 @@
         }
       }
     },
+    "Heure et date": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uhrzeit und Datum"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time and date"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora y fecha"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heure et date"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ora e data"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "時刻と日付"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hora e data"
+          }
+        }
+      }
+    },
     "Heure et devise sur place": {
       "extractionState": "manual",
       "localizations": {
@@ -118112,6 +118394,53 @@
         }
       }
     },
+    "L'essentiel en un coup d'œil.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Wichtigste auf einen Blick."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The essentials at a glance."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo esencial de un vistazo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'essentiel en un coup d'œil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'essenziale a colpo d'occhio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大事なことをひと目で。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O essencial num relance."
+          }
+        }
+      }
+    },
     "L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.": {
       "extractionState": "manual",
       "localizations": {
@@ -120505,6 +120834,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "A foto é reduzida para caber na memória limitada dos widgets."
+          }
+        }
+      }
+    },
+    "La place de %@ icônes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Braucht den Platz von %@ Symbolen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Takes the space of %@ icons"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocupa el lugar de %@ iconos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La place de %@ icônes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Occupa il posto di %@ icone"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アイコン%@個分の大きさ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ocupa o lugar de %@ ícones"
           }
         }
       }
@@ -178930,6 +179306,100 @@
         }
       }
     },
+    "Quelle catégorie ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welche Kategorie?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Which category?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué categoría?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle catégorie ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quale categoria?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのカテゴリ？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qual categoria?"
+          }
+        }
+      }
+    },
+    "Quelle taille pour ton widget ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welche Größe für dein Widget?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What size for your widget?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Qué tamaño para tu widget?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle taille pour ton widget ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quale dimensione per il tuo widget?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェットのサイズは？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qual tamanho para o seu widget?"
+          }
+        }
+      }
+    },
     "Quelques centimètres suffisent.": {
       "extractionState": "manual",
       "localizations": {
@@ -227152,6 +227622,53 @@
         }
       }
     },
+    "Touche un widget : l'Atelier s'ouvre aussitôt.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe auf ein Widget: Das Studio öffnet sich sofort."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a widget: the Studio opens right away."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca un widget: el Studio se abre al instante."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touche un widget : l'Atelier s'ouvre aussitôt."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca un widget: lo Studio si apre subito."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェットをタップするとStudioがすぐに開きます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque em um widget: o Studio abre na hora."
+          }
+        }
+      }
+    },
     "Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.": {
       "extractionState": "manual",
       "localizations": {
@@ -231895,6 +232412,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Você poderá conferir e corrigir cada aula antes de adicioná-la. Nada muda sem a sua aprovação."
+          }
+        }
+      }
+    },
+    "Tu pourras y réunir plusieurs widgets d'une même catégorie.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du kannst darin mehrere Widgets derselben Kategorie vereinen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You can combine several widgets from the same category in it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podrás combinar en él varios widgets de una misma categoría."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu pourras y réunir plusieurs widgets d'une même catégorie."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Potrai riunirvi più widget della stessa categoria."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "同じカテゴリの複数のウィジェットをまとめられます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você poderá reunir nele vários widgets da mesma categoria."
           }
         }
       }
@@ -242897,6 +243461,53 @@
         }
       }
     },
+    "Widget d'écran verrouillé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sperrbildschirm-Widget"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lock Screen widget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget de pantalla bloqueada"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget d'écran verrouillé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget della schermata di blocco"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ロック画面ウィジェット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget da tela bloqueada"
+          }
+        }
+      }
+    },
     "Widget photo": {
       "extractionState": "manual",
       "localizations": {
@@ -242940,6 +243551,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Widget de foto"
+          }
+        }
+      }
+    },
+    "Widget simple": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einzelnes Widget"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Single widget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget simple"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget simple"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget singolo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "単体ウィジェット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget simples"
           }
         }
       }
@@ -243034,6 +243692,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Widgets adicionados a Meus widgets"
+          }
+        }
+      }
+    },
+    "Widgets de %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ widgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets de %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets de %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget di %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@のウィジェット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widgets de %@"
           }
         }
       }
@@ -255775,6 +256480,53 @@
         }
       }
     },
+    "place libre : tu peux encore ajouter un widget.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "freier Platz: Du kannst noch ein Widget hinzufügen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "free spot: you can still add a widget."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lugar libre: aún puedes añadir un widget."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "place libre : tu peux encore ajouter un widget."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "posto libero: puoi ancora aggiungere un widget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "の空き：まだウィジェットを追加できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lugar livre: você ainda pode adicionar um widget."
+          }
+        }
+      }
+    },
     "placement": {
       "extractionState": "manual",
       "localizations": {
@@ -255865,6 +256617,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "investimentos"
+          }
+        }
+      }
+    },
+    "places libres : tu peux encore ajouter des widgets.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "freie Plätze: Du kannst noch Widgets hinzufügen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "free spots: you can still add widgets."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lugares libres: aún puedes añadir widgets."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "places libres : tu peux encore ajouter des widgets."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "posti liberi: puoi ancora aggiungere dei widget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "の空き：まだウィジェットを追加できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "lugares livres: você ainda pode adicionar widgets."
           }
         }
       }

@@ -1,0 +1,20 @@
+{
+ "1 ou 2 widgets": "1 or 2 widgets",
+ "1 widget": "1 widget",
+ "1 à 4 widgets": "1 to 4 widgets",
+ "Choisi": "Selected",
+ "Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.": "Pick the size first, then the category, then one or more widgets: they are combined into a single widget. The Studio then lets you customize it.",
+ "Choisis jusqu'à %@ widgets : ils seront réunis en un seul.": "Pick up to %@ widgets: they will be combined into one.",
+ "Heure et date": "Time and date",
+ "L'essentiel en un coup d'œil.": "The essentials at a glance.",
+ "La place de %@ icônes": "Takes the space of %@ icons",
+ "Quelle catégorie ?": "Which category?",
+ "Quelle taille pour ton widget ?": "What size for your widget?",
+ "Touche un widget : l'Atelier s'ouvre aussitôt.": "Tap a widget: the Studio opens right away.",
+ "Tu pourras y réunir plusieurs widgets d'une même catégorie.": "You can combine several widgets from the same category in it.",
+ "Widget d'écran verrouillé": "Lock Screen widget",
+ "Widget simple": "Single widget",
+ "Widgets de %@": "%@ widgets",
+ "place libre : tu peux encore ajouter un widget.": "free spot: you can still add a widget.",
+ "places libres : tu peux encore ajouter des widgets.": "free spots: you can still add widgets."
+}
