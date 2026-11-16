@@ -45,7 +45,7 @@ Demande du PDG (01 h 15) : 5 corrections précises, puis un audit fonctionnel, d
 2. **Clavier des nombres sans « Terminé »** (`NumberRow`, formulaires Finances, Fitness, Nutrition) : le pavé décimal ne se ferme qu'en faisant défiler. Proposé : une barre « Terminé » commune.
 3. **« Noter Ardane »** (Profil) : sans identifiant App Store, le bouton peut ne rien afficher (iOS limite la fenêtre, rien en TestFlight). Proposé : le cacher jusqu'à la publication.
 4. **Tâche « Chaque mois » due le 31** : la suivante tombe le 28 février, puis reste au 28. Une tâche quotidienne en retard de 10 jours doit être cochée 10 fois. Proposé : garder le jour d'origine et caler la suivante sur aujourd'hui au plus tôt.
-5. **Créer** : le « + » de l'Atelier fait encore passer le widget à la taille au-dessus tout seul (« Passé en Moyen pour tout afficher »), et l'Atelier compte « 2 sur 4 » pour un widget moyen alors que Créer dit « 2 au plus » ; proposé : « + » seulement s'il reste une place, compteur à la limite de la taille, sinon le message et le choix de taille. `CreateStartView.swift` (ancien départ) n'est plus utilisé : à retirer après ton accord.
+5. **Créer** : le « + » de l'Atelier fait encore passer le widget à la taille au-dessus tout seul (« Passé en Moyen pour tout afficher »), et l'Atelier compte « 2 sur 4 » pour un widget moyen alors que Créer dit « 2 au plus » ; proposé : « + » seulement s'il reste une place, compteur à la limite de la taille, sinon le message et le choix de taille. `CreateStartView.swift` (ancien départ) et `SpacesView` (ancienne feuille « Changer de widget ») ne sont plus utilisés : à retirer après ton accord.
 6. **Textes coupés probables en allemand / portugais** (lignes de listes en une ligne sans réduction : mini-apps, Apple Pay, Business) : proposé une réduction légère du texte.
 **Secondaire**
 7. Profil : « Rappels d'habitudes » et « Habitudes » ouvrent le même écran ; « Contacter le support » pourrait aussi ouvrir Mail.
@@ -55,6 +55,7 @@ Demande du PDG (01 h 15) : 5 corrections précises, puis un audit fonctionnel, d
 11. Finances : graphique des catégories identifié par le nom (deux catégories du même nom se confondent) ; Business : relevé d'abonnements daté plus tard dans le mois exclu du mois en cours.
 12. Fiabilité : un fichier de données illisible pourrait être remplacé par un état vide à la première action (une copie est gardée dans `Recovery/`, sans écran pour la restaurer).
 13. Premier lancement : l'accueil vide apparaît un instant entre l'écran de lancement et l'inscription ; bouton « Illimité » de Mes widgets un peu petit ; prix « −17 % » non localisé.
+14. Mon quotidien : sur la carte séance en demi-largeur, un nom d'exercice long est coupé (« Développé couc… ») ; proposé : réduire légèrement le texte ou passer sur deux lignes.
 
 ## 4. Tests exécutés
 Tous sur la CI GitHub Actions (simulateur iPhone 402 × 874 points, français) ; rien n'a tourné sur un vrai iPhone cette nuit.
@@ -62,12 +63,19 @@ Tous sur la CI GitHub Actions (simulateur iPhone 402 × 874 points, français) ;
 | Série | Commit | Compilation | Tests | Résultat |
 |---|---|---|---|---|
 | Run 425 (lots 1 et 2) | `1e47926` | simulateur, iPhone non signé, IPA : OK ; contrôles statiques OK | 1 439 réussis, 12 en échec | voir ci-dessous |
-| Run 426 (lot 3 + tests corrigés) | à venir | | | |
+| Run 426 (lot 3 + tests corrigés) | `a5bb008` | simulateur, iPhone non signé, IPA : OK ; contrôles statiques OK ; traductions : 5 743 textes, 0 manquant, 0 non traduit | 1 449 réussis, 2 en échec | les 2 dans les tests du Studio, côté test (voir ci-dessous) |
+| Version interne (Premium, TestFlight) | voir `Chantiers.md`, chantier 33 | Release signée | pas de tests (build d'essai) | |
+| Run suivant (2 tests du Studio corrigés) | à venir | | | |
 
 Les 12 échecs du run 425, tous analysés :
 - 9 tests logiques `ProfileMatrixTests` attendaient l'ancien Mon quotidien (profil vide = aucune carte). La règle a changé à ta demande (horaire de la semaine pour tous) : tests mis à jour, la garantie « rien d'inventé » reste vérifiée (l'horaire vide n'a aucun élément).
 - 1 test d'interface de Mon quotidien glissait sur la barre d'onglets : la grande carte Planning pousse maintenant la carte Nutrition plus bas. Le test fait d'abord monter la carte entière.
 - 2 tests d'interface du Studio mesuraient l'écran d'Accueil resté derrière le Studio et touchaient un bouton pendant la montée des réglages. Les vérifications de la montée elle-même (poignée, widget qui rapetisse et reste visible) passaient. Aides de test corrigées.
+
+Les 2 échecs du run 426, analysés sur l'arbre d'écran enregistré au moment de l'échec :
+- `testSettingsRiseAndComeBackDown` : la place des réglages était mesurée pendant le ressort de la montée (haut à 404 points au lieu de 336 une fois arrêtée) ; la montée elle-même est vérifiée juste avant (poignée, widget rapetissé et visible). Le test attend maintenant la fin du mouvement.
+- `testTheStudioChangesTheWidgetAndKeepsItAll` : au lancement, le champ « Nom » est sous le bas de l'écran. L'outil de test le fait défiler lui-même avant de le toucher ; ce défilement fait monter les réglages (comportement voulu) et le toucher tombe à l'ancienne place : le clavier ne s'ouvre pas. Une personne fait défiler puis touche le champ ; le test fait de même. Au run 425, cette étape était passée (aléatoire, selon la vitesse du simulateur).
+- Ce ne sont pas des bugs de l'app : aucune ligne de l'app n'a changé pour ces 2 corrections (seulement `UITests/StudioUITests.swift`).
 
 Vérifié sur les captures de la CI : barre des intérêts masquée à l'inscription ; carte Planning en grand en tête de Mon quotidien ; carte séance « Maintenant » dans le même panneau que les autres ; page de choix Moyen (1 et 2 numérotés, les autres grisés avec « Un widget moyen réunit 2 widgets au plus »).
 
@@ -78,3 +86,10 @@ Vérifié sur les captures de la CI : barre des intérêts masquée à l'inscrip
 - **Apple Pay (automatisation Raccourcis), accès au Calendrier, notifications reçues** : demandent un appareil et des autorisations réelles.
 - **Allemand / portugais** : les tests d'interface tournent en français ; les textes coupés possibles (recommandation 6) n'ont pas été capturés (série `[langs]` non lancée).
 - **VoiceOver** : vérifié par les libellés d'accessibilité dans les tests, pas à l'écoute.
+
+## 5. État de stabilité
+- **Compilation** : propre à chaque série (simulateur, iPhone, IPA), contrôles statiques verts (sécurité Release : pas de déblocage Premium en version publique), traductions complètes dans les 6 langues.
+- **Tests** : 1 449 sur 1 451 au dernier run complet ; les 2 restants sont des défauts de synchronisation des tests d'interface du Studio, corrigés dans les tests (aucune ligne de l'app touchée), à confirmer au run suivant.
+- **Données** : aucun format de données sauvegardées changé cette nuit ; les corrections gardent les données existantes (l'horaire de la semaine n'ajoute rien aux fichiers, il est affiché s'il n'a pas été retiré).
+- **Risque restant principal** : ce qui ne peut se voir que sur un vrai iPhone (widgets après minuit, pas, achats, Apple Pay) ; à vérifier sur la version interne.
+- **Avis** : application stable pour un essai sur iPhone ; la version publique `[testflight]` attend ton accord, après ton essai.
