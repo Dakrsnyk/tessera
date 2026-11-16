@@ -1,0 +1,3 @@
+date,envoi,tests_avant_envoi,contenu
+2026-10-22,0a660cf,run 229 (400 tests),"Huit lots : mini-apps harmonisées, Planning façon Calendrier, habitudes en grille, Productivité, fonds d'écran du Store, licences nutrition, calories actives, permissions expliquées, scanner alimentaire"
+2026-11-16,ce commit (numéro de build = numéro du run),run 434 (1 432 tests, 0 échec),"Tout ce qui a été testé en version Premium depuis le 2026-10-22, dont la mission de nuit du 2026-11-16 (audit, corrections) et le Studio en feuille : tirés vers le bas, les réglages redescendent"
