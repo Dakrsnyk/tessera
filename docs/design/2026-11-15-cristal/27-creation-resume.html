@@ -69,8 +69,8 @@
 <body style="--bw:1240px">
 <main class="bd rs">
   <header class="bd-head"><div class="num">5</div><div><h1>Les 5 parcours de création, sur une page</h1>
-    <p>Même exemple partout : réunir « Prochaine série » et « Régularité » (Fitness) dans un widget Moyen. Pour chaque parcours : l'idée, 4 vrais écrans, les avantages, les inconvénients et la note sur 100.</p></div>
-    <span class="badge">Maquettes · rien n'est changé dans l'app</span></header>
+    <p>Mis à jour le 2026-11-16 : les cinq parcours commencent tous par le même départ (taille, catégorie, widgets de la catégorie, un seul widget à la fin) et ne diffèrent qu'après. Même exemple partout : « Prochaine série » et « Régularité » (Fitness) dans un widget Moyen. Pour chaque parcours : l'idée, 4 vrais écrans, les avantages, les inconvénients et la note sur 100.</p></div>
+    <span class="badge">Taille d'abord · maquettes</span></header>
 
   <h2 style="margin-top:8px">La différence en un coup d'œil</h2>
   <div class="rs-box">
@@ -83,12 +83,12 @@
 
   <div class="rs-rec">
     <div class="k">Ma recommandation</div>
-    <h3>Le parcours 5 : il démarre aussi vite que le 4 et laisse autant de liberté que le 2</h3>
+    <h3>Le parcours 5 : le départ guidé commun, puis autant de liberté que le 2</h3>
     <ul>
       <li>Il règle le problème d'aujourd'hui : <b>un seul geste pour réunir</b>, le « + » posé sur le widget. Plus de bouton caché, plus de widgets séparés par erreur.</li>
-      <li>Quand un widget ne tient pas, Ardane <b>passe à la taille au-dessus</b> au lieu d'en retirer un sans prévenir.</li>
+      <li>Quand un widget ne tient pas, Ardane <b>dit pourquoi</b> et propose la taille au-dessus, sans rien retirer en silence.</li>
       <li>Il garde l'Atelier que tu as validé ; un widget réuni <b>reste modifiable</b> après l'enregistrement.</li>
-      <li>C'est un gros travail : je le livrerais en 4 étapes sur TestFlight, la première répare déjà la combinaison.</li>
+      <li>L'Atelier est déjà sur TestFlight (Builds 418 à 420) ; reste à coder le départ « taille d'abord ».</li>
     </ul>
   </div>
 </main>
@@ -97,37 +97,37 @@ const SHOT = (f, k) => `../../../pub/rapports/design-2026-11-15-cristal/ecrans/$
 const ARR = '<span class="rs-arr"><svg viewBox="0 0 40 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h32M26 4l9 8-9 8"/></svg></span>';
 const REC = 4;
 const P = [
-  { f: '21-creation-guidee', t: 'Guidé, étape par étape', idea: 'Un assistant pose une question par écran, dans l\'ordre : la taille, les widgets, l\'ordre, le style, puis l\'aperçu.', score: 68,
-    shots: [[1, 'Départ : un bouton « Commencer »'], [2, 'Étape 1 : choisir la taille'], [4, 'Étape 2 : 2 widgets réunis'], [5, 'Étape 3 : choisir l\'ordre']],
+  { f: '21-creation-guidee', t: 'Guidé, étape par étape', idea: 'Le départ commun (taille, catégorie, widgets) en assistant : une décision par écran, un fil d\'étapes, « Suivant » en bas. Puis l\'ordre, le style et l\'aperçu, une étape chacun.', score: 70,
+    shots: [[4, 'Étape 3 : 2 places prises en Moyen'], [6, 'Étape 4 : dans quel ordre ?'], [7, 'Étape 5 : quel style ?'], [9, 'Étape 6 : voilà sur ton écran']],
     plus: ['Impossible de se perdre : une seule décision à la fois', 'Chaque refus est expliqué au bon moment', 'Grands boutons, tout se fait au pouce'],
-    minus: ['Le plus long : 9 touchers, même pour un besoin simple', 'Les habitués doivent passer toutes les étapes', 'L\'Atelier validé passe derrière un lien'],
-    who: 'Une toute première création', taps: '9 touchers', work: 'Moyen' },
-  { f: '22-creation-studio', t: 'Studio à aperçu permanent', idea: 'Un seul écran : le widget reste en haut et on agit dessus. On touche le « + » posé sur le widget pour en ajouter un.', score: 80,
-    shots: [[1, 'Départ : le Studio, un widget prêt'], [2, 'En Moyen, un « + » apparaît sur le widget'], [4, 'Le 2e widget est posé, on le voit tout de suite'], [5, 'On glisse une partie pour la déplacer']],
+    minus: ['Le plus long : 8 touchers, même pour un besoin simple', 'Les habitués doivent passer toutes les étapes', 'L\'Atelier validé passe derrière « Ouvrir le Studio »'],
+    who: 'Une toute première création', taps: '8 touchers', work: 'Moyen' },
+  { f: '22-creation-studio', t: 'Studio à aperçu permanent', idea: 'Un seul écran : le widget reste en haut et montre ses places dès la taille choisie ; le panneau du bas passe des tailles aux catégories, puis aux widgets, puis aux outils.', score: 83,
+    shots: [[4, 'La scène montre les 2 places prises'], [6, 'Régler une partie du widget'], [7, 'Déplacer une partie'], [8, 'Un style pour tout le widget']],
     plus: ['On voit toujours le résultat', 'On réunit directement sur le widget', 'Les 10 outils à un toucher', 'La suite directe de l\'Atelier validé'],
-    minus: ['Dix outils d\'un coup : rien ne dit par où commencer', 'En Grand, les parties sont petites à toucher', 'Aucune idée de départ proposée'],
-    who: 'Ceux qui savent ce qu\'ils veulent', taps: '4 touchers', work: 'Gros' },
-  { f: '23-creation-blocs', t: 'Par blocs', idea: 'Le widget est une grille vide. Chaque information est un bloc qu\'on glisse dans une case.', score: 67,
-    shots: [[1, 'Départ : choisir une grille'], [2, 'Grille vide et tiroir de blocs'], [4, 'On glisse les blocs dans les cases'], [5, 'Déplacer, étirer, corbeille']],
+    minus: ['Beaucoup d\'outils une fois le widget choisi', 'En Grand, les parties sont petites à toucher', 'Aucune idée de départ proposée'],
+    who: 'Ceux qui savent ce qu\'ils veulent', taps: '6 touchers', work: 'Gros' },
+  { f: '23-creation-blocs', t: 'Par blocs', idea: 'La taille est une grille de cases, la catégorie un tiroir de blocs ; on pose les blocs dans les cases (en les glissant ou d\'un toucher), puis on les déplace, étire ou retire.', score: 71,
+    shots: [[4, '2 cases sur 2 : « Combiné »'], [6, 'Déplacer, étirer, retirer'], [7, 'Un style pour toute la grille'], [8, 'Régler un bloc']],
     plus: ['La grille montre les règles sans texte', 'Déplacer et retirer sont naturels', 'Le plus original des cinq'],
     minus: ['Glisser-déposer difficile sur un iPhone', 'Fait croire à une liberté qu\'iOS n\'offre pas (pas de bloc haut, pas de taille libre)', 'Le plus éloigné du design validé'],
-    who: 'Les bricoleurs, plutôt sur iPad', taps: '5 gestes', work: 'Gros' },
-  { f: '24-creation-intention', t: 'Par intention', idea: 'On dit ce qu\'on veut garder sous les yeux. Ardane propose 3 widgets déjà réunis, avec tes vraies données.', score: 78,
-    shots: [[1, 'Départ : « Que veux-tu garder sous les yeux ? »'], [2, '3 widgets déjà faits avec tes données'], [4, '« + Séance du jour » : Ardane passe en Grand'], [5, '3 dispositions au choix, sans glisser']],
-    plus: ['Le plus clair : on choisit une phrase', 'Part de tes vraies données', 'Aucun mot de widget à connaître'],
-    minus: ['Peu de liberté sans passer par le Studio', 'Une intention = un seul espace aujourd\'hui', 'Ne répare pas le Studio, où est le problème'],
+    who: 'Les bricoleurs, plutôt sur iPad', taps: '6 touchers ou gestes', work: 'Gros' },
+  { f: '24-creation-intention', t: 'Par intention', idea: 'Après la taille, on dit ce qu\'on veut suivre (« Suivre mon entraînement » = Fitness) ; Ardane remplit les places avec tes données, chaque widget présenté par sa question ; on ajuste.', score: 79,
+    shots: [[4, 'Places déjà remplies, avec tes données'], [6, 'Plein ? Ardane explique'], [7, '3 dispositions, sans glisser'], [8, 'Une ambiance, puis le Studio']],
+    plus: ['Le plus court : 4 touchers si la proposition convient', 'Part de tes vraies données', 'Aucun mot de widget à connaître'],
+    minus: ['Peu de liberté sans passer par le Studio', 'La proposition « avec tes données » est à écrire', 'Ne répare pas le Studio, où est le problème'],
     who: 'Débuter et aller vite', taps: '4 touchers', work: 'Moyen' },
-  { f: '25-creation-hybride', t: 'Hybride intelligent', idea: 'Un départ rapide (« Pour toi », « De zéro » ou « D\'un modèle »), puis l\'Atelier où l\'on agit sur le widget, en 3 chapitres : Contenu, Disposition, Style.', score: 86,
-    shots: [[1, 'Départ : « Pour toi », « De zéro », « D\'un modèle »'], [2, 'L\'Atelier s\'ouvre, widget déjà réuni'], [4, 'Ça ne tient pas : Ardane passe en Grand'], [5, 'Disposition : glisser ou plan proposé']],
-    plus: ['Rapide par suggestion, complet par l\'Atelier', 'Un seul geste pour réunir : le « + » sur le widget', 'Ne retire jamais un widget en silence', 'Garde l\'Atelier validé'],
-    minus: ['Deux façons d\'entrer à garder cohérentes', 'Le plus gros travail, à livrer en 4 étapes', 'Un peu moins guidé que le 1 pour un tout premier usage'],
-    who: 'Les débutants comme les habitués', taps: '2 par suggestion · 4 de zéro', work: 'Gros, en 4 livraisons' },
+  { f: '25-creation-hybride', t: 'Hybride intelligent', idea: 'Le départ commun (taille, catégorie, widgets, places visibles), puis l\'Atelier où l\'on agit sur le widget, en 3 chapitres : Contenu, Disposition, Style ; les réglages montent sur l\'écran.', score: 88,
+    shots: [[4, '2 places prises : « Combiné · 2 widgets »'], [6, 'L\'Atelier s\'ouvre sur le widget réuni'], [7, 'Disposition d\'un toucher'], [8, 'Les réglages montent, le widget reste visible']],
+    plus: ['Départ guidé, complet par l\'Atelier', 'Un seul geste pour réunir : le « + » sur le widget', 'Ne retire jamais un widget en silence', 'Garde l\'Atelier validé (déjà sur TestFlight)'],
+    minus: ['Le départ « taille d\'abord » reste à coder', 'Un peu moins guidé que le 1 pour un tout premier usage', 'Les catégories hors espaces (Heure et date) à ajouter'],
+    who: 'Les débutants comme les habitués', taps: '6 touchers', work: 'Gros : Atelier livré, départ à coder' },
 ];
 
 /* tableau des différences */
 const ROWS = [
-  ['Comment on commence', ['Un assistant : « Commencer »', 'Directement dans le Studio, un widget prêt', 'On choisit une grille vide', 'Une phrase : « Suivre mon entraînement »', '« Pour toi », « De zéro » ou « D\'un modèle »']],
-  ['Comment on réunit 2 widgets', ['Dans une grille, à l\'étape 2', 'On touche le « + » posé sur le widget', 'On glisse un bloc dans une case', 'Ardane le fait : widgets déjà réunis', 'Déjà réuni par une suggestion, ou « + » sur le widget']],
+  ['Comment on commence', ['Taille, catégorie, widgets : en étapes', 'Taille, catégorie, widgets : sur la scène', 'Taille = grille, catégorie = tiroir', 'Taille, puis une intention, puis une proposition', 'Taille, catégorie, widgets, places visibles']],
+  ['Comment on réunit 2 widgets', ['On touche 2 widgets, places visibles', 'Les widgets se posent sur la scène', 'On glisse ou touche 2 blocs', 'Ardane les propose, on ajuste', 'On touche 2 widgets ; ensuite « + » sur le widget']],
   ['Comment on range', ['Étape « Dans quel ordre ? »', 'On glisse la partie sur l\'aperçu', 'On glisse le bloc ; corbeille pour retirer', '3 dispositions proposées', 'Plan proposé, ou glisser']],
   ['Où se règle le style', ['Étape 4 ; le reste dans le Studio', 'Les 10 outils, à un toucher', 'Onglet « Style »', '3 ambiances ; le reste dans le Studio', 'Chapitre « Style » : les 8 outils']],
   ['Touchers pour l\'exemple', P.map((p) => p.taps)],

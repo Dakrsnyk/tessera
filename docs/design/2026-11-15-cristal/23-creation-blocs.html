@@ -2,233 +2,253 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Ardane · Cristal — Parcours 3 · Création par blocs</title>
+<title>Ardane · Cristal — Parcours 3 · Création par blocs (taille d'abord)</title>
 <link rel="stylesheet" href="cristal.css">
 <link rel="stylesheet" href="creation.css">
+<link rel="stylesheet" href="parcours.css">
 <style>
   /* propre à cette planche : préfixe b3- */
-  .b3-scn { position: relative; }
-  .b3-seg { margin-top: 10px; }
-  .b3-seg span { min-height: 34px; }
-  .b3-chips { margin-top: 10px; }
-  .b3-chips .chip.mute { opacity: .55; }
-  .b3-shelf { display: flex; gap: 10px; margin: 12px -20px 0 0; overflow: hidden; align-items: flex-start; }
-  .b3-bl { position: relative; flex: none; width: 88px; }
-  .b3-bl .cr-tile.w { margin-top: 23px; }
-  .b3-bl .cr-tile .lb { white-space: normal; text-wrap: balance; }
-  .b3-f { position: absolute; left: 5px; top: 5px; z-index: 3; height: 18px; padding: 0 7px; border-radius: 9px; background: #0B1220; color: #fff; font: 700 10.5px/18px Inter, sans-serif; white-space: nowrap; }
-  .b3-bl.w .b3-f { top: 28px; }
-  .b3-bl.dim .cr-tile { opacity: .4; }
-  .b3-bl.done .cr-tile img { opacity: .9; }
-  .b3-hint { font-size: 13.5px; line-height: 1.4; color: var(--ink2); margin: 10px 4px 0; }
-  .b3-fab-off { opacity: .45; }
+  .b3-band { margin: 0 0 26px; }
+  .b3-band .nm { font: 700 13px/1 Inter, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--bink2); height: 24px; padding-left: 19px; }
+  .b3-sec { display: flex; justify-content: space-between; align-items: baseline; margin: 12px 4px 0; }
+  .b3-sec b { font-size: 17px; font-weight: 750; } .b3-sec span { font-size: 12.5px; color: var(--ink2); }
+  .b3-pick4, .b3-pick3 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px 8px; margin-top: 8px; }
+  .b3-pick3 .cr-tile img, .b3-pick3 .cr-ph { width: 74%; margin: 0 auto; }
+  .b3-pick4 .cr-tile .ck { display: none; }
+  .b3-pick4 .cr-tile .lb, .b3-pick3 .cr-tile .lb { font-size: 11.5px; line-height: 13px; }
+  .b3-pick4 .cr-tile small, .b3-pick3 .cr-tile small { font-size: 10.5px; line-height: 12px; }
+  .b3-drawer { display: flex; align-items: center; gap: 8px; margin: 8px 4px 0; font-size: 13px; line-height: 1.35; color: var(--ink2); }
+  .b3-drawer i { font-size: 16px; color: var(--primary); flex: none; }
+  .b3-trash { background: #FDE9E7 !important; color: #B3261E !important; }
   .b3-bar { display: flex; gap: 8px; margin-top: 12px; }
   .b3-bar span { flex: 1; min-height: 48px; padding: 6px 8px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; text-align: center;
     font-size: 12px; font-weight: 650; line-height: 1.15; background: var(--panel); border: 1px solid rgba(255,255,255,.85); color: var(--ink); }
   .b3-bar span i { font-size: 17px; --sw: 2.1; }
   .b3-bar span.dg { color: #B3261E; }
-  .b3-trash { background: #FDE9E7 !important; color: #B3261E !important; }
-  .b3-gc { display: flex; align-items: center; gap: 14px; padding: 12px 14px; margin-top: 10px; border-radius: 22px; }
-  .b3-gc.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); background: var(--tint); }
-  .b3-gd { flex: none; width: 84px; display: flex; flex-wrap: wrap; gap: 4px; justify-content: center; align-content: center; }
-  .b3-gd u { display: block; width: 36px; height: 36px; border-radius: 9px; border: 1.8px dashed #9AA3B2; background: rgba(255,255,255,.7); }
-  .b3-gc.on .b3-gd u { border-color: var(--primary); }
-  .b3-gc .tx { flex: 1; min-width: 0; }
-  .b3-gc .tx b { display: block; font-size: 16px; font-weight: 700; letter-spacing: -.01em; }
-  .b3-gc .tx span { display: block; font-size: 12.5px; line-height: 1.34; color: var(--ink2); margin-top: 2px; }
-  .b3-ls { display: flex; gap: 7px; margin-top: 7px; }
-  .b3-ls u { display: block; height: 22px; border: 1.6px dashed #9AA3B2; background: rgba(255,255,255,.7); }
-  .b3-mk { display: inline-flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 11px; background: #fff; border: 1px solid var(--rule2); color: var(--ink2); font-size: 11.5px; font-weight: 700; white-space: nowrap; margin-right: 6px; }
-  .b3-thm { text-align: center; }
-  .b3-thm .cr-cw { margin: 0 auto; box-shadow: 0 1px 3px rgb(var(--sh) / .10), 0 6px 14px rgb(var(--sh) / .12); }
-  .b3-thm.on .cr-cw { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
-  .b3-thm b { display: block; margin-top: 8px; font-size: 12.5px; font-weight: 650; line-height: 16px; }
-  .b3-thm.on b { color: var(--primary); }
-  /* écran d'accueil */
-  .b3-h .cr-grid { top: 124px; }
-  .b3-h .fab { bottom: 156px; z-index: 12; box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 10px 24px rgba(11,18,32,.34); }
-  .b3-top { position: absolute; z-index: 12; left: 16px; top: 58px; height: 44px; padding: 0 18px 0 8px; border-radius: 22px; display: inline-flex; align-items: center; gap: 4px; font-size: 15px; font-weight: 650; color: #0B1220;
-    background: rgba(255,255,255,.72); -webkit-backdrop-filter: blur(20px) saturate(1.5); backdrop-filter: blur(20px) saturate(1.5); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 6px 18px rgba(11,18,32,.18); }
-  .b3-top i { font-size: 22px; --sw: 2.4; }
-  .b3-tag { position: absolute; z-index: 12; right: 16px; top: 66px; height: 28px; padding: 0 11px; border-radius: 14px; background: #0B1220; color: #fff; font: 650 12px/28px Inter, sans-serif; }
-  .b3-code { font: 600 12px Consolas, monospace; color: #35435A; }
+  .b3-hint { font-size: 13.5px; line-height: 1.4; color: var(--ink2); margin: 10px 4px 0; }
+  .b3-th { text-align: center; }
+  .b3-th .bx { min-height: 74px; border-radius: 14px; background: var(--well); display: grid; place-items: center; padding: 8px 4px; }
+  .b3-th.on .bx { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); background: var(--tint); }
+  .b3-th b { display: block; margin-top: 8px; font-size: 12.5px; font-weight: 650; } .b3-th.on b { color: var(--primary); }
+  .b3-glass { position: absolute; z-index: 50; left: 50%; top: 56px; transform: translateX(-50%); height: 44px; padding: 0 16px 0 6px; border-radius: 22px; display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.82); -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: 0 4px 14px rgba(11,18,32,.16); color: #0B1220; font-size: 15px; font-weight: 700; white-space: nowrap; }
+  .b3-glass .bk { width: 32px; height: 32px; border-radius: 16px; background: #fff; display: grid; place-items: center; font-size: 17px; }
+  .b3-glass em { font-style: normal; font-weight: 600; font-size: 13px; color: #35435A; }
+  .b3-save { position: absolute; z-index: 50; left: 24px; right: 24px; bottom: 180px; }
+  .b3-hs .cr-grid { top: 128px; }
+  .b3-ul { margin: 6px 0 0 16px; padding: 0; display: grid; gap: 3px; } .b3-ul li { font-size: 13px; line-height: 1.38; }
+  .note code { font: 600 12px Consolas, monospace; color: #35435A; }
+  .row.r5 .col .cap { min-height: 150px; }
 </style>
 </head>
-<body style="--bw:1860px">
+<body style="--bw:2320px">
 <main class="bd">
-  <header class="bd-head"><div class="num">3</div><div><h1>Parcours 3 · Création par blocs</h1>
-    <p>Le widget est une grille ; chaque information est un bloc. On choisit la grille (Petit, Moyen, Grand), puis on glisse des blocs de l'espace choisi dans les cases, ou on les touche : ils vont dans la première case libre. Les règles se lisent dans la forme des cases : une ligne = 1 bloc large ou 2 petits. Huit écrans, dans l'ordre du parcours.</p></div>
+  <header class="bd-head"><div class="num">3</div><div><h1>Parcours 3 · Création par blocs — taille d'abord</h1>
+    <p>Nouveau départ imposé : la taille (c'est la grille), puis la catégorie (le tiroir de blocs à ouvrir), puis les blocs, posés dans les cases : on les glisse, ou on les touche et ils vont dans la première case libre. En Petit, poser le bloc ouvre aussitôt la personnalisation. Ensuite, ce que la stratégie garde : déplacer, étirer, retirer un bloc, un seul style pour toute la grille, le réglage d'un bloc.</p></div>
     <span class="badge">Maquette d'idée · données d'exemple</span></header>
 
-  <div class="row">
-    <div class="col"><div class="nm">1 · Écran de départ</div>
+  <div class="b3-band"><div class="nm">Ce qu'on crée : toujours un seul widget</div><div id="rule"></div></div>
+
+  <div class="row r5">
+    <div class="col"><div class="nm">1 · Taille</div>
       <div class="phone t-saphir" id="p1" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>On choisit d'abord la grille</h4><p>Trois grilles dessinées à l'échelle, en pointillés : une case, deux cases, quatre cases. Grand est choisi ; « Ouvrir la grille » mène à la scène vide.</p>
-        <ul><li><span class="tag e">Existe</span><span>Les trois tailles et leurs textes, Rond / Rectangle / En ligne (1 widget), « Photos et citations » (son éditeur)</span></li>
-        <li><span class="tag a">À adapter</span><span>Choix de taille avant le contenu, cartes en forme de grille</span></li>
-        <li><span class="tag d">À développer</span><span>Bouton « Ouvrir la grille » et phrase d'aide</span></li>
-        <li><span class="tag e">Geste</span><span><b>1 toucher</b> (onglet Créer), puis une grille</span></li></ul></div><span class="flow"></span></div>
+      <div class="cap"><h4>La taille, c'est la grille</h4><p>Petit = une case, Moyen = deux, Grand = quatre, dessinées à la vraie proportion. Un toucher passe au tiroir de blocs. En bas, le lien vers l'écran verrouillé.</p>
+        <ul><li><span class="tag e">Existe</span><span>Tailles et textes (« L'essentiel en un coup d'œil. »…), silhouettes de « Partir de zéro »</span></li>
+        <li><span class="tag a">À adapter</span><span>Page de départ de Créer (aujourd'hui : « Pour toi », « Partir de zéro », modèles)</span></li>
+        <li><span class="tag e">Geste</span><span><b>1 toucher</b> (Moyen), sans confirmation</span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">2 · Premier choix</div>
+    <div class="col"><div class="nm">2 · Catégorie</div>
       <div class="phone t-saphir" id="p2" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Une grille vide et un tiroir de blocs</h4><p>La grille Grand attend 4 cases. Le tiroir range les blocs par espace ; chaque bloc porte sa forme : « ½ ligne » ou « ligne ». Les cadenas marquent le Premium.</p>
-        <ul><li><span class="tag e">Existe</span><span>Les 5 widgets Fitness, leurs tailles, cadenas Premium, espaces</span></li>
-        <li><span class="tag a">À adapter</span><span>Vignettes de widget = blocs ; badge de forme tiré des tailles existantes</span></li>
-        <li><span class="tag d">À développer</span><span>Cases vides en pointillés, sélecteur Blocs / Style</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Ouvrir la grille)</span></li></ul></div><span class="flow"></span></div>
+      <div class="cap"><h4>Quel tiroir de blocs ouvrir ?</h4><p>Chaque catégorie est un tiroir de blocs. Le nombre dit combien de blocs s'y trouvent dans la taille choisie : Fitness en offre 8.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les 12 espaces et leurs couleurs ; horloge, calendrier, compte à rebours… (hors Créer aujourd'hui)</span></li>
+        <li><span class="tag a">À adapter</span><span>Catégorie « Heure et date » à créer dans Créer</span></li>
+        <li><span class="tag d">À développer</span><span>Météo : aucun widget météo dans l'app</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Fitness)</span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">3 · Choix des éléments</div>
+    <div class="col"><div class="nm">3 · Petit : un seul widget</div>
       <div class="phone t-saphir" id="p3" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Glisser un bloc dans une case</h4><p>Le bloc se soulève, la case visée s'entoure. Au lieu de glisser, un simple toucher envoie le bloc dans la première case libre.</p>
-        <ul><li><span class="tag e">Existe</span><span>Les widgets « Prochaine série », etc. et leur ordre dans la grille</span></li>
-        <li><span class="tag d">À développer</span><span>Glisser-déposer vers une case précise ; l'app choisit aujourd'hui l'ordre par numéros</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (ou 1 glissement)</span></li></ul></div><span class="flow"></span></div>
+      <div class="cap"><h4>Une case, un toucher, l'Atelier</h4><p>La grille n'a qu'une case. Glisser ou toucher le bloc le pose et ouvre aussitôt la personnalisation : pas de bouton, pas de 2e bloc possible.</p>
+        <ul><li><span class="tag e">Existe</span><span>Widgets de Fitness, cadenas Premium, main des widgets interactifs</span></li>
+        <li><span class="tag d">À développer</span><span>Case en pointillés, glisser-déposer vers une case précise</span></li>
+        <li><span class="tag a">À adapter</span><span>Passage automatique à l'Atelier en Petit</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (ou 1 glissement) = Atelier ouvert, 3 en tout</span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">4 · Combinaison</div>
+    <div class="col"><div class="nm">4 · Moyen : jusqu'à 2</div>
       <div class="phone t-saphir" id="p4" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>La grille se remplit, ligne par ligne</h4><p>Deux petits blocs font la ligne 1. « Séance du jour » existe en moyen : il va sur la ligne entière du bas. Les blocs posés portent une coche.</p>
-        <ul><li><span class="tag e">Existe</span><span>Règles : 2 petits ou 1 moyen par ligne, 4 widgets au plus, même espace</span></li>
-        <li><span class="tag a">À adapter</span><span>Cases à forme de ligne ; coche dans le tiroir à la place des numéros</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> par bloc</span></li></ul></div></div>
+      <div class="cap"><h4>Deux cases, deux blocs</h4><p>Les 2 cases sont prises : « Combiné · 2 widgets ». Les autres blocs sont estompés avec « 2 au plus ». On peut aussi s'arrêter à 1 : widget simple, en version moyenne.</p>
+        <ul><li><span class="tag e">Existe</span><span>Règles et textes (« Un widget moyen réunit 2 widgets au plus. ») ; un seul widget réuni enregistré</span></li>
+        <li><span class="tag d">À développer</span><span>Compteur, « Widget simple » / « Combiné », bloc qui va dans la 1re case libre</span></li>
+        <li><span class="tag e">Geste</span><span><b>+3 touchers</b> (2 blocs, Personnaliser)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">5 · Grand : jusqu'à 4</div>
+      <div class="phone t-saphir" id="p5" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Quatre cases, une encore libre</h4><p>3 blocs posés ; « Séance du jour » existe en moyen, il prend une ligne entière. La 4e case attend un bloc : on le glisse ou on le touche.</p>
+        <ul><li><span class="tag e">Existe</span><span>Montage réel : 2 moyens, 1 moyen + 2 petits, ou 4 petits ; 1 seul = version grande</span></li>
+        <li><span class="tag d">À développer</span><span>Cases visibles (prises / libres), phrase « Résultat »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+4 touchers</b> (3 blocs, Personnaliser)</span></li></ul></div></div>
   </div>
 
-  <div class="row">
-    <div class="col"><div class="nm">5 · Organisation</div>
-      <div class="phone t-saphir" id="p5" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Déplacer, étirer, retirer</h4><p>Appui long : le bloc se soulève et change de ligne ; les autres s'écartent. La corbeille apparaît pendant le geste. Une barre propose Étirer / Réduire, Remplacer, Retirer.</p>
+  <div class="row r5">
+    <div class="col"><div class="nm">6 · Déplacer, étirer, retirer</div>
+      <div class="phone t-saphir" id="p6" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Un appui long sur un bloc</h4><p>Le bloc se soulève et change de case ; l'autre s'écarte. La corbeille apparaît pendant le geste ; une barre propose Étirer, Remplacer, Retirer.</p>
         <ul><li><span class="tag e">Existe</span><span>Remplacer, retirer (croix), réordonner par poignée</span></li>
-        <li><span class="tag a">À adapter</span><span>Réduire à ½ ligne = passer de Moyen à Petit pour le même widget</span></li>
+        <li><span class="tag a">À adapter</span><span>« Étirer » en Moyen = la version moyenne du widget, l'autre bloc sort</span></li>
         <li><span class="tag d">À développer</span><span>Appui long, corbeille de glissement, barre contextuelle</span></li>
         <li><span class="tag e">Geste</span><span><b>Facultatif</b> : 1 appui long + 1 glissement</span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">6 · Personnalisation</div>
-      <div class="phone t-saphir" id="p6" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Un seul style pour toute la grille</h4><p>Le mode « Style » ouvre la rangée d'outils réels. Le thème, le style, les couleurs, le fond, la bordure et la densité valent pour tous les blocs ; le contenu se règle bloc par bloc.</p>
-        <ul><li><span class="tag e">Existe</span><span>Outils Thème, Style, Couleurs, Fond, Bordure, Densité, Mes styles</span></li>
+    <div class="col"><div class="nm">7 · Un style pour toute la grille</div>
+      <div class="phone t-saphir" id="p7" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Un thème, tous les blocs</h4><p>Le mode « Style » ouvre la rangée d'outils réels. Thème, style, couleurs, fond, bordure et densité valent pour toute la grille ; le contenu se règle bloc par bloc.</p>
+        <ul><li><span class="tag e">Existe</span><span>Outils Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles</span></li>
         <li><span class="tag a">À adapter</span><span>Vignettes de thème = approximation (exports de thèmes à produire)</span></li>
         <li><span class="tag e">Geste</span><span><b>Facultatif +2</b> (Style, un thème)</span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">7 · Aperçu sur l'écran d'accueil</div>
-      <div class="phone cr-hs b3-h t-saphir" id="p7" data-time="13:20" data-tab="none"></div>
-      <div class="cap"><h4>Le widget Grand parmi les icônes</h4><p>Le combiné occupe 4 × 4 icônes, à l'échelle. « Enregistrer le widget » reste à portée du pouce, au-dessus du dock.</p>
-        <ul><li><span class="tag a">À adapter</span><span>Le bouton œil de Créer devient « Sur mon écran »</span></li>
-        <li><span class="tag d">À développer</span><span>Aperçu sur un écran d'accueil (n'existe pas aujourd'hui)</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Enregistrer le widget)</span></li></ul></div><span class="flow"></span></div>
+    <div class="col"><div class="nm">8 · Régler un bloc</div>
+      <div class="phone t-saphir" id="p8" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Toucher un bloc posé</h4><p>La case s'entoure et son panneau s'ouvre : on remplace ce bloc ou on le retire. Les options de son contenu se règlent ici, bloc par bloc ; le style reste commun.</p>
+        <ul><li><span class="tag e">Existe</span><span>Réglages par partie, remplacer, retirer (Atelier, Build 418)</span></li>
+        <li><span class="tag a">À adapter</span><span>Ouvrir ce panneau en touchant la case</span></li>
+        <li><span class="tag e">Geste</span><span><b>Facultatif +1</b> (toucher le bloc)</span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">8 · Enregistrement</div>
-      <div class="phone t-saphir" id="p8" data-time="13:20" data-tab="none"></div>
-      <div class="cap"><h4>Une fin honnête</h4><p>La feuille « Ajouter un widget » donne les étapes pour la taille Grand et rappelle qu'iOS ne laisse aucune app poser un widget. « Modifier », dans Mes widgets, rouvre la grille avec les blocs.</p>
-        <ul><li><span class="tag e">Existe</span><span>Feuille, segmenté, étapes, encart iOS, « Compris », Mes widgets</span></li>
-        <li><span class="tag a">À adapter</span><span>Montrée après chaque enregistrement ; nom du combiné « A + B + C »</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Compris)</span></li></ul></div></div>
+    <div class="col"><div class="nm">9 · Aperçu sur l'écran d'accueil</div>
+      <div class="phone cr-hs b3-hs t-saphir" id="p9" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Le widget à sa taille réelle</h4><p>« Sur mon écran » (l'œil) : le Moyen parmi les icônes. Retour d'un toucher ; « Enregistrer le widget » à portée du pouce.</p>
+        <ul><li><span class="tag e">Existe</span><span>« Sur mon écran » (Build 418)</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (facultatif)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">10 · Enregistrement</div>
+      <div class="phone t-saphir" id="p10" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Un widget enregistré, un seul</h4><p>« Enregistré dans Mes widgets », puis le guide d'ajout. « Modifier », dans Mes widgets, rouvre la grille avec ses blocs. Un widget réuni compte pour 1 dans la limite gratuite.</p>
+        <ul><li><span class="tag e">Existe</span><span>Vol vers Mes widgets, guide « Ajouter un widget », « Compris »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (Enregistrer, Compris)</span></li></ul></div></div>
   </div>
 
-  <div class="row" style="margin-top:34px">
+  <div class="row r5" style="margin-top:34px">
     <div class="col"><div class="nm">Le principe</div><div class="note" style="margin:9px">
       <h4>Une grille, des blocs</h4>
-      <p>Le widget est une grille à l'échelle ; chaque information est un bloc que l'on pose. Les règles se voient dans la forme des cases : Moyen = 1 ligne de 2 cases, Grand = 2 lignes de 2 cases, un bloc large prend une ligne.</p>
-      <p><b>Pour qui</b> : celles et ceux qui pensent « mise en page » et veulent voir où va chaque chose avant d'enregistrer. Moins adapté à qui cherche seulement un widget tout fait.</p></div></div>
-    <div class="col"><div class="nm">Combiner, en clair</div><div class="note" style="margin:9px">
-      <h4>7 touchers jusqu'au Moyen à 2 blocs</h4>
-      <p>1. Onglet Créer · 2. Grille Moyen · 3. Ouvrir la grille · 4. Toucher « Prochaine série » · 5. Toucher « Régularité » · 6. Enregistrer le widget · 7. Compris.</p>
-      <p>Chaque bloc touché va dans la première case libre : aucun glissement n'est obligatoire.</p></div></div>
+      <p>On décide d'abord <b>la grille</b> (taille), puis <b>le tiroir</b> (catégorie), puis on pose des blocs dans les cases. Les cases disent à chaque geste ce qui est pris, ce qui reste, et si le résultat est un widget simple ou combiné.</p>
+      <p><b>Pour qui</b> : celles et ceux qui pensent « mise en page » et veulent voir où va chaque chose. Moins adapté à qui cherche seulement un widget tout fait.</p></div></div>
+    <div class="col"><div class="nm">Le parcours en clair</div><div class="note" style="margin:9px">
+      <h4>Combien de touchers</h4>
+      <p><b>Petit</b> : Petit, Fitness, un bloc = Atelier ouvert en <b>3 touchers</b> ; « Enregistrer le widget » = 4.</p>
+      <p><b>Moyen à 2</b> : Moyen, Fitness, « Prochaine série », « Régularité », « Personnaliser » = <b>5 touchers</b> ; enregistrer = 6.</p>
+      <p><b>Grand à 3</b> : Grand, Fitness, 3 blocs, « Personnaliser » = <b>6 touchers</b> ; enregistrer = 7.</p>
+      <p>Un glissement vaut un toucher. Retour arrière à chaque page.</p></div></div>
     <div class="col"><div class="nm">Où vit chaque fonction existante</div><div class="note" style="margin:9px">
       <h4>Rien n'est supprimé</h4>
-      <p><b>Tailles</b> : écran 1 (Petit, Moyen, Grand). <b>Écran verrouillé</b> : Rond, Rectangle, En ligne, 1 bloc, jamais combiné. <b>Espaces</b> : puces du tiroir. <b>Thème, Style, Couleurs, Fond, Bordure, Densité, Mes styles</b> : mode « Style ». <b>Graphique</b> : s'y ajoute si un bloc en dessine un. <b>Options de contenu</b> : toucher un bloc posé. <b>Premium</b> : cadenas sur le bloc ; le pied devient « Débloquer et enregistrer ». <b>Enregistrer / Modifier / Supprimer</b> : bouton fixe, puis Mes widgets. <b>Photos et citations</b> : carte de l'écran 1, son propre éditeur.</p></div></div>
+      <ul class="b3-ul"><li><b>Tailles</b> : page 1 ; on peut encore changer dans Contenu › Taille.</li>
+      <li><b>Écran verrouillé</b> : petit lien en bas de la page Taille (choix du PDG), 1 bloc, jamais combiné.</li>
+      <li><b>« Pour toi » et les modèles</b> : Store ; <b>Dupliquer</b> : Mes widgets.</li>
+      <li><b>Photos et citations</b> : une catégorie de la page 2, puis son éditeur.</li>
+      <li><b>Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles</b> : écran 7.</li>
+      <li><b>Premium</b> : cadenas sur les blocs ; « Débloquer et enregistrer ».</li></ul></div></div>
     <div class="col"><div class="nm">Limites dites clairement</div><div class="note" style="margin:9px">
-      <h4>Le plus éloigné de l'Atelier validé</h4>
-      <p>Glisser-déposer sur un écran de 6 pouces : la scène et le tiroir se partagent la hauteur, d'où le toucher simple en double. Un bloc ne peut pas être haut sur deux lignes ni de taille libre : chaque widget n'existe qu'en Petit, Moyen, Grand (l'app ne sait pas le dessiner). Même espace seulement aujourd'hui.</p>
-      <p>Parcours le plus éloigné du C1 Atelier validé. <b>Chantier : gros</b> ; très gros si l'on voulait de nouvelles formes de blocs.</p></div></div>
+      <h4>Ce qui ne se fait pas</h4>
+      <ul class="b3-ul"><li>Plusieurs widgets séparés d'un coup : <b>retiré</b> de Créer.</li>
+      <li>Un bloc ne peut être ni haut sur deux lignes ni de taille libre : chaque widget n'existe qu'en Petit, Moyen, Grand.</li>
+      <li>Les blocs d'un widget réuni viennent <b>d'une seule catégorie</b>.</li>
+      <li>Pour 2 widgets en Moyen ou 4 en Grand, chacun doit exister en petit : sinon il est estompé, avec la raison.</li>
+      <li>Glisser-déposer sur un écran de 6 pouces : d'où le toucher simple en double. <b>Chantier : gros</b>, le plus éloigné de l'Atelier validé.</li>
+      <li>Pas de widget météo (<b>À développer</b>) ; iOS ne laisse aucune app poser un widget.</li></ul></div></div>
+    <div class="col"><div class="nm">Vérifié dans le code</div><div class="note" style="margin:9px">
+      <h4>Ce qui existe, ce qui change</h4>
+      <ul class="b3-ul"><li><b>Existe</b> : montage d'un seul widget réuni (<code>Composer</code>, <code>ComboLayout</code>), 1 widget en Moyen ou Grand = widget simple, refus rédigés, un combiné compte pour 1.</li>
+      <li><b>À changer</b> : l'ordre (catégorie puis taille aujourd'hui) ; « Créer les N widgets séparés » ; le « + » qui change la taille seul ; la page Taille et les cases à écrire.</li>
+      <li><b>À développer</b> : glisser-déposer vers une case précise (l'app range aujourd'hui par numéros).</li>
+      <li><b>À décider</b> : packs du Store et configurations d'écran d'accueil (hors Créer).</li></ul></div></div>
   </div>
 </main>
 <script src="cristal.js"></script>
 <script src="creation.js"></script>
+<script src="parcours.js"></script>
 <script>
 const ic = CR.ico;
-const COMBO = ['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'];
-const modes = (on) => `<div class="seg b3-seg"><span${on === 0 ? ' class="on"' : ''}>Blocs</span><span${on === 1 ? ' class="on"' : ''}>Style</span></div>`;
-const spaces = (mute) => `<div class="chips b3-chips"><span class="chip on">Fitness</span><span class="chip${mute ? ' mute' : ''}">Nutrition</span><span class="chip${mute ? ' mute' : ''}">Budget</span><span class="chip${mute ? ' mute' : ''}">Habitudes</span><span class="chip${mute ? ' mute' : ''}">Productivité</span></div>`;
-// un bloc du tiroir : name = export, f = forme, o = options de CR.tile
-const bl = (name, o = {}) => { const w = /-m-/.test(name);
-  return `<div class="b3-bl${w ? ' w' : ''}${o.dim ? ' dim' : ''}"><span class="b3-f">${w ? 'ligne' : '½ ligne'}</span>${CR.tile(name, { ...o, t: o.t })}</div>`; };
-const shelf = (st = {}) => `<div class="b3-shelf">
-  ${bl('nextSet-s-light', st.a || {})}${bl('trainingStreak-s-light', st.b || {})}${bl('todaysWorkout-m-light', { t: 'Séance du jour', ...(st.c || {}) })}${bl('restTimer-s-light', { lock: 1, hand: 1 })}${bl('weeklyVolume-m-light', { lock: 1 })}</div>`;
-const stage = (inner, lab, h, o = {}) => CR.stage(inner, { h, lab, left: o.left || '', right: '', mt: 38 });
-const fab = (t, cls = '') => `<div class="fab ${cls}">${t || 'Enregistrer le widget'}</div>`;
-const build = (id, body, extra = '', f = '') => { document.getElementById(id).innerHTML = `<div class="scr">${CR.head('Créer', { undo: 1 })}${body}</div>${f}${extra}`; };
-const ge = (g) => ` <b style="display:none"></b>`;
+const $ = (id, html) => { document.getElementById(id).innerHTML = html; };
+const S2 = ['nextSet-s', 'trainingStreak-s'];
+const FIT = {
+  nextSet: (o = {}) => CR.tile('nextSet-s-light', Object.assign({ hand: 1 }, o)),
+  streak: (o = {}) => CR.tile('trainingStreak-s-light', o),
+  rest: (o = {}) => CR.tile('restTimer-s-light', Object.assign({ lock: 1, hand: 1 }, o)),
+  today: (o = {}) => CR.ph('dumbbell', 'Séance du jour', o),
+  volume: (o = {}) => CR.ph('bars', 'Volume de la semaine', Object.assign({ lock: 1 }, o)),
+  records: (o = {}) => CR.ph('trophy', 'Records', Object.assign({ lock: 1 }, o)),
+  burn: (o = {}) => CR.ph('flame', 'Calories brûlées', Object.assign({ lock: 1 }, o)),
+  month: (o = {}) => CR.ph('calendar', 'Mois d\'entraînement', Object.assign({ lock: 1 }, o)),
+};
+const on = (html, n) => html.replace('class="cr-tile', 'class="cr-tile on').replace('<span class="ck"></span>', `<span class="ck">${n}</span>`);
+const ALL = (o = {}) => `${FIT.nextSet(o.a)}${FIT.streak(o.b)}${FIT.today(o.c)}${FIT.rest(o.d)}${FIT.volume(o.e)}${FIT.records(o.f)}${FIT.burn(o.g)}${FIT.month(o.h)}`;
 
-/* 1 · Écran de départ */
-(() => {
-  const g = (n) => `<div class="b3-gd" style="gap:4px">${'<u></u>'.repeat(n)}</div>`;
-  const card = (cells, t, d, on, style = '') => `<article class="pn b3-gc${on ? ' on' : ''}"><div class="b3-gd" style="${style}">${'<u></u>'.repeat(cells)}</div><div class="tx"><b>${t}</b><span>${d}</span></div><span class="cr-rdo${on ? ' on' : ''}">${on ? ic('check') : ''}</span></article>`;
-  document.getElementById('p1').innerHTML = `<div class="scr">${CR.head('Créer', { right: '' })}
-    <div class="cr-q" style="margin:10px 3px 0">Quelle grille ?</div><div class="cr-sub" style="margin:4px 3px 0">Tu poses ensuite des blocs dans les cases.</div>
-    ${card(1, 'Petit', 'L\'essentiel en un coup d\'œil.', 0)}
-    ${card(2, 'Moyen', 'Plus d\'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.', 0)}
-    ${card(4, 'Grand', 'Un tableau de bord de l\'espace : un widget en grand, ou jusqu\'à 4 widgets réunis.', 1)}
-    <article class="pn b3-gc" style="margin-top:10px"><span class="ico sq" style="flex:none">${ic('lockscreen')}</span><div class="tx"><b>Écran verrouillé</b><span>1 bloc : Rond, Rectangle ou En ligne</span>
-      <div class="b3-ls"><u style="width:22px;border-radius:11px"></u><u style="width:34px;border-radius:7px"></u><u style="width:34px;height:12px;margin-top:5px;border-radius:6px"></u></div></div></article>
-    <article class="pn b3-gc" style="margin-top:10px;padding:10px 14px"><span class="ico sq" style="flex:none">${ic('image')}</span><div class="tx"><b style="font-size:15px">Photos et citations</b><span>Son propre éditeur</span></div></article>
-  </div>${fab('Ouvrir la grille')}`;
-})();
+document.getElementById('rule').innerHTML = CR.rule();
 
-/* 2 · Premier choix */
-build('p2', stage(CR.combo([null, null, null, null], { w: 250, add: '' }), 'Grand · 0 bloc sur 4', 314) + modes(0) + spaces() + shelf()
-  + '<div class="b3-hint">Glisse un bloc dans une case, ou touche-le.</div>', '', fab('', 'b3-fab-off'));
+/* 1 · Taille = la grille */
+$('p1', `<div class="scr">${CR.head('Créer', { right: '' })}${CR.sizePage({ on: 'm', q: 'Quelle grille pour ton widget ?', sub: 'Tu y poses ensuite des blocs d\'une même catégorie.' })}</div>${CR.tap(318, 352)}`);
 
-/* 3 · Choix des éléments */
-build('p3', stage(CR.combo([null, null, null, null], { w: 250, add: '', sel: 0 }), 'Grand · 0 bloc sur 4', 314) + modes(0) + spaces() + shelf({ a: { off: 1 } }),
-  CR.lift('nextSet-s-light', 92, 330, 96) + CR.arrow(62, 520, 98, 420, { dash: 1, pri: 1, bend: 22 })
-  + CR.tip(0, 'Dépose ici', 210, 168), fab('', 'b3-fab-off'));
+/* 2 · Catégorie = le tiroir */
+$('p2', `<div class="scr">${CR.head('Créer', { back: 1, right: '' })}${CR.chosen('m')}<div class="pc-q" style="font-size:21px;margin-top:10px">Quel tiroir de blocs ouvrir ?</div>${CR.catPage('m', { on: 'Fitness' })}</div>${CR.tap(96, 395)}`);
 
-/* 4 · Combinaison */
-build('p4', stage(CR.combo(['nextSet-s', 'trainingStreak-s', '+m'], { w: 250, num: 1, sel: 2 }), 'Grand · 2 blocs sur 4', 314) + modes(0) + spaces(1)
-  + shelf({ a: { on: 1 }, b: { on: 1 }, c: { off: 1 } })
-  + `<div class="cr-why" style="margin-top:10px"><span class="b3-mk">autre espace</span><span>Un widget réunit des blocs du même espace : ici, Fitness.</span></div>`,
-  CR.lift('todaysWorkout-m-light', 160, 312, 170) + CR.arrow(235, 534, 232, 420, { dash: 1, pri: 1, bend: -18 }), fab());
+/* 3 · Petit : une case, un bloc, l'Atelier */
+$('p3', `<div class="scr">${CR.head('Fitness', { back: 1, right: '' })}${CR.chosen('s')}
+  ${CR.build('s', [null], { w: 250, add: 'Ton bloc', cls: 'tight', res: 'Glisse un bloc dans la case, ou touche-le : il la prend et l\'Atelier s\'ouvre aussitôt.' })}
+  <div class="b3-sec"><b>Blocs de Fitness</b><span>8 en Petit</span></div>
+  <div class="b3-pick4">${ALL()}</div></div>
+  ${CR.tap(66, 520)}${CR.tip(0, 'Pas de bouton : l\'Atelier s\'ouvre', 150, 700, { w: 210 })}`);
 
-/* 5 · Organisation */
-build('p5', stage(CR.combo(COMBO, { w: 250, sel: 0 }), 'Grand · 3 blocs sur 4', 372, { left: `<span class="pill gl b3-trash">${ic('trash')}Glisse ici pour retirer</span>` })
-  + `<div class="b3-bar"><span>${ic('resize')}Réduire à ½ ligne</span><span>${ic('swap')}Remplacer</span><span class="dg">${ic('x')}Retirer</span></div>`
-  + '<div class="b3-hint">Une ligne = 1 bloc large ou 2 petits.</div>',
-  CR.arrow(350, 335, 350, 190, { dash: 1, pri: 1, bend: -16 }) + CR.tap(342, 345), fab());
+/* 4 · Moyen : 2 cases sur 2 */
+const why2 = { off: 1, sub: '2 au plus' };
+$('p4', `<div class="scr">${CR.head('Fitness', { back: 1, right: '' })}${CR.chosen('m')}
+  ${CR.build('m', S2, { w: 250, res: 'Résultat : <b>Prochaine série + Régularité</b>, côte à côte, dans un seul widget Moyen.' })}
+  <div class="b3-sec"><b>Blocs de Fitness</b><span>Toucher un bloc posé le retire</span></div>
+  <div class="b3-pick3">${on(FIT.nextSet(), 1)}${on(FIT.streak(), 2)}${FIT.today(why2)}${FIT.rest(why2)}${FIT.volume(why2)}${FIT.records(why2)}${FIT.burn(why2)}${FIT.month(why2)}</div></div>
+  ${CR.go('Personnaliser', 'Tu peux aussi t\'arrêter à 1 bloc : le widget sera en version moyenne.')}`);
 
-/* 6 · Personnalisation */
-(() => {
-  const th = (o, t, on) => `<div class="b3-thm${on ? ' on' : ''}">${CR.combo(COMBO, { w: 96, ...o })}<b>${t}</b></div>`;
-  build('p6', stage(CR.combo(COMBO, { w: 206 }), 'Grand · 3 blocs sur 4', 266) + modes(1)
-    + CR.tools(0, 0, [['sparkles', 'Thème'], ['layers', 'Style'], ['palette', 'Couleurs'], ['image', 'Fond'], ['frame', 'Bordure'], ['density', 'Densité'], ['star', 'Mes styles']])
-    + CR.panel(224, CR.hd('Thème', 'Tous les blocs')
-      + '<div class="cr-note" style="margin-top:2px">Le style est commun à tous les blocs. Touche un bloc pour régler son contenu.</div>'
-      + `<div class="cr-g3">${th({}, 'Pure White', 1)}${th({ dark: 1 }, 'Midnight')}${th({ hue: 58 }, 'Ocean')}</div>`), '', fab());
-})();
+/* 5 · Grand : 3 cases sur 4, un bloc glissé vers la dernière */
+$('p5', `<div class="scr">${CR.head('Fitness', { back: 1, right: '' })}${CR.chosen('l')}
+  ${CR.build('l', ['nextSet-s', 'trainingStreak-s', { ph: 'dumbbell', t: 'Séance du jour' }, null], { w: 200, res: 'Résultat : <b>Séance du jour</b> sur une ligne entière, les 2 autres dessous. Un 4e les met tous en petit.' })}
+  <div class="b3-pick3">${on(FIT.nextSet(), 1)}${on(FIT.streak(), 2)}${on(FIT.today(), 3)}${FIT.rest()}${FIT.volume()}${FIT.records()}${FIT.burn()}${FIT.month()}</div></div>
+  ${CR.go('Personnaliser', '3 blocs réunis dans un seul widget Grand.')}`);
+</script>
+<script>
+const head6 = (back = 1) => CR.head('Créer', { back, undo: 1 });
+const stg = (inner, h, o = {}) => CR.stage(inner, Object.assign({ h, left: '', right: `<span class="pill ic gl">${ic('eye')}</span>`, mt: 38 }, o));
+const modes = '';
+const fab = (t) => `<div class="fab">${t || 'Enregistrer le widget'}</div>`;
 
-/* 7 · Aperçu sur l'écran d'accueil */
-document.getElementById('p7').innerHTML = CR.home({ fmt: 'l', widget: CR.combo(COMBO, { w: 338, cls: 'flat' }), ring: 1,
-  extra: `<span class="b3-top">${ic('chevl')}Sur mon écran</span><span class="b3-tag">Grand</span>${fab('Enregistrer le widget')}` });
+/* 6 · Déplacer, étirer, retirer */
+$('p6', `<div class="scr">${head6()}${stg(CR.combo(S2, { w: 290, sel: 0 }), 300, { mt: 0, lab: 'Moyen · 2 blocs sur 2', left: `<span class="pill gl b3-trash">${ic('trash')}Glisse ici pour retirer</span>` })}
+  <div class="b3-bar"><span>${ic('resize')}Étirer</span><span>${ic('swap')}Remplacer</span><span class="dg">${ic('x')}Retirer</span></div>
+  <div class="b3-hint">Une ligne = 1 bloc large ou 2 petits. Étirer « Prochaine série » le met en version moyenne : « Régularité » sort.</div></div>
+  ${CR.arrow(150, 249, 245, 249, { dash: 1, pri: 1, bend: -30 })}${CR.tap(120, 264)}${fab()}`);
 
-/* 8 · Enregistrement */
-(() => {
-  const s = (n, t) => `<div class="step" style="padding:9px 0;font-size:14px;line-height:1.36"><span class="n">${n}</span><span>${t}</span></div>`;
-  document.getElementById('p8').innerHTML = `<div class="scr">${CR.head('Créer', {})}${stage(CR.combo(COMBO, { w: 250 }), '', 300)}</div><div class="dim"></div>
-  <div class="sheet" style="top:40px;padding:8px 20px 0">
-    <div class="grab" style="margin-bottom:6px"></div>
+/* 7 · Un style pour toute la grille */
+const th = (o, t, onn) => `<div class="b3-th${onn ? ' on' : ''}"><div class="bx">${CR.combo(S2, Object.assign({ w: 94, cls: 'flat' }, o))}</div><b>${t}</b></div>`;
+$('p7', `<div class="scr">${head6()}${stg(CR.combo(S2, { w: 250 }), 228, { lab: 'Moyen · 2 blocs sur 2' })}
+  <div class="seg" style="margin-top:10px"><span>Blocs</span><span class="on">Style</span></div>
+  ${CR.tools(0, 0, [['sparkles', 'Thème'], ['layers', 'Style'], ['palette', 'Couleurs'], ['image', 'Fond'], ['frame', 'Bordure'], ['chart', 'Graphique'], ['density', 'Densité'], ['star', 'Mes styles']])}
+  ${CR.panel(300, CR.hd('Thème', 'Tous les blocs') + '<div class="cr-note" style="margin-top:2px">Le style est commun à toute la grille. Touche un bloc pour régler son contenu.</div>'
+    + `<div class="cr-g3" style="margin-top:8px">${th({}, 'Pure White', 1)}${th({ dark: 1 }, 'Midnight')}${th({ hue: 58 }, 'Ocean')}</div>`)}</div>${fab()}`);
+
+/* 8 · Régler un bloc */
+$('p8', `<div class="scr">${head6()}${stg(CR.combo(S2, { w: 290, sel: 1 }), 250, { lab: 'Case 2 sur 2' })}
+  ${CR.panel(330, CR.hd('Ce bloc', 'Case 2 sur 2') + CR.part('trainingStreak-s-light', { right: '<span class="act">Remplacer</span><span class="act ic">' + ic('x') + '</span>' })
+    + '<div class="cr-why" style="margin-top:10px">' + ic('info') + '<span>Le contenu se règle bloc par bloc. Le style, lui, reste commun à toute la grille.</span></div>')}</div>
+  ${CR.tap(290, 270)}${fab()}`);
+
+/* 9 · Aperçu sur l'écran d'accueil */
+$('p9', CR.home({ fmt: 'm', ring: 1, widget: CR.combo(S2, { w: 338, cls: 'flat' }), rows: 1,
+  extra: `<span class="b3-glass"><span class="bk">${ic('chevl')}</span>Sur mon écran<em>· Moyen</em></span><div class="btnP lg b3-save">Enregistrer le widget</div>` }));
+
+/* 10 · Enregistrement */
+const stp = (n, t) => `<div class="step" style="padding:8px 0;font-size:14px;line-height:1.34"><span class="n">${n}</span><span>${t}</span></div>`;
+$('p10', `<div class="scr">${CR.head('Créer', {})}${CR.stage(CR.combo(S2, { w: 290 }), { h: 238, mt: -38 })}</div><div class="dim"></div>
+  <div class="sheet" style="top:40px;padding:8px 20px 0"><div class="grab" style="margin-bottom:6px"></div>
     <div class="nv" style="height:40px;margin-top:0"><span class="sp"></span><span class="t">Ajouter un widget</span><span class="sp"></span></div>
-    <div style="display:flex;gap:14px;align-items:center;margin-top:4px"><div style="flex:none;width:64px">${CR.combo(COMBO, { w: 64 })}</div>
-      <div><div class="h2" style="font-size:17px;line-height:1.22">« Séance du jour + Prochaine série + Régularité » est prêt</div><span class="okl" style="margin-top:4px;font-size:14px">${ic('check')}Enregistré dans Mes widgets</span></div></div>
+    <div style="display:flex;gap:14px;align-items:center;margin-top:4px"><div style="width:120px;flex:none">${CR.combo(S2, { w: 120 })}</div>
+      <div><div class="h2" style="font-size:19px">« Prochaine série + Régularité »</div><span class="okl" style="margin-top:3px;font-size:14px">${ic('check')}Enregistré dans Mes widgets</span></div></div>
     <div class="seg" style="margin-top:12px"><span class="on">Écran d'accueil</span><span>Écran verrouillé</span></div>
-    <div style="margin-top:4px">
-      ${s(1, 'Appuie longuement sur un espace vide de l\'écran d\'accueil')}
-      ${s(2, 'Touche « Modifier » en haut, puis « Ajouter un widget »')}
-      ${s(3, 'Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu\'à la taille Grand')}
-      ${s(4, 'Ajoute-le : il garde ce widget, même quand tu en crées d\'autres')}
-    </div>
-    <div class="s" style="margin:4px 2px 10px">Dans Mes widgets, « Modifier » rouvre la grille avec tes blocs.</div>
+    <div style="margin-top:4px">${stp(1, 'Appuie longuement sur un espace vide de l\'écran d\'accueil')}${stp(2, 'Touche « Modifier » en haut, puis « Ajouter un widget »')}${stp(3, 'Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu\'à la taille Moyen')}${stp(4, 'Ajoute-le : il garde ce widget, même quand tu en crées d\'autres')}</div>
+    <div class="s" style="margin:4px 2px 8px">Dans Mes widgets, « Modifier » rouvre la grille avec tes blocs.</div>
     <div class="info" style="padding:10px 14px">${ic('info')}<span>iOS ne laisse aucune app poser un widget à ta place.</span></div>
-    <div class="btnP lg" style="margin-top:14px">Compris</div>
-  </div>`;
-})();
+    <div class="btnP lg" style="margin-top:12px">Compris</div></div>`);
 Cristal.init();
 </script>
 </body>

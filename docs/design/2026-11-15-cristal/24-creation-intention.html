@@ -2,50 +2,44 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Ardane · Cristal — Parcours 4 · Création par intention</title>
+<title>Ardane · Cristal — Parcours 4 · Création par intention (taille d'abord)</title>
 <link rel="stylesheet" href="cristal.css">
 <link rel="stylesheet" href="creation.css">
+<link rel="stylesheet" href="parcours.css">
 <style>
   /* propre à cette planche : préfixe i4- */
-  .i4-q { margin: 6px 3px 0; }
-  .i4-int { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
-  .i4-c { padding: 11px 12px 12px; display: block; }
-  .i4-top { display: flex; align-items: center; justify-content: space-between; min-height: 44px; }
-  .i4-c .ico { width: 36px; height: 36px; font-size: 18px; }
-  .i4-c b { display: block; font-size: 14px; font-weight: 650; line-height: 1.2; margin-top: 6px; min-height: 34px; }
-  .i4-c p { margin: 3px 0 0; font-size: 12px; line-height: 1.32; color: var(--ink2); min-height: 32px; }
-  .i4-acc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
-  .i4-acc .pn { padding: 8px 4px 8px; text-align: center; font-size: 12px; font-weight: 650; line-height: 1.2; min-height: 72px; border-radius: 20px; display: grid; justify-items: center; align-content: center; gap: 4px; }
-  .i4-acc i { font-size: 20px; color: var(--primary); }
-  .i4-opt { display: flex; gap: 12px; align-items: center; margin-top: 10px; padding: 12px 14px 12px 12px; }
-  .i4-wid { width: 124px; flex: none; display: grid; place-items: center; }
-  .i4-tx { flex: 1; min-width: 0; }
-  .i4-tx .nm2 { display: flex; align-items: flex-start; justify-content: space-between; gap: 6px; }
-  .i4-tx b { font-size: 15px; font-weight: 650; line-height: 1.2; }
-  .i4-tx .re { font-size: 12.5px; line-height: 1.35; color: var(--ink2); margin-top: 3px; }
-  .i4-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; align-items: center; }
-  .i4-sz { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 10px; background: var(--tint); color: var(--primary); font-size: 11px; font-weight: 700; }
-  .i4-rec { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 10px; background: var(--primary); color: var(--on-primary); font-size: 11px; font-weight: 700; }
-  .i4-foot { position: absolute; z-index: 7; left: 20px; right: 20px; bottom: 98px; display: flex; gap: 10px; }
-  .i4-foot > div { height: 50px; border-radius: 25px; font-size: 15.5px; }
-  .i4-foot .btnG { flex: 1.15; } .i4-foot .btnP { flex: 1; }
-  .i4-hit { position: relative; } .i4-hit::after { content: ""; position: absolute; inset: -6px -4px; }
-  .i4-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-  .i4-chips .chip { height: 44px; border-radius: 22px; padding: 0 15px; background: var(--well); border-color: transparent; }
-  .i4-chips .chip.on { background: var(--tint); color: var(--primary); box-shadow: inset 0 0 0 1.5px var(--primary); }
+  .i4-band { margin: 0 0 26px; }
+  .i4-band .nm { font: 700 13px/1 Inter, sans-serif; letter-spacing: .1em; text-transform: uppercase; color: var(--bink2); height: 24px; padding-left: 19px; }
+  .row.r5 .col .cap { min-height: 150px; }
+  .i4-int { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-top: 8px; }
+  .i4-c { display: flex; align-items: center; gap: 9px; min-height: 52px; padding: 7px 9px; border-radius: 17px; }
+  .i4-c .ic { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; font-size: 16px; color: #fff; flex: none; }
+  .i4-c .tx { min-width: 0; } .i4-c b { display: block; font-size: 12.5px; font-weight: 700; line-height: 15px; } .i4-c span.k { font-size: 11px; color: var(--ink2); line-height: 13px; }
+  .i4-c.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4.5px var(--primary); }
+  .i4-c.soon { background: transparent !important; box-shadow: none; border: 1.6px dashed #B9BEC9; } .i4-c.soon .ic { background: #C9CED8 !important; }
+  .i4-c .tg { display: inline-block; font-size: 9.5px; font-weight: 750; color: #8A5A00; background: #FDF0CF; border-radius: 6px; padding: 1px 5px; margin-top: 1px; }
+  .i4-qs { margin-top: 8px; display: grid; gap: 6px; }
+  .i4-qr { display: flex; align-items: center; gap: 10px; min-height: 50px; padding: 6px 12px 6px 7px; border-radius: 16px; }
+  .i4-qr img { width: 38px; height: 38px; border-radius: 10px; flex: none; box-shadow: 0 1px 3px rgb(var(--sh) / .14); }
+  .i4-qr .ph { width: 38px; height: 38px; border-radius: 10px; flex: none; display: grid; place-items: center; background: var(--panel2); border: 1.4px dashed var(--rule2); color: var(--ink2); font-size: 17px; }
+  .i4-qr .tx { flex: 1; min-width: 0; } .i4-qr b { display: block; font-size: 13.5px; font-weight: 650; line-height: 16px; } .i4-qr small { font-size: 11.5px; color: var(--ink2); }
+  .i4-qr .ck { width: 24px; height: 24px; border-radius: 12px; border: 1.5px solid var(--rule2); display: grid; place-items: center; font: 700 12px Inter, sans-serif; color: #fff; flex: none; }
+  .i4-qr.on { box-shadow: inset 0 0 0 2px var(--primary); } .i4-qr.on .ck { background: var(--primary); border-color: var(--primary); }
+  .i4-qr.off { opacity: .45; } .i4-qr .lk { font-size: 13px; color: var(--ink2); }
+  .i4-prop { display: flex; align-items: center; gap: 8px; margin-top: 6px; padding: 8px 12px; border-radius: 14px; background: color-mix(in srgb, var(--primary) 9%, #fff); border: 1px solid color-mix(in srgb, var(--primary) 22%, #fff); font-size: 12.5px; line-height: 1.3; font-weight: 600; }
+  .i4-prop i { color: var(--primary); font-size: 16px; flex: none; }
+  .i4-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 8px; }
+  .i4-chips .chip { height: 40px; border-radius: 20px; padding: 0 13px; background: var(--well); border-color: transparent; font-size: 13px; }
   .i4-chips .chip i { color: var(--ink2); }
-  .i4-ban { margin-top: 10px; align-items: center; background: color-mix(in srgb, var(--primary) 9%, #fff); border: 1px solid color-mix(in srgb, var(--primary) 22%, #fff); padding: 8px 6px 8px 12px; }
+  .i4-ban { margin-top: 10px; align-items: center; background: color-mix(in srgb, var(--primary) 9%, #fff); border: 1px solid color-mix(in srgb, var(--primary) 22%, #fff); padding: 8px 12px; }
   .i4-ban i { color: var(--primary); }
-  .i4-ban .un { flex: none; height: 44px; display: inline-flex; align-items: center; padding: 0 12px; font-size: 14px; font-weight: 650; color: var(--primary); }
   .i4-g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
   .i4-v { padding: 8px 6px 9px; text-align: center; border-radius: 20px; }
-  .i4-v .vw { height: 100px; display: grid; place-items: center; position: relative; }
+  .i4-v .vw { height: 96px; display: grid; place-items: center; position: relative; }
   .i4-v b { display: block; font-size: 12.5px; font-weight: 650; line-height: 1.2; margin-top: 6px; }
   .i4-v small { display: block; font-size: 11px; line-height: 1.25; color: var(--ink2); margin-top: 2px; }
   .i4-v .cr-rdo { position: absolute; top: -2px; right: -1px; width: 22px; height: 22px; }
   .i4-v.on b { color: var(--primary); }
-  .i4-sch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; align-items: end; margin-top: 10px; }
-  .i4-leg { font-size: 12px; line-height: 1.4; color: var(--ink2); margin-top: 10px; text-align: center; }
   .i4-st { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 6px 14px; margin-top: 12px; border-radius: 26px; border: 1.5px solid var(--primary); color: var(--primary); font-size: 15px; font-weight: 650; }
   .i4-st i { font-size: 19px; }
   .i4-hs .cr-grid { top: 120px; }
@@ -56,172 +50,204 @@
   .i4-bt > div { height: 48px; border-radius: 24px; display: flex; align-items: center; justify-content: center; gap: 7px; font: 650 15.5px Inter, sans-serif; white-space: nowrap; }
   .i4-bt .gh { flex: 1; background: rgba(255,255,255,.86); color: #121A2A; -webkit-backdrop-filter: blur(20px); backdrop-filter: blur(20px); box-shadow: 0 2px 10px rgba(20,24,40,.14); }
   .i4-bt .pl { flex: 1.5; background: var(--primary); color: var(--on-primary); box-shadow: 0 4px 14px rgba(20,24,40,.22), inset 0 1px 0 rgba(255,255,255,.28); }
-  .i4-bt i { font-size: 18px; }
   .i4-nm { display: flex; gap: 14px; align-items: center; margin-top: 4px; }
-  .i4-nm .th { flex: none; width: 92px; display: grid; place-items: center; }
-  .note ol, .note ul { margin: 6px 0 0 16px; padding: 0; display: grid; gap: 3px; } .note li { font-size: 13px; line-height: 1.38; }
+  .i4-ul { margin: 6px 0 0 16px; padding: 0; display: grid; gap: 3px; } .i4-ul li { font-size: 13px; line-height: 1.38; }
+  .note code { font: 600 12px Consolas, monospace; color: #35435A; }
+  .act.i4-hit { position: relative; } .act.i4-hit::after { content: ""; position: absolute; inset: -6px -4px; }
 </style>
 </head>
-<body style="--bw:1860px">
+<body style="--bw:2320px">
 <main class="bd">
-  <header class="bd-head"><div class="num">4</div><div><h1>Parcours 4 · Création par intention</h1>
-    <p>On ne choisit pas des widgets : on dit ce qu'on veut garder sous les yeux. Ardane propose des compositions déjà faites, avec les vraies données de la personne, dans les trois tailles. La combinaison est faite par l'app ; la personne ajuste (remplacer, ajouter, retirer une information) et Ardane recompose seul la disposition, en disant pourquoi. Aucun glisser. Une intention correspond à un espace d'Ardane.</p></div>
+  <header class="bd-head"><div class="num">4</div><div><h1>Parcours 4 · Création par intention — taille d'abord</h1>
+    <p>Nouveau départ imposé : la place à donner (taille), puis ce qu'on veut suivre (la catégorie, dite comme une intention), puis les informations, présentées par la question à laquelle elles répondent. Ardane remplit déjà les emplacements avec une proposition tirée de tes données ; on ajuste. Ensuite, ce que la stratégie garde : Ardane recompose seul et le dit, trois dispositions sans glisser, une ambiance puis le Studio si on veut plus.</p></div>
     <span class="badge">Maquette d'idée · données d'exemple</span></header>
 
-  <div class="row">
-    <div class="col"><div class="nm">1 · Écran de départ</div>
+  <div class="i4-band"><div class="nm">Ce qu'on crée : toujours un seul widget</div><div id="rule"></div></div>
+
+  <div class="row r5">
+    <div class="col"><div class="nm">1 · Taille</div>
       <div class="phone t-saphir" id="p1" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Une question, pas un catalogue</h4><p>La personne dit ce qu'elle veut garder sous les yeux. Chaque carte est un espace d'Ardane, avec un vrai widget en vignette. Les 12 espaces restent à un toucher de « Tous les widgets ».</p>
-        <ul><li><span class="tag a">À adapter</span><span>Cartes d'intention à la place de la liste des espaces ; phrases à la 1re personne</span></li>
-        <li><span class="tag e">Existe</span><span>Les espaces, leurs widgets, « Écran verrouillé », « Photos et citations »</span></li>
-        <li><span class="tag e">Geste</span><span><b>2 touchers</b> (onglet Créer, « Suivre mon entraînement »)</span></li></ul></div><span class="flow"></span></div>
+      <div class="cap"><h4>Quelle place lui donner ?</h4><p>Les trois tailles à leur vraie proportion, avec leurs emplacements. Un toucher passe à la suite ; en bas, le lien discret vers l'écran verrouillé.</p>
+        <ul><li><span class="tag e">Existe</span><span>Tailles et textes réels, silhouettes</span></li>
+        <li><span class="tag a">À adapter</span><span>Page de départ de Créer</span></li>
+        <li><span class="tag e">Geste</span><span><b>1 toucher</b> (Moyen)</span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">2 · Premier choix</div>
+    <div class="col"><div class="nm">2 · Catégorie</div>
       <div class="phone t-saphir" id="p2" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Trois propositions avec tes données</h4><p>Les trois sont déjà composées avec les widgets de l'espace Fitness : petit, moyen, grand. Le widget montré est celui qu'on obtiendra, à l'échelle relative des trois tailles.</p>
-        <ul><li><span class="tag e">Existe</span><span>Tailles, règles de combinaison (2 petits en moyen, 1 moyen + 2 petits en grand), gratuit ou Premium</span></li>
-        <li><span class="tag d">À développer</span><span>Les trois propositions par espace, étiquette « Conseillé » ; elles reprennent les présélections par espace</span></li>
-        <li><span class="tag e">Geste</span><span><b>+2 touchers</b> (la proposition, « Continuer »)</span></li></ul></div><span class="flow"></span></div>
+      <div class="cap"><h4>Ce qu'on veut suivre</h4><p>Chaque catégorie dite comme une intention, avec son vrai nom dessous : « Suivre mon entraînement », c'est Fitness.</p>
+        <ul><li><span class="tag e">Existe</span><span>Les 12 espaces, horloge, calendrier, compte à rebours…, photos et citations</span></li>
+        <li><span class="tag a">À adapter</span><span>Phrases d'intention ; catégorie « Heure et date »</span></li>
+        <li><span class="tag d">À développer</span><span>Météo : aucun widget météo</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b></span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">3 · Choix des éléments</div>
+    <div class="col"><div class="nm">3 · Petit : un seul widget</div>
       <div class="phone t-saphir" id="p3" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Remplacer, ajouter, retirer</h4><p>L'aperçu reste en haut. Chaque information se remplace ou se retire ; les suggestions sont les widgets de l'espace qui existent en petit. Un cadenas marque ce qui est Premium.</p>
-        <ul><li><span class="tag e">Existe</span><span>Widgets Fitness, cadenas Premium, « Enregistrer le widget »</span></li>
-        <li><span class="tag a">À adapter</span><span>Parties du combiné en lignes (comme le Studio), puces de suggestion</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> pour « + Séance du jour » ; « Enregistrer le widget » est déjà à portée</span></li></ul></div><span class="flow"></span></div>
+      <div class="cap"><h4>Une question, et c'est réglé</h4><p>Les widgets de Fitness, chacun par la question à laquelle il répond. En Petit, toucher une question pose le widget et ouvre la suite.</p>
+        <ul><li><span class="tag e">Existe</span><span>Widgets, cadenas Premium, main des widgets interactifs</span></li>
+        <li><span class="tag a">À adapter</span><span>Questions sous chaque widget ; passage automatique</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> = suite ouverte (3 en tout)</span></li></ul></div><span class="flow"></span></div>
 
-    <div class="col"><div class="nm">4 · Combinaison</div>
+    <div class="col"><div class="nm">4 · Moyen : jusqu'à 2</div>
       <div class="phone t-saphir" id="p4" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Ardane recompose seul, et le dit</h4><p>Avec 3 informations, le widget passe en Grand et Séance du jour prend une ligne entière. Rien n'est retiré sans prévenir ; « Annuler » revient à l'état d'avant.</p>
-        <ul><li><span class="tag e">Existe</span><span>Règle réelle : Grand = 2 lignes, 1 moyen + 2 petits ; 4 widgets au plus</span></li>
-        <li><span class="tag d">À développer</span><span>Choix automatique de la taille et de la disposition, avec explication</span></li>
-        <li><span class="tag e">Geste</span><span><b>0 toucher</b> en plus (automatique)</span></li></ul></div></div>
-  </div>
+      <div class="cap"><h4>Ardane propose, on ajuste</h4><p>Les 2 emplacements sont déjà remplis avec tes données ; on garde, on retire ou on échange. Plein : les autres sont estompés, avec la raison.</p>
+        <ul><li><span class="tag e">Existe</span><span>Composition de départ par espace (<code>SpaceCatalog.preset</code>), règles et textes</span></li>
+        <li><span class="tag d">À développer</span><span>Proposition tirée des données, carte des emplacements</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Continuer) si la proposition convient</span></li></ul></div><span class="flow"></span></div>
 
-  <div class="row">
-    <div class="col"><div class="nm">5 · Organisation</div>
+    <div class="col"><div class="nm">5 · Grand : jusqu'à 4</div>
       <div class="phone t-saphir" id="p5" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Trois dispositions, aucun glisser</h4><p>L'app propose les arrangements possibles, en vignettes réelles, à choix unique. La personne compare et touche ; rien ne se déplace au doigt.</p>
-        <ul><li><span class="tag e">Existe</span><span>Montage par lignes : 1 widget large ou 2 petits</span></li>
-        <li><span class="tag d">À développer</span><span>Propositions de disposition et variante plus compacte</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (facultatif : la 1re est déjà choisie)</span></li></ul></div><span class="flow"></span></div>
-
-    <div class="col"><div class="nm">6 · Personnalisation</div>
-      <div class="phone t-saphir" id="p6" data-time="13:20" data-tab="1"></div>
-      <div class="cap"><h4>Une ambiance, puis le Studio si on veut plus</h4><p>Clair, Sombre, une couleur : trois vignettes et 8 couleurs principales. Tout le reste passe par le Studio, qui garde ses outils réels.</p>
-        <ul><li><span class="tag e">Existe</span><span>Un seul style pour tout le widget ; 8 couleurs principales gratuites ; Studio complet</span></li>
-        <li><span class="tag a">À adapter</span><span>Trois ambiances en vignettes (le thème Clair, le style Sombre, une couleur) ; vignettes approchées par filtre</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 ou 2 touchers</b> (facultatifs)</span></li></ul></div><span class="flow"></span></div>
-
-    <div class="col"><div class="nm">7 · Aperçu sur l'écran d'accueil</div>
-      <div class="phone cr-hs i4-hs t-saphir" id="p7" data-time="13:20" data-tab="none"></div>
-      <div class="cap"><h4>Le widget à l'échelle, parmi les icônes</h4><p>Le Grand occupe 4 × 4 icônes. « Ajuster » revient à l'écran 3 ; « Enregistrer le widget » finit la création.</p>
-        <ul><li><span class="tag a">À adapter</span><span>Aperçu « Sur mon écran » du Studio, en écran entier</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (« Enregistrer le widget »)</span></li></ul></div><span class="flow"></span></div>
-
-    <div class="col"><div class="nm">8 · Enregistrement</div>
-      <div class="phone t-saphir" id="p8" data-time="13:20" data-tab="none"></div>
-      <div class="cap"><h4>Une fin honnête</h4><p>La feuille « Ajouter un widget » explique l'ajout, étapes raccourcies pour la taille Grand. Pour le changer plus tard : Mes widgets, puis Modifier.</p>
-        <ul><li><span class="tag e">Existe</span><span>Feuille, segmenté, étapes, « Compris », « Enregistré dans Mes widgets »</span></li>
-        <li><span class="tag a">À adapter</span><span>Montrée après chaque enregistrement ; phrase « iOS ne laisse… » (nouvelle)</span></li>
-        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (« Compris »)</span></li></ul></div></div>
+      <div class="cap"><h4>Trois proposés, une place libre</h4><p>« Séance du jour » prend une ligne entière ; la 4e place attend une information de la liste.</p>
+        <ul><li><span class="tag e">Existe</span><span>Trio Grand de l'espace (<code>preset</code>), montage réel</span></li>
+        <li><span class="tag d">À développer</span><span>Emplacements visibles, phrase « Résultat »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (Continuer)</span></li></ul></div></div>
   </div>
 
-  <div class="row" style="margin-top:34px">
+  <div class="row r5">
+    <div class="col"><div class="nm">6 · Ajuster : Ardane le dit</div>
+      <div class="phone t-saphir" id="p6" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Plein ? Ardane explique</h4><p>Ajouter « Séance du jour » à un Moyen plein : Ardane propose de remplacer une information, ou de passer en Grand. Rien ne part en silence.</p>
+        <ul><li><span class="tag e">Existe</span><span>Remplacer, retirer, refus rédigés (« Un widget moyen réunit 2 widgets au plus. »)</span></li>
+        <li><span class="tag a">À adapter</span><span>Choix proposé « Remplacer » / « Passer en Grand »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (facultatif)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">7 · Trois dispositions</div>
+      <div class="phone t-saphir" id="p7" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Aucun glisser</h4><p>Les dispositions possibles, dessinées : on touche celle qu'on veut.</p>
+        <ul><li><span class="tag e">Existe</span><span>Dispositions proposées (Atelier, Build 418)</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b> (facultatif)</span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">8 · Une ambiance, puis le Studio</div>
+      <div class="phone t-saphir" id="p8" data-time="13:20" data-tab="1"></div>
+      <div class="cap"><h4>Trois ambiances, le reste à un toucher</h4><p>Clair, sombre, une couleur ; « Tout personnaliser dans le Studio » ouvre les 8 outils réels.</p>
+        <ul><li><span class="tag e">Existe</span><span>Thèmes, couleur principale, outils du Studio</span></li>
+        <li><span class="tag a">À adapter</span><span>Trois ambiances proposées</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b></span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">9 · Aperçu sur l'écran d'accueil</div>
+      <div class="phone cr-hs t-saphir i4-hs" id="p9" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Le widget à l'échelle, parmi les icônes</h4><p>« Ajuster » revient en arrière ; « Enregistrer le widget » termine.</p>
+        <ul><li><span class="tag e">Existe</span><span>« Sur mon écran » (Build 418)</span></li>
+        <li><span class="tag e">Geste</span><span><b>+1 toucher</b></span></li></ul></div><span class="flow"></span></div>
+
+    <div class="col"><div class="nm">10 · Enregistrement</div>
+      <div class="phone t-saphir" id="p10" data-time="13:20" data-tab="none"></div>
+      <div class="cap"><h4>Un widget enregistré, un seul</h4><p>« Enregistré dans Mes widgets », puis le guide d'ajout. Un widget réuni compte pour 1 dans la limite gratuite.</p>
+        <ul><li><span class="tag e">Existe</span><span>Vol vers Mes widgets, guide d'ajout, « Compris »</span></li>
+        <li><span class="tag e">Geste</span><span><b>+2 touchers</b></span></li></ul></div></div>
+  </div>
+
+  <div class="row r5" style="margin-top:34px">
     <div class="col"><div class="nm">Le principe</div><div class="note" style="margin:9px">
-      <h4>« Je veux garder ça sous les yeux »</h4>
-      <p>Pour la personne qui ne sait pas quels widgets existent ni comment les combiner. Elle exprime un besoin en une phrase ; Ardane propose des widgets déjà composés, avec ses données (ou des données d'exemple si l'espace est vide), puis ajuste la disposition tout seul et explique son choix. Chaque intention est un espace d'Ardane, chaque proposition une présélection par espace.</p>
-      <p>Moins de liberté que le Studio, beaucoup moins de gestes. Les experts gardent le Studio, à un toucher.</p></div></div>
-
-    <div class="col"><div class="nm">Combiner, en clair</div><div class="note" style="margin:9px">
-      <h4>5 touchers jusqu'au Moyen à 2 widgets</h4>
-      <ol><li>Onglet Créer</li><li>« Suivre mon entraînement »</li><li>« Séance et régularité » (conseillé)</li><li>« Continuer »</li><li>« Enregistrer le widget »</li></ol>
-      <p>Puis « Compris » = 6. C'est le plus court des cinq : l'app combine seule, la personne ne touche jamais un emplacement. Le Grand à 3 widgets ajoute « + Séance du jour » et passe par les écrans 4 à 7.</p></div></div>
-
+      <h4>On dit ce qu'on veut voir</h4>
+      <p>Après la taille, on parle d'intentions et de questions, pas de widgets. Ardane remplit les emplacements avec une proposition tirée de tes données ; on ajuste, et Ardane recompose seul en disant pourquoi. Aucun glisser.</p>
+      <p>Pour qui : la personne qui débute, ou qui veut un résultat juste sans réfléchir à la mise en page.</p></div></div>
+    <div class="col"><div class="nm">Le parcours en clair</div><div class="note" style="margin:9px">
+      <h4>Combien de touchers</h4>
+      <p><b>Petit</b> : Petit, « Suivre mon entraînement », une question = <b>3 touchers</b> ; enregistrer = 4.</p>
+      <p><b>Moyen à 2</b> : Moyen, l'intention, « Continuer » (la proposition convient) = <b>3 touchers</b> ; enregistrer = 4. À ajuster : +1 toucher par échange.</p>
+      <p><b>Grand à 3</b> : Grand, l'intention, « Continuer » = <b>3 touchers</b> ; enregistrer = 4.</p></div></div>
     <div class="col"><div class="nm">Où vit chaque fonction existante</div><div class="note" style="margin:9px">
       <h4>Rien n'est supprimé</h4>
-      <p><b>Tailles</b> Petit, Moyen, Grand : une par proposition. <b>Écran verrouillé</b> : « Écran verrouillé » sous les cartes d'intention. <b>12 espaces</b> : « Tous les widgets » garde l'accès à chacun. <b>Photos et citations</b> : leur accès sous les intentions, éditeur inchangé, illimité en gratuit.</p>
-      <p><b>Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles et contenu de chaque widget</b> : par « Tout personnaliser dans le Studio » (écran 6). <b>Premium</b> : cadenas sur les informations, pied « Débloquer et enregistrer ». <b>Modifier, supprimer</b> : Mes widgets.</p></div></div>
-
+      <ul class="i4-ul"><li><b>Tailles</b> : page 1 ; <b>écran verrouillé</b> : lien en bas de la page 1.</li>
+      <li><b>Tous les widgets</b> : la liste des questions de chaque catégorie.</li>
+      <li><b>Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles</b> : « Tout personnaliser dans le Studio ».</li>
+      <li><b>Photos et citations</b> : une catégorie (« Revoir mes souvenirs »), puis son éditeur.</li>
+      <li><b>Premium</b> : cadenas ; « Débloquer et enregistrer ».</li></ul></div></div>
     <div class="col"><div class="nm">Limites dites clairement</div><div class="note" style="margin:9px">
-      <h4>Peu de liberté sans le Studio</h4>
-      <p>Une intention = un espace : « Organiser ma journée » ne peut pas mêler agenda, tâches et habitudes tant que la règle « même espace » n'est pas levée (<span class="tag d">À développer</span>). Les propositions dépendent des données déjà saisies ; sinon elles sont montrées en données d'exemple. iOS ne laisse aucune app poser un widget : le guide d'ajout reste obligatoire.</p>
-      <p>Chantier : <b>moyen</b>. Il réutilise les présélections par espace et le Studio ; il faut écrire les intentions, les propositions et le choix automatique de la taille.</p></div></div>
+      <h4>Ce qui ne se fait pas</h4>
+      <ul class="i4-ul"><li>Plusieurs widgets séparés d'un coup : <b>retiré</b> de Créer.</li>
+      <li>Une intention = une catégorie : on ne mélange pas deux catégories dans un widget.</li>
+      <li>La proposition « avec tes données » demande d'écrire le choix (<b>À développer</b>) ; aujourd'hui l'app a une composition fixe par espace.</li>
+      <li>Pas de widget météo (<b>À développer</b>). iOS ne laisse aucune app poser un widget.</li></ul></div></div>
+    <div class="col"><div class="nm">Vérifié dans le code</div><div class="note" style="margin:9px">
+      <h4>Ce qui existe, ce qui change</h4>
+      <ul class="i4-ul"><li><b>Existe</b> : un seul widget réuni (<code>Composer</code>, <code>ComboLayout</code>), compositions de départ par espace (<code>SpaceCatalog.preset</code> : petit, paire Moyen, trio Grand), refus rédigés.</li>
+      <li><b>À changer</b> : l'ordre ; « Créer les N widgets séparés » ; le « + » qui change la taille seul.</li>
+      <li><b>À écrire</b> : page Taille, intentions, questions, carte des emplacements, proposition tirée des données.</li></ul></div></div>
   </div>
 </main>
 <script src="cristal.js"></script>
 <script src="creation.js"></script>
+<script src="parcours.js"></script>
 <script>
 const ic = CR.ico;
+const $ = (id, html) => { document.getElementById(id).innerHTML = html; };
+const S2 = ['nextSet-s', 'trainingStreak-s'];
+document.getElementById('rule').innerHTML = CR.rule();
+
+/* 1 · Taille */
+$('p1', `<div class="scr">${CR.head('Créer', { right: '' })}${CR.sizePage({ on: 'm', q: 'Quelle place lui donner ?', sub: 'Ardane te proposera quoi y mettre, avec tes données.' })}</div>${CR.tap(318, 352)}`);
+
+/* 2 · Catégorie, dite comme une intention */
+const INT = { 'Heure et date': 'Voir l\'heure et la date', 'Planning · études': 'Réviser mes cours', 'Météo': 'Voir la météo', 'Nutrition': 'Mieux manger', 'Fitness': 'Suivre mon entraînement',
+  'Budget': 'Tenir mon budget', 'Habitudes': 'Garder mes habitudes', 'Photos et citations': 'Revoir mes souvenirs', 'Productivité': 'Organiser ma journée', 'Placements': 'Suivre mes placements',
+  'Mon entreprise': 'Piloter mon entreprise', 'Sociétés cotées': 'Suivre des sociétés', 'Voyage': 'Préparer mon voyage', 'Auto': 'Entretenir ma voiture', 'Ma vie': 'Ne rien oublier' };
+const intents = CR.CATS.map((c) => `<div class="pn i4-c${c.t === 'Fitness' ? ' on' : ''}${c.soon ? ' soon' : ''}"><span class="ic" style="background:${c.c}">${ic(c.i)}</span><span class="tx"><b>${INT[c.t]}</b>${c.soon ? '<span class="tg">À DÉVELOPPER</span>' : `<span class="k">${c.t}</span>`}</span></div>`).join('');
+$('p2', `<div class="scr">${CR.head('Créer', { back: 1, right: '' })}${CR.chosen('m')}<div class="pc-q" style="font-size:20px;margin-top:8px">Que veux-tu suivre ?</div><div class="i4-int">${intents}</div></div>${CR.tap(100, 351)}`);
+
+/* Questions de Fitness (un widget = la question à laquelle il répond) */
+const Q = [
+  ['nextSet-s-light', null, 'Quelle est ma prochaine série ?', 'Prochaine série', { hand: 1 }],
+  ['trainingStreak-s-light', null, 'Est-ce que je m\'entraîne assez ?', 'Régularité', {}],
+  [null, 'dumbbell', 'Qu\'est-ce que je fais aujourd\'hui ?', 'Séance du jour', {}],
+  ['restTimer-s-light', null, 'Combien de repos me reste-t-il ?', 'Repos', { lock: 1, hand: 1 }],
+  [null, 'bars', 'Combien ai-je soulevé cette semaine ?', 'Volume de la semaine', { lock: 1 }],
+  [null, 'trophy', 'Quels sont mes records ?', 'Records', { lock: 1 }],
+];
+const qrow = ([img, ph, q, name, o], st = {}) => `<div class="pn i4-qr${st.on ? ' on' : ''}${st.off ? ' off' : ''}">${img ? `<img data-w="${img}" alt="">` : `<span class="ph">${ic(ph)}</span>`}
+  <span class="tx"><b>${q}</b><small>${name}${o.hand ? ' · interactif' : ''}${st.why ? ` · ${st.why}` : ''}</small></span>${o.lock ? `<i class="lk" data-i="lock"></i>` : ''}${st.radio === false ? '' : `<span class="ck">${st.on ? st.on : ''}</span>`}</div>`;
+
+/* 3 · Petit : une question = le widget, la suite s'ouvre */
+$('p3', `<div class="scr">${CR.head('Fitness', { back: 1, right: '' })}${CR.chosen('s')}
+  ${CR.build('s', [null], { w: 230, add: 'Ton widget', cls: 'tight', res: 'Touche une question : son widget prend la place, la suite s\'ouvre.' })}
+  <div class="i4-qs">${Q.slice(0, 5).map((r) => qrow(r, { radio: false })).join('')}</div></div>${CR.tap(330, 487)}`);
+
+/* 4 · Moyen : proposition remplie, 2 sur 2 */
+const off2 = { off: 1, why: '2 au plus' };
+$('p4', `<div class="scr">${CR.head('Fitness', { back: 1, right: '' })}${CR.chosen('m')}
+  <div class="i4-prop">${ic('sparkles')}<span>Proposé avec tes données : ta prochaine série et ta régularité.</span></div>
+  ${CR.build('m', ['nextSet-s', 'trainingStreak-s'], { w: 240, cls: 'tight', res: 'Résultat : <b>Prochaine série + Régularité</b>, dans un seul widget Moyen.' })}
+  <div class="i4-qs">${qrow(Q[0], { on: 1 })}${qrow(Q[1], { on: 2 })}${qrow(Q[2], off2)}${qrow(Q[3], off2)}</div></div>
+  ${CR.go('Continuer', 'Touche une question choisie pour la retirer.')}`);
+
+/* 5 · Grand : trio proposé, une place libre */
+$('p5', `<div class="scr">${CR.head('Fitness', { back: 1, right: '' })}${CR.chosen('l')}
+  <div class="i4-prop">${ic('sparkles')}<span>Proposé : ta séance, ta prochaine série et ta régularité.</span></div>
+  ${CR.build('l', ['nextSet-s', 'trainingStreak-s', { ph: 'dumbbell', t: 'Séance du jour' }, null], { w: 190, cls: 'tight', res: '<b>Séance du jour</b> sur une ligne entière, les 2 autres dessous.' })}
+  <div class="i4-qs">${qrow(Q[3])}${qrow(Q[4])}</div></div>
+  ${CR.go('Continuer', '3 widgets réunis dans un seul widget Grand.')}`);
+</script>
+<script>
 const act = (t) => `<span class="act i4-hit">${t}</span>`;
 const xb = `<span class="act ic i4-hit">${ic('x')}</span>`;
 const parts = (list) => list.map((n) => CR.part(n, { right: act('Remplacer') + xb })).join('');
-const foot = `<div class="i4-foot"><div class="btnG">Enregistrer le widget</div><div class="btnP">Continuer</div></div>`;
+const foot = `<div class="fab">Continuer</div>`;
 const scr = (id, html, extra = '') => { document.getElementById(id).innerHTML = `<div class="scr">${html}</div>${extra}`; };
 
-/* 1 · Écran de départ */
+/* 6 · Ajuster : Ardane le dit */
+scr('p6', CR.head('Ajuster', { back: 1, small: 1, right: '' })
+  + CR.stage(CR.combo(S2, { w: 290 }), { h: 186, left: '', right: '', lab: 'Moyen', mt: 18 })
+  + `<div class="cr-why i4-ban">${ic('info')}<span>Un widget moyen réunit 2 widgets au plus. Pour ajouter « Séance du jour », remplace une information ou passe en Grand.</span></div>`
+  + `<div class="i4-chips"><span class="chip">${ic('swap')}Remplacer Régularité</span><span class="chip">${ic('resize')}Passer en Grand</span></div>`
+  + CR.panel(250, CR.hd('Ce widget affiche', '2 sur 2') + parts(['nextSet-s-light', 'trainingStreak-s-light'])),
+  foot + CR.tap(105, 407));
+
+/* 7 · Trois dispositions, aucun glisser */
 (() => {
-  const card = (c, i, t, p, th) => `<article class="pn i4-c"><div class="i4-top"><span class="ico" data-c="${c}">${ic(i)}</span>${th}</div><b>${t}</b><p>${p}</p></article>`;
-  const s = (n) => CR.w(n, 46, 'box-shadow:0 1px 3px rgb(var(--sh) / .2)');
-  scr('p1', CR.head('Créer', { right: '' }) + `<div class="cr-q i4-q">Que veux-tu garder sous les yeux ?</div>
-    <div class="i4-int">
-      ${card('fit', 'dumbbell', 'Suivre mon entraînement', 'Je veux voir ma prochaine série.', s('nextSet-s-light'))}
-      ${card('nut', 'fork', 'Mieux manger', 'Je veux savoir ce qu\'il me reste à manger.', s('calories-s-light'))}
-      ${card('bud', 'wallet', 'Tenir mon budget', 'Je veux voir ce qu\'il me reste ce mois-ci.', s('budgetLeft-s-light'))}
-      ${card('pro', 'list', 'Organiser ma journée', 'Je veux mes 3 priorités du jour.', s('priorities-s-light'))}
-      ${card('hab', 'repeat', 'Garder mes habitudes', 'Je veux ne pas casser ma série.', s('habitStreak-s-light'))}
-      ${card('pla', 'graduation', 'Réviser mes cours', 'Je veux mon horaire de la semaine.', CR.w('timetable-m-light', 70, 'box-shadow:0 1px 3px rgb(var(--sh) / .2)'))}
-    </div>
-    <div class="i4-acc"><div class="pn">${ic('grid')}Tous les widgets</div><div class="pn">${ic('lockscreen')}Écran verrouillé</div><div class="pn">${ic('image')}Photos et citations</div></div>`,
-    CR.tap(104, 214));
-})();
-
-/* 2 · Premier choix */
-(() => {
-  const opt = (w, name, re, sz, o = {}) => `<article class="pn cr-card i4-opt${o.on ? ' on' : ''}"><div class="i4-wid">${w}</div><div class="i4-tx"><div class="nm2"><b>${name}</b><span class="cr-rdo${o.on ? ' on' : ''}">${o.on ? ic('check') : ''}</span></div>
-    <div class="re">Réunit : ${re}</div><div class="i4-tags"><span class="i4-sz">${sz}</span><span class="cr-free">Gratuit</span>${o.rec ? '<span class="i4-rec">Conseillé</span>' : ''}</div></div></article>`;
-  scr('p2', CR.head('Suivre mon entraînement', { back: 1, small: 1, right: '' }) + `<div class="cr-sub" style="margin:2px 4px 0">3 propositions avec tes données</div>
-    ${opt(CR.w('nextSet-s-light', 60), 'L\'essentiel', 'Prochaine série', 'Petit')}
-    ${opt(CR.combo(['nextSet-s', 'trainingStreak-s'], { w: 124 }), 'Séance et régularité', 'Prochaine série + Régularité', 'Moyen', { on: 1, rec: 1 })}
-    ${opt(CR.combo(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], { w: 100 }), 'Tableau de bord', 'Séance du jour + Prochaine série + Régularité', 'Grand')}`,
-    `<div class="fab">Continuer</div>`);
-})();
-
-/* 3 · Choix des éléments */
-scr('p3', CR.head('Ajuster', { back: 1, small: 1, right: '' })
-  + CR.stage(CR.combo(['nextSet-s', 'trainingStreak-s'], { w: 290 }), { h: 186, left: '', right: '', lab: 'Aperçu', mt: 18 })
-  + CR.panel(330, CR.hd('Ce widget affiche', '2 sur 4') + parts(['nextSet-s-light', 'trainingStreak-s-light'])
-    + `<div class="cr-hd" style="margin-top:16px"><span class="h3">Ajouter une information</span></div>
-    <div class="i4-chips"><span class="chip">${ic('plus')}Séance du jour</span><span class="chip">${ic('plus')}Repos${ic('lock')}</span><span class="chip">${ic('plus')}Volume de la semaine${ic('lock')}</span><span class="chip">${ic('plus')}Records${ic('lock')}</span></div>`),
-  foot + CR.tap(100, 528));
-
-/* 4 · Combinaison */
-scr('p4', CR.head('Ajuster', { back: 1, small: 1, right: '' })
-  + CR.stage(CR.combo(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], { w: 180, sel: 0 }), { h: 210, left: '', right: '', lab: 'Grand', mt: 8 })
-  + `<div class="cr-ok i4-ban">${ic('sparkles')}<span style="flex:1">3 informations : je passe en Grand et je donne une ligne entière à Séance du jour.</span><span class="un">Annuler</span></div>`
-  + CR.panel(270, CR.hd('Ce widget affiche', '3 sur 4') + parts(['todaysWorkout-m-light', 'nextSet-s-light', 'trainingStreak-s-light'])),
-  foot);
-
-/* 5 · Organisation */
-(() => {
-  const v = (parts_, t, o = {}) => `<article class="pn i4-v cr-card${o.on ? ' on' : ''}" style="padding:8px 6px 9px"><div class="vw">${CR.combo(parts_, { w: 90, cls: 'flat', single: 1 })}<span class="cr-rdo${o.on ? ' on' : ''}">${o.on ? ic('check') : ''}</span></div><b>${t}</b><small>${o.sub || '&nbsp;'}</small></article>`;
-  scr('p5', CR.head('Organisation', { back: 1, small: 1, right: '' }) + `<div class="cr-sub" style="margin:2px 4px 0">Disposition proposée</div>
-    <div class="i4-g3">
-      ${v(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], 'Séance en haut', { on: 1, sub: 'Grand' })}
-      ${v(['nextSet-s', 'trainingStreak-s', 'todaysWorkout-m'], 'Séance en bas', { sub: 'Grand' })}
-      ${v(['nextSet-s', 'trainingStreak-s'], 'Plus compact · Moyen', { sub: 'sans Séance du jour' })}
-    </div>
+  const v = (parts_, t, o = {}) => `<article class="pn i4-v cr-card${o.on ? ' on' : ''}"><div class="vw">${CR.combo(parts_, Object.assign({ w: 92, cls: 'flat' }, o.fmt ? { fmt: o.fmt } : {}))}<span class="cr-rdo${o.on ? ' on' : ''}">${o.on ? ic('check') : ''}</span></div><b>${t}</b><small>${o.sub || '&nbsp;'}</small></article>`;
+  scr('p7', CR.head('Disposition', { back: 1, small: 1, right: '' }) + `<div class="cr-sub" style="margin:2px 4px 0">Touche celle que tu veux</div>
+    <div class="i4-g3">${v(S2, 'Série à gauche', { on: 1, sub: 'Moyen' })}${v(['trainingStreak-s', 'nextSet-s'], 'Régularité à gauche', { sub: 'Moyen' })}${v(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], 'Avec ta séance', { sub: 'passe en Grand' })}</div>
     <article class="pn" style="margin-top:12px;padding:14px 12px 12px"><div class="cr-hd"><span class="h3">Une ligne = 1 widget large ou 2 petits.</span></div>
-      <div class="i4-sch">${CR.layout([['1'], ['2', '3']], { on: 1, t: 'Séance en haut' })}${CR.layout([['2', '3'], ['1']], { t: 'Séance en bas' })}${CR.layout([['2', '3']], { t: 'Plus compact' })}</div>
-      <div class="i4-leg">1 Séance du jour · 2 Prochaine série · 3 Régularité</div></article>`, foot);
+      <div class="cr-g3" style="margin-top:10px">${CR.layout([['1', '2']], { on: 1, t: 'Série à gauche' })}${CR.layout([['2', '1']], { t: 'Régularité à gauche' })}${CR.layout([['3'], ['1', '2']], { t: 'Avec la séance' })}</div>
+      <div class="cr-sub" style="font-size:12px;margin-top:8px;text-align:center">1 Prochaine série · 2 Régularité · 3 Séance du jour</div></article>`, foot);
 })();
 
-/* 6 · Personnalisation */
+/* 8 · Une ambiance, puis le Studio */
 (() => {
-  const v = (o, t, on) => `<article class="pn i4-v cr-card${on ? ' on' : ''}" style="padding:8px 6px 9px"><div class="vw" style="height:90px">${CR.combo(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], Object.assign({ w: 80, cls: 'flat' }, o))}</div><b>${t}</b><small>${on ? 'Choisie' : '&nbsp;'}</small></article>`;
+  const v = (o, t, on) => `<article class="pn i4-v cr-card${on ? ' on' : ''}"><div class="vw" style="height:80px">${CR.combo(S2, Object.assign({ w: 90, cls: 'flat' }, o))}</div><b>${t}</b><small>${on ? 'Choisie' : '&nbsp;'}</small></article>`;
   const dots = ['2F8F7A', '3366FF', 'FF6B57', 'F2A33A', '8C6CFF', 'F2588F', '7FA33A', '6B7280'];
-  scr('p6', CR.head('Ambiance', { back: 1, small: 1, right: '' })
-    + CR.stage(CR.combo(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], { w: 126 }), { h: 156, left: '', right: '', lab: 'Aperçu', mt: 14 })
+  scr('p8', CR.head('Ambiance', { back: 1, small: 1, right: '' })
+    + CR.stage(CR.combo(S2, { w: 250 }), { h: 156, left: '', right: '', lab: 'Aperçu', mt: 10 })
     + `<div class="i4-g3" style="margin-top:8px">${v({}, 'Clair', 1)}${v({ dark: 1 }, 'Sombre')}${v({ hue: -160 }, 'Corail')}</div>
     <article class="pn" style="margin-top:10px;padding:12px 14px 14px"><div class="cr-hd"><span class="h3">Couleur principale</span><span class="m">Vert</span></div>
       <div class="cr-dots" style="margin-top:8px;gap:8px 10px">${dots.map((d) => CR.dot(d, d === '2F8F7A')).join('')}</div></article>
@@ -230,29 +256,28 @@ scr('p4', CR.head('Ajuster', { back: 1, small: 1, right: '' })
     `<div class="fab">${ic('eye')}Voir sur mon écran</div>`);
 })();
 
-/* 7 · Aperçu sur l'écran d'accueil */
-document.getElementById('p7').innerHTML = CR.home({ fmt: 'l', ring: 1, rows: 1,
-  widget: CR.combo(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], { w: 338, cls: 'flat' }),
+/* 9 · Aperçu sur l'écran d'accueil */
+document.getElementById('p9').innerHTML = CR.home({ fmt: 'm', ring: 1, rows: 1,
+  widget: CR.combo(S2, { w: 338, cls: 'flat' }),
   extra: `<div class="i4-cap">${ic('chevl')}Sur mon écran</div>
     <div class="i4-bt"><div class="gh">${ic('pencil')}Ajuster</div><div class="pl">Enregistrer le widget</div></div>` });
 
-/* 8 · Enregistrement */
+/* 10 · Enregistrement */
 (() => {
   const s = (n, t) => `<div class="step" style="padding:9px 0;font-size:14px;line-height:1.36"><span class="n">${n}</span><span>${t}</span></div>`;
-  document.getElementById('p8').innerHTML = `<div class="scr">${CR.head('Créer', { right: '' })}${CR.stage(CR.combo(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], { w: 150 }), { h: 218, left: '', right: '', mt: 0 })}</div><div class="dim"></div>
+  document.getElementById('p10').innerHTML = `<div class="scr">${CR.head('Créer', { right: '' })}${CR.stage(CR.combo(S2, { w: 290 }), { h: 218, left: '', right: '', mt: 0 })}</div><div class="dim"></div>
   <div class="sheet" style="top:40px;padding:8px 20px 0">
     <div class="grab" style="margin-bottom:6px"></div>
     <div class="nv" style="height:40px;margin-top:0"><span class="sp"></span><span class="t">Ajouter un widget</span><span class="sp"></span></div>
-    <div class="i4-nm"><div class="th">${CR.combo(['todaysWorkout-m', 'nextSet-s', 'trainingStreak-s'], { w: 86 })}</div>
-      <div><div class="h2" style="font-size:19px">« Séance et régularité » est prêt</div><span class="okl" style="margin-top:3px;font-size:14px">${ic('check')}Enregistré dans Mes widgets</span><div class="s" style="margin-top:2px">Combiné · 3 widgets · Grand</div></div></div>
+    <div class="i4-nm"><div class="th">${CR.combo(S2, { w: 120 })}</div>
+      <div><div class="h2" style="font-size:19px">« Prochaine série + Régularité »</div><span class="okl" style="margin-top:3px;font-size:14px">${ic('check')}Enregistré dans Mes widgets</span><div class="s" style="margin-top:2px">Combiné · 2 widgets · Moyen</div></div></div>
     <div class="seg" style="margin-top:14px"><span class="on">Écran d'accueil</span><span>Écran verrouillé</span></div>
     <div style="margin-top:4px">
       ${s(1, 'Appuie longuement sur un espace vide de l\'écran d\'accueil')}
       ${s(2, 'Touche « Modifier » en haut, puis « Ajouter un widget »')}
-      ${s(3, 'Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu\'à la taille Grand : « Séance et régularité » y est')}
+      ${s(3, 'Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu\'à la taille Moyen')}
       ${s(4, 'Ajoute-le : il garde ce widget, même quand tu en crées d\'autres')}
     </div>
-    <div class="s" style="margin:4px 2px 8px">Pour le changer plus tard : Mes widgets, puis Modifier.</div>
     <div class="info" style="padding:10px 14px">${ic('info')}<span>iOS ne laisse aucune app poser un widget à ta place.</span></div>
     <div class="btnP lg" style="margin-top:12px">Compris</div>
   </div>`;
