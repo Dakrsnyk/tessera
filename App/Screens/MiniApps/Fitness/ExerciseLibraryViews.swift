@@ -569,10 +569,10 @@ struct ExerciseDetailView: View {
                     } else if history.count >= 3 {
                         Chart {
                             ForEach(history) { session in
-                                LineMark(x: .value("Date", session.date), y: .value("Charge", session.topWeight))
+                                LineMark(x: .value("Date", session.date), y: .value("Charge", Units.weightValue(kilograms: session.topWeight, in: model.settings.unitSystem)))
                                     .foregroundStyle(palette.fitness)
                                     .interpolationMethod(.monotone)
-                                PointMark(x: .value("Date", session.date), y: .value("Charge", session.topWeight))
+                                PointMark(x: .value("Date", session.date), y: .value("Charge", Units.weightValue(kilograms: session.topWeight, in: model.settings.unitSystem)))
                                     .foregroundStyle(palette.fitness)
                                     .symbolSize(24)
                             }

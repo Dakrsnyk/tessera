@@ -310,7 +310,7 @@ struct CarAppView: View {
                             if index > 0 { MiniDivider() }
                             let days = DateMath.daysBetween(now, deadline.date)
                             MiniRow(symbol: deadline.symbol, colorHex: days <= 14 ? Car.alertHex : accentHex, title: deadline.title,
-                                    detail: Fmt.format(deadline.date, template: "dMMMMyyyy"), value: days == 0 ? tr("aujourd'hui") : "J-\(days)")
+                                    detail: Fmt.format(deadline.date, template: "dMMMMyyyy"), value: days == 0 ? tr("aujourd'hui") : tr("J-\(days)"))
                         }
                     }
                     .padding(.horizontal, 14)

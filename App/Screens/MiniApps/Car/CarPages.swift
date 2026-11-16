@@ -223,7 +223,7 @@ struct CarDeadlinesPage: View {
                                 Text(Fmt.format(deadline.date, template: "EEEEdMMMMyyyy").capitalizedFirst).font(.caption).foregroundStyle(Color.secondary)
                             }
                             Spacer()
-                            Text(days < 0 ? tr("passée") : (days == 0 ? tr("aujourd'hui") : "J-\(days)"))
+                            Text(days < 0 ? tr("passée") : (days == 0 ? tr("aujourd'hui") : tr("J-\(days)")))
                                 .font(.subheadline.weight(.semibold))
                                 .foregroundStyle(days <= 14 && days >= 0 ? CristalPalette.of(style.id).strong(Car.alertHex) : Color.secondary)
                                 .monospacedDigit()

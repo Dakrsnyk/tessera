@@ -99,6 +99,7 @@
  "%@ g de protéines aujourd'hui": "今日のたんぱく質 %@ g",
  "%@ g de protéines restantes": "たんぱく質 残り%@ g",
  "%@ g · %@ kcal": "%@ g · %@ kcal",
+ "%@ g · P %@%@ · G %@%@ · L %@%@": "%@ g · P %@%@ · C %@%@ · F %@%@",
  "%@ h": "%@時間",
  "%@ h %@": "%@時間%@分",
  "%@ h %@ min restantes": "残り%@時間%@分",

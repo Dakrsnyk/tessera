@@ -53,7 +53,7 @@ struct NutritionMealPage: View {
                                 Text(entry.food.displayName).foregroundStyle(Color.primary).lineLimit(1)
                                 let line = entry.totals
                                 let mark = line.isIncomplete ? NutritionTotals.minimumMarker : ""
-                                Text("\(TF.int(entry.grams)) g · P \(mark)\(TF.int(line.protein)) · G \(mark)\(TF.int(line.carbs)) · L \(mark)\(TF.int(line.fat))")
+                                Text(tr("\(TF.int(entry.grams)) g · P \(mark)\(TF.int(line.protein)) · G \(mark)\(TF.int(line.carbs)) · L \(mark)\(TF.int(line.fat))"))
                                     .font(.caption)
                                     .foregroundStyle(Color.secondary)
                             }
@@ -560,9 +560,9 @@ struct NutritionHistoryPage: View {
             MiniSectionTitle(title: isSingleDay ? tr("Bilan") : tr("Moyennes", context: "averages"), detail: isSingleDay ? nil : Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours notés")))
             LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
                 MiniStat(title: tr("Calories"), value: TF.int(stats.averages.kcal), unit: "kcal", detail: known.kcal ? tr("objectif \(TF.int(stats.goal))") : nil, colorHex: accentHex)
-                MiniStat(title: tr("Protéines"), value: TF.int(stats.averages.protein), unit: "g")
-                MiniStat(title: tr("Glucides"), value: TF.int(stats.averages.carbs), unit: "g")
-                MiniStat(title: tr("Lipides"), value: TF.int(stats.averages.fat), unit: "g")
+                MiniStat(title: tr("Protéines"), value: stats.averages.marked(TF.int(stats.averages.protein), incomplete: stats.averages.isIncomplete), unit: "g")
+                MiniStat(title: tr("Glucides"), value: stats.averages.marked(TF.int(stats.averages.carbs), incomplete: stats.averages.isIncomplete), unit: "g")
+                MiniStat(title: tr("Lipides"), value: stats.averages.marked(TF.int(stats.averages.fat), incomplete: stats.averages.isIncomplete), unit: "g")
             }
             if known.kcal, !isSingleDay {
                 Label(tr("\(Fmt.plural(stats.daysOnTarget, tr("jour"), tr("jours"))) sur \(stats.trackedDays) à moins de 10 % de ton objectif"), systemImage: "target")

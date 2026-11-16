@@ -193,7 +193,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:340: if hours > 0 { parts.append(tr(\"\\(Fmt.hours(hours)) / semaine\")) }",
-   "App/Screens/Spaces/StudentSpace.swift:149: ValueRow(title: tr(\"Objectif\"), value: tr(\"\\(Fmt.hours(state.weeklyStudyGoalHours)) / semaine\"))"
+   "App/Screens/Spaces/StudentSpace.swift:153: ValueRow(title: tr(\"Objectif\"), value: tr(\"\\(Fmt.hours(state.weeklyStudyGoalHours)) / semaine\"))"
   ]
  },
  "%@ : %@": {
@@ -628,16 +628,22 @@
    "App/Screens/Spaces/NutritionSpace.swift:604: tr(\"\\(TF.int(grams)) g · \\(TF.int(food.nutrients(grams: grams).kcal)) kcal\")"
   ]
  },
+ "%@ g · P %@%@ · G %@%@ · L %@%@": {
+  "placeholders": 7,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/NutritionPages.swift:56: Text(tr(\"\\(TF.int(entry.grams)) g · P \\(mark)\\(TF.int(line.protein)) · G \\(mark)\\(TF.int(line.carbs)) · L \\(mark)\\(TF.int(line.fat))\"))"
+  ]
+ },
  "%@ h": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:353: Text(minutes < 60 ? tr(\"\\(minutes) min\") : (minutes % 60 == 0 ? tr(\"\\(minutes / 60) h\") : tr(\"\\(minutes / 60) h \\(minutes % 60)\")))"
+   "App/Screens/Spaces/StudentSpace.swift:357: Text(minutes < 60 ? tr(\"\\(minutes) min\") : (minutes % 60 == 0 ? tr(\"\\(minutes / 60) h\") : tr(\"\\(minutes / 60) h \\(minutes % 60)\")))"
   ]
  },
  "%@ h %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:353: Text(minutes < 60 ? tr(\"\\(minutes) min\") : (minutes % 60 == 0 ? tr(\"\\(minutes / 60) h\") : tr(\"\\(minutes / 60) h \\(minutes % 60)\")))"
+   "App/Screens/Spaces/StudentSpace.swift:357: Text(minutes < 60 ? tr(\"\\(minutes) min\") : (minutes % 60 == 0 ? tr(\"\\(minutes / 60) h\") : tr(\"\\(minutes / 60) h \\(minutes % 60)\")))"
   ]
  },
  "%@ h %@ min restantes": {
@@ -784,7 +790,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:209: ValueRow(title: tr(\"Durée\"), value: tr(\"\\(TF.int(session.duration / 60)) min\"))",
-   "App/Screens/Spaces/StudentSpace.swift:353: Text(minutes < 60 ? tr(\"\\(minutes) min\") : (minutes % 60 == 0 ? tr(\"\\(minutes / 60) h\") : tr(\"\\(minutes / 60) h \\(minutes % 60)\")))",
+   "App/Screens/Spaces/StudentSpace.swift:357: Text(minutes < 60 ? tr(\"\\(minutes) min\") : (minutes % 60 == 0 ? tr(\"\\(minutes / 60) h\") : tr(\"\\(minutes / 60) h \\(minutes % 60)\")))",
    "Shared/Data/Insights.swift:255: if minutes < 60 { return tr(\"\\(minutes) min\") }",
    "Shared/Render/Kinds/ProductivityWidgets.swift:264: Text(tr(\"\\(minutes) min\"))"
   ]
@@ -1452,7 +1458,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:801: Button(tr(\"+\\(minutes) min\")) {",
-   "App/Screens/Spaces/StudentSpace.swift:141: Button(tr(\"+\\(minutes) min\")) {"
+   "App/Screens/Spaces/StudentSpace.swift:145: Button(tr(\"+\\(minutes) min\")) {"
   ]
  },
  ", %@ %% de ton objectif.": {
@@ -2982,7 +2988,7 @@
  "Ajouter un cours à l'horaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:58: Label(tr(\"Ajouter un cours à l'horaire\"), systemImage: \"plus\")"
+   "App/Screens/Spaces/StudentSpace.swift:62: Label(tr(\"Ajouter un cours à l'horaire\"), systemImage: \"plus\")"
   ]
  },
  "Ajouter un devoir": {
@@ -3651,7 +3657,7 @@
  "Annulé le %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:303: Toggle(tr(\"Annulé le \\(Fmt.longDay(day))\"), isOn: cancelled(on: day))"
+   "App/Screens/Spaces/StudentSpace.swift:307: Toggle(tr(\"Annulé le \\(Fmt.longDay(day))\"), isOn: cancelled(on: day))"
   ]
  },
  "Année": {
@@ -4345,7 +4351,7 @@
   "uses": [
    "App/Screens/Profile/ProfileView.swift:69: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))",
    "App/Screens/Profile/SmartRemindersView.swift:127: Text(value == 0 ? tr(\"Aucun\") : Fmt.minutes(Double(value))).tag(value)",
-   "App/Screens/Spaces/StudentSpace.swift:194: Text(tr(\"Aucun\")).tag(UUID?.none)"
+   "App/Screens/Spaces/StudentSpace.swift:198: Text(tr(\"Aucun\")).tag(UUID?.none)"
   ]
  },
  "Aucun achat Premium trouvé pour ce compte Apple.": {
@@ -4844,7 +4850,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:771: ColorPicker(tr(\"Autre couleur\"), selection: Binding(",
-   "App/Screens/Spaces/StudentSpace.swift:461: ColorPicker(tr(\"Autre couleur\"), selection: Binding("
+   "App/Screens/Spaces/StudentSpace.swift:465: ColorPicker(tr(\"Autre couleur\"), selection: Binding("
   ]
  },
  "Autre événement": {
@@ -7147,7 +7153,7 @@
  "Cette occurrence seulement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:332: Button(tr(\"Cette occurrence seulement\")) {"
+   "App/Screens/Spaces/StudentSpace.swift:336: Button(tr(\"Cette occurrence seulement\")) {"
   ]
  },
  "Cette offre n'est pas disponible dans ton pays.": {
@@ -7306,7 +7312,7 @@
  "Chaque semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:267: Text(tr(\"Chaque semaine\")).tag(false)",
+   "App/Screens/Spaces/StudentSpace.swift:271: Text(tr(\"Chaque semaine\")).tag(false)",
    "Shared/Model/Content.swift:37: case .weekly: tr(\"Chaque semaine\")"
   ]
  },
@@ -8819,7 +8825,7 @@
  "Couleur habituelle": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:454: swatch(defaultHex, isOn: hex == nil, label: tr(\"Couleur habituelle\")) { hex = nil }"
+   "App/Screens/Spaces/StudentSpace.swift:458: swatch(defaultHex, isOn: hex == nil, label: tr(\"Couleur habituelle\")) { hex = nil }"
   ]
  },
  "Couleur personnalisée": {
@@ -8899,7 +8905,7 @@
    "App/Screens/Home/MyInfoSection.swift:54: add(\"courses\", \"book\", tr(\"Cours\"), student.courses.isEmpty ? nil : Fmt.number(student.courses.count))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:248: MiniRow(symbol: \"books.vertical.fill\", colorHex: accentHex, title: tr(\"Cours\"), detail: tr(\"Moyennes, horaire et devoirs par cours\"),",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:322: .navigationTitle(tr(\"Cours\"))",
-   "App/Screens/Spaces/StudentSpace.swift:31: Text(tr(\"Cours\"))"
+   "App/Screens/Spaces/StudentSpace.swift:35: Text(tr(\"Cours\"))"
   ]
  },
  "Cours : CoinGecko": {
@@ -9200,7 +9206,7 @@
  "Crédits": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:174: NumberRow(title: tr(\"Crédits\"), value: $course.credits)",
+   "App/Screens/Spaces/StudentSpace.swift:178: NumberRow(title: tr(\"Crédits\"), value: $course.credits)",
    "Shared/Domains/Budget.swift:160: case .loan: tr(\"Crédits\")"
   ]
  },
@@ -9619,7 +9625,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/ProductivitySpace.swift:290: DatePicker(tr(\"Date et heure\"), selection: $deadline.date)",
-   "App/Screens/Spaces/StudentSpace.swift:498: DatePicker(tr(\"Date et heure\"), selection: $exam.date).environment(\\.locale, Fmt.locale)",
+   "App/Screens/Spaces/StudentSpace.swift:502: DatePicker(tr(\"Date et heure\"), selection: $exam.date).environment(\\.locale, Fmt.locale)",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:256: DatePicker(tr(\"Date et heure\"), selection: $activity.date).environment(\\.locale, Fmt.locale)"
   ]
  },
@@ -10520,7 +10526,7 @@
  "Devoir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:517: SheetForm(title: tr(\"Devoir\"), canSave: !assignment.title.trimmed.isEmpty, onSave: save) {",
+   "App/Screens/Spaces/StudentSpace.swift:521: SheetForm(title: tr(\"Devoir\"), canSave: !assignment.title.trimmed.isEmpty, onSave: save) {",
    "Shared/Intents/SpaceIntents.swift:413: @Parameter(title: \"Devoir\")"
   ]
  },
@@ -10536,7 +10542,7 @@
    "App/Core/DataItems.swift:99: case .assignments: tr(\"Devoirs\")",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:255: MiniRow(symbol: \"doc.text.fill\", colorHex: \"F2A33A\", title: tr(\"Devoirs\"),",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:629: .navigationTitle(tr(\"Devoirs\"))",
-   "App/Screens/Spaces/StudentSpace.swift:78: Section(tr(\"Devoirs\")) {"
+   "App/Screens/Spaces/StudentSpace.swift:82: Section(tr(\"Devoirs\")) {"
   ]
  },
  "Devoirs à rendre": {
@@ -11040,8 +11046,8 @@
   "uses": [
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:413: MinuteTimePicker(title: tr(\"Début\"), minutes: clearing(.start, of: slot, slot.startMinute))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:311: DatePicker(tr(\"Début\"), selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\\.student) { $0.semesterStart = date } }), displayedComponents: .date)",
-   "App/Screens/Spaces/StudentSpace.swift:154: DatePicker(tr(\"Début\"), selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\\.student) { $0.semesterStart = date } }), displayedComponents: .date)",
-   "App/Screens/Spaces/StudentSpace.swift:281: MinuteTimePicker(title: tr(\"Début\"), minutes: Binding(get: { slot.startMinute }, set: { start in"
+   "App/Screens/Spaces/StudentSpace.swift:158: DatePicker(tr(\"Début\"), selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\\.student) { $0.semesterStart = date } }), displayedComponents: .date)",
+   "App/Screens/Spaces/StudentSpace.swift:285: MinuteTimePicker(title: tr(\"Début\"), minutes: Binding(get: { slot.startMinute }, set: { start in"
   ]
  },
  "Début du calcul": {
@@ -11950,7 +11956,7 @@
  "En même temps que %@.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:294: Text(tr(\"En même temps que \\(list).\"))"
+   "App/Screens/Spaces/StudentSpace.swift:298: Text(tr(\"En même temps que \\(list).\"))"
   ]
  },
  "En pause": {
@@ -12167,7 +12173,7 @@
  "Enseignant (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:173: TextField(tr(\"Enseignant (facultatif)\"), text: $course.teacher)"
+   "App/Screens/Spaces/StudentSpace.swift:177: TextField(tr(\"Enseignant (facultatif)\"), text: $course.teacher)"
   ]
  },
  "Ensuite : %@": {
@@ -12385,7 +12391,7 @@
  "Examen": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:495: SheetForm(title: tr(\"Examen\"), canSave: !exam.title.trimmed.isEmpty, onSave: save) {"
+   "App/Screens/Spaces/StudentSpace.swift:499: SheetForm(title: tr(\"Examen\"), canSave: !exam.title.trimmed.isEmpty, onSave: save) {"
   ]
  },
  "Examen : %@": {
@@ -13048,7 +13054,7 @@
  "Fiche": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:562: SheetForm(title: tr(\"Fiche\"), canSave: !card.front.trimmed.isEmpty && !card.back.trimmed.isEmpty, onSave: save) {"
+   "App/Screens/Spaces/StudentSpace.swift:566: SheetForm(title: tr(\"Fiche\"), canSave: !card.front.trimmed.isEmpty && !card.back.trimmed.isEmpty, onSave: save) {"
   ]
  },
  "Fiche de %@": {
@@ -13105,7 +13111,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:101: case .flashcards: tr(\"Fiches de révision\")",
-   "App/Screens/Spaces/StudentSpace.swift:132: Text(tr(\"Fiches de révision\"))"
+   "App/Screens/Spaces/StudentSpace.swift:136: Text(tr(\"Fiches de révision\"))"
   ]
  },
  "Fichier canadien sur les éléments nutritifs": {
@@ -13155,8 +13161,8 @@
   "uses": [
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:415: MinuteTimePicker(title: tr(\"Fin\"), minutes: clearing(.end, of: slot, slot.endMinute))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:312: DatePicker(tr(\"Fin\"), selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\\.student) { $0.semesterEnd = date } }), displayedComponents: .",
-   "App/Screens/Spaces/StudentSpace.swift:156: DatePicker(tr(\"Fin\"), selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\\.student) { $0.semesterEnd = date } }), displayedComponents: .",
-   "App/Screens/Spaces/StudentSpace.swift:287: MinuteTimePicker(title: tr(\"Fin\"), minutes: $slot.endMinute)"
+   "App/Screens/Spaces/StudentSpace.swift:160: DatePicker(tr(\"Fin\"), selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\\.student) { $0.semesterEnd = date } }), displayedComponents: .",
+   "App/Screens/Spaces/StudentSpace.swift:291: MinuteTimePicker(title: tr(\"Fin\"), minutes: $slot.endMinute)"
   ]
  },
  "Fin le %@": {
@@ -14679,7 +14685,7 @@
    "App/Screens/MiniApps/Studies/StudiesApp.swift:241: MiniRow(symbol: \"calendar.day.timeline.left\", colorHex: accentHex, title: tr(\"Horaire\"),",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:72: .navigationTitle(tr(\"Horaire\"))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:468: return section(tr(\"Horaire\"), add: tr(\"Ajouter une plage\"), onAdd: { sheet = .slot(Studies.newSlot(state, course: course.id)) }) {",
-   "App/Screens/Spaces/StudentSpace.swift:34: Section(tr(\"Horaire\")) {"
+   "App/Screens/Spaces/StudentSpace.swift:38: Section(tr(\"Horaire\")) {"
   ]
  },
  "Horaire %@": {
@@ -15337,7 +15343,10 @@
  "J-%@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:403: Text(days <= 0 ? tr(\"Auj.\") : tr(\"J-\\(days)\"))"
+   "App/Screens/Home/MiniAppsRow.swift:90: return \"\\(trip.destination) · \" + tr(\"J-\\(DateMath.daysBetween(now, trip.start))\")",
+   "App/Screens/MiniApps/Car/CarApp.swift:313: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\")))",
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:54: default: return tr(\"J-\\(days)\")"
   ]
  },
  "JOUR": {
@@ -16235,7 +16244,7 @@
  "La moyenne de chaque cours est pondérée par le poids des évaluations, la moyenne générale par les crédits.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:118: Text(tr(\"La moyenne de chaque cours est pondérée par le poids des évaluations, la moyenne générale par les crédits.\"))"
+   "App/Screens/Spaces/StudentSpace.swift:122: Text(tr(\"La moyenne de chaque cours est pondérée par le poids des évaluations, la moyenne générale par les crédits.\"))"
   ]
  },
  "La part de chaque type de placement dans ton portefeuille.": {
@@ -17681,7 +17690,7 @@
  "Lieu (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:289: TextField(slot.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"), text: $slot.room)"
+   "App/Screens/Spaces/StudentSpace.swift:293: TextField(slot.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"), text: $slot.room)"
   ]
  },
  "Ligne": {
@@ -19053,7 +19062,7 @@
  "Modifier la série ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:331: .confirmationDialog(tr(\"Modifier la série ?\"), isPresented: $asksScope, titleVisibility: .visible) {"
+   "App/Screens/Spaces/StudentSpace.swift:335: .confirmationDialog(tr(\"Modifier la série ?\"), isPresented: $asksScope, titleVisibility: .visible) {"
   ]
  },
  "Modifier la vente": {
@@ -19582,7 +19591,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:662: Text(tr(\"Moyenne générale\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)",
-   "App/Screens/Spaces/StudentSpace.swift:104: ValueRow(title: tr(\"Moyenne générale\"), value: \"\\(TF.decimal(overall, 1)) %\", symbol: \"graduationcap\")"
+   "App/Screens/Spaces/StudentSpace.swift:108: ValueRow(title: tr(\"Moyenne générale\"), value: \"\\(TF.decimal(overall, 1)) %\", symbol: \"graduationcap\")"
   ]
  },
  "Moyenne par mois": {
@@ -19993,7 +20002,7 @@
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:82: TextField(tr(\"Nom de l'événement\"), text: $design.options.countdownTitle)",
    "App/Screens/Editor/KindOptionsSection.swift:108: TextField(tr(\"Nom de l'événement\"), text: Binding(",
-   "App/Screens/Spaces/StudentSpace.swift:259: TextField(tr(\"Nom de l'événement\"), text: $slot.title)"
+   "App/Screens/Spaces/StudentSpace.swift:263: TextField(tr(\"Nom de l'événement\"), text: $slot.title)"
   ]
  },
  "Nom de la nouvelle séance": {
@@ -20012,7 +20021,7 @@
  "Nom du cours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:172: TextField(tr(\"Nom du cours\"), text: $course.name)"
+   "App/Screens/Spaces/StudentSpace.swift:176: TextField(tr(\"Nom du cours\"), text: $course.name)"
   ]
  },
  "Nom du projet": {
@@ -20097,13 +20106,13 @@
  "Note [grade]": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:539: SheetForm(title: tr(\"Note\", context: \"grade\"), canSave: !grade.title.trimmed.isEmpty && grade.maxScore > 0, onSave: save) {"
+   "App/Screens/Spaces/StudentSpace.swift:543: SheetForm(title: tr(\"Note\", context: \"grade\"), canSave: !grade.title.trimmed.isEmpty && grade.maxScore > 0, onSave: save) {"
   ]
  },
  "Note obtenue": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:542: NumberRow(title: tr(\"Note obtenue\"), value: $grade.score)"
+   "App/Screens/Spaces/StudentSpace.swift:546: NumberRow(title: tr(\"Note obtenue\"), value: $grade.score)"
   ]
  },
  "Note ta première vente": {
@@ -20324,7 +20333,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:303: Button { sheet = .course(Course(name: \"\")) } label: { Label(tr(\"Nouveau cours\"), systemImage: \"plus\") }",
    "App/Screens/Profile/DataItemViews.swift:186: action(tr(\"Nouveau cours\"), symbol: \"plus\") { sheets?.open { CourseEditor(course: Course(name: \"\")) } }",
-   "App/Screens/Spaces/StudentSpace.swift:29: Button { sheets?.open { CourseEditor(course: Course(name: \"\")) } } label: { Label(tr(\"Nouveau cours\"), systemImage: \"plus\") }"
+   "App/Screens/Spaces/StudentSpace.swift:33: Button { sheets?.open { CourseEditor(course: Course(name: \"\")) } } label: { Label(tr(\"Nouveau cours\"), systemImage: \"plus\") }"
   ]
  },
  "Nouveau devoir": {
@@ -20332,7 +20341,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:619: Button { sheet = .assignment(Studies.newAssignment(state)) } label: { Label(tr(\"Nouveau devoir\"), systemImage: \"plus\") }",
    "App/Screens/Profile/DataItemViews.swift:200: buttons(add: tr(\"Nouveau devoir\"), space: model.isFilled(.assignments) ? .student : nil) {",
-   "App/Screens/Spaces/StudentSpace.swift:99: Button { sheets?.open { AssignmentEditor(assignment: Assignment(courseID: state.courses.first?.id, title: \"\", due: now.addingTimeInterval(3 * 86_400))) } } label: { Label(tr(\"Nouveau devoir\"), systemI"
+   "App/Screens/Spaces/StudentSpace.swift:103: Button { sheets?.open { AssignmentEditor(assignment: Assignment(courseID: state.courses.first?.id, title: \"\", due: now.addingTimeInterval(3 * 86_400))) } } label: { Label(tr(\"Nouveau devoir\"), systemI"
   ]
  },
  "Nouveau placement": {
@@ -20425,7 +20434,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:554: MiniActionButton(title: tr(\"Nouvel examen\"), symbol: \"plus\", colorHex: Studies.accentHex) {",
    "App/Screens/Profile/DataItemViews.swift:195: buttons(add: tr(\"Nouvel examen\"), space: model.isFilled(.exams) ? .student : nil) {",
-   "App/Screens/Spaces/StudentSpace.swift:75: Button { sheets?.open { ExamEditor(exam: Exam(courseID: state.courses.first?.id, title: \"\", date: now.addingTimeInterval(7 * 86_400))) } } label: { Label(tr(\"Nouvel examen\"), systemImage: \"plus\") }"
+   "App/Screens/Spaces/StudentSpace.swift:79: Button { sheets?.open { ExamEditor(exam: Exam(courseID: state.courses.first?.id, title: \"\", date: now.addingTimeInterval(7 * 86_400))) } } label: { Label(tr(\"Nouvel examen\"), systemImage: \"plus\") }"
   ]
  },
  "Nouvel exercice": {
@@ -20458,7 +20467,7 @@
  "Nouvel événement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:249: SheetForm(title: isSaved ? tr(\"Événement\") : tr(\"Nouvel événement\"), canSave: slot.endMinute > slot.startMinute, dismissesOnSave: !changesOnlyThisKind, closesWithBackArrow: isSaved, onSave: save) {"
+   "App/Screens/Spaces/StudentSpace.swift:253: SheetForm(title: isSaved ? tr(\"Événement\") : tr(\"Nouvel événement\"), canSave: slot.endMinute > slot.startMinute, dismissesOnSave: !changesOnlyThisKind, closesWithBackArrow: isSaved, onSave: save) {"
   ]
  },
  "Nouvelle activité": {
@@ -20502,7 +20511,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:880: Label(tr(\"Nouvelle fiche\"), systemImage: \"plus.circle.fill\")",
    "App/Screens/Profile/DataItemViews.swift:210: buttons(add: tr(\"Nouvelle fiche\"), space: model.isFilled(.flashcards) ? .student : nil) {",
-   "App/Screens/Spaces/StudentSpace.swift:130: Button { sheets?.open { CardEditor(card: Flashcard(front: \"\", back: \"\")) } } label: { Label(tr(\"Nouvelle fiche\"), systemImage: \"plus\") }"
+   "App/Screens/Spaces/StudentSpace.swift:134: Button { sheets?.open { CardEditor(card: Flashcard(front: \"\", back: \"\")) } } label: { Label(tr(\"Nouvelle fiche\"), systemImage: \"plus\") }"
   ]
  },
  "Nouvelle habitude": {
@@ -20524,7 +20533,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:674: MiniActionButton(title: tr(\"Nouvelle note\"), symbol: \"plus\", colorHex: Studies.accentHex) {",
    "App/Screens/Profile/DataItemViews.swift:205: buttons(add: tr(\"Nouvelle note\"), space: model.isFilled(.grades) ? .student : nil) {",
-   "App/Screens/Spaces/StudentSpace.swift:113: Button { sheets?.open { GradeEditor(grade: Grade(courseID: state.courses.first?.id, title: \"\", score: 0)) } } label: { Label(tr(\"Nouvelle note\"), systemImage: \"plus\") }"
+   "App/Screens/Spaces/StudentSpace.swift:117: Button { sheets?.open { GradeEditor(grade: Grade(courseID: state.courses.first?.id, title: \"\", score: 0)) } } label: { Label(tr(\"Nouvelle note\"), systemImage: \"plus\") }"
   ]
  },
  "Nouvelle priorité": {
@@ -21468,7 +21477,7 @@
  "Paquet (biologie, anglais…)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:563: TextField(tr(\"Paquet (biologie, anglais…)\"), text: $card.deck)"
+   "App/Screens/Spaces/StudentSpace.swift:567: TextField(tr(\"Paquet (biologie, anglais…)\"), text: $card.deck)"
   ]
  },
  "Par cours": {
@@ -22612,7 +22621,7 @@
  "Poids dans le cours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:544: NumberRow(title: tr(\"Poids dans le cours\"), value: $grade.weight, unit: \"%\")"
+   "App/Screens/Spaces/StudentSpace.swift:548: NumberRow(title: tr(\"Poids dans le cours\"), value: $grade.weight, unit: \"%\")"
   ]
  },
  "Poids du corps": {
@@ -24090,7 +24099,7 @@
  "Quand": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:266: Picker(tr(\"Quand\"), selection: isOnce) {"
+   "App/Screens/Spaces/StudentSpace.swift:270: Picker(tr(\"Quand\"), selection: isOnce) {"
   ]
  },
  "Quand tu changes une catégorie, Ardane s'en souvient pour ce commerçant. Tout reste sur ton iPhone.": {
@@ -24141,7 +24150,7 @@
  "Question ou mot": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:564: TextField(tr(\"Question ou mot\"), text: $card.front, axis: .vertical)"
+   "App/Screens/Spaces/StudentSpace.swift:568: TextField(tr(\"Question ou mot\"), text: $card.front, axis: .vertical)"
   ]
  },
  "Quincaillerie": {
@@ -24832,7 +24841,7 @@
  "Rendu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:521: Toggle(tr(\"Rendu\"), isOn: $assignment.isDone)"
+   "App/Screens/Spaces/StudentSpace.swift:525: Toggle(tr(\"Rendu\"), isOn: $assignment.isDone)"
   ]
  },
  "Rendu du rapport": {
@@ -26244,7 +26253,7 @@
  "Réponse": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:565: TextField(tr(\"Réponse\"), text: $card.back, axis: .vertical)",
+   "App/Screens/Spaces/StudentSpace.swift:569: TextField(tr(\"Réponse\"), text: $card.back, axis: .vertical)",
    "Shared/Render/Tiles/StudentTiles.swift:197: tile.buttons = [TileButton(title: tr(\"Réponse\"), symbol: \"eye\", action: .revealCard, isProminent: true)]"
   ]
  },
@@ -26264,7 +26273,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Planning/PlanningApp.swift:416: Picker(tr(\"Répéter\"), selection: $task.repeats) {",
-   "App/Screens/Spaces/StudentSpace.swift:277: Text(tr(\"Répéter\"))"
+   "App/Screens/Spaces/StudentSpace.swift:281: Text(tr(\"Répéter\"))"
   ]
  },
  "Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes.": {
@@ -26276,7 +26285,7 @@
  "Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours. Révise-les depuis le widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:134: Text(tr(\"Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours. Révise-les depuis le widget.\"))"
+   "App/Screens/Spaces/StudentSpace.swift:138: Text(tr(\"Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours. Révise-les depuis le widget.\"))"
   ]
  },
  "Répétitions": {
@@ -26543,8 +26552,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:422: TextField(tr(\"Salle (facultatif)\"), text: clearing(.room, of: slot, Binding(get: { slot.room.wrappedValue ?? \"\" },",
-   "App/Screens/Spaces/StudentSpace.swift:289: TextField(slot.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"), text: $slot.room)",
-   "App/Screens/Spaces/StudentSpace.swift:499: TextField(tr(\"Salle (facultatif)\"), text: $exam.room)"
+   "App/Screens/Spaces/StudentSpace.swift:293: TextField(slot.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"), text: $slot.room)",
+   "App/Screens/Spaces/StudentSpace.swift:503: TextField(tr(\"Salle (facultatif)\"), text: $exam.room)"
   ]
  },
  "Salle de sport": {
@@ -27181,7 +27190,7 @@
    "App/Screens/MiniApps/Studies/StudiesApp.swift:220: Text(tr(\"Session\")).font(.subheadline.weight(.semibold))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:227: .accessibilityLabel(tr(\"Session\"))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:314: Text(tr(\"Session\"))",
-   "App/Screens/Spaces/StudentSpace.swift:153: Section(tr(\"Session\")) {"
+   "App/Screens/Spaces/StudentSpace.swift:157: Section(tr(\"Session\")) {"
   ]
  },
  "Session %@ · %@ j": {
@@ -27922,7 +27931,7 @@
  "Supprimer (toutes les semaines)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:310: Label(isOccurrence ? tr(\"Supprimer\") : (slot.date == nil ? tr(\"Supprimer (toutes les semaines)\") : tr(\"Supprimer l'événement\")), systemImage: \"trash\")"
+   "App/Screens/Spaces/StudentSpace.swift:314: Label(isOccurrence ? tr(\"Supprimer\") : (slot.date == nil ? tr(\"Supprimer (toutes les semaines)\") : tr(\"Supprimer l'événement\")), systemImage: \"trash\")"
   ]
  },
  "Supprimer ce compte ?": {
@@ -27986,7 +27995,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:68: .confirmDelete($pendingEvent, title: tr(\"Supprimer cet événement ?\"), button: tr(\"Supprimer\"),",
-   "App/Screens/Spaces/StudentSpace.swift:315: .confirmationDialog(tr(\"Supprimer cet événement ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {"
+   "App/Screens/Spaces/StudentSpace.swift:319: .confirmationDialog(tr(\"Supprimer cet événement ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {"
   ]
  },
  "Supprimer cette occurrence ?": {
@@ -28041,7 +28050,7 @@
  "Supprimer l'événement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:310: Label(isOccurrence ? tr(\"Supprimer\") : (slot.date == nil ? tr(\"Supprimer (toutes les semaines)\") : tr(\"Supprimer l'événement\")), systemImage: \"trash\")"
+   "App/Screens/Spaces/StudentSpace.swift:314: Label(isOccurrence ? tr(\"Supprimer\") : (slot.date == nil ? tr(\"Supprimer (toutes les semaines)\") : tr(\"Supprimer l'événement\")), systemImage: \"trash\")"
   ]
  },
  "Supprimer la dépense": {
@@ -28124,7 +28133,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:57: Button(tr(\"Supprimer toute la série\"), role: .destructive) {",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:159: Label(tr(\"Supprimer toute la série\"), systemImage: \"trash.fill\")",
-   "App/Screens/Spaces/StudentSpace.swift:324: Button(isOccurrence ? tr(\"Supprimer toute la série\") : tr(\"Supprimer\"), role: .destructive) {"
+   "App/Screens/Spaces/StudentSpace.swift:328: Button(isOccurrence ? tr(\"Supprimer toute la série\") : tr(\"Supprimer\"), role: .destructive) {"
   ]
  },
  "Supprimer toute la série ?": {
@@ -28144,7 +28153,7 @@
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:64: .confirmDelete($pendingOccurrence, title: tr(\"Supprimer cette occurrence ?\"), button: tr(\"Supprimer uniquement cette occurrence\"),",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:154: Label(tr(\"Supprimer uniquement cette occurrence\"), systemImage: \"trash\")",
-   "App/Screens/Spaces/StudentSpace.swift:317: Button(tr(\"Supprimer uniquement cette occurrence\"), role: .destructive) {"
+   "App/Screens/Spaces/StudentSpace.swift:321: Button(tr(\"Supprimer uniquement cette occurrence\"), role: .destructive) {"
   ]
  },
  "Supprimer « %@ » ?": {
@@ -28157,7 +28166,7 @@
  "Sur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:543: NumberRow(title: tr(\"Sur\"), value: $grade.maxScore)"
+   "App/Screens/Spaces/StudentSpace.swift:547: NumberRow(title: tr(\"Sur\"), value: $grade.maxScore)"
   ]
  },
  "Sur 30 jours : %@ kcal/j": {
@@ -29142,7 +29151,7 @@
  "Temps d'étude": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:137: Section(tr(\"Temps d'étude\")) {",
+   "App/Screens/Spaces/StudentSpace.swift:141: Section(tr(\"Temps d'étude\")) {",
    "Shared/Live/StudyLiveActivity.swift:105: Label(tr(\"Temps d'étude\"), systemImage: \"book.fill\")",
    "Widgets/StudyLiveActivityWidget.swift:24: Text(tr(\"Temps d'étude\"))"
   ]
@@ -30044,7 +30053,7 @@
    "App/Screens/Editor/StudioPanels.swift:68: Toggle(tr(\"Titre\"), isOn: $design.showsTitle)",
    "App/Screens/MiniApps/Planning/PlanningApp.swift:402: TextField(tr(\"Titre\"), text: $task.title)",
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:380: TextField(tr(\"Titre\"), text: clearing(.title, of: slot, slot.title))",
-   "App/Screens/Spaces/StudentSpace.swift:518: TextField(tr(\"Titre\"), text: $assignment.title)"
+   "App/Screens/Spaces/StudentSpace.swift:522: TextField(tr(\"Titre\"), text: $assignment.title)"
   ]
  },
  "Titre (assurance, immatriculation…)": {
@@ -30062,7 +30071,7 @@
  "Titre (intra, final…)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:496: TextField(tr(\"Titre (intra, final…)\"), text: $exam.title)"
+   "App/Screens/Spaces/StudentSpace.swift:500: TextField(tr(\"Titre (intra, final…)\"), text: $exam.title)"
   ]
  },
  "Titre (rendu, dossier, examen…)": {
@@ -30074,7 +30083,7 @@
  "Titre de cette occurrence (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:263: TextField(tr(\"Titre de cette occurrence (facultatif)\"), text: $slot.title)"
+   "App/Screens/Spaces/StudentSpace.swift:267: TextField(tr(\"Titre de cette occurrence (facultatif)\"), text: $slot.title)"
   ]
  },
  "Titre, valeur, puis le graphique en dessous.": {
@@ -31038,7 +31047,7 @@
  "Toute la série": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:337: Button(tr(\"Toute la série\")) {"
+   "App/Screens/Spaces/StudentSpace.swift:341: Button(tr(\"Toute la série\")) {"
   ]
  },
  "Toutes": {
@@ -31813,7 +31822,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:131: let detail = entry.isCancelled ? tr(\"Annulé cette fois-ci\") : [slot.date == nil ? nil : tr(\"Une seule fois\"), place].compactMap { $0 }.joined(separator: \" · \")",
-   "App/Screens/Spaces/StudentSpace.swift:268: Text(tr(\"Une seule fois\")).tag(true)",
+   "App/Screens/Spaces/StudentSpace.swift:272: Text(tr(\"Une seule fois\")).tag(true)",
    "Shared/Domains/WeekdayRepeat.swift:64: if list.isEmpty { return tr(\"Une seule fois\") }"
   ]
  },
@@ -33039,8 +33048,8 @@
  "aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:313: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : \"J-\\(days)\")",
-   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : \"J-\\(days)\"))",
+   "App/Screens/MiniApps/Car/CarApp.swift:313: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\")))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:52: case 0: return tr(\"aujourd'hui\")",
    "Shared/Render/Tiles/NutritionTiles.swift:122: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal))\") : tr(\"aujourd'hui\")"
   ]
@@ -33066,7 +33075,7 @@
  "aux 2 semaines": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Content.swift:281: case .twoWeeks: tr(\"aux 2 semaines\")"
+   "Shared/Model/Content.swift:285: case .twoWeeks: tr(\"aux 2 semaines\")"
   ]
  },
  "avant %@": {
@@ -33128,7 +33137,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:868: Text(tr(\"boîte \\(card.box)\")).font(.caption).foregroundStyle(.secondary)",
-   "App/Screens/Spaces/StudentSpace.swift:125: ValueRow(title: card.front, value: tr(\"boîte \\(card.box)\"))"
+   "App/Screens/Spaces/StudentSpace.swift:129: ValueRow(title: card.front, value: tr(\"boîte \\(card.box)\"))"
   ]
  },
  "c'est le départ !": {
@@ -34348,20 +34357,20 @@
  "par an": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Content.swift:283: case .year: tr(\"par an\")"
+   "Shared/Model/Content.swift:287: case .year: tr(\"par an\")"
   ]
  },
  "par jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Content.swift:279: case .day: tr(\"par jour\")"
+   "Shared/Model/Content.swift:283: case .day: tr(\"par jour\")"
   ]
  },
  "par mois": {
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:490: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
-   "Shared/Model/Content.swift:282: case .month: tr(\"par mois\")",
+   "Shared/Model/Content.swift:286: case .month: tr(\"par mois\")",
    "Shared/Render/Kinds/DataWidgets.swift:228: WLabel(text: tr(\"par mois\"), style: s)"
   ]
  },
@@ -34398,7 +34407,7 @@
  "par semaine": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Content.swift:280: case .week: tr(\"par semaine\")"
+   "Shared/Model/Content.swift:284: case .week: tr(\"par semaine\")"
   ]
  },
  "partiel": {
@@ -34429,13 +34438,13 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:51: case ..<0: return tr(\"passé\")",
-   "App/Screens/Spaces/StudentSpace.swift:66: ValueRow(title: exam.title, value: exam.date < now ? tr(\"passé\") : \"J-\\(DateMath.daysBetween(now, exam.date))\", symbol: \"pencil.and.list.clipboard\", colorHex: state.course(exam.courseID)?.colorHex)"
+   "App/Screens/Spaces/StudentSpace.swift:70: ValueRow(title: exam.title, value: exam.date < now ? tr(\"passé\") : tr(\"J-\\(DateMath.daysBetween(now, exam.date))\"), symbol: \"pencil.and.list.clipboard\", colorHex: state.course(exam.courseID)?.colorHex"
   ]
  },
  "passée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : \"J-\\(days)\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\")))"
   ]
  },
  "pastel": {
@@ -35530,7 +35539,7 @@
  "À rendre le": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:520: DatePicker(tr(\"À rendre le\"), selection: $assignment.due).environment(\\.locale, Fmt.locale)"
+   "App/Screens/Spaces/StudentSpace.swift:524: DatePicker(tr(\"À rendre le\"), selection: $assignment.due).environment(\\.locale, Fmt.locale)"
   ]
  },
  "À rendre, rendus": {
@@ -35557,7 +35566,7 @@
  "À réviser maintenant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:122: ValueRow(title: tr(\"À réviser maintenant\"), value: \"\\(StudentMath.dueCount(state, at: now))\", symbol: \"rectangle.on.rectangle.angled\")"
+   "App/Screens/Spaces/StudentSpace.swift:126: ValueRow(title: tr(\"À réviser maintenant\"), value: \"\\(StudentMath.dueCount(state, at: now))\", symbol: \"rectangle.on.rectangle.angled\")"
   ]
  },
  "À titre informatif seulement : Ardane ne donne aucun conseil d'investissement.": {
@@ -36142,7 +36151,7 @@
  "Évaluation (quiz, examen…)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/StudentSpace.swift:541: TextField(tr(\"Évaluation (quiz, examen…)\"), text: $grade.title)"
+   "App/Screens/Spaces/StudentSpace.swift:545: TextField(tr(\"Évaluation (quiz, examen…)\"), text: $grade.title)"
   ]
  },
  "Évalué": {
@@ -36171,7 +36180,7 @@
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:80: EditorSection(title: tr(\"Événement\")) {",
    "App/Screens/Editor/KindOptionsSection.swift:106: EditorSection(title: tr(\"Événement\")) {",
-   "App/Screens/Spaces/StudentSpace.swift:249: SheetForm(title: isSaved ? tr(\"Événement\") : tr(\"Nouvel événement\"), canSave: slot.endMinute > slot.startMinute, dismissesOnSave: !changesOnlyThisKind, closesWithBackArrow: isSaved, onSave: save) {",
+   "App/Screens/Spaces/StudentSpace.swift:253: SheetForm(title: isSaved ? tr(\"Événement\") : tr(\"Nouvel événement\"), canSave: slot.endMinute > slot.startMinute, dismissesOnSave: !changesOnlyThisKind, closesWithBackArrow: isSaved, onSave: save) {",
    "Shared/Render/AccessoryViews.swift:67: let title = options.countdownTitle.trimmed.isEmpty ? tr(\"Événement\") : options.countdownTitle"
   ]
  },

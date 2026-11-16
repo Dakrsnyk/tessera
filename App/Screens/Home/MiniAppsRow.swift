@@ -87,7 +87,7 @@ enum MiniAppSummary {
         case .travel:
             guard let trip = TravelMath.currentTrip(model.travel, at: now) else { return nil }
             if TravelMath.isOngoing(trip, at: now) { return tr("\(trip.destination) · jour \(TravelMath.tripDay(trip, at: now).day)") }
-            return "\(trip.destination) · J-\(DateMath.daysBetween(now, trip.start))"
+            return "\(trip.destination) · " + tr("J-\(DateMath.daysBetween(now, trip.start))")
         case .car:
             if let range = CarMath.range(model.car) { return tr("≈ \(Fmt.number(Int(range.km))) km d'autonomie") }
             return CarMath.odometer(model.car).map { tr("\(Fmt.number(Int($0))) km") }

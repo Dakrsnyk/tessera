@@ -296,7 +296,12 @@ struct HabitEditor: View {
         if model.content.habits.contains(where: { $0.id == saved.id }) {
             // An existing habit stays editable, whatever the plan.
             model.updateContent { content in
-                if let index = content.habits.firstIndex(where: { $0.id == saved.id }) { content.habits[index] = saved }
+                if let index = content.habits.firstIndex(where: { $0.id == saved.id }) {
+                    // The editor doesn't edit the days done: a day checked since it opened is kept.
+                    var edited = saved
+                    edited.completedDays = content.habits[index].completedDays
+                    content.habits[index] = edited
+                }
             }
         } else if !model.addHabit(saved) {
             // At the free limit: nothing is added, the paywall opens (the form stays open, the text kept).

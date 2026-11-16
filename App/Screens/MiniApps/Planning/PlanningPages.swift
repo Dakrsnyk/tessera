@@ -108,7 +108,7 @@ struct PlanningTasksPage: View {
     private func addQuick() {
         let title = quickTitle.trimmed
         guard !title.isEmpty else { return }
-        let due: Date? = filter == .today ? DateMath.startOfDay(Date()) : nil
+        let due: Date? = filter == .today ? DateMath.startOfDay(day) : nil
         model.updateContent { $0.tasks.append(TaskItem(title: title, due: due)) }
         quickTitle = ""
         Haptics.tap()

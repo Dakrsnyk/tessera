@@ -25,7 +25,11 @@ struct StudentSpaceSections: View {
                     }
                 }
             }
-            .onDelete { offsets in model.update(\.student) { $0.courses.remove(atOffsets: offsets) } }
+            .onDelete { offsets in
+                // With its time slots, grades, exams and homework, as Études deletes a course.
+                let ids = offsets.map { state.courses[$0].id }
+                model.update(\.student) { student in ids.forEach { student.deleteCourse($0) } }
+            }
             Button { sheets?.open { CourseEditor(course: Course(name: "")) } } label: { Label(tr("Nouveau cours"), systemImage: "plus") }
         } header: {
             Text(tr("Cours"))
@@ -63,7 +67,7 @@ struct StudentSpaceSections: View {
         Section(tr("Examens")) {
             ForEach(state.exams.sorted { $0.date < $1.date }) { exam in
                 Button { sheets?.open { ExamEditor(exam: exam) } } label: {
-                    ValueRow(title: exam.title, value: exam.date < now ? tr("passé") : "J-\(DateMath.daysBetween(now, exam.date))", symbol: "pencil.and.list.clipboard", colorHex: state.course(exam.courseID)?.colorHex)
+                    ValueRow(title: exam.title, value: exam.date < now ? tr("passé") : tr("J-\(DateMath.daysBetween(now, exam.date))"), symbol: "pencil.and.list.clipboard", colorHex: state.course(exam.courseID)?.colorHex)
                 }
                 .tint(.primary)
             }

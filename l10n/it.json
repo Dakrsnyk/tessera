@@ -99,6 +99,7 @@
  "%@ g de protéines aujourd'hui": "%@ g di proteine oggi",
  "%@ g de protéines restantes": "%@ g di proteine rimaste",
  "%@ g · %@ kcal": "%@ g · %@ kcal",
+ "%@ g · P %@%@ · G %@%@ · L %@%@": "%@ g · P %@%@ · C %@%@ · G %@%@",
  "%@ h": "%@ h",
  "%@ h %@": "%@ h %@",
  "%@ h %@ min restantes": "%@ h %@ min rimanenti",

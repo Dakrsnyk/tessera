@@ -51,7 +51,7 @@ enum Studies {
         case ..<0: return tr("passé")
         case 0: return tr("aujourd'hui")
         case 1: return tr("demain")
-        default: return "J-\(days)"
+        default: return tr("J-\(days)")
         }
     }
 

@@ -4701,6 +4701,53 @@
         }
       }
     },
+    "%@ g · P %@%@ · G %@%@ · L %@%@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g · E %@%@ · K %@%@ · F %@%@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g · P %@%@ · C %@%@ · F %@%@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g · P %@%@ · C %@%@ · G %@%@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g · P %@%@ · G %@%@ · L %@%@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g · P %@%@ · C %@%@ · G %@%@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g · P %@%@ · C %@%@ · F %@%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ g · P %@%@ · C %@%@ · G %@%@"
+          }
+        }
+      }
+    },
     "%@ h": {
       "extractionState": "manual",
       "localizations": {
