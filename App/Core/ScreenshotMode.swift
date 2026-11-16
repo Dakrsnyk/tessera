@@ -23,8 +23,9 @@ enum ScreenshotMode {
             restoreDemoData(model)
         }
         model.seedDemoCaches(SampleData.domains(now: Date()))
-        // The offer is captured as a free user sees it; every other screen with Premium unlocked.
-        model.setDebugPremium(screen != "paywall" && screen != "setups-free")
+        // The offer is captured as a free user sees it (and Home with its gold « Premium » sign, `home-free`);
+        // every other screen with Premium unlocked.
+        model.setDebugPremium(screen != "paywall" && screen != "setups-free" && screen != "home-free")
         // `-screenshotStyle ocean -screenshotAppearance dark`: the app style to capture with (default otherwise).
         let defaults = UserDefaults.standard
         // Ads: `-screenshotCourseColors forest`, the demo courses drawn in the greens of a Home Screen.
@@ -68,7 +69,7 @@ enum ScreenshotMode {
                 try? await Task.sleep(for: .milliseconds(900))
                 router.storePath = [.setups]
             }
-        case "home", "home-habits-wide":
+        case "home", "home-habits-wide", "home-free":
             router.tab = .home
             // `home-habits-wide`: the Habits card across the whole width (a row of days a habit). `home` puts it back
             // to its own size, so the tests after the one that widened it see Home as before.

@@ -101,12 +101,19 @@ struct DailySection: View {
                         .font(.caption.weight(.bold))
                         .tracking(1.1)
                         .foregroundStyle(Color.secondary)
-                    Text(DailyBrief.Moment(now).title)
-                        .font(.largeTitle.weight(.bold))
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.8)
-                        .accessibilityAddTraits(.isHeader)
-                        .accessibilityIdentifier("daily-title")
+                    HStack(alignment: .center, spacing: 10) {
+                        Text(DailyBrief.Moment(now).title)
+                            .font(.largeTitle.weight(.bold))
+                            .lineLimit(2)
+                            .minimumScaleFactor(0.8)
+                            .accessibilityAddTraits(.isHeader)
+                            .accessibilityIdentifier("daily-title")
+                        // Without Premium, its gold sign by the title opens the offer; it goes away once bought.
+                        if !model.isPremium && !editing {
+                            Spacer(minLength: 0)
+                            PremiumGoldBadge { router.showPaywall() }
+                        }
+                    }
                 }
                 Spacer(minLength: 0)
                 if editing { editBar }
@@ -1701,5 +1708,38 @@ private struct StepsWeekTile: View {
         }
         .task { await counter.refreshWeek() }
         .accessibilityIdentifier("daily-steps-week")
+    }
+}
+
+/// The gold « Premium » sign of Home, by the title of « Mon Quotidien », shown only to whoever hasn't Premium:
+/// a touch opens the offer. Dark brown on gold, readable in light and dark mode.
+private struct PremiumGoldBadge: View {
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 5) {
+                Image(systemName: "crown.fill")
+                    .font(.footnote.weight(.bold))
+                Text(tr("Premium"))
+                    .font(.subheadline.weight(.bold))
+                    .lineLimit(1)
+            }
+            .foregroundStyle(Color(hex: "3D2A00"))
+            .padding(.horizontal, 12)
+            .frame(minHeight: 34)
+            .background(
+                LinearGradient(colors: [Color(hex: "FCE9A8"), Color(hex: "E8BE55"), Color(hex: "D3A23C")],
+                               startPoint: .topLeading, endPoint: .bottomTrailing),
+                in: Capsule()
+            )
+            .overlay { Capsule().strokeBorder(Color.white.opacity(0.5), lineWidth: 0.8) }
+            .shadow(color: Color(hex: "B8862B").opacity(0.35), radius: 6, y: 2)
+        }
+        .buttonStyle(.pressable)
+        .fixedSize()
+        .accessibilityLabel(Text(tr("Premium")))
+        .accessibilityHint(Text(tr("Découvrir Premium")))
+        .accessibilityIdentifier("daily-premium")
     }
 }
