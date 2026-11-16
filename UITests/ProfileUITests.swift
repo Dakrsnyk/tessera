@@ -288,6 +288,28 @@ final class ProfileUITests: XCTestCase {
         snapshot("home-daily")
     }
 
+    /// Without Premium, a gold « Premium » sign sits on the line of « Mon Quotidien »'s title and opens the offer;
+    /// with Premium, it isn't there.
+    func testThePremiumSignShowsOnlyWithoutPremium() {
+        launch(["-screenshotScreen", "home-free"])
+        let sign = app.buttons["daily-premium"]
+        XCTAssertTrue(sign.waitForExistence(timeout: 12), "Sans Premium, le badge doré « Premium » doit être à côté du titre")
+        let title = app.staticTexts["daily-title"]
+        XCTAssertTrue(title.waitForExistence(timeout: 5), "Titre de « Mon Quotidien » absent")
+        XCTAssertGreaterThanOrEqual(sign.frame.minX, title.frame.maxX - 1, "Le badge est à droite du titre")
+        XCTAssertLessThan(abs(sign.frame.midY - title.frame.midY), title.frame.height / 2, "Le badge est sur la ligne du titre")
+        snapshot("home-premium-sign")
+        sign.tap()
+        XCTAssertTrue(app.staticTexts["Tous les widgets, tous les styles, sans limite."].waitForExistence(timeout: 8),
+                      "Le badge ouvre l'offre Premium")
+        snapshot("home-premium-sign-paywall")
+
+        app.terminate()
+        launch(["-screenshotScreen", "home"])
+        XCTAssertTrue(app.staticTexts["daily-title"].waitForExistence(timeout: 12), "Titre de « Mon Quotidien » absent")
+        XCTAssertFalse(app.buttons["daily-premium"].exists, "Avec Premium, le badge doré disparaît")
+    }
+
     // MARK: Widgets from the Store
 
     func testTheEditorAsksForWhatTheWidgetNeeds() {
