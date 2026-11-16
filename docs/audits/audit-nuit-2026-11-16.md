@@ -69,7 +69,8 @@ Tous sur la CI GitHub Actions (simulateur iPhone 402 × 874 points, français) ;
 | Run 429 (3 tests corrigés) | `0577448` | OK | 1 450 réussis, 1 en échec | les 3 corrections passent ; reste l'étape « tirer les réglages vers le bas » du même test du Studio (ci-dessous) |
 | Run `[studio]` (relevé de chaque tirage) | `4a5245b` | OK | 1 430 réussis, 2 en échec | le relevé montre un vrai bug de l'app (ci-dessous) ; l'autre échec est le champ « Nom » d'un test `DataEntry` |
 | Run `[studio]` (correctif de l'app) | `5b47978` | OK | 1 431 réussis, 1 en échec | **le tirage vers le bas redescend les réglages du Studio en feuille** (`testSettingsRiseAndComeBackDown` passe) ; reste le champ « Nom » du test `DataEntry` (ci-dessous) |
-| Version interne suivante (Premium, TestFlight) | à venir | | | avec le correctif du Studio en feuille |
+| Version interne **Build 432** (Premium, TestFlight) | `2947825` | Release signée, envoyée, « Internal Only » vérifié (2ᵉ tentative : la 1ʳᵉ n'avait pas trouvé de machine Mac chez GitHub) | pas de tests (build d'essai) | **à installer** : contient le correctif du Studio en feuille |
+| Run `[studio]` (test du champ « Nom ») | à venir | | | |
 
 Les 12 échecs du run 425, tous analysés :
 - 9 tests logiques `ProfileMatrixTests` attendaient l'ancien Mon quotidien (profil vide = aucune carte). La règle a changé à ta demande (horaire de la semaine pour tous) : tests mis à jour, la garantie « rien d'inventé » reste vérifiée (l'horaire vide n'a aucun élément).
