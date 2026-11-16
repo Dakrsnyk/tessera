@@ -64,7 +64,7 @@ Tous sur la CI GitHub Actions (simulateur iPhone 402 × 874 points, français) ;
 |---|---|---|---|---|
 | Run 425 (lots 1 et 2) | `1e47926` | simulateur, iPhone non signé, IPA : OK ; contrôles statiques OK | 1 439 réussis, 12 en échec | voir ci-dessous |
 | Run 426 (lot 3 + tests corrigés) | `a5bb008` | simulateur, iPhone non signé, IPA : OK ; contrôles statiques OK ; traductions : 5 743 textes, 0 manquant, 0 non traduit | 1 449 réussis, 2 en échec | les 2 dans les tests du Studio, côté test (voir ci-dessous) |
-| Version interne (Premium, TestFlight) | voir `Chantiers.md`, chantier 33 | Release signée | pas de tests (build d'essai) | |
+| Version interne Build 427 (Premium, TestFlight) | `cebf414` | Release signée, envoyée, « Internal Only » vérifié | pas de tests (build d'essai) | à essayer sur ton iPhone |
 | Run suivant (2 tests du Studio corrigés) | à venir | | | |
 
 Les 12 échecs du run 425, tous analysés :

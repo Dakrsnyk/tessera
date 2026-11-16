@@ -36,7 +36,13 @@ final class StudioUITests: XCTestCase {
     /// another widget is chosen) and returns it. A choice below the fold keeps its old accessibility state.
     @discardableResult
     private func reveal(_ identifier: String, bottomMargin: CGFloat = 125, file: StaticString = #filePath, line: UInt = #line) -> XCUIElement {
-        let button = app.buttons[identifier].firstMatch
+        reveal(element: app.buttons[identifier].firstMatch, named: identifier, bottomMargin: bottomMargin, file: file, line: line)
+    }
+
+    /// The same for any element (the name field): scrolled to as a person would, then left to settle.
+    @discardableResult
+    private func reveal(element button: XCUIElement, named identifier: String, bottomMargin: CGFloat = 125,
+                        file: StaticString = #filePath, line: UInt = #line) -> XCUIElement {
         let height = app.frame.height > 200 ? app.frame.height : 874
         if !button.waitForExistence(timeout: 8) {
             // A lazy grid lets go of what scrolled away (the main colors once the palettes below are reached):
@@ -340,6 +346,7 @@ final class StudioUITests: XCTestCase {
         XCTAssertEqual(handle.label, "Agrandir les réglages", "Le Studio s'ouvre réglages repliés, grand widget")
         let widget = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", "Aperçu du widget")).firstMatch
         XCTAssertTrue(widget.waitForExistence(timeout: 8), "L'aperçu du widget est absent")
+        settle(handle)
         let large = widget.frame.height
         let height = app.frame.height > 200 ? app.frame.height : 874
         let lowered = scrollArea(height: height, bottomMargin: 125)
@@ -349,6 +356,8 @@ final class StudioUITests: XCTestCase {
         tapButton("preset-midnight")
         XCTAssertTrue(waitUntil { handle.label == "Agrandir l'aperçu" }, "Les réglages ne montent pas quand on change un réglage")
         XCTAssertTrue(waitUntil { widget.frame.height < large * 0.8 }, "Le widget ne rapetisse pas quand les réglages montent")
+        // The settings rise with a spring: measured where they end up, not on their way.
+        settle(handle)
         XCTAssertTrue(widget.frame.minY > 0 && widget.frame.height > 40, "Le widget n'est plus visible quand les réglages montent")
         XCTAssertGreaterThan(scrollArea(height: height, bottomMargin: 125).height, lowered.height + 60, "Les réglages ne prennent pas plus de place")
         snapshot("panel-raised")
@@ -357,6 +366,7 @@ final class StudioUITests: XCTestCase {
         handle.tap()
         XCTAssertTrue(waitUntil { handle.label == "Agrandir les réglages" }, "La poignée ne redescend pas les réglages")
         XCTAssertTrue(waitUntil { widget.frame.height > large * 0.95 }, "Le widget ne reprend pas sa taille")
+        settle(handle)
 
         // Scrolled down, the settings rise; pulled down from their top, they come back down.
         drag(in: scrollArea(height: height, bottomMargin: 125), up: true)
@@ -399,7 +409,9 @@ final class StudioUITests: XCTestCase {
         launch(["-screenshotScreen", "studio-content"])
         let name = app.textFields["widget-name"]
         XCTAssertTrue(name.waitForExistence(timeout: 15), "Le Studio ne s'est pas ouvert")
-        name.tap()
+        // The name is below the screen at first: scrolled to as a person would (the settings rise), then touched
+        // where it ends up. A direct tap scrolled it itself and landed where the field was before the rise.
+        reveal(element: name, named: "widget-name").tap()
         name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 30) + "Studio test\n")
 
         section("theme")
