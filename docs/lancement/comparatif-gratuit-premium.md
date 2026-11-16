@@ -52,6 +52,7 @@ Tableau relevé dans le code le 2026-11-16 (commit `84590b6`), chiffres comptés
 | Fond | celui du style | couleur, dégradé, photo, verre |
 | Police | Thème, Standard, Arrondie | en plus : Serif, Mono |
 | Bordure, texture, ombre et profondeur | | oui |
+| Widgets d'écran verrouillé | pas de personnalisation : l'iPhone les affiche dans ses propres couleurs (depuis le 2026-11-16) | pareil |
 
 ## L'app
 

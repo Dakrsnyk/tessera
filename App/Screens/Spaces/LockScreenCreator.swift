@@ -24,13 +24,26 @@ struct LockScreenCreator: View {
                 let family: WidgetFamily = kind.families.contains(.accessoryRectangular) ? .accessoryRectangular
                     : kind.families.contains(.accessoryCircular) ? .accessoryCircular : .accessoryInline
                 return ShowcaseItem(
-                    widget: SetupWidget(kind: kind, family: family, theme: .minimal, accent: space?.colorHex ?? "3366FF"),
+                    widget: SetupWidget(kind: kind, family: family, theme: .minimal, accent: Self.freeAccent(space?.colorHex ?? "3366FF")),
                     title: kind.title,
                     subtitle: family.shortTitle
                 )
             }
             return items.isEmpty ? nil : (space?.title ?? tr("Général"), items)
         }
+    }
+
+    /// The free color closest to the space's: a Lock Screen widget has no « Style » to change it (iOS draws it in its
+    /// own colors), so it never needs Premium for a color nobody sees there.
+    static func freeAccent(_ hex: String) -> String {
+        let free = Palette.freeAccents.map(\.hex)
+        if free.contains(hex) { return hex }
+        let target = ColorMath.rgb(hex)
+        func distance(_ other: String) -> Double {
+            let color = ColorMath.rgb(other)
+            return pow(color.r - target.r, 2) + pow(color.g - target.g, 2) + pow(color.b - target.b, 2)
+        }
+        return free.min { distance($0) < distance($1) } ?? "3366FF"
     }
 
     var body: some View {

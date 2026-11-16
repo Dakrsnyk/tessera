@@ -2130,7 +2130,7 @@
  "8 × 60 kg": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:108: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),"
+   "App/Screens/Spaces/LockScreenCreator.swift:121: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),"
   ]
  },
  "AN": {
@@ -2185,13 +2185,13 @@
  "Abandonner": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:327: Button(tr(\"Abandonner\"), role: .destructive) { onClose() }"
+   "App/Screens/Editor/EditorView.swift:332: Button(tr(\"Abandonner\"), role: .destructive) { onClose() }"
   ]
  },
  "Abandonner les modifications ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:326: .confirmationDialog(tr(\"Abandonner les modifications ?\"), isPresented: $confirmDiscard, titleVisibility: .visible) {"
+   "App/Screens/Editor/EditorView.swift:331: .confirmationDialog(tr(\"Abandonner les modifications ?\"), isPresented: $confirmDiscard, titleVisibility: .visible) {"
   ]
  },
  "Abdominaux": {
@@ -2593,13 +2593,13 @@
  "Agrandir l'aperçu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:204: .accessibilityLabel(Text(panelRaised ? tr(\"Agrandir l'aperçu\") : tr(\"Agrandir les réglages\")))"
+   "App/Screens/Editor/EditorView.swift:209: .accessibilityLabel(Text(panelRaised ? tr(\"Agrandir l'aperçu\") : tr(\"Agrandir les réglages\")))"
   ]
  },
  "Agrandir les réglages": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:204: .accessibilityLabel(Text(panelRaised ? tr(\"Agrandir l'aperçu\") : tr(\"Agrandir les réglages\")))"
+   "App/Screens/Editor/EditorView.swift:209: .accessibilityLabel(Text(panelRaised ? tr(\"Agrandir l'aperçu\") : tr(\"Agrandir les réglages\")))"
   ]
  },
  "Aide": {
@@ -3040,7 +3040,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/AddToHomeScreenGuide.swift:111: .navigationTitle(tr(\"Ajouter un widget\"))",
-   "App/Screens/Editor/EditorView.swift:267: StudioRoundButton(symbol: \"plus\", title: tr(\"Ajouter un widget\"), identifier: \"stage-add\") {",
+   "App/Screens/Editor/EditorView.swift:272: StudioRoundButton(symbol: \"plus\", title: tr(\"Ajouter un widget\"), identifier: \"stage-add\") {",
    "App/Screens/Editor/StudioParts.swift:371: Text(tr(\"Ajouter un widget\"))",
    "App/Screens/Editor/StudioParts.swift:642: Label(tr(\"Ajouter un widget\"), systemImage: \"plus\")"
   ]
@@ -3134,7 +3134,7 @@
  "Ajouter à côté de %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:637: title: tr(\"Ajouter à côté de \\(design.name)\"), kinds: partCandidates, base: design, currentKind: nil,"
+   "App/Screens/Editor/EditorView.swift:651: title: tr(\"Ajouter à côté de \\(design.name)\"), kinds: partCandidates, base: design, currentKind: nil,"
   ]
  },
  "Ajouter à l'écran": {
@@ -3609,7 +3609,7 @@
    "App/Core/ScreenshotMode.swift:526: Button(tr(\"Annuler\")) {}",
    "App/Screens/Content/HabitsView.swift:252: Button(tr(\"Annuler\")) { dismiss() }",
    "App/Screens/Content/MoneyView.swift:171: ToolbarItem(placement: .cancellationAction) { Button(tr(\"Annuler\")) { dismiss() } }",
-   "App/Screens/Editor/EditorView.swift:422: Button(tr(\"Annuler\")) {"
+   "App/Screens/Editor/EditorView.swift:431: Button(tr(\"Annuler\")) {"
   ]
  },
  "Annuler cette fois-ci": {
@@ -3690,7 +3690,7 @@
  "Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:561: Text(tr(\"Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes.\"))"
+   "App/Screens/Editor/EditorView.swift:575: Text(tr(\"Aperçu avec des données d'exemple. Renseigne tes données ci-dessous : ton widget affichera les tiennes.\"))"
   ]
  },
  "Aperçu du widget %@": {
@@ -4849,7 +4849,7 @@
  "Autre couleur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:775: ColorPicker(tr(\"Autre couleur\"), selection: Binding(",
+   "App/Screens/Editor/EditorView.swift:789: ColorPicker(tr(\"Autre couleur\"), selection: Binding(",
    "App/Screens/Spaces/StudentSpace.swift:465: ColorPicker(tr(\"Autre couleur\"), selection: Binding("
   ]
  },
@@ -7014,7 +7014,7 @@
  "Ce widget utilise Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:690: Text(tr(\"Ce widget utilise Premium\"))"
+   "App/Screens/Editor/EditorView.swift:704: Text(tr(\"Ce widget utilise Premium\"))"
   ]
  },
  "Cela peut prendre quelques secondes.": {
@@ -7241,14 +7241,14 @@
  "Changer de photo": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:797: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
+   "App/Screens/Editor/EditorView.swift:811: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:505: Label(tr(\"Changer de photo\"), systemImage: \"photo.on.rectangle\")"
   ]
  },
  "Changer de widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:282: Label(tr(\"Changer de widget\"), systemImage: \"square.grid.2x2\")",
+   "App/Screens/Editor/EditorView.swift:287: Label(tr(\"Changer de widget\"), systemImage: \"square.grid.2x2\")",
    "App/Screens/Spaces/SpacesView.swift:70: .navigationTitle(tr(\"Changer de widget\"))"
   ]
  },
@@ -7701,7 +7701,7 @@
  "Choisir une photo": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:797: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
+   "App/Screens/Editor/EditorView.swift:811: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:236: .accessibilityLabel(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:240: .accessibilityLabel(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:527: Text(tr(\"Choisir une photo\"))"
@@ -7800,7 +7800,7 @@
  "Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués %@ s'utilisent directement : valider une série, cocher une habitude, ajouter un verre…": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:87: Text(\"Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués \\(Image(systemName: \"hand.tap.fill\")) s'utilisent directement : valider une série, cocher une ha"
+   "App/Screens/Spaces/LockScreenCreator.swift:100: Text(\"Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués \\(Image(systemName: \"hand.tap.fill\")) s'utilisent directement : valider une série, cocher une ha"
   ]
  },
  "Choisis une photo bien nette ou un PDF de ton horaire de cours. La lecture se fait sur ton iPhone : rien n'est envoyé.": {
@@ -7830,7 +7830,7 @@
  "Choisis « Écran verrouillé », puis touche la zone sous l'heure.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:140: (\"lock.iphone\", tr(\"Choisis « Écran verrouillé », puis touche la zone sous l'heure.\")),"
+   "App/Screens/Spaces/LockScreenCreator.swift:153: (\"lock.iphone\", tr(\"Choisis « Écran verrouillé », puis touche la zone sous l'heure.\")),"
   ]
  },
  "Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.": {
@@ -8198,7 +8198,7 @@
  "Comment l'ajouter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:94: Label(tr(\"Comment l'ajouter\"), systemImage: \"questionmark.circle\")"
+   "App/Screens/Spaces/LockScreenCreator.swift:107: Label(tr(\"Comment l'ajouter\"), systemImage: \"questionmark.circle\")"
   ]
  },
  "Comment veux-tu qu'on t'appelle ?": {
@@ -8467,7 +8467,7 @@
  "Contenu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:540: StudioPanelHeader(title: tr(\"Contenu\"), link: nextLink)",
+   "App/Screens/Editor/EditorView.swift:549: StudioPanelHeader(title: tr(\"Contenu\"), link: nextLink)",
    "App/Screens/Editor/KindOptionsSection.swift:28: EditorSection(title: tr(\"Contenu\")) {",
    "App/Screens/Editor/KindOptionsSection.swift:129: EditorSection(title: tr(\"Contenu\")) {",
    "App/Screens/Editor/KindOptionsSection.swift:139: EditorSection(title: tr(\"Contenu\")) {"
@@ -8805,7 +8805,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsView.swift:208: Section(tr(\"Couleur\")) {",
-   "App/Screens/Editor/EditorView.swift:748: Text(tr(\"Couleur\")).tag(BackgroundKind.color)",
+   "App/Screens/Editor/EditorView.swift:762: Text(tr(\"Couleur\")).tag(BackgroundKind.color)",
    "App/Screens/Editor/StudioPanels.swift:392: StudioColorRow(title: tr(\"Couleur\"), hex: $design.style.borderHex, fallback: ResolvedStyle(design: design).borderColor)",
    "App/Screens/Editor/StudioPanels.swift:430: StudioColorRow(title: tr(\"Couleur\"), hex: $design.style.chartHex, fallback: ResolvedStyle(design: design).chart)"
   ]
@@ -8813,13 +8813,13 @@
  "Couleur 1": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:831: ColorPicker(tr(\"Couleur 1\"), selection: Binding("
+   "App/Screens/Editor/EditorView.swift:845: ColorPicker(tr(\"Couleur 1\"), selection: Binding("
   ]
  },
  "Couleur 2": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:835: ColorPicker(tr(\"Couleur 2\"), selection: Binding("
+   "App/Screens/Editor/EditorView.swift:849: ColorPicker(tr(\"Couleur 2\"), selection: Binding("
   ]
  },
  "Couleur de %@": {
@@ -9349,7 +9349,7 @@
   "placeholders": 0,
   "uses": [
    "App/ArdaneApp.swift:305: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
-   "App/Screens/Editor/EditorView.swift:128: if onChangeWidget != nil { return tr(\"Créer\") }",
+   "App/Screens/Editor/EditorView.swift:129: if onChangeWidget != nil { return tr(\"Créer\") }",
    "App/Screens/Spaces/CreateFlow.swift:242: case .size: tr(\"Créer\")",
    "App/Screens/Spaces/CreateStartView.swift:51: .navigationTitle(tr(\"Créer\"))"
   ]
@@ -9564,7 +9564,7 @@
  "Dans la liste, choisis Ardane, puis le widget voulu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:141: (\"plus.circle\", tr(\"Dans la liste, choisis Ardane, puis le widget voulu.\")),"
+   "App/Screens/Spaces/LockScreenCreator.swift:154: (\"plus.circle\", tr(\"Dans la liste, choisis Ardane, puis le widget voulu.\")),"
   ]
  },
  "Dans le manuel ou sur le site du constructeur : il sert à estimer l'autonomie après un plein complet.": {
@@ -10617,7 +10617,7 @@
  "Disposition": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:648: StudioPanelHeader(title: tr(\"Disposition\"), link: nextLink)",
+   "App/Screens/Editor/EditorView.swift:662: StudioPanelHeader(title: tr(\"Disposition\"), link: nextLink)",
    "App/Screens/Editor/StudioComponents.swift:66: case .layout: return tr(\"Disposition\")"
   ]
  },
@@ -10944,7 +10944,7 @@
  "Du verre dépoli teinté de la couleur principale, avec ses reflets. Change la couleur principale pour le teinter.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:786: Text(tr(\"Du verre dépoli teinté de la couleur principale, avec ses reflets. Change la couleur principale pour le teinter.\"))"
+   "App/Screens/Editor/EditorView.swift:800: Text(tr(\"Du verre dépoli teinté de la couleur principale, avec ses reflets. Change la couleur principale pour le teinter.\"))"
   ]
  },
  "Dubaï": {
@@ -11004,7 +11004,7 @@
  "Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et « Passer » marchent sans déverrouiller.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:117: Text(tr(\"Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et « Passer » marchent sans dé"
+   "App/Screens/Spaces/LockScreenCreator.swift:130: Text(tr(\"Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et « Passer » marchent sans dé"
   ]
  },
  "Débloque ce widget": {
@@ -11022,8 +11022,8 @@
  "Débloquer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:698: Text(tr(\"Débloquer\")).foregroundStyle(.onAccent)",
-   "App/Screens/Editor/EditorView.swift:723: Text(tr(\"Débloquer\")).foregroundStyle(.onAccent)"
+   "App/Screens/Editor/EditorView.swift:712: Text(tr(\"Débloquer\")).foregroundStyle(.onAccent)",
+   "App/Screens/Editor/EditorView.swift:737: Text(tr(\"Débloquer\")).foregroundStyle(.onAccent)"
   ]
  },
  "Débloquer avec Premium": {
@@ -11037,7 +11037,7 @@
  "Débloquer et enregistrer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:918: if needsPremium || count == 0 { return tr(\"Débloquer et enregistrer\") }"
+   "App/Screens/Editor/EditorView.swift:932: if needsPremium || count == 0 { return tr(\"Débloquer et enregistrer\") }"
   ]
  },
  "Débloqué en mode test": {
@@ -11199,8 +11199,8 @@
  "Dégradé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:749: Text(tr(\"Dégradé\")).tag(BackgroundKind.gradient)",
-   "App/Screens/Editor/EditorView.swift:861: .accessibilityLabel(Text(tr(\"Dégradé\")))",
+   "App/Screens/Editor/EditorView.swift:763: Text(tr(\"Dégradé\")).tag(BackgroundKind.gradient)",
+   "App/Screens/Editor/EditorView.swift:875: .accessibilityLabel(Text(tr(\"Dégradé\")))",
    "Shared/Model/WidgetDesign.swift:22: case .gradient: tr(\"Dégradé\")",
    "Shared/Model/WidgetStyle.swift:155: case .gradient: tr(\"Dégradé\")"
   ]
@@ -11262,7 +11262,7 @@
  "Déjà posé sur ton écran ? Il faudra le reposer à la nouvelle taille.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:1162: let placeAgain = tr(\"Déjà posé sur ton écran ? Il faudra le reposer à la nouvelle taille.\")"
+   "App/Screens/Editor/EditorView.swift:1176: let placeAgain = tr(\"Déjà posé sur ton écran ? Il faudra le reposer à la nouvelle taille.\")"
   ]
  },
  "Déjà réuni, à ajuster": {
@@ -11659,7 +11659,7 @@
   "uses": [
    "App/Core/AdExport.swift:387: exercise: job.string(\"exercise\") ?? tr(\"Développé couché\"),",
    "App/Core/MarketingShots.swift:131: exercise: tr(\"Développé couché\"),",
-   "App/Screens/Spaces/LockScreenCreator.swift:108: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),",
+   "App/Screens/Spaces/LockScreenCreator.swift:121: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),",
    "Shared/Data/SampleData.swift:139: ExerciseTemplate(name: tr(\"Développé couché\"), sets: 4, reps: 8, weight: 60, restSeconds: 120),"
   ]
  },
@@ -12108,7 +12108,7 @@
   "uses": [
    "App/Screens/Content/HabitsView.swift:258: Button(tr(\"Enregistrer\"), action: save)",
    "App/Screens/Content/MoneyView.swift:173: Button(tr(\"Enregistrer\"), action: save)",
-   "App/Screens/Editor/EditorView.swift:919: if !isNew { return tr(\"Enregistrer\") }",
+   "App/Screens/Editor/EditorView.swift:933: if !isNew { return tr(\"Enregistrer\") }",
    "App/Screens/Editor/StudioPanels.swift:508: Text(tr(\"Enregistrer\")).foregroundStyle(.onAccent)"
   ]
  },
@@ -12141,14 +12141,14 @@
  "Enregistrer le widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:921: return count > 1 ? tr(\"Enregistrer les \\(count) widgets\") : tr(\"Enregistrer le widget\")",
+   "App/Screens/Editor/EditorView.swift:935: return count > 1 ? tr(\"Enregistrer les \\(count) widgets\") : tr(\"Enregistrer le widget\")",
    "App/Screens/Editor/HomeScreenPreview.swift:130: Text(tr(\"Enregistrer le widget\"))"
   ]
  },
  "Enregistrer les %@ widgets": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:921: return count > 1 ? tr(\"Enregistrer les \\(count) widgets\") : tr(\"Enregistrer le widget\")"
+   "App/Screens/Editor/EditorView.swift:935: return count > 1 ? tr(\"Enregistrer les \\(count) widgets\") : tr(\"Enregistrer le widget\")"
   ]
  },
  "Enregistrer quand même ?": {
@@ -12983,7 +12983,7 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:51: .accessibilityLabel(Text(tr(\"Fermer\")))",
-   "App/Screens/Editor/EditorView.swift:611: Text(tr(\"Fermer\"))",
+   "App/Screens/Editor/EditorView.swift:625: Text(tr(\"Fermer\"))",
    "App/Screens/Editor/StudioParts.swift:281: .accessibilityLabel(Text(tr(\"Fermer\")))",
    "App/Screens/Editor/StudioParts.swift:562: StudioPanelHeader(title: title, link: StudioPanelLink(title: tr(\"Fermer\"), identifier: \"parts-picker-close\", action: onClose))"
   ]
@@ -13311,8 +13311,8 @@
  "Fond": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:744: EditorSection(title: tr(\"Fond\"), isPremium: !model.isPremium) {",
-   "App/Screens/Editor/EditorView.swift:746: Picker(tr(\"Fond\"), selection: $backgroundTab) {",
+   "App/Screens/Editor/EditorView.swift:758: EditorSection(title: tr(\"Fond\"), isPremium: !model.isPremium) {",
+   "App/Screens/Editor/EditorView.swift:760: Picker(tr(\"Fond\"), selection: $backgroundTab) {",
    "App/Screens/Editor/StudioComponents.swift:25: case .background: tr(\"Fond\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:450: ColorPicker(tr(\"Fond\"), selection: colorBinding(\\.backgroundHex), supportsOpacity: false)"
   ]
@@ -14507,7 +14507,7 @@
   "uses": [
    "App/Core/AdExport.swift:377: let attributes = WorkoutActivityAttributes(routineName: job.string(\"routine\") ?? tr(\"Haut du corps\"))",
    "App/Core/MarketingShots.swift:129: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
-   "App/Screens/Spaces/LockScreenCreator.swift:106: let attributes = WorkoutActivityAttributes(routineName: tr(\"Haut du corps\"))",
+   "App/Screens/Spaces/LockScreenCreator.swift:119: let attributes = WorkoutActivityAttributes(routineName: tr(\"Haut du corps\"))",
    "Shared/Data/SampleData.swift:138: let upper = Routine(name: tr(\"Haut du corps\"), exercises: ["
   ]
  },
@@ -15292,8 +15292,8 @@
  "Intensité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:847: StudioSlider(title: tr(\"Intensité\"), value: Binding(",
-   "App/Screens/Editor/EditorView.swift:882: StudioSlider(title: tr(\"Intensité\"), value: edited.style.textureOpacity, range: 0.1...1)"
+   "App/Screens/Editor/EditorView.swift:861: StudioSlider(title: tr(\"Intensité\"), value: Binding(",
+   "App/Screens/Editor/EditorView.swift:896: StudioSlider(title: tr(\"Intensité\"), value: edited.style.textureOpacity, range: 0.1...1)"
   ]
  },
  "Interactif": {
@@ -16263,7 +16263,7 @@
  "La photo est réduite pour tenir dans la mémoire limitée des widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:812: StudioNote(text: tr(\"La photo est réduite pour tenir dans la mémoire limitée des widgets.\"))"
+   "App/Screens/Editor/EditorView.swift:826: StudioNote(text: tr(\"La photo est réduite pour tenir dans la mémoire limitée des widgets.\"))"
   ]
  },
  "La place de %@ icônes": {
@@ -16833,7 +16833,7 @@
  "Le dégradé suit la couleur principale.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:865: Text(tr(\"Le dégradé suit la couleur principale.\"))"
+   "App/Screens/Editor/EditorView.swift:879: Text(tr(\"Le dégradé suit la couleur principale.\"))"
   ]
  },
  "Le départ, le vol et l'heure sur place, au soleil couchant.": {
@@ -16882,7 +16882,7 @@
  "Le fond du style choisi, clair ou sombre selon le style.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:790: Text(tr(\"Le fond du style choisi, clair ou sombre selon le style.\"))"
+   "App/Screens/Editor/EditorView.swift:804: Text(tr(\"Le fond du style choisi, clair ou sombre selon le style.\"))"
   ]
  },
  "Le format 12 h / 24 h se règle dans Réglages.": {
@@ -17128,7 +17128,7 @@
  "Le thème, les couleurs, le fond et la bordure vont à tous les widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:481: .accessibilityHint(Text(tr(\"Le thème, les couleurs, le fond et la bordure vont à tous les widgets\")))"
+   "App/Screens/Editor/EditorView.swift:490: .accessibilityHint(Text(tr(\"Le thème, les couleurs, le fond et la bordure vont à tous les widgets\")))"
   ]
  },
  "Le tonnage soulevé chaque jour de la semaine.": {
@@ -17617,7 +17617,7 @@
  "Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:167: Text(tr(\"Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions.\"))"
+   "App/Screens/Spaces/LockScreenCreator.swift:180: Text(tr(\"Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions.\"))"
   ]
  },
  "Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.": {
@@ -17629,7 +17629,7 @@
  "Les widgets qui l'affichent reviendront au modèle par défaut.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:332: Text(tr(\"Les widgets qui l'affichent reviendront au modèle par défaut.\"))"
+   "App/Screens/Editor/EditorView.swift:337: Text(tr(\"Les widgets qui l'affichent reviendront au modèle par défaut.\"))"
   ]
  },
  "Les widgets qui l'affichent sur ton écran d'accueil reviendront au modèle par défaut.": {
@@ -19265,7 +19265,7 @@
  "Mon propre dégradé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:820: Toggle(tr(\"Mon propre dégradé\"), isOn: Binding("
+   "App/Screens/Editor/EditorView.swift:834: Toggle(tr(\"Mon propre dégradé\"), isOn: Binding("
   ]
  },
  "Mon repas": {
@@ -19776,7 +19776,7 @@
  "Même style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:476: FilterChip(title: tr(\"Même style\"), symbol: sharesLook ? \"link\" : \"link.badge.plus\", isSelected: sharesLook) {"
+   "App/Screens/Editor/EditorView.swift:485: FilterChip(title: tr(\"Même style\"), symbol: sharesLook ? \"link\" : \"link.badge.plus\", isSelected: sharesLook) {"
   ]
  },
  "Mêmes muscles": {
@@ -19933,8 +19933,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsView.swift:186: Section(tr(\"Nom\")) {",
-   "App/Screens/Editor/EditorView.swift:733: EditorSection(title: tr(\"Nom\")) {",
-   "App/Screens/Editor/EditorView.swift:1256: EditorSection(title: tr(\"Nom\")) {",
+   "App/Screens/Editor/EditorView.swift:747: EditorSection(title: tr(\"Nom\")) {",
+   "App/Screens/Editor/EditorView.swift:1270: EditorSection(title: tr(\"Nom\")) {",
    "App/Screens/Editor/StudioPanels.swift:481: TextField(tr(\"Nom\"), text: $renameText)"
   ]
  },
@@ -20046,8 +20046,8 @@
  "Nom du widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:734: TextField(tr(\"Nom du widget\"), text: edited.name)",
-   "App/Screens/Editor/EditorView.swift:1257: TextField(tr(\"Nom du widget\"), text: part.name)",
+   "App/Screens/Editor/EditorView.swift:748: TextField(tr(\"Nom du widget\"), text: edited.name)",
+   "App/Screens/Editor/EditorView.swift:1271: TextField(tr(\"Nom du widget\"), text: part.name)",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:168: TextField(tr(\"Nom du widget\"), text: $design.name)"
   ]
  },
@@ -20410,7 +20410,7 @@
  "Nouveau widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:130: return designs.count > 1 ? tr(\"Nouveaux widgets\") : tr(\"Nouveau widget\")",
+   "App/Screens/Editor/EditorView.swift:131: return designs.count > 1 ? tr(\"Nouveaux widgets\") : tr(\"Nouveau widget\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:74: .accessibilityLabel(Text(tr(\"Nouveau widget\")))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:86: .confirmationDialog(tr(\"Nouveau widget\"), isPresented: $choosingKind, titleVisibility: .visible) {"
   ]
@@ -20426,7 +20426,7 @@
  "Nouveaux widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:130: return designs.count > 1 ? tr(\"Nouveaux widgets\") : tr(\"Nouveau widget\")"
+   "App/Screens/Editor/EditorView.swift:131: return designs.count > 1 ? tr(\"Nouveaux widgets\") : tr(\"Nouveau widget\")"
   ]
  },
  "Nouvel entretien": {
@@ -21941,7 +21941,7 @@
  "Pendant une séance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:113: Text(tr(\"Pendant une séance\"))"
+   "App/Screens/Spaces/LockScreenCreator.swift:126: Text(tr(\"Pendant une séance\"))"
   ]
  },
  "Pense à tirer avec les coudes, pas avec les mains.": {
@@ -22113,7 +22113,7 @@
  "Photo": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:751: Text(tr(\"Photo\")).tag(BackgroundKind.photo)",
+   "App/Screens/Editor/EditorView.swift:765: Text(tr(\"Photo\")).tag(BackgroundKind.photo)",
    "Shared/Model/WidgetDesign.swift:23: case .photo: tr(\"Photo\")"
   ]
  },
@@ -23436,7 +23436,7 @@
    "App/Components/UIComponents.swift:101: if !compact { Text(tr(\"Premium\")) }",
    "App/Components/UIComponents.swift:108: .accessibilityLabel(Text(tr(\"Premium\")))",
    "App/Premium/PaywallView.swift:199: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
-   "App/Screens/Editor/EditorView.swift:462: let premium = tr(\"Premium\")"
+   "App/Screens/Editor/EditorView.swift:471: let premium = tr(\"Premium\")"
   ]
  },
  "Premium actif": {
@@ -24812,7 +24812,7 @@
  "Remplacer %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:626: title: tr(\"Remplacer \\(replaced.name)\"), kinds: partCandidates, base: design, currentKind: replaced.kind,"
+   "App/Screens/Editor/EditorView.swift:640: title: tr(\"Remplacer \\(replaced.name)\"), kinds: partCandidates, base: design, currentKind: replaced.kind,"
   ]
  },
  "Remplacer l'ancien": {
@@ -25377,14 +25377,14 @@
  "Retour en arrière": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:432: .accessibilityLabel(Text(tr(\"Retour en arrière\")))",
+   "App/Screens/Editor/EditorView.swift:441: .accessibilityLabel(Text(tr(\"Retour en arrière\")))",
    "App/Screens/Tutorial/TutorialOverlay.swift:294: arrow(\"arrow.uturn.backward\", label: tr(\"Retour en arrière\"), enabled: !past.isEmpty, action: undo)"
   ]
  },
  "Retour en avant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:438: .accessibilityLabel(Text(tr(\"Retour en avant\")))",
+   "App/Screens/Editor/EditorView.swift:447: .accessibilityLabel(Text(tr(\"Retour en avant\")))",
    "App/Screens/Tutorial/TutorialOverlay.swift:295: arrow(\"arrow.uturn.forward\", label: tr(\"Retour en avant\"), enabled: !future.isEmpty, action: redo)"
   ]
  },
@@ -26613,7 +26613,7 @@
  "Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:717: Text(savedDesigns.isEmpty ? context.detail : tr(\"Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés.\"))"
+   "App/Screens/Editor/EditorView.swift:731: Text(savedDesigns.isEmpty ? context.detail : tr(\"Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés.\"))"
   ]
  },
  "Sans Premium, tu ne pourras plus revenir à « %@ ».": {
@@ -27229,7 +27229,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioParts.swift:568: Text(tr(\"Seulement les widgets interactifs\"))",
-   "App/Screens/Spaces/LockScreenCreator.swift:43: Text(tr(\"Seulement les widgets interactifs\"))",
+   "App/Screens/Spaces/LockScreenCreator.swift:56: Text(tr(\"Seulement les widgets interactifs\"))",
    "App/Screens/Spaces/SpaceBuilderView.swift:285: Text(tr(\"Seulement les widgets interactifs\"))"
   ]
  },
@@ -27566,7 +27566,7 @@
  "Sous l'heure, sans déverrouiller": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:85: Label(tr(\"Sous l'heure, sans déverrouiller\"), systemImage: \"lock.fill\")"
+   "App/Screens/Spaces/LockScreenCreator.swift:98: Label(tr(\"Sous l'heure, sans déverrouiller\"), systemImage: \"lock.fill\")"
   ]
  },
  "Sous une barre basse, corps gainé, tire la poitrine vers la barre.": {
@@ -27780,14 +27780,14 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:775: MarketingShowcase(eyebrow: tr(\"Studio\"), title: tr(\"Un widget,\\nmille styles.\"), subtitle: tr(\"Styles, couleurs, photos, polices.\"), phoneWidth: 300, phoneX: 20) {",
-   "App/Screens/Editor/EditorView.swift:129: if !isNew { return tr(\"Studio\") }",
+   "App/Screens/Editor/EditorView.swift:130: if !isNew { return tr(\"Studio\") }",
    "App/Screens/Tutorial/Tutorial.swift:54: case .studio: tr(\"Studio\")"
   ]
  },
  "Style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:747: Text(tr(\"Style\")).tag(BackgroundKind.theme)",
+   "App/Screens/Editor/EditorView.swift:761: Text(tr(\"Style\")).tag(BackgroundKind.theme)",
    "App/Screens/Editor/StudioComponents.swift:23: case .style: tr(\"Style\")",
    "App/Screens/Editor/StudioComponents.swift:67: case .style: return tr(\"Style\")",
    "Shared/Model/WidgetStyle.swift:194: case .theme: tr(\"Style\")"
@@ -27877,7 +27877,7 @@
  "Suivant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:535: return StudioPanelLink(title: tr(\"Suivant\"), symbol: \"chevron.right\", identifier: \"studio-next\") { goTo(next) }",
+   "App/Screens/Editor/EditorView.swift:544: return StudioPanelLink(title: tr(\"Suivant\"), symbol: \"chevron.right\", identifier: \"studio-next\") { goTo(next) }",
    "App/Screens/Tutorial/TutorialOverlay.swift:234: default: tr(\"Suivant\")"
   ]
  },
@@ -27937,7 +27937,7 @@
   "uses": [
    "App/Screens/Content/HabitsView.swift:241: Button(tr(\"Supprimer\"), role: .destructive) {",
    "App/Screens/Content/MoneyView.swift:160: Button(tr(\"Supprimer\"), role: .destructive) {",
-   "App/Screens/Editor/EditorView.swift:330: Button(tr(\"Supprimer\"), role: .destructive, action: deleteDesign)",
+   "App/Screens/Editor/EditorView.swift:335: Button(tr(\"Supprimer\"), role: .destructive, action: deleteDesign)",
    "App/Screens/Editor/StudioPanels.swift:549: Button(tr(\"Supprimer\"), systemImage: \"trash\", role: .destructive) {"
   ]
  },
@@ -27974,14 +27974,14 @@
  "Supprimer ce widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:892: Label(tr(\"Supprimer ce widget\"), systemImage: \"trash\")",
+   "App/Screens/Editor/EditorView.swift:906: Label(tr(\"Supprimer ce widget\"), systemImage: \"trash\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:177: Label(tr(\"Supprimer ce widget\"), systemImage: \"trash\")"
   ]
  },
  "Supprimer ce widget ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:329: .confirmationDialog(tr(\"Supprimer ce widget ?\"), isPresented: $confirmDelete, titleVisibility: .visible) {",
+   "App/Screens/Editor/EditorView.swift:334: .confirmationDialog(tr(\"Supprimer ce widget ?\"), isPresented: $confirmDelete, titleVisibility: .visible) {",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:206: .confirmationDialog(tr(\"Supprimer ce widget ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {",
    "App/Screens/MyWidgets/MyWidgetsView.swift:149: selectedIDs.count == 1 ? tr(\"Supprimer ce widget ?\") : tr(\"Supprimer ces \\(selectedIDs.count) widgets ?\"),"
   ]
@@ -28200,10 +28200,16 @@
    "App/Screens/Editor/AddToHomeScreenGuide.swift:76: AddStepRow(number: 1, symbol: \"lock\", text: tr(\"Sur l'écran verrouillé, appuie longuement puis touche « Personnaliser »\"))"
   ]
  },
+ "Sur l'écran verrouillé, l'iPhone affiche les widgets dans ses propres couleurs : il n'y a pas de style à choisir.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Editor/EditorView.swift:563: StudioNote(text: tr(\"Sur l'écran verrouillé, l'iPhone affiche les widgets dans ses propres couleurs : il n'y a pas de style à choisir.\"),"
+  ]
+ },
  "Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:139: (\"hand.tap\", tr(\"Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».\")),"
+   "App/Screens/Spaces/LockScreenCreator.swift:152: (\"hand.tap\", tr(\"Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».\")),"
   ]
  },
  "Sur la distance ou le temps choisi.": {
@@ -28262,7 +28268,7 @@
  "Sur mon écran": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:271: StudioRoundButton(symbol: \"eye\", title: tr(\"Sur mon écran\"), identifier: \"studio-on-my-screen\") {",
+   "App/Screens/Editor/EditorView.swift:276: StudioRoundButton(symbol: \"eye\", title: tr(\"Sur mon écran\"), identifier: \"studio-on-my-screen\") {",
    "App/Screens/Editor/HomeScreenPreview.swift:109: Text(tr(\"Sur mon écran\"))"
   ]
  },
@@ -29835,7 +29841,7 @@
  "Texture": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:878: EditorSection(title: tr(\"Texture\"), isPremium: !model.isPremium) {",
+   "App/Screens/Editor/EditorView.swift:892: EditorSection(title: tr(\"Texture\"), isPremium: !model.isPremium) {",
    "Shared/Model/WidgetStyle.swift:564: if texture != .none { features.append(tr(\"Texture\")) }"
   ]
  },
@@ -30588,7 +30594,7 @@
  "Touche le widget ajouté pour choisir lequel de tes widgets Ardane il affiche.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/LockScreenCreator.swift:142: (\"slider.horizontal.3\", tr(\"Touche le widget ajouté pour choisir lequel de tes widgets Ardane il affiche.\")),"
+   "App/Screens/Spaces/LockScreenCreator.swift:155: (\"slider.horizontal.3\", tr(\"Touche le widget ajouté pour choisir lequel de tes widgets Ardane il affiche.\")),"
   ]
  },
  "Touche les widgets à supprimer ou à fusionner": {
@@ -30690,7 +30696,7 @@
  "Touche une partie du widget pour la changer.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:551: StudioNote(text: tr(\"Touche une partie du widget pour la changer.\"), symbol: \"hand.tap\")",
+   "App/Screens/Editor/EditorView.swift:560: StudioNote(text: tr(\"Touche une partie du widget pour la changer.\"), symbol: \"hand.tap\")",
    "App/Screens/Editor/StudioParts.swift:237: .accessibilityHint(Text(tr(\"Touche une partie du widget pour la changer.\")))"
   ]
  },
@@ -32181,7 +32187,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/StudioGallery.swift:92: add(tr(\"Verre\")) { $0.background = .glass; $0.style.depth = .soft }",
-   "App/Screens/Editor/EditorView.swift:750: Text(tr(\"Verre\")).tag(BackgroundKind.glass)",
+   "App/Screens/Editor/EditorView.swift:764: Text(tr(\"Verre\")).tag(BackgroundKind.glass)",
    "Shared/Model/WidgetDesign.swift:24: case .glass: tr(\"Verre\")",
    "Shared/Theme/Theme.swift:138: id: .glass, name: tr(\"Verre\"), tagline: tr(\"Translucide et lumineux\"), isPremium: true,"
   ]
@@ -32509,7 +32515,7 @@
  "Voile pour la lisibilité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:807: StudioSlider(title: tr(\"Voile pour la lisibilité\"), value: Binding(",
+   "App/Screens/Editor/EditorView.swift:821: StudioSlider(title: tr(\"Voile pour la lisibilité\"), value: Binding(",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:518: StudioSlider(title: tr(\"Voile pour la lisibilité\"), value: quoteBinding.photoVeil, range: QuoteContent.veilRange)"
   ]
  },
@@ -32771,7 +32777,7 @@
  "Widget %@ sur %@ : %@": {
   "placeholders": 3,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:472: .accessibilityLabel(Text(tr(\"Widget \\(pair.offset + 1) sur \\(designs.count) : \\(pair.element.name)\")))"
+   "App/Screens/Editor/EditorView.swift:481: .accessibilityLabel(Text(tr(\"Widget \\(pair.offset + 1) sur \\(designs.count) : \\(pair.element.name)\")))"
   ]
  },
  "Widget citation": {
@@ -33831,7 +33837,7 @@
  "iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Ardane propose le Verre (givre et reflets dessinés), les dégradés doux et ta photo. Les apparences « Teinté » ou transparentes d'iOS (Personnaliser l'écran d'accueil) s'appliquent aussi aux widgets Ardane.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:670: StudioNote(text: tr(\"iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Ardane propose le Verre (givre et reflets dessinés), les dégradés do"
+   "App/Screens/Editor/EditorView.swift:684: StudioNote(text: tr(\"iOS ne laisse pas un widget montrer le fond d'écran à travers lui : une vraie transparence n'est pas possible. Ardane propose le Verre (givre et reflets dessinés), les dégradés do"
   ]
  },
  "iOS te demandera ensuite ton accord.": {
@@ -36045,7 +36051,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Onboarding/OnboardingView.swift:380: Text(tr(\"Étape \\(number)\"))",
-   "App/Screens/Spaces/LockScreenCreator.swift:156: Text(tr(\"Étape \\(index + 1)\"))"
+   "App/Screens/Spaces/LockScreenCreator.swift:169: Text(tr(\"Étape \\(index + 1)\"))"
   ]
  },
  "Étape %@ sur %@": {

@@ -209386,6 +209386,53 @@
         }
       }
     },
+    "Sur l'écran verrouillé, l'iPhone affiche les widgets dans ses propres couleurs : il n'y a pas de style à choisir.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf dem Sperrbildschirm zeigt das iPhone Widgets in seinen eigenen Farben: Es gibt keinen Stil zu wählen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On the Lock Screen, iPhone shows widgets in its own colors: there's no style to choose."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En la pantalla bloqueada, el iPhone muestra los widgets con sus propios colores: no hay estilo que elegir."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sur l'écran verrouillé, l'iPhone affiche les widgets dans ses propres couleurs : il n'y a pas de style à choisir."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sulla schermata di blocco, l'iPhone mostra i widget con i suoi colori: non c'è uno stile da scegliere."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ロック画面では、iPhoneが独自の色でウィジェットを表示するため、スタイルは選べません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na Tela Bloqueada, o iPhone mostra os widgets com as próprias cores: não há estilo para escolher."
+          }
+        }
+      }
+    },
     "Sur l'écran verrouillé, touche et maintiens un espace vide, puis « Personnaliser ».": {
       "extractionState": "manual",
       "localizations": {

@@ -101,7 +101,8 @@ struct WidgetStudio: View {
         // « Contenu » (where « Taille » and « Contenu » now are), or « Style » on the tool the request names.
         var tool: StudioSection?
         if let asked = request.section.flatMap(StudioSection.init(name:)), asked != .size, asked != .content { tool = asked }
-        let first: StudioChapter = tool == nil ? .content : .style
+        // A Lock Screen widget has « Contenu » only: iOS draws it in its own colors (PDG, 2026-11-16).
+        let first: StudioChapter = tool == nil || opening.isAccessory ? .content : .style
         _chapter = State(initialValue: first)
         _visitedChapters = State(initialValue: [first])
         _section = State(initialValue: tool ?? .theme)
@@ -153,10 +154,14 @@ struct WidgetStudio: View {
                     .transition(.opacity)
             }
             panelHandle
-            StudioChapterBar(selection: $chapter, visited: visitedChapters)
-                .padding(.horizontal, 20)
-                .padding(.bottom, chapter == .style ? 0 : 8)
-            if chapter == .style {
+            // On the Lock Screen, iOS draws widgets in its own colors: no « Style » to set, nothing to lay out,
+            // so « Contenu » alone, without the chapters (PDG, 2026-11-16).
+            if !isLockScreen {
+                StudioChapterBar(selection: $chapter, visited: visitedChapters)
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, chapter == .style ? 0 : 8)
+            }
+            if chapter == .style && !isLockScreen {
                 StudioSectionBar(sections: Self.styleTools(sections), selection: $section)
             }
             Divider()
@@ -359,6 +364,10 @@ struct WidgetStudio: View {
                 partsPanel = .list
                 comboNote = nil
             }
+            .onChange(of: family) { _, shown in
+                // A Lock Screen size chosen: back to « Contenu », the only chapter there.
+                if shown.isAccessory && chapter != .content { chapter = .content }
+            }
             .onChange(of: chapter) { _, opened in
                 _ = visitedChapters.insert(opened)
                 // Leaving « Contenu »: its choice and widget panels close (opening a widget or the choice from
@@ -531,7 +540,7 @@ struct WidgetStudio: View {
 
     /// « Suivant › » at the top of « Contenu » and « Disposition ».
     private var nextLink: StudioPanelLink? {
-        guard let next = chapter.next else { return nil }
+        guard !isLockScreen, let next = chapter.next else { return nil }
         return StudioPanelLink(title: tr("Suivant"), symbol: "chevron.right", identifier: "studio-next") { goTo(next) }
     }
 
@@ -549,6 +558,11 @@ struct WidgetStudio: View {
         )
         if parts.count > 1 && !isLockScreen {
             StudioNote(text: tr("Touche une partie du widget pour la changer."), symbol: "hand.tap")
+        }
+        if isLockScreen {
+            StudioNote(text: tr("Sur l'écran verrouillé, l'iPhone affiche les widgets dans ses propres couleurs : il n'y a pas de style à choisir."),
+                       symbol: "lock.iphone")
+                .accessibilityIdentifier("studio-lock-note")
         }
         currentContent(input, showsDelete: true)
     }
