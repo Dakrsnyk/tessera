@@ -70,7 +70,8 @@ Tous sur la CI GitHub Actions (simulateur iPhone 402 × 874 points, français) ;
 | Run `[studio]` (relevé de chaque tirage) | `4a5245b` | OK | 1 430 réussis, 2 en échec | le relevé montre un vrai bug de l'app (ci-dessous) ; l'autre échec est le champ « Nom » d'un test `DataEntry` |
 | Run `[studio]` (correctif de l'app) | `5b47978` | OK | 1 431 réussis, 1 en échec | **le tirage vers le bas redescend les réglages du Studio en feuille** (`testSettingsRiseAndComeBackDown` passe) ; reste le champ « Nom » du test `DataEntry` (ci-dessous) |
 | Version interne **Build 432** (Premium, TestFlight) | `2947825` | Release signée, envoyée, « Internal Only » vérifié (2ᵉ tentative : la 1ʳᵉ n'avait pas trouvé de machine Mac chez GitHub) | pas de tests (build d'essai) | **à installer** : contient le correctif du Studio en feuille |
-| Run `[studio]` (test du champ « Nom ») | à venir | | | |
+| Run `[studio]` (test du champ « Nom ») | `f24cc20` | OK | 1 431 réussis, 1 en échec | **le champ « Nom » passe** (`DataEntry`) ; nouvel échec côté test seulement : `testTheStudioChangesTheWidgetAndKeepsItAll` lit l'état de la palette « Océan » restée sous le bas de l'écran (logique vérifiée par le test unitaire `testTheMainColorReplacesAPaletteAndItsBackground`, qui passe) ; le test fait maintenant défiler jusqu'à elle avant de la lire |
+| Run `[studio]` (palette lue à l'écran) | à venir | | | |
 
 Les 12 échecs du run 425, tous analysés :
 - 9 tests logiques `ProfileMatrixTests` attendaient l'ancien Mon quotidien (profil vide = aucune carte). La règle a changé à ta demande (horaire de la semaine pour tous) : tests mis à jour, la garantie « rien d'inventé » reste vérifiée (l'horaire vide n'a aucun élément).

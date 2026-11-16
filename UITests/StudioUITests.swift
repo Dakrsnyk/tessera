@@ -438,6 +438,9 @@ final class StudioUITests: XCTestCase {
         // The main color repaints the whole widget, palette included.
         tapButton("main-FF6B57")
         XCTAssertTrue(waitForSelection("main-FF6B57"), "La couleur principale n'est pas sélectionnée")
+        // The palettes are below the main colors: brought on screen before their state is read (a choice
+        // below the fold keeps its old accessibility state).
+        reveal("palette-ocean")
         XCTAssertTrue(waitForSelection("palette-ocean", selected: false), "La couleur principale remplace la palette")
         snapshot("main-color")
         tapButton("studio-undo")
