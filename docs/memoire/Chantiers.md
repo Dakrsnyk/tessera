@@ -305,7 +305,7 @@ Objectif de l'utilisateur : découpe, nom et quantités chacun ≥ 80 % sur tout
 ## Chantier 34 : logo doré « Premium » de l'accueil — 2026-11-16 (demande du PDG après la Build 435)
 - `PremiumGoldBadge` dans `App/Screens/Home/DailySection.swift`, à droite du titre de Mon Quotidien, seulement sans Premium (et hors mode Organiser) ; un toucher ouvre l'offre (`router.showPaywall()`). Le bandeau Premium du bas de l'accueil est gardé.
 - Test `ProfileUITests/testThePremiumSignShowsOnlyWithoutPremium` (écran `home-free` = accueil sans Premium, captures `profile-home-premium-sign*`). Relu par code-reviewer (OK).
-- Envoi : version interne d'abord (Premium débloqué : le badge n'y est PAS, c'est attendu), puis `[daily]`. Version interne **Build 436** (`c0ef0a2`, « Internal Only » vérifié). Le badge ne se voit sur l'iPhone qu'en version publique (`[testflight]`, sur accord du PDG).
+- Envoi : version interne d'abord (Premium débloqué : le badge n'y est PAS, c'est attendu), puis `[daily]`. Version interne **Build 436** (`c0ef0a2`, « Internal Only » vérifié). `[daily]` run 437 (`80aa936`) : 1 453 réussis, 0 en échec, test du badge compris ; capture envoyée au PDG. Le badge ne se voit sur l'iPhone qu'en version publique (`[testflight]`, sur accord du PDG).
 
 ## Chantier 33 : mission de nuit, corrections ciblées et audit complet — 2026-11-16 (demande du PDG à 01 h 15, retour vers 6 h)
 - Compte rendu complet (corrections, bugs, recommandations à valider, tests exécutés et impossibles, stabilité) : `docs/audits/audit-nuit-2026-11-16.md`.
