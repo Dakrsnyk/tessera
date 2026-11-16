@@ -1,5 +1,6 @@
 import PhotosUI
 import SwiftUI
+import UIKit
 import WidgetKit
 
 /// The Studio in its own sheet: a saved widget from « Mes widgets », or a new one from the Store.
@@ -307,6 +308,9 @@ struct WidgetStudio: View {
             .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(Self.settingsSpace)).minY } action: { top in
                 followSettings(top: top)
             }
+            // In a sheet, iOS moves the sheet instead of the settings pulled down at their top: their position
+            // never shows the pull, the finger's travel does.
+            .background(StudioPullDownWatcher { raisePanel(false) })
         }
         .coordinateSpace(.named(Self.settingsSpace))
         // Another chapter, tool, widget of the set or panel: back to the top.
@@ -1332,5 +1336,88 @@ struct ColorDot: View {
         }
         .buttonStyle(.pressable)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+}
+
+/// Watches the finger on the scroll view it sits in: pulled down by `distance` points while the content is at
+/// its top, it calls `onPull` (once per gesture). In a sheet the content stays at its top while iOS moves the
+/// sheet, so the content's position (`followSettings`) never sees that pull; the scroll view's own pan does.
+private struct StudioPullDownWatcher: UIViewRepresentable {
+    var distance: CGFloat = 64
+    let onPull: () -> Void
+
+    func makeUIView(context: Context) -> WatchView { WatchView() }
+
+    func updateUIView(_ view: WatchView, context: Context) {
+        view.distance = distance
+        view.onPull = onPull
+        view.attach()
+    }
+
+    final class WatchView: UIView {
+        var distance: CGFloat = 64
+        var onPull: () -> Void = {}
+        private weak var scroll: UIScrollView?
+        /// Where the finger was (in the window) when the content reached its top during this gesture.
+        private var startY: CGFloat?
+        private var pulled = false
+
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            isUserInteractionEnabled = false
+            isAccessibilityElement = false
+        }
+
+        required init?(coder: NSCoder) { nil }
+
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            attach()
+        }
+
+        /// Off screen: no longer the target of the scroll view's pan (it may outlive this view).
+        override func willMove(toWindow newWindow: UIWindow?) {
+            super.willMove(toWindow: newWindow)
+            guard newWindow == nil else { return }
+            scroll?.panGestureRecognizer.removeTarget(self, action: #selector(pan(_:)))
+            scroll = nil
+        }
+
+        /// Follows the pan of the nearest scroll view above it (a new one after a change of chapter or tool).
+        func attach() {
+            guard window != nil else { return }
+            var candidate = superview
+            while let view = candidate, !(view is UIScrollView) { candidate = view.superview }
+            guard let found = candidate as? UIScrollView, found !== scroll else { return }
+            scroll?.panGestureRecognizer.removeTarget(self, action: #selector(pan(_:)))
+            scroll = found
+            found.panGestureRecognizer.addTarget(self, action: #selector(pan(_:)))
+        }
+
+        @objc private func pan(_ gesture: UIPanGestureRecognizer) {
+            guard let scroll else { return }
+            if gesture.state == .began {
+                startY = nil
+                pulled = false
+            }
+            guard gesture.state == .began || gesture.state == .changed else {
+                startY = nil
+                return
+            }
+            // At its top or pulled past it (bounce): the pull counts from there; scrolled down, it starts over.
+            guard scroll.contentOffset.y <= -scroll.adjustedContentInset.top + 0.5 else {
+                startY = nil
+                return
+            }
+            let y = gesture.location(in: nil).y
+            guard let start = startY else {
+                startY = y
+                return
+            }
+            if !pulled && y - start > distance {
+                pulled = true
+                onPull()
+            }
+        }
     }
 }

@@ -375,40 +375,16 @@ final class StudioUITests: XCTestCase {
         drag(in: scrollArea(height: height, bottomMargin: 125), up: true)
         XCTAssertTrue(waitUntil { handle.label == "Agrandir l'aperçu" }, "Les réglages ne montent pas quand on les fait défiler")
         settle(handle)
-        // What each pull did (TEMPORARY, run 429 diagnosis): panel up or down, the settings' area and where their
-        // first theme card is (at their top, it sits about 95 pt under the area's top).
-        var trace: [String] = []
-        func note(_ step: String) {
-            let area = scrollArea(height: height, bottomMargin: 125)
-            let card = app.buttons["preset-midnight"]
-            let state = handle.label == "Agrandir les réglages" ? "bas" : "haut"
-            trace.append("\(step) \(state) zone \(Int(area.minY))-\(Int(area.maxY)) carte \(card.exists ? Int(card.frame.minY) : -1)")
-        }
-        note("monte")
+        // Opened from the Store or Home, the Studio is a sheet: pulled at their top, iOS moves the sheet, not the
+        // settings (run 4a5245b: content at its top, still raised after a 330-point pull). The app follows the
+        // finger on the settings instead.
         var pulls = 0
         while handle.label != "Agrandir les réglages" && pulls < 3 {
             drag(in: scrollArea(height: height, bottomMargin: 125), up: false)
             pulls += 1
             settle(handle)
-            note("tirage\(pulls)")
-            snapshot("pull-\(pulls)")
         }
-        if handle.label != "Agrandir les réglages" {
-            // A longer pull, from the very top of the settings to the save bar.
-            let area = scrollArea(height: height, bottomMargin: 125)
-            let origin = app.coordinate(withNormalizedOffset: .zero)
-            origin.withOffset(CGVector(dx: area.midX, dy: area.minY + 8))
-                .press(forDuration: 0.05, thenDragTo: origin.withOffset(CGVector(dx: area.midX, dy: area.maxY - 8)),
-                       withVelocity: .slow, thenHoldForDuration: 0.1)
-            settle(handle)
-            note("long")
-            snapshot("pull-long")
-        }
-        let log = XCTAttachment(string: trace.joined(separator: "\n"))
-        log.name = "studio-pull-trace"
-        log.lifetime = .keepAlways
-        add(log)
-        XCTAssertEqual(handle.label, "Agrandir les réglages", "Tirés vers le bas depuis leur haut, les réglages ne redescendent pas : \(trace.joined(separator: " | "))")
+        XCTAssertEqual(handle.label, "Agrandir les réglages", "Tirés vers le bas depuis leur haut, les réglages ne redescendent pas (\(pulls) tirages)")
         XCTAssertTrue(waitUntil { widget.frame.height > large * 0.95 }, "Le widget ne reprend pas sa taille")
     }
 

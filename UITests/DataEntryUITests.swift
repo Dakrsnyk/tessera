@@ -174,6 +174,15 @@ final class DataEntryUITests: XCTestCase {
         launch(["-screenshotScreen", "editor-v2"])
         let name = app.textFields["widget-name"]
         XCTAssertTrue(name.waitForExistence(timeout: 15), "Éditeur absent")
+        // The field can start under the bottom of the screen: scrolled to as a person would. Scrolling raises the
+        // settings (a spring), so it is touched once it has stopped moving, not where it was.
+        reveal(name, "Nom du widget")
+        var last = name.frame
+        for _ in 0..<12 {
+            Thread.sleep(forTimeInterval: 0.25)
+            if name.frame == last { break }
+            last = name.frame
+        }
         name.coordinate(withNormalizedOffset: CGVector(dx: 0.95, dy: 0.5)).tap()
         // Return closes the keyboard: dragging on a field still being edited moves its cursor
         // instead of scrolling the Studio's settings.
