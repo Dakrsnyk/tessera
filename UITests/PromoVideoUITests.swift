@@ -18,7 +18,9 @@ final class PromoVideoUITests: XCTestCase {
 
     private func launch(_ screen: String, _ extra: [String] = [], language: String = "fr") {
         app = XCUIApplication()
-        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", "\(language)_CA", "-screenshotScreen", screen] + extra
+        // « -studioPanelStill »: the Studio keeps its large widget while the video changes its settings.
+        app.launchArguments = ["-AppleLanguages", "(\(language))", "-AppleLocale", "\(language)_CA", "-screenshotScreen", screen,
+                               "-studioPanelStill", "YES"] + extra
         app.launch()
     }
 

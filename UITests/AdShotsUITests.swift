@@ -39,8 +39,9 @@ final class AdShotsUITests: XCTestCase {
 
     private func launch(_ screen: String, _ extra: [String] = []) {
         app = XCUIApplication()
+        // « -studioPanelStill »: the Studio keeps its large widget while the shots change its settings.
         app.launchArguments = ["-AppleLanguages", "(\(Self.language))", "-AppleLocale", Self.locale, "-screenshotScreen", screen,
-                               "-screenshotStyle", Self.style]
+                               "-screenshotStyle", Self.style, "-studioPanelStill", "YES"]
             + (Self.appearance.map { ["-screenshotAppearance", $0] } ?? []) + extra
         app.launch()
     }

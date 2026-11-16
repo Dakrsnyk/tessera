@@ -222,6 +222,7 @@ MODULES = [
      "features": [
          "Chapitres (2026-11-15) : Contenu = Taille, « Dans ce widget » (parties, « + », détail : Remplacer, Retirer, réglages, « Va bien avec ») et contenu ; Disposition = dispositions proposées, Monter / Descendre ; Style = les outils Thème, Style, Couleurs, Fond, Bordure, Graphique, Densité, Mes styles.",
          "Réunir : `ComboEditing` (`Shared/Model/Combo.swift`) ajoute, retire, remplace, déplace en gardant les réglages de chaque partie ; un ajout qui ne tient pas passe à la taille au-dessus (bandeau + Annuler) ou est refusé avec la raison ; structure modifiable aussi après l'enregistrement ; même espace seulement.",
+         "Réglages qui montent (2026-11-15) : faire défiler les réglages ou changer un réglage les fait monter sur la plus grande part de l'écran ; le widget reste visible à 96 pt de haut, « + » et « Sur mon écran » à côté ; tirer depuis leur haut, la poignée ou un toucher sur le petit widget les redescend.",
          "« Sur mon écran » (`HomeScreenPreview`) : le widget à sa taille réelle parmi des icônes, ou sur l'écran verrouillé ; `EditorRequest.family` ouvre l'Atelier sur une forme d'écran verrouillé.",
          "57 styles (`ThemeID`), 16 thèmes complets (`StylePreset`), 14 palettes, couleur principale, fonds et textures, bordures.",
          "« Mes styles » : looks enregistrés pour plusieurs widgets.",

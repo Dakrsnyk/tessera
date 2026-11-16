@@ -37,8 +37,17 @@ final class StudioUITests: XCTestCase {
     @discardableResult
     private func reveal(_ identifier: String, bottomMargin: CGFloat = 125, file: StaticString = #filePath, line: UInt = #line) -> XCUIElement {
         let button = app.buttons[identifier].firstMatch
-        XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(identifier) » introuvable", file: file, line: line)
         let height = app.frame.height > 200 ? app.frame.height : 874
+        if !button.waitForExistence(timeout: 8) {
+            // A lazy grid lets go of what scrolled away (the main colors once the palettes below are reached):
+            // look above first, then below.
+            var tries = 0
+            while !button.exists && tries < 12 {
+                drag(in: scrollArea(height: height, bottomMargin: bottomMargin), up: tries >= 4)
+                tries += 1
+            }
+        }
+        XCTAssertTrue(button.waitForExistence(timeout: 4), "Bouton « \(identifier) » introuvable", file: file, line: line)
         // Reachable: on screen and not under the save bar at the bottom (the toolbar arrows are at the top).
         func reachable() -> Bool {
             button.exists && button.isHittable && (button.frame.maxY < height - bottomMargin || button.frame.maxY < 140)
@@ -58,14 +67,19 @@ final class StudioUITests: XCTestCase {
                 // A lazy list let it go once it scrolled past: come back the other way.
                 up = !lastUp
             }
-            let origin = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
-            let low = origin.withOffset(CGVector(dx: area.midX, dy: area.minY + area.height * 0.7))
-            let high = origin.withOffset(CGVector(dx: area.midX, dy: area.minY + area.height * 0.3))
-            (up ? low : high).press(forDuration: 0.05, thenDragTo: up ? high : low, withVelocity: .slow, thenHoldForDuration: 0.1)
+            drag(in: area, up: up)
             lastUp = up
             swipes += 1
         }
         return button
+    }
+
+    /// A short drag without momentum inside an area: up brings what is below, down what is above.
+    private func drag(in area: CGRect, up: Bool) {
+        let origin = app.coordinate(withNormalizedOffset: CGVector(dx: 0, dy: 0))
+        let low = origin.withOffset(CGVector(dx: area.midX, dy: area.minY + area.height * 0.7))
+        let high = origin.withOffset(CGVector(dx: area.midX, dy: area.minY + area.height * 0.3))
+        (up ? low : high).press(forDuration: 0.05, thenDragTo: up ? high : low, withVelocity: .slow, thenHoldForDuration: 0.1)
     }
 
     /// The visible part of the page that scrolls: the tallest scroll view, above the save bar.
@@ -243,6 +257,45 @@ final class StudioUITests: XCTestCase {
         app.buttons["home-preview-back"].tap()
         XCTAssertTrue(app.buttons["home-preview-back"].waitForNonExistence(timeout: 8), "« Sur mon écran » ne se ferme pas")
         XCTAssertTrue(app.textFields["widget-name"].waitForExistence(timeout: 8), "Le Studio n'est pas revenu")
+    }
+
+    /// A setting changed or the settings scrolled: they rise over most of the screen and the widget shrinks above
+    /// them, still in view. The handle, the small widget or a pull from their top brings them back down.
+    func testSettingsRiseAndComeBackDown() {
+        launch(["-screenshotScreen", "studio-content"])
+        let handle = app.buttons["studio-panel-handle"]
+        XCTAssertTrue(handle.waitForExistence(timeout: 15), "La poignée des réglages est absente")
+        XCTAssertEqual(handle.label, "Agrandir les réglages", "Le Studio s'ouvre réglages repliés, grand widget")
+        let widget = app.descendants(matching: .any).matching(NSPredicate(format: "label BEGINSWITH %@", "Aperçu du widget")).firstMatch
+        XCTAssertTrue(widget.waitForExistence(timeout: 8), "L'aperçu du widget est absent")
+        let large = widget.frame.height
+        let height = app.frame.height > 200 ? app.frame.height : 874
+        let lowered = scrollArea(height: height, bottomMargin: 125)
+
+        // A setting changed: the settings rise, the widget stays on screen, smaller.
+        section("theme")
+        tapButton("preset-midnight")
+        XCTAssertTrue(waitUntil { handle.label == "Agrandir l'aperçu" }, "Les réglages ne montent pas quand on change un réglage")
+        XCTAssertTrue(waitUntil { widget.frame.height < large * 0.8 }, "Le widget ne rapetisse pas quand les réglages montent")
+        XCTAssertTrue(widget.frame.minY > 0 && widget.frame.height > 40, "Le widget n'est plus visible quand les réglages montent")
+        XCTAssertGreaterThan(scrollArea(height: height, bottomMargin: 125).height, lowered.height + 60, "Les réglages ne prennent pas plus de place")
+        snapshot("panel-raised")
+
+        // The handle brings the large widget back.
+        handle.tap()
+        XCTAssertTrue(waitUntil { handle.label == "Agrandir les réglages" }, "La poignée ne redescend pas les réglages")
+        XCTAssertTrue(waitUntil { widget.frame.height > large * 0.95 }, "Le widget ne reprend pas sa taille")
+
+        // Scrolled down, the settings rise; pulled down from their top, they come back down.
+        drag(in: scrollArea(height: height, bottomMargin: 125), up: true)
+        XCTAssertTrue(waitUntil { handle.label == "Agrandir l'aperçu" }, "Les réglages ne montent pas quand on les fait défiler")
+        var pulls = 0
+        while handle.label != "Agrandir les réglages" && pulls < 5 {
+            drag(in: scrollArea(height: height, bottomMargin: 125), up: false)
+            pulls += 1
+        }
+        XCTAssertEqual(handle.label, "Agrandir les réglages", "Tirés vers le bas depuis leur haut, les réglages ne redescendent pas (\(pulls) tirages)")
+        XCTAssertTrue(waitUntil { widget.frame.height > large * 0.95 }, "Le widget ne reprend pas sa taille")
     }
 
     /// « Dupliquer un de mes widgets »: a widget chosen opens in the Studio as a copy; with nothing to copy, the

@@ -443,45 +443,69 @@ struct StudioStage<Footer: View>: View {
     var selectedPart: Int?
     /// A touch on a widget inside a combined widget (nil: not touchable, as on the Lock Screen).
     var onPart: ((Int) -> Void)?
+    /// The settings fill most of the screen: the widget shrinks to about the height of two buttons, the footer
+    /// stands beside it, and a touch on the scene (not on a widget inside) calls `onExpand`.
+    var isCompact: Bool
+    var onExpand: (() -> Void)?
     let footer: Footer
     @Environment(\.appStyle) private var style
 
+    /// The widget's height on the shrunk scene: « + » and « Sur mon écran » one above the other.
+    static var compactHeight: CGFloat { 96 }
+
     init(design: WidgetDesign, family: Binding<WidgetFamily>, payload: WidgetPayload, isExample: Bool = false,
-         selectedPart: Int? = nil, onPart: ((Int) -> Void)? = nil, @ViewBuilder footer: () -> Footer) {
+         selectedPart: Int? = nil, onPart: ((Int) -> Void)? = nil, isCompact: Bool = false, onExpand: (() -> Void)? = nil,
+         @ViewBuilder footer: () -> Footer) {
         self.design = design
         self._family = family
         self.payload = payload
         self.isExample = isExample
         self.selectedPart = selectedPart
         self.onPart = onPart
+        self.isCompact = isCompact
+        self.onExpand = onExpand
         self.footer = footer()
     }
 
     var body: some View {
         let palette = CristalPalette.of(style.id)
         VStack(spacing: 0) {
-            preview
-                .shadow(color: Color.black.opacity(family.isAccessory ? 0 : 0.14), radius: 10, y: 5)
-                // Laid exactly over the widget, after the shadow (the rings aren't shadowed).
-                .overlay { zones }
-                // Room for the shadow inside the clipped scene (radius 10, 5 points down).
-                .padding(.top, 12)
-                .padding(.bottom, family.isAccessory ? 6 : 14)
-                .animation(.easeInOut(duration: 0.25), value: design)
-                .animation(.easeInOut(duration: 0.2), value: family)
-            if family.isAccessory {
-                Text(tr("Écran verrouillé : iOS affiche les widgets d'une seule teinte."))
-                    .font(.caption2.weight(.medium))
-                    .foregroundStyle(.white.opacity(0.85))
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal, 12)
-                    .padding(.bottom, 8)
+            HStack(spacing: 12) {
+                preview
+                    .shadow(color: Color.black.opacity(family.isAccessory ? 0 : 0.14), radius: isCompact ? 6 : 10, y: isCompact ? 3 : 5)
+                    // Laid exactly over the widget, after the shadow (the rings aren't shadowed).
+                    .overlay { zones }
+                    // Room for the shadow inside the clipped scene (radius 10, 5 points down).
+                    .padding(.top, isCompact ? 8 : 12)
+                    .padding(.bottom, isCompact ? 10 : (family.isAccessory ? 6 : 14))
+                    .frame(maxWidth: .infinity)
+                    .animation(.easeInOut(duration: 0.25), value: design)
+                    .animation(.easeInOut(duration: 0.2), value: family)
+                if isCompact {
+                    footer
+                        .padding(.trailing, 12)
+                        .transition(.opacity)
+                }
             }
-            footer
-                .padding(.horizontal, 12)
-                .padding(.bottom, 12)
+            if !isCompact {
+                if family.isAccessory {
+                    Text(tr("Écran verrouillé : iOS affiche les widgets d'une seule teinte."))
+                        .font(.caption2.weight(.medium))
+                        .foregroundStyle(.white.opacity(0.85))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 12)
+                        .padding(.bottom, 8)
+                }
+                footer
+                    .padding(.horizontal, 12)
+                    .padding(.bottom, 12)
+                    .transition(.opacity)
+            }
         }
         .frame(maxWidth: .infinity)
+        // Shrunk: a touch on the scene brings the large widget back (a widget inside keeps its own touch).
+        .contentShape(Rectangle())
+        .gesture(TapGesture().onEnded { onExpand?() }, including: isCompact ? .all : .subviews)
         .background {
             // The Lock Screen scene keeps its night backdrop (white caption, one-tint widgets).
             if family.isAccessory {
@@ -508,17 +532,27 @@ struct StudioStage<Footer: View>: View {
     }
 
     @ViewBuilder private var preview: some View {
-        switch family {
-        case .systemSmall:
-            WidgetPreview(design: design, family: family, payload: payload, width: 150)
-        case .systemMedium:
-            WidgetPreview(design: design, family: family, payload: payload, width: 318)
-        case .systemLarge, .systemExtraLarge:
-            WidgetPreview(design: design, family: family, payload: payload, width: 196)
-        default:
-            WidgetPreview(design: design, family: family, payload: payload, width: WidgetMetrics.size(family).width * 1.3)
-                .padding(.vertical, 14)
+        if family.isAccessory {
+            WidgetPreview(design: design, family: family, payload: payload, width: previewWidth)
+                .padding(.vertical, isCompact ? 0 : 14)
+        } else {
+            WidgetPreview(design: design, family: family, payload: payload, width: previewWidth)
         }
+    }
+
+    /// The widget's width on the scene; shrunk, no taller than `compactHeight`.
+    private var previewWidth: CGFloat {
+        let size = WidgetMetrics.size(family)
+        let full: CGFloat
+        switch family {
+        case .systemSmall: full = 150
+        case .systemMedium: full = 318
+        case .systemLarge, .systemExtraLarge: full = 196
+        default: full = size.width * 1.3
+        }
+        guard isCompact, size.width > 0 else { return full }
+        let height = full * size.height / size.width
+        return height > Self.compactHeight ? full * Self.compactHeight / height : full
     }
 }
 

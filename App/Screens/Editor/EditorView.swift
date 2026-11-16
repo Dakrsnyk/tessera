@@ -78,6 +78,11 @@ struct WidgetStudio: View {
     @State private var showsOnMyScreen = false
     /// « Enregistrer le widget » touched in « Sur mon écran »: saved once it has closed.
     @State private var savesAfterPreview = false
+    /// The settings fill most of the screen once the person scrolls them or changes a setting: the widget shrinks
+    /// above them, still in view. Pulled down from their top, or the handle or the small widget touched, they go
+    /// back down under the large widget.
+    @State private var panelRaised = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let isNew: Bool
     private let originals: [WidgetDesign]
@@ -146,9 +151,9 @@ struct WidgetStudio: View {
                     .padding(.top, 8)
                     .transition(.opacity)
             }
+            panelHandle
             StudioChapterBar(selection: $chapter, visited: visitedChapters)
                 .padding(.horizontal, 20)
-                .padding(.top, 10)
                 .padding(.bottom, chapter == .style ? 0 : 8)
             if chapter == .style {
                 StudioSectionBar(sections: Self.styleTools(sections), selection: $section)
@@ -167,10 +172,71 @@ struct WidgetStudio: View {
     private var stage: some View {
         StudioStage(
             design: design, family: $family, payload: payload, isExample: !model.hasOwnData(for: design),
-            selectedPart: chapter == .content ? shownPanel.partIndex : nil, onPart: stagePartAction
+            selectedPart: chapter == .content ? shownPanel.partIndex : nil, onPart: stagePartAction,
+            isCompact: panelRaised, onExpand: { raisePanel(false) }
         ) {
             stageFooter
         }
+    }
+
+    // MARK: Settings raised over the stage
+
+    /// Above the chapters: the panel's handle. Touched or dragged, it raises the settings or brings them back down.
+    private var panelHandle: some View {
+        Button {
+            Haptics.tap()
+            raisePanel(!panelRaised)
+        } label: {
+            Capsule()
+                .fill(Color.secondary.opacity(0.45))
+                .frame(width: 40, height: 5)
+                .frame(maxWidth: .infinity, minHeight: 24)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 8).onEnded { drag in
+                raisePanel(drag.translation.height < 0)
+            }
+        )
+        .padding(.horizontal, 20)
+        .accessibilityLabel(Text(panelRaised ? tr("Agrandir l'aperçu") : tr("Agrandir les réglages")))
+        .accessibilityIdentifier("studio-panel-handle")
+    }
+
+    /// Raises the settings over the stage (the widget shrinks beside its buttons) or brings them back down.
+    private func raisePanel(_ raised: Bool) {
+        guard raised != panelRaised, !(raised && Self.panelStaysDown) else { return }
+        withAnimation(reduceMotion ? .easeInOut(duration: 0.2) : .spring(response: 0.38, dampingFraction: 0.86)) {
+            panelRaised = raised
+        }
+    }
+
+    /// The settings scrolled down a little: they rise. Pulled down past their top: they go back down.
+    /// `top` is the top of their content in the scroll view (0 at rest, negative once scrolled).
+    private func followSettings(top: CGFloat) {
+        if top < -24 {
+            raisePanel(true)
+        } else if top > 44 {
+            raisePanel(false)
+        }
+    }
+
+    /// Captures for the ads and the screenshots scrolled by the app: the large widget stays (debug only).
+    private static var panelStaysDown: Bool {
+        #if DEBUG
+        UserDefaults.standard.bool(forKey: "studioPanelStill") || UserDefaults.standard.string(forKey: "screenshotScroll") != nil
+        #else
+        false
+        #endif
+    }
+
+    /// What a change of setting leaves as it is: the size and the widgets inside, which the person watches on the
+    /// large widget.
+    private static func sameStructure(_ old: WidgetDesign, _ new: WidgetDesign) -> Bool {
+        old.kind == new.kind
+            && old.displayFormat.family == new.displayFormat.family
+            && old.options.parts.map(\.kind) == new.options.parts.map(\.kind)
     }
 
     private var stagePartAction: ((Int) -> Void)? {
@@ -179,18 +245,30 @@ struct WidgetStudio: View {
     }
 
     /// On the stage, under the widget: « Changer de widget » (Créer), « + » while there is room, « Sur mon écran ».
-    private var stageFooter: some View {
-        HStack(spacing: 10) {
-            if let onChangeWidget { changeWidgetButton(onChangeWidget) }
-            Spacer(minLength: 0)
-            if canAddPart {
-                StudioRoundButton(symbol: "plus", title: tr("Ajouter un widget"), identifier: "stage-add") {
-                    openPicker(.adding)
-                }
+    /// Settings raised: « + » and « Sur mon écran » in a column beside the small widget (« Changer de widget » comes
+    /// back with the large one).
+    @ViewBuilder private var stageFooter: some View {
+        if panelRaised {
+            VStack(spacing: 8) {
+                stageButtons
             }
-            StudioRoundButton(symbol: "eye", title: tr("Sur mon écran"), identifier: "studio-on-my-screen") {
-                showsOnMyScreen = true
+        } else {
+            HStack(spacing: 10) {
+                if let onChangeWidget { changeWidgetButton(onChangeWidget) }
+                Spacer(minLength: 0)
+                stageButtons
             }
+        }
+    }
+
+    @ViewBuilder private var stageButtons: some View {
+        if canAddPart {
+            StudioRoundButton(symbol: "plus", title: tr("Ajouter un widget"), identifier: "stage-add") {
+                openPicker(.adding)
+            }
+        }
+        StudioRoundButton(symbol: "eye", title: tr("Sur mon écran"), identifier: "studio-on-my-screen") {
+            showsOnMyScreen = true
         }
     }
 
@@ -226,12 +304,18 @@ struct WidgetStudio: View {
             .padding(.horizontal, 20)
             .padding(.top, 14)
             .padding(.bottom, 24)
+            .onGeometryChange(for: CGFloat.self) { $0.frame(in: .named(Self.settingsSpace)).minY } action: { top in
+                followSettings(top: top)
+            }
         }
+        .coordinateSpace(.named(Self.settingsSpace))
         // Another chapter, tool, widget of the set or panel: back to the top.
         .id("\(chapter.rawValue)-\(section.rawValue)-\(index)-\(shownPanel.key)")
         .scrollDismissesKeyboard(.interactively)
         .screenshotScroll()
     }
+
+    private static let settingsSpace = "studio-settings"
 
     private func dialogs<Content: View>(_ content: Content) -> some View {
         content
@@ -854,6 +938,10 @@ struct WidgetStudio: View {
         }
         lastChange = now
         future.removeAll()
+        // A setting changed (not the size nor the widgets inside): the settings rise, the widget stays in view.
+        if old.count == new.count, new.indices.contains(index), Self.sameStructure(old[index], new[index]) {
+            raisePanel(true)
+        }
         // Another change came after the note's: its « Annuler » would no longer take back what it says.
         if comboNote != nil { comboNote = nil }
     }
