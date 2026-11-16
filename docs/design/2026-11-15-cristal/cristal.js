@@ -44,8 +44,8 @@ const THEMES = [
     primary: '#7B5D34', secondary: '#C8A97A', accent: '#B5813A', bg: '#F8F4EC', na: '#EFE0C4', nb: '#F6E8D6', ink: '#241C10', ink2: '#665A48', rule: '#E8DFCF', track: '#E3D9C7',
     cat: .18, panel: '#FFFDF9', chipR: '12px', wash: (t) => [blob(t.na, 230, 230, 350, 120), blob(t.nb, 210, 210, 20, 540)] },
   { id: 'graphite', name: 'Graphite', sub: 'Graphite clair et argent', app: 'nouvelle teinte neutre', isNew: true,
-    primary: '#3D4756', secondary: '#8E99A8', accent: '#56789F', bg: '#F1F3F6', na: '#DDE2E9', nb: '#E3E8F0', ink: '#12161C', ink2: '#545D6A', rule: '#DCE0E7', track: '#D5DAE2',
-    cat: .10, gray: .30, r: 22, chipR: '10px', wash: (t) => [`linear-gradient(165deg, ${t.na} 0%, ${C.rgba(t.na, 0)} 42%)`, blob(t.nb, 250, 250, 320, 800)] },
+    primary: '#2B323D', secondary: '#5E7590', accent: '#56789F', bg: '#F1F3F6', na: '#D3DBE6', nb: '#DCE3EE', ink: '#12161C', ink2: '#545D6A', rule: '#DCE0E7', track: '#D5DAE2',
+    cat: 0, gray: .05, r: 22, chipR: '10px', wash: (t) => [`linear-gradient(165deg, ${t.na} 0%, ${C.rgba(t.na, 0)} 42%)`, blob(t.nb, 250, 250, 320, 800)] },
   { id: 'peche', name: 'Pêche', sub: 'Pêche et abricot', app: 'Ambre',
     primary: '#A04C1B', secondary: '#F0A56B', accent: '#E07B32', bg: '#FCF4EC', na: '#FFDCC2', nb: '#FFE9C6', ink: '#2A170B', ink2: '#6B5747', rule: '#F1E0D0', track: '#EBDAC9',
     cat: .12, r: 28, wash: (t) => [blob(t.na, 220, 220, 330, 150), blob(t.nb, 240, 240, 80, 700)] },
@@ -81,7 +81,7 @@ function themeCss() {
 /* ---------- mode sombre ----------
    Mêmes règles que l'app (Shared/Theme/AppStyle.swift) : fond = la teinte à 5,5 % de clarté, carte à 11,5 %, couleur d'action claire
    (accentDark de la teinte de l'app), encre sombre sur un bouton plein quand sa couleur est claire. Classe .dk sur .phone (ou ?mode=dark). */
-const DARK = { saphir: '#68B5F5', lavande: '#B69AFF', rose: '#FF83B2', sauge: '#B8D987', ocean: '#45DDE0', sable: '#E3C08A', graphite: '#B4C0D0', peche: '#FFB454', foret: '#65D5BC', mono: '#F2F2F4' };
+const DARK = { saphir: '#68B5F5', lavande: '#B69AFF', rose: '#FF83B2', sauge: '#B8D987', ocean: '#45DDE0', sable: '#E3C08A', graphite: '#E6EBF2', peche: '#FFB454', foret: '#65D5BC', mono: '#F2F2F4' };
 C.hsl = (hex) => { const [r, g, b] = C.rgb(hex).map((v) => v / 255), hi = Math.max(r, g, b), lo = Math.min(r, g, b), l = (hi + lo) / 2, d = hi - lo;
   if (!d) return { h: 0, s: 0, l }; const s = d / (1 - Math.abs(2 * l - 1)); let h = hi === r ? ((g - b) / d) % 6 : hi === g ? (b - r) / d + 2 : (r - g) / d + 4; h *= 60; if (h < 0) h += 360; return { h, s, l }; };
 C.fromHsl = (h, s, l) => { const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs((h / 60) % 2 - 1)), m = l - c / 2;

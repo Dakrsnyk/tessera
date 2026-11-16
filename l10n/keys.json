@@ -14197,7 +14197,7 @@
  "Gris ardoise, sobre et net": {
   "placeholders": 0,
   "uses": [
-   "Shared/Theme/AppStyle.swift:41: palette(.slate, tr(\"Gris ardoise, sobre et net\"), light: \"3D4756\", dark: \"B4C0D0\", saturation: 0.22),"
+   "Shared/Theme/AppStyle.swift:42: palette(.slate, tr(\"Gris ardoise, sobre et net\"), light: \"2B323D\", dark: \"E6EBF2\", saturation: 0.22),"
   ]
  },
  "Gris doux, chiffres noirs": {

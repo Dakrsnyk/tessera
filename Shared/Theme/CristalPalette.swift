@@ -59,8 +59,10 @@ struct CristalSeed {
                                    ink: "241C10", ink2: "665A48", rule: "E8DFCF", track: "E3D9C7", cat: 0.18, gray: 0, panel: "FFFDF9", radius: 26,
                                    washes: [CristalWash(rx: 230, ry: 230, x: 350, y: 120), CristalWash(rx: 210, ry: 210, x: 20, y: 540)])
     // La nappe 1 de la maquette est un dégradé linéaire en biais : ici une large nappe radiale en haut à gauche.
-    static let graphite = CristalSeed(id: "graphite", primary: "3D4756", secondary: "8E99A8", accent: "56789F", bg: "F1F3F6", na: "DDE2E9", nb: "E3E8F0",
-                                      ink: "12161C", ink2: "545D6A", rule: "DCE0E7", track: "D5DAE2", cat: 0.10, gray: 0.30, panel: "FFFFFF", radius: 22,
+    // 2026-11-16 (PDG, « plus contrastées comme le thème gratuit ») : graphite plus profond, nappes acier plus nettes, catégories presque
+    // dans leurs vraies couleurs (5 % de gris au lieu de 30 %, sans mélange à la couleur d'action) ; reste neutre (gray > 0).
+    static let graphite = CristalSeed(id: "graphite", primary: "2B323D", secondary: "5E7590", accent: "56789F", bg: "F1F3F6", na: "D3DBE6", nb: "DCE3EE",
+                                      ink: "12161C", ink2: "545D6A", rule: "DCE0E7", track: "D5DAE2", cat: 0, gray: 0.05, panel: "FFFFFF", radius: 22,
                                       washes: [CristalWash(rx: 300, ry: 260, x: 60, y: 60), CristalWash(rx: 250, ry: 250, x: 320, y: 800)])
 }
 

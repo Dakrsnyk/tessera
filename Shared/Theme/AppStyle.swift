@@ -37,8 +37,9 @@ struct AppStyle: Identifiable {
         palette(.orchid, tr("Doux et raffiné"), light: "9854B8", dark: "D5A0F5", fontDesign: .rounded),
         palette(.amethyst, tr("Violet profond, pour les couche-tard"), light: "6841A5", dark: "B69AFF"),
         palette(.sable, tr("Beige chaud, comme du papier"), light: "7B5D34", dark: "E3C08A"),
-        // A neutral color: its backgrounds keep only 22 % of the hue's saturation.
-        palette(.slate, tr("Gris ardoise, sobre et net"), light: "3D4756", dark: "B4C0D0", saturation: 0.22),
+        // A neutral color: its backgrounds keep only 22 % of the hue's saturation. Deep graphite in light, near-white silver
+        // in dark (PDG, 2026-11-16: the former pale grey-blue looked dull next to Saphir).
+        palette(.slate, tr("Gris ardoise, sobre et net"), light: "2B323D", dark: "E6EBF2", saturation: 0.22),
     ]
 
     private static func palette(_ id: AppStyleID, _ tagline: String, light: String, dark: String,

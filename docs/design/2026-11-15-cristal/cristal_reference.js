@@ -22,7 +22,7 @@ const APP = [
   ['aqua', '008C95', '45DDE0', 'ocean', true], ['jade', '268577', '65D5BC', 'foret', true], ['pistachio', '718C42', 'B8D987', 'sauge', true],
   ['olive', '77752B', 'C7C36A', 'sauge', false], ['amber', 'B86A13', 'FFB454', 'peche', true], ['ruby', 'C62845', 'FF6B81', 'rose', false],
   ['rose', 'C04472', 'FF83B2', 'rose', true], ['orchid', '9854B8', 'D5A0F5', 'lavande', false], ['amethyst', '6841A5', 'B69AFF', 'lavande', true],
-  ['sable', '7B5D34', 'E3C08A', 'sable', true], ['slate', '3D4756', 'B4C0D0', 'graphite', true],   // Premium, ajoutées le 2026-11-15 (slate s'affiche « Graphite »)
+  ['sable', '7B5D34', 'E3C08A', 'sable', true], ['slate', '2B323D', 'E6EBF2', 'graphite', true],   // Premium, ajoutées le 2026-11-15 (slate s'affiche « Graphite ») ; Graphite plus contrasté le 2026-11-16
 ];
 const KEYS = ['nut', 'fit', 'pla', 'hab', 'bud', 'pro', 'pas', 'prot', 'gluc', 'lip', 'travail', 'rdv'];
 // assombrit une couleur jusqu'à ce qu'elle se lise sur sa propre teinte (onglet actif, bouton teinté)
