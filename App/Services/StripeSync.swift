@@ -147,6 +147,8 @@ enum StripeSync {
     /// are still converted, and an entry converted before stays converted).
     @discardableResult
     static func sync(model: AppModel, now: Date = Date(), convertsCurrencies: Bool = true) async -> Failure? {
+        // The Stripe connection is Premium (2026-11-16): without it, the sales already read stay and nothing syncs.
+        guard model.isPremium else { return nil }
         guard let link = model.business.connections.stripe else { return nil }
         guard let key = SecretStore.read(keychainAccount) else {
             // Never a card that looks connected while nothing syncs.

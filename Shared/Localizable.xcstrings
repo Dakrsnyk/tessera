@@ -62605,6 +62605,53 @@
         }
       }
     },
+    "Connecter Stripe, avec Premium": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripe verbinden, mit Premium"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connect Stripe, with Premium"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conecta Stripe, con Premium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Connecter Stripe, avec Premium"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Collega Stripe, con Premium"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PremiumでStripeに接続"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conecte o Stripe, com o Premium"
+          }
+        }
+      }
+    },
     "Conseil nutrition": {
       "extractionState": "manual",
       "localizations": {
@@ -111767,49 +111814,49 @@
         }
       }
     },
-    "Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La connexion Stripe et la saisie à la main restent gratuites.": {
+    "Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La saisie à la main reste gratuite.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Importiere die Verkäufe und Ausgaben eines Exports von Stripe, Shopify, deiner Bank oder einer Tabelle auf einmal. Die Stripe-Verbindung und die Eingabe von Hand bleiben kostenlos."
+            "value": "Importiere die Verkäufe und Ausgaben eines Exports von Stripe, Shopify, deiner Bank oder einer Tabelle auf einmal. Die Eingabe von Hand bleibt kostenlos."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Import all the sales and costs of an export from Stripe, Shopify, your bank or a spreadsheet in one go. Connecting Stripe and typing by hand stay free."
+            "value": "Import all the sales and costs of an export from Stripe, Shopify, your bank or a spreadsheet in one go. Typing by hand stays free."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Importa de una vez las ventas y los gastos de una exportación de Stripe, Shopify, tu banco o una hoja de cálculo. La conexión con Stripe y la entrada manual siguen siendo gratuitas."
+            "value": "Importa de una vez las ventas y los gastos de una exportación de Stripe, Shopify, tu banco o una hoja de cálculo. La entrada manual sigue siendo gratuita."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La connexion Stripe et la saisie à la main restent gratuites."
+            "value": "Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La saisie à la main reste gratuite."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Importa in un colpo vendite e spese da un'esportazione di Stripe, Shopify, della tua banca o di un foglio di calcolo. La connessione a Stripe e l'inserimento manuale restano gratuiti."
+            "value": "Importa in un colpo vendite e spese da un'esportazione di Stripe, Shopify, della tua banca o di un foglio di calcolo. L'inserimento manuale resta gratuito."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stripe、Shopify、銀行、表計算のエクスポートから売上と経費をまとめて読み込めます。Stripeとの接続と手入力は引き続き無料です。"
+            "value": "Stripe、Shopify、銀行、表計算のエクスポートから売上と経費をまとめて読み込めます。手入力は引き続き無料です。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Importe de uma vez as vendas e despesas de uma exportação do Stripe, Shopify, do seu banco ou de uma planilha. A conexão com o Stripe e a digitação manual continuam gratuitas."
+            "value": "Importe de uma vez as vendas e despesas de uma exportação do Stripe, Shopify, do seu banco ou de uma planilha. A digitação manual continua gratuita."
           }
         }
       }
@@ -121445,6 +121492,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "A semana vai aparecer aqui."
+          }
+        }
+      }
+    },
+    "La synchronisation Stripe est dans Premium. Les ventes déjà importées restent.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Stripe-Synchronisierung ist in Premium. Bereits importierte Verkäufe bleiben erhalten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripe syncing is in Premium. Sales already imported stay."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sincronización con Stripe está en Premium. Las ventas ya importadas se conservan."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La synchronisation Stripe est dans Premium. Les ventes déjà importées restent."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sincronizzazione con Stripe è in Premium. Le vendite già importate restano."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripeとの同期はPremiumの機能です。読み込み済みの売上はそのまま残ります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A sincronização com o Stripe está no Premium. As vendas já importadas continuam salvas."
           }
         }
       }
@@ -220850,6 +220944,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suas vendas em 30 dias, a meta e o lucro."
+          }
+        }
+      }
+    },
+    "Tes ventes, remboursements et frais Stripe arrivent seuls, en lecture seule. Les ventes déjà importées restent, et la saisie à la main reste gratuite.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Stripe-Verkäufe, Erstattungen und Gebühren kommen von selbst, nur lesend. Bereits importierte Verkäufe bleiben erhalten, und die Eingabe von Hand bleibt kostenlos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your Stripe sales, refunds and fees come in by themselves, read-only. Sales already imported stay, and typing by hand stays free."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus ventas, reembolsos y comisiones de Stripe llegan solos, en solo lectura. Las ventas ya importadas se conservan, y la entrada manual sigue siendo gratuita."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes ventes, remboursements et frais Stripe arrivent seuls, en lecture seule. Les ventes déjà importées restent, et la saisie à la main reste gratuite."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le tue vendite, i rimborsi e le commissioni di Stripe arrivano da soli, in sola lettura. Le vendite già importate restano, e l'inserimento manuale resta gratuito."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stripeの売上・返金・手数料が自動で届きます（読み取り専用）。読み込み済みの売上はそのまま残り、手入力は引き続き無料です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas vendas, reembolsos e taxas do Stripe chegam sozinhos, somente leitura. As vendas já importadas continuam salvas, e a digitação manual continua gratuita."
           }
         }
       }

@@ -36,7 +36,15 @@ struct BusinessSourcesCard: View {
                                 .fixedSize(horizontal: false, vertical: true)
                                 .accessibilityIdentifier("stripe-error")
                         }
-                        if let codes = stripe.unconvertedCurrencies, !codes.isEmpty {
+                        if !model.isPremium {
+                            // Premium ended: the sales already read stay, syncing waits for Premium; disconnecting
+                            // (the key leaves the iPhone) is always possible.
+                            Text(tr("La synchronisation Stripe est dans Premium. Les ventes déjà importées restent."))
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .accessibilityIdentifier("stripe-premium-note")
+                        } else if let codes = stripe.unconvertedCurrencies, !codes.isEmpty {
                             Button {
                                 Task {
                                     isSyncing = true
@@ -57,6 +65,7 @@ struct BusinessSourcesCard: View {
                         }
                         HStack(spacing: 10) {
                             Button {
+                                guard model.isPremium else { paywall = .stripeConnection; return }
                                 Task {
                                     isSyncing = true
                                     await StripeSync.sync(model: model)
@@ -76,17 +85,21 @@ struct BusinessSourcesCard: View {
                     }
                 } else {
                     Button {
-                        connecting = true
+                        // Connecting Stripe is Premium (decided on 2026-11-16).
+                        if model.isPremium { connecting = true } else { paywall = .stripeConnection }
                     } label: {
                         MiniRow(symbol: "creditcard.and.123", colorHex: "635BFF", title: tr("Connecter Stripe"),
                                 detail: tr("Ventes, remboursements et frais, en lecture seule"))
+                            .overlay(alignment: .topTrailing) {
+                                if !model.isPremium { PremiumBadge(compact: true).padding(.top, 6) }
+                            }
                     }
                     .buttonStyle(.pressable)
                     .accessibilityIdentifier("stripe-connect")
                 }
                 MiniDivider()
                 Button {
-                    // Importing a file is Premium (decided on 2026-11-05); Stripe and typing by hand stay free.
+                    // Importing a file is Premium (decided on 2026-11-05), as Stripe (2026-11-16); typing by hand stays free.
                     if model.isPremium { importing = true } else { paywall = .businessImport }
                 } label: {
                     MiniRow(symbol: "doc.badge.arrow.up", colorHex: accentHex, title: tr("Importer un fichier CSV"),
@@ -112,7 +125,7 @@ struct BusinessSourcesCard: View {
             }
             MiniFootnote(text: tr("Les données vont directement de ton iPhone à Stripe, sans passer par Ardane. Une vente déjà importée n'est jamais ajoutée deux fois."))
         }
-        .task { await StripeSync.syncIfDue(model: model) }
+        .task { if model.isPremium { await StripeSync.syncIfDue(model: model) } }
         .sheet(isPresented: $connecting) { StripeConnectSheet() }
         .sheet(item: $preview, onDismiss: sayWhatWasImported) { BusinessImportSheet(preview: $0) }
         .sheet(item: $paywall) { PaywallView(context: $0) }
@@ -227,7 +240,17 @@ extension PaywallContext {
         PaywallContext(
             symbol: "doc.badge.arrow.up",
             title: tr("Importer un fichier, avec Premium"),
-            detail: tr("Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La connexion Stripe et la saisie à la main restent gratuites."),
+            detail: tr("Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La saisie à la main reste gratuite."),
+            perk: .smart
+        )
+    }
+
+    /// Connecting Stripe and syncing its sales (Business).
+    static var stripeConnection: PaywallContext {
+        PaywallContext(
+            symbol: "creditcard.and.123",
+            title: tr("Connecter Stripe, avec Premium"),
+            detail: tr("Tes ventes, remboursements et frais Stripe arrivent seuls, en lecture seule. Les ventes déjà importées restent, et la saisie à la main reste gratuite."),
             perk: .smart
         )
     }

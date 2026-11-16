@@ -1,6 +1,6 @@
 # Fiche App Store d'Ardane (App Store Connect › Distribution › version 1.0)
 
-Rédigée le 2026-11-07 (chantier 12.A). Chaque texte est vérifié contre le code : 12 espaces de `Shared/Model/KindCatalog.swift`, limites gratuites de `App/Core/AppModel.swift` (3 widgets, 5 habitudes) et `Shared/Domains/ScanQuota.swift` (10 analyses de plat), produits vendus (mensuel et annuel avec essai de 7 jours ; pas d'achat à vie au lancement, décision du 2026-11-08, même si `Config/Ardane.storekit` le garde pour les tests). À mettre à jour si l'un d'eux change.
+Rédigée le 2026-11-07 (chantier 12.A). Chaque texte est vérifié contre le code : 12 espaces de `Shared/Model/KindCatalog.swift`, limites gratuites de `App/Core/AppModel.swift` (3 widgets, 3 habitudes depuis le 2026-11-16) et `Shared/Domains/ScanQuota.swift` (10 analyses de plat), produits vendus (mensuel et annuel avec essai de 7 jours ; pas d'achat à vie au lancement, décision du 2026-11-08, même si `Config/Ardane.storekit` le garde pour les tests). À mettre à jour si l'un d'eux change.
 
 ## Français
 
@@ -40,7 +40,7 @@ TES DONNÉES RESTENT À TOI
 Pas de compte, pas de publicité, pas de suivi. Ce que tu notes est enregistré sur ton iPhone.
 
 ARDANE PREMIUM
-La version gratuite comprend 3 widgets enregistrés, 5 habitudes et 10 analyses de plat en photo. Premium débloque tous les widgets et tous les styles, les packs, les habitudes sans limite, l'import d'horaire, les statistiques détaillées et les analyses de plat illimitées.
+La version gratuite comprend 3 widgets enregistrés, 3 habitudes et 10 analyses de plat en photo. Premium débloque tous les widgets et tous les styles, les packs, les habitudes sans limite, l'import d'horaire, la connexion Stripe, les statistiques détaillées et les analyses de plat illimitées.
 
 Premium est offert en abonnement mensuel ou annuel, avec un essai gratuit de 7 jours. Le paiement est débité de ton compte Apple. L'abonnement se renouvelle automatiquement, sauf s'il est annulé au moins 24 heures avant la fin de la période en cours. Gère ou annule ton abonnement dans les réglages de ton compte App Store.
 
@@ -98,7 +98,7 @@ YOUR DATA STAYS YOURS
 No account, no ads, no tracking. What you enter is stored on your iPhone.
 
 ARDANE PREMIUM
-The free version includes 3 saved widgets, 5 habits and 10 dish photo analyses. Premium unlocks every widget and style, the packs, unlimited habits, schedule import, detailed stats and unlimited dish analyses.
+The free version includes 3 saved widgets, 3 habits and 10 dish photo analyses. Premium unlocks every widget and style, the packs, unlimited habits, schedule import, the Stripe connection, detailed stats and unlimited dish analyses.
 
 Premium is available as a monthly or yearly subscription, with a 7-day free trial. Payment is charged to your Apple Account. The subscription renews automatically unless it is canceled at least 24 hours before the end of the current period. Manage or cancel it in your App Store account settings.
 
@@ -134,7 +134,7 @@ HOW TO TEST
 
 IN-APP PURCHASES (Ardane Premium)
 - Monthly and yearly auto-renewable subscriptions, each with a one-week free trial (once per Apple Account).
-- Free version: 3 saved widgets, 5 habits and 10 dish photo analyses. Premium unlocks every widget, style and pack, unlimited habits, schedule import from a photo or PDF, detailed stats and unlimited dish analyses.
+- Free version: 3 saved widgets, 3 habits and 10 dish photo analyses. Premium unlocks every widget, style and pack, unlimited habits, schedule import from a photo or PDF, detailed stats and unlimited dish analyses.
 - The Premium screen opens from any locked item (for example a Premium style in the Studio, or a sixth habit). It shows the prices, "Restore purchases", and links to the Terms of Use and Privacy Policy.
 
 PERMISSIONS (optional, asked only when the feature is used)

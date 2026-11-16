@@ -179,7 +179,7 @@ MODULES = [
     {"file": "Autres-mini-apps", "title": "Autres mini-apps", "zone": "interface",
      "role": "Business, Voyage, Auto et Photos et citations, plus les espaces Placements, Marchés et Ma vie.",
      "features": [
-         "Business : ventes, résultats, récurrent, indicateurs ; « Ventes automatiques » : Stripe en lecture seule (clé restreinte dans le trousseau, `StripeSync`) et import CSV (`BusinessSources`). Audit : `docs/integrations-business.md`.",
+         "Business : ventes, résultats, récurrent, indicateurs ; « Ventes automatiques » : Stripe en lecture seule (clé restreinte dans le trousseau, `StripeSync`) et import CSV (`BusinessSources`), tous deux Premium (Stripe depuis le 2026-11-16 : un Stripe déjà connecté garde ses ventes, sa synchronisation attend Premium). Audit : `docs/integrations-business.md`.",
          "Photos et citations : taille d'abord, puis 1 à 12 photos (sélecteur système, mises en page 1 à 4, recadrage) ou une citation (typographie, couleurs) ; widgets `photos` et `quote`.",
          "Voyage : programme, budget en devise (taux Frankfurter), liste.",
          "Auto : pleins, kilométrage, entretien, échéances, coûts.",

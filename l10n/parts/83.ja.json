@@ -1,0 +1,6 @@
+{
+ "La synchronisation Stripe est dans Premium. Les ventes déjà importées restent.": "Stripeとの同期はPremiumの機能です。読み込み済みの売上はそのまま残ります。",
+ "Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La saisie à la main reste gratuite.": "Stripe、Shopify、銀行、表計算のエクスポートから売上と経費をまとめて読み込めます。手入力は引き続き無料です。",
+ "Connecter Stripe, avec Premium": "PremiumでStripeに接続",
+ "Tes ventes, remboursements et frais Stripe arrivent seuls, en lecture seule. Les ventes déjà importées restent, et la saisie à la main reste gratuite.": "Stripeの売上・返金・手数料が自動で届きます（読み取り専用）。読み込み済みの売上はそのまま残り、手入力は引き続き無料です。"
+}

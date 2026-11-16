@@ -72,8 +72,9 @@ Tableau relevé dans le code le 2026-11-16 (commit `84590b6`), chiffres comptés
 | Fitness : bibliothèque d'exercices | | 163 exercices : démonstration, technique, alternatives, tes performances |
 | Fitness : progression | | volume semaine par semaine, évolution des charges, records |
 | Planning : tâches, cours, événements | à la main | à la main, ou import de l'horaire depuis une photo ou un PDF |
-| Planning : habitudes | 5 | sans limite |
+| Planning : habitudes | 3 (depuis le 2026-11-16 ; qui en avait plus les garde, seul l'ajout est bloqué) | sans limite |
 | Planning : régularité des habitudes | | taux de réussite sur 30 et 90 jours, plus longue série |
 | Finances | le mois en cours | les mois passés, l'évolution sur 6 mois, les moyennes, la comparaison avec le mois dernier |
-| Mon entreprise : ajout des ventes | à la main, connexion Stripe | en plus : import d'un fichier CSV (Stripe, Shopify, banque, tableur) |
+| Mon entreprise : ajout des ventes | à la main | en plus : connexion Stripe (depuis le 2026-11-16) et import d'un fichier CSV (Stripe, Shopify, banque, tableur) |
+| Mon entreprise : Stripe déjà connecté, Premium arrêté | ventes déjà importées gardées, synchronisation en pause, « Déconnecter » toujours possible | synchronisation automatique |
 | Mon entreprise : analyse | | mois par mois sur 6 mois, avec la marge |

@@ -10,7 +10,7 @@ import WidgetKit
 final class AppModel {
     /// Widgets the free plan keeps. Photo and quote widgets don't count: they are unlimited.
     static let freeDesignLimit = 3
-    static let freeHabitLimit = 5
+    static let freeHabitLimit = 3
 
     private(set) var designs: [WidgetDesign] = []
     private(set) var content = ContentState()
