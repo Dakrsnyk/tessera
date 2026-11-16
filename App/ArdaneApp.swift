@@ -64,6 +64,8 @@ struct ArdaneApp: App {
                         // replace the person's data.
                         model.reloadFromDisk()
                         model.countOpen()
+                        // Mon Quotidien's steps: read again on each return (the card's `.task` only runs once).
+                        Task { await StepCounter.shared.refresh() }
                         #if DEBUG
                         if !ScreenshotMode.isActive { ReviewPrompt.recordOpen() }
                         #else

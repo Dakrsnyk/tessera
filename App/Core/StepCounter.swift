@@ -10,6 +10,8 @@ final class StepCounter {
 
     private let pedometer = CMPedometer()
     private(set) var stepsToday: Int?
+    /// The day `stepsToday` was read for: a failed read keeps it that day, never into the next.
+    private var readDay: Date?
 
     /// A day of activity from the motion sensor.
     struct Day: Identifiable, Hashable {
@@ -57,7 +59,12 @@ final class StepCounter {
                 continuation.resume(returning: data?.numberOfSteps.intValue)
             }
         }
-        stepsToday = steps
+        if let steps {
+            stepsToday = steps
+            readDay = start
+        } else if readDay != start {
+            stepsToday = nil
+        }
         revision += 1
     }
 

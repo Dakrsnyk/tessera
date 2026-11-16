@@ -473,7 +473,9 @@ enum DailyBrief {
                 return Workout(name: tr("Repos"), exercises: [], totalSets: 0, stage: .rest(nextName: routine.name, nextDay: when))
             }
         }
-        return nil
+        // Routines with no day planned: a rest day, as the Fitness mini-app reads them (not an empty
+        // « Crée ton programme » card while a programme exists).
+        return Workout(name: tr("Repos"), exercises: [], totalSets: 0, stage: .rest(nextName: nil, nextDay: nil))
     }
 
     // MARK: Planning

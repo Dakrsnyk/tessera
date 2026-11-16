@@ -170,8 +170,12 @@ struct Habit: Codable, Identifiable, Hashable {
             completedDays.remove(at: index)
         } else {
             completedDays.append(key)
-            // Keep the log bounded: a year of history is enough for streaks.
-            if completedDays.count > 400 { completedDays.removeFirst(completedDays.count - 400) }
+            // Keep the log bounded: a year of history is enough for streaks. The oldest days go (the keys
+            // « yyyy-MM-dd » sort as dates), never a recent one checked late.
+            if completedDays.count > 400 {
+                completedDays.sort()
+                completedDays.removeFirst(completedDays.count - 400)
+            }
         }
     }
 

@@ -282,7 +282,14 @@ struct QuickExpenseIntent: AppIntent {
         let id = expenseID
         SharedStore.shared.update(BudgetState.self) { state in
             guard let quick = state.quickExpenses.first(where: { $0.id.uuidString == id }) else { return }
-            state.add(Expense(amount: quick.amount, categoryID: quick.categoryID, note: quick.name, date: Date()))
+            let now = Date()
+            // A double tap within 2 seconds is one expense, as for the quick food (`NutritionState.quickAddWindow`).
+            let repeated = state.expenses.contains { expense in
+                expense.note == quick.name && expense.amount == quick.amount && expense.categoryID == quick.categoryID
+                    && abs(now.timeIntervalSince(expense.date)) < NutritionState.quickAddWindow
+            }
+            guard !repeated else { return }
+            state.add(Expense(amount: quick.amount, categoryID: quick.categoryID, note: quick.name, date: now))
         }
         refreshWidgets()
         return .result()

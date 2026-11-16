@@ -5547,53 +5547,6 @@
         }
       }
     },
-    "%@ kg soulevés": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg gehoben"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg lifted"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg levantados"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg soulevés"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg sollevati"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg挙上"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ kg levantados"
-          }
-        }
-      }
-    },
     "%@ km": {
       "extractionState": "manual",
       "localizations": {
@@ -6953,6 +6906,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ de estudo"
+          }
+        }
+      }
+    },
+    "%@ soulevés": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ gehoben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ lifted"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ levantados"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ soulevés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sollevati"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@を挙上"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ levantados"
           }
         }
       }
@@ -203746,6 +203746,53 @@
         }
       }
     },
+    "Son historique et sa série seront effacés.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verlauf und Serie werden gelöscht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Its history and its streak will be erased."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se borrarán su historial y su racha."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Son historique et sa série seront effacés."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La sua cronologia e la sua serie verranno cancellate."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴と連続記録は消去されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O histórico e a sequência serão apagados."
+          }
+        }
+      }
+    },
     "Sorties": {
       "extractionState": "manual",
       "localizations": {
@@ -208066,6 +208113,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Excluir hábito"
+          }
+        }
+      }
+    },
+    "Supprimer l'habitude ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gewohnheit löschen?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this habit?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar el hábito?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer l'habitude ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminare l'abitudine?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "習慣を削除しますか？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir o hábito?"
           }
         }
       }

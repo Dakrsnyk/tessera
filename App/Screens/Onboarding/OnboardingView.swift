@@ -137,9 +137,11 @@ struct OnboardingView: View {
             // Not on the interests step (PDG, 2026-11-16): each interest picked adds its pages, so the bar kept
             // changing while the person chose. The steps themselves are unchanged.
             if current == .interests {
-                Spacer(minLength: 0)
+                Color.clear
                     .frame(height: 5)
                     .frame(maxWidth: .infinity)
+                    .accessibilityElement()
+                    .accessibilityLabel(Text(tr("Étape \(position + 1) sur \(personal.count)")))
             } else {
                 HStack(spacing: 5) {
                     ForEach(personal.indices, id: \.self) { item in

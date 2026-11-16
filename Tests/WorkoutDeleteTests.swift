@@ -113,4 +113,14 @@ final class WorkoutDeleteTests: XCTestCase {
         XCTAssertFalse(state.deleteSession(id: UUID()))
         XCTAssertEqual(state, before)
     }
+
+    /// Routines without any day planned: Mon Quotidien shows a rest day, as the Fitness mini-app reads them, not the
+    /// empty « Crée ton programme » card while a programme exists (audit of 2026-11-16).
+    func testRoutinesWithoutAPlannedDayAreARestDay() {
+        var state = makeState()
+        state.routines[0].weekdays = []
+        var input = DailyBrief.Input(now: thursday(10))
+        input.fitness = state
+        XCTAssertEqual(DailyBrief.workoutTile(input)?.stage, .rest(nextName: nil, nextDay: nil))
+    }
 }

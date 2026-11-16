@@ -183,6 +183,11 @@ struct ProfileView: View {
                     Button {
                         UIPasteboard.general.string = PremiumConfiguration.supportEmail
                         copiedEmail = true
+                        // « Copiée » for a moment, then the address again.
+                        Task { @MainActor in
+                            try? await Task.sleep(for: .seconds(2))
+                            copiedEmail = false
+                        }
                     } label: {
                         LabeledContent {
                             Text(copiedEmail ? tr("Copiée") : PremiumConfiguration.supportEmail)
@@ -409,11 +414,11 @@ struct ProfileView: View {
         if let birthday = model.life.birthday {
             DatePicker(tr("Anniversaire"), selection: Binding(
                 get: { birthday },
-                set: { value in model.update(\.life) { $0.birthday = value } }
+                set: { value in model.update(\.life) { $0.birthday = DateMath.startOfDay(value) } }
             ), in: ...Date(), displayedComponents: .date)
         } else {
             Button {
-                model.update(\.life) { $0.birthday = Calendar.current.date(byAdding: .year, value: -25, to: Date()) }
+                model.update(\.life) { $0.birthday = Holidays.make(2000, 1, 1) }
             } label: {
                 Label(tr("Ajouter mon anniversaire"), systemImage: "gift")
             }

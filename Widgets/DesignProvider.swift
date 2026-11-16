@@ -143,9 +143,11 @@ enum TimelinePlanner {
             let dates = (0..<60).compactMap { DateMath.calendar.date(byAdding: .minute, value: $0, to: start) }
             return Plan(dates: dates, policy: .atEnd)
         case .restTimer, .nextSet, .todaysWorkout, .fitnessDashboard:
+            // A frame at midnight too: if iOS puts the reload off, the new day's session shows, not yesterday's.
             var dates = [now]
             if let rest = payload.domains.fitness.active?.restEndsAt, rest > now { dates.append(rest) }
-            return Plan(dates: dates, policy: .after(min(halfHour, midnight)))
+            if !dates.contains(midnight) { dates.append(midnight) }
+            return Plan(dates: dates.sorted(), policy: .after(min(halfHour, midnight)))
         case .timetable:
             // One frame at each start and end of an event (and at midnight), as the day's answer changes then.
             // iOS may run a frame a little late: the system doesn't promise the exact second.
@@ -163,7 +165,9 @@ enum TimelinePlanner {
         case .ageProgress, .birthday, .weekView, .holiday, .moonPhase, .semesterProgress, .tripCountdown, .tripProgress, .carDeadlines:
             return Plan(dates: [now, midnight], policy: .after(midnight.addingTimeInterval(60)))
         default:
-            return Plan(dates: [now, midnight].filter { $0 < halfHour || $0 == now }, policy: .after(min(halfHour, midnight.addingTimeInterval(60))))
+            // Always a frame at midnight (2026-11-16 audit): the figures of « today » (calories, spending) start again
+            // from the new day even when iOS puts the half-hour reload off, as it often does at night.
+            return Plan(dates: [now, midnight], policy: .after(min(halfHour, midnight.addingTimeInterval(60))))
         }
     }
 }

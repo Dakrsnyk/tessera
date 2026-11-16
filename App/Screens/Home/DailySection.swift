@@ -836,7 +836,7 @@ private struct WorkoutDayTile: View {
                 Text(exercise)
                     .font(.headline)
                     .lineLimit(1)
-                Text(tr("Série \(set)/\(sets) · \(reps) × \(weight > 0 ? tr("\(ProfileNumberField.format(weight)) kg") : tr("poids du corps"))"))
+                Text(tr("Série \(set)/\(sets) · \(reps) × \(weight > 0 ? Units.loadText(kilograms: weight, in: model.settings.unitSystem) : tr("poids du corps"))"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 // The rest: counting down with a pause button, or paused with a button to start again.
@@ -861,7 +861,7 @@ private struct WorkoutDayTile: View {
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(style.cristal.okColor)
                 if volume > 0 {
-                    Text(tr("\(TF.int(volume)) kg soulevés"))
+                    Text(tr("\(Units.loadText(kilograms: volume, in: model.settings.unitSystem, digits: 0)) soulevés"))
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

@@ -161,6 +161,8 @@ struct HabitEditor: View {
     @State private var notificationsDenied = false
     @State private var showsNotificationExplainer = false
     @State private var paywall: PaywallContext?
+    /// « Supprimer l'habitude » asks first: its history and its streak go with it.
+    @State private var confirmsDelete = false
     let isNew: Bool
 
     static let symbols = [
@@ -227,9 +229,7 @@ struct HabitEditor: View {
                 if !isNew {
                     Section {
                         Button(tr("Supprimer l'habitude"), role: .destructive) {
-                            NotificationScheduler.cancelHabitReminder(habit.id)
-                            model.updateContent { content in content.habits.removeAll { $0.id == habit.id } }
-                            dismiss()
+                            confirmsDelete = true
                         }
                     }
                 }
@@ -237,6 +237,15 @@ struct HabitEditor: View {
             .styledList()
             .navigationTitle(isNew ? tr("Nouvelle habitude") : tr("Habitude"))
             .navigationBarTitleDisplayMode(.inline)
+            .confirmationDialog(tr("Supprimer l'habitude ?"), isPresented: $confirmsDelete, titleVisibility: .visible) {
+                Button(tr("Supprimer"), role: .destructive) {
+                    NotificationScheduler.cancelHabitReminder(habit.id)
+                    model.updateContent { content in content.habits.removeAll { $0.id == habit.id } }
+                    dismiss()
+                }
+            } message: {
+                Text(tr("Son historique et sa série seront effacés."))
+            }
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     if isNew {
