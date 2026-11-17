@@ -90,7 +90,8 @@ struct FinancesTransactionsPage: View {
         // otherwise from zero on the 1st, as the chart's caption says.
         let lines = BudgetMath.statement(state, from: interval.start, now: now).filter { interval.holds($0.date) }
         let shown = lines.filter { keeps($0, state: state) }
-        let toReview = ApplePayStatus.reviewCount(state)
+        // What is still to check in the month shown (the list shows that month only).
+        let toReview = state.expenses.filter { $0.source == .applePay && $0.needsReview == true && interval.holds($0.date) }.count
         MiniAppScroll {
             BalanceChartCard(state: state, currency: currency, isPremium: model.isPremium) { sheet = .opening }
             VStack(alignment: .leading, spacing: 10) {
@@ -224,13 +225,13 @@ struct FinancesTransactionsPage: View {
                         .overlay(Capsule().strokeBorder(palette.ruleColor, lineWidth: 1))
                 }
             }
-            .contentShape(Capsule())
             .padding(.vertical, 4)
+            .contentShape(Capsule())
     }
 
     /// What is still to check: the payments Apple Pay sent whose category was guessed.
     private func reviewBanner(state: BudgetState, count: Int) -> some View {
-        let first = state.expenses.filter { $0.source == .applePay && $0.needsReview == true }.max { $0.date < $1.date }
+        let first = state.expenses.filter { $0.source == .applePay && $0.needsReview == true && BudgetMath.monthInterval(month).holds($0.date) }.max { $0.date < $1.date }
         return HStack(spacing: 12) {
             Image(systemName: "wave.3.right.circle")
                 .font(.system(size: 15, weight: .semibold))

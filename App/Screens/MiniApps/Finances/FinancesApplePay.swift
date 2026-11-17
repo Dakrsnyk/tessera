@@ -25,8 +25,8 @@ enum ApplePayStatus {
     }
 
     /// The line of the row in Finances.
-    static func subtitle(_ state: BudgetState) -> String {
-        let automatic = WalletImport.isEnabled && WalletImport.isSupported
+    static func subtitle(_ state: BudgetState, isPremium: Bool = false) -> String {
+        let automatic = isPremium && WalletImport.isEnabled && WalletImport.isSupported
         guard let last = lastDate(state) else { return automatic ? tr("Automatique · aucun achat pour l'instant") : tr("À configurer") }
         return automatic ? tr("Automatique · dernière dépense \(since(last))") : tr("Active · dernière dépense \(since(last))")
     }
@@ -85,7 +85,9 @@ struct ApplePayGuideView: View {
                     }
                     howItWorks
                     rules(state)
-                    MiniFootnote(text: tr("Ardane ne reçoit que le montant, le commerçant et la carte que Raccourcis lui passe. Une dépense reçue se supprime comme les autres."))
+                    MiniFootnote(text: WalletImport.isSupported && WalletImport.isEnabled && model.isPremium
+                                 ? tr("Ardane ne garde que le montant, le commerçant et la date de chaque achat. Une dépense reçue se supprime comme les autres et ne revient pas.")
+                                 : tr("Ardane ne reçoit que le montant, le commerçant et la carte que Raccourcis lui passe. Une dépense reçue se supprime comme les autres."))
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 8)

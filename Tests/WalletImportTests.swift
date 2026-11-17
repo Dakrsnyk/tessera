@@ -37,6 +37,26 @@ final class WalletImportTests: XCTestCase {
         XCTAssertEqual(state.expenses.count, 2)
     }
 
+    func testTwoWalletPurchasesOfTheSameAmountAreBothKept() {
+        var state = BudgetState()
+        let first = UUID(), second = UUID()
+        state.addWalletPurchase(id: first, amount: 4.5, merchant: "Café", date: date(12, 8, 0))
+        // Two coffees five minutes apart: only a purchase from the Shortcuts automation counts as the same payment.
+        guard case .added = state.addWalletPurchase(id: second, amount: 4.5, merchant: "Café", date: date(12, 8, 5), importedIDs: [first]) else {
+            return XCTFail("The second coffee is another purchase")
+        }
+        XCTAssertEqual(state.expenses.count, 2)
+    }
+
+    func testADeletedPurchaseDoesNotComeBack() {
+        var state = BudgetState()
+        let id = UUID()
+        state.addWalletPurchase(id: id, amount: 30, merchant: "Shop", date: date(7))
+        state.expenses.removeAll { $0.id == id }
+        XCTAssertEqual(state.addWalletPurchase(id: id, amount: 30, merchant: "Shop", date: date(7), importedIDs: [id]), .duplicate)
+        XCTAssertTrue(state.expenses.isEmpty)
+    }
+
     func testARefundOrANullAmountAddsNothing() {
         var state = BudgetState()
         if case .ignored = state.addWalletPurchase(id: UUID(), amount: -20, merchant: "Shop", date: date(5)) {} else { XCTFail("A refund") }

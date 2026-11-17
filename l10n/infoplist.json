@@ -54,12 +54,12 @@
   "ja": "Ardane"
  },
  "NSFinancialDataUsageDescription": {
-  "fr": "Avec Premium, Ardane lit les achats de tes cartes de Cartes pour les ajouter seul à tes dépenses. Tout reste sur ton iPhone.",
-  "en": "With Premium, Ardane reads the purchases made with your Wallet cards and adds them to your expenses for you. Everything stays on your iPhone.",
-  "es": "Con Premium, Ardane lee las compras de tus tarjetas de Cartera y las añade solo a tus gastos. Todo se queda en tu iPhone.",
-  "de": "Mit Premium liest Ardane die Einkäufe deiner Karten in Wallet und fügt sie selbst deinen Ausgaben hinzu. Alles bleibt auf deinem iPhone.",
-  "it": "Con Premium, Ardane legge gli acquisti delle tue carte in Wallet e li aggiunge da solo alle tue spese. Tutto resta sul tuo iPhone.",
-  "pt-BR": "Com o Premium, o Ardane lê as compras dos seus cartões da Carteira e as adiciona sozinho às suas despesas. Tudo fica no seu iPhone.",
-  "ja": "Premiumでは、Ardaneがウォレットのカードでの購入を読み取り、自動で支出に追加します。データはすべてiPhoneに残ります。"
+  "fr": "Avec Premium, Ardane lit les opérations de tes cartes dans l'app Cartes et ajoute tes achats (montant, commerçant, date) à tes dépenses. Ardane n'envoie rien hors de ton iPhone.",
+  "en": "With Premium, Ardane reads the transactions of your cards in the Wallet app and adds your purchases (amount, merchant, date) to your expenses. Ardane sends nothing off your iPhone.",
+  "es": "Con Premium, Ardane lee los movimientos de tus tarjetas en la app Cartera y añade tus compras (importe, comercio, fecha) a tus gastos. Ardane no envía nada fuera de tu iPhone.",
+  "de": "Mit Premium liest Ardane die Umsätze deiner Karten in der Wallet-App und fügt deine Einkäufe (Betrag, Händler, Datum) deinen Ausgaben hinzu. Ardane sendet nichts von deinem iPhone weg.",
+  "it": "Con Premium, Ardane legge le operazioni delle tue carte nell'app Wallet e aggiunge i tuoi acquisti (importo, esercente, data) alle tue spese. Ardane non invia nulla fuori dal tuo iPhone.",
+  "pt-BR": "Com o Premium, o Ardane lê as transações dos seus cartões no app Carteira e adiciona suas compras (valor, comerciante, data) aos seus gastos. O Ardane não envia nada para fora do seu iPhone.",
+  "ja": "Premiumでは、Ardaneがウォレットアプリのカードの取引を読み取り、購入（金額・店舗・日付）を支出に追加します。ArdaneはiPhoneの外に何も送信しません。"
  }
 }

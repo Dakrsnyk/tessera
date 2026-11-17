@@ -29470,6 +29470,53 @@
         }
       }
     },
+    "Ardane ne garde que le montant, le commerçant et la date de chaque achat. Une dépense reçue se supprime comme les autres et ne revient pas.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane behält nur Betrag, Händler und Datum jedes Einkaufs. Eine erhaltene Ausgabe wird wie jede andere gelöscht und kommt nicht zurück."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane keeps only the amount, merchant and date of each purchase. An expense received is deleted like any other and doesn't come back."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane solo guarda el importe, el comercio y la fecha de cada compra. Un gasto recibido se elimina como los demás y no vuelve."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane ne garde que le montant, le commerçant et la date de chaque achat. Une dépense reçue se supprime comme les autres et ne revient pas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane conserva solo importo, esercente e data di ogni acquisto. Una spesa ricevuta si elimina come le altre e non ritorna."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardaneが保存するのは、各購入の金額・店舗・日付だけです。受け取った支出は他と同じように削除でき、再び現れることはありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Ardane guarda só o valor, o comerciante e a data de cada compra. Um gasto recebido é apagado como os outros e não volta."
+          }
+        }
+      }
+    },
     "Ardane ne propose pas de calories pour cet objectif.": {
       "extractionState": "manual",
       "localizations": {

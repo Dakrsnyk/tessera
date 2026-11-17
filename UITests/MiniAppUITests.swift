@@ -309,7 +309,7 @@ final class MiniAppUITests: XCTestCase {
 
         // « Ajouter »: one sheet for an expense or an income (refonte du 2026-11-16).
         tap(app.buttons["finances-add"], "Ajouter")
-        XCTAssertTrue(app.otherElements["add-sheet"].waitForExistence(timeout: 8) || app.buttons["add-save"].waitForExistence(timeout: 2), "Feuille Ajouter absente")
+        XCTAssertTrue(app.buttons["add-save"].waitForExistence(timeout: 8), "Feuille Ajouter absente")
         snapshot("finances-add")
         app.buttons["Annuler"].firstMatch.tap()
         XCTAssertTrue(hero.waitForExistence(timeout: 8))

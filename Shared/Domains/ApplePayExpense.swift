@@ -364,16 +364,19 @@ extension BudgetState {
     /// identifier Wallet gives it: reading the same purchase again adds nothing, even after the person changed the
     /// expense. A purchase the Shortcuts automation already sent (same amount, within `walletShortcutWindow`) is not
     /// added twice. Same rules as `addApplePay` otherwise: nothing for a null or unreadable amount, the category
-    /// learned for the shop or guessed from its name (then « à vérifier »).
+    /// learned for the shop or guessed from its name (then « à vérifier »). `importedIDs`: every purchase already read
+    /// in Wallet (kept by the app), so that one the person deleted doesn't come back, and so that two purchases of the
+    /// same amount a few minutes apart are both kept (only the Shortcuts ones count as the same payment).
     @discardableResult
-    mutating func addWalletPurchase(id: UUID, amount: Double, merchant: String, date: Date) -> ApplePayResult {
+    mutating func addWalletPurchase(id: UUID, amount: Double, merchant: String, date: Date, importedIDs: Set<UUID> = []) -> ApplePayResult {
         guard amount.isFinite else { return .ignored(ApplePayExpense.Reason.unreadable) }
         guard amount >= 0 else { return .ignored(ApplePayExpense.Reason.refund) }
         let cents = (amount * 100).rounded() / 100
         guard cents > 0 else { return .ignored(ApplePayExpense.Reason.zero) }
-        if expenses.contains(where: { $0.id == id }) { return .duplicate }
+        if importedIDs.contains(id) || expenses.contains(where: { $0.id == id }) { return .duplicate }
         let fromShortcut = expenses.contains { other in
             other.source == .applePay
+                && !importedIDs.contains(other.id)
                 && abs(other.date.timeIntervalSince(date)) <= ApplePayExpense.walletShortcutWindow
                 && abs(other.amount - cents) < 0.005
         }

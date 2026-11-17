@@ -24,7 +24,7 @@
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>NSFinancialDataUsageDescription</key>
-	<string>Avec Premium, Ardane lit les achats de tes cartes de Cartes pour les ajouter seul à tes dépenses. Tout reste sur ton iPhone.</string>
+	<string>Avec Premium, Ardane lit les opérations de tes cartes dans l'app Cartes et ajoute tes achats (montant, commerçant, date) à tes dépenses. Ardane n'envoie rien hors de ton iPhone.</string>
 	<key>ArdaneFinanceKit</key>
 	<false/>
 </dict>

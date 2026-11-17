@@ -80,5 +80,6 @@
  "À vérifier : c'est bien « %@ » ? Ardane s'en souviendra pour ce commerçant.": "Por revisar: ¿es «%@»? Ardane lo recordará para este comercio.",
  "À vérifier : choisis sa catégorie avec « Modifier ».": "Por revisar: elige su categoría con «Editar».",
  "Échéancier": "Calendario de pagos",
- "Épargne visée atteinte": "Objetivo de ahorro alcanzado"
+ "Épargne visée atteinte": "Objetivo de ahorro alcanzado",
+ "Ardane ne garde que le montant, le commerçant et la date de chaque achat. Une dépense reçue se supprime comme les autres et ne revient pas.": "Ardane solo guarda el importe, el comercio y la fecha de cada compra. Un gasto recibido se elimina como los demás y no vuelve."
 }

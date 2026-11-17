@@ -109,7 +109,6 @@ struct FinanceAddSheet: View {
                 amountFocused = true
             }
         }
-        .accessibilityIdentifier("add-sheet")
     }
 
     // MARK: Pieces
@@ -382,7 +381,6 @@ struct FinanceOperationSheet: View {
         .onChange(of: isSaved) { wasSaved, saved in
             if wasSaved && !saved { dismiss() }
         }
-        .accessibilityIdentifier("operation-sheet")
     }
 
     // MARK: Expense

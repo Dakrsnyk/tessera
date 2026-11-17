@@ -80,5 +80,6 @@
  "À vérifier : c'est bien « %@ » ? Ardane s'en souviendra pour ce commerçant.": "Prüfen: Ist es wirklich „%@“? Ardane merkt es sich für diesen Händler.",
  "À vérifier : choisis sa catégorie avec « Modifier ».": "Prüfen: Wähle die Kategorie über „Bearbeiten“.",
  "Échéancier": "Fälligkeiten",
- "Épargne visée atteinte": "Sparziel erreicht"
+ "Épargne visée atteinte": "Sparziel erreicht",
+ "Ardane ne garde que le montant, le commerçant et la date de chaque achat. Une dépense reçue se supprime comme les autres et ne revient pas.": "Ardane behält nur Betrag, Händler und Datum jedes Einkaufs. Eine erhaltene Ausgabe wird wie jede andere gelöscht und kommt nicht zurück."
 }

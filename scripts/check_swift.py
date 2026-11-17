@@ -7,6 +7,7 @@
 4. Release safety: the DEBUG Premium unlock is only referenced inside `#if DEBUG`.
 5. Privacy manifest: every "required reason" API the code uses is declared in Shared/PrivacyInfo.xcprivacy.
 6. App icons: every icon offered in « Icône de l'app » has its icon set and its preview in the asset catalog.
+7. FinanceKit: the switch ArdaneFinanceKit is on only with Apple's entitlement (otherwise the app would close).
 
 Usage: python3 scripts/check_swift.py  (exit code 1 when something is wrong)
 """
@@ -368,12 +369,23 @@ def check_button_label_tint():
                 problems.append(f"{rel}:{index + 1}: Button with .foregroundStyle(.primary/.secondary) and no buttonStyle: the text turns accent-colored (use Color.primary / Color.secondary)")
 
 
+def check_financekit():
+    """FinanceKit closes the app when it is called without Apple's authorization: the switch `ArdaneFinanceKit` of
+    Config/App-Info.plist may be true only when the entitlement com.apple.developer.financekit is in the app's
+    entitlements (see scripts/signing/README.md)."""
+    info = plistlib.load(open(os.path.join(ROOT, "Config", "App-Info.plist"), "rb"))
+    entitlements = plistlib.load(open(os.path.join(ROOT, "Config", "Ardane.entitlements"), "rb"))
+    if info.get("ArdaneFinanceKit") is True and "com.apple.developer.financekit" not in entitlements:
+        problems.append("Config/App-Info.plist: ArdaneFinanceKit is true without com.apple.developer.financekit in Config/Ardane.entitlements")
+
+
 checked = check_memberwise()
 kinds = check_kinds()
 check_release_safety()
 check_button_label_tint()
 check_internal_premium()
 check_privacy_manifest()
+check_financekit()
 icons = check_app_icons()
 if problems:
     print("\n".join(problems))

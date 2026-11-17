@@ -626,6 +626,7 @@
  "Ardane n'envoie que ce qui est utile : rien quand c'est déjà fait, jamais deux fois la même chose.": "Ardaneは必要なものだけ送ります。完了済みなら送らず、同じ内容を2回送ることもありません。",
  "Ardane n'utilise que ces accès, et chacun reste facultatif : sans lui, la fonction concernée affiche simplement un message.": "Ardaneが使うのはこれらのアクセスだけで、どれも任意です。許可しない場合、該当の機能にはメッセージが表示されるだけです。",
  "Ardane ne demande jamais ton mot de passe ni ta clé secrète. La clé restreinte reste dans le trousseau de ton iPhone, et ne sert qu'à lire tes ventes, remboursements et frais.": "Ardaneがパスワードやシークレットキーを求めることはありません。制限付きキーはiPhoneのキーチェーンに保存され、売上・返金・手数料の読み取りだけに使われます。",
+ "Ardane ne garde que le montant, le commerçant et la date de chaque achat. Une dépense reçue se supprime comme les autres et ne revient pas.": "Ardaneが保存するのは、各購入の金額・店舗・日付だけです。受け取った支出は他と同じように削除でき、再び現れることはありません。",
  "Ardane ne propose pas de calories pour cet objectif.": "Ardaneはこの目標のカロリーを提案しません。",
  "Ardane ne reçoit que le montant, le commerçant et la carte que Raccourcis lui passe. Une dépense reçue se supprime comme les autres.": "Ardaneが受け取るのは、ショートカットから渡される金額、店舗、カードだけです。受け取った支出は、ほかの支出と同じように削除できます。",
  "Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.": "Ardaneは銀行に接続しません。すべてあなたの記録から計算されます。これは目安であり、金融アドバイスではありません。",

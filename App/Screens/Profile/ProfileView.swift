@@ -139,7 +139,7 @@ struct ProfileView: View {
                 Section(tr("Tes données")) {
                     NavigationLink { TasksView() } label: { Label(tr("Tâches"), systemImage: "checklist") }
                     NavigationLink { HabitsView() } label: { Label(tr("Habitudes"), systemImage: "repeat") }
-                    NavigationLink { MoneyView() } label: { Label(tr("Revenus et dépenses"), systemImage: "dollarsign.circle") }
+                    NavigationLink { MoneyView() } label: { Label(tr("Revenus et dépenses fixes"), systemImage: "dollarsign.circle") }
                     NavigationLink { CalendarAccessView() } label: { Label(tr("Calendrier"), systemImage: "calendar") }
                     NavigationLink { PermissionsSettingsView() } label: { Label(tr("Autorisations"), systemImage: "hand.raised") }
                         .accessibilityIdentifier("settings-permissions")

@@ -715,6 +715,8 @@ final class AppModel {
         let photoScansUsed = nutrition.photoScansUsed
         // The Stripe key lives in the keychain, outside the shared files: it goes with the data.
         SecretStore.delete(StripeSync.keychainAccount)
+        // The automatic Apple Pay import (Wallet) is turned off and forgets what it read.
+        WalletImport.reset()
         for design in designs {
             if case let .photo(name) = design.background { ImageStore.delete(named: name) }
             for photo in design.options.photos { ImageStore.delete(named: photo.file) }

@@ -599,7 +599,7 @@ struct FinancesAppView: View {
                 MiniDivider()
                 Button { sheet = .applePay } label: {
                     FinancesRow(symbol: "wave.3.right.circle", colorHex: ApplePayStatus.hex, title: tr("Dépenses Apple Pay automatiques"),
-                                detail: ApplePayStatus.subtitle(state))
+                                detail: ApplePayStatus.subtitle(state, isPremium: model.isPremium))
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-applepay")
