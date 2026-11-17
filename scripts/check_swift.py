@@ -8,6 +8,8 @@
 5. Privacy manifest: every "required reason" API the code uses is declared in Shared/PrivacyInfo.xcprivacy.
 6. App icons: every icon offered in « Icône de l'app » has its icon set and its preview in the asset catalog.
 7. FinanceKit: the switch ArdaneFinanceKit is on only with Apple's entitlement (otherwise the app would close).
+8. Warning only: when every staged file is a .md file, the push will not start the CI (paths-ignore "**.md"),
+   whatever tag the commit message carries.
 
 Usage: python3 scripts/check_swift.py  (exit code 1 when something is wrong)
 """
@@ -379,6 +381,22 @@ def check_financekit():
         problems.append("Config/App-Info.plist: ArdaneFinanceKit is true without com.apple.developer.financekit in Config/Ardane.entitlements")
 
 
+def warn_markdown_only_commit():
+    """The workflow ignores pushes that change only .md files: a [daily] or [interne] commit made of notes alone
+    starts nothing (2026-11-17: the [daily] of Finances, eb599e0). Warning only, never a failure (in the CI nothing
+    is staged)."""
+    import subprocess
+    try:
+        staged = subprocess.run(["git", "diff", "--cached", "--name-only"], cwd=ROOT, capture_output=True,
+                                text=True, timeout=20).stdout.split()
+    except (OSError, subprocess.SubprocessError):
+        return
+    if staged and all(name.lower().endswith(".md") for name in staged):
+        print("WARNING: only .md files are staged: this commit will not start the CI (paths-ignore \"**.md\" in "
+              ".github/workflows/build.yml), whatever its tag. Add the non-.md files it is meant to test.")
+
+
+warn_markdown_only_commit()
 checked = check_memberwise()
 kinds = check_kinds()
 check_release_safety()
