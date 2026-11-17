@@ -26,10 +26,33 @@ struct WidgetCarousel<Menu: View>: View {
 
     static var stageHeight: CGFloat { 250 }
 
+    /// How big a widget is drawn on its page, and at which scale.
+    static func fitted(_ design: WidgetDesign, pageWidth: CGFloat) -> (size: CGSize, scale: CGFloat) {
+        let size = WidgetMetrics.size(design.displayFormat.family)
+        let scale = min(pageWidth / size.width, stageHeight * 0.9 / size.height)
+        return (CGSize(width: size.width * scale, height: size.height * scale), scale)
+    }
+
+    /// The widget in the middle (the first one until the carousel has turned).
+    private var centered: WidgetDesign? {
+        designs.first { $0.id == centeredID } ?? designs.first
+    }
+
     var body: some View {
         GeometryReader { geo in
             let pageWidth = min(geo.size.width * 0.6, 300)
             let margin = max(0, (geo.size.width - pageWidth) / 2)
+            // Where the widget in the middle is drawn: what the tutorial lights up on « Mes widgets ». A marker of
+            // its own, in the middle of the stage, so it is right whichever widget the carousel has turned to.
+            if let centered {
+                let fitted = Self.fitted(centered, pageWidth: pageWidth)
+                Color.clear
+                    .frame(width: fitted.size.width, height: fitted.size.height)
+                    .tutorialTarget(.myWidgets, radius: WidgetMetrics.cornerRadius * fitted.scale)
+                    .position(x: geo.size.width / 2, y: Self.stageHeight / 2)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+            }
             ScrollView(.horizontal, showsIndicators: false) {
                 // Pages overlap a little so the neighbors peek in on each side.
                 LazyHStack(spacing: -pageWidth * 0.08) {
@@ -58,8 +81,7 @@ struct WidgetCarousel<Menu: View>: View {
 
     private func page(_ design: WidgetDesign, width: CGFloat) -> some View {
         let family = design.displayFormat.family
-        let size = WidgetMetrics.size(family)
-        let scale = min(width / size.width, Self.stageHeight * 0.9 / size.height)
+        let fitted = Self.fitted(design, pageWidth: width)
         let isCentered = centeredID == design.id || (centeredID == nil && design.id == designs.first?.id)
         return Button {
             if isCentered {
@@ -69,7 +91,7 @@ struct WidgetCarousel<Menu: View>: View {
                 withAnimation(.spring(response: 0.45, dampingFraction: 0.85)) { centeredID = design.id }
             }
         } label: {
-            WidgetPreview(design: design, family: family, payload: payload(design), width: size.width * scale)
+            WidgetPreview(design: design, family: family, payload: payload(design), width: fitted.size.width)
                 .overlay(alignment: .topTrailing) {
                     if design.isFavorite {
                         Image(systemName: "heart.fill")

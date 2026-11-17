@@ -5,15 +5,16 @@ import SwiftUI
 /// through the app itself, tab by tab, lighting up what each step talks about. Every step can be
 /// skipped, and the tour can be left at any time.
 enum TutorialStep: String, CaseIterable, Identifiable {
-    // The order of the cases is the order of the tour. « info » keeps its old name for the slide about the
-    // information shared by Fitness and Nutrition (the screenshots open « tutorial-<name> »).
-    case welcome, daily, planning, studies, info, create, studio, store, mine, homeScreen, finish
+    // The order of the cases is the order of the tour: the path of a widget, from the app to the Home Screen
+    // (the day, Créer, the Studio, Mes widgets, the Home Screen), then the Store for the ready-made ones.
+    // The screenshots open « tutorial-<name> ».
+    case welcome, daily, create, studio, mine, homeScreen, store, finish
     var id: String { rawValue }
 
     /// The tab shown behind the step.
     var tab: Router.Tab {
         switch self {
-        case .welcome, .daily, .planning, .studies, .info, .finish: .home
+        case .welcome, .daily, .finish: .home
         case .create, .studio: .spaces
         case .store: .explore
         case .mine, .homeScreen: .mine
@@ -26,13 +27,11 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     var targets: [[TutorialTarget]] {
         switch self {
         case .daily: [[.daily], [.dailyHeader, .dailyNutrition, .dailyFitness], [.dailyHeader, .dailyNutrition], [.dailyHeader]]
-        case .planning: [[.dailyPlanning], [.dailyPlanningTop]]
-        case .info: [[.dailyNutrition, .dailyFitness], [.dailyFitness], [.dailyNutrition], [.info]]
         case .create: [[.createSpace]]
-        case .store: [[.storeHero]]
         case .mine: [[.myWidgets]]
+        case .store: [[.storeAisles]]
         case .finish: [[.profile]]
-        case .welcome, .studies, .studio, .homeScreen: []
+        case .welcome, .studio, .homeScreen: []
         }
     }
 
@@ -40,9 +39,6 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         switch self {
         case .welcome: "hand.wave.fill"
         case .daily: "sun.max.fill"
-        case .planning: "calendar"
-        case .studies: "graduationcap.fill"
-        case .info: "person.text.rectangle.fill"
         case .create: "plus.square.on.square"
         case .studio: "paintbrush.pointed.fill"
         case .store: "bag.fill"
@@ -58,8 +54,6 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         switch self {
         case .welcome, .finish: tr("Ardane")
         case .daily: name.isEmpty ? tr("Bonjour") : tr("Bonjour \(name)")
-        case .planning, .info: tr("Accueil")
-        case .studies: tr("Études")
         case .create: tr("Créer")
         case .studio: tr("Studio")
         case .store: tr("Store")
@@ -72,9 +66,6 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         switch self {
         case .welcome: tr("Bienvenue !")
         case .daily: tr("Mon Quotidien")
-        case .planning: tr("Ton planning")
-        case .studies: tr("Études")
-        case .info: tr("Un objectif pour deux")
         case .create: tr("Créer un widget")
         case .studio: tr("Le Studio")
         case .store: tr("Le Store")
@@ -87,21 +78,15 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     var message: String {
         switch self {
         case .welcome:
-            tr("Un petit tour d'Ardane : ta journée, tes mini-apps, tes widgets et le Studio. Passe une étape ou quitte le tutoriel quand tu veux.")
+            tr("Ardane en une minute : tu notes ta journée dans les mini-apps, et tes widgets l'affichent sur ton écran d'accueil. Passe une étape ou quitte le tutoriel quand tu veux.")
         case .daily:
-            tr("Nutrition, Fitness, Planning, Habitudes et Top 3 passent d'abord ; tes autres centres d'intérêt suivent, en plus petit. Un appui long sur une carte la déplace ou change sa taille.")
-        case .planning:
-            tr("Ta semaine d'un coup d'œil : ton planning hebdomadaire, tes rendez-vous, tes événements et tes horaires. Il est là pour tout le monde.")
-        case .studies:
-            tr("Une mini-app à part pour tes cours, tes examens et tes sessions de concentration. Avec Premium, le scanner d'horaires lit une photo ou un PDF de ton horaire : tu vérifies, et les cours s'ajoutent.")
-        case .info:
-            tr("Tu donnes ton objectif et tes informations une seule fois : Fitness et Nutrition les partagent. L'objectif de Fitness sert aussi à Nutrition pour tes calories.")
+            tr("Ta journée d'un coup d'œil. Touche une carte pour ouvrir sa mini-app ; un appui long la déplace ou change sa taille.")
         case .create:
             tr("Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.")
         case .studio:
             tr("Contenu, thème, style, couleurs, fond, bordure : l'aperçu change en direct, et les flèches annulent ou rétablissent. Essaie :")
         case .store:
-            tr("Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé.")
+            tr("Pas envie de partir de zéro ? Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé.")
         case .mine:
             tr("Tous tes widgets enregistrés : modifie-les dans le Studio, duplique-les, ajoute-les à ton écran ou réunis-en plusieurs en un seul.")
         case .homeScreen:
@@ -122,9 +107,11 @@ enum TutorialStep: String, CaseIterable, Identifiable {
 
 /// Parts of the app the tour lights up. Each reports where it is on screen (`tutorialTarget`).
 enum TutorialTarget: String {
-    case daily, miniApps, info, createSpace, storeHero, myWidgets, profile
-    /// Inside Mon Quotidien: its title row and the Nutrition, Fitness and Planning cards.
-    case dailyHeader, dailyNutrition, dailyFitness, dailyPlanning, dailyPlanningTop
+    /// Mon Quotidien whole, the first size of Créer, the aisles of the Store, the widget in the middle of Mes widgets
+    /// (or its empty state), the profile button.
+    case daily, createSpace, storeAisles, myWidgets, profile
+    /// Inside Mon Quotidien: its title row and the Nutrition and Fitness cards.
+    case dailyHeader, dailyNutrition, dailyFitness
 }
 
 /// Where each lit-up part is, in window coordinates. Shared by the tabs (each in its own navigation)

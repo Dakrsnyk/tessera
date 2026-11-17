@@ -28953,6 +28953,53 @@
         }
       }
     },
+    "Ardane en une minute : tu notes ta journée dans les mini-apps, et tes widgets l'affichent sur ton écran d'accueil. Passe une étape ou quitte le tutoriel quand tu veux.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane in einer Minute: Du trägst deinen Tag in den Mini-Apps ein, und deine Widgets zeigen ihn auf deinem Home-Bildschirm. Überspringe einen Schritt oder beende das Tutorial jederzeit."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane in one minute: you log your day in the mini-apps, and your widgets show it on your Home Screen. Skip a step or leave the tutorial anytime."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane en un minuto: anotas tu día en las miniapps y tus widgets lo muestran en tu pantalla de inicio. Salta un paso o sal del tutorial cuando quieras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane en une minute : tu notes ta journée dans les mini-apps, et tes widgets l'affichent sur ton écran d'accueil. Passe une étape ou quitte le tutoriel quand tu veux."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane in un minuto: annoti la tua giornata nelle mini-app e i tuoi widget la mostrano sulla schermata Home. Salta un passaggio o esci dal tutorial quando vuoi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1分でわかるArdane：ミニアプリに1日を記録すると、ウィジェットがホーム画面に表示します。ステップのスキップやチュートリアルの終了はいつでもOK。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane em um minuto: você anota seu dia nas miniapps, e seus widgets mostram tudo na sua Tela de Início. Pule uma etapa ou saia do tutorial quando quiser."
+          }
+        }
+      }
+    },
     "Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.": {
       "extractionState": "manual",
       "localizations": {
@@ -77500,53 +77547,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vendas"
-          }
-        }
-      }
-    },
-    "Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fertige Widgets, Pakete, komplette Home-Bildschirme und Hintergründe. Alles öffnet sich im Studio zum Anpassen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ready-made widgets, packs, full Home Screens and wallpapers. Everything opens in the Studio to customize."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widgets listos para usar, packs, pantallas de inicio completas y fondos de pantalla. Todo se abre en el Studio para personalizarlo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widget pronti all'uso, pack, schermate Home complete e sfondi. Tutto si apre nello Studio per personalizzarlo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すぐ使えるウィジェット、パック、ホーム画面のセット、壁紙。すべてスタジオで開いてカスタマイズできます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widgets prontos, pacotes, Telas de Início completas e papéis de parede. Tudo abre no Studio para personalizar."
           }
         }
       }
@@ -155430,53 +155430,6 @@
         }
       }
     },
-    "Nutrition, Fitness, Planning, Habitudes et Top 3 passent d'abord ; tes autres centres d'intérêt suivent, en plus petit. Un appui long sur une carte la déplace ou change sa taille.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ernährung, Fitness, Planung, Gewohnheiten und Top 3 stehen zuerst; deine anderen Interessen folgen, kleiner. Langes Drücken auf eine Karte verschiebt sie oder ändert ihre Größe."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrition, Fitness, Planning, Habits and Top 3 come first; your other interests follow, smaller. A long press on a card moves it or changes its size."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrición, Fitness, Planificación, Hábitos y Top 3 van primero; tus otros intereses les siguen, más pequeños. Una pulsación larga en una tarjeta la mueve o cambia su tamaño."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrition, Fitness, Planning, Habitudes et Top 3 passent d'abord ; tes autres centres d'intérêt suivent, en plus petit. Un appui long sur une carte la déplace ou change sa taille."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alimentazione, Fitness, Pianificazione, Abitudini e Top 3 vengono prima; i tuoi altri interessi seguono, più piccoli. Una pressione prolungata su una scheda la sposta o ne cambia la dimensione."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "栄養、フィットネス、プランニング、習慣、トップ3が先に並び、ほかの関心事はそのあとに小さく表示されます。カードを長押しすると、移動やサイズ変更ができます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nutrição, Fitness, Planejamento, Hábitos e Top 3 vêm primeiro; seus outros interesses vêm depois, menores. Um toque longo em um cartão o move ou muda seu tamanho."
-          }
-        }
-      }
-    },
     "Nutrition, sport, planning, budget.": {
       "extractionState": "manual",
       "localizations": {
@@ -162523,6 +162476,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ainda não feito"
+          }
+        }
+      }
+    },
+    "Pas envie de partir de zéro ? Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Lust, bei null anzufangen? Fertige Widgets, Pakete, komplette Home-Bildschirme und Hintergründe. Alles öffnet sich im Studio zum Anpassen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Don't want to start from scratch? Ready-made widgets, packs, full Home Screens and wallpapers. Everything opens in the Studio to customize."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿No quieres empezar de cero? Widgets listos para usar, packs, pantallas de inicio completas y fondos de pantalla. Todo se abre en el Studio para personalizarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas envie de partir de zéro ? Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Non vuoi partire da zero? Widget pronti all'uso, pack, schermate Home complete e sfondi. Tutto si apre nello Studio per personalizzarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ゼロから作りたくないときは？すぐ使えるウィジェット、パック、ホーム画面のセット、壁紙。すべてスタジオで開いてカスタマイズできます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não quer começar do zero? Widgets prontos, pacotes, Telas de Início completas e papéis de parede. Tudo abre no Studio para personalizar."
           }
         }
       }
@@ -215261,6 +215261,53 @@
         }
       }
     },
+    "Ta journée d'un coup d'œil. Touche une carte pour ouvrir sa mini-app ; un appui long la déplace ou change sa taille.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Tag auf einen Blick. Tippe auf eine Karte, um ihre Mini-App zu öffnen; langes Drücken verschiebt sie oder ändert ihre Größe."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your day at a glance. Tap a card to open its mini-app; a long press moves it or changes its size."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu día de un vistazo. Toca una tarjeta para abrir su miniapp; una pulsación larga la mueve o cambia su tamaño."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta journée d'un coup d'œil. Touche une carte pour ouvrir sa mini-app ; un appui long la déplace ou change sa taille."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua giornata a colpo d'occhio. Tocca una scheda per aprire la sua mini-app; una pressione prolungata la sposta o ne cambia la dimensione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1日をひと目で。カードをタップするとミニアプリが開き、長押しすると移動やサイズ変更ができます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu dia em um relance. Toque em um cartão para abrir sua miniapp; um toque longo o move ou muda seu tamanho."
+          }
+        }
+      }
+    },
     "Ta journée en calories": {
       "extractionState": "manual",
       "localizations": {
@@ -216056,53 +216103,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sua semana de hábitos, sua taxa e sua sequência."
-          }
-        }
-      }
-    },
-    "Ta semaine d'un coup d'œil : ton planning hebdomadaire, tes rendez-vous, tes événements et tes horaires. Il est là pour tout le monde.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Woche auf einen Blick: deine Wochenplanung, Termine, Ereignisse und Zeiten. Sie ist für alle da."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your week at a glance: your weekly planning, appointments, events and schedule. It's there for everyone."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu semana de un vistazo: tu planificación semanal, tus citas, tus eventos y tus horarios. Está para todo el mundo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ta semaine d'un coup d'œil : ton planning hebdomadaire, tes rendez-vous, tes événements et tes horaires. Il est là pour tout le monde."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La tua settimana a colpo d'occhio: il tuo planning settimanale, gli appuntamenti, gli eventi e gli orari. C'è per tutti."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1週間をひと目で。週間プランニング、予定、イベント、時間割がここにあります。だれでも使えます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sua semana num relance: seu planejamento semanal, compromissos, eventos e horários. Ele está lá para todo mundo."
           }
         }
       }
@@ -227058,53 +227058,6 @@
         }
       }
     },
-    "Ton planning": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Planung"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your planning"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu planificación"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ton planning"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il tuo planning"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "あなたのプランニング"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seu planejamento"
-          }
-        }
-      }
-    },
     "Ton poids actuel est déjà bas pour ta taille : Ardane ne propose pas de perte de poids. Parle à un professionnel de santé.": {
       "extractionState": "manual",
       "localizations": {
@@ -234296,53 +234249,6 @@
         }
       }
     },
-    "Tu donnes ton objectif et tes informations une seule fois : Fitness et Nutrition les partagent. L'objectif de Fitness sert aussi à Nutrition pour tes calories.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Du gibst dein Ziel und deine Angaben nur einmal ein: Fitness und Ernährung teilen sie. Das Ziel aus Fitness nutzt Ernährung auch für deine Kalorien."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "You enter your goal and your details once: Fitness and Nutrition share them. Your Fitness goal also gives Nutrition your calories."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indicas tu objetivo y tus datos una sola vez: Fitness y Nutrición los comparten. El objetivo de Fitness también sirve a Nutrición para tus calorías."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu donnes ton objectif et tes informations une seule fois : Fitness et Nutrition les partagent. L'objectif de Fitness sert aussi à Nutrition pour tes calories."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Indichi il tuo obiettivo e i tuoi dati una sola volta: Fitness e Alimentazione li condividono. L'obiettivo di Fitness serve anche ad Alimentazione per le tue calorie."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目標とプロフィールの入力は1回だけ。フィットネスと栄養で共有されます。フィットネスの目標は、栄養のカロリーにも使われます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Você informa sua meta e seus dados uma só vez: Fitness e Nutrição compartilham. A meta de Fitness também serve à Nutrição para suas calorias."
-          }
-        }
-      }
-    },
     "Tu es dans ta cible de calories aujourd'hui.": {
       "extractionState": "manual",
       "localizations": {
@@ -236599,53 +236505,6 @@
         }
       }
     },
-    "Un objectif pour deux": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Ziel für beide"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One goal for both"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un objetivo para los dos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un objectif pour deux"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un obiettivo per due"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ひとつの目標を2つで共有"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma meta para os dois"
-          }
-        }
-      }
-    },
     "Un petit tour ?": {
       "extractionState": "manual",
       "localizations": {
@@ -236689,53 +236548,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Um tour rápido?"
-          }
-        }
-      }
-    },
-    "Un petit tour d'Ardane : ta journée, tes mini-apps, tes widgets et le Studio. Passe une étape ou quitte le tutoriel quand tu veux.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine kurze Tour durch Ardane: dein Tag, deine Mini-Apps, deine Widgets und das Studio. Überspringe einen Schritt oder beende das Tutorial jederzeit."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A quick tour of Ardane: your day, your mini-apps, your widgets and the Studio. Skip a step or leave the tutorial anytime."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un pequeño recorrido por Ardane: tu día, tus miniapps, tus widgets y el Studio. Salta un paso o sal del tutorial cuando quieras."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un petit tour d'Ardane : ta journée, tes mini-apps, tes widgets et le Studio. Passe une étape ou quitte le tutoriel quand tu veux."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un giro veloce in Ardane: la tua giornata, le mini-app, i widget e lo Studio. Salta un passaggio o esci dal tutorial quando vuoi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardaneをざっと案内します：1日、ミニアプリ、ウィジェット、スタジオ。ステップのスキップやチュートリアルの終了はいつでもOK。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um tour rápido pelo Ardane: seu dia, suas miniapps, seus widgets e o Studio. Pule uma etapa ou saia do tutorial quando quiser."
           }
         }
       }
@@ -238287,53 +238099,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uma linha = 1 widget largo ou 2 pequenos."
-          }
-        }
-      }
-    },
-    "Une mini-app à part pour tes cours, tes examens et tes sessions de concentration. Avec Premium, le scanner d'horaires lit une photo ou un PDF de ton horaire : tu vérifies, et les cours s'ajoutent.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine eigene Mini-App für deine Kurse, Prüfungen und Konzentrationssitzungen. Mit Premium liest der Stundenplan-Scanner ein Foto oder PDF deines Stundenplans: Du prüfst ihn, und die Kurse werden hinzugefügt."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A separate mini-app for your classes, exams and focus sessions. With Premium, the schedule scanner reads a photo or PDF of your timetable: you check it, and the classes are added."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una mini-app aparte para tus clases, tus exámenes y tus sesiones de concentración. Con Premium, el escáner de horarios lee una foto o un PDF de tu horario: lo revisas y las clases se añaden."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une mini-app à part pour tes cours, tes examens et tes sessions de concentration. Avec Premium, le scanner d'horaires lit une photo ou un PDF de ton horaire : tu vérifies, et les cours s'ajoutent."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una mini-app a parte per le tue lezioni, i tuoi esami e le tue sessioni di concentrazione. Con Premium, lo scanner degli orari legge una foto o un PDF del tuo orario: controlli, e le lezioni vengono aggiunte."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "授業、試験、集中セッションのための独立したミニアプリです。Premiumなら、時間割スキャナーが時間割の写真やPDFを読み取り、確認すると授業が追加されます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um mini-app à parte para suas aulas, provas e sessões de concentração. Com o Premium, o scanner de horários lê uma foto ou PDF do seu horário: você confere, e as aulas são adicionadas."
           }
         }
       }

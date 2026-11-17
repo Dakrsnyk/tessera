@@ -219,6 +219,13 @@ struct ExploreView: View {
             }
             .padding(.horizontal, 20)
         }
+        // What the tutorial lights up on « Le Store »: the row of aisles, kept inside the sides of the screen
+        // (the row itself scrolls from edge to edge).
+        .background {
+            Color.clear
+                .tutorialTarget(.storeAisles, radius: 20)
+                .padding(.horizontal, 14)
+        }
     }
 
     private func seeAll(_ item: StoreAisle) -> (() -> Void)? {
@@ -292,7 +299,6 @@ struct ExploreView: View {
             WeeklySetupHero(setup: weekly, isPremiumUser: model.isPremium) {
                 openedSetup = weekly
             }
-            .tutorialTarget(.storeHero, radius: 30)
         }
         let style = StoreEdition.style()
         WeeklyStyleFeature(theme: style, isPremiumUser: model.isPremium) {

@@ -81,7 +81,6 @@ struct MyWidgetsView: View {
                             .padding(20)
                     } else {
                         carousel
-                            .tutorialTarget(.myWidgets)
                     }
                 }
                 .id("top")

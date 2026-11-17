@@ -87,8 +87,6 @@ struct HomeView: View {
                         .tutorialTarget(.daily)
                 }
                 MyInfoCard()
-                    .id(TutorialTarget.info.rawValue)
-                    .tutorialTarget(.info, radius: 24)
                 if !model.isPremium {
                     PremiumBanner { router.isPaywallPresented = true }
                 }
