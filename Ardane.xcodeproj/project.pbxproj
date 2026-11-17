@@ -473,7 +473,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Ardane;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Ardane affiche tes prochains rendez-vous dans le widget À venir et dans Planning. Rien ne quitte ton iPhone.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier ton plat. L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment, à photographier ton plat ou à scanner ton horaire. L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Ardane lit tes pas, ta distance et tes étages avec le capteur de ton iPhone, pour Mon Quotidien et Fitness. Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Ardane enregistre dans Photos les fonds d'écran que tu choisis dans le Store.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -520,7 +520,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Ardane;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_NSCalendarsFullAccessUsageDescription = "Ardane affiche tes prochains rendez-vous dans le widget À venir et dans Planning. Rien ne quitte ton iPhone.";
-				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment ou à photographier ton plat. L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée.";
+				INFOPLIST_KEY_NSCameraUsageDescription = "La caméra sert uniquement à scanner le code-barres d'un aliment, à photographier ton plat ou à scanner ton horaire. L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "Ardane lit tes pas, ta distance et tes étages avec le capteur de ton iPhone, pour Mon Quotidien et Fitness. Rien ne quitte ton iPhone.";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Ardane enregistre dans Photos les fonds d'écran que tu choisis dans le Store.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

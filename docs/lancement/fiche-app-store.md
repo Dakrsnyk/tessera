@@ -138,7 +138,7 @@ IN-APP PURCHASES (Ardane Premium)
 - The Premium screen opens from any locked item (for example a Premium style in the Studio, or a sixth habit). It shows the prices, "Restore purchases", and links to the Terms of Use and Privacy Policy.
 
 PERMISSIONS (optional, asked only when the feature is used)
-- Camera: scan a food barcode or photograph a dish. A class schedule is imported with the system photo picker or from a PDF (no permission needed).
+- Camera: scan a food barcode, photograph a dish, or scan a schedule with the document camera. A schedule can also be imported with the system photo picker or from a PDF (no permission needed).
 - Calendars: show upcoming events in the Upcoming widget and in Planning.
 - Motion & Fitness: steps, distance and floors for My Day.
 - Photos (add only): save the wallpapers chosen in the Store.

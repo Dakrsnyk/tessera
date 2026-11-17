@@ -360,7 +360,7 @@
  "%@ cours étaient déjà dans ton horaire.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:635: Text(skipped == 1 ? tr(\"1 cours était déjà dans ton horaire.\") : tr(\"\\(skipped) cours étaient déjà dans ton horaire.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:655: Text(skipped == 1 ? tr(\"1 cours était déjà dans ton horaire.\") : tr(\"\\(skipped) cours étaient déjà dans ton horaire.\"))"
   ]
  },
  "%@ crédits": {
@@ -1653,7 +1653,7 @@
  "1 cours était déjà dans ton horaire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:635: Text(skipped == 1 ? tr(\"1 cours était déjà dans ton horaire.\") : tr(\"\\(skipped) cours étaient déjà dans ton horaire.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:655: Text(skipped == 1 ? tr(\"1 cours était déjà dans ton horaire.\") : tr(\"\\(skipped) cours étaient déjà dans ton horaire.\"))"
   ]
  },
  "1 croissant": {
@@ -3017,7 +3017,7 @@
  "Ajouter un cours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:348: MiniActionButton(title: tr(\"Ajouter un cours\"), symbol: \"plus.circle\", colorHex: accentHex, isProminent: false) {",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:368: MiniActionButton(title: tr(\"Ajouter un cours\"), symbol: \"plus.circle\", colorHex: accentHex, isProminent: false) {",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:200: MiniRow(symbol: \"plus\", colorHex: accentHex, title: tr(\"Ajouter un cours\"), showsChevron: false)"
   ]
  },
@@ -3201,13 +3201,13 @@
  "Ajouter à mon horaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:374: Button(tr(\"Ajouter à mon horaire\")) { save(replacing: false) }"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:394: Button(tr(\"Ajouter à mon horaire\")) { save(replacing: false) }"
   ]
  },
  "Ajouter à mon horaire (%@)": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:359: MiniActionButton(title: tr(\"Ajouter à mon horaire (\\(count))\"), symbol: \"calendar.badge.plus\", colorHex: accentHex) {"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:379: MiniActionButton(title: tr(\"Ajouter à mon horaire (\\(count))\"), symbol: \"calendar.badge.plus\", colorHex: accentHex) {"
   ]
  },
  "Ajouter à une séance": {
@@ -3544,7 +3544,7 @@
  "Analyse du plat sur ton iPhone…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:142: progress(tr(\"Analyse du plat sur ton iPhone…\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:153: progress(tr(\"Analyse du plat sur ton iPhone…\"))"
   ]
  },
  "Analyse productivité": {
@@ -3562,7 +3562,7 @@
  "Analyses de plat gratuites utilisées": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:118: if left == 0 { return tr(\"Analyses de plat gratuites utilisées\") }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:129: if left == 0 { return tr(\"Analyses de plat gratuites utilisées\") }"
   ]
  },
  "Analyses de plat illimitées": {
@@ -4449,7 +4449,7 @@
  "Aucun cours trouvé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:274: Text(unreadable ? tr(\"Impossible de lire ce fichier\") : tr(\"Aucun cours trouvé\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:294: Text(unreadable ? tr(\"Impossible de lire ce fichier\") : tr(\"Aucun cours trouvé\"))"
   ]
  },
  "Aucun envoi pour l'instant : cette option ne fait rien tant qu'aucun service n'existe. Tes corrections restent sur cet iPhone et servent seulement à mieux deviner tes prochains scans.": {
@@ -6667,7 +6667,7 @@
  "Caméra indisponible": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:220: title: tr(\"Caméra indisponible\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:231: title: tr(\"Caméra indisponible\"),"
   ]
  },
  "Canada": {
@@ -7131,7 +7131,7 @@
  "Cela peut prendre quelques secondes.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:259: Text(tr(\"Cela peut prendre quelques secondes.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:279: Text(tr(\"Cela peut prendre quelques secondes.\"))"
   ]
  },
  "Celle du style": {
@@ -7349,6 +7349,12 @@
    "Shared/Domains/ExerciseTechniques.swift:313: [tr(\"Dessine de grands cercles avec le bassin.\"), tr(\"Change de sens après quelques tours.\")],"
   ]
  },
+ "Change le mode du flash : automatique, activé ou désactivé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanTorch.swift:262: .accessibilityHint(tr(\"Change le mode du flash : automatique, activé ou désactivé\"))"
+  ]
+ },
  "Changer d'icône": {
   "placeholders": 0,
   "uses": [
@@ -7429,7 +7435,7 @@
  "Chaque semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:525: Text(tr(\"Chaque semaine\")).tag(false)",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:545: Text(tr(\"Chaque semaine\")).tag(false)",
    "App/Screens/Spaces/StudentSpace.swift:290: Text(tr(\"Chaque semaine\")).tag(false)",
    "Shared/Model/Content.swift:37: case .weekly: tr(\"Chaque semaine\")"
   ]
@@ -7588,10 +7594,10 @@
  "Chercher dans la liste": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:155: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:169: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:182: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:191: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:166: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:180: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:193: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:202: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }"
   ]
  },
  "Chercher la ville (fuseau et devise)": {
@@ -7603,10 +7609,10 @@
  "Chercher ou créer l'aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:134: alternativeTitle: tr(\"Chercher ou créer l'aliment\"),",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:203: plainButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:223: prominentButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:277: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:145: alternativeTitle: tr(\"Chercher ou créer l'aliment\"),",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:214: plainButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:234: prominentButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:292: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
   ]
  },
  "Chercher une ville": {
@@ -7812,7 +7818,7 @@
  "Choisir un PDF": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:234: sourceLabel(tr(\"Choisir un PDF\"), symbol: \"doc.richtext\", isProminent: false)"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:254: sourceLabel(tr(\"Choisir un PDF\"), symbol: \"doc.richtext\", isProminent: false)"
   ]
  },
  "Choisir un widget": {
@@ -7832,9 +7838,15 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:811: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:236: .accessibilityLabel(tr(\"Choisir une photo\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:240: .accessibilityLabel(tr(\"Choisir une photo\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:247: .accessibilityLabel(tr(\"Choisir une photo\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:251: .accessibilityLabel(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:527: Text(tr(\"Choisir une photo\"))"
+  ]
+ },
+ "Choisir une photo ou un PDF": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleCameraSheet.swift:14: alternativeTitle: tr(\"Choisir une photo ou un PDF\"),"
   ]
  },
  "Choisis 1 widget, ou 2 à réunir.": {
@@ -7936,7 +7948,7 @@
  "Choisis une photo bien nette ou un PDF de ton horaire de cours. La lecture se fait sur ton iPhone : rien n'est envoyé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:222: Text(tr(\"Choisis une photo bien nette ou un PDF de ton horaire de cours. La lecture se fait sur ton iPhone : rien n'est envoyé.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:232: : tr(\"Choisis une photo bien nette ou un PDF de ton horaire de cours. La lecture se fait sur ton iPhone : rien n'est envoyé.\"))"
   ]
  },
  "Choisis une taille et tes widgets, puis personnalise-les dans le Studio.": {
@@ -8157,7 +8169,7 @@
  "Code-barres ou aliments": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:124: return tr(\"Code-barres ou aliments\")",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:135: return tr(\"Code-barres ou aliments\")",
    "App/Screens/Spaces/NutritionSpace.swift:786: .navigationTitle(tr(\"Code-barres ou aliments\"))"
   ]
  },
@@ -9442,7 +9454,7 @@
  "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:152: detail: tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:163: detail: tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\")"
   ]
  },
  "Crée-les dans Ardane": {
@@ -9463,10 +9475,10 @@
  "Créer cet aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:154: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:168: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:181: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:190: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(found)) }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:165: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:179: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:192: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:201: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(found)) }"
   ]
  },
  "Créer les %@ widgets séparés": {
@@ -10792,7 +10804,7 @@
  "Donne un nom à ce cours pour pouvoir l'ajouter.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:491: Label(tr(\"Donne un nom à ce cours pour pouvoir l'ajouter.\"), systemImage: \"exclamationmark.triangle.fill\")"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:511: Label(tr(\"Donne un nom à ce cours pour pouvoir l'ajouter.\"), systemImage: \"exclamationmark.triangle.fill\")"
   ]
  },
  "Donne-lui un nom : « Déjeuner du dimanche », « Bol protéiné »…": {
@@ -11138,7 +11150,7 @@
  "Début": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:544: MinuteTimePicker(title: tr(\"Début\"), minutes: clearing(.start, of: slot, slot.startMinute))",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:564: MinuteTimePicker(title: tr(\"Début\"), minutes: clearing(.start, of: slot, slot.startMinute))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:311: DatePicker(tr(\"Début\"), selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\\.student) { $0.semesterStart = date } }), displayedComponents: .date)",
    "App/Screens/Spaces/StudentSpace.swift:158: DatePicker(tr(\"Début\"), selection: Binding(get: { state.semesterStart ?? now }, set: { date in model.update(\\.student) { $0.semesterStart = date } }), displayedComponents: .date)",
    "App/Screens/Spaces/StudentSpace.swift:304: MinuteTimePicker(title: tr(\"Début\"), minutes: Binding(get: { slot.startMinute }, set: { start in"
@@ -11160,7 +11172,7 @@
  "Décocher les cours incertains": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:321: MiniActionButton(title: tr(\"Décocher les cours incertains\"), symbol: \"exclamationmark.triangle\","
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:341: MiniActionButton(title: tr(\"Décocher les cours incertains\"), symbol: \"exclamationmark.triangle\","
   ]
  },
  "Décollage": {
@@ -11912,7 +11924,13 @@
  "Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:132: reason: tr(\"Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:143: reason: tr(\"Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.\"),"
+  ]
+ },
+ "Elle photographie ton horaire, sur papier ou sur un écran, pour en lire les cours et les heures.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleCameraSheet.swift:12: reason: tr(\"Elle photographie ton horaire, sur papier ou sur un écran, pour en lire les cours et les heures.\"),"
   ]
  },
  "Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.": {
@@ -12160,7 +12178,7 @@
  "Encore %@ analyses de plat gratuites": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:119: return left == 1 ? tr(\"Encore 1 analyse de plat gratuite\") : tr(\"Encore \\(left) analyses de plat gratuites\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:130: return left == 1 ? tr(\"Encore 1 analyse de plat gratuite\") : tr(\"Encore \\(left) analyses de plat gratuites\")"
   ]
  },
  "Encore %@ g de protéines pour atteindre ta cible.": {
@@ -12184,7 +12202,7 @@
  "Encore 1 analyse de plat gratuite": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:119: return left == 1 ? tr(\"Encore 1 analyse de plat gratuite\") : tr(\"Encore \\(left) analyses de plat gratuites\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:130: return left == 1 ? tr(\"Encore 1 analyse de plat gratuite\") : tr(\"Encore \\(left) analyses de plat gratuites\")"
   ]
  },
  "Encouragements": {
@@ -12294,7 +12312,7 @@
  "Enseignant (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:557: TextField(value.kind == .course ? tr(\"Enseignant (facultatif)\") : tr(\"Personne ou note (facultatif)\"),",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:577: TextField(value.kind == .course ? tr(\"Enseignant (facultatif)\") : tr(\"Personne ou note (facultatif)\"),",
    "App/Screens/Spaces/StudentSpace.swift:177: TextField(tr(\"Enseignant (facultatif)\"), text: $course.teacher)"
   ]
  },
@@ -12448,7 +12466,7 @@
  "Essayer avec une autre photo": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:284: MiniActionButton(title: tr(\"Essayer avec une autre photo\"), symbol: \"arrow.counterclockwise\", colorHex: accentHex) {"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:304: MiniActionButton(title: tr(\"Essayer avec une autre photo\"), symbol: \"arrow.counterclockwise\", colorHex: accentHex) {"
   ]
  },
  "Estimation": {
@@ -13273,7 +13291,7 @@
  "Fin": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:546: MinuteTimePicker(title: tr(\"Fin\"), minutes: clearing(.end, of: slot, slot.endMinute))",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:566: MinuteTimePicker(title: tr(\"Fin\"), minutes: clearing(.end, of: slot, slot.endMinute))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:312: DatePicker(tr(\"Fin\"), selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\\.student) { $0.semesterEnd = date } }), displayedComponents: .",
    "App/Screens/Spaces/StudentSpace.swift:160: DatePicker(tr(\"Fin\"), selection: Binding(get: { state.semesterEnd ?? now.addingTimeInterval(100 * 86_400) }, set: { date in model.update(\\.student) { $0.semesterEnd = date } }), displayedComponents: .",
    "App/Screens/Spaces/StudentSpace.swift:310: MinuteTimePicker(title: tr(\"Fin\"), minutes: $slot.endMinute)"
@@ -13349,6 +13367,30 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/CarTiles.swift:36: TileSegment(label: tr(\"Fixes\"), value: cost.fixed, colorHex: \"3366FF\"),"
+  ]
+ },
+ "Flash": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanTorch.swift:260: .accessibilityLabel(tr(\"Flash\"))"
+  ]
+ },
+ "Flash activé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanTorch.swift:23: case .on: tr(\"Flash activé\")"
+  ]
+ },
+ "Flash automatique": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanTorch.swift:22: case .auto: tr(\"Flash automatique\")"
+  ]
+ },
+ "Flash désactivé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanTorch.swift:24: case .off: tr(\"Flash désactivé\")"
   ]
  },
  "Flexion des poignets": {
@@ -13936,7 +13978,7 @@
  "Garder les quarts de…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:395: Label(tr(\"Garder les quarts de…\"), systemImage: \"person.crop.circle\")"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:415: Label(tr(\"Garder les quarts de…\"), systemImage: \"person.crop.circle\")"
   ]
  },
  "Garder les tâches cochées aujourd'hui": {
@@ -15187,7 +15229,7 @@
   "uses": [
    "App/Premium/PaywallContext.swift:59: title: tr(\"Importer mon horaire\"),",
    "App/Screens/MiniApps/Planning/PlanningApp.swift:80: MiniRow(symbol: \"doc.viewfinder\", colorHex: accentHex, title: tr(\"Importer mon horaire\"),",
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:179: .navigationTitle(tr(\"Importer mon horaire\"))",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:181: .navigationTitle(tr(\"Importer mon horaire\"))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:347: MiniRow(symbol: \"doc.viewfinder\", colorHex: accentHex, title: tr(\"Importer mon horaire\"),"
   ]
  },
@@ -15237,7 +15279,7 @@
  "Impossible de lire ce fichier": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:274: Text(unreadable ? tr(\"Impossible de lire ce fichier\") : tr(\"Aucun cours trouvé\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:294: Text(unreadable ? tr(\"Impossible de lire ce fichier\") : tr(\"Aucun cours trouvé\"))"
   ]
  },
  "Impérial": {
@@ -15261,7 +15303,7 @@
  "Inclure ce cours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:470: .accessibilityLabel(Text(tr(\"Inclure ce cours\")))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:490: .accessibilityLabel(Text(tr(\"Inclure ce cours\")))"
   ]
  },
  "Inclure les opérations non payées (%@)": {
@@ -15541,13 +15583,13 @@
  "Je n'ai pas trouvé de cours dans ce document. Essaie avec une photo plus nette, bien cadrée et sans reflet, ou avec le PDF.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:279: : tr(\"Je n'ai pas trouvé de cours dans ce document. Essaie avec une photo plus nette, bien cadrée et sans reflet, ou avec le PDF.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:299: : tr(\"Je n'ai pas trouvé de cours dans ce document. Essaie avec une photo plus nette, bien cadrée et sans reflet, ou avec le PDF.\"))"
   ]
  },
  "Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:199: ? tr(\"Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:210: ? tr(\"Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.\")"
   ]
  },
  "Je préfère ne pas répondre": {
@@ -16000,7 +16042,7 @@
  "L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:200: : tr(\"L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:211: : tr(\"L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.\")"
   ]
  },
  "L'analyse est dans Premium": {
@@ -16024,7 +16066,7 @@
  "L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:133: privacy: tr(\"L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:144: privacy: tr(\"L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.\"),"
   ]
  },
  "L'année avance": {
@@ -16267,7 +16309,7 @@
  "La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:221: message: tr(\"La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:232: message: tr(\"La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.\")"
   ]
  },
  "La capitalisation totale du marché et ses principaux actifs.": {
@@ -16315,7 +16357,7 @@
  "La fin doit venir après le début.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:549: Label(tr(\"La fin doit venir après le début.\"), systemImage: \"exclamationmark.triangle.fill\")"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:569: Label(tr(\"La fin doit venir après le début.\"), systemImage: \"exclamationmark.triangle.fill\")"
   ]
  },
  "La force vient des hanches : les bras ne font que tenir la kettlebell.": {
@@ -16352,6 +16394,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:284: case .failed: message = tr(\"La lecture n'a pas pu se faire. Réessaie dans un moment.\")"
+  ]
+ },
+ "La lecture se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleCameraSheet.swift:13: privacy: tr(\"La lecture se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée.\"),"
   ]
  },
  "La lune ce soir, son éclairage et la prochaine pleine lune.": {
@@ -17007,13 +17055,19 @@
  "Le fichier n'a pas pu être ouvert. Essaie avec une autre photo ou un autre PDF.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:278: ? tr(\"Le fichier n'a pas pu être ouvert. Essaie avec une autre photo ou un autre PDF.\")"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:298: ? tr(\"Le fichier n'a pas pu être ouvert. Essaie avec une autre photo ou un autre PDF.\")"
   ]
  },
  "Le fil des ans": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:125: combo(\"annee-age\", tr(\"Le fil des ans\"), tr(\"Ton âge qui avance et ton prochain anniversaire.\"), .matteBlack, \"F2A33A\","
+  ]
+ },
+ "Le flash s'allume tout seul quand il fait sombre ; le bouton éclair de la caméra le règle sur automatique, activé ou désactivé.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:245: MiniFootnote(text: tr(\"Le flash s'allume tout seul quand il fait sombre ; le bouton éclair de la caméra le règle sur automatique, activé ou désactivé.\"))"
   ]
  },
  "Le fond du style choisi, clair ou sombre selon le style.": {
@@ -17223,7 +17277,7 @@
  "Le produit %@ n'est pas encore dans Open Food Facts.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:151: message: tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:162: message: tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
   ]
  },
  "Le repos démarre tout seul.": {
@@ -17332,7 +17386,7 @@
  "Lecture de ton horaire…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:257: Text(tr(\"Lecture de ton horaire…\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:277: Text(tr(\"Lecture de ton horaire…\"))"
   ]
  },
  "Leg curl allongé": {
@@ -17459,7 +17513,7 @@
  "Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:308: Label(tr(\"Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près.\"),"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:328: Label(tr(\"Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près.\"),"
   ]
  },
  "Les cours s'affichent dès que la connexion est disponible.": {
@@ -17877,7 +17931,7 @@
  "Lieu (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:553: TextField(value.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"),",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:573: TextField(value.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"),",
    "App/Screens/Spaces/StudentSpace.swift:312: TextField(slot.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"), text: $slot.room)"
   ]
  },
@@ -20280,7 +20334,7 @@
  "Non": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:471: .accessibilityValue(Text(value.isSelected ? tr(\"Oui\") : tr(\"Non\")))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:491: .accessibilityValue(Text(value.isSelected ? tr(\"Oui\") : tr(\"Non\")))"
   ]
  },
  "Non binaire": {
@@ -21260,7 +21314,7 @@
  "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:188: message: tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\")",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:199: message: tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\")",
    "App/Screens/Spaces/NutritionSpace.swift:652: : tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\"))"
   ]
  },
@@ -21273,7 +21327,7 @@
  "Open Food Facts reçoit trop de demandes en ce moment : le produit %@ n'a pas pu être cherché. Réessaie dans un instant.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:175: message: tr(\"Open Food Facts reçoit trop de demandes en ce moment : le produit \\(code) n'a pas pu être cherché. Réessaie dans un instant.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:186: message: tr(\"Open Food Facts reçoit trop de demandes en ce moment : le produit \\(code) n'a pas pu être cherché. Réessaie dans un instant.\")"
   ]
  },
  "Open Food Facts reçoit trop de demandes en ce moment. Réessaie dans un instant.": {
@@ -21373,7 +21427,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:464: Text(tr(\"Oui\"))",
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:471: .accessibilityValue(Text(value.isSelected ? tr(\"Oui\") : tr(\"Non\")))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:491: .accessibilityValue(Text(value.isSelected ? tr(\"Oui\") : tr(\"Non\")))"
   ]
  },
  "Ouverture sans forcer.": {
@@ -21808,7 +21862,7 @@
  "Pas de connexion : le produit %@ n'a pas pu être cherché.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:162: message: tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:173: message: tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
   ]
  },
  "Pas de cours prévu": {
@@ -22214,7 +22268,7 @@
  "Personne ou note (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:557: TextField(value.kind == .course ? tr(\"Enseignant (facultatif)\") : tr(\"Personne ou note (facultatif)\"),"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:577: TextField(value.kind == .course ? tr(\"Enseignant (facultatif)\") : tr(\"Personne ou note (facultatif)\"),"
   ]
  },
  "Perte de poids": {
@@ -22330,8 +22384,8 @@
  "Photographier le plat": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:256: .accessibilityLabel(tr(\"Photographier le plat\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:261: Text(tr(\"Photographier le plat\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:267: .accessibilityLabel(tr(\"Photographier le plat\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:276: Text(flashNotice ?? tr(\"Photographier le plat\"))"
   ]
  },
  "Photos": {
@@ -22504,7 +22558,7 @@
  "Plat non reconnu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:197: title: tr(\"Plat non reconnu\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:208: title: tr(\"Plat non reconnu\"),"
   ]
  },
  "Plats": {
@@ -22774,7 +22828,7 @@
  "Plusieurs personnes figurent sur cet horaire. Choisis la tienne : seuls ses quarts seront cochés.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:386: Text(tr(\"Plusieurs personnes figurent sur cet horaire. Choisis la tienne : seuls ses quarts seront cochés.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:406: Text(tr(\"Plusieurs personnes figurent sur cet horaire. Choisis la tienne : seuls ses quarts seront cochés.\"))"
   ]
  },
  "Plusieurs sociétés comparées par revenus annuels.": {
@@ -23923,8 +23977,8 @@
  "Produit introuvable": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:150: title: tr(\"Produit introuvable\"),",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:161: title: tr(\"Produit introuvable\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:161: title: tr(\"Produit introuvable\"),",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:172: title: tr(\"Produit introuvable\"),"
   ]
  },
  "Produits emballés": {
@@ -24310,7 +24364,7 @@
  "Quand": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:524: Picker(tr(\"Quand\"), selection: onceBinding(slot)) {",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:544: Picker(tr(\"Quand\"), selection: onceBinding(slot)) {",
    "App/Screens/Spaces/StudentSpace.swift:289: Picker(tr(\"Quand\"), selection: isOnce) {"
   ]
  },
@@ -24638,7 +24692,7 @@
  "Recherche du produit %@…": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:140: progress(tr(\"Recherche du produit \\(code)…\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:151: progress(tr(\"Recherche du produit \\(code)…\"))"
   ]
  },
  "Recherche sur Open Food Facts…": {
@@ -25025,13 +25079,13 @@
  "Remplacer l'ancien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:375: Button(tr(\"Remplacer l'ancien\"), role: .destructive) { save(replacing: true) }"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:395: Button(tr(\"Remplacer l'ancien\"), role: .destructive) { save(replacing: true) }"
   ]
  },
  "Remplacer retire les anciens cours de l'horaire. Tes tâches et tes événements restent.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:378: Text(tr(\"Remplacer retire les anciens cours de l'horaire. Tes tâches et tes événements restent.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:398: Text(tr(\"Remplacer retire les anciens cours de l'horaire. Tes tâches et tes événements restent.\"))"
   ]
  },
  "Remplacer tes données par cette sauvegarde ?": {
@@ -26003,7 +26057,7 @@
  "Rien de nouveau à ajouter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:631: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:651: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
   ]
  },
  "Rien de prévu": {
@@ -26373,7 +26427,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/ScreenshotMode.swift:529: .navigationTitle(mode == \"nutrition-plan\" ? tr(\"Ton objectif de poids\") : tr(\"Récapitulatif\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:123: if case .recap = stage { return tr(\"Récapitulatif\") }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:134: if case .recap = stage { return tr(\"Récapitulatif\") }"
   ]
  },
  "Récents": {
@@ -26418,8 +26472,8 @@
   "uses": [
    "App/Premium/PaywallView.swift:248: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Business/BusinessSources.swift:360: Button(tr(\"Réessayer\")) { attempt += 1 }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:164: prominentButton(tr(\"Réessayer\")) {",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:177: prominentButton(tr(\"Réessayer\")) {"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:175: prominentButton(tr(\"Réessayer\")) {",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:188: prominentButton(tr(\"Réessayer\")) {"
   ]
  },
  "Région": {
@@ -26773,7 +26827,7 @@
  "Salle (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:553: TextField(value.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"),",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:573: TextField(value.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"),",
    "App/Screens/Spaces/StudentSpace.swift:312: TextField(slot.kind == .course ? tr(\"Salle (facultatif)\") : tr(\"Lieu (facultatif)\"), text: $slot.room)",
    "App/Screens/Spaces/StudentSpace.swift:522: TextField(tr(\"Salle (facultatif)\"), text: $exam.room)"
   ]
@@ -27078,6 +27132,12 @@
    "App/Core/DataItems.swift:166: case .meals: tr(\"Scanne ou cherche un aliment : tes widgets se mettent à jour.\")"
   ]
  },
+ "Scanne ton horaire avec la caméra, ou choisis une photo bien nette ou un PDF. La lecture se fait sur ton iPhone : rien n'est envoyé.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:231: ? tr(\"Scanne ton horaire avec la caméra, ou choisis une photo bien nette ou un PDF. La lecture se fait sur ton iPhone : rien n'est envoyé.\")"
+  ]
+ },
  "Scanne.\nC'est noté.": {
   "placeholders": 0,
   "uses": [
@@ -27091,6 +27151,12 @@
    "App/Screens/Home/DailySection.swift:728: Label(tr(\"Scanner\"), systemImage: \"barcode.viewfinder\")",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:91: MiniActionButton(title: tr(\"Scanner\"), symbol: \"barcode.viewfinder\", colorHex: accentHex) {",
    "App/Screens/Profile/DataItemViews.swift:114: action(tr(\"Scanner\"), symbol: \"barcode.viewfinder\", prominent: true) { sheets?.open { FoodSearchView(startsWithScanner: true) } }"
+  ]
+ },
+ "Scanner avec la caméra": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:241: sourceLabel(tr(\"Scanner avec la caméra\"), symbol: \"doc.viewfinder\", isProminent: true)"
   ]
  },
  "Scanner un aliment": {
@@ -27118,9 +27184,9 @@
  "Scanner à nouveau": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:85: .accessibilityLabel(tr(\"Scanner à nouveau\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:156: plainButton(tr(\"Scanner à nouveau\")) { rescan() }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:192: plainButton(tr(\"Scanner à nouveau\")) { rescan() }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:91: .accessibilityLabel(tr(\"Scanner à nouveau\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:167: plainButton(tr(\"Scanner à nouveau\")) { rescan() }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:203: plainButton(tr(\"Scanner à nouveau\")) { rescan() }"
   ]
  },
  "Se balancer.": {
@@ -27413,7 +27479,7 @@
  "Service occupé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:174: title: tr(\"Service occupé\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:185: title: tr(\"Service occupé\"),"
   ]
  },
  "Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours.": {
@@ -28183,7 +28249,7 @@
  "Supprimer ce cours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:487: .accessibilityLabel(Text(tr(\"Supprimer ce cours\")))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:507: .accessibilityLabel(Text(tr(\"Supprimer ce cours\")))"
   ]
  },
  "Supprimer ce cours ?": {
@@ -29528,7 +29594,7 @@
  "Terminé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:640: MiniActionButton(title: tr(\"Terminé\"), symbol: \"checkmark\", colorHex: accentHex) { dismiss() }",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:660: MiniActionButton(title: tr(\"Terminé\"), symbol: \"checkmark\", colorHex: accentHex) { dismiss() }",
    "Shared/Render/Kinds/ProductivityWidgets.swift:23: Text(openCount == 0 ? tr(\"Terminé\") : tr(\"\\(openCount) à faire\"))",
    "Shared/Render/Tiles/ProductivityTiles.swift:48: var caption = remaining == 0 ? tr(\"Terminé\") : Fmt.plural(remaining, tr(\"tâche restante\"), tr(\"tâches restantes\"))"
   ]
@@ -30314,7 +30380,7 @@
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:68: Toggle(tr(\"Titre\"), isOn: $design.showsTitle)",
    "App/Screens/MiniApps/Planning/PlanningApp.swift:370: TextField(tr(\"Titre\"), text: $task.title)",
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:472: TextField(value.kind == .course ? tr(\"Titre\") : tr(\"Titre (facultatif)\"), text: clearing(.title, of: slot, slot.title))",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:492: TextField(value.kind == .course ? tr(\"Titre\") : tr(\"Titre (facultatif)\"), text: clearing(.title, of: slot, slot.title))",
    "App/Screens/Spaces/StudentSpace.swift:541: TextField(tr(\"Titre\"), text: $assignment.title)"
   ]
  },
@@ -30328,7 +30394,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:155: TextField(tr(\"Titre (facultatif)\"), text: $design.options.noteTitle)",
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:472: TextField(value.kind == .course ? tr(\"Titre\") : tr(\"Titre (facultatif)\"), text: clearing(.title, of: slot, slot.title))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:492: TextField(value.kind == .course ? tr(\"Titre\") : tr(\"Titre (facultatif)\"), text: clearing(.title, of: slot, slot.title))"
   ]
  },
  "Titre (intra, final…)": {
@@ -30485,7 +30551,7 @@
  "Ton horaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:221: MiniSectionTitle(title: tr(\"Ton horaire\"))",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:229: MiniSectionTitle(title: tr(\"Ton horaire\"))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:36: EmptyStateView(symbol: \"calendar.day.timeline.left\", title: tr(\"Ton horaire\"),"
   ]
  },
@@ -31168,7 +31234,7 @@
  "Tout cocher": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:328: MiniActionButton(title: tr(\"Tout cocher\"), symbol: \"checkmark.circle\", colorHex: accentHex, isProminent: false) {"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:348: MiniActionButton(title: tr(\"Tout cocher\"), symbol: \"checkmark.circle\", colorHex: accentHex, isProminent: false) {"
   ]
  },
  "Tout désélectionner": {
@@ -31544,7 +31610,7 @@
  "Tu pourras vérifier et corriger chaque cours avant de l'ajouter. Rien n'est changé sans ton accord.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:238: MiniFootnote(text: tr(\"Tu pourras vérifier et corriger chaque cours avant de l'ajouter. Rien n'est changé sans ton accord.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:258: MiniFootnote(text: tr(\"Tu pourras vérifier et corriger chaque cours avant de l'ajouter. Rien n'est changé sans ton accord.\"))"
   ]
  },
  "Tu pourras y réunir plusieurs widgets d'une même catégorie.": {
@@ -31805,7 +31871,7 @@
  "Un horaire est déjà dans ton planning": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:373: .confirmationDialog(tr(\"Un horaire est déjà dans ton planning\"), isPresented: $asksAddOrReplace, titleVisibility: .visible) {"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:393: .confirmationDialog(tr(\"Un horaire est déjà dans ton planning\"), isPresented: $asksAddOrReplace, titleVisibility: .visible) {"
   ]
  },
  "Un instant…": {
@@ -32086,7 +32152,7 @@
  "Une seule fois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:526: Text(tr(\"Une seule fois\")).tag(true)",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:546: Text(tr(\"Une seule fois\")).tag(true)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:131: let detail = entry.isCancelled ? tr(\"Annulé cette fois-ci\") : [slot.date == nil ? nil : tr(\"Une seule fois\"), place].compactMap { $0 }.joined(separator: \" · \")",
    "App/Screens/Spaces/StudentSpace.swift:291: Text(tr(\"Une seule fois\")).tag(true)",
    "Shared/Domains/WeekdayRepeat.swift:64: if list.isEmpty { return tr(\"Une seule fois\") }"
@@ -32775,7 +32841,7 @@
  "Voir la fiche Open Food Facts": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:89: Button(tr(\"Voir la fiche Open Food Facts\")) {"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:95: Button(tr(\"Voir la fiche Open Food Facts\")) {"
   ]
  },
  "Voir la réponse": {
@@ -32963,7 +33029,7 @@
  "Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:303: Text(tr(\"Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire.\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:323: Text(tr(\"Vérifie ce qui a été lu, corrige si besoin, puis ajoute les cours à ton horaire.\"))"
   ]
  },
  "Vérifier": {
@@ -33607,13 +33673,13 @@
  "créneau ajouté": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:631: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:651: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
   ]
  },
  "créneaux ajoutés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:631: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:651: Text(added > 0 ? Fmt.plural(added, tr(\"créneau ajouté\"), tr(\"créneaux ajoutés\")) : tr(\"Rien de nouveau à ajouter\"))"
   ]
  },
  "cumulé": {
@@ -35922,8 +35988,8 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:51: Text(tr(\"À vérifier\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:177: chip(tr(\"À vérifier\"), isOn: filter == .review) { filter = .review }",
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:454: Label(tr(\"À vérifier\"), systemImage: \"exclamationmark.triangle\")",
-   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:782: .accessibilityHint(active ? tr(\"À vérifier\") : \"\")"
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:474: Label(tr(\"À vérifier\"), systemImage: \"exclamationmark.triangle\")",
+   "App/Screens/MiniApps/Planning/ScheduleImportView.swift:807: .accessibilityHint(active ? tr(\"À vérifier\") : \"\")"
   ]
  },
  "À vérifier : c'est bien « %@ » ?": {

@@ -125,8 +125,9 @@ enum ScheduleImportMerge {
 
 /// « Importer mon horaire »: a photo or a PDF of the timetable is read on the iPhone, the classes found are
 /// shown to check and correct, then added to the Planning's schedule. Four steps: the source, the reading,
-/// the check, the confirmation. The photo is chosen with the system picker (no access to the photo library, no
-/// camera) and nothing leaves the iPhone.
+/// the check, the confirmation. The photo is chosen with the system picker (no access to the photo library), or
+/// the timetable is photographed with the document camera of iOS (`ScheduleCameraSheet`, behind the explanation of
+/// `CameraAccessGate`; its own flash button: automatic, on, off). Nothing leaves the iPhone.
 struct ScheduleImportView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -149,6 +150,7 @@ struct ScheduleImportView: View {
     @State private var rosterNames: [UUID: String] = [:]
     @State private var photoItem: PhotosPickerItem?
     @State private var choosesFile = false
+    @State private var scansWithCamera = false
     @State private var readTask: Task<Void, Never>?
     @State private var asksAddOrReplace = false
 
@@ -195,6 +197,12 @@ struct ScheduleImportView: View {
             guard case let .success(url) = result else { return }
             readFile(at: url)
         }
+        .fullScreenCover(isPresented: $scansWithCamera) {
+            ScheduleCameraSheet { scan in
+                scansWithCamera = false
+                if let scan { readScan(scan) }
+            }
+        }
         .onDisappear { readTask?.cancel() }
         .interactiveDismissDisabled(stage == .reading)
     }
@@ -213,19 +221,31 @@ struct ScheduleImportView: View {
         }
     }
 
-    /// 1. The source: a photo (system picker) or a PDF (Files).
+    /// 1. The source: the camera (where there is one), a photo (system picker) or a PDF (Files).
     private var pickStep: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 VStack(alignment: .leading, spacing: 8) {
                     MiniSectionTitle(title: tr("Ton horaire"))
-                    Text(tr("Choisis une photo bien nette ou un PDF de ton horaire de cours. La lecture se fait sur ton iPhone : rien n'est envoyé."))
+                    Text(ScheduleDocumentCamera.isSupported
+                         ? tr("Scanne ton horaire avec la caméra, ou choisis une photo bien nette ou un PDF. La lecture se fait sur ton iPhone : rien n'est envoyé.")
+                         : tr("Choisis une photo bien nette ou un PDF de ton horaire de cours. La lecture se fait sur ton iPhone : rien n'est envoyé."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
                 }
+                if ScheduleDocumentCamera.isSupported {
+                    Button {
+                        scansWithCamera = true
+                    } label: {
+                        sourceLabel(tr("Scanner avec la caméra"), symbol: "doc.viewfinder", isProminent: true)
+                    }
+                    .buttonStyle(.pressable)
+                    .accessibilityIdentifier("schedule-import-camera")
+                    MiniFootnote(text: tr("Le flash s'allume tout seul quand il fait sombre ; le bouton éclair de la caméra le règle sur automatique, activé ou désactivé."))
+                }
                 PhotosPicker(selection: $photoItem, matching: .images) {
-                    sourceLabel(tr("Choisir une photo"), symbol: "photo.on.rectangle", isProminent: true)
+                    sourceLabel(tr("Choisir une photo"), symbol: "photo.on.rectangle", isProminent: !ScheduleDocumentCamera.isSupported)
                 }
                 .accessibilityIdentifier("schedule-import-photo")
                 Button {
@@ -652,6 +672,15 @@ struct ScheduleImportView: View {
         start {
             guard let data = try? await item.loadTransferable(type: Data.self), let image = SafeImage.decode(data, maxDimension: 6_000) else { return .unreadable }
             return await slotsOrFailure(from: .image(image))
+        }
+    }
+
+    /// The pages photographed with the document camera (already straightened by it): made light away from the main
+    /// thread, then read like the pages of a PDF.
+    private func readScan(_ scan: ScannedPages) {
+        start {
+            let pages = await ScheduleReader.lightPages(count: scan.count, page: scan.page)
+            return await slotsOrFailure(from: .images(pages))
         }
     }
 

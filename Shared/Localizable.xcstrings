@@ -54615,6 +54615,53 @@
         }
       }
     },
+    "Change le mode du flash : automatique, activé ou désactivé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ändert den Blitzmodus: automatisch, ein oder aus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changes the flash mode: auto, on or off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambia el modo del flash: automático, activado o desactivado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change le mode du flash : automatique, activé ou désactivé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambia la modalità del flash: automatico, attivo o disattivato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フラッシュのモードを切り替えます：自動、オン、オフ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muda o modo do flash: automático, ativado ou desativado"
+          }
+        }
+      }
+    },
     "Changer d'icône": {
       "extractionState": "manual",
       "localizations": {
@@ -58183,6 +58230,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolher uma foto"
+          }
+        }
+      }
+    },
+    "Choisir une photo ou un PDF": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foto oder PDF auswählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a photo or a PDF"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir una foto o un PDF"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir une photo ou un PDF"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli una foto o un PDF"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真またはPDFを選択"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher uma foto ou um PDF"
           }
         }
       }
@@ -88690,6 +88784,53 @@
         }
       }
     },
+    "Elle photographie ton horaire, sur papier ou sur un écran, pour en lire les cours et les heures.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sie fotografiert deinen Stundenplan, auf Papier oder auf einem Bildschirm, um Kurse und Zeiten zu lesen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It photographs your schedule, on paper or on a screen, to read its classes and times."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografía tu horario, en papel o en una pantalla, para leer sus clases y sus horas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elle photographie ton horaire, sur papier ou sur un écran, pour en lire les cours et les heures."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotografa il tuo orario, su carta o su uno schermo, per leggerne le lezioni e gli orari."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "紙や画面の時間割を撮影して、授業と時間を読み取ります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ela fotografa seu horário, no papel ou em uma tela, para ler as aulas e os horários."
+          }
+        }
+      }
+    },
     "Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.": {
       "extractionState": "manual",
       "localizations": {
@@ -99167,6 +99308,194 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fixos"
+          }
+        }
+      }
+    },
+    "Flash": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blitz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フラッシュ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash"
+          }
+        }
+      }
+    },
+    "Flash activé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blitz ein"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash on"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash activado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash activé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash attivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フラッシュ：オン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash ativado"
+          }
+        }
+      }
+    },
+    "Flash automatique": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blitz automatisch"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash auto"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash automático"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash automatique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash automatico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フラッシュ：自動"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash automático"
+          }
+        }
+      }
+    },
+    "Flash désactivé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blitz aus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash desactivado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash désactivé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash disattivato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フラッシュ：オフ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flash desativado"
           }
         }
       }
@@ -121543,6 +121872,53 @@
         }
       }
     },
+    "La lecture se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Er wird auf deinem iPhone gelesen. Es wird kein Foto gespeichert oder gesendet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It is read on your iPhone. No photo is saved or sent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se lee en tu iPhone. Ninguna foto se guarda ni se envía."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La lecture se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Viene letto sul tuo iPhone. Nessuna foto viene salvata o inviata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み取りはiPhone上で行われます。写真が保存または送信されることはありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A leitura é feita no seu iPhone. Nenhuma foto é salva ou enviada."
+          }
+        }
+      }
+    },
     "La lune ce soir, son éclairage et la prochaine pleine lune.": {
       "extractionState": "manual",
       "localizations": {
@@ -126662,6 +127038,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O passar dos anos"
+          }
+        }
+      }
+    },
+    "Le flash s'allume tout seul quand il fait sombre ; le bouton éclair de la caméra le règle sur automatique, activé ou désactivé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Blitz geht von selbst an, wenn es dunkel ist; die Blitztaste der Kamera stellt ihn auf automatisch, ein oder aus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The flash fires by itself when it is dark; the bolt button of the camera sets it to auto, on or off."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El flash se enciende solo cuando hay poca luz; el botón del rayo de la cámara lo pone en automático, activado o desactivado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le flash s'allume tout seul quand il fait sombre ; le bouton éclair de la caméra le règle sur automatique, activé ou désactivé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il flash si accende da solo quando c'è poca luce; il pulsante con il fulmine della fotocamera lo imposta su automatico, attivo o disattivato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暗いときはフラッシュが自動で光ります。カメラの稲妻ボタンで自動、オン、オフを切り替えられます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O flash acende sozinho quando está escuro; o botão de raio da câmera o deixa em automático, ativado ou desativado."
           }
         }
       }
@@ -201161,6 +201584,53 @@
         }
       }
     },
+    "Scanne ton horaire avec la caméra, ou choisis une photo bien nette ou un PDF. La lecture se fait sur ton iPhone : rien n'est envoyé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanne deinen Stundenplan mit der Kamera oder wähle ein gut lesbares Foto oder ein PDF. Er wird auf deinem iPhone gelesen: Nichts wird gesendet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan your schedule with the camera, or choose a clear photo or a PDF. It is read on your iPhone: nothing is sent."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanea tu horario con la cámara, o elige una foto nítida o un PDF. Se lee en tu iPhone: no se envía nada."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanne ton horaire avec la caméra, ou choisis une photo bien nette ou un PDF. La lecture se fait sur ton iPhone : rien n'est envoyé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scansiona il tuo orario con la fotocamera, oppure scegli una foto nitida o un PDF. Viene letto sul tuo iPhone: non viene inviato nulla."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カメラで時間割をスキャンするか、鮮明な写真またはPDFを選んでください。読み取りはiPhone上で行われ、何も送信されません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escaneie seu horário com a câmera, ou escolha uma foto nítida ou um PDF. A leitura é feita no seu iPhone: nada é enviado."
+          }
+        }
+      }
+    },
     "Scanne.\nC'est noté.": {
       "extractionState": "manual",
       "localizations": {
@@ -201251,6 +201721,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escanear"
+          }
+        }
+      }
+    },
+    "Scanner avec la caméra": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit der Kamera scannen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan with the camera"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanear con la cámara"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanner avec la caméra"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scansiona con la fotocamera"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カメラでスキャン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanear com a câmera"
           }
         }
       }

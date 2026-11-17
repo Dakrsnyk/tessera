@@ -22,6 +22,8 @@ enum FoodScanOutcome {
 ///   to search the list, to create the food, or to try again. No product is ever made up.
 /// - A photo is analysed by `MealAnalysisConfig.makeAnalyzer()` (Vision, on the iPhone). The photo is not
 ///   kept and nothing is sent.
+/// - The light (`ScanTorch`): it comes on by itself when the scene is dark, and a button beside the shutter
+///   chooses automatic, on or off. It goes out as soon as the camera stops.
 struct FoodScanView: View {
     /// The meal the food goes to (chosen from a meal of the Nutrition mini-app), else the current one.
     var presetMeal: MealType? = nil
@@ -35,6 +37,10 @@ struct FoodScanView: View {
     @State private var zoneHints: [ScanZoneHint] = []
     @State private var source: ScanRecapSource = .barcode
     @State private var camera = ScanCameraHandle()
+    @State private var torch = ScanTorch()
+    /// The choice of light just made, said under the shutter for a moment.
+    @State private var flashNotice: String?
+    @State private var flashNoticeTask: Task<Void, Never>?
     @State private var pickedPhoto: PhotosPickerItem?
     @State private var isCapturing = false
     /// The barcode of a saved personal food just shown: Open Food Facts may know the product too, one tap away.
@@ -100,6 +106,11 @@ struct FoodScanView: View {
                     Task { await analyze(item) }
                 }
                 .sheet(item: $paywall) { PaywallView(context: $0) }
+                // Whatever closes the scanner, the light never stays on behind it.
+                .onDisappear {
+                    flashNoticeTask?.cancel()
+                    torch.stop()
+                }
         }
     }
 
@@ -210,7 +221,7 @@ struct FoodScanView: View {
     @ViewBuilder
     private var cameraScreen: some View {
         if DataScannerViewController.isSupported && DataScannerViewController.isAvailable {
-            ScanCameraView(handle: camera, onScan: handleBarcode)
+            ScanCameraView(handle: camera, torch: torch, onScan: handleBarcode)
                 .ignoresSafeArea(edges: .bottom)
                 .overlay { ScanFrame() }
                 .safeAreaInset(edge: .bottom) { controls }
@@ -225,7 +236,7 @@ struct FoodScanView: View {
         }
     }
 
-    /// The shutter (a dish), the picker of a photo already taken, and the way to the search.
+    /// The shutter (a dish), the picker of a photo already taken, the light, and the way to the search.
     private var controls: some View {
         VStack(spacing: 10) {
             HStack {
@@ -255,10 +266,14 @@ struct FoodScanView: View {
                 .opacity(isCapturing ? 0.5 : 1)
                 .accessibilityLabel(tr("Photographier le plat"))
                 Spacer()
-                Color.clear.frame(width: 52, height: 52)
+                if torch.isAvailable {
+                    ScanFlashButton(torch: torch) { sayFlashMode() }
+                } else {
+                    Color.clear.frame(width: 52, height: 52)
+                }
             }
             .padding(.horizontal, 28)
-            Text(tr("Photographier le plat"))
+            Text(flashNotice ?? tr("Photographier le plat"))
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(Color.white)
                 .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
@@ -282,6 +297,17 @@ struct FoodScanView: View {
             }
         }
         .padding(.bottom, 12)
+    }
+
+    /// The new choice of light, in place of the shutter's caption for a moment.
+    private func sayFlashMode() {
+        flashNotice = torch.mode.title
+        flashNoticeTask?.cancel()
+        flashNoticeTask = Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(1_800))
+            guard !Task.isCancelled else { return }
+            flashNotice = nil
+        }
     }
 
     private var galleryLabel: some View {
@@ -501,10 +527,12 @@ final class ScanCameraHandle {
 /// on devices with a camera) and stops at the first one.
 struct ScanCameraView: UIViewControllerRepresentable {
     let handle: ScanCameraHandle
+    /// The light of the scanner: started with the camera, put out with it.
+    let torch: ScanTorch
     let onScan: (String) -> Void
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(onScan: onScan)
+        Coordinator(torch: torch, onScan: onScan)
     }
 
     func makeUIViewController(context: Context) -> DataScannerViewController {
@@ -518,6 +546,7 @@ struct ScanCameraView: UIViewControllerRepresentable {
         scanner.delegate = context.coordinator
         handle.scanner = scanner
         try? scanner.startScanning()
+        torch.start(scanner: scanner)
         return scanner
     }
 
@@ -527,14 +556,17 @@ struct ScanCameraView: UIViewControllerRepresentable {
     }
 
     static func dismantleUIViewController(_ controller: DataScannerViewController, coordinator: Coordinator) {
+        coordinator.torch.stop()
         controller.stopScanning()
     }
 
     final class Coordinator: NSObject, DataScannerViewControllerDelegate {
+        let torch: ScanTorch
         var onScan: (String) -> Void
         private var didScan = false
 
-        init(onScan: @escaping (String) -> Void) {
+        init(torch: ScanTorch, onScan: @escaping (String) -> Void) {
+            self.torch = torch
             self.onScan = onScan
         }
 
@@ -543,6 +575,7 @@ struct ScanCameraView: UIViewControllerRepresentable {
             for item in addedItems {
                 if case let .barcode(barcode) = item, let value = barcode.payloadStringValue {
                     didScan = true
+                    torch.stop()
                     dataScanner.stopScanning()
                     onScan(value)
                     return

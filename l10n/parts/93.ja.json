@@ -1,0 +1,13 @@
+{
+ "Flash": "フラッシュ",
+ "Flash automatique": "フラッシュ：自動",
+ "Flash activé": "フラッシュ：オン",
+ "Flash désactivé": "フラッシュ：オフ",
+ "Change le mode du flash : automatique, activé ou désactivé": "フラッシュのモードを切り替えます：自動、オン、オフ",
+ "Scanner avec la caméra": "カメラでスキャン",
+ "Scanne ton horaire avec la caméra, ou choisis une photo bien nette ou un PDF. La lecture se fait sur ton iPhone : rien n'est envoyé.": "カメラで時間割をスキャンするか、鮮明な写真またはPDFを選んでください。読み取りはiPhone上で行われ、何も送信されません。",
+ "Le flash s'allume tout seul quand il fait sombre ; le bouton éclair de la caméra le règle sur automatique, activé ou désactivé.": "暗いときはフラッシュが自動で光ります。カメラの稲妻ボタンで自動、オン、オフを切り替えられます。",
+ "Elle photographie ton horaire, sur papier ou sur un écran, pour en lire les cours et les heures.": "紙や画面の時間割を撮影して、授業と時間を読み取ります。",
+ "La lecture se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée.": "読み取りはiPhone上で行われます。写真が保存または送信されることはありません。",
+ "Choisir une photo ou un PDF": "写真またはPDFを選択"
+}

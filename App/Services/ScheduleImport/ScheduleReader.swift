@@ -3,8 +3,8 @@ import Vision
 import PDFKit
 import CoreImage
 
-/// Where the timetable comes from.
-enum ScheduleSource { case image(UIImage), pdf(URL) }
+/// Where the timetable comes from: one photo, a PDF, or the pages photographed with the document camera.
+enum ScheduleSource { case image(UIImage), pdf(URL), images([UIImage]) }
 
 enum ScheduleImportError: Error { case unreadable, nothingFound }
 
@@ -69,10 +69,49 @@ enum ScheduleReader {
             }
             guard !pages.isEmpty else { throw ScheduleImportError.unreadable }
             return pages
+        case .images(let images):
+            // The pages of a scan, read like the pages of a PDF: one budget for them all.
+            var pages: [SchedulePage] = []
+            let deadline = Date().addingTimeInterval(timeBudget)
+            for image in images.prefix(maxPages) {
+                try Task.checkCancellation()
+                guard let cgImage = upright(image) else { continue }
+                pages.append(try await recognize(cgImage, deadline: deadline))
+            }
+            guard !pages.isEmpty else { throw ScheduleImportError.unreadable }
+            return pages
         }
     }
 
     // MARK: Images
+
+    /// A photographed page no larger than what the reading looks at (`longestSide` pixels): ten pages of the
+    /// document camera then stay light in memory, and nothing the reading uses is lost.
+    static func light(_ image: UIImage) -> UIImage {
+        let width = image.size.width * image.scale
+        let height = image.size.height * image.scale
+        let longest = max(width, height)
+        guard longest > longestSide, width >= 1, height >= 1 else { return image }
+        let ratio = longestSide / longest
+        let size = CGSize(width: max(1, (width * ratio).rounded()), height: max(1, (height * ratio).rounded()))
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        format.opaque = true
+        // Plain 8-bit colours: half the memory of the wide colours a recent screen would ask for.
+        format.preferredRange = .standard
+        return UIGraphicsImageRenderer(size: size, format: format).image { _ in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
+
+    /// The first `maxPages` pages of a scan, each opened (`page`) and made light in turn, away from the main thread.
+    static func lightPages(count: Int, page: @escaping (Int) -> UIImage) async -> [UIImage] {
+        await withCheckedContinuation { (continuation: CheckedContinuation<[UIImage], Never>) in
+            DispatchQueue.global(qos: .userInitiated).async {
+                continuation.resume(returning: (0..<max(0, min(count, maxPages))).map { light(page($0)) })
+            }
+        }
+    }
 
     /// The image drawn upright (its orientation applied) on a white background, with a side between
     /// `smallestSide` and `longestSide` pixels.
