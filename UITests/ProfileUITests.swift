@@ -310,6 +310,17 @@ final class ProfileUITests: XCTestCase {
         XCTAssertFalse(app.buttons["daily-premium"].exists, "Avec Premium, le badge doré disparaît")
     }
 
+    /// Home in Graphite, dark then light: the captures show its colors (made more contrasted on 2026-11-16).
+    func testGraphiteHomeCaptures() {
+        for appearance in ["dark", "light"] {
+            launch(["-screenshotScreen", "home", "-screenshotStyle", "slate", "-screenshotAppearance", appearance])
+            XCTAssertTrue(app.staticTexts["daily-title"].waitForExistence(timeout: 12), "Accueil absent (\(appearance))")
+            Thread.sleep(forTimeInterval: 1.0)
+            snapshot("home-graphite-\(appearance)")
+            app.terminate()
+        }
+    }
+
     // MARK: Widgets from the Store
 
     func testTheEditorAsksForWhatTheWidgetNeeds() {

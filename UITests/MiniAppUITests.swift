@@ -489,6 +489,13 @@ final class MiniAppUITests: XCTestCase {
         }
         XCTAssertTrue(app.buttons["lock-nextSet"].exists, "Prochaine série (écran verrouillé) absente")
         XCTAssertFalse(app.buttons["lock-progress"].exists, "Le filtre ne garde que les widgets interactifs")
+        // Opened in the Studio: « Contenu » only, no chapters, no « Style » (iOS draws the Lock Screen in its own colors).
+        tap(app.buttons["lock-nextSet"], "Prochaine série (écran verrouillé)")
+        XCTAssertTrue(app.descendants(matching: .any)["studio-lock-note"].waitForExistence(timeout: 12),
+                      "Le Studio d'un widget d'écran verrouillé explique qu'il n'y a pas de style")
+        XCTAssertFalse(app.buttons["studio-chapter-style"].exists, "Pas de chapitre Style sur l'écran verrouillé")
+        XCTAssertFalse(app.buttons["studio-chapter-layout"].exists, "Pas de chapitre Disposition sur l'écran verrouillé")
+        snapshot("lock-studio")
     }
 
     /// Home leads to the mini-apps through « Mon Quotidien »: its Nutrition card opens Nutrition.

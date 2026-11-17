@@ -10,7 +10,7 @@ final class AppPaletteTests: XCTestCase {
             (.aqua, "008C95", "45DDE0"), (.jade, "268577", "65D5BC"), (.pistachio, "718C42", "B8D987"),
             (.olive, "77752B", "C7C36A"), (.amber, "B86A13", "FFB454"), (.ruby, "C62845", "FF6B81"),
             (.rose, "C04472", "FF83B2"), (.orchid, "9854B8", "D5A0F5"), (.amethyst, "6841A5", "B69AFF"),
-            (.sable, "7B5D34", "E3C08A"), (.slate, "3D4756", "B4C0D0"),
+            (.sable, "7B5D34", "E3C08A"), (.slate, "2B323D", "E6EBF2"),
         ]
         XCTAssertEqual(AppStyle.all.count, 14)
         XCTAssertEqual(AppStyleID.allCases, expected.map(\.0))

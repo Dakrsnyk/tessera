@@ -195,4 +195,16 @@ final class StudioColorTests: XCTestCase {
         XCTAssertNil(StudioSection(name: "layout"))
         XCTAssertFalse(StudioSection.allCases.map(\.rawValue).contains("depth"))
     }
+
+    /// Créer › Écran verrouillé: no « Style » there (iOS draws the Lock Screen in its own colors), so each widget gets
+    /// the free color closest to its space's, never a color that would ask for Premium (PDG, 2026-11-16).
+    func testALockScreenWidgetGetsTheClosestFreeColor() {
+        XCTAssertEqual(LockScreenCreator.freeAccent("2F8F7A"), "2F8F7A", "Une couleur gratuite est gardée")
+        XCTAssertEqual(LockScreenCreator.freeAccent("F08A24"), "F2A33A", "L'orange de Nutrition devient Ambre")
+        XCTAssertEqual(LockScreenCreator.freeAccent("E5484D"), "FF6B57", "Le rouge de Fitness devient Corail")
+        for space in Space.allCases {
+            let hex = LockScreenCreator.freeAccent(space.colorHex)
+            XCTAssertTrue(Palette.freeAccents.contains { $0.hex == hex }, "\(space.title) : \(hex) n'est pas gratuite")
+        }
+    }
 }

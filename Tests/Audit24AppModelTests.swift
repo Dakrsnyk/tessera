@@ -3,7 +3,7 @@ import XCTest
 @testable import Ardane
 
 /// Audit prépublication (chantier 24), corrections du modèle : le quota gratuit d'analyses photo survit à
-/// l'effacement et à la restauration, la réinitialisation est complète, la limite de 5 habitudes tient,
+/// l'effacement et à la restauration, la réinitialisation est complète, la limite d'habitudes gratuites tient,
 /// les objectifs nutritionnels calculés restent dans les bornes de sécurité, un style Premium n'est pas
 /// donné sans Premium, et une simple date de vérification n'écrit rien.
 @MainActor
@@ -130,7 +130,9 @@ final class Audit24AppModelTests: XCTestCase {
 
     // MARK: Free habits (K-05 / F-01)
 
-    func testTheFifthHabitIsTheLastWithoutPremium() {
+    func testTheLastFreeHabitIsTheLimitWithoutPremium() {
+        // 3 habits in the free plan (PDG, 2026-11-16; 5 before).
+        XCTAssertEqual(AppModel.freeHabitLimit, 3)
         withoutDebugUnlock {
             let model = AppModel(store: temporaryStore())
             for index in 1...AppModel.freeHabitLimit {
