@@ -8,7 +8,8 @@
 5. Privacy manifest: every "required reason" API the code uses is declared in Shared/PrivacyInfo.xcprivacy.
 6. App icons: every icon offered in « Icône de l'app » has its icon set and its preview in the asset catalog.
 7. FinanceKit: the switch ArdaneFinanceKit is on only with Apple's entitlement (otherwise the app would close).
-8. Warning only: when every staged file is a .md file, the push will not start the CI (paths-ignore "**.md"),
+8. API keys: the keys read from the Info.plist stay empty in the project (public repository).
+9. Warning only: when every staged file is a .md file, the push will not start the CI (paths-ignore "**.md"),
    whatever tag the commit message carries.
 
 Usage: python3 scripts/check_swift.py  (exit code 1 when something is wrong)
@@ -285,16 +286,44 @@ def check_internal_premium():
     workflow = open(os.path.join(ROOT, ".github", "workflows", "build.yml"), encoding="utf8").read()
     if "INTERNAL_PREMIUM" in workflow and "testFlightInternalTestingOnly" not in workflow:
         problems.append("build.yml: INTERNAL_PREMIUM without the « TestFlight Internal Only » export option")
-    # Outside comments, the condition is passed on one line only: the [interne] EXTRA=(…) of the archive step.
+    # Outside comments, the condition is named on one line only: the [interne] EXTRA=(…) of the archive step
+    # (whatever the build setting: SWIFT_ACTIVE_COMPILATION_CONDITIONS, OTHER_SWIFT_FLAGS -D, GCC_PREPROCESSOR…).
     passing = [line.strip() for line in workflow.splitlines()
-               if "INTERNAL_PREMIUM" in line and not line.strip().startswith("#") and "SWIFT_ACTIVE_COMPILATION_CONDITIONS" in line]
+               if "INTERNAL_PREMIUM" in line and not line.strip().startswith("#")]
     if any(not line.startswith("EXTRA=(") for line in passing) or len(passing) > 1:
         problems.append("build.yml: INTERNAL_PREMIUM may only be passed by the [interne] EXTRA=(…) line")
+    # Nor by a build configuration file or a shell script of the repository.
+    for folder, extensions in (("Config", (".xcconfig", ".plist", ".entitlements")), ("scripts", (".sh",))):
+        for directory, _, names in os.walk(os.path.join(ROOT, folder)):
+            for name in names:
+                path = os.path.join(directory, name)
+                if not name.endswith(extensions):
+                    continue
+                try:
+                    text = open(path, encoding="utf8", errors="ignore").read()
+                except OSError:
+                    continue
+                if "INTERNAL_PREMIUM" in text:
+                    relative = os.path.relpath(path, ROOT).replace(os.sep, "/")
+                    problems.append(f"{relative}: INTERNAL_PREMIUM must come from the CI tag [interne] only")
     allowed = {"Shared/Model/Settings.swift", "App/Screens/Profile/ProfileView.swift"}
     for path, text in FILES.items():
         relative = os.path.relpath(path, ROOT).replace(os.sep, "/")
         if "INTERNAL_PREMIUM" in text and relative not in allowed:
             problems.append(f"{relative}: INTERNAL_PREMIUM is only allowed in Settings.swift and ProfileView.swift")
+
+
+def check_api_keys():
+    """The repository is public: the API keys the app can read from its Info.plist (CoinGecko, Finnhub) stay empty
+    in the project and are placeholders in the plist. A real key would be public in the repository and in the app."""
+    pbx = open(os.path.join(ROOT, "Ardane.xcodeproj", "project.pbxproj"), encoding="utf8").read()
+    for name, value in re.findall(r"\b([A-Z0-9_]*API_KEY)\s*=\s*([^;]*);", pbx):
+        if value.strip().strip('"') != "":
+            problems.append(f"Ardane.xcodeproj: {name} must stay empty in the project (the repository is public)")
+    info = plistlib.load(open(os.path.join(ROOT, "Config", "App-Info.plist"), "rb"))
+    for key, value in info.items():
+        if key.endswith("APIKey") and isinstance(value, str) and value and not re.fullmatch(r"\$\([A-Z0-9_]+\)", value):
+            problems.append(f"Config/App-Info.plist: {key} must be a $(BUILD_SETTING) placeholder, never a key")
 
 
 def check_privacy_manifest():
@@ -404,6 +433,7 @@ check_button_label_tint()
 check_internal_premium()
 check_privacy_manifest()
 check_financekit()
+check_api_keys()
 icons = check_app_icons()
 if problems:
     print("\n".join(problems))

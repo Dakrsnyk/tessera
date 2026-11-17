@@ -43,3 +43,14 @@ Le code est prêt depuis le 2026-11-16 (`App/Services/WalletImport.swift`), mais
 2. Une fois accordée : Certificates, Identifiers & Profiles → l'identifiant de l'app → cocher la capacité FinanceKit (onglet des capacités gérées) ; régénérer le profil « Ardane App Store » ; refaire l'étape 10 (secrets du profil).
 3. Ajouter à `Config/Ardane.entitlements` la clé `com.apple.developer.financekit` avec exactement la valeur que montre le nouveau profil (sans Mac : `openssl smime -inform der -verify -noverify -in profil.mobileprovision`, section `Entitlements`), puis mettre `ArdaneFinanceKit` à `true`.
 4. Version interne (`[interne]`), puis essai sur un iPhone américain ou britannique (Apple Card, Apple Cash, ou banque reliée à Cartes au Royaume-Uni) : Finances › Dépenses Apple Pay automatiques › « Activer l'import automatique ». Au Canada, la carte n'apparaît pas (Apple n'y partage pas ces données) et le raccourci reste la voie.
+
+## Protéger les clés de signature (à faire par le titulaire du compte)
+
+Le dossier `~/ardane-signing` contient la clé privée du certificat de distribution et la clé API App Store Connect. Tant qu'elles sont en clair sur le PC, un logiciel malveillant ou une personne qui a accès au PC peut envoyer des versions au nom d'Ardane. Audit du 2026-11-17, constat 2.
+
+1. Faire une archive chiffrée du dossier (7-Zip : format 7z, chiffrement AES-256, « chiffrer les noms de fichiers », mot de passe long) et la garder hors du PC (clé USB rangée, ou coffre d'un gestionnaire de mots de passe).
+2. Supprimer ensuite le dossier `~/ardane-signing` du PC : la CI n'en a pas besoin, elle utilise les secrets GitHub. Le dossier ne sert qu'à refaire ces secrets (certificat renouvelé, nouveau profil).
+3. Si le PC a été partagé ou si un doute existe : révoquer la clé API dans App Store Connect (Utilisateurs et accès › Intégrations) et en créer une autre, puis relancer `bash scripts/signing/ardane_signing.sh secrets …`.
+4. Dans GitHub › Settings › Actions › General : « Allow actions created by GitHub » et « Require actions to be pinned to a full-length commit SHA » ; dans Settings › Rules : un ruleset sur `main` qui interdit la suppression et le « force push ».
+
+Le mot de passe du `.p12` n'apparaît plus sur une ligne de commande : `openssl` le lit dans l'environnement.

@@ -48,9 +48,11 @@ case "${1:-}" in
     if [ "$(openssl x509 -in dist.pem -noout -modulus)" != "$(openssl rsa -in dist.key -noout -modulus 2>/dev/null)" ]; then
       echo "Ce certificat ne correspond pas à dist.key : refais-le à partir de Ardane.certSigningRequest."; exit 1
     fi
+    # Read by openssl from the environment: a password on a command line is visible to the other processes.
     P12_PASSWORD=$(openssl rand -hex 16)
+    export P12_PASSWORD
     openssl pkcs12 -export -inkey dist.key -in dist.pem -name "Ardane Distribution" -out dist.p12 \
-      -passout "pass:$P12_PASSWORD" -keypbe PBE-SHA1-3DES -certpbe PBE-SHA1-3DES -macalg sha1
+      -passout env:P12_PASSWORD -keypbe PBE-SHA1-3DES -certpbe PBE-SHA1-3DES -macalg sha1
 
     # Which profile is which: read the application identifier inside each one.
     APP_PROFILE=""; WIDGETS_PROFILE=""
