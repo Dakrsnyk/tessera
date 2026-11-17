@@ -56,7 +56,7 @@ struct TutorialOverlay: View {
                     TutorialLayout.Candidate(frame: $0.frame.offsetBy(dx: -origin.x, dy: -origin.y), radius: $0.radius)
                 }
             }
-            : []
+            : Array(repeating: nil, count: step.targets.count)
         return TutorialLayout.plan(candidates: candidates, screen: size, safeTop: safe.top, safeBottom: safe.bottom, card: cardSize)
     }
 

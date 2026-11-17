@@ -57,8 +57,8 @@ final class TutorialLayoutTests: XCTestCase {
                     XCTAssertEqual(plan.candidateIndex, 0, label)
                 } else {
                     XCTAssertNil(plan.candidateIndex, label)
-                    XCTAssertEqual(plan.card.midY, (screen.top + 12 + screen.size.height - screen.bottom - 12) / 2, accuracy: 0.5,
-                                   "\(label) : sans trou, la bulle est au centre de la zone sûre")
+                    XCTAssertEqual(plan.card.maxY, screen.size.height - screen.bottom - 16, accuracy: 0.5,
+                                   "\(label) : sans trou, la bulle va en bas, jamais au centre par-dessus la partie")
                 }
                 let safe = CGRect(x: 0, y: screen.top, width: screen.size.width, height: screen.size.height - screen.top - screen.bottom)
                 XCTAssertTrue(safe.contains(plan.card), "\(label) : la bulle reste dans la zone sûre")
@@ -142,6 +142,48 @@ final class TutorialLayoutTests: XCTestCase {
         XCTAssertNil(TutorialLayout.scrollDelta(candidates: [cand(wide, 22)], screen: screen.size,
                                                 safeTop: screen.top, safeBottom: screen.bottom, card: card),
                      "Une partie plus large que l'écran ne sera jamais éclairée")
+    }
+
+    func testWhenNothingFitsTheCardGoesToTheBottomAndThePageShowsTheTopOfThePart() throws {
+        // Planning card 410 tall, Store hero 360, card 280: on every screen, no outline ever cut and never a centered card.
+        let bubble = CGSize(width: 360, height: 280)
+        for screen in screens {
+            for (name, height) in [("Planning", CGFloat(410)), ("Store", CGFloat(360)), ("trop haute", CGFloat(2000))] {
+                let part = CGRect(x: 20, y: screen.size.height - 150, width: screen.size.width - 40, height: height)
+                let plan = TutorialLayout.plan(candidates: [cand(part, 24)], screen: screen.size,
+                                               safeTop: screen.top, safeBottom: screen.bottom, card: bubble)
+                let label = "\(screen.name), \(name)"
+                if let hole = plan.hole {
+                    XCTAssertTrue(TutorialLayout.visibleZone(screen: screen.size, safeTop: screen.top, safeBottom: screen.bottom).contains(hole), label)
+                    XCTAssertFalse(hole.intersects(plan.card), label)
+                } else {
+                    XCTAssertEqual(plan.card.maxY, screen.size.height - screen.bottom - 16, accuracy: 0.5, "\(label) : bulle en bas")
+                    XCTAssertFalse(plan.cardAtTop, label)
+                }
+                // The page then moves so that the top of the part (or the whole part when it fits) is in the free room.
+                let move = try XCTUnwrap(TutorialLayout.scrollDelta(candidates: [cand(part, 24)], screen: screen.size,
+                                                                     safeTop: screen.top, safeBottom: screen.bottom, card: bubble), label)
+                let moved = part.offsetBy(dx: 0, dy: -move.delta)
+                let zone = TutorialLayout.visibleZone(screen: screen.size, safeTop: screen.top, safeBottom: screen.bottom)
+                let freeBottom = plan.card.minY
+                if !move.fits {
+                    XCTAssertEqual(moved.minY, zone.minY + 8, accuracy: 0.5, "\(label) : le haut de la partie est en haut de la zone libre")
+                    XCTAssertLessThan(moved.minY, freeBottom, label)
+                }
+            }
+        }
+    }
+
+    func testTheTopOfThePlanningCardTakesOverWhenTheWholeCardIsTooTall() {
+        let bubble = CGSize(width: 360, height: 280)
+        // Small iPhone: 410 doesn't fit above the bubble, the top of the card (170) does.
+        let screen = screens[0]
+        let whole = CGRect(x: 20, y: 100, width: 335, height: 410)
+        let top = CGRect(x: 20, y: 100, width: 335, height: 170)
+        let plan = TutorialLayout.plan(candidates: [cand(whole, 24), cand(top, 24)], screen: screen.size,
+                                       safeTop: screen.top, safeBottom: screen.bottom, card: bubble)
+        XCTAssertEqual(plan.candidateIndex, 1)
+        XCTAssertNotNil(plan.hole)
     }
 
     func testSeveralPartsAreLitTogetherOnlyWhenAllAreThere() {

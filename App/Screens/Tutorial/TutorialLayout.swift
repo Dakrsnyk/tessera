@@ -63,7 +63,7 @@ enum TutorialLayout {
     // MARK: Plan
 
     /// The first candidate that fits whole, with the bubble below it or else above it; otherwise nothing lit and the
-    /// bubble centered. Candidates are listed by preference (the whole section, then a smaller part of it).
+    /// bubble at the bottom (centered only when the step has no part at all). Candidates are listed by preference (the whole section, then a smaller part of it).
     static func plan(candidates: [Candidate?], screen: CGSize, safeTop: CGFloat, safeBottom: CGFloat, card: CGSize) -> Plan {
         let zone = visibleZone(screen: screen, safeTop: safeTop, safeBottom: safeBottom)
         for (index, candidate) in candidates.enumerated() {
@@ -74,6 +74,12 @@ enum TutorialLayout {
                     return Plan(hole: fitted.rect, holeRadius: fitted.radius, card: cardRect, cardAtTop: atTop, candidateIndex: index)
                 }
             }
+        }
+        // The step has parts to show but none fits whole: no outline, and the card goes to the bottom so it never
+        // covers what the step presents (the page is scrolled to show the top of the part above the card).
+        if !candidates.isEmpty {
+            let bottom = cardFrame(card, screen: screen, safeTop: safeTop, safeBottom: safeBottom, atTop: false)
+            return Plan(hole: nil, holeRadius: defaultRadius, card: bottom, cardAtTop: false, candidateIndex: nil)
         }
         let centered = cardFrame(card, screen: screen, safeTop: safeTop, safeBottom: safeBottom, atTop: nil)
         return Plan(hole: nil, holeRadius: defaultRadius, card: centered, cardAtTop: false, candidateIndex: nil)
@@ -99,7 +105,7 @@ enum TutorialLayout {
     /// How far the content must move up (positive) or down (negative) so the first candidate that can fit sits in the
     /// middle of the room above the bubble. Nil when none can fit however it is scrolled (too tall, too wide).
     static func scrollDelta(candidates: [Candidate?], screen: CGSize, safeTop: CGFloat, safeBottom: CGFloat,
-                            card: CGSize) -> (index: Int, delta: CGFloat)? {
+                            card: CGSize) -> (index: Int, delta: CGFloat, fits: Bool)? {
         let zone = visibleZone(screen: screen, safeTop: safeTop, safeBottom: safeBottom)
         let cardRect = cardFrame(card, screen: screen, safeTop: safeTop, safeBottom: safeBottom, atTop: false)
         let bandTop = zone.minY
@@ -113,7 +119,13 @@ enum TutorialLayout {
             guard zone.minX <= frame.minX - paddings[paddings.count - 1], frame.maxX <= zone.maxX else { continue }
             guard frame.height <= bandBottom - bandTop - 1 else { continue }
             let wantedMid = (bandTop + bandBottom) / 2
-            return (index, frame.midY - wantedMid)
+            return (index, frame.midY - wantedMid, true)
+        }
+        // None fits whole: show the top of the first part that is at least inside sideways, at the top of the free room.
+        for (index, candidate) in candidates.enumerated() {
+            guard let candidate, candidate.frame.width >= smallest, candidate.frame.height >= smallest,
+                  zone.minX <= candidate.frame.minX, candidate.frame.maxX <= zone.maxX else { continue }
+            return (index, candidate.frame.minY - (bandTop + 8), false)
         }
         return nil
     }

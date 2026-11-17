@@ -250,6 +250,16 @@ struct DailySection: View {
                 .tutorialTarget(.dailyNutrition, radius: 24, when: tile.id == "nutrition")
                 .tutorialTarget(.dailyFitness, radius: 24, when: tile.id == "workout")
                 .tutorialTarget(.dailyPlanning, radius: 24, when: tile.id == "planning")
+                // The top of the Planning card (its title and the days), for when the whole card is too tall to be lit.
+                .overlay(alignment: .top) {
+                    if tile.id == "planning" {
+                        Color.clear
+                            .frame(height: 170)
+                            .tutorialTarget(.dailyPlanningTop, radius: 24)
+                            .allowsHitTesting(false)
+                            .accessibilityHidden(true)
+                    }
+                }
                 .environment(\.dailyCompact, compact)
                 .environment(\.dailyEditing, editing)
                 .environment(\.dailyCardActions, actions)

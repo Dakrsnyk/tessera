@@ -26,7 +26,7 @@ enum TutorialStep: String, CaseIterable, Identifiable {
     var targets: [[TutorialTarget]] {
         switch self {
         case .daily: [[.daily], [.dailyHeader, .dailyNutrition, .dailyFitness], [.dailyHeader, .dailyNutrition], [.dailyHeader]]
-        case .planning: [[.dailyPlanning]]
+        case .planning: [[.dailyPlanning], [.dailyPlanningTop]]
         case .info: [[.dailyNutrition, .dailyFitness], [.dailyFitness], [.dailyNutrition], [.info]]
         case .create: [[.createSpace]]
         case .store: [[.storeHero]]
@@ -124,7 +124,7 @@ enum TutorialStep: String, CaseIterable, Identifiable {
 enum TutorialTarget: String {
     case daily, miniApps, info, createSpace, storeHero, myWidgets, profile
     /// Inside Mon Quotidien: its title row and the Nutrition, Fitness and Planning cards.
-    case dailyHeader, dailyNutrition, dailyFitness, dailyPlanning
+    case dailyHeader, dailyNutrition, dailyFitness, dailyPlanning, dailyPlanningTop
 }
 
 /// Where each lit-up part is, in window coordinates. Shared by the tabs (each in its own navigation)

@@ -65,7 +65,7 @@ final class TutorialTests: XCTestCase {
     func testStepsLightUpTheirPartsOrNothing() {
         XCTAssertTrue(TutorialStep.welcome.targets.isEmpty)
         XCTAssertTrue(TutorialStep.studio.targets.isEmpty)
-        XCTAssertEqual(TutorialStep.planning.targets, [[.dailyPlanning]])
+        XCTAssertEqual(TutorialStep.planning.targets, [[.dailyPlanning], [.dailyPlanningTop]])
         XCTAssertEqual(TutorialStep.finish.targets, [[.profile]])
         // Mon Quotidien: the whole section first, then smaller parts down to the title alone.
         XCTAssertEqual(TutorialStep.daily.targets.first, [.daily])
