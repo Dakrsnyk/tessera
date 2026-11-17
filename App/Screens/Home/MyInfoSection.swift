@@ -25,16 +25,25 @@ extension AppModel {
             guard let mine = order.firstIndex(of: topic), let theirs = order.firstIndex(of: other) else { return true }
             return mine < theirs
         }
-        switch topic {
-        case .sport:
-            if showsGoal(on: .sport) { add("goal", "target", tr("Objectif"), profile.goal?.title) }
+        // The body (weight, height, age, activity) is one answer too: under Sport, and under Nutrition only when
+        // the person does not follow Sport (the calculation of Nutrition uses it all the same).
+        func addBody() {
             add("weight", "scalemass", tr("Poids"), profile.weightKg.map { Units.weightText(kilograms: $0, in: settings.unitSystem) })
             add("height", "ruler", tr("Taille", context: "height"), profile.heightCm.map { Units.heightText(centimetres: $0, in: settings.unitSystem) })
             add("age", "person", tr("Âge"), age.map { tr("\($0) ans") })
+        }
+        switch topic {
+        case .sport:
+            if showsGoal(on: .sport) { add("goal", "target", tr("Objectif"), profile.goal?.title) }
+            addBody()
             add("workouts", "calendar", tr("Séances"), profile.knows(.weeklyWorkouts) ? tr("\(fitness.weeklyGoal) par semaine") : nil)
             add("level", "chart.bar.fill", tr("Niveau"), profile.fitnessLevel?.title)
         case .nutrition:
             if showsGoal(on: .nutrition) { add("goal", "target", tr("Objectif"), profile.goal?.title) }
+            if !profile.topics.contains(.sport) {
+                addBody()
+                add("activity", "figure.walk", tr("Activité"), profile.calculatedActivity?.title ?? activityFromWorkouts?.title)
+            }
             add("kcal", "flame", tr("Calories"), profile.knows(.kcalTarget) ? tr("\(TF.int(nutrition.goals.kcal)) kcal") : nil)
             add("protein", "bolt.heart", tr("Protéines"), profile.knows(.proteinTarget) ? "\(TF.int(nutrition.goals.protein)) g" : nil)
             add("carbs", "leaf", tr("Glucides"), profile.knows(.carbsTarget) ? "\(TF.int(nutrition.goals.carbs)) g" : nil)
@@ -54,10 +63,10 @@ extension AppModel {
             let open = content.tasks.filter { !$0.isDone }.count
             add("tasks", "checklist", tr("Tâches du jour"), content.tasks.isEmpty ? nil : Fmt.number(open))
             add("work", "clock", tr("Travail"), profile.dailyWorkHours.map { tr("\(ProfileNumberField.format($0)) h par jour") })
-            add("focus", "brain.head.profile", tr("Concentration"), profile.knows(.focusGoal) ? tr("\(Fmt.hours(productivity.weeklyFocusGoalHours)) / sem.") : nil)
         case .studies:
             add("field", "graduationcap", tr("Études"), profile.studyField.trimmed.nonEmpty)
-            add("hours", "clock", tr("Étude perso"), profile.weeklyStudyHours.map { tr("\(ProfileNumberField.format($0)) h / sem.") })
+            add("hours", "clock", tr("Étude perso"), profile.knows(.studyGoal) ? tr("\(ProfileNumberField.format(student.weeklyStudyGoalHours)) h / sem.") : nil)
+            add("focus", "brain.head.profile", tr("Concentration"), profile.knows(.focusGoal) ? tr("\(Fmt.hours(productivity.weeklyFocusGoalHours)) / sem.") : nil)
             add("courses", "book", tr("Cours"), student.courses.isEmpty ? nil : Fmt.number(student.courses.count))
         case .car:
             add("name", "car", tr("Voiture"), profile.knows(.carName) ? car.name : nil)

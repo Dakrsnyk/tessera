@@ -281,7 +281,8 @@ struct DataItemRow: View {
                     .environment(\.locale, Fmt.locale)
             } else {
                 action(tr("Ajouter ma date de naissance"), symbol: "plus") {
-                    model.update(\.life) { $0.birthday = Holidays.make(2000, 1, 1) }
+                    let start = model.profile.startingBirthday
+                    model.update(\.life) { $0.birthday = start }
                 }
             }
         case .calendar:

@@ -149,7 +149,7 @@ struct StudentSpaceSections: View {
                     .buttonStyle(.bordered)
                 }
             }
-            Stepper(value: Binding(get: { state.weeklyStudyGoalHours }, set: { hours in model.update(\.student) { $0.weeklyStudyGoalHours = hours } }), in: 1...60) {
+            Stepper(value: Binding(get: { state.weeklyStudyGoalHours }, set: { hours in model.setStudyGoal(hours) }), in: 1...60) {
                 ValueRow(title: tr("Objectif"), value: tr("\(Fmt.hours(state.weeklyStudyGoalHours)) / semaine"))
             }
         }

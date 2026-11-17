@@ -807,7 +807,7 @@ struct StudiesRevisionPage: View {
                     }
                 }
                 .accessibilityIdentifier("revision-quick-add")
-                Stepper(value: Binding(get: { state.weeklyStudyGoalHours }, set: { hours in model.update(\.student) { $0.weeklyStudyGoalHours = hours } }), in: 1...60) {
+                Stepper(value: Binding(get: { state.weeklyStudyGoalHours }, set: { hours in model.setStudyGoal(hours) }), in: 1...60) {
                     Text(tr("Objectif : \(Fmt.hours(state.weeklyStudyGoalHours)) par semaine")).font(.subheadline)
                 }
             }

@@ -40,6 +40,12 @@ final class ScheduleRealOCRTests: XCTestCase {
     func testDayList() async throws { try await run("liste") }
     func testTable() async throws { try await run("tableau") }
 
+    // Documents that are not timetables of classes: MEASURED only (lines « SCORE OCR-… » in the journal and the attachments),
+    // never a failure of the CI while no real document has been read. To tighten once the numbers are known.
+    func testWorkListMeasure() async throws { try await measureDocument("travail") }
+    func testRosterMeasure() async throws { try await measureDocument("employes") }
+    func testAppointmentsMeasure() async throws { try await measureDocument("rendez-vous") }
+
     /// Runs last (XCTest goes in alphabetical order): the table of all the cases of this run, as one attachment. The
     /// `print`s are not kept by the CI journal; the attachments are exported in the report.
     func testZSynthese() {
@@ -127,6 +133,51 @@ final class ScheduleRealOCRTests: XCTestCase {
                 // Not measured yet: the first real run read the clean boxed blocks at 6/10 and the others perfectly. Four classes of slack, to tighten with the CI numbers.
                 XCTAssertGreaterThanOrEqual(result.correct, rendered.expected.count - 4, "image propre « \(label) » mal lue : \(slots.map { summary($0) })")
             }
+        }
+    }
+
+    /// The same reading as `run`, for the clean and the blurred page only, with nothing asserted but the drawing itself: the
+    /// lines read, the entries found and a « SCORE OCR-<name> <variant> » line (correct = right weekday, start and end within
+    /// 10 minutes; ticked or not).
+    private func measureDocument(_ name: String) async throws {
+        let rendered = try XCTUnwrap(ScheduleRenderer.make(name))
+        XCTAssertFalse(rendered.expected.isEmpty, name)
+        var rows: [String] = []
+        defer { attach(rows.isEmpty ? "aucun cas lu" : rows.joined(separator: "\n"), name: "OCR-SYNTHESE-\(name)") }
+        for variant in [ScheduleVariant.clean, .blurred] {
+            let image = ScheduleRenderer.apply(variant, to: rendered.image)
+            let label = "\(name) \(variant.rawValue)"
+            var report: [String] = []
+            func record(_ text: String) {
+                print(text)
+                report.append(text)
+            }
+            var pages: [SchedulePage] = []
+            do {
+                pages = try await ScheduleReader.pages(from: .image(image))
+            } catch {
+                record("OCR-ERREUR Vision a échoué sur « \(label) » : \(error)")
+                rows.append("\(name) | \(variant.rawValue) | erreur")
+                attach(report.joined(separator: "\n"), name: "OCR-\(name)-\(variant.rawValue)")
+                continue
+            }
+            var found: [ImportedSlot] = []
+            for page in pages {
+                for line in page.lines.sorted(by: { ($0.box.midY, $0.box.midX) < ($1.box.midY, $1.box.midX) }) {
+                    record("OCR-LINES \(label) [y=\(fmt(line.box.midY)) x=\(fmt(line.box.midX)) « \(line.text) »]")
+                }
+                found.append(contentsOf: ScheduleParser.slots(from: page.lines, probe: page.probe, aspect: page.aspect))
+            }
+            let slots = ScheduleParser.deduplicated(found)
+            let result = score(slots, expected: rendered.expected)
+            let row = "SCORE OCR-\(name) \(variant.rawValue) corrects=\(result.correct)/\(rendered.expected.count) lus=\(slots.count) "
+                + "types=\(slots.map { $0.kind.rawValue }.joined(separator: ",")) dates=\(slots.filter { $0.date != nil }.count)"
+            record(row)
+            record("OCR-DETAIL \(label): manquants \(result.missing), en trop \(result.extra)")
+            record("OCR-LUS \(label): \(slots.map { summary($0) + "|" + ($0.detail ?? "-") })")
+            rows.append(row)
+            Self.summaryRows.append(row)
+            attach(report.joined(separator: "\n"), name: "OCR-\(name)-\(variant.rawValue)")
         }
     }
 

@@ -315,7 +315,7 @@ struct StudiesAppView: View {
             MiniRowsCard {
                 NavigationLink(value: HomeRoute.page(.planningFocus)) {
                     MiniRow(symbol: "timer", colorHex: "8C6CFF", title: tr("Temps de concentration"),
-                            detail: tr("\(TF.int(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60)) h sur \(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine"))
+                            detail: tr("\(TF.decimal(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60, 1)) h sur \(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine"))
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("studies-focus")

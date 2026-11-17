@@ -5,14 +5,15 @@ import UniformTypeIdentifiers
 /// Puts the classes read from a photo or a PDF into the timetable of the app, without ever erasing or
 /// doubling what is already there. Pure (no model, no screen) so that it can be tested.
 enum ScheduleImportMerge {
-    /// The slots that can be saved: ticked, with a name and an end after the start, on a day of the week.
+    /// The slots that can be saved: ticked, with a name (for a class) and an end after the start, on a day of the week.
     static func importable(_ imported: [ImportedSlot]) -> [ImportedSlot] {
         imported.filter { isValid($0) }
     }
 
+    /// A shift, an appointment or another event may have no name: its kind names it in the Planning.
     static func isValid(_ slot: ImportedSlot) -> Bool {
         slot.isSelected
-            && !slot.title.trimmed.isEmpty
+            && (slot.kind != .course || !slot.title.trimmed.isEmpty)
             && (1...7).contains(slot.weekday)
             && slot.startMinute >= 0
             && slot.endMinute <= 24 * 60
@@ -24,33 +25,76 @@ enum ScheduleImportMerge {
         name.trimmed.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil)
     }
 
-    /// Adds each importable slot as a weekly class of its course (the course is made when no course
-    /// has that name). A slot already in the timetable (same course, day and hours, repeating every week)
-    /// is left as it is. Nothing existing is removed or changed. `added` counts the slots really added.
+    /// Adds each importable slot: a class as a class of its course (the course is made when no course has that name; the
+    /// teacher read fills the course's teacher when it has none, never replacing one), every week or on its date; a shift,
+    /// an appointment or another event as an entry of that kind, with its title (and « · » the person read), its place and
+    /// its date when it happens once. A slot already in the timetable (same kind, name, day or date, and hours) is left as it
+    /// is. Nothing existing is removed. `added` counts the slots really added.
     static func merge(_ imported: [ImportedSlot], into state: StudentState) -> (state: StudentState, added: Int) {
         var result = state
         var added = 0
         for item in importable(imported) {
-            let name = item.title.trimmed
-            let courseID: UUID
-            if let existing = result.courses.first(where: { key($0.name) == key(name) }) {
-                courseID = existing.id
-            } else {
-                let colors = SpaceColors.choices
-                let course = Course(name: name, colorHex: colors[result.courses.count % colors.count])
-                result.courses.append(course)
-                courseID = course.id
-            }
-            let isDuplicate = result.slots.contains {
-                $0.kind == .course && $0.courseID == courseID && $0.date == nil
-                    && $0.weekdays.contains(item.weekday) && $0.startMinute == item.startMinute && $0.endMinute == item.endMinute
-            }
-            guard !isDuplicate else { continue }
-            result.slots.append(ClassSlot(courseID: courseID, weekday: item.weekday, startMinute: item.startMinute, endMinute: item.endMinute,
-                                          room: (item.room ?? "").trimmed))
-            added += 1
+            let isNew = item.kind == .course ? addClass(item, to: &result) : addEvent(item, to: &result)
+            if isNew { added += 1 }
         }
         return (result, added)
+    }
+
+    /// A class of the timetable: weekly, or on its date. Returns whether a slot was added.
+    private static func addClass(_ item: ImportedSlot, to result: inout StudentState) -> Bool {
+        let name = item.title.trimmed
+        let teacher = (item.detail ?? "").trimmed
+        // The same rule as a course added by hand in Études (`CourseMatch`): the course of that name is found again,
+        // whatever its case, accents or punctuation, else it is made; a teacher read only fills an empty one.
+        let colors = SpaceColors.choices
+        let courseID = result.ensureCourse(named: name, teacher: teacher, colorHex: colors[result.courses.count % colors.count])
+        let day = item.date.map { DateMath.startOfDay($0) }
+        let weekday = day.map { FitnessMath.isoWeekday($0) } ?? item.weekday
+        let isDuplicate = result.slots.contains {
+            $0.kind == .course && $0.courseID == courseID && sameDay($0, weekday: weekday, date: day)
+                && $0.startMinute == item.startMinute && $0.endMinute == item.endMinute
+        }
+        guard !isDuplicate else { return false }
+        result.slots.append(ClassSlot(courseID: courseID, weekday: weekday, startMinute: item.startMinute, endMinute: item.endMinute,
+                                      room: (item.room ?? "").trimmed, date: day))
+        return true
+    }
+
+    /// The name of an entry that is not a class: its title, with the person read after « · » (« Dentiste · Dr Roy »), or
+    /// the person alone.
+    static func eventTitle(_ item: ImportedSlot) -> String {
+        let title = item.title.trimmed
+        let detail = (item.detail ?? "").trimmed
+        if detail.isEmpty { return title }
+        return title.isEmpty ? detail : title + " · " + detail
+    }
+
+    /// A shift, an appointment or another event. Returns whether a slot was added.
+    private static func addEvent(_ item: ImportedSlot, to result: inout StudentState) -> Bool {
+        let title = eventTitle(item)
+        let day = item.date.map { DateMath.startOfDay($0) }
+        let weekday = day.map { FitnessMath.isoWeekday($0) } ?? item.weekday
+        // The same entry typed by hand without the person (« Dentiste ») or with it (« Dentiste · Dr Roy ») is not doubled.
+        let names = Set([key(title), key(item.title)].filter { !$0.isEmpty })
+        let isDuplicate = result.slots.contains {
+            $0.kind == item.kind && (key($0.title) == key(title) || names.contains(key($0.title)))
+                && sameDay($0, weekday: weekday, date: day)
+                && $0.startMinute == item.startMinute && $0.endMinute == item.endMinute
+        }
+        guard !isDuplicate else { return false }
+        result.slots.append(ClassSlot(courseID: nil, weekday: weekday, startMinute: item.startMinute, endMinute: item.endMinute,
+                                      room: (item.room ?? "").trimmed, kind: item.kind, title: title, date: day))
+        return true
+    }
+
+    /// Whether an entry of the schedule falls on the same day: the same date for an entry that happens once, the same
+    /// weekday among those of a weekly one.
+    private static func sameDay(_ slot: ClassSlot, weekday: Int, date: Date?) -> Bool {
+        if let date {
+            guard let other = slot.date else { return false }
+            return DateMath.isSameDay(other, date)
+        }
+        return slot.date == nil && slot.weekdays.contains(weekday)
     }
 
     /// A weekly class: what an import creates (a course slot that comes back every week). Events, work and
@@ -62,6 +106,12 @@ enum ScheduleImportMerge {
     /// Whether the schedule already holds weekly classes (then the person is asked: add or replace).
     static func hasSchedule(_ state: StudentState) -> Bool {
         state.slots.contains(where: isWeeklyClass)
+    }
+
+    /// Whether to ask « add or replace »: only when the schedule holds weekly classes AND the import brings at least one.
+    /// An import of shifts or appointments only is added directly: replacing would remove the classes for nothing.
+    static func asksAddOrReplace(_ imported: [ImportedSlot], state: StudentState) -> Bool {
+        hasSchedule(state) && importable(imported).contains { $0.kind == .course && $0.date == nil }
     }
 
     /// Removes the weekly classes of the schedule, then adds the imported ones. Courses (with their grades, exams and
@@ -94,6 +144,9 @@ struct ScheduleImportView: View {
     /// The classes marked "to check" at the reading without any precise field (a page explained poorly as a whole): they
     /// stay marked when the person corrects fields. For the others, the mark goes when the last uncertain field is corrected.
     @State private var inheritedDoubt: Set<UUID> = []
+    /// The person of each shift of a roster of several people (read from the page): the person picks theirs, whose shifts are
+    /// ticked (without the name, which is theirs) while the others are unticked and keep their name.
+    @State private var rosterNames: [UUID: String] = [:]
     @State private var photoItem: PhotosPickerItem?
     @State private var choosesFile = false
     @State private var readTask: Task<Void, Never>?
@@ -259,6 +312,9 @@ struct ScheduleImportView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .accessibilityIdentifier("schedule-import-doubt-note")
                     }
+                    if Set(rosterNames.values).count >= 2 {
+                        rosterPicker
+                    }
                     if hasUncertainTicked || hasUnticked {
                         VStack(spacing: 10) {
                             if hasUncertainTicked {
@@ -301,7 +357,7 @@ struct ScheduleImportView: View {
         .scrollDismissesKeyboard(.interactively)
         .safeAreaInset(edge: .bottom) {
             MiniActionButton(title: tr("Ajouter à mon horaire (\(count))"), symbol: "calendar.badge.plus", colorHex: accentHex) {
-                if ScheduleImportMerge.hasSchedule(model.student) {
+                if ScheduleImportMerge.asksAddOrReplace(slots, state: model.student) {
                     asksAddOrReplace = true
                 } else {
                     save(replacing: false)
@@ -320,6 +376,42 @@ struct ScheduleImportView: View {
             Button(tr("Annuler"), role: .cancel) {}
         } message: {
             Text(tr("Remplacer retire les anciens cours de l'horaire. Tes tâches et tes événements restent."))
+        }
+    }
+
+    /// A roster of several people: a note and a menu of the names; choosing one keeps that person's shifts only.
+    private var rosterPicker: some View {
+        let names = Array(Set(rosterNames.values)).sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
+        return VStack(alignment: .leading, spacing: 8) {
+            Text(tr("Plusieurs personnes figurent sur cet horaire. Choisis la tienne : seuls ses quarts seront cochés."))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Menu {
+                ForEach(names, id: \.self) { name in
+                    Button(name) { keepShifts(of: name) }
+                }
+            } label: {
+                Label(tr("Garder les quarts de…"), systemImage: "person.crop.circle")
+                    .font(.headline)
+                    .foregroundStyle(strong)
+                    .frame(maxWidth: .infinity, minHeight: 48)
+                    .background(accent.opacity(0.14), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            }
+            .accessibilityIdentifier("schedule-import-roster-person")
+        }
+    }
+
+    /// Ticks the shifts of one person of the roster (their own name is left out of their entries) and unticks the others.
+    private func keepShifts(of name: String) {
+        Haptics.tap()
+        withAnimation {
+            for index in slots.indices {
+                guard let owner = rosterNames[slots[index].id] else { continue }
+                let mine = owner == name
+                slots[index].isSelected = mine
+                slots[index].detail = mine ? nil : owner
+            }
         }
     }
 
@@ -352,11 +444,11 @@ struct ScheduleImportView: View {
     /// One class found: tick, name, day, hours and room; a mark when the reading was in doubt; a button to delete it.
     private func slotCard(_ slot: Binding<ImportedSlot>) -> some View {
         let value = slot.wrappedValue
-        let invalidTime = value.endMinute <= value.startMinute
         let uncertain = value.uncertain
         let flagged = value.needsCheck || !uncertain.isEmpty
-        // A ticked class without a name cannot be added: the field is shown as one to fix, with a hint.
-        let missingTitle = value.isSelected && value.title.trimmed.isEmpty
+        // A ticked class without a name cannot be added: the field is shown as one to fix, with a hint. A shift or an
+        // appointment is named by its kind when it has no title.
+        let missingTitle = value.isSelected && value.kind == .course && value.title.trimmed.isEmpty
         return VStack(alignment: .leading, spacing: 8) {
             if flagged {
                 Label(tr("À vérifier"), systemImage: "exclamationmark.triangle")
@@ -377,7 +469,7 @@ struct ScheduleImportView: View {
                 .buttonStyle(.pressable)
                 .accessibilityLabel(Text(tr("Inclure ce cours")))
                 .accessibilityValue(Text(value.isSelected ? tr("Oui") : tr("Non")))
-                TextField(tr("Titre"), text: clearing(.title, of: slot, slot.title))
+                TextField(value.kind == .course ? tr("Titre") : tr("Titre (facultatif)"), text: clearing(.title, of: slot, slot.title))
                     .font(.body.weight(.semibold))
                     .uncertainHighlight(uncertain.contains(.title) || missingTitle)
                     .accessibilityIdentifier("schedule-import-title")
@@ -403,26 +495,7 @@ struct ScheduleImportView: View {
                     .accessibilityIdentifier("schedule-import-title-missing")
             }
             if value.isSelected {
-                // Each field read with a doubt is highlighted; changing it clears the mark (see `clearing`).
-                Picker(tr("Jour"), selection: clearing(.day, of: slot, slot.weekday)) {
-                    ForEach(1...7, id: \.self) { day in
-                        Text(Studies.weekdayNames[day - 1]).tag(day)
-                    }
-                }
-                .uncertainHighlight(uncertain.contains(.day))
-                MinuteTimePicker(title: tr("Début"), minutes: clearing(.start, of: slot, slot.startMinute))
-                    .uncertainHighlight(uncertain.contains(.start))
-                MinuteTimePicker(title: tr("Fin"), minutes: clearing(.end, of: slot, slot.endMinute))
-                    .uncertainHighlight(uncertain.contains(.end))
-                if invalidTime {
-                    Label(tr("La fin doit venir après le début."), systemImage: "exclamationmark.triangle.fill")
-                        .font(.caption)
-                        .foregroundStyle(alert)
-                }
-                TextField(tr("Salle (facultatif)"), text: clearing(.room, of: slot, Binding(get: { slot.room.wrappedValue ?? "" },
-                                                                                          set: { slot.room.wrappedValue = $0 })))
-                    .font(.subheadline)
-                    .uncertainHighlight(uncertain.contains(.room))
+                slotFields(slot)
             }
         }
         .padding(14)
@@ -433,6 +506,105 @@ struct ScheduleImportView: View {
                 .stroke(alert.opacity(flagged ? 0.7 : 0), lineWidth: 1.5)
         )
         .opacity(value.isSelected ? 1 : 0.6)
+    }
+
+    /// The fields of a ticked entry: its kind, every week or once (then its date), its day, its hours, its place and the
+    /// person or note read with it. Each field read with a doubt is highlighted; changing it clears the mark (see `clearing`).
+    @ViewBuilder
+    private func slotFields(_ slot: Binding<ImportedSlot>) -> some View {
+        let value = slot.wrappedValue
+        let uncertain = value.uncertain
+        Picker(tr("Type"), selection: clearing(.kind, of: slot, slot.kind)) {
+            ForEach(ScheduleKind.allCases) { kind in
+                Text(kind.title).tag(kind)
+            }
+        }
+        .uncertainHighlight(uncertain.contains(.kind))
+        .accessibilityIdentifier("schedule-import-kind")
+        Picker(tr("Quand"), selection: onceBinding(slot)) {
+            Text(tr("Chaque semaine")).tag(false)
+            Text(tr("Une seule fois")).tag(true)
+        }
+        .pickerStyle(.segmented)
+        .uncertainHighlight(uncertain.contains(.date) && value.date == nil)
+        .accessibilityIdentifier("schedule-import-repeat")
+        if value.date != nil {
+            DatePicker(tr("Date"), selection: dateBinding(slot), displayedComponents: .date)
+                .environment(\.locale, Fmt.locale)
+                .uncertainHighlight(uncertain.contains(.date) || uncertain.contains(.day))
+                .accessibilityIdentifier("schedule-import-date")
+        } else {
+            Picker(tr("Jour"), selection: clearing(.day, of: slot, slot.weekday)) {
+                ForEach(1...7, id: \.self) { day in
+                    Text(Studies.weekdayNames[day - 1]).tag(day)
+                }
+            }
+            .uncertainHighlight(uncertain.contains(.day))
+        }
+        MinuteTimePicker(title: tr("Début"), minutes: clearing(.start, of: slot, slot.startMinute))
+            .uncertainHighlight(uncertain.contains(.start))
+        MinuteTimePicker(title: tr("Fin"), minutes: clearing(.end, of: slot, slot.endMinute))
+            .uncertainHighlight(uncertain.contains(.end))
+        if value.endMinute <= value.startMinute {
+            Label(tr("La fin doit venir après le début."), systemImage: "exclamationmark.triangle.fill")
+                .font(.caption)
+                .foregroundStyle(alert)
+        }
+        TextField(value.kind == .course ? tr("Salle (facultatif)") : tr("Lieu (facultatif)"),
+                  text: clearing(.room, of: slot, optionalText(slot.room)))
+            .font(.subheadline)
+            .uncertainHighlight(uncertain.contains(.room))
+        TextField(value.kind == .course ? tr("Enseignant (facultatif)") : tr("Personne ou note (facultatif)"),
+                  text: clearing(.detail, of: slot, optionalText(slot.detail)))
+            .font(.subheadline)
+            .uncertainHighlight(uncertain.contains(.detail))
+            .accessibilityIdentifier("schedule-import-detail")
+    }
+
+    /// An optional text edited as a text: empty means none.
+    private func optionalText(_ binding: Binding<String?>) -> Binding<String> {
+        Binding(get: { binding.wrappedValue ?? "" }, set: { binding.wrappedValue = $0.isEmpty ? nil : $0 })
+    }
+
+    /// Every week (no date) or once: choosing once gives the next day of its weekday, to set; a date read with a doubt stays
+    /// marked until the date itself is chosen. Choosing every week clears the doubt on the date (there is none any more).
+    private func onceBinding(_ slot: Binding<ImportedSlot>) -> Binding<Bool> {
+        Binding(
+            get: { slot.wrappedValue.date != nil },
+            set: { once in
+                if once {
+                    if slot.wrappedValue.date == nil { slot.wrappedValue.date = Self.nextDate(on: slot.wrappedValue.weekday) }
+                } else {
+                    slot.wrappedValue.date = nil
+                    slot.wrappedValue.uncertain.remove(.date)
+                    if slot.wrappedValue.uncertain.isEmpty, !inheritedDoubt.contains(slot.wrappedValue.id) {
+                        slot.wrappedValue.needsCheck = false
+                    }
+                }
+            }
+        )
+    }
+
+    /// The date of an entry that happens once: its weekday follows it (the day name read next to it is then settled too).
+    private func dateBinding(_ slot: Binding<ImportedSlot>) -> Binding<Date> {
+        clearing(.date, of: slot, Binding(
+            get: { slot.wrappedValue.date ?? Date() },
+            set: { newValue in
+                let day = DateMath.startOfDay(newValue)
+                slot.wrappedValue.date = day
+                slot.wrappedValue.weekday = FitnessMath.isoWeekday(day)
+                slot.wrappedValue.uncertain.remove(.day)
+            }
+        ))
+    }
+
+    /// Today or the next day that falls on this weekday (1 = Monday ... 7 = Sunday).
+    private static func nextDate(on weekday: Int) -> Date {
+        var day = DateMath.startOfDay(Date())
+        for _ in 0..<7 where FitnessMath.isoWeekday(day) != weekday {
+            day = DateMath.calendar.date(byAdding: .day, value: 1, to: day) ?? day
+        }
+        return day
     }
 
     /// A binding that, when the person changes the value, also removes `field` from the uncertain fields of the class:
@@ -478,7 +650,7 @@ struct ScheduleImportView: View {
     /// A photo chosen with the system picker: its data is read, then the image.
     private func readPhoto(_ item: PhotosPickerItem) {
         start {
-            guard let data = try? await item.loadTransferable(type: Data.self), let image = UIImage(data: data) else { return .unreadable }
+            guard let data = try? await item.loadTransferable(type: Data.self), let image = SafeImage.decode(data, maxDimension: 6_000) else { return .unreadable }
             return await slotsOrFailure(from: .image(image))
         }
     }
@@ -494,7 +666,7 @@ struct ScheduleImportView: View {
             }
             // A file from Files can be anything: an image over 30 MB is not loaded into memory at all.
             if let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize, size > 30_000_000 { return .unreadable }
-            guard let data = try? Data(contentsOf: url), let image = UIImage(data: data) else { return .unreadable }
+            guard let data = try? Data(contentsOf: url), let image = SafeImage.decode(data, maxDimension: 6_000) else { return .unreadable }
             return await slotsOrFailure(from: .image(image))
         }
     }
@@ -527,6 +699,11 @@ struct ScheduleImportView: View {
             case .found(let found):
                 // By day, then by hour; the order stays as is while the person edits.
                 inheritedDoubt = Set(found.filter { $0.needsCheck && $0.uncertain.isEmpty }.map { $0.id })
+                var names: [UUID: String] = [:]
+                for item in found where item.kind == .work && !item.isSelected {
+                    if let name = item.detail, !name.isEmpty { names[item.id] = name }
+                }
+                rosterNames = Set(names.values).count >= 2 ? names : [:]
                 slots = found.sorted { ($0.weekday, $0.startMinute, $0.endMinute) < ($1.weekday, $1.startMinute, $1.endMinute) }
                 stage = .review
             case .unreadable:

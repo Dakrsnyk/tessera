@@ -418,7 +418,8 @@ struct ProfileView: View {
             ), in: ...Date(), displayedComponents: .date)
         } else {
             Button {
-                model.update(\.life) { $0.birthday = Holidays.make(2000, 1, 1) }
+                let start = model.profile.startingBirthday
+                model.update(\.life) { $0.birthday = start }
             } label: {
                 Label(tr("Ajouter mon anniversaire"), systemImage: "gift")
             }

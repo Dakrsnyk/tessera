@@ -21,6 +21,8 @@ enum ScheduleScoring {
     static let longest = 5 * 60
     /// Two classes of the same day overlapping by more than this are in doubt (both).
     static let tolerableOverlap = 10
+    /// A shift of a work schedule may last a whole day.
+    static let longestShift = 12 * 60
 
     static func evaluate(_ slots: [ImportedSlot], lines: [RecognizedLine]) -> ScheduleScore {
         guard !slots.isEmpty else { return ScheduleScore(value: 0, quality: 0, doubtful: []) }
@@ -32,17 +34,19 @@ enum ScheduleScoring {
                 doubtful[index] = true
             }
             let length = slot.endMinute - slot.startMinute
-            if length < shortest || length > longest {
+            if length < shortest || length > (slot.kind == .work ? longestShift : longest) {
                 qualities[index] -= 0.4
                 doubtful[index] = true
             }
-            if isNoisy(slot.title) {
+            // A shift or an appointment may have no name (its kind names it); a class always has one.
+            if (slot.kind == .course || !slot.title.isEmpty) && isNoisy(slot.title) {
                 qualities[index] -= 0.5
                 doubtful[index] = true
             }
         }
         for first in 0..<slots.count {
-            for second in (first + 1)..<slots.count where slots[first].weekday == slots[second].weekday {
+            for second in (first + 1)..<slots.count where slots[first].weekday == slots[second].weekday
+                && sameAgenda(slots[first], slots[second]) {
                 let overlap = min(slots[first].endMinute, slots[second].endMinute)
                     - max(slots[first].startMinute, slots[second].startMinute)
                 if overlap > tolerableOverlap {
@@ -54,8 +58,19 @@ enum ScheduleScoring {
             }
         }
         let total = qualities.reduce(0) { $0 + max(0, $1) }
-        let value = total * (0.4 + 0.6 * coverage(of: slots, in: lines))
+        var explained = coverage(of: slots, in: lines)
+        // Shifts and appointments are told by their hours and dates, not always by a name: a page of them alone is not
+        // judged on the names it explains only.
+        if slots.allSatisfy({ $0.kind != .course }) { explained = max(explained, 0.5) }
+        let value = total * (0.4 + 0.6 * explained)
         return ScheduleScore(value: value, quality: value / Double(slots.count), doubtful: doubtful)
+    }
+
+    /// Whether two entries of the same weekday can clash: two classes always; otherwise only on the same date (or both
+    /// weekly) and for the same person (two employees of a roster work the same hours).
+    static func sameAgenda(_ a: ImportedSlot, _ b: ImportedSlot) -> Bool {
+        if a.kind == .course && b.kind == .course && a.date == nil && b.date == nil { return true }
+        return a.date == b.date && (a.detail ?? "") == (b.detail ?? "")
     }
 
     /// A name that is mostly digits or symbols, very long, or that still holds a time.
@@ -95,7 +110,10 @@ enum ScheduleScoring {
         guard !informative.isEmpty else { return 1 }
         var vocabulary = Set<String>()
         for slot in slots {
-            for word in ScheduleParser.words(of: slot.title) + ScheduleParser.words(of: slot.room ?? "") where word.count >= 3 || hasCJK(word) {
+            // The person of a shift or an appointment (the name of the row of a roster) is part of what it explains.
+            let person = slot.kind == .course ? "" : (slot.detail ?? "")
+            let words = ScheduleParser.words(of: slot.title) + ScheduleParser.words(of: slot.room ?? "") + ScheduleParser.words(of: person)
+            for word in words where word.count >= 3 || hasCJK(word) {
                 vocabulary.insert(word)
             }
         }

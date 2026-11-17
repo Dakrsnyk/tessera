@@ -12,6 +12,9 @@ enum LayoutRole {
     /// Readings of a page with no row of day names (lists, tables, a grid with the days as rows), or of any page
     /// where the grid readings found nothing.
     case sequence
+    /// Readings of documents that are not timetables of classes (a work roster): they find something only when the page
+    /// carries their marks, and then compete with the other readings (they replace one only when clearly better).
+    case document
 }
 
 /// One way of reading a page of text. Each layout is independent (one file in `Layouts/`) and sees the same lines:
@@ -49,13 +52,17 @@ struct ScheduleCandidate {
 /// 4. when the photo is tilted, the same is done on the straightened lines, and the better reading wins;
 /// 5. a page with two grids (week A and week B) gives the first as it is and the others unticked.
 /// The best reading is the highest score; a later layout replaces an earlier one only when it is clearly better.
+/// Before all this, the rows that hold a dated entry of their own (an appointment with its date and its hour, anywhere on
+/// the page, a footer included) are taken out and read apart (`ScheduleEvents.extract`); the document readings (a work
+/// roster) are tried with the others.
 enum ScheduleLayouts {
     /// Height over width of a phone photo, used when the page size is not known.
     static let defaultAspect = 4.0 / 3.0
 
     /// In order of priority: on a tie the first one stays.
     static let all: [ScheduleLayout] = [
-        OmnivoxLayout(), BoxedBlocksLayout(), PeriodGridLayout(), WeekViewLayout(), ColumnsLayout(), ListLayout(), TransposedLayout()
+        OmnivoxLayout(), BoxedBlocksLayout(), PeriodGridLayout(), WeekViewLayout(), ColumnsLayout(), ListLayout(), TransposedLayout(),
+        ShiftRosterLayout()
     ]
 
     /// A later reading must beat the best one by this share to replace it.
@@ -65,6 +72,21 @@ enum ScheduleLayouts {
     static let doubtfulQuality = 0.5
 
     static func read(_ lines: [RecognizedLine], probe: BlockProbe?, aspect: Double) -> [ImportedSlot] {
+        let events = ScheduleEvents.extract(lines, reference: Date())
+        // A page without a dated entry of its own is read exactly as a timetable.
+        guard !events.drafts.isEmpty else { return readPage(lines, probe: probe, aspect: aspect) }
+        var slots: [ImportedSlot] = []
+        let rest = lines.indices.filter { !events.used.contains($0) }.map { lines[$0] }
+        if !rest.isEmpty { slots = readPage(rest, probe: probe, aspect: aspect) }
+        for var slot in ScheduleParser.finalize(events.drafts) {
+            slot.needsCheck = !slot.uncertain.isEmpty
+            slots.append(slot)
+        }
+        return ScheduleParser.deduplicated(slots)
+    }
+
+    /// The page read as a timetable: one band, or each grid of a page that holds several.
+    static func readPage(_ lines: [RecognizedLine], probe: BlockProbe?, aspect: Double) -> [ImportedSlot] {
         guard let bands = PageSections.split(lines) else {
             return readBand(lines, probe: probe, aspect: aspect)
         }
@@ -127,6 +149,10 @@ enum ScheduleLayouts {
                 found = readings(for: .sequence, in: variant.lines, probe: variant.probe, weight: variant.weight)
             }
             candidates.append(contentsOf: found)
+        }
+        // A work roster (names in the margin, shifts in the cells) competes last: it only reads a page that says it is one.
+        for variant in variants {
+            candidates.append(contentsOf: readings(for: .document, in: variant.lines, probe: variant.probe, weight: variant.weight))
         }
         guard var best = candidates.first else { return [] }
         for candidate in candidates.dropFirst() where candidate.value > best.value * switchMargin + 0.01 {

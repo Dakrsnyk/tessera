@@ -174,6 +174,10 @@ enum WidgetLinks {
         if design.kind == .timetable || design.kind == .nextClass {
             return DeepLink.space(Space.productivity.rawValue).url
         }
+        // Focus and Travail profond: the concentration timer lives in Études (Planning has no access to it any more).
+        if design.kind == .focus || design.kind == .deepWork {
+            return DeepLink.space(Space.student.rawValue).url
+        }
         // Mini-app widgets open their space, where the data behind them is entered.
         if let space = design.kind.space {
             return DeepLink.space(space.rawValue).url

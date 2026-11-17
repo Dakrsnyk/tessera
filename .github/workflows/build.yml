@@ -18,7 +18,9 @@ concurrency:
 jobs:
   build:
     runs-on: macos-15
-    timeout-minutes: 110
+    # 140 since the 2026-11-17: the tests of a [daily] run take close to an hour (run 445 was cut at its 55 minutes
+    # just after « TEST SUCCEEDED », while it exported the attachments).
+    timeout-minutes: 140
     env:
       # Tests and screenshots cost macOS minutes: only on a manual run or with [qa] in the commit message.
       # A plain push only builds: the IPA is in the report within about ten minutes.
@@ -295,7 +297,7 @@ jobs:
         id: tests
         if: steps.sim.outcome == 'success' && env.DEVICE != '' && env.SHOTSONLY != 'true' && env.LANGS != 'true' && (env.QA == 'true' || env.PLACE == 'true' || env.UNIT == 'true')
         continue-on-error: true
-        timeout-minutes: 55
+        timeout-minutes: 85
         run: |
           set -o pipefail
           xcrun simctl bootstatus "$DEVICE" -b

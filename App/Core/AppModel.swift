@@ -102,6 +102,7 @@ final class AppModel {
         profile = store.state(UserProfile.self)
         savedStyles = store.state(StyleLibrary.self).styles
         migrateProfile()
+        migrateStudyGoal()
         migrateDailyLayout()
         insights = InsightCache.load()
         let cache = MarketService.cache
@@ -732,6 +733,8 @@ final class AppModel {
         fresh.appStyle = settings.appStyle
         fresh.appearance = settings.appearance
         fresh.unitSystem = settings.unitSystem
+        fresh.currencyCode = settings.currencyCode
+        fresh.uses24HourClock = settings.uses24HourClock
         fresh.hasChosenStyle = settings.hasChosenStyle
         fresh.profileName = settings.profileName
         fresh.hasCompletedProfileSetup = settings.hasCompletedProfileSetup
@@ -862,6 +865,22 @@ extension AppModel {
         store.save(profile)
     }
 
+    /// The study hours of « Mes paramètres » used to be a second number (`weeklyStudyHours`) that nothing read; the
+    /// goal everything uses is `StudentState.weeklyStudyGoalHours`. An account that typed the old one while the goal
+    /// was never set takes it over, once (the goal then counts as given, so this does not run again). The old
+    /// field stays in the file.
+    func migrateStudyGoal() {
+        guard !profile.knows(.studyGoal) else { return }
+        // A goal already set on the Révisions page is the person's: it is kept, and counts as given so that
+        // « Mes paramètres » shows it.
+        if student.weeklyStudyGoalHours != StudentState().weeklyStudyGoalHours {
+            markProvided(.studyGoal)
+            return
+        }
+        guard let typed = profile.weeklyStudyHours, typed > 0 else { return }
+        setStudyGoal(typed)
+    }
+
     /// The user cleared a value: it is unknown again (the space keeps its default, never shown as theirs).
     func forget(_ fact: ProvidedFact) {
         guard profile.provided.contains(fact) else { return }
@@ -941,6 +960,13 @@ extension AppModel {
     /// The activity level of the calculation: the one chosen, else the one of the workouts per week.
     func setNutritionActivity(_ activity: NutritionCalculator.Activity?) {
         update(\.profile) { $0.calculatedActivity = activity }
+    }
+
+    /// A touch on an activity chip: the chosen level touched again goes back to the workouts; the level the workouts
+    /// give (nothing chosen yet) touched changes nothing, so it keeps following them; any other level is chosen.
+    func tapNutritionActivity(_ level: NutritionCalculator.Activity) {
+        if profile.calculatedActivity == nil, activityFromWorkouts == level { return }
+        setNutritionActivity(profile.calculatedActivity == level ? nil : level)
     }
 
     /// The one goal, for Sport and Nutrition (nil takes it back). Nothing else is written: targets that
@@ -1272,6 +1298,12 @@ extension AppModel {
     func setFocusGoal(_ hours: Double) {
         update(\.productivity) { $0.weeklyFocusGoalHours = max(0.5, hours) }
         markProvided(.focusGoal)
+    }
+
+    /// The study hours a week: the one goal of Études (page Révisions, card, widget, notifications).
+    func setStudyGoal(_ hours: Double) {
+        update(\.student) { $0.weeklyStudyGoalHours = min(60, max(1, hours)) }
+        markProvided(.studyGoal)
     }
 
     func setCarName(_ name: String) {

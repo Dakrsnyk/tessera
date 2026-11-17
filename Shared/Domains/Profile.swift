@@ -302,6 +302,8 @@ enum BodySex: String, Codable, CaseIterable, Identifiable {
 enum ProvidedFact: String, Codable, CaseIterable {
     case kcalTarget, proteinTarget, carbsTarget, fatTarget
     case weeklyWorkouts, monthlyBudget, businessName, businessGoal, focusGoal, hydrationGoal, carName
+    /// The study hours a week of Études (`StudentState.weeklyStudyGoalHours`).
+    case studyGoal
 }
 
 struct UserProfile: Codable, Hashable {
@@ -496,6 +498,14 @@ struct UserProfile: Codable, Hashable {
         }
         guard let birthYear else { return nil }
         return DateMath.calendar.component(.year, from: now) - birthYear
+    }
+
+    /// The date « Ajouter ma date de naissance » starts from: 1 January of the birth year already given (so the
+    /// age the calculations use does not move), else 1 January 2000.
+    var startingBirthday: Date {
+        let year = DateMath.calendar.component(.year, from: Date())
+        if let birthYear, birthYear >= 1900, birthYear <= year { return Holidays.make(birthYear, 1, 1) }
+        return Holidays.make(2000, 1, 1)
     }
 
     /// The topics to ask about or show, in the order the interests were picked, without repeats.

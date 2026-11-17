@@ -83,7 +83,13 @@ enum MiniAppSummary {
                 return "\(exam.title) · \(Studies.countdown(exam.date, from: now))"
             }
             let homework = StudentMath.openAssignments(model.student).count
-            return homework > 0 ? tr("\(Fmt.plural(homework, tr("devoir"), tr("devoirs"))) à rendre") : nil
+            if homework > 0 { return tr("\(Fmt.plural(homework, tr("devoir"), tr("devoirs"))) à rendre") }
+            // Classes only: the next class of the day, else how many there are (the card is never left empty).
+            if let next = StudentMath.occurrences(model.student, on: now).first(where: { $0.end > now }) {
+                return "\(model.student.title(of: next.slot)) · \(Fmt.time(next.start, uses24Hour: model.settings.uses24HourClock))"
+            }
+            let classes = model.student.courses.count
+            return classes > 0 ? Fmt.plural(classes, tr("cours", context: "one"), tr("cours")) : nil
         case .finances:
             guard !model.budget.expenses.isEmpty else { return nil }
             let remaining = BudgetMath.remaining(model.budget, at: now)

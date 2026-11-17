@@ -471,7 +471,7 @@ struct TopicForm: View {
                     ForEach(NutritionCalculator.Activity.allCases) { level in
                         let isOn = (profile.calculatedActivity ?? model.activityFromWorkouts) == level
                         ChoiceChip(title: level.title, isSelected: isOn) {
-                            model.setNutritionActivity(profile.calculatedActivity == level ? nil : level)
+                            model.tapNutritionActivity(level)
                         }
                         .accessibilityIdentifier("nutrition-activity-\(Int(level.rawValue * 1_000))")
                     }
@@ -563,18 +563,9 @@ struct TopicForm: View {
         QuestionCard(title: tr("Ton objectif du moment")) {
             ProfileTextField(placeholder: tr("Finir mon projet, lire plus…"), text: profileBinding(\.mainGoal), identifier: "productivity-goal")
         }
+        // The weekly concentration goal is asked once, in Études (`ProfileTopic.studies`), where Concentration lives.
         QuestionCard(title: tr("Ton rythme")) {
-            HStack(spacing: 8) {
-                ProfileNumberField(title: tr("Travail / étude"), unit: tr("h par jour"), value: profileBinding(\.dailyWorkHours), identifier: "work-hours")
-                ProfileNumberField(
-                    title: tr("Concentration"), unit: tr("h / sem."),
-                    value: Binding(
-                        get: { model.profile.knows(.focusGoal) ? model.productivity.weeklyFocusGoalHours : nil },
-                        set: { value in if let value { model.setFocusGoal(value) } else { model.forget(.focusGoal) } }
-                    ),
-                    identifier: "focus-goal"
-                )
-            }
+            ProfileNumberField(title: tr("Travail / étude"), unit: tr("h par jour"), value: profileBinding(\.dailyWorkHours), identifier: "work-hours")
         }
         if !inMiniApp {
             QuestionCard(title: tr("Une tâche pour commencer"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr("tâche à faire"), tr("tâches à faire"))) {
@@ -612,7 +603,32 @@ struct TopicForm: View {
             ProfileTextField(placeholder: tr("Filière, niveau…"), text: profileBinding(\.studyField), identifier: "study-field")
         }
         QuestionCard(title: tr("Ton rythme"), detail: tr("Tes cours, examens et notes s'ajoutent dans Créer › Études.")) {
-            ProfileNumberField(title: tr("Étude personnelle"), unit: tr("h par semaine"), value: profileBinding(\.weeklyStudyHours), identifier: "study-hours")
+            HStack(spacing: 8) {
+                // The goal of Études itself (card, widget, notifications), not a second number.
+                ProfileNumberField(
+                    title: tr("Étude personnelle"), unit: tr("h par semaine"),
+                    value: Binding(
+                        get: { model.profile.knows(.studyGoal) ? model.student.weeklyStudyGoalHours : nil },
+                        set: { value in
+                            if let value {
+                                model.setStudyGoal(value)
+                            } else {
+                                // Cleared for good: the old field must not bring the value back.
+                                model.update(\.profile) { $0.provided.remove(.studyGoal); $0.weeklyStudyHours = nil }
+                            }
+                        }
+                    ),
+                    identifier: "study-hours"
+                )
+                ProfileNumberField(
+                    title: tr("Concentration"), unit: tr("h / sem."),
+                    value: Binding(
+                        get: { model.profile.knows(.focusGoal) ? model.productivity.weeklyFocusGoalHours : nil },
+                        set: { value in if let value { model.setFocusGoal(value) } else { model.forget(.focusGoal) } }
+                    ),
+                    identifier: "focus-goal"
+                )
+            }
         }
     }
 

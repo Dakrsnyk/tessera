@@ -35,8 +35,9 @@ enum ScheduleImporter {
 /// nothing is sent anywhere. A PDF page is drawn as an image and read like a photo, so scanned PDFs and
 /// PDFs with a text layer go through the same path (the places of the words are then the ones that are seen).
 enum ScheduleReader {
-    /// A longer PDF is cut here: a timetable never needs more.
-    static let maxPages = 6
+    /// A longer PDF is cut here. A timetable fits on one page, but a work schedule or a list of appointments may run over
+    /// several: each page is read (its first pass always runs; the extra passes stop when `timeBudget` is spent).
+    static let maxPages = 10
     /// Pixels of the longest side given to Vision: enough for small print, not so much that memory blows up.
     static let longestSide: CGFloat = 3000
     static let smallestSide: CGFloat = 1000

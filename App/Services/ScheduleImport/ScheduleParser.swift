@@ -4,6 +4,9 @@ import CoreGraphics
 /// A field of an `ImportedSlot` whose value may be wrong (see `ImportedSlot.uncertain`).
 enum SlotField: String, Hashable {
     case day, start, end, title, room
+    /// What the entry is (a class, a shift, an appointment), the date of an entry that happens once, and the person or the
+    /// note read with it.
+    case kind, date, detail
 }
 
 /// A class found in a photo or a PDF of a timetable, before the person checks it.
@@ -24,6 +27,14 @@ struct ImportedSlot: Identifiable, Hashable {
     /// or from the next class, start from the centre of the text) or from an ambiguous reading. The check screen
     /// highlights exactly these fields. Kept after `needsCheck`, empty by default, so older memberwise calls still compile.
     var uncertain: Set<SlotField> = []
+    /// What the entry is: a weekly class (the timetables of school), a shift of a work schedule, an appointment, another
+    /// event. Kept after `uncertain`, like the two fields below, so that every older memberwise call still compiles.
+    var kind: ScheduleKind = .course
+    /// The day of an entry that happens once (midnight, device time zone); nil for an entry that comes back every week.
+    var date: Date? = nil
+    /// The person read with the entry (the teacher of a class, "Dr Roy", the employee of a row of a roster) and the notes
+    /// that are neither a title nor a place.
+    var detail: String? = nil
 }
 
 /// Looks at the colours of the image along a vertical line, to tell the blocks that hold a class (lighter)
@@ -93,18 +104,25 @@ enum ScheduleParser {
     }
 
     /// Removes identical classes (same day, hours and title), keeping a room when one copy has it, and sorts
-    /// by day then hour.
+    /// by day then hour. An entry that happens once is the same only on the same date; a shift or an appointment only with
+    /// the same kind and the same person (two employees work the same hours).
     static func deduplicated(_ slots: [ImportedSlot]) -> [ImportedSlot] {
         var result: [ImportedSlot] = []
         var indexOfKey: [String: Int] = [:]
         for slot in slots {
-            let key = "\(slot.weekday)|\(slot.startMinute)|\(slot.endMinute)|\(fold(slot.title))"
+            var key = "\(slot.weekday)|\(slot.startMinute)|\(slot.endMinute)|\(fold(slot.title))"
+            if let date = slot.date { key += "|d\(Int(date.timeIntervalSince1970))" }
+            if slot.kind != .course { key += "|k\(slot.kind.rawValue)|\(fold(slot.detail ?? ""))" }
             if let existing = indexOfKey[key] {
                 // The same class read twice: a field is in doubt only if both readings doubt it.
                 result[existing].uncertain.formIntersection(slot.uncertain)
                 if result[existing].room == nil, slot.room != nil {
                     result[existing].room = slot.room
                     if slot.uncertain.contains(.room) { result[existing].uncertain.insert(.room) }
+                }
+                if result[existing].detail == nil, slot.detail != nil {
+                    result[existing].detail = slot.detail
+                    if slot.uncertain.contains(.detail) { result[existing].uncertain.insert(.detail) }
                 }
             } else {
                 indexOfKey[key] = result.count
@@ -131,6 +149,14 @@ enum ScheduleParser {
         var uncertain: Set<SlotField> = []
         /// The class has the code of a course (Omnivox, boxed blocks): "Study hall" or "Dîner" is then a course, not a break.
         var coded = false
+        /// What the entry is (see `ImportedSlot.kind`). An entry that is not a class may have no title: its kind names it.
+        var kind: ScheduleKind = .course
+        /// The day of an entry that happens once (see `ImportedSlot.date`).
+        var date: Date? = nil
+        /// The person or the notes read with the entry (see `ImportedSlot.detail`).
+        var detail: String? = nil
+        /// Proposed unticked: one row of a roster of several people, an entry whose hour could not be read.
+        var unselected = false
     }
 
     struct TimeFound {
@@ -154,6 +180,8 @@ enum ScheduleParser {
         var extraTimes: [TimeFound] = []
         /// The room holds a look-alike letter that was read as a digit ("B-2O4" as "B-204").
         var roomRepaired = false
+        /// The teacher named in the text ("Dupont J." of "CM Analyse - Dupont J.", "Prof. Martin"), left out of the title.
+        var teacher: String? = nil
     }
 
     struct DayCandidate {
@@ -709,6 +737,14 @@ enum ScheduleParser {
         return String(text.prefix(60))
     }
 
+    /// A person or a note read with an entry, cleaned like a title but keeping its final full stop ("Dupont J.", "Dr. Smith").
+    static func cleanDetail(_ raw: String) -> String {
+        let edge = CharacterSet.whitespacesAndNewlines.union(CharacterSet(charactersIn: "-:;|,·•*/@#_>→{}"))
+        let text = raw.trimmingCharacters(in: edge).split(whereSeparator: { $0.isWhitespace }).joined(separator: " ")
+        guard text.filter({ $0.isLetter }).count >= 2 else { return "" }
+        return String(text.prefix(80))
+    }
+
     /// All the ranges of a text ("9h-12h / 13h-17h" gives two) and the text without them. A start alone is only
     /// taken when the text holds no range.
     static func findTimes(in text: String) -> (times: [TimeFound], rest: String) {
@@ -742,16 +778,25 @@ enum ScheduleParser {
     /// "CM Analyse - Dupont J." keeps "CM Analyse": the pieces cut by " - ", " / " or " | " that name a teacher are dropped
     /// (a title word like "Prof." or a bare name after the first piece). A text of a single piece is left alone.
     static func dropTeacherParts(_ raw: String) -> String {
+        teacherSplit(raw).title
+    }
+
+    /// The same, with the pieces that were dropped (the teachers), in their order.
+    static func teacherSplit(_ raw: String) -> (title: String, teachers: [String]) {
         let title = raw.split(whereSeparator: { $0.isWhitespace }).joined(separator: " ")
         let parts = title.components(separatedBy: " - ").flatMap { $0.components(separatedBy: " / ") }
             .flatMap { $0.components(separatedBy: " | ") }
-        guard parts.count >= 2 else { return title }
+        guard parts.count >= 2 else { return (title, []) }
         var kept: [String] = []
+        var dropped: [String] = []
         for (index, part) in parts.enumerated() {
-            if isTeacher(part) || (index > 0 && isPersonName(part)) { continue }
+            if isTeacher(part) || (index > 0 && isPersonName(part)) {
+                dropped.append(part)
+                continue
+            }
             kept.append(part)
         }
-        return kept.isEmpty ? title : kept.joined(separator: " ")
+        return kept.isEmpty ? (title, []) : (kept.joined(separator: " "), dropped)
     }
 
     /// Time, room and title of a piece of text. Noise (page numbers, "generated on ...") gives nothing.
@@ -770,10 +815,16 @@ enum ScheduleParser {
                 roomRepaired = true
             }
         }
-        var title = cleanTitle(dropTeacherParts(placed.text))
-        if isTeacher(title) { title = "" }
+        let parts = teacherSplit(placed.text)
+        var title = cleanTitle(parts.title)
+        // The teacher is kept apart (it fills the teacher of the course when the course has none); it never changes the title.
+        var teacher = parts.teachers.map { cleanDetail($0) }.first { !$0.isEmpty }
+        if isTeacher(title) {
+            if teacher == nil { teacher = cleanDetail(title) }
+            title = ""
+        }
         return Analysis(time: found, title: title, room: placed.room, extraTimes: Array(split.times.dropFirst()),
-                        roomRepaired: roomRepaired)
+                        roomRepaired: roomRepaired, teacher: teacher)
     }
 
     // MARK: Look-alike letters in rooms
@@ -1365,6 +1416,7 @@ enum ScheduleParser {
         var room: String? = nil
         var roomRepaired = false
         var titles: [String] = []
+        var teacher: String? = nil
         for line in lines {
             let info = analyze(line.text)
             if time == nil { time = info.time }
@@ -1373,18 +1425,20 @@ enum ScheduleParser {
                 roomRepaired = info.roomRepaired
             }
             if !info.title.isEmpty { titles.append(info.title) }
+            if teacher == nil { teacher = info.teacher }
         }
         let title = titles.prefix(2).joined(separator: " ")
         guard !title.isEmpty else { return nil }
         let roomFlag: Set<SlotField> = room != nil && roomRepaired ? [.room] : []
         if let time = time {
             return Draft(weekday: weekday, start: time.start, end: time.end, title: title, room: room,
-                         uncertain: timeFlags(time).union(roomFlag))
+                         uncertain: timeFlags(time).union(roomFlag), detail: teacher)
         }
         let top = lines.map { $0.box.minY }.min() ?? 0
         let bottom = lines.map { $0.box.maxY }.max() ?? top
         guard let placed = axis.lookup(top: top, center: (top + bottom) / 2) else { return nil }
-        return Draft(weekday: weekday, start: placed.start, end: placed.end, title: title, room: room, uncertain: roomFlag)
+        return Draft(weekday: weekday, start: placed.start, end: placed.end, title: title, room: room, uncertain: roomFlag,
+                     detail: teacher)
     }
 
     /// The fields in doubt because a look-alike letter was read as a digit in a time.
@@ -2075,27 +2129,41 @@ enum ScheduleParser {
 
     /// Lines at the same height are one row ("8h-10h" at the left, "Maths" at the right).
     static func readingRows(_ lines: [RecognizedLine]) -> [String] {
-        let sorted = lines.sorted { a, b in
+        readingRowGroups(lines).map { row in row.map { lines[$0].text }.joined(separator: " ") }
+    }
+
+    /// The same rows as the indexes of their lines (left to right), top to bottom.
+    static func readingRowGroups(_ lines: [RecognizedLine]) -> [[Int]] {
+        let sorted = lines.indices.sorted { i, j in
+            let a = lines[i]
+            let b = lines[j]
             if a.box.midY == b.box.midY { return a.box.minX < b.box.minX }
             return a.box.midY < b.box.midY
         }
-        var rows: [[RecognizedLine]] = []
-        for line in sorted {
-            if let first = rows.last?.first {
+        var rows: [[Int]] = []
+        for index in sorted {
+            let line = lines[index]
+            if let firstIndex = rows.last?.first {
+                let first = lines[firstIndex]
                 let tolerance = max(0.008, 0.5 * max(line.box.height, first.box.height))
                 if abs(line.box.midY - first.box.midY) <= tolerance {
-                    rows[rows.count - 1].append(line)
+                    rows[rows.count - 1].append(index)
                     continue
                 }
             }
-            rows.append([line])
+            rows.append([index])
         }
-        return rows.map { row in
-            row.sorted { $0.box.minX < $1.box.minX }.map { $0.text }.joined(separator: " ")
-        }
+        return rows.map { row in row.sorted { lines[$0].box.minX < lines[$1].box.minX } }
     }
 
     static func listDrafts(_ lines: [RecognizedLine]) -> [Draft] {
+        listDrafts(lines, cues: DocumentCues(), reference: Date())
+    }
+
+    /// The list read row by row. With the marks of a work schedule (`cues.work`) every row is a shift, named or not, and a
+    /// day off ("Mer Congé") starts its day without a class; with the marks of a work schedule or of appointments, a dated
+    /// heading ("Mardi 24 novembre 2026") dates the entries under it. Without any mark the reading is the one of a timetable.
+    static func listDrafts(_ lines: [RecognizedLine], cues: DocumentCues, reference: Date) -> [Draft] {
         var drafts: [Draft] = []
         var days: [Int] = []
         var pendingTitle: String? = nil
@@ -2105,8 +2173,11 @@ enum ScheduleParser {
         // The day was matched by its resemblance ("Mardl"), and the room waiting for its class was repaired ("B-2O4").
         var dayFuzzy = false
         var pendingRoomRepaired = false
+        // The date of the heading of an agenda, for the entries under it.
+        var currentDate: SettledDate? = nil
+        let marked = cues.work || cues.appointments
 
-        func startDay(_ newDays: [Int], fuzzy: Bool = false) {
+        func startDay(_ newDays: [Int], fuzzy: Bool = false, date: SettledDate? = nil) {
             days = newDays
             dayFuzzy = fuzzy
             pendingTitle = nil
@@ -2114,6 +2185,7 @@ enum ScheduleParser {
             pendingRoomRepaired = false
             recent = []
             awaiting = false
+            currentDate = date
         }
 
         for row in readingRows(lines) {
@@ -2123,20 +2195,80 @@ enum ScheduleParser {
                 // A short word that only looks like a day ("Don") alone on a line does not start a day: it needs a time with it.
                 let shortGuess = lead.fuzzy && !hasTime && (text.split(separator: " ").first.map { $0.count < 4 } ?? true)
                 if (hasTime || isDateish(lead.rest)) && !shortGuess {
-                    startDay(lead.days, fuzzy: lead.fuzzy)
+                    var date: SettledDate? = nil
+                    if marked, !hasTime, lead.days.count == 1, let written = ScheduleDates.find(in: lead.rest) {
+                        date = ScheduleDates.settle(written, weekday: lead.days[0], reference: reference)
+                    }
+                    startDay(lead.days, fuzzy: lead.fuzzy, date: date)
                     if !hasTime { continue }
                     text = lead.rest
+                } else if cues.work, !hasTime, ScheduleEvents.isOff(lead.rest) {
+                    // "Mer Congé": a day without work.
+                    startDay(lead.days, fuzzy: lead.fuzzy)
+                    continue
                 }
             } else if let day = embeddedCJKDay(in: text), analyze(text).time == nil {
                 startDay([day])
                 continue
+            } else if marked, let heading = ScheduleEvents.dateHeading(text, reference: reference) {
+                // "24 novembre 2026" alone heads the entries of that day.
+                startDay([heading.weekday], date: heading)
+                continue
+            }
+            if let date = currentDate,
+               let entries = ScheduleEvents.entries(text, day: date.weekday, date: date.date, flags: ScheduleEvents.flags(of: date),
+                                                    cues: cues, allowBrokenTime: false) {
+                // An entry of an agenda under its dated heading.
+                drafts.append(contentsOf: entries)
+                recent = []
+                awaiting = false
+                pendingTitle = nil
+                pendingRoom = nil
+                pendingRoomRepaired = false
+                continue
+            }
+            if cues.work, !days.isEmpty, !ScheduleEvents.hasCourseMarker(text) {
+                // A shift whose hours as written are not sure ("4h-12h" would be read 16:00-24:00, "5h-13h" and "22h-6h"
+                // dropped): proposed as written, unticked, its hours marked. Only on a work schedule; a timetable of classes
+                // never comes here.
+                let unsure = ScheduleEvents.unsureShifts(in: text)
+                if !unsure.isEmpty {
+                    let rest = analyze(ScheduleEvents.masking(unsure, in: text))
+                    for day in days {
+                        for shift in unsure {
+                            var flags: Set<SlotField> = [.start, .end]
+                            if dayFuzzy { flags.insert(.day) }
+                            drafts.append(Draft(weekday: day, start: shift.start, end: shift.end, title: rest.title, room: rest.room,
+                                                uncertain: flags, kind: .work, unselected: true))
+                        }
+                        // The other ranges of the row, read as usual.
+                        for each in ([rest.time].compactMap { $0 } + rest.extraTimes) {
+                            var flags = timeFlags(each)
+                            if dayFuzzy { flags.insert(.day) }
+                            drafts.append(Draft(weekday: day, start: each.start, end: each.end, title: rest.title, room: rest.room,
+                                                uncertain: flags, kind: .work))
+                        }
+                    }
+                    recent = []
+                    awaiting = false
+                    pendingTitle = nil
+                    pendingRoom = nil
+                    pendingRoomRepaired = false
+                    continue
+                }
             }
             let info = analyze(text)
             if let time = info.time {
                 guard !days.isEmpty else { continue }
-                let title = info.title.isEmpty ? (pendingTitle ?? "") : info.title
+                // A shift needs no name: the row of a work schedule is not given the title of a line above it.
+                // A row with a word of a class ("Cours", "CM", "Lab", a course code) stays a class on a work schedule.
+                let shift = cues.work && !ScheduleEvents.hasCourseMarker(text)
+                let title = info.title.isEmpty ? (shift ? "" : (pendingTitle ?? "")) : info.title
                 let room = info.room ?? (info.title.isEmpty ? pendingRoom : nil)
                 let roomRepaired = info.room != nil ? info.roomRepaired : (room != nil && pendingRoomRepaired)
+                // Without a date, only a word that leaves no doubt ("rdv", "rendez-vous") makes a row an appointment; the
+                // person can change the kind on the check screen.
+                let kind: ScheduleKind = shift ? .work : (ScheduleEvents.hasExplicitAppointment(title) ? .appointment : .course)
                 recent = []
                 for day in days {
                     // "9h-12h / 13h-17h": the same class at each range of the row.
@@ -2145,10 +2277,11 @@ enum ScheduleParser {
                         var flags = timeFlags(each)
                         if dayFuzzy { flags.insert(.day) }
                         if roomRepaired { flags.insert(.room) }
-                        drafts.append(Draft(weekday: day, start: each.start, end: each.end, title: title, room: room, uncertain: flags))
+                        drafts.append(Draft(weekday: day, start: each.start, end: each.end, title: title, room: room, uncertain: flags,
+                                            kind: kind, detail: info.teacher))
                     }
                 }
-                awaiting = title.isEmpty
+                awaiting = title.isEmpty && !shift
                 pendingTitle = nil
                 pendingRoom = nil
                 pendingRoomRepaired = false
@@ -2159,6 +2292,8 @@ enum ScheduleParser {
                         drafts[index].room = found
                         if info.roomRepaired { drafts[index].uncertain.insert(.room) }
                     }
+                    if drafts[index].detail == nil { drafts[index].detail = info.teacher }
+                    if drafts[index].kind == .course, ScheduleEvents.hasExplicitAppointment(info.title) { drafts[index].kind = .appointment }
                 }
                 awaiting = false
             } else if info.title.isEmpty {
@@ -2167,6 +2302,9 @@ enum ScheduleParser {
                         drafts[index].room = room
                         if info.roomRepaired { drafts[index].uncertain.insert(.room) }
                     }
+                }
+                if let teacher = info.teacher {
+                    for index in recent where index < drafts.count && drafts[index].detail == nil { drafts[index].detail = teacher }
                 }
             } else {
                 pendingTitle = info.title
@@ -2193,20 +2331,35 @@ enum ScheduleParser {
             usual = min(max(((middle + 2) / 5) * 5, 30), 180)
         }
         var kept: [(draft: Draft, title: String)] = []
-        var startsOfDay: [Int: [Int]] = [:]
+        // The starts of each day (a date of its own for an entry that happens once), to end a class when the next one begins.
+        var startsOfDay: [String: [Int]] = [:]
+        func placeKey(_ draft: Draft) -> String {
+            if let date = draft.date { return "d\(Int(date.timeIntervalSince1970))" }
+            return "w\(draft.weekday)"
+        }
         for draft in drafts {
             guard (1...7).contains(draft.weekday), (0..<1440).contains(draft.start) else { continue }
-            let title = cleanTitle(draft.title)
-            // No class without a name that was read: nothing is invented to fill it.
-            guard !title.isEmpty else { continue }
-            if isNonCourse(title, coded: draft.coded) {
-                // A break or a free period is no class, but a class before it ends where it begins.
-                startsOfDay[draft.weekday, default: []].append(draft.start)
-                continue
+            var title = cleanTitle(draft.title)
+            if draft.kind == .course {
+                // No class without a name that was read: nothing is invented to fill it.
+                guard !title.isEmpty else { continue }
+                if isNonCourse(title, coded: draft.coded) {
+                    // A break or a free period is no class, but a class before it ends where it begins.
+                    startsOfDay[placeKey(draft), default: []].append(draft.start)
+                    continue
+                }
+                guard !isUnreadableTitle(title) else { continue }
+            } else if !title.isEmpty {
+                // A shift or an appointment is kept without a name (its kind names it): a break is still no entry, and a
+                // name that cannot be read is left empty, to fill in.
+                if isNonCourse(title, coded: false) {
+                    startsOfDay[placeKey(draft), default: []].append(draft.start)
+                    continue
+                }
+                if isUnreadableTitle(title) { title = "" }
             }
-            guard !isUnreadableTitle(title) else { continue }
             kept.append((draft: draft, title: title))
-            startsOfDay[draft.weekday, default: []].append(draft.start)
+            startsOfDay[placeKey(draft), default: []].append(draft.start)
         }
         var slots: [ImportedSlot] = []
         for item in kept {
@@ -2216,7 +2369,7 @@ enum ScheduleParser {
             if draft.end == nil {
                 // The end is a guess (the usual length of the page), or the start of the next class.
                 uncertain.insert(.end)
-                if let next = (startsOfDay[draft.weekday] ?? []).filter({ $0 > draft.start }).min(),
+                if let next = (startsOfDay[placeKey(draft)] ?? []).filter({ $0 > draft.start }).min(),
                    next < end, next - draft.start >= 20 {
                     // Only a start is written ("8h30 Maths", "10h Physique"): the class ends when the next one begins,
                     // when that comes before the usual length.
@@ -2227,9 +2380,14 @@ enum ScheduleParser {
             guard end > draft.start else { continue }
             if draft.room == nil { uncertain.remove(.room) }
             // A name of two letters ("TP", "Ed") may be what is left of a longer one.
-            if !ScheduleScoring.hasCJK(item.title), item.title.filter({ $0.isLetter }).count <= 2 { uncertain.insert(.title) }
+            if !item.title.isEmpty, !ScheduleScoring.hasCJK(item.title), item.title.filter({ $0.isLetter }).count <= 2 {
+                uncertain.insert(.title)
+            }
+            let detail = draft.detail.map { cleanDetail($0) }.flatMap { $0.isEmpty ? nil : $0 }
+            if detail == nil { uncertain.remove(.detail) }
             slots.append(ImportedSlot(weekday: draft.weekday, startMinute: draft.start, endMinute: end,
-                                      title: item.title, room: draft.room, uncertain: uncertain))
+                                      title: item.title, room: draft.room, isSelected: !draft.unselected, uncertain: uncertain,
+                                      kind: draft.kind, date: draft.date, detail: detail))
         }
         return deduplicated(slots)
     }

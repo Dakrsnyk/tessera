@@ -52,6 +52,10 @@ enum ScheduleRenderer {
 
     static func all() -> [RenderedSchedule] { names.compactMap(make) }
 
+    /// Documents that are not timetables of classes (a work schedule, a roster of employees, dated appointments): MEASURED
+    /// apart in ScheduleRealOCRTests, without a goal to reach yet.
+    static let documentNames = ["travail", "employes", "rendez-vous"]
+
     static func make(_ name: String) -> RenderedSchedule? {
         switch name {
         case "omnivox": return omnivoxGrid()
@@ -59,6 +63,9 @@ enum ScheduleRenderer {
         case "semaine": return weekView()
         case "liste": return dayList()
         case "tableau": return table()
+        case "travail": return workList()
+        case "employes": return roster()
+        case "rendez-vous": return appointments()
         default: return nil
         }
     }
@@ -371,6 +378,117 @@ enum ScheduleRenderer {
             }
         }
         return RenderedSchedule(name: "tableau", image: image, expected: classes.map { $0.expected })
+    }
+
+    // MARK: (f) Work schedule, one person
+
+    /// « Horaire de travail », one row per day: « Lundi   09:00 – 17:00   Caisse », a day off written « Congé ».
+    private static func workList() -> RenderedSchedule {
+        let shifts: [(day: Int, start: Int, end: Int, role: String)] = [
+            (1, at(9), at(17), "Caisse"), (2, at(9), at(17), ""), (4, at(12), at(20), "Plancher"), (5, at(9), at(13), "")
+        ]
+        let width: CGFloat = 1000
+        let height: CGFloat = 130 + 5 * 64 + 60
+        let image = render(width: width, height: height) { ctx in
+            Pen.text("Horaire de travail", at: CGRect(x: 40, y: 30, width: width - 80, height: 44), font: UIFont.boldSystemFont(ofSize: 36))
+            var y: CGFloat = 110
+            for day in 1...5 {
+                let font = UIFont.systemFont(ofSize: 28)
+                Pen.text(dayNames[day - 1], at: CGRect(x: 40, y: y, width: 220, height: 36), font: UIFont.boldSystemFont(ofSize: 28))
+                if let shift = shifts.first(where: { $0.day == day }) {
+                    Pen.text("\(clock(shift.start)) – \(clock(shift.end))", at: CGRect(x: 280, y: y, width: 300, height: 36), font: font)
+                    Pen.text(shift.role, at: CGRect(x: 620, y: y, width: 340, height: 36), font: font, color: UIColor(white: 0.35, alpha: 1))
+                } else {
+                    Pen.text("Congé", at: CGRect(x: 280, y: y, width: 300, height: 36), font: font, color: green)
+                }
+                Pen.line(ctx, from: CGPoint(x: 40, y: y + 50), to: CGPoint(x: width - 40, y: y + 50), color: UIColor(white: 0.85, alpha: 1), width: 1)
+                y += 64
+            }
+        }
+        let expected = shifts.map { ExpectedSlot(weekday: $0.day, startMinute: $0.start, endMinute: $0.end, title: $0.role, room: "") }
+        return RenderedSchedule(name: "travail", image: image, expected: expected)
+    }
+
+    // MARK: (g) Roster: employees by days
+
+    /// A table « Employé | Lun | Mar | Mer | Jeu | Ven », one row per employee, a shift or « Congé » in each cell.
+    private static func roster() -> RenderedSchedule {
+        let people: [(name: String, cells: [(Int, Int)?])] = [
+            ("Alice Tremblay", [(at(9), at(17)), (at(9), at(17)), nil, (at(12), at(20)), (at(9), at(17))]),
+            ("Bruno Kim", [nil, (at(12), at(20)), (at(12), at(20)), (at(9), at(17)), nil]),
+            ("Chloé Diaz", [(at(7), at(15)), (at(7), at(15)), (at(7), at(15)), nil, (at(7), at(15))])
+        ]
+        let width: CGFloat = 1300
+        let rowHeight: CGFloat = 70
+        let top: CGFloat = 110
+        let edges: [CGFloat] = [40, 300, 500, 700, 900, 1100, 1260]
+        let height = top + CGFloat(people.count + 1) * rowHeight + 60
+        let shortDays = ["Lun", "Mar", "Mer", "Jeu", "Ven"]
+        let image = render(width: width, height: height) { ctx in
+            Pen.text("Café Lumière – semaine du 23 novembre", at: CGRect(x: 40, y: 30, width: width - 80, height: 44),
+                     font: UIFont.boldSystemFont(ofSize: 32))
+            let gridColor = UIColor(white: 0.6, alpha: 1)
+            for row in 0...(people.count + 1) {
+                let y = top + CGFloat(row) * rowHeight
+                Pen.line(ctx, from: CGPoint(x: edges[0], y: y), to: CGPoint(x: edges[6], y: y), color: gridColor, width: 1.5)
+            }
+            for edge in edges {
+                Pen.line(ctx, from: CGPoint(x: edge, y: top), to: CGPoint(x: edge, y: top + CGFloat(people.count + 1) * rowHeight),
+                         color: gridColor, width: 1.5)
+            }
+            let bold = UIFont.boldSystemFont(ofSize: 26)
+            let font = UIFont.systemFont(ofSize: 26)
+            Pen.text("Employé", at: CGRect(x: edges[0] + 12, y: top + 18, width: edges[1] - edges[0] - 24, height: 34), font: bold)
+            for (column, day) in shortDays.enumerated() {
+                Pen.text(day, at: CGRect(x: edges[column + 1], y: top + 18, width: edges[column + 2] - edges[column + 1], height: 34),
+                         font: bold, align: .center)
+            }
+            for (index, person) in people.enumerated() {
+                let y = top + CGFloat(index + 1) * rowHeight + 18
+                Pen.text(person.name, at: CGRect(x: edges[0] + 12, y: y, width: edges[1] - edges[0] - 24, height: 34), font: font)
+                for (column, cell) in person.cells.enumerated() {
+                    let rect = CGRect(x: edges[column + 1], y: y, width: edges[column + 2] - edges[column + 1], height: 34)
+                    if let cell = cell {
+                        Pen.text("\(cell.0 / 60)h-\(cell.1 / 60)h", at: rect, font: font, align: .center)
+                    } else {
+                        Pen.text("Congé", at: rect, font: font, color: UIColor(white: 0.45, alpha: 1), align: .center)
+                    }
+                }
+            }
+        }
+        var expected: [ExpectedSlot] = []
+        for person in people {
+            for (column, cell) in person.cells.enumerated() {
+                guard let cell = cell else { continue }
+                expected.append(ExpectedSlot(weekday: column + 1, startMinute: cell.0, endMinute: cell.1, title: "", room: ""))
+            }
+        }
+        return RenderedSchedule(name: "employes", image: image, expected: expected)
+    }
+
+    // MARK: (h) Dated appointments
+
+    /// « Mes rendez-vous », one row per appointment with its full date: « Mardi 24 novembre 2026, 14 h 30 – Dentiste, Dr Roy ».
+    /// 24 November 2026 is a Tuesday. An appointment without an end gets the usual length (one hour).
+    private static func appointments() -> RenderedSchedule {
+        let rows: [(text: String, day: Int, start: Int, end: Int, title: String)] = [
+            ("Mardi 24 novembre 2026, 14 h 30 – Dentiste, Dr Roy", 2, at(14, 30), at(15, 30), "Dentiste"),
+            ("Jeudi 26 novembre 2026, 9 h – 10 h – Notaire, Me Tremblay", 4, at(9), at(10), "Notaire"),
+            ("Vendredi 27 novembre 2026, 16 h 15 – Physiothérapie, Clinique Santé Plus", 5, at(16, 15), at(17, 15), "Physiothérapie")
+        ]
+        let width: CGFloat = 1200
+        let height: CGFloat = 140 + CGFloat(rows.count) * 70 + 60
+        let image = render(width: width, height: height) { ctx in
+            Pen.text("Mes rendez-vous", at: CGRect(x: 40, y: 30, width: width - 80, height: 44), font: UIFont.boldSystemFont(ofSize: 36))
+            var y: CGFloat = 120
+            for row in rows {
+                Pen.text(row.text, at: CGRect(x: 40, y: y, width: width - 80, height: 36), font: UIFont.systemFont(ofSize: 28))
+                Pen.line(ctx, from: CGPoint(x: 40, y: y + 52), to: CGPoint(x: width - 40, y: y + 52), color: UIColor(white: 0.85, alpha: 1), width: 1)
+                y += 70
+            }
+        }
+        let expected = rows.map { ExpectedSlot(weekday: $0.day, startMinute: $0.start, endMinute: $0.end, title: $0.title, room: "") }
+        return RenderedSchedule(name: "rendez-vous", image: image, expected: expected)
     }
 
     // MARK: Variants
