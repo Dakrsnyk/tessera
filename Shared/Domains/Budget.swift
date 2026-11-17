@@ -759,4 +759,220 @@ enum BudgetMath {
         }
         return lines.reversed()
     }
+
+    // MARK: Finances, hybrid layout (2026-11-16)
+
+    /// The share of the month gone by at the end of `day`: 1/30 on the 1st of a 30-day month, 1 on its last day.
+    static func monthFraction(throughDay day: Date) -> Double {
+        let month = monthInterval(day)
+        let total = max(1, DateMath.daysBetween(month.start, month.end))
+        let done = DateMath.daysBetween(month.start, DateMath.startOfDay(day)) + 1
+        return min(1, max(0, Double(done) / Double(total)))
+    }
+
+    /// The payments of the bills and of the fixed expenses still to come in the month of `day`, after `day`
+    /// (the next day to the end of the month): what will leave before the month is over. 0 on the last day.
+    static func dueRestOfMonth(_ state: BudgetState, afterDay day: Date) -> Double {
+        let month = monthInterval(day)
+        let start = DateMath.nextMidnight(after: day)
+        guard start < month.end else { return 0 }
+        let window = DateInterval(start: start, end: month.end)
+        return fixedExpenses(state, in: window, now: month.end).reduce(0) { $0 + $1.amount }
+    }
+
+    /// What is left of the budget at the end of `day` once the bills and fixed expenses still to come this
+    /// month are paid, and what that leaves for each remaining day (never below 0 per day).
+    static func leftAfterDue(_ state: BudgetState, throughDay day: Date, now: Date = Date()) -> (left: Double, perDay: Double) {
+        let left = remaining(state, throughDay: day, now: now) - dueRestOfMonth(state, afterDay: day)
+        return (left, max(0, left) / Double(daysToCover(throughDay: day, now: now)))
+    }
+
+    /// Something that comes back on a date: a bill, or a fixed income or expense of « Revenus et dépenses fixes ».
+    struct UpcomingItem: Hashable, Identifiable {
+        enum Source: Hashable {
+            case bill(Bill)
+            case fixed(MoneyItem)
+        }
+
+        let source: Source
+        let due: Date
+        /// Days from the reference day to the due date (0: today, 1: tomorrow).
+        let days: Int
+
+        var id: String {
+            switch source {
+            case let .bill(bill): "b-\(bill.id.uuidString)"
+            case let .fixed(item): "f-\(item.id.uuidString)"
+            }
+        }
+
+        var name: String {
+            switch source {
+            case let .bill(bill): bill.name
+            case let .fixed(item): item.name
+            }
+        }
+
+        var amount: Double {
+            switch source {
+            case let .bill(bill): bill.amount
+            case let .fixed(item): item.amount
+            }
+        }
+
+        var isIncome: Bool {
+            if case let .fixed(item) = source { return item.isIncome }
+            return false
+        }
+
+        var isSubscription: Bool {
+            if case let .bill(bill) = source { return bill.isSubscription }
+            return false
+        }
+    }
+
+    /// The bills and the fixed amounts falling within `days` days of `date` (today included), soonest first; a
+    /// fixed expense listed as a bill of the same name appears once, as the bill.
+    static func upcoming(_ state: BudgetState, at date: Date, within days: Int) -> [UpcomingItem] {
+        let today = DateMath.startOfDay(date)
+        guard let end = DateMath.calendar.date(byAdding: .day, value: days + 1, to: today) else { return [] }
+        var items: [UpcomingItem] = state.bills.compactMap { bill in
+            let due = bill.nextDue(after: date)
+            let gap = DateMath.daysBetween(today, DateMath.startOfDay(due))
+            return gap <= days ? UpcomingItem(source: .bill(bill), due: due, days: gap) : nil
+        }
+        let billNames = Set(state.bills.map { folded($0.name) })
+        for item in state.fixedFlows where item.isIncome || !billNames.contains(folded(item.name)) {
+            let first = item.date ?? state.fixedFlowsStart ?? date
+            if let due = paymentDates(from: first, every: item.period.step, in: DateInterval(start: today, end: end), until: end).first {
+                items.append(UpcomingItem(source: .fixed(item), due: due, days: DateMath.daysBetween(today, DateMath.startOfDay(due))))
+            }
+        }
+        return items.sorted { $0.due == $1.due ? $0.name < $1.name : $0.due < $1.due }
+    }
+
+    /// What was spent from the 1st of the month of `month`, added up day by day: one total per day, up to the end
+    /// of `through` (or to the end of the month when nil). Fixed payments count on their dates up to `now`.
+    static func cumulativeSpending(_ state: BudgetState, month: Date, through: Date? = nil, now: Date = Date()) -> [Double] {
+        let interval = monthInterval(month)
+        let last = min(DateMath.startOfDay(through ?? interval.end.addingTimeInterval(-1)), DateMath.startOfDay(interval.end.addingTimeInterval(-1)))
+        guard last >= interval.start else { return [] }
+        var byDay: [String: Double] = [:]
+        for expense in expenses(state, in: interval, now: now) {
+            byDay[DateMath.dayKey(expense.date), default: 0] += expense.amount
+        }
+        var values: [Double] = []
+        var total = 0.0
+        var cursor = interval.start
+        while cursor <= last, values.count < 31 {
+            total += byDay[DateMath.dayKey(cursor)] ?? 0
+            values.append(total)
+            guard let next = DateMath.calendar.date(byAdding: .day, value: 1, to: cursor) else { break }
+            cursor = next
+        }
+        return values
+    }
+
+    /// A category spending clearly faster than the month goes by (and not over its limit yet): at least half of its
+    /// limit spent, and half again more than the share of the month gone by.
+    static func isAheadOfPace(_ status: CategoryStatus, fraction: Double) -> Bool {
+        guard let ratio = status.ratio, !status.isOver, status.spent > 0 else { return false }
+        return ratio >= 0.5 && ratio > fraction * 1.5
+    }
+
+    /// The balance at the very start of `day` (before its operations), counted like `balanceHistory`: from the
+    /// « Solde de départ » when there is one, otherwise from zero at the start of `day`.
+    static func balance(atStartOf day: Date, _ state: BudgetState, now: Date = Date()) -> Double {
+        let start = DateMath.startOfDay(day)
+        guard let first = balanceHistory(state, from: start, now: max(now, start)).first else { return 0 }
+        let dayInterval = DateInterval(start: start, end: DateMath.nextMidnight(after: start))
+        return first.balance - earned(state, in: dayInterval, now: now) + spent(state, in: dayInterval, now: now)
+    }
+
+    /// A category this month against the same days of last month.
+    struct CategoryChange: Hashable, Identifiable {
+        let name: String
+        let colorHex: String
+        let symbol: String
+        let current: Double
+        let previous: Double
+        var id: String { name }
+        var difference: Double { current - previous }
+    }
+
+    /// Every category spent in this month so far or in last month up to the same moment, the biggest change first.
+    static func categoryChanges(_ state: BudgetState, at now: Date) -> [CategoryChange] {
+        let month = monthInterval(now)
+        let elapsed = max(1, now.timeIntervalSince(month.start))
+        let previousStart = DateMath.calendar.date(byAdding: .month, value: -1, to: month.start) ?? month.start
+        let current = byCategory(state, in: DateInterval(start: month.start, duration: elapsed), now: now)
+        let previous = byCategory(state, in: DateInterval(start: previousStart, end: min(previousStart.addingTimeInterval(elapsed), month.start)), now: now)
+        let names = Array(Set(current.map(\.name) + previous.map(\.name)))
+        return names.map { name in
+            let thisMonth = current.first { $0.name == name }
+            let lastMonth = previous.first { $0.name == name }
+            let spend = thisMonth ?? lastMonth
+            return CategoryChange(name: name, colorHex: spend?.colorHex ?? "64748B", symbol: spend?.category?.symbol ?? "square.grid.2x2",
+                                  current: thisMonth?.amount ?? 0, previous: lastMonth?.amount ?? 0)
+        }
+        .sorted { abs($0.difference) == abs($1.difference) ? $0.name < $1.name : abs($0.difference) > abs($1.difference) }
+    }
+
+    /// A short finding written on the « Analyse » page, computed on the device from what was noted.
+    enum Insight: Hashable {
+        /// One category spends more than last month at the same date, all the others less or the same.
+        case onlyRise(name: String, symbol: String, colorHex: String, current: Double, previous: Double)
+        /// The category whose spending rose the most (several rose).
+        case biggestRise(name: String, symbol: String, colorHex: String, difference: Double)
+        /// Every category spends less than last month at the same date.
+        case allDown(saved: Double)
+        /// One day weighs at least a fifth of the month so far.
+        case heavyDay(date: Date, share: Double)
+    }
+
+    /// At most two findings for the month of `now`: how the categories moved against last month, then the day that
+    /// weighs the most. Nothing when too little is noted.
+    static func insights(_ state: BudgetState, at now: Date) -> [Insight] {
+        var result: [Insight] = []
+        let changes = categoryChanges(state, at: now)
+        if changes.contains(where: { $0.previous > 0 }) {
+            let rises = changes.filter { $0.difference >= 1 }
+            if rises.count == 1, let rise = rises.first {
+                result.append(.onlyRise(name: rise.name, symbol: rise.symbol, colorHex: rise.colorHex, current: rise.current, previous: rise.previous))
+            } else if let top = rises.max(by: { $0.difference < $1.difference }) {
+                result.append(.biggestRise(name: top.name, symbol: top.symbol, colorHex: top.colorHex, difference: top.difference))
+            } else if changes.allSatisfy({ $0.difference <= 0 }) {
+                let saved = changes.reduce(0) { $0 - $1.difference }
+                if saved >= 1 { result.append(.allDown(saved: saved)) }
+            }
+        }
+        let month = monthInterval(now)
+        let spending = expenses(state, in: DateInterval(start: month.start, end: max(month.start, now)), now: now)
+        let total = spending.reduce(0) { $0 + $1.amount }
+        if total > 0, spending.count >= 4 {
+            var byDay: [Date: Double] = [:]
+            for expense in spending { byDay[DateMath.startOfDay(expense.date), default: 0] += expense.amount }
+            if let heavy = byDay.max(by: { $0.value == $1.value ? $0.key > $1.key : $0.value < $1.value }), heavy.value / total >= 0.2, byDay.count >= 3 {
+                result.append(.heavyDay(date: heavy.key, share: heavy.value / total))
+            }
+        }
+        return result
+    }
+
+    /// The search of « Opérations »: the words typed, without accents or case, in the note, the merchant or the
+    /// category of an expense.
+    static func matches(_ expense: Expense, query: String, state: BudgetState) -> Bool {
+        let words = folded(query).split(separator: " ").map(String.init).filter { !$0.isEmpty }
+        guard !words.isEmpty else { return true }
+        let text = folded([expense.note, expense.merchant ?? "", state.category(expense.categoryID)?.name ?? ""].joined(separator: " "))
+        return words.allSatisfy { text.contains($0) }
+    }
+
+    /// The same for an income: its source.
+    static func matches(_ income: IncomeEntry, query: String) -> Bool {
+        let words = folded(query).split(separator: " ").map(String.init).filter { !$0.isEmpty }
+        guard !words.isEmpty else { return true }
+        let text = folded(income.label)
+        return words.allSatisfy { text.contains($0) }
+    }
 }

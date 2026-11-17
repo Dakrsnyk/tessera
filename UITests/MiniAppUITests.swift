@@ -307,7 +307,14 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(hero.waitForExistence(timeout: 12), "Mini-app Finances absente")
         snapshot("finances")
 
-        // An expense of the month: open it, change it, then delete it.
+        // « Ajouter »: one sheet for an expense or an income (refonte du 2026-11-16).
+        tap(app.buttons["finances-add"], "Ajouter")
+        XCTAssertTrue(app.otherElements["add-sheet"].waitForExistence(timeout: 8) || app.buttons["add-save"].waitForExistence(timeout: 2), "Feuille Ajouter absente")
+        snapshot("finances-add")
+        app.buttons["Annuler"].firstMatch.tap()
+        XCTAssertTrue(hero.waitForExistence(timeout: 8))
+
+        // An expense of the month: its card opens first (« Modifier » leads to the editor), then it is deleted.
         tap(app.buttons["finances-transactions"], "Opérations")
         XCTAssertTrue(app.navigationBars["Opérations"].waitForExistence(timeout: 8), "Page des opérations absente")
         let rows = app.buttons.matching(identifier: "expense-row")
@@ -316,7 +323,7 @@ final class MiniAppUITests: XCTestCase {
         let first = rows.firstMatch.label
         rows.firstMatch.tap()
         let delete = app.buttons["Supprimer la dépense"]
-        XCTAssertTrue(delete.waitForExistence(timeout: 8), "La dépense doit s'ouvrir pour être modifiée")
+        XCTAssertTrue(delete.waitForExistence(timeout: 8), "La fiche de la dépense doit s'ouvrir")
         snapshot("finances-expense")
         delete.tap()
         XCTAssertTrue(waitForDisappearance(delete), "La fiche de la dépense est restée ouverte")
@@ -325,7 +332,7 @@ final class MiniAppUITests: XCTestCase {
         goBack()
         XCTAssertTrue(hero.waitForExistence(timeout: 8))
 
-        for (identifier, title) in [("finances-categories", "Catégories"), ("finances-bills", "Factures"), ("finances-trends", "Évolution")] {
+        for (identifier, title) in [("finances-categories", "Catégories"), ("finances-bills", "Budget et récurrents"), ("finances-savings", "Épargne"), ("finances-trends", "Analyse")] {
             tap(app.buttons[identifier], title)
             XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
             snapshot(identifier)

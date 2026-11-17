@@ -202,6 +202,7 @@ enum ScreenshotMode {
                     case "finances-bills": .financesBills
                     case "finances-savings": .financesSavings
                     case "finances-trends": .financesTrends
+                    case "finances-month": .financesMonth
                     case "business-sales": .businessSales
                     case "business-results": .businessResults
                     case "business-recurring": .businessRecurring

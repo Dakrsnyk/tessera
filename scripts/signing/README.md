@@ -34,3 +34,12 @@ Garder `ardane-signing` en lieu sûr (sauvegarde) : `dist.key` va avec le certif
 - « Le profil s'appelle … » : renommer le profil (Profiles → le profil → Edit → Name) ou le recréer avec le nom exact, puis refaire l'étape 10.
 - Profils et certificat expirent après un an : refaire 5, 6 et 10.
 - Achats Premium : dans une version TestFlight (Release), le déverrouillage de test n'existe pas. Pour tester les achats (gratuits en TestFlight), il faut l'accord « Paid Apps » (Business) et les produits `com.dakrsnyk.ardane.premium.monthly`, `.yearly` et `.lifetime` créés dans App Store Connect.
+
+## FinanceKit : Apple Pay automatique (Premium), quand Apple l'autorise
+
+Le code est prêt depuis le 2026-11-16 (`App/Services/WalletImport.swift`), mais éteint : la clé `ArdaneFinanceKit` de `Config/App-Info.plist` vaut `false`, et FinanceKit n'est jamais appelé tant qu'elle n'est pas à `true` (sans l'autorisation d'Apple dans l'app signée, le système fermerait l'app). Pour l'allumer :
+
+1. Titulaire du compte (Account Holder) : demander l'autorisation FinanceKit sur developer.apple.com (page FinanceKit, formulaire de demande) pour l'identifiant `com.dakrsnyk.ardane`. Conditions d'Apple : app distribuée sur l'App Store aux États-Unis ou au Royaume-Uni, rangée dans la catégorie **Finance**, avec des outils de gestion financière. Aujourd'hui Ardane est rangée en Productivité (`INFOPLIST_KEY_LSApplicationCategoryType` et App Store Connect) : changer de catégorie est une décision du PDG.
+2. Une fois accordée : Certificates, Identifiers & Profiles → l'identifiant de l'app → cocher la capacité FinanceKit (onglet des capacités gérées) ; régénérer le profil « Ardane App Store » ; refaire l'étape 10 (secrets du profil).
+3. Ajouter à `Config/Ardane.entitlements` la clé `com.apple.developer.financekit` avec exactement la valeur que montre le nouveau profil (`security cms -D -i profil.mobileprovision`, section `Entitlements`), puis mettre `ArdaneFinanceKit` à `true`.
+4. Version interne (`[interne]`), puis essai sur un iPhone américain ou britannique (Apple Card, Apple Cash, ou banque reliée à Cartes au Royaume-Uni) : Finances › Dépenses Apple Pay automatiques › « Activer l'import automatique ». Au Canada, la carte n'apparaît pas (Apple n'y partage pas ces données) et le raccourci reste la voie.

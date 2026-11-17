@@ -3714,143 +3714,143 @@
         }
       }
     },
-    "%@ dépensés · %@ avant la fin du mois": {
+    "%@ dépensé, %@ du mois écoulé": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ ausgegeben · %@ bis Monatsende"
+            "value": "%@ ausgegeben, %@ des Monats vorbei"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ spent · %@ until the end of the month"
+            "value": "%@ spent, %@ of the month gone by"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ gastados · %@ antes de fin de mes"
+            "value": "%@ gastado, %@ del mes transcurrido"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ dépensés · %@ avant la fin du mois"
+            "value": "%@ dépensé, %@ du mois écoulé"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ spesi · %@ alla fine del mese"
+            "value": "%@ speso, %@ del mese trascorso"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@使用 · 月末まであと%2$@"
+            "value": "%1$@を使用、月の%2$@が経過"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ gastos · %@ até o fim do mês"
+            "value": "%@ gasto, %@ do mês já passou"
           }
         }
       }
     },
-    "%@ dépensés · %@ par jour pendant %@": {
+    "%@ dépensés depuis le 1er du mois.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ ausgegeben · %@ pro Tag für %@"
+            "value": "%@ ausgegeben seit dem 1. des Monats."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ spent · %@ a day for %@"
+            "value": "%@ spent since the 1st of the month."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ gastados · %@ por día durante %@"
+            "value": "%@ gastados desde el día 1 del mes."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ dépensés · %@ par jour pendant %@"
+            "value": "%@ dépensés depuis le 1er du mois."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ spesi · %@ al giorno per %@"
+            "value": "%@ spesi dal 1° del mese."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%1$@使用 · 残り%3$@、1日%2$@"
+            "value": "月初から%@を使いました。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ gastos · %@ por dia por %@"
+            "value": "%@ gastos desde o dia 1 do mês."
           }
         }
       }
     },
-    "%@ dépensés · dernier jour du mois": {
+    "%@ dépensés · %@": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ ausgegeben · letzter Tag des Monats"
+            "value": "%@ ausgegeben · %@"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ spent · last day of the month"
+            "value": "%@ spent · %@"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ gastados · último día del mes"
+            "value": "%@ gastados · %@"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ dépensés · dernier jour du mois"
+            "value": "%@ dépensés · %@"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ spesi · ultimo giorno del mese"
+            "value": "%@ spesi · %@"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@使用 · 今月は最終日"
+            "value": "%1$@を使用 · %2$@"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ gastos · último dia do mês"
+            "value": "%@ gastos · %@"
           }
         }
       }
@@ -4137,6 +4137,100 @@
         }
       }
     },
+    "%@ est la plus forte hausse : %@ de plus que le mois dernier à la même date.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ist am stärksten gestiegen: %@ mehr als im letzten Monat zum selben Datum."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ rose the most: %@ more than last month at the same date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ es la mayor subida: %@ más que el mes pasado en la misma fecha."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ est la plus forte hausse : %@ de plus que le mois dernier à la même date."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ è l'aumento più forte: %@ in più rispetto al mese scorso alla stessa data."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最も増えたのは%1$@です：先月の同じ日より%2$@多い。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ teve a maior alta: %@ a mais que no mês passado na mesma data."
+          }
+        }
+      }
+    },
+    "%@ est la seule catégorie en hausse : %@ contre %@ le mois dernier à la même date.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ist die einzige Kategorie im Plus: %@ gegenüber %@ im letzten Monat zum selben Datum."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is the only category going up: %@ against %@ last month at the same date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ es la única categoría al alza: %@ frente a %@ el mes pasado en la misma fecha."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ est la seule catégorie en hausse : %@ contre %@ le mois dernier à la même date."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ è l'unica categoria in aumento: %@ contro %@ il mese scorso alla stessa data."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "増えたのは%1$@だけです：先月の同じ日の%3$@に対して%2$@。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ é a única categoria em alta: %@ contra %@ no mês passado na mesma data."
+          }
+        }
+      }
+    },
     "%@ et %@": {
       "extractionState": "manual",
       "localizations": {
@@ -4321,6 +4415,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ exercícios, fichas e demonstrações"
+          }
+        }
+      }
+    },
+    "%@ face à %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ im Vergleich zu %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ vs %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ frente a %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ face à %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ rispetto a %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@と%2$@の比較"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ comparado a %@"
           }
         }
       }
@@ -6863,6 +7004,53 @@
         }
       }
     },
+    "%@ reviennent chaque mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kommen jeden Monat wieder"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ come back every month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ vuelven cada mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ reviennent chaque mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ tornano ogni mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎月%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ voltam todo mês"
+          }
+        }
+      }
+    },
     "%@ répétitions": {
       "extractionState": "manual",
       "localizations": {
@@ -7940,6 +8128,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ treinos em %@"
+          }
+        }
+      }
+    },
+    "%@ vs %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ggü. %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ vs %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ vs %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ vs %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ vs %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@比 %1$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ vs %@"
           }
         }
       }
@@ -9209,53 +9444,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ · modelo"
-          }
-        }
-      }
-    },
-    "%@ · revenu fixe": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · festes Einkommen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · fixed income"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · ingreso fijo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · revenu fixe"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · entrata fissa"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · 固定収入"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ · renda fixa"
           }
         }
       }
@@ -14853,6 +15041,53 @@
         }
       }
     },
+    "3 mois et Année avec Premium": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 Monate und Jahr mit Premium"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 months and Year with Premium"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 meses y Año con Premium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 mois et Année avec Premium"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 mesi e Anno con Premium"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3か月と1年はPremiumで"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 meses e Ano com Premium"
+          }
+        }
+      }
+    },
     "3 sur 5": {
       "extractionState": "manual",
       "localizations": {
@@ -16216,6 +16451,53 @@
         }
       }
     },
+    "Abonnement": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Subscription"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suscripción"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbonamento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サブスク"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Assinatura"
+          }
+        }
+      }
+    },
     "Abonnement actif": {
       "extractionState": "manual",
       "localizations": {
@@ -16964,6 +17246,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Acesso negado"
+          }
+        }
+      }
+    },
+    "Accès refusé. Tu peux l'autoriser plus tard dans les Réglages de l'iPhone, puis revenir ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zugriff verweigert. Du kannst ihn später in den Einstellungen des iPhone erlauben und dann hierher zurückkehren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Access denied. You can allow it later in the iPhone's Settings, then come back here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acceso denegado. Puedes permitirlo más tarde en los Ajustes del iPhone y volver aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accès refusé. Tu peux l'autoriser plus tard dans les Réglages de l'iPhone, puis revenir ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesso negato. Puoi consentirlo più tardi nelle Impostazioni dell'iPhone, poi tornare qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセスが拒否されました。あとでiPhoneの設定で許可してから、ここに戻ってください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acesso negado. Você pode permitir depois nos Ajustes do iPhone e voltar aqui."
           }
         }
       }
@@ -17908,6 +18237,53 @@
         }
       }
     },
+    "Activer l'import automatique": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatischen Import einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on automatic import"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar la importación automática"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer l'import automatique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva l'importazione automatica"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動取り込みをオン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar a importação automática"
+          }
+        }
+      }
+    },
     "Activité": {
       "extractionState": "manual",
       "localizations": {
@@ -18186,6 +18562,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Atividades"
+          }
+        }
+      }
+    },
+    "Activé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktiviert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オン"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativado"
           }
         }
       }
@@ -19365,49 +19788,49 @@
         }
       }
     },
-    "Ajoute l'action « Ajouter une dépense Apple Pay » (app Ardane).": {
+    "Ajoute l'action « Ajouter une dépense Apple Pay » (app Ardane), puis touche chaque champ :": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Füge die Aktion „Apple-Pay-Ausgabe hinzufügen“ hinzu (App Ardane)."
+            "value": "Füge die Aktion „Apple-Pay-Ausgabe hinzufügen“ (App Ardane) hinzu und tippe auf jedes Feld:"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add the action “Add an Apple Pay expense” (Ardane app)."
+            "value": "Add the action “Add an Apple Pay expense” (Ardane app), then tap each field:"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Añade la acción «Añadir un gasto de Apple Pay» (app Ardane)."
+            "value": "Añade la acción «Añadir un gasto de Apple Pay» (app Ardane) y toca cada campo:"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ajoute l'action « Ajouter une dépense Apple Pay » (app Ardane)."
+            "value": "Ajoute l'action « Ajouter une dépense Apple Pay » (app Ardane), puis touche chaque champ :"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aggiungi l'azione «Aggiungi una spesa Apple Pay» (app Ardane)."
+            "value": "Aggiungi l'azione «Aggiungi una spesa Apple Pay» (app Ardane), poi tocca ogni campo:"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "アクション「Apple Payの支出を追加」（Ardaneアプリ）を追加します。"
+            "value": "アクション「Apple Payの支出を追加」（Ardaneアプリ）を追加し、各項目をタップします："
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Adicione a ação “Adicionar um gasto do Apple Pay” (app Ardane)."
+            "value": "Adicione a ação “Adicionar um gasto do Apple Pay” (app Ardane) e toque em cada campo:"
           }
         }
       }
@@ -25757,6 +26180,53 @@
         }
       }
     },
+    "Analyse": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analysis"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Análisis"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyse"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分析"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Análise"
+          }
+        }
+      }
+    },
     "Analyse des dépenses": {
       "extractionState": "manual",
       "localizations": {
@@ -27637,6 +28107,53 @@
         }
       }
     },
+    "Apple Pay automatique": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisches Apple Pay"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic Apple Pay"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Pay automático"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Pay automatique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Pay automatico"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Payの自動記録"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Pay automático"
+          }
+        }
+      }
+    },
     "Appliquer": {
       "extractionState": "manual",
       "localizations": {
@@ -28150,6 +28667,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Depois de adicionar, você vai passar da meta em %@ kcal."
+          }
+        }
+      }
+    },
+    "Après les factures à venir : %@, soit %@ par jour": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach den anstehenden Rechnungen: %@, also %@ pro Tag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After upcoming bills: %@, or %@ a day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tras las facturas por vencer: %@, o sea %@ al día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après les factures à venir : %@, soit %@ par jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dopo le fatture in arrivo: %@, cioè %@ al giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今後の請求の後：%1$@（1日あたり%2$@）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depois das faturas a vencer: %@, ou %@ por dia"
           }
         }
       }
@@ -32008,6 +32572,53 @@
         }
       }
     },
+    "Au-dessus du rythme · %@ pour %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Über dem Tempo · %@ für %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ahead of pace · %@ for %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por encima del ritmo · %@ para %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au-dessus du rythme · %@ pour %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sopra il ritmo · %@ per %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ペース超過 · %2$@で%1$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acima do ritmo · %@ para %@"
+          }
+        }
+      }
+    },
     "Aube": {
       "extractionState": "manual",
       "localizations": {
@@ -32995,53 +33606,6 @@
         }
       }
     },
-    "Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : %@.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Keine Einnahmen diesen Monat eingetragen. Monatliches Einkommen in „Meine Infos“ angegeben: %@."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No income logged this month. Monthly income set in “My info”: %@."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "No hay ingresos anotados este mes. Ingreso mensual indicado en «Mis datos»: %@."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aucun revenu noté ce mois-ci. Revenu mensuel indiqué dans « Mes informations » : %@."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nessuna entrata registrata questo mese. Reddito mensile indicato in «Le mie info»: %@."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今月の収入の記録はありません。「マイ情報」に入力した月収：%@。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nenhuma receita anotada este mês. Renda mensal informada em “Minhas informações”: %@."
-          }
-        }
-      }
-    },
     "Aucun résultat": {
       "extractionState": "manual",
       "localizations": {
@@ -33559,6 +34123,53 @@
         }
       }
     },
+    "Aucune facture ni montant fixe pour l'instant.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Rechnungen oder festen Beträge."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No bills or fixed amounts yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay facturas ni importes fijos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune facture ni montant fixe pour l'instant."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna fattura né importo fisso per ora."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだ請求や固定額はありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma fatura ou valor fixo por enquanto."
+          }
+        }
+      }
+    },
     "Aucune fiche à réviser pour l'instant": {
       "extractionState": "manual",
       "localizations": {
@@ -33790,6 +34401,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nenhuma nota por enquanto. Cada nota vale uma porcentagem da sua disciplina: o Ardane calcula a média da disciplina e depois sua média geral."
+          }
+        }
+      }
+    },
+    "Aucune opération ce jour-là.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Buchungen an diesem Tag."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No transactions that day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ningún movimiento ese día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune opération ce jour-là."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna operazione quel giorno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この日の取引はありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma transação nesse dia."
+          }
+        }
+      }
+    },
+    "Aucune opération ne correspond.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine passenden Buchungen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No matching transactions."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ningún movimiento coincide."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune opération ne correspond."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessuna operazione corrisponde."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一致する取引はありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma transação corresponde."
           }
         }
       }
@@ -35345,6 +36050,100 @@
         }
       }
     },
+    "Automatique · aucun achat pour l'instant": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch · noch kein Einkauf"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic · no purchase yet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático · ninguna compra por ahora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique · aucun achat pour l'instant"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatico · nessun acquisto per ora"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動 · まだ購入はありません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático · nenhuma compra ainda"
+          }
+        }
+      }
+    },
+    "Automatique · dernière dépense %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch · letzte Ausgabe %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic · last expense %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático · último gasto %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatique · dernière dépense %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatico · ultima spesa %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動 · 最後の支出 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automático · último gasto %@"
+          }
+        }
+      }
+    },
     "Automobile": {
       "extractionState": "manual",
       "localizations": {
@@ -35905,6 +36704,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Outra cor"
+          }
+        }
+      }
+    },
+    "Autre date": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anderes Datum"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Other date"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otra fecha"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autre date"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Altra data"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別の日付"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outra data"
           }
         }
       }
@@ -36704,6 +37550,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Com o Premium, escolha a cor do Ardane entre %@ e troque quando quiser. Safira continua grátis."
+          }
+        }
+      }
+    },
+    "Avec Premium, tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses. Rien à régler dans Raccourcis.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit Premium erscheinen Einkäufe mit deinen Karten in Wallet von selbst in deinen Ausgaben. Nichts in Kurzbefehle einzurichten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With Premium, purchases made with your Wallet cards show up in your expenses by themselves. Nothing to set up in Shortcuts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con Premium, las compras con tus tarjetas de Cartera aparecen solas en tus gastos. Nada que configurar en Atajos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec Premium, tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses. Rien à régler dans Raccourcis."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con Premium, gli acquisti fatti con le carte di Wallet arrivano da soli tra le tue spese. Niente da configurare in Comandi rapidi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumなら、ウォレットのカードでの購入が自動で支出に追加されます。ショートカットの設定は不要です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o Premium, as compras feitas com os cartões da Carteira aparecem sozinhas nos seus gastos. Nada para configurar em Atalhos."
           }
         }
       }
@@ -44369,6 +45262,53 @@
         }
       }
     },
+    "Budget et récurrents": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget und Wiederkehrendes"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget and recurring"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Presupuesto y recurrentes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget et récurrents"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget e ricorrenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "予算と定期"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orçamento e recorrentes"
+          }
+        }
+      }
+    },
     "Budget illisible pour le moment : rien n'a été ajouté": {
       "extractionState": "manual",
       "localizations": {
@@ -50005,6 +50945,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cartões ocultos e disposição automática"
+          }
+        }
+      }
+    },
+    "Cartes ne partage pas encore les achats sur cet iPhone. Le raccourci reste possible.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet teilt auf diesem iPhone noch keine Einkäufe. Der Kurzbefehl bleibt möglich."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet doesn't share purchases on this iPhone yet. The shortcut still works."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartera aún no comparte las compras en este iPhone. El atajo sigue siendo posible."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cartes ne partage pas encore les achats sur cet iPhone. Le raccourci reste possible."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wallet non condivide ancora gli acquisti su questo iPhone. Il comando rapido resta possibile."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このiPhoneでは、ウォレットはまだ購入を共有していません。ショートカットは引き続き使えます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A Carteira ainda não compartilha as compras neste iPhone. O atalho continua possível."
           }
         }
       }
@@ -57623,49 +58610,49 @@
         }
       }
     },
-    "Choisis tes cartes et « Tout paiement ».": {
+    "Choisis tes cartes, « Tout paiement » et « Exécuter immédiatement ».": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wähle deine Karten und „Jede Zahlung“."
+            "value": "Wähle deine Karten, „Jede Zahlung“ und „Sofort ausführen“."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choose your cards and “Any Payment”."
+            "value": "Choose your cards, “Any Payment” and “Run Immediately”."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Elige tus tarjetas y «Cualquier pago»."
+            "value": "Elige tus tarjetas, «Cualquier pago» y «Ejecutar inmediatamente»."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Choisis tes cartes et « Tout paiement »."
+            "value": "Choisis tes cartes, « Tout paiement » et « Exécuter immédiatement »."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Scegli le tue carte e «Qualsiasi pagamento»."
+            "value": "Scegli le tue carte, «Qualsiasi pagamento» ed «Esegui immediatamente»."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "カードを選び、「すべての支払い」を選びます。"
+            "value": "カード、「すべての支払い」、「すぐに実行」を選びます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Escolha seus cartões e “Qualquer Pagamento”."
+            "value": "Escolha seus cartões, “Qualquer Pagamento” e “Executar Imediatamente”."
           }
         }
       }
@@ -58042,53 +59029,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha um tamanho e seus widgets, depois personalize no Studio."
-          }
-        }
-      }
-    },
-    "Choisis « Exécuter immédiatement » (et désactive « Notifier à l'exécution » si proposé).": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wähle „Sofort ausführen“ (und deaktiviere „Bei Ausführung benachrichtigen“, falls angeboten)."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choose “Run Immediately” (and turn off “Notify When Run” if offered)."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elige «Ejecutar inmediatamente» (y desactiva «Notificar al ejecutar» si aparece)."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisis « Exécuter immédiatement » (et désactive « Notifier à l'exécution » si proposé)."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scegli «Esegui immediatamente» (e disattiva «Notifica quando viene eseguita» se proposto)."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「すぐに実行」を選びます（表示されたら「実行時に通知」をオフにします）。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolha “Executar Imediatamente” (e desative “Notificar ao Executar” se aparecer)."
           }
         }
       }
@@ -61195,6 +62135,53 @@
         }
       }
     },
+    "Comparaisons, six mois, constats": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergleiche, sechs Monate, Erkenntnisse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparisons, six months, findings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparaciones, seis meses, conclusiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparaisons, six mois, constats"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Confronti, sei mesi, osservazioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "比較・6か月・気づき"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comparações, seis meses, conclusões"
+          }
+        }
+      }
+    },
     "Comparateur": {
       "extractionState": "manual",
       "localizations": {
@@ -62789,6 +63776,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Consumo"
+          }
+        }
+      }
+    },
+    "Constats": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erkenntnisse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Findings"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conclusiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Constats"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Osservazioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "気づき"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conclusões"
           }
         }
       }
@@ -70830,6 +71864,53 @@
         }
       }
     },
+    "D'où vient ton solde": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Woher dein Kontostand kommt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where your balance comes from"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De dónde viene tu saldo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "D'où vient ton solde"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da dove viene il tuo saldo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残高の内訳"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De onde vem o seu saldo"
+          }
+        }
+      }
+    },
     "Dakar": {
       "extractionState": "manual",
       "localizations": {
@@ -71014,53 +72095,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Neste widget"
-          }
-        }
-      }
-    },
-    "Dans l'action, touche chaque champ et choisis la variable de la transaction :": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tippe in der Aktion auf jedes Feld und wähle die Variable der Transaktion:"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "In the action, tap each field and choose the variable of the transaction:"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "En la acción, toca cada campo y elige la variable de la transacción:"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dans l'action, touche chaque champ et choisis la variable de la transaction :"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nell'azione, tocca ogni campo e scegli la variabile della transazione:"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "アクションの各項目をタップし、トランザクションの変数を選びます:"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Na ação, toque em cada campo e escolha a variável da transação:"
           }
         }
       }
@@ -75526,6 +76560,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Última vez"
+          }
+        }
+      }
+    },
+    "Dernière lecture %@. Tes achats arrivent à chaque ouverture d'Ardane.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zuletzt gelesen %@. Deine Einkäufe kommen bei jedem Öffnen von Ardane."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last read %@. Your purchases arrive each time you open Ardane."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Última lectura %@. Tus compras llegan cada vez que abres Ardane."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dernière lecture %@. Tes achats arrivent à chaque ouverture d'Ardane."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ultima lettura %@. I tuoi acquisti arrivano a ogni apertura di Ardane."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最終読み取り：%@。購入はArdaneを開くたびに追加されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Última leitura %@. Suas compras chegam sempre que você abre o Ardane."
           }
         }
       }
@@ -85306,6 +86387,53 @@
         }
       }
     },
+    "Dépense fixe": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixkosten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fixed expense"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto fijo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dépense fixe"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spesa fissa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "固定費"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gasto fixo"
+          }
+        }
+      }
+    },
     "Dépense fixe · %@": {
       "extractionState": "manual",
       "localizations": {
@@ -85541,53 +86669,6 @@
         }
       }
     },
-    "Dépenses du jour": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ausgaben des Tages"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spending of the day"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gastos del día"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dépenses du jour"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spese del giorno"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日の支出"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gastos do dia"
-          }
-        }
-      }
-    },
     "Dépenses du mois": {
       "extractionState": "manual",
       "localizations": {
@@ -85678,100 +86759,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Despesas e taxas"
-          }
-        }
-      }
-    },
-    "Dépenses et revenus, mois par mois": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ausgaben und Einnahmen, Monat für Monat"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Expenses and income, month by month"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gastos e ingresos, mes a mes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dépenses et revenus, mois par mois"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spese ed entrate, mese per mese"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支出と収入を月ごとに"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Despesas e receitas, mês a mês"
-          }
-        }
-      }
-    },
-    "Dépenses fixes": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fixkosten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fixed expenses"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gastos fijos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dépenses fixes"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Spese fisse"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "固定費"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Despesas fixas"
           }
         }
       }
@@ -86481,6 +87468,53 @@
         }
       }
     },
+    "Désactiver": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn off"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattiva"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desativar"
+          }
+        }
+      }
+    },
     "Désactivé": {
       "extractionState": "manual",
       "localizations": {
@@ -86571,53 +87605,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Detalhes"
-          }
-        }
-      }
-    },
-    "Détail des catégories": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Details der Kategorien"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Category breakdown"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detalle de categorías"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Détail des catégories"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dettaglio delle categorie"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カテゴリの内訳"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Detalhe das categorias"
           }
         }
       }
@@ -90006,6 +90993,53 @@
         }
       }
     },
+    "Encore %@ pour ton épargne visée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch %@ bis zu deinem Sparziel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ more for your savings goal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faltan %@ para tu objetivo de ahorro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Encore %@ pour ton épargne visée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancora %@ per il tuo obiettivo di risparmio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貯蓄目標まであと%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faltam %@ para sua meta de poupança"
+          }
+        }
+      }
+    },
     "Encore 1 analyse de plat gratuite": {
       "extractionState": "manual",
       "localizations": {
@@ -90425,6 +91459,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Salvar a data"
+          }
+        }
+      }
+    },
+    "Enregistrer la dépense": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgabe sichern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save expense"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardar el gasto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer la dépense"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salva la spesa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出を保存"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salvar o gasto"
+          }
+        }
+      }
+    },
+    "Enregistrer le revenu": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einnahme sichern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Save income"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardar el ingreso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enregistrer le revenu"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salva l'entrata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "収入を保存"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salvar a receita"
           }
         }
       }
@@ -97898,6 +99026,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fim"
+          }
+        }
+      }
+    },
+    "Fin du mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monatsende"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "End of month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fin de mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fin du mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fine mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月末"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fim do mês"
           }
         }
       }
@@ -111720,6 +112895,53 @@
         }
       }
     },
+    "Import automatique depuis Cartes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatischer Import aus Wallet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic import from Wallet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importación automática desde Cartera"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import automatique depuis Cartes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importazione automatica da Wallet"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウォレットから自動取り込み"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importação automática da Carteira"
+          }
+        }
+      }
+    },
     "Import impossible": {
       "extractionState": "manual",
       "localizations": {
@@ -117924,6 +119146,53 @@
         }
       }
     },
+    "L'analyse est dans Premium": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Analyse ist in Premium"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analysis is in Premium"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El análisis está en Premium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'analyse est dans Premium"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'analisi è in Premium"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分析はPremiumで利用できます"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A análise está no Premium"
+          }
+        }
+      }
+    },
     "L'analyse mois par mois est dans Premium": {
       "extractionState": "manual",
       "localizations": {
@@ -119616,53 +120885,6 @@
         }
       }
     },
-    "L'évolution est dans Premium": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Verlauf ist in Premium"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trends are in Premium"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La evolución está en Premium"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'évolution est dans Premium"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'andamento è in Premium"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "推移はPremiumで"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A evolução está no Premium"
-          }
-        }
-      }
-    },
     "L/100 km": {
       "extractionState": "manual",
       "localizations": {
@@ -120599,6 +121821,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O kettlebell sobe até a altura do peito, braços estendidos, e desce de novo como um pêndulo."
+          }
+        }
+      }
+    },
+    "La lecture n'a pas pu se faire. Réessaie dans un moment.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Lesen hat nicht geklappt. Versuch es gleich noch einmal."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reading failed. Try again in a moment."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer. Vuelve a intentarlo en un momento."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La lecture n'a pas pu se faire. Réessaie dans un moment."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lettura non riuscita. Riprova tra un momento."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み取れませんでした。しばらくしてからもう一度お試しください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler. Tente de novo daqui a pouco."
           }
         }
       }
@@ -123752,6 +125021,100 @@
         }
       }
     },
+    "Le %@ pèse %@ de tes dépenses du mois.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der %@ macht %@ deiner Ausgaben im Monat aus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ accounts for %@ of your spending this month."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El %@ representa el %@ de tus gastos del mes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le %@ pèse %@ de tes dépenses du mois."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il %@ pesa per il %@ delle tue spese del mese."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@は今月の支出の%2$@を占めています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O dia %@ representa %@ dos seus gastos do mês."
+          }
+        }
+      }
+    },
+    "Le 1er": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am 1."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On the 1st"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El día 1"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le 1er"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il 1°"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No dia 1"
+          }
+        }
+      }
+    },
     "Le Caire": {
       "extractionState": "manual",
       "localizations": {
@@ -126055,6 +127418,53 @@
         }
       }
     },
+    "Le mois en cours, plus pâle, n'est pas fini.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der laufende Monat, heller dargestellt, ist noch nicht vorbei."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The current month, paler, isn't over yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El mes en curso, más claro, aún no ha terminado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mois en cours, plus pâle, n'est pas fini."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il mese in corso, più chiaro, non è finito."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "淡く表示された今月はまだ終わっていません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O mês atual, mais claro, ainda não terminou."
+          }
+        }
+      }
+    },
     "Le mois en un coup d'œil, aujourd'hui mis en avant.": {
       "extractionState": "manual",
       "localizations": {
@@ -127371,6 +128781,53 @@
         }
       }
     },
+    "Le solde au 1er du mois, puis tes revenus et tes dépenses notés, factures et montants fixes compris.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Stand am 1. des Monats, dann deine notierten Einnahmen und Ausgaben, Rechnungen und feste Beträge inklusive."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The balance on the 1st of the month, then the income and expenses you noted, bills and fixed amounts included."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El saldo del día 1 del mes y luego tus ingresos y gastos anotados, facturas e importes fijos incluidos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le solde au 1er du mois, puis tes revenus et tes dépenses notés, factures et montants fixes compris."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il saldo al 1° del mese, poi le entrate e le spese che hai annotato, fatture e importi fissi compresi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月初1日の残高に、記録した収入と支出（請求と固定額を含む）を加えたもの。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O saldo no dia 1 do mês e depois as receitas e gastos que você anotou, faturas e valores fixos incluídos."
+          }
+        }
+      }
+    },
     "Le taux de change et une conversion rapide.": {
       "extractionState": "manual",
       "localizations": {
@@ -128311,6 +129768,53 @@
         }
       }
     },
+    "Les %@ échéances": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle %@ Fälligkeiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All %@ due dates"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los %@ vencimientos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les %@ échéances"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutte le %@ scadenze"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全%@件の期日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os %@ vencimentos"
+          }
+        }
+      }
+    },
     "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal.": {
       "extractionState": "manual",
       "localizations": {
@@ -129247,6 +130751,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Os dados vão direto do seu iPhone para o Stripe, sem passar pelo Ardane. Uma venda já importada nunca é adicionada duas vezes."
+          }
+        }
+      }
+    },
+    "Les factures à venir dépassent le reste de %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die anstehenden Rechnungen übersteigen den Rest um %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Upcoming bills exceed what's left by %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las facturas por vencer superan lo que queda en %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les factures à venir dépassent le reste de %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le fatture in arrivo superano il resto di %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今後の請求が残りを%@上回っています"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As faturas a vencer passam do que resta em %@"
           }
         }
       }
@@ -132447,6 +133998,53 @@
         }
       }
     },
+    "Limites des %@ catégories": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits der %@ Kategorien"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limits of the %@ categories"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Límites de las %@ categorías"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites des %@ catégories"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limiti delle %@ categorie"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@カテゴリの上限"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limites das %@ categorias"
+          }
+        }
+      }
+    },
     "Limites habituelles des guides de santé publique, modifiables dans Objectifs. Quand un aliment ne donne pas une valeur, le total est marqué « partiel ».": {
       "extractionState": "manual",
       "localizations": {
@@ -132725,6 +134323,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ler 20 páginas"
+          }
+        }
+      }
+    },
+    "Lire maintenant": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jetzt lesen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Read now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leer ahora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lire maintenant"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Leggi ora"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今すぐ読み取る"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ler agora"
           }
         }
       }
@@ -141565,6 +143210,53 @@
         }
       }
     },
+    "Mis de côté en %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zurückgelegt im %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set aside in %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reservado en %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis de côté en %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Messo da parte a %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@に貯めた額"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guardado em %@"
+          }
+        }
+      }
+    },
     "Mis à jour": {
       "extractionState": "manual",
       "localizations": {
@@ -142783,6 +144475,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mês de treino"
+          }
+        }
+      }
+    },
+    "Mois dernier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Letzter Monat"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Last month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes pasado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mois dernier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mese scorso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "先月"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mês passado"
           }
         }
       }
@@ -156746,6 +158485,53 @@
         }
       }
     },
+    "Opérations et relevé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buchungen und Kontoauszug"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transactions and statement"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movimientos y extracto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opérations et relevé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Operazioni ed estratto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取引と明細"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Transações e extrato"
+          }
+        }
+      }
+    },
     "Opérations plus anciennes avec Premium": {
       "extractionState": "manual",
       "localizations": {
@@ -157404,49 +159190,49 @@
         }
       }
     },
-    "Ouvre Raccourcis › Automatisation › « + » › Créer une automatisation personnelle › Transaction.": {
+    "Ouvre Raccourcis › Automatisation › « + » › Transaction.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Öffne Kurzbefehle › Automation › „+“ › Private Automation erstellen › Transaktion."
+            "value": "Öffne Kurzbefehle › Automation › „+“ › Transaktion."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open Shortcuts › Automation › “+” › Create Personal Automation › Transaction."
+            "value": "Open Shortcuts › Automation › “+” › Transaction."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abre Atajos › Automatización › «+» › Crear automatización personal › Transacción."
+            "value": "Abre Atajos › Automatización › «+» › Transacción."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ouvre Raccourcis › Automatisation › « + » › Créer une automatisation personnelle › Transaction."
+            "value": "Ouvre Raccourcis › Automatisation › « + » › Transaction."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Apri Comandi rapidi › Automazione › «+» › Crea automazione personale › Transazione."
+            "value": "Apri Comandi rapidi › Automazione › «+» › Transazione."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ショートカット › オートメーション › 「+」 › パーソナルオートメーションを作成 › トランザクション の順に開きます。"
+            "value": "ショートカット › オートメーション › 「+」 › トランザクション の順に開きます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abra Atalhos › Automação › “+” › Criar Automação Pessoal › Transação."
+            "value": "Abra Atalhos › Automação › “+” › Transação."
           }
         }
       }
@@ -176298,53 +178084,6 @@
         }
       }
     },
-    "Prochaines échéances": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nächste Fälligkeiten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Upcoming due dates"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Próximos vencimientos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prochaines échéances"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prossime scadenze"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今後の期限"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Próximos vencimentos"
-          }
-        }
-      }
-    },
     "Production de glucose à partir de CO₂, d'eau et de lumière.": {
       "extractionState": "manual",
       "localizations": {
@@ -184805,6 +186544,53 @@
         }
       }
     },
+    "Remplit le montant, la catégorie et la note": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füllt Betrag, Kategorie und Notiz aus"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fills in the amount, category and note"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rellena el importe, la categoría y la nota"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remplit le montant, la catégorie et la note"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compila importo, categoria e nota"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "金額・カテゴリ・メモを入力します"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Preenche o valor, a categoria e a nota"
+          }
+        }
+      }
+    },
     "Rendez-vous": {
       "extractionState": "manual",
       "localizations": {
@@ -189552,53 +191338,6 @@
         }
       }
     },
-    "Revenus du jour": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einnahmen des Tages"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Income of the day"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ingresos del día"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revenus du jour"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Entrate del giorno"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日の収入"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Receitas do dia"
-          }
-        }
-      }
-    },
     "Revenus et dépenses": {
       "extractionState": "manual",
       "localizations": {
@@ -192372,6 +194111,53 @@
         }
       }
     },
+    "Rien à payer dans les 14 prochains jours": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nichts zu zahlen in den nächsten 14 Tagen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nothing to pay in the next 14 days"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada que pagar en los próximos 14 días"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rien à payer dans les 14 prochains jours"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Niente da pagare nei prossimi 14 giorni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今後14日間の支払いはありません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nada a pagar nos próximos 14 dias"
+          }
+        }
+      }
+    },
     "Riz blanc cuit": {
       "extractionState": "manual",
       "localizations": {
@@ -194205,6 +195991,53 @@
         }
       }
     },
+    "Rythme du budget": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budgettempo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Budget pace"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo del presupuesto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rythme du budget"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo del budget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "予算のペース"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritmo do orçamento"
+          }
+        }
+      }
+    },
     "Rythme soutenu mais dans les limites : plus de 0,75 % du poids par semaine demande de la rigueur.": {
       "extractionState": "manual",
       "localizations": {
@@ -195141,53 +196974,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Distribuição das calorias"
-          }
-        }
-      }
-    },
-    "Répartition et limites": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aufteilung und Limits"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Breakdown and limits"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Distribución y límites"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Répartition et limites"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ripartizione e limiti"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "内訳と上限"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Distribuição e limites"
           }
         }
       }
@@ -197730,6 +199516,53 @@
         }
       }
     },
+    "Sans Premium : avec Raccourcis": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Premium: mit Kurzbefehlen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without Premium: with Shortcuts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin Premium: con Atajos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans Premium : avec Raccourcis"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senza Premium: con Comandi rapidi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumなし：ショートカットで"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem Premium: com Atalhos"
+          }
+        }
+      }
+    },
     "Sans Premium, les widgets marqués d'un cadenas ne seront pas enregistrés.": {
       "extractionState": "manual",
       "localizations": {
@@ -198243,6 +200076,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sem preço: contado pelo preço pago"
+          }
+        }
+      }
+    },
+    "Sans raccourci à créer": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Kurzbefehl nötig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No shortcut to create"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin atajo que crear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans raccourci à créer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun comando rapido da creare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ショートカットの作成は不要"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem atalho para criar"
+          }
+        }
+      }
+    },
+    "Sans solde de départ, le mois part de 0 : tes revenus moins tes dépenses, factures et montants fixes compris.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Startsaldo beginnt der Monat bei 0: deine Einnahmen minus deine Ausgaben, Rechnungen und feste Beträge inklusive."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without a starting balance, the month starts at 0: your income minus your expenses, bills and fixed amounts included."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin saldo inicial, el mes empieza en 0: tus ingresos menos tus gastos, facturas e importes fijos incluidos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans solde de départ, le mois part de 0 : tes revenus moins tes dépenses, factures et montants fixes compris."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senza saldo iniziale, il mese parte da 0: le tue entrate meno le tue spese, fatture e importi fissi compresi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始残高がない場合、月は0から始まります：収入から支出を引いた額（請求と固定額を含む）。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem saldo inicial, o mês começa em 0: suas receitas menos seus gastos, faturas e valores fixos incluídos."
           }
         }
       }
@@ -202947,53 +204874,6 @@
         }
       }
     },
-    "Six mois, moyennes et comparaisons": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sechs Monate, Durchschnitte und Vergleiche"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Six months, averages and comparisons"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seis meses, promedios y comparaciones"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Six mois, moyennes et comparaisons"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sei mesi, medie e confronti"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "6か月、平均、比較"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seis meses, médias e comparações"
-          }
-        }
-      }
-    },
     "Six widgets assortis, dans le même style, ajoutés d'une touche à Mes widgets.": {
       "extractionState": "manual",
       "localizations": {
@@ -203601,6 +205481,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saldo"
+          }
+        }
+      }
+    },
+    "Solde après chaque opération": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kontostand nach jeder Buchung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balance after each transaction"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo tras cada movimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solde après chaque opération"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo dopo ogni operazione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "各取引後の残高"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo após cada transação"
           }
         }
       }
@@ -217705,6 +219632,147 @@
         }
       }
     },
+    "Tes achats arrivent à chaque ouverture d'Ardane.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Einkäufe kommen bei jedem Öffnen von Ardane."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your purchases arrive each time you open Ardane."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus compras llegan cada vez que abres Ardane."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes achats arrivent à chaque ouverture d'Ardane."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi acquisti arrivano a ogni apertura di Ardane."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "購入はArdaneを開くたびに追加されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas compras chegam sempre que você abre o Ardane."
+          }
+        }
+      }
+    },
+    "Tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses, sans raccourci à créer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einkäufe mit deinen Karten in Wallet erscheinen von selbst in deinen Ausgaben, ganz ohne Kurzbefehl."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchases made with your Wallet cards show up in your expenses by themselves, with no shortcut to create."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las compras con tus tarjetas de Cartera aparecen solas en tus gastos, sin atajo que crear."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses, sans raccourci à créer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli acquisti fatti con le carte di Wallet arrivano da soli tra le tue spese, senza comandi rapidi da creare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウォレットのカードでの購入が、ショートカットを作らなくても自動で支出に追加されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As compras feitas com os cartões da Carteira aparecem sozinhas nos seus gastos, sem atalho para criar."
+          }
+        }
+      }
+    },
+    "Tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses, à chaque ouverture d'Ardane. Rien ne quitte ton iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einkäufe mit deinen Karten in Wallet erscheinen bei jedem Öffnen von Ardane von selbst in deinen Ausgaben. Nichts verlässt dein iPhone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchases made with your Wallet cards show up in your expenses by themselves, each time you open Ardane. Nothing leaves your iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Las compras con tus tarjetas de Cartera aparecen solas en tus gastos cada vez que abres Ardane. Nada sale de tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses, à chaque ouverture d'Ardane. Rien ne quitte ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli acquisti fatti con le carte di Wallet arrivano da soli tra le tue spese a ogni apertura di Ardane. Nulla lascia il tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウォレットのカードでの購入は、Ardaneを開くたびに自動で支出に追加されます。データがiPhoneの外に出ることはありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "As compras feitas com os cartões da Carteira aparecem sozinhas nos seus gastos sempre que você abre o Ardane. Nada sai do seu iPhone."
+          }
+        }
+      }
+    },
     "Tes actions, ETF et cryptos.": {
       "extractionState": "manual",
       "localizations": {
@@ -227058,53 +229126,6 @@
         }
       }
     },
-    "Total du mois": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Summe des Monats"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Month total"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total del mes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total du mois"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Totale del mese"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "月の合計"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total do mês"
-          }
-        }
-      }
-    },
     "Total dépensé": {
       "extractionState": "manual",
       "localizations": {
@@ -229643,6 +231664,53 @@
         }
       }
     },
+    "Tout Finance": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alles in Finanzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All of Finances"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo Finanzas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout Finance"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutto Finanze"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイナンスのすべて"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tudo em Finanças"
+          }
+        }
+      }
+    },
     "Tout afficher": {
       "extractionState": "manual",
       "localizations": {
@@ -231331,6 +233399,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todas as tarefas estão feitas"
+          }
+        }
+      }
+    },
+    "Toutes tes catégories sont en baisse : %@ de moins que le mois dernier à la même date.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle deine Kategorien sind gesunken: %@ weniger als im letzten Monat zum selben Datum."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All your categories are down: %@ less than last month at the same date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas tus categorías bajan: %@ menos que el mes pasado en la misma fecha."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes tes catégories sont en baisse : %@ de moins que le mois dernier à la même date."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutte le tue categorie sono in calo: %@ in meno rispetto al mese scorso alla stessa data."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのカテゴリが減っています：先月の同じ日より%@少ない。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas as suas categorias estão em queda: %@ a menos que no mês passado na mesma data."
           }
         }
       }
@@ -234715,6 +236830,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Já há um horário no seu planejamento"
+          }
+        }
+      }
+    },
+    "Un instant…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einen Moment …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One moment…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un momento…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un instant…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un attimo…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "少々お待ちください…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um instante…"
           }
         }
       }
@@ -243367,6 +245529,53 @@
         }
       }
     },
+    "Vérifier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifica"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確認"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar"
+          }
+        }
+      }
+    },
     "Vérifié": {
       "extractionState": "manual",
       "localizations": {
@@ -244961,6 +247170,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "ausente"
+          }
+        }
+      }
+    },
+    "achat Apple Pay à vérifier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple-Pay-Einkauf zu prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Pay purchase to check"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "compra con Apple Pay por revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "achat Apple Pay à vérifier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "acquisto Apple Pay da verificare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件のApple Pay購入が要確認"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "compra do Apple Pay a verificar"
+          }
+        }
+      }
+    },
+    "achats Apple Pay à vérifier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple-Pay-Einkäufe zu prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apple Pay purchases to check"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "compras con Apple Pay por revisar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "achats Apple Pay à vérifier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "acquisti Apple Pay da verificare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件のApple Pay購入が要確認"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "compras do Apple Pay a verificar"
           }
         }
       }
@@ -248067,6 +250370,53 @@
         }
       }
     },
+    "cumulé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "kumuliert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cumulative"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "acumulado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cumulé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cumulato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "累計"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "acumulado"
+          }
+        }
+      }
+    },
     "d'ici %@ j": {
       "extractionState": "manual",
       "localizations": {
@@ -248674,6 +251024,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "último dia"
+          }
+        }
+      }
+    },
+    "dernier jour du mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "letzter Tag des Monats"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "last day of the month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "último día del mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dernier jour du mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ultimo giorno del mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月の最終日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "último dia do mês"
           }
         }
       }
@@ -255728,6 +258125,53 @@
         }
       }
     },
+    "par jour pendant %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "pro Tag für %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "a day for %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "al día durante %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "par jour pendant %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "al giorno per %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@の1日あたり"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "por dia durante %@"
+          }
+        }
+      }
+    },
     "par mois": {
       "extractionState": "manual",
       "localizations": {
@@ -257937,49 +260381,49 @@
         }
       }
     },
-    "prévus (Mes informations)": {
+    "prévus": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "erwartet (Meine Infos)"
+            "value": "geplant"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "expected (My info)"
+            "value": "expected"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "previstos (Mis datos)"
+            "value": "previstos"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "prévus (Mes informations)"
+            "value": "prévus"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "previsti (Le mie info)"
+            "value": "previsti"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "見込み（マイ情報）"
+            "value": "予定"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "previstos (Minhas informações)"
+            "value": "previstos"
           }
         }
       }
@@ -258121,6 +260565,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "refeição registrada hoje"
+          }
+        }
+      }
+    },
+    "repère du %@ : %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marke am %@.: %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mark for the %@: %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "referencia del %@: %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "repère du %@ : %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "riferimento del %@: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@日の目安：%2$@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "marca do dia %@: %@"
           }
         }
       }
@@ -258403,6 +260894,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "faturamento %@ · %@"
+          }
+        }
+      }
+    },
+    "revenus moins dépenses": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einnahmen minus Ausgaben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "income minus expenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ingresos menos gastos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "revenus moins dépenses"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "entrate meno spese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "収入－支出"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "receitas menos gastos"
           }
         }
       }
@@ -259206,6 +261744,53 @@
         }
       }
     },
+    "solde %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stand %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "balance %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "saldo %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "solde %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "saldo %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残高 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "saldo %@"
+          }
+        }
+      }
+    },
     "sombre": {
       "extractionState": "manual",
       "localizations": {
@@ -259484,6 +262069,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "de %@ esta semana"
+          }
+        }
+      }
+    },
+    "sur %@ visés par mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "von %@ Sparziel pro Monat"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "of %@ aimed for each month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "de %@ previstos al mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sur %@ visés par mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "su %@ previsti al mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎月の目標 %@ に対して"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "de %@ previstos por mês"
           }
         }
       }
@@ -264799,6 +267431,147 @@
         }
       }
     },
+    "À vérifier : c'est bien « %@ » ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfen: Ist es wirklich „%@“?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To check: is it really “%@”?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por revisar: ¿es «%@»?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À vérifier : c'est bien « %@ » ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da verificare: è proprio «%@»?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要確認：「%@」で正しいですか？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A verificar: é mesmo “%@”?"
+          }
+        }
+      }
+    },
+    "À vérifier : c'est bien « %@ » ? Ardane s'en souviendra pour ce commerçant.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfen: Ist es wirklich „%@“? Ardane merkt es sich für diesen Händler."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To check: is it really “%@”? Ardane will remember it for this merchant."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por revisar: ¿es «%@»? Ardane lo recordará para este comercio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À vérifier : c'est bien « %@ » ? Ardane s'en souviendra pour ce commerçant."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da verificare: è proprio «%@»? Ardane lo ricorderà per questo esercente."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要確認：「%@」で正しいですか？ Ardaneはこの店舗について覚えておきます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A verificar: é mesmo “%@”? O Ardane vai lembrar para este comerciante."
+          }
+        }
+      }
+    },
+    "À vérifier : choisis sa catégorie avec « Modifier ».": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prüfen: Wähle die Kategorie über „Bearbeiten“."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To check: choose its category with “Edit”."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por revisar: elige su categoría con «Editar»."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À vérifier : choisis sa catégorie avec « Modifier »."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Da verificare: scegli la categoria con «Modifica»."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要確認：「編集」でカテゴリを選んでください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A verificar: escolha a categoria em “Editar”."
+          }
+        }
+      }
+    },
     "À éviter": {
       "extractionState": "manual",
       "localizations": {
@@ -265406,6 +268179,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Prazos do carro"
+          }
+        }
+      }
+    },
+    "Échéancier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fälligkeiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schedule"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendario de pagos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Échéancier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scadenzario"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支払い予定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calendário de pagamentos"
           }
         }
       }
@@ -266910,6 +269730,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Meta de poupança"
+          }
+        }
+      }
+    },
+    "Épargne visée atteinte": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sparziel erreicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Savings goal reached"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo de ahorro alcanzado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Épargne visée atteinte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo di risparmio raggiunto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貯蓄目標を達成"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta de poupança atingida"
           }
         }
       }

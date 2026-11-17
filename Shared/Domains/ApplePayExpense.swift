@@ -9,6 +9,9 @@ enum ApplePayExpense {
     /// The same amount from the same shop within this many seconds is one payment: the automation can run
     /// twice for it.
     static let duplicateWindow: TimeInterval = 120
+    /// A purchase read in Wallet and the same one sent earlier by the Shortcuts automation: the automation runs when
+    /// the card is used, Wallet dates the purchase itself, a few minutes apart at most.
+    static let walletShortcutWindow: TimeInterval = 15 * 60
 
     /// What an expense without a shop name is called.
     static let genericMerchant = "Apple Pay"
@@ -352,6 +355,35 @@ extension BudgetState {
         let learned = ApplePayExpense.learnedCategoryID(forKey: key, in: self)
         let category = learned ?? ApplePayExpense.keywordCategoryID(forKey: key, in: self)
         let expense = Expense(amount: cents, categoryID: category, note: ApplePayExpense.noteName(shown), date: date,
+                              source: .applePay, merchant: shown, needsReview: learned == nil)
+        add(expense)
+        return .added(expense)
+    }
+
+    /// Records a purchase read in Wallet (FinanceKit, Premium, 2026-11-16) as an Apple Pay expense, under the
+    /// identifier Wallet gives it: reading the same purchase again adds nothing, even after the person changed the
+    /// expense. A purchase the Shortcuts automation already sent (same amount, within `walletShortcutWindow`) is not
+    /// added twice. Same rules as `addApplePay` otherwise: nothing for a null or unreadable amount, the category
+    /// learned for the shop or guessed from its name (then « à vérifier »).
+    @discardableResult
+    mutating func addWalletPurchase(id: UUID, amount: Double, merchant: String, date: Date) -> ApplePayResult {
+        guard amount.isFinite else { return .ignored(ApplePayExpense.Reason.unreadable) }
+        guard amount >= 0 else { return .ignored(ApplePayExpense.Reason.refund) }
+        let cents = (amount * 100).rounded() / 100
+        guard cents > 0 else { return .ignored(ApplePayExpense.Reason.zero) }
+        if expenses.contains(where: { $0.id == id }) { return .duplicate }
+        let fromShortcut = expenses.contains { other in
+            other.source == .applePay
+                && abs(other.date.timeIntervalSince(date)) <= ApplePayExpense.walletShortcutWindow
+                && abs(other.amount - cents) < 0.005
+        }
+        if fromShortcut { return .duplicate }
+
+        let shown = ApplePayExpense.displayName(merchant)
+        let key = ApplePayExpense.normalizedMerchant(shown)
+        let learned = ApplePayExpense.learnedCategoryID(forKey: key, in: self)
+        let category = learned ?? ApplePayExpense.keywordCategoryID(forKey: key, in: self)
+        let expense = Expense(id: id, amount: cents, categoryID: category, note: ApplePayExpense.noteName(shown), date: date,
                               source: .applePay, merchant: shown, needsReview: learned == nil)
         add(expense)
         return .added(expense)

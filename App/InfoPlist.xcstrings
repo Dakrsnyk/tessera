@@ -142,6 +142,53 @@
         }
       }
     },
+    "NSFinancialDataUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit Premium liest Ardane die Einkäufe deiner Karten in Wallet und fügt sie selbst deinen Ausgaben hinzu. Alles bleibt auf deinem iPhone."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With Premium, Ardane reads the purchases made with your Wallet cards and adds them to your expenses for you. Everything stays on your iPhone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con Premium, Ardane lee las compras de tus tarjetas de Cartera y las añade solo a tus gastos. Todo se queda en tu iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec Premium, Ardane lit les achats de tes cartes de Cartes pour les ajouter seul à tes dépenses. Tout reste sur ton iPhone."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con Premium, Ardane legge gli acquisti delle tue carte in Wallet e li aggiunge da solo alle tue spese. Tutto resta sul tuo iPhone."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumでは、Ardaneがウォレットのカードでの購入を読み取り、自動で支出に追加します。データはすべてiPhoneに残ります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o Premium, o Ardane lê as compras dos seus cartões da Carteira e as adiciona sozinho às suas despesas. Tudo fica no seu iPhone."
+          }
+        }
+      }
+    },
     "NSLocationWhenInUseUsageDescription": {
       "extractionState": "manual",
       "localizations": {

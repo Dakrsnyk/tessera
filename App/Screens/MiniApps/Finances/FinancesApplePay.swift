@@ -26,8 +26,9 @@ enum ApplePayStatus {
 
     /// The line of the row in Finances.
     static func subtitle(_ state: BudgetState) -> String {
-        guard let last = lastDate(state) else { return tr("À configurer") }
-        return tr("Active · dernière dépense \(since(last))")
+        let automatic = WalletImport.isEnabled && WalletImport.isSupported
+        guard let last = lastDate(state) else { return automatic ? tr("Automatique · aucun achat pour l'instant") : tr("À configurer") }
+        return automatic ? tr("Automatique · dernière dépense \(since(last))") : tr("Active · dernière dépense \(since(last))")
     }
 }
 
@@ -75,8 +76,13 @@ struct ApplePayGuideView: View {
                 VStack(alignment: .leading, spacing: 22) {
                     intro
                     status(state)
-                    steps
-                    openShortcuts
+                    if WalletImport.isSupported {
+                        WalletImportSection()
+                    }
+                    if !(WalletImport.isSupported && WalletImport.isEnabled && model.isPremium) {
+                        steps
+                        openShortcuts
+                    }
                     howItWorks
                     rules(state)
                     MiniFootnote(text: tr("Ardane ne reçoit que le montant, le commerçant et la carte que Raccourcis lui passe. Une dépense reçue se supprime comme les autres."))
@@ -134,20 +140,16 @@ struct ApplePayGuideView: View {
     /// The steps, with the words of the Shortcuts app in French.
     private var steps: some View {
         VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("À faire une seule fois"))
+            MiniSectionTitle(title: WalletImport.isSupported ? tr("Sans Premium : avec Raccourcis") : tr("À faire une seule fois"))
             VStack(alignment: .leading, spacing: 16) {
                 GuideStep(number: 1, colorHex: accentHex,
-                          text: tr("Ouvre Raccourcis › Automatisation › « + » › Créer une automatisation personnelle › Transaction."))
+                          text: tr("Ouvre Raccourcis › Automatisation › « + » › Transaction."))
                 GuideStep(number: 2, colorHex: accentHex,
-                          text: tr("Choisis tes cartes et « Tout paiement »."))
+                          text: tr("Choisis tes cartes, « Tout paiement » et « Exécuter immédiatement »."))
                 GuideStep(number: 3, colorHex: accentHex,
-                          text: tr("Choisis « Exécuter immédiatement » (et désactive « Notifier à l'exécution » si proposé)."))
-                GuideStep(number: 4, colorHex: accentHex,
-                          text: tr("Ajoute l'action « Ajouter une dépense Apple Pay » (app Ardane)."))
-                GuideStep(number: 5, colorHex: accentHex,
-                          text: tr("Dans l'action, touche chaque champ et choisis la variable de la transaction :"),
+                          text: tr("Ajoute l'action « Ajouter une dépense Apple Pay » (app Ardane), puis touche chaque champ :"),
                           lines: [tr("Montant → « Montant »"), tr("Commerçant → « Commerçant »"), tr("Carte → « Carte ou laissez-passer »")])
-                GuideStep(number: 6, colorHex: accentHex,
+                GuideStep(number: 4, colorHex: accentHex,
                           text: tr("Termine : le prochain paiement apparaîtra tout seul dans tes dépenses."))
             }
             .padding(14)
@@ -196,6 +198,116 @@ struct ApplePayGuideView: View {
             .buttonStyle(.pressable)
             .accessibilityIdentifier("applepay-rules")
         }
+    }
+}
+
+/// Premium, where Apple allows it (FinanceKit): the purchases of the Wallet cards arrive by themselves, without any
+/// shortcut. Off by default: the person turns it on, iOS asks for the access, then the purchases of the month are read.
+private struct WalletImportSection: View {
+    @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
+    @State private var isEnabled = WalletImport.isEnabled
+    @State private var isWorking = false
+    @State private var message: String?
+    @State private var paywall: PaywallContext?
+
+    private var isOn: Bool { isEnabled && model.isPremium }
+
+    var body: some View {
+        let palette = CristalPalette.of(style.id)
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Import automatique depuis Cartes"))
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(alignment: .top, spacing: 12) {
+                    Image(systemName: isOn ? "checkmark.circle.fill" : "wave.3.right.circle.fill")
+                        .font(.title2)
+                        .foregroundStyle(palette.strong(isOn ? Finances.incomeHex : ApplePayStatus.hex))
+                        .accessibilityHidden(true)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(isOn ? tr("Activé") : tr("Sans raccourci à créer"))
+                            .font(.headline)
+                        Text(detail)
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+                if let message {
+                    Text(message)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                actions
+            }
+            .padding(14)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .miniCard()
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("applepay-wallet")
+        .sheet(item: $paywall) { PaywallView(context: $0) }
+    }
+
+    private var detail: String {
+        guard model.isPremium else {
+            return tr("Avec Premium, tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses. Rien à régler dans Raccourcis.")
+        }
+        guard isEnabled else {
+            return tr("Tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses, à chaque ouverture d'Ardane. Rien ne quitte ton iPhone.")
+        }
+        if let last = WalletImport.lastRun {
+            return tr("Dernière lecture \(ApplePayStatus.since(last)). Tes achats arrivent à chaque ouverture d'Ardane.")
+        }
+        return tr("Tes achats arrivent à chaque ouverture d'Ardane.")
+    }
+
+    @ViewBuilder
+    private var actions: some View {
+        if !model.isPremium {
+            MiniActionButton(title: tr("Découvrir Premium"), symbol: "sparkles", colorHex: Finances.accentHex) { paywall = .walletImport }
+                .accessibilityIdentifier("applepay-wallet-premium")
+        } else if !isEnabled {
+            MiniActionButton(title: isWorking ? tr("Un instant…") : tr("Activer l'import automatique"), symbol: "wave.3.right", colorHex: Finances.accentHex) {
+                guard !isWorking else { return }
+                isWorking = true
+                Task {
+                    let outcome = await WalletImport.enable(model: model)
+                    isWorking = false
+                    isEnabled = WalletImport.isEnabled
+                    switch outcome {
+                    case .enabled: message = nil
+                    case .denied: message = tr("Accès refusé. Tu peux l'autoriser plus tard dans les Réglages de l'iPhone, puis revenir ici.")
+                    case .unavailable: message = tr("Cartes ne partage pas encore les achats sur cet iPhone. Le raccourci reste possible.")
+                    case .failed: message = tr("La lecture n'a pas pu se faire. Réessaie dans un moment.")
+                    }
+                }
+            }
+            .accessibilityIdentifier("applepay-wallet-enable")
+        } else {
+            HStack(spacing: 10) {
+                MiniActionButton(title: tr("Lire maintenant"), symbol: "arrow.clockwise", colorHex: Finances.accentHex, isProminent: false) {
+                    Task { await WalletImport.sync(model: model) }
+                }
+                MiniActionButton(title: tr("Désactiver"), symbol: "pause.circle", colorHex: Finances.overHex, isProminent: false) {
+                    WalletImport.disable()
+                    isEnabled = false
+                }
+                .accessibilityIdentifier("applepay-wallet-disable")
+            }
+        }
+    }
+}
+
+extension PaywallContext {
+    /// The automatic Apple Pay expenses read in Wallet (FinanceKit), in Finances.
+    static var walletImport: PaywallContext {
+        PaywallContext(
+            symbol: "wave.3.right.circle.fill",
+            title: tr("Apple Pay automatique"),
+            detail: tr("Tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses, sans raccourci à créer."),
+            perk: .smart
+        )
     }
 }
 

@@ -76,6 +76,8 @@ struct ArdaneApp: App {
                         // A study timer stopped or cancelled from the Lock Screen while the app was closed.
                         Task { await StudyLiveActivity.sync(model.student) }
                         Task { await premium.refreshEntitlements() }
+                        // Premium: the purchases of the Wallet cards since the last opening (FinanceKit, where Apple allows it).
+                        Task { await WalletImport.sync(model: model) }
                         Task { await model.refreshInsights() }
                         // A new day, or something done from a widget: the reminders follow.
                         model.syncReminders()

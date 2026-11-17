@@ -16,6 +16,11 @@ enum FinanceSheet: Identifiable {
     case opening
     /// The guide of the automatic Apple Pay expenses (the Shortcuts automation).
     case applePay
+    /// « Ajouter »: the one sheet for a new expense or a new income (hybrid layout, 2026-11-16).
+    case add(isIncome: Bool)
+    /// The card of an expense or an income noted, read before it is changed (« Modifier » opens its editor).
+    case detailExpense(Expense)
+    case detailIncome(IncomeEntry)
 
     var id: String {
         switch self {
@@ -29,6 +34,9 @@ enum FinanceSheet: Identifiable {
         case .budget: "budget"
         case .opening: "opening"
         case .applePay: "applepay"
+        case let .add(isIncome): "add-\(isIncome)"
+        case let .detailExpense(expense): "detail-e-\(expense.id.uuidString)"
+        case let .detailIncome(income): "detail-i-\(income.id.uuidString)"
         }
     }
 
@@ -51,6 +59,9 @@ enum FinanceSheet: Identifiable {
         case .budget: MonthlyBudgetEditor()
         case .opening: OpeningBalanceEditor()
         case .applePay: ApplePayGuideView()
+        case let .add(isIncome): FinanceAddSheet(isIncome: isIncome)
+        case let .detailExpense(expense): FinanceOperationSheet(expense: expense)
+        case let .detailIncome(income): FinanceOperationSheet(income: income)
         }
     }
 
@@ -127,11 +138,13 @@ struct OpeningBalanceEditor: View {
     }
 }
 
-/// The Finances mini-app, top to bottom, as in the « Signature » mock-up. On the band: the week selector, then
-/// what is left of the month's budget as it stood at the end of the chosen day, with its trend. On the sheet:
-/// the two actions, the chosen day (two tiles and its operations), « Ce mois-ci », the balance as it went, the
-/// categories, the bills coming and the savings; then every operation, the evolution and the fixed expenses;
-/// a note and the settings last. The figures of the month follow the chosen day (nothing noted after it counts).
+/// The Finances mini-app, top to bottom, as in the hybrid layout the CEO chose on 2026-11-16 (direction 5). On the
+/// band: the week selector, then what is left of the month's budget at the end of the chosen day, what that leaves
+/// per day, the bar of the budget with the mark of the month's pace, and what is left once the bills still to come
+/// are paid. On the page: income, spending and balance in three tiles; what comes back in the next 14 days; the
+/// operations of the chosen day; the categories against their pace; then every page in a list that never changes;
+/// a note and the settings last. One floating action, « Ajouter », opens the sheet for an expense or an income.
+/// The figures of the month follow the chosen day (nothing noted after it counts).
 struct FinancesAppView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.appStyle) private var style
@@ -140,6 +153,7 @@ struct FinancesAppView: View {
 
     private var currency: String { model.settings.currencyCode }
     private var accentHex: String { Finances.accentHex }
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
 
     /// The moment the month's figures are read at: now for today, the end of the chosen day otherwise.
     private func reference(now: Date) -> Date {
@@ -150,25 +164,24 @@ struct FinancesAppView: View {
         let now = Date()
         let at = reference(now: now)
         let state = model.budget
-        MiniAppScaffold(colorHex: accentHex) {
+        MiniAppScaffold(colorHex: accentHex,
+                        action: MiniFloatingAction(title: tr("Ajouter"), symbol: "plus", colorHex: accentHex, identifier: "finances-add") {
+                            sheet = .add(isIncome: false)
+                        }) {
             // The band: the only date selector (spending is logged, so it stops at today), then the budget left.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { dayMark($0, state: state) })
-            hero(state: state, now: now, at: at)
+            hero(state: state, now: now)
         } sheet: {
-            // The sheet, by importance: the two actions, the chosen day, the month, then the balance and the rest.
+            // The page, by importance: where the month stands, what comes soon, the chosen day, the categories, then
+            // every page in the same list each time.
             MiniAppToFillSection(app: .finances)
-            // Grouped: a builder takes ten views at most.
             Group {
-                actions
+                tiles(state: state, now: now, at: at)
+                upcoming(state: state, now: now)
                 dayCard(state: state, now: now)
-                applePayRow(state: state)
             }
-            month(state: state, now: now)
-            BalanceChartCard(state: state, currency: currency, isPremium: model.isPremium) { sheet = .opening }
             categories(state: state, now: now)
-            bills(state: state, now: now)
-            savings(state: state)
-            more(state: state, now: now)
+            pages(state: state)
             MiniFootnote(text: tr("Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers."))
             MiniAppInfoSection(app: .finances)
         }
@@ -176,148 +189,278 @@ struct FinancesAppView: View {
         .sheet(item: $sheet) { $0.editor }
     }
 
-    private var actions: some View {
-        HStack(spacing: 10) {
-            MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex) { sheet = .expense(nil) }
-                .accessibilityIdentifier("finances-add-expense")
-            MiniActionButton(title: tr("Revenu"), symbol: "plus", colorHex: Finances.incomeHex, isProminent: false) { sheet = .income(nil) }
-                .accessibilityIdentifier("finances-add-income")
-        }
-    }
-
-    /// « Dépenses Apple Pay automatiques »: opens the guide of the Shortcuts automation; the line says whether
-    /// a payment has already arrived through it.
-    private func applePayRow(state: BudgetState) -> some View {
-        MiniRowsCard {
-            Button { sheet = .applePay } label: {
-                FinancesRow(symbol: "wave.3.right.circle", colorHex: ApplePayStatus.hex, title: tr("Dépenses Apple Pay automatiques"),
-                            detail: ApplePayStatus.subtitle(state))
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("finances-applepay")
-        }
-    }
-
-    /// The categories of the chosen day's month with some spending (the section and the list below use it).
-    private func categoryStatus(_ state: BudgetState, now: Date) -> [BudgetMath.CategoryStatus] {
-        BudgetMath.categoryStatus(state, throughDay: day, now: now).filter { $0.spent > 0 }
-    }
-
-    /// What came in, from the start of the chosen day's month to the end of that day.
-    private func monthEarned(_ state: BudgetState, now: Date) -> Double {
-        BudgetMath.earned(state, throughDay: day, now: now)
-    }
-
     // MARK: What is left
 
-    /// The budget left at the end of the chosen day, straight on the band (no card): the budget of the month
-    /// minus the spending from the 1st to that day. For today it is the usual figure of the month so far.
-    private func hero(state: BudgetState, now: Date, at: Date) -> some View {
+    /// The glass card of the band: what is left of the month's budget at the end of the chosen day (the budget minus
+    /// the spending from the 1st to that day), what it leaves per day, the bar of the budget with the mark of the
+    /// month's pace, and what is left once the bills and fixed expenses still to come this month are paid. Without a
+    /// budget given, what was spent and a button to set one (the default 2 000 is not the person's budget).
+    private func hero(state: BudgetState, now: Date) -> some View {
         let spent = BudgetMath.spentThisMonth(state, throughDay: day, now: now)
         let remaining = BudgetMath.remaining(state, throughDay: day, now: now)
-        // The default 2 000 is not a budget the person gave: without one, show what was spent, not a made-up remainder.
         let knowsBudget = model.profile.knows(.monthlyBudget)
         let over = knowsBudget && remaining < 0
-        let comparison = BudgetMath.monthToDate(state, at: at)
+        let label = !knowsBudget ? tr("Dépensé ce mois-ci") : (over ? tr("Dépassé ce mois-ci") : tr("Reste ce mois-ci"))
         return VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .center, spacing: 8) {
+                Text(label.uppercased())
+                    .font(.caption.weight(.bold))
+                    .tracking(1)
+                    .foregroundStyle(Color.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                Spacer(minLength: 8)
+                if knowsBudget { budgetButton(state) }
+            }
             if knowsBudget {
-                MiniHero(label: over ? tr("Dépassé ce mois-ci") : tr("Reste ce mois-ci"),
-                         value: TF.money(abs(remaining), currency),
-                         caption: heroDetail(state: state, spent: spent, remaining: remaining, now: now))
-                trend(state: state, now: now, over: over)
+                figure(state: state, remaining: remaining, over: over, now: now)
+                pace(state: state, spent: spent)
+                afterBills(state: state, now: now)
             } else {
-                MiniHero(label: tr("Dépensé ce mois-ci"),
-                         value: TF.money(spent, currency),
-                         caption: tr("Budget à définir pour savoir ce qu'il te reste"))
-            }
-            HStack {
-                Button { sheet = .budget } label: {
-                    Text(knowsBudget ? tr("Budget \(TF.money(state.monthlyBudget, currency))") : tr("Définir mon budget"))
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(Color.accentColor)
-                        .padding(.horizontal, 12)
-                        .frame(minHeight: 44)
-                        .background(CristalPalette.of(style.id).tintColor, in: Capsule())
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("finances-budget")
-                Spacer(minLength: 0)
-            }
-            if comparison.previous > 0, abs(comparison.current - comparison.previous) >= 1 {
-                let difference = comparison.current - comparison.previous
-                Label(difference > 0 ? tr("\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date") : tr("\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date"),
-                      systemImage: difference > 0 ? "arrow.up.right" : "arrow.down.right")
-                    .font(.caption)
+                Text(TF.money(spent, currency))
+                    .font(.system(size: 54, weight: .heavy))
+                    .monospacedDigit()
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                Text(tr("Budget à définir pour savoir ce qu'il te reste"))
+                    .font(.subheadline)
                     .opacity(0.85)
+                    .fixedSize(horizontal: false, vertical: true)
+                budgetButton(state)
             }
         }
+        .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .cristalGlass(in: RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("finances-hero")
     }
 
-    /// The small curve under the figure, in the color of Finances: what was left of the budget at the end of each day of the month,
-    /// up to the chosen day. Nothing is drawn until the budget has moved.
-    @ViewBuilder
-    private func trend(state: BudgetState, now: Date, over: Bool) -> some View {
-        let values = remainingByDay(state, now: now)
-        if values.count >= 2, let high = values.max(), let low = values.min(), high > low {
-            Chart(Array(values.enumerated()), id: \.offset) { item in
-                LineMark(x: .value("Jour", item.offset), y: .value("Reste", item.element))
-                    .foregroundStyle(CristalPalette.of(style.id).category(over ? Finances.overHex : Finances.accentHex))
-                    .lineStyle(StrokeStyle(lineWidth: 2.5, lineCap: .round, lineJoin: .round))
-                    .interpolationMethod(.monotone)
+    /// « Budget 1 200 $ » (or « Définir mon budget »): opens the month's budget.
+    private func budgetButton(_ state: BudgetState) -> some View {
+        let knowsBudget = model.profile.knows(.monthlyBudget)
+        return Button { sheet = .budget } label: {
+            Label(knowsBudget ? tr("Budget \(TF.money(state.monthlyBudget, currency))") : tr("Définir mon budget"),
+                  systemImage: knowsBudget ? "pencil" : "plus.circle.fill")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color.accentColor)
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
+                .padding(.horizontal, 12)
+                .frame(minHeight: 44)
+                .background(palette.tintColor, in: Capsule())
+                .contentShape(Capsule())
+        }
+        .buttonStyle(.pressable)
+        .accessibilityIdentifier("finances-budget")
+    }
+
+    /// The big figure, with what it leaves per day beside it (under it when the text is large).
+    private func figure(state: BudgetState, remaining: Double, over: Bool, now: Date) -> some View {
+        let amount = Text(TF.money(abs(remaining), currency))
+            .font(.system(size: 54, weight: .heavy))
+            .monospacedDigit()
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
+        return ViewThatFits(in: .horizontal) {
+            HStack(alignment: .lastTextBaseline, spacing: 14) {
+                amount
+                perDay(state: state, remaining: remaining, over: over, now: now)
             }
-            .chartXAxis(.hidden)
-            .chartYAxis(.hidden)
-            .chartYScale(domain: .automatic(includesZero: false))
-            .frame(height: 40)
-            .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 4) {
+                amount
+                perDay(state: state, remaining: remaining, over: over, now: now)
+            }
         }
     }
 
-    /// The budget left at the end of each day, from the 1st of the chosen day's month to that day.
-    private func remainingByDay(_ state: BudgetState, now: Date) -> [Double] {
-        var values: [Double] = []
-        var cursor = DateMath.startOfDay(BudgetMath.monthInterval(day).start)
-        while cursor <= day && values.count < 31 {
-            values.append(BudgetMath.remaining(state, throughDay: cursor, now: now))
-            guard let next = DateMath.calendar.date(byAdding: .day, value: 1, to: cursor) else { break }
-            cursor = next
+    /// « 21,68 $ / par jour pendant 19 jours »; on the last day of the month, « dernier jour du mois »; nothing once
+    /// the budget is spent.
+    @ViewBuilder
+    private func perDay(state: BudgetState, remaining: Double, over: Bool, now: Date) -> some View {
+        if BudgetMath.daysLeftInMonth(day) <= 1 {
+            Text(tr("dernier jour du mois"))
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color.secondary)
+                .fixedSize()
+        } else if !over, remaining > 0 {
+            let days = BudgetMath.daysToCover(throughDay: day, now: now)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(TF.money(BudgetMath.perDayLeft(state, throughDay: day, now: now), currency, decimals: 2))
+                    .font(.title3.weight(.bold))
+                    .monospacedDigit()
+                Text(tr("par jour pendant \(Fmt.plural(days, tr("jour"), tr("jours")))"))
+                    .font(.caption)
+                    .foregroundStyle(Color.secondary)
+            }
+            .fixedSize()
+            .accessibilityElement(children: .combine)
         }
-        return values
     }
 
-    /// What was spent, and what can be spent each day left once the chosen day is over. On the last day of the
-    /// month there is nothing left to spread.
-    private func heroDetail(state: BudgetState, spent: Double, remaining: Double, now: Date) -> String {
-        if BudgetMath.daysLeftInMonth(day) <= 1 { return tr("\(TF.money(spent, currency)) dépensés · dernier jour du mois") }
-        let days = BudgetMath.daysToCover(throughDay: day, now: now)
-        let dayText = Fmt.plural(days, tr("jour"), tr("jours"))
-        guard remaining > 0 else { return tr("\(TF.money(spent, currency)) dépensés · \(dayText) avant la fin du mois") }
-        return tr("\(TF.money(spent, currency)) dépensés · \(TF.money(BudgetMath.perDayLeft(state, throughDay: day, now: now), currency)) par jour pendant \(dayText)")
+    /// The bar of the budget with the mark of the month's pace, and the two figures under it.
+    private func pace(state: BudgetState, spent: Double) -> some View {
+        let fraction = BudgetMath.monthFraction(throughDay: day)
+        let budget = state.monthlyBudget
+        let share = budget > 0 ? spent / budget : 0
+        let dayNumber = Fmt.firstOfMonth(" " + Fmt.format(day, template: "d") + " ", day).trimmingCharacters(in: .whitespaces)
+        return VStack(alignment: .leading, spacing: 6) {
+            FinancesPaceBar(spent: spent, budget: budget, fraction: fraction)
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(tr("\(TF.money(spent, currency)) dépensés · \(Fmt.percent(share))"))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                Spacer(minLength: 6)
+                Text(tr("repère du \(dayNumber) : \(TF.money(budget * fraction, currency))"))
+                    .foregroundStyle(Color.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            .font(.caption.monospacedDigit())
+        }
+    }
+
+    /// « Après les factures à venir : 218 $, soit 11,47 $ par jour »: what is left once the bills and fixed expenses
+    /// still to come this month are paid. Nothing when none is left to pay.
+    @ViewBuilder
+    private func afterBills(state: BudgetState, now: Date) -> some View {
+        if BudgetMath.dueRestOfMonth(state, afterDay: day) > 0 {
+            let after = BudgetMath.leftAfterDue(state, throughDay: day, now: now)
+            VStack(alignment: .leading, spacing: 8) {
+                Divider()
+                Text(after.left >= 0
+                     ? tr("Après les factures à venir : \(TF.money(after.left, currency)), soit \(TF.money(after.perDay, currency, decimals: 2)) par jour")
+                     : tr("Les factures à venir dépassent le reste de \(TF.money(-after.left, currency))"))
+                    .font(.footnote)
+                    .foregroundStyle(after.left >= 0 ? Color.secondary : palette.strong(Finances.overHex))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .accessibilityElement(children: .combine)
+            .accessibilityIdentifier("finances-after-bills")
+        }
+    }
+
+    // MARK: The month in three tiles
+
+    /// What came in, what went out and the balance, at the end of the chosen day. Income and spending open
+    /// « Revenus et dépenses », the balance opens « Opérations et relevé » (with its chart).
+    private func tiles(state: BudgetState, now: Date, at: Date) -> some View {
+        let earned = BudgetMath.earned(state, throughDay: day, now: now)
+        let expected = model.profile.monthlyIncome
+        let spent = BudgetMath.spentThisMonth(state, throughDay: day, now: now)
+        let comparison = BudgetMath.monthToDate(state, at: at)
+        let balance = balanceAtDay(state, now: now)
+        let isToday = DateMath.isSameDay(day, now)
+        let incomeValue = earned > 0 ? "+" + TF.money(earned, currency) : TF.money(expected ?? 0, currency)
+        return HStack(alignment: .top, spacing: 8) {
+            NavigationLink(value: HomeRoute.page(.financesMonth)) {
+                FinancesFigureTile(symbol: "arrow.down.left", title: tr("Revenus"), value: incomeValue,
+                                   detail: earned > 0 || expected == nil ? tr("ce mois-ci") : tr("prévus"),
+                                   valueHex: earned > 0 ? Finances.incomeHex : nil)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("finances-kpi-income")
+            NavigationLink(value: HomeRoute.page(.financesMonth)) {
+                FinancesFigureTile(symbol: "arrow.up.right", title: tr("Dépenses"),
+                                   value: (spent > 0 ? "−" : "") + TF.money(spent, currency),
+                                   detail: comparisonText(comparison, at: at))
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("finances-kpi-spent")
+            NavigationLink(value: HomeRoute.page(.financesTransactions)) {
+                FinancesFigureTile(symbol: "creditcard", title: tr("Solde"),
+                                   value: (balance < 0 ? "−" : "") + TF.money(abs(balance), currency),
+                                   detail: isToday ? tr("aujourd'hui") : Fmt.format(day, template: "dMMM"),
+                                   valueHex: balance < 0 ? Finances.overHex : nil)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("finances-kpi-balance")
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("finances-balance")
+    }
+
+    /// « −96 $ vs oct. »: this month's spending against last month up to the same moment; « ce mois-ci » otherwise.
+    private func comparisonText(_ comparison: (current: Double, previous: Double), at: Date) -> String {
+        let difference = comparison.current - comparison.previous
+        guard comparison.previous > 0, abs(difference) >= 1 else { return tr("ce mois-ci") }
+        let lastMonth = DateMath.calendar.date(byAdding: .month, value: -1, to: at) ?? at
+        let amount = (difference > 0 ? "+" : "−") + TF.money(abs(difference), currency)
+        return tr("\(amount) vs \(Fmt.format(lastMonth, template: "MMM"))")
+    }
+
+    /// The balance at the end of the chosen day, counted as on the chart of « Opérations et relevé » (from the
+    /// « Solde de départ » when there is one, otherwise from the start of the month).
+    private func balanceAtDay(_ state: BudgetState, now: Date) -> Double {
+        let points = BudgetMath.balanceHistory(state, from: BudgetMath.monthInterval(day).start, now: now)
+        return points.last(where: { DateMath.startOfDay($0.date) <= DateMath.startOfDay(day) })?.balance ?? points.last?.balance ?? 0
+    }
+
+    // MARK: What comes soon
+
+    /// The bills and fixed amounts of the next 14 days (three at most), the total of what will go out, and a link to
+    /// « Budget et récurrents ». A tap opens the bill or the fixed amount to change it.
+    private func upcoming(state: BudgetState, now: Date) -> some View {
+        let items = BudgetMath.upcoming(state, at: now, within: 14)
+        let total = items.filter { !$0.isIncome }.reduce(0) { $0 + $1.amount }
+        return VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("À venir"), detail: total > 0 ? tr("\(TF.money(total, currency, decimals: 2)) en 14 jours") : nil)
+            MiniRowsCard {
+                if items.isEmpty {
+                    Text(tr("Rien à payer dans les 14 prochains jours"))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                } else {
+                    ForEach(Array(items.prefix(3).enumerated()), id: \.element.id) { index, item in
+                        if index > 0 { MiniDivider() }
+                        Button { open(item) } label: { FinancesDueRow(item: item, now: now, currency: currency) }
+                            .buttonStyle(.pressable)
+                            .accessibilityIdentifier("finances-upcoming-row")
+                    }
+                }
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.financesBills)) {
+                    linkRow(items.count > 3 ? tr("Les \(items.count) échéances") : tr("Tout voir"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("finances-upcoming")
+            }
+        }
+    }
+
+    /// A bill opens its editor; a fixed income or expense opens the one of « Revenus et dépenses fixes ».
+    private func open(_ item: BudgetMath.UpcomingItem) {
+        switch item.source {
+        case let .bill(bill):
+            sheet = .bill(bill)
+        case let .fixed(flow):
+            sheet = .flow(model.content.money.items.first(where: { $0.id == flow.id }) ?? flow)
+        }
     }
 
     // MARK: The day
 
-    /// What came in and went out on the chosen day (the fixed payments of that day included), with the
-    /// operations themselves; a tap opens one to change it.
-    @ViewBuilder
+    /// The operations of the chosen day (the fixed payments of that day included), with the day's total; a tap
+    /// opens one to read it (a fixed payment opens the bill or the fixed amount behind it).
     private func dayCard(state: BudgetState, now: Date) -> some View {
         let interval = DateInterval(start: DateMath.startOfDay(day), end: DateMath.nextMidnight(after: day))
         let expenses = BudgetMath.expenses(state, in: interval, now: now).sorted { $0.date > $1.date }
         let incomes = BudgetMath.incomes(state, in: interval, now: now).sorted { $0.date > $1.date }
         let spent = expenses.reduce(0) { $0 + $1.amount }
         let earned = incomes.reduce(0) { $0 + $1.amount }
-        VStack(alignment: .leading, spacing: 10) {
-            // The date of the chosen day (today included), as in the mock-up.
-            MiniSectionTitle(title: Fmt.longDay(day).capitalizedFirst)
-            HStack(spacing: 10) {
-                MiniStat(title: tr("Dépenses du jour"), value: (spent > 0 ? "−" : "") + TF.money(spent, currency, decimals: 2))
-                MiniStat(title: tr("Revenus du jour"), value: TF.money(earned, currency, decimals: 2), colorHex: earned > 0 ? Finances.incomeHex : nil)
-            }
-            if !expenses.isEmpty || !incomes.isEmpty {
-                MiniRowsCard {
+        let totals = [spent > 0 ? "−" + TF.money(spent, currency, decimals: 2) : nil,
+                      earned > 0 ? "+" + TF.money(earned, currency, decimals: 2) : nil].compactMap { $0 }
+        return VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: DateMath.isSameDay(day, now) ? tr("Aujourd'hui") : Fmt.longDay(day).capitalizedFirst,
+                             detail: totals.isEmpty ? nil : totals.joined(separator: " · "))
+            MiniRowsCard {
+                if expenses.isEmpty && incomes.isEmpty {
+                    Text(tr("Aucune opération ce jour-là."))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .frame(maxWidth: .infinity, minHeight: 44, alignment: .leading)
+                } else {
                     ForEach(Array(expenses.enumerated()), id: \.element.id) { index, expense in
                         if index > 0 { MiniDivider() }
                         Button { open(expense, state: state) } label: { expenseRow(expense, state: state) }
@@ -331,6 +474,10 @@ struct FinancesAppView: View {
                             .accessibilityIdentifier("finances-day-row")
                     }
                 }
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.financesTransactions)) { linkRow(tr("Tout voir")) }
+                    .buttonStyle(.pressable)
+                    .accessibilityIdentifier("finances-day-all")
             }
         }
         .accessibilityElement(children: .contain)
@@ -341,25 +488,25 @@ struct FinancesAppView: View {
         let category = state.category(expense.categoryID)
         let name = category?.name ?? tr("Sans catégorie")
         return FinancesRow(symbol: category?.symbol ?? "square.grid.2x2", colorHex: category?.colorHex ?? "64748B",
-                       title: expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note,
-                       detail: expense.fixedID == nil ? name : tr("Dépense fixe · \(name)"),
-                       value: Fmt.signedMoney(-expense.amount, currency: currency),
-                       isApplePay: expense.source == .applePay, needsReview: expense.needsReview == true)
+                           title: expense.note.isEmpty ? (category?.name ?? tr("Dépense")) : expense.note,
+                           detail: expense.fixedID == nil ? name : tr("Dépense fixe · \(name)"),
+                           value: Fmt.signedMoney(-expense.amount, currency: currency),
+                           isApplePay: expense.source == .applePay, needsReview: expense.needsReview == true)
     }
 
     private func incomeRow(_ income: IncomeEntry) -> some View {
         FinancesRow(symbol: "arrow.down.left", colorHex: Finances.incomeHex, title: income.label.isEmpty ? tr("Revenu") : income.label,
-                detail: income.fixedID == nil ? tr("Revenu") : tr("Revenu fixe"),
-                value: Fmt.signedMoney(income.amount, currency: currency))
+                    detail: income.fixedID == nil ? tr("Revenu") : tr("Revenu fixe"),
+                    value: Fmt.signedMoney(income.amount, currency: currency))
     }
 
-    /// An expense or an income opens where it comes from: itself, or the bill or fixed amount behind it.
+    /// An expense or an income opens its card; a payment of a bill or of a fixed amount opens where it comes from.
     private func open(_ expense: Expense, state: BudgetState) {
-        sheet = expense.fixedID.flatMap { FinanceSheet.fixed($0, state: state, items: model.content.money.items) } ?? .expense(expense)
+        sheet = expense.fixedID.flatMap { FinanceSheet.fixed($0, state: state, items: model.content.money.items) } ?? .detailExpense(expense)
     }
 
     private func open(_ income: IncomeEntry, state: BudgetState) {
-        sheet = income.fixedID.flatMap { FinanceSheet.fixed($0, state: state, items: model.content.money.items) } ?? .income(income)
+        sheet = income.fixedID.flatMap { FinanceSheet.fixed($0, state: state, items: model.content.money.items) } ?? .detailIncome(income)
     }
 
     /// A day with at least one operation (noted or fixed) is marked on the selector.
@@ -371,182 +518,159 @@ struct FinancesAppView: View {
         return WeekDayMark(isPlanned: holdsSomething)
     }
 
-    // MARK: The month
-
-    /// What came in this month (the expenses are in the budget above and the balance in the chart: neither is
-    /// repeated); it opens the evolution.
-    @ViewBuilder
-    private func month(state: BudgetState, now: Date) -> some View {
-        let earned = monthEarned(state, now: now)
-        let expected = model.profile.monthlyIncome
-        if earned > 0 || expected != nil {
-            VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Ce mois-ci"))
-                NavigationLink(value: HomeRoute.page(.financesTrends)) {
-                    VStack(spacing: 0) {
-                        if earned > 0 {
-                            FinancesRow(symbol: "arrow.down.left", colorHex: Finances.incomeHex, title: tr("Revenus"), detail: tr("ce mois-ci"),
-                                        value: TF.money(earned, currency))
-                        } else if let expected {
-                            FinancesRow(symbol: "arrow.down.left", colorHex: Finances.incomeHex, title: tr("Revenus"), detail: tr("prévus (Mes informations)"),
-                                        value: TF.money(expected, currency))
-                        }
-                    }
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 4)
-                    .miniCard()
-                }
-                .buttonStyle(.pressable)
-                // The « Évolution » row of the list below is only there when this row is not.
-                .accessibilityIdentifier("finances-trends")
-            }
-        }
-    }
-
     // MARK: Categories
 
-    @ViewBuilder
+    /// The three categories that spent the most this month (or, before any spending, the first three with a limit),
+    /// each against the mark of the month's pace; one clearly ahead of it, or over its limit, says so in words.
     private func categories(state: BudgetState, now: Date) -> some View {
-        let status = categoryStatus(state, now: now)
-        if !status.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Catégories"), detail: Fmt.monthYear(day).capitalizedFirst)
-                NavigationLink(value: HomeRoute.page(.financesCategories)) {
-                    VStack(spacing: 12) {
-                        ForEach(status.prefix(4)) { item in
-                            CategoryBar(status: item, currency: currency)
-                        }
-                        HStack {
-                            Text(status.count > 4 ? tr("Les \(status.count) catégories") : tr("Détail des catégories"))
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(Color.accentColor)
-                            Spacer()
-                            Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
+        let all = BudgetMath.categoryStatus(state, throughDay: day, now: now)
+        let spending = all.filter { $0.spent > 0 }
+        let shown = Array((spending.isEmpty ? all.filter { $0.limit > 0 } : spending).prefix(3))
+        let fraction = BudgetMath.monthFraction(throughDay: day)
+        let days = BudgetMath.daysToCover(throughDay: day, now: now)
+        return VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Catégories"), detail: Fmt.monthYear(day).capitalizedFirst)
+            VStack(spacing: 12) {
+                ForEach(shown) { item in
+                    VStack(alignment: .leading, spacing: 5) {
+                        CategoryBar(status: item, currency: currency, pace: fraction)
+                        if item.isOver {
+                            Text(tr("Dépassé de \(TF.money(item.spent - item.limit, currency))"))
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(palette.strong(Finances.overHex))
+                        } else if BudgetMath.isAheadOfPace(item, fraction: fraction) {
+                            Text(tr("Au-dessus du rythme · \(TF.money(item.limit - item.spent, currency)) pour \(Fmt.plural(days, tr("jour"), tr("jours")))"))
+                                .font(.caption.weight(.semibold))
+                                .foregroundStyle(.secondary)
+                                .fixedSize(horizontal: false, vertical: true)
                         }
                     }
-                    .card(padding: 14)
+                    .accessibilityElement(children: .combine)
+                }
+                if !shown.isEmpty { Divider() }
+                NavigationLink(value: HomeRoute.page(.financesCategories)) {
+                    linkRow(tr("Les \(state.categories.count) catégories"))
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-categories")
             }
+            .padding(.horizontal, 14)
+            .padding(.top, shown.isEmpty ? 2 : 14)
+            .padding(.bottom, 2)
+            .miniCard()
         }
     }
 
-    // MARK: Bills
+    // MARK: Every page
 
-    @ViewBuilder
-    private func bills(state: BudgetState, now: Date) -> some View {
-        let upcoming = BudgetMath.upcomingBills(state, at: now, within: 14)
-        if !upcoming.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Factures à venir"), detail: tr("\(TF.money(upcoming.reduce(0) { $0 + $1.bill.amount }, currency, decimals: 2)) en 14 jours"))
+    /// Every page of Finances, always the same five lines in the same order, whatever is noted.
+    private func pages(state: BudgetState) -> some View {
+        let recurring = BudgetMath.billsMonthly(state) + BudgetMath.fixedExpensesMonthly(state)
+        return VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Tout Finance"))
+            MiniRowsCard {
+                NavigationLink(value: HomeRoute.page(.financesTransactions)) {
+                    FinancesRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Opérations et relevé"),
+                                detail: tr("Solde après chaque opération"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("finances-transactions")
+                MiniDivider()
                 NavigationLink(value: HomeRoute.page(.financesBills)) {
-                    VStack(spacing: 0) {
-                        ForEach(Array(upcoming.prefix(3).enumerated()), id: \.element.id) { index, item in
-                            if index > 0 { MiniDivider() }
-                            FinancesRow(symbol: item.bill.symbol, colorHex: item.days <= 2 ? Finances.overHex : accentHex, title: item.bill.name,
-                                    detail: TF.relativeDay(item.due, from: now).capitalizedFirst,
-                                    value: TF.money(item.bill.amount, currency, decimals: 2), showsChevron: false)
-                        }
-                    }
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 4)
-                    .miniCard()
+                    FinancesRow(symbol: "repeat", colorHex: "D6409F", title: tr("Budget et récurrents"),
+                                detail: recurring > 0 ? tr("\(TF.money(recurring, currency)) reviennent chaque mois") : tr("Loyer, Internet, abonnements…"))
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-bills")
-            }
-        }
-    }
-
-    // MARK: Savings
-
-    @ViewBuilder
-    private func savings(state: BudgetState) -> some View {
-        if !state.goals.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Épargne"))
-                NavigationLink(value: HomeRoute.page(.financesSavings)) {
-                    VStack(spacing: 14) {
-                        ForEach(state.goals.prefix(2)) { goal in
-                            GoalProgressRow(goal: goal, currency: currency)
-                        }
-                    }
-                    .card(padding: 14)
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("finances-savings")
-            }
-        }
-    }
-
-    // MARK: More
-
-    /// The list under the sections. A destination already shown above (a section or the month row) is not
-    /// repeated; its row comes back only when that section or that row is hidden (nothing to show yet),
-    /// so every page stays reachable. The identifiers move with the link.
-    private func more(state: BudgetState, now: Date) -> some View {
-        let showsCategories = !categoryStatus(state, now: now).isEmpty
-        let showsBills = !BudgetMath.upcomingBills(state, at: now, within: 14).isEmpty
-        let showsSavings = !state.goals.isEmpty
-        let showsMonth = monthEarned(state, now: now) > 0 || model.profile.monthlyIncome != nil
-        return MiniRowsCard {
-            NavigationLink(value: HomeRoute.page(.financesTransactions)) {
-                FinancesRow(symbol: "list.bullet.rectangle", colorHex: accentHex, title: tr("Opérations"), detail: tr("Dépenses et revenus, mois par mois"))
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("finances-transactions")
-            if !showsCategories {
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.financesCategories)) {
-                    FinancesRow(symbol: "chart.pie.fill", colorHex: "8C6CFF", title: tr("Catégories"), detail: tr("Répartition et limites"), value: "\(state.categories.count)")
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("finances-categories")
-            }
-            if !showsBills {
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.financesBills)) {
-                    FinancesRow(symbol: "doc.text.fill", colorHex: "F2A33A", title: tr("Factures et abonnements"),
-                            detail: state.bills.isEmpty ? tr("Loyer, Internet, abonnements…") : tr("\(TF.money(BudgetMath.billsMonthly(state), currency)) par mois"))
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("finances-bills")
-            }
-            if !showsSavings {
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.financesSavings)) {
                     FinancesRow(symbol: "banknote.fill", colorHex: Finances.incomeHex, title: tr("Épargne et comptes"),
-                            detail: state.accounts.isEmpty ? tr("Objectifs et valeur nette") : tr("Valeur nette \(TF.money(BudgetMath.netWorth(state), currency))"))
+                                detail: state.accounts.isEmpty ? tr("Objectifs et valeur nette") : tr("Valeur nette \(TF.money(BudgetMath.netWorth(state), currency))"))
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-savings")
-            }
-            if !showsMonth {
                 MiniDivider()
                 NavigationLink(value: HomeRoute.page(.financesTrends)) {
-                    FinancesRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Évolution"), detail: tr("Six mois, moyennes et comparaisons"))
+                    FinancesRow(symbol: "chart.bar.xaxis", colorHex: "3366FF", title: tr("Analyse"),
+                                detail: tr("Comparaisons, six mois, constats"), showsPremium: !model.isPremium)
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("finances-trends")
+                MiniDivider()
+                Button { sheet = .applePay } label: {
+                    FinancesRow(symbol: "wave.3.right.circle", colorHex: ApplePayStatus.hex, title: tr("Dépenses Apple Pay automatiques"),
+                                detail: ApplePayStatus.subtitle(state))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("finances-applepay")
             }
-            MiniDivider()
-            // The fixed expenses of « Revenus et dépenses fixes » (rent, insurance, phone…), counted on their dates.
-            NavigationLink { MoneyView() } label: {
-                let monthly = BudgetMath.fixedExpensesMonthly(state)
-                FinancesRow(symbol: "repeat", colorHex: "D6409F", title: tr("Dépenses fixes"),
-                        detail: monthly > 0 ? tr("\(TF.money(monthly, currency)) par mois") : tr("Loyer, assurances, forfaits…"))
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("finances-fixed")
         }
+    }
+
+    /// A link at the bottom of a card: the words in the action color, a chevron.
+    private func linkRow(_ title: String) -> some View {
+        HStack {
+            Text(title)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(Color.accentColor)
+            Spacer()
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.tertiary)
+        }
+        .frame(minHeight: 44)
+        .contentShape(Rectangle())
+    }
+}
+
+/// One of the three tiles under the band: an icon and a title, the figure, a short line under it.
+private struct FinancesFigureTile: View {
+    let symbol: String
+    let title: String
+    let value: String
+    var detail: String?
+    var valueHex: String?
+    @Environment(\.appStyle) private var style
+
+    var body: some View {
+        let palette = CristalPalette.of(style.id)
+        VStack(alignment: .leading, spacing: 3) {
+            Label {
+                Text(title)
+            } icon: {
+                Image(systemName: symbol)
+            }
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.8)
+            Text(value)
+                .font(.title3.weight(.bold))
+                .foregroundStyle(valueHex.map { palette.strong($0) } ?? Color.primary)
+                .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+            if let detail {
+                Text(detail)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.85)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .frame(maxWidth: .infinity, minHeight: 44, alignment: .topLeading)
+        .padding(12)
+        .miniTile()
+        .contentShape(Rectangle())
+        .accessibilityElement(children: .combine)
     }
 }
 
 // MARK: - Shared pieces
 
 /// A row of the Signature style: an icon in a tinted rounded square, a title, a detail, a value and a chevron.
-private struct FinancesRow: View {
+struct FinancesRow: View {
     @Environment(\.appStyle) private var style
     let symbol: String
     let colorHex: String
@@ -557,6 +681,8 @@ private struct FinancesRow: View {
     /// An expense received through the Apple Pay automation, and one whose category is still to check.
     var isApplePay = false
     var needsReview = false
+    /// A page reserved to Premium, for an account without it: the golden « Premium » badge before the chevron.
+    var showsPremium = false
 
     var body: some View {
         let tint = CristalPalette.of(style.id).category(colorHex)
@@ -590,6 +716,7 @@ private struct FinancesRow: View {
                     .monospacedDigit()
                     .lineLimit(1)
             }
+            if showsPremium { PremiumBadge() }
             if showsChevron {
                 Image(systemName: "chevron.right")
                     .font(.caption.weight(.bold))
@@ -606,6 +733,8 @@ struct CategoryBar: View {
     @Environment(\.appStyle) private var style
     let status: BudgetMath.CategoryStatus
     let currency: String
+    /// The share of the month gone by: a thin mark on the bar shows where the spending would be at an even pace.
+    var pace: Double? = nil
 
     var body: some View {
         let palette = CristalPalette.of(style.id)
@@ -628,6 +757,17 @@ struct CategoryBar: View {
                     .accessibilityLabel(tr("Progression"))
                     .accessibilityValue(Fmt.percent(min(1, ratio)))
                     .tint(status.isOver ? palette.category(Finances.overHex) : palette.category(hex))
+                    .overlay {
+                        if let pace {
+                            GeometryReader { proxy in
+                                RoundedRectangle(cornerRadius: 1)
+                                    .fill(Color.primary.opacity(0.55))
+                                    .frame(width: 2, height: 12)
+                                    .position(x: min(max(1, proxy.size.width * min(1, pace)), proxy.size.width - 1), y: proxy.size.height / 2)
+                            }
+                            .accessibilityHidden(true)
+                        }
+                    }
             }
         }
     }
@@ -672,7 +812,7 @@ struct GoalProgressRow: View {
 /// The balance as it went, at the top of Finances: what came in minus what went out, day by day, over
 /// the month, three months or the year: from the « Solde de départ » when there is one, otherwise from
 /// zero at the start of the period.
-private struct BalanceChartCard: View {
+struct BalanceChartCard: View {
     @Environment(\.appStyle) private var style
     let state: BudgetState
     let currency: String
@@ -712,29 +852,20 @@ private struct BalanceChartCard: View {
         let balance = points.last?.balance ?? 0
         let color = CristalPalette.of(style.id).category(balance < 0 ? Finances.overHex : Finances.incomeHex)
         let dayFormat: Date.FormatStyle = period == .month ? .dateTime.day().month(.abbreviated) : .dateTime.month(.abbreviated)
-        let statement = HomeRoute.page(.financesStatement(period.start(now)))
         VStack(alignment: .leading, spacing: 12) {
             HStack(alignment: .top) {
-                // The balance opens the statement: every movement, day by day, like a bank account.
-                NavigationLink(value: statement) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        HStack(spacing: 4) {
-                            Text(state.openingBalance == nil ? tr("Solde") : tr("Solde du compte"))
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(.secondary)
-                            Image(systemName: "chevron.right")
-                                .font(.caption2.weight(.bold))
-                                .foregroundStyle(.tertiary)
-                        }
-                        Text(TF.money(balance, currency))
-                            .font(.system(size: 34, weight: .bold, design: .rounded))
-                            .foregroundStyle(balance < 0 ? color : Color.primary)
-                            .monospacedDigit()
-                            .contentTransition(.numericText())
-                    }
-                    .contentShape(Rectangle())
+                // The card heads « Opérations et relevé », where the statement itself is: no link to the same page.
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(state.openingBalance == nil ? tr("Solde") : tr("Solde du compte"))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                    Text(TF.money(balance, currency))
+                        .font(.system(size: 34, weight: .bold, design: .rounded))
+                        .foregroundStyle(balance < 0 ? color : Color.primary)
+                        .monospacedDigit()
+                        .contentTransition(.numericText())
                 }
-                .buttonStyle(.pressable)
+                .accessibilityElement(children: .combine)
                 .accessibilityIdentifier("finances-statement")
                 Spacer(minLength: 8)
                 Picker(tr("Période"), selection: Binding(get: { period }, set: { choice in
@@ -749,10 +880,13 @@ private struct BalanceChartCard: View {
                 .pickerStyle(.segmented)
                 .frame(maxWidth: 190)
             }
-            NavigationLink(value: statement) {
-                chart(points, color: color, dayFormat: dayFormat)
+            chart(points, color: color, dayFormat: dayFormat)
+            if !isPremium {
+                // The lock is said, not discovered by touching the segment.
+                Label(tr("3 mois et Année avec Premium"), systemImage: "lock.fill")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.secondary)
             }
-            .buttonStyle(.pressable)
             Text(caption(points))
                 .font(.caption)
                 .foregroundStyle(.secondary)

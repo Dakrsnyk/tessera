@@ -114,6 +114,8 @@ enum MiniAppPage: Hashable {
     case financesBills
     case financesSavings
     case financesTrends
+    /// « Revenus et dépenses » of a month: where the balance comes from, spending by category, incomes.
+    case financesMonth
     case businessSales
     case businessResults
     case businessRecurring
@@ -204,6 +206,7 @@ struct MiniAppPageView: View {
         case .financesBills: FinancesBillsPage()
         case .financesSavings: FinancesSavingsPage()
         case .financesTrends: FinancesTrendsPage()
+        case .financesMonth: FinancesMonthPage()
         case .businessSales: BusinessSalesPage()
         case .businessResults: BusinessResultsPage()
         case .businessRecurring: BusinessRecurringPage()

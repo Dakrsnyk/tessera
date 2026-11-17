@@ -49,7 +49,7 @@ struct MoneyView: View {
             }
         }
         .styledList()
-        .navigationTitle(tr("Revenus et dépenses"))
+        .navigationTitle(tr("Revenus et dépenses fixes"))
         .sheet(item: $editing) { item in
             MoneyItemEditor(item: item, isNew: !money.items.contains { $0.id == item.id })
         }
