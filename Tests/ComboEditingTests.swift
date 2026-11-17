@@ -98,7 +98,8 @@ final class ComboEditingTests: XCTestCase {
     }
 
     func testAnotherSpaceOrTheSameContentIsRefused() {
-        let current = [part(.caloriesLeft)]
+        // A medium widget alone has room for a second one (a small one never has: `testAddingToASmallWidgetIsRefused…`).
+        let current = [part(.caloriesLeft, .medium)]
         XCTAssertTrue(isRefused(ComboEditing.adding(part(.budgetLeft), to: current)))
         XCTAssertTrue(isRefused(ComboEditing.adding(part(.caloriesLeft), to: current)))
         XCTAssertNotNil(ComboEditing.refusal(adding: .budgetLeft, to: current))
@@ -107,7 +108,7 @@ final class ComboEditingTests: XCTestCase {
     }
 
     func testAddingKeepsTheOptionsAndNamesOfTheParts() throws {
-        var first = part(.caloriesLeft, name: "Mon nom")
+        var first = part(.caloriesLeft, .medium, name: "Mon nom")
         first.options.noteTitle = "Garde-moi"
         let outcome = try applied(ComboEditing.adding(part(.macros), to: [first]))
         XCTAssertEqual(outcome.parts[0].name, "Mon nom")

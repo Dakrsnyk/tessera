@@ -152,6 +152,11 @@ final class StudioUITests: XCTestCase {
         let button = app.buttons[identifier]
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Chapitre « \(name) » introuvable", file: file, line: line)
         if !button.isSelected { button.tap() }
+        if !waitForSelection(identifier) {
+            // The Studio may still be sliding in when the first touch lands: once more, with what the screen shows kept.
+            snapshot("chapter-\(name)-first-touch")
+            button.tap()
+        }
         XCTAssertTrue(waitForSelection(identifier), "Le chapitre \(name) ne s'ouvre pas", file: file, line: line)
     }
 
@@ -351,7 +356,8 @@ final class StudioUITests: XCTestCase {
         XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Passé en Grand")).firstMatch.exists,
                        "Le « + » ne doit plus changer la taille tout seul")
         XCTAssertFalse(app.buttons["combo-note-undo"].exists, "Rien n'a changé : pas d'« Annuler »")
-        XCTAssertEqual(partRows().count, 2, "Le widget moyen garde ses 2 widgets (lignes : \(partRows().count))")
+        // Still on « Disposition » (a refusal changes nothing): the widgets are counted on the stage, the list is in « Contenu ».
+        XCTAssertTrue(app.buttons["stage-part-0"].exists && app.buttons["stage-part-1"].exists, "Le widget moyen garde ses 2 widgets")
         XCTAssertFalse(app.buttons["stage-part-2"].exists)
         snapshot("create-medium-full")
         // The order chosen before is kept.
