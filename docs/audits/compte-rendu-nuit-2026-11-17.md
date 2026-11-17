@@ -4,7 +4,8 @@ Mission : « Missions prioritaires de la nuit et évolution fonctionnelle » (6 
 
 ## Versions envoyées sur TestFlight (internes, Premium débloqué)
 - **Build 448** : Créer, Mon quotidien, Études, objectif partagé, inscription, tutoriel, sécurité.
-- **Build 450** : la même, plus le scanner d'horaires élargi et les corrections des échanges entre mini-apps. C'est celle à essayer.
+- **Build 450** : la même, plus le scanner d'horaires élargi et les corrections des échanges entre mini-apps.
+- **Build 452** : la même, plus le tutoriel dont la bulle ne cache plus l'élément présenté. C'est celle à essayer.
 - Aucune version publique `[testflight]` n'a été envoyée.
 
 ## Missions prioritaires
@@ -28,7 +29,7 @@ Mission : « Missions prioritaires de la nuit et évolution fonctionnelle » (6 
 
 ## Ce qui reste
 16. **Problèmes encore présents.**
-    - Tutoriel : au Store et à Mes widgets, l'élément est maintenant visible au-dessus de la bulle mais sans contour.
+    - Tutoriel : au Store et à Mes widgets, l'écran est maintenant visible au-dessus de la bulle mais rien n'est entouré (vu sur les captures du run 451).
     - Scanner : les quarts de nuit sont proposés décochés et arrêtés à minuit ; un tableau d'employés avec les jours en lignes n'est pas reconnu ; il manque de vrais documents pour régler les seuils.
     - Les sessions de concentration ne comptent pas dans le temps d'étude de la semaine.
     - Les calories dépensées en séance ne s'ajoutent pas aux calories restantes de Nutrition (choix à faire : le niveau d'activité les compte déjà).
