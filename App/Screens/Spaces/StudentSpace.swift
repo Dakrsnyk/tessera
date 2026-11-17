@@ -177,14 +177,33 @@ struct CourseEditor: View {
             TextField(tr("Enseignant (facultatif)"), text: $course.teacher)
             NumberRow(title: tr("Crédits"), value: $course.credits)
             ColorChoiceRow(hex: $course.colorHex)
+            if let existing = duplicate {
+                Text(tr("« \(existing.name) » existe déjà : le cours est complété, pas ajouté une seconde fois."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .accessibilityIdentifier("course-duplicate-note")
+            }
         }
+    }
+
+    /// An existing course with the same name, when this one is new: saving completes it instead of adding another.
+    private var duplicate: Course? {
+        guard !model.student.courses.contains(where: { $0.id == course.id }) else { return nil }
+        return model.student.course(matching: course.name)
     }
 
     private func save() {
         var saved = course
         saved.name = saved.name.trimmed
         model.update(\.student) { state in
-            if let index = state.courses.firstIndex(where: { $0.id == saved.id }) { state.courses[index] = saved } else { state.courses.append(saved) }
+            if let index = state.courses.firstIndex(where: { $0.id == saved.id }) {
+                state.courses[index] = saved
+            } else if state.course(matching: saved.name) != nil {
+                // Same name as a course already there (added by hand or read from a timetable): one course only.
+                state.ensureCourse(named: saved.name, teacher: saved.teacher, colorHex: saved.colorHex)
+            } else {
+                state.courses.append(saved)
+            }
         }
     }
 }

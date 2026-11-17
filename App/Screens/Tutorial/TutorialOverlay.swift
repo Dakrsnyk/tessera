@@ -11,21 +11,18 @@ struct TutorialOverlay: View {
     /// False just after a step changes, while the tab it shows lays itself out.
     @State private var settled = false
     @State private var triedStudio = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
-        // Read here so the overlay follows the part as it moves (a tab laying itself out, a scroll).
-        let frame = step.target.flatMap { TutorialFrames.shared.frames[$0] }
         GeometryReader { proxy in
             let size = proxy.size
             let origin = proxy.frame(in: .global).origin
             let safe = proxy.safeAreaInsets
-            let placed = placement(spotlight(frame, in: size, origin: origin, safe: safe), in: size, safe: safe)
-            let hole = placed.0
-            let cardAtTop = placed.1
+            let plan = layout(in: size, origin: origin, safe: safe)
             ZStack(alignment: .top) {
-                dimming(size: size, hole: hole)
-                if let hole {
-                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                dimming(size: size, hole: plan.hole, radius: plan.holeRadius)
+                if let hole = plan.hole {
+                    RoundedRectangle(cornerRadius: plan.holeRadius, style: .continuous)
                         .strokeBorder(Color.white.opacity(0.9), lineWidth: 2)
                         .frame(width: hole.width, height: hole.height)
                         .position(x: hole.midX, y: hole.midY)
@@ -35,11 +32,14 @@ struct TutorialOverlay: View {
                 card
                     .frame(maxWidth: 520)
                     .padding(.horizontal, 14)
-                    .onGeometryChange(for: CGSize.self) { $0.size } action: { cardSize = $0 }
-                    .position(x: size.width / 2, y: cardY(in: size, safe: safe, atTop: cardAtTop, centered: hole == nil))
+                    .onGeometryChange(for: CGSize.self) { $0.size } action: {
+                        cardSize = $0
+                        TutorialFrames.shared.cardHeight = $0.height
+                    }
+                    .position(x: size.width / 2, y: plan.card.midY)
             }
-            .animation(.spring(response: 0.45, dampingFraction: 0.86), value: hole)
-            .animation(.spring(response: 0.45, dampingFraction: 0.86), value: step)
+            .animation(reduceMotion ? nil : .spring(response: 0.45, dampingFraction: 0.86), value: plan)
+            .animation(reduceMotion ? nil : .spring(response: 0.45, dampingFraction: 0.86), value: step)
         }
         .ignoresSafeArea()
         .task(id: step) { await show(step) }
@@ -47,43 +47,25 @@ struct TutorialOverlay: View {
 
     // MARK: Layout
 
-    /// The part lit up, in the overlay's coordinates: only once the tab is laid out, and only the part on screen.
-    private func spotlight(_ frame: CGRect?, in size: CGSize, origin: CGPoint, safe: EdgeInsets) -> CGRect? {
-        guard settled, let frame else { return nil }
-        let local = frame.offsetBy(dx: -origin.x, dy: -origin.y).insetBy(dx: -8, dy: -8)
-        // What stays visible: under the status bar, above the tab bar.
-        let visible = CGRect(x: 4, y: safe.top + 4, width: size.width - 8, height: size.height - safe.top - safe.bottom - 70)
-        let shown = local.intersection(visible)
-        guard !shown.isNull, shown.height > 36, shown.width > 36 else { return nil }
-        return shown
-    }
-
-    /// The card goes where it leaves the lit part in view: below it, or else above it; when neither
-    /// has room (a tall part), at the bottom, with the light kept to what is above the card.
-    private func placement(_ hole: CGRect?, in size: CGSize, safe: EdgeInsets) -> (CGRect?, Bool) {
-        guard var hole else { return (nil, false) }
-        let need = cardSize.height + 28
-        let below = size.height - safe.bottom - 16 - hole.maxY
-        let above = hole.minY - safe.top - 12
-        if below >= need { return (hole, false) }
-        if above >= need { return (hole, true) }
-        let limit = size.height - safe.bottom - 16 - need
-        hole.size.height = max(60, limit - hole.minY)
-        return (hole, false)
-    }
-
-    private func cardY(in size: CGSize, safe: EdgeInsets, atTop: Bool, centered: Bool) -> CGFloat {
-        let half = cardSize.height / 2
-        if centered { return size.height / 2 }
-        return atTop ? safe.top + 12 + half : size.height - safe.bottom - 16 - half
+    /// Where the light and the card go (rules in `TutorialLayout`). Read here so the overlay follows the parts as they
+    /// move (a tab laying itself out, a scroll). Nothing is lit before the tab is laid out, or when no part fits whole.
+    private func layout(in size: CGSize, origin: CGPoint, safe: EdgeInsets) -> TutorialLayout.Plan {
+        let candidates: [TutorialLayout.Candidate?] = settled
+            ? step.targets.map { group in
+                TutorialFrames.shared.candidate(for: group).map {
+                    TutorialLayout.Candidate(frame: $0.frame.offsetBy(dx: -origin.x, dy: -origin.y), radius: $0.radius)
+                }
+            }
+            : []
+        return TutorialLayout.plan(candidates: candidates, screen: size, safeTop: safe.top, safeBottom: safe.bottom, card: cardSize)
     }
 
     /// The app, dimmed, with a hole where the step looks. It also keeps the app from being touched.
-    private func dimming(size: CGSize, hole: CGRect?) -> some View {
+    private func dimming(size: CGSize, hole: CGRect?, radius: CGFloat) -> some View {
         Path { path in
             path.addRect(CGRect(origin: .zero, size: size))
             if let hole {
-                path.addRoundedRect(in: hole, cornerSize: CGSize(width: 22, height: 22), style: .continuous)
+                path.addRoundedRect(in: hole, cornerSize: CGSize(width: radius, height: radius), style: .continuous)
             }
         }
         .fill(Color.black.opacity(0.58), style: FillStyle(eoFill: true))
@@ -101,7 +83,7 @@ struct TutorialOverlay: View {
     private var card: some View {
         VStack(alignment: .leading, spacing: 12) {
             header
-            Text(step.title(name: firstName))
+            Text(step.title)
                 .font(.title3.weight(.bold))
                 .fixedSize(horizontal: false, vertical: true)
             Text(step.message)
@@ -124,7 +106,7 @@ struct TutorialOverlay: View {
 
     private var header: some View {
         HStack(spacing: 10) {
-            Label(step.place, systemImage: step.symbol)
+            Label(step.place(name: firstName), systemImage: step.symbol)
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(Color.accentColor)
                 .padding(.horizontal, 10)
@@ -182,7 +164,7 @@ struct TutorialOverlay: View {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.pressable)
-                .accessibilityLabel(Text(tr("Aller à l'étape \(item.number) : \(item.title(name: firstName))")))
+                .accessibilityLabel(Text(tr("Aller à l'étape \(item.number) : \(item.title)")))
             }
         }
     }
@@ -246,7 +228,8 @@ struct TutorialOverlay: View {
         router.homePath = []
         router.spacePath = []
         router.storePath = []
-        try? await Task.sleep(for: .milliseconds(450))
+        // A step that lights something up waits a little longer: the tab may first scroll the part into place.
+        try? await Task.sleep(for: .milliseconds(step.targets.isEmpty ? 450 : 900))
         guard !Task.isCancelled else { return }
         settled = true
     }

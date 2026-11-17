@@ -99,7 +99,17 @@ final class Audit24WidgetsNotificationsTests: XCTestCase {
         XCTAssertEqual(NotificationRoute.link(for: Encouragements.prefix + Encouragements.Kind.meal.rawValue + ".2026-11-07"), .space("nutrition"))
         XCTAssertEqual(NotificationRoute.link(for: Encouragements.prefix + Encouragements.Kind.workout.rawValue + ".2026-11-07"), .space("fitness"))
         XCTAssertEqual(NotificationRoute.link(for: NotificationEngine.prefix + NotificationEngine.Kind.lunch.rawValue + ".2026-11-07"), .space("nutrition"))
-        XCTAssertEqual(NotificationRoute.link(for: NotificationEngine.prefix + NotificationEngine.Kind.classSoon.rawValue + ".2026-11-07.\(UUID().uuidString)"), .space("student"))
+        XCTAssertEqual(NotificationRoute.link(for: NotificationEngine.prefix + NotificationEngine.Kind.classSoon.rawValue + ".2026-11-07.\(UUID().uuidString)"), .space("productivity"),
+                       "The next class is on the schedule: Planning")
+        let kind = NotificationEngine.prefix
+        XCTAssertEqual(NotificationRoute.link(for: kind + NotificationEngine.Kind.busyTomorrow.rawValue + ".2026-11-07"), .space("productivity"))
+        XCTAssertEqual(NotificationRoute.link(for: kind + NotificationEngine.Kind.eventTomorrow.rawValue + ".2026-11-07.agenda"), .space("productivity"),
+                       "An appointment tomorrow: Planning")
+        XCTAssertEqual(NotificationRoute.link(for: kind + NotificationEngine.Kind.eventTomorrow.rawValue + ".2026-11-07.\(UUID().uuidString)"), .space("student"),
+                       "An exam tomorrow (the suffix is its id): Études")
+        XCTAssertEqual(NotificationRoute.link(for: kind + NotificationEngine.Kind.eventTomorrow.rawValue + ".2026-11-07"), .space("productivity"), "No suffix: Planning")
+        XCTAssertEqual(NotificationRoute.link(for: Encouragements.prefix + Encouragements.Kind.longStudy.rawValue + ".2026-11-07"), .space("student"))
+        XCTAssertEqual(NotificationRoute.link(for: Encouragements.prefix + Encouragements.Kind.weeklyStudy.rawValue + ".2026-11-07"), .space("student"))
         XCTAssertEqual(NotificationRoute.link(for: SmartReminders.prefix + "bill.\(UUID().uuidString).2026-11-08"), .space("budget"))
         XCTAssertNil(NotificationRoute.link(for: "tessera.focus.end"))
         XCTAssertNil(NotificationRoute.link(for: "tessera.countdown.pas-un-identifiant"))

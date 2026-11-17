@@ -112,6 +112,30 @@ struct QuestionCard<Content: View>: View {
     }
 }
 
+/// An answer already given, shown in place of its question with « Modifier » (the first-launch pages never
+/// ask twice what the person already said).
+struct KnownSummary: View {
+    let text: String
+    let identifier: String
+    let onEdit: () -> Void
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Text(text)
+                .font(.subheadline.weight(.semibold))
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 6)
+            Button(tr("Modifier"), action: onEdit)
+                .font(.subheadline.weight(.semibold))
+                .frame(minHeight: 44)
+                .accessibilityIdentifier(identifier)
+        }
+        .padding(.horizontal, 12)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+}
+
 /// A number the user may leave empty (unknown), saved as it is typed.
 struct ProfileNumberField: View {
     let title: String
@@ -238,10 +262,21 @@ struct TopicForm: View {
     /// Inside a mini-app (« Mes infos »): the questions only, without the « first task / first habit » the
     /// mini-app already lets the person add on its page.
     var inMiniApp = false
+    /// The first-launch pages: what the person already gave (on an earlier page, or in another space) is
+    /// shown as a summary with « Modifier », not asked again. « Mes informations » always shows the answers
+    /// selected, ready to change.
+    var compactKnown = false
     @Environment(AppModel.self) private var model
     @State private var newTask = ""
     @State private var newHabit = ""
-    @State private var asksBody = false
+    // Whether the page opened without the answer (nil until it appeared): the page keeps asking while the
+    // person fills it in, and only shows a summary when the answer was already there.
+    @State private var asksBody: Bool?
+    @State private var asksGoal: Bool?
+    @State private var asksActivity: Bool?
+    @State private var editsBody = false
+    @State private var editsGoal = false
+    @State private var editsActivity = false
     @State private var paywall: PaywallContext?
 
     var body: some View {
@@ -258,7 +293,9 @@ struct TopicForm: View {
             }
         }
         .onAppear {
-            if model.age == nil || profile.heightCm == nil || profile.weightKg == nil { asksBody = true }
+            if asksBody == nil { asksBody = !bodyKnown }
+            if asksGoal == nil { asksGoal = profile.goal == nil }
+            if asksActivity == nil { asksActivity = !activityKnown }
         }
         .sheet(item: $paywall) { PaywallView(context: $0) }
     }
@@ -303,16 +340,68 @@ struct TopicForm: View {
         }
     }
 
+    // MARK: Shared questions (asked once, whichever page comes first)
+
+    /// Age, height, weight and gender: all there (the calculation needs the four).
+    private var bodyKnown: Bool {
+        model.age != nil && profile.heightCm != nil && profile.weightKg != nil && profile.sex != nil
+    }
+
+    private var showsBodyFields: Bool { !compactKnown || editsBody || (asksBody ?? !bodyKnown) }
+
+    /// « Toi » (age, height, weight, gender), the same card in Sport and in Nutrition: when everything is
+    /// already known on a first-launch page, a summary with « Modifier » instead of the fields.
+    private func bodyCard(detail: String, identifier: String) -> some View {
+        QuestionCard(title: tr("Toi"), detail: showsBodyFields ? detail : tr("Déjà renseigné : tu peux le modifier.")) {
+            if showsBodyFields {
+                VStack(alignment: .leading, spacing: 10) {
+                    bodyFields()
+                    GenderPicker()
+                }
+            } else {
+                KnownSummary(text: bodySummary, identifier: identifier) { editsBody = true }
+            }
+        }
+    }
+
+    /// « 27 ans · 175 cm · 78 kg · Homme ».
+    private var bodySummary: String {
+        let system = model.settings.unitSystem
+        var parts: [String] = []
+        if let age = model.age { parts.append(tr("\(age) ans")) }
+        if let height = profile.heightCm { parts.append(Units.heightText(centimetres: height, in: system)) }
+        if let weight = profile.weightKg { parts.append(Units.weightText(kilograms: weight, in: system)) }
+        if let sex = profile.sex { parts.append(sex.title) }
+        return parts.joined(separator: " · ")
+    }
+
+    private var showsGoalChips: Bool { !compactKnown || editsGoal || (asksGoal ?? (profile.goal == nil)) }
+
+    /// « Ton objectif »: one question, one answer for Sport and Nutrition (`UserProfile.goal`), the same list
+    /// on both pages. Already chosen on an earlier first-launch page: shown, with « Modifier ».
+    private func goalCard(identifierPrefix: String) -> some View {
+        QuestionCard(title: tr("Ton objectif"), detail: showsGoalChips ? tr("Le même pour Sport et Nutrition.") : tr("Déjà choisi : tu peux le changer.")) {
+            if showsGoalChips {
+                FlowLayout {
+                    ForEach(FitnessGoal.displayOrder) { goal in
+                        ChoiceChip(title: goal.title, isSelected: profile.goal == goal) {
+                            model.setGoal(profile.goal == goal ? nil : goal)
+                        }
+                        .accessibilityIdentifier("\(identifierPrefix)-\(goal.rawValue)")
+                    }
+                }
+            } else {
+                KnownSummary(text: profile.goal?.title ?? "", identifier: "\(identifierPrefix)-edit") { editsGoal = true }
+            }
+        }
+    }
+
     // MARK: Sport
 
     @ViewBuilder private var sport: some View {
-        QuestionCard(title: tr("Ton objectif")) {
-            FlowLayout {
-                ForEach(FitnessGoal.allCases) { goal in
-                    ChoiceChip(title: goal.title, isSelected: profile.fitnessGoal == goal) { toggle(\.fitnessGoal, goal) }
-                }
-            }
-        }
+        goalCard(identifierPrefix: "sport-goal")
+        // Asked for any loss or gain, wherever the goal was chosen.
+        LifeStageQuestion(compactKnown: compactKnown)
         QuestionCard(title: tr("Ton niveau")) {
             FlowLayout {
                 ForEach(FitnessLevel.allCases) { level in
@@ -339,45 +428,57 @@ struct TopicForm: View {
                 }
             }
         }
-        QuestionCard(title: tr("Toi"), detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Le poids sert aussi à estimer les calories brûlées.")) {
-            VStack(alignment: .leading, spacing: 10) {
-                bodyFields()
-                GenderPicker()
-            }
-        }
+        bodyCard(
+            detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Le poids sert aussi à estimer les calories brûlées."),
+            identifier: "sport-body-edit"
+        )
     }
 
     // MARK: Nutrition
 
+    private var activityKnown: Bool { profile.calculatedActivity != nil || model.activityFromWorkouts != nil }
+
+    private var showsActivityChips: Bool { !compactKnown || editsActivity || (asksActivity ?? !activityKnown) }
+
+    /// What the activity card says about where the level comes from.
+    private var activityDetail: String {
+        if !showsActivityChips { return tr("Déjà connu : tu peux le modifier.") }
+        let fromWorkouts = model.activityFromWorkouts
+        if let chosen = profile.calculatedActivity {
+            if let fromWorkouts, fromWorkouts != chosen {
+                return tr("Choisi par toi. Tes séances donneraient : \(fromWorkouts.title). Touche ton choix pour revenir aux séances.")
+            }
+            return tr("Choisi par toi. Touche-le de nouveau pour revenir à tes séances.")
+        }
+        if fromWorkouts != nil {
+            return tr("D'après tes séances : \(String(model.fitness.weeklyGoal)) par semaine. Choisis un autre niveau si tu préfères.")
+        }
+        return tr("Ton activité physique habituelle, sport compris.")
+    }
+
     /// The aim, the body and the activity: the daily needs are calculated from them (no number to type
     /// first), then each one can be changed by hand in the card below.
     @ViewBuilder private var nutrition: some View {
-        QuestionCard(title: tr("Ton objectif")) {
-            FlowLayout {
-                ForEach(NutritionAim.allCases) { aim in
-                    ChoiceChip(title: aim.title, isSelected: profile.nutritionAim == aim) { toggle(\.nutritionAim, aim) }
-                        .accessibilityIdentifier("nutrition-aim-\(aim.rawValue)")
-                }
-            }
-        }
-        WeightPlanQuestions()
-        QuestionCard(title: tr("Toi"), detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Pour calculer tes besoins. Le poids sert aussi à Fitness.")) {
-            VStack(alignment: .leading, spacing: 10) {
-                bodyFields()
-                GenderPicker()
-            }
-        }
-        QuestionCard(title: tr("Ton activité"), detail: model.activityFromWorkouts != nil && profile.calculatedActivity == nil
-                     ? tr("D'après tes séances par semaine. Choisis-en une autre si elle te ressemble plus.")
-                     : tr("Ton activité physique habituelle, sport compris.")) {
-            FlowLayout {
-                ForEach(NutritionCalculator.Activity.allCases) { level in
-                    let isOn = (profile.calculatedActivity ?? model.activityFromWorkouts) == level
-                    ChoiceChip(title: level.title, isSelected: isOn) {
-                        model.setNutritionActivity(profile.calculatedActivity == level ? nil : level)
+        goalCard(identifierPrefix: "nutrition-aim")
+        WeightPlanQuestions(compactKnown: compactKnown)
+        bodyCard(
+            detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Pour calculer tes besoins. Le poids sert aussi à Fitness."),
+            identifier: "nutrition-body-edit"
+        )
+        QuestionCard(title: tr("Ton niveau d'activité"), detail: activityDetail) {
+            if showsActivityChips {
+                FlowLayout {
+                    ForEach(NutritionCalculator.Activity.allCases) { level in
+                        let isOn = (profile.calculatedActivity ?? model.activityFromWorkouts) == level
+                        ChoiceChip(title: level.title, isSelected: isOn) {
+                            model.setNutritionActivity(profile.calculatedActivity == level ? nil : level)
+                        }
+                        .accessibilityIdentifier("nutrition-activity-\(Int(level.rawValue * 1_000))")
                     }
-                    .accessibilityIdentifier("nutrition-activity-\(Int(level.rawValue * 1_000))")
                 }
+            } else if let level = profile.calculatedActivity ?? model.activityFromWorkouts {
+                KnownSummary(text: profile.calculatedActivity == nil ? tr("\(level.title), d'après tes séances") : level.title,
+                             identifier: "nutrition-activity-edit") { editsActivity = true }
             }
         }
         WeightPlanRecap()
@@ -424,7 +525,8 @@ struct TopicForm: View {
     // MARK: Business
 
     @ViewBuilder private var business: some View {
-        QuestionCard(title: tr("Ton activité")) {
+        // « Ton activité » of the business, not the physical activity of Nutrition (two translations).
+        QuestionCard(title: tr("Ton activité", context: "business")) {
             ProfileTextField(
                 placeholder: tr("Nom ou activité"),
                 text: Binding(
@@ -585,11 +687,22 @@ struct InterestGrid: View {
                             .foregroundStyle(isOn ? .white : Color(hex: interest.colorHex))
                             .frame(width: 44, height: 44)
                             .background(isOn ? Color(hex: interest.colorHex) : Color(hex: interest.colorHex).opacity(0.14), in: Circle())
-                        Text(interest.title)
-                            .font(.footnote.weight(.semibold))
-                            .foregroundStyle(Color.primary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.8)
+                        VStack(spacing: 2) {
+                            Text(interest.title)
+                                .font(.footnote.weight(.semibold))
+                                .foregroundStyle(Color.primary)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.8)
+                            if let hint = interest.hint {
+                                Text(hint)
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                    .multilineTextAlignment(.center)
+                                    .lineLimit(3)
+                                    .minimumScaleFactor(0.85)
+                            }
+                        }
+                        .padding(.horizontal, 4)
                     }
                     .frame(maxWidth: .infinity, minHeight: 96)
                     .cristalPanel(radius: 18)
@@ -608,6 +721,7 @@ struct InterestGrid: View {
                 }
                 .buttonStyle(.pressable)
                 .accessibilityLabel(Text(interest.title))
+                .accessibilityHint(Text(interest.hint ?? ""))
                 .accessibilityAddTraits(isOn ? .isSelected : [])
                 .accessibilityIdentifier("interest-\(interest.rawValue)")
             }
@@ -677,9 +791,46 @@ struct InterestsEditorSheet: View {
 
 // MARK: - Weight goal (chantier 15)
 
+/// « Es-tu enceinte ou allaitante ? », asked for any goal of loss or gain (`UserProfile.aim`), whether it
+/// was chosen in Sport or in Nutrition, and not of a man. Already answered on an earlier first-launch page:
+/// a summary with « Modifier ».
+struct LifeStageQuestion: View {
+    var compactKnown = false
+    @Environment(AppModel.self) private var model
+    @State private var asksStage: Bool?
+    @State private var edits = false
+
+    private var profile: UserProfile { model.profile }
+
+    var body: some View {
+        if profile.asksLifeStage {
+            let asks = !compactKnown || edits || (asksStage ?? (profile.lifeStage == nil))
+            QuestionCard(title: tr("Es-tu enceinte ou allaitante ?"),
+                         detail: asks ? tr("Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids.") : tr("Déjà répondu : tu peux le modifier.")) {
+                if asks {
+                    FlowLayout {
+                        ForEach([LifeStage.adult, .pregnant, .breastfeeding, .preferNotToSay]) { stage in
+                            // None is preselected: an unanswered question gives no weight plan.
+                            ChoiceChip(title: stage.title, isSelected: profile.lifeStage == stage) {
+                                model.update(\.profile) { $0.lifeStage = $0.lifeStage == stage ? nil : stage }
+                            }
+                            .accessibilityIdentifier("lifestage-\(stage.rawValue)")
+                        }
+                    }
+                } else if let stage = profile.lifeStage {
+                    KnownSummary(text: stage.title, identifier: "lifestage-edit") { edits = true }
+                }
+            }
+            .onAppear { if asksStage == nil { asksStage = profile.lifeStage == nil } }
+        }
+    }
+}
+
 /// The weight to reach and when, and the situation that makes the calculation more careful. Shown under
 /// « Ton objectif » when the aim is to lose or to gain; the answers already asked above are not asked again.
 struct WeightPlanQuestions: View {
+    /// First-launch page: the pregnancy question already answered is shown as a summary (see `LifeStageQuestion`).
+    var compactKnown = false
     @Environment(AppModel.self) private var model
     @State private var mode: DurationMode = .weeks
 
@@ -700,7 +851,7 @@ struct WeightPlanQuestions: View {
     private var profile: UserProfile { model.profile }
 
     var body: some View {
-        if profile.nutritionAim == .lose || profile.nutritionAim == .gain {
+        if profile.aim == .lose || profile.aim == .gain {
             VStack(spacing: 12) {
                 QuestionCard(title: tr("Ton poids cible"), detail: tr("Facultatif. Ardane calcule des calories d'après ce poids et la durée choisie, et te les montre avant de les appliquer.")) {
                     VStack(alignment: .leading, spacing: 10) {
@@ -710,19 +861,7 @@ struct WeightPlanQuestions: View {
                         }
                     }
                 }
-                if profile.sex != .male {
-                    QuestionCard(title: tr("Es-tu enceinte ou allaitante ?"), detail: tr("Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids.")) {
-                        FlowLayout {
-                            ForEach([LifeStage.adult, .pregnant, .breastfeeding, .preferNotToSay]) { stage in
-                                // None is preselected: an unanswered question gives no weight plan.
-                                ChoiceChip(title: stage.title, isSelected: profile.lifeStage == stage) {
-                                    model.update(\.profile) { $0.lifeStage = $0.lifeStage == stage ? nil : stage }
-                                }
-                                .accessibilityIdentifier("lifestage-\(stage.rawValue)")
-                            }
-                        }
-                    }
-                }
+                LifeStageQuestion(compactKnown: compactKnown)
             }
         }
     }

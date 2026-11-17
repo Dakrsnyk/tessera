@@ -122,9 +122,11 @@ final class QuickTaskTests: XCTestCase {
         var settings = AppSettings()
         DailyCategories.setProductivity(shown: true, hasTasks: false, in: &settings)
         XCTAssertEqual(DailyCategories.added(settings), [.priorities], "The Productivité entry counts as an added category")
-        // No interest, no task: the card still shows (empty Top 3 with its quick add), until it is taken off.
+        // No interest, no task: the card still shows (empty Top 3 with its quick add), until it is taken off. Since
+        // 2026-11-17 the Top 3 is one of the five cards of every account (`wanted`), so only its removal hides it.
         let input = DailyBrief.Input(now: now)
-        XCTAssertEqual(DailyCategories.wanted(input: input, settings: settings), [.priorities])
+        XCTAssertEqual(DailyCategories.wanted(input: input, settings: settings),
+                       [.nutrition, .workout, .planning, .habits, .priorities])
         DailyCategories.setProductivity(shown: false, hasTasks: false, in: &settings)
         XCTAssertTrue(DailyCategories.added(settings).isEmpty)
     }

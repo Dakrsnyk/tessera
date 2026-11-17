@@ -123,6 +123,23 @@ final class MiniAppToFillTests: XCTestCase {
         XCTAssertEqual(topics.count, Set(topics).count)
     }
 
+    /// Études left Planning on 2026-11-17: each has its own questions and its own cards « À remplir ».
+    func testPlanningAndStudiesHaveTheirOwnQuestionsAndCards() {
+        XCTAssertEqual(MiniApp.planning.infoTopics, [.productivity])
+        XCTAssertEqual(MiniApp.studies.infoTopics, [.studies])
+        XCTAssertEqual(MiniApp.planning.toFillItems, [.habits, .timetable])
+        XCTAssertEqual(MiniApp.studies.toFillItems, [.exams])
+        XCTAssertEqual(MiniApp(space: .student), .studies)
+        let model = temporaryModel()
+        XCTAssertEqual(toFill(model, .planning), [.habits, .timetable])
+        XCTAssertEqual(toFill(model, .studies), [.exams])
+        model.update(\.student) {
+            $0.exams = [Exam(title: "Chimie", date: Date().addingTimeInterval(7 * 86_400), room: "A-110")]
+        }
+        XCTAssertTrue(toFill(model, .studies).isEmpty, "The exam is given: Études has nothing left")
+        XCTAssertEqual(toFill(model, .planning), [.habits, .timetable], "Planning is untouched")
+    }
+
     func testEveryItemOfABlockCountsAsMissingWhenEmpty() {
         // A log (meals, expenses…) with nothing yet is not « to fill »: no mini-app lists one.
         for app in MiniApp.allCases {

@@ -5,19 +5,19 @@ import XCTest
 /// dropping a card onto another, and the rows the grid lays out (the same as `DailyBrief.rows`).
 final class DailyLayoutRulesTests: XCTestCase {
     private let steps = DailyBrief.Tile.steps(steps: 100, goal: nil)          // half by default
-    private let habits = DailyBrief.Tile.habits(done: 0, items: [])           // half by default
-    private let reminders = DailyBrief.Tile.reminders([])                     // wide by default
+    private let halfCard = DailyBrief.Tile.reminders([])                    // half by default (since 2026-11-17)
+    private let wideCard = DailyBrief.Tile.habits(done: 0, items: [])          // wide by default (since 2026-11-17)
     private let invite = DailyBrief.Tile.invite(.nutrition)                   // always wide, last
 
     func testGrowAndShrinkFollowTheCurrentSize() {
         XCTAssertTrue(DailyLayoutRules.canGrow(steps, wide: [:]))
         XCTAssertFalse(DailyLayoutRules.canShrink(steps, wide: [:]))
-        XCTAssertFalse(DailyLayoutRules.canGrow(reminders, wide: [:]))
-        XCTAssertTrue(DailyLayoutRules.canShrink(reminders, wide: [:]))
+        XCTAssertFalse(DailyLayoutRules.canGrow(wideCard, wide: [:]))
+        XCTAssertTrue(DailyLayoutRules.canShrink(wideCard, wide: [:]))
         // The person's choice wins over the card's own size.
         XCTAssertFalse(DailyLayoutRules.canGrow(steps, wide: [steps.id: true]))
         XCTAssertTrue(DailyLayoutRules.canShrink(steps, wide: [steps.id: true]))
-        XCTAssertTrue(DailyLayoutRules.canGrow(reminders, wide: [reminders.id: false]))
+        XCTAssertTrue(DailyLayoutRules.canGrow(wideCard, wide: [wideCard.id: false]))
     }
 
     func testAnInvitationHasOneSizeAndStaysPut() {
@@ -66,7 +66,7 @@ final class DailyLayoutRulesTests: XCTestCase {
     }
 
     func testGridRowsMatchTheDashboardRows() {
-        let tiles = [steps, reminders, habits, steps2, invite]
+        let tiles = [steps, wideCard, halfCard, steps2, invite]
         let wide = [steps.id: false]
         let expected = DailyBrief.rows(tiles, wide: wide).map { $0.map(\.id) }
         let wides = tiles.map { DailyLayoutRules.size(of: $0, wide: wide) == .wide }
@@ -200,9 +200,9 @@ final class DailyLayoutRulesTests: XCTestCase {
     }
 
     func testOrderedKeepsUnknownCardsLast() {
-        let tiles = [steps, habits, reminders]
+        let tiles = [steps, halfCard, wideCard]
         XCTAssertEqual(DailyLayoutRules.ordered(tiles, by: nil).map(\.id), tiles.map(\.id))
-        let live = DailyLayoutRules.ordered(tiles, by: [reminders.id, steps.id])
-        XCTAssertEqual(live.map(\.id), [reminders.id, steps.id, habits.id])
+        let live = DailyLayoutRules.ordered(tiles, by: [wideCard.id, steps.id])
+        XCTAssertEqual(live.map(\.id), [wideCard.id, steps.id, halfCard.id])
     }
 }

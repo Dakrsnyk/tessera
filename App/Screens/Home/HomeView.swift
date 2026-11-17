@@ -66,7 +66,7 @@ struct HomeView: View {
                 router.isProfilePresented = true
             } label: {
                 ProfileAvatar(name: model.settings.profileName.trimmed, size: 36)
-                    .tutorialTarget(.profile)
+                    .tutorialTarget(.profile, radius: 18)
             }
             .buttonStyle(.pressable)
             .accessibilityLabel(Text(tr("Profil et réglages")))
@@ -88,7 +88,7 @@ struct HomeView: View {
                 }
                 MyInfoCard()
                     .id(TutorialTarget.info.rawValue)
-                    .tutorialTarget(.info)
+                    .tutorialTarget(.info, radius: 24)
                 if !model.isPremium {
                     PremiumBanner { router.isPaywallPresented = true }
                 }
@@ -102,6 +102,8 @@ struct HomeView: View {
             .background(alignment: .top) { Color.clear.frame(height: 1).id("home-top") }
             // Last safety net: the scroll view under Home can never move sideways.
             .background { HorizontalScrollLock().frame(width: 1, height: 1).allowsHitTesting(false) }
+            // The tutorial scrolls what it lights up whole into place.
+            .tutorialScroll(step: router.tutorialStep, tab: .home)
         }
         // Home scrolls up and down only: never sideways, never a sideways bounce.
         .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
@@ -109,13 +111,8 @@ struct HomeView: View {
 
     private func bringIntoView(_ step: TutorialStep?, proxy: ScrollViewProxy) {
         guard let step, step.tab == .home else { return }
-        withAnimation(.easeInOut(duration: 0.35)) {
-            if let target = step.target, target == .info {
-                proxy.scrollTo(target.rawValue, anchor: UnitPoint(x: 0.5, y: 0.04))
-            } else {
-                proxy.scrollTo("home-top", anchor: .top)
-            }
-        }
+        // Back to the top at once (no animation); then `tutorialScroll` brings the part of the step to its place.
+        proxy.scrollTo("home-top", anchor: .top)
     }
 
 }

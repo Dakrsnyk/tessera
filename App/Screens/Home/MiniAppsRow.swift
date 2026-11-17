@@ -36,7 +36,8 @@ enum MiniAppSummary {
         case .nutrition: !model.nutrition.entries.isEmpty
         case .fitness: !model.fitness.routines.isEmpty || !model.fitness.history.isEmpty
         case .planning: !model.content.tasks.isEmpty || !model.content.habits.isEmpty || !model.productivity.projects.isEmpty
-            || !model.student.courses.isEmpty || !model.student.slots.isEmpty
+            || !model.student.slots.isEmpty
+        case .studies: !model.student.courses.isEmpty || !model.student.exams.isEmpty || !model.student.assignments.isEmpty
         case .finances: !model.budget.expenses.isEmpty || !model.budget.bills.isEmpty || !model.budget.goals.isEmpty
         case .business: !model.business.sales.isEmpty
         case .travel: !model.travel.trips.isEmpty
@@ -49,7 +50,8 @@ enum MiniAppSummary {
         switch app {
         case .nutrition: [.nutrition, .wellbeing]
         case .fitness: [.sport, .wellbeing]
-        case .planning: [.productivity, .studies]
+        case .planning: [.productivity]
+        case .studies: [.studies]
         case .finances: [.budget, .finance]
         case .business: [.business]
         case .travel: [.travel]
@@ -74,6 +76,11 @@ enum MiniAppSummary {
             if open > 0 { return tr("\(Fmt.plural(open, tr("tâche"), tr("tâches"))) aujourd'hui") }
             if let next = StudentMath.occurrences(model.student, on: now).first(where: { $0.end > now }) {
                 return "\(model.student.title(of: next.slot)) à \(Fmt.time(next.start, uses24Hour: true))"
+            }
+            return nil
+        case .studies:
+            if let exam = StudentMath.nextExam(model.student, at: now), DateMath.daysBetween(now, exam.date) <= 14 {
+                return "\(exam.title) · \(Studies.countdown(exam.date, from: now))"
             }
             let homework = StudentMath.openAssignments(model.student).count
             return homework > 0 ? tr("\(Fmt.plural(homework, tr("devoir"), tr("devoirs"))) à rendre") : nil

@@ -366,7 +366,8 @@ struct FoodScanView: View {
     private func analyze(_ item: PhotosPickerItem) async {
         guard case .camera = stage else { return }
         stage = .analyzing
-        guard let data = try? await item.loadTransferable(type: Data.self), let image = UIImage(data: data) else {
+        guard let data = try? await item.loadTransferable(type: Data.self), let image = SafeImage.decode(data) else {
+            // Unreadable, or too large to open safely: the usual « analysis failed » message.
             stage = .photoFailed(.failed)
             return
         }

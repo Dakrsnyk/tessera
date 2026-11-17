@@ -129,22 +129,33 @@ final class ProfileUITests: XCTestCase {
         tapButton("Continuer")
         // Step 1: the name.
         type("Mathys", into: "identity-first-name")
+        // The greeting moved to the next step (2026-11-17): none on the name step.
+        XCTAssertFalse(app.staticTexts["Bonjour Mathys"].exists, "« Bonjour Mathys » ne doit plus être sur la 1re étape")
+        XCTAssertFalse(app.staticTexts["onboarding-greeting"].exists, "Pas de salutation sur la 1re étape")
         snapshot("identity")
         tapButton("onboarding-continue")
-        // Step 2: interests.
+        // Step 2: interests, with the greeting beside the icon of the title.
+        let greeting = app.staticTexts["onboarding-greeting"]
+        XCTAssertTrue(greeting.waitForExistence(timeout: 8), "La salutation doit s'afficher sur la 2e étape")
+        XCTAssertEqual(greeting.label, "Bonjour Mathys")
         tapButton("interest-sport")
         tapButton("interest-nutrition")
         snapshot("interests")
         tapButton("onboarding-continue")
         // Step 3: only the pages of the chosen interests.
         XCTAssertTrue(app.staticTexts["Sport"].waitForExistence(timeout: 8))
-        tapButton("Prise de masse")
+        tapButton("sport-goal-bulk")
         type("80", into: "profile-weight")
         snapshot("sport")
         tapButton("onboarding-continue")
         // The Nutrition page itself (its aim chips), not a « Nutrition » text that the Home screen would also show.
         let aim = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "nutrition-aim-")).firstMatch
         XCTAssertTrue(aim.waitForExistence(timeout: 8), "La page Nutrition du premier lancement ne s'est pas ouverte")
+        // The goal chosen in Sport is not asked again: a summary with « Modifier », not the list of chips.
+        XCTAssertEqual(aim.identifier, "nutrition-aim-edit", "L'objectif choisi dans Sport doit être résumé, avec « Modifier »")
+        XCTAssertTrue(app.staticTexts["Prise de masse"].exists, "Le résumé doit nommer l'objectif choisi dans Sport")
+        XCTAssertFalse(app.buttons["nutrition-aim-weightLoss"].exists, "La liste des objectifs ne doit pas être redemandée")
+        snapshot("nutrition-goal-known")
         // No number to type: the needs are calculated from the body (the weight was given for sport).
         // Nothing here may reach « C'est parti » (the bar of the last page, right above the number pad).
         type("30", into: "profile-age")
@@ -164,14 +175,21 @@ final class ProfileUITests: XCTestCase {
         // Then the tour of the app, step by step, on the app itself.
         let step = app.staticTexts["tutorial-step"]
         XCTAssertTrue(step.waitForExistence(timeout: 10), "Le tutoriel doit suivre les premières questions")
-        XCTAssertEqual(step.label, "Étape 1 sur 9")
-        XCTAssertTrue(app.staticTexts["Bienvenue, Mathys !"].exists, "Le tutoriel accueille par le prénom")
+        XCTAssertEqual(step.label, "Étape 1 sur 11")
+        // No first name on the welcome (2026-11-17): it greets on the second step, in the pill of « Mon Quotidien ».
+        XCTAssertTrue(app.staticTexts["Bienvenue !"].exists, "Le tutoriel accueille par « Bienvenue ! »")
+        XCTAssertFalse(app.staticTexts["Bienvenue, Mathys !"].exists, "Plus de prénom sur la 1re étape")
         snapshot("tutorial-welcome")
-        for number in 2...9 {
+        for number in 2...11 {
             app.buttons["tutorial-next"].tap()
-            XCTAssertTrue(waitForLabel(step, "Étape \(number) sur 9"), "Étape \(number) du tutoriel absente")
-            if number == 2 { snapshot("tutorial-daily") }
-            if number == 5 {
+            XCTAssertTrue(waitForLabel(step, "Étape \(number) sur 11"), "Étape \(number) du tutoriel absente")
+            if number == 2 {
+                XCTAssertTrue(app.descendants(matching: .any).matching(NSPredicate(format: "label == %@", "Bonjour Mathys")).firstMatch.waitForExistence(timeout: 5),
+                              "L'étape 2 doit saluer par le prénom")
+                snapshot("tutorial-daily")
+            }
+            snapshot("tutorial-step-\(number)")
+            if number == 7 {
                 // The Studio in miniature works: a color repaints the widget, the arrow takes it back.
                 app.buttons["tutorial-color-FF6B57"].tap()
                 let bravo = app.descendants(matching: .any).matching(identifier: "tutorial-bravo").firstMatch
@@ -226,6 +244,15 @@ final class ProfileUITests: XCTestCase {
         // No target and no budget given: « Mon Quotidien » never makes one up.
         XCTAssertFalse(nutritionShows("kcal restantes"), "Calories restantes sans objectif donné")
         XCTAssertFalse(app.staticTexts["à dépenser par jour d'ici la fin du mois"].exists, "Budget du jour sans budget donné")
+        // A new account still has the five default cards (2026-11-17), always in the same order, empty or not.
+        let order = ["nutrition", "workout", "planning", "habits", "priorities"]
+        var tops: [CGFloat] = []
+        for card in order {
+            let found = app.descendants(matching: .any).matching(NSPredicate(format: "identifier IN %@", ["daily-\(card)", "daily-empty-\(card)"])).firstMatch
+            XCTAssertTrue(found.waitForExistence(timeout: 8), "Carte « \(card) » absente d'un compte neuf")
+            tops.append(found.frame.minY)
+        }
+        XCTAssertEqual(tops, tops.sorted(), "Ordre des cartes d'un compte neuf : Nutrition, Fitness, Planning, Habitudes, Top 3 (\(tops))")
         snapshot("home-skipped")
     }
 
@@ -243,15 +270,15 @@ final class ProfileUITests: XCTestCase {
         replay.tap()
         let step = app.staticTexts["tutorial-step"]
         XCTAssertTrue(step.waitForExistence(timeout: 10), "Réglages doit relancer le tutoriel")
-        XCTAssertEqual(step.label, "Étape 1 sur 9")
+        XCTAssertEqual(step.label, "Étape 1 sur 11")
         app.buttons["tutorial-next"].tap()
-        XCTAssertTrue(waitForLabel(step, "Étape 2 sur 9"))
+        XCTAssertTrue(waitForLabel(step, "Étape 2 sur 11"))
         XCTAssertTrue(app.staticTexts["Mon Quotidien"].exists || app.descendants(matching: .any)["daily-section"].exists, "L'étape montre l'accueil")
         app.buttons["tutorial-skip"].tap()
-        XCTAssertTrue(waitForLabel(step, "Étape 3 sur 9"), "« Passer l'étape » mène à la suivante")
+        XCTAssertTrue(waitForLabel(step, "Étape 3 sur 11"), "« Passer l'étape » mène à la suivante")
         // Straight to the Store: several steps skipped at once.
-        app.buttons["Aller à l'étape 6 : Le Store"].tap()
-        XCTAssertTrue(waitForLabel(step, "Étape 6 sur 9"))
+        app.buttons["Aller à l'étape 8 : Le Store"].tap()
+        XCTAssertTrue(waitForLabel(step, "Étape 8 sur 11"))
         XCTAssertTrue(app.tabBars.buttons["Store"].isSelected || app.navigationBars["Store"].waitForExistence(timeout: 5), "L'étape montre le Store")
         snapshot("tutorial-store")
         app.buttons["tutorial-close"].tap()

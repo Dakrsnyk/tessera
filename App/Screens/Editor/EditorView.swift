@@ -1250,7 +1250,7 @@ struct WidgetStudio: View {
                 photoItem = nil
             }
             guard let data = try? await item.loadTransferable(type: Data.self),
-                  let image = UIImage(data: data),
+                  let image = SafeImage.decode(data, maxDimension: 1_800),
                   let name = ImageStore.save(image) else { return }
             photos.imported.append(name)
             if designs.indices.contains(target) { designs[target].background = .photo(name) }

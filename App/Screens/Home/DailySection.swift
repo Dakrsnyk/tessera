@@ -13,13 +13,14 @@ enum HomeRoute: Hashable {
 }
 
 extension InfoArea {
-    /// The mini-app where this area's information is filled in (Studies and Habits live in Planning).
+    /// The mini-app where this area's information is filled in (Studies have their own, Habits live in Planning).
     /// Nil for the areas without a mini-app: investments, listed companies, « Ma vie » and the general settings.
     var miniApp: MiniApp? {
         switch self {
         case .nutrition: .nutrition
         case .fitness: .fitness
-        case .habits, .productivity, .student: .planning
+        case .habits, .productivity: .planning
+        case .student: .studies
         case .budget: .finances
         case .business: .business
         case .travel: .travel
@@ -43,8 +44,9 @@ extension AppModel {
     /// the general ones. A missing item no block shows (tasks, bills…) never picks a mini-app.
     var firstMissingInfoRoute: HomeRoute {
         let app = completion.missing.lazy.compactMap { item -> MiniApp? in
-            guard let app = item.area.miniApp, app.toFillItems.contains(item) else { return nil }
-            return app
+            // The mini-app whose « À remplir » block asks for it (the timetable is asked by Planning, though its
+            // area is the studies').
+            MiniApp.allCases.first { $0.toFillItems.contains(item) }
         }.first
         return app.map { HomeRoute.app($0) } ?? .info
     }
@@ -118,6 +120,7 @@ struct DailySection: View {
                 Spacer(minLength: 0)
                 if editing { editBar }
             }
+            .tutorialTarget(.dailyHeader, radius: 12)
             if editing {
                 Text(tr("Maintiens une carte puis glisse-la pour la déplacer. + et − changent sa taille."))
                     .font(.footnote)
@@ -243,6 +246,10 @@ struct DailySection: View {
             // Two cards side by side: each lays itself out for half the width.
             DailyTileView(tile: tile)
                 .frame(maxWidth: .infinity)
+                // What the tutorial lights up (« Mon Quotidien », « Ton planning », « Un objectif pour deux »).
+                .tutorialTarget(.dailyNutrition, radius: 24, when: tile.id == "nutrition")
+                .tutorialTarget(.dailyFitness, radius: 24, when: tile.id == "workout")
+                .tutorialTarget(.dailyPlanning, radius: 24, when: tile.id == "planning")
                 .environment(\.dailyCompact, compact)
                 .environment(\.dailyEditing, editing)
                 .environment(\.dailyCardActions, actions)
@@ -1280,6 +1287,7 @@ private struct BudgetDayTile: View {
 private struct RemindersDayTile: View {
     let items: [DailyBrief.Reminder]
     @Environment(\.appStyle) private var style
+    @Environment(\.dailyCompact) private var compact
 
     var body: some View {
         DayCard(title: tr("À ne pas oublier"), symbol: "bell.fill", colorHex: "4B5563") {
@@ -1297,7 +1305,37 @@ private struct RemindersDayTile: View {
         .accessibilityIdentifier("daily-reminders")
     }
 
-    private func row(_ item: DailyBrief.Reminder) -> some View {
+    @ViewBuilder private func row(_ item: DailyBrief.Reminder) -> some View {
+        if compact { compactRow(item) } else { wideRow(item) }
+    }
+
+    /// Half width: the reminder on two lines (its title, then when), the chevron kept at the end.
+    private func compactRow(_ item: DailyBrief.Reminder) -> some View {
+        HStack(spacing: 8) {
+            Image(systemName: item.symbol)
+                .font(.system(size: 12, weight: .semibold))
+                .foregroundStyle(style.cristal.category(item.colorHex))
+                .frame(width: 18)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(item.title)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.85)
+                Text(item.when)
+                    .font(.caption2)
+                    .foregroundStyle(item.when == tr("En retard") ? Color.red : .secondary)
+                    .lineLimit(1)
+            }
+            Spacer(minLength: 0)
+            if item.route != nil {
+                Image(systemName: "chevron.right").font(.caption2.weight(.bold)).foregroundStyle(.tertiary)
+            }
+        }
+        .contentShape(Rectangle())
+    }
+
+    private func wideRow(_ item: DailyBrief.Reminder) -> some View {
         HStack(spacing: 10) {
             Image(systemName: item.symbol)
                 .font(.system(size: 12, weight: .semibold))
@@ -1460,10 +1498,57 @@ private struct InviteCard: View {
     let identifier: String
     @Environment(\.dynamicTypeSize) private var typeSize
     @Environment(\.appStyle) private var style
+    @Environment(\.dailyCompact) private var compact
 
     var body: some View {
         let tint = style.cristal.category(colorHex)
         NavigationLink(value: route) {
+            Group {
+                if compact { compactContent(tint) } else { wideContent(tint) }
+            }
+            .padding(14)
+            .cristalPanel(radius: style.cristal.radius)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.pressable)
+        .accessibilityIdentifier(identifier)
+    }
+
+    /// Half width, next to another card: the name on top, the invitation under it, « Ajouter » at the bottom.
+    private func compactContent(_ tint: Color) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
+                Image(systemName: symbol)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(tint)
+                    .frame(width: 28, height: 28)
+                    .background(tint.opacity(0.14), in: Circle())
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                Spacer(minLength: 0)
+            }
+            Text(text)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 0)
+            if !typeSize.isAccessibilitySize {
+                Text(tr("Ajouter"))
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .frame(maxWidth: .infinity, minHeight: 36)
+                    .background(style.cristal.tintColor, in: Capsule())
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    private func wideContent(_ tint: Color) -> some View {
             HStack(spacing: 12) {
                 Image(systemName: symbol)
                     .font(.system(size: 15, weight: .semibold))
@@ -1493,12 +1578,6 @@ private struct InviteCard: View {
                         .layoutPriority(1)
                 }
             }
-            .padding(14)
-            .cristalPanel(radius: style.cristal.radius)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.pressable)
-        .accessibilityIdentifier(identifier)
     }
 }
 

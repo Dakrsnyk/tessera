@@ -103,7 +103,7 @@ struct AppSettings: Codable, Hashable {
     /// The view chosen on each « Mon Quotidien » card (swiped left or right), by card.
     var dailyCardPages: [String: Int] = [:]
     /// « Mon Quotidien » arranged by hand (the layout button under « Mes données »): the cards in
-    /// this order, any other after them. Empty: the automatic order, by what matters now.
+    /// this order, any other after them. Empty: the default order (`DailyDefaults.order`).
     var dailyOrder: [String] = []
     /// Cards hidden from « Mon Quotidien ».
     var dailyHidden: [String] = []
@@ -111,6 +111,9 @@ struct AppSettings: Codable, Hashable {
     var dailyWide: [String: Bool] = [:]
     /// Mini-apps added to « Mon Quotidien » by the person (MiniApp raw values), shown even without data.
     var dailyAdded: [String] = []
+    /// The version of the default layout of « Mon Quotidien » already applied to these settings (0: none yet).
+    /// See `DailyDefaults.migrate`.
+    var dailyLayoutVersion = 0
     /// « Rappels intelligents » (`SmartReminders`): the workout of the day not begun at its hour, no meal
     /// noted in the evening, a bill due tomorrow. On, but sent only once notifications are allowed.
     var remindsWorkout = true
@@ -153,7 +156,7 @@ struct AppSettings: Codable, Hashable {
         case hasCompletedOnboarding, hydrationReminders
         case appStyle, appearance, hasChosenStyle, profileName, hasCompletedProfileSetup, hasSeenTutorial, addGuideCount
         case openCount, lastCountedOpen, reviewRequestedVersion, dailyCardPages
-        case dailyOrder, dailyHidden, dailyWide, dailyAdded
+        case dailyOrder, dailyHidden, dailyWide, dailyAdded, dailyLayoutVersion
         case remindsWorkout, remindsMeals, remindsBills, workoutReminderHour, mealReminderHour
         case encourages, unitSystem
         case remindsNutrition, remindsHabits, remindsFitness, remindsPlanning, remindsGoals, remindsGeneral
@@ -185,6 +188,7 @@ struct AppSettings: Codable, Hashable {
         dailyHidden = (try? c.decodeIfPresent([String].self, forKey: .dailyHidden)) ?? []
         dailyWide = (try? c.decodeIfPresent([String: Bool].self, forKey: .dailyWide)) ?? [:]
         dailyAdded = (try? c.decodeIfPresent([String].self, forKey: .dailyAdded)) ?? []
+        dailyLayoutVersion = c.value(.dailyLayoutVersion, 0)
         remindsWorkout = (try? c.decodeIfPresent(Bool.self, forKey: .remindsWorkout)) ?? true
         remindsMeals = (try? c.decodeIfPresent(Bool.self, forKey: .remindsMeals)) ?? true
         remindsBills = (try? c.decodeIfPresent(Bool.self, forKey: .remindsBills)) ?? true

@@ -18,16 +18,23 @@ extension AppModel {
             facts.append(InfoFact(id: id, symbol: symbol, title: title, value: value))
         }
         func money(_ value: Double?) -> String? { value.map { TF.money($0, currency) } }
+        // The goal is one answer for Sport and Nutrition: one line, on the first of the two pages the person has.
+        func showsGoal(on topic: ProfileTopic) -> Bool {
+            let order = profile.topics
+            let other: ProfileTopic = topic == .sport ? .nutrition : .sport
+            guard let mine = order.firstIndex(of: topic), let theirs = order.firstIndex(of: other) else { return true }
+            return mine < theirs
+        }
         switch topic {
         case .sport:
-            add("goal", "target", tr("Objectif"), profile.fitnessGoal?.title)
+            if showsGoal(on: .sport) { add("goal", "target", tr("Objectif"), profile.goal?.title) }
             add("weight", "scalemass", tr("Poids"), profile.weightKg.map { Units.weightText(kilograms: $0, in: settings.unitSystem) })
             add("height", "ruler", tr("Taille", context: "height"), profile.heightCm.map { Units.heightText(centimetres: $0, in: settings.unitSystem) })
             add("age", "person", tr("Âge"), age.map { tr("\($0) ans") })
             add("workouts", "calendar", tr("Séances"), profile.knows(.weeklyWorkouts) ? tr("\(fitness.weeklyGoal) par semaine") : nil)
             add("level", "chart.bar.fill", tr("Niveau"), profile.fitnessLevel?.title)
         case .nutrition:
-            add("aim", "target", tr("Objectif"), profile.nutritionAim?.title)
+            if showsGoal(on: .nutrition) { add("goal", "target", tr("Objectif"), profile.goal?.title) }
             add("kcal", "flame", tr("Calories"), profile.knows(.kcalTarget) ? tr("\(TF.int(nutrition.goals.kcal)) kcal") : nil)
             add("protein", "bolt.heart", tr("Protéines"), profile.knows(.proteinTarget) ? "\(TF.int(nutrition.goals.protein)) g" : nil)
             add("carbs", "leaf", tr("Glucides"), profile.knows(.carbsTarget) ? "\(TF.int(nutrition.goals.carbs)) g" : nil)

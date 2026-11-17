@@ -22,6 +22,9 @@ final class TutorialTests: XCTestCase {
 
     func testTheStepsCoverTheAppInOrder() {
         let steps = TutorialStep.allCases
+        XCTAssertEqual(steps.map(\.rawValue),
+                       ["welcome", "daily", "planning", "studies", "info", "create", "studio", "store", "mine", "homeScreen", "finish"],
+                       "L'ordre du tutoriel")
         XCTAssertEqual(steps.first, .welcome)
         XCTAssertEqual(steps.last, .finish)
         XCTAssertEqual(Set(steps.map(\.tab)), [.home, .spaces, .explore, .mine], "Chaque onglet est montré")
@@ -29,10 +32,47 @@ final class TutorialTests: XCTestCase {
             XCTAssertEqual(step.number, index + 1)
             XCTAssertEqual(step.next, index + 1 < steps.count ? steps[index + 1] : nil)
             XCTAssertFalse(step.message.isEmpty)
-            XCTAssertFalse(step.title(name: "Mathys").isEmpty)
+            XCTAssertFalse(step.title.isEmpty)
+            XCTAssertFalse(step.place(name: "Mathys").isEmpty)
+            XCTAssertFalse(step.place(name: "").isEmpty)
+            XCTAssertFalse(step.symbol.isEmpty)
         }
-        XCTAssertEqual(TutorialStep.welcome.title(name: "Mathys"), "Bienvenue, Mathys !")
-        XCTAssertEqual(TutorialStep.welcome.title(name: ""), "Bienvenue !")
+    }
+
+    func testTheNameArrivesOnMonQuotidienNotOnTheFirstSlide() {
+        for step in TutorialStep.allCases {
+            let withName = [step.title, step.message, step.place(name: "Mathys")].joined(separator: " ")
+            if step == .daily {
+                XCTAssertTrue(step.place(name: "Mathys").contains("Mathys"), "Le prénom est sur la 2e diapositive")
+                XCTAssertFalse(step.place(name: "").contains("Mathys"))
+                XCTAssertFalse(step.place(name: "").isEmpty, "Sans prénom : « Bonjour » seul")
+            } else {
+                XCTAssertFalse(withName.contains("Mathys"), "Le prénom n'est que sur Mon Quotidien (\(step.rawValue))")
+            }
+        }
+        XCTAssertEqual(TutorialStep.welcome.title, "Bienvenue !")
+        XCTAssertEqual(TutorialStep.daily.place(name: "Mathys"), "Bonjour Mathys")
+        XCTAssertEqual(TutorialStep.daily.place(name: ""), "Bonjour")
+    }
+
+    func testEveryNameOfTheScreenshotsStillOpensAStep() {
+        // The CI screenshots open « tutorial-<name> »: none of these may stop working.
+        for name in ["welcome", "daily", "info", "create", "studio", "store", "mine", "homeScreen", "finish"] {
+            XCTAssertNotNil(TutorialStep(rawValue: name), name)
+        }
+    }
+
+    func testStepsLightUpTheirPartsOrNothing() {
+        XCTAssertTrue(TutorialStep.welcome.targets.isEmpty)
+        XCTAssertTrue(TutorialStep.studio.targets.isEmpty)
+        XCTAssertEqual(TutorialStep.planning.targets, [[.dailyPlanning]])
+        XCTAssertEqual(TutorialStep.finish.targets, [[.profile]])
+        // Mon Quotidien: the whole section first, then smaller parts down to the title alone.
+        XCTAssertEqual(TutorialStep.daily.targets.first, [.daily])
+        XCTAssertEqual(TutorialStep.daily.targets.last, [.dailyHeader])
+        for step in TutorialStep.allCases {
+            XCTAssertFalse(step.targets.contains { $0.isEmpty }, "Pas de groupe vide (\(step.rawValue))")
+        }
     }
 
     func testStartingAgainOpensTheFirstStepOnHome() {

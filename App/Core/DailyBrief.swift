@@ -2,9 +2,9 @@ import Foundation
 
 /// « Mon Quotidien »: what matters today, built only from what the person entered. Nothing is
 /// shown for a part of their life they haven't told Ardane about, and never a made-up number:
-/// at most a discreet invitation for one of their interests. The order follows the moment of the
-/// day: the first class in the morning, tasks and the workout during the day,
-/// what's left to eat and the habits in the evening.
+/// at most a discreet invitation for one of their interests. The default order is fixed
+/// (`DailyDefaults`: Nutrition, Fitness, Planning, Habitudes, Top 3, then the others); the scores
+/// of `tiles` (the moment of the day) only order the cards before that.
 enum DailyBrief {
     enum Moment: Equatable {
         case morning, day, evening
@@ -111,16 +111,17 @@ enum DailyBrief {
     /// The sections Mon Quotidien always offers. Each one's id is the id of its card with data, so a
     /// category keeps its place, its size and its hidden state when it goes from empty to filled.
     enum Category: String, CaseIterable, Identifiable, Hashable {
-        case nutrition, workout, planning, habits, budget, priorities, reminders, steps, business, travel, car
+        case nutrition, workout, planning, habits, budget, priorities, reminders, steps, business, travel, car, studies
 
-        /// The order of the empty cards (after the cards with data).
-        static let defaultOrder: [Category] = allCases
+        /// The default order of Mon Quotidien (fixed, see `DailyDefaults`), and of the empty cards.
+        static let defaultOrder: [Category] = DailyDefaults.order
 
         var tileID: String {
             switch self {
             case .business: "app-business"
             case .travel: "app-travel"
             case .car: "app-car"
+            case .studies: "app-studies"
             default: rawValue
             }
         }
@@ -139,7 +140,7 @@ enum DailyBrief {
             switch space {
             case .nutrition: self = .nutrition
             case .fitness: self = .workout
-            case .student: self = .planning
+            case .student: self = .studies
             case .budget: self = .budget
             case .habits: self = .habits
             case .productivity: self = .priorities
@@ -156,6 +157,7 @@ enum DailyBrief {
             case .nutrition: self = .nutrition
             case .fitness: self = .workout
             case .planning: self = .planning
+            case .studies: self = .studies
             case .finances: self = .budget
             case .business: self = .business
             case .travel: self = .travel
@@ -169,7 +171,6 @@ enum DailyBrief {
             switch self {
             case .nutrition: .nutrition
             case .workout: .fitness
-            case .planning: .student
             case .habits: .habits
             case .budget: .budget
             case .priorities: .productivity
@@ -183,6 +184,7 @@ enum DailyBrief {
             case .business: .business
             case .travel: .travel
             case .car: .car
+            case .studies: .studies
             default: nil
             }
         }
@@ -190,6 +192,8 @@ enum DailyBrief {
         var title: String {
             if let area { return area.title }
             switch self {
+            case .planning: return tr("Planning")
+            case .studies: return tr("Études")
             case .reminders: return tr("À ne pas oublier")
             case .steps: return tr("Pas")
             default: return app?.title ?? rawValue
@@ -199,6 +203,8 @@ enum DailyBrief {
         var symbol: String {
             if let area { return area.symbol }
             switch self {
+            case .planning: return "calendar.day.timeline.left"
+            case .studies: return "graduationcap.fill"
             case .reminders: return "bell.fill"
             case .steps: return "figure.walk"
             default: return app?.symbol ?? "square"
@@ -208,6 +214,8 @@ enum DailyBrief {
         var colorHex: String {
             if let area { return area.colorHex }
             switch self {
+            case .planning: return "3366FF"
+            case .studies: return "D6409F"
             case .reminders: return "4B5563"
             case .steps: return "12A4B5"
             default: return app?.colorHex ?? "8E8E93"
@@ -220,6 +228,7 @@ enum DailyBrief {
             case .nutrition: tr("Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici.")
             case .workout: tr("Crée ton programme : ta séance du jour apparaîtra ici.")
             case .planning: tr("Ajoute tes cours : ton horaire du jour apparaîtra ici.")
+            case .studies: tr("Ajoute tes cours et tes examens : tes prochaines échéances apparaîtront ici.")
             case .budget: tr("Donne ton budget du mois pour voir ce qu'il te reste chaque jour.")
             case .habits: tr("Ajoute une habitude à suivre chaque jour.")
             case .priorities: tr("Ajoute tes tâches ou ton top 3 du jour.")
@@ -235,10 +244,14 @@ enum DailyBrief {
         var route: HomeRoute {
             if let area { return area.homeRoute }
             switch self {
+            case .planning: return .app(.planning)
+            case .studies: return .app(.studies)
             case .reminders: return .app(.planning)
             case .steps: return .page(.fitnessActivity)
             case .business: return .app(.business)
             case .travel: return .app(.travel)
+            case .car: return .app(.car)
+            // Every other category has an area, handled above.
             default: return .app(.car)
             }
         }
@@ -283,8 +296,10 @@ enum DailyBrief {
         /// Across the dashboard, or half of it.
         var isWide: Bool {
             switch self {
-            // Planning, the week's schedule, is as wide as Nutrition (PDG, 2026-11-16); « − » still makes it half width.
-            case .nutrition, .planning, .reminders, .invite, .empty: true
+            // The default sizes are in `DailyDefaults.wide` (PDG, 2026-11-17): Nutrition, Fitness, Planning (its week
+            // table), Habitudes and Top 3 across the width, the other cards at half width; « − » / « + » change that.
+            case .nutrition, .workout, .planning, .habits, .priorities, .invite: true
+            case let .empty(category): DailyDefaults.wide.contains(category)
             default: false
             }
         }
@@ -386,11 +401,24 @@ enum DailyBrief {
         state.activePriorities.prefix(ProductivityState.maxPriorities).map { Check(id: $0.id.uuidString, title: $0.title, isDone: $0.isDone(on: now)) }
     }
 
+    /// The cards in the default order (`DailyDefaults.order`, fixed whatever the hour): a card of no category after
+    /// them, invitations last. Cards of the same rank keep their order.
+    static func inDefaultOrder(_ tiles: [Tile]) -> [Tile] {
+        func rank(_ tile: Tile) -> Int {
+            if case .invite = tile { return Int.max }
+            return tile.category.flatMap { Category.defaultOrder.firstIndex(of: $0) } ?? Category.defaultOrder.count
+        }
+        return tiles.enumerated().sorted { lhs, rhs in
+            let l = rank(lhs.element), r = rank(rhs.element)
+            return l == r ? lhs.offset < rhs.offset : l < r
+        }.map(\.element)
+    }
+
     /// The cards as the person arranged them: hidden ones left out, the chosen order first (the
-    /// others after, in the automatic order), invitations last.
+    /// others after, in the default order), invitations last.
     static func arranged(_ tiles: [Tile], order: [String], hidden: [String]) -> [Tile] {
         let invites = tiles.filter { if case .invite = $0 { true } else { false } }
-        let cards = tiles.filter { tile in !invites.contains(tile) && !hidden.contains(tile.id) }
+        let cards = inDefaultOrder(tiles.filter { tile in !invites.contains(tile) && !hidden.contains(tile.id) })
         guard !order.isEmpty else { return cards + invites }
         let sorted = cards.enumerated().sorted { lhs, rhs in
             let l = order.firstIndex(of: lhs.element.id) ?? order.count + lhs.offset

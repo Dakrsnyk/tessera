@@ -23,6 +23,44 @@ extension Course {
     }
 }
 
+/// How two course names are compared to know they are the same course: without case, accents, extra
+/// spaces or punctuation (« Intro. à la bio » = « intro a la bio »). One rule for a course added by hand
+/// and a course read from a timetable (photo, PDF), so a class is never listed twice.
+enum CourseMatch {
+    static func key(_ name: String) -> String {
+        let folded = name.folding(options: [.diacriticInsensitive, .caseInsensitive, .widthInsensitive], locale: nil).lowercased()
+        let spaced = String(folded.unicodeScalars.map { CharacterSet.alphanumerics.contains($0) ? Character($0) : " " })
+        return spaced.split(whereSeparator: { $0 == " " }).joined(separator: " ")
+    }
+}
+
+extension StudentState {
+    /// The course with the same name (see `CourseMatch`), if there is one.
+    func course(matching name: String) -> Course? {
+        let key = CourseMatch.key(name)
+        guard !key.isEmpty else { return nil }
+        return courses.first { CourseMatch.key($0.name) == key }
+    }
+
+    /// The course of that name: the one already there (it keeps its fields, only its empty ones are filled in),
+    /// or a new one. Returns its id.
+    @discardableResult
+    mutating func ensureCourse(named name: String, teacher: String = "", colorHex: String? = nil) -> UUID {
+        let cleanName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let cleanTeacher = teacher.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let found = course(matching: cleanName), let index = courses.firstIndex(where: { $0.id == found.id }) {
+            if courses[index].teacher.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, !cleanTeacher.isEmpty {
+                courses[index].teacher = cleanTeacher
+            }
+            return found.id
+        }
+        var created = Course(name: cleanName, teacher: cleanTeacher)
+        if let colorHex, !colorHex.isEmpty { created.colorHex = colorHex }
+        courses.append(created)
+        return created.id
+    }
+}
+
 /// What an entry of the week's schedule is: chosen by the person when adding it.
 enum ScheduleKind: String, Codable, CaseIterable, Identifiable {
     case course, work, appointment, other

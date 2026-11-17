@@ -1081,23 +1081,70 @@ enum NutritionCalculator {
         var id: Double { rawValue }
         var title: String {
             switch self {
-            case .sedentary: tr("Sédentaire")
-            case .light: tr("Légère (1–3 séances)")
-            case .moderate: tr("Modérée (3–5 séances)")
-            case .active: tr("Élevée (6–7 séances)")
+            // What the calculation really does with the workouts per week (`AppModel.activityFromWorkouts`):
+            // 0–1 sedentary, 2–3 light, 4–5 moderate, 6 or more high.
+            case .sedentary: tr("Sédentaire (0–1 séance)")
+            case .light: tr("Légère (2–3 séances)")
+            case .moderate: tr("Modérée (4–5 séances)")
+            case .active: tr("Élevée (6 séances ou plus)")
+            }
+        }
+
+        /// The level that goes with a number of workouts a week (0 and 1 sedentary, 2–3 light, 4–5 moderate,
+        /// 6 and more high).
+        static func forWorkouts(perWeek count: Int) -> Activity {
+            switch count {
+            case ...1: .sedentary
+            case 2...3: .light
+            case 4...5: .moderate
+            default: .active
             }
         }
     }
-    enum Goal: Double, CaseIterable, Identifiable {
-        case lose = -0.15, maintain = 0, gain = 0.1
-        var id: Double { rawValue }
+    /// How the daily needs differ from what is spent, and the protein asked (see `goals`). Each goal of
+    /// `FitnessGoal` maps to one (`FitnessGoal.calculatorGoal`).
+    enum Goal: String, CaseIterable, Identifiable {
+        case lose, cut, maintain, recomposition, performance, gain, massGain
+        var id: String { rawValue }
+
         var title: String {
             switch self {
             case .lose: tr("Perdre doucement")
+            case .cut: tr("Sèche")
             case .maintain: tr("Maintenir")
+            case .recomposition: tr("Recomposition corporelle")
+            case .performance: tr("Performance")
             case .gain: tr("Prendre du muscle")
+            case .massGain: tr("Prise de masse")
             }
         }
+
+        /// The change of the energy spent: −15 % to lose, −20 % to cut, +10 % to build muscle, +15 % for a
+        /// mass gain (capped, see `ratio`), nothing otherwise. Estimates, not a validated prescription.
+        var adjustment: Double {
+            switch self {
+            case .lose: -0.15
+            case .cut: -0.20
+            case .maintain, .recomposition, .performance: 0
+            case .gain: 0.10
+            case .massGain: 0.15
+            }
+        }
+
+        /// The surplus of a mass gain never goes over this many calories a day.
+        static let maxSurplusKcal = 500.0
+
+        /// The change really applied to the energy spent: `adjustment`, but a mass gain adds 500 kcal at most.
+        func ratio(dailyKcal: Double) -> Double {
+            guard self == .massGain, dailyKcal > 0 else { return adjustment }
+            return min(adjustment, Self.maxSurplusKcal / dailyKcal)
+        }
+
+        /// A deficit: the calories floors apply.
+        var isDeficit: Bool { adjustment < 0 }
+
+        /// A surplus: refused where gaining is not safe.
+        var isSurplus: Bool { adjustment > 0 }
     }
 
     /// The steps of the calculation, shown under « Comment c'est calculé ».
@@ -1106,7 +1153,7 @@ enum NutritionCalculator {
         var restingKcal: Double
         /// With the activity factor: the energy spent in a day.
         var dailyKcal: Double
-        /// The aim's change (−15 %, 0, +10 %).
+        /// The aim's change (−15 %, −20 %, 0, +10 %, +15 % at most).
         var goalAdjustment: Double
         /// Grams of protein per kilogram of body weight.
         var proteinPerKg: Double
@@ -1114,23 +1161,27 @@ enum NutritionCalculator {
 
     /// Grams of protein per kilogram: more to keep muscle while losing weight or to build it, more with
     /// training (International Society of Sports Nutrition: 1,4 to 2,0 g/kg for active people), and at
-    /// least the adult reference otherwise.
+    /// least the adult reference otherwise. Cutting asks more (2,2), as lean athletes do in the studies.
     static func proteinPerKg(activity: Activity, goal: Goal) -> Double {
         switch goal {
         case .lose: 1.8
-        case .gain: 2.0
+        case .cut: 2.2
+        case .gain, .massGain, .recomposition: 2.0
+        case .performance: 1.6
         case .maintain: activity == .sedentary || activity == .light ? 1.2 : 1.6
         }
     }
 
     static func breakdown(sex: Sex, age: Int, heightCm: Double, weightKg: Double, activity: Activity, goal: Goal) -> Breakdown {
         let resting = 10 * weightKg + 6.25 * heightCm - 5 * Double(age) + sex.offset
-        return Breakdown(restingKcal: resting.rounded(), dailyKcal: (resting * activity.rawValue).rounded(),
-                         goalAdjustment: goal.rawValue, proteinPerKg: proteinPerKg(activity: activity, goal: goal))
+        let daily = (resting * activity.rawValue).rounded()
+        return Breakdown(restingKcal: resting.rounded(), dailyKcal: daily,
+                         goalAdjustment: goal.ratio(dailyKcal: daily), proteinPerKg: proteinPerKg(activity: activity, goal: goal))
     }
 
     /// Every daily target from the body, the activity and the aim:
-    /// - calories: Mifflin-St Jeor × activity factor × aim (−15 % to lose, +10 % to gain), 1 400 at least;
+    /// - calories: Mifflin-St Jeor × activity factor × aim (−15 % to lose, −20 % to cut, +10 % to build
+    ///   muscle, +15 % for a mass gain with 500 kcal at most, 0 otherwise), 1 400 at least;
     /// - protein: `proteinPerKg` × weight, within 35 % of the calories (the upper bound of the AMDR);
     /// - fat: 28 % of the calories (AMDR 20–35 %); carbohydrates: the rest;
     /// - fibre: 14 g per 1 000 kcal (Dietary Guidelines); sugars and saturated fat: under 10 % of the
@@ -1143,7 +1194,7 @@ enum NutritionCalculator {
     /// `kcal`: calories typed by the person, which the macronutrients then follow.
     static func goals(sex: Sex, age: Int, heightCm: Double, weightKg: Double, activity: Activity, goal: Goal, kcal typed: Double? = nil) -> NutritionGoals {
         let steps = breakdown(sex: sex, age: age, heightCm: heightCm, weightKg: weightKg, activity: activity, goal: goal)
-        let kcal = typed ?? max(1_400, (steps.dailyKcal * (1 + goal.rawValue)).rounded())
+        let kcal = typed ?? max(1_400, (steps.dailyKcal * (1 + steps.goalAdjustment)).rounded())
         let protein = min(weightKg * steps.proteinPerKg, kcal * 0.35 / 4).rounded()
         let fat = (kcal * 0.28 / 9).rounded()
         let carbs = max(0, ((kcal - protein * 4 - fat * 9) / 4).rounded())

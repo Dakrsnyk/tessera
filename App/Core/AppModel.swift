@@ -102,6 +102,7 @@ final class AppModel {
         profile = store.state(UserProfile.self)
         savedStyles = store.state(StyleLibrary.self).styles
         migrateProfile()
+        migrateDailyLayout()
         insights = InsightCache.load()
         let cache = MarketService.cache
         quotes = portfolio.watchlist.compactMap { cache.quotes[$0] }
@@ -942,6 +943,69 @@ extension AppModel {
         update(\.profile) { $0.calculatedActivity = activity }
     }
 
+    /// The one goal, for Sport and Nutrition (nil takes it back). Nothing else is written: targets that
+    /// follow the calculation follow the new goal; targets set by hand stay as they are, and Nutrition
+    /// proposes the new calculation (`goalChangeProposal`).
+    func setGoal(_ goal: FitnessGoal?) {
+        // The goal the targets stand for is noted BEFORE it changes (an older account has none noted yet), so
+        // the first change is proposed too. Without any goal until now the calculation was maintaining.
+        noteTargetsGoal()
+        if profile.goal == nil, profile.targetsGoal == nil,
+           !profile.followsNutritionCalculation || !profile.customTargets.isEmpty {
+            update(\.profile) { $0.targetsGoal = .maintain }
+        }
+        update(\.profile) { $0.setGoal(goal) }
+    }
+
+    /// Remembers the goal the targets stand for: the first time it is known, or while every target follows the
+    /// calculation (they follow the new goal). Targets set by hand keep the older goal, so that the change
+    /// can be proposed rather than applied.
+    private func noteTargetsGoal() {
+        guard let goal = profile.goal, profile.targetsGoal != goal else { return }
+        let purelyCalculated = profile.followsNutritionCalculation && profile.customTargets.isEmpty
+        guard profile.targetsGoal == nil || purelyCalculated else { return }
+        update(\.profile) { $0.targetsGoal = goal }
+    }
+
+    /// The calculation to offer after the goal changed while some targets are the person's own: nil when
+    /// there is nothing to offer (every target follows the calculation, nothing changed, or the body
+    /// is not known yet). Never applied by itself.
+    var goalChangeProposal: NutritionGoals? {
+        guard let goal = profile.goal, let seen = profile.targetsGoal, seen != goal else { return nil }
+        guard !profile.followsNutritionCalculation || !profile.customTargets.isEmpty else { return nil }
+        guard let fresh = recommendedNutritionGoals(followingTypedCalories: false) else { return nil }
+        let current = nutrition.goals
+        guard abs(fresh.kcal - current.kcal) >= 1 || abs(fresh.protein - current.protein) >= 1 else { return nil }
+        return fresh
+    }
+
+    /// « Utiliser ce calcul »: the calories and the three macronutrients go back to the calculation for the
+    /// new goal (the targets that follow it take them; for targets kept by hand, the four values are written
+    /// and stay the person's own).
+    func useGoalChangeProposal() {
+        guard let fresh = recommendedNutritionGoals(followingTypedCalories: false) else { return }
+        if profile.followsNutritionCalculation {
+            update(\.profile) { profile in
+                profile.customTargets.subtract([.kcal, .protein, .carbs, .fat])
+                profile.targetsGoal = profile.goal
+            }
+        } else {
+            update(\.nutrition) {
+                $0.goals.kcal = fresh.kcal
+                $0.goals.protein = fresh.protein
+                $0.goals.carbs = fresh.carbs
+                $0.goals.fat = fresh.fat
+            }
+            markProvided(.kcalTarget, .proteinTarget, .carbsTarget, .fatTarget)
+            update(\.profile) { $0.targetsGoal = $0.goal }
+        }
+    }
+
+    /// « Garder mes valeurs »: the proposal is set aside, the targets stay as they are.
+    func keepNutritionTargets() {
+        update(\.profile) { $0.targetsGoal = $0.goal }
+    }
+
     /// Targets the user set or accepted at once. `calculatedWith` is an activity of the calculation: the
     /// targets then follow the body data they come from.
     func setNutritionGoals(_ goals: NutritionGoals, calculatedWith activity: NutritionCalculator.Activity? = nil) {
@@ -958,6 +1022,7 @@ extension AppModel {
     /// aim, the activity, the workouts per week). Targets typed by hand stay; calories typed by hand lead the
     /// macronutrients.
     func followCalculatedNutritionGoals() {
+        noteTargetsGoal()
         guard profile.followsNutritionCalculation, let fresh = recommendedNutritionGoals() else { return }
         var goals = nutrition.goals
         for target in NutritionTarget.allCases where !profile.customTargets.contains(target) {
@@ -986,9 +1051,9 @@ extension AppModel {
         var typed = followingTypedCalories && profile.customTargets.contains(.kcal) ? nutrition.goals.kcal : nil
         // The calories the user accepted for a weight goal lead the macronutrients too (no plan: unchanged).
         var goal = nutritionGoal
-        if let accepted = inForceWeightPlanKcal, let aim = profile.nutritionAim {
+        if let accepted = inForceWeightPlanKcal, let aim = profile.aim {
             typed = typed ?? accepted
-            goal = aim.calculatorGoal
+            goal = profile.goal?.calculatorGoal ?? aim.calculatorGoal
         }
         // Within the safety bounds (a minor, a pregnancy, a low body mass index, the calories floor, the ranges).
         return NutritionSafety.goals(sex: sex, age: age, heightCm: height, weightKg: weight,
@@ -999,7 +1064,7 @@ extension AppModel {
 
     /// The weight goal, while the aim chosen is to lose or to gain (another aim sets it aside, unchanged).
     var activeWeightPlan: WeightPlan? {
-        guard let plan = profile.weightPlan, let aim = profile.nutritionAim, aim != .maintain else { return nil }
+        guard let plan = profile.weightPlan, let aim = profile.aim, aim != .maintain else { return nil }
         return plan
     }
 
@@ -1007,7 +1072,7 @@ extension AppModel {
     /// calculation that is still safe (never a deficit that outlives an unsafe plan, a pregnancy answer, a
     /// minor, or another aim). Otherwise nil, and the calculation of before applies.
     var inForceWeightPlanKcal: Double? {
-        guard let plan = activeWeightPlan, let accepted = plan.acceptedKcal, plan.aim == profile.nutritionAim else { return nil }
+        guard let plan = activeWeightPlan, let accepted = plan.acceptedKcal, plan.aim == profile.aim else { return nil }
         switch evaluateWeightPlan() {
         case .ok?, .adjusted?: return accepted
         default: return nil
@@ -1074,7 +1139,7 @@ extension AppModel {
 
     /// The calculation of the goal now, without saving anything (nil: no goal for the aim chosen).
     func evaluateWeightPlan(now: Date = Date()) -> WeightPlanCalculator.Outcome? {
-        guard let plan = activeWeightPlan, let aim = profile.nutritionAim else { return nil }
+        guard let plan = activeWeightPlan, let aim = profile.aim else { return nil }
         let days = WeightPlanCalculator.days(until: plan.targetDate, from: now)
         let input = WeightPlanCalculator.input(profile: weightPlanProfile, birthday: life.birthday, aim: aim,
                                                targetKg: plan.targetKg, days: days, now: now)
@@ -1165,10 +1230,11 @@ extension AppModel {
         profile.calculatedActivity ?? activityFromWorkouts ?? .light
     }
 
-    /// The aim of the calculation: the nutrition aim, else the one of the sport goal, else maintaining. A loss
-    /// or a gain only where it is safe for the body known (`NutritionSafety.allowedGoal`): maintaining otherwise.
+    /// The aim of the calculation: the one goal shared by Sport and Nutrition (`UserProfile.goal`), else
+    /// maintaining. A loss or a gain only where it is safe for the body known (`NutritionSafety.allowedGoal`):
+    /// maintaining otherwise.
     var nutritionGoal: NutritionCalculator.Goal {
-        let requested = (profile.nutritionAim ?? profile.fitnessGoal?.nutritionAim ?? .maintain).calculatorGoal
+        let requested = profile.goal?.calculatorGoal ?? .maintain
         guard let height = profile.heightCm, let weight = profile.weightKg else { return requested }
         return NutritionSafety.allowedGoal(requested, heightCm: height, weightKg: weight,
                                            isMinor: profile.isMinor(birthday: life.birthday), lifeStage: profile.lifeStage)
@@ -1237,11 +1303,6 @@ extension AppModel {
     /// The activity level that goes with the workouts per week, when the user gave them.
     var activityFromWorkouts: NutritionCalculator.Activity? {
         guard profile.knows(.weeklyWorkouts) else { return nil }
-        switch fitness.weeklyGoal {
-        case ...1: return .sedentary
-        case 2...3: return .light
-        case 4...5: return .moderate
-        default: return .active
-        }
+        return NutritionCalculator.Activity.forWorkouts(perWeek: fitness.weeklyGoal)
     }
 }

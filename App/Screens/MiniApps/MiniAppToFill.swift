@@ -9,7 +9,8 @@ extension MiniApp {
         switch self {
         case .nutrition: [.kcalTarget, .macroTargets]
         case .fitness: [.routines, .weeklyWorkouts, .weight, .stepGoal]
-        case .planning: [.habits, .timetable, .exams]
+        case .planning: [.habits, .timetable]
+        case .studies: [.exams]
         case .finances: [.monthlyBudget]
         case .business: [.businessGoal]
         case .travel: [.trip]

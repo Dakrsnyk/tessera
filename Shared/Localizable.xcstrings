@@ -10341,6 +10341,53 @@
         }
       }
     },
+    "%@, d'après tes séances": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, nach deinen Trainings"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, based on your workouts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, según tus entrenamientos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, d'après tes séances"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, in base ai tuoi allenamenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@（ワークアウトに基づく）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, com base nos seus treinos"
+          }
+        }
+      }
+    },
     "%@, une seule fois, sans abonnement": {
       "extractionState": "manual",
       "localizations": {
@@ -20254,6 +20301,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicione suas aulas no Ardane, no espaço Estudos."
+          }
+        }
+      }
+    },
+    "Ajoute tes cours et tes examens : tes prochaines échéances apparaîtront ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge deine Kurse und Prüfungen hinzu: Deine nächsten Fristen erscheinen hier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your classes and exams: your next deadlines will show up here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Agrega tus clases y exámenes: tus próximos vencimientos aparecerán aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute tes cours et tes examens : tes prochaines échéances apparaîtront ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi i tuoi corsi e i tuoi esami: le prossime scadenze appariranno qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授業と試験を追加すると、次の期限がここに表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione suas aulas e provas: seus próximos prazos vão aparecer aqui."
           }
         }
       }
@@ -35721,49 +35815,49 @@
         }
       }
     },
-    "Automatique : Ardane met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné.": {
+    "Automatique : Nutrition, Fitness, Planning, Habitudes et Top 3, puis tes autres cartes en demi-largeur. Ce que tu as retiré ou ajouté reste tel quel.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automatisch: Ardane zeigt zuerst, was jetzt zählt (Mahlzeiten, heutiges Training, Kurse…), je nach deinen Angaben."
+            "value": "Automatisch: Ernährung, Fitness, Planung, Gewohnheiten und Top 3, danach deine übrigen Karten in halber Breite. Was du entfernt oder hinzugefügt hast, bleibt unverändert."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automatic: Ardane puts what matters now first (meals, today's workout, classes…), based on what you entered."
+            "value": "Automatic: Nutrition, Fitness, Planning, Habits and Top 3, then your other cards at half width. What you removed or added stays as it is."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automático: Ardane pone primero lo que importa ahora (comidas, entrenamiento del día, clases…), según lo que registraste."
+            "value": "Automático: Nutrición, Fitness, Planificación, Hábitos y Top 3, y después tus otras tarjetas a media anchura. Lo que quitaste o añadiste se queda como está."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automatique : Ardane met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné."
+            "value": "Automatique : Nutrition, Fitness, Planning, Habitudes et Top 3, puis tes autres cartes en demi-largeur. Ce que tu as retiré ou ajouté reste tel quel."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automatico: Ardane mette prima ciò che conta adesso (pasti, allenamento di oggi, lezioni…), in base a ciò che hai inserito."
+            "value": "Automatico: Nutrizione, Fitness, Pianificazione, Abitudini e Top 3, poi le altre schede a mezza larghezza. Ciò che hai rimosso o aggiunto resta com'è."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "自動：入力した内容に応じて、今大切なもの（食事、今日のワークアウト、授業など）を先に表示します。"
+            "value": "自動：栄養、フィットネス、プランニング、習慣、トップ3の順に並べ、そのほかのカードは半分の幅で続きます。削除または追加したものはそのままです。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automático: o Ardane mostra primeiro o que importa agora (refeições, treino do dia, aulas…), conforme o que você registrou."
+            "value": "Automático: Nutrição, Fitness, Planejamento, Hábitos e Top 3, depois seus outros cartões em meia largura. O que você removeu ou adicionou continua como está."
           }
         }
       }
@@ -40750,53 +40844,6 @@
         }
       }
     },
-    "Bienvenue, %@ !": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Willkommen, %@!"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Welcome, %@!"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¡Te damos la bienvenida, %@!"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bienvenue, %@ !"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Benvenuto, %@!"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ようこそ、%@さん！"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Boas-vindas, %@!"
-          }
-        }
-      }
-    },
     "Bilan": {
       "extractionState": "manual",
       "localizations": {
@@ -42626,6 +42673,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bala"
+          }
+        }
+      }
+    },
+    "Bonjour": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hallo"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hello"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hola"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bonjour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ciao"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "こんにちは"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Olá"
           }
         }
       }
@@ -53346,6 +53440,53 @@
         }
       }
     },
+    "Ces chiffres sont des estimations de départ, pas une prescription : ajuste-les selon ce que tu observes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Zahlen sind Startschätzungen, keine Verordnung: Passe sie an deine Beobachtungen an."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "These figures are starting estimates, not a prescription: adjust them to what you observe."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estas cifras son estimaciones de partida, no una prescripción: ajústalas según lo que observes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ces chiffres sont des estimations de départ, pas une prescription : ajuste-les selon ce que tu observes."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Queste cifre sono stime di partenza, non una prescrizione: adattale a ciò che osservi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "これらの数値は出発点となる推定であり、処方ではありません。観察した結果に合わせて調整してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Estes números são estimativas de partida, não uma prescrição: ajuste-os conforme o que você observa."
+          }
+        }
+      }
+    },
     "Ces tailles ne remplissent pas un widget moyen ou grand : il faut 2 petits, 2 moyens, 1 moyen et 2 petits, ou 4 petits.": {
       "extractionState": "manual",
       "localizations": {
@@ -57384,6 +57525,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolhido"
+          }
+        }
+      }
+    },
+    "Choisi par toi. Tes séances donneraient : %@. Touche ton choix pour revenir aux séances.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Wahl. Deine Trainings ergäben: %@. Tippe auf deine Wahl, um zu deinen Trainings zurückzukehren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your choice. Your workouts would give: %@. Tap your choice to go back to your workouts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegido por ti. Tus entrenamientos darían: %@. Toca tu elección para volver a tus entrenamientos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisi par toi. Tes séances donneraient : %@. Touche ton choix pour revenir aux séances."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scelto da te. I tuoi allenamenti darebbero: %@. Tocca la tua scelta per tornare ai tuoi allenamenti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたが選んだ値です。ワークアウトからは %@ になります。選んだ項目をタップすると、ワークアウトの値に戻ります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolhido por você. Seus treinos dariam: %@. Toque na sua escolha para voltar aos seus treinos."
+          }
+        }
+      }
+    },
+    "Choisi par toi. Touche-le de nouveau pour revenir à tes séances.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Wahl. Tippe erneut darauf, um zu deinen Trainings zurückzukehren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your choice. Tap it again to go back to your workouts."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegido por ti. Tócalo de nuevo para volver a tus entrenamientos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisi par toi. Touche-le de nouveau pour revenir à tes séances."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scelto da te. Toccalo di nuovo per tornare ai tuoi allenamenti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたが選んだ値です。もう一度タップすると、ワークアウトの値に戻ります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolhido por você. Toque de novo para voltar aos seus treinos."
           }
         }
       }
@@ -67728,53 +67963,6 @@
         }
       }
     },
-    "Cours, examens, devoirs, notes et fiches": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurse, Prüfungen, Hausaufgaben, Noten und Lernkarten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Classes, exams, homework, grades and flashcards"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clases, exámenes, tareas, notas y tarjetas"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cours, examens, devoirs, notes et fiches"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lezioni, esami, compiti, voti e schede"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "授業、試験、課題、成績、暗記カード"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aulas, provas, tarefas, notas e cartões"
-          }
-        }
-      }
-    },
     "Cours, fiches et heures d'étude, en arcs rétro.": {
       "extractionState": "manual",
       "localizations": {
@@ -67818,53 +68006,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aulas, fichas e horas de estudo, em arcos retrô."
-          }
-        }
-      }
-    },
-    "Cours, travail, rendez-vous et autres événements": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Kurse, Arbeit, Termine und andere Ereignisse"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Classes, work, appointments and other events"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clases, trabajo, citas y otros eventos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cours, travail, rendez-vous et autres événements"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lezioni, lavoro, appuntamenti e altri eventi"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "授業、仕事、約束、その他の予定"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aulas, trabalho, compromissos e outros eventos"
           }
         }
       }
@@ -71394,49 +71535,49 @@
         }
       }
     },
-    "D'après tes séances par semaine. Choisis-en une autre si elle te ressemble plus.": {
+    "D'après tes séances : %@ par semaine. Choisis un autre niveau si tu préfères.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nach deinen Trainings pro Woche. Wähle eine andere, wenn sie besser passt."
+            "value": "Nach deinen Trainings: %@ pro Woche. Wähle ein anderes Level, wenn du möchtest."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Based on your workouts per week. Pick another one if it fits you better."
+            "value": "Based on your workouts: %@ a week. Pick another level if you prefer."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Según tus entrenamientos por semana. Elige otra si te describe mejor."
+            "value": "Según tus entrenamientos: %@ por semana. Elige otro nivel si prefieres."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "D'après tes séances par semaine. Choisis-en une autre si elle te ressemble plus."
+            "value": "D'après tes séances : %@ par semaine. Choisis un autre niveau si tu préfères."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "In base ai tuoi allenamenti a settimana. Scegline un'altra se ti somiglia di più."
+            "value": "In base ai tuoi allenamenti: %@ a settimana. Scegli un altro livello se preferisci."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "週のワークアウト回数から推定。より近いものがあれば選んでください。"
+            "value": "ワークアウトに基づく値：週%@回。ほかのレベルがよければ選んでください。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "De acordo com seus treinos por semana. Escolha outra se combinar mais com você."
+            "value": "Com base nos seus treinos: %@ por semana. Escolha outro nível se preferir."
           }
         }
       }
@@ -84319,6 +84460,100 @@
         }
       }
     },
+    "Déjà choisi : tu peux le changer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schon gewählt: Du kannst es ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already chosen: you can change it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya elegido: puedes cambiarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà choisi : tu peux le changer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già scelto: puoi cambiarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "選択済みです。変更できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já escolhido: você pode alterar."
+          }
+        }
+      }
+    },
+    "Déjà connu : tu peux le modifier.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schon bekannt: Du kannst es ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already known: you can change it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya conocido: puedes cambiarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà connu : tu peux le modifier."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già noto: puoi modificarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すでにわかっています。変更できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já conhecido: você pode alterar."
+          }
+        }
+      }
+    },
     "Déjà fait": {
       "extractionState": "manual",
       "localizations": {
@@ -84456,6 +84691,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Já está na sua tela? Você vai precisar colocá-lo de novo no novo tamanho."
+          }
+        }
+      }
+    },
+    "Déjà renseigné : tu peux le modifier.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schon ausgefüllt: Du kannst es ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already filled in: you can change it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya rellenado: puedes cambiarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà renseigné : tu peux le modifier."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già compilato: puoi modificarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "入力済みです。変更できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já preenchido: você pode alterar."
+          }
+        }
+      }
+    },
+    "Déjà répondu : tu peux le modifier.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schon beantwortet: Du kannst es ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already answered: you can change it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya respondido: puedes cambiarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà répondu : tu peux le modifier."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già risposto: puoi modificarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "回答済みです。変更できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já respondido: você pode alterar."
           }
         }
       }
@@ -103166,6 +103495,53 @@
         }
       }
     },
+    "Garder les quarts de…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schichten behalten von…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep the shifts of…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conservar los turnos de…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder les quarts de…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantieni i turni di…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "シフトを残す人を選ぶ…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manter os turnos de…"
+          }
+        }
+      }
+    },
     "Garder les tâches cochées aujourd'hui": {
       "extractionState": "manual",
       "localizations": {
@@ -103209,6 +103585,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Manter tarefas concluídas hoje"
+          }
+        }
+      }
+    },
+    "Garder mes valeurs": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Werte behalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep my values"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantener mis valores"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder mes valeurs"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tieni i miei valori"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分の値を保つ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manter meus valores"
           }
         }
       }
@@ -124880,53 +125303,6 @@
         }
       }
     },
-    "Le calendrier du mois": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Monatskalender"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The month calendar"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El calendario del mes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le calendrier du mois"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il calendario del mese"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "月のカレンダー"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O calendário do mês"
-          }
-        }
-      }
-    },
     "Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.": {
       "extractionState": "manual",
       "localizations": {
@@ -126901,6 +127277,53 @@
         }
       }
     },
+    "Le même pour Sport et Nutrition.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dasselbe für Sport und Ernährung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The same for Sport and Nutrition."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El mismo para Deporte y Nutrición."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le même pour Sport et Nutrition."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo stesso per Sport e Alimentazione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スポーツと栄養で同じです。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O mesmo para Esporte e Nutrição."
+          }
+        }
+      }
+    },
     "Le même widget dans chaque style : choisis l'allure qui te plaît.": {
       "extractionState": "manual",
       "localizations": {
@@ -128072,6 +128495,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O saldo no dia 1 do mês e depois as receitas e gastos que você anotou, faturas e valores fixos incluídos."
+          }
+        }
+      }
+    },
+    "Le surplus d'une prise de masse ne dépasse pas 500 kcal par jour.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Überschuss beim Masseaufbau liegt nie über 500 kcal pro Tag."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The surplus of a mass gain never goes over 500 kcal a day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El superávit de un aumento de masa no supera las 500 kcal al día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le surplus d'une prise de masse ne dépasse pas 500 kcal par jour."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il surplus di un aumento di massa non supera le 500 kcal al giorno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "増量時の余剰は、1日500 kcalを超えません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O superávit de um ganho de massa nunca passa de 500 kcal por dia."
           }
         }
       }
@@ -135737,49 +136207,49 @@
         }
       }
     },
-    "Légère (1–3 séances)": {
+    "Légère (2–3 séances)": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Leicht (1–3 Trainings)"
+            "value": "Leicht (2–3 Trainings)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Light (1–3 workouts)"
+            "value": "Light (2–3 workouts)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ligera (1–3 entrenamientos)"
+            "value": "Ligera (2–3 entrenamientos)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Légère (1–3 séances)"
+            "value": "Légère (2–3 séances)"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Leggera (1–3 allenamenti)"
+            "value": "Leggera (2–3 allenamenti)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "軽め（週1〜3回）"
+            "value": "軽め（週2〜3回）"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Leve (1–3 treinos)"
+            "value": "Leve (2–3 treinos)"
           }
         }
       }
@@ -140625,6 +141095,53 @@
         }
       }
     },
+    "Mes cours": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Kurse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My courses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis cursos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes cours"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I miei corsi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マイ科目"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas disciplinas"
+          }
+        }
+      }
+    },
     "Mes dates": {
       "extractionState": "manual",
       "localizations": {
@@ -140762,6 +141279,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Meus dados do espaço %@"
+          }
+        }
+      }
+    },
+    "Mes examens": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Prüfungen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My exams"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis exámenes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes examens"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I miei esami"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マイ試験"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas provas"
           }
         }
       }
@@ -143492,49 +144056,49 @@
         }
       }
     },
-    "Modérée (3–5 séances)": {
+    "Modérée (4–5 séances)": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mäßig (3–5 Trainings)"
+            "value": "Mäßig (4–5 Trainings)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moderate (3–5 workouts)"
+            "value": "Moderate (4–5 workouts)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moderada (3–5 entrenamientos)"
+            "value": "Moderada (4–5 entrenamientos)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modérée (3–5 séances)"
+            "value": "Modérée (4–5 séances)"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moderata (3–5 allenamenti)"
+            "value": "Moderata (4–5 allenamenti)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ふつう（週3〜5回）"
+            "value": "ふつう（週4〜5回）"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Moderada (3–5 treinos)"
+            "value": "Moderada (4–5 treinos)"
           }
         }
       }
@@ -152234,6 +152798,53 @@
         }
       }
     },
+    "Nouveau calcul proposé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neue Berechnung vorgeschlagen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New calculation suggested"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevo cálculo propuesto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveau calcul proposé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuovo calcolo proposto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい計算の提案"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novo cálculo sugerido"
+          }
+        }
+      }
+    },
     "Nouveau compte": {
       "extractionState": "manual",
       "localizations": {
@@ -154815,6 +155426,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nutrição completa"
+          }
+        }
+      }
+    },
+    "Nutrition, Fitness, Planning, Habitudes et Top 3 passent d'abord ; tes autres centres d'intérêt suivent, en plus petit. Un appui long sur une carte la déplace ou change sa taille.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ernährung, Fitness, Planung, Gewohnheiten und Top 3 stehen zuerst; deine anderen Interessen folgen, kleiner. Langes Drücken auf eine Karte verschiebt sie oder ändert ihre Größe."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nutrition, Fitness, Planning, Habits and Top 3 come first; your other interests follow, smaller. A long press on a card moves it or changes its size."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nutrición, Fitness, Planificación, Hábitos y Top 3 van primero; tus otros intereses les siguen, más pequeños. Una pulsación larga en una tarjeta la mueve o cambia su tamaño."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nutrition, Fitness, Planning, Habitudes et Top 3 passent d'abord ; tes autres centres d'intérêt suivent, en plus petit. Un appui long sur une carte la déplace ou change sa taille."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alimentazione, Fitness, Pianificazione, Abitudini e Top 3 vengono prima; i tuoi altri interessi seguono, più piccoli. Una pressione prolungata su una scheda la sposta o ne cambia la dimensione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "栄養、フィットネス、プランニング、習慣、トップ3が先に並び、ほかの関心事はそのあとに小さく表示されます。カードを長押しすると、移動やサイズ変更ができます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nutrição, Fitness, Planejamento, Hábitos e Top 3 vêm primeiro; seus outros interesses vêm depois, menores. Um toque longo em um cartão o move ou muda seu tamanho."
           }
         }
       }
@@ -158011,6 +158669,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ordem"
+          }
+        }
+      }
+    },
+    "Organisation étudiante": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Studienorganisation"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Student organization"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Organización de estudios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Organisation étudiante"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Organizzazione dello studio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "学習の整理"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Organização dos estudos"
           }
         }
       }
@@ -164360,6 +165065,53 @@
         }
       }
     },
+    "Personne ou note (facultatif)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Person oder Notiz (optional)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Person or note (optional)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Persona o nota (opcional)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Personne ou note (facultatif)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Persona o nota (facoltativa)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "人物またはメモ(任意)"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pessoa ou observação (opcional)"
+          }
+        }
+      }
+    },
     "Perte de poids": {
       "extractionState": "manual",
       "localizations": {
@@ -166189,6 +166941,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Planejamento"
+          }
+        }
+      }
+    },
+    "Planning est déjà sur ton accueil, que tu le choisisses ou non.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planung ist schon auf deinem Startbildschirm, ob du sie wählst oder nicht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planning is already on your home screen, whether you pick it or not."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planificación ya está en tu inicio, la elijas o no."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planning est déjà sur ton accueil, que tu le choisisses ou non."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pianificazione è già nella tua home, che tu la scelga o no."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「プランニング」は、選んでも選ばなくても、ホームにすでにあります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Planejamento já está na sua tela inicial, você escolhendo ou não."
           }
         }
       }
@@ -168398,6 +169197,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vários espaços reunidos, conforme o momento do dia."
+          }
+        }
+      }
+    },
+    "Plusieurs personnes figurent sur cet horaire. Choisis la tienne : seuls ses quarts seront cochés.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf diesem Plan stehen mehrere Personen. Wähle dich aus: Nur deine Schichten werden angehakt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Several people are on this schedule. Pick yours: only your shifts will be checked."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En este horario figuran varias personas. Elige la tuya: solo se marcarán sus turnos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plusieurs personnes figurent sur cet horaire. Choisis la tienne : seuls ses quarts seront cochés."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In questo orario compaiono più persone. Scegli la tua: verranno spuntati solo i suoi turni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このシフト表には複数の人が載っています。自分を選ぶと、その人のシフトだけにチェックが入ります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Há várias pessoas nesta escala. Escolha a sua: só os turnos dela serão marcados."
           }
         }
       }
@@ -175687,6 +176533,53 @@
         }
       }
     },
+    "Prise de muscle": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muskelzuwachs"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muscle gain"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganancia muscular"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prise de muscle"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aumento muscolare"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "筋肉の増加"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganho de músculo"
+          }
+        }
+      }
+    },
     "Prise large, passe le bâton de l'avant vers l'arrière bras tendus.": {
       "extractionState": "manual",
       "localizations": {
@@ -182545,6 +183438,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Recomendado para você: %@."
+          }
+        }
+      }
+    },
+    "Recomposition corporelle": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Körperrekomposition"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Body recomposition"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomposición corporal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomposition corporelle"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ricomposizione corporea"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ボディリコンポジション"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomposição corporal"
           }
         }
       }
@@ -212629,49 +213569,49 @@
         }
       }
     },
-    "Sédentaire": {
+    "Sédentaire (0–1 séance)": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sitzend"
+            "value": "Sitzend (0–1 Training)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sedentary"
+            "value": "Sedentary (0–1 workout)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sedentario"
+            "value": "Sedentario (0–1 entrenamiento)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sédentaire"
+            "value": "Sédentaire (0–1 séance)"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sedentario"
+            "value": "Sedentario (0–1 allenamento)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ほとんど運動しない"
+            "value": "ほとんど運動しない（週0〜1回）"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sedentário"
+            "value": "Sedentário (0–1 treino)"
           }
         }
       }
@@ -214368,53 +215308,6 @@
         }
       }
     },
-    "Ta journée en un coup d'œil : repas, séance, habitudes, budget… selon tes centres d'intérêt. Touche une carte pour ouvrir sa mini-app, ou « + » pour en ajouter.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dein Tag auf einen Blick: Mahlzeiten, Training, Gewohnheiten, Budget … je nach deinen Interessen. Tippe auf eine Karte, um die Mini-App zu öffnen, oder auf „+“, um eine hinzuzufügen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your day at a glance: meals, workout, habits, budget… based on your interests. Tap a card to open its mini-app, or “+” to add one."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu día de un vistazo: comidas, entrenamiento, hábitos, presupuesto… según tus intereses. Toca una tarjeta para abrir su miniapp, o «+» para añadir otra."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ta journée en un coup d'œil : repas, séance, habitudes, budget… selon tes centres d'intérêt. Touche une carte pour ouvrir sa mini-app, ou « + » pour en ajouter."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La tua giornata a colpo d'occhio: pasti, allenamento, abitudini, budget… in base ai tuoi interessi. Tocca una scheda per aprire la mini-app, o «+» per aggiungerne."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "食事・ワークアウト・習慣・予算など、1日をひと目で。カードをタップでミニアプリを開き、「+」で追加できます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seu dia num relance: refeições, treino, hábitos, orçamento… conforme seus interesses. Toque num cartão para abrir a miniapp, ou em “+” para adicionar."
-          }
-        }
-      }
-    },
     "Ta journée et tes tendances résumées à partir de tes données.": {
       "extractionState": "manual",
       "localizations": {
@@ -215163,6 +216056,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sua semana de hábitos, sua taxa e sua sequência."
+          }
+        }
+      }
+    },
+    "Ta semaine d'un coup d'œil : ton planning hebdomadaire, tes rendez-vous, tes événements et tes horaires. Il est là pour tout le monde.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Woche auf einen Blick: deine Wochenplanung, Termine, Ereignisse und Zeiten. Sie ist für alle da."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your week at a glance: your weekly planning, appointments, events and schedule. It's there for everyone."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu semana de un vistazo: tu planificación semanal, tus citas, tus eventos y tus horarios. Está para todo el mundo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta semaine d'un coup d'œil : ton planning hebdomadaire, tes rendez-vous, tes événements et tes horaires. Il est là pour tout le monde."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tua settimana a colpo d'occhio: il tuo planning settimanale, gli appuntamenti, gli eventi e gli orari. C'è per tutti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1週間をひと目で。週間プランニング、予定、イベント、時間割がここにあります。だれでも使えます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua semana num relance: seu planejamento semanal, compromissos, eventos e horários. Ele está lá para todo mundo."
           }
         }
       }
@@ -217278,6 +218218,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tempo de estudo e cartões"
+          }
+        }
+      }
+    },
+    "Temps de concentration": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fokuszeit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Focus time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiempo de concentración"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temps de concentration"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempo di concentrazione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "集中時間"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tempo de concentração"
           }
         }
       }
@@ -220991,53 +221978,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sua receita recorrente e as vendas do dia."
-          }
-        }
-      }
-    },
-    "Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps, à tes widgets et à Mon Quotidien.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Antworten vom Anfang, jederzeit änderbar. Einmal angegeben, gelten sie für alle deine Mini-Apps, Widgets und Mein Tag."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your answers from the start, editable at any time. Given once, they serve all your mini-apps, your widgets and My Day."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus respuestas del principio, editables en cualquier momento. Dadas una vez, sirven para todas tus miniapps, tus widgets y Mi día."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps, à tes widgets et à Mon Quotidien."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le tue risposte iniziali, modificabili in qualsiasi momento. Date una volta, servono a tutte le tue mini-app, ai widget e a La mia giornata."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最初の回答はいつでも変更できます。一度入力すれば、すべてのミニアプリ、ウィジェット、マイデイで使われます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suas respostas do início, editáveis a qualquer momento. Informadas uma vez, servem a todas as suas miniapps, widgets e ao Meu dia."
           }
         }
       }
@@ -224896,7 +225836,7 @@
         }
       }
     },
-    "Ton activité": {
+    "Ton activité [business]": {
       "extractionState": "manual",
       "localizations": {
         "de": {
@@ -225742,6 +226682,53 @@
         }
       }
     },
+    "Ton niveau d'activité": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Aktivitätslevel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your activity level"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu nivel de actividad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton niveau d'activité"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo livello di attività"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたの活動量"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu nível de atividade"
+          }
+        }
+      }
+    },
     "Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », sur l'accueil.": {
       "extractionState": "manual",
       "localizations": {
@@ -225832,6 +226819,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sua meta"
+          }
+        }
+      }
+    },
+    "Ton objectif a changé : calcul recommandé %@ kcal et %@ g de protéines (estimation). Tes valeurs restent telles quelles tant que tu ne l'utilises pas.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Ziel hat sich geändert: empfohlene Berechnung %@ kcal und %@ g Eiweiß (Schätzung). Deine Werte bleiben unverändert, solange du sie nicht übernimmst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your goal changed: recommended calculation %@ kcal and %@ g of protein (estimate). Your values stay as they are until you use it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu objetivo ha cambiado: cálculo recomendado de %@ kcal y %@ g de proteínas (estimación). Tus valores se quedan como están mientras no lo uses."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton objectif a changé : calcul recommandé %@ kcal et %@ g de protéines (estimation). Tes valeurs restent telles quelles tant que tu ne l'utilises pas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo obiettivo è cambiato: calcolo consigliato %@ kcal e %@ g di proteine (stima). I tuoi valori restano come sono finché non lo usi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標が変わりました。おすすめの計算は %@ kcal、たんぱく質 %@ g（推定）です。使うまで、あなたの値はそのままです。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu objetivo mudou: cálculo recomendado de %@ kcal e %@ g de proteína (estimativa). Seus valores ficam como estão enquanto você não o usar."
           }
         }
       }
@@ -226020,6 +227054,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sua meta “%@”: %@%%."
+          }
+        }
+      }
+    },
+    "Ton planning": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Planung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your planning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu planificación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton planning"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo planning"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたのプランニング"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu planejamento"
           }
         }
       }
@@ -229784,53 +230865,6 @@
         }
       }
     },
-    "Tous les devoirs": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alle Aufgaben"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All assignments"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todas las tareas"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tous les devoirs"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutti i compiti"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すべての課題"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todos os trabalhos"
-          }
-        }
-      }
-    },
     "Tous les jours": {
       "extractionState": "manual",
       "localizations": {
@@ -230532,53 +231566,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tudo o que você registra fica guardado. O Premium mostra os meses anteriores e a evolução das suas finanças em seis meses."
-          }
-        }
-      }
-    },
-    "Tout ce qui t'attend, jour par jour": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alles, was ansteht, Tag für Tag"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Everything ahead, day by day"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todo lo que te espera, día por día"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout ce qui t'attend, jour par jour"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutto quello che ti aspetta, giorno per giorno"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "これからの予定を日ごとに"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tudo o que vem por aí, dia a dia"
           }
         }
       }
@@ -233309,6 +234296,53 @@
         }
       }
     },
+    "Tu donnes ton objectif et tes informations une seule fois : Fitness et Nutrition les partagent. L'objectif de Fitness sert aussi à Nutrition pour tes calories.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du gibst dein Ziel und deine Angaben nur einmal ein: Fitness und Ernährung teilen sie. Das Ziel aus Fitness nutzt Ernährung auch für deine Kalorien."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You enter your goal and your details once: Fitness and Nutrition share them. Your Fitness goal also gives Nutrition your calories."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indicas tu objetivo y tus datos una sola vez: Fitness y Nutrición los comparten. El objetivo de Fitness también sirve a Nutrición para tus calorías."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu donnes ton objectif et tes informations une seule fois : Fitness et Nutrition les partagent. L'objectif de Fitness sert aussi à Nutrition pour tes calories."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Indichi il tuo obiettivo e i tuoi dati una sola volta: Fitness e Alimentazione li condividono. L'obiettivo di Fitness serve anche ad Alimentazione per le tue calorie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標とプロフィールの入力は1回だけ。フィットネスと栄養で共有されます。フィットネスの目標は、栄養のカロリーにも使われます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Você informa sua meta e seus dados uma só vez: Fitness e Nutrição compartilham. A meta de Fitness também serve à Nutrição para suas calorias."
+          }
+        }
+      }
+    },
     "Tu es dans ta cible de calories aujourd'hui.": {
       "extractionState": "manual",
       "localizations": {
@@ -235565,6 +236599,53 @@
         }
       }
     },
+    "Un objectif pour deux": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Ziel für beide"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One goal for both"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un objetivo para los dos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un objectif pour deux"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un obiettivo per due"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ひとつの目標を2つで共有"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma meta para os dois"
+          }
+        }
+      }
+    },
     "Un petit tour ?": {
       "extractionState": "manual",
       "localizations": {
@@ -237210,6 +238291,53 @@
         }
       }
     },
+    "Une mini-app à part pour tes cours, tes examens et tes sessions de concentration. Avec Premium, le scanner d'horaires lit une photo ou un PDF de ton horaire : tu vérifies, et les cours s'ajoutent.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine eigene Mini-App für deine Kurse, Prüfungen und Konzentrationssitzungen. Mit Premium liest der Stundenplan-Scanner ein Foto oder PDF deines Stundenplans: Du prüfst ihn, und die Kurse werden hinzugefügt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A separate mini-app for your classes, exams and focus sessions. With Premium, the schedule scanner reads a photo or PDF of your timetable: you check it, and the classes are added."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una mini-app aparte para tus clases, tus exámenes y tus sesiones de concentración. Con Premium, el escáner de horarios lee una foto o un PDF de tu horario: lo revisas y las clases se añaden."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une mini-app à part pour tes cours, tes examens et tes sessions de concentration. Avec Premium, le scanner d'horaires lit une photo ou un PDF de ton horaire : tu vérifies, et les cours s'ajoutent."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una mini-app a parte per le tue lezioni, i tuoi esami e le tue sessioni di concentrazione. Con Premium, lo scanner degli orari legge una foto o un PDF del tuo orario: controlli, e le lezioni vengono aggiunte."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授業、試験、集中セッションのための独立したミニアプリです。Premiumなら、時間割スキャナーが時間割の写真やPDFを読み取り、確認すると授業が追加されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um mini-app à parte para suas aulas, provas e sessões de concentração. Com o Premium, o scanner de horários lê uma foto ou PDF do seu horário: você confere, e as aulas são adicionadas."
+          }
+        }
+      }
+    },
     "Une note et ton prochain rendez-vous sous les yeux.": {
       "extractionState": "manual",
       "localizations": {
@@ -238099,6 +239227,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Use uma chave restrita (começa com rk_): o Ardane nunca guarda uma chave secreta."
+          }
+        }
+      }
+    },
+    "Utiliser ce calcul": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Berechnung verwenden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Use this calculation"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar este cálculo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utiliser ce calcul"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usa questo calcolo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この計算を使う"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usar este cálculo"
           }
         }
       }
@@ -242893,53 +244068,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ver resumo"
-          }
-        }
-      }
-    },
-    "Voir les %@ devoirs": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alle %@ Aufgaben ansehen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "See all %@ assignments"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver las %@ tareas"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voir les %@ devoirs"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vedi i %@ compiti"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@件の課題をすべて見る"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver os %@ trabalhos"
           }
         }
       }
@@ -248815,6 +249943,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "aula"
+          }
+        }
+      }
+    },
+    "cours, examens, révisions, concentration": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kurse, Prüfungen, Wiederholung, Konzentration"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "classes, exams, revision, focus"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "clases, exámenes, repaso, concentración"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "cours, examens, révisions, concentration"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "corsi, esami, ripasso, concentrazione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授業、試験、復習、集中"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "aulas, provas, revisão, concentração"
           }
         }
       }
@@ -260052,6 +261227,53 @@
         }
       }
     },
+    "semaine, rendez-vous, événements": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Woche, Termine, Ereignisse"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "week, appointments, events"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "semana, citas, eventos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "semaine, rendez-vous, événements"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "settimana, appuntamenti, eventi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "週間、予定、イベント"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "semana, compromissos, eventos"
+          }
+        }
+      }
+    },
     "semaines": {
       "extractionState": "manual",
       "localizations": {
@@ -263197,6 +264419,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "“%@” está pronto"
+          }
+        }
+      }
+    },
+    "« %@ » existe déjà : le cours est complété, pas ajouté une seconde fois.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„%@“ gibt es schon: Der Kurs wird ergänzt, nicht ein zweites Mal hinzugefügt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” already exists: the course is completed, not added a second time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» ya existe: el curso se completa, no se añade por segunda vez."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "« %@ » existe déjà : le cours est complété, pas ajouté une seconde fois."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«%@» esiste già: il corso viene completato, non aggiunto una seconda volta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」はすでにあります。科目は追加されず、内容が補われます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@” já existe: a disciplina é completada, não adicionada uma segunda vez."
           }
         }
       }
@@ -267572,49 +268841,49 @@
         }
       }
     },
-    "Élevée (6–7 séances)": {
+    "Élevée (6 séances ou plus)": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hoch (6–7 Trainings)"
+            "value": "Hoch (6 oder mehr Trainings)"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "High (6–7 workouts)"
+            "value": "High (6 or more workouts)"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alta (6–7 entrenamientos)"
+            "value": "Alta (6 o más entrenamientos)"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Élevée (6–7 séances)"
+            "value": "Élevée (6 séances ou plus)"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Elevata (6–7 allenamenti)"
+            "value": "Alta (6 o più allenamenti)"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "多め（週6〜7回）"
+            "value": "高め（週6回以上）"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Alta (6–7 treinos)"
+            "value": "Alta (6 ou mais treinos)"
           }
         }
       }

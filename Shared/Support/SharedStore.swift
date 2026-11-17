@@ -315,7 +315,7 @@ enum ImageStore {
 
     /// Puts back a photo from a backup, only under a name the store gives itself and only if it is an image.
     static func restore(_ data: Data, named name: String) {
-        guard isStoredName(name), UIImage(data: data) != nil else { return }
+        guard isStoredName(name), SafeImage.isAcceptable(data) else { return }
         try? data.write(to: directory.appendingPathComponent(name), options: SharedStore.writingOptions)
     }
 

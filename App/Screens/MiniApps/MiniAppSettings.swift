@@ -14,7 +14,9 @@ extension MiniApp {
         case .fitness: [.sport]
         // Planning: no `.wellbeing`: its only question is « Une habitude à suivre » (a first habit to add), which the
         // Habitudes page and the « À remplir » card already offer.
-        case .planning: [.productivity, .studies]
+        case .planning: [.productivity]
+        // Études: the studies questions (the program, the study rhythm) left Planning with the studies (2026-11-17).
+        case .studies: [.studies]
         // Finances: the money questions (income, budget, savings aim, main expenses) have no other home since the
         // « Tes données » page by category was removed (2026-10-23). The fixed expenses keep their own row on the page
         // (`settingsItems`), not repeated here.

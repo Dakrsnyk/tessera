@@ -184,7 +184,6 @@ private struct IdentityStep: View {
     @FocusState private var focused: Bool
 
     var body: some View {
-        let first = model.settings.profileName.trimmed
         VStack(alignment: .leading, spacing: 18) {
             StepTitle(
                 symbol: "hand.wave.fill", colorHex: "F2A33A",
@@ -208,17 +207,8 @@ private struct IdentityStep: View {
             }
             .card(padding: 12)
             birthDate
-            if !first.isEmpty {
-                // What the Home tab will say.
-                HStack(spacing: 8) {
-                    Image(systemName: "sparkles").foregroundStyle(Color.accentColor)
-                    Text(tr("Bonjour \(first.split(separator: " ").first.map(String.init) ?? first)"))
-                        .font(.title3.weight(.semibold))
-                }
-                .transition(.opacity.combined(with: .move(edge: .top)))
-            }
         }
-        .animation(.snappy, value: first.isEmpty)
+        // The greeting (« Bonjour Mathys ») moved to the next step, beside its icon (PDG, 2026-11-17).
         .onAppear { focused = model.settings.profileName.isEmpty }
     }
 
@@ -255,17 +245,29 @@ private struct IdentityStep: View {
 private struct InterestsStep: View {
     @Environment(AppModel.self) private var model
 
+    /// « Bonjour Mathys », from the first name of the first step; nil without a first name.
+    private var greeting: String? {
+        let first = model.settings.profileName.trimmed
+        guard !first.isEmpty else { return nil }
+        return tr("Bonjour \(first.split(separator: " ").first.map(String.init) ?? first)")
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 18) {
             StepTitle(
                 symbol: "square.grid.2x2.fill", colorHex: "8C6CFF",
                 title: tr("Qu'est-ce qui t'intéresse ?"),
-                message: tr("Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.")
+                message: tr("Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard."),
+                greeting: greeting
             )
             InterestGrid(selection: Binding(
                 get: { model.profile.interests },
                 set: { interests in model.update(\.profile) { $0.interests = interests } }
             ))
+            Text(tr("Planning est déjà sur ton accueil, que tu le choisisses ou non."))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
         }
     }
 }
@@ -277,7 +279,7 @@ private struct TopicStep: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             StepTitle(symbol: topic.symbol, colorHex: topic.colorHex, title: topic.title, message: topic.purpose)
-            TopicForm(topic: topic)
+            TopicForm(topic: topic, compactKnown: true)
             Text(tr("Tout est facultatif : laisse vide ce que tu préfères ne pas dire."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
@@ -290,14 +292,24 @@ struct StepTitle: View {
     let colorHex: String
     let title: String
     let message: String
+    /// A greeting shown beside the icon (the interests step: « Bonjour Mathys »).
+    var greeting: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Image(systemName: symbol)
-                .font(.system(size: 22, weight: .semibold))
-                .foregroundStyle(.white)
-                .frame(width: 48, height: 48)
-                .background(Color(hex: colorHex), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            HStack(spacing: 12) {
+                Image(systemName: symbol)
+                    .font(.system(size: 22, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 48, height: 48)
+                    .background(Color(hex: colorHex), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                if let greeting {
+                    Text(greeting)
+                        .font(.title3.weight(.semibold))
+                        .lineLimit(2)
+                        .accessibilityIdentifier("onboarding-greeting")
+                }
+            }
             Text(title)
                 .font(.title.weight(.bold))
                 .fixedSize(horizontal: false, vertical: true)

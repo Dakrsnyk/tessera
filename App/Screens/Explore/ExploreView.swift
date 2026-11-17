@@ -114,6 +114,7 @@ struct ExploreView: View {
                         }
                     }
                     .padding(.bottom, 36)
+                    .tutorialScroll(step: router.tutorialStep, tab: .explore)
                     .sheet(item: $openedSetup) { setup in
                         HomeSetupSheet(setup: setup)
                     }
@@ -291,7 +292,7 @@ struct ExploreView: View {
             WeeklySetupHero(setup: weekly, isPremiumUser: model.isPremium) {
                 openedSetup = weekly
             }
-            .tutorialTarget(.storeHero)
+            .tutorialTarget(.storeHero, radius: 30)
         }
         let style = StoreEdition.style()
         WeeklyStyleFeature(theme: style, isPremiumUser: model.isPremium) {

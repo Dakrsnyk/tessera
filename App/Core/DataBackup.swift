@@ -82,6 +82,37 @@ enum DataBackup {
         if let steps = archive.steps {
             UserDefaults.standard.set(steps, forKey: StepCounter.historyKey)
         }
+        removeOrphanPhotos(archive, store: store)
+    }
+
+    /// After a restoration that went through, the photos this iPhone had before and that neither the backup nor
+    /// the restored widgets hold are deleted: they would otherwise leave again in the next backup. Nothing is
+    /// deleted if a photo of the backup couldn't be put back (a partial restoration): when in doubt, keep.
+    private static func removeOrphanPhotos(_ archive: Archive, store: SharedStore) {
+        var wanted = Set<String>()
+        for (name, data) in archive.images where ImageStore.isStoredName(name) && SafeImage.isAcceptable(data) {
+            guard ImageStore.data(named: name) != nil else { return }
+            wanted.insert(name)
+        }
+        // A widget this version can't read (written by a newer one) stays in the file as it is, but its photos can't
+        // be listed: nothing is deleted then.
+        if let raw = store.rawData(.designs),
+           let written = (try? JSONSerialization.jsonObject(with: raw)) as? [Any],
+           written.count != store.designs.count {
+            return
+        }
+        for design in store.designs { wanted.formUnion(imageFiles(of: design)) }
+        for name in ImageStore.allNames() where !wanted.contains(name) {
+            ImageStore.delete(named: name)
+        }
+    }
+
+    /// The photo files a widget holds: its background, its photos and the ones of its parts.
+    private static func imageFiles(of design: WidgetDesign) -> Set<String> {
+        var files = Set(design.options.photos.map(\.file))
+        if case let .photo(name) = design.background { files.insert(name) }
+        for part in design.options.parts { files.formUnion(part.options.photos.map(\.file)) }
+        return files
     }
 
     /// « Ardane-sauvegarde-2026-10-08 ».

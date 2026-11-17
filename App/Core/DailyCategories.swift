@@ -53,12 +53,13 @@ enum DailyCategories {
         }
         let tiles = DailyBrief.completing(base, appCaptions: captions,
                                           empty: wanted(input: input, settings: model.settings))
-        return withWeekSchedule(tiles)
+        return DailyBrief.inDefaultOrder(withWeekSchedule(tiles))
     }
 
     /// The week's schedule shows for everyone, Planning chosen at the start or not (PDG, 2026-11-16): without
-    /// anything planned, the Planning card is the week table itself (not a dotted invitation), right after
-    /// the meals and the session. Removed by the person, it stays off (`DailyBrief.arranged`).
+    /// anything planned, the Planning card is the week table itself (not a dotted invitation). Always exactly one
+    /// Planning card (an empty one is replaced); its place is the default order's. Removed by the person, it
+    /// stays off (`DailyBrief.arranged`).
     static func withWeekSchedule(_ tiles: [DailyBrief.Tile]) -> [DailyBrief.Tile] {
         var tiles = tiles.filter { tile in
             if case .empty(.planning) = tile { return false }
@@ -90,12 +91,15 @@ enum DailyCategories {
         return MiniApp(rawValue: entry).flatMap { DailyBrief.Category(app: $0) }
     }
 
-    /// The categories shown even without data: the interests chosen in the first form (no cap)
-    /// and the categories added by hand, in the default order. A category the
+    /// The categories shown even without data: the five of every account (`DailyDefaults.alwaysPresent`), the
+    /// interests chosen in the first form (no cap) and the categories added by hand, in the default order. A category the
     /// person removed is left out of the display later (`DailyBrief.arranged`), whatever it holds.
     static func wanted(input: DailyBrief.Input, settings: AppSettings) -> [DailyBrief.Category] {
         var chosen = Set(input.interests.compactMap(DailyBrief.Category.init(space:)))
         chosen.formUnion(added(settings))
+        // Present for everyone, even empty (PDG, 2026-11-17); the classes of a student make Études a card too.
+        chosen.formUnion(DailyDefaults.alwaysPresent)
+        if !input.student.courses.isEmpty { chosen.insert(.studies) }
         return DailyBrief.Category.defaultOrder.filter(chosen.contains)
     }
 

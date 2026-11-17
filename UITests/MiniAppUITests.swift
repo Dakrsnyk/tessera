@@ -241,7 +241,8 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(element(containing: "Rappeler Léa").waitForExistence(timeout: 8), "La tâche du jour doit apparaître dans la journée")
         snapshot("planning-task-added")
 
-        for (identifier, title) in [("planning-tasks", "Tâches"), ("planning-week", "Semaine"), ("planning-habits", "Habitudes")] {
+        // The week, the month and the schedule have no row any more (Études is its own mini-app).
+        for (identifier, title) in [("planning-tasks", "Tâches"), ("planning-habits", "Habitudes")] {
             tap(app.buttons[identifier], title)
             XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
             snapshot(identifier)
@@ -249,6 +250,21 @@ final class MiniAppUITests: XCTestCase {
             XCTAssertTrue(app.otherElements["planning-today"].waitForExistence(timeout: 8), "Retour depuis \(title)")
         }
         XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    /// Under « Tâches » only « Projets » and « Habitudes » remain (2026-11-17): the four rows of the studies, the week
+    /// and the month left Planning. « Importer mon horaire » stays.
+    func testPlanningKeepsOnlyProjectsAndHabitsUnderTasks() {
+        launch(["-screenshotScreen", "app-planning"])
+        XCTAssertTrue(app.otherElements["planning-today"].waitForExistence(timeout: 12), "Mini-app Planning absente")
+        reveal(app.buttons["planning-tasks"], "Compteurs de tâches")
+        XCTAssertTrue(element(containing: "Projets").exists, "La ligne « Projets » manque sous « Tâches »")
+        reveal(app.buttons["planning-habits"], "Habitudes")
+        snapshot("planning-projects-habits")
+        for removed in ["planning-schedule", "planning-studies", "planning-week", "planning-month"] {
+            XCTAssertFalse(app.descendants(matching: .any)[removed].exists, "« \(removed) » ne devrait plus exister dans Planning")
+        }
+        XCTAssertTrue(app.buttons["planning-import-schedule"].exists, "« Importer mon horaire » doit rester dans Planning")
     }
 
     // MARK: Studies
@@ -297,6 +313,61 @@ final class MiniAppUITests: XCTestCase {
         goBack()
         XCTAssertTrue(timer.waitForExistence(timeout: 8))
         XCTAssertEqual(app.state, .runningForeground)
+    }
+
+    /// The Études mini-app (its own mini-app since 2026-11-17): its sections, then a course added by hand, and the
+    /// same name added a second time which completes the course instead of making a second one.
+    func testStudiesShowsItsSectionsAndAddsACourseOnlyOnce() {
+        launch(["-screenshotScreen", "app-studies"])
+        XCTAssertTrue(app.staticTexts["Mes cours"].waitForExistence(timeout: 12), "Mini-app Études absente")
+        for section in ["Mes cours", "Mes examens", "Concentration"] {
+            XCTAssertTrue(app.staticTexts[section].waitForExistence(timeout: 5), "Section « \(section) » absente d'Études")
+        }
+        reveal(app.staticTexts["Mes cours"], "Section Mes cours")
+        snapshot("studies-sections")
+
+        let name = "Zoologie"
+        let rows = app.buttons.matching(identifier: "course-row")
+        let named = rows.matching(NSPredicate(format: "label CONTAINS %@", name))
+        let total = rows.count
+        XCTAssertEqual(named.count, 0, "Le cours « \(name) » existe déjà avant le test")
+
+        func addCourse(named text: String) {
+            tap(app.buttons["studies-add-course"], "Ajouter un cours")
+            let field = app.textFields["Nom du cours"]
+            XCTAssertTrue(field.waitForExistence(timeout: 8), "Formulaire de cours absent")
+            field.tap()
+            field.typeText(text)
+        }
+
+        addCourse(named: name)
+        saveButton.tap()
+        let added = expectation(for: NSPredicate(format: "count == 1"), evaluatedWith: named)
+        XCTAssertEqual(XCTWaiter().wait(for: [added], timeout: 8), .completed, "Le cours ajouté doit apparaître dans « Mes cours »")
+        XCTAssertEqual(rows.count, total + 1)
+        snapshot("studies-course-added")
+
+        // Same name again: the form says so, and saving completes the course already there.
+        addCourse(named: name)
+        XCTAssertTrue(app.descendants(matching: .any)["course-duplicate-note"].waitForExistence(timeout: 5), "Le formulaire doit signaler le doublon")
+        snapshot("studies-course-duplicate")
+        saveButton.tap()
+        XCTAssertTrue(app.buttons["studies-add-course"].waitForExistence(timeout: 8), "Retour à « Mes cours »")
+        Thread.sleep(forTimeInterval: 1.0)
+        XCTAssertEqual(named.count, 1, "Le même nom ne doit pas créer un second cours")
+        XCTAssertEqual(rows.count, total + 1, "Le nombre de cours a changé après le doublon")
+
+        // Clean-up (best effort): the course goes, so the next tests of the run see the demo courses as before.
+        let menus = app.buttons.matching(identifier: "course-row-menu")
+        if menus.count == total + 1 {
+            menus.element(boundBy: total).tap()
+            let delete = app.buttons["Supprimer le cours"].firstMatch
+            if delete.waitForExistence(timeout: 5) {
+                delete.tap()
+                let confirm = app.buttons["Supprimer le cours"].firstMatch
+                if confirm.waitForExistence(timeout: 5) { confirm.tap() }
+            }
+        }
     }
 
     // MARK: Finances

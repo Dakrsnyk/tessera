@@ -287,9 +287,9 @@ private struct CreateSizePage: View {
                 VStack(spacing: 10) {
                     ForEach(WidgetFormat.allCases) { format in
                         SizeCard(format: format) { onSize(format) }
+                            .tutorialTarget(.createSpace, radius: 24, when: format == WidgetFormat.allCases.first)
                     }
                 }
-                .tutorialTarget(.createSpace)
                 Button {
                     Haptics.tap()
                     onLockScreen()

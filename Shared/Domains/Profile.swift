@@ -20,11 +20,21 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .budget: tr("Budget")
         case .business: tr("Business")
         case .studies: tr("Études")
-        case .productivity: tr("Productivité")
+        // « Planning » since 2026-11-17 (the saved value stays `productivity`).
+        case .productivity: tr("Planning")
         case .travel: tr("Voyage")
         case .car: tr("Automobile")
         case .design: tr("Design")
         case .wellbeing: tr("Bien-être")
+        }
+    }
+
+    /// A few words under the title in the grid of interests, for the two that overlap.
+    var hint: String? {
+        switch self {
+        case .studies: tr("cours, examens, révisions, concentration")
+        case .productivity: tr("semaine, rendez-vous, événements")
+        default: nil
         }
     }
 
@@ -122,7 +132,7 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
         case .nutrition: tr("Nutrition")
         case .money: tr("Finances")
         case .business: tr("Business")
-        case .productivity: tr("Productivité")
+        case .productivity: tr("Planning")
         case .studies: tr("Études")
         case .car: tr("Automobile")
         case .wellbeing: tr("Bien-être")
@@ -170,8 +180,11 @@ enum ProfileTopic: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+/// The one goal of the person, shared by Sport and Nutrition (`UserProfile.goal`). The saved values never
+/// change name: `muscleGain` and `recomposition` came after the others.
 enum FitnessGoal: String, Codable, CaseIterable, Identifiable {
     case bulk, weightLoss, cut, performance, maintain, strength, endurance
+    case muscleGain, recomposition
     var id: String { rawValue }
 
     var title: String {
@@ -183,15 +196,43 @@ enum FitnessGoal: String, Codable, CaseIterable, Identifiable {
         case .maintain: tr("Maintien")
         case .strength: tr("Force")
         case .endurance: tr("Endurance")
+        case .muscleGain: tr("Prise de muscle")
+        case .recomposition: tr("Recomposition corporelle")
         }
     }
 
-    /// The nutrition aim that goes with it, suggested when both are asked.
+    /// The order of the list shown in Sport and in Nutrition (the same one): lose, keep, build, perform.
+    static let displayOrder: [FitnessGoal] = [.weightLoss, .cut, .maintain, .recomposition, .muscleGain, .bulk, .strength, .performance, .endurance]
+
+    /// The coarse aim that goes with it (loss, maintaining, gain): what the weight goal and the older
+    /// `UserProfile.nutritionAim` speak of.
     var nutritionAim: NutritionAim {
         switch self {
-        case .bulk, .strength: .gain
+        case .bulk, .strength, .muscleGain: .gain
         case .weightLoss, .cut: .lose
-        case .performance, .maintain, .endurance: .maintain
+        case .performance, .maintain, .endurance, .recomposition: .maintain
+        }
+    }
+
+    /// How the daily needs are calculated for it (`NutritionCalculator.Goal`).
+    var calculatorGoal: NutritionCalculator.Goal {
+        switch self {
+        case .weightLoss: .lose
+        case .cut: .cut
+        case .maintain: .maintain
+        case .recomposition: .recomposition
+        case .muscleGain, .strength: .gain
+        case .bulk: .massGain
+        case .performance, .endurance: .performance
+        }
+    }
+
+    /// The goal an older account's `nutritionAim` stood for.
+    static func from(_ aim: NutritionAim) -> FitnessGoal {
+        switch aim {
+        case .lose: .weightLoss
+        case .maintain: .maintain
+        case .gain: .muscleGain
         }
     }
 }
@@ -284,13 +325,20 @@ struct UserProfile: Codable, Hashable {
     var calculationSex: NutritionCalculator.Sex?
 
     // Sport (the workouts per week are `FitnessState.weeklyGoal`).
+    /// The goal, shared by Sport and Nutrition (read it through `goal`, which also takes an older account's
+    /// `nutritionAim` into account).
     var fitnessGoal: FitnessGoal?
     var fitnessLevel: FitnessLevel?
     /// Steps a day, for « Mon Quotidien » (the steps come from the iPhone's motion sensor).
     var stepGoal: Int?
 
     // Nutrition (the daily targets are `NutritionState.goals`).
+    /// Older versions kept the nutrition aim here, apart from the sport goal. Still read (see `goal`), and
+    /// now written along with the goal as the aim that goes with it, so it never contradicts it.
     var nutritionAim: NutritionAim?
+    /// The goal the daily targets were last calculated or reviewed for. When the goal changes while some
+    /// targets are the person's own, Nutrition proposes the new calculation instead of applying it.
+    var targetsGoal: FitnessGoal?
     /// The activity level chosen for the calculation (older versions: set by « Calculer pour moi »).
     var calculatedActivity: NutritionCalculator.Activity?
     /// Whether the daily targets follow the calculation (body, aim, activity). Nil: decided by what an
@@ -329,7 +377,7 @@ struct UserProfile: Codable, Hashable {
         case fitnessGoal, fitnessLevel, stepGoal
         case nutritionAim, calculatedActivity, nutritionAuto, customTargets, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
         case businessClients, studyField, weeklyStudyHours, provided, migrated
-        case weightPlan, lifeStage
+        case weightPlan, lifeStage, targetsGoal
     }
 
     init() {}
@@ -366,6 +414,39 @@ struct UserProfile: Codable, Hashable {
         migrated = c.value(.migrated, false)
         weightPlan = c.optional(.weightPlan)
         lifeStage = c.optional(.lifeStage)
+        targetsGoal = c.optional(.targetsGoal)
+    }
+
+    /// The one goal of the person, for Sport and Nutrition. An account that has only one of the two older
+    /// fields keeps it; both agreeing: the sport goal (more precise); both contradicting: the nutrition aim,
+    /// as the calculation always read it, until the person chooses their goal again.
+    var goal: FitnessGoal? {
+        switch (fitnessGoal, nutritionAim) {
+        case (nil, nil): nil
+        case let (goal?, nil): goal
+        case let (nil, aim?): FitnessGoal.from(aim)
+        case let (goal?, aim?): goal.nutritionAim == aim ? goal : FitnessGoal.from(aim)
+        }
+    }
+
+    /// The loss, maintaining or gain of the goal (what the weight goal and the safety rules read).
+    var aim: NutritionAim? { goal?.nutritionAim }
+
+    /// The calculation whose protein a plan of this aim uses: the real goal (sèche 2,2 g/kg, prise de masse…)
+    /// when it goes the same way as the plan, else the plain loss, maintaining or gain.
+    func macroGoal(for aim: NutritionAim) -> NutritionCalculator.Goal {
+        if let goal, goal.nutritionAim == aim { return goal.calculatorGoal }
+        return aim.calculatorGoal
+    }
+
+    /// Whether « enceinte ou allaitante ? » is asked: for any goal of loss or gain, wherever it was chosen
+    /// (Sport or Nutrition), and not of a man.
+    var asksLifeStage: Bool { (aim == .lose || aim == .gain) && sex != .male }
+
+    /// Chooses the goal for both Sport and Nutrition (nil takes it back); the older aim follows it.
+    mutating func setGoal(_ goal: FitnessGoal?) {
+        fitnessGoal = goal
+        nutritionAim = goal?.nutritionAim
     }
 
     /// Under 18, from the birthday (exact) or the birth year (one year is taken off the age, which can be

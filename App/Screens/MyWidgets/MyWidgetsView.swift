@@ -85,6 +85,7 @@ struct MyWidgetsView: View {
                     }
                 }
                 .id("top")
+                .tutorialScroll(step: router.tutorialStep, tab: .mine)
             }
             .onChange(of: fusionRun?.isDone) { _, done in
                 if done == true { withAnimation(.easeInOut(duration: 0.3)) { proxy.scrollTo("top", anchor: .top) } }

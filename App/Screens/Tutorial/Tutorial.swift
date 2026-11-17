@@ -5,29 +5,34 @@ import SwiftUI
 /// through the app itself, tab by tab, lighting up what each step talks about. Every step can be
 /// skipped, and the tour can be left at any time.
 enum TutorialStep: String, CaseIterable, Identifiable {
-    case welcome, daily, info, create, studio, store, mine, homeScreen, finish
+    // The order of the cases is the order of the tour. « info » keeps its old name for the slide about the
+    // information shared by Fitness and Nutrition (the screenshots open « tutorial-<name> »).
+    case welcome, daily, planning, studies, info, create, studio, store, mine, homeScreen, finish
     var id: String { rawValue }
 
     /// The tab shown behind the step.
     var tab: Router.Tab {
         switch self {
-        case .welcome, .daily, .info, .finish: .home
+        case .welcome, .daily, .planning, .studies, .info, .finish: .home
         case .create, .studio: .spaces
         case .store: .explore
         case .mine, .homeScreen: .mine
         }
     }
 
-    /// What the step lights up on screen, if anything.
-    var target: TutorialTarget? {
+    /// What the step can light up, by preference: each entry is one part or several that are lit together (their
+    /// union). The first entry that fits whole on screen wins; when none fits (or none is on screen), nothing is lit
+    /// and the card sits in the middle. A part that is too tall is thus replaced by a smaller one.
+    var targets: [[TutorialTarget]] {
         switch self {
-        case .daily: .daily
-        case .info: .info
-        case .create: .createSpace
-        case .store: .storeHero
-        case .mine: .myWidgets
-        case .finish: .profile
-        case .welcome, .studio, .homeScreen: nil
+        case .daily: [[.daily], [.dailyHeader, .dailyNutrition, .dailyFitness], [.dailyHeader, .dailyNutrition], [.dailyHeader]]
+        case .planning: [[.dailyPlanning]]
+        case .info: [[.dailyNutrition, .dailyFitness], [.dailyFitness], [.dailyNutrition], [.info]]
+        case .create: [[.createSpace]]
+        case .store: [[.storeHero]]
+        case .mine: [[.myWidgets]]
+        case .finish: [[.profile]]
+        case .welcome, .studies, .studio, .homeScreen: []
         }
     }
 
@@ -35,6 +40,8 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         switch self {
         case .welcome: "hand.wave.fill"
         case .daily: "sun.max.fill"
+        case .planning: "calendar"
+        case .studies: "graduationcap.fill"
         case .info: "person.text.rectangle.fill"
         case .create: "plus.square.on.square"
         case .studio: "paintbrush.pointed.fill"
@@ -45,11 +52,14 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         }
     }
 
-    /// Where the step is, in the app's words (the tab, or the Studio).
-    var place: String {
+    /// Where the step is, in the app's words (the tab, or the Studio). The first name arrives here, on « Mon Quotidien »,
+    /// beside the slide's icon: « Bonjour Mathys » (just « Bonjour » when it isn't known).
+    func place(name: String) -> String {
         switch self {
         case .welcome, .finish: tr("Ardane")
-        case .daily, .info: tr("Accueil")
+        case .daily: name.isEmpty ? tr("Bonjour") : tr("Bonjour \(name)")
+        case .planning, .info: tr("Accueil")
+        case .studies: tr("Études")
         case .create: tr("Créer")
         case .studio: tr("Studio")
         case .store: tr("Store")
@@ -58,11 +68,13 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         }
     }
 
-    func title(name: String) -> String {
+    var title: String {
         switch self {
-        case .welcome: name.isEmpty ? tr("Bienvenue !") : tr("Bienvenue, \(name) !")
+        case .welcome: tr("Bienvenue !")
         case .daily: tr("Mon Quotidien")
-        case .info: tr("Mes informations")
+        case .planning: tr("Ton planning")
+        case .studies: tr("Études")
+        case .info: tr("Un objectif pour deux")
         case .create: tr("Créer un widget")
         case .studio: tr("Le Studio")
         case .store: tr("Le Store")
@@ -77,9 +89,13 @@ enum TutorialStep: String, CaseIterable, Identifiable {
         case .welcome:
             tr("Un petit tour d'Ardane : ta journée, tes mini-apps, tes widgets et le Studio. Passe une étape ou quitte le tutoriel quand tu veux.")
         case .daily:
-            tr("Ta journée en un coup d'œil : repas, séance, habitudes, budget… selon tes centres d'intérêt. Touche une carte pour ouvrir sa mini-app, ou « + » pour en ajouter.")
+            tr("Nutrition, Fitness, Planning, Habitudes et Top 3 passent d'abord ; tes autres centres d'intérêt suivent, en plus petit. Un appui long sur une carte la déplace ou change sa taille.")
+        case .planning:
+            tr("Ta semaine d'un coup d'œil : ton planning hebdomadaire, tes rendez-vous, tes événements et tes horaires. Il est là pour tout le monde.")
+        case .studies:
+            tr("Une mini-app à part pour tes cours, tes examens et tes sessions de concentration. Avec Premium, le scanner d'horaires lit une photo ou un PDF de ton horaire : tu vérifies, et les cours s'ajoutent.")
         case .info:
-            tr("Tes réponses du début, modifiables à tout moment. Données une fois, elles servent à toutes tes mini-apps, à tes widgets et à Mon Quotidien.")
+            tr("Tu donnes ton objectif et tes informations une seule fois : Fitness et Nutrition les partagent. L'objectif de Fitness sert aussi à Nutrition pour tes calories.")
         case .create:
             tr("Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.")
         case .studio:
@@ -107,6 +123,8 @@ enum TutorialStep: String, CaseIterable, Identifiable {
 /// Parts of the app the tour lights up. Each reports where it is on screen (`tutorialTarget`).
 enum TutorialTarget: String {
     case daily, miniApps, info, createSpace, storeHero, myWidgets, profile
+    /// Inside Mon Quotidien: its title row and the Nutrition, Fitness and Planning cards.
+    case dailyHeader, dailyNutrition, dailyFitness, dailyPlanning
 }
 
 /// Where each lit-up part is, in window coordinates. Shared by the tabs (each in its own navigation)
@@ -116,8 +134,26 @@ final class TutorialFrames {
     static let shared = TutorialFrames()
 
     private(set) var frames: [TutorialTarget: CGRect] = [:]
+    /// The corner radius of each part, so the outline follows the part's own corners.
+    private(set) var radii: [TutorialTarget: CGFloat] = [:]
+    /// Height of the card, written by the overlay, read by the scrolling (not observed).
+    @ObservationIgnored var cardHeight: CGFloat = 260
 
-    func update(_ target: TutorialTarget, _ frame: CGRect) {
+    /// The part, or the union of several parts lit together; nil as long as one of them isn't on screen yet.
+    func candidate(for group: [TutorialTarget]) -> TutorialLayout.Candidate? {
+        guard !group.isEmpty else { return nil }
+        var union: CGRect?
+        var radius: CGFloat = 0
+        for target in group {
+            guard let frame = frames[target], !frame.isEmpty else { return nil }
+            union = union.map { $0.union(frame) } ?? frame
+            radius = max(radius, radii[target] ?? TutorialLayout.defaultRadius)
+        }
+        return union.map { TutorialLayout.Candidate(frame: $0, radius: radius) }
+    }
+
+    func update(_ target: TutorialTarget, _ frame: CGRect, radius: CGFloat = TutorialLayout.defaultRadius) {
+        if radii[target] != radius { radii[target] = radius }
         if let old = frames[target], abs(old.minX - frame.minX) < 0.5, abs(old.minY - frame.minY) < 0.5,
            abs(old.width - frame.width) < 0.5, abs(old.height - frame.height) < 0.5 {
             return
@@ -128,9 +164,10 @@ final class TutorialFrames {
 
 extension View {
     /// Marks a part of the app the tutorial can light up (only while `condition` holds: the first of a list).
-    func tutorialTarget(_ target: TutorialTarget, when condition: Bool = true) -> some View {
+    /// `radius` is the part's own corner radius: the outline follows it.
+    func tutorialTarget(_ target: TutorialTarget, radius: CGFloat = TutorialLayout.defaultRadius, when condition: Bool = true) -> some View {
         onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { frame in
-            if condition { TutorialFrames.shared.update(target, frame) }
+            if condition { TutorialFrames.shared.update(target, frame, radius: radius) }
         }
     }
 }

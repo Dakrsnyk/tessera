@@ -147,6 +147,9 @@ enum WeightPlanCalculator {
         /// Days from `now` to the target date.
         var days: Int = 0
         var now: Date = Date()
+        /// The calculation behind the macronutrients (nil: the plain one of `aim`). Filled from the profile's
+        /// real goal so the plan shows the same protein as the targets applied (sèche: 2,2 g/kg).
+        var calculatorGoal: NutritionCalculator.Goal? = nil
     }
 
     /// A computed plan: all the numbers the recap shows.
@@ -220,7 +223,8 @@ enum WeightPlanCalculator {
               activity: profile.calculatedActivity ?? .sedentary,
               // Never asked (nil) = not declared: no loss or gain is calculated, as for « préfère ne pas répondre ».
               lifeStage: profile.lifeStage ?? .preferNotToSay,
-              aim: aim, targetKg: targetKg, days: days, now: now)
+              aim: aim, targetKg: targetKg, days: days, now: now,
+              calculatorGoal: profile.macroGoal(for: aim))
     }
 
     /// Days between `now` and a target date (can be zero or negative).
@@ -238,7 +242,7 @@ enum WeightPlanCalculator {
             return .referToProfessional(reason: missingDataReason)
         }
         let steps = NutritionCalculator.breakdown(sex: sex, age: age, heightCm: height, weightKg: weight,
-                                                  activity: input.activity, goal: input.aim.calculatorGoal)
+                                                  activity: input.activity, goal: input.calculatorGoal ?? input.aim.calculatorGoal)
         let resting = steps.restingKcal
         let expenditure = steps.dailyKcal
         let floor = minimumKcal(sex: sex, restingKcal: resting)
@@ -357,7 +361,7 @@ enum WeightPlanCalculator {
 
         func goals(kcal: Double) -> NutritionGoals {
             NutritionCalculator.goals(sex: sex, age: age, heightCm: heightCm, weightKg: weightKg,
-                                      activity: input.activity, goal: input.aim.calculatorGoal, kcal: kcal)
+                                      activity: input.activity, goal: input.calculatorGoal ?? input.aim.calculatorGoal, kcal: kcal)
         }
 
         static func date(afterDays days: Int, from now: Date) -> Date {
@@ -552,7 +556,7 @@ enum WeightPlanCalculator {
     private static func macros(for plan: Plan, kcal: Double, profile: UserProfile, weightKg: Double, birthday: Date?, now: Date) -> NutritionGoals {
         NutritionCalculator.goals(sex: profile.calculatorSex ?? .neutral, age: profile.age(birthday: birthday, now: now) ?? 30,
                                   heightCm: profile.heightCm ?? 170, weightKg: weightKg,
-                                  activity: profile.calculatedActivity ?? .sedentary, goal: plan.aim.calculatorGoal, kcal: kcal)
+                                  activity: profile.calculatedActivity ?? .sedentary, goal: profile.macroGoal(for: plan.aim), kcal: kcal)
     }
 
     // MARK: Texts (keys for tr, in French)

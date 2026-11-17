@@ -19,6 +19,8 @@ struct NutritionTargetsCard: View {
         let recommended = model.recommendedNutritionGoals()
         let followsPlan = auto && model.activeWeightPlan?.acceptedKcal != nil
         VStack(spacing: 12) {
+        // The goal changed while some targets are the person's own: the new calculation is proposed, never applied alone.
+        GoalChangeProposalCard()
         // An adjustment the weigh-ins call for: proposed, never applied without a touch.
         WeightPlanAdjustmentCard()
         QuestionCard(title: tr("Tes besoins par jour"), detail: auto
@@ -214,11 +216,15 @@ struct NutritionTargetsCard: View {
             if adjustment != 0 {
                 let change = adjustment > 0 ? "+\(adjustment)" : "−\(abs(adjustment))"
                 parts.append(tr("Ton objectif « \(model.nutritionGoal.title) » : \(change) %."))
+                if model.nutritionGoal == .massGain {
+                    parts.append(tr("Le surplus d'une prise de masse ne dépasse pas 500 kcal par jour."))
+                }
             }
             parts.append(tr("Protéines : \(TF.decimal(steps.proteinPerKg, 1)) g par kg de poids. Lipides : 28 % des calories. Glucides : le reste."))
         } else {
             parts.append(tr("Calories : formule de Mifflin-St Jeor (âge, taille, poids, genre) × ton niveau d'activité, ajustée selon ton objectif (−15 % pour perdre, +10 % pour prendre du muscle)."))
         }
+        parts.append(tr("Ces chiffres sont des estimations de départ, pas une prescription : ajuste-les selon ce que tu observes."))
         parts.append(tr("Fibres : 14 g par 1 000 kcal. Sucres et gras saturés : moins de 10 % des calories chacun (OMS). Sodium : moins de 2 300 mg."))
         parts.append(tr("Minéraux et vitamines : apports de référence pour les adultes (National Academies), selon ton âge et ton genre."))
         parts.append(tr("Gras trans : moins de 1 % des calories (OMS). Caféine : 400 mg au plus (Santé Canada). Oméga-3 et oméga-6 : apports suffisants (National Academies)."))
@@ -239,6 +245,37 @@ struct NutritionTargetsCard: View {
     static func list(_ items: [String]) -> String {
         guard items.count > 1, let last = items.last else { return items.first ?? "" }
         return tr("\(items.dropLast().joined(separator: ", ")) et \(last)")
+    }
+}
+
+/// After a change of goal, when some targets are the person's own: the new calculation, with a button to use it.
+/// Nothing is written until the person touches it (« Garder mes valeurs » only sets the proposal aside).
+private struct GoalChangeProposalCard: View {
+    @Environment(AppModel.self) private var model
+
+    var body: some View {
+        if let fresh = model.goalChangeProposal {
+            VStack(alignment: .leading, spacing: 10) {
+                Label(tr("Nouveau calcul proposé"), systemImage: "arrow.triangle.2.circlepath")
+                    .font(.headline)
+                    .accessibilityAddTraits(.isHeader)
+                Text(tr("Ton objectif a changé : calcul recommandé \(TF.int(fresh.kcal)) kcal et \(TF.int(fresh.protein)) g de protéines (estimation). Tes valeurs restent telles quelles tant que tu ne l'utilises pas."))
+                    .font(.subheadline)
+                    .fixedSize(horizontal: false, vertical: true)
+                HStack(spacing: 8) {
+                    Button(tr("Utiliser ce calcul")) { model.useGoalChangeProposal() }
+                        .buttonStyle(.borderedProminent)
+                        .accessibilityIdentifier("goal-change-use")
+                    Button(tr("Garder mes valeurs")) { model.keepNutritionTargets() }
+                        .buttonStyle(.bordered)
+                        .accessibilityIdentifier("goal-change-keep")
+                }
+                .frame(minHeight: 44)
+            }
+            .card(padding: 14)
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("goal-change-proposal")
+        }
     }
 }
 

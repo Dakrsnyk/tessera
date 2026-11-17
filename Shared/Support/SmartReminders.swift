@@ -169,8 +169,13 @@ enum NotificationRoute {
                 return .space(Space.habits.rawValue)
             case .sessionsLeft, .steps, .nextSession, .fitnessWeek, .legacyWorkout, .weightProgress, .goalsWeek, .weekStart:
                 return .space(Space.fitness.rawValue)
-            case .classSoon, .eventTomorrow, .busyTomorrow:
-                return .space(Space.student.rawValue)
+            // The general schedule (a class soon, appointments, a busy day) opens Planning; an exam tomorrow
+            // (« …<kind>.<day>.<exam id> », the appointments carry « agenda ») opens Études.
+            case .classSoon, .busyTomorrow:
+                return .space(Space.productivity.rawValue)
+            case .eventTomorrow:
+                let suffix = rest.split(separator: ".").dropFirst(2).first.map(String.init) ?? ""
+                return .space((UUID(uuidString: suffix) != nil ? Space.student : Space.productivity).rawValue)
             case .tasksLeft:
                 return .tasks
             case .legacyBill:

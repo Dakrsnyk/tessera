@@ -169,6 +169,11 @@ enum WidgetLinks {
         default:
             break
         }
+        // The week's schedule (the timetable, the next class) belongs to Planning; the other student widgets
+        // (exams, homework, average, session, cards, study hours) open Études, the student space's mini-app.
+        if design.kind == .timetable || design.kind == .nextClass {
+            return DeepLink.space(Space.productivity.rawValue).url
+        }
         // Mini-app widgets open their space, where the data behind them is entered.
         if let space = design.kind.space {
             return DeepLink.space(space.rawValue).url

@@ -2,9 +2,9 @@ import SwiftUI
 
 /// « Mon Quotidien » arranged by hand, from Home: the order of the cards (drag), their size (half or
 /// full width) and which ones show. Every change is saved at once; « Disposition automatique » gives
-/// the order back to Ardane (what matters at this moment of the day first).
+/// the order back to Ardane (the default order: Nutrition, Fitness, Planning, Habitudes, Top 3, then the others).
 struct DailyLayoutEditor: View {
-    /// Every card of Home, with data or empty (a dotted « Ajouter » card), in the automatic order.
+    /// Every card of Home, with data or empty (a dotted « Ajouter » card), in the default order.
     let available: [DailyBrief.Tile]
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -91,7 +91,7 @@ struct DailyLayoutEditor: View {
                     }
                     .disabled(isAutomatic)
                 } footer: {
-                    Text(tr("Automatique : Ardane met d'abord ce qui compte maintenant (repas, séance du jour, cours…), selon ce que tu as renseigné."))
+                    Text(tr("Automatique : Nutrition, Fitness, Planning, Habitudes et Top 3, puis tes autres cartes en demi-largeur. Ce que tu as retiré ou ajouté reste tel quel."))
                 }
             }
             .styledList()

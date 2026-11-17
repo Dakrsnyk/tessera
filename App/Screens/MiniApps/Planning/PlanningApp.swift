@@ -4,8 +4,8 @@ import SwiftUI
 /// date selector, `day` is the truth of the screen) and a line about the chosen day. On the sheet: first the
 /// week of the planning as a table right under the selector, whose columns fall under its days (a day, the
 /// month or the year instead with the scale picker or a pinch; a touch on a free time creates an event there),
-/// then the three priorities, the task counters, the schedule, the studies, the projects, the habits and
-/// focus, and « Mes infos » last. The new-task action floats above the tab bar.
+/// then the three priorities, the task counters, the projects and the habits, and « Mes infos » last (the
+/// studies and the focus are in the Études mini-app). The new-task action floats above the tab bar.
 struct PlanningAppView: View {
     @Environment(AppModel.self) private var model
     @State private var events: [EventSnapshot] = []
@@ -102,34 +102,8 @@ struct PlanningAppView: View {
 
             // 4. The other categories.
             MiniRowsCard {
-                // The week's schedule (classes, work, appointments, other events) and the studies.
-                NavigationLink(value: HomeRoute.page(.studiesTimetable)) {
-                    MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Horaire de la semaine"),
-                            detail: tr("Cours, travail, rendez-vous et autres événements"),
-                            value: model.student.slots.isEmpty ? nil : "\(model.student.slots.count)")
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("planning-schedule")
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.studiesHome)) {
-                    MiniRow(symbol: "graduationcap.fill", colorHex: ScheduleKind.course.colorHex, title: tr("Études"),
-                            detail: tr("Cours, examens, devoirs, notes et fiches"))
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("planning-studies")
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.planningWeek)) {
-                    MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Semaine"), detail: tr("Tout ce qui t'attend, jour par jour"))
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("planning-week")
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.planningMonth)) {
-                    MiniRow(symbol: "calendar", colorHex: accentHex, title: tr("Mois"), detail: tr("Le calendrier du mois"))
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("planning-month")
-                MiniDivider()
+                // Projects and habits. The studies are their own mini-app (Études); the week, the month and
+                // the focus pages stay reachable (captures, Études) but have no row here.
                 NavigationLink(value: HomeRoute.page(.planningProjects)) {
                     MiniRow(symbol: "folder.fill", colorHex: accentHex, title: tr("Projets"), detail: tr("Tâches regroupées par projet"),
                             value: model.productivity.projects.isEmpty ? nil : "\(model.productivity.projects.count)")
@@ -142,12 +116,6 @@ struct PlanningAppView: View {
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("planning-habits")
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.planningFocus)) {
-                    MiniRow(symbol: "timer", colorHex: "8C6CFF", title: tr("Concentration"),
-                            detail: tr("\(TF.int(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60)) h sur \(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine"))
-                }
-                .buttonStyle(.pressable)
             }
             // 5. Last: « Mes infos ».
             MiniAppInfoSection(app: .planning)

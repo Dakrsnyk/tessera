@@ -76,34 +76,52 @@ enum Studies {
     }
 }
 
-/// The Studies mini-app: the class now or next, homework to hand in, exams coming, the average and
-/// the study time; then the timetable, the courses, the grades and revision one tap away.
+/// The Études mini-app (its own mini-app since 2026-11-17, apart from Planning). Header: the class now or
+/// next and the figures (average, study time, cards). Sheet, top to bottom: « Mes cours » (every course, one
+/// under the other), « Mes examens » (with the homework coming), « Concentration » and « Organisation
+/// étudiante » (study timer, timetable, homework, grades, revision, import of a timetable), « Mes paramètres » last.
 struct StudiesAppView: View {
     @Environment(AppModel.self) private var model
     @State private var sheet: StudiesSheet?
+    /// The sheet that reads a photo or a PDF of the timetable (the courses it finds join « Mes cours »).
+    @State private var importingSchedule = false
+    /// The course a menu asked to delete, until confirmed.
+    @State private var deletingCourse: Course?
     @Environment(\.appStyle) private var style
 
-    private var accentHex: String { Studies.accentHex }
+    private var accentHex: String { MiniApp.studies.colorHex }
 
     var body: some View {
         let now = Date()
         let state = model.student
-        MiniAppScroll {
+        MiniAppScaffold(colorHex: accentHex) {
             if state.courses.isEmpty && state.exams.isEmpty && state.assignments.isEmpty {
                 start
             } else {
                 NextClassCard(state: state, now: now)
                 stats(state: state, now: now)
-                StudyTimerCard()
-                homework(state: state, now: now)
-                exams(state: state, now: now)
-                semester(state: state, now: now)
             }
-            more(state: state, now: now)
+        } sheet: {
+            MiniAppToFillSection(app: .studies)
+            courses(state: state, now: now)
+            exams(state: state, now: now)
+            concentration(now: now)
+            organisation(state: state, now: now)
+            MiniAppInfoSection(app: .studies)
         }
         .navigationTitle(tr("Études"))
-        .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
+        .sheet(isPresented: $importingSchedule) { ScheduleImportView() }
+        // `presenting:` hands the course to the button: the dialog may clear `deletingCourse` before the action runs.
+        .confirmationDialog(tr("Supprimer ce cours ?"), isPresented: Binding(get: { deletingCourse != nil }, set: { if !$0 { deletingCourse = nil } }),
+                            titleVisibility: .visible, presenting: deletingCourse) { course in
+            Button(tr("Supprimer le cours"), role: .destructive) {
+                model.update(\.student) { $0.deleteCourse(course.id) }
+                deletingCourse = nil
+            }
+        } message: { _ in
+            Text(tr("Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours."))
+        }
     }
 
     // MARK: Empty
@@ -119,10 +137,6 @@ struct StudiesAppView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
-            MiniActionButton(title: tr("Ajouter un cours"), symbol: "plus", colorHex: accentHex) {
-                sheet = .course(Course(name: ""))
-            }
-            .accessibilityIdentifier("studies-add-course")
         }
         .card()
     }
@@ -153,64 +167,211 @@ struct StudiesAppView: View {
         }
     }
 
-    // MARK: Homework
+    // MARK: Courses
 
-    @ViewBuilder
-    private func homework(state: StudentState, now: Date) -> some View {
-        let open = StudentMath.openAssignments(state)
-        if !open.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("À rendre"), detail: Fmt.plural(open.count, tr("devoir"), tr("devoirs")))
-                VStack(spacing: 0) {
-                    ForEach(open.prefix(3)) { assignment in
-                        AssignmentRow(assignment: assignment, state: state, now: now) { sheet = .assignment(assignment) }
-                        Divider()
-                    }
-                    NavigationLink(value: HomeRoute.page(.studiesAssignments)) {
-                        HStack {
-                            Text(open.count > 3 ? tr("Voir les \(open.count) devoirs") : tr("Tous les devoirs"))
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(style.cristal.strong(accentHex))
-                            Spacer()
-                            Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(.tertiary)
+    /// 1. « Mes cours »: every course, one under the other (the ones read from a timetable are here too).
+    private func courses(state: StudentState, now: Date) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Mes cours"), detail: state.courses.isEmpty ? nil : "\(state.courses.count)")
+            MiniRowsCard {
+                ForEach(state.courses) { course in
+                    HStack(spacing: 4) {
+                        NavigationLink(value: HomeRoute.page(.studiesCourse(course.id))) {
+                            courseRow(course, state: state, now: now)
                         }
-                        .padding(.vertical, 12)
-                        .contentShape(Rectangle())
+                        .buttonStyle(.pressable)
+                        .accessibilityIdentifier("course-row")
+                        Menu {
+                            Button { sheet = .course(course) } label: { Label(tr("Modifier le cours"), systemImage: "pencil") }
+                            Button(role: .destructive) { deletingCourse = course } label: { Label(tr("Supprimer le cours"), systemImage: "trash") }
+                        } label: {
+                            Image(systemName: "ellipsis.circle")
+                                .font(.title3)
+                                .foregroundStyle(.secondary)
+                                .frame(width: 44, height: 44)
+                                .contentShape(Rectangle())
+                        }
+                        .accessibilityLabel(Text(tr("Modifier le cours")))
+                        .accessibilityIdentifier("course-row-menu")
+                    }
+                    MiniDivider()
+                }
+                Button { sheet = .course(Course(name: "")) } label: {
+                    MiniRow(symbol: "plus", colorHex: accentHex, title: tr("Ajouter un cours"), showsChevron: false)
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("studies-add-course")
+                if !state.courses.isEmpty {
+                    MiniDivider()
+                    NavigationLink(value: HomeRoute.page(.studiesCourses)) {
+                        MiniRow(symbol: "books.vertical.fill", colorHex: accentHex, title: tr("Cours"), detail: tr("Moyennes, horaire et devoirs par cours"),
+                                value: "\(state.courses.count)")
                     }
                     .buttonStyle(.pressable)
-                    .accessibilityIdentifier("studies-assignments")
+                    .accessibilityIdentifier("studies-courses")
                 }
-                .padding(.horizontal, 14)
-                .cristalPanel(radius: 20)
             }
         }
+    }
+
+    /// The color, the name, then the teacher and the next class of the course.
+    private func courseRow(_ course: Course, state: StudentState, now: Date) -> some View {
+        var parts: [String] = []
+        if !course.teacher.trimmed.isEmpty { parts.append(course.teacher) }
+        if let next = nextSlot(of: course, state: state, now: now) { parts.append(next) }
+        return HStack(spacing: 12) {
+            RoundedRectangle(cornerRadius: 3).fill(style.cristal.category(course.colorHex)).frame(width: 6, height: 38)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(course.name)
+                    .font(.body.weight(.medium))
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+                if !parts.isEmpty {
+                    Text(parts.joined(separator: " · "))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                }
+            }
+            Spacer(minLength: 8)
+            Image(systemName: "chevron.right")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(.tertiary)
+        }
+        .padding(.vertical, 10)
+        .contentShape(Rectangle())
+    }
+
+    /// The next time the course meets in the coming week (« Demain · 9:00 »), nil without a class in the timetable.
+    private func nextSlot(of course: Course, state: StudentState, now: Date) -> String? {
+        for offset in 0..<8 {
+            guard let day = DateMath.calendar.date(byAdding: .day, value: offset, to: now) else { continue }
+            let found = StudentMath.occurrences(state, on: day).first { $0.slot.courseID == course.id && $0.end > now && $0.end > $0.start }
+            if let found { return "\(TF.relativeDay(found.start, from: now).capitalizedFirst) · \(Fmt.time(found.start, uses24Hour: true))" }
+        }
+        return nil
     }
 
     // MARK: Exams
 
-    @ViewBuilder
+    /// 2. « Mes examens »: the next ones (date, time, course, room), then the homework to hand in.
     private func exams(state: StudentState, now: Date) -> some View {
         let upcoming = StudentMath.upcomingExams(state, at: now)
-        if !upcoming.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Examens"))
-                NavigationLink(value: HomeRoute.page(.studiesExams)) {
-                    VStack(spacing: 0) {
-                        ForEach(Array(upcoming.prefix(2).enumerated()), id: \.element.id) { index, exam in
-                            if index > 0 { Divider() }
-                            ExamRow(exam: exam, state: state, now: now)
+        let open = StudentMath.openAssignments(state)
+        return VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Mes examens"), detail: upcoming.isEmpty ? nil : "\(upcoming.count)")
+            MiniRowsCard {
+                ForEach(Array(upcoming.prefix(3))) { exam in
+                    Button { sheet = .exam(exam) } label: { ExamRow(exam: exam, state: state, now: now) }
+                        .buttonStyle(.pressable)
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                model.update(\.student) { $0.exams.removeAll { $0.id == exam.id } }
+                            } label: {
+                                Label(tr("Supprimer"), systemImage: "trash")
+                            }
                         }
-                    }
-                    .padding(.horizontal, 14)
-                    .cristalPanel(radius: 20)
+                    Divider()
+                }
+                Button { sheet = .exam(Studies.newExam(state)) } label: {
+                    MiniRow(symbol: "plus", colorHex: accentHex, title: tr("Ajouter un examen"), showsChevron: false)
                 }
                 .buttonStyle(.pressable)
-                .accessibilityIdentifier("studies-exams")
+                .accessibilityIdentifier("studies-add-exam")
+                if !state.exams.isEmpty {
+                    MiniDivider()
+                    NavigationLink(value: HomeRoute.page(.studiesExams)) {
+                        MiniRow(symbol: "pencil.and.list.clipboard", colorHex: "E5484D", title: tr("Examens"), detail: tr("Compte à rebours et préparation"),
+                                value: upcoming.isEmpty ? nil : "\(upcoming.count)")
+                    }
+                    .buttonStyle(.pressable)
+                    .accessibilityIdentifier("studies-exams")
+                }
+            }
+            if !open.isEmpty {
+                MiniSectionTitle(title: tr("À rendre"), detail: Fmt.plural(open.count, tr("devoir"), tr("devoirs")))
+                    .padding(.top, 6)
+                MiniRowsCard {
+                    ForEach(Array(open.prefix(3))) { assignment in
+                        AssignmentRow(assignment: assignment, state: state, now: now) { sheet = .assignment(assignment) }
+                        Divider()
+                    }
+                    Button { sheet = .assignment(Studies.newAssignment(state)) } label: {
+                        MiniRow(symbol: "plus", colorHex: accentHex, title: tr("Nouveau devoir"), showsChevron: false)
+                    }
+                    .buttonStyle(.pressable)
+                    .accessibilityIdentifier("studies-add-assignment")
+                }
             }
         }
     }
 
-    // MARK: Semester
+    // MARK: Focus
+
+    /// 3. « Concentration »: the focus page of Planning, opened from here with all its functions.
+    private func concentration(now: Date) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Concentration"))
+            MiniRowsCard {
+                NavigationLink(value: HomeRoute.page(.planningFocus)) {
+                    MiniRow(symbol: "timer", colorHex: "8C6CFF", title: tr("Temps de concentration"),
+                            detail: tr("\(TF.int(ProductivityMath.focusMinutes(model.productivity, weekOf: now) / 60)) h sur \(TF.int(model.productivity.weeklyFocusGoalHours)) h cette semaine"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("studies-focus")
+            }
+        }
+    }
+
+    // MARK: Organisation
+
+    /// 4. « Organisation étudiante »: the study timer, the session, the timetable, homework, grades, revision and the import.
+    private func organisation(state: StudentState, now: Date) -> some View {
+        let groups = StudentMath.assignmentGroups(state, at: now)
+        let weekly = state.slots.filter { $0.date == nil }
+        return VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Organisation étudiante"))
+            StudyTimerCard()
+            semester(state: state, now: now)
+            MiniRowsCard {
+                NavigationLink(value: HomeRoute.page(.studiesTimetable)) {
+                    MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Horaire"),
+                            detail: weekly.isEmpty ? tr("Tes cours de la semaine") : tr("\(Fmt.plural(weekly.count, tr("cours", context: "one"), tr("cours"))) par semaine"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("studies-timetable")
+                MiniDivider()
+                Button {
+                    importingSchedule = true
+                } label: {
+                    MiniRow(symbol: "doc.viewfinder", colorHex: accentHex, title: tr("Importer mon horaire"),
+                            detail: tr("À partir d'une photo ou d'un PDF"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("studies-import-schedule")
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.studiesAssignments)) {
+                    MiniRow(symbol: "doc.text.fill", colorHex: "F2A33A", title: tr("Devoirs"),
+                            detail: groups.late.isEmpty ? tr("À rendre, rendus") : tr("\(groups.late.count) en retard"),
+                            value: groups.isEmpty ? nil : "\(groups.late.count + groups.thisWeek.count + groups.later.count)")
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("studies-assignments")
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.studiesGrades)) {
+                    MiniRow(symbol: "chart.bar.fill", colorHex: "3366FF", title: tr("Notes"), detail: tr("Moyennes et ce qu'il te faut pour ton objectif"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("studies-grades")
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.studiesRevision)) {
+                    MiniRow(symbol: "rectangle.on.rectangle.angled", colorHex: "8C6CFF", title: tr("Révisions"), detail: tr("Temps d'étude et fiches"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("studies-revision")
+            }
+        }
+    }
 
     @ViewBuilder
     private func semester(state: StudentState, now: Date) -> some View {
@@ -228,53 +389,6 @@ struct StudiesAppView: View {
                     .accessibilityValue(Fmt.percent(progress))
             }
             .card(padding: 14)
-        }
-    }
-
-    // MARK: More
-
-    private func more(state: StudentState, now: Date) -> some View {
-        let groups = StudentMath.assignmentGroups(state, at: now)
-        let weekly = state.slots.filter { $0.date == nil }
-        return MiniRowsCard {
-            NavigationLink(value: HomeRoute.page(.studiesTimetable)) {
-                MiniRow(symbol: "calendar.day.timeline.left", colorHex: accentHex, title: tr("Horaire"),
-                        detail: weekly.isEmpty ? tr("Tes cours de la semaine") : tr("\(Fmt.plural(weekly.count, tr("cours", context: "one"), tr("cours"))) par semaine"))
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("studies-timetable")
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.studiesCourses)) {
-                MiniRow(symbol: "books.vertical.fill", colorHex: accentHex, title: tr("Cours"), detail: tr("Moyennes, horaire et devoirs par cours"),
-                        value: state.courses.isEmpty ? nil : "\(state.courses.count)")
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("studies-courses")
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.studiesAssignments)) {
-                MiniRow(symbol: "doc.text.fill", colorHex: "F2A33A", title: tr("Devoirs"),
-                        detail: groups.late.isEmpty ? tr("À rendre, rendus") : tr("\(groups.late.count) en retard"),
-                        value: groups.isEmpty ? nil : "\(groups.late.count + groups.thisWeek.count + groups.later.count)")
-            }
-            .buttonStyle(.pressable)
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.studiesExams)) {
-                MiniRow(symbol: "pencil.and.list.clipboard", colorHex: "E5484D", title: tr("Examens"), detail: tr("Compte à rebours et préparation"),
-                        value: StudentMath.upcomingExams(state, at: now).isEmpty ? nil : "\(StudentMath.upcomingExams(state, at: now).count)")
-            }
-            .buttonStyle(.pressable)
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.studiesGrades)) {
-                MiniRow(symbol: "chart.bar.fill", colorHex: "3366FF", title: tr("Notes"), detail: tr("Moyennes et ce qu'il te faut pour ton objectif"))
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("studies-grades")
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.studiesRevision)) {
-                MiniRow(symbol: "rectangle.on.rectangle.angled", colorHex: "8C6CFF", title: tr("Révisions"), detail: tr("Temps d'étude et fiches"))
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("studies-revision")
         }
     }
 }
@@ -424,6 +538,7 @@ struct ExamRow: View {
 
     private func detail(course: Course?) -> String {
         var parts = [tr("\(Fmt.shortDay(exam.date)) à \(Fmt.time(exam.date, uses24Hour: true))")]
+        if let course { parts.append(course.name) }
         if !exam.room.isEmpty { parts.append(exam.room) }
         if let course, exam.date > now {
             let studied = StudentMath.studyMinutes(state, course: course.id, from: now.addingTimeInterval(-14 * 86_400), to: now)

@@ -15,7 +15,9 @@ enum NutritionSafety {
     }
 
     /// The aim the automatic calculation may apply. A loss or a gain only for an adult in a safe situation
-    /// (maintaining otherwise: no −15 % and no +10 %), the same refusals as `WeightPlanCalculator.evaluate`.
+    /// (maintaining otherwise: no −15 %, no −20 %, no +10 %, no +15 %; recomposition and performance, which
+    /// keep the calories but ask more protein, are refused the same way), the same refusals as
+    /// `WeightPlanCalculator.evaluate`.
     /// `lifeStage` nil (never asked) is not a refusal here: the person chose the aim herself or himself, and the
     /// calories floor below still holds.
     static func allowedGoal(_ requested: NutritionCalculator.Goal, heightCm: Double, weightKg: Double, isMinor: Bool,
@@ -28,8 +30,9 @@ enum NutritionSafety {
         }
         guard heightCm > 0, weightKg > 0 else { return .maintain }
         let bmi = WeightPlanCalculator.bmi(weightKg: weightKg, heightCm: heightCm)
-        if requested == .lose && bmi < WeightPlanCalculator.lowBMI { return .maintain }
-        if requested == .gain && bmi >= WeightPlanCalculator.highBMI { return .maintain }
+        // Every deficit (lose, cut) and every surplus (muscle, mass) goes through the same refusals.
+        if requested.isDeficit && bmi < WeightPlanCalculator.lowBMI { return .maintain }
+        if requested.isSurplus && bmi >= WeightPlanCalculator.highBMI { return .maintain }
         return requested
     }
 
@@ -51,7 +54,7 @@ enum NutritionSafety {
         guard isInRange(age: age, heightCm: heightCm, weightKg: weightKg) else { return nil }
         let plain = NutritionCalculator.goals(sex: sex, age: age, heightCm: heightCm, weightKg: weightKg,
                                               activity: activity, goal: goal, kcal: typed)
-        guard typed == nil, goal == .lose else { return plain }
+        guard typed == nil, goal.isDeficit else { return plain }
         let floor = minimumKcal(sex: sex, age: age, heightCm: heightCm, weightKg: weightKg)
         guard plain.kcal < floor else { return plain }
         return NutritionCalculator.goals(sex: sex, age: age, heightCm: heightCm, weightKg: weightKg,

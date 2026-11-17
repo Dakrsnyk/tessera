@@ -141,9 +141,12 @@ final class DailyBriefTests: XCTestCase {
     }
 
     func testRowsPairHalfTiles() {
-        let tiles: [DailyBrief.Tile] = [.steps(steps: 1, goal: 8), .invite(.budget), .habits(done: 0, items: []), .budget(spentToday: 3, perDayLeft: nil)]
+        let tiles: [DailyBrief.Tile] = [.steps(steps: 1, goal: 8), .invite(.budget), .reminders([]), .budget(spentToday: 3, perDayLeft: nil)]
         let rows = DailyBrief.rows(tiles).map { $0.map(\.id) }
-        XCTAssertEqual(rows, [["invite-budget"], ["steps", "habits"], ["budget"]])
+        XCTAssertEqual(rows, [["invite-budget"], ["steps", "reminders"], ["budget"]], "Reminders are half width since 2026-11-17")
+        // The habits, the session and the Top 3 are across the width (PDG, 2026-11-17).
+        let wide: [DailyBrief.Tile] = [.steps(steps: 1, goal: 8), .habits(done: 0, items: []), .priorities([]), .budget(spentToday: 3, perDayLeft: nil)]
+        XCTAssertEqual(DailyBrief.rows(wide).map { $0.map(\.id) }, [["habits"], ["priorities"], ["steps", "budget"]])
     }
 
     // MARK: One place for each value, example data only without it
