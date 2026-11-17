@@ -23,19 +23,39 @@ final class ComboEditingTests: XCTestCase {
 
     // MARK: Adding
 
-    func testAddingToASmallWidgetMakesAMediumOne() throws {
-        let outcome = try applied(ComboEditing.adding(part(.macros), to: [part(.caloriesLeft)]))
+    /// The size is the person's choice: adding never changes it (Petit = 1 widget, Moyen = 2 au plus, Grand = 4 au plus).
+    func testAddingToASmallWidgetIsRefusedWithItsReason() {
+        let current = [part(.caloriesLeft, .small)]
+        guard case let .refused(reason) = ComboEditing.adding(part(.macros), to: current) else {
+            return XCTFail("Un petit widget n'en contient qu'un seul")
+        }
+        XCTAssertFalse(reason.isEmpty)
+        XCTAssertEqual(reason, ComboEditing.limitReason(for: current), "Le « + » et l'ajout disent la même chose")
+        XCTAssertNotNil(ComboEditing.refusal(adding: .macros, to: current))
+    }
+
+    func testAddingToAMediumWidgetAloneMakesTwoSmallOnesInTheSameMedium() throws {
+        let outcome = try applied(ComboEditing.adding(part(.macros), to: [part(.caloriesLeft, .medium)]))
         XCTAssertEqual(outcome.parts.map(\.kind), [.caloriesLeft, .macros])
         XCTAssertEqual(outcome.parts.map(\.size), [.small, .small])
         XCTAssertEqual(outcome.format, .medium)
-        XCTAssertEqual(outcome.resizedFrom, .small)
+        XCTAssertNil(outcome.resizedFrom, "La taille n'a pas changé")
     }
 
-    func testThirdAndFourthWidgetsGoToLarge() throws {
+    func testAMediumWidgetHoldsTwoWidgetsAtMost() {
         let two = [part(.caloriesLeft), part(.macros)]
-        let three = try applied(ComboEditing.adding(part(.proteinLeft), to: two))
+        XCTAssertEqual(ComboLayout.format(two), .medium)
+        XCTAssertTrue(isRefused(ComboEditing.adding(part(.proteinLeft), to: two)), "Un 3e widget ne grandit pas le widget moyen")
+        XCTAssertNotNil(ComboEditing.limitReason(for: two))
+        XCTAssertNotNil(ComboEditing.refusal(adding: .proteinLeft, to: two))
+    }
+
+    func testALargeWidgetGrowsToFourWidgetsAtTheSameSize() throws {
+        let two = [part(.mealsToday, .medium), part(.nutritionWeek, .medium)]
+        XCTAssertNil(ComboEditing.limitReason(for: two))
+        let three = try applied(ComboEditing.adding(part(.caloriesLeft), to: two))
         XCTAssertEqual(three.format, .large)
-        XCTAssertEqual(three.resizedFrom, .medium)
+        XCTAssertNil(three.resizedFrom)
         XCTAssertNotNil(ComboLayout.rows(three.parts))
         let four = try applied(ComboEditing.adding(part(.nextMeal), to: three.parts))
         XCTAssertEqual(four.format, .large)
@@ -45,8 +65,36 @@ final class ComboEditingTests: XCTestCase {
 
     func testFifthWidgetIsRefused() {
         let four = [part(.caloriesLeft), part(.macros), part(.proteinLeft), part(.nextMeal)]
+        XCTAssertEqual(ComboEditing.format(of: four), .large)
         XCTAssertTrue(isRefused(ComboEditing.adding(part(.quickFood), to: four)))
         XCTAssertNotNil(ComboEditing.refusal(adding: .quickFood, to: four))
+        XCTAssertNotNil(ComboEditing.limitReason(for: four))
+    }
+
+    func testAddingNeverChangesTheSize() {
+        let starts: [[ComboPart]] = [
+            [part(.caloriesLeft, .small)],
+            [part(.caloriesLeft, .medium)],
+            [part(.mealsToday, .large)],
+            [part(.caloriesLeft), part(.macros)],
+            [part(.mealsToday, .medium), part(.nutritionWeek, .medium)],
+        ]
+        for current in starts {
+            let before = ComboEditing.format(of: current)
+            if case let .applied(outcome) = ComboEditing.adding(part(.nextMeal), to: current) {
+                XCTAssertEqual(outcome.format, before)
+                XCTAssertNil(outcome.resizedFrom)
+            }
+        }
+    }
+
+    func testTheLimitsAreThoseOfTheComposer() {
+        XCTAssertEqual(Composer.widgetLimit(for: .small), 1)
+        XCTAssertEqual(Composer.widgetLimit(for: .medium), 2)
+        XCTAssertEqual(Composer.widgetLimit(for: .large), 4)
+        XCTAssertEqual(CreationDraft(format: .small).room, Composer.widgetLimit(for: .small))
+        XCTAssertEqual(CreationDraft(format: .medium).room, Composer.widgetLimit(for: .medium))
+        XCTAssertEqual(CreationDraft(format: .large).room, Composer.widgetLimit(for: .large))
     }
 
     func testAnotherSpaceOrTheSameContentIsRefused() {
@@ -75,19 +123,38 @@ final class ComboEditingTests: XCTestCase {
 
     // MARK: Removing
 
-    func testRemovingDownToOneWidget() throws {
+    func testRemovingKeepsTheSizeWhileWhatIsLeftFitsIt() throws {
         let four = [part(.caloriesLeft), part(.macros), part(.proteinLeft), part(.nextMeal)]
         let three = try applied(ComboEditing.removing(at: 3, from: four))
         XCTAssertEqual(three.parts.count, 3)
         XCTAssertEqual(three.format, .large)
+        XCTAssertNil(three.resizedFrom)
+        // Two widgets that both exist in medium stay in the large widget, one per row.
         let two = try applied(ComboEditing.removing(at: 1, from: three.parts))
         XCTAssertEqual(two.parts.map(\.kind), [.caloriesLeft, .proteinLeft])
-        XCTAssertEqual(two.format, .medium)
-        XCTAssertEqual(two.resizedFrom, .large)
-        let one = try applied(ComboEditing.removing(at: 0, from: two.parts))
+        XCTAssertEqual(two.format, .large)
+        XCTAssertEqual(two.parts.map(\.size), [.medium, .medium])
+        XCTAssertNil(two.resizedFrom)
+    }
+
+    func testRemovingLeavesAWidgetAloneAtTheNearestSizeItHas() throws {
+        // Large with two medium rows: the one left keeps Grand when it has it.
+        let large = [part(.mealsToday, .medium), part(.nutritionWeek, .medium)]
+        let kept = try applied(ComboEditing.removing(at: 1, from: large))
+        XCTAssertEqual(kept.parts.map(\.kind), [.mealsToday])
+        XCTAssertEqual(kept.format, .large)
+        XCTAssertNil(kept.resizedFrom)
+        // No large size for it: the nearest one, with the note of a change.
+        let two = [part(.caloriesLeft, .medium), part(.proteinLeft, .medium)]
+        let one = try applied(ComboEditing.removing(at: 0, from: two))
         XCTAssertEqual(one.parts.map(\.kind), [.proteinLeft])
         XCTAssertEqual(one.parts[0].size, .medium, "Protéines restantes exists in medium")
         XCTAssertEqual(one.format, .medium)
+        XCTAssertEqual(one.resizedFrom, .large)
+        // Medium with two small ones: the one left is a medium widget, the size is the same.
+        let medium = try applied(ComboEditing.removing(at: 0, from: [part(.caloriesLeft), part(.macros)]))
+        XCTAssertEqual(medium.format, .medium)
+        XCTAssertNil(medium.resizedFrom)
     }
 
     func testTheLastWidgetCantBeRemoved() {
@@ -122,6 +189,27 @@ final class ComboEditingTests: XCTestCase {
         let outcome = try applied(ComboEditing.replacing(at: 0, with: part(.macros), in: [part(.caloriesLeft, .medium)]))
         XCTAssertEqual(outcome.parts.map(\.kind), [.macros])
         XCTAssertEqual(outcome.parts[0].size, .medium)
+    }
+
+    func testReplacingNeverGrowsOrShrinksTheWidget() throws {
+        // A widget alone keeps its size; a widget that doesn't exist there is refused with its reason.
+        let kept = try applied(ComboEditing.replacing(at: 0, with: part(.habitStreak), in: [part(.habits, .small)]))
+        XCTAssertEqual(kept.format, .small)
+        XCTAssertTrue(isRefused(ComboEditing.replacing(at: 0, with: part(.habitWeek, .medium), in: [part(.habitStreak, .small)])),
+                      "La semaine d'habitudes n'existe pas en petit")
+        // Two small ones in a medium: a widget without a small size can't take a place, the widget stays medium.
+        XCTAssertTrue(isRefused(ComboEditing.replacing(at: 1, with: part(.habitWeek, .medium), in: [part(.habitStreak), part(.habits)])))
+        let swapped = try applied(ComboEditing.replacing(at: 1, with: part(.habitStreak), in: [part(.habits), part(.habitStreak)]))
+        XCTAssertEqual(swapped.format, .medium)
+        XCTAssertNil(swapped.resizedFrom)
+    }
+
+    func testReplacingKeepsTheSettingsOfTheOtherParts() throws {
+        var first = part(.caloriesLeft, name: "Garder")
+        first.options.noteTitle = "Option"
+        let outcome = try applied(ComboEditing.replacing(at: 1, with: part(.proteinLeft), in: [first, part(.macros)]))
+        XCTAssertEqual(outcome.parts[0].name, "Garder")
+        XCTAssertEqual(outcome.parts[0].options.noteTitle, "Option")
     }
 
     // MARK: Moving
@@ -215,7 +303,7 @@ final class ComboEditingTests: XCTestCase {
     }
 
     func testApplyingKeepsIdentityAndStyle() throws {
-        var design = WidgetDesign(kind: .caloriesLeft, accentHex: "FF0000", showsTitle: false, isFavorite: true, format: .small)
+        var design = WidgetDesign(kind: .caloriesLeft, accentHex: "FF0000", showsTitle: false, isFavorite: true, format: .medium)
         design.background = .theme
         let outcome = try applied(ComboEditing.adding(part(.macros), to: design.editableParts))
         let result = design.applying(outcome)
@@ -235,7 +323,7 @@ final class ComboEditingTests: XCTestCase {
     }
 
     func testApplyingFollowsTheNameUntilItIsChanged() throws {
-        let design = WidgetDesign(kind: .caloriesLeft, format: .small)
+        let design = WidgetDesign(kind: .caloriesLeft, format: .medium)
         let merged = design.applying(try applied(ComboEditing.adding(part(.macros), to: design.editableParts)))
         XCTAssertEqual(merged.name, "\(WidgetKind.caloriesLeft.title) + \(WidgetKind.macros.title)")
         // Back to one widget: the name follows.
@@ -245,8 +333,9 @@ final class ComboEditingTests: XCTestCase {
         XCTAssertEqual(back.name, WidgetKind.macros.title)
         XCTAssertEqual(back.options.parts, [])
         XCTAssertEqual(back.id, design.id)
-        // A name the person chose stays.
-        var renamed = merged
+        // A name the person chose stays (a removal here: the widget keeps its size, a large one holds a 3rd widget).
+        var renamed = WidgetDesign(kind: .mealsToday, format: .large)
+        renamed = renamed.applying(try applied(ComboEditing.adding(part(.macros, .medium), to: renamed.editableParts)))
         renamed.name = "Mon tableau"
         let more = renamed.applying(try applied(ComboEditing.adding(part(.proteinLeft), to: renamed.editableParts)))
         XCTAssertEqual(more.name, "Mon tableau")

@@ -194,7 +194,7 @@ MODULES = [
      "role": "L'onglet Créer, parcours « taille d'abord » (2026-11-16) : Taille (Petit, Moyen, Grand ; lien Écran verrouillé dessous) → Catégorie → les widgets de la catégorie réunis en UN widget (Petit : 1, Moyen : 2 au plus, Grand : 4 au plus), puis l'Atelier (le Studio) poussé sur ce widget.",
      "features": [
          "`CreateView` : racine de l'onglet = `CreateFlowView` (`CreateFlow.swift` : `CreateStep` taille / catégorie / widgets, `CreationDraft` monté avec `Composer.plan`) ; 12 espaces + « Heure et date » + Photos et citations. En haut de la page des widgets, l'aperçu RÉEL du widget composé (`WidgetPreview`), mis à jour à chaque toucher (Moyen : 1 widget = sa version moyenne pleine surface, 2 = côte à côte). L'Atelier (`WidgetStudio`) est poussé dessus ; « Changer de widget » revient aux catégories de la même taille ; après un enregistrement, retour à la taille, vol vers Mes widgets et guide d'ajout.",
-         "`CreateStartView` (ancien départ « hybride ») et `SpacesView` (ancienne feuille « Changer de widget ») ne sont plus instanciés : à retirer après accord du PDG.",
+         "`CreateStartView` et `SpacesView` sont supprimés (2026-11-17) ; `SpaceCatalog.swift` et `SpaceView.swift` gardent ce qu'ils contenaient d'encore utilisé.",
          "Réunir des widgets : le « + » de l'Atelier (voir Studio) ; le constructeur `SpaceBuilderView` ne sert plus qu'à « Changer de widget » (« Créer les N widgets séparés ») et aux captures.",
          "Guide d'ajout à l'écran d'accueil après les 3 premiers enregistrements (`AppSettings.addGuideCount`), à la fin du vol.",
          "`Space` : productivity, habits, nutrition, fitness, budget, investing, business, markets, student, travel, car, life.",
@@ -203,7 +203,7 @@ MODULES = [
          "Carte « Photos et citations » (`PhotoQuotesCard`, hors enum `Space`) : en dernier dans « Tout » et « Vie » ; Photos ou Citation puis `PhotoQuoteEditor` ; citation sur photo de fond (`quoteBackground` = 1re photo de `options.photos`, voile réglable).",
          "Formulaires des espaces (aliment, séance, dépense, plein…).",
      ],
-     "sources": ["App/Screens/Spaces/CreateView.swift", "App/Screens/Spaces/CreateFlow.swift", "App/Screens/Spaces/CreateStartView.swift", "App/Screens/Spaces/SpacesView.swift", "App/Screens/Spaces/SpaceBuilderView.swift", "App/Screens/Spaces/LockScreenCreator.swift",
+     "sources": ["App/Screens/Spaces/CreateView.swift", "App/Screens/Spaces/CreateFlow.swift", "App/Screens/Spaces/SpaceCatalog.swift", "App/Screens/Spaces/SpaceView.swift", "App/Screens/Spaces/SpaceBuilderView.swift", "App/Screens/Spaces/LockScreenCreator.swift",
                  "App/Screens/Spaces/SpaceForms.swift", "App/Screens/Spaces/SpaceSheets.swift", "App/Screens/Spaces/ProductivitySpace.swift",
                  "App/Screens/Spaces/StudentSpace.swift", "App/Components/SaveFlight.swift", "Shared/Model/KindCatalog.swift"],
      "links": [("Studio-editeur", "ouvre le Studio (openEditor)"), ("Domaines-metier", "saisie des données"), ("Mes-widgets", "les widgets créés y arrivent")]},

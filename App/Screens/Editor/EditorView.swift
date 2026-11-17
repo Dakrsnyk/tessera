@@ -250,7 +250,7 @@ struct WidgetStudio: View {
         return { part in openPart(part) }
     }
 
-    /// On the stage, under the widget: « Changer de widget » (Créer), « + » while there is room, « Sur mon écran ».
+    /// On the stage, under the widget: « Changer de widget » (Créer), « + » (it says why when the size is full), « Sur mon écran ».
     /// Settings raised: « + » and « Sur mon écran » in a column beside the small widget (« Changer de widget » comes
     /// back with the large one).
     @ViewBuilder private var stageFooter: some View {
@@ -270,7 +270,7 @@ struct WidgetStudio: View {
     @ViewBuilder private var stageButtons: some View {
         if canAddPart {
             StudioRoundButton(symbol: "plus", title: tr("Ajouter un widget"), identifier: "stage-add") {
-                openPicker(.adding)
+                requestAdd()
             }
         }
         StudioRoundButton(symbol: "eye", title: tr("Sur mon écran"), identifier: "studio-on-my-screen") {
@@ -553,8 +553,8 @@ struct WidgetStudio: View {
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("studio-size")
         StudioPartsList(
-            design: design, parts: parts, payload: input.payload, capacity: partsCapacity, canAdd: canAddPart,
-            onOpen: { openPart($0) }, onAdd: { openPicker(.adding) }
+            design: design, parts: parts, payload: input.payload, capacity: partsCapacity, canAdd: canAddPart, addLimit: addLimit,
+            onOpen: { openPart($0) }, onAdd: { requestAdd() }
         )
         if parts.count > 1 && !isLockScreen {
             StudioNote(text: tr("Touche une partie du widget pour la changer."), symbol: "hand.tap")
@@ -607,10 +607,10 @@ struct WidgetStudio: View {
             } else {
                 currentContent(input, showsDelete: false)
             }
-            if !isLockScreen && parts.count < 4 {
+            if !isLockScreen && addLimit == nil {
                 StudioGoesWellWith(
                     base: design, kinds: goesWellWith, groupTitle: groupTitle,
-                    onAdd: { addPart($0) }, onShowAll: { openPicker(.adding) }
+                    onAdd: { addPart($0) }, onShowAll: { requestAdd() }
                 )
             }
             closePartButton
@@ -661,8 +661,8 @@ struct WidgetStudio: View {
     @ViewBuilder private var layoutChapter: some View {
         StudioPanelHeader(title: tr("Disposition"), link: nextLink)
         StudioLayoutPanel(
-            parts: parts, isLockScreen: isLockScreen, canAdd: canAddPart,
-            onPlan: { applyPlan($0) }, onMove: { movePart(from: $0, to: $1) }, onAdd: { openPicker(.adding) }
+            parts: parts, isLockScreen: isLockScreen, canAdd: canAddPart, addLimit: addLimit,
+            onPlan: { applyPlan($0) }, onMove: { movePart(from: $0, to: $1) }, onAdd: { requestAdd() }
         )
     }
 
@@ -1018,18 +1018,24 @@ struct WidgetStudio: View {
         StudioPartRules.candidates(for: parts.first?.kind ?? design.kind)
     }
 
-    /// « + »: room for another widget (4 at most) that isn't inside yet, and not on the Lock Screen.
+    /// « + » is offered: another widget of the space exists that isn't inside yet, and not on the Lock Screen.
+    /// When the size is full it stays, saying why (`addLimit`) instead of acting in silence.
     private var canAddPart: Bool {
-        guard !isLockScreen, parts.count < 4 else { return false }
+        guard !isLockScreen else { return false }
         let inside = Set(parts.map(\.kind))
         return partCandidates.contains { !inside.contains($0) }
     }
 
-    /// « N sur M »: the most the widget can reach (4 while « + » is there, since adding grows the size), else what it
-    /// holds now. 0 on the Lock Screen: no count.
+    /// Why nothing more fits at the size the widget has now (the size is the person's choice), or nil while there is room.
+    private var addLimit: String? {
+        isLockScreen ? nil : ComboEditing.limitReason(for: parts)
+    }
+
+    /// « N sur M »: what the widget holds out of what its size holds (1 in Petit, 2 in Moyen, 4 in Grand, as in Créer),
+    /// at most the widgets the space has. 0 on the Lock Screen: no count.
     private var partsCapacity: Int {
         if isLockScreen { return 0 }
-        return canAddPart ? Composer.maxCount(for: .large) : parts.count
+        return min(Composer.widgetLimit(for: ComboEditing.format(of: parts)), max(partCandidates.count, parts.count))
     }
 
     private var groupTitle: String {
@@ -1110,6 +1116,17 @@ struct WidgetStudio: View {
         if family != real { family = real }
     }
 
+    /// « + » touched: the choice of a widget opens, or, when the size is full, the note says why and where to change it.
+    private func requestAdd() {
+        alignPreview()
+        if let addLimit {
+            Haptics.tap()
+            withAnimation(.easeInOut(duration: 0.2)) { comboNote = StudioComboNote(text: addLimit, canUndo: false) }
+        } else {
+            openPicker(.adding)
+        }
+    }
+
     private func addPart(_ kind: WidgetKind) {
         alignPreview()
         apply(ComboEditing.adding(StudioPartRules.newPart(kind), to: parts), then: .list)
@@ -1169,15 +1186,15 @@ struct WidgetStudio: View {
         }
     }
 
-    /// The note when the size changed: « Passé en Grand pour tout afficher… », and for a widget already saved, that
+    /// The note when the size changed (a removal): « Repassé en Moyen… », and for a widget already saved, that
     /// it must be placed again. A size the person chose needs a word only for a saved widget.
     private func note(for outcome: ComboEditing.Outcome, isChosenSize: Bool) -> StudioComboNote? {
-        guard let old = outcome.resizedFrom else { return nil }
+        guard outcome.resizedFrom != nil else { return nil }
         let placeAgain = tr("Déjà posé sur ton écran ? Il faudra le reposer à la nouvelle taille.")
         if isChosenSize {
             return isNew ? nil : StudioComboNote(text: placeAgain, canUndo: true)
         }
-        let resized = StudioPartRules.resizeText(to: outcome.format, from: old, count: outcome.parts.count)
+        let resized = StudioPartRules.resizeText(to: outcome.format, count: outcome.parts.count)
         return StudioComboNote(text: isNew ? resized : resized + " " + placeAgain, canUndo: true)
     }
 

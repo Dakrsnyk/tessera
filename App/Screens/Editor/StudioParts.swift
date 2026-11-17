@@ -145,8 +145,9 @@ enum StudioPartRules {
         }
     }
 
-    /// The note when an edit changed the size: « Passé en Grand pour tout afficher : 3 widgets réunis. »…
-    static func resizeText(to format: WidgetFormat, from old: WidgetFormat, count: Int) -> String {
+    /// The note when an edit changed the size. Only a removal does (adding, replacing and moving keep the size the
+    /// person chose): a widget left alone, or a large widget that no longer holds as one: « Repassé en Moyen : 2 widgets réunis. »
+    static func resizeText(to format: WidgetFormat, count: Int) -> String {
         if count < 2 {
             switch format {
             case .small: return tr("Maintenant en Petit : un seul widget.")
@@ -154,10 +155,7 @@ enum StudioPartRules {
             case .large: return tr("Maintenant en Grand : un seul widget.")
             }
         }
-        if format == .large { return tr("Passé en Grand pour tout afficher : \(count) widgets réunis.") }
-        return old == .large
-            ? tr("Repassé en Moyen : \(count) widgets réunis.")
-            : tr("Passé en Moyen pour tout afficher : \(count) widgets réunis.")
+        return tr("Repassé en Moyen : \(count) widgets réunis.")
     }
 
     /// The name of a layout: « Séance du jour en haut », « Prochaine série d'abord »…
@@ -300,6 +298,8 @@ struct StudioPartsList: View {
     let payload: WidgetPayload
     let capacity: Int
     let canAdd: Bool
+    /// Why « + » can't add one now (the size is full), said under it; nil while there is room.
+    var addLimit: String?
     let onOpen: (Int) -> Void
     let onAdd: () -> Void
     @Environment(\.appStyle) private var style
@@ -356,27 +356,40 @@ struct StudioPartsList: View {
         .accessibilityIdentifier("part-\(part.kind.rawValue)")
     }
 
+    /// « Ajouter un widget »; when the size is full it stays, faded, with the reason under it (a touch says it too).
     private var addRow: some View {
         let palette = CristalPalette.of(style.id)
         return Button {
             Haptics.tap()
             onAdd()
         } label: {
-            HStack(spacing: 12) {
-                Image(systemName: "plus")
-                    .font(.system(size: 15, weight: .bold))
-                    .foregroundStyle(Color.accentColor)
-                    .frame(width: 40, height: 40)
-                    .background(palette.tintColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-                Text(tr("Ajouter un widget"))
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.accentColor)
-                Spacer(minLength: 0)
+            VStack(alignment: .leading, spacing: 4) {
+                HStack(spacing: 12) {
+                    Image(systemName: "plus")
+                        .font(.system(size: 15, weight: .bold))
+                        .foregroundStyle(Color.accentColor)
+                        .frame(width: 40, height: 40)
+                        .background(palette.tintColor, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    Text(tr("Ajouter un widget"))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
+                    Spacer(minLength: 0)
+                }
+                .opacity(addLimit == nil ? 1 : 0.45)
+                if let addLimit {
+                    Text(addLimit)
+                        .font(.caption)
+                        .foregroundStyle(Color.secondary)
+                        .multilineTextAlignment(.leading)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
             .frame(minHeight: 56)
+            .padding(.vertical, addLimit == nil ? 0 : 6)
             .contentShape(Rectangle())
         }
         .buttonStyle(.pressable)
+        .accessibilityValue(Text(addLimit ?? ""))
         .accessibilityIdentifier("parts-add")
     }
 }
@@ -610,6 +623,8 @@ struct StudioLayoutPanel: View {
     let parts: [ComboPart]
     let isLockScreen: Bool
     let canAdd: Bool
+    /// Why « + » can't add one now (the size is full), or nil.
+    var addLimit: String?
     let onPlan: ([ComboPart]) -> Void
     let onMove: (Int, Int) -> Void
     let onAdd: () -> Void
@@ -629,7 +644,9 @@ struct StudioLayoutPanel: View {
 
     private var single: some View {
         VStack(alignment: .leading, spacing: 12) {
-            if canAdd {
+            if let addLimit, canAdd {
+                StudioNote(text: addLimit, symbol: "square.grid.2x2")
+            } else if canAdd {
                 StudioNote(text: tr("Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs."), symbol: "square.grid.2x2")
             } else {
                 StudioNote(text: tr("Ce widget reste seul."), symbol: "square.grid.2x2")
@@ -645,6 +662,7 @@ struct StudioLayoutPanel: View {
                 }
                 .buttonStyle(.bordered)
                 .buttonBorderShape(.capsule)
+                .opacity(addLimit == nil ? 1 : 0.45)
                 .accessibilityIdentifier("layout-add")
             }
         }

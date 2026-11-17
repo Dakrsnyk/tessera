@@ -223,8 +223,9 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(go.waitForExistence(timeout: 8), "Le retour ne ramène pas aux widgets choisis")
     }
 
-    /// Petit: one widget; the touch opens the Studio at once. There, « + » still joins a second widget.
-    func testSmallTouchOpensTheStudioThenAddAWidget() {
+    /// Petit: one widget; the touch opens the Studio at once. There, « + » doesn't change the size by itself: it says
+    /// a small widget holds one widget and where to change the size.
+    func testSmallTouchOpensTheStudioAndAddingSaysWhyNot() {
         launch(["-screenshotScreen", "spaces"])
         openPicks(size: "small", category: "space-fitness")
         XCTAssertFalse(app.buttons["create-pick-go"].exists, "Pas de bouton en Petit : le toucher ouvre le Studio")
@@ -235,10 +236,45 @@ final class StudioUITests: XCTestCase {
         let add = app.buttons["stage-add"]
         XCTAssertTrue(add.waitForExistence(timeout: 8), "Le « + » de la scène est absent")
         add.tap()
+        XCTAssertTrue(element("combo-note").waitForExistence(timeout: 8), "Le « + » d'un petit widget ne dit pas pourquoi il n'ajoute rien")
+        XCTAssertTrue(element("combo-note").staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Moyen ou Grand")).firstMatch.exists,
+                      "Le bandeau ne dit pas où changer la taille")
+        XCTAssertFalse(app.buttons["combo-note-undo"].exists, "Rien n'a changé : pas d'« Annuler »")
+        XCTAssertFalse(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "add-kind-")).firstMatch.exists,
+                       "Le choix d'un widget ne doit pas s'ouvrir en Petit")
+        XCTAssertEqual(partRows().count, 1, "Le widget petit doit rester seul")
+        snapshot("create-small-full")
+    }
+
+    /// Moyen with one widget: « + » adds a second (the list and the preview follow, the size stays Moyen); a third
+    /// is refused with its reason, and the size is still the one chosen.
+    func testMediumAddsASecondWidgetThenRefusesAThird() {
+        launch(["-screenshotScreen", "spaces"])
+        openPicks(size: "medium", category: "space-fitness")
+        reveal("create-pick-nextSet", bottomMargin: 210).tap()
+        app.buttons["create-pick-go"].tap()
+        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "« Personnaliser le widget » n'ouvre pas le Studio")
+        XCTAssertEqual(partRows().count, 1, "Moyen avec un seul widget")
+        let add = app.buttons["stage-add"]
+        XCTAssertTrue(add.waitForExistence(timeout: 8), "Le « + » de la scène est absent")
+        add.tap()
         tapFirstAddable()
-        XCTAssertTrue(waitUntil { partRows().count == 2 }, "Le widget ajouté n'est pas dans le widget réuni (lignes : \(partRows().count))")
+        XCTAssertTrue(waitUntil { partRows().count == 2 }, "Le 2e widget n'est pas dans la liste (lignes : \(partRows().count))")
         XCTAssertTrue(app.buttons["stage-part-0"].exists && app.buttons["stage-part-1"].exists, "Une zone par widget sur la scène")
-        snapshot("create-combine")
+        XCTAssertFalse(app.buttons["stage-part-2"].exists)
+        XCTAssertTrue(element("combo-note").waitForNonExistence(timeout: 8), "La taille n'a pas changé : pas de bandeau de changement de taille")
+        snapshot("create-medium-two")
+        // A third one: refused with the limit, nothing changes.
+        XCTAssertTrue(add.waitForExistence(timeout: 8), "Le « + » doit rester visible, avec sa raison")
+        add.tap()
+        XCTAssertTrue(element("combo-note").waitForExistence(timeout: 8), "Le « + » ne dit pas pourquoi il n'ajoute rien")
+        XCTAssertTrue(element("combo-note").staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "2 widgets au plus")).firstMatch.exists,
+                      "Le bandeau ne nomme pas la limite du widget moyen")
+        XCTAssertFalse(app.buttons["combo-note-undo"].exists, "Rien n'a changé : pas d'« Annuler »")
+        XCTAssertEqual(partRows().count, 2, "Le widget moyen garde ses 2 widgets")
+        XCTAssertFalse(app.buttons["stage-part-2"].exists, "Un 3e widget ne grandit pas le widget moyen")
+        XCTAssertFalse(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", "add-kind-")).firstMatch.exists,
+                       "Le choix d'un widget ne doit pas s'ouvrir quand le widget est plein")
     }
 
     /// A save in Créer shows the add guide once the widget has flown away; closing it leaves Créer on the sizes.
@@ -282,9 +318,9 @@ final class StudioUITests: XCTestCase {
 
 
 
-    /// A ready combined widget (Nutrition, Moyen): « Disposition » reorders its widgets; a third widget makes it
-    /// Grand with a note and « Annuler », which takes the addition back.
-    func testCombinedWidgetLayoutAndThirdWidgetNote() {
+    /// A ready combined widget (Nutrition, Moyen): « Disposition » reorders its widgets; a third widget is refused
+    /// with a note (a medium widget holds 2), the size stays the one chosen and the order is kept.
+    func testCombinedWidgetLayoutAndAThirdWidgetIsRefused() {
         launch(["-screenshotScreen", "creator-nutrition"])
         XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 15), "Le Studio ne s'ouvre pas sur la composition de l'espace")
         XCTAssertTrue(waitUntil { partRows().count == 2 }, "La composition « Pour toi » réunit deux widgets (lignes : \(partRows().count))")
@@ -305,21 +341,20 @@ final class StudioUITests: XCTestCase {
         XCTAssertEqual(app.buttons["stage-part-1"].label, firstBefore)
         snapshot("create-layout")
 
-        // A third widget: the size grows, the note says so and offers to undo.
+        // A third widget: refused, the note names the limit; the size and the order stay.
         let add = app.buttons["stage-add"]
         XCTAssertTrue(add.waitForExistence(timeout: 8), "Le « + » de la scène est absent")
         add.tap()
-        tapFirstAddable()
-        XCTAssertTrue(element("combo-note").waitForExistence(timeout: 8), "Pas de bandeau quand le widget passe en Grand")
-        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Passé en Grand")).firstMatch.exists, "Le bandeau ne dit pas que le widget passe en Grand")
-        XCTAssertTrue(waitUntil { partRows().count == 3 }, "Le troisième widget n'est pas dans le widget (lignes : \(partRows().count))")
-        snapshot("create-grand")
-        let undo = app.buttons["combo-note-undo"]
-        XCTAssertTrue(undo.waitForExistence(timeout: 5), "« Annuler » absent du bandeau")
-        undo.tap()
-        XCTAssertTrue(waitUntil { partRows().count == 2 }, "« Annuler » ne retire pas le troisième widget (lignes : \(partRows().count))")
-        XCTAssertTrue(element("combo-note").waitForNonExistence(timeout: 8), "Le bandeau reste après « Annuler »")
-        // The order chosen before the addition is kept by the undo.
+        XCTAssertTrue(element("combo-note").waitForExistence(timeout: 8), "Pas de bandeau quand le widget moyen est plein")
+        XCTAssertTrue(element("combo-note").staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "2 widgets au plus")).firstMatch.exists,
+                      "Le bandeau ne dit pas qu'un widget moyen réunit 2 widgets au plus")
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS %@", "Passé en Grand")).firstMatch.exists,
+                       "Le « + » ne doit plus changer la taille tout seul")
+        XCTAssertFalse(app.buttons["combo-note-undo"].exists, "Rien n'a changé : pas d'« Annuler »")
+        XCTAssertEqual(partRows().count, 2, "Le widget moyen garde ses 2 widgets (lignes : \(partRows().count))")
+        XCTAssertFalse(app.buttons["stage-part-2"].exists)
+        snapshot("create-medium-full")
+        // The order chosen before is kept.
         XCTAssertEqual(app.buttons["stage-part-0"].label, secondBefore)
     }
 

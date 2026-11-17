@@ -26,7 +26,7 @@ enum WidgetFormat: String, Codable, CaseIterable, Identifiable {
     /// What the size is for, said under the size choice (the space creator and the Studio's « Taille »).
     var hint: String {
         switch self {
-        case .small: tr("L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.")
+        case .small: tr("L'essentiel en un coup d'œil : un petit widget en contient un seul.")
         case .medium: tr("Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.")
         case .large: tr("Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.")
         }
@@ -234,13 +234,14 @@ extension WidgetDesign {
 
 /// Editing the widgets inside a widget one step at a time (the Studio's « + », « Retirer », « Remplacer »,
 /// « Monter / Descendre »): pure functions on the parts, following the layout rules of `ComboLayout` and `Composer`.
-/// A widget alone is one part whose `size` is its format.
+/// A widget alone is one part whose `size` is its format. The size is the person's choice (« Taille »): adding,
+/// replacing and moving never change it; only removing can, when what is left can't be planned at the same size.
 enum ComboEditing {
     /// The result of an edit: the parts (one = a widget alone), the format, and the old format when the size changed.
     struct Outcome: Equatable {
         let parts: [ComboPart]
         let format: WidgetFormat
-        /// The previous format when the size changed (for the « Passé en Grand pour tout afficher » note).
+        /// The previous format when the size changed (a removal that leaves a widget alone, or too few for the size).
         let resizedFrom: WidgetFormat?
     }
 
@@ -289,7 +290,7 @@ enum ComboEditing {
     }
 
     /// Plans these parts (in this order) at the first format of `formats` that works: each part keeps its
-    /// options and name, only its size follows the plan.
+    /// options and name, only its size follows the plan. When none works, the reason is the composer's for the last one.
     private static func fit(_ parts: [ComboPart], formats: [WidgetFormat], from old: WidgetFormat) -> Change {
         let kinds = parts.map(\.kind)
         for format in formats {
@@ -308,10 +309,25 @@ enum ComboEditing {
                 continue
             }
         }
-        if case let .invalid(reason) = Composer.plan(kinds, format: .large) { return .refused(reason) }
+        if case let .invalid(reason) = Composer.plan(kinds, format: formats.last ?? .large) { return .refused(reason) }
         return .refused(tr("Ces widgets ne tiennent pas ensemble."))
     }
 
+    /// Why no other widget fits at the size the widget has now (the size is the person's choice), or nil while there
+    /// is room: 1 widget in Petit, 2 in Moyen, 4 in Grand (`Composer.widgetLimit`).
+    static func limitReason(for current: [ComboPart]) -> String? {
+        switch format(of: current) {
+        case .small:
+            return tr("Un petit widget en contient un seul. Pour en réunir plusieurs, choisis Moyen ou Grand dans « Taille ».")
+        case .medium:
+            return current.count < Composer.widgetLimit(for: .medium) ? nil
+                : tr("Un widget moyen réunit 2 widgets au plus. Pour en réunir jusqu'à 4, choisis Grand dans « Taille ».")
+        case .large:
+            return current.count < Composer.widgetLimit(for: .large) ? nil : tr("Un grand widget réunit 4 widgets au plus.")
+        }
+    }
+
+    /// Adds a widget at the size the widget has now: never a bigger one.
     static func adding(_ part: ComboPart, to current: [ComboPart]) -> Change {
         guard let first = current.first else {
             return .applied(outcome([alone(part)], from: alone(part).size))
@@ -323,12 +339,13 @@ enum ComboEditing {
         guard sameFamily(first.kind, part.kind) else {
             return .refused(tr("Un widget réunit des widgets du même espace."))
         }
-        guard current.count < 4 else {
-            return .refused(tr("Un grand widget réunit 4 widgets au plus."))
+        if let limit = limitReason(for: current) { return .refused(limit) }
+        let change = fit(current + [part], formats: [old], from: old)
+        if case .refused = change, old == .large, current.count == 1 {
+            // Two widgets in a large one are two rows: each must exist in medium (the composer's « ajoute un 3e » can't be followed one at a time).
+            return .refused(tr("En grand, 2 widgets réunis doivent exister chacun en moyen : choisis un autre widget, ou une autre taille dans « Taille »."))
         }
-        // The smallest size that works; a large widget alone tries to stay large first.
-        let formats: [WidgetFormat] = (current.count == 1 && first.size == .large) ? [.large, .medium] : [.medium, .large]
-        return fit(current + [part], formats: formats, from: old)
+        return change
     }
 
     static func removing(at index: Int, from current: [ComboPart]) -> Change {
@@ -338,9 +355,15 @@ enum ComboEditing {
         var remaining = current
         remaining.remove(at: index)
         if remaining.count == 1 {
-            return .applied(outcome([alone(remaining[0])], from: old))
+            // The widget left keeps the size when its kind has it, else the nearest size it has.
+            var single = remaining[0]
+            let order: [WidgetFormat] = old == .large ? [.large, .medium, .small] : [.medium, .small, .large]
+            let kind = single.kind
+            single.size = order.first { kind.families.contains($0.family) } ?? alone(single).size
+            return .applied(outcome([single], from: old))
         }
-        return fit(remaining, formats: [.medium, .large], from: old)
+        // The same size while what is left can be planned there; else the next one down (the one case where it changes).
+        return fit(remaining, formats: old == .large ? [.large, .medium] : [.medium], from: old)
     }
 
     static func replacing(at index: Int, with part: ComboPart, in current: [ComboPart]) -> Change {
@@ -359,16 +382,17 @@ enum ComboEditing {
         var replaced = current
         replaced[index] = part
         if replaced.count == 1 {
-            // A widget alone keeps its size when the new one has it.
-            var single = part
-            if part.kind.families.contains(current[0].size.family) {
-                single.size = current[0].size
-            } else {
-                single = alone(part)
+            // A widget alone keeps its size: the new one must have it.
+            let size = current[0].size
+            guard part.kind.families.contains(size.family) else {
+                if case let .invalid(reason) = Composer.plan([part.kind], format: size) { return .refused(reason) }
+                return .refused(tr("Ces widgets ne tiennent pas ensemble."))
             }
+            var single = part
+            single.size = size
             return .applied(outcome([single], from: old))
         }
-        return fit(replaced, formats: old == .large ? [.large] : [.medium, .large], from: old)
+        return fit(replaced, formats: [old], from: old)
     }
 
     static func moving(from: Int, to: Int, in current: [ComboPart]) -> Change {
@@ -385,9 +409,8 @@ enum ComboEditing {
         if ComboLayout.rows(moved) != nil {
             candidates.append(.applied(outcome(moved, from: old)))
         } else {
-            // The sizes no longer fill whole rows in this order: plan again, at the same format when possible.
-            let formats: [WidgetFormat] = old == .large ? [.large, .medium] : [.medium, .large]
-            candidates.append(fit(moved, formats: formats, from: old))
+            // The sizes no longer fill whole rows in this order: plan again, at the same format (moving never changes it).
+            candidates.append(fit(moved, formats: [old], from: old))
         }
         // The same order of rows would be drawn again (a small one at the end of its row going down…): swap the rows.
         if let rows = ComboLayout.rows(current), rows.count == 2 {
@@ -542,6 +565,16 @@ enum Composer {
         case combo([Slot])
         /// Not possible yet, with what to do about it.
         case invalid(String)
+    }
+
+    /// How many widgets one widget of this size holds: 1 in Petit, 2 in Moyen, 4 in Grand. The one source of the
+    /// limits of Créer (`CreationDraft`) and of the Studio's « + » (`ComboEditing`).
+    static func widgetLimit(for format: WidgetFormat) -> Int {
+        switch format {
+        case .small: 1
+        case .medium: 2
+        case .large: 4
+        }
     }
 
     static func maxCount(for format: WidgetFormat) -> Int {

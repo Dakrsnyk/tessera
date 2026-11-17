@@ -125,8 +125,7 @@
  "%@ (copie)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:355: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")",
-   "App/Screens/Spaces/CreateStartView.swift:80: copy.name = tr(\"\\(design.name) (copie)\")"
+   "App/Core/AppModel.swift:355: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
  "%@ (limite de la version gratuite)": {
@@ -304,7 +303,6 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:426: infoRow(tr(\"\\(status.category.name) ce mois-ci\")) {",
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:502: infoRow(tr(\"\\(incomes) ce mois-ci\")) {",
-   "App/Screens/Spaces/SpacesView.swift:214: return model.business.sales.isEmpty ? tr(\"Note ta première vente\") : tr(\"\\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois-ci\")",
    "Shared/Render/Tiles/MoneyTiles.swift:83: tile.inline = tr(\"\\(TF.money(total, currency)) ce mois-ci\")"
   ]
  },
@@ -373,7 +371,7 @@
  "%@ d'abord": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:169: return tr(\"\\(first.name) d'abord\")"
+   "App/Screens/Editor/StudioParts.swift:167: return tr(\"\\(first.name) d'abord\")"
   ]
  },
  "%@ d'affilée pour « %@ » : ton meilleur résultat. Bravo !": {
@@ -409,16 +407,10 @@
  "%@ dans %@ j": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:222: return TravelMath.isOngoing(trip, at: now) ? tr(\"En voyage à \\(trip.destination)\") : tr(\"\\(trip.destination) dans \\(DateMath.daysBetween(now, trip.start)) j\")",
    "Shared/Render/Tiles/CarTiles.swift:142: tile.inline = tr(\"\\(next.title) dans \\(days) j\")",
    "Shared/Render/Tiles/StudentTiles.swift:107: tile.inline = days == 0 ? tr(\"\\(exam.title) aujourd'hui\") : tr(\"\\(exam.title) dans \\(days) j\")",
-   "Shared/Render/Tiles/TimeTiles.swift:107: tile.inline = usesBirthdayWording ? tr(\"Anniversaire dans \\(days) j\") : tr(\"\\(title) dans \\(days) j\")"
-  ]
- },
- "%@ dans %@ km": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:227: return tr(\"\\(status.item.name) dans \\(TF.int(km)) km\")"
+   "Shared/Render/Tiles/TimeTiles.swift:107: tile.inline = usesBirthdayWording ? tr(\"Anniversaire dans \\(days) j\") : tr(\"\\(title) dans \\(days) j\")",
+   "Shared/Render/Tiles/TimeTiles.swift:133: tile.inline = tr(\"\\(title) dans \\(days) j\")"
   ]
  },
  "%@ de concentration cette semaine": {
@@ -534,7 +526,7 @@
  "%@ en bas": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:167: return first == wide ? tr(\"\\(wide.name) en haut\") : tr(\"\\(wide.name) en bas\")"
+   "App/Screens/Editor/StudioParts.swift:165: return first == wide ? tr(\"\\(wide.name) en haut\") : tr(\"\\(wide.name) en bas\")"
   ]
  },
  "%@ en cours": {
@@ -546,7 +538,7 @@
  "%@ en haut": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:167: return first == wide ? tr(\"\\(wide.name) en haut\") : tr(\"\\(wide.name) en bas\")"
+   "App/Screens/Editor/StudioParts.swift:165: return first == wide ? tr(\"\\(wide.name) en haut\") : tr(\"\\(wide.name) en bas\")"
   ]
  },
  "%@ en retard": {
@@ -717,7 +709,6 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:67: return totals.kcal > 0 ? tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\") : nil",
-   "App/Screens/Spaces/SpacesView.swift:201: return model.profile.knows(.kcalTarget) ? tr(\"\\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes\") : tr(\"\\(TF.int(eaten)) kcal aujourd'hui\")",
    "Shared/Render/Tiles/NutritionTiles.swift:93: tile.inline = tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\")",
    "Shared/Render/Tiles/NutritionTiles.swift:186: tile.inline = tr(\"\\(TF.int(totals.kcal)) kcal aujourd'hui\")"
   ]
@@ -737,7 +728,6 @@
  "%@ kcal restantes": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:201: return model.profile.knows(.kcalTarget) ? tr(\"\\(TF.int(model.nutrition.goals.kcal - eaten)) kcal restantes\") : tr(\"\\(TF.int(eaten)) kcal aujourd'hui\")",
    "Shared/Data/Insights.swift:228: parts.append(tr(\"\\(left) kcal restantes\"))",
    "Shared/Render/Tiles/NutritionTiles.swift:109: tile.inline = left >= 0 ? tr(\"\\(TF.int(left)) kcal restantes\") : tr(\"+\\(TF.int(-left)) kcal\")",
    "Shared/Render/Tiles/NutritionTiles.swift:260: tile.inline = tr(\"\\(TF.int(left)) kcal restantes\")"
@@ -838,25 +828,25 @@
  "%@ n'existe pas dans cette taille.": {
   "placeholders": 1,
   "uses": [
-   "Shared/Model/Combo.swift:514: return tr(\"\\(design.name) n'existe pas dans cette taille.\")"
+   "Shared/Model/Combo.swift:537: return tr(\"\\(design.name) n'existe pas dans cette taille.\")"
   ]
  },
  "%@ n'existe pas en grand : ajoute d'autres widgets, jusqu'à 4.": {
   "placeholders": 1,
   "uses": [
-   "Shared/Model/Combo.swift:580: return fits(kinds[0], .large) ? .single(kinds[0]) : .invalid(tr(\"\\(kinds[0].title) n'existe pas en grand : ajoute d'autres widgets, jusqu'à 4.\"))"
+   "Shared/Model/Combo.swift:613: return fits(kinds[0], .large) ? .single(kinds[0]) : .invalid(tr(\"\\(kinds[0].title) n'existe pas en grand : ajoute d'autres widgets, jusqu'à 4.\"))"
   ]
  },
  "%@ n'existe pas en moyen : ajoute un 2e widget pour les réunir.": {
   "placeholders": 1,
   "uses": [
-   "Shared/Model/Combo.swift:566: return fits(kinds[0], .medium) ? .single(kinds[0]) : .invalid(tr(\"\\(kinds[0].title) n'existe pas en moyen : ajoute un 2e widget pour les réunir.\"))"
+   "Shared/Model/Combo.swift:599: return fits(kinds[0], .medium) ? .single(kinds[0]) : .invalid(tr(\"\\(kinds[0].title) n'existe pas en moyen : ajoute un 2e widget pour les réunir.\"))"
   ]
  },
  "%@ n'existe pas en petit.": {
   "placeholders": 1,
   "uses": [
-   "Shared/Model/Combo.swift:560: return fits(kind, .small) ? .single(kind) : .invalid(tr(\"\\(kind.title) n'existe pas en petit.\"))"
+   "Shared/Model/Combo.swift:593: return fits(kind, .small) ? .single(kind) : .invalid(tr(\"\\(kind.title) n'existe pas en petit.\"))"
   ]
  },
  "%@ nutriments en plus des calories, protéines, glucides et lipides, avec tes besoins calculés. Ce que tu notes est gardé : tout s'affiche dès que tu passes à Premium.": {
@@ -1426,18 +1416,6 @@
    "App/Premium/PaywallView.swift:293: return tr(\"\\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \\(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.\")"
   ]
  },
- "%@/%@ aujourd'hui": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:197: return habits.isEmpty ? tr(\"Crée une habitude\") : tr(\"\\(habits.filter { $0.isDone(on: now) }.count)/\\(habits.count) aujourd'hui\")"
-  ]
- },
- "%@/%@ séances": {
-  "placeholders": 2,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:205: return model.profile.knows(.weeklyWorkouts) ? tr(\"\\(done)/\\(model.fitness.weeklyGoal) séances\") : Fmt.plural(done, tr(\"séance cette semaine\"), tr(\"séances cette semaine\"))"
-  ]
- },
  "%@/%@ séances · série %@": {
   "placeholders": 3,
   "uses": [
@@ -1792,7 +1770,7 @@
  "1 ou 2 widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:374: case .medium: tr(\"1 ou 2 widgets\")"
+   "App/Screens/Spaces/CreateFlow.swift:372: case .medium: tr(\"1 ou 2 widgets\")"
   ]
  },
  "1 petit sac": {
@@ -1960,7 +1938,7 @@
  "1 widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:373: case .small: tr(\"1 widget\")"
+   "App/Screens/Spaces/CreateFlow.swift:371: case .small: tr(\"1 widget\")"
   ]
  },
  "1 wrap": {
@@ -1973,7 +1951,7 @@
  "1 à 4 widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:375: case .large: tr(\"1 à 4 widgets\")"
+   "App/Screens/Spaces/CreateFlow.swift:373: case .large: tr(\"1 à 4 widgets\")"
   ]
  },
  "1 épi": {
@@ -2752,12 +2730,6 @@
    "Shared/Render/Tiles/MoneyTiles.swift:128: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Ardane, espace Budget.\")) }"
   ]
  },
- "Ajoute tes cours": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:219: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))"
-  ]
- },
  "Ajoute tes cours : ton horaire du jour apparaîtra ici.": {
   "placeholders": 0,
   "uses": [
@@ -2799,12 +2771,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/StudentTiles.swift:141: return .empty(tr(\"Moyenne\"), symbol: \"graduationcap\", message: tr(\"Ajoute tes notes dans Ardane, espace Études.\"))"
-  ]
- },
- "Ajoute tes placements": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:212: return model.portfolio.holdings.isEmpty ? tr(\"Ajoute tes placements\") : Fmt.plural(model.portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))"
   ]
  },
  "Ajoute tes placements dans Ardane, espace Placements.": {
@@ -3099,8 +3065,8 @@
   "uses": [
    "App/Screens/Editor/AddToHomeScreenGuide.swift:111: .navigationTitle(tr(\"Ajouter un widget\"))",
    "App/Screens/Editor/EditorView.swift:272: StudioRoundButton(symbol: \"plus\", title: tr(\"Ajouter un widget\"), identifier: \"stage-add\") {",
-   "App/Screens/Editor/StudioParts.swift:371: Text(tr(\"Ajouter un widget\"))",
-   "App/Screens/Editor/StudioParts.swift:642: Label(tr(\"Ajouter un widget\"), systemImage: \"plus\")"
+   "App/Screens/Editor/StudioParts.swift:373: Text(tr(\"Ajouter un widget\"))",
+   "App/Screens/Editor/StudioParts.swift:659: Label(tr(\"Ajouter un widget\"), systemImage: \"plus\")"
   ]
  },
  "Ajouter un widget à l'écran d'accueil": {
@@ -3623,7 +3589,6 @@
  "Anniversaire dans %@ j": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:232: return tr(\"Anniversaire dans \\(DateMath.daysBetween(now, LifeMath.nextBirthday(birthday: birthday, after: now).date)) j\")",
    "Shared/Render/Tiles/TimeTiles.swift:107: tile.inline = usesBirthdayWording ? tr(\"Anniversaire dans \\(days) j\") : tr(\"\\(title) dans \\(days) j\")"
   ]
  },
@@ -3631,12 +3596,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:109: combo(\"anniv-ferie\", tr(\"Anniversaire et jour férié\"), tr(\"Les deux prochaines dates à fêter.\"), .light, \"F2588F\","
-  ]
- },
- "Anniversaire et jours fériés": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:234: return tr(\"Anniversaire et jours fériés\")"
   ]
  },
  "Anniversaire, jours fériés, lune et semaine.": {
@@ -4041,7 +4000,6 @@
  "Argent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:248: case .money: tr(\"Argent\")",
    "Shared/Render/Tiles/DashboardTiles.swift:214: var tile = Tile(title: tr(\"Argent\"), symbol: \"dollarsign.circle\")"
   ]
  },
@@ -4716,12 +4674,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/ProductivityWidgets.swift:30: WidgetMessage(symbol: \"plus.circle\", title: tr(\"Aucune tâche\"), message: tr(\"Ajoute-les dans Ardane\"), style: s)"
-  ]
- },
- "Aucune tâche en attente": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:194: return open == 0 ? tr(\"Aucune tâche en attente\") : Fmt.plural(open, tr(\"tâche à faire\"), tr(\"tâches à faire\"))"
   ]
  },
  "Aucune valeur": {
@@ -7095,7 +7047,6 @@
  "Ce qui se mesure s'améliore.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:305: var quote = QuoteContent(text: tr(\"Ce qui se mesure s'améliore.\"))",
    "Shared/Model/Templates.swift:97: configure: .note(title: \"\", text: tr(\"Ce qui se mesure s'améliore.\"))),"
   ]
  },
@@ -7132,23 +7083,23 @@
  "Ce widget est déjà dans le widget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:321: return .refused(tr(\"Ce widget est déjà dans le widget.\"))",
-   "Shared/Model/Combo.swift:353: return .refused(tr(\"Ce widget est déjà dans le widget.\"))",
-   "Shared/Model/Combo.swift:524: return tr(\"Ce widget est déjà dans le widget.\")"
+   "Shared/Model/Combo.swift:337: return .refused(tr(\"Ce widget est déjà dans le widget.\"))",
+   "Shared/Model/Combo.swift:376: return .refused(tr(\"Ce widget est déjà dans le widget.\"))",
+   "Shared/Model/Combo.swift:547: return tr(\"Ce widget est déjà dans le widget.\")"
   ]
  },
  "Ce widget n'existe plus.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:335: guard current.indices.contains(index) else { return .refused(tr(\"Ce widget n'existe plus.\")) }",
-   "Shared/Model/Combo.swift:347: guard current.indices.contains(index) else { return .refused(tr(\"Ce widget n'existe plus.\")) }",
-   "Shared/Model/Combo.swift:376: return .refused(tr(\"Ce widget n'existe plus.\"))"
+   "Shared/Model/Combo.swift:352: guard current.indices.contains(index) else { return .refused(tr(\"Ce widget n'existe plus.\")) }",
+   "Shared/Model/Combo.swift:370: guard current.indices.contains(index) else { return .refused(tr(\"Ce widget n'existe plus.\")) }",
+   "Shared/Model/Combo.swift:400: return .refused(tr(\"Ce widget n'existe plus.\"))"
   ]
  },
  "Ce widget reste seul.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:635: StudioNote(text: tr(\"Ce widget reste seul.\"), symbol: \"square.grid.2x2\")"
+   "App/Screens/Editor/StudioParts.swift:652: StudioNote(text: tr(\"Ce widget reste seul.\"), symbol: \"square.grid.2x2\")"
   ]
  },
  "Ce widget utilise Premium": {
@@ -7228,13 +7179,13 @@
  "Ces tailles ne remplissent pas un widget moyen ou grand : il faut 2 petits, 2 moyens, 1 moyen et 2 petits, ou 4 petits.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:526: return tr(\"Ces tailles ne remplissent pas un widget moyen ou grand : il faut 2 petits, 2 moyens, 1 moyen et 2 petits, ou 4 petits.\")"
+   "Shared/Model/Combo.swift:549: return tr(\"Ces tailles ne remplissent pas un widget moyen ou grand : il faut 2 petits, 2 moyens, 1 moyen et 2 petits, ou 4 petits.\")"
   ]
  },
  "Ces widgets ne tiennent pas ensemble en grand.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:593: return .invalid(tr(\"Ces widgets ne tiennent pas ensemble en grand.\"))"
+   "Shared/Model/Combo.swift:626: return .invalid(tr(\"Ces widgets ne tiennent pas ensemble en grand.\"))"
   ]
  },
  "Ces widgets ne tiennent pas ensemble.": {
@@ -7242,7 +7193,8 @@
   "uses": [
    "App/Screens/Editor/StudioParts.swift:132: guard var part = parts.first, parts.count == 1 else { return .refused(tr(\"Ces widgets ne tiennent pas ensemble.\")) }",
    "App/Screens/Editor/StudioParts.swift:136: guard slots.count == parts.count else { return .refused(tr(\"Ces widgets ne tiennent pas ensemble.\")) }",
-   "Shared/Model/Combo.swift:312: return .refused(tr(\"Ces widgets ne tiennent pas ensemble.\"))"
+   "Shared/Model/Combo.swift:313: return .refused(tr(\"Ces widgets ne tiennent pas ensemble.\"))",
+   "Shared/Model/Combo.swift:389: return .refused(tr(\"Ces widgets ne tiennent pas ensemble.\"))"
   ]
  },
  "Cet aliment est à 0 kcal. C'est normal pour de l'eau, pas pour le reste.": {
@@ -7388,8 +7340,7 @@
  "Changer de widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:287: Label(tr(\"Changer de widget\"), systemImage: \"square.grid.2x2\")",
-   "App/Screens/Spaces/SpacesView.swift:70: .navigationTitle(tr(\"Changer de widget\"))"
+   "App/Screens/Editor/EditorView.swift:287: Label(tr(\"Changer de widget\"), systemImage: \"square.grid.2x2\")"
   ]
  },
  "Chaque année": {
@@ -7773,7 +7724,7 @@
  "Choisi": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:569: .accessibilityValue(Text(number != nil ? tr(\"Choisi\") : (refusal ?? \"\")))"
+   "App/Screens/Spaces/CreateFlow.swift:567: .accessibilityValue(Text(number != nil ? tr(\"Choisi\") : (refusal ?? \"\")))"
   ]
  },
  "Choisi à l'ajout": {
@@ -7850,7 +7801,7 @@
  "Choisis 1 widget, ou 2 à réunir.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:564: return .invalid(tr(\"Choisis 1 widget, ou 2 à réunir.\"))"
+   "Shared/Model/Combo.swift:597: return .invalid(tr(\"Choisis 1 widget, ou 2 à réunir.\"))"
   ]
  },
  "Choisis d'abord la taille, puis la catégorie, puis un ou plusieurs widgets : ils sont réunis en un seul widget. Le Studio sert ensuite à le personnaliser.": {
@@ -7862,13 +7813,13 @@
  "Choisis de 1 à 4 widgets.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:578: return .invalid(tr(\"Choisis de 1 à 4 widgets.\"))"
+   "Shared/Model/Combo.swift:611: return .invalid(tr(\"Choisis de 1 à 4 widgets.\"))"
   ]
  },
  "Choisis jusqu'à %@ widgets : ils seront réunis en un seul.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:756: if draft.picked.isEmpty { return tr(\"Choisis jusqu'à \\(draft.room) widgets : ils seront réunis en un seul.\") }"
+   "App/Screens/Spaces/CreateFlow.swift:754: if draft.picked.isEmpty { return tr(\"Choisis jusqu'à \\(draft.room) widgets : ils seront réunis en un seul.\") }"
   ]
  },
  "Choisis l'icône d'Ardane sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».": {
@@ -8053,8 +8004,8 @@
   "uses": [
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:31: MiniActionButton(title: tr(\"Citation\"), symbol: \"quote.opening\", colorHex: accentHex, isProminent: false) {",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:88: Button(tr(\"Citation\")) { start(.quote) }",
-   "App/Screens/Spaces/CreateFlow.swift:212: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }",
-   "App/Screens/Spaces/CreateStartView.swift:233: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }"
+   "App/Screens/Spaces/CreateFlow.swift:214: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }",
+   "Shared/Model/KindCatalog.swift:273: KindInfo(kind: .quote, title: tr(\"Citation\"), summary: tr(\"Une phrase qui t'inspire, avec ta typographie et tes couleurs.\"), category: .memories, symbol: \"quote.opening\", isPremium: false, families: S"
   ]
  },
  "Citrouille": {
@@ -8247,7 +8198,7 @@
  "Combiné · %@ widgets": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:740: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))",
+   "App/Screens/Spaces/CreateFlow.swift:738: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))",
    "Shared/Model/Combo.swift:231: isCombo ? tr(\"Combiné · \\(options.parts.count) widgets\") : kind.title"
   ]
  },
@@ -9381,12 +9332,6 @@
    "Shared/Render/Tiles/FitnessTiles.swift:4: static let hint = tr(\"Crée ta première séance dans Ardane, espace Fitness.\")"
   ]
  },
- "Crée ta séance": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:203: if model.fitness.routines.isEmpty { return tr(\"Crée ta séance\") }"
-  ]
- },
  "Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
@@ -9422,8 +9367,7 @@
  "Crée ton widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpaceBuilderView.swift:180: Text(tr(\"Crée ton widget\"))",
-   "App/Screens/Spaces/SpacesView.swift:323: hint: tr(\"Crée ton widget\"), ratios: shown.map { ($0.format ?? .small).family.aspectRatio }"
+   "App/Screens/Spaces/SpaceBuilderView.swift:180: Text(tr(\"Crée ton widget\"))"
   ]
  },
  "Crée ton widget dans Ardane : il apparaîtra ici.": {
@@ -9448,18 +9392,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/ProductivityTiles.swift:43: return .empty(tr(\"Projet\"), symbol: \"folder.fill\", message: tr(\"Crée un projet et ses tâches dans Ardane, espace Productivité.\"))"
-  ]
- },
- "Crée un widget de cet espace": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:280: hint: tr(\"Crée un widget de cet espace\"), ratios: examples.map { $0.family.aspectRatio }"
-  ]
- },
- "Crée une habitude": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:197: return habits.isEmpty ? tr(\"Crée une habitude\") : tr(\"\\(habits.filter { $0.isDone(on: now) }.count)/\\(habits.count) aujourd'hui\")"
   ]
  },
  "Crée une habitude dans Ardane pour suivre ta série.": {
@@ -9497,8 +9429,8 @@
   "uses": [
    "App/ArdaneApp.swift:307: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
    "App/Screens/Editor/EditorView.swift:129: if onChangeWidget != nil { return tr(\"Créer\") }",
-   "App/Screens/Spaces/CreateFlow.swift:242: case .size: tr(\"Créer\")",
-   "App/Screens/Spaces/CreateStartView.swift:51: .navigationTitle(tr(\"Créer\"))"
+   "App/Screens/Spaces/CreateFlow.swift:244: case .size: tr(\"Créer\")",
+   "App/Screens/Tutorial/Tutorial.swift:53: case .create: tr(\"Créer\")"
   ]
  },
  "Créer cet aliment": {
@@ -9526,9 +9458,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MyWidgets/MyWidgetsView.swift:140: .accessibilityLabel(Text(tr(\"Créer un widget\")))",
-   "App/Screens/Spaces/CreateFlow.swift:210: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {",
-   "App/Screens/Spaces/CreateStartView.swift:231: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {",
-   "App/Screens/Spaces/SpacesView.swift:121: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {"
+   "App/Screens/Spaces/CreateFlow.swift:212: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {",
+   "App/Screens/Tutorial/Tutorial.swift:66: case .create: tr(\"Créer un widget\")"
   ]
  },
  "Créer un événement ce jour-là": {
@@ -10207,12 +10138,6 @@
    "Shared/Model/WorldCities.swift:17: WorldCity(id: \"America/Denver\", name: tr(\"Denver\"), country: tr(\"États-Unis\")),"
   ]
  },
- "Depuis Mes widgets": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:204: StartRow(symbol: \"plus.square.on.square\", title: tr(\"Dupliquer un de mes widgets\"), subtitle: tr(\"Depuis Mes widgets\")) {"
-  ]
- },
  "Depuis le %@": {
   "placeholders": 1,
   "uses": [
@@ -10489,7 +10414,7 @@
  "Descendre": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:718: moveButton(symbol: \"chevron.down\", title: tr(\"Descendre\"), name: part.name, identifier: \"part-down-\\(index)\", isEnabled: ComboEditing.canMove(from: index, to: index + 1, in: parts)) {"
+   "App/Screens/Editor/StudioParts.swift:736: moveButton(symbol: \"chevron.down\", title: tr(\"Descendre\"), name: part.name, identifier: \"part-down-\\(index)\", isEnabled: ComboEditing.canMove(from: index, to: index + 1, in: parts)) {"
   ]
  },
  "Descendre trop bas au détriment des épaules.": {
@@ -11128,18 +11053,6 @@
    "App/Screens/MyWidgets/MyWidgetsView.swift:551: Label(tr(\"Dupliquer\"), systemImage: \"plus.square.on.square\")"
   ]
  },
- "Dupliquer un de mes widgets": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:204: StartRow(symbol: \"plus.square.on.square\", title: tr(\"Dupliquer un de mes widgets\"), subtitle: tr(\"Depuis Mes widgets\")) {"
-  ]
- },
- "Dupliquer un widget": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:493: .navigationTitle(tr(\"Dupliquer un widget\"))"
-  ]
- },
  "Durée": {
   "placeholders": 0,
   "uses": [
@@ -11418,13 +11331,7 @@
  "Déjà posé sur ton écran ? Il faudra le reposer à la nouvelle taille.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:1176: let placeAgain = tr(\"Déjà posé sur ton écran ? Il faudra le reposer à la nouvelle taille.\")"
-  ]
- },
- "Déjà réuni, à ajuster": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:200: StartRow(symbol: \"square.grid.2x2\", title: tr(\"Un combiné du Store\"), subtitle: tr(\"Déjà réuni, à ajuster\")) {"
+   "App/Screens/Editor/EditorView.swift:1193: let placeAgain = tr(\"Déjà posé sur ton écran ? Il faudra le reposer à la nouvelle taille.\")"
   ]
  },
  "Déjà épargné": {
@@ -11702,12 +11609,6 @@
   "placeholders": 1,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:43: tile.inline = tr(\"Dépensé \\(TF.money(spent, currency))\")"
-  ]
- },
- "Dépensé %@ ce mois-ci": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:208: return tr(\"Dépensé \\(TF.money(BudgetMath.spentThisMonth(model.budget, at: now), currency)) ce mois-ci\")"
   ]
  },
  "Dépensé : %@": {
@@ -12092,6 +11993,12 @@
    "Shared/Domains/ExerciseTechniques.swift:301: \"boxing\": t(tr(\"En garde face au sac : pied avant devant, poings près du menton, genoux souples.\"),"
   ]
  },
+ "En grand, 2 widgets réunis doivent exister chacun en moyen : choisis un autre widget, ou une autre taille dans « Taille ».": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Combo.swift:346: return .refused(tr(\"En grand, 2 widgets réunis doivent exister chacun en moyen : choisis un autre widget, ou une autre taille dans « Taille ».\"))"
+  ]
+ },
  "En haut": {
   "placeholders": 0,
   "uses": [
@@ -12148,12 +12055,6 @@
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:207: combo(\"en-voyage\", tr(\"En voyage\"), tr(\"Heure, devise, avancement et prochaine activité.\"), .aurora, \"3366FF\",",
    "App/Screens/Explore/StoreShowcase.swift:124: StoreCollection(id: \"travel\", title: tr(\"En voyage\"), subtitle: tr(\"Départ, vol, hôtel et heure sur place.\"),"
-  ]
- },
- "En voyage à %@": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:222: return TravelMath.isOngoing(trip, at: now) ? tr(\"En voyage à \\(trip.destination)\") : tr(\"\\(trip.destination) dans \\(DateMath.daysBetween(now, trip.start)) j\")"
   ]
  },
  "Enceinte": {
@@ -12575,12 +12476,6 @@
    "App/Core/Agenda.swift:62: id: \"exam-\\(exam.id)\", kind: .exam, title: tr(\"Examen : \\(exam.title)\"), detail: exam.room.isEmpty ? nil : tr(\"Salle \\(exam.room)\"),",
    "App/Core/DailyBrief.swift:509: items.append(TimedItem(id: exam.id.uuidString, date: exam.date, time: when(exam.date), title: tr(\"Examen : \\(exam.title)\"), detail: exam.room,",
    "App/Core/DailyBrief.swift:541: reminders.append(Reminder(id: exam.id.uuidString, title: tr(\"Examen : \\(exam.title)\"), when: when(exam.date, withTime: true), symbol: \"pencil.and.list.clipboard\", colorHex: \"D6409F\", date: exam.date, "
-  ]
- },
- "Examen dans %@ j": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:218: if let exam = StudentMath.nextExam(model.student, at: now) { return tr(\"Examen dans \\(DateMath.daysBetween(now, exam.date)) j\") }"
   ]
  },
  "Examen demain": {
@@ -13150,8 +13045,8 @@
   "uses": [
    "App/Premium/PaywallView.swift:51: .accessibilityLabel(Text(tr(\"Fermer\")))",
    "App/Screens/Editor/EditorView.swift:625: Text(tr(\"Fermer\"))",
-   "App/Screens/Editor/StudioParts.swift:281: .accessibilityLabel(Text(tr(\"Fermer\")))",
-   "App/Screens/Editor/StudioParts.swift:562: StudioPanelHeader(title: title, link: StudioPanelLink(title: tr(\"Fermer\"), identifier: \"parts-picker-close\", action: onClose))"
+   "App/Screens/Editor/StudioParts.swift:279: .accessibilityLabel(Text(tr(\"Fermer\")))",
+   "App/Screens/Editor/StudioParts.swift:575: StudioPanelHeader(title: title, link: StudioPanelLink(title: tr(\"Fermer\"), identifier: \"parts-picker-close\", action: onClose))"
   ]
  },
  "Fesses près du banc.": {
@@ -14344,8 +14239,7 @@
   "uses": [
    "App/Premium/PaywallView.swift:198: Text(tr(\"Gratuit\")).frame(width: 72)",
    "App/Screens/Editor/StudioPanels.swift:194: subtitle: { $0.isPremium ? nil : tr(\"Gratuit\") },",
-   "App/Screens/Explore/StoreShowcase.swift:60: subtitle: theme.isPremium ? tr(\"Premium\") : tr(\"Gratuit\")",
-   "App/Screens/Spaces/CreateStartView.swift:301: .accessibilityLabel(Text(verbatim: \"\\(design.name), \\(subtitle), \" + (isPremiumWidget ? tr(\"Premium\") : tr(\"Gratuit\"))))"
+   "App/Screens/Explore/StoreShowcase.swift:60: subtitle: theme.isPremium ? tr(\"Premium\") : tr(\"Gratuit\")"
   ]
  },
  "Gratuits": {
@@ -14725,7 +14619,7 @@
  "Heure et date": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:38: case .time: tr(\"Heure et date\")"
+   "App/Screens/Spaces/CreateFlow.swift:46: case .time: tr(\"Heure et date\")"
   ]
  },
  "Heure et devise sur place": {
@@ -15120,7 +15014,7 @@
  "Il reste au moins un widget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:336: guard current.count > 1 else { return .refused(tr(\"Il reste au moins un widget.\")) }"
+   "Shared/Model/Combo.swift:353: guard current.count > 1 else { return .refused(tr(\"Il reste au moins un widget.\")) }"
   ]
  },
  "Il te faut en moyenne **%@ %%** sur les %@ %% qui restent.": {
@@ -15181,12 +15075,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MyWidgets/MyWidgetsView.swift:368: Button(tr(\"Illimité\")) { router.showPaywall(.designLimit) }"
-  ]
- },
- "Illimitées, même en gratuit": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:226: StartRow(symbol: MiniApp.photos.symbol, title: tr(\"Photos et citations\"), subtitle: tr(\"Illimitées, même en gratuit\")) {"
   ]
  },
  "Ils seront séparés. Pour les réunir en un seul widget, touche « + » sur le widget dans l'Atelier.": {
@@ -16135,16 +16023,16 @@
    "Shared/Model/Packs.swift:72: WidgetPack(id: \"calm\", name: tr(\"Minimal\"), tagline: tr(\"L'essentiel en noir et blanc, sans rien de plus.\"), symbol: \"circle.lefthalf.filled\","
   ]
  },
+ "L'essentiel en un coup d'œil : un petit widget en contient un seul.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Combo.swift:29: case .small: tr(\"L'essentiel en un coup d'œil : un petit widget en contient un seul.\")"
+  ]
+ },
  "L'essentiel en un coup d'œil.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:365: case .small: tr(\"L'essentiel en un coup d'œil.\")"
-  ]
- },
- "L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/Combo.swift:29: case .small: tr(\"L'essentiel en un coup d'œil. Choisis-en plusieurs pour créer plusieurs petits widgets.\")"
+   "App/Screens/Spaces/CreateFlow.swift:363: case .small: tr(\"L'essentiel en un coup d'œil.\")"
   ]
  },
  "L'essentiel, sans une couleur de trop.": {
@@ -16453,7 +16341,7 @@
  "La place de %@ icônes": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:345: Text(tr(\"La place de \\(icons) icônes\"))"
+   "App/Screens/Spaces/CreateFlow.swift:343: Text(tr(\"La place de \\(icons) icônes\"))"
   ]
  },
  "La poitrine arrive à quelques centimètres du sol.": {
@@ -18543,19 +18431,19 @@
  "Maintenant en Grand : un seul widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:154: case .large: return tr(\"Maintenant en Grand : un seul widget.\")"
+   "App/Screens/Editor/StudioParts.swift:155: case .large: return tr(\"Maintenant en Grand : un seul widget.\")"
   ]
  },
  "Maintenant en Moyen : un seul widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:153: case .medium: return tr(\"Maintenant en Moyen : un seul widget.\")"
+   "App/Screens/Editor/StudioParts.swift:154: case .medium: return tr(\"Maintenant en Moyen : un seul widget.\")"
   ]
  },
  "Maintenant en Petit : un seul widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:152: case .small: return tr(\"Maintenant en Petit : un seul widget.\")"
+   "App/Screens/Editor/StudioParts.swift:153: case .small: return tr(\"Maintenant en Petit : un seul widget.\")"
   ]
  },
  "Maintenir": {
@@ -19667,7 +19555,7 @@
  "Monter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:715: moveButton(symbol: \"chevron.up\", title: tr(\"Monter\"), name: part.name, identifier: \"part-up-\\(index)\", isEnabled: ComboEditing.canMove(from: index, to: index - 1, in: parts)) {"
+   "App/Screens/Editor/StudioParts.swift:733: moveButton(symbol: \"chevron.up\", title: tr(\"Monter\"), name: part.name, identifier: \"part-up-\\(index)\", isEnabled: ComboEditing.canMove(from: index, to: index - 1, in: parts)) {"
   ]
  },
  "Monter au-dessus des épaules.": {
@@ -20181,7 +20069,7 @@
   "uses": [
    "App/Screens/Content/HabitsView.swift:186: Section(tr(\"Nom\")) {",
    "App/Screens/Editor/EditorView.swift:747: EditorSection(title: tr(\"Nom\")) {",
-   "App/Screens/Editor/EditorView.swift:1270: EditorSection(title: tr(\"Nom\")) {",
+   "App/Screens/Editor/EditorView.swift:1287: EditorSection(title: tr(\"Nom\")) {",
    "App/Screens/Editor/StudioPanels.swift:481: TextField(tr(\"Nom\"), text: $renameText)"
   ]
  },
@@ -20294,7 +20182,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:748: TextField(tr(\"Nom du widget\"), text: edited.name)",
-   "App/Screens/Editor/EditorView.swift:1271: TextField(tr(\"Nom du widget\"), text: part.name)",
+   "App/Screens/Editor/EditorView.swift:1288: TextField(tr(\"Nom du widget\"), text: part.name)",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:168: TextField(tr(\"Nom du widget\"), text: $design.name)"
   ]
  },
@@ -20375,12 +20263,6 @@
    "App/Screens/Spaces/StudentSpace.swift:546: NumberRow(title: tr(\"Note obtenue\"), value: $grade.score)"
   ]
  },
- "Note ta première vente": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:214: return model.business.sales.isEmpty ? tr(\"Note ta première vente\") : tr(\"\\(TF.money(BusinessMath.revenue(model.business, .month, at: now), currency)) ce mois-ci\")"
-  ]
- },
  "Note tes dépenses dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
@@ -20427,18 +20309,6 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:190: case .sales: tr(\"Note tes ventes pour suivre ton activité.\")"
-  ]
- },
- "Note ton premier plein": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:229: return model.car.fills.isEmpty ? tr(\"Note ton premier plein\") : model.car.name"
-  ]
- },
- "Note ton premier repas": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:200: if model.nutrition.entries.isEmpty { return tr(\"Note ton premier repas\") }"
   ]
  },
  "Note ton premier repas dans Ardane, espace Nutrition.": {
@@ -21390,13 +21260,7 @@
  "Ordre": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:693: EditorSection(title: tr(\"Ordre\")) {"
-  ]
- },
- "Organisation": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:249: case .organisation: tr(\"Organisation\")"
+   "App/Screens/Editor/StudioParts.swift:711: EditorSection(title: tr(\"Ordre\")) {"
   ]
  },
  "Organiser…": {
@@ -21436,12 +21300,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:148: text: tr(\"Ouvre Raccourcis › Automatisation › « + » › Transaction.\"))"
-  ]
- },
- "Ouvre l'Atelier sur ce widget": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:302: .accessibilityHint(Text(tr(\"Ouvre l'Atelier sur ce widget\")))"
   ]
  },
  "Ouvre l'écran pour l'installer": {
@@ -21822,18 +21680,6 @@
    "Shared/Render/Kinds/DataWidgets.swift:235: row(tr(\"Part épargnée\"), Fmt.percent(summary.perDayNet / summary.perDayIncome), s.primary)"
   ]
  },
- "Partir d'un modèle": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:198: header(tr(\"Partir d'un modèle\"))"
-  ]
- },
- "Partir de zéro": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:167: header(tr(\"Partir de zéro\"))"
-  ]
- },
  "Partir trop vite.": {
   "placeholders": 0,
   "uses": [
@@ -22038,18 +21884,6 @@
    "App/Screens/Profile/ProfileView.swift:464: Text(tr(\"Passer à Premium\")).font(.headline).foregroundStyle(.primary)"
   ]
  },
- "Passé en Grand pour tout afficher : %@ widgets réunis.": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Editor/StudioParts.swift:157: if format == .large { return tr(\"Passé en Grand pour tout afficher : \\(count) widgets réunis.\") }"
-  ]
- },
- "Passé en Moyen pour tout afficher : %@ widgets réunis.": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/Editor/StudioParts.swift:160: : tr(\"Passé en Moyen pour tout afficher : \\(count) widgets réunis.\")"
-  ]
- },
  "Passée": {
   "placeholders": 0,
   "uses": [
@@ -22249,7 +22083,7 @@
  "Personnaliser le widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:587: Text(tr(\"Personnaliser le widget\"))",
+   "App/Screens/Spaces/CreateFlow.swift:585: Text(tr(\"Personnaliser le widget\"))",
    "App/Screens/Spaces/SpaceBuilderView.swift:397: return tr(\"Personnaliser le widget\")"
   ]
  },
@@ -22410,7 +22244,7 @@
    "App/Premium/PaywallView.swift:208: comparisonRow(tr(\"Photos et citations\"), free: \"∞\", premium: \"∞\")",
    "App/Screens/MiniApps/MiniApp.swift:18: case .photos: tr(\"Photos et citations\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:81: .navigationTitle(tr(\"Photos et citations\"))",
-   "App/Screens/Spaces/CreateFlow.swift:39: case .photos: tr(\"Photos et citations\")"
+   "App/Screens/Spaces/CreateFlow.swift:47: case .photos: tr(\"Photos et citations\")"
   ]
  },
  "Photos et citations illimitées": {
@@ -22547,7 +22381,7 @@
  "Plans proposés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:656: return EditorSection(title: tr(\"Plans proposés\")) {"
+   "App/Screens/Editor/StudioParts.swift:674: return EditorSection(title: tr(\"Plans proposés\")) {"
   ]
  },
  "Plaquettes de frein": {
@@ -22745,7 +22579,7 @@
  "Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:366: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")",
+   "App/Screens/Spaces/CreateFlow.swift:364: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")",
    "Shared/Model/Combo.swift:30: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")"
   ]
  },
@@ -23250,13 +23084,13 @@
  "Pour 2 widgets en grand, chacun doit exister en moyen : ajoute un 3e ou un 4e widget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:583: return .invalid(tr(\"Pour 2 widgets en grand, chacun doit exister en moyen : ajoute un 3e ou un 4e widget.\"))"
+   "Shared/Model/Combo.swift:616: return .invalid(tr(\"Pour 2 widgets en grand, chacun doit exister en moyen : ajoute un 3e ou un 4e widget.\"))"
   ]
  },
  "Pour 3 widgets, l'un d'eux doit exister en moyen.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:589: return .invalid(tr(\"Pour 3 widgets, l'un d'eux doit exister en moyen.\"))"
+   "Shared/Model/Combo.swift:622: return .invalid(tr(\"Pour 3 widgets, l'un d'eux doit exister en moyen.\"))"
   ]
  },
  "Pour afficher tes prochains rendez-vous dans Ardane et ses widgets.": {
@@ -23340,13 +23174,13 @@
  "Pour réunir 2 widgets, chacun doit exister en petit.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:569: return .invalid(tr(\"Pour réunir 2 widgets, chacun doit exister en petit.\"))"
+   "Shared/Model/Combo.swift:602: return .invalid(tr(\"Pour réunir 2 widgets, chacun doit exister en petit.\"))"
   ]
  },
  "Pour réunir 4 widgets, chacun doit exister en petit.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:598: return .invalid(tr(\"Pour réunir 4 widgets, chacun doit exister en petit.\"))"
+   "Shared/Model/Combo.swift:631: return .invalid(tr(\"Pour réunir 4 widgets, chacun doit exister en petit.\"))"
   ]
  },
  "Pour savoir ce qu'il te reste chaque jour.": {
@@ -23406,7 +23240,6 @@
  "Pour toi": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:137: header(tr(\"Pour toi\"))",
    "App/Screens/Spaces/NutritionSpace.swift:226: FilterChip(title: tr(\"Pour toi\"), isSelected: category == nil) { category = nil }"
   ]
  },
@@ -24160,12 +23993,6 @@
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:299: ProgressView(tr(\"Préparation des photos…\"))"
   ]
  },
- "Prépare ton prochain voyage": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:224: return tr(\"Prépare ton prochain voyage\")"
-  ]
- },
  "Prévu": {
   "placeholders": 0,
   "uses": [
@@ -24380,13 +24207,13 @@
  "Quelle catégorie ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:445: Text(tr(\"Quelle catégorie ?\"))"
+   "App/Screens/Spaces/CreateFlow.swift:443: Text(tr(\"Quelle catégorie ?\"))"
   ]
  },
  "Quelle taille pour ton widget ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:280: Text(tr(\"Quelle taille pour ton widget ?\"))"
+   "App/Screens/Spaces/CreateFlow.swift:278: Text(tr(\"Quelle taille pour ton widget ?\"))"
   ]
  },
  "Quelques centimètres suffisent.": {
@@ -25051,7 +24878,7 @@
  "Remplacer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:399: Label(tr(\"Remplacer\"), systemImage: \"arrow.up.arrow.down\")",
+   "App/Screens/Editor/StudioParts.swift:412: Label(tr(\"Remplacer\"), systemImage: \"arrow.up.arrow.down\")",
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:76: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:497: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:533: .accessibilityHint(tr(\"Remplacer\"))"
@@ -25198,7 +25025,7 @@
  "Repassé en Moyen : %@ widgets réunis.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:159: ? tr(\"Repassé en Moyen : \\(count) widgets réunis.\")"
+   "App/Screens/Editor/StudioParts.swift:158: return tr(\"Repassé en Moyen : \\(count) widgets réunis.\")"
   ]
  },
  "Repos": {
@@ -25439,7 +25266,6 @@
  "Reste %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:210: return tr(\"Reste \\(TF.money(BudgetMath.remaining(model.budget, at: now), currency))\")",
    "Shared/Render/Tiles/MoneyTiles.swift:59: tile.inline = tr(\"Reste \\(TF.money(remaining, currency))\")",
    "Shared/Render/Tiles/MoneyTiles.swift:115: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")"
   ]
@@ -25554,7 +25380,7 @@
  "Retirer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:412: Label(tr(\"Retirer\"), systemImage: \"xmark\")",
+   "App/Screens/Editor/StudioParts.swift:425: Label(tr(\"Retirer\"), systemImage: \"xmark\")",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:260: Label(isFavorite ? tr(\"Retirer\") : tr(\"Favori\"), systemImage: isFavorite ? \"star.slash\" : \"star\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:355: Label(tr(\"Retirer\"), systemImage: \"minus.circle\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:511: Label(tr(\"Retirer\"), systemImage: \"minus.circle\")"
@@ -25624,7 +25450,7 @@
   "uses": [
    "App/Screens/Editor/HomeScreenPreview.swift:107: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
    "App/Screens/Onboarding/OnboardingView.swift:136: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
-   "App/Screens/Spaces/CreateFlow.swift:205: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
+   "App/Screens/Spaces/CreateFlow.swift:207: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
    "App/Screens/Spaces/SpaceForms.swift:52: Text(tr(\"Retour\", context: \"back\"))"
   ]
  },
@@ -26707,12 +26533,6 @@
    "Shared/Domains/ExerciseTechniques.swift:174: [tr(\"S'asseoir sur les talons pour descendre.\"), tr(\"Tirer avec les bras.\")]),"
   ]
  },
- "S'ouvre en Petit": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:117: return tr(\"S'ouvre en Petit\")"
-  ]
- },
  "Sa démonstration, sa technique, ses alternatives et tes performances, comme pour les %@ exercices de la bibliothèque. Tes séries restent enregistrées : tout s'affiche dès que tu passes à Premium.": {
   "placeholders": 1,
   "uses": [
@@ -26972,7 +26792,6 @@
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:130: static let health = SetupApp(name: tr(\"Santé\"), symbol: \"heart.fill\")",
    "App/Screens/Profile/ProfileTopics.swift:389: private static let expenseChoices = [tr(\"Logement\"), tr(\"Épicerie\"), tr(\"Transport\"), tr(\"Restaurants\"), tr(\"Loisirs\"), tr(\"Abonnements\"), tr(\"Santé\"), tr(\"Shopping\"), tr(\"Voyages\")]",
-   "App/Screens/Spaces/SpacesView.swift:247: case .health: tr(\"Santé\")",
    "Shared/Domains/Budget.swift:159: case .health: tr(\"Santé\")"
   ]
  },
@@ -27503,7 +27322,7 @@
  "Seulement les widgets interactifs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:568: Text(tr(\"Seulement les widgets interactifs\"))",
+   "App/Screens/Editor/StudioParts.swift:581: Text(tr(\"Seulement les widgets interactifs\"))",
    "App/Screens/Spaces/LockScreenCreator.swift:56: Text(tr(\"Seulement les widgets interactifs\"))",
    "App/Screens/Spaces/SpaceBuilderView.swift:285: Text(tr(\"Seulement les widgets interactifs\"))"
   ]
@@ -29745,12 +29564,6 @@
    "App/Screens/Explore/StoreCombos.swift:199: combo(\"budget-mois\", tr(\"Budget du mois\"), tr(\"Tes dépenses, ce qu'il reste et ton épargne.\"), .light, \"FF6B57\","
   ]
  },
- "Tes espaces préférés": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:140: Text(tr(\"Tes espaces préférés\"))"
-  ]
- },
  "Tes factures à venir et tes abonnements.": {
   "placeholders": 0,
   "uses": [
@@ -29863,12 +29676,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:24: case .motion: tr(\"Tes pas, ta distance et tes étages dans Mon Quotidien et Fitness.\")"
-  ]
- },
- "Tes photos et les phrases qui t'inspirent, sur ton écran d'accueil.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:317: ? tr(\"Tes photos et les phrases qui t'inspirent, sur ton écran d'accueil.\")"
   ]
  },
  "Tes pleins, pour le coût et la consommation.": {
@@ -30960,13 +30767,13 @@
  "Touche un widget : l'Atelier s'ouvre aussitôt.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:753: if draft.format == .small { return tr(\"Touche un widget : l'Atelier s'ouvre aussitôt.\") }"
+   "App/Screens/Spaces/CreateFlow.swift:751: if draft.format == .small { return tr(\"Touche un widget : l'Atelier s'ouvre aussitôt.\") }"
   ]
  },
  "Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:535: Text(tr(\"Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.\"))"
+   "App/Screens/Spaces/SpaceView.swift:28: Text(tr(\"Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.\"))"
   ]
  },
  "Touche une catégorie pour changer son nom, sa couleur ou sa limite par mois.": {
@@ -30985,7 +30792,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:560: StudioNote(text: tr(\"Touche une partie du widget pour la changer.\"), symbol: \"hand.tap\")",
-   "App/Screens/Editor/StudioParts.swift:237: .accessibilityHint(Text(tr(\"Touche une partie du widget pour la changer.\")))"
+   "App/Screens/Editor/StudioParts.swift:235: .accessibilityHint(Text(tr(\"Touche une partie du widget pour la changer.\")))"
   ]
  },
  "Touche une photo pour la recadrer. La mise en page suit leur nombre : une, deux, trois ou quatre.": {
@@ -31142,7 +30949,7 @@
  "Tous les widgets de %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:505: Text(tr(\"Tous les widgets de \\(groupTitle)\"))"
+   "App/Screens/Editor/StudioParts.swift:518: Text(tr(\"Tous les widgets de \\(groupTitle)\"))"
   ]
  },
  "Tous les widgets des espaces": {
@@ -31178,8 +30985,7 @@
  "Tout": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:173: chip(tr(\"Tout\"), isOn: filter == .all) { filter = .all }",
-   "App/Screens/Spaces/SpacesView.swift:141: filterChip(tr(\"Tout\"), isOn: universe == nil && !showsLockScreen) {"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:173: chip(tr(\"Tout\"), isOn: filter == .all) { filter = .all }"
   ]
  },
  "Tout Finance": {
@@ -31595,12 +31401,6 @@
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:197: insightCard(symbol: \"checkmark.seal.fill\", title: tr(\"Objectif atteint\"), message: tr(\"Tu es dans ta cible de calories aujourd'hui.\"), action: nil)"
   ]
  },
- "Tu n'as pas encore de widget à copier. Crée-en un, puis reviens ici.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:461: Text(tr(\"Tu n'as pas encore de widget à copier. Crée-en un, puis reviens ici.\"))"
-  ]
- },
  "Tu n'as plus droit à cette offre d'essai.": {
   "placeholders": 0,
   "uses": [
@@ -31616,7 +31416,7 @@
  "Tu pourras y réunir plusieurs widgets d'une même catégorie.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:284: Text(tr(\"Tu pourras y réunir plusieurs widgets d'une même catégorie.\"))"
+   "App/Screens/Spaces/CreateFlow.swift:282: Text(tr(\"Tu pourras y réunir plusieurs widgets d'une même catégorie.\"))"
   ]
  },
  "Tu profites de Premium": {
@@ -31804,12 +31604,6 @@
    "App/Screens/Explore/HomeSetups.swift:472: id: \"botanique\", name: tr(\"Botanique\"), tagline: tr(\"Un carnet de serre : habitudes, eau, calendrier et notes.\"),"
   ]
  },
- "Un combiné du Store": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/CreateStartView.swift:200: StartRow(symbol: \"square.grid.2x2\", title: tr(\"Un combiné du Store\"), subtitle: tr(\"Déjà réuni, à ajuster\")) {"
-  ]
- },
  "Un cours 30 minutes avant, les rendez-vous et examens de demain, les tâches importantes du jour. Rien pour un événement supprimé ou annulé.": {
   "placeholders": 0,
   "uses": [
@@ -31861,17 +31655,17 @@
  "Un grand widget est déjà plein : il ne peut pas être réuni.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:508: guard design.displayFormat == .medium else { return tr(\"Un grand widget est déjà plein : il ne peut pas être réuni.\") }",
-   "Shared/Model/Combo.swift:512: guard format != .large else { return tr(\"Un grand widget est déjà plein : il ne peut pas être réuni.\") }"
+   "Shared/Model/Combo.swift:531: guard design.displayFormat == .medium else { return tr(\"Un grand widget est déjà plein : il ne peut pas être réuni.\") }",
+   "Shared/Model/Combo.swift:535: guard format != .large else { return tr(\"Un grand widget est déjà plein : il ne peut pas être réuni.\") }"
   ]
  },
  "Un grand widget réunit 4 widgets au plus.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:115: case .large: return tr(\"Un grand widget réunit 4 widgets au plus.\")",
-   "App/Screens/Spaces/CreateFlow.swift:758: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
-   "Shared/Model/Combo.swift:327: return .refused(tr(\"Un grand widget réunit 4 widgets au plus.\"))",
-   "Shared/Model/Combo.swift:602: return .invalid(tr(\"Un grand widget réunit 4 widgets au plus.\"))"
+   "App/Screens/Spaces/CreateFlow.swift:117: case .large: return tr(\"Un grand widget réunit 4 widgets au plus.\")",
+   "App/Screens/Spaces/CreateFlow.swift:756: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
+   "Shared/Model/Combo.swift:326: return current.count < Composer.widgetLimit(for: .large) ? nil : tr(\"Un grand widget réunit 4 widgets au plus.\")",
+   "Shared/Model/Combo.swift:635: return .invalid(tr(\"Un grand widget réunit 4 widgets au plus.\"))"
   ]
  },
  "Un horaire est déjà dans ton planning": {
@@ -31916,10 +31710,16 @@
    "App/Screens/Tutorial/Tutorial.swift:78: tr(\"Un petit tour d'Ardane : ta journée, tes mini-apps, tes widgets et le Studio. Passe une étape ou quitte le tutoriel quand tu veux.\")"
   ]
  },
+ "Un petit widget en contient un seul. Pour en réunir plusieurs, choisis Moyen ou Grand dans « Taille ».": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Combo.swift:321: return tr(\"Un petit widget en contient un seul. Pour en réunir plusieurs, choisis Moyen ou Grand dans « Taille ».\")"
+  ]
+ },
  "Un petit widget montre un seul widget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:559: guard let kind = kinds.first, kinds.count == 1 else { return .invalid(tr(\"Un petit widget montre un seul widget.\")) }"
+   "Shared/Model/Combo.swift:592: guard let kind = kinds.first, kinds.count == 1 else { return .invalid(tr(\"Un petit widget montre un seul widget.\")) }"
   ]
  },
  "Un pied en avant pour la stabilité ; les mains se rejoignent devant la poitrine.": {
@@ -31943,7 +31743,7 @@
  "Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:633: StudioNote(text: tr(\"Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs.\"), symbol: \"square.grid.2x2\")"
+   "App/Screens/Editor/StudioParts.swift:650: StudioNote(text: tr(\"Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs.\"), symbol: \"square.grid.2x2\")"
   ]
  },
  "Un style change l'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent.": {
@@ -31955,7 +31755,7 @@
  "Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:367: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")",
+   "App/Screens/Spaces/CreateFlow.swift:365: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")",
    "Shared/Model/Combo.swift:31: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")"
   ]
  },
@@ -31992,15 +31792,21 @@
  "Un widget de l'écran verrouillé reste seul.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:620: StudioNote(text: tr(\"Un widget de l'écran verrouillé reste seul.\"), symbol: \"lock.iphone\")"
+   "App/Screens/Editor/StudioParts.swift:635: StudioNote(text: tr(\"Un widget de l'écran verrouillé reste seul.\"), symbol: \"lock.iphone\")"
   ]
  },
  "Un widget moyen réunit 2 widgets au plus.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:114: case .medium: return tr(\"Un widget moyen réunit 2 widgets au plus.\")",
-   "App/Screens/Spaces/CreateFlow.swift:758: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
-   "Shared/Model/Combo.swift:573: return .invalid(tr(\"Un widget moyen réunit 2 widgets au plus.\"))"
+   "App/Screens/Spaces/CreateFlow.swift:116: case .medium: return tr(\"Un widget moyen réunit 2 widgets au plus.\")",
+   "App/Screens/Spaces/CreateFlow.swift:756: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
+   "Shared/Model/Combo.swift:606: return .invalid(tr(\"Un widget moyen réunit 2 widgets au plus.\"))"
+  ]
+ },
+ "Un widget moyen réunit 2 widgets au plus. Pour en réunir jusqu'à 4, choisis Grand dans « Taille ».": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/Combo.swift:324: : tr(\"Un widget moyen réunit 2 widgets au plus. Pour en réunir jusqu'à 4, choisis Grand dans « Taille ».\")"
   ]
  },
  "Un widget qui change selon le moment : agenda le matin, tâches et focus la journée, bilan le soir.": {
@@ -32012,9 +31818,9 @@
  "Un widget réunit des widgets du même espace.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/Combo.swift:324: return .refused(tr(\"Un widget réunit des widgets du même espace.\"))",
-   "Shared/Model/Combo.swift:356: return .refused(tr(\"Un widget réunit des widgets du même espace.\"))",
-   "Shared/Model/Combo.swift:520: return tr(\"Un widget réunit des widgets du même espace.\")"
+   "Shared/Model/Combo.swift:340: return .refused(tr(\"Un widget réunit des widgets du même espace.\"))",
+   "Shared/Model/Combo.swift:379: return .refused(tr(\"Un widget réunit des widgets du même espace.\"))",
+   "Shared/Model/Combo.swift:543: return tr(\"Un widget réunit des widgets du même espace.\")"
   ]
  },
  "Un widget à la fois, rangé par thème : temps, santé, argent…": {
@@ -32104,7 +31910,7 @@
  "Une ligne = 1 widget large ou 2 petits.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:626: StudioNote(text: tr(\"Une ligne = 1 widget large ou 2 petits.\"))"
+   "App/Screens/Editor/StudioParts.swift:641: StudioNote(text: tr(\"Une ligne = 1 widget large ou 2 petits.\"))"
   ]
  },
  "Une note et ton prochain rendez-vous sous les yeux.": {
@@ -32244,7 +32050,7 @@
  "Va bien avec": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:493: EditorSection(title: tr(\"Va bien avec\"), detail: groupTitle) {"
+   "App/Screens/Editor/StudioParts.swift:506: EditorSection(title: tr(\"Va bien avec\"), detail: groupTitle) {"
   ]
  },
  "Va jusqu'aux bras dans l'alignement des épaules.": {
@@ -32709,12 +32515,6 @@
    "App/Screens/MiniApps/Car/CarApp.swift:362: MiniRow(symbol: \"wrench.and.screwdriver.fill\", colorHex: \"3366FF\", title: tr(\"Entretien\"), detail: tr(\"Vidange, pneus, freins…\"),"
   ]
  },
- "Vie": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:250: case .life: tr(\"Vie\")"
-  ]
- },
  "Ville trouvée : heure locale activée": {
   "placeholders": 0,
   "uses": [
@@ -33101,7 +32901,7 @@
  "Widget d'écran verrouillé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:299: Label(tr(\"Widget d'écran verrouillé\"), systemImage: \"lock.rectangle.on.rectangle\")"
+   "App/Screens/Spaces/CreateFlow.swift:297: Label(tr(\"Widget d'écran verrouillé\"), systemImage: \"lock.rectangle.on.rectangle\")"
   ]
  },
  "Widget photo": {
@@ -33113,7 +32913,7 @@
  "Widget simple": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:740: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))"
+   "App/Screens/Spaces/CreateFlow.swift:738: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))"
   ]
  },
  "Widgets": {
@@ -33134,13 +32934,13 @@
  "Widgets de %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:526: Text(tr(\"Widgets de \\(category.title)\"))"
+   "App/Screens/Spaces/CreateFlow.swift:524: Text(tr(\"Widgets de \\(category.title)\"))"
   ]
  },
  "Widgets de l'espace": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:528: Text(tr(\"Widgets de l'espace\"))"
+   "App/Screens/Spaces/SpaceView.swift:21: Text(tr(\"Widgets de l'espace\"))"
   ]
  },
  "Widgets enregistrés": {
@@ -33651,16 +33451,14 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:407: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))",
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:242: detail: weekly.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(weekly.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))",
-   "App/Screens/Spaces/SpacesView.swift:219: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))"
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:242: detail: weekly.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(weekly.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))"
   ]
  },
  "cours [one]": {
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:407: case .timetable: return Fmt.plural(student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))",
-   "App/Screens/MiniApps/Studies/StudiesApp.swift:242: detail: weekly.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(weekly.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))",
-   "App/Screens/Spaces/SpacesView.swift:219: return model.student.courses.isEmpty ? tr(\"Ajoute tes cours\") : Fmt.plural(model.student.courses.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))"
+   "App/Screens/MiniApps/Studies/StudiesApp.swift:242: detail: weekly.isEmpty ? tr(\"Tes cours de la semaine\") : tr(\"\\(Fmt.plural(weekly.count, tr(\"cours\", context: \"one\"), tr(\"cours\"))) par semaine\"))"
   ]
  },
  "coût estimé, tout compris": {
@@ -33917,22 +33715,10 @@
    "App/Core/DataItems.swift:425: case .companies: return Fmt.plural(following.followed.count, tr(\"entreprise\"), tr(\"entreprises\"))"
   ]
  },
- "entreprise suivie": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:216: return Fmt.plural(model.following.followed.count, tr(\"entreprise suivie\"), tr(\"entreprises suivies\"))"
-  ]
- },
  "entreprises": {
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:425: case .companies: return Fmt.plural(following.followed.count, tr(\"entreprise\"), tr(\"entreprises\"))"
-  ]
- },
- "entreprises suivies": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:216: return Fmt.plural(model.following.followed.count, tr(\"entreprise suivie\"), tr(\"entreprises suivies\"))"
   ]
  },
  "environ %@": {
@@ -34881,27 +34667,25 @@
  "place libre : tu peux encore ajouter un widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:757: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
+   "App/Screens/Spaces/CreateFlow.swift:755: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
   ]
  },
  "placement": {
   "placeholders": 0,
   "uses": [
-   "App/Core/DataItems.swift:424: case .holdings: return Fmt.plural(portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))",
-   "App/Screens/Spaces/SpacesView.swift:212: return model.portfolio.holdings.isEmpty ? tr(\"Ajoute tes placements\") : Fmt.plural(model.portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))"
+   "App/Core/DataItems.swift:424: case .holdings: return Fmt.plural(portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))"
   ]
  },
  "placements": {
   "placeholders": 0,
   "uses": [
-   "App/Core/DataItems.swift:424: case .holdings: return Fmt.plural(portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))",
-   "App/Screens/Spaces/SpacesView.swift:212: return model.portfolio.holdings.isEmpty ? tr(\"Ajoute tes placements\") : Fmt.plural(model.portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))"
+   "App/Core/DataItems.swift:424: case .holdings: return Fmt.plural(portfolio.holdings.count, tr(\"placement\"), tr(\"placements\"))"
   ]
  },
  "places libres : tu peux encore ajouter des widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:757: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
+   "App/Screens/Spaces/CreateFlow.swift:755: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
   ]
  },
  "plein": {
@@ -35294,7 +35078,6 @@
  "séance cette semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:205: return model.profile.knows(.weeklyWorkouts) ? tr(\"\\(done)/\\(model.fitness.weeklyGoal) séances\") : Fmt.plural(done, tr(\"séance cette semaine\"), tr(\"séances cette semaine\"))",
    "Shared/Render/Tiles/FitnessTiles.swift:201: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")"
   ]
  },
@@ -35316,7 +35099,6 @@
  "séances cette semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/SpacesView.swift:205: return model.profile.knows(.weeklyWorkouts) ? tr(\"\\(done)/\\(model.fitness.weeklyGoal) séances\") : Fmt.plural(done, tr(\"séance cette semaine\"), tr(\"séances cette semaine\"))",
    "Shared/Render/Tiles/FitnessTiles.swift:201: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")",
    "Shared/Render/Tiles/FitnessTiles.swift:208: tile.caption = tr(\"séances cette semaine\")"
   ]
@@ -35459,8 +35241,7 @@
   "uses": [
    "App/Core/DailyBrief.swift:562: result.append(Reminder(id: \"tasks\", title: Fmt.plural(open.count, tr(\"tâche à faire\"), tr(\"tâches à faire\")), when: names, symbol: \"checklist\", colorHex: \"6B7280\", date: .distantFuture, route: .page(.",
    "App/Core/DataItems.swift:401: return Fmt.plural(open, tr(\"tâche à faire\"), tr(\"tâches à faire\"))",
-   "App/Screens/Profile/ProfileTopics.swift:478: QuestionCard(title: tr(\"Une tâche pour commencer\"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr(\"tâche à faire\"), tr(\"tâches à faire\"))) ",
-   "App/Screens/Spaces/SpacesView.swift:194: return open == 0 ? tr(\"Aucune tâche en attente\") : Fmt.plural(open, tr(\"tâche à faire\"), tr(\"tâches à faire\"))"
+   "App/Screens/Profile/ProfileTopics.swift:478: QuestionCard(title: tr(\"Une tâche pour commencer\"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr(\"tâche à faire\"), tr(\"tâches à faire\"))) "
   ]
  },
  "tâches": {
@@ -35495,8 +35276,7 @@
   "uses": [
    "App/Core/DailyBrief.swift:562: result.append(Reminder(id: \"tasks\", title: Fmt.plural(open.count, tr(\"tâche à faire\"), tr(\"tâches à faire\")), when: names, symbol: \"checklist\", colorHex: \"6B7280\", date: .distantFuture, route: .page(.",
    "App/Core/DataItems.swift:401: return Fmt.plural(open, tr(\"tâche à faire\"), tr(\"tâches à faire\"))",
-   "App/Screens/Profile/ProfileTopics.swift:478: QuestionCard(title: tr(\"Une tâche pour commencer\"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr(\"tâche à faire\"), tr(\"tâches à faire\"))) ",
-   "App/Screens/Spaces/SpacesView.swift:194: return open == 0 ? tr(\"Aucune tâche en attente\") : Fmt.plural(open, tr(\"tâche à faire\"), tr(\"tâches à faire\"))"
+   "App/Screens/Profile/ProfileTopics.swift:478: QuestionCard(title: tr(\"Une tâche pour commencer\"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr(\"tâche à faire\"), tr(\"tâches à faire\"))) "
   ]
  },
  "valeur nette %@": {
@@ -35578,8 +35358,7 @@
  "widget photo ou citation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:96: return count == 0 ? nil : Fmt.plural(count, tr(\"widget photo ou citation\"), tr(\"widgets photo ou citation\"))",
-   "App/Screens/Spaces/SpacesView.swift:318: : Fmt.plural(made.count, tr(\"widget photo ou citation\"), tr(\"widgets photo ou citation\"))"
+   "App/Screens/Home/MiniAppsRow.swift:96: return count == 0 ? nil : Fmt.plural(count, tr(\"widget photo ou citation\"), tr(\"widgets photo ou citation\"))"
   ]
  },
  "widgets": {
@@ -35600,8 +35379,7 @@
  "widgets photo ou citation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/MiniAppsRow.swift:96: return count == 0 ? nil : Fmt.plural(count, tr(\"widget photo ou citation\"), tr(\"widgets photo ou citation\"))",
-   "App/Screens/Spaces/SpacesView.swift:318: : Fmt.plural(made.count, tr(\"widget photo ou citation\"), tr(\"widgets photo ou citation\"))"
+   "App/Screens/Home/MiniAppsRow.swift:96: return count == 0 ? nil : Fmt.plural(count, tr(\"widget photo ou citation\"), tr(\"widgets photo ou citation\"))"
   ]
  },
  "« %@ » est prévu demain. Bonne préparation !": {
@@ -35632,12 +35410,6 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:164: (.smart, \"wand.and.stars\", tr(\"Widgets intelligents\"), tr(\"« Maintenant » change selon le moment, et les analyses résument ta journée\")),"
-  ]
- },
- "· exemple": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Spaces/SpacesView.swift:363: Text(tr(\"· exemple\"))"
   ]
  },
  "¼ tasse": {

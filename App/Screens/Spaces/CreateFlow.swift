@@ -10,6 +10,14 @@ enum CreateStep: Hashable {
     case size
     case category(WidgetFormat)
     case pick(WidgetFormat, CreateCategory)
+
+    /// The step the back button goes to: the widgets → the categories → the size (which stays).
+    var back: CreateStep {
+        switch self {
+        case .size, .category: .size
+        case let .pick(format, _): .category(format)
+        }
+    }
 }
 
 /// A category of Créer: a space, the time widgets that have none (« Heure et date »), or photos and quotes.
@@ -82,13 +90,7 @@ struct CreationDraft: Equatable {
     var picked: [WidgetKind] = []
 
     /// How many widgets the size holds: 1 in Petit, 2 in Moyen, 4 in Grand.
-    var room: Int {
-        switch format {
-        case .small: 1
-        case .medium: 2
-        case .large: 4
-        }
-    }
+    var room: Int { Composer.widgetLimit(for: format) }
 
     var plan: Composer.Plan { Composer.plan(picked, format: format) }
 
@@ -250,11 +252,7 @@ struct CreateFlowView: View {
     }
 
     private func back() {
-        switch step {
-        case .size: break
-        case .category: go(.size)
-        case let .pick(format, _): go(.category(format))
-        }
+        if step != .size { go(step.back) }
     }
 
     /// The rule of every new widget: photos and quotes don't count toward the free limit.
