@@ -23,8 +23,8 @@ final class TutorialTests: XCTestCase {
     func testTheStepsCoverTheAppInOrder() {
         let steps = TutorialStep.allCases
         XCTAssertEqual(steps.map(\.rawValue),
-                       ["welcome", "daily", "planning", "studies", "info", "create", "studio", "store", "mine", "homeScreen", "finish"],
-                       "L'ordre du tutoriel")
+                       ["welcome", "daily", "create", "studio", "mine", "homeScreen", "store", "finish"],
+                       "L'ordre du tutoriel : le chemin d'un widget, puis le Store")
         XCTAssertEqual(steps.first, .welcome)
         XCTAssertEqual(steps.last, .finish)
         XCTAssertEqual(Set(steps.map(\.tab)), [.home, .spaces, .explore, .mine], "Chaque onglet est montré")
@@ -37,6 +37,32 @@ final class TutorialTests: XCTestCase {
             XCTAssertFalse(step.place(name: "").isEmpty)
             XCTAssertFalse(step.symbol.isEmpty)
         }
+    }
+
+    /// 2026-11-17: « Ton planning », « Études » and « Un objectif pour deux » don't explain how the app works: removed.
+    /// What is left follows a widget from the app to the Home Screen, and the Store comes after.
+    func testTheThreeStepsAboutMiniAppsAreGoneAndTheStoreComesAfterTheHomeScreen() throws {
+        for name in ["planning", "studies", "info"] {
+            XCTAssertNil(TutorialStep(rawValue: name), "L'étape « \(name) » n'existe plus")
+        }
+        let steps = TutorialStep.allCases
+        XCTAssertEqual(steps.count, 8)
+        let path: [TutorialStep] = [.create, .studio, .mine, .homeScreen, .store]
+        let numbers = path.map(\.number)
+        XCTAssertEqual(numbers, numbers.sorted(), "Créer, Studio, Mes widgets, écran d'accueil, puis le Store")
+        XCTAssertEqual(TutorialStep.studio.number, 4)
+        XCTAssertEqual(TutorialStep.store.number, 7)
+        // No step talks about a mini-app in particular any more.
+        for step in steps {
+            let text = step.title + " " + step.message
+            for word in ["Planning", "Études", "Nutrition", "Fitness"] {
+                XCTAssertFalse(text.contains(word), "« \(word) » dans l'étape \(step.rawValue)")
+            }
+        }
+        // The first two steps say how the app works: mini-apps feed the widgets, a card opens its mini-app.
+        XCTAssertTrue(TutorialStep.welcome.message.contains("mini-apps"))
+        XCTAssertTrue(TutorialStep.welcome.message.contains("widgets"))
+        XCTAssertTrue(TutorialStep.daily.message.contains("mini-app"))
     }
 
     func testTheNameArrivesOnMonQuotidienNotOnTheFirstSlide() {
@@ -57,7 +83,7 @@ final class TutorialTests: XCTestCase {
 
     func testEveryNameOfTheScreenshotsStillOpensAStep() {
         // The CI screenshots open « tutorial-<name> »: none of these may stop working.
-        for name in ["welcome", "daily", "info", "create", "studio", "store", "mine", "homeScreen", "finish"] {
+        for name in ["welcome", "daily", "create", "studio", "store", "mine", "homeScreen", "finish"] {
             XCTAssertNotNil(TutorialStep(rawValue: name), name)
         }
     }
@@ -65,7 +91,12 @@ final class TutorialTests: XCTestCase {
     func testStepsLightUpTheirPartsOrNothing() {
         XCTAssertTrue(TutorialStep.welcome.targets.isEmpty)
         XCTAssertTrue(TutorialStep.studio.targets.isEmpty)
-        XCTAssertEqual(TutorialStep.planning.targets, [[.dailyPlanning], [.dailyPlanningTop]])
+        XCTAssertTrue(TutorialStep.homeScreen.targets.isEmpty)
+        // One part each, small enough to be lit whole above the bubble: the aisles of the Store, the widget in the
+        // middle of Mes widgets (2026-11-17: the screen of the week and the whole carousel were too tall to be lit).
+        XCTAssertEqual(TutorialStep.store.targets, [[.storeAisles]])
+        XCTAssertEqual(TutorialStep.mine.targets, [[.myWidgets]])
+        XCTAssertEqual(TutorialStep.create.targets, [[.createSpace]])
         XCTAssertEqual(TutorialStep.finish.targets, [[.profile]])
         // Mon Quotidien: the whole section first, then smaller parts down to the title alone.
         XCTAssertEqual(TutorialStep.daily.targets.first, [.daily])

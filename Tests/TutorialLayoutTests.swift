@@ -1,3 +1,4 @@
+import SwiftUI
 import XCTest
 @testable import Ardane
 
@@ -174,9 +175,9 @@ final class TutorialLayoutTests: XCTestCase {
         }
     }
 
-    func testTheTopOfThePlanningCardTakesOverWhenTheWholeCardIsTooTall() {
+    func testASmallerPartTakesOverWhenTheWholePartIsTooTall() {
         let bubble = CGSize(width: 360, height: 280)
-        // Small iPhone: 410 doesn't fit above the bubble, the top of the card (170) does.
+        // Small iPhone: 410 doesn't fit above the bubble, a smaller part of it (170) does.
         let screen = screens[0]
         let whole = CGRect(x: 20, y: 100, width: 335, height: 410)
         let top = CGRect(x: 20, y: 100, width: 335, height: 170)
@@ -184,6 +185,58 @@ final class TutorialLayoutTests: XCTestCase {
                                        safeTop: screen.top, safeBottom: screen.bottom, card: bubble)
         XCTAssertEqual(plan.candidateIndex, 1)
         XCTAssertNotNil(plan.hole)
+    }
+
+    /// « Le Store »: the row of aisles, as wide as the screen minus 14 points on each side, right under the search field.
+    func testTheAislesOfTheStoreAreLitWholeWithTheBubbleBelow() {
+        let bubble = CGSize(width: 360, height: 300)
+        for screen in screens {
+            let aisles = CGRect(x: 14, y: screen.top + 150, width: screen.size.width - 28, height: 38)
+            let plan = TutorialLayout.plan(candidates: [cand(aisles, 20)], screen: screen.size,
+                                           safeTop: screen.top, safeBottom: screen.bottom, card: bubble)
+            let hole = plan.hole
+            XCTAssertNotNil(hole, "\(screen.name) : les rayons sont entourés")
+            XCTAssertFalse(plan.cardAtTop, "\(screen.name) : la bulle reste en bas")
+            XCTAssertEqual(hole?.minX ?? 0, 6, accuracy: 0.5, "\(screen.name) : le contour reste à 6 points du bord")
+            XCTAssertEqual(hole?.maxX ?? 0, screen.size.width - 6, accuracy: 0.5, screen.name)
+            XCTAssertEqual(plan.holeRadius, (hole?.height ?? 0) / 2, accuracy: 0.5, "\(screen.name) : une pastille, pas des coins cassés")
+        }
+    }
+
+    /// « Mes widgets »: the widget in the middle of the carousel, whatever its size, is lit whole; on the smallest
+    /// screen the page may first have to move up.
+    func testTheWidgetInTheMiddleOfMesWidgetsIsLitWhole() throws {
+        let bubble = CGSize(width: 360, height: 300)
+        for screen in screens {
+            let pageWidth = min(screen.size.width * 0.6, 300)
+            for format in [WidgetFormat.small, .medium, .large] {
+                let design = WidgetDesign(kind: .caloriesLeft, themeID: .modern, accentHex: "2F8F7A", format: format)
+                let fitted = WidgetCarousel<EmptyView>.fitted(design, pageWidth: pageWidth)
+                let label = "\(screen.name), \(format.rawValue)"
+                XCTAssertLessThanOrEqual(fitted.size.width, pageWidth + 0.5, label)
+                XCTAssertLessThanOrEqual(fitted.size.height, WidgetCarousel<EmptyView>.stageHeight * 0.9 + 0.5, label)
+                XCTAssertGreaterThan(fitted.scale, 0, label)
+                // The stage starts under the title and the count; the widget is centered in it.
+                let stageTop = screen.top + 130
+                var frame = CGRect(x: (screen.size.width - fitted.size.width) / 2,
+                                   y: stageTop + (WidgetCarousel<EmptyView>.stageHeight - fitted.size.height) / 2,
+                                   width: fitted.size.width, height: fitted.size.height)
+                let radius = WidgetMetrics.cornerRadius * fitted.scale
+                var plan = TutorialLayout.plan(candidates: [cand(frame, radius)], screen: screen.size,
+                                               safeTop: screen.top, safeBottom: screen.bottom, card: bubble)
+                if plan.hole == nil {
+                    let move = try XCTUnwrap(TutorialLayout.scrollDelta(candidates: [cand(frame, radius)], screen: screen.size,
+                                                                         safeTop: screen.top, safeBottom: screen.bottom, card: bubble), label)
+                    XCTAssertTrue(move.fits, "\(label) : le widget tient au-dessus de la bulle une fois la page montée")
+                    frame = frame.offsetBy(dx: 0, dy: -move.delta)
+                    plan = TutorialLayout.plan(candidates: [cand(frame, radius)], screen: screen.size,
+                                               safeTop: screen.top, safeBottom: screen.bottom, card: bubble)
+                }
+                let hole = try XCTUnwrap(plan.hole, "\(label) : le widget du milieu est entouré")
+                XCTAssertTrue(hole.contains(frame), label)
+                XCTAssertFalse(hole.intersects(plan.card), label)
+            }
+        }
     }
 
     func testSeveralPartsAreLitTogetherOnlyWhenAllAreThere() {
