@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Finance — Direction 4 : Quotidienne</title>
+<link rel="stylesheet" href="../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="finance.css">
+<style>
+  /* préfixe q4- : propre à cette planche */
+  .phone.app .fn-fab2 { --primary: var(--cs); }        /* le bouton plein prend la couleur de Finances, comme .fab */
+  .q4-sect .fn-new { margin-left: 0; font-size: 10px; color: var(--fn-new); }
+  .q4-h1 { display: flex; align-items: center; gap: 12px; }
+  .q4-h1 > div:first-child { flex: 1; }
+  .q4-day { font-size: 48px; font-weight: 750; letter-spacing: -.045em; line-height: .95; font-variant-numeric: tabular-nums; margin-top: 10px; }
+  .q4-day small { font-size: 25px; font-weight: 650; color: var(--ink2); letter-spacing: -.01em; }
+  .q4-h2 { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--rule); }
+  #q4p1 .sect, #q4p6 .sect { margin-top: 12px; }
+  #q4p1 .ls > .li { min-height: 48px; padding: 4px 0; }
+  .q4-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .q4-tile { display: flex; align-items: center; gap: 9px; min-height: 52px; padding: 8px 10px; border-radius: 18px; }
+  .q4-tile .ico { width: 32px; height: 32px; font-size: 16px; }
+  .q4-tile b { display: block; font-size: 14px; font-weight: 650; line-height: 1.2; }
+  .q4-tile span.s { display: block; font-size: 11.5px; white-space: nowrap; }
+  .q4-rev { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink2); }
+  .q4-rev b { color: var(--fn-in); font-weight: 650; }
+  .q4-leg i.dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .q4-h2 > div { display: flex; align-items: baseline; gap: 8px; }
+  .q4-h2 .link { display: flex; gap: 5px; align-items: center; min-height: 32px; }
+  .q4-ring .in b { font-size: 15px; letter-spacing: -.01em; }
+  .q4-ring .in small { font-size: 10.5px; margin-top: 2px; }
+  .q4-lab { display: flex; align-items: baseline; justify-content: space-between; margin: 11px 4px 6px; }
+  .q4-lab .fn-lab { font-size: 11.5px; }
+  .q4-act { display: flex; align-items: center; min-height: 44px; padding-left: 8px; font-size: 14px; font-weight: 650; color: var(--primary); white-space: nowrap; }
+  .q4-sect { display: flex; align-items: center; gap: 8px; }
+  .q4-sect span.c { margin-left: auto; }
+  .q4-after { display: flex; align-items: center; gap: 8px; min-height: 48px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--ink2); line-height: 1.35; }
+  .q4-after b { color: var(--ink); font-weight: 650; }
+  #q4p2 .fn-due { min-height: 46px; padding: 3px 0; }
+  #q4p2 .scr { padding-top: 2px; }
+  .q4-two { display: grid; grid-template-columns: 1fr 1fr; }
+  .q4-two > div { display: flex; flex-direction: column; gap: 4px; }
+  .q4-two > div + div { padding-left: 14px; border-left: 1px solid var(--rule); }
+  .q4-cmp { display: flex; align-items: center; gap: 11px; padding: 7px 0; }
+  .q4-cmp .tx { flex: 1; min-width: 0; }
+  .q4-cmp .l { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; font-size: 14.5px; font-weight: 650; }
+  .q4-cmp .l em { font-style: normal; font-weight: 550; font-size: 13px; color: var(--ink2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .q4-cmp .l em b { color: var(--ink); font-weight: 650; }
+  .q4-b2 { height: 6px; border-radius: 3px; position: relative; }
+  .q4-b2 + .q4-b2 { margin-top: 3px; }
+  .q4-b2 > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 3px; background: var(--c); min-width: 3px; }
+  .q4-b2.pv > i { background: var(--fn-prev); opacity: .7; }
+  .q4-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 8px 0 14px; }
+  .q4-3 > div { display: flex; flex-direction: column; gap: 4px; padding-left: 12px; border-left: 1px solid var(--rule); }
+  .q4-3 > div:first-child { padding-left: 0; border-left: 0; }
+  .q4-3 .fn-num { font-size: 19px; }
+  /* une ligne glissée vers la gauche : Modifier / Supprimer révélés */
+  .q4-swp { padding: 0; overflow: hidden; }
+  .q4-acts { position: absolute; right: 0; top: 0; bottom: 0; display: flex; }
+  .q4-acts span { width: 70px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 12px; font-weight: 650; color: #fff; }
+  .q4-acts span i { font-size: 18px; --sw: 2.1; }
+  .q4-acts .ed { background: var(--primary); } .q4-acts .del { background: var(--fn-over); }
+  .q4-moved { position: relative; z-index: 1; transform: translateX(-140px); background: var(--card); padding: 2px 16px; box-shadow: 6px 0 14px rgb(var(--sh) / .10); }
+  .q4-hint { display: flex; align-items: center; gap: 8px; margin: 8px 6px 0; font-size: 12.5px; color: var(--ink2); line-height: 1.35; }
+  /* feuille d'ajout rapide */
+  .q4-amt { text-align: center; font-size: 50px; font-weight: 750; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; margin: 14px 0 12px; }
+  .q4-amt small { font-size: 26px; font-weight: 650; color: var(--ink2); letter-spacing: 0; }
+  .q4-caret { display: inline-block; width: 2px; height: 40px; background: var(--primary); vertical-align: -5px; margin-left: 3px; }
+  .q4-sh .chips { margin-right: -20px; }
+  .q4-sh .chip { height: 40px; background: var(--well); border-color: transparent; }
+  .q4-sh .chip.on { background: var(--primary); }
+  .q4-sh .fn-quick > span { background: var(--well); height: 40px; box-shadow: none; border-color: transparent; }
+  .q4-sh .fn-keys span { height: 44px; font-size: 21px; background: var(--well); }
+  .q4-sh .fn-keys span i { font-size: 22px; }
+  /* calendrier des échéances */
+  .q4-cal { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; }
+  .q4-cal > span { display: flex; flex-direction: column; align-items: center; gap: 2px; height: 35px; justify-content: center; border-radius: 12px; }
+  .q4-cal > span.hd { height: 20px; font-size: 11px; font-weight: 700; color: var(--ink2); }
+  .q4-cal > span b { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; width: 28px; height: 24px; border-radius: 12px; display: grid; place-items: center; }
+  .q4-cal > span u { width: 5px; height: 5px; border-radius: 50%; background: transparent; }
+  .q4-cal > span u.b { background: var(--fn-out); } .q4-cal > span u.i { background: var(--fn-in); }
+  .q4-cal > span.past b { color: var(--ink2); font-weight: 500; } .q4-cal > span.past u { opacity: .45; }
+  .q4-cal > span.today b { box-shadow: 0 0 0 1.8px var(--ink); font-weight: 750; }
+  .q4-cal > span.due b { font-weight: 750; }
+  .q4-cal > span.hot b { color: var(--fn-over); }
+  .q4-tog { width: 51px; height: 31px; border-radius: 16px; background: var(--primary); position: relative; flex: none; }
+  .q4-tog::after { content: ""; position: absolute; right: 2px; top: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,.18); }
+  /* objectifs avec versement direct */
+  .q4-goal { padding: 10px 0 12px; }
+  .q4-goal + .q4-goal { border-top: 1px solid var(--rule); }
+  .q4-gh { display: flex; align-items: center; gap: 10px; }
+  .q4-gh b { display: block; font-size: 15px; font-weight: 650; }
+  .q4-vers { display: inline-flex; align-items: center; gap: 5px; height: 44px; padding: 0 14px; border-radius: 22px; background: var(--tint); color: var(--primary); font-size: 14px; font-weight: 650; flex: none; }
+  .q4-vers i { font-size: 15px; --sw: 2.3; }
+  .q4-gl { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12.5px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+  .q4-gl b { color: var(--fn-in); font-weight: 700; }
+  #q4p7 .scr, #q4p8 .scr { padding-bottom: 0; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">4</div><div><h1>Direction 4 · Quotidienne</h1>
+    <p>Finance comme un compagnon de tous les jours : on l'ouvre pour décider « est-ce que je peux me payer ça aujourd'hui ? ». Le jour est l'unité, l'action vient d'abord, puis ce qui arrive dans les 14 prochains jours. Le sélecteur de semaine y est à sa place naturelle et pilote tout. Journée d'exemple des planches Cristal : jeudi 12 novembre, 13 h 20, nappe et couleur d'action de Finances (jade), thème Saphir.</p></div>
+    <span class="badge">Étape 1 · conception · données d'exemple</span></header>
+
+  <div class="fn-rule">
+    <div><h5>La logique</h5><h3>Aujourd'hui d'abord, puis les 14 prochains jours</h3><p>Un chiffre du jour (ce qu'il reste à dépenser aujourd'hui), l'ajout d'une dépense en une touche, ce qui demande de l'attention, puis l'échéancier. La semaine remplace le mois comme unité de comparaison.</p></div>
+    <div><h5>En ouvrant Finance</h5><ol><li><b class="p p1">P1</b>Encore 7,18 $ aujourd'hui, et l'anneau du jour</li><li><b class="p p1">P1</b>Reste du mois : 412 $, 21,68 $ par jour</li><li><b class="p p2">P2</b>Ajout rapide en puces</li><li><b class="p p2">P2</b>À surveiller : facture de demain, achat à vérifier, limite proche</li></ol></div>
+    <div><h5>En faisant défiler, puis une touche plus loin</h5><ol><li><b class="p p3">P3</b>À venir sur 14 jours, et ce qu'il restera après</li><li><b class="p p2">P2</b>Cette semaine contre la semaine dernière</li><li><b class="p p3">P3</b>Opérations : « À vérifier » en tête, glisser pour modifier</li><li><b class="p p3">P3</b>Échéances au calendrier, épargne en une touche</li></ol></div>
+    <div><h5>Forces et limites</h5><p><b>+</b> Idéal pour un budget serré : on sait quoi faire tout de suite ; la saisie devient très rapide ; les factures ne surprennent plus.</p><p><b>−</b> Le solde, les revenus et la vue du mois passent au second plan ; plusieurs nouveautés à développer (chiffre du jour, alertes, reste après factures, glisser).</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Page principale</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="q4p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Combien je peux dépenser aujourd'hui</h4>
+        <p>Le chiffre du jour en grand : ce qu'il reste à dépenser aujourd'hui pour tenir le mois (21,68 $ moins les 14,50 $ déjà dépensés). Puis l'ajout en une touche et ce qui demande de l'attention. Dépense et Revenu restent deux boutons, comme aujourd'hui.</p>
+        <ul><li><span class="tag e">Existe</span><span>Sélecteur de semaine, reste du mois, 21,68 $ par jour pendant 19 jours, budget, dépenses du jour, Dépense / Revenu.</span></li>
+          <li><span class="tag a">À adapter</span><span>Les dépenses rapides (aujourd'hui réservées au widget Dépense rapide) en puces sur la page.</span></li>
+          <li><span class="tag d">Nouveau</span><span>« Encore 7,18 $ aujourd'hui » et l'anneau du jour ; le bloc « À surveiller » (facture de demain, achat à vérifier, limite proche).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">2 · Page principale, suite</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="q4p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Les 14 prochains jours</h4>
+        <p>Un échéancier daté : ce qui part, et quand. Dessous, ce qu'il restera vraiment une fois les factures payées. Puis le jour choisi et des raccourcis vers toutes les pages ; tout en bas, la note et « Mes paramètres », comme aujourd'hui.</p>
+        <ul><li><span class="tag e">Existe</span><span>Factures à venir sur 14 jours et leur total, opérations du jour choisi, pages, note, « Mes paramètres ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Les pages en six raccourcis fixes (aujourd'hui une liste qui change selon les données).</span></li>
+          <li><span class="tag d">Nouveau</span><span>« Après ces factures : 218 $, soit 11,47 $ par jour ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">3 · Revenus et dépenses</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="q4p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Cette semaine contre la précédente</h4>
+        <p>Deux totaux comparés au même jour, puis chaque jour en deux barres face aux 21,68 $ par jour, et chaque catégorie : cette semaine en couleur, la précédente en gris. L'onglet « Mois » garde la vue du mois.</p>
+        <ul><li><span class="tag e">Existe</span><span>Revenus du mois, catégories, vue du mois (opérations mois par mois).</span></li>
+          <li><span class="tag a">À adapter</span><span>Comparaison avec la semaine dernière, jour par jour et par catégorie (le calcul existe déjà pour le widget « Analyse des dépenses ») ; barres face aux 21,68 $ par jour.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">4 · Analyse</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="q4p4"></div>
+      <div class="cap"><h4>Une analyse légère</h4>
+        <p>Le mois en trois chiffres et la barre du budget avec le repère du 12. Puis les jours de la semaine qui coûtent le plus. L'Évolution complète reste dans Premium.</p>
+        <ul><li><span class="tag e">Existe</span><span>Revenus, dépenses, mis de côté, comparaison au mois dernier, Évolution (Premium), Catégories.</span></li>
+          <li><span class="tag a">À adapter</span><span>Repère du rythme sur la barre du budget.</span></li>
+          <li><span class="tag d">Nouveau</span><span>Moyenne de dépense par jour de la semaine (« le dimanche coûte le plus »).</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Opérations</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="q4p5"></div><span class="flow"></span>
+      <div class="cap"><h4>À vérifier d'abord</h4>
+        <p>Les achats Apple Pay à confirmer passent en tête. Chaque jour a son total. On glisse une ligne vers la gauche pour la modifier ou la supprimer, sans ouvrir sa fiche.</p>
+        <ul><li><span class="tag e">Existe</span><span>Sélecteur de mois (mois passés : Premium), Dépenses / Revenus, filtre de catégorie, « À vérifier », « + ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Section « À vérifier » en tête avec « Confirmer » ; total de chaque jour.</span></li>
+          <li><span class="tag d">Nouveau</span><span>Glisser une ligne pour Modifier ou Supprimer.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">6 · Ajout rapide</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="none" id="q4p6"></div><span class="flow"></span>
+      <div class="cap"><h4>Une dépense en trois touches</h4>
+        <p>La feuille s'ouvre sur le montant : pavé intégré, catégorie en puces, dépenses rapides, date en puces. Dépense ou Revenu se choisit en haut.</p>
+        <ul><li><span class="tag e">Existe</span><span>Montant, catégorie, note, date ; Dépense et Revenu ; dépenses rapides (widget).</span></li>
+          <li><span class="tag a">À adapter</span><span>Pavé numérique dans la feuille, catégorie et date en puces (formulaire système aujourd'hui), dépenses rapides dans la feuille.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">7 · Budget et récurrents</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="q4p7"></div><span class="flow"></span>
+      <div class="cap"><h4>Les échéances au calendrier</h4>
+        <p>Le budget en une barre, puis le mois en calendrier : un point par facture ou dépense fixe, vert pour un revenu fixe. Le rappel de la veille se règle sur la même page.</p>
+        <ul><li><span class="tag e">Existe</span><span>Budget, limites par catégorie, factures et abonnements, revenus et dépenses fixes, rappel des factures la veille.</span></li>
+          <li><span class="tag a">À adapter</span><span>Calendrier des échéances ; factures et montants fixes sur une même page.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">8 · Épargne et objectifs</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="q4p8"></div>
+      <div class="cap"><h4>Mettre de côté tout de suite</h4>
+        <p>« Versement » directement sur chaque objectif, sans ouvrir son éditeur. Le mois mis de côté face à l'épargne visée ; les comptes en compact, avec la valeur nette et sa courbe.</p>
+        <ul><li><span class="tag e">Existe</span><span>Objectifs, versements, date limite, mensualité, comptes et dettes, valeur nette et sa courbe, épargne visée (Mes informations).</span></li>
+          <li><span class="tag a">À adapter</span><span>Bouton « Versement » sur l'objectif (le versement est aujourd'hui dans son éditeur) ; « Mis de côté » face à l'épargne visée.</span></li></ul></div></div>
+  </div>
+
+  <div class="note" style="margin:34px 9px 0" id="q4map"></div>
+</main>
+<script src="../2026-11-15-cristal/cristal.js"></script>
+<script src="finance.js"></script>
+<script>
+const restaurant = FIN.cat('res'), maison = FIN.cat('mai');
+
+// 1 · page principale
+const ring = () => `<div class="rgw q4-ring" style="width:86px;height:86px;--c:var(--fn-out)" role="img" aria-label="14,50 $ dépensés sur 21,68 $ aujourd'hui">${U.ring(14.5 / 21.68, 9)}<div class="in"><b>14,50 $</b><small>sur 21,68 $</small></div></div>`;
+const S1 = () => F.nv() + F.wsel() + `
+  <article class="gl fn-hero" style="margin-top:8px;padding:14px 16px 11px">
+    <div class="q4-h1"><div><span class="fn-lab nw">Encore aujourd'hui</span>
+      <div style="display:flex;align-items:flex-end;gap:10px"><div class="q4-day">7<small>,18 $</small></div><span style="margin-bottom:6px">${F.nw()}</span></div></div>${ring()}</div>
+    <div class="q4-h2"><div><span class="fn-cap">Reste du mois</span><b class="fn-num sm">412 $</b></div><span class="link"><i data-i="pencil" style="font-size:13px"></i>Budget 1 200 $</span></div>
+    <div class="fn-cap" style="margin-top:2px"><b>21,68 $ par jour</b> pendant 19 jours</div>
+  </article>
+  <div class="q4-lab"><span class="fn-lab">Ajout rapide</span><span class="s">une touche, une dépense</span></div>
+  <div class="fn-quick">${FIN.quick.map((q) => `<span><span class="ico" style="--c:${FIN.cat(q.c).col}"><i data-i="${q.i}"></i></span>${q.t}<em>${F.m2(q.a)}</em></span>`).join('')}<span><span class="ico" style="--c:var(--primary)"><i data-i="plus"></i></span>Autre montant</span></div>
+  <div class="sect q4-sect"><b>À surveiller</b>${F.nw()}<span class="c">3</span></div>
+  <article class="pn ls">
+    <div class="li">${F.gIco('wifi', 'var(--fn-over)')}<div class="tx"><b>Internet : 45 $ demain</b><span class="s">Facture · rappel la veille</span></div><span class="q4-act">Voir</span></div>
+    <div class="li">${F.gIco('wave', 'var(--fn-warn)')}<div class="tx"><b>1 achat à vérifier</b><span class="s">Café et sandwich · 14,50 $</span></div><span class="q4-act">Vérifier</span></div>
+    <div class="li">${F.gIco('home', maison.col)}<div class="tx"><b>Maison : 80 % de la limite</b><span class="s">120 $ sur 150 $ · au-dessus du rythme</span></div><i class="go" data-i="chev"></i></div>
+  </article>`;
+F.mount('q4p1', S1(), F.fab2());
+
+// 2 · page principale, suite (défilée)
+const tile = (i, t, s, col) => `<div class="pn q4-tile">${F.gIco(i, col, 'sq')}<div style="min-width:0"><b>${t}</b><span class="s">${s}</span></div></div>`;
+F.mount('q4p2', `
+  ${F.sect('À venir · 14 jours', '193,98 $')}<article class="pn ls">${FIN.bills.slice(0, 5).map((b) => F.due(b)).join('')}
+    <div class="q4-after">${F.nw()}<span>Après ces factures : <b>218 $</b>, soit <b>11,47 $ par jour</b></span></div></article>
+  <div class="fn-dayh" style="margin-top:14px">Jeudi 12 novembre<span>−14,50 $ · +0,00 $</span></div><article class="pn ls">${F.op(FIN.ops[0])}</article>
+  ${F.sect('Tout Finance')}<div class="q4-tiles">
+    ${tile('wallet', 'Solde et relevé', '1 846,20 $')}${tile('list', 'Opérations', 'mois par mois')}
+    ${tile('repeat', 'Budget', 'et récurrents', '#B0368A')}${tile('piggy', 'Épargne', 'valeur nette 2 750 $', 'var(--fn-in)')}
+    ${tile('chart', 'Analyse', 'et Évolution', '#2F5BD0')}${tile('wave', 'Apple Pay', 'Active · il y a 39 min', 'var(--fn-warn)')}</div>
+  <div class="foot">Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.</div>
+  <div class="btnO" style="margin-top:10px"><i data-i="gear"></i>Mes paramètres</div>`, F.fab2());
+
+// 3 · revenus et dépenses : la semaine contre la précédente
+const WK = [['epi', 41, 151], ['res', 14.5, 103.5], ['sor', 12, 62], ['tra', 9, 0], ['mai', 0, 120], ['aut', 0, 75]];
+const cmpRow = ([k, a, b]) => { const c = FIN.cat(k), mx = 151;
+  return `<div class="q4-cmp" style="--c:${c.col}">${F.catIco(c)}<div class="tx"><div class="l"><span>${c.n}</span><em><b>${F.m(a)}</b> · ${F.m(b)}</em></div>
+    <div class="q4-b2"><i style="width:${(a / mx * 100).toFixed(1)}%;${a ? '' : 'min-width:0'}"></i></div><div class="q4-b2 pv"><i style="width:${(b / mx * 100).toFixed(1)}%;${b ? '' : 'min-width:0'}"></i></div></div></div>`; };
+F.mount('q4p3', F.nv('', F.rbtn('plus', 'Ajouter')) + `
+  <div class="fn-ttl">Revenus et dépenses</div>
+  <div class="seg" style="margin-top:10px"><span class="on">Semaine</span><span>Mois</span></div>
+  <div class="gl fn-month" style="margin-top:10px"><i data-i="chevl"></i><span>Cette semaine · 9 au 15 nov.</span><i data-i="chev" style="opacity:.35"></i></div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="q4-two"><div><span class="fn-lab">Cette semaine</span><b class="fn-num">−76,50 $</b><span class="s">lundi → jeudi</span></div><div><span class="fn-lab">La précédente</span><b class="fn-num" style="color:var(--ink2)">−511,50 $</b><span class="s">7 jours</span></div></div>
+    <div class="fn-cap" style="margin-top:8px"><span class="fn-delta"><i data-i="down"></i>345 $ de moins</span> qu'au même jour la semaine dernière</div>
+    <div style="margin-top:12px">${F.bars({ g: FIN.week.lab.map((l, k) => ({ l, v: [FIN.week.cur[k], FIN.week.prev[k]], hl: k === 3 })), c: ['var(--fn-out)', 'var(--fn-prev)'], max: 150, ref: { v: 21.68, t: '' }, h: 70, bw: 11, bg: 3, aria: 'Chaque jour, cette semaine et la précédente, face à 21,68 $ par jour' })}</div>
+    ${F.leg([['var(--fn-out)', 'Cette semaine'], ['var(--fn-prev)', 'La précédente'], ['var(--ink2)', '21,68 $ par jour', 'dsh']])}
+    <div class="q4-rev"><i data-i="inArrow" style="color:var(--fn-in);font-size:16px"></i><span>Revenus de novembre : <b>+1 150 $</b> (salaire du 5)</span></div>
+  </article>
+  ${F.sect('Par catégorie', 'cette semaine · la précédente')}<article class="pn cd" style="padding:6px 16px 8px">${WK.map(cmpRow).join('')}</article>`);
+
+// 4 · analyse légère
+const DOW = [71.25, 64.5, 36, 77.25, 32, 0, 129];
+F.mount('q4p4', F.nv('') + `
+  <div class="fn-ttl">Analyse</div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="ch"><b>Le mois en un coup d'œil</b><span class="s" style="margin-left:auto">au 12 nov.</span></div>
+    <div class="q4-3"><div><span class="fn-lab">Revenus</span><b class="fn-num fn-in">+1 150 $</b></div><div><span class="fn-lab">Dépenses</span><b class="fn-num">−788 $</b></div><div><span class="fn-lab">Mis de côté</span><b class="fn-num">+362 $</b></div></div>
+    ${F.pace()}
+    <div class="fn-cap" style="margin-top:8px"><span class="fn-delta"><i data-i="down"></i>96 $ de moins</span> qu'en octobre à la même date</div>
+  </article>
+  <div class="sect q4-sect"><b>Par jour de la semaine</b>${F.nw()}<span class="c">moyenne</span></div>
+  <article class="pn cd" style="padding:12px 16px 12px">
+    ${F.bars({ g: ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((l, k) => ({ l, v: [DOW[k]], hl: k === 6 })), c: ['var(--fn-out)'], max: 145, ref: { v: 21.68, t: '' }, h: 92, bw: 22, vals: true, vf: (z) => F.n(z), aria: 'Dépense moyenne par jour de la semaine : le dimanche 129 $' })}
+    ${F.leg([['var(--fn-out)', 'Moyenne de novembre, au 12'], ['var(--ink2)', '21,68 $ par jour', 'dsh']])}
+    <div class="fn-cap" style="margin-top:8px"><b>Le dimanche coûte le plus</b> : 129 $ en moyenne, le jour du gros marché.</div>
+  </article>
+  <article class="pn ls" style="margin-top:12px">${F.row('trend', 'Évolution', 'Six mois, moyennes, comparaisons', { col: '#2F5BD0', r: F.prem() })}${F.row('chart', 'Catégories', 'Répartition et limites', { col: '#7A5BD6' })}</article>`);
+
+// 5 · opérations
+const dayG = (lab, d) => { const list = FIN.ops.filter((o) => o.d === d && !o.rev); const tot = list.reduce((s, o) => s + o.a, 0);
+  return `<div class="fn-dayh">${lab}<span>${tot < 0 ? F.out(-tot) : F.inc(tot)}</span></div><article class="pn ls">${list.map((o) => F.op(o)).join('')}</article>`; };
+F.mount('q4p5', F.nv('', F.rbtn('plus', 'Nouvelle opération')) + `
+  <div class="fn-ttl">Opérations</div>
+  <div style="margin-top:10px">${F.month()}</div>
+  <div class="chips" style="margin-top:10px"><span class="chip on">Tout</span><span class="chip">Dépenses</span><span class="chip">Revenus</span><span class="chip">Catégorie<i data-i="chevd"></i></span></div>
+  <div class="fn-dayh" style="color:var(--fn-warn);margin-top:12px">À vérifier<span>1</span></div>
+  <article class="pn ls">${F.op(FIN.ops[0], { when: 'aujourd\'hui' })}<div class="fn-link" style="border-top:1px solid var(--rule)"><span style="display:flex;gap:7px;align-items:center"><i data-i="check"></i>Confirmer « Restos »</span><span style="color:var(--ink2);font-weight:550;font-size:13px">ou changer</span></div></article>
+  <div class="fn-dayh">Hier<span>−9,00 $</span></div>
+  <article class="pn q4-swp"><div class="q4-acts"><span class="ed"><i data-i="pencil"></i>Modifier</span><span class="del"><i data-i="trash"></i>Supprimer</span></div><div class="ls q4-moved">${F.op(FIN.ops[1])}</div></article>
+  <div class="q4-hint">${F.nw()}<span>Glisse une ligne vers la gauche pour la modifier ou la supprimer.</span></div>
+  ${dayG('Mardi 10 novembre', 10)}${dayG('Lundi 9 novembre', 9)}${dayG('Dimanche 8 novembre', 8)}`);
+
+// 6 · ajout rapide (feuille sur la page principale)
+const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '0', '<i data-i="chevl"></i>'];
+F.mount('q4p6', S1(), F.sheet(`<div class="q4-sh">
+  <div class="seg" style="margin-top:4px"><span class="on">Dépense</span><span>Revenu</span></div>
+  <div class="q4-amt">18,75<small> $</small><span class="q4-caret"></span></div>
+  <div class="chips">${FIN.cats.map((c) => `<span class="chip${c.k === 'epi' ? ' on' : ''}"><i data-i="${c.i}"${c.k === 'epi' ? '' : ` style="color:${c.col}"`}></i>${c.n}</span>`).join('')}</div>
+  <div class="fn-quick" style="margin-top:8px">${FIN.quick.map((q) => `<span><span class="ico" style="--c:${FIN.cat(q.c).col}"><i data-i="${q.i}"></i></span>${q.t}<em>${F.m2(q.a)}</em></span>`).join('')}</div>
+  <div class="chips" style="margin-top:8px"><span class="chip on"><i data-i="calendar"></i>Aujourd'hui</span><span class="chip">Hier</span><span class="chip">Autre date</span></div>
+  <div class="fn-field" style="margin-top:10px;min-height:44px"><span class="x-lab">Note</span><span style="color:var(--ink2);font-weight:500">Fruits et pain</span></div>
+  <div class="fn-keys" style="margin-top:10px">${keys.map((k) => `<span>${k}</span>`).join('')}</div>
+  <div class="btnP lg" style="margin-top:10px">Enregistrer</div></div>`, 'Ajouter', { st: 'padding-bottom:26px' }));
+
+// 7 · budget et récurrents : le calendrier des échéances
+const DUE = { 1: 'b', 5: 'i', 13: 'b', 17: 'b', 20: 'b', 22: 'b', 25: 'b' };
+const cal = () => { let h = ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d) => `<span class="hd">${d}</span>`).join('') + '<span></span>'.repeat(FIN.dow0);
+  for (let d = 1; d <= FIN.days; d++) { const cls = [d < FIN.day ? 'past' : '', d === FIN.day ? 'today' : '', DUE[d] && d > FIN.day ? 'due' : '', d === 13 ? 'hot' : ''].filter(Boolean).join(' ');
+    h += `<span class="${cls}"><b>${d}</b><u class="${DUE[d] || ''}"></u></span>`; }
+  return `<div class="q4-cal" role="img" aria-label="Échéances de novembre : 13, 17, 20, 22 et 25 ; passe d'autobus le 1er, salaire le 5">${h}</div>`; };
+F.mount('q4p7', F.nv('') + `
+  <div class="fn-ttl">Budget et récurrents</div>
+  <article class="pn cd" style="margin-top:12px;padding-bottom:4px">
+    <div class="ch"><b>Budget du mois</b><span class="link" style="margin-left:auto;display:flex;gap:5px;align-items:center"><i data-i="pencil" style="font-size:13px"></i>1 200 $</span></div>
+    <div style="margin-top:6px">${F.pace({ right: '412 $ restants' })}</div>
+    <div class="fn-link" style="border-top:1px solid var(--rule);margin-top:10px"><span>Limites par catégorie · Maison à 80 %</span><i data-i="chev"></i></div>
+  </article>
+  ${F.sect('Novembre', '307,97 $ par mois')}<article class="pn cd" style="padding:10px 12px 10px">${cal()}
+    <div class="fn-leg q4-leg" style="gap:6px 12px"><span><i class="dot" style="background:var(--fn-out)"></i>Facture ou montant fixe</span><span><i class="dot" style="background:var(--fn-in)"></i>Revenu fixe</span><span><i class="dot" style="box-shadow:0 0 0 1.5px var(--ink);background:none"></i>Aujourd'hui</span></div></article>
+  <article class="pn ls" style="margin-top:12px">
+    <div class="li">${F.gIco('bell')}<div class="tx"><b>Rappel des factures</b><span class="s">La veille de chaque échéance</span></div><span class="q4-tog" role="switch" aria-checked="true"></span></div>
+    ${F.due(FIN.bills[0]).replace('fn-due', 'fn-due').replace('<div class="fn-due', '<div style="border-top:1px solid var(--rule)" class="fn-due')}${F.due(FIN.bills[1])}</article>`);
+
+// 8 · épargne : versement direct
+const goalV = (g) => { const p = g.s / g.g;
+  return `<div class="q4-goal"><div class="q4-gh"><div style="flex:1;min-width:0"><b>${g.t}</b><span class="s">${g.per ? `${F.m(g.per)} / mois d'ici ${g.dl}` : 'sans date limite'}</span></div><span class="q4-vers" role="button"><i data-i="plus"></i>Versement</span></div>
+    <div class="fn-bar" style="--c:var(--fn-in);margin-top:10px"><i style="width:${(p * 100).toFixed(1)}%"></i></div>
+    <div class="q4-gl"><span><b>${F.pct(p)}</b> · ${F.m(g.s)} sur ${F.m(g.g)}</span><span>encore ${F.m(g.g - g.s)}</span></div></div>`; };
+F.mount('q4p8', F.nv('') + `
+  <div class="fn-ttl">Épargne</div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="fn-lab">Mis de côté en novembre</div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><span class="fn-amt sm fn-in">+362<small>$</small></span><span class="fn-cap">revenus moins dépenses</span></div>
+    <div class="okl" style="margin-top:8px;font-size:13.5px"><i data-i="checkc"></i>Épargne visée : 300 $ par mois, atteinte</div>
+  </article>
+  ${F.sect('Objectifs', '1 760 $ épargnés')}<article class="pn cd" style="padding:2px 16px 0">${FIN.goals.map(goalV).join('')}
+    <div class="fn-link" style="border-top:1px solid var(--rule)"><span style="display:flex;gap:7px;align-items:center"><i data-i="plusc" style="font-size:19px"></i>Nouvel objectif</span></div></article>
+  ${F.sect('Comptes', 'valeur nette 2 750,80 $')}<article class="pn cd" style="padding:10px 16px 2px">${F.line({ series: [{ v: FIN.nw6, c: 'var(--fn-in)', area: true, dot: true }], h: 36, min: 1500, max: 3000, n: 6, xl: [[0, 'juin'], [5, 'nov.']], aria: 'Valeur nette de juin à novembre : de 1 980 $ à 2 750,80 $' })}
+    <div class="ls" style="padding:2px 0 0">${FIN.accounts.map(F.acct).join('')}</div></article>`);
+
+// où se trouve chaque fonction existante
+F.mapNote('q4map', {
+  sel: 'Sélecteur de semaine en haut de la page principale (écran 1), inchangé : il pilote le chiffre du jour.',
+  reste: 'Héros (écran 1) : reste du mois et « par jour » sous le chiffre du jour ; Analyse (écran 4).',
+  budget: 'Lien « Budget 1 200 $ » du héros (écran 1) ; Budget et récurrents (écran 7).',
+  cmp: 'Analyse (écran 4), sous la barre du budget ; la semaine contre la précédente dans Revenus et dépenses (écran 3).',
+  add: 'Boutons flottants Dépense / Revenu et feuille d\'ajout (écran 6) ; Modifier et Supprimer en glissant une ligne (écran 5).',
+  day: 'Sélecteur de semaine (écran 1) ; opérations du jour choisi (écran 2) ; la semaine jour par jour (écran 3).',
+  applepay: 'Alerte « 1 achat à vérifier » (écran 1), section en tête des Opérations (écran 5) ; réglage par le raccourci « Apple Pay » (écran 2).',
+  solde: 'Raccourci « Solde et relevé · 1 846,20 $ » (écran 2) : il ouvre la carte actuelle (courbe, Mois / 3 mois / Année, solde de départ).',
+  releve: 'Même page que le solde (raccourci de l\'écran 2).',
+  ops: 'Opérations (écran 5) : sélecteur de mois, puces Dépenses / Revenus / Catégorie.',
+  cats: 'Revenus et dépenses (écran 3) ; limites dans Budget et récurrents (écran 7) ; page Catégories (anneau) par l\'Analyse (écran 4).',
+  bills: 'Échéancier « À venir » (écran 2), calendrier (écran 7), alerte de la veille (écran 1).',
+  fixed: 'Calendrier de Budget et récurrents (écran 7).',
+  goals: 'Épargne (écran 8), avec « Versement » direct.',
+  accounts: 'Épargne (écran 8), en compact, avec la valeur nette et sa courbe.',
+  trends: 'Lien de l\'Analyse (écran 4), Premium.',
+  quick: 'Puces d\'ajout rapide de la page principale (écran 1) et de la feuille d\'ajout (écran 6) ; options du widget, comme aujourd\'hui.',
+  settings: '« Mes paramètres » en bas de la page principale (écran 2) ; rappel des factures aussi dans Budget et récurrents (écran 7).',
+  tofill: 'Inchangé : en tête de la page principale quand le budget manque.',
+});
+Cristal.init();
+</script>
+</body>
+</html>

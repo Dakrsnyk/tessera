@@ -1,0 +1,170 @@
+/* finance.css : base commune des planches « Refonte de Finance » (2026-11-16). À charger APRÈS ../2026-11-15-cristal/cristal.css.
+   Rien ici ne change le système Cristal : ce sont des pièces propres à Finance (préfixe fn-), posées sur les jetons du thème
+   (--primary, --ink, --ink2, --panel, --track, --rule…). Une planche = un fichier HTML qui charge cristal.css, finance.css,
+   puis cristal.js, finance.js et son propre script, et appelle Cristal.init() en dernier. */
+
+/* ---------- couleurs propres à Finance ----------
+   Revenus = vert ; dépenses = encre ardoise (une dépense n'est pas une faute) ; rouge réservé au dépassement ;
+   mois précédent = gris pointillé. Jamais la couleur seule : toujours un signe (+ / −), un mot ou un motif. */
+.fn { --fn-in: #1F8A62; --fn-out: #45566E; --fn-over: #C93A3A; --fn-prev: #9AA6B8; --fn-new: #5B3FC4; --fn-newbg: #ECE7FA; --fn-warn: #9A6508; --fn-warnbg: #FBEFD9; }
+.dk .fn, .fn.dk { --fn-in: #5FD3A0; --fn-out: #B9C6D8; --fn-over: #FF7A7A; --fn-prev: #6E7A8C; --fn-new: #B9A6FF; --fn-newbg: #2E2550; }
+.fn-in { color: var(--fn-in); } .fn-out { color: var(--fn-out); } .fn-over { color: var(--fn-over); }
+
+/* ---------- barre de navigation : titre centré, retour rond en verre ---------- */
+.fn .nv { position: relative; }
+.fn .nv .t { position: absolute; left: 0; right: 0; text-align: center; pointer-events: none; }
+.fn .nv .rb { position: relative; z-index: 1; }
+.fn .wsel .d.next { opacity: .3; }                 /* Finances bloque le futur (allowsFuture: false) */
+.fn .sheet .rb { background: var(--well); }
+.fn .sect { margin: 16px 4px 8px; }
+.fn .ls > .li { min-height: 50px; }
+.fn-ttl { font-size: 30px; font-weight: 700; letter-spacing: -.025em; line-height: 1.1; margin: 0 3px; }
+
+/* ---------- chiffres ---------- */
+.fn-amt { font-size: 56px; font-weight: 750; letter-spacing: -.045em; line-height: .95; font-variant-numeric: tabular-nums; }
+.fn-amt small { font-size: 26px; font-weight: 650; color: var(--ink2); letter-spacing: -.01em; margin-left: 3px; }
+.fn-amt.md { font-size: 44px; } .fn-amt.md small { font-size: 22px; }
+.fn-amt.sm { font-size: 34px; letter-spacing: -.035em; } .fn-amt.sm small { font-size: 18px; }
+.fn-num { font-size: 22px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; white-space: nowrap; }
+.fn-num small { font-size: 13px; font-weight: 600; color: var(--ink2); letter-spacing: 0; margin-left: 2px; }
+.fn-num.sm { font-size: 18px; }
+.fn-lab { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink2); }
+.fn-cap { font-size: 13px; line-height: 1.38; color: var(--ink2); }
+.fn-cap b { color: var(--ink); font-weight: 650; }
+.fn-delta { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 650; white-space: nowrap; }
+.fn-delta i { font-size: 13px; --sw: 2.3; }
+.fn-tn { font-variant-numeric: tabular-nums; }
+
+/* ---------- héros (la carte de verre du haut : une seule par écran) ---------- */
+.fn-hero { border-radius: var(--r); padding: 16px 16px 16px; }
+.fn-hero .fn-amt { margin-top: 8px; }
+.fn-pace { position: relative; height: 10px; border-radius: 5px; background: var(--track); overflow: visible; }
+.fn-pace > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px; background: var(--fn-out); }
+.fn-pace > u { position: absolute; top: -4px; bottom: -4px; width: 2px; border-radius: 1px; background: var(--ink); }
+.fn-pace-l { display: flex; justify-content: space-between; margin-top: 7px; font-size: 12px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.fn-pace-l b { color: var(--ink); font-weight: 650; }
+
+/* ---------- tuiles de chiffres ---------- */
+.fn-kpis { display: grid; gap: 10px; }
+.fn-kpis.k2 { grid-template-columns: 1fr 1fr; } .fn-kpis.k3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.fn-kpi { padding: 12px 13px 13px; border-radius: 20px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.fn-kpi .h { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 650; color: var(--ink2); white-space: nowrap; }
+.fn-kpi .h i { font-size: 15px; --sw: 2.2; }
+.fn-kpi .s { margin-top: 1px; }
+.fn-k3 .fn-num { font-size: 18px; }
+
+/* ---------- jetons « Nouveau » et « Premium » dans l'écran ---------- */
+.fn-new { display: inline-flex; align-items: center; height: 18px; padding: 0 6px; border-radius: 6px; background: var(--fn-newbg); color: var(--fn-new); font-size: 10px; font-weight: 750; letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; vertical-align: 2px; flex: none; }
+.fn-newbox { outline: 1.5px dashed color-mix(in srgb, var(--fn-new) 55%, transparent); outline-offset: 3px; }
+.fn .prem { height: 20px; font-size: 10.5px; padding: 0 7px; }
+.fn-lock { display: inline-flex; align-items: center; gap: 4px; } .fn-lock i { font-size: 12px; --sw: 2.3; }
+
+/* ---------- listes ---------- */
+.fn-amtR { margin-left: auto; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.fn-amtR b { display: block; font-size: 15px; font-weight: 650; color: var(--ink); }
+.fn-amtR b.in { color: var(--fn-in); }
+.fn-amtR span { display: block; font-size: 12px; color: var(--ink2); }
+.fn-mk { display: inline-flex; align-items: center; gap: 3px; } .fn-mk i { font-size: 13px; }
+.fn-rev { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 0 6px; border-radius: 8px; border: 1.5px solid var(--fn-warn); color: var(--fn-warn); margin-left: 4px; line-height: 15px; }
+.fn-dayh { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; font-weight: 700; color: var(--ink2); margin: 14px 6px 6px; }
+.fn-dayh span { font-weight: 600; font-variant-numeric: tabular-nums; }
+.fn-link { display: flex; align-items: center; justify-content: space-between; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--primary); }
+.fn-link i { font-size: 15px; }
+.fn-more { display: flex; align-items: center; gap: 6px; min-height: 44px; font-size: 14px; font-weight: 650; color: var(--primary); justify-content: center; }
+
+/* ---------- barres de catégorie (avec limite, et repère du rythme si demandé) ---------- */
+.fn-cat { display: flex; align-items: center; gap: 11px; padding: 7px 0; }
+.fn-cat .tx { flex: 1; min-width: 0; }
+.fn-cat .l { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; font-size: 14.5px; font-weight: 650; }
+.fn-cat .l em { font-style: normal; font-weight: 550; font-size: 13px; color: var(--ink2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fn-cat .l em b { color: var(--ink); font-weight: 650; }
+.fn-bar { position: relative; height: 7px; border-radius: 4px; background: var(--track); }
+.fn-bar > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: var(--c, var(--primary)); }
+.fn-bar > u { position: absolute; top: -3px; bottom: -3px; width: 2px; border-radius: 1px; background: var(--ink); opacity: .55; }
+.fn-cat .s2 { font-size: 12px; color: var(--ink2); margin-top: 5px; }
+
+/* ---------- graphiques ---------- */
+.fn-ch { position: relative; }
+.fn-ch svg { display: block; overflow: visible; }
+.fn-ch text { font: 500 10.5px Inter, sans-serif; fill: var(--ink2); font-variant-numeric: tabular-nums; }
+.fn-ch text.b { font-weight: 700; fill: var(--ink); }
+.fn-leg { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 12px; color: var(--ink2); }
+.fn-leg span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.fn-leg u { width: 10px; height: 10px; border-radius: 3px; background: var(--c); flex: none; }
+.fn-leg u.ln { height: 0; border-top: 2.5px solid var(--c); border-radius: 0; width: 14px; }
+.fn-leg u.dsh { height: 0; border-top: 2px dashed var(--c); border-radius: 0; width: 14px; background: none; }
+.fn-leg u.hat { background: repeating-linear-gradient(135deg, var(--c) 0 2px, transparent 2px 4px); border: 1px solid var(--c); }
+.fn-stack { display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 2px; }
+.fn-stack > i { display: block; height: 100%; background: var(--c); }
+.fn-donut { position: relative; flex: none; }
+.fn-donut .in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.fn-donut .in b { font-size: 24px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+.fn-donut .in small { font-size: 11.5px; font-weight: 600; color: var(--ink2); margin-top: 4px; }
+.fn-heat { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.fn-heat > span { aspect-ratio: 1; border-radius: 8px; display: grid; place-items: center; font-size: 11.5px; font-weight: 600; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.fn-heat > span.h { font-size: 10.5px; font-weight: 700; aspect-ratio: auto; height: 16px; }
+.fn-heat > span.f { color: var(--ink2); opacity: .45; border: 1.5px dashed var(--rule2); }
+.fn-heat > span.t { box-shadow: 0 0 0 2px var(--ink); }
+
+/* ---------- échéancier (factures et montants fixes à venir) ---------- */
+.fn-due { display: flex; align-items: center; gap: 11px; min-height: 52px; padding: 6px 0; border-top: 1px solid var(--rule); }
+.fn-due:first-child { border-top: 0; }
+.fn-due .d { width: 40px; flex: none; text-align: center; line-height: 1.05; }
+.fn-due .d b { display: block; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.fn-due .d small { font-size: 10.5px; font-weight: 700; color: var(--ink2); text-transform: uppercase; letter-spacing: .04em; }
+.fn-due.hot .d b, .fn-due.hot .d small { color: var(--fn-over); }
+.fn-due .tx { flex: 1; min-width: 0; } .fn-due .tx b { display: block; font-size: 15px; font-weight: 650; }
+
+/* ---------- alertes ---------- */
+.fn-alert { display: flex; gap: 11px; align-items: flex-start; padding: 12px 14px; border-radius: 18px; }
+.fn-alert .ico { width: 32px; height: 32px; }
+.fn-alert b { display: block; font-size: 14.5px; font-weight: 650; line-height: 1.25; }
+.fn-alert .s { margin-top: 2px; }
+.fn-alert .act { margin-left: auto; align-self: center; font-size: 13.5px; font-weight: 650; color: var(--primary); white-space: nowrap; padding-left: 6px; }
+
+/* ---------- ajout rapide ---------- */
+.fn-quick { display: flex; gap: 8px; overflow: hidden; margin-right: -20px; }
+.fn-quick > span { flex: none; height: 44px; padding: 0 14px 0 6px; border-radius: 22px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 650; background: var(--panel); border: 1px solid rgba(255,255,255,.85); box-shadow: 0 4px 12px rgb(var(--sh) / .06); white-space: nowrap; }
+.fn-quick > span .ico { width: 32px; height: 32px; font-size: 15px; }
+.fn-quick > span em { font-style: normal; color: var(--ink2); font-weight: 600; font-variant-numeric: tabular-nums; }
+.fn-keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.fn-keys span { height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; font-weight: 550; background: var(--card); font-variant-numeric: tabular-nums; }
+.fn-field { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 0 14px; border-radius: 16px; background: var(--well); font-size: 15px; gap: 10px; }
+.fn-field .x-lab { flex: none; }
+.fn-field > span:last-child { display: flex; align-items: center; gap: 7px; font-weight: 600; min-width: 0; }
+.fn-field i { font-size: 17px; color: var(--primary); }
+
+/* ---------- action flottante à deux boutons ---------- */
+.fn-fab2 { position: absolute; z-index: 7; left: 20px; right: 20px; bottom: 98px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.fn-fab2 > div { height: 50px; border-radius: 25px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 650; box-shadow: 0 10px 24px rgb(var(--sh) / .18); }
+.fn-fab2 > div i { font-size: 18px; --sw: 2.3; }
+.fn-fab2 .p { background: var(--primary); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 10px 24px rgb(var(--sh) / .22); }
+.fn-fab2 .g { background: var(--glass); -webkit-backdrop-filter: blur(22px) saturate(1.6); backdrop-filter: blur(22px) saturate(1.6); border: 1px solid rgba(255,255,255,.7); color: var(--fn-in); }
+.phone:has(.fn-fab2) .edge { height: 204px; background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 0%, transparent), color-mix(in srgb, var(--bg) 92%, transparent) 22%, var(--bg) 31%); }
+.fn .fab i { font-size: 19px; }
+
+/* ---------- sélecteur de mois ---------- */
+.fn-month { display: flex; align-items: center; justify-content: space-between; height: 44px; border-radius: 22px; font-size: 15px; font-weight: 650; }
+.fn-month > i { width: 44px; display: grid; place-items: center; font-size: 18px; color: var(--primary); }
+.fn-month > i.lk { color: var(--ink2); font-size: 15px; }
+.fn-search { display: flex; align-items: center; gap: 8px; height: 44px; border-radius: 22px; padding: 0 14px; font-size: 15px; color: var(--ink2); }
+.fn-search i { font-size: 18px; }
+
+/* ================= planche ================= */
+.fn-rule { display: grid; grid-template-columns: 1.25fr 1fr 1fr 1fr; gap: 0; margin: 0 9px 22px; background: #fff; border: 1px solid #D5DDE8; border-radius: 22px; overflow: hidden; font-family: Inter, sans-serif; }
+.fn-rule > div { padding: 18px 20px; border-left: 1px solid #E3E7EE; }
+.fn-rule > div:first-child { border-left: 0; background: linear-gradient(160deg, #F3FAF7, #fff); }
+.fn-rule h3 { font-size: 20px; font-weight: 800; letter-spacing: -.015em; line-height: 1.15; }
+.fn-rule h5 { font-size: 11px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; color: #5B6577; margin-bottom: 6px; }
+.fn-rule p { font-size: 13.5px; line-height: 1.45; color: #2B3545; margin-top: 6px; }
+.fn-rule ol { margin: 4px 0 0 0; padding-left: 0; list-style: none; display: grid; gap: 5px; counter-reset: k; }
+.fn-rule ol li { font-size: 13px; line-height: 1.38; color: #2B3545; display: flex; gap: 8px; }
+.fn-rule ol li b.p { flex: none; display: inline-grid; place-items: center; min-width: 26px; height: 19px; border-radius: 6px; font-size: 10.5px; font-weight: 800; }
+.fn-rule .p1 { background: #1F6B5C; color: #fff; } .fn-rule .p2 { background: #CFE7DF; color: #134B3F; } .fn-rule .p3 { background: #EDF1F6; color: #4E5A6B; }
+.cap li .tag.d { min-width: 82px; }
+.fn-num-sp { letter-spacing: -.01em; }
+/* corrections relevées par les planches 2 et 3 : l'action à deux boutons est hors de .scr (elle doit prendre la couleur de la mini-app),
+   et la règle « .sect span » de cristal.css ne doit pas agrandir les jetons Premium / Nouveau posés dans un titre de section */
+.phone.app .fn-fab2 { --primary: var(--cs); }
+.sect span.prem, .sect span.fn-new { margin-left: 0; font-size: 10.5px; color: inherit; }
+.sect span.prem { color: #6B4E0A; } .sect span.fn-new { color: var(--fn-new); font-size: 10px; }

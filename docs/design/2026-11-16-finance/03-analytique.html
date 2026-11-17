@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Finance — Direction 3 : Analytique</title>
+<link rel="stylesheet" href="../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="finance.css">
+<style>
+  /* préfixe a3- : propre à cette planche */
+  .a3-per { display: flex; gap: 2px; height: 46px; border-radius: 23px; padding: 3px; margin-top: 4px; }
+  .a3-per span { flex: 1; border-radius: 20px; display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 13.5px; font-weight: 650; color: var(--ink); white-space: nowrap; }
+  .a3-per span.on { background: var(--primary); color: #fff; }
+  .a3-per span i { font-size: 11px; --sw: 2.4; color: var(--ink2); }
+  .a3-per span.fn-newbox { outline-offset: -3px; }
+  .a3-dp { display: inline-flex; align-items: center; gap: 4px; height: 26px; padding: 0 10px; border-radius: 13px; background: var(--well); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .a3-dp i { font-size: 13px; --sw: 2.4; }
+  .a3-g4 { display: grid; grid-template-columns: 1fr 1fr; }
+  .a3-g4 > div { padding: 9px 0 9px 14px; display: flex; flex-direction: column; gap: 2px; }
+  .a3-g4 > div:nth-child(odd) { padding-left: 0; border-right: 1px solid var(--rule); }
+  .a3-g4 > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .a3-g4 .fn-num { font-size: 21px; }
+  .a3-g4 .s { font-size: 12px; }
+  .a3-tb { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .a3-tb th { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--ink2); text-align: right; padding: 0 0 6px; }
+  .a3-tb th:first-child, .a3-tb td:first-child { text-align: left; }
+  .a3-tb td { text-align: right; padding: 6px 0; border-top: 1px solid var(--rule); white-space: nowrap; }
+  .a3-tb td:first-child { font-weight: 650; }
+  .a3-tb td em { font-style: normal; color: var(--ink2); font-size: 12px; margin-left: 4px; }
+  .a3-tb tr.cur td { color: var(--ink2); } .a3-tb tr.cur td:first-child { color: var(--ink); }
+  .a3-tb tr.avg td { border-top: 1.5px solid var(--ink); font-weight: 700; }
+  .a3-cr { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 6px 0; border-top: 1px solid var(--rule); }
+  .a3-cr:first-child { border-top: 0; }
+  .a3-cr .tx { flex: 1; min-width: 0; } .a3-cr .tx b { display: block; font-size: 14.5px; font-weight: 650; }
+  .a3-cr .tx .s { font-size: 12px; }
+  .a3-cr .sp6 { flex: none; width: 54px; }
+  .a3-cr .fn-amtR b { font-size: 14.5px; }
+  .a3-heat .fn-heat { gap: 4px; }
+  .a3-heat .fn-heat > span:not(.h) { aspect-ratio: auto; height: 29px; border-radius: 7px; }
+  .a3-scale { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11.5px; color: var(--ink2); }
+  .a3-scale u { flex: none; width: 16px; height: 10px; border-radius: 3px; }
+  .a3-fact { display: flex; gap: 11px; align-items: flex-start; padding: 9px 0; border-top: 1px solid var(--rule); font-size: 13.5px; line-height: 1.38; }
+  .a3-fact:first-child { border-top: 0; }
+  .a3-fact .ico { width: 30px; height: 30px; font-size: 15px; }
+  .a3-fact b { font-weight: 650; }
+  .a3-sum { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .a3-sum > div { display: flex; flex-direction: column; gap: 2px; padding-left: 12px; border-left: 1px solid var(--rule); }
+  .a3-sum > div:first-child { padding-left: 0; border-left: 0; }
+  .a3-sum .fn-num { font-size: 19px; }
+  .a3-sort { display: inline-flex; align-items: center; gap: 5px; height: 44px; font-size: 14px; font-weight: 650; color: var(--primary); }
+  .a3-sort i { font-size: 15px; }
+  .a3-proj { position: relative; height: 12px; border-radius: 6px; background: var(--track); }
+  .a3-proj > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px 0 0 6px; background: var(--c, var(--fn-out)); }
+  .a3-proj > s { position: absolute; top: 0; bottom: 0; border-radius: 0 6px 6px 0; background: repeating-linear-gradient(135deg, var(--c, var(--fn-out)) 0 2px, transparent 2px 5px); border: 1.2px solid var(--c, var(--fn-out)); border-left: 0; opacity: .75; }
+  .a3-proj > u { position: absolute; top: -4px; bottom: -4px; width: 2px; border-radius: 1px; background: var(--ink); }
+  .a3-proj.sm { height: 8px; } .a3-proj.sm > u { top: -3px; bottom: -3px; }
+  .a3-pl { display: flex; justify-content: space-between; margin-top: 7px; font-size: 12px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+  .a3-pl b { color: var(--ink); font-weight: 650; }
+  .a3-eta { display: flex; align-items: flex-start; gap: 7px; margin-top: 7px; font-size: 12.5px; line-height: 1.35; color: var(--ink2); }
+  .a3-eta b { color: var(--ink); font-weight: 650; }
+  .a3-ctx { border-radius: 18px; background: var(--well); padding: 4px 14px; }
+  .a3-ctx .a3-fact { border-top-color: color-mix(in srgb, var(--rule) 70%, transparent); padding: 8px 0; }
+  .a3-det { text-align: center; padding: 0 0 2px; }
+  .a3-det .ico { margin: 0 auto 8px; }
+  .a3-det .fn-amt { font-size: 42px; }
+  .a3-kv { display: flex; align-items: center; justify-content: space-between; min-height: 44px; border-top: 1px solid var(--rule); font-size: 15px; gap: 10px; }
+  .a3-kv:first-child { border-top: 0; }
+  .a3-kv > span:first-child { color: var(--ink2); }
+  .a3-kv > span:last-child { font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .sect span.prem, .sect span.fn-new { margin-left: 0; }
+  .sect span.prem { font-size: 10.5px; color: #6B4E0A; } .sect span.fn-new { font-size: 10px; color: var(--fn-new); }
+  .a3-proj { --c: var(--fn-out); }
+  .a3-eta { display: block; } .a3-eta .fn-new { margin-right: 5px; }
+  #a3p3 .scr, #a3p4 .scr, #a3p7 .scr, #a3p8 .scr { padding-bottom: 0; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">3</div><div><h1>Direction 3 · Analytique</h1>
+    <p>Comprendre son argent dans le temps : chaque chiffre est comparé (au mois dernier à la même date, à un mois habituel, au budget), une période choisie en haut pilote tout l'écran, et des constats écrits disent ce que montrent les graphiques. Journée d'exemple des planches Cristal : jeudi 12 novembre, 13 h 20, nappe et couleur d'action de Finances (jade), thème Saphir.</p></div>
+    <span class="badge">Étape 1 · conception · données d'exemple</span></header>
+
+  <div class="fn-rule">
+    <div><h5>La logique</h5><h3>Comparer pour comprendre</h3><p>Le temps est l'axe principal. On ne lit jamais un chiffre seul : 788 $ dépensés, c'est 96 $ de moins qu'en octobre au même jour, 66 % du budget à 40 % du mois. Chaque page répond à une question : où, quand, combien de plus ou de moins, et ce que ça donnera à la fin du mois.</p></div>
+    <div><h5>En ouvrant Finance</h5><ol><li><b class="p p1">P1</b>Dépensé ce mois-ci et l'écart au mois dernier</li><li><b class="p p2">P2</b>Courbe du mois : novembre, octobre, budget</li><li><b class="p p1">P1</b>Revenus, dépenses, mis de côté, taux d'épargne, solde</li><li><b class="p p2">P2</b>Ce qui a changé, par catégorie</li></ol></div>
+    <div><h5>Une touche plus loin</h5><ol><li><b class="p p2">P2</b>Six mois de revenus et de dépenses</li><li><b class="p p2">P2</b>Catégories face à un mois habituel</li><li><b class="p p2">P2</b>Habitudes : calendrier, jours de la semaine</li><li><b class="p p3">P3</b>Projection du budget, récurrents, épargne</li></ol></div>
+    <div><h5>Forces et limites</h5><p><b>+</b> La plus riche pour comprendre et progresser ; donne envie de Premium (les comparaisons viennent des mois passés).</p><p><b>−</b> Le solde et les factures à venir passent au second plan ; beaucoup de chiffres pour un usage pressé ; le plus de choses à développer (constats, projections, tri, habitudes).</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Page principale</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="a3p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Le mois, comparé dès l'ouverture</h4>
+        <p>En haut, la période pilote tout l'écran. Le grand chiffre est ce qui est dépensé, avec son écart au mois dernier au même jour ; la courbe montre novembre contre octobre et le budget. Sans Premium : novembre et le budget seuls, l'écart total reste affiché.</p>
+        <ul><li><span class="tag e">Existe</span><span>Dépensé, reste, budget, « 96 $ de moins que le mois dernier à la même date » (gratuit), revenus, solde du compte (le toucher ouvre sa courbe et le relevé).</span></li>
+          <li><span class="tag a">À adapter</span><span>Courbe cumulée novembre / octobre (Premium) ; taux d'épargne du mois ; « Ce qui a changé » (comparaison d'Évolution, Premium) ; « Semaine » déplie le sélecteur de semaine actuel.</span></li>
+          <li><span class="tag d">Nouveau</span><span>« 3 mois » et « Année » pour toute la page (contour violet), Premium ; aujourd'hui ils n'existent que pour la courbe du solde.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">2 · Revenus et dépenses</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="a3p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Six mois d'un coup d'œil</h4>
+        <p>Barres vertes pour les revenus, encre pour les dépenses, une ligne bleue pour ce qui reste. Le tableau donne les chiffres exacts ; novembre est en cours (hachures, chiffres grisés).</p>
+        <ul><li><span class="tag e">Existe</span><span>Page Évolution (Premium) : six mois, moyenne par mois sur les mois complets, « Mis de côté » et « % des revenus ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Ligne « mis de côté » sur le graphique ; tableau mois par mois.</span></li>
+          <li><span class="tag d">Nouveau</span><span>Constat écrit (« ton meilleur mois »), à partir des mêmes chiffres.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">3 · Catégories</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="a3p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Chaque catégorie face à un mois habituel</h4>
+        <p>L'anneau donne la répartition ; chaque ligne dit où en est la catégorie par rapport à sa moyenne de juin à octobre, avec sa petite courbe sur six mois. Au 12, le mois n'est écoulé qu'à 40 %.</p>
+        <ul><li><span class="tag e">Existe</span><span>Anneau, montants, parts, sélecteur de mois (mois passés en Premium), « Nouvelle catégorie », réglages d'une catégorie au toucher.</span></li>
+          <li><span class="tag d">Nouveau</span><span>« % d'un mois habituel » et mini-courbes six mois (Premium : elles viennent des mois passés). Sans Premium : montant et part du mois.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">4 · Habitudes de dépense</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="a3p4"></div>
+      <div class="cap"><h4>Quand et comment je dépense</h4>
+        <p>Le calendrier colore chaque jour selon ce qu'il a coûté ; les barres cumulent les jours de la semaine ; trois constats écrits résument le mois. Tout vient des opérations déjà notées.</p>
+        <ul><li><span class="tag d">Nouveau</span><span>Page entière : calendrier coloré, dépenses par jour de la semaine, constats (nombre, moyenne, plus grosse dépense, fréquence d'une catégorie).</span></li>
+          <li><span class="tag a">À adapter</span><span>Gratuite si elle reste sur le mois en cours (même règle qu'aujourd'hui) ; les mois passés, Premium.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Opérations</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="a3p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Trier pour trouver</h4>
+        <p>Les puces filtrent, le tri range par montant : les grosses dépenses remontent. La synthèse du haut suit les filtres ; chaque ligne dit sa part du mois.</p>
+        <ul><li><span class="tag e">Existe</span><span>Dépenses / Revenus, filtre de catégorie, mois par mois (mois passés en Premium), « + », marques Apple Pay et « À vérifier ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Puce « À vérifier » ; part du mois sur chaque ligne.</span></li>
+          <li><span class="tag d">Nouveau</span><span>Tri (date, montant, catégorie) ; synthèse : nombre, moyenne, plus grosse.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">6 · Détail d'une opération</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="none" id="a3p6"></div><span class="flow"></span>
+      <div class="cap"><h4>Une dépense, remise en contexte</h4>
+        <p>La fiche dit ce que pèse la dépense : sa part du mois, sa catégorie face à un mois habituel, la dépense moyenne de la catégorie.</p>
+        <ul><li><span class="tag e">Existe</span><span>Montant, catégorie, note, date, « Supprimer la dépense » ; « Modifier » ouvre l'éditeur actuel.</span></li>
+          <li><span class="tag d">Nouveau</span><span>Bloc « En contexte » (la comparaison au mois habituel est Premium).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">7 · Budget et récurrents</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="a3p7"></div><span class="flow"></span>
+      <div class="cap"><h4>Où finira le mois</h4>
+        <p>Une estimation simple et expliquée : ce qui est dépensé, plus ce qui avait été dépensé après le 12 en octobre. Par catégorie, la partie hachurée est estimée ; le trait noir est la limite.</p>
+        <ul><li><span class="tag e">Existe</span><span>Budget du mois, limites par catégorie, factures et abonnements, revenus et dépenses fixes, total par mois.</span></li>
+          <li><span class="tag a">À adapter</span><span>Part des récurrents dans un mois habituel ; factures et montants fixes sur une même page.</span></li>
+          <li><span class="tag d">Nouveau</span><span>Estimation de fin de mois, totale et par catégorie (Premium : elle s'appuie sur octobre). C'est un repère, pas une prévision.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">8 · Épargne et objectifs</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="a3p8"></div>
+      <div class="cap"><h4>Est-ce que j'avance ?</h4>
+        <p>Ce que chaque mois a laissé, face à l'épargne visée ; les objectifs avec la date d'arrivée au rythme des versements ; la valeur nette sur six mois.</p>
+        <ul><li><span class="tag e">Existe</span><span>Objectifs, versements, date limite, mensualité nécessaire, comptes et dettes, valeur nette et sa courbe ; « Épargne visée » (Mes informations).</span></li>
+          <li><span class="tag a">À adapter</span><span>Mis de côté mois par mois face à l'épargne visée (Premium : mois passés).</span></li>
+          <li><span class="tag d">Nouveau</span><span>Date d'arrivée prévue : il faut garder la date de chaque versement (l'app ne garde aujourd'hui que le total épargné).</span></li></ul></div></div>
+  </div>
+
+  <div class="note" style="margin:34px 9px 0" id="a3map"></div>
+</main>
+<script src="../2026-11-15-cristal/cristal.js"></script>
+<script src="finance.js"></script>
+<script>
+/* ---------- pièces propres à cette planche ---------- */
+const A3 = {
+  BLUE: '#2F6FD6',
+  // moyenne d'un mois habituel (juin → octobre) et part atteinte au 12
+  usual: (c) => Math.round(c.m6.slice(0, 5).reduce((a, b) => a + b, 0) / 5),
+  // contrôle de période : Semaine · Mois · 3 mois · Année (3 mois et Année : nouveaux pour toute la page, Premium)
+  per: (on = 'Mois') => `<div class="gl a3-per">${[['Semaine'], ['Mois'], ['3 mois', 1], ['Année', 1]].map(([t, lk]) => `<span class="${t === on ? 'on' : ''}${lk ? ' fn-newbox' : ''}">${t}${lk ? '<i data-i="lock"></i>' : ''}</span>`).join('')}</div>`,
+  // mini-courbe six mois : cinq mois complets en trait plein, novembre (au 12) en pointillés vers un point creux
+  spark(vals, col, w = 54, h = 24) { const max = Math.max(...vals) * 1.08, X = (k) => 3 + k * (w - 6) / 5, Y = (v) => h - 2 - v / max * (h - 4);
+    const d = vals.slice(0, 5).map((v, k) => (k ? 'L' : 'M') + X(k).toFixed(1) + ' ' + Y(v).toFixed(1)).join(' ');
+    return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display:block;overflow:visible" aria-hidden="true"><path d="${d}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>`
+      + `<path d="M${X(4).toFixed(1)} ${Y(vals[4]).toFixed(1)} L${X(5).toFixed(1)} ${Y(vals[5]).toFixed(1)}" stroke="${col}" stroke-width="1.6" stroke-dasharray="2.5 2.5" fill="none"/>`
+      + `<circle cx="${X(5).toFixed(1)}" cy="${Y(vals[5]).toFixed(1)}" r="2.6" fill="var(--card)" stroke="${col}" stroke-width="1.6"/></svg>`; },
+  // barres revenus / dépenses + ligne « mis de côté », même échelle
+  combo(o = {}) { const W = 321, H = 132, pr = 44, pw = W - pr, M = FIN.months, n = M.length, gw = pw / n, bw = 13, gap = 3, max = 2000, Y = (v) => H - v / max * H;
+    let s = '<defs><pattern id="a3hat" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2.2" height="5" fill="currentColor"/></pattern></defs>';
+    [0, 1000, 2000].forEach((v) => { s += `<line x1="0" x2="${pw}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${pw + 6}" y="${Y(v) + 3.5}">${F.m(v)}</text>`; });
+    const pts = [];
+    M.forEach((m, gi) => { const cx = gi * gw + gw / 2, x0 = cx - bw - gap / 2;
+      [[m.i, 'var(--fn-in)'], [m.o, 'var(--fn-out)']].forEach(([v, c], j) => { const x = x0 + j * (bw + gap), y = Y(v), r = 4;
+        const p = `M${x} ${H} V${y + r} Q${x} ${y} ${x + r} ${y} H${x + bw - r} Q${x + bw} ${y} ${x + bw} ${y + r} V${H} Z`;
+        s += m.cur ? `<path d="${p}" fill="${c}" opacity=".2"/><path d="${p}" fill="url(#a3hat)" style="color:${c}"/><path d="${p}" fill="none" stroke="${c}" stroke-width="1.2"/>` : `<path d="${p}" fill="${c}"/>`; });
+      pts.push([cx, Y(m.i - m.o)]);
+      s += `<text x="${cx}" y="${H + 15}" text-anchor="middle" class="${m.cur ? 'b' : ''}">${m.l}</text>`; });
+    s += `<path d="${pts.slice(0, 5).map((p, k) => (k ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ')}" fill="none" stroke="${A3.BLUE}" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>`
+      + `<path d="M${pts[4][0].toFixed(1)} ${pts[4][1].toFixed(1)} L${pts[5][0].toFixed(1)} ${pts[5][1].toFixed(1)}" fill="none" stroke="${A3.BLUE}" stroke-width="2" stroke-dasharray="4 3"/>`
+      + pts.map((p, k) => `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="${k === 3 ? 4.5 : 3.4}" fill="${k === 5 ? 'var(--card)' : k === 3 ? A3.BLUE : 'var(--card)'}" stroke="${A3.BLUE}" stroke-width="2"/>`).join('')
+      ;
+    s += `<line x1="0" x2="${pw}" y1="${H}" y2="${H}" stroke="var(--rule2)"/>`;
+    return `<div class="fn-ch" role="img" aria-label="Revenus, dépenses et mis de côté de juin à novembre ; meilleur mois : septembre, 720 $ mis de côté"><svg width="${W}" height="${H + 19}" viewBox="0 0 ${W} ${H + 19}">${s}</svg></div>`; },
+  // barre de projection : dépensé (plein), estimé (hachuré), limite (trait noir). scale = valeur au bout de la piste
+  proj(v, est, lim, o = {}) { const sc = o.scale || Math.max(lim, est) * 1.08, w = (x) => (x / sc * 100).toFixed(1) + '%';
+    return `<div class="a3-proj${o.sm ? ' sm' : ''}" style="${o.c ? '--c:' + o.c : ''}" role="img" aria-label="${o.aria || ''}"><i style="width:${w(v)}"></i><s style="left:${w(v)};width:${((est - v) / sc * 100).toFixed(1)}%"></s><u style="left:${w(lim)}"></u></div>`; },
+  fact: (i, html, col) => `<div class="a3-fact"><span class="ico"${col ? ` style="--c:${col}"` : ''}><i data-i="${i}"></i></span><span>${html}</span></div>`,
+  dlab: (d) => (d === 1 ? '1er' : d) + ' nov.',
+};
+
+/* 1 · page principale */
+F.mount('a3p1', F.nv('Finances', F.rbtn('plus', 'Ajouter une opération')) + A3.per('Mois') + `
+  <article class="gl fn-hero" style="margin-top:10px;padding-bottom:13px">
+    <div class="fn-lab">Dépensé en novembre · au 12</div>
+    <div style="display:flex;align-items:center;gap:10px;margin-top:7px"><span class="fn-amt md">788<small>$</small></span><span class="a3-dp"><i data-i="down"></i>−96 $ · −11 %</span></div>
+    <div class="fn-cap" style="margin-top:5px">vs octobre à la même date<br><b>412 $</b> restants sur ${F.m(1200)} · <b>21,68 $</b> par jour</div>
+    <div style="margin-top:16px">${F.line({ n: 31, h: 84, max: 1300, w: 321,
+      series: [{ v: FIN.octCum, c: 'var(--fn-prev)', w: 2, dash: true }, { v: FIN.cum, c: 'var(--fn-out)', area: true, ao: .1, dot: true }],
+      ref: { v: 1200, t: 'Budget 1 200 $' },
+      xl: [[0, '1er'], [11, '12'], [30, '31']], aria: 'Dépensé cumulé au 12 : novembre 788 $, octobre 884 $ ; budget 1 200 $' }).replace('</svg>',
+      '<circle cx="116.2" cy="26.9" r="3.2" fill="var(--card)" stroke="var(--fn-prev)" stroke-width="2"/><text x="109" y="19" text-anchor="end" style="font-weight:650">oct. 884 $</text><text class="b" x="124" y="47">nov. 788 $</text></svg>')}</div>
+    <div class="fn-leg" style="margin-top:6px"><span><u class="ln" style="--c:var(--fn-out)"></u>Novembre</span><span><u class="dsh" style="--c:var(--fn-prev)"></u>Octobre ${F.prem()}</span><span><u class="dsh" style="--c:var(--ink)"></u>Budget</span></div>
+  </article>
+  <article class="pn cd" style="margin-top:12px;padding:10px 16px 6px">
+    <div class="ch"><b>Novembre au 12</b><span class="link" style="margin-left:auto;display:flex;align-items:center;gap:4px;min-height:44px">Solde 1 846,20 $<i data-i="chev" style="font-size:13px"></i></span></div>
+    <div class="a3-g4">
+      <div><span class="fn-lab">Revenus</span><b class="fn-num fn-in">+1 150 $</b></div>
+      <div><span class="fn-lab">Dépenses</span><b class="fn-num">−788 $</b></div>
+      <div><span class="fn-lab">Mis de côté</span><b class="fn-num">+362 $</b><span class="s">revenus − dépenses</span></div>
+      <div><span class="fn-lab">Taux d'épargne</span><b class="fn-num">31 %</b><span class="s">moyenne 33 %</span></div>
+    </div>
+  </article>
+  <div class="sect"><b>Ce qui a changé</b><span style="display:flex;gap:6px;align-items:center">vs oct. ${F.prem()}</span></div>
+  <article class="pn ls">${[['sor', 120, 74], ['mai', 160, 120], ['res', 96, 118]].map(([k, a, b]) => { const c = FIN.cat(k), d = b - a;
+    return `<div class="li">${F.catIco(c)}<div class="tx"><b>${c.n}</b><span class="s">${F.m(a)} → ${F.m(b)} à la même date</span></div><div class="fn-amtR"><b>${d > 0 ? '+' : '−'}${F.m(Math.abs(d))}</b><span>${d > 0 ? '+' : '−'}${Math.round(Math.abs(d) / a * 100)} %</span></div></div>`; }).join('')}</article>`);
+
+/* 2 · revenus et dépenses (six mois) */
+const kept = FIN.months.map((m) => m.i - m.o);
+F.mount('a3p2', F.nv('', F.rbtn('plus', 'Ajouter une opération')) + `
+  <div style="display:flex;align-items:center;gap:10px"><div class="fn-ttl">Revenus et dépenses</div></div>
+  <div class="fn-cap" style="margin:4px 3px 0;display:flex;align-items:center;gap:8px">Six derniers mois ${F.prem()}</div>
+  <article class="pn cd" style="margin-top:10px;padding-bottom:12px">
+    ${A3.combo()}
+    ${F.leg([['var(--fn-in)', 'Revenus'], ['var(--fn-out)', 'Dépenses'], [A3.BLUE, 'Mis de côté', 'ln'], ['var(--fn-out)', 'Au 12 nov.', 'hat']])}
+  </article>
+  <article class="pn cd" style="margin-top:12px;padding:12px 16px 8px">
+    <table class="a3-tb"><thead><tr><th>Mois</th><th>Revenus</th><th>Dépenses</th><th>Mis de côté</th></tr></thead><tbody>
+      ${FIN.months.map((m, k) => `<tr class="${m.cur ? 'cur' : ''}"><td>${m.cur ? 'nov. (au 12)' : m.l}</td><td class="fn-in">${F.n(m.i)}</td><td>${F.n(m.o)}</td><td>${F.n(kept[k])}<em>${Math.round(kept[k] / m.i * 100)} %</em></td></tr>`).join('')}
+      <tr class="avg"><td>Moyenne</td><td class="fn-in">${F.n(1754)}</td><td>${F.n(1172)}</td><td>${F.n(582)}<em>33 %</em></td></tr></tbody></table>
+    <div class="fn-cap" style="margin-top:6px;font-size:12px">En dollars. Moyenne sur les 5 mois complets.</div>
+  </article>
+  <article class="pn" style="margin-top:12px;padding:4px 16px">${A3.fact('bulb', `${F.nw()} <b>Septembre reste ton meilleur mois</b> : 720 $ mis de côté, 40 % de tes revenus.`, A3.BLUE)}</article>`);
+
+/* 3 · catégories */
+F.mount('a3p3', F.nv('', F.rbtn('plus', 'Nouvelle catégorie')) + `
+  <div class="fn-ttl">Catégories</div>
+  <div style="margin-top:10px">${F.month()}</div>
+  <article class="pn cd" style="margin-top:12px;display:flex;align-items:center;gap:16px;padding:14px 16px">
+    ${F.donut(FIN.cats.map((c) => ({ v: c.v, c: c.col })), { s: 132, sw: 15, in: '<b>788 $</b><small>dépensés</small>', aria: 'Répartition des 788 $ de novembre entre six catégories' })}
+    <div style="flex:1;min-width:0">
+      <div class="fn-lab">Le mois</div>
+      <div class="fn-cap" style="margin-top:4px">Écoulé à <b>40 %</b>, dépensé à <b>66 %</b> du budget.</div>
+      <div class="fn-cap" style="margin-top:6px">« Habituel » : moyenne de juin à octobre ; pointillés : novembre.</div>
+    </div>
+  </article>
+  <div class="sect"><b>Face à l'habitude</b><span style="display:flex;gap:6px;align-items:center">${F.nw()}${F.prem()}</span></div>
+  <article class="pn" style="padding:2px 16px">${FIN.cats.map((c) => { const u = A3.usual(c);
+    return `<div class="a3-cr">${F.catIco(c)}<div class="tx"><b>${c.n}</b><span class="s">${Math.round(c.v / u * 100)} % · habituel ${F.m(u)}</span></div><span class="sp6">${A3.spark(c.m6, c.col)}</span><div class="fn-amtR"><b>${F.m(c.v)}</b><span>${F.pct(c.v / FIN.spent)}</span></div></div>`; }).join('')}</article>
+`);
+
+/* 4 · habitudes de dépense (nouveau) */
+const wd = [142.5, 129, 72, 154.5, 32, 0, 258];
+F.mount('a3p4', F.nv('', '') + `
+  <div style="display:flex;align-items:center;gap:10px"><div class="fn-ttl">Tes habitudes</div>${F.nw()}</div>
+  <article class="pn cd a3-heat" style="margin-top:12px;padding:12px 16px 12px">
+    <div class="ch" style="height:24px"><b>Novembre, jour par jour</b><span class="s" style="margin-left:auto">au 12</span></div>
+    <div style="margin-top:8px">${F.heat({ max: 200 })}</div>
+    <div class="a3-scale"><span>0 $</span>${[12, 30, 48, 66, 82].map((p) => `<u style="background:color-mix(in srgb, var(--fn-out) ${p}%, var(--card))"></u>`).join('')}<span>200 $ et plus</span><span style="margin-left:auto">pointillés : à venir</span></div>
+  </article>
+  <article class="pn cd" style="margin-top:12px;padding:12px 16px 10px">
+    <div class="ch" style="height:24px"><b>Par jour de la semaine</b><span class="s" style="margin-left:auto">du 1er au 12</span></div>
+    <div style="margin-top:14px">${F.bars({ g: wd.map((v, k) => ({ l: ['lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.', 'dim.'][k], v: [v], hl: k === 6, c: [k === 6 ? 'var(--fn-out)' : 'color-mix(in srgb, var(--fn-out) 45%, var(--card))'] })), max: 290, h: 78, bw: 26, vals: true, vf: (v) => F.n(v, v % 1 ? 2 : 0), aria: 'Dépenses cumulées par jour de la semaine ; le dimanche pèse le plus : 258 $' })}</div>
+  </article>
+  <article class="pn" style="margin-top:12px;padding:2px 16px">
+    ${A3.fact('list', '<b>17 dépenses</b> depuis le 1er, <b>46,35 $</b> en moyenne.')}
+    ${A3.fact('cart', 'La plus grosse : <b>Costco, 103 $</b>, le dimanche 1er.', FIN.cat('epi').col)}
+    ${A3.fact('fork', '<b>Restos : 4 fois</b> ce mois-ci, 118 $ au total.', FIN.cat('res').col)}
+  </article>`);
+
+/* 5 · opérations triées par montant */
+const exp = FIN.ops.filter((o) => o.a < 0).sort((x, y) => x.a - y.a);
+const opsList = exp.slice(0, 8).map((o) => F.op(o, { sub: FIN.cat(o.c).n + ' · ' + A3.dlab(o.d) + (o.fixed ? ' · fixe' : ''), right: F.pct(-o.a / FIN.spent) + ' du mois' })).join('');
+const a3p5 = F.nv('', F.rbtn('plus', 'Nouvelle opération')) + `
+  <div class="fn-ttl">Opérations</div>
+  <div class="chips" style="margin-top:10px"><span class="chip">Tout</span><span class="chip on">Dépenses</span><span class="chip">Revenus</span><span class="chip">À vérifier · 1</span><span class="chip">Catégorie<i data-i="chevd"></i></span></div>
+  <article class="pn cd" style="margin-top:12px;padding:10px 16px 12px">
+    <div class="ch" style="height:24px"><b>Novembre 2026</b><span style="margin-left:auto;display:flex;align-items:center;gap:6px">${F.nw()}</span></div>
+    <div class="a3-sum" style="margin-top:8px">
+      <div><span class="fn-lab">Dépenses</span><b class="fn-num">17</b></div>
+      <div><span class="fn-lab">Moyenne</span><b class="fn-num">46,35 $</b></div>
+      <div><span class="fn-lab">Plus grosse</span><b class="fn-num">103 $</b></div></div>
+  </article>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin:4px 4px 0"><span class="fn-cap">−788 $ au total</span><span class="a3-sort"><i data-i="sliders"></i>Trier : montant<i data-i="chevd"></i></span></div>
+  <article class="pn ls">${opsList}</article>`;
+F.mount('a3p5', a3p5);
+
+/* 6 · détail d'une opération (feuille) */
+const epi = FIN.cat('epi');
+F.mount('a3p6', a3p5, F.sheet(`
+  <div class="a3-det">${F.catIco(epi, 'xl')}<div class="fn-amt">−103<small>,00 $</small></div><div class="h3" style="margin-top:6px">Costco</div><div class="s" style="margin-top:2px">Épicerie · dimanche 1er novembre</div></div>
+  <div style="display:flex;align-items:center;gap:8px;margin:14px 4px 6px"><span class="fn-lab">En contexte</span>${F.nw()}</div>
+  <div class="a3-ctx">
+    ${A3.fact('trophy', '<b>Ta plus grosse dépense</b> de novembre.')}
+    ${A3.fact('percent', '<b>13 %</b> de tes dépenses du mois (788 $).')}
+    <div class="a3-fact" style="display:block"><div style="display:flex;justify-content:space-between;gap:8px"><span><b>Épicerie</b> : 295 $ ce mois-ci</span>${F.prem()}</div>
+      <div class="fn-bar" style="margin:8px 0 5px;--c:${epi.col}"><i style="width:71%"></i></div><span class="s">71 % d'un mois habituel (416 $) · 73,75 $ par achat en moyenne</span></div>
+  </div>
+  <div style="margin-top:6px">
+    <div class="a3-kv"><span>Catégorie</span><span>Épicerie<i data-i="chev" style="color:var(--go);font-size:15px"></i></span></div>
+    <div class="a3-kv"><span>Date</span><span>Dimanche 1er novembre</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px"><div class="btnT"><i data-i="pencil"></i>Modifier</div><div class="btnO" style="color:var(--fn-over);border-color:color-mix(in srgb,var(--fn-over) 40%,transparent)"><i data-i="trash"></i>Supprimer</div></div>`, 'Dépense'));
+
+/* 7 · budget et récurrents : projection */
+const proj = [['mai', 148, 'juste à la limite'], ['res', 193, ''], ['tra', 133, '']];
+F.mount('a3p7', F.nv('', '') + `
+  <div class="fn-ttl">Budget et récurrents</div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="ch"><b>Fin du mois estimée</b>${F.nw()}<span class="link nw" style="margin-left:auto;display:flex;gap:5px;align-items:center;min-height:44px"><i data-i="pencil" style="font-size:13px"></i>${F.m(1200)}</span></div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin:2px 0 12px"><span class="fn-amt sm">≈ 1 114<small>$</small></span><span class="fn-cap">≈ 86 $ sous le budget</span></div>
+    ${A3.proj(788, 1114, 1200, { scale: 1300, aria: '788 $ dépensés, environ 1 114 $ estimés, budget 1 200 $' })}
+    <div class="a3-pl"><span><b>788 $</b> dépensés</span><span>+ ≈ 326 $ d'ici le 30</span><span>budget</span></div>
+    <div class="fn-cap" style="margin-top:8px;font-size:12px">Estimation ${F.prem()} : ce qui est déjà dépensé, plus ce que tu avais dépensé après le 12 en octobre.</div>
+  </article>
+  <div class="sect"><b>Par catégorie, à ce rythme</b><a>Les 6</a></div>
+  <article class="pn cd" style="padding:6px 16px 8px">${proj.map(([k, est, note]) => { const c = FIN.cat(k);
+    return `<div class="fn-cat">${F.catIco(c)}<div class="tx"><div class="l"><span>${c.n}</span><em><b>${F.m(c.v)}</b> → ≈ ${F.m(est)} / ${F.m(c.lim)}</em></div>${A3.proj(c.v, est, c.lim, { sm: 1, c: c.col, scale: c.lim * 1.12 })}${note ? `<div class="s2"><b style="color:var(--ink)">Juste à la limite</b> · 2 $ de marge</div>` : ''}</div></div>`; }).join('')}</article>
+  <div class="sect"><b>Récurrents</b><span>307,97 $ par mois</span></div>
+  <article class="pn cd" style="padding:12px 16px 4px">
+    <div class="fn-cap"><b>26 %</b> d'un mois habituel revient chaque mois.</div>
+    <div style="margin-top:9px">${F.stack([{ v: 210.97, c: 'var(--fn-out)' }, { v: 97, c: '#B0368A' }, { v: 864.03, c: 'var(--track)' }], 12)}</div>
+    ${F.leg([['var(--fn-out)', 'Factures 210,97 $'], ['#B0368A', 'Dépenses fixes 97 $'], ['var(--track)', 'Le reste']])}
+    <div class="ls" style="padding:6px 0 0">${F.due(FIN.bills[0])}${F.due(FIN.bills[1])}</div>
+  </article>`);
+
+/* 8 · épargne et objectifs */
+const pctK = {}; FIN.months.forEach((m, k) => { pctK[kept[k]] = Math.round(kept[k] / m.i * 100) + ' %'; });
+F.mount('a3p8', F.nv('', '') + `
+  <div class="fn-ttl">Épargne</div>
+  <article class="pn cd" style="margin-top:12px;padding-bottom:12px">
+    <div class="ch"><b>Mis de côté chaque mois</b><span style="margin-left:auto">${F.prem()}</span></div>
+    <div style="margin-top:14px">${F.bars({ g: FIN.months.map((m, k) => ({ l: m.l, v: [kept[k]], cur: m.cur, hl: k === 3 })), c: ['var(--fn-in)'], max: 800, yt: [0, 400, 800], h: 92, bw: 22, vals: true, vf: (v) => pctK[v], ref: { v: 300, t: '' }, aria: 'Mis de côté par mois, de juin à novembre ; épargne visée 300 $' })}</div>
+    <div class="fn-leg"><span><u style="--c:var(--fn-in)"></u>Mis de côté (% des revenus au-dessus)</span><span><u class="dsh" style="--c:var(--ink)"></u>Épargne visée 300 $</span></div>
+  </article>
+  <div class="sect"><b>Objectifs</b><span>1 760 $ épargnés</span></div>
+  <article class="pn cd" style="padding:6px 16px 4px">
+    ${F.goal(FIN.goals[0], { more: `<div class="a3-eta">${F.nw()}<span>À ton rythme de versements (≈ 110 $ par mois) : <b>juillet 2027</b>, un mois après ta date.</span></div>` })}
+    <div style="border-top:1px solid var(--rule)"></div>
+    ${F.goal(FIN.goals[1], { more: `<div class="a3-eta">${F.nw()}<span>À ton rythme de versements (≈ 150 $ par mois) : <b>décembre 2027</b>.</span></div>` })}
+  </article>
+  <div class="sect"><b>Valeur nette</b><span>+770,80 $ depuis juin</span></div>
+  <article class="pn cd" style="padding:12px 16px 6px">
+    <div style="display:flex;align-items:baseline;gap:8px"><span class="fn-num">2 750,80 $</span><span class="fn-cap">3 comptes, dont 1 dette</span></div>
+    <div style="margin-top:10px">${F.line({ series: [{ v: FIN.nw6, c: 'var(--fn-in)', area: true, dot: true }], h: 54, min: 1500, max: 3000, n: 6, xl: [[0, 'juin'], [5, 'nov.']], aria: 'Valeur nette de juin à novembre : de 1 980 $ à 2 750,80 $' })}</div>
+  </article>`);
+
+/* où se trouve chaque fonction existante */
+F.mapNote('a3map', {
+  sel: 'Période « Semaine » en haut de la page principale : le sélecteur de semaine actuel s\'y déplie (écran 1).',
+  reste: 'Carte de verre de la page principale : « 412 $ restants sur 1 200 $ » (écran 1) ; « par jour » dans Budget (écran 7).',
+  budget: 'Crayon « 1 200 $ » de Budget et récurrents (écran 7).',
+  cmp: 'Pastille « −96 $ · −11 % » de la page principale, gratuite comme aujourd\'hui (écran 1).',
+  add: 'Bouton « + » de la barre du haut sur chaque page ; « Modifier » et « Supprimer » dans la fiche (écran 6).',
+  day: 'Période « Semaine » : toucher un jour donne ses chiffres et ses opérations (écran 1).',
+  applepay: 'Puce « À vérifier » d\'Opérations (écran 5) ; guide et règles de commerçants dans la liste du bas de la page principale.',
+  solde: '« Solde 1 846,20 $ » de la carte « Novembre au 12 » (écran 1) : il ouvre sa courbe Mois / 3 mois / Année et le solde de départ.',
+  releve: 'Derrière le solde, comme aujourd\'hui (écran 1).',
+  ops: 'Opérations (écran 5) : puces Dépenses / Revenus / Catégorie, plus le tri.',
+  cats: 'Catégories (écran 3) : anneau, « Nouvelle catégorie » (+), réglages au toucher ; limites dans Budget (écran 7).',
+  bills: 'Récurrents de Budget et récurrents (écran 7).', fixed: 'Récurrents (écran 7) : dépenses fixes dans la barre empilée et la liste.',
+  goals: 'Épargne (écran 8).', accounts: 'Épargne, « Valeur nette » (écran 8), comptes dessous.',
+  trends: 'Revenus et dépenses (écran 2), « Ce qui a changé » (écran 1) et Catégories (écran 3) : Premium.',
+  quick: 'Feuille d\'ajout (bouton +) et options du widget, comme aujourd\'hui.',
+  settings: '« Mes paramètres » en bas de la page principale, comme aujourd\'hui.', tofill: 'Inchangé : en tête de la page principale quand le budget manque.',
+});
+Cristal.init();
+</script>
+</body>
+</html>

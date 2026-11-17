@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Finance — Direction 1 : Minimaliste</title>
+<link rel="stylesheet" href="../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="finance.css">
+<style>
+  /* préfixe m1- : propre à cette planche */
+  .m1-date { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 12px; border-radius: 22px; font-size: 14.5px; font-weight: 650; }
+  .m1-date i { font-size: 16px; color: var(--primary); } .m1-date i:last-child { color: var(--ink2); font-size: 14px; }
+  .m1-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 6px 0 14px; }
+  .m1-3 > div { display: flex; flex-direction: column; gap: 4px; padding-left: 12px; border-left: 1px solid var(--rule); }
+  .m1-3 > div:first-child { padding-left: 0; border-left: 0; }
+  .m1-3 .fn-num { font-size: 21px; }
+  .m1-bal { font-size: 50px; font-weight: 750; letter-spacing: -.045em; line-height: .95; font-variant-numeric: tabular-nums; margin-top: 8px; }
+  .m1-bal small { font-size: 26px; font-weight: 650; color: var(--ink2); letter-spacing: -.01em; }
+  .m1-det { text-align: center; padding: 4px 0 2px; }
+  .m1-det .ico { margin: 2px auto 10px; }
+  .m1-det .fn-amt { font-size: 46px; }
+  .m1-kv { display: flex; align-items: center; justify-content: space-between; min-height: 46px; border-top: 1px solid var(--rule); font-size: 15px; gap: 10px; }
+  .m1-kv:first-child { border-top: 0; }
+  .m1-kv > span:first-child { color: var(--ink2); }
+  .m1-kv > span:last-child { font-weight: 600; display: flex; align-items: center; gap: 6px; text-align: right; }
+  .m1-kv i { font-size: 15px; }
+  .m1-warn { display: flex; gap: 10px; align-items: center; padding: 10px 12px 10px 14px; border-radius: 16px; background: var(--fn-warnbg); color: #5E3D00; font-size: 13px; line-height: 1.35; }
+  .m1-warn .btnP { height: 36px; padding: 0 12px; font-size: 13.5px; flex: none; }
+  #m1p2 .scr, #m1p7 .scr { padding-top: 2px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">1</div><div><h1>Direction 1 · Minimaliste</h1>
+    <p>L'esprit des apps d'Apple : un écran calme, trois réponses en haut (combien j'ai, combien il me reste, ce que j'ai fait en dernier), puis une liste fixe vers tout le reste. Chaque page a un seul graphique. Journée d'exemple des planches Cristal : jeudi 12 novembre, 13 h 20, nappe et couleur d'action de Finances (jade), thème Saphir.</p></div>
+    <span class="badge">Étape 1 · conception · données d'exemple</span></header>
+
+  <div class="fn-rule">
+    <div><h5>La logique</h5><h3>Un chiffre, une courbe, une liste</h3><p>On lit Finance comme un relevé de banque bien fait : le solde, le mois en trois chiffres, les dernières opérations. Aucun bloc ne change de place selon les données : les pages sont toujours dans la même liste, au même endroit.</p></div>
+    <div><h5>En ouvrant Finance</h5><ol><li><b class="p p1">P1</b>Solde du compte et sa courbe du mois</li><li><b class="p p1">P1</b>Revenus, dépenses, reste du budget</li><li><b class="p p2">P2</b>Rythme du budget et « par jour »</li><li><b class="p p3">P3</b>Les 3 dernières opérations</li></ol></div>
+    <div><h5>Une touche plus loin</h5><ol><li><b class="p p2">P2</b>Revenus et dépenses, par catégorie</li><li><b class="p p2">P2</b>Évolution sur 6 mois (Premium)</li><li><b class="p p3">P3</b>À venir, factures, récurrents, épargne</li><li><b class="p p3">P3</b>Opérations et relevé réunis</li></ol></div>
+    <div><h5>Forces et limites</h5><p><b>+</b> Le plus calme et le plus rapide à lire ; presque rien à développer.</p><p><b>−</b> « Ce qui arrive bientôt » n'est visible qu'en faisant défiler ; peu d'analyse sur la page principale ; le sélecteur de semaine est replié dans une capsule.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Page principale</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="m1p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Trois réponses en haut</h4>
+        <p>Le solde en grand, avec sa courbe du mois ; puis le mois en trois chiffres séparés (revenus, dépenses, reste) et la barre du budget. Le repère noir montre où l'on devrait en être au 12 du mois.</p>
+        <ul><li><span class="tag e">Existe</span><span>Solde du compte, courbe, Mois / 3 mois / Année (cadenas Premium), reste, « par jour », comparaison au mois dernier, opérations du jour.</span></li>
+          <li><span class="tag a">À adapter</span><span>Le sélecteur de semaine replié dans la capsule « 12 nov. » de la barre du haut (il s'ouvre en la touchant) ; le repère du rythme sur la barre ; une seule action « Ajouter » (Dépense ou Revenu dans la feuille).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">2 · Page principale, suite</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="m1p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Une liste qui ne bouge plus</h4>
+        <p>Après les dernières opérations : les deux prochaines échéances, puis toutes les pages, toujours dans le même ordre. Aujourd'hui, ces lignes apparaissent ou disparaissent selon les données.</p>
+        <ul><li><span class="tag e">Existe</span><span>Factures à venir (14 jours), Catégories, Épargne et comptes, Évolution, Dépenses fixes, Apple Pay, note, « Mes paramètres ».</span></li>
+          <li><span class="tag a">À adapter</span><span>« À venir » réunit factures et montants fixes ; « Factures » et « Dépenses fixes » ne font plus qu'une ligne : « Budget et récurrents ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">3 · Revenus et dépenses</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="m1p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Le mois, onglet par onglet</h4>
+        <p>Dépenses ou revenus, jamais mélangés. Une seule courbe : ce qui est dépensé jour après jour, face au rythme du budget (la droite en pointillés). Puis les catégories, en part du mois.</p>
+        <ul><li><span class="tag e">Existe</span><span>Sélecteur de mois (mois passés en Premium), Dépenses / Revenus, catégories et leurs montants.</span></li>
+          <li><span class="tag a">À adapter</span><span>Courbe « dépensé ↔ rythme » (calculée à partir du budget) ; part de chaque catégorie en barre.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">4 · Analyse</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="m1p4"></div>
+      <div class="cap"><h4>L'Évolution, enfin lisible</h4>
+        <p>Les revenus en vert, les dépenses en encre : on ne confond plus les deux barres (deux verts aujourd'hui). Le mois en cours est hachuré : il n'est pas fini. Puis les moyennes et ce qui a le plus changé.</p>
+        <ul><li><span class="tag e">Existe</span><span>Page Évolution (Premium) : 6 mois, moyennes sur les mois complets, « Mis de côté », comparaison par catégorie à la même date.</span></li>
+          <li><span class="tag a">À adapter</span><span>Couleurs des barres, hachures du mois en cours, échelle commune ; les 3 plus grands écarts d'abord.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Opérations</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="m1p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Opérations et relevé réunis</h4>
+        <p>Une seule liste : chaque jour avec son total, chaque ligne avec le solde après l'opération. Les filtres sont des puces ; « À vérifier » regroupe les achats Apple Pay à confirmer.</p>
+        <ul><li><span class="tag e">Existe</span><span>Mois par mois, Dépenses / Revenus, filtre de catégorie, solde après chaque opération (Relevé), « + », marques Apple Pay.</span></li>
+          <li><span class="tag a">À adapter</span><span>Total de chaque jour ; puce « À vérifier » ; Relevé et Opérations sur une même page.</span></li>
+          <li><span class="tag d">Nouveau</span><span>Recherche dans les opérations (par note ou commerçant).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">6 · Détail d'une opération</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="none" id="m1p6"></div><span class="flow"></span>
+      <div class="cap"><h4>On lit avant de modifier</h4>
+        <p>Toucher une opération ouvre sa fiche : montant, catégorie, date, origine. La catégorie à confirmer est expliquée en une phrase. « Modifier » ouvre l'éditeur actuel.</p>
+        <ul><li><span class="tag e">Existe</span><span>Montant, catégorie, note, date, commerçant, Apple Pay, « À vérifier » qui apprend la catégorie, « Supprimer la dépense ».</span></li>
+          <li><span class="tag a">À adapter</span><span>La fiche de lecture avant l'éditeur ; la ligne « Restos ce mois-ci ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">7 · Budget et récurrents</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="m1p7"></div><span class="flow"></span>
+      <div class="cap"><h4>Ce que je me permets, ce qui revient</h4>
+        <p>Le budget du mois et les limites par catégorie, avec le même repère de rythme ; puis tout ce qui revient chaque mois, dans l'ordre des dates.</p>
+        <ul><li><span class="tag e">Existe</span><span>Budget du mois, limites par catégorie, factures et abonnements, revenus et dépenses fixes, rappel des factures la veille.</span></li>
+          <li><span class="tag a">À adapter</span><span>Factures et montants fixes sur une même page, en échéancier ; « Maison » à 80 % signalée par le mot « Au-dessus du rythme ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">8 · Épargne et objectifs</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="m1p8"></div>
+      <div class="cap"><h4>Ce que je mets de côté</h4>
+        <p>Ce que le mois a laissé (revenus moins dépenses), comparé à l'épargne visée de « Mes informations » ; les objectifs ; les comptes et la valeur nette.</p>
+        <ul><li><span class="tag e">Existe</span><span>Objectifs, versements, date limite, mensualité, comptes et dettes, valeur nette et sa courbe ; « Épargne visée » (Mes informations).</span></li>
+          <li><span class="tag a">À adapter</span><span>« Mis de côté ce mois-ci » face à l'épargne visée (les deux chiffres existent, pas ici).</span></li></ul></div></div>
+  </div>
+
+  <div class="note" style="margin:34px 9px 0" id="m1map"></div>
+</main>
+<script src="../2026-11-15-cristal/cristal.js"></script>
+<script src="finance.js"></script>
+<script>
+const ops3 = FIN.ops.slice(0, 3);
+// 1 · page principale
+F.mount('m1p1', F.nv('Finances', '<span class="gl m1-date"><i data-i="calendar"></i>12 nov.<i data-i="chevd"></i></span>') + `
+  <article class="gl fn-hero" style="margin-top:8px;padding-bottom:12px">
+    <div class="fn-lab">Solde du compte</div>
+    <div class="m1-bal">1 846<small>,20 $</small></div>
+    <div class="fn-cap" style="margin-top:7px"><span class="fn-delta fn-in"><i data-i="up"></i>+362 $</span> depuis le 1er novembre</div>
+    <div style="margin-top:8px">${F.line({ series: [{ v: FIN.bal, c: 'var(--fn-in)', area: true, dot: true }], h: 44, min: 900, max: 2150, n: 12, w: 323, xl: [[0, '1 nov.'], [11, 'aujourd\'hui']], aria: 'Solde du 1er au 12 novembre : de 1 284,20 $ à 1 846,20 $' })}</div>
+    <div class="seg" style="margin-top:8px;height:36px"><span class="on">Mois</span><span>${F.lock('3 mois')}</span><span>${F.lock('Année')}</span></div>
+  </article>
+  <article class="pn cd" style="margin-top:12px;padding-bottom:14px">
+    <div class="ch"><b>Novembre</b><span class="s" style="margin-left:auto">encore 19 jours</span></div>
+    <div class="m1-3"><div><span class="fn-lab">Revenus</span><b class="fn-num fn-in">+1 150 $</b></div><div><span class="fn-lab">Dépenses</span><b class="fn-num">−788 $</b></div><div><span class="fn-lab">Reste</span><b class="fn-num">412 $</b></div></div>
+    ${F.pace({ right: 'sur ' + F.m(FIN.budget) + ' <i data-i="pencil" style="font-size:12px;color:var(--primary)"></i>' })}
+    <div class="fn-cap" style="margin-top:8px"><b>21,68 $ par jour</b> jusqu'au 30 · 96 $ de moins qu'en octobre à la même date</div>
+  </article>
+  ${F.sect('Dernières opérations', '', 'Tout voir')}<article class="pn ls">${ops3.map((o) => F.op(o, { when: ['', 'Hier', 'Mardi'][FIN.ops.indexOf(o)] })).join('')}</article>`, F.fab('Ajouter'));
+
+// 2 · page principale, suite (défilée)
+F.mount('m1p2', `
+  <article class="pn ls" style="margin-top:4px">${FIN.ops.slice(1, 3).map((o, k) => F.op(o, { when: ['Hier', 'Mardi'][k] })).join('')}</article>
+  <div class="fn-more">Toutes les opérations<i data-i="chev"></i></div>
+  ${F.sect('À venir', '193,98 $ d\'ici le 26')}<article class="pn ls">${F.due(FIN.bills[0])}${F.due(FIN.bills[1])}</article>
+  ${F.sect('Tout Finance')}<article class="pn ls">
+    ${F.row('list', 'Opérations et relevé', 'Mois par mois, solde après chaque opération')}
+    ${F.row('chart', 'Catégories', '6 catégories · Restos à 59 %', { col: '#7A5BD6' })}
+    ${F.row('repeat', 'Budget et récurrents', 'Budget 1 200 $ · 307,97 $ reviennent chaque mois', { col: '#B0368A' })}
+    ${F.row('piggy', 'Épargne et comptes', 'Valeur nette 2 750,80 $', { col: 'var(--fn-in)' })}
+    ${F.row('trend', 'Évolution', 'Six mois, moyennes et comparaisons', { col: '#2F5BD0', r: F.prem() })}
+    ${F.row('wave', 'Dépenses Apple Pay automatiques', 'Active · dernière dépense il y a 39 min', { col: 'var(--fn-warn)' })}</article>
+  <div class="foot">Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.</div>
+  <div class="btnO" style="margin-top:10px"><i data-i="gear"></i>Mes paramètres</div>`, F.fab('Ajouter'));
+
+// 3 · revenus et dépenses
+const pace30 = Array.from({ length: 30 }, (_, k) => (k === 0 ? 0 : k === 29 ? 1200 : null));
+F.mount('m1p3', F.nv('', F.rbtn('plus', 'Ajouter')) + `
+  <div class="fn-ttl">Revenus et dépenses</div>
+  <div style="margin-top:10px">${F.month()}</div>
+  <div class="seg" style="margin-top:10px"><span class="on">Dépenses</span><span>Revenus</span></div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="fn-lab">Dépensé en novembre</div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><span class="fn-amt md">788<small>$</small></span><span class="fn-cap">sur 1 200 $</span></div>
+    <div class="fn-cap" style="margin-top:4px"><span class="fn-delta"><i data-i="down"></i>96 $ de moins</span> qu'en octobre à la même date</div>
+    <div style="margin-top:22px">${F.line({ series: [{ v: pace30, c: 'var(--ink2)', w: 1.6, dash: true }, { v: FIN.cum, c: 'var(--fn-out)', area: true, dot: true }], n: 30, h: 96, max: 1260, ref: { v: 1200, t: 'Budget 1 200 $' }, xl: [[0, '1 nov.'], [11, '12'], [29, '30 nov.']], aria: 'Dépensé cumulé : 788 $ au 12 novembre ; rythme du budget : 480 $ au 12' })}</div>
+    ${F.leg([['var(--fn-out)', 'Dépensé', 'ln'], ['var(--ink2)', 'Rythme du budget', 'dsh']])}
+    <div class="fn-cap" style="margin-top:6px">Au-dessus des pointillés : tu dépenses plus vite que prévu. Le début du mois porte le passe d'autobus et le gros marché.</div>
+  </article>
+  ${F.sect('Par catégorie', 'part du mois')}<article class="pn cd" style="padding:6px 16px">${FIN.cats.map((c) => F.cat(c, { share: true, right: `<b>${F.m(c.v)}</b> · ${F.pct(c.v / FIN.spent)}` })).join('')}</article>`);
+
+// 4 · analyse (Évolution, Premium)
+F.mount('m1p4', F.nv('') + `
+  <div style="display:flex;align-items:center;gap:10px"><div class="fn-ttl">Évolution</div>${F.prem()}</div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="ch"><b>Par mois</b><span class="s" style="margin-left:auto">juin → novembre</span></div>
+    <div style="margin-top:8px">${F.bars({ g: FIN.months.map((m) => ({ l: m.l, v: [m.i, m.o], cur: m.cur, hl: m.cur })), c: ['var(--fn-in)', 'var(--fn-out)'], max: 2000, yt: [0, 1000, 2000], h: 120, bw: 13, aria: 'Revenus et dépenses de juin à novembre' })}</div>
+    ${F.leg([['var(--fn-in)', 'Revenus'], ['var(--fn-out)', 'Dépenses'], ['var(--fn-out)', 'Mois en cours, au 12', 'hat']])}
+  </article>
+  ${F.sect('Moyenne par mois', 'sur 5 mois complets')}
+  <div class="fn-kpis k3">${F.kpi('Dépenses', '1 172 $', '', { sm: 1 })}${F.kpi('Revenus', '1 754 $', '', { sm: 1, vc: 'var(--fn-in)' })}${F.kpi('Mis de côté', '582 $', '33 % des revenus', { sm: 1 })}</div>
+  ${F.sect('Par rapport à octobre', 'à la même date')}<article class="pn ls">
+    ${[['sor', 120, 74], ['mai', 160, 120], ['res', 96, 118]].map(([k, a, b]) => { const c = FIN.cat(k), d = b - a;
+      return `<div class="li">${F.catIco(c)}<div class="tx"><b>${c.n}</b><span class="s">${F.m(a)} → ${F.m(b)}</span></div><div class="fn-amtR"><b>${d > 0 ? '+' : '−'}${F.m(Math.abs(d))}</b><span>${d > 0 ? 'de plus' : 'de moins'}</span></div></div>`; }).join('')}</article>`);
+
+// 5 · opérations
+const balAfter = (d) => F.m2(FIN.bal[d - 1]);
+const dayG = (lab, d) => { const list = FIN.ops.filter((o) => o.d === d); const tot = list.reduce((s, o) => s + o.a, 0);
+  return `<div class="fn-dayh">${lab}<span>${tot < 0 ? F.out(-tot) : F.inc(tot)}</span></div><article class="pn ls">${list.map((o, k) => F.op(o, { right: k === 0 ? 'solde ' + balAfter(d) : '' })).join('')}</article>`; };
+F.mount('m1p5', F.nv('', F.rbtn('plus', 'Nouvelle opération')) + `
+  <div class="fn-ttl">Opérations</div>
+  <div class="gl fn-search" style="margin-top:10px"><i data-i="search"></i><span style="flex:1">Rechercher une opération</span>${F.nw()}</div>
+  <div class="chips" style="margin-top:10px"><span class="chip on">Tout</span><span class="chip">Dépenses</span><span class="chip">Revenus</span><span class="chip">À vérifier · 1</span><span class="chip">Catégorie<i data-i="chevd"></i></span></div>
+  <div class="fn-dayh" style="margin-top:12px;color:var(--ink);font-size:14px">Novembre 2026<span style="color:var(--ink2)">−788 $ · <span class="fn-in">+1 150 $</span></span></div>
+  ${dayG('Aujourd\'hui', 12)}${dayG('Hier', 11)}${dayG('Mardi 10 novembre', 10)}${dayG('Lundi 9 novembre', 9)}${dayG('Dimanche 8 novembre', 8)}${dayG('Vendredi 6 novembre', 6)}`);
+
+// 6 · détail d'une opération (feuille sur la liste)
+const o0 = FIN.ops[0], r0 = FIN.cat('res');
+F.mount('m1p6', document.getElementById('m1p5').innerHTML.replace(/^<div class="scr">|<\/div>$/g, ''), F.sheet(`
+  <div class="m1-det">${F.catIco(r0, 'xl')}<div class="fn-amt">−14<small>,50 $</small></div><div class="h3" style="margin-top:8px">Café et sandwich</div><div class="s" style="margin-top:2px">Aujourd'hui à 12:41 · <span class="fn-mk"><i data-i="wave"></i>Apple Pay</span></div></div>
+  <div class="m1-warn" style="margin-top:14px"><i data-i="info" style="font-size:18px;flex:none"></i><span style="flex:1"><b>À vérifier :</b> confirme « Restos », Ardane s'en souviendra pour ce commerçant.</span><span class="btnP">Confirmer</span></div>
+  <div style="margin-top:8px">
+    <div class="m1-kv"><span>Catégorie</span><span><span class="ico" style="--c:${r0.col};width:24px;height:24px;font-size:13px"><i data-i="fork"></i></span>Restos<i data-i="chev" style="color:var(--go)"></i></span></div>
+    <div class="m1-kv"><span>Commerçant</span><span>Café Myriade</span></div>
+    <div class="m1-kv"><span>Date</span><span>Jeudi 12 novembre</span></div>
+    <div class="m1-kv"><span>Restos ce mois-ci</span><span class="fn-tn">118 $ sur 200 $</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><div class="btnT"><i data-i="pencil"></i>Modifier</div><div class="btnO" style="color:var(--fn-over);border-color:color-mix(in srgb,var(--fn-over) 40%,transparent)"><i data-i="trash"></i>Supprimer</div></div>`, 'Dépense'));
+
+// 7 · budget et récurrents
+F.mount('m1p7', F.nv('') + `
+  <div class="fn-ttl">Budget et récurrents</div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="ch"><b>Budget du mois</b><span class="link" style="margin-left:auto;display:flex;gap:5px;align-items:center"><i data-i="pencil" style="font-size:14px"></i>1 200 $</span></div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin:4px 0 10px"><span class="fn-amt sm">412<small>$</small></span><span class="fn-cap">restants · 21,68 $ par jour</span></div>
+    ${F.pace({ labels: false })}
+  </article>
+  ${F.sect('Limites par catégorie', '', 'Modifier')}<article class="pn cd" style="padding:4px 16px">
+    ${F.cat(FIN.cat('mai'), { pace: true, sub: '<b style="color:var(--ink)">Au-dessus du rythme</b> · 30 $ pour 19 jours' })}${F.cat(FIN.cat('res'), { pace: true })}${F.cat(FIN.cat('epi'), { pace: true })}</article>
+  ${F.sect('Récurrents', '307,97 $ par mois')}<article class="pn ls">${F.due(FIN.bills[0])}${F.due(FIN.bills[1])}${F.due(FIN.bills[2])}
+    <div class="fn-link" style="border-top:1px solid var(--rule)"><span>6 factures, 1 revenu et 1 dépense fixes</span><i data-i="chev"></i></div></article>`);
+
+// 8 · épargne et objectifs
+F.mount('m1p8', F.nv('') + `
+  <div class="fn-ttl">Épargne</div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="fn-lab">Mis de côté en novembre</div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><span class="fn-amt sm fn-in">+362<small>$</small></span><span class="fn-cap">revenus moins dépenses</span></div>
+    <div class="okl" style="margin-top:8px;font-size:13.5px"><i data-i="checkc"></i>Épargne visée : 300 $ par mois, atteinte</div>
+  </article>
+  ${F.sect('Objectifs', '1 760 $ épargnés')}<article class="pn cd" style="padding:8px 16px 2px">${FIN.goals.map((g) => F.goal(g)).join('<div style="border-top:1px solid var(--rule)"></div>')}
+    <div class="fn-link" style="border-top:1px solid var(--rule)"><span style="display:flex;gap:7px;align-items:center"><i data-i="plusc" style="font-size:19px"></i>Nouvel objectif</span></div></article>
+  ${F.sect('Comptes', 'valeur nette 2 750,80 $')}<article class="pn cd" style="padding:12px 16px 6px">${F.line({ series: [{ v: FIN.nw6, c: 'var(--fn-in)', area: true, dot: true }], h: 54, min: 1500, max: 3000, n: 6, xl: [[0, 'juin'], [5, 'nov.']], aria: 'Valeur nette de juin à novembre : de 1 980 $ à 2 750,80 $' })}
+    <div class="ls" style="padding:4px 0 0">${FIN.accounts.map(F.acct).join('')}</div></article>`);
+
+// où se trouve chaque fonction existante
+F.mapNote('m1map', {
+  sel: 'Capsule « Aujourd\'hui » sous le titre : elle déplie le sélecteur de semaine (écran 1).',
+  reste: 'Carte « Novembre » de la page principale (écran 1).', budget: 'Crayon de la barre du budget (écran 1) ; page Budget et récurrents (écran 7).',
+  cmp: 'Sous la barre du budget (écran 1) ; Revenus et dépenses (écran 3).', add: '« Ajouter » flottant, puis Dépense ou Revenu ; « Modifier » dans la fiche (écran 6).',
+  day: 'Capsule « Aujourd\'hui » : le jour choisi filtre les chiffres et les opérations.', applepay: 'Ligne de « Tout Finance » (écran 2) ; « À vérifier » dans Opérations (5) et la fiche (6).',
+  solde: 'Carte de verre de la page principale (écran 1), avec Mois / 3 mois / Année.', releve: 'Fusionné dans Opérations : solde après l\'opération (écran 5).',
+  ops: 'Opérations (écran 5) : puces Dépenses / Revenus / Catégorie.', cats: 'Revenus et dépenses (écran 3) ; limites dans Budget (écran 7) ; page Catégories (anneau) gardée, ligne de l\'écran 2.',
+  bills: 'Budget et récurrents (écran 7) et « À venir » (écran 2).', fixed: 'Budget et récurrents (écran 7).', goals: 'Épargne (écran 8).', accounts: 'Épargne (écran 8).',
+  trends: 'Évolution (écran 4), Premium.', quick: 'Feuille « Ajouter » (en tête) et options du widget, comme aujourd\'hui.',
+  settings: '« Mes paramètres » en bas de la page principale (écran 2).', tofill: 'Inchangé : en tête de la page principale quand le budget manque.',
+});
+Cristal.init();
+</script>
+</body>
+</html>

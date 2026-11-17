@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Finance — Comparaison des cinq directions et recommandation</title>
+<link rel="stylesheet" href="../2026-11-15-cristal/cristal.css">
+<style>
+  /* propre à cette planche : préfixe cp- */
+  .cp-box { background: #fff; border: 1px solid #D5DDE8; border-radius: 18px; padding: 20px 22px; font: 400 13.5px/1.45 Inter, sans-serif; color: #101828; margin: 0 9px; }
+  .cp-box h4 { font-size: 19px; font-weight: 800; letter-spacing: -.012em; margin-bottom: 4px; }
+  .cp-t { border-collapse: separate; border-spacing: 0; width: 100%; font: 400 13px/1.35 Inter, sans-serif; margin-top: 12px; }
+  .cp-t th { text-align: left; vertical-align: bottom; padding: 0 10px 10px; font-size: 14.5px; font-weight: 800; letter-spacing: -.01em; }
+  .cp-t th small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #5B6577; margin-bottom: 2px; }
+  .cp-t th.rec { color: #1F3F8F; }
+  .cp-t td { vertical-align: top; padding: 9px 10px; border-top: 1px solid #E3E7EE; }
+  .cp-t td.c { width: 215px; font-weight: 700; font-size: 13.5px; }
+  .cp-t td.c small { display: block; font-weight: 400; font-size: 12px; color: #5B6577; margin-top: 1px; }
+  .cp-t td .n { display: inline-grid; place-items: center; width: 34px; height: 26px; border-radius: 8px; font: 800 14px Inter, sans-serif; font-variant-numeric: tabular-nums; margin-right: 8px; vertical-align: top; }
+  .cp-t td .w { display: inline-block; width: calc(100% - 48px); font-size: 12.5px; color: #35435A; }
+  .n.a { background: #1F8A5B; color: #fff; } .n.b { background: #D6F0E2; color: #14532F; } .n.m { background: #FBEFD9; color: #774A00; } .n.l { background: #FDE3DF; color: #8E1F14; }
+  .cp-t tr.tot td { border-top: 2px solid #101828; font-size: 15px; font-weight: 800; padding-top: 12px; }
+  .cp-t tr.tot td b { font-size: 26px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; } .cp-t tr.tot td small { font-size: 13px; font-weight: 600; color: #5B6577; }
+  .cp-t td.rec, .cp-t th.rec { background: #F2F6FF; }
+  .cp-t th.rec { border-radius: 14px 14px 0 0; padding-top: 10px; } .cp-t tr.tot td.rec { border-radius: 0 0 14px 14px; padding-bottom: 12px; }
+  .cp-leg { display: flex; gap: 16px; margin-top: 12px; font-size: 12px; color: #5B6577; align-items: center; }
+  .cp-leg .n { display: inline-grid; place-items: center; width: 34px; height: 22px; border-radius: 7px; font: 800 12px Inter, sans-serif; margin-right: 6px; }
+  .cp-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 0 9px; }
+  .cp-card { background: #fff; border: 1px solid #D5DDE8; border-radius: 18px; padding: 16px 16px 18px; font: 400 13px/1.42 Inter, sans-serif; color: #101828; }
+  .cp-card.rec { border: 2px solid #2F5BEA; box-shadow: 0 10px 30px rgba(47,91,234,.14); }
+  .cp-card .k { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #5B6577; }
+  .cp-card h5 { font-size: 16.5px; font-weight: 800; letter-spacing: -.01em; margin: 2px 0 8px; }
+  .cp-card img { display: block; width: 100%; border-radius: 26px; margin-bottom: 12px; }
+  .cp-card h6 { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #5B6577; margin: 10px 0 3px; }
+  .cp-card ul { margin: 0 0 0 4px; padding: 0; list-style: none; display: grid; gap: 4px; }
+  .cp-card li { padding-left: 16px; position: relative; }
+  .cp-card ul.p li::before { content: "+"; position: absolute; left: 0; color: #1F8A5B; font-weight: 800; }
+  .cp-card ul.m li::before { content: "–"; position: absolute; left: 0; color: #C0392B; font-weight: 800; }
+  .cp-card .who { margin-top: 10px; padding: 9px 11px; border-radius: 12px; background: #F4F6FA; font-size: 12.5px; }
+  .cp-rec { margin: 0 9px; border-radius: 22px; padding: 26px 28px; background: linear-gradient(135deg, #17306F, #2F5BEA); color: #fff; font: 400 14.5px/1.5 Inter, sans-serif; display: grid; grid-template-columns: 1.05fr 1fr 1fr; gap: 30px; }
+  .cp-rec .k { font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; opacity: .8; }
+  .cp-rec h3 { font-size: 30px; line-height: 1.1; font-weight: 800; letter-spacing: -.022em; margin: 4px 0 10px; }
+  .cp-rec h5 { font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+  .cp-rec ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+  .cp-rec li { padding-left: 20px; position: relative; }
+  .cp-rec li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 8px; height: 8px; border-radius: 4px; background: #9DB8FF; }
+  .cp-rec b { font-weight: 700; }
+  .cp-3 { display: grid; grid-template-columns: 1.15fr 1fr 1.15fr; gap: 14px; margin: 0 9px; }
+  .cp-3 .cp-box { margin: 0; }
+  .cp-lot { display: grid; grid-template-columns: 62px 1fr; gap: 4px 12px; margin-top: 10px; }
+  .cp-lot b.l { display: grid; place-items: center; height: 26px; border-radius: 8px; background: #E8EEFD; color: #1F3F8F; font-size: 12px; font-weight: 800; }
+  .cp-lot b.l.o { background: #F1F4F9; color: #5B6577; }
+  .cp-q { display: grid; gap: 10px; margin-top: 10px; }
+  .cp-q > div { padding: 11px 13px; border-radius: 14px; background: #F4F6FA; }
+  .cp-q b { font-weight: 700; }
+  .cp-m { border-collapse: collapse; width: 100%; font-size: 12.5px; margin-top: 8px; }
+  .cp-m td { vertical-align: top; padding: 6px 8px 6px 0; border-top: 1px solid #E3E7EE; line-height: 1.38; }
+  .cp-m td:first-child { font-weight: 700; width: 42%; }
+  h2.sec { margin-left: 9px !important; }
+  p.secp { margin-left: 9px; }
+  .cp-card img { border-radius: 30px; }
+  .cp-t td .w { font-size: 12px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">C</div><div><h1>Comparaison des cinq directions et recommandation</h1>
+    <p>Chaque direction est notée sur 10 pour les dix critères demandés, avec la raison en quelques mots. Les notes sont mon jugement à partir des planches et du code ; elles ne viennent pas de tests avec des utilisateurs. Même journée d'exemple partout (jeudi 12 novembre, 412 $ restants sur 1 200 $), mêmes règles : rien n'est retiré, règles Premium inchangées, style Cristal.</p></div>
+    <span class="badge">Étape 1 · comparaison</span></header>
+
+  <div class="cp-box">
+    <h4>Les notes, critère par critère</h4>
+    <table class="cp-t" id="grid"></table>
+    <div class="cp-leg"><span><span class="n a">9</span>très bon (9 ou 10)</span><span><span class="n b">7</span>bon (7 ou 8)</span><span><span class="n m">5</span>moyen (5 ou 6)</span><span><span class="n l">4</span>faible (4 ou moins)</span><span style="margin-left:auto">Rapidité d'accès : touchers pour noter un café de 4,50 $ et pour voir la prochaine facture, depuis l'ouverture de Finance.</span></div>
+  </div>
+
+  <h2 class="sec">Avantages et limites</h2>
+  <p class="secp">L'écran montré est la page principale de chaque direction, telle qu'elle s'ouvre.</p>
+  <div class="cp-5" id="cards"></div>
+
+  <h2 class="sec">Ma recommandation</h2>
+  <div class="cp-rec">
+    <div><div class="k">Direction conseillée</div><h3>La 5, hybride, avec la sobriété de la 1</h3>
+      <p>C'est la seule qui répond, sans faire défiler, aux quatre questions posées : où j'en suis, combien je peux dépenser, comment ça évolue, ce qui arrive bientôt. Elle n'ajoute que trois fonctions ; tout le reste est l'existant, mieux rangé.</p></div>
+    <div><h5>Ce qu'elle corrige dans l'app actuelle</h5><ul>
+      <li><b>Un seul chiffre vedette</b> : le reste du mois, avec le « par jour » en chiffre (problèmes 1 et 2).</li>
+      <li><b>Ce qui arrive bientôt</b> remonte du 3e écran au 1er (4, 20).</li>
+      <li><b>Une liste de pages fixe</b>, factures et montants fixes réunis, Opérations et Relevé réunis (6, 8, 9, 11).</li>
+      <li><b>Des graphiques lisibles</b> : vert pour les revenus, encre pour les dépenses, hachures pour le mois en cours, repère du rythme, cadenas visibles (12, 13, 15, 21).</li>
+      <li><b>Une action « Ajouter »</b> et une feuille à puces au lieu du formulaire système (16, 17, 19).</li></ul></div>
+    <div><h5>Le mélange conseillé</h5><ul>
+      <li>De la <b>Minimaliste</b> : la retenue. Pas plus de quatre blocs au-dessus de la ligne de flottaison, une courbe par carte.</li>
+      <li>De l'<b>Analytique</b> : la courbe d'octobre et les constats, gardés pour la page Analyse (Premium) : c'est un bon argument de vente.</li>
+      <li>De la <b>Quotidienne</b> : les dépenses rapides dans la feuille d'ajout ; pas les alertes en cartes.</li>
+      <li>Du <b>Tableau de bord</b> : la cascade du solde et les objectifs en anneaux, dans leurs pages.</li></ul></div>
+  </div>
+
+  <h2 class="sec">À décider, puis l'étape 2</h2>
+  <div class="cp-3">
+    <div class="cp-box"><h4>Les questions pour le PDG</h4>
+      <div class="cp-q">
+        <div><b>1. Direction :</b> la 5 (conseillée), une autre, ou un mélange précis ?</div>
+        <div><b>2. Chiffre vedette :</b> le reste du mois et le « par jour » (5, 4) ou le solde du compte (1, 2) ?</div>
+        <div><b>3. Ajout :</b> une seule action « Ajouter » (Dépense ou Revenu dans la feuille) ou les deux boutons actuels ?</div>
+        <div><b>4. Pages réunies :</b> Opérations + Relevé ; Factures + Dépenses fixes dans « Budget et récurrents » : oui ou non ?</div>
+        <div><b>5. Nouveautés :</b> « après les factures », recherche, constats : lesquelles garder ?</div>
+      </div></div>
+    <div class="cp-box"><h4>Étape 2 proposée (après ton choix)</h4>
+      <div class="cp-lot">
+        <b class="l">Lot 1</b><span><b>La page principale réordonnée</b>, sans rien de nouveau : héros, tuiles, « À venir », liste fixe, cadenas visibles, couleurs des graphiques, action « Ajouter ».</span>
+        <b class="l">Lot 2</b><span><b>Noter et retrouver</b> : feuille Ajouter à puces avec dépenses rapides, fiche d'opération, Opérations et Relevé réunis.</span>
+        <b class="l">Lot 3</b><span><b>Les pages</b> : Budget et récurrents (échéancier), Revenus et dépenses (cascade), Épargne (épargne visée, anneaux).</span>
+        <b class="l">Lot 4</b><span><b>Les nouveautés retenues</b> : « après les factures », recherche, Analyse avec constats (Premium), chacune avec ses tests.</span>
+        <b class="l o">Chaque lot</b><span>Relu par un autre agent, compilé par la CI, puis une version interne Premium sur TestFlight pour ton iPhone ; vérification sans Premium ensuite.</span>
+      </div></div>
+    <div class="cp-box"><h4>Ce qui ne change dans aucune direction</h4>
+      <table class="cp-m">
+        <tr><td>Données enregistrées</td><td>Aucun changement de format : les nouveautés sont des calculs</td></tr>
+        <tr><td>Gratuit / Premium</td><td>Mois en cours et 7 derniers jours gratuits ; mois passés, 3 mois, Année, Évolution / Analyse en Premium</td></tr>
+        <tr><td>Banque</td><td>Aucune connexion bancaire ; Apple Pay par Raccourcis</td></tr>
+        <tr><td>Fonctions</td><td>Toutes gardées : chaque planche a sa table « où se trouve chaque fonction »</td></tr>
+        <tr><td>Style</td><td>Cristal équilibré, nappe et couleur d'action jade, verre réservé au héros et à ce qui flotte</td></tr>
+        <tr><td>Widgets Budget</td><td>Inchangés à cette étape</td></tr>
+      </table></div>
+  </div>
+</main>
+<script src="../2026-11-15-cristal/cristal.js"></script>
+<script>
+const HEAD = [['Direction 1', 'Minimaliste'], ['Direction 2', 'Tableau de bord'], ['Direction 3', 'Analytique'], ['Direction 4', 'Quotidienne'], ['Direction 5', 'Hybride intelligente']];
+const ROWS = [
+  ['Lisibilité', 'Lire sans effort', [9, 'Un chiffre en grand, peu de texte'], [7, 'Dense : beaucoup de chiffres égaux'], [6, 'Plusieurs graphiques par écran'], [8, 'Un chiffre du jour, clair'], [8, 'Un chiffre en grand, trois tuiles']],
+  ['Simplicité', 'Combien de choses à comprendre', [9, 'Quatre blocs, une seule action'], [6, 'Tuiles et anneaux à décoder'], [5, 'Périodes, comparaisons, filtres'], [7, 'Alertes et puces à trier'], [8, 'Une action, une liste fixe']],
+  ['Hiérarchie', 'P1 avant P2 avant P3', [8, 'Solde, puis le mois ; « par jour » en légende'], [6, 'Quatre tuiles de même poids'], [6, 'L\'analyse passe avant le reste à dépenser'], [8, 'Aujourd\'hui d\'abord, le mois ensuite'], [9, 'Les quatre questions dans l\'ordre']],
+  ['Rapidité d\'accès', '__T__', [7, '3 touchers · facture : défiler'], [7, '3 touchers · facture : défiler'], [6, '3 touchers · facture : 2e page'], [9, '1 toucher · facture : alerte en tête'], [9, '3 touchers · facture : visible']],
+  ['Graphiques', 'Élégants et lisibles', [8, 'Une courbe par page, sobre'], [8, 'Cascade et anneaux parlants'], [9, 'Les plus complets, comparables'], [6, 'Petits graphiques de la semaine'], [8, 'Couleurs séparées, rythme, octobre']],
+  ['Richesse fonctionnelle', 'Ce qu\'on peut faire et savoir', [6, 'Peu d\'analyse hors Évolution'], [8, 'Tout le mois sur deux écrans'], [9, 'Habitudes, projections, constats'], [7, 'Peu d\'analyse du mois'], [8, 'Tout l\'existant et trois nouveautés']],
+  ['Confort quotidien', 'Usage de tous les jours', [7, 'Ajout rapide ; rien sur demain'], [6, 'Demain et l\'ajout passent après'], [5, 'Pensée pour un bilan'], [9, 'Faite pour le jour même'], [9, 'Le jour et le mois ensemble']],
+  ['Cohérence avec Ardane', 'Cristal, règles communes', [7, 'Sélecteur de semaine replié'], [6, 'Beaucoup de cartes'], [7, 'Style tenu, densité élevée'], [8, 'Sélecteur de semaine à sa place'], [9, 'Sélecteur gardé, un seul verre']],
+  ['Esthétique', 'Proche d\'un produit fini', [9, 'Le plus calme, le plus Apple'], [8, 'Riche et soigné'], [8, 'Graphiques élégants'], [7, 'Plus chargée en haut'], [8, 'Un peu plus dense que la 1']],
+  ['Potentiel d\'évolution', 'Place pour la suite', [7, 'Peu de place pour ajouter'], [8, 'Une tuile de plus est facile'], [9, 'Argument Premium fort'], [7, 'Alertes et rappels à enrichir'], [9, 'Analyse Premium extensible']],
+];
+const cls = (n) => (n >= 9 ? 'a' : n >= 7 ? 'b' : n >= 5 ? 'm' : 'l');
+const REC = 4;
+let h = `<tr><th></th>${HEAD.map(([k, t], i) => `<th class="${i === REC ? 'rec' : ''}"><small>${k}${i === REC ? ' · conseillée' : ''}</small>${t}</th>`).join('')}</tr>`;
+ROWS.forEach(([c, s, ...v]) => { h += `<tr><td class="c">${c}<small>${s === '__T__' ? 'Noter un café · voir la prochaine facture' : s}</small></td>${v.map(([n, w], i) => `<td class="${i === REC ? 'rec' : ''}"><span class="n ${cls(n)}">${n}</span><span class="w">${w}</span></td>`).join('')}</tr>`; });
+const tot = HEAD.map((_, i) => ROWS.reduce((a, r) => a + r[2 + i][0], 0));
+h += `<tr class="tot"><td>Total</td>${tot.map((t, i) => `<td class="${i === REC ? 'rec' : ''}"><b>${t}</b> <small>sur 100</small></td>`).join('')}</tr>`;
+document.getElementById('grid').innerHTML = h;
+
+const SHOTS = '../../../pub/rapports/design-2026-11-16-finance/ecrans/';
+const CARDS = [
+  ['01-minimaliste', 'Minimaliste', ['Le plus calme et le plus lisible', 'Presque rien à développer (la recherche)', 'Opérations et relevé réunis, liste de pages fixe'], ['Ce qui arrive bientôt n\'apparaît qu\'en défilant', 'Le sélecteur de semaine replié s\'écarte de la règle commune', 'Le « par jour » reste une légende'], 'Pour un coup d\'œil calme. Petit chantier.'],
+  ['02-tableau-de-bord', 'Tableau de bord', ['Tout le mois sur un écran', 'La cascade explique le solde', 'Facile d\'ajouter une tuile plus tard'], ['Quatre chiffres de même poids : lequel lire d\'abord ?', 'Beaucoup de cartes, alors que Cristal en veut peu', 'Ajout et échéances moins visibles'], 'Pour suivre tous ses chiffres. Chantier moyen.'],
+  ['03-analytique', 'Analytique', ['Les graphiques les plus riches', 'Comparaisons et constats : argument Premium', 'Habitudes et projection de fin de mois'], ['Lourde pour un usage quotidien', 'Plusieurs calculs nouveaux à développer et tester', 'Un compte gratuit voit beaucoup de cadenas'], 'Pour le bilan du mois. Gros chantier.'],
+  ['04-quotidienne', 'Quotidienne', ['Répond à « combien aujourd\'hui ? »', 'Ajout rapide et échéances en tête', 'Le sélecteur de semaine y prend tout son sens'], ['Le mois et l\'évolution passent au second plan', 'Alertes en cartes : risque de bruit', 'Un plafond du jour peut culpabiliser'], 'Pour l\'usage de tous les jours. Chantier moyen.'],
+  ['05-hybride', 'Hybride intelligente', ['Les quatre questions sans défiler', 'Garde le sélecteur et la règle commune', 'Trois nouveautés seulement, le reste réorganisé'], ['Page principale plus dense que la Minimaliste', '« Après les factures » : calcul nouveau à valider', 'Touche presque toutes les pages de Finance'], 'Pour tous. Chantier moyen, découpé en 4 lots.'],
+];
+document.getElementById('cards').innerHTML = CARDS.map(([f, t, p, m, who], i) => `<div class="cp-card${i === REC ? ' rec' : ''}"><img src="${SHOTS}${f}-01.png" alt=""><div class="k">Direction ${i + 1}${i === REC ? ' · conseillée' : ''}</div><h5>${t}</h5>
+  <h6>Avantages</h6><ul class="p">${p.map((x) => `<li>${x}</li>`).join('')}</ul><h6>Limites</h6><ul class="m">${m.map((x) => `<li>${x}</li>`).join('')}</ul><div class="who">${who}</div></div>`).join('');
+Cristal.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Finance — Analyse de la mini-app actuelle</title>
+<link rel="stylesheet" href="../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="finance.css">
+<style>
+  /* préfixe an- : propre à cette planche */
+  .an-row { display: flex; gap: 24px; align-items: flex-start; margin: 0 9px; }
+  .an-cap { width: 262px; flex: none; }
+  .an-cap .nm { font: 700 12.5px/1 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--bink2); height: 22px; }
+  .an-shot { position: relative; width: 262px; }
+  .an-shot img { display: block; width: 100%; border-radius: 34px; box-shadow: 0 0 0 7px #121417, 0 16px 34px rgba(11,18,32,.2); }
+  .an-shot b.k { position: absolute; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 13px; background: #C93A3A; color: #fff; font: 800 13px/26px Inter, sans-serif; text-align: center; box-shadow: 0 0 0 3px #fff, 0 4px 10px rgba(0,0,0,.25); }
+  .an-shot + p { font: 400 12.5px/1.4 Inter, sans-serif; color: var(--bink2); margin-top: 16px; }
+  .an-rib { width: 300px; flex: none; font-family: Inter, sans-serif; }
+  .an-rib .nm { font: 700 12.5px/1 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--bink2); height: 22px; }
+  .an-rb { position: relative; background: #fff; border: 1px solid #D5DDE8; border-radius: 18px; padding: 10px 12px 10px 64px; }
+  .an-rb > div { position: relative; display: flex; align-items: center; border-radius: 6px; margin: 2px 0; padding: 0 8px; font-size: 11.5px; font-weight: 600; color: #101828; background: #EEF3F8; overflow: hidden; white-space: nowrap; }
+  .an-rb > div.hot { background: #FDE3DF; color: #8E1F14; }
+  .an-rb > div.key { background: #DDF0E4; color: #1E5B34; }
+  .an-rb > div em { font-style: normal; margin-left: auto; color: #5B6577; font-weight: 500; }
+  .an-rb .scr-l { position: absolute; left: 0; right: 0; border-top: 2px dashed #7C8AA0; z-index: 2; }
+  .an-rb .scr-l span { position: absolute; left: 6px; top: 2px; font-size: 10.5px; font-weight: 800; color: #4E5A6B; letter-spacing: .04em; text-transform: uppercase; }
+  .an-fam { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 9px; }
+  .an-box { background: #fff; border: 1px solid #D5DDE8; border-radius: 18px; padding: 16px 18px; font: 400 13px/1.42 Inter, sans-serif; color: #101828; }
+  .an-box h4 { font-size: 16.5px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+  .an-box h4 i { font-size: 18px; color: #C93A3A; }
+  .an-box ol { list-style: none; display: grid; gap: 7px; }
+  .an-box li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; }
+  .an-box li b.k { width: 22px; height: 22px; border-radius: 11px; background: #C93A3A; color: #fff; font: 800 11.5px/22px Inter, sans-serif; text-align: center; margin-top: 1px; }
+  .an-box li b.k.g { background: #9AA6B8; }
+  .an-ok { background: linear-gradient(160deg, #F1FAF5, #fff); }
+  .an-ok h4 i { color: #1F8A62; }
+  .an-ok li b.k { background: #1F8A62; }
+  .an-t { width: 100%; border-collapse: collapse; font: 400 12.5px/1.38 Inter, sans-serif; }
+  .an-t th { text-align: left; font-size: 11px; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; color: #5B6577; padding: 0 8px 8px 0; }
+  .an-t td { vertical-align: top; padding: 7px 8px 7px 0; border-top: 1px solid #E3E7EE; }
+  .an-t td:first-child { font-weight: 650; width: 30%; }
+  .an-t td.g { color: #1E5B34; font-weight: 650; width: 18%; } .an-t td.p { color: #6B4E0A; font-weight: 650; width: 20%; }
+  .an-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 0 9px; }
+  .an-3 { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 14px; margin: 0 9px; }
+  h2.sec, p.secp { margin-left: 9px !important; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">0</div><div><h1>Finance aujourd'hui : ce qui ne va pas, ce qui existe</h1>
+    <p>Relevé fait dans le code (FinancesApp.swift, FinancesPages.swift, FinancesApplePay.swift, BudgetSpace.swift, MoneyView.swift, Shared/Domains/Budget.swift) et sur les captures réelles de la CI (Build 441, 17 novembre, données de test de la CI). Les numéros rouges renvoient à la liste des problèmes plus bas. Aucune ligne de code n'est changée à cette étape.</p></div>
+    <span class="badge">Étape 1 · analyse</span></header>
+
+  <div class="an-row">
+    <div class="an-cap"><div class="nm">Page principale</div><div class="an-shot"><img src="../../../pub/rapports/design-2026-11-16-finance/ci-441/finances.jpg" alt="">
+      <b class="k" style="left:78%;top:35%">1</b><b class="k" style="left:93%;top:44%">2</b><b class="k" style="left:52%;top:48.5%">13</b><b class="k" style="left:40%;top:56%">3</b><b class="k" style="left:50%;top:65.5%">16</b><b class="k" style="left:50%;top:79%">11</b></div>
+      <p>Le haut de la page : le reste du mois, une courbe sans repère, la pastille du budget, puis deux gros boutons et le jour choisi.</p></div>
+    <div class="an-cap"><div class="nm">Évolution (Premium)</div><div class="an-shot"><img src="../../../pub/rapports/design-2026-11-16-finance/ci-441/finances-trends.jpg" alt="">
+      <b class="k" style="left:55%;top:36%">12</b><b class="k" style="left:84%;top:26%">12</b></div>
+      <p>Deux verts presque pareils ; le mois en cours, pas fini, est dessiné comme les autres ; une valeur extrême écrase l'échelle.</p></div>
+    <div class="an-cap"><div class="nm">Catégories</div><div class="an-shot"><img src="../../../pub/rapports/design-2026-11-16-finance/ci-441/finances-categories.jpg" alt="">
+      <b class="k" style="left:84%;top:33%">14</b></div>
+      <p>Anneau à six couleurs sans étiquette ; les noms sont plus bas. La liste, elle, est claire.</p></div>
+    <div class="an-cap"><div class="nm">Factures</div><div class="an-shot"><img src="../../../pub/rapports/design-2026-11-16-finance/ci-441/finances-bills.jpg" alt="">
+      <b class="k" style="left:88%;top:16%">8</b></div>
+      <p>Page claire, mais séparée des « Dépenses fixes », rangées ailleurs, dans un autre style et avec un autre éditeur.</p></div>
+    <div class="an-cap"><div class="nm">Modifier une dépense</div><div class="an-shot"><img src="../../../pub/rapports/design-2026-11-16-finance/ci-441/finances-expense.jpg" alt="">
+      <b class="k" style="left:50%;top:15%">17</b></div>
+      <p>Formulaire système : titre coupé, montant « 58,6 $ », catégorie dans un menu déroulant.</p></div>
+    <div class="an-rib"><div class="nm">La page principale, de haut en bas</div><div class="an-rb" id="rib"></div>
+      <p style="font:400 12px/1.4 Inter,sans-serif;color:var(--bink2);margin-top:10px">Hauteurs estimées d'après le code (iPhone 11 Pro, texte par défaut, tous les blocs présents). En vert : ce qu'on voit en ouvrant. En rouge : ce qui compte et arrive tard.</p></div>
+  </div>
+
+  <h2 class="sec">Les problèmes, par famille</h2>
+  <p class="secp">23 constats. Les plus graves en premier dans chaque famille. Ce ne sont pas des bogues : tout fonctionne, mais l'information est mal rangée.</p>
+  <div class="an-fam">
+    <div class="an-box"><h4><i data-i="layers"></i>Hiérarchie faible</h4><ol>
+      <li><b class="k">1</b><span>Deux grands chiffres se disputent la première place : « Reste ce mois-ci » (54 pt, en haut) et « Solde » (34 pt, au 2e écran), chacun avec sa courbe. Lequel est « mon argent » ?</span></li>
+      <li><b class="k">2</b><span>Le chiffre le plus utile au quotidien, « 101 $ par jour pendant 14 jours », n'est qu'une légende en petit, sur deux lignes.</span></li>
+      <li><b class="k">3</b><span>Le budget est une petite pastille (« Budget 2 400 $ ») qui ressemble à un libellé plutôt qu'à un bouton.</span></li></ol></div>
+    <div class="an-box"><h4><i data-i="grid"></i>Informations mal rangées ou peu visibles</h4><ol>
+      <li><b class="k">4</b><span>Les factures à venir arrivent au 3e écran, après le solde et les catégories : ce qui tombe demain n'est pas visible en ouvrant.</span></li>
+      <li><b class="k">5</b><span>Un réglage (« Dépenses Apple Pay automatiques ») est rangé entre les opérations du jour et les chiffres du mois.</span></li>
+      <li><b class="k">6</b><span>La liste de pages change selon les données : Catégories, Factures, Épargne, Évolution n'y sont que si leur bloc est absent. Les repères bougent.</span></li>
+      <li><b class="k">7</b><span>« Ce mois-ci » ne montre que les revenus et ouvre l'Évolution, page Premium : surprise pour un compte gratuit.</span></li>
+      <li><b class="k">8</b><span>Factures et « Dépenses fixes » : deux notions voisines, deux pages, deux styles, deux éditeurs ; les revenus fixes sont dans « Dépenses fixes ».</span></li></ol></div>
+    <div class="an-box"><h4><i data-i="copy"></i>Répétitions</h4><ol>
+      <li><b class="k">9</b><span>Trois soldes : la carte Solde (calculée), le Relevé (le même, sur une autre page) et les Comptes saisis à la main, où le compte chèques peut afficher un autre montant.</span></li>
+      <li><b class="k">10</b><span>Deux courbes de même forme : le reste du budget (en haut) et le solde (plus bas).</span></li>
+      <li><b class="k">11</b><span>Les dépenses du jour en tuiles puis en liste ; et deux pages pour la même liste d'opérations (Opérations, Relevé).</span></li></ol></div>
+    <div class="an-box"><h4><i data-i="chart"></i>Graphiques difficiles à lire</h4><ol>
+      <li><b class="k">12</b><span>Évolution : revenus en vert, dépenses en vert pâle ; le mois en cours est dessiné comme un mois complet ; une valeur extrême écrase l'échelle.</span></li>
+      <li><b class="k">13</b><span>La courbe du haut n'a ni axe ni repère (budget, rythme) : elle descend toujours et ne dit pas si c'est bien.</span></li>
+      <li><b class="k">14</b><span>L'anneau des catégories : six couleurs sans étiquette ; il faut descendre pour lire les noms.</span></li>
+      <li><b class="k">15</b><span>Les segments « 3 mois » et « Année » du solde n'ont pas de cadenas : on découvre Premium en touchant.</span></li></ol></div>
+    <div class="an-box"><h4><i data-i="hand"></i>Interactions à simplifier</h4><ol>
+      <li><b class="k">16</b><span>« Dépense » et « Revenu » : deux gros boutons de même poids au milieu de la page, alors qu'on note surtout des dépenses.</span></li>
+      <li><b class="k">17</b><span>L'éditeur est un formulaire système : titre coupé (« Modifier la dép… »), montant « 58,6 $ », catégorie dans un menu déroulant.</span></li>
+      <li><b class="k">18</b><span>Le sélecteur de semaine recalcule le mois « à la fin du jour choisi » sans le dire à l'écran.</span></li>
+      <li><b class="k">19</b><span>Les dépenses rapides ne se règlent que dans les options du widget, pas dans Finance.</span></li></ol></div>
+    <div class="an-box"><h4><i data-i="eye"></i>Important, pas assez mis en avant</h4><ol>
+      <li><b class="k">20</b><span>Ce qui restera une fois les factures du mois payées : dit nulle part.</span></li>
+      <li><b class="k">21</b><span>Le rythme : 66 % du budget dépensé à 40 % du mois n'est dit nulle part.</span></li>
+      <li><b class="k">22</b><span>« À vérifier » (Apple Pay) : une petite pastille dans une ligne, sans compteur.</span></li>
+      <li><b class="k">23</b><span>Ce qui est mis de côté chaque mois (dans l'Évolution, Premium, seulement) ; l'épargne visée de « Mes informations » n'apparaît pas dans Finance.</span></li></ol></div>
+  </div>
+
+  <h2 class="sec">Ce que Finance fait aujourd'hui (rien ne sera retiré)</h2>
+  <p class="secp">Sans Premium : le mois en cours et les 7 derniers jours. Premium ajoute les mois passés, 3 mois et l'année du solde, et la page Évolution (comparatif gratuit / Premium du 2026-11). Aucune connexion bancaire : tout vient de ce que la personne note, ou d'Apple Pay par une automatisation Raccourcis.</p>
+  <div class="an-3">
+    <div class="an-box"><table class="an-t"><tr><th>Fonction</th><th>Ce qu'elle fait</th><th>Gratuit</th><th>Premium</th></tr>
+      <tr><td>Reste du mois</td><td>Budget moins dépenses au jour choisi, « par jour pendant N jours », courbe du reste</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Budget du mois</td><td>Un budget global ; « Budget à définir » sinon</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Comparaison</td><td>« X $ de plus / de moins que le mois dernier à la même date »</td><td class="g">Total</td><td class="p">Par catégorie</td></tr>
+      <tr><td>Sélecteur de semaine</td><td>Chiffres du mois à la fin du jour choisi ; futur bloqué</td><td class="g">7 derniers jours</td><td class="p">Plus ancien</td></tr>
+      <tr><td>Dépense, revenu</td><td>Ajouter, modifier, supprimer ; montant, catégorie, note, date ; source du revenu</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Apple Pay</td><td>Automatisation Raccourcis, règles de commerçants, « À vérifier », doublons ignorés</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Solde du compte</td><td>Solde de départ + revenus − dépenses ; courbe Mois / 3 mois / Année</td><td class="g">Mois</td><td class="p">3 mois, Année</td></tr></table></div>
+    <div class="an-box"><table class="an-t"><tr><th>Fonction</th><th>Ce qu'elle fait</th><th>Gratuit</th><th>Premium</th></tr>
+      <tr><td>Relevé</td><td>Chaque opération avec le solde après elle</td><td class="g">Mois en cours</td><td class="p">Plus ancien</td></tr>
+      <tr><td>Opérations</td><td>Mois par mois, Dépenses / Revenus, filtre de catégorie, total</td><td class="g">Mois en cours</td><td class="p">Mois passés</td></tr>
+      <tr><td>Catégories</td><td>Anneau, limite par mois, créer, nom, icône, couleur ; 6 par défaut</td><td class="g">Mois en cours</td><td class="p">Mois passés</td></tr>
+      <tr><td>Factures et abonnements</td><td>Mensuel ou annuel, prochaine échéance, total par mois, abonnements, rappel la veille</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Revenus et dépenses fixes</td><td>Salaire, loyer… par jour, semaine, 2 semaines, mois, an ; comptés à leurs dates</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Épargne</td><td>Objectifs, versements, date limite, mensualité nécessaire</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Comptes</td><td>Comptes et dettes saisis à la main, valeur nette et sa courbe</td><td class="g">Oui</td><td class="p">—</td></tr></table></div>
+    <div class="an-box"><table class="an-t"><tr><th>Fonction</th><th>Ce qu'elle fait</th><th>Gratuit</th><th>Premium</th></tr>
+      <tr><td>Évolution</td><td>6 mois en barres, moyennes, « mis de côté », comparaison par catégorie</td><td class="g">—</td><td class="p">Oui</td></tr>
+      <tr><td>Dépenses rapides</td><td>Café, bus… notées d'une touche par le widget</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Mes paramètres</td><td>Devise, Mes informations (revenu, budget, épargne visée, principales dépenses), revenus et dépenses fixes, rappel des factures</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Widgets Budget</td><td>Reste du mois, Objectif d'épargne, Dépense rapide</td><td class="g">Oui</td><td class="p">—</td></tr>
+      <tr><td>Widgets Premium</td><td>Flux d'argent, Dépenses par catégorie, Factures à venir, Valeur nette, Abonnements, Tableau argent, Analyse des dépenses</td><td class="g">—</td><td class="p">Oui</td></tr>
+      <tr><td>N'existe pas</td><td colspan="3" style="color:#5B6577;font-weight:400">Connexion bancaire, import de relevé, placements dans Finance, plusieurs devises, objectifs autres que l'épargne, opérations rattachées à un compte</td></tr></table></div>
+  </div>
+
+  <h2 class="sec">Ce qui marche et qu'on garde</h2>
+  <div class="an-2" style="margin-bottom:6px">
+    <div class="an-box an-ok"><h4><i data-i="checkc"></i>Bonnes bases</h4><ol>
+      <li><b class="k">✓</b><span>Le « reste » calculé jusqu'au jour choisi, factures et montants fixes compris : c'est le bon chiffre, il faut seulement le rendre lisible.</span></li>
+      <li><b class="k">✓</b><span>Le relevé avec le solde après chaque opération, comme une vraie banque.</span></li>
+      <li><b class="k">✓</b><span>Apple Pay automatique, avec apprentissage des catégories par commerçant.</span></li></ol></div>
+    <div class="an-box an-ok"><h4><i data-i="checkc"></i>Bons choix à ne pas perdre</h4><ol>
+      <li><b class="k">✓</b><span>Aucune connexion bancaire : tout reste sur l'iPhone (argument de confiance).</span></li>
+      <li><b class="k">✓</b><span>Les cadenas Premium clairs dans Opérations et Catégories (mois passés), et la carte « L'évolution est dans Premium ».</span></li>
+      <li><b class="k">✓</b><span>Le sélecteur de semaine commun à toutes les mini-apps (règle d'harmonisation du 2026-10-22).</span></li></ol></div>
+  </div>
+</main>
+<script src="../2026-11-15-cristal/cristal.js"></script>
+<script src="finance.js"></script>
+<script>
+// ruban : la page principale actuelle, hauteurs estimées (points), écran visible ≈ 700 points sous la barre du haut
+const RIB = [['Sélecteur de semaine', 100, 'key'], ['Reste ce mois-ci + légende', 120, 'key'], ['Courbe du reste', 50, 'key'], ['Pastille Budget, comparaison', 70, 'key'],
+  ['Boutons Dépense, Revenu', 60, 'key'], ['Jour choisi : tuiles + opérations', 230, 'key'], ['Apple Pay (réglage)', 70, ''], ['Ce mois-ci : revenus', 90, ''],
+  ['Solde du compte + courbe', 370, 'hot'], ['Catégories (4)', 260, ''], ['Factures à venir', 230, 'hot'], ['Épargne', 150, ''], ['Liste de pages', 300, ''], ['Note', 50, ''], ['Mes paramètres', 60, '']];
+const K = .36; let y = 0, h = '';
+const marks = [700, 1400, 2100];
+RIB.forEach(([t, v, c]) => { h += `<div class="${c}" style="height:${(v * K - 4).toFixed(0)}px">${t}</div>`; y += v; });
+const tot = RIB.reduce((a, b) => a + b[1], 0);
+h += marks.map((m, k) => `<span class="scr-l" style="top:${(10 + m * K).toFixed(0)}px"><span>écran ${k + 2}</span></span>`).join('') + `<span class="scr-l" style="top:10px;border-color:transparent"><span>écran 1</span></span>`;
+document.getElementById('rib').innerHTML = h;
+Cristal.init();
+</script>
+</body>
+</html>

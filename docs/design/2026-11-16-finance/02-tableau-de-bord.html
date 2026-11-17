@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Finance — Direction 2 : Tableau de bord Premium</title>
+<link rel="stylesheet" href="../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="finance.css">
+<style>
+  /* préfixe t2- : propre à cette planche */
+  .t2-capsule { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 14px; border-radius: 22px; font-size: 14.5px; font-weight: 650; }
+  .t2-capsule i { font-size: 14px; color: var(--ink2); }
+  .t2-bal { font-size: 46px; font-weight: 750; letter-spacing: -.045em; line-height: .95; font-variant-numeric: tabular-nums; }
+  .t2-bal small { font-size: 23px; font-weight: 650; color: var(--ink2); letter-spacing: -.01em; }
+  .t2-tile { padding: 12px 13px 13px; border-radius: 22px; display: flex; flex-direction: column; min-height: 116px; min-width: 0; }
+  .t2-tile .h { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 650; color: var(--ink2); white-space: nowrap; }
+  .t2-tile .h .ico { width: 26px; height: 26px; font-size: 14px; }
+  .t2-tile .h .go { font-size: 14px; }
+  .t2-tile .v { font-size: 24px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; margin-top: 9px; line-height: 1.05; white-space: nowrap; }
+  .t2-tile .v.sm { font-size: 21px; }
+  .t2-tile .s { margin-top: auto; padding-top: 6px; }
+  .t2-ringrow { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .t2-ringrow .v { margin-top: 0; }
+  .t2-ringrow .s { padding-top: 2px; }
+  .t2-leg { flex: 1; min-width: 0; display: grid; gap: 4px; }
+  .t2-leg > div { display: flex; align-items: center; gap: 8px; font-size: 13px; min-height: 19px; }
+  .t2-leg u { width: 10px; height: 10px; border-radius: 3px; background: var(--c); flex: none; }
+  .t2-leg span { flex: 1; min-width: 0; font-weight: 550; white-space: nowrap; }
+  .t2-leg em { font-style: normal; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .t2-pages { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .t2-pages > div { padding: 12px 10px 11px; border-radius: 20px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-height: 84px; min-width: 0; }
+  .t2-pages b { font-size: 13.5px; font-weight: 650; line-height: 1.2; white-space: nowrap; }
+  .t2-pages .prem { margin-top: -2px; }
+  .t2-ct { padding: 10px 10px 11px; border-radius: 18px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .t2-ct .ico { width: 28px; height: 28px; font-size: 15px; margin-bottom: 4px; }
+  .t2-ct b { font-size: 13px; font-weight: 650; white-space: nowrap; }
+  .t2-ct strong { font-size: 17px; font-weight: 700; letter-spacing: -.015em; font-variant-numeric: tabular-nums; }
+  .t2-ct span { font-size: 11.5px; color: var(--ink2); white-space: nowrap; }
+  .t2-div { display: grid; gap: 7px; margin-top: 8px; }
+  .t2-div .r { display: grid; grid-template-columns: 78px 1fr 54px; align-items: center; gap: 8px; font-size: 13px; }
+  .t2-div .r > span:first-child { font-weight: 600; white-space: nowrap; }
+  .t2-div .b { position: relative; height: 12px; }
+  .t2-div .b::before { content: ""; position: absolute; left: 50%; top: -4px; bottom: -4px; width: 1.5px; margin-left: -.75px; background: var(--rule2); }
+  .t2-div .b i { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
+  .t2-div .r > span:last-child { text-align: right; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .t2-div .ax { display: grid; grid-template-columns: 78px 1fr 54px; gap: 8px; font-size: 11px; color: var(--ink2); }
+  .t2-div .ax span:nth-child(2) { display: flex; justify-content: space-between; }
+  .t2-rt { padding: 9px 6px 10px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 3px; min-width: 0; }
+  .t2-rt b { font-size: 13px; font-weight: 650; margin-top: 4px; white-space: nowrap; }
+  .t2-rt span { font-size: 11.5px; color: var(--ink2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .t2-rt .rgw .in b { font-size: 12.5px; margin: 0; }
+  .t2-cal { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 2px; }
+  .t2-cal > span { height: 25px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .t2-cal > span.h { height: 18px; font-size: 10.5px; font-weight: 700; color: var(--ink2); }
+  .t2-cal > span.p { color: var(--ink2); }
+  .t2-cal > span b { width: 21px; height: 19px; border-radius: 10px; display: grid; place-items: center; font-weight: 600; }
+  .t2-cal > span.t b { box-shadow: 0 0 0 1.8px var(--ink); font-weight: 750; }
+  .t2-cal > span u { width: 6px; height: 6px; border-radius: 50%; background: var(--c); margin-top: 1px; }
+  .t2-goal { padding: 13px 13px 13px; border-radius: 22px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .t2-goal > b { font-size: 14.5px; font-weight: 650; margin-top: 8px; white-space: nowrap; }
+  .t2-goal .rgw .in b { font-size: 14px; }
+  .t2-sum { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .t2-sum > div { display: flex; flex-direction: column; gap: 3px; padding-left: 11px; border-left: 1px solid var(--rule); min-width: 0; }
+  .t2-sum > div:first-child { padding-left: 0; border-left: 0; }
+  .t2-sum .fn-num { font-size: 18px; }
+  .t2-sum .s { white-space: nowrap; }
+  .t2-dt { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .t2-dt > div { padding: 11px 12px; border-radius: 16px; background: var(--well); }
+  .t2-dt .fn-lab { font-size: 10.5px; }
+  .t2-dt b { display: block; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; margin: 5px 0 7px; }
+  .t2-kv { display: flex; align-items: center; justify-content: space-between; min-height: 44px; border-top: 1px solid var(--rule); font-size: 14.5px; gap: 10px; }
+  .t2-kv:first-child { border-top: 0; }
+  .t2-kv > span:first-child { color: var(--ink2); }
+  .t2-kv > span:last-child { font-weight: 600; display: flex; align-items: center; gap: 6px; }
+  .t2-warn { display: flex; gap: 10px; align-items: center; padding: 10px 12px 10px 14px; border-radius: 16px; background: var(--fn-warnbg); color: #5E3D00; font-size: 13px; line-height: 1.35; margin-top: 12px; }
+  .t2-warn .btnP { height: 36px; padding: 0 12px; font-size: 13.5px; flex: none; }
+  .t2-fil { display: grid; grid-template-columns: 1fr auto; gap: 8px; margin-top: 12px; }
+  .t2-fil .btnG { padding: 0 14px; height: 40px; font-size: 14px; }
+  .t2-fil .btnG i { font-size: 16px; }
+  #t2p2 .scr, #t2p3 .scr { padding-top: 2px; }
+  .t2-wide { width: 1327px !important; }
+  .phone.app .fn-fab2 { --primary: var(--cs); }   /* l'action flottante à deux boutons prend la couleur de Finances, comme .fab */
+  .t2-pages .s { font-size: 11.5px; margin-top: -5px; white-space: nowrap; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd">
+  <header class="bd-head"><div class="num">2</div><div><h1>Direction 2 · Tableau de bord Premium</h1>
+    <p>Le cockpit du mois : tout tient sur un écran de tuiles et d'anneaux, comme un tableau de bord de banque haut de gamme. Le mois est l'unité ; chaque tuile est une porte vers sa page. Journée d'exemple des planches Cristal : jeudi 12 novembre, 13 h 20, nappe et couleur d'action de Finances (jade), thème Saphir.</p></div>
+    <span class="badge">Étape 1 · conception · données d'exemple</span></header>
+
+  <div class="fn-rule">
+    <div><h5>La logique</h5><h3>Tout le mois d'un coup d'œil</h3><p>Le solde dans la seule carte de verre, puis quatre tuiles égales qui répondent aux quatre questions du mois : ce qui est entré, ce qui est sorti, ce qu'il reste, ce qui est mis de côté. En faisant défiler : la répartition, ce qui arrive, l'évolution, puis toutes les pages en grille.</p></div>
+    <div><h5>En ouvrant Finance</h5><ol><li><b class="p p1">P1</b>Solde du compte et sa courbe du mois</li><li><b class="p p1">P1</b>Revenus et dépenses, en deux tuiles</li><li><b class="p p1">P1</b>Budget restant en anneau, « par jour »</li><li><b class="p p2">P2</b>Épargne du mois (mis de côté)</li></ol></div>
+    <div><h5>Une touche plus loin</h5><ol><li><b class="p p2">P2</b>Répartition, évolution 6 mois (Premium)</li><li><b class="p p2">P2</b>Le mois en cascade, l'analyse en 4 graphiques</li><li><b class="p p3">P3</b>Budgets en anneaux, calendrier des échéances</li><li><b class="p p3">P3</b>Opérations avec synthèse, épargne et comptes</li></ol></div>
+    <div><h5>Forces et limites</h5><p><b>+</b> Le plus riche au premier regard ; chaque chiffre s'ouvre ; très « Premium ».</p><p><b>−</b> Beaucoup de chiffres de même poids : la hiérarchie tient à la taille du solde ; « À venir » n'arrive qu'en faisant défiler ; le plus de cartes à coder.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">1 · Tableau de bord, haut</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="t2p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Le mois en quatre tuiles</h4>
+        <p>Le solde et sa courbe dans la carte de verre ; dessous, quatre tuiles de même taille. Toucher une tuile ouvre sa page ; toucher le solde ouvre le Relevé.</p>
+        <ul><li><span class="tag e">Existe</span><span>Solde du compte, courbe, Mois / 3 mois / Année (cadenas Premium), revenus du mois, reste, « par jour », comparaison au mois dernier, objectifs d'épargne.</span></li>
+          <li><span class="tag a">À adapter</span><span>Capsule « Novembre » : une feuille avec le mois (mois passés en Premium) et le sélecteur de semaine ; anneau du budget ; tuile Épargne avec « mis de côté » ; « Dépense » et « Revenu » flottants.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">2 · Tableau de bord, suite</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="t2p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Répartition, à venir, évolution</h4>
+        <p>L'anneau des catégories monte sur la page principale, avec sa légende chiffrée. Deux tuiles signalent ce qui demande un geste : les factures qui arrivent, l'achat à vérifier.</p>
+        <ul><li><span class="tag e">Existe</span><span>Anneau des catégories (page Catégories), factures à venir sur 14 jours, « À vérifier » d'Apple Pay, Évolution (Premium), dernières opérations.</span></li>
+          <li><span class="tag a">À adapter</span><span>Anneau sur la page principale ; tuiles « À venir » et « Apple Pay » ; mini-barres de l'Évolution (sans Premium : cadenas et « Découvrir Premium »).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">3 · Tableau de bord, bas</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="t2p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Toutes les pages, toujours au même endroit</h4>
+        <p>Une grille fixe de six raccourcis remplace la liste qui change selon les données. La note sur les banques et « Mes paramètres » restent en dernier.</p>
+        <ul><li><span class="tag e">Existe</span><span>Opérations, Catégories, Factures, Épargne et comptes, Évolution, Apple Pay, note, « Mes paramètres ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Raccourcis en grille, toujours présents ; « Récurrents » réunit factures et montants fixes.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">4 · Revenus et dépenses</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="t2p4"></div>
+      <div class="cap"><h4>Le mois en cascade</h4>
+        <p>D'où vient le solde : ce qu'il y avait le 1er, plus ce qui est entré, moins ce qui est sorti. Puis les revenus par source et les dépenses par catégorie, en tuiles.</p>
+        <ul><li><span class="tag e">Existe</span><span>Solde de départ, revenus (et revenus fixes), dépenses par catégorie, sélecteur de mois (mois passés en Premium).</span></li>
+          <li><span class="tag a">À adapter</span><span>Cascade « départ → revenus → dépenses → aujourd'hui » ; catégories en tuiles avec leur part du mois.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">5 · Analyse</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="t2p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Quatre graphiques, une question chacun</h4>
+        <p>Comment évoluent revenus et dépenses ; quelle part je garde ; combien en moyenne ; ce qui a changé depuis octobre. Les baisses vont à gauche, les hausses à droite, toujours avec leur montant signé.</p>
+        <ul><li><span class="tag e">Existe</span><span>Page Évolution (Premium) : 6 mois, moyennes sur les mois complets, « Mis de côté » en % des revenus, comparaison par catégorie à la même date.</span></li>
+          <li><span class="tag a">À adapter</span><span>Taux d'épargne du mois en anneau (362 $ sur 1 150 $) ; écarts en barres divergentes ; revenus et dépenses en deux couleurs bien distinctes.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">6 · Opérations</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="t2p6"></div><span class="flow"></span>
+      <div class="cap"><h4>Une synthèse avant la liste</h4>
+        <p>En tête, le mois en trois chiffres ; dessous, une barre de filtres (type, catégorie, « À vérifier ») et la liste par jour, avec le total de chaque jour.</p>
+        <ul><li><span class="tag e">Existe</span><span>Mois par mois (mois passés en Premium), Dépenses / Revenus, filtre de catégorie, « + », marques Apple Pay et « À vérifier ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Nombre d'opérations et totaux du mois en tête ; total de chaque jour ; filtres réunis dans « Filtres ».</span></li>
+          <li><span class="tag d">Nouveau</span><span>Dépense moyenne et plus grosse dépense du mois.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">7 · Détail d'une opération</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="none" id="t2p7"></div><span class="flow"></span>
+      <div class="cap"><h4>La dépense dans son mois</h4>
+        <p>La fiche place l'achat dans son contexte : sa catégorie ce mois-ci et sa part du « par jour ». La catégorie à confirmer est expliquée en une phrase ; « Modifier » ouvre l'éditeur actuel.</p>
+        <ul><li><span class="tag e">Existe</span><span>Montant, catégorie, note, date, commerçant, Apple Pay, « À vérifier » qui apprend la catégorie, « Supprimer la dépense ».</span></li>
+          <li><span class="tag a">À adapter</span><span>Fiche de lecture avant l'éditeur ; tuiles « Restos ce mois-ci » et « Part du jour » (chiffres existants).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">8 · Budgets et récurrents</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="t2p8"></div>
+      <div class="cap"><h4>Un anneau par limite, un calendrier des échéances</h4>
+        <p>Le budget du mois, puis un anneau par catégorie (pourcentage écrit au centre, ce qui reste dessous). Les échéances du mois sont posées sur un petit calendrier, avec trois sortes de points nommées.</p>
+        <ul><li><span class="tag e">Existe</span><span>Budget du mois, limites par catégorie, factures et abonnements, revenus et dépenses fixes, rappel des factures la veille.</span></li>
+          <li><span class="tag a">À adapter</span><span>Limites en anneaux ; calendrier des échéances (les dates existent) ; factures et montants fixes sur une même page.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">9 · Épargne et comptes</div>
+      <div class="phone app fn t-saphir" data-c="bud" data-time="13:20" data-tab="0" id="t2p9"></div>
+      <div class="cap"><h4>Ce que je possède</h4>
+        <p>La valeur nette dans la carte de verre, avec sa courbe de six mois ; les objectifs en anneaux ; les comptes et la dette, écrite « Dette » et avec son signe.</p>
+        <ul><li><span class="tag e">Existe</span><span>Valeur nette et sa courbe, comptes et dettes saisis à la main, objectifs, versements, date limite, mensualité.</span></li>
+          <li><span class="tag a">À adapter</span><span>Objectifs en anneaux ; valeur nette en carte de verre.</span></li></ul></div></div>
+    <div class="col t2-wide"><div class="nm">Correspondance</div><div class="note" style="margin:9px" id="t2map"></div></div>
+  </div>
+</main>
+<script src="../2026-11-15-cristal/cristal.js"></script>
+<script>/* finance.js après cristal.js */</script>
+<script src="finance.js"></script>
+<script>
+const ring = (p, s, sw, c, inner) => `<div class="rgw" style="width:${s}px;height:${s}px;--c:${c}">${U.ring(p, sw)}<div class="in">${inner || ''}</div></div>`;
+const tile = (ico, col, h, body, x = '') => `<div class="pn t2-tile"${x}><div class="h"><span class="ico" style="--c:${col}"><i data-i="${ico}"></i></span>${h}<i class="go" data-i="chev"></i></div>${body}</div>`;
+
+const repart = (mt = 6) => `<article class="pn cd" style="margin-top:${mt}px">
+    <div class="ch"><b>Répartition</b><span class="s" style="margin-left:auto">novembre, au 12</span><i class="go" data-i="chev" style="margin-left:6px"></i></div>
+    <div style="display:flex;gap:16px;align-items:center;margin-top:8px">${F.donut(FIN.cats.map((c) => ({ v: c.v, c: c.col })), { s: 118, sw: 15, in: '<b style="font-size:21px">788 $</b><small>dépensés</small>', aria: 'Répartition des 788 $ dépensés en novembre' })}
+      <div class="t2-leg">${FIN.cats.map((c) => `<div style="--c:${c.col}"><u></u><span>${c.n}</span><em>${F.m(c.v)}</em></div>`).join('')}</div></div>
+  </article>`;
+// 1 · tableau de bord, haut
+F.mount('t2p1', F.nv('Finances', '<span class="gl t2-capsule">Novembre<i data-i="chevd"></i></span>') + `
+  <article class="gl fn-hero" style="margin-top:8px;padding:15px 16px 12px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span class="fn-lab">Solde du compte<i data-i="chev" style="font-size:11px;margin-left:4px;vertical-align:-1px"></i></span><span class="fn-delta fn-in"><i data-i="up"></i>+362 $ ce mois-ci</span></div>
+    <div class="t2-bal" style="margin-top:9px">1 846<small>,20 $</small></div>
+    <div style="margin-top:8px">${F.line({ series: [{ v: FIN.bal, c: 'var(--fn-in)', area: true, dot: true }], h: 40, min: 900, max: 2150, n: 12, w: 323, xl: [[0, '1 nov.'], [11, '12 nov.']], aria: 'Solde du 1er au 12 novembre : de 1 284,20 $ à 1 846,20 $' })}</div>
+    <div class="seg" style="margin-top:8px;height:36px"><span class="on">Mois</span><span>${F.lock('3 mois')}</span><span>${F.lock('Année')}</span></div>
+  </article>
+  <div class="g2" style="margin-top:12px">
+    ${tile('inArrow', 'var(--fn-in)', 'Revenus', `<div class="v fn-in">+1 150 $</div><div class="s">Salaire du 5 · 1 revenu</div>`)}
+    ${tile('outArrow', 'var(--fn-out)', 'Dépenses', `<div class="v">−788 $</div><div class="s"><span class="fn-delta"><i data-i="down"></i>96 $</span> de moins qu'en octobre au 12</div>`)}
+    ${tile('target', 'var(--primary)', 'Budget restant', `<div class="t2-ringrow">${ring(FIN.spent / FIN.budget, 54, 9, 'var(--fn-out)', '<b style="font-size:12.5px">66 %</b>')}<div><div class="v">412 $</div><div class="s">21,68 $ / jour</div></div></div>`)}
+    ${tile('piggy', 'var(--fn-in)', 'Épargne', `<div class="v">1 760 $</div><div class="s">objectifs · <b style="color:var(--fn-in)">+362 $</b> mis de côté ce mois</div>`)}
+  </div>
+  ${repart(12)}`, F.fab2());
+
+// 2 · tableau de bord, suite (défilée)
+const months = FIN.months.map((m) => ({ l: m.l, v: [m.i, m.o], cur: m.cur, hl: m.cur }));
+F.mount('t2p2', `
+  ${repart(6)}
+  <div class="g2" style="margin-top:12px">
+    ${tile('calendar', 'var(--primary)', 'À venir', `<div class="v sm">193,98 $</div><div class="s">5 factures d'ici le 26 · <b style="color:var(--fn-over)">Internet demain</b></div>`)}
+    ${tile('wave', 'var(--fn-warn)', 'Apple Pay', `<div class="v sm">1 achat</div><div class="s">à vérifier · Café et sandwich, 14,50 $</div>`)}
+  </div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="ch"><b>Évolution</b><span style="margin-left:6px">${F.prem()}</span><span class="s" style="margin-left:auto">6 mois</span><i class="go" data-i="chev" style="margin-left:6px"></i></div>
+    <div style="margin-top:6px">${F.bars({ g: months, c: ['var(--fn-in)', 'var(--fn-out)'], max: 1900, h: 62, bw: 11, aria: 'Revenus et dépenses de juin à novembre' })}</div>
+    ${F.leg([['var(--fn-in)', 'Revenus'], ['var(--fn-out)', 'Dépenses'], ['var(--fn-out)', 'En cours', 'hat']])}
+  </article>
+  ${F.sect('Opérations récentes', '', 'Tout voir')}<article class="pn ls">${FIN.ops.slice(0, 2).map((o, k) => F.op(o, { when: ['', 'Hier'][k] })).join('')}</article>`, F.fab2());
+
+// 3 · tableau de bord, bas (défilée jusqu'au bout)
+const page = (i, col, t, x = '') => `<div class="pn"><span class="ico" style="--c:${col}"><i data-i="${i}"></i></span><b>${t}</b>${x.startsWith('<span class="prem"') ? x : `<span class="s">${x}</span>`}</div>`;
+F.mount('t2p3', `
+  ${F.sect('Opérations récentes', '', 'Tout voir')}<article class="pn ls">${FIN.ops.slice(0, 4).map((o, k) => F.op(o, { when: ['', 'Hier', 'Mardi', 'Lundi'][k] })).join('')}</article>
+  ${F.sect('Toutes les pages')}
+  <div class="t2-pages">
+    ${page('list', 'var(--primary)', 'Opérations', '18 ce mois-ci')}${page('chart', '#7A5BD6', 'Catégories', '6 · limites')}${page('repeat', '#B0368A', 'Récurrents', '307,97 $ / mois')}
+    ${page('piggy', 'var(--fn-in)', 'Épargne', 'et comptes')}${page('trend', '#2F5BD0', 'Évolution', F.prem())}${page('wave', 'var(--fn-warn)', 'Apple Pay', 'Active')}
+  </div>
+  <div class="foot">Ardane ne se connecte à aucune banque : tout vient de ce que tu notes. Ce sont des repères, pas des conseils financiers.</div>
+  <div class="btnO" style="margin-top:10px"><i data-i="gear"></i>Mes paramètres</div>`, F.fab2());
+
+// 4 · revenus et dépenses
+F.mount('t2p4', F.nv('', F.rbtn('plus', 'Ajouter')) + `
+  <div class="fn-ttl">Revenus et dépenses</div>
+  <div style="margin-top:10px">${F.month()}</div>
+  <article class="pn cd" style="margin-top:12px;padding-bottom:12px">
+    <div class="ch"><b>Flux du mois</b><span class="s" style="margin-left:auto">du 1er au 12 novembre</span></div>
+    <div style="margin-top:20px">${F.fall({ h: 104, max: 2800, steps: [{ l: '1er nov.', v: 1484.2, k: 'start', t: '1 484 $' }, { l: 'Revenus', v: 1150, k: 'in', t: '+1 150 $' }, { l: 'Dépenses', v: 788, k: 'out', t: '−788 $' }, { l: 'Aujourd\'hui', v: 1846.2, k: 'end', t: '1 846 $' }], aria: 'Solde de départ 1 484,20 $, plus 1 150 $ de revenus, moins 788 $ de dépenses : 1 846,20 $' })}</div>
+    <div class="fn-cap" style="margin-top:6px">Solde de départ + revenus − dépenses = solde du compte.</div>
+  </article>
+  ${F.sect('Revenus', '+1 150 $')}<article class="pn ls">${F.op(FIN.ops.find((o) => o.a > 0), { sub: 'Revenu fixe · 5 novembre' })}</article>
+  ${F.sect('Dépenses', '−788 $ · 17 dépenses')}
+  <div class="g3" style="gap:8px">${FIN.cats.map((c) => `<div class="pn t2-ct">${F.catIco(c, '')}<b>${c.n}</b><strong>${F.m(c.v)}</strong><span>${F.pct(c.v / FIN.spent)} du mois</span></div>`).join('')}</div>`);
+
+// 5 · analyse (Premium)
+const deltas = FIN.cats.map((c) => ({ c, d: c.v - c.prev })).sort((a, b) => a.d - b.d);
+F.mount('t2p5', F.nv('') + `
+  <div style="display:flex;align-items:center;gap:10px"><div class="fn-ttl">Analyse</div>${F.prem()}</div>
+  <article class="pn cd" style="margin-top:12px;padding-bottom:12px">
+    <div class="ch"><b>Six derniers mois</b><span class="s" style="margin-left:auto">juin → novembre</span></div>
+    <div style="margin-top:6px">${F.bars({ g: months, c: ['var(--fn-in)', 'var(--fn-out)'], max: 2000, yt: [0, 1000, 2000], h: 92, bw: 12, aria: 'Revenus et dépenses de juin à novembre' })}</div>
+    ${F.leg([['var(--fn-in)', 'Revenus'], ['var(--fn-out)', 'Dépenses'], ['var(--fn-out)', 'Novembre, au 12', 'hat']])}
+  </article>
+  <div class="g2" style="margin-top:12px">
+    <div class="pn t2-tile" style="min-height:0"><div class="h">Taux d'épargne</div>
+      <div class="t2-ringrow">${ring(.315, 56, 9, 'var(--fn-in)', '<b style="font-size:14px">31 %</b>')}<div class="s" style="padding:0;margin:0;white-space:nowrap;line-height:1.5">en novembre<br>moy. <b style="color:var(--ink)">33 %</b></div></div></div>
+    <div class="pn t2-tile" style="min-height:0"><div class="h">Moyenne par mois</div>
+      <div class="s" style="margin-top:6px;padding:0;line-height:1.55">Dépenses <b style="color:var(--ink)">1 172 $</b><br>Revenus <b style="color:var(--fn-in)">1 754 $</b><br>Mis de côté <b style="color:var(--ink)">582 $</b></div></div>
+  </div>
+  <article class="pn cd" style="margin-top:12px">
+    <div class="ch"><b>Écarts avec octobre</b><span class="s" style="margin-left:auto">à la même date</span></div>
+    <div class="t2-div">
+      ${deltas.map(({ c, d }) => { const w = Math.abs(d) / 50 * 50;
+        return `<div class="r"><span>${c.n}</span><span class="b">${d ? `<i style="${d < 0 ? 'right:50%' : 'left:50%'};width:${w.toFixed(1)}%;background:${d < 0 ? 'var(--fn-in)' : 'var(--fn-out)'}"></i>` : ''}</span><span>${d === 0 ? '0 $' : (d > 0 ? '+' : '−') + F.m(Math.abs(d))}</span></div>`; }).join('')}
+      <div class="ax"><span></span><span><span>← moins</span><span>plus →</span></span><span></span></div>
+    </div>
+  </article>
+  <div class="foot">Moyennes calculées sur les mois terminés où tu as noté quelque chose. Novembre n'est pas fini : il est hachuré.</div>`);
+
+// 6 · opérations
+const dayG = (lab, d) => { const list = FIN.ops.filter((o) => o.d === d); const tot = list.reduce((s, o) => s + o.a, 0);
+  return `<div class="fn-dayh">${lab}<span>${tot < 0 ? F.out(-tot) : F.inc(tot)}</span></div><article class="pn ls">${list.map((o) => F.op(o)).join('')}</article>`; };
+const opsHtml = F.nv('', F.rbtn('plus', 'Nouvelle opération')) + `
+  <div class="fn-ttl">Opérations</div>
+  <div style="margin-top:10px">${F.month()}</div>
+  <article class="pn cd" style="margin-top:12px;padding:13px 16px 14px">
+    <div class="t2-sum">
+      <div><span class="fn-lab">17 dépenses</span><b class="fn-num">−788 $</b></div>
+      <div><span class="fn-lab">1 revenu</span><b class="fn-num fn-in">+1 150 $</b></div>
+      <div><span class="fn-lab">Moyenne</span><b class="fn-num">46,35 $</b></div>
+    </div>
+    <div class="fn-cap" style="margin-top:10px;display:flex;align-items:center;gap:8px">${F.nw()}<span>Moyenne par dépense ; la plus grosse : <b>Costco, 103 $</b></span></div>
+  </article>
+  <div class="t2-fil"><div class="seg"><span class="on">Tout</span><span>Dépenses</span><span>Revenus</span></div><div class="btnG"><i data-i="sliders"></i>Filtres</div></div>
+  ${dayG('Aujourd\'hui', 12)}${dayG('Hier', 11)}${dayG('Mardi 10 novembre', 10)}${dayG('Lundi 9 novembre', 9)}`;
+F.mount('t2p6', opsHtml);
+
+// 7 · détail d'une opération (feuille sur la liste)
+const r0 = FIN.cat('res');
+F.mount('t2p7', opsHtml, F.sheet(`
+  <div style="display:flex;align-items:center;gap:12px;margin-top:4px">${F.catIco(r0, 'xl')}<div style="flex:1;min-width:0"><div class="h3">Café et sandwich</div><div class="s" style="margin-top:2px">Aujourd'hui à 12:41 · <span class="fn-mk"><i data-i="wave"></i>Apple Pay</span></div></div><div class="fn-num" style="font-size:24px">−14,50 $</div></div>
+  <div class="t2-dt">
+    <div><span class="fn-lab">Restos ce mois-ci</span><b>118 $ <small style="font-size:12.5px;color:var(--ink2);font-weight:600">sur 200 $</small></b><div class="fn-bar" style="--c:${r0.col}"><i style="width:59%"></i></div></div>
+    <div><span class="fn-lab">Part du jour</span><b>14,50 $ <small style="font-size:12.5px;color:var(--ink2);font-weight:600">sur 21,68 $</small></b><div class="fn-bar" style="--c:var(--fn-out)"><i style="width:66.9%"></i></div></div>
+  </div>
+  <div class="t2-warn"><i data-i="info" style="font-size:18px;flex:none"></i><span style="flex:1"><b>À vérifier :</b> confirme « Restos », Ardane s'en souviendra pour ce commerçant.</span><span class="btnP">Confirmer</span></div>
+  <div style="margin-top:6px">
+    <div class="t2-kv"><span>Catégorie</span><span><span class="ico" style="--c:${r0.col};width:24px;height:24px;font-size:13px"><i data-i="fork"></i></span>Restos<i data-i="chev" style="color:var(--go);font-size:15px"></i></span></div>
+    <div class="t2-kv"><span>Commerçant</span><span>Café Myriade</span></div>
+    <div class="t2-kv"><span>Date</span><span>Jeudi 12 novembre</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><div class="btnT"><i data-i="pencil"></i>Modifier</div><div class="btnO" style="color:var(--fn-over);border-color:color-mix(in srgb,var(--fn-over) 40%,transparent)"><i data-i="trash"></i>Supprimer</div></div>`, 'Dépense'));
+
+// 8 · budgets et récurrents
+const rt = (c) => { const p = c.lim ? c.v / c.lim : 0;
+  return `<div class="pn t2-rt">${ring(p, 46, 6.5, c.col, c.lim ? `<b>${F.pct(p)}</b>` : '<b style="color:var(--ink2)">—</b>')}<b>${c.n}</b><span>${c.lim ? `${F.n(c.v)} / ${F.m(c.lim)}` : `${F.m(c.v)} · sans limite`}</span></div>`; };
+const BILL = '#B0368A', KIND = { 1: 'var(--fn-out)', 5: 'var(--fn-in)', 13: BILL, 17: BILL, 20: BILL, 22: BILL, 25: BILL };
+let cal = ['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((d) => `<span class="h">${d}</span>`).join('') + '<span></span>'.repeat(FIN.dow0);
+for (let d = 1; d <= FIN.days; d++) cal += `<span class="${d < FIN.day ? 'p' : ''}${d === FIN.day ? ' t' : ''}"${KIND[d] ? ` style="--c:${KIND[d]}"` : ''}><b>${d}</b>${KIND[d] ? '<u></u>' : ''}</span>`;
+F.mount('t2p8', F.nv('') + `
+  <div class="fn-ttl">Budgets et récurrents</div>
+  <article class="pn cd" style="margin-top:12px;padding-bottom:14px">
+    <div class="ch"><b>Budget du mois</b><span class="link" style="margin-left:auto;display:flex;gap:5px;align-items:center"><i data-i="pencil" style="font-size:14px"></i>1 200 $</span></div>
+    <div style="display:flex;align-items:baseline;gap:8px;margin:2px 0 10px"><span class="fn-amt sm">412<small>$</small></span><span class="fn-cap">restants · 21,68 $ par jour</span></div>
+    ${F.pace({ labels: false })}
+  </article>
+  ${F.sect('Limites par catégorie', '', 'Modifier')}
+  <div class="g3" style="gap:8px">${['epi', 'mai', 'res', 'tra', 'sor', 'aut'].map((k) => rt(FIN.cat(k))).join('')}</div>
+  ${F.sect('Récurrents', '307,97 $ par mois')}
+  <article class="pn cd" style="padding:10px 14px 12px">
+    <div style="margin:-4px 0 6px">${F.leg([[BILL, 'Facture ou abonnement'], ['var(--fn-in)', 'Revenu fixe'], ['var(--fn-out)', 'Dépense fixe']])}</div>
+    <div class="t2-cal">${cal}</div>
+  </article>`);
+
+// 9 · épargne et comptes
+const goalT = (g) => `<div class="pn t2-goal">${ring(g.s / g.g, 60, 8, 'var(--fn-in)', `<b>${F.pct(g.s / g.g)}</b>`)}<b>${g.t}</b><span class="s">${F.m(g.s)} sur ${F.m(g.g)}</span><span class="s">${g.per ? `${F.m(g.per)} / mois d'ici ${g.dl}` : 'sans date limite'}</span></div>`;
+F.mount('t2p9', F.nv('', F.rbtn('plus', 'Nouvel objectif ou compte')) + `
+  <div class="fn-ttl">Épargne et comptes</div>
+  <article class="gl fn-hero" style="margin-top:12px;padding-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span class="fn-lab">Valeur nette</span><span class="fn-delta fn-in"><i data-i="up"></i>+770,80 $ depuis juin</span></div>
+    <div class="t2-bal" style="margin-top:9px;font-size:40px">2 750<small>,80 $</small></div>
+    <div style="margin-top:8px">${F.line({ series: [{ v: FIN.nw6, c: 'var(--fn-in)', area: true, dot: true }], h: 46, min: 1500, max: 3000, n: 6, w: 323, xl: [[0, 'juin'], [2, 'août'], [5, 'nov.']], aria: 'Valeur nette de juin à novembre : de 1 980 $ à 2 750,80 $' })}</div>
+  </article>
+  ${F.sect('Objectifs', '1 760 $ épargnés')}
+  <div class="g2">${FIN.goals.map(goalT).join('')}</div>
+  ${F.sect('Comptes', '3 comptes')}<article class="pn ls">${FIN.accounts.map(F.acct).join('')}<div class="li"><span class="ico lg" style="background:none;--c:var(--primary)"><i data-i="plusc"></i></span><div class="tx"><b style="color:var(--primary)">Nouveau compte ou dette</b></div></div></article>`);
+
+// où se trouve chaque fonction existante
+F.mapNote('t2map', {
+  sel: 'Capsule « Novembre » de la barre du haut : feuille avec le mois et le sélecteur de semaine (écran 1).',
+  reste: 'Tuile « Budget restant » : anneau, reste, « par jour » (écran 1).', budget: 'Tuile « Budget restant », puis Budgets et récurrents (écran 8).',
+  cmp: 'Tuile « Dépenses » (écran 1) ; Analyse (écran 5).', add: '« Dépense » et « Revenu » flottants (écrans 1 à 3) ; « + » des pages ; « Modifier » dans la fiche (écran 7).',
+  day: 'Capsule « Novembre » : choisir un jour recalcule les tuiles à la fin de ce jour ; opérations du jour dans Opérations.', applepay: 'Tuile « Apple Pay » (écran 2), raccourci « Apple Pay » (écran 3), fiche (écran 7).',
+  solde: 'Carte de verre du tableau de bord, avec Mois / 3 mois / Année (écran 1) ; solde de départ dans la cascade (écran 4).', releve: 'Toucher le solde ouvre le Relevé, comme aujourd\'hui.',
+  ops: 'Opérations (écran 6) : Tout / Dépenses / Revenus et « Filtres » (catégorie, « À vérifier »).', cats: 'Répartition (écran 2) qui ouvre la page Catégories ; tuiles (écran 4) ; limites en anneaux (écran 8).',
+  bills: 'Tuile « À venir » (écran 2) ; calendrier des Récurrents (écran 8).', fixed: 'Récurrents (écran 8) ; revenu fixe dans Revenus et dépenses (écran 4).', goals: 'Tuile Épargne (écran 1) ; Épargne et comptes (écran 9).', accounts: 'Épargne et comptes (écran 9).',
+  trends: 'Carte Évolution (écran 2) et Analyse (écran 5), Premium.', quick: 'Options du widget Dépense rapide, inchangé.',
+  settings: '« Mes paramètres » en bas du tableau de bord (écran 3).', tofill: 'Inchangé : en tête du tableau de bord quand le budget manque.',
+});
+Cristal.init();
+</script>
+</body>
+</html>
