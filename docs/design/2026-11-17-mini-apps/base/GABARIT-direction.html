@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<!-- ============================================================================================================
+     GABARIT D'UNE PLANCHE DE DIRECTION. À copier dans le dossier du sujet sous le nom NN-nom.html (01 à 05).
+     Les règles sont dans ../base/GUIDE-PLANCHES.md. Tout ce qui est écrit ici est un EXEMPLE COURT (Nutrition) : à remplacer.
+     Ordre imposé : en-tête · « La logique » · 6 à 9 écrans avec légendes et passages · case « garde / change / ajoute » · table de fin.
+     Les chemins ../base/… et ../../2026-11-15-cristal/… marchent depuis le dossier de n'importe quel sujet (et depuis base/).
+     ============================================================================================================ -->
+<title>Ardane · Nutrition — Direction 1 : Minimaliste (gabarit)</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<!-- <link rel="stylesheet" href="nutrition.css">   le CSS commun du sujet, s'il existe (préfixe nut-) -->
+<style>
+  /* CSS propre à CETTE planche : un préfixe à elle (clé du sujet + numéro de planche : nut1-). Rien d'autre ici. */
+  .nut1-eau { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+  .nut1-eau .pl-bar { flex: 1; }
+</style>
+</head>
+<!-- 1860 px = 4 téléphones par rangée. Ne pas changer. -->
+<body style="--bw:1860px">
+<!-- data-c : clé de la mini-app (nut, fit, pla, hab, etu, ent, voy, aut, pho) · data-kind : direction -->
+<main class="bd t-saphir" data-c="nut" data-kind="direction">
+
+  <!-- ===== 1. En-tête : numéro, mini-app, titre « Direction N · Nom », 2 ou 3 phrases, badge ===== -->
+  <header class="bd-head"><div class="num">1</div>
+    <div><div class="pl-kick">Direction 1 sur 5</div>   <!-- la pastille de la mini-app est posée par PL.init -->
+      <h1>Direction 1 · Minimaliste</h1>
+      <p>Une phrase qui dit l'idée de la direction, une qui dit ce qu'elle change pour la personne. Journée d'exemple des planches Cristal : jeudi 12 novembre 2026, 13 h 20, thème Saphir, nappe et couleur d'action de la mini-app.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <!-- ===== 2. « La logique » : 4 colonnes, toujours ces 4 titres. data-p = priorité 1, 2 ou 3 (la pastille est posée par PL.init) ===== -->
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Un seul chiffre, puis les repas</h3>
+      <p>Trois ou quatre phrases : ce qu'on lit en premier, ce qui vient ensuite, où est rangé le reste, où est l'action principale.</p></div>
+    <div><h5>En ouvrant Nutrition</h5><ol>
+      <li data-p="1">Ce qu'il reste à manger aujourd'hui</li>
+      <li data-p="1">Protéines, glucides, lipides</li>
+      <li data-p="2">Scanner ou rechercher un aliment</li>
+      <li data-p="3">Les quatre repas du jour</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="2">Calories de la semaine</li>
+      <li data-p="3">Historique, Mes repas</li>
+      <li data-p="3">Mes paramètres, en dernier</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">Ce que la direction fait le mieux, en une phrase.</p>
+      <p class="minus">Ce qu'elle rend moins visible ou plus long, en une phrase.</p></div>
+  </div>
+
+  <!-- ===== 3. Les écrans : des rangées (.row) de 4 colonnes (.col). Une colonne = nom, téléphone, flèche, légende. =====
+       .nm                     : le nom de l'écran, sans numéro (PL.init numérote dans l'ordre du document)
+       .phone app t-saphir     : toujours ; data-c = la mini-app ; data-time="13:20" ; data-tab="0" (Accueil actif) ou "none" (feuille, page sans barre)
+       .pl-past                : à ajouter pour un journal qui bloque le futur (repas, pleins, ventes)
+       <span class="flow">     : la flèche vers l'écran de droite (pas sur le dernier écran d'une rangée)
+       .cap                    : un titre (h4), une ou deux phrases (p), puis les lignes étiquetées :
+                                 tag e = Existe · tag a = À adapter · tag n = Nouveau · tag g data-to="3" = passage vers l'écran 3
+                                 (laisser l'étiquette vide : PL.init écrit le mot) -->
+  <div class="row">
+    <div class="col"><div class="nm">Page principale</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Ce qu'il reste, d'abord</h4>
+        <p>Le titre dit le choix de conception en quelques mots. Le texte dit ce que la personne voit et pourquoi c'est rangé ainsi.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine, anneau, trois jauges, « Scanner », « Rechercher », quatre repas avec « + ».</span></li>
+          <li><span class="tag a"></span><span>Le total du jour à droite du titre « Repas ».</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher la ligne « Dîner ».</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Page principale, suite</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Le complément, sans bruit</h4>
+        <p>La même page, défilée. Une idée qui n'existe pas dans l'app porte le jeton violet dans l'écran et l'étiquette « Nouveau » ici.</p>
+        <ul><li><span class="tag e"></span><span>« Calories de la semaine », « Tous les nutriments » (Premium), « Historique », « Mes repas », note, « Mes paramètres ».</span></li>
+          <li><span class="tag n"></span><span>« Eau » : l'hydratation n'existe plus dans l'app (retirée le 2026-10-15).</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Historique ».</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Mes paramètres ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Un repas</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Une vue de détail</h4>
+        <p>La mission demande au moins une vue détaillée d'une fonction importante. Les libellés sont ceux de l'app.</p>
+        <ul><li><span class="tag e"></span><span>Totaux du repas, aliments, « Ajouter un aliment », reprise d'un repas précédent, « Enregistrer ce repas ».</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher « Ajouter un aliment », puis un résultat.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Feuille de quantité</div>
+      <!-- une feuille : data-tab="none", et la feuille passe en 3e argument de PL.mount -->
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p4"></div>
+      <div class="cap"><h4>Une feuille de saisie</h4>
+        <p>La page d'où l'on vient reste visible, assombrie, derrière la feuille. Une feuille ne monte jamais jusqu'à la barre d'état.</p>
+        <ul><li><span class="tag e"></span><span>Quantité, portions rapides, repas, « Après ajout, il te restera… », apport, nutriments verrouillés.</span></li>
+          <li><span class="tag a"></span><span>Quantité réglée par − et + en plus du champ.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Historique</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Une vue secondaire</h4>
+        <p>Un graphique par carte, une légende écrite, la période en cours hachurée. Ce qui est Premium porte le badge doré.</p>
+        <ul><li><span class="tag e"></span><span>Périodes, moyennes, « Calories par jour », courbe « Poids » (Premium au-delà d'un jour).</span></li>
+          <li><span class="tag a"></span><span>Hachures sur la journée en cours.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes paramètres</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p6"></div>
+      <div class="cap"><h4>Une vue de gestion</h4>
+        <p>La mission demande une vue de gestion ou de personnalisation. Ici, la feuille « Mes paramètres », telle qu'elle existe.</p>
+        <ul><li><span class="tag e"></span><span>« Rappel des repas », « Ton objectif », « Ton poids cible », « Ton niveau d'activité », « Tes besoins par jour ».</span></li></ul></div></div>
+
+    <!-- ===== 4. Case de texte : ce que la direction garde, change, ajoute ; gratuit / Premium. pl-w2 = 2 colonnes, pl-w3 = 3 ===== -->
+    <div class="col pl-w2"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le sélecteur de semaine, l'anneau et les jauges, les quatre repas fixes, la feuille de quantité, « Mes paramètres » en dernier.</span>
+          <b>Changé de place</b><span>Ce qui est déplacé ou réuni, et pourquoi (une ligne par changement).</span>
+          <b>Laissé de côté</b><span>Les idées écartées dans cette direction, et la raison.</span>
+        </div>
+        <h4>Nouveau, à développer (1 seulement)</h4>
+        <p>1. « Eau » (écran 2) : n'existe pas dans l'app ; à décider par le PDG. Tout le reste existe déjà ou se calcule avec les données actuelles.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : dire en deux phrases ce qui reste gratuit et ce qui reste Premium sur les écrans montrés, et ce que voit un compte gratuit à la place d'un écran Premium.</p>
+      </div></div>
+  </div>
+
+  <!-- ===== 5. Table de fin, obligatoire : remplie par PL.mapTable (voir le script) ===== -->
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<!-- <script src="nutrition.js"></script>   le JS commun du sujet : données d'exemple, liste FONCTIONS, pièces propres au sujet -->
+<script>
+/* ---------- les écrans ----------
+   PL.mount(id du téléphone, contenu de la page, ce qui flotte par-dessus : action flottante ou feuille).
+   Les pièces (PL.nv, PL.wsel, PL.hero, PL.list, PL.row…) sont décrites en tête de ../base/planches.js. */
+
+// 1 · page principale
+PL.mount('p1', PL.nv('Nutrition') + `<div style="margin-top:8px">${PL.wsel()}</div>
+  <article class="gl pl-hero split" style="margin-top:10px">
+    ${PL.ring(.49, { s: 112, b: '1 122', small: 'kcal<br>restantes', c: 'nut', aria: '1 078 kcal mangées sur 2 200 : il en reste 1 122' })}
+    <div class="pl-meters">${PL.meter('Protéines', '68 / 140 g', .486, 'prot')}${PL.meter('Glucides', '121 / 250 g', .484, 'gluc')}${PL.meter('Lipides', '34 / 70 g', .486, 'lip')}</div>
+  </article>
+  <div class="g2" style="margin-top:12px">${PL.btn('Scanner', { i: 'scan' })}${PL.btn('Rechercher', { i: 'search', k: 'T' })}</div>
+  ${PL.sect('Repas', '1 078 kcal')}
+  ${PL.list([
+    PL.row('sunrise', 'Déjeuner', '3 aliments', { sq: true, r: '420 kcal', plus: true }),
+    PL.row('sun', 'Dîner', '3 aliments', { sq: true, r: '658 kcal', plus: true }),
+    PL.row('moon', 'Souper', 'Rien noté', { sq: true, plus: true }),
+    PL.row('carrot', 'Collation', 'Rien noté', { sq: true, plus: true })])}`);
+
+// 2 · page principale, suite (défilée). La carte « Eau » est une NOUVEAUTÉ : o.nw pose le contour pointillé et le jeton.
+PL.mount('p2', PL.nv('Nutrition') + `
+  <div style="margin-top:10px">${PL.card(`<div class="nut1-eau"><span class="pl-num">4<small>verres sur 8</small></span>${PL.bar(.5, { c: 'lip' })}<span class="pl-plus" role="button" aria-label="Ajouter un verre"><u><i data-i="plus"></i></u></span></div>`, { t: 'Eau', i: 'glass', c: 'lip', nw: true })}</div>
+  ${PL.sect('Calories de la semaine', 'objectif 2 200 kcal')}
+  ${PL.card(PL.weekBars([2140, 2310, 1980, 1078, 0, 0, 0], { goal: 2200, today: 3 }) + '<div class="pl-cap" style="margin-top:8px">Moyenne <b>1 877 kcal</b> · 3 jours sur 4 dans l\'objectif</div>', { st: 'padding-top:14px' })}
+  ${PL.list([
+    PL.row('leaf', 'Tous les nutriments', '', { sq: true, prem: true }),
+    PL.row('chart', 'Historique', 'Moyennes, tendances et poids', { sq: true }),
+    PL.row('fork', 'Mes repas', 'À reprendre d\'une touche', { sq: true, r: '3' })], { st: 'margin-top:12px' })}
+  ${PL.foot('Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL).')}
+  ${PL.settings()}`);
+
+// 3 · un repas (vue de détail)
+const p3 = PL.nv('') + PL.ttl('Dîner') + `
+  ${PL.sect('Aujourd\'hui', '12:10')}
+  ${PL.strip([['658', 'kcal'], ['44 g', 'Protéines'], ['69 g', 'Glucides'], ['22 g', 'Lipides']])}
+  ${PL.sect('Aliments')}
+  ${PL.list([
+    PL.row('', 'Poulet grillé', '120 g · P 36 · G 0 · L 5', { r: '198 kcal', chev: false }),
+    PL.row('', 'Riz basmati cuit', '200 g · P 5 · G 56 · L 1', { r: '260 kcal', chev: false }),
+    PL.row('', 'Brocoli à l\'huile d\'olive', '180 g · P 3 · G 13 · L 16', { r: '200 kcal', chev: false }),
+    `<div class="pl-link" style="border-top:1px solid var(--rule)"><span style="display:flex;gap:7px;align-items:center"><i data-i="plusc" style="font-size:19px"></i>Ajouter un aliment</span></div>`])}
+  ${PL.sect('Reprendre un dîner précédent')}
+  ${PL.list([PL.row('', 'Mer. 11 nov.', 'Saumon, Quinoa, Haricots verts', { r: '702 kcal', chev: false, plus: true })])}
+  ${PL.btn('Enregistrer ce repas', { i: 'plusbox', k: 'T', st: 'margin-top:12px' })}`;
+PL.mount('p3', p3);
+
+// 4 · feuille de quantité : la page 3 derrière, la feuille par-dessus (PL.sheet en 3e argument)
+PL.mount('p4', p3, PL.sheet(`
+  <div class="pl-cap pl-tn" style="margin:2px 2px 10px">Pour 100 g : 73 kcal · protéines 10,0 g · glucides 4,0 g · lipides 2,0 g</div>
+  ${PL.kvs(PL.kv('Quantité', PL.stepper('175 g')))}
+  ${PL.chips(['½ portion', '1 portion', '2 portions', '100 g'], 1, { fit: true, st: 'margin:8px 0 10px' })}
+  ${PL.field('Repas', 'Collation', { chev: true })}
+  <div class="pl-cap" style="margin:10px 2px 4px">Après ajout, il te restera <b>994 kcal</b>.</div>
+  <div class="x-lab" style="margin:12px 2px 2px">Apport</div>
+  ${PL.kvs([PL.kv('Calories', '128 kcal'), PL.kv('Protéines', '17,5 g'), PL.kv('Glucides', '7,0 g'), PL.kv('Lipides', '3,5 g'), PL.kv('Tous les nutriments', PL.prem('Premium', 'lock'))])}`, 'Yogourt grec nature', { left: 'Annuler', right: PL.sheetBtn('Enregistrer') }));
+
+// 5 · historique (vue secondaire) : un graphique par carte, légende écrite, aria qui dit le graphique
+PL.mount('p5', PL.nv('') + `<div style="display:flex;align-items:center;gap:10px">${PL.ttl('Historique')}${PL.prem()}</div>
+  ${PL.seg(['Aujourd\'hui', 'Hier', '7 jours', '30 jours'], 2, { st: 'margin-top:10px' })}
+  ${PL.sect('Moyennes', '7 jours')}
+  ${PL.strip([['2 202', 'kcal'], ['132 g', 'Protéines'], ['262 g', 'Glucides'], ['69 g', 'Lipides']])}
+  ${PL.sect('Calories par jour')}
+  ${PL.card(PL.bars({ g: CAL7.lab.map((l, k) => ({ l, v: [CAL7.past.concat(1078)[k]], cur: k === 6, hl: k === 6 })), c: ['var(--c-nut)'], max: 2750, yt: [0, 1100, 2200], h: 92, bw: 18,
+      ref: { v: 2200 }, aria: 'Calories des 7 derniers jours ; objectif 2 200 kcal ; aujourd\'hui 1 078 kcal, journée en cours' })
+    + PL.leg([['var(--c-nut)', 'Jour complet'], ['var(--c-nut)', 'Aujourd\'hui, en cours', 'hat'], ['var(--ink2)', 'Objectif', 'dsh']]), { st: 'padding-top:16px' })}
+  ${PL.sect('Poids', '−0,5 kg')}
+  ${PL.card(`<div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span class="pl-num">71,6<small>kg</small></span>
+    ${PL.line({ series: [{ v: [72.1, 72.0, 71.9, 71.9, 71.8, 71.7, 71.6], c: 'var(--c-nut)', area: true, dot: true }], min: 71.2, max: 72.3, w: 170, h: 40, aria: 'Poids de 72,1 kg à 71,6 kg en 7 jours' })}</div>`)}`);
+
+// 6 · « Mes paramètres » (vue de gestion) : une feuille presque plein écran (o.full)
+PL.mount('p6', PL.nv('Nutrition'), PL.sheet(`
+  <div class="x-lab" style="margin:6px 2px 8px">Rappel</div>
+  <div class="pl-fields">${PL.field('Rappel des repas', '12:00 ' + PL.sw(true))}</div>
+  <div class="x-lab" style="margin:16px 2px 8px">Ton objectif</div>
+  <div class="pl-fields">${PL.field('Objectif', 'Perte de poids', { chev: true })}${PL.field('Poids cible', '68 kg · en 12 semaines', { chev: true })}${PL.field('Activité', 'Modérée (4–5 séances)', { chev: true })}</div>
+  <div class="x-lab" style="margin:16px 2px 2px">Tes besoins par jour</div>
+  ${PL.kvs([PL.kv('Calories', '2 200 kcal <span class="pl-pill n">Calculé</span>'), PL.kv('Protéines', '140 g <span class="pl-pill n">Calculé</span>'), PL.kv('Glucides', '250 g <span class="pl-pill n">Calculé</span>'),
+    PL.kv('Lipides', '70 g <span class="pl-pill n">Calculé</span>'), PL.kv('Acides gras, minéraux et vitamines', PL.prem('Premium', 'lock'))])}
+  <div class="pl-cap" style="margin-top:12px">Les mêmes réponses que dans « Mes informations » : un changement ici vaut partout.</div>`, 'Mes paramètres', { right: PL.sheetBtn('OK'), full: true }));
+
+/* ---------- la table de fin ----------
+   FONCTIONS : la liste F1…Fn de l'audit du sujet (section 4), dans le JS commun du sujet. JAMAIS recopiée ni raccourcie dans une planche.
+   Ici, un EXTRAIT de 12 fonctions de Nutrition, pour l'exemple.
+   OU : pour chaque fonction, [écran(s), où exactement]. ['=', raison] = gardée à sa place actuelle, non dessinée sur cette planche.
+   Une fonction oubliée sort en rouge : F31 est laissée sans place EXPRÈS, pour montrer à quoi ressemble un oubli. */
+const FONCTIONS = [
+  ['F1', 'Choisir le jour affiché', 'G'], ['F3', 'Calories du jour (anneau)', 'G'], ['F4', 'Protéines, glucides, lipides du jour', 'G'],
+  ['F6', 'Bouton « Scanner »', 'G'], ['F7', 'Bouton « Rechercher » ou « Ajouter un aliment »', 'G'], ['F11', 'Feuille de quantité', 'G+P'],
+  ['F27', 'Liste des quatre repas du jour', 'G'], ['F28', 'Page d\'un repas', 'G'], ['F31', 'Mettre un aliment en favori (exemple d\'oubli, laissé exprès)', 'G'],
+  ['F41', '« Calories de la semaine »', 'G'], ['F44', 'Historique : « Calories par jour »', 'P'], ['F62', 'Rappels et notifications', 'G'],
+];
+const OU = {
+  F1: [1, 'Sélecteur de semaine, en tête.'], F3: [1, 'Anneau du héros de verre.'], F4: [1, 'Trois jauges, à droite de l\'anneau.'],
+  F6: [1, 'Bouton plein sous le héros.'], F7: [[1, 3], 'Bouton teinté ; « Ajouter un aliment » dans la page du repas.'], F11: [4, 'Inchangée ; − et + en plus.'],
+  F27: [1, 'Section « Repas ».'], F28: [3, 'Totaux, aliments, reprise, enregistrement.'],
+  F41: [2, 'Carte de la page défilée.'], F44: [5, 'Carte « Calories par jour », Premium.'], F62: ['=', 'Notifications inchangées, réglées dans « Rappels » (ligne « Rappel des repas », écran 6).'],
+};
+PL.mapTable('map', FONCTIONS, OU);
+
+PL.init();   // toujours en dernier (remplace Cristal.init)
+</script>
+</body>
+</html>

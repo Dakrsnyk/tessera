@@ -1,0 +1,434 @@
+/* planches.css : boîte à outils commune des planches « Refonte UX/UI des mini-apps » (2026-11-17).
+   À charger APRÈS ../../2026-11-15-cristal/cristal.css. Rien ici ne change le système Cristal « Équilibrée » : ce sont
+   la partie générique de finance.css (rien de propre à Finance) et les pièces de planche, posées sur les jetons du thème
+   (--primary, --ink, --ink2, --panel, --track, --rule, --c, --cs…). Préfixe pl- partout.
+   Une planche = un fichier HTML qui charge cristal.css, planches.css (puis le CSS du sujet s'il existe), puis en fin de <body>
+   cristal.js, planches.js, le JS du sujet, son propre script, et appelle PL.init() en dernier (PL.init appelle Cristal.init).
+   Mode d'emploi : GUIDE-PLANCHES.md. Sommaire :
+     1. jetons communs            4. chiffres, héros, tuiles         7. feuilles, champs, actions
+     2. retouches du téléphone    5. listes, progressions, échéances 8. planche : en-tête, logique, colonnes, légendes
+     3. « Nouveau » et Premium    6. graphiques                      9. table de fin · 10. comparaison · 11. analyse · 12. contrôle */
+
+/* ================= 1. jetons communs =================
+   Couleurs d'état (jamais la couleur seule : toujours un mot, un signe ou un motif) :
+   bon = vert ; alerte ou dépassement = rouge (rien d'autre n'est rouge) ; période précédente = gris ; nouveauté = violet. */
+:root { --pl-ok: #1F8A62; --pl-over: #C93A3A; --pl-prev: #9AA6B8; --pl-new: #5B3FC4; --pl-newbg: #ECE7FA; --pl-warn: #9A6508; --pl-warnbg: #FBEFD9;
+  --pl-acc: #245B8F; --pl-acc2: #16395C; --pl-acct: #EEF4FA;                 /* accents des cadres de planche : le saphir de Cristal */
+  --pl-line: #D5DDE8; --pl-line2: #E3E7EE; --pl-t1: #101828; --pl-t2: #35435A; --pl-t3: #5B6577; }
+.dk { --pl-ok: #5FD3A0; --pl-over: #FF7A7A; --pl-prev: #6E7A8C; --pl-new: #B9A6FF; --pl-newbg: #2E2550; --pl-warn: #F2C56B; --pl-warnbg: #3B2E12; }
+.pl-ok { color: var(--pl-ok); } .pl-over { color: var(--pl-over); } .pl-mute { color: var(--ink2); }
+.pl-tn { font-variant-numeric: tabular-nums; }
+
+/* ================= 2. retouches du téléphone (toutes les planches) ================= */
+/* barre de navigation : le titre occupe l'espace entre les boutons, centré, coupé par « … » s'il est trop long (jamais de chevauchement) */
+.phone .nv .t { flex: 1; min-width: 0; text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.phone .nv:has(.t) .sp { display: none; }               /* le titre prend la place : les espaceurs de Cristal ne servent plus */
+.phone .sheet .rb:not(.txt) { background: var(--well); }
+.phone .sect { margin: 16px 4px 8px; }
+.phone .ls > .li { min-height: 50px; }
+/* un journal (repas, dépenses, pleins) bloque le futur : class="phone app pl-past" */
+.pl-past .wsel .d.next { opacity: .3; }
+/* titre large d'une page secondaire (sous la barre de navigation) */
+.pl-ttl { font-size: 30px; font-weight: 700; letter-spacing: -.025em; line-height: 1.1; margin: 0 3px; }
+.pl-ttl + .x-sub { margin-top: 3px; }
+
+/* ================= 3. « Nouveau » et Premium dans l'écran ================= */
+/* jeton « Nouveau » : se pose DANS l'écran, à côté du titre ou de la ligne qui n'existe pas dans l'audit */
+.pl-new { display: inline-flex; align-items: center; height: 18px; padding: 0 6px; border-radius: 6px; background: var(--pl-newbg); color: var(--pl-new); font-size: 10px; font-weight: 750;
+  letter-spacing: .03em; text-transform: uppercase; white-space: nowrap; vertical-align: 2px; flex: none; font-style: normal; }
+/* bloc entier nouveau : contour en pointillés violets (+ un jeton .pl-new dans son titre, ou .pl-new.corner posé sur son bord) */
+.pl-newbox { outline: 1.5px dashed color-mix(in srgb, var(--pl-new) 55%, transparent); outline-offset: 3px; }
+.pl-new.corner { position: absolute; top: -9px; right: 16px; z-index: 2; box-shadow: 0 0 0 3px var(--bg); }
+/* Premium : le badge doré .prem de Cristal (inchangé), un cadenas en ligne, une carte « … est dans Premium » */
+.phone .prem { height: 20px; font-size: 10.5px; padding: 0 7px; }
+.pl-lock { display: inline-flex; align-items: center; gap: 4px; } .pl-lock i { font-size: 12px; --sw: 2.3; color: var(--ink2); }
+.pl-lockcard { padding: 16px; }
+.pl-lockcard .hd { display: flex; align-items: center; gap: 10px; }
+.pl-lockcard .hd u { width: 40px; height: 40px; border-radius: 12px; background: #F6E7C1; color: #6B4E0A; display: grid; place-items: center; font-size: 18px; flex: none; text-decoration: none; }
+.pl-lockcard .hd b { font-size: 16.5px; font-weight: 700; line-height: 1.2; }
+.pl-lockcard p { font-size: 14px; line-height: 1.4; color: var(--ink2); margin: 10px 0 12px; }
+.dk .pl-lockcard .hd u { background: #4A3B12; color: #F2D27A; }
+/* la règle « .sect span » de cristal.css ne doit pas agrandir ni pousser les jetons posés dans un titre de section */
+.sect span.prem, .sect span.pl-new { margin-left: 0; }
+.sect span.prem { font-size: 10.5px; color: #6B4E0A; } .sect span.pl-new { font-size: 10px; color: var(--pl-new); }
+.ch .prem, .ch .pl-new { margin-left: 2px; }
+
+/* ================= 4. chiffres, héros, tuiles ================= */
+.pl-lab { font-size: 12px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--ink2); }
+.pl-cap { font-size: 13px; line-height: 1.38; color: var(--ink2); }
+.pl-cap b { color: var(--ink); font-weight: 650; }
+/* grand chiffre : 54 comme la figure d'une mini-app (MiniHero) ; .md 44 ; .sm 34 */
+.pl-fig { font-size: 54px; font-weight: 750; letter-spacing: -.045em; line-height: .95; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pl-fig small { font-size: 24px; font-weight: 650; color: var(--ink2); letter-spacing: -.01em; margin-left: 6px; }
+.pl-fig.md { font-size: 44px; } .pl-fig.md small { font-size: 20px; }
+.pl-fig.sm { font-size: 34px; letter-spacing: -.035em; } .pl-fig.sm small { font-size: 17px; }
+.pl-num { font-size: 22px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; white-space: nowrap; }
+.pl-num small { font-size: 13px; font-weight: 600; color: var(--ink2); letter-spacing: 0; margin-left: 4px; }
+.pl-num.sm { font-size: 18px; }
+.pl-delta { display: inline-flex; align-items: center; gap: 4px; font-size: 12.5px; font-weight: 650; white-space: nowrap; }
+.pl-delta i { font-size: 13px; --sw: 2.3; }
+/* héros : la carte de verre du haut (une seule par écran). <article class="gl pl-hero"> */
+.pl-hero { border-radius: var(--r); padding: 16px; }
+.pl-hero .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.pl-hero .pl-fig { margin-top: 8px; }
+.pl-hero .line { margin-top: 8px; font-size: 14px; line-height: 1.38; color: var(--ink2); }
+.pl-hero .line b { color: var(--ink); font-weight: 650; }
+.pl-hero.split { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: center; }
+/* tuiles de chiffres (MiniStat) : <div class="pl-kpis k3"> + PL.kpi(…) */
+.pl-kpis { display: grid; gap: 10px; }
+.pl-kpis.k2 { grid-template-columns: repeat(2, minmax(0, 1fr)); } .pl-kpis.k3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.pl-kpis.k4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+.pl-kpi { padding: 12px 13px 13px; border-radius: 20px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.pl-kpi .h { display: flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 650; color: var(--ink2); white-space: nowrap; }
+.pl-kpi .h i { font-size: 15px; --sw: 2.2; }
+.pl-kpi .s { margin-top: 1px; }
+.pl-kpi > .pl-new.corner { right: 10px; }
+.pl-kpis.k3 .pl-kpi { padding: 11px 11px 12px; } .pl-kpis.k3 .pl-num { font-size: 18px; }
+.pl-kpis.k4 .pl-kpi { padding: 10px 6px 11px; align-items: center; text-align: center; border-radius: 16px; } .pl-kpis.k4 .pl-num { font-size: 17px; } .pl-kpis.k4 .h { font-size: 11.5px; }
+/* bande de chiffres dans un seul panneau (4 au plus) */
+.pl-strip { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); text-align: center; padding: 12px 4px; }
+.pl-strip > div + div { border-left: 1px solid var(--rule); }
+.pl-strip b { display: block; font-size: 21px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1.1; }
+.pl-strip span { display: block; font-size: 12px; color: var(--ink2); margin-top: 3px; }
+/* jauge libellée (macros, objectifs) : PL.meter(…) */
+.pl-meter { display: grid; grid-template-columns: 1fr auto; row-gap: 5px; font-size: 13.5px; }
+.pl-meter > span { font-weight: 600; } .pl-meter > em { font-style: normal; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.pl-meter .u-meter { grid-column: 1 / -1; }
+.pl-meters { display: grid; gap: 9px; }
+
+/* ================= 5. listes, progressions, échéances ================= */
+/* valeur à droite d'une ligne */
+.pl-r { margin-left: auto; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; flex: none; max-width: 56%; }
+.pl-r b { display: block; font-size: 15px; font-weight: 650; color: var(--ink); overflow: hidden; text-overflow: ellipsis; }
+.pl-r b.ok { color: var(--pl-ok); } .pl-r b.over { color: var(--pl-over); }
+.pl-r span { display: block; font-size: 12px; color: var(--ink2); overflow: hidden; text-overflow: ellipsis; }
+/* petit rond « + » d'une ligne (cible de 44 points) */
+.pl-plus { width: 44px; height: 44px; margin: 0 -8px 0 -4px; display: grid; place-items: center; flex: none; }
+.pl-plus u { width: 30px; height: 30px; border-radius: 50%; background: var(--primary); color: var(--on-primary, #fff); display: grid; place-items: center; font-size: 17px; --sw: 2.4; text-decoration: none; }
+/* marque d'origine ou d'état dans le détail d'une ligne */
+.pl-mk { display: inline-flex; align-items: center; gap: 3px; } .pl-mk i { font-size: 13px; }
+.pl-pill { display: inline-block; font-size: 10.5px; font-weight: 700; padding: 0 6px; border-radius: 8px; border: 1.5px solid var(--pl-warn); color: var(--pl-warn); margin-left: 4px; line-height: 15px; white-space: nowrap; }
+.pl-pill.n { border-color: var(--rule2); color: var(--ink2); } .pl-pill.ok { border-color: var(--pl-ok); color: var(--pl-ok); } .pl-pill.over { border-color: var(--pl-over); color: var(--pl-over); }
+/* en-tête de groupe dans une liste (jour, total) */
+.pl-dayh { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; font-weight: 700; color: var(--ink2); margin: 14px 6px 6px; }
+.pl-dayh span { font-weight: 600; font-variant-numeric: tabular-nums; }
+.pl-link { display: flex; align-items: center; justify-content: space-between; min-height: 44px; font-size: 14px; font-weight: 600; color: var(--primary); }
+.pl-link i { font-size: 15px; }
+.pl-more { display: flex; align-items: center; gap: 6px; min-height: 44px; font-size: 14px; font-weight: 650; color: var(--primary); justify-content: center; }
+/* progression libellée : icône, nom, valeur, barre (repère facultatif), détail. PL.prog(…) */
+.pl-prog { display: flex; align-items: center; gap: 11px; padding: 7px 0; }
+.pl-prog .tx { flex: 1; min-width: 0; }
+.pl-prog .l { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; font-size: 14.5px; font-weight: 650; }
+.pl-prog .l em { font-style: normal; font-weight: 550; font-size: 13px; color: var(--ink2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pl-prog .l em b { color: var(--ink); font-weight: 650; }
+.pl-prog .s2 { font-size: 12px; color: var(--ink2); margin-top: 5px; }
+.pl-bar { position: relative; height: 7px; border-radius: 4px; background: var(--track); }
+.pl-bar > i { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 4px; background: var(--c, var(--primary)); }
+.pl-bar > u { position: absolute; top: -3px; bottom: -3px; width: 2px; border-radius: 1px; background: var(--ink); opacity: .55; }
+.pl-bar.lg { height: 10px; border-radius: 5px; } .pl-bar.lg > i { border-radius: 5px; } .pl-bar.lg > u { top: -4px; bottom: -4px; opacity: 1; }
+.pl-bar-l { display: flex; justify-content: space-between; margin-top: 7px; font-size: 12px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.pl-bar-l b { color: var(--ink); font-weight: 650; }
+/* ligne datée (échéance, examen, rendez-vous) : PL.due(…) */
+.pl-due { display: flex; align-items: center; gap: 11px; min-height: 52px; padding: 6px 0; border-top: 1px solid var(--rule); }
+.pl-due:first-child { border-top: 0; }
+.pl-due .d { width: 40px; flex: none; text-align: center; line-height: 1.05; }
+.pl-due .d b { display: block; font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pl-due .d small { font-size: 10.5px; font-weight: 700; color: var(--ink2); text-transform: uppercase; letter-spacing: .04em; }
+.pl-due.hot .d b, .pl-due.hot .d small { color: var(--pl-over); }
+.pl-due .tx { flex: 1; min-width: 0; } .pl-due .tx b { display: block; font-size: 15px; font-weight: 650; }
+/* bandeau d'alerte ou de conseil dans la page */
+.pl-alert { display: flex; gap: 11px; align-items: flex-start; padding: 12px 14px; border-radius: 18px; }
+.pl-alert .ico { width: 32px; height: 32px; }
+.pl-alert b { display: block; font-size: 14.5px; font-weight: 650; line-height: 1.25; }
+.pl-alert .s { margin-top: 2px; }
+.pl-alert .act { margin-left: auto; align-self: center; font-size: 13.5px; font-weight: 650; color: var(--primary); white-space: nowrap; padding-left: 6px; }
+.pl-alert.warn { background: var(--pl-warnbg); color: #5E3D00; }
+/* « À remplir » : PL.toFill(…) */
+.pl-fill { padding: 12px 14px; }
+.pl-fill .hd { display: flex; gap: 10px; align-items: flex-start; }
+.pl-fill .hd b { display: block; font-size: 14.5px; font-weight: 650; line-height: 1.25; }
+.pl-fill .todo { margin-left: auto; flex: none; display: inline-flex; align-items: center; height: 22px; padding: 0 8px; border-radius: 11px; background: #FCE8CC; color: #8A4B00; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.pl-fill .btnP { margin-top: 9px; }
+
+/* ================= 6. graphiques (SVG, lisibles sans couleur : légende écrite, valeur finale marquée) ================= */
+.pl-ch { position: relative; }
+.pl-ch svg { display: block; overflow: visible; }
+.pl-ch text { font: 500 10.5px Inter, sans-serif; fill: var(--ink2); font-variant-numeric: tabular-nums; }
+.pl-ch text.b { font-weight: 700; fill: var(--ink); }
+.pl-leg { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 12px; color: var(--ink2); }
+.pl-leg span { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.pl-leg u { width: 10px; height: 10px; border-radius: 3px; background: currentColor; flex: none; }      /* la couleur est posée par PL.leg (color) */
+.pl-leg u.ln { height: 0; border-top: 2.5px solid currentColor; border-radius: 0; width: 14px; background: none; }
+.pl-leg u.dsh { height: 0; border-top: 2px dashed currentColor; border-radius: 0; width: 14px; background: none; }
+.pl-leg u.hat { background: repeating-linear-gradient(135deg, currentColor 0 2px, transparent 2px 4px); border: 1px solid currentColor; }
+.pl-leg u.dot { border-radius: 50%; }
+.pl-stack { display: flex; height: 14px; border-radius: 7px; overflow: hidden; gap: 2px; }
+.pl-stack > i { display: block; height: 100%; }
+.pl-donut { position: relative; flex: none; }
+.pl-donut .in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.pl-donut .in b { font-size: 24px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; line-height: 1; }
+.pl-donut .in small { font-size: 11.5px; font-weight: 600; color: var(--ink2); margin-top: 4px; line-height: 1.15; }
+/* calendrier d'un mois : intensité (PL.heat) ou états fait / manqué / à venir (PL.month) */
+.pl-heat { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.pl-heat > span { aspect-ratio: 1; border-radius: 8px; display: grid; place-items: center; font-size: 11.5px; font-weight: 600; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.pl-heat > span.h { font-size: 10.5px; font-weight: 700; aspect-ratio: auto; height: 16px; }
+.pl-heat > span.f { color: var(--ink2); opacity: .45; border: 1.5px dashed var(--rule2); }
+.pl-heat > span.t { box-shadow: 0 0 0 2px var(--ink); }
+.pl-heat.round > span:not(.h) { border-radius: 50%; }
+.pl-heat > span.on { background: var(--c, var(--primary)); color: #fff; }
+.pl-heat > span.on i { font-size: 13px; --sw: 3; }
+.pl-heat > span.off { background: var(--well); }
+/* minuteur ou grand anneau avec texte au centre : PL.ring(…) */
+.pl-ring { position: relative; flex: none; }
+.pl-ring .in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.pl-ring .in b { font-weight: 700; letter-spacing: -.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.pl-ring .in small { font-weight: 600; color: var(--ink2); margin-top: 3px; line-height: 1.15; }
+
+/* ================= 7. feuilles, champs, actions ================= */
+.pl-field { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 0 14px; border-radius: 16px; background: var(--well); font-size: 15px; gap: 10px; }
+.pl-field .x-lab { flex: none; }
+.pl-field > span:last-child { display: flex; align-items: center; gap: 7px; font-weight: 600; min-width: 0; }
+.pl-field i { font-size: 17px; color: var(--primary); }
+.pl-field.ph > span:last-child { color: var(--ink2); font-weight: 500; }
+.pl-fields { display: grid; gap: 8px; }
+/* paires libellé / valeur (fiche de détail) */
+.pl-kv { display: flex; align-items: center; justify-content: space-between; min-height: 44px; border-top: 1px solid var(--rule); font-size: 14.5px; gap: 10px; }
+.pl-kv:first-child { border-top: 0; }                    /* PL.kvs([…]) les réunit : la première n'a pas de filet */
+.pl-kv > span:first-child { color: var(--ink2); }
+.pl-kv > span:last-child { font-weight: 600; display: flex; align-items: center; gap: 6px; text-align: right; }
+/* interrupteur (lecture seule, image fixe) */
+.pl-sw { width: 51px; height: 31px; border-radius: 16px; background: var(--track); position: relative; flex: none; }
+.pl-sw::after { content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%; background: #fff; box-shadow: 0 2px 5px rgba(11,18,32,.22); }
+.pl-sw.on { background: var(--primary); } .pl-sw.on::after { left: 22px; }
+/* pas à pas − valeur + */
+.pl-stepper { display: inline-flex; align-items: center; height: 44px; border-radius: 22px; background: var(--well); }
+.pl-stepper u { width: 44px; height: 44px; display: grid; place-items: center; font-size: 17px; color: var(--primary); --sw: 2.4; text-decoration: none; }
+.pl-stepper b { min-width: 54px; text-align: center; font-size: 17px; font-weight: 700; font-variant-numeric: tabular-nums; }
+/* clavier numérique d'une feuille de saisie */
+.pl-keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.pl-keys span { height: 46px; border-radius: 14px; display: grid; place-items: center; font-size: 22px; font-weight: 550; background: var(--well); font-variant-numeric: tabular-nums; }
+/* valeur en cours de saisie, avec son curseur */
+.pl-input { text-align: center; padding: 6px 0 2px; }
+.pl-input .pl-fig { font-size: 50px; }
+.pl-input .pl-fig i.cur { display: inline-block; width: 2.5px; height: 42px; background: var(--primary); vertical-align: -4px; margin-left: 3px; border-radius: 1px; }
+/* raccourcis en capsules qui défilent sur le côté (dépenses rapides, favoris, portions). data-scroll : pas d'alerte de « check » */
+.pl-quick { display: flex; gap: 8px; overflow: hidden; margin-right: -20px; }
+.pl-quick > span { flex: none; height: 44px; padding: 0 14px 0 6px; border-radius: 22px; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 650; background: var(--panel);
+  border: 1px solid rgba(255,255,255,.85); box-shadow: 0 4px 12px rgb(var(--sh) / .06); white-space: nowrap; }
+.pl-quick > span .ico { width: 32px; height: 32px; font-size: 15px; }
+.pl-quick > span em { font-style: normal; color: var(--ink2); font-weight: 600; font-variant-numeric: tabular-nums; }
+.pl-wrap { display: flex; gap: 8px; flex-wrap: wrap; }         /* puces sur plusieurs lignes (dans une feuille) */
+.pl-wrap .chip { height: 40px; }
+.chips.fit { gap: 6px; margin-right: 0; }                       /* puces qui se partagent la largeur (4 au plus) : rien n'est coupé */
+.chips.fit .chip { flex: 1; min-width: 0; justify-content: center; padding: 0 4px; }
+.sheet .chip { background: var(--well); border-color: transparent; }
+.sheet .chip.on { background: var(--primary); }
+.sheet .pl-quick > span { background: var(--well); box-shadow: none; border-color: transparent; }
+/* champ de recherche, sélecteur de mois, sélecteur de jour (DaySwitcher) : capsules de verre de 44 points */
+.pl-search { display: flex; align-items: center; gap: 8px; height: 44px; border-radius: 22px; padding: 0 14px; font-size: 15px; color: var(--ink2); }
+.pl-search i { font-size: 18px; }
+.sheet .pl-search { background: var(--well); }
+.pl-switch { display: flex; align-items: center; justify-content: space-between; height: 44px; border-radius: 22px; font-size: 15px; font-weight: 650; }
+.pl-switch > i { width: 44px; display: grid; place-items: center; font-size: 18px; color: var(--primary); }
+.pl-switch > i.lk { color: var(--ink2); font-size: 15px; } .pl-switch > i.off { opacity: .35; }
+/* action flottante à deux boutons (hors de .scr, comme .fab) */
+.pl-fab2 { position: absolute; z-index: 7; left: 20px; right: 20px; bottom: 98px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.pl-fab2 > div { height: 50px; border-radius: 25px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 16px; font-weight: 650; box-shadow: 0 10px 24px rgb(var(--sh) / .18); white-space: nowrap; }
+.pl-fab2 > div i { font-size: 18px; --sw: 2.3; }
+.pl-fab2 .p { background: var(--primary); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.28), 0 10px 24px rgb(var(--sh) / .22); }
+.pl-fab2 .g { background: var(--glass); -webkit-backdrop-filter: blur(22px) saturate(1.6); backdrop-filter: blur(22px) saturate(1.6); border: 1px solid rgba(255,255,255,.7); color: var(--primary); }
+.phone.app .pl-fab2 { --primary: var(--cs); }
+.phone:has(.pl-fab2) .edge { height: 204px; background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 0%, transparent), color-mix(in srgb, var(--bg) 92%, transparent) 22%, var(--bg) 31%); }
+.phone .fab i { font-size: 19px; }
+/* une feuille sans barre d'onglets (data-tab="none") garde l'indicateur d'accueil au-dessus d'elle */
+.pl-sheet-full { top: 46px; }
+/* barre d'action fixe au bas d'une page sans barre d'onglets (séance en cours, minuteur) */
+.pl-dock { position: absolute; z-index: 7; left: 0; right: 0; bottom: 0; padding: 12px 20px 34px; background: color-mix(in srgb, var(--sheet) 94%, transparent); border-top: 1px solid var(--rule); }
+.phone.app .pl-dock { --primary: var(--cs); --tint: color-mix(in srgb, var(--cs) 10%, #fff); --tint2: color-mix(in srgb, var(--cs) 15%, #fff); }
+
+/* ================= 8. planche : en-tête, « La logique », colonnes, légendes ================= */
+/* ligne au-dessus du titre : la mini-app (icône et nom, à sa couleur) et la place de la planche dans la série */
+.pl-kick { display: flex; align-items: center; gap: 10px; font: 700 12px/1 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--bink2); margin-bottom: 8px; }
+.pl-app { display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 10px 0 7px; border-radius: 12px; background: color-mix(in srgb, var(--c, var(--pl-acc)) 14%, #fff); color: var(--cs, var(--pl-acc)); letter-spacing: .04em; }
+.pl-app i { font-size: 14px; --sw: 2.2; }
+/* « La logique » : 4 colonnes (logique · en ouvrant · en faisant défiler · forces et limites) */
+.pl-rule { display: grid; grid-template-columns: 1.25fr 1fr 1fr 1fr; gap: 0; margin: 0 9px 22px; background: #fff; border: 1px solid var(--pl-line); border-radius: 22px; overflow: hidden; font-family: Inter, sans-serif; color: var(--pl-t1); }
+.pl-rule > div { padding: 18px 20px; border-left: 1px solid var(--pl-line2); min-width: 0; }
+.pl-rule > div:first-child { border-left: 0; background: linear-gradient(160deg, color-mix(in srgb, var(--c, var(--pl-acc)) 9%, #fff), #fff 72%); }
+.pl-rule h3 { font-size: 20px; font-weight: 800; letter-spacing: -.015em; line-height: 1.15; }
+.pl-rule h5 { font-size: 11px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; color: var(--pl-t3); margin-bottom: 6px; }
+.pl-rule p { font-size: 13.5px; line-height: 1.45; color: #2B3545; margin-top: 6px; }
+.pl-rule ol { margin: 4px 0 0; padding-left: 0; list-style: none; display: grid; gap: 5px; }
+.pl-rule ol li { font-size: 13px; line-height: 1.38; color: #2B3545; display: flex; gap: 8px; }
+.pl-rule .p { flex: none; display: inline-grid; place-items: center; min-width: 26px; height: 19px; border-radius: 6px; font-size: 10.5px; font-weight: 800; }
+.pl-rule .p1 { background: var(--cs, var(--pl-acc)); color: #fff; }
+.pl-rule .p2 { background: color-mix(in srgb, var(--cs, var(--pl-acc)) 18%, #fff); color: color-mix(in srgb, var(--cs, var(--pl-acc)) 78%, #000); }
+.pl-rule .p3 { background: #EDF1F6; color: #4E5A6B; }
+.pl-rule p.plus, .pl-rule p.minus { padding-left: 16px; position: relative; }
+.pl-rule p.plus::before { content: "+"; position: absolute; left: 0; font-weight: 800; color: var(--pl-ok); }
+.pl-rule p.minus::before { content: "−"; position: absolute; left: 0; font-weight: 800; color: var(--pl-over); }
+/* colonne d'écran : nom numéroté, téléphone, flèche, légende */
+.col .nm { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.col .nm .pl-n, .pl-n { flex: none; display: inline-grid; place-items: center; min-width: 22px; height: 22px; padding: 0 5px; border-radius: 7px; background: var(--pl-t1); color: #fff; font: 800 12px/1 Inter, sans-serif; letter-spacing: 0; font-style: normal; }
+.col.pl-w2 { width: 869px; } .col.pl-w3 { width: 1327px; } .col.pl-w4 { width: 1785px; }   /* case de texte sur 2, 3 ou 4 colonnes */
+.cap li > span:last-child { min-width: 0; }
+.tag.n { background: var(--pl-newbg); color: var(--pl-new); }                  /* « Nouveau » (même teinte que le jeton posé dans l'écran) */
+.tag.d { background: var(--pl-newbg); color: var(--pl-new); }
+.tag.g { background: #fff; color: var(--pl-t1); box-shadow: inset 0 0 0 1px #AEB9C9; }   /* passage vers un autre écran : « → Écran 3 » */
+.cap code, .note code { font: 600 11.5px Consolas, monospace; color: var(--bink2); }
+/* case « Ce que la direction prend ou laisse » : PL.take ou HTML */
+.pl-take { display: grid; grid-template-columns: 170px 1fr; gap: 6px 14px; margin-top: 4px; font-size: 13px; line-height: 1.4; }
+.pl-take b { font-weight: 750; }
+.note h4 + .pl-take { margin-top: 8px; }
+.note .pl-take + h4, .note p + h4 { margin-top: 14px; }
+.pl-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 0 9px; }
+.pl-3 { display: grid; grid-template-columns: 1.15fr 1fr 1.15fr; gap: 14px; margin: 0 9px; }
+.pl-3.eq { grid-template-columns: repeat(3, 1fr); }
+.pl-2 .pl-box, .pl-3 .pl-box { margin: 0; }
+.pl-box { background: #fff; border: 1px solid var(--pl-line); border-radius: 18px; padding: 20px 22px; font: 400 13.5px/1.45 Inter, sans-serif; color: var(--pl-t1); margin: 0 9px; }
+.pl-box h4 { font-size: 19px; font-weight: 800; letter-spacing: -.012em; margin-bottom: 4px; }
+.pl-box > p { color: var(--pl-t2); }
+.bd h2.sec { margin-left: 9px; } .bd p.secp { margin-left: 9px; }
+
+/* ================= 9. table de fin « Rien n'est retiré » : PL.mapTable(…) ================= */
+.pl-map { margin: 34px 9px 0; background: #fff; border: 1px solid var(--pl-line); border-radius: 18px; padding: 20px 22px; font: 400 13px/1.4 Inter, sans-serif; color: var(--pl-t1); }
+.pl-map h4 { font-size: 19px; font-weight: 800; letter-spacing: -.012em; }
+.pl-map .lg { color: var(--pl-t3); font-size: 12.5px; margin-top: 4px; max-width: 1300px; }
+.pl-map .sum { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; font-size: 12.5px; font-weight: 650; }
+.pl-map .sum span { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 13px; background: #F1F4F9; color: var(--pl-t2); }
+.pl-map .sum span b { font-weight: 800; color: var(--pl-t1); font-variant-numeric: tabular-nums; }
+.pl-map .sum span.ok { background: #DDF0E4; color: #1E5B34; } .pl-map .sum span.ok b { color: #1E5B34; }
+.pl-map .sum span.ko { background: #C93A3A; color: #fff; } .pl-map .sum span.ko b { color: #fff; }
+.pl-map .bad { margin-top: 10px; padding: 10px 14px; border-radius: 12px; background: #FDE3DF; color: #8E1F14; font-weight: 700; border: 1.5px solid #C93A3A; }
+.pl-map .rows { column-count: 2; column-gap: 34px; margin-top: 12px; }
+.pl-map .rows.c3 { column-count: 3; column-gap: 28px; }
+.pl-map .r { break-inside: avoid; display: grid; grid-template-columns: 30px minmax(0, 1fr) 36px minmax(0, 1.25fr); gap: 8px; padding: 6px 0; border-top: 1px solid var(--pl-line2); font-size: 12.5px; line-height: 1.35; align-items: baseline; }
+.pl-map .rows.c3 .r { grid-template-columns: 28px minmax(0, 1fr) 34px minmax(0, 1.1fr); font-size: 12px; gap: 7px; }
+.pl-map .r .k { font-weight: 800; color: var(--pl-t3); font-variant-numeric: tabular-nums; }
+.pl-map .r .t { font-weight: 650; }
+.pl-map .r .ac { justify-self: start; display: inline-grid; place-items: center; min-width: 22px; height: 17px; padding: 0 4px; border-radius: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: .02em; }
+.pl-map .ac.g { background: #DDF0E4; color: #1E5B34; } .pl-map .ac.p { background: #F6E7C1; color: #6B4E0A; } .pl-map .ac.gp { background: linear-gradient(100deg, #DDF0E4 50%, #F6E7C1 50%); color: #2B3545; }
+.pl-map .r .w { color: var(--pl-t2); }
+.pl-map .w i { display: inline-grid; place-items: center; min-width: 17px; height: 17px; padding: 0 4px; border-radius: 5px; background: var(--pl-t1); color: #fff; font: 800 10.5px/1 Inter, sans-serif; font-style: normal; margin-right: 3px; vertical-align: 1px; }
+.pl-map .w i.eq { background: #EDF1F6; color: #4E5A6B; font-size: 9.5px; letter-spacing: .03em; text-transform: uppercase; padding: 0 5px; margin-right: 5px; }
+.pl-map .w i.bad { background: #C93A3A; }
+/* une fonction non placée : toute la ligne en rouge, impossible à manquer */
+.pl-map .r.miss { background: #FDE3DF; color: #8E1F14; border-radius: 8px; padding: 6px 8px; margin: 3px -8px; border-top-color: transparent; box-shadow: inset 0 0 0 1.5px #C93A3A; }
+.pl-map .r.miss .k, .pl-map .r.miss .w { color: #8E1F14; font-weight: 800; }
+.pl-map .r.miss + .r { border-top-color: transparent; }
+
+/* ================= 10. comparaison : grille de notes, cartes, recommandation, questions ================= */
+.pl-grid { border-collapse: separate; border-spacing: 0; width: 100%; font: 400 13px/1.35 Inter, sans-serif; margin-top: 12px; table-layout: fixed; }
+.pl-grid th { text-align: left; vertical-align: bottom; padding: 0 10px 10px; font-size: 14.5px; font-weight: 800; letter-spacing: -.01em; }
+.pl-grid th:first-child { width: 228px; }
+.pl-grid th small { display: block; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--pl-t3); margin-bottom: 2px; }
+.pl-grid td { vertical-align: top; padding: 9px 10px; border-top: 1px solid var(--pl-line2); }
+.pl-grid td.c { font-weight: 700; font-size: 13.5px; }
+.pl-grid td.c small { display: block; font-weight: 400; font-size: 12px; color: var(--pl-t3); margin-top: 1px; }
+.pl-grid td .cell { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px; align-items: start; }
+.pl-grid td .w { font-size: 12px; color: var(--pl-t2); padding-top: 4px; }
+.pl-n10, .pl-grid td .n { display: inline-grid; place-items: center; width: 34px; height: 26px; border-radius: 8px; font: 800 14px/1 Inter, sans-serif; font-variant-numeric: tabular-nums; }
+.pl-n10.a, .pl-grid .n.a { background: #1F8A5B; color: #fff; } .pl-n10.b, .pl-grid .n.b { background: #D6F0E2; color: #14532F; }
+.pl-n10.m, .pl-grid .n.m { background: #FBEFD9; color: #774A00; } .pl-n10.l, .pl-grid .n.l { background: #FDE3DF; color: #8E1F14; }
+.pl-grid .n.top { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--pl-t1); }             /* meilleure note de la ligne */
+.pl-grid tr.tot td { border-top: 2px solid var(--pl-t1); font-size: 15px; font-weight: 800; padding-top: 12px; }
+.pl-grid tr.tot td b { font-size: 26px; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.pl-grid tr.tot td small { font-size: 13px; font-weight: 600; color: var(--pl-t3); }
+.pl-grid tr.tot td.best b { font-size: 34px; color: #14532F; }
+.pl-grid tr.tot td .crown { display: inline-flex; align-items: center; height: 20px; padding: 0 8px; border-radius: 10px; background: #1F8A5B; color: #fff; font-size: 10.5px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; margin-left: 8px; vertical-align: 6px; }
+.pl-grid td.rec, .pl-grid th.rec { background: var(--pl-acct); }
+.pl-grid th.rec { color: var(--pl-acc2); border-radius: 14px 14px 0 0; padding-top: 10px; }
+.pl-grid th.rec small { color: var(--pl-acc); }
+.pl-grid tr.tot td.rec { border-radius: 0 0 14px 14px; padding-bottom: 12px; }
+.pl-gleg { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 12px; font-size: 12px; color: var(--pl-t3); align-items: center; }
+.pl-gleg .pl-n10 { width: 34px; height: 22px; font-size: 12px; margin-right: 6px; border-radius: 7px; }
+.pl-gleg .top { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--pl-t1); margin-left: 4px; margin-right: 10px; }
+.pl-gnote { margin-top: 10px; padding: 10px 14px; border-radius: 12px; background: var(--pl-acct); color: var(--pl-acc2); font-size: 13px; font-weight: 600; }
+.pl-err { margin-top: 10px; padding: 12px 16px; border-radius: 12px; background: #FDE3DF; color: #8E1F14; font: 700 13.5px/1.4 Inter, sans-serif; border: 1.5px solid #C93A3A; }
+/* une carte par direction : vignette du premier écran, avantages, inconvénients, pour qui */
+.pl-5 { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin: 0 9px; }
+.pl-card { background: #fff; border: 1px solid var(--pl-line); border-radius: 18px; padding: 16px 16px 18px; font: 400 13px/1.42 Inter, sans-serif; color: var(--pl-t1); display: flex; flex-direction: column; }
+.pl-card.rec { border: 2px solid var(--pl-acc); box-shadow: 0 10px 30px rgba(36,91,143,.16); }
+.pl-card .k { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--pl-t3); }
+.pl-card.rec .k { color: var(--pl-acc); }
+.pl-card h5 { font-size: 16.5px; font-weight: 800; letter-spacing: -.01em; margin: 2px 0 8px; }
+.pl-card img, .pl-card .noimg { display: block; width: 100%; aspect-ratio: 411 / 870; border-radius: 30px; margin-bottom: 12px; }
+.pl-card .noimg { border: 1.5px dashed #AEB9C9; display: grid; place-items: center; text-align: center; color: var(--pl-t3); font-size: 12px; padding: 16px; background: #F7F9FC; }
+.pl-card h6 { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--pl-t3); margin: 10px 0 3px; }
+.pl-card ul { margin: 0 0 0 4px; padding: 0; list-style: none; display: grid; gap: 4px; }
+.pl-card li { padding-left: 16px; position: relative; }
+.pl-card ul.p li::before { content: "+"; position: absolute; left: 0; color: #1F8A5B; font-weight: 800; }
+.pl-card ul.m li::before { content: "−"; position: absolute; left: 0; color: #C0392B; font-weight: 800; }
+.pl-card .who { margin-top: auto; padding: 9px 11px; border-radius: 12px; background: #F4F6FA; font-size: 12.5px; }
+.pl-card ul.m { margin-bottom: 12px; }
+/* bloc recommandation */
+.pl-rec { margin: 0 9px; border-radius: 22px; padding: 26px 28px; background: linear-gradient(135deg, var(--pl-acc2), #2A6AA6); color: #fff; font: 400 14.5px/1.5 Inter, sans-serif; display: grid; grid-template-columns: 1.05fr 1fr 1fr; gap: 30px; }
+.pl-rec .k { font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; opacity: .8; }
+.pl-rec h3 { font-size: 30px; line-height: 1.1; font-weight: 800; letter-spacing: -.022em; margin: 4px 0 10px; }
+.pl-rec h5 { font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; opacity: .8; margin-bottom: 6px; }
+.pl-rec ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; }
+.pl-rec li { padding-left: 20px; position: relative; }
+.pl-rec li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 8px; height: 8px; border-radius: 4px; background: #A9CDEE; }
+.pl-rec b { font-weight: 700; }
+.pl-rec p + p { margin-top: 8px; }
+/* questions pour le PDG (numérotées toutes seules), lots de l'étape suivante, petite table à deux colonnes */
+.pl-q { display: grid; gap: 10px; margin-top: 10px; counter-reset: q; }
+.pl-q > div { padding: 11px 13px 11px 44px; border-radius: 14px; background: #F4F6FA; position: relative; }
+.pl-q > div::before { counter-increment: q; content: counter(q); position: absolute; left: 12px; top: 10px; width: 22px; height: 22px; border-radius: 7px; background: var(--pl-acc); color: #fff; font: 800 12px/22px Inter, sans-serif; text-align: center; }
+.pl-q b { font-weight: 700; }
+.pl-lot { display: grid; grid-template-columns: 72px 1fr; gap: 6px 12px; margin-top: 10px; }
+.pl-lot b.l { display: grid; place-items: center; height: 26px; border-radius: 8px; background: var(--pl-acct); color: var(--pl-acc2); font-size: 12px; font-weight: 800; white-space: nowrap; }
+.pl-lot b.l.o { background: #F1F4F9; color: var(--pl-t3); }
+.pl-m { border-collapse: collapse; width: 100%; font-size: 12.5px; margin-top: 8px; }
+.pl-m td { vertical-align: top; padding: 6px 8px 6px 0; border-top: 1px solid var(--pl-line2); line-height: 1.38; }
+.pl-m td:first-child { font-weight: 700; width: 40%; }
+
+/* ================= 11. analyse de l'existant : captures annotées, ruban, problèmes, fonctions ================= */
+.pl-an { display: flex; gap: 24px; align-items: flex-start; margin: 0 9px; }
+.pl-an .shot { width: 262px; flex: none; }
+.pl-an .nm, .pl-rib .nm { font: 700 12.5px/1 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--bink2); height: 22px; white-space: nowrap; }
+.pl-shot { position: relative; width: 262px; }
+.pl-shot img { display: block; width: 100%; border-radius: 34px; box-shadow: 0 0 0 7px #121417, 0 16px 34px rgba(11,18,32,.2); }
+.pl-shot .noimg { width: 100%; aspect-ratio: 393 / 852; border-radius: 34px; border: 2px dashed #AEB9C9; background: #F7F9FC; display: grid; place-items: center; text-align: center; padding: 20px; font: 500 12.5px/1.4 Inter, sans-serif; color: var(--pl-t3); }
+.pl-shot .noimg b { display: block; color: var(--pl-t1); font-weight: 700; margin-bottom: 4px; }
+.pl-pin, .pl-shot b.k { position: absolute; transform: translate(-50%, -50%); width: 26px; height: 26px; border-radius: 13px; background: #C93A3A; color: #fff; font: 800 13px/26px Inter, sans-serif; text-align: center; box-shadow: 0 0 0 3px #fff, 0 4px 10px rgba(0,0,0,.25); }
+.pl-an .shot > p { font: 400 12.5px/1.4 Inter, sans-serif; color: var(--bink2); margin-top: 16px; }
+/* ruban : l'écran principal de haut en bas, hauteurs à l'échelle, repères d'écran */
+.pl-rib { width: 300px; flex: none; font-family: Inter, sans-serif; }
+.pl-rib .rb0 { position: relative; background: #fff; border: 1px solid var(--pl-line); border-radius: 18px; padding: 10px 12px 10px 64px; }
+.pl-rib .rb0 > div { position: relative; display: flex; align-items: center; border-radius: 6px; margin: 2px 0; padding: 0 8px; font-size: 11.5px; font-weight: 600; color: var(--pl-t1); background: #EEF3F8; overflow: hidden; white-space: nowrap; }
+.pl-rib .rb0 > div.hot { background: #FDE3DF; color: #8E1F14; }
+.pl-rib .rb0 > div.key { background: #DDF0E4; color: #1E5B34; }
+.pl-rib .scr-l { position: absolute; left: 0; right: 0; border-top: 2px dashed #7C8AA0; z-index: 2; }
+.pl-rib .scr-l span { position: absolute; left: 6px; top: 2px; font-size: 10.5px; font-weight: 800; color: #4E5A6B; letter-spacing: .04em; text-transform: uppercase; }
+.pl-rib > p { font: 400 12px/1.4 Inter, sans-serif; color: var(--bink2); margin-top: 10px; }
+/* familles de problèmes */
+.pl-fam { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 9px; }
+.pl-prob { background: #fff; border: 1px solid var(--pl-line); border-radius: 18px; padding: 16px 18px; font: 400 13px/1.42 Inter, sans-serif; color: var(--pl-t1); }
+.pl-prob h4 { font-size: 16.5px; font-weight: 800; letter-spacing: -.01em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.pl-prob h4 i { font-size: 18px; color: #C93A3A; }
+.pl-prob ol { list-style: none; display: grid; gap: 7px; }
+.pl-prob li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; }
+.pl-prob li b.k { width: 22px; height: 22px; border-radius: 11px; background: #C93A3A; color: #fff; font: 800 11.5px/22px Inter, sans-serif; text-align: center; margin-top: 1px; }
+.pl-prob.ok { background: linear-gradient(160deg, #F1FAF5, #fff); }
+.pl-prob.ok h4 i { color: #1F8A62; } .pl-prob.ok li b.k { background: #1F8A62; }
+.pl-prob.no { background: linear-gradient(160deg, #F3EFFC, #fff); }
+.pl-prob.no h4 i { color: var(--pl-new); } .pl-prob.no li b.k { background: var(--pl-new); }
+/* table des fonctions (Fonction · Ce qu'elle fait · Gratuit · Premium) */
+.pl-t { width: 100%; border-collapse: collapse; font: 400 12.5px/1.38 Inter, sans-serif; }
+.pl-t th { text-align: left; font-size: 11px; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; color: var(--pl-t3); padding: 0 8px 8px 0; }
+.pl-t td { vertical-align: top; padding: 7px 8px 7px 0; border-top: 1px solid var(--pl-line2); }
+.pl-t td:first-child { font-weight: 800; color: var(--pl-t3); width: 34px; font-variant-numeric: tabular-nums; }
+.pl-t td:nth-child(2) { font-weight: 650; }
+.pl-t td small { display: block; font-size: 12px; font-weight: 400; color: var(--pl-t3); margin-top: 1px; }
+.pl-t td.g, .pl-t td.p, .pl-t td.gp { font-weight: 650; width: 124px; white-space: nowrap; padding-right: 0; }
+.pl-t td.g { color: #1E5B34; } .pl-t td.p { color: #6B4E0A; } .pl-t td.gp { color: #2B3545; }
+.pl-t th:last-child { padding-right: 0; }
+
+/* ================= 12. contrôle (?check) : panneau des remarques de PL.lint ================= */
+.pl-lint { margin: 30px 9px 0; padding: 16px 20px; border-radius: 16px; background: #fff; border: 2px solid #C93A3A; font: 400 13px/1.45 Inter, sans-serif; color: var(--pl-t1); }
+.pl-lint.ok { border-color: #1F8A62; }
+.pl-lint h4 { font-size: 16px; font-weight: 800; margin-bottom: 6px; }
+.pl-lint li { margin-left: 18px; }
+.pl-lint li.e { color: #8E1F14; font-weight: 650; }
+.pl-over-mark { outline: 2px solid #E08A00 !important; outline-offset: -2px; }

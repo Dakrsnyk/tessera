@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<!-- CATALOGUE de la boîte à outils : les 9 couleurs d'accent sur de vraies pièces, puis toutes les icônes avec leur nom.
+     Ce n'est pas une planche à livrer : c'est la page à ouvrir pour choisir une icône ou vérifier une couleur.
+     Rendu : ~/ardane-tools/venv/Scripts/python.exe -I render.py CATALOGUE.html -->
+<title>Ardane · Planches des mini-apps — Catalogue des couleurs et des icônes</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<style>
+  .cat-sw { display: grid; grid-template-columns: repeat(9, 1fr); gap: 10px; margin: 0 9px 26px; }
+  .cat-sw > div { background: #fff; border: 1px solid var(--pl-line); border-radius: 16px; padding: 12px; font: 400 12px/1.35 Inter, sans-serif; }
+  .cat-sw b { display: block; font-size: 14px; font-weight: 800; margin: 8px 0 2px; }
+  .cat-sw u { display: block; height: 34px; border-radius: 9px; text-decoration: none; }
+  .cat-sw u + u { margin-top: 5px; }
+  .cat-sw code { font: 600 11px Consolas, monospace; color: var(--pl-t3); display: block; }
+  .cat-ic { display: grid; grid-template-columns: repeat(16, 1fr); gap: 8px; margin: 0 9px; }
+  .cat-ic > div { background: #fff; border: 1px solid var(--pl-line); border-radius: 12px; padding: 12px 4px 8px; text-align: center; font: 600 11px/1.2 Consolas, monospace; color: var(--pl-t2); overflow: hidden; }
+  .cat-ic i { font-size: 26px; color: var(--pl-t1); margin-bottom: 6px; }
+  .cat-ic .new { border-color: color-mix(in srgb, var(--pl-new) 45%, #fff); }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="pla" data-kind="catalogue">
+  <header class="bd-head"><div class="num">◆</div>
+    <div><h1>Catalogue : couleurs d'accent et icônes</h1>
+      <p>Les 9 sujets avec leur clé <code>data-c</code>. Pour chacun : la couleur d'icône et de graphique (<code>--c</code>), la couleur d'action de sa page (<code>--cs</code>, lisible avec du blanc), puis de vraies pièces. Nutrition, Fitness, Planning et Habitudes viennent de cristal.js ; Études, Entreprise, Voyage, Auto et Photos sont ajoutées par planches.js avec la même règle. Les chiffres des écrans ci-dessous ne sont que des démonstrations : les données d'exemple qui font foi sont dans GUIDE-PLANCHES.md.</p></div>
+    <span class="badge">Boîte à outils · contrôle</span></header>
+
+  <div class="cat-sw" id="sw"></div>
+  <div class="row" id="r1"></div>
+  <div class="row" id="r2"></div>
+  <div class="row" id="r3"></div>
+
+  <h2 class="sec">Pièces : chaque écran montre des fonctions de <code style="font:700 18px Consolas,monospace">PL</code>, nommées dessous</h2>
+  <p class="secp">Les pièces déjà montrées dans GABARIT-direction.html (PL.ring, PL.meter, PL.strip, PL.weekBars, PL.bars, PL.sheet, PL.kvs, PL.stepper, PL.chips, PL.settings…) ne sont pas répétées ici.</p>
+  <div class="row">
+    <div class="col"><div class="nm">Chiffres et listes</div><div class="phone app t-saphir" data-c="etu" data-tab="0" id="k1"></div>
+      <div class="cap"><p>PL.nv avec PL.rbtn · PL.month · PL.hero (lab, fig, line, right) · PL.kpis et PL.kpi · PL.sect (nw) · PL.list et PL.row (chk, done, prem, nw, r, r2) · PL.due (hot) · PL.alert.</p></div></div>
+    <div class="col"><div class="nm">Graphiques</div><div class="phone app t-saphir" data-c="ent" data-tab="0" id="k2"></div>
+      <div class="cap"><p>PL.seg · PL.card (t, right) · PL.line (yt, xl, ref, tip) · PL.leg · PL.donut (in) · PL.stack · PL.heat · PL.cal.</p></div></div>
+    <div class="col"><div class="nm">Saisie dans une feuille</div><div class="phone app t-saphir" data-c="aut" data-tab="none" id="k3"></div>
+      <div class="cap"><p>PL.sheet · PL.seg · .pl-input · PL.quick · PL.chips (wrap) · PL.field · PL.kv avec PL.sw · .pl-keys · PL.btn (lg).</p></div></div>
+    <div class="col"><div class="nm">États, verrous, actions</div><div class="phone app t-saphir" data-c="voy" data-tab="0" id="k4"></div>
+      <div class="cap"><p>PL.day · PL.search · PL.toFill · PL.prog (pace, over) · PL.lockCard · PL.empty · .pl-pill · PL.fab2.</p></div></div>
+  </div>
+
+  <h2 class="sec">Icônes : <code style="font:700 18px Consolas,monospace">&lt;i data-i="nom"&gt;&lt;/i&gt;</code></h2>
+  <p class="secp">Bord violet : ajoutée par planches.js. Une icône manquante s'ajoute dans le script de la planche avec <code>Object.assign(P, { nom: 'tracé' })</code>, ou dans le JS du sujet si plusieurs planches s'en servent.</p>
+  <div class="cat-ic" id="ic"></div>
+</main>
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script>const CRISTAL_ICONS = Object.keys(P);</script>
+<script src="../base/planches.js"></script>
+<script>
+const keys = Object.keys(PL.APPS);
+const EX = {   // une figure d'exemple par sujet (cohérente avec la journée d'exemple quand elle y existe)
+  nut: ['Reste aujourd\'hui', '1 122', 'kcal', '1 078 mangées sur 2 200', 'Scanner', 'scan', ['Déjeuner', '420 kcal'], ['Dîner', '658 kcal']],
+  fit: ['Séance du jour', 'Haut du corps', '', '6 exercices · 18 séries', 'Commencer', 'play', ['Semaine', '2 sur 4'], ['Pas', '5 480']],
+  pla: ['Maintenant', '14:00', '', 'Réunion projet · Local 3.12', 'Nouvelle tâche', 'plus', ['Dentiste', '16:30'], ['Séance Haut du corps', '18:30']],
+  hab: ['Aujourd\'hui', '3', '/ 5', 'Série de 12 jours', 'Nouvelle habitude', 'plus', ['Lecture 20 min', 'Faite'], ['Boire 2 L d\'eau', 'À faire']],
+  etu: ['Prochain examen', 'J-4', '', 'Statistiques · lundi 16 novembre', 'Réviser', 'timer', ['Devoir : étude de cas', 'Vendredi'], ['Comptabilité', 'B-204']],
+  ent: ['Chiffre d\'affaires', '3 240', '$', 'Novembre, au 12', 'Vente', 'plus', ['Bénéfice', '1 910 $'], ['Marge', '59 %']],
+  voy: ['Lisbonne', 'J-212', '', 'Du 12 au 19 juin 2027', 'Ajouter', 'plus', ['Budget', '640 $ sur 1 500 $'], ['Liste', '4 sur 18']],
+  aut: ['Compteur', '48 320', 'km', '612 km ce mois-ci', 'Plein', 'fuel', ['Assurance auto', 'Mardi · 62 $'], ['Vidange', 'Dans 1 680 km']],
+  pho: ['Widgets créés', '3', '', '2 de photos, 1 citation', 'Photos', 'images', ['Mes photos', 'Petit'], ['Citation du jour', 'Moyen']],
+};
+// téléphones : 4, 4, puis 1
+keys.forEach((k, i) => { const a = PL.APPS[k], e = EX[k];
+  document.getElementById(i < 4 ? 'r1' : i < 8 ? 'r2' : 'r3').insertAdjacentHTML('beforeend',
+    `<div class="col"><div class="nm">${a.nom} · data-c="${k}"</div><div class="phone app t-saphir" data-c="${k}" data-time="13:20" data-tab="0" id="c-${k}"></div></div>`);
+  PL.mount('c-' + k, PL.nv(a.app || a.nom) + `<div style="margin-top:8px">${PL.wsel()}</div><div style="margin-top:10px">${PL.hero({ lab: e[0], fig: e[1], unit: e[2], line: e[3], size: e[1].length > 7 ? 'sm' : '' })}</div>
+    <div class="g2" style="margin-top:12px">${PL.btn(e[4], { i: e[5] })}${PL.btn('Voir tout', { k: 'T' })}</div>
+    ${PL.sect('Section', 'détail', 'Lien')}${PL.list([PL.row(a.i, e[6][0], 'Détail de la ligne', { r: e[6][1] }), PL.row('bell', e[7][0], 'Détail de la ligne', { r: e[7][1], sq: true })])}
+    <div style="display:flex;align-items:center;gap:16px;margin-top:14px">${PL.ring(.62, { s: 84, sw: 8, b: '62 %' })}<div style="flex:1">${PL.meter('Jauge', '62 %', .62)}<div class="seg" style="margin-top:10px"><span class="on">Jour</span><span>Semaine</span></div></div></div>`, PL.fab(e[4], e[5])); });
+// pièces
+PL.mount('k1', PL.nv('Études', PL.rbtn('plus', 'Ajouter')) + `<div style="margin-top:8px">${PL.month('Novembre 2026')}</div>
+  <div style="margin-top:10px">${PL.hero({ lab: 'Prochain examen', fig: 'J-4', line: '<b>Statistiques</b> · lundi 16 novembre, 9:00', right: '<span class="link">Tout voir</span>' })}</div>
+  ${PL.kpis([PL.kpi('Cours', '3', 'cette session', { i: 'book' }), PL.kpi('Devoirs', '1', 'pour vendredi', { i: 'pencil' }), PL.kpi('Révisé', '2 h 10', 'cette semaine', { nw: true })], 3, 'margin-top:12px')}
+  ${PL.sect('À faire', '1 sur 2', '', { nw: true })}
+  ${PL.list([PL.row('', 'Réviser le chapitre 4', 'Statistiques', { chk: 'todo', r: '45 min', chev: false }), PL.row('', 'Lire le cas Bombardier', 'Marketing', { chk: 'ok', done: true, chev: false }),
+    PL.row('chart', 'Moyenne par cours', 'Notes pondérées', { prem: true }), PL.row('clipboard', 'Fiches de révision', '12 fiches', { r: '3', r2: 'à revoir', nw: true })])}
+  ${PL.list([PL.due({ dow: 'ven.', d: 13, t: 'Devoir : étude de cas', s: 'Marketing · demain', r: 'J-1', rc: 'over', hot: true }), PL.due({ dow: 'lun.', d: 16, t: 'Examen : Statistiques', s: 'B-204 · 9:00', r: 'J-4', chev: true })], { st: 'margin-top:12px' })}
+  <div style="margin-top:12px">${PL.alert('bulb', 'Un bandeau de conseil', 'Une ligne de détail.', { act: 'Voir' })}</div>`);
+PL.mount('k2', PL.nv('Business') + PL.seg(['Semaine', 'Mois', 'Année'], 1, { st: 'margin-top:8px' }) + `
+  <div style="margin-top:12px">${PL.card(`<div style="margin-top:44px">${PL.line({ series: [{ v: [0, null, null, null, null, null, null, null, null, null, null, 1200], c: 'var(--ink2)', w: 1.4, dash: true }, { v: [200, 420, 900, 1100, 1500, 1640, 1900, 2300, 2380, 2700, 3010, 3240], c: 'var(--c)', area: true, dot: true }], n: 30, h: 90, max: 3600, yt: [0, 1800, 3600], yf: (v) => PL.m(v), xl: [[0, '1er'], [11, '12'], [29, '30']], ref: { v: 3000, t: 'Objectif 3 000 $' }, tip: { i: 11, v: 3240, t: '3 240 $', s: 'au 12', w: 76 }, aria: 'Chiffre d’affaires cumulé de novembre : 3 240 $ au 12, objectif 3 000 $' })}</div>
+    ${PL.leg([['var(--c)', 'Novembre', 'ln'], ['var(--ink2)', 'Rythme de l’objectif', 'dsh']])}`, { t: 'Chiffre d’affaires', right: 'cumulé' })}</div>
+  <div style="margin-top:12px">${PL.card(`<div style="display:flex;gap:16px;align-items:center;margin-top:6px">${PL.donut([{ v: 62, c: 'var(--c-ent)' }, { v: 26, c: 'var(--c-voy)' }, { v: 12, c: 'var(--c-aut)' }], { s: 104, sw: 13, in: '<b style="font-size:18px">3 240 $</b><small>ventes</small>', aria: 'Répartition des ventes' })}
+    <div style="flex:1;min-width:0">${PL.stack([{ v: 62, c: 'var(--c-ent)' }, { v: 26, c: 'var(--c-voy)' }, { v: 12, c: 'var(--c-aut)' }])}${PL.leg([['var(--c-ent)', 'Boutique 62 %'], ['var(--c-voy)', 'Marché 26 %'], ['var(--c-aut)', 'Autre 12 %']])}</div></div>`, { t: 'Répartition' })}</div>
+  <div class="g2" style="margin-top:12px">${PL.card(PL.heat({ vals: [200, 220, 480, 200, 400, 140, 260, 400, 80, 320, 310, 230], aria: 'Ventes par jour' }), { st: 'padding:12px' })}${PL.card(PL.cal({ done: [1, 2, 3, 5, 6, 8, 9, 10, 12], aria: 'Jours faits' }), { st: 'padding:12px' })}</div>`);
+PL.mount('k3', PL.nv('Auto') + PL.hero({ lab: 'Compteur', fig: '48 320', unit: 'km', st: 'margin-top:10px' }), PL.sheet(`
+  ${PL.seg(['Plein', 'Kilométrage'], 0)}
+  <div class="pl-input"><div class="pl-fig">52,40<small>$</small><i class="cur"></i></div></div>
+  <div class="x-lab" style="margin:10px 2px 8px">Raccourcis</div>
+  ${PL.quick([{ t: 'Ordinaire', v: '1,62 $/L', i: 'fuel' }, { t: 'Super', v: '1,84 $/L', i: 'fuel' }, { t: 'Diesel', v: '1,79 $/L', i: 'fuel' }])}
+  <div class="x-lab" style="margin:12px 2px 8px">Date</div>
+  ${PL.chips(['Aujourd’hui', 'Hier', ['Autre date', 'calendar']], 0, { wrap: true })}
+  <div class="pl-fields" style="margin-top:12px">${PL.field('Litres', '32,3 L')}${PL.field('Note', 'Facultatif', { ph: true })}</div>
+  ${PL.kvs(PL.kv('Plein complet', PL.sw(true)), { st: 'margin-top:4px' })}
+  <div class="pl-keys" style="margin-top:6px">${[1, 2, 3, 4, 5, 6, 7, 8, 9, ',', 0, '⌫'].map((k) => `<span>${k}</span>`).join('')}</div>
+  ${PL.btn('Enregistrer le plein', { lg: true, st: 'margin-top:12px' })}`, 'Plein', { st: 'padding-bottom:30px' }));
+PL.mount('k4', PL.nv('Voyage') + `<div style="margin-top:8px">${PL.day()}</div><div style="margin-top:10px">${PL.search('Rechercher', PL.nw())}</div>
+  ${PL.toFill([{ i: 'plane', t: 'Voyage', s: 'Pour compter les jours avant le départ.', btn: 'Nouveau voyage', bi: 'plus' }], '0 / 1')}
+  ${PL.sect('Budget', '640 $ sur 1 500 $')}
+  ${PL.card(PL.prog({ i: 'bed', t: 'Hébergement', r: '<b>420 $</b> / 600 $', p: .7, pace: .5, c: 'voy', sub: 'Au-dessus du rythme <span class="pl-pill">À vérifier</span>' }) + PL.prog({ i: 'ticket', t: 'Sorties', r: '<b>260 $</b> / 200 $', p: 1, over: true, sub: '<b class="pl-over">Dépassé de 60 $</b>' }), { st: 'padding:6px 16px' })}
+  <div style="margin-top:12px">${PL.lockCard('Les packs de voyage sont dans Premium', 'Un texte court qui dit ce que Premium ajoute ici.')}</div>
+  <div style="margin-top:12px">${PL.empty('map', 'Aucun programme', 'Ajoute une étape pour la voir ici.', 'Ajouter une étape')}</div>`, PL.fab2(['Dépense', 'minus'], ['Étape', 'plus']));
+PL.init();
+// pastilles de couleur : valeurs lues sur la page (donc celles que les planches affichent vraiment)
+const hex = (v) => { if (/^#/.test(v)) return v.toUpperCase(); const m = v.match(/\d+/g); return m ? '#' + m.slice(0, 3).map((x) => (+x).toString(16).padStart(2, '0')).join('').toUpperCase() : v; };
+document.getElementById('sw').innerHTML = keys.map((k) => { const cs = getComputedStyle(document.getElementById('c-' + k)), c = cs.getPropertyValue('--c').trim(), s = cs.getPropertyValue('--cs').trim();
+  return `<div><u style="background:${c}"></u><u style="background:${s}"></u><b>${PL.APPS[k].nom}</b>data-c="${k}"<code>--c ${hex(c)}</code><code>--cs ${hex(s)}</code><code>modèle ${PL.APPS[k].hex}</code></div>`; }).join('');
+document.getElementById('ic').innerHTML = Object.keys(P).sort().map((n) => `<div class="${CRISTAL_ICONS.includes(n) ? '' : 'new'}"><i data-i="${n}"></i><br>${n}</div>`).join('');
+document.querySelectorAll('#ic i[data-i], #sw i[data-i]').forEach((e) => { e.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="${P[e.dataset.i] || ''}"/></svg>`; });
+</script>
+</body>
+</html>

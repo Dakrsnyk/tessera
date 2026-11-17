@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<!-- ============================================================================================================
+     GABARIT DE LA PLANCHE D'ANALYSE. À copier dans le dossier du sujet sous le nom 00-analyse.html.
+     Règles : ../base/GUIDE-PLANCHES.md. Tout le texte est un EXEMPLE COURT (Nutrition) : à remplacer par l'audit du sujet.
+     Ordre imposé : captures réelles annotées et ruban · problèmes par famille · fonctions existantes ·
+     ce que la mission cite et qui n'existe pas · ce qui marche et qu'on garde.
+     Rien ne s'invente ici : chaque phrase vient de l'audit (audit/NN-sujet.md), avec ses numéros de problème et de fonction.
+     ============================================================================================================ -->
+<title>Ardane · Nutrition — Analyse de la mini-app actuelle (gabarit)</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<style>
+  /* CSS propre à cette planche : préfixe à elle (nuta-). Vide dans le gabarit. */
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="nut" data-kind="analyse">
+
+  <!-- ===== 1. En-tête : le chiffre 0, la mini-app, le titre, d'où vient le relevé ===== -->
+  <header class="bd-head"><div class="num">0</div>
+    <div><div class="pl-kick">Analyse de l'existant</div>
+      <h1>Nutrition aujourd'hui : ce qui ne va pas, ce qui existe</h1>
+      <p>Relevé fait dans le code (fichiers cités dans l'audit) et sur les captures réelles de la CI (dire le numéro de version et la date ; les données sont celles de la CI, pas la journée d'exemple). Les numéros rouges renvoient à la liste des problèmes. Aucune ligne de code n'est changée à cette étape.</p></div>
+    <span class="badge">Phase 2 · analyse de l'existant</span></header>
+
+  <!-- ===== 2. Les captures réelles (4 ou 5) et le ruban de l'écran principal =====
+       PL.shot(chemin, [[x %, y %, numéro du problème], …]) : la capture dans un cadre de téléphone, avec ses pastilles rouges.
+       Une capture qui n'existe pas encore : garder la case, le cadre en pointillés « Capture à venir » la remplace (jamais de fausse capture).
+       Chemin des captures : PL.pub + 'captures-ci-454/…' (hors dépôt). -->
+  <div class="pl-an">
+    <div class="shot"><div class="nm">Écran principal</div><div id="s1"></div>
+      <p>Une phrase : ce qu'on voit en ouvrant, et ce qui manque à cet endroit.</p></div>
+    <div class="shot"><div class="nm">Page d'un repas</div><div id="s2"></div>
+      <p>Une phrase par capture, sans jugement vague : un fait, un numéro de problème.</p></div>
+    <div class="shot"><div class="nm">Feuille de quantité</div><div id="s3"></div>
+      <p>Une phrase.</p></div>
+    <div class="shot"><div class="nm">Historique</div><div id="s4"></div>
+      <p>Une phrase.</p></div>
+    <div class="shot"><div class="nm">Scanner</div><div id="s5"></div>
+      <p>Aucune capture du scanner n'existe (le simulateur n'a pas de caméra) : la case le dit.</p></div>
+    <div class="pl-rib"><div class="nm">L'écran principal, de haut en bas</div><div id="rib"></div>
+      <p>Hauteurs estimées d'après le code (points). En vert : ce qu'on voit en ouvrant. En rouge : ce qui compte et arrive tard.</p></div>
+  </div>
+
+  <!-- ===== 3. Les problèmes, par famille : 6 cases au plus, les plus graves en premier. Numéros = ceux de l'audit (section 8). ===== -->
+  <h2 class="sec">Les problèmes, par famille</h2>
+  <p class="secp">Dire le nombre de constats de l'audit. Ce ne sont pas des bogues : tout fonctionne, mais l'information est mal rangée.</p>
+  <div class="pl-fam">
+    <div class="pl-prob"><h4><i data-i="layers"></i>Hiérarchie</h4><ol>
+      <li><b class="k">1</b><span>Un constat de l'audit, en une ou deux phrases, avec le fait précis (libellé, taille, place).</span></li>
+      <li><b class="k">2</b><span>Un deuxième constat.</span></li></ol></div>
+    <div class="pl-prob"><h4><i data-i="grid"></i>Informations mal rangées</h4><ol>
+      <li><b class="k">4</b><span>Un constat.</span></li>
+      <li><b class="k">5</b><span>Un constat.</span></li></ol></div>
+    <div class="pl-prob"><h4><i data-i="hand"></i>Interactions à simplifier</h4><ol>
+      <li><b class="k">7</b><span>Un constat.</span></li>
+      <li><b class="k">9</b><span>Un constat.</span></li></ol></div>
+  </div>
+
+  <!-- ===== 4. Les fonctions existantes : PL.fnTable remplit #fn à partir de la liste FONCTIONS du sujet (la même que la table de fin des directions) ===== -->
+  <h2 class="sec">Ce que Nutrition fait aujourd'hui (rien ne sera retiré)</h2>
+  <p class="secp">Dire le nombre de fonctions et la règle gratuit / Premium en deux phrases. Les numéros F1…Fn sont ceux de l'audit ; chaque planche de direction dit où se trouve chacune.</p>
+  <div id="fn"></div>
+
+  <!-- ===== 5. Ce que la mission cite et qui n'existe pas (section 9 de l'audit) : en violet, comme tout ce qui sera « Nouveau » ===== -->
+  <h2 class="sec">Ce que la mission cite et qui n'existe pas, et ce qu'on garde</h2>
+  <div class="pl-fam">
+    <div class="pl-prob no"><h4><i data-i="sparkles"></i>N'existe pas : à dessiner comme « Nouveau »</h4><ol>
+      <li><b class="k">N</b><span>Hydratation : la mini-app Eau a été retirée le 2026-10-15. Aucun écran ne permet de noter l'eau.</span></li>
+      <li><b class="k">N</b><span>Évolution des objectifs : l'objectif n'a pas d'historique, une seule valeur.</span></li></ol></div>
+    <div class="pl-prob ok"><h4><i data-i="checkc"></i>Bonnes bases</h4><ol>
+      <li><b class="k">✓</b><span>Ce qui marche et qu'aucune direction ne doit perdre.</span></li>
+      <li><b class="k">✓</b><span>Un deuxième point.</span></li></ol></div>
+    <div class="pl-prob ok"><h4><i data-i="checkc"></i>Contraintes à tenir</h4><ol>
+      <li><b class="k">✓</b><span>Une contrainte de l'audit (section 11) : par exemple, quatre repas fixes, pas de jour futur.</span></li>
+      <li><b class="k">✓</b><span>Une deuxième.</span></li></ol></div>
+  </div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<!-- <script src="nutrition.js"></script>   le JS commun du sujet : c'est lui qui définit FONCTIONS -->
+<script>
+// les captures : chemin, pastilles [x %, y %, numéro du problème]
+const CAP = PL.pub + 'captures-ci-454/';
+document.getElementById('s1').innerHTML = PL.shot(CAP + 'mini-app-nutrition.png', [[80, 30, 1], [50, 46, 4], [88, 62, 7]]);
+document.getElementById('s2').innerHTML = PL.shot(CAP + 'mini-app-nutrition-meal.png', [[50, 22, 2]]);
+document.getElementById('s3').innerHTML = PL.shot(CAP + 'mini-app-nutrition-quantity.png', [[50, 40, 9]]);
+document.getElementById('s4').innerHTML = PL.shot(CAP + 'mini-app-nutrition-history.png', [[50, 17, 5]]);
+document.getElementById('s5').innerHTML = PL.shot(CAP + 'scanner-absent.png', [], { name: 'Scanner (caméra)' });
+
+// le ruban : [bloc, hauteur en points, 'key' = visible en ouvrant | 'hot' = important et tard | '']
+PL.ribbon('rib', [['Sélecteur de semaine', 100, 'key'], ['Anneau et trois macros', 150, 'key'], ['Scanner, Rechercher', 60, 'key'], ['Repas (4 lignes)', 240, 'key'],
+  ['Tous les nutriments', 60, ''], ['Carte conseil', 110, ''], ['Calories de la semaine', 170, 'hot'], ['Historique, Mes repas, Mes aliments', 170, 'hot'], ['Note', 50, ''], ['Mes paramètres', 60, '']]);
+
+// EXTRAIT de la liste du sujet, pour l'exemple (4e élément facultatif : ce qu'elle fait). Dans une vraie planche : la liste complète, dans le JS du sujet.
+const FONCTIONS = [
+  ['F1', 'Choisir le jour affiché', 'G', 'Sélecteur de semaine ; pas de jour futur'], ['F3', 'Calories du jour (anneau)', 'G', 'Reste, trop, ou mangé si pas d\'objectif'],
+  ['F4', 'Protéines, glucides, lipides du jour', 'G'], ['F6', 'Bouton « Scanner »', 'G', 'Absent sans caméra'],
+  ['F11', 'Feuille de quantité', 'G+P', 'Fibres et autres nutriments : Premium'], ['F16', 'Scanner un plat par photo', 'G+P', '10 analyses gratuites, puis Premium'],
+  ['F27', 'Liste des quatre repas du jour', 'G'], ['F28', 'Page d\'un repas', 'G'],
+  ['F41', '« Calories de la semaine »', 'G'], ['F44', 'Historique : « Calories par jour »', 'P', 'Il faut plus d\'un jour'],
+  ['F61', 'Ajout rapide depuis un widget', 'P'], ['F62', 'Rappels et notifications', 'G'],
+];
+PL.fnTable('fn', FONCTIONS);
+
+PL.init();   // toujours en dernier
+</script>
+</body>
+</html>

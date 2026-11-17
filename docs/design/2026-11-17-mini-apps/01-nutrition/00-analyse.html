@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<!-- ============================================================================================================
+     Planche 0 du sujet Nutrition : analyse de l'existant. Règles : ../base/GUIDE-PLANCHES.md (§ 11).
+     Tout vient de l'audit ../audit/01-nutrition.md (sections 2, 3, 4, 7, 8, 9, 10, 11) : numéros de problème, de fonction (F) et d'écran (E).
+     Captures réelles : Build 454 de la CI (hors dépôt, pub/rapports/design-2026-11-17-mini-apps/captures-ci-454/).
+     Une capture de plus, du même Build 454 (app-nutrition-settings-light.jpg, bas de l'écran principal), est lue dans
+     pub/rapports/design-2026-11-17-mini-apps/01-nutrition/captures/ ; si elle manque, sa case affiche « Capture à venir ».
+     Aucune maquette ici : une capture qui n'existe pas garde sa case en pointillés.
+     ============================================================================================================ -->
+<title>Ardane · Nutrition — Analyse de la mini-app actuelle</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<style>
+  /* CSS propre à cette planche : préfixe nuta- */
+  .nuta-leg { display: flex; flex-wrap: wrap; gap: 8px 26px; align-items: center; margin: -4px 9px 0; font: 500 12.5px/1.3 Inter, sans-serif; color: var(--bink2); }
+  .nuta-leg span { display: inline-flex; align-items: center; gap: 8px; }
+  .nuta-leg b { flex: none; width: 22px; height: 22px; border-radius: 11px; background: #C93A3A; color: #fff; font: 800 11.5px/22px Inter, sans-serif; text-align: center; }
+  .nuta-leg b.g { background: #9AA6B8; }
+  .nuta-leg i { flex: none; width: 26px; height: 18px; border-radius: 6px; border: 2px dashed #AEB9C9; background: #F7F9FC; }
+  .nuta-rt { display: flex; align-items: center; gap: 10px; margin: 30px 9px 14px; font: 800 17px/1.2 Inter, sans-serif; letter-spacing: -.01em; color: var(--bink); }
+  .nuta-rt.nuta-rt1 { margin-top: 20px; }
+  .nuta-rt b { flex: none; width: 26px; height: 26px; border-radius: 8px; background: var(--pl-acc); color: #fff; font: 800 13px/26px Inter, sans-serif; text-align: center; letter-spacing: 0; }
+  .nuta-rt small { font: 400 13.5px/1.3 Inter, sans-serif; color: var(--bink2); letter-spacing: 0; margin-left: 4px; }
+  .nuta-s .noimg ~ b.k { display: none; }                      /* capture absente : pas de pastille sur le cadre vide */
+  .nuta-miss { flex: 1; min-width: 0; margin-top: 22px; min-height: 570px; border-radius: 34px; border: 2px dashed #AEB9C9; background: #F7F9FC; padding: 28px 32px; font: 400 13px/1.45 Inter, sans-serif; color: var(--pl-t1); }
+  .nuta-miss h4 { font-size: 20px; font-weight: 800; letter-spacing: -.014em; margin-bottom: 6px; }
+  .nuta-miss > p { color: var(--pl-t2); max-width: 800px; }
+  .nuta-miss ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 34px; margin: 18px 0; }
+  .nuta-miss li { padding-left: 18px; position: relative; }
+  .nuta-miss li::before { content: ""; position: absolute; left: 0; top: 5px; width: 8px; height: 8px; border-radius: 3px; border: 1.5px dashed #7C8AA0; }
+  .nuta-miss li b { font-weight: 700; }
+  .nuta-miss li span { display: block; color: var(--pl-t3); font-size: 12.5px; }
+  .nuta-miss code { font: 600 11.5px Consolas, monospace; color: var(--pl-t2); background: #E6ECF3; border-radius: 5px; padding: 1px 5px; }
+  .nuta-miss { display: flex; flex-direction: column; }
+  .nuta-miss .nuta-end { border-top: 1px solid var(--pl-line); padding-top: 14px; margin-top: auto; color: var(--pl-t2); max-width: none; }
+  .pl-prob li b.k.nuta-g { background: #9AA6B8; }             /* constat qu'aucune capture ne montre */
+  .nuta-h3 { margin: 0 9px 10px; font: 750 12px/1 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--bink2); }
+  .nuta-lim { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px 14px; margin: 0 9px 16px; }
+  .nuta-lim > div { background: #fff; border: 1px solid var(--pl-line); border-radius: 14px; padding: 12px 16px 13px; font: 400 12.5px/1.4 Inter, sans-serif; color: var(--pl-t1); }
+  .nuta-lim h5 { font-size: 14px; font-weight: 800; letter-spacing: -.005em; margin-bottom: 6px; }
+  .nuta-lim p { display: grid; grid-template-columns: 62px 1fr; gap: 8px; }
+  .nuta-lim p + p { margin-top: 2px; }
+  .nuta-lim p b { font-weight: 700; }
+  .nuta-lim p.g b { color: #1E5B34; } .nuta-lim p.p b { color: #6B4E0A; }
+  .nuta-lim .nuta-rule { background: linear-gradient(160deg, #F1FAF5, #fff); }
+  .nuta-2 { display: grid; grid-template-columns: 1.22fr 1fr; gap: 14px; margin: 0 9px; align-items: start; }
+  .nuta-2 > .pl-box { margin: 0; padding: 16px 20px 10px; }
+  .nuta-m { width: 100%; border-collapse: collapse; font: 400 12.5px/1.38 Inter, sans-serif; }
+  .nuta-m th { text-align: left; font-size: 11px; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; color: var(--pl-t3); padding: 0 12px 8px 0; }
+  .nuta-m td { vertical-align: top; padding: 7px 12px 7px 0; border-top: 1px solid var(--pl-line2); }
+  .nuta-m td:first-child { font-weight: 650; width: 31%; }
+  .nuta-m td:nth-child(2) { width: 126px; white-space: nowrap; }
+  .nuta-m td:last-child { padding-right: 0; color: var(--pl-t2); }
+  .nuta-st { display: inline-block; height: 20px; padding: 0 9px; border-radius: 10px; font: 700 11px/20px Inter, sans-serif; }
+  .nuta-st.e { background: #DDF0E4; color: #1E5B34; }
+  .nuta-st.n { background: var(--pl-newbg); color: var(--pl-new); }
+  .nuta-col { display: grid; gap: 14px; }
+  .nuta-col > .pl-box { margin: 0; padding: 16px 20px 18px; }
+  .nuta-att h4 { font-size: 16.5px; margin-bottom: 10px; }
+  .nuta-att ul { list-style: none; display: grid; gap: 10px; font-size: 13px; line-height: 1.42; }
+  .nuta-att li { padding-left: 14px; border-left: 3px solid var(--pl-acc); }
+  .nuta-att li b { display: block; font-weight: 700; }
+  .nuta-att li span { color: var(--pl-t2); }
+  .nuta-sum { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 22px; }
+  .nuta-sum > div { border-radius: 14px; padding: 12px 14px; background: #F4F6FA; }
+  .nuta-sum b { display: block; font: 800 30px/1.2 Inter, sans-serif; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .nuta-sum span { display: block; margin-top: 5px; font: 650 12.5px/1.3 Inter, sans-serif; }
+  .nuta-sum .g { background: #E9F5EE; color: #1E5B34; } .nuta-sum .p { background: #FBF3DD; color: #6B4E0A; } .nuta-sum .gp { color: #2B3545; }
+  .nuta-sumn { margin-top: 12px; font: 400 12.5px/1.45 Inter, sans-serif; color: var(--pl-t3); }
+  .nuta-warn.ok { border-color: #1F8A62; color: #1E5B34; }
+  .nuta-warn { margin: 14px 9px 0; padding: 12px 16px; border-radius: 12px; border: 2px solid #C93A3A; background: #fff; font: 600 13px/1.4 Inter, sans-serif; color: #8E1F14; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="nut" data-kind="analyse">
+
+  <!-- ===== 1. En-tête ===== -->
+  <header class="bd-head"><div class="num">0</div>
+    <div><div class="pl-kick">Analyse de l'existant</div>
+      <h1>Nutrition aujourd'hui : ce qui ne va pas, ce qui existe</h1>
+      <p>Relevé fait dans le code (audit du 17 novembre 2026 : 24 écrans et feuilles, 64 fonctions, 23 constats) et sur 12 captures réelles de la CI (Build 454, 17 novembre 2026). Les captures montrent le compte de test de la CI, avec Premium : ses chiffres changent d'une image à l'autre et ne sont pas ceux de la journée d'exemple. Aucune ligne de code n'est changée à cette étape.</p></div>
+    <span class="badge">Phase 2 · analyse de l'existant</span></header>
+
+  <div class="nuta-leg">
+    <span><b>12</b>Numéro du constat dans l'audit : le même sur la capture et dans la liste des problèmes</span>
+    <span><b class="g">22</b>Constat qu'aucune capture ne montre</span>
+    <span><i></i>Écran sans capture : la case reste vide, rien n'est inventé</span>
+  </div>
+
+  <!-- ===== 2. Les captures réelles, en trois rangées ===== -->
+  <div class="nuta-rt nuta-rt1"><b>A</b>Ouvrir Nutrition et lire sa journée<small>La carte de Mon quotidien, l'écran principal en entier, puis les deux pages de lecture.</small></div>
+  <div class="pl-an">
+    <div class="shot nuta-s"><div class="nm">Mon quotidien : la carte</div><div id="s1"></div>
+      <p>Vue « Aujourd'hui » de la carte : le reste, les macros, « Scanner », « Prochain repas ». Ce dernier calcul n'est pas dans la mini-app (11) et l'anneau est d'un autre orange (19).</p></div>
+    <div class="shot nuta-s"><div class="nm">Écran principal, haut</div><div id="s2"></div>
+      <p>Ce qu'on voit en ouvrant : le reste, mais ni le mangé ni l'objectif (1). Sans caméra, « Ajouter un aliment » remplace « Scanner » et « Rechercher ». Ouvrir depuis Mon quotidien donne la même image.</p></div>
+    <div class="shot nuta-s"><div class="nm">Écran principal, bas</div><div id="s3"></div>
+      <p>Il faut défiler pour le reste : deux blocs sans titre (5), la seule entrée de « Idées » (6), une semaine définie autrement (7), une autre règle de réussite (8), un libellé coupé (17).</p></div>
+    <div class="pl-rib"><div class="nm">L'écran principal, de haut en bas</div><div id="rib"></div>
+      <p>Hauteurs mesurées sur les deux captures (points). En vert : ce qu'on voit en ouvrant. En rouge : ce qui compte et arrive tard. Sur un compte neuf, « À remplir » s'ajoute sous l'anneau et pousse tout le reste.</p></div>
+    <div class="shot nuta-s"><div class="nm">« Nutriments »</div><div id="s4"></div>
+      <p>Le seul endroit de la mini-app où on lit « mangé / objectif » : « 954 / 2 750 kcal » (1). La page elle-même se lit bien : une barre par nutriment.</p></div>
+    <div class="shot nuta-s"><div class="nm">« Historique »</div><div id="s5"></div>
+      <p>« Aujourd'… » est coupé (17). Rien n'annonce les segments Premium (18). Un seul objectif pour tous les jours passés (21), la règle des 10 % (8), les 7 derniers jours (7).</p></div>
+  </div>
+
+  <div class="nuta-rt"><b>B</b>Ajouter et gérer ce qu'on mange<small>La recherche, la quantité, le repas, les repas enregistrés. Le scanner n'a aucune capture.</small></div>
+  <div class="pl-an">
+    <div class="shot nuta-s"><div class="nm">« Ajouter un aliment »</div><div id="s6"></div>
+      <p>La recherche, ici sans caméra. C'est aussi l'écran qui reste quand on ferme le scanner : deux fermetures (3). Rien ne distingue un favori (10). « Aliment perso » : la création seulement (16).</p></div>
+    <div class="shot nuta-s"><div class="nm">Feuille de quantité</div><div id="s7"></div>
+      <p>Portions rapides, repas, « Après ajout, il te restera 1 569 kcal. » : la feuille marche bien. Seul le titre est coupé, « Yogourt grec n… » (17).</p></div>
+    <div class="shot nuta-s"><div class="nm">Page d'un repas</div><div id="s8"></div>
+      <p>Toucher un aliment change la quantité ou le repas, pas le jour (20). Le mettre en favori demande de le glisser, ce que rien ne dit (10). La note ne parle que de supprimer, et c'est sans confirmation (14).</p></div>
+    <div class="shot nuta-s"><div class="nm">« Mes repas »</div><div id="s9"></div>
+      <p>Un repas enregistré s'ajoute ou se supprime, rien d'autre : ni renommer, ni modifier (15). « Supprimer ce repas » agit tout de suite, sans confirmation (14).</p></div>
+    <div class="shot nuta-s"><div class="nm">Scanner (caméra)</div><div id="s10"></div>
+      <p>Aucune capture : le simulateur de la CI n'a pas de caméra. D'après l'audit (E11 à E13) : « Vise un code-barres ou ton assiette », déclencheur, flash à trois états, photo déjà prise, messages d'erreur.</p></div>
+    <div class="shot nuta-s"><div class="nm">« Récapitulatif » du scan</div><div id="s11"></div>
+      <p>Aucune capture. D'après l'audit (E14) : chaque aliment avec son étiquette (« Vérifié », « Estimation »), les quantités, « À confirmer », le total en fourchette, « Ajouter au journal ».</p></div>
+  </div>
+
+  <div class="nuta-rt"><b>C</b>Régler ses besoins, et ce qui manque en image<small>Le même formulaire à trois endroits. Puis les écrans qui n'ont aucune capture.</small></div>
+  <div class="pl-an">
+    <div class="shot nuta-s"><div class="nm">« Mes paramètres »</div><div id="s12"></div>
+      <p>Une feuille de 8 blocs à la suite (13). La pesée se saisit ici, dans « Toi », loin de la courbe de l'Historique (12). C'est le formulaire de la fiche « Nutrition », sous un autre titre (4).</p></div>
+    <div class="shot nuta-s"><div class="nm">Premier lancement</div><div id="s13"></div>
+      <p>La page « Nutrition » du premier lancement : encore le même formulaire (4), avec les réponses déjà connues en résumé (« Déjà choisi : tu peux le changer. »).</p></div>
+    <div class="shot nuta-s"><div class="nm">Premier lancement, suite</div><div id="s14"></div>
+      <p>Corps et niveau d'activité, qui servent au calcul des besoins. Le poids saisi dans ce formulaire alimente la courbe de poids (12).</p></div>
+    <div class="nuta-miss">
+      <h4>Sans capture : 15 des 24 écrans et feuilles de l'audit</h4>
+      <p>Les captures viennent d'un seul compte de test, avec Premium et un objectif déjà réglé, sur un simulateur sans caméra. Aucune image n'est mise à leur place : ces écrans sont décrits par l'audit (numéros E) et les directions les dessineront d'après lui.</p>
+      <ul>
+        <li><b>Scanner</b> : caméra et flash (E11), accès à la caméra (E12), attente et messages (E13)<span>Écran de test prévu dans l'app : <code>scan-frame</code></span></li>
+        <li><b>« Récapitulatif » du scan</b> (E14)<span>Écrans de test prévus : <code>scan-recap</code>, <code>scan-recap-photo</code></span></li>
+        <li><b>« Idées »</b> (E4)<span>Écran de test prévu : <code>nutrition-ideas</code></span></li>
+        <li><b>« Ton objectif de poids »</b> (E21)<span>Écran de test prévu : <code>nutrition-plan</code></span></li>
+        <li><b>« Aliment perso »</b> : création (E10), « Mes aliments » (E16), correction (E17)<span>Le constat 16 ne se voit donc sur aucune image.</span></li>
+        <li><b>Feuille d'un repas enregistré</b> (E9) et <b>modifier un aliment noté</b> (E15)<span>C'est dans E15 qu'on change la quantité et le repas.</span></li>
+        <li><b>Fiche « Nutrition »</b> de « Mes informations » (E19) et <b>éditeur d'une cible</b> (E20)<span>Et le bas de « Mes paramètres » : « Tes besoins par jour ».</span></li>
+        <li><b>Offre Premium et verrous</b> (E23)<span>« L'historique détaillé est dans Premium », nutriments verrouillés, compteur d'analyses.</span></li>
+        <li><b>Espace Nutrition, côté Créer</b> (E24)<span>Le second tableau de bord du constat 23.</span></li>
+        <li><b>Deux états jamais capturés</b><span>Un compte neuf (« À remplir », « Calcule tes besoins du jour ») et un compte sans Premium.</span></li>
+      </ul>
+      <p class="nuta-end">Avec capture : l'écran principal (E1), la page d'un repas (E2), « Nutriments » (E3), « Historique » (E5), « Mes repas » (E6), la recherche (E7), la feuille de quantité (E8), « Mes paramètres » (E18) ; et, hors de la mini-app, la carte de Mon quotidien et le premier lancement. « Rappels » (E22) a aussi une capture au Build 454, non montrée ici : aucun constat ne la concerne. Un passage de la CI avec les écrans de test donnerait les images qui manquent.</p>
+    </div>
+  </div>
+
+  <!-- ===== 3. Les problèmes, par famille (section 8 de l'audit : 23 constats, chacun une seule fois) ===== -->
+  <h2 class="sec">Les problèmes, par famille</h2>
+  <p class="secp">23 constats de l'audit, rangés en 6 familles, les plus gênants en premier. Ce ne sont pas des bogues : tout fonctionne, mais l'information est mal rangée. Pastille rouge : le constat se voit sur une capture, au même numéro. Pastille grise : aucune capture ne le montre.</p>
+  <div class="pl-fam">
+    <div class="pl-prob"><h4><i data-i="layers"></i>Hiérarchie de l'écran principal</h4><ol>
+      <li><b class="k">1</b><span>L'anneau ne montre que le reste (« 1 672 kcal restantes »). Les calories mangées et l'objectif ne sont pas sur l'écran principal : « mangé / objectif » se lit dans « Nutriments » ou dans la vue « Repas » de Mon quotidien.</span></li>
+      <li><b class="k">6</b><span>« Historique », « Mes repas » et « Mes paramètres » sont sous le premier écran. La page « Idées » n'a qu'une entrée, et elle dépend de quatre conditions : aujourd'hui, objectif connu, un aliment noté, plus de 150 kcal restantes.</span></li>
+      <li><b class="k">5</b><span>Deux blocs n'ont pas de titre : la ligne « Tous les nutriments » et la carte « Historique », « Mes repas », « Mes aliments ». « Repas » et « Calories de la semaine » en ont un.</span></li>
+      <li><b class="k">11</b><span>La série de suivi et le prochain repas sont calculés, mais la mini-app ne les montre pas : ils sont dans les widgets, dans Mon quotidien ou dans l'espace.</span></li></ol></div>
+    <div class="pl-prob"><h4><i data-i="hand"></i>Ajouter un aliment : gestes à simplifier</h4><ol>
+      <li><b class="k">2</b><span>Le scan par photo n'a ni entrée ni libellé à lui. Le bouton s'appelle « Scanner » avec une icône de code-barres, l'écran « Code-barres ou aliments », et ailleurs on lit « Scanner un code-barres ».</span></li>
+      <li><b class="k">3</b><span>Annuler un scan demande deux fermetures. Le scanner est une feuille posée sur la recherche : la croix renvoie à la recherche, qu'il faut fermer à son tour.</span></li>
+      <li><b class="k">10</b><span>Les favoris sont cachés. On met en favori seulement en glissant un aliment déjà noté ; le libellé « Favori » ne change pas selon l'état ; la mini-app n'a pas de liste des favoris ; dans la recherche, rien ne distingue un favori.</span></li>
+      <li><b class="k">20</b><span>Un aliment noté ne peut pas changer de jour : la feuille ne propose que la quantité et le repas.</span></li></ol></div>
+    <div class="pl-prob"><h4><i data-i="copy"></i>La même chose à plusieurs endroits</h4><ol>
+      <li><b class="k">4</b><span>Un compte neuf voit quatre accès au même réglage : deux cartes « À remplir », la carte « Calcule tes besoins du jour » et « Mes paramètres ». Ils ouvrent deux feuilles différentes (« Nutrition », « Mes paramètres ») pour le même formulaire.</span></li>
+      <li><b class="k">7</b><span>La semaine est montrée trois fois, avec deux définitions : la semaine civile sur l'écran principal, les 7 derniers jours dans l'Historique et dans Mon quotidien. Les moyennes peuvent différer.</span></li>
+      <li><b class="k nuta-g">22</b><span>L'Historique ouvre une deuxième copie de l'écran principal : « Jour par jour » empile la même vue sur un autre jour, avec son propre sélecteur de semaine.</span></li>
+      <li><b class="k nuta-g">23</b><span>Un second tableau de bord Nutrition existe côté Créer, avec d'autres libellés (« Scanner un code-barres », « Objectifs du jour ») et la seule liste des favoris.</span></li></ol></div>
+    <div class="pl-prob"><h4><i data-i="sliders"></i>Règles qui changent d'un endroit à l'autre</h4><ol>
+      <li><b class="k">8</b><span>Deux règles pour « objectif atteint » sur le même écran. La carte conseil : entre 50 kcal de trop et 150 kcal de reste. La semaine et l'Historique : à 10 % près de l'objectif.</span></li>
+      <li><b class="k">14</b><span>Les suppressions ne suivent pas la même règle. Un aliment perso demande une confirmation ; un repas enregistré et un aliment noté sont supprimés tout de suite, sans retour possible.</span></li>
+      <li><b class="k">16</b><span>Corriger un aliment perso offre moins que le créer : 4 valeurs à la correction, jusqu'à 13 à la création avec Premium.</span></li>
+      <li><b class="k">19</b><span>L'anneau des calories part de trois couleurs dans le code : FF9500 (mini-app), F08A24 (Mon quotidien), FF6B57 (espace). Mesuré sur les captures : #D07A00 dans la mini-app, #C36F25 dans Mon quotidien.</span></li></ol></div>
+    <div class="pl-prob"><h4><i data-i="target"></i>Objectif et poids dans le temps</h4><ol>
+      <li><b class="k">12</b><span>Le poids est coupé en deux : la courbe est dans l'Historique, la pesée se saisit dans « Mes paramètres », sous « Toi », et l'« Ajustement proposé » n'apparaît que dans « Mes paramètres ». L'écran principal ne dit rien de l'objectif de poids.</span></li>
+      <li><b class="k">21</b><span>L'objectif n'est pas daté : l'Historique compare tous les jours passés à l'objectif d'aujourd'hui.</span></li>
+      <li><b class="k">9</b><span>Le sélecteur calcule « jour dans l'objectif » mais ne le montre pas : un jour réussi et un jour simplement noté ont le même point plein.</span></li>
+      <li><b class="k">18</b><span>Sans Premium, trois segments de l'Historique sur cinq (« 7 jours », « 30 jours », « Période ») mènent à une carte verrouillée, sans signe avant de toucher.</span></li></ol></div>
+    <div class="pl-prob"><h4><i data-i="type"></i>Pages longues, libellés coupés</h4><ol>
+      <li><b class="k">13</b><span>« Mes paramètres » est une très longue feuille : jusqu'à 8 blocs à la suite (rappel, objectif, poids cible, grossesse, corps, activité, plan, besoins avec 34 cibles).</span></li>
+      <li><b class="k">17</b><span>Des libellés sont coupés : « Yogourt grec n… » (titre de la feuille de quantité), « Aujourd'… » (segment de l'Historique), « Des repas enregistrés, à reprendre d'… » (détail de « Mes repas »).</span></li>
+      <li><b class="k">15</b><span>Un repas enregistré ne peut être ni renommé ni modifié : seulement ajouté à la journée ou supprimé.</span></li></ol></div>
+  </div>
+
+  <!-- ===== 4. Les fonctions existantes (section 4 de l'audit) et les frontières gratuit / Premium (section 7) ===== -->
+  <h2 class="sec">Ce que Nutrition fait aujourd'hui (rien ne sera retiré)</h2>
+  <p class="secp"><span id="nuta-count">64 fonctions relevées dans le code : 47 gratuites, 13 gratuites avec une part Premium, 4 Premium.</span> Les numéros F1 à F64 sont ceux de l'audit ; chaque planche de direction dira où se trouve chacune. Les frontières gratuit / Premium ne bougent pas.</p>
+  <div class="nuta-h3">Les frontières gratuit / Premium</div>
+  <div class="nuta-lim">
+    <div><h5>Nutriments</h5><p class="g"><b>Gratuit</b><span>Calories, protéines, glucides, lipides</span></p><p class="p"><b>Premium</b><span>Les 34 autres (fibres, sucres, sodium, minéraux, vitamines)</span></p></div>
+    <div><h5>Historique</h5><p class="g"><b>Gratuit</b><span>« Aujourd'hui », « Hier », et la semaine de l'écran principal</span></p><p class="p"><b>Premium</b><span>« 7 jours », « 30 jours », « Période »</span></p></div>
+    <div><h5>Photo de plat</h5><p class="g"><b>Gratuit</b><span>10 analyses au total ; une analyse ratée ne compte pas</span></p><p class="p"><b>Premium</b><span>Les analyses suivantes</span></p></div>
+    <div><h5>Codes-barres et recherche</h5><p class="g"><b>Gratuit</b><span>Toujours, sans limite</span></p><p class="p"><b>Premium</b><span>—</span></p></div>
+    <div><h5>Cibles de « Tes besoins par jour »</h5><p class="g"><b>Gratuit</b><span>4 cibles : calories et trois macros</span></p><p class="p"><b>Premium</b><span>Les 30 autres</span></p></div>
+    <div><h5>« Idées »</h5><p class="g"><b>Gratuit</b><span>Un repas qui tient dans le reste, « Riches en protéines »</span></p><p class="p"><b>Premium</b><span>« Riches en fibres »</span></p></div>
+    <div><h5>Widgets</h5><p class="g"><b>Gratuit</b><span>« Calories restantes », « Macros »</span></p><p class="p"><b>Premium</b><span>Les 6 autres, dont « Ajout rapide »</span></p></div>
+    <div class="nuta-rule"><h5>La règle commune</h5><p style="display:block">Ce que la personne note est toujours gardé, jamais effacé ni caché pour de bon : Premium ajoute de l'affichage.</p></div>
+  </div>
+  <div id="fn"></div>
+  <div id="nuta-diff"></div>
+
+  <!-- ===== 5. Ce que la mission cite : ce qui existe, ce qui n'existe pas (section 9 de l'audit) ===== -->
+  <h2 class="sec">Ce que la mission cite : ce qui existe, ce qui n'existe pas</h2>
+  <p class="secp">La liste de la mission pour Nutrition, point par point. Huit points existent déjà. Deux n'existent pas : toute planche qui les montre devra les marquer « Nouveau », dans l'écran et dans la légende.</p>
+  <div class="nuta-2">
+    <div class="pl-box"><table class="nuta-m"><tr><th>La mission demande de présenter</th><th>Aujourd'hui</th><th>Où, dans l'app</th></tr>
+      <tr><td>Calories consommées et objectif quotidien</td><td><span class="nuta-st e">Existe</span></td><td>Le reste : anneau (F3). « Mangé / objectif » : page « Nutriments » (F38) seulement, voir le constat 1.</td></tr>
+      <tr><td>Protéines, glucides et lipides</td><td><span class="nuta-st e">Existe</span></td><td>Trois jauges à côté de l'anneau (F4), totaux d'un repas (F28), « Nutriments » (F38).</td></tr>
+      <tr><td>Suivi des repas</td><td><span class="nuta-st e">Existe</span></td><td>Quatre repas fixes (F27), page d'un repas (F28), reprendre et enregistrer un repas (F32 à F35).</td></tr>
+      <tr><td>Ajout d'aliments</td><td><span class="nuta-st e">Existe</span></td><td>« Rechercher » ou « Ajouter un aliment » (F7), feuille de quantité (F11), « + » d'un repas (F12), aliment perso (F13).</td></tr>
+      <tr><td>Scanner de repas par photo</td><td><span class="nuta-st e">Existe</span></td><td>Photo ou image déjà prise (F16, F17), récapitulatif et « À confirmer » (F21, F22). 10 analyses gratuites.</td></tr>
+      <tr><td>Scanner de codes-barres</td><td><span class="nuta-st e">Existe</span></td><td>Lecture automatique (F15), sorties si le produit manque (F20). Gratuit, sans limite.</td></tr>
+      <tr><td>Recherche alimentaire</td><td><span class="nuta-st e">Existe</span></td><td>Hors ligne (F8), filtres par famille (F9), produits emballés sur demande (F10).</td></tr>
+      <tr><td>Historique nutritionnel</td><td><span class="nuta-st e">Existe</span></td><td>« Calories de la semaine » (F41, gratuit) ; page « Historique » (F42 à F47), surtout Premium.</td></tr>
+      <tr><td>Évolution des objectifs</td><td><span class="nuta-st n">N'existe pas</span></td><td>L'objectif n'a qu'une valeur, celle d'aujourd'hui. Voir à droite.</td></tr>
+      <tr><td>Hydratation</td><td><span class="nuta-st n">N'existe pas</span></td><td>Retirée le 15 octobre 2026. Voir à droite.</td></tr>
+      <tr><td>« Autres fonctionnalités existantes »</td><td><span class="nuta-st e">Existe</span></td><td>Nutriments (F37, F38), idées (F39, F40), objectif de poids (F51, F55, F56), besoins (F58), widgets et rappels (F60 à F62).</td></tr>
+    </table></div>
+    <div class="nuta-col"><div class="pl-prob no"><h4><i data-i="sparkles"></i>N'existe pas : à dessiner comme « Nouveau »</h4><ol>
+      <li><b class="k">N</b><span><b>Hydratation.</b> La mini-app Eau a été retirée le 15 octobre 2026. Aucun écran ne permet de noter l'eau. Les anciennes données restent dans le fichier ; un ancien widget Eau ouvre l'Accueil.</span></li>
+      <li><b class="k">N</b><span><b>Évolution des objectifs.</b> L'objectif calorique n'a pas d'historique : une seule valeur, celle d'aujourd'hui. Ce qui s'en approche : la courbe de poids avec la ligne « Cible » (F46), l'« Ajustement proposé » (F56), le récapitulatif du plan (F55).</span></li>
+      <li><b class="k">N</b><span><b>Une taille « Medium » dans Mon quotidien.</b> Le code n'a que la demi-largeur et la pleine largeur ; Nutrition est en pleine largeur par défaut. À trancher avant de dessiner la carte.</span></li>
+      <li><b class="k">N</b><span><b>Hors mission, pour mémoire : « Faire mes repas ».</b> Une demande ouverte (Premium), pas développée. À ne pas dessiner comme si elle existait.</span></li></ol></div>
+      <div class="pl-box nuta-att"><h4>Ce que la mission attend, face à l'existant</h4><ul>
+        <li><b>« Comprendre rapidement ce qu'il a consommé, ce qu'il lui reste à consommer »</b><span>Le reste se lit en ouvrant. Le mangé et l'objectif, non (constat 1).</span></li>
+        <li><b>« Comment il progresse vers son objectif »</b><span>La semaine est sous le premier écran (6), un jour réussi n'est pas marqué (9), l'objectif de poids n'est pas sur l'écran principal (12).</span></li>
+        <li><b>« Une utilisation rapide pour enregistrer un repas »</b><span>Un bouton en ouvrant et un « + » par repas. Mais la photo n'a pas d'entrée à elle (2), annuler un scan prend deux fermetures (3), les favoris sont cachés (10).</span></li>
+        <li><b>« Une analyse plus détaillée lorsque l'utilisateur le souhaite »</b><span>« Nutriments » et « Historique » existent. L'Historique est sous le premier écran (6) et surtout Premium, sans signe avant de toucher (18).</span></li></ul></div></div>
+  </div>
+
+  <!-- ===== 6. Ce qui marche et qu'on garde (sections 5, 7 et 11 de l'audit) ===== -->
+  <h2 class="sec">Ce qui marche et qu'on garde</h2>
+  <p class="secp">Ce que toute direction doit conserver, quel que soit le rangement choisi.</p>
+  <div class="pl-fam" style="margin-bottom:6px">
+    <div class="pl-prob ok"><h4><i data-i="checkc"></i>Bonnes bases</h4><ol>
+      <li><b class="k">✓</b><span>Le reste du jour, dit avec les mêmes mots dans la mini-app et sur la carte de Mon quotidien : « kcal restantes », « kcal en trop », « kcal mangées ».</span></li>
+      <li><b class="k">✓</b><span>Plusieurs façons rapides d'ajouter : scanner, recherche hors ligne, repas enregistrés, « Reprendre un déjeuner précédent ». Le repas est proposé selon l'heure.</span></li>
+      <li><b class="k">✓</b><span>La feuille de quantité : portions rapides, « Après ajout, il te restera … kcal », l'apport lu avant d'enregistrer.</span></li>
+      <li><b class="k">✓</b><span>Une valeur inconnue ne devient jamais un zéro : « ≥ », « ≈ », « ? », « partiel », « Non disponible », « — ».</span></li>
+      <li><b class="k">✓</b><span>Le sélecteur de semaine commun aux mini-apps, sans jour futur, et le retour automatique à aujourd'hui.</span></li></ol></div>
+    <div class="pl-prob ok"><h4><i data-i="checkc"></i>Bons choix à ne pas perdre</h4><ol>
+      <li><b class="k">✓</b><span>L'analyse d'une photo se fait sur l'iPhone ; la photo n'est ni gardée ni envoyée. L'explication passe avant la demande de caméra, et un refus est respecté.</span></li>
+      <li><b class="k">✓</b><span>Une estimation se montre comme une estimation : étiquette « Estimation », fourchette « ≈ 420–560 kcal », « peu sûr ». Rien n'est ajouté sans accord (« À confirmer »).</span></li>
+      <li><b class="k">✓</b><span>Codes-barres et recherche : gratuits et sans limite. Open Food Facts n'est interrogé que sur demande, jamais pendant la frappe.</span></li>
+      <li><b class="k">✓</b><span>Besoins calculés avec des bornes de sécurité ; un objectif de poids refusé ne montre aucun chiffre. Plan, ajustement et nouveau calcul ne s'appliquent jamais sans un geste.</span></li>
+      <li><b class="k">✓</b><span>Les sources restent visibles là où leurs données s'affichent : Open Food Facts (ODbL), Fichier canadien sur les éléments nutritifs, USDA, « pas un avis médical ».</span></li></ol></div>
+    <div class="pl-prob ok"><h4><i data-i="checkc"></i>Contraintes à tenir</h4><ol>
+      <li><b class="k">✓</b><span>Les 64 fonctions restent joignables. Les plus faciles à oublier : F2, F14, F20, F22, F23, F25, F31, F32, F36, F56, F57, F63, F64.</span></li>
+      <li><b class="k">✓</b><span>Aucun calcul ne change. Quatre repas fixes, pas de repas libre. Le jour choisi pilote tout l'écran.</span></li>
+      <li><b class="k">✓</b><span>Un seul sélecteur de dates, en tête ; puis l'essentiel, le complémentaire, et les réglages en dernier (décision du 22 octobre 2026).</span></li>
+      <li><b class="k">✓</b><span>Sans caméra, « Scanner » disparaît et « Ajouter un aliment » devient le bouton principal. Le flash reste réglable à côté du déclencheur, avec ses trois états.</span></li>
+      <li><b class="k">✓</b><span>Anneau orange, protéines rouge, glucides jaune, lipides bleu, depuis une seule source. L'objectif est commun à Fitness et à Nutrition.</span></li>
+      <li><b class="k">✓</b><span>Les textes sont traduits en 6 langues : un libellé nouveau ou plus long doit tenir aussi en allemand et en japonais.</span></li></ol></div>
+  </div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="nutrition.js"></script>   <!-- le JS commun du sujet : il définit FONCTIONS (F1 à F64 de l'audit), la seule liste des fonctions du sujet -->
+<script>
+(function () {
+  // ---------- les captures : chemin, pastilles [x %, y %, numéro du constat de l'audit] ----------
+  const CAP = PL.pub + 'captures-ci-454/', PLUS = PL.pub + PL.dossier + '/captures/';
+  const put = (id, html) => { document.getElementById(id).innerHTML = html; };
+  // rangée A
+  put('s1', PL.shot(CAP + 'profile-home-daily.png', [[50, 26.1, 7], [28, 30, 19], [62, 43.9, 2], [77, 48.4, 11]], { alt: 'Carte Nutrition de Mon quotidien' }));
+  put('s2', PL.shot(CAP + 'mini-app-nutrition.png', [[5.5, 25.8, 9], [33.5, 31.2, 19], [10, 43.5, 1], [50, 89.2, 6]], { alt: 'Écran principal de Nutrition, haut' }));   // fichier identique : mini-app-daily-opens-nutrition.png
+  put('s3', PL.shot(PLUS + 'app-nutrition-settings-light.jpg', [[93, 12.2, 5], [86, 27.3, 6], [59, 36.6, 7], [55, 55.1, 8], [93, 56.6, 5], [79.5, 70.3, 17]], { alt: 'Écran principal de Nutrition, bas', name: 'Écran principal, bas (Build\u00A0454)' }));
+  put('s4', PL.shot(CAP + 'mini-app-nutrition-nutrients.png', [[53, 21.2, 1]], { alt: 'Page Nutriments' }));
+  put('s5', PL.shot(CAP + 'mini-app-nutrition-history.png', [[0.5, 21.6, 17], [76, 18.9, 18], [92, 51, 8], [50, 66.2, 21], [91, 85, 7]], { alt: 'Page Historique, 7 jours' }));
+  // rangée B
+  put('s6', PL.shot(CAP + 'profile-scan-fallback.png', [[27, 8.2, 3], [56, 29.8, 16], [40, 62, 10]], { alt: 'Recherche « Ajouter un aliment »' }));
+  put('s7', PL.shot(CAP + 'mini-app-nutrition-quantity.png', [[47, 16.3, 17]], { alt: 'Feuille de quantité' }));
+  put('s8', PL.shot(CAP + 'mini-app-nutrition-meal.png', [[57, 45, 20], [57, 52.5, 10], [88, 79.5, 14]], { alt: 'Page Déjeuner' }));
+  put('s9', PL.shot(CAP + 'mini-app-nutrition-saved.png', [[50, 21.6, 15], [62, 56.65, 14]], { alt: 'Page Mes repas' }));
+  put('s10', PL.shot(CAP + 'scan-frame.png', [], { name: 'Scanner\u00A0: caméra, flash, messages' }));   // n'existe pas : cadre en pointillés
+  put('s11', PL.shot(CAP + 'scan-recap-photo.png', [], { name: 'Récapitulatif du scan' }));              // n'existe pas : cadre en pointillés
+  // rangée C
+  put('s12', PL.shot(CAP + 'mini-app-nutrition-settings.png', [[27, 11.5, 4], [91, 81.8, 12], [90, 96, 13]], { alt: 'Feuille Mes paramètres' }));
+  put('s13', PL.shot(CAP + 'profile-nutrition-goal-known.png', [[90, 32.2, 4]], { alt: 'Premier lancement, page Nutrition' }));
+  put('s14', PL.shot(CAP + 'profile-nutrition-needs.png', [[92, 16.6, 12]], { alt: 'Premier lancement, corps et niveau d\'activité' }));
+
+  // ---------- le ruban : [bloc, hauteur en points mesurée sur les captures, 'key' = visible en ouvrant | 'hot' = important et tard | ''] ----------
+  PL.ribbon('rib', [['Sélecteur de semaine', 132, 'key'], ['Anneau et trois macros', 192, 'key'], ['Scanner, Rechercher', 73, 'key'], ['Repas (4 lignes)', 269, 'key'],
+    ['Tous les nutriments', 86, ''], ['Carte conseil', 123, ''], ['Calories de la semaine', 181, 'hot'], ['Historique, Mes repas, Mes aliments', 142, 'hot'], ['Note', 57, ''], ['Mes paramètres', 77, '']],
+    { k: .42, screen: 670 });
+
+  // ---------- les fonctions existantes : la liste FONCTIONS de nutrition.js (section 4 de l'audit), jamais recopiée ici ----------
+  // Seul ajout de cette planche : pour les 17 fonctions qui ont une part Premium, la note dit où passe la frontière (colonne « Accès » de l'audit).
+  const NUTA_PREMIUM = {
+    F11: 'Fibres et autres nutriments : Premium', F13: '9 valeurs de plus avec Premium (fibres, sucres, sodium…)', F16: '10 analyses gratuites au total, puis Premium',
+    F17: 'Même quota que la photo de plat : 10 analyses gratuites', F29: 'Fibres et autres nutriments : Premium', F37: 'Le résumé « Fibres · sucres · sodium » est Premium',
+    F38: '4 nutriments gratuits, 34 Premium', F40: '« Riches en fibres » est Premium', F42: '« Aujourd\'hui » et « Hier » gratuits ; les trois autres : Premium',
+    F43: 'Bilan d\'un jour gratuit ; moyennes : Premium', F44: 'Premium : il faut plus d\'un jour', F45: 'Sur un jour : gratuit ; sur une période : Premium',
+    F46: 'Premium en pratique : il faut 2 pesées dans la période', F47: 'Premium : il faut plus d\'un jour', F58: '4 cibles gratuites, 30 Premium',
+    F60: '« Calories restantes » et « Macros » gratuits ; 6 autres Premium', F61: 'Premium : une touche ajoute une portion d\'un favori',
+  };
+  if (typeof FONCTIONS === 'undefined' || !Array.isArray(FONCTIONS) || !FONCTIONS.length) {
+    document.getElementById('fn').innerHTML = '<div class="nuta-warn">nutrition.js est introuvable : la liste FONCTIONS (F1 à F64 de l\'audit) ne peut pas être affichée.</div>';
+  } else {
+    const liste = FONCTIONS.map(([k, t, a = 'G', n]) => [k, t, a, a === 'G' ? n : (NUTA_PREMIUM[k] || n)]);
+    PL.fnTable('fn', liste, { cols: 3 });
+    // le décompte vient de la liste affichée : phrase d'introduction et résumé au bas de la 3e colonne
+    const part = liste.filter((f) => f[2] !== 'G'), nP = part.filter((f) => f[2] === 'P').length, nGP = part.length - nP, nG = liste.length - part.length;
+    document.getElementById('nuta-count').textContent = `${liste.length} fonctions relevées dans le code : ${nG} gratuites, ${nGP} gratuites avec une part Premium, ${nP} Premium.`;
+    const last = document.querySelector('#fn .pl-box:last-child');
+    if (last) last.insertAdjacentHTML('beforeend', `<div class="nuta-sum"><div class="g"><b>${nG}</b><span>gratuites</span></div><div class="gp"><b>${nGP}</b><span>gratuites avec une part Premium</span></div><div class="p"><b>${nP}</b><span>Premium</span></div></div>
+      <p class="nuta-sumn">Les ${part.length} fonctions qui ont une part Premium : ${part.map((f) => f[0]).join(', ')}.</p>`);
+    const inconnues = Object.keys(NUTA_PREMIUM).filter((k) => !part.some((f) => f[0] === k)), sansNote = part.filter((f) => !NUTA_PREMIUM[f[0]]).map((f) => f[0]);
+    if (inconnues.length || sansNote.length) document.getElementById('nuta-diff').innerHTML = `<div class="nuta-warn">Écart entre nutrition.js et les notes Premium de cette planche : ${[...inconnues, ...sansNote].join(', ')}.</div>`;
+  }
+
+  // ---------- typographie française : espaces insécables avec les guillemets et la ponctuation haute ----------
+  const tw = document.createTreeWalker(document.querySelector('main'), NodeFilter.SHOW_TEXT);
+  for (let n = tw.nextNode(); n; n = tw.nextNode()) n.nodeValue = n.nodeValue.replace(/« /g, '«\u00A0').replace(/ »/g, '\u00A0»').replace(/ ([:;?!%])/g, '\u00A0$1').replace(/(\d) (\d{3})\b/g, '$1\u00A0$2').replace(/(\d) (kcal|kg|mg|g|s)\b/g, '$1\u00A0$2');
+
+  PL.init();   // toujours en dernier
+
+  // ---------- contrôle propre à la planche (?check) : il attend les images, puis cherche un texte coupé hors des captures et deux pastilles qui se touchent ----------
+  if (new URLSearchParams(location.search).has('check')) {
+    const settle = (im) => (im.complete ? Promise.resolve() : new Promise((r) => { im.addEventListener('load', r); im.addEventListener('error', r); }));
+    Promise.all([document.fonts.ready, ...[...document.querySelectorAll('.pl-shot img')].map(settle)]).then(() => {
+      let n = 0, touch = 0;
+      document.querySelectorAll('main .nm, main .rb0 > div, main td, main th, main h4, main h5, main li, main p, .nuta-rt, .nuta-sum span').forEach((el) => {
+        if (el.scrollWidth > el.clientWidth + 1 || el.scrollHeight > el.clientHeight + 2) { el.style.outline = '2px solid red'; n++; } });
+      document.querySelectorAll('.pl-shot').forEach((s) => { const r = [...s.querySelectorAll('b.k')].map((k) => k.getBoundingClientRect());
+        r.forEach((a, i) => r.forEach((c, j) => { if (j > i && Math.hypot(a.x - c.x, a.y - c.y) < 27) touch++; })); });
+      const vraies = [...document.querySelectorAll('.pl-shot img')].filter((im) => im.naturalWidth > 0).length, vides = document.querySelectorAll('.pl-shot').length - vraies;
+      const nFn = document.querySelectorAll('#fn tr').length - document.querySelectorAll('#fn table').length;
+      const msg = [n ? `${n} texte(s) coupé(s) ou débordant(s), entouré(s) de rouge` : '', touch ? `${touch} paire(s) de pastilles qui se touchent` : ''].filter(Boolean);
+      document.querySelector('main').insertAdjacentHTML('beforeend', `<div class="nuta-warn${msg.length ? '' : ' ok'}">Contrôle propre à la planche d'analyse : ${vraies} captures réelles, ${vides} cases « Capture à venir » (attendues : scanner et récapitulatif du scan), ${document.querySelectorAll('.pl-shot img ~ b.k').length} pastilles, ${nFn} fonctions. ${msg.length ? msg.join(' ; ') : 'Aucun texte coupé, aucune pastille sur une autre'}.</div>`);
+    });
+  }
+})();
+</script>
+</body>
+</html>
