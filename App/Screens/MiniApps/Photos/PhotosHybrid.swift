@@ -263,12 +263,14 @@ struct QuoteTextsImportView: View {
     @State private var picksFile = false
     @State private var fileName: String?
     @State private var fileFailed = false
+    /// The texts found, worked out when the source or the split changes (not at every redraw: a file can be long).
+    @State private var parsedTexts: TextImport.Result?
 
     private var strong: Color { style.cristal.strong(MiniApp.photos.colorHex) }
     private var startDay: Date { startsToday ? DateMath.startOfDay(Date()) : DateMath.startOfDay(chosenDay) }
 
     var body: some View {
-        let parsed = TextImport.parse(raw, by: split)
+        let parsed = parsedTexts ?? TextImport.parse("", by: split)
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
@@ -319,6 +321,8 @@ struct QuoteTextsImportView: View {
                 guard case let .success(url) = result else { return }
                 read(url)
             }
+            .onChange(of: raw, initial: true) { _, text in parsedTexts = TextImport.parse(text, by: split) }
+            .onChange(of: split) { _, by in parsedTexts = TextImport.parse(raw, by: by) }
         }
     }
 
