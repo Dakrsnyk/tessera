@@ -17,7 +17,10 @@ concurrency:
 
 jobs:
   build:
-    runs-on: macos-15
+    # [xcode27] builds on GitHub's Xcode 27 image (iOS 27 SDK, which Apple requires for uploads from April 2027;
+    # the image is a public preview since 2026-07). Added to another tag: « [check] [xcode27] … ». Without it,
+    # nothing changes: macOS 15 and its newest Xcode 26.
+    runs-on: ${{ contains(github.event.head_commit.message, '[xcode27]') && 'xcode-27' || 'macos-15' }}
     # 140 since the 2026-11-17: the tests of a [daily] run take close to an hour (run 445 was cut at its 55 minutes
     # just after « TEST SUCCEEDED », while it exported the attachments).
     timeout-minutes: 140
@@ -90,12 +93,13 @@ jobs:
       - name: Select Xcode
         run: |
           # The image links plain version names (Xcode_26.0.app…) to betas and release candidates: links are
-          # skipped, and so is any Xcode whose license says beta.
+          # skipped, and so is any Xcode whose license says beta. Sorted by the version each Xcode declares, not by
+          # its file name (the Xcode 27 image has « Xcode_27.app » next to « Xcode_27.2.app »).
           XCODE=$(for app in /Applications/Xcode_*.app; do
               [ -d "$app" ] && [ ! -L "$app" ] || continue
               /usr/libexec/PlistBuddy -c "Print :licenseType" "$app/Contents/Resources/LicenseInfo.plist" 2>/dev/null | grep -qi beta && continue
-              echo "$app"
-            done | grep -viE "beta|release_candidate" | sort -V | tail -1)
+              echo "$(/usr/libexec/PlistBuddy -c "Print :CFBundleShortVersionString" "$app/Contents/version.plist" 2>/dev/null || echo 0) $app"
+            done | grep -viE "beta|release_candidate" | sort -V | tail -1 | cut -d' ' -f2-)
           [ -n "$XCODE" ] || { echo "::error::Aucun Xcode stable dans /Applications"; exit 1; }
           echo "Xcode: $XCODE"
           sudo xcode-select -s "$XCODE/Contents/Developer"
