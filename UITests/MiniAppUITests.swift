@@ -478,7 +478,9 @@ final class MiniAppUITests: XCTestCase {
         launch(["-screenshotScreen", "app-car"])
         let hero = app.otherElements["car-hero"]
         XCTAssertTrue(hero.waitForExistence(timeout: 12), "Mini-app Auto absente")
-        XCTAssertTrue(element(containing: "Autonomie estimée").exists, "Avec la taille du réservoir, l'autonomie s'affiche")
+        // The range is now the headline of the page: `MiniHero` writes its label in capitals, so the case is ignored.
+        let range = app.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS[c] %@", "Autonomie estimée")).firstMatch
+        XCTAssertTrue(range.exists, "Avec la taille du réservoir, l'autonomie s'affiche")
         snapshot("car")
         for (identifier, title) in [("car-fuel", "Carburant"), ("car-mileage", "Kilométrage")] {
             tap(app.buttons[identifier], title)
