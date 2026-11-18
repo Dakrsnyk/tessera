@@ -1,0 +1,1923 @@
+{
+ "note": "Trois brouillons de scénario v2 (texte de voix et découpage), écrits le 2026-11-18 par trois rédacteurs indépendants. NON fusionnés, NON relus : la synthèse et la vérification restent à faire.",
+ "scenarios": [
+  {
+   "angle": "Sobriété Apple, peu de mots, films de 35 à 45 s",
+   "script": {
+    "films": [
+     {
+      "id": "main",
+      "durationSec": 44.73,
+      "sequences": [
+       {
+        "name": "1. Accroche validée (inchangée)",
+        "startSec": 0,
+        "endSec": 7.43,
+        "shots": [
+         {
+          "capture": "hook (accroche validée, inchangée)",
+          "shows": "Accroche d'origine, image pour image et son pour son : moments du quotidien, essaim de dix apps, impact, ligne Saphir. Aucune retouche.",
+          "durSec": 7.43,
+          "onScreenText": "Your life isn't one thing. / Why manage it in ten different apps?"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Your life isn't one thing.",
+          "startSec": 0.56,
+          "estDurSec": 1.37
+         },
+         {
+          "text": "Why manage it in ten different apps?",
+          "startSec": 2.95,
+          "estDurSec": 1.94
+         }
+        ]
+       },
+       {
+        "name": "2. Meet Ardane, puis quatre écrans d'accueil",
+        "startSec": 7.43,
+        "endSec": 13,
+        "shots": [
+         {
+          "capture": "homes",
+          "shows": "Écran 1 « Planning & focus » (clair, fond ivoire) : il s'ouvre de la ligne Saphir laissée par l'accroche. Widgets semaine, tâches, Top 3, habitudes. Vrai écran d'iPhone sans coque dessinée, apps Apple seulement (Calendar, Reminders, Photos, Safari, Messages). Le mot-titre « Meet Ardane. » s'écrit au centre, calé sur la voix.",
+          "durSec": 1.47,
+          "onScreenText": "Meet Ardane. · Planning & focus · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers l'écran 2 « Sport & wellness » (sombre, indigo) : séance du jour, repos, calories, volume de la semaine. La légende « All your essentials on your home screen. » s'écrit en bas et reste jusqu'à l'écran 3.",
+          "durSec": 1.35,
+          "onScreenText": "Sport & wellness · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers l'écran 3 « Nutrition » (papier, fond argile) : macros, ajout rapide, calories.",
+          "durSec": 1.35,
+          "onScreenText": "Nutrition · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers l'écran 4 « Everything in one place » (bronze, style Luxury) : macros, budget, calories, prochaine série, lisibles d'un coup d'œil ; puis l'écran est aspiré dans la ligne Saphir.",
+          "durSec": 1.4,
+          "onScreenText": "Everything in one place · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Meet Ardane.",
+          "startSec": 7.55,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "All your essentials on your home screen.",
+          "startSec": 8.95,
+          "estDurSec": 2.39
+         },
+         {
+          "text": "At a glance.",
+          "startSec": 11.65,
+          "estDurSec": 1.11
+         }
+        ]
+       },
+       {
+        "name": "3. Nutrition",
+        "startSec": 13,
+        "endSec": 21.25,
+        "shots": [
+         {
+          "capture": "pub26-nutrition-dark",
+          "shows": "Page Nutrition (sombre) : mot-titre, puis la caméra se pose sur l'anneau « 1,672 kcal left » et les barres Protein / Carbs / Fat ; les boutons flottants Scan et Search restent visibles.",
+          "durSec": 2.3,
+          "onScreenText": "Nutrition. · Calories left"
+         },
+         {
+          "capture": "nut-1-dark",
+          "shows": "Feuille « Add a food » : champ de recherche, puces For you / Fruits / Vegetables, suggestions (Plain Greek yogurt 0%, Banana, Latte). Un appui sur le yaourt.",
+          "durSec": 1.45,
+          "onScreenText": "Add a food"
+         },
+         {
+          "capture": "nut-3-dark",
+          "shows": "Retour à la page Nutrition après l'ajout : l'anneau est passé de 1,672 à 1,569 kcal left, « 1,181 eaten of 2,750 kcal », Dinner 1 food. L'étiquette pointe l'anneau.",
+          "durSec": 1.3,
+          "onScreenText": "1,569 kcal left"
+         },
+         {
+          "capture": "photoScan",
+          "shows": "Première moitié de l'animation : photo d'une assiette, le cadre se referme, balayage, « Analyzing your meal on your iPhone… ».",
+          "durSec": 1.7,
+          "onScreenText": "Photograph the meal"
+         },
+         {
+          "capture": "photoScan",
+          "shows": "Seconde moitié : récapitulatif estimé (environ 247 kcal, protéines, glucides, lipides, bouton Add to log). À régler dans l'animation : « kcal left » = 1,322 (1,569 moins 247) pour suivre le plan d'avant. L'analyse de plat est gratuite 10 fois puis Premium : la voix ne dit ni « free » ni « unlimited ».",
+          "durSec": 1.5,
+          "onScreenText": "Estimated from the photo"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Nutrition.",
+          "startSec": 13.1,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Know what's left.",
+          "startSec": 14.1,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Find your food.",
+          "startSec": 15.5,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Log it.",
+          "startSec": 16.95,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Or snap your meal.",
+          "startSec": 18.1,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Calories and macros.",
+          "startSec": 19.9,
+          "estDurSec": 1.11
+         }
+        ]
+       },
+       {
+        "name": "4. Fitness",
+        "startSec": 21.25,
+        "endSec": 29.5,
+        "shots": [
+         {
+          "capture": "pub26-fitness-dark",
+          "shows": "Accueil Fitness (sombre) : mot-titre, carte de verre « LIVE WORKOUT · Full body · Push-ups, set 1 of 3 », bouton flottant Set done et minuteur de repos.",
+          "durSec": 1.4,
+          "onScreenText": "Fitness. · Live workout"
+         },
+         {
+          "capture": "app-fitness-library-dark",
+          "shows": "Bibliothèque d'exercices : recherche, filtres Muscle / Equipment / Type, liste Most performed (Bench press, Squat, Overhead press, Pull-ups). Un appui sur Bench press.",
+          "durSec": 1.45,
+          "onScreenText": "Exercise library · With Premium"
+         },
+         {
+          "capture": "demo-bench-press",
+          "shows": "Démonstration animée du développé couché, en grand : la figure descend la barre puis la remonte (un peu plus d'une demi-boucle). Cadrer sans la légende de phase, restée en français dans les captures de fiche (« Bras tendus », « Remontée »).",
+          "durSec": 2.2,
+          "onScreenText": "Animated demo · With Premium"
+         },
+         {
+          "capture": "session-0-dark",
+          "shows": "Séance en cours : Upper body 2/14 sets, Bench press Set 3 of 4, 8 reps x 60 kg, repos 0:48. Un appui sur le bouton Set done.",
+          "durSec": 1.5,
+          "onScreenText": "Sets, reps, rest"
+         },
+         {
+          "capture": "pub26-fitness-dark-b",
+          "shows": "Retour à l'accueil Fitness, caméra sur les tuiles « This week » : 2 h 14, 9,341 kg, 127 kcal, 3/3 séances. Les chiffres s'allument un par un.",
+          "durSec": 1.7,
+          "onScreenText": "This week"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Fitness.",
+          "startSec": 21.4,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Pick an exercise.",
+          "startSec": 22.7,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "See how it's done.",
+          "startSec": 24.25,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Count every set.",
+          "startSec": 26.4,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Your week, in numbers.",
+          "startSec": 27.9,
+          "estDurSec": 1.43
+         }
+        ]
+       },
+       {
+        "name": "5. Planning",
+        "startSec": 29.5,
+        "endSec": 36.8,
+        "shots": [
+         {
+          "capture": "pub26-planning-dark",
+          "shows": "Planning (sombre) : mot-titre, puis la caméra descend sur les onglets Day / Week / Month / Year et la grille colorée de la semaine (Math, Biology, History, English). Cadrer sous la carte « Next event », vide dans la capture.",
+          "durSec": 2.7,
+          "onScreenText": "Planning. · Your whole week"
+         },
+         {
+          "capture": "app-planning-week-dark",
+          "shows": "Page Week de novembre 2026 : la grille d'événements colorés est mise en valeur sur « Your events. », puis la liste du mercredi 18 (8 éléments, dont Call the mechanic) sur « Your tasks. ».",
+          "durSec": 2.2,
+          "onScreenText": "Events · Tasks"
+         },
+         {
+          "capture": "hab-0-dark",
+          "shows": "Habits : DONE TODAY 3/4, Streak 12 days, il reste une habitude à cocher.",
+          "durSec": 1.2,
+          "onScreenText": "Habits · 3 of 4"
+         },
+         {
+          "capture": "hab-1-dark",
+          "shows": "La dernière habitude est cochée : 4/4, tout est dans Done, grille This week. L'étiquette rappelle la série de 12 jours.",
+          "durSec": 1.2,
+          "onScreenText": "Streak: 12 days"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Planning.",
+          "startSec": 29.65,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "See your whole week.",
+          "startSec": 30.65,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Your events.",
+          "startSec": 32.4,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Your tasks.",
+          "startSec": 33.5,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Keep your streak.",
+          "startSec": 34.95,
+          "estDurSec": 1.11
+         }
+        ]
+       },
+       {
+        "name": "6. Make everyday your own",
+        "startSec": 36.8,
+        "endSec": 41.9,
+        "shots": [
+         {
+          "capture": "widget-lift",
+          "shows": "Début de l'animation : un widget Macros (clair, taille Medium) seul, qui flotte sur un fond chaud. La phrase du PDG s'écrit dessous.",
+          "durSec": 1.4,
+          "onScreenText": "Make everyday your own."
+         },
+         {
+          "capture": "widget-lift",
+          "shows": "Suite : le widget vient se poser sur un vrai écran d'accueil (fond crème), à côté de Calories et de Budget, entre des apps Apple. Trois widgets en style gratuit : pas de mention Premium ici.",
+          "durSec": 1.9,
+          "onScreenText": "On your home screen."
+         },
+         {
+          "capture": "homes",
+          "shows": "Le même écran se transforme : style Aurora et fond bleu sarcelle assortis (Macros, Calories, série d'habitude, séance du jour). Il tient une seconde pleine, puis est aspiré dans la ligne Saphir.",
+          "durSec": 1.8,
+          "onScreenText": "In your style. · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Make everyday your own.",
+          "startSec": 37,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "On your home screen.",
+          "startSec": 38.7,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "In your style.",
+          "startSec": 40.45,
+          "estDurSec": 1.11
+         }
+        ]
+       },
+       {
+        "name": "7. Carte finale validée (inchangée)",
+        "startSec": 41.9,
+        "endSec": 44.73,
+        "shots": [
+         {
+          "capture": "end-card",
+          "shows": "Carte finale d'origine, identique : logo, « Your whole life. One place. », « AVAILABLE ON THE APP STORE ». Sa phrase commence 0,37 s après le début de la carte.",
+          "durSec": 2.83,
+          "onScreenText": "Ardane · Your whole life. One place. · AVAILABLE ON THE APP STORE"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Ardane. Your whole life. One place.",
+          "startSec": 42.27,
+          "estDurSec": 2.23
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "id": "widget",
+      "durationSec": 35.03,
+      "sequences": [
+       {
+        "name": "1. Accroche : avant, puis après",
+        "startSec": 0,
+        "endSec": 7.7,
+        "shots": [
+         {
+          "capture": "before-phone (plan de la v1, inchangé)",
+          "shows": "Téléphone AVANT Ardane : le vrai écran d'accueil iOS, sans widget Ardane, écran seul sans coque. La question démarre dessus.",
+          "durSec": 1.5,
+          "onScreenText": "You want your phone to look like this?"
+         },
+         {
+          "capture": "homes",
+          "shows": "L'écran s'ouvre de la ligne Saphir sur le premier écran APRÈS, « Minimal » (clair, fond glacier, deux widgets ; statut Premium du widget de régularité à vérifier). « like this? » tombe sur lui.",
+          "durSec": 1.65,
+          "onScreenText": "Minimal"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers « Sober » (sombre, indigo) : semaine, à venir, Top 3. Trois widgets en style gratuit.",
+          "durSec": 1.45,
+          "onScreenText": "Sober"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers « Colorful » (rose, style Blossom, cinq widgets).",
+          "durSec": 1.45,
+          "onScreenText": "Colorful · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers « Creative » (style Synthwave, magenta), le plus audacieux ; puis l'écran est aspiré dans la ligne Saphir.",
+          "durSec": 1.65,
+          "onScreenText": "Creative · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "You want your phone to look like this?",
+          "startSec": 0.5,
+          "estDurSec": 2.71
+         },
+         {
+          "text": "Or this?",
+          "startSec": 3.45,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Or this?",
+          "startSec": 4.9,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Or even this?",
+          "startSec": 6.3,
+          "estDurSec": 1.11
+         }
+        ]
+       },
+       {
+        "name": "2. Personnalisation dans l'app",
+        "startSec": 7.7,
+        "endSec": 22.7,
+        "shots": [
+         {
+          "capture": "pub26-create-dark",
+          "shows": "Animation « process », étape 1 : onglet Create, « What size for your widget? », cartes Small / Medium / Large ; Medium se met en valeur. Mot « Create. ».",
+          "durSec": 1.9,
+          "onScreenText": "Create. · Pick a size"
+         },
+         {
+          "capture": "pub26-editor-dark",
+          "shows": "Étape 2 : l'Atelier, chapitre Content (New widget, aperçu, choix du contenu). Mot « Choose. ». Raccord : l'aperçu montre un petit widget Calories alors que les étapes suivantes montrent le Macros moyen ; garder l'étape « Make it Medium » de la v1 entre les deux si sa capture sombre est validée.",
+          "durSec": 1.6,
+          "onScreenText": "Choose. · Choose what it shows"
+         },
+         {
+          "capture": "studio-style-aurora-dark",
+          "shows": "Étape 3 : Studio, chapitre Style. Le widget Macros passe au style Aurora (dégradé bleu-vert) ; « And styles. » tombe sur le changement. Mot « Style. ».",
+          "durSec": 1.45,
+          "onScreenText": "Style. · Change the style · With Premium"
+         },
+         {
+          "capture": "studio-style-neon-dark",
+          "shows": "Style Neon : le même widget devient magenta.",
+          "durSec": 1.3,
+          "onScreenText": "Another style · With Premium"
+         },
+         {
+          "capture": "studio-style-editorial-dark",
+          "shows": "Style Editorial : le même widget en crème, barres rouge, jaune et bleue.",
+          "durSec": 1.3,
+          "onScreenText": "And another · With Premium"
+         },
+         {
+          "capture": "studio-palette-coral-dark",
+          "shows": "Chapitre Colors, palette Coral : le widget vire au rose corail.",
+          "durSec": 1.35,
+          "onScreenText": "Pick your colors · With Premium"
+         },
+         {
+          "capture": "studio-palette-ocean-dark",
+          "shows": "Palette Ocean : le même widget en bleu turquoise.",
+          "durSec": 1.35,
+          "onScreenText": "Another palette · With Premium"
+         },
+         {
+          "capture": "studio-preset-sunset-dark",
+          "shows": "Chapitre Theme, thème Sunset (orange et violet) : un thème règle le style, les couleurs, le fond et la bordure d'un coup.",
+          "durSec": 1.3,
+          "onScreenText": "Start with a theme · With Premium"
+         },
+         {
+          "capture": "studio-preset-luxury-dark",
+          "shows": "Thème Luxury : noir et or. Le widget est prêt.",
+          "durSec": 1.4,
+          "onScreenText": "Another theme · With Premium"
+         },
+         {
+          "capture": "pub26-mywidgets-dark-b",
+          "shows": "My widgets (sombre) : les widgets enregistrés, boutons Edit / Duplicate / Favorite / Add to screen. Un appui sur « Add to screen », puis la carte est aspirée dans la ligne Saphir.",
+          "durSec": 2.05,
+          "onScreenText": "My widgets · Add to screen"
+         }
+        ],
+        "vo": [
+         {
+          "text": "With Ardane, you can customize your own widgets.",
+          "startSec": 7.85,
+          "estDurSec": 2.71
+         },
+         {
+          "text": "And styles.",
+          "startSec": 11.25,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Try another.",
+          "startSec": 12.7,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "And another.",
+          "startSec": 14,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Pick your colors.",
+          "startSec": 15.35,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Change your mind.",
+          "startSec": 16.7,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Or start with a theme.",
+          "startSec": 18.1,
+          "estDurSec": 1.75
+         },
+         {
+          "text": "Add it to your home screen.",
+          "startSec": 20.75,
+          "estDurSec": 2.07
+         }
+        ]
+       },
+       {
+        "name": "3. Résultat sur l'écran d'accueil",
+        "startSec": 22.7,
+        "endSec": 32.2,
+        "shots": [
+         {
+          "capture": "homes",
+          "shows": "L'écran d'accueil noir et or (fond bronze) s'ouvre de la ligne Saphir : le premier widget se pose, puis les trois autres un par un (Macros, Budget, Calories, Next set), entre de vraies apps Apple.",
+          "durSec": 2.8,
+          "onScreenText": "With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers l'écran Aurora : un GRAND widget d'emploi du temps et deux petits, fond bleu sarcelle assorti.",
+          "durSec": 1.7,
+          "onScreenText": "Large · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers l'écran Neon : moyen, deux petits, moyen, fond assorti. Le titre de la pub s'écrit mot à mot, un morceau par écran.",
+          "durSec": 1.7,
+          "onScreenText": "Your phone. · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers l'écran Planner : grand emploi du temps au style Editorial et un petit, fond argile.",
+          "durSec": 1.7,
+          "onScreenText": "Your style. · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Morphing vers l'écran Everyday (clair, fond crème) : Macros, Calories, Budget, trois widgets en style gratuit, sans mention Premium ; puis l'écran est aspiré dans la ligne Saphir.",
+          "durSec": 1.6,
+          "onScreenText": "Your widgets."
+         }
+        ],
+        "vo": [
+         {
+          "text": "Then build the rest.",
+          "startSec": 23.4,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Go large.",
+          "startSec": 25.65,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Your phone.",
+          "startSec": 27.3,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Your style.",
+          "startSec": 29,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Your widgets.",
+          "startSec": 30.8,
+          "estDurSec": 0.79
+         }
+        ]
+       },
+       {
+        "name": "4. Carte finale validée (inchangée)",
+        "startSec": 32.2,
+        "endSec": 35.03,
+        "shots": [
+         {
+          "capture": "end-card",
+          "shows": "Carte finale d'origine, identique à celle de la Main Pub : logo, « Your whole life. One place. », « AVAILABLE ON THE APP STORE ». Sa phrase commence 0,37 s après le début de la carte.",
+          "durSec": 2.83,
+          "onScreenText": "Ardane · Your whole life. One place. · AVAILABLE ON THE APP STORE"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Ardane. Your whole life. One place.",
+          "startSec": 32.57,
+          "estDurSec": 2.23
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "rationale": "1. Angle sobre : des phrases de deux à cinq mots, une par plan, à cadence régulière. Les plans sans voix de la v1 sont resserrés (les quatre écrans d'accueil de la Main Pub passent de 7 s à 5,57 s) et chaque image ajoutée porte sa phrase. Main Pub : 44,73 s. Widget Pub : 35,03 s.\n2. Main Pub : accroche (0 à 7,43 s) et carte finale (2,83 s, phrase à +0,37 s) intactes. « Meet Ardane. » arrive à 7,55 s sur le premier écran d'accueil qui s'ouvre de la ligne Saphir, puis vient la phrase du PDG. Chaque mini-app reçoit son nom puis trois à cinq commentaires de ce que l'image montre (Fitness : bibliothèque d'exercices, démonstration animée, séries comptées, chiffres de la semaine).\n3. Widget Pub : la question du PDG se prolonge par « Or this? » sur chaque écran. Sa phrase « With Ardane… » couvre la taille et le contenu, et « And styles. » tombe sur le premier style, comme dans son script. Ensuite une phrase par réglage (styles, couleurs, thèmes, Add to screen), puis le titre « Your phone. Your style. Your widgets. » est dit sur les trois derniers écrans.\n4. Authenticité, vérifiée dans le code : je n'ai pas repris « Every exercise, demonstrated. » (ExerciseDemo.swift prévoit « Démonstration indisponible ») et la voix ne dit rien de la gratuité du scan photo (10 analyses gratuites puis Premium, ScanQuota.swift). Premium n'apparaît qu'à l'écran, aucun filtre. À corriger au montage : légendes de démonstration restées en français dans les fiches, « kcal left » du récapitulatif photo (1,322), raccord Calories / Macros entre l'Atelier et le Studio.\n5. Blancs, calculés avec la règle (0,32 s par mot + 0,15 s par phrase, mot seul 0,7 s ; l'accroche et la phrase finale gardent leurs durées mesurées ; écart minimal tenu : 0,24 s). Main Pub : plus long blanc entre la fin de l'accroche et la phrase finale = 0,94 s (36,06 à 37,00 s, entre « Keep your streak. » et « Make everyday your own. »). Widget Pub : 1,01 s par la règle (29,79 à 30,80 s, entre « Your style. » et « Your widgets. »), et 1,32 s (2,13 à 3,45 s, juste après la question) si la question dure 1,63 s comme mesuré en v1. Les phrases du PDG ont été recontrôlées avec leurs durées mesurées en v1 ; aucune respiration de 2 s n'est utilisée."
+   }
+  },
+  {
+   "angle": "Bénéfice pour l'utilisateur, films de 45 à 55 s",
+   "script": {
+    "films": [
+     {
+      "id": "main",
+      "durationSec": 53.33,
+      "sequences": [
+       {
+        "name": "1. Accroche validée (inchangée)",
+        "startSec": 0,
+        "endSec": 7.43,
+        "shots": [
+         {
+          "capture": "hook (v5/short/HookS, validée)",
+          "shows": "Accroche reprise image pour image : moments du quotidien, essaim de dix apps, arrêt, impact. Ni l'image ni la voix ne sont touchées.",
+          "durSec": 7.43
+         }
+        ],
+        "vo": [
+         {
+          "text": "Your life isn't one thing.",
+          "startSec": 0.56,
+          "estDurSec": 1.37
+         },
+         {
+          "text": "Why manage it in ten different apps?",
+          "startSec": 2.95,
+          "estDurSec": 1.94
+         }
+        ]
+       },
+       {
+        "name": "2. Meet Ardane, puis quatre écrans d'accueil un par un",
+        "startSec": 7.43,
+        "endSec": 16.3,
+        "shots": [
+         {
+          "capture": "homes",
+          "shows": "La ligne Saphir apparaît et commence à s'ouvrir ; le mot-titre s'inscrit au-dessus.",
+          "durSec": 1.07,
+          "onScreenText": "Meet Ardane."
+         },
+         {
+          "capture": "homes",
+          "shows": "Écran d'accueil 1 (clair, fond ivoire) : semaine, tâches, top 3, habitudes. Vrai écran d'iPhone sans coque, avec seulement les apps Apple autorisées (Calendar, Reminders, Photos, Messages...).",
+          "durSec": 2.5,
+          "onScreenText": "Planning & focus · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "L'écran se transforme en écran 2 (sombre, indigo) : séance du jour, minuteur de repos, calories, volume de la semaine.",
+          "durSec": 1.7,
+          "onScreenText": "Sport & wellness · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Écran 3 (papier, fond argile) : macros, ajout rapide, calories restantes.",
+          "durSec": 1.6,
+          "onScreenText": "Nutrition · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Écran 4 (bronze, style Luxury) : macros, budget, calories et prochaine série réunis.",
+          "durSec": 2,
+          "onScreenText": "Everything in one place · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Meet Ardane.",
+          "startSec": 7.5,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "All your essentials on your home screen.",
+          "startSec": 8.6,
+          "estDurSec": 2.39
+         },
+         {
+          "text": "See today's workout.",
+          "startSec": 11.2,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Check your calories.",
+          "startSec": 12.85,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Without opening a single app.",
+          "startSec": 14.35,
+          "estDurSec": 1.75
+         }
+        ]
+       },
+       {
+        "name": "3. Nutrition : savoir ce qu'il reste, photographier, chercher, noter",
+        "startSec": 16.3,
+        "endSec": 26,
+        "shots": [
+         {
+          "capture": "pub26-nutrition-dark",
+          "shows": "Page Nutrition sombre : le mot-titre, puis la caméra se pose sur l'anneau « 1,672 kcal left » et les barres Protein, Carbs, Fat ; boutons Scan et Search visibles.",
+          "durSec": 2.9,
+          "onScreenText": "Nutrition. · Calories left"
+         },
+         {
+          "capture": "photoScan",
+          "shows": "Un repas pris en photo, balayé par la ligne de lecture.",
+          "durSec": 1.6,
+          "onScreenText": "Snap your plate"
+         },
+         {
+          "capture": "photoScan",
+          "shows": "Suite de la même animation : le récapitulatif du repas, calories et macros.",
+          "durSec": 1.6,
+          "onScreenText": "Estimated from your photo"
+         },
+         {
+          "capture": "nut-1-dark",
+          "shows": "Feuille Add a food : champ de recherche, My meals, suggestions (Plain Greek yogurt, Banana, Latte).",
+          "durSec": 1.15,
+          "onScreenText": "Or search"
+         },
+         {
+          "capture": "nut-2-dark",
+          "shows": "Fiche Plain Greek yogurt 0% : quantité 175 g, repas Dinner, phrase « After adding, you'll have 1,569 kcal left ». Cadré au-dessus des lignes Fiber et Sugars (nutriments Premium).",
+          "durSec": 1.05,
+          "onScreenText": "Add to Dinner"
+         },
+         {
+          "capture": "nut-3-dark",
+          "shows": "Retour à la page : l'anneau est passé de 1,672 à 1,569 kcal left, Dinner compte un aliment. C'est l'avant / après de l'ajout.",
+          "durSec": 1.4,
+          "onScreenText": "Your day, updated"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Nutrition.",
+          "startSec": 16.5,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Know what's left to eat.",
+          "startSec": 17.4,
+          "estDurSec": 1.75
+         },
+         {
+          "text": "Snap your plate.",
+          "startSec": 19.4,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "See calories and macros.",
+          "startSec": 20.85,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Or just search.",
+          "startSec": 22.5,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Log it, and your day updates.",
+          "startSec": 23.85,
+          "estDurSec": 2.07
+         }
+        ]
+       },
+       {
+        "name": "4. Fitness : séries, repos, exercices, démonstrations, statistiques",
+        "startSec": 26,
+        "endSec": 37.4,
+        "shots": [
+         {
+          "capture": "pub26-fitness-dark",
+          "shows": "Hub Fitness sombre : le mot-titre, la carte LIVE WORKOUT « Full body · Push-ups · set 1 of 3 », le bouton Set done et la pastille de repos.",
+          "durSec": 2.5,
+          "onScreenText": "Fitness. · Live workout"
+         },
+         {
+          "capture": "session-0-dark",
+          "shows": "Séance en cours : Upper body 2/14 sets, Bench press Set 3 of 4, 8 reps × 60 kg, bouton Set done. Cadré sous la ligne « Last time » (donnée Premium).",
+          "durSec": 1.1,
+          "onScreenText": "Every set, logged"
+         },
+         {
+          "capture": "session-1-dark",
+          "shows": "Après Set done : Set 4 of 4, 3/14 sets, le repos est reparti (1:55).",
+          "durSec": 1.5,
+          "onScreenText": "Rest timer"
+         },
+         {
+          "capture": "app-fitness-library-dark",
+          "shows": "Bibliothèque Exercises : recherche, filtres Muscle / Equipment / Type, liste Most performed.",
+          "durSec": 1.15,
+          "onScreenText": "Exercise library · With Premium"
+         },
+         {
+          "capture": "lib-2-dark",
+          "shows": "Liste By muscle avec ses compteurs (Chest 16, Back 17, Shoulders 18, Quads 20...) : la preuve du nombre vient de la capture.",
+          "durSec": 1.15,
+          "onScreenText": "By muscle · With Premium"
+         },
+         {
+          "capture": "demo-bench-press",
+          "shows": "Démonstration animée du développé couché (une descente, une poussée), seule dans une carte, sans la légende de phase : elle est en français dans les captures ex-0 et ex-1.",
+          "durSec": 2.1,
+          "onScreenText": "Animated demo · With Premium"
+         },
+         {
+          "capture": "app-fitness-exercise-back-squat-end",
+          "shows": "Fiche Squat, statistiques : tuiles Personal best, Volume, Frequency et courbe des charges. Cadré sur les tuiles et la courbe. Capture claire, la seule du catalogue pour les records.",
+          "durSec": 1.9,
+          "onScreenText": "Your stats · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Fitness.",
+          "startSec": 26.2,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Never lose count of a set.",
+          "startSec": 27.1,
+          "estDurSec": 2.07
+         },
+         {
+          "text": "Rest on the timer.",
+          "startSec": 29.65,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Over 160 exercises.",
+          "startSec": 31.3,
+          "estDurSec": 2.07
+         },
+         {
+          "text": "Every one, demonstrated.",
+          "startSec": 33.6,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "And track every personal best.",
+          "startSec": 35.55,
+          "estDurSec": 1.75
+         }
+        ]
+       },
+       {
+        "name": "5. Planning : la semaine, la journée, les habitudes",
+        "startSec": 37.4,
+        "endSec": 44,
+        "shots": [
+         {
+          "capture": "pub26-planning-dark",
+          "shows": "Planning sombre : le mot-titre, les onglets Day / Week / Month / Year et la grille de la semaine (Math, Biology, History, English). La caméra reste sur la grille, pas sur la carte « Nothing planned that day ».",
+          "durSec": 2.55,
+          "onScreenText": "Planning. · Your whole week"
+         },
+         {
+          "capture": "app-planning-week-dark",
+          "shows": "Page Week : la grille de novembre 2026, puis la liste « Wednesday, November 18 · 8 items » (Call the mechanic...).",
+          "durSec": 1.8,
+          "onScreenText": "Today's list"
+         },
+         {
+          "capture": "hab-0-dark",
+          "shows": "Habits : DONE TODAY 3/4, Streak 12 days, Fitness reste à faire.",
+          "durSec": 1.15,
+          "onScreenText": "Habits"
+         },
+         {
+          "capture": "hab-1-dark",
+          "shows": "La dernière habitude est cochée : 4/4, quatre lignes dans Done.",
+          "durSec": 1.1,
+          "onScreenText": "All done today"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Planning.",
+          "startSec": 37.6,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Never miss a class.",
+          "startSec": 38.5,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Know what's on today.",
+          "startSec": 40.15,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Keep every streak alive.",
+          "startSec": 41.95,
+          "estDurSec": 1.43
+         }
+        ]
+       },
+       {
+        "name": "6. Make everyday your own : un widget, son écran, son style",
+        "startSec": 44,
+        "endSec": 50.5,
+        "shots": [
+         {
+          "capture": "widget-lift",
+          "shows": "Un widget Macros clair, seul, qui flotte sur un fond chaud.",
+          "durSec": 1.8,
+          "onScreenText": "Make everyday your own."
+         },
+         {
+          "capture": "widget-lift",
+          "shows": "Le même widget vient se poser sur un vrai écran d'accueil (crème), rejoint par Calories et Budget : trois widgets, apps Apple autorisées autour.",
+          "durSec": 2.2,
+          "onScreenText": "One widget"
+         },
+         {
+          "capture": "homes",
+          "shows": "L'écran se transforme : style Aurora et fond bleu-sarcelle assortis au widget, quatre widgets en harmonie.",
+          "durSec": 2.5,
+          "onScreenText": "Your colors · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Make everyday your own.",
+          "startSec": 44.2,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Start with one widget.",
+          "startSec": 45.95,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Then match it to your wallpaper.",
+          "startSec": 48.1,
+          "estDurSec": 2.07
+         }
+        ]
+       },
+       {
+        "name": "7. Carte finale validée (inchangée)",
+        "startSec": 50.5,
+        "endSec": 53.33,
+        "shots": [
+         {
+          "capture": "end-card",
+          "shows": "Carte finale validée : logo Ardane, signature, mention App Store. Aucun changement.",
+          "durSec": 2.83,
+          "onScreenText": "Your whole life. One place. · AVAILABLE ON THE APP STORE"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Ardane. Your whole life. One place.",
+          "startSec": 50.87,
+          "estDurSec": 2.23
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "id": "widget",
+      "durationSec": 45.83,
+      "sequences": [
+       {
+        "name": "1. Accroche : le téléphone avant, puis après, et Meet Ardane",
+        "startSec": 0,
+        "endSec": 9.1,
+        "shots": [
+         {
+          "capture": "before (plan v1 : avantapres/ios-home-light-fixed)",
+          "shows": "Le téléphone AVANT Ardane : vrai écran d'accueil iOS sans widget, écran seul à coins arrondis.",
+          "durSec": 1.5,
+          "onScreenText": "Before"
+         },
+         {
+          "capture": "homes",
+          "shows": "APRÈS : l'écran s'ouvre de la ligne Saphir sur un écran bronze, style Luxury, quatre widgets. « like this? » tombe ici, puis le mot-titre s'inscrit.",
+          "durSec": 2.8,
+          "onScreenText": "Meet Ardane. · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Il se transforme en écran clair, fond glacier, deux widgets seulement.",
+          "durSec": 1.55,
+          "onScreenText": "Minimal"
+         },
+         {
+          "capture": "homes",
+          "shows": "Écran rose, cinq widgets au style Blossom.",
+          "durSec": 1.55,
+          "onScreenText": "Colorful · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Écran sombre synthwave, deux widgets magenta.",
+          "durSec": 1.7,
+          "onScreenText": "Bold · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "You want your phone to look like this?",
+          "startSec": 0.5,
+          "estDurSec": 2.71
+         },
+         {
+          "text": "Meet Ardane.",
+          "startSec": 3.41,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Clean and minimal.",
+          "startSec": 4.45,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Bright and colorful.",
+          "startSec": 5.95,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Or dark and bold.",
+          "startSec": 7.45,
+          "estDurSec": 1.43
+         }
+        ]
+       },
+       {
+        "name": "2. La personnalisation dans l'app, étape par étape",
+        "startSec": 9.1,
+        "endSec": 33.5,
+        "shots": [
+         {
+          "capture": "pub26-create-dark",
+          "shows": "Animation process : la carte de l'onglet Create arrive, « What size for your widget? ».",
+          "durSec": 3.1,
+          "onScreenText": "Create."
+         },
+         {
+          "capture": "pub26-create-dark",
+          "shows": "Même écran : la caméra descend sur Small, Medium, Large ; Medium s'allume.",
+          "durSec": 1.75,
+          "onScreenText": "Pick a size"
+         },
+         {
+          "capture": "pub26-editor-dark",
+          "shows": "Atelier, chapitre 1 Content : aperçu du widget Calories, tailles Small / Medium, « In this widget », bouton Save widget. La pastille change en cours de plan quand Medium s'allume.",
+          "durSec": 2.4,
+          "onScreenText": "Choose what it shows / Make it Medium"
+         },
+         {
+          "capture": "studio-style-aurora-dark",
+          "shows": "Chapitre 3 Style : le widget Macros en moyen prend le style Aurora (dégradé bleu-vert), carte Aurora sélectionnée.",
+          "durSec": 2.4,
+          "onScreenText": "Style. · Aurora · With Premium"
+         },
+         {
+          "capture": "studio-style-neon-dark",
+          "shows": "Le même widget en Neon, contour magenta.",
+          "durSec": 1.15,
+          "onScreenText": "Neon · With Premium"
+         },
+         {
+          "capture": "studio-style-space-dark",
+          "shows": "Le même widget en Space, ciel étoilé.",
+          "durSec": 1.15,
+          "onScreenText": "Space · With Premium"
+         },
+         {
+          "capture": "studio-style-liquidGlass-dark",
+          "shows": "Le même widget en Liquid Glass doré ; un halo marque le toucher sur la carte de style.",
+          "durSec": 2.35,
+          "onScreenText": "One tap · With Premium"
+         },
+         {
+          "capture": "studio-palette-gold-dark",
+          "shows": "Onglet Colors : palette Gold sélectionnée, widget noir et or.",
+          "durSec": 1.7,
+          "onScreenText": "Pick your colors · With Premium"
+         },
+         {
+          "capture": "studio-palette-ocean-dark",
+          "shows": "Palette Ocean : le widget passe au bleu.",
+          "durSec": 1.65,
+          "onScreenText": "Ocean · With Premium"
+         },
+         {
+          "capture": "studio-palette-sunset-dark",
+          "shows": "Palette orange-violet, nommée Dusk à l'écran.",
+          "durSec": 1.45,
+          "onScreenText": "Dusk · With Premium"
+         },
+         {
+          "capture": "studio-preset-luxury-dark",
+          "shows": "Onglet Theme : le thème Luxury (noir et or, chiffres à empattements) règle tout d'un coup.",
+          "durSec": 1.35,
+          "onScreenText": "Themes · With Premium"
+         },
+         {
+          "capture": "studio-preset-cyber-dark",
+          "shows": "Thème Cyber, magenta et cyan.",
+          "durSec": 1.25,
+          "onScreenText": "Cyber · With Premium"
+         },
+         {
+          "capture": "pub26-mywidgets-dark-b",
+          "shows": "My widgets : le widget enregistré, les actions Edit, Duplicate, Favorite, Add to screen ; la pastille montre Add to screen, puis la carte est aspirée dans la ligne Saphir.",
+          "durSec": 2.7,
+          "onScreenText": "Add to screen · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "With Ardane, you can customize your own widgets.",
+          "startSec": 9.3,
+          "estDurSec": 2.71
+         },
+         {
+          "text": "Start with a size.",
+          "startSec": 12.3,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Show only what matters to you.",
+          "startSec": 14.1,
+          "estDurSec": 2.07
+         },
+         {
+          "text": "And styles.",
+          "startSec": 16.5,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Aurora.",
+          "startSec": 17.6,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Neon.",
+          "startSec": 18.85,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Space.",
+          "startSec": 20,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "A new look in one tap.",
+          "startSec": 21.15,
+          "estDurSec": 2.07
+         },
+         {
+          "text": "Then pick your colors.",
+          "startSec": 23.5,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "To match your mood.",
+          "startSec": 25.2,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Or your wallpaper.",
+          "startSec": 26.85,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Short on time? Pick a theme.",
+          "startSec": 28.3,
+          "estDurSec": 2.42
+         },
+         {
+          "text": "Then add it to your home screen.",
+          "startSec": 30.95,
+          "estDurSec": 2.39
+         }
+        ]
+       },
+       {
+        "name": "3. Le résultat sur l'écran d'accueil",
+        "startSec": 33.5,
+        "endSec": 43,
+        "shots": [
+         {
+          "capture": "homes",
+          "shows": "La ligne Saphir se rouvre sur un écran d'accueil Neon ; les widgets créés viennent se poser un par un (moyen, deux petits, moyen).",
+          "durSec": 2.6,
+          "onScreenText": "Your widgets · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Il se transforme en écran Aurora : un GRAND emploi du temps, deux petits widgets, fond assorti.",
+          "durSec": 1.8,
+          "onScreenText": "Small · Medium · Large · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Écran Planner (style Editorial, fond argile) : grand emploi du temps et un petit widget.",
+          "durSec": 1.7,
+          "onScreenText": "Planner · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Écran Everyday (clair, ivoire : moyen, petit, petit, moyen), lent travelling avant ; les trois mots du titre s'inscrivent un à un.",
+          "durSec": 3.4,
+          "onScreenText": "Your phone. Your style. Your widgets. · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Watch your screen come together.",
+          "startSec": 33.8,
+          "estDurSec": 1.75
+         },
+         {
+          "text": "Small, medium, or large.",
+          "startSec": 36.25,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "No two screens alike.",
+          "startSec": 38,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Your phone. Your style. Your widgets.",
+          "startSec": 39.8,
+          "estDurSec": 2.77
+         }
+        ]
+       },
+       {
+        "name": "4. Carte finale validée (inchangée)",
+        "startSec": 43,
+        "endSec": 45.83,
+        "shots": [
+         {
+          "capture": "end-card",
+          "shows": "Carte finale validée : logo Ardane, signature, mention App Store. Aucun changement.",
+          "durSec": 2.83,
+          "onScreenText": "Your whole life. One place. · AVAILABLE ON THE APP STORE"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Ardane. Your whole life. One place.",
+          "startSec": 43.37,
+          "estDurSec": 2.23
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "rationale": "1. Angle bénéfice : chaque phrase dit ce que la personne y gagne (« Know what's left to eat », « Never miss a class », « Without opening a single app ») et a son propre plan ; les blancs sont comblés par du texte ET par des plans ajoutés (scan photo, recherche, ajout avant/après, séance, bibliothèque, démo, stats, liste du jour, habitudes ; styles, palettes, thèmes, My widgets), pas par des plans allongés. Main 53,33 s, Widget 45,83 s.\n2. Main Pub : accroche (0 à 7,43 s) et carte finale (2,83 s, phrase à +0,37 s) intactes ; « Meet Ardane. » à 7,50 s, juste avant la phrase du PDG ; Fitness a le plus de temps (11,4 s : séries, repos, exercices, démos, records). Plus long blanc calculé entre la fin de l'accroche (7,43 s) et la phrase finale : 0,84 s (34,71 à 35,55 s, pendant la démo) ; aucune respiration de 2 s utilisée. Le silence de 4,89 à 7,43 s appartient à l'accroche validée (impact) : non touché, non compté.\n3. Widget Pub : question sur l'avant puis l'après, « Meet Ardane. » aussitôt (le PDG ne précise pas le film ; à retirer s'il ne le voulait que dans la Main), trois styles d'écran nommés, chaque étape de l'app commentée, titre « Your phone. Your style. Your widgets. » sur le dernier écran. Plus long blanc calculé : 0,80 s (42,57 à 43,37 s, avant la phrase finale) ; avec la durée réelle de la question mesurée en v1 (1,63 s au lieu de 2,71 s estimés), le blanc avant « Meet Ardane. » serait de 1,28 s, encore sous 1,5 s.\n4. Authenticité vérifiée dans le code : 163 exercices et 163 démos (ExerciseLibrary.swift, ExerciseDemos.json), le repos part au « Set done », Habits est dans Planning, tailles Small / Medium / Large, « Add to screen » existe. Bibliothèque, démos, records, styles, palettes, thèmes et écrans de plus de 3 widgets portent « With Premium » à l'écran, jamais dans la voix ; l'analyse photo est annoncée comme estimation, sans dire qu'elle est gratuite (10 analyses puis Premium) ; aucune étiquette ne tape un chiffre.\n5. À surveiller au montage (vu sur les captures) : les fiches ex-0 et ex-1 affichent du français (« Remontée », « Descente », « Profil »), d'où la démo seule ; « Last time » (Premium) à cadrer hors champ sur les séances ; la courbe du Squat est plate, donc « track » et non « climb », et cette fiche est claire au milieu de plans sombres ; studio-content-dark n'est pas au catalogue et studio-style-dark montre 1,078 au lieu de 1,181 : l'étape Medium passe par une pastille sur l'Atelier ; la palette « sunset » s'appelle « Dusk » à l'écran ; « Over 160 exercises. » est compté 6 mots dits (2,07 s)."
+   }
+  },
+  {
+   "angle": "Démonstration rythmée façon Nike, films de 40 à 50 s",
+   "script": {
+    "films": [
+     {
+      "id": "main",
+      "durationSec": 49.27,
+      "sequences": [
+       {
+        "name": "1. Accroche (validée, inchangée)",
+        "startSec": 0,
+        "endSec": 7.43,
+        "shots": [
+         {
+          "capture": "hook (accroche validée, v5/short/HookS)",
+          "shows": "Accroche reprise image pour image (446 images) : moments de vie, nuée des dix apps, gel, impact. Ni l'image ni la voix ne sont touchées.",
+          "durSec": 7.43,
+          "onScreenText": "Your life isn't one thing. / Why manage it in ten different apps?"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Your life isn't one thing.",
+          "startSec": 0.56,
+          "estDurSec": 1.37
+         },
+         {
+          "text": "Why manage it in ten different apps?",
+          "startSec": 2.95,
+          "estDurSec": 1.94
+         }
+        ]
+       },
+       {
+        "name": "2. Meet Ardane, puis les écrans d'accueil",
+        "startSec": 7.43,
+        "endSec": 15.43,
+        "shots": [
+         {
+          "capture": "homes",
+          "shows": "Battement de titre : la ligne Saphir seule sur le fond sombre, « Meet Ardane. » s'écrit en grand (même titre cinétique et même décalage de voix, +0,40 s, que le film court validé). Sur les 0,3 dernières secondes, la ligne s'ouvre sur le premier écran d'accueil.",
+          "durSec": 1.5,
+          "onScreenText": "Meet Ardane."
+         },
+         {
+          "capture": "homes",
+          "shows": "Écran d'accueil « Planning & focus » (config prod, clair, ivoire) : semaine, tâches, priorités, habitudes. Vrai écran d'iPhone sans coque, apps Apple seulement (Calendar, Photos, Reminders, News, Maps, Health, Wallet, Settings, Safari, Messages). La phrase du PDG se dit ici, puis l'écran se transforme.",
+          "durSec": 2,
+          "onScreenText": "All your essentials on your home screen. · Planning & focus · Some widgets and styles With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en « Sport & wellness » (config sport, sombre, indigo) : séance du jour, minuteur de repos, calories, volume de la semaine.",
+          "durSec": 1.5,
+          "onScreenText": "Sport & wellness · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en « Nutrition » (config food, papier, argile) : macros, ajout rapide, calories. 3 widgets.",
+          "durSec": 1.5,
+          "onScreenText": "Nutrition"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en « Everything in one place » (config all, bronze) : macros, budget, calories, prochaine série sur un seul écran.",
+          "durSec": 1.5,
+          "onScreenText": "Everything in one place · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Meet Ardane.",
+          "startSec": 7.83,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "All your essentials on your home screen.",
+          "startSec": 8.93,
+          "estDurSec": 2.39
+         },
+         {
+          "text": "Your workouts.",
+          "startSec": 11.53,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Your meals.",
+          "startSec": 12.63,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Your whole day.",
+          "startSec": 14.13,
+          "estDurSec": 1.11
+         }
+        ]
+       },
+       {
+        "name": "3. Nutrition",
+        "startSec": 15.43,
+        "endSec": 24.93,
+        "shots": [
+         {
+          "capture": "pub26-nutrition-dark",
+          "shows": "Page Nutrition sombre : anneau 1,672 kcal left, macros, boutons flottants Scan et Search. Le mot-titre arrive avec la voix, la caméra serre l'anneau, le doigt part vers Scan.",
+          "durSec": 1.5,
+          "onScreenText": "Nutrition. · Calories left"
+         },
+         {
+          "capture": "photoScan",
+          "shows": "Première moitié de l'animation : le repas dans le viseur, déclencheur, coins qui se referment, balayage (resserrée de 2,33 à 2 s).",
+          "durSec": 2,
+          "onScreenText": "Photograph your meal"
+         },
+         {
+          "capture": "photoScan",
+          "shows": "Seconde moitié : le récapitulatif, calories et macros qui se comptent (valeurs approximatives, comme dans l'app). Couper AVANT le toucher « Add to log », pour que l'anneau reste cohérent avec la suite.",
+          "durSec": 2,
+          "onScreenText": "Estimated from the photo"
+         },
+         {
+          "capture": "nut-1-dark",
+          "shows": "Feuille Add a food : champ de recherche, My meals, suggestions. Le doigt touche « Plain Greek yogurt 0% ».",
+          "durSec": 1.5,
+          "onScreenText": "Search a food"
+         },
+         {
+          "capture": "nut-2-dark",
+          "shows": "Fiche de l'aliment : quantité 175 g, repas Dinner, « After adding you'll have 1,569 kcal left ». Cadrer le haut de l'écran (les lignes « To limit » du bas sont des nutriments Premium).",
+          "durSec": 1,
+          "onScreenText": "Set the quantity"
+         },
+         {
+          "capture": "nut-3-dark",
+          "shows": "Retour à la page : l'anneau est passé de 1,672 à 1,569 kcal left, 1,181 eaten. C'est l'avant / après de l'ajout.",
+          "durSec": 1.5,
+          "onScreenText": "1,569 kcal left"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Nutrition.",
+          "startSec": 15.63,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Snap your meal.",
+          "startSec": 17.13,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Calories and macros.",
+          "startSec": 19.13,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Or search it.",
+          "startSec": 21.13,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Log it.",
+          "startSec": 22.53,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Know what's left.",
+          "startSec": 23.63,
+          "estDurSec": 1.11
+         }
+        ]
+       },
+       {
+        "name": "4. Fitness",
+        "startSec": 24.93,
+        "endSec": 35.43,
+        "shots": [
+         {
+          "capture": "pub26-fitness-dark",
+          "shows": "Hub Fitness sombre : carte LIVE WORKOUT, raccourcis Program / Exercises / History / Progress, tuiles This week (2 h 14, 9,341 kg, 3/3). Mot-titre avec la voix.",
+          "durSec": 1.5,
+          "onScreenText": "Fitness. · Live workout"
+         },
+         {
+          "capture": "session-0-dark",
+          "shows": "Séance en cours : Bench press, Set 3 of 4, 8 reps x 60 kg. Le doigt touche « Set done ».",
+          "durSec": 1.5,
+          "onScreenText": "Set done"
+         },
+         {
+          "capture": "session-1-dark",
+          "shows": "La même séance juste après : Set 4 of 4, 3/14 sets, le minuteur de repos est reparti (1:55). Vérifier la continuité entre les deux lots de captures (kit et kit-472).",
+          "durSec": 1.5,
+          "onScreenText": "Rest timer"
+         },
+         {
+          "capture": "app-fitness-library-dark",
+          "shows": "Bibliothèque Exercises : recherche, filtres Muscle / Equipment / Type, liste Most performed. Le doigt touche Bench press.",
+          "durSec": 1.5,
+          "onScreenText": "150+ exercises · With Premium"
+         },
+         {
+          "capture": "demo-bench-press",
+          "shows": "Démonstration animée du développé couché, à vitesse réelle (extrait de la boucle de 4 s : fin de descente puis poussée), la poussée tombe sur un temps fort de la musique.",
+          "durSec": 2.5,
+          "onScreenText": "Animated demo · With Premium"
+         },
+         {
+          "capture": "app-fitness-exercise-back-squat-end",
+          "shows": "Statistiques d'un exercice (Squat) : Last workout, Personal best 79.8 kg, Volume, Frequency, courbe des charges. Seule capture claire du film ; à refaire en sombre si le PDG le préfère.",
+          "durSec": 2,
+          "onScreenText": "Personal best · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Fitness.",
+          "startSec": 25.13,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Log every set.",
+          "startSec": 26.63,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Time your rest.",
+          "startSec": 28.13,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Browse the library.",
+          "startSec": 29.63,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Every exercise, demonstrated.",
+          "startSec": 31.43,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Track your personal bests.",
+          "startSec": 33.63,
+          "estDurSec": 1.43
+         }
+        ]
+       },
+       {
+        "name": "5. Planning",
+        "startSec": 35.43,
+        "endSec": 41.43,
+        "shots": [
+         {
+          "capture": "pub26-planning-dark",
+          "shows": "Planning sombre, This week : sélecteur de semaine, grille colorée (Math, Biology, History, English), boutons New task / New event. Cadrage de la v1 sur la grille (la carte Next event vide reste hors champ).",
+          "durSec": 1.5,
+          "onScreenText": "Planning. · Your whole week"
+         },
+         {
+          "capture": "app-planning-week-dark",
+          "shows": "Page Week de novembre : événements colorés dans la grille et liste du mercredi 18 (8 éléments, dont des tâches).",
+          "durSec": 1.5,
+          "onScreenText": "Week view"
+         },
+         {
+          "capture": "hab-0-dark",
+          "shows": "Habits : Done today 3/4, Streak 12 days. Le doigt coche la dernière habitude. 4 habitudes suivies, la version gratuite en suit 3 : d'où la mention.",
+          "durSec": 1.5,
+          "onScreenText": "12-day streak · With Premium"
+         },
+         {
+          "capture": "hab-1-dark",
+          "shows": "La même page, 4/4 : tout est fait, la série continue.",
+          "durSec": 1.5,
+          "onScreenText": "4 of 4 done"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Planning.",
+          "startSec": 35.63,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Classes, events, and tasks.",
+          "startSec": 36.98,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Build your habits.",
+          "startSec": 38.63,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Keep your streak.",
+          "startSec": 40.13,
+          "estDurSec": 1.11
+         }
+        ]
+       },
+       {
+        "name": "6. Make everyday your own",
+        "startSec": 41.43,
+        "endSec": 46.43,
+        "shots": [
+         {
+          "capture": "widget-lift",
+          "shows": "Un widget Macros seul, flottant sur le fond chaud (plan de la v1). La phrase du PDG commence ici.",
+          "durSec": 1.5,
+          "onScreenText": "Make everyday your own."
+         },
+         {
+          "capture": "widget-lift",
+          "shows": "Le widget vient se poser sur un vrai écran d'accueil crème, suivi de deux petits (calories, budget) : 3 widgets, apps Apple autour, écran sans coque.",
+          "durSec": 1.5,
+          "onScreenText": "Your widget"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation vers le résultat : thème Aurora et fond bleu sarcelle assortis au widget, tenu jusqu'à la carte finale.",
+          "durSec": 2,
+          "onScreenText": "Aurora · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "Make everyday your own.",
+          "startSec": 41.63,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Place it.",
+          "startSec": 43.33,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Style it.",
+          "startSec": 44.83,
+          "estDurSec": 0.79
+         }
+        ]
+       },
+       {
+        "name": "7. Carte finale (validée, inchangée)",
+        "startSec": 46.43,
+        "endSec": 49.27,
+        "shots": [
+         {
+          "capture": "end-card",
+          "shows": "Carte finale validée, 170 images : logo, App Store, signature. La phrase commence 0,37 s après le début de la carte.",
+          "durSec": 2.83,
+          "onScreenText": "Ardane · AVAILABLE ON THE APP STORE · Your whole life. One place."
+         }
+        ],
+        "vo": [
+         {
+          "text": "Ardane. Your whole life. One place.",
+          "startSec": 46.8,
+          "estDurSec": 2.23
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "id": "widget",
+      "durationSec": 40.33,
+      "sequences": [
+       {
+        "name": "1. Accroche : avant, puis après",
+        "startSec": 0,
+        "endSec": 8,
+        "shots": [
+         {
+          "capture": "before (plan de la v1, avantapres/ios-home-light-fixed)",
+          "shows": "AVANT Ardane : le vrai écran d'accueil iOS, sans widget Ardane, écran seul à coins arrondis, sans coque, apps Apple seulement. Il se replie sur la ligne Saphir à la fin.",
+          "durSec": 1.5,
+          "onScreenText": "You want your phone to look like this?"
+         },
+         {
+          "capture": "homes",
+          "shows": "APRÈS : l'écran Minimal (config minimal, glacier, clair) s'ouvre depuis la ligne ; « like this? » tombe sur lui.",
+          "durSec": 2,
+          "onScreenText": "Minimal"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en écran bronze noir et or (config premium). L'étiquette devient « Elegant » pour ne pas se confondre avec la mention Premium.",
+          "durSec": 1.5,
+          "onScreenText": "Elegant · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en écran rose (config color), cinq widgets.",
+          "durSec": 1.5,
+          "onScreenText": "Colorful · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en écran synthwave (config creative), puis repli sur la ligne Saphir.",
+          "durSec": 1.5,
+          "onScreenText": "Bold"
+         }
+        ],
+        "vo": [
+         {
+          "text": "You want your phone to look like this?",
+          "startSec": 0.5,
+          "estDurSec": 2.71
+         },
+         {
+          "text": "Elegant.",
+          "startSec": 3.45,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Colorful.",
+          "startSec": 5.2,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Bold.",
+          "startSec": 6.7,
+          "estDurSec": 0.7
+         }
+        ]
+       },
+       {
+        "name": "2. La personnalisation dans l'app",
+        "startSec": 8,
+        "endSec": 27.5,
+        "shots": [
+         {
+          "capture": "pub26-create-dark",
+          "shows": "process : la carte de l'app sort de la ligne Saphir (0,5 s). Onglet Create, « What size for your widget? », Small / Medium / Large. La phrase du PDG se dit entière sur cet écran ; à la fin le doigt touche Small.",
+          "durSec": 4,
+          "onScreenText": "Create. · Pick a size"
+         },
+         {
+          "capture": "pub26-editor-dark",
+          "shows": "process : l'Atelier (New widget), cadrage large sur l'aperçu du widget et les trois chapitres Content / Layout / Style.",
+          "durSec": 1.5,
+          "onScreenText": "Choose. · Choose what it shows"
+         },
+         {
+          "capture": "pub26-editor-dark",
+          "shows": "Même capture, caméra sur la rangée Size (Small, Medium, Circular, Rectangular, Inline) ; le doigt touche Medium. Variante idéale si elle est validée : studio-content-dark (sur le disque, utilisée en v1, absente du catalogue vérifié).",
+          "durSec": 1.5,
+          "onScreenText": "Make it Medium"
+         },
+         {
+          "capture": "studio-style-aurora-dark",
+          "shows": "process : chapitre Style (glissement de scène 0,5 s). Le widget Macros Medium prend le style Aurora ; les onglets Theme / Style / Colors / Background / Border sont visibles. La phrase du PDG tombe sur l'arrivée des styles.",
+          "durSec": 2,
+          "onScreenText": "Style. · Change the style · With Premium"
+         },
+         {
+          "capture": "studio-style-liquidGlass-dark",
+          "shows": "Le même widget passe en Liquid Glass, changement en direct sur le temps.",
+          "durSec": 1,
+          "onScreenText": "Liquid Glass · With Premium"
+         },
+         {
+          "capture": "studio-style-editorial-dark",
+          "shows": "En Editorial : autre mise en page (barre tricolore sur fond crème).",
+          "durSec": 1,
+          "onScreenText": "Editorial · With Premium"
+         },
+         {
+          "capture": "studio-style-space-dark",
+          "shows": "En Space : fond étoilé.",
+          "durSec": 1,
+          "onScreenText": "Space · With Premium"
+         },
+         {
+          "capture": "studio-preset-sunset-dark",
+          "shows": "Onglet Theme : thème Sunset (orange, rose, violet).",
+          "durSec": 1.5,
+          "onScreenText": "Switch the theme · With Premium"
+         },
+         {
+          "capture": "studio-palette-gold-dark",
+          "shows": "Onglet Colors : palette Gold, widget noir et or.",
+          "durSec": 1.5,
+          "onScreenText": "Pick your colors · With Premium"
+         },
+         {
+          "capture": "studio-style-neon-dark",
+          "shows": "Retour au style Neon (magenta), le look final, celui du premier écran d'accueil du résultat ; puis le doigt touche « Save widget ». Préférée à studio-palette-neon-dark, qui a une autre mise en page et d'autres chiffres.",
+          "durSec": 2,
+          "onScreenText": "Neon · Save widget · With Premium"
+         },
+         {
+          "capture": "pub26-mywidgets-dark-b",
+          "shows": "My widgets : les widgets enregistrés, actions Edit / Duplicate / Favorite / Add to screen ; surbrillance sur « Add to screen », puis la carte rentre dans la ligne Saphir (0,5 s). La phrase enjambe la coupe : « home screen » tombe sur l'écran d'accueil qui s'ouvre.",
+          "durSec": 2.5,
+          "onScreenText": "My widgets. · Add to screen · With Premium"
+         }
+        ],
+        "vo": [
+         {
+          "text": "With Ardane, you can customize your own widgets.",
+          "startSec": 8.4,
+          "estDurSec": 2.71
+         },
+         {
+          "text": "The content.",
+          "startSec": 12.2,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "The size.",
+          "startSec": 13.7,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "And styles.",
+          "startSec": 15.5,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Liquid Glass.",
+          "startSec": 17.1,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Editorial.",
+          "startSec": 18.15,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Space.",
+          "startSec": 19.15,
+          "estDurSec": 0.7
+         },
+         {
+          "text": "Switch the theme.",
+          "startSec": 20.2,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Pick your colors.",
+          "startSec": 21.7,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Go Neon.",
+          "startSec": 23.2,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Save it.",
+          "startSec": 24.2,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Then add it to your home screen.",
+          "startSec": 25.5,
+          "estDurSec": 2.39
+         }
+        ]
+       },
+       {
+        "name": "3. Le résultat sur l'écran d'accueil",
+        "startSec": 27.5,
+        "endSec": 37.5,
+        "shots": [
+         {
+          "capture": "homes",
+          "shows": "La ligne s'ouvre sur l'écran d'accueil Neon (config created) : le widget Macros qu'on vient de faire se pose en premier, puis deux petits et un moyen ; fond d'écran assorti. Écran sans coque, apps Apple seulement.",
+          "durSec": 2.5,
+          "onScreenText": "Your widgets · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en écran Aurora (config large) : un GRAND widget emploi du temps et deux petits.",
+          "durSec": 2,
+          "onScreenText": "Small · Medium · Large · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en écran Planner (config editorial, argile) : un grand éditorial et un petit. Premier mot du titre.",
+          "durSec": 1.5,
+          "onScreenText": "Your phone."
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en écran Everyday (config day, ivoire, clair) : moyen, deux petits, moyen. Deuxième mot du titre.",
+          "durSec": 1.5,
+          "onScreenText": "Your style. · With Premium"
+         },
+         {
+          "capture": "homes",
+          "shows": "Transformation en écran sobre (config sober, indigo, sombre, 3 widgets) : image finale tenue, lente poussée avant. Après « Your widgets. », 1,58 s de musique seule : la respiration voulue du film.",
+          "durSec": 2.5,
+          "onScreenText": "Your widgets."
+         }
+        ],
+        "vo": [
+         {
+          "text": "Match your wallpaper.",
+          "startSec": 28.4,
+          "estDurSec": 1.11
+         },
+         {
+          "text": "Small, medium, or large.",
+          "startSec": 30.2,
+          "estDurSec": 1.43
+         },
+         {
+          "text": "Your phone.",
+          "startSec": 32.2,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Your style.",
+          "startSec": 33.7,
+          "estDurSec": 0.79
+         },
+         {
+          "text": "Your widgets.",
+          "startSec": 35.5,
+          "estDurSec": 0.79
+         }
+        ]
+       },
+       {
+        "name": "4. Carte finale (validée, inchangée)",
+        "startSec": 37.5,
+        "endSec": 40.33,
+        "shots": [
+         {
+          "capture": "end-card",
+          "shows": "Carte finale validée, 170 images. La phrase commence 0,37 s après le début de la carte.",
+          "durSec": 2.83,
+          "onScreenText": "Ardane · AVAILABLE ON THE APP STORE · Your whole life. One place."
+         }
+        ],
+        "vo": [
+         {
+          "text": "Ardane. Your whole life. One place.",
+          "startSec": 37.87,
+          "estDurSec": 2.23
+         }
+        ]
+       }
+      ]
+     }
+    ],
+    "rationale": "1. Méthode : combler plutôt que ralentir. Coupes sur la grille de 0,5 s (120 BPM), ancrée à la fin de l'accroche pour la Main Pub ; une phrase courte par plan, à l'impératif dans les mini-apps (« Log every set. », « Keep your streak. »), en liste nominale avant « And styles. » pour que la phrase du PDG reste correcte (« …your own widgets. The content. The size. And styles. »). Main Pub 49,27 s (2 956 images), Widget Pub 40,33 s (2 420 images) ; aucun plan d'interface sous 1 s, écrans d'accueil à 1,5 s au moins.\n2. Main Pub : accroche et carte finale intactes ; « Meet Ardane. » à 7,83 s (même titre et même décalage que le film court validé), puis la phrase du PDG ; chaque mini-app a 4 à 6 plans commentés (Fitness : série, repos, bibliothèque, démonstration, records). Quatre lignes existent déjà en enregistrement validé (film court v5) : « Meet Ardane. », « Snap your meal. », « Calories and macros. », « Every exercise, demonstrated. ».\n3. Blancs calculés (0,32 s par mot + 0,15 s par phrase, mot seul 0,7 s ; recalculés aussi avec les durées mesurées de la v1, plus courtes). Main Pub : plus long blanc entre la fin de l'accroche et la phrase finale = 1,18 s (« Style it. » finit à 45,62 s, phrase finale à 46,80 s), le suivant 1,09 s ; aucune respiration utilisée ; le silence de 4,89 à 7,83 s appartient à l'accroche validée (0,40 s après sa dernière image). Widget Pub : plus long blanc = 1,58 s, c'est l'unique respiration voulue avant la carte finale (36,29 à 37,87 s) ; hors respiration 1,32 s (après l'accroche, durée mesurée 1,63 s) puis 1,24 s.\n4. Authenticité vérifiée dans le code (App/Premium/PaywallContext.swift, App/Screens/MiniApps) : la bibliothèque d'exercices (démonstrations, performances par exercice) et Progress sont Premium, plus de 3 habitudes aussi, l'analyse de plat a 10 essais gratuits. D'où « With Premium » à l'écran sur ces plans, jamais dans la voix, et aucun « unlimited ». Captures ex-0, ex-1, ex-1-dark et ex-bench-press-en écartées : légendes en français (« Bras tendus », « Remontée ») dans une pub anglaise ; la démonstration passe par l'animation demo-bench-press.\n5. À trancher par le Chef ou le PDG : « Meet Ardane. » n'est mis que dans la Main Pub (la Widget Pub nomme déjà Ardane dans sa phrase principale ; l'ajouter avant « With Ardane… » coûte une seconde et une répétition) ; la fiche de statistiques du squat est la seule capture claire du film ; studio-content-dark, absente du catalogue vérifié, est remplacée par un second cadrage de pub26-editor-dark (le contenu passe alors de Calories à Macros à la coupe) ; la Widget Pub nomme trois styles Premium dans la voix (Liquid Glass, Editorial, Space, plus Neon), couverts par la mention à l'écran."
+   }
+  }
+ ]
+}

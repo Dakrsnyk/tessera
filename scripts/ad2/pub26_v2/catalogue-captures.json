@@ -1,0 +1,2307 @@
+{
+ "note": "Catalogue des captures de l'app actuelle (runs 471 et 472), regardées une par une le 2026-11-18. ok=false : capture ratée, ne pas l'utiliser. folder: 'kit' = ~/ardane-tools/film/public/kit2026/en, 'kit-472' = ~/ardane-tools/kit-472.",
+ "summaries": {
+  "nutrition": "Famille nutrition : 34 fichiers dans kit, 25 dans kit-472 (35 noms distincts). Les app-nutrition-s00 a s10 sont des etapes de defilement ; en kit, s00, s03, s07 et s09 sont ratees (home ou deux ecrans superposes), alors que kit-472 est propre pour s00 a s10 sauf s08 qui est a la fois la home defilee. Au final, kit-472 est a preferer pour s00-s10 et tous les nut-*. Les scan-frame*, scan-frame-white* (sauf -dark ratees) et app-nutrition-meal / s00-dark sont des pages d'accueil ratees. Les 6 a 10 meilleures : (1) pub26-nutrition-dark (kit) ou pub26-nutrition-dark-b (kit-472) : page Nutrition sombre avec boutons Scan et Search ; (2) nut-0-dark (kit-472) : anneau 1,672 kcal, macros, repas ; (3) nut-1-dark (kit-472) : Add a food, suggestions ; (4) nut-2-dark (kit-472) : detail Greek yogurt, quantite, apport ; (5) nut-3-dark (kit-472) : anneau passe a 1,569 apres ajout (avant/apres avec nut-0-dark) ; (6) app-nutrition-nutrients (kit, clair) : objectifs Calories/Protein/Carbs/Fat/Fiber et limites ; (7) app-nutrition-ideas (kit, clair) : idees de repas qui rentrent dans les kcal restantes ; (8) nutrition-plan (kit, clair) : objectif de poids 78 a 72 kg, 1,884 kcal par jour, Apply this plan ; (9) app-nutrition-saved (kit, clair) : repas enregistre Protein breakfast ; (10) app-nutrition-s05 (kit-472, clair) : section Go further (Summary, My library, Ideas). Ce qui manque : variantes sombres des ecrans Ideas, Nutrients, My meals et Your weight goal ; un vrai scan de plat ou de code-barres (camera noire sans aliment, recaps a 0 kcal, cadres de scan tous rates, a reprendre) ; l'ecran Summary de scan avec un aliment reconnu et ses calories ; un ecran Summary hebdomadaire (Go further > Summary) ; l'ecran My library ; le constructeur du widget Nutrition.",
+  "planning-accueil": "Famille planning-accueil, 47 fichiers dans kit, 39 dans kit-472. Les deux lots sont presque identiques. Seule vraie différence utile : hab-1 et hab-1-dark sont ratés dans kit (écran d'accueil iOS) et bons dans kit-472. Captures ratées dans kit : app-planning-focus, app-planning-habits-dark, app-planning-import, app-planning-tasks-dark, app-planning-s01, s03, s08, home-s03, home-s03-dark, home-s04. Les images du kit sont un peu moins nettes que celles du kit-472 pour les pub26-*, qui ont en plus des doublons -b.\n\nMeilleures captures (sombres de préférence) :\n1. pub26-planning-dark (kit) : Planning This week, grille colorée, New task / New event. Écran clé de la mini-app.\n2. pub26-home-dark (kit) : accueil Your evening avec Nutrition, Live workout et carte Planning. Parcours accueil vers Planning.\n3. plan-1-dark (kit) : Next week, grille d'événements et d'examens, bouton Today.\n4. app-planning-week-dark (kit) : page Week de novembre 2026 avec la liste des événements du jour.\n5. hab-0-dark (kit) : Habits 3/4, streak de 12 jours, bouton Add a habit.\n6. hab-1-dark (kit) : Habits 4/4, toutes les habitudes faites.\n7. app-planning-tasks (kit, clair, seul Tasks valide) : Tasks avec Overdue, Today, ajout rapide.\n8. app-planning-s10 (kit, clair) : bas de Planning avec Tasks 2/3/6, Projects, Habits, Add my calendar events, Import my schedule.\n9. home-s06-dark (kit) : accueil défilé avec Habits, Top 3, Studies, Budget, pour montrer un tableau de bord complet.\n10. home-s00-dark (kit) : accueil sombre Bench press.\n\nManque : Tasks sombre (la capture est ratée), Habits sombre dans app-planning-habits, l'import d'emploi du temps (ratée), le mode Focus (raté), la vue Month sombre, et la création d'événement ou de tâche (feuille New task / New event ouverte). Aucun écran de cette famille ne montre l'import photo ou PDF en action.",
+  "fitness": "Beaucoup de captures fitness sont RATÉES (accueil Your evening, springboard iOS ou écran blanc) : toutes les fiches d'exercice app-fitness-exercise-* sauf back-squat-end, app-fitness-progress, app-fitness-session(-dark), app-fitness-s06, session-3 et ex-0-dark. kit-472 corrige le libellé « Ready » coupé en « Read/y » des boutons flottants Fitness, mais certaines captures kit-472 sont à l'inverse ratées (session-list, session-2 en kit, ex-1, lib-3).\n\nMeilleures captures (sombres de préférence) :\n1. pub26-fitness-dark (kit) : Fitness hub avec Full body, raccourcis Program/Exercises/History/Progress, stats de la semaine, boutons flottants et minuteur de repos.\n2. session-1-dark (kit) et session-3-dark (kit) : séance sombre, Bench press puis Pull-ups, Reps/Weight, repos, Set done.\n3. session-2-dark (kit-472) : séance Pull-ups avec Bench press terminé.\n4. session-list-dark (kit-472) : séance défilée, liste d'exercices, End workout.\n5. session-0-dark (kit-472) : début de séance sombre avec Set 3/4.\n6. ex-1-dark (kit) : fiche Squat sombre avec animation, muscles, position de départ (légende française « Remontée » à masquer).\n7. app-fitness-library-dark (kit) : bibliothèque d'exercices, recherche, filtres, Most performed.\n8. app-fitness-exercise-back-squat-end (kit) : fiche Squat avec record, volume, courbe, alternatives (clair).\n9. app-fitness-program (kit-472, clair) : programme de la semaine et séances.\n10. app-fitness-history (kit-472, clair) : « 21 workouts done » et liste des séances.\n\nDémo animée du développé couché : les deux images (1608x944, paysage) montrent l'ancien dessin gris sur fond blanc, lisible mais incohérent avec la fiche actuelle (carte claire, muscles en rouge, légende). Utilisables seulement détourées, sinon à remplacer par les ex-0 / ex-1.\n\nManque : aucun écran Progress valable (clair ou sombre), pas de fiche Bench press sombre, ex-0-dark vide, pas de History ni Program sombres, pas de séance terminée, pas de création d'exercice. À reprendre : progress, history et program en sombre, ex-0-dark, creator-* (non traité ici). Défaut localisation à corriger avant pub : légendes d'animation (« Descente », « Remontée », « Bras tendus ») et « Profil » restent en français dans les fiches d'exercice.",
+  "creer-studio": "Famille creer-studio, 139 variantes comparées sur 18 planches (20 identiques dans les deux dossiers). Beaucoup sont ratées : tous les store-at-0.xx (sauf 0.36 en transition), store-dark, store-end, store-page-bottom et store-page-top sont vides ; spaces, spaces-lock, creator-budget-studio, creator-fitness, creator-nutrition-medium et le creator-nutrition-studio du kit montrent le choix de taille ; pub26-editor-dark-b, studio-background-dark, studio-style-mid et les studio-tt-*@kit-472 montrent l'accueil 'Your evening'. Les creator-* corrects sont ceux qui montrent le constructeur ou la feuille 'Create your widget' (selon le dossier). Les meilleures captures :\n1. pub26-mywidgets-dark-b (kit-472, sombre) : My widgets avec le combo Next set + Consistency + Records et les actions Edit/Duplicate/Favorite/Add to screen. Seule vraie capture sombre de cet écran.\n2. pub26-create-dark (kit-472, sombre) : Create avec les trois tailles. Début du parcours.\n3. pub26-editor-dark (kit, sombre) : éditeur du widget Calories avec les tailles Small/Medium/Circular/Rectangular/Inline.\n4. spaces-lock-end (kit, clair) : feuille Lock Screen avec le widget Bench press en Live Activity, le repos et Set done. Le plus riche pour montrer les écrans verrouillés.\n5. creator-fitness-medium (kit-472, clair) : feuille Fitness avec les widgets sombres 15 reps et 3/3.\n6. store (kit) et store-page-3 (kit, 4096 px de haut) : Featured Aurora avec Install, puis Combos et Packs avec Get. Pour un défilement du Store.\n7. studio-palette-sunset-dark, studio-style-aurora-dark ou studio-style-synthwave-dark (kit-472) : le studio sombre avec un widget très coloré, pour montrer le style et les palettes.\n8. studio-tt-light-sage et creator-student-large (kit) : l'emploi du temps hebdomadaire en grand.\n9. studio-background (kit) : Style > Background avec les textures.\n10. mywidgets et editor-v2 (kit) : les mêmes écrans en clair.\nPièges : pub26-mywidgets-dark@kit est en réalité clair ; les store-page-* du kit datent du 10 novembre alors que store.png date du 18 novembre ; les studio-*-dark sont des feuilles sombres alors que studio-tt-* a une feuille claire avec un widget sombre.\nManque : aucune capture valide de Create > Studio en sombre pour Fitness ou Budget (construit-sombre), le Store sombre (store-dark est noir vide), l'écran Spaces (toutes ratées), le défilement du Store à jour (store-at-* tous vides) et le parcours 'Add to screen' / écran d'accueil final. Il faut aussi des captures sombres de studio-border, studio-background et studio-font, ainsi qu'une capture sombre du Lock Screen."
+ },
+ "captures": [
+  {
+   "name": "app-nutrition-ideas",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Ideas page: card 'About 1,672 kcal left' (67 g protein, 27 g fiber still needed), 'A meal that fits what's left' with Poutine 908 kcal, then 'High in protein' list (cooked shrimp 84, canned tuna 99, turkey breast 135, cod 126, egg white 17 kcal) with plus buttons",
+   "ok": true,
+   "adValue": 4,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-meal",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Home page 'Your evening' (Nutrition, Live workout, Planning cards) instead of a meal screen",
+   "ok": false,
+   "problem": "Ratee : page d'accueil a la place de l'ecran My meal",
+   "adValue": 1,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-nutrients",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Nutrients page: Goals with progress bars (Calories 1,078/2,750 kcal, Protein 89/156 g, Carbs 144/338 g, Fat 16/86 g, Fiber 12/39 g), then 'To limit' (Sugars 35/69 g, Saturated fat 6/31 g, Trans fat, Cholesterol, Sodium)",
+   "ok": true,
+   "adValue": 4,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s00-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Home page 'Your evening' dark with Nutrition card, Live workout Bench press, Planning",
+   "ok": false,
+   "problem": "Ratee : page d'accueil au lieu de la page Nutrition",
+   "adValue": 1,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s00",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page top: week strip (M16..S22, W18 selected), ring 1,672 kcal left with Protein 89/156, Carbs 144/338, Fat 16/86, '1,078 eaten of 2,750 kcal', Ideas card, Meals list start. Version kit montre la home (ratee), 472 est la bonne",
+   "ok": true,
+   "adValue": 4,
+   "problem": "Version du dossier kit ratee (page d'accueil)",
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s01",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page slightly scrolled: week strip fading, ring card, Ideas for the rest of your day, Meals (Breakfast 459, Lunch 516, Dinner nothing logged, Snack 103 kcal) with Add a food floating button",
+   "ok": true,
+   "adValue": 3,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s02",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page scrolling: week strip fading under title, ring card, Ideas card, Meals list, Go further header; Add a food floating",
+   "ok": true,
+   "adValue": 3,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s03",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page scrolled further: ring card compressing under title, Ideas, Meals, Go further (Summary, My library). Version kit montre un chevauchement avec la home (Planning, Habits) = transition ratee",
+   "ok": true,
+   "adValue": 3,
+   "problem": "Version kit ratee (deux ecrans superposes)",
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s04",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page scrolled: ring card nearly gone, Ideas, Meals, Go further list (Summary, My library)",
+   "ok": true,
+   "adValue": 2,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s05",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page scrolled: Ideas card, Meals 4 rows, Go further (Summary 0 of 3 days, My library 1 meal 4 favorites, Ideas), Add a food",
+   "ok": true,
+   "adValue": 3,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s06",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page: Meals (Breakfast, Lunch, Dinner, Snack), Go further list, disclaimer 'Approximate values, not medical advice. Open Food Facts', My settings button fading",
+   "ok": true,
+   "adValue": 2,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s07",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page near bottom: Ideas card, Meals, Go further, disclaimer, My settings under Add a food. Version kit montre la home superposee (Studies, Budget) = ratee",
+   "ok": true,
+   "adValue": 2,
+   "problem": "Version kit ratee",
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s08",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page bottom: Meals, Go further, disclaimer, My settings. Idem kit, correct dans les deux",
+   "ok": true,
+   "adValue": 2,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s09",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page bottom scrolled: Breakfast..Snack, Go further, disclaimer, My settings (clean). Version kit = home Studies/Budget/Habits en transition (ratee)",
+   "ok": true,
+   "adValue": 2,
+   "problem": "Version kit ratee",
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-s10",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page: Lunch, Dinner, Snack, Go further, disclaimer, My settings (top blurred header). Pas d'apport par rapport a s09",
+   "ok": true,
+   "adValue": 2,
+   "family": "nutrition"
+  },
+  {
+   "name": "app-nutrition-saved",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "My meals page: saved meal 'Protein breakfast 579 kcal, P 42 g' with Rolled oats 60 g, 2% milk 250 g, Whey protein powder 30 g, Banana 120 g; actions 'Add to my day' and 'Delete this meal'",
+   "ok": true,
+   "adValue": 4,
+   "family": "nutrition"
+  },
+  {
+   "name": "nut-0-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Nutrition page dark top: 'This week' strip W18, ring 1,672 kcal left with macro bars, Ideas card, Meals (Breakfast 459, Lunch 516, Dinner, Snack), Add a food floating",
+   "ok": true,
+   "adValue": 5,
+   "family": "nutrition"
+  },
+  {
+   "name": "nut-0",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page light top: week strip, ring 1,672 kcal left, macros, Ideas card, Meals, Add a food",
+   "ok": true,
+   "adValue": 4,
+   "family": "nutrition"
+  },
+  {
+   "name": "nut-1-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Add a food sheet dark: search field 'Apple, chicken, yogurt...', Custom food, chips For you/Fruits/Vegetables, My meals (Protein breakfast 579 kcal), Suggestions (Plain Greek yogurt 0% 59 kcal, Banana 89, Latte 54, Whey protein 400, Apple 52)",
+   "ok": true,
+   "adValue": 5,
+   "family": "nutrition"
+  },
+  {
+   "name": "nut-1",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Add a food sheet light: same search/suggestions list as dark",
+   "ok": true,
+   "adValue": 4,
+   "family": "nutrition"
+  },
+  {
+   "name": "nut-2-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Food detail 'Plain Greek yogurt 0%' dark: per 100 g line, Quantity 175 g, chips 1/2 serving, 3/4 cup, 2 servings, Meals Dinner, 'After adding you'll have 1,569 kcal left', Intake (103 kcal, protein 17.5 g, carbs 6.3, fat 0.7, fiber 0), To limit",
+   "ok": true,
+   "adValue": 5,
+   "family": "nutrition"
+  },
+  {
+   "name": "nut-2",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Food detail Plain Greek yogurt 0% light, same content",
+   "ok": true,
+   "adValue": 4,
+   "family": "nutrition"
+  },
+  {
+   "name": "nut-3-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Nutrition page dark after adding the yogurt: ring now 1,569 kcal left, protein 107/156, carbs 150/338, fat 17/86, '1,181 eaten of 2,750 kcal', Dinner 1 food, Add a food. Montre l'effet de l'ajout (avant/apres)",
+   "ok": true,
+   "adValue": 5,
+   "family": "nutrition"
+  },
+  {
+   "name": "nut-3",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page light after adding yogurt: 1,569 kcal left, 1,181 eaten",
+   "ok": true,
+   "adValue": 4,
+   "family": "nutrition"
+  },
+  {
+   "name": "nutrition-plan",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "'Your weight goal' sheet: current 78 kg to target 72 kg, 13 weeks, pace -0.46 kg per week, calories per day 1,884, estimated date Feb 17 2027, protein 140 g, carbs 198 g, fat 59 g, 'Apply this plan' button",
+   "ok": true,
+   "adValue": 4,
+   "family": "nutrition"
+  },
+  {
+   "name": "pub26-nutrition-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Nutrition page dark, 1,672 kcal ring, Ideas, Meals, floating 'Scan' and 'Search' buttons (Add a food expanded), Dinner/Snack rows behind. Version 472 equivalente (aussi -b)",
+   "ok": true,
+   "adValue": 5,
+   "family": "nutrition"
+  },
+  {
+   "name": "pub26-nutrition-dark-b",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Nutrition page dark with floating Scan and Search buttons, 1,672 kcal left, week strip. Variante b de la precedente",
+   "ok": true,
+   "adValue": 5,
+   "family": "nutrition"
+  },
+  {
+   "name": "scan-camera-en",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "'Barcode or food' camera sheet: black viewfinder with corner frame, hint 'Aim at a barcode or your plate', button 'Search or create the food'. Viewfinder vide (pas d'aliment)",
+   "ok": true,
+   "adValue": 3,
+   "problem": "Camera noire sans plat ni code-barres",
+   "family": "nutrition"
+  },
+  {
+   "name": "scan-food",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "'Add a food' list light: search field, Custom food, chips, My meals Protein breakfast, Suggestions. Identique a nut-1 (pas un scan)",
+   "ok": true,
+   "adValue": 2,
+   "problem": "Doublon de nut-1, ne montre pas de scan",
+   "family": "nutrition"
+  },
+  {
+   "name": "scan-frame-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Home 'Your evening' dark with Nutrition card (Scan button, 3 meals), Live workout, Planning",
+   "ok": false,
+   "problem": "Ratee : page d'accueil au lieu du cadre de scan",
+   "adValue": 1,
+   "family": "nutrition"
+  },
+  {
+   "name": "scan-frame-white-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Home 'Your evening' dark (Nutrition, Bench press, Planning)",
+   "ok": false,
+   "problem": "Ratee : page d'accueil",
+   "adValue": 1,
+   "family": "nutrition"
+  },
+  {
+   "name": "scan-frame-white",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page light 1,672 kcal left with Add a food (aucun scan). Version kit = home 'Your evening' (ratee)",
+   "ok": false,
+   "problem": "Ratee dans les deux dossiers (home ou page Nutrition simple)",
+   "adValue": 1,
+   "family": "nutrition"
+  },
+  {
+   "name": "scan-frame",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Nutrition page light, Add a food, legere bande parasite au bord gauche. Version kit = home (ratee)",
+   "ok": false,
+   "problem": "Ratee : pas de cadre de scan",
+   "adValue": 1,
+   "family": "nutrition"
+  },
+  {
+   "name": "scan-recap-photo",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Summary sheet from a photo: Add a food, text 'Estimated from the photo, analyzed on your iPhone and not saved', Meals Dinner, Total all zeros (0 kcal), Goals, 'Add to log' disabled",
+   "ok": true,
+   "adValue": 2,
+   "problem": "Totaux a zero, aucun aliment reconnu",
+   "family": "nutrition"
+  },
+  {
+   "name": "scan-recap",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Summary sheet: Add a food, Meals Dinner, Total 0 kcal/0 g, 'After adding you'll have 1,672 kcal left', Goals, 'Add to log' disabled",
+   "ok": true,
+   "adValue": 2,
+   "problem": "Totaux a zero, aucun aliment reconnu",
+   "family": "nutrition"
+  },
+  {
+   "name": "pub26-planning-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Planning, This week (16-22 Nov, 18 selected), carte NEXT EVENT « Nothing planned that day. », onglets Day/Week/Month/Year, grille hebdo colorée (Math, Biology, History, English), boutons flottants New task / New event",
+   "ok": true,
+   "problem": "carte Next event vide, grille coupée par les boutons flottants",
+   "adValue": 5,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "pub26-home-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil « Your evening » : carte Nutrition (1,672 kcal, Protein/Carbs/Fat, Scan, 3 meals), Live workout Push-ups avec Set done, début de la carte Planning (semaine 16-22)",
+   "ok": true,
+   "problem": "aucun",
+   "adValue": 5,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "pub26-home-dark-b",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Même accueil sombre Your evening (Nutrition, Push-ups Set done, carte Planning), doublon quasi identique",
+   "ok": true,
+   "problem": "doublon de pub26-home-dark",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "pub26-planning-dark-b",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Même écran Planning This week sombre, doublon",
+   "ok": true,
+   "problem": "doublon",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "plan-0-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Planning This week sombre : sélecteur de semaine, Next event vide, onglet Week, grille d'événements, New task / New event",
+   "ok": true,
+   "problem": "identique à pub26-planning-dark, mais en plus petit cadre",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "plan-0",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Planning This week clair, même contenu",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "plan-1-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Planning Next week (23-29, 25 sélectionné), bouton Today, événements Essay/Group, grille Math/Biology/History/English, New task / New event",
+   "ok": true,
+   "problem": "liste d'événements du jour masquée par les boutons",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "plan-1",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Planning Next week clair",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "hab-0-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Habits : DONE TODAY 3/4, Streak 12 days, To do Fitness 54 %, Done (Meditate 81 %, Reading 66 %, No screens in bed 40 %), This week 10 of 12, bouton vert Add a habit",
+   "ok": true,
+   "problem": "bouton Add a habit couvre la grille",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "hab-0",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Habits clair 3/4 avec les mêmes sections",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "hab-1-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Habits 4/4 (toutes faites : Meditate 81 %, Fitness 57 %, Reading 66 %, No screens 40 %), This week 11 of 12",
+   "ok": true,
+   "problem": "aucun",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "hab-1",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Habits clair 4/4 avec Done (4 habitudes) et grille This week (version kit-472)",
+   "ok": true,
+   "problem": "la version du dossier kit est RATEE (écran d'accueil iOS à la place)",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-week-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Page Week, November 2026, 18 sélectionné, grille semaine avec événements colorés, liste Wednesday Nov 18 (8 items, Call the mechanic)",
+   "ok": true,
+   "problem": "aucun",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-week",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Page Week de novembre 2026, clair",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-week-empty",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Page Week octobre 2026, samedi 31 sélectionné, peu d'événements (5 items)",
+   "ok": true,
+   "problem": "semaine peu parlante",
+   "adValue": 2,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-month",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Page Month, November 2026, calendrier avec points colorés, liste du 18 (Call the mechanic, Run 5 km coché, Read 20 pages, Full body)",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-tasks",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Tasks : onglets To do/Today/Upcoming/Completed, Add a task, Overdue (Send the invoice, Pay rent), Today (Call the mechanic, Read 20 pages)",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-tasks-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil sombre Your evening (Nutrition, Bench press, Planning) au lieu de Tasks",
+   "ok": false,
+   "problem": "capture ratée : page d'accueil à la place de Tasks sombre",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-habits",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Habits clair 3/4, To do Fitness, Done, This week avec Add a habit",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-habits-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil sombre Your evening au lieu de Habits",
+   "ok": false,
+   "problem": "capture ratée : accueil à la place de Habits",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-focus",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair Your evening au lieu de l'écran Focus",
+   "ok": false,
+   "problem": "capture ratée : accueil à la place",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-import",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran d'accueil iOS (Fitness, Watch, Contacts, Files, Ardane) au lieu de l'import d'emploi du temps",
+   "ok": false,
+   "problem": "capture ratée : springboard iOS",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s00",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Planning clair, This week, Next event vide, grille semaine",
+   "ok": true,
+   "problem": "clair, début de défilement",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s01",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Planning en transition : Next event et sélecteur de semaine fantômes qui se chevauchent",
+   "ok": false,
+   "problem": "transition en cours",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s02",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Planning défilé : grille semaine entière, Pinch with two fingers, début de Today",
+   "ok": true,
+   "problem": "bouton flottant manque",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s03",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Chevauchement de deux écrans : bouton Set done de l'accueil sous le titre Planning",
+   "ok": false,
+   "problem": "transition en cours",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s04",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Planning défilé : bas de la grille, Link Apple Calendar, liste Today 4 items (Call the mechanic, Run 5 km, Read 20 pages, Full body), Today's top 3",
+   "ok": true,
+   "problem": "léger chevauchement en haut",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s05",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Fin de grille, carte Habits 3/4, Top 3, Studies/Budget, boutons flottants",
+   "ok": true,
+   "problem": "barre d'état collée sur la grille",
+   "adValue": 2,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s06",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé : Habits 3/4 avec grilles de streaks, Top 3, Studies D-6, Budget $109",
+   "ok": true,
+   "problem": "contenu coupé en haut",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s07",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Habits, Top 3 (Finish the presentation...), cartes Studies et Budget",
+   "ok": true,
+   "problem": "barre d'état par-dessus du contenu",
+   "adValue": 2,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s08",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Planning : Today's top 3 (3/3), Tasks, Projects, chevauchement de contenu en haut",
+   "ok": false,
+   "problem": "transition/chevauchement en haut",
+   "adValue": 2,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s09",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé : Studies, Budget $109, Don't forget, Business $9,352, Travel Lisbon D-18, Car 410 km range",
+   "ok": true,
+   "problem": "coupé en haut",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "app-planning-s10",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Planning bas de page : 30 minutes of exercise, Tasks (2 Overdue, 3 Today, 6 To do), Projects, Habits, Add my calendar events, Import my schedule, My settings",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s00-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil sombre Your evening : Nutrition 1,672, Live workout Bench press, début de Planning",
+   "ok": true,
+   "problem": "Bench press au lieu de Push-ups",
+   "adValue": 4,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s00",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair Your evening",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s01",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé : Nutrition, Live workout Push-ups, Set done, carte Planning",
+   "ok": true,
+   "problem": "coupé en haut",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s02",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé : Planning semaine et grille",
+   "ok": true,
+   "problem": "coupé en haut",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s03-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil sombre avec texte fantôme Bench press superposé à Push-ups, carte Planning",
+   "ok": false,
+   "problem": "transition en cours (texte superposé)",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s03",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair avec texte superposé Push-ups",
+   "ok": false,
+   "problem": "transition en cours",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s04",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair avec titre Planning superposé en haut",
+   "ok": false,
+   "problem": "transition en cours",
+   "adValue": 1,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s05",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé : bas de grille Planning, Link Apple Calendar, Habits, Top 3",
+   "ok": true,
+   "problem": "coupé en haut",
+   "adValue": 2,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s06-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil sombre défilé : Habits 3/4 avec streaks, Top 3, Studies et Budget",
+   "ok": true,
+   "problem": "aucun",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s06",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair, même contenu",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s07",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair : Habits, Top 3, Studies/Budget",
+   "ok": true,
+   "problem": "coupé",
+   "adValue": 2,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s08",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair : Top 3, Studies, Budget, Don't forget, Business",
+   "ok": true,
+   "problem": "coupé",
+   "adValue": 2,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "home-s09",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair bas : Studies, Budget, Don't forget, Business, Travel, Car, bouton +, My info 17/17",
+   "ok": true,
+   "problem": "clair",
+   "adValue": 3,
+   "family": "planning-accueil"
+  },
+  {
+   "name": "pub26-fitness-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Fitness hub, sombre : bandeau de semaine 16-22 (18 en rouge), grande carte verre 'LIVE WORKOUT / Full body / Push-ups · set 1 of 3', '15 x Bodyweight 3/6 sets', quatre raccourcis Program/Exercises/History/Progress, tuiles This week (2 h 14, 9,341 kg, 127 kcal, 3/3), boutons flottants 'Set done' et pastille repos avec minuteur 0:14 + pause",
+   "ok": true,
+   "problem": "Aucun ; la version kit-472 (pub26-fitness-dark-b) est identique avec minuteur 0:06",
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "pub26-fitness-dark-b",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Même écran Fitness hub sombre que pub26-fitness-dark, minuteur de repos 0:06 dans la pastille flottante",
+   "ok": true,
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s00",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Fitness hub clair, haut de page : semaine, carte Full body, raccourcis, This week ; flottants 'Set done' et pastille repos",
+   "ok": true,
+   "problem": "Libellé 'Ready' coupé en 'Read / y' avec pause sur deux lignes ; la version kit-472 est une capture RATÉE (page d'accueil)",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s01",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fitness hub clair, haut de page, 'Full body', raccourcis, This week (2 h 14 / 9,341 kg / 127 / 3/3), flottants 'Set done' et 'Ready' sur une ligne",
+   "ok": true,
+   "problem": "La version kit a le libellé 'Read/y' cassé ; kit-472 corrigée",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s02",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fitness hub clair, défilé de quelques pixels, carte Full body, raccourcis, This week, flottants Set done / Ready",
+   "ok": true,
+   "problem": "La version kit est une transition en cours (accueil et Fitness superposés)",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s03",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fitness hub clair défilé un peu plus : carte Full body, raccourcis, This week, note 'Calories and volumes estimated...', flottants Set done / Ready",
+   "ok": true,
+   "problem": "Version kit : 'Read/y' cassé",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s04",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fitness hub clair, en cours de défilement, en-tête flou, carte Full body qui remonte, raccourcis, This week",
+   "ok": true,
+   "problem": "Version kit RATÉE (page d'accueil Planning défilée) ; la kit-472 a un en-tête flou de défilement, intermédiaire",
+   "adValue": 2,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s05",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fitness hub clair défilé, carte Full body, raccourcis, This week, texte d'estimation, bouton 'My settings' à moitié visible, flottants Set done / Ready",
+   "ok": true,
+   "problem": "Version kit : 'Read/y' cassé",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s06",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Page d'accueil défilée (carte Habits 3/4, Top 3, Planning) au lieu de Fitness",
+   "ok": false,
+   "problem": "Capture RATÉE dans les deux dossiers : accueil, pas Fitness",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s07",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fitness hub clair défilé, 'Full body' remonté sous l'en-tête, raccourcis, This week, My settings, flottants Set done / Ready",
+   "ok": true,
+   "problem": "Version kit : 'Read/y' cassé",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s08",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fitness hub clair en bas de page : This week, texte d'estimation, bouton My settings, flottants Set done / Ready",
+   "ok": true,
+   "problem": "Version kit RATÉE (accueil défilé)",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s09",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Fitness hub clair défilé jusqu'à My settings, flottants Set done / pastille repos",
+   "ok": true,
+   "problem": "kit : 'Read/y' cassé ; kit-472 a l'accueil qui déborde sur le bord droit (transition partielle)",
+   "adValue": 2,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-s10",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fitness hub clair, bas de page : This week, My settings, Set done / Ready, titre Full body flou en haut",
+   "ok": true,
+   "problem": "Version kit : transition en cours",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-program",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Écran Program : My week lundi à dimanche (Upper body, Lower body, Full body en rouge), phrase d'aide, My workouts : Upper body (Bench press, Pull-ups, Overhead press, Dumbbell row, 4 exercises, about 32 min), Lower body",
+   "ok": true,
+   "problem": "Version kit RATÉE (accueil)",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-history",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Écran History : '21 workouts done', November 2026, liste Full body / Lower body / Upper body avec durée, séries et volume (ex. 55 min · 10 sets · 4,186 kg)",
+   "ok": true,
+   "problem": "Version kit RATÉE (accueil)",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-progress",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Page d'accueil 'Your evening' (Nutrition, Live workout Push-ups, Planning) au lieu de Progress",
+   "ok": false,
+   "problem": "RATÉE dans les deux dossiers ; app-fitness-progress-dark (kit) aussi",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-progress-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil sombre 'Your evening' avec Live workout Bench press, pas l'écran Progress",
+   "ok": false,
+   "problem": "RATÉE : page d'accueil",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-library",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Écran Exercises clair : recherche 'Bench press, squat, back, dumbbells...', filtres Muscle/Equipment/Type, Most performed (Bench press, Pull-ups, Squat, Overhead press, Romanian deadlift, Deadlift), My exercises",
+   "ok": true,
+   "problem": "Version kit RATÉE (accueil)",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-library-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Écran Exercises sombre : recherche, filtres, Most performed (Bench press, Squat, Overhead press, Pull-ups, Romanian deadlift, Deadlift) avec icônes info rouges",
+   "ok": true,
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-activity",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran Activity : 'Not available - This device doesn't count steps' (simulateur sans podomètre)",
+   "ok": true,
+   "problem": "Écran vide de contenu, inutilisable en pub",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-back-squat",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil 'Your evening' au lieu de la fiche Squat",
+   "ok": false,
+   "problem": "RATÉE (identique dans les deux dossiers)",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-back-squat-end",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Fiche Squat (barbell) défilée : Last workout (79.8 kg x 6), Personal best 79.8 kg, Volume 1,916, Frequency 8 in 30 days, courbe de poids, Alternatives (Front squat, Goblet squat, Bodyweight squat), bouton rouge Add to my workout",
+   "ok": true,
+   "problem": "Version kit-472 RATÉE (accueil)",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-bench-press",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil 'Your evening' au lieu de la fiche Bench press",
+   "ok": false,
+   "problem": "RATÉE dans les deux dossiers",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-bench-press-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil sombre avec carte Live workout Bench press, pas la fiche",
+   "ok": false,
+   "problem": "RATÉE",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-bench-press-end",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé (Don't forget, Business, Travel, Car, My info) au lieu de la fiche",
+   "ok": false,
+   "problem": "RATÉE dans les deux dossiers",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-deadlift",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil 'Your evening'",
+   "ok": false,
+   "problem": "RATÉE",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-deadlift-end",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé (Don't forget, Business, Travel, Car, My info)",
+   "ok": false,
+   "problem": "RATÉE dans les deux dossiers",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-pull-up",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil 'Your evening'",
+   "ok": false,
+   "problem": "RATÉE",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-exercise-pull-up-end",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé (Don't forget, Business...)",
+   "ok": false,
+   "problem": "RATÉE",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-session",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil clair avec carte Live workout Bench press (Set 3/4, 0:59) au lieu de l'écran de séance",
+   "ok": false,
+   "problem": "RATÉE dans les deux dossiers",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-session-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil sombre avec Live workout Bench press, minuteur 0:58",
+   "ok": false,
+   "problem": "RATÉE",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-session-end",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran Workout clair : repos 0:57 (-15 s +15 s Skip rest), Set done rouge, Skip set, Undo last set, Skip this exercise, liste Bench press 60x8 60x8, Pull-ups, Overhead press, Dumbbell row, Choose from library, Add an exercise, End workout",
+   "ok": true,
+   "problem": "Version kit-472 RATÉE (accueil défilé)",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "app-fitness-session-end-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil défilé sombre (Don't forget, Business, My info)",
+   "ok": false,
+   "problem": "RATÉE",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "ex-0",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fiche Bench press (barbell) : animation du développé couché (figure grise sur banc), légende 'Bras tendus', onglets Profil/3-4, muscles principaux Chest, Triceps, Shoulders, 'Starting position' avec texte anglais, bouton Add to my workout",
+   "ok": true,
+   "problem": "Légendes d'animation et 'Profil' restent en français dans une interface anglaise ; kit identique",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "ex-0-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Écran entièrement blanc avec seulement la barre d'état",
+   "ok": false,
+   "problem": "RATÉE dans les deux dossiers : écran vide",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "ex-1",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Fiche Squat (barbell) clair : animation du squat (descente, légende 'Descente, hanches en arrière'), muscles Quads/Glutes/Hamstrings/Lower back, Starting position, Add to my workout",
+   "ok": true,
+   "problem": "Légende française ; version kit-472 RATÉE (écran d'accueil iOS/springboard)",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "ex-1-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Fiche Squat (barbell) sombre : figure blanche avec barre, légende 'Remontée', onglets Profil / 3-4, Quads, Starting position, bouton Add to my workout rose",
+   "ok": true,
+   "problem": "Légende française ; kit-472 RATÉE (springboard iOS)",
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "ex-bench-press-en",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Fiche Bench press (barbell) clair, animation en phase 'Bras tendus', Add to my workout",
+   "ok": true,
+   "problem": "Légende française",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "lib-0",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Écran Exercises clair en haut de page : titre Exercises, recherche, filtres Muscle/Equipment/Type, Most performed",
+   "ok": true,
+   "problem": "Version kit légèrement défilée",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "lib-0-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Écran Exercises sombre en haut de page avec recherche, filtres et liste Most performed",
+   "ok": true,
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "lib-1",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Liste Exercises défilée : Pull-ups, Squat, Overhead press, Romanian deadlift, Deadlift, My exercises, Create an exercise, By muscle (Chest 16, Back 17, Shoulders 18)",
+   "ok": true,
+   "problem": "kit-472 : défilement différent (liste des muscles)",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "lib-1-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Exercises sombre défilé : liste des mouvements, My exercises, Create an exercise, By muscle",
+   "ok": true,
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "lib-2",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Exercises clair défilé sur By muscle : Chest 16, Back 17, Shoulders 18, Biceps 9, Triceps 10, Forearms 4, Quads 20, Hamstrings 10, Glutes 13, Calves 5, Abs 16, Lower back 6",
+   "ok": true,
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "lib-2-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Exercises sombre, liste By muscle avec les compteurs d'exercices",
+   "ok": true,
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "lib-3",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Exercises clair, liste By muscle (Chest à Lower back)",
+   "ok": true,
+   "problem": "Version kit-472 : écran BLANC vide (RATÉE)",
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "lib-3-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Exercises sombre, liste By muscle jusqu'à Lower back",
+   "ok": true,
+   "adValue": 3,
+   "family": "fitness"
+  },
+  {
+   "name": "session-0",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Écran Workout clair : Upper body 3/14 sets, minuteur 10:19, carte Bench press Set 4 of 4 (Last time 59.6 kg x 8, Reps 8, Weight 60 kg, repos 2:00), Set done rouge, Skip set, liste Workout",
+   "ok": true,
+   "problem": "Version kit : état un peu différent (2/14 sets, repos 0:38)",
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "session-0-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Écran Workout sombre : Upper body 2/14 sets, Bench press Set 3 of 4, 8 reps x 60 kg, repos 0:48, Set done, liste d'exercices",
+   "ok": true,
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "session-1",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran Workout clair : Pull-ups Set 2 of 4 (Weight Body...), repos 1:29, 5/14 sets, Bench press terminé 60x8 x4",
+   "ok": true,
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "session-1-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Écran Workout sombre : Bench press Set 4 of 4, 60 kg x 8, repos 1:55, 3/14 sets",
+   "ok": true,
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "session-2",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Écran Workout clair défilé : repos 1:21, Set done, Skip set, liste Bench press terminé (60 x 8 x4), Pull-ups en cours 8 reps, Overhead press, Dumbbell row, End workout",
+   "ok": true,
+   "problem": "Version kit RATÉE (springboard iOS)",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "session-2-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Écran Workout sombre : Pull-ups Set 1 of 4, repos 1:58, 4/14 sets, Bench press terminé",
+   "ok": true,
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "session-3",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran d'accueil iOS (springboard : Fitness, Watch, Contacts, Files, Ardane, Safari, Messages)",
+   "ok": false,
+   "problem": "RATÉE dans les deux dossiers : plus d'app au premier plan",
+   "adValue": 1,
+   "family": "fitness"
+  },
+  {
+   "name": "session-3-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Écran Workout sombre : Pull-ups Set 2 of 4, repos 1:28, 5/14 sets",
+   "ok": true,
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "session-list",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran Workout clair défilé : repos 1:22, liste Bench press terminé, Pull-ups en cours, Overhead press, Dumbbell row, Choose from library, Add an exercise, End workout",
+   "ok": true,
+   "problem": "Version kit-472 RATÉE (springboard iOS)",
+   "adValue": 4,
+   "family": "fitness"
+  },
+  {
+   "name": "session-list-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Écran Workout sombre défilé : repos 1:23, Set done, liste Bench press terminé 4 séries, Pull-ups 8 reps, Overhead press, Dumbbell row, End workout",
+   "ok": true,
+   "adValue": 5,
+   "family": "fitness"
+  },
+  {
+   "name": "demo-bench-press-dark-0000",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Image de la démo animée avant la refonte, format paysage 1608x944 : figure grise sur banc avec barre, haltère levé, sur tapis noir, fond blanc (transparent ?)",
+   "ok": true,
+   "problem": "Ancien dessin, différent de l'animation actuelle (fond blanc, pas de carte) ; réutilisable seulement comme animation détourée si le canal alpha est présent",
+   "adValue": 2,
+   "family": "fitness"
+  },
+  {
+   "name": "demo-bench-press-dark-0120",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Même démo, image 120 : barre redescendue sur la poitrine, mêmes tapis et figure",
+   "ok": true,
+   "problem": "Même remarque : style périmé, mouvement lisible mais incohérent avec l'app actuelle",
+   "adValue": 2,
+   "family": "fitness"
+  },
+  {
+   "name": "creator-budget",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Constructeur 'Create' : aperçu du widget Budget (Left this month $1,411 / Trip to Japan 43%), Change widget, onglets Content/Layout/Style, Size Small/Medium/Large, Save widget",
+   "ok": true,
+   "problem": "La version kit-472 est ratée (écran de choix de taille)",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-budget-medium",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Feuille 'Budget' : Create your widget, Medium, aperçu combiné Left this month + Trip to Japan, 2 selected, Customize widget",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-budget-studio",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran 'What size for your widget?' (Small/Medium/Large) au lieu du constructeur",
+   "ok": false,
+   "problem": "Capture ratée dans les deux dossiers",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-fitness",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran 'What size for your widget?'",
+   "ok": false,
+   "problem": "Ratée dans les deux dossiers",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-fitness-medium",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Feuille 'Fitness' : Create your widget, Medium, aperçu sombre 15 reps / 3/3 workouts, Set done, sélection de widgets (Full body, 15 reps, Ready), Customize widget",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-fitness-studio",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Même feuille Fitness Medium que creator-fitness-medium",
+   "ok": true,
+   "problem": "Doublon",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-nutrition",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Constructeur : widget Calories 1,672 kcal en anneau, fond dégradé violet-rose, Change widget, Content/Layout/Style, Size Small/Medium/Large, Save widget",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-nutrition-medium",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran de choix de taille",
+   "ok": false,
+   "problem": "Ratée dans les deux dossiers",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-nutrition-studio",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Choix de taille, ou feuille Nutrition à moitié montée (transition) dans kit-472",
+   "ok": false,
+   "problem": "Ratée / transition",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-student",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Constructeur : widget Planning Next class 08:30 English / Next exam 6 days Biology midterm, Content, Save widget",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-student-large",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Feuille 'Planning · studies', Large : emploi du temps hebdomadaire vert (15 items, Nov 16-22), 1 selected / 4 max, Customize widget",
+   "ok": true,
+   "problem": "Version kit-472 ratée (choix de taille)",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-student-large-sage",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Feuille Planning · studies Large, emploi du temps vert 'sage'",
+   "ok": true,
+   "problem": "Quasi identique à creator-student-large",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-student-medium",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Feuille Planning · studies Medium : Next class 08:30 + Next exam 6 days, widgets sélectionnables (Homework)",
+   "ok": true,
+   "problem": "Version kit ratée (choix de taille)",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "creator-student-studio",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Constructeur Planning (Next class / Next exam), Content, Save widget",
+   "ok": true,
+   "problem": "Doublon de creator-student ; version kit = feuille Planning Medium",
+   "adValue": 2,
+   "family": "creer-studio"
+  },
+  {
+   "name": "editor-v2",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Éditeur 'New widget' : widget Calories 1,672 kcal violet, onglets Content/Layout/Style, Size Small/Medium/Circular/Rectangular/Inline, Save widget",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "mywidgets",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "'My widgets' (9 widgets) : combo sombre Next set + Consistency + Records (8 x 60 kg, 3/3, 100 kg, 90 kcal), Edit/Duplicate/Favorite/Add to screen, filtres Find a widget",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "pub26-create-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Onglet Create sombre : 'What size for your widget?' avec Small, Medium, Large et tab bar Home/Create/Store/My widgets",
+   "ok": true,
+   "problem": "Identique dans les deux dossiers",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "pub26-create-dark-b",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Variante de pub26-create-dark (même écran sombre)",
+   "ok": true,
+   "problem": "Doublon",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "pub26-editor-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Éditeur sombre 'New widget' : widget Calories 1,672 kcal, Content, Size Small/Medium/Circular/Rectangular/Inline, Save widget bleu clair",
+   "ok": true,
+   "problem": "Identique dans les deux dossiers",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "pub26-editor-dark-b",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Page d'accueil 'Your evening' (Nutrition, Live workout, Planning)",
+   "ok": false,
+   "problem": "Ratée : accueil au lieu de l'éditeur",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "pub26-mywidgets-dark",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "My widgets en CLAIR (8 x 60 kg combo, Edit/Duplicate/Favorite/Add to screen)",
+   "ok": true,
+   "problem": "Le nom dit dark mais l'écran est clair ; la version kit-472 est un écran noir vide",
+   "adValue": 2,
+   "family": "creer-studio"
+  },
+  {
+   "name": "pub26-mywidgets-dark-b",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "My widgets sombre : combo Next set + Consistency + Records (15 reps, 3/3, 100 kg, 21 kcal), Edit/Duplicate/Favorite/Add to screen, filtres, My widgets actif",
+   "ok": true,
+   "problem": "",
+   "adValue": 5,
+   "family": "creer-studio"
+  },
+  {
+   "name": "spaces",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Choix de taille Create",
+   "ok": false,
+   "problem": "Ratée dans les deux dossiers",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "spaces-lock",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Choix de taille Create",
+   "ok": false,
+   "problem": "Ratée",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "spaces-lock-end",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Feuille 'Lock Screen' : Under the clock, no unlocking, During a workout (Bench press, rest 0:52, Pause/Skip/Set done), Productivity widgets 3 to do / Focus 17:58",
+   "ok": true,
+   "problem": "Fond de page encore visible en haut (feuille remontée)",
+   "adValue": 5,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Store : recherche, Featured/Home Screens/Widgets, 'Home screen of the week' Aurora avec bouton Install et maquette d'iPhone (mercredi 18 novembre)",
+   "ok": true,
+   "problem": "Version kit-472 vide",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-at-0.12",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran vide avec barre d'état",
+   "ok": false,
+   "problem": "Page blanche (capture trop tôt)",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-at-0.24",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran vide (parfois avec barre d'onglets)",
+   "ok": false,
+   "problem": "Vide",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-at-0.36",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Store défilé : combos Workout and consistency, Gym, Workout and volume, Packs, avec texte fantôme en haut",
+   "ok": false,
+   "problem": "Transition en cours (superposition en haut) ; version kit vide",
+   "adValue": 2,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-at-0.48",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Fond bleu clair vide",
+   "ok": false,
+   "problem": "Vide",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-at-0.6",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran blanc avec barre d'onglets Store",
+   "ok": false,
+   "problem": "Vide",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-at-0.72",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran blanc vide",
+   "ok": false,
+   "problem": "Vide",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-at-0.84",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran blanc avec onglet Home",
+   "ok": false,
+   "problem": "Vide",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Écran noir vide",
+   "ok": false,
+   "problem": "Vide",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-end",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Écran blanc vide",
+   "ok": false,
+   "problem": "Vide",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-page-0",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Page Store haute (1206x4096) : Featured, Home screen of the week Cream, Style of the week Space, To discover (Currency 66,00 EUR), début Home Screens",
+   "ok": true,
+   "problem": "Date ancienne 'Tuesday November 10' (ancien lot), différente de store.png (18 novembre)",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-page-1",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Page haute : Home Screens Cream/Aurora/Graphite, Wallpapers (Sea and waves, Black and white)",
+   "ok": true,
+   "problem": "Même lot daté du 10 novembre",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-page-2",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Page haute : Wallpapers (Soft gradients, Forest and mist, Cosmos), Widgets Must-haves (horloge 06:39), Lock Screen",
+   "ok": true,
+   "problem": "Lot ancien",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-page-3",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Page haute : Combos (Workout and consistency, Gym), Packs (Good habits, Gym, Athlete, Vivid color) avec bouton Get",
+   "ok": true,
+   "problem": "Lot ancien",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-page-4",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Bandeau Themed packs : Space et Mars (Get)",
+   "ok": true,
+   "problem": "Image courte 1206x1322",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-page-bottom",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Bande de 302 px avec barre d'onglets",
+   "ok": false,
+   "problem": "Fragment inutilisable",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "store-page-top",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Bande de 150 px, barre d'état",
+   "ok": false,
+   "problem": "Fragment inutilisable",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-background",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio New widget (Macros 1,078 kcal), Style > Background : Style/Color/Gradient/Glass/Photo, Texture None/Grain/Paper/Dots",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-background-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Accueil 'Your evening'",
+   "ok": false,
+   "problem": "Ratée : accueil",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-border",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio, Border : None/Solid/Dashed/Dots/Double/Glowing/Gradient, widget Macros",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-colors",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio, Colors : Main color (pastilles jade, bleu, corail, orange, violet, rose)",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-colors-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Studio sombre, Main color, widget Macros sombre",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-content",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, onglet Content : Size Small/Medium/Rectangular, In this widget, Macros 1,181 kcal",
+   "ok": true,
+   "problem": "La version kit montre le Theme à la place",
+   "adValue": 2,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-content-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre à mi-transition entre Content et Style/Theme",
+   "ok": false,
+   "problem": "Transition, onglets incohérents",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-font",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio avec l'accueil visible derrière et liste de thèmes, Reset to style settings grisé",
+   "ok": false,
+   "problem": "Transition",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-coral",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, Palettes : Coral sélectionné, widget Macros rose corail avec étincelles",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-coral-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, palette Coral, widget Macros rose",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-gold",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, palette Gold : widget noir et or avec étincelles",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-gold-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, palette Gold, widget noir et or",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-neon",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio, palette Neon, widget magenta/cyan, liste de palettes",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-neon-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Studio sombre, palette Neon, widget magenta",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-ocean",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, palette Ocean : widget bleu-turquoise étoilé",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-ocean-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, palette Ocean",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-sunset",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, palette Dusk/Sunset : widget dégradé orange-violet",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-palette-sunset-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, palette Sunset, widget orange-violet",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-cyber",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, Theme : Cyber sélectionné (magenta/cyan), grille de thèmes Ocean/Forest/Sunset/Cyber",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-cyber-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, thème Cyber, grille de thèmes",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-luxury",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, thème Luxury noir et or, cartes Luxury / Minimal Black",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-luxury-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, thème Luxury",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-midnight",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, thème Midnight (bleu nuit), cartes Midnight / Pure White, explication du thème",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-midnight-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, thème Midnight",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-ocean",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, thème Ocean turquoise, cartes Ocean/Forest",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-ocean-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, thème Ocean",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-sunset",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, thème Sunset orange-violet, cartes Sunset/Cyber",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-preset-sunset-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, thème Sunset",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio, Style : widget Macros blanc 1,078 kcal, explication 'A style changes the look and layout', cartes Minimal/Light",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Studio sombre, Style : Macros noir 1,078 kcal, cartes Minimal/Light",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-mid",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Accueil défilé (Planning, Habits 3/4, Top 3) sans le studio",
+   "ok": false,
+   "problem": "Ratée : accueil",
+   "adValue": 1,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-aurora",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, style Aurora : widget dégradé bleu-vert, grille Glass/Aurora",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-aurora-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, style Aurora",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-editorial",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, style Editorial : widget crème avec barre rouge/jaune/bleue (36 %, 51 %, 13 %), cartes Editorial/Magazine",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-editorial-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, style Editorial",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-liquidGlass",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, style Liquid Glass : widget doré, cartes Liquid Glass/Premium/Gradient/Neon",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-liquidGlass-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, style Liquid Glass doré",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-luxury",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, style Luxe/Luxury noir et or, cartes Data/Luxe/Fitness/Business",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-luxury-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, style Luxury",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-neon",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, style Neon magenta, cartes Liquid Glass/Premium/Gradient/Neon",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-neon-dark",
+   "folder": "kit",
+   "appearance": "dark",
+   "shows": "Studio sombre, style Neon magenta",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-paper",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, style Paper : widget papier crème, cartes Terminal/Blueprint/Pastel/Paper",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-paper-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, style Paper (widget crème)",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-space",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, style Space : widget étoilé, cartes Synthwave/Space/Mars/Nature",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-space-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, style Space",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-synthwave",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, style Synthwave : barres rouge/jaune/bleu sur fond magenta",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-style-synthwave-dark",
+   "folder": "kit-472",
+   "appearance": "dark",
+   "shows": "Studio sombre, style Synthwave",
+   "ok": true,
+   "problem": "",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-theme",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio, Theme : Macros blanc, explication d'un thème, cartes Midnight / Pure White",
+   "ok": true,
+   "problem": "",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-tt-dark",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio, Style : emploi du temps hebdomadaire vert au style sombre, trois styles dont le sombre sélectionné",
+   "ok": true,
+   "problem": "Version kit-472 ratée (accueil)",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-tt-dark-sage",
+   "folder": "kit-472",
+   "appearance": "light",
+   "shows": "Studio, Style : emploi du temps au style sombre sage, cartes de styles",
+   "ok": true,
+   "problem": "Quasi identique à studio-tt-dark",
+   "adValue": 3,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-tt-light",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio, Style : emploi du temps clair (15 items, grille verte), deuxième style sélectionné",
+   "ok": true,
+   "problem": "Version kit-472 ratée (accueil)",
+   "adValue": 4,
+   "family": "creer-studio"
+  },
+  {
+   "name": "studio-tt-light-sage",
+   "folder": "kit",
+   "appearance": "light",
+   "shows": "Studio, Style : emploi du temps clair sage (Weekly schedule 15 items), cartes de style, Save widget",
+   "ok": true,
+   "problem": "Version kit-472 ratée (accueil)",
+   "adValue": 4,
+   "family": "creer-studio"
+  }
+ ]
+}
