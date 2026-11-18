@@ -3,6 +3,8 @@ name: Build
 on:
   push:
     branches: [main]
+    # A push that changes only .md files, or no file at all (an empty commit), starts no run, whatever its tag:
+    # a tagged commit needs at least one other changed file (seen the 2026-11-18, two [daily] pushes without a run).
     paths-ignore: ["**.md"]
   workflow_dispatch:
 
