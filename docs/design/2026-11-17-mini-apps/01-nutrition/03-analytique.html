@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Nutrition — Direction 3 : Analytique</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="nutrition.css">
+<style>
+  .nut3-fig { font-size: 38px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+  .nut3-fig small { font-size: 14px; font-weight: 600; margin-left: 6px; color: var(--ink2); letter-spacing: 0; }
+  .nut3-ft { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .nut3-ft .pl-cap { margin: 0; }
+  .nut3-d { height: 74px; --bars-gap: 2px; --bar-r: 2px; margin-top: 4px; }
+  .nut3-d .b > i { opacity: .85; }
+  .nut3-cs { display: flex; flex-direction: column; gap: 9px; }
+  .nut3-cs p { margin: 0; font-size: 13px; line-height: 1.35; padding-left: 12px; position: relative; }
+  .nut3-cs p::before { content: ""; position: absolute; left: 0; top: 6px; width: 5px; height: 5px; border-radius: 50%; background: var(--c); }
+  .nut3-g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="nut" data-kind="direction">
+
+  <header class="bd-head"><div class="num">3</div>
+    <div><div class="pl-kick">Direction 3 sur 5</div>
+      <h1>Direction 3 · Analytique</h1>
+      <p>« Les tendances d'abord » : la page se lit par période, avec trois onglets « Jour », « Semaine », « Tendances ». Dans chacun, le graphique passe avant la liste, et l'Historique n'est plus une page à part. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Le graphique avant la liste</h3>
+      <p>Trois onglets en tête, un par durée. « Jour » découpe la journée par repas, « Semaine » montre sept barres, « Tendances » trente. Le « + » est dans la barre du haut. Le poids, les nutriments et les besoins se lisent comme des suites de ces graphiques.</p></div>
+    <div><h5>En ouvrant Nutrition</h5><ol>
+      <li data-p="1">Le reste, et la journée découpée par repas</li>
+      <li data-p="1">Trois onglets, « Tendances » avec un cadenas</li>
+      <li data-p="2">Protéines, glucides, lipides et leur part</li>
+      <li data-p="2">Les quatre repas serrés</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="2">Semaine : sept barres et la moyenne</li>
+      <li data-p="3">Tendances : trente jours, répartition, constats</li>
+      <li data-p="3">Poids, « Jour par jour », besoins, réglages</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">La meilleure pour comprendre pourquoi le poids avance ou non, et pour faire le point de la semaine.</p>
+      <p class="minus">Le « + » est loin du pouce, scanner demande deux touchers, et les onglets n'existent dans aucune autre mini-app.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Onglet « Jour »</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>La journée découpée par repas</h4>
+        <p>La barre du jour montre ce qui est mangé, repas par repas, et ce qui reste en creux. La répartition du jour est gratuite.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine, « kcal restantes », jauges des macros, quatre repas avec « + », « Tous les nutriments » (Premium).</span></li>
+          <li><span class="tag a"></span><span>Barre en parts par repas ; part des macros dans les calories ; « + » en haut à droite ; trois onglets. Sans caméra : « + » ouvre la recherche seule.</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Toucher l'onglet « Semaine ».</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher « + ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Tous les nutriments ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Onglet « Semaine »</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>La semaine, sans chercher</h4>
+        <p>Sept barres, la ligne d'objectif et les jours notés. Gratuit. La semaine dernière sert de repère.</p>
+        <ul><li><span class="tag e"></span><span>« Calories de la semaine », moyenne, jours dans l'objectif, jours notés.</span></li>
+          <li><span class="tag a"></span><span>Tuile « Série de suivi » (23 jours) : le calcul existe, la mini-app ne le montre pas.</span></li>
+          <li><span class="tag n"></span><span>Tuile « Semaine dernière » : comparer deux semaines.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher l'onglet « Tendances ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Onglet « Tendances » (vue Premium)</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p3"></div>
+      <div class="cap"><h4>Trente jours en une page</h4>
+        <p>Vue Premium montrée ici. Les moyennes, les trente barres et la répartition viennent de l'Historique.</p>
+        <ul><li><span class="tag e"></span><span>« Moyennes », « Calories par jour » avec la ligne « Objectif », « Répartition des calories ».</span></li>
+          <li><span class="tag a"></span><span>Périodes « 7 jours », « 30 jours », « Période » en tête de l'onglet.</span></li>
+          <li><span class="tag n"></span><span>« Constats » : trois phrases tirées de calculs existants.</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Poids et objectif ».</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher « Jour par jour ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">« Tendances », compte gratuit</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p4"></div>
+      <div class="cap"><h4>Le verrou se voit avant le toucher</h4>
+        <p>L'onglet porte un cadenas dès l'ouverture. Dedans, la carte Premium dit ce qui reste libre : le jour et la semaine.</p>
+        <ul><li><span class="tag e"></span><span>Carte « L'historique détaillé est dans Premium » et « Découvrir Premium ».</span></li>
+          <li><span class="tag a"></span><span>Cadenas sur l'onglet (aujourd'hui : segments grisés sans signe).</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Nutriments</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Quatre lignes ouvertes, puis le verrou</h4>
+        <p>L'état gratuit de la page : calories et macros, puis la ligne « Tous les nutriments ».</p>
+        <ul><li><span class="tag e"></span><span>« Objectifs » (quatre lignes gratuites), ligne verrouillée « Tous les nutriments ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Poids et objectif (vue Premium)</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p6"></div><span class="flow"></span>
+      <div class="cap"><h4>Le poids et son plan, réunis</h4>
+        <p>La courbe, le rythme et la date estimée sont au même endroit. La frise rappelle les objectifs d'hier.</p>
+        <ul><li><span class="tag e"></span><span>Courbe « Poids », ligne « Cible », « Ton objectif de poids » : rythme, date estimée, calories par jour.</span></li>
+          <li><span class="tag n"></span><span>« Évolution des objectifs » : l'app ne garde que la valeur d'aujourd'hui.</span></li>
+          <li><span class="tag g" data-to="9"></span><span>Toucher « Tes besoins par jour ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Jour par jour (Premium)</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p7"></div>
+      <div class="cap"><h4>Toucher un jour le replace</h4>
+        <p>Un jour ouvre la page principale sur ce jour, au lieu d'empiler une copie de la page.</p>
+        <ul><li><span class="tag e"></span><span>Liste jusqu'à 31 jours, « Tout voir ».</span></li>
+          <li><span class="tag a"></span><span>Toucher un jour place l'onglet « Jour » sur ce jour (aujourd'hui : une copie de la page s'ouvre).</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Toucher un jour.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Ajouter un aliment</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p8"></div>
+      <div class="cap"><h4>La recherche, inchangée</h4>
+        <p>Le « + » du haut ouvre la recherche actuelle avec ses accès « Scanner » et « Aliment perso ».</p>
+        <ul><li><span class="tag e"></span><span>Champ, « Scanner », « Aliment perso », familles, « Résultats », ligne « produits emballés ».</span></li>
+          <li><span class="tag a"></span><span>Étoile des favoris dans les résultats.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Tes besoins par jour</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p9"></div>
+      <div class="cap"><h4>Les cibles, une à une</h4>
+        <p>La liste des cibles, avec ce qui est calculé et ce qui est personnalisé. L'éditeur d'une cible se dessine sur la planche 5.</p>
+        <ul><li><span class="tag e"></span><span>« Calcul automatique », « Calculé d'après ton plan », cibles « Calculé » et « Personnalisé », « Recommandé : », « Comment c'est calculé ».</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le sélecteur de semaine, la recherche, la feuille de quantité, la page d'un repas, le scanner, « Mes paramètres », « Nutriments », les règles de calcul des moyennes.</span>
+          <b>Changé de place</b><span>L'Historique est réparti dans les trois onglets ; le poids a sa page, « Poids et objectif » ; les « Constats » se lisent à côté des graphiques ; le « + » passe en haut à droite.</span>
+          <b>Laissé de côté</b><span>« Mes repas » et « Mes aliments » restent en bas de l'onglet « Jour » (non dessinés). Le chiffre du reste est plus petit que sur la carte de Mon quotidien.</span>
+        </div>
+        <h4>Nouveau, à développer (3)</h4>
+        <p>1. « Évolution des objectifs » (écran 6) : demandée par la mission, l'app ne garde qu'une valeur ; elle change le calcul « jour dans l'objectif » des jours passés. 2. « Constats » (écran 3), Premium : trois phrases tirées de calculs existants. 3. « Semaine dernière » (écran 2) : une moyenne et un compte sur des données existantes.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : « Jour » et « Semaine » restent gratuits ; « Tendances », la courbe de poids, « Jour par jour » et la plupart des nutriments restent Premium, avec le cadenas visible avant le toucher.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="nutrition.js"></script>
+<script>
+const U_ = NUT.ui, J_ = NUT.jour, nb = (x) => PL.n(x);
+const tabs = (on, lock) => `<div style="display:flex;gap:10px;align-items:center;margin-top:6px">${PL.seg(['Jour', 'Semaine', lock ? 'Tendances ' + PL.ico('lock') : 'Tendances'], on, { st: 'flex:1' })}${PL.rbtn('plus', 'Ajouter')}</div>`;
+const plus = PL.rbtn('plus', 'Ajouter');
+
+/* 1 · Jour */
+const parts = [{ v: 420, c: 'var(--c-nut)' }, { v: 658, c: 'color-mix(in srgb, var(--c-nut) 50%, #fff)' }, { v: 1122, c: 'var(--track)' }];
+const page1 = tabs(0, true) + `<div style="margin-top:8px">${PL.wsel()}</div>
+  <article class="gl pl-hero" style="margin-top:8px;padding-bottom:12px">
+    <div class="nut3-ft"><span class="pl-lab">Aujourd'hui</span><span class="pl-cap">1 078 mangées sur 2 200 kcal</span></div>
+    <div class="nut3-fig" style="font-size:34px">1 122<small>kcal restantes</small></div>
+    <div style="margin-top:10px">${PL.stack(parts, 14)}</div>
+    ${PL.leg([['var(--c-nut)', 'Déjeuner 420'], ['color-mix(in srgb, var(--c-nut) 50%, #fff)', 'Dîner 658'], ['var(--track)', 'Reste 1 122']])}
+  </article>
+  ${PL.card(`${U_.m3({ pct: [26, 45, 29] })}`, { t: 'Macros et part des calories', st: 'margin-top:8px;padding-bottom:10px' })}
+  ${PL.list(J_.repas.map((m) => PL.row('', m.n, '', { r: m.vide ? 'Rien noté' : NUT.kc(m.kcal), plus: true, chev: false })).concat(PL.row('', 'Tous les nutriments', '', { prem: true })), { st: 'margin-top:10px' })}`;
+PL.mount('p1', page1);
+
+/* 2 · Semaine */
+const S = NUT.semaine, SP = NUT.semainePrec;
+const jrs = S.jours.map((j) => PL.row('', j.d, 'dans l\'objectif', { r: NUT.kc(j.kcal), chk: 'ok', chev: false }));
+PL.mount('p2', tabs(1, true) + `<div style="margin-top:8px">${PL.wsel()}</div>
+  ${PL.sect('Calories de la semaine', 'objectif 2 200 kcal', '', { st: 'margin-top:10px' })}
+  ${PL.card(PL.bars({ g: S.lab.map((l, k) => ({ l, v: [S.kcal[k] || 0], cur: k === 3, hl: k === 3 })), c: ['var(--c-nut)'], max: 2750, h: 80, bw: 22, ref: { v: 2200 }, aria: 'Calories de la semaine ; lundi 2 140, mardi 2 310, mercredi 1 980, jeudi 1 078 en cours ; objectif 2 200 kcal' })
+    + PL.leg([['var(--c-nut)', 'Jour complet'], ['var(--c-nut)', 'Aujourd\'hui, en cours', 'hat'], ['var(--ink2)', 'Objectif', 'dsh']]) + `<div class="pl-cap" style="margin-top:8px">${S.phrase.replace(/(\d[\d\s]*kcal)/, '<b>$1</b>')}</div>`, { st: 'padding-top:16px' })}
+  ${PL.kpis([PL.kpi('Série de suivi', '23', 'jours de suite', { i: 'flame', unit: NBSP + 'j' }), PL.kpi('Semaine dernière', nb(SP.moyenne), `kcal · ${SP.joursOk} jours sur 7 dans l'objectif`, { nw: true, sm: true })], 2, 'margin-top:10px')}
+  ${PL.list(jrs.concat(PL.row('', 'Jeu. 12 nov.', 'en cours', { r: '1 078 kcal', chev: false, chk: 'todo' })), { st: 'margin-top:10px' })}`);
+
+/* 3 · Tendances (Premium) : 30 jours */
+const H = NUT.h30, v30 = H.kcal.map((v) => v || 0);
+PL.mount('p3', tabs(2, false) + `
+  ${PL.chips(['7 jours', '30 jours', 'Période'], 1, { fit: true, st: 'margin-top:8px' })}
+  ${PL.card(PL.strip([[nb(H.moyenne), 'kcal'], [H.prot + ' g', 'Protéines'], [H.gluc + ' g', 'Glucides'], [H.lip + ' g', 'Lipides']], { st: 'box-shadow:none;background:none;padding:0' })
+    + `<div class="pl-cap" style="margin:8px 0 8px">${H.phrase}</div>` + PL.stack([{ v: 24, c: 'var(--c-prot)' }, { v: 48, c: 'var(--c-gluc)' }, { v: 28, c: 'var(--c-lip)' }], 10)
+    + PL.leg([['var(--c-prot)', 'Protéines 24 %'], ['var(--c-gluc)', 'Glucides 48 %'], ['var(--c-lip)', 'Lipides 28 %']]), { t: 'Moyennes', right: '14 oct. – 12 nov.', st: 'margin-top:8px' })}
+  ${PL.card(`<div class="nut3-d" role="img" aria-label="Calories des 30 derniers jours, objectif 2 200 kcal ; deux jours sans rien noté">${U.bars(v30, { goal: 2200, today: 29, max: 2750 })}</div>`
+    + PL.leg([['var(--c-nut)', 'Jour noté'], ['var(--ink2)', 'Objectif', 'dsh']]), { t: 'Calories par jour', right: '2 jours sans rien noté', st: 'margin-top:10px' })}
+  ${PL.card(`<div class="nut3-cs">${NUT.nouveau.constats.map((c) => `<p>${c}</p>`).join('')}</div>`, { t: 'Constats', nw: true, prem: false, st: 'margin-top:10px' })}
+  <div class="nut3-g2">${PL.btn('Poids et objectif', { k: 'T' })}${PL.btn('Jour par jour', { k: 'T' })}</div>`);
+
+/* 4 · Tendances, compte gratuit */
+PL.mount('p4', tabs(2, true) + `
+  <div class="pl-cap" style="margin:12px 2px 10px">Restent libres : le jour choisi et la semaine.</div>
+  ${PL.lockCard('L\'historique détaillé est dans Premium', 'Les moyennes, les trente jours, la répartition et le poids se lisent ici avec Premium.')}`);
+
+/* 5 · Nutriments, état gratuit */
+const nG = NUT.nutriments[0].items;
+const pg = (it, c) => PL.prog({ t: it[0], r: `<b>${nb(it[1])}</b> / ${nb(it[2])} ${it[3]}`, p: it[1] / it[2], c });
+PL.mount('p5', PL.nv('') + `<div style="display:flex;align-items:center;gap:10px">${PL.ttl('Nutriments')}</div>
+  ${PL.sect('Objectifs')}
+  ${PL.card([pg(nG[0], 'nut'), pg(nG[1], 'prot'), pg(nG[2], 'gluc'), pg(nG[3], 'lip')].join(''))}
+  ${PL.list([PL.row('leaf', 'Tous les nutriments', 'Fibres, sucres, minéraux, vitamines', { sq: true, prem: true, lock: true })], { st: 'margin-top:12px' })}
+  ${PL.lockCard('Tous les nutriments sont dans Premium', 'Trente-quatre nutriments de plus, avec leurs cibles.')}`);
+
+/* 6 · Poids et objectif (Premium) */
+const ps = NUT.poids.pesees30.map((x) => x[1]), pl = NUT.plan, o = NUT.nouveau.objectifs;
+PL.mount('p6', PL.nv('') + PL.ttl('Poids et objectif') + `
+  ${PL.card(`<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px"><span class="pl-num">71,6<small>kg</small></span><span class="pl-cap">−1,8 kg en 30 jours · moyenne sur 7 jours 71,9 kg</span></div>`
+    + PL.line({ series: [{ v: ps, c: 'var(--c-nut)', area: true, dot: true }], min: 67, max: 74, ref: { v: 68, t: 'Cible' }, yt: [68, 71, 74], yf: (v) => v + ' kg', w: 319, h: 84, xl: [[0, '15 oct.'], [13, '12 nov.']], aria: 'Poids de 73,4 kg à 71,6 kg en 30 jours ; cible 68 kg' }), { t: 'Poids', prem: true, st: 'padding-bottom:6px' })}
+  ${PL.kvs([PL.kv('Rythme', '−0,45 kg par semaine'), PL.kv('Date estimée', pl.date), PL.kv('Calories par jour', '2 200 kcal', { chev: true })], { st: 'margin-top:10px' })}
+  ${PL.sect('Évolution des objectifs', '', '', { nw: true })}
+  ${PL.list(o.map((x) => PL.row('', x.d, `${x.t} · ${x.s}`, { r: NUT.kc(x.kcal), chev: false })), { nw: true })}`);
+
+/* 7 · Jour par jour (Premium) */
+const jj = NUT.jourParJour;
+PL.mount('p7', PL.nv('') + `<div style="display:flex;align-items:center;gap:10px">${PL.ttl('Jour par jour')}${PL.prem()}</div>
+  ${PL.list(jj.map(([d, k], i) => PL.row('', d, i === 0 ? 'en cours' : k > 2420 ? 'au-dessus de l\'objectif' : 'dans l\'objectif', { r: NUT.kc(k), rc: k > 2420 ? 'over' : '' })), { st: 'margin-top:8px' })}
+  <div class="pl-link" style="margin-top:8px;justify-content:center;color:var(--cs);font-weight:600">Tout voir</div>`);
+
+/* 8 · Ajouter un aliment (recherche) */
+const R = NUT.recherche;
+PL.mount('p8', page1, PL.sheet(`
+  ${PL.search(R.mot)}
+  <div class="nut3-g2" style="margin-top:8px">${PL.btn('Scanner', { i: 'scan', k: 'T' })}${PL.btn('Aliment perso', { i: 'plusbox', k: 'T' })}</div>
+  ${PL.chips(NUT.familles.slice(0, 4), 0, { fit: true, st: 'margin-top:10px' })}
+  ${PL.sect('Résultats')}
+  ${PL.list(R.resultats.map((a) => PL.row('', a.n, NUT.l100(a), { chev: false, r: a.fav ? '<i data-i="star" class="nut-star"></i>' : null })).concat(PL.row('search', R.emballes, '', { chev: true })))}`, 'Ajouter un aliment', { right: '', full: true }));
+
+/* 9 · Tes besoins par jour */
+PL.mount('p9', PL.nv('') + PL.ttl('Tes besoins par jour') + `
+  ${PL.kvs([PL.kv('Calcul automatique', PL.sw(true)), PL.kv('Calculé d\'après ton plan', 'Voir le récapitulatif', { chev: true })], { st: 'margin-top:8px' })}
+  ${PL.list(NUT.cibles.slice(0, 4).map((c) => PL.row('', c.n, c.reco ? `Recommandé : ${c.reco} g` : 'Calculé d\'après ton plan', { r: c.v + NBSP + c.u, r2: c.origine, chev: true })).concat(PL.row('leaf', 'Acides gras, minéraux et vitamines', '', { sq: true, prem: true })), { st: 'margin-top:10px' })}
+  <div class="pl-link" style="margin-top:10px"><span style="display:flex;gap:7px;align-items:center"><i data-i="info" style="font-size:18px"></i>Comment c'est calculé</span></div>`);
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [1, 'Sélecteur de semaine, sous les onglets.'], F2: ['=', 'Sans écran : la page suit le jour quand l\'app se rouvre.'],
+  F3: [1, 'Chiffre « kcal restantes » et barre par repas.'], F4: [1, 'Carte « Macros et part des calories », trois jauges.'],
+  F5: ['=', 'Carte « À remplir » en tête de l\'onglet « Jour » (compte neuf).'],
+  F6: [8, 'Bouton « Scanner » de la recherche.'], F7: [[1, 8], 'Bouton « + » du haut ; champ de la recherche.'],
+  F8: [8, 'Résultats de la recherche hors ligne.'], F9: [8, 'Pastilles de familles.'], F10: [8, 'Ligne « Chercher « yogourt » dans les produits emballés ».'],
+  F11: ['=', 'Feuille de quantité, inchangée.'], F12: [1, '« + » de chaque ligne de « Repas ».'], F13: [8, 'Bouton « Aliment perso ».'], F14: ['=', 'Section « Mes repas » de la recherche, inchangée.'],
+  F15: ['=', 'Scanner de codes-barres, inchangé, ouvert depuis la recherche.'], F16: ['=', 'Scan d\'un plat, inchangé.'], F17: ['=', 'Galerie du scanner, inchangée.'], F18: ['=', 'Flash, inchangé.'],
+  F19: ['=', 'Explication avant la caméra, inchangée.'], F20: ['=', 'Sorties d\'un code-barres, inchangées.'], F21: ['=', 'Récapitulatif du scan, inchangé.'], F22: ['=', '« À confirmer », inchangé.'],
+  F23: ['=', 'Apprentissage local du scanner, inchangé.'], F24: ['=', 'Compteur d\'analyses, inchangé.'], F25: ['=', '« Scanner à nouveau », inchangé.'], F26: ['=', 'Pas de doublon, inchangé.'],
+  F27: [1, 'Quatre repas serrés, après les graphiques.'], F28: ['=', 'Page d\'un repas, inchangée.'], F29: ['=', 'Feuille d\'un aliment noté, inchangée.'], F30: ['=', 'Glisser pour supprimer, inchangé.'],
+  F31: ['=', 'Favori en glissant, inchangé ; étoile ajoutée à la recherche (écran 8).'], F32: ['=', 'Reprise d\'un repas précédent, inchangée.'], F33: ['=', 'Section « Mes repas » d\'un repas, inchangée.'], F34: ['=', '« Enregistrer ce repas », inchangé.'],
+  F35: ['=', 'Ligne « Mes repas » au bas de l\'onglet « Jour », page inchangée.'], F36: ['=', 'Ligne « Mes aliments » au bas de l\'onglet « Jour », page inchangée.'],
+  F37: [1, 'Ligne « Tous les nutriments », badge Premium.'], F38: [5, 'Page « Nutriments » : quatre lignes, puis verrou.'], F39: ['=', 'Carte conseil au bas de l\'onglet « Jour ».'], F40: ['=', 'Page « Idées », inchangée, ouverte par la carte conseil.'],
+  F41: [2, 'Carte « Calories de la semaine » de l\'onglet.'], F42: [[3, 4], 'Périodes de l\'onglet « Tendances », cadenas.'], F43: [[1, 3], 'Bilan du jour (1) ; « Moyennes » (3).'],
+  F44: [3, 'Carte « Calories par jour », trente barres.'], F45: [[1, 3], 'Part des macros (1) ; « Répartition » (3).'], F46: [6, 'Courbe « Poids » avec ligne « Cible ».'], F47: [7, 'Liste « Jour par jour ».'],
+  F48: ['=', 'Bouton « Mes paramètres » au bas de l\'onglet « Jour ».'], F49: ['=', '« Rappel des repas », inchangé.'], F50: ['=', '« Ton objectif », inchangé.'],
+  F51: [6, 'Rythme et date estimée sous la courbe.'], F52: ['=', 'Question grossesse, inchangée.'], F53: ['=', '« Toi », inchangé.'], F54: ['=', 'Niveau d\'activité, inchangé.'],
+  F55: [6, 'Ligne « Calories par jour » ; récapitulatif ouvert au toucher.'], F56: ['=', '« Ajustement proposé » en tête de « Mes paramètres », inchangé.'], F57: ['=', '« Nouveau calcul proposé » en tête de « Mes paramètres », inchangé.'],
+  F58: [9, 'Liste des cibles, « Calculé » et « Personnalisé ».'], F59: ['=', 'Carte de Mon quotidien : « 7 jours » ouvre l\'onglet « Semaine ».'], F60: ['=', 'Widgets : inchangés.'],
+  F61: ['=', 'Ajout rapide : widget Premium, inchangé.'], F62: ['=', 'Notifications inchangées, réglées dans « Rappels ».'], F63: ['=', 'Espace Nutrition côté Créer : inchangé.'], F64: ['=', 'Note des sources au bas de l\'onglet « Jour ».'],
+});
+PL.init();
+</script>
+</body>
+</html>

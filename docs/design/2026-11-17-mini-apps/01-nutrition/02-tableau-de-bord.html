@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Nutrition — Direction 2 : Tableau de bord</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="nutrition.css">
+<style>
+  .nut2-sub { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+  .nut2-sub div { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; color: var(--ink2); }
+  .nut2-sub b { font-size: 15px; color: var(--ink); font-weight: 650; }
+  .nut2-sub .rest { border-top: 1px solid var(--rule); padding-top: 6px; color: var(--ink); font-weight: 650; }
+  .nut2-sub .rest b { color: var(--cs); font-size: 17px; }
+  .nut2-three { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .nut2-three .btnP, .nut2-three .btnT { font-size: 13px; padding-left: 6px; padding-right: 6px; gap: 5px; white-space: nowrap; }
+  .nut2-band { display: grid; grid-template-columns: repeat(4, 1fr); padding: 6px; }
+  .nut2-band > div { text-align: center; padding: 8px 2px; }
+  .nut2-band > div + div { border-left: 1px solid var(--rule); }
+  .nut2-band i { font-size: 18px; color: var(--c); }
+  .nut2-band span { display: block; font-size: 12px; color: var(--ink2); margin: 2px 0; }
+  .nut2-band b { display: block; font-size: 15px; }
+  .nut2-band small { font-size: 11px; font-weight: 500; color: var(--ink2); margin-left: 1px; }
+  .nut2-band .pl-plus { margin: 2px auto 0; display: flex; justify-content: center; }
+  .nut2-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .nut2-tile { padding: 12px 13px 13px; min-height: 108px; position: relative; }
+  .nut2-tile .h { display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 650; color: var(--ink2); }
+  .nut2-tile .h i { color: var(--c); font-size: 16px; }
+  .nut2-tile .v { font-size: 24px; font-weight: 700; letter-spacing: -.02em; margin: 8px 0 2px; line-height: 1.1; }
+  .nut2-tile .v small { font-size: 12px; font-weight: 600; color: var(--ink2); margin-left: 3px; letter-spacing: 0; }
+  .nut2-tile .s { font-size: 12px; color: var(--ink2); line-height: 1.3; }
+  .nut2-tile .pl-new { position: absolute; top: 9px; right: 9px; }
+  .nut2-tile .lk { margin-left: auto; font-size: 13px; }
+  .nut2-mini { display: flex; align-items: flex-end; gap: 3px; height: 28px; margin: 8px 0 4px; }
+  .nut2-mini i { flex: 1; background: var(--c); border-radius: 2px; opacity: .85; }
+  .nut2-mini i.f { background: none; border-top: 1.5px dashed var(--rule2); opacity: 1; }
+  .nut2-rep { position: relative; }
+  .nut2-menu { position: absolute; right: 8px; top: 104px; z-index: 3; width: 190px; padding: 4px; border-radius: 14px; background: #fff; box-shadow: 0 8px 24px rgba(20,40,80,.18), 0 0 0 1px var(--rule); }
+  .nut2-menu div { padding: 11px 12px; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .nut2-menu div + div { border-top: 1px solid var(--rule); color: var(--pl-over); }
+  .nut2-it { font-size: 12px; color: var(--ink2); line-height: 1.35; margin: 4px 0 10px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="nut" data-kind="direction">
+
+  <header class="bd-head"><div class="num">2</div>
+    <div><div class="pl-kick">Direction 2 sur 5</div>
+      <h1>Direction 2 · Tableau de bord</h1>
+      <p>« Le bilan du jour en tuiles » : chaque question (calories, macros, repas, semaine, poids, nutriments) a sa tuile avec son chiffre, et chaque tuile ouvre sa page. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Le bilan écrit comme une soustraction</h3>
+      <p>Le héros lit « objectif − mangé = reste ». Trois boutons directs ajoutent un aliment sans passer par un menu. Dessous, une grille de tuiles : chaque tuile donne un chiffre et ouvre sa page. Aucun onglet : la navigation se fait en étoile.</p></div>
+    <div><h5>En ouvrant Nutrition</h5><ol>
+      <li data-p="1">Objectif, mangé, reste, et l'anneau</li>
+      <li data-p="1">« Code-barres », « Photo », « Rechercher »</li>
+      <li data-p="2">Trois tuiles de macros avec ce qui reste</li>
+      <li data-p="2">La bande des quatre repas</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">Six tuiles : semaine, poids, nutriments, série, idées, eau</li>
+      <li data-p="3">« Historique », « Ma bibliothèque »</li>
+      <li data-p="3">Note des sources, « Mes paramètres »</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">Tout le bilan d'un coup d'œil ; chaque question a sa porte, sans liste de liens.</p>
+      <p class="minus">La page est dense, les aliments d'un repas sont à un toucher de plus, et un compte neuf voit des tuiles vides ou verrouillées.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Page principale, haut</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Le bilan, puis trois boutons</h4>
+        <p>Le héros écrit la soustraction ; les trois boutons ouvrent chacun une façon d'ajouter. Sans caméra : un seul « Ajouter un aliment ».</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine, anneau « kcal restantes », jauges des macros, quatre repas avec « + ».</span></li>
+          <li><span class="tag a"></span><span>« Objectif », « Mangé », « Reste » écrits à côté de l'anneau ; « Photo » devient un bouton ; « reste 72 g » sous chaque macro ; repas en bande.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Code-barres » (la caméra, puis le récapitulatif).</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Page principale, suite</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Six tuiles, six portes</h4>
+        <p>Chaque question a sa tuile. Un compte gratuit voit un cadenas sur « Nutriments » ; « Eau » est une idée nouvelle.</p>
+        <ul><li><span class="tag e"></span><span>« Calories de la semaine », « Idées », « Tous les nutriments » (Premium), « Historique », « Mes paramètres », note des sources.</span></li>
+          <li><span class="tag a"></span><span>« Objectif de poids » et « Série de suivi » (23 jours) : le calcul existe, la mini-app ne les montre pas.</span></li>
+          <li><span class="tag n"></span><span>Tuile « Eau » : l'hydratation a été retirée le 2026-10-15.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher « Nutriments ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Objectif de poids ».</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Ma bibliothèque ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Récapitulatif d'un code-barres</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p3"></div>
+      <div class="cap"><h4>Un scan, un récapitulatif</h4>
+        <p>Le scan s'ouvre seul depuis « Code-barres ». La croix revient à la page en une seule fermeture.</p>
+        <ul><li><span class="tag e"></span><span>Quantité, apport, repas, « Objectifs », « Ajouter au journal », « Scanner à nouveau », mention Open Food Facts.</span></li>
+          <li><span class="tag a"></span><span>Annuler le scan ferme tout en un geste (aujourd'hui : deux fermetures).</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Toucher « Ajouter au journal ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Nutriments (vue Premium)</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p4"></div>
+      <div class="cap"><h4>La page « Nutriments », telle quelle</h4>
+        <p>Vue Premium montrée ici. Un compte gratuit voit les quatre premières lignes, puis la ligne verrouillée.</p>
+        <ul><li><span class="tag e"></span><span>« Objectifs », « À limiter », « Minéraux » ; « partiel » et « Non disponible » gardent leur place.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Objectif de poids</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Le poids, enfin d'un seul tenant</h4>
+        <p>La courbe et le plan, aujourd'hui coupés en deux endroits, sont réunis. Courbe en Premium.</p>
+        <ul><li><span class="tag e"></span><span>Courbe « Poids » et ligne « Cible » ; « Ton objectif de poids » : poids, durée, rythme, date estimée.</span></li>
+          <li><span class="tag a"></span><span>« Ajouter une pesée » et « Modifier l'objectif » à côté du récapitulatif (la pesée se saisit aujourd'hui dans « Mes paramètres »).</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Retour à la tuile.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Ma bibliothèque</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p6"></div>
+      <div class="cap"><h4>Favoris, repas et aliments réunis</h4>
+        <p>Trois segments au lieu de pages dispersées. Le menu « … » d'un repas ajoute « Renommer ».</p>
+        <ul><li><span class="tag e"></span><span>« Mes repas », « Mes aliments », « Ajouter à ma journée », « Supprimer ce repas ».</span></li>
+          <li><span class="tag a"></span><span>Segment « Favoris » : la liste des favoris vit aujourd'hui dans l'espace Créer.</span></li>
+          <li><span class="tag n"></span><span>« Renommer » un repas enregistré.</span></li></ul></div></div>
+
+    <div class="col pl-w2"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>La recherche, la feuille de quantité, la page d'un repas, l'Historique, « Nutriments », « Idées », « Mes paramètres », le scanner.</span>
+          <b>Changé de place</b><span>Photo, code-barres et recherche deviennent trois boutons. Les repas passent en bande. La semaine, le poids et la série deviennent des tuiles. Favoris, repas et aliments se réunissent.</span>
+          <b>Laissé de côté</b><span>Le journal des objectifs, les constats, la comparaison des semaines. Les aliments d'un repas se voient dans sa page, pas sur le tableau.</span>
+        </div>
+        <h4>Nouveau, à développer (2)</h4>
+        <p>1. Tuile « Eau » (écran 2) : l'hydratation, retirée le 2026-10-15 ; à décider. 2. « Renommer » un repas enregistré (écran 6) : il n'existe que « Ajouter » et « Supprimer ».</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé. Un compte gratuit voit un cadenas sur la tuile « Nutriments » et sur la courbe « Poids » ; le reste du tableau est gratuit.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="nutrition.js"></script>
+<script>
+const U_ = NUT.ui, J_ = NUT.jour;
+
+/* bloc commun : sélecteur + héros-soustraction + trois boutons + trois macros + bande des repas */
+const band = `<div class="pn nut2-band">${J_.repas.map((m) => `<div>${PL.ico(m.i)}<span>${m.n}</span>${m.vide ? '<span class="pl-plus" role="button" aria-label="Ajouter"><u><i data-i="plus"></i></u></span>' : `<b>${m.kcal}<small>kcal</small></b>`}</div>`).join('')}</div>`;
+const page1 = PL.nv('Nutrition', '', { back: false }) + `<div style="margin-top:4px">${PL.wsel()}</div>
+  <article class="gl pl-hero split" style="margin-top:10px">
+    ${U_.ring({ s: 104 })}
+    <div class="nut2-sub"><div>Objectif<b>2 200 kcal</b></div><div>Mangé<b>1 078 kcal</b></div><div class="rest">Reste<b>1 122 kcal</b></div></div>
+  </article>
+  <div class="nut2-three">${PL.btn('Code-barres', { i: 'barcode' })}${PL.btn('Photo', { i: 'camera', k: 'T' })}${PL.btn('Rechercher', { i: 'search', k: 'T' })}</div>
+  <div style="margin-top:12px">${U_.macroKpis()}</div>
+  ${PL.sect('Repas', NUT.kc(1078), '', { st: 'margin-top:12px' })}
+  ${band}`;
+PL.mount('p1', page1);
+
+/* 2 · suite : six tuiles */
+const sem = NUT.semaine.kcal.map((v) => v || 0), mx = 2400;
+const mini = `<div class="nut2-mini">${sem.map((v, k) => (v ? `<i style="height:${Math.round(v / mx * 28)}px${k === 3 ? ';opacity:.45' : ''}"></i>` : `<i class="f" style="height:4px"></i>`)).join('')}</div>`;
+const tile = (i, h, v, s, o = {}) => `<div class="pn nut2-tile${o.nw ? ' pl-newbox' : ''}"><div class="h"><i data-i="${i}"></i>${h}${o.lock ? '<i class="lk" data-i="lock"></i>' : ''}</div>${o.nw ? PL.nw() : ''}${v ? `<div class="v">${v}</div>` : o.mini || ''}<div class="s">${s}</div></div>`;
+PL.mount('p2', PL.nv('Nutrition', '', { back: false }) + `
+  <div class="nut2-tiles" style="margin-top:6px">
+    ${tile('bars', 'Semaine', '', '3 jours sur 4 dans l\'objectif', { mini })}
+    ${tile('scale', 'Objectif de poids', '71,6<small>kg</small>', 'cible 68 kg')}
+    ${tile('leaf', 'Nutriments', '', 'Fibres, sucres, sodium', { lock: true, mini: `<div style="margin:12px 0 4px">${PL.prem()}</div>` })}
+    ${tile('flame', 'Série de suivi', '23<small>jours</small>', 'de suite avec un repas noté')}
+    ${tile('bulb', 'Idées', '', 'Il te reste environ 1 122 kcal', { mini: `<div class="v" style="font-size:19px">1 122<small>kcal</small></div>` })}
+    ${tile('glass', 'Eau', '1,25<small>L sur 2 L</small>', '5 verres sur 8 · + 250 ml', { nw: true })}
+  </div>
+  ${PL.list([PL.row('chart', 'Historique', 'Moyennes, tendances et poids', { sq: true }), PL.row('fork', 'Ma bibliothèque', '3 repas · 2 aliments · 3 favoris', { sq: true })], { st: 'margin-top:12px' })}
+  ${U_.note()}
+  ${PL.settings()}`);
+
+/* 3 · récapitulatif d'un code-barres (feuille sur la page principale) */
+const c = NUT.scan.code;
+PL.mount('p3', page1, PL.sheet(`
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 2px 8px"><b style="font-size:17px">${c.n}</b><span class="pl-pill n">${c.src}</span></div>
+  ${PL.kvs([PL.kv('Quantité', PL.stepper(c.portion)), PL.kv('Repas', 'Collation')])}
+  ${PL.strip([[c.kcal, 'kcal'], [PL.n(c.p, 1) + ' g', 'Protéines'], [c.g + ' g', 'Glucides'], [c.l + ' g', 'Lipides']], { st: 'margin-top:10px' })}
+  <div class="x-lab" style="margin:12px 2px 2px">Objectifs</div>
+  <div class="pl-cap" style="margin:2px 2px 10px">Après ajout, il te restera <b>${PL.n(c.resteApres)} kcal</b>.</div>
+  <div style="display:flex;gap:10px;align-items:center">${PL.btn('Ajouter au journal', { i: 'plusbox' })}${PL.rbtn('camera', 'Scanner à nouveau', 'gl')}</div>
+  ${PL.foot('Produit : Open Food Facts (licence ODbL).')}`, 'Récapitulatif', { right: '' }));
+
+/* 4 · Nutriments (vue Premium) */
+const nutG = NUT.nutriments;
+const pg = (it, c) => PL.prog({ t: it[0], r: it[1] == null ? '—' : `<b>${PL.n(it[1], it[1] % 1 ? 1 : 0)}</b> / ${it[2] == null ? '—' : PL.n(it[2])} ${it[3]}`, p: it[1] == null || it[2] == null ? null : it[1] / it[2], c, sub: it[4] === 'partiel' ? 'partiel' : it[4] === 'nd' ? 'Non disponible' : '' });
+PL.mount('p4', PL.nv('') + `<div style="display:flex;align-items:center;gap:10px">${PL.ttl('Nutriments')}${PL.prem()}</div>
+  ${PL.sect('Objectifs')}
+  ${PL.card([pg(nutG[0].items[0], 'nut'), pg(nutG[0].items[1], 'prot'), pg(nutG[0].items[2], 'gluc'), pg(nutG[0].items[3], 'lip'), pg(nutG[0].items[4], 'nut')].join(''))}
+  ${PL.sect('À limiter')}
+  ${PL.card([pg(nutG[1].items[0], 'nut'), pg(nutG[1].items[1], 'nut'), pg(nutG[1].items[4], 'nut')].join(''))}
+  ${PL.sect('Minéraux')}
+  ${PL.card([pg(nutG[3].items[0], 'nut'), pg(nutG[3].items[1], 'nut'), pg(nutG[3].items[2], 'nut')].join(''))}`);
+
+/* 5 · Objectif de poids */
+const ps = NUT.poids.pesees30.map((x) => x[1]), pl = NUT.plan;
+PL.mount('p5', PL.nv('') + PL.ttl('Objectif de poids') + `
+  ${PL.card(`<div style="display:flex;align-items:baseline;gap:10px;margin-bottom:8px"><span class="pl-num">71,6<small>kg</small></span><span class="pl-cap">−1,8 kg en 30 jours</span></div>`
+    + PL.line({ series: [{ v: ps, c: 'var(--c-nut)', area: true, dot: true }], min: 67, max: 74, ref: { v: 68, t: 'Cible' }, yt: [68, 71, 74], yf: (v) => v + ' kg', w: 319, h: 96, xl: [[0, '15 oct.'], [13, '12 nov.']], aria: 'Poids de 73,4 kg à 71,6 kg en 30 jours ; cible 68 kg' }), { t: 'Poids', i: 'scale', prem: true, st: 'padding-bottom:6px' })}
+  ${PL.sect('Ton objectif de poids')}
+  ${PL.kvs([PL.kv('Poids actuel', '71,6 kg'), PL.kv('Poids cible', '68 kg'), PL.kv('Durée', pl.duree), PL.kv('Rythme', '−0,45 kg par semaine'), PL.kv('Calories par jour', '2 200 kcal'), PL.kv('Date estimée', pl.date)])}
+  <div class="g2" style="margin-top:10px">${PL.btn('Ajouter une pesée', { i: 'plus', k: 'T' })}${PL.btn('Modifier l\'objectif', { k: 'O' })}</div>`);
+
+/* 6 · Ma bibliothèque */
+const repasCard = (r, k) => `<article class="pn cd nut2-rep" style="padding:12px 14px 12px;margin-top:10px${k === 0 ? ';z-index:5' : ''}"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><b style="font-size:15px">${r.n}</b><span class="pl-cap">${NUT.kc(r.kcal)} · P ${r.p} g</span></div>
+  <div class="nut2-it">${r.items.map((a) => a.n).join(', ')}</div>
+  <div style="display:flex;gap:8px;align-items:center">${PL.btn('Ajouter à ma journée', { k: 'T', st: 'flex:1' })}${PL.rbtn('dots', 'Menu du repas', 'gl')}</div>
+  ${k === 0 ? `<div class="nut2-menu"><div>Renommer ${PL.nw()}</div><div>Supprimer ce repas<i data-i="trash"></i></div></div>` : ''}</article>`;
+PL.mount('p6', PL.nv('') + PL.ttl('Ma bibliothèque') + `
+  ${PL.seg(['Mes repas · 3', 'Aliments · 2', 'Favoris · 3'], 0, { st: 'margin-top:8px' })}
+  ${NUT.mesRepas.map((r, k) => repasCard(r, k)).join('')}`);
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [1, 'Sélecteur de semaine, en tête de page.'], F2: ['=', 'Sans écran : la page suit le jour quand l\'app se rouvre.'],
+  F3: [1, 'Anneau du héros, soustraction à côté.'], F4: [1, 'Trois tuiles « Protéines », « Glucides », « Lipides ».'],
+  F5: ['=', 'Carte « À remplir » sous le héros, comme aujourd\'hui (compte neuf).'],
+  F6: [1, 'Boutons « Code-barres » et « Photo ».'], F7: [1, 'Bouton « Rechercher » (sans caméra : « Ajouter un aliment »).'],
+  F8: ['=', 'Recherche hors ligne, inchangée, ouverte par « Rechercher ».'], F9: ['=', 'Filtres par famille, inchangés.'], F10: ['=', 'Produits emballés sur demande, inchangés.'],
+  F11: ['=', 'Feuille de quantité, inchangée.'], F12: [1, '« + » des cases vides de la bande « Repas ».'], F13: ['=', '« Aliment perso » de la recherche, inchangé.'],
+  F14: ['=', 'Section « Mes repas » de la recherche, inchangée.'],
+  F15: [1, 'Bouton « Code-barres » ; la caméra est inchangée.'], F16: [1, 'Bouton « Photo » ; la caméra est inchangée.'],
+  F17: ['=', 'Galerie du scanner, inchangée.'], F18: ['=', 'Flash du scanner, inchangé.'], F19: ['=', 'Explication avant la caméra, inchangée.'],
+  F20: ['=', 'Sorties d\'un code-barres, inchangées (dessinées sur la planche 5).'], F21: [3, 'Récapitulatif : aliment, quantité, apport, « Ajouter au journal ».'],
+  F22: ['=', '« À confirmer » du récapitulatif d\'une photo, inchangé.'], F23: ['=', 'Apprentissage local du scanner, inchangé.'], F24: ['=', 'Compteur d\'analyses dans le scanner, inchangé.'],
+  F25: [3, 'Icône « Scanner à nouveau » à côté du bouton.'], F26: ['=', 'Alerte « Déjà ajouté à l\'instant », inchangée.'],
+  F27: [1, 'Bande « Repas », quatre cases.'], F28: ['=', 'Page d\'un repas (toucher une case), inchangée.'], F29: ['=', 'Feuille d\'un aliment noté, inchangée.'],
+  F30: ['=', 'Glisser pour supprimer, inchangé.'], F31: ['=', 'Favori en glissant, inchangé ; liste dans « Ma bibliothèque ».'],
+  F32: ['=', 'Reprise d\'un repas précédent, dans la page d\'un repas, inchangée.'], F33: ['=', 'Section « Mes repas » de la page d\'un repas, inchangée.'], F34: ['=', '« Enregistrer ce repas », inchangé.'],
+  F35: [6, 'Segment « Mes repas » avec ses trois repas.'], F36: [6, 'Segment « Aliments ».'], F37: [2, 'Tuile « Nutriments » avec cadenas.'], F38: [4, 'Page « Nutriments » : objectifs, à limiter, minéraux.'],
+  F39: [[1, 2], 'Messages d\'objectif dans le héros ; tuile « Idées ».'], F40: [2, 'Tuile « Idées » ; page inchangée.'], F41: [2, 'Tuile « Semaine », 7 mini-barres.'],
+  F42: ['=', 'Historique inchangé, ouvert par la tuile « Semaine » ou la ligne « Historique ».'], F43: ['=', 'Bilan de l\'Historique, inchangé.'], F44: ['=', '« Calories par jour », Premium, inchangé.'],
+  F45: ['=', 'Répartition des calories, inchangée.'], F46: [5, 'Courbe « Poids » avec ligne « Cible ».'], F47: ['=', '« Jour par jour », Premium, inchangé.'],
+  F48: [2, 'Bouton « Mes paramètres » au bas de la page.'], F49: ['=', '« Rappel des repas », inchangé.'], F50: ['=', '« Ton objectif », inchangé.'],
+  F51: [5, 'Ligne « Poids cible » du récapitulatif.'], F52: ['=', 'Question grossesse, inchangée.'], F53: ['=', '« Toi », inchangé.'], F54: ['=', 'Niveau d\'activité, inchangé.'],
+  F55: [5, 'Carte « Ton objectif de poids » : plan, date estimée.'], F56: ['=', '« Ajustement proposé » : carte en tête de « Mes paramètres », inchangée.'],
+  F57: ['=', '« Nouveau calcul proposé » : carte en tête de « Mes paramètres », inchangée.'], F58: ['=', '« Tes besoins par jour », inchangé.'],
+  F59: ['=', 'Carte de Mon quotidien : inchangée ; elle ouvre cette page.'], F60: ['=', 'Widgets : inchangés.'], F61: ['=', 'Ajout rapide : widget Premium, inchangé.'],
+  F62: ['=', 'Notifications inchangées, réglées dans « Rappels ».'], F63: ['=', 'Espace Nutrition côté Créer : inchangé ; ses favoris sont repris à l\'écran 6.'],
+  F64: [[2, 3], 'Note au bas de la page (2) ; mention du récapitulatif (3).'],
+});
+PL.init();
+</script>
+</body>
+</html>

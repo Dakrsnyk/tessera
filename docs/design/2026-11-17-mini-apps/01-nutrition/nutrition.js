@@ -327,3 +327,26 @@ const NUT = (function () {
   return N;
 })();
 NUT.verifier();
+
+/* ================= 3. Pièces d'écran communes aux planches de Nutrition (préfixe NUT.ui) =================
+   Elles évitent de recopier cinq fois le même anneau, les mêmes jauges, la même liste de repas. Les chiffres viennent de NUT. */
+NUT.ui = {
+  ring: (o = {}) => PL.ring(NUT.jour.kcal.p, { s: 112, b: PL.n(NUT.jour.kcal.reste), small: 'kcal<br>restantes', c: 'nut', aria: '1 078 kcal mangées sur 2 200 : il en reste 1 122', ...o }),
+  meters: () => `<div class="pl-meters">${NUT.jauges()}</div>`,
+  // les quatre repas : o.plus (« + » par ligne), o.chev (chevron), o.st
+  repas: (o = {}) => PL.list(NUT.jour.repas.map((m) => PL.row(m.i, m.n, m.detail, { sq: true, r: m.vide ? null : NUT.kc(m.kcal), plus: o.plus !== false, chev: o.chev === true })), { st: o.st }),
+  // « Calories de la semaine » : 7 barres, objectif, moyenne
+  semaine: (o = {}) => PL.card(PL.weekBars(NUT.semaine.kcal.map((v) => v || 0), { goal: NUT.semaine.objectif, today: NUT.semaine.today, h: o.h || 56 }) + `<div class="pl-cap" style="margin-top:8px">${NUT.semaine.phrase.replace(/(\d[\d\s]*kcal)/, '<b>$1</b>')}</div>`, { st: 'padding-top:14px' }),
+  note: () => PL.foot(NUT.note),
+  // « Calories par jour » sur 7 jours, période en cours hachurée
+  cal7: (o = {}) => PL.bars({ g: CAL7.lab.map((l, k) => ({ l, v: [NUT.h7.kcal[k]], cur: k === 6, hl: k === 6 })), c: ['var(--c-nut)'], max: 2750, yt: [0, 1100, 2200], h: o.h || 92, bw: 18, ref: { v: 2200 }, aria: 'Calories des 7 derniers jours ; objectif 2 200 kcal ; aujourd\'hui 1 078 kcal, journée en cours' })
+    + PL.leg([['var(--c-nut)', 'Jour complet'], ['var(--c-nut)', 'Aujourd\'hui, en cours', 'hat'], ['var(--ink2)', 'Objectif', 'dsh']]),
+  // courbe « Poids » (7 jours ou 30 jours)
+  poids: (o = {}) => PL.line({ series: [{ v: o.v || NUT.poids.s7, c: 'var(--c-nut)', area: true, dot: true }], min: o.min ?? 71.2, max: o.max ?? 72.3, w: o.w || 170, h: o.h || 40, ref: o.ref, aria: o.aria || 'Poids de 72,1 kg à 71,6 kg en 7 jours' }),
+  // une ligne d'aliment noté : « Poulet grillé · 120 g · P 36 · G 0 · L 5 · 198 kcal »
+  aliment: (a, o = {}) => PL.row('', a.n, NUT.ligne(a), { r: NUT.kc(a.kcal), chev: false, ...o }),
+  // les trois macros en tuiles : « reste 72 g »
+  macroKpis: () => PL.kpis(NUT.jour.macros.map((m) => PL.kpi(m.n, m.v, `sur ${m.cible}${NBSP}g · reste ${m.reste}${NBSP}g`, { unit: NBSP + 'g', sm: true, ic: 'var(--c-' + m.c + ')' })), 3),
+};
+// trois jauges serrées côte à côte (nom, « 68 / 140 g », jauge) ; o.zero : compte neuf, sans objectif
+NUT.ui.m3 = (o = {}) => `<div class="nut-m3">${NUT.jour.macros.map((m) => `<div data-c="${m.c}"><span>${m.n}${o.pct ? ' · ' + o.pct[NUT.jour.macros.indexOf(m)] + NBSP + '%' : ''}</span><b>${o.zero ? '0 g' : m.v + ' / ' + m.cible + NBSP + 'g'}</b>${U.meter(o.zero ? 0 : m.p)}</div>`).join('')}</div>`;

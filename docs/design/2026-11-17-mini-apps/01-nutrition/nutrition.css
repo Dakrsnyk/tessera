@@ -1,0 +1,7 @@
+/* nutrition.css : CSS commun du sujet Nutrition (préfixe nut-). */
+.nut-m3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 12px; }
+.nut-m3 > div { min-width: 0; }
+.nut-m3 span { display: block; font-size: 12px; color: var(--ink2); }
+.nut-m3 b { display: block; font-size: 13px; font-weight: 650; margin: 1px 0 5px; white-space: nowrap; }
+.nut-m3 .u-meter { display: block; }
+.nut-star { color: var(--c); font-size: 18px; }

@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Nutrition — Direction 4 : Quotidienne</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="nutrition.css">
+<style>
+  .nut4-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .nut4-f { font-size: 30px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+  .nut4-f small { font-size: 13px; font-weight: 600; margin-left: 5px; color: var(--ink2); letter-spacing: 0; }
+  .nut4-now { display: flex; align-items: center; gap: 8px; margin: 10px 0 2px; font-size: 12px; font-weight: 650; color: var(--cs); }
+  .nut4-now::before, .nut4-now::after { content: ""; flex: 1; border-top: 1.5px solid var(--cs); opacity: .55; }
+  .nut4-tot { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; font-size: 13px; color: var(--ink2); border-top: 1px solid var(--rule); }
+  .nut4-tot u { text-decoration: none; color: var(--cs); font-weight: 650; display: flex; align-items: center; gap: 5px; }
+  .nut4-next { padding: 10px 14px 4px; }
+  .nut4-next b { display: block; font-size: 15px; color: var(--cs); }
+  .nut4-next span { font-size: 12px; color: var(--ink2); }
+  .nut4-bar { position: absolute; z-index: 7; left: 14px; right: 14px; bottom: 96px; display: flex; gap: 8px; align-items: center; padding: 7px; border-radius: 32px; }
+  .nut4-bar .fld { flex: 1; height: 44px; border-radius: 22px; background: var(--well); display: flex; align-items: center; gap: 8px; padding: 0 14px; font-size: 15px; color: var(--ink2); white-space: nowrap; }
+  .nut4-rb { width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .nut4-rb i { font-size: 20px; }
+  .nut4-rb.p { background: var(--cs); color: #fff; }
+  .nut4-rb.t { background: color-mix(in srgb, var(--cs) 14%, #fff); color: var(--cs); }
+  .phone:has(.nut4-bar) .edge { height: 204px; background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 0%, transparent), color-mix(in srgb, var(--bg) 92%, transparent) 22%, var(--bg) 31%); }
+  .nut4-fav { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 14px 14px; }
+  .nut4-fav span { background: color-mix(in srgb, var(--cs) 10%, #fff); color: var(--cs); border-radius: 18px; padding: 8px 12px; font-size: 13px; font-weight: 650; white-space: nowrap; }
+  .nut4-fav em { font-style: normal; font-weight: 500; opacity: .85; margin-left: 4px; }
+  .nut4-eau { display: flex; align-items: center; gap: 12px; padding: 0 14px 14px; }
+  .nut4-eau .pl-bar { flex: 1; }
+  .nut4-sem { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+  .nut4-sem .nut4-mini { display: flex; gap: 3px; align-items: flex-end; height: 30px; flex: none; }
+  .nut4-sem .nut4-mini i { width: 9px; background: var(--c); border-radius: 2px; opacity: .85; }
+  .nut4-sem .nut4-mini i.f { background: none; border-top: 1.5px dashed var(--rule2); opacity: 1; }
+  .nut4-kb { position: absolute; z-index: 8; left: 0; right: 0; bottom: 0; height: 286px; background: #D4D8DF; padding: 10px 4px 0; display: flex; flex-direction: column; gap: 10px; }
+  .nut4-kb .r { display: flex; justify-content: center; gap: 5px; }
+  .nut4-kb .k { width: 33px; height: 44px; border-radius: 6px; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 19px; box-shadow: 0 1px 0 rgba(0,0,0,.25); color: #111; }
+  .nut4-kb .k.w { width: 96px; font-size: 15px; } .nut4-kb .k.s { width: 44px; background: #A9AFBA; }
+  .nut4-cam { position: absolute; inset: 0; z-index: 6; background: radial-gradient(ellipse 120% 70% at 50% 54%, #efe6d4 0%, #d3c4a6 45%, #8b7c63 100%); overflow: hidden; }
+  .nut4-cam .plate { position: absolute; left: 50%; top: 47%; width: 300px; height: 300px; transform: translate(-50%, -50%); border-radius: 50%; background: radial-gradient(circle at 40% 35%, #fff, #e9e6df 70%); box-shadow: 0 18px 40px rgba(60,40,10,.35); }
+  .nut4-cam .plate b { position: absolute; border-radius: 50%; }
+  .nut4-cam .top { position: absolute; top: 62px; left: 20px; right: 20px; display: flex; align-items: center; gap: 10px; color: #fff; font-weight: 700; font-size: 17px; text-shadow: 0 1px 6px rgba(0,0,0,.45); }
+  .nut4-cam .x { width: 44px; height: 44px; border-radius: 22px; background: rgba(20,24,30,.55); display: flex; align-items: center; justify-content: center; flex: none; } .nut4-cam .x i { font-size: 20px; }
+  .nut4-cam .frame { position: absolute; left: 44px; right: 44px; top: 190px; height: 400px; }
+  .nut4-cam .frame s { position: absolute; width: 38px; height: 38px; border: 4px solid #fff; border-radius: 12px; }
+  .nut4-cam .frame s:nth-child(1) { left: 0; top: 0; border-right: 0; border-bottom: 0; } .nut4-cam .frame s:nth-child(2) { right: 0; top: 0; border-left: 0; border-bottom: 0; }
+  .nut4-cam .frame s:nth-child(3) { left: 0; bottom: 0; border-right: 0; border-top: 0; } .nut4-cam .frame s:nth-child(4) { right: 0; bottom: 0; border-left: 0; border-top: 0; }
+  .nut4-cam .hint { position: absolute; top: 612px; left: 0; right: 0; text-align: center; }
+  .nut4-cam .hint span { background: rgba(20,24,30,.6); color: #fff; padding: 8px 14px; border-radius: 16px; font-size: 14px; font-weight: 600; }
+  .nut4-cam .bot { position: absolute; left: 0; right: 0; bottom: 36px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .nut4-cam .cnt { background: rgba(20,24,30,.6); color: #fff; padding: 7px 14px; border-radius: 15px; font-size: 13px; font-weight: 600; }
+  .nut4-cam .ctl { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0 28px; }
+  .nut4-cam .sh { width: 76px; height: 76px; border-radius: 50%; border: 5px solid #fff; display: flex; align-items: center; justify-content: center; } .nut4-cam .sh i { width: 56px; height: 56px; border-radius: 50%; background: #fff; display: block; }
+  .nut4-cam .sm { min-width: 44px; height: 44px; border-radius: 22px; background: rgba(20,24,30,.6); color: #fff; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 0 12px; font-size: 12px; font-weight: 650; } .nut4-cam .sm i { font-size: 18px; }
+  .nut4-pm { display: inline-flex; gap: 6px; color: var(--ink2); } .nut4-pm i { font-size: 18px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: var(--well); }
+  .nut4-c .li { padding-top: 6px !important; padding-bottom: 6px !important; min-height: 0 !important; }
+  .nut4-c .li .tx .s { margin-top: 0; }
+  .pl-r .nut4-pm { display: flex !important; flex-direction: row; margin-top: 4px; }
+  .nut4-conf { display: flex; gap: 8px; padding: 0 14px 12px; }
+  .nut4-it { font-size: 12px; color: var(--ink2); line-height: 1.35; margin: 4px 0 10px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="nut" data-kind="direction">
+
+  <header class="bd-head"><div class="num">4</div>
+    <div><div class="pl-kick">Direction 4 sur 5</div>
+      <h1>Direction 4 · Quotidienne</h1>
+      <p>« Le journal des repas » : la page suit la journée dans l'ordre des repas. On lit, on note et on corrige au même endroit, sans changer de page, avec une barre de saisie toujours sous le pouce. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20 (deux écrans à un autre moment, dits en légende), compte gratuit.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Un journal qui suit ta journée</h3>
+      <p>Une seule colonne, dans l'ordre des repas. Chaque repas se déplie sur place : il n'y a plus de page de repas à ouvrir. Un repère « Maintenant » sépare ce qui est noté de ce qui vient, et le repas à venir dit ce qu'il lui reste. Une barre fixe, en bas, ajoute en un geste.</p></div>
+    <div><h5>En ouvrant Nutrition</h5><ol>
+      <li data-p="1">Ce qui est noté, repas par repas</li>
+      <li data-p="1">Le repas à venir : « Environ 1 122 kcal »</li>
+      <li data-p="1">La barre « Ajouter un aliment », « Code-barres », « Photo »</li>
+      <li data-p="2">Le reste, en bandeau fin</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="2">Collation : favoris en une touche</li>
+      <li data-p="2">Eau, « Cette semaine » en une ligne</li>
+      <li data-p="3">Historique, nutriments, bibliothèque, réglages</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">La plus rapide pour qui note chaque repas, souvent les mêmes aliments : un favori s'ajoute en un toucher.</p>
+      <p class="minus">La page est longue, l'analyse n'est qu'une ligne, et le chiffre vedette est plus petit que sur la carte de Mon quotidien.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Journal, 13:20</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Ce qui est noté, ce qui vient</h4>
+        <p>Le dîner est déplié ; « Maintenant » sépare le passé du futur ; le souper dit ce qu'il reste pour lui.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine, aliments d'un repas, « Enregistrer ce repas », « Reprendre », « Mes repas », « Voir des idées ».</span></li>
+          <li><span class="tag a"></span><span>Repas dépliés sur place ; « Prochain repas » mis en avant dans le journal ; barre fixe avec deux boutons de scan (sans caméra : le champ seul).</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher le champ « Ajouter un aliment ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher le bouton « Photo ».</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher « Riz basmati cuit ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Journal, suite</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Le souper, la collation, l'eau</h4>
+        <p>En défilant, le souper offre ses reprises ; la collation propose les favoris d'un toucher ; l'eau se compte en verres.</p>
+        <ul><li><span class="tag e"></span><span>« Reprendre » : les derniers soupers ; puce « Mes repas » ; ligne « Collation » avec son « + ».</span></li>
+          <li><span class="tag n"></span><span>« Eau » en verres : l'hydratation a été retirée le 2026-10-15.</span></li>
+          <li><span class="tag n"></span><span>Favoris en une touche : aujourd'hui, seulement dans le widget « Ajout rapide ».</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Faire défiler.</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher la puce « Mes repas ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Journal, bas de page</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p3"></div><span class="flow"></span>
+      <div class="cap"><h4>La semaine en une ligne, puis le reste</h4>
+        <p>L'analyse tient en une ligne ; l'Historique, la bibliothèque et les réglages sont à la fin, comme aujourd'hui.</p>
+        <ul><li><span class="tag e"></span><span>« Historique », « Tous les nutriments » (Premium), « Mes repas », « Mes aliments », note des sources, « Mes paramètres ».</span></li>
+          <li><span class="tag a"></span><span>« Cette semaine » en une ligne : le calcul existe, la page ne le montrait qu'en bas.</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher « Mes repas ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Saisie en bas</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p4"></div>
+      <div class="cap"><h4>Taper, choisir, c'est noté</h4>
+        <p>Le clavier est ouvert, le repas proposé est « Collation ». Les résultats s'affichent au-dessus du champ.</p>
+        <ul><li><span class="tag e"></span><span>Résultats de « yogourt », ligne « produits emballés », « Aliment perso ».</span></li>
+          <li><span class="tag a"></span><span>Champ en bas avec les pastilles de repas au-dessus ; le repas se choisit avant de toucher un résultat.</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Toucher un résultat, puis la feuille de quantité (inchangée).</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Scanner, 19:05</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="19:05" data-tab="none" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>La caméra, avec sa sortie</h4>
+        <p>Montré à 19:05, pour le souper. La croix revient au journal en une seule fois.</p>
+        <ul><li><span class="tag e"></span><span>Cadre, flash, « Photographier le plat », galerie, « Encore 3 analyses de plat gratuites ».</span></li>
+          <li><span class="tag a"></span><span>Le scanner s'ouvre seul depuis « Photo » ; une seule fermeture.</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher le déclencheur.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Récapitulatif d'une photo, 19:05</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="19:05" data-tab="none" id="p6"></div><span class="flow"></span>
+      <div class="cap"><h4>Une estimation, jamais une mesure</h4>
+        <p>Chaque ligne se corrige. Ce qui est incertain attend ton accord.</p>
+        <ul><li><span class="tag e"></span><span>Estimation, « Vérifié », « Ton habitude », « À confirmer », total « ≈ 440–600 kcal », « Ajouter au journal », « Scanner à nouveau ».</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Toucher « Ajouter au journal ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Corriger un aliment</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p7"></div>
+      <div class="cap"><h4>Corriger sans quitter le journal</h4>
+        <p>La feuille s'ouvre sur place. Glisser une ligne garde « Supprimer » et « Favori ».</p>
+        <ul><li><span class="tag e"></span><span>Quantité, repas, « Apport », « Tous les nutriments » (Premium), « Retirer de ce repas ».</span></li>
+          <li><span class="tag a"></span><span>Quantité réglée de 10 g en 10 g par − et +.</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Toucher « Enregistrer ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes repas</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p8"></div>
+      <div class="cap"><h4>Les repas enregistrés</h4>
+        <p>La page existante, avec l'aide qui dit où enregistrer un repas.</p>
+        <ul><li><span class="tag e"></span><span>Trois repas avec leurs aliments, « Ajouter à ma journée », « Supprimer ce repas ».</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Journal, 08:10</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="08:10" data-tab="0" id="p9"></div>
+      <div class="cap"><h4>La page suit la journée</h4>
+        <p>Le même journal le matin : seul le déjeuner est noté, le dîner dit ce qu'il lui reste.</p>
+        <ul><li><span class="tag e"></span><span>Mêmes blocs ; chiffres du moment (420 mangées, 1 780 restantes).</span></li>
+          <li><span class="tag a"></span><span>« Maintenant · 08:10 » et « Dîner » à venir : environ 890 kcal.</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le sélecteur de semaine, la recherche, la feuille de quantité, le scanner et son récapitulatif, « Mes repas », l'Historique, « Mes paramètres », toutes les règles de calcul.</span>
+          <b>Changé de place</b><span>La page d'un repas disparaît : le repas se déplie dans le journal. Le « Prochain repas » de la carte de Mon quotidien devient le repas à venir. La recherche monte dans une barre fixe. L'analyse n'est plus qu'une ligne, « Cette semaine ».</span>
+          <b>Laissé de côté</b><span>Le poids, la série de suivi, la répartition des calories et les périodes de l'Historique : elles restent derrière la ligne « Historique ». Annuler une suppression (quelques secondes) est proposé en texte, sans dessin.</span>
+        </div>
+        <h4>Nouveau, à développer (2)</h4>
+        <p>1. « Eau » en verres, 5 sur 8 (écran 2) : même objectif que l'habitude « Boire 2 L d'eau » ; il faudra dire laquelle des deux fait foi. 2. Favoris en une touche dans l'app (écran 2) : aujourd'hui, seulement le widget « Ajout rapide » (Premium) ; gratuit ou Premium, à décider.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : la page du journal est entièrement gratuite ; l'Historique détaillé, « Tous les nutriments » et le scan de plat au-delà de 10 analyses restent Premium, derrière leurs liens.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="nutrition.js"></script>
+<script>
+const U_ = NUT.ui, J_ = NUT.jour, A_ = NUT.aliments;
+const bar = (txt = 'Ajouter un aliment') => `<div class="nut4-bar gl"><span class="fld"><i data-i="search"></i>${txt}</span><span class="nut4-rb p" role="button" aria-label="Code-barres"><i data-i="barcode"></i></span><span class="nut4-rb t" role="button" aria-label="Photo"><i data-i="camera"></i></span></div>`;
+const band = (reste, mange, vals) => `<article class="gl pl-hero" style="padding:12px 14px;margin-top:8px"><div class="nut4-top"><span class="nut4-f">${reste}<small>kcal restantes</small></span><span class="pl-cap" style="margin:0">${mange} mangées sur 2 200 kcal</span></div>
+  <div class="nut-m3">${J_.macros.map((m, k) => `<div data-c="${m.c}"><span>${m.n}</span><b>${vals[k][0]} / ${m.cible}${NBSP}g</b>${U.meter(vals[k][0] / m.cible)}</div>`).join('')}</div></article>`;
+const item = (a) => PL.row('', `${a.n} · ${a.q}${NBSP}g`, '', { r: NUT.kc(a.kcal), chev: false });
+const open = (m, heure) => PL.list([PL.row('', `${m.n} · ${heure}`, '', { r: NUT.kc(m.kcal), chev: false })].concat(m.items.map(item),
+  `<div class="nut4-tot" style="padding:7px 14px"><span>P ${m.p} · G ${m.g} · L ${m.l}</span><u><i data-i="plusbox"></i>Enregistrer ce repas</u></div>`), { st: 'margin-top:8px', cls: 'nut4-c' });
+const dej = J_.repas[0], din = J_.repas[1];
+const prev = NUT.precedents.sou;
+
+/* 1 · journal, 13:20 */
+const band2 = (reste, mange, vals) => `<article class="gl pl-hero" style="padding:12px 14px;margin-top:8px"><div class="nut4-top"><span class="nut4-f">${reste}<small>kcal restantes</small></span></div><div class="pl-cap" style="margin:4px 0 0">${mange} mangées sur 2 200 kcal</div>
+  <div class="nut-m3" style="margin-top:8px">${J_.macros.map((m, k) => `<div data-c="${m.c}"><span>${m.n}</span><b>${vals[k][0]} / ${m.cible}${NBSP}g</b>${U.meter(vals[k][0] / m.cible)}</div>`).join('')}</div></article>`;
+const next = (t, h, o = '') => `<article class="pn ls" style="margin-top:8px"><div class="nut4-next" style="display:flex;justify-content:space-between;align-items:center;gap:6px"><div><span style="font-weight:650;color:var(--cs)">${h}</span><b style="color:var(--ink)">${t}</b></div>${o}</div></article>`;
+const idees = '<span style="color:var(--cs);font-size:12px;font-weight:650;white-space:nowrap">Voir des idées ›</span>';
+const page1 = PL.nv('Nutrition', '', { back: false }) + `<div style="margin-top:4px">${PL.wsel()}</div>` + band2('1 122', '1 078', [[68], [121], [34]])
+  + PL.list([PL.row('', `${dej.n} · 07:45`, '3 aliments', { r: NUT.kc(dej.kcal) })], { st: 'margin-top:8px', cls: 'nut4-c' }) + open(din, '12:35')
+  + next('Souper · environ 1 122 kcal', 'Maintenant · 13:20', idees);
+PL.mount('p1', page1, bar());
+
+/* 2 · journal, suite : reprises du souper, collation, eau */
+PL.mount('p2', PL.nv('Nutrition', '', { back: false }) + `
+  ${PL.list([PL.row('', 'Reprendre : Mer. 11 nov.', 'Omelette aux légumes… · 623 kcal', { chev: false, plus: true }), PL.row('', 'Reprendre : Mar. 10 nov.', 'Chili con carne… · 759 kcal', { chev: false, plus: true })], { st: 'margin-top:6px' })}
+  ${PL.chips([['Mes repas', 'fork']], 0, { st: 'margin-top:10px' })}
+  <article class="pn cd" style="margin-top:12px;padding-top:6px">${PL.row('', 'Collation', 'Rien noté', { plus: true, chev: false })}
+    <div class="x-lab" style="margin:2px 14px 8px;display:flex;gap:8px;align-items:center">Favoris en une touche ${PL.nw()}</div>
+    <div class="nut4-fav">${NUT.favoris.map((a) => `<span>${a.n}<em>${a.kcal} kcal</em></span>`).join('')}</div></article>
+  <article class="pn cd pl-newbox" style="margin-top:12px;padding-top:12px"><header class="ch" style="padding:0 14px 8px"><span class="ico"><i data-i="glass"></i></span><b>Eau</b>${PL.nw()}</header>
+    <div class="nut4-eau"><span class="pl-num">5<small>verres sur 8</small></span>${PL.bar(.625, { c: 'lip' })}<span class="pl-plus" role="button" aria-label="Ajouter un verre"><u><i data-i="plus"></i></u></span></div></article>`, bar());
+
+/* 3 · journal, bas de page */
+const mini = `<div class="nut4-mini">${NUT.semaine.kcal.map((v, k) => (v ? `<i style="height:${Math.round(v / 2400 * 30)}px${k === 3 ? ';opacity:.45' : ''}"></i>` : `<i class="f" style="height:3px"></i>`)).join('')}</div>`;
+PL.mount('p3', PL.nv('Nutrition', '', { back: false }) + `
+  <article class="pn cd nut4-sem" style="margin-top:6px">${mini}<div style="flex:1"><b style="font-size:14px">Cette semaine</b><div class="pl-cap" style="margin:2px 0 0">3 jours sur 4 dans l'objectif</div></div><i data-i="chev" style="color:var(--go)"></i></article>
+  ${PL.list([PL.row('', 'Historique', 'Moyennes, tendances et poids', {}), PL.row('', 'Tous les nutriments', '', { prem: true }), PL.row('', 'Mes repas', '', { r: '3' }), PL.row('', 'Mes aliments', '', { r: '2' })], { st: 'margin-top:10px' })}
+  ${U_.note()}${PL.settings()}`, bar());
+
+/* 3 · saisie en bas, clavier ouvert */
+const R = NUT.recherche, kb = (ls) => `<div class="r">${ls.split('').map((l) => `<span class="k">${l}</span>`).join('')}</div>`;
+PL.mount('p4', PL.nv('') + `
+  ${PL.sect('Résultats')}
+  ${PL.list(R.resultats.map((a) => PL.row('', a.n, NUT.l100(a), { chev: false, r: a.fav ? '<i data-i="star" class="nut-star"></i>' : null })).concat(PL.row('search', R.emballes, '', {})))}
+  <div class="pl-link" style="margin-top:10px"><span style="display:flex;gap:7px;align-items:center"><i data-i="plusbox" style="font-size:18px"></i>Aliment perso</span></div>`,
+  `<div class="nut4-bar gl" style="bottom:296px;flex-direction:column;align-items:stretch;gap:6px;border-radius:26px">${PL.chips(['Déjeuner', 'Dîner', 'Souper', 'Collation'], 3, { fit: true })}
+    <div style="display:flex;gap:8px"><span class="fld"><i data-i="search"></i>yogourt</span><span class="nut4-rb p" role="button" aria-label="Code-barres"><i data-i="barcode"></i></span></div></div>
+  <div class="nut4-kb">${kb('QWERTYUIOP')}${kb('ASDFGHJKL')}${kb('ZXCVBNM')}<div class="r"><span class="k s">123</span><span class="k w">espace</span><span class="k s">OK</span></div></div>`);
+
+/* 4 · scanner, 19:05 */
+PL.mount('p5', '<span style="position:absolute;opacity:0">Caméra</span>', `<div class="nut4-cam"><div class="plate"><b style="left:46px;top:70px;width:120px;height:78px;background:#d98b73;transform:rotate(-14deg)"></b><b style="left:150px;top:140px;width:104px;height:78px;background:#f1ecdc"></b><b style="left:70px;top:180px;width:84px;height:40px;background:#6f9a4b;border-radius:30px"></b></div>
+  <div class="top"><span class="x" role="button" aria-label="Fermer"><i data-i="x"></i></span><span>Code-barres ou aliments</span></div>
+  <div class="frame"><s></s><s></s><s></s><s></s></div>
+  <div class="hint"><span>Vise un code-barres ou ton assiette</span></div>
+  <div class="bot"><span class="cnt">${NUT.compte.compteur}</span><div class="ctl"><span class="sm"><i data-i="bolt"></i>${NUT.scan.flash[0]}</span><span class="sh" role="button" aria-label="Photographier le plat"><i></i></span><span class="sm" aria-label="Galerie"><i data-i="image"></i></span></div></div></div>`);
+
+/* 5 · récapitulatif d'une photo */
+const P_ = NUT.scan.photo;
+const pm = '<span class="nut4-pm"><i data-i="minus"></i><i data-i="plus"></i><i data-i="dots"></i></span>';
+PL.mount('p6', page1, PL.sheet(`
+  ${PL.list(P_.items.map((a) => PL.row('', a.n, `${a.q}${NBSP}g · ${a.src} · ${a.sur}`, { r: NUT.kc(a.kcal), r2: pm, chev: false })))}
+  ${PL.card(`<div class="nut4-conf" style="padding:0"><span style="flex:1;font-weight:650;align-self:center">Huile de cuisson ?</span>${PL.btn('Ajouter', { k: 'T', st: 'min-width:92px;height:40px' })}${PL.btn('Ignorer', { k: 'O', st: 'min-width:80px;height:40px' })}</div>`, { t: 'À confirmer', st: 'margin-top:8px;padding-bottom:12px' })}
+  ${PL.kvs([PL.kv('Total', `<b>${P_.fourchette}</b>`), PL.kv('Repas', 'Souper', { chev: true })], { st: 'margin-top:8px' })}
+  <div class="pl-cap" style="margin:6px 2px">P ${P_.p} · G ${P_.g} · L ${P_.l} · il te restera environ <b>${NUT.soir.reste - P_.total} kcal</b></div>
+  <div style="display:flex;gap:10px;align-items:center;margin-top:6px">${PL.btn('Ajouter au journal', { i: 'plusbox' })}${PL.rbtn('camera', 'Scanner à nouveau', 'gl')}</div>`, 'Récapitulatif', { right: '' }));
+
+/* 6 · corriger un aliment */
+const riz = A_.riz;
+PL.mount('p7', page1, PL.sheet(`
+  ${PL.kvs(PL.kv('Quantité', PL.stepper('200 g')))}
+  <div class="pl-cap" style="margin:6px 2px 6px">Ajuster de 10 g</div>
+  ${PL.field('Repas', 'Dîner', { chev: true })}
+  <div class="x-lab" style="margin:12px 2px 2px">Apport</div>
+  ${PL.kvs([PL.kv('Calories', NUT.kc(riz.kcal)), PL.kv('Protéines', riz.p + ' g'), PL.kv('Glucides', riz.g + ' g'), PL.kv('Lipides', riz.l + ' g'), PL.kv('Tous les nutriments', PL.prem('Premium', 'lock'))])}
+  ${PL.btn('Retirer de ce repas', { k: 'O', st: 'margin-top:12px' })}`, 'Riz basmati cuit', { left: 'Annuler', right: PL.sheetBtn('Enregistrer') }));
+
+/* 7 · Mes repas */
+PL.mount('p8', PL.nv('') + PL.ttl('Mes repas') + `
+  ${NUT.mesRepas.map((r) => `<article class="pn cd" style="padding:12px 14px;margin-top:10px"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><b style="font-size:15px">${r.n}</b><span class="pl-cap">${NUT.kc(r.kcal)} · P ${r.p} g</span></div>
+    <div class="nut4-it">${r.items.map((a) => a.n).join(', ')}</div>
+    <div style="display:flex;gap:8px">${PL.btn('Ajouter à ma journée', { k: 'T', st: 'flex:1' })}${PL.btn('Supprimer ce repas', { k: 'O', st: 'flex:1' })}</div></article>`).join('')}
+  <div class="pl-cap" style="margin:12px 2px">Pour enregistrer un repas, ouvre-le dans le journal et touche « Enregistrer ce repas ».</div>`);
+
+/* 9 · journal, 08:10 */
+PL.mount('p9', PL.nv('Nutrition', '', { back: false }) + `<div style="margin-top:4px">${PL.wsel({ marks: [0, 1, 2] })}</div>` + band2('1 780', '420', NUT.matin.macros)
+  + open(dej, '07:45') + next('Dîner · environ 890 kcal', 'Maintenant · 08:10')
+  + PL.list([PL.row('', 'Souper', 'Rien noté', { plus: true, chev: false }), PL.row('', 'Collation', 'Rien noté', { plus: true, chev: false })], { st: 'margin-top:8px' }), bar());
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [1, 'Sélecteur de semaine, en tête du journal.'], F2: ['=', 'Sans écran : la page suit le jour quand l\'app se rouvre.'],
+  F3: [[1, 9], 'Bandeau fin « kcal restantes » ; chiffres du matin (9).'], F4: [[1, 9], 'Trois jauges du bandeau.'], F5: ['=', 'Carte « À remplir » sous le bandeau (compte neuf), inchangée.'],
+  F6: [1, 'Boutons « Code-barres » et « Photo » de la barre fixe.'], F7: [4, 'Champ « Ajouter un aliment » de la barre.'], F8: [4, 'Résultats de la recherche hors ligne.'],
+  F9: ['=', 'Pastilles de familles, dans la recherche vide, inchangées.'], F10: [4, 'Ligne « Chercher « yogourt » dans les produits emballés ».'], F11: ['=', 'Feuille de quantité, inchangée (dessinée sur la planche 1).'],
+  F12: [[1, 2], '« + » des repas, des reprises et de la collation.'], F13: [4, 'Lien « Aliment perso ».'], F14: ['=', 'Section « Mes repas » de la recherche, inchangée.'],
+  F15: [5, 'Caméra : cadre pour code-barres.'], F16: [5, 'Déclencheur « Photographier le plat ».'], F17: [5, 'Bouton de la galerie.'], F18: [5, 'Bouton « Flash automatique ».'],
+  F19: ['=', 'Explication avant la caméra : « Ce qui reste sur ton iPhone », inchangée.'], F20: ['=', 'Sorties d\'un code-barres, inchangées (dessinées sur la planche 5).'],
+  F21: [6, 'Récapitulatif : lignes, quantités, total, repas.'], F22: [6, 'Carte « À confirmer » : « Huile de cuisson ? ».'], F23: [6, 'Étiquettes « Vérifié » et « Ton habitude ».'],
+  F24: [5, 'Compteur « Encore 3 analyses… » dans la caméra.'], F25: [6, 'Icône « Scanner à nouveau ».'], F26: ['=', 'Alerte « Déjà ajouté à l\'instant », inchangée.'],
+  F27: [[1, 9], 'Repas dans l\'ordre de la journée.'], F28: [1, 'Dîner déplié : ses aliments et totaux.'], F29: [7, 'Feuille « Riz basmati cuit ».'], F30: ['=', 'Glisser pour supprimer, inchangé.'], F31: ['=', 'Favori en glissant, inchangé.'],
+  F32: [2, 'Lignes « Reprendre » du souper.'], F33: [2, 'Puce « Mes repas » sous les reprises.'], F34: [1, 'Lien « Enregistrer ce repas » sous le dîner.'],
+  F35: [8, 'Page « Mes repas » : trois repas enregistrés.'], F36: [3, 'Ligne « Mes aliments » (2).'], F37: [3, 'Ligne « Tous les nutriments », badge Premium.'], F38: ['=', 'Page « Nutriments », inchangée.'],
+  F39: [1, 'Repas à venir « environ 1 122 kcal » et lien « Voir des idées ».'], F40: ['=', 'Page « Idées », inchangée, ouverte par « Voir des idées ».'], F41: [3, 'Ligne « Cette semaine » avec 7 mini-barres.'],
+  F42: ['=', 'Historique inchangé, ouvert par la ligne de l\'écran 3.'], F43: ['=', 'Bilan de l\'Historique, inchangé.'], F44: ['=', '« Calories par jour », Premium, inchangé.'], F45: ['=', 'Répartition des calories, inchangée.'],
+  F46: ['=', 'Courbe « Poids », Premium, inchangée.'], F47: ['=', '« Jour par jour », Premium, inchangé.'],
+  F48: [3, 'Bouton « Mes paramètres », dernier élément.'], F49: ['=', '« Rappel des repas », inchangé.'], F50: ['=', '« Ton objectif », inchangé.'], F51: ['=', 'Poids cible, inchangé.'], F52: ['=', 'Question grossesse, inchangée.'],
+  F53: ['=', '« Toi », inchangé.'], F54: ['=', 'Niveau d\'activité, inchangé.'], F55: ['=', 'Récapitulatif « Ton objectif de poids », inchangé.'], F56: ['=', '« Ajustement proposé » : carte sous le bandeau quand il y a lieu.'],
+  F57: ['=', '« Nouveau calcul proposé » : carte sous le bandeau quand il y a lieu.'], F58: ['=', '« Tes besoins par jour », inchangé.'], F59: ['=', 'Carte de Mon quotidien : « Prochain repas » repris à l\'écran 1.'],
+  F60: ['=', 'Widgets : inchangés.'], F61: ['=', 'Ajout rapide : widget Premium ; le même geste est proposé dans l\'app (écran 2).'], F62: ['=', 'Notifications inchangées, réglées dans « Rappels ».'], F63: ['=', 'Espace Nutrition côté Créer : inchangé.'],
+  F64: [[3, 6], 'Note au bas du journal ; mention du récapitulatif.'],
+});
+PL.init();
+</script>
+</body>
+</html>

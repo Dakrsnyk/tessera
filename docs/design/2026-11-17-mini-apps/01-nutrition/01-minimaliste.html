@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Nutrition — Direction 1 : Minimaliste</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="nutrition.css">
+<style>
+  .nut1-fig { font-size: 54px; font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+  .nut1-fig small { font-size: 15px; font-weight: 600; letter-spacing: 0; margin-left: 6px; color: var(--ink2); }
+  .nut1-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .nut1-star { color: var(--c); font-size: 18px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="nut" data-kind="direction">
+
+  <header class="bd-head"><div class="num">1</div>
+    <div><div class="pl-kick">Direction 1 sur 5</div>
+      <h1>Direction 1 · Minimaliste</h1>
+      <p>« Un chiffre, un geste » : en ouvrant Nutrition, on lit ce qu'il reste à manger et on touche « Ajouter ». Tout le reste est rangé dans une page d'index, « Tout Nutrition ». Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Un seul chiffre, puis les repas</h3>
+      <p>La page tient sans défiler : le reste en grand, trois jauges, un seul bouton plein, les quatre repas. Scanner, chercher et reprendre un favori passent tous par la feuille « Ajouter ». L'analyse, la bibliothèque et les réglages sont derrière une ligne, « Tout Nutrition ».</p></div>
+    <div><h5>En ouvrant Nutrition</h5><ol>
+      <li data-p="1">Ce qu'il reste : « 1 122 kcal restantes »</li>
+      <li data-p="1">Le bouton « Ajouter »</li>
+      <li data-p="2">Protéines, glucides, lipides</li>
+      <li data-p="2">Les quatre repas et leur total</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">Rien : la page tient sur un écran</li>
+      <li data-p="3">« Tout Nutrition » : semaine, historique, nutriments</li>
+      <li data-p="3">Ma bibliothèque, « Mes paramètres »</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">La plus rapide à lire et à apprendre : un nouveau ou un compte gratuit n'a rien à décoder.</p>
+      <p class="minus">Scanner demande un toucher de plus, la semaine quitte la page, « Tout Nutrition » est un simple bouton rond, et la page ressemble beaucoup à la carte de Mon quotidien.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Page principale</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Un chiffre, un bouton</h4>
+        <p>Le reste est lu en premier ; « Ajouter » est le seul bouton plein. Rien ne se cache sous l'écran.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine, héros, trois jauges, « Repas » avec « + ».</span></li>
+          <li><span class="tag a"></span><span>« 1 078 mangées sur 2 200 kcal » à côté du reste ; un seul bouton « Ajouter » (sans caméra : le même) ; bouton rond « Tout Nutrition » en haut à droite pour les blocs rangés ailleurs.</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Toucher « Ajouter » ou un « + ».</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher la ligne « Dîner ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher le bouton « Tout Nutrition » (grille, en haut à droite).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Feuille « Ajouter »</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Toutes les façons d'ajouter, au même endroit</h4>
+        <p>La recherche, le code-barres et la photo du plat sont réunis. Le scan par photo a enfin une entrée libellée.</p>
+        <ul><li><span class="tag e"></span><span>Recherche hors ligne, pastilles de familles, « Suggestions », « Aliment perso », « Mes repas ».</span></li>
+          <li><span class="tag a"></span><span>« Code-barres » et « Photo du plat » ouvrent le même scanner ; étoile des favoris dans la liste.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Yogourt grec nature ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Feuille de quantité</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p3"></div>
+      <div class="cap"><h4>Une feuille qu'on connaît déjà</h4>
+        <p>Inchangée, avec − et + en plus du champ. Après « Enregistrer », la page principale affiche 994.</p>
+        <ul><li><span class="tag e"></span><span>Quantité, portions rapides, repas, « Après ajout, il te restera… », apport, « Tous les nutriments » (Premium).</span></li>
+          <li><span class="tag a"></span><span>Quantité réglée par − et + en plus du champ.</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Toucher « Enregistrer ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Un repas : « Dîner »</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p4"></div>
+      <div class="cap"><h4>Le détail d'un repas</h4>
+        <p>La page d'un repas rempli : totaux, aliments, reprises. C'est ici qu'on corrige.</p>
+        <ul><li><span class="tag e"></span><span>Totaux, aliments, « Ajouter un aliment », « Reprendre un dîner précédent », « Enregistrer ce repas ».</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Toucher « Ajouter un aliment ».</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Tout Nutrition</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Une page d'index, trois groupes</h4>
+        <p>Ce qui quittait la page principale se retrouve ici, rangé en « Suivre », « Ma bibliothèque » et « Réglages ».</p>
+        <ul><li><span class="tag e"></span><span>« Calories de la semaine », « Historique », « Tous les nutriments », « Idées », « Mes repas », « Mes aliments », « Mes paramètres », note des sources.</span></li>
+          <li><span class="tag a"></span><span>Ces blocs étaient sous la page principale ; ils ont maintenant un titre de groupe.</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Historique ».</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher « Mes paramètres ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Historique, compte gratuit</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p6"></div>
+      <div class="cap"><h4>Les verrous se voient avant le toucher</h4>
+        <p>« Aujourd'hui » et « Hier » restent libres ; les autres périodes portent un cadenas.</p>
+        <ul><li><span class="tag e"></span><span>Périodes, « Bilan » d'un jour, « Répartition des calories ».</span></li>
+          <li><span class="tag a"></span><span>Cadenas sur « 7 jours », « 30 jours » et « Période » (aujourd'hui : un segment grisé, sans signe).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes paramètres, en chapitres</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="none" id="p7"></div>
+      <div class="cap"><h4>Cinq lignes au lieu d'une longue feuille</h4>
+        <p>Chaque chapitre dit son état en une ligne et ouvre son bloc actuel, inchangé.</p>
+        <ul><li><span class="tag e"></span><span>Les mêmes réponses, le même contenu, les mêmes cibles « Calculé » et « Personnalisé ».</span></li>
+          <li><span class="tag a"></span><span>Feuille repliée en chapitres, chacun avec son résumé.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Première ouverture</div>
+      <div class="phone app pl-past t-saphir" data-c="nut" data-time="13:20" data-tab="0" id="p8"></div>
+      <div class="cap"><h4>Un seul « À remplir »</h4>
+        <p>Un compte neuf voit une carte pour les deux objectifs et un bouton, au lieu de quatre accès au même formulaire.</p>
+        <ul><li><span class="tag e"></span><span>« À remplir » « 0 / 2 », « Calculer mes besoins », quatre fois « Rien noté ».</span></li>
+          <li><span class="tag a"></span><span>Les deux cartes deviennent une seule ; le conseil du jour se tait tant qu'elle est là.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col pl-w4"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le sélecteur de semaine, la feuille de quantité, la page d'un repas, l'Historique, « Mes paramètres », la note des sources. Aucune règle de calcul ne change.</span>
+          <b>Changé de place</b><span>La semaine, « Tous les nutriments », « Idées », « Mes repas » et « Mes aliments » quittent la page principale pour « Tout Nutrition ». Scanner et chercher entrent par « Ajouter ».</span>
+          <b>Laissé de côté</b><span>L'eau, le journal des objectifs, les constats et la comparaison des semaines : cette direction n'ajoute rien, par choix. Le « Prochain repas » de la carte de Mon quotidien n'est pas repris sur la page.</span>
+        </div>
+        <h4>Nouveau, à développer (0)</h4>
+        <p>Aucune nouveauté : tout existe déjà ou se calcule avec les données actuelles. C'est le parti pris de cette direction.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : un compte gratuit voit la page principale, l'index et le bilan d'aujourd'hui. Les périodes de l'Historique, « Tous les nutriments » et « Riches en fibres » restent Premium, avec un cadenas visible avant le toucher.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="nutrition.js"></script>
+<script>
+const N_ = NUT, U_ = NUT.ui;
+
+/* 1 · page principale (les mêmes blocs servent de fond aux feuilles 2 et 3) */
+const page1 = PL.nv('Nutrition', PL.rbtn('grid', 'Tout Nutrition'), { back: false }) + `<div style="margin-top:4px">${PL.wsel()}</div>
+  ${PL.hero({ lab: 'Aujourd\'hui', st: 'margin-top:10px',
+    body: `<div class="nut1-fig">1 122<small>kcal restantes</small></div><div class="line" style="margin:6px 0 8px">1 078 mangées sur 2 200 kcal</div>${PL.bar(.49, { c: 'nut' })}${U_.m3()}` })}
+  ${PL.btn("Ajouter", { i: "plus", st: "margin-top:10px" })}
+  ${PL.sect('Repas', NUT.kc(1078), '', { st: 'margin-top:8px' })}
+  ${U_.repas({ st: '' })}
+`;
+PL.mount('p1', page1);
+
+/* 2 · feuille « Ajouter » */
+const sug = [NUT.aliments.yogNat, NUT.aliments.banane, NUT.aliments.poulet, NUT.aliments.riz];
+PL.mount('p2', page1, PL.sheet(`
+  ${PL.search('Rechercher un aliment')}
+  <div class="nut1-two">${PL.btn('Code-barres', { i: 'barcode', k: 'T' })}${PL.btn('Photo du plat', { i: 'camera', k: 'T' })}</div>
+  <div class="pl-cap" style="margin:6px 2px 8px;text-align:right">${NUT.compte.compteur}</div>
+  ${PL.chips(NUT.familles.slice(0, 3), 0, { fit: true })}
+  ${PL.sect('Suggestions')}
+  ${PL.list(sug.map((a) => PL.row('', a.n, NUT.l100(a), { chev: false, r: a.fav ? '<i data-i="star" class="nut1-star"></i>' : null })))}
+  ${PL.list([PL.row('plusbox', 'Aliment perso', '', { sq: true }), PL.row('fork', 'Mes repas', '3 repas enregistrés', { sq: true })], { st: 'margin-top:10px' })}`, 'Ajouter', { left: 'Fermer', right: '' }));
+
+/* 3 · feuille de quantité */
+PL.mount('p3', page1, PL.sheet(`
+  <div class="pl-cap pl-tn" style="margin:2px 2px 10px">${NUT.ajout.pour100}</div>
+  ${PL.kvs(PL.kv('Quantité', PL.stepper('175 g')))}
+  ${PL.chips(NUT.ajout.portions, 1, { fit: true, st: 'margin:8px 0 10px' })}
+  ${PL.field('Repas', 'Collation', { chev: true })}
+  <div class="pl-cap" style="margin:10px 2px 4px">Après ajout, il te restera <b>994 kcal</b>.</div>
+  <div class="x-lab" style="margin:12px 2px 2px">Apport</div>
+  ${PL.kvs(NUT.ajout.apport.map(([k, v]) => PL.kv(k, v)).concat(PL.kv('Tous les nutriments', PL.prem('Premium', 'lock'))))}`, 'Yogourt grec nature', { left: 'Annuler', right: PL.sheetBtn('Enregistrer') }));
+
+/* 4 · un repas : « Dîner » */
+const din = NUT.jour.repas[1];
+PL.mount('p4', PL.nv('') + PL.ttl('Dîner') + `
+  ${PL.sect('Aujourd\'hui', '12:35')}
+  ${PL.strip([[din.kcal, 'kcal'], [din.p + ' g', 'Protéines'], [din.g + ' g', 'Glucides'], [din.l + ' g', 'Lipides']])}
+  ${PL.sect('Aliments')}
+  ${PL.list(din.items.map((a) => U_.aliment(a)).concat(`<div class="pl-link" style="border-top:1px solid var(--rule)"><span style="display:flex;gap:7px;align-items:center"><i data-i="plusc" style="font-size:19px"></i>Ajouter un aliment</span></div>`))}
+  ${PL.sect('Reprendre un dîner précédent')}
+  ${PL.list(NUT.precedents.din.slice(0, 2).map(([d, a, k]) => PL.row('', d, a, { r: NUT.kc(k), chev: false, plus: true })))}
+  ${PL.btn('Enregistrer ce repas', { i: 'plusbox', k: 'T', st: 'margin-top:12px' })}`);
+
+/* 5 · Tout Nutrition */
+PL.mount('p5', PL.nv('') + PL.ttl('Tout Nutrition') + `
+  ${PL.sect('Suivre')}
+  ${U_.semaine({ h: 44 })}
+  ${PL.list([PL.row('chart', 'Historique', 'Moyennes, tendances et poids', { sq: true }), PL.row('leaf', 'Tous les nutriments', '', { sq: true, prem: true }), PL.row('bulb', 'Idées', 'Il te reste environ 1 122 kcal', { sq: true })], { st: 'margin-top:10px' })}
+  ${PL.sect('Ma bibliothèque')}
+  ${PL.list([PL.row('fork', 'Mes repas', '', { sq: true, r: '3' }), PL.row('plusbox', 'Mes aliments', '', { sq: true, r: '2' })])}
+  ${PL.sect('Réglages')}
+  ${PL.list([PL.row('gear', 'Mes paramètres', '', { sq: true })])}
+  ${U_.note()}`);
+
+/* 6 · Historique, compte gratuit */
+PL.mount('p6', PL.nv('') + PL.ttl('Historique') + `
+  ${PL.chips([['Aujourd\'hui'], ['Hier'], ['7 jours', 'lock'], ['30 jours', 'lock'], ['Période', 'lock']], 0, { wrap: true, st: 'margin-top:10px' })}
+  ${PL.sect('Bilan', 'Aujourd\'hui')}
+  ${PL.card(`<div class="pl-num">1 078<small>kcal · objectif 2 200</small></div>` + PL.strip([['68 g', 'Protéines'], ['121 g', 'Glucides'], ['34 g', 'Lipides']], { st: 'margin-top:10px;box-shadow:none' }))}
+  ${PL.sect('Répartition des calories')}
+  ${PL.card(PL.stack([{ v: 26, c: 'var(--c-prot)' }, { v: 45, c: 'var(--c-gluc)' }, { v: 29, c: 'var(--c-lip)' }], 14) + PL.leg([['var(--c-prot)', 'Protéines 26 %'], ['var(--c-gluc)', 'Glucides 45 %'], ['var(--c-lip)', 'Lipides 29 %']]))}`);
+
+/* 7 · Mes paramètres, en chapitres */
+const pf = NUT.profil, pl = NUT.plan;
+PL.mount('p7', PL.nv('Nutrition'), PL.sheet(`
+  ${PL.list([
+    PL.row('target', 'Ton objectif', `${pf.objectif} · ${pl.cible} kg pour le ${pl.dateCourt}`, { sq: true }),
+    PL.row('user', 'Toi', `${pf.age} ans · ${pf.taille} cm · ${PL.u(pf.poids, 'kg', 1)}`, { sq: true }),
+    PL.row('steps', 'Ton niveau d\'activité', pf.activite, { sq: true }),
+    PL.row('list', 'Tes besoins par jour', '2 200 kcal · 140 g · 250 g · 70 g', { sq: true }),
+    PL.row('bell', 'Rappel des repas', NUT.rappel.heure, { sq: true })])}
+  <div class="pl-cap" style="margin-top:12px">Les mêmes réponses que dans « Mes informations » : un changement ici vaut partout.</div>`, 'Mes paramètres', { right: PL.sheetBtn('OK'), full: true }));
+
+/* 8 · première ouverture */
+PL.mount('p8', PL.nv('Nutrition', '', { back: false }) + `<div style="margin-top:4px">${PL.wsel({ marks: [] })}</div>
+  ${PL.hero({ lab: 'Aujourd\'hui', st: 'margin-top:10px',
+    body: `<div class="nut1-fig">0<small>kcal mangées</small></div>${U_.m3({ zero: true })}` })}
+  ${PL.btn("Ajouter", { i: "plus", st: "margin-top:10px" })}
+  ${PL.sect('À remplir', '0 / 2')}
+  ${PL.list([PL.row('flame', 'Objectif calorique', '', { sq: true, chev: false }), PL.row('pie', 'Objectifs de macros', '', { sq: true, chev: false }),
+    `<div style="padding:10px 14px">${PL.btn('Calculer mes besoins', { k: 'T' })}</div>`])}
+  ${PL.sect('Repas')}
+  ${PL.list(NUT.jour.repas.map((m) => PL.row(m.i, m.n, 'Rien noté', { sq: true, plus: true, chev: false })))}`);
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [1, 'Sélecteur de semaine, en tête de page.'], F2: ['=', 'Sans écran : la page suit le jour quand l\'app se rouvre.'],
+  F3: [1, 'Grand chiffre « kcal restantes » du héros.'], F4: [1, 'Trois jauges sous la barre fine.'],
+  F5: [8, 'Carte « À remplir », une seule pour les deux objectifs.'], F6: [2, 'Bouton « Code-barres » de la feuille « Ajouter ».'],
+  F7: [[1, 4], 'Bouton plein « Ajouter » ; « Ajouter un aliment » dans le repas.'], F8: [2, 'Champ « Rechercher un aliment » et « Suggestions ».'],
+  F9: [2, 'Pastilles de familles sous les boutons.'], F10: ['=', 'La ligne « Chercher « … » dans les produits emballés » s\'ajoute à la recherche dès qu\'un mot est tapé.'],
+  F11: [3, 'Feuille de quantité, − et + en plus.'], F12: [[1, 4], '« + » de chaque ligne de « Repas » ; reprises du repas.'],
+  F13: [2, 'Ligne « Aliment perso » de la feuille.'], F14: [2, 'Ligne « Mes repas » de la feuille « Ajouter ».'],
+  F15: [2, 'Bouton « Code-barres » ; la caméra elle-même est inchangée.'], F16: [2, 'Bouton « Photo du plat » ; la caméra est inchangée.'],
+  F17: ['=', 'Photo déjà prise : bouton de la galerie du scanner, inchangé.'], F18: ['=', 'Flash du scanner, inchangé.'],
+  F19: ['=', 'Explication avant la caméra : « Ce qui reste sur ton iPhone » reste affichée avant la demande.'],
+  F20: ['=', 'Sorties d\'un code-barres : « Produit introuvable » et ses trois sorties, inchangées.'],
+  F21: ['=', 'Récapitulatif du scan, inchangé, ouvert depuis la feuille « Ajouter ».'], F22: ['=', '« À confirmer » du récapitulatif d\'une photo, inchangé.'],
+  F23: ['=', 'Apprentissage local du scanner, inchangé.'], F24: [2, 'Sous « Photo du plat » : « Encore 3 analyses… ».'],
+  F25: ['=', '« Scanner à nouveau » du récapitulatif, inchangé.'], F26: ['=', 'Alerte « Déjà ajouté à l\'instant », inchangée.'],
+  F27: [1, 'Section « Repas », quatre lignes avec « + ».'], F28: [4, 'Totaux et aliments de « Dîner ».'],
+  F29: ['=', 'Feuille d\'un aliment noté (touchée dans la page d\'un repas), inchangée.'], F30: ['=', 'Glisser pour supprimer, dans la page d\'un repas, inchangé.'],
+  F31: ['=', 'Favori en glissant, inchangé ; étoile des favoris ajoutée à la recherche (écran 2).'],
+  F32: [4, 'Section « Reprendre un dîner précédent ».'], F33: ['=', 'Section « Mes repas » de la page d\'un repas vide, inchangée.'],
+  F34: [4, 'Bouton « Enregistrer ce repas ».'], F35: [5, 'Ligne « Mes repas » du groupe « Ma bibliothèque ».'],
+  F36: [5, 'Ligne « Mes aliments » (2) du même groupe.'], F37: [5, 'Ligne « Tous les nutriments » avec le badge Premium.'],
+  F38: ['=', 'Page « Nutriments » inchangée, ouverte par cette ligne.'], F39: [[1, 5, 8], 'Objectif atteint sous le chiffre (1) ; ligne « Idées » (5) ; « Calcule tes besoins » dans « À remplir » (8).'],
+  F40: [5, 'Ligne « Idées » : « Il te reste environ 1 122 kcal ».'], F41: [5, 'Carte « Calories de la semaine » du groupe « Suivre ».'],
+  F42: [6, 'Périodes de l\'Historique, avec cadenas.'], F43: [6, 'Carte « Bilan » d\'aujourd\'hui.'],
+  F44: ['=', 'Carte « Calories par jour » de l\'Historique, Premium, inchangée.'], F45: [6, 'Carte « Répartition des calories ».'],
+  F46: ['=', 'Courbe « Poids » de l\'Historique, Premium, inchangée.'], F47: ['=', '« Jour par jour » de l\'Historique, Premium, inchangé.'],
+  F48: [5, 'Dernière ligne, groupe « Réglages ».'], F49: [7, 'Ligne « Rappel des repas ».'], F50: [7, 'Ligne « Ton objectif », partagée avec Fitness.'],
+  F51: [7, 'Même ligne : poids cible et durée.'], F52: [7, 'Question grossesse dans le chapitre « Toi ».'], F53: [7, 'Ligne « Toi » : âge, taille, poids.'],
+  F54: [7, 'Ligne « Ton niveau d\'activité ».'], F55: ['=', 'Récapitulatif « Ton objectif de poids », ouvert depuis « Ton objectif », inchangé.'],
+  F56: ['=', '« Ajustement proposé » : carte en tête de « Mes paramètres » quand il y a lieu, inchangée.'],
+  F57: ['=', '« Nouveau calcul proposé » : carte en tête de « Mes paramètres » quand il y a lieu, inchangée.'],
+  F58: [7, 'Ligne « Tes besoins par jour ».'], F59: ['=', 'Carte de Mon quotidien : inchangée, mêmes mots ; elle ouvre cette page.'],
+  F60: ['=', 'Widgets : inchangés, hors de la mini-app.'], F61: ['=', 'Ajout rapide : widget Premium, inchangé.'],
+  F62: ['=', 'Notifications inchangées, réglées dans « Rappel des repas » (écran 7).'], F63: ['=', 'Espace côté Créer : inchangé.'],
+  F64: [5, 'Note des sources au bas de l\'index.'],
+});
+
+PL.init();
+</script>
+</body>
+</html>
