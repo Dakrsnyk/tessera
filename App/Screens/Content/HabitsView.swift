@@ -61,12 +61,12 @@ struct HabitsView: View {
                         paywall = .habitLimit
                     }
                 } label: {
-                    Label(tr("Nouvelle habitude"), systemImage: "plus.circle.fill")
+                    Label(tr("Ajouter une habitude"), systemImage: "plus.circle.fill")
                 }
             }
         }
         .styledList()
-        .navigationTitle(tr("Habitudes"))
+        .navigationTitle(tr("Mes habitudes"))
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 if habits.count > 1 { EditButton() }

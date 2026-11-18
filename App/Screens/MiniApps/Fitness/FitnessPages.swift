@@ -147,6 +147,12 @@ struct FitnessHistoryPage: View {
             if sessions.isEmpty {
                 Text(tr("Aucune séance pour l'instant. Commence celle du jour depuis Fitness : elle s'enregistre ici."))
                     .foregroundStyle(Color.secondary)
+            } else {
+                // The total of the sessions done (it was on the main page before the hybrid layout).
+                Text(Fmt.plural(sessions.count, tr("séance faite"), tr("séances faites")))
+                    .font(.subheadline.weight(.semibold))
+                    .monospacedDigit()
+                    .accessibilityIdentifier("history-total")
             }
             ForEach(order, id: \.self) { month in
                 Section(month) {

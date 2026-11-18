@@ -343,91 +343,11 @@ struct PlanningProjectsPage: View {
 
 // MARK: - Habits
 
+/// The Habits page of Planning is the Habits mini-app page (direction « Hybride », `HabitsApp`): one page for Mon
+/// quotidien, Planning and the notifications.
 struct PlanningHabitsPage: View {
-    @Environment(AppModel.self) private var model
-    @State private var editing: Habit?
-    @State private var creating = false
-    @State private var paywall: PaywallContext?
-
-    /// The day the habits are checked for (a habit forgotten yesterday can still be checked).
-    @State private var day = Date()
-    @Environment(\.appStyle) private var style
-
-    /// The editor opens while the free plan has room (`canAddHabit`, the rule of `addHabit`); else the paywall.
-    private func startCreating() {
-        if model.canAddHabit { creating = true } else { paywall = .habitLimit }
-    }
-
     var body: some View {
-        let now = day
-        let habits = model.content.habits
-        MiniAppScroll {
-            if !habits.isEmpty {
-                DaySwitcher(day: $day, colorHex: "7FA33A")
-            }
-            if habits.isEmpty {
-                EmptyStateView(symbol: "repeat", title: tr("Tes habitudes"), message: tr("Lire, marcher, méditer… Coche-les chaque jour et regarde ta série grandir."), actionTitle: tr("Ajouter une habitude")) {
-                    startCreating()
-                }
-                .card()
-            } else {
-                // One card per habit: the same band and grid of weeks as the Habits screen.
-                ForEach(habits) { habit in
-                    HabitRow(habit: habit, day: now) {
-                        Haptics.tap()
-                        model.updateContent { $0.toggleHabit(habit.id, on: now) }
-                    } onEdit: {
-                        editing = habit
-                    }
-                    .padding(12)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .miniCard()
-                }
-                Button {
-                    startCreating()
-                } label: {
-                    Label(tr("Ajouter une habitude"), systemImage: "plus.circle.fill").font(.subheadline.weight(.semibold))
-                }
-                .tint(style.cristal.strong("7FA33A"))
-                regularity(habits, now: Date())
-            }
-        }
-        .navigationTitle(tr("Habitudes"))
-        .navigationBarTitleDisplayMode(.large)
-        .sheet(isPresented: $creating) { HabitEditor(habit: Habit(name: "", symbol: "checkmark", colorHex: "7FA33A"), isNew: true) }
-        .sheet(item: $editing) { HabitEditor(habit: $0, isNew: false) }
-        .sheet(item: $paywall) { PaywallView(context: $0) }
-    }
-
-    /// The detailed statistics (Premium): how regular each habit is over 30 and 90 days, and its best streak.
-    @ViewBuilder
-    private func regularity(_ habits: [Habit], now: Date) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Régularité"))
-            if !model.isPremium {
-                PremiumLockCard(symbol: "chart.bar.doc.horizontal", title: tr("La régularité est dans Premium"),
-                                message: tr("Le taux de réussite de chaque habitude sur 30 et 90 jours, et sa plus longue série. Tes jours cochés restent enregistrés."))
-            } else {
-                MiniRowsCard {
-                    ForEach(Array(habits.enumerated()), id: \.element.id) { index, habit in
-                        if index > 0 { MiniDivider() }
-                        MiniRow(symbol: "chart.bar.fill", colorHex: habit.colorHex, title: habit.name,
-                                detail: tr("Meilleure série : \(Fmt.plural(habit.bestStreak, tr("jour"), tr("jours")))"),
-                                value: regularityText(habit, now: now), showsChevron: false)
-                    }
-                }
-                .accessibilityIdentifier("habits-regularity")
-                Text(tr("Compté depuis le premier jour coché, sur 30 et 90 jours."))
-                    .font(.footnote)
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
-
-    private func regularityText(_ habit: Habit, now: Date) -> String {
-        guard let month = habit.regularity(days: 30, asOf: now) else { return "—" }
-        let quarter = habit.regularity(days: 90, asOf: now) ?? month
-        return "\(Fmt.percent(Double(month.done) / Double(max(1, month.total)))) · \(Fmt.percent(Double(quarter.done) / Double(max(1, quarter.total))))"
+        HabitsApp()
     }
 }
 

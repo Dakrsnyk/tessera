@@ -174,7 +174,7 @@ final class PromoVideoUITests: XCTestCase {
         pause(1)
         scroll(down: false, distance: 0.3)
         pause(0.6)
-        if tap(app.buttons["fitness-resume"]) {
+        if tap(app.buttons["fitness-resume-card"]) || tap(app.buttons["fitness-resume"]) {
             pause(1.6)
             let done = app.buttons["session-set-done"]
             if tap(done) { pause(2.2) }

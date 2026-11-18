@@ -319,6 +319,12 @@ struct FitnessAppView: View {
 
     /// « Série faite » from the page: the set as planned (the reps and load shown on the card), like the session's own.
     private func completeSetFromPage() {
+        // The one-time offer of the rest alerts (notifications) lives in the session page: until it was made, the
+        // first set is logged there, so that a person who only uses this page still gets the end-of-rest alert.
+        if !RestAlertOffer.wasMade() {
+            router.homePath.append(.page(.fitnessSession))
+            return
+        }
         var accepted = false
         model.update(\.fitness) { state in
             guard var session = state.active, session.currentExercise != nil else { return }
