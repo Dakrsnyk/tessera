@@ -558,6 +558,8 @@ private struct FitnessRunningActions: View {
             } label: {
                 Label(tr("Série faite"), systemImage: "checkmark.circle.fill")
                     .font(.headline)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
                     .foregroundStyle(Color.readableInk(on: hex))
                     .padding(.horizontal, 22)
                     .frame(minHeight: 50)
@@ -573,8 +575,8 @@ private struct FitnessRunningActions: View {
     /// The rest (counting down, with its pause or resume), or a way back to the session.
     @ViewBuilder private var side: some View {
         if let rest = session.restEndsAt {
-            // The label never wraps (« Ready » was cut in two beside « Set done »), and the pause leaves with the rest:
-            // once it is over there is nothing left to pause.
+            // The label stays on one line and shrinks a little rather than wrap (« Ready » was cut in two beside
+            // « Set done ») or push the row off a small screen; the pause leaves with the rest, once it is over.
             TimelineView(.periodic(from: Date(), by: 1)) { context in
                 let running = rest > context.date
                 HStack(spacing: 4) {
@@ -592,7 +594,7 @@ private struct FitnessRunningActions: View {
                     .font(.headline)
                     .foregroundStyle(Color.primary)
                     .lineLimit(1)
-                    .fixedSize(horizontal: true, vertical: false)
+                    .minimumScaleFactor(0.8)
                     if running {
                         Button {
                             model.update(\.fitness) { $0.pauseRest(at: Date()) }
