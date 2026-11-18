@@ -1,0 +1,27 @@
+{
+ "_doc": "Voice lines of the two 2026-11-18 ads. 60 fps; startFrame = absolute frame in the film; seconds = frame / 60. Duration ESTIMATED (calm female voice, ~2.6 words/s, Kokoro af_heart pace): to be replaced by the measured length of each recorded line. Values copy src/pub26/timing26.ts (MAIN_VO, WIDGET_VO): if one changes, change the other.",
+ "voice": "Kokoro af_heart (female, calm), same chain as the validated ads",
+ "wordsPerSecond": 2.6,
+ "MainPub26": {
+  "totalFrames": 1756,
+  "totalSeconds": 29.27,
+  "lines": [
+   { "id": "M1", "text": "All your essentials on your home screen.", "startFrame": 470, "words": 7, "estDurationFrames": 162, "estDurationSeconds": 2.69 },
+   { "id": "M2", "text": "Nutrition.", "startFrame": 878, "words": 1, "estDurationFrames": 23, "estDurationSeconds": 0.6, "note": "starts with the title word of the mini-app (KineticLine at +12)" },
+   { "id": "M3", "text": "Fitness.", "startFrame": 1008, "words": 1, "estDurationFrames": 23, "estDurationSeconds": 0.6 },
+   { "id": "M4", "text": "Planning.", "startFrame": 1138, "words": 1, "estDurationFrames": 23, "estDurationSeconds": 0.6 },
+   { "id": "M5", "text": "Make everyday your own.", "startFrame": 1312, "words": 4, "estDurationFrames": 92, "estDurationSeconds": 1.54 }
+  ],
+  "outroVoice": { "text": "Ardane. Your whole life. One place.", "startFrame": 1612, "note": "validated outro line of main-v5-final6 (part 2 voiceLines[3]: starts 26 frames after the close card at 1030, ends 1188); same offset here: close card at 1586" }
+ },
+ "WidgetPub26": {
+  "totalFrames": 1730,
+  "totalSeconds": 28.83,
+  "lines": [
+   { "id": "W1", "text": "You want your phone to look like this?", "startFrame": 30, "words": 8, "estDurationFrames": 185, "estDurationSeconds": 3.08, "note": "'like this?' should land on the first After screen (frame 90 to 150)" },
+   { "id": "W2", "text": "With Ardane, you can customize your own widgets.", "startFrame": 440, "words": 8, "estDurationFrames": 185, "estDurationSeconds": 3.08, "note": "over Create and Pick a widget (frames 420 to 720)" },
+   { "id": "W3", "text": "And styles.", "startFrame": 792, "words": 2, "estDurationFrames": 46, "estDurationSeconds": 0.77, "note": "on the first Style screen (Aurora, local 372)" }
+  ],
+  "outroVoice": { "text": "Ardane. Your whole life. One place.", "startFrame": 1586, "note": "same outro line and offset as the main ad (close card at 1560 + 26)" }
+ }
+}

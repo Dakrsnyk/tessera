@@ -1,0 +1,60 @@
+{
+ "_doc": "Voice lines of the two 2026-11-18 ads (pub26). Same voice and settings as v5short/v5part2 (Kokoro af_heart, speed 1.0, Ardane = ar-DAHN). Nutrition./Fitness./Planning. and the outro come from the validated v5short / v5part2 recordings (audio_pub26.py).",
+ "voice": "af_heart",
+ "speed": 1.0,
+ "brand": {
+  "Ardane": "\u0251\u0279d\u02c8\u0251n"
+ },
+ "films": {
+  "pub26main": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "M1",
+      "text": "All your essentials on your home screen.",
+      "start": 0,
+      "max": 3.5
+     }
+    ],
+    [
+     {
+      "id": "M5",
+      "text": "Make everyday your own.",
+      "start": 0,
+      "max": 2.5
+     }
+    ]
+   ]
+  },
+  "pub26widget": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "W1",
+      "text": "You want your phone to look like this?",
+      "start": 0,
+      "max": 3.5
+     }
+    ],
+    [
+     {
+      "id": "W2",
+      "text": "With Ardane, you can customize your own widgets.",
+      "start": 0,
+      "max": 4.0
+     }
+    ],
+    [
+     {
+      "id": "W3",
+      "text": "And styles.",
+      "start": 0,
+      "max": 1.2
+     }
+    ]
+   ]
+  }
+ }
+}
