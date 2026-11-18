@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Voyage — Direction 5 : Hybride</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<style>
+  .voy5-c .li { padding: 6px 14px !important; min-height: 0 !important; }
+  .pl-fig.voy5-fig { font-size: 31px; letter-spacing: -.03em; margin-top: 6px; }
+  .voy5-edit { width: 44px; height: 44px; margin: -14px -10px -14px 0; display: grid; place-items: center; color: var(--cs); font-size: 20px; flex: none; }
+  .voy5-top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+  .voy5-amt { padding: 4px 4px 12px; }
+  .voy5-amt .pl-num { font-size: 44px; letter-spacing: -.035em; margin-top: 4px; }
+  .voy5-amt .pl-num small { font-size: 20px; }
+  .voy5-g { margin-top: 10px; }
+  .voy5-g .x-lab { display: block; margin: 0 4px 6px; font-size: 13px; color: var(--ink2); }
+  .voy5-gap { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .voy5-type { display: flex; align-items: center; gap: 16px; }
+  .voy5-k { flex: 1; display: flex; flex-direction: column; gap: 9px; font-size: 14px; }
+  .voy5-k div { display: flex; align-items: center; gap: 8px; }
+  .voy5-k u { width: 10px; height: 10px; border-radius: 3px; flex: none; }
+  .voy5-k b { margin-left: auto; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .voy5-sub .li { padding-left: 34px !important; }
+  .voy5-act { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 6px 14px 12px; }
+  .voy5-p { margin: 4px 0 0; font-size: 14px; line-height: 1.42; color: var(--ink2); }
+  .voy5-two { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="voy" data-kind="direction">
+
+  <header class="bd-head"><div class="num">5</div>
+    <div><div class="pl-kick">Direction 5 sur 5</div>
+      <h1>Direction 5 · Hybride</h1>
+      <p>« Le voyage suit son calendrier » : un voyage se prépare, se vit, puis se range. La page garde les mêmes blocs, mais son ordre suit la phase (avant le départ : le compte à rebours, le budget et la liste ; en voyage : le programme du jour et la dépense sous le pouce), et un voyage terminé reste consultable dans « Mes voyages ». Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit ; une seule vue en voyage, le lundi 14 juin 2027.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>L'ordre suit la phase du voyage</h3>
+      <p>Avant le départ, ce qui compte est de préparer : le compte à rebours, ce que le voyage coûte, ce qui reste à emporter. En voyage, c'est le programme du jour et la dépense en un geste. Après le retour, le voyage se range dans « Mes voyages », où l'on peut encore le rouvrir. La carte de Mon quotidien dit la même chose en une phrase : « Lisbonne · J-212 ».</p></div>
+    <div><h5>En ouvrant Voyage</h5><ol>
+      <li data-p="1">« Départ dans 212 jours », puis « Jour 3 / 8 » en voyage</li>
+      <li data-p="1">« Dépense » et « Ajouter », sous le pouce</li>
+      <li data-p="2">Budget (601,82 $ sur 1 500 $) et « À ne pas oublier » (3 / 10)</li>
+      <li data-p="2">« Programme » du jour choisi</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">« À venir » : le vol, l'hôtel, l'activité</li>
+      <li data-p="3">« Devise », avec le taux du jour</li>
+      <li data-p="3">« Mes voyages », puis « Mes paramètres »</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">Une dépense en un toucher au lieu de deux, un compte à rebours qui ouvre la page, et un voyage fini qui ne disparaît plus.</p>
+      <p class="minus">Deux ajouts à bâtir (« Mes voyages », l'épargne) ; l'ordre qui change demande une règle simple (le jour du départ) ; vols, hébergements et activités restent rattachés par les dates.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Page principale, avant le départ</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Préparer : le départ, le budget, la liste</h4>
+        <p>Le compte à rebours ouvre la page, puis ce qui reste à préparer. Un seul bouton plein, « Dépense », sous le pouce.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine (sur le premier jour du voyage), bloc voyage, tuiles « Budget » et « À ne pas oublier », « Programme » du jour.</span></li>
+          <li><span class="tag a"></span><span>Le bloc voyage se touche (crayon : feuille « Voyage ») ; avant le départ, les tuiles passent devant « Programme » ; l'action flottante est double : « Dépense » et « Ajouter ».</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Programme ».</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher la tuile « Budget ».</span></li>
+          <li><span class="tag g" data-to="9"></span><span>Toucher la tuile « À ne pas oublier ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Page principale, suite</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="13:20" data-tab="0" id="p2"></div>
+      <div class="cap"><h4>Ce qui vient, la devise, les voyages</h4>
+        <p>« À venir » garde ses trois lignes, la carte « Devise » son taux ; « Mes voyages » devient une entrée vers une page.</p>
+        <ul><li><span class="tag e"></span><span>« À venir » (vol, hébergement avec sa réservation, activité), carte « Devise » (10, 50, 100 €), « Mes paramètres », dernier élément.</span></li>
+          <li><span class="tag a"></span><span>La section « Mes voyages » (4 voyages au plus, formulaire) devient une ligne qui ouvre la page « Mes voyages ».</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher « Voir tous mes voyages ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Programme</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="13:20" data-tab="0" id="p3"></div>
+      <div class="cap"><h4>Une carte par jour, du départ au retour</h4>
+        <p>La page est celle de l'app, avec un grand titre. Les trois boutons ajoutent ; toucher une ligne ouvre sa feuille.</p>
+        <ul><li><span class="tag e"></span><span>« Vol », « Hébergement », « Activité » ; date longue et « Jour N » ; lignes triées par heure.</span></li>
+          <li><span class="tag a"></span><span>Grand titre, comme les autres mini-apps (aujourd'hui petit titre) ; depuis la page principale, une ligne du programme ouvre aussi sa feuille.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Budget</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="13:20" data-tab="0" id="p4"></div>
+      <div class="cap"><h4>Ce qui est dépensé, et ce qui est épargné</h4>
+        <p>La jauge dit où l'on en est du budget ; juste dessous, l'épargne de Finances pour le même voyage.</p>
+        <ul><li><span class="tag e"></span><span>« Dépensé », jauge, « Il reste X sur Y », « Budget du voyage », « Ajouter une dépense », « Par type », « Dépenses ».</span></li>
+          <li><span class="tag n"></span><span>Carte « Voyage à Lisbonne » : 640 $ sur 1 500 $, l'objectif d'épargne de Finances. Rien ne relie aujourd'hui les deux mini-apps.</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Ajouter une dépense ».</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">En voyage, jour 3 sur 8</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="15:40" data-tab="0" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Vivre : le programme du jour d'abord</h4>
+        <p>Autre moment d'exemple : lundi 14 juin 2027, 15 h 40. Le programme passe devant les tuiles, et ce qu'il reste par jour s'écrit dans le bloc voyage.</p>
+        <ul><li><span class="tag e"></span><span>« Jour 3 / 8 », « Programme » du jour, tuiles « Budget » et « À ne pas oublier » (« tout est prêt »), « À venir ».</span></li>
+          <li><span class="tag a"></span><span>« 141,11 $ par jour jusqu'au retour » : ce calcul existe, mais seulement dans la page « Budget ».</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Dépense ».</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Programme ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Dépense de voyage (feuille)</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="15:40" data-tab="none" id="p6"></div>
+      <div class="cap"><h4>Une dépense en un seul toucher</h4>
+        <p>« Dépense » ouvre directement la feuille, dans la devise du voyage. Aujourd'hui il faut d'abord ouvrir le dialogue « Ajouter ».</p>
+        <ul><li><span class="tag e"></span><span>« Montant », « Devise » (CAD, EUR), « Type » (six choix), « Note (facultatif) », « Date », « Enregistrer ».</span></li>
+          <li><span class="tag a"></span><span>Le montant est grand ; le bouton flottant atteint la feuille sans passer par le dialogue.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Aucun voyage à venir</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="13:20" data-tab="0" id="p7"></div><span class="flow"></span>
+      <div class="cap"><h4>Après le retour, rien ne disparaît</h4>
+        <p>Même compte, si Lisbonne n'était pas encore saisie : l'invitation, puis les voyages terminés au lieu d'un écran sans suite.</p>
+        <ul><li><span class="tag e"></span><span>Carte « Ton prochain voyage », « Mes voyages » (terminés), « Mes paramètres », bouton flottant « Nouveau voyage ».</span></li>
+          <li><span class="tag a"></span><span>Les voyages terminés s'ouvrent enfin (leur programme, budget et liste), au lieu de renvoyer au formulaire.</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher « Tout voir ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes voyages</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="13:20" data-tab="0" id="p8"></div>
+      <div class="cap"><h4>Chaque voyage garde ses trois pages</h4>
+        <p>Un voyage terminé se déplie : programme, budget et liste, comme le voyage actif. On peut aussi le modifier ou le supprimer.</p>
+        <ul><li><span class="tag e"></span><span>« Modifier le voyage », « Nouveau voyage », les voyages avec leurs dates ; le dépassement de budget s'écrit (« dépassé de 151,10 $ »).</span></li>
+          <li><span class="tag n"></span><span>Page « Mes voyages » : ouvrir un voyage passé, et « Supprimer le voyage » (qui retire aussi ses dépenses et sa liste).</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">À ne pas oublier</div>
+      <div class="phone app t-saphir" data-c="voy" data-time="13:20" data-tab="0" id="p9"></div>
+      <div class="cap"><h4>La liste, au même style que le reste</h4>
+        <p>Trois éléments prêts sur dix. L'essentiel à emporter se range sous la liste.</p>
+        <ul><li><span class="tag e"></span><span>« Ajouter (maillot, cadeaux…) », « 3 sur 10 prêts », cocher, « Ajouter l'essentiel à emporter » et sa note.</span></li>
+          <li><span class="tag a"></span><span>Cartes Cristal à la place du formulaire système (deux styles aujourd'hui).</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le sélecteur de semaine, le programme jour par jour, le budget avec ses dépenses et son anneau « Par type », la liste et l'essentiel à emporter, la carte « Devise », les cinq feuilles de saisie (voyage, vol, hébergement, activité, dépense), la recherche de ville, les widgets et le pack, et toutes les règles de calcul (fenêtre d'un voyage, conversions, un seul voyage actif).</span>
+          <b>Changé de place</b><span>L'ordre suit la phase. Le bloc voyage se touche. « Dépense » est un bouton flottant qui ouvre la feuille directement. « Modifier le voyage » et « Nouveau voyage » passent dans « Mes voyages ». « À venir » descend sous la première page, la carte « Devise » aussi. Le reste par jour monte dans le bloc voyage, en voyage. La carte de Mon quotidien ne change pas : « Voyage », l'avion, le même turquoise, et « Lisbonne · J-212 ».</span>
+          <b>Laissé de côté</b><span>Carte et liens vers Plans, documents (billets, passeport), partage, notifications de voyage, budget dans la feuille du voyage, budget par type, convertisseur avec saisie, import d'une réservation : des idées de l'audit, hors de cette direction.</span>
+        </div>
+        <h4>Nouveau, à développer (2)</h4>
+        <p>1. Page « Mes voyages » (écrans 7 et 8) : ouvrir le programme, le budget et la liste d'un voyage terminé, et le supprimer depuis la mini-app avec ses dépenses et sa liste (le code sait déjà tout retirer ; aucun écran ne l'appelle). 2. Épargne liée (écran 4) : « Voyage à Lisbonne », 640 $ sur 1 500 $, lu dans Finances.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : toute la mini-app est gratuite, sans limite. Premium reste limité à cinq widgets sur sept (« Vol », « Hôtel », « Devise », « Avancement du voyage », « Prochaine activité ») et au pack « Voyageur ». Aucun verrou n'est ajouté.</p>
+        <h4>Hors ligne, heures</h4>
+        <p>Hors ligne, la carte « Devise » disparaît comme aujourd'hui (sans le dire) : non modifiée ici. Les heures du programme sont écrites telles qu'elles s'affichent ; le fuseau du téléphone (problème 13 de l'audit) n'est pas simulé.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="voyage.js"></script>
+<script>
+const V = VOY, T = V.T, ui = V.ui;
+const m = (x) => PL.m(V.r2(x));
+const fab = PL.fab2(['Dépense', 'wallet'], ['Ajouter', 'plus']);
+const edit = '<span class="voy5-edit" role="button" aria-label="Modifier le voyage"><i data-i="pencil"></i></span>';
+const nbPrets = V.liste.filter((x) => x.ok).length;
+const tuiles = (b, enVoyage) => PL.kpis([
+  PL.kpi('Budget', PL.n(V.r2(b.total), 2), '/ ' + PL.m(T.budget), { i: 'wallet', sm: true, unit: NBSP + '$' }),
+  enVoyage ? PL.kpi('À ne pas oublier', `${V.liste.length} / ${V.liste.length}`, 'tout est prêt', { i: 'checkc', sm: true, vc: 'var(--pl-ok)' })
+           : PL.kpi('À ne pas oublier', `${nbPrets} / ${V.liste.length}`, `${V.liste.length - nbPrets} à préparer`, { i: 'check', sm: true })], 2, 'margin-top:8px');
+
+/* 1 · page principale, avant le départ (sélecteur sur le premier jour du voyage, comme l'app) */
+PL.mount('p1', PL.nv('Voyage', '', { back: false }) + `<div style="margin-top:4px">${ui.wsel(T.depart, V.AUJ)}</div>
+  <div style="margin-top:8px">${PL.hero({ lab: 'Lisbonne · Prochain voyage', right: edit, fig: 'Départ dans ' + V.avantJours + ' jours', size: 'voy5-fig',
+    line: `${V.carte.phrase.split(' · ')[1]} · ${V.plage(T.depart, T.retour)}`, body: `<div class="line" style="margin-top:2px">Heure locale ${V.heureLocale('13:20')}</div>` })}</div>
+  ${tuiles(V.avant, false)}
+  ${PL.sect('Programme', V.dateC(T.depart), '', { st: 'margin-top:8px' })}
+  ${PL.list(V.programme(T.depart).map((l) => ui.ligne(l)))}`, fab);
+
+/* 2 · suite : « À venir », « Devise », « Mes voyages », « Mes paramètres » */
+const av = V.aVenir(V.AUJ, T.depart);
+PL.mount('p2', PL.nv('Voyage', '', { back: false }) + `
+  ${PL.sect('À venir', '', '', { st: 'margin-top:4px' })}
+  ${PL.list(av.map((l) => ui.ligne(l, { chev: false })))}
+  ${PL.sect('Devise', '1 CAD = 0,660 EUR', '', { st: 'margin-top:8px' })}
+  ${PL.strip([10, 50, 100].map((x) => [V.eur(x), m(x / V.taux.EUR)]))}
+  ${PL.foot(V.txt.taux)}
+  ${PL.sect('Mes voyages', '3', '', { st: 'margin-top:6px' })}
+  ${PL.list([PL.row('suitcase', 'Voir tous mes voyages', 'Lisbonne · New York · Paris', { sq: true })])}
+  ${PL.settings()}`, fab);
+
+/* 3 · Programme */
+const jp = V.joursProg;
+PL.mount('p3', PL.nv('') + PL.ttl('Programme', `${T.ville} · ${V.plage(T.depart, T.retour)}`) + `
+  <div class="voy5-two">${PL.btn('Vol', { k: 'T', i: 'plane', st: 'height:44px;font-size:13px;padding:0 4px' })}${PL.btn('Hébergement', { k: 'T', i: 'bed', st: 'height:44px;font-size:13px;padding:0 4px' })}${PL.btn('Activité', { k: 'T', i: 'ticket', st: 'height:44px;font-size:13px;padding:0 4px' })}</div>`
+  + jp.map((d) => `${PL.sect(V.dateL(d), 'Jour ' + (V.nj(T.depart, d) + 1), '', { st: 'margin-top:8px' })}${PL.list(V.programme(d).map((l) => ui.ligne(l, { compact: true })), { cls: 'voy5-c' })}`).join(''));
+
+/* 4 · Budget (compte du 12 novembre) */
+const A = V.avant, ep = V.epargne, nvEp = V.nouveau.epargne, totalT = A.total;
+PL.mount('p4', PL.nv('') + PL.ttl('Budget · ' + T.ville) + `
+  ${PL.card(`<div class="voy5-top"><span class="pl-lab">Dépensé</span><span class="pl-num sm">${PL.n(V.r2(totalT), 2)}<small>$</small></span></div>${PL.bar(V.pctAvant, { lg: true })}
+    <div class="pl-cap" style="margin:8px 0 10px">Il reste <b>${m(V.resteAvant)}</b> sur ${PL.m(T.budget)}</div>${PL.field('Budget du voyage', PL.m(T.budget))}`, { st: 'margin-top:10px' })}
+  ${PL.card(PL.prog({ i: 'piggy', t: nvEp.titre, r: `<b>${PL.m(ep.actuel)}</b> / ${PL.m(ep.cible)}`, p: V.epargnePct, sub: nvEp.sous, nw: true }), { nw: true, st: 'margin-top:8px;padding-top:4px;padding-bottom:4px' })}
+  <div style="margin-top:8px">${PL.btn('Ajouter une dépense', { i: 'plus' })}</div>
+  ${PL.card(`<div class="voy5-type">${PL.donut(A.parType.map((t) => ({ v: t.m, c: t.c })), { s: 76, sw: 12, aria: 'Répartition des dépenses : ' + A.parType.map((t) => t.n.toLowerCase() + ' ' + PL.pct(t.m / totalT)).join(', ') })}
+    <div class="voy5-k">${A.parType.map((t) => `<div><u style="background:${t.c}"></u><span>${t.n}</span><b>${m(t.m)}</b></div>`).join('')}</div></div>`, { t: 'Par type', st: 'margin-top:8px' })}
+  ${PL.sect('Dépenses', String(A.liste.length), '', { st: 'margin-top:8px' })}
+  ${PL.list(A.liste.slice().sort((a, b) => b.d - a.d).map((e) => PL.row('', e.note, `${V.TYPES.find((t) => t.k === e.k).n} · ${V.dateC(e.d)}`, { r: e.dev === 'EUR' ? V.eur(e.m) : m(e.m), chev: false })), { cls: 'voy5-c' })}`);
+
+/* 5 · en voyage : jour 3 sur 8 (lundi 14 juin 2027) ; la page sert aussi de fond à la feuille de l'écran 6 */
+const enVoyage = () => { const avl = V.aVenir(V.ENV, V.ENV);
+  return PL.nv('Voyage', '', { back: false }) + `<div style="margin-top:4px">${ui.wsel(V.ENV, V.ENV)}</div>
+  <div style="margin-top:8px">${PL.hero({ lab: 'Lisbonne · En voyage', right: edit, fig: `Jour ${V.jourN} / ${V.total}`, line: `<b>${m(V.parJour)}</b> par jour jusqu'au retour` })}</div>
+  ${PL.sect('Programme', V.dateC(V.ENV), '', { st: 'margin-top:8px' })}
+  ${PL.list(V.programme(V.ENV).map((l) => ui.ligne(l, { compact: true })), { cls: 'voy5-c' })}
+  ${tuiles(V.enVoy, true)}
+  ${PL.sect('À venir', '', '', { st: 'margin-top:8px' })}
+  ${PL.list(avl.slice(0, 1).map((l) => ui.ligne(l, { chev: false, compact: true })), { cls: 'voy5-c' })}`; };
+PL.mount('p5', enVoyage(), fab);
+
+/* 6 · feuille « Dépense de voyage » (la dépense que l'on est en train d'ajouter : V.enSaisie) */
+const es = V.enSaisie;
+PL.mount('p6', enVoyage(), PL.sheet(`
+  <div class="voy5-amt"><span class="x-lab">Montant</span><div class="pl-num">${PL.n(es.m, 2)}<small>€</small></div></div>
+  <div class="voy5-g"><span class="x-lab">Devise</span>${PL.seg(['CAD', 'EUR'], 1)}</div>
+  <div class="voy5-g"><span class="x-lab">Type</span>${PL.chips(V.TYPES.map((t) => [t.n, t.i]), 2, { wrap: true })}</div>
+  <div class="voy5-gap">${PL.field('Note (facultatif)', es.note)}${PL.field('Date', V.dateC(es.d) + ' 2027')}</div>`, 'Dépense de voyage', { left: 'Annuler', right: PL.sheetBtn('Enregistrer') }));
+
+/* 7 · aucun voyage à venir (même compte, Lisbonne pas encore saisie : seuls les voyages terminés existent) */
+const fin = (v, j) => PL.row('', v.ville, V.plage(v.depart, v.retour), { r: m(v.total), r2: v.total > v.budget ? 'dépassé de ' + m(v.total - v.budget) : 'sur ' + PL.m(v.budget), rc: v.total > v.budget ? 'over' : '' });
+PL.mount('p7', PL.nv('Voyage', '', { back: false }) + `
+  ${PL.card(`<p class="voy5-p">${V.txt.depart}</p>`, { t: 'Ton prochain voyage', i: 'plane', st: 'margin-top:8px' })}
+  ${PL.sect('Mes voyages', '2', 'Tout voir', { st: 'margin-top:10px' })}
+  ${PL.list([fin(V.ny), fin(V.paris)])}
+  ${PL.settings()}`, PL.fab('Nouveau voyage', 'plus'));
+
+/* 8 · Mes voyages : New York ouvert */
+const sub = (i, t, r) => PL.row('', t, '', { r, cls: 'voy5-sub' });
+PL.mount('p8', PL.nv('') + PL.ttl('Mes voyages') + `
+  ${PL.sect('À venir', '1', '', { st: 'margin-top:10px' })}
+  ${PL.list([PL.row('plane', T.ville, V.plage(T.depart, T.retour), { sq: true, r: V.carte.phrase.split(' · ')[1], r2: 'budget ' + PL.m(T.budget) })])}
+  ${PL.sect('Terminés', '2', '', { nw: true, st: 'margin-top:8px' })}
+  ${PL.list([fin(V.ny), sub('calendar', 'Programme', V.ny.jours + ' jours'), sub('wallet', 'Budget', m(V.ny.total)), sub('check', 'À ne pas oublier', V.ny.prets[0] + ' sur ' + V.ny.prets[1] + ' prêts'),
+    `<div class="voy5-act">${PL.btn('Modifier le voyage', { k: 'T', st: 'height:44px;font-size:13px;padding:0 4px' })}${PL.btn(V.nouveau.mesVoyages.supprimer, { k: 'O', st: 'height:44px;font-size:13px;padding:0 4px' })}</div>`, fin(V.paris)], { cls: 'voy5-c' })}
+  <div style="margin-top:10px">${PL.btn('Nouveau voyage', { k: 'T', i: 'plus' })}</div>`);
+
+/* 9 · À ne pas oublier */
+PL.mount('p9', PL.nv('') + PL.ttl('À ne pas oublier', `${nbPrets} sur ${V.liste.length} prêts`) + `
+  <div style="margin-top:10px">${PL.field('', 'Ajouter (maillot, cadeaux…)', { ph: true, i: 'plus' })}</div>
+  ${PL.list(V.liste.map((x) => PL.row('', x.t, '', { chk: x.ok ? 'ok' : 'todo', chev: false, done: x.ok })), { cls: 'voy5-c', st: 'margin-top:8px' })}
+  <div style="margin-top:8px">${PL.btn('Ajouter l\'essentiel à emporter', { k: 'T', i: 'plus' })}</div>
+  ${PL.foot('Ajoute les incontournables (passeport, chargeur, assurance…) sans doublon ; retire ceux qui ne te servent pas en glissant.')}`);
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [[1, 5], 'Bloc voyage : « Départ dans 212 jours », puis « Jour 3 / 8 ».'],
+  F2: [[1, 5], 'Sélecteur de semaine en tête ; point sous les jours du programme.'],
+  F3: [[1, 5], 'Carte « Programme » du jour choisi.'],
+  F4: [[2, 5], 'Section « À venir » : vol, hébergement, activité.'],
+  F5: [3, 'Page « Programme » : une carte par jour.'],
+  F6: ['=', 'Feuille « Voyage » inchangée ; le crayon du bloc voyage l\'ouvre.'],
+  F7: [3, 'Bouton « Vol » de la page ; feuille « Vol » inchangée.'],
+  F8: [3, 'Bouton « Hébergement » de la page ; feuille inchangée.'],
+  F9: [3, 'Bouton « Activité » de la page ; feuille inchangée.'],
+  F10: [[4, 5], 'Carte « Dépensé » et jauge ; reste par jour dans le bloc voyage.'],
+  F11: [[4, 6], 'Liste « Dépenses » ; feuille « Dépense de voyage ».'],
+  F12: [4, 'Carte « Par type » : anneau et montants.'],
+  F13: [[1, 5], 'Tuile « Budget » à côté de « À ne pas oublier ».'],
+  F14: [[1, 9], 'Tuile « À ne pas oublier » ; page de la liste.'],
+  F15: [9, 'Bouton « Ajouter l\'essentiel à emporter ».'],
+  F16: [2, 'Carte « Devise » sous « À venir ».'],
+  F17: ['=', 'Recherche de ville de la feuille « Voyage », inchangée.'],
+  F18: ['=', 'Widget « Départ en voyage » gratuit : inchangé ; un toucher ouvre cette page.'],
+  F19: ['=', 'Widget « Heure sur place » gratuit : inchangé.'],
+  F20: ['=', 'Widget « Vol » (Premium) : inchangé.'],
+  F21: ['=', 'Widget « Hôtel » (Premium) : inchangé.'],
+  F22: ['=', 'Widget « Devise » (Premium) : inchangé.'],
+  F23: ['=', 'Widget « Avancement du voyage » (Premium) : inchangé.'],
+  F24: ['=', 'Widget « Prochaine activité » (Premium) : inchangé.'],
+  F25: ['=', 'Pack « Voyageur » du Store : inchangé, hors mission.'],
+  F26: ['=', 'Page de données de l\'espace (Studio) : inchangée ; la suppression s\'ajoute dans « Mes voyages ».'],
+  F27: [2, 'Bouton « Mes paramètres », dernier élément ; feuille inchangée.'],
+  F28: ['=', 'Sauvegarde et effacement : inchangés, sans écran.'],
+  F29: ['=', 'Rappel « Départ pour Lisbonne » de Mon quotidien : inchangé.'],
+  F30: ['=', 'Carte de Mon quotidien : mêmes mots, avion, turquoise ; « Lisbonne · J-212 ».'],
+  F31: ['=', 'Carte « Voyage » du bloc « À remplir » : inchangée.'],
+  F32: [[1, 2, 5, 6], 'Action flottante « Dépense » et « Ajouter » ; feuille directe.'],
+  F33: [[2, 7, 8], 'Ligne « Voir tous mes voyages » ; page « Mes voyages ».'],
+  F34: ['=', '« Montant à convertir » : page de données de l\'espace, inchangée.'],
+});
+PL.init();
+</script>
+</body>
+</html>

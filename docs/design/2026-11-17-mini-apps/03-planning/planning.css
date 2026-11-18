@@ -1,0 +1,39 @@
+/* planning.css : le CSS commun du sujet « Planning » (préfixe pla-). À charger après cristal.css et planches.css.
+   Pièces : ligne de la liste du jour, vue « Jour » heure par heure, grille du « Mois », vue « Année ». Couleurs : data-ev (cristal.css) pose --c. */
+
+/* ligne de la liste du jour */
+.pla-hr { width: 58px; flex: none; font-size: 13px; font-weight: 650; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.pla-bar { width: 4px; align-self: stretch; margin: 3px 0; border-radius: 2px; background: var(--c); flex: none; }
+
+/* vue « Jour » : colonne d'heures à gauche, blocs à droite, ligne « maintenant » */
+.pla-day { position: relative; margin-left: 28px; }
+.pla-day .ln { position: absolute; left: 0; right: 0; border-top: 1px solid var(--grid); }
+.pla-day .hr { position: absolute; left: -28px; width: 22px; text-align: right; transform: translateY(-50%); font-size: 12px; color: var(--ink2); font-variant-numeric: tabular-nums; }
+.pla-day .ev { position: absolute; left: 4px; right: 0; overflow: hidden; border-radius: 7px; padding: 4px 9px 0; background: color-mix(in srgb, var(--c) 18%, #fff); border-left: 4px solid var(--c); display: flex; gap: 6px; align-items: baseline; white-space: nowrap; }
+.pla-day .ev b { font-size: 13.5px; font-weight: 650; color: var(--ink); }
+.pla-day .ev small { font-size: 12px; color: var(--ink2); }
+.pla-day .now { position: absolute; left: -4px; right: 0; border-top: 2px solid var(--ink); z-index: 2; }
+.pla-day .now::before { content: ""; position: absolute; left: -1px; top: -5px; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
+
+/* grille du « Mois » : 6 semaines, jour choisi plein, aujourd'hui cerclé, 3 points au plus */
+.pla-mo { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 1px; }
+.pla-mo .h { text-align: center; font-size: 12px; font-weight: 700; color: var(--ink2); height: 18px; }
+.pla-mo .d { height: 31px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.pla-mo .d b { width: 28px; height: 22px; border-radius: 11px; display: grid; place-items: center; font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.pla-mo .d.o b { color: var(--ink2); opacity: .55; font-weight: 500; }
+.pla-mo .d.t b { box-shadow: 0 0 0 2px var(--ink); }
+.pla-mo .d.on b { background: var(--cs); color: #fff; box-shadow: none; }
+.pla-mo .d.on.t b { box-shadow: 0 0 0 2px var(--panel, #fff), 0 0 0 4px var(--ink); }
+.pla-mo u { display: flex; gap: 2px; height: 5px; text-decoration: none; }
+.pla-mo u i { width: 5px; height: 5px; border-radius: 50%; background: var(--c); }
+
+/* vue « Année » : 12 petits mois en points, jours marqués en couleur, mois en cours teinté */
+.pla-yr { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.pla-yr .m { border-radius: 14px; padding: 7px 8px 9px; }
+.pla-yr .m.cur { background: var(--tint, color-mix(in srgb, var(--cs) 10%, #fff)); }
+.pla-yr h6 { margin: 0 0 5px; font-size: 12.5px; font-weight: 700; letter-spacing: 0; color: var(--ink); }
+.pla-yr .g { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px 1px; }
+.pla-yr s { display: block; height: 11px; position: relative; text-decoration: none; }
+.pla-yr s::after { content: ""; position: absolute; left: 50%; top: 50%; width: 4px; height: 4px; margin: -2px 0 0 -2px; border-radius: 50%; background: var(--track, #D9E1EE); }
+.pla-yr s.k::after { width: 8px; height: 8px; margin: -4px 0 0 -4px; background: var(--cs); }
+.pla-yr s.t::after { box-shadow: 0 0 0 2px var(--ink); }

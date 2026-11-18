@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Études — Direction 5 : Hybride</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="etudes.css">
+<style>
+  .etu5-c .li { padding-top: 6px !important; padding-bottom: 6px !important; min-height: 44px !important; }
+  .etu5-av { font-size: 13px; font-weight: 600; color: var(--ink2); }
+  .etu5-add b { color: var(--ink2); font-weight: 500; }
+  .etu5-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .etu5-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .etu5-time { font-size: 40px; font-weight: 750; letter-spacing: -.03em; line-height: 1.1; font-variant-numeric: tabular-nums; margin: 4px 0 10px; }
+  .etu5-q { font-size: 17px; font-weight: 650; line-height: 1.3; margin: 4px 0 10px; }
+  .etu5-ob { display: flex; align-items: center; justify-content: space-between; min-height: 44px; font-size: 15px; font-weight: 650; }
+  .etu5-ex { display: flex; align-items: center; gap: 10px; min-height: 48px; }
+  .etu5-ex .tx { flex: 1; min-width: 0; } .etu5-ex .tx b { display: block; font-size: 15px; font-weight: 650; }
+  .etu5-lab { display: flex; align-items: center; gap: 6px; margin: 8px 0 2px; font-size: 13px; font-weight: 650; color: var(--ink2); }
+  .etu5-cl { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--ink2); }
+  .etu5-cl b { color: var(--ink); font-weight: 650; font-variant-numeric: tabular-nums; }
+  .etu5-act { margin-top: 8px; display: flex; align-items: center; min-height: 44px; font-size: 14.5px; font-weight: 650; color: var(--cs); gap: 8px; }
+  .etu5-act i { font-size: 17px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="etu" data-kind="direction">
+
+  <header class="bd-head"><div class="num">5</div>
+    <div><div class="pl-kick">Direction 5 sur 5</div>
+      <h1>Direction 5 · Hybride</h1>
+      <p>« Ce qui arrive, puis le travail » : la page s'ouvre sur le compte à rebours du prochain examen, « J-4 », le même chiffre que la carte « Études » de Mon quotidien. Dessous, le prochain cours, les trois chiffres et les dates à venir ; le chrono devient une action flottante. Les cours, les notes et les révisions sont à un défilement, et les examens et devoirs se retrouvent sur un calendrier. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit (seul l'import d'horaire est Premium).</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Ce qui arrive, puis le travail</h3>
+      <p>Un étudiant ouvre Études pour savoir ce qui l'attend (un examen, un devoir, le prochain cours), puis pour se mettre au travail. La page garde donc l'essentiel en haut et une seule action, le chrono, flottante. Les dates, aujourd'hui dans trois listes, se rejoignent dans « Échéances ». Cours, notes et révisions suivent, dans l'ordre de leur usage.</p></div>
+    <div><h5>En ouvrant Études</h5><ol>
+      <li data-p="1">« J-4 » : l'examen de Statistiques, lundi</li>
+      <li data-p="1">« Prochain cours » : Statistiques, demain 10:00</li>
+      <li data-p="2">« Moyenne », « Étude », « Fiches »</li>
+      <li data-p="2">« À venir » : le devoir de demain, la session</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">« Mes cours », une seule liste</li>
+      <li data-p="3">« Organisation étudiante » : Horaire, Devoirs, Notes, Révisions, concentration</li>
+      <li data-p="3">« Échéances », « Cours », « Notes » derrière un toucher</li>
+      <li data-p="3">« Mes paramètres »</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">Ce qui presse se lit avant tout le reste, avec le même nom, la même icône, la même couleur et le même « J-4 » que la carte de Mon quotidien. L'import d'horaire est rangé avec les cours.</p>
+      <p class="minus">Quatre nouveautés à développer, un bouton flottant qui oblige à finir les pages plus haut, et deux minuteurs (chrono et concentration) qui restent séparés.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Études</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>L'examen d'abord, le chrono toujours là</h4>
+        <p>Le héros est le prochain examen : « J-4 », le chiffre de la carte de Mon quotidien. Le prochain cours, les trois chiffres et les dates à venir suivent ; le chrono flotte en bas.</p>
+        <ul><li><span class="tag e"></span><span>Carte « Prochain cours », « Moyenne », « Étude », « Fiches », devoir à cocher, « J-4 » et « révisé ».</span></li>
+          <li><span class="tag a"></span><span>L'examen passe en héros ; la carte « Chrono d'étude » devient l'action flottante « Démarrer le chrono » (libellé raccourci) ; « À rendre » devient « À venir ».</span></li>
+          <li><span class="tag n"></span><span>« À venir » : examen, devoir et session réunis par date (audit : dates dans trois listes séparées).</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Tout voir ».</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher « Prochain cours ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Démarrer le chrono ».</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher la tuile « Moyenne ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Études, suite</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p2"></div>
+      <div class="cap"><h4>Les cours, une seule liste</h4>
+        <p>« Mes cours » n'existe plus en double : la ligne « Cours » devient « Tout voir ». « Concentration » rejoint « Organisation étudiante » ; le bouton flottant reste ancré en bas (non redessiné ici).</p>
+        <ul><li><span class="tag e"></span><span>« Mes cours » (barre, nom, enseignant, prochain cours, menu « ⋯ »), « Ajouter un cours », « Horaire », « Devoirs », « Notes », « Révisions », « Temps de concentration », « Mes paramètres ».</span></li>
+          <li><span class="tag a"></span><span>« Importer mon horaire » part vers les cours (écran 7) ; la section « Concentration » devient une ligne.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher un cours.</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher « Tout voir ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Révisions ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Échéances</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p3"></div>
+      <div class="cap"><h4>Les dates sur un calendrier</h4>
+        <p>Trois semaines de calendrier, puis les échéances groupées comme la page « Devoirs » : « Cette semaine », « Plus tard ». Les segments « Examens » et « Devoirs » ouvrent les pages que l'app a déjà.</p>
+        <ul><li><span class="tag e"></span><span>Compte à rebours « J-4 », devoir à cocher, « Nouvel examen », « Nouveau devoir ».</span></li>
+          <li><span class="tag a"></span><span>Les boutons de création quittent l'écran principal ; la fin de session vient de la carte « Session ».</span></li>
+          <li><span class="tag n"></span><span>Vue « Échéances » : examens, devoirs et fin de session sur un calendrier (audit : n'existe que dans Planning).</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Toucher le retour.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Détail d'un cours</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p4"></div>
+      <div class="cap"><h4>Le cours, et son examen à préparer</h4>
+        <p>Trois chiffres de même hauteur, l'objectif de note, puis l'examen du cours avec ce qu'il reste à réviser. « Horaire », « Devoirs à rendre » et « Notes » suivent en défilant.</p>
+        <ul><li><span class="tag e"></span><span>« Moyenne », « Évalué », « Étude », « Objectif : 80 % », examen « Examen intra » avec « J-4 », « Horaire ».</span></li>
+          <li><span class="tag a"></span><span>Les trois chiffres sont dans un seul panneau (hauteurs inégales aujourd'hui) ; l'examen est dans la carte de préparation.</span></li>
+          <li><span class="tag n"></span><span>Objectif d'heures par examen, avancement, révisions prévues (audit : sessions et suivi des révisions absents).</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Toucher le retour.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Révisions</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Chrono, fiche du jour, semaine</h4>
+        <p>Après « Démarrer le chrono », le temps défile. La fiche à réviser monte juste dessous (aujourd'hui : quatrième bloc), et la semaine ajoute son ajout rapide.</p>
+        <ul><li><span class="tag e"></span><span>Chrono « Annuler » et « Terminer et noter », « Voir la réponse », « 2 h 35 sur 12 h », graphique par jour, « +25 min », « +45 min », « +60 min ».</span></li>
+          <li><span class="tag a"></span><span>Les fiches passent avant la semaine ; la concentration se lit dans la même carte, avec son objectif.</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Faire défiler.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Révisions, suite</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p6"></div>
+      <div class="cap"><h4>Corriger une séance, suivre les semaines</h4>
+        <p>La liste des séances d'étude permet enfin de retirer un « +25 min » ajouté par erreur. Les paquets et les six dernières semaines gardent leurs places.</p>
+        <ul><li><span class="tag e"></span><span>« Paquets », « Nouvelle fiche », « 6 dernières semaines », « Objectif : 12 h par semaine ».</span></li>
+          <li><span class="tag n"></span><span>« Historique des sessions » : chaque séance, à corriger ou supprimer en glissant (audit : aucune liste des séances).</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Remonter.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Cours</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p7"></div>
+      <div class="cap"><h4>La session et les cours se règlent ici</h4>
+        <p>Les dates de la session ne sont plus en bas d'une liste : elles sont dans la carte du haut. L'import d'horaire est avec les cours, et son badge Premium se voit avant le toucher.</p>
+        <ul><li><span class="tag e"></span><span>Carte « Session » (« Début », « Fin »), liste avec moyennes et heures par semaine, « Nouveau cours », « Importer mon horaire ».</span></li>
+          <li><span class="tag a"></span><span>Carte « Session » et dates réunies, toujours visibles ; badge Premium sur la ligne d'import ; l'import quitte « Organisation étudiante ».</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher un cours.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Notes</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p8"></div>
+      <div class="cap"><h4>La moyenne, cours par cours</h4>
+        <p>La page « Notes » garde sa logique : moyenne générale, moyenne par cours, puis toutes les notes, la dernière ajoutée d'abord.</p>
+        <ul><li><span class="tag e"></span><span>« Moyenne générale », « Pondérée par les crédits de chaque cours. », « Par cours », « Toutes les notes », « Nouvelle note ».</span></li>
+          <li><span class="tag a"></span><span>Le bouton « Nouvelle note » monte sous la moyenne ; les cours gardent leur couleur.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher un cours de « Par cours ».</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Première ouverture</div>
+      <div class="phone app t-saphir" data-c="etu" data-time="13:20" data-tab="0" id="p9"></div>
+      <div class="cap"><h4>Une carte d'accueil qui a des boutons</h4>
+        <p>Sans cours, examen ni devoir, la carte d'accueil propose enfin d'ajouter un cours ou d'importer l'horaire (Premium, dit tout de suite). « À remplir » reste là.</p>
+        <ul><li><span class="tag e"></span><span>« Ton année en un coup d'œil », son texte, « À remplir » 0 / 1 : « Examens », « Nouvel examen ».</span></li>
+          <li><span class="tag a"></span><span>Deux boutons sur la carte d'accueil : « Ajouter un cours » (plein) et « Importer mon horaire » (badge Premium).</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Ajouter un cours : la page devient l'écran 1.</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le calcul des moyennes (par cours, générale, « Évalué », objectif de note), le temps d'étude, les fiches et leurs boîtes, l'horaire et ses feuilles, l'import d'horaire (Premium), les examens, devoirs et notes avec leurs feuilles, la Concentration, les widgets, les rappels, l'activité en direct du chrono. Le compte gratuit est inchangé : seul l'import est Premium.</span>
+          <b>Changé de place</b><span>L'examen devient le héros ; la carte « Chrono d'étude » devient une action flottante ; « À rendre » et « Mes examens » se rejoignent dans « À venir » et « Échéances » ; « Mes cours » et la ligne « Cours » se fondent ; l'import part vers les cours et porte son badge ; la section « Concentration » devient une ligne ; les fiches montent dans « Révisions » ; les dates de la session sont toujours visibles.</span>
+          <b>Laissé de côté</b><span>Les deux minuteurs ne sont pas fusionnés, et la concentration ne compte toujours pas dans l'étude. Une note n'est toujours pas reliée à un examen. Pas de rappel pour un devoir. Suppression d'une note ou d'une fiche : inchangée (liste « Planning · études »).</span>
+        </div>
+        <h4>Nouveau, à développer (4)</h4>
+        <p>1. « Échéances » (écrans 1 et 3) : une liste et un calendrier qui réunissent examens, devoirs et fin de session ; les données existent, la vue n'est aujourd'hui que dans Planning. 2. Objectif d'heures par examen et avancement (écran 4) : « 4 h 25 sur 8 h », calculé avec le « révisé » de 14 jours. 3. Révisions prévues (écran 4) : une date, une heure, une durée, pour l'examen visé. 4. « Historique des sessions » (écran 6) : liste des séances d'étude, à corriger ou supprimer.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : tout est gratuit et sans limite, sauf l'import d'horaire (F42 à F44), qui porte maintenant son badge sur la ligne (écrans 7 et 9). La planche montre un compte gratuit. Les quatre nouveautés sont gratuites.</p>
+        <h4>Question au PDG</h4>
+        <p>Études prend le magenta « rendez-vous » de Planning (à 4° du HEX du modèle) : à valider. Dans l'app d'aujourd'hui, Études affiche son HEX brut.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="etudes.js"></script>
+<script>
+const E = ETU, NV = E.nouveau, SUI = E.suivant, ST = E.parId('stats'), UI = E.ui, X = E.etude;
+const hl = (rows, st) => PL.list(rows, { cls: 'etu5-c', st });
+const fab = () => PL.fab('Démarrer le chrono', 'play');
+const ex = E.lib(E.examen.date), dv = E.lib(E.devoir.date), sf = E.lib(E.session.fin);
+const dateEx = E.cap(ex.jour) + ' ' + ex.dateC + ' · ' + E.examen.h + ' · ' + E.examen.salle;
+const revE = X.revise('stats');                                                    // 4 h 25 révisé sur 14 jours
+const addRow = '<div class="li etu5-add"><i class="chk" data-i="plus"></i><div class="tx"><b>Ajouter un cours</b></div></div>';
+const quick = `<div class="etu5-3">${['+25 min', '+45 min', '+60 min'].map((t) => PL.btn(t, { k: 'T' })).join('')}</div>`;
+
+/* 1 · Études */
+PL.mount('p1', PL.nv('Études')
+  + PL.hero({ lab: 'Prochain examen', right: `<span class="etu5-av">${PL.dur(revE)} révisé</span>`, fig: E.quotidien.vedette, size: 'md',
+      line: `<b>${E.examen.t}</b> · ${ST.n}<br>${dateEx}`, st: 'margin-top:10px' })
+  + PL.card(`<div class="etu-nm">${SUI.e.t}</div><div class="s">${SUI.jour} · ${SUI.heure} · ${SUI.cours.prof}</div>`, { t: 'Prochain cours', i: 'book', chev: true, st: 'margin-top:10px' })
+  + PL.kpis([PL.kpi('Moyenne', PL.pct(E.moyGen / 100), E.nbNotes + ' notes', { i: 'star' }), PL.kpi('Étude', PL.dur(X.semaineMin), 'sur ' + X.objectifH + ' h', { i: 'timer' }), PL.kpi('Fiches', E.aReviser, 'à réviser', { i: 'layers' })], 3, 'margin-top:10px')
+  + PL.sect('À venir', '', 'Tout voir', { nw: true, st: 'margin-top:8px' })
+  + hl([PL.row('', E.devoir.t, `${E.parId(E.devoir.c).n} · demain ${E.devoir.h}`, { chk: 'todo', chev: false, r: dv.court + ' ' + dv.num }),
+    PL.row('calendar', 'Session', `Fin le ${sf.num} ${sf.moisL}`, { sq: true, chev: false, r: PL.pct(E.session.pct) })]), fab());
+
+/* 2 · Études, suite */
+const suite = () => PL.nv('Études')
+  + PL.sect('Mes cours', E.cours.length, 'Tout voir', { st: 'margin-top:2px' })
+  + hl(E.cours.map(UI.cours).concat([addRow]))
+  + PL.sect('Organisation étudiante', '', '', { st: 'margin-top:8px' })
+  + hl([PL.row('calendar', 'Horaire', 'Tes cours de la semaine', { sq: true }),
+    PL.row('pencil', 'Devoirs', 'À rendre, rendus', { sq: true, r: 1 }),
+    PL.row('star', 'Notes', '', { sq: true, r: PL.pct(E.moyGen / 100) }),
+    PL.row('layers', 'Révisions', '', { sq: true, r: E.aReviser + ' à réviser' }),
+    PL.row('target', 'Temps de concentration', `${PL.dur(E.concentration.min)} sur ${E.concentration.objectifH} h cette semaine`, { sq: true })])
+  + PL.settings();
+PL.mount('p2', suite());
+
+/* 3 · Échéances */
+PL.mount('p3', PL.nv('Échéances ' + PL.nw())
+  + PL.seg(['Tout', 'Examens', 'Devoirs'], 0, { st: 'margin-top:8px' })
+  + PL.card(UI.semaines() + `<div class="etu-lg"><span><i class="ex"></i>Examen</span><span><i class="dv"></i>Devoir</span></div>`, { t: 'Novembre 2026', st: 'margin-top:10px' })
+  + PL.sect('Cette semaine', '', '', { st: 'margin-top:8px' })
+  + PL.list(E.echeances.filter((e) => e.k !== 'session').map(UI.echeance))
+  + PL.sect('Plus tard', '', '', { st: 'margin-top:8px' })
+  + PL.list(E.echeances.filter((e) => e.k === 'session').map(UI.echeance))
+  + `<div class="etu5-2" style="margin-top:10px">${PL.btn('Nouvel examen', { k: 'T', i: 'plus' })}${PL.btn('Nouveau devoir', { k: 'T', i: 'plus' })}</div>`);
+
+/* 4 · Détail d'un cours : Statistiques */
+const stepGoal = '<span class="pl-stepper"><u role="button" aria-label="Moins"><i data-i="minus"></i></u><u role="button" aria-label="Plus"><i data-i="plus"></i></u></span>';
+const rev = NV.revisions.map((r) => { const L = E.lib(r.d); return PL.kv(`${L.court} ${L.dateC} · ${r.h}`, PL.dur(r.min)); });
+PL.mount('p4', PL.nv(ST.n, PL.rbtn('dots', 'Actions du cours'))
+  + `<div class="x-sub" style="margin-top:0">${ST.prof} · ${ST.cr} crédits · ${PL.dur(ST.hSem)} de cours par semaine</div>`
+  + PL.strip([[PL.pct(ST.moy / 100), 'Moyenne'], [PL.pct(ST.evalue / 100), 'Évalué'], [PL.dur(X.etudeCours('stats')), 'Étude']], { st: 'margin-top:10px' })
+  + PL.card(`<div class="etu5-ob"><span>Objectif : ${E.objectif} %</span>${stepGoal}</div><div class="s">Il te faut en moyenne ${Math.round(ST.note(E.objectif))} % sur les ${Math.round(100 - ST.evalue)} % qui restent.</div>`, { st: 'margin-top:10px' })
+  + PL.card(`<div class="etu5-ex"><div class="tx"><b>${E.examen.t}</b><span class="s">${dateEx}</span></div>${UI.jour(E.jExam)}</div>`
+    + PL.prog({ t: 'Révisé', r: `<b>${PL.dur(revE)}</b> sur ${PL.dur(NV.objectifExamen.min)}`, p: revE / NV.objectifExamen.min, nw: true })
+    + `<div class="etu5-lab">Révisions prévues ${PL.nw()}</div>` + PL.kvs(rev.concat([`<div class="pl-kv"><span style="color:var(--cs);font-weight:650">Planifier une révision</span><span><i data-i="plus" style="color:var(--cs);font-size:17px"></i></span></div>`])),
+    { t: NV.objectifExamen.titre, i: 'target', nw: true, st: 'margin-top:10px' })
+  + PL.sect('Horaire', '', '', { st: 'margin-top:8px' })
+  + hl([PL.row('', E.cap(ST.jours.join(' et ')), '10:00–11:00', { chev: true })]));
+
+/* 5 · Révisions : le chrono en marche */
+PL.mount('p5', PL.nv('Révisions')
+  + PL.card(`<div class="etu5-time">00:12</div><div class="etu5-2">${PL.btn('Annuler', { k: 'T' })}${PL.btn('Terminer et noter', { k: 'P' })}</div>`, { t: 'Chrono d\'étude', i: 'timer', right: ST.n, st: 'margin-top:6px' })
+  + PL.card(`<div class="etu5-q">${E.fiche.q}</div>${PL.btn('Voir la réponse', { k: 'T' })}`, { t: 'Fiches', i: 'layers', right: E.fiche.paquet, st: 'margin-top:10px' })
+  + PL.card(PL.bar(X.semaineMin / (X.objectifH * 60), { lg: true }) + `<div style="margin-top:10px">${PL.weekBars(X.parJour, { today: 3, h: 40 })}</div>` + quick
+    + `<div class="etu5-cl"><span>Temps de concentration</span><b>${PL.dur(E.concentration.min)} sur ${E.concentration.objectifH} h</b></div>`,
+    { t: 'Cette semaine', i: 'bars', right: `<b style="color:var(--ink)">${PL.dur(X.semaineMin)}</b> sur ${X.objectifH} h`, st: 'margin-top:10px' }));
+
+/* 6 · Révisions, suite */
+const hist = E.seances.slice().sort((a, b) => b.d - a.d).slice(0, 3).map((s) => { const L = E.lib(s.d);
+  return `<div class="li"><span class="etu-bar" data-c="${E.parId(s.c).c}"></span><div class="tx"><b>${E.parId(s.c).n}</b><span class="s">${L.court} ${L.dateC}</span></div><div class="pl-r"><b>${PL.dur(s.min)}</b></div></div>`; });
+PL.mount('p6', PL.nv('Révisions')
+  + PL.sect(NV.historique, '', '', { nw: true, st: 'margin-top:2px' })
+  + hl(hist)
+  + PL.sect('Paquets', '', 'Nouvelle fiche', { st: 'margin-top:8px' })
+  + hl(E.paquets.map((p) => PL.row('layers', p.n, `${p.due ? p.due + ' à réviser' : 'à jour'} · ${p.total} fiches`, { sq: true })))
+  + PL.sect('6 dernières semaines', '', '', { st: 'margin-top:8px' })
+  + PL.card(PL.bars({ g: X.semaines.map((m, i) => ({ l: X.semLabs[i], v: [m / 60], cur: i === 5 })), yt: [0, 4, 8, 12], yf: (v) => v + ' h', max: 13, h: 72, ref: { v: X.objectifH },
+      aria: 'Heures d\'étude des six dernières semaines : 7, 9, 6, 10, 6,9 et 2,6 h pour la semaine en cours, objectif de 12 h' })
+    + PL.leg([['var(--c)', 'Heures d\'étude'], ['var(--ink)', 'Objectif', 'dsh']])
+    + `<div class="etu5-ob" style="margin-top:6px"><span>Objectif : ${X.objectifH} h par semaine</span>${stepGoal}</div>`));
+
+/* 7 · Cours */
+PL.mount('p7', PL.nv('Cours')
+  + PL.card(PL.bar(E.session.pct, { lg: true }) + PL.kvs([PL.kv('Début', E.session.debut.getDate() + ' ' + E.MOIS[E.session.debut.getMonth()] + ' 2026', { chev: true }), PL.kv('Fin', sf.num + ' ' + sf.mois + ' 2026', { chev: true })], { st: 'margin-top:6px' }),
+    { t: 'Session', i: 'calendar', right: `${PL.pct(E.session.pct)} · fin le ${sf.num} ${sf.mois}`, st: 'margin-top:6px' })
+  + PL.sect('Mes cours', E.cours.length, '', { st: 'margin-top:8px' })
+  + PL.list(E.cours.map(UI.coursMoy), { cls: 'etu5-c' })
+  + `<div style="margin-top:10px">${PL.btn('Nouveau cours', { i: 'plus' })}</div>`
+  + hl([PL.row('import', 'Importer mon horaire', E.txt.importSous, { sq: true, prem: true })], 'margin-top:10px'));
+
+/* 8 · Notes */
+PL.mount('p8', PL.nv('Notes')
+  + PL.hero({ lab: 'Moyenne générale', right: `<span class="etu5-av">${E.nbNotes} notes</span>`, fig: PL.pct(E.moyGen / 100), size: 'md', line: E.txt.pondere, st: 'margin-top:6px' })
+  + `<div style="margin-top:10px">${PL.btn('Nouvelle note', { i: 'plus' })}</div>`
+  + PL.sect('Par cours', '', '', { st: 'margin-top:8px' })
+  + PL.card(E.cours.map((c) => PL.prog({ t: c.n, r: `<b>${PL.pct(c.moy / 100)}</b>`, p: c.moy / 100, c: c.c, sub: `${Math.round(c.evalue)} % de la note finale évalué` })).join(''), { st: 'padding-top:6px;padding-bottom:8px' })
+  + PL.sect('Toutes les notes', '', '', { st: 'margin-top:8px' })
+  + hl(E.notes.slice(0, 3).map((g) => PL.row('', `${E.parId(g.c).n} · ${g.t}`, `${PL.n(g.n, 1)}/${g.sur} · compte pour ${g.w} %`, { r: PL.pct(g.n / g.sur) }))));
+
+/* 9 · Première ouverture */
+PL.mount('p9', PL.nv('Études')
+  + PL.hero({ lab: 'Ton année en un coup d\'œil', line: E.txt.accueil,
+      body: `<div style="margin-top:12px">${PL.btn('Ajouter un cours', { i: 'plus' })}</div><div style="margin-top:8px">${PL.btn('Importer mon horaire ' + PL.prem(), { k: 'T' })}</div>`, st: 'margin-top:10px' })
+  + `<div style="margin-top:8px">${PL.toFill([{ i: 'book', t: 'Examens', s: 'Tes prochains examens.', btn: 'Nouvel examen', bi: 'plus' }], '0 / 1').replace(/btnP/g, 'btnT')}</div>`
+  + PL.sect('Organisation étudiante', '', '', { st: 'margin-top:8px' })
+  + hl([PL.row('calendar', 'Horaire', 'Tes cours de la semaine', { sq: true }), PL.row('pencil', 'Devoirs', 'À rendre, rendus', { sq: true })]), fab());
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [1, `Carte « Prochain cours » : Statistiques, demain, 10:00–11:00.`],
+  F2: [1, `Trois tuiles « Moyenne », « Étude », « Fiches » sous la carte.`],
+  F3: [9, `Carte « Examens » 0 / 1 sous la carte d'accueil.`],
+  F4: [2, `Liste « Mes cours » : barre, nom, prochain cours, menu « ⋯ ».`],
+  F5: [[2, 7, 9], `« Ajouter un cours » (2, 9) ; « Nouveau cours » (7).`],
+  F6: [[2, 4], `Menu « ⋯ » d'une ligne de cours ; menu « ⋯ » du détail.`],
+  F7: [[2, 4, 7], `Mêmes menus, confirmation inchangée ; glisser sur la liste (7).`],
+  F8: ['=', `Note de doublon de la feuille « Cours » : règle et texte inchangés.`],
+  F9: [7, `Liste des cours avec moyenne et heures par semaine.`],
+  F10: [7, `Carte « Session » avec « Début » et « Fin » toujours visibles.`],
+  F11: [4, `Enseignant, crédits, heures ; « Moyenne », « Évalué », « Étude ».`],
+  F12: [4, `Carte « Objectif : 80 % », « − » et « + », moyenne à obtenir.`],
+  F13: [4, `Section « Horaire » : mardi et vendredi, 10:00–11:00.`],
+  F14: [4, `« Examen intra » en tête de la carte de préparation.`],
+  F15: ['=', `Section « Devoirs à rendre » du détail : inchangée, plus bas sur l'écran 4.`],
+  F16: ['=', `Section « Notes » du détail : inchangée, plus bas sur l'écran 4.`],
+  F17: [[1, 3], `Examen en héros (1) ; liste et « Nouvel examen » (3).`],
+  F18: [[3, 4], `« Nouvel examen » (3) ; toucher l'examen (4) ouvre la feuille.`],
+  F19: ['=', `Appui long « Supprimer » inchangé sur la ligne d'un examen.`],
+  F20: ['=', `Page « Examens » inchangée, ouverte par le segment « Examens » (3).`],
+  F21: [[1, 3, 4], `« J-4 » en héros (1), pastille (3, 4), « 4 h 25 révisé » (1).`],
+  F22: [1, `Devoir de demain dans « À venir », avec son rond à cocher.`],
+  F23: [[3, 4], `« Nouveau devoir » (3) ; devoir touché ouvre la feuille.`],
+  F24: [[1, 3], `Rond à cocher sur la ligne du devoir.`],
+  F25: ['=', `Page « Devoirs » inchangée, ouverte par la ligne de l'écran 2.`],
+  F26: [8, `Moyenne générale, « Par cours », « Toutes les notes ».`],
+  F27: [8, `Bouton « Nouvelle note » sous la moyenne.`],
+  F28: [[1, 5], `Action flottante (1) ; chrono en marche, « Terminer et noter » (5).`],
+  F29: ['=', `Activité en direct du chrono inchangée : « Annuler », « Terminer ».`],
+  F30: [5, `Carte « Cette semaine » : « 2 h 35 sur 12 h », barre, jours.`],
+  F31: [5, `Trois boutons « +25 min », « +45 min », « +60 min ».`],
+  F32: [6, `Ligne « Objectif : 12 h par semaine », « − » et « + ».`],
+  F33: [6, `Graphique « 6 dernières semaines » avec la ligne d'objectif.`],
+  F34: [5, `Carte « Fiches » : question, « Voir la réponse ».`],
+  F35: [6, `Section « Paquets » : « à réviser » ou « à jour », total.`],
+  F36: [6, `Lien « Nouvelle fiche » à droite du titre « Paquets ».`],
+  F37: ['=', `Page « Horaire » (grille, liste du jour) inchangée, ligne de l'écran 2.`],
+  F38: ['=', `Flèches de semaine de la page « Horaire » : inchangées.`],
+  F39: ['=', `Feuille d'événement inchangée, ouverte par la page « Horaire ».`],
+  F40: ['=', `Occurrence : feuille et appui long de la page « Horaire » inchangés.`],
+  F41: ['=', `Suppression d'un événement : feuille et appui long inchangés.`],
+  F42: [[7, 9], `Ligne « Importer mon horaire » avec badge Premium ; feuille inchangée.`],
+  F43: ['=', `Vérification de la lecture : étape Premium inchangée, derrière le verrou.`],
+  F44: ['=', `« Ajouter à mon horaire (N) » : étape Premium inchangée.`],
+  F45: [2, `Ligne « Temps de concentration » : 1 h 15 sur 10 h.`],
+  F46: ['=', `Page « Concentration » inchangée, ouverte par la ligne de l'écran 2.`],
+  F47: [5, `Total de la semaine repris dans la carte « Cette semaine ».`],
+  F48: [2, `Bouton « Mes paramètres » en bas ; la feuille est inchangée.`],
+  F49: ['=', `Suppression d'une note ou d'une fiche : liste « Planning · études », inchangée.`],
+});
+PL.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+/* photos.css : CSS commun du sujet « Photos et citations » (préfixe pho-), refonte UX/UI des mini-apps, 2026-11-17.
+   Dessine les widgets d'exemple (cadres dégradés, jamais de vraies photos) et la tuile de la grille « Mes widgets ». */
+
+/* ---- le widget : bord à bord, sans style d'Ardane autour (comme l'aperçu réel de l'app) ---- */
+.pho-w { position: relative; overflow: hidden; flex: none; background: #E9E2DA; box-shadow: 0 1px 3px rgb(var(--sh) / .10), 0 8px 18px rgb(var(--sh) / .14); }
+.pho-c { position: absolute; display: block; box-shadow: inset 0 0 0 1px rgba(255,255,255,.5); }
+.pho-veil { position: absolute; inset: 0; }
+.pho-q { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 9%; text-align: center; }
+.pho-q.left { align-items: flex-start; text-align: left; }
+.pho-q p { margin: 0; line-height: 1.22; }
+.pho-q small { display: block; margin-top: .65em; opacity: .78; font-style: normal; }
+.pho-q .ph { opacity: .5; }
+.pho-q.on-photo p, .pho-q.on-photo small { text-shadow: 0 1px 6px rgba(0,0,0,.35); }
+
+/* ---- la tuile de la grille « Mes widgets » : aperçu réel, nom, « type · taille », bouton « … » ---- */
+.pho-t { min-width: 0; }
+.pho-tv { display: flex; }
+.pho-tl { display: flex; align-items: center; gap: 4px; margin-top: 6px; min-height: 40px; }
+.pho-tl .tx { flex: 1; min-width: 0; }
+.pho-tl .tx b { display: block; font-size: 15px; font-weight: 650; letter-spacing: -.005em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pho-tl .tx span { display: block; font-size: 12.5px; color: var(--ink2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pho-mo { width: 44px; height: 44px; margin: -4px -10px -4px 0; display: grid; place-items: center; flex: none; color: var(--ink2); font-size: 20px; }

@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Planning — Direction 5 : Hybride</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="planning.css">
+<style>
+  .pla5-c .li { padding-top: 6px !important; padding-bottom: 6px !important; min-height: 0 !important; }
+  .pla5-wk { --wk-h: 216px; --wk-gap: 3px; --wk-head: 20px; --wk-gutter: 20px; --ev-fs: 12px; padding: 10px 12px 12px; }
+  .pla5-wk .u-week .hd, .pla5-wk .u-week .gut span { font-size: 12px; }
+  .pla5-wk .u-week .ev { padding-top: 2px; }
+  .pl-fab2 { grid-template-columns: 1fr 1.18fr; } .pl-fab2 > div { font-size: 15px; gap: 6px; }
+  .pla5-av { font-size: 13px; font-weight: 600; color: var(--ink2); }
+  .pla5-add b { color: var(--ink2); font-weight: 500; }
+  .pla5-del { height: 44px; display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 650; color: var(--pl-over); }
+  .pla5-dg { display: flex; justify-content: space-between; margin-top: 10px; }
+  .pla5-dg span { width: 44px; height: 44px; border-radius: 22px; display: grid; place-items: center; font-size: 14px; font-weight: 650; background: var(--well); color: var(--ink2); }
+  .pla5-dg span.on { background: var(--primary); color: #fff; }
+  .pla5-ph { font-size: 12.5px; color: var(--ink2); margin: 4px 3px 0; }
+  .pla5-dot { display: inline-block; width: 12px; height: 12px; border-radius: 6px; background: var(--c); vertical-align: -1px; margin-right: 6px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="pla" data-kind="direction">
+
+  <header class="bd-head"><div class="num">5</div>
+    <div><div class="pl-kick">Direction 5 sur 5</div>
+      <h1>Direction 5 · Hybride</h1>
+      <p>« Ce qui vient, puis la semaine » : la page s'ouvre sur le prochain événement, garde l'horaire en tableau (la forme de la carte de Mon quotidien) et remonte l'échelle « Jour | Semaine | Mois | Année » au-dessus. Le Top 3 et les tâches suivent au premier défilement ; un second bouton crée enfin un événement. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit (seule l'importation d'horaire est Premium).</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Le prochain, puis la semaine</h3>
+      <p>On ouvre Planning pour savoir ce qui vient, puis pour voir sa semaine. La page garde donc le tableau, mais lui donne une tête (le prochain événement) et remonte l'échelle juste au-dessus. Aujourd'hui, le Top 3 est sous un calendrier de 380 points ; ici il suit le tableau, et un bouton à côté de « Nouvelle tâche » crée un événement.</p></div>
+    <div><h5>En ouvrant Planning</h5><ol>
+      <li data-p="1">Le sélecteur de semaine, aujourd'hui cerclé</li>
+      <li data-p="1">« Prochain événement » : 14:00, dans 40 min</li>
+      <li data-p="2">« Jour | Semaine | Mois | Année », au-dessus du tableau</li>
+      <li data-p="2">Le tableau, avec la colonne du jour lisible</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">« Top 3 du jour » et les trois compteurs de tâches</li>
+      <li data-p="3">« Projets », « Habitudes »</li>
+      <li data-p="3">Calendrier Apple, « Importer mon horaire »</li>
+      <li data-p="3">« Mes paramètres » : réglages et rappels</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">La réponse à « qu'est-ce qui vient ? » est la première chose lue, et l'horaire reste central. Même nom, même icône, même couleur et même tableau que la carte de Mon quotidien.</p>
+      <p class="minus">Une carte neuve à définir (que faire d'un événement en cours ?), un bouton double ; les autres jours se lisent en touchant leur colonne, et la page reste longue en défilant.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Planning</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Le prochain, puis la semaine</h4>
+        <p>La page répond d'abord à « qu'est-ce qui vient ? », puis montre la semaine, comme la carte de Mon quotidien. L'échelle est juste au-dessus du tableau.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine, tableau de 8 h à 20 h avec ligne « maintenant », « Jour | Semaine | Mois | Année ».</span></li>
+          <li><span class="tag a"></span><span>L'échelle passe au-dessus du tableau ; la colonne du jour est élargie et seule nommée ; l'action flottante devient double.</span></li>
+          <li><span class="tag n"></span><span>Carte « Prochain événement » : 14:00, « dans 40 min » (idée des planches Cristal, non codée).</span></li>
+          <li><span class="tag n"></span><span>Bouton « Nouvel événement » : créer sans savoir qu'il faut toucher une heure libre.</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Jour ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Planning, suite</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0" id="p2"></div>
+      <div class="cap"><h4>Priorités et tâches, au premier défilement</h4>
+        <p>Le Top 3 et les compteurs ne sont plus sous le calendrier, la liste du jour et l'import : ils suivent le tableau. Compte gratuit : « Habitudes » compte les 3 premières (2 sur 3).</p>
+        <ul><li><span class="tag e"></span><span>« Top 3 du jour » 1/3, « Ajouter une priorité », « En retard », « Aujourd'hui », « À faire », « Projets », « Habitudes », « Mes paramètres ».</span></li>
+          <li><span class="tag a"></span><span>Lien « Mes tâches réalisées » (la page existe sur la carte Top 3 de Mon quotidien, pas dans Planning) ; le calendrier Apple et l'import deviennent deux lignes, l'import porte le badge Premium.</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher « Importer mon horaire ».</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher « Mes paramètres ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Jour</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0" id="p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Le jour, heure par heure</h4>
+        <p>« Jour » remplace le tableau par la journée de 9 h à 20 h (elle défile de 6 h à 22 h). Le héros laisse sa place au calendrier.</p>
+        <ul><li><span class="tag e"></span><span>Vue « Jour » : blocs colorés par type, ligne « maintenant », touche une heure libre pour créer.</span></li>
+          <li><span class="tag a"></span><span>Le lieu est écrit dans chaque bloc ; l'échelle est au-dessus (plus de 832 points à défiler pour revenir à « Semaine »).</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher le bloc « Comptabilité ».</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher « Mois ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mois</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0" id="p4"></div>
+      <div class="cap"><h4>Le mois, avec la liste du jour</h4>
+        <p>En « Mois », le sélecteur de semaine laisse sa place au sélecteur de mois. Un jour touché (ici le vendredi 13) s'ouvre en liste complète, et ses lignes s'ouvrent.</p>
+        <ul><li><span class="tag e"></span><span>Grille du mois, jusqu'à 3 points de couleur, jour choisi plein, aujourd'hui cerclé, « 4 éléments », « Journée », échéance « Facture Internet ».</span></li>
+          <li><span class="tag a"></span><span>Les lignes de la liste s'ouvrent (aujourd'hui, seul le rond se coche) ; sélecteur de mois en tête.</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Année ».</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Année</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>L'année en un coup d'œil</h4>
+        <p>Douze petits mois en points : le mois en cours est teinté, les jours qui ont une chose ponctuelle sont marqués. Les chiffres de 8 points de l'app ne se lisent pas.</p>
+        <ul><li><span class="tag e"></span><span>Vue « Année » : mois en cours teinté, jours marqués, aujourd'hui cerclé, sans l'horaire hebdomadaire.</span></li>
+          <li><span class="tag a"></span><span>Les jours deviennent des points (la date se lit en ouvrant le mois).</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher un mois.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Événement</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="none" id="p6"></div>
+      <div class="cap"><h4>Un événement, avec une note</h4>
+        <p>La feuille d'un événement hebdomadaire ouvert depuis un jour (ici Comptabilité, jeudi 12 novembre). Vide, elle devient « Nouvel événement », déjà remplie à l'heure touchée.</p>
+        <ul><li><span class="tag e"></span><span>Type, cours, « Chaque semaine », jours, « Début », « Fin », durées rapides, « Salle », « Couleur », occurrence, « Annulé le … », suppression.</span></li>
+          <li><span class="tag n"></span><span>« Notes » : un événement n'en a pas aujourd'hui (ni invités, ni rappel réglable) ; seule la note est proposée ici.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Importer mon horaire, compte gratuit</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="none" id="p7"></div>
+      <div class="cap"><h4>L'import, dit avant d'ouvrir</h4>
+        <p>Compte gratuit : la feuille s'ouvre sur la carte verrou ; ajouter à la main reste gratuit. Le badge Premium est déjà sur la ligne.</p>
+        <ul><li><span class="tag e"></span><span>Carte « Importer mon horaire », « Découvrir Premium » (renvoie à l'offre).</span></li>
+          <li><span class="tag a"></span><span>Badge Premium sur la ligne de l'écran 2 : aujourd'hui, le verrou n'apparaît qu'à l'ouverture.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes paramètres</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="none" id="p8"></div>
+      <div class="cap"><h4>Les rappels au même endroit</h4>
+        <p>Les cinq rappels de Planning, réglés aujourd'hui seulement dans Profil › Rappels, se lisent et se coupent aussi ici.</p>
+        <ul><li><span class="tag e"></span><span>« Ton objectif du moment », « Ton rythme », « Heure sur 24 h » (sans effet dans Planning, gardé tel quel).</span></li>
+          <li><span class="tag a"></span><span>Rappels de Planning et heure du soir (19:00 par défaut) : le réglage existe dans le Profil, il est repris ici.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Première ouverture</div>
+      <div class="phone app t-saphir" data-c="pla" data-time="13:20" data-tab="0" id="p9"></div>
+      <div class="cap"><h4>Une page vide qui dit quoi faire</h4>
+        <p>Sans aucune donnée, la page dit « Rien de prévu ce jour-là. » et laisse « À remplir » en deux cartes. Le tableau vide et sa note d'aide sont juste dessous.</p>
+        <ul><li><span class="tag e"></span><span>« À remplir » 0 / 2 : « Habitudes » (champ « Ex. : méditer, lire, marcher »), « Cours et horaire » (« Nouveau cours »), « À renseigner ».</span></li>
+          <li><span class="tag a"></span><span>« À remplir » vient après la carte du haut, et reprend le texte d'état vide déjà dans l'app.</span></li>
+          <li><span class="tag n"></span><span>Carte « Prochain événement » vide et bouton « Nouvel événement » : voir l'écran 1.</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le sélecteur de semaine, le tableau et ses quatre échelles, les feuilles « Événement », « Tâche », « Examen » et « Devoir », les pages « Tâches », « Projets » et « Habitudes », l'import (Premium), les calculs (agenda, occurrences, chevauchements, Top 3 limité à 3, tâches en retard et répétées), les rappels, les widgets, les liens profonds. La carte « Planning » de Mon quotidien ne change pas : même nom, même icône, même couleur, même tableau, « Toute la semaine ».</span>
+          <b>Changé de place</b><span>L'échelle passe au-dessus du tableau ; le Top 3 et les compteurs montent juste après lui ; le calendrier Apple et l'import deviennent deux lignes ; les lignes de la liste du jour s'ouvrent ; « Mes tâches réalisées » est relié depuis Planning ; les rappels vont dans « Mes paramètres » ; le sélecteur devient celui du mois ou de l'année ; l'année se lit en points.</span>
+          <b>Laissé de côté</b><span>Glisser-déposer des blocs, chercher un créneau libre, échéances et compteurs gérés dans Planning, liste des rendez-vous, invités, rappel par événement, les pages « Semaine », « Mois » et « Concentration » (non réintroduites). La carte de Mon quotidien n'a pas de chiffre vedette : reprendre « 14:00 » dessus serait un ajout à décider.</span>
+        </div>
+        <h4>Nouveau, à développer (3)</h4>
+        <p>1. Carte « Prochain événement » (écrans 1 et 9) : le prochain bloc de la journée, tous types confondus ; règle à fixer pour un événement en cours. 2. Bouton « Nouvel événement » (écrans 1 et 9, repris aux autres) : ouvre la feuille « Nouvel événement » à l'heure arrondie, sans passer par une heure libre. 3. « Notes » d'un événement (écran 6) : un champ de plus sur l'événement de l'horaire ; l'import n'en lit pas. À voir : EVENTS date la séance de 18:30 alors que l'audit la dit sans heure (venue de Fitness).</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : tout est gratuit et sans limite, sauf l'importation d'horaire (écran 7 : F14, F15 et F16, carte verrou et « Découvrir Premium »). La planche montre un compte gratuit : « Habitudes » compte les 3 premières. Les trois nouveautés sont gratuites.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="planning.js"></script>
+<script>
+const P_ = PLA, N_ = PLA.nouveau, UI = PLA.ui, CP = PLA.compteurs;
+const hl = (rows, st) => PL.list(rows, { cls: 'pla5-c', st });
+const seg = (k) => PL.seg(P_.echelles, k, { st: 'margin-top:10px' });
+// action flottante double : « Nouvelle tâche » (bouton plein, F17) et « Nouvel événement » (Nouveau ; le jeton ne se pose que sur les écrans 1 et 9)
+const fab = (nw) => PL.fab2(['Nouvelle tâche', 'plus'], [N_.nouvelEvt, 'calendar']).replace(/<\/div>$/, (nw ? PL.nw('Nouveau', 'corner') : '') + '</div>');
+
+/* 1 · Planning (échelle « Semaine ») */
+PL.mount('p1', PL.nv('Planning') + PL.wsel({ sel: 3, marks: [0, 1, 2, 3] })
+  + PL.hero({ lab: N_.prochain + ' ' + PL.nw(), right: `<span class="pla5-av">${P_.avenir.length} à venir</span>`, fig: P_.prochain.s, unit: 'dans ' + P_.dans + ' min', size: 'md', line: P_.prochain.t + ' · ' + P_.prochain.lieu, st: 'margin-top:10px' })
+  + seg(1) + PL.card(UI.semaine(), { cls: 'pla5-wk', st: 'margin-top:10px' }), fab(true));
+
+/* 2 · suite : Top 3, tâches, projets, habitudes, calendrier et import, paramètres */
+const suite = () => PL.nv('Planning')
+  + PL.sect('Top 3 du jour', P_.top3.n + '/3', 'Mes tâches réalisées', { st: 'margin-top:2px' })
+  + hl(P_.top3.restantes.map((t) => PL.row('', t, '', { chk: 'todo', chev: false })).concat(['<div class="li pla5-add"><i class="chk" data-i="plus"></i><div class="tx"><b>Ajouter une priorité</b></div></div>']))
+  + PL.sect('Tâches', '', '', { st: 'margin-top:8px' })
+  + PL.kpis([PL.kpi('En retard', CP.enRetard, '', { vc: 'var(--pl-over)' }), PL.kpi('Aujourd\'hui', CP.aujourdhui, ''), PL.kpi('À faire', CP.aFaire, '')], 3)
+  + hl([PL.row('folder', 'Projets', 'Tâches regroupées par projet', { sq: true, r: P_.projets.length }),
+    PL.row('repeat', 'Habitudes', 'Séries et régularité', { sq: true, c: 'hab', r: `<span style="color:var(--cs-hab, var(--c-hab))">${P_.habitudes.faites}/${P_.habitudes.total}</span>` })], 'margin-top:10px')
+  + hl([PL.row('calendar', 'Ajouter les événements de mon calendrier', '', { sq: true }),
+    PL.row('import', 'Importer mon horaire', 'À partir d\'une photo ou d\'un PDF', { sq: true, prem: true })], 'margin-top:10px')
+  + PL.settings();
+PL.mount('p2', suite(), fab(false));
+
+/* 3 · Jour */
+const pageJour = () => PL.nv('Planning') + PL.wsel({ sel: 3, marks: [0, 1, 2, 3] }) + seg(0)
+  + PL.card(UI.jour({ hh: 30 }), { st: 'margin-top:10px;padding:12px 12px 12px 8px' });
+PL.mount('p3', pageJour(), fab(false));
+
+/* 4 · Mois */
+PL.mount('p4', PL.nv('Planning') + PL.month('Novembre 2026', { next: true }) + seg(2)
+  + PL.card(UI.mois(13), { st: 'margin-top:10px;padding:8px 8px 6px' })
+  + PL.sect('Vendredi 13 novembre', P_.jour13.length + ' éléments', '', { st: 'margin-top:8px' })
+  + hl(P_.jour13.map(UI.ligne)), fab(false));
+
+/* 5 · Année */
+PL.mount('p5', PL.nv('Planning') + PL.month('2026', { next: true }) + seg(3)
+  + PL.card(UI.annee(), { st: 'margin-top:10px;padding:8px 8px 6px' }), fab(false));
+
+/* 6 · Événement (feuille) : Comptabilité, jeudi 12 novembre */
+const jrs = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+PL.mount('p6', pageJour(), PL.sheet(`
+  ${PL.kvs([PL.kv('Type', 'Cours', { chev: true }), PL.kv('Cours', 'Comptabilité', { chev: true })], { st: 'margin-top:0' })}
+  ${PL.seg(['Chaque semaine', 'Une seule fois'], 0, { st: 'margin-top:8px' })}
+  <div class="pla5-dg" role="group" aria-label="Répéter : lundi et jeudi">${jrs.map((d, k) => `<span class="${[0, 3].includes(k) ? 'on' : ''}">${d}</span>`).join('')}</div>
+  <div class="pla5-ph">Tous les lundis et jeudis</div>
+  ${PL.kvs([PL.kv('Début', '09:00'), PL.kv('Fin', '10:00')], { st: 'margin-top:8px' })}
+  ${PL.chips(['30 min', '1 h', '1 h 30', '2 h'], 1, { fit: true, st: 'margin-top:8px' })}
+  ${PL.kvs([PL.kv('Salle', 'B-204'), PL.kv('Couleur', '<span class="pla5-dot" data-ev="cours"></span>Habituelle', { chev: true })], { st: 'margin-top:8px' })}
+  ${PL.kvs([PL.kv('Titre de cette occurrence (facultatif)', ''), `<div class="pl-kv"><span>Annulé le jeu. 12 nov.</span>${PL.sw(false)}</div>`], { st: 'margin-top:8px' })}
+  ${PL.kvs([PL.kv(N_.notes, '', { nw: true, chev: true })], { st: 'margin-top:8px' })}
+  <div class="pla5-del" role="button">Supprimer l'événement</div>`, 'Événement', { left: 'Annuler', right: PL.sheetBtn('Enregistrer'), full: true }));
+
+/* 7 · Importer mon horaire (feuille, compte gratuit) */
+PL.mount('p7', suite(), PL.sheet(PL.lockCard('Importer mon horaire', P_.importTxt), '&nbsp;', { left: 'Annuler' }));
+
+/* 8 · Mes paramètres (feuille) */
+PL.mount('p8', suite(), PL.sheet(`
+  ${PL.kvs([PL.kv('Ton objectif du moment', 'Réussir ma session', { chev: true }), PL.kv('Ton rythme', 'Travail / étude', { chev: true }), `<div class="pl-kv"><span>Heures par jour</span>${PL.stepper(6)}</div>`])}
+  ${PL.sect('Réglages communs', '', '', { st: 'margin-top:10px' })}
+  ${PL.kvs([`<div class="pl-kv"><span>Heure sur 24 h</span>${PL.sw(true)}</div>`])}
+  ${PL.sect('Rappels', '', '', { st: 'margin-top:10px' })}
+  ${PL.kvs([`<div class="pl-kv"><span>Planning</span>${PL.sw(true)}</div>`])}
+  ${hl(['Cours dans 30 minutes|30 minutes avant', 'Rendez-vous demain|La veille au soir', 'Examen demain|La veille au soir', 'Demain, une journée bien remplie|La veille, dès 4 activités', 'Tâches importantes|Priorité haute, due aujourd\'hui'].map((s) => { const [t, d] = s.split('|'); return PL.row('', t, d, { chev: false }); }), 'margin-top:8px')}
+  ${PL.kvs([PL.kv('Heure du soir', '19:00', { chev: true })], { st: 'margin-top:8px' })}`, 'Mes paramètres', { right: PL.sheetBtn('OK'), full: true }));
+
+/* 9 · Première ouverture */
+PL.mount('p9', PL.nv('Planning') + PL.wsel({ sel: 3, marks: [] })
+  + PL.hero({ lab: N_.prochain + ' ' + PL.nw(), fig: '—', line: 'Rien de prévu ce jour-là.', st: 'margin-top:10px' })
+  + `<div style="margin-top:8px">${PL.toFill([{ i: 'repeat', t: 'Habitudes', s: '', btn: 'Ex. : méditer, lire, marcher' }, { i: 'calendar', t: 'Cours et horaire', s: '', btn: 'Nouveau cours', bi: 'plus' }], '0 / 2').replace(/btnP/g, 'btnT')}</div>`, fab(true));
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [[1, 3, 9], 'Sélecteur de semaine sous le titre ; pastilles pleines ou creuses.'],
+  F2: [1, 'Carte du tableau : 8 h à 20 h, colonne du jour élargie, « maintenant ».'],
+  F3: [3, 'Échelle « Jour » : la journée heure par heure, blocs par type.'],
+  F4: [4, 'Échelle « Mois » : grille, points de couleur, jour choisi plein.'],
+  F5: [5, 'Échelle « Année » : douze mois en points, jours marqués.'],
+  F6: [[1, 3, 4, 5], 'Sélecteur « Jour | Semaine | Mois | Année », au-dessus du calendrier.'],
+  F7: [3, 'Heure libre de la vue « Jour » : ouvre la feuille de l\'écran 6, vide.'],
+  F8: [6, 'Feuille « Événement » : type, cours, répétition, heures, salle, couleur.'],
+  F9: [6, 'Champs « Titre de cette occurrence » et « Annulé le … ».'],
+  F10: [[1, 3, 4], 'Bloc ou ligne touchés : feuille « Événement » de l\'écran 6.'],
+  F11: [4, 'Liste « Vendredi 13 novembre », 4 éléments, « Journée » d\'abord.'],
+  F12: [[1, 3, 4], 'Les sources alimentent blocs, jour et points du mois ; calcul inchangé.'],
+  F13: [2, 'Ligne « Ajouter les événements de mon calendrier » (texte devenu ligne).'],
+  F14: [7, 'Carte verrou « Importer mon horaire » ; la source se choisit avec Premium.'],
+  F15: ['=', 'Étape Premium inchangée, derrière le verrou de l\'écran 7.'],
+  F16: ['=', 'Étape Premium inchangée : « Ajouter à mon horaire (N) ».'],
+  F17: [[1, 2], 'Action flottante « Nouvelle tâche », bouton plein, échéance au jour choisi.'],
+  F18: ['=', 'Feuille « Tâche » inchangée, ouverte par le bouton « Nouvelle tâche ».'],
+  F19: ['=', 'Tâche répétée : calcul inchangé (cocher crée la suivante).'],
+  F20: [2, 'Carte « Top 3 du jour » : 1/3, deux priorités, « Ajouter une priorité ».'],
+  F21: [2, 'Trois tuiles « En retard », « Aujourd\'hui », « À faire ».'],
+  F22: ['=', 'Page « Tâches » inchangée ; les trois tuiles de l\'écran 2 y mènent.'],
+  F23: ['=', 'Page « Projets » inchangée ; la ligne « Projets » de l\'écran 2 y mène.'],
+  F24: ['=', 'Feuille projet inchangée, ouverte depuis la page « Projets ».'],
+  F25: [2, 'Ligne « Habitudes » : « 2/3 » du jour (compte gratuit).'],
+  F26: [9, 'Section « À remplir » 0 / 2 : « Habitudes » et « Cours et horaire ».'],
+  F27: [[2, 8], 'Bouton « Mes paramètres » ; feuille : objectif, rythme, heure sur 24 h.'],
+  F28: [2, 'Lien « Mes tâches réalisées » dans l\'en-tête du Top 3.'],
+  F29: [4, 'Échéance « Facture Internet » dans la liste du 13 ; gestion inchangée.'],
+  F30: ['=', 'Compteurs : espace Productivité et widget « Compteur » inchangés.'],
+  F31: ['=', 'Liste simple « Tâches » inchangée, ouverte par le widget « Tâches ».'],
+  F32: [8, 'Les cinq rappels et le réglage « Planning » réunis dans « Mes paramètres ».'],
+});
+PL.init();
+</script>
+</body>
+</html>

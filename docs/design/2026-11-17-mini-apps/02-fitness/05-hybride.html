@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Fitness — Direction 5 : Hybride</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<style>
+  /* sélecteur de semaine : prévu = anneau, fait = point plein (comme la planche Cristal 04) */
+  .wsel .d.pl u { background: transparent; border: 1.6px solid var(--primary); width: 8px; height: 8px; margin: -1px 0; }
+  .wsel .d.on.pl u { border-color: #fff; }
+  /* quatre raccourcis ronds */
+  .fit5-sh { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+  .fit5-sh > span { display: flex; flex-direction: column; align-items: center; gap: 5px; min-height: 44px; font-size: 12.5px; font-weight: 650; color: var(--ink); text-align: center; }
+  .fit5-sh u { width: 54px; height: 54px; border-radius: 27px; background: var(--panel); border: 1px solid rgba(255,255,255,.85); box-shadow: inset 0 1px 0 #fff, 0 8px 24px rgb(var(--sh) / .07); display: grid; place-items: center; font-size: 23px; color: var(--c); text-decoration: none; }
+  .fit5-k .pl-kpi .h { font-size: 12px; }
+  .fit5-c .li { padding-top: 5px !important; padding-bottom: 5px !important; min-height: 0 !important; }
+  .fit5-c .ico.lg { width: 24px; height: 24px; font-size: 14px; border-radius: 12px; }
+  .fit5-pas { display: flex; align-items: center; gap: 14px; padding: 12px 14px; }
+  .fit5-pas b { display: block; font-size: 16px; font-weight: 700; }
+  .fit5-pas span.s { font-size: 13px; color: var(--ink2); }
+  /* séance */
+  .fit5-hd { display: flex; align-items: center; justify-content: space-between; margin: 4px 2px 8px; }
+  .fit5-hd b { display: block; font-size: 17px; font-weight: 700; }
+  .fit5-ch { font-size: 30px; font-weight: 750; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .fit5-ex { padding: 10px 14px 12px; }
+  .fit5-ex .n { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+  .fit5-ex .n b { font-size: 18px; font-weight: 700; letter-spacing: -.01em; line-height: 1.2; }
+  .fit5-ex .n .rb { margin-right: -10px; color: var(--ink2); }
+  .fit5-reg { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .fit5-reg > div { padding: 9px 8px 10px; text-align: center; }
+  .fit5-reg .v { display: flex; align-items: center; justify-content: space-between; margin-top: 2px; }
+  .fit5-reg u { width: 44px; height: 44px; border-radius: 22px; background: var(--well); color: var(--primary); display: grid; place-items: center; font-size: 19px; --sw: 2.4; text-decoration: none; }
+  .fit5-reg b { font-size: 30px; font-weight: 750; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .fit5-reg b small { font-size: 13px; font-weight: 650; color: var(--ink2); margin-left: 2px; letter-spacing: 0; }
+  .fit5-rp { padding: 10px 14px 12px; margin-top: 10px; }
+  .fit5-rp .top { display: flex; align-items: center; justify-content: space-between; }
+  .fit5-rp .tm2 { display: flex; align-items: center; justify-content: space-between; margin: 2px 0 8px; }
+  .fit5-rp .tm2 b { font-size: 34px; font-weight: 750; letter-spacing: -.03em; font-variant-numeric: tabular-nums; line-height: 1; }
+  .fit5-rp .tm2 u { width: 44px; height: 44px; border-radius: 22px; background: var(--well); display: grid; place-items: center; font-size: 19px; color: var(--ink); text-decoration: none; }
+  .fit5-adj { display: flex; gap: 8px; margin-top: 12px; position: relative; }
+  .fit5-adj > div { padding: 0 12px; flex: none; font-size: 14px; }
+  .fit5-adj > div.t { flex: 1; padding: 0 6px; }
+  .fit5-act { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .fit5-act > div { height: 48px; font-size: 13.5px; line-height: 1.15; text-align: center; white-space: normal; padding: 0 8px; }
+  .fit5-pp { display: inline-block; font-size: 12px; font-weight: 650; padding: 0 7px; border-radius: 9px; border: 1.5px solid var(--rule2); color: var(--ink2); margin-left: 4px; line-height: 17px; }
+  /* éditeur */
+  .fit5-jr { display: flex; justify-content: space-between; margin-top: 10px; }
+  .fit5-jr span { width: 44px; height: 44px; border-radius: 22px; background: var(--well); display: grid; place-items: center; font-size: 15px; font-weight: 650; position: relative; }
+  .fit5-jr span.on { background: var(--primary); color: #fff; }
+  .fit5-jr span i { position: absolute; right: -2px; top: -2px; width: 17px; height: 17px; border-radius: 50%; background: #fff; color: var(--primary); font-size: 12px; --sw: 3; display: grid; place-items: center; box-shadow: 0 0 0 1.5px var(--primary); }
+  .fit5-er { gap: 4px !important; }
+  .fit5-er .gp, .fit5-er .rm { width: 40px; height: 44px; display: grid; place-items: center; flex: none; color: var(--ink2); font-size: 20px; }
+  .fit5-er .gp { margin-left: -12px; } .fit5-er .rm { margin-right: -12px; }
+  .fit5-open { padding: 4px 0 12px; border-top: 1px solid var(--rule); }
+  .fit5-open .g { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 8px; margin-top: 8px; }
+  .fit5-open .g > div { display: flex; flex-direction: column; gap: 3px; }
+  /* fiche */
+  .fit5-demo { position: relative; border-radius: 22px; background: var(--well2, var(--well)); overflow: hidden; margin-top: 4px; }
+  .fit5-demo .ph { position: absolute; left: 14px; top: 12px; font-size: 13px; font-weight: 700; color: var(--ink); }
+  .fit5-demo .pz { position: absolute; right: 4px; top: 4px; width: 44px; height: 44px; display: grid; place-items: center; font-size: 18px; color: var(--ink); }
+  .fit5-pl { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .fit5-pl span { height: 28px; padding: 0 10px; border-radius: 14px; background: var(--panel); border: 1px solid rgba(255,255,255,.85); font-size: 12.5px; font-weight: 600; display: inline-flex; align-items: center; }
+  .fit5-tx { font-size: 14px; line-height: 1.4; margin: 0; }
+  .fit5-st { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 1.35; padding: 5px 0; }
+  .fit5-st .n { width: 24px; height: 24px; border-radius: 12px; background: var(--tint2); color: var(--primary); display: grid; place-items: center; font-size: 13px; font-weight: 700; flex: none; }
+  /* progression */
+  .fit5-sr b { display: block; font-size: 17px; font-weight: 700; margin-bottom: 2px; }
+  .fit5-rec { display: grid; grid-template-columns: 14px 1fr; gap: 6px; }
+  .fit5-ix { display: flex; flex-direction: column; justify-content: space-around; align-items: center; font-size: 12px; font-weight: 700; color: var(--primary); }
+  .fit5-lc .pl-lockcard p { font-size: 13px; margin: 8px 0 10px; line-height: 1.38; }
+  .fit5-f .chip { font-size: 13px; }
+  .fit5-dim .li b { color: var(--ink2); font-weight: 600; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="fit" data-kind="direction">
+
+  <header class="bd-head"><div class="num">5</div>
+    <div><div class="pl-kick">Direction 5 sur 5</div>
+      <h1>Direction 5 · Hybride</h1>
+      <p>« L'écran qui suit ton moment » : la page garde toujours le même squelette (une carte, quatre raccourcis, la semaine), mais sa première carte change avec le moment : avant la séance, pendant, après, ou un jour passé. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20 ; séance en cours à 19 h 05 ; séance faite à 19 h 55. Compte Premium, sauf l'écran 7.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Une carte qui suit le moment</h3>
+      <p>La carte du haut dit quoi faire maintenant : la séance du jour, la séance en cours, la séance faite. Une action flottante la suit : « Commencer », puis « Série faite » avec le repos à côté. Sous la carte, quatre raccourcis ronds ouvrent les pages qui étaient cachées en bas.</p></div>
+    <div><h5>En ouvrant Fitness</h5><ol>
+      <li data-p="1">La carte du moment : « Séance du jour », « Séance en cours » ou « Séance faite »</li>
+      <li data-p="1">« Commencer », ou « Série faite » et le repos</li>
+      <li data-p="2">Quatre raccourcis : « Programme », « Exercices », « Historique », « Progression »</li>
+      <li data-p="2">« Cette semaine » : durée, volume, calories, séances</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">Aperçu de la séance : 4 exercices, « + 2 autres »</li>
+      <li data-p="3">Carte des pas</li>
+      <li data-p="3">Note des estimations, « Mes paramètres »</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">Du premier jour au centième, la page dit « voici la chose à faire maintenant », et une série se valide sans quitter la page.</p>
+      <p class="minus">Quatre visages de la carte à dessiner, développer et tester ; les raccourcis ne montrent aucun chiffre ; les progrès restent derrière un toucher.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Avant la séance</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="13:20" data-tab="0" id="p1"></div>
+      <div class="cap"><h4>La séance, puis un seul bouton</h4>
+        <p>La carte dit quelle séance et sa taille ; « Commencer » flotte sous le pouce. Les quatre raccourcis sont toujours au même endroit.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine, « Séance du jour », « Haut du corps », « 6 exercices · 18 séries · environ 55 min », « Commencer », quatre tuiles, aperçu « + 2 autres », carte des pas, « Mes paramètres ».</span></li>
+          <li><span class="tag a"></span><span>« Programme », « Exercices », « Historique » et « Progression » deviennent quatre raccourcis ronds (quatre lignes en bas de page aujourd'hui). « Calories » prend son unité (≈ 220 kcal). « Encore 2 séances » est le texte de la carte de Mon quotidien, repris ici.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Commencer ».</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Programme », puis une séance.</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher « Exercices ».</span></li>
+          <li><span class="tag g" data-to="9"></span><span>Toucher « Progression ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Pendant la séance</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="19:05" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>La même page, une autre carte</h4>
+        <p>À 19 h 05, la carte devient « Séance en cours » et l'action flottante se double : on valide une série sans quitter la page.</p>
+        <ul><li><span class="tag e"></span><span>« Séance en cours », « Haut du corps », « Développé couché (barre) · série 2 sur 4 », barre de progression, carte des pas.</span></li>
+          <li><span class="tag a"></span><span>« 10 × 60 kg » et « 1/18 séries » sur la carte. Action flottante double : « Série faite » et le repos 0:45. Tuiles à 3 / 4 : dans le code, la séance en cours compte dès sa première série (Mon quotidien dit encore 2/4).</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher la carte, ou « Série faite ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Séance</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="19:05" data-tab="none" id="p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Valider d'un geste, le reste à côté</h4>
+        <p>« Série faite » est le plus gros élément, tout en bas. Deux actions restent visibles ; les cinq autres sont derrière « … » (19 h 05).</p>
+        <ul><li><span class="tag e"></span><span>En-tête, « Série 2 sur 4 », ⓘ, « La dernière fois », répétitions et charge, repos, « Passer le repos », « Passer la série », « Annuler la dernière série », liste « La séance ».</span></li>
+          <li><span class="tag a"></span><span>Sept actions en texte deviennent deux et « … » (« Passer cet exercice », « Choisir dans la bibliothèque », « Ajouter un exercice », « Terminer la séance », « Annuler la séance »). « Série faite » passe dans une barre fixe de 64 points.</span></li>
+          <li><span class="tag n"></span><span>« − 15 s » et « + 15 s » pendant le repos : aujourd'hui le repos ne se règle que dans l'éditeur.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Valider la dernière série.</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher ⓘ : la fiche s'ouvre par-dessus.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Séance terminée</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="19:55" data-tab="none" id="p4"></div>
+      <div class="cap"><h4>Un bilan avant de repartir</h4>
+        <p>À la dernière série, un récapitulatif remplace l'écran de choix. « Terminé » ramène à la page principale, carte « Séance faite » (19 h 55).</p>
+        <ul><li><span class="tag e"></span><span>« Voir le détail », « Annuler la dernière série », carte « Séance faite » derrière.</span></li>
+          <li><span class="tag a"></span><span>L'écran « Choisis la séance à faire. » n'est plus le point d'arrivée : il reste derrière « Faire une séance quand même ».</span></li>
+          <li><span class="tag n"></span><span>Récapitulatif « Séance terminée » : durée, séries, volume, calories, nouveau record, semaine (3 / 4).</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Un autre jour : séance rattrapée</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="13:20" data-tab="0" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Un jour passé, la même carte</h4>
+        <p>Jeudi 5 novembre, choisi dans la semaine dernière : la carte dit où la séance a été faite. Aucune action flottante.</p>
+        <ul><li><span class="tag e"></span><span>« Séance rattrapée », « Faite le vendredi 6 novembre à la place. », « Voir le détail », bouton « Aujourd'hui », jours marqués.</span></li>
+          <li><span class="tag a"></span><span>Tuiles « Semaine dernière » : 3 h 37, 16 845 kg, 4 / 4, « Objectif de la semaine atteint ».</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Toucher « Aujourd'hui ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Éditeur de séance</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="13:20" data-tab="none" id="p6"></div>
+      <div class="cap"><h4>Changer l'ordre sans tout refaire</h4>
+        <p>Chaque exercice a sa poignée et son bouton pour le retirer. L'exercice ouvert montre tous ses réglages.</p>
+        <ul><li><span class="tag e"></span><span>Nom, jours, « Ajouter un exercice », « Choisir dans la bibliothèque », séries, répétitions, charge, repos, tempo, notes.</span></li>
+          <li><span class="tag a"></span><span>Une ligne par exercice, qui se déplie (sept lignes par exercice aujourd'hui).</span></li>
+          <li><span class="tag n"></span><span>Poignée pour changer l'ordre et retrait d'un exercice précis : aujourd'hui seulement « Retirer le dernier exercice ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Exercices, compte gratuit</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="13:20" data-tab="0" id="p7"></div><span class="flow"></span>
+      <div class="cap"><h4>La bibliothèque se voit, la fiche se paie</h4>
+        <p>Compte gratuit : on cherche et on filtre, les lignes portent un cadenas, la carte dorée explique pourquoi.</p>
+        <ul><li><span class="tag e"></span><span>Recherche, quatre filtres, « Toute la bibliothèque d'exercices », « Favoris », « Mes exercices », « Par muscle ».</span></li>
+          <li><span class="tag a"></span><span>« Favoris » quitte la page principale pour cette page. Les filtres rapetissent pour que « Niveau » ne soit plus coupé.</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Avec Premium, toucher un exercice ouvre sa fiche.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Fiche d'exercice</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="13:20" data-tab="none" id="p8"></div>
+      <div class="cap"><h4>Tout l'exercice, un bouton en bas</h4>
+        <p>Premium. La démonstration d'abord, la technique ensuite, puis les performances. « Ajouter à une séance » reste sous le pouce.</p>
+        <ul><li><span class="tag e"></span><span>Démonstration animée (un schéma tient sa place ici), « Profil » et « 3/4 », pastilles, muscles, « Position de départ », « Exécution », « Mes performances », « Alternatives », étoile.</span></li>
+          <li><span class="tag a"></span><span>« Ajouter à une séance » fixé en bas de l'écran.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Progression</div>
+      <div class="phone app t-saphir" data-c="fit" data-time="13:20" data-tab="0" id="p9"></div>
+      <div class="cap"><h4>Les progrès, avec un mot d'encouragement</h4>
+        <p>Premium. En tête, la régularité ; puis le volume des huit semaines et les records de A à Z.</p>
+        <ul><li><span class="tag e"></span><span>« Volume par semaine » (8 barres, semaine en cours hachurée), « Records », index à gauche.</span></li>
+          <li><span class="tag n"></span><span>« 2 semaines de suite à l'objectif » : le calcul existe (widget « Régularité »), pas son affichage dans la mini-app.</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher un record : la fiche s'ouvre.</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le sélecteur de semaine, les quatre tuiles, l'aperçu de la séance, la carte des pas, la liste « La séance », la bibliothèque et la fiche, « Volume par semaine » et « Records », « Mes paramètres » en dernier, toutes les règles de calcul.</span>
+          <b>Changé de place</b><span>Les quatre lignes de « Programme » deviennent quatre raccourcis ronds. « Série faite » monte sur la page principale (action flottante double). Sept actions de la séance : deux visibles, le reste derrière « … ». Les favoris passent dans « Exercices ». La dernière série ouvre un récapitulatif, plus l'écran de choix. « Séance libre » reste dans « Programme ».</span>
+          <b>Laissé de côté</b><span>Calendrier du mois, comparaison avec la semaine d'avant, volume par muscle, filtre de l'historique : ils vont avec d'autres directions.</span>
+          <b>États non dessinés</b><span>« Repos aujourd'hui » (« Prochaine séance : Jambes, demain »), « Aujourd'hui » · « Ton programme » avec « Créer une séance », « 1 séance faite », « Prévu », « Prévu, pas fait » avec « Rattraper la séance », et « Aucune séance prévue ce jour-là. ».</span>
+        </div>
+        <h4>Nouveau, à développer (4)</h4>
+        <p>1. Récapitulatif « Séance terminée » (écran 4). 2. « − 15 s » et « + 15 s » pendant le repos (écran 3). 3. « 2 semaines de suite à l'objectif » dans la mini-app (écran 9). 4. Poignée et retrait d'un exercice précis dans l'éditeur (écran 6).</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : la carte du moment, les tuiles, la séance, le repos, le récapitulatif, l'éditeur, « Mes exercices » et l'historique sont gratuits. « La dernière fois », la fiche, « Choisir dans la bibliothèque », « Volume par semaine » et « Records » restent Premium. L'écran 7 montre un compte gratuit ; les autres écrans montrent un compte Premium.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="fitness.js"></script>
+<script>
+const J_ = FIT.jour, H_ = FIT.haut, EC = FIT.jour.enCours;
+const nb = (x) => PL.n(x);
+
+/* sélecteur de semaine : o.sel, o.marks (points pleins), o.pl (anneaux), o.title, o.dates (semaine passée) */
+function ws(o) {
+  const old = WEEKDATES.slice(); if (o.dates) WEEKDATES.splice(0, 7, ...o.dates);
+  let h = U.wsel({ sel: o.sel, marks: o.marks, title: o.title }); WEEKDATES.splice(0, 7, ...old);
+  let k = 0;
+  h = h.replace(/<span class="d ([^"]*)">/g, (m, c) => { const i = k++; if (o.dates) c = c.replace(/\bnext\b/, 'past'); return `<span class="d ${c}${(o.pl || []).includes(i) ? ' pl' : ''}">`; });
+  return `<div style="margin-top:4px">${h}</div>`;
+}
+const tuiles = (w) => `<div class="fit5-k">${PL.kpis([PL.kpi('Durée', PL.dur(w.min)), PL.kpi('Volume', nb(w.volume), 'kg'), PL.kpi('Calories', '≈' + NBSP + w.kcal, 'kcal'), PL.kpi('Séances', `${w.n} / 4`)], 4)}</div>`;
+const mo = (lab, line, o = {}) => PL.hero({ lab, fig: 'Haut du corps', size: 'sm', line, right: o.right, body: o.body, st: 'margin-top:8px' });
+const SH = [['Programme', 'calendar'], ['Exercices', 'dumbbell'], ['Historique', 'history'], ['Progression', 'chart']];
+const raccourcis = `<div class="fit5-sh">${SH.map(([t, i]) => `<span role="button" aria-label="${t}"><u><i data-i="${i}"></i></u>${t}</span>`).join('')}</div>`;
+const pas = PL.card(`<div class="fit5-pas">${PL.ring(FIT.pas.p, { s: 54, sw: 6, c: 'pas', aria: '5 480 pas sur 8 000' })}<div><b>5 480 pas</b><span class="s">objectif 8 000 · 3,9 km · 6 étages</span></div></div>`, { st: 'margin-top:12px;padding:0' });
+const bas = pas + PL.foot(FIT.textes.note) + PL.settings();
+const NAV = PL.nv('Fitness', '', { back: false });
+
+/* 1 · avant la séance */
+PL.mount('p1', NAV + ws({ sel: 3, marks: [0, 1], pl: [3, 5] })
+  + mo('Séance du jour', H_.detail) + raccourcis
+  + PL.sect('Cette semaine', FIT.encore(2), '', { st: 'margin-top:12px' }) + tuiles(FIT.semaine)
+  + PL.sect('Séance du jour', 'environ 55 min', '', { st: 'margin-top:12px' })
+  + PL.list(H_.apercu.map((e) => PL.row('', e.n, e.plan, { chev: false })).concat([PL.row('', '+ 2 autres', '', { chev: false })]), { cls: 'fit5-c' })
+  + bas, PL.fab('Commencer', 'play'));
+
+/* 2 · pendant la séance (19:05) */
+PL.mount('p2', NAV + ws({ sel: 3, marks: [0, 1], pl: [3, 5] })
+  + mo('Séance en cours', EC.hero, { body: `<div style="margin-top:10px">${PL.bar(EC.p, { c: 'fit' })}</div><div class="pl-cap" style="margin-top:6px"><b>${EC.compte}</b> · ${EC.repsTxt}</div>` })
+  + raccourcis
+  + PL.sect('Cette semaine', FIT.semaineEnCours.encore, '', { st: 'margin-top:12px' }) + tuiles(FIT.semaineEnCours)
+  + bas, PL.fab2(['Série faite', 'check'], ['Repos 0:45', 'pause']));
+
+/* 3 · séance (19:05) */
+const lst = EC.liste.map((e, i) => PL.row(i ? '' : 'play', e.n, i ? e.plan : `${e.plan} <span class="fit5-pp">60 × 10</span>`, { chk: i ? 'todo' : undefined, r: '<i data-i="info" style="font-size:19px;color:var(--ink2)"></i>', chev: false, c: 'fit' }));
+PL.mount('p3', PL.nv('Séance', PL.rbtn('dots', 'Autres actions : passer cet exercice, choisir dans la bibliothèque, ajouter un exercice, terminer ou annuler la séance')) + `
+  <div class="fit5-hd"><div><b>Haut du corps</b><span class="pl-cap">${EC.compte}</span></div><span class="fit5-ch">${EC.chrono}</span></div>
+  ${PL.bar(EC.p, { c: 'fit' })}
+  <article class="pn cd fit5-ex" style="margin-top:12px"><span class="x-lab">${EC.serieTxt}</span>
+    <div class="n"><b>${EC.exo.n}</b><span class="rb" role="button" aria-label="Fiche de l'exercice"><i data-i="info"></i></span></div>
+    <div class="pl-cap">${EC.laDerniereFois}</div></article>
+  <div class="fit5-reg">
+    <div class="pn"><span class="x-lab">Répétitions</span><div class="v"><u role="button" aria-label="Moins une répétition"><i data-i="minus"></i></u><b>${EC.reps}</b><u role="button" aria-label="Plus une répétition"><i data-i="plus"></i></u></div></div>
+    <div class="pn"><span class="x-lab">Charge</span><div class="v"><u role="button" aria-label="Moins 2,5 kg"><i data-i="minus"></i></u><b>${EC.kg}<small>kg</small></b><u role="button" aria-label="Plus 2,5 kg"><i data-i="plus"></i></u></div></div></div>
+  <article class="pn cd fit5-rp"><div class="top"><span class="x-lab">Repos</span><span class="pl-cap">sur ${EC.reposTotal}</span></div>
+    <div class="tm2"><b>${EC.repos}</b><u role="button" aria-label="Pause du repos"><i data-i="pause"></i></u></div>${PL.bar(EC.reposP, { c: 'fit' })}
+    <div class="fit5-adj pl-newbox">${PL.nw('Nouveau', 'corner')}<div class="btnO" role="button">− 15 s</div><div class="btnO" role="button">+ 15 s</div><div class="btnT t" role="button">Passer le repos</div></div></article>
+  <div class="fit5-act"><div class="btnO" role="button">Passer la série</div><div class="btnO" role="button">Annuler la dernière série</div></div>
+  ${PL.sect('La séance', '', '', { st: 'margin-top:12px' })}${PL.list(lst, { cls: 'fit5-c' })}`,
+  PL.dock(PL.btn('Série faite', { i: 'check', st: 'height:64px;border-radius:32px;font-size:20px' })));
+
+/* 4 · séance terminée : la page principale « Séance faite » derrière, le récapitulatif par-dessus */
+const R_ = FIT.nouveau.recap, SA = FIT.semaineApres;
+const faite = NAV + ws({ sel: 3, marks: [0, 1, 3], pl: [5] })
+  + mo('Séance faite', J_.faite.detail, { right: PL.rbtn('dots', 'Autres actions', ''), body: '<div class="pl-link" style="margin-top:4px"><span>Voir le détail</span><i data-i="chev"></i></div>' })
+  + raccourcis + PL.sect('Cette semaine', FIT.encore(3), '', { st: 'margin-top:12px' }) + tuiles(SA);
+PL.mount('p4', faite, PL.sheet(`
+  ${PL.kpis(R_.lignes.map(([h, v]) => PL.kpi(h, v)), 2)}
+  ${PL.list([PL.row('trophy', R_.record, '', { sq: true, chev: false })], { st: 'margin-top:10px' })}
+  <div class="pl-cap" style="margin:10px 2px 12px"><b>${R_.semaine}</b></div>
+  <div style="display:grid;gap:8px">${PL.btn('Terminé', { i: 'check' })}<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">${PL.btn(R_.boutons[0], { k: 'T', st: 'font-size:14px;padding:0 6px' })}${PL.btn(R_.boutons[1], { k: 'O', st: 'font-size:13.5px;padding:0 6px' })}</div></div>`,
+  `Séance terminée ${PL.nw()}`));
+
+/* 5 · un autre jour : la séance du jeudi 5 novembre, rattrapée le vendredi 6 (semaine dernière) */
+const PR = FIT.semainePrec;
+PL.mount('p5', PL.nv('Fitness', PL.sheetBtn("Aujourd'hui"), { back: false })
+  + ws({ sel: 3, marks: [0, 1, 3, 4, 5], dates: [2, 3, 4, 5, 6, 7, 8], title: 'Semaine dernière' })
+  + mo('Séance rattrapée', 'Faite le vendredi 6 novembre à la place.', { body: '<div class="pl-link" style="margin-top:4px"><span>Voir le détail</span><i data-i="chev"></i></div>' })
+  + raccourcis + PL.sect('Semaine dernière', FIT.encore(PR.n), '', { st: 'margin-top:12px' }) + tuiles(PR)
+  + PL.list([PL.row('', 'Jambes', 'Sam. 7 nov. · 52 min · 15 séries', { chev: true })], { st: 'margin-top:12px' }));
+
+/* 6 · éditeur de séance */
+const ex = H_.exos;
+const stp = (lab, v) => `<div><span class="x-lab">${lab}</span>${PL.stepper(v)}</div>`;
+const erow = (e) => `<div class="li fit5-er"><span class="gp" role="button" aria-label="Changer l'ordre de ${e.n}"><i data-i="grip"></i></span><div class="tx"><b>${e.n}</b><span class="s">${e.plan} · repos ${e.reposTxt}</span></div><span class="rm" role="button" aria-label="Retirer ${e.n}"><i data-i="trash"></i></span></div>`;
+PL.mount('p6', PL.nv('Programme') + PL.sect('Mes séances', '3') + PL.list(FIT.seances.map((q) => PL.row('', q.n, q.court))), PL.sheet(`
+  ${PL.field('Nom', 'Haut du corps')}
+  <div class="fit5-jr">${['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((c, i) => (i === 0 || i === 3 ? `<span class="on" role="checkbox" aria-checked="true" aria-label="Jour choisi">${c}<i data-i="check"></i></span>` : `<span role="checkbox" aria-checked="false">${c}</span>`)).join('')}</div>
+  <div style="display:grid;gap:8px;margin-top:10px">${PL.btn('Ajouter un exercice', { i: 'plus', k: 'T' })}${PL.btn('Choisir dans la bibliothèque', { i: 'search', k: 'O' })}</div>
+  ${PL.sect('Exercices', '6', '', { nw: true, st: 'margin-top:12px' })}
+  <article class="pn ls fit5-c" style="padding:2px 16px">${erow(ex[0])}
+    <div class="fit5-open"><div class="g">${stp('Séries', '4')}${stp('Répétitions', '10')}${stp('Charge', '60 kg')}${stp('Repos', '3:00')}</div>
+      ${PL.kvs([PL.kv('Tempo', '2-0-1'), PL.kv('Notes', 'Omoplates serrées…')], { st: 'margin-top:4px' })}</div>
+    ${ex.slice(1).map(erow).join('')}</article>`, 'Haut du corps', { left: 'Annuler', right: PL.sheetBtn('OK'), full: true }));
+
+/* 7 · exercices, compte gratuit */
+const B_ = FIT.biblio, G_ = FIT.gratuit;
+const rr = (n) => PL.row('', n, '', { lock: true, chev: false });
+PL.mount('p7', PL.nv('Exercices') + `<div style="margin-top:4px">${PL.search('développé')}</div>
+  <div class="fit5-f">${PL.chips(B_.filtres, 0, { fit: true, st: 'margin-top:10px' })}</div>
+  <div class="fit5-lc" style="margin-top:10px">${PL.lockCard(G_.biblioCarte[0], G_.biblioCarte[1])}</div>
+  ${PL.sect(`${B_.recherche.n} résultats`, '', '', { st: 'margin-top:12px' })}
+  <div class="fit5-dim">${PL.list(B_.recherche.resultats.slice(0, 2).map(rr), { cls: 'fit5-c' })}</div>
+  ${PL.sect('Favoris', '3', '', { st: 'margin-top:12px' })}
+  <div class="fit5-dim">${PL.list(B_.favoris.map((e) => PL.row('star', e.n, '', { lock: true, chev: false })), { cls: 'fit5-c' })}</div>
+  ${PL.sect('Mes exercices', '1', '', { st: 'margin-top:12px' })}
+  ${PL.list([PL.row('', B_.mesExercices[0].n, B_.mesExercices[0].ligne), PL.row('plus', 'Créer un exercice', '', { chev: false })], { cls: 'fit5-c' })}`);
+
+/* 8 · fiche d'exercice (Premium) */
+const FI = FIT.fiche, PD = FIT.perfs.dc;
+const demo = `<div class="fit5-demo" role="img" aria-label="Démonstration animée : développé couché, vue de profil"><svg viewBox="0 0 320 116" width="100%" height="116" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <rect x="52" y="82" width="172" height="12" rx="6" fill="var(--rule2)" stroke="none"/><path d="M72 94v18M206 94v18" stroke="var(--rule2)" stroke-width="6"/>
+  <circle cx="66" cy="70" r="9" stroke="var(--ink)" stroke-width="3"/><path d="M80 72h72l34 10v26" stroke="var(--ink)" stroke-width="6"/><path d="M112 72V32" stroke="var(--ink)" stroke-width="5"/>
+  <path d="M66 32h92" stroke="var(--c)" stroke-width="5"/><circle cx="68" cy="32" r="11" fill="var(--c)" stroke="none"/><circle cx="156" cy="32" r="11" fill="var(--c)" stroke="none"/></svg>
+  <span class="ph">Poussée</span><span class="pz" role="button" aria-label="Pause"><i data-i="pause"></i></span></div>`;
+PL.mount('p8', PL.nv(FI.exo.n, PL.rbtn('star', 'Mettre en favori')) + demo
+  + PL.seg(FI.vues, 0, { st: 'margin-top:10px' })
+  + `<div class="fit5-pl">${FI.pastilles.map((t) => `<span>${t}</span>`).join('')}</div>`
+  + PL.kvs([PL.kv('Principalement', FI.principaux.join(', ')), PL.kv('Aussi', FI.secondaires.join(', '))], { st: 'margin-top:10px' })
+  + PL.card(`<p class="fit5-tx">${FI.depart}</p>`, { t: 'Position de départ', st: 'margin-top:10px' })
+  + PL.card(FI.execution.map((s, i) => `<div class="fit5-st"><span class="n">${i + 1}</span><span>${s}</span></div>`).join(''), { t: 'Exécution', st: 'margin-top:10px' })
+  + PL.card(PL.kvs([PL.kv('Record', `${PD.record.txt} · ${PD.record.rmTxt}`), PL.kv('Dernière séance', PD.derniere.date), PL.kv('Volume', PD.volumeTxt), PL.kv('Fréquence', PD.frequenceTxt)]), { t: 'Mes performances', st: 'margin-top:10px' })
+  + PL.sect('Alternatives', '5', '', { st: 'margin-top:12px' }) + PL.list(FI.alternatives.slice(0, 2).map((a) => PL.row('', a[0], a[1])), { cls: 'fit5-c' }),
+  PL.dock(PL.btn(FI.ajout.sinon, { i: 'plusbox' })));
+
+/* 9 · progression (Premium) */
+const PG = FIT.progression, N4 = FIT.nouveau.serieSemaines;
+const lettres = [...new Set(PG.records.map((r) => r.n[0]))];
+PL.mount('p9', PL.nv('Progression') + `<div style="margin-top:6px">${PL.card(`<div class="fit5-sr"><b>${N4.txt}</b><span class="pl-cap">Objectif : 4 séances / semaine</span></div>`, { t: 'Régularité', i: 'flame', nw: true })}</div>
+  ${PL.sect('Volume par semaine', '8 semaines', '', { st: 'margin-top:12px' })}
+  ${PL.card(PL.bars({ g: PG.semaines.map((w, k) => ({ l: String(parseInt(w.lab, 10)), v: [w.volume], cur: k === 7, hl: k === 7 })), c: ['var(--c-fit)'], max: 18000, yt: [0, 8000, 16000], h: 92, bw: 18,
+      aria: 'Volume soulevé par semaine, du 21 septembre au 9 novembre ; semaine en cours 8 460 kg, hachurée' })
+    + PL.leg([['var(--c-fit)', 'Semaine complète'], ['var(--c-fit)', 'Semaine en cours', 'hat']]) + '<div class="pl-cap" style="margin-top:4px">Lundi de chaque semaine, du 21 sept. au 9 nov.</div>', { st: 'padding-top:16px' })}
+  ${PL.sect('Records', 'de A à Z', '', { st: 'margin-top:12px' })}
+  <div class="fit5-rec"><div class="fit5-ix" aria-hidden="true">${lettres.map((l) => `<span>${l}</span>`).join('')}</div>${PL.list(PG.records.map((r) => PL.row('', r.n, r.detail, { r: r.txt, chev: false })), { cls: 'fit5-c' })}</div>`);
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [[1, 2, 5], 'Sélecteur de semaine, en tête des écrans 1, 2 et 5.'],
+  F2: [[1, 2, 4, 5], 'Carte du moment : prévue, en cours, faite, rattrapée.'],
+  F3: [[1, 2], 'Action flottante : « Commencer », puis « Série faite » et repos.'],
+  F4: [5, 'Carte « Séance rattrapée » et jour marqué ; « Rattraper » reste sur un jour manqué.'],
+  F5: ['=', "Menu « Faire une séance quand même » de la carte d'un jour de repos, inchangé."],
+  F6: [1, 'Section « Séance du jour » : 4 exercices et « + 2 autres ».'],
+  F7: [[1, 2, 5], 'Quatre tuiles « Cette semaine », avec « Encore n séances ».'],
+  F8: ['=', "Sous la carte du moment, tant qu'il manque une information, inchangé."],
+  F9: [7, 'Section « Favoris » de la bibliothèque, sortie de la page principale.'],
+  F10: [[1, 2], 'Carte des pas, au bas de la page principale.'],
+  F11: ['=', 'Sans écran : séance close après 3 h sans série.'],
+  F12: ['=', 'Menu « … » de la séance faite, détail et historique, inchangés.'],
+  F13: [1, 'Action flottante « Commencer » ; Mon quotidien et widgets inchangés.'],
+  F14: ['=', 'Dans « Programme », sous « Mes séances » ; la page ne change pas.'],
+  F15: [3, 'En-tête : nom, chrono 6:05, « 1/18 séries », barre.'],
+  F16: [3, 'Carte « Série 2 sur 4 », nom de l\'exercice, bouton ⓘ.'],
+  F17: [3, '« La dernière fois : 57,5 kg × 10 » sous le nom.'],
+  F18: [3, 'Deux réglettes « Répétitions » et « Charge », boutons − et +.'],
+  F19: [[2, 3], '« Série faite » : action flottante en 2, barre basse en 3.'],
+  F20: [[2, 3], 'Repos 0:45 : bouton de l\'écran 2, compte à rebours et pause en 3.'],
+  F21: ['=', 'Notification « Repos terminé », proposée une fois au premier repos.'],
+  F22: [3, 'Bouton « Passer la série », sous le repos.'],
+  F23: [[3, 4], '« Annuler la dernière série » : écran 3 et récapitulatif.'],
+  F24: [3, 'Derrière le bouton « … » : « Passer cet exercice ».'],
+  F25: [3, 'Liste « La séance » : états, plans, pastille « 60 × 10 ».'],
+  F26: [3, 'Toucher une pastille de série faite : feuille actuelle.'],
+  F27: [3, 'Derrière « … » : « Choisir dans la bibliothèque ».'],
+  F28: [3, 'Derrière « … » : « Ajouter un exercice ».'],
+  F29: [3, 'Derrière « … » : « Terminer la séance ».'],
+  F30: [3, 'Derrière « … » : « Annuler la séance ».'],
+  F31: [4, 'La dernière série ouvre le récapitulatif, plus l\'écran de choix.'],
+  F32: ['=', 'Page « Programme » actuelle, ouverte par le raccourci.'],
+  F33: ['=', 'Page « Programme » actuelle, section « Mes séances ».'],
+  F34: ['=', 'Page « Programme » actuelle, ligne « Objectif ».'],
+  F35: [6, 'Feuille « Haut du corps » : nom, jours, exercices.'],
+  F36: [6, 'Boutons « Ajouter un exercice » et « Choisir dans la bibliothèque ».'],
+  F37: ['=', 'Sous le champ du nom d\'un exercice, inchangé (Premium).'],
+  F38: [1, '« environ 55 min » dans la carte et dans l\'aperçu.'],
+  F39: [7, 'Liste des exercices, lignes visibles avec cadenas.'],
+  F40: [7, 'Champ « développé » : 12 résultats.'],
+  F41: [7, 'Quatre filtres : « Muscle », « Équipement », « Type », « Niveau ».'],
+  F42: [7, '« Favoris » et « Mes exercices » ; « Par muscle » plus bas.'],
+  F43: [[7, 8], 'Liste « Favoris » ; étoile en haut de la fiche.'],
+  F44: [7, 'Section « Mes exercices » et « Créer un exercice ».'],
+  F45: [8, 'Démonstration, pause et vues « Profil » et « 3/4 ».'],
+  F46: [8, 'Pastilles de la fiche, muscles principaux et secondaires.'],
+  F47: [8, 'Cartes « Position de départ » et « Exécution ».'],
+  F48: [8, 'Carte « Mes performances » : record, 1RM, volume.'],
+  F49: [8, 'Section « Alternatives », au bas de la fiche.'],
+  F50: [8, 'Bouton « Ajouter à une séance », fixé en bas.'],
+  F51: [3, 'Bouton ⓘ de l\'exercice : fiche par-dessus la séance.'],
+  F52: ['=', 'Page « Historique » actuelle, ouverte par le raccourci.'],
+  F53: ['=', 'Page actuelle, ouverte par « Voir le détail ».'],
+  F54: [9, 'Carte « Volume par semaine », 8 barres.'],
+  F55: [9, 'Liste « Records » de A à Z, index à gauche.'],
+  F56: ['=', 'Page « Activité » actuelle, ouverte par la carte des pas.'],
+  F57: [1, 'Bouton « Mes paramètres », dernier élément de la page.'],
+  F58: ['=', 'Réglage général de l\'app, inchangé.'],
+  F59: ['=', 'Mon quotidien : mêmes mots que la carte du moment, inchangé.'],
+  F60: ['=', 'Mon quotidien : page « Semaine » de la carte, inchangée.'],
+  F61: ['=', 'Mon quotidien : carte « Pas », inchangée.'],
+  F62: ['=', 'Écran verrouillé et Dynamic Island, inchangés.'],
+  F63: ['=', 'Les 9 widgets Fitness, inchangés.'],
+  F64: ['=', 'Rappels et encouragements, réglés dans « Rappels ».'],
+  F65: ['=', 'Agenda de Planning : séances sans heure, inchangé.'],
+  F66: ['=', 'Espace Fitness côté Créer, inchangé.'],
+  F67: ['=', 'Objectif partagé : « Mes paramètres » › « Ton objectif ».'],
+  F68: ['=', 'Pastille Fitness de l\'accueil, inchangée.'],
+});
+PL.init();
+</script>
+</body>
+</html>

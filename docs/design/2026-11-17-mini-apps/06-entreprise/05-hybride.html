@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Entreprise — Direction 5 : Hybride</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="entreprise.css">
+<style>
+  .ent5-c .li { padding: 6px 14px !important; min-height: 0 !important; }
+  .ent5-per { font-size: 13px; font-weight: 600; color: var(--ink2); white-space: nowrap; }
+  .ent5-goal { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--rule); }
+  .ent5-goal .l { font-size: 14px; margin-bottom: 7px; color: var(--ink); } .ent5-goal .l b { font-weight: 700; }
+  .ent5-goal .s { font-size: 13px; line-height: 1.38; color: var(--ink2); margin-top: 7px; }
+  .phone .sect span.ent5-btn { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 2px 0 10px; margin: 0 -2px 0 auto; font-size: 14px; font-weight: 600; color: var(--cs); }
+  .ent5-btn i { font-size: 17px; }
+  .ent5-grip { width: 44px; height: 44px; margin: -10px -12px -10px 0; display: grid; place-items: center; color: var(--ink2); font-size: 20px; }
+  .ent5-amt { padding: 4px 4px 14px; }
+  .ent5-amt .pl-num { font-size: 44px; letter-spacing: -.035em; margin-top: 4px; }
+  .ent5-amt .pl-num small { font-size: 20px; }
+  .ent5-gap { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+  .ent5-two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="ent" data-kind="direction">
+
+  <header class="bd-head"><div class="num">5</div>
+    <div><div class="pl-kick">Direction 5 sur 5</div>
+      <h1>Direction 5 · Hybride</h1>
+      <p>« Le mois d'abord, la saisie sous le pouce » : la page s'ouvre sur le chiffre d'affaires du mois, dit ce qui est compté et où l'on en est de l'objectif, puis trois indicateurs. « Vente » et « Dépense » flottent au bas de l'écran. Les quatre pages, les connexions et les réglages suivent, toujours dans le même ordre. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit, entreprise « Atelier Nova ».</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Le mois d'abord, la saisie au pouce</h3>
+      <p>Ouvrir Business répond à une question : où en est le mois ? La grande carte donne le chiffre, ce qui est compté (« Du 1er au 12 nov. ») et la jauge de l'objectif. Les deux saisies flottent sous le pouce. Le reste est rangé par fréquence : indicateurs, courbe, pages, connexions, réglages.</p></div>
+    <div><h5>En ouvrant Business</h5><ol>
+      <li data-p="1">Le chiffre d'affaires du mois et sa variation</li>
+      <li data-p="1">La jauge : 40 % de l'objectif, 397 $ par jour</li>
+      <li data-p="1">« Vente » et « Dépense », sous le pouce</li>
+      <li data-p="2">Bénéfice, Commandes, Panier moyen</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">La courbe du mois contre le mois dernier</li>
+      <li data-p="3">Quatre pages, un résumé sur chaque ligne</li>
+      <li data-p="3">« Ventes automatiques » (Premium), « Mes paramètres »</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">Le mois se lit en cinq secondes et la vente du jour se note sans chercher. Les quatre pages ne changent plus de place.</p>
+      <p class="minus">Le jour et la période ne commandent toujours que la grande carte et la courbe. Le calcul « par jour » vient du widget : sa règle est à valider.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Page principale</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Le mois, l'objectif, deux gestes</h4>
+        <p>Le chiffre d'affaires dit ce qui est compté et où l'on en est. Les saisies ne défilent plus avec la page.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de semaine, « Jour », « Semaine », « Mois », « Année », carte « Chiffre d'affaires » avec sa variation, « Indicateurs ».</span></li>
+          <li><span class="tag a"></span><span>« Du 1er au 12 nov. » ; jauge de l'objectif avec le reste par jour (calcul du widget) ; « Choisir » devient un bouton ; « Vente » et « Dépense » flottent ; titre « Business ».</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher « Vente ».</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher « Choisir ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Page principale, suite</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Quatre pages, toujours au même endroit</h4>
+        <p>Les suivis ne quittent plus la carte quand il y en a. « Ventes automatiques » passe après les pages.</p>
+        <ul><li><span class="tag e"></span><span>Courbe « Chiffre d'affaires cumulé », « Ventes et dépenses », « Résultats », « Revenu récurrent », « Suivis à la main », « Ventes automatiques », « Mes paramètres ».</span></li>
+          <li><span class="tag a"></span><span>Un résumé sur chaque ligne de page ; « Ventes automatiques » sous les pages ; la note sur Stripe reste visible.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Ventes et dépenses ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Résultats ».</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Revenu récurrent ».</span></li>
+          <li><span class="tag g" data-to="9"></span><span>Toucher « Mes paramètres ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Ventes et dépenses</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="0" id="p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Le journal, mois par mois</h4>
+        <p>Les ventes de novembre, la plus récente d'abord, avec le total du mois en tête. Un seul « + » ajoute.</p>
+        <ul><li><span class="tag e"></span><span>« Ventes » / « Dépenses », lecture par mois avec le total, toucher une ligne, balayer pour supprimer, « + » en haut à droite.</span></li>
+          <li><span class="tag a"></span><span>Grand titre, comme les autres pages.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher « + ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Vente (feuille)</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="none" id="p4"></div>
+      <div class="cap"><h4>Le montant d'abord, le reste après</h4>
+        <p>Un total du jour suffit : le montant et la date sont grands, les autres champs viennent ensuite.</p>
+        <ul><li><span class="tag e"></span><span>« Montant », « Date », « Commandes », « Nouveaux clients », « Visiteurs », « Note (facultatif) ».</span></li>
+          <li><span class="tag a"></span><span>Montant en grand ; la date reprend le jour choisi et ne dépasse jamais aujourd'hui.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Résultats (compte gratuit)</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="0" id="p5"></div>
+      <div class="cap"><h4>Une page pleine sans Premium</h4>
+        <p>Compte gratuit : l'année, puis le mois, puis la carte verrou. La page ne paraît plus à moitié vide.</p>
+        <ul><li><span class="tag e"></span><span>« Depuis le 1er janvier » (chiffre d'affaires, bénéfice, marge), carte « L'analyse mois par mois est dans Premium ».</span></li>
+          <li><span class="tag a"></span><span>« Ce mois-ci » : chiffre d'affaires, dépenses, bénéfice, marge (déjà calculés pour les indicateurs et le widget) ; phrase d'aide du verrou à reprendre.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Revenu récurrent</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="0" id="p6"></div>
+      <div class="cap"><h4>Lire et mettre à jour au même endroit</h4>
+        <p>Le bouton est sous les chiffres qu'il change. La courbe et les mois suivent.</p>
+        <ul><li><span class="tag e"></span><span>MRR, ARR, abonnés et montant par abonné, « Mettre à jour le MRR », courbe, liste des mois.</span></li>
+          <li><span class="tag a"></span><span>Bouton sous les trois chiffres ; chaque mois se supprime en balayant, comme dans le journal (l'appui long reste).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes indicateurs</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="none" id="p7"></div>
+      <div class="cap"><h4>Choisir, puis ranger les tuiles</h4>
+        <p>Les 11 indicateurs sont les mêmes. Ceux qui sont affichés se placent en tête, dans l'ordre voulu.</p>
+        <ul><li><span class="tag e"></span><span>Les 11 indicateurs à cocher, « OK ».</span></li>
+          <li><span class="tag a"></span><span>Le chiffre d'affaires, coché sans effet aujourd'hui, devient une ligne fixe (« Déjà affiché en haut »). Les phrases d'explication de chaque ligne restent celles de l'app.</span></li>
+          <li><span class="tag n"></span><span>Ordre des tuiles : glisser une ligne affichée. Aujourd'hui l'ordre est celui des coches.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Première ouverture</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="0" id="p8"></div>
+      <div class="cap"><h4>Un départ avec ses boutons</h4>
+        <p>Aucune donnée : le texte, les deux saisies et l'objectif sont réunis, sans tuile à zéro.</p>
+        <ul><li><span class="tag e"></span><span>« Ton activité, chiffres à l'appui », « Vente », « Dépense », « À remplir », « Ventes automatiques » (Premium).</span></li>
+          <li><span class="tag a"></span><span>Les boutons sont dans la carte de départ ; l'objectif reste vide au lieu d'afficher 10 000 $ ; « Ventes automatiques » monte ici seulement ; phrase d'aide à reprendre.</span></li>
+          <li><span class="tag g" data-to="1"></span><span>Noter une première vente : la page principale prend la place du texte.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Mes paramètres</div>
+      <div class="phone app pl-past t-saphir" data-c="ent" data-time="13:20" data-tab="none" id="p9"></div>
+      <div class="cap"><h4>Les réglages et un rappel</h4>
+        <p>Les trois chapitres sont ceux de l'app. Un rappel s'ajoute, parce que l'usage repose sur une saisie régulière.</p>
+        <ul><li><span class="tag e"></span><span>« Ton activité », « Chaque mois » (« Objectif de CA », « Clients »), « Réglages communs » › « Devise ».</span></li>
+          <li><span class="tag n"></span><span>« Rappel de saisie » : un rappel si rien n'est noté de la journée (demande l'autorisation des notifications).</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le sélecteur de semaine, les quatre périodes, les 11 indicateurs, les suivis, le journal par mois, « Résultats », le revenu récurrent, les feuilles de vente, de dépense, de MRR, de Stripe et d'import, toutes les règles de calcul.</span>
+          <b>Changé de place</b><span>L'objectif passe d'une phrase à une jauge dans la grande carte. Les quatre pages ont un résumé et restent à la même place. « Ventes automatiques » passe sous les pages (au-dessus, à la première ouverture). « Vente » et « Dépense » forment une action flottante double. Le titre est « Business » ; le nom saisi reste dans « Mes paramètres » et sur le widget.</span>
+          <b>Laissé de côté</b><span>Taxes, factures, devis, catégories de dépenses : nouvelles idées de l'audit, hors de cette direction. La page de données de l'espace, la carte de Mon quotidien, les widgets : inchangés. La carte garde le nom « Business », la mallette, le violet et le même chiffre : « 4 859 $ ce mois ».</span>
+        </div>
+        <h4>Nouveau, à développer (2)</h4>
+        <p>1. « Rappel de saisie » (écran 9) : un rappel quotidien et sa permission. 2. Ordre des tuiles (écran 7) : glisser pour placer les indicateurs.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : toute la saisie à la main, les indicateurs, la courbe, les totaux de l'année, le revenu récurrent et les suivis sont gratuits. L'import CSV, Stripe, l'analyse mois par mois et 6 widgets sur 7 restent Premium, avec leur badge ou leur cadenas visible avant le toucher.</p>
+        <h4>Questions au PDG</h4>
+        <p>1. Un seul nom : « Business » (carte et mini-app) ou « Entreprise » (le mot du PDG) ? 2. Deux couleurs dans le code : violet 8C6CFF pour la mini-app, or C28A12 pour l'espace et les widgets. Les planches montrent le violet adouci. 3. Aujourd'hui Business affiche son violet brut : l'intégration devra ajouter cette base à la palette Cristal.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="entreprise.js"></script>
+<script>
+const E = ENT, M = E.mois, g = E.objectifMois, ui = ENT.ui;
+const fab = PL.fab2(['Vente', 'plus'], ['Dépense', 'minus']);
+const ent = (x, d = 0) => PL.n(x, d);
+const choose = `<div class="sect" style="margin:6px 4px 0;min-height:44px"><b>Indicateurs</b><span class="ent5-btn" role="button" aria-label="Choisir les indicateurs"><i data-i="sliders"></i>Choisir</span></div>`;
+const behind = () => PL.nv('Business', '', { back: false }) + `<div style="margin-top:4px">${PL.wsel({ marks: E.marks })}</div>`;
+
+/* 1 · page principale */
+PL.mount('p1', PL.nv('Business', '', { back: false }) + `<div style="margin-top:4px">${PL.wsel({ marks: E.marks })}</div>
+  ${PL.seg(['Jour', 'Semaine', 'Mois', 'Année'], 2, { st: 'margin-top:8px' })}
+  <div style="margin-top:8px">${PL.hero({ lab: 'Chiffre d\'affaires', right: `<span class="ent5-per">${E.periode.texte}</span>`, fig: ent(M.ca), unit: '$',
+    line: `${ui.vari(E.hero.vari)} ${E.hero.phrase}`,
+    body: `<div class="ent5-goal"><div class="l"><b>${g.pct}${NBSP}%</b> de l'objectif de ${PL.m(g.obj)}</div>${PL.bar(g.p, { lg: true })}<div class="s">Il reste ${PL.m(g.reste)} : environ ${PL.m(g.parJour)} par jour d'ici la fin du mois.</div></div>` })}</div>
+  ${choose}
+  ${PL.kpis([PL.kpi('Bénéfice', ent(M.benef), ui.vari(E.kpis.benef.vari), { unit: NBSP + '$', sm: true }), PL.kpi('Commandes', ent(M.cmd), ui.vari(E.kpis.cmd.vari), { sm: true }), PL.kpi('Panier moyen', ent(Math.round(M.panier)), ui.vari(E.kpis.panier.vari), { unit: NBSP + '$', sm: true })], 3)}`, fab);
+
+/* 2 · suite */
+const c = E.cumul;
+PL.mount('p2', PL.nv('Business', '', { back: false }) + `
+  ${PL.sect('Chiffre d\'affaires cumulé', '', '', { st: 'margin-top:8px' })}
+  ${PL.card(PL.line({ series: [{ v: c.oct, c: 'var(--pl-prev)', dash: true, w: 2 }, { v: c.nov, c: 'var(--c-ent)', area: true, dot: true }], n: 31, min: 0, max: 11000, yt: [0, 5000, 10000], w: 319, h: 92, xl: [[0, '1er'], [11, '12'], [30, '31']],
+      aria: 'Chiffre d\'affaires cumulé : 4 859 $ au 12 novembre, contre 3 889 $ au 12 octobre ; 10 418 $ à la fin d\'octobre' }) + PL.leg([['var(--c-ent)', 'Cette période', 'ln'], ['var(--pl-prev)', 'Période précédente', 'dsh']]), { st: 'padding-bottom:10px' })}
+  ${PL.sect('Pages', '', '', { st: 'margin-top:10px' })}
+  ${PL.list([
+    PL.row('receipt', 'Ventes et dépenses', `${E.plur(M.nV, 'vente', 'ventes')} · ${E.plur(M.nD, 'dépense', 'dépenses')} en novembre`, { sq: true }),
+    PL.row('chart', 'Résultats', `Depuis le 1er janvier : bénéfice de ${PL.m(E.annee.benef)}`, { sq: true }),
+    PL.row('repeat', 'Revenu récurrent', '', { sq: true, r: 'MRR ' + PL.m(E.recurrent.mrr) }),
+    PL.row('target', 'Suivis à la main', E.suivis.map((s) => s.n).join(' · '), { sq: true })])}
+  ${PL.sect('Ventes automatiques', '', '', { st: 'margin-top:10px' })}
+  ${PL.list([PL.row('link', 'Connecter Stripe', '', { sq: true, prem: true }), PL.row('import', 'Importer un fichier CSV', '', { sq: true, prem: true })])}
+  ${PL.foot(E.txt.stripe)}
+  ${PL.settings()}`);
+
+/* 3 · Ventes et dépenses */
+PL.mount('p3', PL.nv('', PL.rbtn('plus', 'Ajouter', 'gl')) + PL.ttl('Ventes et dépenses') + `
+  ${PL.seg(['Ventes', 'Dépenses'], 0, { st: 'margin-top:10px' })}
+  <div style="margin-top:10px">${PL.month('Novembre 2026')}</div>
+  ${PL.sect('Novembre 2026', 'Total ' + PL.m(M.ca), '', { st: 'margin-top:12px' })}
+  ${PL.list(M.v.slice().sort((a, b) => b.d - a.d).map(ui.vente), { cls: 'ent5-c' })}`);
+
+/* 4 · Vente (feuille) */
+PL.mount('p4', behind(), PL.sheet(`
+  <div class="ent5-amt"><span class="x-lab">Montant</span><div class="pl-num">289<small>$</small></div></div>
+  <div class="ent5-gap" style="margin-top:0">${PL.field('Date', E.court + ' 2026')}</div>
+  <div class="ent5-gap">${PL.field('Commandes', '3')}${PL.field('Nouveaux clients', '1')}${PL.field('Visiteurs', '88')}${PL.field('Note (facultatif)', '—', { ph: true })}</div>`, 'Vente', { left: 'Annuler', right: PL.sheetBtn('Enregistrer'), full: true }));
+
+/* 5 · Résultats, compte gratuit */
+PL.mount('p5', PL.nv('') + PL.ttl('Résultats') + `
+  ${PL.sect('Depuis le 1er janvier', '', '', { st: 'margin-top:12px' })}
+  ${PL.strip([[PL.m(E.annee.ca), 'Chiffre d\'affaires'], [PL.m(E.annee.benef), 'Bénéfice'], [PL.pct(E.annee.marge), 'Marge']])}
+  ${PL.sect('Ce mois-ci', E.periode.texte)}
+  ${PL.strip([[PL.m(M.ca), 'Chiffre d\'affaires'], [PL.m(M.dep), 'Dépenses'], [PL.m(M.benef), 'Bénéfice'], [PL.pct(M.marge), 'Marge']])}
+  <div style="margin-top:12px">${PL.lockCard(E.txt.verrou, 'Le graphique des six derniers mois et la liste « Mois par mois » s\'ouvrent avec Premium. Ta saisie reste gratuite.')}</div>`);
+
+/* 6 · Revenu récurrent */
+const R = E.recurrent, mr = E.mrr;
+PL.mount('p6', PL.nv('') + PL.ttl('Revenu récurrent') + `
+  <div style="margin-top:12px">${PL.kpis([PL.kpi('MRR', ent(R.mrr), ui.vari(R.croissance) + ' sur un mois', { unit: NBSP + '$', sm: true }), PL.kpi('ARR', ent(R.arr), 'MRR × 12', { unit: NBSP + '$', sm: true }), PL.kpi('Abonnés', ent(R.abonnes), PL.m(R.parAbonne) + ' chacun', { sm: true })], 3)}</div>
+  <div style="margin-top:10px">${PL.btn('Mettre à jour le MRR', { i: 'refresh' })}</div>
+  ${PL.card(PL.line({ series: [{ v: mr.map((x) => x.mrr), c: 'var(--c-ent)', area: true, dot: true }], min: 2000, max: 3600, yt: [2000, 3000], w: 319, h: 72, xl: [[0, 'juin'], [5, 'nov.']], aria: 'Revenu mensuel récurrent de 2 100 $ en juin à 3 420 $ en novembre' }), { t: 'MRR', right: '6 mois', st: 'margin-top:10px;padding-bottom:6px' })}
+  ${PL.list(mr.slice().reverse().map((x) => PL.row('', x.m + ' 2026', `${E.plur(x.abonnes, 'abonné', 'abonnés')} · ${PL.m(x.parAbonne, x.parAbonne % 1 ? 2 : 0)} chacun`, { r: PL.m(x.mrr), chev: false })), { cls: 'ent5-c', st: 'margin-top:10px' })}`);
+
+/* 7 · Mes indicateurs (feuille) */
+const grip = `<span class="ent5-grip" role="button" aria-label="${E.nouveau.ordre.glisser}"><i data-i="grip"></i></span>`;
+PL.mount('p7', behind(), PL.sheet(`
+  ${PL.sect(E.nouveau.ordre.titre, '4', '', { nw: true, st: 'margin-top:6px' })}
+  ${PL.list(E.indicateurs.coches.map((n, k) => PL.row('', n, k === 0 ? 'Déjà affiché en haut' : '', { chk: 'ok', chev: false }).replace(/<\/div>$/, (k === 0 ? '' : grip) + '</div>')), { cls: 'ent5-c' })}
+  ${PL.sect('Autres indicateurs', '7')}
+  ${PL.list(E.indicateurs.autres.map((n) => PL.row('', n, '', { chk: 'todo', chev: false })), { cls: 'ent5-c' })}`, 'Mes indicateurs', { right: PL.sheetBtn('OK'), full: true }));
+
+/* 8 · Première ouverture */
+PL.mount('p8', PL.nv('Business', '', { back: false }) + `<div style="margin-top:4px">${PL.wsel({ marks: [] })}</div>
+  <div style="margin-top:10px">${PL.empty('briefcase', E.txt.depart, 'Note une première vente ou une dépense : le chiffre d\'affaires, le bénéfice et la marge apparaîtront ici.')}</div>
+  <div class="ent5-two">${PL.btn('Vente', { i: 'plus' })}${PL.btn('Dépense', { k: 'O', i: 'minus' })}</div>
+  ${PL.sect('À remplir', '0 / 1', '', { st: 'margin-top:12px' })}
+  ${PL.card(PL.field('Chaque mois', '—', { ph: true }), { t: 'Objectif de chiffre d\'affaires', i: 'target' })}
+  ${PL.sect('Ventes automatiques', '', '', { st: 'margin-top:12px' })}
+  ${PL.list([PL.row('link', 'Connecter Stripe', '', { sq: true, prem: true }), PL.row('import', 'Importer un fichier CSV', '', { sq: true, prem: true })])}`);
+
+/* 9 · Mes paramètres (feuille) */
+const P_ = E.profil, N_ = E.nouveau.rappel;
+PL.mount('p9', behind(), PL.sheet(`
+  ${PL.sect('Ton activité', '', '', { st: 'margin-top:6px' })}
+  <div class="ent5-gap" style="margin-top:0">${PL.field('Nom', P_.nom)}</div>
+  ${PL.sect('Chaque mois')}
+  <div class="ent5-gap" style="margin-top:0">${PL.field('Objectif de CA', PL.m(P_.objectif))}${PL.field('Clients', String(P_.clients))}</div>
+  ${PL.sect('Réglages communs')}
+  <div class="ent5-gap" style="margin-top:0">${PL.field('Devise', P_.devise, { chev: true })}</div>
+  ${PL.sect(N_.titre, '', '', { nw: true })}
+  ${PL.kvs([PL.kv(N_.titre, PL.sw(true)), PL.kv(N_.texte, N_.heure)], { st: 'margin-top:0' })}`, 'Mes paramètres', { right: PL.sheetBtn('OK'), full: true }));
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [1, 'Grande carte « Chiffre d\'affaires » et sa variation.'], F2: [1, 'Segments « Jour », « Semaine », « Mois », « Année ».'],
+  F3: [[1, 8], 'Sélecteur de semaine, en tête ; points sur les jours notés.'], F4: [[1, 9], 'Jauge de la grande carte ; saisie dans « Chaque mois ».'],
+  F5: [[1, 4], 'Action flottante « Vente » ; feuille « Vente ».'], F6: [[1, 3], 'Action flottante « Dépense » ; « + » du journal.'],
+  F7: [3, 'Toucher une ligne du journal ; balayer pour supprimer.'], F8: [[1, 7], 'Trois tuiles ; feuille « Mes indicateurs », 11 lignes.'],
+  F9: [2, 'Carte « Chiffre d\'affaires cumulé » : période contre précédente.'], F10: [3, 'Page « Ventes et dépenses », « Ventes » / « Dépenses ».'],
+  F11: [5, 'Bloc « Depuis le 1er janvier ».'], F12: [5, 'Carte verrou sans Premium ; l\'analyse reste inchangée avec Premium.'],
+  F13: [[2, 6], 'Ligne « Revenu récurrent » ; page, bouton, courbe, mois.'], F14: [2, 'Ligne « Suivis à la main » : toujours dans la carte des pages.'],
+  F15: [[2, 8], 'Ligne « Importer un fichier CSV », badge Premium.'], F16: ['=', 'Conversion dans l\'aperçu de l\'import et la synchronisation, inchangée.'],
+  F17: [[2, 8], 'Ligne « Connecter Stripe », badge Premium.'], F18: ['=', 'Ligne Stripe connectée : « Synchroniser », inchangée (compte gratuit montré).'],
+  F19: ['=', 'Dialogue « Déconnecter Stripe ? », inchangé.'], F20: ['=', 'Note « La synchronisation Stripe est dans Premium », inchangée.'],
+  F21: [9, 'Chapitres « Ton activité » et « Chaque mois ».'], F22: [9, 'Chapitre « Réglages communs » › « Devise ».'],
+  F23: ['=', 'Fusion sans doublon à l\'import, automatique, inchangée.'], F24: ['=', 'Widgets : inchangés ; toucher l\'un ouvre cette page.'],
+  F25: ['=', 'Carte de Mon quotidien : mêmes mots, mallette, violet ; ouvre cette page.'], F26: ['=', 'Page de données de l\'espace (Studio), inchangée.'],
+  F27: ['=', 'Pastille et ligne « Mon entreprise » de « Mes informations », inchangées.'],
+});
+PL.init();
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Habitudes — Direction 5 : Hybride</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="habitudes.css">
+<style>
+  .hab5-c .li { padding: 6px 14px !important; min-height: 0 !important; }
+  .hab5-serie { display: flex; align-items: center; gap: 6px; font-size: 17px; font-weight: 700; letter-spacing: -.01em; }
+  .hab5-serie i { font-size: 20px; color: var(--cs); }
+  .hab5-hero { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px; }
+  .hab5-big { display: flex; align-items: baseline; gap: 8px; }
+  .hab5-ok { display: flex; align-items: center; gap: 10px; }
+  .hab5-grid { margin-top: 10px; }
+  .hab5-fiche .pl-field { margin-top: 0; }
+  .hab5-cal .pl-heat { gap: 3px; }
+  .hab5-cal .pl-heat > span:not(.h) { aspect-ratio: auto; height: 29px; font-size: 11.5px; }
+  .hab5-cal .pl-heat > span.on i { font-size: 14px; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="hab" data-kind="direction">
+
+  <header class="bd-head"><div class="num">5</div>
+    <div><div class="pl-kick">Direction 5 sur 5</div>
+      <h1>Direction 5 · Hybride</h1>
+      <p>« Cocher d'abord, comprendre ensuite » : une seule page remplace les deux écrans d'aujourd'hui. Elle dit « 3/5 », sépare « À faire » de « Faites » et se coche d'un toucher. Le détail d'une habitude (calendrier, meilleure série), le « Bilan » et les réglages sont rangés derrière. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte Premium (5 habitudes dépassent la limite gratuite de 3).</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Une page qui se coche, un détail qui s'explique</h3>
+      <p>Une habitude se coche en quelques secondes, souvent le soir. La page d'aujourd'hui garde donc l'essentiel : le « 3/5 » et la série de la carte de Mon quotidien, puis deux groupes. Le geste de tous les jours est un toucher ; la compréhension (calendrier, séries, régularité) vit dans le détail d'une habitude et dans « Bilan ».</p></div>
+    <div><h5>En ouvrant Habitudes</h5><ol>
+      <li data-p="1">« 3/5 » et « Série de 12 jours », comme la carte</li>
+      <li data-p="1">« À faire » : deux ronds à cocher de 44 points</li>
+      <li data-p="2">« Faites », le sélecteur de jour, « Ajouter une habitude »</li>
+      <li data-p="2">Toucher un nom ouvre son détail</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">« Cette semaine » : 5 habitudes sur 7 jours</li>
+      <li data-p="3">« Bilan », « Gérer mes habitudes »</li>
+      <li data-p="3">« Mes paramètres » : rappels, notifications</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">Le geste quotidien est plus court qu'aujourd'hui et l'on voit enfin ce qu'il reste. Le chiffre, le nom et l'icône sont ceux de Mon quotidien.</p>
+      <p class="minus">Quatre pages neuves à construire (détail, Bilan, paramètres, fréquence) ; en faire une mini-app touche la navigation du code ; la grille longue n'est plus sur la liste.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Aujourd'hui</div>
+      <div class="phone app pl-past t-saphir" data-c="hab" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Ce qu'il reste, d'abord</h4>
+        <p>Le héros reprend le chiffre de la carte de Mon quotidien. Ce qui reste à faire passe avant ce qui est fait, et chaque ligne a son rond de 44 points. Compte Premium.</p>
+        <ul><li><span class="tag e"></span><span>Sélecteur de jour, rond à cocher, « Série de N jours », « 90 % », « Modifier ».</span></li>
+          <li><span class="tag a"></span><span>« 3/5 » et la série sur la page (ils n'y étaient pas) ; action flottante « Ajouter une habitude » (un seul libellé) ; chevron : toucher le nom ouvre un détail.</span></li>
+          <li><span class="tag n"></span><span>Groupes « À faire » / « Faites » (la mission les demande ; aucun tri n'existe).</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Lecture 20 min ».</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Modifier ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Aujourd'hui, suite</div>
+      <div class="phone app pl-past t-saphir" data-c="hab" data-time="13:20" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>La semaine, puis trois portes</h4>
+        <p>La semaine se lit d'un regard. Trois lignes mènent au reste, avec les réglages en dernier, comme dans les autres mini-apps.</p>
+        <ul><li><span class="tag e"></span><span>« Gérer mes habitudes » (lien déjà dans l'app).</span></li>
+          <li><span class="tag a"></span><span>« Cette semaine » : la grille du widget Premium « Semaine d'habitudes », montrée sur la page (calcul inchangé, 18 sur 20).</span></li>
+          <li><span class="tag n"></span><span>Ligne « Mes paramètres » : Habitudes devient une mini-app, avec son cadre et ses réglages.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher « Bilan ».</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Gérer mes habitudes ».</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher « Mes paramètres ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Détail d'une habitude</div>
+      <div class="phone app pl-past t-saphir" data-c="hab" data-time="13:20" data-tab="0" id="p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Une page pour comprendre</h4>
+        <p>Toucher une habitude ouvre enfin ses chiffres au lieu du formulaire. « Meilleure série » et « 90 jours » sont Premium, comme aujourd'hui.</p>
+        <ul><li><span class="tag e"></span><span>« Série de 12 jours », régularité de 30 jours, meilleure série, 90 jours.</span></li>
+          <li><span class="tag a"></span><span>La grille de 26 semaines vient ici, une par habitude, au lieu d'alourdir la liste ; rond à cocher repris.</span></li>
+          <li><span class="tag n"></span><span>Page de détail et calendrier « Novembre 2026 » : les jours faits du mois, chiffres issus des jours déjà gardés.</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Modifier ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Bilan</div>
+      <div class="phone app pl-past t-saphir" data-c="hab" data-time="13:20" data-tab="0" id="p4"></div>
+      <div class="cap"><h4>Tout le suivi, en une page</h4>
+        <p>Les chiffres globaux et la « Régularité » par habitude, avec ses deux durées enfin nommées. Vue Premium.</p>
+        <ul><li><span class="tag e"></span><span>Section « Régularité » : « Meilleure série : N jours », « 30 j · 90 j » (Premium).</span></li>
+          <li><span class="tag a"></span><span>Les durées sont écrites sous chaque pourcentage (aujourd'hui seule une note le dit).</span></li>
+          <li><span class="tag n"></span><span>« Toutes les habitudes » : régularité globale, jours complets, barres par semaine. Rien de cela n'existe dans l'app.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Fiche « Habitude »</div>
+      <div class="phone app pl-past t-saphir" data-c="hab" data-time="13:20" data-tab="none" id="p5"></div>
+      <div class="cap"><h4>La même fiche, avec une fréquence</h4>
+        <p>La feuille d'aujourd'hui, champ pour champ, avec les jours de la semaine en plus.</p>
+        <ul><li><span class="tag e"></span><span>« Nom », « Icône », « Couleur », « Rappel quotidien », « Heure », « Supprimer l'habitude », « Enregistrer ».</span></li>
+          <li><span class="tag n"></span><span>« Fréquence » : « Certains jours » pour une habitude de la semaine. Demande de nouveaux champs ; le moteur de notifications sait déjà lire des jours prévus.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes habitudes, compte gratuit</div>
+      <div class="phone app pl-past t-saphir" data-c="hab" data-time="13:20" data-tab="0" id="p6"></div>
+      <div class="cap"><h4>Réordonner et voir la limite</h4>
+        <p>Le contenu de l'ancien écran liste, tel quel, dans le même chemin que la page : l'ordre décide de ce que montrent la carte et les widgets. Compte gratuit, trois premières habitudes (2 faites sur 3).</p>
+        <ul><li><span class="tag e"></span><span>« Modifier » (poignées de déplacement), « 3 sur 3 habitudes en version gratuite. », bouton d'ajout.</span></li>
+          <li><span class="tag a"></span><span>Atteint depuis la page principale, plus depuis le Profil seulement ; « Ajouter une habitude » ouvre l'offre « Plus de 3 habitudes ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Première ouverture</div>
+      <div class="phone app pl-past t-saphir" data-c="hab" data-time="13:20" data-tab="0" id="p7"></div>
+      <div class="cap"><h4>Une première habitude en un geste</h4>
+        <p>Sans habitude, la page dit à quoi elle sert et laisse écrire un nom : icône et couleur sont mises d'office.</p>
+        <ul><li><span class="tag e"></span><span>« Tes habitudes », le texte d'aide, « Ajouter une habitude », champ « Ex. : méditer, lire, marcher ».</span></li>
+          <li><span class="tag a"></span><span>L'ajout par le nom seul vient sur la page même (il n'était que dans « À remplir » et dans les premières questions).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes paramètres</div>
+      <div class="phone app pl-past t-saphir" data-c="hab" data-time="13:20" data-tab="0" id="p8"></div>
+      <div class="cap"><h4>Les rappels au même endroit</h4>
+        <p>Un seul écran dit quelle habitude sonne et quand ; « Rappels d'habitudes » ouvrait la liste des habitudes, pas des rappels.</p>
+        <ul><li><span class="tag e"></span><span>« Rappel quotidien » par habitude, interrupteur « Habitudes » des Rappels intelligents.</span></li>
+          <li><span class="tag a"></span><span>Les heures sont réunies en une liste ; l'interrupteur vient du Profil.</span></li>
+          <li><span class="tag n"></span><span>La page « Mes paramètres » d'Habitudes (mini-app à part).</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher une habitude.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col pl-w4"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Le rond à cocher et les jours passés, la série et la régularité de 30 jours (gratuites), la fiche « Habitude », les calculs (série, meilleure série, 30 et 90 jours, 400 jours gardés), les notifications, les widgets, les liens profonds.</span>
+          <b>Changé de place</b><span>Les deux écrans (cartes et liste) deviennent une page et « Mes habitudes ». La grille de 26 semaines passe dans le détail ; « Régularité » passe dans « Bilan ». Réordonner n'est plus qu'au Profil : « Modifier » est sur la page.</span>
+          <b>Laissé de côté</b><span>Les objectifs (cible par semaine, quantité, durée) : ils demandent de nouveaux champs et une règle de calcul ; à décider avec le PDG. La carte de Mon quotidien, la ligne de Planning et les widgets ne changent pas (la carte vide ouvre encore Planning : à corriger plus tard).</span>
+        </div>
+        <h4>Nouveau, à développer (5)</h4>
+        <p>1. Groupes « À faire » / « Faites » (écran 1) : un tri des habitudes du jour. 2. Page de détail et calendrier du mois (écran 3) : une vue, avec les jours déjà gardés. 3. « Bilan » (écran 4) : régularité globale, jours complets, barres par semaine. 4. « Fréquence » (écran 5) : habitudes hebdomadaires, avec de nouveaux champs. 5. Habitudes en mini-app à part et « Mes paramètres » (écrans 2 et 8) : une valeur à ajouter à la navigation du code ; à faire valider.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : 3 habitudes gratuites (le seul ajout est bloqué, rien de saisi ne l'est jamais), la série et la régularité de 30 jours gratuites. « Meilleure série », « 90 jours », « Cette semaine » et « Bilan » restent Premium, avec un verrou visible pour un compte gratuit.</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="habitudes.js"></script>
+<script>
+const H_ = HAB, U_ = HAB.ui, P_ = H_.par, NV_ = H_.nouveau;
+const hl = (list, cls = 'hab5-c') => PL.list(list.map((h) => U_.ligne(h)), { cls });
+
+/* 1 · Aujourd'hui */
+PL.mount('p1', PL.nv('Habitudes', PL.sheetBtn('Modifier'), { back: false }) + `<div style="margin-top:2px">${PL.day()}</div>
+  <article class="gl pl-hero split" style="margin-top:8px">${U_.ring()}
+    <div class="hab5-hero"><div class="pl-cap" style="margin:0">faites aujourd'hui</div>
+      <div class="hab5-serie"><i data-i="flame"></i>${H_.quotidien.serie}</div>
+      <div class="pl-cap" style="margin:0">${H_.longue.n}</div></div></article>
+  ${PL.sect(NV_.groupes[0], H_.afaire.length, '', { nw: true, st: 'margin-top:8px' })}
+  ${hl(H_.afaire)}
+  ${PL.sect(NV_.groupes[1], H_.faites.length, '', { st: 'margin-top:8px' })}
+  ${hl(H_.faites)}`, PL.fab('Ajouter une habitude', 'plus'));
+
+/* 2 · suite */
+PL.mount('p2', PL.nv('Habitudes', '', { back: false }) + `
+  ${PL.card(U_.semaine(), { t: 'Cette semaine', prem: true, right: H_.semaine.coches + ' sur ' + H_.semaine.total, st: 'margin-top:6px' })}
+  ${PL.list([PL.row('chart', 'Bilan', 'Régularité, semaines, jours complets', { sq: true }),
+    PL.row('repeat', 'Gérer mes habitudes', H_.total + ' habitudes', { sq: true })], { st: 'margin-top:10px' })}
+  ${PL.list([PL.row('gear', 'Mes paramètres', 'Rappels et notifications', { sq: true, nw: true })], { st: 'margin-top:10px' })}`);
+
+/* 3 · Détail d'une habitude */
+const L_ = P_.lec;
+PL.mount('p3', PL.nv('', PL.sheetBtn('Modifier')) + PL.ttl(L_.n) + `
+  ${PL.list([`<div class="li"><span class="hab-ck ok" role="button" aria-label="Marquer ${L_.n} comme non fait"><u><i data-i="check"></i></u></span><div class="tx"><b>${NV_.detail.fait}</b><span class="s">${H_.court}</span></div></div>`], { cls: 'hab5-c', st: 'margin-top:2px' })}
+  ${PL.strip([[H_.jours(L_.serie), 'Série'], [H_.jours(L_.meilleure), 'Meilleure série'], [PL.pct(L_.t30), '30 jours'], [PL.pct(L_.t90), '90 jours']], { st: 'margin-top:8px' })}
+  ${PL.card(PL.cal({ done: U_.novembre(L_), aria: 'Novembre 2026 : les 12 premiers jours sont faits' }), { t: NV_.detail.mois, nw: true, right: '12 jours faits', cls: 'hab5-cal', st: 'margin-top:10px' })}
+  ${PL.card(U_.grille(L_) + PL.leg([['var(--c)', 'Jour fait'], ['var(--track)', 'Jour non fait']]), { t: '26 dernières semaines', st: 'margin-top:10px;padding-bottom:6px' })}`);
+
+/* 4 · Bilan */
+const SM = H_.semaines;
+PL.mount('p4', PL.nv('Bilan') + `
+  ${PL.card(PL.strip([[PL.pct(H_.bilan.t30), 'Régularité · 30 jours'], [H_.serieMax + ' j', 'Série la plus longue'], [H_.bilan.complets + ' sur ' + H_.bilan.jours, 'Jours complets']], { st: 'box-shadow:none;background:none;padding:0 0 6px' })
+    + PL.bars({ g: SM.map((s) => ({ l: s.lundi, v: [Math.round(s.taux * 100)], cur: s.cur, hl: s.cur })), c: ['var(--c)'], max: 100, yt: [0, 50, 100], yf: (v) => v + ' %', h: 78, bw: 17, aria: 'Régularité de toutes les habitudes, par semaine, sur 8 semaines ; la semaine en cours est à 90 %' })
+    + PL.leg([['var(--c)', 'Semaine complète'], ['var(--c)', 'Semaine en cours', 'hat']]), { t: 'Toutes les habitudes', nw: true, right: 'par semaine, lundi indiqué', st: 'margin-top:4px' })}
+  ${PL.sect('Régularité', '30 j · 90 j', '', { prem: true, st: 'margin-top:10px' })}
+  ${PL.list(H_.habits.map((h) => PL.row('', h.n, 'Meilleure série : ' + H_.jours(h.meilleure), { r: PL.pct(h.t30) + ' · ' + PL.pct(h.t90), chev: false })), { cls: 'hab5-c' })}`);
+
+/* 5 · Fiche « Habitude » (feuille) */
+const nvIco = (h) => H_.icones.map((i) => `<span class="${i === 'book' ? 'on' : ''}" style="--k:${P_.lec.c}"><i data-i="${i}"></i></span>`).join('');
+const FQ = NV_.frequence;
+PL.mount('p5', PL.nv('Habitudes', '', { back: false }), PL.sheet(`<div class="hab5-fiche">
+  ${PL.field('Nom', P_.lec.n)}
+  <div class="hab-lab">Icône</div><div class="hab-ig">${nvIco()}</div>
+  <div class="hab-lab" style="display:flex;justify-content:space-between"><span>Couleur</span><span>Lilas</span></div>
+  <div class="hab-cg">${H_.couleurs.map(([n, c]) => `<span class="${n === 'Lilas' ? 'on' : ''}" aria-label="${n}"><u style="--k:${c}">${n === 'Lilas' ? '<i data-i="check"></i>' : ''}</u></span>`).join('')}</div>
+  ${PL.kvs([`<div class="pl-kv"><span>Rappel quotidien</span>${PL.sw(true)}</div>`, PL.kv('Heure', '20:00', { chev: true })], { st: 'margin-top:8px' })}
+  <div class="hab-lab" style="display:flex;align-items:center;gap:6px"><span>${FQ.t}</span>${PL.nw()}</div>
+  ${PL.seg(FQ.choix, 1)}
+  <div class="hab-dg">${FQ.jours.map((d, k) => `<span class="${FQ.choisis.includes(k) ? 'on' : ''}">${d}</span>`).join('')}</div>
+  <div class="hab-del" role="button">Supprimer l'habitude</div></div>`, 'Habitude', { left: 'Annuler', right: PL.sheetBtn('Enregistrer'), full: true }));
+
+/* 6 · Mes habitudes, compte gratuit */
+PL.mount('p6', PL.nv('Mes habitudes', PL.sheetBtn('OK')) + `
+  ${PL.list(H_.gratuit.habits.map((h) => PL.row(h.i, h.n, h.rappel ? 'Rappel : ' + h.rappel : 'Aucun rappel', { sq: true, c: h.c, chev: false, r: '<i data-i="lines" style="font-size:22px;color:var(--ink2)"></i>' })), { st: 'margin-top:6px' })}
+  ${PL.btn('Ajouter une habitude', { k: 'T', i: 'plus', st: 'margin-top:12px' })}
+  ${PL.foot(H_.limiteTxt(H_.gratuit.habits.length))}`);
+
+/* 7 · Première ouverture */
+PL.mount('p7', PL.nv('Habitudes', '', { back: false }) + `<div style="margin-top:14px">${PL.empty('repeat', H_.vide.t, H_.vide.p, H_.vide.btn)}</div>
+  ${PL.sect('Une habitude à suivre', '', '', { st: 'margin-top:14px' })}
+  ${PL.field('Nom', H_.vide.champ, { ph: true })}`);
+
+/* 8 · Mes paramètres */
+PL.mount('p8', PL.nv('Mes paramètres') + `
+  ${PL.sect('Rappels d\'habitudes', '', '', { nw: true, st: 'margin-top:4px' })}
+  ${PL.list(H_.habits.map((h) => PL.row(h.i, h.n, h.rappel ? 'Rappel quotidien' : 'Aucun rappel', { sq: true, c: h.c, r: h.rappel || '—' })), { cls: 'hab5-c' })}
+  ${PL.sect('Rappels intelligents', '', '', { st: 'margin-top:10px' })}
+  ${PL.list([`<div class="li"><div class="tx"><b>Habitudes</b><span class="s">${H_.intelligents}</span></div>${PL.sw(true)}</div>`])}`);
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [[1, 6], 'Groupes « À faire » et « Faites » ; liste de « Mes habitudes ».'],
+  F2: [[1, 3], 'Rond de chaque ligne ; coche « Faite aujourd\'hui » du détail.'],
+  F3: [1, 'Sélecteur de jour sous le titre ; « Choisir une date » inchangée.'],
+  F4: [[1, 3], 'Héros « Série de 12 jours » ; sous chaque nom ; tuile du détail.'],
+  F5: [[1, 3, 4], '« 90 % » sur la ligne ; tuile « 30 jours » ; liste de « Régularité ».'],
+  F6: [3, 'Carte « 26 dernières semaines » du détail.'],
+  F7: [[1, 5], 'Action flottante « Ajouter une habitude » et fiche « Habitude ».'],
+  F8: [[3, 5], 'Bouton « Modifier » du détail et fiche « Habitude ».'],
+  F9: [5, 'Bouton « Supprimer l\'habitude » au bas de la fiche.'],
+  F10: ['=', 'Balayage de la liste, inchangé (se dessine mal) ; sans confirmation, à décider.'],
+  F11: [6, 'Poignées de déplacement de « Mes habitudes », après « Modifier ».'],
+  F12: [[5, 8], 'Champs « Rappel quotidien » et « Heure » ; liste des heures.'],
+  F13: [4, 'Section « Régularité » du Bilan : meilleure série, 30 j · 90 j.'],
+  F14: [6, 'Pied « 3 sur 3 habitudes en version gratuite. » et bouton d\'ajout.'],
+  F15: [7, 'Champ « Ex. : méditer, lire, marcher » de l\'état vide.'],
+  F16: ['=', 'Carte de Mon quotidien : mêmes mots, « 3/5 » ; elle ouvre cette page.'],
+  F17: ['=', 'Ligne « Habitudes » de Planning, inchangée ; ouvre cette page.'],
+  F18: ['=', 'Widget « Habitudes » inchangé : coche sur l\'écran d\'accueil.'],
+  F19: ['=', 'Widget « Série » inchangé, comme la page d\'espace.'],
+  F20: [2, 'Grille « Cette semaine », même calcul que le widget Premium.'],
+  F21: ['=', 'Widget « Taux de réussite » inchangé (calcul du mois, différent).'],
+  F22: ['=', 'Lignes des widgets Premium « Ma journée » et « Maintenant », inchangées.'],
+  F23: [8, 'Interrupteur « Habitudes » des Rappels intelligents.'],
+  F24: ['=', 'Encouragement « Belle série » inchangé, réglé dans « Encouragements ».'],
+  F25: ['=', 'Page d\'espace côté Créer inchangée ; les notifications y mènent encore.'],
+  F26: ['=', 'Tuile du Profil et « Mes informations » inchangés.'],
+  F27: ['=', 'Liens tessera://habits et tessera://space/habits inchangés.'],
+  F28: ['=', 'Widget « Hydratation » reste dans la catégorie de Créer : à décider.'],
+});
+PL.init();
+</script>
+</body>
+</html>

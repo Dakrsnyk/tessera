@@ -1,0 +1,4 @@
+/* entreprise.css : le CSS commun du sujet « Entreprise » (préfixe ent-). À charger après cristal.css et planches.css.
+   Pièce : variation signée (le signe + ou − dit déjà le sens ; la couleur ne fait que l'appuyer). */
+.ent-v { font-weight: 650; color: var(--pl-ok); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ent-v.neg { color: var(--pl-over); }

@@ -1,0 +1,43 @@
+/* habitudes.css : pièces communes du sujet « Habitudes » (préfixe hab-). À charger après cristal.css et planches.css. */
+
+/* rond à cocher : cible de 44 points, rond de 28 (plein avec une coche = fait ; creux = à faire : jamais la couleur seule) */
+.hab-ck { width: 44px; height: 44px; margin: -8px 4px -8px -10px; display: grid; place-items: center; flex: none; }
+.hab-ck u { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--rule2, var(--track)); box-sizing: border-box; display: grid; place-items: center; color: #fff; text-decoration: none; }
+.hab-ck u i { font-size: 17px; --sw: 3; }
+.hab-ck.ok u { background: var(--c, var(--primary)); border-color: var(--c, var(--primary)); }
+.hab-nm { display: flex !important; align-items: center; gap: 6px; }
+.hab-nm i { font-size: 17px; flex: none; }
+.hab-nm span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* semaine : une rangée par habitude, 7 jours */
+.hab-wk { display: grid; grid-template-columns: 1fr repeat(7, 24px); gap: 7px 3px; align-items: center; }
+.hab-wk .n { font-size: 12.5px; line-height: 1.15; font-weight: 600; display: flex; align-items: center; gap: 5px; min-width: 0; }
+.hab-wk .n i { font-size: 15px; flex: none; }
+.hab-wk .d { font-size: 11px; text-align: center; font-weight: 700; color: var(--ink2); }
+.hab-wk .d.t { color: var(--ink); }
+.hab-wk .c { width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--rule2, var(--track)); box-sizing: border-box; display: grid; place-items: center; color: #fff; }
+.hab-wk .c i { font-size: 13px; --sw: 3.2; }
+.hab-wk .c.on { background: var(--c, var(--primary)); border-color: var(--c, var(--primary)); }
+.hab-wk .c.f { border: 1.5px dashed var(--rule2); opacity: .5; }
+
+/* grille des 26 dernières semaines : un carré par jour, plein si fait ; la dernière colonne est la semaine en cours */
+.hab-gr { display: grid; grid-template-columns: repeat(26, 1fr); grid-template-rows: repeat(7, auto); grid-auto-flow: column; gap: 2px; }
+.hab-gr s { display: block; aspect-ratio: 1; border-radius: 2.5px; background: var(--track); text-decoration: none; }
+.hab-gr s.on { background: var(--c, var(--primary)); }
+.hab-gr s.pre { background: transparent; border: 1px dashed var(--rule2); box-sizing: border-box; }
+.hab-gr s.f { visibility: hidden; }
+
+/* fiche : grille d'icônes, couleurs, jours */
+.hab-ig { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.hab-ig span { height: 44px; border-radius: 12px; background: var(--well); display: grid; place-items: center; font-size: 22px; color: var(--ink2); }
+.hab-ig span.on { background: color-mix(in srgb, var(--k, var(--primary)) 16%, var(--card, #fff)); box-shadow: inset 0 0 0 2px var(--k, var(--primary)); color: var(--k, var(--primary)); }
+.hab-cg { display: grid; grid-template-columns: repeat(8, 1fr); }
+.hab-cg span { height: 44px; display: grid; place-items: center; }
+.hab-cg u { width: 30px; height: 30px; border-radius: 50%; background: var(--k); color: #fff; display: grid; place-items: center; text-decoration: none; }
+.hab-cg span.on u { box-shadow: 0 0 0 2.5px var(--card, #fff), 0 0 0 4.5px var(--k); }
+.hab-cg u i { font-size: 16px; --sw: 3; }
+.hab-dg { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; margin-top: 8px; }
+.hab-dg span { height: 44px; border-radius: 22px; display: grid; place-items: center; font-size: 14px; font-weight: 650; background: var(--well); color: var(--ink2); }
+.hab-dg span.on { background: var(--cs, var(--primary)); color: #fff; }
+.hab-lab { margin: 12px 2px 6px; font-size: 13px; font-weight: 650; color: var(--ink2); }
+.hab-del { height: 44px; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 600; color: var(--pl-over); margin-top: 6px; }

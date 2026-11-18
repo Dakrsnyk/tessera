@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Photos et citations — Direction 5 : Hybride</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<link rel="stylesheet" href="photos.css">
+<style>
+  .pho5-two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .pho5-g { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 13px; }
+  .pho5-g .wide { grid-column: 1 / -1; }
+  .pho5-stage { height: 164px; margin-top: 2px; }
+  .pho5-tools { margin: 10px 0 0; }
+  .pho5-tools div { flex: 1; width: auto; height: 54px; }
+  .pho5-h { display: flex; align-items: center; gap: 8px; margin: 12px 4px 6px; font-size: 15px; font-weight: 700; letter-spacing: -.005em; }
+  .pho5-h span.r { margin-left: auto; font-size: 13px; font-weight: 500; color: var(--ink2); }
+  .pho5-p { margin: 0; font-size: 13.5px; line-height: 1.4; color: var(--ink2); }
+  .pho5-lnk { display: flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 4px; font-size: 15px; font-weight: 650; color: var(--cs); }
+  .pho5-lnk i { font-size: 18px; }
+  .pho5-ta { height: 84px; border-radius: 16px; background: var(--well); padding: 10px 14px; }
+  .pho5-ta .cur { display: inline-block; width: 2px; height: 18px; background: var(--primary); vertical-align: -3px; border-radius: 1px; }
+  .pho5-gap { display: flex; flex-direction: column; gap: 8px; }
+  .pho5-nb { border-radius: 14px; padding: 4px 0 2px; }
+  .pho5-th { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 8px; }
+  .pho5-tb { position: relative; aspect-ratio: 1; border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.5); }
+  .pho5-tb b { position: absolute; left: 6px; top: 6px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 12px; background: rgba(255,255,255,.88); color: #1B2333; font-size: 12.5px; font-weight: 700; display: grid; place-items: center; }
+  .pho5-tb.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary); }
+  .pho5-act { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
+  .pho5-act span { height: 44px; border-radius: 14px; background: var(--tint); color: var(--primary); display: grid; place-items: center; font-size: 13.5px; font-weight: 650; }
+  .pho5-sz { grid-template-columns: repeat(3, 1fr); }
+  .pho5-ly { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; align-items: end; }
+  .pho5-ly div { text-align: center; font-size: 12px; font-weight: 600; color: var(--ink2); }
+  .pho5-ly u { position: relative; display: block; margin: 0 auto 6px; width: 62px; height: 36px; border-radius: 9px; background: var(--well); border: 1.8px solid var(--rule2); overflow: hidden; }
+  .pho5-ly u i { position: absolute; background: var(--rule2); box-shadow: inset 0 0 0 1px var(--well); }
+  .pho5-ly .on { color: var(--primary); } .pho5-ly .on u { border-color: var(--primary); background: var(--tint); }
+  .pho5-ly .on u i { background: color-mix(in srgb, var(--primary) 45%, #fff); }
+  .pho5-ty { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+  .pho5-ty span { height: 44px; border-radius: 14px; background: var(--well); display: grid; place-items: center; font-size: 14px; color: var(--ink); }
+  .pho5-ty span.on { background: var(--tint2); color: var(--primary); box-shadow: inset 0 0 0 2px var(--primary); font-weight: 700; }
+  .pho5-pal { display: flex; gap: 8px; margin-right: -20px; overflow: hidden; }
+  .pho5-pal span { flex: none; width: 48px; height: 48px; border-radius: 15px; display: grid; place-items: center; font-size: 17px; font-weight: 700; border: 1px solid rgba(11,18,32,.1); }
+  .pho5-pal span.on { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--primary); }
+  .pho5-bg { display: flex; align-items: center; gap: 12px; }
+  .pho5-bgv { width: 106px; height: 50px; border-radius: 10px; flex: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.5); }
+  .pho5-bgt { font-size: 13.5px; line-height: 1.35; color: var(--ink2); }
+  .pho5-bt { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 6px; margin-top: 8px; }
+  .pho5-bt span { min-height: 44px; border-radius: 14px; background: var(--tint); color: var(--primary); display: grid; place-items: center; text-align: center; font-size: 12.5px; line-height: 1.2; font-weight: 650; padding: 0 4px; }
+  .pho5-sl { display: flex; align-items: center; gap: 10px; margin-top: 8px; min-height: 40px; font-size: 13.5px; }
+  .pho5-sl > span:first-child { flex: none; width: 118px; line-height: 1.25; }
+  .pho5-sl .tr { position: relative; flex: 1; height: 6px; border-radius: 3px; background: var(--track); }
+  .pho5-sl .tr i { position: absolute; left: 0; top: 0; bottom: 0; width: 42%; border-radius: 3px; background: var(--primary); }
+  .pho5-sl .tr u { position: absolute; left: 42%; top: -9px; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%; background: #fff; box-shadow: 0 1px 5px rgba(11,18,32,.3); }
+  .pho5-sw { display: inline-block; width: 20px; height: 20px; border-radius: 50%; border: 1px solid rgba(11,18,32,.15); }
+  .pho5-two2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .pho5-ta2 { min-height: 148px; border-radius: 16px; background: var(--well); padding: 12px 14px; font-size: 14.5px; line-height: 1.5; overflow: hidden; }
+  .pho5-ta2 div { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pho5-pv { display: flex; align-items: baseline; gap: 10px; min-height: 34px; font-size: 14px; border-top: 1px solid var(--rule); }
+  .pho5-pv b { flex: none; width: 22px; color: var(--ink2); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pho5-pv span { flex: 1; min-width: 0; padding: 6px 0; line-height: 1.3; }
+  .pho5-big { display: flex; align-items: baseline; gap: 8px; }
+  .pho5-big b { font-size: 30px; font-weight: 750; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+  .pho5-pop { position: absolute; z-index: 40; right: 20px; width: 250px; background: #fff; border-radius: 18px; box-shadow: 0 14px 40px rgba(11,18,32,.28); padding: 4px 0; }
+  .pho5-pop div { display: flex; align-items: center; gap: 12px; height: 44px; padding: 0 16px; font-size: 15.5px; font-weight: 550; color: #1B2333; border-top: 1px solid rgba(11,18,32,.07); }
+  .pho5-pop div:first-child { border-top: 0; }
+  .pho5-pop div i { font-size: 18px; color: #4A5468; }
+  .pho5-pop div.red, .pho5-pop div.red i { color: var(--pl-over); }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="pho" data-kind="direction">
+
+  <header class="bd-head"><div class="num">5</div>
+    <div><div class="pl-kick">Direction 5 sur 5</div>
+      <h1>Direction 5 · Hybride</h1>
+      <p>« Voir d'abord, régler ensuite » : la page devient la galerie de ses widgets (vraies proportions, un menu « … » par tuile) et dit ce qui s'affiche aujourd'hui. L'éditeur devient un atelier : l'aperçu reste en haut et les réglages se rangent en trois chapitres, « Contenu », « Disposition » et « Style ». Deux ajouts demandés : importer ses propres textes (« Mes textes ») et faire défiler un texte ou une photo par jour (« Un par jour »). Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit. Aucune vraie photo : des cadres dégradés.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Voir d'abord, régler ensuite</h3>
+      <p>Personne ne vient ici tous les jours : on y vient fabriquer un widget, puis le retoucher. La page montre donc ses widgets tels qu'ils sont posés, avec leurs actions sous la main, et ce qu'ils affichent aujourd'hui. L'éditeur garde l'aperçu en haut (aujourd'hui il sort de l'écran dès qu'on défile) et sépare ce qu'on écrit, comment ça se range et comment ça se voit.</p></div>
+    <div><h5>En ouvrant Photos et citations</h5><ol>
+      <li data-p="1">« Aujourd'hui » : « Jour 12 sur 365 »</li>
+      <li data-p="1">« Photos » (bouton plein) et « Citation »</li>
+      <li data-p="2">« Mes widgets » : aperçus en vraies proportions</li>
+      <li data-p="3">Menu « … » de chaque tuile</li></ol></div>
+    <div><h5>Dans l'atelier</h5><ol>
+      <li data-p="1">Aperçu fixe en haut, toujours vu</li>
+      <li data-p="2">Chapitres « Contenu », « Disposition », « Style »</li>
+      <li data-p="3">Ordre et retrait des photos, visibles</li>
+      <li data-p="3">« Mes textes » et « Un par jour » (nouveaux)</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">Le réglage se fait en voyant le résultat, les actions de « Mes widgets » arrivent dans la mini-app, et l'on sait enfin ce que le widget montrera aujourd'hui.</p>
+      <p class="minus">Trois nouveautés à bâtir (import, « Un par jour », bloc « Aujourd'hui ») ; Photos n'a pas de chapitre « Style » (rien à y mettre) ; aucune carte dans Mon quotidien : Photos en est exclue et rien n'est daté.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Page principale</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>Ce que chaque widget montre</h4>
+        <p>En haut, le jour du texte affiché. Dessous, les widgets en vraies proportions : un Moyen occupe toute la largeur, un Petit la moitié.</p>
+        <ul><li><span class="tag e"></span><span>Boutons « Photos » (plein) et « Citation », section « Mes widgets » (aperçu réel, nom, « Photos · Petit »), tri par dernier usage.</span></li>
+          <li><span class="tag a"></span><span>Le bandeau « Tes widgets photo » (le nombre, oublie les citations, et une règle de confidentialité) devient « Mes widgets » avec le nombre en détail ; la tuile « + » disparaît (doublon des boutons) ; chaque tuile gagne un menu « … » ; légende en 12,5.</span></li>
+          <li><span class="tag n"></span><span>Bloc « Aujourd'hui » : « Jour 12 sur 365 » et « Un par jour » sous le nom de la tuile.</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Toucher « … » de la tuile « Balades ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Citation ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Menu d'une tuile</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Les actions, sans quitter la page</h4>
+        <p>« Dupliquer », « Favori », « Supprimer » demandaient d'aller dans « Mes widgets », ou d'ouvrir l'éditeur et de descendre tout en bas.</p>
+        <ul><li><span class="tag a"></span><span>Les six actions de « Mes widgets » sur ces widgets : « Modifier », « Dupliquer », « Créer une variante », « Favori », « Ajouter à l'écran », « Supprimer » (confirmation inchangée).</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher « Modifier » (ou la tuile).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Photos · Contenu</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="none" id="p3"></div><span class="flow"></span>
+      <div class="cap"><h4>Les photos, leur ordre, leur recadrage</h4>
+        <p>Sept photos, quatre à la fois : les vignettes se rangent en grille, sans défilement caché, et les actions de l'appui long sont devant soi.</p>
+        <ul><li><span class="tag e"></span><span>« Widget photo », « Annuler » / « Enregistrer », « Nom du widget », « Ajouter des photos » (12 au plus), vignettes numérotées, phrase de rotation, « Recadrer », « Avancer », « Reculer », « Retirer ».</span></li>
+          <li><span class="tag a"></span><span>Aperçu fixe en haut ; le nom monte en tête (il était à l'étape 3) ; les actions de l'appui long (le menu reste) deviennent une rangée ; les vignettes passent d'une rangée qui défile à une grille.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher le chapitre « Disposition ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Photos · Disposition et « Un par jour »</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="none" id="p4"></div>
+      <div class="cap"><h4>Quatre à la fois, ou une par jour</h4>
+        <p>Le réglage garde la rotation d'aujourd'hui et en ajoute une : une photo différente chaque jour, dans l'ordre ou au hasard. L'aperçu montre la photo du jour.</p>
+        <ul><li><span class="tag e"></span><span>« Petit », « Moyen », « Grand » ; mise en page automatique (de « 1 photo » à « 4 photos » : le calcul existe, il ne se voyait pas) ; rotation à l'heure par 4 photos.</span></li>
+          <li><span class="tag n"></span><span>« Un par jour » (photos) : « Dans l'ordre » / « Au hasard », changement à minuit, « Aujourd'hui » (photo 5 sur 7). Aujourd'hui le widget ne change qu'à l'heure.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Citation · Contenu</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="none" id="p5"></div><span class="flow"></span>
+      <div class="cap"><h4>Écrire, ou importer ses textes</h4>
+        <p>Citation neuve : « Enregistrer » reste grisé tant que le texte est vide, et l'aperçu dit « Ta citation ici ». Une carte propose d'importer ses propres textes.</p>
+        <ul><li><span class="tag e"></span><span>« Widget citation », « Ta citation », « Auteur (facultatif) », « Nom du widget » (« Ma citation »), « Essayer avec un exemple », « Enregistrer » grisé.</span></li>
+          <li><span class="tag a"></span><span>Les champs montent en tête du chapitre « Contenu » ; la taille passe dans « Disposition ».</span></li>
+          <li><span class="tag n"></span><span>Carte « Mes textes » : importer un recueil, un texte s'affiche chaque jour.</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Importer mes textes ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Mes textes (import)</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="none" id="p6"></div><span class="flow"></span>
+      <div class="cap"><h4>Coller ou importer, voir le total</h4>
+        <p>Un texte par ligne ou par paragraphe. L'app ne nomme ni ne classe rien : elle compte les textes, montre les premiers et demande le jour de départ.</p>
+        <ul><li><span class="tag n"></span><span>Feuille « Mes textes » : « Coller » / « Fichier » (sélecteur de fichiers d'iOS, non dessiné), « Un texte par » ligne ou paragraphe, aperçu « 365 textes », « Aujourd'hui » ou « Choisir le jour », bouton « Importer 365 textes ».</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher « Importer 365 textes ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Citation · Disposition et « Un par jour »</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="none" id="p7"></div><span class="flow"></span>
+      <div class="cap"><h4>Un texte par jour, dans l'ordre</h4>
+        <p>Le réglage vient avec l'import. Le changement se fait à minuit ; le texte 12 s'affiche aujourd'hui, le 13 demain.</p>
+        <ul><li><span class="tag e"></span><span>« Petit », « Moyen », « Grand » ; interrupteurs « Centrée » et « Guillemets » (ici avec « Moyen »).</span></li>
+          <li><span class="tag n"></span><span>« Un texte par jour » : « Dans l'ordre » / « Au hasard », « Change à minuit », « Aujourd'hui » : « Jour 12 sur 365 » (le jour 1 est le dimanche 1er novembre).</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher le chapitre « Style ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Citation · Style</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="none" id="p8"></div>
+      <div class="cap"><h4>L'allure, dans un seul chapitre</h4>
+        <p>« Photo de fond » passe avant « Fond » et « Texte » : avec une photo, la couleur de fond ne sert plus, et le champ se grise.</p>
+        <ul><li><span class="tag e"></span><span>« Typographie » (4), « Couleurs » (8 paires), « Photo de fond » (vignette, « Voile pour la lisibilité », « Recadrer », « Changer de photo », « Retirer »), « Fond » et « Texte ».</span></li>
+          <li><span class="tag a"></span><span>Regroupé dans « Style » ; « Photo de fond » monte avant « Fond » (il était après « Couleurs ») ; « Fond » est grisé quand une photo est choisie.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Première ouverture</div>
+      <div class="phone app t-saphir" data-c="pho" data-time="13:20" data-tab="0" id="p9"></div>
+      <div class="cap"><h4>Un état vide qui dit la vérité</h4>
+        <p>Compte gratuit, aucun widget. Le texte vide est corrigé : il annonçait « deux étapes » (l'éditeur en numérote trois) et « une à quatre » photos (la limite est 12).</p>
+        <ul><li><span class="tag e"></span><span>Bandeau « 0 widget » et sa règle de confidentialité, les deux boutons, « Mes widgets » avec son texte seul, la note de pied « Pour le poser… ».</span></li>
+          <li><span class="tag a"></span><span>Libellé « Tes widgets » ; texte vide corrigé (libellé à confirmer) ; la note « Pour le poser » reste en bas de page.</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Tout le modèle et les calculs (photos de 1 à 12, quatre à la fois, rotation à l'heure, cases, cadrage, voile, couleur du texte sur photo, copies de photos), la feuille « Recadrer » (fond noir, glisser, pincer, « Zoom »), les confirmations, les modes Clair et Teinté, « Photo indisponible », l'ouverture de l'éditeur depuis Créer, Mes widgets et le toucher du widget posé, « Fusionner », la promesse de confidentialité (sélecteur d'Apple, aucun accès à la photothèque). Tout reste gratuit et illimité.</span>
+          <b>Changé de place</b><span>La page devient une galerie en vraies proportions, avec « Aujourd'hui » en tête et un menu « … » par tuile ; la tuile « + » disparaît. L'éditeur garde un aperçu fixe et range ses réglages en « Contenu », « Disposition » et « Style » (deux chapitres pour Photos, qui n'a pas de style). Le nom monte, la taille descend en « Disposition », « Photo de fond » passe avant « Fond » et « Texte », l'ordre des photos se voit.</span>
+          <b>Laissé de côté</b><span>Albums, bibliothèque ou citation du jour fournie par l'app, rotation réglable à l'heure, mise en page au choix, widgets d'écran verrouillé, partage, filtres, statistiques, carte dans Mon quotidien (rien de daté à y mettre), confirmation du bouton « Annuler », guide de pose proposé après « Enregistrer » : des idées de l'audit, hors de cette direction.</span>
+        </div>
+        <h4>Nouveau, à développer (3)</h4>
+        <p>1. Mes textes (écrans 5 et 6) : importer un recueil de la personne, un texte par ligne ou par paragraphe, avec le total et le jour de départ ; l'app ne nomme ni ne classe aucune catégorie. 2. Un par jour (écrans 4 et 7) : pour des textes ou une série de photos, ordre « Dans l'ordre » / « Au hasard », changement à minuit, indicateur « Jour 12 sur 365 » ; demande de mettre à jour le widget à minuit, que l'app ne fait pas (aujourd'hui : à l'heure, ou jamais). 3. « Aujourd'hui » sur la page (écran 1) : le jour et ce que montre le widget « Un par jour ». À décider : le « Au hasard » est-il mélangé une fois ou retiré chaque jour ?</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : tout est gratuit, sans limite ni verrou (l'offre Premium affiche ∞ pour « Photos et citations »). Aucune des trois nouveautés n'est proposée en Premium dans cette planche.</p>
+        <h4>Données d'exemple</h4>
+        <p>Trois widgets : « Mes textes » (Citation · Moyen, 365 textes neutres inventés, jour 12), « Mes photos » (4 photos) et « Balades » (7 photos). Cadres dégradés à la place des photos ; typographies et paires de couleurs de l'app (seules les teintes de « Papier » sont connues, les sept autres sont des teintes d'exemple).</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="photos.js"></script>
+<script>
+const W = PHO.widgets, ui = PHO.ui, nvx = PHO.nouveau, J = nvx.parJour, K = PHO.nouveau.recueil;
+const ph = PHO.photos;
+Object.assign(P, {});
+
+/* ---- pièces de la planche ---- */
+const buttons = () => `<div class="pho5-two">${PL.btn('Photos', { i: 'images' })}${PL.btn('Citation', { k: 'T', i: 'quote', st: 'color:var(--cs)' })}</div>`;
+/* 1 · page principale (fond des feuilles et du menu) */
+const page1 = (bg) => PL.nv('Photos et citations', '', { back: false }) + `
+  <div style="margin-top:4px">${PL.hero({ lab: 'Aujourd\'hui ' + (bg ? '' : PL.nw()), fig: 'Jour ' + J.texte.n, unit: 'sur ' + J.texte.total, size: 'sm', cls: bg ? '' : 'pl-newbox', line: 'Mes textes · prochain texte à minuit' })}</div>
+  ${buttons()}
+  ${PL.sect('Mes widgets', '3 widgets', '', { st: 'margin-top:10px' })}
+  <div class="pho5-g"><div class="wide">${ui.tuile(W[0], { w: 353 })}</div>${ui.tuile(W[1], { w: 170 })}${ui.tuile(W[2], { w: 170 })}</div>`;
+PL.mount('p1', page1());
+
+/* 2 · menu d'une tuile */
+const menu = [['pencil', 'Modifier'], ['copy', 'Dupliquer'], ['layers', 'Créer une variante'], ['heart', 'Favori'], ['phone', 'Ajouter à l\'écran'], ['trash', 'Supprimer', 'red']];
+PL.mount('p2', page1(true), `<div class="dim"></div><div class="pho5-pop" style="top:392px">${menu.map(([i, t, c]) => `<div class="${c || ''}" role="menuitem"><i data-i="${i}"></i>${t}</div>`).join('')}</div>`);
+
+/* ---- l'atelier : aperçu fixe, chapitres, enregistrer ---- */
+const tabs = (items, on) => `<div class="tools pho5-tools" role="tablist">${items.map(([i, l], k) => `<div${k === on ? ' class="on"' : ''} role="tab"><i data-i="${i}"></i>${l}</div>`).join('')}</div>`;
+const TAB3 = [['lines', 'Contenu'], ['frame', 'Disposition'], ['palette', 'Style']], TAB2 = TAB3.slice(0, 2);
+const stage = (w, px) => `<div class="stage pho5-stage">${ui.widget(w, { w: px })}</div>`;
+const enreg = (off) => `<span class="rb txt" style="padding:0 4px${off ? ';opacity:.4' : ''}" role="button"${off ? ' aria-disabled="true"' : ''}>Enregistrer</span>`;
+const atelier = (id, titre, body, off) => PL.mount(id, page1(true), PL.sheet(body, titre, { left: 'Annuler', right: enreg(off), full: true }));
+const h = (t, r, n) => `<div class="pho5-h">${t}${n ? PL.nw() : ''}${r ? `<span class="r">${r}</span>` : ''}</div>`;
+const sizes = (on) => `<div class="sizes pho5-sz" role="group" aria-label="Taille">${[['Petit', 36, 36], ['Moyen', 62, 30], ['Grand', 48, 48]].map(([n, w, hh], k) => `<div${k === on ? ' class="on"' : ''}><u style="width:${w}px;height:${hh}px"></u><b>${n}</b></div>`).join('')}</div>`;
+const seg = (items, on) => PL.seg(items, on);
+
+/* 3 · Photos · Contenu : « Balades », 7 photos */
+const bal = W[2], balP = bal.p;
+const thumbs = balP.map((k, i) => `<div class="pho5-tb${i === 3 ? ' on' : ''}" style="background:${ph[k].bg}" role="img" aria-label="Photo ${i + 1} sur 7"><b>${i + 1}</b></div>`).join('');
+atelier('p3', 'Widget photo', stage(bal, 130) + tabs([['images', 'Contenu'], TAB2[1]], 0) + `
+  <div style="margin-top:12px">${PL.field('Nom du widget', 'Balades')}</div>
+  ${h('Les photos')}
+  ${PL.btn('Ajouter des photos', { i: 'plus' })}
+  <div class="pho5-th" role="list">${thumbs}</div>
+  <div class="pho5-act"><span role="button">Recadrer</span><span role="button">Avancer</span><span role="button">Reculer</span><span role="button">Retirer</span></div>
+  <p class="pho5-p" style="margin-top:10px">${PHO.txt.rotation}</p>`);
+
+/* 4 · Photos · Disposition et « Un par jour » : la photo 5 sur 7 est celle du jour 12 */
+const lay = (n) => { const c = { 1: [[0, 0, 1, 1]], 2: [[0, 0, .5, 1], [.5, 0, .5, 1]], 3: [[0, 0, .5, 1], [.5, 0, .5, .5], [.5, .5, .5, .5]], 4: [[0, 0, .5, .5], [.5, 0, .5, .5], [0, .5, .5, .5], [.5, .5, .5, .5]] }[n];
+  return `<div${n === 1 ? ' class="on"' : ''}><u>${c.map(([x, y, w, hh]) => `<i style="left:${x * 100}%;top:${y * 100}%;width:${w * 100}%;height:${hh * 100}%"></i>`).join('')}</u>${n} photo${n > 1 ? 's' : ''}</div>`; };
+atelier('p4', 'Widget photo', stage({ ...bal, vis: [J.photos.index] }, 130) + tabs([['images', 'Contenu'], TAB2[1]], 1) + `
+  ${h('Taille')}${sizes(0)}
+  ${h('Mise en page automatique')}<div class="pho5-ly">${[1, 2, 3, 4].map(lay).join('')}</div>
+  <div class="pl-newbox" style="margin:14px 0 0;border-radius:12px">${h('Défilement', '', true)}${seg(['Quatre à la fois', 'Un par jour'], 1)}
+  <div style="margin-top:8px">${ui.jour({ ordre: 0, demain: 'demain : ' + J.photos.demain, auj: 'Jour ' + J.texte.n + ' · photo ' + (J.photos.index + 1) + ' sur ' + J.photos.serie })}</div></div>`);
+
+/* 5 · Citation · Contenu : citation neuve, vide */
+atelier('p5', 'Widget citation', stage(PHO.nouvelle, 130) + tabs(TAB3, 0) + `
+  <div class="pho5-gap" style="margin-top:12px">
+    <div class="pho5-ta"><span class="x-lab">Ta citation</span><div style="margin-top:6px"><i class="cur"></i></div></div>
+    ${PL.field('Auteur (facultatif)', '', { ph: true })}${PL.field('Nom du widget', 'Ma citation')}</div>
+  <div class="pho5-lnk" role="button"><i data-i="sparkles"></i>Essayer avec un exemple</div>
+  ${PL.card(`<p class="pho5-p">Un texte par jour, pris dans ton recueil.</p><div style="margin-top:10px">${PL.btn('Importer mes textes', { k: 'T', i: 'import', st: 'color:var(--cs)' })}</div>`, { t: K.titre, i: 'import', nw: true, st: 'margin-top:12px' })}`, true);
+
+/* 6 · Mes textes : l'import */
+PL.mount('p6', page1(true), PL.sheet(`
+  ${seg(['Coller', 'Fichier'], 0)}
+  <div class="pho5-ta2" style="margin-top:8px" aria-label="Textes collés">${K.lignes.slice(0, 6).map((t) => `<div>${t}</div>`).join('')}<div>…</div></div>
+  <div style="display:flex;align-items:center;gap:12px;margin-top:10px"><span class="x-lab" style="flex:none">Un texte par</span><div style="flex:1">${seg(['Ligne', 'Paragraphe'], 0)}</div></div>
+  ${PL.card(`<div class="pho5-big"><b>${PL.n(K.total)}</b><span class="s">textes trouvés</span></div>${K.lignes.slice(0, 3).map((t, i) => `<div class="pho5-pv"><b>${i + 1}</b><span>${t}</span></div>`).join('')}`, { t: 'Aperçu', st: 'margin-top:10px' })}
+  ${h('Commencer')}${seg(['Aujourd\'hui', 'Choisir le jour'], 1)}
+  <div style="margin-top:8px">${PL.field('Premier texte le', '1 novembre 2026')}</div>
+  <p class="pho5-p" style="margin:8px 4px 0">Aujourd'hui, jeudi 12 novembre : texte ${J.texte.n} sur ${PL.n(J.texte.total)}.</p>
+  <div style="margin-top:12px">${PL.btn('Importer ' + PL.n(K.total) + ' textes', { lg: true })}</div>`, 'Mes textes ' + PL.nw(), { left: 'Annuler', full: true }));
+
+/* 7 · Citation · Disposition et « Un texte par jour » : Moyen, le texte 12 */
+const q7 = { type: 'citation', taille: 'Moyen', q: { ...PHO.citationFinale, pal: 'Papier', fond: null } };
+atelier('p7', 'Widget citation', stage(q7, 250) + tabs(TAB3, 1) + `
+  ${h('Taille')}${sizes(1)}
+  <div style="margin-top:12px">${PL.kvs([PL.kv('Centrée', PL.sw(true)), PL.kv('Guillemets', PL.sw(true))])}</div>
+  <div class="pl-newbox" style="margin:16px 0 0;border-radius:12px">${PL.kvs([PL.kv('Un texte par jour', PL.sw(true), { nw: true })])}
+  <div style="margin-top:8px">${ui.jour({ ordre: 0, demain: 'demain : ' + J.texte.demain, auj: 'Jour ' + J.texte.n + ' sur ' + PL.n(J.texte.total) })}</div></div>`);
+
+/* 8 · Citation · Style : Nuit, Serif, photo de fond, voile 0,4 */
+const finale = { ...PHO.citationFinale }, q8 = { type: 'citation', taille: 'Moyen', q: finale };
+atelier('p8', 'Widget citation', stage(q8, 250) + tabs(TAB3, 2) + `
+  ${h('Typographie')}<div class="pho5-ty" role="group" aria-label="Typographie">${PHO.polices.map((f, k) => `<span class="${k === 0 ? 'on' : ''}" style="font-family:${f.css.split(';')[0]};${/italic/.test(f.css) ? 'font-style:italic;' : /650/.test(f.css) ? 'font-weight:650;' : ''}">${f.n}</span>`).join('')}</div>
+  ${h('Couleurs', 'Nuit')}<div class="pho5-pal" data-scroll role="group" aria-label="Couleurs">${PHO.palettes.map((p, k) => `<span class="${k === 1 ? 'on' : ''}" style="background:${p.bg};color:${p.ink}" role="button" aria-label="${p.n}">Aa</span>`).join('')}</div>
+  ${h('Photo de fond')}
+  <div class="pho5-bg"><span class="pho5-bgv" style="background:${ph[PHO.citationFinale.fond].bg}" role="img" aria-label="Photo de fond"></span><div class="pho5-bgt">Une photo, aux proportions du widget.</div></div>
+  <div class="pho5-bt"><span role="button">Recadrer</span><span role="button">Changer de photo</span><span role="button">Retirer</span></div>
+  <div class="pho5-sl"><span>Voile pour la lisibilité</span><div class="tr" role="slider" aria-label="Voile pour la lisibilité" aria-valuemin="0.15" aria-valuemax="0.75" aria-valuenow="0.4"><i></i><u></u></div></div>
+  <div class="pho5-two2">${PL.field('Fond', '<span class="pho5-sw" style="background:#1C2437"></span>').replace('class="pl-field"', 'class="pl-field" style="opacity:.45"')}${PL.field('Texte', '<span class="pho5-sw" style="background:#F1ECE2"></span>')}</div>`);
+
+/* 9 · première ouverture : aucun widget */
+PL.mount('p9', PL.nv('Photos et citations', '', { back: false }) + `
+  <div style="margin-top:4px">${PL.hero({ lab: 'Tes widgets', fig: '0', unit: 'widget', size: 'sm', line: PHO.txt.confidentialite })}</div>
+  ${buttons()}
+  ${PL.sect('Mes widgets', '', '', { st: 'margin-top:10px' })}
+  ${PL.card(`<p class="pho5-p" style="font-size:14.5px">${PHO.txt.vide}</p>`)}
+  ${PL.foot(PHO.txt.pose)}`);
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [[1, 9], 'Bouton « Photos » (plein), sous le bloc « Aujourd\'hui ».'],
+  F2: [[1, 5], 'Bouton « Citation » ; ouvre l\'éditeur vide de l\'écran 5.'],
+  F3: [[1, 2], 'Section « Mes widgets » ; menu « … » de chaque tuile.'],
+  F4: [[1, 9], 'Détail « 3 widgets » de la section ; « 0 widget » au départ.'],
+  F5: [[4, 7], 'Cadres « Petit », « Moyen », « Grand » du chapitre « Disposition ».'],
+  F6: [3, 'Bouton « Ajouter des photos », chapitre « Contenu ».'],
+  F7: [4, 'Quatre cadres « 1 photo » à « 4 photos », chapitre « Disposition ».'],
+  F8: [[3, 4], 'Phrase de rotation sous les vignettes ; choix « Quatre à la fois ».'],
+  F9: [[3, 8], 'Bouton « Recadrer » (photos, photo de fond) ; feuille inchangée.'],
+  F10: [3, 'Rangée « Recadrer », « Avancer », « Reculer », « Retirer » sous les vignettes.'],
+  F11: [5, 'Champs « Ta citation » et « Auteur (facultatif) », chapitre « Contenu ».'],
+  F12: [8, 'Rangée « Typographie » : Serif, Arrondie, Standard, Mono.'],
+  F13: [8, 'Rangée « Couleurs » (8 paires) ; champs « Fond » et « Texte ».'],
+  F14: [8, 'Bloc « Photo de fond » : vignette, trois boutons, « Voile ».'],
+  F15: [7, 'Interrupteurs « Centrée » et « Guillemets », chapitre « Disposition ».'],
+  F16: [5, 'Lien « Essayer avec un exemple », tant que le texte est vide.'],
+  F17: [[3, 5], 'Champ « Nom du widget », en tête du chapitre « Contenu ».'],
+  F18: [[3, 4, 5, 7, 8], 'Aperçu fixe en haut de l\'éditeur, à chaque chapitre.'],
+  F19: [[3, 5], 'Barre « Annuler » / « Enregistrer » (grisé à l\'écran 5).'],
+  F20: [2, 'Ligne « Supprimer » du menu « … » ; le bouton du bas de l\'éditeur reste.'],
+  F21: [[2, 9], 'Note de pied de l\'écran 9 ; « Ajouter à l\'écran » ouvre le guide.'],
+  F22: ['=', '« Photo indisponible » et couleurs de la citation : le dessin du widget ne change pas.'],
+  F23: ['=', 'Modes Clair et Teinté d\'iOS : rendu des widgets inchangé, hors planche.'],
+  F24: ['=', 'Renouvellement à l\'heure du widget posé inchangé ; « Un par jour » y ajoute minuit.'],
+  F25: ['=', 'Toucher le widget posé (lien tessera://design) ouvre l\'éditeur : inchangé.'],
+  F26: [2, 'Menu « … » : six actions, jusque-là seulement dans « Mes widgets ».'],
+  F27: ['=', 'Fusion dans « Mes widgets » (Sélectionner, Fusionner) : page non touchée.'],
+});
+PL.init();
+</script>
+</body>
+</html>

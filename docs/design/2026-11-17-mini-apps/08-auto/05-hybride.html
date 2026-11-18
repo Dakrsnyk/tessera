@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · Auto — Direction 5 : Hybride</title>
+<link rel="stylesheet" href="../../2026-11-15-cristal/cristal.css">
+<link rel="stylesheet" href="../base/planches.css">
+<style>
+  .aut5-c .li { padding: 6px 14px !important; min-height: 0 !important; }
+  .aut5-two { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .aut5-lnk { display: inline-flex; align-items: center; gap: 2px; min-height: 44px; margin: -12px -6px -12px 0; padding: 0 6px; color: var(--cs); font-weight: 650; font-size: 14px; white-space: nowrap; }
+  .aut5-lnk i { font-size: 14px; }
+  .aut5-h { display: flex; align-items: center; gap: 8px; margin: 10px 0 2px; font-size: 13px; font-weight: 650; color: var(--ink2); }
+  .aut5-hl { display: flex; align-items: center; gap: 10px; min-height: 34px; font-size: 14px; border-top: 1px solid var(--rule); font-variant-numeric: tabular-nums; }
+  .aut5-hl span:first-child { flex: 1; }
+  .aut5-hl b { font-weight: 650; }
+  .aut5-nb { border-radius: 14px; padding: 4px 12px 10px; }
+  .aut5-act { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .aut5-ic { display: flex; gap: 8px; margin-top: 6px; }
+  .aut5-ic span { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--well); color: var(--ink2); font-size: 20px; flex: none; }
+  .aut5-ic span.on { background: var(--cs); color: #fff; }
+  .aut5-g { margin-top: 10px; }
+  .aut5-g .x-lab { display: block; margin: 0 4px 2px; font-size: 13px; color: var(--ink2); }
+  .aut5-gap { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+  .aut5-tot { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
+  .aut5-ln { display: flex; align-items: center; gap: 10px; min-height: 48px; border-top: 1px solid var(--rule); }
+  .aut5-ln u { width: 12px; height: 12px; border-radius: 4px; flex: none; }
+  .aut5-ln div { flex: 1; font-size: 15px; font-weight: 600; }
+  .aut5-ln div small { display: block; font-size: 12px; font-weight: 500; color: var(--ink2); }
+  .aut5-ln b { font-weight: 700; font-variant-numeric: tabular-nums; }
+  .aut5-p { margin: 4px 0 0; font-size: 14px; line-height: 1.42; color: var(--ink2); }
+  .aut5-res { margin-top: 6px !important; font-size: 13px !important; }
+</style>
+</head>
+<body style="--bw:1860px">
+<main class="bd t-saphir" data-c="aut" data-kind="direction">
+
+  <header class="bd-head"><div class="num">5</div>
+    <div><div class="pl-kick">Direction 5 sur 5</div>
+      <h1>Direction 5 · Hybride</h1>
+      <p>« Ce qui presse passe d'abord » : on n'ouvre Auto que pour noter un plein ou voir ce qui arrive. La page garde ses blocs, mais l'ordre suit l'usage : le chiffre de la carte de Mon quotidien (l'autonomie), puis l'échéance et l'entretien, puis les chiffres ; le journal et son sélecteur descendent. Chaque page a un seul accès fixe, et trois choses qu'on ne pouvait pas corriger (un relevé, un historique d'entretien, une échéance annuelle) deviennent possibles. Journée d'exemple : jeudi 12 novembre 2026, 13 h 20, compte gratuit.</p></div>
+    <span class="badge">Phase 2 · conception · données d'exemple</span></header>
+
+  <div class="pl-rule">
+    <div><h5>La logique</h5><h3>Ce qui presse passe d'abord</h3>
+      <p>Un plein se note au plus quelques fois par mois : le journal du jour est souvent vide et le sélecteur de semaine prend la place du haut. Ce qui sert vraiment, c'est de savoir jusqu'où on peut rouler et ce qui arrive (l'assurance mardi, la vidange). La page ouvre donc sur le même chiffre que la carte « Auto » de Mon quotidien, puis sur l'échéance et l'entretien. Chaque page secondaire a un seul chemin, toujours le même.</p></div>
+    <div><h5>En ouvrant Auto</h5><ol>
+      <li data-p="1">« ≈ 370 km » d'autonomie, le compteur en dessous</li>
+      <li data-p="1">« Plein » (bouton plein) et « Kilométrage »</li>
+      <li data-p="2">« Échéances » : Assurance auto, J-5</li>
+      <li data-p="2">« Entretien » : la vidange à 90 %, en orange</li></ol></div>
+    <div><h5>En faisant défiler</h5><ol>
+      <li data-p="3">« Chiffres » : « Consommation » et « Coût réel »</li>
+      <li data-p="3">Sélecteur de semaine et journal du jour</li>
+      <li data-p="3">« Mes paramètres », en dernier</li></ol></div>
+    <div><h5>Forces et limites</h5>
+      <p class="plus">L'urgent se lit sans chercher, la page ne change plus de forme selon les données, et un relevé, un entretien ou une échéance se corrigent enfin.</p>
+      <p class="minus">Trois ajouts à bâtir ; le sélecteur de semaine quitte le haut de la page (contraire à la règle commune « sélecteur en tête ») ; l'autonomie n'existe qu'après deux pleins complets, sinon le compteur la remplace.</p></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Page principale</div>
+      <div class="phone app pl-past t-saphir" data-c="aut" data-time="13:20" data-tab="0" id="p1"></div><span class="flow"></span>
+      <div class="cap"><h4>L'autonomie, puis ce qui arrive</h4>
+        <p>Le grand chiffre est celui de la carte de Mon quotidien. L'échéance (J-5) et l'entretien (90 %) passent avant les chiffres.</p>
+        <ul><li><span class="tag e"></span><span>« Plein » (bouton plein) et « Kilométrage », sections « Échéances » et « Entretien » à 2 lignes, « J-N » rouge à 14 jours ou moins, jauge orange dès 85 %, « Ce mois-ci », « Environ N L dans le réservoir… ».</span></li>
+          <li><span class="tag a"></span><span>L'autonomie devient le grand chiffre (le compteur passe en ligne) ; « Échéances » et « Entretien » montent devant « Chiffres » ; le crayon ouvre « Ma voiture » ; la liste « Plus » disparaît.</span></li>
+          <li><span class="tag g" data-to="2"></span><span>Faire défiler.</span></li>
+          <li><span class="tag g" data-to="4"></span><span>Toucher « Ce mois-ci ».</span></li>
+          <li><span class="tag g" data-to="5"></span><span>Toucher « Entretien ».</span></li>
+          <li><span class="tag g" data-to="6"></span><span>Toucher « Échéances ».</span></li>
+          <li><span class="tag g" data-to="8"></span><span>Toucher le crayon.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Page principale, suite</div>
+      <div class="phone app pl-past t-saphir" data-c="aut" data-time="13:20" data-tab="0" id="p2"></div><span class="flow"></span>
+      <div class="cap"><h4>Les chiffres, puis le journal</h4>
+        <p>Les deux tuiles ouvrent leur page. Le journal et le sélecteur descendent : un plein est rare, le jour est souvent vide.</p>
+        <ul><li><span class="tag e"></span><span>« Chiffres » (« Consommation », « Coût réel »), sélecteur de 7 jours (jamais le futur, point sous un jour noté), journal du jour (« Relevé »), « Mes paramètres », dernier élément.</span></li>
+          <li><span class="tag a"></span><span>Le sélecteur de semaine et le journal quittent le haut de la page.</span></li>
+          <li><span class="tag g" data-to="3"></span><span>Toucher la tuile « Consommation ».</span></li>
+          <li><span class="tag g" data-to="7"></span><span>Toucher la tuile « Coût réel ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Carburant</div>
+      <div class="phone app pl-past t-saphir" data-c="aut" data-time="13:20" data-tab="0" id="p3"></div>
+      <div class="cap"><h4>Deux courbes, puis tous les pleins</h4>
+        <p>La page est déjà en cartes : les autres pages s'y alignent. La consommation se lit entre deux pleins complets.</p>
+        <ul><li><span class="tag e"></span><span>« Noter un plein », courbe de consommation, courbe du prix au litre (« dernier 1,729 $/L »), liste « Pleins » (litres, prix/L, km, « partiel », total).</span></li>
+          <li><span class="tag a"></span><span>Seul accès à la page : la tuile « Consommation » (la ligne « Carburant » du bas disparaît).</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Kilométrage</div>
+      <div class="phone app pl-past t-saphir" data-c="aut" data-time="13:20" data-tab="0" id="p4"></div>
+      <div class="cap"><h4>Un relevé faux se corrige enfin</h4>
+        <p>Le compteur prend le plus grand kilométrage : une faute de frappe le fixait pour toujours. Les relevés se touchent.</p>
+        <ul><li><span class="tag e"></span><span>Tuiles « Compteur » et « Moyenne », « Noter le kilométrage », barres des 6 derniers mois, « Relevés » (12 derniers points) et sa note.</span></li>
+          <li><span class="tag n"></span><span>Chaque relevé se touche : modifier ou supprimer. Aujourd'hui la liste est en lecture seule et un relevé n'a pas d'identifiant.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Entretien</div>
+      <div class="phone app pl-past t-saphir" data-c="aut" data-time="13:20" data-tab="0" id="p5"></div>
+      <div class="cap"><h4>Chaque entretien garde son histoire</h4>
+        <p>La vidange est ouverte : ce qui a été fait, quand, pour combien. « Fait aujourd'hui » et « Supprimer » sortent du balayage.</p>
+        <ul><li><span class="tag e"></span><span>« Nouvel entretien », jauge (bleu, orange dès 85 %), « dans N km ou d'ici N j », « dernier à N km le … », la note sur le balayage.</span></li>
+          <li><span class="tag a"></span><span>Cartes Cristal au lieu de la liste système ; « Fait aujourd'hui » et « Supprimer » en boutons visibles (le balayage reste).</span></li>
+          <li><span class="tag n"></span><span>« Historique » : chaque fois (date, compteur, coût). Aujourd'hui l'app ne garde que la dernière fois.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Échéances et feuille « Échéance »</div>
+      <div class="phone app pl-past t-saphir" data-c="aut" data-time="13:20" data-tab="none" id="p6"></div>
+      <div class="cap"><h4>Une assurance annuelle se répète</h4>
+        <p>« Assurance auto », mardi 17 novembre : la même que dans « À ne pas oublier » (62 $ par mois, le frais fixe « Assurance »). La feuille propose de la répéter.</p>
+        <ul><li><span class="tag e"></span><span>Liste triée par date, « J-N », « passée », « Nouvelle échéance » ; feuille « Échéance » : « Titre (assurance, immatriculation…) », « Date », « Icône » (6 choix).</span></li>
+          <li><span class="tag a"></span><span>Bouton « Supprimer l'échéance » dans la feuille (aujourd'hui, un balayage que rien n'indique) ; cartes Cristal.</span></li>
+          <li><span class="tag n"></span><span>« Répéter chaque année » et « Marquer comme fait » : aujourd'hui une échéance annuelle se recrée à la main et une passée reste « passée ».</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Coûts</div>
+      <div class="phone app pl-past t-saphir" data-c="aut" data-time="13:20" data-tab="0" id="p7"></div>
+      <div class="cap"><h4>Chaque chiffre dit d'où il vient</h4>
+        <p>Le carburant est une moyenne et l'entretien un forfait : la page le dit à chaque ligne, au lieu de « tout compris ».</p>
+        <ul><li><span class="tag e"></span><span>Total, barre de répartition (Frais fixes, Carburant, Entretien), « par kilomètre parcouru », 5 frais fixes écrits en place (« Entretien prévu » par an).</span></li>
+          <li><span class="tag a"></span><span>Cartes Cristal ; la source de chaque ligne s'écrit dessous (le pied de page de la page actuelle le disait déjà, en bas) : libellés à confirmer.</span></li></ul></div></div>
+
+    <div class="col"><div class="nm">Ma voiture (feuille)</div>
+      <div class="phone app pl-past t-saphir" data-c="aut" data-time="13:20" data-tab="none" id="p8"></div>
+      <div class="cap"><h4>Le nom et le réservoir, à portée</h4>
+        <p>Le crayon, à côté du nom, ouvre la feuille à toute heure. Avant, un seul bouton, visible quand le réservoir est vide.</p>
+        <ul><li><span class="tag e"></span><span>Feuille « Ma voiture » : « Nom de la voiture », « Réservoir » (L), inchangée.</span></li>
+          <li><span class="tag a"></span><span>Nouvel accès permanent : le crayon de la barre du haut.</span></li></ul></div></div>
+  </div>
+
+  <div class="row">
+    <div class="col"><div class="nm">Première ouverture</div>
+      <div class="phone app t-saphir" data-c="aut" data-time="13:20" data-tab="0" id="p9"></div>
+      <div class="cap"><h4>Sans donnée, l'écran explique</h4>
+        <p>Même compte, sans aucune donnée. Les tuiles restent là, à « – », et le texte sur les pleins complets monte ici.</p>
+        <ul><li><span class="tag e"></span><span>Carte « Ta voiture, sans surprise » et son texte, « Plein », « Kilométrage », carte « À remplir » « Ta voiture » (libellé du bouton à confirmer), « Mes paramètres ».</span></li>
+          <li><span class="tag a"></span><span>Tuiles « Consommation » et « Coût réel » toujours affichées, à « – » ; la phrase de la page « Carburant » vide (deux pleins complets) est lue ici, où l'on cherche pourquoi rien ne s'affiche.</span></li></ul></div></div>
+
+    <div class="col pl-w3"><div class="nm">Ce que cette direction garde, change, ajoute</div>
+      <div class="note" style="margin:9px">
+        <div class="pl-take">
+          <b>Gardé tel quel</b><span>Tous les calculs (consommation de plein complet à plein complet, autonomie, coût réel, état des entretiens), les cinq pages, les quatre feuilles de saisie (plein, kilométrage, entretien, échéance), « Ma voiture » et « Mes paramètres », la carte « À remplir », la carte « Auto » de Mon quotidien (« Auto », la voiture, le même gris, « ≈ 370 km d'autonomie »), le rappel d'« À ne pas oublier » et les cinq widgets.</span>
+          <b>Changé de place</b><span>L'autonomie devient le grand chiffre, comme sur la carte. « Échéances » et « Entretien » passent avant « Chiffres ». Le sélecteur de semaine et le journal descendent. La liste « Plus » (qui change de forme selon les données) disparaît : Carburant et Coûts s'ouvrent par leurs tuiles, Entretien et Échéances par leurs sections, Kilométrage par « Ce mois-ci ». Les pages Entretien, Échéances et Coûts passent en cartes Cristal.</span>
+          <b>Laissé de côté</b><span>Plusieurs voitures, voiture électrique, trajets, photo, plaque, documents, notifications d'entretien et d'échéance, export, lien avec Finances ou Planning, coût par kilomètre sur la page principale, rappel du kilométrage : des idées de l'audit, hors de cette direction. L'espace « Auto » de Créer (doublon) n'est pas touché : à garder en tête comme dette.</span>
+        </div>
+        <h4>Nouveau, à développer (3)</h4>
+        <p>1. Historique des entretiens (écran 5) : garder chaque fois, pas seulement la dernière (date, compteur, coût). 2. Relevés modifiables (écran 4) : modifier ou supprimer un relevé, qui n'a pas d'identifiant aujourd'hui. 3. Échéance qui se répète et « Marquer comme fait » (écran 6) : champ de répétition et état « fait » à ajouter au modèle.</p>
+        <h4>Gratuit / Premium</h4>
+        <p>Inchangé : toute la mini-app est gratuite, sans limite ni verrou. Premium reste limité à quatre widgets sur cinq (« Coût de la voiture », « Kilométrage », « Carburant », « Échéances auto ») ; « Prochain entretien » est gratuit. Aucun verrou n'est ajouté.</p>
+        <h4>Données d'exemple</h4>
+        <p>« Civic 2019 », réservoir 47 L ; 9 pleins du 8 août au 5 novembre, dont un partiel ; compteur 61 640 km. Tout est calculé : 7,3 L/100, ≈ 370 km (arrondi à 10 km, à confirmer), 466 $ par mois, 0,56 $ du kilomètre. Le modèle d'échéance n'a pas de montant : le 62 $ est le frais fixe « Assurance ».</p>
+      </div></div>
+  </div>
+
+  <div id="map"></div>
+</main>
+
+<script src="../../2026-11-15-cristal/cristal.js"></script>
+<script src="../base/planches.js"></script>
+<script src="auto.js"></script>
+<script>
+const A = AUT, V = A.V, ui = A.ui, nw = A.nouveau;
+const m0 = (x) => PL.m(Math.round(x));
+const au = A.autonomie;
+
+/* 1 · page principale (sert aussi de fond à la feuille de l'écran 8) */
+const hero = PL.hero({ lab: 'Autonomie estimée', size: 'md', fig: '≈' + NBSP + PL.n(A.km10), unit: 'km',
+  right: `<span class="aut5-lnk" role="button">Ce mois-ci ${PL.u(A.kmMois, 'km')}<i data-i="chev"></i></span>`,
+  line: `Compteur <b>${PL.u(A.compteur, 'km')}</b>`,
+  body: `<div class="line aut5-res">Environ ${PL.n(au.litres)} L dans le réservoir, d'après ta consommation depuis le plein du ${A.dateM(au.depuis)}</div>` });
+const page1 = () => PL.nv(V.nom, PL.rbtn('pencil', 'Ma voiture'), { back: false }) + `<div style="margin-top:4px">${hero}</div>
+  <div class="aut5-two">${PL.btn('Plein', { i: 'fuel' })}${PL.btn('Kilométrage', { k: 'T', i: 'gauge', st: 'color:var(--cs)' })}</div>
+  ${PL.sect('Échéances', '', 'Tout voir', { st: 'margin-top:10px' })}
+  ${PL.card(A.aVenir.slice(0, 2).map((e) => ui.echeance(A.echeance(e))).join(''), { st: 'padding-top:2px;padding-bottom:2px' })}
+  ${PL.sect('Entretien', '', 'Tout voir', { st: 'margin-top:8px' })}
+  ${PL.card(A.statuts.slice(0, 2).map((s) => ui.entretien(s)).join(''), { st: 'padding-top:4px;padding-bottom:4px' })}`;
+PL.mount('p1', page1());
+
+/* 2 · suite : « Chiffres », sélecteur et journal, « Mes paramètres » */
+const jr = A.journal(A.AUJ);
+PL.mount('p2', PL.nv(V.nom, PL.rbtn('pencil', 'Ma voiture'), { back: false }) + `
+  ${PL.sect('Chiffres', '', '', { st: 'margin-top:4px' })}
+  ${PL.kpis([
+    PL.kpi('Consommation', PL.n(A.r1(A.consommation), 1), PL.m(A.r2(A.coutAux100)) + ' / 100 km', { i: 'gauge', unit: NBSP + 'L/100', sm: true }),
+    PL.kpi('Coût réel', PL.n(Math.round(A.coutMois)), 'par mois, tout compris', { i: 'wallet', unit: NBSP + '$', sm: true })], 2, 'margin-top:8px')}
+  <div style="margin-top:12px">${PL.wsel({ sel: 3, marks: [3] })}</div>
+  ${PL.sect(A.dateL(A.AUJ), jr.total != null ? PL.m(jr.total) : '', '', { st: 'margin-top:10px' })}
+  ${PL.list(jr.lignes.map((x) => ui.journal(x)))}
+  ${PL.settings()}`);
+
+/* 3 · Carburant */
+const pp = A.parPlein, pl = A.pleins;
+PL.mount('p3', PL.nv('') + PL.ttl('Carburant') + `
+  <div style="margin-top:8px">${PL.btn('Noter un plein', { i: 'plus' })}</div>
+  ${PL.card(PL.line({ series: [{ v: pp.map((x) => A.r2(x.v)), c: 'var(--c-nut)', dots: true, dot: true }], min: 6.5, max: 8, yt: [6.5, 7, 7.5, 8], yf: (v) => PL.n(v, 1), h: 78,
+      ref: { v: A.r2(A.consommation) }, xl: [[0, A.dateM(pp[0].d)], [pp.length - 1, A.dateM(pp[pp.length - 1].d)]],
+      aria: `Consommation par plein complet, de ${A.r1(Math.min(...pp.map((x) => x.v)))} à ${A.r1(Math.max(...pp.map((x) => x.v)))} litres aux 100 kilomètres` })
+    + PL.leg([['nut', 'L/100 km, par plein complet', 'ln'], ['var(--ink)', 'moyenne', 'dsh']]), { t: 'Consommation', right: PL.u(A.r1(A.consommation), 'L/100', 1), st: 'margin-top:10px' })}
+  ${PL.card(PL.line({ series: [{ v: pl.map((x) => A.r2(x.prix * 1000) / 1000), c: 'var(--c-nut)', dots: true, dot: true }], min: 1.6, max: 1.8, yt: [1.6, 1.7, 1.8], yf: (v) => PL.n(v, 2), h: 54,
+      xl: [[0, A.dateM(pl[0].d)], [pl.length - 1, A.dateM(pl[pl.length - 1].d)]], aria: 'Prix au litre à chaque plein, de 1,649 à 1,739 dollar' }), { t: 'Prix au litre', right: 'dernier ' + PL.n(A.dernierPrix, 3) + NBSP + '$/L', st: 'margin-top:8px' })}
+  ${PL.sect('Pleins', String(pl.length), '', { st: 'margin-top:8px' })}
+  ${PL.list(A.pleinsRecents.map((f) => ui.plein(f)), { cls: 'aut5-c' })}`);
+
+/* 4 · Kilométrage */
+const km6 = A.kmParMois(), MC = ['juin', 'juill.', 'août', 'sept.', 'oct.', 'nov.'];
+const rel = A.pointsRecents(12);
+PL.mount('p4', PL.nv('') + PL.ttl('Kilométrage') + `
+  <div style="margin-top:8px">${PL.strip([[PL.u(A.compteur, 'km'), 'Compteur'], [PL.u(Math.round(A.moyenneKm), 'km'), 'Moyenne par mois']])}</div>
+  <div style="margin-top:8px">${PL.btn('Noter le kilométrage', { i: 'plus' })}</div>
+  ${PL.card(PL.bars({ g: km6.map((x, k) => ({ l: MC[k], v: [x.km], cur: x.cur })), h: 70, max: 1000, yt: [0, 500, 1000], ref: { v: Math.round(A.moyenneKm), t: 'moyenne' },
+      aria: 'Kilomètres par mois depuis juin : ' + km6.map((x, k) => MC[k] + ' ' + x.km).join(', ') + ' (novembre en cours)' })
+    + PL.leg([['var(--c)', 'km par mois'], ['var(--c)', 'mois en cours', 'hat']]), { t: 'Kilomètres par mois', st: 'margin-top:8px' })}
+  ${PL.sect('Relevés', '12 derniers', '', { nw: true, st: 'margin-top:8px' })}
+  ${PL.list(rel.map((x) => PL.row('', PL.u(x.km, 'km'), (x.t === 'releve' ? 'Relevé' : 'Plein') + ' · ' + A.dateC(x.d), { chev: true })), { cls: 'aut5-c' })}
+  ${PL.foot(A.txt.releves)}`);
+
+/* 5 · Entretien : la vidange est ouverte */
+const hist = nw.historique, s0 = A.statuts[0];
+PL.mount('p5', PL.nv('') + PL.ttl('Entretien') + `
+  <div style="margin-top:8px">${PL.btn('Nouvel entretien', { i: 'plus' })}</div>
+  ${PL.card(ui.entretien(s0, { dernier: true }) + `<div class="aut5-nb pl-newbox" style="margin-top:12px"><div class="aut5-h">Historique ${PL.nw()}</div>`
+    + hist[s0.nom].map((h) => `<div class="aut5-hl"><span>${A.dateM(h.d)} ${h.d.getUTCFullYear()}</span><span>${PL.u(h.km, 'km')}</span><b>${PL.m(h.cout)}</b></div>`).join('') + '</div>'
+    + `<div class="aut5-act">${PL.btn('Fait aujourd\'hui', { k: 'T', st: 'font-size:14px;padding:0 4px;color:var(--cs)' })}${PL.btn('Supprimer', { k: 'O', st: 'font-size:14px;padding:0 4px' })}</div>`, { st: 'margin-top:10px' })}
+  ${PL.card(ui.entretien(A.statuts[1], { dernier: true }), { st: 'margin-top:8px;padding-top:4px;padding-bottom:4px' })}
+  ${PL.card(ui.entretien(A.statuts[2], { dernier: true }), { st: 'margin-top:8px;padding-top:4px;padding-bottom:4px' })}
+  ${PL.foot(A.txt.entretien)}`);
+
+/* 6 · Échéances et feuille « Échéance » (Assurance auto) */
+const ech = A.echeances.map((e) => A.echeance(e)), as = ech[1];
+PL.mount('p6', PL.nv('') + PL.ttl('Échéances') + `
+  <div style="margin-top:8px">${PL.btn('Nouvelle échéance', { i: 'plus' })}</div>
+  ${PL.card(ech.map((e) => ui.echeance(e, { chev: true })).join(''), { st: 'margin-top:10px;padding-top:2px;padding-bottom:2px' })}`,
+  PL.sheet(`
+    <div class="aut5-gap"><div><span class="x-lab" style="display:block;margin:0 4px 4px;font-size:13px;color:var(--ink2)">Titre (assurance, immatriculation…)</span>${PL.field('', as.titre)}</div>${PL.field('Date', A.dateC(as.d) + ' 2026')}</div>
+    <div class="aut5-g"><span class="x-lab">Icône</span><div class="aut5-ic" role="group" aria-label="Icône">${A.ICONES.map(([i, n]) => `<span class="${i === as.i ? 'on' : ''}" role="button" aria-label="${n}"><i data-i="${i}"></i></span>`).join('')}</div></div>
+    <div class="aut5-nb pl-newbox" style="margin-top:12px">${PL.kv(nw.repete.titre, PL.sw(true), { nw: true })}<div style="margin-top:8px">${PL.btn(nw.repete.fait, { k: 'T', i: 'check', st: 'color:var(--cs)' })}</div></div>
+    <div style="margin-top:12px">${PL.btn('Supprimer l\'échéance', { k: 'O', i: 'trash' })}</div>`, 'Échéance', { left: 'Annuler', right: PL.sheetBtn('Enregistrer') }));
+
+/* 7 · Coûts */
+const F = A.fixes, tot = Math.round(A.coutMois), cm = Math.round(A.carburantMois), em = Math.round(A.entretienMois);
+const ln = (c, t, s, v) => `<div class="aut5-ln"><u style="background:${c}"></u><div>${t}<small>${s}</small></div><b>${v}</b></div>`;
+PL.mount('p7', PL.nv('') + PL.ttl('Coûts') + `
+  ${PL.card(`<div class="aut5-tot"><span class="pl-lab">Coût réel</span><span class="pl-num sm">${PL.n(tot)}<small>$ par mois</small></span></div>
+    ${PL.stack([{ v: A.fraisFixes, c: 'var(--c-bud)' }, { v: cm, c: 'var(--c-nut)' }, { v: em, c: 'var(--c-pla)' }], 14)}
+    <div style="margin-top:6px">${ln('var(--c-bud)', 'Frais fixes', 'assurance, prêt, stationnement, autres', m0(A.fraisFixes))}${ln('var(--c-nut)', 'Carburant', 'moyenne des 3 derniers mois', m0(cm))}${ln('var(--c-pla)', 'Entretien', 'forfait de ' + m0(F.entretienAn) + ' par an ÷ 12', m0(em))}</div>
+    <div class="pl-cap" style="margin-top:8px">Soit environ <b>${PL.m(A.r2(A.coutParKm))}</b> par kilomètre parcouru</div>`, { st: 'margin-top:10px' })}
+  ${PL.card(`${PL.field('Assurance', PL.m(F.assurance))}<div class="aut5-gap" style="margin-top:8px">${PL.field('Prêt ou location', PL.m(F.pret))}${PL.field('Stationnement', PL.m(F.stationnement))}${PL.field('Autres frais', PL.m(F.autres))}${PL.field('Entretien prévu', PL.m(F.entretienAn) + ' par an')}</div>`, { t: 'Frais fixes', right: 'par mois', st: 'margin-top:8px' })}`);
+
+/* 8 · feuille « Ma voiture » sur la page principale */
+PL.mount('p8', page1(), PL.sheet(`<div class="aut5-gap" style="margin-bottom:10px">${PL.field('Nom de la voiture', V.nom)}${PL.field('Réservoir', V.reservoir + NBSP + 'L')}</div>`, 'Ma voiture', { left: 'Annuler', right: PL.sheetBtn('Enregistrer') }));
+
+/* 9 · première ouverture : aucune donnée */
+PL.mount('p9', PL.nv('Auto', '', { back: false }) + `
+  ${PL.card(`<p class="aut5-p">${A.txt.depart}</p>`, { t: 'Ta voiture, sans surprise', i: 'car', st: 'margin-top:8px' })}
+  <div class="aut5-two">${PL.btn('Plein', { i: 'fuel' })}${PL.btn('Kilométrage', { k: 'T', i: 'gauge', st: 'color:var(--cs)' })}</div>
+  ${PL.kpis([PL.kpi('Consommation', '–', 'L / 100 km', { i: 'gauge', sm: true }), PL.kpi('Coût réel', '–', 'par mois', { i: 'wallet', sm: true })], 2, 'margin-top:10px')}
+  ${PL.foot(A.txt.sansPlein)}
+  <div style="margin-top:4px">${PL.toFill([{ i: 'car', t: 'Ta voiture', s: 'Nom et compteur.', btn: 'Compléter' }], '0 / 1').replace(/btnP/g, 'btnT').replace('class="btnT"', 'class="btnT" style="color:var(--cs)"')}</div>
+  ${PL.settings()}`);
+
+/* ---------- la table de fin ---------- */
+PL.mapTable('map', FONCTIONS, {
+  F1: [[1, 4], 'Ligne « Compteur » du bloc ; « Ce mois-ci » ; tuile de la page « Kilométrage ».'],
+  F2: [[1, 8], 'Grand chiffre « ≈ 370 km » du bloc ; réservoir réglé dans « Ma voiture ».'],
+  F3: [[1, 3], 'Bouton « Plein » ; « Noter un plein » de la page ; feuille inchangée.'],
+  F4: [[1, 4], 'Bouton « Kilométrage » ; « Noter le kilométrage » ; feuille inchangée.'],
+  F5: [2, 'Journal du jour, sous le sélecteur de semaine.'],
+  F6: [2, 'Sélecteur de 7 jours, au-dessus du journal.'],
+  F7: [[2, 3], 'Tuile « Consommation » ; page « Carburant », courbe.'],
+  F8: [3, 'Carte « Prix au litre » : courbe et « dernier 1,729 $/L ».'],
+  F9: [3, 'Liste « Pleins » : litres, prix/L, km, « partiel », total.'],
+  F10: [4, 'Carte « Kilomètres par mois » et tuile « Moyenne ».'],
+  F11: [4, 'Liste « Relevés » : 12 derniers points, maintenant touchables.'],
+  F12: [[1, 5], 'Section « Entretien » ; page : jauge, « Fait aujourd\'hui », « Supprimer ».'],
+  F13: [[1, 6], 'Section « Échéances » ; page et feuille « Échéance ».'],
+  F14: [[2, 7], 'Tuile « Coût réel » ; carte « Coût réel » et répartition.'],
+  F15: [7, 'Carte « Frais fixes » : 5 champs écrits en place.'],
+  F16: [[1, 8, 9], 'Crayon du titre ; feuille « Ma voiture » ; carte « À remplir ».'],
+  F17: ['=', 'Carte de Mon quotidien : « Auto », voiture, gris, « ≈ 370 km d\'autonomie ».'],
+  F18: ['=', 'Rappel « Assurance auto » d\'« À ne pas oublier » (7 jours) ouvre « Échéances ».'],
+  F19: ['=', 'Cinq widgets : « Prochain entretien » gratuit, quatre Premium ; inchangés.'],
+  F20: ['=', 'Espace « Auto » de Créer (doublon en liste) : non touché, dette signalée.'],
+});
+PL.init();
+</script>
+</body>
+</html>
