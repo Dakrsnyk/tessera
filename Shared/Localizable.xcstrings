@@ -34076,6 +34076,53 @@
         }
       }
     },
+    "Aucun voyage pour l'instant.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Reisen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No trips yet."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay viajes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun voyage pour l'instant."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancora nessun viaggio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "旅行はまだありません。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma viagem ainda."
+          }
+        }
+      }
+    },
     "Aucun widget pour l'instant": {
       "extractionState": "manual",
       "localizations": {
@@ -52355,53 +52402,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "O que eu ganho"
-          }
-        }
-      }
-    },
-    "Ce que la voiture coûte vraiment chaque mois": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Was dein Auto wirklich jeden Monat kostet"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What your car really costs each month"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lo que de verdad cuesta tu auto cada mes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce que la voiture coûte vraiment chaque mois"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quanto costa davvero la tua auto ogni mese"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "車に毎月本当にかかる費用"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Quanto o carro realmente custa por mês"
           }
         }
       }
@@ -97526,6 +97526,53 @@
         }
       }
     },
+    "Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Heute erledigt“ setzt Kilometerstand und Datum der Wartung auf heute."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done today sets the maintenance's odometer and date to today."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hecho hoy pone el kilometraje y la fecha del mantenimiento en los de hoy."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "«Fatto oggi» imposta chilometraggio e data della manutenzione a oggi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「今日済ませた」で、整備の走行距離と日付が今日になります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Feito hoje coloca a quilometragem e a data da manutenção em hoje."
+          }
+        }
+      }
+    },
     "Faite": {
       "extractionState": "manual",
       "localizations": {
@@ -106452,53 +106499,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Deslize um alimento para a esquerda para tirá-lo desta refeição."
-          }
-        }
-      }
-    },
-    "Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wische nach rechts, wenn eine Wartung erledigt ist: Sie startet dann ab dem heutigen Kilometerstand neu."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Swipe right when a service is done: it restarts from today's odometer."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Desliza a la derecha cuando se haga un mantenimiento: vuelve a empezar desde el odómetro de hoy."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scorri verso destra quando una manutenzione è fatta: riparte dal contachilometri di oggi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メンテナンスを完了したら右にスワイプしてください。今日の走行距離から再スタートします。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deslize para a direita quando uma manutenção for feita: ela recomeça do odômetro de hoje."
           }
         }
       }
@@ -119663,6 +119663,53 @@
         }
       }
     },
+    "L / 100 km": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L / 100 km"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L / 100 km"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L / 100 km"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L / 100 km"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L / 100 km"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L / 100 km"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L / 100 km"
+          }
+        }
+      }
+    },
     "L [fat]": {
       "extractionState": "manual",
       "localizations": {
@@ -127132,6 +127179,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "A contagem regressiva do Natal, o calendário e os feriados."
+          }
+        }
+      }
+    },
+    "Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Kilometerzähler nimmt den höchsten notierten Stand: Korrigiere hier einen falschen Eintrag."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The odometer takes the highest mileage noted: fix a wrong reading here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El cuentakilómetros toma el kilometraje más alto anotado: corrige aquí una lectura errónea."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il contachilometri prende il chilometraggio più alto annotato: correggi qui una lettura sbagliata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "走行距離計は記録された最大の距離を使います。間違った記録はここで直せます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O hodômetro usa a maior quilometragem anotada: corrija aqui uma leitura errada."
           }
         }
       }
@@ -169530,53 +169624,6 @@
         }
       }
     },
-    "Pleins, prix et consommation": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tankfüllungen, Preise und Verbrauch"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fill-ups, prices and consumption"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cargas, precios y consumo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pleins, prix et consommation"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pieni, prezzi e consumo"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "給油、価格、燃費"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abastecimentos, preços e consumo"
-          }
-        }
-      }
-    },
     "Plie le coude pour monter l'haltère vers l'épaule.": {
       "extractionState": "manual",
       "localizations": {
@@ -198905,6 +198952,53 @@
         }
       }
     },
+    "Répéter chaque année": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jedes Jahr wiederholen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repeat every year"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repetir cada año"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Répéter chaque année"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ripeti ogni anno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎年くり返す"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repetir todo ano"
+          }
+        }
+      }
+    },
     "Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes.": {
       "extractionState": "manual",
       "localizations": {
@@ -205720,6 +205814,53 @@
         }
       }
     },
+    "Ses dépenses, sa liste et les vols, hébergements et activités de ses dates seront aussi supprimés.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auch ihre Ausgaben, ihre Liste sowie die Flüge, Unterkünfte und Aktivitäten ihrer Daten werden gelöscht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Its expenses, its checklist and the flights, stays and activities of its dates will be deleted too."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "También se eliminarán sus gastos, su lista y los vuelos, alojamientos y actividades de sus fechas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ses dépenses, sa liste et les vols, hébergements et activités de ses dates seront aussi supprimés."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verranno eliminati anche le sue spese, la sua lista e i voli, gli alloggi e le attività delle sue date."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この旅行の支出、リスト、期間内のフライト・宿泊・アクティビティも削除されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas despesas, sua lista e os voos, hospedagens e atividades das suas datas também serão excluídos."
+          }
+        }
+      }
+    },
     "Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours.": {
       "extractionState": "manual",
       "localizations": {
@@ -211454,6 +211595,53 @@
         }
       }
     },
+    "Supprimer ce relevé ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diesen Eintrag löschen?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this reading?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar esta lectura?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer ce relevé ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminare questa lettura?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この記録を削除しますか?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir esta leitura?"
+          }
+        }
+      }
+    },
     "Supprimer ce repas": {
       "extractionState": "manual",
       "localizations": {
@@ -211685,6 +211873,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Excluir este alimento?"
+          }
+        }
+      }
+    },
+    "Supprimer cet entretien ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Wartung löschen?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this maintenance?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar este mantenimiento?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer cet entretien ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminare questa manutenzione?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この整備を削除しますか?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir esta manutenção?"
           }
         }
       }
@@ -211971,6 +212206,53 @@
         }
       }
     },
+    "Supprimer cette échéance ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diesen Termin löschen?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete this deadline?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar este vencimiento?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer cette échéance ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminare questa scadenza?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この期限を削除しますか?"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir este vencimento?"
+          }
+        }
+      }
+    },
     "Supprimer l'habitude": {
       "extractionState": "manual",
       "localizations": {
@@ -212155,6 +212437,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Excluir a meta"
+          }
+        }
+      }
+    },
+    "Supprimer l'échéance": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Termin löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete the deadline"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar el vencimiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer l'échéance"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina la scadenza"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "期限を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir o vencimento"
           }
         }
       }
@@ -212582,6 +212911,53 @@
         }
       }
     },
+    "Supprimer le relevé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eintrag löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete the reading"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar la lectura"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer le relevé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina la lettura"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir a leitura"
+          }
+        }
+      }
+    },
     "Supprimer le revenu": {
       "extractionState": "manual",
       "localizations": {
@@ -212625,6 +213001,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Apagar receita"
+          }
+        }
+      }
+    },
+    "Supprimer le voyage": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reise löschen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete the trip"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminar el viaje"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer le voyage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elimina il viaggio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "旅行を削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir a viagem"
+          }
+        }
+      }
+    },
+    "Supprimer le voyage ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reise löschen?"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Delete the trip?"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Eliminar el viaje?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Supprimer le voyage ?"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eliminare il viaggio?"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この旅行を削除しますか？"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Excluir a viagem?"
           }
         }
       }
@@ -221408,6 +221878,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "完了済み"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Concluídas"
+          }
+        }
+      }
+    },
+    "Terminés": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beendet"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finished"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminados"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terminati"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "終了した旅行"
           }
         },
         "pt-BR": {
@@ -232134,6 +232651,53 @@
         }
       }
     },
+    "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tippe auf einen Termin, um ihn zu bearbeiten, als erledigt zu markieren, jährlich zu wiederholen oder zu löschen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a deadline to edit it, mark it done, repeat it every year or delete it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toca un vencimiento para editarlo, marcarlo como hecho, repetirlo cada año o eliminarlo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tocca una scadenza per modificarla, segnarla come fatta, ripeterla ogni anno o eliminarla."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "期限をタップすると、編集、完了にする、毎年くり返す、削除ができます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toque em um vencimento para editá-lo, marcá-lo como feito, repeti-lo todo ano ou excluí-lo."
+          }
+        }
+      }
+    },
     "Touche « Modifier » en haut, puis « Ajouter un widget »": {
       "extractionState": "manual",
       "localizations": {
@@ -234198,6 +234762,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Costas inteiras contra a parede."
+          }
+        }
+      }
+    },
+    "Tout le programme": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ganzes Programm"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Whole program"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo el programa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout le programme"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutto il programma"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プログラム全体"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Programa completo"
           }
         }
       }
@@ -240970,6 +241581,100 @@
         }
       }
     },
+    "Une échéance faite quitte la liste de ce qui arrive.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein erledigter Termin verschwindet aus der Liste dessen, was ansteht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A deadline marked done leaves the list of what is coming."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un vencimiento hecho sale de la lista de lo que viene."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une échéance faite quitte la liste de ce qui arrive."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una scadenza fatta esce dall'elenco di ciò che arriva."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了にした期限は、これからの一覧から消えます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um vencimento feito sai da lista do que vem aí."
+          }
+        }
+      }
+    },
+    "Une échéance qui se répète passe à l'année suivante quand elle est faite.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Termin, der sich wiederholt, rückt nach dem Erledigen ins nächste Jahr."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A deadline that repeats moves to the next year when it is done."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un vencimiento que se repite pasa al año siguiente cuando se hace."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une échéance qui se répète passe à l'année suivante quand elle est faite."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una scadenza che si ripete passa all'anno successivo quando è fatta."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "くり返す期限は、完了にすると翌年に移ります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um vencimento que se repete passa para o ano seguinte quando é feito."
+          }
+        }
+      }
+    },
     "Unité (facultatif)": {
       "extractionState": "manual",
       "localizations": {
@@ -246046,6 +246751,53 @@
         }
       }
     },
+    "Voir tous mes voyages": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle meine Reisen ansehen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See all my trips"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver todos mis viajes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir tous mes voyages"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vedi tutti i miei viaggi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "旅行をすべて見る"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver todas as minhas viagens"
+          }
+        }
+      }
+    },
     "Voiture": {
       "extractionState": "manual",
       "localizations": {
@@ -249426,6 +250178,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "bastante certo"
+          }
+        }
+      }
+    },
+    "assurance, prêt, stationnement, autres": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versicherung, Kredit, Stellplatz, Sonstiges"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "insurance, loan, parking, other"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "seguro, préstamo, aparcamiento, otros"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "assurance, prêt, stationnement, autres"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "assicurazione, prestito, parcheggio, altro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保険、ローン、駐車場、その他"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "seguro, financiamento, estacionamento, outros"
           }
         }
       }
@@ -253331,6 +254130,53 @@
         }
       }
     },
+    "dépassé de %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "um %@ überschritten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "over by %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "superado en %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dépassé de %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "superato di %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@超過"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "excedido em %@"
+          }
+        }
+      }
+    },
     "dépassé de %@ km": {
       "extractionState": "manual",
       "localizations": {
@@ -255207,6 +256053,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "finanças"
+          }
+        }
+      }
+    },
+    "forfait par an ÷ 12": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jahrespauschale ÷ 12"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "yearly allowance ÷ 12"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "presupuesto anual ÷ 12"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "forfait par an ÷ 12"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "importo annuo ÷ 12"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "年間の予算 ÷ 12"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "verba anual ÷ 12"
           }
         }
       }
@@ -258826,6 +259719,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "média %@ L/100"
+          }
+        }
+      }
+    },
+    "moyenne des 3 derniers mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durchschnitt der letzten 3 Monate"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "average of the last 3 months"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "media de los últimos 3 meses"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "moyenne des 3 derniers mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "media degli ultimi 3 mesi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直近3か月の平均"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "média dos últimos 3 meses"
           }
         }
       }

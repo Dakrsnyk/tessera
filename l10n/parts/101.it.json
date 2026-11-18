@@ -1,0 +1,17 @@
+{
+ "Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui.": "«Fatto oggi» imposta chilometraggio e data della manutenzione a oggi.",
+ "L / 100 km": "L / 100 km",
+ "Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux.": "Il contachilometri prende il chilometraggio più alto annotato: correggi qui una lettura sbagliata.",
+ "Répéter chaque année": "Ripeti ogni anno",
+ "Supprimer ce relevé ?": "Eliminare questa lettura?",
+ "Supprimer cet entretien ?": "Eliminare questa manutenzione?",
+ "Supprimer cette échéance ?": "Eliminare questa scadenza?",
+ "Supprimer l'échéance": "Elimina la scadenza",
+ "Supprimer le relevé": "Elimina la lettura",
+ "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.": "Tocca una scadenza per modificarla, segnarla come fatta, ripeterla ogni anno o eliminarla.",
+ "Une échéance faite quitte la liste de ce qui arrive.": "Una scadenza fatta esce dall'elenco di ciò che arriva.",
+ "Une échéance qui se répète passe à l'année suivante quand elle est faite.": "Una scadenza che si ripete passa all'anno successivo quando è fatta.",
+ "assurance, prêt, stationnement, autres": "assicurazione, prestito, parcheggio, altro",
+ "forfait par an ÷ 12": "importo annuo ÷ 12",
+ "moyenne des 3 derniers mois": "media degli ultimi 3 mesi"
+}

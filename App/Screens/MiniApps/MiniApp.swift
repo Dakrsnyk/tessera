@@ -128,6 +128,8 @@ enum MiniAppPage: Hashable {
     case travelProgram(UUID)
     case travelBudget(UUID)
     case travelChecklist(UUID)
+    /// « Mes voyages »: the trips to come and the finished ones, each with its pages.
+    case travelTrips
     case carFuel
     case carMileage
     case carMaintenance
@@ -225,6 +227,7 @@ struct MiniAppPageView: View {
         case let .travelProgram(id): TravelProgramPage(tripID: id)
         case let .travelBudget(id): TravelBudgetPage(tripID: id)
         case let .travelChecklist(id): TravelChecklistPage(tripID: id)
+        case .travelTrips: TravelTripsPage()
         case .carFuel: CarFuelPage()
         case .carMileage: CarMileagePage()
         case .carMaintenance: CarMaintenancePage()

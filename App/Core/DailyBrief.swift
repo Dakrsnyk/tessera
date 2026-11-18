@@ -577,7 +577,7 @@ enum DailyBrief {
         for upcoming in BudgetMath.upcomingBills(input.budget, at: now, within: 3) {
             reminders.append(Reminder(id: upcoming.bill.id.uuidString, title: upcoming.bill.name, when: "\(when(upcoming.due, withTime: false)) · \(TF.money(upcoming.bill.amount, input.currency))", symbol: "doc.text.fill", colorHex: "2F8F7A", date: upcoming.due, route: .page(.financesBills)))
         }
-        for deadline in input.car.deadlines where within(deadline.date, days: 7) {
+        for deadline in input.car.deadlines where deadline.doneOn == nil && within(deadline.date, days: 7) {
             reminders.append(Reminder(id: deadline.id.uuidString, title: deadline.title, when: when(deadline.date, withTime: false), symbol: "car.fill", colorHex: "4B5563", date: deadline.date, route: .page(.carDeadlines)))
         }
         for trip in input.travel.trips where within(trip.start, days: 3) {

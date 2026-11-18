@@ -88,7 +88,7 @@ struct CarMileagePage: View {
         let now = Date()
         let months = CarMath.kmByMonth(state, count: 6, at: now)
         let driven = months.filter { $0.km > 0 }
-        let points = Array(CarMath.odometerPoints(state).reversed())
+        let points = pointsList(state)
         MiniAppScroll {
             HStack(spacing: 10) {
                 MiniStat(title: tr("Compteur"), value: CarMath.odometer(state).map { Fmt.number(Int($0)) } ?? "–", unit: tr("km"))
@@ -119,10 +119,15 @@ struct CarMileagePage: View {
                 VStack(alignment: .leading, spacing: 10) {
                     MiniSectionTitle(title: tr("Relevés"))
                     MiniRowsCard {
-                        ForEach(Array(points.prefix(12).enumerated()), id: \.offset) { index, point in
+                        ForEach(Array(points.enumerated()), id: \.offset) { index, point in
                             if index > 0 { MiniDivider() }
-                            MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: Car.accentHex, title: Fmt.shortDay(point.date),
-                                    value: tr("\(Fmt.number(Int(point.km))) km"), showsChevron: false)
+                            Button { sheet = point.sheet } label: {
+                                MiniRow(symbol: "gauge.with.dots.needle.33percent", colorHex: Car.accentHex,
+                                        title: tr("\(Fmt.number(Int(point.km))) km"),
+                                        detail: "\(point.isReading ? tr("Relevé") : tr("Plein")) · \(Fmt.shortDay(point.date))")
+                            }
+                            .buttonStyle(.pressable)
+                            .accessibilityIdentifier("reading-row")
                         }
                     }
                     Text(tr("Les relevés viennent de tes pleins et des kilométrages notés.")).font(.footnote).foregroundStyle(.secondary)
@@ -133,6 +138,21 @@ struct CarMileagePage: View {
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
     }
+
+    /// One known odometer value, with the sheet that corrects it: a reading, or the fill-up it comes from.
+    private struct Point {
+        let date: Date
+        let km: Double
+        let sheet: CarSheet
+        let isReading: Bool
+    }
+
+    /// The 12 latest values, newest first.
+    private func pointsList(_ state: CarState) -> [Point] {
+        let all = state.readings.map { Point(date: $0.date, km: $0.km, sheet: .reading($0), isReading: true) }
+            + state.fills.map { Point(date: $0.date, km: $0.odometer, sheet: .fuel($0), isReading: false) }
+        return Array(all.sorted { $0.date > $1.date }.prefix(12))
+    }
 }
 
 // MARK: - Maintenance
@@ -141,54 +161,81 @@ struct CarMaintenancePage: View {
     @Environment(AppModel.self) private var model
     @Environment(\.appStyle) private var style
     @State private var sheet: CarSheet?
+    /// The maintenance a deletion is asked for.
+    @State private var deleting: ServiceItem?
 
     var body: some View {
         let state = model.car
         let now = Date()
         let statuses = CarMath.serviceStatus(state, at: now)
-        List {
-            Section {
-                ForEach(statuses, id: \.item.id) { status in
-                    Button { sheet = .service(status.item) } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            ServiceStatusRow(status: status)
-                            Text(lastText(status.item)).font(.caption).foregroundStyle(Color.secondary)
-                        }
-                        .padding(.vertical, 4)
-                    }
-                    .swipeActions(edge: .leading) {
-                        Button {
-                            let km = CarMath.odometer(state) ?? 0
-                            model.update(\.car) { $0.markServiceDone(status.item.id, km: km) }
-                            Haptics.success()
-                        } label: {
-                            Label(tr("Fait aujourd'hui"), systemImage: "checkmark")
-                        }
-                        .tint(CristalPalette.of(style.id).category(MiniStyle.goodHex))
-                    }
-                    .swipeActions(edge: .trailing) {
-                        Button(role: .destructive) {
-                            model.update(\.car) { $0.services.removeAll { $0.id == status.item.id } }
-                        } label: {
-                            Label(tr("Supprimer"), systemImage: "trash")
-                        }
-                    }
-                    .accessibilityIdentifier("service-row")
-                }
-                Button {
-                    sheet = .service(ServiceItem(name: "", intervalKm: 8_000, intervalMonths: 6, lastKm: CarMath.odometer(state), lastDate: now))
-                } label: {
-                    Label(tr("Nouvel entretien"), systemImage: "plus")
-                }
-            } footer: {
-                Text(tr("Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui."))
+        MiniAppScroll {
+            MiniActionButton(title: tr("Nouvel entretien"), symbol: "plus", colorHex: "3366FF") {
+                sheet = .service(ServiceItem(name: "", intervalKm: 8_000, intervalMonths: 6, lastKm: CarMath.odometer(state), lastDate: now))
             }
+            VStack(spacing: 10) {
+                ForEach(statuses, id: \.item.id) { status in
+                    VStack(alignment: .leading, spacing: 8) {
+                        Button { sheet = .service(status.item) } label: {
+                            VStack(alignment: .leading, spacing: 4) {
+                                ServiceStatusRow(status: status)
+                                Text(lastText(status.item)).font(.caption).foregroundStyle(Color.secondary)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.pressable)
+                        .accessibilityIdentifier("service-row")
+                        history(status.item)
+                        HStack(spacing: 10) {
+                            MiniActionButton(title: tr("Fait aujourd'hui"), symbol: "checkmark", colorHex: "3366FF", isProminent: false) {
+                                let km = CarMath.odometer(state) ?? 0
+                                let id = status.item.id
+                                model.update(\.car) { $0.markServiceDone(id, km: km) }
+                                Haptics.success()
+                            }
+                            MiniActionButton(title: tr("Supprimer"), symbol: "trash", colorHex: Car.alertHex, isProminent: false) {
+                                deleting = status.item
+                            }
+                        }
+                    }
+                    .padding(14)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .miniCard()
+                }
+            }
+            MiniFootnote(text: tr("Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui."))
         }
-        .styledList()
-        .tint(CristalPalette.of(style.id).strong("3366FF"))
         .navigationTitle(tr("Entretien"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
+        .confirmationDialog(tr("Supprimer cet entretien ?"), isPresented: Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } }), titleVisibility: .visible) {
+            Button(tr("Supprimer"), role: .destructive) {
+                if let id = deleting?.id { model.update(\.car) { $0.services.removeAll { $0.id == id } } }
+                deleting = nil
+            }
+            Button(tr("Annuler"), role: .cancel) { deleting = nil }
+        }
+    }
+
+    /// Each time it was done (newest first), when the app has kept them.
+    @ViewBuilder
+    private func history(_ item: ServiceItem) -> some View {
+        let records = (item.history ?? []).sorted { $0.date > $1.date }
+        if !records.isEmpty {
+            VStack(alignment: .leading, spacing: 0) {
+                Text(tr("Historique")).font(.footnote.weight(.semibold)).foregroundStyle(.secondary).padding(.bottom, 4)
+                ForEach(Array(records.prefix(5).enumerated()), id: \.element.id) { index, record in
+                    if index > 0 { MiniDivider() }
+                    HStack(spacing: 10) {
+                        Text(Fmt.format(record.date, template: "dMMMMyyyy")).font(.subheadline)
+                        Spacer()
+                        if let km = record.km { Text(tr("\(Fmt.number(Int(km))) km")).font(.subheadline).foregroundStyle(.secondary).monospacedDigit() }
+                        if record.cost > 0 { Text(TF.money(record.cost, model.settings.currencyCode)).font(.subheadline.weight(.semibold)).monospacedDigit() }
+                    }
+                    .frame(minHeight: 32)
+                }
+            }
+        }
     }
 
     private func lastText(_ item: ServiceItem) -> String {
@@ -211,38 +258,30 @@ struct CarDeadlinesPage: View {
         let state = model.car
         let now = Date()
         let sorted = state.deadlines.sorted { $0.date < $1.date }
-        List {
-            Section {
-                ForEach(sorted) { deadline in
-                    let days = DateMath.daysBetween(now, deadline.date)
-                    Button { sheet = .deadline(deadline) } label: {
-                        HStack(spacing: 12) {
-                            Image(systemName: deadline.symbol).frame(width: 24).foregroundStyle(days <= 14 ? CristalPalette.of(style.id).category(Car.alertHex) : CristalPalette.of(style.id).category(Car.accentHex))
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(deadline.title).foregroundStyle(Color.primary)
-                                Text(Fmt.format(deadline.date, template: "EEEEdMMMMyyyy").capitalizedFirst).font(.caption).foregroundStyle(Color.secondary)
-                            }
-                            Spacer()
-                            Text(days < 0 ? tr("passée") : (days == 0 ? tr("aujourd'hui") : tr("J-\(days)")))
-                                .font(.subheadline.weight(.semibold))
-                                .foregroundStyle(days <= 14 && days >= 0 ? CristalPalette.of(style.id).strong(Car.alertHex) : Color.secondary)
-                                .monospacedDigit()
+        MiniAppScroll {
+            MiniActionButton(title: tr("Nouvelle échéance"), symbol: "plus", colorHex: Car.alertHex) {
+                sheet = .deadline(CarDeadline(title: "", date: now.addingTimeInterval(60 * 86_400)))
+            }
+            if !sorted.isEmpty {
+                MiniRowsCard {
+                    ForEach(Array(sorted.enumerated()), id: \.element.id) { index, deadline in
+                        if index > 0 { MiniDivider() }
+                        let days = DateMath.daysBetween(now, deadline.date)
+                        let done = deadline.doneOn != nil
+                        Button { sheet = .deadline(deadline) } label: {
+                            MiniRow(symbol: done ? "checkmark.circle.fill" : deadline.symbol,
+                                    colorHex: !done && days <= 14 ? Car.alertHex : Car.accentHex,
+                                    title: deadline.title,
+                                    detail: Fmt.format(deadline.date, template: "EEEEdMMMMyyyy").capitalizedFirst,
+                                    value: done ? tr("fait") : (days < 0 ? tr("passée") : (days == 0 ? tr("aujourd'hui") : tr("J-\(days)"))))
                         }
+                        .buttonStyle(.pressable)
+                        .accessibilityIdentifier("deadline-row")
                     }
                 }
-                .onDelete { offsets in
-                    let ids = offsets.map { sorted[$0].id }
-                    model.update(\.car) { $0.deadlines.removeAll { ids.contains($0.id) } }
-                }
-                Button {
-                    sheet = .deadline(CarDeadline(title: "", date: now.addingTimeInterval(60 * 86_400)))
-                } label: {
-                    Label(tr("Nouvelle échéance"), systemImage: "plus")
-                }
             }
+            MiniFootnote(text: tr("Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer."))
         }
-        .styledList()
-        .tint(CristalPalette.of(style.id).strong(Car.alertHex))
         .navigationTitle(tr("Échéances"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
@@ -262,6 +301,8 @@ struct CarCostsPage: View {
         let name: String
         let hex: String
         let value: Double
+        /// Where the figure comes from.
+        let source: String
         var id: String { name }
     }
 
@@ -270,54 +311,61 @@ struct CarCostsPage: View {
         let now = Date()
         let cost = CarMath.monthlyCost(state, at: now)
         let shares = [
-            Share(name: tr("Frais fixes"), hex: "2F8F7A", value: cost.fixed),
-            Share(name: tr("Carburant"), hex: Car.fuelHex, value: cost.fuel),
-            Share(name: tr("Entretien"), hex: "3366FF", value: cost.maintenance),
+            Share(name: tr("Frais fixes"), hex: "2F8F7A", value: cost.fixed, source: tr("assurance, prêt, stationnement, autres")),
+            Share(name: tr("Carburant"), hex: Car.fuelHex, value: cost.fuel, source: tr("moyenne des 3 derniers mois")),
+            Share(name: tr("Entretien"), hex: "3366FF", value: cost.maintenance, source: tr("forfait par an ÷ 12")),
         ].filter { $0.value > 0 }
-        List {
-            Section {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(tr("Par mois")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
-                    Text(TF.money(cost.total, currency)).font(.system(size: 36, weight: .bold, design: .rounded)).monospacedDigit()
-                    if !shares.isEmpty {
-                        Chart(shares) { share in
-                            BarMark(x: .value("Montant", share.value), stacking: .normalized)
-                                .foregroundStyle(CristalPalette.of(style.id).category(share.hex))
-                        }
-                        .accessibilityLabel(tr("Par mois"))
-                        .chartXAxis(.hidden)
-                        .frame(height: 16)
-                        .clipShape(Capsule())
-                        HStack(spacing: 12) {
-                            ForEach(shares) { share in
-                                HStack(spacing: 4) {
-                                    Circle().fill(CristalPalette.of(style.id).category(share.hex)).frame(width: 8, height: 8)
-                                    Text("\(share.name) \(TF.money(share.value, currency))").font(.caption)
-                                }
-                            }
-                        }
+        MiniAppScroll {
+            VStack(alignment: .leading, spacing: 10) {
+                Text(tr("Par mois")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+                Text(TF.money(cost.total, currency)).font(.system(size: 36, weight: .bold, design: .rounded)).monospacedDigit()
+                if !shares.isEmpty {
+                    Chart(shares) { share in
+                        BarMark(x: .value("Montant", share.value), stacking: .normalized)
+                            .foregroundStyle(CristalPalette.of(style.id).category(share.hex))
                     }
-                    if let perKm = perKilometre(state, total: cost.total, now: now) {
-                        Text(tr("Soit environ \(TF.money(perKm, currency, decimals: 2)) par kilomètre parcouru.")).font(.caption).foregroundStyle(.secondary)
+                    .accessibilityLabel(tr("Par mois"))
+                    .chartXAxis(.hidden)
+                    .frame(height: 16)
+                    .clipShape(Capsule())
+                    // Each part says where its figure comes from: a real average, a forfait, or what was typed.
+                    VStack(spacing: 0) {
+                        ForEach(Array(shares.enumerated()), id: \.element.id) { index, share in
+                            if index > 0 { MiniDivider() }
+                            HStack(spacing: 10) {
+                                Circle().fill(CristalPalette.of(style.id).category(share.hex)).frame(width: 10, height: 10)
+                                VStack(alignment: .leading, spacing: 1) {
+                                    Text(share.name).font(.subheadline.weight(.semibold))
+                                    Text(share.source).font(.caption).foregroundStyle(.secondary)
+                                }
+                                Spacer()
+                                Text(TF.money(share.value, currency)).font(.subheadline.weight(.semibold)).monospacedDigit()
+                            }
+                            .frame(minHeight: 44)
+                        }
                     }
                 }
-                .padding(.vertical, 6)
-                .accessibilityElement(children: .contain)
-                .accessibilityIdentifier("car-costs")
+                if let perKm = perKilometre(state, total: cost.total, now: now) {
+                    Text(tr("Soit environ \(TF.money(perKm, currency, decimals: 2)) par kilomètre parcouru.")).font(.caption).foregroundStyle(.secondary)
+                }
             }
-            Section {
-                NumberRow(title: tr("Assurance"), value: binding(\.insuranceMonthly), unit: tr("/ mois"))
-                NumberRow(title: tr("Prêt ou location"), value: binding(\.loanMonthly), unit: tr("/ mois"))
-                NumberRow(title: tr("Stationnement"), value: binding(\.parkingMonthly), unit: tr("/ mois"))
-                NumberRow(title: tr("Autres frais"), value: binding(\.otherMonthly), unit: tr("/ mois"))
-                NumberRow(title: tr("Entretien prévu"), value: binding(\.maintenanceYearly), unit: tr("/ an"))
-            } header: {
-                Text(tr("Frais fixes"))
-            } footer: {
-                Text(tr("Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois."))
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .card()
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("car-costs")
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: tr("Frais fixes"))
+                VStack(spacing: 8) {
+                    NumberRow(title: tr("Assurance"), value: binding(\.insuranceMonthly), unit: tr("/ mois"))
+                    NumberRow(title: tr("Prêt ou location"), value: binding(\.loanMonthly), unit: tr("/ mois"))
+                    NumberRow(title: tr("Stationnement"), value: binding(\.parkingMonthly), unit: tr("/ mois"))
+                    NumberRow(title: tr("Autres frais"), value: binding(\.otherMonthly), unit: tr("/ mois"))
+                    NumberRow(title: tr("Entretien prévu"), value: binding(\.maintenanceYearly), unit: tr("/ an"))
+                }
+                .card()
+                MiniFootnote(text: tr("Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois."))
             }
         }
-        .styledList()
         .navigationTitle(tr("Coûts"))
         .navigationBarTitleDisplayMode(.large)
     }

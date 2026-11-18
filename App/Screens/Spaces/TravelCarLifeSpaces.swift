@@ -484,15 +484,48 @@ struct ServiceEditor: View {
 
 struct CarDeadlineEditor: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
     @State var deadline: CarDeadline
+    @State private var confirmsDelete = false
+
+    /// An existing deadline (already in the list) can be marked done or deleted from here.
+    private var exists: Bool { model.car.deadlines.contains { $0.id == deadline.id } }
 
     var body: some View {
         SheetForm(title: tr("Échéance"), canSave: !deadline.title.trimmed.isEmpty, onSave: save) {
-            TextField(tr("Titre (assurance, immatriculation…)"), text: $deadline.title)
-            DatePicker(tr("Date"), selection: $deadline.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
-            Picker(tr("Icône"), selection: $deadline.symbol) {
-                ForEach(["calendar", "shield.fill", "doc.text.fill", "snowflake", "wrench.and.screwdriver", "creditcard"], id: \.self) { Image(systemName: $0).tag($0) }
+            Section {
+                TextField(tr("Titre (assurance, immatriculation…)"), text: $deadline.title)
+                DatePicker(tr("Date"), selection: $deadline.date, displayedComponents: .date).environment(\.locale, Fmt.locale)
+                Picker(tr("Icône"), selection: $deadline.symbol) {
+                    ForEach(["calendar", "shield.fill", "doc.text.fill", "snowflake", "wrench.and.screwdriver", "creditcard"], id: \.self) { Image(systemName: $0).tag($0) }
+                }
+                Toggle(tr("Répéter chaque année"), isOn: Binding(get: { deadline.repeatsYearly == true }, set: { deadline.repeatsYearly = $0 ? true : nil }))
             }
+            if exists {
+                Section {
+                    Button {
+                        let id = deadline.id
+                        model.update(\.car) { $0.markDeadlineDone(id) }
+                        Haptics.success()
+                        dismiss()
+                    } label: {
+                        Label(tr("Marquer comme fait"), systemImage: "checkmark")
+                    }
+                    Button(tr("Supprimer l'échéance"), role: .destructive) { confirmsDelete = true }
+                } footer: {
+                    Text(deadline.repeatsYearly == true
+                         ? tr("Une échéance qui se répète passe à l'année suivante quand elle est faite.")
+                         : tr("Une échéance faite quitte la liste de ce qui arrive."))
+                }
+            }
+        }
+        .confirmationDialog(tr("Supprimer cette échéance ?"), isPresented: $confirmsDelete, titleVisibility: .visible) {
+            Button(tr("Supprimer l'échéance"), role: .destructive) {
+                let id = deadline.id
+                model.update(\.car) { $0.deadlines.removeAll { $0.id == id } }
+                dismiss()
+            }
+            Button(tr("Annuler"), role: .cancel) {}
         }
     }
 

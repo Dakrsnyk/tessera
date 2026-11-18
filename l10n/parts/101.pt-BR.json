@@ -1,0 +1,17 @@
+{
+ "Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui.": "Feito hoje coloca a quilometragem e a data da manutenção em hoje.",
+ "L / 100 km": "L / 100 km",
+ "Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux.": "O hodômetro usa a maior quilometragem anotada: corrija aqui uma leitura errada.",
+ "Répéter chaque année": "Repetir todo ano",
+ "Supprimer ce relevé ?": "Excluir esta leitura?",
+ "Supprimer cet entretien ?": "Excluir esta manutenção?",
+ "Supprimer cette échéance ?": "Excluir este vencimento?",
+ "Supprimer l'échéance": "Excluir o vencimento",
+ "Supprimer le relevé": "Excluir a leitura",
+ "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.": "Toque em um vencimento para editá-lo, marcá-lo como feito, repeti-lo todo ano ou excluí-lo.",
+ "Une échéance faite quitte la liste de ce qui arrive.": "Um vencimento feito sai da lista do que vem aí.",
+ "Une échéance qui se répète passe à l'année suivante quand elle est faite.": "Um vencimento que se repete passa para o ano seguinte quando é feito.",
+ "assurance, prêt, stationnement, autres": "seguro, financiamento, estacionamento, outros",
+ "forfait par an ÷ 12": "verba anual ÷ 12",
+ "moyenne des 3 derniers mois": "média dos últimos 3 meses"
+}

@@ -25,6 +25,16 @@ struct ServiceItem: Codable, Hashable, Identifiable {
     var lastKm: Double?
     var lastDate: Date?
     var cost: Double = 0
+    /// Every time it was marked done (the item itself keeps only the last one). Optional: old saves have none.
+    var history: [ServiceRecord]?
+}
+
+/// One time a maintenance was done: when, at which odometer (if known) and for how much.
+struct ServiceRecord: Codable, Hashable, Identifiable {
+    var id = UUID()
+    var date: Date
+    var km: Double?
+    var cost: Double = 0
 }
 
 struct CarDeadline: Codable, Hashable, Identifiable {
@@ -32,6 +42,10 @@ struct CarDeadline: Codable, Hashable, Identifiable {
     var title: String
     var date: Date
     var symbol: String = "calendar"
+    /// Comes back every year (an insurance, a registration). Optional: old saves have none.
+    var repeatsYearly: Bool?
+    /// The day it was marked done (a deadline that does not repeat). Optional: old saves have none.
+    var doneOn: Date?
 }
 
 struct CarState: Codable, Hashable {
@@ -78,6 +92,29 @@ struct CarState: Codable, Hashable {
         guard let index = services.firstIndex(where: { $0.id == id }) else { return }
         services[index].lastKm = km
         services[index].lastDate = date
+        var history = services[index].history ?? []
+        history.append(ServiceRecord(date: date, km: km, cost: services[index].cost))
+        services[index].history = history
+    }
+
+    /// A deadline done: one that repeats moves to the same day next year (as many years as it takes to be
+    /// ahead of today), the others are marked done and leave the list of what comes.
+    mutating func markDeadlineDone(_ id: UUID, at date: Date = Date()) {
+        guard let index = deadlines.firstIndex(where: { $0.id == id }) else { return }
+        guard deadlines[index].repeatsYearly == true else {
+            deadlines[index].doneOn = date
+            return
+        }
+        let today = DateMath.startOfDay(date)
+        var next = deadlines[index].date
+        var steps = 0
+        repeat {
+            guard let later = DateMath.calendar.date(byAdding: .year, value: 1, to: next) else { break }
+            next = later
+            steps += 1
+        } while next < today && steps < 60
+        deadlines[index].date = next
+        deadlines[index].doneOn = nil
     }
 }
 
@@ -178,7 +215,7 @@ enum CarMath {
 
     static func upcomingDeadlines(_ state: CarState, at date: Date) -> [CarDeadline] {
         let today = DateMath.startOfDay(date)
-        return state.deadlines.filter { $0.date >= today }.sorted { $0.date < $1.date }
+        return state.deadlines.filter { $0.date >= today && $0.doneOn == nil }.sorted { $0.date < $1.date }
     }
 
     // MARK: Mini-app

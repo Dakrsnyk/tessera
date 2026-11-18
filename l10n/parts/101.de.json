@@ -1,0 +1,17 @@
+{
+ "Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui.": "„Heute erledigt“ setzt Kilometerstand und Datum der Wartung auf heute.",
+ "L / 100 km": "L / 100 km",
+ "Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux.": "Der Kilometerzähler nimmt den höchsten notierten Stand: Korrigiere hier einen falschen Eintrag.",
+ "Répéter chaque année": "Jedes Jahr wiederholen",
+ "Supprimer ce relevé ?": "Diesen Eintrag löschen?",
+ "Supprimer cet entretien ?": "Diese Wartung löschen?",
+ "Supprimer cette échéance ?": "Diesen Termin löschen?",
+ "Supprimer l'échéance": "Termin löschen",
+ "Supprimer le relevé": "Eintrag löschen",
+ "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.": "Tippe auf einen Termin, um ihn zu bearbeiten, als erledigt zu markieren, jährlich zu wiederholen oder zu löschen.",
+ "Une échéance faite quitte la liste de ce qui arrive.": "Ein erledigter Termin verschwindet aus der Liste dessen, was ansteht.",
+ "Une échéance qui se répète passe à l'année suivante quand elle est faite.": "Ein Termin, der sich wiederholt, rückt nach dem Erledigen ins nächste Jahr.",
+ "assurance, prêt, stationnement, autres": "Versicherung, Kredit, Stellplatz, Sonstiges",
+ "forfait par an ÷ 12": "Jahrespauschale ÷ 12",
+ "moyenne des 3 derniers mois": "Durchschnitt der letzten 3 Monate"
+}

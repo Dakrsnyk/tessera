@@ -1,0 +1,17 @@
+{
+ "Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui.": "「今日済ませた」で、整備の走行距離と日付が今日になります。",
+ "L / 100 km": "L / 100 km",
+ "Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux.": "走行距離計は記録された最大の距離を使います。間違った記録はここで直せます。",
+ "Répéter chaque année": "毎年くり返す",
+ "Supprimer ce relevé ?": "この記録を削除しますか?",
+ "Supprimer cet entretien ?": "この整備を削除しますか?",
+ "Supprimer cette échéance ?": "この期限を削除しますか?",
+ "Supprimer l'échéance": "期限を削除",
+ "Supprimer le relevé": "記録を削除",
+ "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.": "期限をタップすると、編集、完了にする、毎年くり返す、削除ができます。",
+ "Une échéance faite quitte la liste de ce qui arrive.": "完了にした期限は、これからの一覧から消えます。",
+ "Une échéance qui se répète passe à l'année suivante quand elle est faite.": "くり返す期限は、完了にすると翌年に移ります。",
+ "assurance, prêt, stationnement, autres": "保険、ローン、駐車場、その他",
+ "forfait par an ÷ 12": "年間の予算 ÷ 12",
+ "moyenne des 3 derniers mois": "直近3か月の平均"
+}

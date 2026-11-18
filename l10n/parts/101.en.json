@@ -1,0 +1,17 @@
+{
+ "Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui.": "Done today sets the maintenance's odometer and date to today.",
+ "L / 100 km": "L / 100 km",
+ "Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux.": "The odometer takes the highest mileage noted: fix a wrong reading here.",
+ "Répéter chaque année": "Repeat every year",
+ "Supprimer ce relevé ?": "Delete this reading?",
+ "Supprimer cet entretien ?": "Delete this maintenance?",
+ "Supprimer cette échéance ?": "Delete this deadline?",
+ "Supprimer l'échéance": "Delete the deadline",
+ "Supprimer le relevé": "Delete the reading",
+ "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.": "Tap a deadline to edit it, mark it done, repeat it every year or delete it.",
+ "Une échéance faite quitte la liste de ce qui arrive.": "A deadline marked done leaves the list of what is coming.",
+ "Une échéance qui se répète passe à l'année suivante quand elle est faite.": "A deadline that repeats moves to the next year when it is done.",
+ "assurance, prêt, stationnement, autres": "insurance, loan, parking, other",
+ "forfait par an ÷ 12": "yearly allowance ÷ 12",
+ "moyenne des 3 derniers mois": "average of the last 3 months"
+}

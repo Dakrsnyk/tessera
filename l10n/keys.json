@@ -56,7 +56,7 @@
  " ou ": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:43: return parts.isEmpty ? tr(\"Pas encore de repère\") : parts.joined(separator: tr(\" ou \"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:46: return parts.isEmpty ? tr(\"Pas encore de repère\") : parts.joined(separator: tr(\" ou \"))"
   ]
  },
  " pour tes objectifs du jour.": {
@@ -81,7 +81,7 @@
  " · partiel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:230: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),",
+   "App/Screens/MiniApps/Car/CarApp.swift:246: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),",
    "App/Screens/MiniApps/Car/CarPages.swift:63: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),"
   ]
  },
@@ -146,7 +146,7 @@
  "%@ / 100 km": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:259: detail: CarMath.fuelCostPerKm(state).map { tr(\"\\(TF.money($0 * 100, currency, decimals: 2)) / 100 km\") })"
+   "App/Screens/MiniApps/Car/CarApp.swift:276: detail: CarMath.fuelCostPerKm(state).map { tr(\"\\(TF.money($0 * 100, currency, decimals: 2)) / 100 km\") })"
   ]
  },
  "%@ / jour · %@ / mois": {
@@ -217,7 +217,7 @@
  "%@ L · %@/L · %@ km%@": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:230: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),",
+   "App/Screens/MiniApps/Car/CarApp.swift:246: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),",
    "App/Screens/MiniApps/Car/CarPages.swift:63: detail: tr(\"\\(TF.decimal(fill.liters, 1)) L · \\(TF.money(fill.pricePerLiter, currency, decimals: 3))/L · \\(Fmt.number(Int(fill.odometer))) km\\(fill.isFull ? \"\" : tr(\" · partiel\"))\"),"
   ]
  },
@@ -244,7 +244,7 @@
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:33: add(\"age\", \"person\", tr(\"Âge\"), age.map { tr(\"\\($0) ans\") })",
    "App/Screens/Profile/ProfileTopics.swift:371: if let age = model.age { parts.append(tr(\"\\(age) ans\")) }",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:539: ValueRow(title: tr(\"Âge\"), value: tr(\"\\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans\"), symbol: \"person.crop.circle\")",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:572: ValueRow(title: tr(\"Âge\"), value: tr(\"\\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans\"), symbol: \"person.crop.circle\")",
    "Shared/Render/Tiles/TimeTiles.swift:68: tile.inline = tr(\"\\(TF.decimal(age, 2)) ans\")"
   ]
  },
@@ -423,7 +423,7 @@
  "%@ de l'objectif de %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:410: Text(tr(\"\\(Fmt.percent(share)) de l'objectif de \\(TF.money(goal, currency))\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:412: Text(tr(\"\\(Fmt.percent(share)) de l'objectif de \\(TF.money(goal, currency))\"))"
   ]
  },
  "%@ de la journée écoulée": {
@@ -759,8 +759,8 @@
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:106: return CarMath.odometer(model.car).map { tr(\"\\(Fmt.number(Int($0))) km\") }",
    "App/Screens/Home/MyInfoSection.swift:73: add(\"km\", \"gauge.with.dots.needle.33percent\", tr(\"Compteur\"), CarMath.odometer(car).map { tr(\"\\(TF.int($0)) km\") })",
-   "App/Screens/MiniApps/Car/CarApp.swift:126: let odometer = CarMath.odometer(state).map { tr(\"\\(Fmt.number(Int($0))) km\") } ?? \"–\"",
-   "App/Screens/MiniApps/Car/CarApp.swift:136: Text(tr(\"\\(Fmt.number(Int(month))) km\")).font(.headline).foregroundStyle(.primary).monospacedDigit()"
+   "App/Screens/MiniApps/Car/CarApp.swift:138: let odometer = CarMath.odometer(state).map { tr(\"\\(Fmt.number(Int($0))) km\") } ?? \"–\"",
+   "App/Screens/MiniApps/Car/CarApp.swift:152: Text(tr(\"\\(Fmt.number(Int(month))) km\")).font(.headline).foregroundStyle(.primary).monospacedDigit()"
   ]
  },
  "%@ km en %@": {
@@ -1021,6 +1021,7 @@
  "%@ sur %@ prêts": {
   "placeholders": 2,
   "uses": [
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:194: detail: items.isEmpty ? nil : tr(\"\\(items.filter(\\.isDone).count) sur \\(items.count) prêts\"))",
    "App/Screens/MiniApps/Travel/TravelPages.swift:295: Text(tr(\"\\(items.filter(\\.isDone).count) sur \\(items.count) prêts\"))"
   ]
  },
@@ -1152,7 +1153,7 @@
  "%@ · %@ ce mois-ci": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:330: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
   ]
  },
  "%@ · %@ de la semaine": {
@@ -1338,7 +1339,7 @@
  "%@ à préparer": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:237: detail: items.isEmpty ? tr(\"liste à préparer\") : (done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")),"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:265: detail: items.isEmpty ? tr(\"liste à préparer\") : (done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")),"
   ]
  },
  "%@ à rendre": {
@@ -1508,17 +1509,17 @@
  "/ an": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:313: NumberRow(title: tr(\"Entretien prévu\"), value: binding(\\.maintenanceYearly), unit: tr(\"/ an\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:363: NumberRow(title: tr(\"Entretien prévu\"), value: binding(\\.maintenanceYearly), unit: tr(\"/ an\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:359: NumberRow(title: tr(\"Entretien prévu\"), value: carBinding(\\.maintenanceYearly), unit: tr(\"/ an\"))"
   ]
  },
  "/ mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:309: NumberRow(title: tr(\"Assurance\"), value: binding(\\.insuranceMonthly), unit: tr(\"/ mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:310: NumberRow(title: tr(\"Prêt ou location\"), value: binding(\\.loanMonthly), unit: tr(\"/ mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:311: NumberRow(title: tr(\"Stationnement\"), value: binding(\\.parkingMonthly), unit: tr(\"/ mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:312: NumberRow(title: tr(\"Autres frais\"), value: binding(\\.otherMonthly), unit: tr(\"/ mois\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:359: NumberRow(title: tr(\"Assurance\"), value: binding(\\.insuranceMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:360: NumberRow(title: tr(\"Prêt ou location\"), value: binding(\\.loanMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:361: NumberRow(title: tr(\"Stationnement\"), value: binding(\\.parkingMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:362: NumberRow(title: tr(\"Autres frais\"), value: binding(\\.otherMonthly), unit: tr(\"/ mois\"))"
   ]
  },
  "/%@ séances": {
@@ -2512,7 +2513,7 @@
    "App/Screens/Home/MyInfoSection.swift:45: add(\"activity\", \"figure.walk\", tr(\"Activité\"), profile.calculatedActivity?.title ?? activityFromWorkouts?.title)",
    "App/Screens/Home/MyInfoSection.swift:57: add(\"name\", \"briefcase\", tr(\"Activité\"), profile.knows(.businessName) ? business.name : nil)",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:495: .navigationTitle(tr(\"Activité\"))",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:108: Button(tr(\"Activité\")) { sheet = .activity(TripActivity(title: \"\", date: max(trip.start, Date()))) }"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:127: Button(tr(\"Activité\")) { sheet = .activity(TripActivity(title: \"\", date: max(trip.start, Date()))) }"
   ]
  },
  "Activité (visite, restaurant…)": {
@@ -2555,7 +2556,7 @@
  "Actuel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:286: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:288: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
    "Shared/Render/Tiles/TileView.swift:1217: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
   ]
  },
@@ -2631,7 +2632,7 @@
  "Afficher mon anniversaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:520: Toggle(tr(\"Afficher mon anniversaire\"), isOn: Binding("
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:553: Toggle(tr(\"Afficher mon anniversaire\"), isOn: Binding("
   ]
  },
  "Afrique du Sud": {
@@ -2900,7 +2901,7 @@
  "Ajoute un voyage : compte à rebours, heure sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:133: Text(tr(\"Ajoute un voyage : compte à rebours, heure sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit.\"))"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:145: Text(tr(\"Ajoute un voyage : compte à rebours, heure sur place, vols, hébergements, programme, budget et liste des choses à ne pas oublier, au même endroit.\"))"
   ]
  },
  "Ajoute un voyage : son compte à rebours apparaîtra ici.": {
@@ -3656,7 +3657,7 @@
   "uses": [
    "App/Core/DataItems.swift:116: case .birthday: tr(\"Anniversaire\")",
    "App/Screens/Profile/ProfileView.swift:415: DatePicker(tr(\"Anniversaire\"), selection: Binding(",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:544: Text(tr(\"Anniversaire\"))",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:577: Text(tr(\"Anniversaire\"))",
    "Shared/Model/Templates.swift:80: WidgetTemplate(id: \"countdown-birthday\", name: tr(\"Anniversaire\"), kind: .countdown, themeID: .minimal, accentHex: \"F2588F\","
   ]
  },
@@ -4112,7 +4113,7 @@
  "Arrivée %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:197: detail: stay.checkIn > now ? tr(\"Arrivée \\(Fmt.format(stay.checkIn, template: \"EEEdMMMHHmm\"))\") : tr(\"Départ \\(Fmt.format(stay.checkOut, template: \"EEEdMMMHHmm\"))\"),"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:217: detail: stay.checkIn > now ? tr(\"Arrivée \\(Fmt.format(stay.checkIn, template: \"EEEdMMMHHmm\"))\") : tr(\"Départ \\(Fmt.format(stay.checkOut, template: \"EEEdMMMHHmm\"))\"),"
   ]
  },
  "Arrivée %@ à %@": {
@@ -4325,7 +4326,7 @@
  "Assurance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:309: NumberRow(title: tr(\"Assurance\"), value: binding(\\.insuranceMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:359: NumberRow(title: tr(\"Assurance\"), value: binding(\\.insuranceMonthly), unit: tr(\"/ mois\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:355: NumberRow(title: tr(\"Assurance\"), value: carBinding(\\.insuranceMonthly), unit: tr(\"/ mois\"))"
   ]
  },
@@ -4350,7 +4351,7 @@
  "Assurance, immatriculation, pneus d'hiver…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:371: MiniRow(symbol: \"calendar.badge.exclamationmark\", colorHex: Car.alertHex, title: tr(\"Échéances\"), detail: tr(\"Assurance, immatriculation, pneus d'hiver…\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:382: MiniRow(symbol: \"calendar.badge.exclamationmark\", colorHex: Car.alertHex, title: tr(\"Échéances\"), detail: tr(\"Assurance, immatriculation, pneus d'hiver…\"))"
   ]
  },
  "Assurance, prêt, stationnement": {
@@ -4564,6 +4565,7 @@
  "Aucun plein noté. À chaque plein, note les litres, le prix et le compteur : la consommation se calcule entre deux pleins complets.": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Car/CarApp.swift:295: MiniFootnote(text: tr(\"Aucun plein noté. À chaque plein, note les litres, le prix et le compteur : la consommation se calcule entre deux pleins complets.\"))",
    "App/Screens/MiniApps/Car/CarPages.swift:22: Text(tr(\"Aucun plein noté. À chaque plein, note les litres, le prix et le compteur : la consommation se calcule entre deux pleins complets.\"))"
   ]
  },
@@ -4608,6 +4610,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/BusinessImport.swift:870: sentences.append(tr(\"Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue.\"))"
+  ]
+ },
+ "Aucun voyage pour l'instant.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:122: Text(tr(\"Aucun voyage pour l'instant.\"))"
   ]
  },
  "Aucun widget pour l'instant": {
@@ -4779,7 +4787,7 @@
  "Aucune valeur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:599: return parts.isEmpty ? tr(\"Aucune valeur\") : parts.joined(separator: \" · \")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:601: return parts.isEmpty ? tr(\"Aucune valeur\") : parts.joined(separator: \" · \")"
   ]
  },
  "Aucune vente notée pour l'instant.": {
@@ -4896,7 +4904,7 @@
  "Auto": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:105: .navigationTitle(state.name.isEmpty ? tr(\"Auto\") : state.name)",
+   "App/Screens/MiniApps/Car/CarApp.swift:110: .navigationTitle(state.name.isEmpty ? tr(\"Auto\") : state.name)",
    "App/Screens/MiniApps/MiniApp.swift:18: case .car: tr(\"Auto\")",
    "Shared/Model/KindCatalog.swift:22: case .car: tr(\"Auto\")",
    "Shared/Model/WidgetGroup.swift:49: case .car: tr(\"Auto\")"
@@ -4951,7 +4959,7 @@
  "Autonomie estimée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:130: MiniHero(label: tr(\"Compteur\"), value: odometer, caption: rangeText.map { \"\\(tr(\"Autonomie estimée\")) \\($0)\" })"
+   "App/Screens/MiniApps/Car/CarApp.swift:143: MiniHero(label: tr(\"Autonomie estimée\"), value: tr(\"≈ \\(Fmt.number(Int(range.km))) km\"), caption: \"\\(tr(\"Compteur\")) \\(odometer)\")"
   ]
  },
  "Autorisation": {
@@ -5042,7 +5050,7 @@
  "Autres frais": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:312: NumberRow(title: tr(\"Autres frais\"), value: binding(\\.otherMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:362: NumberRow(title: tr(\"Autres frais\"), value: binding(\\.otherMonthly), unit: tr(\"/ mois\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:358: NumberRow(title: tr(\"Autres frais\"), value: carBinding(\\.otherMonthly), unit: tr(\"/ mois\"))"
   ]
  },
@@ -6827,10 +6835,10 @@
  "Carburant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:345: MiniRow(symbol: \"fuelpump.fill\", colorHex: Car.fuelHex, title: tr(\"Carburant\"), detail: tr(\"Pleins, prix et consommation\"),",
    "App/Screens/MiniApps/Car/CarPages.swift:73: .navigationTitle(tr(\"Carburant\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:274: Share(name: tr(\"Carburant\"), hex: Car.fuelHex, value: cost.fuel),",
-   "Shared/Model/KindCatalog.swift:254: KindInfo(kind: .fuelStats, title: tr(\"Carburant\"), summary: tr(\"Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.\"), category: .car, symbol: \"fuelpump\", isPremium: true, fami"
+   "App/Screens/MiniApps/Car/CarPages.swift:315: Share(name: tr(\"Carburant\"), hex: Car.fuelHex, value: cost.fuel, source: tr(\"moyenne des 3 derniers mois\")),",
+   "Shared/Model/KindCatalog.swift:254: KindInfo(kind: .fuelStats, title: tr(\"Carburant\"), summary: tr(\"Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.\"), category: .car, symbol: \"fuelpump\", isPremium: true, fami",
+   "Shared/Render/Tiles/CarTiles.swift:32: TileRow(id: \"fuel\", title: tr(\"Carburant\"), value: TF.money(cost.fuel, currency), symbol: \"fuelpump\", progress: cost.fuel / cost.total),"
   ]
  },
  "Carburant : %@/km": {
@@ -7001,7 +7009,7 @@
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:60: add(\"revenue\", \"chart.line.uptrend.xyaxis\", tr(\"Ce mois-ci\"), business.sales.isEmpty ? nil : TF.money(BusinessMath.revenue(business, .month, at: Date()), currency))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:205: MiniSectionTitle(title: tr(\"Ce mois-ci\"), detail: Fmt.monthYear(now).capitalizedFirst)",
-   "App/Screens/MiniApps/Car/CarApp.swift:135: Text(tr(\"Ce mois-ci\")).font(.caption).opacity(0.75)",
+   "App/Screens/MiniApps/Car/CarApp.swift:151: Text(tr(\"Ce mois-ci\")).font(.caption).opacity(0.75)",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:1226: legend(tr(\"Ce mois-ci\"), color: ink, dashed: false)"
   ]
  },
@@ -7063,12 +7071,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/Templates.swift:108: WidgetTemplate(id: \"money-income\", name: tr(\"Ce que je gagne\"), kind: .moneyFlow, themeID: .light, accentHex: \"2F8F7A\","
-  ]
- },
- "Ce que la voiture coûte vraiment chaque mois": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:379: MiniRow(symbol: \"creditcard.fill\", colorHex: \"2F8F7A\", title: tr(\"Coûts\"), detail: tr(\"Ce que la voiture coûte vraiment chaque mois\"))"
   ]
  },
  "Ce que ton compte affichait": {
@@ -7386,7 +7388,7 @@
  "Cette période": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:296: legend(tr(\"Cette période\"), hex: accentHex, dashed: false)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:298: legend(tr(\"Cette période\"), hex: accentHex, dashed: false)"
   ]
  },
  "Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.": {
@@ -7739,7 +7741,7 @@
  "Chiffre d'affaires": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:375: Text(tr(\"Chiffre d'affaires\").uppercased())",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:377: Text(tr(\"Chiffre d'affaires\").uppercased())",
    "App/Screens/MiniApps/Business/BusinessPages.swift:181: .chartForegroundStyleScale([tr(\"Chiffre d'affaires\"): CristalPalette.of(style.id).category(BusinessFormat.accentHex), tr(\"Dépenses\"): CristalPalette.of(style.id).category(\"8A8A8E\").opacity(0.5), tr(\"B",
    "App/Screens/MiniApps/Business/BusinessPages.swift:196: MiniStat(title: tr(\"Chiffre d'affaires\"), value: TF.money(revenue, currency))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:207: MiniStat(title: tr(\"Chiffre d'affaires\"), value: TF.money(thisMonth.revenue, currency))"
@@ -7748,8 +7750,8 @@
  "Chiffre d'affaires cumulé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:278: MiniSectionTitle(title: tr(\"Chiffre d'affaires cumulé\"), detail: period == .day ? tr(\"cette semaine\") : nil)",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:291: .accessibilityLabel(tr(\"Chiffre d'affaires cumulé\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:280: MiniSectionTitle(title: tr(\"Chiffre d'affaires cumulé\"), detail: period == .day ? tr(\"cette semaine\") : nil)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:293: .accessibilityLabel(tr(\"Chiffre d'affaires cumulé\"))"
   ]
  },
  "Chiffre d'affaires et indicateurs": {
@@ -7775,7 +7777,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:308: StudioColorRow(title: tr(\"Chiffres\"), hex: $design.style.numberHex, fallback: style.numberColor)",
-   "App/Screens/MiniApps/Car/CarApp.swift:254: MiniSectionTitle(title: tr(\"Chiffres\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:271: MiniSectionTitle(title: tr(\"Chiffres\"))"
   ]
  },
  "Chiffres officiels des sociétés cotées": {
@@ -7866,7 +7868,7 @@
  "Choisir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:241: Label(tr(\"Choisir\"), systemImage: \"slider.horizontal.3\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:243: Label(tr(\"Choisir\"), systemImage: \"slider.horizontal.3\")"
   ]
  },
  "Choisir dans la bibliothèque": {
@@ -7915,8 +7917,8 @@
  "Choisir une date": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/MiniApp.swift:510: .accessibilityLabel(Text(tr(\"Choisir une date\")))",
-   "App/Screens/MiniApps/MiniApp.swift:549: .navigationTitle(tr(\"Choisir une date\"))"
+   "App/Screens/MiniApps/MiniApp.swift:513: .accessibilityLabel(Text(tr(\"Choisir une date\")))",
+   "App/Screens/MiniApps/MiniApp.swift:552: .navigationTitle(tr(\"Choisir une date\"))"
   ]
  },
  "Choisir une photo": {
@@ -7979,7 +7981,7 @@
  "Choisis les indicateurs à suivre ici : bénéfice, marge, panier moyen, conversion, MRR…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:249: Text(tr(\"Choisis les indicateurs à suivre ici : bénéfice, marge, panier moyen, conversion, MRR…\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:251: Text(tr(\"Choisis les indicateurs à suivre ici : bénéfice, marge, panier moyen, conversion, MRR…\"))"
   ]
  },
  "Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir.": {
@@ -8181,7 +8183,7 @@
  "Clients abonnés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:662: case .subscribers: tr(\"Clients abonnés\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:664: case .subscribers: tr(\"Clients abonnés\")"
   ]
  },
  "Club sandwich": {
@@ -8369,7 +8371,7 @@
  "Commandes divisées par les visiteurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:660: case .conversion: tr(\"Commandes divisées par les visiteurs\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:662: case .conversion: tr(\"Commandes divisées par les visiteurs\")"
   ]
  },
  "Commandes, panier moyen, nouveaux clients et conversion.": {
@@ -8565,8 +8567,8 @@
   "uses": [
    "App/Screens/Editor/SpaceOptionsSection.swift:13: case .counter: tr(\"Compteur\")",
    "App/Screens/Home/MyInfoSection.swift:73: add(\"km\", \"gauge.with.dots.needle.33percent\", tr(\"Compteur\"), CarMath.odometer(car).map { tr(\"\\(TF.int($0)) km\") })",
-   "App/Screens/MiniApps/Car/CarApp.swift:130: MiniHero(label: tr(\"Compteur\"), value: odometer, caption: rangeText.map { \"\\(tr(\"Autonomie estimée\")) \\($0)\" })",
-   "App/Screens/MiniApps/Car/CarPages.swift:94: MiniStat(title: tr(\"Compteur\"), value: CarMath.odometer(state).map { Fmt.number(Int($0)) } ?? \"–\", unit: tr(\"km\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:143: MiniHero(label: tr(\"Autonomie estimée\"), value: tr(\"≈ \\(Fmt.number(Int(range.km))) km\"), caption: \"\\(tr(\"Compteur\")) \\(odometer)\")",
+   "App/Screens/MiniApps/Car/CarApp.swift:145: MiniHero(label: tr(\"Compteur\"), value: odometer, caption: nil)"
   ]
  },
  "Compteur, focus, échéance et priorités.": {
@@ -8693,10 +8695,10 @@
  "Consommation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:258: MiniStat(title: tr(\"Consommation\"), value: TF.decimal(consumption, 1), unit: \"L/100\",",
+   "App/Screens/MiniApps/Car/CarApp.swift:275: MiniStat(title: tr(\"Consommation\"), value: TF.decimal(consumption, 1), unit: \"L/100\",",
+   "App/Screens/MiniApps/Car/CarApp.swift:278: MiniStat(title: tr(\"Consommation\"), value: \"–\", detail: tr(\"L / 100 km\"))",
    "App/Screens/MiniApps/Car/CarPages.swift:29: MiniSectionTitle(title: tr(\"Consommation\"), detail: CarMath.consumption(state).map { tr(\"moyenne \\(TF.decimal($0, 1)) L/100\") })",
-   "App/Screens/MiniApps/Car/CarPages.swift:35: .accessibilityLabel(tr(\"Consommation\"))",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:288: ValueRow(title: tr(\"Consommation\"), value: tr(\"\\(TF.decimal(consumption, 1)) L/100 km\"), symbol: \"fuelpump\")"
+   "App/Screens/MiniApps/Car/CarPages.swift:35: .accessibilityLabel(tr(\"Consommation\"))"
   ]
  },
  "Constats": {
@@ -9316,7 +9318,8 @@
  "Coût réel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:267: MiniStat(title: tr(\"Coût réel\"), value: TF.money(cost.total, currency), detail: tr(\"par mois, tout compris\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:285: MiniStat(title: tr(\"Coût réel\"), value: TF.money(cost.total, currency), detail: tr(\"par mois, tout compris\"))",
+   "App/Screens/MiniApps/Car/CarApp.swift:287: MiniStat(title: tr(\"Coût réel\"), value: \"–\", detail: tr(\"par mois\"))"
   ]
  },
  "Coût, entretien, kilométrage et carburant.": {
@@ -9328,8 +9331,7 @@
  "Coûts": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:379: MiniRow(symbol: \"creditcard.fill\", colorHex: \"2F8F7A\", title: tr(\"Coûts\"), detail: tr(\"Ce que la voiture coûte vraiment chaque mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:321: .navigationTitle(tr(\"Coûts\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:369: .navigationTitle(tr(\"Coûts\"))"
   ]
  },
  "Coûts fixes": {
@@ -9819,8 +9821,8 @@
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:89: DatePicker(tr(\"Date\"), selection: $design.options.countdownDate, displayedComponents: .date)",
    "App/Screens/Editor/KindOptionsSection.swift:114: DatePicker(tr(\"Date\"), selection: Binding(",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:736: DatePicker(tr(\"Date\"), selection: $date, in: ...Date(), displayedComponents: .date)",
-   "App/Screens/MiniApps/Finances/FinancesApplePay.swift:486: DatePicker(tr(\"Date\"), selection: $expense.date, displayedComponents: .date)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:738: DatePicker(tr(\"Date\"), selection: $date, in: ...Date(), displayedComponents: .date)",
+   "App/Screens/MiniApps/Car/CarHybrid.swift:23: DatePicker(tr(\"Date\"), selection: $date, displayedComponents: .date).environment(\\.locale, Fmt.locale)"
   ]
  },
  "Date cible": {
@@ -9840,8 +9842,8 @@
   "uses": [
    "App/Screens/Onboarding/OnboardingView.swift:219: DatePicker(tr(\"Date de naissance\"), selection: Binding(",
    "App/Screens/Profile/DataItemViews.swift:279: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:528: DatePicker(tr(\"Date de naissance\"), selection: $birthdayDraft, in: ...now, displayedComponents: .date)",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:537: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:561: DatePicker(tr(\"Date de naissance\"), selection: $birthdayDraft, in: ...now, displayedComponents: .date)",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:570: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)"
   ]
  },
  "Date estimée": {
@@ -10216,7 +10218,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DailyBrief.swift:500: let when = offset == 1 ? tr(\"Demain\") : Fmt.weekday(day)",
-   "App/Screens/MiniApps/MiniApp.swift:571: if let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return tr(\"Demain\") }",
+   "App/Screens/MiniApps/MiniApp.swift:574: if let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return tr(\"Demain\") }",
    "Shared/Model/WorldCities.swift:83: return r > l ? tr(\"Demain\") : tr(\"Hier\")",
    "Shared/Render/Kinds/ProductivityWidgets.swift:321: case 1: return tr(\"Demain\")"
   ]
@@ -10298,7 +10300,7 @@
  "Depuis le 1er janvier : bénéfice de %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:335: detail: tr(\"Depuis le 1er janvier : bénéfice de \\(TF.money(yearProfit, currency))\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:337: detail: tr(\"Depuis le 1er janvier : bénéfice de \\(TF.money(yearProfit, currency))\"))"
   ]
  },
  "Depuis le centre": {
@@ -10388,7 +10390,7 @@
  "Dernière valeur : %@, %@.": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:740: Text(tr(\"Dernière valeur : \\(BusinessFormat.number(latest.value, unit: metric.unit)), \\(Fmt.shortDay(latest.date)).\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:742: Text(tr(\"Dernière valeur : \\(BusinessFormat.number(latest.value, unit: metric.unit)), \\(Fmt.shortDay(latest.date)).\"))"
   ]
  },
  "Dernières ventes": {
@@ -10725,7 +10727,7 @@
    "App/Screens/Content/MoneyView.swift:43: Picker(tr(\"Devise\"), selection: Binding(",
    "App/Screens/Editor/KindOptionsSection.swift:183: Picker(tr(\"Devise\"), selection: Binding(",
    "App/Screens/MiniApps/MiniAppSettings.swift:165: Picker(tr(\"Devise\"), selection: Binding(",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:250: MiniSectionTitle(title: tr(\"Devise\"), detail: \"1 \\(currency) = \\(TF.decimal(rate, 3)) \\(trip.currencyCode)\")"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:278: MiniSectionTitle(title: tr(\"Devise\"), detail: \"1 \\(currency) = \\(TF.decimal(rate, 3)) \\(trip.currencyCode)\")"
   ]
  },
  "Devise (crypto)": {
@@ -11087,7 +11089,7 @@
  "Du %@ au %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:230: return tr(\"Du \\(dayMonth(BusinessMath.interval(period.math, containing: now).start)) au \\(dayMonth(now))\")",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:232: return tr(\"Du \\(dayMonth(BusinessMath.interval(period.math, containing: now).start)) au \\(dayMonth(now))\")",
    "Shared/Render/Tiles/TravelTiles.swift:39: tile.detail = tr(\"Du \\(Fmt.format(trip.start, template: \"dMMM\")) au \\(Fmt.format(trip.end, template: \"dMMM\"))\")"
   ]
  },
@@ -11453,7 +11455,7 @@
  "Déjà affiché en haut": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:622: Text(kpi == .revenue ? tr(\"Déjà affiché en haut\") : explanation(kpi)).font(.caption).foregroundStyle(Color.secondary)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:624: Text(kpi == .revenue ? tr(\"Déjà affiché en haut\") : explanation(kpi)).font(.caption).foregroundStyle(Color.secondary)"
   ]
  },
  "Déjà ajouté à l'instant": {
@@ -11571,7 +11573,7 @@
  "Départ %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:197: detail: stay.checkIn > now ? tr(\"Arrivée \\(Fmt.format(stay.checkIn, template: \"EEEdMMMHHmm\"))\") : tr(\"Départ \\(Fmt.format(stay.checkOut, template: \"EEEdMMMHHmm\"))\"),"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:217: detail: stay.checkIn > now ? tr(\"Arrivée \\(Fmt.format(stay.checkIn, template: \"EEEdMMMHHmm\"))\") : tr(\"Départ \\(Fmt.format(stay.checkOut, template: \"EEEdMMMHHmm\"))\"),"
   ]
  },
  "Départ %@ à %@": {
@@ -11589,19 +11591,19 @@
  "Départ aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:338: case ..<1: return tr(\"Départ aujourd'hui\")"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:386: case ..<1: return tr(\"Départ aujourd'hui\")"
   ]
  },
  "Départ dans %@ jours": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:340: default: return tr(\"Départ dans \\(days) jours\")"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:388: default: return tr(\"Départ dans \\(days) jours\")"
   ]
  },
  "Départ demain": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:339: case 1: return tr(\"Départ demain\")"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:387: case 1: return tr(\"Départ demain\")"
   ]
  },
  "Départ en voyage": {
@@ -11671,14 +11673,14 @@
   "uses": [
    "App/Screens/Content/MoneyView.swift:124: Text(tr(\"Dépense\")).tag(false)",
    "App/Screens/MiniApps/Business/BusinessApp.swift:182: MiniActionButton(title: tr(\"Dépense\"), symbol: \"minus\", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:465: Label(tr(\"Dépense\"), systemImage: \"minus\")",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:467: Label(tr(\"Dépense\"), systemImage: \"minus\")",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:491: title: expense.note.isEmpty ? (category?.name ?? tr(\"Dépense\")) : expense.note,"
   ]
  },
  "Dépense de voyage": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:366: SheetForm(title: isNew ? tr(\"Dépense de voyage\") : tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:415: SheetForm(title: isNew ? tr(\"Dépense de voyage\") : tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {"
   ]
  },
  "Dépense et factures": {
@@ -11994,7 +11996,7 @@
  "EN VOYAGE": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:320: MiniHero(label: \"\\(trip.destination) · \\(ongoing ? tr(\"EN VOYAGE\") : tr(\"PROCHAIN VOYAGE\"))\","
+   "App/Screens/MiniApps/Travel/TravelApp.swift:354: MiniHero(label: \"\\(trip.destination) · \\(ongoing ? tr(\"EN VOYAGE\") : tr(\"PROCHAIN VOYAGE\"))\","
   ]
  },
  "ETF": {
@@ -12380,7 +12382,7 @@
  "Enregistrer la date": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:530: Button(tr(\"Enregistrer la date\")) {"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:563: Button(tr(\"Enregistrer la date\")) {"
   ]
  },
  "Enregistrer la dépense": {
@@ -12476,10 +12478,10 @@
  "Entretien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:239: MiniRow(symbol: \"wrench.and.screwdriver.fill\", colorHex: \"3366FF\", title: service.name, detail: tr(\"Entretien\"),",
-   "App/Screens/MiniApps/Car/CarApp.swift:284: MiniSectionTitle(title: tr(\"Entretien\"))",
-   "App/Screens/MiniApps/Car/CarApp.swift:362: MiniRow(symbol: \"wrench.and.screwdriver.fill\", colorHex: \"3366FF\", title: tr(\"Entretien\"), detail: tr(\"Vidange, pneus, freins…\"),",
-   "App/Screens/MiniApps/Car/CarPages.swift:189: .navigationTitle(tr(\"Entretien\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:255: MiniRow(symbol: \"wrench.and.screwdriver.fill\", colorHex: \"3366FF\", title: service.name, detail: tr(\"Entretien\"),",
+   "App/Screens/MiniApps/Car/CarApp.swift:307: CarSectionHead(title: tr(\"Entretien\"), page: .carMaintenance)",
+   "App/Screens/MiniApps/Car/CarApp.swift:373: MiniRow(symbol: \"wrench.and.screwdriver.fill\", colorHex: \"3366FF\", title: tr(\"Entretien\"), detail: tr(\"Vidange, pneus, freins…\"),",
+   "App/Screens/MiniApps/Car/CarPages.swift:208: .navigationTitle(tr(\"Entretien\"))"
   ]
  },
  "Entretien et carburant": {
@@ -12491,7 +12493,7 @@
  "Entretien prévu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:313: NumberRow(title: tr(\"Entretien prévu\"), value: binding(\\.maintenanceYearly), unit: tr(\"/ an\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:363: NumberRow(title: tr(\"Entretien prévu\"), value: binding(\\.maintenanceYearly), unit: tr(\"/ an\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:359: NumberRow(title: tr(\"Entretien prévu\"), value: carBinding(\\.maintenanceYearly), unit: tr(\"/ an\"))"
   ]
  },
@@ -12504,7 +12506,7 @@
  "Environ %@ L dans le réservoir, d'après ta consommation depuis le plein du %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:147: Text(tr(\"Environ \\(TF.int(range.liters)) L dans le réservoir, d'après ta consommation depuis le plein du \\(Fmt.format(range.since.date, template: \"dMMMM\"))\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:163: Text(tr(\"Environ \\(TF.int(range.liters)) L dans le réservoir, d'après ta consommation depuis le plein du \\(Fmt.format(range.since.date, template: \"dMMMM\"))\"))"
   ]
  },
  "Envoyer la facture": {
@@ -12719,7 +12721,7 @@
  "Exercice introuvable": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/MiniApp.swift:192: ContentUnavailableView(tr(\"Exercice introuvable\"), systemImage: \"dumbbell\")"
+   "App/Screens/MiniApps/MiniApp.swift:194: ContentUnavailableView(tr(\"Exercice introuvable\"), systemImage: \"dumbbell\")"
   ]
  },
  "Exercices": {
@@ -13130,7 +13132,13 @@
  "Fait aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:165: Label(tr(\"Fait aujourd'hui\"), systemImage: \"checkmark\")"
+   "App/Screens/MiniApps/Car/CarPages.swift:190: MiniActionButton(title: tr(\"Fait aujourd'hui\"), symbol: \"checkmark\", colorHex: \"3366FF\", isProminent: false) {"
+  ]
+ },
+ "Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarPages.swift:206: MiniFootnote(text: tr(\"Fait aujourd'hui remet le compteur et la date de l'entretien à aujourd'hui.\"))"
   ]
  },
  "Faite": {
@@ -13778,8 +13786,8 @@
  "Frais fixes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:273: Share(name: tr(\"Frais fixes\"), hex: \"2F8F7A\", value: cost.fixed),",
-   "App/Screens/MiniApps/Car/CarPages.swift:315: Text(tr(\"Frais fixes\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:314: Share(name: tr(\"Frais fixes\"), hex: \"2F8F7A\", value: cost.fixed, source: tr(\"assurance, prêt, stationnement, autres\")),",
+   "App/Screens/MiniApps/Car/CarPages.swift:357: MiniSectionTitle(title: tr(\"Frais fixes\"))"
   ]
  },
  "Fraises": {
@@ -14338,12 +14346,6 @@
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:1131: Text(tr(\"Glisse un aliment vers la gauche pour le retirer de ce repas.\"))"
   ]
  },
- "Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:184: Text(tr(\"Glisse vers la droite quand un entretien est fait : il repart du compteur d'aujourd'hui.\"))"
-  ]
- },
  "Glucides": {
   "placeholders": 0,
   "uses": [
@@ -14871,7 +14873,7 @@
  "Heure locale": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:349: parts.append(\"\\(tr(\"Heure locale\")) \\(Fmt.time(date, uses24Hour: true, timeZone: trip.timeZone))\")"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:398: parts.append(\"\\(tr(\"Heure locale\")) \\(Fmt.time(date, uses24Hour: true, timeZone: trip.timeZone))\")"
   ]
  },
  "Heure sur 24 h": {
@@ -14930,7 +14932,7 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:392: if let yesterday = DateMath.calendar.date(byAdding: .day, value: -1, to: now), DateMath.isSameDay(day, yesterday) { return tr(\"Hier\") }",
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:189: chip(tr(\"Hier\"), symbol: nil, isOn: day == .yesterday) { day = .yesterday }",
-   "App/Screens/MiniApps/MiniApp.swift:570: if let yesterday = calendar.date(byAdding: .day, value: -1, to: Date()), DateMath.isSameDay(day, yesterday) { return tr(\"Hier\") }",
+   "App/Screens/MiniApps/MiniApp.swift:573: if let yesterday = calendar.date(byAdding: .day, value: -1, to: Date()), DateMath.isSameDay(day, yesterday) { return tr(\"Hier\") }",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:484: case .yesterday: tr(\"Hier\")"
   ]
  },
@@ -14956,6 +14958,7 @@
  "Historique": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(tr(\"Historique\")).font(.footnote.weight(.semibold)).foregroundStyle(.secondary).padding(.bottom, 4)",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:508: shortcut(symbol: \"clock.arrow.circlepath\", title: tr(\"Historique\"), value: HomeRoute.page(.fitnessHistory), identifier: \"fitness-history\")",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:196: .navigationTitle(tr(\"Historique\"))",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:524: .navigationTitle(tr(\"Historique\"))"
@@ -15134,7 +15137,7 @@
  "Hébergement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:107: Button(tr(\"Hébergement\")) { sheet = .stay(Stay(name: \"\", checkIn: trip.start, checkOut: trip.end)) }",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:126: Button(tr(\"Hébergement\")) { sheet = .stay(Stay(name: \"\", checkIn: trip.start, checkOut: trip.end)) }",
    "App/Screens/MiniApps/Travel/TravelPages.swift:21: addButton(tr(\"Hébergement\"), symbol: \"bed.double.fill\") { sheet = .stay(Stay(name: \"\", checkIn: trip.start, checkOut: trip.end)) }",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:87: Section(tr(\"Hébergement\")) {",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:231: SheetForm(title: tr(\"Hébergement\"), canSave: !stay.name.trimmed.isEmpty && stay.checkOut > stay.checkIn, onSave: save) {"
@@ -15255,7 +15258,7 @@
  "Il reste %@ : environ %@ par jour d'ici la fin du mois.": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:422: Text(tr(\"Il reste \\(TF.money(goal - revenue, currency)) : environ \\(TF.money(perDay, currency)) par jour d'ici la fin du mois.\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:424: Text(tr(\"Il reste \\(TF.money(goal - revenue, currency)) : environ \\(TF.money(perDay, currency)) par jour d'ici la fin du mois.\"))"
   ]
  },
  "Il reste %@ sur %@": {
@@ -15493,7 +15496,7 @@
  "Indicateurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:239: MiniSectionTitle(title: tr(\"Indicateurs\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:241: MiniSectionTitle(title: tr(\"Indicateurs\"))",
    "App/Screens/Spaces/MoneySpaces.swift:432: Section(tr(\"Indicateurs\")) {",
    "Shared/Model/KindCatalog.swift:208: KindInfo(kind: .businessKPIs, title: tr(\"Indicateurs\"), summary: tr(\"Commandes, panier moyen, nouveaux clients et conversion.\"), category: .business, symbol: \"square.grid.2x2\", isPremium: true, famili"
   ]
@@ -15507,7 +15510,7 @@
  "Indique la taille du réservoir pour voir l'autonomie": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:153: Label(tr(\"Indique la taille du réservoir pour voir l'autonomie\"), systemImage: \"fuelpump\")"
+   "App/Screens/MiniApps/Car/CarApp.swift:169: Label(tr(\"Indique la taille du réservoir pour voir l'autonomie\"), systemImage: \"fuelpump\")"
   ]
  },
  "Indique les dates de ta session dans Ardane, espace Études.": {
@@ -15671,8 +15674,8 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:103: return \"\\(trip.destination) · \" + tr(\"J-\\(DateMath.daysBetween(now, trip.start))\")",
-   "App/Screens/MiniApps/Car/CarApp.swift:313: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\")))",
+   "App/Screens/MiniApps/Car/CarApp.swift:336: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:276: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:54: default: return tr(\"J-\\(days)\")"
   ]
  },
@@ -15780,7 +15783,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:43: case .day: tr(\"Jour\")",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:292: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:294: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
    "App/Screens/MiniApps/Planning/PlanningApp.swift:448: DatePicker(tr(\"Jour\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .date)",
    "App/Screens/MiniApps/Planning/PlanningCalendar.swift:10: case .day: tr(\"Jour\")"
   ]
@@ -15834,13 +15837,13 @@
  "Jour précédent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/MiniApp.swift:496: .accessibilityLabel(Text(tr(\"Jour précédent\")))"
+   "App/Screens/MiniApps/MiniApp.swift:499: .accessibilityLabel(Text(tr(\"Jour précédent\")))"
   ]
  },
  "Jour suivant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/MiniApp.swift:534: .accessibilityLabel(Text(tr(\"Jour suivant\")))"
+   "App/Screens/MiniApps/MiniApp.swift:537: .accessibilityLabel(Text(tr(\"Jour suivant\")))"
   ]
  },
  "Journée": {
@@ -15887,7 +15890,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:71: Picker(tr(\"Jours fériés\"), selection: Binding(",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:549: Section(tr(\"Jours fériés\")) {"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:582: Section(tr(\"Jours fériés\")) {"
   ]
  },
  "Joyeux anniversaire !": {
@@ -16107,7 +16110,7 @@
  "Kilomètres par mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:354: MiniRow(symbol: \"speedometer\", colorHex: accentHex, title: tr(\"Kilométrage\"), detail: tr(\"Kilomètres par mois\"))",
+   "App/Screens/MiniApps/Car/CarApp.swift:365: MiniRow(symbol: \"speedometer\", colorHex: accentHex, title: tr(\"Kilométrage\"), detail: tr(\"Kilomètres par mois\"))",
    "App/Screens/MiniApps/Car/CarPages.swift:100: MiniSectionTitle(title: tr(\"Kilomètres par mois\"))",
    "App/Screens/MiniApps/Car/CarPages.swift:106: .accessibilityLabel(tr(\"Kilomètres par mois\"))"
   ]
@@ -16115,9 +16118,9 @@
  "Kilométrage": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:93: MiniActionButton(title: tr(\"Kilométrage\"), symbol: \"speedometer\", colorHex: accentHex, isProminent: false) { sheet = .odometer }",
-   "App/Screens/MiniApps/Car/CarApp.swift:354: MiniRow(symbol: \"speedometer\", colorHex: accentHex, title: tr(\"Kilométrage\"), detail: tr(\"Kilomètres par mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:132: .navigationTitle(tr(\"Kilométrage\"))",
+   "App/Screens/MiniApps/Car/CarApp.swift:94: MiniActionButton(title: tr(\"Kilométrage\"), symbol: \"speedometer\", colorHex: accentHex, isProminent: false) { sheet = .odometer }",
+   "App/Screens/MiniApps/Car/CarApp.swift:365: MiniRow(symbol: \"speedometer\", colorHex: accentHex, title: tr(\"Kilométrage\"), detail: tr(\"Kilomètres par mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:137: .navigationTitle(tr(\"Kilométrage\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:444: SheetForm(title: tr(\"Kilométrage\"), canSave: km > 0, onSave: save) {"
   ]
  },
@@ -16137,6 +16140,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/FoodDatabase.swift:162: f(\"kefir\", tr(\"Kéfir nature\"), 41, 3.8, 4.5, 0.9, 0, 250, tr(\"1 tasse\"), s: 4.6, sf: 0.6, na: 40, chol: 5),"
+  ]
+ },
+ "L / 100 km": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarApp.swift:278: MiniStat(title: tr(\"Consommation\"), value: \"–\", detail: tr(\"L / 100 km\"))"
   ]
  },
  "L [fat]": {
@@ -16741,7 +16750,7 @@
  "La taille du réservoir (dans le manuel ou sur le site du constructeur) sert à estimer l'autonomie après un plein complet.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:424: Text(tr(\"La taille du réservoir (dans le manuel ou sur le site du constructeur) sert à estimer l'autonomie après un plein complet.\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:446: Text(tr(\"La taille du réservoir (dans le manuel ou sur le site du constructeur) sert à estimer l'autonomie après un plein complet.\"))"
   ]
  },
  "La tête passe légèrement vers l'avant une fois la charge au-dessus.": {
@@ -17053,13 +17062,13 @@
  "Le bénéfice rapporté aux ventes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:655: case .margin: tr(\"Le bénéfice rapporté aux ventes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:657: case .margin: tr(\"Le bénéfice rapporté aux ventes\")"
   ]
  },
  "Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:317: Text(tr(\"Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:366: MiniFootnote(text: tr(\"Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.\"))"
   ]
  },
  "Le changement est limité par les bornes de sécurité d'Ardane.": {
@@ -17077,7 +17086,7 @@
  "Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:636: Text(tr(\"Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment.\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:638: Text(tr(\"Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment.\"))"
   ]
  },
  "Le chiffre d'affaires, les dépenses et le bénéfice viennent des ventes que tu notes.": {
@@ -17102,6 +17111,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/Packs.swift:137: WidgetPack(id: \"christmas-eve\", name: tr(\"Veillée de Noël\"), tagline: tr(\"Le compte à rebours de Noël, le calendrier et les jours fériés.\"), symbol: \"gift.fill\","
+  ]
+ },
+ "Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarHybrid.swift:25: Text(tr(\"Le compteur prend le plus grand kilométrage noté : corrige ici un relevé faux.\"))"
   ]
  },
  "Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée.": {
@@ -17348,7 +17363,7 @@
  "Le nombre de commandes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:656: case .orders: tr(\"Le nombre de commandes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:658: case .orders: tr(\"Le nombre de commandes\")"
   ]
  },
  "Le pack « %@ »": {
@@ -17528,13 +17543,13 @@
  "Le total de tes dépenses": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:653: case .costs: tr(\"Le total de tes dépenses\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:655: case .costs: tr(\"Le total de tes dépenses\")"
   ]
  },
  "Le total de tes ventes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:652: case .revenue: tr(\"Le total de tes ventes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:654: case .revenue: tr(\"Le total de tes ventes\")"
   ]
  },
  "Le widget Régularité suit cet objectif.": {
@@ -17680,7 +17695,7 @@
  "Les clients arrivés sur la période": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:658: case .newCustomers: tr(\"Les clients arrivés sur la période\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:660: case .newCustomers: tr(\"Les clients arrivés sur la période\")"
   ]
  },
  "Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près.": {
@@ -17941,7 +17956,7 @@
  "Les relevés viennent de tes pleins et des kilométrages notés.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:128: Text(tr(\"Les relevés viennent de tes pleins et des kilométrages notés.\")).font(.footnote).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Car/CarPages.swift:133: Text(tr(\"Les relevés viennent de tes pleins et des kilométrages notés.\")).font(.footnote).foregroundStyle(.secondary)"
   ]
  },
  "Les revenus d'une société, son action et son aperçu.": {
@@ -18013,7 +18028,7 @@
  "Les visites notées avec tes ventes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:659: case .visitors: tr(\"Les visites notées avec tes ventes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:661: case .visitors: tr(\"Les visites notées avec tes ventes\")"
   ]
  },
  "Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions.": {
@@ -18378,7 +18393,7 @@
  "Lune": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:558: Section(tr(\"Lune\")) {",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:591: Section(tr(\"Lune\")) {",
    "Shared/Model/Templates.swift:127: WidgetTemplate(id: \"moon-futuristic\", name: tr(\"Lune\"), kind: .moonPhase, themeID: .futuristic, accentHex: \"3366FF\"),",
    "Shared/Render/Tiles/TimeTiles.swift:185: var tile = Tile(title: tr(\"Lune\"), symbol: MoonPhase.symbol(at: now))"
   ]
@@ -18545,7 +18560,7 @@
  "MRR, abonnés, ARR": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:342: detail: tr(\"MRR, abonnés, ARR\"), value: BusinessMath.recurring(state).map { TF.money($0.mrr, currency) })"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:344: detail: tr(\"MRR, abonnés, ARR\"), value: BusinessMath.recurring(state).map { TF.money($0.mrr, currency) })"
   ]
  },
  "Ma bibliothèque": {
@@ -18593,9 +18608,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreCombos.swift:211: combo(\"ma-voiture\", tr(\"Ma voiture\"), tr(\"Ce qu'elle coûte, son entretien et son kilométrage.\"), .dark, \"6B7280\",",
-   "App/Screens/MiniApps/Car/CarApp.swift:418: SheetForm(title: tr(\"Ma voiture\"), canSave: true, onSave: save) {",
-   "App/Screens/MiniApps/Car/CarApp.swift:435: model.setCarName(name.trimmed.isEmpty ? tr(\"Ma voiture\") : name.trimmed)",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:294: Text(tr(\"Ma voiture\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:114: .accessibilityLabel(tr(\"Ma voiture\"))",
+   "App/Screens/MiniApps/Car/CarApp.swift:440: SheetForm(title: tr(\"Ma voiture\"), canSave: true, onSave: save) {",
+   "App/Screens/MiniApps/Car/CarApp.swift:457: model.setCarName(name.trimmed.isEmpty ? tr(\"Ma voiture\") : name.trimmed)"
   ]
  },
  "Macaroni au fromage": {
@@ -18949,7 +18964,8 @@
  "Marquer comme fait": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:406: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:406: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:512: Label(tr(\"Marquer comme fait\"), systemImage: \"checkmark\")"
   ]
  },
  "Marquer comme rendu": {
@@ -19204,7 +19220,7 @@
  "Mes indicateurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:640: .navigationTitle(tr(\"Mes indicateurs\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:642: .navigationTitle(tr(\"Mes indicateurs\"))"
   ]
  },
  "Mes informations": {
@@ -19301,7 +19317,9 @@
  "Mes voyages": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:279: MiniSectionTitle(title: tr(\"Mes voyages\"))"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:305: MiniSectionTitle(title: tr(\"Mes voyages\"), detail: \"\\(state.trips.count)\")",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:322: MiniSectionTitle(title: tr(\"Mes voyages\"), detail: \"\\(finished.count)\")",
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:138: .navigationTitle(tr(\"Mes voyages\"))"
   ]
  },
  "Mes widgets": {
@@ -19511,7 +19529,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:456: SheetForm(title: tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:366: SheetForm(title: isNew ? tr(\"Dépense de voyage\") : tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:415: SheetForm(title: isNew ? tr(\"Dépense de voyage\") : tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {",
    "App/Screens/Spaces/BudgetSpace.swift:203: SheetForm(title: isNew ? tr(\"Dépense\") : tr(\"Modifier la dépense\"), canSave: expense.amount > 0, onSave: save) {",
    "App/Screens/Spaces/MoneySpaces.swift:269: SheetForm(title: isNew ? tr(\"Dépense\") : tr(\"Modifier la dépense\"), canSave: cost.amount > 0, onSave: save) {"
   ]
@@ -19563,7 +19581,8 @@
  "Modifier le voyage": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:283: MiniRow(symbol: \"pencil\", colorHex: \"8A8A8E\", title: tr(\"Modifier le voyage\"), detail: \"\\(current.destination) · \\(Travel.dates(current))\")"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:370: .accessibilityLabel(Text(tr(\"Modifier le voyage\")))",
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:199: MiniActionButton(title: tr(\"Modifier le voyage\"), symbol: \"pencil\", colorHex: Travel.accentHex, isProminent: false) { sheet = .trip(trip) }"
   ]
  },
  "Module des widgets": {
@@ -19594,7 +19613,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:45: case .month: tr(\"Mois\")",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:292: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:294: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:833: case .month: tr(\"Mois\")",
    "App/Screens/MiniApps/Planning/PlanningCalendar.swift:12: case .month: tr(\"Mois\")"
   ]
@@ -20382,7 +20401,7 @@
  "Nom (abonnés, devis envoyés, NPS…)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:682: TextField(tr(\"Nom (abonnés, devis envoyés, NPS…)\"), text: $metric.name)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:684: TextField(tr(\"Nom (abonnés, devis envoyés, NPS…)\"), text: $metric.name)"
   ]
  },
  "Nom (café, bus…)": {
@@ -20468,7 +20487,7 @@
  "Nom de la voiture": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:420: TextField(tr(\"Nom de la voiture\"), text: $name)",
+   "App/Screens/MiniApps/Car/CarApp.swift:442: TextField(tr(\"Nom de la voiture\"), text: $name)",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:283: TextField(tr(\"Nom de la voiture\"), text: Binding(get: { state.name }, set: { name in model.setCarName(name) }))"
   ]
  },
@@ -20553,7 +20572,7 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:485: TextField(tr(\"Note (facultatif)\"), text: $expense.note)",
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:84: TextField(tr(\"Note (facultatif)\"), text: $note)",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:376: TextField(tr(\"Note (facultatif)\"), text: $expense.label)",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:425: TextField(tr(\"Note (facultatif)\"), text: $expense.label)",
    "App/Screens/Spaces/BudgetSpace.swift:212: TextField(tr(\"Note (facultatif)\"), text: $expense.note)"
   ]
  },
@@ -20584,7 +20603,7 @@
  "Note tes pleins et ton kilométrage : consommation, autonomie, coût réel par mois, entretiens et échéances se suivent tout seuls.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:113: Text(tr(\"Note tes pleins et ton kilométrage : consommation, autonomie, coût réel par mois, entretiens et échéances se suivent tout seuls.\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:125: Text(tr(\"Note tes pleins et ton kilométrage : consommation, autonomie, coût réel par mois, entretiens et échéances se suivent tout seuls.\"))"
   ]
  },
  "Note tes revenus et tes dépenses : ton solde s'affichera ici.": {
@@ -20830,9 +20849,9 @@
  "Nouveau voyage": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:113: Button(tr(\"Nouveau voyage\")) { sheet = .trip(Travel.newTrip()) }",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:125: MiniFloatingAction(title: tr(\"Nouveau voyage\"), symbol: \"plus\", colorHex: accentHex, identifier: \"travel-new-trip\") { sheet = .trip(Travel.newTrip()) }",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:299: MiniRow(symbol: \"plus\", colorHex: accentHex, title: tr(\"Nouveau voyage\"), showsChevron: false)",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:130: Button(tr(\"Nouveau voyage\")) { sheet = .trip(Travel.newTrip()) }",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:137: MiniFloatingAction(title: tr(\"Nouveau voyage\"), symbol: \"plus\", colorHex: accentHex, identifier: \"travel-new-trip\") { sheet = .trip(Travel.newTrip()) }",
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:133: MiniActionButton(title: tr(\"Nouveau voyage\"), symbol: \"plus\", colorHex: Travel.accentHex, isProminent: false) {",
    "App/Screens/Profile/DataItemViews.swift:256: buttons(add: tr(\"Nouveau voyage\"), space: model.isFilled(.trip) ? .travel : nil) {"
   ]
  },
@@ -20861,7 +20880,7 @@
  "Nouvel entretien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:181: Label(tr(\"Nouvel entretien\"), systemImage: \"plus\")",
+   "App/Screens/MiniApps/Car/CarPages.swift:172: MiniActionButton(title: tr(\"Nouvel entretien\"), symbol: \"plus\", colorHex: \"3366FF\") {",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:331: Label(tr(\"Nouvel entretien\"), systemImage: \"plus\")"
   ]
  },
@@ -20895,7 +20914,7 @@
  "Nouvel indicateur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:680: SheetForm(title: isNew ? tr(\"Nouvel indicateur\") : metric.name, canSave: !metric.name.trimmed.isEmpty, onSave: save) {",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:682: SheetForm(title: isNew ? tr(\"Nouvel indicateur\") : metric.name, canSave: !metric.name.trimmed.isEmpty, onSave: save) {",
    "App/Screens/MiniApps/Business/BusinessPages.swift:326: MiniActionButton(title: tr(\"Nouvel indicateur\"), symbol: \"plus\", colorHex: BusinessFormat.accentHex) {"
   ]
  },
@@ -21019,7 +21038,7 @@
  "Nouvelle échéance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:240: Label(tr(\"Nouvelle échéance\"), systemImage: \"plus\")",
+   "App/Screens/MiniApps/Car/CarPages.swift:262: MiniActionButton(title: tr(\"Nouvelle échéance\"), symbol: \"plus\", colorHex: Car.alertHex) {",
    "App/Screens/Profile/DataItemViews.swift:168: buttons(add: tr(\"Nouvelle échéance\"), space: model.isFilled(.deadlines) ? .productivity : nil) {",
    "App/Screens/Profile/DataItemViews.swift:274: buttons(add: tr(\"Nouvelle échéance\"), space: model.isFilled(.carDeadlines) ? .car : nil) {",
    "App/Screens/Spaces/ProductivitySpace.swift:103: Label(tr(\"Nouvelle échéance\"), systemImage: \"plus\")"
@@ -21236,7 +21255,7 @@
  "Objectif atteint": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:427: Text(tr(\"Objectif atteint\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:429: Text(tr(\"Objectif atteint\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:198: insightCard(symbol: \"checkmark.seal.fill\", title: tr(\"Objectif atteint\"), message: tr(\"Tu es dans ta cible de calories aujourd'hui.\"), action: nil)",
    "Shared/Render/Tiles/MoneyTiles.swift:115: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")",
    "Shared/Render/Tiles/NutritionTiles.swift:163: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")"
@@ -21784,7 +21803,7 @@
  "PROCHAIN VOYAGE": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:320: MiniHero(label: \"\\(trip.destination) · \\(ongoing ? tr(\"EN VOYAGE\") : tr(\"PROCHAIN VOYAGE\"))\","
+   "App/Screens/MiniApps/Travel/TravelApp.swift:354: MiniHero(label: \"\\(trip.destination) · \\(ongoing ? tr(\"EN VOYAGE\") : tr(\"PROCHAIN VOYAGE\"))\","
   ]
  },
  "Pack %@, %@ widgets. %@": {
@@ -21828,7 +21847,7 @@
  "Pages": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:324: MiniSectionTitle(title: tr(\"Pages\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:326: MiniSectionTitle(title: tr(\"Pages\"))"
   ]
  },
  "Paiement en ligne": {
@@ -21985,7 +22004,7 @@
    "App/Screens/Content/MoneyView.swift:25: summaryValue(tr(\"Par mois\"), Fmt.signedMoney(summary.perDayNet * MoneySummary.daysPerMonth, currency: currency, decimals: 0))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:166: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:180: .accessibilityLabel(tr(\"Par mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:280: Text(tr(\"Par mois\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Car/CarPages.swift:320: Text(tr(\"Par mois\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)"
   ]
  },
  "Par muscle": {
@@ -22115,7 +22134,7 @@
  "Pas encore de repère": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:43: return parts.isEmpty ? tr(\"Pas encore de repère\") : parts.joined(separator: tr(\" ou \"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:46: return parts.isEmpty ? tr(\"Pas encore de repère\") : parts.joined(separator: tr(\" ou \"))"
   ]
  },
  "Pas encore de série": {
@@ -22136,7 +22155,7 @@
  "Pas encore fait": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:199: return parts.isEmpty ? tr(\"Pas encore fait\") : parts.joined(separator: \" · \").capitalizedFirst"
+   "App/Screens/MiniApps/Car/CarPages.swift:246: return parts.isEmpty ? tr(\"Pas encore fait\") : parts.joined(separator: \" · \").capitalizedFirst"
   ]
  },
  "Pas envie de partir de zéro ? Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé.": {
@@ -22795,8 +22814,9 @@
  "Plein": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:91: MiniActionButton(title: tr(\"Plein\"), symbol: \"plus\", colorHex: accentHex) { sheet = .fuel(nil) }",
-   "App/Screens/MiniApps/Car/CarApp.swift:229: MiniRow(symbol: fill.isFull ? \"fuelpump.fill\" : \"fuelpump\", colorHex: Car.fuelHex, title: tr(\"Plein\"),",
+   "App/Screens/MiniApps/Car/CarApp.swift:92: MiniActionButton(title: tr(\"Plein\"), symbol: \"plus\", colorHex: accentHex) { sheet = .fuel(nil) }",
+   "App/Screens/MiniApps/Car/CarApp.swift:245: MiniRow(symbol: fill.isFull ? \"fuelpump.fill\" : \"fuelpump\", colorHex: Car.fuelHex, title: tr(\"Plein\"),",
+   "App/Screens/MiniApps/Car/CarPages.swift:127: detail: \"\\(point.isReading ? tr(\"Relevé\") : tr(\"Plein\")) · \\(Fmt.shortDay(point.date))\")",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:407: SheetForm(title: isNew ? tr(\"Plein\") : tr(\"Modifier le plein\"), canSave: fill.liters > 0 && fill.total > 0 && fill.odometer > 0, onSave: save) {"
   ]
  },
@@ -22821,7 +22841,7 @@
  "Pleine lune": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:560: ValueRow(title: tr(\"Pleine lune\"), value: Fmt.shortDay(MoonPhase.next(0.5, after: now)), symbol: \"moonphase.full.moon\")",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:593: ValueRow(title: tr(\"Pleine lune\"), value: Fmt.shortDay(MoonPhase.next(0.5, after: now)), symbol: \"moonphase.full.moon\")",
    "Shared/Domains/Life.swift:224: tr(\"Pleine lune\"), tr(\"Lune gibbeuse décroissante\"), tr(\"Dernier quartier\"), tr(\"Dernier croissant\")][index(phase(at: date))]",
    "Shared/Render/Tiles/TimeTiles.swift:192: TileRow(id: \"full\", title: tr(\"Pleine lune\"), value: Fmt.shortDay(full), symbol: \"moonphase.full.moon\"),"
   ]
@@ -22849,12 +22869,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:39: case .car: tr(\"Pleins, entretiens et coûts\")"
-  ]
- },
- "Pleins, prix et consommation": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:345: MiniRow(symbol: \"fuelpump.fill\", colorHex: Car.fuelHex, title: tr(\"Carburant\"), detail: tr(\"Pleins, prix et consommation\"),"
   ]
  },
  "Plie le coude pour monter l'haltère vers l'épaule.": {
@@ -22963,7 +22977,7 @@
  "Plus c'est haut, mieux c'est": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:685: Toggle(tr(\"Plus c'est haut, mieux c'est\"), isOn: $metric.higherIsBetter)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:687: Toggle(tr(\"Plus c'est haut, mieux c'est\"), isOn: $metric.higherIsBetter)"
   ]
  },
  "Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.": {
@@ -24054,7 +24068,7 @@
  "Prochain anniversaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:541: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:574: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
   ]
  },
  "Prochain cours": {
@@ -24239,8 +24253,8 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:505: shortcut(symbol: \"dumbbell.fill\", title: tr(\"Programme\"), value: HomeRoute.page(.fitnessProgram), identifier: \"fitness-program\")",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:103: .navigationTitle(tr(\"Programme\"))",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:147: MiniSectionTitle(title: tr(\"Programme\"), detail: Fmt.shortDay(day))",
-   "App/Screens/MiniApps/Travel/TravelPages.swift:34: .navigationTitle(tr(\"Programme\"))"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:160: MiniSectionTitle(title: tr(\"Programme\"), detail: Fmt.shortDay(day))",
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:180: MiniRow(symbol: \"calendar\", colorHex: Travel.accentHex, title: tr(\"Programme\"),"
   ]
  },
  "Programme d'entraînement": {
@@ -24372,7 +24386,7 @@
  "Précédent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:281: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Précédent\", point.previous), series: .value(\"Série\", tr(\"Précédent\")))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:283: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Précédent\", point.previous), series: .value(\"Série\", tr(\"Précédent\")))"
   ]
  },
  "Préférences": {
@@ -24442,7 +24456,7 @@
  "Prêt ou location": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:310: NumberRow(title: tr(\"Prêt ou location\"), value: binding(\\.loanMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:360: NumberRow(title: tr(\"Prêt ou location\"), value: binding(\\.loanMonthly), unit: tr(\"/ mois\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:356: NumberRow(title: tr(\"Prêt ou location\"), value: carBinding(\\.loanMonthly), unit: tr(\"/ mois\"))"
   ]
  },
@@ -24549,7 +24563,7 @@
  "Période précédente": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:297: legend(tr(\"Période précédente\"), hex: \"8A8A8E\", dashed: true)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:299: legend(tr(\"Période précédente\"), hex: \"8A8A8E\", dashed: true)",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:238: .accessibilityLabel(Text(tr(\"Période précédente\")))"
   ]
  },
@@ -25176,7 +25190,9 @@
  "Relevé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:235: MiniRow(symbol: \"speedometer\", colorHex: accentHex, title: tr(\"Relevé\"),"
+   "App/Screens/MiniApps/Car/CarApp.swift:251: MiniRow(symbol: \"speedometer\", colorHex: accentHex, title: tr(\"Relevé\"),",
+   "App/Screens/MiniApps/Car/CarHybrid.swift:20: SheetForm(title: tr(\"Relevé\"), canSave: km > 0, onSave: save) {",
+   "App/Screens/MiniApps/Car/CarPages.swift:127: detail: \"\\(point.isReading ? tr(\"Relevé\") : tr(\"Plein\")) · \\(Fmt.shortDay(point.date))\")"
   ]
  },
  "Relevés": {
@@ -25928,7 +25944,7 @@
  "Revenir à aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/MiniApp.swift:522: .accessibilityLabel(Text(tr(\"Revenir à aujourd'hui\")))"
+   "App/Screens/MiniApps/MiniApp.swift:525: .accessibilityLabel(Text(tr(\"Revenir à aujourd'hui\")))"
   ]
  },
  "Revenir à l'icône par défaut ?": {
@@ -25970,13 +25986,13 @@
  "Revenu mensuel récurrent (abonnements)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:661: case .mrr: tr(\"Revenu mensuel récurrent (abonnements)\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:663: case .mrr: tr(\"Revenu mensuel récurrent (abonnements)\")"
   ]
  },
  "Revenu récurrent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:341: BusinessRow(symbol: \"arrow.triangle.2.circlepath\", colorHex: MiniStyle.goodHex, title: tr(\"Revenu récurrent\"),",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:343: BusinessRow(symbol: \"arrow.triangle.2.circlepath\", colorHex: MiniStyle.goodHex, title: tr(\"Revenu récurrent\"),",
    "App/Screens/MiniApps/Business/BusinessPages.swift:310: .navigationTitle(tr(\"Revenu récurrent\"))",
    "App/Screens/Spaces/MoneySpaces.swift:300: SheetForm(title: tr(\"Revenu récurrent\"), canSave: snapshot.mrr > 0, onSave: save) {",
    "Shared/Render/Tiles/BusinessTiles.swift:109: var tile = Tile(title: tr(\"Revenu récurrent\"), symbol: \"arrow.triangle.2.circlepath\")"
@@ -26314,7 +26330,7 @@
    "App/Screens/MiniApps/Planning/PlanningApp.swift:143: card = MiniHero(label: tr(\"Prochain événement\"), value: \"—\", caption: tr(\"Rien de prévu ce jour-là.\"), valueSize: 44)",
    "App/Screens/MiniApps/Planning/PlanningApp.swift:231: Text(tr(\"Rien de prévu ce jour-là.\"))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:116: Text(tr(\"Rien de prévu ce jour-là.\")).font(.subheadline).foregroundStyle(.secondary).card(padding: 14)",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:151: MiniRow(symbol: \"list.bullet.below.rectangle\", colorHex: accentHex, title: tr(\"Rien de prévu ce jour-là.\"),"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:163: MiniRow(symbol: \"list.bullet.below.rectangle\", colorHex: accentHex, title: tr(\"Rien de prévu ce jour-là.\"),"
   ]
  },
  "Rien de prévu cette semaine.": {
@@ -26365,7 +26381,7 @@
  "Rien noté ce jour-là.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:206: Text(tr(\"Rien noté ce jour-là.\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:222: Text(tr(\"Rien noté ce jour-là.\"))"
   ]
  },
  "Rien noté cette semaine": {
@@ -26722,7 +26738,7 @@
  "Région": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:550: Picker(tr(\"Région\"), selection: Binding(get: { life.holidayRegion }, set: { region in model.update(\\.life) { $0.holidayRegion = region } })) {"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:583: Picker(tr(\"Région\"), selection: Binding(get: { life.holidayRegion }, set: { region in model.update(\\.life) { $0.holidayRegion = region } })) {"
   ]
  },
  "Réglages": {
@@ -26813,6 +26829,12 @@
    "App/Screens/Spaces/StudentSpace.swift:300: Text(tr(\"Répéter\"))"
   ]
  },
+ "Répéter chaque année": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:502: Toggle(tr(\"Répéter chaque année\"), isOn: Binding(get: { deadline.repeatsYearly == true }, set: { deadline.repeatsYearly = $0 ? true : nil }))"
+  ]
+ },
  "Répétition espacée : une fiche sue revient dans 1, 2, 4, 8 puis 16 jours ; une fiche ratée revient dans 10 minutes.": {
   "placeholders": 0,
   "uses": [
@@ -26861,7 +26883,7 @@
  "Réservoir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:421: NumberRow(title: tr(\"Réservoir\"), value: $tank, unit: \"L\")",
+   "App/Screens/MiniApps/Car/CarApp.swift:443: NumberRow(title: tr(\"Réservoir\"), value: $tank, unit: \"L\")",
    "App/Screens/Profile/ProfileTopics.swift:658: QuestionCard(title: tr(\"Réservoir\"), detail: tr(\"Dans le manuel ou sur le site du constructeur : il sert à estimer l'autonomie après un plein complet.\")) {"
   ]
  },
@@ -26880,7 +26902,7 @@
  "Résultats": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:334: BusinessRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Résultats\"),",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:336: BusinessRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Résultats\"),",
    "App/Screens/MiniApps/Business/BusinessPages.swift:238: .navigationTitle(tr(\"Résultats\"))",
    "App/Screens/Spaces/NutritionSpace.swift:266: Text(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\")))"
   ]
@@ -27745,6 +27767,12 @@
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:185: title: tr(\"Service occupé\"),"
   ]
  },
+ "Ses dépenses, sa liste et les vols, hébergements et activités de ses dates seront aussi supprimés.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:143: message: tr(\"Ses dépenses, sa liste et les vols, hébergements et activités de ses dates seront aussi supprimés.\")) { id in"
+  ]
+ },
  "Ses plages quittent l'horaire. Ses notes, examens et devoirs restent, sans cours.": {
   "placeholders": 0,
   "uses": [
@@ -27930,13 +27958,14 @@
  "Soit %@ par jour jusqu'au retour": {
   "placeholders": 1,
   "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:72: .map { tr(\"Soit \\(TF.money($0, currency)) par jour jusqu'au retour\") }",
    "App/Screens/MiniApps/Travel/TravelPages.swift:171: Text(tr(\"Soit \\(TF.money((budget - spending.total) / Double(max(1, days.total - days.day + 1)), currency)) par jour jusqu'au retour\"))"
   ]
  },
  "Soit environ %@ par kilomètre parcouru.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:301: Text(tr(\"Soit environ \\(TF.money(perKm, currency, decimals: 2)) par kilomètre parcouru.\")).font(.caption).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Car/CarPages.swift:349: Text(tr(\"Soit environ \\(TF.money(perKm, currency, decimals: 2)) par kilomètre parcouru.\")).font(.caption).foregroundStyle(.secondary)"
   ]
  },
  "Soit par jour": {
@@ -28288,7 +28317,7 @@
  "Stationnement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:311: NumberRow(title: tr(\"Stationnement\"), value: binding(\\.parkingMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:361: NumberRow(title: tr(\"Stationnement\"), value: binding(\\.parkingMonthly), unit: tr(\"/ mois\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:357: NumberRow(title: tr(\"Stationnement\"), value: carBinding(\\.parkingMonthly), unit: tr(\"/ mois\"))"
   ]
  },
@@ -28471,7 +28500,7 @@
  "Suivis à la main": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:347: BusinessRow(symbol: \"gauge.with.dots.needle.33percent\", colorHex: \"F2A33A\", title: tr(\"Suivis à la main\"),",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:349: BusinessRow(symbol: \"gauge.with.dots.needle.33percent\", colorHex: \"F2A33A\", title: tr(\"Suivis à la main\"),",
    "App/Screens/MiniApps/Business/BusinessPages.swift:340: .navigationTitle(tr(\"Suivis à la main\"))"
   ]
  },
@@ -28527,6 +28556,12 @@
    "App/Screens/MiniApps/Studies/StudiesPages.swift:357: .confirmationDialog(tr(\"Supprimer ce cours ?\"), isPresented: Binding(get: { !deletingCourses.isEmpty }, set: { if !$0 { deletingCourses = [] } }),"
   ]
  },
+ "Supprimer ce relevé ?": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarHybrid.swift:31: .confirmationDialog(tr(\"Supprimer ce relevé ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {"
+  ]
+ },
  "Supprimer ce repas": {
   "placeholders": 0,
   "uses": [
@@ -28559,6 +28594,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/CustomFoodsView.swift:64: tr(\"Supprimer cet aliment ?\"), isPresented: Binding(get: { pendingDelete != nil }, set: { if !$0 { pendingDelete = nil } }),"
+  ]
+ },
+ "Supprimer cet entretien ?": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarPages.swift:211: .confirmationDialog(tr(\"Supprimer cet entretien ?\"), isPresented: Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } }), titleVisibility: .visible) {"
   ]
  },
  "Supprimer cet objectif ?": {
@@ -28598,6 +28639,12 @@
    "App/Screens/MiniApps/Fitness/FitnessSession.swift:622: Label(tr(\"Supprimer cette série\"), systemImage: \"trash\")"
   ]
  },
+ "Supprimer cette échéance ?": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:522: .confirmationDialog(tr(\"Supprimer cette échéance ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {"
+  ]
+ },
  "Supprimer l'habitude": {
   "placeholders": 0,
   "uses": [
@@ -28613,7 +28660,7 @@
  "Supprimer l'indicateur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:697: Button(tr(\"Supprimer l'indicateur\"), role: .destructive) {"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:699: Button(tr(\"Supprimer l'indicateur\"), role: .destructive) {"
   ]
  },
  "Supprimer l'objectif": {
@@ -28621,6 +28668,13 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:913: .confirmDelete($pendingGoal, title: tr(\"Supprimer cet objectif ?\"), button: tr(\"Supprimer l'objectif\"),",
    "App/Screens/Spaces/BudgetSpace.swift:408: Button(tr(\"Supprimer l'objectif\"), role: .destructive) {"
+  ]
+ },
+ "Supprimer l'échéance": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:514: Button(tr(\"Supprimer l'échéance\"), role: .destructive) { confirmsDelete = true }",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:523: Button(tr(\"Supprimer l'échéance\"), role: .destructive) {"
   ]
  },
  "Supprimer l'événement": {
@@ -28634,7 +28688,7 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:490: Button(tr(\"Supprimer la dépense\"), role: .destructive) {",
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:434: actions(deleteTitle: tr(\"Supprimer la dépense\"), canDelete: expense.fixedID == nil)",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:381: Button(tr(\"Supprimer la dépense\"), role: .destructive) {",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:430: Button(tr(\"Supprimer la dépense\"), role: .destructive) {",
    "App/Screens/Spaces/BudgetSpace.swift:218: Button(tr(\"Supprimer la dépense\"), role: .destructive) {"
   ]
  },
@@ -28687,11 +28741,31 @@
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:419: Button(tr(\"Supprimer le plein\"), role: .destructive) {"
   ]
  },
+ "Supprimer le relevé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarHybrid.swift:28: Button(tr(\"Supprimer le relevé\"), role: .destructive) { confirmsDelete = true }",
+   "App/Screens/MiniApps/Car/CarHybrid.swift:32: Button(tr(\"Supprimer le relevé\"), role: .destructive) {"
+  ]
+ },
  "Supprimer le revenu": {
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:509: actions(deleteTitle: tr(\"Supprimer le revenu\"), canDelete: income.fixedID == nil)",
    "App/Screens/Spaces/BudgetSpace.swift:258: Button(tr(\"Supprimer le revenu\"), role: .destructive) {"
+  ]
+ },
+ "Supprimer le voyage": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:142: .confirmDelete($pendingDelete, title: tr(\"Supprimer le voyage ?\"), button: tr(\"Supprimer le voyage\"),",
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:200: MiniActionButton(title: tr(\"Supprimer le voyage\"), symbol: \"trash\", colorHex: MiniStyle.alertHex, isProminent: false) { pendingDelete = trip.id }"
+  ]
+ },
+ "Supprimer le voyage ?": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:142: .confirmDelete($pendingDelete, title: tr(\"Supprimer le voyage ?\"), button: tr(\"Supprimer le voyage\"),"
   ]
  },
  "Supprimer le widget": {
@@ -29336,7 +29410,7 @@
  "Ta date de naissance reste sur ton iPhone.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:546: Text(tr(\"Ta date de naissance reste sur ton iPhone.\"))"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:579: Text(tr(\"Ta date de naissance reste sur ton iPhone.\"))"
   ]
  },
  "Ta destination utilise ta devise : rien à convertir.": {
@@ -29529,7 +29603,7 @@
  "Ta voiture, sans surprise": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:112: Text(tr(\"Ta voiture, sans surprise\")).font(.title3.weight(.bold))"
+   "App/Screens/MiniApps/Car/CarApp.swift:124: Text(tr(\"Ta voiture, sans surprise\")).font(.title3.weight(.bold))"
   ]
  },
  "Tableau argent": {
@@ -29693,7 +29767,7 @@
  "Taux de référence de la BCE du %@ (Frankfurter).": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:263: Text(tr(\"Taux de référence de la BCE du \\(rates.day) (Frankfurter).\")).font(.caption2).foregroundStyle(.tertiary)"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:291: Text(tr(\"Taux de référence de la BCE du \\(rates.day) (Frankfurter).\")).font(.caption2).foregroundStyle(.tertiary)"
   ]
  },
  "Taux de référence de la Banque centrale européenne, mis à jour chaque jour ouvrable (Frankfurter).": {
@@ -29889,6 +29963,12 @@
    "App/Screens/Content/TasksView.swift:52: Text(tr(\"Terminées\"))",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:16: case .done: tr(\"Terminées\")",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:75: section(tr(\"Terminées\"), done)"
+  ]
+ },
+ "Terminés": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:131: section(tr(\"Terminés\"), trips: groups.finished, state: state)"
   ]
  },
  "Terrazzo": {
@@ -30209,7 +30289,7 @@
  "Tes propres indicateurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:348: detail: metricNames.isEmpty ? tr(\"Tes propres indicateurs\") : metricNames)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:350: detail: metricNames.isEmpty ? tr(\"Tes propres indicateurs\") : metricNames)"
   ]
  },
  "Tes records apparaîtront après ta première séance.": {
@@ -30659,7 +30739,7 @@
  "Titre (assurance, immatriculation…)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:491: TextField(tr(\"Titre (assurance, immatriculation…)\"), text: $deadline.title)"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:497: TextField(tr(\"Titre (assurance, immatriculation…)\"), text: $deadline.title)"
   ]
  },
  "Titre (facultatif)": {
@@ -30972,7 +31052,7 @@
  "Ton prochain voyage": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:132: Text(tr(\"Ton prochain voyage\")).font(.title3.weight(.bold))"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:144: Text(tr(\"Ton prochain voyage\")).font(.title3.weight(.bold))"
   ]
  },
  "Ton prochain voyage : destination et dates.": {
@@ -31291,6 +31371,12 @@
    "App/Screens/Spaces/ProductivitySpace.swift:205: Text(tr(\"Touche une tâche pour la remettre dans ton Top 3.\"))"
   ]
  },
+ "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarPages.swift:283: MiniFootnote(text: tr(\"Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.\"))"
+  ]
+ },
  "Touche « Modifier » en haut, puis « Ajouter un widget »": {
   "placeholders": 0,
   "uses": [
@@ -31564,6 +31650,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseTechniques.swift:97: [tr(\"Tout le dos contre le mur.\"), tr(\"Poids sur les talons.\")],"
+  ]
+ },
+ "Tout le programme": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:179: MiniRow(symbol: \"calendar\", colorHex: accentHex, title: tr(\"Tout le programme\"))"
   ]
  },
  "Tout reste sur ton iPhone": {
@@ -32473,10 +32565,22 @@
    "Shared/Model/KindCatalog.swift:272: KindInfo(kind: .photos, title: tr(\"Photos\"), summary: tr(\"Une à quatre de tes photos, cadrées comme tu veux.\"), category: .memories, symbol: \"photo.on.rectangle.angled\", isPremium: false, families: SM"
   ]
  },
+ "Une échéance faite quitte la liste de ce qui arrive.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:518: : tr(\"Une échéance faite quitte la liste de ce qui arrive.\"))"
+  ]
+ },
+ "Une échéance qui se répète passe à l'année suivante quand elle est faite.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:517: ? tr(\"Une échéance qui se répète passe à l'année suivante quand elle est faite.\")"
+  ]
+ },
  "Unité (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:684: TextField(tr(\"Unité (facultatif)\"), text: $metric.unit)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:686: TextField(tr(\"Unité (facultatif)\"), text: $metric.unit)"
   ]
  },
  "Unités": {
@@ -32544,15 +32648,15 @@
  "Valeur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:693: NumberRow(title: tr(\"Valeur\"), value: $firstValue)",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:734: NumberRow(title: tr(\"Valeur\"), value: $value, unit: metric.unit.isEmpty ? nil : metric.unit)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:695: NumberRow(title: tr(\"Valeur\"), value: $firstValue)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:736: NumberRow(title: tr(\"Valeur\"), value: $value, unit: metric.unit.isEmpty ? nil : metric.unit)",
    "App/Screens/Profile/NutritionTargetsCard.swift:311: TextField(tr(\"Valeur\"), text: $text)"
   ]
  },
  "Valeur d'aujourd'hui (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:692: Section(tr(\"Valeur d'aujourd'hui (facultatif)\")) {"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:694: Section(tr(\"Valeur d'aujourd'hui (facultatif)\")) {"
   ]
  },
  "Valeur nette": {
@@ -32580,7 +32684,7 @@
  "Valeur visée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:688: NumberRow(title: tr(\"Valeur visée\"), value: $target)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:690: NumberRow(title: tr(\"Valeur visée\"), value: $target)"
   ]
  },
  "Valeurs indicatives, pas un avis médical.": {
@@ -32673,7 +32777,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:180: MiniActionButton(title: tr(\"Vente\"), symbol: \"plus\", colorHex: accentHex) { sheet = .sale(nil) }",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:452: Label(tr(\"Vente\"), systemImage: \"plus\")",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:454: Label(tr(\"Vente\"), systemImage: \"plus\")",
    "App/Screens/Spaces/MoneySpaces.swift:225: SheetForm(title: isNew ? tr(\"Vente\") : tr(\"Modifier la vente\"), canSave: sale.amount > 0, onSave: save) {"
   ]
  },
@@ -32694,7 +32798,7 @@
  "Ventes divisées par les commandes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:657: case .averageBasket: tr(\"Ventes divisées par les commandes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:659: case .averageBasket: tr(\"Ventes divisées par les commandes\")"
   ]
  },
  "Ventes du jour": {
@@ -32707,7 +32811,7 @@
  "Ventes et dépenses": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:327: BusinessRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Ventes et dépenses\"),",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:329: BusinessRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Ventes et dépenses\"),",
    "App/Screens/MiniApps/Business/BusinessPages.swift:39: .navigationTitle(tr(\"Ventes et dépenses\"))"
   ]
  },
@@ -32726,7 +32830,7 @@
  "Ventes moins dépenses": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:654: case .profit: tr(\"Ventes moins dépenses\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:656: case .profit: tr(\"Ventes moins dépenses\")"
   ]
  },
  "Ventes sur 30 jours": {
@@ -32983,7 +33087,7 @@
  "Vidange, pneus, freins…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:362: MiniRow(symbol: \"wrench.and.screwdriver.fill\", colorHex: \"3366FF\", title: tr(\"Entretien\"), detail: tr(\"Vidange, pneus, freins…\"),"
+   "App/Screens/MiniApps/Car/CarApp.swift:373: MiniRow(symbol: \"wrench.and.screwdriver.fill\", colorHex: \"3366FF\", title: tr(\"Entretien\"), detail: tr(\"Vidange, pneus, freins…\"),"
   ]
  },
  "Ville trouvée : heure locale activée": {
@@ -33151,6 +33255,12 @@
    "App/Screens/Profile/DataItemViews.swift:162: link(model.isFilled(.priorities) ? tr(\"Voir mon top 3\") : tr(\"Choisir mon top 3 du jour\")) { SpaceView(space: .productivity, isEmbedded: true) }"
   ]
  },
+ "Voir tous mes voyages": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelApp.swift:308: MiniRow(symbol: \"suitcase.fill\", colorHex: accentHex, title: tr(\"Voir tous mes voyages\"), detail: names)"
+  ]
+ },
  "Voiture": {
   "placeholders": 0,
   "uses": [
@@ -33166,7 +33276,7 @@
  "Vol": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:106: Button(tr(\"Vol\")) { sheet = .flight(Flight(number: \"\", from: \"\", to: \"\", departure: trip.start)) }",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:125: Button(tr(\"Vol\")) { sheet = .flight(Flight(number: \"\", from: \"\", to: \"\", departure: trip.start)) }",
    "App/Screens/MiniApps/Travel/TravelPages.swift:20: addButton(tr(\"Vol\"), symbol: \"airplane\") { sheet = .flight(Flight(number: \"\", from: \"\", to: \"\", departure: trip.start)) }",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:204: SheetForm(title: tr(\"Vol\"), canSave: !flight.number.trimmed.isEmpty && (flight.arrival.map { $0 > flight.departure } ?? true), onSave: save) {",
    "Shared/Model/KindCatalog.swift:240: KindInfo(kind: .flight, title: tr(\"Vol\"), summary: tr(\"Ton vol : heure de départ, terminal, porte et compte à rebours.\"), category: .travel, symbol: \"airplane\", isPremium: true, families: SM + [rect],"
@@ -33175,7 +33285,7 @@
  "Vol %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:191: MiniRow(symbol: \"airplane\", colorHex: accentHex, title: tr(\"Vol \\(flight.number)\"),",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:211: MiniRow(symbol: \"airplane\", colorHex: accentHex, title: tr(\"Vol \\(flight.number)\"),",
    "Shared/Domains/Travel.swift:253: items.append(ProgramItem(id: \"flight-\\(flight.id)\", kind: .flight, date: flight.departure, title: tr(\"Vol \\(flight.number)\"), detail: flightDetail(flight)))",
    "Shared/Render/Tiles/TravelTiles.swift:53: var tile = Tile(title: tr(\"Vol \\(flight.number)\"), symbol: \"airplane\")"
   ]
@@ -33189,7 +33299,7 @@
  "Vols, hébergements et activités, jour par jour": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:152: detail: tr(\"Vols, hébergements et activités, jour par jour\"), value: \"\\(days) j\")"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:164: detail: tr(\"Vols, hébergements et activités, jour par jour\"), showsChevron: false)"
   ]
  },
  "Vols, hôtels et activités": {
@@ -33225,7 +33335,7 @@
   "uses": [
    "App/Core/DataItems.swift:112: case .trip: tr(\"Voyage\")",
    "App/Screens/MiniApps/MiniApp.swift:17: case .travel: tr(\"Voyage\")",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:93: .navigationTitle(tr(\"Voyage\"))",
+   "App/Screens/MiniApps/Travel/TravelApp.swift:112: .navigationTitle(tr(\"Voyage\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:143: SheetForm(title: tr(\"Voyage\"), canSave: !trip.destination.trimmed.isEmpty && trip.end >= trip.start, onSave: save) {"
   ]
  },
@@ -33607,6 +33717,12 @@
    "Shared/Domains/ScanRecap.swift:68: return isLowConfidence ? tr(\"peu sûr\") : tr(\"assez sûr\")"
   ]
  },
+ "assurance, prêt, stationnement, autres": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarPages.swift:314: Share(name: tr(\"Frais fixes\"), hex: \"2F8F7A\", value: cost.fixed, source: tr(\"assurance, prêt, stationnement, autres\")),"
+  ]
+ },
  "atteint": {
   "placeholders": 0,
   "uses": [
@@ -33666,8 +33782,8 @@
  "aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:313: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\")))",
+   "App/Screens/MiniApps/Car/CarApp.swift:336: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:276: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:373: detail: isToday ? tr(\"aujourd'hui\") : Fmt.format(day, template: \"dMMM\"),",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:52: case 0: return tr(\"aujourd'hui\")"
   ]
@@ -33779,7 +33895,7 @@
  "ce mois-ci": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:259: note: kpi.isSnapshot ? tr(\"ce mois-ci\") : nil)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:261: note: kpi.isSnapshot ? tr(\"ce mois-ci\") : nil)",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:358: detail: earned > 0 || expected == nil ? tr(\"ce mois-ci\") : tr(\"prévus\"),",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:386: guard comparison.previous > 0, abs(difference) >= 1 else { return tr(\"ce mois-ci\") }",
    "Shared/Render/Tiles/BusinessTiles.swift:33: tile.caption = tr(\"ce mois-ci\")"
@@ -33794,7 +33910,7 @@
  "cette semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:278: MiniSectionTitle(title: tr(\"Chiffre d'affaires cumulé\"), detail: period == .day ? tr(\"cette semaine\") : nil)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:280: MiniSectionTitle(title: tr(\"Chiffre d'affaires cumulé\"), detail: period == .day ? tr(\"cette semaine\") : nil)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:462: figure(tr(\"Étude\"), Fmt.minutes(Double(studied)), detail: tr(\"cette semaine\"), hex: nil)"
   ]
  },
@@ -33964,7 +34080,7 @@
  "d'ici %@ j": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:42: if let days = status.daysLeft { parts.append(days >= 0 ? tr(\"d'ici \\(days) j\") : tr(\"en retard de \\(-days) j\")) }"
+   "App/Screens/MiniApps/Car/CarApp.swift:45: if let days = status.daysLeft { parts.append(days >= 0 ? tr(\"d'ici \\(days) j\") : tr(\"en retard de \\(-days) j\")) }"
   ]
  },
  "dans %@": {
@@ -33977,7 +34093,7 @@
  "dans %@ j": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:541: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:574: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
   ]
  },
  "dans %@ jours": {
@@ -33989,7 +34105,7 @@
  "dans %@ km": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:41: if let km = status.kmLeft { parts.append(km >= 0 ? tr(\"dans \\(Fmt.number(Int(km))) km\") : tr(\"dépassé de \\(Fmt.number(Int(-km))) km\")) }",
+   "App/Screens/MiniApps/Car/CarApp.swift:44: if let km = status.kmLeft { parts.append(km >= 0 ? tr(\"dans \\(Fmt.number(Int(km))) km\") : tr(\"dépassé de \\(Fmt.number(Int(-km))) km\")) }",
    "Shared/Render/Tiles/CarTiles.swift:91: rows.append(TileRow(id: \"service\", title: service.item.name, value: tr(\"dans \\(TF.int(left)) km\"), symbol: \"wrench.and.screwdriver\"))"
   ]
  },
@@ -34058,7 +34174,7 @@
  "dernier à %@ km": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:196: if let km = item.lastKm { parts.append(tr(\"dernier à \\(Fmt.number(Int(km))) km\")) }"
+   "App/Screens/MiniApps/Car/CarPages.swift:243: if let km = item.lastKm { parts.append(tr(\"dernier à \\(Fmt.number(Int(km))) km\")) }"
   ]
  },
  "dernière séance": {
@@ -34130,22 +34246,28 @@
    "App/Screens/MiniApps/Business/BusinessSources.swift:231: if result.unchanged > 0 { parts.append(Fmt.plural(result.unchanged, tr(\"déjà présente\"), tr(\"déjà présentes\"))) }"
   ]
  },
+ "dépassé de %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:187: detail: overrun.map { tr(\"dépassé de \\(TF.money($0, currency))\") } ?? ((trip.budget ?? 0) > 0 ? tr(\"sur \\(TF.money(trip.budget ?? 0, currency))\") : nil),"
+  ]
+ },
  "dépassé de %@ km": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:41: if let km = status.kmLeft { parts.append(km >= 0 ? tr(\"dans \\(Fmt.number(Int(km))) km\") : tr(\"dépassé de \\(Fmt.number(Int(-km))) km\")) }"
+   "App/Screens/MiniApps/Car/CarApp.swift:44: if let km = status.kmLeft { parts.append(km >= 0 ? tr(\"dans \\(Fmt.number(Int(km))) km\") : tr(\"dépassé de \\(Fmt.number(Int(-km))) km\")) }"
   ]
  },
  "dépense": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:330: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
   ]
  },
  "dépenses": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:330: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
   ]
  },
  "dépensé aujourd'hui": {
@@ -34158,7 +34280,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:456: Text(tr(\"dépensés\")).font(.caption).foregroundStyle(.secondary)",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:223: unit: budget > 0 ? \"/ \\(TF.money(budget, currency))\" : tr(\"dépensés\"),"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:251: unit: budget > 0 ? \"/ \\(TF.money(budget, currency))\" : tr(\"dépensés\"),"
   ]
  },
  "dépensés ce mois-ci": {
@@ -34188,7 +34310,7 @@
  "en retard de %@ j": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:42: if let days = status.daysLeft { parts.append(days >= 0 ? tr(\"d'ici \\(days) j\") : tr(\"en retard de \\(-days) j\")) }"
+   "App/Screens/MiniApps/Car/CarApp.swift:45: if let days = status.daysLeft { parts.append(days >= 0 ? tr(\"d'ici \\(days) j\") : tr(\"en retard de \\(-days) j\")) }"
   ]
  },
  "encore %@": {
@@ -34212,7 +34334,7 @@
  "environ %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:198: if item.cost > 0 { parts.append(tr(\"environ \\(TF.money(item.cost, model.settings.currencyCode))\")) }"
+   "App/Screens/MiniApps/Car/CarPages.swift:245: if item.cost > 0 { parts.append(tr(\"environ \\(TF.money(item.cost, model.settings.currencyCode))\")) }"
   ]
  },
  "espaces actifs": {
@@ -34286,6 +34408,7 @@
  "fait": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Car/CarPages.swift:276: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
    "Shared/Render/Kinds/ProductivityWidgets.swift:202: .accessibilityLabel(Text(\"\\(habit.name), \\(done ? tr(\"fait\") : tr(\"à faire\"))\"))"
   ]
  },
@@ -34378,6 +34501,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/HomeSetups.swift:55: case .money: tr(\"finances\")"
+  ]
+ },
+ "forfait par an ÷ 12": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarPages.swift:316: Share(name: tr(\"Entretien\"), hex: \"3366FF\", value: cost.maintenance, source: tr(\"forfait par an ÷ 12\")),"
   ]
  },
  "ft": {
@@ -34673,10 +34802,10 @@
  "km": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Car/CarHybrid.swift:22: NumberRow(title: tr(\"Compteur\"), value: $km, unit: tr(\"km\"))",
    "App/Screens/MiniApps/Car/CarPages.swift:94: MiniStat(title: tr(\"Compteur\"), value: CarMath.odometer(state).map { Fmt.number(Int($0)) } ?? \"–\", unit: tr(\"km\"))",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:444: MiniStat(title: tr(\"Distance\"), value: today?.distance.map { TF.decimal($0 / 1_000, 1) } ?? \"—\", unit: tr(\"km\"))",
-   "App/Screens/Profile/DataItemViews.swift:269: ProfileNumberField(title: tr(\"Compteur\"), unit: tr(\"km\"), value: Binding(get: { model.odometer }, set: { model.setOdometer($0) }), decimals: false, identifier: \"data-car-km\")",
-   "App/Screens/Profile/ProfileTopics.swift:652: title: tr(\"Compteur\"), unit: tr(\"km\"),"
+   "App/Screens/Profile/DataItemViews.swift:269: ProfileNumberField(title: tr(\"Compteur\"), unit: tr(\"km\"), value: Binding(get: { model.odometer }, set: { model.setOdometer($0) }), decimals: false, identifier: \"data-car-km\")"
   ]
  },
  "kraft dinner": {
@@ -34736,7 +34865,7 @@
  "le %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:197: if let date = item.lastDate { parts.append(tr(\"le \\(Fmt.shortDay(date))\")) }"
+   "App/Screens/MiniApps/Car/CarPages.swift:244: if let date = item.lastDate { parts.append(tr(\"le \\(Fmt.shortDay(date))\")) }"
   ]
  },
  "le %@ à %@": {
@@ -34778,7 +34907,7 @@
  "liste à préparer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:237: detail: items.isEmpty ? tr(\"liste à préparer\") : (done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")),"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:265: detail: items.isEmpty ? tr(\"liste à préparer\") : (done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")),"
   ]
  },
  "lundis [each]": {
@@ -34881,6 +35010,12 @@
    "App/Screens/MiniApps/Car/CarPages.swift:29: MiniSectionTitle(title: tr(\"Consommation\"), detail: CarMath.consumption(state).map { tr(\"moyenne \\(TF.decimal($0, 1)) L/100\") })"
   ]
  },
+ "moyenne des 3 derniers mois": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Car/CarPages.swift:315: Share(name: tr(\"Carburant\"), hex: Car.fuelHex, value: cost.fuel, source: tr(\"moyenne des 3 derniers mois\")),"
+  ]
+ },
  "moyenne générale pondérée": {
   "placeholders": 0,
   "uses": [
@@ -34968,7 +35103,7 @@
  "objectif %@ · %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:597: parts.append(tr(\"objectif \\(BusinessFormat.number(target, unit: metric.unit)) · \\(Fmt.percent(latest.value / target))\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:599: parts.append(tr(\"objectif \\(BusinessFormat.number(target, unit: metric.unit)) · \\(Fmt.percent(latest.value / target))\"))"
   ]
  },
  "objectifs": {
@@ -35052,6 +35187,7 @@
  "par mois": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Car/CarApp.swift:287: MiniStat(title: tr(\"Coût réel\"), value: \"–\", detail: tr(\"par mois\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:728: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
    "Shared/Model/Content.swift:286: case .month: tr(\"par mois\")",
    "Shared/Render/Kinds/DataWidgets.swift:228: WLabel(text: tr(\"par mois\"), style: s)"
@@ -35060,7 +35196,7 @@
  "par mois, tout compris": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:267: MiniStat(title: tr(\"Coût réel\"), value: TF.money(cost.total, currency), detail: tr(\"par mois, tout compris\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:285: MiniStat(title: tr(\"Coût réel\"), value: TF.money(cost.total, currency), detail: tr(\"par mois, tout compris\"))"
   ]
  },
  "par rapport au mois dernier à la même date": {
@@ -35108,7 +35244,7 @@
  "pas encore de données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:553: Text(note ?? (comparison.current == nil ? tr(\"pas encore de données\") : tr(\"rien avant\"))).font(.caption).foregroundStyle(.tertiary)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:555: Text(note ?? (comparison.current == nil ? tr(\"pas encore de données\") : tr(\"rien avant\"))).font(.caption).foregroundStyle(.tertiary)"
   ]
  },
  "pas encore de ventes ce mois-ci": {
@@ -35133,7 +35269,7 @@
  "passée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\")))"
+   "App/Screens/MiniApps/Car/CarPages.swift:276: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))"
   ]
  },
  "pastel": {
@@ -35421,7 +35557,7 @@
  "rien avant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:553: Text(note ?? (comparison.current == nil ? tr(\"pas encore de données\") : tr(\"rien avant\"))).font(.caption).foregroundStyle(.tertiary)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:555: Text(note ?? (comparison.current == nil ? tr(\"pas encore de données\") : tr(\"rien avant\"))).font(.caption).foregroundStyle(.tertiary)"
   ]
  },
  "riz complet": {
@@ -35580,8 +35716,8 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:1130: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:219: MiniStat(title: tr(\"Étude\"), value: Fmt.minutes(studied), detail: tr(\"sur \\(Fmt.hours(state.weeklyStudyGoalHours))\"),",
-   "Shared/Render/Tiles/MoneyTiles.swift:78: detail: limit > 0 ? tr(\"sur \\(TF.money(limit, currency))\") : nil,",
-   "Shared/Render/Tiles/NutritionTiles.swift:122: tile.caption = known.kcal ? tr(\"sur \\(TF.int(state.goals.kcal))\") : tr(\"aujourd'hui\")"
+   "App/Screens/MiniApps/Travel/TravelHybrid.swift:187: detail: overrun.map { tr(\"dépassé de \\(TF.money($0, currency))\") } ?? ((trip.budget ?? 0) > 0 ? tr(\"sur \\(TF.money(trip.budget ?? 0, currency))\") : nil),",
+   "Shared/Render/Tiles/MoneyTiles.swift:78: detail: limit > 0 ? tr(\"sur \\(TF.money(limit, currency))\") : nil,"
   ]
  },
  "sur %@ cette semaine": {
@@ -35751,7 +35887,7 @@
  "tout est prêt": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Travel/TravelApp.swift:237: detail: items.isEmpty ? tr(\"liste à préparer\") : (done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")),"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:265: detail: items.isEmpty ? tr(\"liste à préparer\") : (done == items.count ? tr(\"tout est prêt\") : tr(\"\\(items.count - done) à préparer\")),"
   ]
  },
  "toute la journée": {
@@ -35857,7 +35993,7 @@
  "vente": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:330: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
   ]
  },
  "vente notée": {
@@ -35869,7 +36005,7 @@
  "ventes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:330: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
   ]
  },
  "ventes notées": {
@@ -36185,7 +36321,7 @@
    "App/Core/DailyBrief.swift:197: case .reminders: return tr(\"À ne pas oublier\")",
    "App/Screens/Home/DailyLayoutEditor.swift:172: case .reminders: (tr(\"À ne pas oublier\"), \"bell.fill\", \"E5484D\")",
    "App/Screens/Home/DailySection.swift:1292: DayCard(title: tr(\"À ne pas oublier\"), symbol: \"bell.fill\", colorHex: \"4B5563\") {",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:235: MiniStat(title: tr(\"À ne pas oublier\"), value: items.isEmpty ? \"–\" : \"\\(done)\","
+   "App/Screens/MiniApps/Travel/TravelApp.swift:263: MiniStat(title: tr(\"À ne pas oublier\"), value: items.isEmpty ? \"–\" : \"\\(done)\","
   ]
  },
  "À partir d'une photo ou d'un PDF": {
@@ -36381,7 +36517,7 @@
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:33: add(\"age\", \"person\", tr(\"Âge\"), age.map { tr(\"\\($0) ans\") })",
    "App/Screens/Profile/ProfileTopics.swift:331: ProfileNumberField(title: tr(\"Âge\"), unit: tr(\"ans\"), value: ageBinding, decimals: false, identifier: \"profile-age\")",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:539: ValueRow(title: tr(\"Âge\"), value: tr(\"\\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans\"), symbol: \"person.crop.circle\")"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:572: ValueRow(title: tr(\"Âge\"), value: tr(\"\\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans\"), symbol: \"person.crop.circle\")"
   ]
  },
  "Écarte les bouts de la corde en bas du mouvement.": {
@@ -36446,9 +36582,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:94: case .deadlines: tr(\"Échéances\")",
-   "App/Screens/MiniApps/Car/CarApp.swift:306: MiniSectionTitle(title: tr(\"Échéances\"))",
-   "App/Screens/MiniApps/Car/CarApp.swift:371: MiniRow(symbol: \"calendar.badge.exclamationmark\", colorHex: Car.alertHex, title: tr(\"Échéances\"), detail: tr(\"Assurance, immatriculation, pneus d'hiver…\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:246: .navigationTitle(tr(\"Échéances\"))"
+   "App/Screens/MiniApps/Car/CarApp.swift:329: CarSectionHead(title: tr(\"Échéances\"), page: .carDeadlines)",
+   "App/Screens/MiniApps/Car/CarApp.swift:382: MiniRow(symbol: \"calendar.badge.exclamationmark\", colorHex: Car.alertHex, title: tr(\"Échéances\"), detail: tr(\"Assurance, immatriculation, pneus d'hiver…\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:285: .navigationTitle(tr(\"Échéances\"))"
   ]
  },
  "Échéances auto": {
@@ -37104,7 +37240,7 @@
  "≈ %@ km": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarApp.swift:127: let rangeText = range.map { tr(\"≈ \\(Fmt.number(Int($0.km))) km\") }"
+   "App/Screens/MiniApps/Car/CarApp.swift:143: MiniHero(label: tr(\"Autonomie estimée\"), value: tr(\"≈ \\(Fmt.number(Int(range.km))) km\"), caption: \"\\(tr(\"Compteur\")) \\(odometer)\")"
   ]
  },
  "≈ %@ km d'autonomie": {

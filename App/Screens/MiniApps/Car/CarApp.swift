@@ -8,6 +8,7 @@ enum CarSheet: Identifiable {
     case service(ServiceItem)
     case deadline(CarDeadline)
     case settings
+    case reading(OdometerReading)
 
     var id: String {
         switch self {
@@ -16,6 +17,7 @@ enum CarSheet: Identifiable {
         case let .service(service): "service-\(service.id)"
         case let .deadline(deadline): "deadline-\(deadline.id)"
         case .settings: "settings"
+        case let .reading(reading): "reading-\(reading.date.timeIntervalSince1970)-\(reading.km)"
         }
     }
 
@@ -27,6 +29,7 @@ enum CarSheet: Identifiable {
         case let .service(service): ServiceEditor(service: service)
         case let .deadline(deadline): CarDeadlineEditor(deadline: deadline)
         case .settings: CarSettingsEditor()
+        case let .reading(reading): CarReadingEditor(reading: reading)
         }
     }
 }
@@ -76,10 +79,8 @@ struct CarAppView: View {
         let state = model.car
         let hasData = !(state.fills.isEmpty && state.readings.isEmpty && state.services.isEmpty && state.deadlines.isEmpty)
         MiniAppScaffold(colorHex: accentHex) {
+            // The band: the figure the Mon quotidien card shows (the range, else the odometer), then what comes.
             if hasData {
-                WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { date in
-                    WeekDayMark(isPlanned: hasRecord(state, on: date))
-                })
                 hero(state: state, now: now)
             } else {
                 start
@@ -93,16 +94,27 @@ struct CarAppView: View {
                 MiniActionButton(title: tr("Kilométrage"), symbol: "speedometer", colorHex: accentHex, isProminent: false) { sheet = .odometer }
                     .accessibilityIdentifier("car-add-odometer")
             }
+            // What presses first: the deadlines, then the maintenance, then the figures; the day and its log come last.
+            deadlines(state: state, now: now)
+            maintenance(state: state, now: now)
+            stats(state: state, now: now)
             if hasData {
+                WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { date in
+                    WeekDayMark(isPlanned: hasRecord(state, on: date))
+                })
                 journal(state: state)
             }
-            stats(state: state, now: now)
-            maintenance(state: state, now: now)
-            deadlines(state: state, now: now)
             more(state: state, now: now, hasData: hasData)
             MiniAppInfoSection(app: .car)
         }
         .navigationTitle(state.name.isEmpty ? tr("Auto") : state.name)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button { sheet = .settings } label: { Image(systemName: "pencil") }
+                    .accessibilityLabel(tr("Ma voiture"))
+                    .accessibilityIdentifier("car-edit")
+            }
+        }
         .sheet(item: $sheet) { $0.editor }
     }
 
@@ -124,10 +136,14 @@ struct CarAppView: View {
     private func hero(state: CarState, now: Date) -> some View {
         let range = CarMath.range(state)
         let odometer = CarMath.odometer(state).map { tr("\(Fmt.number(Int($0))) km") } ?? "–"
-        let rangeText = range.map { tr("≈ \(Fmt.number(Int($0.km))) km") }
         return VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .top) {
-                MiniHero(label: tr("Compteur"), value: odometer, caption: rangeText.map { "\(tr("Autonomie estimée")) \($0)" })
+                if let range {
+                    // The range is the figure; the odometer is the line under it.
+                    MiniHero(label: tr("Autonomie estimée"), value: tr("≈ \(Fmt.number(Int(range.km))) km"), caption: "\(tr("Compteur")) \(odometer)")
+                } else {
+                    MiniHero(label: tr("Compteur"), value: odometer, caption: nil)
+                }
                 if let month = CarMath.kmThisMonth(state, at: now) {
                     // It opens the mileage page: the « Kilométrage » row of the list below is only there when this figure is not.
                     NavigationLink(value: HomeRoute.page(.carMileage)) {
@@ -143,7 +159,7 @@ struct CarAppView: View {
                 }
             }
             if let range {
-                // The range is the line under the figure; here, where the tank stands and what it is worked out from.
+                // Where the tank stands and what it is worked out from.
                 Text(tr("Environ \(TF.int(range.liters)) L dans le réservoir, d'après ta consommation depuis le plein du \(Fmt.format(range.since.date, template: "dMMMM"))"))
                     .font(.caption)
                     .opacity(0.75)
@@ -245,32 +261,39 @@ struct CarAppView: View {
 
     // MARK: Figures
 
+    /// The two figures are always there (« – » while unknown), so the pages « Carburant » and « Coûts »
+    /// always have their one door.
     @ViewBuilder
     private func stats(state: CarState, now: Date) -> some View {
         let consumption = CarMath.consumption(state)
         let cost = CarMath.monthlyCost(state, at: now)
-        if consumption != nil || cost.total > 0 {
-          VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 10) {
             MiniSectionTitle(title: tr("Chiffres"))
             HStack(spacing: 10) {
-                if let consumption {
-                    NavigationLink(value: HomeRoute.page(.carFuel)) {
+                NavigationLink(value: HomeRoute.page(.carFuel)) {
+                    if let consumption {
                         MiniStat(title: tr("Consommation"), value: TF.decimal(consumption, 1), unit: "L/100",
                                  detail: CarMath.fuelCostPerKm(state).map { tr("\(TF.money($0 * 100, currency, decimals: 2)) / 100 km") })
+                    } else {
+                        MiniStat(title: tr("Consommation"), value: "–", detail: tr("L / 100 km"))
                     }
-                    .buttonStyle(.pressable)
-                    // The « Carburant » row of the list below is only there when this figure is not.
-                    .accessibilityIdentifier("car-fuel")
                 }
-                if cost.total > 0 {
-                    NavigationLink(value: HomeRoute.page(.carCosts)) {
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("car-fuel")
+                NavigationLink(value: HomeRoute.page(.carCosts)) {
+                    if cost.total > 0 {
                         MiniStat(title: tr("Coût réel"), value: TF.money(cost.total, currency), detail: tr("par mois, tout compris"))
+                    } else {
+                        MiniStat(title: tr("Coût réel"), value: "–", detail: tr("par mois"))
                     }
-                    .buttonStyle(.pressable)
-                    .accessibilityIdentifier("car-cost")
                 }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("car-cost")
             }
-          }
+            if consumption == nil {
+                // Without two full tanks nothing is worked out: say why, where one looks for it.
+                MiniFootnote(text: tr("Aucun plein noté. À chaque plein, note les litres, le prix et le compteur : la consommation se calcule entre deux pleins complets."))
+            }
         }
     }
 
@@ -281,7 +304,7 @@ struct CarAppView: View {
         let statuses = CarMath.serviceStatus(state, at: now)
         if !statuses.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Entretien"))
+                CarSectionHead(title: tr("Entretien"), page: .carMaintenance)
                 NavigationLink(value: HomeRoute.page(.carMaintenance)) {
                     MiniRowsCard {
                         ForEach(Array(statuses.prefix(2).enumerated()), id: \.element.item.id) { index, status in
@@ -303,7 +326,7 @@ struct CarAppView: View {
         let upcoming = CarMath.upcomingDeadlines(state, at: now)
         if !upcoming.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Échéances"))
+                CarSectionHead(title: tr("Échéances"), page: .carDeadlines)
                 NavigationLink(value: HomeRoute.page(.carDeadlines)) {
                     VStack(spacing: 0) {
                         ForEach(Array(upcoming.prefix(2).enumerated()), id: \.element.id) { index, deadline in
@@ -325,39 +348,27 @@ struct CarAppView: View {
 
     // MARK: More
 
-    /// The list under the sections. A destination already shown above (a figure or a section) is not
-    /// repeated; its row comes back only when that figure or section is hidden (nothing to show yet), so
-    /// every page stays reachable. The identifiers move with the link. The mileage page is opened by
-    /// « Ce mois-ci » of the hero; with nothing to show, there is no list.
+    /// The list under the sections, only for a page whose other door is hidden (nothing to show yet): « Kilométrage »
+    /// (opened by « Ce mois-ci »), « Entretien » and « Échéances » (opened by their sections). « Carburant » and
+    /// « Coûts » have their figure always; with every door open there is no list. The identifiers move with the link.
     @ViewBuilder
     private func more(state: CarState, now: Date, hasData: Bool) -> some View {
         let wants = [
-            CarMath.consumption(state) == nil,
             !(hasData && CarMath.kmThisMonth(state, at: now) != nil),
             CarMath.serviceStatus(state, at: now).isEmpty,
             CarMath.upcomingDeadlines(state, at: now).isEmpty,
-            CarMath.monthlyCost(state, at: now).total <= 0,
         ]
         if wants.contains(true) {
             MiniRowsCard {
                 if wants[0] {
-                    NavigationLink(value: HomeRoute.page(.carFuel)) {
-                        MiniRow(symbol: "fuelpump.fill", colorHex: Car.fuelHex, title: tr("Carburant"), detail: tr("Pleins, prix et consommation"),
-                                value: state.fills.isEmpty ? nil : "\(state.fills.count)")
-                    }
-                    .buttonStyle(.pressable)
-                    .accessibilityIdentifier("car-fuel")
-                }
-                if wants[1] {
-                    if wants[..<1].contains(true) { MiniDivider() }
                     NavigationLink(value: HomeRoute.page(.carMileage)) {
                         MiniRow(symbol: "speedometer", colorHex: accentHex, title: tr("Kilométrage"), detail: tr("Kilomètres par mois"))
                     }
                     .buttonStyle(.pressable)
                     .accessibilityIdentifier("car-mileage")
                 }
-                if wants[2] {
-                    if wants[..<2].contains(true) { MiniDivider() }
+                if wants[1] {
+                    if wants[..<1].contains(true) { MiniDivider() }
                     NavigationLink(value: HomeRoute.page(.carMaintenance)) {
                         MiniRow(symbol: "wrench.and.screwdriver.fill", colorHex: "3366FF", title: tr("Entretien"), detail: tr("Vidange, pneus, freins…"),
                                 value: state.services.isEmpty ? nil : "\(state.services.count)")
@@ -365,23 +376,34 @@ struct CarAppView: View {
                     .buttonStyle(.pressable)
                     .accessibilityIdentifier("car-maintenance")
                 }
-                if wants[3] {
-                    if wants[..<3].contains(true) { MiniDivider() }
+                if wants[2] {
+                    if wants[..<2].contains(true) { MiniDivider() }
                     NavigationLink(value: HomeRoute.page(.carDeadlines)) {
                         MiniRow(symbol: "calendar.badge.exclamationmark", colorHex: Car.alertHex, title: tr("Échéances"), detail: tr("Assurance, immatriculation, pneus d'hiver…"))
                     }
                     .buttonStyle(.pressable)
                     .accessibilityIdentifier("car-deadlines")
                 }
-                if wants[4] {
-                    if wants[..<4].contains(true) { MiniDivider() }
-                    NavigationLink(value: HomeRoute.page(.carCosts)) {
-                        MiniRow(symbol: "creditcard.fill", colorHex: "2F8F7A", title: tr("Coûts"), detail: tr("Ce que la voiture coûte vraiment chaque mois"))
-                    }
-                    .buttonStyle(.pressable)
-                    .accessibilityIdentifier("car-cost")
-                }
             }
+        }
+    }
+}
+
+/// A section title with its one fixed door: « Tout voir » opens the page.
+private struct CarSectionHead: View {
+    let title: String
+    let page: MiniAppPage
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline) {
+            MiniSectionTitle(title: title)
+            NavigationLink(value: HomeRoute.page(page)) {
+                Text(tr("Tout voir"))
+                    .font(.subheadline.weight(.semibold))
+                    .frame(minHeight: 44)
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(.pressable)
         }
     }
 }
