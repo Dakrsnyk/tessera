@@ -271,7 +271,8 @@ final class MiniAppUITests: XCTestCase {
 
     func testStudiesChecksHomeworkTimesStudyAndOpensItsPages() {
         launch(["-screenshotScreen", "app-studies"])
-        let timer = app.otherElements["studies-timer"]
+        // Direction 5 (2026-11-17): the study timer is the floating action « Démarrer le chrono ».
+        let timer = app.buttons["studies-timer-start"]
         XCTAssertTrue(timer.waitForExistence(timeout: 12), "Mini-app Études absente")
         snapshot("studies")
 
@@ -289,7 +290,7 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertTrue(noCourse.waitForExistence(timeout: 5), "Choix du cours absent")
         noCourse.tap()
         tap(app.buttons["studies-timer-stop"], "Terminer le chrono")
-        XCTAssertTrue(element(containing: "Moins d'une minute").waitForExistence(timeout: 5), "Le chrono doit s'arrêter")
+        XCTAssertTrue(timer.waitForExistence(timeout: 5), "Le chrono doit s'arrêter")
 
         for (identifier, title) in [("studies-timetable", "Horaire"), ("studies-grades", "Notes"), ("studies-revision", "Révisions")] {
             tap(app.buttons[identifier], title)
@@ -320,7 +321,7 @@ final class MiniAppUITests: XCTestCase {
     func testStudiesShowsItsSectionsAndAddsACourseOnlyOnce() {
         launch(["-screenshotScreen", "app-studies"])
         XCTAssertTrue(app.staticTexts["Mes cours"].waitForExistence(timeout: 12), "Mini-app Études absente")
-        for section in ["Mes cours", "Mes examens", "Concentration"] {
+        for section in ["Mes cours", "À venir", "Organisation étudiante"] {
             XCTAssertTrue(app.staticTexts[section].waitForExistence(timeout: 5), "Section « \(section) » absente d'Études")
         }
         reveal(app.staticTexts["Mes cours"], "Section Mes cours")

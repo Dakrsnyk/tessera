@@ -244,8 +244,10 @@ struct Exam: Codable, Hashable, Identifiable {
     var title: String
     var date: Date
     var room: String = ""
+    /// Minutes of revision the student aims at before the exam (nil: no goal set). Added 2026-11-17, optional.
+    var studyGoalMinutes: Int?
 
-    enum CodingKeys: String, CodingKey { case id, courseID, title, date, room }
+    enum CodingKeys: String, CodingKey { case id, courseID, title, date, room, studyGoalMinutes }
 }
 
 extension Exam {
@@ -257,6 +259,7 @@ extension Exam {
         title = c.value(.title, "")
         date = c.value(.date, Date())
         room = c.value(.room, "")
+        studyGoalMinutes = c.optional(.studyGoalMinutes)
     }
 }
 

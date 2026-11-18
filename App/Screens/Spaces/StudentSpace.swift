@@ -520,6 +520,15 @@ struct ExamEditor: View {
             CoursePicker(selection: $exam.courseID, courses: model.student.courses)
             DatePicker(tr("Date et heure"), selection: $exam.date).environment(\.locale, Fmt.locale)
             TextField(tr("Salle (facultatif)"), text: $exam.room)
+            // Hours of revision aimed at before the exam (« 4 h 25 sur 8 h » on the page of the course).
+            Toggle(tr("Objectif de révision"), isOn: Binding(get: { exam.studyGoalMinutes != nil },
+                                                             set: { exam.studyGoalMinutes = $0 ? (exam.studyGoalMinutes ?? 8 * 60) : nil }))
+            if exam.studyGoalMinutes != nil {
+                Stepper(value: Binding(get: { exam.studyGoalMinutes ?? 8 * 60 }, set: { exam.studyGoalMinutes = $0 }), in: 60...3_000, step: 60) {
+                    Text(Fmt.minutes(Double(exam.studyGoalMinutes ?? 0))).monospacedDigit()
+                }
+                .accessibilityIdentifier("exam-goal")
+            }
         }
     }
 

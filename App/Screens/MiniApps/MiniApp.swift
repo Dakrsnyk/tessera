@@ -110,6 +110,8 @@ enum MiniAppPage: Hashable {
     case studiesAssignments
     case studiesGrades
     case studiesRevision
+    case studiesDeadlines
+    case studiesHistory
     case financesTransactions
     /// The account statement; `start`: where the balance counts from without a « Solde de départ ».
     case financesStatement(Date)
@@ -207,6 +209,8 @@ struct MiniAppPageView: View {
         case .studiesAssignments: StudiesAssignmentsPage()
         case .studiesGrades: StudiesGradesPage()
         case .studiesRevision: StudiesRevisionPage()
+        case .studiesDeadlines: StudiesDeadlinesPage()
+        case .studiesHistory: StudiesHistoryPage()
         case .financesTransactions: FinancesTransactionsPage()
         case let .financesStatement(start): FinancesStatementPage(start: start)
         case .financesCategories: FinancesCategoriesPage()
