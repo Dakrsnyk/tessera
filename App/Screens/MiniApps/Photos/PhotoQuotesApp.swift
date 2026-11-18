@@ -2,25 +2,23 @@ import PhotosUI
 import SwiftUI
 import WidgetKit
 
-/// « Photos et citations »: widgets made of the person's photos or of a quote. One main action for each,
-/// then the widgets already made, ready to be changed. A widget is made in two steps: its size, then its
-/// photos (Apple's photo picker: only the chosen photos are shared, no access to the library is asked)
-/// or its quote.
+/// « Photos et citations »: the gallery of its widgets (as they are placed, a « … » menu on each), with what the
+/// « Un par jour » widget shows today. One main action for each kind, then the widgets already made, ready to be
+/// changed. A widget is made in a workshop: the widget stays in view above, the settings in chapters. Photos come
+/// from Apple's photo picker (only the chosen photos are shared, no access to the library is asked).
 struct PhotoQuotesAppView: View {
     @Environment(AppModel.self) private var model
+    @Environment(Router.self) private var router
     @State private var editing: PhotoQuoteDraft?
     @State private var paywall: PaywallContext?
-    /// The choice behind the « + » tile of the grid: a photo widget or a quote.
-    @State private var choosingKind = false
+    @State private var pendingDeletion: WidgetDesign?
 
     private var accentHex: String { MiniApp.photos.colorHex }
 
     var body: some View {
         let made = model.photoQuoteDesigns
         MiniAppScaffold(colorHex: accentHex) {
-            // No selector: nothing here is dated. The band tells how many widgets exist and what is shared.
-            MiniHero(label: tr("Tes widgets photo"), value: Fmt.plural(made.count, tr("widget"), tr("widgets")),
-                     caption: tr("Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé."))
+            header(made)
         } sheet: {
             // Two actions: a row at the head of the sheet.
             HStack(spacing: 10) {
@@ -34,46 +32,15 @@ struct PhotoQuotesAppView: View {
                 .accessibilityIdentifier("quote-new")
             }
             VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Mes widgets"))
+                MiniSectionTitle(title: tr("Mes widgets"),
+                                 detail: made.isEmpty ? nil : Fmt.plural(made.count, tr("widget"), tr("widgets")))
                 if made.isEmpty {
-                    Text(tr("Une photo, deux, trois ou quatre, ou une citation : ton premier widget se crée en deux étapes."))
+                    Text(tr("Choisis des photos (jusqu'à 12) ou écris une citation : ton premier widget se crée en quelques touches."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .card(padding: 14)
                 } else {
-                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 14) {
-                        ForEach(made) { design in
-                            Button {
-                                editing = PhotoQuoteDraft(design: design, isNew: false)
-                            } label: {
-                                VStack(alignment: .leading, spacing: 6) {
-                                    WidgetPreview(design: design, family: (design.format ?? .small).family, payload: WidgetPayload())
-                                    Text(design.name)
-                                        .font(.caption.weight(.semibold))
-                                        .foregroundStyle(.primary)
-                                        .lineLimit(1)
-                                    Text("\(design.kind.title) · \((design.format ?? .small).title)")
-                                        .font(.caption2)
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
-                            .buttonStyle(.pressable)
-                            .accessibilityIdentifier("photos-widget")
-                        }
-                        // The last tile of the grid: one more widget.
-                        Button {
-                            choosingKind = true
-                        } label: {
-                            Image(systemName: "plus")
-                                .font(.title2.weight(.semibold))
-                                .foregroundStyle(.secondary)
-                                .frame(maxWidth: .infinity, minHeight: 130)
-                                .cristalPanel(radius: MiniStyle.tileRadius)
-                        }
-                        .buttonStyle(.pressable)
-                        .accessibilityLabel(Text(tr("Nouveau widget")))
-                        .accessibilityIdentifier("photos-add")
-                    }
+                    gallery(made)
                 }
             }
             MiniFootnote(text: tr("Pour le poser : touche longuement l'écran d'accueil, puis + › Ardane › « Mes widgets », et choisis-le avec « Modifier le widget »."))
@@ -83,11 +50,87 @@ struct PhotoQuotesAppView: View {
             PhotoQuoteEditor(draft: draft)
         }
         .sheet(item: $paywall) { PaywallView(context: $0) }
-        .confirmationDialog(tr("Nouveau widget"), isPresented: $choosingKind, titleVisibility: .visible) {
-            Button(tr("Photos")) { start(.photos) }
-            Button(tr("Citation")) { start(.quote) }
-            Button(tr("Annuler"), role: .cancel) {}
+        .confirmationDialog(tr("Supprimer ce widget ?"), isPresented: Binding(
+            get: { pendingDeletion != nil },
+            set: { if !$0 { pendingDeletion = nil } }
+        ), titleVisibility: .visible) {
+            Button(tr("Supprimer"), role: .destructive) {
+                if let design = pendingDeletion { model.delete(design) }
+                pendingDeletion = nil
+            }
+        } message: {
+            Text(tr("Il disparaîtra de ton écran d'accueil. Les photos de ta photothèque ne sont pas touchées."))
         }
+    }
+
+    /// The band: the day of the first « Un par jour » widget and what it shows, else how many widgets there are
+    /// and what is shared.
+    @ViewBuilder private func header(_ made: [WidgetDesign]) -> some View {
+        let now = Date()
+        if let daily = made.first(where: { $0.dailyPosition(on: now) != nil }), let position = daily.dailyPosition(on: now) {
+            let next = daily.kind == .quote ? tr("prochain texte à minuit") : tr("prochaine photo à minuit")
+            MiniHero(label: tr("Aujourd'hui"), value: PhotoDailyText.day(position), caption: "\(daily.name) · \(next)", valueSize: 40)
+                .accessibilityIdentifier("photos-today")
+        } else {
+            MiniHero(label: tr("Tes widgets"), value: Fmt.plural(made.count, tr("widget"), tr("widgets")),
+                     caption: tr("Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé."))
+        }
+    }
+
+    /// The widgets in their real proportions: a Medium or a Large takes the whole width, two Small ones share a row.
+    private func gallery(_ made: [WidgetDesign]) -> some View {
+        var rows: [[WidgetDesign]] = []
+        for design in made {
+            let isSmall = (design.format ?? .small) == .small
+            if isSmall, let last = rows.last, last.count == 1, (last[0].format ?? .small) == .small {
+                rows[rows.count - 1].append(design)
+            } else {
+                rows.append([design])
+            }
+        }
+        return VStack(spacing: 16) {
+            ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                HStack(alignment: .top, spacing: 14) {
+                    ForEach(row) { tile($0) }
+                    if row.count == 1, (row[0].format ?? .small) == .small {
+                        Color.clear.frame(maxWidth: .infinity)
+                    }
+                }
+            }
+        }
+    }
+
+    private func tile(_ design: WidgetDesign) -> some View {
+        PhotoWidgetTile(
+            design: design,
+            isFavorite: design.isFavorite,
+            edit: { editing = PhotoQuoteDraft(design: design, isNew: false) },
+            duplicate: { duplicate(design, asVariant: false) },
+            makeVariant: { duplicate(design, asVariant: true) },
+            toggleFavorite: {
+                Haptics.tap()
+                model.toggleFavorite(design)
+            },
+            place: {
+                // The widget to place becomes the latest of its size: the gallery previews it.
+                model.markUsed(design)
+                router.lastSavedName = design.name
+                router.lastSavedID = design.id
+                router.isAddGuidePresented = true
+            },
+            delete: { pendingDeletion = design }
+        )
+        .frame(maxWidth: .infinity)
+    }
+
+    private func duplicate(_ design: WidgetDesign, asVariant: Bool) {
+        guard let copy = model.duplicate(design, asVariant: asVariant) else {
+            paywall = .designLimit
+            return
+        }
+        Haptics.success()
+        // A variant is the same copy, opened to be changed.
+        if asVariant { editing = PhotoQuoteDraft(design: copy, isNew: false) }
     }
 
     private func start(_ kind: WidgetKind) {
@@ -122,8 +165,8 @@ struct PhotoQuoteDraft: Identifiable {
     }
 }
 
-/// Makes or changes a photo or quote widget: its size first, then its photos (framed one by one) or its
-/// quote (text, author, typography, colors), with the widget as it will look above.
+/// Makes or changes a photo or quote widget, in a workshop: the widget as it will look stays in view above, the
+/// settings in chapters (« Contenu », « Disposition », and « Style » for a quote).
 struct PhotoQuoteEditor: View {
     @Environment(AppModel.self) private var model
     @Environment(\.dismiss) private var dismiss
@@ -139,6 +182,11 @@ struct PhotoQuoteEditor: View {
     @State private var confirmsDelete = false
     /// Photo files written while editing: removed if the widget isn't saved.
     @State private var written: Set<String> = []
+    @State private var chapter: PhotoChapter = .content
+    /// The thumbnail whose actions (frame, move, remove) are shown under the grid.
+    @State private var selectedPhoto: UUID?
+    @State private var importsTexts = false
+    @State private var paywall: PaywallContext?
 
     init(draft: PhotoQuoteDraft) {
         _design = State(initialValue: draft.design)
@@ -152,37 +200,43 @@ struct PhotoQuoteEditor: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
+            VStack(spacing: 0) {
+                // The widget stays in view while the settings scroll under it.
+                VStack(spacing: 12) {
                     WidgetPreview(design: design, family: format.family, payload: WidgetPayload())
-                        .frame(maxWidth: format == .small ? 200 : .infinity)
+                        .frame(maxWidth: format == .small ? 150 : .infinity, maxHeight: 170)
                         .frame(maxWidth: .infinity)
                         .accessibilityIdentifier("photos-preview")
-                    step(1, tr("La taille")) { sizePicker }
-                    if design.kind == .photos {
-                        step(2, tr("Les photos")) { photosStep }
-                    } else {
-                        step(2, tr("La citation")) { quoteStep }
+                    Picker(tr("Chapitre"), selection: $chapter) {
+                        ForEach(PhotoChapter.chapters(for: design.kind)) { Text($0.title).tag($0) }
                     }
-                    step(3, tr("Le nom")) {
-                        TextField(tr("Nom du widget"), text: $design.name)
-                            .padding(12)
-                            .cristalPanel(radius: 12)
-                            .accessibilityIdentifier("photos-name")
-                    }
-                    if !isNew {
-                        Button(role: .destructive) {
-                            confirmsDelete = true
-                        } label: {
-                            Label(tr("Supprimer ce widget"), systemImage: "trash")
-                                .frame(maxWidth: .infinity, minHeight: 44)
-                        }
-                        .buttonStyle(.bordered)
-                    }
+                    .pickerStyle(.segmented)
+                    .accessibilityIdentifier("photos-chapter")
                 }
-                .padding(20)
+                .padding(.horizontal, 20)
+                .padding(.top, 8)
+                .padding(.bottom, 10)
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        switch chapter {
+                        case .content: contentChapter
+                        case .layout: layoutChapter
+                        case .style: styleChapter
+                        }
+                        if !isNew {
+                            Button(role: .destructive) {
+                                confirmsDelete = true
+                            } label: {
+                                Label(tr("Supprimer ce widget"), systemImage: "trash")
+                                    .frame(maxWidth: .infinity, minHeight: 44)
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                    }
+                    .padding(20)
+                }
+                .scrollDismissesKeyboard(.interactively)
             }
-            .scrollDismissesKeyboard(.interactively)
             .cristalScreen()
             .navigationTitle(design.kind == .photos ? tr("Widget photo") : tr("Widget citation"))
             .navigationBarTitleDisplayMode(.inline)
@@ -203,6 +257,10 @@ struct PhotoQuoteEditor: View {
                     }
                 }
             }
+            .sheet(isPresented: $importsTexts) {
+                QuoteTextsImportView { texts, day in applyImport(texts, from: day) }
+            }
+            .sheet(item: $paywall) { PaywallView(context: $0) }
             .confirmationDialog(tr("Supprimer ce widget ?"), isPresented: $confirmsDelete, titleVisibility: .visible) {
                 Button(tr("Supprimer"), role: .destructive) {
                     // The saved widget's photos go with it, and so do the copies made in this edit.
@@ -235,18 +293,44 @@ struct PhotoQuoteEditor: View {
         }
     }
 
-    private func step<Content: View>(_ number: Int, _ title: String, @ViewBuilder content: () -> Content) -> some View {
+    private func heading(_ title: String) -> some View {
+        Text(title).font(.headline)
+    }
+
+    // MARK: Chapters
+
+    @ViewBuilder private var contentChapter: some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 8) {
-                Text("\(number)")
-                    .font(.caption.weight(.bold))
-                    .foregroundStyle(style.onAccent)
-                    .frame(width: 22, height: 22)
-                    .background(strong, in: Circle())
-                Text(title).font(.headline)
-            }
-            content()
+            heading(tr("Le nom"))
+            TextField(tr("Nom du widget"), text: $design.name)
+                .padding(12)
+                .cristalPanel(radius: 12)
+                .accessibilityIdentifier("photos-name")
         }
+        if design.kind == .photos {
+            VStack(alignment: .leading, spacing: 10) {
+                heading(tr("Les photos"))
+                photosStep
+            }
+        } else {
+            quoteStep
+        }
+    }
+
+    @ViewBuilder private var layoutChapter: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            heading(tr("La taille"))
+            sizePicker
+        }
+        if design.kind == .photos {
+            photosLayout
+        } else {
+            quoteLayout
+        }
+    }
+
+    @ViewBuilder private var styleChapter: some View {
+        quoteStyle
     }
 
     // MARK: Size
@@ -303,30 +387,47 @@ struct PhotoQuoteEditor: View {
                     .font(.footnote)
                     .foregroundStyle(.secondary)
             }
-            Text(photos.isEmpty
-                 ? tr("Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé.")
-                 : (photos.count > PhotoLayout.capacity
-                    ? tr("Plus de \(PhotoLayout.capacity) photos : le widget en montre \(PhotoLayout.capacity) à la fois, puis les suivantes chaque heure.")
-                    : tr("Touche une photo pour la recadrer. La mise en page suit leur nombre : une, deux, trois ou quatre.")))
-                .font(.footnote)
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
-            if !photos.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 10) {
-                        ForEach(Array(photos.enumerated()), id: \.element.id) { index, slot in
-                            thumbnail(slot, index: index, count: photos.count)
-                        }
+            if photos.isEmpty {
+                Text(tr("Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            } else {
+                // The grid: every photo in view, no hidden scrolling.
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 8), count: 4), spacing: 8) {
+                    ForEach(Array(photos.enumerated()), id: \.element.id) { index, slot in
+                        thumbnail(slot, index: index, count: photos.count)
                     }
-                    .padding(.vertical, 2)
                 }
+                if let slot = photos.first(where: { $0.id == selectedPhoto }), let index = photos.firstIndex(where: { $0.id == slot.id }) {
+                    photoActions(slot, index: index, count: photos.count)
+                } else {
+                    Text(tr("Touche une photo pour la recadrer, la déplacer ou la retirer."))
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Text(rotationNote(count: photos.count))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
         }
     }
 
+    private func rotationNote(count: Int) -> String {
+        if design.options.daily != nil && count > 1 {
+            return tr("Une photo par jour : la série passe à minuit.")
+        }
+        return count > PhotoLayout.capacity
+            ? tr("Plus de \(PhotoLayout.capacity) photos : le widget en montre \(PhotoLayout.capacity) à la fois, puis les suivantes chaque heure.")
+            : tr("La mise en page suit leur nombre : une, deux, trois ou quatre.")
+    }
+
     private func thumbnail(_ slot: PhotoSlot, index: Int, count: Int) -> some View {
-        Button {
-            framing = slot
+        let isOn = selectedPhoto == slot.id
+        return Button {
+            withAnimation(.snappy) { selectedPhoto = isOn ? nil : slot.id }
         } label: {
             PhotoCell(slot: PhotoSlot(file: slot.file), size: CGSize(width: 72, height: 72))
                 .frame(width: 72, height: 72)
@@ -339,6 +440,11 @@ struct PhotoQuoteEditor: View {
                         .background(Color.black.opacity(0.55), in: Circle())
                         .padding(4)
                 }
+                .overlay {
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .strokeBorder(isOn ? strong : .clear, lineWidth: 3)
+                }
+                .frame(maxWidth: .infinity)
         }
         .buttonStyle(.pressable)
         .contextMenu {
@@ -350,14 +456,49 @@ struct PhotoQuoteEditor: View {
                 Button { move(slot, to: index + 1) } label: { Label(tr("Reculer"), systemImage: "arrow.right") }
             }
             Button(role: .destructive) {
-                design.options.photos.removeAll { $0.id == slot.id }
+                remove(slot)
             } label: {
                 Label(tr("Retirer"), systemImage: "minus.circle")
             }
         }
         .accessibilityLabel(Text(tr("Photo \(index + 1)")))
-        .accessibilityHint(Text(tr("Touche pour recadrer, touche longuement pour la déplacer ou la retirer.")))
+        .accessibilityHint(Text(tr("Touche pour la choisir, puis recadre-la, déplace-la ou retire-la.")))
         .accessibilityIdentifier("photos-thumbnail")
+    }
+
+    /// The actions of the chosen photo, in front of the person (they used to hide in a long-press menu).
+    private func photoActions(_ slot: PhotoSlot, index: Int, count: Int) -> some View {
+        HStack(spacing: 6) {
+            photoAction(tr("Recadrer"), "crop", id: "photos-action-frame") { framing = slot }
+            photoAction(tr("Avancer"), "arrow.left", id: "photos-action-earlier", isEnabled: index > 0) { move(slot, to: index - 1) }
+            photoAction(tr("Reculer"), "arrow.right", id: "photos-action-later", isEnabled: index < count - 1) { move(slot, to: index + 1) }
+            photoAction(tr("Retirer"), "minus.circle", id: "photos-action-remove", isDestructive: true) { remove(slot) }
+        }
+    }
+
+    private func photoAction(_ title: String, _ symbol: String, id: String, isEnabled: Bool = true, isDestructive: Bool = false,
+                             action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(spacing: 2) {
+                Image(systemName: symbol).font(.subheadline)
+                Text(title).font(.caption2.weight(.semibold)).lineLimit(1).minimumScaleFactor(0.7)
+            }
+            .foregroundStyle(isDestructive ? Color.red : strong)
+            .frame(maxWidth: .infinity, minHeight: 48)
+            .background((isDestructive ? Color.red : strong).opacity(0.12), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .opacity(isEnabled ? 1 : 0.4)
+        }
+        .buttonStyle(.pressable)
+        .disabled(!isEnabled)
+        .accessibilityIdentifier(id)
+    }
+
+    private func remove(_ slot: PhotoSlot) {
+        withAnimation(.snappy) {
+            design.options.photos.removeAll { $0.id == slot.id }
+            if selectedPhoto == slot.id { selectedPhoto = nil }
+            if design.options.photos.count < 2 { design.options.daily = nil }
+        }
     }
 
     private func move(_ slot: PhotoSlot, to index: Int) {
@@ -365,6 +506,45 @@ struct PhotoQuoteEditor: View {
         withAnimation(.snappy) {
             let item = design.options.photos.remove(at: from)
             design.options.photos.insert(item, at: min(index, design.options.photos.count))
+        }
+    }
+
+    /// « Disposition » of a photo widget: the automatic layouts, and how the series goes by (four at a time, or
+    /// one per day).
+    @ViewBuilder private var photosLayout: some View {
+        let count = design.options.photos.count
+        VStack(alignment: .leading, spacing: 10) {
+            heading(tr("Mise en page automatique"))
+            PhotoLayoutChoices(family: format.family, count: count, strong: strong)
+        }
+        VStack(alignment: .leading, spacing: 10) {
+            heading(tr("Défilement"))
+            Picker(tr("Défilement"), selection: Binding(
+                get: { design.options.daily != nil },
+                set: { isDaily in
+                    withAnimation(.snappy) {
+                        design.options.daily = isDaily ? DailyRotation(startDay: Date()) : nil
+                    }
+                }
+            )) {
+                Text(tr("Quatre à la fois")).tag(false)
+                Text(tr("Un par jour")).tag(true)
+            }
+            .pickerStyle(.segmented)
+            .disabled(count < 2)
+            .accessibilityIdentifier("photos-scroll")
+            if count < 2 {
+                Text(tr("Il faut au moins deux photos pour en changer chaque jour."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            } else if design.options.daily != nil {
+                PhotoDailyBlock(design: $design, strong: strong)
+            } else {
+                Text(rotationNote(count: count))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
         }
     }
 
@@ -401,24 +581,153 @@ struct PhotoQuoteEditor: View {
         Binding(get: { design.options.quote ?? QuoteContent() }, set: { design.options.quote = $0 })
     }
 
+    /// The texts imported into this quote (« Mes textes »), nil for a quote written by hand.
+    private var importedCount: Int { design.options.quote?.texts?.count ?? 0 }
+
+    /// « Contenu » of a quote: what is written (or the imported texts), and the door to « Mes textes ».
     @ViewBuilder private var quoteStep: some View {
         let quote = quoteBinding
         VStack(alignment: .leading, spacing: 12) {
-            TextField(tr("Ta citation"), text: Binding(get: { quote.wrappedValue.text }, set: { quote.wrappedValue.text = String($0.prefix(280)) }), axis: .vertical)
-                .lineLimit(3...8)
-                .padding(12)
-                .cristalPanel(radius: 12)
-                .accessibilityIdentifier("quote-text")
-            TextField(tr("Auteur (facultatif)"), text: quote.author)
-                .padding(12)
-                .cristalPanel(radius: 12)
-                .accessibilityIdentifier("quote-author")
-            Text(tr("Typographie")).font(.subheadline.weight(.semibold))
+            if importedCount > 0 {
+                importedCard
+            } else {
+                heading(tr("La citation"))
+                TextField(tr("Ta citation"), text: Binding(get: { quote.wrappedValue.text }, set: { quote.wrappedValue.text = String($0.prefix(280)) }), axis: .vertical)
+                    .lineLimit(3...8)
+                    .padding(12)
+                    .cristalPanel(radius: 12)
+                    .accessibilityIdentifier("quote-text")
+                TextField(tr("Auteur (facultatif)"), text: quote.author)
+                    .padding(12)
+                    .cristalPanel(radius: 12)
+                    .accessibilityIdentifier("quote-author")
+                if quote.wrappedValue.text.trimmed.isEmpty {
+                    Button(tr("Essayer avec un exemple")) {
+                        let current = quote.wrappedValue
+                        var sample = QuoteContent.sample
+                        sample.font = current.font
+                        sample.backgroundHex = current.backgroundHex
+                        sample.textHex = current.textHex
+                        sample.photoVeil = current.photoVeil
+                        quote.wrappedValue = sample
+                    }
+                    .font(.subheadline.weight(.semibold))
+                }
+                textsCard
+            }
+        }
+        .tint(strong)
+    }
+
+    /// The door to « Mes textes » on a quote written by hand.
+    private var textsCard: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label(tr("Mes textes"), systemImage: "square.and.arrow.down")
+                .font(.headline)
+            Text(tr("Importe un recueil à toi : un texte s'affiche chaque jour."))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            Button {
+                importsTexts = true
+            } label: {
+                Text(tr("Importer mes textes"))
+                    .font(.subheadline.weight(.semibold))
+                    .frame(minHeight: 44, alignment: .leading)
+            }
+            .accessibilityIdentifier("quote-import")
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .cristalPanel(radius: 16)
+    }
+
+    /// A quote made of imported texts: how many, and the ways to replace or leave them.
+    private var importedCard: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Label(tr("Mes textes"), systemImage: "square.and.arrow.down")
+                .font(.headline)
+            Text(Fmt.plural(importedCount, tr("texte importé"), tr("textes importés")))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            if let text = design.options.quote?.texts?.first {
+                Text(text)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+            HStack(spacing: 16) {
+                Button(tr("Remplacer")) { importsTexts = true }
+                    .accessibilityIdentifier("quote-import")
+                Button(tr("Retirer mes textes"), role: .destructive) { removeTexts() }
+                    .accessibilityIdentifier("quote-import-remove")
+            }
+            .font(.subheadline.weight(.semibold))
+            .frame(minHeight: 44)
+        }
+        .padding(14)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .cristalPanel(radius: 16)
+    }
+
+    /// The person's texts, one per day from the chosen day. The quote's own text becomes the first one, so that
+    /// the widget can be saved and shows something where « Un par jour » can't.
+    private func applyImport(_ texts: [String], from day: Date) {
+        guard let first = texts.first else { return }
+        var quote = quoteBinding.wrappedValue
+        quote.texts = texts
+        quote.text = first
+        quote.author = ""
+        design.options.quote = quote
+        let old = design.options.daily
+        design.options.daily = DailyRotation(order: old?.order ?? .inOrder, startDay: day, seed: old?.seed ?? Int.random(in: 1...1_000_000))
+        withAnimation(.snappy) { chapter = .layout }
+        Haptics.success()
+    }
+
+    private func removeTexts() {
+        var quote = quoteBinding.wrappedValue
+        quote.texts = nil
+        design.options.quote = quote
+        design.options.daily = nil
+    }
+
+    /// « Disposition » of a quote: the two switches, and « Un texte par jour » once texts are imported.
+    @ViewBuilder private var quoteLayout: some View {
+        let quote = quoteBinding
+        VStack(alignment: .leading, spacing: 10) {
+            Toggle(tr("Centrée"), isOn: quote.isCentered).font(.subheadline)
+            Toggle(tr("Guillemets"), isOn: quote.showsMarks).font(.subheadline)
+        }
+        .tint(strong)
+        if importedCount > 0 {
+            VStack(alignment: .leading, spacing: 10) {
+                Toggle(tr("Un texte par jour"), isOn: Binding(
+                    get: { design.options.daily != nil },
+                    set: { isOn in
+                        withAnimation(.snappy) { design.options.daily = isOn ? DailyRotation(startDay: Date()) : nil }
+                    }
+                ))
+                .font(.subheadline.weight(.semibold))
+                .tint(strong)
+                .accessibilityIdentifier("quote-daily")
+                if design.options.daily != nil {
+                    PhotoDailyBlock(design: $design, strong: strong)
+                }
+            }
+        }
+    }
+
+    /// « Style » of a quote: typography, color pairs, the photo behind, then the background and text colors.
+    @ViewBuilder private var quoteStyle: some View {
+        let quote = quoteBinding
+        VStack(alignment: .leading, spacing: 12) {
+            Text(tr("Typographie")).font(.headline)
             Picker(tr("Typographie"), selection: quote.font) {
                 ForEach(QuoteFont.allCases) { Text($0.title).tag($0) }
             }
             .pickerStyle(.segmented)
-            Text(tr("Couleurs")).font(.subheadline.weight(.semibold))
+            Text(tr("Couleurs")).font(.headline)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(QuotePalette.all) { palette in
@@ -446,30 +755,45 @@ struct PhotoQuoteEditor: View {
                 }
                 .padding(.vertical, 2)
             }
-            HStack(spacing: 12) {
-                ColorPicker(tr("Fond"), selection: colorBinding(\.backgroundHex), supportsOpacity: false)
-                ColorPicker(tr("Texte"), selection: colorBinding(\.textHex), supportsOpacity: false)
-            }
-            .font(.subheadline)
+            // The photo comes before the colors it replaces.
             backgroundSection
-            Group {
-                Toggle(tr("Centrée"), isOn: quote.isCentered).font(.subheadline)
-                Toggle(tr("Guillemets"), isOn: quote.showsMarks).font(.subheadline)
-            }
-            if quote.wrappedValue.text.trimmed.isEmpty {
-                Button(tr("Essayer avec un exemple")) {
-                    let current = quote.wrappedValue
-                    var sample = QuoteContent.sample
-                    sample.font = current.font
-                    sample.backgroundHex = current.backgroundHex
-                    sample.textHex = current.textHex
-                    sample.photoVeil = current.photoVeil
-                    quote.wrappedValue = sample
+            let hasPhoto = design.quoteBackground != nil
+            VStack(alignment: .leading, spacing: 8) {
+                Text(tr("Fond")).font(.subheadline.weight(.semibold))
+                QuoteBackgroundSwatches(selectedHex: quote.wrappedValue.backgroundHex, isPremium: model.isPremium, strong: strong) { swatch, isLocked in
+                    if isLocked {
+                        paywall = PaywallContext(
+                            symbol: "paintpalette.fill",
+                            title: tr("Couleurs de fond"),
+                            detail: tr("Premium ouvre toutes les couleurs de fond, comme dans le Studio."),
+                            perk: .styles
+                        )
+                    } else {
+                        quote.wrappedValue.backgroundHex = swatch.hex
+                        quote.wrappedValue.textHex = readableTextHex(onBackground: swatch.hex)
+                    }
                 }
-                .font(.subheadline.weight(.semibold))
+                HStack(spacing: 12) {
+                    ColorPicker(tr("Fond"), selection: colorBinding(\.backgroundHex), supportsOpacity: false)
+                    ColorPicker(tr("Texte"), selection: colorBinding(\.textHex), supportsOpacity: false)
+                }
+                .font(.subheadline)
+                if hasPhoto {
+                    Text(tr("Avec une photo, la couleur de fond ne sert que si la photo n'est plus disponible."))
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
             }
+            .opacity(hasPhoto ? 0.55 : 1)
         }
         .tint(strong)
+    }
+
+    /// The text color that reads on a background chosen from the swatches: dark on a light color, light on a dark one.
+    private func readableTextHex(onBackground hex: String) -> String {
+        let rgb = ColorMath.rgb(hex)
+        return ColorMath.relativeLuminance(rgb.r, rgb.g, rgb.b) >= 0.5 ? "2B2622" : "F2EEE6"
     }
 
     /// A photo behind the quote, copied and framed like a photo widget's (it is the widget's only photo), under
@@ -564,6 +888,9 @@ struct PhotoQuoteEditor: View {
             quote.author = quote.author.trimmed
             saved.options.quote = quote
         }
+        // « Un par jour » needs something to go through: texts imported, or two photos at least.
+        if saved.kind == .quote, saved.options.quote?.texts?.isEmpty ?? true { saved.options.daily = nil }
+        if saved.kind == .photos, saved.options.photos.count < 2 { saved.options.daily = nil }
         let kept = Set(saved.options.photos.map(\.file))
         let before = Set(model.design(id: saved.id)?.options.photos.map(\.file) ?? [])
         model.save(saved)
@@ -597,7 +924,7 @@ struct PhotoFramingView: View {
     /// The cell of this photo in the widget, at the widget's real size.
     private var cellSize: CGSize {
         let family = (design.format ?? .small).family
-        let shown = PhotoLayout.visible(design.options.photos, at: Date())
+        let shown = PhotoLayout.visible(design.options.photos, daily: design.options.daily, at: Date())
         let index = shown.firstIndex { $0.id == slot.id } ?? 0
         let cells = PhotoLayout.cells(count: max(1, shown.count), family: family)
         let cell = cells[safe: index] ?? CGRect(x: 0, y: 0, width: 1, height: 1)

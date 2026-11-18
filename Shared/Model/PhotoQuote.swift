@@ -93,13 +93,16 @@ struct QuoteContent: Codable, Hashable {
     var showsMarks = true
     /// With a photo behind the quote (`WidgetDesign.quoteBackground`): how much it is darkened under the text.
     var photoVeil = 0.4
+    /// « Mes textes »: the person's own texts (imported), one per day when the widget's « Un par jour » is on
+    /// (`DesignOptions.daily`). Nil for a quote written by hand. `text` stays the one shown when « Un par jour » is off.
+    var texts: [String]?
 
     init(text: String = "", author: String = "") {
         self.text = text
         self.author = author
     }
 
-    enum CodingKeys: String, CodingKey { case text, author, font, backgroundHex, textHex, isCentered, showsMarks, photoVeil }
+    enum CodingKeys: String, CodingKey { case text, author, font, backgroundHex, textHex, isCentered, showsMarks, photoVeil, texts }
 
     init(from decoder: Decoder) throws {
         let c = try decoder.container(keyedBy: CodingKeys.self)
@@ -112,6 +115,8 @@ struct QuoteContent: Codable, Hashable {
         isCentered = c.value(.isCentered, d.isCentered)
         showsMarks = c.value(.showsMarks, d.showsMarks)
         photoVeil = c.value(.photoVeil, d.photoVeil)
+        let imported: [String]? = c.optional(.texts)
+        texts = imported.map { $0.prefix(TextImport.maxTexts).map { String($0.prefix(TextImport.maxLength)) } }
     }
 
     mutating func apply(_ palette: QuotePalette) {
@@ -133,6 +138,157 @@ struct QuoteContent: Codable, Hashable {
     static let sample = QuoteContent(text: tr("Fais de ta vie un rêve, et d'un rêve, une réalité."), author: "Antoine de Saint-Exupéry")
 }
 
+/// How « Un par jour » goes through its list.
+enum DailyOrder: String, Codable, CaseIterable, Identifiable {
+    /// The list as it is, one after the other.
+    case inOrder
+    /// The list shuffled once (the order is kept, nothing is drawn again each day).
+    case shuffled
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .inOrder: tr("Dans l'ordre")
+        case .shuffled: tr("Au hasard")
+        }
+    }
+}
+
+/// « Un par jour »: a text of the person's list, or a photo of a series, a new one each day, changing at midnight.
+/// Day 1 is `startDay`; after the last one, the list starts again. Before `startDay`, the first one is shown.
+struct DailyRotation: Codable, Hashable {
+    var order: DailyOrder = .inOrder
+    /// The start of the day the first item is shown.
+    var startDay: Date
+    /// Makes the shuffle: the same seed, the same order, every time and on every widget.
+    var seed: Int = 1
+
+    init(order: DailyOrder = .inOrder, startDay: Date, seed: Int = Int.random(in: 1...1_000_000)) {
+        self.order = order
+        self.startDay = DateMath.startOfDay(startDay)
+        self.seed = seed
+    }
+
+    enum CodingKeys: String, CodingKey { case order, startDay, seed }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        order = c.value(.order, .inOrder)
+        startDay = DateMath.startOfDay(c.value(.startDay, Date()))
+        seed = c.value(.seed, 1)
+    }
+
+    /// What a day shows: its number in the list (1 for the first), the size of the list, and the item's place in it.
+    struct Position: Equatable {
+        let day: Int
+        let total: Int
+        let index: Int
+    }
+
+    func position(count: Int, on date: Date) -> Position? {
+        guard count > 0 else { return nil }
+        let elapsed = DateMath.daysBetween(startDay, date)
+        // Before the start, the first one; after the last, the list starts again.
+        let slot = elapsed < 0 ? 0 : elapsed % count
+        let index = order == .shuffled ? DailyRotation.shuffledOrder(count: count, seed: seed)[slot] : slot
+        return Position(day: slot + 1, total: count, index: index)
+    }
+
+    func hasStarted(on date: Date) -> Bool { DateMath.daysBetween(startDay, date) >= 0 }
+
+    /// The next time the item changes: the next local midnight.
+    static func nextChange(after date: Date) -> Date { DateMath.nextMidnight(after: date) }
+
+    /// The numbers 0…count-1 in an order that only depends on `seed` (a Fisher-Yates shuffle with a small
+    /// generator of our own: the system's one gives another order each time).
+    static func shuffledOrder(count: Int, seed: Int) -> [Int] {
+        var order = Array(0..<max(0, count))
+        guard order.count > 1 else { return order }
+        var state = UInt64(truncatingIfNeeded: seed) &+ 0x9E37_79B9_7F4A_7C15
+        func next() -> UInt64 {
+            state = state &+ 0x9E37_79B9_7F4A_7C15
+            var z = state
+            z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
+            z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
+            return z ^ (z >> 31)
+        }
+        for i in stride(from: order.count - 1, to: 0, by: -1) {
+            let j = Int(next() % UInt64(i + 1))
+            order.swapAt(i, j)
+        }
+        return order
+    }
+}
+
+/// « Mes textes »: cutting what the person pastes or opens (a text file) into texts, one per line or per paragraph.
+/// The app names and sorts nothing: it counts them.
+enum TextImport {
+    /// A widget keeps 2 000 texts at most, each cut to the length of a quote typed by hand.
+    static let maxTexts = 2_000
+    static let maxLength = 280
+    /// A file bigger than this is not read.
+    static let maxFileBytes = 2_000_000
+
+    enum Split: String, CaseIterable, Identifiable {
+        case line, paragraph
+        var id: String { rawValue }
+
+        var title: String {
+            switch self {
+            case .line: tr("Ligne", context: "text")
+            case .paragraph: tr("Paragraphe")
+            }
+        }
+    }
+
+    struct Result: Equatable {
+        var texts: [String]
+        /// Texts cut because they were too long.
+        var cut = 0
+        /// Texts left out because the list was full.
+        var left = 0
+    }
+
+    static func parse(_ raw: String, by split: Split) -> Result {
+        let clean = raw.replacingOccurrences(of: "\u{FEFF}", with: "")
+            .replacingOccurrences(of: "\r\n", with: "\n")
+            .replacingOccurrences(of: "\r", with: "\n")
+        var pieces: [String] = []
+        switch split {
+        case .line:
+            pieces = clean.components(separatedBy: "\n")
+        case .paragraph:
+            var current: [String] = []
+            for line in clean.components(separatedBy: "\n") {
+                if line.trimmed.isEmpty {
+                    if !current.isEmpty {
+                        pieces.append(current.joined(separator: " "))
+                        current = []
+                    }
+                } else {
+                    current.append(line.trimmed)
+                }
+            }
+            if !current.isEmpty { pieces.append(current.joined(separator: " ")) }
+        }
+        let texts = pieces.map(\.trimmed).filter { !$0.isEmpty }
+        var result = Result(texts: [])
+        for text in texts {
+            guard result.texts.count < maxTexts else {
+                result.left += 1
+                continue
+            }
+            if text.count > maxLength {
+                result.cut += 1
+                result.texts.append(String(text.prefix(maxLength)).trimmed)
+            } else {
+                result.texts.append(text)
+            }
+        }
+        return result
+    }
+}
+
 /// Where the photos go in the widget, from their number and the widget's size.
 enum PhotoLayout {
     /// Photos shown at once: four at most, whatever the size, so each one stays readable.
@@ -147,6 +303,20 @@ enum PhotoLayout {
         let hour = Int(date.timeIntervalSince1970 / 3_600)
         let start = (hour * capacity) % photos.count
         return (0..<capacity).map { photos[(start + $0) % photos.count] }
+    }
+
+    /// With « Un par jour »: the one photo of the day (the list's order, or shuffled once); without it, as `visible(_:at:)`.
+    static func visible(_ photos: [PhotoSlot], daily: DailyRotation?, at date: Date) -> [PhotoSlot] {
+        guard let daily, photos.count > 1, let position = daily.position(count: photos.count, on: date) else {
+            return visible(photos, at: date)
+        }
+        return [photos[position.index]]
+    }
+
+    /// With « Un par jour »: the next midnight; without it, as `nextChange(_:after:)`.
+    static func nextChange(_ photos: [PhotoSlot], daily: DailyRotation?, after date: Date) -> Date? {
+        guard daily != nil, photos.count > 1 else { return nextChange(photos, after: date) }
+        return DailyRotation.nextChange(after: date)
     }
 
     /// The next date the photos shown change, or nil when they never do.
@@ -202,6 +372,36 @@ extension WidgetDesign {
     /// The photo behind a quote widget: its first photo. It is kept in `options.photos` like a photo widget's,
     /// so deleting, duplicating or backing up the widget handles its file the same way.
     var quoteBackground: PhotoSlot? { kind == .quote ? options.photos.first : nil }
+}
+
+extension QuoteContent {
+    /// The quote as it is shown on a date: with « Un par jour » and a list of texts, the text of the day
+    /// (no author: the texts are the person's own); otherwise the quote itself.
+    func shown(daily: DailyRotation?, on date: Date) -> QuoteContent {
+        guard let daily, let texts, !texts.isEmpty, let position = daily.position(count: texts.count, on: date) else { return self }
+        var copy = self
+        copy.text = texts[position.index]
+        copy.author = ""
+        return copy
+    }
+}
+
+extension WidgetDesign {
+    /// What « Un par jour » shows on a date: its day, the size of the list and the item; nil when it is off, or
+    /// when there is nothing to go through (a hand-written quote, one photo).
+    func dailyPosition(on date: Date) -> DailyRotation.Position? {
+        guard let daily = options.daily else { return nil }
+        switch kind {
+        case .quote:
+            guard let count = options.quote?.texts?.count, count > 0 else { return nil }
+            return daily.position(count: count, on: date)
+        case .photos:
+            guard options.photos.count > 1 else { return nil }
+            return daily.position(count: options.photos.count, on: date)
+        default:
+            return nil
+        }
+    }
 }
 
 extension WidgetKind {

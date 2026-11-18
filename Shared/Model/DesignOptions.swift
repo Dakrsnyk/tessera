@@ -69,12 +69,14 @@ struct DesignOptions: Codable, Hashable {
     var photos: [PhotoSlot] = []
     /// A quote widget: its text, author, typography and colors.
     var quote: QuoteContent?
+    /// « Un par jour » of a photo widget (its series) or a quote widget (its imported texts); nil when off.
+    var daily: DailyRotation?
 
     init() {}
 
     enum CodingKeys: String, CodingKey {
         case progressUnit, countdownTitle, countdownDate, countdownMode, countdownReminder, dayTitle, dayDate, dayRepeatsYearly
-        case cities, noteTitle, noteText, coinID, moneyMode, showsCompletedTasks, clockShowsDate, targetID, parts, photos, quote
+        case cities, noteTitle, noteText, coinID, moneyMode, showsCompletedTasks, clockShowsDate, targetID, parts, photos, quote, daily
     }
 
     init(from decoder: Decoder) throws {
@@ -100,5 +102,6 @@ struct DesignOptions: Codable, Hashable {
         parts = (try? c.decodeIfPresent(LossyList<ComboPart>.self, forKey: .parts))?.elements ?? []
         photos = (try? c.decodeIfPresent([PhotoSlot].self, forKey: .photos)) ?? []
         quote = (try? c.decodeIfPresent(QuoteContent.self, forKey: .quote)) ?? nil
+        daily = (try? c.decodeIfPresent(DailyRotation.self, forKey: .daily)) ?? nil
     }
 }

@@ -10,12 +10,14 @@ struct PhotoCollageView: View {
     let photos: [PhotoSlot]
     let family: WidgetFamily
     let date: Date
+    /// « Un par jour »: one photo of the series each day.
+    var daily: DailyRotation?
     /// In the app, while choosing: a cell can be touched to frame its photo.
     var onSelect: ((PhotoSlot) -> Void)?
     @Environment(\.widgetRenderingMode) private var renderingMode
 
     var body: some View {
-        let shown = PhotoLayout.visible(photos, at: date)
+        let shown = PhotoLayout.visible(photos, daily: daily, at: date)
         GeometryReader { geo in
             if shown.isEmpty {
                 PhotoPlaceholder(symbol: "photo.on.rectangle.angled", text: tr("Choisis tes photos dans Ardane"))

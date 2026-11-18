@@ -244,7 +244,7 @@
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:33: add(\"age\", \"person\", tr(\"Âge\"), age.map { tr(\"\\($0) ans\") })",
    "App/Screens/Profile/ProfileTopics.swift:371: if let age = model.age { parts.append(tr(\"\\(age) ans\")) }",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:572: ValueRow(title: tr(\"Âge\"), value: tr(\"\\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans\"), symbol: \"person.crop.circle\")",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:579: ValueRow(title: tr(\"Âge\"), value: tr(\"\\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans\"), symbol: \"person.crop.circle\")",
    "Shared/Render/Tiles/TimeTiles.swift:68: tile.inline = tr(\"\\(TF.decimal(age, 2)) ans\")"
   ]
  },
@@ -1101,6 +1101,12 @@
    "Shared/Render/Tiles/FitnessTiles.swift:245: tile.inline = tr(\"\\(trained.count) séances en \\(Fmt.month(now).lowercased())\")"
   ]
  },
+ "%@ textes en trop ont été laissés : un widget en garde 2 000 au plus.": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:394: Text(tr(\"\\(parsed.left) textes en trop ont été laissés : un widget en garde 2 000 au plus.\"))"
+  ]
+ },
  "%@ vs %@": {
   "placeholders": 2,
   "uses": [
@@ -1509,17 +1515,17 @@
  "/ an": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:363: NumberRow(title: tr(\"Entretien prévu\"), value: binding(\\.maintenanceYearly), unit: tr(\"/ an\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:364: NumberRow(title: tr(\"Entretien prévu\"), value: binding(\\.maintenanceYearly), unit: tr(\"/ an\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:359: NumberRow(title: tr(\"Entretien prévu\"), value: carBinding(\\.maintenanceYearly), unit: tr(\"/ an\"))"
   ]
  },
  "/ mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:359: NumberRow(title: tr(\"Assurance\"), value: binding(\\.insuranceMonthly), unit: tr(\"/ mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:360: NumberRow(title: tr(\"Prêt ou location\"), value: binding(\\.loanMonthly), unit: tr(\"/ mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:361: NumberRow(title: tr(\"Stationnement\"), value: binding(\\.parkingMonthly), unit: tr(\"/ mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:362: NumberRow(title: tr(\"Autres frais\"), value: binding(\\.otherMonthly), unit: tr(\"/ mois\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:360: NumberRow(title: tr(\"Assurance\"), value: binding(\\.insuranceMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:361: NumberRow(title: tr(\"Prêt ou location\"), value: binding(\\.loanMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:362: NumberRow(title: tr(\"Stationnement\"), value: binding(\\.parkingMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:363: NumberRow(title: tr(\"Autres frais\"), value: binding(\\.otherMonthly), unit: tr(\"/ mois\"))"
   ]
  },
  "/%@ séances": {
@@ -2207,7 +2213,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:673: Text(tr(\"Aa\"))",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:430: Text(\"Aa\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:739: Text(\"Aa\")"
   ]
  },
  "Abaisse d'abord les épaules, puis tire les coudes vers le bas et l'arrière.": {
@@ -2471,6 +2477,12 @@
    "Shared/Domains/Portfolio.swift:9: case .stock: tr(\"Actions\")"
   ]
  },
+ "Actions du widget": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:96: .accessibilityLabel(Text(tr(\"Actions du widget\")))"
+  ]
+ },
  "Actions en circulation": {
   "placeholders": 0,
   "uses": [
@@ -2632,7 +2644,7 @@
  "Afficher mon anniversaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:553: Toggle(tr(\"Afficher mon anniversaire\"), isOn: Binding("
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:560: Toggle(tr(\"Afficher mon anniversaire\"), isOn: Binding("
   ]
  },
  "Afrique du Sud": {
@@ -2992,7 +3004,7 @@
  "Ajouter des photos": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:290: Label(photos.isEmpty ? tr(\"Choisir des photos\") : tr(\"Ajouter des photos\"), systemImage: \"photo.badge.plus\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:374: Label(photos.isEmpty ? tr(\"Choisir des photos\") : tr(\"Ajouter des photos\"), systemImage: \"photo.badge.plus\")"
   ]
  },
  "Ajouter l'essentiel à emporter": {
@@ -3224,6 +3236,7 @@
  "Ajouter à l'écran": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:86: Button(action: place) { Label(tr(\"Ajouter à l'écran\"), systemImage: \"apps.iphone.badge.plus\") }",
    "App/Screens/MyWidgets/MyWidgetsView.swift:303: CarouselAction(title: tr(\"Ajouter à l'écran\"), symbol: \"apps.iphone.badge.plus\", identifier: \"carousel-place\") {"
   ]
  },
@@ -3657,7 +3670,7 @@
   "uses": [
    "App/Core/DataItems.swift:116: case .birthday: tr(\"Anniversaire\")",
    "App/Screens/Profile/ProfileView.swift:415: DatePicker(tr(\"Anniversaire\"), selection: Binding(",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:577: Text(tr(\"Anniversaire\"))",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:584: Text(tr(\"Anniversaire\"))",
    "Shared/Model/Templates.swift:80: WidgetTemplate(id: \"countdown-birthday\", name: tr(\"Anniversaire\"), kind: .countdown, themeID: .minimal, accentHex: \"F2588F\","
   ]
  },
@@ -4326,7 +4339,7 @@
  "Assurance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:359: NumberRow(title: tr(\"Assurance\"), value: binding(\\.insuranceMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:360: NumberRow(title: tr(\"Assurance\"), value: binding(\\.insuranceMonthly), unit: tr(\"/ mois\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:355: NumberRow(title: tr(\"Assurance\"), value: carBinding(\\.insuranceMonthly), unit: tr(\"/ mois\"))"
   ]
  },
@@ -4432,6 +4445,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApp.swift:120: DatePicker(tr(\"Au début du\"), selection: $date, in: ...Date(), displayedComponents: .date)"
+  ]
+ },
+ "Au hasard": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/PhotoQuote.swift:152: case .shuffled: tr(\"Au hasard\")"
   ]
  },
  "Au moins jusqu'aux cuisses parallèles au sol si ta mobilité le permet, dos neutre.": {
@@ -4610,6 +4629,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/BusinessImport.swift:870: sentences.append(tr(\"Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue.\"))"
+  ]
+ },
+ "Aucun texte trouvé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:373: ? tr(\"Aucun texte trouvé\")"
   ]
  },
  "Aucun voyage pour l'instant.": {
@@ -4857,6 +4882,12 @@
    "App/Core/DailyBrief.swift:559: case 0: return tr(\"Aujourd'hui\\(time)\")"
   ]
  },
+ "Aujourd'hui, %@ : texte %@ sur %@.": {
+  "placeholders": 3,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:421: ? tr(\"Aujourd'hui, \\(Fmt.longDay(Date())) : texte \\(position.day) sur \\(position.total).\")"
+  ]
+ },
  "Aurore": {
   "placeholders": 0,
   "uses": [
@@ -4898,7 +4929,7 @@
  "Auteur (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:412: TextField(tr(\"Auteur (facultatif)\"), text: quote.author)"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:600: TextField(tr(\"Auteur (facultatif)\"), text: quote.author)"
   ]
  },
  "Auto": {
@@ -5050,7 +5081,7 @@
  "Autres frais": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:362: NumberRow(title: tr(\"Autres frais\"), value: binding(\\.otherMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:363: NumberRow(title: tr(\"Autres frais\"), value: binding(\\.otherMonthly), unit: tr(\"/ mois\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:358: NumberRow(title: tr(\"Autres frais\"), value: carBinding(\\.otherMonthly), unit: tr(\"/ mois\"))"
   ]
  },
@@ -5099,7 +5130,8 @@
  "Avancer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:347: Button { move(slot, to: index - 1) } label: { Label(tr(\"Avancer\"), systemImage: \"arrow.left\") }"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:453: Button { move(slot, to: index - 1) } label: { Label(tr(\"Avancer\"), systemImage: \"arrow.left\") }",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:473: photoAction(tr(\"Avancer\"), \"arrow.left\", id: \"photos-action-earlier\", isEnabled: index > 0) { move(slot, to: index - 1) }"
   ]
  },
  "Avancé": {
@@ -5150,6 +5182,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:256: return tr(\"Avec Premium, tes achats faits avec les cartes de Cartes arrivent seuls dans tes dépenses. Rien à régler dans Raccourcis.\")"
+  ]
+ },
+ "Avec une photo, la couleur de fond ne sert que si la photo n'est plus disponible.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:782: Text(tr(\"Avec une photo, la couleur de fond ne sert que si la photo n'est plus disponible.\"))"
   ]
  },
  "Avocat": {
@@ -6836,7 +6874,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Car/CarPages.swift:73: .navigationTitle(tr(\"Carburant\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:315: Share(name: tr(\"Carburant\"), hex: Car.fuelHex, value: cost.fuel, source: tr(\"moyenne des 3 derniers mois\")),",
+   "App/Screens/MiniApps/Car/CarPages.swift:316: Share(name: tr(\"Carburant\"), hex: Car.fuelHex, value: cost.fuel, source: tr(\"moyenne des 3 derniers mois\")),",
    "Shared/Model/KindCatalog.swift:254: KindInfo(kind: .fuelStats, title: tr(\"Carburant\"), summary: tr(\"Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.\"), category: .car, symbol: \"fuelpump\", isPremium: true, fami",
    "Shared/Render/Tiles/CarTiles.swift:32: TileRow(id: \"fuel\", title: tr(\"Carburant\"), value: TF.money(cost.fuel, currency), symbol: \"fuelpump\", progress: cost.fuel / cost.total),"
   ]
@@ -6982,6 +7020,12 @@
   "uses": [
    "App/Screens/MiniApps/Business/BusinessSources.swift:196: fail(tr(\"Ce fichier est trop gros pour être lu.\"))",
    "App/Screens/Profile/ProfileView.swift:362: backupMessage = tr(\"Ce fichier est trop gros pour être lu.\")"
+  ]
+ },
+ "Ce fichier n'a pas pu être lu (texte simple, 2 Mo au plus).": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:363: Label(tr(\"Ce fichier n'a pas pu être lu (texte simple, 2 Mo au plus).\"), systemImage: \"exclamationmark.triangle\")"
   ]
  },
  "Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.": {
@@ -7256,7 +7300,7 @@
  "Centrée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:456: Toggle(tr(\"Centrée\"), isOn: quote.isCentered).font(.subheadline)"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:699: Toggle(tr(\"Centrée\"), isOn: quote.isCentered).font(.subheadline)"
   ]
  },
  "Cercle": {
@@ -7460,6 +7504,12 @@
    "App/Screens/MiniApps/Nutrition/ScanTorch.swift:290: .accessibilityHint(tr(\"Change le mode du flash : automatique, activé ou désactivé\"))"
   ]
  },
+ "Change à minuit": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:179: Text(tr(\"Change à minuit\"))"
+  ]
+ },
  "Changer d'icône": {
   "placeholders": 0,
   "uses": [
@@ -7471,13 +7521,19 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:811: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:505: Label(tr(\"Changer de photo\"), systemImage: \"photo.on.rectangle\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:829: Label(tr(\"Changer de photo\"), systemImage: \"photo.on.rectangle\")"
   ]
  },
  "Changer de widget": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:287: Label(tr(\"Changer de widget\"), systemImage: \"square.grid.2x2\")"
+  ]
+ },
+ "Chapitre": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:210: Picker(tr(\"Chapitre\"), selection: $chapter) {"
   ]
  },
  "Chaque année": {
@@ -7881,7 +7937,13 @@
  "Choisir des photos": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:290: Label(photos.isEmpty ? tr(\"Choisir des photos\") : tr(\"Ajouter des photos\"), systemImage: \"photo.badge.plus\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:374: Label(photos.isEmpty ? tr(\"Choisir des photos\") : tr(\"Ajouter des photos\"), systemImage: \"photo.badge.plus\")"
+  ]
+ },
+ "Choisir le jour": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:410: Text(tr(\"Choisir le jour\")).tag(false)"
   ]
  },
  "Choisir les entreprises suivies": {
@@ -7908,6 +7970,12 @@
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:254: sourceLabel(tr(\"Choisir un PDF\"), symbol: \"doc.richtext\", isProminent: false)"
   ]
  },
+ "Choisir un fichier texte": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:349: Label(tr(\"Choisir un fichier texte\"), systemImage: \"doc.text\")"
+  ]
+ },
  "Choisir un widget": {
   "placeholders": 0,
   "uses": [
@@ -7927,7 +7995,7 @@
    "App/Screens/Editor/EditorView.swift:811: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:247: .accessibilityLabel(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:251: .accessibilityLabel(tr(\"Choisir une photo\"))",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:527: Text(tr(\"Choisir une photo\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:851: Text(tr(\"Choisir une photo\"))"
   ]
  },
  "Choisir une photo ou un PDF": {
@@ -7952,6 +8020,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/Combo.swift:611: return .invalid(tr(\"Choisis de 1 à 4 widgets.\"))"
+  ]
+ },
+ "Choisis des photos (jusqu'à 12) ou écris une citation : ton premier widget se crée en quelques touches.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:38: Text(tr(\"Choisis des photos (jusqu'à 12) ou écris une citation : ton premier widget se crée en quelques touches.\"))"
   ]
  },
  "Choisis jusqu'à %@ widgets : ils seront réunis en un seul.": {
@@ -7999,7 +8073,7 @@
  "Choisis tes photos dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/PhotoQuoteWidgets.swift:21: PhotoPlaceholder(symbol: \"photo.on.rectangle.angled\", text: tr(\"Choisis tes photos dans Ardane\"))"
+   "Shared/Render/Kinds/PhotoQuoteWidgets.swift:23: PhotoPlaceholder(symbol: \"photo.on.rectangle.angled\", text: tr(\"Choisis tes photos dans Ardane\"))"
   ]
  },
  "Choisis tes trois priorités dans Ardane, espace Productivité.": {
@@ -8141,10 +8215,10 @@
  "Citation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:31: MiniActionButton(title: tr(\"Citation\"), symbol: \"quote.opening\", colorHex: accentHex, isProminent: false) {",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:88: Button(tr(\"Citation\")) { start(.quote) }",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:29: MiniActionButton(title: tr(\"Citation\"), symbol: \"quote.opening\", colorHex: accentHex, isProminent: false) {",
    "App/Screens/Spaces/CreateFlow.swift:214: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }",
-   "Shared/Model/KindCatalog.swift:273: KindInfo(kind: .quote, title: tr(\"Citation\"), summary: tr(\"Une phrase qui t'inspire, avec ta typographie et tes couleurs.\"), category: .memories, symbol: \"quote.opening\", isPremium: false, families: S"
+   "Shared/Model/KindCatalog.swift:273: KindInfo(kind: .quote, title: tr(\"Citation\"), summary: tr(\"Une phrase qui t'inspire, avec ta typographie et tes couleurs.\"), category: .memories, symbol: \"quote.opening\", isPremium: false, families: S",
+   "Shared/Model/Templates.swift:96: WidgetTemplate(id: \"note-quote\", name: tr(\"Citation\"), kind: .note, themeID: .typography, accentHex: \"FF6B57\", font: .serif,"
   ]
  },
  "Citrouille": {
@@ -8303,6 +8377,12 @@
    "Shared/Domains/FoodDatabase.swift:17: case .snacks: tr(\"Collations\")"
   ]
  },
+ "Colle tes textes ici, un par ligne ou par paragraphe.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:334: Text(tr(\"Colle tes textes ici, un par ligne ou par paragraphe.\"))"
+  ]
+ },
  "Collection": {
   "placeholders": 0,
   "uses": [
@@ -8331,6 +8411,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/StoreMagazine.swift:406: .navigationTitle(tr(\"Collections\"))"
+  ]
+ },
+ "Coller": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:276: Text(tr(\"Coller\")).tag(false)"
   ]
  },
  "Columbus Day": {
@@ -8392,6 +8478,12 @@
    "Shared/Domains/ExerciseTechniques.swift:289: [tr(\"Atterrissage silencieux, au centre de la boîte.\"), tr(\"Commence avec une boîte basse.\")],"
   ]
  },
+ "Commence le %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:187: Text(tr(\"Commence le \\(Fmt.longDay(rotation.wrappedValue.startDay))\"))"
+  ]
+ },
  "Commence sans charge pour apprendre les étapes.": {
   "placeholders": 0,
   "uses": [
@@ -8409,8 +8501,8 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:839: actionButton(tr(\"Commencer\"), symbol: \"play.fill\") {",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:182: return MiniFloatingAction(title: tr(\"Commencer\"), symbol: \"play.fill\", colorHex: accentHex, identifier: \"fitness-start\") {",
-   "App/Screens/Tutorial/TutorialOverlay.swift:214: case .welcome: tr(\"Commencer\")",
-   "Shared/Render/Tiles/FitnessTiles.swift:95: tile.buttons = setButtons(state, now: now, title: active == nil ? tr(\"Commencer\") : tr(\"Série faite\"), symbol: active == nil ? \"play.fill\" : \"checkmark\")"
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:407: Text(tr(\"Commencer\")).font(.subheadline.weight(.semibold))",
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:408: Picker(tr(\"Commencer\"), selection: $startsToday) {"
   ]
  },
  "Commencer la séance": {
@@ -9108,13 +9200,19 @@
   "uses": [
    "App/Premium/PaywallView.swift:212: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
    "App/Screens/Editor/StudioComponents.swift:24: case .colors: tr(\"Couleurs\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:421: Text(tr(\"Couleurs\")).font(.subheadline.weight(.semibold))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:730: Text(tr(\"Couleurs\")).font(.headline)"
   ]
  },
  "Couleurs de dragée": {
   "placeholders": 0,
   "uses": [
    "Shared/Theme/Theme.swift:394: id: .pastel, name: tr(\"Pastel\"), tagline: tr(\"Couleurs de dragée\"), isPremium: true,"
+  ]
+ },
+ "Couleurs de fond": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:767: title: tr(\"Couleurs de fond\"),"
   ]
  },
  "Couleurs de l'app": {
@@ -9331,7 +9429,7 @@
  "Coûts": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:369: .navigationTitle(tr(\"Coûts\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:370: .navigationTitle(tr(\"Coûts\"))"
   ]
  },
  "Coûts fixes": {
@@ -9624,6 +9722,7 @@
  "Créer une variante": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:82: Button(action: makeVariant) { Label(tr(\"Créer une variante\"), systemImage: \"wand.and.stars\") }",
    "App/Screens/MyWidgets/MyWidgetsView.swift:556: Label(tr(\"Créer une variante\"), systemImage: \"wand.and.stars\")"
   ]
  },
@@ -9786,6 +9885,12 @@
    "App/Screens/Editor/StudioParts.swift:308: EditorSection(title: tr(\"Dans ce widget\"), detail: capacity > 0 ? tr(\"\\(parts.count) sur \\(capacity)\") : nil) {"
   ]
  },
+ "Dans l'ordre": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/PhotoQuote.swift:151: case .inOrder: tr(\"Dans l'ordre\")"
+  ]
+ },
  "Dans la liste, choisis Ardane, puis le widget voulu.": {
   "placeholders": 0,
   "uses": [
@@ -9842,8 +9947,8 @@
   "uses": [
    "App/Screens/Onboarding/OnboardingView.swift:219: DatePicker(tr(\"Date de naissance\"), selection: Binding(",
    "App/Screens/Profile/DataItemViews.swift:279: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:561: DatePicker(tr(\"Date de naissance\"), selection: $birthdayDraft, in: ...now, displayedComponents: .date)",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:570: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:568: DatePicker(tr(\"Date de naissance\"), selection: $birthdayDraft, in: ...now, displayedComponents: .date)",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:577: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)"
   ]
  },
  "Date estimée": {
@@ -10219,8 +10324,8 @@
   "uses": [
    "App/Core/DailyBrief.swift:500: let when = offset == 1 ? tr(\"Demain\") : Fmt.weekday(day)",
    "App/Screens/MiniApps/MiniApp.swift:574: if let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date()), DateMath.isSameDay(day, tomorrow) { return tr(\"Demain\") }",
-   "Shared/Model/WorldCities.swift:83: return r > l ? tr(\"Demain\") : tr(\"Hier\")",
-   "Shared/Render/Kinds/ProductivityWidgets.swift:321: case 1: return tr(\"Demain\")"
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:192: Text(\"\\(tr(\"Demain\")) : \\(PhotoDailyText.shown(design, next))\")",
+   "Shared/Model/WorldCities.swift:83: return r > l ? tr(\"Demain\") : tr(\"Hier\")"
   ]
  },
  "Demain %@": {
@@ -10838,7 +10943,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:662: StudioPanelHeader(title: tr(\"Disposition\"), link: nextLink)",
-   "App/Screens/Editor/StudioComponents.swift:66: case .layout: return tr(\"Disposition\")"
+   "App/Screens/Editor/StudioComponents.swift:66: case .layout: return tr(\"Disposition\")",
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:15: case .layout: tr(\"Disposition\")"
   ]
  },
  "Disposition automatique": {
@@ -11191,6 +11297,7 @@
  "Dupliquer": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:81: Button(action: duplicate) { Label(tr(\"Dupliquer\"), systemImage: \"plus.square.on.square\") }",
    "App/Screens/MyWidgets/MyWidgetsView.swift:295: CarouselAction(title: tr(\"Dupliquer\"), symbol: \"plus.square.on.square\", identifier: \"carousel-duplicate\") {",
    "App/Screens/MyWidgets/MyWidgetsView.swift:551: Label(tr(\"Dupliquer\"), systemImage: \"plus.square.on.square\")"
   ]
@@ -11398,6 +11505,13 @@
    "App/Premium/PremiumLock.swift:32: Label(tr(\"Découvrir Premium\"), systemImage: \"sparkles\")",
    "App/Screens/Home/DailySection.swift:1820: .accessibilityHint(Text(tr(\"Découvrir Premium\")))",
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:270: MiniActionButton(title: tr(\"Découvrir Premium\"), symbol: \"sparkles\", colorHex: Finances.accentHex) { paywall = .walletImport }"
+  ]
+ },
+ "Défilement": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:521: heading(tr(\"Défilement\"))",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:522: Picker(tr(\"Défilement\"), selection: Binding("
   ]
  },
  "Définir mon budget": {
@@ -12382,7 +12496,7 @@
  "Enregistrer la date": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:563: Button(tr(\"Enregistrer la date\")) {"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:570: Button(tr(\"Enregistrer la date\")) {"
   ]
  },
  "Enregistrer la dépense": {
@@ -12493,7 +12607,7 @@
  "Entretien prévu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:363: NumberRow(title: tr(\"Entretien prévu\"), value: binding(\\.maintenanceYearly), unit: tr(\"/ an\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:364: NumberRow(title: tr(\"Entretien prévu\"), value: binding(\\.maintenanceYearly), unit: tr(\"/ an\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:359: NumberRow(title: tr(\"Entretien prévu\"), value: carBinding(\\.maintenanceYearly), unit: tr(\"/ an\"))"
   ]
  },
@@ -12587,7 +12701,7 @@
  "Essayer avec un exemple": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:460: Button(tr(\"Essayer avec un exemple\")) {"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:605: Button(tr(\"Essayer avec un exemple\")) {"
   ]
  },
  "Essayer avec une autre photo": {
@@ -13068,7 +13182,7 @@
  "Fais de ta vie un rêve, et d'un rêve, une réalité.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/PhotoQuote.swift:133: static let sample = QuoteContent(text: tr(\"Fais de ta vie un rêve, et d'un rêve, une réalité.\"), author: \"Antoine de Saint-Exupéry\")"
+   "Shared/Model/PhotoQuote.swift:138: static let sample = QuoteContent(text: tr(\"Fais de ta vie un rêve, et d'un rêve, une réalité.\"), author: \"Antoine de Saint-Exupéry\")"
   ]
  },
  "Fais glisser une carte pour la déplacer. ½ : à côté d'une autre carte ; Large : toute la largeur.": {
@@ -13194,8 +13308,8 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:260: Label(isFavorite ? tr(\"Retirer\") : tr(\"Favori\"), systemImage: isFavorite ? \"star.slash\" : \"star\")",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:76: Label(tr(\"Favori\"), systemImage: \"star\")",
-   "App/Screens/MyWidgets/MyWidgetsView.swift:298: CarouselAction(title: tr(\"Favori\"), symbol: design.isFavorite ? \"heart.fill\" : \"heart\", identifier: \"carousel-favorite\") {",
-   "App/Screens/MyWidgets/MyWidgetsView.swift:561: Label(design.isFavorite ? tr(\"Retirer des favoris\") : tr(\"Favori\"), systemImage: design.isFavorite ? \"heart.slash\" : \"heart\")"
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:84: Label(isFavorite ? tr(\"Retirer des favoris\") : tr(\"Favori\"), systemImage: isFavorite ? \"heart.slash\" : \"heart\")",
+   "App/Screens/MyWidgets/MyWidgetsView.swift:298: CarouselAction(title: tr(\"Favori\"), symbol: design.isFavorite ? \"heart.fill\" : \"heart\", identifier: \"carousel-favorite\") {"
   ]
  },
  "Favoris": {
@@ -13384,6 +13498,12 @@
   "uses": [
    "App/Core/DataItems.swift:101: case .flashcards: tr(\"Fiches de révision\")",
    "App/Screens/Spaces/StudentSpace.swift:136: Text(tr(\"Fiches de révision\"))"
+  ]
+ },
+ "Fichier": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:277: Text(tr(\"Fichier\")).tag(true)"
   ]
  },
  "Fichier canadien sur les éléments nutritifs": {
@@ -13610,7 +13730,7 @@
    "App/Screens/Editor/EditorView.swift:758: EditorSection(title: tr(\"Fond\"), isPremium: !model.isPremium) {",
    "App/Screens/Editor/EditorView.swift:760: Picker(tr(\"Fond\"), selection: $backgroundTab) {",
    "App/Screens/Editor/StudioComponents.swift:25: case .background: tr(\"Fond\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:450: ColorPicker(tr(\"Fond\"), selection: colorBinding(\\.backgroundHex), supportsOpacity: false)"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:762: Text(tr(\"Fond\")).font(.subheadline.weight(.semibold))"
   ]
  },
  "Fond %@": {
@@ -13786,8 +13906,8 @@
  "Frais fixes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:314: Share(name: tr(\"Frais fixes\"), hex: \"2F8F7A\", value: cost.fixed, source: tr(\"assurance, prêt, stationnement, autres\")),",
-   "App/Screens/MiniApps/Car/CarPages.swift:357: MiniSectionTitle(title: tr(\"Frais fixes\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:315: Share(name: tr(\"Frais fixes\"), hex: \"2F8F7A\", value: cost.fixed, source: tr(\"assurance, prêt, stationnement, autres\")),",
+   "App/Screens/MiniApps/Car/CarPages.swift:358: MiniSectionTitle(title: tr(\"Frais fixes\"))"
   ]
  },
  "Fraises": {
@@ -14331,7 +14451,7 @@
  "Glisse pour déplacer la photo, pince pour zoomer.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:627: Text(tr(\"Glisse pour déplacer la photo, pince pour zoomer.\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:954: Text(tr(\"Glisse pour déplacer la photo, pince pour zoomer.\"))"
   ]
  },
  "Glisse un aliment vers la gauche pour l'ajouter aux favoris. Le widget Ajout rapide les propose d'une touche.": {
@@ -14540,7 +14660,7 @@
  "Guillemets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:457: Toggle(tr(\"Guillemets\"), isOn: quote.showsMarks).font(.subheadline)"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:700: Toggle(tr(\"Guillemets\"), isOn: quote.showsMarks).font(.subheadline)"
   ]
  },
  "Gymnase": {
@@ -14958,7 +15078,7 @@
  "Historique": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:226: Text(tr(\"Historique\")).font(.footnote.weight(.semibold)).foregroundStyle(.secondary).padding(.bottom, 4)",
+   "App/Screens/MiniApps/Car/CarPages.swift:227: Text(tr(\"Historique\")).font(.footnote.weight(.semibold)).foregroundStyle(.secondary).padding(.bottom, 4)",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:508: shortcut(symbol: \"clock.arrow.circlepath\", title: tr(\"Historique\"), value: HomeRoute.page(.fitnessHistory), identifier: \"fitness-history\")",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:196: .navigationTitle(tr(\"Historique\"))",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:524: .navigationTitle(tr(\"Historique\"))"
@@ -15228,7 +15348,14 @@
  "Il disparaîtra de ton écran d'accueil. Les photos de ta photothèque ne sont pas touchées.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:215: Text(tr(\"Il disparaîtra de ton écran d'accueil. Les photos de ta photothèque ne sont pas touchées.\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:62: Text(tr(\"Il disparaîtra de ton écran d'accueil. Les photos de ta photothèque ne sont pas touchées.\"))",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:273: Text(tr(\"Il disparaîtra de ton écran d'accueil. Les photos de ta photothèque ne sont pas touchées.\"))"
+  ]
+ },
+ "Il faut au moins deux photos pour en changer chaque jour.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:537: Text(tr(\"Il faut au moins deux photos pour en changer chaque jour.\"))"
   ]
  },
  "Il ira dans « Mes repas » pour le reprendre d'une touche.": {
@@ -15375,10 +15502,28 @@
    "App/Screens/MiniApps/Business/BusinessSources.swift:243: detail: tr(\"Importe d'un coup les ventes et les dépenses d'un export de Stripe, Shopify, ta banque ou un tableur. La saisie à la main reste gratuite.\"),"
   ]
  },
+ "Importe un recueil à toi : un texte s'affiche chaque jour.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:627: Text(tr(\"Importe un recueil à toi : un texte s'affiche chaque jour.\"))"
+  ]
+ },
  "Importer": {
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessSources.swift:306: SheetForm(title: tr(\"Importer\"), canSave: ready.map(chosen).map { !$0.sales.isEmpty || !$0.expenses.isEmpty } ?? false, onSave: importReady) {"
+  ]
+ },
+ "Importer %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:296: Text(tr(\"Importer \\(Fmt.plural(parsed.texts.count, tr(\"texte\"), tr(\"textes\")))\"))"
+  ]
+ },
+ "Importer mes textes": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:634: Text(tr(\"Importer mes textes\"))"
   ]
  },
  "Importer mon horaire": {
@@ -15675,7 +15820,7 @@
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:103: return \"\\(trip.destination) · \" + tr(\"J-\\(DateMath.daysBetween(now, trip.start))\")",
    "App/Screens/MiniApps/Car/CarApp.swift:336: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:276: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
+   "App/Screens/MiniApps/Car/CarPages.swift:277: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:54: default: return tr(\"J-\\(days)\")"
   ]
  },
@@ -15799,6 +15944,7 @@
  "Jour %@ sur %@": {
   "placeholders": 2,
   "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:29: tr(\"Jour \\(position.day) sur \\(position.total)\")",
    "Shared/Render/Kinds/TimeWidgets.swift:178: Text(tr(\"Jour \\(day) sur \\(total)\"))"
   ]
  },
@@ -15890,7 +16036,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileView.swift:71: Picker(tr(\"Jours fériés\"), selection: Binding(",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:582: Section(tr(\"Jours fériés\")) {"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:589: Section(tr(\"Jours fériés\")) {"
   ]
  },
  "Joyeux anniversaire !": {
@@ -16497,7 +16643,7 @@
  "La citation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:165: step(2, tr(\"La citation\")) { quoteStep }"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:594: heading(tr(\"La citation\"))"
   ]
  },
  "La clé est effacée de ton iPhone. Pense aussi à la supprimer dans ton tableau de bord Stripe.": {
@@ -16594,6 +16740,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/ExerciseTechniques.swift:167: [tr(\"Jambe d'appui droite sans verrouiller.\"), tr(\"La main ne sert qu'à l'équilibre.\")],"
+  ]
+ },
+ "La mise en page suit leur nombre : une, deux, trois ou quatre.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:424: : tr(\"La mise en page suit leur nombre : une, deux, trois ou quatre.\")"
   ]
  },
  "La moyenne de chaque cours est pondérée par le poids des évaluations, la moyenne générale par les crédits.": {
@@ -16744,7 +16896,7 @@
  "La taille": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:161: step(1, tr(\"La taille\")) { sizePicker }"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:322: heading(tr(\"La taille\"))"
   ]
  },
  "La taille du réservoir (dans le manuel ou sur le site du constructeur) sert à estimer l'autonomie après un plein complet.": {
@@ -17068,7 +17220,7 @@
  "Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:366: MiniFootnote(text: tr(\"Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:367: MiniFootnote(text: tr(\"Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.\"))"
   ]
  },
  "Le changement est limité par les bornes de sécurité d'Ardane.": {
@@ -17351,7 +17503,7 @@
  "Le nom": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:167: step(3, tr(\"Le nom\")) {"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:304: heading(tr(\"Le nom\"))"
   ]
  },
  "Le nom de ta voiture et son kilométrage.": {
@@ -17430,6 +17582,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:149: KindInfo(kind: .habitRate, title: tr(\"Taux de réussite\"), summary: tr(\"Le pourcentage d'habitudes tenues ce mois-ci.\"), category: .wellbeing, symbol: \"percent\", isPremium: true, families: SM, keywords"
+  ]
+ },
+ "Le premier texte s'affiche le %@.": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:422: : tr(\"Le premier texte s'affiche le \\(Fmt.longDay(startDay)).\"))"
   ]
  },
  "Le prix se met à jour automatiquement.": {
@@ -17913,7 +18071,7 @@
  "Les photos": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:163: step(2, tr(\"Les photos\")) { photosStep }"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:312: heading(tr(\"Les photos\"))"
   ]
  },
  "Les pleins et les entretiens le mettent ensuite à jour.": {
@@ -18128,6 +18286,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/WidgetStyle.swift:78: case .line: tr(\"Ligne\")"
+  ]
+ },
+ "Ligne [text]": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/PhotoQuote.swift:238: case .line: tr(\"Ligne\", context: \"text\")"
   ]
  },
  "Ligne entière": {
@@ -18393,7 +18557,7 @@
  "Lune": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:591: Section(tr(\"Lune\")) {",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:598: Section(tr(\"Lune\")) {",
    "Shared/Model/Templates.swift:127: WidgetTemplate(id: \"moon-futuristic\", name: tr(\"Lune\"), kind: .moonPhase, themeID: .futuristic, accentHex: \"3366FF\"),",
    "Shared/Render/Tiles/TimeTiles.swift:185: var tile = Tile(title: tr(\"Lune\"), symbol: MoonPhase.symbol(at: now))"
   ]
@@ -18573,7 +18737,7 @@
  "Ma citation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:119: design.name = kind == .photos ? tr(\"Mes photos\") : tr(\"Ma citation\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:162: design.name = kind == .photos ? tr(\"Mes photos\") : tr(\"Ma citation\")"
   ]
  },
  "Ma journée": {
@@ -18965,7 +19129,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Planning/PlanningApp.swift:406: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:512: Label(tr(\"Marquer comme fait\"), systemImage: \"checkmark\")"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:514: Label(tr(\"Marquer comme fait\"), systemImage: \"checkmark\")"
   ]
  },
  "Marquer comme rendu": {
@@ -19255,7 +19419,7 @@
  "Mes photos": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:119: design.name = kind == .photos ? tr(\"Mes photos\") : tr(\"Ma citation\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:162: design.name = kind == .photos ? tr(\"Mes photos\") : tr(\"Ma citation\")"
   ]
  },
  "Mes placements": {
@@ -19293,6 +19457,14 @@
    "App/Screens/Spaces/FitnessSpace.swift:57: Section(tr(\"Mes séances\")) {"
   ]
  },
+ "Mes textes": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:625: Label(tr(\"Mes textes\"), systemImage: \"square.and.arrow.down\")",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:648: Label(tr(\"Mes textes\"), systemImage: \"square.and.arrow.down\")",
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:311: .navigationTitle(tr(\"Mes textes\"))"
+  ]
+ },
  "Mes tâches": {
   "placeholders": 0,
   "uses": [
@@ -19326,7 +19498,7 @@
   "placeholders": 0,
   "uses": [
    "App/ArdaneApp.swift:315: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:37: MiniSectionTitle(title: tr(\"Mes widgets\"))",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:35: MiniSectionTitle(title: tr(\"Mes widgets\"),",
    "App/Screens/MyWidgets/MyWidgetsView.swift:97: .navigationTitle(isSelecting ? selectionTitle : tr(\"Mes widgets\"))",
    "App/Screens/Tutorial/Tutorial.swift:60: case .mine: tr(\"Mes widgets\")"
   ]
@@ -19466,6 +19638,12 @@
    "Shared/Data/SampleData.swift:447: let tasks = [tr(\"Maquettes\"), tr(\"Textes\"), tr(\"Photos\"), tr(\"Paiement en ligne\"), tr(\"Tests\"), tr(\"Nom de domaine\"), tr(\"Annonce\"), tr(\"Mise en ligne\")]"
   ]
  },
+ "Mise en page automatique": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:517: heading(tr(\"Mise en page automatique\"))"
+  ]
+ },
  "Mitochondrie": {
   "placeholders": 0,
   "uses": [
@@ -19515,7 +19693,7 @@
    "App/Screens/Content/HabitsApp.swift:494: Button(tr(\"Modifier\")) { editing = habit }",
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:580: Label(tr(\"Modifier\"), systemImage: \"pencil\")",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:1089: Label(tr(\"Modifier\"), systemImage: \"pencil\")",
-   "App/Screens/MyWidgets/MyWidgetsView.swift:292: CarouselAction(title: tr(\"Modifier\"), symbol: \"slider.horizontal.3\", isProminent: true, identifier: \"carousel-edit\") {"
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:80: Button(action: edit) { Label(tr(\"Modifier\"), systemImage: \"slider.horizontal.3\") }"
   ]
  },
  "Modifier l'objectif": {
@@ -20508,7 +20686,7 @@
   "uses": [
    "App/Screens/Editor/EditorView.swift:748: TextField(tr(\"Nom du widget\"), text: edited.name)",
    "App/Screens/Editor/EditorView.swift:1288: TextField(tr(\"Nom du widget\"), text: part.name)",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:168: TextField(tr(\"Nom du widget\"), text: $design.name)"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:305: TextField(tr(\"Nom du widget\"), text: $design.name)"
   ]
  },
  "Nom ou activité": {
@@ -20858,9 +21036,7 @@
  "Nouveau widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/EditorView.swift:131: return designs.count > 1 ? tr(\"Nouveaux widgets\") : tr(\"Nouveau widget\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:74: .accessibilityLabel(Text(tr(\"Nouveau widget\")))",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:86: .confirmationDialog(tr(\"Nouveau widget\"), isPresented: $choosingKind, titleVisibility: .visible) {"
+   "App/Screens/Editor/EditorView.swift:131: return designs.count > 1 ? tr(\"Nouveaux widgets\") : tr(\"Nouveau widget\")"
   ]
  },
  "Nouveaux clients": {
@@ -21038,7 +21214,7 @@
  "Nouvelle échéance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:262: MiniActionButton(title: tr(\"Nouvelle échéance\"), symbol: \"plus\", colorHex: Car.alertHex) {",
+   "App/Screens/MiniApps/Car/CarPages.swift:263: MiniActionButton(title: tr(\"Nouvelle échéance\"), symbol: \"plus\", colorHex: Car.alertHex) {",
    "App/Screens/Profile/DataItemViews.swift:168: buttons(add: tr(\"Nouvelle échéance\"), space: model.isFilled(.deadlines) ? .productivity : nil) {",
    "App/Screens/Profile/DataItemViews.swift:274: buttons(add: tr(\"Nouvelle échéance\"), space: model.isFilled(.carDeadlines) ? .car : nil) {",
    "App/Screens/Spaces/ProductivitySpace.swift:103: Label(tr(\"Nouvelle échéance\"), systemImage: \"plus\")"
@@ -21612,7 +21788,8 @@
  "Ordre": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioParts.swift:711: EditorSection(title: tr(\"Ordre\")) {"
+   "App/Screens/Editor/StudioParts.swift:711: EditorSection(title: tr(\"Ordre\")) {",
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:171: Picker(tr(\"Ordre\"), selection: rotation.order) {"
   ]
  },
  "Organisation étudiante": {
@@ -22004,7 +22181,7 @@
    "App/Screens/Content/MoneyView.swift:25: summaryValue(tr(\"Par mois\"), Fmt.signedMoney(summary.perDayNet * MoneySummary.daysPerMonth, currency: currency, decimals: 0))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:166: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))",
    "App/Screens/MiniApps/Business/BusinessPages.swift:180: .accessibilityLabel(tr(\"Par mois\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:320: Text(tr(\"Par mois\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Car/CarPages.swift:321: Text(tr(\"Par mois\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)"
   ]
  },
  "Par muscle": {
@@ -22024,6 +22201,12 @@
   "uses": [
    "App/Screens/MiniApps/Travel/TravelPages.swift:226: MiniSectionTitle(title: tr(\"Par type\"))",
    "App/Screens/MiniApps/Travel/TravelPages.swift:232: .accessibilityLabel(tr(\"Par type\"))"
+  ]
+ },
+ "Paragraphe": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/PhotoQuote.swift:239: case .paragraph: tr(\"Paragraphe\")"
   ]
  },
  "Paris": {
@@ -22155,7 +22338,7 @@
  "Pas encore fait": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:246: return parts.isEmpty ? tr(\"Pas encore fait\") : parts.joined(separator: \" · \").capitalizedFirst"
+   "App/Screens/MiniApps/Car/CarPages.swift:247: return parts.isEmpty ? tr(\"Pas encore fait\") : parts.joined(separator: \" · \").capitalizedFirst"
   ]
  },
  "Pas envie de partir de zéro ? Des widgets prêts à l'emploi, des packs, des écrans d'accueil complets et des fonds d'écran. Tout s'ouvre dans le Studio pour être personnalisé.": {
@@ -22604,19 +22787,19 @@
  "Photo %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:358: .accessibilityLabel(Text(tr(\"Photo \\(index + 1)\")))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:464: .accessibilityLabel(Text(tr(\"Photo \\(index + 1)\")))"
   ]
  },
  "Photo de fond": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:480: Text(tr(\"Photo de fond\")).font(.subheadline.weight(.semibold))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:804: Text(tr(\"Photo de fond\")).font(.subheadline.weight(.semibold))"
   ]
  },
  "Photo indisponible": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/PhotoQuoteWidgets.swift:54: PhotoPlaceholder(symbol: \"photo.badge.exclamationmark\", text: tr(\"Photo indisponible\"))"
+   "Shared/Render/Kinds/PhotoQuoteWidgets.swift:56: PhotoPlaceholder(symbol: \"photo.badge.exclamationmark\", text: tr(\"Photo indisponible\"))"
   ]
  },
  "Photographier le plat": {
@@ -22631,8 +22814,8 @@
   "uses": [
    "App/Screens/Editor/HomeScreenPreview.swift:32: FakeApp(name: tr(\"Photos\"), symbol: \"photo.on.rectangle.angled\"),",
    "App/Screens/Explore/HomeSetups.swift:120: static let photos = SetupApp(name: tr(\"Photos\"), symbol: \"photo.on.rectangle.angled\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:27: MiniActionButton(title: tr(\"Photos\"), symbol: \"photo.on.rectangle.angled\", colorHex: accentHex) {",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:87: Button(tr(\"Photos\")) { start(.photos) }"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:25: MiniActionButton(title: tr(\"Photos\"), symbol: \"photo.on.rectangle.angled\", colorHex: accentHex) {",
+   "App/Screens/Spaces/CreateFlow.swift:213: Button(tr(\"Photos\")) { startPhotoQuote(.photos) }"
   ]
  },
  "Photos et citations": {
@@ -22640,7 +22823,7 @@
   "uses": [
    "App/Premium/PaywallView.swift:208: comparisonRow(tr(\"Photos et citations\"), free: \"∞\", premium: \"∞\")",
    "App/Screens/MiniApps/MiniApp.swift:19: case .photos: tr(\"Photos et citations\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:81: .navigationTitle(tr(\"Photos et citations\"))",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:48: .navigationTitle(tr(\"Photos et citations\"))",
    "App/Screens/Spaces/CreateFlow.swift:47: case .photos: tr(\"Photos et citations\")"
   ]
  },
@@ -22841,7 +23024,7 @@
  "Pleine lune": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:593: ValueRow(title: tr(\"Pleine lune\"), value: Fmt.shortDay(MoonPhase.next(0.5, after: now)), symbol: \"moonphase.full.moon\")",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:600: ValueRow(title: tr(\"Pleine lune\"), value: Fmt.shortDay(MoonPhase.next(0.5, after: now)), symbol: \"moonphase.full.moon\")",
    "Shared/Domains/Life.swift:224: tr(\"Pleine lune\"), tr(\"Lune gibbeuse décroissante\"), tr(\"Dernier quartier\"), tr(\"Dernier croissant\")][index(phase(at: date))]",
    "Shared/Render/Tiles/TimeTiles.swift:192: TileRow(id: \"full\", title: tr(\"Pleine lune\"), value: Fmt.shortDay(full), symbol: \"moonphase.full.moon\"),"
   ]
@@ -23008,7 +23191,7 @@
  "Plus de %@ photos : le widget en montre %@ à la fois, puis les suivantes chaque heure.": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:309: ? tr(\"Plus de \\(PhotoLayout.capacity) photos : le widget en montre \\(PhotoLayout.capacity) à la fois, puis les suivantes chaque heure.\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:423: ? tr(\"Plus de \\(PhotoLayout.capacity) photos : le widget en montre \\(PhotoLayout.capacity) à la fois, puis les suivantes chaque heure.\")"
   ]
  },
  "Plus de %@ widgets": {
@@ -23572,7 +23755,7 @@
  "Pour le poser : touche longuement l'écran d'accueil, puis + › Ardane › « Mes widgets », et choisis-le avec « Modifier le widget ».": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:79: MiniFootnote(text: tr(\"Pour le poser : touche longuement l'écran d'accueil, puis + › Ardane › « Mes widgets », et choisis-le avec « Modifier le widget ».\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:46: MiniFootnote(text: tr(\"Pour le poser : touche longuement l'écran d'accueil, puis + › Ardane › « Mes widgets », et choisis-le avec « Modifier le widget ».\"))"
   ]
  },
  "Pour les sportifs": {
@@ -23908,6 +24091,12 @@
    "Shared/Domains/Life.swift:223: [tr(\"Nouvelle lune\"), tr(\"Premier croissant\"), tr(\"Premier quartier\"), tr(\"Lune gibbeuse croissante\"),"
   ]
  },
+ "Premier jour": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:176: DatePicker(tr(\"Premier jour\"), selection: startDay, displayedComponents: .date)"
+  ]
+ },
  "Premier quartier": {
   "placeholders": 0,
   "uses": [
@@ -23918,6 +24107,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:263: KindInfo(kind: .morning, title: tr(\"Ce matin\"), summary: tr(\"Premier rendez-vous, priorités et objectif du jour pour bien démarrer.\"), category: .dashboards, symbol: \"sunrise\", isPremium: true, famili"
+  ]
+ },
+ "Premier texte le": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:415: DatePicker(tr(\"Premier texte le\"), selection: $chosenDay, displayedComponents: .date)"
   ]
  },
  "Premier tirage : pousse avec les jambes, barre collée aux tibias.": {
@@ -23951,6 +24146,12 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallContext.swift:60: detail: tr(\"Premium lit ton horaire à partir d'une photo ou d'un PDF, sur ton iPhone. Ajouter tes cours et tes événements à la main reste gratuit.\")"
+  ]
+ },
+ "Premium ouvre toutes les couleurs de fond, comme dans le Studio.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:768: detail: tr(\"Premium ouvre toutes les couleurs de fond, comme dans le Studio.\"),"
   ]
  },
  "Prendre du muscle": {
@@ -24068,7 +24269,7 @@
  "Prochain anniversaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:574: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:581: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
   ]
  },
  "Prochain cours": {
@@ -24405,7 +24606,7 @@
  "Préparation des photos…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:299: ProgressView(tr(\"Préparation des photos…\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:383: ProgressView(tr(\"Préparation des photos…\"))"
   ]
  },
  "Prévu": {
@@ -24456,7 +24657,7 @@
  "Prêt ou location": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:360: NumberRow(title: tr(\"Prêt ou location\"), value: binding(\\.loanMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:361: NumberRow(title: tr(\"Prêt ou location\"), value: binding(\\.loanMonthly), unit: tr(\"/ mois\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:356: NumberRow(title: tr(\"Prêt ou location\"), value: carBinding(\\.loanMonthly), unit: tr(\"/ mois\"))"
   ]
  },
@@ -24619,6 +24820,12 @@
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:544: .accessibilityLabel(tr(\"Quantité\"))",
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:547: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
    "App/Screens/Spaces/MoneySpaces.swift:112: NumberRow(title: holding.kind == .cash ? tr(\"Montant\") : tr(\"Quantité\"), value: $holding.quantity)"
+  ]
+ },
+ "Quatre à la fois": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:530: Text(tr(\"Quatre à la fois\")).tag(false)"
   ]
  },
  "Quelle catégorie ?": {
@@ -24925,10 +25132,10 @@
  "Recadrer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:345: Button { framing = slot } label: { Label(tr(\"Recadrer\"), systemImage: \"crop\") }",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:496: .accessibilityLabel(Text(tr(\"Recadrer\")))",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:502: Label(tr(\"Recadrer\"), systemImage: \"crop\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:644: .navigationTitle(tr(\"Recadrer\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:451: Button { framing = slot } label: { Label(tr(\"Recadrer\"), systemImage: \"crop\") }",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:472: photoAction(tr(\"Recadrer\"), \"crop\", id: \"photos-action-frame\") { framing = slot }",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:820: .accessibilityLabel(Text(tr(\"Recadrer\")))",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:826: Label(tr(\"Recadrer\"), systemImage: \"crop\")"
   ]
  },
  "Recevoir la barre bras tendus devant.": {
@@ -25024,7 +25231,8 @@
  "Reculer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:350: Button { move(slot, to: index + 1) } label: { Label(tr(\"Reculer\"), systemImage: \"arrow.right\") }"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:456: Button { move(slot, to: index + 1) } label: { Label(tr(\"Reculer\"), systemImage: \"arrow.right\") }",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:474: photoAction(tr(\"Reculer\"), \"arrow.right\", id: \"photos-action-later\", isEnabled: index < count - 1) { move(slot, to: index + 1) }"
   ]
  },
  "Redescendre en sautant en arrière.": {
@@ -25820,7 +26028,7 @@
    "App/Screens/Editor/StudioParts.swift:425: Label(tr(\"Retirer\"), systemImage: \"xmark\")",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:260: Label(isFavorite ? tr(\"Retirer\") : tr(\"Favori\"), systemImage: isFavorite ? \"star.slash\" : \"star\")",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:1004: Button(tr(\"Retirer\")) {",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:355: Label(tr(\"Retirer\"), systemImage: \"minus.circle\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:461: Label(tr(\"Retirer\"), systemImage: \"minus.circle\")"
   ]
  },
  "Retirer %@": {
@@ -25861,7 +26069,7 @@
    "App/Screens/Explore/HomeSetupViews.swift:458: .accessibilityLabel(Text(isFavorite ? tr(\"Retirer des favoris\") : tr(\"Ajouter aux favoris\")))",
    "App/Screens/Explore/HomeSetupViews.swift:646: .accessibilityLabel(Text(isFavorite ? tr(\"Retirer des favoris\") : tr(\"Ajouter aux favoris\")))",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:466: .accessibilityLabel(Text(isFavorite ? tr(\"Retirer des favoris\") : tr(\"Ajouter aux favoris\")))",
-   "App/Screens/MyWidgets/MyWidgetsView.swift:302: .accessibilityLabel(Text(design.isFavorite ? tr(\"Retirer des favoris\") : tr(\"Ajouter aux favoris\")))"
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:84: Label(isFavorite ? tr(\"Retirer des favoris\") : tr(\"Favori\"), systemImage: isFavorite ? \"heart.slash\" : \"heart\")"
   ]
  },
  "Retirer le dernier exercice": {
@@ -25874,6 +26082,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApp.swift:127: Button(tr(\"Retirer le solde de départ\"), role: .destructive) {"
+  ]
+ },
+ "Retirer mes textes": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:662: Button(tr(\"Retirer mes textes\"), role: .destructive) { removeTexts() }"
   ]
  },
  "Retour": {
@@ -26738,7 +26952,7 @@
  "Région": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:583: Picker(tr(\"Région\"), selection: Binding(get: { life.holidayRegion }, set: { region in model.update(\\.life) { $0.holidayRegion = region } })) {"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:590: Picker(tr(\"Région\"), selection: Binding(get: { life.holidayRegion }, set: { region in model.update(\\.life) { $0.holidayRegion = region } })) {"
   ]
  },
  "Réglages": {
@@ -26779,7 +26993,7 @@
  "Réinitialiser": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:651: Button(tr(\"Réinitialiser\")) {"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:978: Button(tr(\"Réinitialiser\")) {"
   ]
  },
  "Répartition": {
@@ -27826,8 +28040,8 @@
  "Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:23: caption: tr(\"Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé.\"))",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:307: ? tr(\"Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé.\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:76: caption: tr(\"Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé.\"))",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:391: Text(tr(\"Seules les photos que tu choisis sont copiées dans Ardane : aucun accès à ta photothèque n'est demandé.\"))"
   ]
  },
  "Seuls les avant-bras bougent.": {
@@ -27965,7 +28179,7 @@
  "Soit environ %@ par kilomètre parcouru.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:349: Text(tr(\"Soit environ \\(TF.money(perKm, currency, decimals: 2)) par kilomètre parcouru.\")).font(.caption).foregroundStyle(.secondary)"
+   "App/Screens/MiniApps/Car/CarPages.swift:350: Text(tr(\"Soit environ \\(TF.money(perKm, currency, decimals: 2)) par kilomètre parcouru.\")).font(.caption).foregroundStyle(.secondary)"
   ]
  },
  "Soit par jour": {
@@ -28126,7 +28340,8 @@
  "Source": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:76: if tile.footnote != nil { Toggle(tr(\"Source\"), isOn: shown(\"footnote\")) }"
+   "App/Screens/Editor/StudioPanels.swift:76: if tile.footnote != nil { Toggle(tr(\"Source\"), isOn: shown(\"footnote\")) }",
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:275: Picker(tr(\"Source\"), selection: $fromFile) {"
   ]
  },
  "Source (salaire, contrat, remboursement…)": {
@@ -28317,7 +28532,7 @@
  "Stationnement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:361: NumberRow(title: tr(\"Stationnement\"), value: binding(\\.parkingMonthly), unit: tr(\"/ mois\"))",
+   "App/Screens/MiniApps/Car/CarPages.swift:362: NumberRow(title: tr(\"Stationnement\"), value: binding(\\.parkingMonthly), unit: tr(\"/ mois\"))",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:357: NumberRow(title: tr(\"Stationnement\"), value: carBinding(\\.parkingMonthly), unit: tr(\"/ mois\"))"
   ]
  },
@@ -28381,7 +28596,7 @@
    "App/Screens/Editor/EditorView.swift:761: Text(tr(\"Style\")).tag(BackgroundKind.theme)",
    "App/Screens/Editor/StudioComponents.swift:23: case .style: tr(\"Style\")",
    "App/Screens/Editor/StudioComponents.swift:67: case .style: return tr(\"Style\")",
-   "Shared/Model/WidgetStyle.swift:194: case .theme: tr(\"Style\")"
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:16: case .style: tr(\"Style\")"
   ]
  },
  "Style %@": {
@@ -28573,14 +28788,15 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:906: Label(tr(\"Supprimer ce widget\"), systemImage: \"trash\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:177: Label(tr(\"Supprimer ce widget\"), systemImage: \"trash\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:230: Label(tr(\"Supprimer ce widget\"), systemImage: \"trash\")"
   ]
  },
  "Supprimer ce widget ?": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:334: .confirmationDialog(tr(\"Supprimer ce widget ?\"), isPresented: $confirmDelete, titleVisibility: .visible) {",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:206: .confirmationDialog(tr(\"Supprimer ce widget ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:53: .confirmationDialog(tr(\"Supprimer ce widget ?\"), isPresented: Binding(",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:264: .confirmationDialog(tr(\"Supprimer ce widget ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {",
    "App/Screens/MyWidgets/MyWidgetsView.swift:149: selectedIDs.count == 1 ? tr(\"Supprimer ce widget ?\") : tr(\"Supprimer ces \\(selectedIDs.count) widgets ?\"),"
   ]
  },
@@ -28599,7 +28815,7 @@
  "Supprimer cet entretien ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:211: .confirmationDialog(tr(\"Supprimer cet entretien ?\"), isPresented: Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } }), titleVisibility: .visible) {"
+   "App/Screens/MiniApps/Car/CarPages.swift:211: .confirmationDialog(tr(\"Supprimer cet entretien ?\"), isPresented: Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } }), titleVisibility: .visible, presenting: deleting) { item in"
   ]
  },
  "Supprimer cet objectif ?": {
@@ -28642,7 +28858,7 @@
  "Supprimer cette échéance ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:522: .confirmationDialog(tr(\"Supprimer cette échéance ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:524: .confirmationDialog(tr(\"Supprimer cette échéance ?\"), isPresented: $confirmsDelete, titleVisibility: .visible) {"
   ]
  },
  "Supprimer l'habitude": {
@@ -28673,8 +28889,8 @@
  "Supprimer l'échéance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:514: Button(tr(\"Supprimer l'échéance\"), role: .destructive) { confirmsDelete = true }",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:523: Button(tr(\"Supprimer l'échéance\"), role: .destructive) {"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:516: Button(tr(\"Supprimer l'échéance\"), role: .destructive) { confirmsDelete = true }",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:525: Button(tr(\"Supprimer l'échéance\"), role: .destructive) {"
   ]
  },
  "Supprimer l'événement": {
@@ -28889,7 +29105,7 @@
  "Sur la photo, le texte garde ta couleur si elle est claire, sinon il passe en blanc. La couleur de fond ne sert que si la photo n'est plus disponible.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:519: Text(tr(\"Sur la photo, le texte garde ta couleur si elle est claire, sinon il passe en blanc. La couleur de fond ne sert que si la photo n'est plus disponible.\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:843: Text(tr(\"Sur la photo, le texte garde ta couleur si elle est claire, sinon il passe en blanc. La couleur de fond ne sert que si la photo n'est plus disponible.\"))"
   ]
  },
  "Sur le banc à 45°, hanches sur l'appui, chevilles bloquées sous les rouleaux, corps aligné, bras croisés.": {
@@ -29362,13 +29578,13 @@
  "Ta citation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:407: TextField(tr(\"Ta citation\"), text: Binding(get: { quote.wrappedValue.text }, set: { quote.wrappedValue.text = String($0.prefix(280)) }), axis: .vertical)"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:595: TextField(tr(\"Ta citation\"), text: Binding(get: { quote.wrappedValue.text }, set: { quote.wrappedValue.text = String($0.prefix(280)) }), axis: .vertical)"
   ]
  },
  "Ta citation ici": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Kinds/PhotoQuoteWidgets.swift:203: Text(quote.text.trimmed.isEmpty ? tr(\"Ta citation ici\") : quote.text)"
+   "Shared/Render/Kinds/PhotoQuoteWidgets.swift:205: Text(quote.text.trimmed.isEmpty ? tr(\"Ta citation ici\") : quote.text)"
   ]
  },
  "Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.": {
@@ -29410,7 +29626,7 @@
  "Ta date de naissance reste sur ton iPhone.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:579: Text(tr(\"Ta date de naissance reste sur ton iPhone.\"))"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:586: Text(tr(\"Ta date de naissance reste sur ton iPhone.\"))"
   ]
  },
  "Ta destination utilise ta devise : rien à convertir.": {
@@ -30418,16 +30634,16 @@
    "Shared/Model/KindCatalog.swift:146: KindInfo(kind: .hydration, title: tr(\"Hydratation\"), summary: tr(\"Tes verres d'eau de la journée, ajoutés d'une touche.\"), category: .wellbeing, symbol: \"drop.fill\", isPremium: false, families: SM + ["
   ]
  },
+ "Tes widgets": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:75: MiniHero(label: tr(\"Tes widgets\"), value: Fmt.plural(made.count, tr(\"widget\"), tr(\"widgets\")),"
+  ]
+ },
  "Tes widgets et « Mon Quotidien » utilisent tes vraies données.": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MyInfoCenter.swift:75: guard !missing.isEmpty else { return tr(\"Tes widgets et « Mon Quotidien » utilisent tes vraies données.\") }"
-  ]
- },
- "Tes widgets photo": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:22: MiniHero(label: tr(\"Tes widgets photo\"), value: Fmt.plural(made.count, tr(\"widget\"), tr(\"widgets\")),"
   ]
  },
  "Tes widgets t'attendent dans la galerie de widgets d'iOS :": {
@@ -30478,7 +30694,7 @@
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:153: EditorSection(title: tr(\"Texte\")) {",
    "App/Screens/Editor/StudioPanels.swift:304: StudioColorRow(title: tr(\"Texte\"), hex: $design.style.textHex, fallback: style.primary)",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:451: ColorPicker(tr(\"Texte\"), selection: colorBinding(\\.textHex), supportsOpacity: false)"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:778: ColorPicker(tr(\"Texte\"), selection: colorBinding(\\.textHex), supportsOpacity: false)"
   ]
  },
  "Texte secondaire": {
@@ -31280,10 +31496,10 @@
    "Shared/Render/Kinds/ProductivityWidgets.swift:289: WidgetMessage(symbol: \"calendar.badge.exclamationmark\", title: tr(\"Accès au calendrier\"), message: tr(\"Touche pour l'autoriser dans Ardane\"), style: s)"
   ]
  },
- "Touche pour recadrer, touche longuement pour la déplacer ou la retirer.": {
+ "Touche pour la choisir, puis recadre-la, déplace-la ou retire-la.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:359: .accessibilityHint(Text(tr(\"Touche pour recadrer, touche longuement pour la déplacer ou la retirer.\")))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:465: .accessibilityHint(Text(tr(\"Touche pour la choisir, puis recadre-la, déplace-la ou retire-la.\")))"
   ]
  },
  "Touche un aliment pour changer sa quantité ou le déplacer. Glisse-le pour le supprimer.": {
@@ -31359,10 +31575,10 @@
    "App/Screens/Editor/StudioParts.swift:235: .accessibilityHint(Text(tr(\"Touche une partie du widget pour la changer.\")))"
   ]
  },
- "Touche une photo pour la recadrer. La mise en page suit leur nombre : une, deux, trois ou quatre.": {
+ "Touche une photo pour la recadrer, la déplacer ou la retirer.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:310: : tr(\"Touche une photo pour la recadrer. La mise en page suit leur nombre : une, deux, trois ou quatre.\")))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:405: Text(tr(\"Touche une photo pour la recadrer, la déplacer ou la retirer.\"))"
   ]
  },
  "Touche une tâche pour la remettre dans ton Top 3.": {
@@ -31374,7 +31590,7 @@
  "Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:283: MiniFootnote(text: tr(\"Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:284: MiniFootnote(text: tr(\"Touche une échéance pour la modifier, la marquer comme faite, la répéter chaque année ou la supprimer.\"))"
   ]
  },
  "Touche « Modifier » en haut, puis « Ajouter un widget »": {
@@ -32055,8 +32271,8 @@
  "Typographie": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:416: Text(tr(\"Typographie\")).font(.subheadline.weight(.semibold))",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:417: Picker(tr(\"Typographie\"), selection: quote.font) {"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:725: Text(tr(\"Typographie\")).font(.headline)",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:726: Picker(tr(\"Typographie\"), selection: quote.font) {"
   ]
  },
  "Tâche": {
@@ -32256,6 +32472,13 @@
    "Shared/Model/KindCatalog.swift:135: KindInfo(kind: .note, title: tr(\"Note\"), summary: tr(\"Un mot, un rappel ou une citation, toujours sous les yeux.\"), category: .productivity, symbol: \"note.text\", isPremium: false, families: SML, keywo"
   ]
  },
+ "Un par jour": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:531: Text(tr(\"Un par jour\")).tag(true)",
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:72: Text(\"\\(tr(\"Un par jour\")) · \\(PhotoDailyText.day(position))\")"
+  ]
+ },
  "Un petit tour ?": {
   "placeholders": 0,
   "uses": [
@@ -32309,6 +32532,19 @@
   "uses": [
    "App/Screens/Spaces/CreateFlow.swift:365: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")",
    "Shared/Model/Combo.swift:31: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")"
+  ]
+ },
+ "Un texte par": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:283: Text(tr(\"Un texte par\")).font(.subheadline.weight(.semibold))",
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:284: Picker(tr(\"Un texte par\"), selection: $split) {"
+  ]
+ },
+ "Un texte par jour": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:705: Toggle(tr(\"Un texte par jour\"), isOn: Binding("
   ]
  },
  "Un thème règle tout d'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget.": {
@@ -32484,10 +32720,10 @@
    "Shared/Model/WidgetStyle.swift:179: case .strong: tr(\"Une ombre marquée, plus de contraste.\")"
   ]
  },
- "Une photo, deux, trois ou quatre, ou une citation : ton premier widget se crée en deux étapes.": {
+ "Une photo par jour : la série passe à minuit.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:39: Text(tr(\"Une photo, deux, trois ou quatre, ou une citation : ton premier widget se crée en deux étapes.\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:420: return tr(\"Une photo par jour : la série passe à minuit.\")"
   ]
  },
  "Une phrase qui t'inspire, avec ta typographie et tes couleurs.": {
@@ -32568,13 +32804,13 @@
  "Une échéance faite quitte la liste de ce qui arrive.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:518: : tr(\"Une échéance faite quitte la liste de ce qui arrive.\"))"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:520: : tr(\"Une échéance faite quitte la liste de ce qui arrive.\"))"
   ]
  },
  "Une échéance qui se répète passe à l'année suivante quand elle est faite.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:517: ? tr(\"Une échéance qui se répète passe à l'année suivante quand elle est faite.\")"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:519: ? tr(\"Une échéance qui se répète passe à l'année suivante quand elle est faite.\")"
   ]
  },
  "Unité (facultatif)": {
@@ -33197,7 +33433,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:821: StudioSlider(title: tr(\"Voile pour la lisibilité\"), value: Binding(",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:518: StudioSlider(title: tr(\"Voile pour la lisibilité\"), value: quoteBinding.photoVeil, range: QuoteContent.veilRange)"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:842: StudioSlider(title: tr(\"Voile pour la lisibilité\"), value: quoteBinding.photoVeil, range: QuoteContent.veilRange)"
   ]
  },
  "Voir comment les ajouter à l'écran": {
@@ -33471,7 +33707,7 @@
  "Widget citation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:187: .navigationTitle(design.kind == .photos ? tr(\"Widget photo\") : tr(\"Widget citation\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:241: .navigationTitle(design.kind == .photos ? tr(\"Widget photo\") : tr(\"Widget citation\"))"
   ]
  },
  "Widget d'écran verrouillé": {
@@ -33483,7 +33719,7 @@
  "Widget photo": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:187: .navigationTitle(design.kind == .photos ? tr(\"Widget photo\") : tr(\"Widget citation\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:241: .navigationTitle(design.kind == .photos ? tr(\"Widget photo\") : tr(\"Widget citation\"))"
   ]
  },
  "Widget simple": {
@@ -33588,7 +33824,7 @@
  "Zoom": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:631: Text(tr(\"Zoom\"))"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:958: Text(tr(\"Zoom\"))"
   ]
  },
  "Zurich": {
@@ -33720,7 +33956,7 @@
  "assurance, prêt, stationnement, autres": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:314: Share(name: tr(\"Frais fixes\"), hex: \"2F8F7A\", value: cost.fixed, source: tr(\"assurance, prêt, stationnement, autres\")),"
+   "App/Screens/MiniApps/Car/CarPages.swift:315: Share(name: tr(\"Frais fixes\"), hex: \"2F8F7A\", value: cost.fixed, source: tr(\"assurance, prêt, stationnement, autres\")),"
   ]
  },
  "atteint": {
@@ -33783,7 +34019,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Car/CarApp.swift:336: detail: Fmt.format(deadline.date, template: \"dMMMMyyyy\"), value: days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:276: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
+   "App/Screens/MiniApps/Car/CarPages.swift:277: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:373: detail: isToday ? tr(\"aujourd'hui\") : Fmt.format(day, template: \"dMMM\"),",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:52: case 0: return tr(\"aujourd'hui\")"
   ]
@@ -34093,7 +34329,7 @@
  "dans %@ j": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:574: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:581: ValueRow(title: tr(\"Prochain anniversaire\"), value: tr(\"dans \\(DateMath.daysBetween(now, next.date)) j\"), symbol: \"gift\")"
   ]
  },
  "dans %@ jours": {
@@ -34174,7 +34410,7 @@
  "dernier à %@ km": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:243: if let km = item.lastKm { parts.append(tr(\"dernier à \\(Fmt.number(Int(km))) km\")) }"
+   "App/Screens/MiniApps/Car/CarPages.swift:244: if let km = item.lastKm { parts.append(tr(\"dernier à \\(Fmt.number(Int(km))) km\")) }"
   ]
  },
  "dernière séance": {
@@ -34334,7 +34570,7 @@
  "environ %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:245: if item.cost > 0 { parts.append(tr(\"environ \\(TF.money(item.cost, model.settings.currencyCode))\")) }"
+   "App/Screens/MiniApps/Car/CarPages.swift:246: if item.cost > 0 { parts.append(tr(\"environ \\(TF.money(item.cost, model.settings.currencyCode))\")) }"
   ]
  },
  "espaces actifs": {
@@ -34408,7 +34644,7 @@
  "fait": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:276: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
+   "App/Screens/MiniApps/Car/CarPages.swift:277: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))",
    "Shared/Render/Kinds/ProductivityWidgets.swift:202: .accessibilityLabel(Text(\"\\(habit.name), \\(done ? tr(\"fait\") : tr(\"à faire\"))\"))"
   ]
  },
@@ -34506,7 +34742,7 @@
  "forfait par an ÷ 12": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:316: Share(name: tr(\"Entretien\"), hex: \"3366FF\", value: cost.maintenance, source: tr(\"forfait par an ÷ 12\")),"
+   "App/Screens/MiniApps/Car/CarPages.swift:317: Share(name: tr(\"Entretien\"), hex: \"3366FF\", value: cost.maintenance, source: tr(\"forfait par an ÷ 12\")),"
   ]
  },
  "ft": {
@@ -34865,7 +35101,7 @@
  "le %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:244: if let date = item.lastDate { parts.append(tr(\"le \\(Fmt.shortDay(date))\")) }"
+   "App/Screens/MiniApps/Car/CarPages.swift:245: if let date = item.lastDate { parts.append(tr(\"le \\(Fmt.shortDay(date))\")) }"
   ]
  },
  "le %@ à %@": {
@@ -35013,7 +35249,7 @@
  "moyenne des 3 derniers mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:315: Share(name: tr(\"Carburant\"), hex: Car.fuelHex, value: cost.fuel, source: tr(\"moyenne des 3 derniers mois\")),"
+   "App/Screens/MiniApps/Car/CarPages.swift:316: Share(name: tr(\"Carburant\"), hex: Car.fuelHex, value: cost.fuel, source: tr(\"moyenne des 3 derniers mois\")),"
   ]
  },
  "moyenne générale pondérée": {
@@ -35269,7 +35505,7 @@
  "passée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Car/CarPages.swift:276: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))"
+   "App/Screens/MiniApps/Car/CarPages.swift:277: value: done ? tr(\"fait\") : (days < 0 ? tr(\"passée\") : (days == 0 ? tr(\"aujourd'hui\") : tr(\"J-\\(days)\"))))"
   ]
  },
  "pastel": {
@@ -35315,18 +35551,36 @@
    "Shared/Domains/ScanRecap.swift:68: return isLowConfidence ? tr(\"peu sûr\") : tr(\"assez sûr\")"
   ]
  },
+ "photo": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:133: Text(Fmt.plural(n, tr(\"photo\"), tr(\"photos\")))"
+  ]
+ },
+ "photo %@ sur %@": {
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:35: return tr(\"photo \\(position.index + 1) sur \\(position.total)\")"
+  ]
+ },
  "photo illisible": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:302: Label(Fmt.plural(failed, tr(\"photo illisible\"), tr(\"photos illisibles\")), systemImage: \"exclamationmark.triangle\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:539: Label(Fmt.plural(failed, tr(\"photo illisible\"), tr(\"photos illisibles\")), systemImage: \"exclamationmark.triangle\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:386: Label(Fmt.plural(failed, tr(\"photo illisible\"), tr(\"photos illisibles\")), systemImage: \"exclamationmark.triangle\")",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:863: Label(Fmt.plural(failed, tr(\"photo illisible\"), tr(\"photos illisibles\")), systemImage: \"exclamationmark.triangle\")"
+  ]
+ },
+ "photos": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:133: Text(Fmt.plural(n, tr(\"photo\"), tr(\"photos\")))"
   ]
  },
  "photos illisibles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:302: Label(Fmt.plural(failed, tr(\"photo illisible\"), tr(\"photos illisibles\")), systemImage: \"exclamationmark.triangle\")",
-   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:539: Label(Fmt.plural(failed, tr(\"photo illisible\"), tr(\"photos illisibles\")), systemImage: \"exclamationmark.triangle\")"
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:386: Label(Fmt.plural(failed, tr(\"photo illisible\"), tr(\"photos illisibles\")), systemImage: \"exclamationmark.triangle\")",
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:863: Label(Fmt.plural(failed, tr(\"photo illisible\"), tr(\"photos illisibles\")), systemImage: \"exclamationmark.triangle\")"
   ]
  },
  "piment doux": {
@@ -35453,6 +35707,18 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:248: detail: position.isEstimated ? tr(\"prix à renseigner\") : position.change24h.map { PriceChange.text($0, position.period, arrow: false) },"
+  ]
+ },
+ "prochain texte à minuit": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:71: let next = daily.kind == .quote ? tr(\"prochain texte à minuit\") : tr(\"prochaine photo à minuit\")"
+  ]
+ },
+ "prochaine photo à minuit": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:71: let next = daily.kind == .quote ? tr(\"prochain texte à minuit\") : tr(\"prochaine photo à minuit\")"
   ]
  },
  "productivité": {
@@ -35864,6 +36130,54 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/ProductivityWidgets.swift:54: Text(hiddenOpen > 0 ? tr(\"+ \\(hiddenOpen) à faire\") : \"+ \\(Fmt.plural(hidden.count, tr(\"terminée\"), tr(\"terminées\")))\")"
+  ]
+ },
+ "texte": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:296: Text(tr(\"Importer \\(Fmt.plural(parsed.texts.count, tr(\"texte\"), tr(\"textes\")))\"))"
+  ]
+ },
+ "texte coupé à 280 caractères": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:389: Text(Fmt.plural(parsed.cut, tr(\"texte coupé à 280 caractères\"), tr(\"textes coupés à 280 caractères\")))"
+  ]
+ },
+ "texte importé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:650: Text(Fmt.plural(importedCount, tr(\"texte importé\"), tr(\"textes importés\")))"
+  ]
+ },
+ "texte trouvé": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:374: : Fmt.plural(parsed.texts.count, tr(\"texte trouvé\"), tr(\"textes trouvés\")))"
+  ]
+ },
+ "textes": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:296: Text(tr(\"Importer \\(Fmt.plural(parsed.texts.count, tr(\"texte\"), tr(\"textes\")))\"))"
+  ]
+ },
+ "textes coupés à 280 caractères": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:389: Text(Fmt.plural(parsed.cut, tr(\"texte coupé à 280 caractères\"), tr(\"textes coupés à 280 caractères\")))"
+  ]
+ },
+ "textes importés": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:650: Text(Fmt.plural(importedCount, tr(\"texte importé\"), tr(\"textes importés\")))"
+  ]
+ },
+ "textes trouvés": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Photos/PhotosHybrid.swift:374: : Fmt.plural(parsed.texts.count, tr(\"texte trouvé\"), tr(\"textes trouvés\")))"
   ]
  },
  "ton genre": {
@@ -36517,7 +36831,7 @@
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:33: add(\"age\", \"person\", tr(\"Âge\"), age.map { tr(\"\\($0) ans\") })",
    "App/Screens/Profile/ProfileTopics.swift:331: ProfileNumberField(title: tr(\"Âge\"), unit: tr(\"ans\"), value: ageBinding, decimals: false, identifier: \"profile-age\")",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:572: ValueRow(title: tr(\"Âge\"), value: tr(\"\\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans\"), symbol: \"person.crop.circle\")"
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:579: ValueRow(title: tr(\"Âge\"), value: tr(\"\\(TF.decimal(LifeMath.age(birthday: birthday, at: now), 2)) ans\"), symbol: \"person.crop.circle\")"
   ]
  },
  "Écarte les bouts de la corde en bas du mouvement.": {
@@ -36584,7 +36898,7 @@
    "App/Core/DataItems.swift:94: case .deadlines: tr(\"Échéances\")",
    "App/Screens/MiniApps/Car/CarApp.swift:329: CarSectionHead(title: tr(\"Échéances\"), page: .carDeadlines)",
    "App/Screens/MiniApps/Car/CarApp.swift:382: MiniRow(symbol: \"calendar.badge.exclamationmark\", colorHex: Car.alertHex, title: tr(\"Échéances\"), detail: tr(\"Assurance, immatriculation, pneus d'hiver…\"))",
-   "App/Screens/MiniApps/Car/CarPages.swift:285: .navigationTitle(tr(\"Échéances\"))"
+   "App/Screens/MiniApps/Car/CarPages.swift:286: .navigationTitle(tr(\"Échéances\"))"
   ]
  },
  "Échéances auto": {

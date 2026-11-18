@@ -87,10 +87,18 @@ enum TimelinePlanner {
         switch design.kind {
         case .photos:
             // More than four photos take turns: a new set each hour.
+            // « Un par jour »: a new photo at each midnight.
+            if design.dailyPosition(on: now) != nil {
+                return Plan(dates: [now, midnight], policy: .after(midnight.addingTimeInterval(60)))
+            }
             guard let next = PhotoLayout.nextChange(design.options.photos, after: now) else { return Plan(dates: [now], policy: .never) }
             let dates = [now] + (0..<6).compactMap { DateMath.calendar.date(byAdding: .hour, value: $0, to: next) }
             return Plan(dates: dates, policy: .atEnd)
         case .quote:
+            // « Un par jour » with imported texts: a new text at each midnight.
+            if design.dailyPosition(on: now) != nil {
+                return Plan(dates: [now, midnight], policy: .after(midnight.addingTimeInterval(60)))
+            }
             return Plan(dates: [now], policy: .never)
         case .clock, .worldClock:
             let start = DateMath.calendar.dateInterval(of: .minute, for: now)?.start ?? now

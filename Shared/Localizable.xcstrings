@@ -8085,6 +8085,53 @@
         }
       }
     },
+    "%@ textes en trop ont été laissés : un widget en garde 2 000 au plus.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ überzählige Texte wurden weggelassen: Ein Widget behält höchstens 2.000."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ extra texts were left out: a widget keeps 2,000 at most."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Se dejaron fuera %@ textos de más: un widget guarda 2000 como máximo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ textes en trop ont été laissés : un widget en garde 2 000 au plus."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ testi in eccesso sono stati lasciati fuori: un widget ne tiene 2.000 al massimo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "超過した%@件のテキストは除外されました。1つのウィジェットに保存できるのは最大2,000件です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ textos a mais foram deixados de fora: um widget guarda 2.000 no máximo."
+          }
+        }
+      }
+    },
     "%@ vs %@": {
       "extractionState": "manual",
       "localizations": {
@@ -18092,6 +18139,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ações"
+          }
+        }
+      }
+    },
+    "Actions du widget": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget-Aktionen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget actions"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acciones del widget"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actions du widget"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Azioni del widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェットの操作"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ações do widget"
           }
         }
       }
@@ -32713,6 +32807,53 @@
         }
       }
     },
+    "Au hasard": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zufällig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Random"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Al azar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Au hasard"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A caso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ランダム"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aleatório"
+          }
+        }
+      }
+    },
     "Au moins jusqu'aux cuisses parallèles au sol si ta mobilité le permet, dos neutre.": {
       "extractionState": "manual",
       "localizations": {
@@ -34072,6 +34213,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nenhuma taxa do BCE para a data de algumas operações: data futura ou lida errado."
+          }
+        }
+      }
+    },
+    "Aucun texte trouvé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Text gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No text found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ningún texto encontrado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun texte trouvé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nessun testo trovato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキストが見つかりません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum texto encontrado"
           }
         }
       }
@@ -35905,6 +36093,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hoje%@"
+          }
+        }
+      }
+    },
+    "Aujourd'hui, %@ : texte %@ sur %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute, %@: Text %@ von %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today, %@: text %@ of %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoy, %@: texto %@ de %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aujourd'hui, %@ : texte %@ sur %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oggi, %@: testo %@ di %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日、%@:テキスト %@/%@。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoje, %@: texto %@ de %@."
           }
         }
       }
@@ -38067,6 +38302,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Com o Premium, as compras feitas com os cartões da Carteira aparecem sozinhas nos seus gastos. Nada para configurar em Atalhos."
+          }
+        }
+      }
+    },
+    "Avec une photo, la couleur de fond ne sert que si la photo n'est plus disponible.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mit einem Foto gilt die Hintergrundfarbe nur, wenn das Foto nicht mehr verfügbar ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With a photo, the background color is only used if the photo is no longer available."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con una foto, el color de fondo solo se usa si la foto ya no está disponible."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec une photo, la couleur de fond ne sert que si la photo n'est plus disponible."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con una foto, il colore di sfondo serve solo se la foto non è più disponibile."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真がある場合、背景色は写真が使えなくなったときだけ使われます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com uma foto, a cor de fundo só é usada se a foto não estiver mais disponível."
           }
         }
       }
@@ -51748,6 +52030,53 @@
         }
       }
     },
+    "Ce fichier n'a pas pu être lu (texte simple, 2 Mo au plus).": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Datei konnte nicht gelesen werden (reiner Text, höchstens 2 MB)."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This file could not be read (plain text, 2 MB at most)."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo leer este archivo (texto sin formato, 2 MB como máximo)."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce fichier n'a pas pu être lu (texte simple, 2 Mo au plus)."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile leggere questo file (testo semplice, 2 MB al massimo)."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このファイルは読み込めませんでした(プレーンテキスト、2MBまで)。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível ler este arquivo (texto simples, 2 MB no máximo)."
+          }
+        }
+      }
+    },
     "Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.": {
       "extractionState": "manual",
       "localizations": {
@@ -55320,6 +55649,53 @@
         }
       }
     },
+    "Change à minuit": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wechselt um Mitternacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changes at midnight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambia a medianoche"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change à minuit"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambia a mezzanotte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "深夜0時に切り替わります"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muda à meia-noite"
+          }
+        }
+      }
+    },
     "Changer d'icône": {
       "extractionState": "manual",
       "localizations": {
@@ -55457,6 +55833,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Trocar de widget"
+          }
+        }
+      }
+    },
+    "Chapitre": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapitel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapter"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capítulo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chapitre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capitolo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "章"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Capítulo"
           }
         }
       }
@@ -58422,6 +58845,53 @@
         }
       }
     },
+    "Choisir le jour": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tag wählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir el día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir le jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli il giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "日を選ぶ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher o dia"
+          }
+        }
+      }
+    },
     "Choisir les entreprises suivies": {
       "extractionState": "manual",
       "localizations": {
@@ -58606,6 +59076,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolher um PDF"
+          }
+        }
+      }
+    },
+    "Choisir un fichier texte": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Textdatei auswählen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a text file"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegir un archivo de texto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisir un fichier texte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli un file di testo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキストファイルを選ぶ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolher um arquivo de texto"
           }
         }
       }
@@ -58935,6 +59452,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha de 1 a 4 widgets."
+          }
+        }
+      }
+    },
+    "Choisis des photos (jusqu'à 12) ou écris une citation : ton premier widget se crée en quelques touches.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle Fotos (bis zu 12) oder schreibe ein Zitat: Dein erstes Widget entsteht mit wenigen Tipps."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick photos (up to 12) or write a quote: your first widget takes a few taps."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige fotos (hasta 12) o escribe una cita: tu primer widget se crea con unos toques."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis des photos (jusqu'à 12) ou écris une citation : ton premier widget se crée en quelques touches."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli le foto (fino a 12) o scrivi una citazione: il tuo primo widget si crea con pochi tocchi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真(最大12枚)を選ぶか名言を書くと、数回のタップで最初のウィジェットができます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha fotos (até 12) ou escreva uma citação: seu primeiro widget se cria em poucos toques."
           }
         }
       }
@@ -61571,6 +62135,53 @@
         }
       }
     },
+    "Colle tes textes ici, un par ligne ou par paragraphe.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge deine Texte hier ein, einen pro Zeile oder Absatz."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste your texts here, one per line or per paragraph."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pega tus textos aquí, uno por línea o por párrafo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colle tes textes ici, un par ligne ou par paragraphe."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incolla qui i tuoi testi, uno per riga o per paragrafo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ここにテキストを貼り付けてください(1行または1段落に1つ)。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cole seus textos aqui, um por linha ou por parágrafo."
+          }
+        }
+      }
+    },
     "Collection": {
       "extractionState": "manual",
       "localizations": {
@@ -61802,6 +62413,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Coleções"
+          }
+        }
+      }
+    },
+    "Coller": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einfügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paste"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pegar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coller"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Incolla"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "貼り付け"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colar"
           }
         }
       }
@@ -62225,6 +62883,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Comece com um caixote baixo."
+          }
+        }
+      }
+    },
+    "Commence le %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beginnt am %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starts on %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empieza el %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commence le %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizia il %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@から開始"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Começa em %@"
           }
         }
       }
@@ -67587,6 +68292,53 @@
         }
       }
     },
+    "Couleurs de fond": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hintergrundfarben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Background colors"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colores de fondo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couleurs de fond"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Colori di sfondo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "背景色"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cores de fundo"
+          }
+        }
+      }
+    },
     "Couleurs de l'app": {
       "extractionState": "manual",
       "localizations": {
@@ -72612,6 +73364,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Neste widget"
+          }
+        }
+      }
+    },
+    "Dans l'ordre": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Reihenfolge"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In order"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En orden"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dans l'ordre"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In ordine"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "順番どおり"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Em ordem"
           }
         }
       }
@@ -84785,6 +85584,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Conhecer o Premium"
+          }
+        }
+      }
+    },
+    "Défilement": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wechsel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scrolling"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desplazamiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Défilement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorrimento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "切り替え"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rotação"
           }
         }
       }
@@ -99312,6 +100158,53 @@
         }
       }
     },
+    "Fichier": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datei"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Archivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fichier"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "File"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arquivo"
+          }
+        }
+      }
+    },
     "Fichier canadien sur les éléments nutritifs": {
       "extractionState": "manual",
       "localizations": {
@@ -112942,6 +113835,53 @@
         }
       }
     },
+    "Il faut au moins deux photos pour en changer chaque jour.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Du brauchst mindestens zwei Fotos, um jeden Tag eines zu wechseln."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You need at least two photos to change one every day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hacen falta al menos dos fotos para cambiar una cada día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il faut au moins deux photos pour en changer chaque jour."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Servono almeno due foto per cambiarne una ogni giorno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎日切り替えるには、写真が2枚以上必要です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "São necessárias pelo menos duas fotos para trocar uma a cada dia."
+          }
+        }
+      }
+    },
     "Il ira dans « Mes repas » pour le reprendre d'une touche.": {
       "extractionState": "manual",
       "localizations": {
@@ -114070,6 +115010,53 @@
         }
       }
     },
+    "Importe un recueil à toi : un texte s'affiche chaque jour.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importiere eine eigene Sammlung: Jeden Tag erscheint ein Text."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import a collection of your own: one text shows each day."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa una colección tuya: cada día se muestra un texto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importe un recueil à toi : un texte s'affiche chaque jour."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa una raccolta tua: ogni giorno si mostra un testo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分のテキスト集を読み込みます。毎日1つずつ表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importe uma coletânea sua: um texto aparece a cada dia."
+          }
+        }
+      }
+    },
     "Importer": {
       "extractionState": "manual",
       "localizations": {
@@ -114113,6 +115100,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importar"
+          }
+        }
+      }
+    },
+    "Importer %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ importieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@を読み込む"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar %@"
+          }
+        }
+      }
+    },
+    "Importer mes textes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Texte importieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Import my texts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar mis textos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importer mes textes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importa i miei testi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マイテキストを読み込む"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importar meus textos"
           }
         }
       }
@@ -123188,6 +124269,53 @@
         }
       }
     },
+    "La mise en page suit leur nombre : une, deux, trois ou quatre.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Layout richtet sich nach ihrer Anzahl: eins, zwei, drei oder vier."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The layout follows their number: one, two, three or four."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La composición sigue su número: una, dos, tres o cuatro."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La mise en page suit leur nombre : une, deux, trois ou quatre."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La disposizione segue il loro numero: una, due, tre o quattro."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レイアウトは枚数に合わせて決まります(1〜4枚)。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O layout segue o número delas: uma, duas, três ou quatro."
+          }
+        }
+      }
+    },
     "La moyenne de chaque cours est pondérée par le poids des évaluations, la moyenne générale par les crédits.": {
       "extractionState": "manual",
       "localizations": {
@@ -129674,6 +130802,53 @@
         }
       }
     },
+    "Le premier texte s'affiche le %@.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der erste Text erscheint am %@."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The first text shows on %@."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El primer texto se muestra el %@."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le premier texte s'affiche le %@."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il primo testo si mostra il %@."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最初のテキストは%@に表示されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O primeiro texto aparece em %@."
+          }
+        }
+      }
+    },
     "Le prix se met à jour automatiquement.": {
       "extractionState": "manual",
       "localizations": {
@@ -135069,6 +136244,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "折れ線"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Linha"
+          }
+        }
+      }
+    },
+    "Ligne [text]": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeile"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Line"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Línea"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ligne"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riga"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "行"
           }
         },
         "pt-BR": {
@@ -143586,6 +144808,53 @@
         }
       }
     },
+    "Mes textes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Texte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My texts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis textos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes textes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I miei testi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マイテキスト"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meus textos"
+          }
+        }
+      }
+    },
     "Mes tâches": {
       "extractionState": "manual",
       "localizations": {
@@ -144804,6 +146073,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Publicação"
+          }
+        }
+      }
+    },
+    "Mise en page automatique": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisches Layout"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatic layout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Composición automática"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mise en page automatique"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disposizione automatica"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自動レイアウト"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Layout automático"
           }
         }
       }
@@ -163373,6 +164689,53 @@
         }
       }
     },
+    "Paragraphe": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Absatz"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paragraph"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Párrafo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paragraphe"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Paragrafo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "段落"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parágrafo"
+          }
+        }
+      }
+    },
     "Paris": {
       "extractionState": "manual",
       "localizations": {
@@ -177567,6 +178930,53 @@
         }
       }
     },
+    "Premier jour": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erster Tag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primer día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premier jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primo giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "初日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primeiro dia"
+          }
+        }
+      }
+    },
     "Premier quartier": {
       "extractionState": "manual",
       "localizations": {
@@ -177657,6 +179067,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Primeiro compromisso, prioridades e meta do dia para começar bem."
+          }
+        }
+      }
+    },
+    "Premier texte le": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erster Text am"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "First text on"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primer texto el"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premier texte le"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primo testo il"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最初のテキストの日"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Primeiro texto em"
           }
         }
       }
@@ -177892,6 +179349,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O Premium lê seu horário a partir de uma foto ou PDF, no seu iPhone. Adicionar aulas e eventos à mão continua grátis."
+          }
+        }
+      }
+    },
+    "Premium ouvre toutes les couleurs de fond, comme dans le Studio.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium schaltet alle Hintergrundfarben frei, wie im Studio."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium opens every background color, as in the Studio."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium abre todos los colores de fondo, como en el Studio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium ouvre toutes les couleurs de fond, comme dans le Studio."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium sblocca tutti i colori di sfondo, come nello Studio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premiumなら、スタジオと同じようにすべての背景色が使えます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O Premium libera todas as cores de fundo, como no Studio."
           }
         }
       }
@@ -182686,6 +184190,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quantidade"
+          }
+        }
+      }
+    },
+    "Quatre à la fois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vier gleichzeitig"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Four at a time"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuatro a la vez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quatre à la fois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quattro alla volta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "4枚ずつ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quatro por vez"
           }
         }
       }
@@ -191898,6 +193449,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Remover o saldo inicial"
+          }
+        }
+      }
+    },
+    "Retirer mes textes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Texte entfernen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove my texts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quitar mis textos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer mes textes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rimuovi i miei testi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マイテキストを削除"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remover meus textos"
           }
         }
       }
@@ -225413,6 +227011,53 @@
         }
       }
     },
+    "Tes widgets": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Widgets"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your widgets"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus widgets"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes widgets"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I tuoi widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたのウィジェット"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seus widgets"
+          }
+        }
+      }
+    },
     "Tes widgets et « Mon Quotidien » utilisent tes vraies données.": {
       "extractionState": "manual",
       "localizations": {
@@ -225456,53 +227101,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seus widgets e o “Meu dia” usam seus dados reais."
-          }
-        }
-      }
-    },
-    "Tes widgets photo": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Foto-Widgets"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your photo widgets"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus widgets de fotos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tes widgets photo"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "I tuoi widget foto"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "写真ウィジェット"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Seus widgets de fotos"
           }
         }
       }
@@ -231946,49 +233544,49 @@
         }
       }
     },
-    "Touche pour recadrer, touche longuement pour la déplacer ou la retirer.": {
+    "Touche pour la choisir, puis recadre-la, déplace-la ou retire-la.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tippen zum Zuschneiden, gedrückt halten zum Verschieben oder Entfernen."
+            "value": "Tippe zum Auswählen, dann zuschneiden, verschieben oder entfernen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tap to crop, touch and hold to move or remove it."
+            "value": "Tap to choose it, then crop, move or remove it."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toca para recortar, mantén pulsado para moverla o quitarla."
+            "value": "Toca para elegirla y luego recórtala, muévela o quítala."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Touche pour recadrer, touche longuement pour la déplacer ou la retirer."
+            "value": "Touche pour la choisir, puis recadre-la, déplace-la ou retire-la."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tocca per ritagliare, tieni premuto per spostarla o toglierla."
+            "value": "Tocca per sceglierla, poi ritagliala, spostala o rimuovila."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "タップで切り取り、長押しで移動または削除。"
+            "value": "タップして選び、切り抜き・移動・削除をします。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toque para recortar, toque e segure para mover ou remover."
+            "value": "Toque para escolhê-la, depois corte, mova ou remova."
           }
         }
       }
@@ -232557,49 +234155,49 @@
         }
       }
     },
-    "Touche une photo pour la recadrer. La mise en page suit leur nombre : une, deux, trois ou quatre.": {
+    "Touche une photo pour la recadrer, la déplacer ou la retirer.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tippe auf ein Foto, um es zuzuschneiden. Das Layout richtet sich nach ihrer Anzahl: eins, zwei, drei oder vier."
+            "value": "Tippe auf ein Foto, um es zuzuschneiden, zu verschieben oder zu entfernen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tap a photo to crop it. The layout follows how many there are: one, two, three or four."
+            "value": "Tap a photo to crop, move or remove it."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toca una foto para recortarla. El diseño se adapta a su número: una, dos, tres o cuatro."
+            "value": "Toca una foto para recortarla, moverla o quitarla."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Touche une photo pour la recadrer. La mise en page suit leur nombre : une, deux, trois ou quatre."
+            "value": "Touche une photo pour la recadrer, la déplacer ou la retirer."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tocca una foto per ritagliarla. Il layout segue il loro numero: una, due, tre o quattro."
+            "value": "Tocca una foto per ritagliarla, spostarla o rimuoverla."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "写真をタップして切り取り。レイアウトは枚数（1〜4枚）に合わせて変わります。"
+            "value": "写真をタップすると、切り抜き・移動・削除ができます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toque em uma foto para recortá-la. O layout segue a quantidade: uma, duas, três ou quatro."
+            "value": "Toque em uma foto para cortá-la, movê-la ou removê-la."
           }
         }
       }
@@ -239231,6 +240829,53 @@
         }
       }
     },
+    "Un par jour": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eins pro Tag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One a day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uno al día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un par jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una al giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1日1つ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um por dia"
+          }
+        }
+      }
+    },
     "Un petit tour ?": {
       "extractionState": "manual",
       "localizations": {
@@ -239650,6 +241295,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Um painel do espaço: um widget em tamanho grande, ou até 4 widgets juntos."
+          }
+        }
+      }
+    },
+    "Un texte par": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Text pro"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One text per"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un texto por"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un texte par"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un testo per"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "区切り"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um texto por"
+          }
+        }
+      }
+    },
+    "Un texte par jour": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein Text pro Tag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One text a day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un texto al día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un texte par jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un testo al giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1日1テキスト"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um texto por dia"
           }
         }
       }
@@ -240970,49 +242709,49 @@
         }
       }
     },
-    "Une photo, deux, trois ou quatre, ou une citation : ton premier widget se crée en deux étapes.": {
+    "Une photo par jour : la série passe à minuit.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ein Foto, zwei, drei oder vier, oder ein Zitat: Dein erstes Widget entsteht in zwei Schritten."
+            "value": "Ein Foto pro Tag: Die Serie rückt um Mitternacht weiter."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "One photo, two, three or four, or a quote: your first widget takes two steps."
+            "value": "One photo a day: the series moves on at midnight."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Una foto, dos, tres o cuatro, o una cita: tu primer widget se crea en dos pasos."
+            "value": "Una foto al día: la serie avanza a medianoche."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Une photo, deux, trois ou quatre, ou une citation : ton premier widget se crée en deux étapes."
+            "value": "Une photo par jour : la série passe à minuit."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Una foto, due, tre o quattro, o una citazione: il tuo primo widget si crea in due passaggi."
+            "value": "Una foto al giorno: la serie avanza a mezzanotte."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "写真1〜4枚、または引用文。最初のウィジェットは2ステップで作れます。"
+            "value": "1日1枚:シリーズは深夜0時に進みます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Uma foto, duas, três ou quatro, ou uma citação: seu primeiro widget fica pronto em duas etapas."
+            "value": "Uma foto por dia: a série avança à meia-noite."
           }
         }
       }
@@ -262026,6 +263765,100 @@
         }
       }
     },
+    "photo": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foto"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "photo"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "foto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "photo"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "foto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "枚"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "foto"
+          }
+        }
+      }
+    },
+    "photo %@ sur %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Foto %@ von %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "photo %@ of %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "foto %@ de %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "photo %@ sur %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "foto %@ di %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真%@/%@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "foto %@ de %@"
+          }
+        }
+      }
+    },
     "photo illisible": {
       "extractionState": "manual",
       "localizations": {
@@ -262069,6 +263902,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "foto ilegível"
+          }
+        }
+      }
+    },
+    "photos": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fotos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "photos"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fotos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "photos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "foto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "枚"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "fotos"
           }
         }
       }
@@ -263103,6 +264983,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "preço a informar"
+          }
+        }
+      }
+    },
+    "prochain texte à minuit": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nächster Text um Mitternacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "next text at midnight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "próximo texto a medianoche"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prochain texte à minuit"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prossimo testo a mezzanotte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次のテキストは深夜0時"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "próximo texto à meia-noite"
+          }
+        }
+      }
+    },
+    "prochaine photo à minuit": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nächstes Foto um Mitternacht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "next photo at midnight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "próxima foto a medianoche"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prochaine photo à minuit"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "prossima foto a mezzanotte"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次の写真は深夜0時"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "próxima foto à meia-noite"
           }
         }
       }
@@ -266064,6 +268038,382 @@
           "stringUnit": {
             "state": "translated",
             "value": "concluídas"
+          }
+        }
+      }
+    },
+    "texte": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "text"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texte"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "testo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texto"
+          }
+        }
+      }
+    },
+    "texte coupé à 280 caractères": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text auf 280 Zeichen gekürzt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "text cut to 280 characters"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texto cortado a 280 caracteres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texte coupé à 280 caractères"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "testo tagliato a 280 caratteri"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "280文字に切り詰めたテキスト"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texto cortado em 280 caracteres"
+          }
+        }
+      }
+    },
+    "texte importé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text importiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "text imported"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texto importado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texte importé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "testo importato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件のテキストを読み込み済み"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texto importado"
+          }
+        }
+      }
+    },
+    "texte trouvé": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Text gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "text found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texto encontrado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texte trouvé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "testo trovato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件のテキストが見つかりました"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texto encontrado"
+          }
+        }
+      }
+    },
+    "textes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "testi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textos"
+          }
+        }
+      }
+    },
+    "textes coupés à 280 caractères": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte auf 280 Zeichen gekürzt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texts cut to 280 characters"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textos cortados a 280 caracteres"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textes coupés à 280 caractères"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "testi tagliati a 280 caratteri"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "280文字に切り詰めたテキスト"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textos cortados em 280 caracteres"
+          }
+        }
+      }
+    },
+    "textes importés": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte importiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texts imported"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textos importados"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textes importés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "testi importati"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件のテキストを読み込み済み"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textos importados"
+          }
+        }
+      }
+    },
+    "textes trouvés": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Texte gefunden"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "texts found"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textos encontrados"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textes trouvés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "testi trovati"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件のテキストが見つかりました"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "textos encontrados"
           }
         }
       }

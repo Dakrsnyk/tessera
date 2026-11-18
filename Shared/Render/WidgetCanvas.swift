@@ -27,9 +27,9 @@ struct WidgetCanvas: View {
             PremiumLockedView(context: context)
         } else if design.kind == .photos, !family.isAccessory {
             // Photos and quotes are drawn edge to edge, in their own colors: no margin, no style.
-            PhotoCollageView(photos: design.options.photos, family: family, date: date)
+            PhotoCollageView(photos: design.options.photos, family: family, date: date, daily: design.options.daily)
         } else if design.kind == .quote, !family.isAccessory {
-            QuoteWidgetView(quote: design.options.quote ?? QuoteContent(), family: family, background: design.quoteBackground)
+            QuoteWidgetView(quote: (design.options.quote ?? QuoteContent()).shown(daily: design.options.daily, on: date), family: family, background: design.quoteBackground)
         } else if family.isAccessory {
             // A combined widget shows its first widget on the Lock Screen.
             if design.isCombo, let first = design.partDesigns.first {
