@@ -83,6 +83,7 @@ struct NutritionAppView: View {
         }
         .navigationTitle(tr("Nutrition"))
         .onAppear { trackGoal(known: known) }
+        .onChange(of: model.nutrition.goals.kcal) { _, _ in trackGoal(known: known) }
         .onChange(of: scenePhase) { _, phase in
             guard phase == .active else { return }
             if DateMath.isSameDay(day, activeOn), !DateMath.isSameDay(activeOn, Date()) { day = Date() }
@@ -263,6 +264,12 @@ struct NutritionAppView: View {
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("nutrition-library")
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.nutritionIdeas)) {
+                    MiniRow(symbol: "lightbulb.fill", colorHex: accentHex, title: tr("Idées"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("nutrition-ideas-row")
             }
         }
     }

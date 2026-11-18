@@ -546,6 +546,14 @@ struct FitnessState: Codable, Hashable {
         active?.restPausedRemaining = nil
     }
 
+    /// Shortens or lengthens the rest running (« − 15 s » / « + 15 s »): never before now (then it reads « Prêt »),
+    /// never more than an hour from now. Nothing when no rest runs (over, paused or none).
+    mutating func adjustRest(by seconds: TimeInterval, at date: Date) {
+        guard let end = active?.restEndsAt, end > date else { return }
+        let moved = end.addingTimeInterval(seconds)
+        active?.restEndsAt = min(date.addingTimeInterval(3_600), max(date, moved))
+    }
+
     /// Logs one set from a widget or the app, starting today's routine if needed. Returns true when a set was logged.
     @discardableResult
     mutating func completeNextSet(at date: Date) -> Bool {

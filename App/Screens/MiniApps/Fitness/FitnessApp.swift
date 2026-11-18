@@ -1,11 +1,12 @@
 import SwiftUI
 
-/// The Fitness mini-app in the « Signature » style, in the order a workout is prepared and done. On the band:
-/// the week selector (the only one of the screen), then the session of the day picked as the essential figure
-/// (today's or the next one, or what was done), with its one main action floating above the tab bar. On the
-/// sheet, as in the mockup: the week's four figures (2 × 2 tiles), the session of the day (its details and
-/// secondary actions), « Programme » (program, sessions done, exercises, progress), the favorite exercises and
-/// the steps, and last the footnote and the settings button.
+/// The Fitness mini-app, « Hybride » direction: one page whose first card follows the moment (before, during, after
+/// the session, or a rest day). On the band: the week selector (the only one of the screen), then the card of the
+/// moment (today's session or the next one, the one running, or what was done). On the sheet: what is missing,
+/// a fixed row of four round shortcuts (« Programme », « Exercices », « Historique », « Progression »), the week's
+/// four figures (2 × 2 tiles), the session of the day (its details and secondary actions), the steps, and last
+/// the footnote and the settings button. The action floating above the tab bar follows the moment: « Commencer »
+/// before; « Série faite » with the rest beside it while a session runs; nothing after.
 struct FitnessAppView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -31,20 +32,36 @@ struct FitnessAppView: View {
         let now = Date()
         let state = model.fitness
         let content = dayContent(state: state, now: now)
+        let runningSession: WorkoutSession? = {
+            if case .running(let active) = content { return active }
+            return nil
+        }()
         MiniAppScaffold(colorHex: accentHex, action: floatingAction(content, state: state, now: now)) {
             weekSelector(state: state)
             dayHeader(content, state: state, now: now)
         } sheet: {
             MiniAppToFillSection(app: .fitness)
+            shortcuts(state: state)
             weekSummary(state: state, now: now)
             if content.hasExtras {
                 daySection(content, state: state, now: now)
             }
-            program(state: state)
-            favorites(state: state)
             activity
             MiniFootnote(text: tr("Calories et volumes estimés à partir de tes séances et de ton poids : des repères, pas des mesures."))
             MiniAppInfoSection(app: .fitness)
+            if runningSession != nil {
+                // Room for the double action.
+                Color.clear.frame(height: 80)
+            }
+        }
+        .overlay(alignment: .bottom) {
+            // While a session runs: « Série faite » and the rest, without leaving the page.
+            if let runningSession {
+                FitnessRunningActions(session: runningSession, colorHex: accentHex,
+                                      setDone: { completeSetFromPage() },
+                                      open: { router.homePath.append(.page(.fitnessSession)) })
+                    .padding(.bottom, 12)
+            }
         }
         .navigationTitle(tr("Fitness"))
         .task {
@@ -100,12 +117,30 @@ struct FitnessAppView: View {
     private func dayHero(_ content: FitnessDayContent, state: FitnessState, now: Date) -> some View {
         switch content {
         case .running(let active):
-            MiniHero(label: active.isCatchUp ? tr("Rattrapage en cours") : tr("Séance en cours"),
-                     value: active.routineName, caption: runningCaption(active))
-            ProgressView(value: Double(active.sets.count), total: Double(max(1, active.totalSets)))
-                .accessibilityLabel(tr("Progression"))
-                .accessibilityValue(tr("\(active.sets.count)/\(active.totalSets) séries"))
-                .tint(Color.primary)
+            // A tap on the card opens the session.
+            Button {
+                router.homePath.append(.page(.fitnessSession))
+            } label: {
+                VStack(alignment: .leading, spacing: 8) {
+                    MiniHero(label: active.isCatchUp ? tr("Rattrapage en cours") : tr("Séance en cours"),
+                             value: active.routineName, caption: runningCaption(active))
+                    if let plan = runningPlan(active) {
+                        Text(plan).font(.title3.weight(.semibold)).monospacedDigit()
+                    }
+                    ProgressView(value: Double(active.sets.count), total: Double(max(1, active.totalSets)))
+                        .accessibilityLabel(tr("Progression"))
+                        .accessibilityValue(tr("\(active.sets.count)/\(active.totalSets) séries"))
+                        .tint(palette.fitnessText)
+                    Text(tr("\(active.sets.count)/\(active.totalSets) séries"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .monospacedDigit()
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("fitness-resume-card")
         case .done(let session):
             MiniHero(label: session.isCatchUp ? tr("Séance rattrapée") : tr("Séance faite"),
                      value: session.routineName, caption: sessionLine([session]))
@@ -141,9 +176,8 @@ struct FitnessAppView: View {
     private func floatingAction(_ content: FitnessDayContent, state: FitnessState, now: Date) -> MiniFloatingAction? {
         switch content {
         case .running:
-            return MiniFloatingAction(title: tr("Reprendre la séance"), symbol: "play.fill", colorHex: accentHex, identifier: "fitness-resume") {
-                router.homePath.append(.page(.fitnessSession))
-            }
+            // The double action (« Série faite » and the rest) is drawn by `FitnessRunningActions`.
+            return nil
         case .planned(let routine):
             return MiniFloatingAction(title: tr("Commencer"), symbol: "play.fill", colorHex: accentHex, identifier: "fitness-start") {
                 start(routine)
@@ -274,6 +308,27 @@ struct FitnessAppView: View {
     private func runningCaption(_ active: WorkoutSession) -> String? {
         guard let exercise = active.currentExercise else { return nil }
         return tr("\(exercise.name) · série \(active.setIndex + 1) sur \(exercise.sets)")
+    }
+
+    /// « 10 × 60 kg »: what the set shown asks for (« Corps » for no load).
+    private func runningPlan(_ active: WorkoutSession) -> String? {
+        guard let exercise = active.currentExercise else { return nil }
+        let load = exercise.weight > 0 ? Units.loadText(kilograms: exercise.weight, in: model.settings.unitSystem) : tr("Corps")
+        return "\(exercise.reps) × \(load)"
+    }
+
+    /// « Série faite » from the page: the set as planned (the reps and load shown on the card), like the session's own.
+    private func completeSetFromPage() {
+        var accepted = false
+        model.update(\.fitness) { state in
+            guard var session = state.active, session.currentExercise != nil else { return }
+            _ = session.completeSet(at: Date())
+            accepted = true
+            state.active = session
+            if let id = session.sets.last?.exerciseID { state.noteUsed(id) }
+            if session.isFinished { state.finishActive(at: Date()) }
+        }
+        if accepted { Haptics.tap() }
     }
 
     /// « 12 séries · 48 min · 3 200 kg soulevés » for the sessions of a day.
@@ -435,77 +490,152 @@ struct FitnessAppView: View {
         return parts.isEmpty ? tr("Aujourd'hui") : parts.joined(separator: " · ")
     }
 
-    // MARK: Program
+    // MARK: Shortcuts
 
-    /// « Programme »: the program, the sessions done, the exercises (library) and the progress, as rows.
-    private func program(state: FitnessState) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Programme"))
-            MiniRowsCard {
-                NavigationLink(value: HomeRoute.page(.fitnessProgram)) {
-                    MiniRow(symbol: "dumbbell.fill", colorHex: accentHex, title: tr("Programme et séances"),
-                            detail: state.routines.isEmpty ? tr("Tes séances de la semaine") : Fmt.plural(state.routines.count, tr("séance"), tr("séances")))
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("fitness-program")
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.fitnessHistory)) {
-                    MiniRow(symbol: "clock.arrow.circlepath", colorHex: accentHex, title: tr("Séances faites"), detail: tr("Toutes tes séances"), value: FitnessMath.sessions(state).isEmpty ? nil : "\(FitnessMath.sessions(state).count)")
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("fitness-history")
-                MiniDivider()
-                // Open to everyone (« Mes exercices » is free); every exercise in it is Premium.
-                NavigationLink(value: HomeRoute.page(.fitnessLibrary)) {
-                    premiumRow(symbol: "list.bullet", title: tr("Exercices"),
-                               detail: tr("\(ExerciseLibrary.all.count) exercices, fiches et démonstrations"))
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("fitness-library")
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.fitnessProgress)) {
-                    premiumRow(symbol: "chart.bar.fill", title: tr("Progression"), detail: tr("Charges, volume, records et évolution"))
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("fitness-progress")
-            }
+    /// The fixed row of four round shortcuts under the card, always in the same place: « Programme », « Exercices »,
+    /// « Historique », « Progression » (the favorites are one tap away, at the top of « Exercices »).
+    private func shortcuts(state: FitnessState) -> some View {
+        HStack(alignment: .top, spacing: 4) {
+            shortcut(symbol: "dumbbell.fill", title: tr("Programme"), value: HomeRoute.page(.fitnessProgram), identifier: "fitness-program")
+            // Open to everyone (« Mes exercices » is free); every exercise in it is Premium.
+            shortcut(symbol: "list.bullet", title: tr("Exercices"), value: HomeRoute.page(.fitnessLibrary), identifier: "fitness-library", premium: true)
+            shortcut(symbol: "clock.arrow.circlepath", title: tr("Historique"), value: HomeRoute.page(.fitnessHistory), identifier: "fitness-history")
+            shortcut(symbol: "chart.bar.fill", title: tr("Progression"), value: HomeRoute.page(.fitnessProgress), identifier: "fitness-progress", premium: true)
         }
     }
 
-    /// The favorite exercises (recent ones are not shown here), under their own title; nothing without favorites.
-    @ViewBuilder
-    private func favorites(state: FitnessState) -> some View {
-        let quick = Array(state.favoriteExercises.compactMap(ExerciseLibrary.info).prefix(6))
-        if !quick.isEmpty {
-            VStack(alignment: .leading, spacing: 10) {
-                MiniSectionTitle(title: tr("Exercices"))
-                MiniRowsCard {
-                    ForEach(Array(quick.enumerated()), id: \.element.id) { index, exercise in
-                        if index > 0 {
-                            MiniDivider()
-                        }
-                        NavigationLink(value: HomeRoute.page(.fitnessExercise(exercise.id))) {
-                            premiumRow(symbol: "star.fill", title: exercise.name, detail: exercise.summary)
-                        }
-                        .buttonStyle(.pressable)
+    private func shortcut(symbol: String, title: String, value: HomeRoute, identifier: String, premium: Bool = false) -> some View {
+        NavigationLink(value: value) {
+            VStack(spacing: 6) {
+                ZStack {
+                    Circle().fill(palette.fitness.opacity(0.16))
+                    Image(systemName: symbol).font(.title3.weight(.semibold)).foregroundStyle(palette.fitnessText)
+                }
+                .frame(width: 56, height: 56)
+                .overlay(alignment: .topTrailing) {
+                    if premium && !model.isPremium {
+                        PremiumBadge(compact: true).offset(x: 6, y: -4)
                     }
                 }
+                Text(title)
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(Color.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.pressable)
+        .accessibilityIdentifier(identifier)
+    }
+}
+
+/// The action floating while a session runs: « Série faite » (the set as planned) and, beside it, the rest with its
+/// pause, or a way back to the session when no rest runs. Drawn like the other floating actions of the Cristal style.
+private struct FitnessRunningActions: View {
+    let session: WorkoutSession
+    let colorHex: String
+    let setDone: () -> Void
+    let open: () -> Void
+    @Environment(AppModel.self) private var model
+    @State private var tapGuard = TapGuard()
+    @Environment(\.appStyle) private var style
+    @Environment(\.colorScheme) private var scheme
+
+    var body: some View {
+        let strong = CristalPalette.of(style.id).strongHex(colorHex)
+        let hex = scheme == .dark ? strong.dark : strong.light
+        HStack(spacing: 10) {
+            Button {
+                tapGuard.run(setDone)
+            } label: {
+                Label(tr("Série faite"), systemImage: "checkmark.circle.fill")
+                    .font(.headline)
+                    .foregroundStyle(Color.readableInk(on: hex))
+                    .padding(.horizontal, 22)
+                    .frame(minHeight: 50)
+                    .background(Color(hex: hex), in: Capsule())
+                    .shadow(color: Color.black.opacity(0.22), radius: 10, y: 5)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("fitness-set-done")
+            side
         }
     }
 
-    /// A row of a Premium feature: the small Premium badge before the chevron while the person is not Premium.
-    private func premiumRow(symbol: String, title: String, detail: String?) -> some View {
-        HStack(spacing: 8) {
-            MiniRow(symbol: symbol, colorHex: accentHex, title: title, detail: detail, showsChevron: false)
-            if !model.isPremium {
-                PremiumBadge(compact: true)
+    /// The rest (counting down, with its pause or resume), or a way back to the session.
+    @ViewBuilder private var side: some View {
+        if let rest = session.restEndsAt {
+            HStack(spacing: 4) {
+                TimelineView(.periodic(from: Date(), by: 1)) { context in
+                    Group {
+                        if rest > context.date {
+                            Label {
+                                Text(timerInterval: context.date...rest, countsDown: true).monospacedDigit()
+                            } icon: {
+                                Image(systemName: "hourglass")
+                            }
+                        } else {
+                            Label(tr("Prêt"), systemImage: "checkmark.circle")
+                        }
+                    }
+                    .font(.headline)
+                    .foregroundStyle(Color.primary)
+                }
+                Button {
+                    model.update(\.fitness) { $0.pauseRest(at: Date()) }
+                } label: {
+                    Image(systemName: "pause.fill")
+                        .foregroundStyle(Color.primary)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text(tr("Mettre le repos en pause")))
+                .accessibilityIdentifier("fitness-rest-pause")
             }
-            Image(systemName: "chevron.right")
-                .font(.caption.weight(.bold))
-                .foregroundStyle(.tertiary)
+            .padding(.leading, 16)
+            .padding(.trailing, 6)
+            .frame(minHeight: 50)
+            .cristalGlass(in: Capsule())
+            .shadow(color: Color.black.opacity(0.12), radius: 8, y: 4)
+        } else if let paused = session.restPausedRemaining {
+            HStack(spacing: 4) {
+                Label(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)), systemImage: "pause.circle")
+                    .font(.headline)
+                    .foregroundStyle(Color.primary)
+                    .monospacedDigit()
+                Button {
+                    model.update(\.fitness) { $0.resumeRest(at: Date()) }
+                } label: {
+                    Image(systemName: "play.fill")
+                        .foregroundStyle(Color.primary)
+                        .frame(width: 44, height: 44)
+                        .contentShape(Rectangle())
+                }
+                .accessibilityLabel(Text(tr("Reprendre")))
+                .accessibilityIdentifier("fitness-rest-resume")
+            }
+            .padding(.leading, 16)
+            .padding(.trailing, 6)
+            .frame(minHeight: 50)
+            .cristalGlass(in: Capsule())
+            .shadow(color: Color.black.opacity(0.12), radius: 8, y: 4)
+        } else {
+            Button {
+                tapGuard.run(open)
+            } label: {
+                Label(tr("Séance"), systemImage: "arrow.right")
+                    .font(.headline)
+                    .foregroundStyle(Color.primary)
+                    .padding(.horizontal, 20)
+                    .frame(minHeight: 50)
+                    .cristalGlass(in: Capsule())
+                    .shadow(color: Color.black.opacity(0.12), radius: 8, y: 4)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("fitness-resume")
         }
-        .contentShape(Rectangle())
     }
 }
 

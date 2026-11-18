@@ -341,6 +341,20 @@ struct FitnessSessionPage: View {
                     Image(systemName: "pause.fill")
                 }
                 .accessibilityLabel(Text(tr("Mettre le repos en pause")))
+                Button {
+                    model.update(\.fitness) { $0.adjustRest(by: -15, at: Date()) }
+                } label: {
+                    Text(verbatim: "− 15 s")
+                }
+                .font(.subheadline.weight(.semibold))
+                .accessibilityLabel(Text(tr("Raccourcir le repos de 15 secondes")))
+                Button {
+                    model.update(\.fitness) { $0.adjustRest(by: 15, at: Date()) }
+                } label: {
+                    Text(verbatim: "+ 15 s")
+                }
+                .font(.subheadline.weight(.semibold))
+                .accessibilityLabel(Text(tr("Allonger le repos de 15 secondes")))
                 Button(tr("Passer le repos")) {
                     model.update(\.fitness) { $0.skipRest() }
                 }

@@ -83,6 +83,11 @@ struct FitnessProgramPage: View {
                     Label(tr("Nouvelle séance"), systemImage: "plus.circle.fill")
                 }
                 .accessibilityIdentifier("program-new")
+                // A session without a plan: the session page offers « Séance libre » (exercises added as you go).
+                NavigationLink(value: HomeRoute.page(.fitnessSession)) {
+                    Label(tr("Séance libre"), systemImage: "sparkles")
+                }
+                .accessibilityIdentifier("program-free")
             } header: {
                 Text(tr("Mes séances"))
             }
@@ -299,6 +304,13 @@ struct FitnessProgressPage: View {
                         .card()
                 } else {
                     VStack(alignment: .leading, spacing: 22) {
+                        let streak = FitnessMath.weekStreak(state, until: Date())
+                        if streak >= 1 {
+                            Label(Fmt.plural(streak, tr("semaine de suite à l'objectif"), tr("semaines de suite à l'objectif")), systemImage: "flame.fill")
+                                .font(.headline)
+                                .foregroundStyle(palette.fitnessText)
+                                .accessibilityIdentifier("progress-streak")
+                        }
                         VStack(alignment: .leading, spacing: 10) {
                             MiniSectionTitle(title: tr("Volume par semaine"))
                             Chart {
