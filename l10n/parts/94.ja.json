@@ -1,0 +1,20 @@
+{
+ "%@ kcal / 100 g": "%@ kcal / 100 g",
+ "%@ mangées sur %@ kcal": "%2$@ kcal 中 %1$@ 摂取",
+ "%@%@ %@ en 7 jours": "%@%@ %@(7日間)",
+ "Ajoute ton poids : la courbe et ton plan se construisent à partir de là.": "体重を追加してください。グラフとプランはそこから作られます。",
+ "Ajouter une pesée": "体重を記録",
+ "Aller plus loin": "さらに詳しく",
+ "Aucun favori. Glisse un aliment de ton repas vers la gauche pour l'ajouter ici.": "お気に入りはまだありません。食事の食品を左にスワイプすると、ここに追加できます。",
+ "Calories, nutriments et poids": "カロリー、栄養素、体重",
+ "Cette semaine : %@ sur %@ dans l'objectif": "今週: %2$@ 日中 %1$@ 日が目標内",
+ "Code-barres": "バーコード",
+ "Glisse un aliment vers la gauche pour le retirer de ce repas.": "食品を左にスワイプすると、この食事から外せます。",
+ "Ma bibliothèque": "マイライブラリ",
+ "Objectif : %@ kcal par jour": "目標: 1日 %@ kcal",
+ "Objectif : %@ kcal par jour, depuis le %@": "目標: 1日 %@ kcal(%@ から)",
+ "Pas encore de pesée": "まだ体重の記録がありません",
+ "Plat": "料理",
+ "favori": "お気に入り",
+ "favoris": "お気に入り"
+}

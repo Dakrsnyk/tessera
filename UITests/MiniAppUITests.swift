@@ -148,7 +148,7 @@ final class MiniAppUITests: XCTestCase {
     func testNutritionPagesOpenAndComeBack() {
         launch(["-screenshotScreen", "app-nutrition"])
         XCTAssertTrue(app.otherElements["nutrition-hero"].waitForExistence(timeout: 12), "Mini-app Nutrition absente")
-        for (identifier, title) in [("nutrition-nutrients", "Nutriments"), ("nutrition-saved", "Mes repas"), ("nutrition-history", "Historique")] {
+        for (identifier, title) in [("nutrition-review", "Bilan"), ("nutrition-library", "Ma bibliothèque")] {
             tap(app.buttons[identifier], title)
             XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
             snapshot(identifier)

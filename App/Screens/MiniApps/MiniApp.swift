@@ -84,6 +84,9 @@ enum MiniAppPage: Hashable {
     case nutritionIdeas
     case nutritionHistory
     case nutritionSavedMeals
+    /// « Bilan » (calories, nutrients, weight) and « Ma bibliothèque » (favorites, saved meals, personal foods).
+    case nutritionReview(Date)
+    case nutritionLibrary
     case fitnessSession
     case fitnessProgram
     case fitnessLibrary
@@ -175,6 +178,8 @@ struct MiniAppPageView: View {
         case .nutritionIdeas: NutritionIdeasPage()
         case .nutritionHistory: NutritionHistoryPage()
         case .nutritionSavedMeals: NutritionSavedMealsPage()
+        case let .nutritionReview(day): NutritionReviewPage(day: day)
+        case .nutritionLibrary: NutritionLibraryPage()
         case .fitnessSession: FitnessSessionPage()
         case .fitnessProgram: FitnessProgramPage()
         case .fitnessLibrary: ExerciseLibraryPage()

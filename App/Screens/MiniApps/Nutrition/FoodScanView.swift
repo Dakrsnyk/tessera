@@ -273,6 +273,15 @@ struct FoodScanView: View {
                 }
             }
             .padding(.horizontal, 28)
+            // The two ways of the camera, named: the barcode is read by itself, the dish by the round button.
+            HStack(spacing: 14) {
+                Label(tr("Code-barres"), systemImage: "barcode.viewfinder")
+                Label(tr("Plat"), systemImage: "fork.knife")
+            }
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(Color.white.opacity(0.9))
+            .shadow(color: .black.opacity(0.5), radius: 3, y: 1)
+            .accessibilityElement(children: .combine)
             Text(flashNotice ?? tr("Photographier le plat"))
                 .font(.footnote.weight(.semibold))
                 .foregroundStyle(Color.white)

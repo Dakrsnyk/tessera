@@ -1,0 +1,20 @@
+{
+ "%@ kcal / 100 g": "%@ kcal / 100 g",
+ "%@ mangées sur %@ kcal": "%1$@ comidas de %2$@ kcal",
+ "%@%@ %@ en 7 jours": "%@%@ %@ en 7 días",
+ "Ajoute ton poids : la courbe et ton plan se construisent à partir de là.": "Añade tu peso: la curva y tu plan se construyen a partir de ahí.",
+ "Ajouter une pesée": "Añadir un pesaje",
+ "Aller plus loin": "Ir más lejos",
+ "Aucun favori. Glisse un aliment de ton repas vers la gauche pour l'ajouter ici.": "Aún no hay favoritos. Desliza un alimento de tu comida hacia la izquierda para añadirlo aquí.",
+ "Calories, nutriments et poids": "Calorías, nutrientes y peso",
+ "Cette semaine : %@ sur %@ dans l'objectif": "Esta semana: %@ de %@ dentro del objetivo",
+ "Code-barres": "Código de barras",
+ "Glisse un aliment vers la gauche pour le retirer de ce repas.": "Desliza un alimento hacia la izquierda para quitarlo de esta comida.",
+ "Ma bibliothèque": "Mi biblioteca",
+ "Objectif : %@ kcal par jour": "Objetivo: %@ kcal al día",
+ "Objectif : %@ kcal par jour, depuis le %@": "Objetivo: %@ kcal al día, desde el %@",
+ "Pas encore de pesée": "Aún no hay pesajes",
+ "Plat": "Plato",
+ "favori": "favorito",
+ "favoris": "favoritos"
+}

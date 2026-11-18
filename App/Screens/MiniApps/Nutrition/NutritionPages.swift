@@ -259,6 +259,8 @@ struct EntryEditor: View {
 /// macronutrients are free; the other nutrients are Premium (their values are kept either way).
 struct NutritionNutrientsPage: View {
     let day: Date
+    /// Inside « Bilan »: no title of its own.
+    var embedded = false
     @Environment(AppModel.self) private var model
     @Environment(\.appStyle) private var style
     private var palette: CristalPalette { CristalPalette.of(style.id) }
@@ -313,7 +315,7 @@ struct NutritionNutrientsPage: View {
             }
         }
         .styledList()
-        .navigationTitle(tr("Nutriments"))
+        .navigationTitle(embedded ? tr("Bilan") : tr("Nutriments"))
         .navigationBarTitleDisplayMode(.inline)
         // Targets added by an update follow the calculation at once.
         .onAppear { model.followCalculatedNutritionGoals() }
@@ -487,6 +489,10 @@ struct NutritionHistoryPage: View {
         }
     }
 
+    /// Inside « Bilan » (its own title and segments): no title of its own. `showsWeek`: the free week of `day` on top.
+    var embedded = false
+    var showsWeek = false
+    var day = Date()
     @Environment(AppModel.self) private var model
     @State private var period: Period = .week
     @State private var customStart = DateMath.calendar.date(byAdding: .day, value: -13, to: Date()) ?? Date()
@@ -511,6 +517,16 @@ struct NutritionHistoryPage: View {
     }
 
     var body: some View {
+        if embedded {
+            scroll
+        } else {
+            scroll
+                .navigationTitle(tr("Historique"))
+                .navigationBarTitleDisplayMode(.large)
+        }
+    }
+
+    @ViewBuilder private var scroll: some View {
         let bounds = range
         let state = model.nutrition
         let stats = NutritionMath.stats(state, from: bounds.0, to: bounds.1)
@@ -522,6 +538,10 @@ struct NutritionHistoryPage: View {
             }
             .pickerStyle(.segmented)
             .accessibilityIdentifier("history-period")
+            // The week stays free: shown while the periods below are a day or locked.
+            if showsWeek && (!model.isPremium || period == .today || period == .yesterday) {
+                NutritionWeekCard(day: day)
+            }
             if period == .custom && model.isPremium {
                 VStack(spacing: 8) {
                     DatePicker(tr("Du"), selection: $customStart, in: ...Date(), displayedComponents: .date)
@@ -543,15 +563,13 @@ struct NutritionHistoryPage: View {
                 }
                 macroSplit(stats.averages)
                 if weights.count >= 2 {
-                    weightChart(weights)
+                    NutritionWeightChart(points: weights)
                 }
                 if stats.days.count > 1 {
                     dayList(stats)
                 }
             }
         }
-        .navigationTitle(tr("Historique"))
-        .navigationBarTitleDisplayMode(.large)
         .onAppear { if !model.isPremium && period == .week { period = .today } }
     }
 
@@ -633,11 +651,39 @@ struct NutritionHistoryPage: View {
         }
     }
 
-    private func weightChart(_ weights: [ValuePoint]) -> some View {
+    private func dayList(_ stats: NutritionMath.PeriodStats) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Jour par jour"))
+            MiniRowsCard {
+                let days = Array(zip(stats.days, stats.kcalPerDay).reversed().prefix(31))
+                ForEach(Array(days.enumerated()), id: \.offset) { index, pair in
+                    NavigationLink(value: HomeRoute.page(.nutritionDay(pair.0))) {
+                        MiniRow(symbol: "calendar", colorHex: accentHex, title: Fmt.shortDay(pair.0), detail: pair.1 > 0 ? nil : tr("Rien de noté"), value: pair.1 > 0 ? tr("\(TF.int(pair.1)) kcal") : nil)
+                    }
+                    .buttonStyle(.pressable)
+                    if index < days.count - 1 { MiniDivider() }
+                }
+            }
+        }
+    }
+}
+
+/// The weight curve of a period (saved in kg, shown in the chosen unit), with the target of the weight goal as a
+/// line and the 7-day average as a smoother curve.
+struct NutritionWeightChart: View {
+    let points: [ValuePoint]
+    @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
+    private var accentHex: String { MiniApp.nutrition.colorHex }
+
+    var body: some View { chart }
+
+    private var chart: some View {
         // Saved in kg; shown in the chosen unit.
         let system = model.settings.unitSystem
-        let kilograms = weights
-        let weights = weights.map { ValuePoint(date: $0.date, value: Units.weightValue(kilograms: $0.value, in: system)) }
+        let kilograms = points
+        let weights = points.map { ValuePoint(date: $0.date, value: Units.weightValue(kilograms: $0.value, in: system)) }
         // With a weight goal: its target as a line, and the 7-day average as a smoother curve.
         var plannedTarget: Double?
         if let plan = model.activeWeightPlan {
@@ -689,22 +735,6 @@ struct NutritionHistoryPage: View {
             Text(tr("Le poids vient de « Mes informations » : chaque nouvelle valeur s'ajoute ici."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
-        }
-    }
-
-    private func dayList(_ stats: NutritionMath.PeriodStats) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Jour par jour"))
-            MiniRowsCard {
-                let days = Array(zip(stats.days, stats.kcalPerDay).reversed().prefix(31))
-                ForEach(Array(days.enumerated()), id: \.offset) { index, pair in
-                    NavigationLink(value: HomeRoute.page(.nutritionDay(pair.0))) {
-                        MiniRow(symbol: "calendar", colorHex: accentHex, title: Fmt.shortDay(pair.0), detail: pair.1 > 0 ? nil : tr("Rien de noté"), value: pair.1 > 0 ? tr("\(TF.int(pair.1)) kcal") : nil)
-                    }
-                    .buttonStyle(.pressable)
-                    if index < days.count - 1 { MiniDivider() }
-                }
-            }
         }
     }
 }
@@ -776,5 +806,352 @@ struct NutritionSavedMealsPage: View {
         .sheet(item: $logged) { meal in
             SavedMealLogSheet(saved: meal)
         }
+    }
+}
+
+// MARK: - The calories of the week
+
+/// The calories of the week of a day, one bar a day (the chosen one in full color), then the average and the days
+/// on target. Free: the week was on the Nutrition page before it moved into « Bilan ».
+struct NutritionWeekCard: View {
+    let day: Date
+    @Environment(AppModel.self) private var model
+
+    private var accentHex: String { MiniApp.nutrition.colorHex }
+
+    var body: some View {
+        let state = model.nutrition
+        let known = NutritionTiles.Targets(model.profile)
+        let week = DateMath.week(containing: day)
+        let stats = Self.stats(state, week)
+        let values = week.map { NutritionMath.totals(state, on: $0).kcal }
+        VStack(alignment: .leading, spacing: 10) {
+            MiniSectionTitle(title: tr("Calories de la semaine"))
+            VStack(alignment: .leading, spacing: 12) {
+                WeekBars(values: values, days: week, goal: known.kcal ? state.goals.kcal : nil, colorHex: accentHex,
+                         highlighted: week.firstIndex { DateMath.isSameDay($0, day) })
+                    .frame(height: 70)
+                Text(Self.text(stats, known: known, empty: tr("Rien de noté cette semaine.")))
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            .padding(16)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .miniCard()
+        }
+    }
+
+    /// The days of the week up to today.
+    static func stats(_ state: NutritionState, _ week: [Date]) -> NutritionMath.PeriodStats {
+        let now = Date()
+        let start = week.first ?? now
+        let end = min(week.last ?? now, now)
+        return NutritionMath.stats(state, from: start, to: max(start, end))
+    }
+
+    static func text(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets, empty: String) -> String {
+        guard stats.trackedDays > 0 else { return empty }
+        let average = tr("Moyenne \(TF.int(stats.averages.kcal)) kcal")
+        guard known.kcal else { return tr("\(average) sur \(Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours notés"))).") }
+        return tr("\(average) · \(Fmt.plural(stats.daysOnTarget, tr("jour"), tr("jours"))) sur \(stats.trackedDays) dans l'objectif")
+    }
+}
+
+// MARK: - Review
+
+/// « Bilan »: one page, three segments, for what the old pages held apart: « Calories » (the week, the periods,
+/// the averages: the history), « Nutriments » (every nutrient of the day) and « Poids ». The locks of Premium are the
+/// ones of the pages inside.
+struct NutritionReviewPage: View {
+    enum Segment: String, CaseIterable, Identifiable {
+        case calories, nutrients, weight
+        var id: String { rawValue }
+
+        var title: String {
+            switch self {
+            case .calories: tr("Calories")
+            case .nutrients: tr("Nutriments")
+            case .weight: tr("Poids")
+            }
+        }
+    }
+
+    var day = Date()
+    @State private var segment: Segment = .calories
+    @Environment(\.appStyle) private var style
+    private var palette: CristalPalette { CristalPalette.of(style.id) }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Picker(tr("Bilan"), selection: $segment) {
+                ForEach(Segment.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 8)
+            .accessibilityIdentifier("review-segment")
+            switch segment {
+            case .calories: NutritionHistoryPage(embedded: true, showsWeek: true, day: day)
+            case .nutrients: NutritionNutrientsPage(day: day, embedded: true)
+            case .weight: NutritionWeightSegment()
+            }
+        }
+        .cristalScreen()
+        .tint(palette.strong(MiniApp.nutrition.colorHex))
+        .navigationTitle(tr("Bilan"))
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+/// The weight segment of « Bilan »: the weight now and its change over 7 days, the curve of 30 days (Premium, as in the
+/// history), the recap of the weight goal, the calorie goal and since when it holds.
+struct NutritionWeightSegment: View {
+    @Environment(AppModel.self) private var model
+    @State private var showsInfo = false
+
+    var body: some View {
+        let now = Date()
+        let start = DateMath.calendar.date(byAdding: .day, value: -29, to: now) ?? now
+        let weights = model.profile.weights(from: start, to: now)
+        let state = model.nutrition
+        let known = NutritionTiles.Targets(model.profile)
+        MiniAppScroll {
+            if let last = weights.last {
+                MiniHero(label: tr("Poids"), value: weightText(last.value), caption: changeText(weights, now: now))
+                    .accessibilityIdentifier("review-weight")
+            } else {
+                EmptyStateView(symbol: "scalemass", title: tr("Pas encore de pesée"), message: tr("Ajoute ton poids : la courbe et ton plan se construisent à partir de là."))
+                    .card()
+            }
+            if !model.isPremium {
+                PremiumLockCard(symbol: "chart.line.uptrend.xyaxis", title: tr("L'historique détaillé est dans Premium"),
+                                message: tr("7 jours, 30 jours ou la période de ton choix : moyennes, tendances, répartition des macros et poids. Tes repas restent enregistrés : tout s'affiche dès que tu passes à Premium."))
+            } else if weights.count >= 2 {
+                NutritionWeightChart(points: weights)
+            }
+            WeightPlanSummaryView()
+            if known.kcal {
+                Label(goalText(state), systemImage: "target")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .accessibilityIdentifier("review-goal-since")
+            }
+            Button {
+                showsInfo = true
+            } label: {
+                Label(tr("Ajouter une pesée"), systemImage: "plus")
+                    .font(.subheadline.weight(.semibold))
+                    .frame(maxWidth: .infinity, minHeight: 44)
+            }
+            .buttonStyle(.bordered)
+            .accessibilityIdentifier("review-add-weight")
+        }
+        .sheet(isPresented: $showsInfo) { MiniAppInfoSheet(app: .nutrition) }
+    }
+
+    private func weightText(_ kilograms: Double) -> String {
+        let system = model.settings.unitSystem
+        return "\(TF.decimal(Units.weightValue(kilograms: kilograms, in: system), 1)) \(system.weightUnit)"
+    }
+
+    /// « −0,5 kg en 7 jours »: the last weight against the first of the last 7 days (nothing with a single weight).
+    private func changeText(_ weights: [ValuePoint], now: Date) -> String? {
+        let weekAgo = DateMath.startOfDay(DateMath.calendar.date(byAdding: .day, value: -6, to: now) ?? now)
+        let recent = weights.filter { $0.date >= weekAgo }
+        guard recent.count >= 2, let first = recent.first, let last = recent.last else { return nil }
+        let system = model.settings.unitSystem
+        let change = Units.weightValue(kilograms: last.value, in: system) - Units.weightValue(kilograms: first.value, in: system)
+        return tr("\(change >= 0 ? "+" : "−")\(TF.decimal(abs(change), 1)) \(system.weightUnit) en 7 jours")
+    }
+
+    /// « Objectif : 2 200 kcal par jour, depuis le 5 nov. »: the date only once the app has seen the goal change.
+    private func goalText(_ state: NutritionState) -> String {
+        guard let since = state.kcalGoalSince else { return tr("Objectif : \(TF.int(state.goals.kcal)) kcal par jour") }
+        return tr("Objectif : \(TF.int(state.goals.kcal)) kcal par jour, depuis le \(Fmt.format(since, template: "dMMM"))")
+    }
+}
+
+// MARK: - Library
+
+/// « Ma bibliothèque »: what the person keeps, in three titled sections: the favorites, the saved meals (to add to the
+/// day or to change) and the personal foods (only when there are some).
+struct NutritionLibraryPage: View {
+    @Environment(AppModel.self) private var model
+    @State private var logged: SavedMeal?
+    @State private var editing: SavedMeal?
+    @State private var showsCustomFoods = false
+
+    private var accentHex: String { MiniApp.nutrition.colorHex }
+
+    var body: some View {
+        let state = model.nutrition
+        MiniAppScroll {
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: tr("Favoris"), detail: state.favorites.isEmpty ? nil : "\(state.favorites.count)")
+                if state.favorites.isEmpty {
+                    Text(tr("Aucun favori. Glisse un aliment de ton repas vers la gauche pour l'ajouter ici."))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                } else {
+                    MiniRowsCard {
+                        ForEach(Array(state.favorites.enumerated()), id: \.element.id) { index, food in
+                            HStack(spacing: 8) {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(food.displayName).font(.body.weight(.medium)).lineLimit(1)
+                                    Text(FoodText.summary(food)).font(.caption).foregroundStyle(.secondary).lineLimit(1)
+                                }
+                                Spacer(minLength: 8)
+                                Button(tr("Retirer")) {
+                                    model.update(\.nutrition) { $0.toggleFavorite(food) }
+                                }
+                                .font(.subheadline.weight(.semibold))
+                                .buttonStyle(.pressable)
+                                .accessibilityIdentifier("library-unfavorite")
+                            }
+                            .padding(.vertical, 10)
+                            if index < state.favorites.count - 1 { MiniDivider() }
+                        }
+                    }
+                }
+            }
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: tr("Mes repas"), detail: state.savedMeals.isEmpty ? nil : "\(state.savedMeals.count)")
+                if state.savedMeals.isEmpty {
+                    Text(tr("Aucun repas enregistré. Ouvre un repas de ta journée et touche « Enregistrer ce repas » : il sera ici, prêt à reprendre d'une touche."))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                } else {
+                    MiniRowsCard {
+                        ForEach(Array(state.savedMeals.enumerated()), id: \.element.id) { index, meal in
+                            savedRow(meal)
+                            if index < state.savedMeals.count - 1 { MiniDivider() }
+                        }
+                    }
+                }
+            }
+            if !state.customFoods.isEmpty {
+                VStack(alignment: .leading, spacing: 10) {
+                    MiniSectionTitle(title: tr("Mes aliments"), detail: "\(state.customFoods.count)")
+                    MiniRowsCard {
+                        Button {
+                            showsCustomFoods = true
+                        } label: {
+                            VStack(alignment: .leading, spacing: 0) {
+                                ForEach(Array(state.customFoods.enumerated()), id: \.element.id) { index, food in
+                                    HStack {
+                                        Text(food.displayName).font(.body.weight(.medium)).foregroundStyle(.primary).lineLimit(1)
+                                        Spacer(minLength: 8)
+                                        Text(tr("\(TF.int(food.kcal)) kcal / 100 g")).font(.subheadline).foregroundStyle(.secondary).monospacedDigit()
+                                    }
+                                    .padding(.vertical, 10)
+                                    if index < state.customFoods.count - 1 { MiniDivider() }
+                                }
+                            }
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.pressable)
+                        .accessibilityIdentifier("nutrition-custom-foods")
+                    }
+                    Text(tr("Corriger ou supprimer tes aliments personnels"))
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .navigationTitle(tr("Ma bibliothèque"))
+        .navigationBarTitleDisplayMode(.large)
+        .sheet(item: $logged) { SavedMealLogSheet(saved: $0) }
+        .sheet(item: $editing) { SavedMealEditor(saved: $0) }
+        .sheet(isPresented: $showsCustomFoods) { CustomFoodsView() }
+    }
+
+    private func savedRow(_ meal: SavedMeal) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text(meal.name).font(.body.weight(.medium)).lineLimit(1)
+                Spacer(minLength: 8)
+                Text(tr("\(TF.int(meal.totals.kcal)) kcal")).font(.subheadline).foregroundStyle(.secondary).monospacedDigit()
+            }
+            Text(meal.items.map { $0.food.name }.joined(separator: ", "))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(2)
+            HStack(spacing: 16) {
+                Button {
+                    logged = meal
+                } label: {
+                    Label(tr("Ajouter à ma journée"), systemImage: "plus.circle.fill")
+                }
+                .accessibilityIdentifier("library-log")
+                Button {
+                    editing = meal
+                } label: {
+                    Label(tr("Modifier"), systemImage: "pencil")
+                }
+                .accessibilityIdentifier("library-edit")
+            }
+            .font(.subheadline.weight(.semibold))
+            .buttonStyle(.pressable)
+            .padding(.top, 2)
+        }
+        .padding(.vertical, 10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
+/// Changes a saved meal: its name, the quantity of each food, and which foods it keeps (swipe to remove one). Adding
+/// a new food is done from a day: log it, then « Enregistrer ce repas ».
+struct SavedMealEditor: View {
+    private struct Row: Identifiable {
+        let id = UUID()
+        let food: FoodItem
+        var grams: Double
+    }
+
+    let saved: SavedMeal
+    @Environment(AppModel.self) private var model
+    @Environment(\.dismiss) private var dismiss
+    @State private var name = ""
+    @State private var rows: [Row] = []
+
+    var body: some View {
+        SheetForm(title: saved.name, canSave: !rows.isEmpty && rows.allSatisfy { $0.grams > 0 }, onSave: save) {
+            Section(tr("Nom")) {
+                TextField(tr("Nom"), text: $name)
+                    .accessibilityIdentifier("saved-meal-name")
+            }
+            Section {
+                ForEach($rows) { $row in
+                    NumberRow(title: row.food.name, value: $row.grams, unit: "g")
+                }
+                .onDelete { rows.remove(atOffsets: $0) }
+            } header: {
+                Text(tr("Aliments"))
+            } footer: {
+                Text(tr("Glisse un aliment vers la gauche pour le retirer de ce repas."))
+            }
+            Section {
+                Button(role: .destructive) {
+                    let id = saved.id
+                    model.update(\.nutrition) { $0.savedMeals.removeAll { $0.id == id } }
+                    dismiss()
+                } label: {
+                    Label(tr("Supprimer ce repas"), systemImage: "trash")
+                }
+            }
+        }
+        .onAppear {
+            guard rows.isEmpty else { return }
+            name = saved.name
+            rows = saved.items.map { Row(food: $0.food, grams: $0.grams) }
+        }
+    }
+
+    private func save() {
+        let id = saved.id
+        let newName = name
+        let items = rows.map { SavedMeal.Item(food: $0.food, grams: $0.grams) }
+        model.update(\.nutrition) { $0.updateSavedMeal(id, name: newName, items: items) }
+        Haptics.success()
     }
 }

@@ -702,8 +702,12 @@ struct NutritionState: Codable, Hashable {
     var mealMemory = MealMemory()
     /// Dish analyses (photos) started on a free plan; see `PhotoScanQuota`. Old data without it counts 0.
     var photoScansUsed = 0
+    /// The calorie goal the app last saw, and the day it was seen to change (« depuis le … » in the weight view).
+    /// Both stay nil until a change is seen: the first goal is not dated, the app never invents a date.
+    var kcalGoalSeen: Double?
+    var kcalGoalSince: Date?
 
-    enum CodingKeys: String, CodingKey { case goals, entries, favorites, customFoods, recentFoods, savedMeals, scanLearning, mealMemory, photoScansUsed }
+    enum CodingKeys: String, CodingKey { case goals, entries, favorites, customFoods, recentFoods, savedMeals, scanLearning, mealMemory, photoScansUsed, kcalGoalSeen, kcalGoalSince }
 
     init() {}
 
@@ -718,6 +722,37 @@ struct NutritionState: Codable, Hashable {
         scanLearning = c.value(.scanLearning, ScanLearning())
         mealMemory = c.value(.mealMemory, MealMemory())
         photoScansUsed = max(0, c.value(.photoScansUsed, 0))
+        kcalGoalSeen = c.optional(.kcalGoalSeen)
+        kcalGoalSince = c.optional(.kcalGoalSince)
+    }
+
+    /// Notes the day the calorie goal changed: the first time only remembers the goal (no date), a later
+    /// different goal is dated `now`. True when something was updated.
+    @discardableResult
+    mutating func trackGoalChange(now: Date = Date()) -> Bool {
+        guard let seen = kcalGoalSeen else {
+            kcalGoalSeen = goals.kcal
+            return true
+        }
+        guard abs(seen - goals.kcal) >= 0.5 else { return false }
+        kcalGoalSeen = goals.kcal
+        kcalGoalSince = now
+        return true
+    }
+
+    /// A saved meal renamed and/or with other foods; false (nothing changed) when it is gone or no food is left.
+    @discardableResult
+    mutating func updateSavedMeal(_ id: UUID, name: String, items: [SavedMeal.Item]) -> Bool {
+        guard let index = savedMeals.firstIndex(where: { $0.id == id }) else { return false }
+        let kept = items.compactMap { item -> SavedMeal.Item? in
+            guard let grams = Self.safeGrams(item.grams) else { return nil }
+            return SavedMeal.Item(food: item.food, grams: grams)
+        }
+        guard !kept.isEmpty else { return false }
+        let trimmed = name.trimmed
+        savedMeals[index].name = trimmed.isEmpty ? savedMeals[index].name : trimmed
+        savedMeals[index].items = kept
+        return true
     }
 
     /// The quantity limits, in grams (the same as the scan summary): typed or stored, a quantity is kept inside.

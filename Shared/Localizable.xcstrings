@@ -659,100 +659,6 @@
         }
       }
     },
-    " · sodium %@ mg": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · Natrium %@ mg"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · sodium %@ mg"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · sodio %@ mg"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · sodium %@ mg"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · sodio %@ mg"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · ナトリウム %@ mg"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · sódio %@ mg"
-          }
-        }
-      }
-    },
-    " · sucres %@ g": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · Zucker %@ g"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · sugars %@ g"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · azúcares %@ g"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · sucres %@ g"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · zuccheri %@ g"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · 糖類 %@ g"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": " · açúcares %@ g"
-          }
-        }
-      }
-    },
     "$ US": {
       "extractionState": "manual",
       "localizations": {
@@ -5218,6 +5124,53 @@
         }
       }
     },
+    "%@ kcal / 100 g": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal / 100 g"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal / 100 g"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal / 100 g"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal / 100 g"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal / 100 g"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal / 100 g"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ kcal / 100 g"
+          }
+        }
+      }
+    },
     "%@ kcal / 100 g · P %@ · G %@ · L %@": {
       "extractionState": "manual",
       "localizations": {
@@ -5872,6 +5825,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ m"
+          }
+        }
+      }
+    },
+    "%@ mangées sur %@ kcal": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ von %2$@ kcal gegessen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ eaten of %@ kcal"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ comidas de %2$@ kcal"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ mangées sur %@ kcal"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ mangiate su %@ kcal"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ kcal 中 %1$@ 摂取"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ consumidas de %@ kcal"
           }
         }
       }
@@ -10149,6 +10149,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ → %@ kcal por dia"
+          }
+        }
+      }
+    },
+    "%@%@ %@ en 7 jours": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ %@ in 7 Tagen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ %@ in 7 days"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ %@ en 7 días"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ %@ en 7 jours"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ %@ in 7 giorni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ %@(7日間)"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@%@ %@ em 7 dias"
           }
         }
       }
@@ -20916,6 +20963,53 @@
         }
       }
     },
+    "Ajoute ton poids : la courbe et ton plan se construisent à partir de là.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage dein Gewicht ein: Die Kurve und dein Plan entstehen daraus."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your weight: the curve and your plan are built from there."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade tu peso: la curva y tu plan se construyen a partir de ahí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute ton poids : la courbe et ton plan se construisent à partir de là."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi il tuo peso: la curva e il tuo piano nascono da lì."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "体重を追加してください。グラフとプランはそこから作られます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione seu peso: a curva e seu plano nascem daí."
+          }
+        }
+      }
+    },
     "Ajoute ton poids dans « Mes informations » pour estimer tes calories brûlées.": {
       "extractionState": "manual",
       "localizations": {
@@ -23078,6 +23172,53 @@
         }
       }
     },
+    "Ajouter une pesée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wiegung hinzufügen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a weigh-in"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añadir un pesaje"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajouter une pesée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi una pesata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "体重を記録"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicionar uma pesagem"
+          }
+        }
+      }
+    },
     "Ajouter une plage": {
       "extractionState": "manual",
       "localizations": {
@@ -24484,6 +24625,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alemanha"
+          }
+        }
+      }
+    },
+    "Aller plus loin": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter gehen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go further"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ir más lejos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aller plus loin"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vai oltre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "さらに詳しく"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ir além"
           }
         }
       }
@@ -33132,6 +33320,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nenhum favorito"
+          }
+        }
+      }
+    },
+    "Aucun favori. Glisse un aliment de ton repas vers la gauche pour l'ajouter ici.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Favoriten. Wische ein Lebensmittel deiner Mahlzeit nach links, um es hier hinzuzufügen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No favorites yet. Swipe a food of your meal to the left to add it here."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay favoritos. Desliza un alimento de tu comida hacia la izquierda para añadirlo aquí."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun favori. Glisse un aliment de ton repas vers la gauche pour l'ajouter ici."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancora nessun preferito. Scorri un alimento del tuo pasto verso sinistra per aggiungerlo qui."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お気に入りはまだありません。食事の食品を左にスワイプすると、ここに追加できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhum favorito ainda. Deslize um alimento da sua refeição para a esquerda para adicioná-lo aqui."
           }
         }
       }
@@ -49022,6 +49257,53 @@
         }
       }
     },
+    "Calories, nutriments et poids": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kalorien, Nährstoffe und Gewicht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calories, nutrients and weight"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorías, nutrientes y peso"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calories, nutriments et poids"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorie, nutrienti e peso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カロリー、栄養素、体重"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Calorias, nutrientes e peso"
+          }
+        }
+      }
+    },
     "Calories, séance et régularité, aux couleurs d'Ardane.": {
       "extractionState": "manual",
       "localizations": {
@@ -54282,6 +54564,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esta semana"
+          }
+        }
+      }
+    },
+    "Cette semaine : %@ sur %@ dans l'objectif": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Woche: %1$@ von %2$@ im Ziel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This week: %@ of %@ on target"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta semana: %@ de %@ dentro del objetivo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette semaine : %@ sur %@ dans l'objectif"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questa settimana: %@ su %@ nell'obiettivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週: %2$@ 日中 %1$@ 日が目標内"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta semana: %@ de %@ dentro da meta"
           }
         }
       }
@@ -60674,6 +61003,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Cockpit"
+          }
+        }
+      }
+    },
+    "Code-barres": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barcode"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Barcode"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Código de barras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Code-barres"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Codice a barre"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バーコード"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Código de barras"
           }
         }
       }
@@ -77359,53 +77735,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pacotes sombrios e misteriosos, inspirados em heróis e nas noites de Halloween. Até 31 de outubro."
-          }
-        }
-      }
-    },
-    "Des repas enregistrés, à reprendre d'une touche": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Gespeicherte Mahlzeiten, mit einem Tipp wieder hinzugefügt"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saved meals, ready to reuse in one tap"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Comidas guardadas, para repetir con un toque"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Des repas enregistrés, à reprendre d'une touche"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pasti salvati, da riprendere con un tocco"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "保存した食事。ワンタップで再利用できます"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Refeições salvas, para retomar com um toque"
           }
         }
       }
@@ -97855,53 +98184,6 @@
         }
       }
     },
-    "Fibres %@ g%@%@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ballaststoffe %1$@ g%2$@%3$@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fiber %1$@ g%2$@%3$@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fibra %1$@ g%2$@%3$@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fibres %@ g%@%@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fibre %1$@ g%2$@%3$@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "食物繊維 %1$@ g%2$@%3$@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fibras %1$@ g%2$@%3$@"
-          }
-        }
-      }
-    },
     "Fibres : 14 g par 1 000 kcal. Sucres et gras saturés : moins de 10 % des calories chacun (OMS). Sodium : moins de 2 300 mg.": {
       "extractionState": "manual",
       "localizations": {
@@ -105559,6 +105841,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Deslize um alimento para a esquerda para adicioná-lo aos favoritos. O widget Adição rápida mostra todos a um toque."
+          }
+        }
+      }
+    },
+    "Glisse un aliment vers la gauche pour le retirer de ce repas.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wische ein Lebensmittel nach links, um es aus dieser Mahlzeit zu entfernen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swipe a food to the left to remove it from this meal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desliza un alimento hacia la izquierda para quitarlo de esta comida."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Glisse un aliment vers la gauche pour le retirer de ce repas."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorri un alimento verso sinistra per toglierlo da questo pasto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食品を左にスワイプすると、この食事から外せます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deslize um alimento para a esquerda para tirá-lo desta refeição."
           }
         }
       }
@@ -137100,6 +137429,53 @@
         }
       }
     },
+    "Ma bibliothèque": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Bibliothek"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My library"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mi biblioteca"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ma bibliothèque"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La mia libreria"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マイライブラリ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minha biblioteca"
+          }
+        }
+      }
+    },
     "Ma citation": {
       "extractionState": "manual",
       "localizations": {
@@ -148427,53 +148803,6 @@
         }
       }
     },
-    "Moyennes, tendances et poids": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Durchschnitte, Trends und Gewicht"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Averages, trends and weight"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Promedios, tendencias y peso"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Moyennes, tendances et poids"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Medie, tendenze e peso"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "平均、傾向、体重"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Médias, tendências e peso"
-          }
-        }
-      }
-    },
     "Mozzarella": {
       "extractionState": "manual",
       "localizations": {
@@ -156370,6 +156699,100 @@
         }
       }
     },
+    "Objectif : %@ kcal par jour": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel: %@ kcal pro Tag"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal: %@ kcal a day"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo: %@ kcal al día"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif : %@ kcal par jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo: %@ kcal al giorno"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標: 1日 %@ kcal"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta: %@ kcal por dia"
+          }
+        }
+      }
+    },
+    "Objectif : %@ kcal par jour, depuis le %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziel: %@ kcal pro Tag, seit dem %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Goal: %@ kcal a day, since %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objetivo: %@ kcal al día, desde el %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Objectif : %@ kcal par jour, depuis le %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Obiettivo: %@ kcal al giorno, dal %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標: 1日 %@ kcal(%@ から)"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meta: %@ kcal por dia, desde %@"
+          }
+        }
+      }
+    },
     "Objectif : %@ par semaine": {
       "extractionState": "manual",
       "localizations": {
@@ -162668,6 +163091,53 @@
         }
       }
     },
+    "Pas encore de pesée": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Wiegung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No weigh-in yet"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aún no hay pesajes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pas encore de pesée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ancora nessuna pesata"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "まだ体重の記録がありません"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nenhuma pesagem ainda"
+          }
+        }
+      }
+    },
     "Pas encore de progression": {
       "extractionState": "manual",
       "localizations": {
@@ -167599,6 +168069,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pastilhas de freio"
+          }
+        }
+      }
+    },
+    "Plat": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gericht"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dish"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plato"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plat"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Piatto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "料理"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prato"
           }
         }
       }
@@ -252998,6 +253515,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "feitos hoje"
+          }
+        }
+      }
+    },
+    "favori": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favorit"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "favorite"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "favorito"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "favori"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "preferito"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お気に入り"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "favorito"
+          }
+        }
+      }
+    },
+    "favoris": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Favoriten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "favorites"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "favoritos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "favoris"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "preferiti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お気に入り"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "favoritos"
           }
         }
       }

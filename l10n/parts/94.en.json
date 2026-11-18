@@ -1,0 +1,20 @@
+{
+ "%@ kcal / 100 g": "%@ kcal / 100 g",
+ "%@ mangées sur %@ kcal": "%@ eaten of %@ kcal",
+ "%@%@ %@ en 7 jours": "%@%@ %@ in 7 days",
+ "Ajoute ton poids : la courbe et ton plan se construisent à partir de là.": "Add your weight: the curve and your plan are built from there.",
+ "Ajouter une pesée": "Add a weigh-in",
+ "Aller plus loin": "Go further",
+ "Aucun favori. Glisse un aliment de ton repas vers la gauche pour l'ajouter ici.": "No favorites yet. Swipe a food of your meal to the left to add it here.",
+ "Calories, nutriments et poids": "Calories, nutrients and weight",
+ "Cette semaine : %@ sur %@ dans l'objectif": "This week: %@ of %@ on target",
+ "Code-barres": "Barcode",
+ "Glisse un aliment vers la gauche pour le retirer de ce repas.": "Swipe a food to the left to remove it from this meal.",
+ "Ma bibliothèque": "My library",
+ "Objectif : %@ kcal par jour": "Goal: %@ kcal a day",
+ "Objectif : %@ kcal par jour, depuis le %@": "Goal: %@ kcal a day, since %@",
+ "Pas encore de pesée": "No weigh-in yet",
+ "Plat": "Dish",
+ "favori": "favorite",
+ "favoris": "favorites"
+}

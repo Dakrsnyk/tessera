@@ -19,8 +19,10 @@ enum NutritionSheet: Identifiable {
     }
 }
 
-/// The Nutrition mini-app: the day at a glance (calories, macros, meals), one main action (add a
-/// food), then everything else one tap away (meals, nutrients, ideas, history, saved meals, goals).
+/// The Nutrition mini-app, short like a day: the week, the ring (what is left, what is eaten, the three macros),
+/// the card « Maintenant » (the next useful thing), the four meals, then two doors, « Bilan » and « Ma bibliothèque »,
+/// and « Mes paramètres ». The two main actions float: « Scanner » and « Rechercher » (one « Ajouter un aliment »
+/// without a camera).
 struct NutritionAppView: View {
     @Environment(AppModel.self) private var model
     @State private var day: Date
@@ -49,23 +51,38 @@ struct NutritionAppView: View {
             // chosen day, calories left and macros, straight on the band.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { weekMark($0, state: state, known: known) })
             // The figure of the day floats on glass, like the essential figure of the other mini-apps.
-            CalorieHero(totals: totals, goals: state.goals, known: known, accentHex: accentHex)
-                .padding(16)
-                .cristalGlass(in: RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
+            VStack(alignment: .leading, spacing: 12) {
+                CalorieHero(totals: totals, goals: state.goals, known: known, accentHex: accentHex)
+                if known.kcal {
+                    Text(tr("\(TF.int(totals.kcal)) mangées sur \(TF.int(state.goals.kcal)) kcal"))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.secondary)
+                        .monospacedDigit()
+                        .accessibilityIdentifier("nutrition-eaten")
+                }
+            }
+            .padding(16)
+            .cristalGlass(in: RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
         } sheet: {
-            // The sheet, by importance: the two actions, the meals, the idea of the moment, the week's
-            // calories, history and saved meals, the note, the settings last.
+            // The sheet, by importance: the goal to set (while it is unknown), the card « Maintenant », the meals,
+            // the two doors, the note, the settings last.
+            if !known.kcal { goalCard }
             MiniAppToFillSection(app: .nutrition)
-            actions
+            if isToday && known.kcal { nowCard(state: state, totals: totals, known: known, hasEntries: !entries.isEmpty) }
             meals(entries: entries)
-            nutrientsRow(totals: totals)
-            if isToday { insight(state: state, known: known, totals: totals, hasEntries: !entries.isEmpty) }
-            weekTrend(state: state, known: known)
-            more(state: state, known: known)
+            doors(state: state, known: known)
             MiniFootnote(text: tr("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL)."))
             MiniAppInfoSection(app: .nutrition)
+            // Room for the floating actions.
+            Color.clear.frame(height: 80)
+        }
+        .overlay(alignment: .bottom) {
+            NutritionFloatingActions(canScan: canScan, colorHex: accentHex,
+                                     scan: { sheet = .scan(day) }, search: { sheet = .search(nil, day) })
+                .padding(.bottom, 12)
         }
         .navigationTitle(tr("Nutrition"))
+        .onAppear { trackGoal(known: known) }
         .onChange(of: scenePhase) { _, phase in
             guard phase == .active else { return }
             if DateMath.isSameDay(day, activeOn), !DateMath.isSameDay(activeOn, Date()) { day = Date() }
@@ -81,23 +98,15 @@ struct NutritionAppView: View {
         }
     }
 
-    // MARK: Main action
-
     private var canScan: Bool { DataScannerViewController.isSupported }
 
-    private var actions: some View {
-        HStack(spacing: 10) {
-            if canScan {
-                MiniActionButton(title: tr("Scanner"), symbol: "barcode.viewfinder", colorHex: accentHex) {
-                    sheet = .scan(day)
-                }
-                .accessibilityIdentifier("nutrition-scan")
-            }
-            MiniActionButton(title: canScan ? tr("Rechercher") : tr("Ajouter un aliment"), symbol: canScan ? "magnifyingglass" : "plus", colorHex: accentHex, isProminent: !canScan) {
-                sheet = .search(nil, day)
-            }
-            .accessibilityIdentifier("nutrition-search")
-        }
+    /// Dates the calorie goal once it is seen to change (« depuis le … » in « Bilan », Poids). Only a goal the
+    /// person's own information gives is followed, never the default.
+    private func trackGoal(known: NutritionTiles.Targets) {
+        guard known.kcal else { return }
+        let state = model.nutrition
+        guard state.kcalGoalSeen == nil || abs((state.kcalGoalSeen ?? 0) - state.goals.kcal) >= 0.5 else { return }
+        model.update(\.nutrition) { $0.trackGoalChange() }
     }
 
     // MARK: Meals
@@ -137,50 +146,39 @@ struct NutritionAppView: View {
         }
     }
 
-    // MARK: Nutrients
+    // MARK: Goal and « Maintenant »
 
-    /// The fibres and the way to every nutrient, moved off the band into the sheet (the figures are Premium).
-    private func nutrientsRow(totals: NutritionTotals) -> some View {
-        let sugars = totals.sugars.map { tr(" · sucres \(TF.int($0)) g") } ?? ""
-        let sodium = totals.sodiumMg.map { tr(" · sodium \(TF.int($0)) mg") } ?? ""
-        // The same key as before (« Fibres %@ g%@%@ »): the marker joins the number, so every language keeps its text.
-        let fiberText = (totals.isFiberIncomplete ? NutritionTotals.minimumMarker : "") + TF.int(totals.fiber)
-        let fibres = tr("Fibres \(fiberText) g\(sugars)\(sodium)")
-        let detail: String? = model.isPremium ? fibres : nil
-        return MiniRowsCard {
-            NavigationLink(value: HomeRoute.page(.nutritionNutrients(day))) {
-                HStack(spacing: 8) {
-                    MiniRow(
-                        symbol: "leaf.fill", colorHex: accentHex, title: tr("Tous les nutriments"),
-                        detail: detail,
-                        showsChevron: false
-                    )
-                    if !model.isPremium { PremiumBadge(compact: true) }
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(.tertiary)
-                }
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("nutrition-nutrients")
+    /// The goal to set: shown first while the person's needs are unknown; « Maintenant » stays silent then.
+    private var goalCard: some View {
+        Button {
+            sheet = .goals
+        } label: {
+            insightCard(symbol: "target", title: tr("Calcule tes besoins du jour"), message: tr("Ton âge, ta taille, ton poids et ton objectif suffisent : Ardane calcule tes calories et tes nutriments, puis te dit ce qu'il te reste."), action: tr("Calculer"))
         }
+        .buttonStyle(.pressable)
     }
 
-    // MARK: Idea of the moment
-
+    /// What the card says, by order: the next meal ahead (what is left, the protein of it), the ideas for the rest
+    /// of the evening, a goal passed, a goal reached. The figures of the day are in the ring above.
     @ViewBuilder
-    private func insight(state: NutritionState, known: NutritionTiles.Targets, totals: NutritionTotals, hasEntries: Bool) -> some View {
-        if !known.kcal {
-            Button {
-                sheet = .goals
-            } label: {
-                insightCard(symbol: "target", title: tr("Calcule tes besoins du jour"), message: tr("Ton âge, ta taille, ton poids et ton objectif suffisent : Ardane calcule tes calories et tes nutriments, puis te dit ce qu'il te reste."), action: tr("Calculer"))
-            }
-            .buttonStyle(.pressable)
-        } else if hasEntries {
-            let left = state.goals.kcal - totals.kcal
-            // The figures (left, over, macros) are in the hero above: the card only says what to do.
-            if left > 150 {
+    private func nowCard(state: NutritionState, totals: NutritionTotals, known: NutritionTiles.Targets, hasEntries: Bool) -> some View {
+        let left = state.goals.kcal - totals.kcal
+        if left > 150 {
+            if let next = MealType.next() {
+                let remaining = NutritionMath.remaining(state, on: day, knowsKcal: known.kcal, knowsProtein: known.protein)
+                let proteinLeft = remaining.protein ?? 0
+                let protein: String? = proteinLeft > 0 ? tr("dont \(TF.int(proteinLeft)) g de protéines") : nil
+                NavigationLink(value: HomeRoute.page(.nutritionIdeas)) {
+                    insightCard(
+                        symbol: "fork.knife",
+                        title: tr("Prochain repas : \(next.title.lowercased()), environ \(TF.int(left)) kcal"),
+                        message: protein,
+                        action: tr("Voir des idées")
+                    )
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("nutrition-insight")
+            } else if hasEntries {
                 NavigationLink(value: HomeRoute.page(.nutritionIdeas)) {
                     insightCard(
                         symbol: "lightbulb.fill",
@@ -191,7 +189,9 @@ struct NutritionAppView: View {
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("nutrition-insight")
-            } else if left < -50 {
+            }
+        } else if hasEntries {
+            if left < -50 {
                 insightCard(symbol: "info.circle.fill", title: tr("Objectif dépassé"), message: tr("Rien de grave : c'est la moyenne sur plusieurs jours qui compte. L'historique te la montre."), action: nil)
             } else {
                 insightCard(symbol: "checkmark.seal.fill", title: tr("Objectif atteint"), message: tr("Tu es dans ta cible de calories aujourd'hui."), action: nil)
@@ -228,7 +228,7 @@ struct NutritionAppView: View {
         .miniCard()
     }
 
-    // MARK: Trend
+    // MARK: Week mark
 
     /// What a day of the selector holds: nothing when no meal is noted, a ring of how far it got toward the
     /// calorie goal, a check when it is on target (within 10 %).
@@ -240,67 +240,96 @@ struct NutritionAppView: View {
         return WeekDayMark(progress: kcal / goal, isDone: abs(kcal - goal) <= goal * 0.1)
     }
 
-    /// The calories of the week of the chosen day, one bar a day (the chosen one in full color), then the
-    /// average and the days on target.
-    private func weekTrend(state: NutritionState, known: NutritionTiles.Targets) -> some View {
-        let week = DateMath.week(containing: day)
-        let stats = weekStats(state, week)
-        let values = week.map { NutritionMath.totals(state, on: $0).kcal }
+    // MARK: Doors
+
+    /// « Bilan » (the week, the nutrients, the weight) and « Ma bibliothèque » (favorites, saved meals, own foods).
+    private func doors(state: NutritionState, known: NutritionTiles.Targets) -> some View {
+        let stats = NutritionWeekCard.stats(state, DateMath.week(containing: day))
+        let reviewDetail = reviewText(stats, known: known)
+        let savedText = Fmt.plural(state.savedMeals.count, tr("repas", context: "one"), tr("repas"))
+        let foodsText = Fmt.plural(state.customFoods.count, tr("aliment"), tr("aliments"))
+        let favoritesText = Fmt.plural(state.favorites.count, tr("favori"), tr("favoris"))
         return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Calories de la semaine"))
-            VStack(alignment: .leading, spacing: 12) {
-                WeekBars(values: values, days: week, goal: known.kcal ? state.goals.kcal : nil, colorHex: accentHex,
-                         highlighted: week.firstIndex { DateMath.isSameDay($0, day) })
-                    .frame(height: 70)
-                Text(trendText(stats, known: known, empty: tr("Rien de noté cette semaine.")))
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+            MiniSectionTitle(title: tr("Aller plus loin"))
+            MiniRowsCard {
+                NavigationLink(value: HomeRoute.page(.nutritionReview(day))) {
+                    MiniRow(symbol: "chart.bar.xaxis", colorHex: accentHex, title: tr("Bilan"), detail: reviewDetail)
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("nutrition-review")
+                MiniDivider()
+                NavigationLink(value: HomeRoute.page(.nutritionLibrary)) {
+                    MiniRow(symbol: "books.vertical.fill", colorHex: accentHex, title: tr("Ma bibliothèque"), detail: "\(savedText) · \(foodsText) · \(favoritesText)")
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("nutrition-library")
             }
-            .padding(16)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .miniCard()
         }
     }
 
-    /// The days of the week up to today.
-    private func weekStats(_ state: NutritionState, _ week: [Date]) -> NutritionMath.PeriodStats {
-        let now = Date()
-        let start = week.first ?? now
-        let end = min(week.last ?? now, now)
-        return NutritionMath.stats(state, from: start, to: max(start, end))
+    private func reviewText(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets) -> String {
+        guard stats.trackedDays > 0 else { return tr("Calories, nutriments et poids") }
+        guard known.kcal else { return tr("Moyenne \(TF.int(stats.averages.kcal)) kcal") }
+        return tr("Cette semaine : \(Fmt.plural(stats.daysOnTarget, tr("jour"), tr("jours"))) sur \(stats.trackedDays) dans l'objectif")
     }
+}
 
-    private func trendText(_ stats: NutritionMath.PeriodStats, known: NutritionTiles.Targets, empty: String) -> String {
-        guard stats.trackedDays > 0 else { return empty }
-        let average = tr("Moyenne \(TF.int(stats.averages.kcal)) kcal")
-        guard known.kcal else { return tr("\(average) sur \(Fmt.plural(stats.trackedDays, tr("jour noté"), tr("jours notés"))).") }
-        return tr("\(average) · \(Fmt.plural(stats.daysOnTarget, tr("jour"), tr("jours"))) sur \(stats.trackedDays) dans l'objectif")
-    }
+/// The two main actions, floating above the tab bar: « Scanner » (filled) and « Rechercher » (glass). Without a
+/// camera, one filled « Ajouter un aliment ». A double tap runs an action once.
+private struct NutritionFloatingActions: View {
+    let canScan: Bool
+    let colorHex: String
+    let scan: () -> Void
+    let search: () -> Void
+    @State private var tapGuard = TapGuard()
+    @Environment(\.appStyle) private var style
+    @Environment(\.colorScheme) private var scheme
 
-    // MARK: More
-
-    private func more(state: NutritionState, known: NutritionTiles.Targets) -> some View {
-        MiniRowsCard {
-            NavigationLink(value: HomeRoute.page(.nutritionHistory)) {
-                MiniRow(symbol: "chart.bar.xaxis", colorHex: accentHex, title: tr("Historique"), detail: tr("Moyennes, tendances et poids"))
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("nutrition-history")
-            MiniDivider()
-            NavigationLink(value: HomeRoute.page(.nutritionSavedMeals)) {
-                MiniRow(symbol: "bookmark.fill", colorHex: accentHex, title: tr("Mes repas"), detail: tr("Des repas enregistrés, à reprendre d'une touche"), value: state.savedMeals.isEmpty ? nil : "\(state.savedMeals.count)")
-            }
-            .buttonStyle(.pressable)
-            .accessibilityIdentifier("nutrition-saved")
-            if !state.customFoods.isEmpty {
-                MiniDivider()
+    var body: some View {
+        let strong = CristalPalette.of(style.id).strongHex(colorHex)
+        let hex = scheme == .dark ? strong.dark : strong.light
+        HStack(spacing: 10) {
+            if canScan {
                 Button {
-                    sheet = .customFoods
+                    tapGuard.run(scan)
                 } label: {
-                    MiniRow(symbol: "pencil.and.list.clipboard", colorHex: accentHex, title: tr("Mes aliments"), detail: tr("Corriger ou supprimer tes aliments personnels"), value: "\(state.customFoods.count)")
+                    Label(tr("Scanner"), systemImage: "barcode.viewfinder")
+                        .font(.headline)
+                        .foregroundStyle(Color.readableInk(on: hex))
+                        .padding(.horizontal, 22)
+                        .frame(minHeight: 50)
+                        .background(Color(hex: hex), in: Capsule())
+                        .shadow(color: Color.black.opacity(0.22), radius: 10, y: 5)
                 }
                 .buttonStyle(.pressable)
-                .accessibilityIdentifier("nutrition-custom-foods")
+                .accessibilityIdentifier("nutrition-scan")
+                Button {
+                    tapGuard.run(search)
+                } label: {
+                    Label(tr("Rechercher"), systemImage: "magnifyingglass")
+                        .font(.headline)
+                        .foregroundStyle(Color.primary)
+                        .padding(.horizontal, 20)
+                        .frame(minHeight: 50)
+                        .cristalGlass(in: Capsule())
+                        .shadow(color: Color.black.opacity(0.12), radius: 8, y: 4)
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("nutrition-search")
+            } else {
+                Button {
+                    tapGuard.run(search)
+                } label: {
+                    Label(tr("Ajouter un aliment"), systemImage: "plus")
+                        .font(.headline)
+                        .foregroundStyle(Color.readableInk(on: hex))
+                        .padding(.horizontal, 24)
+                        .frame(minHeight: 50)
+                        .background(Color(hex: hex), in: Capsule())
+                        .shadow(color: Color.black.opacity(0.22), radius: 10, y: 5)
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("nutrition-search")
             }
         }
     }
