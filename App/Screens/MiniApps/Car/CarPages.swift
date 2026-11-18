@@ -208,9 +208,10 @@ struct CarMaintenancePage: View {
         .navigationTitle(tr("Entretien"))
         .navigationBarTitleDisplayMode(.large)
         .sheet(item: $sheet) { $0.editor }
-        .confirmationDialog(tr("Supprimer cet entretien ?"), isPresented: Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } }), titleVisibility: .visible) {
+        .confirmationDialog(tr("Supprimer cet entretien ?"), isPresented: Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } }), titleVisibility: .visible, presenting: deleting) { item in
             Button(tr("Supprimer"), role: .destructive) {
-                if let id = deleting?.id { model.update(\.car) { $0.services.removeAll { $0.id == id } } }
+                let id = item.id
+                model.update(\.car) { $0.services.removeAll { $0.id == id } }
                 deleting = nil
             }
             Button(tr("Annuler"), role: .cancel) { deleting = nil }

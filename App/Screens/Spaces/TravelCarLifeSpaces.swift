@@ -504,6 +504,8 @@ struct CarDeadlineEditor: View {
             if exists {
                 Section {
                     Button {
+                        // The edits of the sheet are kept first: the repetition starts from the date shown.
+                        save()
                         let id = deadline.id
                         model.update(\.car) { $0.markDeadlineDone(id) }
                         Haptics.success()
@@ -532,6 +534,11 @@ struct CarDeadlineEditor: View {
     private func save() {
         var saved = deadline
         saved.title = saved.title.trimmed
+        // A deadline marked done comes back when it is given a new date or made to repeat.
+        if saved.doneOn != nil, let stored = model.car.deadlines.first(where: { $0.id == saved.id }),
+           stored.date != saved.date || (saved.repeatsYearly == true && stored.repeatsYearly != true) {
+            saved.doneOn = nil
+        }
         model.update(\.car) { state in
             if let index = state.deadlines.firstIndex(where: { $0.id == saved.id }) { state.deadlines[index] = saved } else { state.deadlines.append(saved) }
         }
