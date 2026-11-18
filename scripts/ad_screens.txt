@@ -1,5 +1,7 @@
 # Écrans fixes de l'app pour les films, rendus par [adkit] dans report/adkit/screens/<fichier>.png
 # (iPhone 16 Pro, 1 206 × 2 622, barre d'état à 9:41, clair, français (anglais avec [adkit-en]), style Saphir, données démo).
+# Kit refait le 2026-11-18 (run [adkit-en] après la refonte Hybride des mini-apps, Build 467) : les captures
+# d'avant le 2026-11-12 montrent l'ancienne interface et ne doivent plus servir dans une pub.
 # Format : <fichier> <valeur de -screenshotScreen> [arguments de lancement en plus]
 # Les tranches -screenshotScroll 0 … 1 (-sNN) se recollent hors ligne en une image haute : seules les pages
 # qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
