@@ -99,7 +99,14 @@ struct NutritionAppView: View {
         }
     }
 
-    private var canScan: Bool { DataScannerViewController.isSupported }
+    /// The simulator has no camera to scan with: an ad capture launched with `-screenshotScanButtons YES` shows the
+    /// page as a real iPhone does (« Scanner » and « Rechercher »). The UI tests keep the simulator's own page.
+    private var canScan: Bool {
+        #if DEBUG
+        if ScreenshotMode.isActive && UserDefaults.standard.bool(forKey: "screenshotScanButtons") { return true }
+        #endif
+        return DataScannerViewController.isSupported
+    }
 
     /// Dates the calorie goal once it is seen to change (« depuis le … » in « Bilan », Poids). Only a goal the
     /// person's own information gives is followed, never the default.

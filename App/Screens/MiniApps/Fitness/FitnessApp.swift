@@ -573,10 +573,13 @@ private struct FitnessRunningActions: View {
     /// The rest (counting down, with its pause or resume), or a way back to the session.
     @ViewBuilder private var side: some View {
         if let rest = session.restEndsAt {
-            HStack(spacing: 4) {
-                TimelineView(.periodic(from: Date(), by: 1)) { context in
+            // The label never wraps (« Ready » was cut in two beside « Set done »), and the pause leaves with the rest:
+            // once it is over there is nothing left to pause.
+            TimelineView(.periodic(from: Date(), by: 1)) { context in
+                let running = rest > context.date
+                HStack(spacing: 4) {
                     Group {
-                        if rest > context.date {
+                        if running {
                             Label {
                                 Text(timerInterval: context.date...rest, countsDown: true).monospacedDigit()
                             } icon: {
@@ -588,17 +591,22 @@ private struct FitnessRunningActions: View {
                     }
                     .font(.headline)
                     .foregroundStyle(Color.primary)
+                    .lineLimit(1)
+                    .fixedSize(horizontal: true, vertical: false)
+                    if running {
+                        Button {
+                            model.update(\.fitness) { $0.pauseRest(at: Date()) }
+                        } label: {
+                            Image(systemName: "pause.fill")
+                                .foregroundStyle(Color.primary)
+                                .frame(width: 44, height: 44)
+                                .contentShape(Rectangle())
+                        }
+                        .accessibilityLabel(Text(tr("Mettre le repos en pause")))
+                        .accessibilityIdentifier("fitness-rest-pause")
+                    }
                 }
-                Button {
-                    model.update(\.fitness) { $0.pauseRest(at: Date()) }
-                } label: {
-                    Image(systemName: "pause.fill")
-                        .foregroundStyle(Color.primary)
-                        .frame(width: 44, height: 44)
-                        .contentShape(Rectangle())
-                }
-                .accessibilityLabel(Text(tr("Mettre le repos en pause")))
-                .accessibilityIdentifier("fitness-rest-pause")
+                .padding(.trailing, running ? 0 : 10)
             }
             .padding(.leading, 16)
             .padding(.trailing, 6)

@@ -12,6 +12,25 @@
 # Premier lancement après l'export : l'app n'est pas encore dessinée au bout de 6 s (écran blanc, run 42359896678),
 # d'où une capture de mise en route jetable avant les vraies.
 warmup spaces
+
+# Pubs du 2026-11-18 (Main Pub et Widget Pub, app actuelle, apparence sombre comme sur l'iPhone du PDG). En tête de
+# liste et CHACUNE DEUX FOIS (-b) : au run 471, quelques captures prises à 6 s montraient encore l'accueil (machine
+# lente : app-nutrition-s00, app-nutrition-meal, app-finances-s00-dark). -screenshotScanButtons YES : la page
+# Nutrition comme sur un vrai iPhone (« Scan » et « Search » ; le simulateur n'a pas de caméra).
+pub26-nutrition-dark app-nutrition -screenshotScroll 0 -screenshotAppearance dark -screenshotScanButtons YES
+pub26-nutrition-dark-b app-nutrition -screenshotScroll 0 -screenshotAppearance dark -screenshotScanButtons YES
+pub26-fitness-dark app-fitness -screenshotScroll 0 -screenshotAppearance dark
+pub26-fitness-dark-b app-fitness -screenshotScroll 0 -screenshotAppearance dark
+pub26-planning-dark app-planning -screenshotScroll 0 -screenshotAppearance dark
+pub26-planning-dark-b app-planning -screenshotScroll 0 -screenshotAppearance dark
+pub26-home-dark home -screenshotScroll 0 -screenshotAppearance dark
+pub26-home-dark-b home -screenshotScroll 0 -screenshotAppearance dark
+pub26-create-dark spaces -screenshotAppearance dark
+pub26-create-dark-b spaces -screenshotAppearance dark
+pub26-editor-dark editor-v2 -screenshotAppearance dark
+pub26-editor-dark-b editor-v2 -screenshotAppearance dark
+pub26-mywidgets-dark mywidgets -screenshotAppearance dark
+pub26-mywidgets-dark-b mywidgets -screenshotAppearance dark
 creator-student-large creator-student -screenshotCreatorFormat large -screenshotCreatorKinds timetable -screenshotCourseColors forest
 studio-tt-light studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme light -screenshotStudioAccent 7FA33A -screenshotCourseColors forest
 studio-tt-dark studio-style -screenshotStudioKind timetable -screenshotStudioFormat large -screenshotStudioTheme dark -screenshotStudioAccent 7FA33A -screenshotCourseColors forest
