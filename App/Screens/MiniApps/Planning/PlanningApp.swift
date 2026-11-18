@@ -1,11 +1,12 @@
 import SwiftUI
 
-/// The Planning mini-app in the « Signature » style, top to bottom. On the band: the week selector (the one
-/// date selector, `day` is the truth of the screen) and a line about the chosen day. On the sheet: first the
-/// week of the planning as a table right under the selector, whose columns fall under its days (a day, the
-/// month or the year instead with the scale picker or a pinch; a touch on a free time creates an event there),
-/// then the three priorities, the task counters, the projects and the habits, and « Mes infos » last (the
-/// studies and the focus are in the Études mini-app). The new-task action floats above the tab bar.
+/// The Planning mini-app, direction 5 « Hybride » (« ce qui vient, puis la semaine »). On the band: the week
+/// selector (the one date selector, `day` is the truth of the screen) and, for the current week, the card
+/// « Prochain événement ». On the sheet: the scale picker and the week as a table right under it, whose columns
+/// fall under the selector's days (a day, the month or the year instead with the picker or a pinch; a touch on a
+/// free time creates an event there), then the three priorities, the task counters, the projects and the habits,
+/// the calendar and the import as two rows, and « Mes infos » last (the studies and the focus are in the Études
+/// mini-app). The two actions « Nouvelle tâche » and « Nouvel événement » float above the tab bar.
 struct PlanningAppView: View {
     @Environment(AppModel.self) private var model
     @State private var events: [EventSnapshot] = []
@@ -30,19 +31,26 @@ struct PlanningAppView: View {
         let items = Agenda.items(on: day, model: model, events: events)
         let tasks = model.content.tasks
         let overdue = tasks.filter { $0.isOverdue(at: now) }
+        // What comes next, read in today's own agenda (events are loaded around the day picked, which holds today
+        // as long as the current week is shown).
+        let showsNext = scale == .week && DateMath.calendar.isDate(day, equalTo: now, toGranularity: .weekOfYear)
         MiniAppScaffold(
             colorHex: accentHex,
-            // The one main action, floating above the tab bar (a task due the day picked).
-            action: MiniFloatingAction(title: tr("Nouvelle tâche"), symbol: "plus", colorHex: accentHex, identifier: "planning-new-task") {
-                editors.task = TaskItem(title: "", due: DateMath.startOfDay(day))
-            },
+            // The two actions float above the tab bar (see the overlay), not one main action.
             compact: true
         ) {
             // 1. The only date selector of the screen, with room on the left for the hours of the table below it.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: mark, leadingInset: WeekTimetable.fullLeadingInset)
+            // 2. « Prochain événement »: the answer to « qu'est-ce qui vient ? », for the current week.
+            if showsNext {
+                // Read again every minute: « dans 40 min » and « En cours » follow the clock.
+                TimelineView(.everyMinute) { context in
+                    nextCard(PlanningNext.pick(from: Agenda.items(on: context.date, model: model, events: events), now: context.date))
+                }
+            }
         } sheet: {
             MiniAppToFillSection(app: .planning)
-            // 2. The planning right under the selector: the week as a table (or the day, the month, the year).
+            // 3. The planning: the scale picker, then the week as a table (or the day, the month, the year).
             VStack(alignment: .leading, spacing: 18) {
                 PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)
                 // The month and the year show no hours: the day picked is listed under them, to open and check off.
@@ -57,34 +65,7 @@ struct PlanningAppView: View {
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("planning-today")
 
-            if !CalendarService.hasAccess {
-                Button {
-                    Task {
-                        // Explanation first (once); refused, the sheet offers the settings and Planning works without.
-                        if await AppPermission.calendar.requestOrExplain(isPresented: $askingCalendar, request: requestCalendar) != nil {
-                            loadEvents()
-                        }
-                    }
-                } label: {
-                    Label(tr("Ajouter les événements de mon calendrier"), systemImage: "calendar.badge.plus")
-                        .font(.subheadline.weight(.semibold))
-                }
-                .tint(style.cristal.strong(accentHex))
-            }
-
-            // Between the planning and the tasks: a photo or a PDF of the timetable becomes classes of the schedule.
-            MiniRowsCard {
-                Button {
-                    importingSchedule = true
-                } label: {
-                    MiniRow(symbol: "doc.viewfinder", colorHex: accentHex, title: tr("Importer mon horaire"),
-                            detail: tr("À partir d'une photo ou d'un PDF"))
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("planning-import-schedule")
-            }
-
-            // 3. The tasks: the three priorities, then the counters.
+            // 4. The tasks: the three priorities, then the counters.
             priorities(now: now)
 
             VStack(alignment: .leading, spacing: 10) {
@@ -100,7 +81,7 @@ struct PlanningAppView: View {
                 .accessibilityIdentifier("planning-tasks")
             }
 
-            // 4. The other categories.
+            // 5. The other categories.
             MiniRowsCard {
                 // Projects and habits. The studies are their own mini-app (Études); the week, the month and
                 // the focus pages stay reachable (captures, Études) but have no row here.
@@ -117,8 +98,18 @@ struct PlanningAppView: View {
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("planning-habits")
             }
-            // 5. Last: « Mes infos ».
+            // 6. The calendar of the iPhone and the import of a timetable (Premium), as two rows.
+            sourcesCard
+            // 7. Last: « Mes infos ».
             MiniAppInfoSection(app: .planning)
+            // Room for the floating actions.
+            Color.clear.frame(height: 80)
+        }
+        .overlay(alignment: .bottom) {
+            PlanningFloatingActions(colorHex: accentHex,
+                                    newTask: { editors.task = TaskItem(title: "", due: DateMath.startOfDay(day)) },
+                                    newEvent: { editors.create(on: day, at: PlanningNext.defaultStartMinute(now: Date(), isToday: DateMath.isSameDay(day, Date()))) })
+                .padding(.bottom, 12)
         }
         .navigationTitle(tr("Planning"))
         .onAppear(perform: loadEvents)
@@ -136,6 +127,68 @@ struct PlanningAppView: View {
         let checkable = items.compactMap(\.isDone)
         let allDone = !checkable.isEmpty && checkable.allSatisfy { $0 }
         return WeekDayMark(isDone: allDone, isPlanned: !items.isEmpty)
+    }
+
+    /// « Prochain événement »: the time of what comes next (or is going on), how long until it, and where.
+    private func nextCard(_ next: PlanningNext.Pick?) -> some View {
+        let card: MiniHero
+        if let next {
+            let item = next.item
+            let length = PlanningNext.lengthText(minutes: next.minutes)
+            let when = next.inProgress ? tr("En cours · encore \(length)") : tr("dans \(length)")
+            let place = (item.place ?? "").trimmed
+            let caption = place.isEmpty ? "\(when) · \(item.title)" : "\(when) · \(item.title) · \(place)"
+            card = MiniHero(label: tr("Prochain événement"), value: item.timeText, caption: caption, valueSize: 44)
+        } else {
+            card = MiniHero(label: tr("Prochain événement"), value: "—", caption: tr("Rien de prévu ce jour-là."), valueSize: 44)
+        }
+        return Button {
+            if let item = next?.item { open(item) }
+        } label: {
+            card
+        }
+        .buttonStyle(.pressable)
+        .disabled(next == nil)
+        .accessibilityIdentifier("planning-next")
+    }
+
+    /// The calendar of the iPhone (while access is not given) and the import of a timetable, as two rows. The
+    /// import carries the Premium badge for a free account: the lock used to show only when the sheet opened.
+    private var sourcesCard: some View {
+        MiniRowsCard {
+            if !CalendarService.hasAccess {
+                Button {
+                    Task {
+                        // Explanation first (once); refused, the sheet offers the settings and Planning works without.
+                        if await AppPermission.calendar.requestOrExplain(isPresented: $askingCalendar, request: requestCalendar) != nil {
+                            loadEvents()
+                        }
+                    }
+                } label: {
+                    MiniRow(symbol: "calendar.badge.plus", colorHex: accentHex, title: tr("Ajouter les événements de mon calendrier"))
+                }
+                .buttonStyle(.pressable)
+                .accessibilityIdentifier("planning-add-calendar")
+                MiniDivider()
+            }
+            // A photo or a PDF of the timetable becomes classes of the schedule.
+            Button {
+                importingSchedule = true
+            } label: {
+                HStack(spacing: 6) {
+                    MiniRow(symbol: "doc.viewfinder", colorHex: accentHex, title: tr("Importer mon horaire"),
+                            detail: tr("À partir d'une photo ou d'un PDF"), showsChevron: model.isPremium)
+                    if !model.isPremium {
+                        PremiumBadge(compact: true)
+                        Image(systemName: "chevron.right")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(.tertiary)
+                    }
+                }
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("planning-import-schedule")
+        }
     }
 
     private func requestCalendar() async {
@@ -181,7 +234,7 @@ struct PlanningAppView: View {
                         .padding(.vertical, 12)
                 }
                 ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                    AgendaRow(item: item, isNow: isToday && (item.start.map { $0 <= now && (item.end ?? $0) > now } ?? false))
+                    AgendaRow(item: item, isNow: isToday && (item.start.map { $0 <= now && (item.end ?? $0) > now } ?? false), onOpen: { open(item) })
                     if index < items.count - 1 { Divider().padding(.leading, 62) }
                 }
             }
@@ -194,6 +247,18 @@ struct PlanningAppView: View {
         let items = model.productivity.activePriorities
         return VStack(alignment: .leading, spacing: 10) {
             MiniSectionTitle(title: tr("Top 3 du jour"), detail: items.isEmpty ? nil : "\(items.count)/\(ProductivityState.maxPriorities)")
+            // The history of the priorities checked off (it was only on the Top 3 card of « Mon quotidien »).
+            NavigationLink {
+                CompletedPrioritiesView()
+            } label: {
+                HStack(spacing: 4) {
+                    Text(tr("Mes tâches réalisées"))
+                    Image(systemName: "chevron.right").font(.caption2.weight(.bold))
+                }
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(style.cristal.strong(accentHex))
+            }
+            .accessibilityIdentifier("planning-completed-priorities")
             // Rows like the other lists of the mini-apps: a 34-point mark, the title, hairlines between.
             MiniRowsCard {
                 ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
@@ -300,6 +365,8 @@ extension View {
 struct AgendaRow: View {
     let item: AgendaItem
     var isNow = false
+    /// A touch on the line opens the item (its own editor); the round of a task or homework alone checks it off.
+    var onOpen: (() -> Void)? = nil
     @Environment(AppModel.self) private var model
     @Environment(\.appStyle) private var style
 
@@ -344,6 +411,8 @@ struct AgendaRow: View {
             }
         }
         .padding(.vertical, 10)
+        .contentShape(Rectangle())
+        .onTapGesture { onOpen?() }
     }
 
     private func toggle() {
@@ -417,5 +486,53 @@ struct TaskEditor: View {
             }
         }
         Haptics.success()
+    }
+}
+
+/// The two actions floating above the tab bar: « Nouvelle tâche » (filled) and « Nouvel événement » (glass). A
+/// double tap runs an action once.
+private struct PlanningFloatingActions: View {
+    let colorHex: String
+    let newTask: () -> Void
+    let newEvent: () -> Void
+    @State private var tapGuard = TapGuard()
+    @Environment(\.appStyle) private var style
+    @Environment(\.colorScheme) private var scheme
+
+    var body: some View {
+        let strong = CristalPalette.of(style.id).strongHex(colorHex)
+        let hex = scheme == .dark ? strong.dark : strong.light
+        HStack(spacing: 10) {
+            Button {
+                tapGuard.run(newTask)
+            } label: {
+                Label(tr("Nouvelle tâche"), systemImage: "plus")
+                    .font(.subheadline.weight(.bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .foregroundStyle(Color.readableInk(on: hex))
+                    .padding(.horizontal, 18)
+                    .frame(minHeight: 50)
+                    .background(Color(hex: hex), in: Capsule())
+                    .shadow(color: Color.black.opacity(0.22), radius: 10, y: 5)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("planning-new-task")
+            Button {
+                tapGuard.run(newEvent)
+            } label: {
+                Label(tr("Nouvel événement"), systemImage: "calendar.badge.plus")
+                    .font(.subheadline.weight(.bold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .foregroundStyle(Color.primary)
+                    .padding(.horizontal, 16)
+                    .frame(minHeight: 50)
+                    .cristalGlass(in: Capsule())
+                    .shadow(color: Color.black.opacity(0.12), radius: 8, y: 4)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityIdentifier("planning-new-event")
+        }
     }
 }

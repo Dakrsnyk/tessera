@@ -65,23 +65,23 @@ struct PlanningCalendarCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
+            // The scale picker sits right above the table (Hybride): no scrolling to come back to « Semaine ».
+            Picker(tr("Échelle"), selection: Binding(get: { scale }, set: { change(to: $0) })) {
+                ForEach(CalendarScale.allCases) { Text($0.title).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            .accessibilityIdentifier("planning-scale")
             // The month and the year have no strip of days above: their period is named here.
             if let period {
                 Text(period).font(.headline)
             }
-            // The week itself comes first, right under the selector at the top of the screen.
-            content
+                        content
                 .scaleEffect(isPinching ? min(1.12, max(0.88, pinch)) : 1, anchor: .center)
                 .opacity(isPinching ? 0.85 : 1)
                 .id("\(scale.rawValue)-\(DateMath.dayKey(scale.interval(containing: day).start))")
                 .transition(.asymmetric(insertion: .opacity.combined(with: .scale(scale: 0.96)), removal: .opacity))
                 .simultaneousGesture(magnify)
                 .simultaneousGesture(swipe)
-            Picker(tr("Échelle"), selection: Binding(get: { scale }, set: { change(to: $0) })) {
-                ForEach(CalendarScale.allCases) { Text($0.title).tag($0) }
-            }
-            .pickerStyle(.segmented)
-            .accessibilityIdentifier("planning-scale")
             MiniFootnote(text: hint)
         }
         .accessibilityElement(children: .contain)
@@ -400,5 +400,50 @@ enum PlanningCalendar {
             let to = WeekTimetable.end(item)
             return from < slot.endMinute && to > slot.startMinute
         }
+    }
+}
+
+/// The figures of the « Prochain événement » card and of the « Nouvel événement » button.
+enum PlanningNext {
+    /// What comes next today: the item, whether it has begun, and the minutes to its start (or to its end if begun).
+    struct Pick: Equatable {
+        let item: AgendaItem
+        let inProgress: Bool
+        let minutes: Int
+    }
+
+    /// The one to show among the items of a day: what is going on (the earliest to have begun) first, else the
+    /// next to begin. Whatever has no time, is checked off or is over does not count; an item without an end is
+    /// over as soon as it begins.
+    static func pick(from items: [AgendaItem], now: Date) -> Pick? {
+        let timed = items.filter { $0.start != nil && $0.isDone != true }.sorted { ($0.start ?? now) < ($1.start ?? now) }
+        if let current = timed.first(where: { item in
+            guard let start = item.start, let end = item.end else { return false }
+            return start <= now && end > now
+        }), let end = current.end {
+            return Pick(item: current, inProgress: true, minutes: Int((end.timeIntervalSince(now) / 60).rounded(.up)))
+        }
+        if let next = timed.first(where: { ($0.start ?? .distantPast) > now }), let start = next.start {
+            return Pick(item: next, inProgress: false, minutes: Int((start.timeIntervalSince(now) / 60).rounded(.up)))
+        }
+        return nil
+    }
+
+    /// « 40 min », « 2 h 05 »: a length of time for the line under the figure.
+    static func lengthText(minutes: Int) -> String {
+        guard minutes >= 60 else {
+            let count = String(max(1, minutes))
+            return tr("\(count) min")
+        }
+        let hours = String(minutes / 60)
+        let rest = String(format: "%02d", minutes % 60)
+        return tr("\(hours) h \(rest)")
+    }
+
+    /// The start of a new event made by the button: the next half hour (never past 23:00) for today, else 9:00.
+    static func defaultStartMinute(now: Date, isToday: Bool) -> Int {
+        guard isToday else { return 9 * 60 }
+        let minute = DateMath.minuteOfDay(now)
+        return min(23 * 60, (minute / 30 + 1) * 30)
     }
 }

@@ -640,6 +640,7 @@
  "%@ h %@": {
   "placeholders": 2,
   "uses": [
+   "App/Screens/MiniApps/Planning/PlanningCalendar.swift:440: return tr(\"\\(hours) h \\(rest)\")",
    "App/Screens/Spaces/StudentSpace.swift:376: Text(minutes < 60 ? tr(\"\\(minutes) min\") : (minutes % 60 == 0 ? tr(\"\\(minutes / 60) h\") : tr(\"\\(minutes / 60) h \\(minutes % 60)\")))"
   ]
  },
@@ -797,9 +798,9 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:220: ValueRow(title: tr(\"Durée\"), value: tr(\"\\(TF.int(session.duration / 60)) min\"))",
+   "App/Screens/MiniApps/Planning/PlanningCalendar.swift:436: return tr(\"\\(count) min\")",
    "App/Screens/Spaces/StudentSpace.swift:376: Text(minutes < 60 ? tr(\"\\(minutes) min\") : (minutes % 60 == 0 ? tr(\"\\(minutes / 60) h\") : tr(\"\\(minutes / 60) h \\(minutes % 60)\")))",
-   "Shared/Data/Insights.swift:255: if minutes < 60 { return tr(\"\\(minutes) min\") }",
-   "Shared/Render/Kinds/ProductivityWidgets.swift:264: Text(tr(\"\\(minutes) min\"))"
+   "Shared/Data/Insights.swift:255: if minutes < 60 { return tr(\"\\(minutes) min\") }"
   ]
  },
  "%@ min restantes": {
@@ -2037,7 +2038,7 @@
  "26 dernières semaines": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:480: MiniSectionTitle(title: tr(\"26 dernières semaines\"))"
+   "App/Screens/Content/HabitsApp.swift:483: MiniSectionTitle(title: tr(\"26 dernières semaines\"))"
   ]
  },
  "3 dattes": {
@@ -2073,13 +2074,13 @@
  "30 j · 90 j": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:617: MiniSectionTitle(title: tr(\"Régularité\"), detail: tr(\"30 j · 90 j\"))"
+   "App/Screens/Content/HabitsApp.swift:620: MiniSectionTitle(title: tr(\"Régularité\"), detail: tr(\"30 j · 90 j\"))"
   ]
  },
  "30 jours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:464: MiniStat(title: tr(\"30 jours\"), value: thirty.map { Fmt.percent($0) } ?? \"—\", colorHex: habit.colorHex)",
+   "App/Screens/Content/HabitsApp.swift:467: MiniStat(title: tr(\"30 jours\"), value: thirty.map { Fmt.percent($0) } ?? \"—\", colorHex: habit.colorHex)",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:486: case .month: tr(\"30 jours\")"
   ]
  },
@@ -2171,7 +2172,7 @@
  "90 jours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:465: MiniStat(title: tr(\"90 jours\"), value: model.isPremium ? (ninety.map { Fmt.percent($0) } ?? \"—\") : \"—\","
+   "App/Screens/Content/HabitsApp.swift:468: MiniStat(title: tr(\"90 jours\"), value: model.isPremium ? (ninety.map { Fmt.percent($0) } ?? \"—\") : \"—\","
   ]
  },
  "AN": {
@@ -2998,7 +2999,7 @@
  "Ajouter les événements de mon calendrier": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:69: Label(tr(\"Ajouter les événements de mon calendrier\"), systemImage: \"calendar.badge.plus\")"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:164: MiniRow(symbol: \"calendar.badge.plus\", colorHex: accentHex, title: tr(\"Ajouter les événements de mon calendrier\"))"
   ]
  },
  "Ajouter ma date de naissance": {
@@ -3179,7 +3180,7 @@
  "Ajouter une priorité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:234: TextField(tr(\"Ajouter une priorité\"), text: $newPriority)"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:295: TextField(tr(\"Ajouter une priorité\"), text: $newPriority)"
   ]
  },
  "Ajouter une tâche": {
@@ -4565,7 +4566,7 @@
  "Aucun rappel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:664: detail: habit.reminderDate == nil ? tr(\"Aucun rappel\") : tr(\"Rappel quotidien\"),"
+   "App/Screens/Content/HabitsApp.swift:667: detail: habit.reminderDate == nil ? tr(\"Aucun rappel\") : tr(\"Rappel quotidien\"),"
   ]
  },
  "Aucun repas enregistré. Ouvre un repas de ta journée et touche « Enregistrer ce repas » : il sera ici, prêt à reprendre d'une touche.": {
@@ -4677,7 +4678,7 @@
  "Aucune habitude pour l'instant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:655: Text(tr(\"Aucune habitude pour l'instant\"))",
+   "App/Screens/Content/HabitsApp.swift:658: Text(tr(\"Aucune habitude pour l'instant\"))",
    "App/Screens/Content/HabitsView.swift:23: Text(tr(\"Aucune habitude pour l'instant\"))"
   ]
  },
@@ -5568,7 +5569,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsApp.swift:234: MiniRow(symbol: \"chart.bar.fill\", colorHex: accentHex, title: tr(\"Bilan\"), detail: tr(\"Régularité, semaines, jours complets\"))",
-   "App/Screens/Content/HabitsApp.swift:565: .navigationTitle(tr(\"Bilan\"))",
+   "App/Screens/Content/HabitsApp.swift:568: .navigationTitle(tr(\"Bilan\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:257: MiniRow(symbol: \"chart.bar.xaxis\", colorHex: accentHex, title: tr(\"Bilan\"), detail: reviewDetail)",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:318: .navigationTitle(embedded ? tr(\"Bilan\") : tr(\"Nutriments\"))"
   ]
@@ -8212,7 +8213,7 @@
  "Coche une habitude pour voir ta régularité.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:557: EmptyStateView(symbol: \"chart.bar\", title: tr(\"Pas encore de bilan\"), message: tr(\"Coche une habitude pour voir ta régularité.\"))"
+   "App/Screens/Content/HabitsApp.swift:560: EmptyStateView(symbol: \"chart.bar\", title: tr(\"Pas encore de bilan\"), message: tr(\"Coche une habitude pour voir ta régularité.\"))"
   ]
  },
  "Cocher un devoir": {
@@ -8584,7 +8585,7 @@
  "Compté depuis le premier jour coché, sur 30 et 90 jours.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:627: Text(tr(\"Compté depuis le premier jour coché, sur 30 et 90 jours.\"))"
+   "App/Screens/Content/HabitsApp.swift:630: Text(tr(\"Compté depuis le premier jour coché, sur 30 et 90 jours.\"))"
   ]
  },
  "Concentration": {
@@ -12094,6 +12095,12 @@
    "Shared/Render/Tiles/FitnessTiles.swift:78: tile.caption = tr(\"En cours · \\(active.sets.count)/\\(active.totalSets) séries\")"
   ]
  },
+ "En cours · encore %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:134: let when = next.inProgress ? tr(\"En cours · encore \\(length)\") : tr(\"dans \\(length)\")"
+  ]
+ },
  "En cours · fin à %@": {
   "placeholders": 1,
   "uses": [
@@ -12184,7 +12191,7 @@
    "App/Core/DailyBrief.swift:558: case ..<0: return tr(\"En retard\")",
    "App/Screens/Home/DailySection.swift:1326: .foregroundStyle(item.when == tr(\"En retard\") ? Color.red : .secondary)",
    "App/Screens/Home/DailySection.swift:1350: .foregroundStyle(item.when == tr(\"En retard\") ? Color.red : .secondary)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:94: countTile(tr(\"En retard\"), overdue.count, overdue.isEmpty ? nil : MiniStyle.alertHex)"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:71: countTile(tr(\"En retard\"), overdue.count, overdue.isEmpty ? nil : MiniStyle.alertHex)"
   ]
  },
  "En semaine": {
@@ -13096,7 +13103,7 @@
  "Faite aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:444: Text(done ? tr(\"Faite aujourd'hui\") : tr(\"À faire aujourd'hui\"))"
+   "App/Screens/Content/HabitsApp.swift:447: Text(done ? tr(\"Faite aujourd'hui\") : tr(\"À faire aujourd'hui\"))"
   ]
  },
  "Faite le %@ à la place.": {
@@ -14556,7 +14563,7 @@
    "App/Core/DataItems.swift:90: case .habits: tr(\"Habitudes\")",
    "App/Premium/PaywallView.swift:209: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
    "App/Screens/Content/HabitsApp.swift:149: .navigationTitle(tr(\"Habitudes\"))",
-   "App/Screens/Content/HabitsApp.swift:677: Text(tr(\"Habitudes\")).font(.body.weight(.medium))"
+   "App/Screens/Content/HabitsApp.swift:680: Text(tr(\"Habitudes\")).font(.body.weight(.medium))"
   ]
  },
  "Habitudes : %@ ce mois-ci": {
@@ -14804,7 +14811,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsView.swift:221: DatePicker(tr(\"Heure\"), selection: $reminderTime, displayedComponents: .hourAndMinute)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:382: DatePicker(tr(\"Heure\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .hourAndMinute)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:447: DatePicker(tr(\"Heure\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .hourAndMinute)",
    "App/Screens/Profile/SmartRemindersView.swift:168: private func hourPicker(_ hour: Binding<Int>, title: String = tr(\"Heure\")) -> some View {",
    "Shared/Model/Templates.swift:63: WidgetTemplate(id: \"clock-minimal\", name: tr(\"Heure\"), kind: .clock, themeID: .minimal, accentHex: \"2F8F7A\", isFeatured: true),"
   ]
@@ -15322,7 +15329,7 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallContext.swift:59: title: tr(\"Importer mon horaire\"),",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:80: MiniRow(symbol: \"doc.viewfinder\", colorHex: accentHex, title: tr(\"Importer mon horaire\"),",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:175: MiniRow(symbol: \"doc.viewfinder\", colorHex: accentHex, title: tr(\"Importer mon horaire\"),",
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:181: .navigationTitle(tr(\"Importer mon horaire\"))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:347: MiniRow(symbol: \"doc.viewfinder\", colorHex: accentHex, title: tr(\"Importer mon horaire\"),"
   ]
@@ -15721,7 +15728,7 @@
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:43: case .day: tr(\"Jour\")",
    "App/Screens/MiniApps/Business/BusinessApp.swift:294: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:379: DatePicker(tr(\"Jour\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .date)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:444: DatePicker(tr(\"Jour\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .date)",
    "App/Screens/MiniApps/Planning/PlanningCalendar.swift:10: case .day: tr(\"Jour\")"
   ]
  },
@@ -15813,7 +15820,7 @@
  "Jours complets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:577: MiniStat(title: tr(\"Jours complets\"), value: full.counted > 0 ? \"\\(full.complete)/\\(full.counted)\" : \"—\", colorHex: HabitsApp.accentHex)"
+   "App/Screens/Content/HabitsApp.swift:580: MiniStat(title: tr(\"Jours complets\"), value: full.counted > 0 ? \"\\(full.complete)/\\(full.counted)\" : \"—\", colorHex: HabitsApp.accentHex)"
   ]
  },
  "Jours depuis": {
@@ -16597,7 +16604,7 @@
  "La régularité est dans Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:554: PremiumLockCard(symbol: \"chart.bar.doc.horizontal\", title: tr(\"La régularité est dans Premium\"),"
+   "App/Screens/Content/HabitsApp.swift:557: PremiumLockCard(symbol: \"chart.bar.doc.horizontal\", title: tr(\"La régularité est dans Premium\"),"
   ]
  },
  "La réponse de Stripe n'a pas pu être lue.": {
@@ -17426,7 +17433,7 @@
  "Le taux de réussite de chaque habitude sur 30 et 90 jours, et sa plus longue série. Tes jours cochés restent enregistrés.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:555: message: tr(\"Le taux de réussite de chaque habitude sur 30 et 90 jours, et sa plus longue série. Tes jours cochés restent enregistrés.\"))"
+   "App/Screens/Content/HabitsApp.swift:558: message: tr(\"Le taux de réussite de chaque habitude sur 30 et 90 jours, et sa plus longue série. Tes jours cochés restent enregistrés.\"))"
   ]
  },
  "Le temps de repos entre deux séries, qui défile en direct.": {
@@ -17693,7 +17700,7 @@
  "Les habitudes qu'il te reste à faire, ta série, un record battu et le bilan de la semaine.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:680: Text(tr(\"Les habitudes qu'il te reste à faire, ta série, un record battu et le bilan de la semaine.\"))",
+   "App/Screens/Content/HabitsApp.swift:683: Text(tr(\"Les habitudes qu'il te reste à faire, ta série, un record battu et le bilan de la semaine.\"))",
    "App/Screens/Profile/SmartRemindersView.swift:90: Text(tr(\"Les habitudes qu'il te reste à faire, ta série, un record battu et le bilan de la semaine.\"))"
   ]
  },
@@ -18881,14 +18888,14 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Content/HabitsApp.swift:328: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))",
-   "App/Screens/Content/HabitsApp.swift:442: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))",
+   "App/Screens/Content/HabitsApp.swift:445: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))",
    "App/Screens/Content/HabitsView.swift:114: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))"
   ]
  },
  "Marquer comme fait": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:339: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:402: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
   ]
  },
  "Marquer comme rendu": {
@@ -18900,7 +18907,7 @@
  "Marquer comme à faire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:339: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:402: .accessibilityLabel(Text(done ? tr(\"Marquer comme à faire\") : tr(\"Marquer comme fait\")))"
   ]
  },
  "Marquer comme à rendre": {
@@ -19011,13 +19018,13 @@
  "Meilleure série": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:462: MiniStat(title: tr(\"Meilleure série\"), value: model.isPremium ? \"\\(habit.bestStreak)\" : \"—\","
+   "App/Screens/Content/HabitsApp.swift:465: MiniStat(title: tr(\"Meilleure série\"), value: model.isPremium ? \"\\(habit.bestStreak)\" : \"—\","
   ]
  },
  "Meilleure série : %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:622: detail: tr(\"Meilleure série : \\(Fmt.plural(habit.bestStreak, tr(\"jour\"), tr(\"jours\")))\"),"
+   "App/Screens/Content/HabitsApp.swift:625: detail: tr(\"Meilleure série : \\(Fmt.plural(habit.bestStreak, tr(\"jour\"), tr(\"jours\")))\"),"
   ]
  },
  "Melon d'eau": {
@@ -19168,7 +19175,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsApp.swift:293: MiniRow(symbol: \"gearshape.fill\", colorHex: HabitsApp.accentHex, title: tr(\"Mes paramètres\"), detail: tr(\"Rappels et notifications\"))",
-   "App/Screens/Content/HabitsApp.swift:694: .navigationTitle(tr(\"Mes paramètres\"))",
+   "App/Screens/Content/HabitsApp.swift:697: .navigationTitle(tr(\"Mes paramètres\"))",
    "App/Screens/MiniApps/MiniAppSettings.swift:73: Label(tr(\"Mes paramètres\"), systemImage: \"gearshape\")",
    "App/Screens/MiniApps/MiniAppSettings.swift:200: .navigationTitle(tr(\"Mes paramètres\"))"
   ]
@@ -19231,8 +19238,8 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:1429: Label(tr(\"Mes tâches réalisées\"), systemImage: \"checkmark.circle\")",
    "App/Screens/Home/DailySection.swift:1438: .accessibilityLabel(Text(tr(\"Mes tâches réalisées\")))",
-   "App/Screens/Spaces/ProductivitySpace.swift:32: ValueRow(title: tr(\"Mes tâches réalisées\"), value: \"\\(model.productivity.completedPriorities.count)\", symbol: \"checkmark.circle\")",
-   "App/Screens/Spaces/ProductivitySpace.swift:210: .navigationTitle(tr(\"Mes tâches réalisées\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:251: Text(tr(\"Mes tâches réalisées\"))",
+   "App/Screens/Spaces/ProductivitySpace.swift:32: ValueRow(title: tr(\"Mes tâches réalisées\"), value: \"\\(model.productivity.completedPriorities.count)\", symbol: \"checkmark.circle\")"
   ]
  },
  "Mes villes": {
@@ -19437,7 +19444,7 @@
  "Modifier": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:491: Button(tr(\"Modifier\")) { editing = habit }",
+   "App/Screens/Content/HabitsApp.swift:494: Button(tr(\"Modifier\")) { editing = habit }",
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:580: Label(tr(\"Modifier\"), systemImage: \"pencil\")",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:1089: Label(tr(\"Modifier\"), systemImage: \"pencil\")",
    "App/Screens/MyWidgets/MyWidgetsView.swift:292: CarouselAction(title: tr(\"Modifier\"), symbol: \"slider.horizontal.3\", isProminent: true, identifier: \"carousel-edit\") {"
@@ -20658,8 +20665,8 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:630: TextField(tr(\"Notes\", context: \"text\"), text: $notes, axis: .vertical)",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:676: TextField(tr(\"Notes\", context: \"text\"), text: $notes, axis: .vertical)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:393: Section(tr(\"Notes\", context: \"text\")) {",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:394: TextField(tr(\"Notes\", context: \"text\"), text: $task.notes, axis: .vertical)"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:458: Section(tr(\"Notes\", context: \"text\")) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:459: TextField(tr(\"Notes\", context: \"text\"), text: $task.notes, axis: .vertical)"
   ]
  },
  "Notifications": {
@@ -20858,6 +20865,7 @@
  "Nouvel événement": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:520: Label(tr(\"Nouvel événement\"), systemImage: \"calendar.badge.plus\")",
    "App/Screens/Spaces/StudentSpace.swift:272: SheetForm(title: isSaved ? tr(\"Événement\") : tr(\"Nouvel événement\"), canSave: slot.endMinute > slot.startMinute, dismissesOnSave: !changesOnlyThisKind, closesWithBackArrow: isSaved, onSave: save) {"
   ]
  },
@@ -20952,8 +20960,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/TasksView.swift:16: TextField(tr(\"Nouvelle tâche\"), text: $newTitle)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:36: action: MiniFloatingAction(title: tr(\"Nouvelle tâche\"), symbol: \"plus\", colorHex: accentHex, identifier: \"planning-new-task\") {",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:368: SheetForm(title: task.title.isEmpty ? tr(\"Nouvelle tâche\") : tr(\"Tâche\"), canSave: !task.title.trimmed.isEmpty, closesWithBackArrow: exists, onSave: save) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:433: SheetForm(title: task.title.isEmpty ? tr(\"Nouvelle tâche\") : tr(\"Tâche\"), canSave: !task.title.trimmed.isEmpty, closesWithBackArrow: exists, onSave: save) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:505: Label(tr(\"Nouvelle tâche\"), systemImage: \"plus\")",
    "App/Screens/Spaces/ProductivitySpace.swift:254: TextField(tr(\"Nouvelle tâche\"), text: $newTask)"
   ]
  },
@@ -22026,7 +22034,7 @@
  "Pas encore de bilan": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:557: EmptyStateView(symbol: \"chart.bar\", title: tr(\"Pas encore de bilan\"), message: tr(\"Coche une habitude pour voir ta régularité.\"))"
+   "App/Screens/Content/HabitsApp.swift:560: EmptyStateView(symbol: \"chart.bar\", title: tr(\"Pas encore de bilan\"), message: tr(\"Coche une habitude pour voir ta régularité.\"))"
   ]
  },
  "Pas encore de pesée": {
@@ -22051,7 +22059,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsApp.swift:342: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
-   "App/Screens/Content/HabitsApp.swift:446: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
+   "App/Screens/Content/HabitsApp.swift:449: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "App/Screens/Content/HabitsView.swift:126: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))"
   ]
  },
@@ -23847,7 +23855,7 @@
    "App/Components/UIComponents.swift:101: if !compact { Text(tr(\"Premium\")) }",
    "App/Components/UIComponents.swift:108: .accessibilityLabel(Text(tr(\"Premium\")))",
    "App/Premium/PaywallView.swift:199: Text(tr(\"Premium\")).frame(width: 72).foregroundStyle(Color.premiumInk)",
-   "App/Screens/Content/HabitsApp.swift:463: unit: model.isPremium ? tr(\"jours\") : tr(\"Premium\"), colorHex: habit.colorHex)"
+   "App/Screens/Content/HabitsApp.swift:466: unit: model.isPremium ? tr(\"jours\") : tr(\"Premium\"), colorHex: habit.colorHex)"
   ]
  },
  "Premium actif": {
@@ -23902,7 +23910,7 @@
  "Priorité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:372: Picker(tr(\"Priorité\"), selection: $task.priority) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:437: Picker(tr(\"Priorité\"), selection: $task.priority) {",
    "Shared/Intents/SpaceIntents.swift:331: @Parameter(title: \"Priorité\")"
   ]
  },
@@ -24063,6 +24071,8 @@
  "Prochain événement": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:137: card = MiniHero(label: tr(\"Prochain événement\"), value: item.timeText, caption: caption, valueSize: 44)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:139: card = MiniHero(label: tr(\"Prochain événement\"), value: \"—\", caption: tr(\"Rien de prévu ce jour-là.\"), valueSize: 44)",
    "Shared/Render/Tiles/StudentTiles.swift:65: var tile = Tile(title: isClass ? (ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\")) : (ongoing ? tr(\"Événement en cours\") : tr(\"Prochain événement\")), symbol: isClass ? \"book.closed\" : \"calendar\")"
   ]
  },
@@ -24221,7 +24231,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:93: case .projects: tr(\"Projets\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:108: MiniRow(symbol: \"folder.fill\", colorHex: accentHex, title: tr(\"Projets\"), detail: tr(\"Tâches regroupées par projet\"),",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:85: MiniRow(symbol: \"folder.fill\", colorHex: accentHex, title: tr(\"Projets\"), detail: tr(\"Tâches regroupées par projet\"),",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:338: .navigationTitle(tr(\"Projets\"))",
    "App/Screens/Spaces/ProductivitySpace.swift:58: Section(tr(\"Projets\")) {"
   ]
@@ -24706,7 +24716,7 @@
  "Rappel quotidien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:664: detail: habit.reminderDate == nil ? tr(\"Aucun rappel\") : tr(\"Rappel quotidien\"),",
+   "App/Screens/Content/HabitsApp.swift:667: detail: habit.reminderDate == nil ? tr(\"Aucun rappel\") : tr(\"Rappel quotidien\"),",
    "App/Screens/Content/HabitsView.swift:219: Toggle(tr(\"Rappel quotidien\"), isOn: $hasReminder)"
   ]
  },
@@ -24725,7 +24735,7 @@
  "Rappels d'habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:653: MiniSectionTitle(title: tr(\"Rappels d'habitudes\"))",
+   "App/Screens/Content/HabitsApp.swift:656: MiniSectionTitle(title: tr(\"Rappels d'habitudes\"))",
    "App/Screens/Profile/ProfileView.swift:127: NavigationLink { HabitsView() } label: { Text(tr(\"Rappels d'habitudes\")) }"
   ]
  },
@@ -24750,8 +24760,8 @@
  "Rappels intelligents": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:674: MiniSectionTitle(title: tr(\"Rappels intelligents\"))",
-   "App/Screens/Content/HabitsApp.swift:688: MiniRow(symbol: \"bell.badge.fill\", colorHex: HabitsApp.accentHex, title: tr(\"Rappels intelligents\"))",
+   "App/Screens/Content/HabitsApp.swift:677: MiniSectionTitle(title: tr(\"Rappels intelligents\"))",
+   "App/Screens/Content/HabitsApp.swift:691: MiniRow(symbol: \"bell.badge.fill\", colorHex: HabitsApp.accentHex, title: tr(\"Rappels intelligents\"))",
    "App/Screens/Profile/ProfileView.swift:125: NavigationLink { SmartRemindersView() } label: { Text(tr(\"Rappels intelligents\")) }",
    "App/Screens/Profile/SmartRemindersView.swift:144: .navigationTitle(tr(\"Rappels intelligents\"))"
   ]
@@ -26237,7 +26247,8 @@
  "Rien de prévu ce jour-là.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:178: Text(tr(\"Rien de prévu ce jour-là.\"))",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:139: card = MiniHero(label: tr(\"Prochain événement\"), value: \"—\", caption: tr(\"Rien de prévu ce jour-là.\"), valueSize: 44)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:227: Text(tr(\"Rien de prévu ce jour-là.\"))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:116: Text(tr(\"Rien de prévu ce jour-là.\")).font(.subheadline).foregroundStyle(.secondary).card(padding: 14)",
    "App/Screens/MiniApps/Travel/TravelApp.swift:151: MiniRow(symbol: \"list.bullet.below.rectangle\", colorHex: accentHex, title: tr(\"Rien de prévu ce jour-là.\"),"
   ]
@@ -26661,7 +26672,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsApp.swift:352: .accessibilityLabel(Text(\"\\(tr(\"Régularité\")) : \\(Fmt.percent(rate))\"))",
-   "App/Screens/Content/HabitsApp.swift:617: MiniSectionTitle(title: tr(\"Régularité\"), detail: tr(\"30 j · 90 j\"))",
+   "App/Screens/Content/HabitsApp.swift:620: MiniSectionTitle(title: tr(\"Régularité\"), detail: tr(\"30 j · 90 j\"))",
    "App/Screens/Content/HabitsView.swift:136: .accessibilityLabel(Text(\"\\(tr(\"Régularité\")) : \\(Fmt.percent(rate))\"))",
    "App/Screens/Explore/StoreCombos.swift:133: combo(\"taux-serie\", tr(\"Régularité\"), tr(\"Ton taux de réussite et ta série.\"), .forest, \"7FA33A\","
   ]
@@ -26669,7 +26680,7 @@
  "Régularité · 30 jours": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:575: MiniStat(title: tr(\"Régularité · 30 jours\"), value: rate.map { Fmt.percent($0) } ?? \"—\", colorHex: HabitsApp.accentHex)"
+   "App/Screens/Content/HabitsApp.swift:578: MiniStat(title: tr(\"Régularité · 30 jours\"), value: rate.map { Fmt.percent($0) } ?? \"—\", colorHex: HabitsApp.accentHex)"
   ]
  },
  "Régularité, semaines, jours complets": {
@@ -26727,7 +26738,7 @@
  "Répéter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:384: Picker(tr(\"Répéter\"), selection: $task.repeats) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:449: Picker(tr(\"Répéter\"), selection: $task.repeats) {",
    "App/Screens/Spaces/StudentSpace.swift:300: Text(tr(\"Répéter\"))"
   ]
  },
@@ -28561,7 +28572,7 @@
  "Supprimer la tâche": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:398: Button(tr(\"Supprimer la tâche\"), role: .destructive) {"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:463: Button(tr(\"Supprimer la tâche\"), role: .destructive) {"
   ]
  },
  "Supprimer la vente": {
@@ -29056,7 +29067,7 @@
  "Série": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:461: MiniStat(title: tr(\"Série\"), value: \"\\(streak)\", unit: tr(\"jours\"), colorHex: habit.colorHex)",
+   "App/Screens/Content/HabitsApp.swift:464: MiniStat(title: tr(\"Série\"), value: \"\\(streak)\", unit: tr(\"jours\"), colorHex: habit.colorHex)",
    "App/Screens/Explore/StoreShowcase.swift:71: subtitle: tr(\"Série\")",
    "Shared/Model/KindCatalog.swift:147: KindInfo(kind: .habitStreak, title: tr(\"Série\"), summary: tr(\"La série en cours d'une habitude et ses 30 derniers jours.\"), category: .wellbeing, symbol: \"flame.fill\", isPremium: false, families: SM +",
    "Shared/Model/Templates.swift:129: WidgetTemplate(id: \"streak-dark\", name: tr(\"Série\"), kind: .habitStreak, themeID: .dark, accentHex: \"F2A33A\"),"
@@ -29106,7 +29117,7 @@
   "uses": [
    "App/Screens/Content/HabitsApp.swift:170: caption: streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : nil",
    "App/Screens/Content/HabitsApp.swift:342: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
-   "App/Screens/Content/HabitsApp.swift:446: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
+   "App/Screens/Content/HabitsApp.swift:449: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
    "App/Screens/Content/HabitsView.swift:126: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))"
   ]
  },
@@ -29142,7 +29153,7 @@
  "Série la plus longue": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:576: MiniStat(title: tr(\"Série la plus longue\"), value: \"\\(best)\", unit: tr(\"j\"), colorHex: HabitsApp.accentHex)"
+   "App/Screens/Content/HabitsApp.swift:579: MiniStat(title: tr(\"Série la plus longue\"), value: \"\\(best)\", unit: tr(\"j\"), colorHex: HabitsApp.accentHex)"
   ]
  },
  "Série · %@": {
@@ -29175,7 +29186,7 @@
  "Séries et régularité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:114: MiniRow(symbol: \"repeat\", colorHex: \"7FA33A\", title: tr(\"Habitudes\"), detail: tr(\"Séries et régularité\"),"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:91: MiniRow(symbol: \"repeat\", colorHex: \"7FA33A\", title: tr(\"Habitudes\"), detail: tr(\"Séries et régularité\"),"
   ]
  },
  "Séries, semaine et taux de réussite de tes habitudes.": {
@@ -30555,7 +30566,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:68: Toggle(tr(\"Titre\"), isOn: $design.showsTitle)",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:370: TextField(tr(\"Titre\"), text: $task.title)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:435: TextField(tr(\"Titre\"), text: $task.title)",
    "App/Screens/MiniApps/Planning/ScheduleImportView.swift:492: TextField(value.kind == .course ? tr(\"Titre\") : tr(\"Titre (facultatif)\"), text: clearing(.title, of: slot, slot.title))",
    "App/Screens/Spaces/StudentSpace.swift:541: TextField(tr(\"Titre\"), text: $assignment.title)"
   ]
@@ -31007,7 +31018,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:92: case .priorities: tr(\"Top 3 du jour\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:196: MiniSectionTitle(title: tr(\"Top 3 du jour\"), detail: items.isEmpty ? nil : \"\\(items.count)/\\(ProductivityState.maxPriorities)\")",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:245: MiniSectionTitle(title: tr(\"Top 3 du jour\"), detail: items.isEmpty ? nil : \"\\(items.count)/\\(ProductivityState.maxPriorities)\")",
    "App/Screens/Spaces/ProductivitySpace.swift:45: Text(tr(\"Top 3 du jour\"))",
    "Shared/Model/KindCatalog.swift:136: KindInfo(kind: .priorities, title: tr(\"Top 3 du jour\"), summary: tr(\"Tes trois priorités du jour, cochées depuis l'écran d'accueil.\"), category: .productivity, symbol: \"3.circle\", isPremium: false, fa"
   ]
@@ -31579,7 +31590,7 @@
  "Toutes les habitudes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:587: MiniSectionTitle(title: tr(\"Toutes les habitudes\"), detail: tr(\"par semaine, lundi indiqué\"))"
+   "App/Screens/Content/HabitsApp.swift:590: MiniSectionTitle(title: tr(\"Toutes les habitudes\"), detail: tr(\"par semaine, lundi indiqué\"))"
   ]
  },
  "Toutes les icônes de l'app": {
@@ -31879,7 +31890,7 @@
  "Tâche": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:368: SheetForm(title: task.title.isEmpty ? tr(\"Nouvelle tâche\") : tr(\"Tâche\"), canSave: !task.title.trimmed.isEmpty, closesWithBackArrow: exists, onSave: save) {",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:433: SheetForm(title: task.title.isEmpty ? tr(\"Nouvelle tâche\") : tr(\"Tâche\"), canSave: !task.title.trimmed.isEmpty, closesWithBackArrow: exists, onSave: save) {",
    "App/Screens/Spaces/ProductivitySpace.swift:249: TextField(tr(\"Tâche\"), text: $task.title)",
    "Shared/Intents/InteractiveIntents.swift:13: @Parameter(title: \"Tâche\")",
    "Shared/Intents/SpaceIntents.swift:355: @Parameter(title: \"Tâche\")"
@@ -31891,7 +31902,7 @@
    "App/Components/StylePicker.swift:155: Text(tr(\"Tâches\"))",
    "App/Core/DataItems.swift:91: case .tasks: tr(\"Tâches\")",
    "App/Screens/Content/TasksView.swift:65: .navigationTitle(tr(\"Tâches\"))",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:91: MiniSectionTitle(title: tr(\"Tâches\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:68: MiniSectionTitle(title: tr(\"Tâches\"))"
   ]
  },
  "Tâches : %@": {
@@ -31933,7 +31944,7 @@
  "Tâches regroupées par projet": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:108: MiniRow(symbol: \"folder.fill\", colorHex: accentHex, title: tr(\"Projets\"), detail: tr(\"Tâches regroupées par projet\"),"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:85: MiniRow(symbol: \"folder.fill\", colorHex: accentHex, title: tr(\"Projets\"), detail: tr(\"Tâches regroupées par projet\"),"
   ]
  },
  "Tâches, priorités et focus sur des éclats de couleur.": {
@@ -32255,7 +32266,7 @@
  "Une fois faite, la tâche revient à sa prochaine date.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:390: Text(tr(\"Une fois faite, la tâche revient à sa prochaine date.\"))"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:455: Text(tr(\"Une fois faite, la tâche revient à sa prochaine date.\"))"
   ]
  },
  "Une grande barre de progression.": {
@@ -32515,7 +32526,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Content/HabitsApp.swift:328: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))",
-   "App/Screens/Content/HabitsApp.swift:442: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))",
+   "App/Screens/Content/HabitsApp.swift:445: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))",
    "App/Screens/Content/HabitsView.swift:114: .accessibilityLabel(Text(done ? tr(\"Marquer \\(habit.name) comme non fait\") : tr(\"Valider \\(habit.name)\")))"
   ]
  },
@@ -33878,6 +33889,7 @@
  "dans %@": {
   "placeholders": 1,
   "uses": [
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:134: let when = next.inProgress ? tr(\"En cours · encore \\(length)\") : tr(\"dans \\(length)\")",
    "Shared/Render/Tiles/TileFactory.swift:108: if seconds < 86_400 { return tr(\"dans \\(Fmt.hours(seconds / 3600))\").replacingOccurrences(of: \" \", with: \"\\u{00A0}\") }"
   ]
  },
@@ -34426,7 +34438,7 @@
  "j": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:576: MiniStat(title: tr(\"Série la plus longue\"), value: \"\\(best)\", unit: tr(\"j\"), colorHex: HabitsApp.accentHex)"
+   "App/Screens/Content/HabitsApp.swift:579: MiniStat(title: tr(\"Série la plus longue\"), value: \"\\(best)\", unit: tr(\"j\"), colorHex: HabitsApp.accentHex)"
   ]
  },
  "jeudis [each]": {
@@ -34440,8 +34452,8 @@
   "uses": [
    "App/Screens/Content/HabitsApp.swift:170: caption: streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : nil",
    "App/Screens/Content/HabitsApp.swift:342: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
-   "App/Screens/Content/HabitsApp.swift:446: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
-   "App/Screens/Content/HabitsApp.swift:622: detail: tr(\"Meilleure série : \\(Fmt.plural(habit.bestStreak, tr(\"jour\"), tr(\"jours\")))\"),"
+   "App/Screens/Content/HabitsApp.swift:449: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
+   "App/Screens/Content/HabitsApp.swift:625: detail: tr(\"Meilleure série : \\(Fmt.plural(habit.bestStreak, tr(\"jour\"), tr(\"jours\")))\"),"
   ]
  },
  "jour depuis": {
@@ -34454,8 +34466,8 @@
  "jour fait": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:471: MiniSectionTitle(title: Fmt.monthYear(today), detail: Fmt.plural(month, tr(\"jour fait\"), tr(\"jours faits\")))",
-   "App/Screens/Content/HabitsApp.swift:538: .accessibilityLabel(Text(\"\\(Fmt.monthYear(today)) : \\(Fmt.plural(HabitsHybrid.doneCount(habit, inMonthOf: today), tr(\"jour fait\"), tr(\"jours faits\")))\"))"
+   "App/Screens/Content/HabitsApp.swift:474: MiniSectionTitle(title: Fmt.monthYear(today), detail: Fmt.plural(month, tr(\"jour fait\"), tr(\"jours faits\")))",
+   "App/Screens/Content/HabitsApp.swift:541: .accessibilityLabel(Text(\"\\(Fmt.monthYear(today)) : \\(Fmt.plural(HabitsHybrid.doneCount(habit, inMonthOf: today), tr(\"jour fait\"), tr(\"jours faits\")))\"))"
   ]
  },
  "jour gratuit": {
@@ -34484,8 +34496,8 @@
   "uses": [
    "App/Screens/Content/HabitsApp.swift:170: caption: streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : nil",
    "App/Screens/Content/HabitsApp.swift:342: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
-   "App/Screens/Content/HabitsApp.swift:446: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
-   "App/Screens/Content/HabitsApp.swift:461: MiniStat(title: tr(\"Série\"), value: \"\\(streak)\", unit: tr(\"jours\"), colorHex: habit.colorHex)"
+   "App/Screens/Content/HabitsApp.swift:449: Text(streak > 0 ? tr(\"Série de \\(Fmt.plural(streak, tr(\"jour\"), tr(\"jours\")))\") : tr(\"Pas encore de série\"))",
+   "App/Screens/Content/HabitsApp.swift:464: MiniStat(title: tr(\"Série\"), value: \"\\(streak)\", unit: tr(\"jours\"), colorHex: habit.colorHex)"
   ]
  },
  "jours depuis": {
@@ -34498,8 +34510,8 @@
  "jours faits": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:471: MiniSectionTitle(title: Fmt.monthYear(today), detail: Fmt.plural(month, tr(\"jour fait\"), tr(\"jours faits\")))",
-   "App/Screens/Content/HabitsApp.swift:538: .accessibilityLabel(Text(\"\\(Fmt.monthYear(today)) : \\(Fmt.plural(HabitsHybrid.doneCount(habit, inMonthOf: today), tr(\"jour fait\"), tr(\"jours faits\")))\"))"
+   "App/Screens/Content/HabitsApp.swift:474: MiniSectionTitle(title: Fmt.monthYear(today), detail: Fmt.plural(month, tr(\"jour fait\"), tr(\"jours faits\")))",
+   "App/Screens/Content/HabitsApp.swift:541: .accessibilityLabel(Text(\"\\(Fmt.monthYear(today)) : \\(Fmt.plural(HabitsHybrid.doneCount(habit, inMonthOf: today), tr(\"jour fait\"), tr(\"jours faits\")))\"))"
   ]
  },
  "jours gratuits": {
@@ -34993,7 +35005,7 @@
  "par semaine, lundi indiqué": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:587: MiniSectionTitle(title: tr(\"Toutes les habitudes\"), detail: tr(\"par semaine, lundi indiqué\"))"
+   "App/Screens/Content/HabitsApp.swift:590: MiniSectionTitle(title: tr(\"Toutes les habitudes\"), detail: tr(\"par semaine, lundi indiqué\"))"
   ]
  },
  "partiel": {
@@ -35986,7 +35998,7 @@
  "À faire aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Content/HabitsApp.swift:444: Text(done ? tr(\"Faite aujourd'hui\") : tr(\"À faire aujourd'hui\"))"
+   "App/Screens/Content/HabitsApp.swift:447: Text(done ? tr(\"Faite aujourd'hui\") : tr(\"À faire aujourd'hui\"))"
   ]
  },
  "À faire une seule fois": {
@@ -36076,7 +36088,7 @@
  "À partir d'une photo ou d'un PDF": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:81: detail: tr(\"À partir d'une photo ou d'un PDF\"))",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:176: detail: tr(\"À partir d'une photo ou d'un PDF\"), showsChevron: model.isPremium)",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:348: detail: tr(\"À partir d'une photo ou d'un PDF\"))"
   ]
  },
@@ -36222,7 +36234,7 @@
  "À une heure précise": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:380: Toggle(tr(\"À une heure précise\"), isOn: $task.hasTime)"
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:445: Toggle(tr(\"À une heure précise\"), isOn: $task.hasTime)"
   ]
  },
  "À venir": {
@@ -36314,7 +36326,7 @@
  "Échelle": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningCalendar.swift:80: Picker(tr(\"Échelle\"), selection: Binding(get: { scale }, set: { change(to: $0) })) {"
+   "App/Screens/MiniApps/Planning/PlanningCalendar.swift:69: Picker(tr(\"Échelle\"), selection: Binding(get: { scale }, set: { change(to: $0) })) {"
   ]
  },
  "Échéance": {
@@ -36322,7 +36334,7 @@
   "uses": [
    "App/Core/Agenda.swift:80: id: \"deadline-\\(deadline.id)\", kind: .deadline, title: deadline.title, detail: tr(\"Échéance\"),",
    "App/Screens/Editor/SpaceOptionsSection.swift:15: case .deadline: tr(\"Échéance\")",
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:377: Toggle(tr(\"Échéance\"), isOn: $hasDue)",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:442: Toggle(tr(\"Échéance\"), isOn: $hasDue)",
    "App/Screens/Spaces/ProductivitySpace.swift:232: Toggle(tr(\"Échéance\"), isOn: $hasDeadline)"
   ]
  },
@@ -36953,7 +36965,7 @@
  "élément": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:175: detail: items.isEmpty ? nil : Fmt.plural(items.count, tr(\"élément\"), tr(\"éléments\")))",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:224: detail: items.isEmpty ? nil : Fmt.plural(items.count, tr(\"élément\"), tr(\"éléments\")))",
    "App/Screens/MiniApps/Planning/PlanningCalendar.swift:360: .accessibilityValue(Text(list.isEmpty ? tr(\"Libre\") : Fmt.plural(list.count, tr(\"élément\"), tr(\"éléments\"))))",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:190: MiniSectionTitle(title: Fmt.longDay(day), detail: items.isEmpty ? nil : Fmt.plural(items.count, tr(\"élément\"), tr(\"éléments\")))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:114: MiniSectionTitle(title: Fmt.longDay(day), detail: count == 0 ? nil : Fmt.plural(count, tr(\"élément\"), tr(\"éléments\")))"
@@ -36962,7 +36974,7 @@
  "éléments": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Planning/PlanningApp.swift:175: detail: items.isEmpty ? nil : Fmt.plural(items.count, tr(\"élément\"), tr(\"éléments\")))",
+   "App/Screens/MiniApps/Planning/PlanningApp.swift:224: detail: items.isEmpty ? nil : Fmt.plural(items.count, tr(\"élément\"), tr(\"éléments\")))",
    "App/Screens/MiniApps/Planning/PlanningCalendar.swift:360: .accessibilityValue(Text(list.isEmpty ? tr(\"Libre\") : Fmt.plural(list.count, tr(\"élément\"), tr(\"éléments\"))))",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:190: MiniSectionTitle(title: Fmt.longDay(day), detail: items.isEmpty ? nil : Fmt.plural(items.count, tr(\"élément\"), tr(\"éléments\")))",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:114: MiniSectionTitle(title: Fmt.longDay(day), detail: count == 0 ? nil : Fmt.plural(count, tr(\"élément\"), tr(\"éléments\")))"
