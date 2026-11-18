@@ -324,7 +324,7 @@
  "%@ chacun": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:251: detail: recurring.subscribers > 0 ? tr(\"\\(TF.money(recurring.mrr / Double(recurring.subscribers), currency, decimals: 2)) chacun\") : nil)"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:266: detail: recurring.subscribers > 0 ? tr(\"\\(TF.money(recurring.mrr / Double(recurring.subscribers), currency, decimals: 2)) chacun\") : nil)"
   ]
  },
  "%@ commandes ce mois-ci": {
@@ -423,7 +423,7 @@
  "%@ de l'objectif de %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:199: lines.append(tr(\"\\(Fmt.percent(progress)) de l'objectif de \\(TF.money(state.monthlyGoal, currency))\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:410: Text(tr(\"\\(Fmt.percent(share)) de l'objectif de \\(TF.money(goal, currency))\"))"
   ]
  },
  "%@ de la journée écoulée": {
@@ -1077,7 +1077,7 @@
  "%@ sur un mois": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:248: detail: recurring.growth.map { tr(\"\\(Fmt.signedPercent($0 * 100)) sur un mois\") }, colorHex: \"1E9E75\")",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:263: detail: recurring.growth.map { tr(\"\\(Fmt.signedPercent($0 * 100)) sur un mois\") }, colorHex: \"1E9E75\")",
    "Shared/Render/Tiles/BusinessTiles.swift:114: tile.detail = tr(\"\\(Fmt.signedPercent(growth * 100)) sur un mois\")"
   ]
  },
@@ -1147,6 +1147,12 @@
   "placeholders": 2,
   "uses": [
    "Shared/Render/Tiles/MoneyTiles.swift:69: tile.caption = tr(\"\\(Fmt.month(now)) · \\(items.count) catégories\")"
+  ]
+ },
+ "%@ · %@ ce mois-ci": {
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
   ]
  },
  "%@ · %@ de la semaine": {
@@ -2187,7 +2193,7 @@
  "ARR": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:249: MiniStat(title: tr(\"ARR\"), value: TF.money(recurring.arr, currency), detail: tr(\"MRR × 12\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:264: MiniStat(title: tr(\"ARR\"), value: TF.money(recurring.arr, currency), detail: tr(\"MRR × 12\"))"
   ]
  },
  "ARR %@ · %@ abonnés": {
@@ -2294,7 +2300,7 @@
  "Abonnés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:250: MiniStat(title: tr(\"Abonnés\"), value: Fmt.number(recurring.subscribers),",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:265: MiniStat(title: tr(\"Abonnés\"), value: Fmt.number(recurring.subscribers),",
    "App/Screens/Spaces/MoneySpaces.swift:303: IntRow(title: tr(\"Abonnés\"), value: $snapshot.subscribers)",
    "Shared/Domains/Business.swift:66: case .subscribers: tr(\"Abonnés\")"
   ]
@@ -2308,7 +2314,7 @@
  "Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Ardane trace leur évolution.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:316: Text(tr(\"Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Ardane trace leur évolution.\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:331: Text(tr(\"Abonnés, devis envoyés, avis clients, NPS… Crée les indicateurs qui comptent pour toi et note leur valeur quand tu veux : Ardane trace leur évolution.\"))"
   ]
  },
  "Absent": {
@@ -2549,7 +2555,7 @@
  "Actuel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:288: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:286: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
    "Shared/Render/Tiles/TileView.swift:1217: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
   ]
  },
@@ -4773,7 +4779,7 @@
  "Aucune valeur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:469: return parts.isEmpty ? tr(\"Aucune valeur\") : parts.joined(separator: \" · \")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:599: return parts.isEmpty ? tr(\"Aucune valeur\") : parts.joined(separator: \" · \")"
   ]
  },
  "Aucune vente notée pour l'instant.": {
@@ -6225,7 +6231,7 @@
  "Business": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:152: .navigationTitle(state.name.isEmpty ? tr(\"Business\") : state.name)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:166: .navigationTitle(tr(\"Business\"))",
    "App/Screens/MiniApps/MiniApp.swift:16: case .business: tr(\"Business\")",
    "Shared/Domains/Profile.swift:21: case .business: tr(\"Business\")",
    "Shared/Domains/Profile.swift:134: case .business: tr(\"Business\")"
@@ -6326,10 +6332,10 @@
  "Bénéfice": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:180: .foregroundStyle(by: .value(\"Type\", tr(\"Bénéfice\")))",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:185: .chartForegroundStyleScale([tr(\"Chiffre d'affaires\"): CristalPalette.of(style.id).category(BusinessFormat.accentHex), tr(\"Dépenses\"): CristalPalette.of(style.id).category(\"8A8A8E\").opacity(0.5), tr(\"B",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:201: MiniStat(title: tr(\"Bénéfice\"), value: TF.money(revenue - costs, currency),",
-   "Shared/Domains/Business.swift:58: case .profit: tr(\"Bénéfice\")"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:176: .foregroundStyle(by: .value(\"Type\", tr(\"Bénéfice\")))",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:181: .chartForegroundStyleScale([tr(\"Chiffre d'affaires\"): CristalPalette.of(style.id).category(BusinessFormat.accentHex), tr(\"Dépenses\"): CristalPalette.of(style.id).category(\"8A8A8E\").opacity(0.5), tr(\"B",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:197: MiniStat(title: tr(\"Bénéfice\"), value: TF.money(revenue - costs, currency),",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:211: MiniStat(title: tr(\"Bénéfice\"), value: TF.money(thisMonth.profit, currency),"
   ]
  },
  "Bénéfice %@": {
@@ -6994,9 +7000,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MyInfoSection.swift:60: add(\"revenue\", \"chart.line.uptrend.xyaxis\", tr(\"Ce mois-ci\"), business.sales.isEmpty ? nil : TF.money(BusinessMath.revenue(business, .month, at: Date()), currency))",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:205: MiniSectionTitle(title: tr(\"Ce mois-ci\"), detail: Fmt.monthYear(now).capitalizedFirst)",
    "App/Screens/MiniApps/Car/CarApp.swift:135: Text(tr(\"Ce mois-ci\")).font(.caption).opacity(0.75)",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:1226: legend(tr(\"Ce mois-ci\"), color: ink, dashed: false)",
-   "App/Screens/Spaces/MoneySpaces.swift:167: ValueRow(title: tr(\"Ce mois-ci\"), value: TF.money(BusinessMath.revenue(state, .month, at: now), currency), symbol: \"chart.bar\")"
+   "App/Screens/MiniApps/Finances/FinancesPages.swift:1226: legend(tr(\"Ce mois-ci\"), color: ink, dashed: false)"
   ]
  },
  "Ce qu'elle coûte, son entretien et son kilométrage.": {
@@ -7380,7 +7386,7 @@
  "Cette période": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:298: legend(tr(\"Cette période\"), hex: accentHex, dashed: false)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:296: legend(tr(\"Cette période\"), hex: accentHex, dashed: false)"
   ]
  },
  "Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.": {
@@ -7733,35 +7739,23 @@
  "Chiffre d'affaires": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:209: MiniHero(label: tr(\"Chiffre d'affaires\"), value: TF.money(comparison.current ?? 0, currency),",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:185: .chartForegroundStyleScale([tr(\"Chiffre d'affaires\"): CristalPalette.of(style.id).category(BusinessFormat.accentHex), tr(\"Dépenses\"): CristalPalette.of(style.id).category(\"8A8A8E\").opacity(0.5), tr(\"B",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:200: MiniStat(title: tr(\"Chiffre d'affaires\"), value: TF.money(revenue, currency))",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:228: months.flatMap { [Bar(month: $0.start, series: tr(\"Chiffre d'affaires\"), value: $0.revenue), Bar(month: $0.start, series: tr(\"Dépenses\"), value: $0.costs)] }"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:375: Text(tr(\"Chiffre d'affaires\").uppercased())",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:181: .chartForegroundStyleScale([tr(\"Chiffre d'affaires\"): CristalPalette.of(style.id).category(BusinessFormat.accentHex), tr(\"Dépenses\"): CristalPalette.of(style.id).category(\"8A8A8E\").opacity(0.5), tr(\"B",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:196: MiniStat(title: tr(\"Chiffre d'affaires\"), value: TF.money(revenue, currency))",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:207: MiniStat(title: tr(\"Chiffre d'affaires\"), value: TF.money(thisMonth.revenue, currency))"
   ]
  },
  "Chiffre d'affaires cumulé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:280: MiniSectionTitle(title: tr(\"Chiffre d'affaires cumulé\"), detail: period == .day ? tr(\"cette semaine\") : nil)",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:293: .accessibilityLabel(tr(\"Chiffre d'affaires cumulé\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:278: MiniSectionTitle(title: tr(\"Chiffre d'affaires cumulé\"), detail: period == .day ? tr(\"cette semaine\") : nil)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:291: .accessibilityLabel(tr(\"Chiffre d'affaires cumulé\"))"
   ]
  },
  "Chiffre d'affaires et indicateurs": {
   "placeholders": 0,
   "uses": [
    "Shared/Model/KindCatalog.swift:35: case .business: tr(\"Chiffre d'affaires et indicateurs\")"
-  ]
- },
- "Chiffre d'affaires, dépenses et bénéfice de chaque mois, leur évolution sur six mois et ta marge. Tout ce que tu notes reste enregistré.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:162: message: tr(\"Chiffre d'affaires, dépenses et bénéfice de chaque mois, leur évolution sur six mois et ta marge. Tout ce que tu notes reste enregistré.\"))"
-  ]
- },
- "Chiffre d'affaires, dépenses et bénéfice par mois": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:325: BusinessRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Résultats\"), detail: tr(\"Chiffre d'affaires, dépenses et bénéfice par mois\"))"
   ]
  },
  "Chiffre d'affaires, objectif, bénéfice et MRR.": {
@@ -7872,7 +7866,7 @@
  "Choisir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:224: Text(tr(\"Choisir\")).font(.subheadline.weight(.semibold)).foregroundStyle(Color.accentColor)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:241: Label(tr(\"Choisir\"), systemImage: \"slider.horizontal.3\")"
   ]
  },
  "Choisir dans la bibliothèque": {
@@ -7985,7 +7979,7 @@
  "Choisis les indicateurs à suivre ici : bénéfice, marge, panier moyen, conversion, MRR…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:229: Text(tr(\"Choisis les indicateurs à suivre ici : bénéfice, marge, panier moyen, conversion, MRR…\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:249: Text(tr(\"Choisis les indicateurs à suivre ici : bénéfice, marge, panier moyen, conversion, MRR…\"))"
   ]
  },
  "Choisis les mini-apps à afficher : leur carte montre tes vraies données, et apparaît même vide pour t'inviter à les remplir.": {
@@ -8187,7 +8181,7 @@
  "Clients abonnés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:529: case .subscribers: tr(\"Clients abonnés\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:662: case .subscribers: tr(\"Clients abonnés\")"
   ]
  },
  "Club sandwich": {
@@ -8375,7 +8369,7 @@
  "Commandes divisées par les visiteurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:527: case .conversion: tr(\"Commandes divisées par les visiteurs\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:660: case .conversion: tr(\"Commandes divisées par les visiteurs\")"
   ]
  },
  "Commandes, panier moyen, nouveaux clients et conversion.": {
@@ -9825,7 +9819,7 @@
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:89: DatePicker(tr(\"Date\"), selection: $design.options.countdownDate, displayedComponents: .date)",
    "App/Screens/Editor/KindOptionsSection.swift:114: DatePicker(tr(\"Date\"), selection: Binding(",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:603: DatePicker(tr(\"Date\"), selection: $date, in: ...Date(), displayedComponents: .date)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:736: DatePicker(tr(\"Date\"), selection: $date, in: ...Date(), displayedComponents: .date)",
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:486: DatePicker(tr(\"Date\"), selection: $expense.date, displayedComponents: .date)"
   ]
  },
@@ -10298,7 +10292,13 @@
  "Depuis le 1er janvier": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:198: MiniSectionTitle(title: tr(\"Depuis le 1er janvier\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:194: MiniSectionTitle(title: tr(\"Depuis le 1er janvier\"))"
+  ]
+ },
+ "Depuis le 1er janvier : bénéfice de %@": {
+  "placeholders": 1,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:335: detail: tr(\"Depuis le 1er janvier : bénéfice de \\(TF.money(yearProfit, currency))\"))"
   ]
  },
  "Depuis le centre": {
@@ -10388,7 +10388,7 @@
  "Dernière valeur : %@, %@.": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:607: Text(tr(\"Dernière valeur : \\(BusinessFormat.number(latest.value, unit: metric.unit)), \\(Fmt.shortDay(latest.date)).\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:740: Text(tr(\"Dernière valeur : \\(BusinessFormat.number(latest.value, unit: metric.unit)), \\(Fmt.shortDay(latest.date)).\"))"
   ]
  },
  "Dernières ventes": {
@@ -11087,6 +11087,7 @@
  "Du %@ au %@": {
   "placeholders": 2,
   "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:230: return tr(\"Du \\(dayMonth(BusinessMath.interval(period.math, containing: now).start)) au \\(dayMonth(now))\")",
    "Shared/Render/Tiles/TravelTiles.swift:39: tile.detail = tr(\"Du \\(Fmt.format(trip.start, template: \"dMMM\")) au \\(Fmt.format(trip.end, template: \"dMMM\"))\")"
   ]
  },
@@ -11449,6 +11450,12 @@
    "Shared/Domains/DishTemplates.swift:329: DishTemplate(name: tr(\"Déjeuner œufs et bacon\"),"
   ]
  },
+ "Déjà affiché en haut": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:622: Text(kpi == .revenue ? tr(\"Déjà affiché en haut\") : explanation(kpi)).font(.caption).foregroundStyle(Color.secondary)"
+  ]
+ },
  "Déjà ajouté à l'instant": {
   "placeholders": 0,
   "uses": [
@@ -11663,9 +11670,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/MoneyView.swift:124: Text(tr(\"Dépense\")).tag(false)",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:160: MiniActionButton(title: tr(\"Dépense\"), symbol: \"minus\", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }",
-   "App/Screens/MiniApps/Finances/FinancesApp.swift:491: title: expense.note.isEmpty ? (category?.name ?? tr(\"Dépense\")) : expense.note,",
-   "App/Screens/MiniApps/Finances/FinancesPages.swift:369: expense.note.isEmpty ? (category?.name ?? tr(\"Dépense\")) : expense.note,"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:182: MiniActionButton(title: tr(\"Dépense\"), symbol: \"minus\", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:465: Label(tr(\"Dépense\"), systemImage: \"minus\")",
+   "App/Screens/MiniApps/Finances/FinancesApp.swift:491: title: expense.note.isEmpty ? (category?.name ?? tr(\"Dépense\")) : expense.note,"
   ]
  },
  "Dépense de voyage": {
@@ -15245,6 +15252,12 @@
    "App/Services/StripeSync.swift:109: case .missingPermission: tr(\"Il manque à la clé l'autorisation « Balance transactions : lecture ».\")"
   ]
  },
+ "Il reste %@ : environ %@ par jour d'ici la fin du mois.": {
+  "placeholders": 2,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:422: Text(tr(\"Il reste \\(TF.money(goal - revenue, currency)) : environ \\(TF.money(perDay, currency)) par jour d'ici la fin du mois.\"))"
+  ]
+ },
  "Il reste %@ sur %@": {
   "placeholders": 2,
   "uses": [
@@ -15480,7 +15493,7 @@
  "Indicateurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:222: MiniSectionTitle(title: tr(\"Indicateurs\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:239: MiniSectionTitle(title: tr(\"Indicateurs\"))",
    "App/Screens/Spaces/MoneySpaces.swift:432: Section(tr(\"Indicateurs\")) {",
    "Shared/Model/KindCatalog.swift:208: KindInfo(kind: .businessKPIs, title: tr(\"Indicateurs\"), summary: tr(\"Commandes, panier moyen, nouveaux clients et conversion.\"), category: .business, symbol: \"square.grid.2x2\", isPremium: true, famili"
   ]
@@ -15767,7 +15780,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:43: case .day: tr(\"Jour\")",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:294: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:292: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
    "App/Screens/MiniApps/Planning/PlanningApp.swift:448: DatePicker(tr(\"Jour\"), selection: Binding(get: { task.due ?? Date() }, set: { task.due = $0 }), displayedComponents: .date)",
    "App/Screens/MiniApps/Planning/PlanningCalendar.swift:10: case .day: tr(\"Jour\")"
   ]
@@ -16201,7 +16214,7 @@
  "L'analyse mois par mois est dans Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:161: PremiumLockCard(symbol: \"chart.bar.xaxis\", title: tr(\"L'analyse mois par mois est dans Premium\"),"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:218: PremiumLockCard(symbol: \"chart.bar.xaxis\", title: tr(\"L'analyse mois par mois est dans Premium\"),"
   ]
  },
  "L'analyse se fait sur ton iPhone : aucune photo n'est enregistrée ni envoyée.": {
@@ -17034,13 +17047,13 @@
  "Le bénéfice ici, c'est tes ventes moins les dépenses que tu as notées : un repère, pas un résultat comptable.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:219: Text(tr(\"Le bénéfice ici, c'est tes ventes moins les dépenses que tu as notées : un repère, pas un résultat comptable.\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:234: Text(tr(\"Le bénéfice ici, c'est tes ventes moins les dépenses que tu as notées : un repère, pas un résultat comptable.\"))"
   ]
  },
  "Le bénéfice rapporté aux ventes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:522: case .margin: tr(\"Le bénéfice rapporté aux ventes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:655: case .margin: tr(\"Le bénéfice rapporté aux ventes\")"
   ]
  },
  "Le carburant est la moyenne de tes pleins des trois derniers mois ; l'entretien prévu est réparti sur douze mois.": {
@@ -17064,7 +17077,7 @@
  "Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:503: Text(tr(\"Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment.\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:636: Text(tr(\"Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment.\"))"
   ]
  },
  "Le chiffre d'affaires, les dépenses et le bénéfice viennent des ventes que tu notes.": {
@@ -17248,6 +17261,12 @@
    "Shared/Domains/ExerciseLibrary.swift:466: range: tr(\"Le genou vient sous la poitrine.\"),"
   ]
  },
+ "Le graphique des six derniers mois et la liste « Mois par mois » s'ouvrent avec Premium. Ta saisie reste gratuite.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessPages.swift:219: message: tr(\"Le graphique des six derniers mois et la liste « Mois par mois » s'ouvrent avec Premium. Ta saisie reste gratuite.\"))"
+  ]
+ },
  "Le haut du bras reste immobile, le long du buste.": {
   "placeholders": 0,
   "uses": [
@@ -17329,7 +17348,7 @@
  "Le nombre de commandes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:523: case .orders: tr(\"Le nombre de commandes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:656: case .orders: tr(\"Le nombre de commandes\")"
   ]
  },
  "Le pack « %@ »": {
@@ -17509,13 +17528,13 @@
  "Le total de tes dépenses": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:520: case .costs: tr(\"Le total de tes dépenses\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:653: case .costs: tr(\"Le total de tes dépenses\")"
   ]
  },
  "Le total de tes ventes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:519: case .revenue: tr(\"Le total de tes ventes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:652: case .revenue: tr(\"Le total de tes ventes\")"
   ]
  },
  "Le widget Régularité suit cet objectif.": {
@@ -17661,7 +17680,7 @@
  "Les clients arrivés sur la période": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:525: case .newCustomers: tr(\"Les clients arrivés sur la période\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:658: case .newCustomers: tr(\"Les clients arrivés sur la période\")"
   ]
  },
  "Les cours marqués « À vérifier » ont été lus avec un doute : regarde-les de près.": {
@@ -17994,7 +18013,7 @@
  "Les visites notées avec tes ventes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:526: case .visitors: tr(\"Les visites notées avec tes ventes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:659: case .visitors: tr(\"Les visites notées avec tes ventes\")"
   ]
  },
  "Les widgets interactifs et la séance en direct demandent iOS 17. Si une action ne répond pas, déverrouille ton iPhone : iOS peut demander Face ID pour certaines actions.": {
@@ -18505,16 +18524,10 @@
  "MRR": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:247: MiniStat(title: tr(\"MRR\"), value: TF.money(recurring.mrr, currency),",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:269: .accessibilityLabel(tr(\"MRR\"))",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:262: MiniStat(title: tr(\"MRR\"), value: TF.money(recurring.mrr, currency),",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:284: .accessibilityLabel(tr(\"MRR\"))",
    "App/Screens/Spaces/MoneySpaces.swift:302: NumberRow(title: tr(\"MRR\"), value: $snapshot.mrr, unit: model.settings.currencyCode)",
    "Shared/Domains/Business.swift:65: case .mrr: tr(\"MRR\")"
-  ]
- },
- "MRR %@": {
-  "placeholders": 1,
-  "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:332: detail: BusinessMath.recurring(state).map { tr(\"MRR \\(TF.money($0.mrr, currency))\") } ?? tr(\"MRR, abonnés, ARR\"))"
   ]
  },
  "MRR et ARR": {
@@ -18526,13 +18539,13 @@
  "MRR × 12": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:249: MiniStat(title: tr(\"ARR\"), value: TF.money(recurring.arr, currency), detail: tr(\"MRR × 12\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:264: MiniStat(title: tr(\"ARR\"), value: TF.money(recurring.arr, currency), detail: tr(\"MRR × 12\"))"
   ]
  },
  "MRR, abonnés, ARR": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:332: detail: BusinessMath.recurring(state).map { tr(\"MRR \\(TF.money($0.mrr, currency))\") } ?? tr(\"MRR, abonnés, ARR\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:342: detail: tr(\"MRR, abonnés, ARR\"), value: BusinessMath.recurring(state).map { TF.money($0.mrr, currency) })"
   ]
  },
  "Ma bibliothèque": {
@@ -18864,6 +18877,7 @@
  "Marge": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Business/BusinessPages.swift:213: MiniStat(title: tr(\"Marge\"), value: thisMonth.margin.map { Fmt.percent($0) } ?? \"–\")",
    "Shared/Domains/Business.swift:59: case .margin: tr(\"Marge\")"
   ]
  },
@@ -19190,7 +19204,7 @@
  "Mes indicateurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:507: .navigationTitle(tr(\"Mes indicateurs\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:640: .navigationTitle(tr(\"Mes indicateurs\"))"
   ]
  },
  "Mes informations": {
@@ -19330,7 +19344,7 @@
  "Mettre à jour le MRR": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:259: MiniActionButton(title: tr(\"Mettre à jour le MRR\"), symbol: \"arrow.triangle.2.circlepath\", colorHex: \"1E9E75\") { sheet = .recurring }",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:274: MiniActionButton(title: tr(\"Mettre à jour le MRR\"), symbol: \"arrow.triangle.2.circlepath\", colorHex: \"1E9E75\") { sheet = .recurring }",
    "App/Screens/Spaces/MoneySpaces.swift:178: Button { sheets?.open { MRREditor() } } label: { Label(tr(\"Mettre à jour le MRR\"), systemImage: \"arrow.triangle.2.circlepath\") }"
   ]
  },
@@ -19580,7 +19594,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:45: case .month: tr(\"Mois\")",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:294: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:292: .chartXAxisLabel(period == .year ? tr(\"Mois\") : tr(\"Jour\"))",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:833: case .month: tr(\"Mois\")",
    "App/Screens/MiniApps/Planning/PlanningCalendar.swift:12: case .month: tr(\"Mois\")"
   ]
@@ -19600,7 +19614,7 @@
  "Mois par mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:208: MiniSectionTitle(title: tr(\"Mois par mois\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:223: MiniSectionTitle(title: tr(\"Mois par mois\"))"
   ]
  },
  "Mois précédent": {
@@ -20368,7 +20382,7 @@
  "Nom (abonnés, devis envoyés, NPS…)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:549: TextField(tr(\"Nom (abonnés, devis envoyés, NPS…)\"), text: $metric.name)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:682: TextField(tr(\"Nom (abonnés, devis envoyés, NPS…)\"), text: $metric.name)"
   ]
  },
  "Nom (café, bus…)": {
@@ -20582,7 +20596,7 @@
  "Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:169: Text(tr(\"Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls.\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:174: Text(tr(\"Note tes ventes (le total du jour suffit) et tes dépenses : chiffre d'affaires, bénéfice, panier moyen et comparaisons se calculent tout seuls.\"))"
   ]
  },
  "Note tes ventes : ton chiffre d'affaires du mois apparaîtra ici.": {
@@ -20665,7 +20679,7 @@
  "Noter une valeur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:351: Label(tr(\"Noter une valeur\"), systemImage: \"plus.circle.fill\")"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:366: Label(tr(\"Noter une valeur\"), systemImage: \"plus.circle.fill\")"
   ]
  },
  "Noter une vente": {
@@ -20881,8 +20895,8 @@
  "Nouvel indicateur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:547: SheetForm(title: isNew ? tr(\"Nouvel indicateur\") : metric.name, canSave: !metric.name.trimmed.isEmpty, onSave: save) {",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:311: MiniActionButton(title: tr(\"Nouvel indicateur\"), symbol: \"plus\", colorHex: BusinessFormat.accentHex) {"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:680: SheetForm(title: isNew ? tr(\"Nouvel indicateur\") : metric.name, canSave: !metric.name.trimmed.isEmpty, onSave: save) {",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:326: MiniActionButton(title: tr(\"Nouvel indicateur\"), symbol: \"plus\", colorHex: BusinessFormat.accentHex) {"
   ]
  },
  "Nouvel objectif": {
@@ -21222,10 +21236,10 @@
  "Objectif atteint": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:427: Text(tr(\"Objectif atteint\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:198: insightCard(symbol: \"checkmark.seal.fill\", title: tr(\"Objectif atteint\"), message: tr(\"Tu es dans ta cible de calories aujourd'hui.\"), action: nil)",
    "Shared/Render/Tiles/MoneyTiles.swift:115: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")",
-   "Shared/Render/Tiles/NutritionTiles.swift:163: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")",
-   "Shared/Render/Tiles/ProductivityTiles.swift:114: tile.caption = value >= goal ? tr(\"Objectif atteint\") : tr(\"encore \\(Fmt.number(goal - value))\")"
+   "Shared/Render/Tiles/NutritionTiles.swift:163: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")"
   ]
  },
  "Objectif calorique": {
@@ -21811,6 +21825,12 @@
    "Shared/Domains/FoodDatabase.swift:220: f(\"padthai\", tr(\"Pad thaï\"), 176, 8, 24, 5.5, 1.5, 350, tr(\"1 portion\"), s: 7, sf: 1, na: 520),"
   ]
  },
+ "Pages": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:324: MiniSectionTitle(title: tr(\"Pages\"))"
+  ]
+ },
  "Paiement en ligne": {
   "placeholders": 0,
   "uses": [
@@ -21963,8 +21983,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/MoneyView.swift:25: summaryValue(tr(\"Par mois\"), Fmt.signedMoney(summary.perDayNet * MoneySummary.daysPerMonth, currency: currency, decimals: 0))",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:170: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:184: .accessibilityLabel(tr(\"Par mois\"))",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:166: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:180: .accessibilityLabel(tr(\"Par mois\"))",
    "App/Screens/MiniApps/Car/CarPages.swift:280: Text(tr(\"Par mois\")).font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)"
   ]
  },
@@ -22943,7 +22963,7 @@
  "Plus c'est haut, mieux c'est": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:552: Toggle(tr(\"Plus c'est haut, mieux c'est\"), isOn: $metric.higherIsBetter)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:685: Toggle(tr(\"Plus c'est haut, mieux c'est\"), isOn: $metric.higherIsBetter)"
   ]
  },
  "Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.": {
@@ -24352,7 +24372,7 @@
  "Précédent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:283: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Précédent\", point.previous), series: .value(\"Série\", tr(\"Précédent\")))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:281: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Précédent\", point.previous), series: .value(\"Série\", tr(\"Précédent\")))"
   ]
  },
  "Préférences": {
@@ -24522,14 +24542,14 @@
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:73: EditorSection(title: tr(\"Période\")) {",
    "App/Screens/Editor/KindOptionsSection.swift:74: Picker(tr(\"Période\"), selection: $design.options.progressUnit) {",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:204: Picker(tr(\"Période\"), selection: $period) {",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:213: Picker(tr(\"Période\"), selection: $period) {",
    "App/Screens/MiniApps/Business/BusinessSources.swift:323: LabeledContent(tr(\"Période\"), value: \"\\(Fmt.shortDay(period.lowerBound)) – \\(Fmt.shortDay(period.upperBound))\")"
   ]
  },
  "Période précédente": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:299: legend(tr(\"Période précédente\"), hex: \"8A8A8E\", dashed: true)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:297: legend(tr(\"Période précédente\"), hex: \"8A8A8E\", dashed: true)",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:238: .accessibilityLabel(Text(tr(\"Période précédente\")))"
   ]
  },
@@ -25950,14 +25970,14 @@
  "Revenu mensuel récurrent (abonnements)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:528: case .mrr: tr(\"Revenu mensuel récurrent (abonnements)\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:661: case .mrr: tr(\"Revenu mensuel récurrent (abonnements)\")"
   ]
  },
  "Revenu récurrent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:331: BusinessRow(symbol: \"arrow.triangle.2.circlepath\", colorHex: MiniStyle.goodHex, title: tr(\"Revenu récurrent\"),",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:295: .navigationTitle(tr(\"Revenu récurrent\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:341: BusinessRow(symbol: \"arrow.triangle.2.circlepath\", colorHex: MiniStyle.goodHex, title: tr(\"Revenu récurrent\"),",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:310: .navigationTitle(tr(\"Revenu récurrent\"))",
    "App/Screens/Spaces/MoneySpaces.swift:300: SheetForm(title: tr(\"Revenu récurrent\"), canSave: snapshot.mrr > 0, onSave: save) {",
    "Shared/Render/Tiles/BusinessTiles.swift:109: var tile = Tile(title: tr(\"Revenu récurrent\"), symbol: \"arrow.triangle.2.circlepath\")"
   ]
@@ -26198,7 +26218,7 @@
  "Rien %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:194: lines.append(tr(\"Rien \\(period.previousText)\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:207: lines.append(tr(\"Rien \\(period.previousText)\"))"
   ]
  },
  "Rien au programme pour l'instant. Ajoute tes vols, ton hébergement et ce que tu veux faire : tout se range ici jour par jour.": {
@@ -26265,7 +26285,7 @@
  "Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:164: Text(tr(\"Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.\"))",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:160: Text(tr(\"Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:1118: Text(tr(\"Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération.\"))"
   ]
  },
@@ -26860,8 +26880,8 @@
  "Résultats": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:325: BusinessRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Résultats\"), detail: tr(\"Chiffre d'affaires, dépenses et bénéfice par mois\"))",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:223: .navigationTitle(tr(\"Résultats\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:334: BusinessRow(symbol: \"chart.bar.xaxis\", colorHex: \"3366FF\", title: tr(\"Résultats\"),",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:238: .navigationTitle(tr(\"Résultats\"))",
    "App/Screens/Spaces/NutritionSpace.swift:266: Text(category.map(\\.title) ?? (query.trimmed.isEmpty ? tr(\"Suggestions\") : tr(\"Résultats\")))"
   ]
  },
@@ -27815,7 +27835,7 @@
  "Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Ardane en suit la croissance.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:254: Text(tr(\"Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Ardane en suit la croissance.\"))"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:269: Text(tr(\"Si tu vends des abonnements, note ton revenu mensuel récurrent chaque mois : Ardane en suit la croissance.\"))"
   ]
  },
  "Silence jusqu'à": {
@@ -27852,7 +27872,7 @@
  "Six derniers mois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:170: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:166: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:1268: MiniSectionTitle(title: months.count >= 6 ? tr(\"Six derniers mois\") : tr(\"Par mois\"))"
   ]
  },
@@ -28451,9 +28471,8 @@
  "Suivis à la main": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:255: MiniSectionTitle(title: tr(\"Suivis à la main\"))",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:339: BusinessRow(symbol: \"gauge.with.dots.needle.33percent\", colorHex: \"F2A33A\", title: tr(\"Suivis à la main\"),",
-   "App/Screens/MiniApps/Business/BusinessPages.swift:325: .navigationTitle(tr(\"Suivis à la main\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:347: BusinessRow(symbol: \"gauge.with.dots.needle.33percent\", colorHex: \"F2A33A\", title: tr(\"Suivis à la main\"),",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:340: .navigationTitle(tr(\"Suivis à la main\"))"
   ]
  },
  "Sunset": {
@@ -28594,7 +28613,7 @@
  "Supprimer l'indicateur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:564: Button(tr(\"Supprimer l'indicateur\"), role: .destructive) {"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:697: Button(tr(\"Supprimer l'indicateur\"), role: .destructive) {"
   ]
  },
  "Supprimer l'objectif": {
@@ -30190,7 +30209,7 @@
  "Tes propres indicateurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:340: detail: tr(\"Tes propres indicateurs\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:348: detail: metricNames.isEmpty ? tr(\"Tes propres indicateurs\") : metricNames)"
   ]
  },
  "Tes records apparaîtront après ta première séance.": {
@@ -30750,7 +30769,7 @@
  "Ton activité, chiffres à l'appui": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:168: Text(tr(\"Ton activité, chiffres à l'appui\")).font(.title3.weight(.bold))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:173: Text(tr(\"Ton activité, chiffres à l'appui\")).font(.title3.weight(.bold))"
   ]
  },
  "Ton année en un coup d'œil": {
@@ -31464,12 +31483,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MyInfoCenter.swift:161: Text(tr(\"Tout ce que tes widgets savent de toi. Renseigné une fois ici ou en créant un widget, c'est utilisé partout : widgets, « Mon Quotidien » et statistiques.\"))"
-  ]
- },
- "Tout ce que tu as noté, modifiable": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:319: BusinessRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Ventes et dépenses\"), detail: tr(\"Tout ce que tu as noté, modifiable\"))"
   ]
  },
  "Tout ce que tu notes est gardé. Premium affiche les mois d'avant et l'évolution de tes finances sur six mois.": {
@@ -32463,7 +32476,7 @@
  "Unité (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:551: TextField(tr(\"Unité (facultatif)\"), text: $metric.unit)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:684: TextField(tr(\"Unité (facultatif)\"), text: $metric.unit)"
   ]
  },
  "Unités": {
@@ -32531,15 +32544,15 @@
  "Valeur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:560: NumberRow(title: tr(\"Valeur\"), value: $firstValue)",
-   "App/Screens/MiniApps/Business/BusinessApp.swift:601: NumberRow(title: tr(\"Valeur\"), value: $value, unit: metric.unit.isEmpty ? nil : metric.unit)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:693: NumberRow(title: tr(\"Valeur\"), value: $firstValue)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:734: NumberRow(title: tr(\"Valeur\"), value: $value, unit: metric.unit.isEmpty ? nil : metric.unit)",
    "App/Screens/Profile/NutritionTargetsCard.swift:311: TextField(tr(\"Valeur\"), text: $text)"
   ]
  },
  "Valeur d'aujourd'hui (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:559: Section(tr(\"Valeur d'aujourd'hui (facultatif)\")) {"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:692: Section(tr(\"Valeur d'aujourd'hui (facultatif)\")) {"
   ]
  },
  "Valeur nette": {
@@ -32567,7 +32580,7 @@
  "Valeur visée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:555: NumberRow(title: tr(\"Valeur visée\"), value: $target)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:688: NumberRow(title: tr(\"Valeur visée\"), value: $target)"
   ]
  },
  "Valeurs indicatives, pas un avis médical.": {
@@ -32659,7 +32672,8 @@
  "Vente": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:158: MiniActionButton(title: tr(\"Vente\"), symbol: \"plus\", colorHex: accentHex) { sheet = .sale(nil) }",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:180: MiniActionButton(title: tr(\"Vente\"), symbol: \"plus\", colorHex: accentHex) { sheet = .sale(nil) }",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:452: Label(tr(\"Vente\"), systemImage: \"plus\")",
    "App/Screens/Spaces/MoneySpaces.swift:225: SheetForm(title: isNew ? tr(\"Vente\") : tr(\"Modifier la vente\"), canSave: sale.amount > 0, onSave: save) {"
   ]
  },
@@ -32680,7 +32694,7 @@
  "Ventes divisées par les commandes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:524: case .averageBasket: tr(\"Ventes divisées par les commandes\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:657: case .averageBasket: tr(\"Ventes divisées par les commandes\")"
   ]
  },
  "Ventes du jour": {
@@ -32693,7 +32707,7 @@
  "Ventes et dépenses": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:319: BusinessRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Ventes et dépenses\"), detail: tr(\"Tout ce que tu as noté, modifiable\"))",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:327: BusinessRow(symbol: \"list.bullet.rectangle\", colorHex: accentHex, title: tr(\"Ventes et dépenses\"),",
    "App/Screens/MiniApps/Business/BusinessPages.swift:39: .navigationTitle(tr(\"Ventes et dépenses\"))"
   ]
  },
@@ -32712,7 +32726,7 @@
  "Ventes moins dépenses": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:521: case .profit: tr(\"Ventes moins dépenses\")"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:654: case .profit: tr(\"Ventes moins dépenses\")"
   ]
  },
  "Ventes sur 30 jours": {
@@ -33488,13 +33502,13 @@
  "abonné": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:283: detail: Fmt.plural(snapshot.subscribers, tr(\"abonné\"), tr(\"abonnés\")), value: TF.money(snapshot.mrr, currency), showsChevron: false)"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:298: detail: Fmt.plural(snapshot.subscribers, tr(\"abonné\"), tr(\"abonnés\")), value: TF.money(snapshot.mrr, currency), showsChevron: false)"
   ]
  },
  "abonnés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:283: detail: Fmt.plural(snapshot.subscribers, tr(\"abonné\"), tr(\"abonnés\")), value: TF.money(snapshot.mrr, currency), showsChevron: false)"
+   "App/Screens/MiniApps/Business/BusinessPages.swift:298: detail: Fmt.plural(snapshot.subscribers, tr(\"abonné\"), tr(\"abonnés\")), value: TF.money(snapshot.mrr, currency), showsChevron: false)"
   ]
  },
  "absent": {
@@ -33765,7 +33779,7 @@
  "ce mois-ci": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:239: note: kpi.isSnapshot ? tr(\"ce mois-ci\") : nil)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:259: note: kpi.isSnapshot ? tr(\"ce mois-ci\") : nil)",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:358: detail: earned > 0 || expected == nil ? tr(\"ce mois-ci\") : tr(\"prévus\"),",
    "App/Screens/MiniApps/Finances/FinancesApp.swift:386: guard comparison.previous > 0, abs(difference) >= 1 else { return tr(\"ce mois-ci\") }",
    "Shared/Render/Tiles/BusinessTiles.swift:33: tile.caption = tr(\"ce mois-ci\")"
@@ -33780,7 +33794,7 @@
  "cette semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:280: MiniSectionTitle(title: tr(\"Chiffre d'affaires cumulé\"), detail: period == .day ? tr(\"cette semaine\") : nil)",
+   "App/Screens/MiniApps/Business/BusinessApp.swift:278: MiniSectionTitle(title: tr(\"Chiffre d'affaires cumulé\"), detail: period == .day ? tr(\"cette semaine\") : nil)",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:462: figure(tr(\"Étude\"), Fmt.minutes(Double(studied)), detail: tr(\"cette semaine\"), hex: nil)"
   ]
  },
@@ -34120,6 +34134,18 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Car/CarApp.swift:41: if let km = status.kmLeft { parts.append(km >= 0 ? tr(\"dans \\(Fmt.number(Int(km))) km\") : tr(\"dépassé de \\(Fmt.number(Int(-km))) km\")) }"
+  ]
+ },
+ "dépense": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
+  ]
+ },
+ "dépenses": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
   ]
  },
  "dépensé aujourd'hui": {
@@ -34789,7 +34815,7 @@
  "marge %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessPages.swift:202: detail: revenue > 0 ? tr(\"marge \\(Fmt.percent((revenue - costs) / revenue))\") : nil,",
+   "App/Screens/MiniApps/Business/BusinessPages.swift:198: detail: revenue > 0 ? tr(\"marge \\(Fmt.percent((revenue - costs) / revenue))\") : nil,",
    "Shared/Render/Tiles/BusinessTiles.swift:79: tile.caption = result.margin.map { tr(\"marge \\(Fmt.percent($0))\") } ?? tr(\"pas encore de ventes ce mois-ci\")",
    "Shared/Render/Tiles/BusinessTiles.swift:151: TileRow(id: \"profit\", title: tr(\"Bénéfice\"), value: TF.money(result.profit, currency), detail: result.margin.map { tr(\"marge \\(Fmt.percent($0))\") }, symbol: \"banknote\"),"
   ]
@@ -34942,7 +34968,7 @@
  "objectif %@ · %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:467: parts.append(tr(\"objectif \\(BusinessFormat.number(target, unit: metric.unit)) · \\(Fmt.percent(latest.value / target))\"))"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:597: parts.append(tr(\"objectif \\(BusinessFormat.number(target, unit: metric.unit)) · \\(Fmt.percent(latest.value / target))\"))"
   ]
  },
  "objectifs": {
@@ -35082,7 +35108,7 @@
  "pas encore de données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:423: Text(note ?? (comparison.current == nil ? tr(\"pas encore de données\") : tr(\"rien avant\"))).font(.caption).foregroundStyle(.tertiary)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:553: Text(note ?? (comparison.current == nil ? tr(\"pas encore de données\") : tr(\"rien avant\"))).font(.caption).foregroundStyle(.tertiary)"
   ]
  },
  "pas encore de ventes ce mois-ci": {
@@ -35395,7 +35421,7 @@
  "rien avant": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Business/BusinessApp.swift:423: Text(note ?? (comparison.current == nil ? tr(\"pas encore de données\") : tr(\"rien avant\"))).font(.caption).foregroundStyle(.tertiary)"
+   "App/Screens/MiniApps/Business/BusinessApp.swift:553: Text(note ?? (comparison.current == nil ? tr(\"pas encore de données\") : tr(\"rien avant\"))).font(.caption).foregroundStyle(.tertiary)"
   ]
  },
  "riz complet": {
@@ -35828,10 +35854,22 @@
    "Shared/Domains/WeekdayRepeat.swift:55: case 5: tr(\"vendredis\", context: \"each\")"
   ]
  },
+ "vente": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
+  ]
+ },
  "vente notée": {
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:423: case .sales: return Fmt.plural(business.sales.count, tr(\"vente notée\"), tr(\"ventes notées\"))"
+  ]
+ },
+ "ventes": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Business/BusinessApp.swift:328: detail: tr(\"\\(Fmt.plural(salesCount, tr(\"vente\"), tr(\"ventes\"))) · \\(Fmt.plural(costsCount, tr(\"dépense\"), tr(\"dépenses\"))) ce mois-ci\"))"
   ]
  },
  "ventes notées": {

@@ -37,7 +37,7 @@ struct BusinessSalesPage: View {
         .styledList()
         .tint(CristalPalette.of(style.id).strong(BusinessFormat.accentHex))
         .navigationTitle(tr("Ventes et dépenses"))
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { sheet = kind == .sales ? BusinessSheet.sale(nil) : BusinessSheet.cost(nil) } label: { Image(systemName: "plus") }
@@ -156,16 +156,12 @@ struct BusinessResultsPage: View {
         let revenue = BusinessMath.revenue(state, in: year)
         let costs = BusinessMath.costs(state, in: year)
         MiniAppScroll {
-            if !model.isPremium {
-                // The totals of the year stay free; the month-by-month analysis is part of Premium.
-                PremiumLockCard(symbol: "chart.bar.xaxis", title: tr("L'analyse mois par mois est dans Premium"),
-                                message: tr("Chiffre d'affaires, dépenses et bénéfice de chaque mois, leur évolution sur six mois et ta marge. Tout ce que tu notes reste enregistré."))
-            } else if months.isEmpty {
+            if model.isPremium && months.isEmpty {
                 Text(tr("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération."))
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .card(padding: 14)
-            } else {
+            } else if model.isPremium {
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: months.count >= 6 ? tr("Six derniers mois") : tr("Par mois"))
                 Chart {
@@ -202,6 +198,25 @@ struct BusinessResultsPage: View {
                              detail: revenue > 0 ? tr("marge \(Fmt.percent((revenue - costs) / revenue))") : nil,
                              colorHex: revenue - costs < 0 ? BusinessFormat.badHex : BusinessFormat.goodHex)
                 }
+            }
+            // This month: the figures already computed for the indicators and the widgets.
+            let thisMonth = BusinessMath.profit(state, month: now)
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: tr("Ce mois-ci"), detail: Fmt.monthYear(now).capitalizedFirst)
+                HStack(spacing: 10) {
+                    MiniStat(title: tr("Chiffre d'affaires"), value: TF.money(thisMonth.revenue, currency))
+                    MiniStat(title: tr("Dépenses"), value: TF.money(thisMonth.costs, currency))
+                }
+                HStack(spacing: 10) {
+                    MiniStat(title: tr("Bénéfice"), value: TF.money(thisMonth.profit, currency),
+                             colorHex: thisMonth.profit < 0 ? BusinessFormat.badHex : BusinessFormat.goodHex)
+                    MiniStat(title: tr("Marge"), value: thisMonth.margin.map { Fmt.percent($0) } ?? "–")
+                }
+            }
+            if !model.isPremium {
+                // The totals of the year stay free; the month-by-month analysis is part of Premium.
+                PremiumLockCard(symbol: "chart.bar.xaxis", title: tr("L'analyse mois par mois est dans Premium"),
+                                message: tr("Le graphique des six derniers mois et la liste « Mois par mois » s'ouvrent avec Premium. Ta saisie reste gratuite."))
             }
             if model.isPremium {
             VStack(alignment: .leading, spacing: 10) {

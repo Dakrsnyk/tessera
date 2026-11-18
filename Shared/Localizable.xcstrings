@@ -8461,6 +8461,53 @@
         }
       }
     },
+    "%@ · %@ ce mois-ci": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ in diesem Monat"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ this month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ este mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ ce mois-ci"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ questo mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今月は%@ · %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %@ neste mês"
+          }
+        }
+      }
+    },
     "%@ · %@ de la semaine": {
       "extractionState": "manual",
       "localizations": {
@@ -57435,100 +57482,6 @@
         }
       }
     },
-    "Chiffre d'affaires, dépenses et bénéfice de chaque mois, leur évolution sur six mois et ta marge. Tout ce que tu notes reste enregistré.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Umsatz, Ausgaben und Gewinn jedes Monats, ihre Entwicklung über sechs Monate und deine Marge. Alles, was du einträgst, bleibt gespeichert."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revenue, costs and profit for each month, how they change over six months, and your margin. Everything you log stays saved."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Facturación, gastos y beneficio de cada mes, su evolución en seis meses y tu margen. Todo lo que anotas queda guardado."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chiffre d'affaires, dépenses et bénéfice de chaque mois, leur évolution sur six mois et ta marge. Tout ce que tu notes reste enregistré."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fatturato, spese e utile di ogni mese, la loro evoluzione su sei mesi e il tuo margine. Tutto ciò che registri resta salvato."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "毎月の売上・経費・利益、6か月の推移、利益率。記録した内容はすべて保存されます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faturamento, despesas e lucro de cada mês, a evolução em seis meses e sua margem. Tudo o que você anota continua salvo."
-          }
-        }
-      }
-    },
-    "Chiffre d'affaires, dépenses et bénéfice par mois": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Umsatz, Ausgaben und Gewinn pro Monat"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Revenue, expenses and profit by month"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ingresos, gastos y beneficio por mes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Chiffre d'affaires, dépenses et bénéfice par mois"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fatturato, spese e utile per mese"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "月ごとの売上・支出・利益"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Faturamento, despesas e lucro por mês"
-          }
-        }
-      }
-    },
     "Chiffre d'affaires, objectif, bénéfice et MRR.": {
       "extractionState": "manual",
       "localizations": {
@@ -76564,6 +76517,53 @@
         }
       }
     },
+    "Depuis le 1er janvier : bénéfice de %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seit dem 1. Januar: Gewinn von %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Since January 1: profit of %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desde el 1 de enero: beneficio de %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depuis le 1er janvier : bénéfice de %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dal 1° gennaio: utile di %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "1月1日から：利益 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desde 1º de janeiro: lucro de %@"
+          }
+        }
+      }
+    },
     "Depuis le centre": {
       "extractionState": "manual",
       "localizations": {
@@ -85161,6 +85161,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Café da manhã com ovos e bacon"
+          }
+        }
+      }
+    },
+    "Déjà affiché en haut": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schon oben angezeigt"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already shown at the top"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ya se muestra arriba"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà affiché en haut"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già mostrato in alto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すでに上に表示されています"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já exibido no topo"
           }
         }
       }
@@ -113083,6 +113130,53 @@
         }
       }
     },
+    "Il reste %@ : environ %@ par jour d'ici la fin du mois.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Es fehlen noch %@: etwa %@ pro Tag bis Monatsende."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ left: about %@ a day until the end of the month."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quedan %@: unos %@ al día hasta fin de mes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il reste %@ : environ %@ par jour d'ici la fin du mois."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mancano %@: circa %@ al giorno fino a fine mese."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残り%@：月末まで1日あたり約%@です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Faltam %@: cerca de %@ por dia até o fim do mês."
+          }
+        }
+      }
+    },
     "Il reste %@ sur %@": {
       "extractionState": "manual",
       "localizations": {
@@ -128264,6 +128358,53 @@
         }
       }
     },
+    "Le graphique des six derniers mois et la liste « Mois par mois » s'ouvrent avec Premium. Ta saisie reste gratuite.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Diagramm der letzten sechs Monate und die Liste „Monat für Monat“ gibt es mit Premium. Das Erfassen bleibt kostenlos."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The six-month chart and the “Month by month” list open with Premium. Entering your figures stays free."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El gráfico de los últimos seis meses y la lista «Mes a mes» se abren con Premium. Anotar tus datos sigue siendo gratis."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le graphique des six derniers mois et la liste « Mois par mois » s'ouvrent avec Premium. Ta saisie reste gratuite."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il grafico degli ultimi sei mesi e l'elenco «Mese per mese» si aprono con Premium. Registrare i dati resta gratuito."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "直近6か月のグラフと「月ごと」の一覧はPremiumで開けます。記録は引き続き無料です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O gráfico dos últimos seis meses e a lista «Mês a mês» abrem com o Premium. Registrar seus dados continua grátis."
+          }
+        }
+      }
+    },
     "Le haut du bras reste immobile, le long du buste.": {
       "extractionState": "manual",
       "localizations": {
@@ -137895,53 +138036,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "MRR"
-          }
-        }
-      }
-    },
-    "MRR %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MRR %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MRR %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MRR %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MRR %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MRR %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MRR %@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "MRR %@"
           }
         }
       }
@@ -161818,6 +161912,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pad thai"
+          }
+        }
+      }
+    },
+    "Pages": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pages"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Páginas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pages"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pagine"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ページ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Páginas"
           }
         }
       }
@@ -233450,53 +233591,6 @@
         }
       }
     },
-    "Tout ce que tu as noté, modifiable": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Alles, was du eingetragen hast, bearbeitbar"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Everything you've logged, editable"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todo lo que has anotado, editable"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tout ce que tu as noté, modifiable"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutto ciò che hai registrato, modificabile"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "記録した内容をすべて編集できます"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tudo o que você anotou, editável"
-          }
-        }
-      }
-    },
     "Tout ce que tu notes est gardé. Premium affiche les mois d'avant et l'évolution de tes finances sur six mois.": {
       "extractionState": "manual",
       "localizations": {
@@ -253284,6 +253378,100 @@
         }
       }
     },
+    "dépense": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "expense"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gasto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dépense"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "spesa"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件の支出"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "despesa"
+          }
+        }
+      }
+    },
+    "dépenses": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ausgaben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "expenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gastos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dépenses"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "spese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件の支出"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "despesas"
+          }
+        }
+      }
+    },
     "dépensé aujourd'hui": {
       "extractionState": "manual",
       "localizations": {
@@ -265833,6 +266021,53 @@
         }
       }
     },
+    "vente": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkauf"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sale"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "venta"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vente"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vendita"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件の売上"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "venda"
+          }
+        }
+      }
+    },
     "vente notée": {
       "extractionState": "manual",
       "localizations": {
@@ -265876,6 +266111,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "venda registrada"
+          }
+        }
+      }
+    },
+    "ventes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verkäufe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sales"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ventas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ventes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vendite"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "件の売上"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vendas"
           }
         }
       }

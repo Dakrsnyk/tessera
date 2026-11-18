@@ -224,6 +224,22 @@ enum BusinessMath {
         return revenue(state, .month, at: date) / state.monthlyGoal
     }
 
+    // MARK: Goal gauge, hybrid layout (2026-11-17)
+
+    /// The share of the goal reached by a revenue (0 without a goal). The revenue is the one the screen shows, up to
+    /// the chosen day, so the gauge and the figure above it always agree.
+    static func goalShare(revenue: Double, goal: Double) -> Double {
+        guard goal > 0 else { return 0 }
+        return max(0, revenue / goal)
+    }
+
+    /// What to sell each day to reach the goal: what is missing, spread over the days left in the month (the rule of
+    /// the « Objectif du mois » widget). Nil without a goal or once it is reached.
+    static func neededPerDay(goal: Double, revenue: Double, at date: Date) -> Double? {
+        guard goal > 0, goal - revenue > 0 else { return nil }
+        return (goal - revenue) / Double(BudgetMath.daysLeftInMonth(date))
+    }
+
     static func costs(_ state: BusinessState, in interval: DateInterval) -> Double {
         state.expenses.filter { interval.holds($0.date) }.reduce(0) { $0 + $1.amount }
     }
