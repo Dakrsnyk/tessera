@@ -393,6 +393,7 @@ MODULES += [
      "role": "Production des pubs d'Ardane : captures de l'app, voix off (Kokoro), musique de synthèse, mixage, montage Remotion des films et contrôle qualité.",
      "features": [
          "`scripts/ad2/film` : projet Remotion des films (scènes, téléphone 3D, coupes dans `cuts.json`).",
+         "`scripts/ad2/film/src/pub26` : Main Pub et Widget Pub du 2026-11-18 sur l'app actuelle (minutages `timing26.ts`, captures `shots.ts`), bande-son `audio_pub26.py`, préparation de la version 2 dans `scripts/ad2/pub26_v2/` ; mémoire `docs/memoire/campagne-2026/` (notes 18 à 21).",
          "`vo.py` (voix), `score.py` (musique), `mix.py` (mixage −14 LUFS), `qc.py` (contrôle qualité), `stitch.py`.",
          "Brief et concept : `docs/memoire/campagne-v2/`.",
      ],
