@@ -52,3 +52,9 @@ Nouveau type de contenu demandé par l'utilisateur : une pub « vraie vie », su
 | C rock énergique | /music/rock-uplifting-action-sport-energetic-rock-619094/ | 107 | 8,07 s | +12 % |
 
 - Une fois le morceau choisi, possibilité de refaire la grille du montage à son tempo exact (au lieu de l'étirer).
+
+## v4 (2026-11-19) — retour de l'utilisateur sur v3
+- Refusé : l'écran d'accueil final en Noir mat (boutons et cases carrés), jugé irréalisable avec Ardane. Retenu : le style **Carbone** (noir, accent rouge E5383B, fond rayé), qui clôt désormais la série « your colors. » (cinq coloris, le Noir mat retiré).
+- Écran d'accueil final : widgets Carbone (combiné Next set + Consistency, Records en petit, Volume en moyen ; le minuteur Carbone affichait 0:00, écarté) et **vraies apps iPhone** dans les cases libres (Santé, Plans, Calendrier, Rappels) et le Dock. Fond `wall-irl-apps.png` (`irl_wall.py --sans-halteres` : l'haltère serait cachée par les icônes).
+- Exports : `irl-restTimer-s-carbon`, `irl-personalRecords-s-carbon`, `irl-weeklyVolume-m-carbon` (`[adkit-img]`, run 44525767850).
+- Planche : `pub/campagne-2026-11/fitness/v4/planche-v4.png` ; vidéo : `pub/campagne-2026-11/fitness/ardane-fitness-v4-1080x1920.mp4`. Même musique et même grille que v3.

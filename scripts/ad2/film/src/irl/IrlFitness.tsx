@@ -97,9 +97,9 @@ const Screen: React.FC<{ dur: number; children: React.ReactNode; top?: number }>
 };
 const Cap: React.FC<{ name: string }> = ({ name }) => <Img src={asset(`kit/${name}.png`)} style={{ position: "absolute", left: 0, top: 0, width: 1206, height: 2622 }} />;
 
-/** v3 (user, 2026-11-19): the medium combined widget « Next set + Consistency » (15 reps · 3/3) in six real styles (kit exports
- * irl-nextSet-combo-*), the last one (Matte black, red accent) is the Home's. */
-const STYLES = ["light", "luxury", "mars", "neon", "carbon", "matte"].map((s) => `irl-nextSet-combo-${s}`);
+/** v4 (user, 2026-11-19): the medium combined widget « Next set + Consistency » in five real styles (kit exports
+ * irl-nextSet-combo-*); the last one, Carbon (black, red accent, striped background), is the Home's. Matte black (square buttons) is gone. */
+const STYLES = ["light", "luxury", "mars", "neon", "carbon"].map((s) => `irl-nextSet-combo-${s}`);
 const StyleCycle: React.FC<{ dur: number }> = ({ dur }) => {
   const f = useCurrentFrame();
   const step = dur / STYLES.length;
@@ -126,15 +126,16 @@ const HOME: Config[] = [
   {
     id: "fitness",
     label: "Fitness",
-    wall: "irl/fitness/wall-irl.png", // scripts/ad2/irl_wall.py: black, red glow, thin red barbell under the widgets, thin red frame
+    wall: "irl/fitness/wall-irl-apps.png", // scripts/ad2/irl_wall.py --sans-halteres: black, red glow, thin red frame
     dark: true,
     icons: "",
     glow: "#E5383B",
-    noFill: true, // no app icons: the barbell of the wallpaper stays visible
+    // v4: real iPhone apps in the free cells and the Dock (lib/iosHome.ts), widgets in Carbon like the last style shown
     slots: [
-      { file: k("irl-nextSet-combo-matte"), rect: [57, 204, 1092, 510] },
-      { file: k("irl-restTimer-s"), rect: [57, 813, 510, 510] },
-      { file: k("irl-personalRecords-s"), rect: [638, 813, 510, 510] },
+      // medium, small with four apps beside it, medium (the Carbon rest timer shows 0:00, so Volume instead)
+      { file: k("irl-nextSet-combo-carbon"), rect: [57, 204, 1092, 510] },
+      { file: k("irl-personalRecords-s-carbon"), rect: [57, 813, 510, 510] },
+      { file: k("irl-weeklyVolume-m-carbon"), rect: [57, 1422, 1092, 510] },
     ],
   } as Config,
 ];

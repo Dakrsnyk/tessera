@@ -1,7 +1,8 @@
 """Fond d'écran de la pub IRL Fitness (v3, 2026-11-19) : noir, lueur rouge discrète, haltère en fin trait rouge au centre,
 fin cadre rouge arrondi. 1206 x 2622 (géométrie des captures du kit). Dessiné à 2x puis réduit (traits lissés).
 
-Usage : python scripts/ad2/irl_wall.py <sortie.png>
+Usage : python scripts/ad2/irl_wall.py <sortie.png> [--sans-halteres]
+(v4, 2026-11-19 : --sans-halteres pour l'écran d'accueil avec de vraies apps iPhone, qui couvriraient l'haltère)
 """
 import math
 import sys
@@ -13,7 +14,7 @@ W, H, K = 1206, 2622, 2
 RED = (229, 56, 59)
 
 
-def main(out):
+def main(out, barbell=True):
     w, h = W * K, H * K
     y, x = np.mgrid[0:h, 0:w].astype(np.float32)
     # fond : noir bleuté très sombre, lueur rouge au centre bas
@@ -45,8 +46,9 @@ def main(out):
         g.line(pts + [pts[0]], fill=RED + (255,), width=lw, joint="curve")
 
     s = K * 0.74
-    rect(-330 * s, -16 * s, 330 * s, 16 * s, 10 * s)  # barre
-    for side in (-1, 1):
+    if barbell:
+        rect(-330 * s, -16 * s, 330 * s, 16 * s, 10 * s)  # barre
+    for side in (-1, 1) if barbell else ():
         rect(side * 360 * s - 22 * s, -70 * s, side * 360 * s + 22 * s, 70 * s, 10 * s)  # butée
         rect(side * 420 * s - 30 * s, -190 * s, side * 420 * s + 30 * s, 190 * s, 18 * s)  # grand disque
         rect(side * 490 * s - 26 * s, -150 * s, side * 490 * s + 26 * s, 150 * s, 16 * s)  # disque moyen
@@ -65,4 +67,4 @@ def main(out):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], "--sans-halteres" not in sys.argv)
