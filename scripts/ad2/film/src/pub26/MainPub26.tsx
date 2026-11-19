@@ -5,7 +5,7 @@ import { FormatProps } from "../films/Formatted";
 import { C, clamp, ease, W } from "../lib/brand";
 import { asset } from "../lib/kit";
 import { MainLook } from "../v5/mainLook";
-import { AppDef, MiniApp5 } from "../v5/MiniApp5";
+import { AppDef, Cam, MiniApp5, Screen } from "../v5/MiniApp5";
 import { HomeBuilder } from "../v5/part2/Home";
 import { HookS } from "../v5/short/HookS";
 import { MAIN_HOMES, MAKE_HOMES, MAKE_ISOLATED } from "./configs26";
@@ -27,33 +27,51 @@ const Homes: React.FC = () => {
         {/* as in the validated opening of FilmMainV5Short: a flat screen (no drawn iPhone) that opens out of the Sapphire line */}
         <HomeBuilder configs={MAIN_HOMES} morphAt={H.morphAt} morphLen={H.morphLen} installAt={0} swallow={[99998, 99999]} lineOpen install={false} />
       </AbsoluteFill>
-      <Caption lines={["All your essentials", "on your home screen."]} at={24} until={H.len - 34} />
+      <Caption lines={["Meet Ardane."]} at={H.meetAt} until={H.meetUntil} />
+      <Caption lines={["All your essentials", "on your home screen."]} at={H.captionAt} until={H.len - 34} />
     </AbsoluteFill>
   );
 };
 
 // ------------------------------------------------------------------ Sequence 3: Nutrition. Fitness. Planning. (template of v5/MiniApp5)
-const appDef = (id: keyof typeof APP_SHOTS): AppDef => {
-  const a = APP_SHOTS[id];
-  const T = MAIN.apps;
-  const [fx, fy] = a.focus;
+// Several screens per mini-app (version 2): each step = a highlighted zone of a capture, commented by the voice.
+type AppT = (typeof MAIN.apps.list)[number];
+const OVERVIEW = { cx: 603, cy: 1311, z: 1 };
+const appDef = (a: AppT): AppDef => {
+  const S = APP_SHOTS[a.id];
+  const steps = a.steps.map((t) => ({ t, s: S.steps[t.key] }));
+  const screens: Screen[] = [];
+  const cam: Cam[] = [{ at: 0, ...OVERVIEW }];
+  steps.forEach(({ t, s }, i) => {
+    const prev = steps[i - 1];
+    if (!prev || prev.s.capture !== s.capture) {
+      screens.push({
+        at: t.at,
+        src: `kit/${s.capture}.png`,
+        premium: s.premium,
+        cover: s.cover ? s.cover.map((c) => [...c] as [number, number, number, number, string]) : undefined,
+        demo: s.demo ? { ...s.demo, box: [...s.demo.box] as [number, number, number, number], from: t.at + s.demo.from } : undefined,
+      });
+    }
+    const z = s.zoom ?? 1.1;
+    cam.push({ at: t.hi[0] - 4, cx: s.focus[0], cy: s.focus[1], z }, { at: t.hi[1], cx: s.focus[0], cy: s.focus[1], z });
+    const next = steps[i + 1];
+    // a new screen: back to the whole screen while the blade brings it in ; same screen: the camera goes straight to the next zone
+    if (!next) cam.push({ at: t.hi[1] + 14, ...OVERVIEW });
+    else if (next.s.capture !== s.capture) cam.push({ at: next.t.at + 6, ...OVERVIEW });
+  });
   return {
-    id,
-    title: a.title,
-    titleAt: T.titleAt,
+    id: a.id,
+    title: S.title,
+    titleAt: MAIN.apps.titleAt,
     subs: [],
-    accent: a.accent,
-    length: T.seqLen,
+    accent: S.accent,
+    length: a.seqLen,
     drift: [-30, 30],
     safeTop: true,
-    screens: [{ at: 0, src: `kit/${a.capture}.png` }],
-    cam: [
-      { at: 0, cx: 603, cy: 1311, z: 1 },
-      { at: T.camFocusAt, cx: fx, cy: fy, z: a.zoom },
-      { at: T.camBackAt, cx: fx, cy: fy, z: a.zoom },
-      { at: T.camBackAt + 14, cx: 603, cy: 1311, z: 1 },
-    ],
-    hi: [{ from: T.hi.from, to: T.hi.to, rect: [...a.rect] as [number, number, number, number], label: a.label, below: "below" in a ? a.below : false }],
+    screens,
+    cam,
+    hi: steps.map(({ t, s }) => ({ from: t.hi[0], to: t.hi[1], rect: [...s.rect] as [number, number, number, number], label: s.label, below: !!s.below })),
   };
 };
 
@@ -105,9 +123,9 @@ export const MainPub26: React.FC<{ silent?: boolean }> = ({ silent = false }) =>
       <Homes />
     </Sequence>
     <MainLook.Provider value={true}>
-      {MAIN.apps.ids.map((id, i) => (
-        <Sequence key={id} from={MAIN.apps.from + i * MAIN.apps.effective} durationInFrames={MAIN.apps.seqLen} layout="absolute-fill">
-          <MiniApp5 app={appDef(id)} />
+      {MAIN.apps.list.map((a) => (
+        <Sequence key={a.id} from={a.from} durationInFrames={a.seqLen} layout="absolute-fill">
+          <MiniApp5 app={appDef(a)} />
         </Sequence>
       ))}
     </MainLook.Provider>

@@ -1,5 +1,8 @@
 /**
- * ALL the timings of the two 2026-11-18 ads (frames at 60 fps; seconds = f / 60). Nothing else carries a duration.
+ * ALL the timings of the two 2026-11-18 ads, VERSION 2 (frames at 60 fps; seconds = f / 60). Nothing else carries a duration.
+ * Version 2 (PDG's feedback on v1): the voice comments what the image shows, no voice gap over 1.5 s between the hook and the outro,
+ * « Meet Ardane. » right after the hook of the Main ad, 60 s at most. Every voice line is placed on its MEASURED length
+ * (pub/pub26/audio/vo/*.json, Kokoro af_heart), noted after each line as « (n f) ».
  * HOOK and CLOSE_LEN are the validated ones: v5/short/timing.json `hookLength` (446) and v5/part2/timing.json sequences.close.length (170).
  */
 export const FPS26 = 60;
@@ -7,91 +10,179 @@ export const HOOK = 446;
 export const CLOSE_LEN = 170;
 /** The validated end card: Close.tsx played through this remap (local frame -> Close frame), as in FilmMainV5Part2. */
 export const CLOSE_REMAP = { input: [0, 30, CLOSE_LEN - 22, CLOSE_LEN], output: [56, 96, 216, 216] };
+/** The outro line (« Ardane. Your whole life. One place. ») starts this many frames after the end card (validated v5part2 offset). */
+export const OUTRO_AT = 26;
 
-export type VoLine = { id: string; text: string; at: number; words: number };
-/** Voice duration, estimated: a calm female voice at ~2.6 words per second. */
-export const WPS = 2.6;
-export const voFrames = (words: number) => Math.round((words / WPS) * FPS26);
+export type VoLine = { id: string; text: string; at: number };
 
-// ---------------------------------------------------------------- Film 1: MainPub26 (target 29-30 s)
+// ---------------------------------------------------------------- Film 1: MainPub26 (52.3 s)
 const M_HOMES_FROM = HOOK; // 446
-const M_HOMES_LEN = 420; // 7.0 s
-const M_APPS_FROM = M_HOMES_FROM + M_HOMES_LEN; // 866
-const APP_EFFECTIVE = 130; // 2.17 s per mini-app
+const M_HOMES_LEN = 544;
 const APP_LINK = 30; // overlap = the app's own entry / exit
-const M_APPS_LEN = 3 * APP_EFFECTIVE; // 390 = 6.5 s
-const M_MAKE_FROM = M_APPS_FROM + M_APPS_LEN; // 1256
-const M_MAKE_LEN = 330; // 5.5 s
-const M_CLOSE_FROM = M_MAKE_FROM + M_MAKE_LEN; // 1586
+/** One mini-app: its steps (keys of APP_SHOTS[id].steps in shots.ts): `at` = the screen arrives (same capture = same screen), `hi` = the highlight. */
+type AppStepT = { key: string; at: number; hi: [number, number] };
+type AppT = { id: "nutrition" | "fitness" | "planning"; eff: number; steps: AppStepT[]; vo: { id: string; text: string; at: number }[] };
+const APPS_T: AppT[] = [
+  {
+    id: "nutrition",
+    eff: 456,
+    steps: [
+      { key: "ring", at: 0, hi: [40, 160] },
+      { key: "scan", at: 0, hi: [172, 216] },
+      { key: "search", at: 222, hi: [244, 284] },
+      { key: "amount", at: 290, hi: [306, 364] },
+      { key: "added", at: 372, hi: [390, 450] },
+    ],
+    vo: [
+      { id: "M2", text: "Nutrition.", at: 12 }, // validated v5short-NA (47 f)
+      { id: "N1", text: "Know what's left to eat.", at: 72 }, // (76 f)
+      { id: "N2", text: "Scan it, or search it.", at: 168 }, // (77 f)
+      { id: "N3", text: "Log it, and your day updates.", at: 300 }, // (102 f)
+    ],
+  },
+  {
+    id: "fitness",
+    eff: 700,
+    steps: [
+      { key: "live", at: 0, hi: [36, 90] },
+      { key: "sets", at: 96, hi: [116, 190] },
+      { key: "rest", at: 200, hi: [220, 282] },
+      { key: "library", at: 290, hi: [310, 420] },
+      { key: "demo", at: 428, hi: [450, 540] },
+      { key: "record", at: 550, hi: [570, 650] },
+    ],
+    vo: [
+      { id: "M3", text: "Fitness.", at: 12 }, // validated v5short-FA (40 f)
+      { id: "F1", text: "Never lose count of a set.", at: 108 }, // (89 f)
+      { id: "F2", text: "Rest on the timer.", at: 214 }, // (62 f)
+      { id: "F3", text: "Over 160 exercises.", at: 300 }, // (123 f) ExerciseLibrary.all = 163, each with its animation (ExerciseDemos.json)
+      { id: "F4", text: "Each one, demonstrated.", at: 440 }, // (92 f)
+      { id: "F5", text: "And every record, tracked.", at: 562 }, // (83 f)
+    ],
+  },
+  {
+    id: "planning",
+    eff: 430,
+    steps: [
+      { key: "week", at: 0, hi: [36, 104] },
+      { key: "events", at: 110, hi: [126, 170] },
+      { key: "tasks", at: 110, hi: [176, 220] },
+      { key: "streak", at: 226, hi: [244, 300] },
+      { key: "done", at: 306, hi: [322, 420] },
+    ],
+    vo: [
+      { id: "M4", text: "Planning.", at: 12 }, // validated v5short-PA (38 f)
+      { id: "P1", text: "Classes, events, and tasks.", at: 110 }, // (99 f)
+      { id: "P2", text: "Build your habits.", at: 236 }, // (61 f)
+      { id: "P3", text: "And keep your streak.", at: 318 }, // (65 f)
+    ],
+  },
+];
+const M_APPS_FROM = M_HOMES_FROM + M_HOMES_LEN; // 990
+let acc = M_APPS_FROM;
+const APPS = APPS_T.map((a) => {
+  const from = acc;
+  acc += a.eff;
+  return { ...a, from, seqLen: a.eff + APP_LINK };
+});
+const M_MAKE_FROM = acc; // 2576
+const M_MAKE_LEN = 390;
+const M_CLOSE_FROM = M_MAKE_FROM + M_MAKE_LEN; // 2966
 
 export const MAIN = {
   hook: { from: 0, len: HOOK },
-  homes: { from: M_HOMES_FROM, len: M_HOMES_LEN, morphAt: [96, 198, 300], morphLen: [22, 22, 22], exit: 30 },
-  apps: {
-    from: M_APPS_FROM,
-    effective: APP_EFFECTIVE,
-    link: APP_LINK,
-    /** length of each app's Sequence = effective + link (the next app enters while this one leaves) */
-    seqLen: APP_EFFECTIVE + APP_LINK,
-    titleAt: 12,
-    hi: { from: 40, to: 124 },
-    camFocusAt: 36,
-    camBackAt: 124,
-    ids: ["nutrition", "fitness", "planning"] as const,
+  homes: {
+    from: M_HOMES_FROM,
+    len: M_HOMES_LEN,
+    morphAt: [200, 300, 392],
+    morphLen: [22, 22, 22],
+    exit: 30,
+    /** captions: « Meet Ardane. » then the PDG's line */
+    meetAt: 10,
+    meetUntil: 74,
+    captionAt: 80,
   },
+  apps: { from: M_APPS_FROM, link: APP_LINK, titleAt: 12, list: APPS },
   make: {
     from: M_MAKE_FROM,
     len: M_MAKE_LEN,
-    isolatedLen: 112, // isolated widget (fades out under the Home that fades in)
-    homeFrom: 90, // local frame where the Home Screen starts (its own frame 0)
-    homeLen: M_MAKE_LEN - 90,
+    isolatedLen: 172, // isolated widget (fades out under the Home that fades in)
+    homeFrom: 150, // local frame where the Home Screen starts (its own frame 0)
+    homeLen: M_MAKE_LEN - 150,
     homeFade: 12,
     installAt: 12,
-    morphAt: [128],
+    morphAt: [100],
     morphLen: [30],
-    swallow: [M_MAKE_LEN - 90 - 46, M_MAKE_LEN - 90 - 8] as [number, number],
-    captionAt: 56,
+    swallow: [M_MAKE_LEN - 150 - 46, M_MAKE_LEN - 150 - 8] as [number, number],
+    captionAt: 24,
   },
   close: { from: M_CLOSE_FROM, len: CLOSE_LEN },
-  total: M_CLOSE_FROM + CLOSE_LEN, // 1756 = 29.27 s
+  total: M_CLOSE_FROM + CLOSE_LEN, // 3136 = 52.27 s
 };
 export const MAIN_VO: VoLine[] = [
-  { id: "M1", text: "All your essentials on your home screen.", at: M_HOMES_FROM + 24, words: 7 },
-  { id: "M2", text: "Nutrition.", at: M_APPS_FROM + 12, words: 1 },
-  { id: "M3", text: "Fitness.", at: M_APPS_FROM + APP_EFFECTIVE + 12, words: 1 },
-  { id: "M4", text: "Planning.", at: M_APPS_FROM + 2 * APP_EFFECTIVE + 12, words: 1 },
-  { id: "M5", text: "Make everyday your own.", at: M_MAKE_FROM + 56, words: 4 },
+  { id: "M0", text: "Meet Ardane.", at: M_HOMES_FROM + 10 }, // (50 f)
+  { id: "M1", text: "All your essentials on your home screen.", at: M_HOMES_FROM + 80 }, // (110 f, v1 recording)
+  { id: "M1b", text: "See today's workout.", at: M_HOMES_FROM + 214 }, // (75 f) on « Sport & wellness »
+  { id: "M1c", text: "Check your calories.", at: M_HOMES_FROM + 314 }, // (63 f) on « Nutrition »
+  { id: "M1d", text: "Without opening a single app.", at: M_HOMES_FROM + 404 }, // (98 f) on « Everything in one place »
+  ...APPS.flatMap((a) => a.vo.map((v) => ({ id: v.id, text: v.text, at: a.from + v.at }))),
+  { id: "M5", text: "Make everyday your own.", at: M_MAKE_FROM + 24 }, // (75 f, v1 recording) on the isolated widget
+  { id: "K1", text: "Start with one widget.", at: M_MAKE_FROM + 104 }, // (75 f)
+  { id: "K2", text: "Then give it your style.", at: M_MAKE_FROM + 262 }, // (71 f) on the morph to Aurora
 ];
 
-// ---------------------------------------------------------------- Film 2: WidgetPub26 (target 27-30 s)
+// ---------------------------------------------------------------- Film 2: WidgetPub26 (38.8 s)
 const W_BEFORE_LEN = 90; // 1.5 s: the real iOS Home, no Ardane
-const W_AFTER_LEN = 330; // 5.5 s: five Homes, one at a time
-const W_PROC_FROM = W_BEFORE_LEN + W_AFTER_LEN; // 420
-const W_PROC_LEN = 720; // 12 s
-const W_RES_FROM = W_PROC_FROM + W_PROC_LEN; // 1140
-const W_RES_LEN = 420; // 7 s
-const W_CLOSE_FROM = W_RES_FROM + W_RES_LEN; // 1560
+const W_AFTER_LEN = 410; // five Homes, one at a time, one word each
+const W_PROC_FROM = W_BEFORE_LEN + W_AFTER_LEN; // 500
+const W_PROC_LEN = 1100;
+const W_RES_FROM = W_PROC_FROM + W_PROC_LEN; // 1600
+const W_RES_LEN = 560;
+const W_CLOSE_FROM = W_RES_FROM + W_RES_LEN; // 2160
 
 /** Process steps (local to the Process sequence). `scene` groups the steps that share one card; a scene change slides. */
-export type StepId = "create" | "editor" | "content" | "styleAurora" | "styleNeon" | "palette";
+export type StepId =
+  | "create"
+  | "editor"
+  | "styleAurora"
+  | "styleNeon"
+  | "styleSpace"
+  | "styleGlass"
+  | "colorGold"
+  | "paletteOcean"
+  | "colorDusk"
+  | "themeMidnight"
+  | "themeLuxury"
+  | "themeCyber"
+  | "myWidgets";
 export const PROCESS = {
   len: W_PROC_LEN,
   squeeze: 34, // the last frames: the card is drawn into the Sapphire line (the cut to the Home Screen)
   scenes: [
     { start: 0, label: "Create", word: "Create." },
-    { start: 130, label: "Workshop", word: "Choose." },
-    { start: 372, label: "Style", word: "Style." },
+    { start: 150, label: "Workshop", word: "Choose." },
+    { start: 270, label: "Style", word: "Style." },
+    { start: 540, label: "Colors", word: "Colors." },
+    { start: 750, label: "Themes", word: "Themes." },
+    { start: 960, label: "My widgets", word: "Add." },
   ],
   steps: [
     { id: "create", at: 0, scene: 0 },
-    { id: "editor", at: 130, scene: 1 },
-    { id: "content", at: 250, scene: 1 },
-    { id: "styleAurora", at: 372, scene: 2 },
-    { id: "styleNeon", at: 452, scene: 2 },
-    { id: "palette", at: 532, scene: 2 },
+    { id: "editor", at: 150, scene: 1 },
+    { id: "styleAurora", at: 270, scene: 2 },
+    { id: "styleNeon", at: 340, scene: 2 },
+    { id: "styleSpace", at: 400, scene: 2 },
+    { id: "styleGlass", at: 460, scene: 2 },
+    { id: "colorGold", at: 540, scene: 3 },
+    { id: "paletteOcean", at: 620, scene: 3 },
+    { id: "colorDusk", at: 690, scene: 3 },
+    { id: "themeMidnight", at: 750, scene: 4 },
+    { id: "themeLuxury", at: 830, scene: 4 },
+    { id: "themeCyber", at: 900, scene: 4 },
+    { id: "myWidgets", at: 960, scene: 5 },
   ] as { id: StepId; at: number; scene: number }[],
-  /** « With Premium » while a Premium option is on screen (styles Aurora / Neon, palette, background). */
-  premium: { from: 380, to: 690 },
+  /** « With Premium » while a Premium option is on screen (styles, colours, palettes, themes). */
+  premium: { from: 278, to: 966 },
   pillFrom: 10,
   blade: 20,
   sceneTransition: 32,
@@ -99,22 +190,42 @@ export const PROCESS = {
 
 export const WIDGET = {
   before: { from: 0, len: W_BEFORE_LEN, collapse: 16 },
-  after: { from: W_BEFORE_LEN, len: W_AFTER_LEN, morphAt: [64, 130, 196, 262], morphLen: [30, 30, 30, 30] }, // 30: HomeBuilder staggers each slot by 3 frames (j * 3 must stay under morphLen ; 20 broke the render with 8 slots)
+  // 30: HomeBuilder staggers each slot by 3 frames (j * 3 must stay under morphLen ; 20 broke the render with 8 slots)
+  after: { from: W_BEFORE_LEN, len: W_AFTER_LEN, morphAt: [70, 150, 230, 310], morphLen: [30, 30, 30, 30] },
   process: { from: W_PROC_FROM, len: W_PROC_LEN },
   result: {
     from: W_RES_FROM,
     len: W_RES_LEN,
     installAt: 20,
-    morphAt: [150, 238, 324],
+    morphAt: [150, 280, 390],
     morphLen: [30, 30, 30],
     swallow: [W_RES_LEN - 44, W_RES_LEN - 8] as [number, number],
     fade: 8,
+    /** the title of the ad as a caption on the last Home */
+    titleAt: 404,
   },
   close: { from: W_CLOSE_FROM, len: CLOSE_LEN },
-  total: W_CLOSE_FROM + CLOSE_LEN, // 1730 = 28.83 s
+  total: W_CLOSE_FROM + CLOSE_LEN, // 2330 = 38.83 s
 };
 export const WIDGET_VO: VoLine[] = [
-  { id: "W1", text: "You want your phone to look like this?", at: 30, words: 8 },
-  { id: "W2", text: "With Ardane, you can customize your own widgets.", at: W_PROC_FROM + 20, words: 8 },
-  { id: "W3", text: "And styles.", at: W_PROC_FROM + 372, words: 2 },
+  { id: "W1", text: "You want your phone to look like this?", at: 30 }, // (98 f, v1 recording)
+  { id: "A1", text: "Elegant.", at: W_BEFORE_LEN + 86 }, // (39 f) bronze / Luxury
+  { id: "A2", text: "Colorful.", at: W_BEFORE_LEN + 166 }, // (42 f) rose
+  { id: "A3", text: "Sleek.", at: W_BEFORE_LEN + 246 }, // (36 f) indigo
+  { id: "A4", text: "Or bold.", at: W_BEFORE_LEN + 326 }, // (45 f) synthwave
+  { id: "W2", text: "With Ardane, you can customize your own widgets.", at: W_PROC_FROM + 20 }, // (153 f, v1 recording)
+  { id: "S1", text: "Choose what it shows.", at: W_PROC_FROM + 190 }, // (64 f)
+  { id: "W3", text: "And styles.", at: W_PROC_FROM + 280 }, // (51 f, v1 recording)
+  { id: "S2", text: "Neon.", at: W_PROC_FROM + 350 }, // (38 f)
+  { id: "S3", text: "Space.", at: W_PROC_FROM + 410 }, // (40 f)
+  { id: "S4", text: "Liquid Glass.", at: W_PROC_FROM + 470 }, // (58 f)
+  { id: "S5", text: "Pick your colors.", at: W_PROC_FROM + 550 }, // (57 f)
+  { id: "S6", text: "Or a whole palette.", at: W_PROC_FROM + 630 }, // (61 f)
+  { id: "S7", text: "Or start from a theme.", at: W_PROC_FROM + 760 }, // (73 f)
+  { id: "S7b", text: "One tap, and it all changes.", at: W_PROC_FROM + 850 }, // (102 f)
+  { id: "S8", text: "Then add it to your home screen.", at: W_PROC_FROM + 975 }, // (91 f)
+  { id: "R1", text: "Watch your screen come together.", at: W_RES_FROM + 24 }, // (94 f) while the widgets land
+  { id: "R2", text: "Small, medium, or large.", at: W_RES_FROM + 170 }, // (96 f) on the Large widget
+  { id: "R3", text: "No two screens alike.", at: W_RES_FROM + 296 }, // (79 f)
+  { id: "R4", text: "Your phone. Your style. Your widgets.", at: W_RES_FROM + 404 }, // (115 f)
 ];

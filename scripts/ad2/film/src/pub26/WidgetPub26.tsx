@@ -74,6 +74,7 @@ export const WidgetPub26: React.FC<{ silent?: boolean }> = ({ silent = false }) 
       <FadeIn n={WIDGET.result.fade}>
         <HomeBuilder configs={RESULT_HOMES} morphAt={WIDGET.result.morphAt} morphLen={WIDGET.result.morphLen} installAt={WIDGET.result.installAt} swallow={WIDGET.result.swallow} lineOpen />
       </FadeIn>
+      <Caption lines={["Your phone. Your style.", "Your widgets."]} at={WIDGET.result.titleAt} until={WIDGET.result.swallow[0]} />
     </Sequence>
     <Sequence from={WIDGET.close.from} durationInFrames={WIDGET.close.len} layout="absolute-fill">
       <EndCard />

@@ -1,27 +1,362 @@
 {
- "_doc": "Voice lines of the two 2026-11-18 ads. 60 fps; startFrame = absolute frame in the film; seconds = frame / 60. Duration ESTIMATED (calm female voice, ~2.6 words/s, Kokoro af_heart pace): to be replaced by the measured length of each recorded line. Values copy src/pub26/timing26.ts (MAIN_VO, WIDGET_VO): if one changes, change the other.",
+ "_doc": "Voice lines of the two pub26 ads, VERSION 2 (2026-11-18). 60 fps; startFrame = absolute frame in the film; durations MEASURED on the recordings (pub/pub26/audio/vo, Kokoro af_heart). Generated from src/pub26/timing26.ts (MAIN_VO, WIDGET_VO), which is the source: if it changes, regenerate this file.",
  "voice": "Kokoro af_heart (female, calm), same chain as the validated ads",
- "wordsPerSecond": 2.6,
  "MainPub26": {
-  "totalFrames": 1756,
-  "totalSeconds": 29.27,
+  "totalFrames": 3136,
+  "totalSeconds": 52.27,
   "lines": [
-   { "id": "M1", "text": "All your essentials on your home screen.", "startFrame": 470, "words": 7, "estDurationFrames": 162, "estDurationSeconds": 2.69 },
-   { "id": "M2", "text": "Nutrition.", "startFrame": 878, "words": 1, "estDurationFrames": 23, "estDurationSeconds": 0.6, "note": "starts with the title word of the mini-app (KineticLine at +12)" },
-   { "id": "M3", "text": "Fitness.", "startFrame": 1008, "words": 1, "estDurationFrames": 23, "estDurationSeconds": 0.6 },
-   { "id": "M4", "text": "Planning.", "startFrame": 1138, "words": 1, "estDurationFrames": 23, "estDurationSeconds": 0.6 },
-   { "id": "M5", "text": "Make everyday your own.", "startFrame": 1312, "words": 4, "estDurationFrames": 92, "estDurationSeconds": 1.54 }
+   {
+    "id": "M0",
+    "text": "Meet Ardane.",
+    "startFrame": 456,
+    "durationSeconds": 0.835,
+    "endFrame": 506.1,
+    "file": "pub26main-M0.wav"
+   },
+   {
+    "id": "M1",
+    "text": "All your essentials on your home screen.",
+    "startFrame": 526,
+    "durationSeconds": 1.825,
+    "endFrame": 635.5,
+    "file": "pub26main-M1.wav"
+   },
+   {
+    "id": "M1b",
+    "text": "See today's workout.",
+    "startFrame": 660,
+    "durationSeconds": 1.255,
+    "endFrame": 735.3,
+    "file": "pub26main-M1b.wav"
+   },
+   {
+    "id": "M1c",
+    "text": "Check your calories.",
+    "startFrame": 760,
+    "durationSeconds": 1.055,
+    "endFrame": 823.3,
+    "file": "pub26main-M1c.wav"
+   },
+   {
+    "id": "M1d",
+    "text": "Without opening a single app.",
+    "startFrame": 850,
+    "durationSeconds": 1.63,
+    "endFrame": 947.8,
+    "file": "pub26main-M1d.wav"
+   },
+   {
+    "id": "M2",
+    "text": "Nutrition.",
+    "startFrame": 1002,
+    "durationSeconds": 0.78,
+    "endFrame": 1048.8,
+    "file": "v5short-NA (validated)"
+   },
+   {
+    "id": "N1",
+    "text": "Know what's left to eat.",
+    "startFrame": 1062,
+    "durationSeconds": 1.27,
+    "endFrame": 1138.2,
+    "file": "pub26main-N1.wav"
+   },
+   {
+    "id": "N2",
+    "text": "Scan it, or search it.",
+    "startFrame": 1158,
+    "durationSeconds": 1.28,
+    "endFrame": 1234.8,
+    "file": "pub26main-N2.wav"
+   },
+   {
+    "id": "N3",
+    "text": "Log it, and your day updates.",
+    "startFrame": 1290,
+    "durationSeconds": 1.695,
+    "endFrame": 1391.7,
+    "file": "pub26main-N3.wav"
+   },
+   {
+    "id": "M3",
+    "text": "Fitness.",
+    "startFrame": 1458,
+    "durationSeconds": 0.665,
+    "endFrame": 1497.9,
+    "file": "v5short-FA (validated)"
+   },
+   {
+    "id": "F1",
+    "text": "Never lose count of a set.",
+    "startFrame": 1554,
+    "durationSeconds": 1.48,
+    "endFrame": 1642.8,
+    "file": "pub26main-F1.wav"
+   },
+   {
+    "id": "F2",
+    "text": "Rest on the timer.",
+    "startFrame": 1660,
+    "durationSeconds": 1.03,
+    "endFrame": 1721.8,
+    "file": "pub26main-F2.wav"
+   },
+   {
+    "id": "F3",
+    "text": "Over 160 exercises.",
+    "startFrame": 1746,
+    "durationSeconds": 2.045,
+    "endFrame": 1868.7,
+    "file": "pub26main-F3.wav"
+   },
+   {
+    "id": "F4",
+    "text": "Each one, demonstrated.",
+    "startFrame": 1886,
+    "durationSeconds": 1.535,
+    "endFrame": 1978.1,
+    "file": "pub26main-F4.wav"
+   },
+   {
+    "id": "F5",
+    "text": "And every record, tracked.",
+    "startFrame": 2008,
+    "durationSeconds": 1.39,
+    "endFrame": 2091.4,
+    "file": "pub26main-F5.wav"
+   },
+   {
+    "id": "M4",
+    "text": "Planning.",
+    "startFrame": 2158,
+    "durationSeconds": 0.63,
+    "endFrame": 2195.8,
+    "file": "v5short-PA (validated)"
+   },
+   {
+    "id": "P1",
+    "text": "Classes, events, and tasks.",
+    "startFrame": 2256,
+    "durationSeconds": 1.65,
+    "endFrame": 2355.0,
+    "file": "pub26main-P1.wav"
+   },
+   {
+    "id": "P2",
+    "text": "Build your habits.",
+    "startFrame": 2382,
+    "durationSeconds": 1.01,
+    "endFrame": 2442.6,
+    "file": "pub26main-P2.wav"
+   },
+   {
+    "id": "P3",
+    "text": "And keep your streak.",
+    "startFrame": 2464,
+    "durationSeconds": 1.08,
+    "endFrame": 2528.8,
+    "file": "pub26main-P3.wav"
+   },
+   {
+    "id": "M5",
+    "text": "Make everyday your own.",
+    "startFrame": 2600,
+    "durationSeconds": 1.25,
+    "endFrame": 2675.0,
+    "file": "pub26main-M5.wav"
+   },
+   {
+    "id": "K1",
+    "text": "Start with one widget.",
+    "startFrame": 2680,
+    "durationSeconds": 1.245,
+    "endFrame": 2754.7,
+    "file": "pub26main-K1.wav"
+   },
+   {
+    "id": "K2",
+    "text": "Then give it your style.",
+    "startFrame": 2838,
+    "durationSeconds": 1.175,
+    "endFrame": 2908.5,
+    "file": "pub26main-K2.wav"
+   }
   ],
-  "outroVoice": { "text": "Ardane. Your whole life. One place.", "startFrame": 1612, "note": "validated outro line of main-v5-final6 (part 2 voiceLines[3]: starts 26 frames after the close card at 1030, ends 1188); same offset here: close card at 1586" }
+  "outroVoice": {
+   "text": "Ardane. Your whole life. One place.",
+   "startFrame": 2992,
+   "file": "v5part2-C1 (validated)"
+  }
  },
  "WidgetPub26": {
-  "totalFrames": 1730,
-  "totalSeconds": 28.83,
+  "totalFrames": 2330,
+  "totalSeconds": 38.83,
   "lines": [
-   { "id": "W1", "text": "You want your phone to look like this?", "startFrame": 30, "words": 8, "estDurationFrames": 185, "estDurationSeconds": 3.08, "note": "'like this?' should land on the first After screen (frame 90 to 150)" },
-   { "id": "W2", "text": "With Ardane, you can customize your own widgets.", "startFrame": 440, "words": 8, "estDurationFrames": 185, "estDurationSeconds": 3.08, "note": "over Create and Pick a widget (frames 420 to 720)" },
-   { "id": "W3", "text": "And styles.", "startFrame": 792, "words": 2, "estDurationFrames": 46, "estDurationSeconds": 0.77, "note": "on the first Style screen (Aurora, local 372)" }
+   {
+    "id": "W1",
+    "text": "You want your phone to look like this?",
+    "startFrame": 30,
+    "durationSeconds": 1.63,
+    "endFrame": 127.8,
+    "file": "pub26widget-W1.wav"
+   },
+   {
+    "id": "A1",
+    "text": "Elegant.",
+    "startFrame": 176,
+    "durationSeconds": 0.655,
+    "endFrame": 215.3,
+    "file": "pub26widget-A1.wav"
+   },
+   {
+    "id": "A2",
+    "text": "Colorful.",
+    "startFrame": 256,
+    "durationSeconds": 0.7,
+    "endFrame": 298.0,
+    "file": "pub26widget-A2.wav"
+   },
+   {
+    "id": "A3",
+    "text": "Sleek.",
+    "startFrame": 336,
+    "durationSeconds": 0.6,
+    "endFrame": 372.0,
+    "file": "pub26widget-A3.wav"
+   },
+   {
+    "id": "A4",
+    "text": "Or bold.",
+    "startFrame": 416,
+    "durationSeconds": 0.75,
+    "endFrame": 461.0,
+    "file": "pub26widget-A4.wav"
+   },
+   {
+    "id": "W2",
+    "text": "With Ardane, you can customize your own widgets.",
+    "startFrame": 520,
+    "durationSeconds": 2.555,
+    "endFrame": 673.3,
+    "file": "pub26widget-W2.wav"
+   },
+   {
+    "id": "S1",
+    "text": "Choose what it shows.",
+    "startFrame": 690,
+    "durationSeconds": 1.06,
+    "endFrame": 753.6,
+    "file": "pub26widget-S1.wav"
+   },
+   {
+    "id": "W3",
+    "text": "And styles.",
+    "startFrame": 780,
+    "durationSeconds": 0.855,
+    "endFrame": 831.3,
+    "file": "pub26widget-W3.wav"
+   },
+   {
+    "id": "S2",
+    "text": "Neon.",
+    "startFrame": 850,
+    "durationSeconds": 0.625,
+    "endFrame": 887.5,
+    "file": "pub26widget-S2.wav"
+   },
+   {
+    "id": "S3",
+    "text": "Space.",
+    "startFrame": 910,
+    "durationSeconds": 0.67,
+    "endFrame": 950.2,
+    "file": "pub26widget-S3.wav"
+   },
+   {
+    "id": "S4",
+    "text": "Liquid Glass.",
+    "startFrame": 970,
+    "durationSeconds": 0.96,
+    "endFrame": 1027.6,
+    "file": "pub26widget-S4.wav"
+   },
+   {
+    "id": "S5",
+    "text": "Pick your colors.",
+    "startFrame": 1050,
+    "durationSeconds": 0.95,
+    "endFrame": 1107.0,
+    "file": "pub26widget-S5.wav"
+   },
+   {
+    "id": "S6",
+    "text": "Or a whole palette.",
+    "startFrame": 1130,
+    "durationSeconds": 1.015,
+    "endFrame": 1190.9,
+    "file": "pub26widget-S6.wav"
+   },
+   {
+    "id": "S7",
+    "text": "Or start from a theme.",
+    "startFrame": 1260,
+    "durationSeconds": 1.22,
+    "endFrame": 1333.2,
+    "file": "pub26widget-S7.wav"
+   },
+   {
+    "id": "S7b",
+    "text": "One tap, and it all changes.",
+    "startFrame": 1350,
+    "durationSeconds": 1.695,
+    "endFrame": 1451.7,
+    "file": "pub26widget-S7b.wav"
+   },
+   {
+    "id": "S8",
+    "text": "Then add it to your home screen.",
+    "startFrame": 1475,
+    "durationSeconds": 1.52,
+    "endFrame": 1566.2,
+    "file": "pub26widget-S8.wav"
+   },
+   {
+    "id": "R1",
+    "text": "Watch your screen come together.",
+    "startFrame": 1624,
+    "durationSeconds": 1.56,
+    "endFrame": 1717.6,
+    "file": "pub26widget-R1.wav"
+   },
+   {
+    "id": "R2",
+    "text": "Small, medium, or large.",
+    "startFrame": 1770,
+    "durationSeconds": 1.595,
+    "endFrame": 1865.7,
+    "file": "pub26widget-R2.wav"
+   },
+   {
+    "id": "R3",
+    "text": "No two screens alike.",
+    "startFrame": 1896,
+    "durationSeconds": 1.315,
+    "endFrame": 1974.9,
+    "file": "pub26widget-R3.wav"
+   },
+   {
+    "id": "R4",
+    "text": "Your phone. Your style. Your widgets.",
+    "startFrame": 2004,
+    "durationSeconds": 1.915,
+    "endFrame": 2118.9,
+    "file": "pub26widget-R4.wav"
+   }
   ],
-  "outroVoice": { "text": "Ardane. Your whole life. One place.", "startFrame": 1586, "note": "same outro line and offset as the main ad (close card at 1560 + 26)" }
+  "outroVoice": {
+   "text": "Ardane. Your whole life. One place.",
+   "startFrame": 2186,
+   "file": "v5part2-C1 (validated)"
+  }
  }
 }

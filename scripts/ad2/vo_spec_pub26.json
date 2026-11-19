@@ -1,14 +1,22 @@
 {
- "_doc": "Voice lines of the two 2026-11-18 ads (pub26). Same voice and settings as v5short/v5part2 (Kokoro af_heart, speed 1.0, Ardane = ar-DAHN). Nutrition./Fitness./Planning. and the outro come from the validated v5short / v5part2 recordings (audio_pub26.py).",
+ "_doc": "Voice lines of the two pub26 ads, version 2 (2026-11-18). Same voice and settings as v5short/v5part2 (Kokoro af_heart, speed 1.0, Ardane = ar-DAHN). Nutrition./Fitness./Planning. (M2, M3, M4) and the outro come from the validated v5short / v5part2 recordings (audio_pub26.py); the hook (H1, H2) too. Start times: src/pub26/timing26.ts (MAIN_VO, WIDGET_VO).",
  "voice": "af_heart",
  "speed": 1.0,
  "brand": {
-  "Ardane": "\u0251\u0279d\u02c8\u0251n"
+  "Ardane": "ɑɹdˈɑn"
  },
  "films": {
   "pub26main": {
    "speed": 1.0,
    "chunks": [
+    [
+     {
+      "id": "M0",
+      "text": "Meet Ardane.",
+      "start": 0,
+      "max": 1.2
+     }
+    ],
     [
      {
       "id": "M1",
@@ -19,10 +27,138 @@
     ],
     [
      {
+      "id": "M1b",
+      "text": "See today's workout.",
+      "start": 0,
+      "max": 1.6
+     }
+    ],
+    [
+     {
+      "id": "M1c",
+      "text": "Check your calories.",
+      "start": 0,
+      "max": 1.6
+     }
+    ],
+    [
+     {
+      "id": "M1d",
+      "text": "Without opening a single app.",
+      "start": 0,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Know what's left to eat.",
+      "start": 0,
+      "max": 1.8
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "Scan it, or search it.",
+      "start": 0,
+      "max": 1.8
+     }
+    ],
+    [
+     {
+      "id": "N3",
+      "text": "Log it, and your day updates.",
+      "start": 0,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "F1",
+      "text": "Never lose count of a set.",
+      "start": 0,
+      "max": 2.0
+     }
+    ],
+    [
+     {
+      "id": "F2",
+      "text": "Rest on the timer.",
+      "start": 0,
+      "max": 1.6
+     }
+    ],
+    [
+     {
+      "id": "F3",
+      "text": "Over 160 exercises.",
+      "start": 0,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "F4",
+      "text": "Each one, demonstrated.",
+      "start": 0,
+      "max": 1.8
+     }
+    ],
+    [
+     {
+      "id": "F5",
+      "text": "And every record, tracked.",
+      "start": 0,
+      "max": 2.0
+     }
+    ],
+    [
+     {
+      "id": "P1",
+      "text": "Classes, events, and tasks.",
+      "start": 0,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "P2",
+      "text": "Build your habits.",
+      "start": 0,
+      "max": 1.5
+     }
+    ],
+    [
+     {
+      "id": "P3",
+      "text": "And keep your streak.",
+      "start": 0,
+      "max": 1.6
+     }
+    ],
+    [
+     {
       "id": "M5",
       "text": "Make everyday your own.",
       "start": 0,
       "max": 2.5
+     }
+    ],
+    [
+     {
+      "id": "K1",
+      "text": "Start with one widget.",
+      "start": 0,
+      "max": 1.6
+     }
+    ],
+    [
+     {
+      "id": "K2",
+      "text": "Then give it your style.",
+      "start": 0,
+      "max": 1.8
      }
     ]
    ]
@@ -40,6 +176,38 @@
     ],
     [
      {
+      "id": "A1",
+      "text": "Elegant.",
+      "start": 0,
+      "max": 1.0
+     }
+    ],
+    [
+     {
+      "id": "A2",
+      "text": "Colorful.",
+      "start": 0,
+      "max": 1.0
+     }
+    ],
+    [
+     {
+      "id": "A3",
+      "text": "Sleek.",
+      "start": 0,
+      "max": 0.9
+     }
+    ],
+    [
+     {
+      "id": "A4",
+      "text": "Or bold.",
+      "start": 0,
+      "max": 1.0
+     }
+    ],
+    [
+     {
       "id": "W2",
       "text": "With Ardane, you can customize your own widgets.",
       "start": 0,
@@ -48,10 +216,114 @@
     ],
     [
      {
+      "id": "S1",
+      "text": "Choose what it shows.",
+      "start": 0,
+      "max": 1.6
+     }
+    ],
+    [
+     {
       "id": "W3",
       "text": "And styles.",
       "start": 0,
       "max": 1.2
+     }
+    ],
+    [
+     {
+      "id": "S2",
+      "text": "Neon.",
+      "start": 0,
+      "max": 0.9
+     }
+    ],
+    [
+     {
+      "id": "S3",
+      "text": "Space.",
+      "start": 0,
+      "max": 0.9
+     }
+    ],
+    [
+     {
+      "id": "S4",
+      "text": "Liquid Glass.",
+      "start": 0,
+      "max": 1.1
+     }
+    ],
+    [
+     {
+      "id": "S5",
+      "text": "Pick your colors.",
+      "start": 0,
+      "max": 1.4
+     }
+    ],
+    [
+     {
+      "id": "S6",
+      "text": "Or a whole palette.",
+      "start": 0,
+      "max": 1.5
+     }
+    ],
+    [
+     {
+      "id": "S7",
+      "text": "Or start from a theme.",
+      "start": 0,
+      "max": 1.6
+     }
+    ],
+    [
+     {
+      "id": "S7b",
+      "text": "One tap, and it all changes.",
+      "start": 0,
+      "max": 1.8
+     }
+    ],
+    [
+     {
+      "id": "S8",
+      "text": "Then add it to your home screen.",
+      "start": 0,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "R1",
+      "text": "Watch your screen come together.",
+      "start": 0,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "R2",
+      "text": "Small, medium, or large.",
+      "start": 0,
+      "max": 2.0
+     }
+    ],
+    [
+     {
+      "id": "R3",
+      "text": "No two screens alike.",
+      "start": 0,
+      "max": 1.6
+     }
+    ],
+    [
+     {
+      "id": "R4",
+      "text": "Your phone. Your style. Your widgets.",
+      "start": 0,
+      "max": 3.2
      }
     ]
    ]

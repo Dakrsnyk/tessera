@@ -41,7 +41,7 @@ WORK = os.path.join(OUT, "work")
 VO = os.path.join(OUT, "vo")
 PUBLIC_EN = os.path.join(FILM, "public", "audio", "en")
 DING_DB = -8.0
-VOICE_LIFT = 1.5                            # dB: the voice after the hook (raised in the silence between H2 and M1), so the music does not have to carry the loudness alone
+VOICE_LIFT = -1.35                          # dB: the voice after the hook (changed in the silence between H2 and M0). v1: +1.5 ; v2: -1.35 (-1.25: -13.9 LUFS at best ; -1.5: voice only 10.4 dB over the music ; -1.0: -13.7 LUFS even with the music at -34 dB ; -2.0: the music has to rise, voice only 7 dB above it), the voice now speaks almost all the time and alone would pass -14 LUFS
 AFTER_HOOK_CEILING = -1.5                   # dBFS: the limiter ceiling after the hook (hook: -2.8, as v5short)
 HOOK_TRIM_FROM, HOOK_TRIM_RAMP = 446 / FPS, 2.0   # the post-hook gain of music and bruitages starts at the end of the hook, over 2 s
 OUTRO_OFFSET = 26                           # frames after the close card (validated: v5part2 1056 - 1030)
@@ -67,15 +67,14 @@ def vo_files(T):
     """(id, start in seconds, wav) of every line of both films."""
     v5s = os.path.join(A.VO_DIR, "en", "v5short")
     p2 = os.path.join(A.VO_DIR, "en", "v5part2", "v5part2-C1.wav")
-    main_files = {"M1": os.path.join(VO, "pub26main-M1.wav"), "M2": os.path.join(v5s, "v5short-NA.wav"),
-                  "M3": os.path.join(v5s, "v5short-FA.wav"), "M4": os.path.join(v5s, "v5short-PA.wav"),
-                  "M5": os.path.join(VO, "pub26main-M5.wav")}
+    validated = {"M2": os.path.join(v5s, "v5short-NA.wav"), "M3": os.path.join(v5s, "v5short-FA.wav"), "M4": os.path.join(v5s, "v5short-PA.wav")}
+    main_files = {l["id"]: validated.get(l["id"], os.path.join(VO, f"pub26main-{l['id']}.wav")) for l in T["MAIN_VO"]}
     hs = hook_starts()
     main = [("H1", hs["H1"], os.path.join(v5s, "v5short-H1.wav")), ("H2", hs["H2"], os.path.join(v5s, "v5short-H2.wav"))]
     main += [(l["id"], f(l["at"]), main_files[l["id"]]) for l in T["MAIN_VO"]]
-    main.append(("OUTRO", f(T["MAIN"]["close"]["from"] + OUTRO_OFFSET), p2))
+    main.append(("OUTRO", f(T["MAIN"]["close"]["from"] + T["OUTRO_AT"]), p2))
     wid = [(l["id"], f(l["at"]), os.path.join(VO, f"pub26widget-{l['id']}.wav")) for l in T["WIDGET_VO"]]
-    wid.append(("OUTRO", f(T["WIDGET"]["close"]["from"] + OUTRO_OFFSET), p2))
+    wid.append(("OUTRO", f(T["WIDGET"]["close"]["from"] + T["OUTRO_AT"]), p2))
     return main, wid
 
 
@@ -217,12 +216,14 @@ def main_sfx(T):
     ev += morph_events([homes["from"] + m for m in homes["morphAt"]])
     ev += [(f(homes["from"] + homes["len"] - homes["exit"]), "swipe", -27, 0.3)]
     notes = ("glassD5", "glassF5", "glassA5")
-    for k in range(3):
-        s = M_["apps"]["from"] + k * M_["apps"]["effective"]
+    for k, app in enumerate(M_["apps"]["list"]):                      # version 2: several screens per mini-app
+        s = app["from"]
         ev += cut_events(s)
-        ev += [(f(s + M_["apps"]["titleAt"]), "tic", -21, 0), (f(s + M_["apps"]["titleAt"]), notes[k], -26, 0),
-               (f(s + M_["apps"]["camFocusAt"]), "swipe", -29, 0.3 if k % 2 else -0.3),
-               (f(s + M_["apps"]["hi"]["from"]), "tic", -31, 0)]
+        ev += [(f(s + M_["apps"]["titleAt"]), "tic", -21, 0), (f(s + M_["apps"]["titleAt"]), notes[k], -26, 0)]
+        for j, st in enumerate(app["steps"]):
+            if j > 0 and st["at"] != app["steps"][j - 1]["at"]:           # a new screen: the blade
+                ev += [(f(s + st["at"]), "swipe", -29, 0.3 if j % 2 else -0.3)]
+            ev += [(f(s + st["hi"][0]), "tic", -31, 0)]
     mk = M_["make"]
     ev += cut_events(mk["from"]) + [(f(mk["from"]) + 0.05, "swipe", -27, 0), (f(mk["from"]) + 0.05, "pull", -29, 0)]
     hf = mk["from"] + mk["homeFrom"]
@@ -245,7 +246,8 @@ def widget_sfx(T):
         ev += [(f(p + st["at"]), "swipe", -28, 0.3 if k % 2 else -0.3), (f(p + st["at"]), "tic", -23 if k < 3 else -21, 0)]
     for sc in T["PROCESS"]["scenes"][1:]:
         ev += [(f(p + sc["start"]), "blade", -29, 0.5)]
-    ev += [(f(p + 380), "glassA5", -27, 0), (f(p + 460), "glassD5", -27, 0)]       # Aurora / Neon (With Premium)
+    at = {st["id"]: st["at"] for st in steps}
+    ev += [(f(p + at["styleAurora"] + 8), "glassA5", -27, 0), (f(p + at["styleNeon"] + 8), "glassD5", -27, 0)]       # Aurora / Neon (With Premium)
     ev += [(f(p + W["process"]["len"] - T["PROCESS"]["squeeze"]) - 0.2, "pull", -26, 0)]
     r = W["result"]
     ev += install_events(r["from"], r["installAt"], 4)
@@ -312,7 +314,7 @@ def build_main(T):
     main_lines, _ = vo_files(T)
     voice, _ = voice_stem(main_lines, n, cal["voice_gain"])
     t = np.arange(n) / SR
-    x = np.clip((t - 6.5) / 0.8, 0, 1)                                   # 6.5 to 7.3 s: nobody speaks (H2 ends at 4.9 s, M1 starts at 7.83 s)
+    x = np.clip((t - 6.5) / 0.8, 0, 1)                                   # 6.5 to 7.3 s: nobody speaks (H2 ends at 4.9 s, M0 « Meet Ardane. » starts at 7.6 s)
     voice = voice * db(VOICE_LIFT * x * x * (3 - 2 * x))[:, None]
     back = cfg["logo"] - A.PRE_LOGO_SILENCE - 1.0              # the gain is back to 0 dB when the silence before the logo begins
     trim, hist = 0.0, []
@@ -376,11 +378,16 @@ def ffmpeg_loudness(path):
 def plan_of(T, film, frame):
     if film == "main":
         M_ = T["MAIN"]
-        names = [("accroche (hook)", 0, 446), ("Homes", 446, 866), ("Nutrition", 866, 996), ("Fitness", 996, 1126), ("Planning", 1126, 1256),
-                 ("Make everyday your own", 1256, 1586), ("carte finale", 1586, 1756)]
+        names = [("accroche (hook)", 0, M_["hook"]["len"]), ("Meet Ardane + Homes", M_["homes"]["from"], M_["apps"]["from"])]
+        names += [(a["id"].capitalize(), a["from"], a["from"] + a["eff"]) for a in M_["apps"]["list"]]
+        names += [("Make everyday your own", M_["make"]["from"], M_["close"]["from"]), ("carte finale", M_["close"]["from"], M_["total"])]
     else:
-        names = [("iOS avant Ardane", 0, 90), ("Homes apres", 90, 420), ("Process: Create", 420, 550), ("Process: Choose", 550, 792),
-                 ("Process: Style", 792, 1140), ("Resultat (Homes)", 1140, 1560), ("carte finale", 1560, 1730)]
+        W = T["WIDGET"]
+        p = W["process"]["from"]
+        names = [("iOS avant Ardane", 0, W["before"]["len"]), ("Homes apres", W["after"]["from"], p)]
+        sc = T["PROCESS"]["scenes"]
+        names += [(f"Process: {c['label']}", p + c["start"], p + (sc[i + 1]["start"] if i + 1 < len(sc) else W["process"]["len"])) for i, c in enumerate(sc)]
+        names += [("Resultat (Homes)", W["result"]["from"], W["close"]["from"]), ("carte finale", W["close"]["from"], W["total"])]
     for name, a, b in names:
         if a <= frame < b:
             return name
@@ -415,6 +422,27 @@ def check(T):
             fr, e = st * FPS, (st + dur) * FPS
             ok = "" if e <= total - 6 else "  ** CUT BY THE END **"
             print(f"   {i:6s} {st:6.2f}-{st + dur:5.2f}   {fr:6.1f}-{e:6.1f}   {plan_of(T, film, int(fr))}{ok}")
+        # voice gaps (version 2 target: none over 1.5 s between the end of the hook and the outro), measured on the voice stem itself
+        stem, ssr = sf.read(os.path.join(OUT, f"{film}-voix.wav"), dtype="float64")
+        env = np.abs(stem.mean(axis=1) if stem.ndim > 1 else stem)
+        hop = ssr // 100
+        lvl = np.array([env[i:i + hop].max() for i in range(0, len(env) - hop, hop)])
+        on = lvl > lvl.max() * 10 ** (-40 / 20)
+        t0 = (T["MAIN"]["homes"]["from"] if film == "main" else 0) / FPS
+        gaps, run = [], None
+        for i, v in enumerate(on):
+            t = i / 100
+            if not v and run is None:
+                run = t
+            if v and run is not None:
+                if run >= t0 and t - run >= 0.25:
+                    gaps.append((run, t))
+                run = None
+        if run is not None:
+            gaps.append((run, len(on) / 100))
+        big = [(a, b) for a, b in gaps if b - a > 1.5]
+        print("   voice gaps >= 0.25 s after the hook:", ", ".join(f"{a:.2f}-{b:.2f} ({b - a:.2f})" for a, b in gaps))
+        print(f"   longest gap before the outro: {max([b - a for a, b in gaps[:-1]] or [0]):.2f} s ; over 1.5 s: {big[:-1] if big and big[-1] == gaps[-1] else big}")
         words = transcribe(p)
         print("   Whisper on the mix:", " ".join(w for w, _, _ in words))
         print("   words:", "; ".join(f"{w}@{s:.2f}" for w, s, _ in words))
