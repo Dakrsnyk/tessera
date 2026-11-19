@@ -25,9 +25,11 @@ export const MAIN_HOMES: Config[] = [
 ];
 
 // ---------------------------------------------------------------- Main ad, sequence 4: the widget on a Home, then wallpaper + theme matched to it
+// v2.1 (PDG, 2026-11-18): the SAME three widgets in both, only their style changes (light -> Aurora). Before, Budget ($1,631) faded into
+// Meditate (12 days) in the same cell and a 4th widget (Today's workout) faded in over the app icons: a visible double image.
 export const MAKE_HOMES: Config[] = [
-  { id: "plain", label: "Your widget", wall: "kit/wall-cream", dark: false, icons: "", glow: "#E39A62", slots: [s("macros-m-light", M(R0)), s("calories-s-light", SL(R2)), s("budgetLeft-s-light", SR(R2))] },
-  { id: "aurora", label: "Aurora", wall: MP("wall-mp-aurora"), dark: true, icons: "", glow: "#5FE3D6", slots: [s("macros-m-aurora", M(R0)), s("calories-s-aurora", SL(R2)), s("habitStreak-s-aurora", SR(R2)), s("todaysWorkout-m-aurora", M(R4))] },
+  { id: "plain", label: "Your widget", wall: "kit/wall-cream", dark: false, icons: "", glow: "#E39A62", slots: [s("macros-m-light", M(R0)), s("calories-s-light", SL(R2)), s("habitStreak-s-light", SR(R2))] },
+  { id: "aurora", label: "Aurora", wall: MP("wall-mp-aurora"), dark: true, icons: "", glow: "#5FE3D6", slots: [s("macros-m-aurora", M(R0)), s("calories-s-aurora", SL(R2)), s("habitStreak-s-aurora", SR(R2))] },
 ];
 /** The isolated widget of sequence 4 (same one that lands on the Home). */
 export const MAKE_ISOLATED = "kit/macros-m-light";
