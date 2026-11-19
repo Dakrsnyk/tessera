@@ -231,7 +231,7 @@ def main_sfx(T):
     mk = M_["make"]
     ev += cut_events(mk["from"]) + [(f(mk["from"]) + 0.05, "swipe", -27, 0), (f(mk["from"]) + 0.05, "pull", -29, 0)]
     hf = mk["from"] + mk["homeFrom"]
-    ev += install_events(hf, mk["installAt"], 3)
+    ev += install_events(hf, mk["installAt"], 2)                          # v2.5: Macros, then the Weekly schedule (Planning)
     ev += morph_events([hf + m for m in mk["morphAt"]])
     ev += swallow_events(hf + mk["swallow"][1])
     ev += finalcard_sfx(T, M_["close"]["from"])
