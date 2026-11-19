@@ -10,7 +10,7 @@ import { EndCard } from "../pub26/parts";
 
 /**
  * « IRL » Fitness ad (2026-11-18): real gym footage (Pexels, free licence, see docs/memoire/campagne-2026/23-pub-irl-fitness.md)
- * graded red / black / grey, cut on the beat (120 BPM = 30 frames at 60 fps), cut with REAL Ardane captures (current app, kit runs
+ * in black and white (v2, 2026-11-19; v1 was graded red), cut on the beat (120 BPM = 30 frames at 60 fps), cut with REAL Ardane captures (current app, kit runs
  * 471/472): Live Activity, workout, program, then Create -> choose -> style -> Home Screen. No face of the footage is ever shown next to
  * a phone (Pexels licence: no implied endorsement).
  */
@@ -37,9 +37,8 @@ const T = {
 export const IRL_LENGTH = T.end[0] + T.end[1]; // 1640 = 27.3 s (the audio script irl_audio.py uses the same beat grid)
 
 const clip = (n: string) => staticFile(`irl/fitness/${n}.mp4`);
-const RED = "#C3162B";
 
-/** Real footage, graded: mostly desaturated, red midtones, crushed blacks, vignette, slow push-in. */
+/** Real footage in contrasted black and white (user, 2026-11-19: no red filter), vignette, slow push-in. Only the Ardane screens are in colour. */
 const Footage: React.FC<{ name: string; dur: number; from?: number; rate?: number; bg?: boolean }> = ({ name, dur, from = 0, rate = 1, bg = false }) => {
   const f = useCurrentFrame();
   const z = interpolate(f, [0, dur], [1.03, 1.1]);
@@ -50,9 +49,8 @@ const Footage: React.FC<{ name: string; dur: number; from?: number; rate?: numbe
         muted
         playbackRate={rate}
         startFrom={from}
-        style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${bg ? 1.15 : z})`, filter: `saturate(0.2) contrast(1.22) brightness(${bg ? 0.42 : 0.88})${bg ? " blur(22px)" : ""}` }}
+        style={{ width: "100%", height: "100%", objectFit: "cover", transform: `scale(${bg ? 1.15 : z})`, filter: `grayscale(1) contrast(1.28) brightness(${bg ? 0.45 : 0.95})${bg ? " blur(22px)" : ""}` }}
       />
-      <AbsoluteFill style={{ background: RED, mixBlendMode: "color", opacity: 0.5 }} />
       <AbsoluteFill style={{ background: "radial-gradient(ellipse 75% 60% at 50% 48%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65) 100%)" }} />
     </AbsoluteFill>
   );

@@ -38,3 +38,17 @@ Nouveau type de contenu demandé par l'utilisateur : une pub « vraie vie », su
 - Retour de l'utilisateur sur la v1.
 - Mêmes pubs pour Nutrition (cuisine, assiette ; écrans du scanner), Planning, etc. : même gabarit, changer les extraits, les écrans et la couleur.
 - Formats 4:5 et 1:1 non faits.
+
+## v2 (2026-11-19) — demandes de l'utilisateur
+- « Pas de filtre rouge » : plans de salle en **noir et blanc contrasté** (choix entre couleurs d'origine et noir et blanc ; les sources mélangent bleu, vert, orange). Seuls les écrans d'Ardane restent en couleur.
+- « Je n'aime pas du tout la musique » (le beat synthétisé de v1) : morceaux réels de **Pixabay Music** (licence Pixabay : usage commercial gratuit, sans attribution ; certains morceaux sont inscrits à Content ID, une réclamation reste possible sur YouTube, à lever depuis la page du morceau). Les sites qui analysent la vidéo pour proposer une musique (Epidemic Sound Soundmatch, environ 49 $/mois en commercial ; Freebeat, qui compose d'après la vidéo) ont été écartés : payants ou envoi de la pub à un tiers.
+- `scripts/ad2/irl_music.py <morceau> <bpm> <sortie.wav> [drop_s]` : ramène le morceau à 120 BPM (atempo, hauteur gardée), cale son drop sur la fin de l'accroche (2,0 s), garde les sons d'interface d'`irl_audio.py`, -14 LUFS. Tempo mesuré par un filtre en peigne sur les attaques (pas de librosa installé).
+- Trois propositions (morceaux hors du dépôt, `~/ardane-tools/irl-fitness/music/`) :
+
+| Version | Pixabay | Tempo | Drop dans le morceau | Étirement |
+|---|---|---|---|---|
+| A phonk de salle | /music/phonk-gym-phonk-620567/ | 124 | 17,25 s (après un silence) | -3 % |
+| B phonk dur | /music/phonk-phonk-hard-624946/ | 113,3 | 11,27 s | +6 % |
+| C rock énergique | /music/rock-uplifting-action-sport-energetic-rock-619094/ | 107 | 8,07 s | +12 % |
+
+- Une fois le morceau choisi, possibilité de refaire la grille du montage à son tempo exact (au lieu de l'étirer).
