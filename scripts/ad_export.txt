@@ -502,3 +502,9 @@ widget camp-hotel-s-light kind=hotel family=small scale=4 theme=light
 widget camp-nextActivity-m-light kind=nextActivity family=medium scale=3 theme=light
 widget camp-tripProgress-s-light kind=tripProgress family=small scale=4 theme=light
 only camp-caloriesLeft-s-light camp-macros-m-light camp-mealsToday-m-light camp-nutritionWeek-m-light camp-proteinLeft-s-light camp-macros-m-aurora camp-caloriesLeft-s-paper camp-budgetLeft-s-light camp-spendingByCategory-m-light camp-savingsGoal-s-light camp-billsUpcoming-m-light camp-moneyFlow-m-light camp-budgetLeft-s-liquidGlass camp-tasks-m-light camp-priorities-s-light camp-counter-s-light camp-tasks-s-light camp-timetable-l-light camp-timetable-m-light camp-nextClass-s-light camp-nextExam-s-light camp-assignments-m-light camp-semesterProgress-s-light camp-studyHours-s-light camp-habits-m-dark camp-habitStreak-s-dark camp-habitWeek-m-dark camp-hydration-s-dark camp-habitRate-s-dark camp-revenueTrend-m-light camp-mrr-s-light camp-revenueGoal-s-light camp-businessKPIs-m-light camp-profit-s-light camp-tripCountdown-s-light camp-flight-m-light camp-hotel-s-light camp-nextActivity-m-light camp-tripProgress-s-light
+
+# --- Pub IRL Fitness v4 (2026-11-19) : le Noir mat (boutons carrés) est remplacé par le Carbone (fond rayé, accent rouge) sur l'écran d'accueil ---
+widget irl-restTimer-s-carbon kind=restTimer family=small scale=4 theme=carbon accent=E5383B scheme=dark
+widget irl-personalRecords-s-carbon kind=personalRecords family=small scale=4 theme=carbon accent=E5383B scheme=dark
+widget irl-weeklyVolume-m-carbon kind=weeklyVolume family=medium scale=3 theme=carbon accent=E5383B scheme=dark
+only irl-restTimer-s-carbon irl-personalRecords-s-carbon irl-weeklyVolume-m-carbon
