@@ -292,6 +292,12 @@ enum ScreenshotMode {
                 if let accent = defaults.string(forKey: "screenshotStudioAccent") {
                     design.accentHex = accent
                 }
+                // Ads: the Studio on a combined widget (-screenshotStudioParts nextSet+trainingStreak).
+                if let spec = defaults.string(forKey: "screenshotStudioParts"), let parts = ComboPart.adParts(spec) {
+                    design.kind = parts[0].kind
+                    design.options.parts = parts
+                    design.format = ComboLayout.format(parts)
+                }
                 if section.hasPrefix("main-") {
                     let theme = ThemeID(rawValue: String(section.dropFirst(5))) ?? .neon
                     design.themeID = theme

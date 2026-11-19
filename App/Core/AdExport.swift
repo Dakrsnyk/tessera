@@ -156,6 +156,13 @@ enum AdExport {
         } else {
             design = WidgetDesign(kind: kind)
         }
+        // A combined widget: `parts=nextSet+trainingStreak` (the kinds side by side, `kind` = the first one).
+        if let spec = job.string("parts") {
+            guard let parts = ComboPart.adParts(spec), parts[0].kind == kind else {
+                throw AdFailure("parts « \(spec) » make no combined widget starting with \(kind.rawValue)")
+            }
+            design.options.parts = parts
+        }
         if let raw = job.string("theme") {
             guard let theme = ThemeID(rawValue: raw) else { throw AdFailure("unknown theme « \(raw) »") }
             design.themeID = theme
@@ -183,7 +190,7 @@ enum AdExport {
         let familyText = job.string("family") ?? "small"
         guard let widgetFamily = family(familyText) else { throw AdFailure("unknown family « \(familyText) »") }
         let widgetDesign = try design(job)
-        guard widgetDesign.kind.families.contains(widgetFamily) else {
+        guard widgetDesign.families.contains(widgetFamily) else {
             throw AdFailure("\(widgetDesign.kind.rawValue) has no \(familyText) size")
         }
         let size = WidgetMetrics.size(widgetFamily)
@@ -600,6 +607,20 @@ struct AdJob {
 struct AdOutcome {
     var files: Int
     var note: String = ""
+}
+
+extension ComboPart {
+    /// Ads: the parts of a combined widget from its kinds (`nextSet+trainingStreak`), each one small, with the demo
+    /// content the Store combos use. Nil when they don't fill a medium or a large widget.
+    static func adParts(_ spec: String) -> [ComboPart]? {
+        let kinds = spec.split(separator: "+").compactMap { WidgetKind(rawValue: String($0)) }
+        guard kinds.count >= 2 else { return nil }
+        let parts = kinds.map { kind in
+            let base = TemplateCatalog.template(for: kind)?.makeDesign() ?? WidgetDesign.starter(for: kind)
+            return ComboPart(kind: kind, options: base.options, name: kind.title, size: .small)
+        }
+        return ComboLayout.format(parts) == nil ? nil : parts
+    }
 }
 
 /// Why a job wrote nothing (written in done.txt).

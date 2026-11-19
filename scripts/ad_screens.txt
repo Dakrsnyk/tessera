@@ -13,6 +13,13 @@
 # d'où une capture de mise en route jetable avant les vraies.
 warmup spaces
 
+# Pub IRL Fitness v3 (2026-11-19) : le Studio, partie Style, sur le widget moyen combiné « Next set + Régularité »
+# (15 reps · 3/3), style Noir mat à l'accent rouge, en sombre. En tête de liste (limite de 60 min), chacune deux fois (-b).
+irl-studio-style studio-style -screenshotStudioParts nextSet+trainingStreak -screenshotStudioFormat medium -screenshotStudioTheme matteBlack -screenshotStudioAccent E5383B -screenshotAppearance dark
+irl-studio-style-b studio-style -screenshotStudioParts nextSet+trainingStreak -screenshotStudioFormat medium -screenshotStudioTheme matteBlack -screenshotStudioAccent E5383B -screenshotAppearance dark
+irl-studio-style-mid studio-style -screenshotStudioParts nextSet+trainingStreak -screenshotStudioFormat medium -screenshotStudioTheme matteBlack -screenshotStudioAccent E5383B -screenshotAppearance dark -screenshotScroll 0.4
+irl-studio-style-mid-b studio-style -screenshotStudioParts nextSet+trainingStreak -screenshotStudioFormat medium -screenshotStudioTheme matteBlack -screenshotStudioAccent E5383B -screenshotAppearance dark -screenshotScroll 0.4
+
 # Pubs du 2026-11-18 (Main Pub et Widget Pub, app actuelle, apparence sombre comme sur l'iPhone du PDG). En tête de
 # liste et CHACUNE DEUX FOIS (-b) : au run 471, quelques captures prises à 6 s montraient encore l'accueil (machine
 # lente : app-nutrition-s00, app-nutrition-meal, app-finances-s00-dark). -screenshotScanButtons YES : la page

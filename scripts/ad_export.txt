@@ -447,3 +447,16 @@ only priorities-m-light
 widget priorities-m-dark kind=priorities family=medium scale=3 theme=dark scheme=dark
 widget habitStreak-s-paper kind=habitStreak family=small scale=4 theme=paper
 only priorities-m-dark habitStreak-s-paper
+
+# --- Pub IRL Fitness v3 (2026-11-19) : le widget moyen combiné « Next set + Régularité » (15 reps · 3/3) en six coloris,
+# le dernier (Noir mat, accent rouge E5383B) est celui de l'écran d'accueil, avec trois widgets Fitness du même style ---
+widget irl-nextSet-combo-light kind=nextSet parts=nextSet+trainingStreak family=medium scale=3 theme=light accent=E5383B
+widget irl-nextSet-combo-luxury kind=nextSet parts=nextSet+trainingStreak family=medium scale=3 theme=luxury scheme=dark
+widget irl-nextSet-combo-mars kind=nextSet parts=nextSet+trainingStreak family=medium scale=3 theme=mars scheme=dark
+widget irl-nextSet-combo-neon kind=nextSet parts=nextSet+trainingStreak family=medium scale=3 theme=neon accent=E5383B scheme=dark
+widget irl-nextSet-combo-carbon kind=nextSet parts=nextSet+trainingStreak family=medium scale=3 theme=carbon accent=E5383B scheme=dark
+widget irl-nextSet-combo-matte kind=nextSet parts=nextSet+trainingStreak family=medium scale=3 theme=matteBlack accent=E5383B scheme=dark
+widget irl-weeklyVolume-m kind=weeklyVolume family=medium scale=3 theme=matteBlack accent=E5383B scheme=dark
+widget irl-restTimer-s kind=restTimer family=small scale=4 theme=matteBlack accent=E5383B scheme=dark
+widget irl-personalRecords-s kind=personalRecords family=small scale=4 theme=matteBlack accent=E5383B scheme=dark
+only irl-nextSet-combo-light irl-nextSet-combo-luxury irl-nextSet-combo-mars irl-nextSet-combo-neon irl-nextSet-combo-carbon irl-nextSet-combo-matte irl-weeklyVolume-m irl-restTimer-s irl-personalRecords-s
