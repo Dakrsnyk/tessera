@@ -61,3 +61,6 @@ Minutages exacts, écran par écran : `scripts/ad2/film/src/pub26/timing26.ts` (
 - Rendu Main Pub v2 : 52,27 s, 1080x1920, 60 i/s, 3136 images, -14,0 LUFS, aucune image noire (`blackdetect`), planche de 25 images regardée (`pub/pub26/final/planche-main-pub-v2.png`).
 - Pas écouté à l'oreille par le Chef (pas d'écoute possible) : rythme de la voix, équilibre voix / musique et naturel des phrases restent à juger par le PDG.
 - Widget Pub v2 : montée et mixée, NON rendue (le PDG valide d'abord la Main Pub).
+
+## v2.1 (2026-11-18) : sans zoom / dézoom entre les fonctionnalités
+Demande du PDG : « je parle du zoom puis dezoom entre chaques fonctionnalités ». Dans chaque mini-app, la caméra se rapproche une fois, glisse d'une zone à la suivante (même écran) ou garde son rapprochement pendant le balayage vers l'écran suivant, et ne revient au plein écran qu'à la sortie de la mini-app. Les zones mises en valeur s'enchaînent sans trou. Minutages, voix et son inchangés. Rendu : `ardane-main-pub-v2.1-1080x1920.mp4`.

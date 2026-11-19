@@ -42,9 +42,21 @@ const appDef = (a: AppT): AppDef => {
   const steps = a.steps.map((t) => ({ t, s: S.steps[t.key] }));
   const screens: Screen[] = [];
   const cam: Cam[] = [{ at: 0, ...OVERVIEW }];
+  // PDG, 2026-11-18 (v2.1): inside one mini-app the camera stays close from one explanation to the next (no pull-back to the whole
+  // screen between two of them); it only goes back to the whole screen at the app's own entry and exit (the existing plan transitions).
+  // b[i] = where step i takes over: the blade of its screen (+8) or, on the same screen, its highlight.
+  const isNew = (i: number) => i === 0 || steps[i - 1].s.capture !== steps[i].s.capture;
+  const b = steps.map(({ t }, i) => (i === 0 ? t.hi[0] : isNew(i) ? t.at + 8 : t.hi[0]));
+  const focusOf = (i: number) => ({ cx: steps[i].s.focus[0], cy: steps[i].s.focus[1], z: steps[i].s.zoom ?? 1.1 });
+  steps.forEach(({ t }, i) => {
+    if (i === 0) cam.push({ at: t.hi[0] - 4, ...focusOf(0) });
+    else {
+      cam.push({ at: isNew(i) ? t.at : b[i] - 8, ...focusOf(i - 1) }, { at: b[i] + 14, ...focusOf(i) });
+    }
+    if (i === steps.length - 1) cam.push({ at: t.hi[1], ...focusOf(i) }, { at: t.hi[1] + 14, ...OVERVIEW });
+  });
   steps.forEach(({ t, s }, i) => {
-    const prev = steps[i - 1];
-    if (!prev || prev.s.capture !== s.capture) {
+    if (isNew(i)) {
       screens.push({
         at: t.at,
         src: `kit/${s.capture}.png`,
@@ -53,12 +65,6 @@ const appDef = (a: AppT): AppDef => {
         demo: s.demo ? { ...s.demo, box: [...s.demo.box] as [number, number, number, number], from: t.at + s.demo.from } : undefined,
       });
     }
-    const z = s.zoom ?? 1.1;
-    cam.push({ at: t.hi[0] - 4, cx: s.focus[0], cy: s.focus[1], z }, { at: t.hi[1], cx: s.focus[0], cy: s.focus[1], z });
-    const next = steps[i + 1];
-    // a new screen: back to the whole screen while the blade brings it in ; same screen: the camera goes straight to the next zone
-    if (!next) cam.push({ at: t.hi[1] + 14, ...OVERVIEW });
-    else if (next.s.capture !== s.capture) cam.push({ at: next.t.at + 6, ...OVERVIEW });
   });
   return {
     id: a.id,
@@ -71,7 +77,8 @@ const appDef = (a: AppT): AppDef => {
     safeTop: true,
     screens,
     cam,
-    hi: steps.map(({ t, s }) => ({ from: t.hi[0], to: t.hi[1], rect: [...s.rect] as [number, number, number, number], label: s.label, below: !!s.below })),
+    // the highlights follow each other without a gap (the zone in focus never falls back to the default one)
+    hi: steps.map(({ t, s }, i) => ({ from: b[i], to: i < steps.length - 1 ? b[i + 1] : t.hi[1], rect: [...s.rect] as [number, number, number, number], label: s.label, below: !!s.below })),
   };
 };
 
