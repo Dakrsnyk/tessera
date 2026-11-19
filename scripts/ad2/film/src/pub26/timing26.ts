@@ -15,7 +15,7 @@ export const OUTRO_AT = 26;
 
 export type VoLine = { id: string; text: string; at: number };
 
-// ---------------------------------------------------------------- Film 1: MainPub26 (53.8 s)
+// ---------------------------------------------------------------- Film 1: MainPub26 (56.0 s)
 const M_HOMES_FROM = HOOK; // 446
 const M_HOMES_LEN = 544;
 const APP_LINK = 30; // overlap = the app's own entry / exit
@@ -64,19 +64,19 @@ const APPS_T: AppT[] = [
   },
   {
     id: "planning",
-    eff: 410,
+    eff: 420,
     steps: [
-      { key: "week", at: 0, hi: [36, 92] },
-      { key: "events", at: 96, hi: [110, 170] },
-      { key: "tasks", at: 96, hi: [174, 226] },
-      { key: "streak", at: 230, hi: [244, 306] },
-      { key: "done", at: 310, hi: [324, 400] },
+      { key: "week", at: 0, hi: [36, 110] },
+      { key: "events", at: 114, hi: [128, 188] },
+      { key: "tasks", at: 114, hi: [192, 244] },
+      { key: "streak", at: 248, hi: [262, 324] },
+      { key: "done", at: 328, hi: [342, 410] },
     ],
     vo: [
-      { id: "PI", text: "Finally, there's Planning.", at: 4 }, // (78 f)
-      { id: "P1b", text: "Your classes, events, and tasks.", at: 104 }, // (111 f)
-      { id: "P2", text: "Build your habits.", at: 238 }, // (61 f)
-      { id: "P3", text: "And keep your streak.", at: 318 }, // (65 f)
+      { id: "PI2", text: "Stay organized with Planning.", at: 4 }, // (97 f) v2.4: no more « Finally » (« And much more. » follows)
+      { id: "P1b", text: "Your classes, events, and tasks.", at: 122 }, // (111 f)
+      { id: "P2", text: "Build your habits.", at: 256 }, // (61 f)
+      { id: "P3b", text: "Keep your streak going.", at: 338 }, // (70 f)
     ],
   },
 ];
@@ -87,9 +87,12 @@ const APPS = APPS_T.map((a) => {
   acc += a.eff;
   return { ...a, from, seqLen: a.eff + APP_LINK };
 });
-const M_MAKE_FROM = acc; // 2670
+/** « And much more. » (v2.4): the other mini-apps scroll by, 2 s at most (PDG). */
+const M_MORE_FROM = acc; // 2680
+const M_MORE_LEN = 120;
+const M_MAKE_FROM = M_MORE_FROM + M_MORE_LEN; // 2800
 const M_MAKE_LEN = 390;
-const M_CLOSE_FROM = M_MAKE_FROM + M_MAKE_LEN; // 3060
+const M_CLOSE_FROM = M_MAKE_FROM + M_MAKE_LEN; // 3190
 
 export const MAIN = {
   hook: { from: 0, len: HOOK },
@@ -105,6 +108,7 @@ export const MAIN = {
     captionAt: 80,
   },
   apps: { from: M_APPS_FROM, link: APP_LINK, titleAt: 12, list: APPS },
+  more: { from: M_MORE_FROM, len: M_MORE_LEN, titleAt: 12 },
   make: {
     from: M_MAKE_FROM,
     len: M_MAKE_LEN,
@@ -116,10 +120,10 @@ export const MAIN = {
     morphAt: [100],
     morphLen: [30],
     swallow: [M_MAKE_LEN - 150 - 46, M_MAKE_LEN - 150 - 8] as [number, number],
-    captionAt: 24,
+    captionAt: 14,
   },
   close: { from: M_CLOSE_FROM, len: CLOSE_LEN },
-  total: M_CLOSE_FROM + CLOSE_LEN, // 3230 = 53.83 s
+  total: M_CLOSE_FROM + CLOSE_LEN, // 3360 = 56.0 s
 };
 export const MAIN_VO: VoLine[] = [
   { id: "M0", text: "Meet Ardane.", at: M_HOMES_FROM + 10 }, // (50 f)
@@ -128,7 +132,8 @@ export const MAIN_VO: VoLine[] = [
   { id: "M1c", text: "Check your calories.", at: M_HOMES_FROM + 314 }, // (63 f) on « Nutrition »
   { id: "M1d", text: "Without opening a single app.", at: M_HOMES_FROM + 404 }, // (98 f) on « Everything in one place »
   ...APPS.flatMap((a) => a.vo.map((v) => ({ id: v.id, text: v.text, at: a.from + v.at }))),
-  { id: "M5", text: "Make everyday your own.", at: M_MAKE_FROM + 24 }, // (75 f, v1 recording) on the isolated widget
+  { id: "MORE", text: "And much more.", at: M_MORE_FROM + 14 }, // (50 f)
+  { id: "M5", text: "Make everyday your own.", at: M_MAKE_FROM + 14 }, // (75 f, v1 recording) on the isolated widget
   { id: "K1", text: "Start with one widget.", at: M_MAKE_FROM + 104 }, // (75 f)
   { id: "K2", text: "Then give it your style.", at: M_MAKE_FROM + 262 }, // (71 f) on the morph to Aurora
 ];

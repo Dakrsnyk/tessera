@@ -76,6 +76,18 @@ export const APP_SHOTS: Record<"nutrition" | "fitness" | "planning", { title: st
 };
 export type AppId = keyof typeof APP_SHOTS;
 
+/**
+ * « And much more. » (Main ad, v2.3): the other mini-apps that have a CURRENT capture (kit run 471, 2026-11-18). Studies, Travel, Car and
+ * Photos have none of the current app (app-travel-en / app-photos-en are of 2026-11-10, before the redesign): not shown.
+ * app-finances-savings / -bills / -categories / -transactions / -s00-dark show the Home, not Finances: not used.
+ */
+export const MORE_SHOTS: { capture: string; label: string; accent: string; premium?: boolean }[] = [
+  { capture: "app-finances-s00", label: "Finances", accent: "#34C759" },
+  { capture: "app-business-hero", label: "Business", accent: "#7B61FF" },
+  { capture: "app-finances-trends", label: "Finances", accent: "#34C759", premium: true }, // « Analysis » (FinancesApp: comparisons, six months = Premium)
+  { capture: "app-business-sales", label: "Business", accent: "#7B61FF" },
+];
+
 /** Widget ad, customisation: the capture shown at each step (kit names, see scripts/ad_screens.txt). All show the SAME Medium Macros widget from `styleAurora` on. */
 export const SHOTS: Record<StepId, string> = {
   create: "pub26-create-dark", // « What size for your widget? »

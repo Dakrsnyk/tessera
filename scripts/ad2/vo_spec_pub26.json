@@ -131,8 +131,8 @@
     ],
     [
      {
-      "id": "PI",
-      "text": "Finally, there's Planning.",
+      "id": "PI2",
+      "text": "Stay organized with Planning.",
       "start": 0,
       "max": 1.9
      }
@@ -155,10 +155,18 @@
     ],
     [
      {
-      "id": "P3",
-      "text": "And keep your streak.",
+      "id": "P3b",
+      "text": "Keep your streak going.",
       "start": 0,
       "max": 1.6
+     }
+    ],
+    [
+     {
+      "id": "MORE",
+      "text": "And much more.",
+      "start": 0,
+      "max": 1.2
      }
     ],
     [

@@ -224,6 +224,10 @@ def main_sfx(T):
             if j > 0 and st["at"] != app["steps"][j - 1]["at"]:           # a new screen: the blade
                 ev += [(f(s + st["at"]), "swipe", -29, 0.3 if j % 2 else -0.3)]
             ev += [(f(s + st["hi"][0]), "tic", -31, 0)]
+    if "more" in M_:                                                    # v2.4: « And much more. » (the other mini-apps scroll by)
+        mo = M_["more"]
+        ev += cut_events(mo["from"]) + [(f(mo["from"] + mo["titleAt"]), "tic", -21, 0), (f(mo["from"] + 16), "swipe", -27, -0.3),
+                                        (f(mo["from"] + 60), "swipe", -28, 0.3)]
     mk = M_["make"]
     ev += cut_events(mk["from"]) + [(f(mk["from"]) + 0.05, "swipe", -27, 0), (f(mk["from"]) + 0.05, "pull", -29, 0)]
     hf = mk["from"] + mk["homeFrom"]
@@ -380,6 +384,8 @@ def plan_of(T, film, frame):
         M_ = T["MAIN"]
         names = [("accroche (hook)", 0, M_["hook"]["len"]), ("Meet Ardane + Homes", M_["homes"]["from"], M_["apps"]["from"])]
         names += [(a["id"].capitalize(), a["from"], a["from"] + a["eff"]) for a in M_["apps"]["list"]]
+        if "more" in M_:
+            names += [("And much more", M_["more"]["from"], M_["make"]["from"])]
         names += [("Make everyday your own", M_["make"]["from"], M_["close"]["from"]), ("carte finale", M_["close"]["from"], M_["total"])]
     else:
         W = T["WIDGET"]

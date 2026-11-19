@@ -9,6 +9,7 @@ import { AppDef, Cam, MiniApp5, Screen } from "../v5/MiniApp5";
 import { HomeBuilder } from "../v5/part2/Home";
 import { HookS } from "../v5/short/HookS";
 import { MAIN_HOMES, MAKE_HOMES, MAKE_ISOLATED } from "./configs26";
+import { More26 } from "./More26";
 import { Caption, EndCard, FadeIn, OptionalAudio } from "./parts";
 import { APP_SHOTS } from "./shots";
 import { MAIN } from "./timing26";
@@ -137,6 +138,9 @@ export const MainPub26: React.FC<{ silent?: boolean }> = ({ silent = false }) =>
         </Sequence>
       ))}
     </MainLook.Provider>
+    <Sequence from={MAIN.more.from} durationInFrames={MAIN.more.len} layout="absolute-fill">
+      <More26 />
+    </Sequence>
     <Sequence from={MAIN.make.from} durationInFrames={MAIN.make.len} layout="absolute-fill">
       <Make />
     </Sequence>
