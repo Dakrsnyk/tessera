@@ -2,7 +2,7 @@
 tags: [ardane, memoire, campagne-2026]
 ---
 
-# Faits vérifiés pour la campagne 2026 (lus dans le code le 2026-10-31)
+# Faits vérifiés pour la campagne 2026 (lus dans le code le 2026-10-31 ; import d'horaire corrigé le 2026-11-19)
 
 Remplace et complète [[Faits-verifies-campagne-v2]] (audit du 2026-10-11, PÉRIMÉ sur les points marqués « CHANGÉ » ci-dessous). Chaque ligne vient du code ; entre parenthèses, le fichier. « À confirmer » = non tranché par le code seul. Règle de la campagne : on ne montre et on ne dit que ce qui est ici ; tout chiffre affiché à l'écran vient d'une capture réelle, jamais d'un texte tapé.
 
@@ -32,7 +32,7 @@ Remplace et complète [[Faits-verifies-campagne-v2]] (audit du 2026-10-11, PÉRI
 | Finances | le mois courant et les 7 derniers jours (`PremiumHistory`) ; courbe « Mois » | mois précédents, courbe 3 mois / Année, évolution sur six mois |
 | Statistiques détaillées de chaque mini-app | — | oui |
 | Scanner alimentaire (code-barres et photo de plat) | GRATUIT : aucun verrou Premium dans `FoodScanView`, `ScanRecapView`, `MealPhotoAnalysis` | — |
-| Import d'horaire (photo/PDF, sur l'appareil) | gratuit « pour l'instant » (Decisions 2026-10-23) | — |
+| Import d'horaire (photo/PDF, sur l'appareil) | — (CHANGÉ, vérifié le 2026-11-19 : écran verrouillé sans Premium, `ScheduleImportView` « if !model.isPremium { lockedStep } », depuis le 2026-11-05) | PREMIUM : tout plan qui montre l'import porte « With Premium » |
 
 Widgets précis dont le statut compte pour les images : GRATUITS = Calories restantes, Macros, Prochaine série, Séance du jour, Série d'entraînement, Budget restant, Habitudes, Série d'habitude, Top 3, Tâches, Ma semaine, À venir, Compteur, Horloge, Calendrier, Note, Emploi du temps (timetable), Objectif d'épargne, Dépense rapide. PREMIUM = Repos (restTimer), Ajout rapide (quickFood), Protéines restantes, Repas du jour, Semaine nutrition, Prochain repas, Volume de la semaine, Dépenses par catégorie, Tableau de bord argent (moneyDashboard), L'année en points, Focus, Semaine d'habitudes. Vérifier chaque widget dans `KindCatalog.swift` avant de le mettre dans une image « gratuite ».
 
@@ -97,3 +97,9 @@ Règle de mention : tout plan qui montre une fonction ou un réglage Premium por
 4. Statut de chaque widget d'écran verrouillé (gratuit ou Premium) : la règle est `kind.isPremium` du widget affiché, à vérifier cas par cas.
 5. L'activité en direct n'a jamais été vérifiée sur un iPhone pour les boutons (voir Chantiers 2026-10-15/17).
 6. Les noms français exacts des écrans (Mon Quotidien, « Série faite »…) viennent des captures : toute légende doit être relue contre la capture.
+
+## Ajouts du 2026-11-19 (relecture des pubs Planning et Fitness)
+- Import d'horaire par photo ou PDF : PREMIUM (voir § 1). Sur un vrai iPhone le premier bouton est « Scan with the camera » ; les captures `camp-import-*` viennent du simulateur (« Choose a photo ») et l'écran de vérification `camp-import-review-b` est un état de démonstration (rien n'est réellement lu).
+- Carte finale : le film affiche « Available on the App Store » (`src/lib/i18n.json`, `close.cta` et `common.comingSoon`) alors que le § 0 impose « Coming soon » tant que l'app n'est pas publiée. À trancher par l'utilisateur avant toute publication.
+- Texte de l'app à corriger : la clé « Repos » sert à la fois au jour de repos et au repos entre deux séries ; en anglais elle donne « Rest day » sur le minuteur de repos (widget Repos, Activité en direct). Visible dans l'accroche de la pub Fitness.
+- Le bouton « Set done » du widget Next set (gratuit) note la série sans ouvrir l'app : établi par le code, jamais prouvé sur un vrai iPhone.
