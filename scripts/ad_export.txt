@@ -460,3 +460,45 @@ widget irl-weeklyVolume-m kind=weeklyVolume family=medium scale=3 theme=matteBla
 widget irl-restTimer-s kind=restTimer family=small scale=4 theme=matteBlack accent=E5383B scheme=dark
 widget irl-personalRecords-s kind=personalRecords family=small scale=4 theme=matteBlack accent=E5383B scheme=dark
 only irl-nextSet-combo-light irl-nextSet-combo-luxury irl-nextSet-combo-mars irl-nextSet-combo-neon irl-nextSet-combo-carbon irl-nextSet-combo-matte irl-weeklyVolume-m irl-restTimer-s irl-personalRecords-s
+
+# --- Campagne 2026-11 (2026-11-19) : widgets de l'app actuelle pour les écrans d'accueil des pubs par mini-app ---
+widget camp-caloriesLeft-s-light kind=caloriesLeft family=small scale=4 theme=light
+widget camp-macros-m-light kind=macros family=medium scale=3 theme=light
+widget camp-mealsToday-m-light kind=mealsToday family=medium scale=3 theme=light
+widget camp-nutritionWeek-m-light kind=nutritionWeek family=medium scale=3 theme=light
+widget camp-proteinLeft-s-light kind=proteinLeft family=small scale=4 theme=light
+widget camp-macros-m-aurora kind=macros family=medium scale=3 theme=aurora scheme=dark
+widget camp-caloriesLeft-s-paper kind=caloriesLeft family=small scale=4 theme=paper
+widget camp-budgetLeft-s-light kind=budgetLeft family=small scale=4 theme=light
+widget camp-spendingByCategory-m-light kind=spendingByCategory family=medium scale=3 theme=light
+widget camp-savingsGoal-s-light kind=savingsGoal family=small scale=4 theme=light
+widget camp-billsUpcoming-m-light kind=billsUpcoming family=medium scale=3 theme=light
+widget camp-moneyFlow-m-light kind=moneyFlow family=medium scale=3 theme=light
+widget camp-budgetLeft-s-liquidGlass kind=budgetLeft family=small scale=4 theme=liquidGlass scheme=dark
+widget camp-tasks-m-light kind=tasks family=medium scale=3 theme=light
+widget camp-priorities-s-light kind=priorities family=small scale=4 theme=light
+widget camp-counter-s-light kind=counter family=small scale=4 theme=light
+widget camp-tasks-s-light kind=tasks family=small scale=4 theme=light
+widget camp-timetable-l-light kind=timetable family=large scale=3 theme=light
+widget camp-timetable-m-light kind=timetable family=medium scale=3 theme=light
+widget camp-nextClass-s-light kind=nextClass family=small scale=4 theme=light
+widget camp-nextExam-s-light kind=nextExam family=small scale=4 theme=light
+widget camp-assignments-m-light kind=assignments family=medium scale=3 theme=light
+widget camp-semesterProgress-s-light kind=semesterProgress family=small scale=4 theme=light
+widget camp-studyHours-s-light kind=studyHours family=small scale=4 theme=light
+widget camp-habits-m-dark kind=habits family=medium scale=3 theme=dark scheme=dark
+widget camp-habitStreak-s-dark kind=habitStreak family=small scale=4 theme=dark scheme=dark
+widget camp-habitWeek-m-dark kind=habitWeek family=medium scale=3 theme=dark scheme=dark
+widget camp-hydration-s-dark kind=hydration family=small scale=4 theme=dark scheme=dark
+widget camp-habitRate-s-dark kind=habitRate family=small scale=4 theme=dark scheme=dark
+widget camp-revenueTrend-m-light kind=revenueTrend family=medium scale=3 theme=light
+widget camp-mrr-s-light kind=mrr family=small scale=4 theme=light
+widget camp-revenueGoal-s-light kind=revenueGoal family=small scale=4 theme=light
+widget camp-businessKPIs-m-light kind=businessKPIs family=medium scale=3 theme=light
+widget camp-profit-s-light kind=profit family=small scale=4 theme=light
+widget camp-tripCountdown-s-light kind=tripCountdown family=small scale=4 theme=light
+widget camp-flight-m-light kind=flight family=medium scale=3 theme=light
+widget camp-hotel-s-light kind=hotel family=small scale=4 theme=light
+widget camp-nextActivity-m-light kind=nextActivity family=medium scale=3 theme=light
+widget camp-tripProgress-s-light kind=tripProgress family=small scale=4 theme=light
+only camp-caloriesLeft-s-light camp-macros-m-light camp-mealsToday-m-light camp-nutritionWeek-m-light camp-proteinLeft-s-light camp-macros-m-aurora camp-caloriesLeft-s-paper camp-budgetLeft-s-light camp-spendingByCategory-m-light camp-savingsGoal-s-light camp-billsUpcoming-m-light camp-moneyFlow-m-light camp-budgetLeft-s-liquidGlass camp-tasks-m-light camp-priorities-s-light camp-counter-s-light camp-tasks-s-light camp-timetable-l-light camp-timetable-m-light camp-nextClass-s-light camp-nextExam-s-light camp-assignments-m-light camp-semesterProgress-s-light camp-studyHours-s-light camp-habits-m-dark camp-habitStreak-s-dark camp-habitWeek-m-dark camp-hydration-s-dark camp-habitRate-s-dark camp-revenueTrend-m-light camp-mrr-s-light camp-revenueGoal-s-light camp-businessKPIs-m-light camp-profit-s-light camp-tripCountdown-s-light camp-flight-m-light camp-hotel-s-light camp-nextActivity-m-light camp-tripProgress-s-light

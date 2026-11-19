@@ -13,12 +13,85 @@
 # d'où une capture de mise en route jetable avant les vraies.
 warmup spaces
 
-# Pub IRL Fitness v3 (2026-11-19) : le Studio, partie Style, sur le widget moyen combiné « Next set + Régularité »
-# (15 reps · 3/3), style Noir mat à l'accent rouge, en sombre. En tête de liste (limite de 60 min), chacune deux fois (-b).
-irl-studio-style studio-style -screenshotStudioParts nextSet+trainingStreak -screenshotStudioFormat medium -screenshotStudioTheme matteBlack -screenshotStudioAccent E5383B -screenshotAppearance dark
-irl-studio-style-b studio-style -screenshotStudioParts nextSet+trainingStreak -screenshotStudioFormat medium -screenshotStudioTheme matteBlack -screenshotStudioAccent E5383B -screenshotAppearance dark
-irl-studio-style-mid studio-style -screenshotStudioParts nextSet+trainingStreak -screenshotStudioFormat medium -screenshotStudioTheme matteBlack -screenshotStudioAccent E5383B -screenshotAppearance dark -screenshotScroll 0.4
-irl-studio-style-mid-b studio-style -screenshotStudioParts nextSet+trainingStreak -screenshotStudioFormat medium -screenshotStudioTheme matteBlack -screenshotStudioAccent E5383B -screenshotAppearance dark -screenshotScroll 0.4
+# Campagne 2026-11 (une pub par mini-app, 2026-11-19) : écrans de l'app actuelle, en tête de liste, chacun deux fois (-b).
+# Clair sauf mention. Études, import d'emploi du temps, Voyage, Business, Finances, Nutrition, Planning, Habits (sombre), créateurs.
+camp-studies app-studies
+camp-studies-b app-studies
+camp-studies-timetable app-studies-timetable
+camp-studies-timetable-b app-studies-timetable
+camp-studies-exams app-studies-exams
+camp-studies-exams-b app-studies-exams
+camp-studies-revision app-studies-revision
+camp-studies-revision-b app-studies-revision
+camp-studies-courses app-studies-courses
+camp-studies-courses-b app-studies-courses
+camp-studies-grades app-studies-grades
+camp-studies-grades-b app-studies-grades
+camp-import-pick app-planning-import-pick
+camp-import-pick-b app-planning-import-pick
+camp-import-reading app-planning-import-reading
+camp-import-reading-b app-planning-import-reading
+camp-import-review app-planning-import-review
+camp-import-review-b app-planning-import-review
+camp-travel app-travel
+camp-travel-b app-travel
+camp-travel-program app-travel-program
+camp-travel-program-b app-travel-program
+camp-travel-budget app-travel-budget
+camp-travel-budget-b app-travel-budget
+camp-travel-checklist app-travel-checklist
+camp-travel-checklist-b app-travel-checklist
+camp-business app-business
+camp-business-b app-business
+camp-business-sales app-business-sales
+camp-business-sales-b app-business-sales
+camp-business-results app-business-results
+camp-business-results-b app-business-results
+camp-business-metrics app-business-metrics
+camp-business-metrics-b app-business-metrics
+camp-finances app-finances -screenshotScroll 0
+camp-finances-b app-finances -screenshotScroll 0
+camp-finances-transactions app-finances-transactions
+camp-finances-transactions-b app-finances-transactions
+camp-finances-categories app-finances-categories
+camp-finances-categories-b app-finances-categories
+camp-finances-trends app-finances-trends
+camp-finances-trends-b app-finances-trends
+camp-finances-savings app-finances-savings
+camp-finances-savings-b app-finances-savings
+camp-finances-bills app-finances-bills
+camp-finances-bills-b app-finances-bills
+camp-finances-month app-finances-month
+camp-finances-month-b app-finances-month
+camp-nutrition app-nutrition -screenshotScroll 0 -screenshotScanButtons YES
+camp-nutrition-b app-nutrition -screenshotScroll 0 -screenshotScanButtons YES
+camp-nutrition-nutrients app-nutrition-nutrients
+camp-nutrition-nutrients-b app-nutrition-nutrients
+camp-nutrition-history app-nutrition-history
+camp-nutrition-history-b app-nutrition-history
+camp-nutrition-plan nutrition-plan
+camp-nutrition-plan-b nutrition-plan
+camp-scan-recap-photo scan-recap-photo
+camp-scan-recap-photo-b scan-recap-photo
+camp-planning app-planning -screenshotScroll 0
+camp-planning-b app-planning -screenshotScroll 0
+camp-planning-week app-planning-week
+camp-planning-week-b app-planning-week
+camp-planning-tasks app-planning-tasks
+camp-planning-tasks-b app-planning-tasks
+camp-habits-dark app-planning-habits -screenshotAppearance dark
+camp-habits-dark-b app-planning-habits -screenshotAppearance dark
+camp-creator-travel creator-travel -screenshotCreatorFormat medium
+camp-creator-travel-b creator-travel -screenshotCreatorFormat medium
+camp-creator-business creator-business -screenshotCreatorFormat medium
+camp-creator-business-b creator-business -screenshotCreatorFormat medium
+camp-creator-habits-dark creator-habits -screenshotCreatorFormat medium -screenshotAppearance dark
+camp-creator-habits-dark-b creator-habits -screenshotCreatorFormat medium -screenshotAppearance dark
+camp-creator-nutrition creator-nutrition -screenshotCreatorFormat medium
+camp-creator-nutrition-b creator-nutrition -screenshotCreatorFormat medium
+camp-creator-productivity creator-productivity -screenshotCreatorFormat medium
+camp-creator-productivity-b creator-productivity -screenshotCreatorFormat medium
+
 
 # Pubs du 2026-11-18 (Main Pub et Widget Pub, app actuelle, apparence sombre comme sur l'iPhone du PDG). En tête de
 # liste et CHACUNE DEUX FOIS (-b) : au run 471, quelques captures prises à 6 s montraient encore l'accueil (machine
