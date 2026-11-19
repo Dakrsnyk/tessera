@@ -51,6 +51,14 @@
     ],
     [
      {
+      "id": "NI",
+      "text": "Inside the app, you have Nutrition.",
+      "start": 0,
+      "max": 2.6
+     }
+    ],
+    [
+     {
       "id": "N1",
       "text": "Know what's left to eat.",
       "start": 0,
@@ -59,10 +67,10 @@
     ],
     [
      {
-      "id": "N2",
-      "text": "Scan it, or search it.",
+      "id": "N2b",
+      "text": "Scan your food, or search for it.",
       "start": 0,
-      "max": 1.8
+      "max": 2.4
      }
     ],
     [
@@ -75,26 +83,26 @@
     ],
     [
      {
-      "id": "F1",
-      "text": "Never lose count of a set.",
-      "start": 0,
-      "max": 2.0
-     }
-    ],
-    [
-     {
-      "id": "F2",
-      "text": "Rest on the timer.",
+      "id": "FI",
+      "text": "There's also Fitness.",
       "start": 0,
       "max": 1.6
      }
     ],
     [
      {
-      "id": "F3",
-      "text": "Over 160 exercises.",
+      "id": "F1b",
+      "text": "Track every set as you go.",
       "start": 0,
-      "max": 2.2
+      "max": 2.0
+     }
+    ],
+    [
+     {
+      "id": "F3b",
+      "text": "Choose from over 160 exercises.",
+      "start": 0,
+      "max": 2.6
      }
     ],
     [
@@ -107,18 +115,34 @@
     ],
     [
      {
-      "id": "F5",
-      "text": "And every record, tracked.",
+      "id": "F5b",
+      "text": "Watch your records climb.",
       "start": 0,
-      "max": 2.0
+      "max": 1.8
      }
     ],
     [
      {
-      "id": "P1",
-      "text": "Classes, events, and tasks.",
+      "id": "FL",
+      "text": "And your training on your lock screen.",
       "start": 0,
-      "max": 2.2
+      "max": 2.6
+     }
+    ],
+    [
+     {
+      "id": "PI",
+      "text": "Finally, there's Planning.",
+      "start": 0,
+      "max": 1.9
+     }
+    ],
+    [
+     {
+      "id": "P1b",
+      "text": "Your classes, events, and tasks.",
+      "start": 0,
+      "max": 2.4
      }
     ],
     [

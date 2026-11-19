@@ -18,6 +18,8 @@ export type AppStep = {
   premium?: boolean;
   /** an animation played inside a zone of the capture (frames kit/<name>-0000.png ...), from `from` frames after the screen arrives */
   demo?: { name: string; count: number; box: Rect; fill: string; from: number };
+  /** a screen drawn by the film over real captures (v5/MiniApp5 `custom`) */
+  custom?: "lockLive";
   /** plain rects drawn over the capture (capture px + colour): French words left in a capture */
   cover?: [number, number, number, number, string][];
 };
@@ -41,7 +43,6 @@ export const APP_SHOTS: Record<"nutrition" | "fitness" | "planning", { title: st
     steps: {
       live: { capture: "pub26-fitness-dark", label: "Live workout", rect: [62, 757, 1082, 600], focus: [603, 962], zoom: 1.1, below: true },
       sets: { capture: "session-0-dark", label: "Set 3 of 4", rect: [36, 645, 1134, 900], focus: [603, 1100], zoom: 1.1 },
-      rest: { capture: "session-1-dark", label: "Rest timer", rect: [50, 1200, 1110, 150], focus: [603, 1270], zoom: 1.1, below: true },
       library: { capture: "app-fitness-library-dark", label: "163 exercises", rect: [36, 1000, 1134, 1160], focus: [603, 1500], zoom: 1.1, premium: true },
       demo: {
         capture: "ex-1-dark",
@@ -56,6 +57,9 @@ export const APP_SHOTS: Record<"nutrition" | "fitness" | "planning", { title: st
         cover: [[30, 1118, 1146, 172, "rgb(8,14,20)"]], // « Remontée » and « Profil » (French words left in the capture)
       },
       record: { capture: "app-fitness-exercise-back-squat-end", label: "Personal best", rect: [40, 560, 1126, 830], focus: [603, 975], zoom: 1.1, below: true, premium: true },
+      // the workout Live Activity on the Lock Screen (v5/lib/LockLive: real captures lock-minuit + live-ready-night / live-afterset-night ;
+      // same layout as the current app's own preview, spaces-lock-end of 2026-11-18). Free (no Premium check around Activity.request).
+      lock: { capture: "lock-minuit", custom: "lockLive", label: "Live Activity", rect: [45, 1790, 1116, 465], focus: [603, 2020], zoom: 1.1 },
     },
   },
   planning: {

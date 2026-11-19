@@ -61,6 +61,7 @@ const appDef = (a: AppT): AppDef => {
         at: t.at,
         src: `kit/${s.capture}.png`,
         premium: s.premium,
+        custom: s.custom,
         cover: s.cover ? s.cover.map((c) => [...c] as [number, number, number, number, string]) : undefined,
         demo: s.demo ? { ...s.demo, box: [...s.demo.box] as [number, number, number, number], from: t.at + s.demo.from } : undefined,
       });

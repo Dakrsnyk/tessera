@@ -15,65 +15,67 @@ export const OUTRO_AT = 26;
 
 export type VoLine = { id: string; text: string; at: number };
 
-// ---------------------------------------------------------------- Film 1: MainPub26 (52.3 s)
+// ---------------------------------------------------------------- Film 1: MainPub26 (53.8 s)
 const M_HOMES_FROM = HOOK; // 446
 const M_HOMES_LEN = 544;
 const APP_LINK = 30; // overlap = the app's own entry / exit
 /** One mini-app: its steps (keys of APP_SHOTS[id].steps in shots.ts): `at` = the screen arrives (same capture = same screen), `hi` = the highlight. */
 type AppStepT = { key: string; at: number; hi: [number, number] };
 type AppT = { id: "nutrition" | "fitness" | "planning"; eff: number; steps: AppStepT[]; vo: { id: string; text: string; at: number }[] };
+// v2.3 (PDG, 2026-11-18): linking words (« Inside the app, you have Nutrition. », « There's also Fitness. », « Finally, there's Planning. »),
+// « Rest on the timer » removed, « And your training on your lock screen. » (the workout Live Activity) at the end of Fitness.
 const APPS_T: AppT[] = [
   {
     id: "nutrition",
-    eff: 456,
+    eff: 520,
     steps: [
-      { key: "ring", at: 0, hi: [40, 160] },
-      { key: "scan", at: 0, hi: [172, 216] },
-      { key: "search", at: 222, hi: [244, 284] },
-      { key: "amount", at: 290, hi: [306, 364] },
-      { key: "added", at: 372, hi: [390, 450] },
+      { key: "ring", at: 0, hi: [120, 228] },
+      { key: "scan", at: 0, hi: [232, 292] },
+      { key: "search", at: 296, hi: [314, 350] },
+      { key: "amount", at: 356, hi: [370, 430] },
+      { key: "added", at: 436, hi: [450, 510] },
     ],
     vo: [
-      { id: "M2", text: "Nutrition.", at: 12 }, // validated v5short-NA (47 f)
-      { id: "N1", text: "Know what's left to eat.", at: 72 }, // (76 f)
-      { id: "N2", text: "Scan it, or search it.", at: 168 }, // (77 f)
-      { id: "N3", text: "Log it, and your day updates.", at: 300 }, // (102 f)
+      { id: "NI", text: "Inside the app, you have Nutrition.", at: 4 }, // (110 f)
+      { id: "N1", text: "Know what's left to eat.", at: 136 }, // (76 f)
+      { id: "N2b", text: "Scan your food, or search for it.", at: 232 }, // (106 f)
+      { id: "N3", text: "Log it, and your day updates.", at: 360 }, // (102 f)
     ],
   },
   {
     id: "fitness",
-    eff: 700,
+    eff: 750,
     steps: [
-      { key: "live", at: 0, hi: [36, 90] },
-      { key: "sets", at: 96, hi: [116, 190] },
-      { key: "rest", at: 200, hi: [220, 282] },
-      { key: "library", at: 290, hi: [310, 420] },
-      { key: "demo", at: 428, hi: [450, 540] },
-      { key: "record", at: 550, hi: [570, 650] },
+      { key: "live", at: 0, hi: [36, 84] },
+      { key: "sets", at: 90, hi: [104, 190] },
+      { key: "library", at: 200, hi: [214, 368] },
+      { key: "demo", at: 376, hi: [390, 480] },
+      { key: "record", at: 490, hi: [504, 584] },
+      { key: "lock", at: 592, hi: [612, 740] },
     ],
     vo: [
-      { id: "M3", text: "Fitness.", at: 12 }, // validated v5short-FA (40 f)
-      { id: "F1", text: "Never lose count of a set.", at: 108 }, // (89 f)
-      { id: "F2", text: "Rest on the timer.", at: 214 }, // (62 f)
-      { id: "F3", text: "Over 160 exercises.", at: 300 }, // (123 f) ExerciseLibrary.all = 163, each with its animation (ExerciseDemos.json)
-      { id: "F4", text: "Each one, demonstrated.", at: 440 }, // (92 f)
-      { id: "F5", text: "And every record, tracked.", at: 562 }, // (83 f)
+      { id: "FI", text: "There's also Fitness.", at: 4 }, // (73 f)
+      { id: "F1b", text: "Track every set as you go.", at: 98 }, // (88 f)
+      { id: "F3b", text: "Choose from over 160 exercises.", at: 208 }, // (155 f) ExerciseLibrary.all = 163, each with its animation (ExerciseDemos.json)
+      { id: "F4", text: "Each one, demonstrated.", at: 384 }, // (92 f)
+      { id: "F5b", text: "Watch your records climb.", at: 498 }, // (80 f)
+      { id: "FL", text: "And your training on your lock screen.", at: 600 }, // (93 f) the Live Activity pops up at 612, « Set done » tapped at 692
     ],
   },
   {
     id: "planning",
-    eff: 430,
+    eff: 410,
     steps: [
-      { key: "week", at: 0, hi: [36, 104] },
-      { key: "events", at: 110, hi: [126, 170] },
-      { key: "tasks", at: 110, hi: [176, 220] },
-      { key: "streak", at: 226, hi: [244, 300] },
-      { key: "done", at: 306, hi: [322, 420] },
+      { key: "week", at: 0, hi: [36, 92] },
+      { key: "events", at: 96, hi: [110, 170] },
+      { key: "tasks", at: 96, hi: [174, 226] },
+      { key: "streak", at: 230, hi: [244, 306] },
+      { key: "done", at: 310, hi: [324, 400] },
     ],
     vo: [
-      { id: "M4", text: "Planning.", at: 12 }, // validated v5short-PA (38 f)
-      { id: "P1", text: "Classes, events, and tasks.", at: 110 }, // (99 f)
-      { id: "P2", text: "Build your habits.", at: 236 }, // (61 f)
+      { id: "PI", text: "Finally, there's Planning.", at: 4 }, // (78 f)
+      { id: "P1b", text: "Your classes, events, and tasks.", at: 104 }, // (111 f)
+      { id: "P2", text: "Build your habits.", at: 238 }, // (61 f)
       { id: "P3", text: "And keep your streak.", at: 318 }, // (65 f)
     ],
   },
@@ -85,9 +87,9 @@ const APPS = APPS_T.map((a) => {
   acc += a.eff;
   return { ...a, from, seqLen: a.eff + APP_LINK };
 });
-const M_MAKE_FROM = acc; // 2576
+const M_MAKE_FROM = acc; // 2670
 const M_MAKE_LEN = 390;
-const M_CLOSE_FROM = M_MAKE_FROM + M_MAKE_LEN; // 2966
+const M_CLOSE_FROM = M_MAKE_FROM + M_MAKE_LEN; // 3060
 
 export const MAIN = {
   hook: { from: 0, len: HOOK },
@@ -117,7 +119,7 @@ export const MAIN = {
     captionAt: 24,
   },
   close: { from: M_CLOSE_FROM, len: CLOSE_LEN },
-  total: M_CLOSE_FROM + CLOSE_LEN, // 3136 = 52.27 s
+  total: M_CLOSE_FROM + CLOSE_LEN, // 3230 = 53.83 s
 };
 export const MAIN_VO: VoLine[] = [
   { id: "M0", text: "Meet Ardane.", at: M_HOMES_FROM + 10 }, // (50 f)
