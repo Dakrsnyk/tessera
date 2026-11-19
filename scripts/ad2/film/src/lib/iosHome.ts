@@ -29,7 +29,9 @@ export const IOS = {
   radius: 165,
 };
 
-export const APPLE_APPS = ["Calendar", "Photos", "Reminders", "News", "Maps", "Health", "Wallet", "Settings", "Safari", "Messages"] as const;
+/** Page 1 and Dock of the simulator, then (2026-11-19, [ios-home] run 479) its page 2: Fitness, Watch, Contacts, Files, Preview.
+ * (The Utilities folder of page 2 is cut too but is see-through: it shows the simulator's wallpaper, never use it.) */
+export const APPLE_APPS = ["Calendar", "Photos", "Reminders", "News", "Maps", "Health", "Wallet", "Settings", "Safari", "Messages", "Fitness", "Watch", "Contacts", "Files", "Preview"] as const;
 export type AppleApp = (typeof APPLE_APPS)[number];
 export const appleIcon = (name: string) => `apple-icons/${name}.png`;
 /** The Dock of every film (always the same phone: only the apps of the grid change with the widgets). */
@@ -84,19 +86,20 @@ export const appsFor = (files: string[]): AppleApp[] => {
   const n = files.join(" ");
   const score = (re: RegExp) => (n.match(re) ?? []).length;
   const themes: [number, AppleApp[]][] = [
-    [score(/budget|money|spending|business|expense|currency|sales/gi), ["Wallet", "News", "Calendar", "Reminders", "Maps", "Health"]],
-    [score(/workout|nextSet|training|rest|volume|steps|activity/gi), ["Health", "Maps", "Calendar", "Reminders", "News", "Wallet"]],
-    [score(/macros|calories|quickFood|meal|water|nutri/gi), ["Health", "Reminders", "Calendar", "Maps", "News", "Wallet"]],
-    [score(/timetable|week|upNext|task|priorit|habit|month|countdown|moon|birthday|flight|hotel|trip|localTime|quote/gi), ["Calendar", "Reminders", "Maps", "News", "Health", "Wallet"]],
+    [score(/budget|money|spending|business|expense|currency|sales/gi), ["Wallet", "News", "Calendar", "Reminders", "Maps", "Health", "Files", "Contacts", "Preview", "Watch", "Fitness"]],
+    [score(/workout|nextSet|training|rest|volume|steps|activity/gi), ["Health", "Maps", "Calendar", "Reminders", "News", "Wallet", "Fitness", "Watch", "Files", "Contacts", "Preview"]],
+    [score(/macros|calories|quickFood|meal|water|nutri/gi), ["Health", "Reminders", "Calendar", "Maps", "News", "Wallet", "Fitness", "Watch", "Files", "Contacts", "Preview"]],
+    [score(/timetable|week|upNext|task|priorit|habit|month|countdown|moon|birthday|flight|hotel|trip|localTime|quote/gi), ["Calendar", "Reminders", "Maps", "News", "Health", "Wallet", "Contacts", "Files", "Preview", "Watch", "Fitness"]],
   ];
   themes.sort((a, b) => b[0] - a[0]);
-  return themes[0][0] > 0 ? themes[0][1] : ["Calendar", "Reminders", "Health", "Wallet", "Maps", "News"];
+  return themes[0][0] > 0 ? themes[0][1] : ["Calendar", "Reminders", "Health", "Wallet", "Maps", "News", "Contacts", "Files", "Watch", "Preview", "Fitness"];
 };
 
 export type IosIcon = { x: number; y: number; name: string };
 /**
  * Every free cell gets a real app, never one of the Dock, never twice; when the 6 apps of the grid are used up the last cells
- * stay empty (better a few empty cells at the bottom than a crowded screen).
+ * stay empty (better a few empty cells at the bottom than a crowded screen). `max` above 6 also uses the 5 apps of page 2 (each
+ * theme list keeps its first 6 apps unchanged, so the Homes made before stay identical).
  */
 export const iosFill = (rects: Rect[], files: string[], dock: string[] = IOS_DOCK, max = 6): IosIcon[] => {
   const pool = appsFor(files).filter((a) => !dock.includes(a));

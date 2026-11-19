@@ -31,3 +31,9 @@ Demande : chaque pub (films du dépôt tessera ET pubs du QG ardane-hq) montre d
 - Libellés : blancs avec ombre sur fond sombre, gris foncé sur fond très clair (papier) : illisibles sinon.
 - Copie de travail : NE PAS lancer `film_sync.py import` (il efface `ads/`, `hq/`, `lifestyle/`, `store/`, `tiktok/` et le Root de ~/ardane-tools/film) ; copier fichier par fichier (`~/ardane-tools/sync_ios.sh`).
 - Planche avant / après envoyée : `pub/film2026/check/planche-vraies-icones.png`. Re-rendu de toutes les pubs : PAS fait ; le PDG a demandé à la place de refaire seulement la pub principale (note 17).
+
+## Page 2 du simulateur (2026-11-19, accord de l'utilisateur pour modifier la CI)
+- `[ios-home]` photographie aussi les autres pages : la disposition de SpringBoard (`data/Library/SpringBoard/IconState.plist`) est modifiée simulateur éteint (page N mise en tête, apps de la seule Bibliothèque d'apps ajoutées en pages), puis remise à l'état d'origine. Rapport : `ios-home/ios-home-pN-light|dark.png`, `pages.txt` (apps de chaque page), avertissement si une page est identique à la page 1. Run 479 : fonctionne (iOS 26, iPhone 16 Pro).
+- Page 2 : Fitness, Watch, Contacts, Files, Preview et un dossier Utilities (Shortcuts, Passwords). La « page 3 » ajoutée (affiches Kaleidoscope, Pride, Unity, Web, Xcode Previews) reste vide : SpringBoard ignore ces apps cachées.
+- `apple_icons.py <page1.png> <page2.png>` découpe les 16 icônes ; le dossier Utilities est transparent (il montre le fond du simulateur) : ne pas l'utiliser. Calendar affiche le jour de la capture (19 au run 479).
+- Apps autorisées désormais : les 10 d'avant + Fitness, Watch, Contacts, Files, Preview. Jamais la même app sur deux pages d'un même iPhone.
