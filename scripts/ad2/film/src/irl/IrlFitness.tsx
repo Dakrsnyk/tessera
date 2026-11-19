@@ -11,7 +11,7 @@ import { EndCard } from "../pub26/parts";
 /**
  * « IRL » Fitness ad (2026-11-18): real gym footage (Pexels, free licence, see docs/memoire/campagne-2026/23-pub-irl-fitness.md)
  * in black and white (v2, 2026-11-19; v1 was graded red), cut on the beat (120 BPM = 30 frames at 60 fps), cut with REAL Ardane captures (current app, kit runs
- * 471/472): Live Activity, workout, program, then Create -> choose -> style -> Home Screen. No face of the footage is ever shown next to
+ * 471/472): Live Activity, workout, program, then Create -> Studio (Style) -> colours -> Home Screen (v3). No face of the footage is ever shown next to
  * a phone (Pexels licence: no implied endorsement).
  */
 export const IRL_FPS = 60;
@@ -28,13 +28,13 @@ const T = {
   s2: [20 * B, 4 * B],
   b8: [24 * B, 3 * B],
   create: [27 * B, 3 * B],
-  choose: [30 * B, 3 * B],
-  style: [33 * B, 4 * B],
-  home: [37 * B, 8 * B],
-  b9: [45 * B, 4 * B],
-  end: [49 * B, 170],
+  studio: [30 * B, 4 * B],
+  colors: [34 * B, 5 * B],
+  home: [39 * B, 8 * B],
+  b9: [47 * B, 4 * B],
+  end: [51 * B, 170],
 } as const;
-export const IRL_LENGTH = T.end[0] + T.end[1]; // 1640 = 27.3 s (the audio script irl_audio.py uses the same beat grid)
+export const IRL_LENGTH = T.end[0] + T.end[1]; // 1700 = 28.3 s (irl_audio.py / irl_music.py use the same beat grid)
 
 const clip = (n: string) => staticFile(`irl/fitness/${n}.mp4`);
 
@@ -97,8 +97,9 @@ const Screen: React.FC<{ dur: number; children: React.ReactNode; top?: number }>
 };
 const Cap: React.FC<{ name: string }> = ({ name }) => <Img src={asset(`kit/${name}.png`)} style={{ position: "absolute", left: 0, top: 0, width: 1206, height: 2622 }} />;
 
-/** Studio « style » beat: the same Next set widget (the one chosen) in three real styles, the last one (Neon) is the Home's. */
-const STYLES = ["nextSet-s-light", "nextSet-s-luxury", "nextSet-s-neon"];
+/** v3 (user, 2026-11-19): the medium combined widget « Next set + Consistency » (15 reps · 3/3) in six real styles (kit exports
+ * irl-nextSet-combo-*), the last one (Matte black, red accent) is the Home's. */
+const STYLES = ["light", "luxury", "mars", "neon", "carbon", "matte"].map((s) => `irl-nextSet-combo-${s}`);
 const StyleCycle: React.FC<{ dur: number }> = ({ dur }) => {
   const f = useCurrentFrame();
   const step = dur / STYLES.length;
@@ -112,7 +113,7 @@ const StyleCycle: React.FC<{ dur: number }> = ({ dur }) => {
           <Img
             key={n}
             src={asset(`kit/${n}.png`)}
-            style={{ position: "absolute", left: 540 - 300, top: 960 - 300, width: 600, height: 600, opacity: a * out, transform: `scale(${pop})`, filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.6))" }}
+            style={{ position: "absolute", left: 540 - 470, top: 960 - 220, width: 940, height: (940 * 510) / 1092, opacity: a * out, transform: `scale(${pop})`, filter: "drop-shadow(0 40px 80px rgba(0,0,0,0.6))" }}
           />
         );
       })}
@@ -125,16 +126,17 @@ const HOME: Config[] = [
   {
     id: "fitness",
     label: "Fitness",
-    wall: k("wall-ruby"),
+    wall: "irl/fitness/wall-irl.png", // scripts/ad2/irl_wall.py: black, red glow, thin red barbell under the widgets, thin red frame
     dark: true,
     icons: "",
-    glow: "#FF3D8B",
+    glow: "#E5383B",
+    noFill: true, // no app icons: the barbell of the wallpaper stays visible
     slots: [
-      { file: k("weeklyVolume-m-neon"), rect: [57, 204, 1092, 510] },
-      { file: k("nextSet-s-neon"), rect: [57, 813, 510, 510] },
-      { file: k("restTimer-s-neon"), rect: [638, 813, 510, 510] },
+      { file: k("irl-nextSet-combo-matte"), rect: [57, 204, 1092, 510] },
+      { file: k("irl-restTimer-s"), rect: [57, 813, 510, 510] },
+      { file: k("irl-personalRecords-s"), rect: [638, 813, 510, 510] },
     ],
-  },
+  } as Config,
 ];
 
 const Seq: React.FC<{ t: readonly [number, number]; children: React.ReactNode }> = ({ t, children }) => (
@@ -187,8 +189,8 @@ export const IrlFitness: React.FC<{ silent?: boolean }> = ({ silent = false }) =
         <Word text="your program." until={T.s2[1]} y={70} />
       </Seq>
       <Roll t={T.b8} name="b8" word="getting stronger" />
-      <Seq t={[T.create[0], T.create[1] + T.choose[1] + T.style[1]]}>
-        <Footage name="bg-make" dur={T.create[1] + T.choose[1] + T.style[1]} rate={0.75} bg />
+      <Seq t={[T.create[0], T.create[1] + T.studio[1] + T.colors[1]]}>
+        <Footage name="bg-make" dur={T.create[1] + T.studio[1] + T.colors[1]} rate={0.75} bg />
       </Seq>
       <Seq t={T.create}>
         <Screen dur={T.create[1]}>
@@ -196,15 +198,19 @@ export const IrlFitness: React.FC<{ silent?: boolean }> = ({ silent = false }) =
         </Screen>
         <Word text="create." until={T.create[1]} y={70} />
       </Seq>
-      <Seq t={T.choose}>
-        <Screen dur={T.choose[1]}>
-          <Cap name="creator-fitness-medium" />
+      {/* v3: the Studio on its Style part (combined widget, Matte black, red accent), then the style list scrolled */}
+      <Seq t={T.studio}>
+        <Screen dur={T.studio[1]}>
+          <StudioStyle capture="studio-style-luxury-dark" widget="irl-nextSet-combo-luxury" />
+          <StudioSwap at={2 * B}>
+            <StudioStyle capture="studio-style-neon-dark" widget="irl-nextSet-combo-neon" />
+          </StudioSwap>
         </Screen>
-        <Word text="choose." until={T.choose[1]} y={70} />
+        <Word text="style." until={T.studio[1]} y={70} />
       </Seq>
-      <Seq t={T.style}>
-        <StyleCycle dur={T.style[1]} />
-        <Word text="style." until={T.style[1]} y={330} />
+      <Seq t={T.colors}>
+        <StyleCycle dur={T.colors[1]} />
+        <Word text="your colors." until={T.colors[1]} y={560} />
       </Seq>
       <Seq t={T.home}>
         <HomeBuilder configs={HOME} morphAt={[]} morphLen={[]} installAt={6} swallow={[99998, 99999]} lineOpen />
@@ -219,6 +225,25 @@ export const IrlFitness: React.FC<{ silent?: boolean }> = ({ silent = false }) =
     </AbsoluteFill>
     </LangContext.Provider>
   );
+};
+
+/**
+ * The Studio on its Style part (real captures studio-style-<style>-dark, current app) with the widget being styled, the
+ * combined « Next set + Consistency » widget (real exports irl-nextSet-combo-<style> of the same style), laid over the
+ * capture's preview (measured: x 126..1080, y 450..896 of the 1206 x 2622 capture). The kit could not open the Studio on a
+ * combined widget (run 44465910005: captures irl-studio-style* failed), and the app's code is not changed for the ads.
+ */
+const StudioStyle: React.FC<{ capture: string; widget: string }> = ({ capture, widget }) => (
+  <>
+    <Cap name={capture} />
+    <div style={{ position: "absolute", left: 110, top: 434, width: 986, height: 478, background: "rgb(18,31,43)" }} />
+    <Img src={asset(`kit/${widget}.png`)} style={{ position: "absolute", left: 126, top: 450, width: 954, height: 446 }} />
+  </>
+);
+const StudioSwap: React.FC<{ at: number; children: React.ReactNode }> = ({ at, children }) => {
+  const f = useCurrentFrame();
+  const o = interpolate(f, [at, at + 10], [0, 1], clamp);
+  return o > 0 ? <div style={{ position: "absolute", inset: 0, opacity: o }}>{children}</div> : null;
 };
 
 const HookLock: React.FC = () => {

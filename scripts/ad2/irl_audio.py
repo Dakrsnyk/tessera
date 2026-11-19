@@ -19,11 +19,11 @@ from synth import SR, db, fm_glass, note, reverb
 
 FPS = 60
 BEAT = 0.5  # 120 BPM
-LENGTH = 1640 / FPS  # IRL_LENGTH
+LENGTH = 1700 / FPS  # IRL_LENGTH (v3)
 DROP = 2.0  # fin de l'accroche (4 temps)
-END = 1470 / FPS  # carte finale (T.end)
+END = 1530 / FPS  # carte finale (T.end, v3)
 TAP = 40 / FPS  # LockLive : tap à t = 100, l'accroche joue t = 60 + f
-SWAPS = [810, 900, 990, 1030, 1070, 1110]  # create, choose, style (3 styles), écran d'accueil
+SWAPS = [810, 900, 960, 1020, 1045, 1070, 1095, 1120, 1145, 1170]  # v3 : Create, Studio, Studio défilé, six coloris, écran d'accueil
 rng = np.random.default_rng(7)
 
 
