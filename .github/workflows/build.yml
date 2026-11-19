@@ -135,10 +135,14 @@ jobs:
       - name: Real iOS Home Screen
         if: env.IOSHOME == 'true' && env.DEVICE != ''
         continue-on-error: true
-        timeout-minutes: 15
+        timeout-minutes: 35
         run: |
-          xcrun simctl bootstatus "$DEVICE" -b
-          xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true
+          # A simulator sometimes never finishes booting (see [marketing]): every wait is bounded to 4 minutes.
+          boot_ok() { perl -e 'alarm 240; exec @ARGV' xcrun simctl bootstatus "$DEVICE" -b; }
+          reboot_ok() { xcrun simctl boot "$DEVICE" || true; boot_ok || { xcrun simctl shutdown "$DEVICE" || true; xcrun simctl boot "$DEVICE" || true; boot_ok; }; }
+          bars() { xcrun simctl status_bar "$DEVICE" override --time "9:41" --batteryState charged --batteryLevel 100 --wifiBars 3 --cellularBars 4 || true; }
+          boot_ok || { xcrun simctl shutdown "$DEVICE" || true; xcrun simctl boot "$DEVICE" || true; boot_ok; } || true
+          bars
           mkdir -p ioshome
           sleep 20
           for look in light dark; do
@@ -147,6 +151,105 @@ jobs:
             xcrun simctl io "$DEVICE" screenshot --type=png "ioshome/ios-home-$look.png" < /dev/null || true
           done
           xcrun simctl list devices | grep "$DEVICE" > ioshome/device.txt || true
+          # The other Home Screen pages (2026-11-19: more real Apple apps for the ads than the 8 of page 1 and the Dock).
+          # There is no simctl gesture to swipe, so SpringBoard's own layout file is edited while the simulator is shut
+          # down: the system apps that are on no page (App Library only) are added as extra pages, page N is moved to
+          # the front, the simulator boots and the first page is photographed (ios-home-pN-<look>.png). pages.txt lists
+          # what each page should show (bundle id and name from simctl listapps); a page identical to page 1 is flagged.
+          # The original layout is put back at the end and the simulator is booted again for any later step.
+          SB="$HOME/Library/Developer/CoreSimulator/Devices/$DEVICE/data/Library/SpringBoard"
+          # simctl listapps needs a booted device and prints an old-style (OpenStep) plist: plutil makes it XML.
+          xcrun simctl listapps "$DEVICE" > ioshome/listapps.txt 2> ioshome/listapps-error.txt || true
+          plutil -convert xml1 -o ioshome/listapps.plist ioshome/listapps.txt > ioshome/listapps-plutil.txt 2>&1 || true
+          # SpringBoard is stopped before its layout file is read: it may only write it when it stops.
+          xcrun simctl shutdown "$DEVICE" || true
+          { ls -la "$SB"; find "$HOME/Library/Developer/CoreSimulator/Devices/$DEVICE/data/Library" -iname '*iconstate*'; } > ioshome/springboard-files.txt 2>&1 || true
+          if [ -f "$SB/IconState.plist" ]; then cp "$SB/IconState.plist" ioshome/IconState-original.plist || true; fi
+          if [ -f ioshome/IconState-original.plist ]; then plutil -convert json -o ioshome/IconState.json ioshome/IconState-original.plist > /dev/null 2>&1 || true; fi
+          # Working layout: the original pages (or none), then the missing system apps, 24 per page.
+          python3 - <<'PY' > ioshome/pages-range.txt || echo "0 0" > ioshome/pages-range.txt
+          import os, plistlib
+          if os.path.exists("ioshome/IconState-original.plist"):
+              state = plistlib.load(open("ioshome/IconState-original.plist", "rb"))
+          else:
+              state = {"buttonBar": [], "iconLists": []}
+          try:
+              apps = plistlib.load(open("ioshome/listapps.plist", "rb"))
+          except Exception:
+              apps = {}
+          placed = set()
+          def walk(x):
+              if isinstance(x, str):
+                  placed.add(x)
+              elif isinstance(x, list):
+                  for e in x:
+                      walk(e)
+              elif isinstance(x, dict):
+                  walk(x.get("iconLists", []))
+          walk(state.get("buttonBar", []))
+          walk(state.get("iconLists", []))
+          def name(bundle):
+              info = apps.get(bundle, {})
+              return info.get("CFBundleDisplayName") or info.get("CFBundleName") or "?"
+          extra = sorted((b for b, i in apps.items()
+                          if i.get("ApplicationType") == "System" and "hidden" not in (i.get("SBAppTags") or []) and b not in placed),
+                         key=name)
+          original = len(state.get("iconLists", []))
+          state.setdefault("iconLists", []).extend(extra[i:i + 24] for i in range(0, len(extra), 24))
+          plistlib.dump(state, open("ioshome/IconState-work.plist", "wb"), fmt=plistlib.FMT_BINARY)
+          def label(entry):
+              if isinstance(entry, str):
+                  return f"{entry} | {name(entry)}"
+              if isinstance(entry, dict):
+                  kind = entry.get("listType") or entry.get("iconType") or "item"
+                  inner = [label(e) for page in entry.get("iconLists", []) for e in page]
+                  return f"[{kind}] {entry.get('displayName', '')} {inner if inner else ''}".strip()
+              return repr(entry)
+          with open("ioshome/pages.txt", "w") as out:
+              out.write(f"original pages: {original}, added pages (apps on no page): {len(state['iconLists']) - original}\n")
+              out.write("dock: " + ", ".join(label(e) for e in state.get("buttonBar", [])) + "\n")
+              for n, page in enumerate(state["iconLists"], 1):
+                  tag = "" if n <= original else " (added)"
+                  out.write(f"page {n}{tag}:\n" + "".join(f"  {i}: {label(e)}\n" for i, e in enumerate(page)))
+          # pages to photograph: from 2 (page 1 is already done) or from 1 when SpringBoard had no saved layout
+          print(2 if original else 1, len(state["iconLists"]))
+          PY
+          cat ioshome/pages.txt 2>/dev/null || true
+          read FIRST LAST < ioshome/pages-range.txt || { FIRST=0; LAST=0; }
+          echo "Home Screen pages to photograph: $FIRST..$LAST"
+          # (BSD seq counts down when the first number is larger: no loop at all without a page to photograph)
+          if [ "$FIRST" -ge 1 ] 2>/dev/null && [ "$LAST" -ge "$FIRST" ] 2>/dev/null; then
+            for p in $(seq "$FIRST" "$LAST"); do
+              xcrun simctl shutdown "$DEVICE" || true
+              python3 - "$SB/IconState.plist" "$p" <<'PY' || true
+          import plistlib, sys
+          path, page = sys.argv[1], int(sys.argv[2]) - 1
+          state = plistlib.load(open("ioshome/IconState-work.plist", "rb"))
+          lists = state["iconLists"]
+          state["iconLists"] = [lists[page]] + [l for i, l in enumerate(lists) if i != page]
+          with open(path, "wb") as f:
+              plistlib.dump(state, f, fmt=plistlib.FMT_BINARY)
+          PY
+              if ! reboot_ok; then echo "page $p: the simulator did not finish booting" | tee -a ioshome/pages.txt; break; fi
+              bars
+              sleep 20
+              for look in light dark; do
+                xcrun simctl ui "$DEVICE" appearance $look || true
+                sleep 8
+                xcrun simctl io "$DEVICE" screenshot --type=png "ioshome/ios-home-p$p-$look.png" < /dev/null || true
+              done
+              # The status bar is pinned to 9:41: a page SpringBoard ignored gives the very same picture as page 1.
+              if [ "$p" -ge 2 ] && cmp -s ioshome/ios-home-light.png "ioshome/ios-home-p$p-light.png"; then
+                echo "::warning::page $p: screenshot identical to page 1, SpringBoard did not use the edited IconState.plist" | tee -a ioshome/pages.txt
+              fi
+            done
+          fi
+          # The original layout again (or none, as before), and the simulator booted for any later step of this run.
+          xcrun simctl shutdown "$DEVICE" || true
+          if [ -f ioshome/IconState-original.plist ]; then cp ioshome/IconState-original.plist "$SB/IconState.plist" || true; else rm -f "$SB/IconState.plist"; fi
+          reboot_ok || true
+          xcrun simctl ui "$DEVICE" appearance light || true
+          rm -f ioshome/IconState-work.plist ioshome/pages-range.txt
           ls -l ioshome
 
       - name: TestFlight signing (certificate and provisioning profiles)
