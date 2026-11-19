@@ -508,3 +508,13 @@ widget irl-restTimer-s-carbon kind=restTimer family=small scale=4 theme=carbon a
 widget irl-personalRecords-s-carbon kind=personalRecords family=small scale=4 theme=carbon accent=E5383B scheme=dark
 widget irl-weeklyVolume-m-carbon kind=weeklyVolume family=medium scale=3 theme=carbon accent=E5383B scheme=dark
 only irl-restTimer-s-carbon irl-personalRecords-s-carbon irl-weeklyVolume-m-carbon
+
+# --- Pub Planning v2 (2026-11-19, plan du PDG) : deux pages d'écran d'accueil en clair (Planning grand + Top 3 ; Habitudes moyen + Planning petit + un autre petit) ---
+widget camp-habits-m-light kind=habits family=medium scale=3 theme=light
+widget camp-habitWeek-m-light kind=habitWeek family=medium scale=3 theme=light
+widget camp-upNext-s-light kind=upNext family=small scale=4 theme=light
+widget camp-timetable-s-light kind=timetable family=small scale=4 theme=light
+widget camp-calendar-s-light kind=calendar family=small scale=4 theme=light
+widget camp-habitStreak-s-light kind=habitStreak family=small scale=4 theme=light
+widget camp-upNext-l-light kind=upNext family=large scale=3 theme=light
+only camp-habits-m-light camp-habitWeek-m-light camp-upNext-s-light camp-timetable-s-light camp-calendar-s-light camp-habitStreak-s-light camp-upNext-l-light
