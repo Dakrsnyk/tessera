@@ -518,3 +518,14 @@ widget camp-calendar-s-light kind=calendar family=small scale=4 theme=light
 widget camp-habitStreak-s-light kind=habitStreak family=small scale=4 theme=light
 widget camp-upNext-l-light kind=upNext family=large scale=3 theme=light
 only camp-habits-m-light camp-habitWeek-m-light camp-upNext-s-light camp-timetable-s-light camp-calendar-s-light camp-habitStreak-s-light camp-upNext-l-light
+
+# --- Pub Planning v4 (2026-11-19) : plan Studio de 2 s, le grand Planning (emploi du temps) qui change de style dans l'aperçu
+# du Studio (capture studio-tt-light du 2026-11-18). Mêmes styles et teintes de cours que la série du 2026-11-10, app actuelle.
+widget camp-timetable-l-dark kind=timetable family=large scale=3 theme=dark scheme=dark courses=mono
+widget camp-timetable-l-pastel kind=timetable family=large scale=3 theme=pastel courses=peach
+widget camp-timetable-l-blossom kind=timetable family=large scale=3 theme=blossom courses=rose
+widget camp-timetable-l-modern kind=timetable family=large scale=3 theme=modern courses=indigo
+widget camp-timetable-l-business kind=timetable family=large scale=3 theme=business courses=steel
+widget camp-timetable-l-minimal kind=timetable family=large scale=3 theme=minimal courses=ink
+widget camp-timetable-l-forest kind=timetable family=large scale=3 theme=light accent=7FA33A courses=forest
+only camp-timetable-l-dark camp-timetable-l-pastel camp-timetable-l-blossom camp-timetable-l-modern camp-timetable-l-business camp-timetable-l-minimal camp-timetable-l-forest
