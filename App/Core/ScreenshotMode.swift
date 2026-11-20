@@ -557,8 +557,9 @@ struct NutritionScreenshotStage: View {
     private static func demoRecap(photo: Bool) -> ScanRecap {
         if photo {
             var proposals: [MealProposal] = []
-            for (id, grams, confidence) in [("chicken", 150.0, 0.82), ("rice", 180.0, 0.74), ("gardensalad", 80.0, 0.46)] {
-                if let food = FoodDatabase.item(id) {
+            for (id, grams, confidence) in [("chicken", 150.0, 0.93), ("rice", 180.0, 0.90), ("gardensalad", 80.0, 0.86)] {
+                // The ids of the table are « builtin.<id> » (a bare id finds nothing: the recap was empty).
+                if let food = FoodDatabase.item("builtin.\(id)") {
                     proposals.append(MealProposal(food: food, grams: grams, confidence: confidence, label: id))
                 }
             }
@@ -566,7 +567,7 @@ struct NutritionScreenshotStage: View {
         }
         var recap = ScanRecap()
         for id in ["greekyogurt", "oats", "blueberries"] {
-            if let food = FoodDatabase.item(id) { _ = recap.add(food) }
+            if let food = FoodDatabase.item("builtin.\(id)") { _ = recap.add(food) }
         }
         return recap
     }

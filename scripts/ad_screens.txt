@@ -6,6 +6,11 @@
 # Les tranches -screenshotScroll 0 … 1 (-sNN) se recollent hors ligne en une image haute : seules les pages
 # qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
 
+# Pub Nutrition organique v5 (2026-11-20) : le récapitulatif d'un plat photographié (poulet, riz, salade), vide jusqu'ici à cause
+# des ids sans préfixe « builtin. » dans NutritionScreenshotStage.demoRecap ; en tête de liste (le kit complet dépasse l'heure).
+camp-scan-recap-photo2 scan-recap-photo
+camp-scan-recap2 scan-recap
+
 # Pubs organiques v3 (2026-11-20) : le Studio, partie Style, ouvert sur le widget clé de chaque mini-app (clair, puis sombre),
 # en tête de liste (le kit complet dépasse l'heure de l'étape).
 camp-studio-caloriesLeft-light studio-style -screenshotStudioKind caloriesLeft -screenshotStudioFormat medium -screenshotStudioTheme light
