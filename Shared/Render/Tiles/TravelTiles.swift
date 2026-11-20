@@ -183,7 +183,7 @@ enum TravelTiles {
         var tile = Tile(title: tr("Prochaine activité"), symbol: "mappin.and.ellipse")
         tile.value = activity.title
         let zone = TravelMath.currentTrip(state, at: now)?.timeZone ?? .current
-        tile.caption = "\(TF.relativeDay(activity.date, from: now).capitalizedFirst) à \(TF.time(activity.date, context, zone: zone))"
+        tile.caption = tr("\(TF.relativeDay(activity.date, from: now).capitalizedFirst) à \(TF.time(activity.date, context, zone: zone))")
         tile.detail = activity.place.isEmpty ? nil : activity.place
         let later = state.activities.filter { $0.date > activity.date }.sorted { $0.date < $1.date }
         tile.rows = later.prefix(4).map { item in
