@@ -606,3 +606,6 @@ widget camp-tripProgress-s-light-ongoing kind=tripProgress family=small scale=4 
 widget camp-nextActivity-m-light-ongoing kind=nextActivity family=medium scale=3 theme=light trip=ongoing
 widget camp-hotel-s-light-ongoing kind=hotel family=small scale=4 theme=light trip=ongoing
 only camp-tripCountdown-s-light camp-flight-m-light camp-hotel-s-light camp-nextActivity-m-light camp-tripProgress-s-light camp-localTime-s-light camp-tripCountdown-s-light-ongoing camp-tripCountdown-s-light-ahead camp-flight-m-light-ahead camp-tripProgress-s-light-ongoing camp-nextActivity-m-light-ongoing camp-hotel-s-light-ongoing
+
+# --- Pub Voyage organique (2026-11-20) : « Next activity » réexporté après la traduction de « Today à 15:00 » (prochain run d'export)
+widget camp-nextActivity-m-light-ongoing2 kind=nextActivity family=medium scale=3 theme=light trip=ongoing
