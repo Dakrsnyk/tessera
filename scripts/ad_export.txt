@@ -541,3 +541,11 @@ only live-ready-ruby live-ready-real2
 # l'état prêt (live-ready-ruby) puis le décompte juste après la série, une image par seconde de 120 à 116.
 live live-afterset-ruby from=120 to=116 set=4 sets=4 done=3 total=14 restTotal=120 bg=real scheme=dark scale=3 style=ruby
 only live-afterset-ruby
+
+# --- Pub Fitness organique v4.2 (2026-11-20) : widgets d'écran verrouillé sous l'heure (Planning, Nutrition, Fitness), app actuelle
+widget camp-lock-timetable-rect kind=timetable family=rect scale=4
+widget camp-lock-upNext-rect kind=upNext family=rect scale=4
+widget camp-lock-caloriesLeft-circular kind=caloriesLeft family=circular scale=4
+widget camp-lock-trainingStreak-circular kind=trainingStreak family=circular scale=4
+widget camp-lock-nextSet-rect kind=nextSet family=rect scale=4
+only camp-lock-timetable-rect camp-lock-upNext-rect camp-lock-caloriesLeft-circular camp-lock-trainingStreak-circular camp-lock-nextSet-rect
