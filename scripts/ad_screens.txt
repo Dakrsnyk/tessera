@@ -6,6 +6,21 @@
 # Les tranches -screenshotScroll 0 … 1 (-sNN) se recollent hors ligne en une image haute : seules les pages
 # qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
 
+# Pubs organiques v3 (2026-11-20) : le Studio, partie Style, ouvert sur le widget clé de chaque mini-app (clair, puis sombre),
+# en tête de liste (le kit complet dépasse l'heure de l'étape).
+camp-studio-caloriesLeft-light studio-style -screenshotStudioKind caloriesLeft -screenshotStudioFormat medium -screenshotStudioTheme light
+camp-studio-caloriesLeft-dark studio-style -screenshotStudioKind caloriesLeft -screenshotStudioFormat medium -screenshotStudioTheme dark
+camp-studio-habits-light studio-style -screenshotStudioKind habits -screenshotStudioFormat medium -screenshotStudioTheme light
+camp-studio-habits-dark studio-style -screenshotStudioKind habits -screenshotStudioFormat medium -screenshotStudioTheme dark
+camp-studio-budgetLeft-light studio-style -screenshotStudioKind budgetLeft -screenshotStudioFormat small -screenshotStudioTheme light
+camp-studio-budgetLeft-dark studio-style -screenshotStudioKind budgetLeft -screenshotStudioFormat small -screenshotStudioTheme dark
+camp-studio-revenueGoal-light studio-style -screenshotStudioKind revenueGoal -screenshotStudioFormat small -screenshotStudioTheme light
+camp-studio-revenueGoal-dark studio-style -screenshotStudioKind revenueGoal -screenshotStudioFormat small -screenshotStudioTheme dark
+camp-studio-assignments-light studio-style -screenshotStudioKind assignments -screenshotStudioFormat medium -screenshotStudioTheme light
+camp-studio-assignments-dark studio-style -screenshotStudioKind assignments -screenshotStudioFormat medium -screenshotStudioTheme dark
+camp-studio-tripCountdown-light studio-style -screenshotStudioKind tripCountdown -screenshotStudioFormat small -screenshotStudioTheme light
+camp-studio-tripCountdown-dark studio-style -screenshotStudioKind tripCountdown -screenshotStudioFormat small -screenshotStudioTheme dark
+
 # Pub Planning organique v2 (2026-11-20) : l'écran Tâches avant puis après « Call the mechanic » coché, EN TÊTE de liste (le kit
 # complet dépasse l'heure de l'étape). -screenshotTasksDone N repart de la liste de démo et coche les N premières tâches ouvertes ;
 # la troisième ligne (0) remet la liste décochée pour les captures qui suivent.

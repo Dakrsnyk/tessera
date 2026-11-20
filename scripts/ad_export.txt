@@ -609,3 +609,49 @@ only camp-tripCountdown-s-light camp-flight-m-light camp-hotel-s-light camp-next
 
 # --- Pub Voyage organique (2026-11-20) : « Next activity » réexporté après la traduction de « Today à 15:00 » (prochain run d'export)
 widget camp-nextActivity-m-light-ongoing2 kind=nextActivity family=medium scale=3 theme=light trip=ongoing
+
+# --- Pubs organiques v3 (2026-11-20, demande : la personnalisation dans chaque pub) : le widget clé de chaque mini-app
+# dans sept styles réels (Clair, Sombre, Minimal gratuits ; Pastel, Blossom, Aurore, Néon Premium), même jeu de données.
+widget camp-caloriesLeft-m-st-light kind=caloriesLeft family=medium scale=3 theme=light
+widget camp-caloriesLeft-m-st-dark kind=caloriesLeft family=medium scale=3 theme=dark scheme=dark
+widget camp-caloriesLeft-m-st-minimal kind=caloriesLeft family=medium scale=3 theme=minimal
+widget camp-caloriesLeft-m-st-pastel kind=caloriesLeft family=medium scale=3 theme=pastel
+widget camp-caloriesLeft-m-st-blossom kind=caloriesLeft family=medium scale=3 theme=blossom
+widget camp-caloriesLeft-m-st-aurora kind=caloriesLeft family=medium scale=3 theme=aurora scheme=dark
+widget camp-caloriesLeft-m-st-neon kind=caloriesLeft family=medium scale=3 theme=neon scheme=dark
+widget camp-habits-m-st-light kind=habits family=medium scale=3 theme=light
+widget camp-habits-m-st-dark kind=habits family=medium scale=3 theme=dark scheme=dark
+widget camp-habits-m-st-minimal kind=habits family=medium scale=3 theme=minimal
+widget camp-habits-m-st-pastel kind=habits family=medium scale=3 theme=pastel
+widget camp-habits-m-st-blossom kind=habits family=medium scale=3 theme=blossom
+widget camp-habits-m-st-aurora kind=habits family=medium scale=3 theme=aurora scheme=dark
+widget camp-habits-m-st-neon kind=habits family=medium scale=3 theme=neon scheme=dark
+widget camp-budgetLeft-s-st-light kind=budgetLeft family=small scale=4 theme=light
+widget camp-budgetLeft-s-st-dark kind=budgetLeft family=small scale=4 theme=dark scheme=dark
+widget camp-budgetLeft-s-st-minimal kind=budgetLeft family=small scale=4 theme=minimal
+widget camp-budgetLeft-s-st-pastel kind=budgetLeft family=small scale=4 theme=pastel
+widget camp-budgetLeft-s-st-blossom kind=budgetLeft family=small scale=4 theme=blossom
+widget camp-budgetLeft-s-st-aurora kind=budgetLeft family=small scale=4 theme=aurora scheme=dark
+widget camp-budgetLeft-s-st-neon kind=budgetLeft family=small scale=4 theme=neon scheme=dark
+widget camp-revenueGoal-s-st-light kind=revenueGoal family=small scale=4 theme=light
+widget camp-revenueGoal-s-st-dark kind=revenueGoal family=small scale=4 theme=dark scheme=dark
+widget camp-revenueGoal-s-st-minimal kind=revenueGoal family=small scale=4 theme=minimal
+widget camp-revenueGoal-s-st-pastel kind=revenueGoal family=small scale=4 theme=pastel
+widget camp-revenueGoal-s-st-blossom kind=revenueGoal family=small scale=4 theme=blossom
+widget camp-revenueGoal-s-st-aurora kind=revenueGoal family=small scale=4 theme=aurora scheme=dark
+widget camp-revenueGoal-s-st-neon kind=revenueGoal family=small scale=4 theme=neon scheme=dark
+widget camp-assignments-m-st-light kind=assignments family=medium scale=3 theme=light
+widget camp-assignments-m-st-dark kind=assignments family=medium scale=3 theme=dark scheme=dark
+widget camp-assignments-m-st-minimal kind=assignments family=medium scale=3 theme=minimal
+widget camp-assignments-m-st-pastel kind=assignments family=medium scale=3 theme=pastel
+widget camp-assignments-m-st-blossom kind=assignments family=medium scale=3 theme=blossom
+widget camp-assignments-m-st-aurora kind=assignments family=medium scale=3 theme=aurora scheme=dark
+widget camp-assignments-m-st-neon kind=assignments family=medium scale=3 theme=neon scheme=dark
+widget camp-tripCountdown-s-st-light kind=tripCountdown family=small scale=4 theme=light trip=ongoing
+widget camp-tripCountdown-s-st-dark kind=tripCountdown family=small scale=4 theme=dark scheme=dark trip=ongoing
+widget camp-tripCountdown-s-st-minimal kind=tripCountdown family=small scale=4 theme=minimal trip=ongoing
+widget camp-tripCountdown-s-st-pastel kind=tripCountdown family=small scale=4 theme=pastel trip=ongoing
+widget camp-tripCountdown-s-st-blossom kind=tripCountdown family=small scale=4 theme=blossom trip=ongoing
+widget camp-tripCountdown-s-st-aurora kind=tripCountdown family=small scale=4 theme=aurora scheme=dark trip=ongoing
+widget camp-tripCountdown-s-st-neon kind=tripCountdown family=small scale=4 theme=neon scheme=dark trip=ongoing
+only camp-caloriesLeft-m-st-light camp-caloriesLeft-m-st-dark camp-caloriesLeft-m-st-minimal camp-caloriesLeft-m-st-pastel camp-caloriesLeft-m-st-blossom camp-caloriesLeft-m-st-aurora camp-caloriesLeft-m-st-neon camp-habits-m-st-light camp-habits-m-st-dark camp-habits-m-st-minimal camp-habits-m-st-pastel camp-habits-m-st-blossom camp-habits-m-st-aurora camp-habits-m-st-neon camp-budgetLeft-s-st-light camp-budgetLeft-s-st-dark camp-budgetLeft-s-st-minimal camp-budgetLeft-s-st-pastel camp-budgetLeft-s-st-blossom camp-budgetLeft-s-st-aurora camp-budgetLeft-s-st-neon camp-revenueGoal-s-st-light camp-revenueGoal-s-st-dark camp-revenueGoal-s-st-minimal camp-revenueGoal-s-st-pastel camp-revenueGoal-s-st-blossom camp-revenueGoal-s-st-aurora camp-revenueGoal-s-st-neon camp-assignments-m-st-light camp-assignments-m-st-dark camp-assignments-m-st-minimal camp-assignments-m-st-pastel camp-assignments-m-st-blossom camp-assignments-m-st-aurora camp-assignments-m-st-neon camp-tripCountdown-s-st-light camp-tripCountdown-s-st-dark camp-tripCountdown-s-st-minimal camp-tripCountdown-s-st-pastel camp-tripCountdown-s-st-blossom camp-tripCountdown-s-st-aurora camp-tripCountdown-s-st-neon
