@@ -580,3 +580,6 @@ widget camp-quickExpense-s-light kind=quickExpense family=small scale=4 theme=li
 widget camp-quickExpense-s-light-spent kind=quickExpense family=small scale=4 theme=light spent=1
 widget camp-budgetLeft-s-light-spent kind=budgetLeft family=small scale=4 theme=light spent=1
 only camp-budgetLeft-s-light camp-budgetLeft-s-light-spent camp-quickExpense-s-light camp-quickExpense-s-light-spent camp-savingsGoal-s-light camp-spendingByCategory-m-light camp-billsUpcoming-m-light camp-moneyFlow-m-light camp-budgetLeft-s-liquidGlass
+
+# --- Pub Business organique v2 (2026-11-20) : widgets Business actuels pour l'écran d'accueil (Objectif du mois gratuit, les autres Premium)
+only camp-revenueGoal-s-light camp-revenueTrend-m-light camp-profit-s-light camp-businessKPIs-m-light camp-mrr-s-light
