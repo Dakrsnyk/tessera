@@ -202,6 +202,10 @@ enum AdExport {
                 payload.content.tasks[index].isDone = true
                 payload.content.tasks[index].completedAt = MK.now
             }
+            // done=N also hands in the first N open assignments (Assignments widget): the widget just after a tap.
+            for id in StudentMath.openAssignments(payload.domains.student).prefix(done).map(\.id) {
+                payload.domains.student.toggleAssignment(id)
+            }
         }
         // todo=N (ads, 2026-11-20): the last N habits done today unchecked, the Habits widget as it is just before a tap.
         if let todo = job.args["todo"].flatMap(Int.init), todo > 0 {

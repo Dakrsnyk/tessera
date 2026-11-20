@@ -179,7 +179,8 @@ struct TimetableGrid: View {
     @Environment(\.appStyle) private var style
 
     private let perMinute: CGFloat = 0.8
-    private let letters = ["L", "M", "M", "J", "V", "S", "D"]
+    /// The days in the language of the iPhone (they were French letters in every language until 2026-11-20).
+    private var letters: [String] { DateMath.weekdaySymbols() }
 
     var body: some View {
         let entries = week.map { StudentMath.occurrences(state, on: $0, includingCancelled: true) }

@@ -583,3 +583,10 @@ only camp-budgetLeft-s-light camp-budgetLeft-s-light-spent camp-quickExpense-s-l
 
 # --- Pub Business organique v2 (2026-11-20) : widgets Business actuels pour l'écran d'accueil (Objectif du mois gratuit, les autres Premium)
 only camp-revenueGoal-s-light camp-revenueTrend-m-light camp-profit-s-light camp-businessKPIs-m-light camp-mrr-s-light
+
+# --- Pub Études organique v2 (2026-11-20) : widgets Études actuels (les camp-* d'Études n'avaient jamais été produits), Devoirs
+# avant / après un devoir rendu (done=N rend aussi les N premiers devoirs ouverts), widgets d'écran verrouillé, horaires du même run.
+widget camp-assignments-m-light-done kind=assignments family=medium scale=3 theme=light done=1
+widget camp-lock-nextClass-rect kind=nextClass family=rect scale=4
+widget camp-lock-nextExam-circular kind=nextExam family=circular scale=4
+only camp-nextClass-s-light camp-nextExam-s-light camp-assignments-m-light camp-assignments-m-light-done camp-semesterProgress-s-light camp-studyHours-s-light camp-lock-nextClass-rect camp-lock-nextExam-circular camp-timetable-l-light camp-timetable-s-light camp-lock-timetable-rect
