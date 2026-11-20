@@ -567,3 +567,9 @@ only camp-tasks-m-cobalt camp-tasks-m-cobalt-done camp-timetable-l-cobalt camp-u
 widget camp-habits-m-light-todo kind=habits family=medium scale=3 theme=light todo=1
 widget camp-habitStreak-s-light kind=habitStreak family=small scale=4 theme=light
 only camp-habits-m-light camp-habits-m-light-todo camp-habitStreak-s-light
+
+# --- Pub Nutrition organique v2 (2026-11-20) : widgets Nutrition actuels pour l'écran d'accueil (ceux de kit2026 datent du 2026-10-31)
+widget camp-caloriesLeft-s-light kind=caloriesLeft family=small scale=4 theme=light
+widget camp-macros-m-light kind=macros family=medium scale=3 theme=light
+widget camp-caloriesLeft-m-light kind=caloriesLeft family=medium scale=3 theme=light
+only camp-caloriesLeft-s-light camp-macros-m-light camp-caloriesLeft-m-light
