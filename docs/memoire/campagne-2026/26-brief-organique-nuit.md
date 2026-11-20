@@ -62,3 +62,14 @@ Planning v2 (à finir), puis Nutrition, Habitudes, Finances, Business, Études, 
 - **La personnalisation dans CHAQUE pub** (« élément clé »). Le Studio, partie Style, ouvert sur le widget clé de la mini-app : captures `camp-studio-<kind>-light|dark`. Puis le widget qui change de style par coupes franches : exports `camp-<kind>-<s|m>-st-<style>`, en Clair, Sombre et Minimal (gratuits), puis Pastel, Blossom, Aurore et Néon (Premium, avec mention). Même méthode que le plan Studio de Planning v4 et de Fitness v4.3 (`StudioStyle` / `StyleCycle`).
 - **Plus de fonctions essentielles** de la mini-app : 2 ou 3 écrans clés de plus, chacun avec une idée et un texte court, pas une seule démonstration.
 - **On garde** l'accroche, l'app à 1,25 s, la vraie démonstration (toucher puis effet), la musique d'un seul tenant, les coupes sur les temps, l'écran d'accueil final et la carte « AVAILABLE ON THE APP STORE ».
+
+## Études organique v3 VALIDÉE par l'utilisateur (2026-11-20, « parfait ») : modèle de la v3
+`pub/campagne-2026-11/etudes/organique/ardane-etudes-organique-v3-1080x1920.mp4` (25,7 s), source `~/ardane-tools/film/src/campaign/student-org/Film.tsx`. Déroulé :
+1. accroche ;
+2. écran verrouillé (widget gratuit) ;
+3. semaine sur l'écran d'accueil ;
+4. vrai toucher sur un widget interactif (3 → 2 due), avec mention Premium ;
+5. trois écrans de fonctions clés (Exams, Review avec le temps d'étude, Grades), chacun avec une idée ;
+6. « Make it yours. », le Studio (partie Style) et le widget héros dans 7 styles par coupes franches ;
+7. écran d'accueil final dans un style de l'univers de la mini-app ;
+8. plan réel, puis carte finale.
