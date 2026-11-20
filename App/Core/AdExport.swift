@@ -203,6 +203,12 @@ enum AdExport {
                 payload.content.tasks[index].completedAt = MK.now
             }
         }
+        // todo=N (ads, 2026-11-20): the last N habits done today unchecked, the Habits widget as it is just before a tap.
+        if let todo = job.args["todo"].flatMap(Int.init), todo > 0 {
+            for index in payload.content.habits.indices.filter({ payload.content.habits[$0].isDone(on: MK.now) }).suffix(todo) {
+                payload.content.habits[index].toggle(on: MK.now)
+            }
+        }
         let view = WidgetPreview(
             design: widgetDesign, family: widgetFamily, payload: payload, width: size.width, date: MK.now,
             lockInk: ink.map { Color(hex: $0) } ?? .white, lockInkIsDark: ink.map { isDarkInk($0) } ?? false

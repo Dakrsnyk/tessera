@@ -26,7 +26,7 @@ Remplace et complète [[Faits-verifies-campagne-v2]] (audit du 2026-10-11, PÉRI
 | Icônes de l'app (20) | Saphir (par défaut) | 19 autres : Corail, Classique, 16 variantes « Verre »/Aurore… (changer d'icône est Premium) |
 | Écrans d'accueil du Store (23 ; `HomeSetups`) | ceux dont tous les widgets/styles sont gratuits | un écran est Premium dès qu'un de ses widgets utilise un type, un style, un fond, une police ou une couleur Premium (`HomeSetup.isPremium`) ; la plupart des 23 le sont |
 | Fonds d'écran du Store | 14 gratuits sur 43 (Chantiers, lot 4 du 2026-10-22) | 29 |
-| Habitudes suivies | 5 (`freeHabitLimit`) ; pourcentage de régularité 30 jours gratuit | illimité ; régularité 90 jours, meilleure série |
+| Habitudes suivies | 3 (`AppModel.freeHabitLimit`, CHANGÉ le 2026-11-16, vérifié le 2026-11-20 ; c'était 5) ; pourcentage de régularité 30 jours gratuit | illimité ; régularité 90 jours, meilleure série |
 | Bibliothèque d'exercices | « Mes exercices » (écrits à la main) ; séances et séries notées gratuites | toute la bibliothèque (fiche, démonstration animée, technique, alternatives, performances), progression (volume, charges, records) |
 | Nutriments | calories, protéines, glucides, lipides (les 4 macros ; `Nutrient.free`) | tous les autres (fibres, sucres, sodium, vitamines, minéraux…) ; historique détaillé 7/30 jours et période libre |
 | Finances | le mois courant et les 7 derniers jours (`PremiumHistory`) ; courbe « Mois » | mois précédents, courbe 3 mois / Année, évolution sur six mois |
