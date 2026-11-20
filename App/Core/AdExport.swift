@@ -209,6 +209,12 @@ enum AdExport {
                 payload.content.habits[index].toggle(on: MK.now)
             }
         }
+        // spent=N (ads, 2026-11-20): the quick expense N of the sample (1 = the first) noted now, as QuickExpenseIntent does:
+        // the Finances widgets just after a tap.
+        if let spent = job.args["spent"].flatMap(Int.init), spent > 0, payload.domains.budget.quickExpenses.indices.contains(spent - 1) {
+            let quick = payload.domains.budget.quickExpenses[spent - 1]
+            payload.domains.budget.add(Expense(amount: quick.amount, categoryID: quick.categoryID, note: quick.name, date: MK.now))
+        }
         let view = WidgetPreview(
             design: widgetDesign, family: widgetFamily, payload: payload, width: size.width, date: MK.now,
             lockInk: ink.map { Color(hex: $0) } ?? .white, lockInkIsDark: ink.map { isDarkInk($0) } ?? false
