@@ -590,3 +590,8 @@ widget camp-assignments-m-light-done kind=assignments family=medium scale=3 them
 widget camp-lock-nextClass-rect kind=nextClass family=rect scale=4
 widget camp-lock-nextExam-circular kind=nextExam family=circular scale=4
 only camp-nextClass-s-light camp-nextExam-s-light camp-assignments-m-light camp-assignments-m-light-done camp-semesterProgress-s-light camp-studyHours-s-light camp-lock-nextClass-rect camp-lock-nextExam-circular camp-timetable-l-light camp-timetable-s-light camp-lock-timetable-rect
+
+# --- Pub Business organique v3 (2026-11-20) : widgets Business dans l'accent Lilas (8C6CFF, couleur de base gratuite) de la mini-app
+widget camp-revenueGoal-s-lilac kind=revenueGoal family=small scale=4 theme=light accent=8C6CFF
+widget camp-revenueTrend-m-lilac kind=revenueTrend family=medium scale=3 theme=light accent=8C6CFF
+only camp-revenueGoal-s-lilac camp-revenueTrend-m-lilac
