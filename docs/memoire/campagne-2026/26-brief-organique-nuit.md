@@ -56,3 +56,9 @@ Demande de l'utilisateur (2026-11-20, avant de dormir) : « prépare le plus de 
 
 ## Ordre de la nuit
 Planning v2 (à finir), puis Nutrition, Habitudes, Finances, Business, Études, Voyage. Pas de Voiture, Photos ni Citation (brief de campagne).
+
+## v3 (2026-11-20, retour de l'utilisateur : « vraiment de bonnes bases, mais… »)
+- **20 s au moins**, 30 s au plus (Fitness v4.3 : 29,75 s).
+- **La personnalisation dans CHAQUE pub** (« élément clé »). Le Studio, partie Style, ouvert sur le widget clé de la mini-app : captures `camp-studio-<kind>-light|dark`. Puis le widget qui change de style par coupes franches : exports `camp-<kind>-<s|m>-st-<style>`, en Clair, Sombre et Minimal (gratuits), puis Pastel, Blossom, Aurore et Néon (Premium, avec mention). Même méthode que le plan Studio de Planning v4 et de Fitness v4.3 (`StudioStyle` / `StyleCycle`).
+- **Plus de fonctions essentielles** de la mini-app : 2 ou 3 écrans clés de plus, chacun avec une idée et un texte court, pas une seule démonstration.
+- **On garde** l'accroche, l'app à 1,25 s, la vraie démonstration (toucher puis effet), la musique d'un seul tenant, les coupes sur les temps, l'écran d'accueil final et la carte « AVAILABLE ON THE APP STORE ».
