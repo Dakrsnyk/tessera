@@ -553,11 +553,12 @@ struct NutritionScreenshotStage: View {
         }
     }
 
-    /// A breakfast read from barcodes (values of the table, « Vérifié »), or a dish guessed from a photo.
+    /// A breakfast read from barcodes (values of the table, « Vérifié »), or a dish guessed from a photo: the roast chicken
+    /// thigh on rice with eggplant and a tomato-cucumber salad of the Nutrition ad (Pexels 34453034, 2026-11-20).
     private static func demoRecap(photo: Bool) -> ScanRecap {
         if photo {
             var proposals: [MealProposal] = []
-            for (id, grams, confidence) in [("chicken", 150.0, 0.93), ("rice", 180.0, 0.90), ("gardensalad", 80.0, 0.86)] {
+            for (id, grams, confidence) in [("chickenthigh", 180.0, 0.94), ("rice", 180.0, 0.91), ("eggplant", 60.0, 0.87), ("tomato", 90.0, 0.89), ("cucumber", 70.0, 0.86)] {
                 // The ids of the table are « builtin.<id> » (a bare id finds nothing: the recap was empty).
                 if let food = FoodDatabase.item("builtin.\(id)") {
                     proposals.append(MealProposal(food: food, grams: grams, confidence: confidence, label: id))
