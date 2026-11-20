@@ -24,9 +24,10 @@ enum ScreenshotMode {
         }
         model.seedDemoCaches(SampleData.domains(now: Date()))
         // Ads: `-screenshotTasksDone 1`, the demo tasks with their first N open ones checked (the Tasks screen just after a
-        // tap). Saved like any change: the captures that use it come last in scripts/ad_screens.txt.
-        let tasksDone = UserDefaults.standard.integer(forKey: "screenshotTasksDone")
-        if tasksDone > 0 {
+        // tap). Saved like any change: in scripts/ad_screens.txt a last line with 0 puts the list back for the next captures.
+        // `-screenshotTasksDone 0` puts the demo list back unchecked (the captures that follow see the usual tasks).
+        if UserDefaults.standard.object(forKey: "screenshotTasksDone") != nil {
+            let tasksDone = UserDefaults.standard.integer(forKey: "screenshotTasksDone")
             model.updateContent { content in
                 // From the demo list each time, so the capture is the same however many times it runs.
                 content.tasks = SampleData.content(now: Date()).tasks

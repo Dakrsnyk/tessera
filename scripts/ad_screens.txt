@@ -6,6 +6,13 @@
 # Les tranches -screenshotScroll 0 … 1 (-sNN) se recollent hors ligne en une image haute : seules les pages
 # qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
 
+# Pub Planning organique v2 (2026-11-20) : l'écran Tâches avant puis après « Call the mechanic » coché, EN TÊTE de liste (le kit
+# complet dépasse l'heure de l'étape). -screenshotTasksDone N repart de la liste de démo et coche les N premières tâches ouvertes ;
+# la troisième ligne (0) remet la liste décochée pour les captures qui suivent.
+camp-planning-tasks2 app-planning-tasks -screenshotTasksDone 0
+camp-planning-tasks2-done app-planning-tasks -screenshotTasksDone 1
+camp-planning-tasks2-reset app-planning-tasks -screenshotTasksDone 0
+
 # Pub Planning (2026-11-07) : l'horaire de la semaine seul en Grand dans le constructeur, puis le Studio sur ce widget
 # (Style : Clair, puis Sombre à l'accent vert de « Forêt »), les cours en verts (-screenshotCourseColors forest, ou
 # forestSage en variante -sage). En tête de liste (limite de 60 min de l'étape Ad kit).
@@ -299,8 +306,3 @@ studio-font studio-style -screenshotScroll bottom
 paywall paywall
 paywall-widget paywall-widget
 paywall-history paywall-history
-
-# Pub Planning organique v2 (2026-11-20) : l'écran Tâches avant puis après « Call the mechanic » coché. -screenshotTasksDone coche
-# et ENREGISTRE : cette ligne reste la toute dernière de la liste (chaque lancement cocherait une tâche de plus).
-camp-planning-tasks2 app-planning-tasks
-camp-planning-tasks2-done app-planning-tasks -screenshotTasksDone 1
