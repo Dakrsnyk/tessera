@@ -195,8 +195,16 @@ enum AdExport {
         }
         let size = WidgetMetrics.size(widgetFamily)
         let ink = job.string("ink").flatMap { isHex($0) ? $0 : nil }
+        var payload = MK.payload(widgetDesign)
+        // done=N (ads, 2026-11-20): the first N open tasks of the sample checked, the widget as it is just after a tap.
+        if let done = job.args["done"].flatMap(Int.init), done > 0 {
+            for index in payload.content.tasks.indices.filter({ !payload.content.tasks[$0].isDone }).prefix(done) {
+                payload.content.tasks[index].isDone = true
+                payload.content.tasks[index].completedAt = MK.now
+            }
+        }
         let view = WidgetPreview(
-            design: widgetDesign, family: widgetFamily, payload: MK.payload(widgetDesign), width: size.width, date: MK.now,
+            design: widgetDesign, family: widgetFamily, payload: payload, width: size.width, date: MK.now,
             lockInk: ink.map { Color(hex: $0) } ?? .white, lockInkIsDark: ink.map { isDarkInk($0) } ?? false
         )
         .environment(\.colorScheme, widgetFamily.isAccessory ? .dark : job.scheme)

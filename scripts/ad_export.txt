@@ -549,3 +549,15 @@ widget camp-lock-caloriesLeft-circular kind=caloriesLeft family=circular scale=4
 widget camp-lock-trainingStreak-circular kind=trainingStreak family=circular scale=4
 widget camp-lock-nextSet-rect kind=nextSet family=rect scale=4
 only camp-lock-timetable-rect camp-lock-upNext-rect camp-lock-caloriesLeft-circular camp-lock-trainingStreak-circular camp-lock-nextSet-rect
+
+# --- Pub Planning organique v2 (2026-11-20) : cocher « Call the mechanic » dans le widget Tâches moyen (gratuit, interactif), avant / après,
+# accent Cobalt (couleur de base gratuite 3366FF) ; écran verrouillé : Tâches rectangulaire avant / après ; grand Planning et ses styles
+# refaits le même jour que les écrans (run [adkit-en]) pour que le jour mis en avant soit partout le même.
+# done=N (clé ajoutée le 2026-11-20, AdExport.widget) : les N premières tâches ouvertes de l'échantillon cochées.
+widget camp-tasks-m-cobalt kind=tasks family=medium scale=3 theme=light accent=3366FF
+widget camp-tasks-m-cobalt-done kind=tasks family=medium scale=3 theme=light accent=3366FF done=1
+widget camp-timetable-l-cobalt kind=timetable family=large scale=3 theme=light accent=3366FF
+widget camp-upNext-s-cobalt kind=upNext family=small scale=4 theme=light accent=3366FF
+widget camp-lock-tasks-rect kind=tasks family=rect scale=4
+widget camp-lock-tasks-rect-done kind=tasks family=rect scale=4 done=1
+only camp-tasks-m-cobalt camp-tasks-m-cobalt-done camp-timetable-l-cobalt camp-upNext-s-cobalt camp-lock-tasks-rect camp-lock-tasks-rect-done camp-lock-timetable-rect camp-lock-caloriesLeft-circular camp-timetable-l-light camp-timetable-l-dark camp-timetable-l-pastel camp-timetable-l-blossom camp-timetable-l-modern camp-timetable-l-business camp-timetable-l-minimal camp-timetable-l-forest camp-priorities-s-light camp-habits-m-light camp-timetable-s-light camp-tasks-s-light

@@ -23,6 +23,14 @@ enum ScreenshotMode {
             restoreDemoData(model)
         }
         model.seedDemoCaches(SampleData.domains(now: Date()))
+        // Ads: `-screenshotTasksDone 1`, the first N open demo tasks checked (the Tasks screen just after a tap). Saved
+        // like any change: the captures that use it come last in scripts/ad_screens.txt.
+        let tasksDone = UserDefaults.standard.integer(forKey: "screenshotTasksDone")
+        if tasksDone > 0 {
+            model.updateContent { content in
+                for id in content.tasks.filter({ !$0.isDone }).prefix(tasksDone).map(\.id) { content.toggleTask(id) }
+            }
+        }
         // The offer is captured as a free user sees it (and Home with its gold « Premium » sign, `home-free`);
         // every other screen with Premium unlocked.
         model.setDebugPremium(screen != "paywall" && screen != "setups-free" && screen != "home-free")
