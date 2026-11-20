@@ -660,3 +660,12 @@ only camp-caloriesLeft-m-st-light camp-caloriesLeft-m-st-dark camp-caloriesLeft-
 widget camp-profit-s-lilac kind=profit family=small scale=4 theme=light accent=8C6CFF
 widget camp-businessKPIs-m-lilac kind=businessKPIs family=medium scale=3 theme=light accent=8C6CFF
 only camp-profit-s-lilac camp-businessKPIs-m-lilac
+# --- Pub organique « Avant / après de l'écran d'accueil » (2026-11-20) : Planning petit (horaire du jour) dans les styles des autres widgets -st-
+widget camp-timetable-s-st-light kind=timetable family=small scale=4 theme=light
+widget camp-timetable-s-st-dark kind=timetable family=small scale=4 theme=dark scheme=dark
+widget camp-timetable-s-st-minimal kind=timetable family=small scale=4 theme=minimal
+widget camp-timetable-s-st-pastel kind=timetable family=small scale=4 theme=pastel
+widget camp-timetable-s-st-blossom kind=timetable family=small scale=4 theme=blossom
+widget camp-timetable-s-st-aurora kind=timetable family=small scale=4 theme=aurora scheme=dark
+widget camp-timetable-s-st-neon kind=timetable family=small scale=4 theme=neon scheme=dark
+only camp-timetable-s-st-light camp-timetable-s-st-dark camp-timetable-s-st-minimal camp-timetable-s-st-pastel camp-timetable-s-st-blossom camp-timetable-s-st-aurora camp-timetable-s-st-neon
