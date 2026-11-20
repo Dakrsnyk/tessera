@@ -81,3 +81,8 @@ Nos films Fitness v4 et Planning v3/v4 sont des PUBS (voix off posée, carte fin
 - Leçon 15 (vrai téléphone, vrai doigt) : nous n'avons que des captures. Le mieux serait que l'utilisateur filme 10 s de son iPhone (app TestFlight) ; à défaut, on montre l'écran en gros plan, plein cadre.
 
 **À vérifier avant toute publication** : la carte finale dit « Available on the App Store » alors que `Faits-verifies.md` (§ 0) impose « Coming soon » tant que l'app n'est pas publiée.
+
+## Pub Fitness organique v4.3 VALIDÉE par l'utilisateur (2026-11-20) : modèle des pubs organiques
+- `pub/campagne-2026-11/fitness/organique/ardane-fitness-organique-v4.3-1080x1920.mp4` (29,75 s). Source : `scripts/ad2/film/src/campaign/fitness-org/` (copie de `~/ardane-tools/film/src/campaign/fitness-org/`, composition `OrgFitness`), son : `scripts/ad2/irl_org_audio.py`.
+- Déroulé : plan muscu N/B 1,25 s avec l'accroche → iPhone qui monte du bas sur l'écran verrouillé (widgets d'écran verrouillé sous l'heure, Activité en direct Rubis) en deux moitiés de 1,75 s : « Tap Set done. » puis « Rest timer starts. » → écran d'accueil → widget agrandi → preuve « Set logged » → écrans complets (programme, séance) → fiche d'exercice en feuille avec la démo → personnalisation (Create, Studio, styles) → écran d'accueil final → plan N/B → « Available on the App Store ».
+- Règles apprises : texte gros rouge et blanc ; écrans complets environ 2 s ; musique d'un seul tenant (jamais de raccord ni de répétition), départ à 0,2 s, coupes déplacées sur les temps (tempo mesuré, pas supposé) ; un vrai iPhone entier pour l'écran verrouillé ; une démonstration lisible de la fonction (toucher puis effet) ; carte finale « Available on the App Store ».
