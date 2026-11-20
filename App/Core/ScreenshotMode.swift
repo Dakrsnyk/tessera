@@ -23,11 +23,13 @@ enum ScreenshotMode {
             restoreDemoData(model)
         }
         model.seedDemoCaches(SampleData.domains(now: Date()))
-        // Ads: `-screenshotTasksDone 1`, the first N open demo tasks checked (the Tasks screen just after a tap). Saved
-        // like any change: the captures that use it come last in scripts/ad_screens.txt.
+        // Ads: `-screenshotTasksDone 1`, the demo tasks with their first N open ones checked (the Tasks screen just after a
+        // tap). Saved like any change: the captures that use it come last in scripts/ad_screens.txt.
         let tasksDone = UserDefaults.standard.integer(forKey: "screenshotTasksDone")
         if tasksDone > 0 {
             model.updateContent { content in
+                // From the demo list each time, so the capture is the same however many times it runs.
+                content.tasks = SampleData.content(now: Date()).tasks
                 for id in content.tasks.filter({ !$0.isDone }).prefix(tasksDone).map(\.id) { content.toggleTask(id) }
             }
         }
