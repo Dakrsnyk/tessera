@@ -536,3 +536,8 @@ only camp-timetable-l-dark camp-timetable-l-pastel camp-timetable-l-blossom camp
 live live-ready-ruby state=ready set=3 sets=4 done=2 total=14 bg=real scheme=dark scale=3 style=ruby
 live live-ready-real2 state=ready set=3 sets=4 done=2 total=14 bg=real scheme=dark scale=3
 only live-ready-ruby live-ready-real2
+
+# --- Pub Fitness organique v4.2 (2026-11-20) : sur l'écran verrouillé, « Set done » touché puis le repos qui démarre (Rubis) :
+# l'état prêt (live-ready-ruby) puis le décompte juste après la série, une image par seconde de 120 à 116.
+live live-afterset-ruby from=120 to=116 set=4 sets=4 done=3 total=14 restTotal=120 bg=real scheme=dark scale=3 style=ruby
+only live-afterset-ruby
