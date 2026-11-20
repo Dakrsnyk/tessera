@@ -529,3 +529,9 @@ widget camp-timetable-l-business kind=timetable family=large scale=3 theme=busin
 widget camp-timetable-l-minimal kind=timetable family=large scale=3 theme=minimal courses=ink
 widget camp-timetable-l-forest kind=timetable family=large scale=3 theme=light accent=7FA33A courses=forest
 only camp-timetable-l-dark camp-timetable-l-pastel camp-timetable-l-blossom camp-timetable-l-modern camp-timetable-l-business camp-timetable-l-minimal camp-timetable-l-forest
+
+# --- Pub Fitness organique v4 (2026-11-19) : l'Activité en direct dans la couleur d'app Rubis (Premium, rouge), comme la voit
+# un utilisateur qui l'a choisie (clé style= de live, AdExport.swift) ; « Repos [timer] » = « Rest » (plus « Rest day »). Saphir refait pour comparer.
+live live-ready-ruby state=ready set=3 sets=4 done=2 total=14 bg=real scheme=dark scale=3 style=ruby
+live live-ready-real2 state=ready set=3 sets=4 done=2 total=14 bg=real scheme=dark scale=3
+only live-ready-ruby live-ready-real2

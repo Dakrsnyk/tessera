@@ -159,9 +159,11 @@ struct WorkoutActivityView: View {
     /// False inside the app: buttons don't run and the timer shows a still value.
     var isLive = true
     var now = Date()
+    /// Only for the ad kit (App/Core/AdExport.swift, live … style=): draws the activity in another app style than the saved one.
+    var styleOverride: AppStyle? = nil
 
     /// The app style chosen in Ardane: the Lock Screen follows its colors and its font.
-    private var style: AppStyle { AppStyle.stored() }
+    private var style: AppStyle { styleOverride ?? AppStyle.stored() }
     private var accent: Color { style.accent }
 
     var body: some View {
@@ -219,7 +221,7 @@ struct WorkoutActivityView: View {
             }
         } else if let start = state.restStart, let end = state.restEnd, end > now {
             VStack(alignment: .trailing, spacing: 2) {
-                Text(tr("Repos"))
+                Text(tr("Repos", context: "timer"))
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
                 if isLive {
@@ -234,7 +236,7 @@ struct WorkoutActivityView: View {
             }
         } else {
             VStack(alignment: .trailing, spacing: 2) {
-                Text(tr("Repos"))
+                Text(tr("Repos", context: "timer"))
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Text(tr("Prêt"))

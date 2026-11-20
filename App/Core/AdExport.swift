@@ -401,7 +401,12 @@ enum AdExport {
                 restEnd: rest.map { now.addingTimeInterval($0) },
                 restPaused: state == "paused" ? job.number("paused", 45) : nil
             )
-            let view = WorkoutActivityView(attributes: attributes, state: content, isLive: false, now: now)
+            // style=ruby (any AppStyleID name): the activity in that app style, as a Premium user who chose it sees it.
+            let styleOverride = try job.string("style").map { name -> AppStyle in
+                guard let id = AppStyleID(named: name) else { throw AdFailure("unknown app style « \(name) »") }
+                return AppStyle.style(id)
+            }
+            let view = WorkoutActivityView(attributes: attributes, state: content, isLive: false, now: now, styleOverride: styleOverride)
                 .frame(width: width)
                 .background(background, in: RoundedRectangle(cornerRadius: radius, style: .continuous))
                 .environment(\.colorScheme, scheme)

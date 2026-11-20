@@ -122,7 +122,7 @@ enum FitnessTiles {
 
     static func restTimer(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
         let active = state.active.flatMap { $0.isFinished || $0.isIdle(at: now) ? nil : $0 }
-        var tile = Tile(title: tr("Repos"), symbol: "timer")
+        var tile = Tile(title: tr("Repos", context: "timer"), symbol: "timer")
         if let active, let rest = active.restEndsAt, rest > now {
             let start = min(active.sets.last?.date ?? now, now)
             tile.timer = start...rest
