@@ -169,7 +169,7 @@ enum TravelTiles {
             tile.caption = tr("de voyage, départ \(TF.relativeDay(trip.start, from: now))")
             tile.visual = .ring(0)
             tile.gauge = 0
-            tile.shortValue = "J-\(days)"
+            tile.shortValue = tr("J-\(days)")
         }
         tile.inline = "\(trip.destination) · \(tile.value)"
         return tile

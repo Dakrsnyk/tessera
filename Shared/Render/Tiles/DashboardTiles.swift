@@ -252,7 +252,7 @@ enum DashboardTiles {
         }
         var rows: [TileRow] = []
         if let exam = StudentMath.nextExam(state, at: now) {
-            rows.append(TileRow(id: "exam", title: exam.title, value: "J-\(DateMath.daysBetween(now, exam.date))", symbol: "pencil.and.list.clipboard", isHighlighted: DateMath.daysBetween(now, exam.date) <= 7))
+            rows.append(TileRow(id: "exam", title: exam.title, value: tr("J-\(DateMath.daysBetween(now, exam.date))"), symbol: "pencil.and.list.clipboard", isHighlighted: DateMath.daysBetween(now, exam.date) <= 7))
         }
         for item in StudentMath.openAssignments(state).prefix(2) {
             rows.append(TileRow(id: item.id.uuidString, title: item.title, value: TF.relativeDay(item.due, from: now), isDone: false, action: .toggleAssignment(item.id.uuidString)))

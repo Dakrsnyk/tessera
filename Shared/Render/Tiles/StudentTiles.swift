@@ -103,7 +103,7 @@ enum StudentTiles {
             TileRow(id: item.id.uuidString, title: item.title, value: Fmt.shortDay(item.date), colorHex: state.course(item.courseID)?.colorHex)
         }
         tile.gauge = max(0, 1 - Double(days) / 30)
-        tile.shortValue = days == 0 ? "J" : "J-\(days)"
+        tile.shortValue = days == 0 ? tr("Auj.") : tr("J-\(days)")
         tile.inline = days == 0 ? tr("\(exam.title) aujourd'hui") : tr("\(exam.title) dans \(days) j")
         return tile
     }
