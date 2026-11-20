@@ -595,3 +595,14 @@ only camp-nextClass-s-light camp-nextExam-s-light camp-assignments-m-light camp-
 widget camp-revenueGoal-s-lilac kind=revenueGoal family=small scale=4 theme=light accent=8C6CFF
 widget camp-revenueTrend-m-lilac kind=revenueTrend family=medium scale=3 theme=light accent=8C6CFF
 only camp-revenueGoal-s-lilac camp-revenueTrend-m-lilac
+
+# --- Pub Voyage organique v2 (2026-11-20) : widgets Voyage actuels, pendant le voyage comme les écrans de l'app (trip=ongoing,
+# clé ajoutée le 2026-11-20 : l'échantillon Voyage avant le départ ou en cours, quel que soit le type), et le décompte avant le départ.
+widget camp-localTime-s-light kind=localTime family=small scale=4 theme=light
+widget camp-tripCountdown-s-light-ongoing kind=tripCountdown family=small scale=4 theme=light trip=ongoing
+widget camp-tripCountdown-s-light-ahead kind=tripCountdown family=small scale=4 theme=light trip=ahead
+widget camp-flight-m-light-ahead kind=flight family=medium scale=3 theme=light trip=ahead
+widget camp-tripProgress-s-light-ongoing kind=tripProgress family=small scale=4 theme=light trip=ongoing
+widget camp-nextActivity-m-light-ongoing kind=nextActivity family=medium scale=3 theme=light trip=ongoing
+widget camp-hotel-s-light-ongoing kind=hotel family=small scale=4 theme=light trip=ongoing
+only camp-tripCountdown-s-light camp-flight-m-light camp-hotel-s-light camp-nextActivity-m-light camp-tripProgress-s-light camp-localTime-s-light camp-tripCountdown-s-light-ongoing camp-tripCountdown-s-light-ahead camp-flight-m-light-ahead camp-tripProgress-s-light-ongoing camp-nextActivity-m-light-ongoing camp-hotel-s-light-ongoing

@@ -219,6 +219,10 @@ enum AdExport {
             let quick = payload.domains.budget.quickExpenses[spent - 1]
             payload.domains.budget.add(Expense(amount: quick.amount, categoryID: quick.categoryID, note: quick.name, date: MK.now))
         }
+        // trip=ahead|ongoing (ads, 2026-11-20): the Travel sample before the departure or under way, whatever the kind.
+        if let phase = job.string("trip") {
+            payload.domains.travel = SampleData.travel(now: MK.now, ongoing: phase == "ongoing")
+        }
         let view = WidgetPreview(
             design: widgetDesign, family: widgetFamily, payload: payload, width: size.width, date: MK.now,
             lockInk: ink.map { Color(hex: $0) } ?? .white, lockInkIsDark: ink.map { isDarkInk($0) } ?? false
