@@ -459,6 +459,94 @@ struct StudioDensityPanel: View {
     }
 }
 
+// MARK: - Texte
+
+/// « Texte »: the font of the whole widget, picked in a list of the fonts iOS brings (each name shown in its own
+/// font), by kind. The weight of the numbers and the titles follows the style: a font with a bold face uses it.
+struct StudioTextPanel: View {
+    @Binding var design: WidgetDesign
+    @Environment(AppModel.self) private var model
+    @State private var category: FontCategory?
+
+    private var selectedID: String? { FontCatalog.entry(for: design.effectiveStyle.fontName)?.id }
+
+    var body: some View {
+        StudioGroup(title: tr("Police"), detail: "\(FontCatalog.available.count)", isPremium: !model.isPremium) {
+            VStack(alignment: .leading, spacing: 12) {
+                FlowLayout(spacing: 8) {
+                    FilterChip(title: tr("Toutes"), isSelected: category == nil) {
+                        Haptics.tap()
+                        withAnimation(.easeInOut(duration: 0.2)) { category = nil }
+                    }
+                    .accessibilityIdentifier("font-kind-all")
+                    ForEach(FontCategory.allCases) { kind in
+                        FilterChip(title: kind.title, isSelected: category == kind) {
+                            Haptics.tap()
+                            withAnimation(.easeInOut(duration: 0.2)) { category = kind }
+                        }
+                        .accessibilityIdentifier("font-kind-\(kind.rawValue)")
+                    }
+                }
+                LazyVStack(spacing: 0) {
+                    styleRow
+                    ForEach(FontCatalog.fonts(in: category)) { entry in
+                        Divider()
+                        fontRow(entry)
+                    }
+                }
+            }
+        }
+        StudioNote(text: tr("La police change tout le texte du widget : titres, chiffres et détails. Seules les polices déjà présentes sur l'iPhone sont proposées, elles s'affichent donc aussi sur l'écran d'accueil et l'écran verrouillé."), symbol: "textformat")
+    }
+
+    /// Back to the font the style brings.
+    private var styleRow: some View {
+        Button {
+            Haptics.tap()
+            design.style.fontName = nil
+        } label: {
+            HStack {
+                Text(tr("Police du style"))
+                    .font(.body.weight(.semibold))
+                Spacer(minLength: 8)
+                if selectedID == nil {
+                    Image(systemName: "checkmark.circle.fill").foregroundStyle(Color.accentColor)
+                }
+            }
+            .frame(minHeight: 52)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("font-style")
+        .accessibilityAddTraits(selectedID == nil ? .isSelected : [])
+    }
+
+    private func fontRow(_ entry: FontEntry) -> some View {
+        let isSelected = selectedID == entry.id
+        return Button {
+            Haptics.tap()
+            design.style.fontName = entry.id
+        } label: {
+            HStack(spacing: 10) {
+                Text(entry.name)
+                    .font(.custom(entry.id, size: 21))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                Spacer(minLength: 8)
+                if isSelected {
+                    Image(systemName: "checkmark.circle.fill").foregroundStyle(Color.accentColor)
+                }
+            }
+            .frame(minHeight: 52)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(entry.name))
+        .accessibilityIdentifier("font-\(entry.id)")
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+}
+
 // MARK: - Mes styles
 
 struct StudioMyStylesPanel: View {

@@ -678,6 +678,8 @@ struct WidgetStudio: View {
             StudioStylePanel(design: edited, input: input)
         case .colors:
             StudioColorsPanel(design: edited, input: input)
+        case .text:
+            StudioTextPanel(design: edited)
         case .background:
             backgroundSection
             textureSection

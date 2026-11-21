@@ -419,6 +419,8 @@ struct StyleOptions: Codable, Hashable {
     var tracking: Double = 0
     var titleCase: TitleCase = .theme
     var monospacedNumbers: Bool = true
+    /// The font picked in « Texte » (PostScript name of a `FontCatalog` face). Nil: the style's own font.
+    var fontName: String?
 
     // Icons.
     var iconStyle: IconStyle = .theme
@@ -446,7 +448,7 @@ struct StyleOptions: Codable, Hashable {
         case textHex, secondaryHex, numberHex, iconHex, chartHex, positiveHex, negativeHex, rowColors, panelHex, seriesHexes, recolor
         case gradient, texture, textureOpacity, veil, border, borderHex, borderWidth, borderOpacity
         case depth, shadowHex, shadowRadius, shadowOpacity, shadowOffset, shape
-        case valueScale, titleScale, textScale, numberWeight, titleWeight, tracking, titleCase, monospacedNumbers
+        case valueScale, titleScale, textScale, numberWeight, titleWeight, tracking, titleCase, monospacedNumbers, fontName
         case iconStyle, iconFamily, iconScale, iconPosition, layout, chart, chartThickness, chartFill, chartValues, density, hidden
     }
 
@@ -489,6 +491,7 @@ struct StyleOptions: Codable, Hashable {
         tracking = value(.tracking, d.tracking)
         titleCase = value(.titleCase, d.titleCase)
         monospacedNumbers = value(.monospacedNumbers, d.monospacedNumbers)
+        fontName = optional(.fontName, String.self)
         iconStyle = value(.iconStyle, d.iconStyle)
         iconFamily = value(.iconFamily, d.iconFamily)
         iconScale = value(.iconScale, d.iconScale)
@@ -541,6 +544,7 @@ struct StyleOptions: Codable, Hashable {
         r.tracking = pick(tracking, base.tracking, d.tracking)
         r.titleCase = pick(titleCase, base.titleCase, d.titleCase)
         r.monospacedNumbers = pick(monospacedNumbers, base.monospacedNumbers, d.monospacedNumbers)
+        r.fontName = fontName ?? base.fontName
         r.iconStyle = pick(iconStyle, base.iconStyle, d.iconStyle)
         r.iconFamily = pick(iconFamily, base.iconFamily, d.iconFamily)
         r.iconScale = pick(iconScale, base.iconScale, d.iconScale)
@@ -564,6 +568,7 @@ struct StyleOptions: Codable, Hashable {
         if texture != .none { features.append(tr("Texture")) }
         if border != .none { features.append(tr("Bordure")) }
         if depth != .none { features.append(tr("Ombre et profondeur")) }
+        if fontName != nil { features.append(tr("Police personnalisée")) }
         return features
     }
 
@@ -586,6 +591,7 @@ struct StyleOptions: Codable, Hashable {
         copy.texture = .none
         copy.border = .none
         copy.depth = .none
+        copy.fontName = nil
         return copy
     }
 

@@ -1,0 +1,12 @@
+{
+ "Police": "Font",
+ "La police change tout le texte du widget : titres, chiffres et détails. Seules les polices déjà présentes sur l'iPhone sont proposées, elles s'affichent donc aussi sur l'écran d'accueil et l'écran verrouillé.": "The font changes all the text of the widget: titles, numbers and details. Only fonts already on the iPhone are offered, so they also show on the Home Screen and the Lock Screen.",
+ "Police du style": "Style's font",
+ "Sans empattement": "Sans serif",
+ "Écriture et lettres attachées": "Script and handwriting",
+ "Fantaisie": "Fancy",
+ "Machine à écrire et mono": "Typewriter and monospaced",
+ "Condensées": "Condensed",
+ "Police personnalisée": "Custom font",
+ "Repos [timer]": "Rest"
+}

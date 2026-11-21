@@ -412,3 +412,9 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 - Demande : des pubs réalistes par mini-app (salle de sport pour Fitness, cuisine et repas scannés pour Nutrition…), sur le modèle d'un Reel de partenariat. Carte blanche, aucun autre outil que Claude : plans réels tirés de Pexels (licence libre, aucun visage reconnaissable à côté d'un téléphone), vrais écrans d'Ardane, musique synthétisée.
 - Fitness v1 : composition `IrlFitness` (27,3 s, 60 i/s), son `scripts/ad2/irl_audio.py`, tout le détail dans `campagne-2026/23-pub-irl-fitness.md`. Rendu : `~/ardane-tools/film/out/irl/ardane-irl-fitness-v1-1080x1920.mp4`.
 - Reste : retour de l'utilisateur, puis Nutrition et les autres mini-apps sur le même gabarit ; widgets exportés d'avant la refonte (`[adkit-img]`).
+
+## Chantier 42 : polices des widgets (onglet « Texte » du Studio) — 2026-11-21
+- Demande du PDG : changer la police des widgets, au moins 100 polices de plusieurs styles (sans empattement, serif, lettres attachées, fantaisie…), dans un onglet « Texte » après « Couleurs ».
+- Fait : `Shared/Model/FontCatalog.swift` (environ 140 faces d'iOS en 6 familles, seules celles installées sont proposées ; face grasse pour les chiffres et les titres), réglage `StyleOptions.fontName` (facultatif, Premium), rendu par `ResolvedStyle.text/number/label`, panneau `StudioTextPanel`, tests `FontCatalogTests`, 9 textes traduits (`l10n/parts/103.*`).
+- Limites : pas de Calibri (police Microsoft, absente d'iOS), pas de police ajoutée à l'app (aucune licence à porter) ; les textes dessinés avec `.font(.system(...))` en dur (quelques pastilles, icônes) gardent la police système.
+- Reste : voir sur l'iPhone le rendu des polices larges (Zapfino) dans les petits widgets ; un `[unit]` pour prouver `FontCatalogTests` (au moins 100 polices installées sur le simulateur).

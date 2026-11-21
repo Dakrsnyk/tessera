@@ -1,0 +1,12 @@
+{
+ "Police": "フォント",
+ "La police change tout le texte du widget : titres, chiffres et détails. Seules les polices déjà présentes sur l'iPhone sont proposées, elles s'affichent donc aussi sur l'écran d'accueil et l'écran verrouillé.": "フォントはウィジェットのすべての文字（タイトル、数字、詳細）を変えます。iPhoneにすでに入っているフォントだけを表示するので、ホーム画面とロック画面でもそのまま表示されます。",
+ "Police du style": "スタイルのフォント",
+ "Sans empattement": "ゴシック体（サンセリフ）",
+ "Écriture et lettres attachées": "筆記体と手書き風",
+ "Fantaisie": "ファンシー",
+ "Machine à écrire et mono": "タイプライターと等幅",
+ "Condensées": "縦長（コンデンスド）",
+ "Police personnalisée": "カスタムフォント",
+ "Repos [timer]": "休憩"
+}

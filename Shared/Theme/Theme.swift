@@ -724,6 +724,8 @@ struct ResolvedStyle {
     /// The color of charts, rings and progress bars (the accent unless the person picked one).
     var chart: Color
     var fontDesign: Font.Design
+    /// The font picked in « Texte » (nil: the system font, in the style's design).
+    var customFont: FontEntry?
     var numberWeight: Font.Weight
     var titleWeight: Font.Weight
     /// The weight of the small widget titles.
@@ -872,6 +874,7 @@ struct ResolvedStyle {
         case .serif: self.fontDesign = .serif
         case .mono: self.fontDesign = .monospaced
         }
+        self.customFont = FontCatalog.entry(for: options.fontName)
         self.numberWeight = options.numberWeight?.fontWeight ?? theme.numberWeight
         self.titleWeight = options.titleWeight?.fontWeight ?? theme.titleWeight
         self.labelWeight = options.titleWeight?.fontWeight ?? .semibold
@@ -920,17 +923,28 @@ struct ResolvedStyle {
     }
 
     func text(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
-        .system(size: size * options.textScale, weight: weight, design: fontDesign)
+        if let customFont {
+            return FontCatalog.font(customFont, size: size * options.textScale, bold: FontCatalog.isBold(weight))
+        }
+        return .system(size: size * options.textScale, weight: weight, design: fontDesign)
     }
 
     func number(_ size: CGFloat) -> Font {
-        let font = Font.system(size: size * options.valueScale, weight: numberWeight, design: fontDesign)
+        let font: Font
+        if let customFont {
+            font = FontCatalog.font(customFont, size: size * options.valueScale, bold: FontCatalog.isBold(numberWeight))
+        } else {
+            font = Font.system(size: size * options.valueScale, weight: numberWeight, design: fontDesign)
+        }
         return options.monospacedNumbers ? font.monospacedDigit() : font
     }
 
     /// The small title of a widget.
     func label(_ size: CGFloat) -> Font {
-        .system(size: size * options.titleScale, weight: labelWeight, design: fontDesign)
+        if let customFont {
+            return FontCatalog.font(customFont, size: size * options.titleScale, bold: FontCatalog.isBold(labelWeight))
+        }
+        return .system(size: size * options.titleScale, weight: labelWeight, design: fontDesign)
     }
 
     func labelText(_ text: String) -> String {
