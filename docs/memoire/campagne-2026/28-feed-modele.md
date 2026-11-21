@@ -43,3 +43,8 @@ L'utilisateur a envoyé trois exemples de « ce à quoi j'aimerais que mon feed 
 - Séries : Widget of the day (8), Style of the week (3, Premium), écran verrouillé (2), noir et blanc façon impello (3), motivation (2), Did you know? (2). Fond noir à la lumière de la mini-app, logo en bas à gauche, mention Premium en bas à droite.
 - Mentions Premium : 02, 10, 18 (styles), 03 (« Last time »), 11 (accent rouge personnalisé), 14 (Rubis), 19 (widget Devoirs).
 - À savoir : dates et heure des écrans verrouillés (06, 14) dessinées ; 09 et 13 montrent deux chiffres Business différents sur deux posts distincts.
+
+## Section « Photos » du QG (2026-11-20)
+- `ardane-hq` commit 4b389c4 (poussé) : boîte `workspace/marketing/_imports/photos/` (PNG, JPG, WebP, 30 Mo), onglet « Photos » du Marketing Hub, soumission à validation comme les vidéos importées (légende reprise de `post-feed-legendes.md`). 445 tests réussis. Les 23 posts y sont (vérifié dans le navigateur après redémarrage du QG).
+- Les nouveaux posts fixes vont dans `_imports/photos/`, les vidéos restent à la racine de `_imports/`.
+- Légende : le QG impose « Coming soon to the App Store » tant que `appReleased` est faux ; à revoir à la sortie de l'app.
