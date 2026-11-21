@@ -8,8 +8,19 @@ import XCTest
 @MainActor
 final class FontCatalogTests: XCTestCase {
     func testAtLeastAHundredFontsAreInstalled() {
-        XCTAssertGreaterThanOrEqual(FontCatalog.available.count, 100,
+        XCTAssertGreaterThanOrEqual(FontCatalog.available.count, 200,
             "polices manquantes : \(Set(FontCatalog.candidates.map(\.id)).subtracting(FontCatalog.available.map(\.id)).sorted())")
+    }
+
+    /// Les polices libres de `Shared/Fonts` sont copiées dans l'app et enregistrées au premier usage.
+    func testTheBundledFontsAreRegistered() {
+        let installed = FontCatalog.bundled.filter { FontCatalog.isInstalled($0.id) }
+        XCTAssertGreaterThanOrEqual(installed.count, 100,
+            "polices libres absentes : \(FontCatalog.bundled.map(\.id).filter { !FontCatalog.isInstalled($0) })")
+        XCTAssertGreaterThanOrEqual(FontCatalog.fonts(in: .script).count, 50, "au moins 50 écritures attachées ou manuscrites")
+        for id in ["Parisienne-Regular", "PinyonScript-Regular", "WindSong-Regular", "GreatVibes-Regular", "Tangerine-Regular", "Cinzel-Regular"] {
+            XCTAssertNotNil(FontCatalog.entry(for: id), "\(id) manque")
+        }
     }
 
     func testEveryKindHasFonts() {

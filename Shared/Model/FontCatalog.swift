@@ -1,5 +1,6 @@
 import SwiftUI
 #if canImport(UIKit)
+import CoreText
 import UIKit
 #endif
 
@@ -40,17 +41,32 @@ struct FontEntry: Identifiable, Hashable {
 }
 
 enum FontCatalog {
-    /// Whether a face is installed on this device.
+    /// Registers the free fonts of `Shared/Fonts` (copied in the app and in the widgets) for this process, once: the
+    /// app and the widget extension each do it the first time a font is asked for, so a widget draws the font the
+    /// Studio showed. No Info.plist entry is needed, and a missing file only leaves its font out of `available`.
+    private static let registration: Void = {
+        #if canImport(UIKit)
+        guard let root = Bundle.main.resourceURL,
+              let files = FileManager.default.enumerator(at: root, includingPropertiesForKeys: nil) else { return }
+        let urls = files.compactMap { $0 as? URL }.filter { ["ttf", "otf"].contains($0.pathExtension.lowercased()) }
+        guard !urls.isEmpty else { return }
+        CTFontManagerRegisterFontsForURLs(urls as CFArray, .process, nil)
+        #endif
+    }()
+
+    /// Whether a face is installed on this device (iOS's own, or one of the bundled fonts).
     static func isInstalled(_ postScriptName: String) -> Bool {
         #if canImport(UIKit)
+        _ = registration
         return UIFont(name: postScriptName, size: 12) != nil
         #else
         return true
         #endif
     }
 
-    /// Every font Ardane knows. A face an iOS version does not have is simply left out of `available`.
-    static let candidates: [FontEntry] = sans + condensed + serif + script + fun + typewriter
+    /// Every font Ardane knows: the ones iOS brings, then the free fonts bundled with the app (`FontCatalogBundled`).
+    /// A face that is not there (an iOS version without it, a file not copied) is simply left out of `available`.
+    static let candidates: [FontEntry] = sans + condensed + serif + script + fun + typewriter + bundled
 
     /// The fonts this iPhone has, in the order they are shown.
     static let available: [FontEntry] = candidates.filter { isInstalled($0.id) }
