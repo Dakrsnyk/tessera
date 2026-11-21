@@ -49,8 +49,10 @@ struct ScanRecapView: View {
         let state = model.nutrition
         let known = NutritionTiles.Targets(model.profile)
         let totals = recap.totals
-        // « ≈ » for a guess, « ≥ » when a food lacks a macronutrient (the total is then a minimum).
-        let approximate = recap.isIncomplete ? "≥ " : (recap.showsRange ? "≈ " : "")
+        // One fixed figure from the values read (the « Estimation » badge and the footer say the grams are a
+        // guess; changing the grams changes the figure). « ≥ » only when a food lacks a macronutrient (the
+        // total is then a minimum).
+        let approximate = recap.isIncomplete ? "≥ " : ""
         let suggestions = recap.suggestions().filter { !dismissedSuggestions.contains($0.id) }
         let left = state.goals.kcal - NutritionMath.totals(state, on: day).kcal - totals.kcal
         List {
@@ -127,7 +129,7 @@ struct ScanRecapView: View {
             }
 
             Section {
-                ValueRow(title: tr("Calories"), value: recap.showsRange ? Self.kcalRangeText(recap.kcalRange) : approximate + tr("\(TF.int(totals.kcal)) kcal"))
+                ValueRow(title: tr("Calories"), value: approximate + tr("\(TF.int(totals.kcal)) kcal"))
                 ValueRow(title: tr("Protéines"), value: "\(approximate)\(TF.decimal(totals.protein, 1)) g")
                 ValueRow(title: tr("Glucides"), value: "\(approximate)\(TF.decimal(totals.carbs, 1)) g")
                 ValueRow(title: tr("Lipides"), value: "\(approximate)\(TF.decimal(totals.fat, 1)) g")
@@ -446,15 +448,14 @@ private struct ScanLineRow: View {
     @Environment(\.appStyle) private var style
     private var palette: CristalPalette { CristalPalette.of(style.id) }
 
-    /// Calories and macros of the line: a range for a guess (« ≈ 420–560 kcal »), « ? » for a macronutrient
-    /// the source did not give (never a zero made up).
+    /// Calories and macros of the line, one fixed figure for the quantity shown (the person adjusts the grams
+    /// and the figures follow), « ? » for a macronutrient the source did not give (never a zero made up).
     private func macroSummary(_ totals: NutritionTotals) -> String {
-        let mark = line.showsRange ? "≈ " : ""
-        func macro(_ value: Double, known: Bool) -> String { known ? mark + TF.decimal(value, 1) : "?" }
+        func macro(_ value: Double, known: Bool) -> String { known ? TF.decimal(value, 1) : "?" }
         let protein = macro(totals.protein, known: line.food.knownProtein != nil)
         let carbs = macro(totals.carbs, known: line.food.knownCarbs != nil)
         let fat = macro(totals.fat, known: line.food.knownFat != nil)
-        let kcal = line.showsRange ? ScanRecapView.kcalRangeText(line.kcalRange) : tr("\(TF.int(totals.kcal)) kcal")
+        let kcal = tr("\(TF.int(totals.kcal)) kcal")
         return tr("\(kcal) · P \(protein) · G \(carbs) · L \(fat)")
     }
 
