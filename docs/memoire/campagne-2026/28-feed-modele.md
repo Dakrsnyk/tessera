@@ -32,3 +32,8 @@ L'utilisateur a envoyé trois exemples de « ce à quoi j'aimerais que mon feed 
 - Pas de « 150,000+ users » ni de note tant que ce n'est pas vrai ; pas de « AI ».
 - Seulement de vraies captures et de vrais exports.
 - Pas de Google Play : l'app est sur iOS seulement.
+
+## Posts épinglés v1 (2026-11-20)
+- Fichiers : `pub/campagne-2026-11/epingles/`. 1 « Your whole life. One place. » avec le badge officiel (choix de l'utilisateur) ; 2 « Your day, at a glance. » (Fitness, accueil Clair, Studio ; Fitness plutôt que Nutrition pour ne pas montrer 1,672 et 1,122 côte à côte) ; 3 « Make it yours. » (Calories dans les 7 styles, mention Premium).
+- Source : `~/ardane-tools/film/src/campaign/epingles/Posts.tsx` (Remotion `Still`). Déposés au QG (`post-epingle-1..3`).
+- Limite : la capture Fitness a été prise avec Premium ; un compte gratuit verrait de petits badges Premium sur Exercises et Progress.
