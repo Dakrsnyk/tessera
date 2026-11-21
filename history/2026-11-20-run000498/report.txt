@@ -1,0 +1,61 @@
+run: 498
+commit: 934f356058dc242b69ae110414d053abe2c6e069
+static: success
+simulator: cancelled
+device: skipped
+tests: skipped
+ipa: none (the test IPA is no longer built or published)
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped
+---- errors ----
+OK: 3702 memberwise calls checked, 98 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 5926 texts in the code, 0 not in the catalog, 0 untranslated, 0 unused in the catalog
+---- tests ----
+privacy manifest: app MISSING, widget MISSING
+alternate app icons in the app: 0
+---- widget extension bundle ----
+---- last lines ----
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileFactory.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TileView.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TimeTiles.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/Tiles/TravelTiles.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/AccentedRendering.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/AccessoryViews.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/RenderComponents.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/StyleRendering.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Render/WidgetCanvas.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    
+
+SwiftCompile normal arm64 Compiling\ FinancesSheets.swift,\ ExerciseDemo.swift,\ ExerciseLibraryViews.swift,\ FitnessApp.swift,\ FitnessPages.swift,\ FitnessSession.swift,\ CameraAccessGate.swift,\ CustomFoodsView.swift,\ FoodModelRecognizer.swift,\ FoodScanView.swift,\ MealPhotoAnalysis.swift,\ NutrientViews.swift,\ NutritionApp.swift,\ NutritionPages.swift,\ ScanRecapView.swift,\ ScanTorch.swift,\ WeightPlanSummaryView.swift,\ PhotoQuotesApp.swift,\ PhotosHybrid.swift,\ PlanningApp.swift,\ PlanningCalendar.swift,\ PlanningPages.swift,\ ScheduleCameraSheet.swift,\ ScheduleImportView.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Finances/FinancesSheets.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Fitness/ExerciseDemo.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Fitness/FitnessApp.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Fitness/FitnessPages.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Fitness/FitnessSession.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/CameraAccessGate.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/CustomFoodsView.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/FoodModelRecognizer.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/FoodScanView.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/MealPhotoAnalysis.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/NutrientViews.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/NutritionApp.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/NutritionPages.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/ScanRecapView.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/ScanTorch.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Photos/PhotoQuotesApp.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Photos/PhotosHybrid.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Planning/PlanningApp.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Planning/PlanningCalendar.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Planning/PlanningPages.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Planning/ScheduleCameraSheet.swift /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Planning/ScheduleImportView.swift (in target 'Ardane' from project 'Ardane')
+SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/App/Screens/MiniApps/Finances/FinancesSheets.swift (in target 'Ardane' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    

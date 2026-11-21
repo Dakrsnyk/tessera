@@ -1,0 +1,2 @@
+SCORE OCR-rendez-vous propre corrects=3/3 lus=3 types=appointment,appointment,appointment dates=3
+SCORE OCR-rendez-vous flou corrects=3/3 lus=3 types=appointment,appointment,appointment dates=3
