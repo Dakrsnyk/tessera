@@ -37,3 +37,9 @@ L'utilisateur a envoyé trois exemples de « ce à quoi j'aimerais que mon feed 
 - Fichiers : `pub/campagne-2026-11/epingles/`. 1 « Your whole life. One place. » avec le badge officiel (choix de l'utilisateur) ; 2 « Your day, at a glance. » (Fitness, accueil Clair, Studio ; Fitness plutôt que Nutrition pour ne pas montrer 1,672 et 1,122 côte à côte) ; 3 « Make it yours. » (Calories dans les 7 styles, mention Premium).
 - Source : `~/ardane-tools/film/src/campaign/epingles/Posts.tsx` (Remotion `Still`). Déposés au QG (`post-epingle-1..3`).
 - Limite : la capture Fitness a été prise avec Premium ; un compte gratuit verrait de petits badges Premium sur Exercises et Progress.
+
+## 20 posts du feed v1 (2026-11-20 soir)
+- Fichiers : `pub/campagne-2026-11/posts/01..20-*.png`, `apercu-grille.png` (3 épinglés + 20), `legendes.md` (légende anglaise + hashtags par post). Source `~/ardane-tools/film/src/campaign/posts20/Posts.tsx`. Déposés au QG (`post-feed-*`).
+- Séries : Widget of the day (8), Style of the week (3, Premium), écran verrouillé (2), noir et blanc façon impello (3), motivation (2), Did you know? (2). Fond noir à la lumière de la mini-app, logo en bas à gauche, mention Premium en bas à droite.
+- Mentions Premium : 02, 10, 18 (styles), 03 (« Last time »), 11 (accent rouge personnalisé), 14 (Rubis), 19 (widget Devoirs).
+- À savoir : dates et heure des écrans verrouillés (06, 14) dessinées ; 09 et 13 montrent deux chiffres Business différents sur deux posts distincts.
