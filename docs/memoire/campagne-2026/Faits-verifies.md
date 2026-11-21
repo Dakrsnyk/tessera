@@ -100,6 +100,6 @@ Règle de mention : tout plan qui montre une fonction ou un réglage Premium por
 
 ## Ajouts du 2026-11-19 (relecture des pubs Planning et Fitness)
 - Import d'horaire par photo ou PDF : PREMIUM (voir § 1). Sur un vrai iPhone le premier bouton est « Scan with the camera » ; les captures `camp-import-*` viennent du simulateur (« Choose a photo ») et l'écran de vérification `camp-import-review-b` est un état de démonstration (rien n'est réellement lu).
-- Carte finale : « Available on the App Store » (décision de l'utilisateur, 2026-11-19 : les pubs ne sont publiées qu'une fois l'app sortie). Toujours ni badge officiel, ni prix.
+- Carte finale : « Available on the App Store » (décision de l'utilisateur, 2026-11-19 : les pubs ne sont publiées qu'une fois l'app sortie). Toujours aucun prix. Badge officiel « Download on the App Store » autorisé sur les posts épinglés (décision de l'utilisateur, 2026-11-20), à publier seulement une fois l'app en ligne (règle d'Apple) ; fichier `film/public/hq/appstore-badge-en.svg`, jamais redessiné.
 - Texte de l'app à corriger : la clé « Repos » sert à la fois au jour de repos et au repos entre deux séries ; en anglais elle donne « Rest day » sur le minuteur de repos (widget Repos, Activité en direct). Visible dans l'accroche de la pub Fitness.
 - Le bouton « Set done » du widget Next set (gratuit) note la série sans ouvrir l'app : établi par le code, jamais prouvé sur un vrai iPhone.
