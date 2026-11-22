@@ -29,13 +29,10 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         }
     }
 
-    /// A few words under the title in the grid of interests, for the two that overlap.
-    var hint: String? {
-        switch self {
-        case .studies: tr("cours, examens, révisions, concentration")
-        case .productivity: tr("semaine, rendez-vous, événements")
-        default: nil
-        }
+    /// The tiles of the grid of interests. Finance is no longer offered (PDG, 2026-11-22): Business leads to the
+    /// finances page; an older account that picked it still sees its tile, to be able to untick it.
+    static func offered(keeping selection: [Interest]) -> [Interest] {
+        allCases.filter { $0 != .finance || selection.contains(.finance) }
     }
 
     var symbol: String {
@@ -77,7 +74,8 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .nutrition: [.nutrition]
         case .finance: [.investing, .markets]
         case .budget: [.budget]
-        case .business: [.business]
+        // Business takes over the finance spaces since Finance left the grid (2026-11-22).
+        case .business: [.business, .investing, .markets]
         case .studies: [.student]
         case .productivity: [.productivity]
         case .travel: [.travel]
@@ -94,7 +92,7 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         case .nutrition: [.nutrition]
         case .finance: [.investing, .markets]
         case .budget: [.finance]
-        case .business: [.business]
+        case .business: [.business, .investing, .markets]
         case .studies: [.student]
         case .productivity: [.productivity]
         case .travel: [.travel]
@@ -104,18 +102,19 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
         }
     }
 
-    /// The questions it leads to (finance and budget share theirs). Nil when there is nothing worth asking.
-    var topic: ProfileTopic? {
+    /// The pages of questions it leads to (finance and budget share theirs; Business also leads to the
+    /// finances page since 2026-11-22). Empty when there is nothing worth asking.
+    var topics: [ProfileTopic] {
         switch self {
-        case .sport: .sport
-        case .nutrition: .nutrition
-        case .finance, .budget: .money
-        case .business: .business
-        case .studies: .studies
-        case .productivity: .productivity
-        case .car: .car
-        case .wellbeing: .wellbeing
-        case .travel, .design: nil
+        case .sport: [.sport]
+        case .nutrition: [.nutrition]
+        case .finance, .budget: [.money]
+        case .business: [.business, .money]
+        case .studies: [.studies]
+        case .productivity: [.productivity]
+        case .car: [.car]
+        case .wellbeing: [.wellbeing]
+        case .travel, .design: []
         }
     }
 }
@@ -237,6 +236,54 @@ enum FitnessGoal: String, Codable, CaseIterable, Identifiable {
     }
 }
 
+/// What the training side of the goal aims at, beside the weight (« Perte de poids et force »). Nil: the weight
+/// only. Kept apart from `FitnessGoal` so the calculation and the older accounts are unchanged.
+enum GoalFocus: String, Codable, CaseIterable, Identifiable {
+    case strength, endurance
+    var id: String { rawValue }
+
+    /// The focus a goal already says by itself (« Force », « Endurance »).
+    static func implied(by goal: FitnessGoal?) -> GoalFocus? {
+        switch goal {
+        case .strength: .strength
+        case .endurance: .endurance
+        default: nil
+        }
+    }
+}
+
+/// One answer of « Ton objectif » in Nutrition: the weight and, when it matters, the training side together
+/// (PDG, 2026-11-22). Saved as the shared goal (`UserProfile.goal`, which the calculation reads) and its focus.
+struct NutritionGoalChoice: Identifiable, Hashable {
+    let goal: FitnessGoal
+    let focus: GoalFocus?
+    let title: String
+
+    var id: String { goal.rawValue + "-" + (focus?.rawValue ?? "none") }
+
+    static var all: [NutritionGoalChoice] {
+        [
+            NutritionGoalChoice(goal: .weightLoss, focus: nil, title: tr("Perte de poids")),
+            NutritionGoalChoice(goal: .weightLoss, focus: .strength, title: tr("Perte de poids et force")),
+            NutritionGoalChoice(goal: .weightLoss, focus: .endurance, title: tr("Perte de poids et endurance")),
+            NutritionGoalChoice(goal: .maintain, focus: nil, title: tr("Maintien du poids")),
+            NutritionGoalChoice(goal: .maintain, focus: .strength, title: tr("Maintien du poids et force")),
+            NutritionGoalChoice(goal: .endurance, focus: .endurance, title: tr("Maintien du poids et endurance")),
+            NutritionGoalChoice(goal: .recomposition, focus: nil, title: tr("Recomposition corporelle")),
+            NutritionGoalChoice(goal: .muscleGain, focus: nil, title: tr("Prise de muscle")),
+            NutritionGoalChoice(goal: .strength, focus: .strength, title: tr("Prise de muscle et force")),
+            NutritionGoalChoice(goal: .bulk, focus: nil, title: tr("Prise de masse")),
+        ]
+    }
+
+    /// The choice the profile stands for, nil when its goal was picked elsewhere without a match (Sèche…).
+    static func current(_ profile: UserProfile) -> NutritionGoalChoice? {
+        guard let goal = profile.goal else { return nil }
+        let focus = profile.goalFocus ?? GoalFocus.implied(by: goal)
+        return all.first { $0.goal == goal && $0.focus == focus }
+    }
+}
+
 enum FitnessLevel: String, Codable, CaseIterable, Identifiable {
     case beginner, intermediate, advanced
     var id: String { rawValue }
@@ -330,6 +377,9 @@ struct UserProfile: Codable, Hashable {
     /// The goal, shared by Sport and Nutrition (read it through `goal`, which also takes an older account's
     /// `nutritionAim` into account).
     var fitnessGoal: FitnessGoal?
+    /// The training side chosen with the goal in Nutrition (« … et force »), nil for the weight only. Cleared
+    /// when the goal changes.
+    var goalFocus: GoalFocus?
     var fitnessLevel: FitnessLevel?
     /// Steps a day, for « Mon Quotidien » (the steps come from the iPhone's motion sensor).
     var stepGoal: Int?
@@ -379,7 +429,7 @@ struct UserProfile: Codable, Hashable {
         case fitnessGoal, fitnessLevel, stepGoal
         case nutritionAim, calculatedActivity, nutritionAuto, customTargets, monthlyIncome, monthlySavingsGoal, mainExpenses, mainGoal, dailyWorkHours
         case businessClients, studyField, weeklyStudyHours, provided, migrated
-        case weightPlan, lifeStage, targetsGoal
+        case weightPlan, lifeStage, targetsGoal, goalFocus
     }
 
     init() {}
@@ -417,6 +467,7 @@ struct UserProfile: Codable, Hashable {
         weightPlan = c.optional(.weightPlan)
         lifeStage = c.optional(.lifeStage)
         targetsGoal = c.optional(.targetsGoal)
+        goalFocus = c.optional(.goalFocus)
     }
 
     /// The one goal of the person, for Sport and Nutrition. An account that has only one of the two older
@@ -447,6 +498,7 @@ struct UserProfile: Codable, Hashable {
 
     /// Chooses the goal for both Sport and Nutrition (nil takes it back); the older aim follows it.
     mutating func setGoal(_ goal: FitnessGoal?) {
+        if goal != self.goal { goalFocus = nil }
         fitnessGoal = goal
         nutritionAim = goal?.nutritionAim
     }
@@ -511,7 +563,7 @@ struct UserProfile: Codable, Hashable {
     /// The topics to ask about or show, in the order the interests were picked, without repeats.
     var topics: [ProfileTopic] {
         var seen = Set<ProfileTopic>()
-        return interests.compactMap(\.topic).filter { seen.insert($0).inserted }
+        return interests.flatMap(\.topics).filter { seen.insert($0).inserted }
     }
 
     /// Spaces put forward first, in the order the interests were picked.

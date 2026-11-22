@@ -52,7 +52,7 @@ enum MiniAppSummary {
         case .fitness: [.sport, .wellbeing]
         case .planning: [.productivity]
         case .studies: [.studies]
-        case .finances: [.budget, .finance]
+        case .finances: [.budget, .finance, .business]
         case .business: [.business]
         case .travel: [.travel]
         case .car: [.car]

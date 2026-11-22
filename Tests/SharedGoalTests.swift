@@ -360,8 +360,8 @@ final class SharedGoalTests: XCTestCase {
         XCTAssertEqual(Interest.productivity.title, tr("Planning"))
         XCTAssertEqual(ProfileTopic.productivity.title, tr("Planning"))
         XCTAssertEqual(Interest.studies.title, tr("Études"))
-        XCTAssertNotNil(Interest.studies.hint)
-        XCTAssertNotNil(Interest.productivity.hint)
-        XCTAssertNil(Interest.sport.hint)
+        // No words under the titles any more (2026-11-22), and Finance left the grid for Business.
+        XCTAssertFalse(Interest.offered(keeping: []).contains(.finance))
+        XCTAssertTrue(Interest.offered(keeping: [.finance]).contains(.finance), "An older account can still untick Finance")
     }
 }

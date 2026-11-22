@@ -38,6 +38,36 @@ final class ProfileTests: XCTestCase {
         XCTAssertEqual(profile.preferredCategories.first, .finance)
     }
 
+    /// Business leads to its page and to the finances page (Finance left the grid, 2026-11-22), once each.
+    func testBusinessAlsoAsksTheFinances() {
+        var profile = UserProfile()
+        profile.interests = [.business]
+        XCTAssertEqual(profile.topics, [.business, .money])
+        XCTAssertTrue(profile.preferredSpaces.contains(.investing))
+        profile.interests = [.budget, .business]
+        XCTAssertEqual(profile.topics, [.money, .business], "The finances page is asked once")
+    }
+
+    /// « Perte de poids et force »: the shared goal plus its training side, read back as the same choice, and
+    /// a goal changed elsewhere drops the old training side.
+    func testNutritionGoalChoices() throws {
+        var profile = UserProfile()
+        XCTAssertNil(NutritionGoalChoice.current(profile))
+        let choice = try XCTUnwrap(NutritionGoalChoice.all.first { $0.goal == .weightLoss && $0.focus == .strength })
+        profile.setGoal(choice.goal)
+        profile.goalFocus = choice.focus
+        XCTAssertEqual(NutritionGoalChoice.current(profile), choice)
+        XCTAssertEqual(profile.aim, .lose, "The calculation still reads a loss")
+        let data = try JSONEncoder().encode(profile)
+        XCTAssertEqual(try JSONDecoder().decode(UserProfile.self, from: data).goalFocus, .strength)
+        profile.setGoal(.bulk)
+        XCTAssertNil(profile.goalFocus)
+        XCTAssertEqual(NutritionGoalChoice.current(profile)?.title, tr("Prise de masse"))
+        profile.setGoal(.strength)
+        XCTAssertEqual(NutritionGoalChoice.current(profile)?.focus, .strength, "« Force » chosen in Sport says its focus by itself")
+        XCTAssertEqual(Set(NutritionGoalChoice.all.map(\.id)).count, NutritionGoalChoice.all.count, "Unique ids")
+    }
+
     func testAgeFromTheBirthYearOrTheBirthday() throws {
         var profile = UserProfile()
         let now = Date()

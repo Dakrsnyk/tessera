@@ -269,6 +269,9 @@ struct TopicForm: View {
     @Environment(AppModel.self) private var model
     @State private var newTask = ""
     @State private var newHabit = ""
+    /// Planning, first launch: « Importer mon emploi du temps » opened, or the tasks typed by hand shown.
+    @State private var importsSchedule = false
+    @State private var addsTasksByHand = false
     // Whether the page opened without the answer (nil until it appeared): the page keeps asking while the
     // person fills it in, and only shows a summary when the answer was already there.
     @State private var asksBody: Bool?
@@ -325,9 +328,11 @@ struct TopicForm: View {
         Binding<Double?>(get: { model.profile.weightKg }, set: { model.setWeight($0) }).weight(in: model.settings.unitSystem)
     }
 
-    /// Age, height and weight side by side (also used by the nutrition calculation).
-    private func bodyFields() -> some View {
+    /// Age, height and weight side by side (also used by the nutrition calculation). Nutrition asks the weight
+    /// first (PDG, 2026-11-22): weight, age, height.
+    private func bodyFields(weightFirst: Bool = false) -> some View {
         HStack(spacing: 8) {
+            if weightFirst { weightField }
             ProfileNumberField(title: tr("Âge"), unit: tr("ans"), value: ageBinding, decimals: false, identifier: "profile-age")
                 .disabled(model.life.birthday != nil)
             if model.settings.unitSystem == .imperial {
@@ -336,8 +341,12 @@ struct TopicForm: View {
             } else {
                 ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
             }
-            ProfileNumberField(title: tr("Poids"), unit: model.settings.unitSystem.weightUnit, value: weightBinding, identifier: "profile-weight")
+            if !weightFirst { weightField }
         }
+    }
+
+    private var weightField: some View {
+        ProfileNumberField(title: tr("Poids"), unit: model.settings.unitSystem.weightUnit, value: weightBinding, identifier: "profile-weight")
     }
 
     // MARK: Shared questions (asked once, whichever page comes first)
@@ -351,11 +360,11 @@ struct TopicForm: View {
 
     /// « Toi » (age, height, weight, gender), the same card in Sport and in Nutrition: when everything is
     /// already known on a first-launch page, a summary with « Modifier » instead of the fields.
-    private func bodyCard(detail: String, identifier: String) -> some View {
+    private func bodyCard(detail: String, identifier: String, weightFirst: Bool = false) -> some View {
         QuestionCard(title: tr("Toi"), detail: showsBodyFields ? detail : tr("Déjà renseigné : tu peux le modifier.")) {
             if showsBodyFields {
                 VStack(alignment: .leading, spacing: 10) {
-                    bodyFields()
+                    bodyFields(weightFirst: weightFirst)
                     GenderPicker()
                 }
             } else {
@@ -392,6 +401,31 @@ struct TopicForm: View {
                 }
             } else {
                 KnownSummary(text: profile.goal?.title ?? "", identifier: "\(identifierPrefix)-edit") { editsGoal = true }
+            }
+        }
+    }
+
+    /// « Ton objectif » of Nutrition: the weight and the training side in one answer (« Perte de poids et
+    /// force »). The same shared goal as Sport (the calculation reads it); its training side is `goalFocus`.
+    private var nutritionGoalCard: some View {
+        let current = NutritionGoalChoice.current(profile)
+        return QuestionCard(title: tr("Ton objectif"), detail: showsGoalChips ? tr("Le même pour Sport et Nutrition.") : tr("Déjà choisi : tu peux le changer.")) {
+            if showsGoalChips {
+                FlowLayout {
+                    ForEach(NutritionGoalChoice.all) { choice in
+                        ChoiceChip(title: choice.title, isSelected: current == choice) {
+                            if current == choice {
+                                model.setGoal(nil)
+                            } else {
+                                model.setGoal(choice.goal)
+                                model.update(\.profile) { $0.goalFocus = choice.focus }
+                            }
+                        }
+                        .accessibilityIdentifier("nutrition-aim-\(choice.id)")
+                    }
+                }
+            } else {
+                KnownSummary(text: current?.title ?? profile.goal?.title ?? "", identifier: "nutrition-aim-edit") { editsGoal = true }
             }
         }
     }
@@ -459,12 +493,14 @@ struct TopicForm: View {
     /// The aim, the body and the activity: the daily needs are calculated from them (no number to type
     /// first), then each one can be changed by hand in the card below.
     @ViewBuilder private var nutrition: some View {
-        goalCard(identifierPrefix: "nutrition-aim")
-        WeightPlanQuestions(compactKnown: compactKnown)
+        // Weight, age and height first, then the goal (PDG, 2026-11-22).
         bodyCard(
             detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Pour calculer tes besoins. Le poids sert aussi à Fitness."),
-            identifier: "nutrition-body-edit"
+            identifier: "nutrition-body-edit",
+            weightFirst: true
         )
+        nutritionGoalCard
+        WeightPlanQuestions(compactKnown: compactKnown)
         QuestionCard(title: tr("Ton niveau d'activité"), detail: activityDetail) {
             if showsActivityChips {
                 FlowLayout {
@@ -489,21 +525,27 @@ struct TopicForm: View {
 
     private static let expenseChoices = [tr("Logement"), tr("Épicerie"), tr("Transport"), tr("Restaurants"), tr("Loisirs"), tr("Abonnements"), tr("Santé"), tr("Shopping"), tr("Voyages")]
 
+    /// The first launch asks only the income, the main expenses and the savings goal (PDG, 2026-11-22): the
+    /// monthly budget is set later, in « Mes informations » or the Finances mini-app.
     @ViewBuilder private var money: some View {
         QuestionCard(title: tr("Chaque mois")) {
-            VStack(spacing: 8) {
-                HStack(spacing: 8) {
-                    ProfileNumberField(title: tr("Revenu"), unit: currencySymbol, value: profileBinding(\.monthlyIncome), decimals: false, identifier: "money-income")
-                    ProfileNumberField(
-                        title: tr("Budget"), unit: currencySymbol,
-                        value: Binding(
-                            get: { model.profile.knows(.monthlyBudget) ? model.budget.monthlyBudget : nil },
-                            set: { value in if let value { model.setMonthlyBudget(value) } else { model.forget(.monthlyBudget) } }
-                        ),
-                        decimals: false, identifier: "money-budget"
-                    )
+            if compactKnown {
+                ProfileNumberField(title: tr("Revenu"), unit: currencySymbol, value: profileBinding(\.monthlyIncome), decimals: false, identifier: "money-income")
+            } else {
+                VStack(spacing: 8) {
+                    HStack(spacing: 8) {
+                        ProfileNumberField(title: tr("Revenu"), unit: currencySymbol, value: profileBinding(\.monthlyIncome), decimals: false, identifier: "money-income")
+                        ProfileNumberField(
+                            title: tr("Budget"), unit: currencySymbol,
+                            value: Binding(
+                                get: { model.profile.knows(.monthlyBudget) ? model.budget.monthlyBudget : nil },
+                                set: { value in if let value { model.setMonthlyBudget(value) } else { model.forget(.monthlyBudget) } }
+                            ),
+                            decimals: false, identifier: "money-budget"
+                        )
+                    }
+                    ProfileNumberField(title: tr("Épargne visée"), unit: currencySymbol, value: profileBinding(\.monthlySavingsGoal), decimals: false, identifier: "money-savings")
                 }
-                ProfileNumberField(title: tr("Épargne visée"), unit: currencySymbol, value: profileBinding(\.monthlySavingsGoal), decimals: false, identifier: "money-savings")
             }
         }
         QuestionCard(title: tr("Tes principales dépenses")) {
@@ -516,6 +558,11 @@ struct TopicForm: View {
                         }
                     }
                 }
+            }
+        }
+        if compactKnown {
+            QuestionCard(title: tr("Ton objectif d'épargne"), detail: tr("Ce que tu veux mettre de côté chaque mois.")) {
+                ProfileNumberField(title: tr("Épargne visée"), unit: currencySymbol, value: profileBinding(\.monthlySavingsGoal), decimals: false, identifier: "money-savings")
             }
         }
     }
@@ -560,6 +607,7 @@ struct TopicForm: View {
     // MARK: Productivity
 
     @ViewBuilder private var productivity: some View {
+        if !inMiniApp { planningStart }
         QuestionCard(title: tr("Ton objectif du moment")) {
             ProfileTextField(placeholder: tr("Finir mon projet, lire plus…"), text: profileBinding(\.mainGoal), identifier: "productivity-goal")
         }
@@ -567,14 +615,63 @@ struct TopicForm: View {
         QuestionCard(title: tr("Ton rythme")) {
             ProfileNumberField(title: tr("Travail / étude"), unit: tr("h par jour"), value: profileBinding(\.dailyWorkHours), identifier: "work-hours")
         }
-        if !inMiniApp {
-            QuestionCard(title: tr("Une tâche pour commencer"), detail: model.content.tasks.isEmpty ? nil : Fmt.plural(model.content.tasks.filter { !$0.isDone }.count, tr("tâche à faire"), tr("tâches à faire"))) {
-                quickAdd(placeholder: tr("Ex. : appeler le garage"), text: $newTask, identifier: "first-task") {
-                    model.updateContent { $0.tasks.append(TaskItem(title: newTask.trimmed)) }
-                    newTask = ""
+    }
+
+    /// « Pour commencer » of Planning (PDG, 2026-11-22): import the timetable (a photo or a PDF, read on the
+    /// iPhone) or type the tasks by hand, whichever suits the person.
+    private var planningStart: some View {
+        let openTasks = model.content.tasks.filter { !$0.isDone }.count
+        let slots = model.student.slots.count
+        return QuestionCard(title: tr("Pour commencer"), detail: tr("Choisis comment remplir ton planning.")) {
+            VStack(spacing: 8) {
+                startChoice(
+                    symbol: "doc.viewfinder", title: tr("Importer mon emploi du temps"),
+                    detail: slots > 0 ? Fmt.plural(slots, tr("créneau dans ton horaire"), tr("créneaux dans ton horaire")) : tr("À partir d'une photo ou d'un PDF"),
+                    isPremiumOnly: !model.isPremium, identifier: "first-import-schedule"
+                ) { importsSchedule = true }
+                startChoice(
+                    symbol: "square.and.pencil", title: tr("Ajouter mes tâches à la main"),
+                    detail: openTasks > 0 ? Fmt.plural(openTasks, tr("tâche à faire"), tr("tâches à faire")) : tr("Une par une, en quelques mots"),
+                    isPremiumOnly: false, identifier: "first-tasks-by-hand"
+                ) { withAnimation(.snappy) { addsTasksByHand = true } }
+                if addsTasksByHand || openTasks > 0 {
+                    quickAdd(placeholder: tr("Ex. : appeler le garage"), text: $newTask, identifier: "first-task") {
+                        model.updateContent { $0.tasks.append(TaskItem(title: newTask.trimmed)) }
+                        newTask = ""
+                    }
                 }
             }
         }
+        .sheet(isPresented: $importsSchedule) { ScheduleImportView() }
+    }
+
+    private func startChoice(symbol: String, title: String, detail: String, isPremiumOnly: Bool, identifier: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            HStack(spacing: 12) {
+                Image(systemName: symbol)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 40, height: 40)
+                    .background(Color.accentColor.opacity(0.14), in: Circle())
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color.primary)
+                    Text(detail)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                if isPremiumOnly { PremiumBadge(compact: true) }
+                Image(systemName: "chevron.right")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(.tertiary)
+            }
+            .padding(10)
+            .background(.screenFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        }
+        .buttonStyle(.pressable)
+        .accessibilityIdentifier(identifier)
     }
 
     private func quickAdd(placeholder: String, text: Binding<String>, identifier: String, add: @escaping () -> Void) -> some View {
@@ -667,8 +764,47 @@ struct TopicForm: View {
 
     // MARK: Well-being
 
+    /// Habits to start with in one tap (PDG, 2026-11-22: Bien-être proposes the habits), each with its icon.
+    private struct HabitSuggestion: Hashable {
+        let name: String
+        let symbol: String
+    }
+
+    private static var habitSuggestions: [HabitSuggestion] {
+        [
+            HabitSuggestion(name: tr("Boire de l'eau"), symbol: "drop.fill"),
+            HabitSuggestion(name: tr("Méditer"), symbol: "brain.head.profile"),
+            HabitSuggestion(name: tr("Lire"), symbol: "book.fill"),
+            HabitSuggestion(name: tr("Marcher"), symbol: "figure.walk"),
+            HabitSuggestion(name: tr("Dormir 8 h"), symbol: "bed.double.fill"),
+            HabitSuggestion(name: tr("S'étirer"), symbol: "figure.flexibility"),
+            HabitSuggestion(name: tr("Tenir un journal"), symbol: "pencil.line"),
+            HabitSuggestion(name: tr("Moins d'écrans le soir"), symbol: "moon.fill"),
+        ]
+    }
+
     @ViewBuilder private var wellbeing: some View {
-        QuestionCard(title: tr("Une habitude à suivre"), detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, tr("habitude suivie"), tr("habitudes suivies"))) {
+        if !inMiniApp {
+            QuestionCard(title: tr("Des habitudes à suivre"), detail: tr("Touche celles qui te parlent : elles arrivent dans Habitudes.")) {
+                FlowLayout {
+                    ForEach(Self.habitSuggestions, id: \.self) { suggestion in
+                        let existing = model.content.habits.first { $0.name.caseInsensitiveCompare(suggestion.name) == .orderedSame }
+                        ChoiceChip(title: suggestion.name, symbol: suggestion.symbol, isSelected: existing != nil) {
+                            if let existing {
+                                // Only a habit never checked is taken back: a followed one stays.
+                                if existing.completedDays.isEmpty {
+                                    model.updateContent { $0.habits.removeAll { $0.id == existing.id } }
+                                }
+                            } else if !model.addHabit(Habit(name: suggestion.name, symbol: suggestion.symbol, colorHex: "7FA33A")) {
+                                paywall = .habitLimit
+                            }
+                        }
+                        .accessibilityIdentifier("habit-suggestion-\(suggestion.symbol)")
+                    }
+                }
+            }
+        }
+        QuestionCard(title: inMiniApp ? tr("Une habitude à suivre") : tr("Une autre habitude"), detail: model.content.habits.isEmpty ? nil : Fmt.plural(model.content.habits.count, tr("habitude suivie"), tr("habitudes suivies"))) {
             quickAdd(placeholder: tr("Ex. : méditer, lire, marcher"), text: $newHabit, identifier: "first-habit") {
                 // At the free limit: the paywall opens and the text typed stays.
                 guard model.addHabit(Habit(name: newHabit.trimmed, symbol: "checkmark.circle", colorHex: "7FA33A")) else {
@@ -689,7 +825,7 @@ struct InterestGrid: View {
 
     var body: some View {
         LazyVGrid(columns: [GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10), GridItem(.flexible(), spacing: 10)], spacing: 10) {
-            ForEach(Interest.allCases) { interest in
+            ForEach(Interest.offered(keeping: selection)) { interest in
                 let isOn = selection.contains(interest)
                 Button {
                     withAnimation(.snappy(duration: 0.2)) {
@@ -703,22 +839,13 @@ struct InterestGrid: View {
                             .foregroundStyle(isOn ? .white : Color(hex: interest.colorHex))
                             .frame(width: 44, height: 44)
                             .background(isOn ? Color(hex: interest.colorHex) : Color(hex: interest.colorHex).opacity(0.14), in: Circle())
-                        VStack(spacing: 2) {
-                            Text(interest.title)
-                                .font(.footnote.weight(.semibold))
-                                .foregroundStyle(Color.primary)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.8)
-                            if let hint = interest.hint {
-                                Text(hint)
-                                    .font(.caption2)
-                                    .foregroundStyle(.secondary)
-                                    .multilineTextAlignment(.center)
-                                    .lineLimit(3)
-                                    .minimumScaleFactor(0.85)
-                            }
-                        }
-                        .padding(.horizontal, 4)
+                        // The title only (PDG, 2026-11-22: no words under Études and Planning).
+                        Text(interest.title)
+                            .font(.footnote.weight(.semibold))
+                            .foregroundStyle(Color.primary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                            .padding(.horizontal, 4)
                     }
                     .frame(maxWidth: .infinity, minHeight: 96)
                     .cristalPanel(radius: 18)
@@ -737,7 +864,6 @@ struct InterestGrid: View {
                 }
                 .buttonStyle(.pressable)
                 .accessibilityLabel(Text(interest.title))
-                .accessibilityHint(Text(interest.hint ?? ""))
                 .accessibilityAddTraits(isOn ? .isSelected : [])
                 .accessibilityIdentifier("interest-\(interest.rawValue)")
             }

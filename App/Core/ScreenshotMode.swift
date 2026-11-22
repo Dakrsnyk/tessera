@@ -66,7 +66,7 @@ enum ScreenshotMode {
             model.update(\.profile) { profile in
                 profile = UserProfile()
                 profile.migrated = true
-                profile.interests = Interest.allCases.filter { topic != nil && $0.topic == topic }
+                profile.interests = Interest.allCases.filter { topic != nil && $0.topics.first == topic }
             }
             // A new person has arranged nothing in « Mon Quotidien »: an earlier test that moved, resized or removed
             // cards would otherwise leave its order to this first launch (run 449: Nutrition was found last).

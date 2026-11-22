@@ -154,7 +154,7 @@ final class ProfileUITests: XCTestCase {
         // The goal chosen in Sport is not asked again: a summary with « Modifier », not the list of chips.
         XCTAssertEqual(aim.identifier, "nutrition-aim-edit", "L'objectif choisi dans Sport doit être résumé, avec « Modifier »")
         XCTAssertTrue(app.staticTexts["Prise de masse"].exists, "Le résumé doit nommer l'objectif choisi dans Sport")
-        XCTAssertFalse(app.buttons["nutrition-aim-weightLoss"].exists, "La liste des objectifs ne doit pas être redemandée")
+        XCTAssertFalse(app.buttons["nutrition-aim-weightLoss-none"].exists, "La liste des objectifs ne doit pas être redemandée")
         snapshot("nutrition-goal-known")
         // No number to type: the needs are calculated from the body (the weight was given for sport).
         // Nothing here may reach « C'est parti » (the bar of the last page, right above the number pad).
