@@ -21,6 +21,9 @@ enum WeekDayKind: Equatable {
 /// how far it got). `leadingInset` leaves room on the left for the hours column of a week table placed
 /// right below, so that its columns sit under the days.
 struct WeekSelector: View {
+    /// The side margin inside the card: the card keeps the width of the other cards of the screen, and a week table
+    /// under it (Planning, `leadingInset`) takes the same margin so its columns stay under the days (2026-11-22).
+    static let cardInset: CGFloat = 8
     @Binding var day: Date
     let colorHex: String
     /// Logs (meals, spending) stop at today; plans look ahead too.
@@ -54,12 +57,9 @@ struct WeekSelector: View {
             .transition(.push(from: forward ? .trailing : .leading))
             .simultaneousGesture(swipe(canGoForward: canGoForward))
         }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, Self.cardInset)
         .padding(.vertical, 4)
         .cristalGlass(in: RoundedRectangle(cornerRadius: CristalPalette.of(style.id).radius, style: .continuous))
-        // Beside a week table (`leadingInset`) the columns must stay under the days: the card grows by its own 8-pt
-        // margin on each side instead (it used to have none, so the first and last pills touched the card's edge).
-        .padding(.horizontal, leadingInset > 0 ? -8 : 0)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("week-card")
     }
