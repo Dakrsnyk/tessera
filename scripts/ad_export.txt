@@ -723,3 +723,16 @@ only camp-assignments-m-st-aurora-done camp-assignments-m-st-dark-done camp-busi
 widget camp-quickExpense-s-st-light kind=quickExpense family=small scale=4 theme=light
 widget camp-quickExpense-s-st-light-spent kind=quickExpense family=small scale=4 theme=light spent=1
 only camp-quickExpense-s-st-light camp-quickExpense-s-st-light-spent camp-quickExpense-s-st-dark-spent camp-quickExpense-s-st-neon-spent
+# --- Pub organique « Guess my budget » (2026-11-22) : Finances en un seul run (avant/après la dépense rapide, styles après, écran verrouillé)
+widget camp-budgetLeft-s-st-minimal-spent kind=budgetLeft family=small scale=4 theme=minimal spent=1
+widget camp-budgetLeft-s-st-pastel-spent kind=budgetLeft family=small scale=4 theme=pastel spent=1
+widget camp-budgetLeft-s-st-blossom-spent kind=budgetLeft family=small scale=4 theme=blossom spent=1
+widget camp-budgetLeft-s-st-aurora-spent kind=budgetLeft family=small scale=4 theme=aurora scheme=dark spent=1
+widget camp-budgetLeft-s-st-neon-spent kind=budgetLeft family=small scale=4 theme=neon scheme=dark spent=1
+widget camp-quickExpense-s-st-minimal-spent kind=quickExpense family=small scale=4 theme=minimal spent=1
+widget camp-quickExpense-s-st-pastel-spent kind=quickExpense family=small scale=4 theme=pastel spent=1
+widget camp-quickExpense-s-st-blossom-spent kind=quickExpense family=small scale=4 theme=blossom spent=1
+widget camp-quickExpense-s-st-aurora-spent kind=quickExpense family=small scale=4 theme=aurora scheme=dark spent=1
+widget camp-lock-budgetLeft-rect kind=budgetLeft family=rect scale=4
+widget camp-lock-budgetLeft-rect-spent kind=budgetLeft family=rect scale=4 spent=1
+only camp-budgetLeft-s-light camp-budgetLeft-s-light-spent camp-quickExpense-s-light camp-quickExpense-s-light-spent camp-budgetLeft-s-st-dark-spent camp-budgetLeft-s-st-minimal-spent camp-budgetLeft-s-st-pastel-spent camp-budgetLeft-s-st-blossom-spent camp-budgetLeft-s-st-aurora-spent camp-budgetLeft-s-st-neon-spent camp-quickExpense-s-st-dark-spent camp-quickExpense-s-st-neon-spent camp-quickExpense-s-st-minimal-spent camp-quickExpense-s-st-pastel-spent camp-quickExpense-s-st-blossom-spent camp-quickExpense-s-st-aurora-spent camp-lock-budgetLeft-rect camp-lock-budgetLeft-rect-spent
