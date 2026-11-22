@@ -841,3 +841,28 @@ widget camp-disc-savingsGoal-s-mars kind=savingsGoal family=small scale=4 theme=
 widget camp-disc-savingsGoal-s-luxury kind=savingsGoal family=small scale=4 theme=luxury scheme=dark
 widget camp-disc-savingsGoal-s-neon kind=savingsGoal family=small scale=4 theme=neon accent=E5383B scheme=dark
 only camp-disc-habits-m-matte-todo camp-disc-habits-m-matte camp-disc-habits-m-carbon camp-disc-habits-m-mars camp-disc-habits-m-luxury camp-disc-habits-m-neon camp-disc-savingsGoal-s-matte camp-disc-savingsGoal-s-carbon camp-disc-savingsGoal-s-mars camp-disc-savingsGoal-s-luxury camp-disc-savingsGoal-s-neon
+
+# --- Pub organique niche Auto « For people who forget their oil change » (2026-11-22) : Prochain entretien moyen avant/après « Fait aujourd'hui » (service=done), Carburant et Échéances auto en petit, en 7 styles, un seul run (carCost et mileage écartés : titre « Civic 2019 »)
+widget camp-auto-nextService-m-st-light kind=nextService family=medium scale=3 theme=light
+widget camp-auto-nextService-m-st-light-done kind=nextService family=medium scale=3 theme=light service=done
+widget camp-auto-nextService-m-st-dark-done kind=nextService family=medium scale=3 theme=dark scheme=dark service=done
+widget camp-auto-nextService-m-st-minimal-done kind=nextService family=medium scale=3 theme=minimal service=done
+widget camp-auto-nextService-m-st-pastel-done kind=nextService family=medium scale=3 theme=pastel service=done
+widget camp-auto-nextService-m-st-blossom-done kind=nextService family=medium scale=3 theme=blossom service=done
+widget camp-auto-nextService-m-st-aurora-done kind=nextService family=medium scale=3 theme=aurora scheme=dark service=done
+widget camp-auto-nextService-m-st-neon-done kind=nextService family=medium scale=3 theme=neon scheme=dark service=done
+widget camp-auto-fuelStats-s-st-light kind=fuelStats family=small scale=4 theme=light
+widget camp-auto-fuelStats-s-st-dark kind=fuelStats family=small scale=4 theme=dark scheme=dark
+widget camp-auto-fuelStats-s-st-minimal kind=fuelStats family=small scale=4 theme=minimal
+widget camp-auto-fuelStats-s-st-pastel kind=fuelStats family=small scale=4 theme=pastel
+widget camp-auto-fuelStats-s-st-blossom kind=fuelStats family=small scale=4 theme=blossom
+widget camp-auto-fuelStats-s-st-aurora kind=fuelStats family=small scale=4 theme=aurora scheme=dark
+widget camp-auto-fuelStats-s-st-neon kind=fuelStats family=small scale=4 theme=neon scheme=dark
+widget camp-auto-carDeadlines-s-st-light kind=carDeadlines family=small scale=4 theme=light
+widget camp-auto-carDeadlines-s-st-dark kind=carDeadlines family=small scale=4 theme=dark scheme=dark
+widget camp-auto-carDeadlines-s-st-minimal kind=carDeadlines family=small scale=4 theme=minimal
+widget camp-auto-carDeadlines-s-st-pastel kind=carDeadlines family=small scale=4 theme=pastel
+widget camp-auto-carDeadlines-s-st-blossom kind=carDeadlines family=small scale=4 theme=blossom
+widget camp-auto-carDeadlines-s-st-aurora kind=carDeadlines family=small scale=4 theme=aurora scheme=dark
+widget camp-auto-carDeadlines-s-st-neon kind=carDeadlines family=small scale=4 theme=neon scheme=dark
+only camp-auto-nextService-m-st-light camp-auto-nextService-m-st-light-done camp-auto-nextService-m-st-dark-done camp-auto-nextService-m-st-minimal-done camp-auto-nextService-m-st-pastel-done camp-auto-nextService-m-st-blossom-done camp-auto-nextService-m-st-aurora-done camp-auto-nextService-m-st-neon-done camp-auto-fuelStats-s-st-light camp-auto-fuelStats-s-st-dark camp-auto-fuelStats-s-st-minimal camp-auto-fuelStats-s-st-pastel camp-auto-fuelStats-s-st-blossom camp-auto-fuelStats-s-st-aurora camp-auto-fuelStats-s-st-neon camp-auto-carDeadlines-s-st-light camp-auto-carDeadlines-s-st-dark camp-auto-carDeadlines-s-st-minimal camp-auto-carDeadlines-s-st-pastel camp-auto-carDeadlines-s-st-blossom camp-auto-carDeadlines-s-st-aurora camp-auto-carDeadlines-s-st-neon
