@@ -185,20 +185,19 @@ struct PermissionRowCard: View {
     }
 }
 
-/// The page itself, inside the onboarding's scroll view.
+/// The page itself, inside the onboarding's scroll view: the notifications only (PDG, 2026-11-22). The camera, the
+/// calendar and the motion are asked when they are first used (the first scan of a meal, the calendar in Planning,
+/// the steps in Fitness), each behind its own explanation; all of them stay in Profil › Autorisations.
 struct PermissionsStep: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             StepTitle(
-                symbol: "hand.raised.fill", colorHex: "34C759",
-                title: tr("Autorisations"),
-                message: tr("Active seulement ce qui t'est utile. Chaque accès est expliqué avant qu'iOS te le demande, et tu peux continuer sans.")
+                symbol: "bell.badge.fill", colorHex: "34C759",
+                title: tr("Notifications"),
+                message: tr("Les autres accès (caméra, calendrier, mouvement) te seront demandés au moment où tu en auras besoin.")
             )
-            // Every notification in one go (PDG, 2026-11-22): one card, one iOS prompt, instead of a request per mini-app.
+            // Every notification in one go: one card, one iOS prompt, instead of a request per mini-app.
             AllNotificationsCard()
-            ForEach(PermissionsSetup.order.filter { $0 != .notifications }) { permission in
-                PermissionRowCard(permission: permission)
-            }
             Text(tr("Tu retrouveras tout dans Profil › Autorisations."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)

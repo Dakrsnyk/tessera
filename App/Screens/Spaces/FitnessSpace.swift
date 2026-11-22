@@ -128,7 +128,6 @@ struct RoutineEditor: View {
     @State private var paywall: PaywallContext?
     /// The exercise held to be moved, how far the finger went since the last swap, and what was already swapped.
     @State private var heldID: UUID?
-    @State private var heldOffset: CGFloat = 0
     @State private var swapped: CGFloat = 0
     @State private var heights: [UUID: CGFloat] = [:]
 
@@ -273,6 +272,7 @@ struct RoutineEditor: View {
             moveArrow("arrow.down", label: tr("Descendre"), enabled: index + 1 < routine.exercises.count) { shift(id, by: 1) }
         }
         .font(.footnote.weight(.semibold))
+        .textCase(nil)
     }
 
     private func moveArrow(_ symbol: String, label: String, enabled: Bool, action: @escaping () -> Void) -> some View {
@@ -317,13 +317,11 @@ struct RoutineEditor: View {
             dy -= sign * step
             Haptics.tap()
         }
-        heldOffset = dy
     }
 
     private func drop() {
         withAnimation(.snappy) {
             heldID = nil
-            heldOffset = 0
         }
         swapped = 0
     }

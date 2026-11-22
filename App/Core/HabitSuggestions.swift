@@ -25,6 +25,8 @@ enum HabitSuggestions {
 
     /// The color the first version of these suggestions gave to all of them (the green of Habitudes).
     static let formerColorHex = "7FA33A"
+    /// Set once the former suggestions were recolored at launch (it is done a single time).
+    static let recoloredKey = "habitSuggestionsRecolored"
 
     /// The habits added from a suggestion by the first version (same name and icon, still in its single green) take
     /// the suggestion's own color. Any other habit, or one whose color the person changed, is left as it is.

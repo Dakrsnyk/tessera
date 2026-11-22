@@ -2343,7 +2343,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:106: Label(tr(\"Accordée\"), systemImage: \"checkmark.circle.fill\")",
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:265: Label(tr(\"Accordée\"), systemImage: \"checkmark.circle.fill\")"
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:264: Label(tr(\"Accordée\"), systemImage: \"checkmark.circle.fill\")"
   ]
  },
  "Accroupis-toi et pose les mains au sol.": {
@@ -2505,12 +2505,6 @@
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:131: title: last == nil ? tr(\"À configurer\") : tr(\"Active\"),"
   ]
  },
- "Active seulement ce qui t'est utile. Chaque accès est expliqué avant qu'iOS te le demande, et tu peux continuer sans.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:195: message: tr(\"Active seulement ce qui t'est utile. Chaque accès est expliqué avant qu'iOS te le demande, et tu peux continuer sans.\")"
-  ]
- },
  "Active · dernière dépense %@": {
   "placeholders": 1,
   "uses": [
@@ -2526,7 +2520,7 @@
  "Activer les notifications": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:286: Text(tr(\"Activer les notifications\"))"
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:285: Text(tr(\"Activer les notifications\"))"
   ]
  },
  "Activité": {
@@ -5049,7 +5043,6 @@
  "Autorisations": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:194: title: tr(\"Autorisations\"),",
    "App/Screens/Profile/PermissionsSettingsView.swift:36: .navigationTitle(tr(\"Autorisations\"))",
    "App/Screens/Profile/ProfileView.swift:144: NavigationLink { PermissionsSettingsView() } label: { Label(tr(\"Autorisations\"), systemImage: \"hand.raised\") }"
   ]
@@ -6499,7 +6492,7 @@
  "C'est fait : tu peux changer chaque famille dans Profil › Rappels.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:310: Text(tr(\"C'est fait : tu peux changer chaque famille dans Profil › Rappels.\"))"
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:309: Text(tr(\"C'est fait : tu peux changer chaque famille dans Profil › Rappels.\"))"
   ]
  },
  "C'est l'arrière de l'épaule qui travaille : charge légère.": {
@@ -8090,7 +8083,7 @@
  "Choisis ce qui t'intéresse, puis autorise une seule fois : chaque mini-app en profite.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:237: Text(tr(\"Choisis ce qui t'intéresse, puis autorise une seule fois : chaque mini-app en profite.\"))"
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:236: Text(tr(\"Choisis ce qui t'intéresse, puis autorise une seule fois : chaque mini-app en profite.\"))"
   ]
  },
  "Choisis comment remplir ton planning.": {
@@ -16535,7 +16528,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:146: Text(tr(\"L'accès est refusé. Tu peux l'activer dans Réglages › Ardane, ou continuer sans.\"))",
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:296: Text(tr(\"L'accès est refusé. Tu peux l'activer dans Réglages › Ardane, ou continuer sans.\"))"
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:295: Text(tr(\"L'accès est refusé. Tu peux l'activer dans Réglages › Ardane, ou continuer sans.\"))"
   ]
  },
  "L'accès à la caméra est refusé pour Ardane. Tu peux l'autoriser dans Réglages › Ardane, ou continuer sans la caméra.": {
@@ -17997,6 +17990,12 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PremiumStore.swift:105: return tr(\"Les achats ne sont pas autorisés sur cet appareil.\")"
+  ]
+ },
+ "Les autres accès (caméra, calendrier, mouvement) te seront demandés au moment où tu en auras besoin.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:197: message: tr(\"Les autres accès (caméra, calendrier, mouvement) te seront demandés au moment où tu en auras besoin.\")"
   ]
  },
  "Les autres semaines restent dans l'horaire.": {
@@ -21232,6 +21231,7 @@
   "placeholders": 0,
   "uses": [
    "App/Components/PermissionExplainer.swift:70: case .notifications: tr(\"Notifications\")",
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:196: title: tr(\"Notifications\"),",
    "App/Screens/Profile/ProfileView.swift:134: Text(tr(\"Notifications\"))"
   ]
  },
@@ -22662,7 +22662,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:114: Text(tr(\"Pas encore demandée\"))",
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:273: Text(tr(\"Pas encore demandée\"))",
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:272: Text(tr(\"Pas encore demandée\"))",
    "App/Screens/Profile/ProfileView.swift:510: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
   ]
  },
@@ -25733,7 +25733,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:110: Label(tr(\"Refusée\"), systemImage: \"xmark.circle.fill\")",
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:269: Label(tr(\"Refusée\"), systemImage: \"xmark.circle.fill\")",
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:268: Label(tr(\"Refusée\"), systemImage: \"xmark.circle.fill\")",
    "App/Screens/Profile/ProfileView.swift:128: if notificationStatus == tr(\"Refusée\") {",
    "App/Screens/Profile/ProfileView.swift:509: case .denied: notificationStatus = tr(\"Refusée\")"
   ]
@@ -32455,7 +32455,7 @@
  "Toutes tes notifications en une fois": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:230: Text(tr(\"Toutes tes notifications en une fois\"))"
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:229: Text(tr(\"Toutes tes notifications en une fois\"))"
   ]
  },
  "Tractions": {
@@ -32643,7 +32643,7 @@
  "Tu retrouveras tout dans Profil › Autorisations.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/PermissionsSetupStep.swift:202: Text(tr(\"Tu retrouveras tout dans Profil › Autorisations.\"))"
+   "App/Screens/Onboarding/PermissionsSetupStep.swift:201: Text(tr(\"Tu retrouveras tout dans Profil › Autorisations.\"))"
   ]
  },
  "Tunis": {

@@ -18331,53 +18331,6 @@
         }
       }
     },
-    "Active seulement ce qui t'est utile. Chaque accès est expliqué avant qu'iOS te le demande, et tu peux continuer sans.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aktiviere nur, was dir nützt. Jeder Zugriff wird erklärt, bevor iOS dich fragt, und du kannst auch ohne weitermachen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Turn on only what's useful to you. Each permission is explained before iOS asks for it, and you can continue without."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activa solo lo que te sirva. Cada acceso se explica antes de que iOS te lo pida, y puedes continuar sin él."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Active seulement ce qui t'est utile. Chaque accès est expliqué avant qu'iOS te le demande, et tu peux continuer sans."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attiva solo ciò che ti serve. Ogni accesso è spiegato prima che iOS te lo chieda, e puoi continuare anche senza."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "必要なものだけオンにしてね。各アクセスはiOSが確認する前に説明します。なしで続けることもできます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ative só o que for útil para você. Cada acesso é explicado antes de o iOS pedir, e você pode continuar sem ele."
-          }
-        }
-      }
-    },
     "Active · dernière dépense %@": {
       "extractionState": "manual",
       "localizations": {
@@ -133947,6 +133900,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "As compras não são permitidas neste dispositivo."
+          }
+        }
+      }
+    },
+    "Les autres accès (caméra, calendrier, mouvement) te seront demandés au moment où tu en auras besoin.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die anderen Zugriffe (Kamera, Kalender, Bewegung) werden erst abgefragt, wenn du sie brauchst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The other permissions (camera, calendar, motion) will be asked when you need them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los demás accesos (cámara, calendario, movimiento) se te pedirán cuando los necesites."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les autres accès (caméra, calendrier, mouvement) te seront demandés au moment où tu en auras besoin."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli altri accessi (fotocamera, calendario, movimento) ti verranno chiesti quando ti serviranno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ほかのアクセス（カメラ、カレンダー、モーション）は、必要になったときにお願いします。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os outros acessos (câmera, calendário, movimento) serão pedidos quando você precisar deles."
           }
         }
       }

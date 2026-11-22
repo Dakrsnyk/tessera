@@ -104,10 +104,14 @@ final class AppModel {
         migrateProfile()
         migrateStudyGoal()
         // The habits of the first Bien-être suggestions, all in one green, take their own color (2026-11-22).
-        var recolored = content.habits
-        if HabitSuggestions.recolor(&recolored) {
-            content.habits = recolored
-            store.content = content
+        // Once only: a color the person sets again later is theirs.
+        if !UserDefaults.standard.bool(forKey: HabitSuggestions.recoloredKey) {
+            var recolored = content.habits
+            if HabitSuggestions.recolor(&recolored) {
+                content.habits = recolored
+                store.content = content
+            }
+            UserDefaults.standard.set(true, forKey: HabitSuggestions.recoloredKey)
         }
         migrateDailyLayout()
         insights = InsightCache.load()
