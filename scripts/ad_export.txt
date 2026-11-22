@@ -866,3 +866,5 @@ widget camp-auto-carDeadlines-s-st-blossom kind=carDeadlines family=small scale=
 widget camp-auto-carDeadlines-s-st-aurora kind=carDeadlines family=small scale=4 theme=aurora scheme=dark
 widget camp-auto-carDeadlines-s-st-neon kind=carDeadlines family=small scale=4 theme=neon scheme=dark
 only camp-auto-nextService-m-st-light camp-auto-nextService-m-st-light-done camp-auto-nextService-m-st-dark-done camp-auto-nextService-m-st-minimal-done camp-auto-nextService-m-st-pastel-done camp-auto-nextService-m-st-blossom-done camp-auto-nextService-m-st-aurora-done camp-auto-nextService-m-st-neon-done camp-auto-fuelStats-s-st-light camp-auto-fuelStats-s-st-dark camp-auto-fuelStats-s-st-minimal camp-auto-fuelStats-s-st-pastel camp-auto-fuelStats-s-st-blossom camp-auto-fuelStats-s-st-aurora camp-auto-fuelStats-s-st-neon camp-auto-carDeadlines-s-st-light camp-auto-carDeadlines-s-st-dark camp-auto-carDeadlines-s-st-minimal camp-auto-carDeadlines-s-st-pastel camp-auto-carDeadlines-s-st-blossom camp-auto-carDeadlines-s-st-aurora camp-auto-carDeadlines-s-st-neon
+
+# --- Fin des exports de la nuit du 2026-11-22 (production arrêtée).
