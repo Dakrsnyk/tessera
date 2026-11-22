@@ -219,6 +219,11 @@ enum AdExport {
             let quick = payload.domains.budget.quickExpenses[spent - 1]
             payload.domains.budget.add(Expense(amount: quick.amount, categoryID: quick.categoryID, note: quick.name, date: MK.now))
         }
+        // meal=photo (ads, 2026-11-22): the dish of the photo scan demo (`NutritionScreenshotStage.demoRecap`) logged now,
+        // as « Add to log » of the recap does: the Nutrition widgets just after the scan.
+        if job.string("meal") == "photo" {
+            _ = NutritionScreenshotStage.demoRecap(photo: true).commit(into: &payload.domains.nutrition, meal: MealType.current(at: MK.now), at: MK.now)
+        }
         // trip=ahead|ongoing (ads, 2026-11-20): the Travel sample before the departure or under way, whatever the kind.
         if let phase = job.string("trip") {
             payload.domains.travel = SampleData.travel(now: MK.now, ongoing: phase == "ongoing")

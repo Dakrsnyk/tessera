@@ -736,3 +736,12 @@ widget camp-quickExpense-s-st-aurora-spent kind=quickExpense family=small scale=
 widget camp-lock-budgetLeft-rect kind=budgetLeft family=rect scale=4
 widget camp-lock-budgetLeft-rect-spent kind=budgetLeft family=rect scale=4 spent=1
 only camp-budgetLeft-s-light camp-budgetLeft-s-light-spent camp-quickExpense-s-light camp-quickExpense-s-light-spent camp-budgetLeft-s-st-dark-spent camp-budgetLeft-s-st-minimal-spent camp-budgetLeft-s-st-pastel-spent camp-budgetLeft-s-st-blossom-spent camp-budgetLeft-s-st-aurora-spent camp-budgetLeft-s-st-neon-spent camp-quickExpense-s-st-dark-spent camp-quickExpense-s-st-neon-spent camp-quickExpense-s-st-minimal-spent camp-quickExpense-s-st-pastel-spent camp-quickExpense-s-st-blossom-spent camp-quickExpense-s-st-aurora-spent camp-lock-budgetLeft-rect camp-lock-budgetLeft-rect-spent
+# --- Pub organique « Scan it, don't type it » (2026-11-22) : Calories left avant et après « Add to log » du plat scanné (Pexels 34453034), un seul run
+widget camp-caloriesLeft-m-st-light-scan kind=caloriesLeft family=medium scale=3 theme=light meal=photo
+widget camp-caloriesLeft-m-st-dark-scan kind=caloriesLeft family=medium scale=3 theme=dark scheme=dark meal=photo
+widget camp-caloriesLeft-m-st-minimal-scan kind=caloriesLeft family=medium scale=3 theme=minimal meal=photo
+widget camp-caloriesLeft-m-st-pastel-scan kind=caloriesLeft family=medium scale=3 theme=pastel meal=photo
+widget camp-caloriesLeft-m-st-blossom-scan kind=caloriesLeft family=medium scale=3 theme=blossom meal=photo
+widget camp-caloriesLeft-m-st-aurora-scan kind=caloriesLeft family=medium scale=3 theme=aurora scheme=dark meal=photo
+widget camp-caloriesLeft-m-st-neon-scan kind=caloriesLeft family=medium scale=3 theme=neon scheme=dark meal=photo
+only camp-caloriesLeft-m-st-light camp-caloriesLeft-m-st-light-scan camp-caloriesLeft-m-st-dark-scan camp-caloriesLeft-m-st-minimal-scan camp-caloriesLeft-m-st-pastel-scan camp-caloriesLeft-m-st-blossom-scan camp-caloriesLeft-m-st-aurora-scan camp-caloriesLeft-m-st-neon-scan
