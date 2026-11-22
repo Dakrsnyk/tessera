@@ -328,20 +328,43 @@ struct TopicForm: View {
         Binding<Double?>(get: { model.profile.weightKg }, set: { model.setWeight($0) }).weight(in: model.settings.unitSystem)
     }
 
-    /// Age, height and weight side by side (also used by the nutrition calculation). Nutrition asks the weight
-    /// first (PDG, 2026-11-22): weight, age, height.
-    private func bodyFields(weightFirst: Bool = false) -> some View {
+    /// The order of the three body fields (PDG, 2026-11-22): Nutrition asks the weight first (weight, age, height),
+    /// Fitness the age, the weight, then the height; elsewhere age, height, weight as before.
+    enum BodyOrder {
+        case ageHeightWeight, weightAgeHeight, ageWeightHeight
+    }
+
+    /// Age, height and weight side by side (also used by the nutrition calculation), in the order of the page.
+    private func bodyFields(order: BodyOrder = .ageHeightWeight) -> some View {
         HStack(spacing: 8) {
-            if weightFirst { weightField }
-            ProfileNumberField(title: tr("Âge"), unit: tr("ans"), value: ageBinding, decimals: false, identifier: "profile-age")
-                .disabled(model.life.birthday != nil)
-            if model.settings.unitSystem == .imperial {
-                ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("ft"), value: heightBinding.heightFeet(), decimals: false, identifier: "profile-height-feet")
-                ProfileNumberField(title: tr("Pouces"), unit: tr("in"), value: heightBinding.heightInches(), decimals: false, identifier: "profile-height-inches")
-            } else {
-                ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
+            switch order {
+            case .ageHeightWeight:
+                ageField
+                heightFields
+                weightField
+            case .weightAgeHeight:
+                weightField
+                ageField
+                heightFields
+            case .ageWeightHeight:
+                ageField
+                weightField
+                heightFields
             }
-            if !weightFirst { weightField }
+        }
+    }
+
+    private var ageField: some View {
+        ProfileNumberField(title: tr("Âge"), unit: tr("ans"), value: ageBinding, decimals: false, identifier: "profile-age")
+            .disabled(model.life.birthday != nil)
+    }
+
+    @ViewBuilder private var heightFields: some View {
+        if model.settings.unitSystem == .imperial {
+            ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("ft"), value: heightBinding.heightFeet(), decimals: false, identifier: "profile-height-feet")
+            ProfileNumberField(title: tr("Pouces"), unit: tr("in"), value: heightBinding.heightInches(), decimals: false, identifier: "profile-height-inches")
+        } else {
+            ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
         }
     }
 
@@ -360,11 +383,11 @@ struct TopicForm: View {
 
     /// « Toi » (age, height, weight, gender), the same card in Sport and in Nutrition: when everything is
     /// already known on a first-launch page, a summary with « Modifier » instead of the fields.
-    private func bodyCard(detail: String, identifier: String, weightFirst: Bool = false) -> some View {
+    private func bodyCard(detail: String, identifier: String, order: BodyOrder = .ageHeightWeight) -> some View {
         QuestionCard(title: tr("Toi"), detail: showsBodyFields ? detail : tr("Déjà renseigné : tu peux le modifier.")) {
             if showsBodyFields {
                 VStack(alignment: .leading, spacing: 10) {
-                    bodyFields(weightFirst: weightFirst)
+                    bodyFields(order: order)
                     GenderPicker()
                 }
             } else {
@@ -388,11 +411,11 @@ struct TopicForm: View {
 
     /// « Ton objectif »: one question, one answer for Sport and Nutrition (`UserProfile.goal`), the same list
     /// on both pages. Already chosen on an earlier first-launch page: shown, with « Modifier ».
-    private func goalCard(identifierPrefix: String) -> some View {
-        QuestionCard(title: tr("Ton objectif"), detail: showsGoalChips ? tr("Le même pour Sport et Nutrition.") : tr("Déjà choisi : tu peux le changer.")) {
+    private func goalCard(identifierPrefix: String, goals: [FitnessGoal] = FitnessGoal.displayOrder, detail: String? = nil) -> some View {
+        QuestionCard(title: tr("Ton objectif"), detail: showsGoalChips ? (detail ?? tr("Le même pour Sport et Nutrition.")) : tr("Déjà choisi : tu peux le changer.")) {
             if showsGoalChips {
                 FlowLayout {
-                    ForEach(FitnessGoal.displayOrder) { goal in
+                    ForEach(goals) { goal in
                         ChoiceChip(title: goal.title, isSelected: profile.goal == goal) {
                             model.setGoal(profile.goal == goal ? nil : goal)
                         }
@@ -432,21 +455,38 @@ struct TopicForm: View {
 
     // MARK: Sport
 
+    /// Fitness (PDG, 2026-11-22): the person first (age, weight, height), then questions that follow the answers
+    /// (`FitnessAdvice`): the goals that fit the body first and none unsafe for a minor, a level hint, the sessions
+    /// a week that fit the level, the goal and the age. No pregnancy question here: it is asked only where a weight
+    /// plan needs it (Nutrition, `WeightPlanQuestions`).
     @ViewBuilder private var sport: some View {
-        goalCard(identifierPrefix: "sport-goal")
-        // Asked for any loss or gain, wherever the goal was chosen.
-        LifeStageQuestion(compactKnown: compactKnown)
-        QuestionCard(title: tr("Ton niveau")) {
+        let minor = profile.isMinor(birthday: model.life.birthday)
+        let bmi = FitnessAdvice.bmi(weightKg: profile.weightKg, heightCm: profile.heightCm)
+        let suggested = FitnessAdvice.suggestedFirst(bmi: bmi)
+        bodyCard(
+            detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Pour adapter les questions suivantes. Le poids sert aussi à estimer les calories brûlées."),
+            identifier: "sport-body-edit",
+            order: .ageWeightHeight
+        )
+        goalCard(
+            identifierPrefix: "sport-goal",
+            goals: FitnessAdvice.goals(bmi: bmi, isMinor: minor),
+            detail: suggested.isEmpty ? nil : tr("Les plus adaptés à ton profil sont en premier. Le même objectif pour Sport et Nutrition.")
+        )
+        QuestionCard(title: tr("Ton niveau"), detail: levelDetail) {
             FlowLayout {
                 ForEach(FitnessLevel.allCases) { level in
                     ChoiceChip(title: level.title, isSelected: profile.fitnessLevel == level) { toggle(\.fitnessLevel, level) }
+                        .accessibilityIdentifier("sport-level-\(level.rawValue)")
                 }
             }
         }
-        QuestionCard(title: tr("Séances par semaine"), detail: tr("Le widget Régularité suit cet objectif.")) {
+        let advised = FitnessAdvice.sessions(level: profile.fitnessLevel, goal: profile.goal, age: model.age, isMinor: minor)
+        QuestionCard(title: tr("Séances par semaine"), detail: sessionsDetail(advised)) {
             HStack(spacing: 6) {
                 ForEach(1...7, id: \.self) { count in
                     let isOn = profile.knows(.weeklyWorkouts) && model.fitness.weeklyGoal == count
+                    let isAdvised = advised?.contains(count) == true
                     Button {
                         if isOn { model.forget(.weeklyWorkouts) } else { model.setWeeklyWorkouts(count) }
                     } label: {
@@ -455,17 +495,38 @@ struct TopicForm: View {
                             .foregroundStyle(isOn ? AnyShapeStyle(.onAccent) : AnyShapeStyle(Color.primary))
                             .frame(maxWidth: .infinity, minHeight: 40)
                             .background(isOn ? AnyShapeStyle(Color.accentColor) : AnyShapeStyle(AppFill.screenFill), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                            .overlay {
+                                // The advised counts, outlined in the accent (never chosen for the person).
+                                if isAdvised && !isOn {
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .strokeBorder(Color.accentColor.opacity(0.7), lineWidth: 1.5)
+                                }
+                            }
                     }
                     .buttonStyle(.pressable)
                     .accessibilityLabel(Text(Fmt.plural(count, tr("séance"), tr("séances"))))
+                    .accessibilityHint(Text(isAdvised ? tr("Conseillé pour toi") : ""))
                     .accessibilityAddTraits(isOn ? .isSelected : [])
                 }
             }
         }
-        bodyCard(
-            detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Le poids sert aussi à estimer les calories brûlées."),
-            identifier: "sport-body-edit"
-        )
+    }
+
+    /// Under « Ton niveau »: a word of prudence for a beginner from 60 years old or under 18, else nothing.
+    private var levelDetail: String? {
+        let minor = profile.isMinor(birthday: model.life.birthday)
+        if minor { return tr("Avant 18 ans, privilégie la technique et des charges légères.") }
+        if let age = model.age, age >= 60 { return tr("Commence doucement : tu pourras changer de niveau plus tard.") }
+        return nil
+    }
+
+    /// « Conseillé pour toi : 3 à 4 séances » once the level is known, else what the number is for.
+    private func sessionsDetail(_ advised: ClosedRange<Int>?) -> String {
+        guard let advised else { return tr("Choisis ton niveau pour un conseil. Le widget Régularité suit cet objectif.") }
+        if advised.lowerBound == advised.upperBound {
+            return tr("Conseillé pour toi : \(Fmt.plural(advised.lowerBound, tr("séance"), tr("séances"))). Le widget Régularité suit cet objectif.")
+        }
+        return tr("Conseillé pour toi : \(advised.lowerBound) à \(advised.upperBound) séances. Le widget Régularité suit cet objectif.")
     }
 
     // MARK: Nutrition
@@ -497,7 +558,7 @@ struct TopicForm: View {
         bodyCard(
             detail: model.life.birthday != nil ? tr("L'âge vient de ton anniversaire (Ma vie).") : tr("Pour calculer tes besoins. Le poids sert aussi à Fitness."),
             identifier: "nutrition-body-edit",
-            weightFirst: true
+            order: .weightAgeHeight
         )
         nutritionGoalCard
         WeightPlanQuestions(compactKnown: compactKnown)
@@ -1005,7 +1066,11 @@ struct WeightPlanQuestions: View {
                         }
                     }
                 }
-                LifeStageQuestion(compactKnown: compactKnown)
+                // Only where it is needed (PDG, 2026-11-22): once a target weight is set, outside the first launch
+                // (the plan's calculation reads it; a man or a minor is never asked).
+                if !compactKnown, profile.weightPlan != nil {
+                    LifeStageQuestion()
+                }
             }
         }
     }

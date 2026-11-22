@@ -118,6 +118,7 @@ struct StudiesAppView: View {
             MiniAppInfoSection(app: .studies)
         }
         .navigationTitle(tr("Études"))
+        .miniAppTour(.studies)
         .sheet(item: $sheet) { $0.editor }
         .sheet(isPresented: $importingSchedule) { ScheduleImportView() }
         .confirmationDialog(tr("Chrono d'étude"), isPresented: $choosingTimerCourse, titleVisibility: .visible) {
@@ -172,11 +173,13 @@ struct StudiesAppView: View {
                 sheet = .course(Course(name: ""))
             }
             .accessibilityIdentifier("studies-add-course")
+            .tourAnchor(.studies, 0)
             HStack(spacing: 8) {
                 MiniActionButton(title: tr("Importer mon horaire"), symbol: "doc.viewfinder", colorHex: accentHex, isProminent: false) {
                     importingSchedule = true
                 }
                 .accessibilityIdentifier("studies-import-schedule")
+                .tourAnchor(.studies, 1)
                 if !model.isPremium { PremiumBadge() }
             }
         }

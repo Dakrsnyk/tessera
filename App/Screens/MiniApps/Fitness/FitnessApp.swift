@@ -64,6 +64,7 @@ struct FitnessAppView: View {
             }
         }
         .navigationTitle(tr("Fitness"))
+        .miniAppTour(.fitness, onlyStep: 0)
         .task {
             // A session left behind (app killed, forgotten) is closed at its last set, not left « en cours ».
             if model.fitness.active?.isIdle(at: Date()) == true {

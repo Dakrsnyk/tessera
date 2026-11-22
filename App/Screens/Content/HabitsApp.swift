@@ -147,6 +147,11 @@ struct HabitsApp: View {
             }
         }
         .navigationTitle(tr("Habitudes"))
+        .miniAppTour(id: MiniAppTourContent.habitsID)
+        .onAppear {
+            // Habits is not a `MiniApp` (no open counter): someone who already has habits is an existing user.
+            MiniAppTourController.shared.begin(MiniAppTourContent.habitsID, priorOpens: 0, hasData: !model.content.habits.isEmpty)
+        }
         .sheet(isPresented: $creating) {
             HabitEditor(habit: Habit(name: "", symbol: HabitEditor.symbols[0], colorHex: Palette.freeAccents[0].hex), isNew: true)
         }
@@ -184,6 +189,7 @@ struct HabitsApp: View {
                         Haptics.tap()
                         model.updateContent { $0.toggleHabit(habit.id, on: day) }
                     }
+                    .tourAnchor(MiniAppTourContent.habitsID, 1, enabled: index == 0)
                 }
             }
         }
@@ -269,6 +275,7 @@ struct HabitsApp: View {
                 }
                 .padding(14)
                 .miniCard()
+                .tourAnchor(MiniAppTourContent.habitsID, 0)
             }
         }
     }

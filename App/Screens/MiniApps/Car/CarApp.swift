@@ -91,8 +91,10 @@ struct CarAppView: View {
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Plein"), symbol: "plus", colorHex: accentHex) { sheet = .fuel(nil) }
                     .accessibilityIdentifier("car-add-fuel")
+                    .tourAnchor(.car, 0)
                 MiniActionButton(title: tr("Kilométrage"), symbol: "speedometer", colorHex: accentHex, isProminent: false) { sheet = .odometer }
                     .accessibilityIdentifier("car-add-odometer")
+                    .tourAnchor(.car, 1)
             }
             // What presses first: the deadlines, then the maintenance, then the figures; the day and its log come last.
             deadlines(state: state, now: now)
@@ -108,6 +110,7 @@ struct CarAppView: View {
             MiniAppInfoSection(app: .car)
         }
         .navigationTitle(state.name.isEmpty ? tr("Auto") : state.name)
+        .miniAppTour(.car)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Button { sheet = .settings } label: { Image(systemName: "pencil") }

@@ -194,10 +194,10 @@ final class NightScenariosTests: XCTestCase {
         // The mini-app is Planning's own: its questions and cards do not ask for courses or exams.
         XCTAssertEqual(MiniApp(space: .productivity), .planning)
         XCTAssertEqual(InfoArea.productivity.homeRoute, .app(.planning))
-        XCTAssertEqual(MiniApp.planning.toFillItems, [.habits, .timetable])
+        XCTAssertEqual(MiniApp.planning.toFillItems, [])
         XCTAssertFalse(MiniApp.planning.toFillItems.contains(.exams))
         XCTAssertEqual(MiniApp.planning.infoTopics, [.productivity])
-        XCTAssertFalse(model.toFillItems(in: .planning).contains(.habits), "The habit was given")
+        XCTAssertTrue(model.toFillItems(in: .planning).isEmpty)
 
         // Études only comes with classes (or when added by hand).
         model.update(\.student) { $0.courses = [Course(name: "Mathématiques")] }

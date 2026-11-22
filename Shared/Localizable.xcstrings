@@ -18472,6 +18472,53 @@
         }
       }
     },
+    "Activer les notifications": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen aktivieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on notifications"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar las notificaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer les notifications"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva le notifiche"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知をオンにする"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar as notificações"
+          }
+        }
+      }
+    },
     "Activité": {
       "extractionState": "manual",
       "localizations": {
@@ -19929,6 +19976,147 @@
         }
       }
     },
+    "Ajoute aussi tes dépenses : bénéfice et objectif se calculent seuls.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage auch deine Ausgaben ein: Gewinn und Ziel berechnen sich von selbst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your expenses too: profit and goal work themselves out."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade también tus gastos: el beneficio y el objetivo se calculan solos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute aussi tes dépenses : bénéfice et objectif se calculent seuls."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi anche le tue spese: utile e obiettivo si calcolano da soli."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "経費も追加すると、利益と目標が自動で計算されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione também suas despesas: lucro e meta se calculam sozinhos."
+          }
+        }
+      }
+    },
+    "Ajoute aussi ton kilométrage pour suivre ta voiture.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage auch deinen Kilometerstand ein, um dein Auto im Blick zu behalten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your mileage too to keep track of your car."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade también tu kilometraje para seguir tu coche."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute aussi ton kilométrage pour suivre ta voiture."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi anche i tuoi chilometri per seguire la tua auto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "走行距離も追加して、車を管理しましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione também sua quilometragem para acompanhar seu carro."
+          }
+        }
+      }
+    },
+    "Ajoute des exercices depuis la bibliothèque.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge Übungen aus der Bibliothek hinzu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add exercises from the library."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade ejercicios desde la biblioteca."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute des exercices depuis la bibliothèque."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi esercizi dalla libreria."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライブラリからエクササイズを追加しましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione exercícios da biblioteca."
+          }
+        }
+      }
+    },
     "Ajoute des favoris dans Ardane, espace Nutrition.": {
       "extractionState": "manual",
       "localizations": {
@@ -20442,6 +20630,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicione suas contas e dívidas no Ardane, no espaço Orçamento."
+          }
+        }
+      }
+    },
+    "Ajoute tes cours : devoirs, examens et notes s'y rangent.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge deine Kurse hinzu: Hausaufgaben, Prüfungen und Noten ordnen sich dort ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your classes: homework, exams and grades go with them."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade tus clases: tareas, exámenes y notas se ordenan en ellas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute tes cours : devoirs, examens et notes s'y rangent."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi i tuoi corsi: compiti, esami e voti si organizzano lì."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "授業を追加すると、宿題・試験・成績がまとまります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione suas matérias: tarefas, provas e notas ficam organizadas nelas."
           }
         }
       }
@@ -21570,6 +21805,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Adicione um hábito para acompanhar todo dia."
+          }
+        }
+      }
+    },
+    "Ajoute une tâche ou un événement avec ces boutons.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Füge mit diesen Buttons eine Aufgabe oder einen Termin hinzu."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add a task or an event with these buttons."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Añade una tarea o un evento con estos botones."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ajoute une tâche ou un événement avec ces boutons."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiungi un'attività o un evento con questi pulsanti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このボタンでタスクや予定を追加できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Adicione uma tarefa ou um evento com estes botões."
           }
         }
       }
@@ -38024,6 +38306,53 @@
         }
       }
     },
+    "Avant 18 ans, privilégie la technique et des charges légères.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unter 18: Achte auf die Technik und leichte Gewichte."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Under 18, focus on technique and light weights."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antes de los 18 años, prioriza la técnica y cargas ligeras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avant 18 ans, privilégie la technique et des charges légères."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima dei 18 anni, privilegia la tecnica e carichi leggeri."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "18 歳未満は、フォームと軽い負荷を優先しましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antes dos 18 anos, priorize a técnica e cargas leves."
+          }
+        }
+      }
+    },
     "Avant-bras": {
       "extractionState": "manual",
       "localizations": {
@@ -47847,6 +48176,53 @@
         }
       }
     },
+    "C'est fait : tu peux changer chaque famille dans Profil › Rappels.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erledigt: Du kannst jede Kategorie unter Profil › Erinnerungen ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done: you can change each family in Profile › Reminders."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Listo: puedes cambiar cada familia en Perfil › Recordatorios."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C'est fait : tu peux changer chaque famille dans Profil › Rappels."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fatto: puoi cambiare ogni famiglia in Profilo › Promemoria."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了しました。各カテゴリは「プロフィール › リマインダー」で変更できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pronto: você pode mudar cada categoria em Perfil › Lembretes."
+          }
+        }
+      }
+    },
     "C'est l'arrière de l'épaule qui travaille : charge légère.": {
       "extractionState": "manual",
       "localizations": {
@@ -52449,6 +52825,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O que resta para a sua próxima refeição em calorias e proteínas."
+          }
+        }
+      }
+    },
+    "Ce qu'il te reste du mois se met à jour tout seul.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was von deinem Monat übrig ist, aktualisiert sich von selbst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What is left of your month updates by itself."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lo que te queda del mes se actualiza solo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce qu'il te reste du mois se met à jour tout seul."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quello che ti resta del mese si aggiorna da solo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今月の残りは自動で更新されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O que sobra do seu mês se atualiza sozinho."
           }
         }
       }
@@ -59503,6 +59926,53 @@
         }
       }
     },
+    "Choisis ce qui t'intéresse, puis autorise une seule fois : chaque mini-app en profite.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle, was dich interessiert, und erlaube es einmal: Jede Mini-App profitiert davon."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose what interests you, then allow once: every mini-app benefits."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige lo que te interesa y autoriza una sola vez: todas las mini-apps se benefician."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis ce qui t'intéresse, puis autorise une seule fois : chaque mini-app en profite."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli ciò che ti interessa, poi autorizza una sola volta: ne beneficia ogni mini-app."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "興味のあるものを選んで、一度だけ許可してください。すべてのミニアプリで使えます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha o que te interessa e autorize uma única vez: todos os mini-apps aproveitam."
+          }
+        }
+      }
+    },
     "Choisis comment remplir ton planning.": {
       "extractionState": "manual",
       "localizations": {
@@ -59687,6 +60157,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha fotos (até 12) ou escreva uma citação: seu primeiro widget se cria em poucos toques."
+          }
+        }
+      }
+    },
+    "Choisis des photos pour créer un widget.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle Fotos, um ein Widget zu erstellen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick photos to create a widget."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige fotos para crear un widget."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis des photos pour créer un widget."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli delle foto per creare un widget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真を選んでウィジェットを作成しましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha fotos para criar um widget."
           }
         }
       }
@@ -60157,6 +60674,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha suas cidades no Ardane"
+          }
+        }
+      }
+    },
+    "Choisis ton niveau pour un conseil. Le widget Régularité suit cet objectif.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle dein Niveau für eine Empfehlung. Das Widget Regelmäßigkeit folgt diesem Ziel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose your level for a recommendation. The Consistency widget follows this goal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige tu nivel para recibir una recomendación. El widget Constancia sigue este objetivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis ton niveau pour un conseil. Le widget Régularité suit cet objectif."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli il tuo livello per un consiglio. Il widget Costanza segue questo obiettivo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レベルを選ぶとおすすめが表示されます。「継続度」ウィジェットはこの目標に沿います。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha seu nível para receber uma recomendação. O widget Regularidade segue este objetivo."
           }
         }
       }
@@ -61759,6 +62323,53 @@
         }
       }
     },
+    "Coche-la chaque jour pour faire grandir ta série.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hake sie jeden Tag ab, damit deine Serie wächst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check it off every day to grow your streak."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Márcalo cada día para hacer crecer tu racha."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Coche-la chaque jour pour faire grandir ta série."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spuntala ogni giorno per far crescere la tua serie."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "毎日チェックして、連続記録を伸ばしましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marque-o todo dia para aumentar sua sequência."
+          }
+        }
+      }
+    },
     "Cocher un devoir": {
       "extractionState": "manual",
       "localizations": {
@@ -63075,6 +63686,53 @@
         }
       }
     },
+    "Commence doucement : tu pourras changer de niveau plus tard.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fang locker an: Du kannst dein Niveau später ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start gently: you can change your level later."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empieza con calma: podrás cambiar de nivel más tarde."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commence doucement : tu pourras changer de niveau plus tard."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizia con calma: potrai cambiare livello più tardi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無理せず始めましょう。レベルは後から変更できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comece com calma: você pode mudar de nível depois."
+          }
+        }
+      }
+    },
     "Commence le %@": {
       "extractionState": "manual",
       "localizations": {
@@ -63921,6 +64579,53 @@
         }
       }
     },
+    "Compose ton propre entraînement": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stelle dein eigenes Training zusammen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Build your own workout"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea tu propio entrenamiento"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compose ton propre entraînement"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea il tuo allenamento"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分だけのワークアウトを作成"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monte seu próprio treino"
+          }
+        }
+      }
+    },
     "Compote de pommes non sucrée": {
       "extractionState": "manual",
       "localizations": {
@@ -64246,6 +64951,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Contagem regressiva e preparação"
+          }
+        }
+      }
+    },
+    "Compte à rebours, budget et liste à ne pas oublier, au même endroit.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countdown, Budget und Packliste an einem Ort."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Countdown, budget and packing list, all in one place."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuenta atrás, presupuesto y lista de cosas que no olvidar, en un solo lugar."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Compte à rebours, budget et liste à ne pas oublier, au même endroit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conto alla rovescia, budget e lista delle cose da non dimenticare, in un unico posto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カウントダウン、予算、持ち物リストをひとつにまとめられます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Contagem regressiva, orçamento e lista do que não esquecer, no mesmo lugar."
           }
         }
       }
@@ -65327,6 +66079,147 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dica de nutrição"
+          }
+        }
+      }
+    },
+    "Conseillé pour toi": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für dich empfohlen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recommended for you"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomendado para ti"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conseillé pour toi"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consigliato per te"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたにおすすめ"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomendado para você"
+          }
+        }
+      }
+    },
+    "Conseillé pour toi : %@ à %@ séances. Le widget Régularité suit cet objectif.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für dich empfohlen: %1$@ bis %2$@ Einheiten. Das Widget Regelmäßigkeit folgt diesem Ziel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recommended for you: %1$@ to %2$@ sessions. The Consistency widget follows this goal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomendado para ti: de %1$@ a %2$@ sesiones. El widget Constancia sigue este objetivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conseillé pour toi : %@ à %@ séances. Le widget Régularité suit cet objectif."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consigliato per te: da %1$@ a %2$@ sessioni. Il widget Costanza segue questo obiettivo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたにおすすめ：週 %1$@〜%2$@ 回。「継続度」ウィジェットはこの目標に沿います。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomendado para você: de %1$@ a %2$@ treinos. O widget Regularidade segue este objetivo."
+          }
+        }
+      }
+    },
+    "Conseillé pour toi : %@. Le widget Régularité suit cet objectif.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für dich empfohlen: %@. Das Widget Regelmäßigkeit folgt diesem Ziel."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recommended for you: %@. The Consistency widget follows this goal."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomendado para ti: %@. El widget Constancia sigue este objetivo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conseillé pour toi : %@. Le widget Régularité suit cet objectif."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consigliato per te: %@. Il widget Costanza segue questo obiettivo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたにおすすめ：%@。「継続度」ウィジェットはこの目標に沿います。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recomendado para você: %@. O widget Regularidade segue este objetivo."
           }
         }
       }
@@ -71535,6 +72428,53 @@
         }
       }
     },
+    "Crée ton voyage : vols, hébergements et programme.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lege deine Reise an: Flüge, Unterkünfte und Programm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create your trip: flights, stays and itinerary."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea tu viaje: vuelos, alojamientos y programa."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crée ton voyage : vols, hébergements et programme."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea il tuo viaggio: voli, alloggi e programma."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "旅行を作成しましょう。フライト、宿泊、スケジュールまで。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crie sua viagem: voos, hospedagens e programação."
+          }
+        }
+      }
+    },
     "Crée ton widget": {
       "extractionState": "manual",
       "localizations": {
@@ -71766,6 +72706,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Crie um projeto e suas tarefas no Ardane, no espaço Produtividade."
+          }
+        }
+      }
+    },
+    "Crée une habitude : lire, marcher, méditer…": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lege eine Gewohnheit an: lesen, gehen, meditieren…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create a habit: read, walk, meditate…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea un hábito: leer, caminar, meditar…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crée une habitude : lire, marcher, méditer…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crea un'abitudine: leggere, camminare, meditare…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "習慣を作成しましょう。読書、散歩、瞑想など。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crie um hábito: ler, caminhar, meditar…"
           }
         }
       }
@@ -89156,6 +90143,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mover para antes"
+          }
+        }
+      }
+    },
+    "Déplacer l'exercice": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Übung verschieben"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Move the exercise"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mover el ejercicio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déplacer l'exercice"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sposta l'esercizio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "種目を移動"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mover o exercício"
           }
         }
       }
@@ -131037,53 +132071,6 @@
         }
       }
     },
-    "Le poids sert aussi à estimer les calories brûlées.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Gewicht dient auch zur Schätzung der verbrannten Kalorien."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weight is also used to estimate calories burned."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El peso también sirve para estimar las calorías quemadas."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le poids sert aussi à estimer les calories brûlées."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il peso serve anche a stimare le calorie bruciate."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "体重は消費カロリーの推定にも使われます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O peso também serve para estimar as calorias queimadas."
-          }
-        }
-      }
-    },
     "Le poids sert à estimer les calories brûlées. Estimation indicative.": {
       "extractionState": "manual",
       "localizations": {
@@ -132255,53 +133242,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "O total das suas vendas"
-          }
-        }
-      }
-    },
-    "Le widget Régularité suit cet objectif.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das Widget „Regelmäßigkeit“ verfolgt dieses Ziel."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Consistency widget tracks this goal."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El widget Constancia sigue este objetivo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le widget Régularité suit cet objectif."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Il widget Costanza segue questo obiettivo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "「継続」ウィジェットがこの目標を記録します。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O widget Regularidade acompanha esta meta."
           }
         }
       }
@@ -135122,6 +136062,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Os abastecimentos e as manutenções a atualizam depois."
+          }
+        }
+      }
+    },
+    "Les plus adaptés à ton profil sont en premier. Le même objectif pour Sport et Nutrition.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die passendsten für dein Profil stehen oben. Dasselbe Ziel für Sport und Ernährung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The best fits for your profile come first. The same goal for Sport and Nutrition."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los más adecuados para tu perfil aparecen primero. El mismo objetivo para Deporte y Nutrición."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les plus adaptés à ton profil sont en premier. Le même objectif pour Sport et Nutrition."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I più adatti al tuo profilo sono in cima. Lo stesso obiettivo per Sport e Nutrizione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あなたのプロフィールに合うものが先頭です。スポーツと栄養で同じ目標です。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os mais adequados ao seu perfil aparecem primeiro. O mesmo objetivo para Esporte e Nutrição."
           }
         }
       }
@@ -155195,6 +156182,53 @@
         }
       }
     },
+    "Note ta première vente : le total du jour suffit.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage deinen ersten Verkauf ein: die Tagessumme genügt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log your first sale: the day's total is enough."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra tu primera venta: basta con el total del día."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note ta première vente : le total du jour suffit."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra la tua prima vendita: basta il totale del giorno."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最初の売上を記録しましょう。1日の合計だけでOKです。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registre sua primeira venda: o total do dia basta."
+          }
+        }
+      }
+    },
     "Note tes dépenses dans Ardane, espace Budget.": {
       "extractionState": "manual",
       "localizations": {
@@ -155618,6 +156652,53 @@
         }
       }
     },
+    "Note un plein : consommation et autonomie suivent.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage eine Tankfüllung ein: Verbrauch und Reichweite folgen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log a fill-up: consumption and range follow."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra un repostaje: consumo y autonomía se calculan solos."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note un plein : consommation et autonomie suivent."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra un pieno: consumo e autonomia si calcolano da soli."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "給油を記録すると、燃費と航続距離が分かります。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registre um abastecimento: consumo e autonomia acompanham."
+          }
+        }
+      }
+    },
     "Note un plein ou le kilométrage : ta voiture apparaîtra ici.": {
       "extractionState": "manual",
       "localizations": {
@@ -155708,6 +156789,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Registre uma despesa em poucos segundos."
+          }
+        }
+      }
+    },
+    "Note une dépense ou un revenu en un geste.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage eine Ausgabe oder Einnahme mit einem Fingertipp ein."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Log an expense or an income in one tap."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra un gasto o un ingreso con un toque."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note une dépense ou un revenu en un geste."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registra una spesa o un'entrata con un tocco."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "支出も収入もワンタップで記録できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Registre uma despesa ou uma receita com um toque."
           }
         }
       }
@@ -162570,6 +163698,100 @@
           "stringUnit": {
             "state": "translated",
             "value": "Organela que produz a energia da célula (ATP)."
+          }
+        }
+      }
+    },
+    "Ou importe ton horaire depuis une photo ou un PDF.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oder importiere deinen Stundenplan aus einem Foto oder PDF."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or import your schedule from a photo or a PDF."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O importa tu horario desde una foto o un PDF."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ou importe ton horaire depuis une photo ou un PDF."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oppure importa il tuo orario da una foto o da un PDF."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "または写真やPDFから時間割を読み込めます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ou importe seu horário a partir de uma foto ou de um PDF."
+          }
+        }
+      }
+    },
+    "Ou écris une citation pour ton écran d'accueil.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oder schreibe ein Zitat für deinen Home-Bildschirm."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Or write a quote for your Home Screen."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O escribe una cita para tu pantalla de inicio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ou écris une citation pour ton écran d'accueil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oppure scrivi una citazione per la tua schermata Home."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "または、ホーム画面に表示する名言を書きましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ou escreva uma citação para sua tela de início."
           }
         }
       }
@@ -176811,6 +178033,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Para 3 widgets, um deles precisa existir em médio."
+          }
+        }
+      }
+    },
+    "Pour adapter les questions suivantes. Le poids sert aussi à estimer les calories brûlées.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Damit die nächsten Fragen passen. Das Gewicht hilft auch, verbrannte Kalorien zu schätzen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To adapt the next questions. Your weight also helps estimate calories burned."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para adaptar las siguientes preguntas. El peso también sirve para estimar las calorías quemadas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour adapter les questions suivantes. Le poids sert aussi à estimer les calories brûlées."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per adattare le domande successive. Il peso serve anche a stimare le calorie bruciate."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "次の質問を合わせるために使います。体重は消費カロリーの推定にも使います。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para adaptar as próximas perguntas. O peso também ajuda a estimar as calorias queimadas."
           }
         }
       }
@@ -206190,6 +207459,53 @@
         }
       }
     },
+    "Scanne un aliment ou photographie ton repas pour le noter.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanne ein Lebensmittel oder fotografiere deine Mahlzeit, um sie einzutragen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scan a food or photograph your meal to log it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escanea un alimento o fotografía tu comida para registrarla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanne un aliment ou photographie ton repas pour le noter."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scansiona un alimento o fotografa il tuo pasto per registrarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "食品をスキャンするか食事を撮影して記録しましょう。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escaneie um alimento ou fotografe sua refeição para registrá-la."
+          }
+        }
+      }
+    },
     "Scanne.\nC'est noté.": {
       "extractionState": "manual",
       "localizations": {
@@ -220102,53 +221418,6 @@
         }
       }
     },
-    "Séries et régularité": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serien und Regelmäßigkeit"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Streaks and consistency"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rachas y constancia"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Séries et régularité"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Serie e costanza"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "連続記録と継続"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sequências e regularidade"
-          }
-        }
-      }
-    },
     "Séries, semaine et taux de réussite de tes habitudes.": {
       "extractionState": "manual",
       "localizations": {
@@ -225409,6 +226678,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suas calorias dos últimos sete dias e a sua média."
+          }
+        }
+      }
+    },
+    "Tes calories et tes macros du jour avancent à chaque repas noté.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Kalorien und Makros des Tages wachsen mit jeder eingetragenen Mahlzeit."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your calories and macros for the day move with every meal you log."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tus calorías y macros del día avanzan con cada comida que registras."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tes calories et tes macros du jour avancent à chaque repas noté."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le tue calorie e i tuoi macro del giorno avanzano a ogni pasto registrato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "記録した食事ごとに、今日のカロリーとマクロが更新されます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suas calorias e macros do dia avançam a cada refeição registrada."
           }
         }
       }
@@ -231942,6 +233258,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Seu odômetro e os quilômetros rodados neste mês."
+          }
+        }
+      }
+    },
+    "Ton emploi du temps de la semaine, en un coup d'œil.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Wochenplan auf einen Blick."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your week's schedule, at a glance."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu horario de la semana, de un vistazo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ton emploi du temps de la semaine, en un coup d'œil."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il tuo orario della settimana, a colpo d'occhio."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今週の予定をひと目で確認できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sua agenda da semana, num relance."
           }
         }
       }
@@ -238851,6 +240214,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Todos os seus hábitos em sete dias, numa grade."
+          }
+        }
+      }
+    },
+    "Toutes tes notifications en une fois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Mitteilungen auf einmal"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All your notifications at once"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas tus notificaciones de una vez"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes tes notifications en une fois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutte le notifiche in una volta"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知をまとめて設定"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todas as suas notificações de uma vez"
           }
         }
       }

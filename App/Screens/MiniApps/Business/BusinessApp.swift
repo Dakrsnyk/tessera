@@ -160,10 +160,12 @@ struct BusinessAppView: View {
         .overlay(alignment: .bottom) {
             if !isEmpty {
                 BusinessFloatingActions(colorHex: accentHex, sale: { sheet = .sale(nil) }, cost: { sheet = .cost(nil) })
+                    .tourAnchor(.business, 1)
                     .padding(.bottom, 12)
             }
         }
         .navigationTitle(tr("Business"))
+        .miniAppTour(.business)
         .sheet(item: $sheet) { $0.editor }
     }
 
@@ -179,8 +181,10 @@ struct BusinessAppView: View {
             HStack(spacing: 10) {
                 MiniActionButton(title: tr("Vente"), symbol: "plus", colorHex: accentHex) { sheet = .sale(nil) }
                     .accessibilityIdentifier("business-add-sale")
+                    .tourAnchor(.business, 0)
                 MiniActionButton(title: tr("Dépense"), symbol: "minus", colorHex: accentHex, isProminent: false) { sheet = .cost(nil) }
                     .accessibilityIdentifier("business-add-cost")
+                    .tourAnchor(.business, 1)
             }
             .padding(.top, 4)
         }

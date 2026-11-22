@@ -259,8 +259,8 @@ final class ProfileMatrixTests: XCTestCase {
         let model = makeModel(.partial)
         XCTAssertEqual(model.toFillItems(in: .nutrition), [.macroTargets], "The calorie target was given")
         XCTAssertEqual(model.toFillItems(in: .fitness), [.routines, .weeklyWorkouts, .stepGoal], "The weight was given")
-        XCTAssertEqual(model.toFillItems(in: .planning), [.timetable], "The habit was given")
-        XCTAssertEqual(model.toFillItems(in: .studies), [.exams], "Études asks for the exams")
+        XCTAssertTrue(model.toFillItems(in: .planning).isEmpty, "Planning asks nothing")
+        XCTAssertEqual(model.toFillItems(in: .studies), [.timetable, .exams], "Études asks for the schedule and the exams")
         XCTAssertEqual(model.toFillItems(in: .finances), [.monthlyBudget], "An expense is not the monthly budget, and the default amount is not an answer")
         XCTAssertEqual(model.toFillItems(in: .business), [.businessGoal])
         XCTAssertEqual(model.toFillItems(in: .travel), [.trip])
@@ -269,9 +269,9 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertEqual(model.toFillProgress(in: .nutrition).total, 2)
         XCTAssertEqual(model.toFillProgress(in: .fitness).filled, 1)
         XCTAssertEqual(model.toFillProgress(in: .fitness).total, 4)
-        XCTAssertEqual(model.toFillProgress(in: .planning).filled, 1)
-        XCTAssertEqual(model.toFillProgress(in: .planning).total, 2)
+        XCTAssertEqual(model.toFillProgress(in: .planning).total, 0)
         XCTAssertEqual(model.toFillProgress(in: .studies).filled, 0)
+        XCTAssertEqual(model.toFillProgress(in: .studies).total, 2)
         XCTAssertEqual(model.toFillProgress(in: .finances).filled, 0)
     }
 
@@ -319,7 +319,8 @@ final class ProfileMatrixTests: XCTestCase {
                 XCTAssertEqual(route, expected[category], "\(level) \(category)")
                 if case .infoArea = route { XCTFail("\(level) \(category) opens the old page « Tes données »") }
                 // A card with nothing in it opens a mini-app that still asks for something.
-                if case let .app(app) = route {
+                // (Planning asks nothing since 2026-11-22: its cards open it all the same.)
+                if case let .app(app) = route, app != .planning {
                     XCTAssertFalse(model.toFillItems(in: app).isEmpty, "\(level) \(category): \(app.rawValue) has nothing to fill in")
                 }
             }

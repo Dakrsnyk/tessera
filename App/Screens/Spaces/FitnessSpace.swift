@@ -126,10 +126,17 @@ struct RoutineEditor: View {
     @State private var picking = false
     @State private var info: ExerciseInfo?
     @State private var paywall: PaywallContext?
+    /// The exercise held to be moved, how far the finger went since the last swap, and what was already swapped.
+    @State private var heldID: UUID?
+    @State private var heldOffset: CGFloat = 0
+    @State private var swapped: CGFloat = 0
+    @State private var heights: [UUID: CGFloat] = [:]
 
     var body: some View {
         ScrollViewReader { proxy in
             form
+                .miniAppTour(.fitness, onlyStep: 1)
+                .onPreferenceChange(ExerciseHeightsKey.self) { heights = $0 }
                 // An exercise added from the top of the form: shown where it lands, at the end.
                 .onChange(of: routine.exercises.count) { old, new in
                     guard new > old, let added = routine.exercises.last?.id else { return }
@@ -177,6 +184,7 @@ struct RoutineEditor: View {
                     }
                 }
                 .accessibilityIdentifier("routine-library")
+                .tourAnchor(.fitness, 1)
                 Button {
                     routine.exercises.append(ExerciseTemplate(name: "", sets: 3, reps: 10, weight: 0))
                 } label: {
@@ -185,7 +193,9 @@ struct RoutineEditor: View {
                 .accessibilityIdentifier("routine-add-exercise")
             }
             ForEach($routine.exercises) { $exercise in
+                let lifted = heldID == exercise.id
                 Section {
+                    Group {
                     HStack {
                         TextField(tr("Exercice"), text: $exercise.name)
                             .accessibilityIdentifier("exercise-name")
@@ -223,6 +233,15 @@ struct RoutineEditor: View {
                     Stepper(tr("Repos : \(exercise.restSeconds) s"), value: $exercise.restSeconds, in: 15...600, step: 15)
                     TextField(tr("Tempo (ex. 3-1-1-0)"), text: $exercise.tempo)
                     TextField(tr("Notes", context: "text"), text: $exercise.notes)
+                    }
+                    .exerciseHeight(exercise.id)
+                    // The held exercise follows the finger (every row of the section, header included).
+                    .offset(y: lifted ? heldOffset : 0)
+                    .animation(nil, value: heldOffset)
+                } header: {
+                    reorderHandle(for: exercise.id)
+                        .offset(y: lifted ? heldOffset : 0)
+                        .animation(nil, value: heldOffset)
                 }
                 .id(exercise.id)
             }
@@ -234,6 +253,69 @@ struct RoutineEditor: View {
                 }
             }
         }
+    }
+
+    /// The grip above an exercise: hold it then move it up or down (like a card of Mon Quotidien); VoiceOver
+    /// gets « Monter » and « Descendre ». The fields below stay editable by a simple touch.
+    private func reorderHandle(for id: UUID) -> some View {
+        let position = (routine.exercises.firstIndex { $0.id == id } ?? 0) + 1
+        return HStack(spacing: 6) {
+            Image(systemName: "line.3.horizontal")
+            Text("\(position)")
+            Spacer()
+        }
+        .font(.footnote.weight(.semibold))
+        .frame(minHeight: 36)
+        .contentShape(Rectangle())
+        .overlay { DailyHoldToMove(onMove: { hold(id, $0) }, onDrop: drop) }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(tr("Déplacer l'exercice")))
+        .accessibilityValue(Text("\(position)"))
+        .accessibilityAction(named: Text(tr("Monter"))) { shift(id, by: -1) }
+        .accessibilityAction(named: Text(tr("Descendre"))) { shift(id, by: 1) }
+    }
+
+    private func height(of id: UUID) -> CGFloat { (heights[id] ?? 260) + 40 }
+
+    /// The finger moves: the exercise swaps with its neighbour once it has passed half of it, live.
+    private func hold(_ id: UUID, _ drag: DailyCardDrag) {
+        if heldID != id {
+            heldID = id
+            swapped = 0
+            Haptics.tap()
+        }
+        var dy = drag.translation.height - swapped
+        while let index = routine.exercises.firstIndex(where: { $0.id == id }) {
+            let target: Int
+            if dy > 0, index + 1 < routine.exercises.count { target = index + 1 }
+            else if dy < 0, index > 0 { target = index - 1 }
+            else { break }
+            let step = height(of: routine.exercises[target].id)
+            guard abs(dy) > step / 2 else { break }
+            let sign: CGFloat = dy > 0 ? 1 : -1
+            withAnimation(.snappy) {
+                routine.exercises = ExerciseReorder.move(routine.exercises, from: index, to: target)
+            }
+            swapped += sign * step
+            dy -= sign * step
+            Haptics.tap()
+        }
+        heldOffset = dy
+    }
+
+    private func drop() {
+        withAnimation(.snappy) {
+            heldID = nil
+            heldOffset = 0
+        }
+        swapped = 0
+    }
+
+    private func shift(_ id: UUID, by delta: Int) {
+        guard let index = routine.exercises.firstIndex(where: { $0.id == id }) else { return }
+        let target = index + delta
+        guard routine.exercises.indices.contains(target) else { return }
+        withAnimation { routine.exercises = ExerciseReorder.move(routine.exercises, from: index, to: target) }
     }
 
     private func save() {

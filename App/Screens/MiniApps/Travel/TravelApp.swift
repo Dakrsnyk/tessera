@@ -76,6 +76,7 @@ struct TravelAppView: View {
                 TripHero(trip: trip, now: now, perDay: perDay, onEdit: { sheet = .trip(trip) })
             } else {
                 start
+                    .tourAnchor(.travel, 1)
             }
         } sheet: {
             MiniAppToFillSection(app: .travel)
@@ -110,6 +111,7 @@ struct TravelAppView: View {
             }
         }
         .navigationTitle(tr("Voyage"))
+        .miniAppTour(.travel)
         .onAppear {
             // A trip still to come: the selector opens on its first day, not on a week with nothing in it.
             if let trip = TravelMath.currentTrip(model.travel, at: Date()), trip.start > Date(), DateMath.isSameDay(day, Date()) {

@@ -115,9 +115,9 @@ final class MiniAppToFillTests: XCTestCase {
         XCTAssertTrue(MiniApp.finances.hasInfo)
         XCTAssertEqual(MiniApp.finances.settingsTopic, .money)
         XCTAssertEqual(MiniApp.finances.settingsItems, [.moneyFlow], "The fixed expenses keep their own row, not repeated in the questions")
-        // The first habit is added on the Habitudes page and by its « À remplir » card: no second form in Planning.
+        // The first habit is added on the Habitudes page: no second form in Planning, which has no « À remplir » block.
         XCTAssertFalse(MiniApp.planning.infoTopics.contains(.wellbeing))
-        XCTAssertTrue(MiniApp.planning.toFillItems.contains(.habits))
+        XCTAssertTrue(MiniApp.planning.toFillItems.isEmpty)
         // A topic is never listed twice across the mini-apps' settings.
         let topics = MiniApp.allCases.flatMap(\.infoTopics)
         XCTAssertEqual(topics.count, Set(topics).count)
@@ -127,17 +127,17 @@ final class MiniAppToFillTests: XCTestCase {
     func testPlanningAndStudiesHaveTheirOwnQuestionsAndCards() {
         XCTAssertEqual(MiniApp.planning.infoTopics, [.productivity])
         XCTAssertEqual(MiniApp.studies.infoTopics, [.studies])
-        XCTAssertEqual(MiniApp.planning.toFillItems, [.habits, .timetable])
-        XCTAssertEqual(MiniApp.studies.toFillItems, [.exams])
+        XCTAssertEqual(MiniApp.planning.toFillItems, [])
+        XCTAssertEqual(MiniApp.studies.toFillItems, [.timetable, .exams])
         XCTAssertEqual(MiniApp(space: .student), .studies)
         let model = temporaryModel()
-        XCTAssertEqual(toFill(model, .planning), [.habits, .timetable])
-        XCTAssertEqual(toFill(model, .studies), [.exams])
+        XCTAssertTrue(toFill(model, .planning).isEmpty)
+        XCTAssertEqual(toFill(model, .studies), [.timetable, .exams])
         model.update(\.student) {
             $0.exams = [Exam(title: "Chimie", date: Date().addingTimeInterval(7 * 86_400), room: "A-110")]
         }
-        XCTAssertTrue(toFill(model, .studies).isEmpty, "The exam is given: Études has nothing left")
-        XCTAssertEqual(toFill(model, .planning), [.habits, .timetable], "Planning is untouched")
+        XCTAssertEqual(toFill(model, .studies), [.timetable], "The exam is given: the schedule is still asked")
+        XCTAssertTrue(toFill(model, .planning).isEmpty, "Planning asks nothing")
     }
 
     func testEveryItemOfABlockCountsAsMissingWhenEmpty() {

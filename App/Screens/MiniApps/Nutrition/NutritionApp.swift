@@ -63,6 +63,7 @@ struct NutritionAppView: View {
             }
             .padding(16)
             .cristalGlass(in: RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
+            .tourAnchor(.nutrition, 1)
         } sheet: {
             // The sheet, by importance: the goal to set (while it is unknown), the card « Maintenant », the meals,
             // the two doors, the note, the settings last.
@@ -79,9 +80,11 @@ struct NutritionAppView: View {
         .overlay(alignment: .bottom) {
             NutritionFloatingActions(canScan: canScan, colorHex: accentHex,
                                      scan: { sheet = .scan(day) }, search: { sheet = .search(nil, day) })
+                .tourAnchor(.nutrition, 0)
                 .padding(.bottom, 12)
         }
         .navigationTitle(tr("Nutrition"))
+        .miniAppTour(.nutrition)
         .onAppear { trackGoal(known: known) }
         .onChange(of: model.nutrition.goals.kcal) { _, _ in trackGoal(known: known) }
         .onChange(of: scenePhase) { _, phase in

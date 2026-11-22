@@ -4,9 +4,9 @@ import SwiftUI
 /// selector (the one date selector, `day` is the truth of the screen) and, for the current week, the card
 /// « Prochain événement ». On the sheet: the scale picker and the week as a table right under it, whose columns
 /// fall under the selector's days (a day, the month or the year instead with the picker or a pinch; a touch on a
-/// free time creates an event there), then the three priorities, the task counters, the projects and the habits,
+/// free time creates an event there), then the three priorities, the task counters, the projects,
 /// the calendar and the import as two rows, and « Mes infos » last (the studies and the focus are in the Études
-/// mini-app). The two actions « Nouvelle tâche » and « Nouvel événement » float above the tab bar.
+/// mini-app, the habits have their own page; no « À remplir » block here). The two actions « Nouvelle tâche » and « Nouvel événement » float above the tab bar.
 struct PlanningAppView: View {
     @Environment(AppModel.self) private var model
     @State private var events: [EventSnapshot] = []
@@ -49,10 +49,10 @@ struct PlanningAppView: View {
                 }
             }
         } sheet: {
-            MiniAppToFillSection(app: .planning)
             // 3. The planning: the scale picker, then the week as a table (or the day, the month, the year).
             VStack(alignment: .leading, spacing: 18) {
                 PlanningCalendarCard(day: $day, scale: $scale, events: events, onCreate: { editors.create(on: $0, at: $1) }, onOpen: open)
+                    .tourAnchor(.planning, 0)
                 // The month and the year show no hours: the day picked is listed under them, to open and check off.
                 // The day and the week show the hours: only what has no hour (a task, a homework) is listed, as the
                 // table keeps just a few chips for them.
@@ -83,20 +83,13 @@ struct PlanningAppView: View {
 
             // 5. The other categories.
             MiniRowsCard {
-                // Projects and habits. The studies are their own mini-app (Études); the week, the month and
-                // the focus pages stay reachable (captures, Études) but have no row here.
+                // Projects. The studies are their own mini-app (Études) and the habits have their own page (Mon
+                // quotidien); the week, the month and the focus pages stay reachable but have no row here.
                 NavigationLink(value: HomeRoute.page(.planningProjects)) {
                     MiniRow(symbol: "folder.fill", colorHex: accentHex, title: tr("Projets"), detail: tr("Tâches regroupées par projet"),
                             value: model.productivity.projects.isEmpty ? nil : "\(model.productivity.projects.count)")
                 }
                 .buttonStyle(.pressable)
-                MiniDivider()
-                NavigationLink(value: HomeRoute.page(.planningHabits)) {
-                    MiniRow(symbol: "repeat", colorHex: "7FA33A", title: tr("Habitudes"), detail: tr("Séries et régularité"),
-                            value: model.content.habits.isEmpty ? nil : "\(model.content.habits.filter { $0.isDone(on: now) }.count)/\(model.content.habits.count)")
-                }
-                .buttonStyle(.pressable)
-                .accessibilityIdentifier("planning-habits")
             }
             // 6. The calendar of the iPhone and the import of a timetable (Premium), as two rows.
             sourcesCard
@@ -109,9 +102,11 @@ struct PlanningAppView: View {
             PlanningFloatingActions(colorHex: accentHex,
                                     newTask: { editors.task = TaskItem(title: "", due: DateMath.startOfDay(day)) },
                                     newEvent: { editors.create(on: day, at: PlanningNext.defaultStartMinute(now: Date(), isToday: DateMath.isSameDay(day, Date()))) })
+                .tourAnchor(.planning, 1)
                 .padding(.bottom, 12)
         }
         .navigationTitle(tr("Planning"))
+        .miniAppTour(.planning)
         .onAppear(perform: loadEvents)
         .onChange(of: day) { _, _ in loadEvents() }
         .onChange(of: scale) { _, _ in loadEvents() }

@@ -242,7 +242,7 @@ final class MiniAppUITests: XCTestCase {
         snapshot("planning-task-added")
 
         // The week, the month and the schedule have no row any more (Études is its own mini-app).
-        for (identifier, title) in [("planning-tasks", "Tâches"), ("planning-habits", "Habitudes")] {
+        for (identifier, title) in [("planning-tasks", "Tâches")] {
             tap(app.buttons[identifier], title)
             XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
             snapshot(identifier)
@@ -252,16 +252,15 @@ final class MiniAppUITests: XCTestCase {
         XCTAssertEqual(app.state, .runningForeground)
     }
 
-    /// Under « Tâches » only « Projets » and « Habitudes » remain (2026-11-17): the four rows of the studies, the week
-    /// and the month left Planning. « Importer mon horaire » stays.
-    func testPlanningKeepsOnlyProjectsAndHabitsUnderTasks() {
+    /// Under « Tâches » only « Projets » remains (2026-11-22; « Habitudes » left too): the four rows of the studies, the
+    /// week and the month left Planning on 2026-11-17. « Importer mon horaire » stays.
+    func testPlanningKeepsOnlyProjectsUnderTasks() {
         launch(["-screenshotScreen", "app-planning"])
         XCTAssertTrue(app.otherElements["planning-today"].waitForExistence(timeout: 12), "Mini-app Planning absente")
         reveal(app.buttons["planning-tasks"], "Compteurs de tâches")
         XCTAssertTrue(element(containing: "Projets").exists, "La ligne « Projets » manque sous « Tâches »")
-        reveal(app.buttons["planning-habits"], "Habitudes")
         snapshot("planning-projects-habits")
-        for removed in ["planning-schedule", "planning-studies", "planning-week", "planning-month"] {
+        for removed in ["planning-habits", "planning-schedule", "planning-studies", "planning-week", "planning-month"] {
             XCTAssertFalse(app.descendants(matching: .any)[removed].exists, "« \(removed) » ne devrait plus exister dans Planning")
         }
         XCTAssertTrue(app.buttons["planning-import-schedule"].exists, "« Importer mon horaire » doit rester dans Planning")

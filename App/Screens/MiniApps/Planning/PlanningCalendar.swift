@@ -75,7 +75,7 @@ struct PlanningCalendarCard: View {
             if let period {
                 Text(period).font(.headline)
             }
-                        content
+            content
                 .scaleEffect(isPinching ? min(1.12, max(0.88, pinch)) : 1, anchor: .center)
                 .opacity(isPinching ? 0.85 : 1)
                 .id("\(scale.rawValue)-\(DateMath.dayKey(scale.interval(containing: day).start))")

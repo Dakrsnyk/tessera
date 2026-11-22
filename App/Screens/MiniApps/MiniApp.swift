@@ -140,10 +140,16 @@ enum MiniAppPage: Hashable {
 /// A mini-app, or its space's data while it isn't built yet.
 struct MiniAppView: View {
     let app: MiniApp
+    @Environment(AppModel.self) private var model
 
     var body: some View {
         content
-            .onAppear { MiniAppUsage.record(app) }
+            .onAppear {
+                // The tour decides first: it reads the opens BEFORE this one is counted (opened before = not a first time).
+                MiniAppTourController.shared.begin(app.rawValue, priorOpens: MiniAppUsage.load()[app.rawValue] ?? 0,
+                                                   hasData: MiniAppSummary.hasData(app, model))
+                MiniAppUsage.record(app)
+            }
     }
 
     @ViewBuilder

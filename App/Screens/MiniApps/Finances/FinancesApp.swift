@@ -171,6 +171,7 @@ struct FinancesAppView: View {
             // The band: the only date selector (spending is logged, so it stops at today), then the budget left.
             WeekSelector(day: $day, colorHex: accentHex, allowsFuture: false, mark: { dayMark($0, state: state) })
             hero(state: state, now: now)
+                .tourAnchor(.finances, 1)
         } sheet: {
             // The page, by importance: where the month stands, what comes soon, the chosen day, the categories, then
             // every page in the same list each time.
@@ -186,6 +187,7 @@ struct FinancesAppView: View {
             MiniAppInfoSection(app: .finances)
         }
         .navigationTitle(tr("Finances"))
+        .miniAppTour(.finances)
         .sheet(item: $sheet) { $0.editor }
     }
 

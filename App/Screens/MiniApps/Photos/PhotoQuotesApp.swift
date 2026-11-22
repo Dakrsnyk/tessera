@@ -26,10 +26,12 @@ struct PhotoQuotesAppView: View {
                     start(.photos)
                 }
                 .accessibilityIdentifier("photos-new")
+                .tourAnchor(.photos, 0)
                 MiniActionButton(title: tr("Citation"), symbol: "quote.opening", colorHex: accentHex, isProminent: false) {
                     start(.quote)
                 }
                 .accessibilityIdentifier("quote-new")
+                .tourAnchor(.photos, 1)
             }
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: tr("Mes widgets"),
@@ -46,6 +48,7 @@ struct PhotoQuotesAppView: View {
             MiniFootnote(text: tr("Pour le poser : touche longuement l'écran d'accueil, puis + › Ardane › « Mes widgets », et choisis-le avec « Modifier le widget »."))
         }
         .navigationTitle(tr("Photos et citations"))
+        .miniAppTour(.photos)
         .sheet(item: $editing) { draft in
             PhotoQuoteEditor(draft: draft)
         }

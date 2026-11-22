@@ -249,6 +249,15 @@ enum ScreenshotMode {
                     }
                 }
             }
+            // The discovery tour of a mini-app, shown on its first screen (tour-nutrition, tour-fitness…): the only capture
+            // that sees a tour (`MiniAppTourController.begin`).
+            if screen.hasPrefix("tour-"), let app = MiniApp(rawValue: String(screen.dropFirst(5))) {
+                router.tab = .home
+                Task { @MainActor in
+                    try? await Task.sleep(for: .milliseconds(700))
+                    router.openApp(app)
+                }
+            }
             // « Mes informations » and one of its areas, pushed on Home.
             if screen == "info" || screen.hasPrefix("info-") {
                 router.tab = .home

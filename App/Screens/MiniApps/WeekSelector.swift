@@ -54,10 +54,12 @@ struct WeekSelector: View {
             .transition(.push(from: forward ? .trailing : .leading))
             .simultaneousGesture(swipe(canGoForward: canGoForward))
         }
-        // Beside a week table (`leadingInset`) the columns must stay under the days: no side margin then.
-        .padding(.horizontal, leadingInset > 0 ? 0 : 8)
+        .padding(.horizontal, 8)
         .padding(.vertical, 4)
         .cristalGlass(in: RoundedRectangle(cornerRadius: CristalPalette.of(style.id).radius, style: .continuous))
+        // Beside a week table (`leadingInset`) the columns must stay under the days: the card grows by its own 8-pt
+        // margin on each side instead (it used to have none, so the first and last pills touched the card's edge).
+        .padding(.horizontal, leadingInset > 0 ? -8 : 0)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("week-card")
     }

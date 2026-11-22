@@ -194,12 +194,163 @@ struct PermissionsStep: View {
                 title: tr("Autorisations"),
                 message: tr("Active seulement ce qui t'est utile. Chaque accès est expliqué avant qu'iOS te le demande, et tu peux continuer sans.")
             )
-            ForEach(PermissionsSetup.order) { permission in
+            // Every notification in one go (PDG, 2026-11-22): one card, one iOS prompt, instead of a request per mini-app.
+            AllNotificationsCard()
+            ForEach(PermissionsSetup.order.filter { $0 != .notifications }) { permission in
                 PermissionRowCard(permission: permission)
             }
             Text(tr("Tu retrouveras tout dans Profil › Autorisations."))
                 .font(.footnote)
                 .foregroundStyle(.secondary)
         }
+    }
+}
+
+/// The last page of the first setup: all the notifications in one go. The person picks the families they want
+/// (the same switches as Profil › Rappels), then one button shows the real iOS prompt once. Nothing counts as
+/// allowed before iOS says so: the state is read back from the system, and a refusal leads to Réglages, never to a
+/// second prompt. The switches are only the person's wishes; nothing is sent until iOS allows it.
+struct AllNotificationsCard: View {
+    @Environment(AppModel.self) private var model
+    @Environment(\.openURL) private var openURL
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var state: PermissionState?
+    @State private var isAsking = false
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 12) {
+                Image(systemName: AppPermission.notifications.symbol)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 40, height: 40)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(tr("Toutes tes notifications en une fois"))
+                        .font(.headline)
+                        .fixedSize(horizontal: false, vertical: true)
+                    statusText
+                }
+                Spacer(minLength: 0)
+            }
+            Text(tr("Choisis ce qui t'intéresse, puis autorise une seule fois : chaque mini-app en profite."))
+                .font(.subheadline)
+                .fixedSize(horizontal: false, vertical: true)
+            VStack(spacing: 0) {
+                ForEach(SmartCategory.allCases) { category in
+                    Toggle(isOn: Self.binding(category, model: model)) {
+                        Label(category.title, systemImage: category.symbol)
+                            .font(.subheadline.weight(.medium))
+                    }
+                    .padding(.vertical, 6)
+                    .accessibilityIdentifier("all-notifications-\(category.rawValue)")
+                }
+            }
+            Label(AppPermission.notifications.privacy, systemImage: "lock.fill")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+            action
+        }
+        .card(padding: 14)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("all-notifications-card")
+        .task(id: scenePhase) { await refresh() }
+    }
+
+    @ViewBuilder private var statusText: some View {
+        switch state {
+        case .granted:
+            Label(tr("Accordée"), systemImage: "checkmark.circle.fill")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.green)
+        case .denied:
+            Label(tr("Refusée"), systemImage: "xmark.circle.fill")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.orange)
+        case .notDetermined, nil:
+            Text(tr("Pas encore demandée"))
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    @ViewBuilder private var action: some View {
+        let anyChosen = SmartCategory.allCases.contains { $0.isEnabled(in: model.settings) }
+        switch state {
+        case .notDetermined:
+            Button(action: ask) {
+                HStack {
+                    if isAsking { ProgressView() }
+                    Text(tr("Activer les notifications"))
+                }
+                .frame(maxWidth: .infinity, minHeight: 40)
+                .foregroundStyle(.onAccent)
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(isAsking || !anyChosen)
+            .accessibilityIdentifier("all-notifications-allow")
+        case .denied:
+            VStack(alignment: .leading, spacing: 8) {
+                Text(tr("L'accès est refusé. Tu peux l'activer dans Réglages › Ardane, ou continuer sans."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+                Button {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                } label: {
+                    Text(tr("Ouvrir Réglages"))
+                        .frame(maxWidth: .infinity, minHeight: 36)
+                }
+                .buttonStyle(.bordered)
+                .accessibilityIdentifier("all-notifications-settings")
+            }
+        case .granted:
+            Text(tr("C'est fait : tu peux changer chaque famille dans Profil › Rappels."))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        case nil:
+            EmptyView()
+        }
+    }
+
+    /// The switch of a family, written in the settings at once (the same values as Profil › Rappels).
+    static func binding(_ category: SmartCategory, model: AppModel) -> Binding<Bool> {
+        let path = keyPath(category)
+        return Binding(get: { model.settings[keyPath: path] }, set: { isOn in model.updateSettings { $0[keyPath: path] = isOn } })
+    }
+
+    static func keyPath(_ category: SmartCategory) -> WritableKeyPath<AppSettings, Bool> {
+        switch category {
+        case .nutrition: return \.remindsNutrition
+        case .habits: return \.remindsHabits
+        case .fitness: return \.remindsFitness
+        case .planning: return \.remindsPlanning
+        case .goals: return \.remindsGoals
+        case .general: return \.remindsGeneral
+        }
+    }
+
+    /// The one real iOS prompt, from the person's tap, only while the answer is still open.
+    private func ask() {
+        guard !isAsking else { return }
+        isAsking = true
+        Task { @MainActor in
+            PermissionMemory.markExplained(.notifications)
+            if await AppPermission.notifications.currentState() == .notDetermined {
+                await PermissionsSetup.request(.notifications)
+            }
+            state = await AppPermission.notifications.currentState()
+            isAsking = false
+            // Allowed: the reminders of the families chosen are planned now.
+            if state == .granted { model.syncReminders() }
+        }
+    }
+
+    private func refresh() async {
+        guard !isAsking else { return }
+        state = await AppPermission.notifications.currentState()
     }
 }

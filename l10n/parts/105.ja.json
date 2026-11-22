@@ -1,0 +1,14 @@
+{
+ "Toutes tes notifications en une fois": "通知をまとめて設定",
+ "Choisis ce qui t'intéresse, puis autorise une seule fois : chaque mini-app en profite.": "興味のあるものを選んで、一度だけ許可してください。すべてのミニアプリで使えます。",
+ "Activer les notifications": "通知をオンにする",
+ "C'est fait : tu peux changer chaque famille dans Profil › Rappels.": "完了しました。各カテゴリは「プロフィール › リマインダー」で変更できます。",
+ "Pour adapter les questions suivantes. Le poids sert aussi à estimer les calories brûlées.": "次の質問を合わせるために使います。体重は消費カロリーの推定にも使います。",
+ "Les plus adaptés à ton profil sont en premier. Le même objectif pour Sport et Nutrition.": "あなたのプロフィールに合うものが先頭です。スポーツと栄養で同じ目標です。",
+ "Conseillé pour toi": "あなたにおすすめ",
+ "Avant 18 ans, privilégie la technique et des charges légères.": "18 歳未満は、フォームと軽い負荷を優先しましょう。",
+ "Commence doucement : tu pourras changer de niveau plus tard.": "無理せず始めましょう。レベルは後から変更できます。",
+ "Choisis ton niveau pour un conseil. Le widget Régularité suit cet objectif.": "レベルを選ぶとおすすめが表示されます。「継続度」ウィジェットはこの目標に沿います。",
+ "Conseillé pour toi : %@. Le widget Régularité suit cet objectif.": "あなたにおすすめ：%@。「継続度」ウィジェットはこの目標に沿います。",
+ "Conseillé pour toi : %@ à %@ séances. Le widget Régularité suit cet objectif.": "あなたにおすすめ：週 %1$@〜%2$@ 回。「継続度」ウィジェットはこの目標に沿います。"
+}
