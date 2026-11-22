@@ -771,3 +771,11 @@ widget camp-cours-assignments-m-st-blossom-done kind=assignments family=medium s
 widget camp-cours-assignments-m-st-aurora-done kind=assignments family=medium scale=3 theme=aurora scheme=dark done=1
 widget camp-cours-assignments-m-st-neon-done kind=assignments family=medium scale=3 theme=neon scheme=dark done=1
 only camp-cours-lock-nextClass-rect camp-cours-lock-timetable-rect camp-cours-nextClass-s-st-light camp-cours-nextClass-s-st-dark camp-cours-nextClass-s-st-minimal camp-cours-nextClass-s-st-pastel camp-cours-nextClass-s-st-blossom camp-cours-nextClass-s-st-aurora camp-cours-nextClass-s-st-neon camp-cours-timetable-s-st-light camp-cours-timetable-s-st-dark camp-cours-timetable-s-st-minimal camp-cours-timetable-s-st-pastel camp-cours-timetable-s-st-blossom camp-cours-timetable-s-st-aurora camp-cours-timetable-s-st-neon camp-cours-assignments-m-st-light camp-cours-assignments-m-st-light-done camp-cours-assignments-m-st-dark-done camp-cours-assignments-m-st-minimal-done camp-cours-assignments-m-st-pastel-done camp-cours-assignments-m-st-blossom-done camp-cours-assignments-m-st-aurora-done camp-cours-assignments-m-st-neon-done
+# --- Pub organique « POV: my day on one screen » (2026-11-22) : Tâches moyen avant/après le toucher en Clair, puis l'état coché dans les styles de l'accueil, un seul run (Sombre et Pastel « done » existent plus haut)
+widget camp-tasks-m-st-light kind=tasks family=medium scale=3 theme=light
+widget camp-tasks-m-st-light-done kind=tasks family=medium scale=3 theme=light done=1
+widget camp-tasks-m-st-minimal-done kind=tasks family=medium scale=3 theme=minimal done=1
+widget camp-tasks-m-st-blossom-done kind=tasks family=medium scale=3 theme=blossom done=1
+widget camp-tasks-m-st-aurora-done kind=tasks family=medium scale=3 theme=aurora scheme=dark done=1
+widget camp-tasks-m-st-neon-done kind=tasks family=medium scale=3 theme=neon scheme=dark done=1
+only camp-tasks-m-st-light camp-tasks-m-st-light-done camp-tasks-m-st-dark-done camp-tasks-m-st-minimal-done camp-tasks-m-st-pastel-done camp-tasks-m-st-blossom-done camp-tasks-m-st-aurora-done camp-tasks-m-st-neon-done
