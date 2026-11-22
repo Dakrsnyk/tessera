@@ -791,8 +791,10 @@ struct TopicForm: View {
                         let existing = model.content.habits.first { $0.name.caseInsensitiveCompare(suggestion.name) == .orderedSame }
                         ChoiceChip(title: suggestion.name, symbol: suggestion.symbol, isSelected: existing != nil) {
                             if let existing {
-                                // Only a habit never checked is taken back: a followed one stays.
-                                if existing.completedDays.isEmpty {
+                                // Only the habit this chip added, never checked, is taken back: a followed one, or one
+                                // made by hand with the same name, stays.
+                                if existing.completedDays.isEmpty, existing.symbol == suggestion.symbol,
+                                   existing.colorHex == "7FA33A", existing.reminderHour == nil {
                                     model.updateContent { $0.habits.removeAll { $0.id == existing.id } }
                                 }
                             } else if !model.addHabit(Habit(name: suggestion.name, symbol: suggestion.symbol, colorHex: "7FA33A")) {

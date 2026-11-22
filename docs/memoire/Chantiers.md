@@ -420,3 +420,9 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 - Limites : pas de Calibri (police Microsoft, absente d'iOS), pas de police ajoutée à l'app (aucune licence à porter) ; les textes dessinés avec `.font(.system(...))` en dur (quelques pastilles, icônes) gardent la police système.
 - Reste : voir sur l'iPhone le rendu des polices larges (Zapfino) dans les petits widgets ; un `[unit]` pour prouver `FontCatalogTests` (au moins 100 polices installées sur le simulateur).
 - 2026-11-21 (suite) : sur les inspirations du PDG (Pinterest), ~120 polices libres de Google Fonts ajoutées (`Shared/Fonts`, `FontCatalogBundled.swift` généré, enregistrement `CTFontManagerRegisterFontsForURLs` au premier usage, aucune entrée Info.plist) ; reste : page de crédits des polices (OFL exige la licence, textes dans `docs/legal/polices`) à publier avant l'App Store, comme celle des photos ; les polices variables (Raleway, Josefin Sans, Quicksand, Fredoka) n'ont que leur instance par défaut (Thin ou Light).
+
+## Chantier 43 : inscription revue — 2026-11-22
+- Demande du PDG (série de corrections, un `[interne]` à la fin de chacune) : voir Demandes.md.
+- Fait : `Interest.offered(keeping:)` (Finance cachée sauf pour un ancien compte qui l'a cochée), `Interest.topics` (Business → pages Business puis Finances), `Interest.hint` supprimé ; `NutritionGoalChoice` + `UserProfile.goalFocus` (côté entraînement de l'objectif, effacé quand l'objectif change, sans effet sur le calcul) ; `TopicForm` : Nutrition « Toi » en tête (poids, âge, taille), Planning « Pour commencer » (ScheduleImportView ou tâches à la main), Bien-être 8 habitudes proposées, Finances sans budget quand `compactKnown` (premier lancement) ; textes `l10n/parts/104.*`.
+- Reste : `[unit]` (tests `ProfileTests`, `SharedGoalTests`), vérifier sur l'iPhone ; `goalFocus` ne change pas encore les besoins calculés (à décider : plus de protéines pour « … et force » ?).
+

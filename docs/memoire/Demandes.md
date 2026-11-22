@@ -353,6 +353,7 @@ Retour : [[Memoire]]
 
 ## À faire
 
+- [ ] **Inscription revue (demandée le 2026-11-22)** : grille des intérêts sans Finance (Business mène aussi à la page Finances), Bien-être propose des habitudes, plus de sous-titres sous Études et Planning ; Nutrition demande poids, âge, taille puis un objectif combiné (« Perte de poids et force »…) ; Planning propose d'importer l'emploi du temps ou de saisir les tâches à la main ; Finances au premier lancement : revenu, principales dépenses, objectif d'épargne (sans budget). Code fait le 2026-11-22 (Chantier 43), à vérifier sur l'iPhone.
 - [ ] **Mission de nuit du 2026-11-17 : « Missions prioritaires de la nuit et évolution fonctionnelle »** (demandée le 2026-11-17 vers 0 h 50, 6 heures au plus, PDG endormi, aucune question après les 5 premières minutes ; ses deux réponses : nouvel ordre de Mon quotidien pour TOUS les comptes, historique de `ci-report` non réécrit). Suivi et résultats : Chantier 37 de `Chantiers.md` ; décisions : `Decisions.md` (2026-11-17).
   - [x] 1. Finance : diagnostic et relance de la CI, sans toucher au code de Finance (2026-11-17 : le commit ne modifiait qu'un `.md`, relancé par 629f561).
   - [x] 2. (fait le 2026-11-17 : run 446 `[check]` vert ; run 447 `[studio]` : 4 tests à corriger ; run 449 : tous les tests du Studio réussis ; Build 448 `[interne]`) Créer « taille d'abord » : tests repris, bouton « + » corrigé, deux anciens écrans supprimés, relecture par un autre agent (2026-11-17, 9a2d512) ; validation `[check]` puis `[studio]` puis `[interne]` : voir Chantier 37.
