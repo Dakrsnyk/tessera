@@ -78,7 +78,7 @@ enum ProductivityTiles {
             tile.caption = "\(Fmt.longDay(deadline.date)) à \(TF.time(deadline.date, context))"
         }
         tile.detail = seconds < 3600 ? tr("Dernière ligne droite") : nil
-        tile.shortValue = seconds < 86_400 ? "\(Int(seconds / 3600)) h" : "\(Int(seconds / 86_400)) j"
+        tile.shortValue = seconds < 86_400 ? "\(Int(seconds / 3600)) h" : tr("\(Int(seconds / 86_400)) j")
         tile.inline = "\(deadline.title) · \(TF.relativeTime(deadline.date, from: now))"
         return tile
     }

@@ -94,7 +94,7 @@ struct AccessoryWidgetView: View {
                     .font(.caption)
             }
         default:
-            Text(info.isToday ? tr("\(title) · aujourd'hui") : "\(title) · \(Fmt.number(info.days)) j")
+            Text(info.isToday ? tr("\(title) · aujourd'hui") : "\(title) · " + tr("\(Fmt.number(info.days)) j"))
         }
     }
 

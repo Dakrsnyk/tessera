@@ -65,7 +65,7 @@ enum CarTiles {
         }
         tile.visual = .bar(min(1, first.used))
         tile.rows = statuses.dropFirst().prefix(4).map { status -> TileRow in
-            let left = status.kmLeft.map { tr("\(TF.int($0)) km") } ?? status.daysLeft.map { "\($0) j" } ?? "—"
+            let left = status.kmLeft.map { tr("\(TF.int($0)) km") } ?? status.daysLeft.map { tr("\($0) j") } ?? "—"
             return TileRow(id: status.item.id.uuidString, title: status.item.name, value: left, progress: min(1, status.used))
         }
         tile.gauge = min(1, first.used)
@@ -136,7 +136,7 @@ enum CarTiles {
         tile.caption = next.title
         tile.rows = upcoming.prefix(5).map { item -> TileRow in
             let left = DateMath.daysBetween(now, item.date)
-            return TileRow(id: item.id.uuidString, title: item.title, value: "\(left) j", detail: Fmt.firstOfMonth(Fmt.format(item.date, template: "dMMMMyyyy"), item.date), symbol: item.symbol, isHighlighted: left <= 14)
+            return TileRow(id: item.id.uuidString, title: item.title, value: tr("\(left) j"), detail: Fmt.firstOfMonth(Fmt.format(item.date, template: "dMMMMyyyy"), item.date), symbol: item.symbol, isHighlighted: left <= 14)
         }
         tile.compactRows = true
         tile.inline = tr("\(next.title) dans \(days) j")

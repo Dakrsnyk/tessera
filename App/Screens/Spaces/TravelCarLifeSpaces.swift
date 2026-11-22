@@ -379,7 +379,7 @@ struct CarSpaceSections: View {
 
     private static func remaining(_ status: CarMath.ServiceStatus) -> String {
         if let km = status.kmLeft { return tr("\(TF.int(km)) km") }
-        if let days = status.daysLeft { return "\(days) j" }
+        if let days = status.daysLeft { return tr("\(days) j") }
         return "—"
     }
 
