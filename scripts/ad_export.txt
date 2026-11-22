@@ -745,3 +745,29 @@ widget camp-caloriesLeft-m-st-blossom-scan kind=caloriesLeft family=medium scale
 widget camp-caloriesLeft-m-st-aurora-scan kind=caloriesLeft family=medium scale=3 theme=aurora scheme=dark meal=photo
 widget camp-caloriesLeft-m-st-neon-scan kind=caloriesLeft family=medium scale=3 theme=neon scheme=dark meal=photo
 only camp-caloriesLeft-m-st-light camp-caloriesLeft-m-st-light-scan camp-caloriesLeft-m-st-dark-scan camp-caloriesLeft-m-st-minimal-scan camp-caloriesLeft-m-st-pastel-scan camp-caloriesLeft-m-st-blossom-scan camp-caloriesLeft-m-st-aurora-scan camp-caloriesLeft-m-st-neon-scan
+# --- Pub organique « Next class, one glance » (2026-11-22) : Études en un seul run, un dimanche UTC (écran verrouillé, Prochain cours, Horaire du jour, Devoirs avant/après le toucher, 7 styles)
+widget camp-cours-lock-nextClass-rect kind=nextClass family=rect scale=4
+widget camp-cours-lock-timetable-rect kind=timetable family=rect scale=4
+widget camp-cours-nextClass-s-st-light kind=nextClass family=small scale=4 theme=light
+widget camp-cours-nextClass-s-st-dark kind=nextClass family=small scale=4 theme=dark scheme=dark
+widget camp-cours-nextClass-s-st-minimal kind=nextClass family=small scale=4 theme=minimal
+widget camp-cours-nextClass-s-st-pastel kind=nextClass family=small scale=4 theme=pastel
+widget camp-cours-nextClass-s-st-blossom kind=nextClass family=small scale=4 theme=blossom
+widget camp-cours-nextClass-s-st-aurora kind=nextClass family=small scale=4 theme=aurora scheme=dark
+widget camp-cours-nextClass-s-st-neon kind=nextClass family=small scale=4 theme=neon scheme=dark
+widget camp-cours-timetable-s-st-light kind=timetable family=small scale=4 theme=light
+widget camp-cours-timetable-s-st-dark kind=timetable family=small scale=4 theme=dark scheme=dark
+widget camp-cours-timetable-s-st-minimal kind=timetable family=small scale=4 theme=minimal
+widget camp-cours-timetable-s-st-pastel kind=timetable family=small scale=4 theme=pastel
+widget camp-cours-timetable-s-st-blossom kind=timetable family=small scale=4 theme=blossom
+widget camp-cours-timetable-s-st-aurora kind=timetable family=small scale=4 theme=aurora scheme=dark
+widget camp-cours-timetable-s-st-neon kind=timetable family=small scale=4 theme=neon scheme=dark
+widget camp-cours-assignments-m-st-light kind=assignments family=medium scale=3 theme=light
+widget camp-cours-assignments-m-st-light-done kind=assignments family=medium scale=3 theme=light done=1
+widget camp-cours-assignments-m-st-dark-done kind=assignments family=medium scale=3 theme=dark scheme=dark done=1
+widget camp-cours-assignments-m-st-minimal-done kind=assignments family=medium scale=3 theme=minimal done=1
+widget camp-cours-assignments-m-st-pastel-done kind=assignments family=medium scale=3 theme=pastel done=1
+widget camp-cours-assignments-m-st-blossom-done kind=assignments family=medium scale=3 theme=blossom done=1
+widget camp-cours-assignments-m-st-aurora-done kind=assignments family=medium scale=3 theme=aurora scheme=dark done=1
+widget camp-cours-assignments-m-st-neon-done kind=assignments family=medium scale=3 theme=neon scheme=dark done=1
+only camp-cours-lock-nextClass-rect camp-cours-lock-timetable-rect camp-cours-nextClass-s-st-light camp-cours-nextClass-s-st-dark camp-cours-nextClass-s-st-minimal camp-cours-nextClass-s-st-pastel camp-cours-nextClass-s-st-blossom camp-cours-nextClass-s-st-aurora camp-cours-nextClass-s-st-neon camp-cours-timetable-s-st-light camp-cours-timetable-s-st-dark camp-cours-timetable-s-st-minimal camp-cours-timetable-s-st-pastel camp-cours-timetable-s-st-blossom camp-cours-timetable-s-st-aurora camp-cours-timetable-s-st-neon camp-cours-assignments-m-st-light camp-cours-assignments-m-st-light-done camp-cours-assignments-m-st-dark-done camp-cours-assignments-m-st-minimal-done camp-cours-assignments-m-st-pastel-done camp-cours-assignments-m-st-blossom-done camp-cours-assignments-m-st-aurora-done camp-cours-assignments-m-st-neon-done
