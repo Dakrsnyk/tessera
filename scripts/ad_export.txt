@@ -827,3 +827,17 @@ only camp-inspo-budgetLeft-s-st-blossom camp-inspo-budgetLeft-s-st-blossom-spent
 
 # --- Pub organique « Before you unlock » (2026-11-22) : écran verrouillé (Calories en ligne, Horaire et Reste du mois en rectangle, avant / après la dépense rapide) et l'accueil en 7 styles, un seul run (toutes les pièces existent déjà)
 only lock-caloriesLeft-inline camp-cours-lock-timetable-rect camp-lock-budgetLeft-rect camp-lock-budgetLeft-rect-spent camp-quickExpense-s-light camp-quickExpense-s-light-spent camp-quickExpense-s-st-dark-spent camp-quickExpense-s-st-minimal-spent camp-quickExpense-s-st-pastel-spent camp-quickExpense-s-st-blossom-spent camp-quickExpense-s-st-aurora-spent camp-quickExpense-s-st-neon-spent camp-cours-timetable-s-st-light camp-cours-timetable-s-st-dark camp-cours-timetable-s-st-minimal camp-cours-timetable-s-st-pastel camp-cours-timetable-s-st-blossom camp-cours-timetable-s-st-aurora camp-cours-timetable-s-st-neon camp-caloriesLeft-m-st-light camp-caloriesLeft-m-st-dark camp-caloriesLeft-m-st-minimal camp-caloriesLeft-m-st-pastel camp-caloriesLeft-m-st-blossom camp-caloriesLeft-m-st-aurora camp-caloriesLeft-m-st-neon
+
+# --- Pub organique « Discipline edit » (2026-11-22) : Habitudes avant/après en Noir mat, puis l'état coché et l'objectif d'épargne en 5 styles sombres (accent rouge comme irl-nextSet-combo), un seul run
+widget camp-disc-habits-m-matte-todo kind=habits family=medium scale=3 theme=matteBlack accent=E5383B scheme=dark todo=1
+widget camp-disc-habits-m-matte kind=habits family=medium scale=3 theme=matteBlack accent=E5383B scheme=dark
+widget camp-disc-habits-m-carbon kind=habits family=medium scale=3 theme=carbon accent=E5383B scheme=dark
+widget camp-disc-habits-m-mars kind=habits family=medium scale=3 theme=mars scheme=dark
+widget camp-disc-habits-m-luxury kind=habits family=medium scale=3 theme=luxury scheme=dark
+widget camp-disc-habits-m-neon kind=habits family=medium scale=3 theme=neon accent=E5383B scheme=dark
+widget camp-disc-savingsGoal-s-matte kind=savingsGoal family=small scale=4 theme=matteBlack accent=E5383B scheme=dark
+widget camp-disc-savingsGoal-s-carbon kind=savingsGoal family=small scale=4 theme=carbon accent=E5383B scheme=dark
+widget camp-disc-savingsGoal-s-mars kind=savingsGoal family=small scale=4 theme=mars scheme=dark
+widget camp-disc-savingsGoal-s-luxury kind=savingsGoal family=small scale=4 theme=luxury scheme=dark
+widget camp-disc-savingsGoal-s-neon kind=savingsGoal family=small scale=4 theme=neon accent=E5383B scheme=dark
+only camp-disc-habits-m-matte-todo camp-disc-habits-m-matte camp-disc-habits-m-carbon camp-disc-habits-m-mars camp-disc-habits-m-luxury camp-disc-habits-m-neon camp-disc-savingsGoal-s-matte camp-disc-savingsGoal-s-carbon camp-disc-savingsGoal-s-mars camp-disc-savingsGoal-s-luxury camp-disc-savingsGoal-s-neon
