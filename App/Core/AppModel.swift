@@ -103,6 +103,12 @@ final class AppModel {
         savedStyles = store.state(StyleLibrary.self).styles
         migrateProfile()
         migrateStudyGoal()
+        // The habits of the first Bien-être suggestions, all in one green, take their own color (2026-11-22).
+        var recolored = content.habits
+        if HabitSuggestions.recolor(&recolored) {
+            content.habits = recolored
+            store.content = content
+        }
         migrateDailyLayout()
         insights = InsightCache.load()
         let cache = MarketService.cache

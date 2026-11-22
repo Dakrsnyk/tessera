@@ -40,7 +40,10 @@ struct PlanningAppView: View {
             compact: true
         ) {
             // 1. The only date selector of the screen, with room on the left for the hours of the table below it.
-            WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: mark, leadingInset: WeekTimetable.fullLeadingInset)
+            // The same card as in the other mini-apps (PDG, 2026-11-22): the days spread over the whole card. The
+            // room kept on the left for the hours of the table left the card lopsided (an empty strip on the left,
+            // Sunday's pill against the right edge), and the table no longer sits right under it.
+            WeekSelector(day: $day, colorHex: accentHex, allowsFuture: true, mark: mark)
             // 2. « Prochain événement »: the answer to « qu'est-ce qui vient ? », for the current week.
             if showsNext {
                 // Read again every minute: « dans 40 min » and « En cours » follow the clock.

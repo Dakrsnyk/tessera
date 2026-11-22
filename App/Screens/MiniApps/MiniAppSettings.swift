@@ -49,6 +49,22 @@ extension MiniApp {
         }
     }
 
+    /// The name of the button and of the sheet of a mini-app's own information and preferences (PDG, 2026-11-22:
+    /// « Mes infos nutrition », « Mes infos fitness »… instead of « Mes paramètres »).
+    var infoTitle: String {
+        switch self {
+        case .nutrition: tr("Mes infos nutrition")
+        case .fitness: tr("Mes infos fitness")
+        case .planning: tr("Mes infos planning")
+        case .studies: tr("Mes infos études")
+        case .finances: tr("Mes infos finances")
+        case .business: tr("Mes infos business")
+        case .travel: tr("Mes infos voyage")
+        case .car: tr("Mes infos auto")
+        case .photos: tr("Mes infos photos")
+        }
+    }
+
     /// Whether « Mes infos » has something to show.
     var hasInfo: Bool { !infoTopics.isEmpty || !settingsItems.isEmpty || !commonSettings.isEmpty }
 }
@@ -70,7 +86,7 @@ struct MiniAppInfoSection: View {
             Button {
                 isShowing = true
             } label: {
-                Label(tr("Mes paramètres"), systemImage: "gearshape")
+                Label(app.infoTitle, systemImage: "gearshape")
                     .font(.subheadline.weight(.semibold))
                     .frame(maxWidth: .infinity, minHeight: 44)
             }
@@ -197,7 +213,7 @@ struct MiniAppInfoSheet: View {
             }
             .scrollDismissesKeyboard(.interactively)
             .cristalScreen()
-            .navigationTitle(tr("Mes paramètres"))
+            .navigationTitle(app.infoTitle)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

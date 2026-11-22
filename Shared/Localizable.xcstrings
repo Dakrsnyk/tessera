@@ -96680,6 +96680,53 @@
         }
       }
     },
+    "Exercice %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Übung %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exercise %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ejercicio %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exercice %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esercizio %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エクササイズ %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Exercício %@"
+          }
+        }
+      }
+    },
     "Exercice introuvable": {
       "extractionState": "manual",
       "localizations": {
@@ -146124,6 +146171,476 @@
         }
       }
     },
+    "Mes infos auto": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Auto-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My car info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos del auto"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos auto"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info auto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "車の情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos do carro"
+          }
+        }
+      }
+    },
+    "Mes infos business": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Business-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My business info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de negocio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos business"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info business"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ビジネスの情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de negócios"
+          }
+        }
+      }
+    },
+    "Mes infos finances": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Finanz-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My finances info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de finanzas"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos finances"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info finanze"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お金の情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de finanças"
+          }
+        }
+      }
+    },
+    "Mes infos fitness": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Fitness-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My fitness info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de fitness"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos fitness"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info fitness"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フィットネスの情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de fitness"
+          }
+        }
+      }
+    },
+    "Mes infos habitudes": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Gewohnheiten-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My habits info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de hábitos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos habitudes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info abitudini"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "習慣の情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de hábitos"
+          }
+        }
+      }
+    },
+    "Mes infos nutrition": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Ernährungs-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My nutrition info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de nutrición"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos nutrition"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info nutrizione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "栄養の情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de nutrição"
+          }
+        }
+      }
+    },
+    "Mes infos photos": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Foto-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My photos info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de fotos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos photos"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info foto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "写真の情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de fotos"
+          }
+        }
+      }
+    },
+    "Mes infos planning": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Planungs-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My planning info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de planificación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos planning"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info agenda"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プランニングの情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de planejamento"
+          }
+        }
+      }
+    },
+    "Mes infos voyage": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Reise-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My travel info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de viaje"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos voyage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info viaggi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "旅行の情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de viagem"
+          }
+        }
+      }
+    },
+    "Mes infos études": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meine Studien-Infos"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My studies info"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mis datos de estudios"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes infos études"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mie info studio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "勉強の情報"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minhas infos de estudos"
+          }
+        }
+      }
+    },
     "Mes mini-apps": {
       "extractionState": "manual",
       "localizations": {
@@ -146167,53 +146684,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Meus miniapps"
-          }
-        }
-      }
-    },
-    "Mes paramètres": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meine Einstellungen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "My settings"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mis ajustes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mes paramètres"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le mie impostazioni"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "設定"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Minhas configurações"
           }
         }
       }

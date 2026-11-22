@@ -297,7 +297,7 @@ private struct MiniAppSettingsDoor: View {
     var body: some View {
         MiniRowsCard {
             NavigationLink { HabitsSettingsView() } label: {
-                MiniRow(symbol: "gearshape.fill", colorHex: HabitsApp.accentHex, title: tr("Mes paramètres"), detail: tr("Rappels et notifications"))
+                MiniRow(symbol: "gearshape.fill", colorHex: HabitsApp.accentHex, title: tr("Mes infos habitudes"), detail: tr("Rappels et notifications"))
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("habits-settings")
@@ -701,7 +701,7 @@ struct HabitsSettingsView: View {
                 }
             }
         }
-        .navigationTitle(tr("Mes paramètres"))
+        .navigationTitle(tr("Mes infos habitudes"))
         .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $editing) { HabitEditor(habit: $0, isNew: false) }
         .permissionSheet(.notifications, isPresented: $showsExplainer, request: requestNotifications) { _ in

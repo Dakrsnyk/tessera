@@ -826,39 +826,21 @@ struct TopicForm: View {
     // MARK: Well-being
 
     /// Habits to start with in one tap (PDG, 2026-11-22: Bien-être proposes the habits), each with its icon.
-    private struct HabitSuggestion: Hashable {
-        let name: String
-        let symbol: String
-    }
-
-    private static var habitSuggestions: [HabitSuggestion] {
-        [
-            HabitSuggestion(name: tr("Boire de l'eau"), symbol: "drop.fill"),
-            HabitSuggestion(name: tr("Méditer"), symbol: "brain.head.profile"),
-            HabitSuggestion(name: tr("Lire"), symbol: "book.fill"),
-            HabitSuggestion(name: tr("Marcher"), symbol: "figure.walk"),
-            HabitSuggestion(name: tr("Dormir 8 h"), symbol: "bed.double.fill"),
-            HabitSuggestion(name: tr("S'étirer"), symbol: "figure.flexibility"),
-            HabitSuggestion(name: tr("Tenir un journal"), symbol: "pencil.line"),
-            HabitSuggestion(name: tr("Moins d'écrans le soir"), symbol: "moon.fill"),
-        ]
-    }
-
     @ViewBuilder private var wellbeing: some View {
         if !inMiniApp {
             QuestionCard(title: tr("Des habitudes à suivre"), detail: tr("Touche celles qui te parlent : elles arrivent dans Habitudes.")) {
                 FlowLayout {
-                    ForEach(Self.habitSuggestions, id: \.self) { suggestion in
+                    ForEach(HabitSuggestions.all, id: \.self) { suggestion in
                         let existing = model.content.habits.first { $0.name.caseInsensitiveCompare(suggestion.name) == .orderedSame }
                         ChoiceChip(title: suggestion.name, symbol: suggestion.symbol, isSelected: existing != nil) {
                             if let existing {
                                 // Only the habit this chip added, never checked, is taken back: a followed one, or one
                                 // made by hand with the same name, stays.
                                 if existing.completedDays.isEmpty, existing.symbol == suggestion.symbol,
-                                   existing.colorHex == "7FA33A", existing.reminderHour == nil {
+                                   existing.colorHex == suggestion.colorHex, existing.reminderHour == nil {
                                     model.updateContent { $0.habits.removeAll { $0.id == existing.id } }
                                 }
-                            } else if !model.addHabit(Habit(name: suggestion.name, symbol: suggestion.symbol, colorHex: "7FA33A")) {
+                            } else if !model.addHabit(Habit(name: suggestion.name, symbol: suggestion.symbol, colorHex: suggestion.colorHex)) {
                                 paywall = .habitLimit
                             }
                         }

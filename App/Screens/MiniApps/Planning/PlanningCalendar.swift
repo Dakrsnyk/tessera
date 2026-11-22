@@ -115,13 +115,10 @@ struct PlanningCalendarCard: View {
         case .day:
             WeekTimetable(days: [(day: day, items: Agenda.items(on: day, model: model, events: events))], selected: day, hourHeight: 52, hours: 6...22,
                           onSelect: select, onCreate: create, onOpen: onOpen, accent: accent, showsHeader: false)
-                .padding(.horizontal, WeekSelector.cardInset)
         case .week:
             // Without a frame or strip of days: the selector at the top of the screen is the header of the columns.
             WeekTimetable(days: Agenda.week(containing: day, model: model, events: events), selected: day,
                           onSelect: select, onCreate: create, onOpen: onOpen, accent: accent, showsHeader: false)
-                // The selector's own side margin: the columns fall exactly under its days.
-                .padding(.horizontal, WeekSelector.cardInset)
         case .month:
             monthGrid
         case .year:

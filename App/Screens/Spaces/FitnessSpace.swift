@@ -235,13 +235,11 @@ struct RoutineEditor: View {
                     TextField(tr("Notes", context: "text"), text: $exercise.notes)
                     }
                     .exerciseHeight(exercise.id)
-                    // The held exercise follows the finger (every row of the section, header included).
-                    .offset(y: lifted ? heldOffset : 0)
-                    .animation(nil, value: heldOffset)
+                    // The held exercise is lifted as one block (PDG, 2026-11-22): its whole card takes the accent
+                    // tint, and the section moves as a whole each time it passes a neighbour (no row left behind).
+                    .listRowBackground(Rectangle().fill(lifted ? AnyShapeStyle(Color.accentColor.opacity(0.18)) : AnyShapeStyle(AppFill.cardFill)))
                 } header: {
-                    reorderHandle(for: exercise.id)
-                        .offset(y: lifted ? heldOffset : 0)
-                        .animation(nil, value: heldOffset)
+                    reorderHeader(for: exercise.id)
                 }
                 .id(exercise.id)
             }
@@ -255,24 +253,43 @@ struct RoutineEditor: View {
         }
     }
 
-    /// The grip above an exercise: hold it then move it up or down (like a card of Mon Quotidien); VoiceOver
-    /// gets « Monter » and « Descendre ». The fields below stay editable by a simple touch.
-    private func reorderHandle(for id: UUID) -> some View {
-        let position = (routine.exercises.firstIndex { $0.id == id } ?? 0) + 1
-        return HStack(spacing: 6) {
-            Image(systemName: "line.3.horizontal")
-            Text("\(position)")
-            Spacer()
+    /// Above an exercise: its number, to hold then move up or down (like a card of Mon Quotidien), and in the
+    /// top right corner two arrows that move it one place up or down (PDG, 2026-11-22). VoiceOver gets « Monter » and
+    /// « Descendre ». The fields below stay editable by a simple touch.
+    private func reorderHeader(for id: UUID) -> some View {
+        let index = routine.exercises.firstIndex { $0.id == id } ?? 0
+        let position = index + 1
+        return HStack(spacing: 8) {
+            Text(tr("Exercice \(position)"))
+                .frame(maxWidth: .infinity, minHeight: 36, alignment: .leading)
+                .contentShape(Rectangle())
+                .overlay { DailyHoldToMove(onMove: { hold(id, $0) }, onDrop: drop) }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Text(tr("Déplacer l'exercice")))
+                .accessibilityValue(Text("\(position)"))
+                .accessibilityAction(named: Text(tr("Monter"))) { shift(id, by: -1) }
+                .accessibilityAction(named: Text(tr("Descendre"))) { shift(id, by: 1) }
+            moveArrow("arrow.up", label: tr("Monter"), enabled: index > 0) { shift(id, by: -1) }
+            moveArrow("arrow.down", label: tr("Descendre"), enabled: index + 1 < routine.exercises.count) { shift(id, by: 1) }
         }
         .font(.footnote.weight(.semibold))
-        .frame(minHeight: 36)
-        .contentShape(Rectangle())
-        .overlay { DailyHoldToMove(onMove: { hold(id, $0) }, onDrop: drop) }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(tr("Déplacer l'exercice")))
-        .accessibilityValue(Text("\(position)"))
-        .accessibilityAction(named: Text(tr("Monter"))) { shift(id, by: -1) }
-        .accessibilityAction(named: Text(tr("Descendre"))) { shift(id, by: 1) }
+    }
+
+    private func moveArrow(_ symbol: String, label: String, enabled: Bool, action: @escaping () -> Void) -> some View {
+        Button {
+            Haptics.tap()
+            action()
+        } label: {
+            Image(systemName: symbol)
+                .font(.footnote.weight(.bold))
+                .foregroundStyle(enabled ? Color.accentColor : Color.secondary.opacity(0.4))
+                .frame(width: 36, height: 36)
+                .background(Color.accentColor.opacity(enabled ? 0.14 : 0.06), in: Circle())
+                .contentShape(Circle())
+        }
+        .buttonStyle(.borderless)
+        .disabled(!enabled)
+        .accessibilityLabel(Text(label))
     }
 
     private func height(of id: UUID) -> CGFloat { (heights[id] ?? 260) + 40 }
