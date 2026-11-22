@@ -202759,53 +202759,6 @@
         }
       }
     },
-    "Réponds à la question ci-dessus pour obtenir ton plan": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beantworte die Frage oben, um deinen Plan zu erhalten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Answer the question above to get your plan"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Responde a la pregunta anterior para obtener tu plan"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Réponds à la question ci-dessus pour obtenir ton plan"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Rispondi alla domanda qui sopra per ottenere il tuo piano"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "上の質問に答えると、プランが表示されます"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Responda à pergunta acima para obter seu plano"
-          }
-        }
-      }
-    },
     "Réponse": {
       "extractionState": "manual",
       "localizations": {

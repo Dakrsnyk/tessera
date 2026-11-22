@@ -590,9 +590,9 @@
  "%@ g": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:89: stat(tr(\"Protéines\"), tr(\"\\(TF.int(numbers.goals.protein)) g\"))",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:90: stat(tr(\"Glucides\"), tr(\"\\(TF.int(numbers.goals.carbs)) g\"))",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:91: stat(tr(\"Lipides\"), tr(\"\\(TF.int(numbers.goals.fat)) g\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:99: stat(tr(\"Protéines\"), tr(\"\\(TF.int(numbers.goals.protein)) g\"))",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:100: stat(tr(\"Glucides\"), tr(\"\\(TF.int(numbers.goals.carbs)) g\"))",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:101: stat(tr(\"Lipides\"), tr(\"\\(TF.int(numbers.goals.fat)) g\"))"
   ]
  },
  "%@ g de fibres": {
@@ -1386,7 +1386,7 @@
  "%@ → %@ kcal par jour": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:246: Text(tr(\"\\(TF.int(proposal.previousKcal)) → \\(TF.int(proposal.newKcal)) kcal par jour\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:256: Text(tr(\"\\(TF.int(proposal.previousKcal)) → \\(TF.int(proposal.newKcal)) kcal par jour\"))"
   ]
  },
  "%@%@ %@ en 7 jours": {
@@ -1410,7 +1410,7 @@
  "%@%@ par semaine (%@%@ %%)": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:158: return tr(\"\\(sign)\\(amount) par semaine (\\(sign)\\(percent) %)\")"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:168: return tr(\"\\(sign)\\(amount) par semaine (\\(sign)\\(percent) %)\")"
   ]
  },
  "%@, Premium": {
@@ -1435,7 +1435,7 @@
  "%@, vers le %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:174: stat(tr(\"Durée plus prudente\"), tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))), vers le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\"), highlighted: true)"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:184: stat(tr(\"Durée plus prudente\"), tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))), vers le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\"), highlighted: true)"
   ]
  },
  "%@. Rien n'est débité pendant l'essai. Renouvellement automatique %@, annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.": {
@@ -2336,7 +2336,7 @@
  "Accepter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:258: PlanButton(title: tr(\"Accepter\"), filled: true, accent: accent) {"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:268: PlanButton(title: tr(\"Accepter\"), filled: true, accent: accent) {"
   ]
  },
  "Accordée": {
@@ -3350,7 +3350,7 @@
  "Ajustement proposé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:240: Label(tr(\"Ajustement proposé\"), systemImage: \"arrow.triangle.2.circlepath\")"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:250: Label(tr(\"Ajustement proposé\"), systemImage: \"arrow.triangle.2.circlepath\")"
   ]
  },
  "Ajuster de 10 g": {
@@ -3929,13 +3929,13 @@
  "Appliquer ce plan": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:123: PlanButton(title: tr(\"Appliquer ce plan\"), filled: true, accent: accent) {"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:133: PlanButton(title: tr(\"Appliquer ce plan\"), filled: true, accent: accent) {"
   ]
  },
  "Appliquer remplace tes valeurs saisies.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:117: Text(tr(\"Appliquer remplace tes valeurs saisies.\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:127: Text(tr(\"Appliquer remplace tes valeurs saisies.\"))"
   ]
  },
  "Appliquer « %@ »": {
@@ -4109,7 +4109,7 @@
  "Ardane ne propose pas de calories pour cet objectif.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:198: Text(tr(\"Ardane ne propose pas de calories pour cet objectif.\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:208: Text(tr(\"Ardane ne propose pas de calories pour cet objectif.\"))"
   ]
  },
  "Ardane ne reçoit que le montant, le commerçant et la carte que Raccourcis lui passe. Une dépense reçue se supprime comme les autres.": {
@@ -4719,7 +4719,7 @@
  "Aucune calorie n'est proposée pour le rythme demandé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:175: Text(tr(\"Aucune calorie n'est proposée pour le rythme demandé.\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:185: Text(tr(\"Aucune calorie n'est proposée pour le rythme demandé.\"))"
   ]
  },
  "Aucune colonne de date ou de montant n'a été trouvée. Le fichier doit avoir au moins une date et un montant par ligne.": {
@@ -6748,7 +6748,7 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:595: MiniSectionTitle(title: tr(\"Calories par jour\"))",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:611: .accessibilityLabel(tr(\"Calories par jour\"))",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:87: stat(tr(\"Calories par jour\"), tr(\"\\(TF.int(numbers.targetKcal)) kcal\"), highlighted: true)"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:97: stat(tr(\"Calories par jour\"), tr(\"\\(TF.int(numbers.targetKcal)) kcal\"), highlighted: true)"
   ]
  },
  "Calories restantes": {
@@ -10094,7 +10094,7 @@
  "Date cible": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileTopics.swift:1114: DatePicker(tr(\"Date cible\"), selection: Binding(get: { max(plan.targetDate, tomorrow) }, set: { model.setWeightPlanDate($0) }),"
+   "App/Screens/Profile/ProfileTopics.swift:1111: DatePicker(tr(\"Date cible\"), selection: Binding(get: { max(plan.targetDate, tomorrow) }, set: { model.setWeightPlanDate($0) }),"
   ]
  },
  "Date d'un paiement": {
@@ -10115,7 +10115,7 @@
  "Date estimée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:88: stat(tr(\"Date estimée\"), Fmt.format(numbers.reachDate, template: \"dMMMMyyyy\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:98: stat(tr(\"Date estimée\"), Fmt.format(numbers.reachDate, template: \"dMMMMyyyy\"))"
   ]
  },
  "Date et heure": {
@@ -11481,14 +11481,14 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:430: MiniStat(title: tr(\"Durée\"), value: Fmt.minutes(FitnessMath.minutes(inWeekOf: first, state)))",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:220: ValueRow(title: tr(\"Durée\"), value: tr(\"\\(TF.int(session.duration / 60)) min\"))",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:85: stat(tr(\"Durée\"), duration(days: numbers.days))",
-   "App/Screens/Profile/ProfileTopics.swift:1092: Text(tr(\"Durée\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:95: stat(tr(\"Durée\"), duration(days: numbers.days))",
+   "App/Screens/Profile/ProfileTopics.swift:1089: Text(tr(\"Durée\"))"
   ]
  },
  "Durée plus prudente": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:174: stat(tr(\"Durée plus prudente\"), tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))), vers le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\"), highlighted: true)"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:184: stat(tr(\"Durée plus prudente\"), tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))), vers le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\"), highlighted: true)"
   ]
  },
  "Dès ta première série validée, ta séance s'affiche sur l'écran verrouillé et dans la Dynamic Island : l'exercice, la série, le repos qui défile. « Série faite » et « Passer » marchent sans déverrouiller.": {
@@ -12376,13 +12376,13 @@
  "En %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileTopics.swift:1103: Text(tr(\"En \\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\")))\"))"
+   "App/Screens/Profile/ProfileTopics.swift:1100: Text(tr(\"En \\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\")))\"))"
   ]
  },
  "En %@ mois": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileTopics.swift:1109: Text(tr(\"En \\(String(months)) mois\"))"
+   "App/Screens/Profile/ProfileTopics.swift:1106: Text(tr(\"En \\(String(months)) mois\"))"
   ]
  },
  "En alterné ou les deux bras ensemble, paumes vers le haut.": {
@@ -12814,6 +12814,7 @@
  "Es-tu enceinte ou allaitante ?": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:54: Label(tr(\"Es-tu enceinte ou allaitante ?\"), systemImage: \"questionmark.circle\")",
    "App/Screens/Profile/ProfileTopics.swift:1013: QuestionCard(title: tr(\"Es-tu enceinte ou allaitante ?\"),"
   ]
  },
@@ -12906,7 +12907,7 @@
  "Estimation, pas une garantie : ton corps réagit à son propre rythme. Ce n'est pas un avis médical.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:100: Text(tr(\"Estimation, pas une garantie : ton corps réagit à son propre rythme. Ce n'est pas un avis médical.\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:110: Text(tr(\"Estimation, pas une garantie : ton corps réagit à son propre rythme. Ce n'est pas un avis médical.\"))"
   ]
  },
  "Estimé d'après la photo, analysée sur ton iPhone sans être enregistrée.": {
@@ -17426,7 +17427,7 @@
  "Le changement est limité par les bornes de sécurité d'Ardane.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:253: Text(tr(\"Le changement est limité par les bornes de sécurité d'Ardane.\"))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:263: Text(tr(\"Le changement est limité par les bornes de sécurité d'Ardane.\"))"
   ]
  },
  "Le chiffre d'affaires du jour comparé au même jour la semaine dernière.": {
@@ -19930,8 +19931,8 @@
  "Modifier l'objectif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:183: PlanButton(title: tr(\"Modifier l'objectif\"), filled: false, accent: accent, action: onEdit)",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:202: PlanButton(title: tr(\"Modifier l'objectif\"), filled: false, accent: accent, action: onEdit)"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:193: PlanButton(title: tr(\"Modifier l'objectif\"), filled: false, accent: accent, action: onEdit)",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:212: PlanButton(title: tr(\"Modifier l'objectif\"), filled: false, accent: accent, action: onEdit)"
   ]
  },
  "Modifier la dépense": {
@@ -21787,7 +21788,7 @@
  "Objectif impossible à atteindre de manière sûre": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:165: Label(tr(\"Objectif impossible à atteindre de manière sûre\"), systemImage: \"exclamationmark.triangle.fill\")"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:175: Label(tr(\"Objectif impossible à atteindre de manière sûre\"), systemImage: \"exclamationmark.triangle.fill\")"
   ]
  },
  "Objectif impossible à atteindre de manière sûre : perdre autant de poids aussi vite dépasse un rythme prudent.": {
@@ -22487,7 +22488,7 @@
  "Parle à un professionnel de santé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:191: Label(tr(\"Parle à un professionnel de santé\"), systemImage: \"cross.case\")"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:201: Label(tr(\"Parle à un professionnel de santé\"), systemImage: \"cross.case\")"
   ]
  },
  "Parmesan": {
@@ -22859,6 +22860,7 @@
  "Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids.": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:59: Text(tr(\"Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids.\"))",
    "App/Screens/Profile/ProfileTopics.swift:1014: detail: asks ? tr(\"Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids.\") : tr(\"Déjà répondu : tu peux le modifier.\")) {"
   ]
  },
@@ -23196,7 +23198,7 @@
  "Plan appliqué à tes besoins": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:105: Label(tr(\"Plan appliqué à tes besoins\"), systemImage: \"checkmark.circle.fill\")"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:115: Label(tr(\"Plan appliqué à tes besoins\"), systemImage: \"checkmark.circle.fill\")"
   ]
  },
  "Planche (gainage)": {
@@ -23514,7 +23516,7 @@
   "uses": [
    "App/Components/PermissionExplainer.swift:228: Button(tr(\"Plus tard\")) { dismiss() }",
    "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:80: Text(tr(\"Plus tard\")).frame(maxWidth: .infinity, minHeight: 44)",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:262: PlanButton(title: tr(\"Plus tard\"), filled: false, accent: accent) {",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:272: PlanButton(title: tr(\"Plus tard\"), filled: false, accent: accent) {",
    "App/Screens/MiniApps/Planning/PlanningPages.swift:57: section(tr(\"Plus tard\"), open.filter { ($0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false) })"
   ]
  },
@@ -23584,13 +23586,13 @@
  "Poids actuel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:77: stat(tr(\"Poids actuel\"), Units.weightText(kilograms: numbers.startKg, in: system))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:87: stat(tr(\"Poids actuel\"), Units.weightText(kilograms: numbers.startKg, in: system))"
   ]
  },
  "Poids cible": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:82: stat(tr(\"Poids cible\"), Units.weightText(kilograms: numbers.targetKg, in: system), highlighted: true)",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:92: stat(tr(\"Poids cible\"), Units.weightText(kilograms: numbers.targetKg, in: system), highlighted: true)",
    "App/Screens/Profile/ProfileTopics.swift:1063: ProfileNumberField(title: tr(\"Poids cible\"), unit: system.weightUnit, value: targetBinding, identifier: \"weightplan-target\")"
   ]
  },
@@ -26378,7 +26380,7 @@
  "Retirer cet objectif de poids": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileTopics.swift:1140: Button(tr(\"Retirer cet objectif de poids\"), role: .destructive) {"
+   "App/Screens/Profile/ProfileTopics.swift:1137: Button(tr(\"Retirer cet objectif de poids\"), role: .destructive) {"
   ]
  },
  "Retirer de Mon Quotidien": {
@@ -27188,7 +27190,7 @@
  "Rythme": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:86: stat(tr(\"Rythme\"), pace(numbers))"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:96: stat(tr(\"Rythme\"), pace(numbers))"
   ]
  },
  "Rythme du budget": {
@@ -27341,12 +27343,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:625: MiniSectionTitle(title: tr(\"Répartition des calories\"))"
-  ]
- },
- "Réponds à la question ci-dessus pour obtenir ton plan": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:52: Label(tr(\"Réponds à la question ci-dessus pour obtenir ton plan\"), systemImage: \"questionmark.circle\")"
   ]
  },
  "Réponse": {
@@ -30621,7 +30617,7 @@
  "Tes calories saisies restent prioritaires : reviens au calcul pour les remplacer par celles du plan.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:110: Label(tr(\"Tes calories saisies restent prioritaires : reviens au calcul pour les remplacer par celles du plan.\"), systemImage: \"hand.point.up.left\")"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:120: Label(tr(\"Tes calories saisies restent prioritaires : reviens au calcul pour les remplacer par celles du plan.\"), systemImage: \"hand.point.up.left\")"
   ]
  },
  "Tes cours de la semaine": {
@@ -31555,7 +31551,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/ScreenshotMode.swift:555: .navigationTitle(mode == \"nutrition-plan\" ? tr(\"Ton objectif de poids\") : tr(\"Récapitulatif\"))",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:73: Label(tr(\"Ton objectif de poids\"), systemImage: \"scalemass\")",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:83: Label(tr(\"Ton objectif de poids\"), systemImage: \"scalemass\")",
    "App/Screens/Profile/NutritionTargetsCard.swift:114: .navigationTitle(tr(\"Ton objectif de poids\"))"
   ]
  },
@@ -33231,7 +33227,7 @@
  "Utiliser cette durée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:178: PlanButton(title: tr(\"Utiliser cette durée\"), filled: true, accent: accent) {"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:188: PlanButton(title: tr(\"Utiliser cette durée\"), filled: true, accent: accent) {"
   ]
  },
  "Utiliser la caméra": {
@@ -36293,9 +36289,9 @@
  "semaine": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:150: return Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:174: stat(tr(\"Durée plus prudente\"), tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))), vers le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\"), highlighted: true)",
-   "App/Screens/Profile/ProfileTopics.swift:1103: Text(tr(\"En \\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\")))\"))",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:160: return Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:184: stat(tr(\"Durée plus prudente\"), tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))), vers le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\"), highlighted: true)",
+   "App/Screens/Profile/ProfileTopics.swift:1100: Text(tr(\"En \\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\")))\"))",
    "Shared/Render/Kinds/TimeWidgets.swift:450: ? tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))) et \\(Fmt.plural(rest, tr(\"jour\"), tr(\"jours\")))\")"
   ]
  },
@@ -36308,9 +36304,9 @@
  "semaines": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:150: return Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:174: stat(tr(\"Durée plus prudente\"), tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))), vers le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\"), highlighted: true)",
-   "App/Screens/Profile/ProfileTopics.swift:1103: Text(tr(\"En \\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\")))\"))",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:160: return Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))",
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:184: stat(tr(\"Durée plus prudente\"), tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))), vers le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\"), highlighted: true)",
+   "App/Screens/Profile/ProfileTopics.swift:1100: Text(tr(\"En \\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\")))\"))",
    "Shared/Render/Kinds/TimeWidgets.swift:450: ? tr(\"\\(Fmt.plural(weeks, tr(\"semaine\"), tr(\"semaines\"))) et \\(Fmt.plural(rest, tr(\"jour\"), tr(\"jours\")))\")"
   ]
  },

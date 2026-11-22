@@ -1066,11 +1066,8 @@ struct WeightPlanQuestions: View {
                         }
                     }
                 }
-                // Only where it is needed (PDG, 2026-11-22): once a target weight is set, outside the first launch
-                // (the plan's calculation reads it; a man or a minor is never asked).
-                if !compactKnown, profile.weightPlan != nil {
-                    LifeStageQuestion()
-                }
+                // The pregnancy question is no longer asked here (PDG, 2026-11-22): the recap of the plan asks it, only
+                // when a target weight needs it (`WeightPlanSummaryView`).
             }
         }
     }

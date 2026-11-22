@@ -47,17 +47,27 @@ struct WeightPlanSummaryView: View {
         model.profile.lifeStage == nil && model.profile.sex != .male && !model.profile.isMinor(birthday: model.life.birthday)
     }
 
+    /// The pregnancy question, asked here only (PDG, 2026-11-22: no longer on the first-launch pages): right where
+    /// the plan needs it, with its answers, wherever the recap is shown.
     private func situationPrompt(reason: String) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Label(tr("Réponds à la question ci-dessus pour obtenir ton plan"), systemImage: "questionmark.circle")
+            Label(tr("Es-tu enceinte ou allaitante ?"), systemImage: "questionmark.circle")
                 .font(.headline)
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityIdentifier("weightplan-needs-situation")
-            Text(reason)
+            Text(tr("Pendant la grossesse ou l'allaitement, Ardane ne calcule pas d'objectif de poids."))
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
+            FlowLayout {
+                ForEach([LifeStage.adult, .pregnant, .breastfeeding, .preferNotToSay]) { stage in
+                    ChoiceChip(title: stage.title, isSelected: model.profile.lifeStage == stage) {
+                        model.update(\.profile) { $0.lifeStage = stage }
+                    }
+                    .accessibilityIdentifier("lifestage-\(stage.rawValue)")
+                }
+            }
         }
     }
 
