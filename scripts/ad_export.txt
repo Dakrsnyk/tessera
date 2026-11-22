@@ -779,3 +779,41 @@ widget camp-tasks-m-st-blossom-done kind=tasks family=medium scale=3 theme=bloss
 widget camp-tasks-m-st-aurora-done kind=tasks family=medium scale=3 theme=aurora scheme=dark done=1
 widget camp-tasks-m-st-neon-done kind=tasks family=medium scale=3 theme=neon scheme=dark done=1
 only camp-tasks-m-st-light camp-tasks-m-st-light-done camp-tasks-m-st-dark-done camp-tasks-m-st-minimal-done camp-tasks-m-st-pastel-done camp-tasks-m-st-blossom-done camp-tasks-m-st-aurora-done camp-tasks-m-st-neon-done
+# --- Pub organique « Leaving in… » (Voyage, 2026-11-22) : décompte avant le départ (trip=ahead) dans les 7 styles de l'accueil, puis le même accueil pendant le voyage (trip=ongoing), un seul run (aucun vol, hôtel ni activité : marques réelles)
+widget camp-depart-tripCountdown-m-st-light-ahead kind=tripCountdown family=medium scale=3 theme=light trip=ahead
+widget camp-depart-tripCountdown-m-st-dark-ahead kind=tripCountdown family=medium scale=3 theme=dark scheme=dark trip=ahead
+widget camp-depart-tripCountdown-m-st-minimal-ahead kind=tripCountdown family=medium scale=3 theme=minimal trip=ahead
+widget camp-depart-tripCountdown-m-st-pastel-ahead kind=tripCountdown family=medium scale=3 theme=pastel trip=ahead
+widget camp-depart-tripCountdown-m-st-blossom-ahead kind=tripCountdown family=medium scale=3 theme=blossom trip=ahead
+widget camp-depart-tripCountdown-m-st-aurora-ahead kind=tripCountdown family=medium scale=3 theme=aurora scheme=dark trip=ahead
+widget camp-depart-tripCountdown-m-st-neon-ahead kind=tripCountdown family=medium scale=3 theme=neon scheme=dark trip=ahead
+widget camp-depart-tripCountdown-m-st-light-ongoing kind=tripCountdown family=medium scale=3 theme=light trip=ongoing
+widget camp-depart-tripCountdown-m-st-aurora-ongoing kind=tripCountdown family=medium scale=3 theme=aurora scheme=dark trip=ongoing
+widget camp-depart-tripCountdown-s-st-light-ahead kind=tripCountdown family=small scale=4 theme=light trip=ahead
+widget camp-depart-tripCountdown-s-st-dark-ahead kind=tripCountdown family=small scale=4 theme=dark scheme=dark trip=ahead
+widget camp-depart-tripCountdown-s-st-minimal-ahead kind=tripCountdown family=small scale=4 theme=minimal trip=ahead
+widget camp-depart-tripCountdown-s-st-pastel-ahead kind=tripCountdown family=small scale=4 theme=pastel trip=ahead
+widget camp-depart-tripCountdown-s-st-blossom-ahead kind=tripCountdown family=small scale=4 theme=blossom trip=ahead
+widget camp-depart-tripCountdown-s-st-aurora-ahead kind=tripCountdown family=small scale=4 theme=aurora scheme=dark trip=ahead
+widget camp-depart-tripCountdown-s-st-neon-ahead kind=tripCountdown family=small scale=4 theme=neon scheme=dark trip=ahead
+widget camp-depart-tripCountdown-s-st-light-ongoing kind=tripCountdown family=small scale=4 theme=light trip=ongoing
+widget camp-depart-tripCountdown-s-st-aurora-ongoing kind=tripCountdown family=small scale=4 theme=aurora scheme=dark trip=ongoing
+widget camp-depart-tripProgress-s-st-light-ahead kind=tripProgress family=small scale=4 theme=light trip=ahead
+widget camp-depart-tripProgress-s-st-dark-ahead kind=tripProgress family=small scale=4 theme=dark scheme=dark trip=ahead
+widget camp-depart-tripProgress-s-st-minimal-ahead kind=tripProgress family=small scale=4 theme=minimal trip=ahead
+widget camp-depart-tripProgress-s-st-pastel-ahead kind=tripProgress family=small scale=4 theme=pastel trip=ahead
+widget camp-depart-tripProgress-s-st-blossom-ahead kind=tripProgress family=small scale=4 theme=blossom trip=ahead
+widget camp-depart-tripProgress-s-st-aurora-ahead kind=tripProgress family=small scale=4 theme=aurora scheme=dark trip=ahead
+widget camp-depart-tripProgress-s-st-neon-ahead kind=tripProgress family=small scale=4 theme=neon scheme=dark trip=ahead
+widget camp-depart-tripProgress-s-st-light-ongoing kind=tripProgress family=small scale=4 theme=light trip=ongoing
+widget camp-depart-tripProgress-s-st-aurora-ongoing kind=tripProgress family=small scale=4 theme=aurora scheme=dark trip=ongoing
+widget camp-depart-currency-s-st-light-ahead kind=currency family=small scale=4 theme=light trip=ahead
+widget camp-depart-currency-s-st-dark-ahead kind=currency family=small scale=4 theme=dark scheme=dark trip=ahead
+widget camp-depart-currency-s-st-minimal-ahead kind=currency family=small scale=4 theme=minimal trip=ahead
+widget camp-depart-currency-s-st-pastel-ahead kind=currency family=small scale=4 theme=pastel trip=ahead
+widget camp-depart-currency-s-st-blossom-ahead kind=currency family=small scale=4 theme=blossom trip=ahead
+widget camp-depart-currency-s-st-aurora-ahead kind=currency family=small scale=4 theme=aurora scheme=dark trip=ahead
+widget camp-depart-currency-s-st-neon-ahead kind=currency family=small scale=4 theme=neon scheme=dark trip=ahead
+widget camp-depart-currency-s-st-light-ongoing kind=currency family=small scale=4 theme=light trip=ongoing
+widget camp-depart-currency-s-st-aurora-ongoing kind=currency family=small scale=4 theme=aurora scheme=dark trip=ongoing
+only camp-depart-tripCountdown-m-st-light-ahead camp-depart-tripCountdown-m-st-dark-ahead camp-depart-tripCountdown-m-st-minimal-ahead camp-depart-tripCountdown-m-st-pastel-ahead camp-depart-tripCountdown-m-st-blossom-ahead camp-depart-tripCountdown-m-st-aurora-ahead camp-depart-tripCountdown-m-st-neon-ahead camp-depart-tripCountdown-m-st-light-ongoing camp-depart-tripCountdown-m-st-aurora-ongoing camp-depart-tripCountdown-s-st-light-ahead camp-depart-tripCountdown-s-st-dark-ahead camp-depart-tripCountdown-s-st-minimal-ahead camp-depart-tripCountdown-s-st-pastel-ahead camp-depart-tripCountdown-s-st-blossom-ahead camp-depart-tripCountdown-s-st-aurora-ahead camp-depart-tripCountdown-s-st-neon-ahead camp-depart-tripCountdown-s-st-light-ongoing camp-depart-tripCountdown-s-st-aurora-ongoing camp-depart-tripProgress-s-st-light-ahead camp-depart-tripProgress-s-st-dark-ahead camp-depart-tripProgress-s-st-minimal-ahead camp-depart-tripProgress-s-st-pastel-ahead camp-depart-tripProgress-s-st-blossom-ahead camp-depart-tripProgress-s-st-aurora-ahead camp-depart-tripProgress-s-st-neon-ahead camp-depart-tripProgress-s-st-light-ongoing camp-depart-tripProgress-s-st-aurora-ongoing camp-depart-currency-s-st-light-ahead camp-depart-currency-s-st-dark-ahead camp-depart-currency-s-st-minimal-ahead camp-depart-currency-s-st-pastel-ahead camp-depart-currency-s-st-blossom-ahead camp-depart-currency-s-st-aurora-ahead camp-depart-currency-s-st-neon-ahead camp-depart-currency-s-st-light-ongoing camp-depart-currency-s-st-aurora-ongoing
