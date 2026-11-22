@@ -6,6 +6,10 @@
 # Les tranches -screenshotScroll 0 … 1 (-sNN) se recollent hors ligne en une image haute : seules les pages
 # qui suivent -screenshotScroll (Mon Quotidien, pages des mini-apps, Store) défilent. -s00 est le haut de la page.
 
+# Pub organique « tutoriel écran d'accueil » (2026-11-22) : étape 3, le constructeur « My business » en petit, widget Objectif du mois
+# (camp-creator-business en moyen sort cassé : contenu décalé, aperçu vide) ; en tête de liste.
+camp-creator-business-goal creator-business -screenshotCreatorFormat small -screenshotCreatorKinds revenueGoal
+
 # Pub Nutrition organique v5 (2026-11-20) : le récapitulatif d'un plat photographié (poulet, riz, salade), vide jusqu'ici à cause
 # des ids sans préfixe « builtin. » dans NutritionScreenshotStage.demoRecap ; en tête de liste (le kit complet dépasse l'heure).
 camp-scan-recap-photo2 scan-recap-photo
