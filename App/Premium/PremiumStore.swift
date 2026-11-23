@@ -277,3 +277,22 @@ final class PremiumStore {
         }
     }
 }
+
+/// Shared by the paywall and the offer at the end of the first launch.
+extension PremiumStore {
+    /// What will be charged, and when, before the purchase is confirmed.
+    func purchaseTerms(for product: Product) -> String {
+        if let intro = introDescription(for: product) {
+            let period = product.id == PremiumConfiguration.yearlyID ? tr("chaque année") : tr("chaque mois")
+            return tr("\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.")
+        }
+        switch product.id {
+        case PremiumConfiguration.yearlyID:
+            return tr("\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.")
+        case PremiumConfiguration.monthlyID:
+            return tr("\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.")
+        default:
+            return tr("\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.")
+        }
+    }
+}

@@ -12,6 +12,8 @@ struct ProfileView: View {
     @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
     @State private var showsPaywall = false
+    /// Test builds only: the offer of the end of the first launch, seen again without reinstalling.
+    @State private var showsWelcomeOffer = false
     @State private var showsAddGuide = false
     @State private var restoreMessage: String?
     @State private var showsManageSubscriptions = false
@@ -304,6 +306,10 @@ struct ProfileView: View {
                 }
             }
             .sheet(isPresented: $showsPaywall) { PaywallView() }
+            .fullScreenCover(isPresented: $showsWelcomeOffer) {
+                OnboardingOffer { showsWelcomeOffer = false }
+                    .appStyle(model.settings, isPremium: model.isPremium)
+            }
             .sheet(isPresented: $showsAddGuide) { AddToHomeScreenGuide(designName: nil) }
             .task(id: scenePhase) { await refreshNotificationStatus() }
             .manageSubscriptionsSheet(isPresented: $showsManageSubscriptions)
@@ -484,6 +490,11 @@ struct ProfileView: View {
                 }
             }
             .disabled(premium.isRestoring)
+            #if DEBUG || INTERNAL_PREMIUM
+            // The internal TestFlight build is already Premium, so the first launch skips the offer: shown from here.
+            Button(tr("Voir l'offre de bienvenue")) { showsWelcomeOffer = true }
+                .accessibilityIdentifier("profile-welcome-offer")
+            #endif
         }
     }
 

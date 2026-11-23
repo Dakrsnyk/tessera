@@ -13,6 +13,8 @@ struct OnboardingView: View {
     @Environment(AppModel.self) private var model
     @State private var step: Step?
     @State private var goesBack = false
+    /// The Premium offer, after the last page of the first setup (PDG, 2026-11-23).
+    @State private var showsOffer = false
 
     enum Step: Hashable {
         case style, identity, interests
@@ -37,7 +39,25 @@ struct OnboardingView: View {
     private var index: Int { steps.firstIndex(of: current) ?? 0 }
     private var isLast: Bool { index == steps.count - 1 }
 
+    /// Only at the end of the first setup, and only without Premium.
+    private var offersPremium: Bool { !styleOnly && !personalizationOnly && !model.isPremium }
+
     var body: some View {
+        ZStack {
+            if showsOffer {
+                OnboardingOffer(onDone: onFinish)
+                    .transition(.move(edge: .trailing).combined(with: .opacity))
+            } else {
+                stepView(current)
+            }
+        }
+        .animation(.spring(response: 0.42, dampingFraction: 0.88), value: showsOffer)
+        #if DEBUG
+        .onAppear(perform: applyCaptureStep)
+        #endif
+    }
+
+    @ViewBuilder private func stepView(_ current: Step) -> some View {
         ZStack {
             switch current {
             case .style:
@@ -53,16 +73,17 @@ struct OnboardingView: View {
             }
         }
         .animation(.spring(response: 0.42, dampingFraction: 0.88), value: current)
-        #if DEBUG
-        .onAppear(perform: applyCaptureStep)
-        #endif
     }
 
     private func advance() {
         Haptics.tap()
         if current == .permissions { PermissionsSetup.markSeen() }
         if isLast {
-            onFinish()
+            if offersPremium {
+                showsOffer = true
+            } else {
+                onFinish()
+            }
             return
         }
         goesBack = false
@@ -159,6 +180,7 @@ struct OnboardingView: View {
         case "identity": step = .identity
         case "interests": step = .interests
         case "permissions": step = .permissions
+        case "offer": showsOffer = true
         default: if let topic = ProfileTopic(rawValue: name) { step = .topic(topic) }
         }
     }

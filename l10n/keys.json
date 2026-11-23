@@ -467,19 +467,19 @@
  "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:297: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
+   "App/Premium/PremiumStore.swift:291: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
   ]
  },
  "%@ débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:299: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
+   "App/Premium/PremiumStore.swift:293: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
   ]
  },
  "%@ débités une seule fois. Premium à vie, sans abonnement ni renouvellement.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:301: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
+   "App/Premium/PremiumStore.swift:295: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
   ]
  },
  "%@ dépensé, %@ du mois écoulé": {
@@ -872,8 +872,8 @@
   "uses": [
    "App/Core/DataItems.swift:416: case .monthlyBudget: return tr(\"\\(TF.money(budget.monthlyBudget, currency)) par mois\")",
    "App/Core/DataItems.swift:422: case .businessGoal: return tr(\"\\(TF.money(business.monthlyGoal, currency)) par mois\")",
-   "App/Premium/PaywallView.swift:283: return tr(\"\\(product.displayPrice) par mois\")",
-   "App/Premium/PremiumStore.swift:273: case (.month, 1): tr(\"\\(price) par mois\")"
+   "App/Premium/OnboardingOffer.swift:176: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
+   "App/Premium/PaywallView.swift:283: return tr(\"\\(product.displayPrice) par mois\")"
   ]
  },
  "%@ par mois jusqu'au %@": {
@@ -974,6 +974,12 @@
   "placeholders": 1,
   "uses": [
    "App/Premium/PaywallView.swift:166: (.styles, \"paintpalette\", tr(\"\\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles en plus\"), tr(\"Les \\(AppStyleID.allCases.count - 1) autres couleurs de l'app, Espace, Mars, Océan, Aurore, Élég"
+  ]
+ },
+ "%@ styles et %@ couleurs d'app": {
+  "placeholders": 2,
+  "uses": [
+   "App/Premium/OnboardingOffer.swift:35: perk(tr(\"\\(ThemeCatalog.all.count) styles et \\(AppStyleID.allCases.count) couleurs d'app\"))"
   ]
  },
  "%@ suivis cette semaine, dont %@ dans ta cible. Belle constance !": {
@@ -1381,7 +1387,7 @@
  "%@ — %@. Tes widgets gardent chacun leur propre style.": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:95: Text(tr(\"\\(style.name) — \\(style.tagline). Tes widgets gardent chacun leur propre style.\"))"
+   "App/Screens/Profile/ProfileView.swift:97: Text(tr(\"\\(style.name) — \\(style.tagline). Tes widgets gardent chacun leur propre style.\"))"
   ]
  },
  "%@ → %@ kcal par jour": {
@@ -1442,7 +1448,7 @@
  "%@. Rien n'est débité pendant l'essai. Renouvellement automatique %@, annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/PaywallView.swift:293: return tr(\"\\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \\(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.\")"
+   "App/Premium/PremiumStore.swift:287: return tr(\"\\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \\(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.\")"
   ]
  },
  "%@/%@ séances · série %@": {
@@ -1470,6 +1476,12 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:374: Text(tr(\"+ \\(routine.exercises.count - 4) autres\")).font(.caption).foregroundStyle(.secondary)"
+  ]
+ },
+ "+ %@ styles": {
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/OnboardingOffer.swift:110: Label(tr(\"+ \\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles\"), systemImage: \"sparkles\")"
   ]
  },
  "+ %@ à faire": {
@@ -1799,7 +1811,7 @@
  "1 ou 2 widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:372: case .medium: tr(\"1 ou 2 widgets\")"
+   "App/Screens/Spaces/CreateFlow.swift:408: case .medium: tr(\"1 ou 2 widgets\")"
   ]
  },
  "1 petit sac": {
@@ -1967,7 +1979,7 @@
  "1 widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:371: case .small: tr(\"1 widget\")"
+   "App/Screens/Spaces/CreateFlow.swift:407: case .small: tr(\"1 widget\")"
   ]
  },
  "1 wrap": {
@@ -1980,7 +1992,7 @@
  "1 à 4 widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:373: case .large: tr(\"1 à 4 widgets\")"
+   "App/Screens/Spaces/CreateFlow.swift:409: case .large: tr(\"1 à 4 widgets\")"
   ]
  },
  "1 épi": {
@@ -2284,7 +2296,7 @@
  "Abonnement actif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:503: return tr(\"Abonnement actif\")"
+   "App/Screens/Profile/ProfileView.swift:514: return tr(\"Abonnement actif\")"
   ]
  },
  "Abonnement · ": {
@@ -2331,7 +2343,7 @@
  "Absent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:279: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:281: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Accepter": {
@@ -2393,7 +2405,7 @@
  "Accès à vie": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:498: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
+   "App/Screens/Profile/ProfileView.swift:509: case PremiumConfiguration.lifetimeID: return tr(\"Accès à vie\")"
   ]
  },
  "Accélère progressivement si tu veux.": {
@@ -2405,6 +2417,7 @@
  "Achat": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/OnboardingOffer.swift:49: .alert(tr(\"Achat\"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {",
    "App/Premium/PaywallView.swift:54: .alert(tr(\"Achat\"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {"
   ]
  },
@@ -2697,7 +2710,7 @@
  "Aide": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:148: Section(tr(\"Aide\")) {"
+   "App/Screens/Profile/ProfileView.swift:150: Section(tr(\"Aide\")) {"
   ]
  },
  "Aire": {
@@ -3063,7 +3076,7 @@
  "Ajouter ma date de naissance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:217: Label(tr(\"Ajouter ma date de naissance\"), systemImage: \"gift\")",
+   "App/Screens/Onboarding/OnboardingView.swift:239: Label(tr(\"Ajouter ma date de naissance\"), systemImage: \"gift\")",
    "App/Screens/Profile/DataItemViews.swift:283: action(tr(\"Ajouter ma date de naissance\"), symbol: \"plus\") {"
   ]
  },
@@ -3082,7 +3095,7 @@
  "Ajouter mon anniversaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:427: Label(tr(\"Ajouter mon anniversaire\"), systemImage: \"gift\")"
+   "App/Screens/Profile/ProfileView.swift:433: Label(tr(\"Ajouter mon anniversaire\"), systemImage: \"gift\")"
   ]
  },
  "Ajouter mon salaire et mes dépenses fixes": {
@@ -3176,7 +3189,7 @@
  "Ajouter un widget à l'écran d'accueil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:152: Label(tr(\"Ajouter un widget à l'écran d'accueil\"), systemImage: \"plus.square.on.square\")"
+   "App/Screens/Profile/ProfileView.swift:154: Label(tr(\"Ajouter un widget à l'écran d'accueil\"), systemImage: \"plus.square.on.square\")"
   ]
  },
  "Ajouter un événement": {
@@ -3709,7 +3722,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:116: case .birthday: tr(\"Anniversaire\")",
-   "App/Screens/Profile/ProfileView.swift:418: DatePicker(tr(\"Anniversaire\"), selection: Binding(",
+   "App/Screens/Profile/ProfileView.swift:424: DatePicker(tr(\"Anniversaire\"), selection: Binding(",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:584: Text(tr(\"Anniversaire\"))",
    "Shared/Model/Templates.swift:80: WidgetTemplate(id: \"countdown-birthday\", name: tr(\"Anniversaire\"), kind: .countdown, themeID: .minimal, accentHex: \"F2588F\","
   ]
@@ -3753,6 +3766,7 @@
  "Annuel": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/OnboardingOffer.swift:183: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
    "Shared/Domains/Budget.swift:53: var title: String { self == .monthly ? tr(\"Mensuel\") : tr(\"Annuel\") }"
   ]
  },
@@ -3867,7 +3881,7 @@
  "Apparence": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:92: Text(tr(\"Apparence\"))"
+   "App/Screens/Profile/ProfileView.swift:94: Text(tr(\"Apparence\"))"
   ]
  },
  "Apparence du graphique": {
@@ -4021,7 +4035,7 @@
  "Ardane %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:214: Text(tr(\"Ardane \\(appVersion)\"))"
+   "App/Screens/Profile/ProfileView.swift:216: Text(tr(\"Ardane \\(appVersion)\"))"
   ]
  },
  "Ardane Premium": {
@@ -4030,7 +4044,7 @@
    "App/Premium/PaywallView.swift:82: Text(tr(\"Ardane Premium\"))",
    "App/Premium/PaywallView.swift:113: Text(tr(\"Ardane Premium\"))",
    "App/Screens/Home/HomeView.swift:183: Text(tr(\"Ardane Premium\"))",
-   "App/Screens/Profile/ProfileView.swift:385: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+   "App/Screens/Profile/ProfileView.swift:391: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
   ]
  },
  "Ardane apprend quand tu changes une catégorie": {
@@ -4121,7 +4135,7 @@
  "Ardane te propose les autorisations après tes premières questions ; tu peux les retrouver dans Autorisations. Les comptes à rebours ont leur propre rappel dans l'éditeur.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:136: Text(tr(\"Ardane te propose les autorisations après tes premières questions ; tu peux les retrouver dans Autorisations. Les comptes à rebours ont leur propre rappel dans l'éditeur.\"))"
+   "App/Screens/Profile/ProfileView.swift:138: Text(tr(\"Ardane te propose les autorisations après tes premières questions ; tu peux les retrouver dans Autorisations. Les comptes à rebours ont leur propre rappel dans l'éditeur.\"))"
   ]
  },
  "Ardoise": {
@@ -4538,7 +4552,7 @@
  "Aucun": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:69: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))",
+   "App/Screens/Profile/ProfileView.swift:71: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))",
    "App/Screens/Profile/SmartRemindersView.swift:127: Text(value == 0 ? tr(\"Aucun\") : Fmt.minutes(Double(value))).tag(value)",
    "App/Screens/Spaces/StudentSpace.swift:217: Text(tr(\"Aucun\")).tag(UUID?.none)"
   ]
@@ -5037,14 +5051,14 @@
  "Autorisation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:124: LabeledContent(tr(\"Autorisation\"), value: notificationStatus)"
+   "App/Screens/Profile/ProfileView.swift:126: LabeledContent(tr(\"Autorisation\"), value: notificationStatus)"
   ]
  },
  "Autorisations": {
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/PermissionsSettingsView.swift:36: .navigationTitle(tr(\"Autorisations\"))",
-   "App/Screens/Profile/ProfileView.swift:144: NavigationLink { PermissionsSettingsView() } label: { Label(tr(\"Autorisations\"), systemImage: \"hand.raised\") }"
+   "App/Screens/Profile/ProfileView.swift:146: NavigationLink { PermissionsSettingsView() } label: { Label(tr(\"Autorisations\"), systemImage: \"hand.raised\") }"
   ]
  },
  "Autorise le compteur de pas : tes pas du jour apparaîtront ici.": {
@@ -5081,7 +5095,7 @@
  "Autorisée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:511: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
+   "App/Screens/Profile/ProfileView.swift:522: case .authorized, .provisional, .ephemeral: notificationStatus = tr(\"Autorisée\")"
   ]
  },
  "Autre": {
@@ -5671,13 +5685,14 @@
  "Bienvenue dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:325: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:347: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
   ]
  },
  "Bienvenue dans Ardane Premium !": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:397: message = tr(\"Bienvenue dans Ardane Premium !\")"
+   "App/Premium/OnboardingOffer.swift:272: message = tr(\"Bienvenue dans Ardane Premium !\")",
+   "App/Premium/PaywallView.swift:381: message = tr(\"Bienvenue dans Ardane Premium !\")"
   ]
  },
  "Bilan": {
@@ -5937,7 +5952,7 @@
  "Bonjour %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:240: return tr(\"Bonjour \\(first.split(separator: \" \").first.map(String.init) ?? first)\")",
+   "App/Screens/Onboarding/OnboardingView.swift:262: return tr(\"Bonjour \\(first.split(separator: \" \").first.map(String.init) ?? first)\")",
    "App/Screens/Tutorial/Tutorial.swift:56: case .daily: name.isEmpty ? tr(\"Bonjour\") : tr(\"Bonjour \\(name)\")"
   ]
  },
@@ -6522,8 +6537,8 @@
  "C'est parti": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:108: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))",
-   "App/Screens/Onboarding/OnboardingView.swift:349: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:129: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))",
+   "App/Screens/Onboarding/OnboardingView.swift:371: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
   ]
  },
  "C'est un abonnement": {
@@ -7077,7 +7092,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessSources.swift:196: fail(tr(\"Ce fichier est trop gros pour être lu.\"))",
-   "App/Screens/Profile/ProfileView.swift:365: backupMessage = tr(\"Ce fichier est trop gros pour être lu.\")"
+   "App/Screens/Profile/ProfileView.swift:371: backupMessage = tr(\"Ce fichier est trop gros pour être lu.\")"
   ]
  },
  "Ce fichier n'a pas pu être lu (texte simple, 2 Mo au plus).": {
@@ -7089,7 +7104,7 @@
  "Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:373: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.\")"
+   "App/Screens/Profile/ProfileView.swift:379: backupMessage = tr(\"Ce fichier n'est pas une sauvegarde d'Ardane, ou il est abîmé. Rien n'a été changé.\")"
   ]
  },
  "Ce fond fait partie de Premium.": {
@@ -7351,8 +7366,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/ProfileTopics.swift:969: .navigationTitle(tr(\"Centres d'intérêt\"))",
-   "App/Screens/Profile/ProfileView.swift:67: .navigationTitle(tr(\"Centres d'intérêt\"))",
-   "App/Screens/Profile/ProfileView.swift:69: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))"
+   "App/Screens/Profile/ProfileView.swift:69: .navigationTitle(tr(\"Centres d'intérêt\"))",
+   "App/Screens/Profile/ProfileView.swift:71: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))"
   ]
  },
  "Centré": {
@@ -7502,7 +7517,7 @@
  "Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:371: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.\")"
+   "App/Screens/Profile/ProfileView.swift:377: backupMessage = tr(\"Cette sauvegarde vient d'une version plus récente d'Ardane. Mets l'app à jour, puis réessaie.\")"
   ]
  },
  "Cette semaine": {
@@ -7733,6 +7748,7 @@
  "Chargement des offres…": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/OnboardingOffer.swift:151: ProgressView(tr(\"Chargement des offres…\"))",
    "App/Premium/PaywallView.swift:237: ProgressView(tr(\"Chargement des offres…\"))"
   ]
  },
@@ -7964,7 +7980,7 @@
  "Choisi": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:567: .accessibilityValue(Text(number != nil ? tr(\"Choisi\") : (refusal ?? \"\")))"
+   "App/Screens/Spaces/CreateFlow.swift:604: .accessibilityValue(Text(number != nil ? tr(\"Choisi\") : (refusal ?? \"\")))"
   ]
  },
  "Choisi par toi. Tes séances donneraient : %@. Touche ton choix pour revenir aux séances.": {
@@ -8113,7 +8129,7 @@
  "Choisis jusqu'à %@ widgets : ils seront réunis en un seul.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:754: if draft.picked.isEmpty { return tr(\"Choisis jusqu'à \\(draft.room) widgets : ils seront réunis en un seul.\") }"
+   "App/Screens/Spaces/CreateFlow.swift:791: if draft.picked.isEmpty { return tr(\"Choisis jusqu'à \\(draft.room) widgets : ils seront réunis en un seul.\") }"
   ]
  },
  "Choisis l'icône d'Ardane sur ton écran d'accueil. Pour revenir ici, touche et maintiens l'icône, puis « Changer d'icône ».": {
@@ -8179,7 +8195,7 @@
  "Choisis ton style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:328: Text(tr(\"Choisis ton style\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:350: Text(tr(\"Choisis ton style\"))"
   ]
  },
  "Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.": {
@@ -8221,7 +8237,7 @@
  "Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:248: message: tr(\"Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.\"),"
+   "App/Screens/Onboarding/OnboardingView.swift:270: message: tr(\"Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.\"),"
   ]
  },
  "Cholestérol": {
@@ -8304,7 +8320,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:30: MiniActionButton(title: tr(\"Citation\"), symbol: \"quote.opening\", colorHex: accentHex, isProminent: false) {",
-   "App/Screens/Spaces/CreateFlow.swift:214: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }",
+   "App/Screens/Spaces/CreateFlow.swift:250: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }",
    "Shared/Model/KindCatalog.swift:273: KindInfo(kind: .quote, title: tr(\"Citation\"), summary: tr(\"Une phrase qui t'inspire, avec ta typographie et tes couleurs.\"), category: .memories, symbol: \"quote.opening\", isPremium: false, families: S",
    "Shared/Model/Templates.swift:96: WidgetTemplate(id: \"note-quote\", name: tr(\"Citation\"), kind: .note, themeID: .typography, accentHex: \"FF6B57\", font: .serif,"
   ]
@@ -8529,7 +8545,7 @@
  "Combiné · %@ widgets": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:738: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))",
+   "App/Screens/Spaces/CreateFlow.swift:775: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))",
    "Shared/Model/Combo.swift:231: isCombo ? tr(\"Combiné · \\(options.parts.count) widgets\") : kind.title"
   ]
  },
@@ -8632,7 +8648,7 @@
  "Comment veux-tu qu'on t'appelle ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:177: title: tr(\"Comment veux-tu qu'on t'appelle ?\"),"
+   "App/Screens/Onboarding/OnboardingView.swift:199: title: tr(\"Comment veux-tu qu'on t'appelle ?\"),"
   ]
  },
  "Comment ça marche": {
@@ -8830,21 +8846,23 @@
  "Conditions": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:385: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
+   "App/Premium/OnboardingOffer.swift:255: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }",
+   "App/Premium/PaywallView.swift:369: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
   ]
  },
  "Conditions d'utilisation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:205: Label(tr(\"Conditions d'utilisation\"), systemImage: \"doc.text\")"
+   "App/Screens/Profile/ProfileView.swift:207: Label(tr(\"Conditions d'utilisation\"), systemImage: \"doc.text\")"
   ]
  },
  "Confidentialité": {
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:928: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
-   "App/Premium/PaywallView.swift:386: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
-   "App/Screens/Profile/ProfileView.swift:202: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
+   "App/Premium/OnboardingOffer.swift:256: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
+   "App/Premium/PaywallView.swift:370: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
+   "App/Screens/Profile/ProfileView.swift:204: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
  },
  "Confirmations de réservation": {
@@ -8938,7 +8956,7 @@
  "Contacter le support": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:195: Label(tr(\"Contacter le support\"), systemImage: \"envelope\")"
+   "App/Screens/Profile/ProfileView.swift:197: Label(tr(\"Contacter le support\"), systemImage: \"envelope\")"
   ]
  },
  "Contenu": {
@@ -8965,7 +8983,7 @@
  "Contient des données d'Open Food Facts, disponibles sous la licence Open Database License (ODbL). Contenu sous Database Contents License. Données saisies par la communauté : vérifie l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:223: text: tr(\"Contient des données d'Open Food Facts, disponibles sous la licence Open Database License (ODbL). Contenu sous Database Contents License. Données saisies par la communauté : vérifie l'étique"
+   "App/Screens/Profile/ProfileView.swift:225: text: tr(\"Contient des données d'Open Food Facts, disponibles sous la licence Open Database License (ODbL). Contenu sous Database Contents License. Données saisies par la communauté : vérifie l'étique"
   ]
  },
  "Continue jusque derrière le dos.": {
@@ -8978,9 +8996,9 @@
   "placeholders": 0,
   "uses": [
    "App/Components/PermissionExplainer.swift:219: Text(tr(\"Continuer\"))",
-   "App/Premium/PaywallView.swift:363: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
-   "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:73: Text(tr(\"Continuer\")).frame(maxWidth: .infinity, minHeight: 44)",
-   "App/Screens/Onboarding/OnboardingView.swift:108: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
+   "App/Premium/OnboardingOffer.swift:236: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Premium/PaywallView.swift:347: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:73: Text(tr(\"Continuer\")).frame(maxWidth: .infinity, minHeight: 44)"
   ]
  },
  "Contour": {
@@ -9041,7 +9059,7 @@
  "Copiée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:193: Text(copiedEmail ? tr(\"Copiée\") : PremiumConfiguration.supportEmail)"
+   "App/Screens/Profile/ProfileView.swift:195: Text(copiedEmail ? tr(\"Copiée\") : PremiumConfiguration.supportEmail)"
   ]
  },
  "Corail": {
@@ -9425,7 +9443,7 @@
  "Cours crypto : CoinGecko.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:215: Text(tr(\"Cours crypto : CoinGecko.\"))"
+   "App/Screens/Profile/ProfileView.swift:217: Text(tr(\"Cours crypto : CoinGecko.\"))"
   ]
  },
  "Cours dans 30 minutes": {
@@ -9697,7 +9715,7 @@
  "Crédits et licences": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:208: Label(tr(\"Crédits et licences\"), systemImage: \"text.book.closed\")"
+   "App/Screens/Profile/ProfileView.swift:210: Label(tr(\"Crédits et licences\"), systemImage: \"text.book.closed\")"
   ]
  },
  "Crée d'abord une séance": {
@@ -9827,7 +9845,7 @@
   "uses": [
    "App/ArdaneApp.swift:307: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
    "App/Screens/Editor/EditorView.swift:129: if onChangeWidget != nil { return tr(\"Créer\") }",
-   "App/Screens/Spaces/CreateFlow.swift:244: case .size: tr(\"Créer\")",
+   "App/Screens/Spaces/CreateFlow.swift:280: case .size: tr(\"Créer\")",
    "App/Screens/Tutorial/Tutorial.swift:57: case .create: tr(\"Créer\")"
   ]
  },
@@ -9856,7 +9874,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MyWidgets/MyWidgetsView.swift:140: .accessibilityLabel(Text(tr(\"Créer un widget\")))",
-   "App/Screens/Spaces/CreateFlow.swift:212: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {",
+   "App/Screens/Spaces/CreateFlow.swift:248: .confirmationDialog(tr(\"Créer un widget\"), isPresented: $choosesPhotoQuote, titleVisibility: .visible) {",
    "App/Screens/Tutorial/Tutorial.swift:69: case .create: tr(\"Créer un widget\")"
   ]
  },
@@ -10099,7 +10117,7 @@
  "Date de naissance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:206: DatePicker(tr(\"Date de naissance\"), selection: Binding(",
+   "App/Screens/Onboarding/OnboardingView.swift:228: DatePicker(tr(\"Date de naissance\"), selection: Binding(",
    "App/Screens/Profile/DataItemViews.swift:279: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:568: DatePicker(tr(\"Date de naissance\"), selection: $birthdayDraft, in: ...now, displayedComponents: .date)",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:577: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)"
@@ -11000,13 +11018,13 @@
  "Devise (crypto)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:118: Picker(tr(\"Devise (crypto)\"), selection: settingBinding(\\.cryptoCurrency)) {"
+   "App/Screens/Profile/ProfileView.swift:120: Picker(tr(\"Devise (crypto)\"), selection: settingBinding(\\.cryptoCurrency)) {"
   ]
  },
  "Devise (flux d'argent)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:115: Picker(tr(\"Devise (flux d'argent)\"), selection: settingBinding(\\.currencyCode)) {"
+   "App/Screens/Profile/ProfileView.swift:117: Picker(tr(\"Devise (flux d'argent)\"), selection: settingBinding(\\.currencyCode)) {"
   ]
  },
  "Devise sur place": {
@@ -11525,8 +11543,8 @@
  "Débloqué en mode test": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:492: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }",
-   "App/Screens/Profile/ProfileView.swift:495: if !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
+   "App/Screens/Profile/ProfileView.swift:503: if model.isDebugPremiumOn && !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }",
+   "App/Screens/Profile/ProfileView.swift:506: if !model.premium.hasPurchase() { return tr(\"Débloqué en mode test\") }"
   ]
  },
  "Début": {
@@ -12160,7 +12178,7 @@
  "Développeur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:290: Text(tr(\"Développeur\"))"
+   "App/Screens/Profile/ProfileView.swift:292: Text(tr(\"Développeur\"))"
   ]
  },
  "Développé Arnold": {
@@ -12320,13 +12338,13 @@
  "Effacer toutes mes données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:268: Button(tr(\"Effacer toutes mes données\"), role: .destructive) { confirmReset = true }"
+   "App/Screens/Profile/ProfileView.swift:270: Button(tr(\"Effacer toutes mes données\"), role: .destructive) { confirmReset = true }"
   ]
  },
  "Effacer toutes tes données ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:331: .confirmationDialog(tr(\"Effacer toutes tes données ?\"), isPresented: $confirmReset, titleVisibility: .visible) {"
+   "App/Screens/Profile/ProfileView.swift:337: .confirmationDialog(tr(\"Effacer toutes tes données ?\"), isPresented: $confirmReset, titleVisibility: .visible) {"
   ]
  },
  "Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.": {
@@ -12827,7 +12845,7 @@
  "Espace partagé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:280: LabeledContent(tr(\"Espace partagé\"), value: WidgetDiagnostics.sharedSpaceText)"
+   "App/Screens/Profile/ProfileView.swift:282: LabeledContent(tr(\"Espace partagé\"), value: WidgetDiagnostics.sharedSpaceText)"
   ]
  },
  "Espacement minimal": {
@@ -12869,7 +12887,8 @@
  "Essayer %@ jours gratuits": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:363: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))"
+   "App/Premium/OnboardingOffer.swift:236: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Premium/PaywallView.swift:347: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))"
   ]
  },
  "Essayer avec un exemple": {
@@ -13236,7 +13255,7 @@
  "Exporter mes données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:243: Label(tr(\"Exporter mes données\"), systemImage: \"square.and.arrow.up\")"
+   "App/Screens/Profile/ProfileView.swift:245: Label(tr(\"Exporter mes données\"), systemImage: \"square.and.arrow.up\")"
   ]
  },
  "Exposé": {
@@ -13324,8 +13343,8 @@
  "Facultatif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:43: TextField(tr(\"Facultatif\"), text: settingBinding(\\.profileName))",
-   "App/Screens/Profile/ProfileView.swift:49: TextField(tr(\"Facultatif\"), text: Binding("
+   "App/Screens/Profile/ProfileView.swift:45: TextField(tr(\"Facultatif\"), text: settingBinding(\\.profileName))",
+   "App/Screens/Profile/ProfileView.swift:51: TextField(tr(\"Facultatif\"), text: Binding("
   ]
  },
  "Facultatif. Ardane calcule des calories d'après ce poids et la durée choisie, et te les montre avant de les appliquer.": {
@@ -13337,7 +13356,7 @@
  "Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:223: Text(tr(\"Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:245: Text(tr(\"Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.\"))"
   ]
  },
  "Faire des rebonds.": {
@@ -13695,13 +13714,13 @@
  "Fichier canadien sur les éléments nutritifs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:229: foodSource(name: tr(\"Fichier canadien sur les éléments nutritifs\"), url: FoodSourceLinks.openGovernmentLicence,"
+   "App/Screens/Profile/ProfileView.swift:231: foodSource(name: tr(\"Fichier canadien sur les éléments nutritifs\"), url: FoodSourceLinks.openGovernmentLicence,"
   ]
  },
  "Fichier canadien sur les éléments nutritifs, Santé Canada, 2026. Contient des renseignements licenciés en vertu de la Licence du gouvernement ouvert – Canada. Ardane n'est pas une version officielle de la FCÉN, n'est pas affilié à Santé Canada ni approuvé par lui. Outil de référence, pas un avis médical.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:230: text: tr(\"Fichier canadien sur les éléments nutritifs, Santé Canada, 2026. Contient des renseignements licenciés en vertu de la Licence du gouvernement ouvert – Canada. Ardane n'est pas une version of"
+   "App/Screens/Profile/ProfileView.swift:232: text: tr(\"Fichier canadien sur les éléments nutritifs, Santé Canada, 2026. Contient des renseignements licenciés en vertu de la Licence du gouvernement ouvert – Canada. Ardane n'est pas une version of"
   ]
  },
  "Fichier importé": {
@@ -14822,7 +14841,7 @@
  "Groupes accordés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:282: Text(tr(\"Groupes accordés\"))"
+   "App/Screens/Profile/ProfileView.swift:284: Text(tr(\"Groupes accordés\"))"
   ]
  },
  "Gruau cuit à l'eau": {
@@ -14873,7 +14892,7 @@
  "Gérer l'abonnement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:456: Button(tr(\"Gérer l'abonnement\")) { showsManageSubscriptions = true }"
+   "App/Screens/Profile/ProfileView.swift:462: Button(tr(\"Gérer l'abonnement\")) { showsManageSubscriptions = true }"
   ]
  },
  "Gérer mes habitudes": {
@@ -15186,7 +15205,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/MiniAppSettings.swift:190: Toggle(tr(\"Heure sur 24 h\"), isOn: Binding(",
-   "App/Screens/Profile/ProfileView.swift:110: Toggle(tr(\"Heure sur 24 h\"), isOn: settingBinding(\\.uses24HourClock))"
+   "App/Screens/Profile/ProfileView.swift:112: Toggle(tr(\"Heure sur 24 h\"), isOn: settingBinding(\\.uses24HourClock))"
   ]
  },
  "Heure sur place": {
@@ -15490,7 +15509,7 @@
   "uses": [
    "App/Screens/Profile/AppIconPicker.swift:44: .navigationTitle(tr(\"Icône de l'app\"))",
    "App/Screens/Profile/AppIconPicker.swift:47: .alert(tr(\"Icône de l'app\"), isPresented: $failed) {",
-   "App/Screens/Profile/ProfileView.swift:104: Label(tr(\"Icône de l'app\"), systemImage: \"app.badge\")"
+   "App/Screens/Profile/ProfileView.swift:106: Label(tr(\"Icône de l'app\"), systemImage: \"app.badge\")"
   ]
  },
  "Icône, valeur et progression sur une ligne.": {
@@ -15946,7 +15965,7 @@
  "Installé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:279: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:281: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Intensité": {
@@ -16227,7 +16246,7 @@
  "Jours fériés": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:71: Picker(tr(\"Jours fériés\"), selection: Binding(",
+   "App/Screens/Profile/ProfileView.swift:73: Picker(tr(\"Jours fériés\"), selection: Binding(",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:589: Section(tr(\"Jours fériés\")) {"
   ]
  },
@@ -16640,7 +16659,7 @@
  "L'essentiel en un coup d'œil.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:363: case .small: tr(\"L'essentiel en un coup d'œil.\")"
+   "App/Screens/Spaces/CreateFlow.swift:399: case .small: tr(\"L'essentiel en un coup d'œil.\")"
   ]
  },
  "L'essentiel, sans une couleur de trop.": {
@@ -16962,7 +16981,7 @@
  "La place de %@ icônes": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:343: Text(tr(\"La place de \\(icons) icônes\"))"
+   "App/Screens/Spaces/CreateFlow.swift:379: Text(tr(\"La place de \\(icons) icônes\"))"
   ]
  },
  "La poitrine arrive à quelques centimètres du sol.": {
@@ -17029,7 +17048,7 @@
  "La sauvegarde n'a pas pu être créée.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:355: backupMessage = tr(\"La sauvegarde n'a pas pu être créée.\")"
+   "App/Screens/Profile/ProfileView.swift:361: backupMessage = tr(\"La sauvegarde n'a pas pu être créée.\")"
   ]
  },
  "La semaine apparaîtra ici.": {
@@ -17829,7 +17848,7 @@
  "Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à partir de DINOv2 (Meta, licence Apache 2.0) et de RF-DETR (Roboflow, licence Apache 2.0). Les photos restent sur ton iPhone.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:234: text: tr(\"Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à part"
+   "App/Screens/Profile/ProfileView.swift:236: text: tr(\"Le scanner reconnaît les aliments avec des modèles entraînés par Ardane sur le jeu de données MyFoodRepo / AIcrowd Food Recognition Benchmark 2022 (myfoodrepo.org, licence CC BY 4.0), à part"
   ]
  },
  "Le service n'a pas répondu.": {
@@ -17975,13 +17994,13 @@
  "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:379: ? tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonne"
+   "App/Premium/PaywallView.swift:363: ? tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonne"
   ]
  },
  "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal. L'achat à vie est un paiement unique, sans renouvellement.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:380: : tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonne"
+   "App/Premium/PaywallView.swift:364: : tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonne"
   ]
  },
  "Les achats ne sont pas autorisés sur cet appareil.": {
@@ -18077,7 +18096,7 @@
  "Les données actuelles de l'app seront remplacées par celles de la sauvegarde du %@. Ton abonnement n'est pas touché.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:324: Text(tr(\"Les données actuelles de l'app seront remplacées par celles de la sauvegarde du \\(Fmt.longDay(pendingRestore?.date ?? Date())). Ton abonnement n'est pas touché.\"))"
+   "App/Screens/Profile/ProfileView.swift:330: Text(tr(\"Les données actuelles de l'app seront remplacées par celles de la sauvegarde du \\(Fmt.longDay(pendingRestore?.date ?? Date())). Ton abonnement n'est pas touché.\"))"
   ]
  },
  "Les données du marché s'affichent dès que la connexion est disponible.": {
@@ -19469,7 +19488,7 @@
  "Me proposer de noter Ardane": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:180: Label(tr(\"Me proposer de noter Ardane\"), systemImage: \"star.bubble\")"
+   "App/Screens/Profile/ProfileView.swift:182: Label(tr(\"Me proposer de noter Ardane\"), systemImage: \"star.bubble\")"
   ]
  },
  "Me rappeler le jour J": {
@@ -19512,6 +19531,7 @@
  "Mensuel": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/OnboardingOffer.swift:183: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
    "Shared/Domains/Budget.swift:53: var title: String { self == .monthly ? tr(\"Mensuel\") : tr(\"Annuel\") }"
   ]
  },
@@ -19544,13 +19564,13 @@
  "Merci ! Tous les widgets et tous les styles sont débloqués.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:312: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
+   "App/Premium/PaywallView.swift:296: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
   ]
  },
  "Merci pour ton soutien": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:504: default: return tr(\"Merci pour ton soutien\")"
+   "App/Screens/Profile/ProfileView.swift:515: default: return tr(\"Merci pour ton soutien\")"
   ]
  },
  "Mercredi": {
@@ -20054,7 +20074,7 @@
  "Module des widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:279: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
+   "App/Screens/Profile/ProfileView.swift:281: LabeledContent(tr(\"Module des widgets\"), value: WidgetDiagnostics.isExtensionInstalled ? tr(\"Installé\") : tr(\"Absent\"))"
   ]
  },
  "Modérée (4–5 séances)": {
@@ -20202,7 +20222,7 @@
  "Mon profil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:78: Text(tr(\"Mon profil\"))"
+   "App/Screens/Profile/ProfileView.swift:80: Text(tr(\"Mon profil\"))"
   ]
  },
  "Mon propre dégradé": {
@@ -20900,7 +20920,7 @@
  "Nom (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:189: placeholder: tr(\"Nom (facultatif)\"),"
+   "App/Screens/Onboarding/OnboardingView.swift:211: placeholder: tr(\"Nom (facultatif)\"),"
   ]
  },
  "Nom (haut du corps, jambes…)": {
@@ -20930,7 +20950,7 @@
  "Nom [lastname]": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:48: LabeledContent(tr(\"Nom\", context: \"lastname\")) {"
+   "App/Screens/Profile/ProfileView.swift:50: LabeledContent(tr(\"Nom\", context: \"lastname\")) {"
   ]
  },
  "Nom de domaine": {
@@ -21156,7 +21176,7 @@
  "Noter Ardane": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:168: Label(tr(\"Noter Ardane\"), systemImage: \"star\")"
+   "App/Screens/Profile/ProfileView.swift:170: Label(tr(\"Noter Ardane\"), systemImage: \"star\")"
   ]
  },
  "Noter la fiche": {
@@ -21230,7 +21250,7 @@
   "uses": [
    "App/Components/PermissionExplainer.swift:70: case .notifications: tr(\"Notifications\")",
    "App/Screens/Onboarding/PermissionsSetupStep.swift:196: title: tr(\"Notifications\"),",
-   "App/Screens/Profile/ProfileView.swift:134: Text(tr(\"Notifications\"))"
+   "App/Screens/Profile/ProfileView.swift:136: Text(tr(\"Notifications\"))"
   ]
  },
  "Notifications autorisées": {
@@ -21254,7 +21274,7 @@
  "Nouveau : les styles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:325: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:347: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
   ]
  },
  "Nouveau calcul proposé": {
@@ -21694,8 +21714,8 @@
   "uses": [
    "App/ArdaneApp.swift:139: Button(tr(\"OK\")) { router.isIconPickerPresented = false }",
    "App/ArdaneApp.swift:339: Button(tr(\"OK\")) { dismiss() }",
-   "App/Premium/PaywallView.swift:55: Button(tr(\"OK\"), role: .cancel) {",
-   "App/Screens/Home/DailyLayoutEditor.swift:103: Button(tr(\"OK\")) { dismiss() }"
+   "App/Premium/OnboardingOffer.swift:50: Button(tr(\"OK\"), role: .cancel) {",
+   "App/Premium/PaywallView.swift:55: Button(tr(\"OK\"), role: .cancel) {"
   ]
  },
  "Objectif": {
@@ -22265,7 +22285,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/PermissionsSettingsView.swift:26: Label(tr(\"Ouvrir les réglages de l'iPhone\"), systemImage: \"gearshape\")",
-   "App/Screens/Profile/ProfileView.swift:129: Button(tr(\"Ouvrir les réglages de l'iPhone\")) {",
+   "App/Screens/Profile/ProfileView.swift:131: Button(tr(\"Ouvrir les réglages de l'iPhone\")) {",
    "App/Screens/Profile/SmartRemindersView.swift:34: Button(tr(\"Ouvrir les réglages de l'iPhone\")) {"
   ]
  },
@@ -22661,7 +22681,7 @@
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:114: Text(tr(\"Pas encore demandée\"))",
    "App/Screens/Onboarding/PermissionsSetupStep.swift:272: Text(tr(\"Pas encore demandée\"))",
-   "App/Screens/Profile/ProfileView.swift:513: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
+   "App/Screens/Profile/ProfileView.swift:524: case .notDetermined: notificationStatus = tr(\"Pas encore demandée\")"
   ]
  },
  "Pas encore fait": {
@@ -22741,7 +22761,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/MiniAppTour.swift:312: Text(tr(\"Passer\"))",
-   "App/Screens/Onboarding/OnboardingView.swift:144: Button(tr(\"Passer\"), action: skip)",
+   "App/Screens/Onboarding/OnboardingView.swift:165: Button(tr(\"Passer\"), action: skip)",
    "Shared/Live/WorkoutLiveActivity.swift:198: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipSetIntent(expecting: state.position))",
    "Shared/Render/Tiles/FitnessTiles.swift:136: TileButton(title: tr(\"Passer\"), symbol: \"forward.fill\", action: .skipSet(state.position)),"
   ]
@@ -22783,7 +22803,7 @@
  "Passer à Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:468: Text(tr(\"Passer à Premium\")).font(.headline).foregroundStyle(.primary)"
+   "App/Screens/Profile/ProfileView.swift:474: Text(tr(\"Passer à Premium\")).font(.headline).foregroundStyle(.primary)"
   ]
  },
  "Passée": {
@@ -22987,7 +23007,7 @@
  "Personnaliser le widget": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:585: Text(tr(\"Personnaliser le widget\"))",
+   "App/Screens/Spaces/CreateFlow.swift:622: Text(tr(\"Personnaliser le widget\"))",
    "App/Screens/Spaces/SpaceBuilderView.swift:397: return tr(\"Personnaliser le widget\")"
   ]
  },
@@ -23158,7 +23178,7 @@
    "App/Screens/Editor/HomeScreenPreview.swift:32: FakeApp(name: tr(\"Photos\"), symbol: \"photo.on.rectangle.angled\"),",
    "App/Screens/Explore/HomeSetups.swift:120: static let photos = SetupApp(name: tr(\"Photos\"), symbol: \"photo.on.rectangle.angled\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:25: MiniActionButton(title: tr(\"Photos\"), symbol: \"photo.on.rectangle.angled\", colorHex: accentHex) {",
-   "App/Screens/Spaces/CreateFlow.swift:213: Button(tr(\"Photos\")) { startPhotoQuote(.photos) }"
+   "App/Screens/Spaces/CreateFlow.swift:249: Button(tr(\"Photos\")) { startPhotoQuote(.photos) }"
   ]
  },
  "Photos et citations": {
@@ -23289,7 +23309,7 @@
  "Planning est déjà sur ton accueil, que tu le choisisses ou non.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:255: Text(tr(\"Planning est déjà sur ton accueil, que tu le choisisses ou non.\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:277: Text(tr(\"Planning est déjà sur ton accueil, que tu le choisisses ou non.\"))"
   ]
  },
  "Planning · études": {
@@ -23503,7 +23523,7 @@
  "Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:364: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")",
+   "App/Screens/Spaces/CreateFlow.swift:400: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")",
    "Shared/Model/Combo.swift:30: case .medium: tr(\"Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.\")"
   ]
  },
@@ -23567,9 +23587,9 @@
   "placeholders": 0,
   "uses": [
    "App/Components/PermissionExplainer.swift:228: Button(tr(\"Plus tard\")) { dismiss() }",
+   "App/Premium/OnboardingOffer.swift:85: Button(tr(\"Plus tard\")) {",
    "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:80: Text(tr(\"Plus tard\")).frame(maxWidth: .infinity, minHeight: 44)",
-   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:272: PlanButton(title: tr(\"Plus tard\"), filled: false, accent: accent) {",
-   "App/Screens/MiniApps/Planning/PlanningPages.swift:57: section(tr(\"Plus tard\"), open.filter { ($0.due.map { DateMath.startOfDay($0) > DateMath.startOfDay(now) } ?? false) })"
+   "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:272: PlanButton(title: tr(\"Plus tard\"), filled: false, accent: accent) {"
   ]
  },
  "Plusieurs cryptos suivies en direct, en une liste.": {
@@ -24494,13 +24514,13 @@
  "Premium actif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:451: Text(tr(\"Premium actif\")).font(.headline)"
+   "App/Screens/Profile/ProfileView.swift:457: Text(tr(\"Premium actif\")).font(.headline)"
   ]
  },
  "Premium débloqué (mode test)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:273: Toggle(tr(\"Premium débloqué (mode test)\"), isOn: Binding("
+   "App/Screens/Profile/ProfileView.swift:275: Toggle(tr(\"Premium débloqué (mode test)\"), isOn: Binding("
   ]
  },
  "Premium lit ton horaire à partir d'une photo ou d'un PDF, sur ton iPhone. Ajouter tes cours et tes événements à la main reste gratuit.": {
@@ -24809,7 +24829,7 @@
  "Profil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:299: .navigationTitle(tr(\"Profil\"))"
+   "App/Screens/Profile/ProfileView.swift:301: .navigationTitle(tr(\"Profil\"))"
   ]
  },
  "Profil et réglages": {
@@ -24962,14 +24982,14 @@
  "Préférences": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:98: Section(tr(\"Préférences\")) {"
+   "App/Screens/Profile/ProfileView.swift:100: Section(tr(\"Préférences\")) {"
   ]
  },
  "Prénom": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:182: placeholder: tr(\"Prénom\"),",
-   "App/Screens/Profile/ProfileView.swift:42: LabeledContent(tr(\"Prénom\")) {"
+   "App/Screens/Onboarding/OnboardingView.swift:204: placeholder: tr(\"Prénom\"),",
+   "App/Screens/Profile/ProfileView.swift:44: LabeledContent(tr(\"Prénom\")) {"
   ]
  },
  "Préparation des photos…": {
@@ -25159,7 +25179,7 @@
  "Qu'est-ce qui t'intéresse ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:247: title: tr(\"Qu'est-ce qui t'intéresse ?\"),"
+   "App/Screens/Onboarding/OnboardingView.swift:269: title: tr(\"Qu'est-ce qui t'intéresse ?\"),"
   ]
  },
  "Quadriceps": {
@@ -25200,13 +25220,13 @@
  "Quelle catégorie ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:443: Text(tr(\"Quelle catégorie ?\"))"
+   "App/Screens/Spaces/CreateFlow.swift:479: Text(tr(\"Quelle catégorie ?\"))"
   ]
  },
  "Quelle taille pour ton widget ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:278: Text(tr(\"Quelle taille pour ton widget ?\"))"
+   "App/Screens/Spaces/CreateFlow.swift:314: Text(tr(\"Quelle taille pour ton widget ?\"))"
   ]
  },
  "Quelques centimètres suffisent.": {
@@ -25390,7 +25410,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/HabitsApp.swift:663: MiniSectionTitle(title: tr(\"Rappels d'habitudes\"))",
-   "App/Screens/Profile/ProfileView.swift:127: NavigationLink { HabitsView() } label: { Text(tr(\"Rappels d'habitudes\")) }"
+   "App/Screens/Profile/ProfileView.swift:129: NavigationLink { HabitsView() } label: { Text(tr(\"Rappels d'habitudes\")) }"
   ]
  },
  "Rappels de repas, d'habitudes, de séances et de planning, et quelques encouragements, à l'heure que tu choisis.": {
@@ -25416,7 +25436,7 @@
   "uses": [
    "App/Screens/Content/HabitsApp.swift:684: MiniSectionTitle(title: tr(\"Rappels intelligents\"))",
    "App/Screens/Content/HabitsApp.swift:698: MiniRow(symbol: \"bell.badge.fill\", colorHex: HabitsApp.accentHex, title: tr(\"Rappels intelligents\"))",
-   "App/Screens/Profile/ProfileView.swift:125: NavigationLink { SmartRemindersView() } label: { Text(tr(\"Rappels intelligents\")) }",
+   "App/Screens/Profile/ProfileView.swift:127: NavigationLink { SmartRemindersView() } label: { Text(tr(\"Rappels intelligents\")) }",
    "App/Screens/Profile/SmartRemindersView.swift:144: .navigationTitle(tr(\"Rappels intelligents\"))"
   ]
  },
@@ -25516,7 +25536,7 @@
  "Recharger les widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:277: Button(tr(\"Recharger les widgets\")) { WidgetCenter.shared.reloadAllTimelines() }"
+   "App/Screens/Profile/ProfileView.swift:279: Button(tr(\"Recharger les widgets\")) { WidgetCenter.shared.reloadAllTimelines() }"
   ]
  },
  "Recherche du produit %@…": {
@@ -25562,7 +25582,7 @@
  "Reconnaissance des aliments": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:233: foodSource(name: tr(\"Reconnaissance des aliments\"), url: FoodSourceLinks.ccBy4,"
+   "App/Screens/Profile/ProfileView.swift:235: foodSource(name: tr(\"Reconnaissance des aliments\"), url: FoodSourceLinks.ccBy4,"
   ]
  },
  "Record": {
@@ -25720,8 +25740,8 @@
   "uses": [
    "App/Screens/Onboarding/PermissionsSetupStep.swift:110: Label(tr(\"Refusée\"), systemImage: \"xmark.circle.fill\")",
    "App/Screens/Onboarding/PermissionsSetupStep.swift:268: Label(tr(\"Refusée\"), systemImage: \"xmark.circle.fill\")",
-   "App/Screens/Profile/ProfileView.swift:128: if notificationStatus == tr(\"Refusée\") {",
-   "App/Screens/Profile/ProfileView.swift:512: case .denied: notificationStatus = tr(\"Refusée\")"
+   "App/Screens/Profile/ProfileView.swift:130: if notificationStatus == tr(\"Refusée\") {",
+   "App/Screens/Profile/ProfileView.swift:523: case .denied: notificationStatus = tr(\"Refusée\")"
   ]
  },
  "Regard droit devant.": {
@@ -25926,7 +25946,7 @@
  "Remplacer tes données par cette sauvegarde ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:315: .confirmationDialog(tr(\"Remplacer tes données par cette sauvegarde ?\"), isPresented: Binding(get: { pendingRestore != nil }, set: { if !$0 { pendingRestore = nil } }), titleVisibility: .visible) {"
+   "App/Screens/Profile/ProfileView.swift:321: .confirmationDialog(tr(\"Remplacer tes données par cette sauvegarde ?\"), isPresented: Binding(get: { pendingRestore != nil }, set: { if !$0 { pendingRestore = nil } }), titleVisibility: .visible) {"
   ]
  },
  "Remplissage": {
@@ -25987,7 +26007,7 @@
  "Renouvellement le %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:501: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
+   "App/Screens/Profile/ProfileView.swift:512: return tr(\"Renouvellement le \\(Fmt.format(date, template: \"dMMMMyyyy\"))\")"
   ]
  },
  "Renseigné": {
@@ -26255,37 +26275,39 @@
  "Restauration": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:310: .alert(tr(\"Restauration\"), isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {"
+   "App/Screens/Profile/ProfileView.swift:316: .alert(tr(\"Restauration\"), isPresented: Binding(get: { restoreMessage != nil }, set: { if !$0 { restoreMessage = nil } })) {"
   ]
  },
  "Restauration…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:343: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/OnboardingOffer.swift:80: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
+   "App/Premium/PaywallView.swift:327: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:316: Button(tr(\"Restaurer\"), role: .destructive) {"
+   "App/Premium/OnboardingOffer.swift:80: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
+   "App/Screens/Profile/ProfileView.swift:322: Button(tr(\"Restaurer\"), role: .destructive) {"
   ]
  },
  "Restaurer les achats": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:481: Text(tr(\"Restaurer les achats\"))"
+   "App/Screens/Profile/ProfileView.swift:487: Text(tr(\"Restaurer les achats\"))"
   ]
  },
  "Restaurer mes achats": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:343: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/PaywallView.swift:327: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer une sauvegarde": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:254: Label(tr(\"Restaurer une sauvegarde\"), systemImage: \"arrow.counterclockwise\")"
+   "App/Screens/Profile/ProfileView.swift:256: Label(tr(\"Restaurer une sauvegarde\"), systemImage: \"arrow.counterclockwise\")"
   ]
  },
  "Reste %@": {
@@ -26480,8 +26502,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/HomeScreenPreview.swift:107: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
-   "App/Screens/Onboarding/OnboardingView.swift:136: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
-   "App/Screens/Spaces/CreateFlow.swift:207: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
+   "App/Screens/Onboarding/OnboardingView.swift:157: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
+   "App/Screens/Spaces/CreateFlow.swift:243: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
    "App/Screens/Spaces/SpaceForms.swift:52: Text(tr(\"Retour\", context: \"back\"))"
   ]
  },
@@ -26632,7 +26654,7 @@
    "App/Core/DataItems.swift:107: case .moneyFlow: tr(\"Revenus et dépenses fixes\")",
    "App/Screens/Content/MoneyView.swift:52: .navigationTitle(tr(\"Revenus et dépenses fixes\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:762: FinancesRow(symbol: \"repeat\", colorHex: \"D6409F\", title: tr(\"Revenus et dépenses fixes\"),",
-   "App/Screens/Profile/ProfileView.swift:142: NavigationLink { MoneyView() } label: { Label(tr(\"Revenus et dépenses fixes\"), systemImage: \"dollarsign.circle\") }"
+   "App/Screens/Profile/ProfileView.swift:144: NavigationLink { MoneyView() } label: { Label(tr(\"Revenus et dépenses fixes\"), systemImage: \"dollarsign.circle\") }"
   ]
  },
  "Revenus moins dépenses depuis le %@, factures et montants fixes compris.": {
@@ -26785,7 +26807,7 @@
  "Revoir le tutoriel": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:162: Label(tr(\"Revoir le tutoriel\"), systemImage: \"graduationcap\")"
+   "App/Screens/Profile/ProfileView.swift:164: Label(tr(\"Revoir le tutoriel\"), systemImage: \"graduationcap\")"
   ]
  },
  "Reçois-toi sur l'avant du pied, genoux fléchis.": {
@@ -27323,10 +27345,10 @@
  "Réessayer": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/OnboardingOffer.swift:159: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Premium/PaywallView.swift:248: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Business/BusinessSources.swift:360: Button(tr(\"Réessayer\")) { attempt += 1 }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:175: prominentButton(tr(\"Réessayer\")) {",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:188: prominentButton(tr(\"Réessayer\")) {"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:175: prominentButton(tr(\"Réessayer\")) {"
   ]
  },
  "Région": {
@@ -27875,7 +27897,7 @@
  "Saphir est offert. Avec Premium, choisis parmi %@ couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:330: Text(tr(\"Saphir est offert. Avec Premium, choisis parmi \\(AppStyleID.allCases.count) couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:352: Text(tr(\"Saphir est offert. Avec Premium, choisis parmi \\(AppStyleID.allCases.count) couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.\"))"
   ]
  },
  "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.": {
@@ -28001,14 +28023,14 @@
  "Sauvegarde": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:262: Text(tr(\"Sauvegarde\"))",
-   "App/Screens/Profile/ProfileView.swift:326: .alert(tr(\"Sauvegarde\"), isPresented: Binding(get: { backupMessage != nil }, set: { if !$0 { backupMessage = nil } })) {"
+   "App/Screens/Profile/ProfileView.swift:264: Text(tr(\"Sauvegarde\"))",
+   "App/Screens/Profile/ProfileView.swift:332: .alert(tr(\"Sauvegarde\"), isPresented: Binding(get: { backupMessage != nil }, set: { if !$0 { backupMessage = nil } })) {"
   ]
  },
  "Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:248: if case .success = result { backupMessage = tr(\"Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.\") }"
+   "App/Screens/Profile/ProfileView.swift:250: if case .success = result { backupMessage = tr(\"Sauvegarde enregistrée. Garde-la dans Fichiers ou iCloud Drive.\") }"
   ]
  },
  "Scanne ou cherche un aliment : tes widgets se mettent à jour.": {
@@ -28759,7 +28781,7 @@
  "Sources des données alimentaires": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:236: Text(tr(\"Sources des données alimentaires\"))"
+   "App/Screens/Profile/ProfileView.swift:238: Text(tr(\"Sources des données alimentaires\"))"
   ]
  },
  "Sous l'heure, sans déverrouiller": {
@@ -28934,6 +28956,12 @@
   "uses": [
    "App/Premium/PaywallView.swift:167: (.history, \"chart.bar.xaxis\", tr(\"Statistiques détaillées\"), tr(\"Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes hab",
    "App/Premium/PaywallView.swift:211: comparisonRow(tr(\"Statistiques détaillées\"), free: \"—\", premium: \"✓\")"
+  ]
+ },
+ "Statistiques, exercices, scans illimités": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/OnboardingOffer.swift:36: perk(tr(\"Statistiques, exercices, scans illimités\"))"
   ]
  },
  "Statut « à payer », « prévu » ou « en attente » dans le fichier.": {
@@ -30700,7 +30728,7 @@
   "uses": [
    "App/Screens/MiniApps/MiniAppSettings.swift:173: WidgetDataSection(items: app.settingsItems, title: tr(\"Tes données\"))",
    "App/Screens/Profile/DataItemViews.swift:14: var title = tr(\"Tes données\")",
-   "App/Screens/Profile/ProfileView.swift:139: Section(tr(\"Tes données\")) {"
+   "App/Screens/Profile/ProfileView.swift:141: Section(tr(\"Tes données\")) {"
   ]
  },
  "Tes données\nrestent à toi.": {
@@ -30712,13 +30740,13 @@
  "Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:216: Text(tr(\"Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.\"))"
+   "App/Screens/Profile/ProfileView.swift:218: Text(tr(\"Tes données restent sur ton iPhone. Aucun compte, aucun suivi publicitaire.\"))"
   ]
  },
  "Tes données sont de retour.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:319: backupMessage = tr(\"Tes données sont de retour.\")"
+   "App/Screens/Profile/ProfileView.swift:325: backupMessage = tr(\"Tes données sont de retour.\")"
   ]
  },
  "Tes dépenses comparées à la semaine dernière.": {
@@ -31054,7 +31082,7 @@
  "Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:334: Text(tr(\"Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.\"))"
+   "App/Screens/Profile/ProfileView.swift:340: Text(tr(\"Tes widgets, tâches, habitudes et montants seront supprimés. Ton abonnement n'est pas touché.\"))"
   ]
  },
  "Tes échéances, ta consommation et ton kilométrage.": {
@@ -31441,7 +31469,8 @@
  "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:399: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
+   "App/Premium/OnboardingOffer.swift:275: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")",
+   "App/Premium/PaywallView.swift:383: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
   ]
  },
  "Ton activité [business]": {
@@ -31570,7 +31599,7 @@
  "Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », sur l'accueil.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:80: Text(tr(\"Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », sur l'accueil.\"))"
+   "App/Screens/Profile/ProfileView.swift:82: Text(tr(\"Ton nom, ton anniversaire et tes centres d'intérêt restent sur ton iPhone. Tes autres informations (poids, objectifs, budget…) se modifient dans « Mes informations », sur l'accueil.\"))"
   ]
  },
  "Ton objectif": {
@@ -31693,7 +31722,7 @@
  "Ton profil": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:382: Text(name.isEmpty ? tr(\"Ton profil\") : name)"
+   "App/Screens/Profile/ProfileView.swift:388: Text(name.isEmpty ? tr(\"Ton profil\") : name)"
   ]
  },
  "Ton profil est complet": {
@@ -31729,7 +31758,7 @@
  "Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:178: message: tr(\"Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.\")"
+   "App/Screens/Onboarding/OnboardingView.swift:200: message: tr(\"Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.\")"
   ]
  },
  "Ton revenu récurrent, tes abonnés et ta croissance mensuelle.": {
@@ -31966,7 +31995,7 @@
  "Touche un widget : l'Atelier s'ouvre aussitôt.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:751: if draft.format == .small { return tr(\"Touche un widget : l'Atelier s'ouvre aussitôt.\") }"
+   "App/Screens/Spaces/CreateFlow.swift:788: if draft.format == .small { return tr(\"Touche un widget : l'Atelier s'ouvre aussitôt.\") }"
   ]
  },
  "Touche un widget pour le personnaliser, puis ajoute-le à ton écran d'accueil ou verrouillé.": {
@@ -32159,7 +32188,7 @@
  "Tous les widgets et tous les styles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:469: Text(tr(\"Tous les widgets et tous les styles\")).font(.caption).foregroundStyle(.secondary)"
+   "App/Screens/Profile/ProfileView.swift:475: Text(tr(\"Tous les widgets et tous les styles\")).font(.caption).foregroundStyle(.secondary)"
   ]
  },
  "Tous les widgets, tous les styles, sans limite.": {
@@ -32185,6 +32214,18 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:173: chip(tr(\"Tout\"), isOn: filter == .all) { filter = .all }",
    "App/Screens/MiniApps/Studies/StudiesDeadlines.swift:140: case .all: tr(\"Tout\")"
+  ]
+ },
+ "Tout Ardane, %@ jours gratuits": {
+  "placeholders": 1,
+  "uses": [
+   "App/Premium/OnboardingOffer.swift:29: Text(trialDays.map { tr(\"Tout Ardane, \\($0) jours gratuits\") } ?? tr(\"Tout Ardane, sans limite\"))"
+  ]
+ },
+ "Tout Ardane, sans limite": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/OnboardingOffer.swift:29: Text(trialDays.map { tr(\"Tout Ardane, \\($0) jours gratuits\") } ?? tr(\"Tout Ardane, sans limite\"))"
   ]
  },
  "Tout Finance": {
@@ -32234,13 +32275,13 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Content/TasksView.swift:54: Button(tr(\"Tout effacer\")) {",
-   "App/Screens/Profile/ProfileView.swift:332: Button(tr(\"Tout effacer\"), role: .destructive) { model.resetAllData() }"
+   "App/Screens/Profile/ProfileView.swift:338: Button(tr(\"Tout effacer\"), role: .destructive) { model.resetAllData() }"
   ]
  },
  "Tout est facultatif : laisse vide ce que tu préfères ne pas dire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:271: Text(tr(\"Tout est facultatif : laisse vide ce que tu préfères ne pas dire.\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:293: Text(tr(\"Tout est facultatif : laisse vide ce que tu préfères ne pas dire.\"))"
   ]
  },
  "Tout est fait": {
@@ -32616,13 +32657,13 @@
  "Tu pourras y réunir plusieurs widgets d'une même catégorie.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:282: Text(tr(\"Tu pourras y réunir plusieurs widgets d'une même catégorie.\"))"
+   "App/Screens/Spaces/CreateFlow.swift:318: Text(tr(\"Tu pourras y réunir plusieurs widgets d'une même catégorie.\"))"
   ]
  },
  "Tu profites de Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:310: Text(tr(\"Tu profites de Premium\"))"
+   "App/Premium/PaywallView.swift:294: Text(tr(\"Tu profites de Premium\"))"
   ]
  },
  "Tu retrouveras tout dans Profil › Autorisations.": {
@@ -32795,7 +32836,7 @@
  "U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (avril 2018), et USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domaine public, CC0). Une partie des valeurs de la table d'aliments intégrée et les aliments que le Fichier canadien n'a pas viennent de l'USDA ; ses valeurs ne sont jamais mélangées à celles du Fichier canadien. fdc.nal.usda.gov": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:232: text: tr(\"U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (avril 2018), et USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domaine public, CC0)"
+   "App/Screens/Profile/ProfileView.swift:234: text: tr(\"U.S. Department of Agriculture, Agricultural Research Service. FoodData Central, SR Legacy (avril 2018), et USDA Table of Cooking Yields for Meat and Poultry, Release 2 (domaine public, CC0)"
   ]
  },
  "Un carnet de serre : habitudes, eau, calendrier et notes.": {
@@ -32843,7 +32884,7 @@
  "Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:264: Text(tr(\"Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.\"))"
+   "App/Screens/Profile/ProfileView.swift:266: Text(tr(\"Un fichier avec tes widgets, les données de tes mini-apps et tes réglages, à garder dans Fichiers ou iCloud Drive. Il remet tout en place sur cet iPhone ou un autre.\"))"
   ]
  },
  "Un grand chiffre, comme une une": {
@@ -32862,8 +32903,8 @@
  "Un grand widget réunit 4 widgets au plus.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:117: case .large: return tr(\"Un grand widget réunit 4 widgets au plus.\")",
-   "App/Screens/Spaces/CreateFlow.swift:756: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
+   "App/Screens/Spaces/CreateFlow.swift:152: case .large: return tr(\"Un grand widget réunit 4 widgets au plus.\")",
+   "App/Screens/Spaces/CreateFlow.swift:793: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
    "Shared/Model/Combo.swift:326: return current.count < Composer.widgetLimit(for: .large) ? nil : tr(\"Un grand widget réunit 4 widgets au plus.\")",
    "Shared/Model/Combo.swift:635: return .invalid(tr(\"Un grand widget réunit 4 widgets au plus.\"))"
   ]
@@ -32950,7 +32991,7 @@
  "Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:365: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")",
+   "App/Screens/Spaces/CreateFlow.swift:401: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")",
    "Shared/Model/Combo.swift:31: case .large: tr(\"Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.\")"
   ]
  },
@@ -33000,8 +33041,8 @@
  "Un widget moyen réunit 2 widgets au plus.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:116: case .medium: return tr(\"Un widget moyen réunit 2 widgets au plus.\")",
-   "App/Screens/Spaces/CreateFlow.swift:756: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
+   "App/Screens/Spaces/CreateFlow.swift:151: case .medium: return tr(\"Un widget moyen réunit 2 widgets au plus.\")",
+   "App/Screens/Spaces/CreateFlow.swift:793: return draft.format == .medium ? tr(\"Un widget moyen réunit 2 widgets au plus.\") : tr(\"Un grand widget réunit 4 widgets au plus.\")",
    "Shared/Model/Combo.swift:606: return .invalid(tr(\"Un widget moyen réunit 2 widgets au plus.\"))"
   ]
  },
@@ -33236,7 +33277,7 @@
  "Unités": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:111: Picker(tr(\"Unités\"), selection: settingBinding(\\.unitSystem)) {"
+   "App/Screens/Profile/ProfileView.swift:113: Picker(tr(\"Unités\"), selection: settingBinding(\\.unitSystem)) {"
   ]
  },
  "Utilise une clé restreinte (elle commence par rk_) : Ardane ne garde jamais de clé secrète.": {
@@ -33659,13 +33700,13 @@
  "Version": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:278: LabeledContent(tr(\"Version\"), value: WidgetDiagnostics.appVersion)"
+   "App/Screens/Profile/ProfileView.swift:280: LabeledContent(tr(\"Version\"), value: WidgetDiagnostics.appVersion)"
   ]
  },
  "Version gratuite": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:385: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
+   "App/Screens/Profile/ProfileView.swift:391: Label(model.isPremium ? tr(\"Ardane Premium\") : tr(\"Version gratuite\"), systemImage: model.isPremium ? \"sparkles\" : \"person\")"
   ]
  },
  "Vert doré, terreux et calme": {
@@ -33785,7 +33826,7 @@
  "Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Premium.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:292: Text(tr(\"Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Prem"
+   "App/Screens/Profile/ProfileView.swift:294: Text(tr(\"Visible uniquement dans les versions de test : tout est débloqué par défaut pour essayer chaque widget. Cet interrupteur n'existe pas dans la version App Store, où seul un achat débloque Prem"
   ]
  },
  "Visiteurs": {
@@ -33861,6 +33902,12 @@
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:187: action: tr(\"Voir des idées\")",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:198: action: tr(\"Voir des idées\")"
+  ]
+ },
+ "Voir l'offre de bienvenue": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Profile/ProfileView.swift:495: Button(tr(\"Voir l'offre de bienvenue\")) { showsWelcomeOffer = true }"
   ]
  },
  "Voir la fiche Open Food Facts": {
@@ -34127,7 +34174,7 @@
  "Widget d'écran verrouillé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:297: Label(tr(\"Widget d'écran verrouillé\"), systemImage: \"lock.rectangle.on.rectangle\")"
+   "App/Screens/Spaces/CreateFlow.swift:333: Label(tr(\"Widget d'écran verrouillé\"), systemImage: \"lock.rectangle.on.rectangle\")"
   ]
  },
  "Widget photo": {
@@ -34139,7 +34186,7 @@
  "Widget simple": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:738: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))"
+   "App/Screens/Spaces/CreateFlow.swift:775: Text(combined ? tr(\"Combiné · \\(draft.picked.count) widgets\") : tr(\"Widget simple\"))"
   ]
  },
  "Widgets": {
@@ -34160,7 +34207,7 @@
  "Widgets de %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:524: Text(tr(\"Widgets de \\(category.title)\"))"
+   "App/Screens/Spaces/CreateFlow.swift:560: Text(tr(\"Widgets de \\(category.title)\"))"
   ]
  },
  "Widgets de l'espace": {
@@ -34175,6 +34222,12 @@
    "App/Premium/PaywallView.swift:207: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
   ]
  },
+ "Widgets illimités, tous les types": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/OnboardingOffer.swift:34: perk(tr(\"Widgets illimités, tous les types\"))"
+  ]
+ },
  "Widgets intelligents": {
   "placeholders": 0,
   "uses": [
@@ -34184,7 +34237,7 @@
  "Widgets lancés par iOS": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:288: LabeledContent(tr(\"Widgets lancés par iOS\"), value: WidgetDiagnostics.lastLaunchText)"
+   "App/Screens/Profile/ProfileView.swift:290: LabeledContent(tr(\"Widgets lancés par iOS\"), value: WidgetDiagnostics.lastLaunchText)"
   ]
  },
  "Widgets moyens": {
@@ -34567,25 +34620,25 @@
  "chaque année": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:292: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
+   "App/Premium/PremiumStore.swift:286: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
   ]
  },
  "chaque mois": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:292: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
+   "App/Premium/PremiumStore.swift:286: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
   ]
  },
  "choisi": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:69: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))"
+   "App/Screens/Profile/ProfileView.swift:71: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))"
   ]
  },
  "choisis": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:69: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))"
+   "App/Screens/Profile/ProfileView.swift:71: LabeledContent(tr(\"Centres d'intérêt\"), value: model.profile.interests.isEmpty ? tr(\"Aucun\") : Fmt.plural(model.profile.interests.count, tr(\"choisi\"), tr(\"choisis\")))"
   ]
  },
  "chou kale": {
@@ -34996,7 +35049,7 @@
  "espaces actifs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:392: stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr(\"espaces actifs\"))"
+   "App/Screens/Profile/ProfileView.swift:398: stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr(\"espaces actifs\"))"
   ]
  },
  "estimées aujourd'hui": {
@@ -35195,7 +35248,7 @@
   "uses": [
    "App/Core/DataItems.swift:398: case .habits: return Fmt.plural(content.habits.count, tr(\"habitude\"), tr(\"habitudes\"))",
    "App/Screens/Content/HabitsApp.swift:246: MiniRow(symbol: \"repeat\", colorHex: accentHex, title: tr(\"Gérer mes habitudes\"), detail: Fmt.plural(habits.count, tr(\"habitude\"), tr(\"habitudes\")))",
-   "App/Screens/Profile/ProfileView.swift:391: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))",
+   "App/Screens/Profile/ProfileView.swift:397: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))",
    "Shared/Support/NotificationEngine.swift:482: body: tr(\"Il te reste \\(Fmt.plural(left.count, tr(\"habitude\"), tr(\"habitudes\"))) aujourd'hui. Un petit effort et ta journée est complète !\"),"
   ]
  },
@@ -35210,7 +35263,7 @@
   "uses": [
    "App/Core/DataItems.swift:398: case .habits: return Fmt.plural(content.habits.count, tr(\"habitude\"), tr(\"habitudes\"))",
    "App/Screens/Content/HabitsApp.swift:246: MiniRow(symbol: \"repeat\", colorHex: accentHex, title: tr(\"Gérer mes habitudes\"), detail: Fmt.plural(habits.count, tr(\"habitude\"), tr(\"habitudes\")))",
-   "App/Screens/Profile/ProfileView.swift:391: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))",
+   "App/Screens/Profile/ProfileView.swift:397: stat(model.content.habits.count, model.content.habits.count > 1 ? tr(\"habitudes\") : tr(\"habitude\"))",
    "Shared/Support/NotificationEngine.swift:482: body: tr(\"Il te reste \\(Fmt.plural(left.count, tr(\"habitude\"), tr(\"habitudes\"))) aujourd'hui. Un petit effort et ta journée est complète !\"),"
   ]
  },
@@ -35831,10 +35884,10 @@
  "par mois": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/OnboardingOffer.swift:176: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
    "App/Screens/MiniApps/Car/CarApp.swift:290: MiniStat(title: tr(\"Coût réel\"), value: \"–\", detail: tr(\"par mois\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:728: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
-   "Shared/Model/Content.swift:286: case .month: tr(\"par mois\")",
-   "Shared/Render/Kinds/DataWidgets.swift:228: WLabel(text: tr(\"par mois\"), style: s)"
+   "Shared/Model/Content.swift:286: case .month: tr(\"par mois\")"
   ]
  },
  "par mois, tout compris": {
@@ -36000,7 +36053,7 @@
  "place libre : tu peux encore ajouter un widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:755: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
+   "App/Screens/Spaces/CreateFlow.swift:792: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
   ]
  },
  "placement": {
@@ -36018,7 +36071,7 @@
  "places libres : tu peux encore ajouter des widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Spaces/CreateFlow.swift:755: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
+   "App/Screens/Spaces/CreateFlow.swift:792: if left > 0 { return Fmt.plural(left, tr(\"place libre : tu peux encore ajouter un widget.\"), tr(\"places libres : tu peux encore ajouter des widgets.\")) }"
   ]
  },
  "plein": {
@@ -37063,7 +37116,7 @@
  "À propos": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Profile/ProfileView.swift:211: Text(tr(\"À propos\"))"
+   "App/Screens/Profile/ProfileView.swift:213: Text(tr(\"À propos\"))"
   ]
  },
  "À quatre pattes (ou debout face à la poulie), dos plat, ventre gainé.": {
@@ -37656,14 +37709,14 @@
  "Étape %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:380: Text(tr(\"Étape \\(number)\"))",
+   "App/Screens/Onboarding/OnboardingView.swift:402: Text(tr(\"Étape \\(number)\"))",
    "App/Screens/Spaces/LockScreenCreator.swift:169: Text(tr(\"Étape \\(index + 1)\"))"
   ]
  },
  "Étape %@ sur %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:143: .accessibilityLabel(Text(tr(\"Étape \\(position + 1) sur \\(personal.count)\")))",
+   "App/Screens/Onboarding/OnboardingView.swift:164: .accessibilityLabel(Text(tr(\"Étape \\(position + 1) sur \\(personal.count)\")))",
    "App/Screens/Tutorial/TutorialOverlay.swift:120: .accessibilityLabel(Text(tr(\"Étape \\(step.number) sur \\(TutorialStep.allCases.count)\")))"
   ]
  },

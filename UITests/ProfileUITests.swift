@@ -114,6 +114,15 @@ final class ProfileUITests: XCTestCase {
         XCTAssertTrue(waitForDisappearance(done), "La liste \(identifier) doit se fermer après OK", file: file, line: line)
     }
 
+    /// The Premium offer at the end of the first launch: shown, and left with « Plus tard ».
+    private func passOffer(snapshotName: String? = nil, file: StaticString = #filePath, line: UInt = #line) {
+        let later = app.buttons["onboarding-offer-later"]
+        XCTAssertTrue(later.waitForExistence(timeout: 10), "L'offre Premium doit suivre la dernière page de l'inscription", file: file, line: line)
+        if let snapshotName { snapshot(snapshotName) }
+        later.tap()
+        XCTAssertTrue(waitForDisappearance(later), "« Plus tard » doit fermer l'offre", file: file, line: line)
+    }
+
     private func tapButton(_ label: String, file: StaticString = #filePath, line: UInt = #line) {
         let button = app.buttons[label].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(label) » introuvable", file: file, line: line)
@@ -178,9 +187,11 @@ final class ProfileUITests: XCTestCase {
         if !targetsShown { attachHierarchy("diagnostic-nutrition-targets") }
         XCTAssertTrue(targetsShown, "Les besoins calculés doivent s'afficher")
         snapshot("nutrition-needs")
-        // Everything else can be skipped; the permissions page, now last, ends the first launch.
+        // Everything else can be skipped; the permissions page, now last, ends the questions.
         tapButton("onboarding-skip")
         tapButton("onboarding-skip")
+        // Then the Premium offer, once; « Plus tard » enters the app.
+        passOffer(snapshotName: "onboarding-offer")
 
         // Then the tour of the app, step by step, on the app itself.
         let step = app.staticTexts["tutorial-step"]
@@ -242,9 +253,10 @@ final class ProfileUITests: XCTestCase {
         launch(["-screenshotScreen", "onboarding"])
         tapButton("Continuer")
         tapButton("onboarding-skip")
-        // No interest chosen: the interests step, then the permissions page, end the first launch.
+        // No interest chosen: the interests step, then the permissions page, end the questions.
         tapButton("onboarding-skip")
         tapButton("onboarding-skip")
+        passOffer()
         // The tour can be skipped as a whole, from its first step.
         let skipAll = app.buttons["tutorial-skip-all"]
         XCTAssertTrue(skipAll.waitForExistence(timeout: 10), "Le tutoriel doit suivre les premières questions")
