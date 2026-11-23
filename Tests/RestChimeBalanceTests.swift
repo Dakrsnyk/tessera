@@ -82,6 +82,8 @@ final class RestChimeBalanceTests: XCTestCase {
         XCTAssertNil(tile.empty)
         XCTAssertEqual(tile.value, TF.money(1_300, "CAD"))
         XCTAssertEqual(tile.rows.first?.value, TF.money(1_000, "CAD"), "Balance on the 1st")
+        XCTAssertEqual(tile.rows.dropFirst().first?.value, "+" + TF.money(500, "CAD"), "This month's income")
+        XCTAssertEqual(tile.rows.last?.value, "−" + TF.money(200, "CAD"), "This month's expenses")
         XCTAssertNil(tile.footnote, "With a « Solde de départ », no warning")
         if case .line = tile.visual {} else { XCTFail("The month's line") }
     }
