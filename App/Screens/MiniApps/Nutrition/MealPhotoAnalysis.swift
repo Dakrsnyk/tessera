@@ -280,7 +280,21 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
                 )
                 break
             }
-            guard let proposal = made else { continue }
+            guard var proposal = made else { continue }
+            // Sure or « maybe »: the segmenter and the classifier together (`ScannerModelLogic.isSureZone`). A food from the
+            // person's habits keeps the place its zone had: the measure that chose the rule knows nothing of habits.
+            var isMaybe = zone.isTentative
+            if !proposal.usesHabit {
+                isMaybe = !ScannerModelLogic.isSureZone(score: zone.score, probability: proposal.confidence)
+                // A zone the segmenter doubts is never added alone, however clear its food: it waits in « À confirmer ».
+                if !isMaybe, zone.isTentative, proposal.confidence >= ScanRecap.autoAddThreshold {
+                    proposal = MealProposal(
+                        food: proposal.food, grams: proposal.grams, confidence: ScanRecap.autoAddThreshold - 0.001,
+                        label: proposal.label, detectedFoodID: proposal.detectedFoodID, usesHabit: false,
+                        fromMealContext: proposal.fromMealContext
+                    )
+                }
+            }
             // The other foods of the zone, for a replacement in one tap.
             var alternatives: [FoodItem] = []
             for candidate in candidates where !candidate.key.hasPrefix(FoodModelRecognizer.labelPrefix) {
@@ -294,7 +308,7 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
                 detectedFoodID: proposal.detectedFoodID ?? proposal.food.id,
                 embedding: zone.classification.embedding, alternatives: alternatives
             ))
-            if zone.isTentative {
+            if isMaybe {
                 if let existing = tentativeByFood[proposal.food.id], existing.confidence >= proposal.confidence { continue }
                 tentativeByFood[proposal.food.id] = proposal
             } else {

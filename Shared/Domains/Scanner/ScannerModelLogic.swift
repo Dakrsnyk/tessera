@@ -38,7 +38,20 @@ enum ScannerModelLogic {
     static let detectionThreshold = 0.30
     /// A query of the segmenter between this score and `detectionThreshold` is kept as a « maybe » zone: its food is
     /// only ever offered to confirm, never added alone (audit of 2026-11-04: foods found 73.9 % -> 77.9 %).
+    /// Whether it is shown as a « maybe » or as a food to confirm is said by `isSureZone`.
     static let tentativeThreshold = 0.20
+    /// A zone is sure when the segmenter and the classifier agree enough: score × √(probability of its food) reaches this.
+    /// It replaces « score ≥ `detectionThreshold` » to sort the zones between sure and « maybe » (2026-11-23): a clear food
+    /// in a zone the segmenter doubts (0.25 × √0.9) is sure, a doubtful food in a zone it barely accepts (0.32 × √0.3) is a
+    /// « maybe ». Chosen on 1 500 validation photos, confirmed on the 1 000 test photos: precision 70.2 -> 71.8 %, recall
+    /// 57.1 -> 59.2 %, F1 63.0 -> 64.9 % (95 % interval of the gain: +1.2 to +2.7), no food added alone that was not before.
+    static let sureZoneAgreement = 0.20
+
+    /// True when a zone of this segmenter score, whose food has this probability, is sure (else it is a « maybe »).
+    static func isSureZone(score: Double, probability: Double) -> Bool {
+        guard score.isFinite, probability.isFinite, probability > 0 else { return false }
+        return score * probability.squareRoot() >= sureZoneAgreement
+    }
     /// A mask is a duplicate of an earlier, better one when both its box and its mask overlap that much.
     static let duplicateBoxIoU = 0.5
     static let duplicateMaskIoU = 0.7

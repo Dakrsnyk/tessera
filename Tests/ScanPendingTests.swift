@@ -159,7 +159,7 @@ final class ScanPendingTests: XCTestCase {
         let resolve: (String) -> FoodItem? = { id in [apple, rice, egg].first { $0.id == id } }
         let zones = [
             zone(0.9, [("builtin.rice", 0.7)]),
-            zone(0.25, [("builtin.rice", 0.9)]),
+            zone(0.25, [("builtin.rice", 0.5)]),
             zone(0.22, [("builtin.apple", 0.6), ("builtin.egg", 0.2)]),
         ]
         XCTAssertFalse(zones[0].isTentative)
@@ -174,5 +174,48 @@ final class ScanPendingTests: XCTestCase {
         let recap = analysis.recap
         XCTAssertEqual(recap.lines.count, 0, "0,70 < 0,80 : le riz attend aussi")
         XCTAssertEqual(recap.pending.map(\.food.id), ["builtin.rice", "builtin.apple"])
+    }
+
+    // MARK: Sure or « maybe »: the segmenter and the classifier together
+
+    func testAZoneIsSureWhenTheSegmenterAndTheClassifierAgreeEnough() {
+        XCTAssertEqual(ScannerModelLogic.sureZoneAgreement, 0.20)
+        XCTAssertTrue(ScannerModelLogic.isSureZone(score: 0.25, probability: 0.9), "0,25 × √0,9 = 0,237")
+        XCTAssertFalse(ScannerModelLogic.isSureZone(score: 0.32, probability: 0.3), "0,32 × √0,3 = 0,175")
+        XCTAssertTrue(ScannerModelLogic.isSureZone(score: 0.9, probability: 0.15))
+        XCTAssertTrue(ScannerModelLogic.isSureZone(score: 0.2, probability: 1), "La limite compte")
+        XCTAssertFalse(ScannerModelLogic.isSureZone(score: 0.2, probability: 0.99))
+        XCTAssertFalse(ScannerModelLogic.isSureZone(score: 1, probability: 0))
+        XCTAssertFalse(ScannerModelLogic.isSureZone(score: .nan, probability: 0.9))
+        XCTAssertFalse(ScannerModelLogic.isSureZone(score: 0.9, probability: .infinity))
+        // Whatever the food, a zone the segmenter gives 0.30 or more with a food at 0.80 or more is sure, as before.
+        XCTAssertTrue(ScannerModelLogic.isSureZone(score: ScannerModelLogic.detectionThreshold, probability: ScanRecap.autoAddThreshold))
+    }
+
+    func testAClearFoodInADoubtedZoneIsProposedButNeverAddedAlone() {
+        let apple = food("builtin.apple")
+        let zones = [zone(0.25, [("builtin.apple", 0.95)])]
+        let reading = OnDeviceMealAnalyzer.modelReading(from: zones, learning: ScanLearning()) { $0 == apple.id ? apple : nil }
+        XCTAssertEqual(reading.proposals.map(\.food.id), ["builtin.apple"])
+        XCTAssertTrue(reading.tentative.isEmpty)
+        XCTAssertLessThan(reading.proposals[0].confidence, ScanRecap.autoAddThreshold)
+        let recap = MealAnalysis(proposals: reading.proposals, tentative: reading.tentative, zoneHints: reading.hints).recap
+        XCTAssertTrue(recap.lines.isEmpty, "Le segmenteur doute : à confirmer, jamais ajouté seul")
+        XCTAssertEqual(recap.pending.map(\.food.id), ["builtin.apple"])
+        XCTAssertFalse(recap.pending[0].isTentative)
+    }
+
+    func testADoubtfulFoodInABarelyAcceptedZoneIsAMaybe() {
+        let apple = food("builtin.apple"), rice = food("builtin.rice")
+        let resolve: (String) -> FoodItem? = { id in [apple, rice].first { $0.id == id } }
+        let zones = [zone(0.32, [("builtin.apple", 0.3)]), zone(0.32, [("builtin.rice", 0.85)])]
+        let reading = OnDeviceMealAnalyzer.modelReading(from: zones, learning: ScanLearning(), resolve: resolve)
+        XCTAssertEqual(reading.proposals.map(\.food.id), ["builtin.rice"])
+        XCTAssertEqual(reading.proposals[0].confidence, 0.85, accuracy: 1e-9, "Une zone sûre du segmenteur garde sa probabilité")
+        XCTAssertEqual(reading.tentative.map(\.food.id), ["builtin.apple"])
+        let recap = MealAnalysis(proposals: reading.proposals, tentative: reading.tentative, zoneHints: reading.hints).recap
+        XCTAssertEqual(recap.lines.map(\.food.id), ["builtin.rice"])
+        XCTAssertEqual(recap.pending.map(\.food.id), ["builtin.apple"])
+        XCTAssertTrue(recap.pending[0].isTentative)
     }
 }

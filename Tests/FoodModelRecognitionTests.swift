@@ -84,7 +84,8 @@ final class FoodModelRecognitionTests: XCTestCase {
                 continue
             }
             analysed += 1
-            // Sure zones only (score >= 0.30), as in the measures before the « maybe » zones: the figures stay comparable.
+            // The zones the segmenter is sure of (score >= 0.30) are listed; since 2026-11-23 the proposals also hold the clear
+            // foods of the zones it doubts (`ScannerModelLogic.isSureZone`), so the rate is not comparable with earlier runs.
             let sureZones = result.zones.filter { !$0.isTentative }
             if !sureZones.isEmpty { photosWithZones += 1 }
             let proposals = result.analysis.proposals
