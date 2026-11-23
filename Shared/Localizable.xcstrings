@@ -86011,6 +86011,53 @@
         }
       }
     },
+    "Début du mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monatsbeginn"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start of month"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inicio del mes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Début du mois"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inizio mese"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "月初"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Início do mês"
+          }
+        }
+      }
+    },
     "Débutant": {
       "extractionState": "manual",
       "localizations": {
@@ -126948,53 +126995,6 @@
         }
       }
     },
-    "La séance prévue aujourd'hui et ses exercices.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das für heute geplante Training und seine Übungen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today's planned workout and its exercises."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "El entrenamiento previsto para hoy y sus ejercicios."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La séance prévue aujourd'hui et ses exercices."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "L'allenamento previsto oggi e i suoi esercizi."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日予定されているワークアウトとそのエクササイズ。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O treino previsto para hoje e seus exercícios."
-          }
-        }
-      }
-    },
     "La sélection de la semaine : un écran, un style et des widgets à découvrir.": {
       "extractionState": "manual",
       "localizations": {
@@ -132913,6 +132913,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "O saldo no dia 1 do mês e depois as receitas e gastos que você anotou, faturas e valores fixos incluídos."
+          }
+        }
+      }
+    },
+    "Le solde de ton compte aujourd'hui et son évolution depuis le début du mois.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein Kontosaldo heute und seine Entwicklung seit Monatsbeginn."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your account balance today and how it has moved since the start of the month."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El saldo de tu cuenta hoy y su evolución desde el inicio del mes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le solde de ton compte aujourd'hui et son évolution depuis le début du mois."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il saldo del tuo conto oggi e la sua evoluzione dall'inizio del mese."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日の口座残高と、月初からの推移。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O saldo da sua conta hoje e a evolução desde o início do mês."
           }
         }
       }
@@ -157259,6 +157306,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Registre sua primeira refeição no Ardane, no espaço Nutrição."
+          }
+        }
+      }
+    },
+    "Note ton solde de départ, tes revenus et tes dépenses dans Ardane, espace Budget.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trage deinen Anfangssaldo, deine Einnahmen und Ausgaben in Ardane ein, Bereich Budget."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Add your starting balance, income and expenses in Ardane, Budget space."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anota tu saldo inicial, tus ingresos y tus gastos en Ardane, espacio Presupuesto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note ton solde de départ, tes revenus et tes dépenses dans Ardane, espace Budget."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inserisci saldo iniziale, entrate e spese in Ardane, spazio Budget."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ardane の「予算」で、開始残高・収入・支出を記録してください。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anote seu saldo inicial, receitas e despesas no Ardane, espaço Orçamento."
           }
         }
       }
@@ -197448,6 +197542,53 @@
         }
       }
     },
+    "Revenus %@ · Dépenses %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einnahmen %@ · Ausgaben %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Income %@ · Expenses %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ingresos %@ · Gastos %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revenus %@ · Dépenses %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entrate %@ · Spese %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "収入 %@ · 支出 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Receitas %@ · Despesas %@"
+          }
+        }
+      }
+    },
     "Revenus annuels": {
       "extractionState": "manual",
       "localizations": {
@@ -206519,6 +206660,53 @@
         }
       }
     },
+    "Sans solde de départ, le calcul part de zéro au début du mois.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Anfangssaldo beginnt die Rechnung bei null am Monatsanfang."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Without a starting balance, the count starts from zero at the start of the month."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sin saldo inicial, el cálculo parte de cero al inicio del mes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sans solde de départ, le calcul part de zéro au début du mois."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senza saldo iniziale, il calcolo parte da zero a inizio mese."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始残高がないため、月初の0から計算しています。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sem saldo inicial, o cálculo começa do zero no início do mês."
+          }
+        }
+      }
+    },
     "Sans solde de départ, le mois part de 0 : tes revenus moins tes dépenses, factures et montants fixes compris.": {
       "extractionState": "manual",
       "localizations": {
@@ -212108,6 +212296,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saldo"
+          }
+        }
+      }
+    },
+    "Solde %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balance %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Solde %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "残高 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saldo %@"
           }
         }
       }
@@ -240308,6 +240543,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Série inteira"
+          }
+        }
+      }
+    },
+    "Toute ta séance du jour : ses exercices, ta progression, et un bouton pour la lancer.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein ganzes Training des Tages: die Übungen, dein Fortschritt und ein Button zum Starten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your whole workout for today: its exercises, your progress, and a button to start it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toda tu rutina de hoy: sus ejercicios, tu progreso y un botón para empezarla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toute ta séance du jour : ses exercices, ta progression, et un bouton pour la lancer."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tutto l'allenamento di oggi: gli esercizi, i tuoi progressi e un pulsante per iniziarlo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のワークアウト全体：種目、進み具合、開始ボタン。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Todo o seu treino do dia: os exercícios, seu progresso e um botão para começar."
           }
         }
       }

@@ -73,6 +73,7 @@ struct ArdaneApp: App {
                         #endif
                         // A set validated from the Lock Screen while the app was closed.
                         Task { await WorkoutLiveActivity.sync(model.fitness) }
+                        RestChime.shared.follow(model.fitness)
                         // A study timer stopped or cancelled from the Lock Screen while the app was closed.
                         Task { await StudyLiveActivity.sync(model.student) }
                         Task { await premium.refreshEntitlements() }
@@ -82,6 +83,7 @@ struct ArdaneApp: App {
                         // A new day, or something done from a widget: the reminders follow.
                         model.syncReminders()
                     } else if phase == .background {
+                        RestChime.shared.disarm()
                         WidgetCenter.shared.reloadAllTimelines()
                     }
                 }

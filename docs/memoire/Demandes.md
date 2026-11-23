@@ -409,6 +409,7 @@ Retour : [[Memoire]]
 
 ## Fait
 
+- [x] **Widget Solde, Séance du jour distincte, « ding » de fin de repos** (demandé et fait le 2026-11-23, à vérifier sur l'iPhone) : widget « Solde » (`balance`) dans le Budget ; « Séance du jour » = vue d'ensemble de la séance avec ▶ « Commencer » (badge interactif), sans « Série faite » ; fin du repos = « ding » d'Ardane (notes de verre ré5-la5 de la fin des pubs) ou vibration en silencieux. Détail : Chantiers, chantier 50.
 - [x] **Toutes les mini-apps : même structure, avec le sélecteur de semaine** (demandé le 2026-10-22). Pour les agents : appliquer à CHAQUE mini-app (Nutrition, Fitness, Planning, Finances, Business, Voyage, Auto, Météo ; Photos et citations n'a aucun contenu daté : sans sélecteur, ses blocs suivent le même ordre) l'ordre suivant, de haut en bas :
   1. **Sélecteur de semaine** (composant partagé `WeekSelector`) : les 7 jours côte à côte, initiale du jour et date dans un cercle ; jour sélectionné sur un fond arrondi de la couleur d'accent de la mini-app ; jours passés, jour sélectionné, aujourd'hui et jours à venir visuellement différents ; toucher un jour le sélectionne ; navigation entre les semaines (flèches et balayage) ; dates calculées d'après le vrai calendrier. UN SEUL sélecteur de dates par écran.
   2. **Informations essentielles** tout de suite après : le contenu prioritaire du jour sélectionné (Fitness : la séance ; Nutrition : calories et macros ; Finances : solde et dépenses…).

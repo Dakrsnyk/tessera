@@ -15,6 +15,7 @@ enum MoneyTiles {
         case .billsUpcoming: return bills(data.budget, now: now, currency: currency)
         case .savingsGoal: return savings(data.budget, target: target, now: now, currency: currency)
         case .netWorth: return netWorth(data.budget, now: now, currency: currency)
+        case .balance: return balance(data.budget, now: now, currency: currency)
         case .subscriptions: return subscriptions(data.budget, currency: currency)
         case .quickExpense: return quickExpense(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget))
         case .portfolio: return portfolio(data, currency: currency, clock: clock, isLarge: context.isLarge)
@@ -141,6 +142,45 @@ enum MoneyTiles {
         tile.detail = tr("Actifs \(TF.money(assets, currency)) · Dettes \(TF.money(debts, currency))")
         if history.count >= 2 { tile.visual = .line(Array(history.suffix(60))) }
         tile.inline = tr("Valeur nette \(TF.money(worth, currency))")
+        return tile
+    }
+
+    /// « Solde »: the account's balance today, counted like the « Solde » figure of the Budget mini-app (from the
+    /// « Solde de départ » when there is one, otherwise from zero at the start of the month), its move since the
+    /// 1st and its line over the month.
+    static func balance(_ state: BudgetState, now: Date, currency: String) -> Tile {
+        let symbol = "chart.line.uptrend.xyaxis"
+        let hasData = state.openingBalance != nil || !state.expenses.isEmpty || !state.incomes.isEmpty
+            || !state.fixedFlows.isEmpty || !state.bills.isEmpty
+        guard hasData else {
+            return .empty(tr("Solde"), symbol: symbol, message: tr("Note ton solde de départ, tes revenus et tes dépenses dans Ardane, espace Budget."))
+        }
+        let month = BudgetMath.monthInterval(now)
+        let points = BudgetMath.balanceHistory(state, from: month.start, now: now)
+        let current = points.last?.balance ?? 0
+        let atStart = BudgetMath.balance(atStartOf: month.start, state, now: now)
+        let monthSoFar = DateInterval(start: month.start, end: max(month.start, now))
+        let earned = BudgetMath.earned(state, in: monthSoFar, now: now)
+        let spent = BudgetMath.spent(state, in: monthSoFar, now: now)
+        func signed(_ value: Double) -> String { (value < 0 ? "−" : "") + TF.money(abs(value), currency) }
+
+        var tile = Tile(title: tr("Solde"), symbol: symbol)
+        tile.value = signed(current)
+        tile.trend = current < 0 ? false : nil
+        let change = current - atStart
+        tile.caption = abs(change) >= 1 ? tr("\(Fmt.signedMoney(change, currency: currency, decimals: 0)) ce mois-ci") : tr("aujourd'hui")
+        tile.detail = tr("Revenus \(TF.money(earned, currency)) · Dépenses \(TF.money(spent, currency))")
+        if points.count >= 2 { tile.visual = .line(points.map(\.balance)) }
+        tile.rows = [
+            TileRow(id: "start", title: tr("Début du mois"), value: signed(atStart), symbol: "calendar"),
+            TileRow(id: "in", title: tr("Revenus"), value: "+" + TF.money(earned, currency), symbol: "arrow.down.left"),
+            TileRow(id: "out", title: tr("Dépenses"), value: (spent > 0 ? "−" : "") + TF.money(spent, currency), symbol: "arrow.up.right"),
+        ]
+        if state.openingBalance == nil {
+            tile.footnote = tr("Sans solde de départ, le calcul part de zéro au début du mois.")
+        }
+        tile.shortValue = signed(current)
+        tile.inline = tr("Solde \(signed(current))")
         return tile
     }
 

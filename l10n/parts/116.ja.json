@@ -1,0 +1,9 @@
+{
+ "Toute ta séance du jour : ses exercices, ta progression, et un bouton pour la lancer.": "今日のワークアウト全体：種目、進み具合、開始ボタン。",
+ "Le solde de ton compte aujourd'hui et son évolution depuis le début du mois.": "今日の口座残高と、月初からの推移。",
+ "Note ton solde de départ, tes revenus et tes dépenses dans Ardane, espace Budget.": "Ardane の「予算」で、開始残高・収入・支出を記録してください。",
+ "Revenus %@ · Dépenses %@": "収入 %@ · 支出 %@",
+ "Début du mois": "月初",
+ "Sans solde de départ, le calcul part de zéro au début du mois.": "開始残高がないため、月初の0から計算しています。",
+ "Solde %@": "残高 %@"
+}

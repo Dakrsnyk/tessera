@@ -123,6 +123,15 @@ enum WorkoutLiveActivity {
 /// person already gave; the Fitness session screen asks for it, with the usual explanation.
 enum RestNotifier {
     static let identifier = "tessera.rest.end"
+    /// The end-of-rest sound, in both bundles (app and widgets: a widget's « Série faite » schedules the alert too).
+    static let soundFile = "ardane-ding.wav"
+
+    /// The rest to ring at the end of, nil when none runs (no session, session idle or over, rest paused or over).
+    static func pendingEnd(_ state: FitnessState, now: Date = Date()) -> Date? {
+        guard let session = state.active, !session.isFinished, !session.isIdle(at: now), session.restPausedRemaining == nil,
+              let end = session.restEndsAt, end > now else { return nil }
+        return end
+    }
 
     /// Seconds before the alert, nil when the rest is already over (nothing to schedule).
     static func interval(until end: Date, now: Date = Date()) -> TimeInterval? {
@@ -141,7 +150,9 @@ enum RestNotifier {
         let content = UNMutableNotificationContent()
         content.title = tr("Repos terminé")
         content.body = tr("Prêt pour la prochaine série.")
-        content.sound = .default
+        // The « ding » of Ardane (Shared/Sounds, built by scripts/sound/rest_ding.py); iPhone on silent, iOS vibrates
+        // instead. A missing file falls back to the default sound.
+        content.sound = UNNotificationSound(named: UNNotificationSoundName(soundFile))
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
         try? await center.add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
     }

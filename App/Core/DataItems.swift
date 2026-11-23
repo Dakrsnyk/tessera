@@ -281,7 +281,7 @@ extension WidgetKind {
         case .caloriesBurned: [.routines, .weight]
         case .moneyFlow: [.moneyFlow]
         case .budgetLeft: [.monthlyBudget, .expenses]
-        case .spendingByCategory, .quickExpense: [.expenses]
+        case .spendingByCategory, .quickExpense, .balance: [.expenses]
         case .billsUpcoming, .subscriptions: [.bills]
         case .savingsGoal: [.savingsGoals]
         case .netWorth: [.accounts]

@@ -165,6 +165,8 @@ final class AppModel {
         // The workout on the Lock Screen follows the session (started, set done, rest, finished).
         if let fitness = value as? FitnessState {
             Task { await WorkoutLiveActivity.sync(fitness) }
+            // The « ding » (or a vibration on silent) at the end of the rest, while the app is open.
+            RestChime.shared.follow(fitness)
         }
         // The study timer on the Lock Screen follows the studies (started, stopped, cancelled).
         if let student = value as? StudentState {

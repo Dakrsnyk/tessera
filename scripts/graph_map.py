@@ -40,7 +40,7 @@ MODULES = [
          "Rappels intelligents (SmartReminders, Profil › Rappels), encouragements (`Encouragements` : repas, séance, record, étude, objectifs, séries d'habitudes ; 2 par jour au plus, 3 h d'écart, 8 h–22 h, journal dans l'App Group ; bannière app ouverte par `NotificationPresenter`), activité en direct de la séance, « bons moments » pour la demande de note.",
          "Router : onglets `home`, `spaces` (Créer), `explore` (Store), `mine` (Mes widgets) ; `openEditor`, `openApp`, `showPaywall`, `handle(DeepLink)`.",
      ],
-     "sources": ["App/Core/AppModel.swift", "App/Core/Router.swift", "App/ArdaneApp.swift", "App/Core/AppModel+Debug.swift", "Shared/Support/Encouragements.swift", "App/Services/NotificationPresenter.swift"],
+     "sources": ["App/Core/AppModel.swift", "App/Core/Router.swift", "App/ArdaneApp.swift", "App/Core/AppModel+Debug.swift", "Shared/Support/Encouragements.swift", "App/Services/NotificationPresenter.swift", "App/Services/RestChime.swift"],
      "links": [("Donnees-et-stockage", "écrit chaque domaine en JSON"), ("Domaines-metier", "tient les états"), ("Widgets-extension", "recharge les widgets (WidgetCenter)"),
                ("Services-externes", "remplit les caches réseau"), ("Intents-et-activite-en-direct", "démarre l'activité en direct"), ("Premium-et-abonnements", "état Premium")]},
     {"file": "Donnees-et-stockage", "title": "Données et stockage", "zone": "donnees",

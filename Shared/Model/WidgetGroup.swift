@@ -19,7 +19,7 @@ enum WidgetGroup: String, CaseIterable, Identifiable {
         case .habitsPlus: [.habitStreak, .habitWeek, .habitRate]
         case .nutrition: [.caloriesLeft, .macros, .proteinLeft, .mealsToday, .nutritionWeek, .nutritionStreak, .quickFood, .nextMeal]
         case .fitness: [.todaysWorkout, .trainingStreak, .nextSet, .restTimer, .weeklyVolume, .personalRecords, .caloriesBurned, .workoutMonth]
-        case .budget: [.budgetLeft, .savingsGoal, .spendingByCategory, .billsUpcoming, .netWorth, .subscriptions, .quickExpense]
+        case .budget: [.budgetLeft, .balance, .savingsGoal, .spendingByCategory, .billsUpcoming, .netWorth, .subscriptions, .quickExpense]
         case .investing: [.watchlist, .portfolio, .allocation, .topMover, .marketOverview]
         case .business: [.revenueGoal, .revenueTrend, .profit, .businessKPIs, .mrr, .revenueToday, .businessDashboard]
         case .companies: [.companySnapshot, .companyRevenue, .companyStock, .companyCompare]

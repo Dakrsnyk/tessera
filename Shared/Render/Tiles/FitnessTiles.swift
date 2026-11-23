@@ -88,11 +88,12 @@ enum FitnessTiles {
             let isDone = active.map { $0.exerciseIndex > pair.offset } ?? doneToday
             return TileRow(id: "\(pair.offset)", title: pair.element.name, value: setsText(pair.element, system: system), isDone: isDone, isHighlighted: isCurrent)
         }
-        if doneToday {
-            tile.buttons = []
-            if let back = backButton(state, now: now) { tile.buttons.append(back) }
-        } else {
-            tile.buttons = setButtons(state, now: now, title: active == nil ? tr("Commencer") : tr("Série faite"), symbol: active == nil ? "play.fill" : "checkmark")
+        // The whole session at a glance, not the set-by-set controls of « Prochaine série » (2026-11-23): no « Série
+        // faite » here, only « Commencer » in the header before the session (an icon in the small size), so the
+        // exercise list keeps its room in the medium and large sizes.
+        tile.buttons = []
+        if active == nil, !doneToday {
+            tile.headerButton = TileButton(title: tr("Commencer"), symbol: "play.fill", action: .completeSet(state.position), isProminent: true)
         }
         tile.inline = tr("\(tile.value) · \(totalSets) séries")
         return tile

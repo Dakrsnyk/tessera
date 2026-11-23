@@ -93,7 +93,7 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
     // Fitness
     case todaysWorkout, nextSet, restTimer, weeklyVolume, personalRecords, trainingStreak, caloriesBurned, workoutMonth
     // Budget
-    case moneyFlow, budgetLeft, spendingByCategory, billsUpcoming, savingsGoal, netWorth, subscriptions, quickExpense
+    case moneyFlow, budgetLeft, spendingByCategory, billsUpcoming, savingsGoal, netWorth, subscriptions, quickExpense, balance
     // Investissement
     case crypto, portfolio, allocation, topMover, watchlist, marketOverview
     // Business

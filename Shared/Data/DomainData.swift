@@ -57,7 +57,7 @@ enum DataNeeds {
             return [.nutrition]
         case .todaysWorkout, .nextSet, .restTimer, .weeklyVolume, .personalRecords, .trainingStreak, .caloriesBurned, .workoutMonth:
             return [.fitness]
-        case .budgetLeft, .spendingByCategory, .billsUpcoming, .savingsGoal, .netWorth, .subscriptions, .quickExpense:
+        case .budgetLeft, .spendingByCategory, .billsUpcoming, .savingsGoal, .netWorth, .subscriptions, .quickExpense, .balance:
             return [.budget]
         case .portfolio, .allocation, .topMover:
             return [.portfolio]

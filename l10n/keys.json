@@ -107,7 +107,7 @@
  "%@ (copie)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:367: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
+   "App/Core/AppModel.swift:369: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
  "%@ (limite de la version gratuite)": {
@@ -127,7 +127,7 @@
  "%@ (variante)": {
   "placeholders": 1,
   "uses": [
-   "App/Core/AppModel.swift:367: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
+   "App/Core/AppModel.swift:369: copy.name = asVariant ? tr(\"\\(design.name) (variante)\") : tr(\"\\(design.name) (copie)\")"
   ]
  },
  "%@ / %@ kcal": {
@@ -181,7 +181,7 @@
  "%@ : %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:184: tile.inline = tr(\"\\(best.exercise) : \\(Units.loadText(kilograms: best.weight, in: system, digits: 0))\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:185: tile.inline = tr(\"\\(best.exercise) : \\(Units.loadText(kilograms: best.weight, in: system, digits: 0))\")"
   ]
  },
  "%@ : %@ cette semaine contre %@ la semaine dernière": {
@@ -286,15 +286,16 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:426: infoRow(tr(\"\\(status.category.name) ce mois-ci\")) {",
    "App/Screens/MiniApps/Finances/FinancesSheets.swift:502: infoRow(tr(\"\\(incomes) ce mois-ci\")) {",
-   "Shared/Render/Tiles/MoneyTiles.swift:83: tile.inline = tr(\"\\(TF.money(total, currency)) ce mois-ci\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:84: tile.inline = tr(\"\\(TF.money(total, currency)) ce mois-ci\")",
+   "Shared/Render/Tiles/MoneyTiles.swift:171: tile.caption = abs(change) >= 1 ? tr(\"\\(Fmt.signedMoney(change, currency: currency, decimals: 0)) ce mois-ci\") : tr(\"aujourd'hui\")"
   ]
  },
  "%@ cette semaine": {
   "placeholders": 1,
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:73: return model.fitness.routines.isEmpty && days == 0 ? nil : tr(\"\\(Fmt.plural(days, tr(\"séance\"), tr(\"séances\"))) cette semaine\")",
-   "Shared/Render/Tiles/FitnessTiles.swift:170: tile.inline = tr(\"\\(Units.loadText(kilograms: total, in: system, digits: 0)) cette semaine\")",
-   "Shared/Render/Tiles/FitnessTiles.swift:204: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:171: tile.inline = tr(\"\\(Units.loadText(kilograms: total, in: system, digits: 0)) cette semaine\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:205: tile.inline = tr(\"\\(Fmt.plural(count, tr(\"séance\"), tr(\"séances\"))) cette semaine\")"
   ]
  },
  "%@ cette semaine sur %@ prévues. Beau travail !": {
@@ -430,14 +431,14 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:1248: : tr(\"\\(TF.money(abs(difference), currency)) de moins que le mois dernier à la même date\")",
-   "Shared/Render/Tiles/MoneyTiles.swift:159: return difference > 0 ? tr(\"\\(amount) de plus que le mois dernier à la même date\") : tr(\"\\(amount) de moins que le mois dernier à la même date\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:199: return difference > 0 ? tr(\"\\(amount) de plus que le mois dernier à la même date\") : tr(\"\\(amount) de moins que le mois dernier à la même date\")"
   ]
  },
  "%@ de plus que le mois dernier à la même date": {
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:1247: ? tr(\"\\(TF.money(abs(difference), currency)) de plus que le mois dernier à la même date\")",
-   "Shared/Render/Tiles/MoneyTiles.swift:159: return difference > 0 ? tr(\"\\(amount) de plus que le mois dernier à la même date\") : tr(\"\\(amount) de moins que le mois dernier à la même date\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:199: return difference > 0 ? tr(\"\\(amount) de plus que le mois dernier à la même date\") : tr(\"\\(amount) de moins que le mois dernier à la même date\")"
   ]
  },
  "%@ de ton année en cours": {
@@ -703,7 +704,7 @@
  "%@ kcal brûlées": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:226: tile.inline = tr(\"\\(TF.int(today)) kcal brûlées\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:227: tile.inline = tr(\"\\(TF.int(today)) kcal brûlées\")"
   ]
  },
  "%@ kcal par jour": {
@@ -873,7 +874,7 @@
  "%@ par mois jusqu'au %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:113: tile.detail = tr(\"\\(TF.money(left / Double(months), currency)) par mois jusqu'au \\(Fmt.format(deadline, template: \"dMMMMyyyy\"))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:114: tile.detail = tr(\"\\(TF.money(left / Double(months), currency)) par mois jusqu'au \\(Fmt.format(deadline, template: \"dMMMMyyyy\"))\")"
   ]
  },
  "%@ par période": {
@@ -1057,7 +1058,7 @@
  "%@ sur 30 jours": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:171: return (tr(\"\\(amount) sur 30 jours\"), trend)"
+   "Shared/Render/Tiles/MoneyTiles.swift:211: return (tr(\"\\(amount) sur 30 jours\"), trend)"
   ]
  },
  "%@ sur 4": {
@@ -1102,7 +1103,7 @@
  "%@ séances en %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:245: tile.inline = tr(\"\\(trained.count) séances en \\(Fmt.month(now).lowercased())\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:246: tile.inline = tr(\"\\(trained.count) séances en \\(Fmt.month(now).lowercased())\")"
   ]
  },
  "%@ textes en trop ont été laissés : un widget en garde 2 000 au plus.": {
@@ -1157,7 +1158,7 @@
  "%@ · %@ catégories": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:69: tile.caption = tr(\"\\(Fmt.month(now)) · \\(items.count) catégories\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:70: tile.caption = tr(\"\\(Fmt.month(now)) · \\(items.count) catégories\")"
   ]
  },
  "%@ · %@ ce mois-ci": {
@@ -1193,7 +1194,7 @@
  "%@ · %@ rép.": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:179: tile.caption = tr(\"\\(best.exercise) · \\(best.reps) rép.\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:180: tile.caption = tr(\"\\(best.exercise) · \\(best.reps) rép.\")"
   ]
  },
  "%@ · %@ sur %@ dans l'objectif": {
@@ -1206,7 +1207,7 @@
   "placeholders": 2,
   "uses": [
    "Shared/Render/Tiles/FitnessTiles.swift:84: tile.caption = tr(\"\\(Fmt.plural(exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · \\(totalSets) séries\")",
-   "Shared/Render/Tiles/FitnessTiles.swift:97: tile.inline = tr(\"\\(tile.value) · \\(totalSets) séries\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:98: tile.inline = tr(\"\\(tile.value) · \\(totalSets) séries\")"
   ]
  },
  "%@ · %@ · environ %@ min": {
@@ -1218,7 +1219,7 @@
  "%@ · %@/an": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:185: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:225: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
   ]
  },
  "%@ · P %@ g": {
@@ -1291,7 +1292,7 @@
  "%@ · série %@/%@": {
   "placeholders": 3,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:109: tile.caption = tr(\"\\(exercise.name) · série \\(setNumber)/\\(exercise.sets)\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:110: tile.caption = tr(\"\\(exercise.name) · série \\(setNumber)/\\(exercise.sets)\")"
   ]
  },
  "%@ · série de %@ j": {
@@ -1399,7 +1400,7 @@
  "%@%@ au total": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:229: let total = tr(\"\\(Fmt.signedMoney(summary.gain, currency: currency, decimals: 0))\\(percent) au total\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:269: let total = tr(\"\\(Fmt.signedMoney(summary.gain, currency: currency, decimals: 0))\\(percent) au total\")"
   ]
  },
  "%@%@ h par rapport à ici": {
@@ -1454,7 +1455,7 @@
  "%@/%@ séances · série %@": {
   "placeholders": 3,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:212: tile.inline = tr(\"\\(count)/\\(goal) séances · série \\(streak)\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:213: tile.inline = tr(\"\\(count)/\\(goal) séances · série \\(streak)\")"
   ]
  },
  "%@/%@ séries": {
@@ -2004,14 +2005,14 @@
  "1RM estimé : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:180: tile.detail = tr(\"1RM estimé : \\(Units.loadText(kilograms: best.oneRepMax, in: system, digits: 0))\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:181: tile.detail = tr(\"1RM estimé : \\(Units.loadText(kilograms: best.oneRepMax, in: system, digits: 0))\")"
   ]
  },
  "1RM ≈ %@": {
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:560: MiniStat(title: tr(\"Record\"), value: Units.loadNumber(kilograms: best.weight, in: model.settings.unitSystem), unit: tr(\"\\(model.settings.unitSystem.weightUnit) × \\(best.reps)\"), detail: tr(\"1RM ≈ \\(Un",
-   "Shared/Render/Tiles/FitnessTiles.swift:182: TileRow(id: record.exercise, title: record.exercise, value: tr(\"\\(Units.loadText(kilograms: record.weight, in: system, digits: 0)) × \\(record.reps)\"), detail: tr(\"1RM ≈ \\(Units.loadText(kilograms: rec"
+   "Shared/Render/Tiles/FitnessTiles.swift:183: TileRow(id: record.exercise, title: record.exercise, value: tr(\"\\(Units.loadText(kilograms: record.weight, in: system, digits: 0)) × \\(record.reps)\"), detail: tr(\"1RM ≈ \\(Units.loadText(kilograms: rec"
   ]
  },
  "2 c. à soupe": {
@@ -2125,7 +2126,7 @@
  "30 prochains jours : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:94: tile.detail = tr(\"30 prochains jours : \\(TF.money(total, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:95: tile.detail = tr(\"30 prochains jours : \\(TF.money(total, currency))\")"
   ]
  },
  "365 points": {
@@ -2317,7 +2318,7 @@
  "Abonnements %@/mois": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:189: tile.inline = tr(\"Abonnements \\(TF.money(monthly, currency))/mois\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:229: tile.inline = tr(\"Abonnements \\(TF.money(monthly, currency))/mois\")"
   ]
  },
  "Abonnés": {
@@ -2368,7 +2369,7 @@
  "Accueil": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:303: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
+   "App/ArdaneApp.swift:304: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
   ]
  },
  "Accès au calendrier": {
@@ -2472,13 +2473,13 @@
  "Actifs %@ · Dettes %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:141: tile.detail = tr(\"Actifs \\(TF.money(assets, currency)) · Dettes \\(TF.money(debts, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:142: tile.detail = tr(\"Actifs \\(TF.money(assets, currency)) · Dettes \\(TF.money(debts, currency))\")"
   ]
  },
  "Action": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:219: KindInfo(kind: .companyStock, title: tr(\"Action\"), summary: tr(\"Le cours de l'action d'une société et sa capitalisation.\"), category: .markets, symbol: \"chart.line.uptrend.xyaxis.circle\", isPremium: t",
+   "Shared/Model/KindCatalog.swift:220: KindInfo(kind: .companyStock, title: tr(\"Action\"), summary: tr(\"Le cours de l'action d'une société et sa capitalisation.\"), category: .markets, symbol: \"chart.line.uptrend.xyaxis.circle\", isPremium: t",
    "Shared/Render/Tiles/BusinessTiles.swift:217: return .empty(tr(\"Action\"), symbol: \"chart.line.uptrend.xyaxis.circle\", message: tr(\"Suis une entreprise dans Ardane, espace Sociétés cotées.\"))"
   ]
  },
@@ -2587,7 +2588,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:292: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
-   "Shared/Render/Tiles/TileView.swift:1217: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
+   "Shared/Render/Tiles/TileView.swift:1218: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
   ]
  },
  "Adaptateur de prise": {
@@ -2802,7 +2803,7 @@
  "Ajoute tes abonnements dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:180: guard !subs.isEmpty else { return .empty(tr(\"Abonnements\"), symbol: \"repeat.circle\", message: tr(\"Ajoute tes abonnements dans Ardane, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:220: guard !subs.isEmpty else { return .empty(tr(\"Abonnements\"), symbol: \"repeat.circle\", message: tr(\"Ajoute tes abonnements dans Ardane, espace Budget.\")) }"
   ]
  },
  "Ajoute tes actions, ETF, cryptos et liquidités. Les cryptos se mettent à jour en direct (CoinGecko). Pour les actions et ETF, indique le dernier prix connu.": {
@@ -2814,7 +2815,7 @@
  "Ajoute tes comptes et tes dettes dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:128: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Ardane, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:129: guard !state.accounts.isEmpty else { return .empty(tr(\"Valeur nette\"), symbol: \"building.columns\", message: tr(\"Ajoute tes comptes et tes dettes dans Ardane, espace Budget.\")) }"
   ]
  },
  "Ajoute tes cours : devoirs, examens et notes s'y rangent.": {
@@ -2863,7 +2864,7 @@
  "Ajoute tes factures dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:89: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Ardane, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:90: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Ardane, espace Budget.\")) }"
   ]
  },
  "Ajoute tes notes dans Ardane, espace Études.": {
@@ -2875,8 +2876,8 @@
  "Ajoute tes placements dans Ardane, espace Placements.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:224: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\")) }",
-   "Shared/Render/Tiles/MoneyTiles.swift:265: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\"))"
+   "Shared/Render/Tiles/MoneyTiles.swift:264: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\")) }",
+   "Shared/Render/Tiles/MoneyTiles.swift:305: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\"))"
   ]
  },
  "Ajoute tes repas en quelques secondes pour garder ton suivi juste.": {
@@ -3666,7 +3667,7 @@
  "Analyse des dépenses": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:269: KindInfo(kind: .aiFinance, title: tr(\"Analyse des dépenses\"), summary: tr(\"Tes dépenses comparées à la semaine dernière.\"), category: .dashboards, symbol: \"sparkle.magnifyingglass\", isPremium: true, f"
+   "Shared/Model/KindCatalog.swift:270: KindInfo(kind: .aiFinance, title: tr(\"Analyse des dépenses\"), summary: tr(\"Tes dépenses comparées à la semaine dernière.\"), category: .dashboards, symbol: \"sparkle.magnifyingglass\", isPremium: true, f"
   ]
  },
  "Analyse du plat sur ton iPhone…": {
@@ -3678,7 +3679,7 @@
  "Analyse productivité": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:270: KindInfo(kind: .aiProductivity, title: tr(\"Analyse productivité\"), summary: tr(\"Tes tendances de concentration, d'habitudes et de tâches.\"), category: .dashboards, symbol: \"chart.line.text.clipboard\","
+   "Shared/Model/KindCatalog.swift:271: KindInfo(kind: .aiProductivity, title: tr(\"Analyse productivité\"), summary: tr(\"Tes tendances de concentration, d'habitudes et de tâches.\"), category: .dashboards, symbol: \"chart.line.text.clipboard\","
   ]
  },
  "Analyses": {
@@ -4412,7 +4413,7 @@
  "Assurance, immatriculation, pneus : les prochaines dates à retenir.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:255: KindInfo(kind: .carDeadlines, title: tr(\"Échéances auto\"), summary: tr(\"Assurance, immatriculation, pneus : les prochaines dates à retenir.\"), category: .car, symbol: \"calendar.badge.exclamationmark\","
+   "Shared/Model/KindCatalog.swift:256: KindInfo(kind: .carDeadlines, title: tr(\"Échéances auto\"), summary: tr(\"Assurance, immatriculation, pneus : les prochaines dates à retenir.\"), category: .car, symbol: \"calendar.badge.exclamationmark\","
   ]
  },
  "Assurance, immatriculation, pneus d'hiver…": {
@@ -5178,7 +5179,7 @@
  "Avancement du voyage": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:244: KindInfo(kind: .tripProgress, title: tr(\"Avancement du voyage\"), summary: tr(\"Le jour du voyage où tu es et les jours restants.\"), category: .travel, symbol: \"map\", isPremium: true, families: SM + [ci"
+   "Shared/Model/KindCatalog.swift:245: KindInfo(kind: .tripProgress, title: tr(\"Avancement du voyage\"), summary: tr(\"Le jour du voyage où tu es et les jours restants.\"), category: .travel, symbol: \"map\", isPremium: true, families: SM + [ci"
   ]
  },
  "Avancer": {
@@ -6281,7 +6282,7 @@
  "Budget mensuel à définir dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:38: tile.detail = tr(\"Budget mensuel à définir dans Ardane\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:39: tile.detail = tr(\"Budget mensuel à définir dans Ardane\")"
   ]
  },
  "Budget serré": {
@@ -6717,7 +6718,7 @@
    "Shared/Model/KindCatalog.swift:174: KindInfo(kind: .caloriesBurned, title: tr(\"Calories brûlées\"), summary: tr(\"Une estimation des calories dépensées pendant tes séances.\"), category: .fitness, symbol: \"flame\", isPremium: true, families",
    "Shared/Render/Tiles/DashboardTiles.swift:193: rows.append(TileRow(id: \"burned\", title: tr(\"Calories brûlées\"), value: tr(\"\\(TF.int(FitnessMath.caloriesBurned(state, on: now))) kcal\"), symbol: \"flame\"))",
    "Shared/Render/Tiles/FitnessTiles.swift:21: return .empty(tr(\"Calories brûlées\"), symbol: \"flame\", message: tr(\"Ajoute ton poids dans « Mes informations » pour estimer tes calories brûlées.\"))",
-   "Shared/Render/Tiles/FitnessTiles.swift:219: var tile = Tile(title: tr(\"Calories brûlées\"), symbol: \"flame\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:220: var tile = Tile(title: tr(\"Calories brûlées\"), symbol: \"flame\")"
   ]
  },
  "Calories de la semaine": {
@@ -6948,7 +6949,7 @@
   "uses": [
    "App/Screens/MiniApps/Car/CarPages.swift:73: .navigationTitle(tr(\"Carburant\"))",
    "App/Screens/MiniApps/Car/CarPages.swift:316: Share(name: tr(\"Carburant\"), hex: Car.fuelHex, value: cost.fuel, source: tr(\"moyenne des 3 derniers mois\")),",
-   "Shared/Model/KindCatalog.swift:254: KindInfo(kind: .fuelStats, title: tr(\"Carburant\"), summary: tr(\"Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.\"), category: .car, symbol: \"fuelpump\", isPremium: true, fami",
+   "Shared/Model/KindCatalog.swift:255: KindInfo(kind: .fuelStats, title: tr(\"Carburant\"), summary: tr(\"Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.\"), category: .car, symbol: \"fuelpump\", isPremium: true, fami",
    "Shared/Render/Tiles/CarTiles.swift:32: TileRow(id: \"fuel\", title: tr(\"Carburant\"), value: TF.money(cost.fuel, currency), symbol: \"fuelpump\", progress: cost.fuel / cost.total),"
   ]
  },
@@ -7116,7 +7117,7 @@
  "Ce matin": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:263: KindInfo(kind: .morning, title: tr(\"Ce matin\"), summary: tr(\"Premier rendez-vous, priorités et objectif du jour pour bien démarrer.\"), category: .dashboards, symbol: \"sunrise\", isPremium: true, famili",
+   "Shared/Model/KindCatalog.swift:264: KindInfo(kind: .morning, title: tr(\"Ce matin\"), summary: tr(\"Premier rendez-vous, priorités et objectif du jour pour bien démarrer.\"), category: .dashboards, symbol: \"sunrise\", isPremium: true, famili",
    "Shared/Render/Tiles/DashboardTiles.swift:108: var tile = Tile(title: tr(\"Ce matin\"), symbol: \"sunrise\")",
    "Shared/Render/Tiles/DashboardTiles.swift:163: var tile = Tile(title: tr(\"Ce matin\"), symbol: \"sunrise\")"
   ]
@@ -7151,7 +7152,7 @@
  "Ce qu'il te reste pour la journée, expliqué simplement.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:268: KindInfo(kind: .aiNutrition, title: tr(\"Conseil nutrition\"), summary: tr(\"Ce qu'il te reste pour la journée, expliqué simplement.\"), category: .dashboards, symbol: \"sparkles.rectangle.stack\", isPremiu"
+   "Shared/Model/KindCatalog.swift:269: KindInfo(kind: .aiNutrition, title: tr(\"Conseil nutrition\"), summary: tr(\"Ce qu'il te reste pour la journée, expliqué simplement.\"), category: .dashboards, symbol: \"sparkles.rectangle.stack\", isPremiu"
   ]
  },
  "Ce qu'il te reste à faire.": {
@@ -7241,7 +7242,7 @@
  "Ce que tu possèdes moins ce que tu dois, et son évolution.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:186: KindInfo(kind: .netWorth, title: tr(\"Valeur nette\"), summary: tr(\"Ce que tu possèdes moins ce que tu dois, et son évolution.\"), category: .finance, symbol: \"building.columns\", isPremium: true, familie"
+   "Shared/Model/KindCatalog.swift:187: KindInfo(kind: .netWorth, title: tr(\"Valeur nette\"), summary: tr(\"Ce que tu possèdes moins ce que tu dois, et son évolution.\"), category: .finance, symbol: \"building.columns\", isPremium: true, familie"
   ]
  },
  "Ce que tu te permets de dépenser chaque mois, factures comprises ou non : à toi de choisir, Ardane compte ce que tu notes.": {
@@ -8327,7 +8328,7 @@
   "uses": [
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:30: MiniActionButton(title: tr(\"Citation\"), symbol: \"quote.opening\", colorHex: accentHex, isProminent: false) {",
    "App/Screens/Spaces/CreateFlow.swift:250: Button(tr(\"Citation\")) { startPhotoQuote(.quote) }",
-   "Shared/Model/KindCatalog.swift:273: KindInfo(kind: .quote, title: tr(\"Citation\"), summary: tr(\"Une phrase qui t'inspire, avec ta typographie et tes couleurs.\"), category: .memories, symbol: \"quote.opening\", isPremium: false, families: S",
+   "Shared/Model/KindCatalog.swift:274: KindInfo(kind: .quote, title: tr(\"Citation\"), summary: tr(\"Une phrase qui t'inspire, avec ta typographie et tes couleurs.\"), category: .memories, symbol: \"quote.opening\", isPremium: false, families: S",
    "Shared/Model/Templates.swift:96: WidgetTemplate(id: \"note-quote\", name: tr(\"Citation\"), kind: .note, themeID: .typography, accentHex: \"FF6B57\", font: .serif,"
   ]
  },
@@ -8579,7 +8580,7 @@
  "Commandes, panier moyen, nouveaux clients et conversion.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:208: KindInfo(kind: .businessKPIs, title: tr(\"Indicateurs\"), summary: tr(\"Commandes, panier moyen, nouveaux clients et conversion.\"), category: .business, symbol: \"square.grid.2x2\", isPremium: true, famili"
+   "Shared/Model/KindCatalog.swift:209: KindInfo(kind: .businessKPIs, title: tr(\"Indicateurs\"), summary: tr(\"Commandes, panier moyen, nouveaux clients et conversion.\"), category: .business, symbol: \"square.grid.2x2\", isPremium: true, famili"
   ]
  },
  "Comme ton repas du %@": {
@@ -8698,7 +8699,7 @@
  "Comparateur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:220: KindInfo(kind: .companyCompare, title: tr(\"Comparateur\"), summary: tr(\"Plusieurs sociétés comparées par revenus annuels.\"), category: .markets, symbol: \"chart.bar.doc.horizontal\", isPremium: true, fam",
+   "Shared/Model/KindCatalog.swift:221: KindInfo(kind: .companyCompare, title: tr(\"Comparateur\"), summary: tr(\"Plusieurs sociétés comparées par revenus annuels.\"), category: .markets, symbol: \"chart.bar.doc.horizontal\", isPremium: true, fam",
    "Shared/Render/Tiles/BusinessTiles.swift:243: return .empty(tr(\"Comparateur\"), symbol: \"chart.bar.doc.horizontal\", message: offline, emptySymbol: \"wifi.slash\")"
   ]
  },
@@ -8917,7 +8918,7 @@
  "Conseil nutrition": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:268: KindInfo(kind: .aiNutrition, title: tr(\"Conseil nutrition\"), summary: tr(\"Ce qu'il te reste pour la journée, expliqué simplement.\"), category: .dashboards, symbol: \"sparkles.rectangle.stack\", isPremiu"
+   "Shared/Model/KindCatalog.swift:269: KindInfo(kind: .aiNutrition, title: tr(\"Conseil nutrition\"), summary: tr(\"Ce qu'il te reste pour la journée, expliqué simplement.\"), category: .dashboards, symbol: \"sparkles.rectangle.stack\", isPremiu"
   ]
  },
  "Conseillé pour toi": {
@@ -9431,7 +9432,7 @@
  "Cours : CoinGecko": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:315: tile.footnote = tr(\"Cours : CoinGecko\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:355: tile.footnote = tr(\"Cours : CoinGecko\")"
   ]
  },
  "Cours actuel": {
@@ -9557,7 +9558,7 @@
  "Coût de la voiture": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:251: KindInfo(kind: .carCost, title: tr(\"Coût de la voiture\"), summary: tr(\"Le coût mensuel estimé de ta voiture, tout compris.\"), category: .car, symbol: \"car.side\", isPremium: true, families: SML, keywor",
+   "Shared/Model/KindCatalog.swift:252: KindInfo(kind: .carCost, title: tr(\"Coût de la voiture\"), summary: tr(\"Le coût mensuel estimé de ta voiture, tout compris.\"), category: .car, symbol: \"car.side\", isPremium: true, families: SML, keywor",
    "Shared/Render/Tiles/CarTiles.swift:22: guard cost.total > 0 else { return .empty(tr(\"Coût de la voiture\"), symbol: \"car.side\", message: hint) }"
   ]
  },
@@ -9684,7 +9685,7 @@
    "App/Screens/Editor/KindOptionsSection.swift:176: Picker(tr(\"Crypto\"), selection: $design.options.coinID) {",
    "App/Screens/Spaces/MoneySpaces.swift:99: Picker(tr(\"Crypto\"), selection: $holding.symbol) {",
    "Shared/Domains/Portfolio.swift:11: case .crypto: tr(\"Crypto\")",
-   "Shared/Model/KindCatalog.swift:194: KindInfo(kind: .crypto, title: tr(\"Crypto\"), summary: tr(\"Le cours d'une crypto et sa courbe sur 7 jours.\"), category: .investing, symbol: \"bitcoinsign.circle\", isPremium: true, families: SM + [rect],"
+   "Shared/Model/KindCatalog.swift:195: KindInfo(kind: .crypto, title: tr(\"Crypto\"), summary: tr(\"Le cours d'une crypto et sa courbe sur 7 jours.\"), category: .investing, symbol: \"bitcoinsign.circle\", isPremium: true, families: SM + [rect],"
   ]
  },
  "Crème": {
@@ -9745,7 +9746,7 @@
  "Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:196: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.\"))"
+   "Shared/Render/Tiles/MoneyTiles.swift:236: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.\"))"
   ]
  },
  "Crée tes fiches de révision dans Ardane, espace Études.": {
@@ -9801,7 +9802,7 @@
  "Crée un objectif d'épargne dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:105: return .empty(tr(\"Épargne\"), symbol: \"banknote\", message: tr(\"Crée un objectif d'épargne dans Ardane, espace Budget.\"))"
+   "Shared/Render/Tiles/MoneyTiles.swift:106: return .empty(tr(\"Épargne\"), symbol: \"banknote\", message: tr(\"Crée un objectif d'épargne dans Ardane, espace Budget.\"))"
   ]
  },
  "Crée un projet et ses tâches dans Ardane, espace Productivité.": {
@@ -9849,7 +9850,7 @@
  "Créer": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:307: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
+   "App/ArdaneApp.swift:308: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
    "App/Screens/Editor/EditorView.swift:129: if onChangeWidget != nil { return tr(\"Créer\") }",
    "App/Screens/Spaces/CreateFlow.swift:280: case .size: tr(\"Créer\")",
    "App/Screens/Tutorial/Tutorial.swift:57: case .create: tr(\"Créer\")"
@@ -10571,7 +10572,7 @@
   "placeholders": 1,
   "uses": [
    "Shared/Render/Kinds/DataWidgets.swift:192: Text(tr(\"Depuis le \\(Fmt.format(summary.startDate, template: \"dMMMMyyyy\"))\"))",
-   "Shared/Render/Tiles/MoneyTiles.swift:174: let since = tr(\"Depuis le \\(day)\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:214: let since = tr(\"Depuis le \\(day)\")"
   ]
  },
  "Depuis le 1er janvier": {
@@ -10595,7 +10596,7 @@
  "Dernier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TileView.swift:1186: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
+   "Shared/Render/Tiles/TileView.swift:1187: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
   ]
  },
  "Dernier : %@, %@": {
@@ -11164,13 +11165,13 @@
  "Dominance BTC": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:332: TileRow(id: \"btc\", title: tr(\"Dominance BTC\"), value: Fmt.percent(global.bitcoinDominance / 100, decimals: 1), progress: global.bitcoinDominance / 100),"
+   "Shared/Render/Tiles/MoneyTiles.swift:372: TileRow(id: \"btc\", title: tr(\"Dominance BTC\"), value: Fmt.percent(global.bitcoinDominance / 100, decimals: 1), progress: global.bitcoinDominance / 100),"
   ]
  },
  "Dominance ETH": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:333: TileRow(id: \"eth\", title: tr(\"Dominance ETH\"), value: Fmt.percent(global.ethereumDominance / 100, decimals: 1), progress: global.ethereumDominance / 100),"
+   "Shared/Render/Tiles/MoneyTiles.swift:373: TileRow(id: \"eth\", title: tr(\"Dominance ETH\"), value: Fmt.percent(global.ethereumDominance / 100, decimals: 1), progress: global.ethereumDominance / 100),"
   ]
  },
  "Donkey kick": {
@@ -11568,6 +11569,12 @@
    "App/Screens/Content/MoneyView.swift:38: DatePicker(tr(\"Début du calcul\"), selection: Binding("
   ]
  },
+ "Début du mois": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:175: TileRow(id: \"start\", title: tr(\"Début du mois\"), value: signed(atStart), symbol: \"calendar\"),"
+  ]
+ },
  "Débutant": {
   "placeholders": 0,
   "uses": [
@@ -11914,7 +11921,7 @@
  "Départ en voyage": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:239: KindInfo(kind: .tripCountdown, title: tr(\"Départ en voyage\"), summary: tr(\"Les jours avant ton prochain voyage.\"), category: .travel, symbol: \"airplane.departure\", isPremium: false, families: SM + [ci"
+   "Shared/Model/KindCatalog.swift:240: KindInfo(kind: .tripCountdown, title: tr(\"Départ en voyage\"), summary: tr(\"Les jours avant ton prochain voyage.\"), category: .travel, symbol: \"airplane.departure\", isPremium: false, families: SM + [ci"
   ]
  },
  "Départ et vol": {
@@ -12020,9 +12027,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/BudgetSpace.swift:283: SheetForm(title: tr(\"Dépense rapide\"), canSave: !quick.name.trimmed.isEmpty && quick.amount > 0, onSave: save) {",
-   "Shared/Model/KindCatalog.swift:188: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: false, families: SM,",
-   "Shared/Render/Tiles/MoneyTiles.swift:196: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.\"))",
-   "Shared/Render/Tiles/MoneyTiles.swift:198: var tile = Tile(title: tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\")"
+   "Shared/Model/KindCatalog.swift:189: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: false, families: SM,",
+   "Shared/Render/Tiles/MoneyTiles.swift:236: return .empty(tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\", message: tr(\"Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget.\"))",
+   "Shared/Render/Tiles/MoneyTiles.swift:238: var tile = Tile(title: tr(\"Dépense rapide\"), symbol: \"cart.badge.plus\")"
   ]
  },
  "Dépenses": {
@@ -12045,8 +12052,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/BudgetSpace.swift:38: Section(tr(\"Dépenses du mois\")) {",
-   "Shared/Render/Tiles/MoneyTiles.swift:35: var tile = Tile(title: tr(\"Dépenses du mois\"), symbol: \"creditcard\")",
-   "Shared/Render/Tiles/MoneyTiles.swift:67: var tile = Tile(title: tr(\"Dépenses du mois\"), symbol: \"chart.bar.doc.horizontal\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:36: var tile = Tile(title: tr(\"Dépenses du mois\"), symbol: \"creditcard\")",
+   "Shared/Render/Tiles/MoneyTiles.swift:68: var tile = Tile(title: tr(\"Dépenses du mois\"), symbol: \"chart.bar.doc.horizontal\")"
   ]
  },
  "Dépenses et frais": {
@@ -12058,7 +12065,7 @@
  "Dépenses par catégorie": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:183: KindInfo(kind: .spendingByCategory, title: tr(\"Dépenses par catégorie\"), summary: tr(\"Où part ton argent ce mois-ci, catégorie par catégorie.\"), category: .finance, symbol: \"chart.bar.doc.horizontal\","
+   "Shared/Model/KindCatalog.swift:184: KindInfo(kind: .spendingByCategory, title: tr(\"Dépenses par catégorie\"), summary: tr(\"Où part ton argent ce mois-ci, catégorie par catégorie.\"), category: .finance, symbol: \"chart.bar.doc.horizontal\","
   ]
  },
  "Dépenses rapides": {
@@ -12091,7 +12098,7 @@
  "Dépensé %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:43: tile.inline = tr(\"Dépensé \\(TF.money(spent, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:44: tile.inline = tr(\"Dépensé \\(TF.money(spent, currency))\")"
   ]
  },
  "Dépensé : %@": {
@@ -12103,7 +12110,7 @@
  "Dépensé : %@ sur %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:52: tile.detail = tr(\"Dépensé : \\(TF.money(spent, currency)) sur \\(TF.money(budget, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:53: tile.detail = tr(\"Dépensé : \\(TF.money(spent, currency)) sur \\(TF.money(budget, currency))\")"
   ]
  },
  "Dépensé aujourd'hui": {
@@ -12130,7 +12137,7 @@
  "Dépensé ce mois-ci : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:208: : tr(\"Dépensé ce mois-ci : \\(TF.money(BudgetMath.spentThisMonth(state, at: now), currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:248: : tr(\"Dépensé ce mois-ci : \\(TF.money(BudgetMath.spentThisMonth(state, at: now), currency))\")"
   ]
  },
  "Déplacer après": {
@@ -12170,7 +12177,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/DataWidgets.swift:226: WLabel(text: mode == .net ? tr(\"Chaque mois\") : tr(\"Détail\"), style: s)",
-   "Shared/Render/Tiles/TileView.swift:616: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
+   "Shared/Render/Tiles/TileView.swift:617: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
   ]
  },
  "Détails": {
@@ -12527,7 +12534,7 @@
  "En pause": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:215: Text(tr(\"En pause\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:226: Text(tr(\"En pause\"))"
   ]
  },
  "En position de pompe, bras tendus, corps gainé.": {
@@ -12758,7 +12765,7 @@
   "placeholders": 1,
   "uses": [
    "Shared/Render/Tiles/DashboardTiles.swift:127: tile.caption = open.first.map { tr(\"Ensuite : \\($0.title)\") } ?? tr(\"Rien d'urgent, profites-en\")",
-   "Shared/Render/Tiles/FitnessTiles.swift:131: tile.caption = tr(\"Ensuite : \\(next.name)\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:132: tile.caption = tr(\"Ensuite : \\(next.name)\")"
   ]
  },
  "Entitlements": {
@@ -12918,7 +12925,7 @@
  "Estimation selon la durée des séances et ton poids": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:225: tile.footnote = tr(\"Estimation selon la durée des séances et ton poids\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:226: tile.footnote = tr(\"Estimation selon la durée des séances et ton poids\")"
   ]
  },
  "Estimation, pas une garantie : ton corps réagit à son propre rythme. Ce n'est pas un avis médical.": {
@@ -13329,7 +13336,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Profile/SmartRemindersView.swift:110: Label(tr(\"Factures\"), systemImage: \"doc.text\")",
-   "Shared/Render/Tiles/MoneyTiles.swift:89: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Ardane, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:90: guard let next = upcoming.first else { return .empty(tr(\"Factures\"), symbol: \"doc.text\", message: tr(\"Ajoute tes factures dans Ardane, espace Budget.\")) }"
   ]
  },
  "Factures et abonnements": {
@@ -13342,8 +13349,8 @@
  "Factures à venir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:184: KindInfo(kind: .billsUpcoming, title: tr(\"Factures à venir\"), summary: tr(\"Tes prochaines factures et leurs échéances.\"), category: .finance, symbol: \"doc.text\", isPremium: true, families: SML + [rect",
-   "Shared/Render/Tiles/MoneyTiles.swift:91: var tile = Tile(title: tr(\"Factures à venir\"), symbol: \"doc.text\")"
+   "Shared/Model/KindCatalog.swift:185: KindInfo(kind: .billsUpcoming, title: tr(\"Factures à venir\"), summary: tr(\"Tes prochaines factures et leurs échéances.\"), category: .finance, symbol: \"doc.text\", isPremium: true, families: SML + [rect",
+   "Shared/Render/Tiles/MoneyTiles.swift:92: var tile = Tile(title: tr(\"Factures à venir\"), symbol: \"doc.text\")"
   ]
  },
  "Facultatif": {
@@ -13672,7 +13679,7 @@
  "Fiche de révision": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:231: KindInfo(kind: .flashcard, title: tr(\"Fiche de révision\"), summary: tr(\"Une fiche à retourner depuis l'écran d'accueil, avec répétition espacée.\"), category: .student, symbol: \"rectangle.on.rectangle."
+   "Shared/Model/KindCatalog.swift:232: KindInfo(kind: .flashcard, title: tr(\"Fiche de révision\"), summary: tr(\"Une fiche à retourner depuis l'écran d'accueil, avec répétition espacée.\"), category: .student, symbol: \"rectangle.on.rectangle."
   ]
  },
  "Fiche du jour": {
@@ -13684,7 +13691,7 @@
  "Fiche entreprise": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:217: KindInfo(kind: .companySnapshot, title: tr(\"Fiche entreprise\"), summary: tr(\"Revenus, bénéfice, marge et croissance d'une société cotée.\"), category: .markets, symbol: \"building.2\", isPremium: true, f",
+   "Shared/Model/KindCatalog.swift:218: KindInfo(kind: .companySnapshot, title: tr(\"Fiche entreprise\"), summary: tr(\"Revenus, bénéfice, marge et croissance d'une société cotée.\"), category: .markets, symbol: \"building.2\", isPremium: true, f",
    "Shared/Model/Templates.swift:128: WidgetTemplate(id: \"company-futuristic\", name: tr(\"Fiche entreprise\"), kind: .companySnapshot, themeID: .futuristic, accentHex: \"3366FF\"),",
    "Shared/Render/Tiles/BusinessTiles.swift:169: return .empty(tr(\"Fiche entreprise\"), symbol: \"building.2\", message: offline, emptySymbol: \"wifi.slash\")"
   ]
@@ -15217,7 +15224,7 @@
  "Heure sur place": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:242: KindInfo(kind: .localTime, title: tr(\"Heure sur place\"), summary: tr(\"L'heure à destination et le décalage avec chez toi.\"), category: .travel, symbol: \"clock.arrow.2.circlepath\", isPremium: false, fa",
+   "Shared/Model/KindCatalog.swift:243: KindInfo(kind: .localTime, title: tr(\"Heure sur place\"), summary: tr(\"L'heure à destination et le décalage avec chez toi.\"), category: .travel, symbol: \"clock.arrow.2.circlepath\", isPremium: false, fa",
    "Shared/Render/Tiles/TravelTiles.swift:111: return .empty(tr(\"Heure sur place\"), symbol: \"clock.arrow.2.circlepath\", message: hint)"
   ]
  },
@@ -15254,7 +15261,7 @@
  "Heures d'étude": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:232: KindInfo(kind: .studyHours, title: tr(\"Heures d'étude\"), summary: tr(\"Tes heures d'étude de la semaine face à ton objectif.\"), category: .student, symbol: \"clock.badge.checkmark\", isPremium: true, fam",
+   "Shared/Model/KindCatalog.swift:233: KindInfo(kind: .studyHours, title: tr(\"Heures d'étude\"), summary: tr(\"Tes heures d'étude de la semaine face à ton objectif.\"), category: .student, symbol: \"clock.badge.checkmark\", isPremium: true, fam",
    "Shared/Render/Tiles/StudentTiles.swift:207: var tile = Tile(title: tr(\"Heures d'étude\"), symbol: \"clock.badge.checkmark\")"
   ]
  },
@@ -15483,7 +15490,7 @@
  "Hôtel": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:241: KindInfo(kind: .hotel, title: tr(\"Hôtel\"), summary: tr(\"Ton hôtel, son adresse et les dates d'arrivée et de départ.\"), category: .travel, symbol: \"bed.double.fill\", isPremium: true, families: SM, keyw",
+   "Shared/Model/KindCatalog.swift:242: KindInfo(kind: .hotel, title: tr(\"Hôtel\"), summary: tr(\"Ton hôtel, son adresse et les dates d'arrivée et de départ.\"), category: .travel, symbol: \"bed.double.fill\", isPremium: true, families: SM, keyw",
    "Shared/Render/Tiles/TravelTiles.swift:86: return .empty(tr(\"Hôtel\"), symbol: \"bed.double.fill\", message: tr(\"Ajoute ton hébergement dans Ardane, espace Voyage.\"))",
    "Shared/Render/Tiles/TravelTiles.swift:88: var tile = Tile(title: tr(\"Hôtel\"), symbol: \"bed.double.fill\")"
   ]
@@ -15860,7 +15867,7 @@
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:245: MiniSectionTitle(title: tr(\"Indicateurs\"))",
    "App/Screens/Spaces/MoneySpaces.swift:432: Section(tr(\"Indicateurs\")) {",
-   "Shared/Model/KindCatalog.swift:208: KindInfo(kind: .businessKPIs, title: tr(\"Indicateurs\"), summary: tr(\"Commandes, panier moyen, nouveaux clients et conversion.\"), category: .business, symbol: \"square.grid.2x2\", isPremium: true, famili"
+   "Shared/Model/KindCatalog.swift:209: KindInfo(kind: .businessKPIs, title: tr(\"Indicateurs\"), summary: tr(\"Commandes, panier moyen, nouveaux clients et conversion.\"), category: .business, symbol: \"square.grid.2x2\", isPremium: true, famili"
   ]
  },
  "Indicateurs du mois": {
@@ -16635,7 +16642,7 @@
  "L'avancement de ta session ou de ton semestre.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:230: KindInfo(kind: .semesterProgress, title: tr(\"Session\"), summary: tr(\"L'avancement de ta session ou de ton semestre.\"), category: .student, symbol: \"calendar.badge.clock\", isPremium: false, families: S"
+   "Shared/Model/KindCatalog.swift:231: KindInfo(kind: .semesterProgress, title: tr(\"Session\"), summary: tr(\"L'avancement de ta session ou de ton semestre.\"), category: .student, symbol: \"calendar.badge.clock\", isPremium: false, families: S"
   ]
  },
  "L'eau, le ciel et tes habitudes, en bleu profond.": {
@@ -16713,7 +16720,7 @@
  "L'heure à destination et le décalage avec chez toi.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:242: KindInfo(kind: .localTime, title: tr(\"Heure sur place\"), summary: tr(\"L'heure à destination et le décalage avec chez toi.\"), category: .travel, symbol: \"clock.arrow.2.circlepath\", isPremium: false, fa"
+   "Shared/Model/KindCatalog.swift:243: KindInfo(kind: .localTime, title: tr(\"Heure sur place\"), summary: tr(\"L'heure à destination et le décalage avec chez toi.\"), category: .travel, symbol: \"clock.arrow.2.circlepath\", isPremium: false, fa"
   ]
  },
  "L'heure, ce qui vient et ta concentration, sur la ville endormie.": {
@@ -16737,7 +16744,7 @@
  "L'heure, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:261: KindInfo(kind: .myDay, title: tr(\"Ma journée\"), summary: tr(\"L'heure, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.\"), category: .dashboards, symbol: \"sun.horizon\", isPremium"
+   "Shared/Model/KindCatalog.swift:262: KindInfo(kind: .myDay, title: tr(\"Ma journée\"), summary: tr(\"L'heure, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.\"), category: .dashboards, symbol: \"sun.horizon\", isPremium"
   ]
  },
  "L'historique détaillé est dans Premium": {
@@ -16849,7 +16856,7 @@
  "La capitalisation totale du marché et ses principaux actifs.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .marketOverview, title: tr(\"Marché crypto\"), summary: tr(\"La capitalisation totale du marché et ses principaux actifs.\"), category: .investing, symbol: \"globe.americas\", isPremium: true"
+   "Shared/Model/KindCatalog.swift:200: KindInfo(kind: .marketOverview, title: tr(\"Marché crypto\"), summary: tr(\"La capitalisation totale du marché et ses principaux actifs.\"), category: .investing, symbol: \"globe.americas\", isPremium: true"
   ]
  },
  "La catégorie est une estimation. Corrige-la si besoin : Ardane s'en souviendra pour ce commerçant. Enregistrer sans rien changer la confirme.": {
@@ -16975,7 +16982,7 @@
  "La part de chaque type de placement dans ton portefeuille.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:196: KindInfo(kind: .allocation, title: tr(\"Répartition\"), summary: tr(\"La part de chaque type de placement dans ton portefeuille.\"), category: .investing, symbol: \"chart.pie\", isPremium: true, families: S"
+   "Shared/Model/KindCatalog.swift:197: KindInfo(kind: .allocation, title: tr(\"Répartition\"), summary: tr(\"La part de chaque type de placement dans ton portefeuille.\"), category: .investing, symbol: \"chart.pie\", isPremium: true, families: S"
   ]
  },
  "La photo est réduite pour tenir dans la mémoire limitée des widgets.": {
@@ -17011,7 +17018,7 @@
  "La prochaine activité prévue pendant ton voyage.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:245: KindInfo(kind: .nextActivity, title: tr(\"Prochaine activité\"), summary: tr(\"La prochaine activité prévue pendant ton voyage.\"), category: .travel, symbol: \"mappin.and.ellipse\", isPremium: true, famili"
+   "Shared/Model/KindCatalog.swift:246: KindInfo(kind: .nextActivity, title: tr(\"Prochaine activité\"), summary: tr(\"La prochaine activité prévue pendant ton voyage.\"), category: .travel, symbol: \"mappin.and.ellipse\", isPremium: true, famili"
   ]
  },
  "La prochaine série et le temps de repos.": {
@@ -17099,12 +17106,6 @@
    "App/Screens/Profile/SmartRemindersView.swift:71: Text(tr(\"La séance du jour si elle n'est pas commencée à l'heure choisie, les séances restantes de la semaine, tes pas (si le mouvement est autorisé), la séance de demain et le bilan du dimanche. Rien"
   ]
  },
- "La séance prévue aujourd'hui et ses exercices.": {
-  "placeholders": 0,
-  "uses": [
-   "Shared/Model/KindCatalog.swift:168: KindInfo(kind: .todaysWorkout, title: tr(\"Séance du jour\"), summary: tr(\"La séance prévue aujourd'hui et ses exercices.\"), category: .fitness, symbol: \"figure.strengthtraining.traditional\", isPremium:"
-  ]
- },
  "La sélection de la semaine : un écran, un style et des widgets à découvrir.": {
   "placeholders": 0,
   "uses": [
@@ -17144,7 +17145,7 @@
  "La valeur de ton portefeuille et sa performance.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:195: KindInfo(kind: .portfolio, title: tr(\"Portefeuille\"), summary: tr(\"La valeur de ton portefeuille et sa performance.\"), category: .investing, symbol: \"chart.line.uptrend.xyaxis\", isPremium: true, famil"
+   "Shared/Model/KindCatalog.swift:196: KindInfo(kind: .portfolio, title: tr(\"Portefeuille\"), summary: tr(\"La valeur de ton portefeuille et sa performance.\"), category: .investing, symbol: \"chart.line.uptrend.xyaxis\", isPremium: true, famil"
   ]
  },
  "La valeur et un grand graphique.": {
@@ -17426,7 +17427,7 @@
  "Le bénéfice du mois et ta marge.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:207: KindInfo(kind: .profit, title: tr(\"Bénéfice\"), summary: tr(\"Le bénéfice du mois et ta marge.\"), category: .business, symbol: \"banknote.fill\", isPremium: true, families: SM, keywords: [\"bénéfice\", \"mar"
+   "Shared/Model/KindCatalog.swift:208: KindInfo(kind: .profit, title: tr(\"Bénéfice\"), summary: tr(\"Le bénéfice du mois et ta marge.\"), category: .business, symbol: \"banknote.fill\", isPremium: true, families: SM, keywords: [\"bénéfice\", \"mar"
   ]
  },
  "Le bénéfice ici, c'est tes ventes moins les dépenses que tu as notées : un repère, pas un résultat comptable.": {
@@ -17456,7 +17457,7 @@
  "Le chiffre d'affaires du jour comparé au même jour la semaine dernière.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:210: KindInfo(kind: .revenueToday, title: tr(\"Ventes du jour\"), summary: tr(\"Le chiffre d'affaires du jour comparé au même jour la semaine dernière.\"), category: .business, symbol: \"cart\", isPremium: true,"
+   "Shared/Model/KindCatalog.swift:211: KindInfo(kind: .revenueToday, title: tr(\"Ventes du jour\"), summary: tr(\"Le chiffre d'affaires du jour comparé au même jour la semaine dernière.\"), category: .business, symbol: \"cart\", isPremium: true,"
   ]
  },
  "Le chiffre d'affaires reste toujours en haut. Chaque indicateur est comparé à la période précédente, arrêtée au même moment.": {
@@ -17528,13 +17529,13 @@
  "Le cours d'une crypto et sa courbe sur 7 jours.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:194: KindInfo(kind: .crypto, title: tr(\"Crypto\"), summary: tr(\"Le cours d'une crypto et sa courbe sur 7 jours.\"), category: .investing, symbol: \"bitcoinsign.circle\", isPremium: true, families: SM + [rect],"
+   "Shared/Model/KindCatalog.swift:195: KindInfo(kind: .crypto, title: tr(\"Crypto\"), summary: tr(\"Le cours d'une crypto et sa courbe sur 7 jours.\"), category: .investing, symbol: \"bitcoinsign.circle\", isPremium: true, families: SM + [rect],"
   ]
  },
  "Le cours de l'action d'une société et sa capitalisation.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:219: KindInfo(kind: .companyStock, title: tr(\"Action\"), summary: tr(\"Le cours de l'action d'une société et sa capitalisation.\"), category: .markets, symbol: \"chart.line.uptrend.xyaxis.circle\", isPremium: t"
+   "Shared/Model/KindCatalog.swift:220: KindInfo(kind: .companyStock, title: tr(\"Action\"), summary: tr(\"Le cours de l'action d'une société et sa capitalisation.\"), category: .markets, symbol: \"chart.line.uptrend.xyaxis.circle\", isPremium: t"
   ]
  },
  "Le cours du bitcoin et le marché crypto.": {
@@ -17552,13 +17553,13 @@
  "Le coût mensuel de tous tes abonnements.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:187: KindInfo(kind: .subscriptions, title: tr(\"Abonnements\"), summary: tr(\"Le coût mensuel de tous tes abonnements.\"), category: .finance, symbol: \"repeat.circle\", isPremium: true, families: SML, keywords:"
+   "Shared/Model/KindCatalog.swift:188: KindInfo(kind: .subscriptions, title: tr(\"Abonnements\"), summary: tr(\"Le coût mensuel de tous tes abonnements.\"), category: .finance, symbol: \"repeat.circle\", isPremium: true, families: SML, keywords:"
   ]
  },
  "Le coût mensuel estimé de ta voiture, tout compris.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:251: KindInfo(kind: .carCost, title: tr(\"Coût de la voiture\"), summary: tr(\"Le coût mensuel estimé de ta voiture, tout compris.\"), category: .car, symbol: \"car.side\", isPremium: true, families: SML, keywor"
+   "Shared/Model/KindCatalog.swift:252: KindInfo(kind: .carCost, title: tr(\"Coût de la voiture\"), summary: tr(\"Le coût mensuel estimé de ta voiture, tout compris.\"), category: .car, symbol: \"car.side\", isPremium: true, families: SML, keywor"
   ]
  },
  "Le décompte repart chaque année à la date choisie, comme un anniversaire.": {
@@ -17673,7 +17674,7 @@
  "Le jour du voyage où tu es et les jours restants.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:244: KindInfo(kind: .tripProgress, title: tr(\"Avancement du voyage\"), summary: tr(\"Le jour du voyage où tu es et les jours restants.\"), category: .travel, symbol: \"map\", isPremium: true, families: SM + [ci"
+   "Shared/Model/KindCatalog.swift:245: KindInfo(kind: .tripProgress, title: tr(\"Avancement du voyage\"), summary: tr(\"Le jour du voyage où tu es et les jours restants.\"), category: .travel, symbol: \"map\", isPremium: true, families: SM + [ci"
   ]
  },
  "Le minuteur et tes heures de travail profond.": {
@@ -17752,7 +17753,7 @@
  "Le placement qui a le plus bougé en 24 h.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:197: KindInfo(kind: .topMover, title: tr(\"Plus forte variation\"), summary: tr(\"Le placement qui a le plus bougé en 24 h.\"), category: .investing, symbol: \"arrow.up.arrow.down\", isPremium: true, families: S"
+   "Shared/Model/KindCatalog.swift:198: KindInfo(kind: .topMover, title: tr(\"Plus forte variation\"), summary: tr(\"Le placement qui a le plus bougé en 24 h.\"), category: .investing, symbol: \"arrow.up.arrow.down\", isPremium: true, families: S"
   ]
  },
  "Le plus bas confortable, talons au sol.": {
@@ -17824,7 +17825,7 @@
  "Le prochain entretien et les kilomètres ou jours qu'il reste.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:252: KindInfo(kind: .nextService, title: tr(\"Prochain entretien\"), summary: tr(\"Le prochain entretien et les kilomètres ou jours qu'il reste.\"), category: .car, symbol: \"wrench.and.screwdriver\", isPremium:"
+   "Shared/Model/KindCatalog.swift:253: KindInfo(kind: .nextService, title: tr(\"Prochain entretien\"), summary: tr(\"Le prochain entretien et les kilomètres ou jours qu'il reste.\"), category: .car, symbol: \"wrench.and.screwdriver\", isPremium:"
   ]
  },
  "Le prochain entretien et ta consommation.": {
@@ -17869,6 +17870,12 @@
    "App/Screens/MiniApps/Finances/FinancesPages.swift:625: : tr(\"Le solde au 1er du mois, puis tes revenus et tes dépenses notés, factures et montants fixes compris.\")"
   ]
  },
+ "Le solde de ton compte aujourd'hui et son évolution depuis le début du mois.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/KindCatalog.swift:183: KindInfo(kind: .balance, title: tr(\"Solde\"), summary: tr(\"Le solde de ton compte aujourd'hui et son évolution depuis le début du mois.\"), category: .finance, symbol: \"chart.line.uptrend.xyaxis\", isPre"
+  ]
+ },
  "Le surplus d'une prise de masse ne dépasse pas 500 kcal par jour.": {
   "placeholders": 0,
   "uses": [
@@ -17878,7 +17885,7 @@
  "Le taux de change et une conversion rapide.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:243: KindInfo(kind: .currency, title: tr(\"Devise\"), summary: tr(\"Le taux de change et une conversion rapide.\"), category: .travel, symbol: \"coloncurrencysign.circle\", isPremium: true, families: SM, keyword"
+   "Shared/Model/KindCatalog.swift:244: KindInfo(kind: .currency, title: tr(\"Devise\"), summary: tr(\"Le taux de change et une conversion rapide.\"), category: .travel, symbol: \"coloncurrencysign.circle\", isPremium: true, families: SM, keyword"
   ]
  },
  "Le taux de réussite de chaque habitude sur 30 et 90 jours, et sa plus longue série. Tes jours cochés restent enregistrés.": {
@@ -18054,7 +18061,7 @@
  "Les chiffres clés de ton entreprise sur un seul widget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:211: KindInfo(kind: .businessDashboard, title: tr(\"Tableau de bord business\"), summary: tr(\"Les chiffres clés de ton entreprise sur un seul widget.\"), category: .business, symbol: \"rectangle.3.group\", isPr"
+   "Shared/Model/KindCatalog.swift:212: KindInfo(kind: .businessDashboard, title: tr(\"Tableau de bord business\"), summary: tr(\"Les chiffres clés de ton entreprise sur un seul widget.\"), category: .business, symbol: \"rectangle.3.group\", isPr"
   ]
  },
  "Les chiffres et les graphiques brillent.": {
@@ -18084,7 +18091,7 @@
  "Les cours s'affichent dès que la connexion est disponible.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:292: return .empty(tr(\"Liste de suivi\"), symbol: \"list.star\", message: tr(\"Les cours s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:332: return .empty(tr(\"Liste de suivi\"), symbol: \"list.star\", message: tr(\"Les cours s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")"
   ]
  },
  "Les dates à ne pas manquer.": {
@@ -18108,7 +18115,7 @@
  "Les données du marché s'affichent dès que la connexion est disponible.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:323: return .empty(tr(\"Marché crypto\"), symbol: \"globe.americas\", message: tr(\"Les données du marché s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:363: return .empty(tr(\"Marché crypto\"), symbol: \"globe.americas\", message: tr(\"Les données du marché s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")"
   ]
  },
  "Les données reçues sont illisibles.": {
@@ -18206,13 +18213,13 @@
  "Les jours avant ton prochain examen.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:227: KindInfo(kind: .nextExam, title: tr(\"Prochain examen\"), summary: tr(\"Les jours avant ton prochain examen.\"), category: .student, symbol: \"pencil.and.list.clipboard\", isPremium: false, families: SM + ["
+   "Shared/Model/KindCatalog.swift:228: KindInfo(kind: .nextExam, title: tr(\"Prochain examen\"), summary: tr(\"Les jours avant ton prochain examen.\"), category: .student, symbol: \"pencil.and.list.clipboard\", isPremium: false, families: SM + ["
   ]
  },
  "Les jours avant ton prochain voyage.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:239: KindInfo(kind: .tripCountdown, title: tr(\"Départ en voyage\"), summary: tr(\"Les jours avant ton prochain voyage.\"), category: .travel, symbol: \"airplane.departure\", isPremium: false, families: SM + [ci"
+   "Shared/Model/KindCatalog.swift:240: KindInfo(kind: .tripCountdown, title: tr(\"Départ en voyage\"), summary: tr(\"Les jours avant ton prochain voyage.\"), category: .travel, symbol: \"airplane.departure\", isPremium: false, families: SM + [ci"
   ]
  },
  "Les jours avant un événement, ou depuis un moment important.": {
@@ -18351,7 +18358,7 @@
  "Les revenus trimestriels d'une société, en barres.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:218: KindInfo(kind: .companyRevenue, title: tr(\"Revenus trimestriels\"), summary: tr(\"Les revenus trimestriels d'une société, en barres.\"), category: .markets, symbol: \"chart.bar.fill\", isPremium: true, fam"
+   "Shared/Model/KindCatalog.swift:219: KindInfo(kind: .companyRevenue, title: tr(\"Revenus trimestriels\"), summary: tr(\"Les revenus trimestriels d'une société, en barres.\"), category: .markets, symbol: \"chart.bar.fill\", isPremium: true, fam"
   ]
  },
  "Les sept jours de la semaine, aujourd'hui en avant, avec ta progression.": {
@@ -18399,7 +18406,7 @@
  "Les variations apparaissent pour les placements cotés en direct.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:278: return .empty(tr(\"Plus forte variation\"), symbol: \"arrow.up.arrow.down\", message: tr(\"Les variations apparaissent pour les placements cotés en direct.\"))"
+   "Shared/Render/Tiles/MoneyTiles.swift:318: return .empty(tr(\"Plus forte variation\"), symbol: \"arrow.up.arrow.down\", message: tr(\"Les variations apparaissent pour les placements cotés en direct.\"))"
   ]
  },
  "Les ventes du jour et l'objectif du mois.": {
@@ -18646,9 +18653,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/MoneySpaces.swift:81: Text(tr(\"Liste de suivi\"))",
-   "Shared/Model/KindCatalog.swift:198: KindInfo(kind: .watchlist, title: tr(\"Liste de suivi\"), summary: tr(\"Plusieurs cryptos suivies en direct, en une liste.\"), category: .investing, symbol: \"list.star\", isPremium: false, families: SML, k",
-   "Shared/Render/Tiles/MoneyTiles.swift:292: return .empty(tr(\"Liste de suivi\"), symbol: \"list.star\", message: tr(\"Les cours s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")",
-   "Shared/Render/Tiles/MoneyTiles.swift:294: var tile = Tile(title: tr(\"Liste de suivi\"), symbol: \"list.star\")"
+   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .watchlist, title: tr(\"Liste de suivi\"), summary: tr(\"Plusieurs cryptos suivies en direct, en une liste.\"), category: .investing, symbol: \"list.star\", isPremium: false, families: SML, k",
+   "Shared/Render/Tiles/MoneyTiles.swift:332: return .empty(tr(\"Liste de suivi\"), symbol: \"list.star\", message: tr(\"Les cours s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")",
+   "Shared/Render/Tiles/MoneyTiles.swift:334: var tile = Tile(title: tr(\"Liste de suivi\"), symbol: \"list.star\")"
   ]
  },
  "Litecoin": {
@@ -18943,7 +18950,7 @@
  "MRR et ARR": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:209: KindInfo(kind: .mrr, title: tr(\"MRR et ARR\"), summary: tr(\"Ton revenu récurrent, tes abonnés et ta croissance mensuelle.\"), category: .business, symbol: \"arrow.triangle.2.circlepath\", isPremium: true,"
+   "Shared/Model/KindCatalog.swift:210: KindInfo(kind: .mrr, title: tr(\"MRR et ARR\"), summary: tr(\"Ton revenu récurrent, tes abonnés et ta croissance mensuelle.\"), category: .business, symbol: \"arrow.triangle.2.circlepath\", isPremium: true,"
   ]
  },
  "MRR × 12": {
@@ -18975,7 +18982,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Data/Insights.swift:238: return Insight(title: tr(\"Ma journée\"), symbol: \"sparkles\", text: text, facts: facts, points: Array(facts.prefix(5)))",
-   "Shared/Model/KindCatalog.swift:261: KindInfo(kind: .myDay, title: tr(\"Ma journée\"), summary: tr(\"L'heure, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.\"), category: .dashboards, symbol: \"sun.horizon\", isPremium",
+   "Shared/Model/KindCatalog.swift:262: KindInfo(kind: .myDay, title: tr(\"Ma journée\"), summary: tr(\"L'heure, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.\"), category: .dashboards, symbol: \"sun.horizon\", isPremium",
    "Shared/Model/Templates.swift:74: WidgetTemplate(id: \"progress-day\", name: tr(\"Ma journée\"), kind: .progress, themeID: .minimal, accentHex: \"3366FF\",",
    "Shared/Model/Templates.swift:125: WidgetTemplate(id: \"myday-glass\", name: tr(\"Ma journée\"), kind: .myDay, themeID: .glass, accentHex: \"8C6CFF\"),"
   ]
@@ -19133,7 +19140,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/DailySection.swift:910: isNow ? tr(\"Maintenant\") : nil",
-   "Shared/Model/KindCatalog.swift:262: KindInfo(kind: .now, title: tr(\"Maintenant\"), summary: tr(\"Un widget qui change selon le moment : agenda le matin, tâches et focus la journée, bilan le soir.\"), category: .dashboards, symbol: \"wand.an",
+   "Shared/Model/KindCatalog.swift:263: KindInfo(kind: .now, title: tr(\"Maintenant\"), summary: tr(\"Un widget qui change selon le moment : agenda le matin, tâches et focus la journée, bilan le soir.\"), category: .dashboards, symbol: \"wand.an",
    "Shared/Model/Templates.swift:118: WidgetTemplate(id: \"now-colorful\", name: tr(\"Maintenant\"), kind: .now, themeID: .colorful, accentHex: \"8C6CFF\", isFeatured: true),",
    "Shared/Render/Tiles/DashboardTiles.swift:123: var tile = Tile(title: tr(\"Maintenant\"), symbol: \"bolt.fill\")"
   ]
@@ -19288,15 +19295,15 @@
  "Marché %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:340: tile.inline = tr(\"Marché \\(PriceChange.percent(global.change24h))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:380: tile.inline = tr(\"Marché \\(PriceChange.percent(global.change24h))\")"
   ]
  },
  "Marché crypto": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .marketOverview, title: tr(\"Marché crypto\"), summary: tr(\"La capitalisation totale du marché et ses principaux actifs.\"), category: .investing, symbol: \"globe.americas\", isPremium: true",
-   "Shared/Render/Tiles/MoneyTiles.swift:323: return .empty(tr(\"Marché crypto\"), symbol: \"globe.americas\", message: tr(\"Les données du marché s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")",
-   "Shared/Render/Tiles/MoneyTiles.swift:325: var tile = Tile(title: tr(\"Marché crypto\"), symbol: \"globe.americas\")"
+   "Shared/Model/KindCatalog.swift:200: KindInfo(kind: .marketOverview, title: tr(\"Marché crypto\"), summary: tr(\"La capitalisation totale du marché et ses principaux actifs.\"), category: .investing, symbol: \"globe.americas\", isPremium: true",
+   "Shared/Render/Tiles/MoneyTiles.swift:363: return .empty(tr(\"Marché crypto\"), symbol: \"globe.americas\", message: tr(\"Les données du marché s'affichent dès que la connexion est disponible.\"), emptySymbol: \"wifi.slash\")",
+   "Shared/Render/Tiles/MoneyTiles.swift:365: var tile = Tile(title: tr(\"Marché crypto\"), symbol: \"globe.americas\")"
   ]
  },
  "Marché de Campo de Ourique": {
@@ -19811,7 +19818,7 @@
  "Mes widgets": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:315: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }",
+   "App/ArdaneApp.swift:316: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:37: MiniSectionTitle(title: tr(\"Mes widgets\"),",
    "App/Screens/MyWidgets/MyWidgetsView.swift:97: .navigationTitle(isSelecting ? selectionTitle : tr(\"Mes widgets\"))",
    "App/Screens/Tutorial/Tutorial.swift:60: case .mine: tr(\"Mes widgets\")"
@@ -20246,7 +20253,7 @@
  "Mon thème": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:419: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
+   "App/Core/AppModel.swift:421: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
    "App/Screens/Editor/StudioPanels.swift:585: TextField(tr(\"Mon thème\"), text: $newName)",
    "Shared/Model/WidgetStyle.swift:747: name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr(\"Mon thème\")"
   ]
@@ -20531,7 +20538,7 @@
    "App/Screens/MiniApps/Car/CarPages.swift:95: MiniStat(title: tr(\"Moyenne\"), value: driven.isEmpty ? \"–\" : Fmt.number(Int(driven.reduce(0) { $0 + $1.km } / Double(driven.count))), unit: \"km/mois\")",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:216: MiniStat(title: tr(\"Moyenne\"), value: StudentMath.overallAverage(state).map { \"\\(TF.decimal($0, 1)) %\" } ?? \"–\",",
    "App/Screens/MiniApps/Studies/StudiesPages.swift:459: figure(tr(\"Moyenne\"), StudentMath.courseAverage(state, course: course.id).map { \"\\(TF.decimal($0, 1)) %\" } ?? \"–\", detail: nil, hex: course.colorHex)",
-   "Shared/Model/KindCatalog.swift:229: KindInfo(kind: .gradeAverage, title: tr(\"Moyenne\"), summary: tr(\"Ta moyenne générale pondérée et celle de chaque cours.\"), category: .student, symbol: \"graduationcap\", isPremium: true, families: SML, "
+   "Shared/Model/KindCatalog.swift:230: KindInfo(kind: .gradeAverage, title: tr(\"Moyenne\"), summary: tr(\"Ta moyenne générale pondérée et celle de chaque cours.\"), category: .student, symbol: \"graduationcap\", isPremium: true, families: SML, "
   ]
  },
  "Moyenne %@ %%": {
@@ -21098,7 +21105,7 @@
  "Note tes dépenses dans Ardane, espace Budget.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:65: guard !items.isEmpty else { return .empty(tr(\"Dépenses\"), symbol: \"chart.bar.doc.horizontal\", message: tr(\"Note tes dépenses dans Ardane, espace Budget.\")) }"
+   "Shared/Render/Tiles/MoneyTiles.swift:66: guard !items.isEmpty else { return .empty(tr(\"Dépenses\"), symbol: \"chart.bar.doc.horizontal\", message: tr(\"Note tes dépenses dans Ardane, espace Budget.\")) }"
   ]
  },
  "Note tes pleins dans Ardane, espace Auto.": {
@@ -21147,6 +21154,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Tiles/NutritionTiles.swift:4: static let hint = tr(\"Note ton premier repas dans Ardane, espace Nutrition.\")"
+  ]
+ },
+ "Note ton solde de départ, tes revenus et tes dépenses dans Ardane, espace Budget.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:156: return .empty(tr(\"Solde\"), symbol: symbol, message: tr(\"Note ton solde de départ, tes revenus et tes dépenses dans Ardane, espace Budget.\"))"
   ]
  },
  "Note un plein : consommation et autonomie suivent.": {
@@ -21718,8 +21731,8 @@
  "OK": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:139: Button(tr(\"OK\")) { router.isIconPickerPresented = false }",
-   "App/ArdaneApp.swift:339: Button(tr(\"OK\")) { dismiss() }",
+   "App/ArdaneApp.swift:140: Button(tr(\"OK\")) { router.isIconPickerPresented = false }",
+   "App/ArdaneApp.swift:340: Button(tr(\"OK\")) { dismiss() }",
    "App/Premium/OnboardingOffer.swift:49: Button(tr(\"OK\"), role: .cancel) {",
    "App/Premium/PaywallView.swift:55: Button(tr(\"OK\"), role: .cancel) {"
   ]
@@ -21767,7 +21780,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesPages.swift:913: Text(tr(\"Objectif : \\(Fmt.hours(state.weeklyStudyGoalHours)) par semaine\")).font(.subheadline)",
-   "Shared/Render/Tiles/FitnessTiles.swift:209: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:210: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
   ]
  },
  "Objectif atteint": {
@@ -21775,7 +21788,7 @@
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:433: Text(tr(\"Objectif atteint\"))",
    "App/Screens/MiniApps/Nutrition/NutritionApp.swift:208: insightCard(symbol: \"checkmark.seal.fill\", title: tr(\"Objectif atteint\"), message: tr(\"Tu es dans ta cible de calories aujourd'hui.\"), action: nil)",
-   "Shared/Render/Tiles/MoneyTiles.swift:115: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")",
+   "Shared/Render/Tiles/MoneyTiles.swift:116: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")",
    "Shared/Render/Tiles/NutritionTiles.swift:163: tile.caption = left == 0 ? tr(\"Objectif atteint\") : tr(\"à trouver sur \\(TF.int(goal)) g\")"
   ]
  },
@@ -21801,7 +21814,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/BudgetSpace.swift:386: SheetForm(title: tr(\"Objectif d'épargne\"), canSave: !goal.name.trimmed.isEmpty && goal.target > 0, onSave: save) {",
-   "Shared/Model/KindCatalog.swift:185: KindInfo(kind: .savingsGoal, title: tr(\"Objectif d'épargne\"), summary: tr(\"Où tu en es de ton objectif d'épargne.\"), category: .finance, symbol: \"banknote\", isPremium: false, families: SM + [circ], ke"
+   "Shared/Model/KindCatalog.swift:186: KindInfo(kind: .savingsGoal, title: tr(\"Objectif d'épargne\"), summary: tr(\"Où tu en es de ton objectif d'épargne.\"), category: .finance, symbol: \"banknote\", isPremium: false, families: SM + [circ], ke"
   ]
  },
  "Objectif d'étude atteint": {
@@ -21857,7 +21870,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/MoneySpaces.swift:164: NumberRow(title: tr(\"Objectif du mois\"), value: Binding(get: { state.monthlyGoal }, set: { goal in model.setBusinessGoal(goal) }), unit: currency)",
-   "Shared/Model/KindCatalog.swift:205: KindInfo(kind: .revenueGoal, title: tr(\"Objectif du mois\"), summary: tr(\"Ton chiffre d'affaires du mois face à ton objectif.\"), category: .business, symbol: \"target\", isPremium: false, families: SM + ",
+   "Shared/Model/KindCatalog.swift:206: KindInfo(kind: .revenueGoal, title: tr(\"Objectif du mois\"), summary: tr(\"Ton chiffre d'affaires du mois face à ton objectif.\"), category: .business, symbol: \"target\", isPremium: false, families: SM + ",
    "Shared/Model/Templates.swift:121: WidgetTemplate(id: \"revenue-elegant\", name: tr(\"Objectif du mois\"), kind: .revenueGoal, themeID: .elegant, accentHex: \"F2A33A\", isFeatured: true),",
    "Shared/Render/Tiles/BusinessTiles.swift:42: var tile = Tile(title: tr(\"Objectif du mois\"), symbol: \"target\")"
   ]
@@ -21909,7 +21922,7 @@
  "Objectif à définir dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:202: tile.detail = tr(\"Objectif à définir dans Ardane\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:203: tile.detail = tr(\"Objectif à définir dans Ardane\")",
    "Shared/Render/Tiles/NutritionTiles.swift:38: static let targetHint = tr(\"Objectif à définir dans Ardane\")"
   ]
  },
@@ -22316,13 +22329,13 @@
  "Où part ton argent ce mois-ci, catégorie par catégorie.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:183: KindInfo(kind: .spendingByCategory, title: tr(\"Dépenses par catégorie\"), summary: tr(\"Où part ton argent ce mois-ci, catégorie par catégorie.\"), category: .finance, symbol: \"chart.bar.doc.horizontal\","
+   "Shared/Model/KindCatalog.swift:184: KindInfo(kind: .spendingByCategory, title: tr(\"Dépenses par catégorie\"), summary: tr(\"Où part ton argent ce mois-ci, catégorie par catégorie.\"), category: .finance, symbol: \"chart.bar.doc.horizontal\","
   ]
  },
  "Où tu en es de ton objectif d'épargne.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:185: KindInfo(kind: .savingsGoal, title: tr(\"Objectif d'épargne\"), summary: tr(\"Où tu en es de ton objectif d'épargne.\"), category: .finance, symbol: \"banknote\", isPremium: false, families: SM + [circ], ke"
+   "Shared/Model/KindCatalog.swift:186: KindInfo(kind: .savingsGoal, title: tr(\"Objectif d'épargne\"), summary: tr(\"Où tu en es de ton objectif d'épargne.\"), category: .finance, symbol: \"banknote\", isPremium: false, families: SM + [circ], ke"
   ]
  },
  "P [protein]": {
@@ -22768,8 +22781,8 @@
   "uses": [
    "App/Screens/MiniApps/MiniAppTour.swift:312: Text(tr(\"Passer\"))",
    "App/Screens/Onboarding/OnboardingView.swift:172: Button(tr(\"Passer\"), action: skip)",
-   "Shared/Live/WorkoutLiveActivity.swift:198: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipSetIntent(expecting: state.position))",
-   "Shared/Render/Tiles/FitnessTiles.swift:136: TileButton(title: tr(\"Passer\"), symbol: \"forward.fill\", action: .skipSet(state.position)),"
+   "Shared/Live/WorkoutLiveActivity.swift:209: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipSetIntent(expecting: state.position))",
+   "Shared/Render/Tiles/FitnessTiles.swift:137: TileButton(title: tr(\"Passer\"), symbol: \"forward.fill\", action: .skipSet(state.position)),"
   ]
  },
  "Passer cet exercice": {
@@ -22876,7 +22889,7 @@
  "Pause": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:195: actionButton(tr(\"Pause\"), symbol: \"pause.fill\", prominent: false, intent: PauseRestIntent())",
+   "Shared/Live/WorkoutLiveActivity.swift:206: actionButton(tr(\"Pause\"), symbol: \"pause.fill\", prominent: false, intent: PauseRestIntent())",
    "Widgets/WorkoutLiveActivityWidget.swift:43: Label(tr(\"Pause\"), systemImage: \"pause.fill\")"
   ]
  },
@@ -23572,9 +23585,9 @@
  "Plus forte variation": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:197: KindInfo(kind: .topMover, title: tr(\"Plus forte variation\"), summary: tr(\"Le placement qui a le plus bougé en 24 h.\"), category: .investing, symbol: \"arrow.up.arrow.down\", isPremium: true, families: S",
-   "Shared/Render/Tiles/MoneyTiles.swift:278: return .empty(tr(\"Plus forte variation\"), symbol: \"arrow.up.arrow.down\", message: tr(\"Les variations apparaissent pour les placements cotés en direct.\"))",
-   "Shared/Render/Tiles/MoneyTiles.swift:281: var tile = Tile(title: tr(\"Plus forte variation\"), symbol: trend == false ? \"arrow.down.right\" : \"arrow.up.right\")"
+   "Shared/Model/KindCatalog.swift:198: KindInfo(kind: .topMover, title: tr(\"Plus forte variation\"), summary: tr(\"Le placement qui a le plus bougé en 24 h.\"), category: .investing, symbol: \"arrow.up.arrow.down\", isPremium: true, families: S",
+   "Shared/Render/Tiles/MoneyTiles.swift:318: return .empty(tr(\"Plus forte variation\"), symbol: \"arrow.up.arrow.down\", message: tr(\"Les variations apparaissent pour les placements cotés en direct.\"))",
+   "Shared/Render/Tiles/MoneyTiles.swift:321: var tile = Tile(title: tr(\"Plus forte variation\"), symbol: trend == false ? \"arrow.down.right\" : \"arrow.up.right\")"
   ]
  },
  "Plus les jambes sont hautes, plus c'est facile.": {
@@ -23601,7 +23614,7 @@
  "Plusieurs cryptos suivies en direct, en une liste.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:198: KindInfo(kind: .watchlist, title: tr(\"Liste de suivi\"), summary: tr(\"Plusieurs cryptos suivies en direct, en une liste.\"), category: .investing, symbol: \"list.star\", isPremium: false, families: SML, k"
+   "Shared/Model/KindCatalog.swift:199: KindInfo(kind: .watchlist, title: tr(\"Liste de suivi\"), summary: tr(\"Plusieurs cryptos suivies en direct, en une liste.\"), category: .investing, symbol: \"list.star\", isPremium: false, families: SML, k"
   ]
  },
  "Plusieurs espaces réunis, selon le moment de la journée.": {
@@ -23619,7 +23632,7 @@
  "Plusieurs sociétés comparées par revenus annuels.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:220: KindInfo(kind: .companyCompare, title: tr(\"Comparateur\"), summary: tr(\"Plusieurs sociétés comparées par revenus annuels.\"), category: .markets, symbol: \"chart.bar.doc.horizontal\", isPremium: true, fam"
+   "Shared/Model/KindCatalog.swift:221: KindInfo(kind: .companyCompare, title: tr(\"Comparateur\"), summary: tr(\"Plusieurs sociétés comparées par revenus annuels.\"), category: .markets, symbol: \"chart.bar.doc.horizontal\", isPremium: true, fam"
   ]
  },
  "Plusieurs statistiques, bien alignées.": {
@@ -23898,15 +23911,15 @@
  "Portefeuille": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:195: KindInfo(kind: .portfolio, title: tr(\"Portefeuille\"), summary: tr(\"La valeur de ton portefeuille et sa performance.\"), category: .investing, symbol: \"chart.line.uptrend.xyaxis\", isPremium: true, famil",
-   "Shared/Render/Tiles/MoneyTiles.swift:224: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\")) }",
-   "Shared/Render/Tiles/MoneyTiles.swift:226: var tile = Tile(title: tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\")"
+   "Shared/Model/KindCatalog.swift:196: KindInfo(kind: .portfolio, title: tr(\"Portefeuille\"), summary: tr(\"La valeur de ton portefeuille et sa performance.\"), category: .investing, symbol: \"chart.line.uptrend.xyaxis\", isPremium: true, famil",
+   "Shared/Render/Tiles/MoneyTiles.swift:264: guard !positions.isEmpty else { return .empty(tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\")) }",
+   "Shared/Render/Tiles/MoneyTiles.swift:266: var tile = Tile(title: tr(\"Portefeuille\"), symbol: \"chart.line.uptrend.xyaxis\")"
   ]
  },
  "Portefeuille %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:256: tile.inline = tr(\"Portefeuille \\(TF.money(summary.value, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:296: tile.inline = tr(\"Portefeuille \\(TF.money(summary.value, currency))\")"
   ]
  },
  "Portefeuille et variation": {
@@ -24493,7 +24506,7 @@
  "Premier rendez-vous, priorités et objectif du jour pour bien démarrer.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:263: KindInfo(kind: .morning, title: tr(\"Ce matin\"), summary: tr(\"Premier rendez-vous, priorités et objectif du jour pour bien démarrer.\"), category: .dashboards, symbol: \"sunrise\", isPremium: true, famili"
+   "Shared/Model/KindCatalog.swift:264: KindInfo(kind: .morning, title: tr(\"Ce matin\"), summary: tr(\"Premier rendez-vous, priorités et objectif du jour pour bien démarrer.\"), category: .dashboards, symbol: \"sunrise\", isPremium: true, famili"
   ]
  },
  "Premier texte le": {
@@ -24671,7 +24684,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:425: Label(isNow ? tr(\"En cours\") : tr(\"Prochain cours\"), systemImage: isNow ? \"dot.radiowaves.left.and.right\" : \"clock\")",
-   "Shared/Model/KindCatalog.swift:226: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours ou événement, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM ",
+   "Shared/Model/KindCatalog.swift:227: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours ou événement, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM ",
    "Shared/Render/Tiles/StudentTiles.swift:59: return .empty(tr(\"Prochain cours\"), symbol: \"book.closed\", message: hint)",
    "Shared/Render/Tiles/StudentTiles.swift:65: var tile = Tile(title: isClass ? (ongoing ? tr(\"Cours actuel\") : tr(\"Prochain cours\")) : (ongoing ? tr(\"Événement en cours\") : tr(\"Prochain événement\")), symbol: isClass ? \"book.closed\" : \"calendar\")"
   ]
@@ -24679,20 +24692,20 @@
  "Prochain cours, examen, devoirs et heures d'étude réunis.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:266: KindInfo(kind: .studentDashboard, title: tr(\"Tableau études\"), summary: tr(\"Prochain cours, examen, devoirs et heures d'étude réunis.\"), category: .dashboards, symbol: \"graduationcap.circle\", isPremiu"
+   "Shared/Model/KindCatalog.swift:267: KindInfo(kind: .studentDashboard, title: tr(\"Tableau études\"), summary: tr(\"Prochain cours, examen, devoirs et heures d'étude réunis.\"), category: .dashboards, symbol: \"graduationcap.circle\", isPremiu"
   ]
  },
  "Prochain entretien": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:252: KindInfo(kind: .nextService, title: tr(\"Prochain entretien\"), summary: tr(\"Le prochain entretien et les kilomètres ou jours qu'il reste.\"), category: .car, symbol: \"wrench.and.screwdriver\", isPremium:"
+   "Shared/Model/KindCatalog.swift:253: KindInfo(kind: .nextService, title: tr(\"Prochain entretien\"), summary: tr(\"Le prochain entretien et les kilomètres ou jours qu'il reste.\"), category: .car, symbol: \"wrench.and.screwdriver\", isPremium:"
   ]
  },
  "Prochain examen": {
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Studies/StudiesApp.swift:202: MiniHero(label: tr(\"Prochain examen\"), value: Studies.examBadge(daysLeft: DateMath.daysBetween(now, exam.date)),",
-   "Shared/Model/KindCatalog.swift:227: KindInfo(kind: .nextExam, title: tr(\"Prochain examen\"), summary: tr(\"Les jours avant ton prochain examen.\"), category: .student, symbol: \"pencil.and.list.clipboard\", isPremium: false, families: SM + [",
+   "Shared/Model/KindCatalog.swift:228: KindInfo(kind: .nextExam, title: tr(\"Prochain examen\"), summary: tr(\"Les jours avant ton prochain examen.\"), category: .student, symbol: \"pencil.and.list.clipboard\", isPremium: false, families: SM + [",
    "Shared/Render/Tiles/StudentTiles.swift:93: return .empty(tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\", message: tr(\"Ajoute tes examens dans Ardane, espace Études.\"))",
    "Shared/Render/Tiles/StudentTiles.swift:96: var tile = Tile(title: tr(\"Prochain examen\"), symbol: \"pencil.and.list.clipboard\")"
   ]
@@ -24759,7 +24772,7 @@
  "Prochaine activité": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:245: KindInfo(kind: .nextActivity, title: tr(\"Prochaine activité\"), summary: tr(\"La prochaine activité prévue pendant ton voyage.\"), category: .travel, symbol: \"mappin.and.ellipse\", isPremium: true, famili",
+   "Shared/Model/KindCatalog.swift:246: KindInfo(kind: .nextActivity, title: tr(\"Prochaine activité\"), summary: tr(\"La prochaine activité prévue pendant ton voyage.\"), category: .travel, symbol: \"mappin.and.ellipse\", isPremium: true, famili",
    "Shared/Render/Tiles/TravelTiles.swift:181: return .empty(tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\", message: tr(\"Planifie tes activités dans Ardane, espace Voyage.\"))",
    "Shared/Render/Tiles/TravelTiles.swift:183: var tile = Tile(title: tr(\"Prochaine activité\"), symbol: \"mappin.and.ellipse\")"
   ]
@@ -24788,8 +24801,8 @@
   "uses": [
    "Shared/Model/KindCatalog.swift:169: KindInfo(kind: .nextSet, title: tr(\"Prochaine série\"), summary: tr(\"Ta prochaine série, validée depuis l'écran d'accueil, avec le repos qui démarre.\"), category: .fitness, symbol: \"arrow.forward.circl",
    "Shared/Model/Templates.swift:120: WidgetTemplate(id: \"nextset-dark\", name: tr(\"Prochaine série\"), kind: .nextSet, themeID: .dark, accentHex: \"FF6B57\", isFeatured: true),",
-   "Shared/Render/Tiles/FitnessTiles.swift:104: return .empty(tr(\"Prochaine série\"), symbol: \"arrow.forward.circle.fill\", message: hint)",
-   "Shared/Render/Tiles/FitnessTiles.swift:106: var tile = Tile(title: tr(\"Prochaine série\"), symbol: \"arrow.forward.circle.fill\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:105: return .empty(tr(\"Prochaine série\"), symbol: \"arrow.forward.circle.fill\", message: hint)",
+   "Shared/Render/Tiles/FitnessTiles.swift:107: var tile = Tile(title: tr(\"Prochaine série\"), symbol: \"arrow.forward.circle.fill\")"
   ]
  },
  "Prochaine échéance": {
@@ -25039,8 +25052,8 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:592: Label(tr(\"Prêt\"), systemImage: \"checkmark.circle\")",
    "App/Screens/MiniApps/Fitness/FitnessSession.swift:329: Text(tr(\"Prêt\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:242: Text(tr(\"Prêt\"))",
-   "Shared/Render/Tiles/FitnessTiles.swift:143: tile.value = tr(\"Prêt\")"
+   "Shared/Live/WorkoutLiveActivity.swift:253: Text(tr(\"Prêt\"))",
+   "Shared/Render/Tiles/FitnessTiles.swift:144: tile.value = tr(\"Prêt\")"
   ]
  },
  "Prêt auto": {
@@ -25059,7 +25072,7 @@
  "Prêt pour la prochaine série.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:143: content.body = tr(\"Prêt pour la prochaine série.\")"
+   "Shared/Live/WorkoutLiveActivity.swift:152: content.body = tr(\"Prêt pour la prochaine série.\")"
   ]
  },
  "Prêt à te concentrer ?": {
@@ -25608,8 +25621,8 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:334: MiniSectionTitle(title: tr(\"Records\"))",
    "Shared/Model/KindCatalog.swift:172: KindInfo(kind: .personalRecords, title: tr(\"Records\"), summary: tr(\"Tes meilleures charges par exercice.\"), category: .fitness, symbol: \"trophy.fill\", isPremium: true, families: SML, keywords: [\"recor",
-   "Shared/Render/Tiles/FitnessTiles.swift:176: guard let best = records.first else { return .empty(tr(\"Records\"), symbol: \"trophy.fill\", message: tr(\"Tes records apparaîtront après ta première séance.\")) }",
-   "Shared/Render/Tiles/FitnessTiles.swift:177: var tile = Tile(title: tr(\"Records\"), symbol: \"trophy.fill\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:177: guard let best = records.first else { return .empty(tr(\"Records\"), symbol: \"trophy.fill\", message: tr(\"Tes records apparaîtront après ta première séance.\")) }",
+   "Shared/Render/Tiles/FitnessTiles.swift:178: var tile = Tile(title: tr(\"Records\"), symbol: \"trophy.fill\")"
   ]
  },
  "Records, volume, bénéfice, MRR, devoirs, vol, carburant…": {
@@ -26101,16 +26114,16 @@
  "Repos : prêt": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:150: tile.inline = tr(\"Repos : prêt\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:151: tile.inline = tr(\"Repos : prêt\")"
   ]
  },
  "Repos [timer]": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:224: Text(tr(\"Repos\", context: \"timer\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:239: Text(tr(\"Repos\", context: \"timer\"))",
+   "Shared/Live/WorkoutLiveActivity.swift:235: Text(tr(\"Repos\", context: \"timer\"))",
+   "Shared/Live/WorkoutLiveActivity.swift:250: Text(tr(\"Repos\", context: \"timer\"))",
    "Shared/Model/KindCatalog.swift:170: KindInfo(kind: .restTimer, title: tr(\"Repos\", context: \"timer\"), summary: tr(\"Le temps de repos entre deux séries, qui défile en direct.\"), category: .fitness, symbol: \"timer\", isPremium: true, famili",
-   "Shared/Render/Tiles/FitnessTiles.swift:125: var tile = Tile(title: tr(\"Repos\", context: \"timer\"), symbol: \"timer\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:126: var tile = Tile(title: tr(\"Repos\", context: \"timer\"), symbol: \"timer\")"
   ]
  },
  "Repos aujourd'hui": {
@@ -26129,14 +26142,14 @@
  "Repos jusqu'à %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:113: tile.detail = tr(\"Repos jusqu'à \\(Fmt.time(rest, uses24Hour: true))\")",
-   "Shared/Render/Tiles/FitnessTiles.swift:141: tile.inline = tr(\"Repos jusqu'à \\(Fmt.time(rest, uses24Hour: true))\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:114: tile.detail = tr(\"Repos jusqu'à \\(Fmt.time(rest, uses24Hour: true))\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:142: tile.inline = tr(\"Repos jusqu'à \\(Fmt.time(rest, uses24Hour: true))\")"
   ]
  },
  "Repos terminé": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:142: content.title = tr(\"Repos terminé\")"
+   "Shared/Live/WorkoutLiveActivity.swift:151: content.title = tr(\"Repos terminé\")"
   ]
  },
  "Repose doucement.": {
@@ -26162,7 +26175,7 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:633: .accessibilityLabel(Text(tr(\"Reprendre\")))",
    "App/Screens/MiniApps/Fitness/FitnessSession.swift:205: Button(tr(\"Reprendre\")) {",
-   "Shared/Live/WorkoutLiveActivity.swift:193: actionButton(tr(\"Reprendre\"), symbol: \"play.fill\", prominent: false, intent: ResumeRestIntent())",
+   "Shared/Live/WorkoutLiveActivity.swift:204: actionButton(tr(\"Reprendre\"), symbol: \"play.fill\", prominent: false, intent: ResumeRestIntent())",
    "Widgets/WorkoutLiveActivityWidget.swift:37: Label(tr(\"Reprendre\"), systemImage: \"play.fill\")"
   ]
  },
@@ -26319,8 +26332,8 @@
  "Reste %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:59: tile.inline = tr(\"Reste \\(TF.money(remaining, currency))\")",
-   "Shared/Render/Tiles/MoneyTiles.swift:115: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:60: tile.inline = tr(\"Reste \\(TF.money(remaining, currency))\")",
+   "Shared/Render/Tiles/MoneyTiles.swift:116: tile.detail = left == 0 ? tr(\"Objectif atteint\") : tr(\"Reste \\(TF.money(left, currency))\")"
   ]
  },
  "Reste : %@": {
@@ -26358,13 +26371,13 @@
   "uses": [
    "Shared/Model/KindCatalog.swift:182: KindInfo(kind: .budgetLeft, title: tr(\"Reste du mois\"), summary: tr(\"L'argent qu'il te reste à dépenser ce mois-ci, et par jour.\"), category: .finance, symbol: \"creditcard\", isPremium: false, families",
    "Shared/Model/Templates.swift:124: WidgetTemplate(id: \"budget-light\", name: tr(\"Reste du mois\"), kind: .budgetLeft, themeID: .light, accentHex: \"2F8F7A\", isFeatured: true),",
-   "Shared/Render/Tiles/MoneyTiles.swift:48: var tile = Tile(title: tr(\"Reste du mois\"), symbol: \"creditcard\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:49: var tile = Tile(title: tr(\"Reste du mois\"), symbol: \"creditcard\")"
   ]
  },
  "Reste du mois : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:207: tile.detail = knowsBudget ? tr(\"Reste du mois : \\(TF.money(BudgetMath.remaining(state, at: now), currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:247: tile.detail = knowsBudget ? tr(\"Reste du mois : \\(TF.money(BudgetMath.remaining(state, at: now), currency))\")"
   ]
  },
  "Reste du mois et épargne": {
@@ -26382,7 +26395,7 @@
  "Reste du mois, dépenses, épargne et factures réunies.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:265: KindInfo(kind: .moneyDashboard, title: tr(\"Tableau argent\"), summary: tr(\"Reste du mois, dépenses, épargne et factures réunies.\"), category: .dashboards, symbol: \"dollarsign.circle\", isPremium: true, "
+   "Shared/Model/KindCatalog.swift:266: KindInfo(kind: .moneyDashboard, title: tr(\"Tableau argent\"), summary: tr(\"Reste du mois, dépenses, épargne et factures réunies.\"), category: .dashboards, symbol: \"dollarsign.circle\", isPremium: true, "
   ]
  },
  "Reste du mois, factures, épargne et abonnements.": {
@@ -26641,6 +26654,12 @@
    "Shared/Render/Tiles/BusinessTiles.swift:233: tile.detail = company.latestRevenue.map { tr(\"Revenus \\($0.label) : \\(BigNumber.compact($0.value))\") }"
   ]
  },
+ "Revenus %@ · Dépenses %@": {
+  "placeholders": 2,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:172: tile.detail = tr(\"Revenus \\(TF.money(earned, currency)) · Dépenses \\(TF.money(spent, currency))\")"
+  ]
+ },
  "Revenus annuels": {
   "placeholders": 0,
   "uses": [
@@ -26672,14 +26691,14 @@
  "Revenus trimestriels": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:218: KindInfo(kind: .companyRevenue, title: tr(\"Revenus trimestriels\"), summary: tr(\"Les revenus trimestriels d'une société, en barres.\"), category: .markets, symbol: \"chart.bar.fill\", isPremium: true, fam",
+   "Shared/Model/KindCatalog.swift:219: KindInfo(kind: .companyRevenue, title: tr(\"Revenus trimestriels\"), summary: tr(\"Les revenus trimestriels d'une société, en barres.\"), category: .markets, symbol: \"chart.bar.fill\", isPremium: true, fam",
    "Shared/Render/Tiles/BusinessTiles.swift:195: return .empty(tr(\"Revenus trimestriels\"), symbol: \"chart.bar.fill\", message: offline, emptySymbol: \"wifi.slash\")"
   ]
  },
  "Revenus, bénéfice, marge et croissance d'une société cotée.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:217: KindInfo(kind: .companySnapshot, title: tr(\"Fiche entreprise\"), summary: tr(\"Revenus, bénéfice, marge et croissance d'une société cotée.\"), category: .markets, symbol: \"building.2\", isPremium: true, f"
+   "Shared/Model/KindCatalog.swift:218: KindInfo(kind: .companySnapshot, title: tr(\"Fiche entreprise\"), summary: tr(\"Revenus, bénéfice, marge et croissance d'une société cotée.\"), category: .markets, symbol: \"building.2\", isPremium: true, f"
   ]
  },
  "Reviens au centre puis tourne de l'autre côté.": {
@@ -27408,9 +27427,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:96: StudioGroup(title: tr(\"Répartition\"), detail: \"\\(segments.count)\") {",
-   "Shared/Model/KindCatalog.swift:196: KindInfo(kind: .allocation, title: tr(\"Répartition\"), summary: tr(\"La part de chaque type de placement dans ton portefeuille.\"), category: .investing, symbol: \"chart.pie\", isPremium: true, families: S",
-   "Shared/Render/Tiles/MoneyTiles.swift:265: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\"))",
-   "Shared/Render/Tiles/MoneyTiles.swift:267: var tile = Tile(title: tr(\"Répartition\"), symbol: \"chart.pie\")"
+   "Shared/Model/KindCatalog.swift:197: KindInfo(kind: .allocation, title: tr(\"Répartition\"), summary: tr(\"La part de chaque type de placement dans ton portefeuille.\"), category: .investing, symbol: \"chart.pie\", isPremium: true, families: S",
+   "Shared/Render/Tiles/MoneyTiles.swift:305: return .empty(tr(\"Répartition\"), symbol: \"chart.pie\", message: tr(\"Ajoute tes placements dans Ardane, espace Placements.\"))",
+   "Shared/Render/Tiles/MoneyTiles.swift:307: var tile = Tile(title: tr(\"Répartition\"), symbol: \"chart.pie\")"
   ]
  },
  "Répartition des calories": {
@@ -27532,7 +27551,7 @@
  "Résumé intelligent": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:267: KindInfo(kind: .aiSummary, title: tr(\"Résumé intelligent\"), summary: tr(\"Ta journée résumée en deux phrases, à partir de tes vraies données.\"), category: .dashboards, symbol: \"sparkles\", isPremium: tr",
+   "Shared/Model/KindCatalog.swift:268: KindInfo(kind: .aiSummary, title: tr(\"Résumé intelligent\"), summary: tr(\"Ta journée résumée en deux phrases, à partir de tes vraies données.\"), category: .dashboards, symbol: \"sparkles\", isPremium: tr",
    "Shared/Model/Templates.swift:126: WidgetTemplate(id: \"ai-typo\", name: tr(\"Résumé intelligent\"), kind: .aiSummary, themeID: .typography, accentHex: \"8C6CFF\"),"
   ]
  },
@@ -27858,13 +27877,19 @@
  "Sans prix : compté au prix payé": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:254: tile.footnote = [tile.footnote, tr(\"Sans prix : compté au prix payé\")].compactMap { $0 }.joined(separator: \" · \")"
+   "Shared/Render/Tiles/MoneyTiles.swift:294: tile.footnote = [tile.footnote, tr(\"Sans prix : compté au prix payé\")].compactMap { $0 }.joined(separator: \" · \")"
   ]
  },
  "Sans raccourci à créer": {
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApplePay.swift:229: Text(isOn ? tr(\"Activé\") : tr(\"Sans raccourci à créer\"))"
+  ]
+ },
+ "Sans solde de départ, le calcul part de zéro au début du mois.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:180: tile.footnote = tr(\"Sans solde de départ, le calcul part de zéro au début du mois.\")"
   ]
  },
  "Sans solde de départ, le mois part de 0 : tes revenus moins tes dépenses, factures et montants fixes compris.": {
@@ -28171,7 +28196,7 @@
  "Sem. dernière : %@ (%@)": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:167: tile.detail = tr(\"Sem. dernière : \\(Units.loadText(kilograms: lastWeek, in: system, digits: 0)) (\\(Fmt.signedPercent(change * 100, decimals: 0)))\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:168: tile.detail = tr(\"Sem. dernière : \\(Units.loadText(kilograms: lastWeek, in: system, digits: 0)) (\\(Fmt.signedPercent(change * 100, decimals: 0)))\")"
   ]
  },
  "Semaine": {
@@ -28206,7 +28231,7 @@
  "Semaine : %@ kcal": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:223: tile.detail = tr(\"Semaine : \\(TF.int(week.reduce(0, +))) kcal\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:224: tile.detail = tr(\"Semaine : \\(TF.int(week.reduce(0, +))) kcal\")"
   ]
  },
  "Semaine d'habitudes": {
@@ -28631,6 +28656,12 @@
    "App/Screens/Spaces/BudgetSpace.swift:440: NumberRow(title: tr(\"Solde\"), value: $account.balance, unit: model.settings.currencyCode)"
   ]
  },
+ "Solde %@": {
+  "placeholders": 1,
+  "uses": [
+   "Shared/Render/Tiles/MoneyTiles.swift:183: tile.inline = tr(\"Solde \\(signed(current))\")"
+  ]
+ },
  "Solde après chaque opération": {
   "placeholders": 0,
   "uses": [
@@ -28985,7 +29016,7 @@
  "Store": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:311: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }",
+   "App/ArdaneApp.swift:312: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }",
    "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
    "App/Core/MarketingShots.swift:813: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
    "App/Screens/Explore/ExploreView.swift:133: .navigationTitle(tr(\"Store\"))"
@@ -29771,7 +29802,7 @@
  "Séance, régularité, calories et protéines réunies.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:264: KindInfo(kind: .fitnessDashboard, title: tr(\"Tableau fitness\"), summary: tr(\"Séance, régularité, calories et protéines réunies.\"), category: .dashboards, symbol: \"figure.run\", isPremium: true, familie"
+   "Shared/Model/KindCatalog.swift:265: KindInfo(kind: .fitnessDashboard, title: tr(\"Tableau fitness\"), summary: tr(\"Séance, régularité, calories et protéines réunies.\"), category: .dashboards, symbol: \"figure.run\", isPremium: true, familie"
   ]
  },
  "Séance, séries, records et calories, en bleu, rouge et or.": {
@@ -29891,7 +29922,7 @@
   "placeholders": 3,
   "uses": [
    "App/Screens/Spaces/FitnessSpace.swift:16: Text(tr(\"Série \\(active.setIndex + 1)/\\(exercise.sets) · \\(FitnessTiles.setText(exercise, system: model.settings.unitSystem))\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:180: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:191: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
   ]
  },
  "Série %@/%@ · %@ × %@": {
@@ -29903,7 +29934,7 @@
  "Série : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:209: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:210: tile.detail = streak > 0 ? tr(\"Série : \\(Fmt.plural(streak, tr(\"semaine\"), tr(\"semaines\")))\") : tr(\"Objectif : \\(goal) par semaine\")"
   ]
  },
  "Série attendue": {
@@ -30012,7 +30043,7 @@
  "Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:254: KindInfo(kind: .fuelStats, title: tr(\"Carburant\"), summary: tr(\"Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.\"), category: .car, symbol: \"fuelpump\", isPremium: true, fami"
+   "Shared/Model/KindCatalog.swift:255: KindInfo(kind: .fuelStats, title: tr(\"Carburant\"), summary: tr(\"Ta consommation moyenne, ton dernier prix au litre et le coût au kilomètre.\"), category: .car, symbol: \"fuelpump\", isPremium: true, fami"
   ]
  },
  "Ta couleur en dégradé vif": {
@@ -30084,7 +30115,7 @@
  "Ta journée résumée en deux phrases, à partir de tes vraies données.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:267: KindInfo(kind: .aiSummary, title: tr(\"Résumé intelligent\"), summary: tr(\"Ta journée résumée en deux phrases, à partir de tes vraies données.\"), category: .dashboards, symbol: \"sparkles\", isPremium: tr"
+   "Shared/Model/KindCatalog.swift:268: KindInfo(kind: .aiSummary, title: tr(\"Résumé intelligent\"), summary: tr(\"Ta journée résumée en deux phrases, à partir de tes vraies données.\"), category: .dashboards, symbol: \"sparkles\", isPremium: tr"
   ]
  },
  "Ta journée,\nen un écran.": {
@@ -30096,7 +30127,7 @@
  "Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:233: KindInfo(kind: .timetable, title: tr(\"Horaire\"), summary: tr(\"Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.\"), category: .student, symbol: \"list.bullet.rectangle.portrait\", i"
+   "Shared/Model/KindCatalog.swift:234: KindInfo(kind: .timetable, title: tr(\"Horaire\"), summary: tr(\"Ta journée, et toute ta semaine en grand : cours, travail, rendez-vous.\"), category: .student, symbol: \"list.bullet.rectangle.portrait\", i"
   ]
  },
  "Ta liste de suivi, ta plus forte variation et ta répartition.": {
@@ -30132,7 +30163,7 @@
  "Ta moyenne générale pondérée et celle de chaque cours.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:229: KindInfo(kind: .gradeAverage, title: tr(\"Moyenne\"), summary: tr(\"Ta moyenne générale pondérée et celle de chaque cours.\"), category: .student, symbol: \"graduationcap\", isPremium: true, families: SML, "
+   "Shared/Model/KindCatalog.swift:230: KindInfo(kind: .gradeAverage, title: tr(\"Moyenne\"), summary: tr(\"Ta moyenne générale pondérée et celle de chaque cours.\"), category: .student, symbol: \"graduationcap\", isPremium: true, families: SML, "
   ]
  },
  "Ta note": {
@@ -30144,7 +30175,7 @@
  "Ta position : %@": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:285: tile.detail = tr(\"Ta position : \\(TF.money(mover.value, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:325: tile.detail = tr(\"Ta position : \\(TF.money(mover.value, currency))\")"
   ]
  },
  "Ta prochaine série, validée depuis l'écran d'accueil, avec le repos qui démarre.": {
@@ -30247,7 +30278,7 @@
  "Tableau argent": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:265: KindInfo(kind: .moneyDashboard, title: tr(\"Tableau argent\"), summary: tr(\"Reste du mois, dépenses, épargne et factures réunies.\"), category: .dashboards, symbol: \"dollarsign.circle\", isPremium: true, "
+   "Shared/Model/KindCatalog.swift:266: KindInfo(kind: .moneyDashboard, title: tr(\"Tableau argent\"), summary: tr(\"Reste du mois, dépenses, épargne et factures réunies.\"), category: .dashboards, symbol: \"dollarsign.circle\", isPremium: true, "
   ]
  },
  "Tableau de bord": {
@@ -30260,13 +30291,13 @@
  "Tableau de bord business": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:211: KindInfo(kind: .businessDashboard, title: tr(\"Tableau de bord business\"), summary: tr(\"Les chiffres clés de ton entreprise sur un seul widget.\"), category: .business, symbol: \"rectangle.3.group\", isPr"
+   "Shared/Model/KindCatalog.swift:212: KindInfo(kind: .businessDashboard, title: tr(\"Tableau de bord business\"), summary: tr(\"Les chiffres clés de ton entreprise sur un seul widget.\"), category: .business, symbol: \"rectangle.3.group\", isPr"
   ]
  },
  "Tableau fitness": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:264: KindInfo(kind: .fitnessDashboard, title: tr(\"Tableau fitness\"), summary: tr(\"Séance, régularité, calories et protéines réunies.\"), category: .dashboards, symbol: \"figure.run\", isPremium: true, familie",
+   "Shared/Model/KindCatalog.swift:265: KindInfo(kind: .fitnessDashboard, title: tr(\"Tableau fitness\"), summary: tr(\"Séance, régularité, calories et protéines réunies.\"), category: .dashboards, symbol: \"figure.run\", isPremium: true, familie",
    "Shared/Render/Tiles/DashboardTiles.swift:178: guard !state.routines.isEmpty else { return .empty(tr(\"Tableau fitness\"), symbol: \"figure.run\", message: FitnessTiles.hint) }"
   ]
  },
@@ -30279,7 +30310,7 @@
  "Tableau études": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:266: KindInfo(kind: .studentDashboard, title: tr(\"Tableau études\"), summary: tr(\"Prochain cours, examen, devoirs et heures d'étude réunis.\"), category: .dashboards, symbol: \"graduationcap.circle\", isPremiu",
+   "Shared/Model/KindCatalog.swift:267: KindInfo(kind: .studentDashboard, title: tr(\"Tableau études\"), summary: tr(\"Prochain cours, examen, devoirs et heures d'étude réunis.\"), category: .dashboards, symbol: \"graduationcap.circle\", isPremiu",
    "Shared/Render/Tiles/DashboardTiles.swift:244: guard !state.courses.isEmpty || !state.exams.isEmpty else { return .empty(tr(\"Tableau études\"), symbol: \"graduationcap.circle\", message: StudentTiles.hint) }"
   ]
  },
@@ -30726,7 +30757,7 @@
  "Tes devoirs à rendre, par échéance.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:228: KindInfo(kind: .assignments, title: tr(\"Devoirs\"), summary: tr(\"Tes devoirs à rendre, par échéance.\"), category: .student, symbol: \"doc.text\", isPremium: true, families: SML + [rect], keywords: [\"devo"
+   "Shared/Model/KindCatalog.swift:229: KindInfo(kind: .assignments, title: tr(\"Devoirs\"), summary: tr(\"Tes devoirs à rendre, par échéance.\"), category: .student, symbol: \"doc.text\", isPremium: true, families: SML + [rect], keywords: [\"devo"
   ]
  },
  "Tes données": {
@@ -30758,13 +30789,13 @@
  "Tes dépenses comparées à la semaine dernière.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:269: KindInfo(kind: .aiFinance, title: tr(\"Analyse des dépenses\"), summary: tr(\"Tes dépenses comparées à la semaine dernière.\"), category: .dashboards, symbol: \"sparkle.magnifyingglass\", isPremium: true, f"
+   "Shared/Model/KindCatalog.swift:270: KindInfo(kind: .aiFinance, title: tr(\"Analyse des dépenses\"), summary: tr(\"Tes dépenses comparées à la semaine dernière.\"), category: .dashboards, symbol: \"sparkle.magnifyingglass\", isPremium: true, f"
   ]
  },
  "Tes dépenses habituelles, notées d'une touche.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:188: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: false, families: SM,"
+   "Shared/Model/KindCatalog.swift:189: KindInfo(kind: .quickExpense, title: tr(\"Dépense rapide\"), summary: tr(\"Tes dépenses habituelles, notées d'une touche.\"), category: .finance, symbol: \"cart.badge.plus\", isPremium: false, families: SM,"
   ]
  },
  "Tes dépenses, ce qu'il reste et ton épargne.": {
@@ -30824,7 +30855,7 @@
  "Tes heures d'étude de la semaine face à ton objectif.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:232: KindInfo(kind: .studyHours, title: tr(\"Heures d'étude\"), summary: tr(\"Tes heures d'étude de la semaine face à ton objectif.\"), category: .student, symbol: \"clock.badge.checkmark\", isPremium: true, fam"
+   "Shared/Model/KindCatalog.swift:233: KindInfo(kind: .studyHours, title: tr(\"Heures d'étude\"), summary: tr(\"Tes heures d'étude de la semaine face à ton objectif.\"), category: .student, symbol: \"clock.badge.checkmark\", isPremium: true, fam"
   ]
  },
  "Tes heures de concentration de la semaine, par rapport à ton objectif.": {
@@ -30908,7 +30939,7 @@
  "Tes prochaines factures et leurs échéances.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:184: KindInfo(kind: .billsUpcoming, title: tr(\"Factures à venir\"), summary: tr(\"Tes prochaines factures et leurs échéances.\"), category: .finance, symbol: \"doc.text\", isPremium: true, families: SML + [rect"
+   "Shared/Model/KindCatalog.swift:185: KindInfo(kind: .billsUpcoming, title: tr(\"Factures à venir\"), summary: tr(\"Tes prochaines factures et leurs échéances.\"), category: .finance, symbol: \"doc.text\", isPremium: true, families: SML + [rect"
   ]
  },
  "Tes prochains examens.": {
@@ -30944,7 +30975,7 @@
  "Tes records apparaîtront après ta première séance.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:176: guard let best = records.first else { return .empty(tr(\"Records\"), symbol: \"trophy.fill\", message: tr(\"Tes records apparaîtront après ta première séance.\")) }"
+   "Shared/Render/Tiles/FitnessTiles.swift:177: guard let best = records.first else { return .empty(tr(\"Records\"), symbol: \"trophy.fill\", message: tr(\"Tes records apparaîtront après ta première séance.\")) }"
   ]
  },
  "Tes records et le volume de la semaine.": {
@@ -30998,7 +31029,7 @@
  "Tes tendances de concentration, d'habitudes et de tâches.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:270: KindInfo(kind: .aiProductivity, title: tr(\"Analyse productivité\"), summary: tr(\"Tes tendances de concentration, d'habitudes et de tâches.\"), category: .dashboards, symbol: \"chart.line.text.clipboard\","
+   "Shared/Model/KindCatalog.swift:271: KindInfo(kind: .aiProductivity, title: tr(\"Analyse productivité\"), summary: tr(\"Tes tendances de concentration, d'habitudes et de tâches.\"), category: .dashboards, symbol: \"chart.line.text.clipboard\","
   ]
  },
  "Tes thèmes": {
@@ -31530,19 +31561,19 @@
  "Ton chiffre d'affaires du mois face à ton objectif.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:205: KindInfo(kind: .revenueGoal, title: tr(\"Objectif du mois\"), summary: tr(\"Ton chiffre d'affaires du mois face à ton objectif.\"), category: .business, symbol: \"target\", isPremium: false, families: SM + "
+   "Shared/Model/KindCatalog.swift:206: KindInfo(kind: .revenueGoal, title: tr(\"Objectif du mois\"), summary: tr(\"Ton chiffre d'affaires du mois face à ton objectif.\"), category: .business, symbol: \"target\", isPremium: false, families: SM + "
   ]
  },
  "Ton chiffre d'affaires jour par jour, avec la semaine et le mois.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:206: KindInfo(kind: .revenueTrend, title: tr(\"Ventes sur 30 jours\"), summary: tr(\"Ton chiffre d'affaires jour par jour, avec la semaine et le mois.\"), category: .business, symbol: \"chart.xyaxis.line\", isPr"
+   "Shared/Model/KindCatalog.swift:207: KindInfo(kind: .revenueTrend, title: tr(\"Ventes sur 30 jours\"), summary: tr(\"Ton chiffre d'affaires jour par jour, avec la semaine et le mois.\"), category: .business, symbol: \"chart.xyaxis.line\", isPr"
   ]
  },
  "Ton compteur et les kilomètres parcourus ce mois-ci.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:253: KindInfo(kind: .mileage, title: tr(\"Kilométrage\"), summary: tr(\"Ton compteur et les kilomètres parcourus ce mois-ci.\"), category: .car, symbol: \"gauge.with.dots.needle.33percent\", isPremium: true, fam"
+   "Shared/Model/KindCatalog.swift:254: KindInfo(kind: .mileage, title: tr(\"Kilométrage\"), summary: tr(\"Ton compteur et les kilomètres parcourus ce mois-ci.\"), category: .car, symbol: \"gauge.with.dots.needle.33percent\", isPremium: true, fam"
   ]
  },
  "Ton emploi du temps de la semaine, en un coup d'œil.": {
@@ -31567,7 +31598,7 @@
  "Ton hôtel, son adresse et les dates d'arrivée et de départ.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:241: KindInfo(kind: .hotel, title: tr(\"Hôtel\"), summary: tr(\"Ton hôtel, son adresse et les dates d'arrivée et de départ.\"), category: .travel, symbol: \"bed.double.fill\", isPremium: true, families: SM, keyw"
+   "Shared/Model/KindCatalog.swift:242: KindInfo(kind: .hotel, title: tr(\"Hôtel\"), summary: tr(\"Ton hôtel, son adresse et les dates d'arrivée et de départ.\"), category: .travel, symbol: \"bed.double.fill\", isPremium: true, families: SM, keyw"
   ]
  },
  "Ton kilométrage et les prochaines échéances.": {
@@ -31710,7 +31741,7 @@
  "Ton prochain cours ou événement, l'heure et la salle.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:226: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours ou événement, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM "
+   "Shared/Model/KindCatalog.swift:227: KindInfo(kind: .nextClass, title: tr(\"Prochain cours\"), summary: tr(\"Ton prochain cours ou événement, l'heure et la salle.\"), category: .student, symbol: \"book.closed\", isPremium: false, families: SM "
   ]
  },
  "Ton prochain voyage": {
@@ -31770,7 +31801,7 @@
  "Ton revenu récurrent, tes abonnés et ta croissance mensuelle.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:209: KindInfo(kind: .mrr, title: tr(\"MRR et ARR\"), summary: tr(\"Ton revenu récurrent, tes abonnés et ta croissance mensuelle.\"), category: .business, symbol: \"arrow.triangle.2.circlepath\", isPremium: true,"
+   "Shared/Model/KindCatalog.swift:210: KindInfo(kind: .mrr, title: tr(\"MRR et ARR\"), summary: tr(\"Ton revenu récurrent, tes abonnés et ta croissance mensuelle.\"), category: .business, symbol: \"arrow.triangle.2.circlepath\", isPremium: true,"
   ]
  },
  "Ton rythme": {
@@ -31795,7 +31826,7 @@
  "Ton vol : heure de départ, terminal, porte et compte à rebours.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:240: KindInfo(kind: .flight, title: tr(\"Vol\"), summary: tr(\"Ton vol : heure de départ, terminal, porte et compte à rebours.\"), category: .travel, symbol: \"airplane\", isPremium: true, families: SM + [rect],"
+   "Shared/Model/KindCatalog.swift:241: KindInfo(kind: .flight, title: tr(\"Vol\"), summary: tr(\"Ton vol : heure de départ, terminal, porte et compte à rebours.\"), category: .travel, symbol: \"airplane\", isPremium: true, families: SM + [rect],"
   ]
  },
  "Ton vol et ton hôtel, côte à côte.": {
@@ -31941,7 +31972,7 @@
  "Touche pour démarrer « %@ »": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:115: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\")) »\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:116: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\")) »\")"
   ]
  },
  "Touche pour l'autoriser dans Ardane": {
@@ -32414,6 +32445,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Spaces/StudentSpace.swift:360: Button(tr(\"Toute la série\")) {"
+  ]
+ },
+ "Toute ta séance du jour : ses exercices, ta progression, et un bouton pour la lancer.": {
+  "placeholders": 0,
+  "uses": [
+   "Shared/Model/KindCatalog.swift:168: KindInfo(kind: .todaysWorkout, title: tr(\"Séance du jour\"), summary: tr(\"Toute ta séance du jour : ses exercices, ta progression, et un bouton pour la lancer.\"), category: .fitness, symbol: \"figure.st"
   ]
  },
  "Toutes": {
@@ -33061,7 +33098,7 @@
  "Un widget qui change selon le moment : agenda le matin, tâches et focus la journée, bilan le soir.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:262: KindInfo(kind: .now, title: tr(\"Maintenant\"), summary: tr(\"Un widget qui change selon le moment : agenda le matin, tâches et focus la journée, bilan le soir.\"), category: .dashboards, symbol: \"wand.an"
+   "Shared/Model/KindCatalog.swift:263: KindInfo(kind: .now, title: tr(\"Maintenant\"), summary: tr(\"Un widget qui change selon le moment : agenda le matin, tâches et focus la journée, bilan le soir.\"), category: .dashboards, symbol: \"wand.an"
   ]
  },
  "Un widget réunit des widgets du même espace.": {
@@ -33117,7 +33154,7 @@
  "Une fiche à retourner depuis l'écran d'accueil, avec répétition espacée.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:231: KindInfo(kind: .flashcard, title: tr(\"Fiche de révision\"), summary: tr(\"Une fiche à retourner depuis l'écran d'accueil, avec répétition espacée.\"), category: .student, symbol: \"rectangle.on.rectangle."
+   "Shared/Model/KindCatalog.swift:232: KindInfo(kind: .flashcard, title: tr(\"Fiche de révision\"), summary: tr(\"Une fiche à retourner depuis l'écran d'accueil, avec répétition espacée.\"), category: .student, symbol: \"rectangle.on.rectangle."
   ]
  },
  "Une fiche à réviser et l'avancement de ta session.": {
@@ -33196,7 +33233,7 @@
  "Une phrase qui t'inspire, avec ta typographie et tes couleurs.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:273: KindInfo(kind: .quote, title: tr(\"Citation\"), summary: tr(\"Une phrase qui t'inspire, avec ta typographie et tes couleurs.\"), category: .memories, symbol: \"quote.opening\", isPremium: false, families: S"
+   "Shared/Model/KindCatalog.swift:274: KindInfo(kind: .quote, title: tr(\"Citation\"), summary: tr(\"Une phrase qui t'inspire, avec ta typographie et tes couleurs.\"), category: .memories, symbol: \"quote.opening\", isPremium: false, families: S"
   ]
  },
  "Une première habitude à suivre.": {
@@ -33259,7 +33296,7 @@
  "Une à quatre de tes photos, cadrées comme tu veux.": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:272: KindInfo(kind: .photos, title: tr(\"Photos\"), summary: tr(\"Une à quatre de tes photos, cadrées comme tu veux.\"), category: .memories, symbol: \"photo.on.rectangle.angled\", isPremium: false, families: SM"
+   "Shared/Model/KindCatalog.swift:273: KindInfo(kind: .photos, title: tr(\"Photos\"), summary: tr(\"Une à quatre de tes photos, cadrées comme tu veux.\"), category: .memories, symbol: \"photo.on.rectangle.angled\", isPremium: false, families: SM"
   ]
  },
  "Une échéance faite quitte la liste de ce qui arrive.": {
@@ -33361,7 +33398,7 @@
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesPages.swift:978: .accessibilityLabel(tr(\"Valeur nette\"))",
    "App/Screens/Spaces/BudgetSpace.swift:160: ValueRow(title: tr(\"Valeur nette\"), value: TF.money(BudgetMath.netWorth(state), currency), symbol: \"sum\")",
-   "Shared/Model/KindCatalog.swift:186: KindInfo(kind: .netWorth, title: tr(\"Valeur nette\"), summary: tr(\"Ce que tu possèdes moins ce que tu dois, et son évolution.\"), category: .finance, symbol: \"building.columns\", isPremium: true, familie",
+   "Shared/Model/KindCatalog.swift:187: KindInfo(kind: .netWorth, title: tr(\"Valeur nette\"), summary: tr(\"Ce que tu possèdes moins ce que tu dois, et son évolution.\"), category: .finance, symbol: \"building.columns\", isPremium: true, familie",
    "Shared/Render/Tiles/DashboardTiles.swift:234: rows.append(TileRow(id: \"worth\", title: tr(\"Valeur nette\"), value: TF.money(BudgetMath.netWorth(state), currency), symbol: \"building.columns\"))"
   ]
  },
@@ -33369,7 +33406,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Finances/FinancesApp.swift:590: detail: state.accounts.isEmpty ? tr(\"Objectifs et valeur nette\") : tr(\"Valeur nette \\(TF.money(BudgetMath.netWorth(state), currency))\"))",
-   "Shared/Render/Tiles/MoneyTiles.swift:143: tile.inline = tr(\"Valeur nette \\(TF.money(worth, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:144: tile.inline = tr(\"Valeur nette \\(TF.money(worth, currency))\")"
   ]
  },
  "Valeur principale": {
@@ -33400,7 +33437,7 @@
  "Valide une série pour lancer le repos": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:147: tile.caption = tr(\"Valide une série pour lancer le repos\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:148: tile.caption = tr(\"Valide une série pour lancer le repos\")"
   ]
  },
  "Valider %@": {
@@ -33501,7 +33538,7 @@
  "Ventes du jour": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:210: KindInfo(kind: .revenueToday, title: tr(\"Ventes du jour\"), summary: tr(\"Le chiffre d'affaires du jour comparé au même jour la semaine dernière.\"), category: .business, symbol: \"cart\", isPremium: true,",
+   "Shared/Model/KindCatalog.swift:211: KindInfo(kind: .revenueToday, title: tr(\"Ventes du jour\"), summary: tr(\"Le chiffre d'affaires du jour comparé au même jour la semaine dernière.\"), category: .business, symbol: \"cart\", isPremium: true,",
    "Shared/Render/Tiles/BusinessTiles.swift:125: var tile = Tile(title: tr(\"Ventes du jour\"), symbol: \"cart\")"
   ]
  },
@@ -33533,7 +33570,7 @@
  "Ventes sur 30 jours": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/KindCatalog.swift:206: KindInfo(kind: .revenueTrend, title: tr(\"Ventes sur 30 jours\"), summary: tr(\"Ton chiffre d'affaires jour par jour, avec la semaine et le mois.\"), category: .business, symbol: \"chart.xyaxis.line\", isPr",
+   "Shared/Model/KindCatalog.swift:207: KindInfo(kind: .revenueTrend, title: tr(\"Ventes sur 30 jours\"), summary: tr(\"Ton chiffre d'affaires jour par jour, avec la semaine et le mois.\"), category: .business, symbol: \"chart.xyaxis.line\", isPr",
    "Shared/Render/Tiles/BusinessTiles.swift:59: var tile = Tile(title: tr(\"Ventes sur 30 jours\"), symbol: \"chart.xyaxis.line\")"
   ]
  },
@@ -33982,7 +34019,7 @@
    "App/Screens/MiniApps/Travel/TravelApp.swift:127: Button(tr(\"Vol\")) { sheet = .flight(Flight(number: \"\", from: \"\", to: \"\", departure: trip.start)) }",
    "App/Screens/MiniApps/Travel/TravelPages.swift:20: addButton(tr(\"Vol\"), symbol: \"airplane\") { sheet = .flight(Flight(number: \"\", from: \"\", to: \"\", departure: trip.start)) }",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:204: SheetForm(title: tr(\"Vol\"), canSave: !flight.number.trimmed.isEmpty && (flight.arrival.map { $0 > flight.departure } ?? true), onSave: save) {",
-   "Shared/Model/KindCatalog.swift:240: KindInfo(kind: .flight, title: tr(\"Vol\"), summary: tr(\"Ton vol : heure de départ, terminal, porte et compte à rebours.\"), category: .travel, symbol: \"airplane\", isPremium: true, families: SM + [rect],"
+   "Shared/Model/KindCatalog.swift:241: KindInfo(kind: .flight, title: tr(\"Vol\"), summary: tr(\"Ton vol : heure de départ, terminal, porte et compte à rebours.\"), category: .travel, symbol: \"airplane\", isPremium: true, families: SM + [rect],"
   ]
  },
  "Vol %@": {
@@ -34309,13 +34346,13 @@
  "abonnement": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:185: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:225: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
   ]
  },
  "abonnements": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:185: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:225: tile.caption = tr(\"\\(Fmt.plural(subs.count, tr(\"abonnement\"), tr(\"abonnements\"))) · \\(TF.money(monthly * 12, currency))/an\")"
   ]
  },
  "abonné": {
@@ -34351,7 +34388,7 @@
  "actifs moins dettes": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:137: tile.caption = tr(\"actifs moins dettes\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:138: tile.caption = tr(\"actifs moins dettes\")"
   ]
  },
  "ajoute ton poids dans « Mes informations »": {
@@ -34460,7 +34497,7 @@
  "au-dessus du budget": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:51: tile.caption = remaining >= 0 ? tr(\"soit \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour\") : tr(\"au-dessus du budget\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:52: tile.caption = remaining >= 0 ? tr(\"soit \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour\") : tr(\"au-dessus du budget\")"
   ]
  },
  "aucun": {
@@ -34598,7 +34635,7 @@
  "capitalisation · %@ sur 24 h": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:329: tile.caption = tr(\"capitalisation · \\(move) sur 24 h\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:369: tile.caption = tr(\"capitalisation · \\(move) sur 24 h\")"
   ]
  },
  "ce mois-ci": {
@@ -34988,7 +35025,7 @@
  "dépensé aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:200: tile.caption = tr(\"dépensé aujourd'hui\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:240: tile.caption = tr(\"dépensé aujourd'hui\")"
   ]
  },
  "dépensés": {
@@ -35001,7 +35038,7 @@
  "dépensés ce mois-ci": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:37: tile.caption = tr(\"dépensés ce mois-ci\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:38: tile.caption = tr(\"dépensés ce mois-ci\")"
   ]
  },
  "dépensés ce mois-ci · budget à définir": {
@@ -35013,7 +35050,7 @@
  "en %@ · total %@": {
   "placeholders": 2,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:269: tile.caption = tr(\"en \\(largest.kind.title.lowercased()) · total \\(TF.money(total, currency))\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:309: tile.caption = tr(\"en \\(largest.kind.title.lowercased()) · total \\(TF.money(total, currency))\")"
   ]
  },
  "en 30 jours": {
@@ -35061,7 +35098,7 @@
  "estimées aujourd'hui": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:222: tile.caption = tr(\"estimées aujourd'hui\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:223: tile.caption = tr(\"estimées aujourd'hui\")"
   ]
  },
  "estimées d'après les pas": {
@@ -36175,7 +36212,7 @@
  "prix à renseigner": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:248: detail: position.isEstimated ? tr(\"prix à renseigner\") : position.change24h.map { PriceChange.text($0, position.period, arrow: false) },"
+   "Shared/Render/Tiles/MoneyTiles.swift:288: detail: position.isEstimated ? tr(\"prix à renseigner\") : position.change24h.map { PriceChange.text($0, position.period, arrow: false) },"
   ]
  },
  "prochain texte à minuit": {
@@ -36407,7 +36444,7 @@
  "soit %@ par jour": {
   "placeholders": 1,
   "uses": [
-   "Shared/Render/Tiles/MoneyTiles.swift:51: tile.caption = remaining >= 0 ? tr(\"soit \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour\") : tr(\"au-dessus du budget\")"
+   "Shared/Render/Tiles/MoneyTiles.swift:52: tile.caption = remaining >= 0 ? tr(\"soit \\(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour\") : tr(\"au-dessus du budget\")"
   ]
  },
  "solde %@": {
@@ -36425,7 +36462,7 @@
  "soulevés cette semaine": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:165: tile.caption = tr(\"soulevés cette semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:166: tile.caption = tr(\"soulevés cette semaine\")"
   ]
  },
  "sport": {
@@ -36446,7 +36483,7 @@
    "App/Screens/MiniApps/Finances/FinancesPages.swift:1130: MiniSectionTitle(title: tr(\"Moyenne par mois\"), detail: tr(\"sur \\(Fmt.plural(past.count, tr(\"mois complet\"), tr(\"mois complets\")))\"))",
    "App/Screens/MiniApps/Studies/StudiesApp.swift:222: MiniStat(title: tr(\"Étude\"), value: Fmt.minutes(studied), detail: tr(\"sur \\(Fmt.hours(state.weeklyStudyGoalHours))\"),",
    "App/Screens/MiniApps/Travel/TravelHybrid.swift:187: detail: overrun.map { tr(\"dépassé de \\(TF.money($0, currency))\") } ?? ((trip.budget ?? 0) > 0 ? tr(\"sur \\(TF.money(trip.budget ?? 0, currency))\") : nil),",
-   "Shared/Render/Tiles/MoneyTiles.swift:78: detail: limit > 0 ? tr(\"sur \\(TF.money(limit, currency))\") : nil,"
+   "Shared/Render/Tiles/MoneyTiles.swift:79: detail: limit > 0 ? tr(\"sur \\(TF.money(limit, currency))\") : nil,"
   ]
  },
  "sur %@ cette semaine": {
@@ -36498,7 +36535,7 @@
  "séance cette semaine": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:201: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:202: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")"
   ]
  },
  "séance faite": {
@@ -36520,8 +36557,8 @@
  "séances cette semaine": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:201: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")",
-   "Shared/Render/Tiles/FitnessTiles.swift:208: tile.caption = tr(\"séances cette semaine\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:202: tile.caption = count > 1 ? tr(\"séances cette semaine\") : tr(\"séance cette semaine\")",
+   "Shared/Render/Tiles/FitnessTiles.swift:209: tile.caption = tr(\"séances cette semaine\")"
   ]
  },
  "séances cette semaine · série %@": {
@@ -36574,13 +36611,13 @@
  "ta séance": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/FitnessTiles.swift:115: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\")) »\")"
+   "Shared/Render/Tiles/FitnessTiles.swift:116: tile.detail = tr(\"Touche pour démarrer « \\(state.routine(for: now)?.name ?? tr(\"ta séance\")) »\")"
   ]
  },
  "ta taille": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1258: if profile.heightCm == nil { missing.append(tr(\"ta taille\")) }"
+   "App/Core/AppModel.swift:1260: if profile.heightCm == nil { missing.append(tr(\"ta taille\")) }"
   ]
  },
  "terminée": {
@@ -36646,19 +36683,19 @@
  "ton genre": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1260: if profile.calculatorSex == nil { missing.append(tr(\"ton genre\")) }"
+   "App/Core/AppModel.swift:1262: if profile.calculatorSex == nil { missing.append(tr(\"ton genre\")) }"
   ]
  },
  "ton poids": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1259: if profile.weightKg == nil { missing.append(tr(\"ton poids\")) }"
+   "App/Core/AppModel.swift:1261: if profile.weightKg == nil { missing.append(tr(\"ton poids\")) }"
   ]
  },
  "ton âge": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AppModel.swift:1257: if age == nil { missing.append(tr(\"ton âge\")) }"
+   "App/Core/AppModel.swift:1259: if age == nil { missing.append(tr(\"ton âge\")) }"
   ]
  },
  "tout est prêt": {
@@ -37369,7 +37406,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:115: case .carDeadlines: tr(\"Échéances auto\")",
-   "Shared/Model/KindCatalog.swift:255: KindInfo(kind: .carDeadlines, title: tr(\"Échéances auto\"), summary: tr(\"Assurance, immatriculation, pneus : les prochaines dates à retenir.\"), category: .car, symbol: \"calendar.badge.exclamationmark\",",
+   "Shared/Model/KindCatalog.swift:256: KindInfo(kind: .carDeadlines, title: tr(\"Échéances auto\"), summary: tr(\"Assurance, immatriculation, pneus : les prochaines dates à retenir.\"), category: .car, symbol: \"calendar.badge.exclamationmark\",",
    "Shared/Render/Tiles/CarTiles.swift:130: return .empty(tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\", message: tr(\"Ajoute l'assurance, l'immatriculation ou les pneus dans Ardane, espace Auto.\"))",
    "Shared/Render/Tiles/CarTiles.swift:133: var tile = Tile(title: tr(\"Échéances auto\"), symbol: \"calendar.badge.exclamationmark\")"
   ]
@@ -37577,7 +37614,7 @@
    "App/Screens/MiniApps/Finances/FinancesPages.swift:910: .navigationTitle(tr(\"Épargne\"))",
    "App/Screens/Spaces/BudgetSpace.swift:116: Section(tr(\"Épargne\")) {",
    "Shared/Data/SampleData.swift:246: Account(name: tr(\"Épargne\"), balance: 6_400),",
-   "Shared/Render/Tiles/MoneyTiles.swift:105: return .empty(tr(\"Épargne\"), symbol: \"banknote\", message: tr(\"Crée un objectif d'épargne dans Ardane, espace Budget.\"))"
+   "Shared/Render/Tiles/MoneyTiles.swift:106: return .empty(tr(\"Épargne\"), symbol: \"banknote\", message: tr(\"Crée un objectif d'épargne dans Ardane, espace Budget.\"))"
   ]
  },
  "Épargne et comptes": {

@@ -85,7 +85,8 @@ struct TileView: View {
     private var showsIcon: Bool { !s.options.isHidden("icon") && s.iconStyle != .none }
 
     @ViewBuilder private var header: some View {
-        let button = context.allowsLinks ? tile.headerButton : nil
+        // A link (the Nutrition scanner) only where iOS allows links; an action (« Commencer » of « Séance du jour ») in every size.
+        let button = tile.headerButton.flatMap { $0.action == .scanFood && !context.allowsLinks ? nil : $0 }
         if s.showsTitle || button != nil {
             HStack(spacing: 5) {
                 if s.showsTitle {
