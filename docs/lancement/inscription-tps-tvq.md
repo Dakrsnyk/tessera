@@ -71,8 +71,10 @@ Le LM-1 rempli porte la mention « Protégé B » : ne l'envoyer à personne d'a
 
 - **2026-11-22 :** code clicSÉQUR Express du Registraire reçu (Mon bureau : NEQ + code de 8 caractères ; à garder, jamais dans ce dépôt). La banque exige le nom légal complet (tous les prénoms) au registre. Mon bureau ne permet de changer ni les prénoms (grisés dans la déclaration de mise à jour courante) ni l'unité de l'adresse (Postes Canada ne la propose pas) : correction à demander par téléphone au 1 800 644-0075, puis imprimer l'état de renseignements pour la banque. Appels prévus le 2026-11-23 (Registraire, puis Revenu Québec pour les numéros TPS/TVQ). La demande TPS/TVQ n'en dépend pas.
 
+- **2026-11-23 : numéros TPS et TVQ reçus** par l'utilisateur (gardés dans ses papiers, jamais dans ce dépôt). Prochaine étape : App Store Connect › Business › Tax Forms › Canada.
+
 ## Après
-- [ ] Noter les deux numéros dans tes papiers (pas dans ce dépôt) et garder les lettres.
+- [x] Noter les deux numéros dans tes papiers (pas dans ce dépôt) et garder les lettres (2026-11-23).
 - [ ] App Store Connect › Business › Tax Forms › Canada : saisir le numéro TPS puis le numéro TVQ ; télécharger la copie du FP-2506-V et du GST506.
 - [ ] Questions au CPA :
   - date d'effet à retenir ;
