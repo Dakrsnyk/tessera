@@ -73,6 +73,39 @@ enum CreateCategory: Hashable, Identifiable {
         }
     }
 
+    /// One look for every widget of the category (PDG, 2026-11-22): the same example style across a section, a
+    /// different one from a section to the next (no two categories share a theme and an accent). Free themes and
+    /// accents only, so the widget opened in the Studio is the one shown, with or without Premium.
+    var look: (theme: ThemeID, accentHex: String) {
+        switch self {
+        case .time: return (.minimal, "3366FF")
+        case .photos: return (.minimal, "F2588F")
+        case let .space(space):
+            switch space {
+            case .productivity: return (.monochrome, "6B7280")
+            case .habits: return (.forest, "7FA33A")
+            case .nutrition: return (.card, "F2A33A")
+            case .fitness: return (.dark, "FF6B57")
+            case .budget: return (.light, "2F8F7A")
+            case .investing: return (.modern, "8C6CFF")
+            case .business: return (.compact, "F2A33A")
+            case .markets: return (.modern, "3366FF")
+            case .student: return (.soft, "F2588F")
+            case .travel: return (.glacier, "3366FF")
+            case .car: return (.compact, "6B7280")
+            case .life: return (.soft, "8C6CFF")
+            }
+        }
+    }
+
+    /// A widget of a kind as this category shows it: its template, in the category's look.
+    func design(for kind: WidgetKind) -> WidgetDesign {
+        var design = SpaceCatalog.design(for: kind)
+        design.themeID = look.theme
+        design.accentHex = look.accentHex
+        return design
+    }
+
     /// The widgets that can go in a widget of this size (alone or with others).
     func kinds(for format: WidgetFormat) -> [WidgetKind] {
         kinds.filter { kind in
@@ -88,6 +121,8 @@ enum CreateCategory: Hashable, Identifiable {
 struct CreationDraft: Equatable {
     let format: WidgetFormat
     var picked: [WidgetKind] = []
+    /// The category the widgets are picked in: the widget made takes its look (nil: each kind's own template).
+    var category: CreateCategory?
 
     /// How many widgets the size holds: 1 in Petit, 2 in Moyen, 4 in Grand.
     var room: Int { Composer.widgetLimit(for: format) }
@@ -147,24 +182,25 @@ struct CreationDraft: Equatable {
     }
 
     /// The one widget this creation makes, or nil while the picks don't make one.
-    var design: WidgetDesign? { Self.design(for: picked, format: format) }
+    var design: WidgetDesign? { Self.design(for: picked, format: format, category: category) }
 
     /// One widget at the size: a widget alone in its layout for that size, or the widgets combined.
-    static func design(for kinds: [WidgetKind], format: WidgetFormat) -> WidgetDesign? {
+    static func design(for kinds: [WidgetKind], format: WidgetFormat, category: CreateCategory? = nil) -> WidgetDesign? {
+        let template = { (kind: WidgetKind) in category?.design(for: kind) ?? SpaceCatalog.design(for: kind) }
         switch Composer.plan(kinds, format: format) {
         case let .single(kind):
-            var design = SpaceCatalog.design(for: kind)
+            var design = template(kind)
             design.format = format
             return design
         case let .combo(slots):
-            let base = SpaceCatalog.design(for: slots[0].kind)
+            let base = template(slots[0].kind)
             var options = DesignOptions()
             options.parts = slots.map { slot in
-                let part = SpaceCatalog.design(for: slot.kind)
+                let part = template(slot.kind)
                 return ComboPart(kind: slot.kind, options: part.options, name: part.name, size: slot.size)
             }
             return WidgetDesign(
-                name: slots.map { SpaceCatalog.design(for: $0.kind).name }.joined(separator: " + "),
+                name: slots.map { template($0.kind).name }.joined(separator: " + "),
                 kind: slots[0].kind, themeID: base.themeID, accentHex: base.accentHex,
                 options: options, format: format
             )
@@ -514,7 +550,7 @@ private struct CreatePickPage: View {
     init(format: WidgetFormat, category: CreateCategory, onDone: @escaping (WidgetDesign) -> Void) {
         self.category = category
         self.onDone = onDone
-        _draft = State(initialValue: CreationDraft(format: format))
+        _draft = State(initialValue: CreationDraft(format: format, category: category))
     }
 
     var body: some View {
@@ -548,7 +584,7 @@ private struct CreatePickPage: View {
             Haptics.tap()
             pick(kind)
         } label: {
-            StudioKindTile(kind: kind, design: SpaceCatalog.design(for: kind), payload: model.previewPayload(for: SpaceCatalog.design(for: kind)),
+            StudioKindTile(kind: kind, design: category.design(for: kind), payload: model.previewPayload(for: category.design(for: kind)),
                            showsLock: kind.isPremium && !model.isPremium, refusal: refusal, isCurrent: number != nil)
                 .overlay(alignment: .topLeading) {
                     if let number {

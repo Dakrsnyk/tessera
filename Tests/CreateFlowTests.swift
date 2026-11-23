@@ -355,4 +355,25 @@ final class CreateSizeFirstFlowTests: XCTestCase {
         a.toggle(kind)
         XCTAssertNotEqual(a, b)
     }
+
+    /// Every widget of a category shows the same look, and no two categories share one; all free (PDG, 2026-11-22).
+    func testEachCategoryHasItsOwnFreeLook() {
+        let categories = CreateCategory.all(preferred: [])
+        var seen = Set<String>()
+        for category in categories {
+            let look = category.look
+            XCTAssertFalse(ThemeCatalog.theme(look.theme).isPremium, "\(category.id) : thème Premium")
+            XCTAssertTrue(Palette.freeAccents.contains { $0.hex == look.accentHex }, "\(category.id) : couleur Premium")
+            XCTAssertTrue(seen.insert("\(look.theme.rawValue)-\(look.accentHex)").inserted, "\(category.id) : même style qu'une autre catégorie")
+            for kind in category.kinds {
+                let design = category.design(for: kind)
+                XCTAssertEqual(design.themeID, look.theme, "\(kind.rawValue) dans \(category.id)")
+                XCTAssertEqual(design.accentHex, look.accentHex, "\(kind.rawValue) dans \(category.id)")
+            }
+        }
+        // The widget made from the picks keeps the category's look.
+        var draft = CreationDraft(format: .small, category: .space(.nutrition))
+        draft.toggle(.caloriesLeft)
+        XCTAssertEqual(draft.design?.themeID, CreateCategory.space(.nutrition).look.theme)
+    }
 }
