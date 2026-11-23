@@ -72,6 +72,7 @@ Le LM-1 rempli porte la mention « Protégé B » : ne l'envoyer à personne d'a
 - **2026-11-22 :** code clicSÉQUR Express du Registraire reçu (Mon bureau : NEQ + code de 8 caractères ; à garder, jamais dans ce dépôt). La banque exige le nom légal complet (tous les prénoms) au registre. Mon bureau ne permet de changer ni les prénoms (grisés dans la déclaration de mise à jour courante) ni l'unité de l'adresse (Postes Canada ne la propose pas) : correction à demander par téléphone au 1 800 644-0075, puis imprimer l'état de renseignements pour la banque. Appels prévus le 2026-11-23 (Registraire, puis Revenu Québec pour les numéros TPS/TVQ). La demande TPS/TVQ n'en dépend pas.
 
 - **2026-11-23 : numéros TPS et TVQ reçus** par l'utilisateur (gardés dans ses papiers, jamais dans ce dépôt). Prochaine étape : App Store Connect › Business › Tax Forms › Canada.
+- **Lettre de Revenu Québec (notée par l'utilisateur le 2026-11-23) :** date d'effet **2026-11-06** ; fin d'exercice **décembre** ; fréquence **mensuelle** (et non annuelle comme prévu). Conséquence : une déclaration TPS/TVQ **chaque mois, même à zéro**, au plus tard un mois après la fin de la période (première période du 6 au 30 novembre 2026 : échéance **2026-12-31**), par le service express « Déclaration de la TPS/TVH et de la TVQ » (clicSÉQUR Express) ou Mon dossier pour les entreprises. À demander à Revenu Québec ou au CPA : passer à la période **annuelle** (petit fournisseur).
 
 ## Après
 - [x] Noter les deux numéros dans tes papiers (pas dans ce dépôt) et garder les lettres (2026-11-23).
