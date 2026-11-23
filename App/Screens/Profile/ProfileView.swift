@@ -204,6 +204,9 @@ struct ProfileView: View {
                     Link(destination: PremiumConfiguration.termsURL) {
                         Label(tr("Conditions d'utilisation"), systemImage: "doc.text")
                     }
+                    Link(destination: PremiumConfiguration.creditsURL) {
+                        Label(tr("Crédits et licences"), systemImage: "text.book.closed")
+                    }
                 } header: {
                     Text(tr("À propos"))
                 } footer: {

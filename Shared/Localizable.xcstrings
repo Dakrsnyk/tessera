@@ -56213,53 +56213,6 @@
         }
       }
     },
-    "Changer d'unités": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einheiten ändern"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Change units"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cambiar de unidades"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Changer d'unités"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cambia unità"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "単位を切り替える"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mudar de unidades"
-          }
-        }
-      }
-    },
     "Changer de photo": {
       "extractionState": "manual",
       "localizations": {
@@ -72001,6 +71954,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Créditos"
+          }
+        }
+      }
+    },
+    "Crédits et licences": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credits und Lizenzen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Credits and licenses"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créditos y licencias"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crédits et licences"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Crediti e licenze"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クレジットとライセンス"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créditos e licenças"
           }
         }
       }
@@ -178037,53 +178037,6 @@
         }
       }
     },
-    "Pouces": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zoll"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Inches"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pulgadas"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pouces"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pollici"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "インチ"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Polegadas"
-          }
-        }
-      }
-    },
     "Pouces et index se touchent sous la poitrine.": {
       "extractionState": "manual",
       "localizations": {
@@ -260992,53 +260945,6 @@
         }
       }
     },
-    "ft": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ft"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ft"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ft"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ft"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ft"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ft"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ft"
-          }
-        }
-      }
-    },
     "ground beef": {
       "extractionState": "manual",
       "localizations": {
@@ -261928,53 +261834,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "há %@ min"
-          }
-        }
-      }
-    },
-    "in": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "in"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "in"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "in"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "in"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "in"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "in"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "in"
           }
         }
       }

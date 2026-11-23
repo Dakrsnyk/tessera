@@ -13,6 +13,8 @@ enum PremiumConfiguration {
     /// The terms page covers the subscriptions (trial, renewal, cancellation) and is the link of the App Store listing.
     static let termsURL = URL(string: "https://ardane.app/terms.html")!
     static let privacyURL = URL(string: "https://ardane.app/privacy.html")!
+    /// Credits and licenses: the data, models, training photos and bundled fonts (OFL and Apache texts in full).
+    static let creditsURL = URL(string: "https://ardane.app/credits.html")!
     static var supportEmail: String { AppInfo.supportEmail }
     /// The app's numeric App Store ID, once published (« Noter Ardane » then opens the review page).
     static let appStoreID: String? = nil

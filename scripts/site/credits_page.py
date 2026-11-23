@@ -4,7 +4,7 @@ It lists what Ardane uses under a license that asks for credit: the food data, t
 the photos of Quebec dishes the classifier learned from (CC BY: title, author, source, license, changes) and the
 fonts bundled in the app (SIL OFL 1.1 or Apache 2.0, full license texts on the page).
 
-    python3 scripts/site/credits_page.py [--photos <quebec_crops.csv>] [--attributions <attributions.csv>] [--out <credits.html>]
+    python3 scripts/site/credits_page.py [--with-photos] [--photos <quebec_crops.csv>] [--attributions <attributions.csv>] [--out <credits.html>]
 
 Inputs: `scripts/fonts/manifest.json`, `Shared/Model/FontCatalogBundled.swift` and `docs/legal/polices` (in this
 repository); the photo lists live outside it (`ardane-tools/ml/...`, defaults below). The page goes to the site's
@@ -45,32 +45,32 @@ T = {
         "title": "Crédits et licences d'Ardane",
         "sub": "Crédits et licences",
         "intro": "Ardane s'appuie sur des données, des modèles, des photos et des polices partagés librement par leurs auteurs. Cette page les remercie et donne les conditions de leurs licences.",
-        "data_h": "1. Données nutritives",
+        "data_h": "Données nutritives",
         "data": [
             ("Fichier canadien sur les éléments nutritifs (FCÉN)", "Santé Canada, 2026. Licence du gouvernement ouvert – Canada. Ardane n'est pas une version officielle du FCÉN, n'est pas affiliée à Santé Canada ni approuvée par lui.", "https://open.canada.ca/fr/licence-du-gouvernement-ouvert-canada"),
             ("USDA FoodData Central", "Département de l'Agriculture des États-Unis, Agricultural Research Service. Domaine public (CC0 1.0).", "https://fdc.nal.usda.gov"),
             ("Open Food Facts", "Contient des données d'Open Food Facts, disponibles sous la licence Open Database License (ODbL) ; contenu sous Database Contents License (DbCL). Données saisies par la communauté.", "https://world.openfoodfacts.org"),
         ],
-        "scan_h": "2. Reconnaissance des aliments",
+        "scan_h": "Reconnaissance des aliments",
         "scan_p": "Le scanner fonctionne sur ton iPhone avec des modèles entraînés par Ardane. Les données d'entraînement ne sont pas distribuées avec l'app.",
         "scan": [
             ("MyFoodRepo / AIcrowd Food Recognition Benchmark 2022", "Jeu de données du projet MyFoodRepo (myfoodrepo.org). Licence CC BY 4.0.", "https://creativecommons.org/licenses/by/4.0/"),
             ("DINOv2", "Meta Platforms, Inc. Code et poids sous licence Apache 2.0.", "https://github.com/facebookresearch/dinov2"),
             ("RF-DETR", "Roboflow, Inc. Code et poids sous licence Apache 2.0.", "https://github.com/roboflow/rf-detr"),
         ],
-        "photos_h": "3. Photos de plats québécois",
+        "photos_h": "Photos de plats québécois",
         "photos_p": "Pour reconnaître la poutine, la tourtière et le pâté chinois, le modèle a appris sur les photos ci-dessous, partagées sous licence Creative Commons ou versées au domaine public. Modifications : photos recadrées et réduites pour l'entraînement. Elles ne sont ni affichées ni distribuées dans l'app. Merci à leurs auteurs.",
         "photos_n": "{n} photos",
         "col_photo": "Photo", "col_author": "Auteur", "col_license": "Licence",
         "untitled": "Sans titre", "unknown": "Auteur inconnu",
-        "fonts_h": "4. Polices du Studio",
+        "fonts_h": "Polices du Studio",
         "fonts_p": "Les {n} polices proposées dans l'onglet « Texte » du Studio viennent de Google Fonts. Elles sont distribuées sous la SIL Open Font License 1.1 ou la licence Apache 2.0 ; les textes complets sont plus bas.",
         "col_font": "Police", "col_copyright": "Droits d'auteur",
         "apache_note": "Voir le texte de la licence Apache 2.0 plus bas.",
         "ofl_h": "Texte de la SIL Open Font License 1.1",
         "apache_h": "Texte de la licence Apache 2.0",
         "show": "Afficher",
-        "other_h": "5. Le reste",
+        "other_h": "Le reste",
         "other_p": "Les icônes de l'app sont les SF Symbols d'Apple, utilisés selon les conditions d'Apple. Le logo, les textes, les illustrations et le code d'Ardane appartiennent à leur éditeur. Une erreur ou un oubli dans ces crédits ? Écris à support.ardane@gmail.com : nous corrigeons au plus vite.",
         "nav_label": "Liens légaux",
         "nav": [("privacy.html#fr", "Politique de confidentialité"), ("terms.html#fr", "Conditions d'utilisation"), ("credits.html#fr", "Crédits"), ("support.html#fr", "Assistance")],
@@ -80,32 +80,32 @@ T = {
         "title": "Ardane credits and licenses",
         "sub": "Credits and licenses",
         "intro": "Ardane relies on data, models, photos and fonts freely shared by their authors. This page thanks them and gives the terms of their licenses.",
-        "data_h": "1. Nutrition data",
+        "data_h": "Nutrition data",
         "data": [
             ("Canadian Nutrient File (CNF)", "Health Canada, 2026. Open Government Licence – Canada. Ardane is not an official version of the CNF, and is not affiliated with or endorsed by Health Canada.", "https://open.canada.ca/en/open-government-licence-canada"),
             ("USDA FoodData Central", "U.S. Department of Agriculture, Agricultural Research Service. Public domain (CC0 1.0).", "https://fdc.nal.usda.gov"),
             ("Open Food Facts", "Contains data from Open Food Facts, made available under the Open Database License (ODbL); contents under the Database Contents License (DbCL). Data entered by the community.", "https://world.openfoodfacts.org"),
         ],
-        "scan_h": "2. Food recognition",
+        "scan_h": "Food recognition",
         "scan_p": "The scanner runs on your iPhone with models trained by Ardane. The training data is not distributed with the app.",
         "scan": [
             ("MyFoodRepo / AIcrowd Food Recognition Benchmark 2022", "Dataset of the MyFoodRepo project (myfoodrepo.org). CC BY 4.0 license.", "https://creativecommons.org/licenses/by/4.0/"),
             ("DINOv2", "Meta Platforms, Inc. Code and weights under the Apache 2.0 license.", "https://github.com/facebookresearch/dinov2"),
             ("RF-DETR", "Roboflow, Inc. Code and weights under the Apache 2.0 license.", "https://github.com/roboflow/rf-detr"),
         ],
-        "photos_h": "3. Photos of Quebec dishes",
+        "photos_h": "Photos of Quebec dishes",
         "photos_p": "To recognize poutine, tourtière and pâté chinois, the model learned from the photos below, shared under a Creative Commons license or dedicated to the public domain. Changes: photos cropped and resized for training. They are neither shown nor distributed in the app. Thanks to their authors.",
         "photos_n": "{n} photos",
         "col_photo": "Photo", "col_author": "Author", "col_license": "License",
         "untitled": "Untitled", "unknown": "Unknown author",
-        "fonts_h": "4. Studio fonts",
+        "fonts_h": "Studio fonts",
         "fonts_p": "The {n} fonts offered in the Studio's “Text” tab come from Google Fonts. They are distributed under the SIL Open Font License 1.1 or the Apache License 2.0; the full texts are below.",
         "col_font": "Font", "col_copyright": "Copyright",
         "apache_note": "See the text of the Apache License 2.0 below.",
         "ofl_h": "Text of the SIL Open Font License 1.1",
         "apache_h": "Text of the Apache License 2.0",
         "show": "Show",
-        "other_h": "5. Everything else",
+        "other_h": "Everything else",
         "other_p": "The app's icons are Apple's SF Symbols, used under Apple's terms. Ardane's logo, texts, illustrations and code belong to its publisher. An error or omission in these credits? Write to support.ardane@gmail.com and we will fix it quickly.",
         "nav_label": "Legal links",
         "nav": [("privacy.html#en", "Privacy policy"), ("terms.html#en", "Terms of use"), ("credits.html#en", "Credits"), ("support.html#en", "Support")],
@@ -194,13 +194,14 @@ def license_text(kind):
 
 def article(lang, photos, fonts, ofl, apache):
     t = T[lang]
+    number = iter(range(1, 10))
     out = [f'  <article id="{lang}" lang="{lang}"' + (" hidden>" if lang == "en" else ">")]
     out.append(f'    <p class="updated">{e(UPDATED[lang])}</p>')
     out.append(f'    <div class="summary"><p>{e(t["intro"])}</p></div>')
 
     def sources(title, items, para=None):
         out.append("    <section>")
-        out.append(f"      <h2>{e(title)}</h2>")
+        out.append(f"      <h2>{next(number)}. {e(title)}</h2>")
         if para:
             out.append(f"      <p>{e(para)}</p>")
         out.append('      <ul class="list">')
@@ -212,9 +213,10 @@ def article(lang, photos, fonts, ofl, apache):
     sources(t["data_h"], t["data"])
     sources(t["scan_h"], t["scan"], t["scan_p"])
 
-    out.append("    <section>")
-    out.append(f'      <h2>{e(t["photos_h"])}</h2>')
-    out.append(f'      <p>{e(t["photos_p"])}</p>')
+    if photos:
+        out.append("    <section>")
+        out.append(f'      <h2>{next(number)}. {e(t["photos_h"])}</h2>')
+        out.append(f'      <p>{e(t["photos_p"])}</p>')
     for dish, names in DISHES.items():
         rows = [p for p in photos if p["dish"] == dish]
         if not rows:
@@ -229,10 +231,11 @@ def article(lang, photos, fonts, ofl, apache):
                 link(lic_url, lic_name)))
         out.append("        </tbody></table></div>")
         out.append("      </details>")
-    out.append("    </section>")
+    if photos:
+        out.append("    </section>")
 
     out.append("    <section>")
-    out.append(f'      <h2>{e(t["fonts_h"])}</h2>')
+    out.append(f'      <h2>{next(number)}. {e(t["fonts_h"])}</h2>')
     out.append(f'      <p>{e(t["fonts_p"].format(n=len(fonts)))}</p>')
     out.append(f'      <details><summary>{e(t["col_font"])} · {len(fonts)}</summary>')
     out.append(f'        <div class="scroll"><table><thead><tr><th>{e(t["col_font"])}</th><th>{e(t["col_license"])}</th><th>{e(t["col_copyright"])}</th></tr></thead><tbody>')
@@ -247,7 +250,7 @@ def article(lang, photos, fonts, ofl, apache):
     out.append("    </section>")
 
     out.append("    <section>")
-    out.append(f'      <h2>{e(t["other_h"])}</h2>')
+    out.append(f'      <h2>{next(number)}. {e(t["other_h"])}</h2>')
     out.append(f'      <p>{e(t["other_p"])}</p>')
     out.append("    </section>")
 
@@ -302,8 +305,10 @@ def main():
     ap.add_argument("--photos", default=DEFAULT_CROPS, help="liste des recadrages (quebec_crops.csv)")
     ap.add_argument("--attributions", default=DEFAULT_ATTR, help="attributions des photos (attributions.csv)")
     ap.add_argument("--out", default=DEFAULT_OUT, help="page à écrire")
+    ap.add_argument("--with-photos", action="store_true",
+                    help="ajouter la liste des photos d'entraînement (retirée de la page le 2026-11-22, à la demande de l'utilisateur)")
     args = ap.parse_args()
-    photos = load_photos(args.photos, args.attributions)
+    photos = load_photos(args.photos, args.attributions) if args.with_photos else []
     fonts = load_fonts()
     with open(args.out, "w", encoding="utf-8", newline="\n") as fh:
         fh.write(page(photos, fonts))
