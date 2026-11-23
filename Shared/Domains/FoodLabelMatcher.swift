@@ -22,12 +22,14 @@ struct MealProposal: Identifiable, Hashable {
     let dishName: String?
     /// True for a component of a dish that is often absent (a sauce, a garnish): the person keeps or drops it.
     let isOptional: Bool
+    /// True when the rest of the plate (`ScannerMealContext`) put this food before the one the image alone gave first.
+    let fromMealContext: Bool
 
     var id: String { food.id }
 
     init(food: FoodItem, grams: Double, confidence: Double, isEstimate: Bool = true,
          label: String? = nil, detectedFoodID: String? = nil, usesHabit: Bool = false,
-         alternative: FoodItem? = nil, dishName: String? = nil, isOptional: Bool = false) {
+         alternative: FoodItem? = nil, dishName: String? = nil, isOptional: Bool = false, fromMealContext: Bool = false) {
         self.food = food
         self.grams = grams
         self.confidence = confidence
@@ -38,6 +40,7 @@ struct MealProposal: Identifiable, Hashable {
         self.alternative = alternative
         self.dishName = dishName
         self.isOptional = isOptional
+        self.fromMealContext = fromMealContext
     }
 
     var totals: NutritionTotals { food.nutrients(grams: grams) }

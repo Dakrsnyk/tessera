@@ -104,12 +104,6 @@
    "Shared/Render/Tiles/TravelTiles.swift:160: tile.caption = left == 0 ? tr(\"dernier jour\") : tr(\"\\(left) \\(TF.days(left)) restants\")"
   ]
  },
- "%@ %@, puis %@": {
-  "placeholders": 3,
-  "uses": [
-   "App/Premium/PremiumStore.swift:267: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
-  ]
- },
  "%@ (copie)": {
   "placeholders": 1,
   "uses": [
@@ -467,19 +461,19 @@
  "%@ débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PremiumStore.swift:291: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
+   "App/Premium/PremiumStore.swift:292: return tr(\"\\(product.displayPrice) débités aujourd'hui pour 12 mois. Renouvellement automatique chaque année au même prix, annulable à tout moment.\")"
   ]
  },
  "%@ débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PremiumStore.swift:293: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
+   "App/Premium/PremiumStore.swift:294: return tr(\"\\(product.displayPrice) débités aujourd'hui pour un mois. Renouvellement automatique chaque mois, annulable à tout moment.\")"
   ]
  },
  "%@ débités une seule fois. Premium à vie, sans abonnement ni renouvellement.": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PremiumStore.swift:295: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
+   "App/Premium/PremiumStore.swift:296: return tr(\"\\(product.displayPrice) débités une seule fois. Premium à vie, sans abonnement ni renouvellement.\")"
   ]
  },
  "%@ dépensé, %@ du mois écoulé": {
@@ -858,7 +852,7 @@
  "%@ par an": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PremiumStore.swift:274: case (.year, 1): tr(\"\\(price) par an\")"
+   "App/Premium/PremiumStore.swift:275: case (.year, 1): tr(\"\\(price) par an\")"
   ]
  },
  "%@ par jour sur %@ %@": {
@@ -872,7 +866,7 @@
   "uses": [
    "App/Core/DataItems.swift:416: case .monthlyBudget: return tr(\"\\(TF.money(budget.monthlyBudget, currency)) par mois\")",
    "App/Core/DataItems.swift:422: case .businessGoal: return tr(\"\\(TF.money(business.monthlyGoal, currency)) par mois\")",
-   "App/Premium/OnboardingOffer.swift:176: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
+   "App/Premium/OnboardingOffer.swift:194: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
    "App/Premium/PaywallView.swift:283: return tr(\"\\(product.displayPrice) par mois\")"
   ]
  },
@@ -885,7 +879,7 @@
  "%@ par période": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PremiumStore.swift:276: default: tr(\"\\(price) par période\")"
+   "App/Premium/PremiumStore.swift:277: default: tr(\"\\(price) par période\")"
   ]
  },
  "%@ par semaine": {
@@ -893,7 +887,7 @@
   "uses": [
    "App/Core/DataItems.swift:395: case .weeklyWorkouts: return tr(\"\\(fitness.weeklyGoal) par semaine\")",
    "App/Core/DataItems.swift:406: case .focusGoal: return tr(\"\\(Fmt.hours(productivity.weeklyFocusGoalHours)) par semaine\")",
-   "App/Premium/PremiumStore.swift:275: case (.week, 1): tr(\"\\(price) par semaine\")",
+   "App/Premium/PremiumStore.swift:276: case (.week, 1): tr(\"\\(price) par semaine\")",
    "App/Screens/Home/MyInfoSection.swift:39: add(\"workouts\", \"calendar\", tr(\"Séances\"), profile.knows(.weeklyWorkouts) ? tr(\"\\(fitness.weeklyGoal) par semaine\") : nil)"
   ]
  },
@@ -979,7 +973,7 @@
  "%@ styles et %@ couleurs d'app": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:35: perk(tr(\"\\(ThemeCatalog.all.count) styles et \\(AppStyleID.allCases.count) couleurs d'app\"))"
+   "App/Premium/OnboardingOffer.swift:32: perk(tr(\"\\(ThemeCatalog.all.count) styles et \\(AppStyleID.allCases.count) couleurs d'app\"))"
   ]
  },
  "%@ suivis cette semaine, dont %@ dans ta cible. Belle constance !": {
@@ -1242,7 +1236,7 @@
  "%@ · P %@ · G %@ · L %@": {
   "placeholders": 4,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:459: return tr(\"\\(kcal) · P \\(protein) · G \\(carbs) · L \\(fat)\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:466: return tr(\"\\(kcal) · P \\(protein) · G \\(carbs) · L \\(fat)\")"
   ]
  },
  "%@ · aujourd'hui": {
@@ -1433,6 +1427,12 @@
    "App/Screens/Profile/ProfileTopics.swift:578: KnownSummary(text: profile.calculatedActivity == nil ? tr(\"\\(level.title), d'après tes séances\") : level.title,"
   ]
  },
+ "%@, puis %@": {
+  "placeholders": 2,
+  "uses": [
+   "App/Premium/PremiumStore.swift:268: return tr(\"\\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
+  ]
+ },
  "%@, une seule fois, sans abonnement": {
   "placeholders": 1,
   "uses": [
@@ -1448,7 +1448,7 @@
  "%@. Rien n'est débité pendant l'essai. Renouvellement automatique %@, annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/PremiumStore.swift:287: return tr(\"\\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \\(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.\")"
+   "App/Premium/PremiumStore.swift:288: return tr(\"\\(intro). Rien n'est débité pendant l'essai. Renouvellement automatique \\(period), annulable à tout moment. L'essai gratuit ne vaut qu'une fois par compte Apple.\")"
   ]
  },
  "%@/%@ séances · série %@": {
@@ -1481,7 +1481,7 @@
  "+ %@ styles": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:110: Label(tr(\"+ \\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles\"), systemImage: \"sparkles\")"
+   "App/Premium/OnboardingOffer.swift:128: Label(tr(\"+ \\(ThemeCatalog.all.count - ThemeCatalog.free.count) styles\"), systemImage: \"sparkles\")"
   ]
  },
  "+ %@ à faire": {
@@ -2417,7 +2417,7 @@
  "Achat": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:49: .alert(tr(\"Achat\"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {",
+   "App/Premium/OnboardingOffer.swift:48: .alert(tr(\"Achat\"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {",
    "App/Premium/PaywallView.swift:54: .alert(tr(\"Achat\"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {"
   ]
  },
@@ -3076,7 +3076,7 @@
  "Ajouter ma date de naissance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:239: Label(tr(\"Ajouter ma date de naissance\"), systemImage: \"gift\")",
+   "App/Screens/Onboarding/OnboardingView.swift:246: Label(tr(\"Ajouter ma date de naissance\"), systemImage: \"gift\")",
    "App/Screens/Profile/DataItemViews.swift:283: action(tr(\"Ajouter ma date de naissance\"), symbol: \"plus\") {"
   ]
  },
@@ -3400,7 +3400,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/CustomFoodsView.swift:106: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty && blocking == nil, dismissesOnSave: false, onSave: save) {",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:570: case .custom: return tr(\"Aliment perso\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:577: case .custom: return tr(\"Aliment perso\")",
    "App/Screens/Spaces/NutritionSpace.swift:216: Label(tr(\"Aliment perso\"), systemImage: \"square.and.pencil\")",
    "App/Screens/Spaces/NutritionSpace.swift:644: SheetForm(title: tr(\"Aliment perso\"), canSave: !name.trimmed.isEmpty && blocking == nil, dismissesOnSave: false, onSave: save) {"
   ]
@@ -3766,7 +3766,7 @@
  "Annuel": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:183: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
+   "App/Premium/OnboardingOffer.swift:201: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
    "Shared/Domains/Budget.swift:53: var title: String { self == .monthly ? tr(\"Mensuel\") : tr(\"Annuel\") }"
   ]
  },
@@ -5628,7 +5628,7 @@
  "Beurre ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:414: case .butter: tr(\"Beurre ?\")"
+   "Shared/Domains/ScanRecap.swift:417: case .butter: tr(\"Beurre ?\")"
   ]
  },
  "Beurre d'amande": {
@@ -5685,13 +5685,13 @@
  "Bienvenue dans Ardane": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:347: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:354: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
   ]
  },
  "Bienvenue dans Ardane Premium !": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:272: message = tr(\"Bienvenue dans Ardane Premium !\")",
+   "App/Premium/OnboardingOffer.swift:290: message = tr(\"Bienvenue dans Ardane Premium !\")",
    "App/Premium/PaywallView.swift:381: message = tr(\"Bienvenue dans Ardane Premium !\")"
   ]
  },
@@ -5952,7 +5952,7 @@
  "Bonjour %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:262: return tr(\"Bonjour \\(first.split(separator: \" \").first.map(String.init) ?? first)\")",
+   "App/Screens/Onboarding/OnboardingView.swift:269: return tr(\"Bonjour \\(first.split(separator: \" \").first.map(String.init) ?? first)\")",
    "App/Screens/Tutorial/Tutorial.swift:56: case .daily: name.isEmpty ? tr(\"Bonjour\") : tr(\"Bonjour \\(name)\")"
   ]
  },
@@ -6537,8 +6537,8 @@
  "C'est parti": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:129: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))",
-   "App/Screens/Onboarding/OnboardingView.swift:371: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:136: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))",
+   "App/Screens/Onboarding/OnboardingView.swift:378: Text(isLast ? tr(\"C'est parti\") : tr(\"Continuer\"))"
   ]
  },
  "C'est un abonnement": {
@@ -7748,7 +7748,7 @@
  "Chargement des offres…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:151: ProgressView(tr(\"Chargement des offres…\"))",
+   "App/Premium/OnboardingOffer.swift:169: ProgressView(tr(\"Chargement des offres…\"))",
    "App/Premium/PaywallView.swift:237: ProgressView(tr(\"Chargement des offres…\"))"
   ]
  },
@@ -7983,6 +7983,12 @@
    "App/Screens/Spaces/CreateFlow.swift:604: .accessibilityValue(Text(number != nil ? tr(\"Choisi\") : (refusal ?? \"\")))"
   ]
  },
+ "Choisi d'après le reste de l'assiette": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:403: Text(tr(\"Choisi d'après le reste de l'assiette\"))"
+  ]
+ },
  "Choisi par toi. Tes séances donneraient : %@. Touche ton choix pour revenir aux séances.": {
   "placeholders": 1,
   "uses": [
@@ -8195,7 +8201,7 @@
  "Choisis ton style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:350: Text(tr(\"Choisis ton style\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:357: Text(tr(\"Choisis ton style\"))"
   ]
  },
  "Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.": {
@@ -8237,7 +8243,7 @@
  "Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:270: message: tr(\"Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.\"),"
+   "App/Screens/Onboarding/OnboardingView.swift:277: message: tr(\"Choisis-en autant que tu veux. Ardane ne posera que les questions utiles, et tu pourras tout changer plus tard.\"),"
   ]
  },
  "Cholestérol": {
@@ -8579,7 +8585,7 @@
  "Comme ton repas du %@": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:194: return String(format: tr(\"Comme ton repas du %@\"), locale: Fmt.locale, day)"
+   "Shared/Domains/ScanRecap.swift:197: return String(format: tr(\"Comme ton repas du %@\"), locale: Fmt.locale, day)"
   ]
  },
  "Commence avec une boîte basse.": {
@@ -8648,7 +8654,7 @@
  "Comment veux-tu qu'on t'appelle ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:199: title: tr(\"Comment veux-tu qu'on t'appelle ?\"),"
+   "App/Screens/Onboarding/OnboardingView.swift:206: title: tr(\"Comment veux-tu qu'on t'appelle ?\"),"
   ]
  },
  "Comment ça marche": {
@@ -8846,7 +8852,7 @@
  "Conditions": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:255: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }",
+   "App/Premium/OnboardingOffer.swift:273: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }",
    "App/Premium/PaywallView.swift:369: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
   ]
  },
@@ -8860,7 +8866,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:928: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
-   "App/Premium/OnboardingOffer.swift:256: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
+   "App/Premium/OnboardingOffer.swift:274: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
    "App/Premium/PaywallView.swift:370: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
    "App/Screens/Profile/ProfileView.swift:204: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
@@ -8996,7 +9002,7 @@
   "placeholders": 0,
   "uses": [
    "App/Components/PermissionExplainer.swift:219: Text(tr(\"Continuer\"))",
-   "App/Premium/OnboardingOffer.swift:236: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Premium/OnboardingOffer.swift:254: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
    "App/Premium/PaywallView.swift:347: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
    "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:73: Text(tr(\"Continuer\")).frame(maxWidth: .infinity, minHeight: 44)"
   ]
@@ -10117,7 +10123,7 @@
  "Date de naissance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:228: DatePicker(tr(\"Date de naissance\"), selection: Binding(",
+   "App/Screens/Onboarding/OnboardingView.swift:235: DatePicker(tr(\"Date de naissance\"), selection: Binding(",
    "App/Screens/Profile/DataItemViews.swift:279: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:568: DatePicker(tr(\"Date de naissance\"), selection: $birthdayDraft, in: ...now, displayedComponents: .date)",
    "App/Screens/Spaces/TravelCarLifeSpaces.swift:577: DatePicker(tr(\"Date de naissance\"), selection: Binding(get: { birthday }, set: { date in model.update(\\.life) { $0.birthday = date } }), in: ...now, displayedComponents: .date)"
@@ -12887,7 +12893,7 @@
  "Essayer %@ jours gratuits": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:236: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Premium/OnboardingOffer.swift:254: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
    "App/Premium/PaywallView.swift:347: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))"
   ]
  },
@@ -12906,7 +12912,7 @@
  "Estimation": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:566: if isEstimate { return tr(\"Estimation\") }"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:573: if isEstimate { return tr(\"Estimation\") }"
   ]
  },
  "Estimation selon la durée des séances et ton poids": {
@@ -13356,7 +13362,7 @@
  "Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:245: Text(tr(\"Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:252: Text(tr(\"Facultatif. Elle donne ton âge (calories, anniversaire) et reste sur ton iPhone.\"))"
   ]
  },
  "Faire des rebonds.": {
@@ -15444,7 +15450,7 @@
  "Huile de cuisson ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:413: case .oil: tr(\"Huile de cuisson ?\")"
+   "Shared/Domains/ScanRecap.swift:416: case .oil: tr(\"Huile de cuisson ?\")"
   ]
  },
  "Hydratation": {
@@ -15541,7 +15547,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:282: Button(tr(\"Ignorer\")) {",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:403: Button(tr(\"Ignorer\"), action: onDismiss)"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:410: Button(tr(\"Ignorer\"), action: onDismiss)"
   ]
  },
  "Il affiche tes événements des 48 prochaines heures, directement depuis le calendrier de ton iPhone.": {
@@ -19531,7 +19537,7 @@
  "Mensuel": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:183: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
+   "App/Premium/OnboardingOffer.swift:201: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
    "Shared/Domains/Budget.swift:53: var title: String { self == .monthly ? tr(\"Mensuel\") : tr(\"Annuel\") }"
   ]
  },
@@ -20920,7 +20926,7 @@
  "Nom (facultatif)": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:211: placeholder: tr(\"Nom (facultatif)\"),"
+   "App/Screens/Onboarding/OnboardingView.swift:218: placeholder: tr(\"Nom (facultatif)\"),"
   ]
  },
  "Nom (haut du corps, jambes…)": {
@@ -21274,7 +21280,7 @@
  "Nouveau : les styles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:347: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:354: Text(isLast ? tr(\"Nouveau : les styles\") : tr(\"Bienvenue dans Ardane\"))"
   ]
  },
  "Nouveau calcul proposé": {
@@ -21714,7 +21720,7 @@
   "uses": [
    "App/ArdaneApp.swift:139: Button(tr(\"OK\")) { router.isIconPickerPresented = false }",
    "App/ArdaneApp.swift:339: Button(tr(\"OK\")) { dismiss() }",
-   "App/Premium/OnboardingOffer.swift:50: Button(tr(\"OK\"), role: .cancel) {",
+   "App/Premium/OnboardingOffer.swift:49: Button(tr(\"OK\"), role: .cancel) {",
    "App/Premium/PaywallView.swift:55: Button(tr(\"OK\"), role: .cancel) {"
   ]
  },
@@ -22064,7 +22070,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Editor/StudioPanels.swift:646: .accessibilityLabel(Text(tr(\"Options de \\(saved.name)\")))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:510: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:517: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
   ]
  },
  "Opérations": {
@@ -22761,7 +22767,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/MiniAppTour.swift:312: Text(tr(\"Passer\"))",
-   "App/Screens/Onboarding/OnboardingView.swift:165: Button(tr(\"Passer\"), action: skip)",
+   "App/Screens/Onboarding/OnboardingView.swift:172: Button(tr(\"Passer\"), action: skip)",
    "Shared/Live/WorkoutLiveActivity.swift:198: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipSetIntent(expecting: state.position))",
    "Shared/Render/Tiles/FitnessTiles.swift:136: TileButton(title: tr(\"Passer\"), symbol: \"forward.fill\", action: .skipSet(state.position)),"
   ]
@@ -23309,7 +23315,7 @@
  "Planning est déjà sur ton accueil, que tu le choisisses ou non.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:277: Text(tr(\"Planning est déjà sur ton accueil, que tu le choisisses ou non.\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:284: Text(tr(\"Planning est déjà sur ton accueil, que tu le choisisses ou non.\"))"
   ]
  },
  "Planning · études": {
@@ -23587,7 +23593,7 @@
   "placeholders": 0,
   "uses": [
    "App/Components/PermissionExplainer.swift:228: Button(tr(\"Plus tard\")) { dismiss() }",
-   "App/Premium/OnboardingOffer.swift:85: Button(tr(\"Plus tard\")) {",
+   "App/Premium/OnboardingOffer.swift:102: Button(tr(\"Plus tard\")) {",
    "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:80: Text(tr(\"Plus tard\")).frame(maxWidth: .infinity, minHeight: 44)",
    "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:272: PlanButton(title: tr(\"Plus tard\"), filled: false, accent: accent) {"
   ]
@@ -24988,7 +24994,7 @@
  "Prénom": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:204: placeholder: tr(\"Prénom\"),",
+   "App/Screens/Onboarding/OnboardingView.swift:211: placeholder: tr(\"Prénom\"),",
    "App/Screens/Profile/ProfileView.swift:44: LabeledContent(tr(\"Prénom\")) {"
   ]
  },
@@ -25179,7 +25185,7 @@
  "Qu'est-ce qui t'intéresse ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:269: title: tr(\"Qu'est-ce qui t'intéresse ?\"),"
+   "App/Screens/Onboarding/OnboardingView.swift:276: title: tr(\"Qu'est-ce qui t'intéresse ?\"),"
   ]
  },
  "Quadriceps": {
@@ -25206,8 +25212,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:200: NumberRow(title: tr(\"Quantité\"), value: $grams, unit: \"g\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:545: .accessibilityLabel(tr(\"Quantité\"))",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:548: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:552: .accessibilityLabel(tr(\"Quantité\"))",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:555: Stepper(tr(\"Quantité\"), value: grams, in: ScanRecap.minGrams...ScanRecap.maxGrams, step: line.grams < 50 ? 5 : 10)",
    "App/Screens/Spaces/MoneySpaces.swift:112: NumberRow(title: holding.kind == .cash ? tr(\"Montant\") : tr(\"Quantité\"), value: $holding.quantity)"
   ]
  },
@@ -25921,8 +25927,8 @@
   "uses": [
    "App/Screens/Editor/StudioParts.swift:412: Label(tr(\"Remplacer\"), systemImage: \"arrow.up.arrow.down\")",
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:78: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:498: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:534: .accessibilityHint(tr(\"Remplacer\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:505: Label(tr(\"Remplacer\"), systemImage: \"arrow.triangle.2.circlepath\")",
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:541: .accessibilityHint(tr(\"Remplacer\"))"
   ]
  },
  "Remplacer %@": {
@@ -26281,14 +26287,14 @@
  "Restauration…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:80: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
+   "App/Premium/OnboardingOffer.swift:97: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
    "App/Premium/PaywallView.swift:327: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:80: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
+   "App/Premium/OnboardingOffer.swift:97: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
    "App/Screens/Profile/ProfileView.swift:322: Button(tr(\"Restaurer\"), role: .destructive) {"
   ]
  },
@@ -26502,7 +26508,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/HomeScreenPreview.swift:107: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
-   "App/Screens/Onboarding/OnboardingView.swift:157: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
+   "App/Screens/Onboarding/OnboardingView.swift:164: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
    "App/Screens/Spaces/CreateFlow.swift:243: .accessibilityLabel(Text(tr(\"Retour\", context: \"back\")))",
    "App/Screens/Spaces/SpaceForms.swift:52: Text(tr(\"Retour\", context: \"back\"))"
   ]
@@ -27345,7 +27351,7 @@
  "Réessayer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:159: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
+   "App/Premium/OnboardingOffer.swift:177: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Premium/PaywallView.swift:248: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Business/BusinessSources.swift:360: Button(tr(\"Réessayer\")) { attempt += 1 }",
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:175: prominentButton(tr(\"Réessayer\")) {"
@@ -27897,7 +27903,7 @@
  "Saphir est offert. Avec Premium, choisis parmi %@ couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:352: Text(tr(\"Saphir est offert. Avec Premium, choisis parmi \\(AppStyleID.allCases.count) couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:359: Text(tr(\"Saphir est offert. Avec Premium, choisis parmi \\(AppStyleID.allCases.count) couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.\"))"
   ]
  },
  "Sapin, flocons et fils d'or pour tes widgets, tout le mois de décembre.": {
@@ -27915,7 +27921,7 @@
  "Sauce ?": {
   "placeholders": 0,
   "uses": [
-   "Shared/Domains/ScanRecap.swift:415: case .sauce: tr(\"Sauce ?\")"
+   "Shared/Domains/ScanRecap.swift:418: case .sauce: tr(\"Sauce ?\")"
   ]
  },
  "Sauce BBQ": {
@@ -28961,7 +28967,7 @@
  "Statistiques, exercices, scans illimités": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:36: perk(tr(\"Statistiques, exercices, scans illimités\"))"
+   "App/Premium/OnboardingOffer.swift:33: perk(tr(\"Statistiques, exercices, scans illimités\"))"
   ]
  },
  "Statut « à payer », « prévu » ou « en attente » dans le fichier.": {
@@ -31469,7 +31475,7 @@
  "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:275: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")",
+   "App/Premium/OnboardingOffer.swift:293: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")",
    "App/Premium/PaywallView.swift:383: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
   ]
  },
@@ -31548,7 +31554,7 @@
  "Ton habitude": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:476: Text(tr(\"Ton habitude\"))"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:483: Text(tr(\"Ton habitude\"))"
   ]
  },
  "Ton horaire": {
@@ -31758,7 +31764,7 @@
  "Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:200: message: tr(\"Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.\")"
+   "App/Screens/Onboarding/OnboardingView.swift:207: message: tr(\"Ton prénom sert au message d'accueil. Tout reste sur ton iPhone.\")"
   ]
  },
  "Ton revenu récurrent, tes abonnés et ta croissance mensuelle.": {
@@ -32216,16 +32222,16 @@
    "App/Screens/MiniApps/Studies/StudiesDeadlines.swift:140: case .all: tr(\"Tout\")"
   ]
  },
- "Tout Ardane, %@ jours gratuits": {
-  "placeholders": 1,
+ "Tout Ardane,": {
+  "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:29: Text(trialDays.map { tr(\"Tout Ardane, \\($0) jours gratuits\") } ?? tr(\"Tout Ardane, sans limite\"))"
+   "App/Premium/OnboardingOffer.swift:75: Text(tr(\"Tout Ardane,\"))"
   ]
  },
  "Tout Ardane, sans limite": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:29: Text(trialDays.map { tr(\"Tout Ardane, \\($0) jours gratuits\") } ?? tr(\"Tout Ardane, sans limite\"))"
+   "App/Premium/OnboardingOffer.swift:80: Text(tr(\"Tout Ardane, sans limite\"))"
   ]
  },
  "Tout Finance": {
@@ -32281,7 +32287,7 @@
  "Tout est facultatif : laisse vide ce que tu préfères ne pas dire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:293: Text(tr(\"Tout est facultatif : laisse vide ce que tu préfères ne pas dire.\"))"
+   "App/Screens/Onboarding/OnboardingView.swift:300: Text(tr(\"Tout est facultatif : laisse vide ce que tu préfères ne pas dire.\"))"
   ]
  },
  "Tout est fait": {
@@ -34119,7 +34125,7 @@
  "Vérifié": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:568: case .builtin, .nutrientFile: return tr(\"Vérifié\")"
+   "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:575: case .builtin, .nutrientFile: return tr(\"Vérifié\")"
   ]
  },
  "Vérité et réconciliation": {
@@ -34225,7 +34231,7 @@
  "Widgets illimités, tous les types": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:34: perk(tr(\"Widgets illimités, tous les types\"))"
+   "App/Premium/OnboardingOffer.swift:31: perk(tr(\"Widgets illimités, tous les types\"))"
   ]
  },
  "Widgets intelligents": {
@@ -34620,13 +34626,13 @@
  "chaque année": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PremiumStore.swift:286: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
+   "App/Premium/PremiumStore.swift:287: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
   ]
  },
  "chaque mois": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PremiumStore.swift:286: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
+   "App/Premium/PremiumStore.swift:287: let period = product.id == PremiumConfiguration.yearlyID ? tr(\"chaque année\") : tr(\"chaque mois\")"
   ]
  },
  "choisi": {
@@ -35390,7 +35396,8 @@
  "jour gratuit": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PremiumStore.swift:267: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
+   "App/Premium/OnboardingOffer.swift:76: Text(Fmt.plural(trialDays, tr(\"jour gratuit\"), tr(\"jours gratuits\")))",
+   "App/Premium/PremiumStore.swift:268: return tr(\"\\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
   ]
  },
  "jour noté": {
@@ -35434,7 +35441,8 @@
  "jours gratuits": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PremiumStore.swift:267: return tr(\"\\(days) \\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
+   "App/Premium/OnboardingOffer.swift:76: Text(Fmt.plural(trialDays, tr(\"jour gratuit\"), tr(\"jours gratuits\")))",
+   "App/Premium/PremiumStore.swift:268: return tr(\"\\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
   ]
  },
  "jours notés": {
@@ -35884,7 +35892,7 @@
  "par mois": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:176: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
+   "App/Premium/OnboardingOffer.swift:194: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
    "App/Screens/MiniApps/Car/CarApp.swift:290: MiniStat(title: tr(\"Coût réel\"), value: \"–\", detail: tr(\"par mois\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:728: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
    "Shared/Model/Content.swift:286: case .month: tr(\"par mois\")"
@@ -37709,14 +37717,14 @@
  "Étape %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:402: Text(tr(\"Étape \\(number)\"))",
+   "App/Screens/Onboarding/OnboardingView.swift:409: Text(tr(\"Étape \\(number)\"))",
    "App/Screens/Spaces/LockScreenCreator.swift:169: Text(tr(\"Étape \\(index + 1)\"))"
   ]
  },
  "Étape %@ sur %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Onboarding/OnboardingView.swift:164: .accessibilityLabel(Text(tr(\"Étape \\(position + 1) sur \\(personal.count)\")))",
+   "App/Screens/Onboarding/OnboardingView.swift:171: .accessibilityLabel(Text(tr(\"Étape \\(position + 1) sur \\(personal.count)\")))",
    "App/Screens/Tutorial/TutorialOverlay.swift:120: .accessibilityLabel(Text(tr(\"Étape \\(step.number) sur \\(TutorialStep.allCases.count)\")))"
   ]
  },

@@ -83,10 +83,12 @@ struct ScanPendingFood: Identifiable, Hashable {
     let usesHabit: Bool
     /// True for a « maybe » zone (the segmenter itself was unsure there was a food): never added alone.
     let isTentative: Bool
+    /// True when the rest of the plate made this food the first choice of its zone (the image alone put another first).
+    let fromMealContext: Bool
 
     init(
         id: UUID = UUID(), food: FoodItem, grams: Double, confidence: Double, label: String? = nil,
-        detectedFoodID: String? = nil, usesHabit: Bool = false, isTentative: Bool = false
+        detectedFoodID: String? = nil, usesHabit: Bool = false, isTentative: Bool = false, fromMealContext: Bool = false
     ) {
         self.id = id
         self.food = food
@@ -96,13 +98,14 @@ struct ScanPendingFood: Identifiable, Hashable {
         self.detectedFoodID = detectedFoodID
         self.usesHabit = usesHabit
         self.isTentative = isTentative
+        self.fromMealContext = fromMealContext
     }
 
     init(_ proposal: MealProposal, isTentative: Bool) {
         self.init(
             food: proposal.food, grams: proposal.grams, confidence: proposal.confidence, label: proposal.label,
             detectedFoodID: proposal.detectedFoodID ?? proposal.food.id, usesHabit: proposal.usesHabit,
-            isTentative: isTentative
+            isTentative: isTentative, fromMealContext: proposal.fromMealContext
         )
     }
 
@@ -110,7 +113,7 @@ struct ScanPendingFood: Identifiable, Hashable {
     var proposal: MealProposal {
         MealProposal(
             food: food, grams: grams, confidence: confidence, label: label,
-            detectedFoodID: detectedFoodID, usesHabit: usesHabit
+            detectedFoodID: detectedFoodID, usesHabit: usesHabit, fromMealContext: fromMealContext
         )
     }
 }

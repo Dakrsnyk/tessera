@@ -398,6 +398,13 @@ private struct ScanPendingRow: View {
                     Text(item.isTentative ? tr("Peut-être sur la photo") : tr("peu sûr"))
                         .font(.caption)
                         .foregroundStyle(palette.strong("F08A24"))
+                    // Said, so the person knows why the first choice is not what the image alone showed.
+                    if item.fromMealContext {
+                        Text(tr("Choisi d'après le reste de l'assiette"))
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
                 Spacer(minLength: 0)
                 Button(tr("Ignorer"), action: onDismiss)

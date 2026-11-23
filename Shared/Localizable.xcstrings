@@ -59127,6 +59127,53 @@
         }
       }
     },
+    "Choisi d'après le reste de l'assiette": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gewählt anhand des restlichen Tellers"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chosen from the rest of the plate"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elegido según el resto del plato"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisi d'après le reste de l'assiette"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scelto in base al resto del piatto"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "お皿のほかの料理から判断"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolhido com base no resto do prato"
+          }
+        }
+      }
+    },
     "Choisi par toi. Tes séances donneraient : %@. Touche ton choix pour revenir aux séances.": {
       "extractionState": "manual",
       "localizations": {

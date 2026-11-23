@@ -150,7 +150,8 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
         let personal = PersonalFoodMemoryStore.load()
         let context = ScannerContextPriors(entries: state.entries.map { (foodID: $0.food.id, date: $0.date) }, now: Date())
         let reading = Self.modelReading(
-            from: photo.zones, learning: state.scanLearning, memory: personal, context: context, resolve: resolveModelFood
+            from: photo.zones, learning: state.scanLearning, memory: personal, context: context,
+            meal: MealContextTable.bundled, resolve: resolveModelFood
         )
         var fromLabels = reading.proposals
         if fromLabels.isEmpty {
@@ -220,26 +221,40 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
     static let maximumAlternatives = 3
 
     /// `modelProposals`, with what the recap needs for each zone that gave a proposal: the other foods and the embedding.
-    /// Before a zone's foods are looked at, the personal memory (`PersonalFoodMemory.fused`) then the context of the last
-    /// days (`ScannerContextPriors`) refine the probabilities; with an empty memory and no history they change nothing.
+    /// Before a zone's foods are looked at, the personal memory (`PersonalFoodMemory.fused`), the other zones of the photo
+    /// (`ScannerMealContext`, with `meal`) then the context of the last days (`ScannerContextPriors`) refine the
+    /// probabilities; with an empty memory, no table and no history they change nothing.
     static func modelReading(
         from zones: [FoodModelZone], learning: ScanLearning,
         memory: PersonalFoodMemory = PersonalFoodMemory(), context: ScannerContextPriors = ScannerContextPriors(),
-        resolve: (String) -> FoodItem?
+        meal: MealContextTable? = nil, resolve: (String) -> FoodItem?
     ) -> (proposals: [MealProposal], hints: [ScanZoneHint], tentative: [MealProposal]) {
         var byFood: [String: MealProposal] = [:]
         // The same, for the « maybe » zones (`FoodModelZone.isTentative`): kept apart, they are never added alone.
         var tentativeByFood: [String: MealProposal] = [:]
         var hints: [ScanZoneHint] = []
-        for zone in zones {
+        // What the image says of each zone, refined by the person's own memory.
+        let seen: [[(key: String, probability: Double)]] = zones.map { zone in
+            let candidates = zone.classification.foods.map { (key: $0.key, probability: $0.probability) }
+            guard let embedding = zone.classification.embedding else { return candidates }
+            return memory.fused(model: candidates, embedding: embedding)
+        }
+        // Then what the other zones of the plate make more or less likely (never a food the zone does not propose).
+        let inContext: [[(key: String, probability: Double)]]
+        if let meal {
+            inContext = ScannerMealContext.reranked(
+                zip(seen, zones).map { MealContextZone(candidates: $0.0, isTentative: $0.1.isTentative) }, table: meal
+            )
+        } else {
+            inContext = seen
+        }
+        for (index, zone) in zones.enumerated() {
             let label = FoodLabelMatcher.cleaned(zone.classification.topLabel)
-            var candidates: [(key: String, probability: Double)] = zone.classification.foods.map {
-                (key: $0.key, probability: $0.probability)
-            }
-            if let embedding = zone.classification.embedding {
-                candidates = memory.fused(model: candidates, embedding: embedding)
-            }
-            candidates = context.reweighted(candidates)
+            let candidates = context.reweighted(inContext[index])
+            // The food the image alone would have given, to say when the plate changed the choice.
+            let visualFirst = context.reweighted(seen[index]).first {
+                !$0.key.hasPrefix(FoodModelRecognizer.labelPrefix) && $0.probability >= modelMinimumConfidence && resolve($0.key) != nil
+            }?.key
             var made: MealProposal?
             for candidate in candidates where !candidate.key.hasPrefix(FoodModelRecognizer.labelPrefix) {
                 // The foods come from the most to the least likely: under the floor, nothing after is better.
@@ -260,7 +275,8 @@ struct OnDeviceMealAnalyzer: MealPhotoAnalyzing {
                 }
                 made = MealProposal(
                     food: food, grams: grams, confidence: candidate.probability,
-                    label: label, detectedFoodID: detected.id, usesHabit: usesHabit
+                    label: label, detectedFoodID: detected.id, usesHabit: usesHabit,
+                    fromMealContext: visualFirst != nil && visualFirst != detected.id
                 )
                 break
             }
