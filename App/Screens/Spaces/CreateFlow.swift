@@ -584,7 +584,8 @@ private struct CreatePickPage: View {
             Haptics.tap()
             pick(kind)
         } label: {
-            StudioKindTile(kind: kind, design: category.design(for: kind), payload: model.previewPayload(for: category.design(for: kind)),
+            let design = category.design(for: kind)
+            StudioKindTile(kind: kind, design: design, payload: model.previewPayload(for: design),
                            showsLock: kind.isPremium && !model.isPremium, refusal: refusal, isCurrent: number != nil)
                 .overlay(alignment: .topLeading) {
                     if let number {

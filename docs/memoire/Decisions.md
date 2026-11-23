@@ -154,3 +154,4 @@ Les choix déjà faits, avec leur date. Retour : [[Memoire]]
 - 2026-11-22 (PDG) : **la taille d'un widget se choisit dans Créer, plus dans le Studio** : Contenu n'a plus de section Taille, un widget enregistré garde sa taille (en changer = en créer un autre).
 - 2026-11-22 (Chef) : **dans un pager qui défile, l'ombre des panneaux est dessinée par le pager** (une fois, hors du défilement) : le `ScrollView` coupait l'ombre de chaque vue en carré aux coins.
 - 2026-11-22 (PDG) : **poids et taille du premier lancement se choisissent dans une roulette à double unité** (lb | kg, pieds et pouces | cm sur la même ligne) : plus de bouton de bascule ni de case Pouces.
+- 2026-11-22 (PDG) : **dans Créer, chaque catégorie a un seul style d'exemple** (`CreateCategory.look`, thème et couleur gratuits, paire unique par catégorie), repris par le widget ouvert dans le Studio ; 11 thèmes gratuits pour 13 catégories, donc quelques thèmes partagés avec une autre couleur.

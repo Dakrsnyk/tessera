@@ -375,5 +375,12 @@ final class CreateSizeFirstFlowTests: XCTestCase {
         var draft = CreationDraft(format: .small, category: .space(.nutrition))
         draft.toggle(.caloriesLeft)
         XCTAssertEqual(draft.design?.themeID, CreateCategory.space(.nutrition).look.theme)
+        // Combined too (Moyen, two widgets).
+        var combo = CreationDraft(format: .medium, category: .space(.fitness))
+        combo.toggle(.nextSet)
+        combo.toggle(.trainingStreak)
+        let look = CreateCategory.space(.fitness).look
+        XCTAssertEqual(combo.design?.themeID, look.theme)
+        XCTAssertEqual(combo.design?.accentHex, look.accentHex)
     }
 }
