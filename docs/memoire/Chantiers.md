@@ -457,3 +457,11 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 - **Décision :** **éteint**. La table est dans `Tests/Fixtures/MealContext/`, pas dans l'app ; `MealContextTable.bundled` vaut nil ; le scanner se comporte exactement comme avant.
 - **Piste mesurée, non retenue :** zones faibles 0,10–0,20 soutenues par le contexte. Justes à 59 % sur la validation, mais instables sur le test : 54 %, puis 43 % et 39 % quand le soutien monte.
 - **Reste — prochaine source à essayer :** les associations des propres repas de la personne (historique de 60 jours, comme `ScannerContextPriors`). À allumer seulement si la même mesure montre un gain.
+
+## Chantier 49 : scanner au maximum (mesuré contre l'actuel) — 2026-11-23
+- **Référence (1 000 photos de test, segmenteur Nano v2 + classifieur v4) :** précision 70,2 %, rappel 57,1 %, F1 63,0 %.
+- **Où il se trompe (validation, 2 814 aliments) :** 52,8 % bien nommés ; 27,3 % jamais découpés ; 12,2 % en 2e ou 3e choix ; 7,7 % faux.
+- **Fait — règle « zone sûre »** (commit 65eb8a42) : précision 71,8 %, rappel 59,2 %, F1 64,9 % sur le test, mêmes ajouts automatiques (770, dont 95 faux).
+- **Écarté après mesure :** segmenteur Small v3 (égal au Nano), a priori de fréquence des classes (+0,6 pt, abîme les aliments rares), contexte du repas (Chantier 48).
+- **En cours — Kaggle :** classifieur v5 (12 blocs, EMA, mixup, recadrages imparfaits) et segmenteur Small v4 (reprise du v3). Scripts dans `scripts/ml/kaggle/` (pas encore commités).
+- **À faire :** mesurer v5 contre v4 et Small v4 contre Nano sur le même test ; n'intégrer que ce qui gagne ; rapport comparatif dans `docs/scanner/`.
