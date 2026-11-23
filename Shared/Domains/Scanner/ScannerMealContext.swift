@@ -12,10 +12,15 @@ import Foundation
 //      total probability of the zone stays what the image gave;
 //   5. the result: no food crosses the threshold of automatic adding (`ScanRecap.autoAddThreshold`) thanks to the context
 //      alone; a food the context put first, or made less sure, waits in « À confirmer » with the others as one-tap choices.
-// Measured before / after on 1 000 test photos never used to tune it: `scripts/ml/meal_context.py eval`.
+// Measured before / after on 1 000 test photos never used to tune it (`scripts/ml/meal_context.py eval`, report in
+// `docs/scanner/Contexte-repas-avant-apres-2026-11-23.md`): with the associations of MyFoodRepo it changes the first food of
+// 13 zones in 1 364 (6 right, 7 wrong), kcal unchanged. No gain, so it is OFF in the app: the table is not in the app's
+// resources (`bundled` is nil) and the scanner reads each zone alone, as before. It is kept, tested, for a better source of
+// associations (the person's own meals) that must first beat the image alone on the same measure.
 //
 // Pure logic, Foundation only (this folder is also compiled in the widget extension). The Python of `meal_context.py`
 // (`rerank`) is the reference: `ScannerMealContextTests` replays its outputs, so a change here must be a change there.
+// Only difference: a probability or score that is not finite (never given by the classifier) is ignored here, kept in Python.
 
 /// How much two foods go together in real meals: S(a, b) = ln((n_ab + k) / (n_a n_b / N + k)) over the photos of meals
 /// (positive: seen together more often than chance; negative: less; 0: no evidence either way, or a pair too rare to say).
@@ -78,8 +83,8 @@ struct MealContextTable: Sendable {
 
     static let resourceName = "ArdaneFoodPairs"
 
-    /// The table of the app, read once. Nil where the file is absent (the widget extension): the scanner then reads each
-    /// zone alone, as before.
+    /// The table of the app, read once. Nil where the file is absent (today everywhere: see the note at the top; the
+    /// learned table lives in `Tests/Fixtures/MealContext`): the scanner then reads each zone alone, as before.
     static let bundled: MealContextTable? = {
         guard let url = Bundle.main.url(forResource: resourceName, withExtension: "json"),
               let data = try? Data(contentsOf: url) else { return nil }

@@ -183,10 +183,19 @@ final class ScannerMealContextTests: XCTestCase {
         XCTAssertTrue(recap.pending.contains { $0.food.id == "potato" && $0.fromMealContext })
     }
 
-    // MARK: The table of the app
+    // MARK: The table learned on real meals
 
-    func testTheBundledTableKnowsUsualMeals() throws {
-        guard let real = MealContextTable.bundled else { throw XCTSkip("ArdaneFoodPairs.json absent du paquet de l'app") }
+    /// `Tests/Fixtures/MealContext/ArdaneFoodPairs.json`, written by `meal_context.py build`. Kept with the tests, not in the
+    /// app: measured on 1 000 test photos, it does not make the scanner more precise yet (see `ScannerMealContext`).
+    private func learnedTable() throws -> MealContextTable {
+        let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+            .appendingPathComponent("Fixtures/MealContext/\(MealContextTable.resourceName).json")
+        guard let data = try? Data(contentsOf: url) else { throw XCTSkip("Tests/Fixtures/MealContext/ArdaneFoodPairs.json introuvable") }
+        return try XCTUnwrap(MealContextTable(data: data), "Table illisible")
+    }
+
+    func testTheLearnedTableKnowsUsualMeals() throws {
+        let real = try learnedTable()
         XCTAssertGreaterThan(real.score("builtin.rice", "builtin.chicken"), 0, "Riz et poulet")
         XCTAssertGreaterThan(real.score("builtin.steak", "builtin.fries"), 0, "Steak et frites")
         XCTAssertGreaterThan(real.score("builtin.steak", "builtin.potato"), 0, "Steak et pommes de terre")
@@ -218,9 +227,9 @@ final class ScannerMealContextTests: XCTestCase {
     }
 
     /// `Tests/Fixtures/MealContext/parity.json`, written by `scripts/ml/meal_context.py fixture` from real zones of the test
-    /// photos and the table of the app: the Swift rule must give the Python's numbers.
+    /// photos and the learned table: the Swift rule must give the Python's numbers.
     func testSameResultsAsThePythonReference() throws {
-        guard let real = MealContextTable.bundled else { throw XCTSkip("ArdaneFoodPairs.json absent du paquet de l'app") }
+        let real = try learnedTable()
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
             .appendingPathComponent("Fixtures/MealContext/parity.json")
         guard let data = try? Data(contentsOf: url) else { throw XCTSkip("Tests/Fixtures/MealContext/parity.json introuvable") }

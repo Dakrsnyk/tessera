@@ -443,3 +443,17 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 ## Chantier 47 : offre Premium « Vitrine » à la fin de l'inscription — 2026-11-23
 - Fait : `OnboardingOffer` (App/Premium) après la page des notifications, une seule fois, seulement sans Premium (et en mode capture pour les tests) : 3 vrais widgets des centres d'intérêt dans le style de leur catégorie de Créer (Nutrition, Fitness, Habitudes par défaut), « + N styles », 3 avantages, annuel et mensuel côte à côte (annuel choisi, badge −%), « Essayer 7 jours gratuits », conditions sous le bouton (`PremiumStore.purchaseTerms`, partagé avec la page Premium), Restaurer, « Plus tard » toujours visible. Profil › « Voir l'offre de bienvenue » dans les versions de test (DEBUG et interne, déjà Premium). UITests d'inscription : `passOffer`, capture `profile-onboarding-offer`. Corrigé au passage : « 7 7 jours gratuits » (le nombre écrit deux fois) dans la page Premium aussi.
 - Reste : voir sur l'iPhone (Profil › Voir l'offre de bienvenue) ; achat réel en bac à sable quand le contrat Paid Apps sera actif ; ensuite, deuxième moment proposé : après le premier widget enregistré.
+
+## Chantier 48 : contexte du repas pour le scanner — 2026-11-23
+- **Fait — la règle :** `ScannerMealContext` (Shared/Domains/Scanner) reclasse les 3 aliments d'une zone d'après les autres zones.
+  - Associations S(a, b) apprises sur 38 462 repas MyFoodRepo (`scripts/ml/meal_context.py`).
+  - Changement borné, masse gardée ; jamais un aliment ajouté, jamais « sûr » (≥ 0,80) grâce au contexte seul.
+  - Branchée dans `modelReading` (paramètre `meal`) ; mention « Choisi d'après le reste de l'assiette » (6 langues).
+  - Tests : règle, 9 types de repas, intégration, table apprise, parité avec le Python (40 cas réels).
+- **Fait — la mesure hors ligne :**
+  - `dump_zones.py` enregistre les zones de 1 500 photos de validation et 1 000 de test ;
+  - `meal_context.py sweep|eval|fixture` produit le rapport `docs/scanner/Contexte-repas-avant-apres-2026-11-23.md`.
+- **Résultat :** aucun gain sur le test. 13 zones changent sur 1 364 (6 justes, 7 fausses) ; kcal inchangées ; salades −2 pts (non significatif).
+- **Décision :** **éteint**. La table est dans `Tests/Fixtures/MealContext/`, pas dans l'app ; `MealContextTable.bundled` vaut nil ; le scanner se comporte exactement comme avant.
+- **Piste mesurée, non retenue :** zones faibles 0,10–0,20 soutenues par le contexte. Justes à 59 % sur la validation, mais instables sur le test : 54 %, puis 43 % et 39 % quand le soutien monte.
+- **Reste — prochaine source à essayer :** les associations des propres repas de la personne (historique de 60 jours, comme `ScannerContextPriors`). À allumer seulement si la même mesure montre un gain.

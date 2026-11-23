@@ -5,10 +5,11 @@ Trois commandes :
 
     # 1. La base d'associations, apprise sur les vrais repas de MyFoodRepo (train officiel, SANS les photos de la validation)
     python scripts/ml/meal_context.py build --train <raw/myfoodrepo/train/annotations.json> --exclude <ds/valid/_annotations.coco.json> \
-        --out App/Resources/Models/ArdaneFoodPairs.json
+        --out Tests/Fixtures/MealContext/ArdaneFoodPairs.json
+    # (dans App/Resources/Models/ seulement le jour où `eval` montre un vrai gain sur le test : le 2026-11-23, aucun, donc hors de l'app)
 
     # 2. La mesure avant / après, hors ligne, sur les zones enregistrées par dump_zones.py
-    python scripts/ml/meal_context.py eval --pairs App/Resources/Models/ArdaneFoodPairs.json --zones zones-test.json --out rapport.md
+    python scripts/ml/meal_context.py eval --pairs Tests/Fixtures/MealContext/ArdaneFoodPairs.json --zones zones-test.json --out rapport.md
 
     # 3. Le réglage (sur la VALIDATION seulement, jamais sur le test)
     python scripts/ml/meal_context.py sweep --train ... --exclude ... --zones zones-valid.json
