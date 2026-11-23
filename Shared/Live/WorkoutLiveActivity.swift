@@ -151,7 +151,8 @@ enum RestNotifier {
         content.title = tr("Repos terminé")
         content.body = tr("Prêt pour la prochaine série.")
         // The « ding » of Ardane (Shared/Sounds, built by scripts/sound/rest_ding.py); iPhone on silent, iOS vibrates
-        // instead. A missing file falls back to the default sound.
+        // instead. A missing file falls back to the default sound. Not time-sensitive (that needs one more signing
+        // capability): a Focus mode may hold it back.
         content.sound = UNNotificationSound(named: UNNotificationSoundName(soundFile))
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: seconds, repeats: false)
         try? await center.add(UNNotificationRequest(identifier: identifier, content: content, trigger: trigger))
