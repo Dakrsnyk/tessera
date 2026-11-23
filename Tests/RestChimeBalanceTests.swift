@@ -1,3 +1,4 @@
+import AVFoundation
 import XCTest
 @testable import Ardane
 
@@ -45,6 +46,17 @@ final class RestChimeBalanceTests: XCTestCase {
         XCTAssertEqual(RestNotifier.soundFile, "ardane-ding.wav")
         let name = (RestNotifier.soundFile as NSString).deletingPathExtension
         XCTAssertNotNil(Bundle.main.url(forResource: name, withExtension: "wav"), "The sound is in the app")
+    }
+
+    /// iOS plays a notification sound only under 30 s; 44.1 kHz PCM is the safest format.
+    func testTheDingIsAValidNotificationSound() throws {
+        let name = (RestNotifier.soundFile as NSString).deletingPathExtension
+        let url = try XCTUnwrap(Bundle.main.url(forResource: name, withExtension: "wav"))
+        let file = try AVAudioFile(forReading: url)
+        XCTAssertEqual(file.fileFormat.sampleRate, 44_100)
+        let seconds = Double(file.length) / file.fileFormat.sampleRate
+        XCTAssertGreaterThan(seconds, 1)
+        XCTAssertLessThan(seconds, 30)
     }
 
     // MARK: Séance du jour / Prochaine série
