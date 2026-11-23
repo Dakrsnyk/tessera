@@ -442,7 +442,7 @@ def main() -> None:
     p.add_argument("--pairs", required=True)
     p.add_argument("--zones", required=True)
     p.add_argument("--count", type=int, default=40)
-    p.add_argument("--out", default=str(REPO / "Tests" / "Fixtures" / "MealContext" / "parity.json"))
+    p.add_argument("--out", default=str(REPO / "Tests" / "Fixtures" / "MealContext" / "meal-context-parity.json"))
     args = ap.parse_args()
     {"build": cmd_build, "sweep": cmd_sweep, "eval": cmd_eval, "fixture": cmd_fixture}[args.cmd](args)
 

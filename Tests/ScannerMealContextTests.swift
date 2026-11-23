@@ -226,13 +226,13 @@ final class ScannerMealContextTests: XCTestCase {
         rows.map { (key: $0[0], probability: Double($0[1]) ?? .nan) }
     }
 
-    /// `Tests/Fixtures/MealContext/parity.json`, written by `scripts/ml/meal_context.py fixture` from real zones of the test
+    /// `Tests/Fixtures/MealContext/meal-context-parity.json`, written by `scripts/ml/meal_context.py fixture` from real zones of the test
     /// photos and the learned table: the Swift rule must give the Python's numbers.
     func testSameResultsAsThePythonReference() throws {
         let real = try learnedTable()
         let url = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
-            .appendingPathComponent("Fixtures/MealContext/parity.json")
-        guard let data = try? Data(contentsOf: url) else { throw XCTSkip("Tests/Fixtures/MealContext/parity.json introuvable") }
+            .appendingPathComponent("Fixtures/MealContext/meal-context-parity.json")
+        guard let data = try? Data(contentsOf: url) else { throw XCTSkip("Tests/Fixtures/MealContext/meal-context-parity.json introuvable") }
         let parity = try JSONDecoder().decode(Parity.self, from: data)
         XCTAssertGreaterThanOrEqual(parity.cases.count, 20)
         var changed = 0
