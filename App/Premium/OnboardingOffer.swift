@@ -45,6 +45,8 @@ struct OnboardingOffer: View {
             .safeAreaInset(edge: .bottom, spacing: 0) { purchaseBar }
         }
         .cristalScreen()
+        // `.contain` first: an identifier set on the whole screen would replace the buttons' own ones.
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("onboarding-offer")
         .alert(tr("Achat"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {
             Button(tr("OK"), role: .cancel) {

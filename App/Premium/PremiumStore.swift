@@ -264,7 +264,8 @@ final class PremiumStore {
     func introDescription(for product: Product) -> String? {
         guard let days = trialDays(for: product), let subscription = product.subscription else { return nil }
         let regular = Self.periodText(product.displayPrice, subscription.subscriptionPeriod)
-        return tr("\(days) \(Fmt.plural(days, tr("jour gratuit"), tr("jours gratuits"))), puis \(regular)")
+        // `Fmt.plural` already writes the number (« 7 jours gratuits »); it was written twice before (2026-11-23).
+        return tr("\(Fmt.plural(days, tr("jour gratuit"), tr("jours gratuits"))), puis \(regular)")
     }
 
     /// « 6,99 $ par mois », « 59,99 $ par an ».

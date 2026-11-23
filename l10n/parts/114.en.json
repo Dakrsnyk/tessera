@@ -1,5 +1,6 @@
 {
  "%@ styles et %@ couleurs d'app": "%@ styles and %@ app colors",
+ "%@, puis %@": "%1$@, then %2$@",
  "+ %@ styles": "+ %@ styles",
  "Statistiques, exercices, scans illimités": "Stats, exercises, unlimited scans",
  "Tout Ardane, %@ jours gratuits": "All of Ardane, %@ days free",
