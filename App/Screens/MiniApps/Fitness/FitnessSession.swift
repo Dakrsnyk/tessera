@@ -20,6 +20,9 @@ struct FitnessSessionPage: View {
     @State private var confirmCancel = false
     /// The explanation before the notification prompt (the rest alert), shown once when a first rest starts.
     @State private var asksNotifications = false
+    /// Whether notifications are allowed: without them, the end of a rest is silent once the screen is locked.
+    @State private var restAlertState: PermissionState?
+    @Environment(\.scenePhase) private var scenePhase
     @Environment(\.appStyle) private var style
     private var palette: CristalPalette { CristalPalette.of(style.id) }
 
@@ -69,6 +72,12 @@ struct FitnessSessionPage: View {
             // Allowed now: the alert of the rest under way is set right away.
             let fitness = model.fitness
             Task { await WorkoutLiveActivity.sync(fitness) }
+            Task { await refreshRestAlertState() }
+        }
+        .task { await refreshRestAlertState() }
+        // Back from the Settings, where notifications may have been allowed.
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { Task { await refreshRestAlertState() } }
         }
     }
 
@@ -192,10 +201,13 @@ struct FitnessSessionPage: View {
                 }
                 if let rest = session.restEndsAt {
                     // Redrawn every second: at zero the countdown gives way to « Prêt » instead of staying at 0:00.
+                    // At the end: the « ding » and two vibrations (`RestChime`), or the notification screen locked.
                     TimelineView(.periodic(from: now, by: 1)) { context in
                         restRow(until: rest, at: context.date)
                     }
-                    .task(id: rest) { await signalRestEnd(rest) }
+                    if let restAlertState, restAlertState != .granted {
+                        restAlertHint
+                    }
                 } else if let paused = session.restPausedRemaining {
                     HStack {
                         Label(tr("Repos en pause · \(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))"), systemImage: "pause.circle")
@@ -365,14 +377,32 @@ struct FitnessSessionPage: View {
         .background(palette.tintColor, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
     }
 
-    /// In the app, the end of the rest is felt (the screen stays open): a haptic at the instant. Locked or in the
-    /// background, the notification does it. Cancelled with the rest (skipped, paused, set done).
-    private func signalRestEnd(_ rest: Date) async {
-        let wait = rest.timeIntervalSinceNow
-        guard wait > 0 else { return }
-        try? await Task.sleep(for: .seconds(wait))
-        guard !Task.isCancelled else { return }
-        await MainActor.run { Haptics.success() }
+    /// Reads again whether notifications are allowed (for `restAlertHint`). The end of the rest itself rings through
+    /// `RestChime` with the app open, through `RestNotifier`'s notification once locked or in the background.
+    private func refreshRestAlertState() async {
+        restAlertState = await AppPermission.notifications.currentState()
+    }
+
+    /// Notifications not allowed: the rest ends silently once the screen is locked. « Autoriser » explains and asks
+    /// (or, refused before, offers the Settings).
+    private var restAlertHint: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "bell.slash")
+                .foregroundStyle(.secondary)
+            Text(tr("Écran verrouillé, la fin du repos ne sonne qu'avec les notifications."))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Button(tr("Autoriser")) {
+                Task {
+                    _ = await AppPermission.notifications.requestOrExplain(isPresented: $asksNotifications, request: requestNotifications)
+                    await refreshRestAlertState()
+                }
+            }
+            .font(.footnote.weight(.semibold))
+        }
+        .padding(.horizontal, 4)
+        .accessibilityIdentifier("session-rest-alert-hint")
     }
 
     /// Drops the session in progress: never in the history, nor in the week, streak or records.

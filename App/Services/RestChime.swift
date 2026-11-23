@@ -1,12 +1,14 @@
+import AVFoundation
 import AudioToolbox
 import Foundation
 import UIKit
 
-/// The end of a rest while Ardane is open (2026-11-23): the « ding » of Ardane, or a vibration when the iPhone is on
-/// silent, so the person knows the next set is due without looking at the phone. `AudioServicesPlayAlertSound` does
-/// exactly that: the sound with the ringer on, a vibration on silent. App in the background or screen locked,
-/// `RestNotifier`'s notification carries the same sound (iOS vibrates on silent too); in front, that notification
-/// stays quiet (`NotificationPresenter`), so the rest never rings twice.
+/// The end of a rest while Ardane is open (2026-11-23): the « ding » of Ardane and two strong vibrations (one per note),
+/// so the person knows the next set is due without looking at the phone. On silent, the ding is muted by the switch
+/// (`.ambient`, which also plays over the person's music instead of stopping it) and the vibrations remain. The first
+/// version used `AudioServicesPlayAlertSound` with the sound file: nothing was heard nor felt on the iPhone (2026-11-23).
+/// App in the background or screen locked, `RestNotifier`'s notification carries the same sound (iOS vibrates on silent
+/// too); in front, that notification stays quiet (`NotificationPresenter`), so the rest never rings twice.
 @MainActor
 final class RestChime {
     static let shared = RestChime()
@@ -16,7 +18,7 @@ final class RestChime {
 
     private var task: Task<Void, Never>?
     private var armedEnd: Date?
-    private var soundID: SystemSoundID?
+    private var player: AVAudioPlayer?
 
     /// Follows the workout: armed for the rest running, disarmed when it is passed, paused or the session ends.
     /// Safe to call after every change.
@@ -52,18 +54,27 @@ final class RestChime {
         armedEnd = nil
         task = nil
         guard Self.shouldRing(end: end, now: Date(), isInBackground: UIApplication.shared.applicationState == .background) else { return }
-        AudioServicesPlayAlertSound(sound() ?? kSystemSoundID_Vibrate)
+        playDing()
+        // Two vibrations, on the two notes (D5, then A5 half a second later).
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+        }
     }
 
-    /// The sound registered once; nil when the file is missing (then only the vibration).
-    private func sound() -> SystemSoundID? {
-        if let soundID { return soundID }
-        let name = (RestNotifier.soundFile as NSString).deletingPathExtension
-        let ext = (RestNotifier.soundFile as NSString).pathExtension
-        guard let url = Bundle.main.url(forResource: name, withExtension: ext) else { return nil }
-        var id: SystemSoundID = 0
-        guard AudioServicesCreateSystemSoundID(url as CFURL, &id) == kAudioServicesNoError else { return nil }
-        soundID = id
-        return id
+    /// The ding through an `.ambient` audio session: muted by the silent switch, mixed with the music playing.
+    private func playDing() {
+        if player == nil {
+            let name = (RestNotifier.soundFile as NSString).deletingPathExtension
+            let ext = (RestNotifier.soundFile as NSString).pathExtension
+            guard let url = Bundle.main.url(forResource: name, withExtension: ext) else { return }
+            player = try? AVAudioPlayer(contentsOf: url)
+            player?.prepareToPlay()
+        }
+        let session = AVAudioSession.sharedInstance()
+        try? session.setCategory(.ambient)
+        try? session.setActive(true)
+        player?.currentTime = 0
+        player?.play()
     }
 }

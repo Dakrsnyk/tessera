@@ -1,7 +1,7 @@
 """The « ding » of Ardane for the end of a rest between two sets: the two glass notes of the ads' close
 (D5, then A5 half a second later: `cue_close` of scripts/ad2/synth.py), short and dry enough for a
-notification. Writes Shared/Sounds/ardane-ding.wav (mono, 48 kHz, 16-bit PCM: a format iOS plays for a
-notification and for a system sound; under 30 s).
+notification. Writes Shared/Sounds/ardane-ding.wav (mono, 44.1 kHz, 16-bit PCM: the safest format for a
+notification sound; under 30 s).
 
     ~/ardane-tools/venv/Scripts/python.exe scripts/sound/rest_ding.py
 """
@@ -13,7 +13,11 @@ import soundfile as sf
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.join(ROOT, "scripts", "ad2"))
-from synth import SR, fm_glass, note, reverb  # noqa: E402
+import synth  # noqa: E402
+from synth import fm_glass, note, reverb  # noqa: E402
+
+# The instruments read synth.SR when called: 44.1 kHz here, the rate iOS expects most often for a notification sound.
+synth.SR = SR = 44100
 
 SECONDS = 2.4
 GAP = 0.5  # the eighth rest of the close: f60 -> f90 at 60 fps

@@ -927,7 +927,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:554: Text(last.sets.map { $0.weight > 0 ? tr(\"\\(Units.loadText(kilograms: $0.weight, in: model.settings.unitSystem)) × \\($0.reps)\") : tr(\"\\($0.reps) reps\") }.joined(separator: \" · \"))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:466: Text(set.weight > 0 ? \"\\(Units.loadNumber(kilograms: set.weight, in: model.settings.unitSystem)) × \\(set.reps)\" : tr(\"\\(set.reps) reps\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:496: Text(set.weight > 0 ? \"\\(Units.loadNumber(kilograms: set.weight, in: model.settings.unitSystem)) × \\(set.reps)\" : tr(\"\\(set.reps) reps\"))"
   ]
  },
  "%@ restants": {
@@ -1250,7 +1250,7 @@
   "placeholders": 2,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:71: Text(tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:520: detail: tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:550: detail: tr(\"\\(Fmt.plural(routine.exercises.count, tr(\"exercice\"), tr(\"exercices\"))) · environ \\(FitnessPlan.minutes(routine)) min\"))"
   ]
  },
  "%@ · fond d'écran assorti": {
@@ -1463,8 +1463,8 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:133: .accessibilityValue(tr(\"\\(active.sets.count)/\\(active.totalSets) séries\"))",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:135: Text(tr(\"\\(active.sets.count)/\\(active.totalSets) séries\"))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:146: Text(tr(\"\\(session.sets.count)/\\(session.totalSets) séries\"))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:152: .accessibilityValue(tr(\"\\(session.sets.count)/\\(session.totalSets) séries\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:155: Text(tr(\"\\(session.sets.count)/\\(session.totalSets) séries\"))",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:161: .accessibilityValue(tr(\"\\(session.sets.count)/\\(session.totalSets) séries\"))"
   ]
  },
  "%@/%@ · compte pour %@ %%": {
@@ -2369,7 +2369,7 @@
  "Accueil": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:304: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
+   "App/ArdaneApp.swift:305: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
   ]
  },
  "Accès au calendrier": {
@@ -2779,7 +2779,7 @@
  "Ajoute les exercices au fur et à mesure": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:533: MiniRow(symbol: \"sparkles\", colorHex: accentHex, title: tr(\"Séance libre\"), detail: tr(\"Ajoute les exercices au fur et à mesure\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:563: MiniRow(symbol: \"sparkles\", colorHex: accentHex, title: tr(\"Séance libre\"), detail: tr(\"Ajoute les exercices au fur et à mesure\"))"
   ]
  },
  "Ajoute les incontournables (passeport, chargeur, assurance…) sans doublon ; retire ceux qui ne te servent pas en glissant.": {
@@ -3150,8 +3150,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:136: .navigationTitle(onPick == nil ? tr(\"Exercices\") : tr(\"Ajouter un exercice\"))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:278: Label(tr(\"Ajouter un exercice\"), systemImage: \"plus.circle.fill\").font(.subheadline.weight(.semibold))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:554: SheetForm(title: tr(\"Ajouter un exercice\"), canSave: !name.trimmed.isEmpty, onSave: save) {",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:290: Label(tr(\"Ajouter un exercice\"), systemImage: \"plus.circle.fill\").font(.subheadline.weight(.semibold))",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:584: SheetForm(title: tr(\"Ajouter un exercice\"), canSave: !name.trimmed.isEmpty, onSave: save) {",
    "App/Screens/Spaces/FitnessSpace.swift:190: Label(tr(\"Ajouter un exercice\"), systemImage: \"plus\")"
   ]
  },
@@ -3476,7 +3476,7 @@
  "Allonger le repos de 15 secondes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:357: .accessibilityLabel(Text(tr(\"Allonger le repos de 15 secondes\")))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:369: .accessibilityLabel(Text(tr(\"Allonger le repos de 15 secondes\")))"
   ]
  },
  "Allongé ou assis dans la machine, rouleau au-dessus des talons.": {
@@ -3789,8 +3789,8 @@
  "Annuler la dernière série": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:239: Label(tr(\"Annuler la dernière série\"), systemImage: \"arrow.uturn.backward\")",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:502: Label(tr(\"Annuler la dernière série\"), systemImage: \"arrow.uturn.backward\")",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:251: Label(tr(\"Annuler la dernière série\"), systemImage: \"arrow.uturn.backward\")",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:532: Label(tr(\"Annuler la dernière série\"), systemImage: \"arrow.uturn.backward\")",
    "Shared/Intents/SpaceIntents.swift:142: static var title: LocalizedStringResource = \"Annuler la dernière série\"",
    "Shared/Live/WorkoutLiveActivity.swift:40: var backTitle: String { undoesSet ? tr(\"Annuler la dernière série\") : tr(\"Annuler la séance\") }"
   ]
@@ -3798,8 +3798,8 @@
  "Annuler la séance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:304: Label(tr(\"Annuler la séance\"), systemImage: \"xmark\")",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:310: Button(tr(\"Annuler la séance\"), role: .destructive) { cancelSession() }",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:316: Label(tr(\"Annuler la séance\"), systemImage: \"xmark\")",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:322: Button(tr(\"Annuler la séance\"), role: .destructive) { cancelSession() }",
    "Shared/Intents/SpaceIntents.swift:167: static var title: LocalizedStringResource = \"Annuler la séance\"",
    "Shared/Live/WorkoutLiveActivity.swift:40: var backTitle: String { undoesSet ? tr(\"Annuler la dernière série\") : tr(\"Annuler la séance\") }"
   ]
@@ -3807,7 +3807,7 @@
  "Annuler la séance ? Elle ne sera pas comptée.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:309: .confirmationDialog(tr(\"Annuler la séance ? Elle ne sera pas comptée.\"), isPresented: $confirmCancel, titleVisibility: .visible) {"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:321: .confirmationDialog(tr(\"Annuler la séance ? Elle ne sera pas comptée.\"), isPresented: $confirmCancel, titleVisibility: .visible) {"
   ]
  },
  "Annuler le temps d'étude": {
@@ -4843,7 +4843,7 @@
  "Aucune séance dans ton programme : crée-en une dans Programme.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:510: Text(tr(\"Aucune séance dans ton programme : crée-en une dans Programme.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:540: Text(tr(\"Aucune séance dans ton programme : crée-en une dans Programme.\"))"
   ]
  },
  "Aucune séance pour l'instant. Commence celle du jour depuis Fitness : elle s'enregistre ici.": {
@@ -4892,7 +4892,7 @@
  "Augmenter : %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:429: .accessibilityLabel(tr(\"Augmenter : \\(title)\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:459: .accessibilityLabel(tr(\"Augmenter : \\(title)\"))"
   ]
  },
  "Auj.": {
@@ -5078,6 +5078,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:480: EmptyStateView(symbol: \"figure.walk\", title: tr(\"Tes pas\"), message: tr(\"Ardane lit tes pas, ta distance et tes étages depuis le capteur de ton iPhone.\"), actionTitle: tr(\"Autoriser\")) {",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:396: Button(tr(\"Autoriser\")) {",
    "App/Screens/Onboarding/PermissionsSetupStep.swift:136: Text(tr(\"Autoriser\"))"
   ]
  },
@@ -7697,9 +7698,9 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:625: NumberRow(title: tr(\"Charge\"), value: $weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:187: adjuster(title: tr(\"Charge\"), value: weight > 0 ? Units.loadText(kilograms: weight, in: model.settings.unitSystem) : tr(\"Corps\")) {",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:579: NumberRow(title: tr(\"Charge\"), value: $weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:611: NumberRow(title: tr(\"Charge\"), value: $weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:196: adjuster(title: tr(\"Charge\"), value: weight > 0 ? Units.loadText(kilograms: weight, in: model.settings.unitSystem) : tr(\"Corps\")) {",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:609: NumberRow(title: tr(\"Charge\"), value: $weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:641: NumberRow(title: tr(\"Charge\"), value: $weight.weight(in: model.settings.unitSystem), unit: model.settings.unitSystem.weightUnit)"
   ]
  },
  "Charge la plus lourde de chaque séance": {
@@ -8017,7 +8018,7 @@
  "Choisir dans la bibliothèque": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:270: Label(tr(\"Choisir dans la bibliothèque\"), systemImage: \"books.vertical\").font(.subheadline.weight(.semibold))",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:282: Label(tr(\"Choisir dans la bibliothèque\"), systemImage: \"books.vertical\").font(.subheadline.weight(.semibold))",
    "App/Screens/Spaces/FitnessSpace.swift:178: Label(tr(\"Choisir dans la bibliothèque\"), systemImage: \"books.vertical\")"
   ]
  },
@@ -8148,7 +8149,7 @@
  "Choisis la séance à faire.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:507: Text(tr(\"Choisis la séance à faire.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:537: Text(tr(\"Choisis la séance à faire.\"))"
   ]
  },
  "Choisis la tienne, ou n'importe quelle autre avec Premium.": {
@@ -9100,7 +9101,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:317: let load = exercise.weight > 0 ? Units.loadText(kilograms: exercise.weight, in: model.settings.unitSystem) : tr(\"Corps\")",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:187: adjuster(title: tr(\"Charge\"), value: weight > 0 ? Units.loadText(kilograms: weight, in: model.settings.unitSystem) : tr(\"Corps\")) {"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:196: adjuster(title: tr(\"Charge\"), value: weight > 0 ? Units.loadText(kilograms: weight, in: model.settings.unitSystem) : tr(\"Corps\")) {"
   ]
  },
  "Corps aligné des chevilles à la tête, position fixe.": {
@@ -9850,7 +9851,7 @@
  "Créer": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:308: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
+   "App/ArdaneApp.swift:309: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
    "App/Screens/Editor/EditorView.swift:129: if onChangeWidget != nil { return tr(\"Créer\") }",
    "App/Screens/Spaces/CreateFlow.swift:280: case .size: tr(\"Créer\")",
    "App/Screens/Tutorial/Tutorial.swift:57: case .create: tr(\"Créer\")"
@@ -11087,7 +11088,7 @@
  "Diminuer : %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:419: .accessibilityLabel(tr(\"Diminuer : \\(title)\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:449: .accessibilityLabel(tr(\"Diminuer : \\(title)\"))"
   ]
  },
  "Dips (pectoraux)": {
@@ -12534,7 +12535,7 @@
  "En pause": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:226: Text(tr(\"En pause\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:227: Text(tr(\"En pause\"))"
   ]
  },
  "En position de pompe, bras tendus, corps gainé.": {
@@ -13034,7 +13035,7 @@
  "Exercice": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:556: TextField(tr(\"Exercice\"), text: $name)",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:586: TextField(tr(\"Exercice\"), text: $name)",
    "App/Screens/Spaces/FitnessSpace.swift:199: TextField(tr(\"Exercice\"), text: $exercise.name)"
   ]
  },
@@ -13666,13 +13667,13 @@
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:253: .accessibilityLabel(Text(tr(\"Fiche de \\(exercise.name)\")))",
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:256: .accessibilityLabel(Text(isOpen ? tr(\"Fiche de \\(name)\") : tr(\"\\(name), Premium\")))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:456: .accessibilityLabel(Text(tr(\"Fiche de \\(item.name)\")))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:486: .accessibilityLabel(Text(tr(\"Fiche de \\(item.name)\")))"
   ]
  },
  "Fiche de l'exercice": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:177: .accessibilityLabel(Text(tr(\"Fiche de l'exercice\")))",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:186: .accessibilityLabel(Text(tr(\"Fiche de l'exercice\")))",
    "App/Screens/Spaces/FitnessSpace.swift:214: .accessibilityLabel(Text(tr(\"Fiche de l'exercice\")))"
   ]
  },
@@ -16886,7 +16887,7 @@
  "La dernière fois : %@ × %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:164: Text(tr(\"La dernière fois : \\(Units.loadText(kilograms: best.weight, in: model.settings.unitSystem)) × \\(best.reps)\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:173: Text(tr(\"La dernière fois : \\(Units.loadText(kilograms: best.weight, in: model.settings.unitSystem)) × \\(best.reps)\"))"
   ]
  },
  "La disposition prévue pour ce widget.": {
@@ -17085,7 +17086,7 @@
  "La séance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:259: MiniSectionTitle(title: tr(\"La séance\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:271: MiniSectionTitle(title: tr(\"La séance\"))"
   ]
  },
  "La séance du jour et le volume de la semaine.": {
@@ -18382,7 +18383,7 @@
  "Les séries faites sont enregistrées dans l'historique.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:297: Text(tr(\"Les séries faites sont enregistrées dans l'historique.\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:309: Text(tr(\"Les séries faites sont enregistrées dans l'historique.\"))"
   ]
  },
  "Les taux de change s'affichent dès que la connexion est disponible.": {
@@ -19639,7 +19640,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:100: Text(tr(\"Mes exercices\"))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:560: Section(tr(\"Mes exercices\")) {"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:590: Section(tr(\"Mes exercices\")) {"
   ]
  },
  "Mes habitudes": {
@@ -19818,7 +19819,7 @@
  "Mes widgets": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:316: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }",
+   "App/ArdaneApp.swift:317: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:37: MiniSectionTitle(title: tr(\"Mes widgets\"),",
    "App/Screens/MyWidgets/MyWidgetsView.swift:97: .navigationTitle(isSelecting ? selectionTitle : tr(\"Mes widgets\"))",
    "App/Screens/Tutorial/Tutorial.swift:60: case .mine: tr(\"Mes widgets\")"
@@ -19848,7 +19849,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:861: label: tr(\"Mettre le repos en pause\")) { $0.pauseRest(at: Date()) }",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:608: .accessibilityLabel(Text(tr(\"Mettre le repos en pause\")))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:343: .accessibilityLabel(Text(tr(\"Mettre le repos en pause\")))",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:355: .accessibilityLabel(Text(tr(\"Mettre le repos en pause\")))",
    "Shared/Intents/SpaceIntents.swift:182: static var title: LocalizedStringResource = \"Mettre le repos en pause\""
   ]
  },
@@ -21731,8 +21732,8 @@
  "OK": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:140: Button(tr(\"OK\")) { router.isIconPickerPresented = false }",
-   "App/ArdaneApp.swift:340: Button(tr(\"OK\")) { dismiss() }",
+   "App/ArdaneApp.swift:141: Button(tr(\"OK\")) { router.isIconPickerPresented = false }",
+   "App/ArdaneApp.swift:341: Button(tr(\"OK\")) { dismiss() }",
    "App/Premium/OnboardingOffer.swift:49: Button(tr(\"OK\"), role: .cancel) {",
    "App/Premium/PaywallView.swift:55: Button(tr(\"OK\"), role: .cancel) {"
   ]
@@ -22781,14 +22782,14 @@
   "uses": [
    "App/Screens/MiniApps/MiniAppTour.swift:312: Text(tr(\"Passer\"))",
    "App/Screens/Onboarding/OnboardingView.swift:172: Button(tr(\"Passer\"), action: skip)",
-   "Shared/Live/WorkoutLiveActivity.swift:209: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipSetIntent(expecting: state.position))",
+   "Shared/Live/WorkoutLiveActivity.swift:210: actionButton(tr(\"Passer\"), symbol: \"forward.fill\", prominent: false, intent: SkipSetIntent(expecting: state.position))",
    "Shared/Render/Tiles/FitnessTiles.swift:137: TileButton(title: tr(\"Passer\"), symbol: \"forward.fill\", action: .skipSet(state.position)),"
   ]
  },
  "Passer cet exercice": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:246: Button(tr(\"Passer cet exercice\")) {"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:258: Button(tr(\"Passer cet exercice\")) {"
   ]
  },
  "Passer l'étape": {
@@ -22800,7 +22801,7 @@
  "Passer la série": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:227: Label(tr(\"Passer la série\"), systemImage: \"forward.fill\")",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:239: Label(tr(\"Passer la série\"), systemImage: \"forward.fill\")",
    "Shared/Intents/SpaceIntents.swift:118: static var title: LocalizedStringResource = \"Passer la série\"",
    "Shared/Render/Tiles/FitnessTiles.swift:57: return TileButton(title: tr(\"Passer la série\"), symbol: \"forward.fill\", action: .skipSet(state.position), isIconOnly: true)"
   ]
@@ -22808,8 +22809,8 @@
  "Passer le repos": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:209: Button(tr(\"Passer le repos\")) {",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:358: Button(tr(\"Passer le repos\")) {",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:221: Button(tr(\"Passer le repos\")) {",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:370: Button(tr(\"Passer le repos\")) {",
    "Shared/Intents/SpaceIntents.swift:214: static var title: LocalizedStringResource = \"Passer le repos\""
   ]
  },
@@ -22828,7 +22829,7 @@
  "Passée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:477: Label(tr(\"Passée\"), systemImage: \"forward.fill\")"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:507: Label(tr(\"Passée\"), systemImage: \"forward.fill\")"
   ]
  },
  "Passés": {
@@ -22889,7 +22890,7 @@
  "Pause": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:206: actionButton(tr(\"Pause\"), symbol: \"pause.fill\", prominent: false, intent: PauseRestIntent())",
+   "Shared/Live/WorkoutLiveActivity.swift:207: actionButton(tr(\"Pause\"), symbol: \"pause.fill\", prominent: false, intent: PauseRestIntent())",
    "Widgets/WorkoutLiveActivityWidget.swift:43: Label(tr(\"Pause\"), systemImage: \"pause.fill\")"
   ]
  },
@@ -25051,8 +25052,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:592: Label(tr(\"Prêt\"), systemImage: \"checkmark.circle\")",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:329: Text(tr(\"Prêt\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:253: Text(tr(\"Prêt\"))",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:341: Text(tr(\"Prêt\"))",
+   "Shared/Live/WorkoutLiveActivity.swift:254: Text(tr(\"Prêt\"))",
    "Shared/Render/Tiles/FitnessTiles.swift:144: tile.value = tr(\"Prêt\")"
   ]
  },
@@ -25312,7 +25313,7 @@
  "Raccourcir le repos de 15 secondes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:350: .accessibilityLabel(Text(tr(\"Raccourcir le repos de 15 secondes\")))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:362: .accessibilityLabel(Text(tr(\"Raccourcir le repos de 15 secondes\")))"
   ]
  },
  "Ragoût de bœuf": {
@@ -26107,7 +26108,7 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:626: Stepper(tr(\"Repos : \\(rest) s\"), value: $rest, in: 15...600, step: 15)",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:580: Stepper(tr(\"Repos : \\(rest) s\"), value: $rest, in: 15...600, step: 15)",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:610: Stepper(tr(\"Repos : \\(rest) s\"), value: $rest, in: 15...600, step: 15)",
    "App/Screens/Spaces/FitnessSpace.swift:232: Stepper(tr(\"Repos : \\(exercise.restSeconds) s\"), value: $exercise.restSeconds, in: 15...600, step: 15)"
   ]
  },
@@ -26120,8 +26121,8 @@
  "Repos [timer]": {
   "placeholders": 0,
   "uses": [
-   "Shared/Live/WorkoutLiveActivity.swift:235: Text(tr(\"Repos\", context: \"timer\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:250: Text(tr(\"Repos\", context: \"timer\"))",
+   "Shared/Live/WorkoutLiveActivity.swift:236: Text(tr(\"Repos\", context: \"timer\"))",
+   "Shared/Live/WorkoutLiveActivity.swift:251: Text(tr(\"Repos\", context: \"timer\"))",
    "Shared/Model/KindCatalog.swift:170: KindInfo(kind: .restTimer, title: tr(\"Repos\", context: \"timer\"), summary: tr(\"Le temps de repos entre deux séries, qui défile en direct.\"), category: .fitness, symbol: \"timer\", isPremium: true, famili",
    "Shared/Render/Tiles/FitnessTiles.swift:126: var tile = Tile(title: tr(\"Repos\", context: \"timer\"), symbol: \"timer\")"
   ]
@@ -26136,7 +26137,7 @@
  "Repos en pause · %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:201: Label(tr(\"Repos en pause · \\(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))\"), systemImage: \"pause.circle\")"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:213: Label(tr(\"Repos en pause · \\(Duration.seconds(paused).formatted(.time(pattern: .minuteSecond)))\"), systemImage: \"pause.circle\")"
   ]
  },
  "Repos jusqu'à %@": {
@@ -26174,8 +26175,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:633: .accessibilityLabel(Text(tr(\"Reprendre\")))",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:205: Button(tr(\"Reprendre\")) {",
-   "Shared/Live/WorkoutLiveActivity.swift:204: actionButton(tr(\"Reprendre\"), symbol: \"play.fill\", prominent: false, intent: ResumeRestIntent())",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:217: Button(tr(\"Reprendre\")) {",
+   "Shared/Live/WorkoutLiveActivity.swift:205: actionButton(tr(\"Reprendre\"), symbol: \"play.fill\", prominent: false, intent: ResumeRestIntent())",
    "Widgets/WorkoutLiveActivityWidget.swift:37: Label(tr(\"Reprendre\"), systemImage: \"play.fill\")"
   ]
  },
@@ -27485,15 +27486,15 @@
  "Répétitions": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:182: adjuster(title: tr(\"Répétitions\"), value: \"\\(reps)\") {"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:191: adjuster(title: tr(\"Répétitions\"), value: \"\\(reps)\") {"
   ]
  },
  "Répétitions : %@": {
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:624: Stepper(tr(\"Répétitions : \\(reps)\"), value: $reps, in: 1...100)",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:578: Stepper(tr(\"Répétitions : \\(reps)\"), value: $reps, in: 1...100)",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:610: Stepper(tr(\"Répétitions : \\(reps)\"), value: $reps, in: 1...100)",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:608: Stepper(tr(\"Répétitions : \\(reps)\"), value: $reps, in: 1...100)",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:640: Stepper(tr(\"Répétitions : \\(reps)\"), value: $reps, in: 1...100)",
    "App/Screens/Spaces/FitnessSpace.swift:230: Stepper(tr(\"Répétitions : \\(exercise.reps)\"), value: $exercise.reps, in: 1...50)"
   ]
  },
@@ -29016,7 +29017,7 @@
  "Store": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:312: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }",
+   "App/ArdaneApp.swift:313: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }",
    "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
    "App/Core/MarketingShots.swift:813: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
    "App/Screens/Explore/ExploreView.swift:133: .navigationTitle(tr(\"Store\"))"
@@ -29311,7 +29312,7 @@
  "Supprimer cette série": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:622: Label(tr(\"Supprimer cette série\"), systemImage: \"trash\")"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:652: Label(tr(\"Supprimer cette série\"), systemImage: \"trash\")"
   ]
  },
  "Supprimer cette échéance ?": {
@@ -29767,8 +29768,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/FitnessPages.swift:88: Label(tr(\"Séance libre\"), systemImage: \"sparkles\")",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:528: state.startSession(Routine(name: tr(\"Séance libre\"), exercises: []), at: Date())",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:533: MiniRow(symbol: \"sparkles\", colorHex: accentHex, title: tr(\"Séance libre\"), detail: tr(\"Ajoute les exercices au fur et à mesure\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:558: state.startSession(Routine(name: tr(\"Séance libre\"), exercises: []), at: Date())",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:563: MiniRow(symbol: \"sparkles\", colorHex: accentHex, title: tr(\"Séance libre\"), detail: tr(\"Ajoute les exercices au fur et à mesure\"))"
   ]
  },
  "Séance rattrapée": {
@@ -29909,7 +29910,7 @@
  "Série %@ sur %@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:159: Text(tr(\"Série \\(session.setIndex + 1) sur \\(exercise.sets)\"))"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:168: Text(tr(\"Série \\(session.setIndex + 1) sur \\(exercise.sets)\"))"
   ]
  },
  "Série %@/%@": {
@@ -29922,7 +29923,7 @@
   "placeholders": 3,
   "uses": [
    "App/Screens/Spaces/FitnessSpace.swift:16: Text(tr(\"Série \\(active.setIndex + 1)/\\(exercise.sets) · \\(FitnessTiles.setText(exercise, system: model.settings.unitSystem))\"))",
-   "Shared/Live/WorkoutLiveActivity.swift:191: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
+   "Shared/Live/WorkoutLiveActivity.swift:192: Text(tr(\"Série \\(state.setNumber)/\\(state.sets) · \\(state.load)\"))"
   ]
  },
  "Série %@/%@ · %@ × %@": {
@@ -29973,7 +29974,7 @@
   "uses": [
    "App/Screens/Home/DailySection.swift:864: actionButton(tr(\"Série faite\"), symbol: \"checkmark\") {",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:560: Label(tr(\"Série faite\"), systemImage: \"checkmark.circle.fill\")",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:217: MiniActionButton(title: tr(\"Série faite\"), symbol: \"checkmark.circle.fill\", colorHex: accentHex) {",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:229: MiniActionButton(title: tr(\"Série faite\"), symbol: \"checkmark.circle.fill\", colorHex: accentHex) {",
    "App/Screens/Spaces/FitnessSpace.swift:38: Label(tr(\"Série faite\"), systemImage: \"checkmark.circle.fill\").font(.headline)"
   ]
  },
@@ -30005,14 +30006,14 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:622: Section(tr(\"Séries\")) {",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:576: Section(tr(\"Séries\")) {"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:606: Section(tr(\"Séries\")) {"
   ]
  },
  "Séries : %@": {
   "placeholders": 1,
   "uses": [
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:623: Stepper(tr(\"Séries : \\(sets)\"), value: $sets, in: 1...12)",
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:577: Stepper(tr(\"Séries : \\(sets)\"), value: $sets, in: 1...12)",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:607: Stepper(tr(\"Séries : \\(sets)\"), value: $sets, in: 1...12)",
    "App/Screens/Spaces/FitnessSpace.swift:229: Stepper(tr(\"Séries : \\(exercise.sets)\"), value: $exercise.sets, in: 1...12)"
   ]
  },
@@ -30583,7 +30584,7 @@
  "Terminer et enregistrer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:291: Button(tr(\"Terminer et enregistrer\")) {"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:303: Button(tr(\"Terminer et enregistrer\")) {"
   ]
  },
  "Terminer et noter": {
@@ -30595,14 +30596,14 @@
  "Terminer la séance": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:286: Text(tr(\"Terminer la séance\")).frame(maxWidth: .infinity, minHeight: 44)",
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:298: Text(tr(\"Terminer la séance\")).frame(maxWidth: .infinity, minHeight: 44)",
    "App/Screens/Spaces/FitnessSpace.swift:40: Button(tr(\"Terminer la séance\"), role: .destructive) {"
   ]
  },
  "Terminer la séance ?": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Fitness/FitnessSession.swift:290: .confirmationDialog(tr(\"Terminer la séance ?\"), isPresented: $confirmFinish, titleVisibility: .visible) {"
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:302: .confirmationDialog(tr(\"Terminer la séance ?\"), isPresented: $confirmFinish, titleVisibility: .visible) {"
   ]
  },
  "Terminer le temps d'étude": {
@@ -37464,6 +37465,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioComponents.swift:491: Text(tr(\"Écran verrouillé : iOS affiche les widgets d'une seule teinte.\"))"
+  ]
+ },
+ "Écran verrouillé, la fin du repos ne sonne qu'avec les notifications.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/MiniApps/Fitness/FitnessSession.swift:392: Text(tr(\"Écran verrouillé, la fin du repos ne sonne qu'avec les notifications.\"))"
   ]
  },
  "Écran à cristaux liquides": {
