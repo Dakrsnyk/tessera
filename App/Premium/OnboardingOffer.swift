@@ -197,9 +197,20 @@ struct OnboardingOffer: View {
             selectedID = product.id
         } label: {
             VStack(alignment: .leading, spacing: 3) {
-                HStack(alignment: .top) {
+                HStack(alignment: .center, spacing: 6) {
                     Text(yearly ? tr("Annuel") : tr("Mensuel"))
                         .font(.subheadline.weight(.semibold))
+                        .lineLimit(1)
+                    // Inside the card: drawn over its edge, the badge was cut off (2026-11-23 capture).
+                    if yearly, let savings = store.yearlySavingsPercent {
+                        Text(verbatim: "−\(savings) %")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(.onAccent)
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 2)
+                            .background(Color.accentColor, in: Capsule())
+                            .fixedSize()
+                    }
                     Spacer(minLength: 4)
                     Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                         .font(.title3)
@@ -225,17 +236,6 @@ struct OnboardingOffer: View {
             .overlay {
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
                     .strokeBorder(isSelected ? Color.accentColor : Color.clear, lineWidth: 2)
-            }
-            .overlay(alignment: .topTrailing) {
-                if yearly, let savings = store.yearlySavingsPercent {
-                    Text(verbatim: "−\(savings) %")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(.onAccent)
-                        .padding(.horizontal, 8)
-                        .padding(.vertical, 3)
-                        .background(Color.accentColor, in: Capsule())
-                        .offset(x: -12, y: -10)
-                }
             }
         }
         .buttonStyle(.pressable)
