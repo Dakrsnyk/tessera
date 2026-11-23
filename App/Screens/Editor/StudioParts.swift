@@ -615,95 +615,17 @@ struct StudioKindPicker: View {
     }
 }
 
-// MARK: - Disposition
+// MARK: - Ordre
 
-/// « Disposition »: the layouts the widgets inside can take (as plans), and their order (« Monter », « Descendre »).
-/// A widget alone has nothing to lay out; a Lock Screen widget stays alone.
+/// The order of the widgets inside (« Monter », « Descendre »), under the name in « Contenu »; shown from two widgets.
+/// The layouts proposed (`ComboEditing.arrangements`) are no longer offered, but a saved design keeps its layout.
 struct StudioLayoutPanel: View {
     let parts: [ComboPart]
-    let isLockScreen: Bool
-    let canAdd: Bool
-    /// Why « + » can't add one now (the size is full), or nil.
-    var addLimit: String?
-    let onPlan: ([ComboPart]) -> Void
     let onMove: (Int, Int) -> Void
-    let onAdd: () -> Void
     @Environment(\.appStyle) private var style
 
     var body: some View {
-        if isLockScreen {
-            StudioNote(text: tr("Un widget de l'écran verrouillé reste seul."), symbol: "lock.iphone")
-        } else if parts.count < 2 {
-            single
-        } else {
-            plans
-            order
-            StudioNote(text: tr("Une ligne = 1 widget large ou 2 petits."))
-        }
-    }
-
-    private var single: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            if let addLimit, canAdd {
-                StudioNote(text: addLimit, symbol: "square.grid.2x2")
-            } else if canAdd {
-                StudioNote(text: tr("Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs."), symbol: "square.grid.2x2")
-            } else {
-                StudioNote(text: tr("Ce widget reste seul."), symbol: "square.grid.2x2")
-            }
-            if canAdd {
-                Button {
-                    Haptics.tap()
-                    onAdd()
-                } label: {
-                    Label(tr("Ajouter un widget"), systemImage: "plus")
-                        .font(.subheadline.weight(.semibold))
-                        .frame(maxWidth: .infinity, minHeight: 44)
-                }
-                .buttonStyle(.bordered)
-                .buttonBorderShape(.capsule)
-                .opacity(addLimit == nil ? 1 : 0.45)
-                .accessibilityIdentifier("layout-add")
-            }
-        }
-    }
-
-    /// The layouts proposed, the one now first.
-    private var plans: some View {
-        let options = ComboEditing.arrangements(of: parts)
-        return EditorSection(title: tr("Plans proposés")) {
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12, alignment: .top), count: 3), alignment: .leading, spacing: 14) {
-                ForEach(Array(options.enumerated()), id: \.offset) { pair in
-                    planButton(pair.element, index: pair.offset)
-                }
-            }
-        }
-    }
-
-    private func planButton(_ plan: [ComboPart], index: Int) -> some View {
-        let isCurrent = index == 0
-        let title = StudioPartRules.planTitle(plan)
-        return Button {
-            Haptics.tap()
-            if !isCurrent { onPlan(plan) }
-        } label: {
-            VStack(spacing: 6) {
-                StudioPlanThumbnail(plan: plan, numbers: StudioPartRules.planNumbers(plan, current: parts), isCurrent: isCurrent)
-                Text(title)
-                    .font(.caption.weight(isCurrent ? .bold : .regular))
-                    .foregroundStyle(isCurrent ? Color.accentColor : Color.primary)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-            .frame(maxWidth: .infinity)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.pressable)
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text(title))
-        .accessibilityAddTraits(isCurrent ? [.isButton, .isSelected] : .isButton)
-        .accessibilityIdentifier("layout-plan-\(index)")
+        order
     }
 
     /// The widgets inside in order, each with « Monter » and « Descendre ».

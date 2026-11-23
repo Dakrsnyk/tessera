@@ -60,7 +60,10 @@ struct DailyPager<Content: View>: View {
 
     /// A view of the card, told where it is among the views (its header draws the dots).
     private func shown(_ index: Int) -> some View {
-        content(index).environment(\.dailyPager, DailyPagerInfo(count: count, page: page))
+        content(index)
+            .environment(\.dailyPager, DailyPagerInfo(count: count, page: page))
+            // The scroll of the pager clips its views: their own shadow was cut square at the corners (PDG, 2026-11-22).
+            .environment(\.cristalPanelDrawsShadow, false)
     }
 
     var body: some View {
@@ -100,6 +103,8 @@ struct DailyPager<Content: View>: View {
                 }
             }
         }
+        // The card's shadow, once, around the whole pager (never clipped by the scroll).
+        .cristalPanelShadow()
         // One element for the dots drawn in the header: VoiceOver reads « Vue 1 sur 3 », the tests find it by its identifier.
         .overlay(alignment: .top) { dotsElement }
         .accessibilityElement(children: .contain)

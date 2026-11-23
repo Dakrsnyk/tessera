@@ -144,6 +144,8 @@ struct ProfileNumberField: View {
     var decimals = true
     var placeholder = "—"
     var identifier: String?
+    /// The unit becomes a button that switches the units (kg ⇄ lb, cm ⇄ ft) right here (PDG, 2026-11-22).
+    var onUnitTap: (() -> Void)?
     @State private var text = ""
 
     var body: some View {
@@ -158,10 +160,31 @@ struct ProfileNumberField: View {
                     .monospacedDigit()
                     .accessibilityLabel(Text(title))
                     .accessibilityIdentifier(identifier ?? title)
-                Text(unit)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                if let onUnitTap {
+                    Button(action: onUnitTap) {
+                        HStack(spacing: 2) {
+                            Text(unit)
+                            Image(systemName: "arrow.left.arrow.right")
+                                .font(.system(size: 9, weight: .bold))
+                        }
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Color.accentColor)
+                        .padding(.horizontal, 6)
+                        .frame(minHeight: 30)
+                        .background(Color.accentColor.opacity(0.12), in: Capsule())
+                        .contentShape(Capsule())
+                    }
+                    .buttonStyle(.borderless)
                     .fixedSize()
+                    .accessibilityLabel(Text(tr("Changer d'unités")))
+                    .accessibilityValue(Text(unit))
+                    .accessibilityIdentifier("\(identifier ?? title)-unit")
+                } else {
+                    Text(unit)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize()
+                }
             }
         }
         .padding(12)
@@ -361,15 +384,24 @@ struct TopicForm: View {
 
     @ViewBuilder private var heightFields: some View {
         if model.settings.unitSystem == .imperial {
-            ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("ft"), value: heightBinding.heightFeet(), decimals: false, identifier: "profile-height-feet")
+            ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("ft"), value: heightBinding.heightFeet(), decimals: false, identifier: "profile-height-feet", onUnitTap: switchUnits)
             ProfileNumberField(title: tr("Pouces"), unit: tr("in"), value: heightBinding.heightInches(), decimals: false, identifier: "profile-height-inches")
         } else {
-            ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height")
+            ProfileNumberField(title: tr("Taille", context: "height"), unit: tr("cm"), value: heightBinding, decimals: false, identifier: "profile-height", onUnitTap: switchUnits)
         }
     }
 
     private var weightField: some View {
-        ProfileNumberField(title: tr("Poids"), unit: model.settings.unitSystem.weightUnit, value: weightBinding, identifier: "profile-weight")
+        ProfileNumberField(title: tr("Poids"), unit: model.settings.unitSystem.weightUnit, value: weightBinding, identifier: "profile-weight", onUnitTap: switchUnits)
+    }
+
+    /// kg and cm ⇄ lb and ft/in, for the whole app (the same setting as Réglages › Unités). The saved values stay in kg
+    /// and cm: only what is shown and typed changes.
+    private func switchUnits() {
+        Haptics.tap()
+        withAnimation(.snappy) {
+            model.updateSettings { $0.unitSystem = $0.unitSystem == .metric ? .imperial : .metric }
+        }
     }
 
     // MARK: Shared questions (asked once, whichever page comes first)

@@ -41,16 +41,63 @@ private struct CristalPanelModifier: ViewModifier {
     @Environment(\.appStyle) private var style
     @Environment(\.colorScheme) private var scheme
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
+    @Environment(\.cristalPanelDrawsShadow) private var drawsShadow
 
     func body(content: Content) -> some View {
         let palette = CristalPalette.of(style.id)
         let dark = scheme == .dark
         let shape = RoundedRectangle(cornerRadius: radius ?? palette.radius, style: .continuous)
         let solid = Color(hex: palette.hex("panelSolid", dark: dark))
-        let shadow = dark ? Color.black.opacity(0.28) : Color(hex: palette.hex("primary", dark: false)).opacity(0.07)
         content
-            .background { shape.fill(reduceTransparency ? solid : solid.opacity(dark ? 0.84 : 0.80)).shadow(color: shadow, radius: 12, y: 6) }
+            .background {
+                shape.fill(reduceTransparency ? solid : solid.opacity(dark ? 0.84 : 0.80))
+                    .shadow(color: drawsShadow ? CristalPanelShadow.color(palette: palette, dark: dark) : .clear, radius: 12, y: 6)
+            }
             .overlay { shape.strokeBorder(Color.white.opacity(dark ? 0.07 : 0.85), lineWidth: 1) }
+    }
+}
+
+/// The light shadow of a panel, alone: for panels drawn inside something that clips them (the views of a card of Mon
+/// Quotidien scroll in a pager, which cut their shadow square at the corners, 2026-11-22). The pager draws it once,
+/// around the whole card, and only outside the card's shape (nothing is added under the panel itself).
+private struct CristalPanelShadow: ViewModifier {
+    let radius: CGFloat?
+    @Environment(\.appStyle) private var style
+    @Environment(\.colorScheme) private var scheme
+
+    static func color(palette: CristalPalette, dark: Bool) -> Color {
+        dark ? Color.black.opacity(0.28) : Color(hex: palette.hex("primary", dark: false)).opacity(0.07)
+    }
+
+    func body(content: Content) -> some View {
+        let palette = CristalPalette.of(style.id)
+        let dark = scheme == .dark
+        let shape = RoundedRectangle(cornerRadius: radius ?? palette.radius, style: .continuous)
+        content.background {
+            shape.fill(Color.black)
+                .shadow(color: Self.color(palette: palette, dark: dark), radius: 12, y: 6)
+                // Only the shadow: the shape itself is cut out, so the panel above keeps exactly its own look.
+                .mask {
+                    Rectangle()
+                        .padding(-40)
+                        .overlay { shape.blendMode(.destinationOut) }
+                        .compositingGroup()
+                }
+                .allowsHitTesting(false)
+                .accessibilityHidden(true)
+        }
+    }
+}
+
+private struct CristalPanelDrawsShadowKey: EnvironmentKey {
+    static let defaultValue = true
+}
+
+extension EnvironmentValues {
+    /// False inside a view that clips its panels (a pager): the panels then draw no shadow of their own.
+    var cristalPanelDrawsShadow: Bool {
+        get { self[CristalPanelDrawsShadowKey.self] }
+        set { self[CristalPanelDrawsShadowKey.self] = newValue }
     }
 }
 
@@ -86,6 +133,11 @@ extension View {
     /// Panneau du contenu (carte) : presque opaque, liseré clair, ombre légère, ni matière ni flou.
     func cristalPanel(radius: CGFloat? = nil) -> some View {
         modifier(CristalPanelModifier(radius: radius))
+    }
+
+    /// Only the shadow of a panel, around this view (see `CristalPanelShadow`).
+    func cristalPanelShadow(radius: CGFloat? = nil) -> some View {
+        modifier(CristalPanelShadow(radius: radius))
     }
 
     /// Verre pour ce qui flotte (barre d'onglets, en-tête) : matière fine et voile clair.

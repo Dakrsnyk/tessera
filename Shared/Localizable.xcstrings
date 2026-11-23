@@ -54333,53 +54333,6 @@
         }
       }
     },
-    "Ce widget reste seul.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dieses Widget bleibt allein."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This widget stays on its own."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Este widget va solo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ce widget reste seul."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Questo widget resta da solo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このウィジェットは単独で使います。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Este widget fica sozinho."
-          }
-        }
-      }
-    },
     "Ce widget utilise Premium": {
       "extractionState": "manual",
       "localizations": {
@@ -56256,6 +56209,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mudar ícone"
+          }
+        }
+      }
+    },
+    "Changer d'unités": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einheiten ändern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Change units"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambiar de unidades"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Changer d'unités"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cambia unità"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "単位を切り替える"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mudar de unidades"
           }
         }
       }
@@ -172914,53 +172914,6 @@
         }
       }
     },
-    "Plans proposés": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vorgeschlagene Layouts"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suggested layouts"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Diseños sugeridos"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Plans proposés"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Layout proposti"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "おすすめのレイアウト"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Layouts sugeridos"
-          }
-        }
-      }
-    },
     "Plaquettes de frein": {
       "extractionState": "manual",
       "localizations": {
@@ -244401,53 +244354,6 @@
         }
       }
     },
-    "Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nur ein Widget: nichts anzuordnen. Füge ein Widget hinzu, um mehrere zu kombinieren."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Just one widget: nothing to arrange. Add a widget to combine several."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un solo widget: nada que ordenar. Añade un widget para combinar varios."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un seul widget : rien à ranger. Ajoute un widget pour en réunir plusieurs."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un solo widget: niente da ordinare. Aggiungi un widget per unirne più di uno."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ウィジェットが1つだけなので、並べ替えるものはありません。ウィジェットを追加すると、複数をまとめられます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Só um widget: nada para organizar. Adicione um widget para combinar vários."
-          }
-        }
-      }
-    },
     "Un style change l'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent.": {
       "extractionState": "manual",
       "localizations": {
@@ -244867,53 +244773,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Um widget %@"
-          }
-        }
-      }
-    },
-    "Un widget de l'écran verrouillé reste seul.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ein Sperrbildschirm-Widget bleibt allein."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "A Lock Screen widget stays on its own."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un widget de la pantalla bloqueada va solo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un widget de l'écran verrouillé reste seul."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Un widget della schermata di blocco resta da solo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ロック画面のウィジェットは単独で使います。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Um widget da Tela Bloqueada fica sozinho."
           }
         }
       }
@@ -245807,53 +245666,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uma perna dobrada à sua frente, canela no chão, a outra perna esticada atrás."
-          }
-        }
-      }
-    },
-    "Une ligne = 1 widget large ou 2 petits.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eine Reihe = 1 breites Widget oder 2 kleine."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "One row = 1 wide widget or 2 small ones."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una fila = 1 widget ancho o 2 pequeños."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Une ligne = 1 widget large ou 2 petits."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Una riga = 1 widget largo o 2 piccoli."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "1行 = 横長のウィジェット1つ、または小2つ。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uma linha = 1 widget largo ou 2 pequenos."
           }
         }
       }

@@ -29,8 +29,8 @@ final class StudioPhotoSession {
 }
 
 /// The Widget Studio (« l'Atelier »): every widget is made and changed here, whether it comes from « Créer », the
-/// Store, a pack or « Mes widgets ». Three chapters under the stage: « Contenu » (the size, the widgets inside, what
-/// the widget shows), « Disposition » (how the widgets inside are laid out) and « Style » (the look). The stage acts on
+/// Store, a pack or « Mes widgets ». Two chapters under the stage: « Contenu » (what the widget shows, the order of
+/// the widgets inside; the size is chosen before) and « Style » (the look). The stage acts on
 /// the widget: a touch on a widget inside opens it, « + » adds one. Several widgets made together are edited one
 /// after the other and can share their look. Every change can be undone and redone.
 struct WidgetStudio: View {
@@ -517,8 +517,6 @@ struct WidgetStudio: View {
         switch chapter {
         case .content:
             contentChapter(input)
-        case .layout:
-            layoutChapter
         case .style:
             styleTool(input)
         }
@@ -538,24 +536,15 @@ struct WidgetStudio: View {
         }
     }
 
-    /// « Suivant › » at the top of « Contenu » and « Disposition ».
-    private var nextLink: StudioPanelLink? {
-        guard !isLockScreen, let next = chapter.next else { return nil }
-        return StudioPanelLink(title: tr("Suivant"), symbol: "chevron.right", identifier: "studio-next") { goTo(next) }
+    /// « Suivant » (bottom button) in « Contenu »: leads to « Style ». Never on the Lock Screen (no « Style »: it saves).
+    private var nextChapter: StudioChapter? {
+        isLockScreen || chapter != .content ? nil : chapter.next
     }
 
-    /// The size, the widgets inside (« + » while there is room), then what the widget shows.
+    /// What the widget shows, and the order of the widgets inside. The size is chosen before the Studio (Créer);
+    /// the widgets inside are opened on the stage, added with its « + ».
     @ViewBuilder private func contentList(_ input: StudioInput) -> some View {
-        StudioPanelHeader(title: tr("Contenu"), link: nextLink)
-        VStack(alignment: .leading, spacing: 18) {
-            StudioSizePanel(design: edited, family: $family, isNew: isNew, onFormat: comboFormatAction)
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("studio-size")
-        StudioPartsList(
-            design: design, parts: parts, payload: input.payload, capacity: partsCapacity, canAdd: canAddPart, addLimit: addLimit,
-            onOpen: { openPart($0) }, onAdd: { requestAdd() }
-        )
+        StudioPanelHeader(title: tr("Contenu"))
         if parts.count > 1 && !isLockScreen {
             StudioNote(text: tr("Touche une partie du widget pour la changer."), symbol: "hand.tap")
         }
@@ -578,6 +567,10 @@ struct WidgetStudio: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             nameSection
+            // The order of the widgets inside, under the name (a widget alone has none).
+            if showsDelete && parts.count > 1 && !isLockScreen {
+                StudioLayoutPanel(parts: parts, onMove: { movePart(from: $0, to: $1) })
+            }
             // What the widget needs from the person, asked here and shared with every widget.
             if !design.dataItems.isEmpty {
                 WidgetDataSection(items: design.dataItems)
@@ -655,15 +648,6 @@ struct WidgetStudio: View {
                 onClose: closePicker
             )
         }
-    }
-
-    /// « Disposition »: the layouts proposed and the order of the widgets inside.
-    @ViewBuilder private var layoutChapter: some View {
-        StudioPanelHeader(title: tr("Disposition"), link: nextLink)
-        StudioLayoutPanel(
-            parts: parts, isLockScreen: isLockScreen, canAdd: canAddPart, addLimit: addLimit,
-            onPlan: { applyPlan($0) }, onMove: { movePart(from: $0, to: $1) }, onAdd: { requestAdd() }
-        )
     }
 
     /// « Style »: the tool chosen in the row under the chapters, its panel as before.
@@ -914,15 +898,16 @@ struct WidgetStudio: View {
     private var saveBar: some View {
         VStack(spacing: 0) {
             Divider()
-            Button(action: save) {
-                Text(saveTitle)
+            Button(action: { if let nextChapter { goTo(nextChapter) } else { save() } }) {
+                Text(nextChapter == nil ? saveTitle : tr("Suivant"))
                     .font(.headline)
-                    .foregroundStyle(hasChanges ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.secondary))
+                    .foregroundStyle(hasChanges || nextChapter != nil ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.secondary))
                     .frame(maxWidth: .infinity, minHeight: 50)
             }
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.roundedRectangle(radius: 14))
-            .disabled(!hasChanges)
+            .disabled(nextChapter == nil && !hasChanges)
+            .accessibilityIdentifier(nextChapter == nil ? "studio-save" : "studio-next")
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
         }

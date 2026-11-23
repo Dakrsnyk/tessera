@@ -48,24 +48,25 @@ enum StudioSection: String, CaseIterable, Identifiable {
     }
 }
 
-/// The Studio's three chapters, in the order a widget is usually made: what it shows (its size and the widgets
-/// inside), how the widgets inside are laid out, and its look (the tools of `StudioSection` but « Taille » and « Contenu »).
+/// The Studio's two chapters, in the order a widget is usually made: what it shows (and the order of the widgets
+/// inside), and its look (the tools of `StudioSection` but « Taille » and « Contenu »).
 enum StudioChapter: String, CaseIterable, Identifiable {
-    case content, layout, style
+    case content, style
     var id: String { rawValue }
+
+    /// The former « layout » (removed) falls back on « Contenu »: a saved state or a capture argument never crashes.
+    init(restoring raw: String) { self = StudioChapter(rawValue: raw) ?? .content }
 
     var number: Int {
         switch self {
         case .content: return 1
-        case .layout: return 2
-        case .style: return 3
+        case .style: return 2
         }
     }
 
     var title: String {
         switch self {
         case .content: return tr("Contenu")
-        case .layout: return tr("Disposition")
         case .style: return tr("Style")
         }
     }
@@ -73,14 +74,13 @@ enum StudioChapter: String, CaseIterable, Identifiable {
     /// « Suivant › »: the chapter after this one (none after « Style »).
     var next: StudioChapter? {
         switch self {
-        case .content: return .layout
-        case .layout: return .style
+        case .content: return .style
         case .style: return nil
         }
     }
 }
 
-/// The three chapters under the stage, on glass: a numbered badge each, a check once a chapter has been opened.
+/// The two chapters under the stage, on glass: a numbered badge each, a check once a chapter has been opened.
 /// The chapter open sits on a light capsule with its number filled (never the color alone).
 struct StudioChapterBar: View {
     @Binding var selection: StudioChapter

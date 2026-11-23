@@ -412,6 +412,8 @@ final class ProfileUITests: XCTestCase {
             }
         }
         snapshot("pack-studio-last")
+        // In « Contenu » the bottom button is « Suivant »: it leads to « Style », where it saves.
+        if app.buttons["studio-next"].exists { tapButton("studio-next") }
         tapButton("Enregistrer les 6 widgets")
         XCTAssertTrue(waitForDisappearance(first), "Le pack doit se fermer une fois enregistré")
         XCTAssertEqual(app.state, .runningForeground)
@@ -459,10 +461,10 @@ final class ProfileUITests: XCTestCase {
         XCTAssertTrue(next.waitForExistence(timeout: 15), "Le créateur n'a pas de bouton pour passer au Studio")
         XCTAssertTrue(app.segmentedControls.buttons["Moyen"].isSelected)
         next.tap()
-        // Créer opens its Studio on « Contenu »: the widgets of the combined widget are listed in « Dans ce widget ».
+        // Créer opens its Studio on « Contenu »: the widgets of the combined widget are touch zones of the stage.
         let content = app.descendants(matching: .any)["studio-content"]
         XCTAssertTrue(content.waitForExistence(timeout: 10), "Le Studio n'est pas ouvert")
-        let part = app.buttons["part-caloriesLeft"]
+        let part = app.buttons["stage-part-0"]
         XCTAssertTrue(part.waitForExistence(timeout: 10), "Réglages par widget absents du Studio")
         bringAboveSaveBar(part)
         part.tap()
@@ -485,8 +487,8 @@ final class ProfileUITests: XCTestCase {
         XCTAssertTrue(close.waitForExistence(timeout: 8), "« Fermer » absent du panneau du widget")
         bringAboveSaveBar(close)
         close.tap()
-        XCTAssertTrue(app.buttons["part-caloriesLeft"].waitForExistence(timeout: 8), "« Fermer » ne revient pas à la liste")
-        XCTAssertTrue(label(of: "part-caloriesLeft").contains("Mes calories"))
+        XCTAssertTrue(app.buttons["stage-part-0"].waitForExistence(timeout: 8), "« Fermer » ne revient pas à la liste")
+        XCTAssertTrue(label(of: "stage-part-0").contains("Mes calories"))
         snapshot("creator-studio")
     }
 
