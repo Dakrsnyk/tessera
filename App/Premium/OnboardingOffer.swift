@@ -79,7 +79,7 @@ struct OnboardingOffer: View {
             } label: {
                 Text(store.isRestoring ? tr("Restauration…") : tr("Restaurer"))
             }
-            .disabled(store.isRestoring)
+            .disabled(store.isRestoring || store.purchasingID != nil)
             .accessibilityIdentifier("onboarding-offer-restore")
             Spacer()
             Button(tr("Plus tard")) {
@@ -115,11 +115,11 @@ struct OnboardingOffer: View {
                 .rotationEffect(.degrees(2))
                 .offset(x: 18, y: 176)
         }
-        .frame(maxWidth: .infinity, minHeight: 250, alignment: .topLeading)
+        .frame(maxWidth: .infinity, minHeight: 278, alignment: .topLeading)
         .accessibilityHidden(true)
     }
 
-    private static let places: [(x: CGFloat, y: CGFloat, angle: Double)] = [(4, 12, -6), (180, 0, 4), (186, 120, -3)]
+    private static let places: [(x: CGFloat, y: CGFloat, angle: Double)] = [(4, 12, -6), (168, 0, 4), (172, 116, -3)]
 
     /// The small widget Créer would open for each of the first three interests, in its category's look.
     static func showcaseDesigns(for preferred: [Space]) -> [WidgetDesign] {

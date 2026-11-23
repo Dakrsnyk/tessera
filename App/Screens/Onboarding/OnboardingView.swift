@@ -40,7 +40,14 @@ struct OnboardingView: View {
     private var isLast: Bool { index == steps.count - 1 }
 
     /// Only at the end of the first setup, and only without Premium.
-    private var offersPremium: Bool { !styleOnly && !personalizationOnly && !model.isPremium }
+    private var offersPremium: Bool {
+        guard !styleOnly && !personalizationOnly else { return false }
+        #if DEBUG
+        // Test captures run with Premium unlocked: the offer is still shown, so the tests go through it.
+        if ScreenshotMode.isActive { return true }
+        #endif
+        return !model.isPremium
+    }
 
     var body: some View {
         ZStack {
