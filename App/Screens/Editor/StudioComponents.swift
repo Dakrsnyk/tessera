@@ -54,9 +54,6 @@ enum StudioChapter: String, CaseIterable, Identifiable {
     case content, style
     var id: String { rawValue }
 
-    /// The former « layout » (removed) falls back on « Contenu »: a saved state or a capture argument never crashes.
-    init(restoring raw: String) { self = StudioChapter(rawValue: raw) ?? .content }
-
     var number: Int {
         switch self {
         case .content: return 1
