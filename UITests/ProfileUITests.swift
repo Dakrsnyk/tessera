@@ -229,7 +229,7 @@ final class ProfileUITests: XCTestCase {
         tapButton("home-info")
         let fitness = app.buttons["area-fitness"]
         XCTAssertTrue(fitness.waitForExistence(timeout: 8), "Le thème Fitness manque dans Mes informations")
-        XCTAssertTrue(fitness.label.contains("80 kg"), "Poids absent : \(fitness.label)")
+        XCTAssertTrue(fitness.label.contains("70 kg"), "Poids absent : \(fitness.label)") // the list keeps 70 kg when nothing is known
         XCTAssertTrue(label(of: "area-nutrition").contains("kcal"), "Objectif calorique absent")
         snapshot("info-after-onboarding")
 
@@ -246,7 +246,7 @@ final class ProfileUITests: XCTestCase {
         let back = app.navigationBars.buttons.allElementsBoundByIndex.first { $0.isHittable && $0.frame.minX < 60 }
         XCTAssertNotNil(back)
         back?.tap()
-        XCTAssertTrue(label(of: "area-fitness").contains("80 kg"), "Revenir à Mes informations garde les valeurs")
+        XCTAssertTrue(label(of: "area-fitness").contains("70 kg"), "Revenir à Mes informations garde les valeurs")
     }
 
     func testSkippingEverythingShowsNothingMadeUp() {

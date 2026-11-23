@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Ardane · paywall de fin d'inscription — 4 directions</title>
+<style>
+@font-face { font-family: Inter; src: url("../2026-11-14-refonte/Inter-opsz.woff2") format("woff2"); font-weight: 100 900; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Inter, -apple-system, "Segoe UI", sans-serif; background: #E9EEF4; color: #F4F7FB; -webkit-font-smoothing: antialiased; }
+.board { padding: 48px 40px 56px; width: 1840px; }
+.board > header { color: #0E1726; margin-bottom: 34px; }
+.board > header h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.02em; }
+.board > header p { font-size: 17px; color: #4A5668; margin-top: 8px; max-width: 1200px; line-height: 1.45; }
+.row { display: flex; gap: 46px; align-items: flex-start; }
+.col { width: 410px; }
+.col .nm { color: #0E1726; font-weight: 800; font-size: 21px; margin-bottom: 12px; }
+.col .nm span { display: inline-block; background: #0E1726; color: #fff; border-radius: 8px; padding: 2px 9px; margin-right: 8px; font-size: 17px; }
+.cap { color: #3C485A; font-size: 15px; line-height: 1.45; margin-top: 16px; }
+.cap b { color: #0E1726; }
+
+/* The phone: the look of the first launch (night blue, turquoise glow, light blue button). */
+.phone { width: 390px; height: 844px; border-radius: 52px; overflow: hidden; position: relative; background: #070C14;
+  box-shadow: 0 0 0 10px #0B0F16, 0 0 0 11px #2A3140, 0 30px 60px rgba(10, 20, 40, .35); }
+.bg { position: absolute; inset: 0;
+  background: radial-gradient(420px 380px at 88% 8%, rgba(23, 179, 208, .30), transparent 70%),
+              radial-gradient(460px 420px at 0% 62%, rgba(29, 78, 158, .40), transparent 70%),
+              linear-gradient(180deg, #0A111C, #070C14); }
+.scr { position: absolute; inset: 0; padding: 58px 22px 0; display: flex; flex-direction: column; }
+.status { position: absolute; top: 16px; left: 34px; right: 28px; display: flex; justify-content: space-between; font-weight: 700; font-size: 16px; }
+.status i { font-style: normal; letter-spacing: 1px; font-size: 12px; opacity: .9; }
+.top { display: flex; justify-content: space-between; align-items: center; height: 40px; }
+.x { width: 32px; height: 32px; border-radius: 16px; background: rgba(255,255,255,.10); display: grid; place-items: center; color: #AAB4C3; font-size: 17px; }
+.later { color: #8D99AA; font-weight: 600; font-size: 16px; }
+.restore { color: #8D99AA; font-weight: 600; font-size: 14px; }
+h2 { font-size: 30px; line-height: 1.1; font-weight: 800; letter-spacing: -0.02em; }
+.sub { color: #9AA6B6; font-size: 15.5px; line-height: 1.4; margin-top: 8px; }
+.card { background: rgba(17, 26, 38, .82); border: 1px solid rgba(255,255,255,.08); border-radius: 24px; }
+.cta { margin-top: auto; padding: 12px 0 30px; }
+.btn { height: 58px; border-radius: 29px; background: #63B4F2; color: #0B1B2E; font-weight: 800; font-size: 18px; display: grid; place-items: center; }
+.fine { text-align: center; color: #8D99AA; font-size: 12.5px; margin-top: 10px; line-height: 1.4; }
+.links { text-align: center; color: #6E7A8C; font-size: 11.5px; margin-top: 8px; }
+.ic { width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center; flex: none; }
+.ic svg { width: 19px; height: 19px; }
+.plans { display: flex; gap: 10px; }
+.plan { flex: 1; border-radius: 20px; padding: 14px 14px 13px; background: rgba(17, 26, 38, .82); border: 1.5px solid rgba(255,255,255,.10); position: relative; }
+.plan.on { border-color: #63B4F2; background: rgba(99, 180, 242, .10); }
+.plan .t { font-weight: 700; font-size: 15px; }
+.plan .p { font-weight: 800; font-size: 21px; margin-top: 4px; }
+.plan .m { color: #9AA6B6; font-size: 12.5px; margin-top: 2px; }
+.badge { position: absolute; top: -10px; right: 12px; background: #17B3D0; color: #04222A; font-weight: 800; font-size: 11.5px; border-radius: 8px; padding: 3px 8px; }
+.radio { position: absolute; top: 14px; right: 14px; width: 20px; height: 20px; border-radius: 10px; border: 2px solid #4A5668; }
+.on .radio { border: 6px solid #63B4F2; }
+
+/* Small widgets drawn in the category looks of Créer. */
+.w { border-radius: 22px; padding: 12px; position: relative; overflow: hidden; }
+.w .k { font-size: 11px; font-weight: 700; opacity: .75; }
+.w .v { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; margin-top: 4px; }
+.w .u { font-size: 11px; opacity: .7; }
+.ring { width: 54px; height: 54px; border-radius: 50%; position: absolute; right: 12px; bottom: 12px; }
+
+/* B: the trial's timeline. */
+.tl { position: relative; padding-left: 58px; }
+.tl::before { content: ""; position: absolute; left: 31px; top: 18px; bottom: 30px; width: 3px; border-radius: 2px; background: linear-gradient(#17B3D0, #1D4E9E 70%, rgba(255,255,255,.15)); }
+.st { position: relative; padding-bottom: 26px; }
+.st .dot { position: absolute; left: -44px; top: 0; width: 35px; height: 35px; border-radius: 18px; display: grid; place-items: center; }
+.st .dot svg { width: 18px; height: 18px; }
+.st b { display: block; font-size: 17px; }
+.st p { color: #9AA6B6; font-size: 14.5px; margin-top: 3px; line-height: 1.38; }
+
+/* C: the comparison. */
+table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+th { color: #9AA6B6; font-size: 12.5px; font-weight: 700; text-align: center; padding: 12px 6px 8px; }
+th.pr { color: #63B4F2; }
+td { padding: 9.5px 6px; border-top: 1px solid rgba(255,255,255,.06); text-align: center; color: #9AA6B6; }
+td:first-child { text-align: left; color: #E8EDF4; font-weight: 600; padding-left: 16px; }
+td.pr { color: #F4F7FB; font-weight: 800; }
+td.pr.ok { color: #4FD1C5; }
+.seg { display: flex; background: rgba(255,255,255,.07); border-radius: 14px; padding: 4px; }
+.seg div { flex: 1; text-align: center; border-radius: 11px; padding: 9px 0; font-weight: 700; font-size: 14.5px; color: #9AA6B6; }
+.seg .on { background: #1B2738; color: #F4F7FB; }
+.seg small { color: #17B3D0; font-weight: 800; margin-left: 4px; }
+
+/* D: made for you. */
+.mine { display: flex; gap: 12px; align-items: flex-start; padding: 13px 14px; }
+.mine + .mine { border-top: 1px solid rgba(255,255,255,.06); }
+.mine b { font-size: 15.5px; display: block; }
+.mine p { color: #9AA6B6; font-size: 13.5px; line-height: 1.35; margin-top: 2px; }
+.logo { width: 64px; height: 64px; border-radius: 16px; display: block; }
+
+body.single { background: #070C14; }
+body.single .board { padding: 0; width: auto; }
+body.single .board > header, body.single .nm, body.single .cap { display: none; }
+body.single .row { gap: 0; }
+body.single .col { width: 390px; }
+body.single .phone { border-radius: 0; box-shadow: none; }
+body.single .col:not(.shown) { display: none; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="3" fill="currentColor"/><path d="M8.5 10.5V8a3.5 3.5 0 017 0v2.5" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+  <symbol id="bell" viewBox="0 0 24 24"><path d="M6 16.5h12l-1.6-2.2V10a4.4 4.4 0 00-8.8 0v4.3z" fill="currentColor"/><circle cx="12" cy="19" r="2" fill="currentColor"/></symbol>
+  <symbol id="star" viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z" fill="currentColor"/></symbol>
+  <symbol id="spark" viewBox="0 0 24 24"><path d="M12 2.5l1.9 6.1 6.1 1.9-6.1 1.9L12 18.5l-1.9-6.1L4 10.5l6.1-1.9z" fill="currentColor"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z" fill="currentColor"/></symbol>
+  <symbol id="grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="13" y="3.5" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="3.5" y="13" width="7.5" height="7.5" rx="2" fill="currentColor"/><rect x="13" y="13" width="7.5" height="7.5" rx="2" fill="currentColor" opacity=".55"/></symbol>
+  <symbol id="palette" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18c1.3 0 1.8-1 1.2-2-.7-1.1 0-2.5 1.4-2.5H17a4 4 0 004-4C21 7 17 3 12 3z" fill="currentColor"/><circle cx="7.5" cy="11" r="1.5" fill="#0A111C"/><circle cx="10.5" cy="7.2" r="1.5" fill="#0A111C"/><circle cx="15" cy="7.6" r="1.5" fill="#0A111C"/></symbol>
+  <symbol id="chart" viewBox="0 0 24 24"><rect x="4" y="12" width="3.6" height="8" rx="1.2" fill="currentColor"/><rect x="10.2" y="7" width="3.6" height="13" rx="1.2" fill="currentColor"/><rect x="16.4" y="3.5" width="3.6" height="16.5" rx="1.2" fill="currentColor"/></symbol>
+  <symbol id="dumbbell" viewBox="0 0 24 24"><rect x="2.5" y="8.5" width="3" height="7" rx="1.2" fill="currentColor"/><rect x="5.8" y="6.5" width="3" height="11" rx="1.2" fill="currentColor"/><rect x="18.5" y="8.5" width="3" height="7" rx="1.2" fill="currentColor"/><rect x="15.2" y="6.5" width="3" height="11" rx="1.2" fill="currentColor"/><rect x="8.5" y="10.8" width="7" height="2.4" fill="currentColor"/></symbol>
+  <symbol id="fork" viewBox="0 0 24 24"><path d="M7 3v7a2.5 2.5 0 002 2.4V21h2v-8.6A2.5 2.5 0 0013 10V3h-1.5v6h-1V3h-1v6h-1V3zM16 3c-1.7 1.2-2.5 3.6-2.5 6.5V14H16v7h2V3z" fill="currentColor"/></symbol>
+  <symbol id="leaf" viewBox="0 0 24 24"><path d="M20 4C10 4 5 9 5 15c0 1.6.5 3 1.2 4L4 21l1.4 1.2 2.1-2.3c1 .7 2.4 1.1 4 1.1C17 21 20 15 20 4z" fill="currentColor"/></symbol>
+</svg>
+
+<main class="board">
+  <header>
+    <h1>Paywall de fin d'inscription · 4 directions</h1>
+    <p>Écran montré une seule fois, juste après la page des notifications, avant d'entrer dans l'app. Même univers que l'inscription (fond nuit, lueur turquoise, bouton bleu). Vrais prix et vraies limites : 7 jours gratuits, puis 59,99 $ par an ou 6,99 $ par mois. On peut toujours le fermer : « Plus tard » ou ✕ en haut (règle d'Apple). Exemple pour Mathys, qui a choisi Fitness, Nutrition et Habitudes.</p>
+  </header>
+
+  <div class="row">
+    <!-- A — Vitrine -->
+    <div class="col" data-v="a"><div class="nm"><span>A</span>Vitrine</div>
+      <div class="phone"><div class="bg"></div><div class="scr">
+        <div class="status">21:00<i>●●●● 5G ▮</i></div>
+        <div class="top"><span class="restore">Restaurer</span><span class="later">Plus tard</span></div>
+        <div style="position:relative;height:262px;margin-top:6px">
+          <div class="w" style="position:absolute;left:8px;top:14px;width:150px;height:150px;background:#FFF7EA;color:#3A2A12;transform:rotate(-6deg);box-shadow:0 18px 40px rgba(0,0,0,.45)">
+            <div class="k" style="color:#C27A0E">Calories</div><div class="v">1 240</div><div class="u">restantes</div>
+            <div class="ring" style="background:conic-gradient(#F2A33A 0 62%, #F3E3C7 0)"><div style="position:absolute;inset:9px;border-radius:50%;background:#FFF7EA"></div></div></div>
+          <div class="w" style="position:absolute;left:174px;top:0;width:176px;height:118px;background:#15171C;color:#fff;transform:rotate(4deg);box-shadow:0 18px 40px rgba(0,0,0,.5)">
+            <div class="k" style="color:#FF6B57">Prochaine série</div><div class="v">Squat</div><div class="u">4 × 8 · 80 kg</div>
+            <div style="position:absolute;left:12px;right:12px;bottom:12px;height:6px;border-radius:3px;background:#2A2D34"><div style="width:58%;height:100%;border-radius:3px;background:#FF6B57"></div></div></div>
+          <div class="w" style="position:absolute;left:186px;top:132px;width:164px;height:118px;background:#1F3B2A;color:#E6F2DC;transform:rotate(-3deg);box-shadow:0 18px 40px rgba(0,0,0,.5)">
+            <div class="k" style="color:#A9CF7A">Habitudes</div>
+            <div style="display:flex;gap:6px;margin-top:10px">
+              <i style="width:22px;height:22px;border-radius:7px;background:#12A4B5"></i><i style="width:22px;height:22px;border-radius:7px;background:#2F8F7A"></i><i style="width:22px;height:22px;border-radius:7px;background:#F2A33A"></i><i style="width:22px;height:22px;border-radius:7px;background:#7FA33A;opacity:.35"></i><i style="width:22px;height:22px;border-radius:7px;background:#8C6CFF;opacity:.35"></i></div>
+            <div class="u" style="margin-top:10px">3 sur 5 aujourd'hui</div></div>
+          <div style="position:absolute;left:30px;top:178px;width:120px;height:66px;border-radius:18px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;gap:6px;font-weight:800;font-size:13px;transform:rotate(2deg)"><svg width="16" height="16" style="color:#63B4F2"><use href="#spark"/></svg>+ 47 styles</div>
+        </div>
+        <h2 style="margin-top:6px">Tout Ardane,<br>7 jours gratuits</h2>
+        <div style="margin-top:14px;display:grid;gap:9px">
+          <div style="display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600"><svg width="20" height="20" style="color:#4FD1C5"><use href="#check"/></svg>Widgets illimités, tous les types</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600"><svg width="20" height="20" style="color:#4FD1C5"><use href="#check"/></svg>57 styles et 14 couleurs d'app</div>
+          <div style="display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600"><svg width="20" height="20" style="color:#4FD1C5"><use href="#check"/></svg>Statistiques, exercices, scans illimités</div>
+        </div>
+        <div class="plans" style="margin-top:18px">
+          <div class="plan on"><span class="badge">−28 %</span><span class="radio"></span><div class="t">Annuel</div><div class="p">59,99 $</div><div class="m">5,00 $ par mois</div></div>
+          <div class="plan"><span class="radio"></span><div class="t">Mensuel</div><div class="p">6,99 $</div><div class="m">par mois</div></div>
+        </div>
+        <div class="cta"><div class="btn">Essayer 7 jours gratuits</div>
+          <div class="fine">Rien n'est débité aujourd'hui · annulable à tout moment</div>
+          <div class="links">Conditions · Confidentialité</div></div>
+      </div></div>
+      <div class="cap"><b>Montrer le résultat.</b> De vrais widgets dans les styles de Créer flottent en haut : on voit ce qu'on gagne avant de lire. Deux offres côte à côte, l'annuelle choisie d'avance. Le plus proche des paywalls d'apps de widgets qui marchent.</div>
+    </div>
+
+    <!-- B — Frise de l'essai -->
+    <div class="col" data-v="b"><div class="nm"><span>B</span>Frise de l'essai</div>
+      <div class="phone"><div class="bg"></div><div class="scr">
+        <div class="status">21:00<i>●●●● 5G ▮</i></div>
+        <div class="top"><span class="x">✕</span><span class="restore">Restaurer</span></div>
+        <img class="logo" src="../../marque/logo-2026-11-19/ardane-0-actuel-1024.png" alt="" style="margin-top:14px">
+        <h2 style="margin-top:18px">Ta semaine Premium<br>commence maintenant</h2>
+        <div class="sub">Sans engagement : tu sais toujours ce qui arrive et quand.</div>
+        <div class="card tl" style="margin-top:22px;padding-top:20px;padding-right:16px">
+          <div class="st"><span class="dot" style="background:#17B3D0;color:#04222A"><svg><use href="#lock"/></svg></span><b>Aujourd'hui</b><p>Tout est débloqué : widgets, styles, statistiques, exercices.</p></div>
+          <div class="st"><span class="dot" style="background:#1D4E9E;color:#fff"><svg><use href="#bell"/></svg></span><b>Jour 5</b><p>Une notification te rappelle que l'essai se termine bientôt.</p></div>
+          <div class="st" style="padding-bottom:18px"><span class="dot" style="background:#2A3446;color:#C9D2DE"><svg><use href="#star"/></svg></span><b>Jour 7</b><p>L'abonnement annuel commence, sauf si tu l'annules avant.</p></div>
+        </div>
+        <div style="text-align:center;margin-top:18px;font-size:15px;color:#C9D2DE">7 jours gratuits, puis <b style="color:#fff">59,99 $ par an</b></div>
+        <div style="text-align:center;margin-top:6px;font-size:14px;color:#63B4F2;font-weight:700">Voir l'offre mensuelle</div>
+        <div class="cta"><div class="btn">Commencer l'essai gratuit</div>
+          <div class="fine">Rien n'est débité aujourd'hui</div>
+          <div class="links">Conditions · Confidentialité</div></div>
+      </div></div>
+      <div class="cap"><b>Rassurer sur l'essai.</b> La peur d'être débité freine le plus. La frise dit tout : rappel au jour 5, débit au jour 7. <b>À coder en plus</b> : la notification locale du jour 5 (sinon la promesse serait fausse).</div>
+    </div>
+
+    <!-- C — Gratuit ou Premium -->
+    <div class="col" data-v="c"><div class="nm"><span>C</span>Gratuit ou Premium</div>
+      <div class="phone"><div class="bg"></div><div class="scr">
+        <div class="status">21:00<i>●●●● 5G ▮</i></div>
+        <div class="top"><span class="restore">Restaurer</span><span class="later">Plus tard</span></div>
+        <h2 style="margin-top:12px">Choisis ta version</h2>
+        <div class="sub">Tu peux rester en gratuit. Premium enlève toutes les limites.</div>
+        <div class="card" style="margin-top:16px;padding-bottom:4px">
+          <table>
+            <tr><th style="text-align:left;padding-left:16px"></th><th>Gratuit</th><th class="pr">Premium</th></tr>
+            <tr><td>Widgets enregistrés</td><td>3</td><td class="pr">∞</td></tr>
+            <tr><td>Styles de widget</td><td>10</td><td class="pr">57</td></tr>
+            <tr><td>Couleurs de l'app</td><td>1</td><td class="pr">14</td></tr>
+            <tr><td>Habitudes</td><td>3</td><td class="pr">∞</td></tr>
+            <tr><td>Analyses de plat</td><td>10</td><td class="pr">∞</td></tr>
+            <tr><td>Bibliothèque d'exercices</td><td>—</td><td class="pr ok">✓</td></tr>
+            <tr><td>Statistiques détaillées</td><td>—</td><td class="pr ok">✓</td></tr>
+            <tr><td>Fonds photo et polices</td><td>—</td><td class="pr ok">✓</td></tr>
+          </table>
+        </div>
+        <div class="seg" style="margin-top:16px"><div class="on">Annuel<small>−28 %</small></div><div>Mensuel</div></div>
+        <div style="text-align:center;margin-top:10px;font-size:15px;color:#C9D2DE">7 jours gratuits, puis <b style="color:#fff">59,99 $ par an</b></div>
+        <div class="cta"><div class="btn">Essayer Premium gratuitement</div>
+          <div class="fine">Annulable à tout moment dans les réglages de l'App Store</div>
+          <div class="links">Conditions · Confidentialité</div></div>
+      </div></div>
+      <div class="cap"><b>Être franc.</b> Un tableau clair, comme celui de la page Premium actuelle : la personne voit qu'elle peut rester en gratuit, ce qui donne confiance. Plus sobre, mais moins d'émotion que A.</div>
+    </div>
+
+    <!-- D — Fait pour toi -->
+    <div class="col" data-v="d"><div class="nm"><span>D</span>Fait pour toi</div>
+      <div class="phone"><div class="bg"></div><div class="scr">
+        <div class="status">21:00<i>●●●● 5G ▮</i></div>
+        <div class="top"><span class="x">✕</span><span class="restore">Restaurer</span></div>
+        <div style="display:flex;align-items:center;gap:14px;margin-top:10px">
+          <img class="logo" src="../../marque/logo-2026-11-19/ardane-0-actuel-1024.png" alt="" style="width:52px;height:52px;border-radius:13px">
+          <div style="color:#9AA6B6;font-size:15px;font-weight:600">Ton Ardane est prêt</div></div>
+        <h2 style="margin-top:14px">Mathys, voici ce que<br>Premium ajoute pour toi</h2>
+        <div class="card" style="margin-top:18px">
+          <div class="mine"><span class="ic" style="background:#E5484D;color:#fff"><svg><use href="#dumbbell"/></svg></span><div><b>Fitness</b><p>Toute la bibliothèque d'exercices, la progression de tes charges</p></div></div>
+          <div class="mine"><span class="ic" style="background:#F08A24;color:#fff"><svg><use href="#fork"/></svg></span><div><b>Nutrition</b><p>Analyses de plat illimitées, tendances de tes repas</p></div></div>
+          <div class="mine"><span class="ic" style="background:#7FA33A;color:#fff"><svg><use href="#leaf"/></svg></span><div><b>Habitudes</b><p>Autant d'habitudes que tu veux, ta régularité en détail</p></div></div>
+          <div class="mine"><span class="ic" style="background:linear-gradient(135deg,#17B3D0,#1D4E9E);color:#fff"><svg><use href="#palette"/></svg></span><div><b>Et tout le reste</b><p>Widgets illimités, 57 styles, 14 couleurs d'app</p></div></div>
+        </div>
+        <div class="plans" style="margin-top:16px">
+          <div class="plan on" style="padding:11px 14px"><span class="badge">−28 %</span><span class="radio" style="top:12px"></span><div class="t">Annuel</div><div class="m" style="color:#C9D2DE;font-size:13.5px">59,99 $</div></div>
+          <div class="plan" style="padding:11px 14px"><span class="radio" style="top:12px"></span><div class="t">Mensuel</div><div class="m" style="color:#C9D2DE;font-size:13.5px">6,99 $/mois</div></div>
+        </div>
+        <div class="cta"><div class="btn">Essayer 7 jours gratuits</div>
+          <div class="fine">Rien n'est débité aujourd'hui · annulable à tout moment</div>
+          <div class="links">Conditions · Confidentialité</div></div>
+      </div></div>
+      <div class="cap"><b>Parler de ses choix.</b> Le paywall reprend son prénom et les centres d'intérêt cochés juste avant (couleurs des mini-apps). Le plus « Ardane » : la suite directe de l'inscription. Les lignes changent selon les choix de chacun.</div>
+    </div>
+  </div>
+</main>
+<script>
+  const v = new URLSearchParams(location.search).get("v");
+  if (v) {
+    document.body.classList.add("single");
+    document.querySelector(`.col[data-v="${v}"]`).classList.add("shown");
+  }
+</script>
+</body>
+</html>

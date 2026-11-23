@@ -23,14 +23,11 @@ struct OnboardingOffer: View {
         VStack(spacing: 0) {
             topBar
             ScrollView {
-                VStack(alignment: .leading, spacing: 18) {
+                VStack(alignment: .leading, spacing: 14) {
                     showcase
-                    VStack(alignment: .leading, spacing: 14) {
-                        Text(trialDays.map { tr("Tout Ardane, \($0) jours gratuits") } ?? tr("Tout Ardane, sans limite"))
-                            .font(.largeTitle.weight(.bold))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .accessibilityAddTraits(.isHeader)
-                        VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading, spacing: 12) {
+                        title
+                        VStack(alignment: .leading, spacing: 8) {
                             perk(tr("Widgets illimités, tous les types"))
                             perk(tr("\(ThemeCatalog.all.count) styles et \(AppStyleID.allCases.count) couleurs d'app"))
                             perk(tr("Statistiques, exercices, scans illimités"))
@@ -70,6 +67,24 @@ struct OnboardingOffer: View {
 
     // MARK: Parts
 
+    /// « Tout Ardane, » then « 7 jours gratuits » on its own line, as in the chosen mockup (never cut mid-phrase).
+    private var title: some View {
+        Group {
+            if let trialDays {
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(tr("Tout Ardane,"))
+                    Text(Fmt.plural(trialDays, tr("jour gratuit"), tr("jours gratuits")))
+                }
+                .accessibilityElement(children: .combine)
+            } else {
+                Text(tr("Tout Ardane, sans limite"))
+            }
+        }
+        .font(.title.weight(.bold))
+        .fixedSize(horizontal: false, vertical: true)
+        .accessibilityAddTraits(.isHeader)
+    }
+
     private var topBar: some View {
         HStack {
             Button {
@@ -97,10 +112,11 @@ struct OnboardingOffer: View {
     }
 
     /// Three widgets of the person's interests (Nutrition, Fitness, Habitudes when none was chosen), each in the look
-    /// of its category in Créer, scattered like on a table, with the number of styles Premium adds.
+    /// of its category in Créer, laid like on a table (one on the left, two on the right, barely touching), with the
+    /// number of styles Premium adds under the first. Small enough for the plans to show above the button.
     private var showcase: some View {
         let designs = Self.showcaseDesigns(for: model.profile.preferredSpaces)
-        let width: CGFloat = 148
+        let width: CGFloat = 124
         return ZStack(alignment: .topLeading) {
             ForEach(Array(designs.enumerated()), id: \.offset) { index, design in
                 let place = Self.places[index]
@@ -115,13 +131,13 @@ struct OnboardingOffer: View {
                 .padding(.vertical, 12)
                 .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                 .rotationEffect(.degrees(2))
-                .offset(x: 18, y: 176)
+                .offset(x: 24, y: 158)
         }
-        .frame(maxWidth: .infinity, minHeight: 278, alignment: .topLeading)
+        .frame(maxWidth: .infinity, minHeight: 244, alignment: .topLeading)
         .accessibilityHidden(true)
     }
 
-    private static let places: [(x: CGFloat, y: CGFloat, angle: Double)] = [(4, 12, -6), (168, 0, 4), (172, 116, -3)]
+    private static let places: [(x: CGFloat, y: CGFloat, angle: Double)] = [(6, 14, -5), (196, 0, 4), (204, 116, -3)]
 
     /// The small widget Créer would open for each of the first three interests, in its category's look.
     static func showcaseDesigns(for preferred: [Space]) -> [WidgetDesign] {

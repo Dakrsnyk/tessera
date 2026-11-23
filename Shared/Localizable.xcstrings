@@ -238855,49 +238855,49 @@
         }
       }
     },
-    "Tout Ardane, %@ jours gratuits": {
+    "Tout Ardane,": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ganz Ardane, %@ Tage gratis"
+            "value": "Ganz Ardane,"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "All of Ardane, %@ days free"
+            "value": "All of Ardane,"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todo Ardane, %@ días gratis"
+            "value": "Todo Ardane,"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tout Ardane, %@ jours gratuits"
+            "value": "Tout Ardane,"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tutto Ardane, %@ giorni gratis"
+            "value": "Tutto Ardane,"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ardaneのすべてを%@日間無料で"
+            "value": "Ardaneのすべてを"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Todo o Ardane, %@ dias grátis"
+            "value": "Todo o Ardane,"
           }
         }
       }
