@@ -104,6 +104,16 @@ final class ProfileUITests: XCTestCase {
         field.typeText(text)
     }
 
+    /// Weight and height are chosen in a list (lb | kg, ft in | cm): opening it and confirming saves the row shown
+    /// (70 kg, 170 cm when nothing is known yet).
+    private func pick(_ identifier: String, file: StaticString = #filePath, line: UInt = #line) {
+        tapButton(identifier, file: file, line: line)
+        let done = app.buttons["\(identifier)-done"]
+        XCTAssertTrue(done.waitForExistence(timeout: 8), "Liste \(identifier) introuvable", file: file, line: line)
+        done.tap()
+        XCTAssertTrue(waitForDisappearance(done), "La liste \(identifier) doit se fermer après OK", file: file, line: line)
+    }
+
     private func tapButton(_ label: String, file: StaticString = #filePath, line: UInt = #line) {
         let button = app.buttons[label].firstMatch
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Bouton « \(label) » introuvable", file: file, line: line)
@@ -145,7 +155,7 @@ final class ProfileUITests: XCTestCase {
         // Step 3: only the pages of the chosen interests.
         XCTAssertTrue(app.staticTexts["Sport"].waitForExistence(timeout: 8))
         tapButton("sport-goal-bulk")
-        type("80", into: "profile-weight")
+        pick("profile-weight")
         snapshot("sport")
         tapButton("onboarding-continue")
         // The Nutrition page itself (its aim chips), not a « Nutrition » text that the Home screen would also show.
@@ -160,7 +170,7 @@ final class ProfileUITests: XCTestCase {
         // Nothing here may reach « C'est parti » (the bar of the last page, right above the number pad).
         type("30", into: "profile-age")
         assertStillOnNutritionPage(after: "saisie de l'âge")
-        type("180", into: "profile-height")
+        pick("profile-height")
         assertStillOnNutritionPage(after: "saisie de la taille")
         tapButton("gender-male")
         assertStillOnNutritionPage(after: "choix du genre")
@@ -371,8 +381,8 @@ final class ProfileUITests: XCTestCase {
         }
         app.buttons["data-kcal"].tap()
         type("30", into: "profile-age")
-        type("175", into: "profile-height")
-        type("70", into: "profile-weight")
+        pick("profile-height")
+        pick("profile-weight")
         tapButton("gender-female")
         tapButton("OK")
         XCTAssertTrue(waitForDisappearance(example), "Une fois les besoins calculés, l'aperçu montre les vraies données")
