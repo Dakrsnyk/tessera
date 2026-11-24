@@ -390,6 +390,14 @@ M = {
 }
 
 
+# How far the belly of each muscle rises above the skin, in metres (2026-11-24, CEO: « une représentation des tissus
+# musculaires en 3D et pas juste des plans »). Athletic, not a bodybuilder.
+BULGE = {"chest": 0.018, "shoulders": 0.018, "biceps": 0.02, "triceps": 0.016, "forearms": 0.011, "abs": 0.008, "traps": 0.011,
+         "back": 0.012, "lowerBack": 0.008, "glutes": 0.022, "quads": 0.018, "adductors": 0.011, "hamstrings": 0.018,
+         "calves": 0.02}
+DOME = (0.82, 0.62, 0.4)      # the contours of the dome above the rim, as a share of the outline
+
+
 def muscle_shapes(cam, body, active):
     out = []
     for group, muscles in M.items():
@@ -398,16 +406,35 @@ def muscle_shapes(cam, body, active):
                 specs = mu["outline"]
                 if any(sp[0] != "T" and (sp[0], s) not in body.limbs for sp in specs):
                     continue
-                lift = mu.get("lift", 1.03)
-                P = [cam.p(body.point(sp, s, lift)) for sp in specs]
-                normal = unit(sum(body.normal(sp, s) for sp in specs))
+                # A muscle is a volume: its outline lies on the skin, its belly rises above it as a dome (the outline
+                # drawn smaller and smaller toward the middle, higher and higher along the muscle's normal).
+                P3 = [body.point(sp, s, 1.01) for sp in specs]
+                N3 = [body.normal(sp, s) for sp in specs]
+                P = [cam.p(q) for q in P3]
+                normal = unit(sum(N3))
                 facing = float(np.dot(normal, cam.toward))
                 if facing < -0.05:
                     continue
-                grooves = [polyline([cam.p(body.point(sp, s, lift * 1.01))[:2] for sp in g]) for g in mu.get("grooves", [])]
+                center = np.mean(P3, axis=0)
+                # The skin itself is curved: over the middle of the outline it is already above the outline's plane.
+                sag = max(0.0, 0.5 * float(np.mean([np.dot(q - center, n) for q, n in zip(P3, N3)])))
+                reach = float(np.mean([np.linalg.norm(q - center) for q in P3]))
+                height = BULGE.get(group, 0.01)
+
+                def dome(q, share):
+                    return center + (q - center) * share + normal * (sag + height) * (1 - share * share)
+                layers = [smooth([cam.p(dome(q, share))[:2] for q in P3], tension=6.5) for share in DOME]
+                grooves = []
+                for g in mu.get("grooves", []):
+                    pts = []
+                    for sp in g:
+                        q = body.point(sp, s, 1.01)
+                        share = min(1.0, float(np.linalg.norm(q - center)) / max(reach, 1e-6))
+                        pts.append(cam.p(q + normal * height * (1 - share * share))[:2])
+                    grooves.append(polyline(pts))
                 depth = float(np.mean([q[2] for q in P])) - 0.01
                 out.append(dict(d=smooth([q[:2] for q in P], tension=6.5), depth=depth, active=group in active, grooves=grooves,
-                                facing=facing))
+                                facing=facing, layers=layers))
     return out
 
 
@@ -512,7 +539,18 @@ def render(scene, view, box, close, active, st, W, H, uid):
                   f'transform="translate({-g * 1.3:.1f},{-g * 1.5:.1f})" filter="url(#b1{uid})"/>'
                   + "".join(f'<path d="{gr}" fill="none" stroke="{groove}" stroke-opacity="0.45" stroke-width="{g * 1.4:.1f}" stroke-linecap="round" '
                             f'filter="url(#b1{uid})"/>' for gr in m["grooves"]) + "</g>")
-        body_svg.append(f'<g clip-path="url(#{clip_all})"><path d="{m["d"]}" fill="{fill}" fill-opacity="{0.94 if m["active"] else 1}"/>{relief}</g>')
+        body_svg.append(f'<g clip-path="url(#{clip_all})"><path d="{m["d"]}" fill="{fill}" fill-opacity="{0.94 if m["active"] else 1}"/>{relief}'
+                        f'<path d="{m["d"]}" fill="#000000" fill-opacity="{0.16 if m["active"] else 0.07}"/></g>')
+        if f"lit{uid}" not in "".join(defs):
+            defs.append(f'<linearGradient id="lit{uid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.2"/>'
+                        f'<stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity="0.2"/></linearGradient>')
+        count = len(m.get("layers", []))
+        for i, layer in enumerate(m.get("layers", [])):
+            body_svg.append(f'<path d="{layer}" fill="{fill}"/><path d="{layer}" fill="url(#lit{uid})"/>'
+                            f'<path d="{layer}" fill="#000000" fill-opacity="{(0.1 if m["active"] else 0.045) * (count - 1 - i) / max(count - 1, 1):.3f}"/>')
+        if m.get("layers"):
+            body_svg.append("".join(f'<path d="{gr}" fill="none" stroke="{groove}" stroke-opacity="0.5" stroke-width="{g * 1.2:.1f}" stroke-linecap="round"/>'
+                                    for gr in m["grooves"]))
     svg = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}"><defs>{"".join(defs)}</defs>',
            f'<rect width="{W}" height="{H}" rx="14" fill="url(#bg{uid})"/>',
            f'<g filter="url(#sh{uid})">{"".join(body_svg)}</g></svg>']

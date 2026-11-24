@@ -332,7 +332,17 @@ enum Sculpt {
         var box: CGRect = .null
         /// Skin: how thick the body is there, from its axis to its surface, in metres.
         var radius: Double = 0
+        /// Muscle: the contours of its belly above the outline, from the widest to the top of the dome.
+        var layers: [Path] = []
     }
+
+    /// How far the belly of each muscle rises above the skin, in metres (CEO, 2026-11-24: « une représentation des tissus
+    /// musculaires en 3D et pas juste des plans »). Athletic, not a bodybuilder. The same as scripts/demos/sculpt.py.
+    static let bulge: [String: Double] = [
+        "chest": 0.018, "shoulders": 0.018, "biceps": 0.02, "triceps": 0.016, "forearms": 0.011, "abs": 0.008, "traps": 0.011,
+        "back": 0.012, "lowerBack": 0.008, "glutes": 0.022, "quads": 0.018, "adductors": 0.011, "hamstrings": 0.018,
+        "calves": 0.02,
+    ]
 
     /// A stretch of a body part: the trunk by its height from the waist, a limb by the fraction along it.
     struct Span {
@@ -539,21 +549,54 @@ enum Sculpt {
         for shape in muscles {
             for side in [1, -1] {
                 var pts: [CGPoint] = []
+                var world: [Vec3] = []
+                var normals: [Vec3] = []
                 var depth = 0.0
-                var normal = Vec3(0, 0, 0)
+                var sum = Vec3(0, 0, 0)
                 var complete = true
                 for spot in shape.outline {
-                    guard let q = body.point(spot, side, lift: shape.lift), let n = body.normal(spot, side) else { complete = false; break }
+                    guard let q = body.point(spot, side, lift: 1.01), let n = body.normal(spot, side) else { complete = false; break }
                     let (pt, z) = camera.project(q)
                     pts.append(pt)
+                    world.append(q)
+                    normals.append(n)
                     depth += z
-                    normal += n
+                    sum += n
                 }
                 guard complete, !pts.isEmpty else { continue }
-                if dot(unit(normal), camera.toward) < -0.05 { continue }
+                let normal = unit(sum)
+                if dot(normal, camera.toward) < -0.05 { continue }
+                // A muscle is a volume (2026-11-24): its outline lies on the skin, its belly rises above it as a dome —
+                // the outline drawn smaller and smaller toward the middle, higher and higher along the muscle's normal.
+                var center = Vec3(0, 0, 0)
+                for q in world { center += q }
+                center = center / Double(world.count)
+                // The skin itself is curved: over the middle of the outline it is already above the outline's plane.
+                var sag = 0.0, reach = 0.0
+                for (q, n) in zip(world, normals) {
+                    sag += dot(q - center, n)
+                    reach += length(q - center)
+                }
+                sag = max(0, 0.5 * sag / Double(world.count))
+                reach = max(reach / Double(world.count), 1e-6)
+                let height = bulge[shape.group] ?? 0.01
+                var layers: [Path] = []
+                var covered = pts
+                let shares: [Double] = fine ? [0.82, 0.62, 0.4] : [0.6]
+                for share in shares {
+                    let rise = (sag + height) * (1 - share * share)
+                    let contour = world.map { q in camera.project(center + (q - center) * share + normal * rise).0 }
+                    covered += contour
+                    layers.append(smoothPath(contour, tension: 6.5))
+                }
                 var grooves: [Path] = []
                 for line in shape.grooves {
-                    let gpts = line.compactMap { body.point($0, side, lift: shape.lift * 1.01).map { camera.project($0).0 } }
+                    var gpts: [CGPoint] = []
+                    for spot in line {
+                        guard let q = body.point(spot, side, lift: 1.01) else { continue }
+                        let share = min(1, length(q - center) / reach)
+                        gpts.append(camera.project(q + normal * (height * (1 - share * share))).0)
+                    }
                     guard gpts.count >= 2 else { continue }
                     var g = Path()
                     g.addLines(gpts)
@@ -578,7 +621,8 @@ enum Sculpt {
                     spans.append(Span(part: part, lo: range.0 - pad, hi: range.1 + pad))
                 }
                 out.append(Piece(depth: depth / Double(pts.count) - 0.01, path: smoothPath(pts, tension: 6.5),
-                                 kind: .muscle(level: level, grooves: grooves), spans: spans, box: bounds(pts)))
+                                 kind: .muscle(level: level, grooves: grooves), spans: spans, box: bounds(covered),
+                                 layers: layers))
             }
         }
         return (out, union)
@@ -665,9 +709,26 @@ enum Sculpt {
                 groove = palette.groove
             }
             layer.fill(piece.path, with: fill)
+            // The belly of the muscle: each contour of its dome a little lighter than the one below, lit from the upper
+            // left. It may rise past the outline of the body (a calf, a biceps seen from the side).
+            func belly() {
+                var top = context
+                if let clip { top.clip(to: clip) }
+                let count = piece.layers.count
+                for (index, contour) in piece.layers.enumerated() {
+                    top.fill(contour, with: fill)
+                    let box = contour.boundingRect
+                    top.fill(contour, with: .linearGradient(Gradient(colors: [.white.opacity(0.2), .clear, .black.opacity(0.2)]),
+                                                            startPoint: CGPoint(x: box.minX, y: box.minY),
+                                                            endPoint: CGPoint(x: box.maxX, y: box.maxY)))
+                    let below = Double(count - 1 - index) / Double(max(count - 1, 1))
+                    if below > 0 { top.fill(contour, with: .color(.black.opacity((level > 0 ? 0.1 : 0.045) * below))) }
+                }
+            }
             guard fine else {
                 // Thumbnails: the outline as a light groove, no clipping (cheap enough for many at once).
                 layer.stroke(piece.path, with: .color(groove.opacity(0.45)), lineWidth: max(0.5, g * 0.8))
+                belly()
                 return
             }
             // Relief: a shade inside the lower-right edge, a light inside the upper-left one, the grooves between portions.
@@ -679,9 +740,14 @@ enum Sculpt {
             inner.stroke(shade, with: .color(groove.opacity(0.3)), lineWidth: g * 1.5)
             inner.stroke(light, with: .color(.white.opacity(level > 0 ? 0.14 : 0.22)), lineWidth: g * 2.2)
             inner.stroke(light, with: .color(.white.opacity(level > 0 ? 0.12 : 0.2)), lineWidth: g * 1.0)
+            // The rim sits in the shade of the belly.
+            layer.fill(piece.path, with: .color(.black.opacity(level > 0 ? 0.16 : 0.07)))
+            belly()
+            var over = context
+            if let clip { over.clip(to: clip) }
             for line in grooves {
-                inner.stroke(line, with: .color(groove.opacity(0.22)), style: StrokeStyle(lineWidth: g * 2.4, lineCap: .round))
-                inner.stroke(line, with: .color(groove.opacity(0.35)), style: StrokeStyle(lineWidth: g * 1.1, lineCap: .round))
+                over.stroke(line, with: .color(groove.opacity(0.22)), style: StrokeStyle(lineWidth: g * 2.4, lineCap: .round))
+                over.stroke(line, with: .color(groove.opacity(0.35)), style: StrokeStyle(lineWidth: g * 1.1, lineCap: .round))
             }
         }
     }
