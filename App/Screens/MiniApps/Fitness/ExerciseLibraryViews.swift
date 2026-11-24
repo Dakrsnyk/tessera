@@ -332,6 +332,13 @@ struct ExerciseDetailView: View {
             VStack(spacing: 8) {
                 ExerciseDemoView(exercise: exercise, colorHex: accentHex)
                     .frame(maxWidth: .infinity)
+                // An exercise of the extended catalogue: said plainly that the figure shows the closest movement.
+                if let source = exercise.demoID.flatMap({ ExerciseLibrary.info($0) }) {
+                    Text(tr("Démonstration d'un mouvement proche : \(source.name)"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
                 HStack(spacing: 6) {
                     Circle().fill(palette.fitness).frame(width: 7, height: 7)
                     Text(tr("Muscles principaux"))

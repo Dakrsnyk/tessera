@@ -1,0 +1,1531 @@
+{
+ "Lying_Close-Grip_Bar_Curl_On_High_Pulley": {
+  "fr": "Curl allongé à la poulie haute",
+  "en": "Lying high-pulley bar curl",
+  "es": "Curl tumbado en polea alta",
+  "de": "Curl liegend am hohen Kabelzug",
+  "it": "Curl sdraiato al cavo alto",
+  "pt-BR": "Rosca deitada na polia alta",
+  "ja": "ライイング・ハイプーリー・バーカール",
+  "aliases": [
+   "curl allongé poulie",
+   "curl couché poulie haute"
+  ],
+  "pattern": "curl"
+ },
+ "Lying_Close-Grip_Barbell_Triceps_Extension_Behind_The_Head": {
+  "fr": "Extension triceps allongé derrière la tête (barre, prise serrée)",
+  "en": "Lying close-grip barbell triceps extension behind the head",
+  "es": "Extensión de tríceps tumbado tras la nuca con barra, agarre cerrado",
+  "de": "Liegendes Trizepsdrücken hinter dem Kopf, enger Griff",
+  "it": "Estensione tricipiti su panca dietro la testa, presa stretta",
+  "pt-BR": "Extensão de tríceps deitado atrás da cabeça com barra, pegada fechada",
+  "ja": "ライイング・クローズグリップ・バーベルトライセプスエクステンション（頭の後ろ）",
+  "aliases": [
+   "barre au front derrière la tête",
+   "extension triceps barre derrière la tête",
+   "skull crusher prise serrée"
+  ],
+  "pattern": "lyingExtension"
+ },
+ "Lying_Close-Grip_Barbell_Triceps_Press_To_Chin": {
+  "fr": "Extension triceps allongé au menton (barre EZ)",
+  "en": "Lying close-grip EZ-bar triceps press to chin",
+  "es": "Press de tríceps tumbado a la barbilla con barra Z",
+  "de": "Liegendes Trizepsdrücken zum Kinn mit SZ-Stange",
+  "it": "Press tricipiti su panca al mento con barra EZ",
+  "pt-BR": "Tríceps deitado até o queixo com barra W",
+  "ja": "ライイング・トライセプスプレス（あご引き寄せ・EZバー）",
+  "aliases": [
+   "triceps press au menton",
+   "barre EZ au menton",
+   "extension triceps menton"
+  ],
+  "pattern": "lyingExtension"
+ },
+ "Lying_Crossover": {
+  "fr": "Étirement croisé allongé (jambe)",
+  "en": "Lying crossover stretch",
+  "es": "Estiramiento cruzado tumbado",
+  "de": "Liegende Beinüberkreuzung (Dehnung)",
+  "it": "Stretching incrociato sdraiato",
+  "pt-BR": "Alongamento cruzado deitado",
+  "ja": "仰向けクロスオーバー・ストレッチ",
+  "aliases": [
+   "étirement jambe croisée",
+   "étirement abducteurs allongé",
+   "torsion jambe croisée"
+  ],
+  "pattern": "stretchFold"
+ },
+ "Lying_Dumbbell_Tricep_Extension": {
+  "fr": "Extension triceps allongé haltères",
+  "en": "Lying dumbbell triceps extension",
+  "es": "Extensión de tríceps tumbado con mancuernas",
+  "de": "Liegendes Trizepsstrecken mit Kurzhanteln",
+  "it": "Estensione tricipiti su panca con manubri",
+  "pt-BR": "Tríceps testa com halteres",
+  "ja": "ライイング・ダンベルトライセプスエクステンション",
+  "aliases": [
+   "barre au front haltères",
+   "skull crusher haltères",
+   "extension triceps couché haltères"
+  ],
+  "pattern": "lyingExtension"
+ },
+ "Lying_Face_Down_Plate_Neck_Resistance": {
+  "fr": "Renforcement de la nuque face au banc (disque)",
+  "en": "Lying face-down plate neck resistance",
+  "es": "Resistencia de cuello boca abajo con disco",
+  "de": "Nackentraining in Bauchlage mit Hantelscheibe",
+  "it": "Rinforzo del collo prono con disco",
+  "pt-BR": "Resistência de pescoço de bruços com anilha",
+  "ja": "うつ伏せプレート・ネックレジスタンス",
+  "aliases": [
+   "nuque disque",
+   "extension de nuque disque",
+   "renforcement nuque ventre"
+  ],
+  "pattern": "generic"
+ },
+ "Lying_Face_Up_Plate_Neck_Resistance": {
+  "fr": "Renforcement de la nuque sur le dos (disque)",
+  "en": "Lying face-up plate neck resistance",
+  "es": "Resistencia de cuello boca arriba con disco",
+  "de": "Nackentraining in Rückenlage mit Hantelscheibe",
+  "it": "Rinforzo del collo supino con disco",
+  "pt-BR": "Resistência de pescoço de costas com anilha",
+  "ja": "仰向けプレート・ネックレジスタンス",
+  "aliases": [
+   "flexion de nuque disque",
+   "nuque disque dos",
+   "renforcement nuque dos"
+  ],
+  "pattern": "generic"
+ },
+ "Lying_Glute": {
+  "fr": "Étirement des fessiers allongé",
+  "en": "Lying glute stretch",
+  "es": "Estiramiento de glúteos tumbado",
+  "de": "Liegende Gesäßdehnung",
+  "it": "Stretching dei glutei sdraiato",
+  "pt-BR": "Alongamento de glúteos deitado",
+  "ja": "仰向けお尻ストレッチ",
+  "aliases": [
+   "étirement fessier couché",
+   "étirement du fessier",
+   "genou vers la poitrine fessier"
+  ],
+  "pattern": "stretchFold"
+ },
+ "Lying_Hamstring": {
+  "fr": "Étirement des ischio-jambiers allongé (avec sangle)",
+  "en": "Lying hamstring stretch with strap",
+  "es": "Estiramiento de isquiotibiales tumbado",
+  "de": "Liegende Beinbeugerdehnung",
+  "it": "Stretching dei femorali sdraiato",
+  "pt-BR": "Alongamento de posteriores deitado",
+  "ja": "仰向けハムストリングス・ストレッチ",
+  "aliases": [
+   "étirement ischios couché",
+   "étirement ischio avec sangle",
+   "jambe tendue au plafond"
+  ],
+  "pattern": "stretchFold"
+ },
+ "Lying_High_Bench_Barbell_Curl": {
+  "fr": "Curl allongé sur banc haut (barre)",
+  "en": "Lying high-bench barbell curl",
+  "es": "Curl con barra tumbado en banco alto",
+  "de": "Langhantel-Curl liegend auf hoher Bank",
+  "it": "Curl con bilanciere sdraiato su panca alta",
+  "pt-BR": "Rosca com barra deitado em banco alto",
+  "ja": "ライイング・ハイベンチ・バーベルカール",
+  "aliases": [
+   "curl allongé barre",
+   "curl couché sur banc",
+   "curl barre sur le dos"
+  ],
+  "pattern": "curl"
+ },
+ "Lying_Machine_Squat": {
+  "fr": "Squat allongé à la machine",
+  "en": "Lying machine squat",
+  "es": "Sentadilla tumbado en máquina",
+  "de": "Liegende Maschinen-Kniebeuge",
+  "it": "Squat sdraiato alla macchina",
+  "pt-BR": "Agachamento deitado na máquina",
+  "ja": "ライイング・マシンスクワット",
+  "aliases": [
+   "squat couché machine",
+   "presse allongée",
+   "squat machine allongé"
+  ],
+  "pattern": "legPress"
+ },
+ "Lying_One-Arm_Lateral_Raise": {
+  "fr": "Élévation latérale allongé un bras",
+  "en": "Lying one-arm lateral raise",
+  "es": "Elevación lateral tumbado a un brazo",
+  "de": "Einarmiges Seitheben im Liegen",
+  "it": "Alzata laterale sdraiato a un braccio",
+  "pt-BR": "Elevação lateral deitado com um braço",
+  "ja": "ライイング・ワンハンド・サイドレイズ",
+  "aliases": [
+   "élévation latérale couché",
+   "latérale sur le côté haltère",
+   "élévation latérale sur banc côté"
+  ],
+  "pattern": "lateralRaise"
+ },
+ "Lying_Prone_Quadriceps": {
+  "fr": "Étirement des quadriceps sur le ventre",
+  "en": "Lying prone quad stretch",
+  "es": "Estiramiento de cuádriceps boca abajo",
+  "de": "Quadrizepsdehnung in Bauchlage",
+  "it": "Stretching del quadricipite prono",
+  "pt-BR": "Alongamento de quadríceps de bruços",
+  "ja": "うつ伏せ大腿四頭筋ストレッチ",
+  "aliases": [
+   "étirement quadriceps ventre",
+   "talon aux fesses allongé",
+   "étirement quads couché"
+  ],
+  "pattern": "stretchFold"
+ },
+ "Lying_Rear_Delt_Raise": {
+  "fr": "Oiseau allongé haltères",
+  "en": "Lying rear delt raise",
+  "es": "Elevación posterior de deltoides tumbado",
+  "de": "Hintere Schulter-Hebung im Liegen",
+  "it": "Alzata deltoide posteriore sdraiato",
+  "pt-BR": "Elevação de deltoide posterior deitado",
+  "ja": "ライイング・リアデルトレイズ",
+  "aliases": [
+   "oiseau couché",
+   "oiseau sur banc ventre",
+   "élévation arrière allongé"
+  ],
+  "pattern": "horizontalPull"
+ },
+ "Lying_Supine_Dumbbell_Curl": {
+  "fr": "Curl allongé sur le dos (haltères)",
+  "en": "Lying supine dumbbell curl",
+  "es": "Curl con mancuernas tumbado boca arriba",
+  "de": "Kurzhantel-Curl in Rückenlage",
+  "it": "Curl con manubri supino",
+  "pt-BR": "Rosca com halteres deitado de costas",
+  "ja": "仰向けダンベルカール",
+  "aliases": [
+   "curl couché haltères",
+   "curl haltères sur le dos",
+   "curl allongé haltères"
+  ],
+  "pattern": "curl"
+ },
+ "Lying_T-Bar_Row": {
+  "fr": "Rowing T-bar allongé (buste appuyé)",
+  "en": "Chest-supported T-bar row",
+  "es": "Remo en T con apoyo en pecho",
+  "de": "T-Bar-Rudern mit Brustauflage",
+  "it": "Rematore a T con appoggio al petto",
+  "pt-BR": "Remada em T com apoio no peito",
+  "ja": "チェストサポート・Tバーロウ",
+  "aliases": [
+   "t-bar appuyé",
+   "rowing t-bar couché",
+   "rowing T-bar sur banc"
+  ],
+  "pattern": "horizontalPull"
+ },
+ "Lying_Triceps_Press": {
+  "fr": "Extension triceps allongé (barre EZ)",
+  "en": "Lying EZ-bar triceps press",
+  "es": "Press de tríceps tumbado con barra Z",
+  "de": "Liegendes Trizepsdrücken mit SZ-Stange",
+  "it": "Press tricipiti su panca con barra EZ",
+  "pt-BR": "Tríceps testa com barra W",
+  "ja": "ライイング・トライセプスプレス（EZバー）",
+  "aliases": [
+   "barre au front EZ",
+   "skull crusher barre EZ",
+   "barre EZ au front"
+  ],
+  "pattern": "lyingExtension"
+ },
+ "Machine_Bicep_Curl": {
+  "fr": "Curl à la machine",
+  "en": "Machine biceps curl",
+  "es": "Curl de bíceps en máquina",
+  "de": "Bizeps-Curl an der Maschine",
+  "it": "Curl bicipiti alla macchina",
+  "pt-BR": "Rosca de bíceps na máquina",
+  "ja": "マシンカール",
+  "aliases": [
+   "curl machine",
+   "machine à biceps",
+   "curl biceps machine"
+  ],
+  "pattern": "curl"
+ },
+ "Machine_Preacher_Curls": {
+  "fr": "Curl pupitre à la machine",
+  "en": "Machine preacher curl",
+  "es": "Curl predicador en máquina",
+  "de": "Preacher-Curl an der Maschine",
+  "it": "Preacher curl alla macchina",
+  "pt-BR": "Rosca scott na máquina",
+  "ja": "マシン・プリーチャーカール",
+  "aliases": [
+   "pupitre machine",
+   "larry scott machine",
+   "curl pupitre machine"
+  ],
+  "pattern": "curl"
+ },
+ "Machine_Triceps_Extension": {
+  "fr": "Extension triceps à la machine",
+  "en": "Machine triceps extension",
+  "es": "Extensión de tríceps en máquina",
+  "de": "Trizepsstrecken an der Maschine",
+  "it": "Estensione tricipiti alla macchina",
+  "pt-BR": "Extensão de tríceps na máquina",
+  "ja": "マシン・トライセプスエクステンション",
+  "aliases": [
+   "triceps machine",
+   "machine à triceps",
+   "extension triceps machine assise"
+  ],
+  "pattern": "tricepsExtension"
+ },
+ "Medicine_Ball_Chest_Pass": {
+  "fr": "Passe poitrine au medicine ball",
+  "en": "Medicine ball chest pass",
+  "es": "Pase de pecho con balón medicinal",
+  "de": "Brustpass mit Medizinball",
+  "it": "Passaggio al petto con palla medica",
+  "pt-BR": "Passe de peito com medicine ball",
+  "ja": "メディシンボール・チェストパス",
+  "aliases": [
+   "passe poitrine médecine ball",
+   "lancer poitrine medball",
+   "chest pass"
+  ],
+  "pattern": "benchPress"
+ },
+ "Medicine_Ball_Full_Twist": {
+  "fr": "Rotation complète avec medicine ball",
+  "en": "Medicine ball full twist",
+  "es": "Giro completo con balón medicinal",
+  "de": "Volle Rumpfdrehung mit Medizinball",
+  "it": "Torsione completa con palla medica",
+  "pt-BR": "Giro completo com medicine ball",
+  "ja": "メディシンボール・フルツイスト",
+  "aliases": [
+   "rotation médecine ball",
+   "twist medball",
+   "rotation tronc ballon lesté"
+  ],
+  "pattern": "rotation"
+ },
+ "Medicine_Ball_Scoop_Throw": {
+  "fr": "Lancer en cuillère au medicine ball",
+  "en": "Medicine ball scoop throw",
+  "es": "Lanzamiento de cuchara con balón medicinal",
+  "de": "Medizinball-Schaufelwurf",
+  "it": "Lancio a cucchiaio con palla medica",
+  "pt-BR": "Arremesso em concha com medicine ball",
+  "ja": "メディシンボール・スクープスロー",
+  "aliases": [
+   "lancer vers l'arrière médecine ball",
+   "scoop throw",
+   "lancer médecine ball arrière"
+  ],
+  "pattern": "hinge"
+ },
+ "Middle_Back_Shrug": {
+  "fr": "Haussements d'épaules du milieu du dos (haltères)",
+  "en": "Middle back shrug",
+  "es": "Encogimiento de espalda media",
+  "de": "Schulterblatt-Retraktion mit Kurzhanteln",
+  "it": "Scrollata per la parte media della schiena",
+  "pt-BR": "Encolhimento para meio das costas",
+  "ja": "ミドルバック・シュラッグ",
+  "aliases": [
+   "rétraction scapulaire haltères",
+   "haussements scapulaires",
+   "shrug milieu du dos"
+  ],
+  "pattern": "shrug"
+ },
+ "Middle_Back_Stretch": {
+  "fr": "Étirement du milieu du dos",
+  "en": "Middle back stretch",
+  "es": "Estiramiento de espalda media",
+  "de": "Dehnung des mittleren Rückens",
+  "it": "Stretching della schiena media",
+  "pt-BR": "Alongamento do meio das costas",
+  "ja": "背中中央のストレッチ",
+  "aliases": [
+   "étirement dos rond",
+   "étirement du dos",
+   "étirement dorsal"
+  ],
+  "pattern": "stretchStand"
+ },
+ "Mixed_Grip_Chin": {
+  "fr": "Tractions prise mixte",
+  "en": "Mixed-grip chin-up",
+  "es": "Dominada con agarre mixto",
+  "de": "Klimmzug im Wechselgriff",
+  "it": "Trazione a presa mista",
+  "pt-BR": "Barra fixa com pegada mista",
+  "ja": "オルタネイトグリップ・チンアップ",
+  "aliases": [
+   "tractions mixtes",
+   "tractions prise alternée",
+   "chin-up prise mixte"
+  ],
+  "pattern": "verticalPull"
+ },
+ "Monster_Walk": {
+  "fr": "Marche monster avec élastique",
+  "en": "Monster walk",
+  "es": "Caminata monstruo con banda",
+  "de": "Monster Walk mit Widerstandsband",
+  "it": "Monster walk con elastico",
+  "pt-BR": "Monster walk com elástico",
+  "ja": "モンスターウォーク",
+  "aliases": [
+   "marche latérale élastique",
+   "marche du monstre",
+   "monster walk élastique"
+  ],
+  "pattern": "lunge"
+ },
+ "Moving_Claw_Series": {
+  "fr": "Série de la griffe en mouvement",
+  "en": "Moving claw series",
+  "es": "Serie de la garra en movimiento",
+  "de": "Moving-Claw-Serie",
+  "it": "Serie dell'artiglio in movimento",
+  "pt-BR": "Série da garra em movimento",
+  "ja": "ムービング・クロー・シリーズ",
+  "aliases": [
+   "claw série",
+   "griffe en déplacement",
+   "série claw"
+  ],
+  "pattern": "lunge"
+ },
+ "Muscle_Snatch": {
+  "fr": "Arraché de force (muscle snatch)",
+  "en": "Muscle snatch",
+  "es": "Arrancada muscular",
+  "de": "Muscle Snatch",
+  "it": "Muscle snatch",
+  "pt-BR": "Muscle snatch",
+  "ja": "マッスルスナッチ",
+  "aliases": [
+   "arraché sans flexion",
+   "muscle snatch barre",
+   "arraché de puissance bras tendus"
+  ],
+  "pattern": "hinge"
+ },
+ "Muscle_Up": {
+  "fr": "Muscle-up",
+  "en": "Muscle-up",
+  "es": "Muscle-up",
+  "de": "Muscle-up",
+  "it": "Muscle-up",
+  "pt-BR": "Muscle-up",
+  "ja": "マッスルアップ",
+  "aliases": [
+   "muscle up barre",
+   "traction dips enchaînés",
+   "muscle ups"
+  ],
+  "pattern": "verticalPull"
+ },
+ "Narrow_Stance_Hack_Squats": {
+  "fr": "Hack squat pieds rapprochés",
+  "en": "Narrow-stance hack squat",
+  "es": "Hack squat con pies juntos",
+  "de": "Hackenschmidt-Kniebeuge enger Stand",
+  "it": "Hack squat a piedi stretti",
+  "pt-BR": "Hack squat com pés juntos",
+  "ja": "ナロースタンス・ハックスクワット",
+  "aliases": [
+   "hack squat serré",
+   "hack squat stance étroite",
+   "hack squat pieds joints"
+  ],
+  "pattern": "squat"
+ },
+ "Narrow_Stance_Leg_Press": {
+  "fr": "Presse à cuisses pieds rapprochés",
+  "en": "Narrow-stance leg press",
+  "es": "Prensa con pies juntos",
+  "de": "Beinpresse enger Stand",
+  "it": "Leg press a piedi stretti",
+  "pt-BR": "Leg press com pés juntos",
+  "ja": "ナロースタンス・レッグプレス",
+  "aliases": [
+   "presse pieds serrés",
+   "presse à cuisses étroite",
+   "leg press serré"
+  ],
+  "pattern": "legPress"
+ },
+ "Narrow_Stance_Squats": {
+  "fr": "Squat pieds rapprochés (barre)",
+  "en": "Narrow-stance barbell squat",
+  "es": "Sentadilla con pies juntos",
+  "de": "Kniebeuge enger Stand",
+  "it": "Squat a piedi stretti",
+  "pt-BR": "Agachamento com pés juntos",
+  "ja": "ナロースタンス・スクワット",
+  "aliases": [
+   "squat serré",
+   "squat stance étroite",
+   "squat pieds joints"
+  ],
+  "pattern": "squat"
+ },
+ "Natural_Glute_Ham_Raise": {
+  "fr": "Relevé glutes-ischios au poids du corps",
+  "en": "Natural glute-ham raise",
+  "es": "Elevación glúteo-isquio natural",
+  "de": "Natural Glute-Ham-Raise",
+  "it": "Glute-ham raise naturale",
+  "pt-BR": "Elevação glúteo-isquio natural",
+  "ja": "ナチュラル・グルートハムレイズ",
+  "aliases": [
+   "ghr naturel",
+   "glute ham raise sans machine",
+   "nordic assisté"
+  ],
+  "pattern": "legCurl"
+ },
+ "Neck-SMR": {
+  "fr": "Auto-massage de la nuque au rouleau",
+  "en": "Neck foam rolling",
+  "es": "Automasaje de cuello con rodillo",
+  "de": "Nacken-Faszienrolle",
+  "it": "Automassaggio del collo con rullo",
+  "pt-BR": "Automassagem do pescoço com rolo",
+  "ja": "首のフォームローリング",
+  "aliases": [
+   "rouleau nuque",
+   "massage nuque foam roller",
+   "auto-massage cervical"
+  ],
+  "pattern": "stretchStand"
+ },
+ "Neck_Press": {
+  "fr": "Développé nuque",
+  "en": "Neck press",
+  "es": "Press de cuello",
+  "de": "Nackendrücken (Neck Press)",
+  "it": "Neck press",
+  "pt-BR": "Supino na nuca",
+  "ja": "ネックプレス",
+  "aliases": [
+   "développé à la nuque couché",
+   "neck press barre",
+   "développé couché vers le cou"
+  ],
+  "pattern": "benchPress"
+ },
+ "Oblique_Crunches": {
+  "fr": "Crunch oblique",
+  "en": "Oblique crunch",
+  "es": "Crunch oblicuo",
+  "de": "Seitliche Crunches",
+  "it": "Crunch obliquo",
+  "pt-BR": "Abdominal oblíquo",
+  "ja": "オブリーククランチ",
+  "aliases": [
+   "crunch obliques",
+   "crunch latéral",
+   "crunch en rotation"
+  ],
+  "pattern": "crunch"
+ },
+ "Oblique_Crunches_-_On_The_Floor": {
+  "fr": "Crunch oblique au sol (jambes sur le côté)",
+  "en": "Floor oblique crunch",
+  "es": "Crunch oblicuo en el suelo",
+  "de": "Seitliche Crunches am Boden",
+  "it": "Crunch obliquo a terra",
+  "pt-BR": "Abdominal oblíquo no chão",
+  "ja": "フロア・オブリーククランチ",
+  "aliases": [
+   "crunch oblique sol",
+   "crunch latéral au sol",
+   "crunch obliques allongé"
+  ],
+  "pattern": "crunch"
+ },
+ "Olympic_Squat": {
+  "fr": "Squat olympique (haltérophilie)",
+  "en": "Olympic squat",
+  "es": "Sentadilla olímpica",
+  "de": "Olympische Kniebeuge",
+  "it": "Squat olimpico",
+  "pt-BR": "Agachamento olímpico",
+  "ja": "オリンピックスクワット",
+  "aliases": [
+   "squat haltérophile",
+   "squat olympique barre",
+   "squat talons surélevés"
+  ],
+  "pattern": "squat"
+ },
+ "On-Your-Back_Quad_Stretch": {
+  "fr": "Étirement des quadriceps sur le dos",
+  "en": "On-your-back quad stretch",
+  "es": "Estiramiento de cuádriceps boca arriba",
+  "de": "Quadrizepsdehnung in Rückenlage",
+  "it": "Stretching del quadricipite supino",
+  "pt-BR": "Alongamento de quadríceps deitado de costas",
+  "ja": "仰向け大腿四頭筋ストレッチ",
+  "aliases": [
+   "étirement quads dos",
+   "étirement quadriceps couché dos",
+   "quad stretch allongé"
+  ],
+  "pattern": "stretchFold"
+ },
+ "On_Your_Side_Quad_Stretch": {
+  "fr": "Étirement des quadriceps sur le côté",
+  "en": "Side-lying quad stretch",
+  "es": "Estiramiento de cuádriceps de lado",
+  "de": "Quadrizepsdehnung in Seitenlage",
+  "it": "Stretching del quadricipite sul fianco",
+  "pt-BR": "Alongamento de quadríceps de lado",
+  "ja": "横向き大腿四頭筋ストレッチ",
+  "aliases": [
+   "étirement quads côté",
+   "étirement quadriceps allongé côté",
+   "quad stretch de côté"
+  ],
+  "pattern": "stretchFold"
+ },
+ "One-Arm_Flat_Bench_Dumbbell_Flye": {
+  "fr": "Écarté haltère à un bras sur banc plat",
+  "en": "One-arm flat bench dumbbell fly",
+  "es": "Aperturas con mancuerna a un brazo en banco plano",
+  "de": "Einarmige Fliegende mit Kurzhantel",
+  "it": "Croci con manubrio a un braccio su panca piana",
+  "pt-BR": "Crucifixo com halter unilateral no banco reto",
+  "ja": "ワンアーム・フラットベンチ・ダンベルフライ",
+  "aliases": [
+   "écarté unilatéral",
+   "écarté haltère un bras",
+   "écarté un bras"
+  ],
+  "pattern": "fly"
+ },
+ "One-Arm_High-Pulley_Cable_Side_Bends": {
+  "fr": "Flexion latérale à la poulie haute (un bras)",
+  "en": "One-arm high-pulley cable side bend",
+  "es": "Flexión lateral en polea alta a un brazo",
+  "de": "Seitbeuge am hohen Kabelzug einarmig",
+  "it": "Flessione laterale al cavo alto a un braccio",
+  "pt-BR": "Flexão lateral na polia alta unilateral",
+  "ja": "ワンアーム・ハイプーリー・サイドベンド",
+  "aliases": [
+   "inclinaison latérale poulie",
+   "flexion latérale poulie haute",
+   "side bend poulie"
+  ],
+  "pattern": "rotation"
+ },
+ "One-Arm_Incline_Lateral_Raise": {
+  "fr": "Élévation latérale sur banc incliné (un bras)",
+  "en": "One-arm incline lateral raise",
+  "es": "Elevación lateral en banco inclinado a un brazo",
+  "de": "Einarmiges Seitheben an der Schrägbank",
+  "it": "Alzata laterale su panca inclinata a un braccio",
+  "pt-BR": "Elevação lateral no banco inclinado unilateral",
+  "ja": "ワンアーム・インクライン・サイドレイズ",
+  "aliases": [
+   "latérale sur banc incliné",
+   "élévation latérale inclinée côté",
+   "latérale couché sur le côté incliné"
+  ],
+  "pattern": "lateralRaise"
+ },
+ "One-Arm_Kettlebell_Clean": {
+  "fr": "Épaulé kettlebell à un bras",
+  "en": "One-arm kettlebell clean",
+  "es": "Cargada de kettlebell a un brazo",
+  "de": "Einarmiges Kettlebell-Clean",
+  "it": "Clean con kettlebell a un braccio",
+  "pt-BR": "Clean com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・クリーン",
+  "aliases": [
+   "clean kettlebell un bras",
+   "épaulé kettlebell unilatéral",
+   "kb clean un bras"
+  ],
+  "pattern": "hinge"
+ },
+ "One-Arm_Kettlebell_Clean_and_Jerk": {
+  "fr": "Épaulé-jeté kettlebell à un bras",
+  "en": "One-arm kettlebell clean and jerk",
+  "es": "Cargada y envión de kettlebell a un brazo",
+  "de": "Einarmiges Kettlebell Clean and Jerk",
+  "it": "Clean and jerk con kettlebell a un braccio",
+  "pt-BR": "Clean and jerk com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・クリーン＆ジャーク",
+  "aliases": [
+   "clean and jerk kettlebell",
+   "épaulé jeté kettlebell",
+   "kb clean and jerk"
+  ],
+  "pattern": "verticalPush"
+ },
+ "One-Arm_Kettlebell_Floor_Press": {
+  "fr": "Développé au sol kettlebell à un bras",
+  "en": "One-arm kettlebell floor press",
+  "es": "Press de suelo con kettlebell a un brazo",
+  "de": "Einarmiges Kettlebell-Bodendrücken",
+  "it": "Floor press con kettlebell a un braccio",
+  "pt-BR": "Supino no chão com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・フロアプレス",
+  "aliases": [
+   "floor press kettlebell",
+   "développé sol kettlebell",
+   "kb floor press"
+  ],
+  "pattern": "benchPress"
+ },
+ "One-Arm_Kettlebell_Jerk": {
+  "fr": "Jeté kettlebell à un bras",
+  "en": "One-arm kettlebell jerk",
+  "es": "Envión de kettlebell a un brazo",
+  "de": "Einarmiger Kettlebell-Jerk",
+  "it": "Jerk con kettlebell a un braccio",
+  "pt-BR": "Jerk com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・ジャーク",
+  "aliases": [
+   "jerk kettlebell",
+   "jeté kettlebell",
+   "kb jerk"
+  ],
+  "pattern": "verticalPush"
+ },
+ "One-Arm_Kettlebell_Military_Press_To_The_Side": {
+  "fr": "Développé militaire kettlebell sur le côté (un bras)",
+  "en": "One-arm kettlebell military press to the side",
+  "es": "Press militar con kettlebell lateral a un brazo",
+  "de": "Einarmiges Kettlebell-Schulterdrücken seitlich",
+  "it": "Military press con kettlebell laterale a un braccio",
+  "pt-BR": "Desenvolvimento militar lateral com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・ミリタリープレス（サイド）",
+  "aliases": [
+   "développé kettlebell latéral",
+   "press kettlebell côté",
+   "kb military press côté"
+  ],
+  "pattern": "verticalPush"
+ },
+ "One-Arm_Kettlebell_Para_Press": {
+  "fr": "Para press kettlebell à un bras",
+  "en": "One-arm kettlebell para press",
+  "es": "Para press con kettlebell a un brazo",
+  "de": "Einarmiges Kettlebell Para Press",
+  "it": "Para press con kettlebell a un braccio",
+  "pt-BR": "Para press com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・パラプレス",
+  "aliases": [
+   "para press",
+   "développé kettlebell para",
+   "kb para press"
+  ],
+  "pattern": "verticalPush"
+ },
+ "One-Arm_Kettlebell_Push_Press": {
+  "fr": "Push press kettlebell à un bras",
+  "en": "One-arm kettlebell push press",
+  "es": "Push press con kettlebell a un brazo",
+  "de": "Einarmiges Kettlebell Push Press",
+  "it": "Push press con kettlebell a un braccio",
+  "pt-BR": "Push press com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・プッシュプレス",
+  "aliases": [
+   "push press kettlebell",
+   "développé poussé kettlebell",
+   "kb push press"
+  ],
+  "pattern": "verticalPush"
+ },
+ "One-Arm_Kettlebell_Row": {
+  "fr": "Rowing kettlebell à un bras",
+  "en": "One-arm kettlebell row",
+  "es": "Remo con kettlebell a un brazo",
+  "de": "Einarmiges Kettlebell-Rudern",
+  "it": "Rematore con kettlebell a un braccio",
+  "pt-BR": "Remada com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・ロウ",
+  "aliases": [
+   "rowing kettlebell",
+   "tirage kettlebell un bras",
+   "kb row"
+  ],
+  "pattern": "horizontalPull"
+ },
+ "One-Arm_Kettlebell_Snatch": {
+  "fr": "Arraché kettlebell à un bras",
+  "en": "One-arm kettlebell snatch",
+  "es": "Arrancada de kettlebell a un brazo",
+  "de": "Einarmiges Kettlebell-Snatch",
+  "it": "Snatch con kettlebell a un braccio",
+  "pt-BR": "Snatch com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・スナッチ",
+  "aliases": [
+   "snatch kettlebell",
+   "arraché kettlebell",
+   "kb snatch"
+  ],
+  "pattern": "hinge"
+ },
+ "One-Arm_Kettlebell_Split_Jerk": {
+  "fr": "Jeté fendu kettlebell à un bras",
+  "en": "One-arm kettlebell split jerk",
+  "es": "Envión con tijera de kettlebell a un brazo",
+  "de": "Einarmiger Kettlebell-Split-Jerk",
+  "it": "Split jerk con kettlebell a un braccio",
+  "pt-BR": "Split jerk com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・スプリットジャーク",
+  "aliases": [
+   "split jerk kettlebell",
+   "jeté fendu kettlebell",
+   "kb split jerk"
+  ],
+  "pattern": "verticalPush"
+ },
+ "One-Arm_Kettlebell_Split_Snatch": {
+  "fr": "Arraché fendu kettlebell à un bras",
+  "en": "One-arm kettlebell split snatch",
+  "es": "Arrancada con tijera de kettlebell a un brazo",
+  "de": "Einarmiger Kettlebell-Split-Snatch",
+  "it": "Split snatch con kettlebell a un braccio",
+  "pt-BR": "Split snatch com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・スプリットスナッチ",
+  "aliases": [
+   "split snatch kettlebell",
+   "arraché fendu kettlebell",
+   "kb split snatch"
+  ],
+  "pattern": "hinge"
+ },
+ "One-Arm_Kettlebell_Swings": {
+  "fr": "Kettlebell swing à un bras",
+  "en": "One-arm kettlebell swing",
+  "es": "Swing de kettlebell a un brazo",
+  "de": "Einarmiger Kettlebell-Swing",
+  "it": "Swing con kettlebell a un braccio",
+  "pt-BR": "Swing com kettlebell unilateral",
+  "ja": "ワンアーム・ケトルベル・スイング",
+  "aliases": [
+   "swing kettlebell un bras",
+   "kb swing un bras",
+   "balancé kettlebell un bras"
+  ],
+  "pattern": "hinge"
+ },
+ "One-Arm_Long_Bar_Row": {
+  "fr": "Rowing barre longue à un bras (landmine)",
+  "en": "One-arm landmine row",
+  "es": "Remo con barra larga a un brazo",
+  "de": "Einarmiges Langstangenrudern",
+  "it": "Rematore con barra lunga a un braccio",
+  "pt-BR": "Remada com barra longa unilateral",
+  "ja": "ワンアーム・ロングバー・ロウ",
+  "aliases": [
+   "rowing landmine",
+   "rowing barre à un bras",
+   "rowing barre coin"
+  ],
+  "pattern": "horizontalPull"
+ },
+ "One-Arm_Medicine_Ball_Slam": {
+  "fr": "Slam au medicine ball à un bras",
+  "en": "One-arm medicine ball slam",
+  "es": "Golpe de balón medicinal a un brazo",
+  "de": "Einarmiger Medizinball-Slam",
+  "it": "Slam con palla medica a un braccio",
+  "pt-BR": "Slam com medicine ball unilateral",
+  "ja": "ワンアーム・メディシンボール・スラム",
+  "aliases": [
+   "slam ball un bras",
+   "lancer au sol médecine ball",
+   "wall slam un bras"
+  ],
+  "pattern": "verticalPush"
+ },
+ "One-Arm_Open_Palm_Kettlebell_Clean": {
+  "fr": "Épaulé kettlebell main ouverte à un bras",
+  "en": "One-arm open-palm kettlebell clean",
+  "es": "Cargada de kettlebell con palma abierta a un brazo",
+  "de": "Einarmiges Kettlebell-Clean mit offener Hand",
+  "it": "Clean con kettlebell a palmo aperto a un braccio",
+  "pt-BR": "Clean com kettlebell de palma aberta unilateral",
+  "ja": "ワンアーム・オープンパーム・ケトルベル・クリーン",
+  "aliases": [
+   "clean kettlebell paume ouverte",
+   "épaulé kettlebell main ouverte",
+   "kb clean main ouverte"
+  ],
+  "pattern": "hinge"
+ },
+ "One-Arm_Overhead_Kettlebell_Squats": {
+  "fr": "Squat kettlebell au-dessus de la tête à un bras",
+  "en": "One-arm overhead kettlebell squat",
+  "es": "Sentadilla con kettlebell sobre la cabeza a un brazo",
+  "de": "Einarmige Kettlebell-Überkopf-Kniebeuge",
+  "it": "Squat con kettlebell sopra la testa a un braccio",
+  "pt-BR": "Agachamento com kettlebell acima da cabeça unilateral",
+  "ja": "ワンアーム・オーバーヘッド・ケトルベル・スクワット",
+  "aliases": [
+   "squat overhead kettlebell",
+   "squat kettlebell bras tendu",
+   "kb overhead squat"
+  ],
+  "pattern": "squat"
+ },
+ "One-Arm_Side_Deadlift": {
+  "fr": "Soulevé de terre sur le côté à un bras (barre)",
+  "en": "One-arm side deadlift",
+  "es": "Peso muerto lateral a un brazo",
+  "de": "Einarmiges seitliches Kreuzheben",
+  "it": "Stacco laterale a un braccio",
+  "pt-BR": "Levantamento terra lateral unilateral",
+  "ja": "ワンアーム・サイドデッドリフト",
+  "aliases": [
+   "soulevé de terre latéral",
+   "soulevé de terre un bras",
+   "deadlift un bras côté"
+  ],
+  "pattern": "hinge"
+ },
+ "One-Arm_Side_Laterals": {
+  "fr": "Élévations latérales à un bras (haltère)",
+  "en": "One-arm side lateral raise",
+  "es": "Elevación lateral a un brazo con mancuerna",
+  "de": "Einarmiges Seitheben",
+  "it": "Alzata laterale a un braccio",
+  "pt-BR": "Elevação lateral unilateral",
+  "ja": "ワンアーム・サイドレイズ",
+  "aliases": [
+   "latérale un bras",
+   "élévation latérale unilatérale",
+   "latérale haltère un bras"
+  ],
+  "pattern": "lateralRaise"
+ },
+ "One-Legged_Cable_Kickback": {
+  "fr": "Kickback fessier à la poulie (une jambe)",
+  "en": "One-legged cable kickback",
+  "es": "Patada de glúteo en polea a una pierna",
+  "de": "Einbeiniger Kabelzug-Kickback",
+  "it": "Kickback al cavo a una gamba",
+  "pt-BR": "Coice na polia unilateral",
+  "ja": "ワンレッグ・ケーブルキックバック",
+  "aliases": [
+   "kickback poulie basse",
+   "extension de hanche poulie",
+   "kickback fessier une jambe"
+  ],
+  "pattern": "legKickback"
+ },
+ "One_Arm_Against_Wall": {
+  "fr": "Étirement du dorsal contre le mur (un bras)",
+  "en": "One-arm lat stretch against wall",
+  "es": "Estiramiento de dorsal contra la pared a un brazo",
+  "de": "Einarmige Latissimus-Dehnung an der Wand",
+  "it": "Stretching del gran dorsale al muro a un braccio",
+  "pt-BR": "Alongamento de dorsal na parede unilateral",
+  "ja": "壁を使った片腕広背筋ストレッチ",
+  "aliases": [
+   "étirement dorsal mur",
+   "étirement du grand dorsal",
+   "étirement latéral au mur"
+  ],
+  "pattern": "stretchStand"
+ },
+ "One_Arm_Chin-Up": {
+  "fr": "Traction à un bras (supination)",
+  "en": "One-arm chin-up",
+  "es": "Dominada a un brazo supina",
+  "de": "Einarmiger Klimmzug im Untergriff",
+  "it": "Trazione a un braccio supina",
+  "pt-BR": "Barra fixa unilateral supinada",
+  "ja": "片手チンアップ",
+  "aliases": [
+   "traction un bras",
+   "chin-up un bras",
+   "one arm chin"
+  ],
+  "pattern": "verticalPull"
+ },
+ "One_Arm_Dumbbell_Bench_Press": {
+  "fr": "Développé couché haltère à un bras",
+  "en": "One-arm dumbbell bench press",
+  "es": "Press de banca con mancuerna a un brazo",
+  "de": "Einarmiges Kurzhantel-Bankdrücken",
+  "it": "Panca piana con manubrio a un braccio",
+  "pt-BR": "Supino com halter unilateral",
+  "ja": "ワンアーム・ダンベルベンチプレス",
+  "aliases": [
+   "développé couché un bras",
+   "développé haltère unilatéral",
+   "développé un bras"
+  ],
+  "pattern": "benchPress"
+ },
+ "One_Arm_Dumbbell_Preacher_Curl": {
+  "fr": "Curl pupitre haltère à un bras",
+  "en": "One-arm dumbbell preacher curl",
+  "es": "Curl predicador con mancuerna a un brazo",
+  "de": "Einarmiger Kurzhantel-Preacher-Curl",
+  "it": "Preacher curl con manubrio a un braccio",
+  "pt-BR": "Rosca scott com halter unilateral",
+  "ja": "ワンアーム・ダンベル・プリーチャーカール",
+  "aliases": [
+   "pupitre haltère",
+   "larry scott haltère",
+   "curl pupitre un bras"
+  ],
+  "pattern": "curl"
+ },
+ "One_Arm_Floor_Press": {
+  "fr": "Développé au sol à un bras (barre)",
+  "en": "One-arm barbell floor press",
+  "es": "Press de suelo a un brazo con barra",
+  "de": "Einarmiges Langhantel-Bodendrücken",
+  "it": "Floor press a un braccio con bilanciere",
+  "pt-BR": "Supino no chão unilateral com barra",
+  "ja": "ワンアーム・フロアプレス",
+  "aliases": [
+   "floor press un bras",
+   "développé sol un bras",
+   "floor press barre"
+  ],
+  "pattern": "benchPress"
+ },
+ "One_Arm_Lat_Pulldown": {
+  "fr": "Tirage vertical à un bras",
+  "en": "One-arm lat pulldown",
+  "es": "Jalón al pecho a un brazo",
+  "de": "Einarmiges Latziehen",
+  "it": "Lat machine a un braccio",
+  "pt-BR": "Puxada alta unilateral",
+  "ja": "ワンアーム・ラットプルダウン",
+  "aliases": [
+   "tirage poulie haute un bras",
+   "tirage vertical unilatéral",
+   "pulldown un bras"
+  ],
+  "pattern": "verticalPull"
+ },
+ "One_Arm_Pronated_Dumbbell_Triceps_Extension": {
+  "fr": "Extension triceps haltère à un bras (pronation)",
+  "en": "One-arm pronated dumbbell triceps extension",
+  "es": "Extensión de tríceps con mancuerna a un brazo en pronación",
+  "de": "Einarmiges Trizepsstrecken Kurzhantel im Obergriff",
+  "it": "Estensione tricipiti con manubrio a un braccio in pronazione",
+  "pt-BR": "Extensão de tríceps unilateral com halter pronada",
+  "ja": "ワンアーム・プロネイト・ダンベルトライセプスエクステンション",
+  "aliases": [
+   "extension triceps un bras pronation",
+   "triceps haltère un bras paume vers le bas",
+   "extension triceps unilatérale"
+  ],
+  "pattern": "lyingExtension"
+ },
+ "One_Arm_Supinated_Dumbbell_Triceps_Extension": {
+  "fr": "Extension triceps haltère à un bras (supination)",
+  "en": "One-arm supinated dumbbell triceps extension",
+  "es": "Extensión de tríceps con mancuerna a un brazo en supinación",
+  "de": "Einarmiges Trizepsstrecken Kurzhantel im Untergriff",
+  "it": "Estensione tricipiti con manubrio a un braccio in supinazione",
+  "pt-BR": "Extensão de tríceps unilateral com halter supinada",
+  "ja": "ワンアーム・スピネイト・ダンベルトライセプスエクステンション",
+  "aliases": [
+   "extension triceps un bras supination",
+   "triceps haltère un bras paume vers le haut",
+   "extension triceps haltère couché un bras"
+  ],
+  "pattern": "lyingExtension"
+ },
+ "One_Half_Locust": {
+  "fr": "Demi-sauterelle (étirement)",
+  "en": "Half locust stretch",
+  "es": "Media langosta (estiramiento)",
+  "de": "Halbe Heuschrecke (Dehnung)",
+  "it": "Mezza locusta (stretching)",
+  "pt-BR": "Meio gafanhoto (alongamento)",
+  "ja": "ハーフ・ローカスト",
+  "aliases": [
+   "demi sauterelle",
+   "étirement de la sauterelle",
+   "étirement quadriceps ventre jambe"
+  ],
+  "pattern": "stretchFold"
+ },
+ "One_Handed_Hang": {
+  "fr": "Suspension à une main",
+  "en": "One-handed hang",
+  "es": "Suspensión a una mano",
+  "de": "Einhändiges Hängen",
+  "it": "Sospensione a una mano",
+  "pt-BR": "Suspensão com uma mão",
+  "ja": "片手ぶら下がり",
+  "aliases": [
+   "suspension un bras",
+   "dead hang un bras",
+   "suspension unilatérale"
+  ],
+  "pattern": "verticalPull"
+ },
+ "One_Knee_To_Chest": {
+  "fr": "Genou à la poitrine (étirement)",
+  "en": "One knee to chest stretch",
+  "es": "Rodilla al pecho (estiramiento)",
+  "de": "Ein Knie zur Brust (Dehnung)",
+  "it": "Un ginocchio al petto (stretching)",
+  "pt-BR": "Um joelho ao peito (alongamento)",
+  "ja": "片膝を胸へ引き寄せるストレッチ",
+  "aliases": [
+   "genou poitrine",
+   "étirement genou à la poitrine",
+   "genou au torse"
+  ],
+  "pattern": "stretchFold"
+ },
+ "One_Leg_Barbell_Squat": {
+  "fr": "Squat sur une jambe (barre)",
+  "en": "One-leg barbell squat",
+  "es": "Sentadilla a una pierna con barra",
+  "de": "Einbeinige Langhantel-Kniebeuge",
+  "it": "Squat a una gamba con bilanciere",
+  "pt-BR": "Agachamento unilateral com barra",
+  "ja": "ワンレッグ・バーベルスクワット",
+  "aliases": [
+   "squat une jambe barre",
+   "squat unilatéral barre",
+   "pistol squat barre"
+  ],
+  "pattern": "squat"
+ },
+ "Open_Palm_Kettlebell_Clean": {
+  "fr": "Épaulé kettlebell main ouverte",
+  "en": "Open-palm kettlebell clean",
+  "es": "Cargada de kettlebell con palma abierta",
+  "de": "Kettlebell-Clean mit offener Hand",
+  "it": "Clean con kettlebell a palmo aperto",
+  "pt-BR": "Clean com kettlebell de palma aberta",
+  "ja": "オープンパーム・ケトルベル・クリーン",
+  "aliases": [
+   "clean kettlebell paume ouverte",
+   "épaulé kettlebell paume ouverte",
+   "kb clean paume ouverte"
+  ],
+  "pattern": "hinge"
+ },
+ "Otis-Up": {
+  "fr": "Otis-up (abdominaux avec poids)",
+  "en": "Otis-up",
+  "es": "Otis-up",
+  "de": "Otis-Up",
+  "it": "Otis-up",
+  "pt-BR": "Otis-up",
+  "ja": "オーティス・アップ",
+  "aliases": [
+   "otis up",
+   "redressement assis avec disque",
+   "sit-up lesté bras tendus"
+  ],
+  "pattern": "crunch"
+ },
+ "Overhead_Cable_Curl": {
+  "fr": "Curl à la poulie bras en l'air",
+  "en": "Overhead cable curl",
+  "es": "Curl en polea con brazos arriba",
+  "de": "Kabel-Curl über Kopf",
+  "it": "Curl ai cavi sopra la testa",
+  "pt-BR": "Rosca na polia acima da cabeça",
+  "ja": "オーバーヘッド・ケーブルカール",
+  "aliases": [
+   "curl poulie double biceps",
+   "curl poulie bras levés",
+   "pose de biceps poulie"
+  ],
+  "pattern": "curl"
+ },
+ "Overhead_Lat": {
+  "fr": "Étirement des dorsaux bras au-dessus de la tête",
+  "en": "Overhead lat stretch",
+  "es": "Estiramiento de dorsal sobre la cabeza",
+  "de": "Überkopf-Latissimus-Dehnung",
+  "it": "Stretching dorsale sopra la testa",
+  "pt-BR": "Alongamento de dorsal acima da cabeça",
+  "ja": "オーバーヘッド・ラットストレッチ",
+  "aliases": [
+   "étirement dorsaux suspendu",
+   "étirement lats",
+   "étirement latéral bras levés"
+  ],
+  "pattern": "stretchStand"
+ },
+ "Overhead_Slam": {
+  "fr": "Slam au-dessus de la tête (medicine ball)",
+  "en": "Overhead slam",
+  "es": "Golpe de balón sobre la cabeza",
+  "de": "Overhead Slam",
+  "it": "Overhead slam",
+  "pt-BR": "Slam acima da cabeça",
+  "ja": "オーバーヘッド・スラム",
+  "aliases": [
+   "slam ball",
+   "lancer médecine ball au sol",
+   "slam au sol"
+  ],
+  "pattern": "verticalPush"
+ },
+ "Overhead_Squat": {
+  "fr": "Squat bras tendus au-dessus de la tête (barre)",
+  "en": "Overhead squat",
+  "es": "Sentadilla overhead",
+  "de": "Überkopf-Kniebeuge",
+  "it": "Overhead squat",
+  "pt-BR": "Agachamento overhead",
+  "ja": "オーバーヘッドスクワット",
+  "aliases": [
+   "overhead squat",
+   "squat barre au-dessus de la tête",
+   "squat bras tendus"
+  ],
+  "pattern": "squat"
+ },
+ "Overhead_Stretch": {
+  "fr": "Étirement abdominal bras au-dessus de la tête",
+  "en": "Overhead abdominal stretch",
+  "es": "Estiramiento abdominal sobre la cabeza",
+  "de": "Überkopf-Bauchdehnung",
+  "it": "Stretching addominale sopra la testa",
+  "pt-BR": "Alongamento abdominal acima da cabeça",
+  "ja": "オーバーヘッド・アブストレッチ",
+  "aliases": [
+   "étirement des abdos debout",
+   "grand étirement bras levés",
+   "étirement abdominaux"
+  ],
+  "pattern": "stretchStand"
+ },
+ "Pallof_Press_With_Rotation": {
+  "fr": "Pallof press avec rotation",
+  "en": "Pallof press with rotation",
+  "es": "Pallof press con rotación",
+  "de": "Pallof Press mit Rotation",
+  "it": "Pallof press con rotazione",
+  "pt-BR": "Pallof press com rotação",
+  "ja": "パロフプレス（ローテーション付き）",
+  "aliases": [
+   "pallof rotation",
+   "pallof press rotatif",
+   "pallof avec rotation"
+  ],
+  "pattern": "rotation"
+ },
+ "Palms-Down_Dumbbell_Wrist_Curl_Over_A_Bench": {
+  "fr": "Extension des poignets haltères (pronation, sur banc)",
+  "en": "Palms-down dumbbell wrist curl over a bench",
+  "es": "Curl de muñeca con mancuernas palmas abajo",
+  "de": "Handgelenkstrecker mit Kurzhanteln auf der Bank",
+  "it": "Wrist curl inverso con manubri su panca",
+  "pt-BR": "Rosca de punho inversa com halteres no banco",
+  "ja": "ダンベル・リバースリストカール（ベンチ）",
+  "aliases": [
+   "curl poignets pronation haltères",
+   "extension poignets haltères",
+   "wrist curl inversé haltères"
+  ],
+  "pattern": "curl"
+ },
+ "Palms-Down_Wrist_Curl_Over_A_Bench": {
+  "fr": "Extension des poignets barre (pronation, sur banc)",
+  "en": "Palms-down barbell wrist curl over a bench",
+  "es": "Curl de muñeca con barra palmas abajo",
+  "de": "Handgelenkstrecker mit Langhantel auf der Bank",
+  "it": "Wrist curl inverso con bilanciere su panca",
+  "pt-BR": "Rosca de punho inversa com barra no banco",
+  "ja": "バーベル・リバースリストカール（ベンチ）",
+  "aliases": [
+   "curl poignets pronation barre",
+   "extension poignets barre",
+   "wrist curl inversé barre"
+  ],
+  "pattern": "curl"
+ },
+ "Palms-Up_Barbell_Wrist_Curl_Over_A_Bench": {
+  "fr": "Flexion des poignets barre (supination, sur banc)",
+  "en": "Palms-up barbell wrist curl over a bench",
+  "es": "Curl de muñeca con barra palmas arriba",
+  "de": "Handgelenkbeuger mit Langhantel auf der Bank",
+  "it": "Wrist curl con bilanciere su panca",
+  "pt-BR": "Rosca de punho com barra no banco",
+  "ja": "バーベル・リストカール（ベンチ）",
+  "aliases": [
+   "curl poignets barre",
+   "flexion poignets barre",
+   "wrist curl barre"
+  ],
+  "pattern": "curl"
+ },
+ "Palms-Up_Dumbbell_Wrist_Curl_Over_A_Bench": {
+  "fr": "Flexion des poignets haltères (supination, sur banc)",
+  "en": "Palms-up dumbbell wrist curl over a bench",
+  "es": "Curl de muñeca con mancuernas palmas arriba",
+  "de": "Handgelenkbeuger mit Kurzhanteln auf der Bank",
+  "it": "Wrist curl con manubri su panca",
+  "pt-BR": "Rosca de punho com halteres no banco",
+  "ja": "ダンベル・リストカール（ベンチ）",
+  "aliases": [
+   "curl poignets haltères supination",
+   "flexion poignets haltères sur banc",
+   "wrist curl haltères"
+  ],
+  "pattern": "curl"
+ },
+ "Pelvic_Tilt_Into_Bridge": {
+  "fr": "Bascule du bassin vers le pont",
+  "en": "Pelvic tilt into bridge",
+  "es": "Inclinación pélvica hacia el puente",
+  "de": "Beckenkippung in die Brücke",
+  "it": "Retroversione del bacino verso il ponte",
+  "pt-BR": "Inclinação pélvica para a ponte",
+  "ja": "骨盤チルトからブリッジ",
+  "aliases": [
+   "rétroversion du bassin",
+   "bascule bassin pont",
+   "pont avec bascule du bassin"
+  ],
+  "pattern": "bridge"
+ },
+ "Peroneals-SMR": {
+  "fr": "Auto-massage des péroniers au rouleau",
+  "en": "Peroneals foam rolling",
+  "es": "Automasaje de peroneos con rodillo",
+  "de": "Peroneus-Faszienrolle",
+  "it": "Automassaggio dei peronei con rullo",
+  "pt-BR": "Automassagem dos fibulares com rolo",
+  "ja": "腓骨筋のフォームローリング",
+  "aliases": [
+   "rouleau péroniers",
+   "massage jambe côté rouleau",
+   "foam roller péroniers"
+  ],
+  "pattern": "stretchFold"
+ },
+ "Peroneals_Stretch": {
+  "fr": "Étirement des péroniers",
+  "en": "Peroneals stretch",
+  "es": "Estiramiento de peroneos",
+  "de": "Peroneus-Dehnung",
+  "it": "Stretching dei peronei",
+  "pt-BR": "Alongamento dos fibulares",
+  "ja": "腓骨筋ストレッチ",
+  "aliases": [
+   "étirement jambe extérieure",
+   "étirement cheville externe",
+   "étirement péronier"
+  ],
+  "pattern": "stretchFold"
+ },
+ "Physioball_Hip_Bridge": {
+  "fr": "Pont fessier sur ballon",
+  "en": "Stability ball hip bridge",
+  "es": "Puente de glúteo con fitball",
+  "de": "Hüftbrücke auf dem Gymnastikball",
+  "it": "Ponte glutei su fitball",
+  "pt-BR": "Ponte de glúteo na bola suíça",
+  "ja": "バランスボール・ヒップブリッジ",
+  "aliases": [
+   "pont fessier swiss ball",
+   "pont sur ballon",
+   "hip bridge ballon"
+  ],
+  "pattern": "bridge"
+ },
+ "Pin_Presses": {
+  "fr": "Développé couché aux barres de sécurité (pin press)",
+  "en": "Pin press",
+  "es": "Press de banca desde pines",
+  "de": "Pin Press",
+  "it": "Pin press",
+  "pt-BR": "Supino a partir dos pinos",
+  "ja": "ピンプレス",
+  "aliases": [
+   "pin press",
+   "développé aux pins",
+   "développé départ bas"
+  ],
+  "pattern": "benchPress"
+ },
+ "Piriformis-SMR": {
+  "fr": "Auto-massage du piriforme au rouleau",
+  "en": "Piriformis foam rolling",
+  "es": "Automasaje de piriforme con rodillo",
+  "de": "Piriformis-Faszienrolle",
+  "it": "Automassaggio del piriforme con rullo",
+  "pt-BR": "Automassagem do piriforme com rolo",
+  "ja": "梨状筋のフォームローリング",
+  "aliases": [
+   "rouleau fessiers",
+   "massage piriforme",
+   "foam roller fessier"
+  ],
+  "pattern": "stretchFold"
+ },
+ "Plate_Pinch": {
+  "fr": "Pincement de disques",
+  "en": "Plate pinch",
+  "es": "Pinza de discos",
+  "de": "Scheibenklemmen",
+  "it": "Pinch di dischi",
+  "pt-BR": "Pinça de anilhas",
+  "ja": "プレートピンチ",
+  "aliases": [
+   "pinch grip disques",
+   "prise en pince disques",
+   "plate pinch"
+  ],
+  "pattern": "carry"
+ },
+ "Plate_Twist": {
+  "fr": "Rotation du tronc avec disque",
+  "en": "Plate twist",
+  "es": "Giro de tronco con disco",
+  "de": "Rumpfrotation mit Hantelscheibe",
+  "it": "Torsione del busto con disco",
+  "pt-BR": "Giro de tronco com anilha",
+  "ja": "プレートツイスト",
+  "aliases": [
+   "russian twist disque",
+   "rotation avec disque",
+   "twist avec disque"
+  ],
+  "pattern": "rotation"
+ },
+ "Platform_Hamstring_Slides": {
+  "fr": "Glissés des ischio-jambiers",
+  "en": "Hamstring slides",
+  "es": "Deslizamientos de isquiotibiales",
+  "de": "Hamstring-Slides",
+  "it": "Scivolamenti dei femorali",
+  "pt-BR": "Deslizamentos de posteriores",
+  "ja": "ハムストリングス・スライド",
+  "aliases": [
+   "leg curl glissé",
+   "curl ischios au sol",
+   "glissés ischios serviette"
+  ],
+  "pattern": "legCurl"
+ },
+ "Plie_Dumbbell_Squat": {
+  "fr": "Squat plié avec haltère",
+  "en": "Plié dumbbell squat",
+  "es": "Sentadilla plié con mancuerna",
+  "de": "Plié-Kniebeuge mit Kurzhantel",
+  "it": "Squat plié con manubrio",
+  "pt-BR": "Agachamento plié com halter",
+  "ja": "プリエ・ダンベルスクワット",
+  "aliases": [
+   "squat sumo haltère",
+   "squat plié",
+   "squat écarté haltère"
+  ],
+  "pattern": "squat"
+ },
+ "Plyo_Kettlebell_Pushups": {
+  "fr": "Pompes pliométriques sur kettlebell",
+  "en": "Plyo kettlebell push-up",
+  "es": "Flexiones pliométricas con kettlebell",
+  "de": "Plyometrische Liegestütze mit Kettlebell",
+  "it": "Piegamenti pliometrici su kettlebell",
+  "pt-BR": "Flexão pliométrica com kettlebell",
+  "ja": "プライオ・ケトルベル・プッシュアップ",
+  "aliases": [
+   "pompes explosives kettlebell",
+   "pompes sur kettlebell",
+   "pompes sautées kettlebell"
+  ],
+  "pattern": "pushUp"
+ },
+ "Plyo_Push-up": {
+  "fr": "Pompes pliométriques",
+  "en": "Plyometric push-up",
+  "es": "Flexiones pliométricas",
+  "de": "Plyometrische Liegestütze",
+  "it": "Piegamenti pliometrici",
+  "pt-BR": "Flexão pliométrica",
+  "ja": "プライオ・プッシュアップ",
+  "aliases": [
+   "pompes explosives",
+   "pompes claquées",
+   "pompes avec saut"
+  ],
+  "pattern": "pushUp"
+ },
+ "Posterior_Tibialis_Stretch": {
+  "fr": "Étirement du tibial postérieur",
+  "en": "Posterior tibialis stretch",
+  "es": "Estiramiento del tibial posterior",
+  "de": "Dehnung des Tibialis posterior",
+  "it": "Stretching del tibiale posteriore",
+  "pt-BR": "Alongamento do tibial posterior",
+  "ja": "後脛骨筋ストレッチ",
+  "aliases": [
+   "étirement tibial",
+   "étirement mollet intérieur",
+   "étirement cheville interne"
+  ],
+  "pattern": "stretchStand"
+ },
+ "Machine_Bench_Press": {
+  "dup": "machine-chest-press"
+ },
+ "Lying_Leg_Curls": {
+  "dup": "lying-leg-curl"
+ },
+ "Machine_Shoulder_Military_Press": {
+  "dup": "machine-shoulder-press"
+ },
+ "Mountain_Climbers": {
+  "dup": "mountain-climber"
+ },
+ "One-Arm_Dumbbell_Row": {
+  "dup": "db-row"
+ },
+ "Overhead_Triceps": {
+  "dup": "triceps-stretch"
+ },
+ "Pallof_Press": {
+  "dup": "pallof-press"
+ },
+ "Parallel_Bar_Dip": {
+  "dup": "triceps-dips"
+ },
+ "Plank": {
+  "dup": "plank"
+ },
+ "Power_Clean": {
+  "dup": "power-clean"
+ }
+}

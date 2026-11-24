@@ -585,6 +585,13 @@ struct SessionExerciseForm: View {
             Section {
                 TextField(tr("Exercice"), text: $name)
                     .accessibilityIdentifier("session-exercise-name")
+                // The exercise of the library a typed name is understood as (its statistics and demonstration).
+                if let known = recognized {
+                    Label(tr("Reconnu : \(known.name)"), systemImage: "checkmark.seal")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                        .accessibilityIdentifier("session-exercise-recognized")
+                }
             }
             if !mine.isEmpty {
                 Section(tr("Mes exercices")) {
@@ -612,6 +619,12 @@ struct SessionExerciseForm: View {
         }
     }
 
+    /// One of « Mes exercices » stays the person's own (not linked to the library, even with a close name).
+    private var recognized: ExerciseInfo? {
+        guard name.trimmed.count >= 2, !model.fitness.customExercises.contains(where: { $0.name == name.trimmed }) else { return nil }
+        return ExerciseLibrary.match(name: name)
+    }
+
     private func choose(_ custom: CustomExercise) {
         name = custom.name
         if custom.type != .strength {
@@ -621,7 +634,7 @@ struct SessionExerciseForm: View {
     }
 
     private func save() {
-        onAdd(ExerciseTemplate(name: name.trimmed, sets: sets, reps: reps, weight: weight, restSeconds: rest))
+        onAdd(ExerciseTemplate(name: name.trimmed, sets: sets, reps: reps, weight: weight, restSeconds: rest, exerciseID: recognized?.id))
         Haptics.success()
     }
 }

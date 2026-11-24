@@ -3,7 +3,7 @@ import AudioToolbox
 import Foundation
 import UIKit
 
-/// The end of a rest while Ardane is open (2026-11-23): the « ding » of Ardane and two strong vibrations (one per note),
+/// The end of a rest while Ardane is open (2026-11-23): the « ding » of Ardane (a widget landing in the ads, twice) and two strong vibrations (one per landing),
 /// so the person knows the next set is due without looking at the phone. On silent, the ding is muted by the switch
 /// (`.ambient`, which also plays over the person's music instead of stopping it) and the vibrations remain. The first
 /// version used `AudioServicesPlayAlertSound` with the sound file: nothing was heard nor felt on the iPhone (2026-11-23).
@@ -55,9 +55,9 @@ final class RestChime {
         task = nil
         guard Self.shouldRing(end: end, now: Date(), isInBackground: UIApplication.shared.applicationState == .background) else { return }
         playDing()
-        // Two vibrations, on the two notes (D5, then A5 half a second later).
+        // Two vibrations, on the two landings of the sound (22 frames apart in the ad: 0.37 s).
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.37) {
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
         }
     }

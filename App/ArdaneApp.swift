@@ -74,6 +74,8 @@ struct ArdaneApp: App {
                         // A set validated from the Lock Screen while the app was closed.
                         Task { await WorkoutLiveActivity.sync(model.fitness) }
                         RestChime.shared.follow(model.fitness)
+                        // The exercise names (900 exercises, 7 languages) are indexed away from the screen.
+                        Task.detached(priority: .utility) { ExerciseMatcher.warmUp() }
                         // A study timer stopped or cancelled from the Lock Screen while the app was closed.
                         Task { await StudyLiveActivity.sync(model.student) }
                         Task { await premium.refreshEntitlements() }

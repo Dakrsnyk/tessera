@@ -156,6 +156,9 @@ struct ExerciseInfo: Identifiable, Hashable {
     let pattern: MovementPattern
     /// Advice specific to this exercise, added to the technique of its movement.
     let cues: [String]
+    /// An exercise of the extended catalogue (`ExerciseCatalog`) shows the hand-made demonstration of this built-in one
+    /// (the closest: same movement, then equipment and muscles); nil: its own.
+    var demoID: String? = nil
 
     /// Its own technique when its movement differs from its family's, the family's otherwise.
     var technique: ExerciseTechnique { ExerciseLibrary.technique(for: id) ?? ExerciseTechnique.technique(for: pattern) }
@@ -562,8 +565,9 @@ extension String {
 
 // MARK: - The library
 
-/// About 160 common exercises, by muscle, equipment, type and difficulty, each with its technique and a
-/// schematic animated demonstration drawn by the app (no outside video, so no licence issue).
+/// 163 common exercises written here, by muscle, equipment, type and difficulty, each with its technique and its own
+/// schematic animated demonstration drawn by the app (no outside video, so no licence issue); plus the extended
+/// catalogue of free-exercise-db (`ExerciseCatalog`, public domain), which shows the demonstration of the closest of them.
 enum ExerciseLibrary {
     private static func x(_ id: String, _ name: String, _ primary: [Muscle], _ secondary: [Muscle], _ equipment: [Equipment],
                           _ type: ExerciseType, _ difficulty: Difficulty, _ pattern: MovementPattern,
@@ -572,7 +576,19 @@ enum ExerciseLibrary {
                      type: type, difficulty: difficulty, pattern: pattern, cues: cues)
     }
 
-    static let all: [ExerciseInfo] = chest + back + shoulders + arms + legs + core + fullBody + cardio + mobility + stretching
+    static let builtIn: [ExerciseInfo] = chest + back + shoulders + arms + legs + core + fullBody + cardio + mobility + stretching
+
+    /// The built-in exercises first (with the dataset's names of the same exercises as more aliases), then the catalogue.
+    static let all: [ExerciseInfo] = {
+        let extra = ExerciseCatalog.extraAliases
+        let known = builtIn.map { exercise -> ExerciseInfo in
+            guard let more = extra[exercise.id], !more.isEmpty else { return exercise }
+            return ExerciseInfo(id: exercise.id, name: exercise.name, aliases: exercise.aliases + more, primary: exercise.primary,
+                                secondary: exercise.secondary, equipment: exercise.equipment, type: exercise.type,
+                                difficulty: exercise.difficulty, pattern: exercise.pattern, cues: exercise.cues)
+        }
+        return known + ExerciseCatalog.exercises
+    }()
 
     /// Every exercise of the library is Premium, with the person's data on it: its sheet (demonstration,
     /// technique, alternatives), its history, the evolution of its loads and its records. Without Premium,
@@ -877,18 +893,22 @@ enum ExerciseLibrary {
     }
 
     /// "Développé couché (barre)" → "developpe couche"
-    private static func base(_ name: String) -> String {
+    static func base(_ name: String) -> String {
         let withoutDetail = name.split(separator: "(").first.map(String.init) ?? name
         return normalized(withoutDetail)
     }
 
-    /// The exercise a name written by the person (in a routine, in a set) refers to, if any.
+    /// The exercise a name written by the person (in a routine, in a set) refers to, if any: the exact name or alias
+    /// first (the built-in exercises before the catalogue, so that a set keeps the exercise it always had), then the
+    /// closest name by its words (`ExerciseMatcher`), so that an exercise typed by hand gets the statistics, the sheet
+    /// and the demonstration of the exercise it is. Remembered per name.
     static func match(name: String) -> ExerciseInfo? {
         let key = normalized(name)
         guard !key.isEmpty else { return nil }
-        return all.first { normalized($0.name) == key }
-            ?? all.first { base($0.name) == key }
-            ?? all.first { $0.aliases.contains { normalized($0) == key } }
+        if let known = ExerciseMatcher.cached(key) { return known.flatMap { info($0) } }
+        let found = ExerciseMatcher.exact(key).flatMap { info($0) } ?? ExerciseMatcher.closest(to: name)
+        ExerciseMatcher.remember(key, found?.id)
+        return found
     }
 
     struct Filters: Hashable {
@@ -910,21 +930,36 @@ enum ExerciseLibrary {
 
     /// Typing « développé » offers every développé; a muscle, a tool or a type found in the words works
     /// too. Names starting with the text come first, then words starting with it, then other names.
+    /// What `search` reads of each exercise, in the order of `all`, prepared once (900 exercises with their names in
+    /// 7 languages: not normalized again at each letter typed).
+    private struct Searchable {
+        let name: String
+        let nameWords: [String]
+        let allWords: [String]
+    }
+
+    private static func searchWords(_ text: String) -> [String] {
+        normalized(text).split(whereSeparator: { !$0.isLetter && !$0.isNumber }).map(String.init)
+    }
+
+    private static let searchable: [String: Searchable] = Dictionary(all.map { exercise in
+        let nameWords = searchWords(exercise.name)
+        let extra = (exercise.aliases + exercise.primary.map(\.title) + exercise.equipment.map(\.title) + [exercise.type.title]).flatMap(searchWords)
+        return (exercise.id, Searchable(name: normalized(exercise.name), nameWords: nameWords, allWords: nameWords + extra))
+    }, uniquingKeysWith: { first, _ in first })
+
     static func search(_ query: String, filters: Filters = Filters()) -> [ExerciseInfo] {
         let candidates = all.filter { filters.allows($0) }
         let q = normalized(query)
         guard !q.isEmpty else { return candidates.sorted { $0.name.localizedStandardCompare($1.name) == .orderedAscending } }
         let tokens = q.split(whereSeparator: { $0 == " " || $0 == "-" || $0 == "'" }).map(String.init)
-        func words(_ text: String) -> [String] {
-            normalized(text).split(whereSeparator: { !$0.isLetter && !$0.isNumber }).map(String.init)
-        }
         var ranked: [(Int, Int, ExerciseInfo)] = []
         for (index, exercise) in candidates.enumerated() {
-            let name = normalized(exercise.name)
-            let nameWords = words(exercise.name)
-            let extra = (exercise.aliases + exercise.primary.map(\.title) + exercise.equipment.map(\.title) + [exercise.type.title]).flatMap(words)
+            guard let prepared = searchable[exercise.id] else { continue }
+            let name = prepared.name
+            let nameWords = prepared.nameWords
             let inName = tokens.allSatisfy { token in nameWords.contains { $0.hasPrefix(token) } }
-            let inAll = tokens.allSatisfy { token in (nameWords + extra).contains { $0.hasPrefix(token) } }
+            let inAll = tokens.allSatisfy { token in prepared.allWords.contains { $0.hasPrefix(token) } }
             let rank: Int
             if name.hasPrefix(q) { rank = 0 }
             else if inName { rank = 1 }

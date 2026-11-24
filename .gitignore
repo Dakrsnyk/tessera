@@ -9,6 +9,8 @@ Config/Secrets.xcconfig
 
 # Exercise demonstration tool outputs
 scripts/demos/out/
+# Exercise catalogue: chunks prepared for translation (rebuilt by scripts/exercises/build_catalog.py prepare)
+scripts/exercises/work/
 __pycache__/
 
 # Graphify analysis output

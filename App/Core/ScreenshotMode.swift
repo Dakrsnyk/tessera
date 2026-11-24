@@ -199,7 +199,7 @@ enum ScreenshotMode {
                     case "fitness-library": .fitnessLibrary
                     case "fitness-exercise": .fitnessExercise(parts.count > 2 ? parts.dropFirst(2).joined(separator: "-") : "bench-press")
                     case "fitness-history": .fitnessHistory
-                    case "fitness-progress": .fitnessProgress
+                    case "fitness-progress": parts.count > 2 ? MiniAppPage.fitnessProgressCategory(parts[2]) : MiniAppPage.fitnessProgress
                     case "fitness-activity": .fitnessActivity
                     case "planning-tasks": .planningTasks
                     case "planning-week": .planningWeek

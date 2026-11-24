@@ -283,83 +283,60 @@ struct FitnessSessionDetailPage: View {
 
 // MARK: - Progress
 
-/// The volume over the weeks and the personal records (only here, not on the Fitness page); each record
-/// opens its exercise sheet with its chart. The records are filed from A to Z under their letter, with an
-/// index along the left edge to jump to one. Premium.
+/// The volume over the weeks, then the exercises done filed by category (chest, back, legs...); a
+/// category opens the exercises of it with their demonstration sheet and personal numbers. Premium.
 struct FitnessProgressPage: View {
     @Environment(AppModel.self) private var model
     @Environment(\.appStyle) private var style
     private var palette: CristalPalette { CristalPalette.of(style.id) }
 
-    private var accentHex: String { MiniApp.fitness.colorHex }
-
     var body: some View {
         let state = model.fitness
-        let records = FitnessMath.records(state)
+        let groups = FitnessProgressCategories.groups(state)
         let volumes = weeklyVolumes(state)
-        let sections = SectionIndex.sections(records) { $0.exercise }
-        let letters = Set(sections.map(\.letter))
-        ScrollViewReader { proxy in
-            MiniAppScroll {
-                if !model.isPremium {
-                    // The records, their evolution and the volume over weeks are Premium; the sessions stay recorded.
-                    PremiumLockCard(symbol: "chart.line.uptrend.xyaxis", title: tr("La progression est dans Premium"),
-                                    message: tr("Ton volume semaine après semaine, l'évolution de tes charges et tous tes records, exercice par exercice. Tes séances restent enregistrées : tout s'affiche dès que tu passes à Premium."))
-                } else if records.isEmpty {
-                    EmptyStateView(symbol: "chart.line.uptrend.xyaxis", title: tr("Pas encore de progression"), message: tr("Fais quelques séances : tes charges, ton volume et tes records apparaîtront ici."))
+        MiniAppScroll {
+            if !model.isPremium {
+                // The records, their evolution and the volume over weeks are Premium; the sessions stay recorded.
+                PremiumLockCard(symbol: "chart.line.uptrend.xyaxis", title: tr("La progression est dans Premium"),
+                                message: tr("Ton volume semaine après semaine, l'évolution de tes charges et tous tes records, exercice par exercice. Tes séances restent enregistrées : tout s'affiche dès que tu passes à Premium."))
+            } else if groups.isEmpty {
+                EmptyStateView(symbol: "chart.line.uptrend.xyaxis", title: tr("Pas encore de progression"), message: tr("Fais quelques séances : tes charges, ton volume et tes records apparaîtront ici."))
+                    .card()
+            } else {
+                VStack(alignment: .leading, spacing: 22) {
+                    let streak = FitnessMath.weekStreak(state, until: Date())
+                    if streak >= 1 {
+                        Label(Fmt.plural(streak, tr("semaine de suite à l'objectif"), tr("semaines de suite à l'objectif")), systemImage: "flame.fill")
+                            .font(.headline)
+                            .foregroundStyle(palette.fitnessText)
+                            .accessibilityIdentifier("progress-streak")
+                    }
+                    VStack(alignment: .leading, spacing: 10) {
+                        MiniSectionTitle(title: tr("Volume par semaine"))
+                        Chart {
+                            ForEach(volumes) { item in
+                                BarMark(x: .value("Semaine", item.date, unit: .weekOfYear), y: .value(model.settings.unitSystem.weightUnit, Units.weightValue(kilograms: item.value, in: model.settings.unitSystem)))
+                                    .foregroundStyle(palette.fitness.gradient)
+                                    .cornerRadius(3)
+                            }
+                        }
+                        .accessibilityLabel(tr("Volume par semaine"))
+                        .frame(height: 170)
                         .card()
-                } else {
-                    VStack(alignment: .leading, spacing: 22) {
-                        let streak = FitnessMath.weekStreak(state, until: Date())
-                        if streak >= 1 {
-                            Label(Fmt.plural(streak, tr("semaine de suite à l'objectif"), tr("semaines de suite à l'objectif")), systemImage: "flame.fill")
-                                .font(.headline)
-                                .foregroundStyle(palette.fitnessText)
-                                .accessibilityIdentifier("progress-streak")
-                        }
-                        VStack(alignment: .leading, spacing: 10) {
-                            MiniSectionTitle(title: tr("Volume par semaine"))
-                            Chart {
-                                ForEach(volumes) { item in
-                                    BarMark(x: .value("Semaine", item.date, unit: .weekOfYear), y: .value(model.settings.unitSystem.weightUnit, Units.weightValue(kilograms: item.value, in: model.settings.unitSystem)))
-                                        .foregroundStyle(palette.fitness.gradient)
-                                        .cornerRadius(3)
+                    }
+                    VStack(alignment: .leading, spacing: 10) {
+                        MiniSectionTitle(title: tr("Par catégorie"))
+                        MiniRowsCard {
+                            ForEach(Array(groups.enumerated()), id: \.element.id) { index, group in
+                                NavigationLink(value: HomeRoute.page(.fitnessProgressCategory(group.category.rawValue))) {
+                                    categoryRow(group)
                                 }
-                            }
-                            .accessibilityLabel(tr("Volume par semaine"))
-                            .frame(height: 170)
-                            .card()
-                        }
-                        VStack(alignment: .leading, spacing: 14) {
-                            MiniSectionTitle(title: tr("Records"))
-                            ForEach(sections) { section in
-                                VStack(alignment: .leading, spacing: 6) {
-                                    Text(section.letter)
-                                        .font(.subheadline.weight(.bold))
-                                        .foregroundStyle(palette.fitnessText)
-                                        .padding(.leading, 4)
-                                        .accessibilityAddTraits(.isHeader)
-                                    MiniRowsCard {
-                                        ForEach(Array(section.items.enumerated()), id: \.offset) { index, record in
-                                            recordRow(record, state: state)
-                                            if index < section.items.count - 1 { MiniDivider() }
-                                        }
-                                    }
-                                }
-                                .id(Self.anchor(section.letter))
+                                .buttonStyle(.pressable)
+                                .accessibilityIdentifier("progress-category-\(group.category.rawValue)")
+                                if index < groups.count - 1 { MiniDivider() }
                             }
                         }
                     }
-                    // Room for the index along the left edge.
-                    .padding(.leading, 8)
-                }
-            }
-            .overlay(alignment: .leading) {
-                if model.isPremium && !sections.isEmpty {
-                    SectionIndexBar(letters: SectionIndex.letters(for: letters), available: letters, colorHex: accentHex) { letter in
-                        proxy.scrollTo(Self.anchor(letter), anchor: .top)
-                    }
-                    .padding(.vertical, 8)
                 }
             }
         }
@@ -367,30 +344,13 @@ struct FitnessProgressPage: View {
         .navigationBarTitleDisplayMode(.large)
     }
 
-    /// Where the index scrolls to for a letter.
-    private static func anchor(_ letter: String) -> String { "records-\(letter)" }
-
-    /// A record, opening its exercise sheet when the library knows the exercise.
-    private func recordRow(_ record: FitnessMath.Record, state: FitnessState) -> some View {
-        Group {
-            if let info = ExerciseLibrary.match(name: record.exercise) {
-                NavigationLink(value: HomeRoute.page(.fitnessExercise(info.id))) {
-                    row(record, state: state)
-                }
-            } else {
-                row(record, state: state, chevron: false)
-            }
-        }
-        .buttonStyle(.pressable)
-    }
-
-    private func row(_ record: FitnessMath.Record, state: FitnessState, chevron: Bool = true) -> some View {
-        let sessions = FitnessMath.history(named: record.exercise, state)
-        let first = sessions.first?.topWeight ?? record.weight
-        let change = record.weight - first
-        return MiniRow(symbol: "trophy.fill", colorHex: "F2A33A", title: record.exercise,
-                       detail: sessions.count > 1 && change > 0 ? tr("+\(Units.loadText(kilograms: change, in: model.settings.unitSystem)) depuis le début · \(sessions.count) séances") : Fmt.plural(sessions.count, tr("séance"), tr("séances")),
-                       value: "\(Units.loadNumber(kilograms: record.weight, in: model.settings.unitSystem)) × \(record.reps)", showsChevron: chevron)
+    /// A category: its name, how many exercises it holds and the best record of them (the most practised one).
+    private func categoryRow(_ group: ProgressCategoryGroup) -> some View {
+        let system = model.settings.unitSystem
+        let top = group.exercises.first
+        return MiniRow(symbol: group.category.symbol, colorHex: MiniApp.fitness.colorHex, title: group.category.title,
+                       detail: Fmt.plural(group.exercises.count, tr("exercice"), tr("exercices")),
+                       value: top.map { $0.bestText(in: system) })
     }
 
     /// Volume of the last eight weeks, oldest first.

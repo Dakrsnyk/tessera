@@ -94,6 +94,8 @@ enum MiniAppPage: Hashable {
     case fitnessHistory
     case fitnessSessionDetail(UUID)
     case fitnessProgress
+    /// The exercises done in one category of the Progress page (`ExerciseCategory.rawValue`).
+    case fitnessProgressCategory(String)
     case fitnessActivity
     case planningTasks
     case planningWeek
@@ -202,6 +204,7 @@ struct MiniAppPageView: View {
         case .fitnessHistory: FitnessHistoryPage()
         case let .fitnessSessionDetail(id): FitnessSessionDetailPage(sessionID: id)
         case .fitnessProgress: FitnessProgressPage()
+        case let .fitnessProgressCategory(raw): FitnessProgressCategoryPage(category: ExerciseCategory(rawValue: raw) ?? .other)
         case .fitnessActivity: FitnessActivityPage()
         case .planningTasks: PlanningTasksPage()
         case .planningWeek: PlanningWeekPage()

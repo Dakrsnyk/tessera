@@ -10,6 +10,9 @@ struct ExerciseDemoView: View {
     let exercise: ExerciseInfo
     var colorHex = "E5484D"
     var height: CGFloat = 236
+    /// A small looping preview (the rows of « Progression »): the figure only, 20 frames a second, no phases nor
+    /// view picker nor pause.
+    var compact = false
 
     @State private var viewIndex = 0
     @State private var paused = false
@@ -33,7 +36,7 @@ struct ExerciseDemoView: View {
     private func content(_ demo: DemoModel) -> some View {
         let palette = DemoPalette(scheme: scheme, accentHex: colorHex)
         return VStack(spacing: 10) {
-            TimelineView(.animation(minimumInterval: nil, paused: isPaused)) { timeline in
+            TimelineView(.animation(minimumInterval: compact ? 1.0 / 20 : nil, paused: isPaused)) { timeline in
                 let seconds = time(at: timeline.date, demo: demo)
                 let phase = demo.phase(at: seconds)
                 VStack(spacing: 10) {
@@ -42,8 +45,9 @@ struct ExerciseDemoView: View {
                                           in: &context, size: size, palette: palette)
                     }
                     .frame(height: height)
-                    .background(palette.background, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .background(palette.background, in: RoundedRectangle(cornerRadius: compact ? 10 : 20, style: .continuous))
                     .overlay(alignment: .topTrailing) {
+                        if !compact {
                         Image(systemName: isPaused ? "play.fill" : "pause.fill")
                             .font(.caption.weight(.bold))
                             .foregroundStyle(.secondary)
@@ -51,9 +55,10 @@ struct ExerciseDemoView: View {
                             .background(.thinMaterial, in: Circle())
                             .padding(10)
                             .opacity(isPaused ? 1 : 0.55)
+                        }
                     }
                     .contentShape(Rectangle())
-                    .onTapGesture { togglePause(demo) }
+                    .onTapGesture { if !compact { togglePause(demo) } }
                     .accessibilityElement()
                     .accessibilityLabel(Text(tr("Démonstration animée de \(exercise.name)")))
                     .accessibilityValue(Text(phase.label.map { demo.labels.indices.contains($0) ? demo.labels[$0] : "" } ?? ""))
@@ -61,10 +66,12 @@ struct ExerciseDemoView: View {
                     .accessibilityAddTraits(.isButton)
                     .accessibilityIdentifier("exercise-demo-canvas")
 
-                    PhaseStrip(labels: demo.labels, current: phase.label, accent: CristalPalette.of(style.id).category(colorHex))
+                    if !compact {
+                        PhaseStrip(labels: demo.labels, current: phase.label, accent: CristalPalette.of(style.id).category(colorHex))
+                    }
                 }
             }
-            if demo.views.count > 1 {
+            if !compact && demo.views.count > 1 {
                 ViewPicker(names: demo.views.map(\.name), selection: $viewIndex)
             }
         }
@@ -202,9 +209,12 @@ enum ExerciseDemos {
     static func demo(for id: String) -> DemoModel? {
         lock.lock()
         defer { lock.unlock() }
-        if let model = cache[id] { return model }
-        guard let data = file?.demos[id], let model = DemoModel(data) else { return nil }
-        cache[id] = model
+        // An exercise of the extended catalogue shows the demonstration of the closest built-in one (`ExerciseInfo.demoID`),
+        // prepared once for all the exercises that share it.
+        let key = file?.demos[id] != nil ? id : (ExerciseLibrary.info(id)?.demoID ?? id)
+        if let model = cache[key] { return model }
+        guard let data = file?.demos[key], let model = DemoModel(data) else { return nil }
+        cache[key] = model
         return model
     }
 }

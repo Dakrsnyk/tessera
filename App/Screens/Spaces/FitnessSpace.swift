@@ -214,6 +214,12 @@ struct RoutineEditor: View {
                             .accessibilityLabel(Text(tr("Fiche de l'exercice")))
                         }
                     }
+                    // A name typed by hand: the exercise of the library it is understood as (its statistics and demonstration).
+                    if exercise.exerciseID == nil, exercise.name.trimmed.count >= 2, let known = exercise.info {
+                        Label(tr("Reconnu : \(known.name)"), systemImage: "checkmark.seal")
+                            .font(.footnote)
+                            .foregroundStyle(.secondary)
+                    }
                     // Suggestions from the library while the name is typed (Premium, like the library).
                     if model.isPremium, exercise.info == nil, exercise.name.trimmed.count >= 2 {
                         ForEach(ExerciseLibrary.search(exercise.name).prefix(3)) { suggestion in
