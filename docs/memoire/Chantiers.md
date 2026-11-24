@@ -481,4 +481,5 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 - **Exercices tapés à la main** : cause réelle des « sans statistiques » de la capture du PDG = iPhone en anglais, séries enregistrées en français (« Curl à la poulie » ≠ « Cable curl »). Corrigé : noms des 163 exercices intégrés dans les 7 langues en alias ; `ExerciseMatcher` (mots, synonymes, pluriels, une faute de frappe) après les noms exacts, mémoire par nom ; « Reconnu : … » dans les formulaires.
 - **Progression** : par catégories (`FitnessProgressCategories.swift`, agent ios-developer) au lieu des records de A à Z ; lignes avec démonstration animée compacte (`ExerciseDemoView(compact:)`).
 - Tests : `Tests/ExerciseCatalogMatcherTests.swift`, `Tests/FitnessProgressCategoriesTests.swift`. Traductions : `l10n/parts/118.*`, `119.*`.
-- **Reste** : CI ; sur l'iPhone : le nouveau ding, la page Progression, la reconnaissance sur ses vraies séances. Noms rares (strongman, haltérophilie) en ja/de/it parfois translittérés : relecture possible.
+- CI : [check] 549 vert, build interne 550 sur TestFlight, [unit] 551 : tous les tests passent (journal complet lu, TEST SUCCEEDED).
+- **Reste** : sur l'iPhone : le nouveau ding, la page Progression, la reconnaissance sur ses vraies séances. Noms rares (strongman, haltérophilie) en ja/de/it parfois translittérés : relecture possible.
