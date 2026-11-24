@@ -47,6 +47,16 @@ final class SculptMannequinTests: XCTestCase {
         XCTAssertGreaterThan(lit(back.pieces), lit(front.pieces), "The latissimus faces the back")
     }
 
+    func testThumbnailsDrawALighterMannequin() throws {
+        let demo = try XCTUnwrap(ExerciseDemos.demo(for: "db-curl"))
+        let joints = try XCTUnwrap(demo.skeleton(at: 0.5))
+        let lit = DemoMuscles.forDemo("db-curl")
+        let sheet = try XCTUnwrap(Sculpt.pieces(joints: joints, camera: camera(yaw: 35), muscles: lit, fine: true))
+        let thumb = try XCTUnwrap(Sculpt.pieces(joints: joints, camera: camera(yaw: 35), muscles: lit, fine: false))
+        XCTAssertEqual(sheet.pieces.count, thumb.pieces.count, "The same pieces")
+        XCTAssertLessThan(thumb.body.boundingRect.width * 0.9, sheet.body.boundingRect.width, "The same body, with fewer sections")
+    }
+
     func testTheExerciseMusclesMapToTheMannequin() {
         let bench = DemoMuscles(primary: [.chest], secondary: [.triceps, .shoulders])
         XCTAssertEqual(bench.primary, ["chest"])
