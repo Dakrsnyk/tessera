@@ -62,7 +62,9 @@ struct TileView: View {
     private var effectiveLayout: LayoutKind {
         switch s.options.layout {
         case .progress: progressFraction == nil ? .vertical : .progress
-        case .graph: hasVisual || !tile.rows.isEmpty ? .graph : .vertical
+        // The graph layout draws no button: a medium widget that has some (« Prochaine série » with the session beside
+        // it) takes the vertical one, which keeps them.
+        case .graph: (hasVisual || !tile.rows.isEmpty) && !(context.isMedium && !tile.buttons.isEmpty) ? .graph : .vertical
         case .list: tile.rows.isEmpty ? .vertical : .list
         // Two columns of lines don't fit in a small widget: its chart can, its lines can't.
         case .split: context.isSmall && !(hasVisual && tile.rows.isEmpty) ? .vertical : .split

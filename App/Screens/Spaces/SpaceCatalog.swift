@@ -53,7 +53,7 @@ enum SpaceCatalog {
         case .productivity: pair = ([.priorities, .deadline], [.priorities, .deadline, .tasks])
         case .habits: pair = ([.habitStreak, .habits], [.habitStreak, .habitRate, .habits])
         case .nutrition: pair = ([.caloriesLeft, .macros], [.caloriesLeft, .macros, .mealsToday])
-        case .fitness: pair = ([.nextSet, .trainingStreak], [.nextSet, .trainingStreak, .todaysWorkout])
+        case .fitness: pair = ([.todaysWorkout, .trainingStreak], [.todaysWorkout, .trainingStreak, .nextSet])
         case .budget: pair = ([.budgetLeft, .savingsGoal], [.budgetLeft, .savingsGoal, .spendingByCategory])
         case .investing: pair = ([.portfolio, .allocation], [.allocation, .topMover, .portfolio])
         case .business: pair = ([.revenueToday, .revenueGoal], [.revenueToday, .revenueGoal, .revenueTrend])
