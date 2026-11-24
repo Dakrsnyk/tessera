@@ -161,7 +161,7 @@ def glute_ham_raise(p, s):
     from machines import roller
     floor(s, -1.2, 1.3)
     pad_top = 0.80
-    knee = vec(-0.3, pad_top + Body.W_SHIN / 2 + 0.005, 0.0)
+    knee = vec(-0.3, pad_top + Body.R_SHIN + 0.005, 0.0)
     s.slab(vec(-0.98, pad_top, 0), vec(0.2, pad_top, 0), Y, 0.34, 0.05, "pad", solid="le banc")
     angle = lerp(88.0, 4.0, p)
     u = vec(math.cos(math.radians(angle)), math.sin(math.radians(angle)), 0.0)
@@ -172,7 +172,7 @@ def glute_ham_raise(p, s):
         body.leg_dirs(side, -u, -X)
         body.foot_toward(side, body.ankle[side] + vec(-0.172, -0.02, 0.0))
     ankle = body.ankle[1]
-    roller(s, vec(ankle[0] + 0.02, ankle[1] + Body.W_SHIN / 2 + 0.05, 0.0), half=0.22)
+    roller(s, vec(ankle[0] + 0.02, ankle[1] + Body.R_SHIN + 0.05, 0.0), half=0.22)
     s.slab(vec(ankle[0] - 0.24, pad_top + 0.02, 0), vec(ankle[0] - 0.24, pad_top + 0.34, 0), X, 0.44, 0.04, "pad")
     for x in (-0.9, 0.1):
         s.line([vec(x, pad_top - 0.05, 0), vec(x, 0.03, 0)], TUBE * 1.2, "frame")
@@ -307,7 +307,11 @@ def monster_walk(p, s):
         pitch = 0.0 if contact else 14.0 * math.sin(math.pi * t)
         body.toe[side] = body.ankle[side] + rotate(FOOT, Z, -pitch)
     # the band around the knees, kept tight by the wide stance
-    s.line([body.knee[1], body.knee[-1]], 0.022, "load")
+    # The band loops around both legs just above the knees (not through them).
+    f, r = body.pelvis.f, body.pelvis.r
+    kr, kl = body.knee[1], body.knee[-1]
+    s.line([kr + f * 0.075, kl + f * 0.075, kl - r * 0.075, kl - f * 0.075, kr - f * 0.075, kr + r * 0.075, kr + f * 0.075],
+           0.022, "load")
     for side in (1, -1):
         sh = body.shoulder[side]
         body.arm(side, sh + vec(0.3, -0.26, -side * 0.08), unit(-Y + Z * side * 0.3))

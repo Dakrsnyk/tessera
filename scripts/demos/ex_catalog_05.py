@@ -169,7 +169,7 @@ def single_arm_push_up(p, s):
     sh = body.shoulder[side]
     body.arm(side, vec(hx, 0.025, sh[2]), unit(-body.chest.u * 1.0 + body.chest.r * side * 0.7 - body.chest.f * 0.2))
     # The free hand rests on the lower back.
-    back = body.pelvis.at(u=0.12, f=-(Body.W_TORSO / 2 + 0.03), r=-side * 0.02)
+    back = body.pelvis.at(u=0.12, f=-(Body.D_TRUNK + 0.03), r=-side * 0.02)
     body.arm(-side, back, unit(-body.chest.f * 0.5 - body.chest.r * side * 0.8 - body.chest.u * 0.2))
     show(s, body)
 
@@ -277,7 +277,7 @@ def sled_drag_harness(p, s):
     floor(s, -2.6, 1.0)
     body = walk_cycle(p, s, stride=0.5, arms="swing", lean=26.0, bounce=0.012, stance=0.62, lift=0.12, hip=0.84, ahead=-0.1)
     # Waist belt, a strap down to the sled behind.
-    belt = body.pelvis.at(u=0.03, f=-(Body.W_TORSO / 2 + 0.035))
+    belt = body.pelvis.at(u=0.03, f=-(Body.D_TRUNK + 0.035))
     left, right = belt - body.pelvis.r * 0.13, belt + body.pelvis.r * 0.13
     s.line([left, right], 0.045, "load")
     s.line([belt - body.pelvis.f * 0.0, belt - body.pelvis.r * 0.0 + vec(0, 0, 0)], 0.03, "load")
@@ -322,7 +322,7 @@ def weighted_sissy_squat(p, s):
         body.toe[side] = t
     # Plate held against the chest by the right hand, the left hand on the rack upright.
     c = body.chest
-    pc = c.at(u=0.27, f=Body.W_TORSO / 2 + 0.12)
+    pc = c.at(u=0.27, f=Body.D_TRUNK + 0.12)
     plate(s, pc, c.f, r=0.17)
     body.arm(1, pc + c.r * 0.0 + c.u * 0.1 + c.r * 0.04 - c.u * 0.17 * 0.0, unit(c.r * 0.9 - c.u * 0.6 - c.f * 0.2))
     post_x = 0.2

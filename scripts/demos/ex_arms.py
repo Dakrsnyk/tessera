@@ -41,7 +41,7 @@ def curl_body(p, s, lean=0.0):
 
 
 def curl_angles(p, top=140.0):
-    return lerp(6.0, top, p), lerp(0.0, 0.18, p)
+    return lerp(16.0, top, p), lerp(0.0, 0.18, p)      # at the bottom the bar rests against the front of the thighs
 
 
 @demo("bb-curl", views=[PROFILE(), THREE_QUARTER(35, 10)], labels=CURL, timing=(0.6, 1.1, 0.5, 1.6))
@@ -141,8 +141,9 @@ def incline_curl(p, s):
       timing=(0.6, 1.1, 0.5, 1.8))
 def preacher_curl(p, s):
     floor(s, -0.7, 1.0)
-    seat_y = 0.58
-    s.slab(vec(-0.2, seat_y, 0), vec(0.15, seat_y, 0), Y, 0.34, PAD_T, "pad", solid="le siège")
+    seat_y = 0.52
+    # A short seat: the thighs slope down to the feet past its front edge instead of sinking into it.
+    s.slab(vec(-0.22, seat_y, 0), vec(0.05, seat_y, 0), Y, 0.34, PAD_T, "pad", solid="le siège")
     body = seated_upright(seat_y, -0.06, lean=4.0, head=10)
     feet_flat(body, (0.42, 0.2), (0.42, -0.2), pole=X)
     # The pad: angled 45°, the back of the upper arms resting on it.
@@ -413,7 +414,7 @@ def wrist_curl(p, s):
     for side in (1, -1):
         knee = body.knee[side]
         thigh = unit(knee - body.hip[side])
-        thigh_top = knee + Y * (Body.W_THIGH / 2 + Body.W_LOWER / 2)
+        thigh_top = knee + Y * (Body.R_THIGH + Body.W_LOWER / 2)
         # Forearm lying along the thigh, the wrist just past the knee.
         wrist = thigh_top + thigh * 0.11
         elbow = wrist - thigh * Body.LOWER

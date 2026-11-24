@@ -23,7 +23,7 @@ def mat(s, x0, x1, half=0.32):
 
 def zercher_bar(b):
     """In the crook of the elbows, in front of the belly."""
-    return b.chest.at(u=0.13, f=Body.W_TORSO / 2 + 0.085)
+    return b.chest.at(u=0.13, f=Body.D_TRUNK + 0.085)
 
 
 @demo("x-zercher-squats", views=[PROFILE(), THREE_QUARTER(35, 12)],
@@ -36,7 +36,7 @@ def zercher_squat(p, s):
     bar[2] = 0.0
     for side in (1, -1):
         # Forearms folded up on the chest, the hands joined; the elbows hold the bar.
-        hand = body.chest.at(u=0.36, f=Body.W_TORSO / 2 + 0.12, r=0.03 * side)
+        hand = body.chest.at(u=0.36, f=Body.D_TRUNK + 0.12, r=0.03 * side)
         elbow_hint = bar + Z * side * 0.17 + body.chest.f * 0.0
         body.arm_via(side, hand, elbow_hint)
     barbell(s, bar, Z)
@@ -129,7 +129,7 @@ def box_squat(p, s):
 
     body = make(p)
     low = make(1.0)
-    top = 0.5 - Body.W_THIGH / 2 - 0.004
+    top = 0.5 - Body.R_THIGH - 0.004
     bx = float(low.pelvis.o[0]) - 0.04
     s.box(vec(bx, top / 2, 0.0), X * 0.22, Y * top / 2, Z * 0.34, "pad", stroke=0.012, solid="le plateau du box")
     bar = back_bar_point(body)
@@ -180,7 +180,7 @@ def adductor_groin(p, s):
     floor(s, -0.9, 0.9, -0.7, 0.7)
     mat(s, -0.6, 0.8, 0.5)
     k = smooth(p)
-    hip_y = Body.W_THIGH / 2 + 0.03
+    hip_y = Body.R_THIGH + 0.03
     body = Body(Frame(vec(0.0, hip_y, 0.0), X, Y).pitched(lerp(4.0, 16.0, k)), spine=lerp(2.0, 12.0, k), head=lerp(0.0, 12.0, k))
     for side in (1, -1):
         ankle = vec(lerp(0.2, 0.17, k), 0.045, 0.04 * side)
@@ -205,7 +205,7 @@ def kneeling_forearm_stretch(p, s):
     k = smooth(p)
     # Knees and hands stay put (fingers pointing back toward the knees); the hips sit back toward the heels and the
     # chest sinks, so the wrists open under the weight of the body.
-    knee_y = Body.W_SHIN / 2 + 0.004
+    knee_y = Body.R_SHIN + 0.004
 
     def make(q, sy):
         d = lerp(0.0, 0.4, q)
@@ -237,7 +237,7 @@ def side_lying_floor_stretch(p, s):
     k = smooth(p)
     # Lying on the left side (head toward -x, belly toward +z): the lower knee bent in front, the upper leg straight
     # behind it; the upper arm goes overhead and the lower hand pulls its wrist.
-    y0 = 0.2
+    y0 = 0.215      # on the side of the (sculpted) hips and shoulder, not sunk in the mat
     body = Body(Frame(vec(0.0, y0, 0.0), Z, -X), head=lerp(0.0, -4.0, k))
     bottom, top = 1, -1
     body.leg_dirs(bottom, unit(vec(0.35, -0.1, 0.9)), unit(vec(0.9, -0.06, -0.15)))
@@ -249,7 +249,7 @@ def side_lying_floor_stretch(p, s):
     over_top = vec(sh_top[0] - 0.59, 0.22, 0.0)
     hand_top = lerp(rest_top, over_top, k)
     body.arm(top, hand_top, unit(Z * 0.6 + Y * 0.8))
-    under = vec(sh_bottom[0] - 0.5, 0.05, 0.02)
+    under = vec(sh_bottom[0] - 0.5, 0.075, 0.02)
     hold = hand_top + vec(0.0, -0.03, -0.02)
     body.arm(bottom, lerp(under, hold, k), unit(Z * 0.6 - Y * 0.1))
     s.allow = {"le tapis", "tibia droit", "cuisse droit", "bras droit", "avant-bras droit", "pied droit"}

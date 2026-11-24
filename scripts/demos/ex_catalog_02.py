@@ -58,7 +58,7 @@ def drag_curl(p, s):
         sh = body.shoulder[side]
         upper = unit(-Y - X * 0.5 * p + body.chest.r * side * 0.12)
         elbow = sh + upper * Body.UPPER
-        fore = rotate(upper, body.chest.r, lerp(6.0, 105.0, p) + 24.0 * p)
+        fore = rotate(upper, body.chest.r, lerp(16.0, 105.0, p) + 24.0 * p)
         grip = elbow + fore * Body.LOWER
         body.arm_via(side, vec(grip[0], grip[1], side * 0.2), elbow)
     bar = (body.grip[1] + body.grip[-1]) / 2
@@ -113,7 +113,7 @@ def wrist_extension_one_arm(p, s):
     for side in (1, -1):
         knee = body.knee[side]
         thigh = unit(knee - body.hip[side])
-        thigh_top = knee + Y * (Body.W_THIGH / 2 + Body.W_LOWER / 2)
+        thigh_top = knee + Y * (Body.R_THIGH + Body.W_LOWER / 2)
         wrist = thigh_top + thigh * 0.11
         elbow = wrist - thigh * Body.LOWER
         body.arm_via(side, wrist, elbow)
@@ -184,7 +184,7 @@ def dip_machine(p, s):
 def cable_rear_delt_fly(p, s):
     floor(s, -0.75, 1.0, -1.5, 1.5)
     z_col = 1.25
-    pulley_y = 1.95
+    pulley_y = 1.5      # at shoulder height, ahead of the body: the crossed cables pass in front of the chest, not the face
     body = placed(posture(vec(0, 0, 0), 0.0, 8.0), "pelvis", vec(0.0, 0.92, 0.0), head=-2)
     stance(body, 0.0, half_width=0.13)
     for side in (1, -1):
@@ -194,14 +194,14 @@ def cable_rear_delt_fly(p, s):
         d = unit(lerp(d0, d1, p))
         grip = sh + d * 0.6
         body.arm(side, grip, unit(-Y * 0.35 - X * 0.5 + Z * side * 0.3 * p))
-        top = vec(0.3, pulley_y, -side * (z_col - 0.12))   # le câble de la main droite vient de la poulie gauche
+        top = vec(0.6, pulley_y, -side * (z_col - 0.12))   # le câble de la main droite vient de la poulie gauche
         g0 = sh + d0 * 0.6
-        column = Column(s, 0.3, -side * z_col, height=2.15, depth=0.22, width=0.24)
+        column = Column(s, 0.6, -side * z_col, height=2.15, depth=0.22, width=0.24)
         column.frame(lift=np.linalg.norm(grip - top) - np.linalg.norm(g0 - top))
         pulley(s, top, unit(np.cross(grip - top, X)), side=sd(side))
         cable(s, top, grip, side=sd(side))
         d_handle(s, grip, Y, side=sd(side))
-    s.line([vec(0.3, 2.15, -z_col), vec(0.3, 2.15, z_col)], TUBE, "frame")
+    s.line([vec(0.6, 2.15, -z_col), vec(0.6, 2.15, z_col)], TUBE, "frame")
     show(s, body)
 
 

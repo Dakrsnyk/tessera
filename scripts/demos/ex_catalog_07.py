@@ -134,7 +134,7 @@ def kettlebell_sumo_high_pull(p, s):
     stance(body, 0.0, half_width=0.36, toe_out=40.0, pole=None)
     hang = shoulder_mid(body) + vec(0.02, -0.6, 0.0)
     hang[1] = max(hang[1], 0.3)
-    chin = body.chest.at(u=0.36, f=Body.W_TORSO / 2 + 0.06)
+    chin = body.chest.at(u=0.36, f=Body.D_TRUNK + 0.06)
     chin[2] = 0.0
     grip = lerp(hang, chin, pull)
     # Elbows go high and out: poles toward the sides and up while pulling.
@@ -187,8 +187,10 @@ def muscle_up(p, s):
     keys = [
         (0.0, vec(-0.04, bar_y - 0.60, 0.0), -4.0, 35.0, -8.0, unit(-Y * 0.6 + X * -0.15)),
         (0.4, vec(-0.12, bar_y - 0.12, 0.0), -16.0, 55.0, -10.0, unit(-Y * 0.6 - X * 0.35)),
-        (0.7, vec(0.02, bar_y + 0.16, 0.0), 24.0, 60.0, 12.0, unit(-X * 1.0 + Y * 0.2)),
-        (1.0, vec(0.04, bar_y + 0.58, 0.0), 6.0, 20.0, 0.0, unit(-X * 0.7 - Y * 0.1)),
+        (0.55, vec(-0.14, bar_y + 0.04, 0.0), 8.0, 58.0, 0.0, unit(-Y * 0.3 - X * 0.8)),
+        # The chest rolls over the bar (folded at the hips), then the hips rest behind it, the shoulders ahead.
+        (0.7, vec(0.0, bar_y + 0.18, 0.0), 45.0, 60.0, 12.0, unit(-X * 1.0 + Y * 0.2)),
+        (1.0, vec(0.06, bar_y + 0.58, 0.0), 20.0, 20.0, 0.0, unit(-X * 0.7 - Y * 0.1)),
     ]
     for (p0, *a), (p1, *b) in zip(keys[:-1], keys[1:]):
         if p <= p1 + 1e-9:
@@ -296,7 +298,7 @@ def press_behind_neck(p, s):
     stance(body, 0.0, half_width=0.15)
     grip_half = 0.38
     mid = shoulder_mid(body)
-    rest = body.chest.at(u=0.385, f=-(Body.W_TORSO / 2 + 0.045))
+    rest = body.chest.at(u=0.385, f=-(Body.D_TRUNK + 0.045))
     rest[2] = 0.0
     dz = grip_half - Body.SH_HALF
     top = mid + Y * math.sqrt(0.63 ** 2 - dz ** 2) - X * 0.02

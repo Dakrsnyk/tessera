@@ -27,7 +27,7 @@ def top_point(body, forward=-0.02):
 
 
 def rack_point(body):
-    p = body.chest.at(u=Body.THORAX - 0.06, f=Body.W_TORSO / 2 + 0.06)
+    p = body.chest.at(u=Body.THORAX - 0.06, f=Body.D_TRUNK + 0.06)
     p[2] = 0.0
     return p
 

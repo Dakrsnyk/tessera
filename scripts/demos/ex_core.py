@@ -21,7 +21,7 @@ def smooth(t):
 
 def supine(pelvis_x=0.0, spine=0.0, head=20.0, y=None, **args):
     """Lying on the back on the floor, head toward -x."""
-    origin = vec(pelvis_x, Body.W_TORSO / 2 + 0.006 if y is None else y, 0.0)
+    origin = vec(pelvis_x, Body.D_TRUNK + 0.006 if y is None else y, 0.0)
     return Body(Frame(origin, Y, -X), spine=spine, head=head, **args)
 
 
@@ -52,7 +52,7 @@ def sit_up(p, s):
     # The spine curls first, then the hips flex to sit up.
     curl = 35.0 * smooth(min(1.0, p * 2.0))
     hip = lerp(0.0, 62.0, smooth(max(0.0, (p - 0.25) / 0.75)))
-    pelvis = Frame(vec(0.0, Body.W_TORSO / 2 + 0.006, 0.0), Y, -X).pitched(hip)
+    pelvis = Frame(vec(0.0, Body.D_TRUNK + 0.006, 0.0), Y, -X).pitched(hip)
     body = Body(pelvis, spine=curl - hip * 0.35, head=lerp(22.0, 18.0, k))
     for side in (1, -1):
         body.foot_on_floor(side, (0.38, side * 0.13), 0.0, pole=Y)
@@ -65,7 +65,7 @@ def sit_up(p, s):
 def bicycle_crunch(p, s):
     floor(s, -1.0, 0.9)
     a = math.sin(2 * math.pi * p)
-    body = supine(spine=30.0, twist=24.0 * a, head=26.0, y=Body.W_TORSO / 2 + 0.006)
+    body = supine(spine=30.0, twist=24.0 * a, head=26.0, y=Body.D_TRUNK + 0.006)
     for side in (1, -1):
         # Legs pedal: one knee in toward the chest while the other leg extends.
         bend = 0.5 + 0.5 * a * side
@@ -85,7 +85,7 @@ def bicycle_crunch(p, s):
 def cable_crunch(p, s):
     floor(s, -0.8, 1.2)
     s.slab(vec(-0.35, 0.03, 0), vec(0.15, 0.03, 0), Y, 0.5, 0.03, "pad")
-    knee = vec(0.0, 0.03 + Body.W_SHIN / 2 + 0.004, 0.0)
+    knee = vec(0.0, 0.03 + Body.R_SHIN + 0.004, 0.0)
     pelvis_pt = knee + vec(0.06, Body.THIGH - 0.01, 0.0)
     pelvis = Frame(pelvis_pt, X, Y).pitched(8.0)
     body = Body(pelvis, spine=lerp(25.0, 82.0, p), head=lerp(20.0, 30.0, p))
@@ -95,7 +95,7 @@ def cable_crunch(p, s):
         body.foot_relaxed(side, plantar=60)
     # Hands hold the rope beside the head; the rope follows the head down.
     pul = vec(0.78, 2.05, 0.0)
-    knot = body.head + body.head_frame.u * 0.05 + body.chest.f * 0.12
+    knot = body.head + body.head_frame.u * 0.17 + body.chest.f * 0.06     # the rope's knot past the top of the head, toward the pulley
     for side in (1, -1):
         g = body.head + body.head_frame.r * side * 0.1 + body.chest.f * 0.06
         body.arm(side, g, unit(body.chest.r * side - body.chest.u * 0.3 + body.chest.f * 0.6))
@@ -121,7 +121,7 @@ def plank(p, s):
     def make(theta, on_knees):
         frame = posture(vec(0, 0, 0), 0.0, 90.0 - theta)
         if on_knees:
-            knee = vec(0.0, Body.W_SHIN / 2 + 0.005, 0.0)
+            knee = vec(0.0, Body.R_SHIN + 0.005, 0.0)
             pelvis = knee + frame.u * Body.THIGH
             b = Body(Frame(pelvis, frame.f, frame.u), head=-6)
             for side in (1, -1):
@@ -222,7 +222,7 @@ def side_plank(p, s):
       timing=(0.6, 1.6, 0.4, 1.4))
 def ab_wheel(p, s):
     floor(s, -0.6, 1.7)
-    knee = vec(0.0, Body.W_SHIN / 2 + 0.005, 0.0)
+    knee = vec(0.0, Body.R_SHIN + 0.005, 0.0)
     wheel_r = 0.09
     k = smooth(p)
     thigh_angle = lerp(72.0, 22.0, k)        # thighs from the floor
@@ -334,7 +334,7 @@ def hollow_hold(p, s):
 def russian_twist(p, s):
     floor(s, -0.8, 0.9, -0.8, 0.8)
     a = math.sin(2 * math.pi * p)
-    pelvis = Frame(vec(0.0, Body.W_THIGH / 2 + 0.004, 0.0), X, Y).pitched(-45.0)
+    pelvis = Frame(vec(0.0, Body.R_THIGH + 0.004, 0.0), X, Y).pitched(-45.0)
     body = Body(pelvis, twist=42.0 * a, spine=8.0, head=10.0)
     for side in (1, -1):
         body.leg_dirs(side, unit(vec(0.8, 0.6, 0.0)), unit(vec(0.94, -0.34, 0.0)))
@@ -354,14 +354,14 @@ def woodchop(p, s):
     k = smooth(p)
     body = upright(lerp(0.92, 0.86, k), 2.0, pelvis_x=0.0, twist=lerp(-38.0, 42.0, k), head=0)
     stance(body, 0.0, half_width=0.25, toe_out=10)
-    pul = vec(0.0, 2.05, 0.95)
+    pul = vec(0.3, 2.1, 0.95)
     sh = (body.shoulder[1] + body.shoulder[-1]) / 2
     start = sh + unit(vec(0.3, 0.75, 0.55)) * 0.58
     end = sh + unit(vec(0.35, -0.75, -0.55)) * 0.62
     grip = lerp(start, end, k)
     for side in (1, -1):
         body.arm(side, grip + Y * 0.04 * side, unit(-Y + body.chest.r * side * 0.3))
-    col = Column(s, 0.0, 1.12, height=2.2, depth=0.24, width=0.24)
+    col = Column(s, 0.3, 1.12, height=2.2, depth=0.24, width=0.24)
     col.frame(lift=np.linalg.norm(grip - pul) - np.linalg.norm(start - pul))
     s.disc(pul, X, 0.045, "frame")
     cable(s, pul, grip)
@@ -376,8 +376,8 @@ def pallof_press(p, s):
     floor(s, -0.6, 1.0, -1.4, 0.7)
     body = upright(0.9, 0.0, pelvis_x=0.0, head=0)
     stance(body, 0.0, half_width=0.22, toe_out=8)
-    chest = body.chest.at(u=0.27, f=Body.W_TORSO / 2 + 0.06)
-    out = chest + X * 0.5
+    chest = body.chest.at(u=0.27, f=Body.D_TRUNK + 0.06)
+    out = chest + X * 0.46
     grip = lerp(chest, out, smooth(p))
     for side in (1, -1):
         body.arm(side, grip + Z * side * 0.03, unit(-Y + Z * side * 0.4))
@@ -446,9 +446,9 @@ def back_extension(p, s):
         body.toe[side] = body.ankle[side] + n * 0.165 - d * 0.06
         cross = body.chest.at(u=0.3, f=0.1, r=-side * 0.06)
         body.arm(side, cross, unit(body.chest.r * side + body.chest.f * 0.3))
-    pad = hip_pt + n * (Body.W_THIGH / 2 + 0.004) - d * 0.11     # under the upper thighs, below the hip crease
+    pad = hip_pt + n * (Body.R_THIGH + 0.004) - d * 0.11     # under the upper thighs, below the hip crease
     s.slab(pad - d * 0.2, pad + d * 0.05, -n, 0.4, 0.08, "pad", solid="l'appui")
-    roller(s, body.ankle[1] - n * (Body.W_SHIN / 2 + 0.05) + d * 0.03 - Z * body.ankle[1][2], half=0.18)
+    roller(s, body.ankle[1] - n * (Body.R_SHIN + 0.05) + d * 0.03 - Z * body.ankle[1][2], half=0.18)
     plate = ankle + n * 0.06 - d * 0.1
     s.line([vec(plate[0], plate[1], -0.2), vec(plate[0], plate[1], 0.2)], 0.05, "frame")
     s.line([plate, pad + n * 0.08], TUBE * 1.2, "frame")
@@ -465,7 +465,7 @@ def back_extension(p, s):
 def superman(p, s):
     floor(s, -1.2, 1.5)
     k = smooth(p)
-    origin = vec(0.0, Body.W_TORSO / 2 + 0.006, 0.0)
+    origin = vec(0.0, Body.D_TRUNK + 0.006, 0.0)
     body = Body(Frame(origin, -Y, X), spine=lerp(0.0, -14.0, k), head=lerp(-18.0, -22.0, k))
     lift = lerp(0.0, 10.0, k)
     d = vec(-math.cos(math.radians(lift)), math.sin(math.radians(lift)), 0.0)
@@ -495,7 +495,7 @@ def bird_dog(p, s):
     reach = lerp(min(0.62, float(np.linalg.norm(floor_pt - sh))), 0.62, e)
     body.arm(arm_side, sh + d * reach, unit(-X + Z * arm_side * 0.3) if e < 0.2 else unit(Y))
     hip = body.hip[leg_side]
-    knee_floor = vec(hip[0], Body.W_SHIN / 2 + 0.004, hip[2])
+    knee_floor = vec(hip[0], Body.R_SHIN + 0.004, hip[2])
     thigh = unit(lerp(unit(knee_floor - hip), vec(-1.0, 0.04, 0.0), e))
     shin = unit(lerp(vec(-1.0, 0.0, 0.0), vec(-1.0, 0.04, 0.0), e))
     body.leg_dirs(leg_side, thigh, shin)

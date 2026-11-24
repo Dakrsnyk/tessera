@@ -7,7 +7,7 @@ import numpy as np
 from demos import demo, show
 from engine import (FRONT, PROFILE, THREE_QUARTER, Body, SIDE_LEFT, SIDE_RIGHT, X, Y, Z, lerp, rotate, unit, vec)
 from ex_back import bent_over
-from ex_legs import hanging_grip
+from ex_legs import hanging_grip, thigh_clear
 from gear import PAD_T, PAD_W, TUBE, barbell, dumbbell, flat_bench, floor, kettlebell
 from keys import keyed, pose, stage_segments
 from poses import lying_on_front, plank_on_toes, solve, stance, upright
@@ -84,12 +84,12 @@ def plate_neck(p, s):
         body.leg_dirs(side, -X, -X)
         body.foot_relaxed(side, plantar=25)
     hf = body.head_frame
-    center = body.head - hf.f * (Body.HEAD + 0.012) - hf.u * 0.045
+    center = body.head - hf.f * (Body.HEAD + 0.012) + hf.u * 0.02     # high on the back of the head, clear of the upper back
     for side in (1, -1):
         grip = center + Z * side * 0.17
         grip = grip + hf.f * 0.0
         body.arm(side, grip, unit(Y * 0.5 + Z * side * 0.9 - X * 0.2))
-    s.disc(center, hf.f, 0.225, "load")
+    s.disc(center, hf.f, 0.15, "load")
     s.allow = {("bassin", "le banc"), ("cuisse droit", "le banc"), ("cuisse gauche", "le banc")}
     show(s, body)
 
@@ -101,6 +101,7 @@ def lift_between(p, lean_start, bar_start, bar_top, half, toe_out, grip_half, gr
     k = smooth(p)
     bar_y = lerp(bar_start, bar_top, k)
     lean = lean_start * (1 - smooth(min(1.0, p * 1.05)) ** 1.6)
+    ahead = thigh_clear(ahead, bar_y, ground)
 
     def make(hip_y, px):
         return upright(hip_y, lean, pelvis_x=px, head=-lean * 0.5)
@@ -189,7 +190,7 @@ def two_dumbbell_row(p, s):
     sh = mid(body)
     for side in (1, -1):
         hang = vec(sh[0] + 0.02, sh[1] - 0.62, side * 0.19)
-        top = body.chest.at(u=0.02, f=Body.W_TORSO / 2 + 0.03, r=side * 0.19)
+        top = body.chest.at(u=0.02, f=Body.D_TRUNK + 0.03, r=side * 0.19)
         top[2] = side * 0.19
         grip = lerp(hang, top, p)
         body.arm(side, grip, unit(-X * 1.0 + Y * 0.6 + body.chest.r * side * 0.35))
@@ -256,7 +257,7 @@ def incline_bench_pull(p, s):
         s.line([a, vec(a[0], 0.03, 0)], TUBE * 1.2, "frame")
     # The body lies on the pad, the pelvis near the low end, the head beyond the top.
     point = low + along * 0.14
-    origin = point + normal * (Body.W_TORSO / 2 + 0.004)
+    origin = point + normal * (Body.D_TRUNK + 0.004)
     body = Body(Frame(origin, -normal, along), head=-12)
     for side in (1, -1):
         ankle = vec(-0.68, Body.ANKLE, side * 0.17)
@@ -306,10 +307,14 @@ def snatch_keys():
 
     fb, fbar = lift_between(0.0, 55.0, 0.235, 0.84, 0.17, 8.0, SN_GRIP, reach=SN_HANG)
     kb, kbar = lift_between(0.45, 55.0, 0.235, 0.84, 0.17, 8.0, SN_GRIP, reach=SN_HANG)
+    fbar, kbar = fbar + X * 0.045, kbar + X * 0.115      # in front of the (sculpted) shins and knees
     k0 = snatch_key(fbar, fb.pelvis.o[1], 55.0, fb.pelvis.o[0], -27.0)
     k1 = snatch_key(kbar, kb.pelvis.o[1], lean_at(0.45), kb.pelvis.o[0], -lean_at(0.45) * 0.5)
     pull_poles = (unit(Y * 0.3 + Z * 0.8), unit(Y * 0.3 - Z * 0.8))
-    k2 = snatch_key(vec(0.06, 1.2, 0.0), 1.0, -4.0, -0.02, 0.0, heel=35.0, shrug=0.07, poles=pull_poles)
+    k2 = snatch_key(vec(0.12, 1.2, 0.0), 1.0, -4.0, -0.02, 0.0, heel=35.0, shrug=0.07, poles=pull_poles)
+    # Turnover: the body drops under the bar, which passes close in front of the chin, not through the face.
+    k2b = snatch_key(vec(0.2, 1.52, 0.0), 0.78, 12.0, -0.04, -6.0, heel=10.0, half=0.22,
+                     poles=(unit(Y * 0.6 + Z * 0.7 - X * 0.2), unit(Y * 0.6 - Z * 0.7 - X * 0.2)))
     # Catch: overhead squat, wide stance, bar above the middle of the feet.
     probe = upright(0.5, 30.0, pelvis_x=0.0, head=-15)
     px = 0.05 - mid(probe)[0]
@@ -323,9 +328,9 @@ def snatch_keys():
     probe = upright(0.95, 0.0, pelvis_x=0.0, head=0)
     bar4b = mid(probe) + vec(0.3, 0.08, 0.0)
     k4b = snatch_key(bar4b, 0.95, 0.0, 0.0, 0.0, half=0.17, poles=(unit(-X + Z * 0.5), unit(-X - Z * 0.5)))
-    hang = vec(0.03, mid(probe)[1] - math.sqrt(SN_REACH ** 2 - (SN_GRIP - Body.SH_HALF) ** 2) + 0.0, 0.0)
+    hang = vec(0.1, mid(probe)[1] - math.sqrt(SN_REACH ** 2 - (SN_GRIP - Body.SH_HALF) ** 2) + 0.0, 0.0)
     k5 = snatch_key(hang, 0.95, 4.0, -0.02, 0.0, half=0.17)
-    return [(0.0, k0), (0.14, k1), (0.26, k2), (0.38, k3), (0.52, k4), (0.64, k4b), (0.8, k5), (1.0, k0)]
+    return [(0.0, k0), (0.14, k1), (0.26, k2), (0.32, k2b), (0.38, k3), (0.52, k4), (0.64, k4b), (0.8, k5), (0.9, k1), (1.0, k0)]
 
 
 SNATCH_KEYS = snatch_keys()
@@ -334,7 +339,7 @@ SNATCH_KEYS = snatch_keys()
 @demo("x-snatch", views=[PROFILE(), THREE_QUARTER(35, 12)], mode="loop", samples=48,
       labels=("Barre au sol, prise large", "Tirage des jambes", "Extension explosive", "Réception en squat, barre au-dessus",
               "Debout, bras tendus", "La barre descend devant", "Retour aux hanches", "Retour au sol"),
-      segments=[(0.5, 0.0, 0.0, 0, 1)] + stage_segments(SNATCH_KEYS, [0.7, 0.35, 0.3, 0.6, 0.6, 0.6, 0.8], [1, 2, 3, 4, 5, 6, 7]))
+      segments=[(0.5, 0.0, 0.0, 0, 1)] + stage_segments(SNATCH_KEYS, [0.7, 0.35, 0.3, 0.15, 0.45, 0.6, 0.6, 0.4, 0.4], [1, 2, 3, 3, 4, 5, 6, 7, 7]))
 def snatch(p, s):
     floor(s, -0.9, 0.9, -0.9, 0.9)
     body = pose(keyed(p, SNATCH_KEYS))

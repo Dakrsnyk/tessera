@@ -38,7 +38,7 @@ def half_kneeling(front_ankle_x, shin_angle, rear_knee_x, lean=2.0, head=0, mat_
     a = math.radians(shin_angle)
     front_ankle = vec(front_ankle_x, Body.ANKLE + mat_top, 0.12)
     front_knee = front_ankle + vec(math.sin(a), math.cos(a), 0.0) * Body.SHIN
-    rear_knee = vec(rear_knee_x, mat_top + Body.W_SHIN / 2 + 0.006, -0.12)
+    rear_knee = vec(rear_knee_x, mat_top + Body.R_SHIN + 0.006, -0.12)
     # Hip joints sit 0.09 from the middle; both knees are 0.12 out: 0.03 sideways from their hip.
     r = math.sqrt(Body.THIGH ** 2 - 0.03 ** 2)
     c1, c2 = front_knee[:2], rear_knee[:2]
@@ -87,7 +87,7 @@ def shoulder_dislocates(p, s):
     floor(s, -0.8, 0.8)
     body = upright(0.945, 0.0, pelvis_x=0.0, head=0)
     stance(body, 0.0, half_width=0.15)
-    angle = lerp(-80.0, 245.0, p)      # arms turning forward, over the head, to the back
+    angle = lerp(-70.0, 245.0, p)      # arms turning forward, over the head, to the back (the stick starts clear of the hips)
     d = vec(math.cos(math.radians(angle)), math.sin(math.radians(angle)), 0.0)
     m = mid(body)
     half = 0.62
@@ -190,7 +190,7 @@ def hamstring_stretch(p, s):
     floor(s, -0.9, 1.1)
     mat(s, -0.7, 1.0)
     k = smooth(p)
-    pelvis = Frame(vec(0.0, Body.W_THIGH / 2 + 0.02, 0.0), X, Y).pitched(lerp(-5.0, 45.0, k))
+    pelvis = Frame(vec(0.0, Body.R_THIGH + 0.02, 0.0), X, Y).pitched(lerp(-5.0, 45.0, k))
     body = Body(pelvis, spine=lerp(0.0, 22.0, k), head=lerp(0.0, 15.0, k))
     for side in (1, -1):
         body.leg_dirs(side, X, X)
@@ -322,7 +322,7 @@ def childs_pose(p, s):
     floor(s, -0.9, 1.2)
     mat(s, -0.75, 1.0)
     k = smooth(p)
-    knee = vec(0.0, Body.W_SHIN / 2 + 0.02, 0.0)
+    knee = vec(0.0, Body.R_SHIN + 0.02, 0.0)
     # Hips from above the knees back to the heels; the torso folds down over the thighs.
     thigh_angle = lerp(88.0, 158.0, k)         # angle of the thigh from the floor, measured from +x
     thigh_dir = vec(math.cos(math.radians(thigh_angle)), math.sin(math.radians(thigh_angle)), 0.0)
@@ -353,13 +353,13 @@ def pigeon(p, s):
     floor(s, -1.3, 1.0, -0.7, 0.7)
     mat(s, -1.2, 0.8)
     k = smooth(p)
-    hip_y = Body.W_THIGH / 2 + 0.07
-    body = Body(posture(vec(0.0, hip_y + 0.05, 0.0), 0.0, lerp(14.0, 62.0, k)), spine=lerp(0.0, 12.0, k), head=lerp(-8.0, 10.0, k))
+    hip_y = Body.R_THIGH + 0.07
+    body = Body(posture(vec(0.0, hip_y + 0.05, 0.0), 0.0, lerp(19.0, 62.0, k)), spine=lerp(0.0, 12.0, k), head=lerp(-8.0, 10.0, k))
     # Front (right) leg folded across in front, the shin on the floor; the left leg straight back.
     body.leg_dirs(1, unit(vec(0.7, -0.15, -0.25)), unit(vec(-0.05, -0.02, -1.0)))
     body.foot_toward(1, body.ankle[1] + unit(vec(0.25, -0.12, -0.95)) * 0.17)      # resting on its outer edge
     # Rear leg long on the mat: the knee and the top of the foot on the floor.
-    knee_y = Body.W_THIGH / 2 + 0.006
+    knee_y = Body.R_THIGH + 0.006
     drop = (knee_y - body.hip[-1][1]) / Body.THIGH
     body.leg_dirs(-1, unit(vec(-math.sqrt(max(1 - drop * drop, 0.0)), drop, -0.02)), unit(vec(-1.0, -0.015, 0.0)))
     body.foot_toward(-1, body.ankle[-1] + vec(-0.172, -0.012, 0.0))
@@ -378,7 +378,7 @@ def cobra(p, s):
     floor(s, -1.2, 1.1)
     mat(s, -1.1, 1.0)
     k = smooth(p)
-    origin = vec(0.0, Body.W_TORSO / 2 + 0.02, 0.0)
+    origin = vec(0.0, Body.D_TRUNK + 0.02, 0.0)
     pelvis = Frame(origin, -Y, X).pitched(lerp(0.0, -10.0, k))
     body = Body(pelvis, spine=lerp(0.0, -36.0, k), head=lerp(-18.0, -12.0, k))
     for side in (1, -1):

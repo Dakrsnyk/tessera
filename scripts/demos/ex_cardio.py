@@ -143,7 +143,7 @@ def cycling(p, s):
     s.line([saddle - X * 0.1, saddle + X * 0.12], 0.05, "load")
     s.line([vec(-0.18, 0.86, 0), saddle], 0.03, "metal")
     crank_parts(s, crank, p)
-    pelvis = Frame(saddle + Y * (Body.W_THIGH / 2 + 0.02), X, Y).pitched(52.0)
+    pelvis = Frame(saddle + Y * (Body.R_THIGH + 0.02), X, Y).pitched(52.0)
     body = Body(pelvis, spine=8.0, head=-28)
     pedal_legs(body, crank, p)
     for side in (1, -1):
@@ -170,7 +170,7 @@ def spinning(p, s):
     s.line([crank, vec(0.46, 0.75, 0)], TUBE, "frame")
     s.line([saddle - X * 0.1, saddle + X * 0.12], 0.06, "load")
     crank_parts(s, crank, p)
-    pelvis = Frame(saddle + Y * (Body.W_THIGH / 2 + 0.02), X, Y).pitched(35.0)
+    pelvis = Frame(saddle + Y * (Body.R_THIGH + 0.02), X, Y).pitched(35.0)
     body = Body(pelvis, spine=6.0, head=-18)
     pedal_legs(body, crank, p)
     for side in (1, -1):
@@ -218,7 +218,7 @@ def rowing_machine(p, s):
     seat = vec(seat_x, rail_y + 0.04, 0.0)
     s.slab(seat - X * 0.16, seat + X * 0.16, Y, 0.3, 0.05, "pad", solid="le siège")
     lean = lerp(24.0, -22.0, back)
-    pelvis = Frame(seat + Y * (Body.W_THIGH / 2 + 0.006), X, Y).pitched(lean)
+    pelvis = Frame(seat + Y * (Body.R_THIGH + 0.006), X, Y).pitched(lean)
     body = Body(pelvis, head=-lean * 0.3)
     for side in (1, -1):
         ankle = foot + vec(-0.08, 0.06, side * 0.11)
@@ -226,7 +226,7 @@ def rowing_machine(p, s):
         body.toe[side] = ankle + unit(vec(0.25, 0.97, 0)) * 0.17
     sh = mid(body)
     reach = vec(sh[0] + 0.6, sh[1] - 0.12, 0.0)
-    ribs = body.chest.at(u=0.12, f=Body.W_TORSO / 2 + 0.06)
+    ribs = body.chest.at(u=0.12, f=Body.D_TRUNK + 0.06)
     ribs[2] = 0.0
     straight = sh + unit(vec(0.97, -0.25, 0.0)) * 0.62
     handle = lerp(straight, ribs, arms)
@@ -320,7 +320,7 @@ def jump_rope(p, s):
     n = 14
     for i in range(n + 1):
         u = i / n
-        z = lerp(-0.28, 0.28, u)
+        z = lerp(-0.28, 0.28, u) * (1 + 0.9 * math.sin(math.pi * u))     # the rope bows out, clear of the shoulders
         r = 1.0 * math.sin(math.pi * u) ** 0.7 + 0.02
         pts.append(vec(0.12 + r * math.cos(angle) * 0.55, hands_y + r * math.sin(angle), z))
     pts[0] = body.grip[-1]

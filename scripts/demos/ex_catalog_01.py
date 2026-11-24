@@ -75,7 +75,7 @@ def floor_press(p, s):
 
 def supine(pelvis_x=0.0, spine=0.0, head=20.0, y=None, **args):
     """Lying on the back on the floor, head toward -x."""
-    origin = vec(pelvis_x, Body.W_TORSO / 2 + 0.006 if y is None else y, 0.0)
+    origin = vec(pelvis_x, Body.D_TRUNK + 0.006 if y is None else y, 0.0)
     return Body(Frame(origin, Y, -X), spine=spine, head=head, **args)
 
 
@@ -102,7 +102,7 @@ def jackknife_sit_up(p, s):
     floor(s, -1.2, 1.1)
     k = smooth(p)
     hip = 58.0 * k
-    origin = vec(0.0, Body.W_TORSO / 2 + 0.006 + 0.03 * k, 0.0)
+    origin = vec(0.0, Body.D_TRUNK + 0.006 + 0.03 * k, 0.0)
     body = Body(Frame(origin, Y, -X).pitched(hip), spine=36.0 * k, head=lerp(14.0, 28.0, k))
     leg_up = 56.0 * k
     thigh = vec(math.cos(math.radians(leg_up)), math.sin(math.radians(leg_up)) - 0.0, 0.0)
@@ -185,7 +185,7 @@ def prone_incline(s, p, tool, angle=52.0):
     body = plank_on_toes(angle, toe_x=-0.75, head=-6)
     pel = body.pelvis
     d, n = pel.u, pel.f                      # up the body toward the head, and toward the belly
-    surface = n * (Body.W_TORSO / 2 + 0.006)
+    surface = n * (Body.D_TRUNK + 0.006)
     start = pel.o + d * 0.02 + surface
     end = pel.o + d * 0.44 + surface
     s.slab(start, end, -n, 0.3, PAD_T, "pad", solid="le banc")
@@ -251,9 +251,10 @@ def reverse_hyperextension(p, s):
         body.leg_dirs(side, leg, leg)
         body.foot_relaxed(side, plantar=-10)
         # Hands on the handles at the head end of the pad.
-        body.arm(side, vec(pad_end + 0.04, top - 0.1, side * 0.22), unit(-Y + Z * side * 0.5))
-        sh = vec(pad_end + 0.04, top - 0.16, side * 0.22)
-        s.line([sh, sh + Y * 0.2], 0.035, "load", side=sd(side))
+        # The hands hold the handles at the front of the pad, beside it: the arms lie along its sides, not through it.
+        body.arm(side, vec(pad_end - 0.04, top + 0.03, side * 0.27), unit(-Y + Z * side * 0.5))
+        sh = vec(pad_end - 0.04, top - 0.1, side * 0.27)
+        s.line([sh, sh + Y * 0.19], 0.035, "load", side=sd(side))
     # Frame under the pad.
     for x in (pad_start + 0.12, pad_end - 0.15):
         s.line([vec(x, top - PAD_T, 0), vec(x, 0.03, 0)], TUBE * 1.3, "frame")
@@ -307,7 +308,7 @@ def donkey_calf_raises(p, s):
     s.line([vec(sh[0] + 0.1, hand_y - 0.03, -0.2), vec(sh[0] + 0.1, hand_y - 0.03, 0.2)], TUBE * 1.2, "frame")
     # The padded lever across the lower back, carrying the weight behind.
     pel = body.pelvis
-    pad_c = pel.o + Y * (Body.W_TORSO / 2 + 0.05) + X * 0.05
+    pad_c = pel.o + Y * (Body.D_TRUNK + 0.05) + X * 0.05
     s.slab(pad_c - X * 0.12 + Y * 0.0, pad_c + X * 0.14, -Y, 0.4, 0.07, "pad")
     lever_y = pad_c[1] + 0.08
     s.line([vec(pad_c[0] - 0.1, pad_c[1] + 0.04, 0.0), vec(pad_c[0] - 0.1, lever_y, 0.0), vec(-0.7, lever_y, 0.0)], TUBE * 1.3, "frame")
@@ -344,7 +345,7 @@ def calf_press(p, s):
     q = float(np.dot(toe - hip, sled)) + 0.02          # the platform follows the ball of the foot
     sole = hip + sled * q + plate_up * 0.1
     # Seat and backrest.
-    seat_pt = hip - normal * (Body.W_TORSO / 2 + 0.004)
+    seat_pt = hip - normal * (Body.D_TRUNK + 0.004)
     s.slab(seat_pt - up * 0.08, seat_pt + up * 0.75, normal, 0.34, 0.08, "pad", solid="le dossier")
     seat_dir = rotate(sled, Z, -20)
     s.slab(seat_pt + seat_dir * 0.02, seat_pt + seat_dir * 0.3, rotate(seat_dir, Z, 90), 0.42, 0.08, "pad")
@@ -393,16 +394,21 @@ def ab_crunch_machine(p, s):
     # The chest pad and its handles turn with the trunk around a pivot behind the hips.
     c = body.chest
     pivot = vec(-0.28, 0.75, 0.0)
-    pad_pt = c.at(u=0.31, f=0.065)
+    # The pad lies across the upper chest; the arm holding it comes down on each side, outside the shoulders.
+    pad_pt = c.at(u=0.27, f=Body.D_TRUNK + 0.055)
     pad_pt[2] = 0.0
-    s.line([pad_pt - c.u * 0.1, pad_pt + c.u * 0.1], 0.1, "pad")
-    s.line([pivot, vec(pivot[0], pivot[1] + 0.2, 0.0), vec(pad_pt[0] - 0.05, pad_pt[1] + 0.24, 0.0), pad_pt], TUBE * 1.3, "frame")
-    s.disc(pivot, Z, 0.055, "frame")
+    s.line([pad_pt - Z * 0.17, pad_pt + Z * 0.17], 0.1, "pad")
     for side in (1, -1):
-        grip = c.at(u=0.37, f=0.12, r=side * 0.17)
+        z = side * 0.3
+        end = vec(pad_pt[0], pad_pt[1], side * 0.17)
+        s.line([vec(pivot[0], pivot[1], z), vec(pivot[0], pivot[1] + 0.2, z), vec(pad_pt[0] - 0.05, pad_pt[1] + 0.24, z),
+                vec(pad_pt[0], pad_pt[1], z), end], TUBE * 1.3, "frame", side=sd(side))
+        s.disc(vec(pivot[0], pivot[1], z), Z, 0.055, "frame", side=sd(side))
+    for side in (1, -1):
+        grip = c.at(u=0.37, f=Body.D_TRUNK + 0.08, r=side * 0.2)
         body.arm(side, grip, unit(-c.u * 0.3 + c.f * 0.1 + c.r * side * 0.3 - Y * 0.5))
         s.line([grip - c.u * 0.04, grip + c.u * 0.07], 0.035, "load", side=sd(side))
-        s.line([vec(pad_pt[0], pad_pt[1], 0), vec(grip[0], grip[1], grip[2])], TUBE, "frame", side=sd(side))
+        s.line([vec(pad_pt[0], pad_pt[1], side * 0.17), vec(grip[0], grip[1], grip[2])], TUBE, "frame", side=sd(side))
     stack(s, -0.62, 0.0, lift=p * 0.12, height=1.3)
     s.allow = {"le siège"}
     show(s, body)
@@ -410,5 +416,5 @@ def ab_crunch_machine(p, s):
 
 def seated_hip(seat_y, hip_x, **args):
     """Sitting on a seat, the trunk upright (the spine may curl forward)."""
-    origin = vec(hip_x, seat_y + Body.W_THIGH / 2 + 0.004, 0.0)
+    origin = vec(hip_x, seat_y + Body.R_THIGH + 0.004, 0.0)
     return Body(posture(origin, 0.0, 0.0), **args)

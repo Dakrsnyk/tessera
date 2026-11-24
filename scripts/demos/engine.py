@@ -267,6 +267,11 @@ class Body:
     W_THIGH = 0.092
     W_SHIN = 0.074
     W_FOOT = 0.052
+    # The sculpted mannequin the app draws (sculpt.py) is thicker than the drawn sticks: contacts (lying on a
+    # bench, sitting, a bar on the chest) use its sizes. Trunk half-depth less ~1 cm of pad, thigh radius at the hip.
+    D_TRUNK = 0.098
+    R_THIGH = 0.074
+    R_SHIN = 0.05
 
     def __init__(self, pelvis, spine=0.0, twist=0.0, bend=0.0, head=0.0, shrug=0.0, protract=0.0,
                  head_turn=0.0, lumbar=None):

@@ -111,7 +111,7 @@ def assisted_pull_up(p, s):
         body.foot_relaxed(side, plantar=88)     # top of the foot along the pad
         body.arm(side, vec(0.0, handle_y, side * grip_half), unit(-Y * 0.6 + body.chest.r * side - X * 0.15))
     knee = body.knee[1]
-    pad_top = knee[1] - Body.W_SHIN / 2 - 0.005
+    pad_top = knee[1] - Body.R_SHIN - 0.005
     s.slab(vec(knee[0] - 0.12, pad_top, 0.0), vec(knee[0] - 0.55, pad_top, 0.0), Y, 0.4, 0.06, "pad", solid="le plateau")
     # Frame: tall posts behind with the handles forward, the pad on a lever to the counterweight.
     post_x = -0.75
@@ -166,11 +166,11 @@ def lat_pulldown(p, s):
     lean = lerp(-10.0, -18.0, p)
     body = seated_upright(seat_y, hip_x, lean=lean, head=lerp(-4.0, -12.0, p))
     feet_flat(body, (0.5, 0.17), (0.5, -0.17))
-    thigh_top = body.hip[1][1] + Body.W_THIGH / 2
+    thigh_top = body.hip[1][1] + Body.R_THIGH
     sh = shoulder_mid(body)
     grip_half = 0.45
     top = vec(sh[0] + 0.12, sh[1] + math.sqrt(0.632 ** 2 - (grip_half - Body.SH_HALF) ** 2 - 0.12 ** 2), 0.0)
-    low = body.chest.at(u=0.36, f=Body.W_TORSO / 2 + 0.03)
+    low = body.chest.at(u=0.36, f=Body.D_TRUNK + 0.03)
     low[2] = 0.0
     bar = lerp(top, low, p)
     for side in (1, -1):
@@ -191,10 +191,10 @@ def close_pulldown(p, s):
     seat_y, hip_x = 0.48, 0.0
     body = seated_upright(seat_y, hip_x, lean=lerp(-10.0, -20.0, p), head=lerp(-4.0, -12.0, p))
     feet_flat(body, (0.5, 0.17), (0.5, -0.17))
-    thigh_top = body.hip[1][1] + Body.W_THIGH / 2
+    thigh_top = body.hip[1][1] + Body.R_THIGH
     sh = shoulder_mid(body)
     top = vec(sh[0] + 0.14, sh[1] + math.sqrt(0.632 ** 2 - Body.SH_HALF ** 2 * 0.6 - 0.14 ** 2), 0.0)
-    low = body.chest.at(u=0.3, f=Body.W_TORSO / 2 + 0.05)
+    low = body.chest.at(u=0.3, f=Body.D_TRUNK + 0.05)
     low[2] = 0.0
     grip = lerp(top, low, p)
     for side in (1, -1):
@@ -225,7 +225,7 @@ def barbell_row(p, s):
     body = bent_over(48.0, 0.84)
     sh = shoulder_mid(body)
     hang = vec(sh[0] + 0.02, sh[1] - 0.62, 0.0)
-    belly = body.chest.at(u=0.06, f=Body.W_TORSO / 2 + 0.03)
+    belly = body.chest.at(u=0.06, f=Body.D_TRUNK + 0.03)
     belly[2] = 0.0
     bar = lerp(hang, belly, p)
     for side in (1, -1):
@@ -245,16 +245,16 @@ def t_bar_row(p, s):
     # The bar turns around its anchor on the floor: the handle under the plates follows that arc.
     hang = vec(sh[0] + 0.03, sh[1] - 0.6, 0.0)
     radius = np.linalg.norm(hang - anchor)
-    chest = body.chest.at(u=0.12, f=Body.W_TORSO / 2 + 0.03)
+    chest = body.chest.at(u=0.04, f=Body.D_TRUNK + 0.05)
     a0 = math.atan2(hang[1] - anchor[1], hang[0] - anchor[0])
     a1 = math.atan2(chest[1] - anchor[1], chest[0] - anchor[0])
-    a = lerp(a0, a1, p)
+    a = lerp(a0, a1, p * 0.75)       # the plates stop against the chest
     handle = anchor + vec(math.cos(a), math.sin(a), 0.0) * radius
     direction = unit(handle - anchor)
-    bar_end = anchor + direction * (radius + 0.25)
+    bar_end = anchor + direction * (radius + 0.16)
     s.segs(anchor, bar_end, 0.035, "metal", parts=6)
     s.disc(anchor, Y, 0.06, "frame")
-    s.disc(anchor + direction * (radius + 0.12), direction, 0.225, "load")
+    s.disc(anchor + direction * (radius + 0.09), direction, 0.17, "load")     # 10 kg plates: they stop at the chest
     s.line([handle, handle + Z * 0.08], 0.03, "metal")
     s.line([handle, handle - Z * 0.08], 0.03, "metal")
     s.line([handle + direction * 0.02, handle + rotate(direction, Z, 90) * 0.04], 0.03, "metal")
@@ -271,7 +271,7 @@ def db_row(p, s):
     top = 0.43
     flat_bench(s, -0.35, 0.95, top, z=-0.05)
     # Left knee and left hand on the bench, right foot on the floor, back flat (horizontal).
-    knee_y = top + Body.W_SHIN / 2 + 0.004
+    knee_y = top + Body.R_SHIN + 0.004
     hip_y = knee_y + Body.THIGH
     body = upright(hip_y - 0.03, 82.0, pelvis_x=0.02, z=0.0, head=-25)
     body.leg(-1, vec(0.02 - 0.0, knee_y, -0.09), pole=X)
@@ -283,7 +283,7 @@ def db_row(p, s):
     body.arm(-1, vec(sh[0] + 0.03, top + 0.025, -0.1), unit(-X * 0.2 + Z * -0.4 + Y * 0.0 - X))
     shr = body.shoulder[1]
     hang = vec(shr[0] + 0.04, shr[1] - 0.62, 0.3)
-    hip = body.chest.at(u=-0.05, f=Body.W_TORSO / 2 + 0.06, r=0.2)
+    hip = body.chest.at(u=-0.05, f=Body.D_TRUNK + 0.06, r=0.2)
     grip = lerp(hang, hip, p)
     body.arm(1, grip, unit(Y * 1.0 - X * 0.5 + Z * 0.2))
     dumbbell(s, grip, X, side=SIDE_RIGHT)
@@ -361,7 +361,7 @@ def seated_cable_row(p, s):
         body.foot_toward(side, ankle + unit(Y * 0.9 + X * 0.25) * 0.17)
     sh = shoulder_mid(body)
     far = vec(sh[0] + 0.6, sh[1] - 0.12, 0.0)
-    belly = body.chest.at(u=0.08, f=Body.W_TORSO / 2 + 0.05)
+    belly = body.chest.at(u=0.08, f=Body.D_TRUNK + 0.05)
     belly[2] = 0.0
     grip = lerp(far, belly, p)
     for side in (1, -1):
@@ -384,7 +384,7 @@ def machine_row(p, s):
     feet_flat(body, (0.48, 0.18), (0.48, -0.18))
     # Chest pad in front of the sternum.
     c = body.chest
-    pad_pt = c.at(u=0.25, f=Body.W_TORSO / 2 + 0.004)
+    pad_pt = c.at(u=0.25, f=Body.D_TRUNK + 0.004)
     s.slab(pad_pt - c.u * 0.2, pad_pt + c.u * 0.2, -c.f, 0.36, 0.08, "pad", solid="l'appui")
     s.line([pad_pt + c.f * 0.08, vec(pad_pt[0] + 0.25, 0.03, 0)], TUBE * 1.2, "frame")
     sh = shoulder_mid(body)

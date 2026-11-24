@@ -10,14 +10,14 @@ GAP = 0.004
 
 
 def torso_offset():
-    return Body.W_TORSO / 2 + GAP
+    return Body.D_TRUNK + GAP
 
 
 def on_backrest(junction, back_dir, back_normal, seat_y, z=0.0, slide=0.0, **body_args):
     """Seated on a seat whose back end is junction, the back against a backrest going along back_dir.
     The thighs rest on the seat (the hip joint above it by half a thigh)."""
     off = torso_offset()
-    hip_y = seat_y + Body.W_THIGH / 2 + GAP
+    hip_y = seat_y + Body.R_THIGH + GAP
     base = junction + back_normal * off
     s = (hip_y - base[1]) / back_dir[1] if abs(back_dir[1]) > 1e-6 else 0.0
     s = max(s, 0.0) + slide
@@ -50,7 +50,7 @@ def lying_on_front(pad_top, pelvis_x, head_toward=1.0, z=0.0, **body_args):
 
 def seated_upright(seat_top, hip_x, z=0.0, lean=0.0, facing=0.0, **body_args):
     """Sitting on a seat at seat_top, the hip joint above it; lean > 0 leans forward."""
-    origin = vec(hip_x, seat_top + Body.W_THIGH / 2 + GAP, z)
+    origin = vec(hip_x, seat_top + Body.R_THIGH + GAP, z)
     pelvis = posture(origin, facing, lean)
     return Body(pelvis, **body_args)
 
@@ -121,7 +121,7 @@ def plank_on_toes(theta, toe_x=0.0, foot_half=0.09, **body_args):
 def plank_on_knees(theta, knee_x=0.0, shin_up=45.0, **body_args):
     """Face down, straight from the knees to the head (knees on the floor), shins lifted by shin_up."""
     frame = posture(vec(0, 0, 0), 0.0, 90.0 - theta)
-    knee = vec(knee_x, Body.W_SHIN / 2 + 0.005, 0.0)
+    knee = vec(knee_x, Body.R_SHIN + 0.005, 0.0)
     pelvis = knee + frame.u * Body.THIGH
     body = Body(Frame(pelvis, frame.f, frame.u), **body_args)
     shin = rotate(-X, Z, -shin_up)  # back and up

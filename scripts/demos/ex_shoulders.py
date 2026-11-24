@@ -40,7 +40,7 @@ def ohp(p, s):
     body = upright(0.95, -2.0, shoulder_x=0.0, head=head)
     stance(body, 0.0, half_width=0.15)
     grip_half = 0.26
-    rack = body.chest.at(u=0.36, f=Body.W_TORSO / 2 + 0.06)
+    rack = body.chest.at(u=0.36, f=Body.D_TRUNK + 0.06)
     rack[2] = 0.0
     top = overhead(body, grip_half, forward=-0.02)
     top[2] = 0.0
@@ -229,15 +229,15 @@ def cable_lateral(p, s):
     floor(s, -0.7, 0.7, -1.1, 0.8)
     body = upright(0.94, 4.0, shoulder_x=0.0, bend=lerp(0.0, -4.0, p), head=0)
     stance(body, 0.0, half_width=0.14)
-    pul = vec(0.02, 0.18, -0.68)
+    pul = vec(0.22, 0.18, -0.68)      # a little ahead: the cable crosses in front of the thighs
     sh = body.shoulder[1]
     angle = lerp(-12.0, 84.0, p)
     d = unit(-Y * math.cos(math.radians(angle)) + body.chest.r * math.sin(math.radians(angle)) + X * 0.16)
     grip = sh + d * 0.6
     body.arm(1, grip, unit(-X + body.chest.r * 0.2))
     left = body.shoulder[-1]
-    body.arm(-1, vec(0.05, 1.18, -0.69), unit(-Y - X * 0.3))
-    col = Column(s, 0.02, -0.82, height=2.15, depth=0.24, width=0.24)
+    body.arm(-1, vec(0.25, 1.18, -0.69), unit(-Y - X * 0.3))
+    col = Column(s, 0.22, -0.82, height=2.15, depth=0.24, width=0.24)
     g0 = sh + unit(-Y * math.cos(math.radians(-12)) + body.chest.r * math.sin(math.radians(-12)) + X * 0.16) * 0.6
     col.frame(lift=np.linalg.norm(grip - pul) - np.linalg.norm(g0 - pul))
     s.disc(pul, X, 0.045, "frame")
@@ -291,7 +291,7 @@ def reverse_pec_deck(p, s):
     body = seated_upright(seat_y, -0.04, lean=4.0, head=0)
     feet_flat(body, (body.pelvis.o[0] + 0.42, 0.22), (body.pelvis.o[0] + 0.42, -0.22))
     c = body.chest
-    pad_pt = c.at(u=0.2, f=Body.W_TORSO / 2 + 0.004)
+    pad_pt = c.at(u=0.2, f=Body.D_TRUNK + 0.004)
     s.slab(pad_pt - c.u * 0.3, pad_pt + c.u * 0.08, -c.f, 0.28, 0.08, "pad", solid="l'appui")
     pivots, col_x = pec_deck_frame(s, seat_y, pad_pt[0] + 0.08, body.shoulder, reverse=True)
     angle = lerp(-6.0, 92.0, p)
@@ -315,7 +315,7 @@ def upright_row(p, s):
     stance(body, 0.0, half_width=0.14)
     mid = shoulder_mid(body)
     low = vec(mid[0] + 0.1, mid[1] - 0.6, 0.0)
-    high = body.chest.at(u=0.27, f=Body.W_TORSO / 2 + 0.05)
+    high = body.chest.at(u=0.27, f=Body.D_TRUNK + 0.05)
     high[2] = 0.0
     bar = lerp(low, high, p)
     for side in (1, -1):

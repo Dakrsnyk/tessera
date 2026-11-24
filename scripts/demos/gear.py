@@ -35,8 +35,8 @@ def flat_bench(scene, x0, x1, height=0.43, z=0.0, name="le banc"):
     return height
 
 
-def adjustable_bench(scene, seat_back_x, angle, seat_len=0.34, back_len=0.82, height=0.45, z=0.0,
-                     seat_tilt=8.0, name="le banc"):
+def adjustable_bench(scene, seat_back_x, angle, seat_len=0.3, back_len=0.82, height=0.45, z=0.0,
+                     seat_tilt=4.0, name="le banc"):
     """Seat in front of seat_back_x (toward +x), backrest rising toward -x at angle degrees from the
     floor (0 = flat). Returns (junction point on the top surface, backrest direction, backrest normal)."""
     junction = vec(seat_back_x, height, z)

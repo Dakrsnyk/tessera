@@ -137,9 +137,9 @@ def body_samples(body):
     """Points along the body with their radius, to test against the equipment and the floor."""
     out = []
 
-    def seg(a, b, r, name):
+    def seg(a, b, r, name, r_end=None):
         for t in np.linspace(0, 1, 6):
-            out.append((lerp(a, b, t), r, name))
+            out.append((lerp(a, b, t), r if r_end is None else r + (r_end - r) * t, name))
 
     for side in (1, -1):
         tag = "droit" if side == 1 else "gauche"
@@ -147,12 +147,12 @@ def body_samples(body):
             seg(body.shoulder[side], body.elbow[side], body.W_UPPER / 2, f"bras {tag}")
             seg(body.elbow[side], body.grip[side], body.W_LOWER / 2, f"avant-bras {tag}")
         if side in body.knee:
-            seg(body.hip[side], body.knee[side], body.W_THIGH / 2, f"cuisse {tag}")
+            seg(body.hip[side], body.knee[side], body.R_THIGH, f"cuisse {tag}", 0.05)
             seg(body.knee[side], body.ankle[side], body.W_SHIN / 2, f"tibia {tag}")
             if side in body.toe:
                 seg(body.ankle[side], body.toe[side], 0.02, f"pied {tag}")
-    seg(body.pelvis.o, body.waist, body.W_TORSO / 2, "bassin")
-    seg(body.waist, body.neck, body.W_TORSO / 2, "buste")
+    seg(body.pelvis.o, body.waist, 0.08, "bassin", body.D_TRUNK)
+    seg(body.waist, body.neck, body.D_TRUNK, "buste")
     out.append((body.head, body.HEAD, "tête"))
     return out
 

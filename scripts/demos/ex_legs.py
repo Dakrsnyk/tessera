@@ -44,7 +44,7 @@ def leg_extension(p, s):
     pivot = vec(knee[0], knee[1], -0.27)
     shin_dir = unit(body.ankle[1] - body.knee[1])
     front = rotate(shin_dir, Z, 90)  # in front of the shin
-    roll_at = knee + shin_dir * 0.355 + front * (Body.W_SHIN / 2 + 0.05)
+    roll_at = knee + shin_dir * 0.355 + front * (Body.R_SHIN + 0.05)
     roller(s, vec(roll_at[0], roll_at[1], 0.0), half=0.2, r=0.05)
     lever_end = vec(roll_at[0], roll_at[1], -0.27)
     s.line([pivot, lever_end], TUBE * 1.2, "frame", side=SIDE_LEFT)
@@ -59,10 +59,10 @@ def leg_extension(p, s):
     for side in (1, -1):
         z = 0.29 * side
         sd = SIDE_RIGHT if side == 1 else SIDE_LEFT
-        s.line([vec(-0.02, seat_y - 0.05, z), vec(0.16, seat_y - 0.05, z)], 0.035, "load", side=sd)
-        s.line([vec(-0.02, seat_y - 0.05, z), vec(-0.02, seat_y - PAD_T, z * 0.6)], TUBE, "frame", side=sd)
+        s.line([vec(-0.02, seat_y - 0.015, z), vec(0.16, seat_y - 0.015, z)], 0.035, "load", side=sd)
+        s.line([vec(-0.02, seat_y - 0.015, z), vec(-0.02, seat_y - PAD_T, z * 0.6)], TUBE, "frame", side=sd)
     for side in (1, -1):
-        body.arm(side, vec(0.07, seat_y - 0.05, 0.29 * side), unit(-X * 0.6 + Y * 0.0 + Z * side * 0.3))
+        body.arm(side, vec(0.06, seat_y - 0.015, 0.29 * side), unit(-X * 0.6 + Y * 0.0 + Z * side * 0.3))
     stack(s, -0.6, 0.0, lift=lever_lift * 0.13, height=1.45)
     s.allow = {("cuisse droit", "le siège"), ("cuisse gauche", "le siège")}
     show(s, body)
@@ -190,7 +190,7 @@ def wall_sit(p, s):
     floor(s, wall, 0.9)
     s.box(vec(wall - 0.04, 1.0, 0.0), X * 0.04, Y * 1.0, Z * 0.7, "floor", stroke=0.0, bias=10.0)
     hip_y = lerp(0.85, Body.ANKLE + Body.SHIN + 0.0, p)
-    body = upright(hip_y, 0.0, pelvis_x=wall + Body.W_TORSO / 2 + 0.01, head=0)
+    body = upright(hip_y, 0.0, pelvis_x=wall + Body.D_TRUNK + 0.01, head=0)
     feet_flat(body, (wall + 0.06 + Body.THIGH, 0.14), (wall + 0.06 + Body.THIGH, -0.14))
     for side in (1, -1):
         body.arm(side, body.shoulder[side] - Y * 0.6 + Z * side * 0.05, unit(-X))
@@ -231,7 +231,7 @@ def hack_squat(p, s):
         s.line([a, b], TUBE * 1.3, "frame", side=sd)
         s.line([b, vec(b[0], 0.03, z)], TUBE * 1.3, "frame", side=sd)
         s.line([vec(b[0] - 0.2, 0.025, z), vec(0.9, 0.025, z)], TUBE, "frame", side=sd)
-    back_point = pelvis - normal * (Body.W_TORSO / 2 + 0.004)
+    back_point = pelvis - normal * (Body.D_TRUNK + 0.004)
     s.slab(back_point - up * 0.12, back_point + up * 0.62, normal, 0.4, 0.07, "pad", solid="le dossier")
     for side in (1, -1):
         sd = SIDE_RIGHT if side == 1 else SIDE_LEFT
@@ -264,7 +264,7 @@ def leg_press(p, s):
         body.leg(side, ankle, pole=plate_up)
         body.foot_toward(side, ankle + plate_up * 0.165 + sled * 0.06)
     # Seat and backrest.
-    seat_pt = hip - normal * (Body.W_TORSO / 2 + 0.004)
+    seat_pt = hip - normal * (Body.D_TRUNK + 0.004)
     s.slab(seat_pt - up * 0.08, seat_pt + up * 0.75, normal, 0.34, 0.08, "pad", solid="le dossier")
     seat_dir = rotate(sled, Z, -20)
     s.slab(seat_pt + seat_dir * 0.02 - Y * 0.0, seat_pt + seat_dir * 0.3, rotate(seat_dir, Z, 90), 0.42, 0.08, "pad")
@@ -312,6 +312,12 @@ def hinge_body(p, hip_top, hip_bottom, lean_top, lean_bottom, grip_point, bar_x=
     return body
 
 
+def thigh_clear(ahead, bar_y, ground=0.0):
+    """Above the knees the bar slides up the front of the (sculpted) thighs, not through them: the hands hang a little
+    further ahead of the shoulders as it rises."""
+    return ahead + 0.075 * min(max((bar_y - ground - 0.5) / 0.25, 0.0), 1.0)
+
+
 def hanging_grip(b, ahead=0.0):
     """Where the hands are with the arms hanging straight down (a little ahead of the shoulders)."""
     m = shoulder_mid(b)
@@ -324,6 +330,7 @@ def lift_from_floor(p, lean_floor, bar_top, half, toe_out, grip_half, ahead=0.02
     k = smooth(p)
     bar_y = lerp(0.235, bar_top, k)
     lean = lean_floor * (1 - smooth(min(1.0, p * 1.05)) ** 1.6)
+    ahead = thigh_clear(ahead, bar_y)
 
     def make(hip_y, px):
         return upright(hip_y, lean, pelvis_x=px, head=-lean * 0.5)
@@ -356,16 +363,16 @@ def deadlift(p, s):
       timing=(0.7, 1.5, 0.6, 1.6))
 def sumo_deadlift(p, s):
     floor(s, -0.9, 0.9, -0.9, 0.9)
-    body, bar = lift_from_floor(p, 38.0, 0.79, 0.4, 38.0, 0.17)
+    body, bar = lift_from_floor(p, 38.0, 0.79, 0.4, 38.0, 0.17, ahead=0.0)
     barbell(s, bar, Z)
     show(s, body)
 
 
 def rdl_like(p, s, load, lean_bottom=72.0, hip_drop=0.06):
-    body = hinge_body(p, 0.925, 0.925 - hip_drop, 2.0, lean_bottom, lambda b: hanging_grip(b, 0.03), bar_x=0.0)
+    ahead = lerp(0.1, 0.03, min(1.0, p * 1.6))      # against the front of the thighs at the top
+    body = hinge_body(p, 0.925, 0.925 - hip_drop, 2.0, lean_bottom, lambda b: hanging_grip(b, ahead), bar_x=0.0)
     for side in (1, -1):
-        sh = body.shoulder[side]
-        target = hanging_grip(body, 0.03) + Z * side * 0.22
+        target = hanging_grip(body, ahead) + Z * side * 0.22
         body.arm(side, target, unit(-X + Z * side * 0.1))
     return body
 
@@ -608,7 +615,7 @@ def lying_leg_curl(p, s):
     knee = body.knee[1]
     shin_dir = unit(body.ankle[1] - knee)
     back_of_leg = rotate(shin_dir, Z, -90)      # the back of the ankles (prone: facing up)
-    roll_at = knee + shin_dir * 0.37 + back_of_leg * (Body.W_SHIN / 2 + 0.05)
+    roll_at = knee + shin_dir * 0.37 + back_of_leg * (Body.R_SHIN + 0.05)
     roller(s, vec(roll_at[0], roll_at[1], 0.0), half=0.2)
     pivot = vec(knee[0], knee[1], -0.27)
     s.line([pivot, vec(roll_at[0], roll_at[1], -0.27), vec(roll_at[0], roll_at[1], -0.2)], TUBE * 1.2, "frame", side=SIDE_LEFT)
@@ -639,10 +646,10 @@ def seated_leg_curl(p, s):
     knee = body.knee[1]
     shin_dir = unit(body.ankle[1] - knee)
     calf_side = rotate(shin_dir, Z, -90)
-    roll_at = knee + shin_dir * 0.36 + calf_side * (Body.W_SHIN / 2 + 0.05)
+    roll_at = knee + shin_dir * 0.36 + calf_side * (Body.R_SHIN + 0.05)
     roller(s, vec(roll_at[0], roll_at[1], 0.0), half=0.2)
     # The thigh pad, on top of the thighs just above the knees.
-    thigh_pad = knee - X * 0.1 + Y * (Body.W_THIGH / 2 + 0.05)
+    thigh_pad = knee - X * 0.1 + Y * (Body.R_THIGH + 0.05)
     roller(s, vec(thigh_pad[0], thigh_pad[1], 0.0), half=0.2, r=0.05)
     pivot = vec(knee[0], knee[1], -0.28)
     s.line([pivot, vec(roll_at[0], roll_at[1], -0.28), vec(roll_at[0], roll_at[1], -0.2)], TUBE * 1.2, "frame", side=SIDE_LEFT)
@@ -667,7 +674,7 @@ def nordic_curl(p, s):
     floor(s, -0.9, 1.3)
     pad_top = 0.05
     s.slab(vec(-0.6, pad_top, 0), vec(0.15, pad_top, 0), Y, 0.5, 0.05, "pad", solid="le tapis")
-    knee = vec(0.0, pad_top + Body.W_SHIN / 2 + 0.004, 0.0)
+    knee = vec(0.0, pad_top + Body.R_SHIN + 0.004, 0.0)
     angle = lerp(88.0, 22.0, p)       # the body line from the floor
     u = vec(math.cos(math.radians(angle)), math.sin(math.radians(angle)), 0.0)
     f = vec(u[1], -u[0], 0.0)
@@ -678,7 +685,7 @@ def nordic_curl(p, s):
         # Shins on the pad, the top of the foot resting on it, toes pointing back.
         body.foot_toward(side, body.ankle[side] + vec(-0.172, -0.02, 0.0))
     ankle = body.ankle[1]
-    roller(s, vec(ankle[0] + 0.02, ankle[1] + Body.W_SHIN / 2 + 0.05, 0.0), half=0.22)
+    roller(s, vec(ankle[0] + 0.02, ankle[1] + Body.R_SHIN + 0.05, 0.0), half=0.22)
     s.line([vec(ankle[0] + 0.02, ankle[1] + 0.1, 0.24), vec(ankle[0] - 0.2, 0.03, 0.24)], TUBE, "frame", side=SIDE_RIGHT)
     s.line([vec(ankle[0] + 0.02, ankle[1] + 0.1, -0.24), vec(ankle[0] - 0.2, 0.03, -0.24)], TUBE, "frame", side=SIDE_LEFT)
     # Hands: crossed on the chest, then out to catch near the floor.
@@ -724,9 +731,9 @@ def hip_thrust(p, s):
     from ex_chest import bench_across
     top = 0.43
     bench_across(s, -0.62, top, half=0.6)
-    contact = vec(-0.5, top + Body.W_TORSO / 2, 0.0)
+    contact = vec(-0.5, top + Body.D_TRUNK, 0.0)
     body = bridge_body(p, contact, 0.32, 0.0, -38.0, head=lerp(25.0, 12.0, p))
-    bar = body.pelvis.at(f=Body.W_TORSO / 2 + 0.035, u=-0.04)
+    bar = body.pelvis.at(f=Body.D_TRUNK + 0.035, u=0.02)      # on the hip bones, above the thighs
     bar[2] = 0.0
     for side in (1, -1):
         body.arm(side, bar + Z * side * 0.42, unit(Y * 0.2 - X * 0.5 + Z * side * 0.4))
@@ -740,7 +747,7 @@ def hip_thrust(p, s):
       timing=(0.6, 1.0, 0.8, 1.3))
 def glute_bridge(p, s):
     floor(s, -1.0, 0.9)
-    contact = vec(-0.6, Body.W_TORSO / 2 + 0.02, 0.0)
+    contact = vec(-0.6, Body.D_TRUNK + 0.02, 0.0)
     body = bridge_body(p, contact, 0.3, 30.0, 0.0, head=lerp(32.0, 52.0, p), reach=0.53)
     for side in (1, -1):
         # Arms long on the floor beside the body, palms down.
@@ -753,7 +760,7 @@ def glute_bridge(p, s):
       timing=(0.6, 1.0, 0.8, 1.3))
 def single_leg_bridge(p, s):
     floor(s, -1.0, 1.2)
-    contact = vec(-0.6, Body.W_TORSO / 2 + 0.02, 0.0)
+    contact = vec(-0.6, Body.D_TRUNK + 0.02, 0.0)
     body = bridge_body(p, contact, 0.3, 28.0, 0.0, single=True, head=lerp(32.0, 52.0, p), reach=0.53)
     for side in (1, -1):
         # Arms long on the floor beside the body, palms down.
@@ -763,7 +770,7 @@ def single_leg_bridge(p, s):
 
 def all_fours(hip_y=0.6, hands_x=0.62, knees_x=0.0, head=-10):
     """On hands and knees: hands under the shoulders, knees under the hips, back flat."""
-    knee_pt = vec(knees_x, Body.W_SHIN / 2 + 0.004, 0.0)
+    knee_pt = vec(knees_x, Body.R_SHIN + 0.004, 0.0)
     pelvis = knee_pt + Y * Body.THIGH + vec(0.0, 0.0, 0.0)
     body = Body(Frame(pelvis, -Y, X), head=head)
     return body
@@ -772,7 +779,7 @@ def all_fours(hip_y=0.6, hands_x=0.62, knees_x=0.0, head=-10):
 def quadruped(head=-12, twist=0.0, spine=0.0, pelvis_tilt=0.0, shoulder_y=0.66):
     """On all fours: knees under the hips, the back rising slightly toward the shoulders so the arms
     are straight with the hands under the shoulders."""
-    pelvis_pt = vec(0.0, Body.W_SHIN / 2 + 0.01 + Body.THIGH, 0.0)
+    pelvis_pt = vec(0.0, Body.R_SHIN + 0.01 + Body.THIGH, 0.0)
 
     def mid_y(tilt):
         b = Body(Frame(pelvis_pt, -Y, X).pitched(tilt + pelvis_tilt), head=head, spine=spine)
@@ -787,7 +794,7 @@ def quadruped(head=-12, twist=0.0, spine=0.0, pelvis_tilt=0.0, shoulder_y=0.66):
 def plant_quadruped(body, skip=()):
     for side in (1, -1):
         if ("leg", side) not in skip:
-            knee = vec(body.hip[side][0], Body.W_SHIN / 2 + 0.004, body.hip[side][2])
+            knee = vec(body.hip[side][0], Body.R_SHIN + 0.004, body.hip[side][2])
             body.leg_dirs(side, unit(knee - body.hip[side]), -X)
             body.foot_relaxed(side, plantar=60)
         if ("arm", side) not in skip:
@@ -899,7 +906,7 @@ def abductor_machine(s, p, opening, pads_outside):
         knee = body.knee[side]
         sd = SIDE_RIGHT if side == 1 else SIDE_LEFT
         lateral = unit(np.cross(Y, thigh)) * -side      # outward from the thigh
-        off = (Body.W_THIGH / 2 + 0.04) * (1 if pads_outside else -1)
+        off = (Body.R_THIGH + 0.04) * (1 if pads_outside else -1)
         pad_c = knee - thigh * 0.08 + lateral * off
         s.line([pad_c - thigh * 0.12, pad_c + thigh * 0.06], 0.08, "pad", side=sd)
         pivot = vec(body.hip[side][0], seat_y - 0.12, side * 0.08)
@@ -968,10 +975,10 @@ def standing_calf(p, s):
     for side in (1, -1):
         sh = body.shoulder[side]
         sd = SIDE_RIGHT if side == 1 else SIDE_LEFT
-        s.line([sh + Y * 0.07 - X * 0.07, sh + Y * 0.07 + X * 0.1], 0.09, "pad", side=sd)
+        s.line([sh + Y * 0.07 - X * 0.1, sh + Y * 0.07 + X * 0.1], 0.09, "pad", side=sd)
         body.arm(side, sh + Y * 0.1 + X * 0.14 + Z * side * 0.1, unit(-Y + Z * side))
     mid = shoulder_mid(body)
-    lever_end = mid + Y * 0.12 + X * 0.02
+    lever_end = mid + Y * 0.12 - X * 0.1      # the crossbar passes behind the neck
     pivot = vec(0.75, lever_end[1] + 0.02 - 0.0, 0.0)
     s.line([vec(lever_end[0], lever_end[1], -0.28), vec(lever_end[0], lever_end[1], 0.28)], TUBE, "frame")
     s.line([vec(lever_end[0], lever_end[1], 0.0), vec(-0.45, lever_end[1], 0.0)], TUBE * 1.2, "frame")
@@ -997,12 +1004,15 @@ def seated_calf(p, s):
         ankle = body.stand_foot(side, toe, 0.0, raise_deg)
         body.leg(side, ankle, pole=unit(X + Y))
     knee = body.knee[1]
-    pad = knee - X * 0.08 + Y * (Body.W_THIGH / 2 + 0.05)
+    pad = knee - X * 0.08 + Y * (Body.R_THIGH + 0.05)
     roller(s, vec(pad[0], pad[1], 0.0), half=0.2)
-    s.line([vec(pad[0], pad[1], 0.0), vec(pad[0] - 0.45, pad[1] - 0.05, 0.0), vec(-0.5, 0.2, 0.0)], TUBE * 1.2, "frame")
+    # The lever runs beside the body (left), from the end of the pad to its pivot behind the seat.
+    s.line([vec(pad[0], pad[1], -0.2), vec(pad[0], pad[1], -0.3), vec(pad[0] - 0.45, pad[1] - 0.05, -0.3), vec(-0.5, 0.2, -0.3)],
+           TUBE * 1.2, "frame", side=SIDE_LEFT)
     for side in (1, -1):
         body.arm(side, vec(pad[0] - 0.05, pad[1] + 0.03, side * 0.24), unit(-X - Y * 0.3 + Z * side * 0.4))
-    s.disc(vec(-0.45, 0.4, 0.0), Z, 0.06, "frame")
+    s.disc(vec(-0.5, 0.2, -0.3), Z, 0.06, "frame", side=SIDE_LEFT)
+    s.line([vec(-0.5, 0.03, -0.3), vec(-0.5, 0.2, -0.3)], TUBE, "frame", side=SIDE_LEFT)
     s.line([vec(-0.5, 0.03, 0), vec(0.75, 0.03, 0)], TUBE, "frame")
     s.allow = {"la marche"}
     show(s, body)

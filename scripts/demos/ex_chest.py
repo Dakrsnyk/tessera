@@ -37,7 +37,7 @@ def lockout(body, grip_half, reach=0.632):
 
 
 def on_chest(body, u, extra=0.02):
-    point = body.chest.at(u=u, f=Body.W_TORSO / 2 + extra)
+    point = body.chest.at(u=u, f=Body.D_TRUNK + extra)
     point[2] = 0.0
     return point
 
@@ -197,7 +197,7 @@ def decline_bench_press(p, s):
     ankle = body.ankle[1]
     shin_dir = unit(body.ankle[1] - body.knee[1])
     front = rotate(shin_dir, Z, 90)
-    roll = ankle - shin_dir * 0.06 + front * (Body.W_SHIN / 2 + 0.05)
+    roll = ankle - shin_dir * 0.06 + front * (Body.R_SHIN + 0.05)
     roller(s, vec(roll[0], roll[1], 0.0), half=0.2)
     s.line([vec(roll[0], roll[1], 0.0), vec(roll[0], 0.03, 0.0)], TUBE, "frame")
     grip = 0.40
