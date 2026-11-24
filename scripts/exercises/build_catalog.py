@@ -10,6 +10,9 @@ A translation file (one per chunk, written by hand or by an agent) maps each sou
     {"dup": "<id of a built-in exercise>"}                            the same exercise as a built-in one (its names become aliases), or
     {"fr": …, "en": …, "es": …, "de": …, "it": …, "pt-BR": …, "ja": …, "aliases": [...], "pattern": "<MovementPattern>"}
 The muscles, the equipment, the type and the level come from the dataset (mapped below), never from the translation.
+The build also gives the 163 built-in exercises their names in the 7 languages as aliases (a set saved in French is
+recognised on an iPhone in English), drops every ambiguous alias (one alias, one exercise; the built-in ones first),
+gives each new exercise the closest built-in demonstration (`demo`), and checks that no name repeats in any language.
 """
 import json
 import os
