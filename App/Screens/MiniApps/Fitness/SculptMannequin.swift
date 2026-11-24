@@ -426,16 +426,16 @@ enum Sculpt {
         }
 
         /// A ball joint, lying on the limbs it joins.
-        var joints = 0
+        var jointCount = 0
         func ball(_ center: Vec3, _ r: Double, on spans: [Span], far shade: Double) {
             let (pt, z) = camera.project(center)
             let rr = r * camera.scale
             let rect = CGRect(x: pt.x - rr, y: pt.y - rr, width: 2 * rr, height: 2 * rr)
             let path = Path(ellipseIn: rect)
             union.addPath(path)
-            out.append(Piece(depth: z, path: path, kind: .skin(axis: nil, far: shade), part: Part.joint + joints,
+            out.append(Piece(depth: z, path: path, kind: .skin(axis: nil, far: shade), part: Part.joint + jointCount,
                              spans: spans, box: rect, radius: r))
-            joints += 1
+            jointCount += 1
         }
 
         // Trunk.

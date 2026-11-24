@@ -624,7 +624,7 @@ enum DemoRenderer {
     }
 
     /// Elements of one thing that nothing separates: drawn in one go, as the whole thing was before.
-    private struct Unit {
+    private struct Run {
         let key: Int
         var box: CGRect
         var members: [Int]
@@ -664,7 +664,7 @@ enum DemoRenderer {
             let backdrop = prim.role == 7 || prim.role == 8
             // A bar or a ball is seen by its surface, in front of its axis.
             var near = 0.0
-            if !backdrop {
+            if !backdrop && whole.intersects(bodyBox) {
                 if prim.kind == .line { near = Sculpt.lift * prim.width / 2 }
                 if prim.kind == .ball { near = Sculpt.lift * prim.width }
             }
@@ -724,11 +724,11 @@ enum DemoRenderer {
         elements.sort { $0.depth != $1.depth ? $0.depth > $1.depth : $0.order < $1.order }
 
         // 2. Back together: an element joins the earlier elements of its thing when nothing painted since covers it.
-        var units: [Unit] = []
-        var open: [Int: Int] = [:]
+        var units: [Run] = []
+        var openRun: [Int: Int] = [:]
         var unitOf = [Int](repeating: 0, count: elements.count)
         for (index, element) in elements.enumerated() {
-            if let last = open[element.key] {
+            if let last = openRun[element.key] {
                 var free = true
                 var k = last + 1
                 while k < units.count {
@@ -742,23 +742,25 @@ enum DemoRenderer {
                     continue
                 }
             }
-            open[element.key] = units.count
+            openRun[element.key] = units.count
             unitOf[index] = units.count
-            units.append(Unit(key: element.key, box: element.box, members: [index]))
+            units.append(Run(key: element.key, box: element.box, members: [index]))
         }
 
         // 3. Each muscle follows the slices it lies on. Where something passes between those slices (a bar across the
         // chest, the other arm), it is drawn after each run of them, inside that run only.
         var muscles: [Int: [(piece: Int, clip: Path?)]] = [:]
+        var skins: [(Int, Int)] = []
+        for (e, element) in elements.enumerated() where element.isSkin { skins.append((e, element.source)) }
         var loose: [Int] = []
         for (index, muscle) in pieces.enumerated() {
             guard case .muscle = muscle.kind else { continue }
             var hosts: [Int: [Int]] = [:]
-            for (e, element) in elements.enumerated() where element.isSkin {
-                let lies = pieces[element.source].spans.contains { at in
+            for (e, source) in skins {
+                let lies = pieces[source].spans.contains { at in
                     muscle.spans.contains { $0.part == at.part && at.lo >= $0.lo && at.hi <= $0.hi }
                 }
-                if lies { hosts[unitOf[e], default: []].append(element.source) }
+                if lies { hosts[unitOf[e], default: []].append(source) }
             }
             guard let first = hosts.keys.min(), let last = hosts.keys.max() else {
                 loose.append(index)
