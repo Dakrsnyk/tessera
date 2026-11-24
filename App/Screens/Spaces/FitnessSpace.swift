@@ -220,8 +220,10 @@ struct RoutineEditor: View {
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
-                    // Suggestions from the library while the name is typed (Premium, like the library).
-                    if model.isPremium, exercise.info == nil, exercise.name.trimmed.count >= 2 {
+                    // Suggestions from the library while the name is typed by hand, for everyone (CEO, 2026-11-24): the
+                    // exercise can be picked without Premium; only its sheet is Premium (the badge above).
+                    if exercise.exerciseID == nil, exercise.name.trimmed.count >= 2,
+                       !ExerciseLibrary.search(exercise.name).prefix(3).contains(where: { $0.name == exercise.name.trimmed }) {
                         ForEach(ExerciseLibrary.search(exercise.name).prefix(3)) { suggestion in
                             Button {
                                 exercise.name = suggestion.name

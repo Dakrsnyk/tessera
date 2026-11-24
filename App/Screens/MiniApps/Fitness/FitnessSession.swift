@@ -592,6 +592,17 @@ struct SessionExerciseForm: View {
                         .foregroundStyle(.secondary)
                         .accessibilityIdentifier("session-exercise-recognized")
                 }
+                // The exercises of the library that match what is typed, to pick one (free: the exercise is linked,
+                // with its statistics; its sheet stays Premium). Hidden once the name is one of them.
+                ForEach(suggestions) { suggestion in
+                    Button {
+                        name = suggestion.name
+                    } label: {
+                        Label(suggestion.name, systemImage: "sparkle.magnifyingglass")
+                            .font(.subheadline)
+                    }
+                    .accessibilityIdentifier("session-exercise-suggestion")
+                }
             }
             if !mine.isEmpty {
                 Section(tr("Mes exercices")) {
@@ -623,6 +634,13 @@ struct SessionExerciseForm: View {
     private var recognized: ExerciseInfo? {
         guard name.trimmed.count >= 2, !model.fitness.customExercises.contains(where: { $0.name == name.trimmed }) else { return nil }
         return ExerciseLibrary.match(name: name)
+    }
+
+    private var suggestions: [ExerciseInfo] {
+        let typed = name.trimmed
+        guard typed.count >= 2, !model.fitness.customExercises.contains(where: { $0.name == typed }) else { return [] }
+        let found = Array(ExerciseLibrary.search(typed).prefix(3))
+        return found.contains { $0.name == typed } ? [] : found
     }
 
     private func choose(_ custom: CustomExercise) {
