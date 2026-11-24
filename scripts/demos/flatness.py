@@ -6,6 +6,7 @@ The sculpted mannequin (sculpt.py, SculptMannequin.swift) sweeps each limb aroun
 and away; the feet and the hands are ellipsoids on three axes. When two of those directions line up (a forearm bent at
 a right angle, a foot pointing down), the volume is drawn as a flat sheet. Prints, per demonstration, the parts whose
 thinnest direction falls under 60 % of what it should be, with the worst phase.
+The app tests the same on the exported skeletons (SculptMannequinTests.testNoLimbIsAFlatSheet).
 """
 import glob
 import importlib
