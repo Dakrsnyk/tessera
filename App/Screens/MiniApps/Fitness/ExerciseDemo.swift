@@ -491,6 +491,8 @@ enum DemoRenderer {
         let prim: DemoPrim
         let color: SIMD3<Double>
         let screen: [CGPoint]
+        /// Its points seen by the camera, in metres: x, y on screen and the depth.
+        let proj: [Vec3]
     }
 
     static func basis(yaw: Double, pitch: Double) -> (Vec3, Vec3, Vec3) {
@@ -569,7 +571,7 @@ enum DemoRenderer {
             if prim.side == 1 { fade = max(0, -sideFactor) * 0.55 }
             if prim.side == 2 { fade = max(0, sideFactor) * 0.55 }
             if fade > 0 { color = color + (palette.backgroundRGB - color) * fade }
-            items.append(Item(depth: depth, order: order, prim: prim, color: color, screen: proj.map(screen)))
+            items.append(Item(depth: depth, order: order, prim: prim, color: color, screen: proj.map(screen), proj: proj))
         }
         // Floor marks scrolling under a figure that travels (walking, running, rowing on water...).
         if demo.marks.count >= 8 {
@@ -588,7 +590,7 @@ enum DemoRenderer {
                     let pa = Vec3((a * R).sum(), (a * U).sum(), -(a * B).sum())
                     let pb = Vec3((b * R).sum(), (b * U).sum(), -(b * B).sum())
                     items.append(Item(depth: (pa.z + pb.z) / 2 + bias, order: -1, prim: markRole,
-                                      color: palette.role(8), screen: [screen(pa), screen(pb)]))
+                                      color: palette.role(8), screen: [screen(pa), screen(pb)], proj: [pa, pb]))
                 }
                 x += spacing
             }
@@ -599,34 +601,265 @@ enum DemoRenderer {
             for item in items { drawItem(item, points: points, R: R, U: U, B: B, scale: scale, in: &context, plastic: false) }
             return
         }
-        // Body pieces and equipment, back to front.
-        let sculptPalette = Sculpt.Palette(dark: dark)
+        drawSculpted(items, pieces: sculpt.pieces, body: sculpt.body, points: points, R: R, U: U, B: B, scale: scale,
+                     screen: screen, in: &context, size: size, dark: dark)
+    }
+
+    // MARK: Depth order of the sculpted mannequin and its equipment (2026-11-24)
+
+    /// One thing painted at its own depth: a slice of the body, or a cell of a pad or of a bar.
+    private struct Element {
+        let depth: Double
+        let order: Int
+        /// What it is a piece of: a body part (`Sculpt.Part`), or 1000 + the index of its item.
+        let key: Int
+        let box: CGRect
+        /// The index of its piece (body) or of its item (equipment).
+        let source: Int
+        /// Equipment cut in cells: the corners of this one (a quad of a polygon, the two ends of a stretch of line).
+        var cell: [CGPoint] = []
+        /// A quad: which of its sides lie on the outline of the polygon (bits 0 to 3).
+        var edges = 0
+        var isSkin: Bool { key < 1000 }
+    }
+
+    /// Elements of one thing that nothing separates: drawn in one go, as the whole thing was before.
+    private struct Unit {
+        let key: Int
+        var box: CGRect
+        var members: [Int]
+    }
+
+    /// The body and the equipment from the farthest to the nearest. The app has no depth buffer, and a whole pad or a
+    /// whole trunk sorted by its middle lands on the wrong side of what it touches (a backrest painted over the
+    /// shoulders lying on it looked like the body going through the bench). So the body comes in slices
+    /// (`Sculpt.pieces`), pads and bars near the body are cut in cells, each sorted at its own depth; then what nothing
+    /// separates is put back together, so a bench or an arm that nothing crosses is drawn exactly as before.
+    /// Measured on every demonstration by scripts/demos/occlusion.py.
+    private static func drawSculpted(_ items: [Item], pieces: [Sculpt.Piece], body: Path, points: [Vec3], R: Vec3, U: Vec3,
+                                     B: Vec3, scale: Double, screen: (Vec3) -> CGPoint, in context: inout GraphicsContext,
+                                     size: CGSize, dark: Bool) {
         let fine = size.width > 140
-        let pieces = sculpt.pieces.sorted { $0.depth > $1.depth }
-        var k = 0
-        for item in items {
-            while k < pieces.count && pieces[k].depth >= item.depth {
-                Sculpt.draw(pieces[k], body: sculpt.body, in: &context, size: size, palette: sculptPalette, fine: fine)
-                k += 1
+        let palette = Sculpt.Palette(dark: dark)
+        let bodyBox = body.boundingRect.insetBy(dx: -2, dy: -2)
+        let cellSize = fine ? 0.1 : 0.2
+
+        // 1. Everything in elements.
+        var elements: [Element] = []
+        elements.reserveCapacity(pieces.count + items.count * 4)
+        for (index, piece) in pieces.enumerated() {
+            guard case .skin = piece.kind else { continue }
+            elements.append(Element(depth: piece.depth - Sculpt.lift * piece.radius, order: index - 1_000_000, key: piece.part,
+                                    box: piece.box, source: index))
+        }
+        var cellCount = [Int](repeating: 1, count: items.count)
+        for (index, item) in items.enumerated() {
+            let prim = item.prim
+            let key = 1000 + index
+            let order = index * 1024
+            let reach = CGFloat(prim.kind == .disc ? (prim.width + 0.11) * scale : strokeWidth(prim) * scale / 2 + 1)
+            var whole = Sculpt.bounds(item.screen).insetBy(dx: -reach, dy: -reach)
+            if prim.kind == .ball { whole = whole.insetBy(dx: -CGFloat(prim.width * scale), dy: -CGFloat(prim.width * scale)) }
+            // The floor, the walls and their marks lie behind everything.
+            let backdrop = prim.role == 7 || prim.role == 8
+            // A bar or a ball is seen by its surface, in front of its axis.
+            var near = 0.0
+            if !backdrop {
+                if prim.kind == .line { near = Sculpt.lift * prim.width / 2 }
+                if prim.kind == .ball { near = Sculpt.lift * prim.width }
             }
-            drawItem(item, points: points, R: R, U: U, B: B, scale: scale, in: &context, plastic: true)
+            let before = elements.count
+            if !backdrop && whole.intersects(bodyBox) {
+                if prim.kind == .poly, item.proj.count == 4 {
+                    let a = item.proj[0], b = item.proj[1], c = item.proj[2], d = item.proj[3]
+                    let nu = cellSteps(max(distance(a, b), distance(d, c)), cellSize, limit: 16)
+                    let nv = cellSteps(max(distance(a, d), distance(b, c)), cellSize, limit: 16)
+                    if nu * nv > 1 {
+                        var grid: [Vec3] = []
+                        grid.reserveCapacity((nu + 1) * (nv + 1))
+                        for iu in 0...nu {
+                            let u = Double(iu) / Double(nu)
+                            let low = a + (b - a) * u, high = d + (c - d) * u
+                            for iv in 0...nv { grid.append(low + (high - low) * (Double(iv) / Double(nv))) }
+                        }
+                        for iu in 0..<nu {
+                            for iv in 0..<nv {
+                                let corners = [grid[iu * (nv + 1) + iv], grid[(iu + 1) * (nv + 1) + iv],
+                                               grid[(iu + 1) * (nv + 1) + iv + 1], grid[iu * (nv + 1) + iv + 1]]
+                                let cell = corners.map(screen)
+                                var edges = 0
+                                if iv == 0 { edges |= 1 }
+                                if iu == nu - 1 { edges |= 2 }
+                                if iv == nv - 1 { edges |= 4 }
+                                if iu == 0 { edges |= 8 }
+                                let depth = (corners[0].z + corners[1].z + corners[2].z + corners[3].z) / 4 + prim.bias
+                                elements.append(Element(depth: depth, order: order + elements.count - before, key: key,
+                                                        box: Sculpt.bounds(cell).insetBy(dx: -reach, dy: -reach), source: index,
+                                                        cell: cell, edges: edges))
+                            }
+                        }
+                    }
+                } else if prim.kind == .line, item.proj.count >= 2 {
+                    for k in 0..<(item.proj.count - 1) {
+                        let a = item.proj[k], b = item.proj[k + 1]
+                        let n = cellSteps(distance(a, b), cellSize, limit: 24)
+                        guard n > 1 || item.proj.count > 2 else { continue }
+                        for step in 0..<n {
+                            let p0 = a + (b - a) * (Double(step) / Double(n)), p1 = a + (b - a) * (Double(step + 1) / Double(n))
+                            let cell = [screen(p0), screen(p1)]
+                            elements.append(Element(depth: (p0.z + p1.z) / 2 + prim.bias - near, order: order + elements.count - before,
+                                                    key: key, box: Sculpt.bounds(cell).insetBy(dx: -reach, dy: -reach),
+                                                    source: index, cell: cell))
+                        }
+                    }
+                }
+            }
+            if elements.count == before {
+                elements.append(Element(depth: item.depth + (backdrop ? 1000 : 0) - near, order: order, key: key, box: whole,
+                                        source: index))
+            } else {
+                cellCount[index] = elements.count - before
+            }
         }
-        while k < pieces.count {
-            Sculpt.draw(pieces[k], body: sculpt.body, in: &context, size: size, palette: sculptPalette, fine: fine)
-            k += 1
+        elements.sort { $0.depth != $1.depth ? $0.depth > $1.depth : $0.order < $1.order }
+
+        // 2. Back together: an element joins the earlier elements of its thing when nothing painted since covers it.
+        var units: [Unit] = []
+        var open: [Int: Int] = [:]
+        var unitOf = [Int](repeating: 0, count: elements.count)
+        for (index, element) in elements.enumerated() {
+            if let last = open[element.key] {
+                var free = true
+                var k = last + 1
+                while k < units.count {
+                    if units[k].box.intersects(element.box) { free = false; break }
+                    k += 1
+                }
+                if free {
+                    units[last].members.append(index)
+                    units[last].box = units[last].box.union(element.box)
+                    unitOf[index] = last
+                    continue
+                }
+            }
+            open[element.key] = units.count
+            unitOf[index] = units.count
+            units.append(Unit(key: element.key, box: element.box, members: [index]))
         }
+
+        // 3. Each muscle follows the slices it lies on. Where something passes between those slices (a bar across the
+        // chest, the other arm), it is drawn after each run of them, inside that run only.
+        var muscles: [Int: [(piece: Int, clip: Path?)]] = [:]
+        var loose: [Int] = []
+        for (index, muscle) in pieces.enumerated() {
+            guard case .muscle = muscle.kind else { continue }
+            var hosts: [Int: [Int]] = [:]
+            for (e, element) in elements.enumerated() where element.isSkin {
+                let lies = pieces[element.source].spans.contains { at in
+                    muscle.spans.contains { $0.part == at.part && at.lo >= $0.lo && at.hi <= $0.hi }
+                }
+                if lies { hosts[unitOf[e], default: []].append(element.source) }
+            }
+            guard let first = hosts.keys.min(), let last = hosts.keys.max() else {
+                loose.append(index)
+                continue
+            }
+            var together = true
+            if last > first + 1 {
+                for k in (first + 1)..<last where hosts[k] == nil && units[k].box.intersects(muscle.box) {
+                    together = false
+                    break
+                }
+            }
+            if together {
+                muscles[last, default: []].append((piece: index, clip: nil))
+            } else {
+                for (unit, slices) in hosts {
+                    var clip = Path()
+                    for slice in slices { clip.addPath(pieces[slice].path) }
+                    muscles[unit, default: []].append((piece: index, clip: clip))
+                }
+            }
+        }
+
+        // 4. Painting.
+        for (index, unit) in units.enumerated() {
+            let first = elements[unit.members[0]]
+            if first.isSkin {
+                if unit.members.count == 1 {
+                    Sculpt.draw(pieces[first.source], body: body, in: &context, size: size, palette: palette, fine: fine)
+                } else {
+                    var path = Path()
+                    for member in unit.members { path.addPath(pieces[elements[member].source].path) }
+                    Sculpt.draw(Sculpt.Piece(depth: first.depth, path: path, kind: pieces[first.source].kind), body: body,
+                                in: &context, size: size, palette: palette, fine: fine)
+                }
+                if let list = muscles[index] {
+                    for entry in list.sorted(by: { pieces[$0.piece].depth > pieces[$1.piece].depth }) {
+                        Sculpt.draw(pieces[entry.piece], body: body, in: &context, size: size, palette: palette, fine: fine,
+                                    clip: entry.clip)
+                    }
+                }
+            } else {
+                let item = items[first.source]
+                if first.cell.isEmpty || unit.members.count == cellCount[first.source] {
+                    drawItem(item, points: points, R: R, U: U, B: B, scale: scale, in: &context, plastic: true)
+                } else {
+                    // Some cells only: the same paint, on these cells.
+                    var path = Path()
+                    var outline = Path()
+                    var end: CGPoint?
+                    for member in unit.members {
+                        let element = elements[member]
+                        if element.cell.count == 4 {
+                            path.addLines(element.cell)
+                            path.closeSubpath()
+                            for side in 0..<4 where element.edges & (1 << side) != 0 {
+                                outline.move(to: element.cell[side])
+                                outline.addLine(to: element.cell[(side + 1) % 4])
+                            }
+                        } else if element.cell.count == 2 {
+                            if let end, abs(end.x - element.cell[0].x) < 0.01, abs(end.y - element.cell[0].y) < 0.01 {
+                                path.addLine(to: element.cell[1])
+                            } else {
+                                path.move(to: element.cell[0])
+                                path.addLine(to: element.cell[1])
+                            }
+                            end = element.cell[1]
+                        }
+                    }
+                    drawItem(item, points: points, R: R, U: U, B: B, scale: scale, in: &context, plastic: true,
+                             part: (path, outline))
+                }
+            }
+        }
+        for index in loose {
+            Sculpt.draw(pieces[index], body: body, in: &context, size: size, palette: palette, fine: fine)
+        }
+    }
+
+    private static func distance(_ a: Vec3, _ b: Vec3) -> Double {
+        let d = b - a
+        return (d * d).sum().squareRoot()
+    }
+
+    /// In how many cells a length is cut.
+    private static func cellSteps(_ length: Double, _ size: Double, limit: Int) -> Int {
+        guard length.isFinite, length > size else { return 1 }
+        return min(limit, max(1, Int((length / size).rounded(.up))))
     }
 
     /// One primitive of the scene. `plastic`: the equipment in the mannequin's style (a sheen on bars and frames, solid
     /// plates with a light rim and a hub, padded benches lit from above).
+    /// `part`: only these cells of the primitive (their path, and for a polygon the stretches of its outline they hold).
     private static func drawItem(_ item: Item, points: [Vec3], R: Vec3, U: Vec3, B: Vec3, scale: Double,
-                                 in context: inout GraphicsContext, plastic: Bool) {
+                                 in context: inout GraphicsContext, plastic: Bool, part: (path: Path, outline: Path)? = nil) {
         let color = DemoPalette.color(item.color)
         do {
             switch item.prim.kind {
             case .line:
                 var path = Path()
-                path.addLines(item.screen)
+                if let part { path = part.path } else { path.addLines(item.screen) }
                 let width = strokeWidth(item.prim) * scale
                 context.stroke(path, with: .color(color),
                                style: StrokeStyle(lineWidth: CGFloat(width), lineCap: .round, lineJoin: .round))
@@ -636,18 +869,19 @@ enum DemoRenderer {
                                    style: StrokeStyle(lineWidth: CGFloat(width * 0.32), lineCap: .round, lineJoin: .round))
                 }
             case .poly:
-                var path = Path()
-                path.addLines(item.screen)
-                path.closeSubpath()
+                var whole = Path()
+                whole.addLines(item.screen)
+                whole.closeSubpath()
+                let path = part?.path ?? whole
                 context.fill(path, with: .color(color))
                 if item.prim.width > 0 {
                     context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: CGFloat(strokeWidth(item.prim) * scale), lineJoin: .round))
                 }
                 if plastic && item.prim.role != 7 && item.prim.role != 8 {
-                    let box = path.boundingRect
+                    let box = whole.boundingRect
                     context.fill(path, with: .linearGradient(Gradient(colors: [.white.opacity(0.16), .clear, .black.opacity(0.18)]),
                                                              startPoint: CGPoint(x: box.minX, y: box.minY), endPoint: CGPoint(x: box.maxX, y: box.maxY)))
-                    context.stroke(path, with: .color(.black.opacity(0.22)), lineWidth: 0.7)
+                    context.stroke(part?.outline ?? path, with: .color(.black.opacity(0.22)), lineWidth: 0.7)
                 }
             case .ball:
                 let c = item.screen[0]

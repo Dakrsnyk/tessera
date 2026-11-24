@@ -55,8 +55,35 @@ final class SculptMannequinTests: XCTestCase {
         let lit = DemoMuscles.forDemo("db-curl")
         let sheet = try XCTUnwrap(Sculpt.pieces(joints: joints, camera: camera(yaw: 35), muscles: lit, fine: true))
         let thumb = try XCTUnwrap(Sculpt.pieces(joints: joints, camera: camera(yaw: 35), muscles: lit, fine: false))
-        XCTAssertEqual(sheet.pieces.count, thumb.pieces.count, "The same pieces")
+        XCTAssertLessThan(thumb.pieces.count, sheet.pieces.count, "Fewer slices")
+        XCTAssertEqual(Set(sheet.pieces.map(\.part)), Set(thumb.pieces.map(\.part)), "The same body parts")
         XCTAssertLessThan(thumb.body.boundingRect.width * 0.9, sheet.body.boundingRect.width, "The same body, with fewer sections")
+    }
+
+    /// The body comes in slices, each at its own depth (2026-11-24): a whole trunk sorted by its middle let the backrest
+    /// of an incline bench be painted over the shoulders lying on it. Each muscle knows the slices it is drawn on.
+    func testTheBodyComesInSlicesTheMusclesLieOn() throws {
+        let demo = try XCTUnwrap(ExerciseDemos.demo(for: "x-incline-dumbbell-flyes"))
+        let joints = try XCTUnwrap(demo.skeleton(at: 1))
+        let built = try XCTUnwrap(Sculpt.pieces(joints: joints, camera: camera(yaw: 55, pitch: 18),
+                                                muscles: DemoMuscles.forDemo("x-incline-dumbbell-flyes"), fine: true))
+        let trunk = built.pieces.filter { $0.part == Sculpt.Part.trunk }
+        XCTAssertEqual(trunk.count, 26)
+        let depths = trunk.map(\.depth)
+        XCTAssertGreaterThan(try XCTUnwrap(depths.max()) - (try XCTUnwrap(depths.min())), 0.15,
+                             "Lying on the bench, the shoulders are farther than the hips")
+        XCTAssertEqual(built.pieces.filter { $0.part == Sculpt.Part.limb("thigh", -1) }.count, 12)
+        let skins = built.pieces.filter { if case .skin = $0.kind { return true } else { return false } }
+        XCTAssertTrue(skins.allSatisfy { $0.part >= 0 && !$0.box.isNull })
+        let muscles = built.pieces.filter { if case .muscle = $0.kind { return true } else { return false } }
+        XCTAssertFalse(muscles.isEmpty)
+        for muscle in muscles {
+            XCTAssertFalse(muscle.spans.isEmpty)
+            let hosts = skins.filter { skin in
+                skin.spans.contains { at in muscle.spans.contains { $0.part == at.part && at.lo >= $0.lo && at.hi <= $0.hi } }
+            }
+            XCTAssertFalse(hosts.isEmpty, "A muscle is drawn on slices of the body")
+        }
     }
 
     func testTheExerciseMusclesMapToTheMannequin() {

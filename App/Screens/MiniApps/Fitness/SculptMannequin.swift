@@ -290,6 +290,10 @@ enum Sculpt {
     // MARK: Pieces
 
     /// One thing to draw at its depth: a piece of the plastic body (with its limb axis for the sheen) or a muscle.
+    /// The body comes in slices (2026-11-24): each pair of sections of the trunk or of a limb is a piece at its own
+    /// depth, so a pad or a bar that touches the body is painted on the right side of every slice (a whole trunk sorted
+    /// by its middle let a backrest be painted over the shoulders lying on it). `DemoRenderer` draws together the
+    /// slices of a part that nothing separates, and each muscle right after the slices it lies on.
     struct Piece {
         enum Kind {
             case skin(axis: (CGPoint, CGPoint, Double)?, far: Double)
@@ -298,6 +302,53 @@ enum Sculpt {
         let depth: Double
         let path: Path
         let kind: Kind
+        /// Skin: the body part whose slices it belongs to (`Part`); -1 for a muscle.
+        var part: Int = -1
+        /// Skin: where the piece lies (part, position along it; a ball joint lies on the two limbs it joins).
+        /// Muscle: the stretch of each part it is drawn on.
+        var spans: [Span] = []
+        /// What it covers on screen.
+        var box: CGRect = .null
+        /// Skin: how thick the body is there, from its axis to its surface, in metres.
+        var radius: Double = 0
+    }
+
+    /// A stretch of a body part: the trunk by its height from the waist, a limb by the fraction along it.
+    struct Span {
+        let part: Int
+        let lo: Double
+        let hi: Double
+    }
+
+    /// The body parts, as numbers (the keys of the slices drawn together).
+    enum Part {
+        static let trunk = 0, neck = 1, head = 2, joint = 30, hand = 40, foot = 42
+
+        static func limb(_ kind: String, _ side: Int) -> Int {
+            let base: Int
+            switch kind {
+            case "arm": base = 10
+            case "fore": base = 12
+            case "thigh": base = 14
+            default: base = 16
+            }
+            return base + (side == 1 ? 0 : 1)
+        }
+    }
+
+    /// What is seen of a volume is its surface, in front of its axis: a slice of the body, a bar or a ball is sorted
+    /// nearer than its axis by this share of its radius (measured on every demonstration with
+    /// scripts/demos/occlusion.py).
+    static let lift = 0.6
+
+    static func bounds(_ points: [CGPoint]) -> CGRect {
+        guard let first = points.first else { return .null }
+        var minX = first.x, maxX = first.x, minY = first.y, maxY = first.y
+        for p in points.dropFirst() {
+            minX = min(minX, p.x); maxX = max(maxX, p.x)
+            minY = min(minY, p.y); maxY = max(maxY, p.y)
+        }
+        return CGRect(x: minX, y: minY, width: maxX - minX, height: maxY - minY)
     }
 
     /// The camera of a demonstration's view: screen point and depth (larger is farther).
@@ -323,27 +374,40 @@ enum Sculpt {
         let farSide = min(1, max(-1, (leftDepth - rightDepth) / 0.35))   // > 0: the left is farther
         func far(_ side: Int) -> Double { side == 1 ? max(0, -farSide) : max(0, farSide) }
 
-        func add(_ rings: [[Vec3]], axis: (Vec3, Vec3, Double)?, far shade: Double = 0, bias: Double = 0) {
-            var path = Path()
-            var depths = 0.0
-            var count = 0
-            for k in 0..<(rings.count - 1) {
-                var pts: [CGPoint] = []
-                for q in rings[k] + rings[k + 1] {
-                    let (pt, z) = camera.project(q)
-                    pts.append(pt)
-                    depths += z
-                    count += 1
-                }
-                path.addPath(smoothPath(hull(pts), tension: 9))
-            }
-            union.addPath(path)
+        /// A swept volume, one piece per pair of sections; `positions`: where each section lies along its part.
+        func add(_ rings: [[Vec3]], at positions: [Double], part: Int, axis: (Vec3, Vec3, Double)?, far shade: Double = 0) {
             var screenAxis: (CGPoint, CGPoint, Double)?
             if let axis { screenAxis = (camera.project(axis.0).0, camera.project(axis.1).0, axis.2 * camera.scale) }
-            out.append(Piece(depth: depths / Double(max(count, 1)) + bias, path: path, kind: .skin(axis: screenAxis, far: shade)))
+            var slices: [(points: [CGPoint], depth: Double, radius: Double)] = []
+            slices.reserveCapacity(rings.count)
+            for ring in rings {
+                var pts: [CGPoint] = []
+                pts.reserveCapacity(ring.count)
+                var depth = 0.0
+                for q in ring {
+                    let (pt, z) = camera.project(q)
+                    pts.append(pt)
+                    depth += z
+                }
+                // The first point of a section is its front, the middle one its back.
+                let radius = ring.count >= 2 ? length(ring[0] - ring[ring.count / 2]) / 2 : 0
+                slices.append((pts, depth, radius))
+            }
+            guard slices.count >= 2 else { return }
+            for k in 0..<(slices.count - 1) {
+                let pts = slices[k].points + slices[k + 1].points
+                guard !pts.isEmpty else { continue }
+                let path = smoothPath(hull(pts), tension: 9)
+                union.addPath(path)
+                let position = k + 1 < positions.count ? (positions[k] + positions[k + 1]) / 2 : 0
+                out.append(Piece(depth: (slices[k].depth + slices[k + 1].depth) / Double(pts.count), path: path,
+                                 kind: .skin(axis: screenAxis, far: shade), part: part,
+                                 spans: [Span(part: part, lo: position, hi: position)], box: bounds(pts),
+                                 radius: (slices[k].radius + slices[k + 1].radius) / 2))
+            }
         }
 
-        func ellipsoid(_ center: Vec3, _ a0: Vec3, _ a1: Vec3, _ a2: Vec3, far shade: Double = 0, bias: Double = 0) {
+        func ellipsoid(_ center: Vec3, _ a0: Vec3, _ a1: Vec3, _ a2: Vec3, part: Int, far shade: Double = 0, bias: Double = 0) {
             var pts: [CGPoint] = []
             let rows = fine ? 9 : 6, cols = fine ? 14 : 9
             for i in 1..<rows {
@@ -357,61 +421,75 @@ enum Sculpt {
             pts.append(camera.project(center - a0).0)
             let path = smoothPath(hull(pts), tension: 7)
             union.addPath(path)
-            out.append(Piece(depth: camera.project(center).1 + bias, path: path, kind: .skin(axis: nil, far: shade)))
+            out.append(Piece(depth: camera.project(center).1 + bias, path: path, kind: .skin(axis: nil, far: shade),
+                             part: part, box: bounds(pts), radius: min(length(a0), length(a1), length(a2))))
+        }
+
+        /// A ball joint, lying on the limbs it joins.
+        var joints = 0
+        func ball(_ center: Vec3, _ r: Double, on spans: [Span], far shade: Double) {
+            let (pt, z) = camera.project(center)
+            let rr = r * camera.scale
+            let rect = CGRect(x: pt.x - rr, y: pt.y - rr, width: 2 * rr, height: 2 * rr)
+            let path = Path(ellipseIn: rect)
+            union.addPath(path)
+            out.append(Piece(depth: z, path: path, kind: .skin(axis: nil, far: shade), part: Part.joint + joints,
+                             spans: spans, box: rect, radius: r))
+            joints += 1
         }
 
         // Trunk.
         let lo = Body.trunkTable.first!.0, hi = Body.trunkTable.last!.0
         let sections = fine ? 26 : 12
         let us = (0...sections).map { lo + (hi - lo) * Double($0) / Double(sections) }
-        add(us.map { u in angles.map { body.trunk(u, $0, 1) } }, axis: nil)
+        add(us.map { u in angles.map { body.trunk(u, $0, 1) } }, at: us, part: Part.trunk, axis: nil)
         // Neck and head.
         let nb = body.neck - c.u * 0.04, nt = body.head - body.headU * 0.07
-        add([0.0, 0.5, 1.0].map { t in angles.map { a in
+        let neckSteps: [Double] = [0.0, 0.5, 1.0]
+        add(neckSteps.map { t in angles.map { a in
             mix(nb, nt, t) + (c.r * sin(a * .pi / 180) + c.f * cos(a * .pi / 180)) * (0.056 - 0.01 * t)
-        } }, axis: nil)
-        ellipsoid(body.head + body.headU * 0.012, body.headU * 0.122, body.headF * 0.098, body.headR * 0.083, bias: -0.01)
-        ellipsoid(body.head - body.headU * 0.05 + body.headF * 0.02, body.headU * 0.06, body.headF * 0.07, body.headR * 0.062, bias: -0.008)
+        } }, at: neckSteps, part: Part.neck, axis: nil)
+        ellipsoid(body.head + body.headU * 0.012, body.headU * 0.122, body.headF * 0.098, body.headR * 0.083, part: Part.head, bias: -0.01)
+        ellipsoid(body.head - body.headU * 0.05 + body.headF * 0.02, body.headU * 0.06, body.headF * 0.07, body.headR * 0.062,
+                  part: Part.head, bias: -0.008)
         // Limbs.
+        let limbSections = fine ? 12 : 6
         for (key, l) in body.limbs.sorted(by: { $0.key < $1.key }) {
             let side = key.hasSuffix("-1") ? -1 : 1
+            let kind = String(key.dropLast(side == -1 ? 2 : 1))
             let t0 = l.profile.first!.0, t1 = l.profile.last!.0
-            let n = fine ? 12 : 6
-            let ts = (0...n).map { t0 + (t1 - t0) * Double($0) / Double(n) }
-            add(ts.map { t in angles.compactMap { body.limb(key, t, $0) } }, axis: (l.a, l.b, ease2(l.profile, 0.5)), far: far(side))
+            let ts = (0...limbSections).map { t0 + (t1 - t0) * Double($0) / Double(limbSections) }
+            add(ts.map { t in angles.compactMap { body.limb(key, t, $0) } }, at: ts, part: Part.limb(kind, side),
+                axis: (l.a, l.b, ease2(l.profile, 0.5)), far: far(side))
         }
         // Ball joints, hands, feet.
         for side in [1, -1] {
             let shade = far(side)
+            let arm = Part.limb("arm", side), fore = Part.limb("fore", side)
+            let thigh = Part.limb("thigh", side), shin = Part.limb("shin", side)
             if let sh = body.shoulder[side], let el = body.elbow[side], let gr = body.grip[side] {
-                for (center, r) in [(sh + unit(el - sh) * 0.03, 0.05), (el, 0.041), (gr - unit(gr - el) * 0.02, 0.028)] {
-                    let (pt, z) = camera.project(center)
-                    let rr = r * camera.scale
-                    let path = Path(ellipseIn: CGRect(x: pt.x - rr, y: pt.y - rr, width: 2 * rr, height: 2 * rr))
-                    union.addPath(path)
-                    out.append(Piece(depth: z, path: path, kind: .skin(axis: nil, far: shade)))
-                }
-                if let fore = body.limbs["fore\(side)"] {
+                ball(sh + unit(el - sh) * 0.03, 0.05, on: [Span(part: arm, lo: 0.1, hi: 0.1)], far: shade)
+                ball(el, 0.041, on: [Span(part: arm, lo: 1, hi: 1), Span(part: fore, lo: 0, hi: 0)], far: shade)
+                ball(gr - unit(gr - el) * 0.02, 0.028, on: [Span(part: fore, lo: 1, hi: 1)], far: shade)
+                if let foreLimb = body.limbs["fore\(side)"] {
                     let d = unit(gr - el)
-                    ellipsoid(gr + d * 0.035, d * 0.058, fore.away * 0.034, fore.front * 0.019, far: shade)
-                    ellipsoid(gr + d * 0.01 + fore.front * 0.02 - fore.away * 0.012, d * 0.03, fore.front * 0.012, fore.away * 0.012, far: shade, bias: -0.004)
+                    let hand = Part.hand + (side == 1 ? 0 : 1)
+                    ellipsoid(gr + d * 0.035, d * 0.058, foreLimb.away * 0.034, foreLimb.front * 0.019, part: hand, far: shade)
+                    ellipsoid(gr + d * 0.01 + foreLimb.front * 0.02 - foreLimb.away * 0.012, d * 0.03, foreLimb.front * 0.012,
+                              foreLimb.away * 0.012, part: hand, far: shade, bias: -0.004)
                 }
             }
             if let kn = body.knee[side], let an = body.ankle[side], let to = body.toe[side] {
-                for (center, r) in [(kn, 0.05), (an, 0.033)] {
-                    let (pt, z) = camera.project(center)
-                    let rr = r * camera.scale
-                    let path = Path(ellipseIn: CGRect(x: pt.x - rr, y: pt.y - rr, width: 2 * rr, height: 2 * rr))
-                    union.addPath(path)
-                    out.append(Piece(depth: z, path: path, kind: .skin(axis: nil, far: shade)))
-                }
+                ball(kn, 0.05, on: [Span(part: thigh, lo: 1, hi: 1), Span(part: shin, lo: 0, hi: 0)], far: shade)
+                ball(an, 0.033, on: [Span(part: shin, lo: 1, hi: 1)], far: shade)
                 let dir = unit(to - an)
                 let flat = Vec3(dir.x, 0, dir.z)
                 let level = length(flat) > 1e-3 ? unit(flat) : dir
                 let up = Vec3(0, 1, 0)
                 let lateral = body.pelvis.r
-                ellipsoid(an - level * 0.035 - up * 0.035, level * 0.04, up * 0.03, lateral * 0.032, far: shade)
-                ellipsoid(mix(an, to, 0.55) - up * 0.012, dir * 0.11, up * 0.026, lateral * 0.04, far: shade)
+                let foot = Part.foot + (side == 1 ? 0 : 1)
+                ellipsoid(an - level * 0.035 - up * 0.035, level * 0.04, up * 0.03, lateral * 0.032, part: foot, far: shade)
+                ellipsoid(mix(an, to, 0.55) - up * 0.012, dir * 0.11, up * 0.026, lateral * 0.04, part: foot, far: shade)
             }
         }
         // Muscles.
@@ -439,8 +517,25 @@ enum Sculpt {
                     grooves.append(g)
                 }
                 let level = lit.primary.contains(shape.group) ? 2 : (lit.secondary.contains(shape.group) ? 1 : 0)
+                // The stretch of each part it lies on, one slice wider at both ends.
+                var stretch: [Int: (Double, Double)] = [:]
+                for spot in shape.outline {
+                    let located: (part: Int, value: Double)
+                    switch spot {
+                    case let .t(u, _): located = (Part.trunk, u)
+                    case let .l(kind, t, _): located = (Part.limb(kind, side), t)
+                    }
+                    let known = stretch[located.part] ?? (located.value, located.value)
+                    stretch[located.part] = (min(known.0, located.value), max(known.1, located.value))
+                }
+                var spans: [Span] = []
+                for part in stretch.keys.sorted() {
+                    guard let range = stretch[part] else { continue }
+                    let pad = part == Part.trunk ? (hi - lo) / Double(sections) : 1.0 / Double(limbSections)
+                    spans.append(Span(part: part, lo: range.0 - pad, hi: range.1 + pad))
+                }
                 out.append(Piece(depth: depth / Double(pts.count) - 0.01, path: smoothPath(pts, tension: 6.5),
-                                 kind: .muscle(level: level, grooves: grooves)))
+                                 kind: .muscle(level: level, grooves: grooves), spans: spans, box: bounds(pts)))
             }
         }
         return (out, union)
@@ -471,7 +566,9 @@ enum Sculpt {
         }
     }
 
-    static func draw(_ piece: Piece, body: Path, in context: inout GraphicsContext, size: CGSize, palette: Palette, fine: Bool) {
+    /// `clip`: a muscle whose part is cut by the equipment is drawn once per run of slices, inside those slices only.
+    static func draw(_ piece: Piece, body: Path, in context: inout GraphicsContext, size: CGSize, palette: Palette, fine: Bool,
+                     clip: Path? = nil) {
         let w = Double(size.width), h = Double(size.height)
         let start = CGPoint(x: w * 0.15, y: 0), end = CGPoint(x: w * 0.85, y: h)
         let g = max(0.6, w / 220)
@@ -510,7 +607,7 @@ enum Sculpt {
             }
         case let .muscle(level, grooves):
             var layer = context
-            if fine { layer.clip(to: body) }
+            if let clip { layer.clip(to: clip) } else if fine { layer.clip(to: body) }
             let fill: GraphicsContext.Shading
             let groove: Color
             switch level {
