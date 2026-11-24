@@ -36,6 +36,12 @@ struct ExerciseLibraryPage: View {
     private var accentHex: String { MiniApp.fitness.colorHex }
     private var isBrowsing: Bool { query.trimmed.isEmpty && filters.isEmpty }
 
+    /// How many exercises each muscle group holds (917 exercises: counted once, not at every redraw).
+    private static let groupCountsOnce: [MuscleGroup: Int] = Dictionary(uniqueKeysWithValues: MuscleGroup.allCases.map { group in
+        (group, ExerciseLibrary.all.filter { ExerciseLibrary.Filters(group: group).allows($0) }.count)
+    })
+    private var groupCounts: [MuscleGroup: Int] { Self.groupCountsOnce }
+
     var body: some View {
         let state = model.fitness
         List {
@@ -104,15 +110,12 @@ struct ExerciseLibraryPage: View {
                         Button {
                             filters.group = group
                         } label: {
-                            HStack {
-                                Text(group.title).foregroundStyle(Color.primary)
-                                Spacer()
-                                Text("\(ExerciseLibrary.all.filter { ExerciseLibrary.Filters(group: group).allows($0) }.count)")
-                                    .foregroundStyle(Color.secondary)
-                                    .monospacedDigit()
-                                Image(systemName: "chevron.right").font(.caption.weight(.bold)).foregroundStyle(Color.secondary.opacity(0.55))
-                            }
+                            // The body with the group in red, framed on it (CEO, 2026-11-23), like the exercise rows.
+                            DemoRow(demoID: group.anatomyID, symbol: "figure.strengthtraining.traditional", title: group.title,
+                                    detail: Fmt.plural(groupCounts[group] ?? 0, tr("exercice"), tr("exercices")))
                         }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("library-group-\(group.rawValue)")
                     }
                 }
             } else {
@@ -264,19 +267,15 @@ struct ExerciseLibraryPage: View {
     }
 }
 
+/// An exercise of the library in the style of the « Progression » pages (CEO, 2026-11-23): its demonstration small and
+/// looping, its name, its muscles and equipment, its level.
 struct ExerciseRowLabel: View {
     let exercise: ExerciseInfo
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(exercise.name).foregroundStyle(Color.primary).lineLimit(1)
-            Text("\(exercise.summary) · \(exercise.difficulty.title.lowercased())")
-                .font(.caption)
-                .foregroundStyle(Color.secondary)
-                .lineLimit(1)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .contentShape(Rectangle())
+        DemoRow(demoID: exercise.id, symbol: exercise.equipment.first?.symbol ?? "figure.strengthtraining.traditional",
+                title: exercise.name, detail: exercise.summary, value: exercise.difficulty.title, showsChevron: false)
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

@@ -483,3 +483,12 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 - Tests : `Tests/ExerciseCatalogMatcherTests.swift`, `Tests/FitnessProgressCategoriesTests.swift`. Traductions : `l10n/parts/118.*`, `119.*`.
 - CI : [check] 549 vert, build interne 550 sur TestFlight, [unit] 551 : tous les tests passent (journal complet lu, TEST SUCCEEDED).
 - **Reste** : sur l'iPhone : le nouveau ding, la page Progression, la reconnaissance sur ses vraies séances. Noms rares (strongman, haltérophilie) en ja/de/it parfois translittérés : relecture possible.
+
+## Chantier 52 : mannequin plastique sculpté et nouvelle présentation des exercices — 2026-11-23
+- **Choix du PDG** après 3 planches (`scripts/demos/style_sheet.py` 20 styles, `anatomy_styles.py` 20 styles détaillés et portions musculaires, `sculpt.py` mannequin sculpté) : mannequin en plastique gris, tête lisse sans visage, corps neutre, réalisme ~7/10, formes arrondies (épaules, extrémités), muscles attachés à leurs os (origine → insertion), muscle travaillé en rouge (secondaires en rose).
+- **Données** : `scripts/demos/demos.py` exporte le squelette de chaque échantillon (26 points, `SKELETON`) ; lecture de la bibliothèque réparée (noms en `tr("…")`, 0 exercice lu avant). Réexport vérifié : les 163 démonstrations identiques à l'octet près, plus le squelette (ExerciseDemos.json 750 Ko → 1,4 Mo). `build.py` n'exige plus Playwright pour l'export.
+- **App** : `SculptMannequin.swift` (portage de sculpt.py : sections du tronc et des membres, rotules, mains et pieds ovoïdes, tête en œuf, 27 formes musculaires × 2 côtés, relief sans flou, version allégée pour les vignettes) ; `DemoRenderer.draw(…, muscles:, dark:)` dessine le mannequin quand la démo a un squelette, le matériel en style plastique (reflet des barres, disques pleins à bord clair et moyeu, bancs dégradés). Sans muscles fournis (pubs, AdExport), l'ancienne figure.
+- **Présentation** : `DemoRow`/`DemoThumbnail` (style de la page Progression) dans la bibliothèque, les groupes « Par muscle » (figure anatomique cadrée comme les pectoraux) et la Progression ; `ExerciseDemoView(compact:)`.
+- **Figures anatomiques** : `scripts/demos/anatomy.py` (13 groupes, cadre identique à celui des pectoraux, `ViewSpec.close`).
+- Tests : `Tests/SculptMannequinTests.swift`, `Tests/AnatomyFiguresTests.swift`.
+- **Reste** : CI ; fluidité des vignettes sur l'iPhone 11 Pro ; captures. Pubs et AdExport gardent l'ancienne figure.

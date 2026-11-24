@@ -16,7 +16,8 @@ REPO = Path(__file__).resolve().parents[2]
 def read_library():
     text = (REPO / "Shared/Domains/ExerciseLibrary.swift").read_text()
     out = {}
-    pattern = re.compile(r'x\("([^"]+)", "([^"]+)", \[([^\]]*)\], \[([^\]]*)\], \[([^\]]*)\], \.(\w+), \.(\w+), \.(\w+)')
+    # The names are written tr("…") since the app is translated (2026-10): both forms are read.
+    pattern = re.compile(r'x\("([^"]+)", (?:tr\()?"([^"]+)"\)?, \[([^\]]*)\], \[([^\]]*)\], \[([^\]]*)\], \.(\w+), \.(\w+), \.(\w+)')
     for m in pattern.finditer(text):
         ident, name, prim, sec, equip, typ, diff, pat = m.groups()
         split = lambda s: [w.strip().lstrip(".") for w in s.split(",") if w.strip()]
@@ -295,7 +296,7 @@ def export(demo_obj, scenes):
         a, b, c, lab = seg[:4]
         ease_flag = seg[4] if len(seg) > 4 else (0 if demo_obj.mode == "loop" else 1)
         timeline.append([round(a, 3), round(b, 4), round(c, 4), lab, ease_flag])
-    return {
+    out = {
         "id": demo_obj.id,
         "loop": demo_obj.mode == "loop",
         "n": n,
@@ -309,6 +310,39 @@ def export(demo_obj, scenes):
         "shoulders": refs,
         "marks": list(demo_obj.travel) if demo_obj.travel else [],
     }
+    bodies = [sc.body for _, sc in scenes]
+    if all(bd is not None for bd in bodies):
+        skels = [skeleton(bd) for bd in bodies]
+        out["skeleton"] = quantize(np.array([sk for sk, _ in skels]).flatten())
+        out["joints"] = len(SKELETON)
+        out["missing"] = sorted(set(m for _, miss in skels for m in miss))
+    return out
+
+
+# The skeleton of every sample, for the app's sculpted mannequin (2026-11-23): frames as their origin and the tips of
+# their axes 0.1 m away; a side the pose leaves out takes the nearest joint (listed in "missing").
+SKELETON = ["pelvis", "pelvisU", "pelvisR", "pelvisF", "chest", "chestU", "chestR", "chestF", "neck", "head", "headU", "headF",
+            "shoulderR", "shoulderL", "elbowR", "elbowL", "gripR", "gripL", "hipR", "hipL", "kneeR", "kneeL",
+            "ankleR", "ankleL", "toeR", "toeL"]
+
+
+def skeleton(body):
+    def frame(f):
+        return [f.o, f.o + f.u * 0.1, f.o + f.r * 0.1, f.o + f.f * 0.1]
+    pts = frame(body.pelvis) + frame(body.chest) + [body.neck, body.head, body.head + body.head_frame.u * 0.1,
+                                                      body.head + body.head_frame.f * 0.1]
+    missing = []
+    for name, table, fallback in (("shoulder", body.shoulder, None), ("elbow", body.elbow, body.shoulder),
+                                  ("grip", body.grip, body.elbow), ("hip", body.hip, None), ("knee", body.knee, body.hip),
+                                  ("ankle", body.ankle, body.knee), ("toe", body.toe, body.ankle)):
+        for side, tag in ((1, "R"), (-1, "L")):
+            if side in table:
+                pts.append(table[side])
+            else:
+                missing.append(name + tag)
+                src = fallback if fallback is not None and side in fallback else body.shoulder if name in ("elbow", "grip") else body.hip
+                pts.append(src[side] if side in src else body.pelvis.o)
+    return np.array(pts, dtype=float), missing
 
 
 def find_point(scenes, target, index_of_slot, resolve, prims0):

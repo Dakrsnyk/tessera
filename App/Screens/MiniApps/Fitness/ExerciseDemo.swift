@@ -33,6 +33,9 @@ struct ExerciseDemoView: View {
         }
     }
 
+    /// The exercise's own muscles, lit on the sculpted mannequin (main in red, secondary in pink).
+    private var muscles: DemoMuscles { DemoMuscles(primary: exercise.primary, secondary: exercise.secondary) }
+
     private func content(_ demo: DemoModel) -> some View {
         let palette = DemoPalette(scheme: scheme, accentHex: colorHex)
         return VStack(spacing: 10) {
@@ -42,7 +45,7 @@ struct ExerciseDemoView: View {
                 VStack(spacing: 10) {
                     Canvas { context, size in
                         DemoRenderer.draw(demo, p: phase.p, view: min(viewIndex, demo.views.count - 1),
-                                          in: &context, size: size, palette: palette)
+                                          in: &context, size: size, palette: palette, muscles: muscles, dark: scheme == .dark)
                     }
                     .frame(height: height)
                     .background(palette.background, in: RoundedRectangle(cornerRadius: compact ? 10 : 20, style: .continuous))
@@ -177,6 +180,9 @@ struct DemoData: Decodable {
         let yaw: Double
         let pitch: Double
         let box: [Double]
+        /// A close-up (the anatomy figures of the muscle groups): the box is filled, however small. Without it, a body
+        /// never gets bigger than 1.75 m on the full height, so that every exercise keeps the same scale.
+        var close: Bool? = nil
     }
 
     let id: String
@@ -191,6 +197,9 @@ struct DemoData: Decodable {
     let prims: [[Int]]
     let shoulders: [Int]
     let marks: [Double]
+    /// The skeleton of every sample (scripts/demos/demos.py, `SKELETON`: 26 joints), for the sculpted mannequin.
+    var skeleton: String? = nil
+    var joints: Int? = nil
 }
 
 /// The demonstrations of the library, loaded once, each prepared when first shown.
@@ -255,6 +264,8 @@ final class DemoModel {
     let shoulders: [Int]
     let marks: [Double]
     let duration: Double
+    /// The skeleton of every sample (26 joints each, `Sculpt.Joint`); empty without one (then the stroke figure is drawn).
+    let skeletonFrames: [[Vec3]]
 
     init?(_ data: DemoData) {
         guard data.points.count == 2, data.n > 1, !data.views.isEmpty else { return nil }
@@ -276,6 +287,19 @@ final class DemoModel {
             frames.append(frame)
         }
         dynamicPoints = frames
+        var skeletons: [[Vec3]] = []
+        if let raw = data.skeleton, let count = data.joints, count > 0 {
+            let values = Self.decode(raw)
+            if values.count >= data.n * count * 3 {
+                for f in 0..<data.n {
+                    skeletons.append((0..<count).map { i in
+                        let k = (f * count + i) * 3
+                        return Vec3(values[k], values[k + 1], values[k + 2])
+                    })
+                }
+            }
+        }
+        skeletonFrames = skeletons
         id = data.id
         loop = data.loop
         samples = data.n
@@ -323,6 +347,44 @@ final class DemoModel {
 
     private func label(_ index: Int) -> Int? {
         labels.indices.contains(index) ? index : nil
+    }
+
+    /// The skeleton at phase p, interpolated like the points; nil without one.
+    func skeleton(at p: Double) -> [Vec3]? {
+        guard skeletonFrames.count == samples, let first = skeletonFrames.first else { return nil }
+        let (indices, f) = interpolation(at: p)
+        let f2 = f * f
+        let f3 = f2 * f
+        let w0: Double = 0.5 * (-f + 2 * f2 - f3)
+        let w1: Double = 0.5 * (2 - 5 * f2 + 3 * f3)
+        let w2: Double = 0.5 * (f + 4 * f2 - 3 * f3)
+        let w3: Double = 0.5 * (f3 - f2)
+        let p0 = skeletonFrames[indices[0]], p1 = skeletonFrames[indices[1]]
+        let p2 = skeletonFrames[indices[2]], p3 = skeletonFrames[indices[3]]
+        var out: [Vec3] = []
+        out.reserveCapacity(first.count)
+        for k in 0..<first.count {
+            var point: Vec3 = p0[k] * w0
+            point += p1[k] * w1
+            point += p2[k] * w2
+            point += p3[k] * w3
+            out.append(point)
+        }
+        return out
+    }
+
+    /// The four samples around phase p and the fraction between the middle two.
+    private func interpolation(at p: Double) -> ([Int], Double) {
+        let n = samples
+        if loop {
+            var u = p.truncatingRemainder(dividingBy: 1) * Double(n)
+            if u < 0 { u += Double(n) }
+            let i = Int(u.rounded(.down)) % n
+            return ([(i - 1 + n) % n, i, (i + 1) % n, (i + 2) % n], u - u.rounded(.down))
+        }
+        let u = min(max(p, 0), 1) * Double(n - 1)
+        let i = min(Int(u.rounded(.down)), n - 2)
+        return ([max(i - 1, 0), i, i + 1, min(i + 2, n - 1)], u - Double(i))
     }
 
     /// Every point at phase p: the dynamic ones interpolated between samples (Catmull-Rom).
@@ -442,8 +504,11 @@ enum DemoRenderer {
         return (r, u2, b2)
     }
 
+    /// Draws the demonstration at phase p. With `muscles` and a skeleton in the demonstration, the figure is the
+    /// sculpted plastic mannequin (`Sculpt`) with those muscles lit, and the equipment takes the same style; otherwise
+    /// the stroke figure of the first version.
     static func draw(_ demo: DemoModel, p: Double, view index: Int, in context: inout GraphicsContext, size: CGSize,
-                     palette: DemoPalette) {
+                     palette: DemoPalette, muscles: DemoMuscles? = nil, dark: Bool = true) {
         let spec = demo.views[max(0, index)]
         let (R, U, B) = basis(yaw: spec.yaw, pitch: spec.pitch)
         let points = demo.points(at: p)
@@ -454,7 +519,8 @@ enum DemoRenderer {
         let height = Double(size.height)
         let w = max(spec.box[2] - spec.box[0], 0.01)
         let h = max(spec.box[3] - spec.box[1], 0.01)
-        let scale: Double = min((width - 2 * margin) / w, (height - 2 * margin) / h, (height - 2 * margin) / 1.75)
+        let fit = min((width - 2 * margin) / w, (height - 2 * margin) / h)
+        let scale: Double = spec.close == true ? fit : min(fit, (height - 2 * margin) / 1.75)
         let cx = (spec.box[0] + spec.box[2]) / 2
         let cy = (spec.box[1] + spec.box[3]) / 2
         func screen(_ v: Vec3) -> CGPoint {
@@ -468,9 +534,18 @@ enum DemoRenderer {
         }
         let light = normalizedSafe(Vec3(0.35, 1.0, 0.45))
         let white = SIMD3<Double>(255, 255, 255)
+        // The sculpted mannequin in place of the stroke figure (roles 0-2: body and muscles).
+        var sculpt: (pieces: [Sculpt.Piece], body: Path)?
+        if let muscles, let joints = demo.skeleton(at: p) {
+            let camera = Sculpt.Camera(project: { v in
+                (screen(Vec3((v * R).sum(), (v * U).sum(), 0)), -(v * B).sum())
+            }, toward: B, scale: scale)
+            sculpt = Sculpt.pieces(joints: joints, camera: camera, muscles: muscles, fine: size.width > 140)
+        }
         var items: [Item] = []
         items.reserveCapacity(demo.prims.count + 16)
         for (order, prim) in demo.prims.enumerated() {
+            if sculpt != nil && prim.role <= 2 { continue }
             guard prim.indices.allSatisfy({ projected.indices.contains($0) }) else { continue }
             let proj = prim.indices.map { projected[$0] }
             var depth = proj.reduce(0) { $0 + $1.z } / Double(proj.count) + prim.bias
@@ -520,14 +595,46 @@ enum DemoRenderer {
         }
         items.sort { $0.depth != $1.depth ? $0.depth > $1.depth : $0.order < $1.order }
 
+        guard let sculpt else {
+            for item in items { drawItem(item, points: points, R: R, U: U, B: B, scale: scale, in: &context, plastic: false) }
+            return
+        }
+        // Body pieces and equipment, back to front.
+        let sculptPalette = Sculpt.Palette(dark: dark)
+        let fine = size.width > 140
+        let pieces = sculpt.pieces.sorted { $0.depth > $1.depth }
+        var k = 0
         for item in items {
-            let color = DemoPalette.color(item.color)
+            while k < pieces.count && pieces[k].depth >= item.depth {
+                Sculpt.draw(pieces[k], body: sculpt.body, in: &context, size: size, palette: sculptPalette, fine: fine)
+                k += 1
+            }
+            drawItem(item, points: points, R: R, U: U, B: B, scale: scale, in: &context, plastic: true)
+        }
+        while k < pieces.count {
+            Sculpt.draw(pieces[k], body: sculpt.body, in: &context, size: size, palette: sculptPalette, fine: fine)
+            k += 1
+        }
+    }
+
+    /// One primitive of the scene. `plastic`: the equipment in the mannequin's style (a sheen on bars and frames, solid
+    /// plates with a light rim and a hub, padded benches lit from above).
+    private static func drawItem(_ item: Item, points: [Vec3], R: Vec3, U: Vec3, B: Vec3, scale: Double,
+                                 in context: inout GraphicsContext, plastic: Bool) {
+        let color = DemoPalette.color(item.color)
+        do {
             switch item.prim.kind {
             case .line:
                 var path = Path()
                 path.addLines(item.screen)
+                let width = strokeWidth(item.prim) * scale
                 context.stroke(path, with: .color(color),
-                               style: StrokeStyle(lineWidth: CGFloat(strokeWidth(item.prim) * scale), lineCap: .round, lineJoin: .round))
+                               style: StrokeStyle(lineWidth: CGFloat(width), lineCap: .round, lineJoin: .round))
+                if plastic && width > 2.5 && item.prim.role != 7 && item.prim.role != 8 {
+                    let sheen = path.applying(CGAffineTransform(translationX: -width * 0.12, y: -width * 0.15))
+                    context.stroke(sheen, with: .color(.white.opacity(0.28)),
+                                   style: StrokeStyle(lineWidth: CGFloat(width * 0.32), lineCap: .round, lineJoin: .round))
+                }
             case .poly:
                 var path = Path()
                 path.addLines(item.screen)
@@ -536,12 +643,18 @@ enum DemoRenderer {
                 if item.prim.width > 0 {
                     context.stroke(path, with: .color(color), style: StrokeStyle(lineWidth: CGFloat(strokeWidth(item.prim) * scale), lineJoin: .round))
                 }
+                if plastic && item.prim.role != 7 && item.prim.role != 8 {
+                    let box = path.boundingRect
+                    context.fill(path, with: .linearGradient(Gradient(colors: [.white.opacity(0.16), .clear, .black.opacity(0.18)]),
+                                                             startPoint: CGPoint(x: box.minX, y: box.minY), endPoint: CGPoint(x: box.maxX, y: box.maxY)))
+                    context.stroke(path, with: .color(.black.opacity(0.22)), lineWidth: 0.7)
+                }
             case .ball:
                 let c = item.screen[0]
                 let r = CGFloat(item.prim.width * scale)
                 context.fill(Path(ellipseIn: CGRect(x: c.x - r, y: c.y - r, width: 2 * r, height: 2 * r)), with: .color(color))
             case .disc:
-                guard item.prim.indices.count >= 2 else { continue }
+                guard item.prim.indices.count >= 2 else { return }
                 let axis = points[item.prim.indices[1]] - points[item.prim.indices[0]]
                 let half = (axis * axis).sum().squareRoot()
                 let n = half > 1e-9 ? axis / half : Vec3(0, 0, 1)
@@ -556,8 +669,19 @@ enum DemoRenderer {
                 let transform = CGAffineTransform(translationX: c.x, y: c.y).rotated(by: CGFloat(angle))
                 let oval = CGRect(x: -rx, y: -ry, width: 2 * rx, height: 2 * ry)
                 let path = Path(ellipseIn: oval).applying(transform)
-                context.fill(path, with: .color(color.opacity(0.38)))
-                context.stroke(path, with: .color(color), lineWidth: CGFloat(ring))
+                if plastic {
+                    // A solid plate: lit from the upper left, a light rim, a dark hub.
+                    context.fill(path, with: .color(color.opacity(0.92)))
+                    let box = path.boundingRect
+                    context.fill(path, with: .linearGradient(Gradient(colors: [.white.opacity(0.22), .clear, .black.opacity(0.2)]),
+                                                             startPoint: CGPoint(x: box.minX, y: box.minY), endPoint: CGPoint(x: box.maxX, y: box.maxY)))
+                    context.stroke(path, with: .color(.white.opacity(0.35)), lineWidth: CGFloat(max(1, ring * 0.6)))
+                    let hub = Path(ellipseIn: CGRect(x: -rx * 0.22, y: -ry * 0.22, width: rx * 0.44, height: ry * 0.44)).applying(transform)
+                    context.fill(hub, with: .color(.black.opacity(0.35)))
+                } else {
+                    context.fill(path, with: .color(color.opacity(0.38)))
+                    context.stroke(path, with: .color(color), lineWidth: CGFloat(ring))
+                }
             }
         }
     }

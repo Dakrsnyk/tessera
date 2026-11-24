@@ -39,6 +39,20 @@ enum ExerciseCategory: String, CaseIterable, Identifiable {
         }
     }
 
+    /// The anatomy figure of the category (the body with its muscles in red), none for cardio, mobility and others.
+    var anatomyID: String? {
+        switch self {
+        case .chest: MuscleGroup.chest.anatomyID
+        case .back: MuscleGroup.back.anatomyID
+        case .shoulders: MuscleGroup.shoulders.anatomyID
+        case .arms: MuscleGroup.biceps.anatomyID
+        case .legs: MuscleGroup.quads.anatomyID
+        case .abs: MuscleGroup.abs.anatomyID
+        case .fullBody: MuscleGroup.fullBody.anatomyID
+        case .cardio, .mobility, .other: nil
+        }
+    }
+
     /// The category of an exercise of the library.
     static func of(_ info: ExerciseInfo) -> ExerciseCategory {
         switch info.type {
@@ -197,41 +211,9 @@ struct FitnessProgressCategoryPage: View {
             detail = Fmt.plural(exercise.sessionCount, tr("séance"), tr("séances"))
         }
         let info = exercise.id.flatMap { ExerciseLibrary.info($0) }
-        let row = Group {
-            if let info {
-                // The exercise's own demonstration, small and looping (PDG, 2026-11-23); the whole sheet one tap away.
-                HStack(spacing: 12) {
-                    ExerciseDemoView(exercise: info, colorHex: MiniApp.fitness.colorHex, height: 56, compact: true)
-                        .frame(width: 64, height: 56)
-                        .allowsHitTesting(false)
-                        .accessibilityHidden(true)
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(exercise.name)
-                            .font(.body.weight(.medium))
-                            .foregroundStyle(.primary)
-                            .lineLimit(2)
-                        Text(detail)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
-                        Text(exercise.bestText(in: system))
-                            .font(.subheadline.weight(.semibold))
-                            .foregroundStyle(.secondary)
-                            .monospacedDigit()
-                    }
-                    Spacer(minLength: 8)
-                    Image(systemName: "chevron.right")
-                        .font(.caption.weight(.bold))
-                        .foregroundStyle(.tertiary)
-                }
-                .padding(.vertical, 8)
-                .contentShape(Rectangle())
-                .accessibilityElement(children: .combine)
-            } else {
-                MiniRow(symbol: category.symbol, colorHex: MiniApp.fitness.colorHex,
-                        title: exercise.name, detail: detail, value: exercise.bestText(in: system), showsChevron: false)
-            }
-        }
+        // The exercise's own demonstration, small and looping (CEO, 2026-11-23); the whole sheet one tap away.
+        let row = DemoRow(demoID: info?.id, symbol: category.symbol, title: exercise.name, detail: detail,
+                          value: exercise.bestText(in: system), showsChevron: info != nil)
         .accessibilityIdentifier("progress-exercise-\(exercise.id ?? exercise.key)")
         return Group {
             if let info {

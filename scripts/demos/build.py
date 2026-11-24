@@ -5,7 +5,6 @@ from pathlib import Path
 
 import demos
 import ex_chest, ex_legs, ex_back, ex_shoulders, ex_arms, ex_core, ex_full, ex_cardio, ex_mobility  # noqa: F401  (registration)
-from preview import sheet, animation
 
 OUT = Path(__file__).parent / "out"
 OUT.mkdir(exist_ok=True)
@@ -23,6 +22,7 @@ def build(ids=None):
 
 
 if __name__ == "__main__":
+    from preview import sheet  # review sheets only: the export does not need Playwright
     ids = sys.argv[1:] or None
     results, problems = build(ids)
     for ident, probs in problems.items():

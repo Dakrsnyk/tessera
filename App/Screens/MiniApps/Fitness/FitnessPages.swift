@@ -348,7 +348,8 @@ struct FitnessProgressPage: View {
     private func categoryRow(_ group: ProgressCategoryGroup) -> some View {
         let system = model.settings.unitSystem
         let top = group.exercises.first
-        return MiniRow(symbol: group.category.symbol, colorHex: MiniApp.fitness.colorHex, title: group.category.title,
+        // The body with the category's muscles in red (anatomy figure), as the exercises below show their own figure.
+        return DemoRow(demoID: group.category.anatomyID, symbol: group.category.symbol, title: group.category.title,
                        detail: Fmt.plural(group.exercises.count, tr("exercice"), tr("exercices")),
                        value: top.map { $0.bestText(in: system) })
     }

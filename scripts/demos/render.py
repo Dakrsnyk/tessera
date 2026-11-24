@@ -94,7 +94,9 @@ class Player:
         proj = view.project(pts)
         minx, miny, maxx, maxy = box or v["box"]
         w, h = maxx - minx, maxy - miny
-        scale = min((W - 2 * margin) / w, (H - 2 * margin) / h, (H - 2 * margin) / 1.75)
+        scale = min((W - 2 * margin) / w, (H - 2 * margin) / h)
+        if not v.get("close"):
+            scale = min(scale, (H - 2 * margin) / 1.75)
         cx, cy = (minx + maxx) / 2, (miny + maxy) / 2
 
         def sx(x):

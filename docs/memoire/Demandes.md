@@ -409,6 +409,7 @@ Retour : [[Memoire]]
 
 ## Fait
 
+- [x] **Mannequin plastique sculpté pour toutes les démonstrations, matériel au même style, nouvelle présentation des exercices** (demandé et fait le 2026-11-23, à vérifier sur l'iPhone) : voir Chantiers, chantier 52.
 - [x] **Ding de la pub pour la fin du repos, progression par catégories, exercices tapés reconnus, base d'exercices enrichie** (demandé et fait le 2026-11-23, à vérifier sur l'iPhone) : voir Chantiers, chantier 51 ; 917 exercices (163 + 754 de free-exercise-db, domaine public).
 - [x] **Widget Solde, Séance du jour distincte, « ding » de fin de repos** (demandé et fait le 2026-11-23, à vérifier sur l'iPhone) : widget « Solde » (`balance`) dans le Budget ; « Séance du jour » = vue d'ensemble de la séance avec ▶ « Commencer » (badge interactif), sans « Série faite » ; fin du repos = « ding » d'Ardane (notes de verre ré5-la5 de la fin des pubs) ou vibration en silencieux. Détail : Chantiers, chantier 50.
 - [x] **Toutes les mini-apps : même structure, avec le sélecteur de semaine** (demandé le 2026-10-22). Pour les agents : appliquer à CHAQUE mini-app (Nutrition, Fitness, Planning, Finances, Business, Voyage, Auto, Météo ; Photos et citations n'a aucun contenu daté : sans sélecteur, ses blocs suivent le même ordre) l'ordre suivant, de haut en bas :

@@ -31,7 +31,8 @@ struct DemoGalleryView: View {
                             ForEach(phases(demo), id: \.self) { p in
                                 Canvas { context, size in
                                     DemoRenderer.draw(demo, p: p, view: min(view, demo.views.count - 1), in: &context, size: size,
-                                                      palette: palette)
+                                                      palette: palette, muscles: DemoMuscles(primary: exercise.primary, secondary: exercise.secondary),
+                                                      dark: true)
                                 }
                                 .background(palette.background, in: RoundedRectangle(cornerRadius: 8))
                             }
