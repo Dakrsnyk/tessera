@@ -21,6 +21,8 @@ final class SculptMannequinTests: XCTestCase {
             XCTAssertTrue(joints.allSatisfy { $0.x.isFinite && $0.y.isFinite && $0.z.isFinite }, id)
             XCTAssertNotNil(Sculpt.Body(joints), id)
         }
+        // The new movements of the triage (2026-11-24) are in it, with their own skeleton.
+        XCTAssertGreaterThanOrEqual(ExerciseDemos.ids.filter { $0.hasPrefix("x-") }.count, 75)
     }
 
     func testTheMannequinIsBuiltWithItsMusclesLit() throws {
