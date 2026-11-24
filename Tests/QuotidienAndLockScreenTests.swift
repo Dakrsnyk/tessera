@@ -186,7 +186,7 @@ final class QuotidienAndLockScreenTests: XCTestCase {
     // MARK: Interactive widgets
 
     func testInteractiveWidgetsAreMarked() {
-        for kind in [WidgetKind.nextSet, .restTimer, .tasks, .habits, .caloriesLeft] {
+        for kind in [WidgetKind.nextSet, .restTimer, .tasks, .habits, .macros] {
             XCTAssertTrue(kind.isInteractive, "\(kind) should carry the interactive badge")
         }
         XCTAssertFalse(WidgetKind.clock.isInteractive)

@@ -111,6 +111,7 @@ struct PlanningAppView: View {
         .navigationTitle(tr("Planning"))
         .miniAppTour(.planning)
         .onAppear(perform: loadEvents)
+        .task { await offerCalendarOnce() }
         .onChange(of: day) { _, _ in loadEvents() }
         .onChange(of: scale) { _, _ in loadEvents() }
         .planningEditors($editors)
@@ -186,6 +187,26 @@ struct PlanningAppView: View {
             }
             .buttonStyle(.pressable)
             .accessibilityIdentifier("planning-import-schedule")
+        }
+    }
+
+    /// Entering Planning for the first time offers to link the Apple calendar: the usual explanation, then the system
+    /// question (the same flow as the row « Ajouter les événements de mon calendrier »). Only while access was never
+    /// asked, and once: the offer is remembered even if the explanation is closed with « Plus tard ». Never in captures
+    /// and UI tests, and not over the discovery tour (it comes at the next visit).
+    private func offerCalendarOnce() async {
+        #if DEBUG
+        if ScreenshotMode.isActive { return }
+        #endif
+        let key = "planningCalendarOffered"
+        guard !UserDefaults.standard.bool(forKey: key),
+              await AppPermission.calendar.currentState() == .notDetermined else { return }
+        // Let the page and a possible tour settle first.
+        try? await Task.sleep(for: .milliseconds(700))
+        guard !Task.isCancelled, MiniAppTourController.shared.id == nil else { return }
+        UserDefaults.standard.set(true, forKey: key)
+        if await AppPermission.calendar.requestOrExplain(isPresented: $askingCalendar, request: requestCalendar) != nil {
+            loadEvents()
         }
     }
 

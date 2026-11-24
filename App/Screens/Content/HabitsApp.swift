@@ -237,7 +237,16 @@ struct HabitsApp: View {
             MiniSectionTitle(title: tr("Aller plus loin"))
             MiniRowsCard {
                 NavigationLink { HabitsReportView() } label: {
-                    MiniRow(symbol: "chart.bar.fill", colorHex: accentHex, title: tr("Bilan"), detail: tr("Régularité, semaines, jours complets"))
+                    // « Bilan » is Premium: the badge sits before the chevron (the row draws its own chevron only when asked).
+                    HStack(spacing: 8) {
+                        MiniRow(symbol: "chart.bar.fill", colorHex: accentHex, title: tr("Bilan"), detail: tr("Régularité, semaines, jours complets"), showsChevron: model.isPremium)
+                        if !model.isPremium {
+                            PremiumBadge(compact: true)
+                            Image(systemName: "chevron.right")
+                                .font(.caption.weight(.bold))
+                                .foregroundStyle(.tertiary)
+                        }
+                    }
                 }
                 .buttonStyle(.pressable)
                 .accessibilityIdentifier("habits-report")

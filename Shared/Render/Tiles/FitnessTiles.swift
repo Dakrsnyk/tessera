@@ -10,7 +10,8 @@ enum FitnessTiles {
         let system = context.settings.unitSystem
         switch context.design.kind {
         case .todaysWorkout: return todaysWorkout(state, now: now, system: system)
-        case .nextSet: return nextSet(state, now: now, system: system)
+        // The session beside the set where there is room for it: two lines in the medium size, all of it in the large.
+        case .nextSet: return nextSet(state, now: now, system: system, sessionRows: context.isLarge ? 8 : (context.isMedium ? 2 : 0))
         case .restTimer: return restTimer(state, now: now, system: system)
         case .weeklyVolume: return weeklyVolume(state, now: now, system: system)
         case .personalRecords: return records(state, system: system)
@@ -83,23 +84,30 @@ enum FitnessTiles {
         } else {
             tile.caption = tr("\(Fmt.plural(exercises.count, tr("exercice"), tr("exercices"))) · \(totalSets) séries")
         }
-        tile.rows = exercises.enumerated().map { pair -> TileRow in
-            let isCurrent = active.map { $0.exerciseIndex == pair.offset } ?? false
-            let isDone = active.map { $0.exerciseIndex > pair.offset } ?? doneToday
-            return TileRow(id: "\(pair.offset)", title: pair.element.name, value: setsText(pair.element, system: system), isDone: isDone, isHighlighted: isCurrent)
-        }
-        // The whole session at a glance, not the set-by-set controls of « Prochaine série » (2026-11-23): no « Série
-        // faite » here, only « Commencer » in the header before the session (an icon in the small size), so the
-        // exercise list keeps its room in the medium and large sizes.
+        tile.rows = sessionRows(exercises, active: active, doneToday: doneToday, system: system)
+        // The session at a glance, and nothing to press (CEO, 2026-11-24: the free widgets are not interactive): the
+        // session of the day and, once it has started, the exercise in progress. The sets are done from « Prochaine
+        // série » (Premium) or in the app.
         tile.buttons = []
-        if active == nil, !doneToday {
-            tile.headerButton = TileButton(title: tr("Commencer"), symbol: "play.fill", action: .completeSet(state.position), isProminent: true)
+        if let active, let exercise = active.currentExercise {
+            tile.detail = tr("\(exercise.name) · série \(active.setIndex + 1)/\(exercise.sets)")
         }
         tile.inline = tr("\(tile.value) · \(totalSets) séries")
         return tile
     }
 
-    static func nextSet(_ state: FitnessState, now: Date, system: UnitSystem = .metric) -> Tile {
+    /// The exercises of a session as lines: the ones done ticked, the one in progress standing out.
+    static func sessionRows(_ exercises: [ExerciseTemplate], active: WorkoutSession?, doneToday: Bool, system: UnitSystem) -> [TileRow] {
+        exercises.enumerated().map { pair -> TileRow in
+            let isCurrent = active.map { $0.exerciseIndex == pair.offset } ?? false
+            let isDone = active.map { $0.exerciseIndex > pair.offset } ?? doneToday
+            return TileRow(id: "\(pair.offset)", title: pair.element.name, value: setsText(pair.element, system: system), isDone: isDone, isHighlighted: isCurrent)
+        }
+    }
+
+    /// `sessionRows`: how many exercises of the session are listed beside the set (0: none, the small size and the
+    /// Lock Screen), from the one in progress.
+    static func nextSet(_ state: FitnessState, now: Date, system: UnitSystem = .metric, sessionRows limit: Int = 0) -> Tile {
         let active = state.active.flatMap { $0.isFinished || $0.isIdle(at: now) ? nil : $0 }
         guard let exercise = active?.currentExercise ?? state.routine(for: now)?.exercises.first else {
             return .empty(tr("Prochaine série"), symbol: "arrow.forward.circle.fill", message: hint)
@@ -116,6 +124,13 @@ enum FitnessTiles {
             tile.detail = tr("Touche pour démarrer « \(state.routine(for: now)?.name ?? tr("ta séance")) »")
         }
         tile.buttons = setButtons(state, now: now)
+        if limit > 0, let exercises = active?.exercises ?? state.routine(for: now)?.exercises, !exercises.isEmpty {
+            let all = sessionRows(exercises, active: active, doneToday: false, system: system)
+            // The exercise in progress first, with the ones that follow (the last ones when the session ends).
+            let current = active?.exerciseIndex ?? 0
+            let start = max(0, min(current, all.count - limit))
+            tile.rows = Array(all.dropFirst(start).prefix(limit))
+        }
         tile.inline = "\(exercise.name) : \(setText(exercise, system: system))"
         tile.shortValue = "\(setNumber)/\(exercise.sets)"
         return tile

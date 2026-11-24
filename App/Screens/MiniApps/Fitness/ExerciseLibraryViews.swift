@@ -311,7 +311,6 @@ struct ExerciseDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var adding = false
     @State private var addedToSession = false
-    @State private var alternative: ExerciseInfo?
     @State private var paywall: PaywallContext?
     @Environment(\.appStyle) private var style
     private var palette: CristalPalette { CristalPalette.of(style.id) }
@@ -404,11 +403,22 @@ struct ExerciseDetailView: View {
                         ForEach(Array(alternatives.enumerated()), id: \.element.id) { index, other in
                             Group {
                                 if inSheet {
-                                    Button {
-                                        if model.canOpenExercise(other.id) { alternative = other } else { paywall = .exerciseLibrary }
-                                    } label: {
-                                        MiniRow(symbol: other.pattern == exercise.pattern ? "arrow.triangle.branch" : "arrow.left.arrow.right", colorHex: accentHex,
-                                                title: other.name, detail: other.pattern == exercise.pattern ? tr("Variante") : tr("Mêmes muscles"))
+                                    // The sheet has its own stack (no path): a plain destination link, not `navigationDestination(item:)`,
+                                    // which on the path-driven Home stack sent « retour » back to the mini-app's first page.
+                                    if model.canOpenExercise(other.id) {
+                                        NavigationLink {
+                                            ExerciseDetailView(exercise: other, inSheet: true)
+                                        } label: {
+                                            MiniRow(symbol: other.pattern == exercise.pattern ? "arrow.triangle.branch" : "arrow.left.arrow.right", colorHex: accentHex,
+                                                    title: other.name, detail: other.pattern == exercise.pattern ? tr("Variante") : tr("Mêmes muscles"))
+                                        }
+                                    } else {
+                                        Button {
+                                            paywall = .exerciseLibrary
+                                        } label: {
+                                            MiniRow(symbol: other.pattern == exercise.pattern ? "arrow.triangle.branch" : "arrow.left.arrow.right", colorHex: accentHex,
+                                                    title: other.name, detail: other.pattern == exercise.pattern ? tr("Variante") : tr("Mêmes muscles"))
+                                        }
                                     }
                                 } else {
                                     NavigationLink(value: HomeRoute.page(.fitnessExercise(other.id))) {
@@ -477,9 +487,6 @@ struct ExerciseDetailView: View {
             AddToRoutineSheet(exercise: exercise)
         }
         .sheet(item: $paywall) { PaywallView(context: $0) }
-        .navigationDestination(item: $alternative) { other in
-            ExerciseDetailView(exercise: other, inSheet: true)
-        }
         .onAppear {
             model.update(\.fitness) { $0.noteUsed(exercise.id) }
         }

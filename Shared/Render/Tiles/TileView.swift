@@ -359,6 +359,12 @@ struct TileView: View {
                 TileRowsView(rows: rows(mediumRowLimit), context: context, compact: false)
                 Spacer(minLength: 0)
                 if !tile.buttons.isEmpty {
+                    // The rest of « Prochaine série » stays visible above its buttons, as a thin line.
+                    if hasVisual && isTimer {
+                        visual(compact: true)
+                            .frame(height: 8)
+                            .padding(.bottom, 5)
+                    }
                     TileButtonsRow(buttons: Array(tile.buttons.prefix(2)), context: context)
                 }
             }

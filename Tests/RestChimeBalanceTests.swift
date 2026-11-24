@@ -66,7 +66,7 @@ final class RestChimeBalanceTests: XCTestCase {
         state.routines = [routine()]
         var tile = FitnessTiles.todaysWorkout(state, now: t0)
         XCTAssertTrue(tile.buttons.isEmpty, "No « Série faite » in « Séance du jour »")
-        XCTAssertEqual(tile.headerButton?.symbol, "play.fill", "« Commencer » before the session")
+        XCTAssertNil(tile.headerButton, "Nothing to press: the free widgets are not interactive (2026-11-24)")
         XCTAssertEqual(tile.rows.count, 2, "Every exercise of the session")
 
         state.startSession(routine(), at: t0)
@@ -78,7 +78,25 @@ final class RestChimeBalanceTests: XCTestCase {
 
         let next = FitnessTiles.nextSet(state, now: t0.addingTimeInterval(40))
         XCTAssertTrue(next.buttons.contains { $0.symbol == "checkmark" }, "« Prochaine série » keeps « Série faite »")
-        XCTAssertTrue(WidgetKind.todaysWorkout.isInteractive)
+        XCTAssertNotNil(tile.detail, "Once started, the exercise in progress and its set")
+        // « Séance du jour » is free and shows only; « Prochaine série » does the sets, in Premium, with the session
+        // beside the set where there is room (CEO, 2026-11-24).
+        XCTAssertFalse(WidgetKind.todaysWorkout.isInteractive)
+        XCTAssertFalse(WidgetKind.todaysWorkout.isPremium)
+        XCTAssertTrue(WidgetKind.nextSet.isInteractive)
+        XCTAssertTrue(WidgetKind.nextSet.isPremium)
+        XCTAssertTrue(next.rows.isEmpty, "No list in the small size")
+        let wide = FitnessTiles.nextSet(state, now: t0.addingTimeInterval(40), sessionRows: 2)
+        XCTAssertEqual(wide.rows.count, 2, "The session beside the set in the medium size")
+        XCTAssertEqual(wide.rows.filter(\.isHighlighted).count, 1)
+        // Nutrition: « Calories restantes » is free and shows only; « Macros » is Premium.
+        XCTAssertFalse(WidgetKind.caloriesLeft.isInteractive)
+        XCTAssertFalse(WidgetKind.caloriesLeft.isPremium)
+        XCTAssertTrue(WidgetKind.macros.isPremium)
+        // No free widget of Nutrition or Fitness is interactive.
+        for kind in WidgetKind.freeKinds where kind.space == .nutrition || kind.space == .fitness {
+            XCTAssertFalse(kind.isInteractive, kind.rawValue)
+        }
     }
 
     // MARK: Solde

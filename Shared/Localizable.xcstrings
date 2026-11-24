@@ -224285,6 +224285,53 @@
         }
       }
     },
+    "Ta séance du jour et, une fois lancée, l'exercice en cours.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dein heutiges Training und, sobald es läuft, die aktuelle Übung."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today's workout and, once it has started, the exercise in progress."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tu sesión de hoy y, una vez empezada, el ejercicio en curso."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ta séance du jour et, une fois lancée, l'exercice en cours."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'allenamento di oggi e, una volta iniziato, l'esercizio in corso."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今日のワークアウトと、開始後は進行中のエクササイズ。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seu treino de hoje e, depois de iniciado, o exercício em andamento."
+          }
+        }
+      }
+    },
     "Ta séance t'attend": {
       "extractionState": "manual",
       "localizations": {
@@ -240966,53 +241013,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Série inteira"
-          }
-        }
-      }
-    },
-    "Toute ta séance du jour : ses exercices, ta progression, et un bouton pour la lancer.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dein ganzes Training des Tages: die Übungen, dein Fortschritt und ein Button zum Starten."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your whole workout for today: its exercises, your progress, and a button to start it."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toda tu rutina de hoy: sus ejercicios, tu progreso y un botón para empezarla."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Toute ta séance du jour : ses exercices, ta progression, et un bouton pour la lancer."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tutto l'allenamento di oggi: gli esercizi, i tuoi progressi e un pulsante per iniziarlo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日のワークアウト全体：種目、進み具合、開始ボタン。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Todo o seu treino do dia: os exercícios, seu progresso e um botão para começar."
           }
         }
       }
