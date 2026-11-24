@@ -36,6 +36,15 @@ final class ExerciseCatalogMatcherTests: XCTestCase {
         XCTAssertTrue(info.aliases.contains(entry.n["en"] ?? ""), "The other languages are aliases")
     }
 
+    func testEachNameLeadsToOneExerciseInEachLanguage() throws {
+        let entries = try XCTUnwrap(ExerciseCatalog.file?.exercises)
+        for language in ["fr", "en", "es", "de", "it", "pt-BR", "ja"] {
+            let names = entries.compactMap { $0.n[language].map(ExerciseLibrary.normalized) }
+            XCTAssertEqual(names.count, entries.count, language)
+            XCTAssertEqual(Set(names).count, names.count, "\(language): a name repeats")
+        }
+    }
+
     // MARK: Words
 
     func testTheWordsOfAName() {
