@@ -29,7 +29,11 @@ struct PremiumLockCard: View {
                 // The paywall starts with this card's own words (over a sheet too).
                 paywall = PaywallContext(symbol: symbol, title: title, detail: message, perk: perk)
             } label: {
-                Label(tr("Découvrir Premium"), systemImage: "sparkles")
+                Label {
+                    Text(tr("Découvrir Premium"))
+                } icon: {
+                    PremiumMark(size: 20)
+                }
                     .font(.subheadline.weight(.semibold))
                     .frame(maxWidth: .infinity, minHeight: 44)
             }

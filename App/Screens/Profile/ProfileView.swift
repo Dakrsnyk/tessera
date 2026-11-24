@@ -388,7 +388,12 @@ struct ProfileView: View {
                 Text(name.isEmpty ? tr("Ton profil") : name)
                     .font(.title2.weight(.bold))
                     .foregroundStyle(.primary)
-                Label(model.isPremium ? tr("Ardane Premium") : tr("Version gratuite"), systemImage: model.isPremium ? "sparkles" : "person")
+                Label {
+                    Text(model.isPremium ? tr("Ardane Premium") : tr("Version gratuite"))
+                } icon: {
+                    // Premium's sign is the Ardane A on gold (CEO, 2026-11-24), not the stars.
+                    if model.isPremium { PremiumMark(size: 18) } else { Image(systemName: "person") }
+                }
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(model.isPremium ? Color.premiumInk : Color.secondary)
             }
@@ -449,10 +454,9 @@ struct ProfileView: View {
         Section {
             if model.isPremium {
                 HStack(spacing: 12) {
-                    Image(systemName: "sparkles")
-                        .foregroundStyle(Color.premiumInk)
+                    ArdaneGlyph(size: 16)
                         .frame(width: 36, height: 36)
-                        .background(Color.premiumFill, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+                        .background(Color.premiumGold, in: RoundedRectangle(cornerRadius: 10, style: .continuous))
                     VStack(alignment: .leading, spacing: 2) {
                         Text(tr("Premium actif")).font(.headline)
                         Text(premiumDetail).font(.caption).foregroundStyle(.secondary)

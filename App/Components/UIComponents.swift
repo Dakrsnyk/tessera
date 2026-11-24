@@ -92,26 +92,61 @@ struct WidgetPreview: View {
     }
 }
 
+/// The sign of Premium: the Ardane A, dark brown on gold (CEO, 2026-11-24: the logo in place of the stars, in the
+/// style of the gold « Premium » of Home).
 struct PremiumBadge: View {
     var compact = false
 
     var body: some View {
         HStack(spacing: 3) {
-            Image(systemName: "sparkles")
+            ArdaneGlyph(size: 11)
             if !compact { Text(tr("Premium")) }
         }
-        .font(.caption2.weight(.semibold))
-        .foregroundStyle(Color.premiumInk)
+        .font(.caption2.weight(.bold))
+        .foregroundStyle(Color.premiumGoldInk)
         .padding(.horizontal, compact ? 5 : 7)
         .padding(.vertical, 3)
-        .background(Color.premiumFill, in: Capsule())
+        .background(Color.premiumGold, in: Capsule())
         .accessibilityLabel(Text(tr("Premium")))
+    }
+}
+
+/// The Ardane A as a sign in one color, without its ground: the two halves of the logo (`ArdaneHalf`), the right one
+/// a little lighter as on the icon. Dark brown by default, the color of Premium's gold signs.
+struct ArdaneGlyph: View {
+    var size: CGFloat = 14
+    var color: Color = .premiumGoldInk
+
+    var body: some View {
+        ZStack {
+            ArdaneHalf(side: .left).fill(color)
+            ArdaneHalf(side: .right).fill(color.opacity(0.72))
+        }
+        .frame(width: size, height: size)
+        // The A takes two thirds of the logo's square: drawn larger, it reads at the size of the text beside it.
+        .scaleEffect(1.4)
+        .accessibilityHidden(true)
+    }
+}
+
+/// The Ardane A on a gold disc: Premium's sign inside a button (« Découvrir Premium »).
+struct PremiumMark: View {
+    var size: CGFloat = 20
+
+    var body: some View {
+        ArdaneGlyph(size: size * 0.5)
+            .frame(width: size, height: size)
+            .background(Color.premiumGold, in: Circle())
     }
 }
 
 extension Color {
     static let premiumFill = Color(light: "F6E7B8", dark: "4A3B12")
     static let premiumInk = Color(light: "7A5500", dark: "F2D27A")
+    /// The gold of Premium's signs and the dark brown drawn on it, readable in light and dark mode.
+    static let premiumGoldInk = Color(hex: "3D2A00")
+    static let premiumGold = LinearGradient(colors: [Color(hex: "FCE9A8"), Color(hex: "E8BE55"), Color(hex: "D3A23C")],
+                                            startPoint: .topLeading, endPoint: .bottomTrailing)
 }
 
 struct CardBackground: ViewModifier {

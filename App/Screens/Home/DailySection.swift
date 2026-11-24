@@ -1797,8 +1797,8 @@ private struct PremiumGoldBadge: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 5) {
-                Image(systemName: "crown.fill")
-                    .font(.footnote.weight(.bold))
+                // The Ardane A in place of the crown, in the same dark brown (CEO, 2026-11-24).
+                ArdaneGlyph(size: 14, color: Color(hex: "3D2A00"))
                 Text(tr("Premium"))
                     .font(.subheadline.weight(.bold))
                     .lineLimit(1)
