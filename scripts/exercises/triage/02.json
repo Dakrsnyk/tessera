@@ -1,0 +1,414 @@
+{
+ "x-seated-dumbbell-inner-biceps-curl": {
+  "merge": "db-curl",
+  "why": "même curl haltères, simple variante de prise ou banc"
+ },
+ "x-dumbbell-prone-incline-curl": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé face contre un banc incliné, bras pendants avec haltères; fléchir les coudes en supination, redescendre, coudes immobiles.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-standing-inner-biceps-curl": {
+  "merge": "db-curl",
+  "why": "même curl haltères, simple variante de prise ou banc"
+ },
+ "x-flexor-incline-dumbbell-curls": {
+  "merge": "incline-curl",
+  "why": "variante du curl incliné haltères"
+ },
+ "x-alternate-incline-dumbbell-curl": {
+  "merge": "incline-curl",
+  "why": "variante du curl incliné haltères"
+ },
+ "x-incline-inner-biceps-curl": {
+  "merge": "incline-curl",
+  "why": "variante du curl incliné haltères"
+ },
+ "x-standing-dumbbell-reverse-curl": {
+  "merge": "reverse-curl",
+  "why": "curl en pronation, variante du curl inversé"
+ },
+ "x-reverse-cable-curl": {
+  "merge": "reverse-curl",
+  "why": "curl en pronation, variante du curl inversé"
+ },
+ "x-alternate-hammer-curl": {
+  "merge": "hammer-curl",
+  "why": "curl marteau, variante alternée ou inclinée"
+ },
+ "x-preacher-hammer-dumbbell-curl": {
+  "merge": "hammer-curl",
+  "why": "curl marteau, variante alternée ou inclinée"
+ },
+ "x-cross-body-hammer-curl": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, haltères en prise neutre; plier le coude en diagonale vers l'épaule opposée, redescendre, en alternant.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-incline-hammer-curls": {
+  "merge": "hammer-curl",
+  "why": "curl marteau, variante alternée ou inclinée"
+ },
+ "x-cable-hammer-curls-rope-attachment": {
+  "merge": "cable-curl",
+  "why": "curl à la poulie, simple variante de position"
+ },
+ "x-high-cable-curls": {
+  "merge": "cable-curl",
+  "why": "curl à la poulie, simple variante de position"
+ },
+ "x-one-arm-dumbbell-preacher-curl": {
+  "merge": "preacher-curl",
+  "why": "curl au pupitre, haltère ou machine"
+ },
+ "x-reverse-barbell-preacher-curls": {
+  "merge": "reverse-curl",
+  "why": "curl en pronation, variante du curl inversé"
+ },
+ "x-machine-preacher-curls": {
+  "merge": "preacher-curl",
+  "why": "curl au pupitre, haltère ou machine"
+ },
+ "x-drag-curl": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, barre en supination; coudes reculés, faire glisser la barre le long du corps en remontant, coudes derrière le torse.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-zottman-curl": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, haltères en supination; monter en supination, tourner en pronation au sommet, descendre lentement en pronation, retourner en bas.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-zottman-preacher-curl": {
+  "merge": "x-zottman-curl",
+  "why": "Zottman au pupitre, même geste de rotation"
+ },
+ "x-machine-bicep-curl": {
+  "merge": "preacher-curl",
+  "why": "curl au pupitre, haltère ou machine"
+ },
+ "x-standing-one-arm-cable-curl": {
+  "merge": "cable-curl",
+  "why": "curl à la poulie, simple variante de position"
+ },
+ "x-overhead-cable-curl": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout entre deux poulies hautes, bras écartés à hauteur d'épaules; fléchir les coudes en amenant les mains vers la tête, revenir.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-one-half-locust": {
+  "merge": "quad-stretch",
+  "why": "étirement rare du quadriceps au sol"
+ },
+ "x-ring-dips": {
+  "keep": true,
+  "demo": "new",
+  "move": "Suspendu aux anneaux en appui, bras tendus; fléchir les coudes en descendant les épaules sous les coudes, remonter en stabilisant les anneaux.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-weighted-bench-dip": {
+  "merge": "bench-dips",
+  "why": "dips sur banc avec charge"
+ },
+ "x-dip-machine": {
+  "keep": true,
+  "demo": "new",
+  "move": "Assis à la machine à dips, mains sur les poignées; pousser vers le bas jusqu'à extension des coudes, remonter contrôlé.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-linear-acceleration-wall-drill": {
+  "merge": "running",
+  "why": "drill de sprint, proche de la course"
+ },
+ "x-linear-3-part-start-technique": {
+  "merge": "running",
+  "why": "drill de sprint, proche de la course"
+ },
+ "x-side-to-side-box-shuffle": {
+  "merge": "box-jump",
+  "why": "drill de pas sur box, très spécialisé"
+ },
+ "x-see-saw-press-alternating-side-press": {
+  "merge": "db-shoulder-press",
+  "why": "développé haltères, simple variante unilatérale ou alternée"
+ },
+ "x-anti-gravity-press": {
+  "merge": "ohp",
+  "why": "développé barre, variante rare ou avec élastique"
+ },
+ "x-kettlebell-arnold-press": {
+  "merge": "arnold-press",
+  "why": "Arnold avec kettlebell, même rotation"
+ },
+ "x-dumbbell-floor-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé au sol, genoux fléchis, haltères aux mains; pousser vers le haut jusqu'à extension, descendre jusqu'à toucher le sol avec les triceps.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-alternating-floor-press": {
+  "merge": "db-bench",
+  "why": "développé haltères ou kettlebell, variante au sol ou unilatérale"
+ },
+ "x-leg-over-floor-press": {
+  "merge": "db-bench",
+  "why": "développé haltères ou kettlebell, variante au sol ou unilatérale"
+ },
+ "x-one-arm-kettlebell-floor-press": {
+  "merge": "db-bench",
+  "why": "développé haltères ou kettlebell, variante au sol ou unilatérale"
+ },
+ "x-extended-range-one-arm-kettlebell-floor-press": {
+  "merge": "db-bench",
+  "why": "développé haltères ou kettlebell, variante au sol ou unilatérale"
+ },
+ "x-one-arm-floor-press": {
+  "merge": "x-floor-press",
+  "why": "développé au sol à un bras, même mouvement"
+ },
+ "x-chain-press": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-kettlebell-seesaw-press": {
+  "merge": "kb-press",
+  "why": "développé kettlebell, variante de côté ou de position"
+ },
+ "x-standing-bradford-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, barre; développer devant la tête sans verrouiller, descendre derrière la nuque, alterner devant et derrière en continu.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-bradford-rocky-presses": {
+  "merge": "x-standing-bradford-press",
+  "why": "même développé Bradford devant-derrière"
+ },
+ "x-bench-press-powerlifting": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-smith-machine-bench-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé sur banc sous la barre guidée de la Smith machine; descendre la barre à la poitrine et repousser sur rails verticaux.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-floor-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé au sol, barre tenue au-dessus de la poitrine; descendre jusqu'à poser les triceps au sol, repousser jusqu'à extension.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-floor-press-with-chains": {
+  "merge": "x-floor-press",
+  "why": "développé au sol avec chaînes ajoutées"
+ },
+ "x-pin-presses": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-bench-press-with-chains": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-board-press": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-bench-press-with-bands": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-reverse-band-bench-press": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-close-grip-ez-bar-press": {
+  "merge": "close-grip-bench",
+  "why": "développé prise serrée, variante de barre ou prise"
+ },
+ "x-one-arm-dumbbell-bench-press": {
+  "merge": "db-bench",
+  "why": "développé haltères ou kettlebell, variante au sol ou unilatérale"
+ },
+ "x-dumbbell-bench-press-with-neutral-grip": {
+  "merge": "db-bench",
+  "why": "développé haltères ou kettlebell, variante au sol ou unilatérale"
+ },
+ "x-reverse-triceps-bench-press": {
+  "merge": "close-grip-bench",
+  "why": "développé prise serrée, variante de barre ou prise"
+ },
+ "x-wide-grip-barbell-bench-press": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-smith-machine-close-grip-bench-press": {
+  "merge": "close-grip-bench",
+  "why": "développé prise serrée, variante de barre ou prise"
+ },
+ "x-cable-chest-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout ou assis dos à deux poulies, poignées à hauteur de poitrine; pousser les mains vers l'avant jusqu'à extension, revenir.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-cuban-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, haltères; tirer les coudes en rowing menton, rotation externe jusqu'à 90 degrés, puis développer au-dessus de la tête et redescendre.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-smith-machine-decline-press": {
+  "merge": "machine-chest-press",
+  "why": "développé guidé à la machine, même mouvement"
+ },
+ "x-decline-dumbbell-bench-press": {
+  "merge": "db-bench",
+  "why": "développé haltères ou kettlebell, variante au sol ou unilatérale"
+ },
+ "x-wide-grip-decline-barbell-bench-press": {
+  "merge": "decline-bench",
+  "why": "décliné prise large, variante mineure"
+ },
+ "x-decline-close-grip-bench-to-skull-crusher": {
+  "merge": "skull-crusher",
+  "why": "développé serré vers barre au front, proche"
+ },
+ "x-leverage-decline-chest-press": {
+  "merge": "machine-chest-press",
+  "why": "développé guidé à la machine, même mouvement"
+ },
+ "x-decline-smith-press": {
+  "merge": "machine-chest-press",
+  "why": "développé guidé à la machine, même mouvement"
+ },
+ "x-barbell-guillotine-bench-press": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-standing-alternating-dumbbell-press": {
+  "merge": "db-shoulder-press",
+  "why": "développé haltères, simple variante unilatérale ou alternée"
+ },
+ "x-close-grip-dumbbell-press": {
+  "merge": "db-bench",
+  "why": "développé haltères prise serrée, variante mineure"
+ },
+ "x-smith-machine-incline-bench-press": {
+  "merge": "incline-bench",
+  "why": "incliné à la Smith, variante guidée"
+ },
+ "x-hammer-grip-incline-db-bench-press": {
+  "merge": "incline-db",
+  "why": "incliné haltères prise neutre, variante mineure"
+ },
+ "x-incline-dumbbell-bench-with-palms-facing-in": {
+  "merge": "incline-db",
+  "why": "incliné haltères prise neutre, variante mineure"
+ },
+ "x-leverage-incline-chest-press": {
+  "merge": "machine-chest-press",
+  "why": "développé guidé à la machine, même mouvement"
+ },
+ "x-incline-cable-chest-press": {
+  "merge": "x-cable-chest-press",
+  "why": "développé poulie, variante inclinée ou debout"
+ },
+ "x-alternating-kettlebell-press": {
+  "merge": "kb-press",
+  "why": "développé kettlebell, variante de côté ou de position"
+ },
+ "x-kettlebell-seated-press": {
+  "merge": "kb-press",
+  "why": "développé kettlebell, variante de côté ou de position"
+ },
+ "x-smith-machine-overhead-shoulder-press": {
+  "merge": "machine-shoulder-press",
+  "why": "développé épaules guidé, même mouvement"
+ },
+ "x-two-arm-kettlebell-military-press": {
+  "merge": "kb-press",
+  "why": "développé kettlebell, variante de côté ou de position"
+ },
+ "x-one-arm-kettlebell-military-press-to-the-side": {
+  "merge": "kb-press",
+  "why": "développé kettlebell, variante de côté ou de position"
+ },
+ "x-neck-press": {
+  "merge": "bench-press",
+  "why": "développé couché barre, matériel ou prise différente"
+ },
+ "x-standing-barbell-press-behind-neck": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, barre derrière la nuque sur les trapèzes; développer verticalement jusqu'à extension, redescendre derrière la nuque.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-standing-cable-chest-press": {
+  "merge": "x-cable-chest-press",
+  "why": "développé poulie, variante inclinée ou debout"
+ },
+ "x-standing-palm-in-one-arm-dumbbell-press": {
+  "merge": "db-shoulder-press",
+  "why": "développé haltères, simple variante unilatérale ou alternée"
+ },
+ "x-dumbbell-one-arm-shoulder-press": {
+  "merge": "db-shoulder-press",
+  "why": "développé haltères, simple variante unilatérale ou alternée"
+ },
+ "x-shoulder-press-with-bands": {
+  "merge": "ohp",
+  "why": "développé barre, variante rare ou avec élastique"
+ },
+ "x-standing-palms-in-dumbbell-press": {
+  "merge": "db-shoulder-press",
+  "why": "développé haltères, simple variante unilatérale ou alternée"
+ },
+ "x-cable-shoulder-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Assis ou debout entre deux poulies basses, poignées à hauteur d'épaules; développer au-dessus de la tête jusqu'à extension, redescendre.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-alternating-cable-shoulder-press": {
+  "merge": "x-cable-shoulder-press",
+  "why": "développé poulie, variante alternée ou assise"
+ },
+ "x-seated-cable-shoulder-press": {
+  "merge": "x-cable-shoulder-press",
+  "why": "développé poulie, variante alternée ou assise"
+ },
+ "x-isometric-wipers": {
+  "merge": "plank",
+  "why": "essuie-glaces isométrique en gainage, rare"
+ },
+ "x-hip-extension-with-bands": {
+  "merge": "cable-kickback",
+  "why": "extension de hanche, élastique au lieu de poulie"
+ },
+ "x-seated-one-arm-dumbbell-palms-down-wrist-curl": {
+  "keep": true,
+  "demo": "new",
+  "move": "Assis, avant-bras sur la cuisse, haltère en pronation; extension des poignets vers le haut puis retour, seul le poignet bouge.",
+  "why": "mouvement distinct, animation empruntée inexacte"
+ },
+ "x-seated-dumbbell-palms-down-wrist-curl": {
+  "merge": "x-seated-one-arm-dumbbell-palms-down-wrist-curl",
+  "why": "extension des poignets, variante de matériel"
+ },
+ "x-palms-down-wrist-curl-over-a-bench": {
+  "merge": "x-seated-one-arm-dumbbell-palms-down-wrist-curl",
+  "why": "extension des poignets, variante de matériel"
+ },
+ "x-palms-down-dumbbell-wrist-curl-over-a-bench": {
+  "merge": "x-seated-one-arm-dumbbell-palms-down-wrist-curl",
+  "why": "extension des poignets, variante de matériel"
+ }
+}

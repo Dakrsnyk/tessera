@@ -101,7 +101,7 @@ struct ProgressCategoryGroup: Identifiable, Hashable {
 enum FitnessProgressCategories {
     /// The key of a set: its library id, else the id the name resolves to, else the normalized name.
     static func key(of set: SetLog) -> String {
-        if let id = set.exerciseID ?? ExerciseLibrary.match(name: set.exercise)?.id { return id }
+        if let id = set.exerciseID.map(ExerciseLibrary.canonical) ?? ExerciseLibrary.match(name: set.exercise)?.id { return id }
         return "name:" + ExerciseLibrary.normalized(set.exercise)
     }
 
@@ -120,7 +120,7 @@ enum FitnessProgressCategories {
             for set in session.sets { perKey[key(of: set), default: []].append(set) }
             for (k, sets) in perKey {
                 var acc = byKey[k] ?? {
-                    let id = sets[0].exerciseID ?? ExerciseLibrary.match(name: sets[0].exercise)?.id
+                    let id = sets[0].exerciseID.map(ExerciseLibrary.canonical) ?? ExerciseLibrary.match(name: sets[0].exercise)?.id
                     let info = id.flatMap { ExerciseLibrary.info($0) }
                     return Acc(name: info?.name ?? sets[0].exercise, info: info)
                 }()

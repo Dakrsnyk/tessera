@@ -886,7 +886,11 @@ enum ExerciseLibrary {
 
     private static let byID: [String: ExerciseInfo] = Dictionary(all.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
 
-    static func info(_ id: String) -> ExerciseInfo? { byID[id] }
+    /// An exercise by its id; an id merged into another exercise by the triage leads to that exercise.
+    static func info(_ id: String) -> ExerciseInfo? { byID[id] ?? ExerciseCatalog.redirects[id].flatMap { byID[$0] } }
+
+    /// The id an exercise is counted under: the exercise kept when this one was merged into it.
+    static func canonical(_ id: String) -> String { ExerciseCatalog.redirects[id] ?? id }
 
     static func normalized(_ text: String) -> String {
         FoodDatabase.normalized(text)

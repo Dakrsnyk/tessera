@@ -1,0 +1,406 @@
+{
+ "x-band-hip-adductions": {
+  "merge": "hip-adduction",
+  "why": "Même adduction de hanche, autre résistance"
+ },
+ "x-cable-hip-adduction": {
+  "merge": "hip-adduction",
+  "why": "Même adduction de hanche, autre résistance"
+ },
+ "x-snatch": {
+  "keep": true,
+  "demo": "new",
+  "why": "Arraché olympique complet, mouvement distinct",
+  "move": "Barre au sol, tirage explosif puis réception en squat, barre bras tendus au-dessus de la tête, prise large"
+ },
+ "x-muscle-snatch": {
+  "merge": "x-snatch",
+  "why": "Variante d'arraché olympique, départ ou réception différents"
+ },
+ "x-power-snatch": {
+  "keep": true,
+  "demo": "new",
+  "why": "Arraché de puissance courant en CrossFit",
+  "move": "Barre au sol, tirage explosif, réception en quart de squat bras tendus au-dessus de la tête, prise large"
+ },
+ "x-power-snatch-from-blocks": {
+  "merge": "x-snatch",
+  "why": "Variante d'arraché olympique, départ ou réception différents"
+ },
+ "x-snatch-from-blocks": {
+  "merge": "x-snatch",
+  "why": "Variante d'arraché olympique, départ ou réception différents"
+ },
+ "x-split-snatch": {
+  "merge": "x-snatch",
+  "why": "Variante d'arraché olympique, départ ou réception différents"
+ },
+ "x-one-arm-kettlebell-split-snatch": {
+  "keep": true,
+  "demo": "new",
+  "why": "Arraché kettlebell, groupe des arrachés kettlebell",
+  "move": "Un kettlebell entre les jambes, charnière de hanche, extension explosive, bras tendu au-dessus de la tête, réception pieds en fente"
+ },
+ "x-one-arm-kettlebell-snatch": {
+  "merge": "x-one-arm-kettlebell-split-snatch",
+  "why": "Même arraché kettlebell, un ou deux bras"
+ },
+ "x-hang-snatch": {
+  "keep": true,
+  "demo": "new",
+  "why": "Arraché suspendu, départ distinct de l'arraché",
+  "move": "Barre tenue prise large à mi-cuisses, charnière de hanche, extension explosive, réception bras tendus en squat"
+ },
+ "x-hang-snatch-below-knees": {
+  "merge": "x-snatch",
+  "why": "Variante d'arraché olympique, départ ou réception différents"
+ },
+ "x-double-kettlebell-snatch": {
+  "merge": "x-one-arm-kettlebell-split-snatch",
+  "why": "Même arraché kettlebell, un ou deux bras"
+ },
+ "x-snatch-balance": {
+  "merge": "x-snatch",
+  "why": "Variante d'arraché olympique, départ ou réception différents"
+ },
+ "x-neck-smr": {
+  "merge": "shoulder-stretch",
+  "why": "Auto-massage obscur, étirement d'épaule/nuque proche"
+ },
+ "x-hamstring-smr": {
+  "merge": "hamstring-stretch",
+  "why": "Rouleau d'ischio-jambiers, même zone"
+ },
+ "x-peroneals-smr": {
+  "merge": "calf-stretch",
+  "why": "Auto-massage de jambe, zone mollet proche"
+ },
+ "x-brachialis-smr": {
+  "merge": "triceps-stretch",
+  "why": "Auto-massage du bras, zone proche"
+ },
+ "x-foot-smr": {
+  "merge": "calf-stretch",
+  "why": "Auto-massage de jambe, zone mollet proche"
+ },
+ "x-piriformis-smr": {
+  "merge": "pigeon",
+  "why": "Rouleau piriforme, même zone fessière"
+ },
+ "x-anterior-tibialis-smr": {
+  "merge": "calf-stretch",
+  "why": "Auto-massage de jambe, zone mollet proche"
+ },
+ "x-front-leg-raises": {
+  "merge": "hip-circles",
+  "why": "Balancé de jambe, mobilité de hanche"
+ },
+ "x-decline-ez-bar-triceps-extension": {
+  "merge": "skull-crusher",
+  "why": "Même barre au front, variante de matériel"
+ },
+ "x-band-skull-crusher": {
+  "merge": "skull-crusher",
+  "why": "Même barre au front, variante de matériel"
+ },
+ "x-standing-pelvic-tilt": {
+  "merge": "cat-cow",
+  "why": "Mobilité du bassin, drill simple"
+ },
+ "x-pelvic-tilt-into-bridge": {
+  "merge": "glute-bridge",
+  "why": "Pont fessier avec bascule du bassin"
+ },
+ "x-kettlebell-pirate-ships": {
+  "merge": "x-external-rotation",
+  "why": "Exemple du PDG, rotation de l'épaule proche"
+ },
+ "x-flutter-kicks": {
+  "keep": true,
+  "demo": "new",
+  "why": "Battements de jambes, gainage bas du ventre",
+  "move": "Allongé sur le dos, jambes tendues décollées, battements verticaux alternés des deux jambes"
+ },
+ "x-bent-press": {
+  "keep": true,
+  "demo": "new",
+  "why": "Mouvement distinct du développé kettlebell",
+  "move": "Debout kettlebell au rack, flexion latérale du tronc sous la charge, bras tendu qui monte, redressement"
+ },
+ "x-alternate-leg-diagonal-bound": {
+  "keep": true,
+  "demo": "new",
+  "why": "Bonds au sol, groupe des bonds",
+  "move": "Debout, bond en diagonale d'une jambe sur l'autre, réception sur une jambe puis bond opposé"
+ },
+ "x-lateral-bound": {
+  "merge": "x-alternate-leg-diagonal-bound",
+  "why": "Même bond unilatéral, autre direction"
+ },
+ "x-single-leg-stride-jump": {
+  "merge": "x-alternate-leg-diagonal-bound",
+  "why": "Même bond unilatéral, autre direction"
+ },
+ "x-box-jump-multiple-response": {
+  "merge": "box-jump",
+  "why": "Même saut sur box"
+ },
+ "x-shoulder-circles": {
+  "merge": "arm-circles",
+  "why": "Cercles d'articulation du haut du corps"
+ },
+ "x-ankle-circles": {
+  "merge": "ankle-mobility",
+  "why": "Mobilité circulaire de cheville ou genou"
+ },
+ "x-elbow-circles": {
+  "merge": "arm-circles",
+  "why": "Cercles d'articulation du haut du corps"
+ },
+ "x-knee-circles": {
+  "merge": "ankle-mobility",
+  "why": "Mobilité circulaire de cheville ou genou"
+ },
+ "x-hip-circles-prone": {
+  "merge": "hip-circles",
+  "why": "Cercles de hanche, même mobilité"
+ },
+ "x-standing-hip-circles": {
+  "merge": "hip-circles",
+  "why": "Cercles de hanche, même mobilité"
+ },
+ "x-wrist-circles": {
+  "merge": "arm-circles",
+  "why": "Cercles d'articulation du haut du corps"
+ },
+ "x-keg-load": {
+  "merge": "deadlift",
+  "why": "Levée de charge du sol, strongman rare"
+ },
+ "x-sandbag-load": {
+  "merge": "deadlift",
+  "why": "Levée de charge du sol, strongman rare"
+ },
+ "x-inchworm": {
+  "keep": true,
+  "demo": "new",
+  "why": "Échauffement courant, mouvement distinct",
+  "move": "Debout, penché mains au sol, marcher des mains jusqu'en planche, revenir pieds vers les mains"
+ },
+ "x-scissor-kick": {
+  "merge": "x-flutter-kicks",
+  "why": "Même battements de jambes en ciseaux"
+ },
+ "x-circus-bell": {
+  "merge": "ohp",
+  "why": "Développé au-dessus de la tête, matériel rare"
+ },
+ "x-cocoons": {
+  "merge": "crunch",
+  "why": "Même crunch, variante de position ou de bras"
+ },
+ "x-battling-ropes": {
+  "merge": "battle-ropes",
+  "why": "Même exercice de cordes ondulatoires"
+ },
+ "x-elbows-back": {
+  "merge": "chest-stretch",
+  "why": "Étirement des pectoraux, coudes en arrière"
+ },
+ "x-cross-over-with-bands": {
+  "merge": "cable-fly",
+  "why": "Même croisé, matériel différent"
+ },
+ "x-cable-crossover": {
+  "merge": "cable-fly",
+  "why": "Même croisé, matériel différent"
+ },
+ "x-iron-crosses-stretch": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement au sol rare, proche"
+ },
+ "x-iron-cross": {
+  "merge": "lateral-raise",
+  "why": "Élévation en croix, proche de l'élévation latérale"
+ },
+ "x-cable-iron-cross": {
+  "merge": "cable-fly",
+  "why": "Même croisé, matériel différent"
+ },
+ "x-crucifix": {
+  "merge": "lateral-raise",
+  "why": "Élévation en croix, proche de l'élévation latérale"
+ },
+ "x-cable-seated-crunch": {
+  "merge": "cable-crunch",
+  "why": "Même crunch à la poulie, variante"
+ },
+ "x-crunch-hands-overhead": {
+  "merge": "crunch",
+  "why": "Même crunch, variante de position ou de bras"
+ },
+ "x-elbow-to-knee": {
+  "merge": "x-oblique-crunches",
+  "why": "Même crunch oblique, variante"
+ },
+ "x-cross-body-crunch": {
+  "merge": "x-oblique-crunches",
+  "why": "Même crunch oblique, variante"
+ },
+ "x-decline-crunch": {
+  "merge": "crunch",
+  "why": "Même crunch, variante de position ou de bras"
+ },
+ "x-tuck-crunch": {
+  "merge": "crunch",
+  "why": "Même crunch, variante de position ou de bras"
+ },
+ "x-reverse-crunch": {
+  "keep": true,
+  "demo": "new",
+  "why": "Crunch inversé, mouvement du bassin distinct",
+  "move": "Allongé sur le dos, jambes fléchies, enrouler le bassin pour décoller les hanches vers la poitrine"
+ },
+ "x-decline-reverse-crunch": {
+  "merge": "x-reverse-crunch",
+  "why": "Même crunch inversé, variante"
+ },
+ "x-suspended-reverse-crunch": {
+  "merge": "x-reverse-crunch",
+  "why": "Même crunch inversé, variante"
+ },
+ "x-cable-reverse-crunch": {
+  "merge": "x-reverse-crunch",
+  "why": "Même crunch inversé, variante"
+ },
+ "x-crunch-legs-on-exercise-ball": {
+  "merge": "crunch",
+  "why": "Même crunch, variante de position ou de bras"
+ },
+ "x-side-jackknife": {
+  "merge": "x-oblique-crunches",
+  "why": "Même crunch oblique, variante"
+ },
+ "x-weighted-crunches": {
+  "merge": "crunch",
+  "why": "Même crunch, variante de position ou de bras"
+ },
+ "x-oblique-crunches": {
+  "keep": true,
+  "demo": "new",
+  "why": "Crunch oblique, travail des obliques distinct",
+  "move": "Allongé sur le dos, genoux fléchis, relever une épaule vers le genou opposé en rotation du tronc"
+ },
+ "x-oblique-crunches-on-the-floor": {
+  "merge": "x-oblique-crunches",
+  "why": "Même crunch oblique, variante"
+ },
+ "x-decline-oblique-crunch": {
+  "merge": "x-oblique-crunches",
+  "why": "Même crunch oblique, variante"
+ },
+ "x-exercise-ball-crunch": {
+  "merge": "crunch",
+  "why": "Même crunch, variante de position ou de bras"
+ },
+ "x-standing-rope-crunch": {
+  "merge": "cable-crunch",
+  "why": "Même crunch à la poulie, variante"
+ },
+ "x-rope-crunch": {
+  "merge": "cable-crunch",
+  "why": "Même crunch à la poulie, variante"
+ },
+ "x-ab-crunch-machine": {
+  "keep": true,
+  "demo": "new",
+  "why": "Crunch machine courant en salle",
+  "move": "Assis à la machine abdominale, saisir les poignées, enrouler le tronc vers l'avant contre la résistance"
+ },
+ "x-bosu-ball-cable-crunch-with-side-bends": {
+  "merge": "cable-crunch",
+  "why": "Même crunch à la poulie, variante"
+ },
+ "x-kneeling-cable-crunch-with-alternating-oblique-twists": {
+  "merge": "cable-crunch",
+  "why": "Même crunch à la poulie, variante"
+ },
+ "x-lying-high-bench-barbell-curl": {
+  "merge": "bb-curl",
+  "why": "Même curl barre, prise ou position différente"
+ },
+ "x-lying-supine-dumbbell-curl": {
+  "merge": "db-curl",
+  "why": "Même curl haltères, position différente"
+ },
+ "x-lying-cable-curl": {
+  "merge": "cable-curl",
+  "why": "Même curl à la poulie, position différente"
+ },
+ "x-lying-close-grip-bar-curl-on-high-pulley": {
+  "merge": "cable-curl",
+  "why": "Même curl à la poulie, position différente"
+ },
+ "x-spider-curl": {
+  "keep": true,
+  "demo": "new",
+  "why": "Curl araignée, isolation distincte du curl",
+  "move": "Penché sur banc incliné face au dossier, bras pendants à la verticale, curl barre EZ"
+ },
+ "x-two-arm-dumbbell-preacher-curl": {
+  "merge": "db-curl",
+  "why": "Même curl haltères, position différente"
+ },
+ "x-cable-preacher-curl": {
+  "merge": "cable-curl",
+  "why": "Même curl à la poulie, position différente"
+ },
+ "x-barbell-curls-lying-against-an-incline": {
+  "merge": "bb-curl",
+  "why": "Même curl barre, prise ou position différente"
+ },
+ "x-close-grip-standing-barbell-curl": {
+  "merge": "bb-curl",
+  "why": "Même curl barre, prise ou position différente"
+ },
+ "x-close-grip-ez-bar-curl": {
+  "merge": "ez-curl",
+  "why": "Même curl barre EZ, prise serrée ou élastique"
+ },
+ "x-close-grip-ez-bar-curl-with-band": {
+  "merge": "ez-curl",
+  "why": "Même curl barre EZ, prise serrée ou élastique"
+ },
+ "x-wide-grip-standing-barbell-curl": {
+  "merge": "bb-curl",
+  "why": "Même curl barre, prise ou position différente"
+ },
+ "x-standing-concentration-curl": {
+  "merge": "concentration-curl",
+  "why": "Même curl concentration, debout"
+ },
+ "x-seated-close-grip-concentration-barbell-curl": {
+  "merge": "bb-curl",
+  "why": "Même curl barre, prise ou position différente"
+ },
+ "x-finger-curls": {
+  "merge": "wrist-curl",
+  "why": "Flexion des doigts, proche de flexion des poignets"
+ },
+ "x-reverse-plate-curls": {
+  "merge": "bb-curl",
+  "why": "Même curl barre, prise ou position différente"
+ },
+ "x-standing-one-arm-dumbbell-curl-over-incline-bench": {
+  "merge": "incline-curl",
+  "why": "Curl incliné proche, appui sur banc"
+ },
+ "x-dumbbell-alternate-bicep-curl": {
+  "merge": "db-curl",
+  "why": "Même curl haltères, position différente"
+ },
+ "x-seated-dumbbell-curl": {
+  "merge": "db-curl",
+  "why": "Même curl haltères, position différente"
+ }
+}

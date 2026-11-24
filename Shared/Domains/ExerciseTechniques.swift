@@ -4,7 +4,7 @@ import Foundation
 /// (a face pull is not a seated row, a dead bug is not a leg raise...). Written to match their
 /// demonstration step by step.
 extension ExerciseLibrary {
-    static func technique(for id: String) -> ExerciseTechnique? { techniques[id] }
+    static func technique(for id: String) -> ExerciseTechnique? { techniques[id] ?? ExerciseCatalog.techniques[id] }
 
     private static func t(_ start: String, _ steps: [String], _ range: String, _ breathing: String, _ tips: [String],
                           _ mistakes: [String]) -> ExerciseTechnique {

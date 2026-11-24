@@ -1,0 +1,1480 @@
+{
+ "x-alternate-leg-diagonal-bound": {
+  "fr": {
+   "start": "Tiens-toi debout, un pied un peu devant l'autre, genoux souples.",
+   "steps": [
+    "Pousse fort avec la jambe avant.",
+    "Monte le genou opposé le plus haut possible en bondissant en diagonale.",
+    "Réceptionne sur la jambe qui était levée, puis enchaîne de l'autre côté."
+   ],
+   "range": "Chaque bond couvre le plus de distance possible, avec une réception genou fléchi.",
+   "breathing": "Expire pendant la poussée, inspire pendant la réception.",
+   "tips": [
+    "Balance les bras en opposition aux jambes.",
+    "Atterris en silence, sur l'avant du pied puis le talon."
+   ],
+   "mistakes": [
+    "Atterrir genou tendu et verrouillé.",
+    "Faire de petits sauts sans pousser vraiment."
+   ]
+  },
+  "en": {
+   "start": "Stand with one foot slightly ahead of the other, knees soft.",
+   "steps": [
+    "Push hard through the front leg.",
+    "Drive the opposite knee up as high as you can while bounding diagonally.",
+    "Land on the leg that was lifted, then bound to the other side."
+   ],
+   "range": "Each bound covers as much distance as possible, landing with the knee bent.",
+   "breathing": "Breathe out on the push, breathe in on the landing.",
+   "tips": [
+    "Swing your arms opposite to your legs.",
+    "Land quietly, on the ball of the foot then the heel."
+   ],
+   "mistakes": [
+    "Landing with a locked, straight knee.",
+    "Taking small hops without really pushing."
+   ]
+  },
+  "es": {
+   "start": "Colócate de pie, con un pie algo adelantado y las rodillas flexibles.",
+   "steps": [
+    "Empuja con fuerza con la pierna delantera.",
+    "Sube la rodilla contraria lo más alto posible mientras saltas en diagonal.",
+    "Aterriza sobre la pierna que estaba levantada y enlaza el salto hacia el otro lado."
+   ],
+   "range": "Cada salto cubre la mayor distancia posible y se amortigua con la rodilla flexionada.",
+   "breathing": "Espira al empujar e inspira al aterrizar.",
+   "tips": [
+    "Balancea los brazos en oposición a las piernas.",
+    "Aterriza sin ruido, primero con la parte delantera del pie y luego con el talón."
+   ],
+   "mistakes": [
+    "Aterrizar con la rodilla estirada y bloqueada.",
+    "Dar saltitos sin empujar de verdad."
+   ]
+  },
+  "de": {
+   "start": "Stell dich aufrecht hin, ein Fuß leicht vor dem anderen, Knie locker.",
+   "steps": [
+    "Drück dich kräftig mit dem vorderen Bein ab.",
+    "Zieh das andere Knie beim diagonalen Sprung so hoch wie möglich.",
+    "Lande auf dem angehobenen Bein und spring dann zur anderen Seite."
+   ],
+   "range": "Jeder Sprung deckt möglichst viel Strecke ab, die Landung erfolgt mit gebeugtem Knie.",
+   "breathing": "Atme beim Abdruck aus und bei der Landung ein.",
+   "tips": [
+    "Schwing die Arme gegengleich zu den Beinen.",
+    "Lande leise, erst auf dem Fußballen, dann auf der Ferse."
+   ],
+   "mistakes": [
+    "Mit durchgedrücktem, gesperrtem Knie landen.",
+    "Nur kleine Hüpfer machen, ohne richtig abzudrücken."
+   ]
+  },
+  "it": {
+   "start": "Stai in piedi, un piede un po' avanti all'altro, ginocchia morbide.",
+   "steps": [
+    "Spingi forte con la gamba davanti.",
+    "Porta il ginocchio opposto più in alto possibile mentre salti in diagonale.",
+    "Atterra sulla gamba che era sollevata, poi salta dall'altra parte."
+   ],
+   "range": "Ogni balzo copre più distanza possibile, con atterraggio a ginocchio flesso.",
+   "breathing": "Espira durante la spinta, inspira durante l'atterraggio.",
+   "tips": [
+    "Muovi le braccia in opposizione alle gambe.",
+    "Atterra in silenzio, prima sull'avampiede e poi sul tallone."
+   ],
+   "mistakes": [
+    "Atterrare con il ginocchio teso e bloccato.",
+    "Fare saltelli senza spingere davvero."
+   ]
+  },
+  "pt-BR": {
+   "start": "Fique em pé, com um pé um pouco à frente do outro e os joelhos soltos.",
+   "steps": [
+    "Empurre com força com a perna da frente.",
+    "Suba o joelho oposto o mais alto possível enquanto salta na diagonal.",
+    "Aterrisse na perna que estava levantada e salte para o outro lado."
+   ],
+   "range": "Cada salto cobre a maior distância possível, com aterrissagem de joelho flexionado.",
+   "breathing": "Expire na impulsão e inspire na aterrissagem.",
+   "tips": [
+    "Balance os braços em oposição às pernas.",
+    "Aterrisse sem barulho, primeiro na ponta do pé e depois no calcanhar."
+   ],
+   "mistakes": [
+    "Aterrissar com o joelho esticado e travado.",
+    "Dar saltinhos sem empurrar de verdade."
+   ]
+  },
+  "ja": {
+   "start": "片足を少し前に出して立ち、膝は軽くゆるめます。",
+   "steps": [
+    "前の脚で力強く地面を蹴ります。",
+    "斜めに跳びながら、反対側の膝をできるだけ高く引き上げます。",
+    "上げていた脚で着地し、次は反対側へ跳びます。"
+   ],
+   "range": "1回ごとにできるだけ遠くへ跳び、膝を曲げて着地します。",
+   "breathing": "蹴るときに息を吐き、着地で吸います。",
+   "tips": [
+    "腕は脚と逆に振ります。",
+    "音を立てず、つま先側からかかとの順に着地します。"
+   ],
+   "mistakes": [
+    "膝を伸ばしきって着地する。",
+    "しっかり蹴らずに小さく跳ぶだけになる。"
+   ]
+  }
+ },
+ "x-linear-depth-jump": {
+  "fr": {
+   "start": "Tiens-toi debout au bord d'un box stable, pieds largeur de hanches.",
+   "steps": [
+    "Avance un pied dans le vide et laisse-toi tomber, sans sauter vers le bas.",
+    "Réceptionne pieds joints en fléchissant genoux et hanches.",
+    "Rebondis tout de suite en sautant le plus haut possible."
+   ],
+   "range": "Fléchis seulement un peu à la réception : le contact avec le sol doit être le plus bref possible.",
+   "breathing": "Expire pendant le saut, inspire en redescendant sur le box ou au sol.",
+   "tips": [
+    "Choisis un box de 30 à 45 cm au départ.",
+    "Garde le buste fier et les genoux alignés avec les pieds."
+   ],
+   "mistakes": [
+    "Sauter vers le bas au lieu de simplement descendre du box.",
+    "Rester longtemps au sol après la réception.",
+    "Laisser les genoux rentrer vers l'intérieur."
+   ]
+  },
+  "en": {
+   "start": "Stand at the edge of a stable box, feet hip-width apart.",
+   "steps": [
+    "Step one foot out into the air and drop, without jumping down.",
+    "Land on both feet, bending knees and hips to absorb it.",
+    "Rebound straight away, jumping as high as you can."
+   ],
+   "range": "Bend only a little on landing: ground contact should be as short as possible.",
+   "breathing": "Breathe out during the jump, breathe in as you come back down.",
+   "tips": [
+    "Start with a box of 30 to 45 cm.",
+    "Keep your chest tall and knees in line with your feet."
+   ],
+   "mistakes": [
+    "Jumping down instead of simply stepping off the box.",
+    "Staying on the ground too long after landing.",
+    "Letting the knees cave inward."
+   ]
+  },
+  "es": {
+   "start": "Colócate de pie en el borde de un cajón estable, con los pies a la anchura de las caderas.",
+   "steps": [
+    "Da un paso hacia el vacío y déjate caer, sin saltar hacia abajo.",
+    "Aterriza con los dos pies flexionando rodillas y caderas.",
+    "Rebota enseguida y salta lo más alto posible."
+   ],
+   "range": "Flexiona solo un poco al aterrizar: el contacto con el suelo debe ser lo más breve posible.",
+   "breathing": "Espira durante el salto e inspira al volver a bajar.",
+   "tips": [
+    "Empieza con un cajón de 30 a 45 cm.",
+    "Mantén el pecho erguido y las rodillas alineadas con los pies."
+   ],
+   "mistakes": [
+    "Saltar hacia abajo en lugar de simplemente bajar del cajón.",
+    "Quedarte mucho tiempo en el suelo tras aterrizar.",
+    "Dejar que las rodillas se metan hacia dentro."
+   ]
+  },
+  "de": {
+   "start": "Stell dich an den Rand einer stabilen Box, Füße hüftbreit.",
+   "steps": [
+    "Setz einen Fuß ins Leere und lass dich fallen, ohne nach unten zu springen.",
+    "Lande mit beiden Füßen und beuge Knie und Hüfte zum Abfedern.",
+    "Spring sofort wieder so hoch wie möglich ab."
+   ],
+   "range": "Beuge bei der Landung nur wenig: Der Bodenkontakt soll so kurz wie möglich sein.",
+   "breathing": "Atme beim Sprung aus und beim Absteigen ein.",
+   "tips": [
+    "Beginne mit einer Box von 30 bis 45 cm.",
+    "Halte den Oberkörper aufrecht und die Knie in Linie mit den Füßen."
+   ],
+   "mistakes": [
+    "Nach unten springen statt einfach von der Box zu treten.",
+    "Nach der Landung zu lange am Boden bleiben.",
+    "Die Knie nach innen fallen lassen."
+   ]
+  },
+  "it": {
+   "start": "Stai in piedi sul bordo di un box stabile, piedi alla larghezza del bacino.",
+   "steps": [
+    "Fai un passo nel vuoto e lasciati cadere, senza saltare verso il basso.",
+    "Atterra a piedi uniti flettendo ginocchia e anche.",
+    "Rimbalza subito saltando il più in alto possibile."
+   ],
+   "range": "Fletti solo un poco all'atterraggio: il contatto con il suolo deve essere il più breve possibile.",
+   "breathing": "Espira durante il salto, inspira mentre scendi.",
+   "tips": [
+    "Inizia con un box di 30-45 cm.",
+    "Tieni il busto eretto e le ginocchia in linea con i piedi."
+   ],
+   "mistakes": [
+    "Saltare giù invece di scendere semplicemente dal box.",
+    "Restare a lungo a terra dopo l'atterraggio.",
+    "Lasciare che le ginocchia cedano verso l'interno."
+   ]
+  },
+  "pt-BR": {
+   "start": "Fique em pé na beira de uma caixa estável, com os pés na largura do quadril.",
+   "steps": [
+    "Dê um passo no vazio e deixe o corpo cair, sem saltar para baixo.",
+    "Aterrisse com os dois pés, flexionando joelhos e quadris.",
+    "Rebata em seguida, saltando o mais alto possível."
+   ],
+   "range": "Flexione só um pouco ao aterrissar: o contato com o chão deve ser o mais curto possível.",
+   "breathing": "Expire durante o salto e inspire ao descer.",
+   "tips": [
+    "Comece com uma caixa de 30 a 45 cm.",
+    "Mantenha o peito erguido e os joelhos alinhados com os pés."
+   ],
+   "mistakes": [
+    "Saltar para baixo em vez de apenas descer da caixa.",
+    "Ficar muito tempo no chão depois de aterrissar.",
+    "Deixar os joelhos caírem para dentro."
+   ]
+  },
+  "ja": {
+   "start": "安定した台の端に、足を腰幅にして立ちます。",
+   "steps": [
+    "片足を空中に踏み出し、飛び降りずにそのまま落ちます。",
+    "両足で着地し、膝と股関節を曲げて衝撃を受け止めます。",
+    "すぐに反発して、できるだけ高く跳びます。"
+   ],
+   "range": "着地ではあまり深く曲げず、地面に触れている時間をできるだけ短くします。",
+   "breathing": "ジャンプ中に息を吐き、下りるときに吸います。",
+   "tips": [
+    "最初は30〜45cmの台から始めます。",
+    "胸を張り、膝は足と同じ向きにそろえます。"
+   ],
+   "mistakes": [
+    "台から飛び降りてしまい、ただ踏み出すだけにならない。",
+    "着地後に地面に長くとどまる。",
+    "膝が内側に入る。"
+   ]
+  }
+ },
+ "x-standing-long-jump": {
+  "fr": {
+   "start": "Tiens-toi debout, pieds écartés largeur d'épaules, orteils derrière une ligne.",
+   "steps": [
+    "Balance les bras vers l'arrière en fléchissant genoux et hanches.",
+    "Projette les bras vers l'avant et pousse fort pour sauter le plus loin possible.",
+    "Réceptionne sur les deux pieds en amortissant, hanches vers l'arrière."
+   ],
+   "range": "Saute vers l'avant et un peu vers le haut, jusqu'à l'extension complète du corps en l'air.",
+   "breathing": "Inspire pendant l'armé, expire en poussant.",
+   "tips": [
+    "Sers-toi des bras pour donner de l'élan.",
+    "Regarde devant toi, pas tes pieds."
+   ],
+   "mistakes": [
+    "Fléchir trop peu avant le saut.",
+    "Réceptionner jambes tendues.",
+    "Tomber en arrière en réception."
+   ]
+  },
+  "en": {
+   "start": "Stand with feet shoulder-width apart, toes behind a line.",
+   "steps": [
+    "Swing your arms back while bending your knees and hips.",
+    "Throw your arms forward and push hard to jump as far as you can.",
+    "Land on both feet, absorbing the impact with your hips back."
+   ],
+   "range": "Jump forward and slightly upward until your body is fully extended in the air.",
+   "breathing": "Breathe in as you load, breathe out as you push.",
+   "tips": [
+    "Use your arms to build momentum.",
+    "Look ahead, not at your feet."
+   ],
+   "mistakes": [
+    "Bending too little before the jump.",
+    "Landing with straight legs.",
+    "Falling backward on landing."
+   ]
+  },
+  "es": {
+   "start": "Colócate de pie con los pies a la anchura de los hombros y los dedos detrás de una línea.",
+   "steps": [
+    "Lleva los brazos hacia atrás mientras flexionas rodillas y caderas.",
+    "Lanza los brazos hacia delante y empuja con fuerza para saltar lo más lejos posible.",
+    "Aterriza con los dos pies amortiguando, con las caderas hacia atrás."
+   ],
+   "range": "Salta hacia delante y un poco hacia arriba, hasta extender todo el cuerpo en el aire.",
+   "breathing": "Inspira al tomar impulso y espira al empujar.",
+   "tips": [
+    "Usa los brazos para generar impulso.",
+    "Mira al frente, no a los pies."
+   ],
+   "mistakes": [
+    "Flexionar muy poco antes del salto.",
+    "Aterrizar con las piernas estiradas.",
+    "Caerte hacia atrás al aterrizar."
+   ]
+  },
+  "de": {
+   "start": "Stell dich schulterbreit hin, die Zehen hinter einer Linie.",
+   "steps": [
+    "Schwing die Arme nach hinten und beuge Knie und Hüfte.",
+    "Schleudere die Arme nach vorn und spring mit viel Kraft so weit wie möglich.",
+    "Lande auf beiden Füßen und federe mit nach hinten geschobener Hüfte ab."
+   ],
+   "range": "Spring nach vorn und leicht nach oben, bis der Körper in der Luft ganz gestreckt ist.",
+   "breathing": "Atme beim Ausholen ein und beim Abdruck aus.",
+   "tips": [
+    "Nutze die Arme für den Schwung.",
+    "Schau nach vorn, nicht auf die Füße."
+   ],
+   "mistakes": [
+    "Vor dem Sprung zu wenig beugen.",
+    "Mit gestreckten Beinen landen.",
+    "Bei der Landung nach hinten fallen."
+   ]
+  },
+  "it": {
+   "start": "Stai in piedi con i piedi alla larghezza delle spalle e le punte dietro una linea.",
+   "steps": [
+    "Porta le braccia indietro flettendo ginocchia e anche.",
+    "Lancia le braccia in avanti e spingi forte per saltare il più lontano possibile.",
+    "Atterra su entrambi i piedi ammortizzando, con i fianchi indietro."
+   ],
+   "range": "Salta in avanti e leggermente verso l'alto, fino a distendere tutto il corpo in aria.",
+   "breathing": "Inspira durante la caricata, espira mentre spingi.",
+   "tips": [
+    "Usa le braccia per dare slancio.",
+    "Guarda avanti, non i piedi."
+   ],
+   "mistakes": [
+    "Flettere troppo poco prima del salto.",
+    "Atterrare a gambe tese.",
+    "Cadere all'indietro all'atterraggio."
+   ]
+  },
+  "pt-BR": {
+   "start": "Fique em pé com os pés na largura dos ombros e a ponta dos pés atrás de uma linha.",
+   "steps": [
+    "Balance os braços para trás enquanto flexiona joelhos e quadris.",
+    "Lance os braços para a frente e empurre com força para saltar o mais longe possível.",
+    "Aterrisse com os dois pés, amortecendo com o quadril para trás."
+   ],
+   "range": "Salte para a frente e um pouco para cima, até o corpo ficar totalmente estendido no ar.",
+   "breathing": "Inspire ao tomar impulso e expire ao empurrar.",
+   "tips": [
+    "Use os braços para ganhar impulso.",
+    "Olhe para a frente, não para os pés."
+   ],
+   "mistakes": [
+    "Flexionar pouco antes do salto.",
+    "Aterrissar com as pernas esticadas.",
+    "Cair para trás na aterrissagem."
+   ]
+  },
+  "ja": {
+   "start": "足を肩幅に開き、つま先をラインの手前にそろえて立ちます。",
+   "steps": [
+    "腕を後ろに振りながら、膝と股関節を曲げます。",
+    "腕を前に振り出し、強く蹴ってできるだけ遠くへ跳びます。",
+    "両足で着地し、お尻を後ろに引いて衝撃を吸収します。"
+   ],
+   "range": "前方やや上へ跳び、空中で体をしっかり伸ばします。",
+   "breathing": "構えで息を吸い、蹴るときに吐きます。",
+   "tips": [
+    "腕の振りで勢いをつけます。",
+    "足元ではなく前を見ます。"
+   ],
+   "mistakes": [
+    "跳ぶ前の曲げが浅すぎる。",
+    "脚を伸ばしたまま着地する。",
+    "着地で後ろに倒れる。"
+   ]
+  }
+ },
+ "x-glute-ham-raise": {
+  "fr": {
+   "start": "Cale tes pieds sur la plateforme, cuisses sur le coussin, hanches au bord, buste à la verticale.",
+   "steps": [
+    "Descends le buste lentement en gardant le corps gainé, jusqu'à l'horizontale.",
+    "Remonte en fléchissant les genoux, comme pour ramener les talons vers les fessiers.",
+    "Termine en étendant les hanches jusqu'à la verticale."
+   ],
+   "range": "Du buste vertical jusqu'à l'horizontale, puis retour sans cambrer le bas du dos.",
+   "breathing": "Inspire en descendant, expire en remontant.",
+   "tips": [
+    "Croise les bras sur la poitrine pour commencer.",
+    "Serre les fessiers en haut du mouvement."
+   ],
+   "mistakes": [
+    "Cambrer le dos en remontant.",
+    "Se laisser tomber au lieu de contrôler la descente.",
+    "Ne pas bien caler le bassin sur le coussin."
+   ]
+  },
+  "en": {
+   "start": "Lock your feet on the platform, thighs on the pad, hips at the edge, torso upright.",
+   "steps": [
+    "Lower your torso slowly while keeping your body braced, down to horizontal.",
+    "Come back up by bending your knees, as if pulling your heels toward your glutes.",
+    "Finish by extending your hips until you are upright."
+   ],
+   "range": "From an upright torso to horizontal, then back up without arching your lower back.",
+   "breathing": "Breathe in on the way down, breathe out on the way up.",
+   "tips": [
+    "Cross your arms on your chest to begin with.",
+    "Squeeze your glutes at the top."
+   ],
+   "mistakes": [
+    "Arching the back while coming up.",
+    "Dropping down instead of controlling the descent.",
+    "Not setting the hips properly on the pad."
+   ]
+  },
+  "es": {
+   "start": "Fija los pies en la plataforma, con los muslos sobre el cojín, las caderas en el borde y el torso erguido.",
+   "steps": [
+    "Baja el torso despacio manteniendo el cuerpo firme, hasta la horizontal.",
+    "Sube flexionando las rodillas, como si llevaras los talones hacia los glúteos.",
+    "Termina extendiendo las caderas hasta quedar erguido."
+   ],
+   "range": "Desde el torso vertical hasta la horizontal y de vuelta, sin arquear la zona lumbar.",
+   "breathing": "Inspira al bajar y espira al subir.",
+   "tips": [
+    "Cruza los brazos sobre el pecho al principio.",
+    "Aprieta los glúteos arriba."
+   ],
+   "mistakes": [
+    "Arquear la espalda al subir.",
+    "Dejarte caer en lugar de controlar la bajada.",
+    "No colocar bien la pelvis sobre el cojín."
+   ]
+  },
+  "de": {
+   "start": "Fixiere die Füße an der Plattform, Oberschenkel auf dem Polster, Hüfte an der Kante, Oberkörper aufrecht.",
+   "steps": [
+    "Senke den Oberkörper langsam und angespannt ab, bis er waagerecht ist.",
+    "Komm hoch, indem du die Knie beugst, als würdest du die Fersen zum Gesäß ziehen.",
+    "Streck zum Schluss die Hüfte, bis du aufrecht bist."
+   ],
+   "range": "Vom aufrechten Oberkörper bis waagerecht und wieder zurück, ohne ins Hohlkreuz zu gehen.",
+   "breathing": "Atme beim Absenken ein und beim Hochkommen aus.",
+   "tips": [
+    "Verschränke zu Beginn die Arme vor der Brust.",
+    "Spann oben das Gesäß an."
+   ],
+   "mistakes": [
+    "Beim Hochkommen ins Hohlkreuz gehen.",
+    "Sich fallen lassen, statt das Absenken zu kontrollieren.",
+    "Das Becken nicht sauber auf dem Polster fixieren."
+   ]
+  },
+  "it": {
+   "start": "Blocca i piedi sulla piattaforma, cosce sul cuscino, anche al bordo, busto eretto.",
+   "steps": [
+    "Abbassa il busto lentamente, con il corpo in tensione, fino all'orizzontale.",
+    "Risali flettendo le ginocchia, come per portare i talloni verso i glutei.",
+    "Concludi distendendo le anche fino alla posizione eretta."
+   ],
+   "range": "Dal busto verticale all'orizzontale e ritorno, senza inarcare la zona lombare.",
+   "breathing": "Inspira in discesa, espira in salita.",
+   "tips": [
+    "Incrocia le braccia sul petto all'inizio.",
+    "Contrai i glutei in alto."
+   ],
+   "mistakes": [
+    "Inarcare la schiena in salita.",
+    "Lasciarsi cadere invece di controllare la discesa.",
+    "Non appoggiare bene il bacino sul cuscino."
+   ]
+  },
+  "pt-BR": {
+   "start": "Fixe os pés na plataforma, com as coxas no apoio, os quadris na borda e o tronco ereto.",
+   "steps": [
+    "Desça o tronco devagar, com o corpo firme, até a horizontal.",
+    "Suba flexionando os joelhos, como se levasse os calcanhares aos glúteos.",
+    "Termine estendendo os quadris até ficar ereto."
+   ],
+   "range": "Do tronco vertical até a horizontal e de volta, sem arquear a lombar.",
+   "breathing": "Inspire na descida e expire na subida.",
+   "tips": [
+    "Cruze os braços sobre o peito no início.",
+    "Contraia os glúteos no alto."
+   ],
+   "mistakes": [
+    "Arquear as costas ao subir.",
+    "Deixar o corpo cair em vez de controlar a descida.",
+    "Não apoiar bem o quadril no apoio."
+   ]
+  },
+  "ja": {
+   "start": "足をプレートに固定し、太ももをパッドにのせ、股関節をパッドの端に合わせて上体を立てます。",
+   "steps": [
+    "体をしっかり固めたまま、上体をゆっくり水平まで下ろします。",
+    "かかとをお尻に引き寄せるように膝を曲げて上がります。",
+    "最後に股関節を伸ばして上体を立てます。"
+   ],
+   "range": "上体が立った位置から水平まで下ろして戻り、腰は反らせません。",
+   "breathing": "下ろすときに吸い、上がるときに吐きます。",
+   "tips": [
+    "最初は腕を胸の前で組みます。",
+    "上でお尻を締めます。"
+   ],
+   "mistakes": [
+    "上がるときに腰を反らせる。",
+    "コントロールせずに落ちてしまう。",
+    "骨盤をパッドにしっかり固定しない。"
+   ]
+  }
+ },
+ "x-ball-leg-curl": {
+  "fr": {
+   "start": "Allonge-toi sur le dos, talons sur le ballon, bassin relevé, bras au sol.",
+   "steps": [
+    "Garde le bassin haut et le corps aligné des épaules aux genoux.",
+    "Plie les genoux pour rouler le ballon vers tes fessiers.",
+    "Étends les jambes lentement pour ramener le ballon."
+   ],
+   "range": "Du corps aligné jusqu'au ballon près des fessiers, sans que le bassin descende.",
+   "breathing": "Expire en ramenant le ballon, inspire en l'éloignant.",
+   "tips": [
+    "Serre les fessiers pour garder le bassin haut.",
+    "Pousse les bras dans le sol pour te stabiliser."
+   ],
+   "mistakes": [
+    "Laisser le bassin retomber pendant le mouvement.",
+    "Cambrer le bas du dos.",
+    "Aller trop vite et perdre le contrôle du ballon."
+   ]
+  },
+  "en": {
+   "start": "Lie on your back with your heels on the ball, hips raised, arms on the floor.",
+   "steps": [
+    "Keep your hips high and your body in line from shoulders to knees.",
+    "Bend your knees to roll the ball toward your glutes.",
+    "Extend your legs slowly to send the ball back out."
+   ],
+   "range": "From a straight body line to the ball close to your glutes, without letting your hips drop.",
+   "breathing": "Breathe out as you pull the ball in, breathe in as you send it away.",
+   "tips": [
+    "Squeeze your glutes to keep your hips up.",
+    "Press your arms into the floor for stability."
+   ],
+   "mistakes": [
+    "Letting the hips sag during the movement.",
+    "Arching the lower back.",
+    "Going too fast and losing control of the ball."
+   ]
+  },
+  "es": {
+   "start": "Túmbate boca arriba con los talones sobre el balón, la pelvis elevada y los brazos en el suelo.",
+   "steps": [
+    "Mantén la pelvis alta y el cuerpo alineado desde los hombros hasta las rodillas.",
+    "Flexiona las rodillas para llevar el balón hacia los glúteos.",
+    "Estira las piernas despacio para devolver el balón."
+   ],
+   "range": "Desde el cuerpo alineado hasta el balón cerca de los glúteos, sin dejar caer la pelvis.",
+   "breathing": "Espira al acercar el balón e inspira al alejarlo.",
+   "tips": [
+    "Aprieta los glúteos para mantener la pelvis alta.",
+    "Presiona los brazos contra el suelo para estabilizarte."
+   ],
+   "mistakes": [
+    "Dejar caer la pelvis durante el movimiento.",
+    "Arquear la zona lumbar.",
+    "Ir demasiado rápido y perder el control del balón."
+   ]
+  },
+  "de": {
+   "start": "Lieg auf dem Rücken, die Fersen auf dem Ball, das Becken angehoben, die Arme am Boden.",
+   "steps": [
+    "Halte das Becken oben und den Körper von den Schultern bis zu den Knien in einer Linie.",
+    "Beuge die Knie und rolle den Ball zum Gesäß.",
+    "Streck die Beine langsam und schick den Ball zurück."
+   ],
+   "range": "Von der geraden Körperlinie bis der Ball nah am Gesäß ist, ohne dass das Becken absinkt.",
+   "breathing": "Atme aus, wenn du den Ball heranziehst, und ein, wenn du ihn wegrollst.",
+   "tips": [
+    "Spann das Gesäß an, damit das Becken oben bleibt.",
+    "Drück die Arme in den Boden, um stabil zu bleiben."
+   ],
+   "mistakes": [
+    "Das Becken während der Bewegung absinken lassen.",
+    "Ins Hohlkreuz gehen.",
+    "Zu schnell werden und den Ball nicht mehr kontrollieren."
+   ]
+  },
+  "it": {
+   "start": "Sdraiati sulla schiena con i talloni sulla palla, bacino sollevato, braccia a terra.",
+   "steps": [
+    "Tieni il bacino alto e il corpo allineato dalle spalle alle ginocchia.",
+    "Fletti le ginocchia per far rotolare la palla verso i glutei.",
+    "Distendi lentamente le gambe per riportare la palla indietro."
+   ],
+   "range": "Dal corpo allineato alla palla vicina ai glutei, senza far scendere il bacino.",
+   "breathing": "Espira mentre avvicini la palla, inspira mentre la allontani.",
+   "tips": [
+    "Contrai i glutei per tenere il bacino alto.",
+    "Premi le braccia a terra per stabilizzarti."
+   ],
+   "mistakes": [
+    "Lasciar cadere il bacino durante il movimento.",
+    "Inarcare la zona lombare.",
+    "Andare troppo veloce e perdere il controllo della palla."
+   ]
+  },
+  "pt-BR": {
+   "start": "Deite de costas com os calcanhares sobre a bola, o quadril elevado e os braços no chão.",
+   "steps": [
+    "Mantenha o quadril alto e o corpo alinhado dos ombros aos joelhos.",
+    "Dobre os joelhos para rolar a bola em direção aos glúteos.",
+    "Estenda as pernas devagar para afastar a bola."
+   ],
+   "range": "Do corpo alinhado até a bola perto dos glúteos, sem deixar o quadril cair.",
+   "breathing": "Expire ao puxar a bola e inspire ao afastá-la.",
+   "tips": [
+    "Contraia os glúteos para manter o quadril alto.",
+    "Pressione os braços contra o chão para se estabilizar."
+   ],
+   "mistakes": [
+    "Deixar o quadril cair durante o movimento.",
+    "Arquear a lombar.",
+    "Ir rápido demais e perder o controle da bola."
+   ]
+  },
+  "ja": {
+   "start": "仰向けになり、かかとをボールにのせて腰を持ち上げ、腕は床に置きます。",
+   "steps": [
+    "腰を高く保ち、肩から膝まで一直線にします。",
+    "膝を曲げて、ボールをお尻の方へ転がします。",
+    "ゆっくり脚を伸ばしてボールを戻します。"
+   ],
+   "range": "体が一直線の位置から、ボールがお尻の近くに来るまで。腰は落としません。",
+   "breathing": "ボールを引くときに息を吐き、戻すときに吸います。",
+   "tips": [
+    "お尻を締めて腰の高さを保ちます。",
+    "腕で床を押して安定させます。"
+   ],
+   "mistakes": [
+    "動作中に腰が落ちる。",
+    "腰を反らせる。",
+    "速すぎてボールを制御できなくなる。"
+   ]
+  }
+ },
+ "x-flutter-kicks": {
+  "fr": {
+   "start": "Allonge-toi sur le dos sur le banc, jambes tendues dans le vide, mains sous les hanches.",
+   "steps": [
+    "Décolle les jambes tendues à quelques dizaines de centimètres.",
+    "Monte une jambe pendant que l'autre descend, en petits battements.",
+    "Continue en alternance sans poser les pieds."
+   ],
+   "range": "Battements courts et réguliers, jambes tendues, sans toucher le sol.",
+   "breathing": "Respire de façon régulière, sans retenir ton souffle.",
+   "tips": [
+    "Garde le bas du dos plaqué contre le banc.",
+    "Serre le ventre pour rester stable."
+   ],
+   "mistakes": [
+    "Cambrer le bas du dos.",
+    "Plier les genoux.",
+    "Faire des battements trop grands qui font balancer le bassin."
+   ]
+  },
+  "en": {
+   "start": "Lie on your back on the bench with your legs straight and hanging beyond the end, hands under your hips.",
+   "steps": [
+    "Lift your straight legs a short way off the ground.",
+    "Raise one leg while the other goes down, in small kicks.",
+    "Keep alternating without letting your feet touch down."
+   ],
+   "range": "Short, steady kicks with straight legs, without touching the floor.",
+   "breathing": "Breathe steadily, without holding your breath.",
+   "tips": [
+    "Keep your lower back pressed against the bench.",
+    "Brace your abs to stay stable."
+   ],
+   "mistakes": [
+    "Arching the lower back.",
+    "Bending the knees.",
+    "Making kicks so big that your hips rock."
+   ]
+  },
+  "es": {
+   "start": "Túmbate boca arriba en el banco, con las piernas estiradas fuera del extremo y las manos bajo las caderas.",
+   "steps": [
+    "Despega las piernas estiradas unos centímetros del suelo.",
+    "Sube una pierna mientras la otra baja, con batidas cortas.",
+    "Sigue alternando sin apoyar los pies."
+   ],
+   "range": "Batidas cortas y regulares con las piernas estiradas, sin tocar el suelo.",
+   "breathing": "Respira con regularidad, sin contener el aire.",
+   "tips": [
+    "Mantén la zona lumbar pegada al banco.",
+    "Contrae el abdomen para mantenerte estable."
+   ],
+   "mistakes": [
+    "Arquear la zona lumbar.",
+    "Flexionar las rodillas.",
+    "Hacer batidas tan grandes que la pelvis se balancee."
+   ]
+  },
+  "de": {
+   "start": "Lieg auf dem Rücken auf der Bank, die Beine gestreckt über das Ende hinaus, die Hände unter dem Becken.",
+   "steps": [
+    "Heb die gestreckten Beine ein Stück vom Boden ab.",
+    "Heb ein Bein an, während das andere sinkt, in kleinen Schlägen.",
+    "Wechsle weiter ab, ohne die Füße abzusetzen."
+   ],
+   "range": "Kurze, gleichmäßige Schläge mit gestreckten Beinen, ohne den Boden zu berühren.",
+   "breathing": "Atme gleichmäßig und halte die Luft nicht an.",
+   "tips": [
+    "Drück den unteren Rücken gegen die Bank.",
+    "Spann den Bauch an, um stabil zu bleiben."
+   ],
+   "mistakes": [
+    "Ins Hohlkreuz gehen.",
+    "Die Knie beugen.",
+    "Zu große Schläge machen, bei denen das Becken wippt."
+   ]
+  },
+  "it": {
+   "start": "Sdraiati sulla schiena sulla panca, gambe tese oltre il bordo, mani sotto i fianchi.",
+   "steps": [
+    "Solleva le gambe tese di pochi centimetri da terra.",
+    "Alza una gamba mentre l'altra scende, con piccoli colpi.",
+    "Continua ad alternare senza appoggiare i piedi."
+   ],
+   "range": "Colpi brevi e regolari con le gambe tese, senza toccare terra.",
+   "breathing": "Respira in modo regolare, senza trattenere il fiato.",
+   "tips": [
+    "Tieni la zona lombare premuta contro la panca.",
+    "Contrai l'addome per restare stabile."
+   ],
+   "mistakes": [
+    "Inarcare la zona lombare.",
+    "Piegare le ginocchia.",
+    "Fare colpi così ampi da far dondolare il bacino."
+   ]
+  },
+  "pt-BR": {
+   "start": "Deite de costas no banco, com as pernas esticadas para fora da ponta e as mãos sob o quadril.",
+   "steps": [
+    "Levante as pernas esticadas alguns centímetros do chão.",
+    "Suba uma perna enquanto a outra desce, em batidas curtas.",
+    "Continue alternando sem apoiar os pés."
+   ],
+   "range": "Batidas curtas e regulares com as pernas esticadas, sem tocar o chão.",
+   "breathing": "Respire de forma regular, sem prender o ar.",
+   "tips": [
+    "Mantenha a lombar pressionada contra o banco.",
+    "Contraia o abdômen para ficar estável."
+   ],
+   "mistakes": [
+    "Arquear a lombar.",
+    "Dobrar os joelhos.",
+    "Fazer batidas tão grandes que o quadril balance."
+   ]
+  },
+  "ja": {
+   "start": "ベンチに仰向けになり、脚をまっすぐ端の外に出して、手はお尻の下に置きます。",
+   "steps": [
+    "まっすぐな脚を床から少し持ち上げます。",
+    "片脚を上げながらもう片脚を下げ、小さく交互に動かします。",
+    "足をつけずにそのまま交互に続けます。"
+   ],
+   "range": "脚を伸ばしたまま、小さく一定のリズムで動かし、床には触れません。",
+   "breathing": "息を止めず、一定のリズムで呼吸します。",
+   "tips": [
+    "腰をベンチに押しつけたままにします。",
+    "お腹に力を入れて安定させます。"
+   ],
+   "mistakes": [
+    "腰を反らせる。",
+    "膝を曲げる。",
+    "動きが大きすぎて骨盤が揺れる。"
+   ]
+  }
+ },
+ "x-reverse-crunch": {
+  "fr": {
+   "start": "Allonge-toi sur le dos, jambes fléchies, genoux au-dessus des hanches, bras le long du corps.",
+   "steps": [
+    "Contracte le ventre pour enrouler le bassin.",
+    "Décolle les hanches du sol en amenant les genoux vers la poitrine.",
+    "Redescends lentement, le bas du dos revient au sol en dernier."
+   ],
+   "range": "Le bassin se décolle de quelques centimètres : c'est un enroulement, pas un balancement des jambes.",
+   "breathing": "Expire en enroulant, inspire en redescendant.",
+   "tips": [
+    "Garde la nuque détendue et les épaules au sol.",
+    "Pousse un peu les mains dans le sol si besoin."
+   ],
+   "mistakes": [
+    "Se servir de l'élan des jambes.",
+    "Redescendre d'un coup.",
+    "Lever seulement les jambes sans enrouler le bassin."
+   ]
+  },
+  "en": {
+   "start": "Lie on your back with your legs bent, knees above your hips, arms along your sides.",
+   "steps": [
+    "Brace your abs to curl your pelvis.",
+    "Lift your hips off the floor, bringing your knees toward your chest.",
+    "Lower slowly, with your lower back touching down last."
+   ],
+   "range": "Your pelvis lifts a few centimeters: it is a curl, not a swing of the legs.",
+   "breathing": "Breathe out as you curl, breathe in as you lower.",
+   "tips": [
+    "Keep your neck relaxed and your shoulders on the floor.",
+    "Press your hands lightly into the floor if needed."
+   ],
+   "mistakes": [
+    "Using leg momentum.",
+    "Dropping back down all at once.",
+    "Only lifting the legs without curling the pelvis."
+   ]
+  },
+  "es": {
+   "start": "Túmbate boca arriba con las piernas flexionadas, las rodillas sobre las caderas y los brazos a los lados.",
+   "steps": [
+    "Contrae el abdomen para enrollar la pelvis.",
+    "Despega las caderas del suelo llevando las rodillas hacia el pecho.",
+    "Baja despacio, apoyando la zona lumbar al final."
+   ],
+   "range": "La pelvis se eleva unos centímetros: es un enrollamiento, no un balanceo de piernas.",
+   "breathing": "Espira al enrollar e inspira al bajar.",
+   "tips": [
+    "Mantén el cuello relajado y los hombros en el suelo.",
+    "Presiona un poco las manos contra el suelo si lo necesitas."
+   ],
+   "mistakes": [
+    "Usar el impulso de las piernas.",
+    "Bajar de golpe.",
+    "Levantar solo las piernas sin enrollar la pelvis."
+   ]
+  },
+  "de": {
+   "start": "Lieg auf dem Rücken, die Beine angewinkelt, die Knie über der Hüfte, die Arme neben dem Körper.",
+   "steps": [
+    "Spann den Bauch an, um das Becken einzurollen.",
+    "Heb die Hüfte vom Boden ab und zieh die Knie zur Brust.",
+    "Senk dich langsam ab, der untere Rücken berührt zuletzt den Boden."
+   ],
+   "range": "Das Becken hebt sich nur ein paar Zentimeter: Es ist ein Einrollen, kein Beinschwung.",
+   "breathing": "Atme beim Einrollen aus und beim Absenken ein.",
+   "tips": [
+    "Halte den Nacken entspannt und die Schultern am Boden.",
+    "Drück bei Bedarf die Hände leicht in den Boden."
+   ],
+   "mistakes": [
+    "Schwung aus den Beinen holen.",
+    "Auf einmal zurückfallen.",
+    "Nur die Beine heben, ohne das Becken einzurollen."
+   ]
+  },
+  "it": {
+   "start": "Sdraiati sulla schiena con le gambe flesse, ginocchia sopra le anche, braccia lungo i fianchi.",
+   "steps": [
+    "Contrai l'addome per arrotolare il bacino.",
+    "Solleva i fianchi da terra portando le ginocchia verso il petto.",
+    "Scendi lentamente, con la zona lombare che tocca terra per ultima."
+   ],
+   "range": "Il bacino si solleva di pochi centimetri: è un arrotolamento, non un'oscillazione delle gambe.",
+   "breathing": "Espira mentre arrotoli, inspira mentre scendi.",
+   "tips": [
+    "Tieni il collo rilassato e le spalle a terra.",
+    "Premi leggermente le mani a terra se serve."
+   ],
+   "mistakes": [
+    "Usare lo slancio delle gambe.",
+    "Ricadere tutto d'un colpo.",
+    "Alzare solo le gambe senza arrotolare il bacino."
+   ]
+  },
+  "pt-BR": {
+   "start": "Deite de costas com as pernas dobradas, os joelhos acima do quadril e os braços ao lado do corpo.",
+   "steps": [
+    "Contraia o abdômen para enrolar a pelve.",
+    "Tire o quadril do chão levando os joelhos em direção ao peito.",
+    "Desça devagar, com a lombar tocando o chão por último."
+   ],
+   "range": "A pelve sobe poucos centímetros: é um enrolamento, não um balanço das pernas.",
+   "breathing": "Expire ao enrolar e inspire ao descer.",
+   "tips": [
+    "Mantenha o pescoço relaxado e os ombros no chão.",
+    "Pressione de leve as mãos contra o chão se precisar."
+   ],
+   "mistakes": [
+    "Usar o embalo das pernas.",
+    "Descer de uma vez.",
+    "Levantar só as pernas sem enrolar a pelve."
+   ]
+  },
+  "ja": {
+   "start": "仰向けになり、膝を曲げて股関節の真上に置き、腕は体の横に置きます。",
+   "steps": [
+    "お腹に力を入れて骨盤を丸めます。",
+    "膝を胸に近づけながら、お尻を床から浮かせます。",
+    "ゆっくり下ろし、腰は最後に床につけます。"
+   ],
+   "range": "骨盤が数センチ浮く程度です。脚を振るのではなく、丸める動きです。",
+   "breathing": "丸めるときに息を吐き、下ろすときに吸います。",
+   "tips": [
+    "首の力を抜き、肩は床につけたままにします。",
+    "必要なら手のひらで軽く床を押します。"
+   ],
+   "mistakes": [
+    "脚の反動を使う。",
+    "一気に落とす。",
+    "骨盤を丸めず脚だけを上げる。"
+   ]
+  }
+ },
+ "x-barbell-lunge": {
+  "fr": {
+   "start": "Tiens-toi debout, la barre posée sur les trapèzes, les mains écartées, pieds largeur de hanches.",
+   "steps": [
+    "Fais un grand pas en avant en gardant le buste droit.",
+    "Descends jusqu'à ce que le genou arrière frôle le sol, le genou avant au-dessus du pied.",
+    "Pousse sur la jambe avant pour revenir debout."
+   ],
+   "range": "Du pas debout jusqu'au genou arrière près du sol, genoux fléchis à environ 90 degrés.",
+   "breathing": "Inspire en descendant, expire en poussant.",
+   "tips": [
+    "Commence avec une barre vide ou légère.",
+    "Regarde devant toi et serre les abdominaux."
+   ],
+   "mistakes": [
+    "Faire un pas trop court qui pousse le genou loin devant les orteils.",
+    "Pencher le buste vers l'avant.",
+    "Laisser le genou avant s'effondrer vers l'intérieur."
+   ]
+  },
+  "en": {
+   "start": "Stand tall with the bar resting on your traps, hands wide, feet hip-width apart.",
+   "steps": [
+    "Take a big step forward, keeping your torso upright.",
+    "Lower until the back knee almost touches the floor, with the front knee over the foot.",
+    "Push through the front leg to return to standing."
+   ],
+   "range": "From standing to the back knee close to the floor, both knees bent at about 90 degrees.",
+   "breathing": "Breathe in on the way down, breathe out as you push.",
+   "tips": [
+    "Start with an empty or light bar.",
+    "Look ahead and brace your abs."
+   ],
+   "mistakes": [
+    "Taking too short a step, which pushes the knee far past the toes.",
+    "Leaning the torso forward.",
+    "Letting the front knee cave inward."
+   ]
+  },
+  "es": {
+   "start": "Colócate de pie con la barra sobre los trapecios, las manos separadas y los pies a la anchura de las caderas.",
+   "steps": [
+    "Da un paso largo hacia delante con el torso erguido.",
+    "Baja hasta que la rodilla trasera casi toque el suelo, con la delantera sobre el pie.",
+    "Empuja con la pierna delantera para volver a la posición de pie."
+   ],
+   "range": "Desde de pie hasta la rodilla trasera cerca del suelo, con las dos rodillas a unos 90 grados.",
+   "breathing": "Inspira al bajar y espira al empujar.",
+   "tips": [
+    "Empieza con una barra vacía o ligera.",
+    "Mira al frente y contrae el abdomen."
+   ],
+   "mistakes": [
+    "Dar un paso demasiado corto, que lleva la rodilla muy por delante de los dedos.",
+    "Inclinar el torso hacia delante.",
+    "Dejar que la rodilla delantera se hunda hacia dentro."
+   ]
+  },
+  "de": {
+   "start": "Steh aufrecht, die Stange liegt auf dem Nacken, die Hände greifen weit, die Füße stehen hüftbreit.",
+   "steps": [
+    "Mach einen großen Schritt nach vorn und halte den Oberkörper aufrecht.",
+    "Senk dich ab, bis das hintere Knie fast den Boden berührt und das vordere Knie über dem Fuß bleibt.",
+    "Drück dich mit dem vorderen Bein zurück in den Stand."
+   ],
+   "range": "Vom Stand bis das hintere Knie knapp über dem Boden ist, beide Knie etwa 90 Grad gebeugt.",
+   "breathing": "Atme beim Absenken ein und beim Hochdrücken aus.",
+   "tips": [
+    "Beginne mit einer leeren oder leichten Stange.",
+    "Schau nach vorn und spann den Bauch an."
+   ],
+   "mistakes": [
+    "Zu kleine Schritte, bei denen das Knie weit über die Zehen wandert.",
+    "Den Oberkörper nach vorn neigen.",
+    "Das vordere Knie nach innen fallen lassen."
+   ]
+  },
+  "it": {
+   "start": "Stai in piedi con il bilanciere sui trapezi, mani larghe, piedi alla larghezza del bacino.",
+   "steps": [
+    "Fai un lungo passo in avanti tenendo il busto eretto.",
+    "Scendi finché il ginocchio posteriore sfiora il pavimento, con il ginocchio davanti sopra il piede.",
+    "Spingi con la gamba davanti per tornare in piedi."
+   ],
+   "range": "Dalla posizione eretta al ginocchio posteriore vicino al pavimento, con entrambe le ginocchia a circa 90 gradi.",
+   "breathing": "Inspira in discesa, espira mentre spingi.",
+   "tips": [
+    "Inizia con un bilanciere scarico o leggero.",
+    "Guarda avanti e contrai gli addominali."
+   ],
+   "mistakes": [
+    "Fare un passo troppo corto, che spinge il ginocchio oltre le punte.",
+    "Inclinare il busto in avanti.",
+    "Lasciare che il ginocchio davanti ceda verso l'interno."
+   ]
+  },
+  "pt-BR": {
+   "start": "Fique em pé com a barra apoiada nos trapézios, as mãos afastadas e os pés na largura do quadril.",
+   "steps": [
+    "Dê um passo longo para a frente, mantendo o tronco ereto.",
+    "Desça até o joelho de trás quase tocar o chão, com o joelho da frente sobre o pé.",
+    "Empurre com a perna da frente para voltar à posição em pé."
+   ],
+   "range": "Da posição em pé até o joelho de trás perto do chão, com os dois joelhos a cerca de 90 graus.",
+   "breathing": "Inspire na descida e expire ao empurrar.",
+   "tips": [
+    "Comece com uma barra vazia ou leve.",
+    "Olhe para a frente e contraia o abdômen."
+   ],
+   "mistakes": [
+    "Dar um passo curto demais, levando o joelho muito além dos dedos.",
+    "Inclinar o tronco para a frente.",
+    "Deixar o joelho da frente cair para dentro."
+   ]
+  },
+  "ja": {
+   "start": "バーを僧帽筋にのせ、手は広めに握り、足を腰幅にして立ちます。",
+   "steps": [
+    "上体を立てたまま、大きく一歩前に踏み出します。",
+    "後ろの膝が床すれすれになるまで下ろします。前の膝は足の真上に保ちます。",
+    "前の脚で床を押して立ち上がります。"
+   ],
+   "range": "立った姿勢から後ろの膝が床に近づくまで。両膝は約90度に曲げます。",
+   "breathing": "下ろすときに吸い、押すときに吐きます。",
+   "tips": [
+    "最初は空のバーか軽い重さから始めます。",
+    "前を見て、腹筋に力を入れます。"
+   ],
+   "mistakes": [
+    "歩幅が小さすぎて膝がつま先よりかなり前に出る。",
+    "上体が前に倒れる。",
+    "前の膝が内側に入る。"
+   ]
+  }
+ },
+ "x-monster-walk": {
+  "fr": {
+   "start": "Place un élastique autour des genoux ou des chevilles, descends en mi-squat, pieds écartés.",
+   "steps": [
+    "Fais un pas large en diagonale ou sur le côté, en gardant la tension de l'élastique.",
+    "Rapproche l'autre pied sans le ramener complètement.",
+    "Continue à marcher en restant bas, les genoux poussés vers l'extérieur."
+   ],
+   "range": "Pas larges et contrôlés, en restant en mi-squat du début à la fin.",
+   "breathing": "Respire normalement, sans retenir ton souffle.",
+   "tips": [
+    "Garde les orteils vers l'avant.",
+    "Choisis un élastique plus léger au début."
+   ],
+   "mistakes": [
+    "Laisser les genoux rentrer vers l'intérieur.",
+    "Se redresser entre les pas.",
+    "Laisser l'élastique se relâcher en rapprochant trop les pieds."
+   ]
+  },
+  "en": {
+   "start": "Place a band around your knees or ankles, drop into a half squat with feet apart.",
+   "steps": [
+    "Take a wide step diagonally or sideways, keeping the band tight.",
+    "Bring the other foot closer without fully closing the gap.",
+    "Keep walking while staying low, with your knees pushed outward."
+   ],
+   "range": "Wide, controlled steps, staying in a half squat from start to finish.",
+   "breathing": "Breathe normally, without holding your breath.",
+   "tips": [
+    "Keep your toes pointing forward.",
+    "Start with a lighter band."
+   ],
+   "mistakes": [
+    "Letting the knees cave inward.",
+    "Standing up between steps.",
+    "Letting the band go slack by bringing your feet too close."
+   ]
+  },
+  "es": {
+   "start": "Coloca una banda elástica alrededor de las rodillas o los tobillos y baja a media sentadilla con los pies separados.",
+   "steps": [
+    "Da un paso amplio en diagonal o hacia el lado, manteniendo la banda tensa.",
+    "Acerca el otro pie sin cerrar del todo la separación.",
+    "Sigue caminando sin subir, con las rodillas empujadas hacia fuera."
+   ],
+   "range": "Pasos amplios y controlados, manteniendo la media sentadilla de principio a fin.",
+   "breathing": "Respira con normalidad, sin contener el aire.",
+   "tips": [
+    "Mantén los dedos de los pies hacia delante.",
+    "Empieza con una banda más ligera."
+   ],
+   "mistakes": [
+    "Dejar que las rodillas se metan hacia dentro.",
+    "Erguirte entre los pasos.",
+    "Aflojar la banda al juntar demasiado los pies."
+   ]
+  },
+  "de": {
+   "start": "Leg ein Band um Knie oder Knöchel, geh in die halbe Kniebeuge, die Füße auseinander.",
+   "steps": [
+    "Mach einen weiten Schritt diagonal oder zur Seite und halte das Band gespannt.",
+    "Zieh den anderen Fuß nach, ohne den Abstand ganz zu schließen.",
+    "Geh tief weiter, die Knie nach außen gedrückt."
+   ],
+   "range": "Weite, kontrollierte Schritte, vom Anfang bis zum Ende in der halben Kniebeuge.",
+   "breathing": "Atme ganz normal und halte die Luft nicht an.",
+   "tips": [
+    "Halte die Zehen nach vorn gerichtet.",
+    "Beginne mit einem leichteren Band."
+   ],
+   "mistakes": [
+    "Die Knie nach innen fallen lassen.",
+    "Zwischen den Schritten aufrichten.",
+    "Das Band erschlaffen lassen, weil die Füße zu nah zusammenkommen."
+   ]
+  },
+  "it": {
+   "start": "Metti un elastico attorno alle ginocchia o alle caviglie e scendi a mezzo squat con i piedi larghi.",
+   "steps": [
+    "Fai un passo ampio in diagonale o di lato, mantenendo l'elastico in tensione.",
+    "Avvicina l'altro piede senza chiudere del tutto la distanza.",
+    "Continua a camminare restando in posizione bassa, con le ginocchia spinte in fuori."
+   ],
+   "range": "Passi ampi e controllati, restando a mezzo squat dall'inizio alla fine.",
+   "breathing": "Respira normalmente, senza trattenere il fiato.",
+   "tips": [
+    "Tieni le punte dei piedi in avanti.",
+    "Inizia con un elastico più leggero."
+   ],
+   "mistakes": [
+    "Lasciare che le ginocchia cedano verso l'interno.",
+    "Rialzarsi tra un passo e l'altro.",
+    "Far rilassare l'elastico avvicinando troppo i piedi."
+   ]
+  },
+  "pt-BR": {
+   "start": "Coloque uma faixa elástica em volta dos joelhos ou dos tornozelos e desça em meio agachamento, com os pés afastados.",
+   "steps": [
+    "Dê um passo amplo na diagonal ou para o lado, mantendo a faixa esticada.",
+    "Aproxime o outro pé sem fechar totalmente a distância.",
+    "Continue andando sem subir, com os joelhos empurrados para fora."
+   ],
+   "range": "Passos amplos e controlados, mantendo o meio agachamento do começo ao fim.",
+   "breathing": "Respire normalmente, sem prender o ar.",
+   "tips": [
+    "Mantenha os dedos dos pés voltados para a frente.",
+    "Comece com uma faixa mais leve."
+   ],
+   "mistakes": [
+    "Deixar os joelhos caírem para dentro.",
+    "Levantar o corpo entre os passos.",
+    "Afrouxar a faixa ao juntar demais os pés."
+   ]
+  },
+  "ja": {
+   "start": "ゴムバンドを膝か足首に巻き、足を開いて浅めのスクワットの姿勢になります。",
+   "steps": [
+    "バンドを張ったまま、斜め前か横に大きく一歩踏み出します。",
+    "もう片方の足を近づけますが、完全には閉じません。",
+    "低い姿勢のまま、膝を外に押し出して歩き続けます。"
+   ],
+   "range": "広くコントロールした歩幅で、最初から最後まで浅いスクワットの姿勢を保ちます。",
+   "breathing": "息を止めず、普通に呼吸します。",
+   "tips": [
+    "つま先は前に向けます。",
+    "最初は弱めのバンドから始めます。"
+   ],
+   "mistakes": [
+    "膝が内側に入る。",
+    "歩く合間に体を起こす。",
+    "足を寄せすぎてバンドがゆるむ。"
+   ]
+  }
+ },
+ "x-tate-press": {
+  "fr": {
+   "start": "Allonge-toi sur un banc, un haltère dans chaque main, bras tendus au-dessus de la poitrine.",
+   "steps": [
+    "Écarte les coudes vers l'extérieur et garde les bras en place.",
+    "Fléchis les coudes pour amener les haltères sur la poitrine, vers les épaules.",
+    "Étends les coudes pour remonter les haltères au-dessus de la poitrine."
+   ],
+   "range": "Des bras tendus jusqu'aux haltères tout près de la poitrine, sans bouger les coudes.",
+   "breathing": "Inspire en descendant, expire en tendant les bras.",
+   "tips": [
+    "Choisis des haltères légers, ce mouvement est exigeant pour les coudes.",
+    "Descends lentement et contrôle les haltères."
+   ],
+   "mistakes": [
+    "Prendre trop lourd et perdre le contrôle des haltères.",
+    "Laisser les coudes bouger d'avant en arrière.",
+    "Descendre trop vite, au risque de se heurter la poitrine."
+   ]
+  },
+  "en": {
+   "start": "Lie on a bench with a dumbbell in each hand, arms straight above your chest.",
+   "steps": [
+    "Flare your elbows out to the sides and keep your upper arms in place.",
+    "Bend your elbows to bring the dumbbells onto your chest, toward your shoulders.",
+    "Extend your elbows to press the dumbbells back above your chest."
+   ],
+   "range": "From straight arms to the dumbbells close to your chest, without moving your elbows.",
+   "breathing": "Breathe in on the way down, breathe out as you straighten your arms.",
+   "tips": [
+    "Use light dumbbells: this movement is demanding on the elbows.",
+    "Lower slowly and keep control of the dumbbells."
+   ],
+   "mistakes": [
+    "Going too heavy and losing control of the dumbbells.",
+    "Letting the elbows drift back and forth.",
+    "Lowering too fast and bumping your chest."
+   ]
+  },
+  "es": {
+   "start": "Túmbate en un banco con una mancuerna en cada mano y los brazos estirados sobre el pecho.",
+   "steps": [
+    "Abre los codos hacia los lados y mantén los brazos en su sitio.",
+    "Flexiona los codos para llevar las mancuernas hacia el pecho, cerca de los hombros.",
+    "Estira los codos para subir las mancuernas de nuevo sobre el pecho."
+   ],
+   "range": "Desde los brazos estirados hasta las mancuernas muy cerca del pecho, sin mover los codos.",
+   "breathing": "Inspira al bajar y espira al estirar los brazos.",
+   "tips": [
+    "Elige mancuernas ligeras: este movimiento exige mucho a los codos.",
+    "Baja despacio y controla las mancuernas."
+   ],
+   "mistakes": [
+    "Usar demasiado peso y perder el control de las mancuernas.",
+    "Dejar que los codos se muevan hacia delante y atrás.",
+    "Bajar demasiado rápido y golpearte el pecho."
+   ]
+  },
+  "de": {
+   "start": "Lieg auf einer Bank, in jeder Hand eine Kurzhantel, die Arme gestreckt über der Brust.",
+   "steps": [
+    "Stell die Ellbogen nach außen und halte die Oberarme still.",
+    "Beuge die Ellbogen und führe die Hanteln auf die Brust, Richtung Schultern.",
+    "Streck die Ellbogen und drück die Hanteln wieder über die Brust."
+   ],
+   "range": "Von den gestreckten Armen bis die Hanteln nah an der Brust sind, ohne die Ellbogen zu bewegen.",
+   "breathing": "Atme beim Absenken ein und beim Strecken der Arme aus.",
+   "tips": [
+    "Nimm leichte Kurzhanteln: Die Übung belastet die Ellbogen stark.",
+    "Senk langsam ab und behalte die Hanteln unter Kontrolle."
+   ],
+   "mistakes": [
+    "Zu schwer wählen und die Hanteln nicht mehr kontrollieren.",
+    "Die Ellbogen vor und zurück wandern lassen.",
+    "Zu schnell absenken und gegen die Brust stoßen."
+   ]
+  },
+  "it": {
+   "start": "Sdraiati su una panca con un manubrio per mano, braccia tese sopra il petto.",
+   "steps": [
+    "Apri i gomiti verso l'esterno e tieni le braccia ferme.",
+    "Fletti i gomiti per portare i manubri sul petto, verso le spalle.",
+    "Distendi i gomiti per riportare i manubri sopra il petto."
+   ],
+   "range": "Dalle braccia tese ai manubri vicinissimi al petto, senza muovere i gomiti.",
+   "breathing": "Inspira in discesa, espira mentre distendi le braccia.",
+   "tips": [
+    "Scegli manubri leggeri: l'esercizio sollecita molto i gomiti.",
+    "Scendi lentamente e controlla i manubri."
+   ],
+   "mistakes": [
+    "Usare un carico troppo alto e perdere il controllo dei manubri.",
+    "Lasciare che i gomiti si muovano avanti e indietro.",
+    "Scendere troppo in fretta e urtare il petto."
+   ]
+  },
+  "pt-BR": {
+   "start": "Deite em um banco com um halter em cada mão e os braços esticados acima do peito.",
+   "steps": [
+    "Abra os cotovelos para os lados e mantenha os braços no lugar.",
+    "Dobre os cotovelos para levar os halteres ao peito, em direção aos ombros.",
+    "Estenda os cotovelos para empurrar os halteres de volta acima do peito."
+   ],
+   "range": "Dos braços esticados até os halteres bem perto do peito, sem mover os cotovelos.",
+   "breathing": "Inspire na descida e expire ao esticar os braços.",
+   "tips": [
+    "Use halteres leves: o movimento exige muito dos cotovelos.",
+    "Desça devagar e mantenha o controle dos halteres."
+   ],
+   "mistakes": [
+    "Usar carga demais e perder o controle dos halteres.",
+    "Deixar os cotovelos irem para a frente e para trás.",
+    "Descer rápido demais e bater no peito."
+   ]
+  },
+  "ja": {
+   "start": "ベンチに仰向けになり、両手にダンベルを持って、胸の上で腕を伸ばします。",
+   "steps": [
+    "肘を外側に開き、上腕は動かさずに保ちます。",
+    "肘を曲げて、ダンベルを胸の上、肩の方へ下ろします。",
+    "肘を伸ばして、ダンベルを胸の上に押し上げます。"
+   ],
+   "range": "腕を伸ばした位置から、ダンベルが胸のすぐ近くに来るまで。肘は動かしません。",
+   "breathing": "下ろすときに吸い、腕を伸ばすときに吐きます。",
+   "tips": [
+    "肘への負担が大きいので、軽いダンベルを選びます。",
+    "ゆっくり下ろし、ダンベルを制御します。"
+   ],
+   "mistakes": [
+    "重すぎてダンベルを制御できなくなる。",
+    "肘が前後に動いてしまう。",
+    "速く下ろして胸にぶつける。"
+   ]
+  }
+ },
+ "x-groiners": {
+  "fr": {
+   "start": "Place-toi en position de pompe, mains sous les épaules, corps gainé, hanches basses.",
+   "steps": [
+    "Amène un pied près de la main du même côté, à l'extérieur.",
+    "Ramène ce pied en arrière et amène l'autre pied près de l'autre main.",
+    "Continue en alternant à un rythme soutenu."
+   ],
+   "range": "Chaque pied vient près de la main, les mains restent plantées au sol.",
+   "breathing": "Respire de façon rapide et régulière, sans retenir ton souffle.",
+   "tips": [
+    "Garde les hanches basses, pas en l'air.",
+    "Ralentis si tu perds ta position."
+   ],
+   "mistakes": [
+    "Lever les hanches très haut.",
+    "Faire retomber les pieds lourdement.",
+    "Laisser les épaules s'effondrer."
+   ]
+  },
+  "en": {
+   "start": "Get into a push-up position, hands under your shoulders, body braced, hips low.",
+   "steps": [
+    "Bring one foot up beside the hand on the same side, on the outside.",
+    "Take that foot back and bring the other foot up beside the other hand.",
+    "Keep alternating at a steady pace."
+   ],
+   "range": "Each foot comes up next to the hand while your hands stay planted on the floor.",
+   "breathing": "Breathe quickly and steadily, without holding your breath.",
+   "tips": [
+    "Keep your hips low, not in the air.",
+    "Slow down if you lose your position."
+   ],
+   "mistakes": [
+    "Raising the hips very high.",
+    "Letting the feet slam down heavily.",
+    "Letting the shoulders collapse."
+   ]
+  },
+  "es": {
+   "start": "Colócate en posición de flexión, con las manos bajo los hombros, el cuerpo firme y las caderas bajas.",
+   "steps": [
+    "Lleva un pie junto a la mano del mismo lado, por fuera.",
+    "Devuelve ese pie atrás y lleva el otro pie junto a la otra mano.",
+    "Sigue alternando a un ritmo constante."
+   ],
+   "range": "Cada pie llega junto a la mano mientras las manos siguen apoyadas en el suelo.",
+   "breathing": "Respira de forma rápida y regular, sin contener el aire.",
+   "tips": [
+    "Mantén las caderas bajas, no en alto.",
+    "Reduce el ritmo si pierdes la posición."
+   ],
+   "mistakes": [
+    "Subir mucho las caderas.",
+    "Dejar caer los pies con fuerza.",
+    "Dejar que los hombros se hundan."
+   ]
+  },
+  "de": {
+   "start": "Geh in die Liegestützposition, die Hände unter den Schultern, der Körper gespannt, die Hüfte tief.",
+   "steps": [
+    "Setz einen Fuß neben die Hand derselben Seite, außen.",
+    "Stell den Fuß zurück und setz den anderen Fuß neben die andere Hand.",
+    "Wechsle in gleichmäßigem Tempo weiter ab."
+   ],
+   "range": "Jeder Fuß kommt neben die Hand, während die Hände fest am Boden bleiben.",
+   "breathing": "Atme schnell und gleichmäßig und halte die Luft nicht an.",
+   "tips": [
+    "Halte die Hüfte tief, nicht in der Luft.",
+    "Werde langsamer, wenn du die Position verlierst."
+   ],
+   "mistakes": [
+    "Die Hüfte sehr hoch heben.",
+    "Die Füße schwer aufstampfen.",
+    "Die Schultern einsinken lassen."
+   ]
+  },
+  "it": {
+   "start": "Mettiti in posizione di flessione, mani sotto le spalle, corpo in tensione, fianchi bassi.",
+   "steps": [
+    "Porta un piede accanto alla mano dello stesso lato, all'esterno.",
+    "Riporta quel piede indietro e porta l'altro accanto all'altra mano.",
+    "Continua ad alternare a ritmo costante."
+   ],
+   "range": "Ogni piede arriva accanto alla mano, mentre le mani restano ben appoggiate a terra.",
+   "breathing": "Respira in modo rapido e regolare, senza trattenere il fiato.",
+   "tips": [
+    "Tieni i fianchi bassi, non in alto.",
+    "Rallenta se perdi la posizione."
+   ],
+   "mistakes": [
+    "Alzare molto i fianchi.",
+    "Far ricadere i piedi pesantemente.",
+    "Lasciare che le spalle cedano."
+   ]
+  },
+  "pt-BR": {
+   "start": "Fique na posição de flexão, com as mãos sob os ombros, o corpo firme e o quadril baixo.",
+   "steps": [
+    "Leve um pé até perto da mão do mesmo lado, por fora.",
+    "Volte esse pé para trás e leve o outro pé até perto da outra mão.",
+    "Continue alternando em ritmo constante."
+   ],
+   "range": "Cada pé chega perto da mão enquanto as mãos continuam apoiadas no chão.",
+   "breathing": "Respire de forma rápida e regular, sem prender o ar.",
+   "tips": [
+    "Mantenha o quadril baixo, não para o alto.",
+    "Diminua o ritmo se perder a posição."
+   ],
+   "mistakes": [
+    "Levantar muito o quadril.",
+    "Deixar os pés caírem com força.",
+    "Deixar os ombros afundarem."
+   ]
+  },
+  "ja": {
+   "start": "腕立て伏せの姿勢になり、手は肩の真下に置き、体を固めて腰は低く保ちます。",
+   "steps": [
+    "片足を同じ側の手の外側まで引き寄せます。",
+    "その足を後ろに戻しながら、反対の足を反対の手のそばに引き寄せます。",
+    "一定のリズムで交互に続けます。"
+   ],
+   "range": "手は床に置いたまま、足を手のそばまで引き寄せます。",
+   "breathing": "息を止めず、速く一定に呼吸します。",
+   "tips": [
+    "腰は高く上げず、低く保ちます。",
+    "姿勢が崩れたらペースを落とします。"
+   ],
+   "mistakes": [
+    "腰を高く上げすぎる。",
+    "足を強く打ちつけるように下ろす。",
+    "肩が沈む。"
+   ]
+  }
+ }
+}

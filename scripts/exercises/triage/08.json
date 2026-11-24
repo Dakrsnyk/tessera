@@ -1,0 +1,380 @@
+{
+ "x-one-arm-side-laterals": {
+  "merge": "lateral-raise",
+  "why": "Variante d'élévation latérale à l'haltère"
+ },
+ "x-power-partials": {
+  "merge": "lateral-raise",
+  "why": "Variante d'élévation latérale à l'haltère"
+ },
+ "x-double-kettlebell-alternating-hang-clean": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-two-arm-kettlebell-clean": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-alternating-hang-clean": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-kettlebell-dead-clean": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-open-palm-kettlebell-clean": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-one-arm-open-palm-kettlebell-clean": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-bottoms-up-clean-from-the-hang-position": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-one-arm-kettlebell-clean": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-dumbbell-clean": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-one-arm-kettlebell-clean-and-jerk": {
+  "merge": "kb-clean",
+  "why": "Épaulé à la kettlebell ou à l'haltère, même geste"
+ },
+ "x-clean-from-blocks": {
+  "merge": "power-clean",
+  "why": "Variante d'épaulé à la barre"
+ },
+ "x-power-clean-from-blocks": {
+  "merge": "power-clean",
+  "why": "Variante d'épaulé à la barre"
+ },
+ "x-split-clean": {
+  "merge": "power-clean",
+  "why": "Variante d'épaulé à la barre"
+ },
+ "x-hang-clean": {
+  "merge": "power-clean",
+  "why": "Épaulé suspendu, même mouvement que power clean"
+ },
+ "x-smith-machine-hang-power-clean": {
+  "merge": "power-clean",
+  "why": "Variante d'épaulé à la barre"
+ },
+ "x-hang-clean-below-the-knees": {
+  "merge": "power-clean",
+  "why": "Variante d'épaulé à la barre"
+ },
+ "x-jerk-balance": {
+  "merge": "x-clean-and-jerk",
+  "why": "Même mouvement olympique, phase du jeté"
+ },
+ "x-downward-facing-balance": {
+  "merge": "superman",
+  "why": "Extension dorsale à plat ventre, même gainage"
+ },
+ "x-overhead-stretch": {
+  "merge": "x-standing-lateral-stretch",
+  "why": "Étirement du tronc bras levés, inclinaison latérale"
+ },
+ "x-seated-overhead-stretch": {
+  "merge": "x-standing-lateral-stretch",
+  "why": "Étirement du tronc bras levés, inclinaison latérale"
+ },
+ "x-upward-stretch": {
+  "merge": "x-standing-lateral-stretch",
+  "why": "Étirement du tronc bras levés, inclinaison latérale"
+ },
+ "x-looking-at-ceiling": {
+  "merge": "cobra",
+  "why": "Cambrure vers l'avant, proche du cobra"
+ },
+ "x-lying-crossover": {
+  "merge": "pigeon",
+  "why": "Étirement du fessier cheville sur genou"
+ },
+ "x-it-band-and-glute-stretch": {
+  "merge": "pigeon",
+  "why": "Étirement du fessier cheville sur genou"
+ },
+ "x-ankle-on-the-knee": {
+  "merge": "pigeon",
+  "why": "Étirement du fessier cheville sur genou"
+ },
+ "x-seated-glute": {
+  "merge": "pigeon",
+  "why": "Étirement du fessier cheville sur genou"
+ },
+ "x-spinal-stretch": {
+  "merge": "childs-pose",
+  "why": "Étirement du bas du dos en flexion"
+ },
+ "x-chair-lower-back-stretch": {
+  "merge": "childs-pose",
+  "why": "Étirement du bas du dos en flexion"
+ },
+ "x-dancers-stretch": {
+  "merge": "childs-pose",
+  "why": "Étirement du bas du dos en flexion"
+ },
+ "x-hug-a-ball": {
+  "merge": "childs-pose",
+  "why": "Étirement du bas du dos en flexion"
+ },
+ "x-pyramid": {
+  "merge": "childs-pose",
+  "why": "Étirement du bas du dos en flexion"
+ },
+ "x-cat-stretch": {
+  "merge": "cat-cow",
+  "why": "Même mouvement de dos rond quatre pattes"
+ },
+ "x-adductor": {
+  "merge": "x-adductor-groin",
+  "why": "Étirement des adducteurs, variante de position"
+ },
+ "x-side-lying-groin-stretch": {
+  "merge": "x-adductor-groin",
+  "why": "Étirement des adducteurs, variante de position"
+ },
+ "x-groin-and-back-stretch": {
+  "merge": "x-adductor-groin",
+  "why": "Étirement des adducteurs, variante de position"
+ },
+ "x-seated-biceps": {
+  "merge": "x-standing-biceps-stretch",
+  "why": "Étirement du biceps bras tendu en arrière"
+ },
+ "x-overhead-lat": {
+  "merge": "x-side-lying-floor-stretch",
+  "why": "Étirement du dorsal bras levé"
+ },
+ "x-one-arm-against-wall": {
+  "merge": "x-side-lying-floor-stretch",
+  "why": "Étirement du dorsal bras levé"
+ },
+ "x-upper-back-leg-grab": {
+  "merge": "x-upper-back-stretch",
+  "why": "Étirement du haut du dos, variante proche"
+ },
+ "x-middle-back-stretch": {
+  "merge": "x-upper-back-stretch",
+  "why": "Étirement du dos arrondi, variante proche"
+ },
+ "x-dynamic-back-stretch": {
+  "merge": "x-upper-back-stretch",
+  "why": "Étirement du dos arrondi, variante proche"
+ },
+ "x-chair-upper-body-stretch": {
+  "merge": "x-upper-back-stretch",
+  "why": "Étirement du dos arrondi, variante proche"
+ },
+ "x-hamstring-stretch": {
+  "merge": "hamstring-stretch",
+  "why": "Même étirement des ischio-jambiers"
+ },
+ "x-leg-up-hamstring-stretch": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement des ischio-jambiers, variante de position"
+ },
+ "x-seated-floor-hamstring-stretch": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement des ischio-jambiers, variante de position"
+ },
+ "x-seated-hamstring": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement des ischio-jambiers, variante de position"
+ },
+ "x-90-90-hamstring": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement des ischio-jambiers, variante de position"
+ },
+ "x-runners-stretch": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement des ischio-jambiers, variante de position"
+ },
+ "x-seated-hamstring-and-calf-stretch": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement des ischio-jambiers, variante de position"
+ },
+ "x-standing-hamstring-and-calf-stretch": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement des ischio-jambiers, variante de position"
+ },
+ "x-chair-leg-extended-stretch": {
+  "merge": "hamstring-stretch",
+  "why": "Étirement des ischio-jambiers, variante de position"
+ },
+ "x-intermediate-groin-stretch": {
+  "merge": "x-adductor-groin",
+  "why": "Étirement des adducteurs avec sangle, même zone"
+ },
+ "x-calf-stretch-elbows-against-wall": {
+  "merge": "calf-stretch",
+  "why": "Étirement du mollet, variante de position"
+ },
+ "x-calf-stretch-hands-against-wall": {
+  "merge": "calf-stretch",
+  "why": "Étirement du mollet, variante de position"
+ },
+ "x-seated-calf-stretch": {
+  "merge": "calf-stretch",
+  "why": "Étirement du mollet, variante de position"
+ },
+ "x-standing-soleus-and-achilles-stretch": {
+  "merge": "calf-stretch",
+  "why": "Étirement du mollet, variante de position"
+ },
+ "x-posterior-tibialis-stretch": {
+  "merge": "calf-stretch",
+  "why": "Étirement du mollet, variante de position"
+ },
+ "x-peroneals-stretch": {
+  "merge": "calf-stretch",
+  "why": "Étirement du mollet, variante de position"
+ },
+ "x-chest-and-front-of-shoulder-stretch": {
+  "merge": "chest-stretch",
+  "why": "Étirement des pectoraux, variante"
+ },
+ "x-behind-head-chest-stretch": {
+  "merge": "chest-stretch",
+  "why": "Étirement des pectoraux, variante"
+ },
+ "x-chest-stretch-on-stability-ball": {
+  "merge": "chest-stretch",
+  "why": "Étirement des pectoraux, variante"
+ },
+ "x-dynamic-chest-stretch": {
+  "merge": "chest-stretch",
+  "why": "Étirement des pectoraux, variante"
+ },
+ "x-standing-elevated-quad-stretch": {
+  "merge": "quad-stretch",
+  "why": "Étirement du quadriceps, variante de position"
+ },
+ "x-on-your-side-quad-stretch": {
+  "merge": "quad-stretch",
+  "why": "Étirement du quadriceps, variante de position"
+ },
+ "x-on-your-back-quad-stretch": {
+  "merge": "quad-stretch",
+  "why": "Étirement du quadriceps, variante de position"
+ },
+ "x-lying-prone-quadriceps": {
+  "merge": "quad-stretch",
+  "why": "Étirement du quadriceps, variante de position"
+ },
+ "x-all-fours-quad-stretch": {
+  "merge": "quad-stretch",
+  "why": "Étirement du quadriceps, variante de position"
+ },
+ "x-intermediate-hip-flexor-and-quad-stretch": {
+  "merge": "quad-stretch",
+  "why": "Étirement du quadriceps, variante de position"
+ },
+ "x-standing-hip-flexors": {
+  "merge": "hip-flexor-stretch",
+  "why": "Étirement des fléchisseurs de hanche"
+ },
+ "x-kneeling-hip-flexor": {
+  "merge": "hip-flexor-stretch",
+  "why": "Étirement des fléchisseurs de hanche"
+ },
+ "x-round-the-world-shoulder-stretch": {
+  "merge": "shoulder-stretch",
+  "why": "Étirement de l'épaule, variante"
+ },
+ "x-seated-front-deltoid": {
+  "merge": "shoulder-stretch",
+  "why": "Étirement de l'épaule, variante"
+ },
+ "x-tricep-side-stretch": {
+  "merge": "triceps-stretch",
+  "why": "Étirement du triceps bras levé"
+ },
+ "x-side-wrist-pull": {
+  "merge": "triceps-stretch",
+  "why": "Étirement du triceps bras levé"
+ },
+ "x-chin-to-chest-stretch": {
+  "merge": "x-side-neck-stretch",
+  "why": "Étirement de la nuque, variante d'inclinaison"
+ },
+ "x-clean-and-press": {
+  "merge": "x-clean-and-jerk",
+  "why": "Épaulé puis poussée au-dessus de la tête"
+ },
+ "x-clean": {
+  "keep": true,
+  "demo": "new",
+  "move": "Barre au sol, tirage explosif puis réception en squat complet, barre sur les épaules avant, relevé debout",
+  "why": "Squat clean olympique distinct du power clean"
+ },
+ "x-clean-and-jerk": {
+  "keep": true,
+  "demo": "new",
+  "move": "Barre sur les épaules, flexion-extension des jambes, poussée au-dessus de la tête avec fente de réception, pieds ramenés",
+  "why": "Mouvement olympique complet, sans équivalent"
+ },
+ "x-standing-lateral-stretch": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout pieds écartés, un bras levé, inclinaison latérale du tronc vers le côté opposé",
+  "why": "Étirement latéral du tronc sans équivalent"
+ },
+ "x-lying-glute": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé sur le dos, cheville sur le genou opposé, tirer la cuisse vers la poitrine (figure 4)",
+  "why": "Étirement fessier couché, courant"
+ },
+ "x-adductor-groin": {
+  "keep": true,
+  "demo": "new",
+  "move": "Assis, plantes des pieds jointes, genoux écartés vers le sol, appuyer doucement sur les genoux",
+  "why": "Étirement des adducteurs papillon, courant"
+ },
+ "x-kneeling-forearm-stretch": {
+  "keep": true,
+  "demo": "new",
+  "move": "À genoux, paumes au sol doigts vers les genoux, reculer les fesses vers les talons",
+  "why": "Étirement des avant-bras, distinct"
+ },
+ "x-standing-biceps-stretch": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, bras tendu derrière au niveau de l'épaule, paume sur un appui, tourner le buste à l'opposé",
+  "why": "Étirement du biceps distinct"
+ },
+ "x-side-lying-floor-stretch": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé sur le côté, bras du dessus tendu au-dessus de la tête, étirer le flanc",
+  "why": "Étirement des dorsaux au sol"
+ },
+ "x-upper-back-stretch": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, mains jointes bras tendus devant, arrondir le haut du dos en poussant vers l'avant",
+  "why": "Étirement du haut du dos distinct"
+ },
+ "x-side-neck-stretch": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout ou assis, incliner l'oreille vers l'épaule, main sur la tête pour accentuer",
+  "why": "Étirement du cou, aucun intégré"
+ },
+ "x-lying-hamstring": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé sur le dos, une jambe levée tendue tirée vers soi avec une sangle autour du pied, autre jambe au sol",
+  "why": "Étirement allongé avec sangle, courant"
+ }
+}

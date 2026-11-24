@@ -8,8 +8,8 @@ final class ExerciseCatalogMatcherTests: XCTestCase {
 
     func testTheCatalogueIsLoadedWithTheBuiltInExercisesFirst() {
         let all = ExerciseLibrary.all
-        XCTAssertGreaterThanOrEqual(ExerciseCatalog.exercises.count, 700, "free-exercise-db, without the exercises the app had")
-        XCTAssertGreaterThanOrEqual(all.count, 900)
+        XCTAssertGreaterThanOrEqual(ExerciseCatalog.exercises.count, 75, "The distinct movements kept by the triage")
+        XCTAssertGreaterThanOrEqual(all.count, 240)
         XCTAssertEqual(Array(all.prefix(ExerciseLibrary.builtIn.count)).map(\.id), ExerciseLibrary.builtIn.map(\.id),
                        "The 163 written exercises keep their place")
         XCTAssertEqual(Set(all.map(\.id)).count, all.count, "Each exercise once")
@@ -17,12 +17,24 @@ final class ExerciseCatalogMatcherTests: XCTestCase {
         XCTAssertTrue(ExerciseCatalog.exercises.contains { $0.equipment.contains(.machine) }, "Machines included")
     }
 
-    func testEveryCatalogueExerciseShowsTheDemonstrationOfABuiltInOne() throws {
+    func testEveryCatalogueExerciseHasADemonstrationAndATechnique() throws {
         for exercise in ExerciseCatalog.exercises {
-            let source = try XCTUnwrap(exercise.demoID, exercise.id)
-            XCTAssertNotNil(ExerciseLibrary.builtIn.first { $0.id == source }, exercise.id)
+            if let source = exercise.demoID {
+                XCTAssertNotNil(ExerciseLibrary.builtIn.first { $0.id == source }, exercise.id)
+            }
             XCTAssertNotNil(ExerciseDemos.demo(for: exercise.id), exercise.id)
+            XCTAssertNotNil(ExerciseCatalog.techniques[exercise.id], "\(exercise.id): its own explanation")
         }
+    }
+
+    /// The triage (CEO, 2026-11-23): a variant merged into another exercise leads there, by its id and by its name.
+    func testAMergedExerciseLeadsToTheExerciseKept() throws {
+        let kept = try XCTUnwrap(ExerciseCatalog.redirects["x-kettlebell-pirate-ships"])
+        XCTAssertEqual(ExerciseLibrary.info("x-kettlebell-pirate-ships")?.id, kept, "A set saved with the old id keeps its exercise")
+        XCTAssertEqual(ExerciseLibrary.canonical("x-kettlebell-pirate-ships"), kept)
+        XCTAssertEqual(ExerciseLibrary.canonical("bench-press"), "bench-press")
+        XCTAssertFalse(ExerciseCatalog.exercises.contains { $0.id == "x-kettlebell-pirate-ships" }, "No longer listed")
+        XCTAssertEqual(ExerciseLibrary.match(name: "Bateau pirate kettlebell")?.id, kept, "Its name is an alias of the kept one")
     }
 
     func testANameInEachLanguage() throws {

@@ -1,0 +1,1487 @@
+{
+ "x-cable-rope-overhead-triceps-extension": {
+  "fr": {
+   "start": "Dos à la poulie basse, corde tenue à deux mains, bras tendus au-dessus de la tête, coudes près des oreilles.",
+   "steps": [
+    "Garde les coudes serrés et les bras en haut, sans bouger les épaules.",
+    "Plie les coudes pour descendre la corde derrière la tête.",
+    "Tends les bras pour remonter la corde au-dessus de la tête."
+   ],
+   "range": "Descends jusqu'à sentir l'étirement du triceps, puis tends les bras sans verrouiller les coudes.",
+   "breathing": "Inspire en descendant, expire en tendant les bras.",
+   "tips": [
+    "Un pied devant l'autre te stabilise.",
+    "Choisis une charge qui te laisse contrôler la descente."
+   ],
+   "mistakes": [
+    "Écarter les coudes.",
+    "Cambrer le dos pour pousser.",
+    "Prendre trop lourd et faire bouger tout le haut du corps."
+   ]
+  },
+  "en": {
+   "start": "Facing away from the low pulley, hold the rope with both hands, arms extended overhead, elbows close to your ears.",
+   "steps": [
+    "Keep your elbows tight and your upper arms still.",
+    "Bend your elbows to lower the rope behind your head.",
+    "Extend your arms to bring the rope back overhead."
+   ],
+   "range": "Lower until you feel the triceps stretch, then extend without locking the elbows.",
+   "breathing": "Breathe in as you lower, breathe out as you extend.",
+   "tips": [
+    "Stagger your feet for balance.",
+    "Pick a weight you can control on the way down."
+   ],
+   "mistakes": [
+    "Letting the elbows flare out.",
+    "Arching the lower back to push.",
+    "Using too much weight and swinging the upper body."
+   ]
+  },
+  "es": {
+   "start": "De espaldas a la polea baja, sujeta la cuerda con las dos manos, brazos extendidos sobre la cabeza y codos cerca de las orejas.",
+   "steps": [
+    "Mantén los codos pegados y los brazos quietos.",
+    "Flexiona los codos para bajar la cuerda detrás de la cabeza.",
+    "Extiende los brazos para subir la cuerda sobre la cabeza."
+   ],
+   "range": "Baja hasta notar el estiramiento del tríceps y extiende sin bloquear los codos.",
+   "breathing": "Inspira al bajar y espira al extender.",
+   "tips": [
+    "Un pie adelantado te da estabilidad.",
+    "Elige un peso que puedas controlar al bajar."
+   ],
+   "mistakes": [
+    "Abrir los codos hacia los lados.",
+    "Arquear la zona lumbar para empujar.",
+    "Usar demasiado peso y balancear el tronco."
+   ]
+  },
+  "de": {
+   "start": "Mit dem Rücken zum unteren Kabelzug, Seil mit beiden Händen halten, Arme über dem Kopf gestreckt, Ellbogen nah an den Ohren.",
+   "steps": [
+    "Halte die Ellbogen eng und die Oberarme ruhig.",
+    "Beuge die Ellbogen und senke das Seil hinter den Kopf.",
+    "Strecke die Arme und führe das Seil wieder über den Kopf."
+   ],
+   "range": "Senke, bis du die Dehnung im Trizeps spürst, und strecke dann ohne die Ellbogen durchzudrücken.",
+   "breathing": "Beim Senken einatmen, beim Strecken ausatmen.",
+   "tips": [
+    "Ein Fuß vorn gibt dir Halt.",
+    "Wähle ein Gewicht, das du kontrolliert absenken kannst."
+   ],
+   "mistakes": [
+    "Die Ellbogen nach außen fallen lassen.",
+    "Ins Hohlkreuz gehen, um zu drücken.",
+    "Zu schwer wählen und den Oberkörper mitschwingen."
+   ]
+  },
+  "it": {
+   "start": "Di spalle al cavo basso, impugna la corda con due mani, braccia tese sopra la testa e gomiti vicini alle orecchie.",
+   "steps": [
+    "Tieni i gomiti stretti e le braccia ferme.",
+    "Fletti i gomiti per portare la corda dietro la testa.",
+    "Estendi le braccia per riportare la corda sopra la testa."
+   ],
+   "range": "Scendi fino a sentire lo stiramento del tricipite, poi estendi senza bloccare i gomiti.",
+   "breathing": "Inspira scendendo, espira estendendo le braccia.",
+   "tips": [
+    "Un piede avanti ti dà stabilità.",
+    "Scegli un carico che riesci a controllare in discesa."
+   ],
+   "mistakes": [
+    "Aprire i gomiti verso l'esterno.",
+    "Inarcare la zona lombare per spingere.",
+    "Usare troppo carico e dondolare il busto."
+   ]
+  },
+  "pt-BR": {
+   "start": "De costas para a polia baixa, segure a corda com as duas mãos, braços estendidos acima da cabeça e cotovelos perto das orelhas.",
+   "steps": [
+    "Mantenha os cotovelos juntos e os braços parados.",
+    "Dobre os cotovelos para levar a corda atrás da cabeça.",
+    "Estenda os braços para subir a corda acima da cabeça."
+   ],
+   "range": "Desça até sentir o alongamento do tríceps e estenda sem travar os cotovelos.",
+   "breathing": "Inspire ao descer e expire ao estender.",
+   "tips": [
+    "Um pé à frente ajuda no equilíbrio.",
+    "Escolha uma carga que dê para controlar na descida."
+   ],
+   "mistakes": [
+    "Abrir os cotovelos para os lados.",
+    "Arquear a lombar para empurrar.",
+    "Usar carga demais e balançar o tronco."
+   ]
+  },
+  "ja": {
+   "start": "ローケーブルに背を向け、ロープを両手で持ち、腕を頭上で伸ばして肘を耳の近くに置く。",
+   "steps": [
+    "肘を閉じたまま、上腕を動かさない。",
+    "肘を曲げてロープを頭の後ろへ下ろす。",
+    "腕を伸ばしてロープを頭上に戻す。"
+   ],
+   "range": "上腕三頭筋が伸びるのを感じるところまで下ろし、肘をロックせずに伸ばす。",
+   "breathing": "下ろすときに息を吸い、伸ばすときに吐く。",
+   "tips": [
+    "足を前後にずらすと安定する。",
+    "下ろす動きをコントロールできる重さを選ぶ。"
+   ],
+   "mistakes": [
+    "肘が外に開く。",
+    "腰を反らして押し上げる。",
+    "重すぎて上半身が揺れる。"
+   ]
+  }
+ },
+ "x-suspended-fallout": {
+  "fr": {
+   "start": "Face au sol, avant-bras ou mains dans les sangles, corps gainé en planche inclinée, bras sous l'ancrage.",
+   "steps": [
+    "Serre les abdos et les fessiers pour garder le corps aligné.",
+    "Avance les bras loin devant en laissant le corps s'allonger.",
+    "Ramène les sangles vers toi en contractant les abdos."
+   ],
+   "range": "Allonge-toi jusqu'à ce que les bras soient presque dans le prolongement du corps, sans creuser le dos.",
+   "breathing": "Inspire en avançant, expire en revenant.",
+   "tips": [
+    "Plus tes pieds sont reculés, plus l'exercice est dur : commence avec peu d'inclinaison.",
+    "Rentre légèrement le bassin pour protéger le bas du dos."
+   ],
+   "mistakes": [
+    "Creuser le bas du dos.",
+    "Laisser les hanches s'affaisser.",
+    "Aller trop loin sans contrôle."
+   ]
+  },
+  "en": {
+   "start": "Face down, forearms or hands in the straps, body braced in an inclined plank, arms under the anchor.",
+   "steps": [
+    "Squeeze your abs and glutes to keep the body in one line.",
+    "Reach the arms far forward and let the body lengthen.",
+    "Pull the straps back toward you by tightening your abs."
+   ],
+   "range": "Lengthen until the arms are almost in line with the body, without letting the back arch.",
+   "breathing": "Breathe in as you reach, breathe out as you return.",
+   "tips": [
+    "The further back your feet, the harder it gets: start with a small incline.",
+    "Tuck the pelvis slightly to protect the lower back."
+   ],
+   "mistakes": [
+    "Arching the lower back.",
+    "Letting the hips sag.",
+    "Going too far without control."
+   ]
+  },
+  "es": {
+   "start": "Boca abajo, antebrazos o manos en las correas, cuerpo firme en plancha inclinada, brazos bajo el anclaje.",
+   "steps": [
+    "Aprieta abdomen y glúteos para mantener el cuerpo alineado.",
+    "Lleva los brazos lejos hacia delante y deja que el cuerpo se alargue.",
+    "Tira de las correas hacia ti contrayendo el abdomen."
+   ],
+   "range": "Alárgate hasta que los brazos queden casi en línea con el cuerpo, sin arquear la espalda.",
+   "breathing": "Inspira al avanzar y espira al volver.",
+   "tips": [
+    "Cuanto más atrás tengas los pies, más difícil: empieza con poca inclinación.",
+    "Mete un poco la pelvis para proteger la zona lumbar."
+   ],
+   "mistakes": [
+    "Arquear la zona lumbar.",
+    "Dejar caer las caderas.",
+    "Ir demasiado lejos sin control."
+   ]
+  },
+  "de": {
+   "start": "Bauchlage, Unterarme oder Hände in den Schlingen, Körper in schräger Planke gespannt, Arme unter dem Anker.",
+   "steps": [
+    "Spanne Bauch und Gesäß an, damit der Körper eine Linie bleibt.",
+    "Schiebe die Arme weit nach vorn und lass den Körper länger werden.",
+    "Ziehe die Schlingen mit angespanntem Bauch zurück zu dir."
+   ],
+   "range": "Strecke dich, bis die Arme fast in der Linie des Körpers liegen, ohne ins Hohlkreuz zu fallen.",
+   "breathing": "Beim Nach-vorn-Schieben einatmen, beim Zurückkehren ausatmen.",
+   "tips": [
+    "Je weiter die Füße zurück, desto schwerer: starte mit wenig Neigung.",
+    "Kippe das Becken leicht auf, um den unteren Rücken zu schützen."
+   ],
+   "mistakes": [
+    "Ins Hohlkreuz gehen.",
+    "Die Hüften durchhängen lassen.",
+    "Zu weit gehen, ohne Kontrolle."
+   ]
+  },
+  "it": {
+   "start": "A pancia in giù, avambracci o mani nelle cinghie, corpo teso in plank inclinato, braccia sotto l'ancoraggio.",
+   "steps": [
+    "Contrai addome e glutei per tenere il corpo allineato.",
+    "Porta le braccia lontano in avanti lasciando allungare il corpo.",
+    "Riporta le cinghie verso di te contraendo l'addome."
+   ],
+   "range": "Allungati finché le braccia sono quasi in linea con il corpo, senza inarcare la schiena.",
+   "breathing": "Inspira mentre avanzi, espira mentre torni.",
+   "tips": [
+    "Più i piedi sono indietro, più è difficile: parti con poca inclinazione.",
+    "Inclina leggermente il bacino all’indietro per proteggere la zona lombare."
+   ],
+   "mistakes": [
+    "Inarcare la zona lombare.",
+    "Lasciar cadere i fianchi.",
+    "Andare troppo avanti senza controllo."
+   ]
+  },
+  "pt-BR": {
+   "start": "De bruços, antebraços ou mãos nas fitas, corpo firme em prancha inclinada, braços sob a ancoragem.",
+   "steps": [
+    "Contraia abdômen e glúteos para manter o corpo alinhado.",
+    "Leve os braços longe à frente e deixe o corpo se alongar.",
+    "Puxe as fitas de volta contraindo o abdômen."
+   ],
+   "range": "Alongue-se até os braços ficarem quase na linha do corpo, sem arquear as costas.",
+   "breathing": "Inspire ao avançar e expire ao voltar.",
+   "tips": [
+    "Quanto mais para trás os pés, mais difícil: comece com pouca inclinação.",
+    "Incline levemente a pelve para proteger a lombar."
+   ],
+   "mistakes": [
+    "Arquear a lombar.",
+    "Deixar o quadril cair.",
+    "Ir longe demais sem controle."
+   ]
+  },
+  "ja": {
+   "start": "うつ伏せで前腕または手をストラップに通し、体を斜めのプランクで固め、腕をアンカーの真下に置く。",
+   "steps": [
+    "腹筋とお尻を締め、体を一直線に保つ。",
+    "腕を遠く前へ伸ばし、体を長く伸ばしていく。",
+    "腹筋に力を入れてストラップを手前に引き戻す。"
+   ],
+   "range": "腕が体のラインとほぼ一直線になるまで伸ばすが、腰は反らさない。",
+   "breathing": "前へ伸ばすときに吸い、戻るときに吐く。",
+   "tips": [
+    "足を後ろに置くほど負荷が上がる。最初は傾きを小さく。",
+    "骨盤を軽く後傾させて腰を守る。"
+   ],
+   "mistakes": [
+    "腰が反る。",
+    "お尻が落ちる。",
+    "コントロールできないほど遠くへ行く。"
+   ]
+  }
+ },
+ "x-stomach-vacuum": {
+  "fr": {
+   "start": "Debout, pieds écartés à la largeur des épaules, mains sur les hanches, dos droit.",
+   "steps": [
+    "Inspire profondément par le nez pour remplir les poumons.",
+    "Expire complètement par la bouche en rentrant le ventre vers la colonne.",
+    "Maintiens le ventre rentré, sans reprendre d'air, puis relâche."
+   ],
+   "range": "Le ventre se creuse au maximum sous les côtes ; le haut du corps reste immobile.",
+   "breathing": "Expire à fond, tiens 10 à 20 secondes sans respirer, puis respire normalement.",
+   "tips": [
+    "Commence par des maintiens courts et allonge progressivement.",
+    "Entraîne-toi à jeun ou longtemps après un repas."
+   ],
+   "mistakes": [
+    "Bloquer le souffle trop longtemps et avoir la tête qui tourne.",
+    "Lever les épaules ou se pencher en avant.",
+    "Faire l'exercice juste après avoir mangé."
+   ]
+  },
+  "en": {
+   "start": "Stand tall, feet shoulder-width apart, hands on your hips, back straight.",
+   "steps": [
+    "Breathe in deeply through the nose to fill the lungs.",
+    "Breathe out fully through the mouth while pulling your belly in toward the spine.",
+    "Hold the belly in without taking a breath, then release."
+   ],
+   "range": "The belly draws in as far as possible under the ribs; the upper body stays still.",
+   "breathing": "Breathe out completely, hold 10 to 20 seconds without breathing, then breathe normally.",
+   "tips": [
+    "Start with short holds and build up gradually.",
+    "Train on an empty stomach or well after a meal."
+   ],
+   "mistakes": [
+    "Holding the breath too long and getting dizzy.",
+    "Lifting the shoulders or leaning forward.",
+    "Doing it right after eating."
+   ]
+  },
+  "es": {
+   "start": "De pie, pies separados al ancho de los hombros, manos en las caderas, espalda recta.",
+   "steps": [
+    "Inspira profundamente por la nariz para llenar los pulmones.",
+    "Espira por completo por la boca metiendo el vientre hacia la columna.",
+    "Mantén el vientre metido sin tomar aire y luego suelta."
+   ],
+   "range": "El vientre se hunde al máximo bajo las costillas; la parte superior del cuerpo no se mueve.",
+   "breathing": "Espira a fondo, mantén 10 a 20 segundos sin respirar y vuelve a respirar con normalidad.",
+   "tips": [
+    "Empieza con mantenimientos cortos y alárgalos poco a poco.",
+    "Practícalo en ayunas o mucho después de comer."
+   ],
+   "mistakes": [
+    "Aguantar la respiración demasiado y marearte.",
+    "Subir los hombros o inclinarte hacia delante.",
+    "Hacerlo justo después de comer."
+   ]
+  },
+  "de": {
+   "start": "Aufrecht stehen, Füße schulterbreit, Hände auf den Hüften, Rücken gerade.",
+   "steps": [
+    "Atme tief durch die Nase ein, um die Lunge zu füllen.",
+    "Atme vollständig durch den Mund aus und ziehe den Bauch zur Wirbelsäule ein.",
+    "Halte den Bauch eingezogen, ohne zu atmen, und löse dann."
+   ],
+   "range": "Der Bauch zieht sich so weit wie möglich unter die Rippen ein; der Oberkörper bleibt ruhig.",
+   "breathing": "Ganz ausatmen, 10 bis 20 Sekunden ohne Atmen halten, dann normal weiteratmen.",
+   "tips": [
+    "Beginne mit kurzen Haltezeiten und steigere sie langsam.",
+    "Übe nüchtern oder lange nach einer Mahlzeit."
+   ],
+   "mistakes": [
+    "Die Luft zu lange anhalten, bis dir schwindelig wird.",
+    "Schultern hochziehen oder nach vorn lehnen.",
+    "Direkt nach dem Essen üben."
+   ]
+  },
+  "it": {
+   "start": "In piedi, piedi alla larghezza delle spalle, mani sui fianchi, schiena dritta.",
+   "steps": [
+    "Inspira profondamente dal naso per riempire i polmoni.",
+    "Espira completamente dalla bocca portando l'ombelico verso la colonna.",
+    "Mantieni la pancia in dentro senza respirare, poi rilascia."
+   ],
+   "range": "La pancia si svuota al massimo sotto le costole; la parte alta del corpo resta ferma.",
+   "breathing": "Espira a fondo, mantieni 10-20 secondi senza respirare, poi respira normalmente.",
+   "tips": [
+    "Inizia con tenute brevi e allungale gradualmente.",
+    "Esegui a digiuno o molto tempo dopo i pasti."
+   ],
+   "mistakes": [
+    "Trattenere il fiato troppo a lungo fino a sentirsi storditi.",
+    "Alzare le spalle o inclinarsi in avanti.",
+    "Farlo subito dopo aver mangiato."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé, pés na largura dos ombros, mãos nos quadris, coluna reta.",
+   "steps": [
+    "Inspire fundo pelo nariz para encher os pulmões.",
+    "Expire totalmente pela boca puxando a barriga em direção à coluna.",
+    "Mantenha a barriga para dentro sem respirar e depois solte."
+   ],
+   "range": "A barriga se recolhe ao máximo sob as costelas; a parte de cima do corpo fica parada.",
+   "breathing": "Expire tudo, segure 10 a 20 segundos sem respirar e volte a respirar normalmente.",
+   "tips": [
+    "Comece com pausas curtas e aumente aos poucos.",
+    "Pratique em jejum ou bem depois de comer."
+   ],
+   "mistakes": [
+    "Prender a respiração demais e ficar tonto.",
+    "Levantar os ombros ou se inclinar para a frente.",
+    "Fazer logo depois de comer."
+   ]
+  },
+  "ja": {
+   "start": "背筋を伸ばして立ち、足を肩幅に開き、両手を腰に当てる。",
+   "steps": [
+    "鼻から深く息を吸って肺を満たす。",
+    "口から息を吐ききりながら、お腹を背骨に向けて引き込む。",
+    "息を止めたままお腹を引き込んで保ち、ゆっくり緩める。"
+   ],
+   "range": "お腹を肋骨の下まで最大限へこませる。上半身は動かさない。",
+   "breathing": "息を吐ききり、息を止めて10〜20秒保ち、その後は普通に呼吸する。",
+   "tips": [
+    "短い保持から始めて少しずつ延ばす。",
+    "空腹時、または食後しばらく経ってから行う。"
+   ],
+   "mistakes": [
+    "息を止めすぎてめまいがする。",
+    "肩が上がる、または前かがみになる。",
+    "食べた直後に行う。"
+   ]
+  }
+ },
+ "x-suspended-push-up": {
+  "fr": {
+   "start": "Mains dans les poignées des sangles, bras tendus, corps gainé en planche, pieds au sol.",
+   "steps": [
+    "Serre les abdos et les fessiers pour garder le corps droit.",
+    "Plie les coudes pour descendre la poitrine entre les poignées.",
+    "Pousse pour tendre les bras sans bloquer les coudes."
+   ],
+   "range": "Descends jusqu'à ce que la poitrine arrive à hauteur des mains, puis remonte bras tendus.",
+   "breathing": "Inspire en descendant, expire en poussant.",
+   "tips": [
+    "Les sangles bougent : garde-les tendues en poussant légèrement vers le bas.",
+    "Moins tu es incliné, plus c'est dur."
+   ],
+   "mistakes": [
+    "Laisser le bassin s'affaisser.",
+    "Écarter les coudes à angle droit.",
+    "Laisser les sangles s'écarter et les épaules partir en avant."
+   ]
+  },
+  "en": {
+   "start": "Hands in the strap handles, arms straight, body braced in a plank, feet on the floor.",
+   "steps": [
+    "Squeeze your abs and glutes to keep the body straight.",
+    "Bend your elbows to lower the chest between the handles.",
+    "Push back up until the arms are straight without locking the elbows."
+   ],
+   "range": "Lower until the chest reaches hand level, then press up to straight arms.",
+   "breathing": "Breathe in as you lower, breathe out as you push.",
+   "tips": [
+    "The straps move: keep them taut by pressing slightly downward.",
+    "The less incline, the harder it gets."
+   ],
+   "mistakes": [
+    "Letting the hips sag.",
+    "Flaring the elbows out to 90 degrees.",
+    "Letting the straps drift apart so the shoulders roll forward."
+   ]
+  },
+  "es": {
+   "start": "Manos en las asas de las correas, brazos extendidos, cuerpo firme en plancha, pies en el suelo.",
+   "steps": [
+    "Aprieta abdomen y glúteos para mantener el cuerpo recto.",
+    "Flexiona los codos para bajar el pecho entre las asas.",
+    "Empuja hasta extender los brazos sin bloquear los codos."
+   ],
+   "range": "Baja hasta que el pecho llegue a la altura de las manos y sube hasta extender los brazos.",
+   "breathing": "Inspira al bajar y espira al empujar.",
+   "tips": [
+    "Las correas se mueven: mantenlas tensas empujando ligeramente hacia abajo.",
+    "Cuanto menos inclinado, más difícil."
+   ],
+   "mistakes": [
+    "Dejar caer la cadera.",
+    "Abrir los codos a 90 grados.",
+    "Dejar que las correas se separen y los hombros se adelanten."
+   ]
+  },
+  "de": {
+   "start": "Hände in den Griffen der Schlingen, Arme gestreckt, Körper in der Planke gespannt, Füße am Boden.",
+   "steps": [
+    "Spanne Bauch und Gesäß an, damit der Körper gerade bleibt.",
+    "Beuge die Ellbogen und senke die Brust zwischen die Griffe.",
+    "Drücke dich hoch, bis die Arme gestreckt sind, ohne die Ellbogen zu sperren."
+   ],
+   "range": "Senke, bis die Brust auf Höhe der Hände ist, und drücke dann bis zu gestreckten Armen hoch.",
+   "breathing": "Beim Senken einatmen, beim Drücken ausatmen.",
+   "tips": [
+    "Die Schlingen bewegen sich: halte sie gespannt, indem du leicht nach unten drückst.",
+    "Je weniger Neigung, desto schwerer."
+   ],
+   "mistakes": [
+    "Die Hüfte durchhängen lassen.",
+    "Die Ellbogen auf 90 Grad abspreizen.",
+    "Die Schlingen auseinanderdriften lassen, sodass die Schultern nach vorn rollen."
+   ]
+  },
+  "it": {
+   "start": "Mani nelle maniglie delle cinghie, braccia tese, corpo teso in plank, piedi a terra.",
+   "steps": [
+    "Contrai addome e glutei per tenere il corpo dritto.",
+    "Fletti i gomiti per portare il petto tra le maniglie.",
+    "Spingi fino a stendere le braccia senza bloccare i gomiti."
+   ],
+   "range": "Scendi finché il petto arriva all'altezza delle mani, poi risali a braccia tese.",
+   "breathing": "Inspira scendendo, espira spingendo.",
+   "tips": [
+    "Le cinghie si muovono: tienile tese premendo leggermente verso il basso.",
+    "Meno sei inclinato, più è difficile."
+   ],
+   "mistakes": [
+    "Lasciar cadere il bacino.",
+    "Aprire i gomiti a 90 gradi.",
+    "Lasciare che le cinghie si allarghino e le spalle vadano avanti."
+   ]
+  },
+  "pt-BR": {
+   "start": "Mãos nas alças das fitas, braços estendidos, corpo firme em prancha, pés no chão.",
+   "steps": [
+    "Contraia abdômen e glúteos para manter o corpo reto.",
+    "Dobre os cotovelos para descer o peito entre as alças.",
+    "Empurre até estender os braços sem travar os cotovelos."
+   ],
+   "range": "Desça até o peito chegar à altura das mãos e suba até estender os braços.",
+   "breathing": "Inspire ao descer e expire ao empurrar.",
+   "tips": [
+    "As fitas se movem: mantenha-as firmes pressionando levemente para baixo.",
+    "Quanto menos inclinado, mais difícil."
+   ],
+   "mistakes": [
+    "Deixar o quadril cair.",
+    "Abrir os cotovelos a 90 graus.",
+    "Deixar as fitas se afastarem e os ombros irem para a frente."
+   ]
+  },
+  "ja": {
+   "start": "ストラップのハンドルを握り、腕を伸ばし、体をプランクで固め、足を床につける。",
+   "steps": [
+    "腹筋とお尻を締め、体をまっすぐに保つ。",
+    "肘を曲げて胸をハンドルの間に下ろす。",
+    "肘をロックせずに腕が伸びるまで押し上げる。"
+   ],
+   "range": "胸が手の高さに来るまで下ろし、腕が伸びるまで押し上げる。",
+   "breathing": "下ろすときに吸い、押すときに吐く。",
+   "tips": [
+    "ストラップは動くので、軽く下に押して張りを保つ。",
+    "体の傾きが小さいほど負荷が高い。"
+   ],
+   "mistakes": [
+    "お尻が落ちる。",
+    "肘を90度に開く。",
+    "ストラップが開いて肩が前に出る。"
+   ]
+  }
+ },
+ "x-plyo-push-up": {
+  "fr": {
+   "start": "Planche haute, mains à la largeur des épaules sous les épaules, corps gainé de la tête aux talons.",
+   "steps": [
+    "Descends en pompe de façon contrôlée.",
+    "Pousse très fort pour décoller les mains du sol.",
+    "Réceptionne bras légèrement fléchis et enchaîne la répétition suivante."
+   ],
+   "range": "Descends poitrine près du sol, puis pousse assez fort pour que les mains quittent le sol.",
+   "breathing": "Inspire en descendant, expire en explosant vers le haut.",
+   "tips": [
+    "Maîtrise d'abord les pompes classiques.",
+    "Fais peu de répétitions de qualité, avec du repos."
+   ],
+   "mistakes": [
+    "Réceptionner les bras bloqués.",
+    "Laisser le bassin s'affaisser à la réception.",
+    "Continuer quand la technique se dégrade."
+   ]
+  },
+  "en": {
+   "start": "High plank, hands shoulder-width under the shoulders, body braced from head to heels.",
+   "steps": [
+    "Lower into a push-up with control.",
+    "Push explosively so your hands leave the floor.",
+    "Land with slightly bent arms and flow into the next rep."
+   ],
+   "range": "Lower with the chest close to the floor, then push hard enough for the hands to leave the ground.",
+   "breathing": "Breathe in as you lower, breathe out as you explode up.",
+   "tips": [
+    "Master regular push-ups first.",
+    "Do a few quality reps with rest between sets."
+   ],
+   "mistakes": [
+    "Landing with locked arms.",
+    "Letting the hips sag on landing.",
+    "Carrying on when form breaks down."
+   ]
+  },
+  "es": {
+   "start": "Plancha alta, manos al ancho de los hombros bajo los hombros, cuerpo firme de la cabeza a los talones.",
+   "steps": [
+    "Baja en flexión de forma controlada.",
+    "Empuja con fuerza para despegar las manos del suelo.",
+    "Aterriza con los brazos algo flexionados y enlaza la siguiente repetición."
+   ],
+   "range": "Baja con el pecho cerca del suelo y empuja lo bastante fuerte para que las manos se despeguen.",
+   "breathing": "Inspira al bajar y espira al explotar hacia arriba.",
+   "tips": [
+    "Domina primero las flexiones normales.",
+    "Haz pocas repeticiones de calidad con descanso."
+   ],
+   "mistakes": [
+    "Aterrizar con los brazos bloqueados.",
+    "Dejar caer la cadera al aterrizar.",
+    "Seguir cuando la técnica empeora."
+   ]
+  },
+  "de": {
+   "start": "Hohe Planke, Hände schulterbreit unter den Schultern, Körper von Kopf bis Fersen gespannt.",
+   "steps": [
+    "Senke dich kontrolliert in den Liegestütz.",
+    "Drücke explosiv, sodass die Hände den Boden verlassen.",
+    "Lande mit leicht gebeugten Armen und gehe in die nächste Wiederholung."
+   ],
+   "range": "Senke die Brust nah zum Boden und drücke so kräftig, dass die Hände abheben.",
+   "breathing": "Beim Senken einatmen, beim explosiven Hochdrücken ausatmen.",
+   "tips": [
+    "Beherrsche zuerst normale Liegestütze.",
+    "Mache wenige saubere Wiederholungen mit Pausen."
+   ],
+   "mistakes": [
+    "Mit gesperrten Armen landen.",
+    "Beim Landen die Hüfte durchhängen lassen.",
+    "Weitermachen, wenn die Technik nachlässt."
+   ]
+  },
+  "it": {
+   "start": "Plank alto, mani alla larghezza delle spalle sotto le spalle, corpo teso dalla testa ai talloni.",
+   "steps": [
+    "Scendi in flessione in modo controllato.",
+    "Spingi con forza per staccare le mani dal pavimento.",
+    "Atterra con le braccia leggermente flesse e passa alla ripetizione successiva."
+   ],
+   "range": "Scendi con il petto vicino al pavimento, poi spingi abbastanza forte da staccare le mani.",
+   "breathing": "Inspira scendendo, espira esplodendo verso l'alto.",
+   "tips": [
+    "Padroneggia prima le flessioni normali.",
+    "Fai poche ripetizioni di qualità con recupero."
+   ],
+   "mistakes": [
+    "Atterrare con le braccia bloccate.",
+    "Lasciar cadere il bacino all'atterraggio.",
+    "Continuare quando la tecnica peggiora."
+   ]
+  },
+  "pt-BR": {
+   "start": "Prancha alta, mãos na largura dos ombros sob os ombros, corpo firme da cabeça aos calcanhares.",
+   "steps": [
+    "Desça na flexão de forma controlada.",
+    "Empurre com explosão para tirar as mãos do chão.",
+    "Aterrisse com os braços levemente dobrados e emende a próxima repetição."
+   ],
+   "range": "Desça com o peito perto do chão e empurre forte o bastante para as mãos saírem do chão.",
+   "breathing": "Inspire ao descer e expire ao explodir para cima.",
+   "tips": [
+    "Domine primeiro as flexões comuns.",
+    "Faça poucas repetições de qualidade, com descanso."
+   ],
+   "mistakes": [
+    "Aterrissar com os braços travados.",
+    "Deixar o quadril cair na aterrissagem.",
+    "Continuar quando a técnica piora."
+   ]
+  },
+  "ja": {
+   "start": "ハイプランクの姿勢で、手を肩幅にして肩の真下に置き、頭からかかとまで体を固める。",
+   "steps": [
+    "コントロールしながら腕立て伏せの姿勢まで下ろす。",
+    "爆発的に押して手を床から離す。",
+    "肘を軽く曲げて着地し、次の回へつなげる。"
+   ],
+   "range": "胸を床に近づけて下ろし、手が床から離れるほど強く押し上げる。",
+   "breathing": "下ろすときに吸い、押し上げるときに吐く。",
+   "tips": [
+    "まず通常の腕立て伏せをマスターする。",
+    "回数は少なく質を重視し、休憩を入れる。"
+   ],
+   "mistakes": [
+    "肘を伸ばしきって着地する。",
+    "着地でお尻が落ちる。",
+    "フォームが崩れても続ける。"
+   ]
+  }
+ },
+ "x-single-arm-push-up": {
+  "fr": {
+   "start": "Planche haute, jambes écartées pour l'équilibre, une main au sol sous l'épaule, l'autre dans le dos.",
+   "steps": [
+    "Serre les abdos et les fessiers, regarde le sol.",
+    "Plie le coude de la main d'appui pour descendre la poitrine.",
+    "Pousse pour remonter bras tendu, sans tourner les épaules."
+   ],
+   "range": "Descends poitrine près du sol, puis remonte jusqu'au bras tendu, bassin stable.",
+   "breathing": "Inspire en descendant, expire en poussant.",
+   "tips": [
+    "Écarte bien les pieds : plus ils sont larges, plus c'est facile.",
+    "Progresse d'abord avec des pompes sur une marche ou une main sur un banc."
+   ],
+   "mistakes": [
+    "Tourner le buste pour tricher.",
+    "Réaliser l'exercice trop tôt sans progression.",
+    "Laisser le coude partir loin sur le côté."
+   ]
+  },
+  "en": {
+   "start": "High plank, feet wide for balance, one hand on the floor under the shoulder, the other behind your back.",
+   "steps": [
+    "Brace your abs and glutes, look at the floor.",
+    "Bend the supporting elbow to lower the chest.",
+    "Push back up to a straight arm without twisting the shoulders."
+   ],
+   "range": "Lower with the chest near the floor, then press to a straight arm with a steady pelvis.",
+   "breathing": "Breathe in as you lower, breathe out as you push.",
+   "tips": [
+    "Keep your feet wide: the wider they are, the easier it gets.",
+    "Build up first with incline push-ups, one hand on a bench."
+   ],
+   "mistakes": [
+    "Twisting the torso to cheat.",
+    "Attempting it too early without progressions.",
+    "Letting the elbow flare far out to the side."
+   ]
+  },
+  "es": {
+   "start": "Plancha alta, piernas separadas para el equilibrio, una mano en el suelo bajo el hombro y la otra a la espalda.",
+   "steps": [
+    "Aprieta abdomen y glúteos y mira al suelo.",
+    "Flexiona el codo del brazo de apoyo para bajar el pecho.",
+    "Empuja hasta extender el brazo sin girar los hombros."
+   ],
+   "range": "Baja con el pecho cerca del suelo y sube hasta el brazo extendido con la pelvis estable.",
+   "breathing": "Inspira al bajar y espira al empujar.",
+   "tips": [
+    "Separa bien los pies: cuanto más abiertos, más fácil.",
+    "Progresa antes con flexiones inclinadas apoyando una mano en un banco."
+   ],
+   "mistakes": [
+    "Girar el torso para hacer trampa.",
+    "Intentarlo demasiado pronto sin progresiones.",
+    "Dejar que el codo se abra mucho hacia el lado."
+   ]
+  },
+  "de": {
+   "start": "Hohe Planke, Beine breit für das Gleichgewicht, eine Hand unter der Schulter am Boden, die andere auf dem Rücken.",
+   "steps": [
+    "Spanne Bauch und Gesäß an und schau zum Boden.",
+    "Beuge den Ellbogen des Stützarms und senke die Brust.",
+    "Drücke dich bis zum gestreckten Arm hoch, ohne die Schultern zu verdrehen."
+   ],
+   "range": "Senke die Brust nah zum Boden und drücke dich mit stabilem Becken bis zum gestreckten Arm hoch.",
+   "breathing": "Beim Senken einatmen, beim Drücken ausatmen.",
+   "tips": [
+    "Stelle die Füße weit auseinander: je weiter, desto leichter.",
+    "Steigere dich zuerst mit schrägen Liegestützen, eine Hand auf einer Bank."
+   ],
+   "mistakes": [
+    "Den Oberkörper verdrehen, um zu schummeln.",
+    "Zu früh ohne Vorstufen versuchen.",
+    "Den Ellbogen weit zur Seite ausbrechen lassen."
+   ]
+  },
+  "it": {
+   "start": "Plank alto, gambe larghe per l'equilibrio, una mano a terra sotto la spalla, l'altra dietro la schiena.",
+   "steps": [
+    "Contrai addome e glutei, guarda il pavimento.",
+    "Fletti il gomito del braccio d'appoggio per abbassare il petto.",
+    "Spingi fino al braccio teso senza ruotare le spalle."
+   ],
+   "range": "Scendi con il petto vicino al pavimento, poi risali fino al braccio teso con il bacino stabile.",
+   "breathing": "Inspira scendendo, espira spingendo.",
+   "tips": [
+    "Tieni i piedi larghi: più sono larghi, più è facile.",
+    "Progredisci prima con flessioni inclinate, una mano su una panca."
+   ],
+   "mistakes": [
+    "Ruotare il busto per barare.",
+    "Provarlo troppo presto senza progressioni.",
+    "Lasciare che il gomito si apra molto di lato."
+   ]
+  },
+  "pt-BR": {
+   "start": "Prancha alta, pernas afastadas para equilíbrio, uma mão no chão sob o ombro e a outra nas costas.",
+   "steps": [
+    "Contraia abdômen e glúteos e olhe para o chão.",
+    "Dobre o cotovelo do braço de apoio para descer o peito.",
+    "Empurre até o braço ficar estendido sem girar os ombros."
+   ],
+   "range": "Desça com o peito perto do chão e suba até o braço estendido com a pelve estável.",
+   "breathing": "Inspire ao descer e expire ao empurrar.",
+   "tips": [
+    "Afaste bem os pés: quanto mais afastados, mais fácil.",
+    "Progrida antes com flexões inclinadas, uma mão no banco."
+   ],
+   "mistakes": [
+    "Girar o tronco para facilitar.",
+    "Tentar cedo demais sem progressões.",
+    "Deixar o cotovelo abrir muito para o lado."
+   ]
+  },
+  "ja": {
+   "start": "ハイプランクで足を広げてバランスを取り、片手を肩の真下の床に置き、もう一方の手を背中に回す。",
+   "steps": [
+    "腹筋とお尻を締め、床を見る。",
+    "支えている腕の肘を曲げて胸を下ろす。",
+    "肩をひねらずに腕が伸びるまで押し上げる。"
+   ],
+   "range": "胸を床に近づけて下ろし、骨盤を安定させたまま腕が伸びるまで押し上げる。",
+   "breathing": "下ろすときに吸い、押すときに吐く。",
+   "tips": [
+    "足を広く開くほど楽になる。",
+    "まずはベンチに片手をついた傾斜腕立て伏せで段階を踏む。"
+   ],
+   "mistakes": [
+    "体をひねってごまかす。",
+    "段階を踏まずに早く挑戦する。",
+    "肘が大きく横に開く。"
+   ]
+  }
+ },
+ "x-dumbbell-side-bend": {
+  "fr": {
+   "start": "Debout, pieds à la largeur des épaules, un haltère dans une main le long de la cuisse, l'autre main sur la hanche.",
+   "steps": [
+    "Garde le dos droit et le regard devant.",
+    "Incline le buste sur le côté de l'haltère en faisant glisser l'haltère le long de la jambe.",
+    "Remonte en contractant les obliques du côté opposé."
+   ],
+   "range": "Incline-toi sur le côté sans basculer vers l'avant ni vers l'arrière, puis reviens droit.",
+   "breathing": "Inspire en descendant, expire en remontant.",
+   "tips": [
+    "Choisis un haltère modéré : les obliques s'épaississent vite avec trop de charge.",
+    "Fais toutes les répétitions d'un côté, puis change."
+   ],
+   "mistakes": [
+    "Pencher le buste vers l'avant.",
+    "Prendre trop lourd et utiliser l'élan.",
+    "Tenir un haltère dans chaque main : le mouvement s'annule."
+   ]
+  },
+  "en": {
+   "start": "Stand with feet shoulder-width apart, a dumbbell in one hand beside the thigh, the other hand on your hip.",
+   "steps": [
+    "Keep your back straight and look ahead.",
+    "Lean sideways toward the dumbbell, letting it slide down the leg.",
+    "Come back up by squeezing the obliques on the opposite side."
+   ],
+   "range": "Bend to the side without tipping forward or backward, then return upright.",
+   "breathing": "Breathe in as you lower, breathe out as you come up.",
+   "tips": [
+    "Use a moderate dumbbell: too much load simply bulks the waist.",
+    "Finish all reps on one side, then switch."
+   ],
+   "mistakes": [
+    "Leaning the torso forward.",
+    "Using too much weight and momentum.",
+    "Holding a dumbbell in each hand, which cancels the movement."
+   ]
+  },
+  "es": {
+   "start": "De pie, pies al ancho de los hombros, una mancuerna en una mano junto al muslo y la otra mano en la cadera.",
+   "steps": [
+    "Mantén la espalda recta y la mirada al frente.",
+    "Inclínate hacia el lado de la mancuerna dejándola bajar por la pierna.",
+    "Sube contrayendo los oblicuos del lado contrario."
+   ],
+   "range": "Inclínate hacia un lado sin ir hacia delante ni hacia atrás y vuelve erguido.",
+   "breathing": "Inspira al bajar y espira al subir.",
+   "tips": [
+    "Usa una mancuerna moderada: con demasiado peso solo engrosas la cintura.",
+    "Haz todas las repeticiones de un lado y cambia."
+   ],
+   "mistakes": [
+    "Inclinar el torso hacia delante.",
+    "Usar demasiado peso e impulso.",
+    "Llevar una mancuerna en cada mano, lo que anula el movimiento."
+   ]
+  },
+  "de": {
+   "start": "Aufrecht, Füße schulterbreit, eine Kurzhantel in einer Hand am Oberschenkel, die andere Hand an der Hüfte.",
+   "steps": [
+    "Halte den Rücken gerade und schau nach vorn.",
+    "Neige den Oberkörper zur Seite der Hantel und lass sie am Bein entlang gleiten.",
+    "Richte dich auf, indem du die schrägen Bauchmuskeln der Gegenseite anspannst."
+   ],
+   "range": "Neige dich seitlich, ohne nach vorn oder hinten zu kippen, und richte dich wieder auf.",
+   "breathing": "Beim Absenken einatmen, beim Aufrichten ausatmen.",
+   "tips": [
+    "Nimm eine mäßige Hantel: zu viel Gewicht macht nur die Taille breiter.",
+    "Mache alle Wiederholungen auf einer Seite, dann wechsle."
+   ],
+   "mistakes": [
+    "Den Oberkörper nach vorn neigen.",
+    "Zu schwer wählen und Schwung nutzen.",
+    "Je eine Hantel in beiden Händen halten, das hebt die Bewegung auf."
+   ]
+  },
+  "it": {
+   "start": "In piedi, piedi alla larghezza delle spalle, un manubrio in una mano lungo la coscia e l'altra mano sul fianco.",
+   "steps": [
+    "Tieni la schiena dritta e lo sguardo avanti.",
+    "Inclinati di lato verso il manubrio facendolo scivolare lungo la gamba.",
+    "Risali contraendo gli obliqui del lato opposto."
+   ],
+   "range": "Inclinati di lato senza piegarti avanti o indietro, poi torna in posizione eretta.",
+   "breathing": "Inspira scendendo, espira risalendo.",
+   "tips": [
+    "Usa un manubrio moderato: troppo carico ingrossa solo la vita.",
+    "Fai tutte le ripetizioni da un lato, poi cambia."
+   ],
+   "mistakes": [
+    "Inclinare il busto in avanti.",
+    "Usare troppo carico e slancio.",
+    "Tenere un manubrio per mano: il movimento si annulla."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé, pés na largura dos ombros, um halter em uma mão junto à coxa e a outra mão no quadril.",
+   "steps": [
+    "Mantenha a coluna reta e o olhar à frente.",
+    "Incline o tronco para o lado do halter, deixando-o deslizar pela perna.",
+    "Suba contraindo os oblíquos do lado oposto."
+   ],
+   "range": "Incline-se de lado sem ir para a frente nem para trás e volte ereto.",
+   "breathing": "Inspire ao descer e expire ao subir.",
+   "tips": [
+    "Use um halter moderado: carga demais só engrossa a cintura.",
+    "Faça todas as repetições de um lado e depois troque."
+   ],
+   "mistakes": [
+    "Inclinar o tronco para a frente.",
+    "Usar carga demais e impulso.",
+    "Segurar um halter em cada mão, o que anula o movimento."
+   ]
+  },
+  "ja": {
+   "start": "足を肩幅に開いて立ち、片手にダンベルを持って太ももの横に下げ、もう一方の手を腰に当てる。",
+   "steps": [
+    "背筋を伸ばし、視線は前に向ける。",
+    "ダンベルを脚に沿って滑らせながら、ダンベル側へ上体を横に倒す。",
+    "反対側の腹斜筋を締めて体を起こす。"
+   ],
+   "range": "前後に傾かないよう横に倒し、まっすぐに戻る。",
+   "breathing": "倒すときに吸い、起こすときに吐く。",
+   "tips": [
+    "軽めから中程度の重さを選ぶ。重すぎるとウエストが太くなるだけ。",
+    "片側の回数を終えてから反対側へ。"
+   ],
+   "mistakes": [
+    "上体が前に倒れる。",
+    "重すぎて反動を使う。",
+    "両手にダンベルを持つ（動きが相殺される）。"
+   ]
+  }
+ },
+ "x-landmine-180s": {
+  "fr": {
+   "start": "Debout, pieds largeur d'épaules, extrémité de la barre ancrée tenue à deux mains devant la poitrine, bras presque tendus.",
+   "steps": [
+    "Serre les abdos et garde les bras tendus.",
+    "Tourne le tronc et les hanches pour balayer la barre en arc d'un côté.",
+    "Inverse le mouvement en passant par le centre vers l'autre côté."
+   ],
+   "range": "Balaie la barre jusqu'à hauteur de hanche de chaque côté, en pivotant sur la pointe des pieds.",
+   "breathing": "Expire en balayant vers le côté, inspire en revenant au centre.",
+   "tips": [
+    "Fais pivoter les pieds pour épargner les genoux.",
+    "Commence avec une barre vide."
+   ],
+   "mistakes": [
+    "Tourner uniquement avec les bras.",
+    "Tourner le dos en gardant les pieds fixes.",
+    "Choisir trop lourd et perdre le contrôle."
+   ]
+  },
+  "en": {
+   "start": "Stand with feet shoulder-width apart, holding the anchored bar end with both hands in front of the chest, arms nearly straight.",
+   "steps": [
+    "Brace your abs and keep your arms straight.",
+    "Rotate the torso and hips to sweep the bar in an arc to one side.",
+    "Reverse through the center to the other side."
+   ],
+   "range": "Sweep the bar to about hip height on each side, pivoting on the balls of your feet.",
+   "breathing": "Breathe out as you sweep to the side, breathe in as you return to center.",
+   "tips": [
+    "Let the feet pivot to spare the knees.",
+    "Start with an empty bar."
+   ],
+   "mistakes": [
+    "Turning with the arms only.",
+    "Twisting the back while the feet stay planted.",
+    "Using too much weight and losing control."
+   ]
+  },
+  "es": {
+   "start": "De pie, pies al ancho de los hombros, extremo de la barra anclada sujeto con las dos manos frente al pecho, brazos casi extendidos.",
+   "steps": [
+    "Aprieta el abdomen y mantén los brazos extendidos.",
+    "Gira el tronco y las caderas para llevar la barra en arco hacia un lado.",
+    "Invierte el movimiento pasando por el centro hacia el otro lado."
+   ],
+   "range": "Lleva la barra hasta la altura de la cadera a cada lado, pivotando sobre la punta de los pies.",
+   "breathing": "Espira al barrer hacia el lado e inspira al volver al centro.",
+   "tips": [
+    "Deja que los pies pivoten para cuidar las rodillas.",
+    "Empieza con la barra vacía."
+   ],
+   "mistakes": [
+    "Girar solo con los brazos.",
+    "Torcer la espalda con los pies fijos.",
+    "Usar demasiado peso y perder el control."
+   ]
+  },
+  "de": {
+   "start": "Aufrecht, Füße schulterbreit, das verankerte Stangenende mit beiden Händen vor der Brust halten, Arme fast gestreckt.",
+   "steps": [
+    "Spanne den Bauch an und halte die Arme gestreckt.",
+    "Drehe Oberkörper und Hüfte und schwinge die Stange im Bogen zu einer Seite.",
+    "Kehre über die Mitte zur anderen Seite um."
+   ],
+   "range": "Schwinge die Stange auf jeder Seite bis etwa Hüfthöhe und drehe dabei auf den Fußballen mit.",
+   "breathing": "Beim Schwung zur Seite ausatmen, beim Zurück zur Mitte einatmen.",
+   "tips": [
+    "Lass die Füße mitdrehen, um die Knie zu schonen.",
+    "Beginne mit der leeren Stange."
+   ],
+   "mistakes": [
+    "Nur mit den Armen drehen.",
+    "Den Rücken verdrehen, während die Füße fest bleiben.",
+    "Zu schwer wählen und die Kontrolle verlieren."
+   ]
+  },
+  "it": {
+   "start": "In piedi, piedi alla larghezza delle spalle, estremità del bilanciere ancorato impugnata con due mani davanti al petto, braccia quasi tese.",
+   "steps": [
+    "Contrai l'addome e tieni le braccia tese.",
+    "Ruota busto e fianchi per far percorrere un arco al bilanciere da un lato.",
+    "Inverti il movimento passando dal centro verso l'altro lato."
+   ],
+   "range": "Porta il bilanciere fino all'altezza dei fianchi da ogni lato, ruotando sugli avampiedi.",
+   "breathing": "Espira mentre porti la barra di lato, inspira tornando al centro.",
+   "tips": [
+    "Lascia ruotare i piedi per proteggere le ginocchia.",
+    "Inizia con il bilanciere scarico."
+   ],
+   "mistakes": [
+    "Ruotare solo con le braccia.",
+    "Torcere la schiena con i piedi fermi.",
+    "Usare troppo carico e perdere il controllo."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé, pés na largura dos ombros, extremidade da barra ancorada segurada com as duas mãos à frente do peito, braços quase estendidos.",
+   "steps": [
+    "Contraia o abdômen e mantenha os braços estendidos.",
+    "Gire o tronco e o quadril para levar a barra em arco para um lado.",
+    "Inverta o movimento passando pelo centro para o outro lado."
+   ],
+   "range": "Leve a barra até a altura do quadril de cada lado, girando sobre a ponta dos pés.",
+   "breathing": "Expire ao varrer para o lado e inspire ao voltar ao centro.",
+   "tips": [
+    "Deixe os pés girarem para poupar os joelhos.",
+    "Comece com a barra vazia."
+   ],
+   "mistakes": [
+    "Girar só com os braços.",
+    "Torcer a coluna com os pés parados.",
+    "Usar carga demais e perder o controle."
+   ]
+  },
+  "ja": {
+   "start": "足を肩幅に開いて立ち、固定したバーの端を両手で胸の前に持ち、腕はほぼ伸ばす。",
+   "steps": [
+    "腹筋を締め、腕は伸ばしたままにする。",
+    "体幹と腰を回して、バーを弧を描いて片側へ振る。",
+    "中央を通って反対側へ動きを切り返す。"
+   ],
+   "range": "左右とも腰の高さまでバーを振り、つま先で足を回す。",
+   "breathing": "横へ振るときに吐き、中央へ戻るときに吸う。",
+   "tips": [
+    "膝を守るため足を一緒に回す。",
+    "最初は空のバーで行う。"
+   ],
+   "mistakes": [
+    "腕だけで振る。",
+    "足を固定したまま背中をひねる。",
+    "重すぎてコントロールを失う。"
+   ]
+  }
+ },
+ "x-external-rotation-with-band": {
+  "fr": {
+   "start": "Debout, coude plié à 90 degrés collé au flanc, élastique ancré à hauteur du coude, avant-bras devant le ventre.",
+   "steps": [
+    "Garde le coude collé au flanc, le poignet droit.",
+    "Tourne l'avant-bras vers l'extérieur contre la résistance de l'élastique.",
+    "Reviens lentement à la position de départ."
+   ],
+   "range": "Tourne jusqu'à ce que l'avant-bras pointe devant toi ou un peu à l'extérieur, sans décoller le coude.",
+   "breathing": "Expire en tournant vers l'extérieur, inspire en revenant.",
+   "tips": [
+    "Glisse une serviette roulée entre le coude et le flanc pour rester collé.",
+    "Utilise un élastique léger : l'épaule est une petite articulation."
+   ],
+   "mistakes": [
+    "Décoller le coude du corps.",
+    "Tourner le tronc pour aider.",
+    "Laisser l'élastique ramener le bras trop vite."
+   ]
+  },
+  "en": {
+   "start": "Stand with the elbow bent at 90 degrees against your side, band anchored at elbow height, forearm in front of the belly.",
+   "steps": [
+    "Keep the elbow pinned to your side and the wrist straight.",
+    "Rotate the forearm outward against the band's resistance.",
+    "Return slowly to the start."
+   ],
+   "range": "Rotate until the forearm points forward or slightly out, without the elbow leaving your side.",
+   "breathing": "Breathe out as you rotate out, breathe in as you return.",
+   "tips": [
+    "Tuck a rolled towel between elbow and side to stay connected.",
+    "Use a light band: the shoulder is a small joint."
+   ],
+   "mistakes": [
+    "Letting the elbow drift away from the body.",
+    "Twisting the torso to help.",
+    "Letting the band snap the arm back too fast."
+   ]
+  },
+  "es": {
+   "start": "De pie, codo flexionado a 90 grados pegado al costado, banda anclada a la altura del codo, antebrazo delante del abdomen.",
+   "steps": [
+    "Mantén el codo pegado al costado y la muñeca recta.",
+    "Gira el antebrazo hacia fuera contra la resistencia de la banda.",
+    "Vuelve despacio a la posición inicial."
+   ],
+   "range": "Gira hasta que el antebrazo apunte al frente o un poco hacia fuera, sin separar el codo.",
+   "breathing": "Espira al girar hacia fuera e inspira al volver.",
+   "tips": [
+    "Coloca una toalla enrollada entre codo y costado para mantenerlos unidos.",
+    "Usa una banda ligera: el hombro es una articulación pequeña."
+   ],
+   "mistakes": [
+    "Separar el codo del cuerpo.",
+    "Girar el tronco para ayudarte.",
+    "Dejar que la banda devuelva el brazo demasiado rápido."
+   ]
+  },
+  "de": {
+   "start": "Aufrecht, Ellbogen im 90-Grad-Winkel an der Seite, Band auf Ellbogenhöhe befestigt, Unterarm vor dem Bauch.",
+   "steps": [
+    "Halte den Ellbogen an der Seite und das Handgelenk gerade.",
+    "Drehe den Unterarm gegen den Widerstand des Bandes nach außen.",
+    "Kehre langsam in die Startposition zurück."
+   ],
+   "range": "Drehe, bis der Unterarm nach vorn oder leicht nach außen zeigt, ohne dass der Ellbogen sich löst.",
+   "breathing": "Beim Auswärtsdrehen ausatmen, beim Zurückkehren einatmen.",
+   "tips": [
+    "Klemme ein gerolltes Handtuch zwischen Ellbogen und Körper.",
+    "Nimm ein leichtes Band: Die Schulter ist ein kleines Gelenk."
+   ],
+   "mistakes": [
+    "Den Ellbogen vom Körper lösen.",
+    "Den Oberkörper mitdrehen.",
+    "Das Band den Arm zu schnell zurückziehen lassen."
+   ]
+  },
+  "it": {
+   "start": "In piedi, gomito flesso a 90 gradi contro il fianco, elastico ancorato all'altezza del gomito, avambraccio davanti all'addome.",
+   "steps": [
+    "Tieni il gomito attaccato al fianco e il polso dritto.",
+    "Ruota l'avambraccio verso l'esterno contro la resistenza dell'elastico.",
+    "Torna lentamente alla posizione di partenza."
+   ],
+   "range": "Ruota finché l'avambraccio punta in avanti o leggermente all'esterno, senza staccare il gomito.",
+   "breathing": "Espira ruotando verso l'esterno, inspira tornando.",
+   "tips": [
+    "Metti un asciugamano arrotolato tra gomito e fianco per restare attaccato.",
+    "Usa un elastico leggero: la spalla è un'articolazione piccola."
+   ],
+   "mistakes": [
+    "Staccare il gomito dal corpo.",
+    "Ruotare il busto per aiutarsi.",
+    "Lasciare che l'elastico riporti il braccio troppo in fretta."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé, cotovelo dobrado a 90 graus junto ao corpo, elástico ancorado na altura do cotovelo, antebraço à frente do abdômen.",
+   "steps": [
+    "Mantenha o cotovelo colado ao corpo e o punho reto.",
+    "Gire o antebraço para fora contra a resistência do elástico.",
+    "Volte devagar à posição inicial."
+   ],
+   "range": "Gire até o antebraço apontar para a frente ou um pouco para fora, sem soltar o cotovelo.",
+   "breathing": "Expire ao girar para fora e inspire ao voltar.",
+   "tips": [
+    "Coloque uma toalha enrolada entre o cotovelo e o corpo.",
+    "Use um elástico leve: o ombro é uma articulação pequena."
+   ],
+   "mistakes": [
+    "Afastar o cotovelo do corpo.",
+    "Girar o tronco para ajudar.",
+    "Deixar o elástico puxar o braço rápido demais."
+   ]
+  },
+  "ja": {
+   "start": "立った状態で肘を90度に曲げて脇につけ、肘の高さに固定したバンドを持ち、前腕をお腹の前に置く。",
+   "steps": [
+    "肘を脇につけ、手首はまっすぐに保つ。",
+    "バンドの抵抗に逆らって前腕を外側へ回す。",
+    "ゆっくり開始位置へ戻る。"
+   ],
+   "range": "前腕が前方か少し外側を向くまで回すが、肘は脇から離さない。",
+   "breathing": "外へ回すときに吐き、戻るときに吸う。",
+   "tips": [
+    "肘と脇の間に丸めたタオルを挟むと固定しやすい。",
+    "肩は小さな関節なので軽いバンドを使う。"
+   ],
+   "mistakes": [
+    "肘が体から離れる。",
+    "体幹をひねって補助する。",
+    "バンドに腕を急に引き戻される。"
+   ]
+  }
+ },
+ "x-sled-drag-harness": {
+  "fr": {
+   "start": "Debout dans le harnais, traîneau chargé derrière toi, sangle tendue, buste légèrement penché en avant.",
+   "steps": [
+    "Penche-toi légèrement en avant, abdos serrés.",
+    "Pousse le sol avec les jambes pour avancer à grands pas.",
+    "Marche en gardant la sangle tendue et le dos droit."
+   ],
+   "range": "Fais des pas amples et réguliers sur toute la distance, sans te redresser.",
+   "breathing": "Respire régulièrement en rythme avec tes pas.",
+   "tips": [
+    "Commence avec une charge qui te laisse avancer sans à-coups.",
+    "Garde la tête dans l'alignement du dos."
+   ],
+   "mistakes": [
+    "Arrondir le dos.",
+    "Faire de petits pas rapides en se redressant.",
+    "Laisser la sangle se détendre puis la reprendre d'un coup."
+   ]
+  },
+  "en": {
+   "start": "Stand in the harness with the loaded sled behind you, strap taut, torso leaning slightly forward.",
+   "steps": [
+    "Lean slightly forward with your abs braced.",
+    "Drive through the floor with your legs to take long strides.",
+    "Keep walking with the strap taut and the back straight."
+   ],
+   "range": "Take long, steady strides for the whole distance without standing up.",
+   "breathing": "Breathe steadily in rhythm with your steps.",
+   "tips": [
+    "Start with a load that lets you move smoothly.",
+    "Keep the head in line with the back."
+   ],
+   "mistakes": [
+    "Rounding the back.",
+    "Taking short fast steps while standing up.",
+    "Letting the strap slacken then jerking it taut."
+   ]
+  },
+  "es": {
+   "start": "De pie con el arnés, trineo cargado detrás de ti, correa tensa y torso ligeramente inclinado hacia delante.",
+   "steps": [
+    "Inclínate un poco hacia delante con el abdomen firme.",
+    "Empuja el suelo con las piernas para dar zancadas largas.",
+    "Camina manteniendo la correa tensa y la espalda recta."
+   ],
+   "range": "Da pasos largos y constantes durante toda la distancia sin erguirte.",
+   "breathing": "Respira de forma constante al ritmo de los pasos.",
+   "tips": [
+    "Empieza con una carga que te deje avanzar con fluidez.",
+    "Mantén la cabeza alineada con la espalda."
+   ],
+   "mistakes": [
+    "Redondear la espalda.",
+    "Dar pasos cortos y rápidos erguido.",
+    "Dejar que la correa se afloje y tirar de golpe."
+   ]
+  },
+  "de": {
+   "start": "Im Geschirr stehen, beladener Schlitten hinter dir, Gurt gespannt, Oberkörper leicht nach vorn geneigt.",
+   "steps": [
+    "Neige dich leicht nach vorn, Bauch angespannt.",
+    "Drücke dich mit den Beinen vom Boden ab und mache lange Schritte.",
+    "Gehe weiter mit gespanntem Gurt und geradem Rücken."
+   ],
+   "range": "Mache lange, gleichmäßige Schritte über die ganze Strecke, ohne dich aufzurichten.",
+   "breathing": "Atme gleichmäßig im Rhythmus deiner Schritte.",
+   "tips": [
+    "Beginne mit einer Last, bei der du flüssig vorankommst.",
+    "Halte den Kopf in Verlängerung des Rückens."
+   ],
+   "mistakes": [
+    "Den Rücken runden.",
+    "Kurze schnelle Schritte machen und sich aufrichten.",
+    "Den Gurt erschlaffen lassen und dann ruckartig spannen."
+   ]
+  },
+  "it": {
+   "start": "In piedi nell'imbracatura, slittino carico dietro di te, cinghia tesa, busto leggermente inclinato in avanti.",
+   "steps": [
+    "Inclinati leggermente in avanti con l'addome contratto.",
+    "Spingi il suolo con le gambe per fare passi lunghi.",
+    "Continua a camminare con la cinghia tesa e la schiena dritta."
+   ],
+   "range": "Fai passi lunghi e regolari per tutta la distanza senza raddrizzarti.",
+   "breathing": "Respira in modo regolare al ritmo dei passi.",
+   "tips": [
+    "Parti con un carico che ti permette di avanzare in modo fluido.",
+    "Tieni la testa in linea con la schiena."
+   ],
+   "mistakes": [
+    "Arrotondare la schiena.",
+    "Fare passi corti e veloci stando eretti.",
+    "Lasciare allentare la cinghia e poi strattonarla."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé no arnês, trenó carregado atrás de você, correia esticada e tronco levemente inclinado para a frente.",
+   "steps": [
+    "Incline-se um pouco para a frente com o abdômen firme.",
+    "Empurre o chão com as pernas para dar passadas longas.",
+    "Continue andando com a correia esticada e a coluna reta."
+   ],
+   "range": "Dê passadas longas e constantes durante todo o percurso sem se endireitar.",
+   "breathing": "Respire de forma regular no ritmo dos passos.",
+   "tips": [
+    "Comece com uma carga que permita avançar com fluidez.",
+    "Mantenha a cabeça alinhada com as costas."
+   ],
+   "mistakes": [
+    "Arredondar as costas.",
+    "Dar passos curtos e rápidos ficando ereto.",
+    "Deixar a correia afrouxar e depois puxar de uma vez."
+   ]
+  },
+  "ja": {
+   "start": "ハーネスを着けて立ち、荷重したソリを後ろに置き、ストラップを張って上体をやや前傾させる。",
+   "steps": [
+    "腹筋を締めて少し前傾する。",
+    "脚で床を押して大きな歩幅で進む。",
+    "ストラップを張ったまま背筋を伸ばして歩き続ける。"
+   ],
+   "range": "全距離を通して、体を起こさず大きく安定した歩幅で進む。",
+   "breathing": "歩調に合わせて一定のリズムで呼吸する。",
+   "tips": [
+    "スムーズに進める重さから始める。",
+    "頭を背中のラインに合わせる。"
+   ],
+   "mistakes": [
+    "背中が丸まる。",
+    "体を起こして小刻みに速く歩く。",
+    "ストラップが緩んでから急に引く。"
+   ]
+  }
+ },
+ "x-weighted-sissy-squat": {
+  "fr": {
+   "start": "Debout, pieds largeur d'épaules, talons relevés, un disque contre la poitrine et une main sur un support.",
+   "steps": [
+    "Reste sur la pointe des pieds et serre les abdos.",
+    "Pousse les genoux vers l'avant en inclinant tout le corps en arrière, en ligne droite.",
+    "Remonte en poussant les genoux en arrière et en tendant les jambes."
+   ],
+   "range": "Descends jusqu'à sentir les cuisses travailler fortement, en gardant genoux, hanches et épaules alignés.",
+   "breathing": "Inspire en descendant, expire en remontant.",
+   "tips": [
+    "Commence sans charge et avec un support solide.",
+    "Reste dans une amplitude que tes genoux supportent sans douleur."
+   ],
+   "mistakes": [
+    "Plier les hanches comme dans un squat classique.",
+    "Prendre trop lourd trop vite : les genoux sont très sollicités.",
+    "Laisser les talons retomber."
+   ]
+  },
+  "en": {
+   "start": "Stand with feet shoulder-width apart, heels raised, a plate against the chest and one hand on a support.",
+   "steps": [
+    "Stay on the balls of your feet and brace your abs.",
+    "Push the knees forward while leaning the whole body back in one straight line.",
+    "Return by pushing the knees back and straightening the legs."
+   ],
+   "range": "Go down until the thighs work hard, keeping knees, hips and shoulders in one line.",
+   "breathing": "Breathe in as you lower, breathe out as you rise.",
+   "tips": [
+    "Start with no load and a solid support.",
+    "Stay within a range your knees tolerate without pain."
+   ],
+   "mistakes": [
+    "Bending at the hips like a regular squat.",
+    "Adding weight too fast: the knees take a lot of stress.",
+    "Letting the heels drop."
+   ]
+  },
+  "es": {
+   "start": "De pie, pies al ancho de los hombros, talones elevados, un disco contra el pecho y una mano en un apoyo.",
+   "steps": [
+    "Mantente de puntillas y aprieta el abdomen.",
+    "Empuja las rodillas hacia delante inclinando todo el cuerpo hacia atrás en línea recta.",
+    "Sube empujando las rodillas hacia atrás y extendiendo las piernas."
+   ],
+   "range": "Baja hasta notar que los muslos trabajan con fuerza, manteniendo rodillas, caderas y hombros alineados.",
+   "breathing": "Inspira al bajar y espira al subir.",
+   "tips": [
+    "Empieza sin carga y con un apoyo firme.",
+    "Mantente en un rango que tus rodillas toleren sin dolor."
+   ],
+   "mistakes": [
+    "Flexionar las caderas como en una sentadilla normal.",
+    "Añadir peso demasiado rápido: las rodillas sufren mucho.",
+    "Dejar caer los talones."
+   ]
+  },
+  "de": {
+   "start": "Aufrecht, Füße schulterbreit, Fersen erhöht, eine Scheibe an der Brust und eine Hand an einer Stütze.",
+   "steps": [
+    "Bleibe auf den Fußballen und spanne den Bauch an.",
+    "Schiebe die Knie nach vorn und neige den ganzen Körper in einer Linie nach hinten.",
+    "Komme hoch, indem du die Knie zurückdrückst und die Beine streckst."
+   ],
+   "range": "Gehe so tief, bis die Oberschenkel stark arbeiten, und halte Knie, Hüfte und Schultern in einer Linie.",
+   "breathing": "Beim Absenken einatmen, beim Hochkommen ausatmen.",
+   "tips": [
+    "Beginne ohne Last und mit einer stabilen Stütze.",
+    "Bleibe in einem Bereich, den deine Knie schmerzfrei vertragen."
+   ],
+   "mistakes": [
+    "Die Hüfte wie bei einer normalen Kniebeuge beugen.",
+    "Zu schnell Gewicht steigern: die Knie werden stark belastet.",
+    "Die Fersen absinken lassen."
+   ]
+  },
+  "it": {
+   "start": "In piedi, piedi alla larghezza delle spalle, talloni sollevati, un disco contro il petto e una mano su un appoggio.",
+   "steps": [
+    "Resta sulle punte dei piedi e contrai l'addome.",
+    "Spingi le ginocchia in avanti inclinando tutto il corpo indietro in linea retta.",
+    "Risali spingendo le ginocchia indietro e stendendo le gambe."
+   ],
+   "range": "Scendi finché le cosce lavorano intensamente, mantenendo ginocchia, anche e spalle allineate.",
+   "breathing": "Inspira scendendo, espira risalendo.",
+   "tips": [
+    "Parti senza carico e con un appoggio solido.",
+    "Resta in un'ampiezza che le ginocchia tollerano senza dolore."
+   ],
+   "mistakes": [
+    "Piegare le anche come in uno squat normale.",
+    "Aumentare il carico troppo in fretta: le ginocchia sono molto sollecitate.",
+    "Lasciar cadere i talloni."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé, pés na largura dos ombros, calcanhares elevados, uma anilha junto ao peito e uma mão em um apoio.",
+   "steps": [
+    "Fique na ponta dos pés e contraia o abdômen.",
+    "Empurre os joelhos para a frente inclinando o corpo todo para trás em linha reta.",
+    "Suba empurrando os joelhos para trás e estendendo as pernas."
+   ],
+   "range": "Desça até as coxas trabalharem forte, mantendo joelhos, quadris e ombros alinhados.",
+   "breathing": "Inspire ao descer e expire ao subir.",
+   "tips": [
+    "Comece sem carga e com um apoio firme.",
+    "Fique numa amplitude que seus joelhos aguentem sem dor."
+   ],
+   "mistakes": [
+    "Dobrar o quadril como num agachamento comum.",
+    "Colocar carga rápido demais: os joelhos sofrem muito.",
+    "Deixar os calcanhares caírem."
+   ]
+  },
+  "ja": {
+   "start": "足を肩幅に開いてかかとを上げ、プレートを胸に当て、片手で支えをつかんで立つ。",
+   "steps": [
+    "つま先立ちのまま腹筋を締める。",
+    "膝を前に押し出しながら、体全体を一直線のまま後ろへ倒す。",
+    "膝を後ろへ戻しながら脚を伸ばして起き上がる。"
+   ],
+   "range": "太ももに強い負荷を感じるところまで下ろし、膝・股関節・肩を一直線に保つ。",
+   "breathing": "下ろすときに吸い、上がるときに吐く。",
+   "tips": [
+    "最初は荷重なしで、しっかりした支えを使う。",
+    "膝が痛まない範囲で行う。"
+   ],
+   "mistakes": [
+    "通常のスクワットのように股関節を曲げる。",
+    "重量を急に増やす（膝への負担が大きい）。",
+    "かかとが落ちる。"
+   ]
+  }
+ }
+}

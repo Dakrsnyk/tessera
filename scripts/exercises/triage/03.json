@@ -1,0 +1,401 @@
+{
+ "x-seated-palms-down-barbell-wrist-curl": {
+  "merge": "reverse-curl",
+  "why": "Extension des poignets, avant-bras, même mouvement"
+ },
+ "x-reverse-hyperextension": {
+  "keep": true,
+  "demo": "new",
+  "why": "Extension de hanches inversée, vraiment distincte",
+  "move": "Allongé ventre sur un banc de reverse hyper, torse appuyé, jambes pendantes; les jambes tendues se lèvent en arrière jusqu'à l'horizontale en contractant les fessiers, puis redescendent; seules les hanches bougent"
+ },
+ "x-weighted-ball-hyperextension": {
+  "merge": "back-extension",
+  "why": "Extension lombaire, simple variante de support"
+ },
+ "x-lying-triceps-press": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-lying-close-grip-barbell-triceps-press-to-chin": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-lying-close-grip-barbell-triceps-extension-behind-the-head": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-lying-dumbbell-tricep-extension": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-cable-lying-triceps-extension": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-low-cable-triceps-extension": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-seated-triceps-press": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-body-tricep-press": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-chain-handle-extension": {
+  "merge": "pushdown",
+  "why": "Extension triceps à la poulie, variante de prise"
+ },
+ "x-incline-barbell-triceps-extension": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-standing-bent-over-two-arm-dumbbell-triceps-extension": {
+  "merge": "kickback",
+  "why": "Extension triceps buste penché, variante du kickback"
+ },
+ "x-standing-bent-over-one-arm-dumbbell-triceps-extension": {
+  "merge": "kickback",
+  "why": "Extension triceps buste penché, variante du kickback"
+ },
+ "x-triceps-overhead-extension-with-rope": {
+  "merge": "x-cable-rope-overhead-triceps-extension",
+  "why": "Extension triceps poulie au-dessus de la tête, même mouvement"
+ },
+ "x-decline-dumbbell-triceps-extension": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-standing-one-arm-dumbbell-triceps-extension": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-standing-dumbbell-triceps-extension": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-dumbbell-one-arm-triceps-extension": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-one-arm-pronated-dumbbell-triceps-extension": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-one-arm-supinated-dumbbell-triceps-extension": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-dumbbell-tricep-extension-pronated-grip": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-cable-incline-triceps-extension": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-kettlebell-overhead-triceps-extension": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-standing-overhead-barbell-triceps-extension": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-sled-overhead-triceps-extension": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-speed-band-overhead-triceps": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-seated-bent-over-one-arm-dumbbell-triceps-extension": {
+  "merge": "kickback",
+  "why": "Extension triceps buste penché, variante du kickback"
+ },
+ "x-seated-bent-over-two-arm-dumbbell-triceps-extension": {
+  "merge": "kickback",
+  "why": "Extension triceps buste penché, variante du kickback"
+ },
+ "x-standing-low-pulley-one-arm-triceps-extension": {
+  "merge": "x-cable-rope-overhead-triceps-extension",
+  "why": "Extension triceps poulie au-dessus de la tête, même mouvement"
+ },
+ "x-cable-rope-overhead-triceps-extension": {
+  "keep": true,
+  "demo": "ok",
+  "why": "Extension triceps à la poulie, représentant du groupe"
+ },
+ "x-machine-triceps-extension": {
+  "merge": "pushdown",
+  "why": "Extension triceps à la poulie, variante de prise"
+ },
+ "x-triceps-pushdown-v-bar-attachment": {
+  "merge": "pushdown",
+  "why": "Extension triceps à la poulie, variante de prise"
+ },
+ "x-cable-one-arm-tricep-extension": {
+  "merge": "pushdown",
+  "why": "Extension triceps à la poulie, variante de prise"
+ },
+ "x-reverse-grip-triceps-pushdown": {
+  "merge": "pushdown",
+  "why": "Extension triceps à la poulie, variante de prise"
+ },
+ "x-kneeling-cable-triceps-extension": {
+  "merge": "x-cable-rope-overhead-triceps-extension",
+  "why": "Extension triceps poulie au-dessus de la tête, même mouvement"
+ },
+ "x-standing-towel-triceps-extension": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-hyperextensions-with-no-hyperextension-bench": {
+  "merge": "back-extension",
+  "why": "Extension lombaire, simple variante de support"
+ },
+ "x-body-up": {
+  "merge": "skull-crusher",
+  "why": "Extension triceps allongé, variante de matériel ou prise"
+ },
+ "x-suspended-fallout": {
+  "keep": true,
+  "demo": "new",
+  "why": "Fallout TRX, gainage dynamique distinct",
+  "move": "Face au sol, avant-bras ou mains dans des sangles TRX, corps gainé en planche incliné; les bras avancent loin devant, le corps s'allonge puis revient; épaules et abdominaux travaillent"
+ },
+ "x-crossover-reverse-lunge": {
+  "merge": "reverse-lunge",
+  "why": "Fente arrière, petite variante"
+ },
+ "x-lunge-pass-through": {
+  "merge": "lunge",
+  "why": "Fente avant, variante de matériel"
+ },
+ "x-elevated-back-lunge": {
+  "merge": "reverse-lunge",
+  "why": "Fente arrière, petite variante"
+ },
+ "x-dumbbell-rear-lunge": {
+  "merge": "reverse-lunge",
+  "why": "Fente arrière avec haltères"
+ },
+ "x-dumbbell-lunges": {
+  "merge": "lunge",
+  "why": "Fente avant, variante de matériel"
+ },
+ "x-barbell-walking-lunge": {
+  "merge": "walking-lunge",
+  "why": "Fente marchée, avec barre"
+ },
+ "x-split-jump": {
+  "merge": "jump-squat",
+  "why": "Fente sautée, mouvement pliométrique proche"
+ },
+ "x-lunge-sprint": {
+  "merge": "lunge",
+  "why": "Fente avant, variante de matériel"
+ },
+ "x-barbell-lunge": {
+  "keep": true,
+  "demo": "new",
+  "why": "Fente avec barre sur le dos, distincte des haltères",
+  "move": "Barre sur les trapèzes, debout; un grand pas en avant, le genou arrière descend près du sol, puis poussée sur la jambe avant pour revenir; hanches et genoux fléchissent"
+ },
+ "x-hip-flexion-with-band": {
+  "merge": "leg-raise",
+  "why": "Flexion de hanche, proche du relevé de jambes"
+ },
+ "x-jerk-dip-squat": {
+  "merge": "back-squat",
+  "why": "Flexion de jambes à la barre, variante du squat"
+ },
+ "x-seated-one-arm-dumbbell-palms-up-wrist-curl": {
+  "merge": "wrist-curl",
+  "why": "Flexion des poignets, variante de matériel"
+ },
+ "x-seated-dumbbell-palms-up-wrist-curl": {
+  "merge": "wrist-curl",
+  "why": "Flexion des poignets, variante de matériel"
+ },
+ "x-palms-up-barbell-wrist-curl-over-a-bench": {
+  "merge": "wrist-curl",
+  "why": "Flexion des poignets, variante de matériel"
+ },
+ "x-standing-palms-up-barbell-behind-the-back-wrist-curl": {
+  "merge": "wrist-curl",
+  "why": "Flexion des poignets, variante de matériel"
+ },
+ "x-palms-up-dumbbell-wrist-curl-over-a-bench": {
+  "merge": "wrist-curl",
+  "why": "Flexion des poignets, variante de matériel"
+ },
+ "x-seated-palm-up-barbell-wrist-curl": {
+  "merge": "wrist-curl",
+  "why": "Flexion des poignets, variante de matériel"
+ },
+ "x-cable-wrist-curl": {
+  "merge": "wrist-curl",
+  "why": "Flexion des poignets, variante de matériel"
+ },
+ "x-seated-two-arm-palms-up-low-pulley-wrist-curl": {
+  "merge": "wrist-curl",
+  "why": "Flexion des poignets, variante de matériel"
+ },
+ "x-weighted-ball-side-bend": {
+  "merge": "x-dumbbell-side-bend",
+  "why": "Flexion latérale, variante de matériel"
+ },
+ "x-barbell-side-bend": {
+  "merge": "x-dumbbell-side-bend",
+  "why": "Flexion latérale, variante de matériel"
+ },
+ "x-one-arm-high-pulley-cable-side-bends": {
+  "merge": "x-dumbbell-side-bend",
+  "why": "Flexion latérale, variante de matériel"
+ },
+ "x-dumbbell-side-bend": {
+  "keep": true,
+  "demo": "new",
+  "why": "Flexion latérale du tronc, mouvement distinct",
+  "move": "Debout, un haltère dans une main le long de la cuisse; le tronc s'incline latéralement vers le côté chargé puis revient; hanches fixes, mouvement dans le plan frontal"
+ },
+ "x-sledgehammer-swings": {
+  "merge": "woodchop",
+  "why": "Rotation de tronc avec charge, proche"
+ },
+ "x-knee-across-the-body": {
+  "merge": "pigeon",
+  "why": "Étirement des fessiers, même zone et geste"
+ },
+ "x-one-knee-to-chest": {
+  "merge": "pigeon",
+  "why": "Étirement des fessiers, même zone et geste"
+ },
+ "x-hug-knees-to-chest": {
+  "merge": "childs-pose",
+  "why": "Étirement lombaire au sol, proche"
+ },
+ "x-platform-hamstring-slides": {
+  "keep": true,
+  "demo": "new",
+  "why": "Glissé d'ischios au sol, distinct et accessible",
+  "move": "Allongé sur le dos, pont fessier, talons sur des disques glissants; les jambes s'étendent en glissant puis les talons reviennent vers les fesses par flexion des genoux"
+ },
+ "x-glute-ham-raise": {
+  "keep": true,
+  "demo": "new",
+  "why": "Exercice de banc GHD, distinct et courant",
+  "move": "Sur banc GHD, pieds calés, cuisses sur le coussin; le corps descend à l'horizontale puis se relève par flexion des genoux (ischios) et extension des hanches jusqu'à la verticale"
+ },
+ "x-floor-glute-ham-raise": {
+  "merge": "nordic-curl",
+  "why": "Relevé glutes-ischios au sol, proche du nordic"
+ },
+ "x-seated-good-mornings": {
+  "merge": "good-morning",
+  "why": "Good morning, variante de position ou de charge"
+ },
+ "x-hanging-bar-good-morning": {
+  "merge": "good-morning",
+  "why": "Good morning, variante de position ou de charge"
+ },
+ "x-good-morning-off-pins": {
+  "merge": "good-morning",
+  "why": "Good morning, variante de position ou de charge"
+ },
+ "x-stiff-leg-barbell-good-morning": {
+  "merge": "good-morning",
+  "why": "Good morning, variante de position ou de charge"
+ },
+ "x-band-good-morning": {
+  "merge": "good-morning",
+  "why": "Good morning, variante de position ou de charge"
+ },
+ "x-band-good-morning-pull-through": {
+  "merge": "good-morning",
+  "why": "Good morning, variante de position ou de charge"
+ },
+ "x-gorilla-chin-crunch": {
+  "merge": "pull-up",
+  "why": "Traction avec genoux, variante de traction"
+ },
+ "x-rope-climb": {
+  "keep": true,
+  "demo": "new",
+  "why": "Grimpe à la corde, mouvement distinct",
+  "move": "Suspendu à une corde verticale, mains alternées vers le haut, genoux remontés et pieds serrant la corde pour pousser; le corps monte en tractant puis redescend"
+ },
+ "x-groiners": {
+  "keep": true,
+  "demo": "new",
+  "why": "Drill d'échauffement dynamique, mouvement distinct",
+  "move": "Position de pompe; un pied avance près de la main, puis revient en arrière en alternance rapide, hanches basses, mains au sol"
+ },
+ "x-narrow-stance-hack-squats": {
+  "merge": "hack-squat",
+  "why": "Hack squat, stance plus serrée"
+ },
+ "x-barbell-hack-squat": {
+  "merge": "back-squat",
+  "why": "Flexion de jambes à la barre, variante du squat"
+ },
+ "x-kettlebell-halo": {
+  "keep": true,
+  "demo": "new",
+  "why": "Halo kettlebell, mobilité et épaules, courant",
+  "move": "Debout, kettlebell tenue à deux mains par les cornes devant la poitrine; elle tourne autour de la tête, épaules mobilisées, coudes proches, tronc gainé"
+ },
+ "x-kettlebell-halo-with-overhead-extension": {
+  "merge": "overhead-extension",
+  "why": "Extension triceps au-dessus de la tête, variante"
+ },
+ "x-clean-shrug": {
+  "merge": "bb-shrug",
+  "why": "Haussement d'épaules, variante de matériel"
+ },
+ "x-shoulder-raise": {
+  "merge": "bb-shrug",
+  "why": "Haussement d'épaules, variante de matériel"
+ },
+ "x-barbell-shrug-behind-the-back": {
+  "merge": "bb-shrug",
+  "why": "Haussement d'épaules, variante de matériel"
+ },
+ "x-snatch-shrug": {
+  "merge": "bb-shrug",
+  "why": "Haussement d'épaules, variante de matériel"
+ },
+ "x-smith-machine-behind-the-back-shrug": {
+  "merge": "bb-shrug",
+  "why": "Haussement d'épaules, variante de matériel"
+ },
+ "x-middle-back-shrug": {
+  "merge": "db-shrug",
+  "why": "Haussement d'épaules avec haltères"
+ },
+ "x-leverage-shrug": {
+  "merge": "bb-shrug",
+  "why": "Haussement d'épaules, variante de matériel"
+ },
+ "x-calf-machine-shoulder-shrug": {
+  "merge": "bb-shrug",
+  "why": "Haussement d'épaules, variante de matériel"
+ },
+ "x-cable-shrugs": {
+  "merge": "bb-shrug",
+  "why": "Haussement d'épaules, variante de matériel"
+ },
+ "x-kettlebell-figure-8": {
+  "merge": "woodchop",
+  "why": "Rotation de tronc avec charge, proche"
+ },
+ "x-single-arm-linear-jammer": {
+  "merge": "ohp",
+  "why": "Poussée en ligne, proche du développé militaire"
+ }
+}

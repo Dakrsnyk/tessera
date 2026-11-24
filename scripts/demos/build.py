@@ -5,6 +5,11 @@ from pathlib import Path
 
 import demos
 import ex_chest, ex_legs, ex_back, ex_shoulders, ex_arms, ex_core, ex_full, ex_cardio, ex_mobility  # noqa: F401  (registration)
+import glob as _glob
+import importlib as _importlib
+# The movements kept by the triage of the imported catalogue (2026-11-23): one file per lot, ex_catalog_NN.py.
+for _path in sorted(_glob.glob(str(Path(__file__).parent / "ex_catalog_*.py"))):
+    _importlib.import_module(Path(_path).stem)
 
 OUT = Path(__file__).parent / "out"
 OUT.mkdir(exist_ok=True)

@@ -20,12 +20,26 @@ enum ExerciseCatalog {
         let d: String
         let m: String
         let demo: String?
+        /// Its own technique, by language (fr, en, es, de, it, pt-BR, ja), for a movement the family's doesn't describe.
+        let tq: [String: Technique]?
+    }
+
+    struct Technique: Decodable {
+        let start: String
+        let steps: [String]
+        let range: String
+        let breathing: String
+        let tips: [String]
+        let mistakes: [String]
     }
 
     struct File: Decodable {
         let exercises: [Entry]
         /// Dataset names of exercises the app already had: more ways to recognise a built-in exercise.
         let extraAliases: [String: [String]]
+        /// Exercises merged into another one by the triage (2026-11-23): their id → the exercise kept. A set saved with
+        /// a merged id keeps counting for the exercise kept.
+        var redirects: [String: String]? = nil
     }
 
     static let file: File? = {
@@ -37,6 +51,22 @@ enum ExerciseCatalog {
     static let exercises: [ExerciseInfo] = (file?.exercises ?? []).compactMap { exercise($0, language: Localization.language) }
 
     static var extraAliases: [String: [String]] { file?.extraAliases ?? [:] }
+
+    static var redirects: [String: String] { file?.redirects ?? [:] }
+
+    /// The techniques written for kept imported exercises, in the interface's language (then English).
+    static let techniques: [String: ExerciseTechnique] = {
+        var out: [String: ExerciseTechnique] = [:]
+        let language = Localization.language
+        for entry in file?.exercises ?? [] {
+            guard let table = entry.tq,
+                  let t = table[language] ?? table[String(language.prefix(2))] ?? table["en"] ?? table["fr"],
+                  !t.start.isEmpty, t.steps.count >= 2, !t.mistakes.isEmpty else { continue }
+            out[entry.id] = ExerciseTechnique(start: t.start, steps: t.steps, range: t.range, breathing: t.breathing,
+                                              tips: t.tips, mistakes: t.mistakes)
+        }
+        return out
+    }()
 
     /// The name in the interface's language (« pt-BR », then « pt »), else English.
     static func name(_ names: [String: String], language: String) -> String? {

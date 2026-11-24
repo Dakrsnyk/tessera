@@ -658,7 +658,7 @@ enum FitnessMath {
     static func oneRepMax(_ set: SetLog) -> Double { set.weight * (1 + Double(set.reps) / 30) }
 
     static func matches(_ set: SetLog, _ exercise: ExerciseInfo) -> Bool {
-        if let id = set.exerciseID { return id == exercise.id }
+        if let id = set.exerciseID { return ExerciseLibrary.canonical(id) == exercise.id }
         return ExerciseLibrary.match(name: set.exercise)?.id == exercise.id
     }
 
@@ -696,7 +696,7 @@ enum FitnessMath {
     static func frequentExercises(_ state: FitnessState, limit: Int = 6) -> [String] {
         var counts: [String: Int] = [:]
         for session in sessions(state) {
-            let ids = Set(session.sets.compactMap { $0.exerciseID ?? ExerciseLibrary.match(name: $0.exercise)?.id })
+            let ids = Set(session.sets.compactMap { $0.exerciseID.map(ExerciseLibrary.canonical) ?? ExerciseLibrary.match(name: $0.exercise)?.id })
             for id in ids { counts[id, default: 0] += 1 }
         }
         return counts.sorted { $0.value != $1.value ? $0.value > $1.value : $0.key < $1.key }.prefix(limit).map(\.key)

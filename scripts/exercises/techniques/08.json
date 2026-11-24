@@ -1,0 +1,570 @@
+{
+ "x-push-press": {
+  "fr": {
+   "start": "Debout, pieds largeur de hanches, barre sur l'avant des épaules, coudes légèrement devant la barre.",
+   "steps": [
+    "Fléchis les genoux de quelques centimètres, buste droit.",
+    "Pousse fort dans les talons pour étendre les jambes.",
+    "Profite de l'élan pour pousser la barre au-dessus de la tête, bras verrouillés.",
+    "Redescends la barre sur les épaules en fléchissant les genoux pour amortir."
+   ],
+   "range": "Barre de l'avant des épaules jusqu'au-dessus de la tête, bras tendus, sans cambrer.",
+   "breathing": "Inspire en haut du dip, bloque ton souffle pendant la poussée, expire une fois la barre verrouillée.",
+   "tips": [
+    "Garde les abdos serrés pour protéger le bas du dos.",
+    "Passe la tête en arrière puis en avant sous la barre."
+   ],
+   "mistakes": [
+    "Pencher le buste en arrière au lieu de pousser droit.",
+    "Plier les genoux trop bas : ce n'est pas un squat.",
+    "Pousser avec les bras avant que les jambes aient fini."
+   ]
+  },
+  "en": {
+   "start": "Stand with feet hip-width apart, bar resting on the front of your shoulders, elbows slightly in front of the bar.",
+   "steps": [
+    "Bend your knees a few centimeters, keeping your torso upright.",
+    "Drive hard through your heels to extend your legs.",
+    "Use that momentum to press the bar overhead until your arms lock out.",
+    "Lower the bar back to your shoulders, bending your knees to absorb the weight."
+   ],
+   "range": "From the front of the shoulders to overhead with straight arms, without arching your back.",
+   "breathing": "Breathe in at the top of the dip, hold during the drive, breathe out once the bar is locked out.",
+   "tips": [
+    "Keep your abs tight to protect your lower back.",
+    "Move your head back, then forward under the bar."
+   ],
+   "mistakes": [
+    "Leaning back instead of pushing straight up.",
+    "Dipping too deep: it is not a squat.",
+    "Pressing with the arms before the legs have finished."
+   ]
+  },
+  "es": {
+   "start": "De pie, pies al ancho de las caderas, barra sobre la parte delantera de los hombros, codos un poco por delante de la barra.",
+   "steps": [
+    "Flexiona las rodillas unos centímetros, con el torso recto.",
+    "Empuja con fuerza con los talones para extender las piernas.",
+    "Aprovecha el impulso para empujar la barra sobre la cabeza hasta bloquear los brazos.",
+    "Baja la barra a los hombros flexionando las rodillas para amortiguar."
+   ],
+   "range": "De la parte delantera de los hombros hasta encima de la cabeza con los brazos estirados, sin arquear la espalda.",
+   "breathing": "Inspira antes de flexionar, aguanta durante el empuje y espira cuando la barra esté bloqueada.",
+   "tips": [
+    "Mantén el abdomen apretado para proteger la zona lumbar.",
+    "Echa la cabeza atrás y luego adelante bajo la barra."
+   ],
+   "mistakes": [
+    "Inclinarte hacia atrás en lugar de empujar recto.",
+    "Bajar demasiado las rodillas: no es una sentadilla.",
+    "Empujar con los brazos antes de que terminen las piernas."
+   ]
+  },
+  "de": {
+   "start": "Stell dich hüftbreit hin, die Stange liegt vorn auf den Schultern, die Ellbogen etwas vor der Stange.",
+   "steps": [
+    "Beuge die Knie ein paar Zentimeter, der Oberkörper bleibt aufrecht.",
+    "Drücke kraftvoll über die Fersen und strecke die Beine.",
+    "Nutze den Schwung, um die Stange über den Kopf zu drücken, bis die Arme gestreckt sind.",
+    "Senke die Stange zurück auf die Schultern und federe mit den Knien ab."
+   ],
+   "range": "Von der Schulterfront bis über den Kopf mit gestreckten Armen, ohne Hohlkreuz.",
+   "breathing": "Atme oben vor dem Eintauchen ein, halte die Luft beim Stoß und atme aus, wenn die Stange oben fixiert ist.",
+   "tips": [
+    "Halte die Bauchmuskeln angespannt, um den unteren Rücken zu schützen.",
+    "Bewege den Kopf zurück und dann unter der Stange nach vorn."
+   ],
+   "mistakes": [
+    "Sich nach hinten lehnen, statt gerade zu drücken.",
+    "Zu tief in die Knie gehen: es ist keine Kniebeuge.",
+    "Mit den Armen drücken, bevor die Beine fertig gestreckt sind."
+   ]
+  },
+  "it": {
+   "start": "In piedi, piedi alla larghezza delle anche, bilanciere appoggiato sulla parte anteriore delle spalle, gomiti un po' davanti al bilanciere.",
+   "steps": [
+    "Fletti le ginocchia di pochi centimetri, con il busto dritto.",
+    "Spingi forte sui talloni per estendere le gambe.",
+    "Sfrutta lo slancio per spingere il bilanciere sopra la testa fino a bloccare le braccia.",
+    "Riporta il bilanciere sulle spalle, flettendo le ginocchia per ammortizzare."
+   ],
+   "range": "Dalla parte anteriore delle spalle fino sopra la testa a braccia tese, senza inarcare la schiena.",
+   "breathing": "Inspira prima della flessione, trattieni durante la spinta ed espira quando il bilanciere è bloccato.",
+   "tips": [
+    "Tieni gli addominali contratti per proteggere la zona lombare.",
+    "Porta la testa indietro e poi in avanti sotto il bilanciere."
+   ],
+   "mistakes": [
+    "Inclinarsi indietro invece di spingere in verticale.",
+    "Scendere troppo con le ginocchia: non è uno squat.",
+    "Spingere con le braccia prima che le gambe abbiano finito."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé, pés na largura do quadril, barra apoiada na frente dos ombros, cotovelos um pouco à frente da barra.",
+   "steps": [
+    "Flexione os joelhos alguns centímetros, com o tronco ereto.",
+    "Empurre forte pelos calcanhares para estender as pernas.",
+    "Aproveite o impulso para empurrar a barra acima da cabeça até travar os braços.",
+    "Desça a barra de volta aos ombros, flexionando os joelhos para amortecer."
+   ],
+   "range": "Da frente dos ombros até acima da cabeça com os braços esticados, sem arquear as costas.",
+   "breathing": "Inspire antes de flexionar, segure durante o impulso e expire quando a barra estiver travada.",
+   "tips": [
+    "Mantenha o abdômen contraído para proteger a lombar.",
+    "Leve a cabeça para trás e depois para a frente sob a barra."
+   ],
+   "mistakes": [
+    "Inclinar o tronco para trás em vez de empurrar reto.",
+    "Flexionar demais os joelhos: não é um agachamento.",
+    "Empurrar com os braços antes de as pernas terminarem."
+   ]
+  },
+  "ja": {
+   "start": "足を腰幅に開いて立ち、バーを肩の前側に乗せます。ひじはバーより少し前に出します。",
+   "steps": [
+    "上体をまっすぐに保ち、ひざを数センチだけ曲げます。",
+    "かかとで床を強く押して、脚を一気に伸ばします。",
+    "その勢いでバーを頭上へ押し上げ、腕をロックします。",
+    "ひざを曲げて衝撃を吸収しながら、バーを肩まで戻します。"
+   ],
+   "range": "肩の前から頭上まで、腕をまっすぐ伸ばします。腰は反らさないでください。",
+   "breathing": "ひざを曲げる前に息を吸い、押し上げる間は止め、バーが固定されたら吐きます。",
+   "tips": [
+    "腹筋に力を入れて、腰を守りましょう。",
+    "頭を一度後ろへ引き、バーの下で前に戻します。"
+   ],
+   "mistakes": [
+    "まっすぐ押さずに上体を後ろへ反らす。",
+    "ひざを深く曲げすぎる（スクワットではありません）。",
+    "脚が伸び切る前に腕で押し始める。"
+   ]
+  }
+ },
+ "x-power-jerk": {
+  "fr": {
+   "start": "Debout, pieds largeur de hanches, barre sur l'avant des épaules, coudes légèrement relevés, regard droit devant.",
+   "steps": [
+    "Fléchis les genoux de quelques centimètres sans reculer les hanches (le dip).",
+    "Inverse le mouvement très vite : pousse dans les talons et étends complètement les jambes.",
+    "Pousse la barre au-dessus de la tête et glisse-toi dessous en fléchissant un peu les genoux, bras verrouillés.",
+    "Redresse-toi, puis redescends la barre aux épaules en amortissant."
+   ],
+   "range": "Barre de l'avant des épaules jusqu'au-dessus de la tête, bras verrouillés, réception en quart de squat.",
+   "breathing": "Inspire et bloque ton souffle pendant le dip et l'explosion, expire quand la barre est stable en haut.",
+   "tips": [
+    "Garde le buste vertical pendant le dip.",
+    "Verrouille les bras avant de te redresser."
+   ],
+   "mistakes": [
+    "Reculer les hanches pendant le dip.",
+    "Plier les genoux trop profondément à la réception.",
+    "Rater le verrouillage : coudes pliés ou barre devant la tête."
+   ]
+  },
+  "en": {
+   "start": "Stand with feet hip-width apart, bar on the front of your shoulders, elbows slightly raised, eyes looking straight ahead.",
+   "steps": [
+    "Bend your knees a few centimeters without moving your hips backward (the dip).",
+    "Reverse as fast as you can: drive through your heels and fully extend your legs.",
+    "Punch the bar overhead and drop under it with a slight knee bend, arms locked.",
+    "Stand tall, then lower the bar back to your shoulders under control."
+   ],
+   "range": "From the front of the shoulders to overhead with locked arms, caught in a quarter squat.",
+   "breathing": "Breathe in and hold during the dip and the drive, breathe out once the bar is steady overhead.",
+   "tips": [
+    "Keep your torso vertical during the dip.",
+    "Lock your arms before you stand up."
+   ],
+   "mistakes": [
+    "Moving the hips backward during the dip.",
+    "Bending the knees too deeply on the catch.",
+    "Missing the lockout: bent elbows or bar in front of the head."
+   ]
+  },
+  "es": {
+   "start": "De pie, pies al ancho de las caderas, barra sobre la parte delantera de los hombros, codos un poco elevados, mirada al frente.",
+   "steps": [
+    "Flexiona las rodillas unos centímetros sin llevar las caderas atrás (el dip).",
+    "Invierte el movimiento lo más rápido posible: empuja con los talones y extiende del todo las piernas.",
+    "Lanza la barra sobre la cabeza y mételte debajo flexionando un poco las rodillas, con los brazos bloqueados.",
+    "Ponte de pie y baja la barra a los hombros con control."
+   ],
+   "range": "De la parte delantera de los hombros a encima de la cabeza con los brazos bloqueados, recibiendo en un cuarto de sentadilla.",
+   "breathing": "Inspira y aguanta durante el dip y la explosión, espira cuando la barra esté estable arriba.",
+   "tips": [
+    "Mantén el torso vertical durante el dip.",
+    "Bloquea los brazos antes de ponerte de pie."
+   ],
+   "mistakes": [
+    "Llevar las caderas atrás durante el dip.",
+    "Flexionar demasiado las rodillas al recibir.",
+    "Fallar el bloqueo: codos doblados o barra delante de la cabeza."
+   ]
+  },
+  "de": {
+   "start": "Stell dich hüftbreit hin, die Stange liegt vorn auf den Schultern, die Ellbogen leicht angehoben, der Blick geht geradeaus.",
+   "steps": [
+    "Beuge die Knie ein paar Zentimeter, ohne die Hüfte nach hinten zu schieben (das Dip).",
+    "Kehre die Bewegung so schnell wie möglich um: über die Fersen drücken und die Beine ganz strecken.",
+    "Stoße die Stange über den Kopf und gehe mit leicht gebeugten Knien darunter, die Arme gestreckt.",
+    "Richte dich auf und senke die Stange kontrolliert auf die Schultern."
+   ],
+   "range": "Von der Schulterfront bis über den Kopf mit gestreckten Armen, aufgefangen in einer Viertel-Kniebeuge.",
+   "breathing": "Atme ein und halte die Luft beim Dip und Antritt, atme aus, wenn die Stange oben ruhig steht.",
+   "tips": [
+    "Halte den Oberkörper beim Dip senkrecht.",
+    "Strecke die Arme ganz, bevor du dich aufrichtest."
+   ],
+   "mistakes": [
+    "Die Hüfte beim Dip nach hinten schieben.",
+    "Beim Auffangen zu tief in die Knie gehen.",
+    "Den Lockout verpassen: gebeugte Ellbogen oder Stange vor dem Kopf."
+   ]
+  },
+  "it": {
+   "start": "In piedi, piedi alla larghezza delle anche, bilanciere sulla parte anteriore delle spalle, gomiti leggermente alti, sguardo avanti.",
+   "steps": [
+    "Fletti le ginocchia di pochi centimetri senza portare indietro le anche (il dip).",
+    "Inverti il movimento il più veloce possibile: spingi sui talloni ed estendi completamente le gambe.",
+    "Lancia il bilanciere sopra la testa e inserisciti sotto flettendo un po' le ginocchia, braccia bloccate.",
+    "Raddrizzati e riporta il bilanciere sulle spalle in modo controllato."
+   ],
+   "range": "Dalla parte anteriore delle spalle fino sopra la testa a braccia bloccate, ricevendo in un quarto di squat.",
+   "breathing": "Inspira e trattieni durante il dip e l'esplosione, espira quando il bilanciere è stabile in alto.",
+   "tips": [
+    "Tieni il busto verticale durante il dip.",
+    "Blocca le braccia prima di rialzarti."
+   ],
+   "mistakes": [
+    "Portare indietro le anche durante il dip.",
+    "Flettere troppo le ginocchia in ricezione.",
+    "Sbagliare il blocco: gomiti piegati o bilanciere davanti alla testa."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé, pés na largura do quadril, barra na frente dos ombros, cotovelos um pouco elevados, olhar para a frente.",
+   "steps": [
+    "Flexione os joelhos alguns centímetros sem levar o quadril para trás (o dip).",
+    "Inverta o movimento o mais rápido possível: empurre pelos calcanhares e estenda totalmente as pernas.",
+    "Lance a barra acima da cabeça e entre embaixo dela flexionando um pouco os joelhos, braços travados.",
+    "Fique em pé e desça a barra aos ombros com controle."
+   ],
+   "range": "Da frente dos ombros até acima da cabeça com os braços travados, recebendo em um quarto de agachamento.",
+   "breathing": "Inspire e segure durante o dip e a explosão, expire quando a barra estiver estável no alto.",
+   "tips": [
+    "Mantenha o tronco vertical durante o dip.",
+    "Trave os braços antes de se levantar."
+   ],
+   "mistakes": [
+    "Levar o quadril para trás durante o dip.",
+    "Flexionar demais os joelhos na recepção.",
+    "Errar o travamento: cotovelos dobrados ou barra à frente da cabeça."
+   ]
+  },
+  "ja": {
+   "start": "足を腰幅に開いて立ち、バーを肩の前側に乗せます。ひじは少し上げ、視線はまっすぐ前に向けます。",
+   "steps": [
+    "お尻を後ろに引かずに、ひざを数センチ曲げます（ディップ）。",
+    "できるだけ素早く切り返し、かかとで押して脚を完全に伸ばします。",
+    "バーを頭上へ突き上げ、ひざを少し曲げて下に入り、腕をロックします。",
+    "立ち上がり、バーをコントロールしながら肩に戻します。"
+   ],
+   "range": "肩の前から頭上まで、腕をロックして、浅いスクワットの姿勢で受けます。",
+   "breathing": "ディップと爆発の間は息を吸って止め、バーが頭上で安定したら吐きます。",
+   "tips": [
+    "ディップの間、上体は垂直に保ちます。",
+    "立ち上がる前に腕をしっかりロックします。"
+   ],
+   "mistakes": [
+    "ディップでお尻を後ろに引く。",
+    "受けるときにひざを曲げすぎる。",
+    "ロックが不十分（ひじが曲がる、バーが頭の前に出る）。"
+   ]
+  }
+ },
+ "x-one-arm-medicine-ball-slam": {
+  "fr": {
+   "start": "Debout, pieds largeur d'épaules, un pied légèrement décalé, medicine ball dans une main au-dessus de la tête, bras tendu.",
+   "steps": [
+    "Monte sur la pointe des pieds en étirant tout le corps, ballon bien haut.",
+    "Claque le ballon vers le sol, devant tes pieds, en fléchissant hanches et genoux.",
+    "Ramasse le ballon avec contrôle et reviens debout.",
+    "Recommence, puis change de bras."
+   ],
+   "range": "Du ballon tendu au-dessus de la tête jusqu'au sol devant toi, hanches et genoux fléchis.",
+   "breathing": "Inspire en montant, expire fort au moment du claquement.",
+   "tips": [
+    "Utilise tout le corps, pas seulement le bras.",
+    "Prends un ballon qui rebondit peu pour garder le contrôle."
+   ],
+   "mistakes": [
+    "Arrondir le dos en ramassant le ballon.",
+    "Lancer avec le bras seul sans engager les hanches.",
+    "Se tenir trop près du ballon et le recevoir dans le visage."
+   ]
+  },
+  "en": {
+   "start": "Stand with feet shoulder-width apart, one foot slightly staggered, holding a medicine ball in one hand overhead with your arm straight.",
+   "steps": [
+    "Rise onto your toes, stretching your whole body with the ball high.",
+    "Slam the ball down in front of your feet, bending at the hips and knees.",
+    "Pick the ball up under control and stand back up.",
+    "Repeat, then switch arms."
+   ],
+   "range": "From the ball held overhead with a straight arm to the floor in front of you, hips and knees bent.",
+   "breathing": "Breathe in as you rise, breathe out sharply on the slam.",
+   "tips": [
+    "Use your whole body, not just your arm.",
+    "Choose a ball with little bounce to stay in control."
+   ],
+   "mistakes": [
+    "Rounding your back when picking up the ball.",
+    "Throwing with the arm only, without using the hips.",
+    "Standing too close and taking the ball in the face."
+   ]
+  },
+  "es": {
+   "start": "De pie, pies al ancho de los hombros, un pie algo adelantado, con un balón medicinal en una mano sobre la cabeza y el brazo estirado.",
+   "steps": [
+    "Sube a la punta de los pies estirando todo el cuerpo, con el balón arriba.",
+    "Lanza el balón al suelo delante de tus pies, flexionando caderas y rodillas.",
+    "Recoge el balón con control y vuelve a ponerte de pie.",
+    "Repite y cambia de brazo."
+   ],
+   "range": "Del balón estirado sobre la cabeza hasta el suelo delante de ti, con caderas y rodillas flexionadas.",
+   "breathing": "Inspira al subir y espira con fuerza en el golpe.",
+   "tips": [
+    "Usa todo el cuerpo, no solo el brazo.",
+    "Elige un balón que rebote poco para mantener el control."
+   ],
+   "mistakes": [
+    "Redondear la espalda al recoger el balón.",
+    "Lanzar solo con el brazo sin usar las caderas.",
+    "Ponerte demasiado cerca y recibir el balón en la cara."
+   ]
+  },
+  "de": {
+   "start": "Stell dich schulterbreit hin, ein Fuß leicht versetzt, einen Medizinball in einer Hand über dem Kopf, der Arm ist gestreckt.",
+   "steps": [
+    "Gehe auf die Zehenspitzen und strecke den ganzen Körper, den Ball hoch.",
+    "Schmettere den Ball vor deinen Füßen auf den Boden und beuge dabei Hüfte und Knie.",
+    "Nimm den Ball kontrolliert auf und richte dich wieder auf.",
+    "Wiederhole und wechsle dann den Arm."
+   ],
+   "range": "Vom gestreckten Arm über dem Kopf bis zum Boden vor dir, mit gebeugten Hüften und Knien.",
+   "breathing": "Atme beim Aufrichten ein und beim Aufschlag kräftig aus.",
+   "tips": [
+    "Setze den ganzen Körper ein, nicht nur den Arm.",
+    "Wähle einen Ball, der wenig springt, damit du die Kontrolle behältst."
+   ],
+   "mistakes": [
+    "Den Rücken beim Aufnehmen des Balls runden.",
+    "Nur mit dem Arm werfen, ohne die Hüfte einzusetzen.",
+    "Zu nah stehen und den Ball ins Gesicht bekommen."
+   ]
+  },
+  "it": {
+   "start": "In piedi, piedi alla larghezza delle spalle, un piede leggermente sfalsato, con una palla medica in una mano sopra la testa e il braccio teso.",
+   "steps": [
+    "Sali sulle punte dei piedi allungando tutto il corpo, con la palla in alto.",
+    "Scaglia la palla a terra davanti ai piedi, flettendo anche e ginocchia.",
+    "Raccogli la palla in modo controllato e torna in piedi.",
+    "Ripeti, poi cambia braccio."
+   ],
+   "range": "Dalla palla tenuta sopra la testa a braccio teso fino al suolo davanti a te, con anche e ginocchia flesse.",
+   "breathing": "Inspira mentre sali, espira con forza all'impatto.",
+   "tips": [
+    "Usa tutto il corpo, non solo il braccio.",
+    "Scegli una palla che rimbalza poco per mantenere il controllo."
+   ],
+   "mistakes": [
+    "Arrotondare la schiena nel raccogliere la palla.",
+    "Lanciare solo con il braccio senza usare le anche.",
+    "Stare troppo vicino e prendere la palla in faccia."
+   ]
+  },
+  "pt-BR": {
+   "start": "Em pé, pés na largura dos ombros, um pé um pouco à frente, com uma bola medicinal em uma das mãos acima da cabeça e o braço esticado.",
+   "steps": [
+    "Suba na ponta dos pés esticando o corpo todo, com a bola no alto.",
+    "Arremesse a bola no chão à frente dos pés, flexionando quadril e joelhos.",
+    "Pegue a bola com controle e volte a ficar em pé.",
+    "Repita e troque de braço."
+   ],
+   "range": "Da bola acima da cabeça com o braço esticado até o chão à sua frente, com quadril e joelhos flexionados.",
+   "breathing": "Inspire ao subir e expire com força no arremesso.",
+   "tips": [
+    "Use o corpo todo, não só o braço.",
+    "Escolha uma bola que quique pouco para manter o controle."
+   ],
+   "mistakes": [
+    "Arredondar as costas ao pegar a bola.",
+    "Arremessar só com o braço, sem usar o quadril.",
+    "Ficar perto demais e levar a bola no rosto."
+   ]
+  },
+  "ja": {
+   "start": "足を肩幅に開き、片足を少し前後にずらして立ち、メディシンボールを片手で頭上に持ち、腕を伸ばします。",
+   "steps": [
+    "つま先立ちになり、全身を伸ばしてボールを高く上げます。",
+    "股関節とひざを曲げながら、足の前の床にボールを叩きつけます。",
+    "ボールをコントロールして拾い、立ち上がります。",
+    "繰り返し、反対の腕でも行います。"
+   ],
+   "range": "腕を伸ばして頭上に持ったボールから、前方の床まで。股関節とひざを曲げます。",
+   "breathing": "上がるときに息を吸い、叩きつける瞬間に強く吐きます。",
+   "tips": [
+    "腕だけでなく全身を使いましょう。",
+    "弾みの少ないボールを選ぶとコントロールしやすくなります。"
+   ],
+   "mistakes": [
+    "ボールを拾うときに背中を丸める。",
+    "股関節を使わず腕だけで投げる。",
+    "近くに立ちすぎて、ボールが顔に当たる。"
+   ]
+  }
+ },
+ "x-clean-and-jerk": {
+  "fr": {
+   "start": "Barre au sol contre les tibias, prise un peu plus large que les jambes, dos plat, poitrine haute, épaules au-dessus de la barre.",
+   "steps": [
+    "Soulève la barre du sol en poussant les jambes, dos plat, jusqu'aux genoux.",
+    "Étends hanches et jambes explosivement, hausse les épaules, puis tire les coudes haut et glisse-toi sous la barre pour la recevoir sur l'avant des épaules.",
+    "Redresse-toi, fléchis légèrement les genoux (dip), puis étends-les d'un coup et pousse la barre au-dessus de la tête.",
+    "Reçois la barre bras verrouillés en fente (un pied devant, un derrière), puis ramène les pieds."
+   ],
+   "range": "Du sol aux épaules, puis des épaules jusqu'au-dessus de la tête, bras verrouillés.",
+   "breathing": "Inspire et bloque avant chaque tirage, expire quand tu es stable en haut.",
+   "tips": [
+    "Garde la barre près du corps pendant tout le tirage.",
+    "Apprends chaque phase avec une barre légère avant d'ajouter de la charge."
+   ],
+   "mistakes": [
+    "Tirer avec les bras trop tôt au lieu d'étendre les jambes.",
+    "Arrondir le dos au départ ou laisser la barre s'éloigner du corps.",
+    "Recevoir la barre avec les coudes pliés au-dessus de la tête."
+   ]
+  },
+  "en": {
+   "start": "Bar on the floor against your shins, grip just outside your legs, back flat, chest up, shoulders over the bar.",
+   "steps": [
+    "Lift the bar from the floor by pushing with your legs, back flat, up to your knees.",
+    "Extend your hips and legs explosively, shrug, then pull your elbows high and drop under the bar to catch it on the front of your shoulders.",
+    "Stand up, bend your knees slightly (dip), then drive up and press the bar overhead.",
+    "Catch the bar with locked arms in a split stance (one foot forward, one back), then bring your feet together."
+   ],
+   "range": "From the floor to the shoulders, then from the shoulders to overhead with locked arms.",
+   "breathing": "Breathe in and hold before each pull, breathe out once you are steady overhead.",
+   "tips": [
+    "Keep the bar close to your body throughout the pull.",
+    "Learn each phase with a light bar before adding weight."
+   ],
+   "mistakes": [
+    "Pulling with the arms too early instead of extending the legs.",
+    "Rounding the back at the start or letting the bar drift away from the body.",
+    "Catching the bar overhead with bent elbows."
+   ]
+  },
+  "es": {
+   "start": "Barra en el suelo contra las espinillas, agarre un poco más ancho que las piernas, espalda recta, pecho alto, hombros sobre la barra.",
+   "steps": [
+    "Levanta la barra del suelo empujando con las piernas, con la espalda recta, hasta las rodillas.",
+    "Extiende caderas y piernas con explosividad, encoge los hombros, sube los codos y métete bajo la barra para recibirla sobre la parte delantera de los hombros.",
+    "Ponte de pie, flexiona un poco las rodillas (dip), extiéndelas de golpe y empuja la barra sobre la cabeza.",
+    "Recibe la barra con los brazos bloqueados en zancada (un pie delante y otro detrás) y junta los pies."
+   ],
+   "range": "Del suelo a los hombros y de los hombros a encima de la cabeza con los brazos bloqueados.",
+   "breathing": "Inspira y aguanta antes de cada tirón, espira cuando estés estable arriba.",
+   "tips": [
+    "Mantén la barra pegada al cuerpo durante todo el tirón.",
+    "Aprende cada fase con una barra ligera antes de añadir peso."
+   ],
+   "mistakes": [
+    "Tirar con los brazos demasiado pronto en vez de extender las piernas.",
+    "Redondear la espalda al empezar o dejar que la barra se aleje del cuerpo.",
+    "Recibir la barra sobre la cabeza con los codos doblados."
+   ]
+  },
+  "de": {
+   "start": "Die Stange liegt am Boden an den Schienbeinen, der Griff etwas weiter als die Beine, Rücken gerade, Brust offen, Schultern über der Stange.",
+   "steps": [
+    "Hebe die Stange mit den Beinen vom Boden, den Rücken gerade, bis zu den Knien.",
+    "Strecke Hüfte und Beine explosiv, ziehe die Schultern hoch, dann die Ellbogen hoch und gehe unter die Stange, um sie auf der Schulterfront aufzufangen.",
+    "Richte dich auf, beuge die Knie leicht (Dip), strecke sie schlagartig und stoße die Stange über den Kopf.",
+    "Fange die Stange mit gestreckten Armen im Ausfallschritt auf (ein Fuß vor, einer zurück), dann führe die Füße zusammen."
+   ],
+   "range": "Vom Boden zu den Schultern und von den Schultern über den Kopf mit gestreckten Armen.",
+   "breathing": "Atme vor jedem Zug ein und halte die Luft, atme aus, wenn du oben stabil stehst.",
+   "tips": [
+    "Halte die Stange den ganzen Zug über nah am Körper.",
+    "Lerne jede Phase mit einer leichten Stange, bevor du Gewicht auflegst."
+   ],
+   "mistakes": [
+    "Zu früh mit den Armen ziehen, statt die Beine zu strecken.",
+    "Den Rücken am Start runden oder die Stange vom Körper wegdriften lassen.",
+    "Die Stange mit gebeugten Ellbogen über dem Kopf auffangen."
+   ]
+  },
+  "it": {
+   "start": "Bilanciere a terra contro gli stinchi, presa poco più larga delle gambe, schiena piatta, petto alto, spalle sopra il bilanciere.",
+   "steps": [
+    "Solleva il bilanciere da terra spingendo con le gambe, schiena piatta, fino alle ginocchia.",
+    "Estendi anche e gambe in modo esplosivo, alza le spalle, poi porta i gomiti in alto e inserisciti sotto il bilanciere per riceverlo sulla parte anteriore delle spalle.",
+    "Raddrizzati, fletti leggermente le ginocchia (dip), estendile di colpo e spingi il bilanciere sopra la testa.",
+    "Ricevi il bilanciere a braccia bloccate in affondo (un piede avanti, uno dietro), poi riunisci i piedi."
+   ],
+   "range": "Da terra alle spalle, poi dalle spalle a sopra la testa con le braccia bloccate.",
+   "breathing": "Inspira e trattieni prima di ogni tirata, espira quando sei stabile in alto.",
+   "tips": [
+    "Tieni il bilanciere vicino al corpo per tutta la tirata.",
+    "Impara ogni fase con un bilanciere leggero prima di aggiungere peso."
+   ],
+   "mistakes": [
+    "Tirare troppo presto con le braccia invece di estendere le gambe.",
+    "Arrotondare la schiena alla partenza o lasciare il bilanciere allontanarsi dal corpo.",
+    "Ricevere il bilanciere sopra la testa con i gomiti piegati."
+   ]
+  },
+  "pt-BR": {
+   "start": "Barra no chão junto às canelas, pegada um pouco mais larga que as pernas, costas retas, peito alto, ombros sobre a barra.",
+   "steps": [
+    "Levante a barra do chão empurrando com as pernas, costas retas, até os joelhos.",
+    "Estenda quadril e pernas com explosão, encolha os ombros, suba os cotovelos e entre embaixo da barra para recebê-la na frente dos ombros.",
+    "Fique em pé, flexione levemente os joelhos (dip), estenda-os de uma vez e empurre a barra acima da cabeça.",
+    "Receba a barra com os braços travados em afundo (um pé à frente, outro atrás) e una os pés."
+   ],
+   "range": "Do chão aos ombros e dos ombros até acima da cabeça com os braços travados.",
+   "breathing": "Inspire e segure antes de cada puxada, expire quando estiver estável no alto.",
+   "tips": [
+    "Mantenha a barra junto ao corpo durante toda a puxada.",
+    "Aprenda cada fase com uma barra leve antes de aumentar a carga."
+   ],
+   "mistakes": [
+    "Puxar com os braços cedo demais em vez de estender as pernas.",
+    "Arredondar as costas na saída ou deixar a barra se afastar do corpo.",
+    "Receber a barra acima da cabeça com os cotovelos dobrados."
+   ]
+  },
+  "ja": {
+   "start": "バーを床のすねの前に置き、脚の外側を少し広めに握ります。背中は平らに、胸を張り、肩はバーの真上に置きます。",
+   "steps": [
+    "背中を平らに保ち、脚で押してバーを床からひざまで引き上げます。",
+    "股関節と脚を爆発的に伸ばして肩をすくめ、ひじを高く引いてバーの下に入り、肩の前で受けます。",
+    "立ち上がり、ひざを軽く曲げ（ディップ）、一気に伸ばしてバーを頭上へ押し上げます。",
+    "前後に脚を開いたランジの姿勢で腕をロックして受け、足を揃えて立ちます。"
+   ],
+   "range": "床から肩まで、さらに肩から頭上まで。腕はロックします。",
+   "breathing": "各プルの前に息を吸って止め、頭上で安定したら吐きます。",
+   "tips": [
+    "プルの間、バーを体の近くに保ちます。",
+    "重さを足す前に、軽いバーで各段階を練習します。"
+   ],
+   "mistakes": [
+    "脚を伸ばさず、早すぎるタイミングで腕で引く。",
+    "スタートで背中を丸める、またはバーが体から離れる。",
+    "ひじが曲がったまま頭上で受ける。"
+   ]
+  }
+ }
+}

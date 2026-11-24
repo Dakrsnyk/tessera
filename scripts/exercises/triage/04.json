@@ -1,0 +1,408 @@
+{
+ "x-two-arm-kettlebell-jerk": {
+  "merge": "kb-press",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-power-jerk": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, barre sur l'avant des épaules. Flexion rapide des genoux (dip), extension explosive des jambes, poussée de la barre au-dessus de la tête, bras verrouillés, réception genoux légèrement fléchis puis redressement.",
+  "why": "Jeté olympique distinct, courant en haltérophilie"
+ },
+ "x-split-jerk": {
+  "merge": "x-power-jerk",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-squat-jerk": {
+  "merge": "x-power-jerk",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-one-arm-kettlebell-split-jerk": {
+  "merge": "kb-press",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-one-arm-kettlebell-jerk": {
+  "merge": "kb-press",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-double-kettlebell-jerk": {
+  "merge": "kb-press",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-jm-press": {
+  "merge": "skull-crusher",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-cable-judo-flip": {
+  "merge": "woodchop",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-one-arm-kettlebell-swings": {
+  "merge": "kb-swing",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-one-legged-cable-kickback": {
+  "merge": "cable-kickback",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-standing-two-arm-overhead-throw": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-supine-two-arm-overhead-throw": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-supine-chest-throw": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-supine-one-arm-overhead-throw": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-backward-medicine-ball-throw": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-chest-push-from-3-point-stance": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-spell-caster": {
+  "merge": "woodchop",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-medicine-ball-scoop-throw": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-landmine-180s": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, extrémité de barre ancrée tenue à deux mains devant la poitrine. Rotation du tronc et des hanches balayant la barre en arc d'un côté à l'autre, bras tendus.",
+  "why": "Rotation à la landmine, matériel spécifique"
+ },
+ "x-landmine-linear-jammer": {
+  "merge": "ohp",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-seated-band-hamstring-curl": {
+  "merge": "seated-leg-curl",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-standing-leg-curl": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout face à la machine, rouleau derrière la cheville d'une jambe. Hanche fixe, flexion du genou ramenant le talon vers la fesse, puis retour contrôlé.",
+  "why": "Machine courante, jambe unique debout"
+ },
+ "x-prone-manual-hamstring": {
+  "merge": "nordic-curl",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-ball-leg-curl": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé sur le dos, talons sur un swiss ball, bassin relevé. Flexion des genoux roulant le ballon vers les fessiers en gardant le bassin haut, puis extension.",
+  "why": "Curl ischio sur ballon, distinct de la machine"
+ },
+ "x-single-leg-leg-extension": {
+  "merge": "leg-extension",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-leg-lift": {
+  "merge": "donkey-kick",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-rear-leg-raises": {
+  "merge": "donkey-kick",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-london-bridges": {
+  "merge": "pull-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-sled-overhead-backward-walk": {
+  "merge": "sled-push",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-rickshaw-carry": {
+  "merge": "farmer-walk",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-spider-crawl": {
+  "merge": "mountain-climber",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-yoke-walk": {
+  "merge": "farmer-walk",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-monster-walk": {
+  "keep": true,
+  "demo": "new",
+  "move": "Élastique autour des genoux ou chevilles, position mi-squat. Pas latéraux ou diagonaux larges en gardant la tension, genoux vers l'extérieur, bassin stable.",
+  "why": "Activation fessiers courante, déplacement distinct"
+ },
+ "x-trail-running-walking": {
+  "merge": "running",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-walking-treadmill": {
+  "merge": "treadmill",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-rack-delivery": {
+  "merge": "power-clean",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-dumbbell-seated-one-leg-calf-raise": {
+  "merge": "single-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-barbell-seated-calf-raise": {
+  "merge": "seated-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-calf-raises-with-bands": {
+  "merge": "standing-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-smith-machine-calf-raise": {
+  "merge": "standing-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-standing-dumbbell-calf-raise": {
+  "merge": "single-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-standing-barbell-calf-raise": {
+  "merge": "standing-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-rocking-standing-calf-raise": {
+  "merge": "standing-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-smith-machine-reverse-calf-raises": {
+  "merge": "standing-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-calf-raise-on-a-dumbbell": {
+  "merge": "single-calf",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-donkey-calf-raises": {
+  "keep": true,
+  "demo": "new",
+  "move": "Buste penché à 90 degrés, appuyé sur la machine, lest sur le bas du dos. Flexion plantaire sur la pointe des pieds, talons bas ensuite.",
+  "why": "Mollets donkey avec machine dédiée"
+ },
+ "x-calf-press-on-the-leg-press-machine": {
+  "keep": true,
+  "demo": "new",
+  "move": "Assis à la presse à cuisses, jambes tendues, avant-pieds sur le bas du plateau. Flexion plantaire poussant le plateau, genoux verrouillés, puis retour talons bas.",
+  "why": "Mollets à la presse, courant en salle"
+ },
+ "x-power-stairs": {
+  "merge": "farmer-walk",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-step-up-with-knee-raise": {
+  "merge": "step-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-dumbbell-step-ups": {
+  "merge": "step-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-barbell-step-ups": {
+  "merge": "step-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-windmills": {
+  "merge": "thoracic-rotation",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-kettlebell-windmill": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, kettlebell tenue bras tendu au-dessus de la tête, pieds écartés. Charnière de hanche en inclinant le buste de côté, main libre descend le long de la jambe vers le pied, regard sur la kettlebell, puis remontée.",
+  "why": "Mouvement unilatéral de mobilité-force distinct"
+ },
+ "x-advanced-kettlebell-windmill": {
+  "merge": "x-kettlebell-windmill",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-double-kettlebell-windmill": {
+  "merge": "x-kettlebell-windmill",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-kneeling-arm-drill": {
+  "merge": "arm-circles",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-muscle-up": {
+  "keep": true,
+  "demo": "new",
+  "move": "Suspendu à la barre ou aux anneaux, traction explosive puis passage du torse au-dessus de la barre, transition des poignets, extension des coudes en appui dips, puis descente contrôlée.",
+  "why": "Mouvement distinct, très populaire en gym"
+ },
+ "x-kipping-muscle-up": {
+  "merge": "x-muscle-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-lying-rear-delt-raise": {
+  "merge": "rear-delt-fly",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-seated-bent-over-rear-delt-raise": {
+  "merge": "rear-delt-fly",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-sled-reverse-flye": {
+  "merge": "reverse-pec-deck",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-reverse-flyes-with-external-rotation": {
+  "merge": "rear-delt-fly",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-dumbbell-lying-one-arm-rear-lateral-raise": {
+  "merge": "rear-delt-fly",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-dumbbell-lying-rear-lateral-raise": {
+  "merge": "rear-delt-fly",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-bent-over-dumbbell-rear-delt-raise-with-head-on-bench": {
+  "merge": "rear-delt-fly",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-back-flyes-with-bands": {
+  "merge": "band-pull-apart",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-cable-rear-delt-fly": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout entre deux poulies hautes, câbles croisés tenus à bras tendus. Écartement horizontal des bras vers l'arrière, omoplates serrées, puis retour contrôlé.",
+  "why": "Oiseau à la poulie courant"
+ },
+ "x-bent-over-low-pulley-side-lateral": {
+  "merge": "rear-delt-fly",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-otis-up": {
+  "merge": "sit-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-pallof-press-with-rotation": {
+  "merge": "pallof-press",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-lying-bent-leg-groin": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé sur le dos, genoux fléchis, plantes des pieds jointes, genoux écartés vers le sol. Maintien de l'étirement des adducteurs.",
+  "why": "Étirement papillon des adducteurs, sans équivalent"
+ },
+ "x-one-arm-kettlebell-para-press": {
+  "merge": "kb-press",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-carioca-quick-step": {
+  "merge": "running",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-return-push-from-stance": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-medicine-ball-chest-pass": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-chest-push-single-response": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-chest-push-with-run-release": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-kettlebell-pass-between-the-legs": {
+  "merge": "kb-swing",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-chest-push-multiple-response": {
+  "merge": "wall-ball",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-skating": {
+  "merge": "cycling",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-atlas-stones": {
+  "merge": "deadlift",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-hanging-pike": {
+  "merge": "hanging-leg-raise",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-standing-olympic-plate-hand-squeeze": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, disque tenu par la tranche à bout de bras le long du corps. Pincement du disque entre pouce et doigts, maintien statique.",
+  "why": "Travail de prise par pincement, représentant du groupe"
+ },
+ "x-plate-pinch": {
+  "merge": "x-standing-olympic-plate-hand-squeeze",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-balance-board": {
+  "merge": "ankle-mobility",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-push-up-to-side-plank": {
+  "merge": "push-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-drop-push": {
+  "merge": "push-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-clock-push-up": {
+  "merge": "push-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-suspended-push-up": {
+  "keep": true,
+  "demo": "new",
+  "move": "Position de pompe, mains dans les poignées de sangles suspendues (TRX), corps gainé. Flexion des coudes descendant la poitrine entre les mains, puis extension.",
+  "why": "Pompe instable aux sangles, courante"
+ },
+ "x-butt-ups": {
+  "merge": "plank",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-incline-push-up-depth-jump": {
+  "merge": "push-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-incline-push-up-reverse-grip": {
+  "merge": "incline-push-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-incline-push-up-wide": {
+  "merge": "incline-push-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ },
+ "x-incline-push-up-close-grip": {
+  "merge": "incline-push-up",
+  "why": "Même mouvement ou variante proche de la cible"
+ }
+}

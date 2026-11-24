@@ -492,3 +492,10 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 - **Figures anatomiques** : `scripts/demos/anatomy.py` (13 groupes, cadre identique à celui des pectoraux, `ViewSpec.close`).
 - Tests : `Tests/SculptMannequinTests.swift`, `Tests/AnatomyFiguresTests.swift`.
 - **Reste** : CI ; fluidité des vignettes sur l'iPhone 11 Pro ; captures. Pubs et AdExport gardent l'ancienne figure.
+
+## Chantier 53 : tri des exercices similaires, 80 nouvelles animations — 2026-11-24 (nuit)
+- **Demande du PDG** : enlever les exercices similaires (ex. bateau pirate kettlebell ≈ rotation externe) ; les variantes deviennent des noms associés, reconnus à la création d'un exercice ; nouvelles animations et explications pour les vrais mouvements gardés. Choix « tri un par un ».
+- **Tri** (8 agents, `scripts/exercises/triage/NN.json` + `09-reconcile.json` du Chef pour les doublons entre lots) : 81 mouvements importés gardés, 673 fusionnés (583 dans un exercice intégré) → **244 exercices**. `build_catalog.py` : noms des variantes (7 langues) en alias du gardé, table `redirects` (id fusionné → gardé) lue par `ExerciseLibrary.info`/`canonical` (séries déjà enregistrées conservées), chaînes suivies.
+- **Animations** (8 agents, `scripts/demos/ex_catalog_NN.py`, planche `catalog_sheet.py`) : 80 nouvelles démos, contrôles du moteur sans problème ; 1 exercice garde l'animation d'un intégré. Réserves des agents : vacuum abdominal peu lisible (pas de ventre), inchworm retour inversé, étirement latéral couché sans inclinaison, Zottman (rotation peu visible), sauts qui reviennent par coupure.
+- **Explications** : `scripts/exercises/techniques/NN.json` (7 langues) → champ `tq` du catalogue → `ExerciseCatalog.techniques`.
+- **Reste** : vérifier sur l'iPhone ; étiquettes de phases toujours en français dans toutes les langues (limite existante) ; performance des vignettes (clés texte des membres).

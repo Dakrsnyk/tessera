@@ -1,0 +1,410 @@
+{
+ "x-push-ups-close-triceps-position": {
+  "merge": "diamond-push-up",
+  "why": "Pompes mains rapprochées, même geste que diamant"
+ },
+ "x-pushups-close-and-wide-hand-positions": {
+  "merge": "push-up",
+  "why": "Variante de largeur de mains des pompes"
+ },
+ "x-push-up-wide": {
+  "keep": true,
+  "demo": "new",
+  "move": "Planche haute, mains au sol à environ 1,5 fois la largeur des épaules, coudes sortis à 45-60 degrés; fléchir les coudes jusqu'à frôler le sol puis repousser, corps gainé.",
+  "why": "Pompes larges, mains bien plus écartées que les épaules"
+ },
+ "x-push-ups-with-feet-on-an-exercise-ball": {
+  "keep": true,
+  "demo": "new",
+  "move": "Position de pompes, tibias ou pieds posés sur un gros ballon; corps aligné; fléchir les coudes, poitrine vers le sol, puis repousser en gardant le ballon stable.",
+  "why": "Pompes instables avec pieds sur ballon suisse"
+ },
+ "x-push-ups-with-feet-elevated": {
+  "merge": "decline-push-up",
+  "why": "Pompes pieds surélevés, même exercice"
+ },
+ "x-plyo-push-up": {
+  "keep": true,
+  "demo": "new",
+  "move": "Planche haute; descendre en pompe, puis pousser assez fort pour décoller les mains du sol (tape des mains possible), réceptionner bras fléchis et enchaîner.",
+  "why": "Pompes explosives avec décollage des mains"
+ },
+ "x-plyo-kettlebell-pushups": {
+  "merge": "x-plyo-push-up",
+  "why": "Pompes pliométriques, seulement le support change"
+ },
+ "x-close-grip-push-up-off-of-a-dumbbell": {
+  "merge": "diamond-push-up",
+  "why": "Pompes mains serrées, même geste"
+ },
+ "x-single-arm-push-up": {
+  "keep": true,
+  "demo": "new",
+  "move": "Planche haute, jambes écartées pour l'équilibre, une main au sol sous l'épaule, l'autre dans le dos; fléchir ce seul coude pour descendre la poitrine puis repousser.",
+  "why": "Pompes à un bras, mouvement distinct et avancé"
+ },
+ "x-barbell-glute-bridge": {
+  "merge": "hip-thrust",
+  "why": "Pont fessier lesté à la barre, hip thrust"
+ },
+ "x-butt-lift-bridge": {
+  "merge": "glute-bridge",
+  "why": "Pont fessier au sol identique"
+ },
+ "x-physioball-hip-bridge": {
+  "merge": "glute-bridge",
+  "why": "Pont fessier, seul le support change"
+ },
+ "x-hip-lift-with-band": {
+  "merge": "glute-bridge",
+  "why": "Pont fessier avec élastique ajouté"
+ },
+ "x-single-leg-push-off": {
+  "merge": "box-jump",
+  "why": "Saut explosif sur une jambe, proche du box jump"
+ },
+ "x-heavy-bag-thrust": {
+  "merge": "machine-chest-press",
+  "why": "Poussée de poitrine, proche du chest press"
+ },
+ "x-smith-machine-leg-press": {
+  "merge": "leg-press",
+  "why": "Presse à cuisses, variante de machine"
+ },
+ "x-narrow-stance-leg-press": {
+  "merge": "leg-press",
+  "why": "Presse à cuisses, simple variante de stance"
+ },
+ "x-calf-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Assis sur la presse à cuisses, jambes tendues, seules les pointes de pieds sur la plateforme; pousser sur les avant-pieds en étendant les chevilles puis revenir en étirant les mollets, genoux quasi verrouillés.",
+  "why": "Mollets à la presse, mouvement courant en salle"
+ },
+ "x-isometric-chest-squeezes": {
+  "merge": "cable-fly",
+  "why": "Contraction pectorale mains jointes, proche de l'écarté"
+ },
+ "x-single-leg-hop-progression": {
+  "merge": "box-jump",
+  "why": "Sauts sur une jambe, drill proche du box jump"
+ },
+ "x-dumbbell-lying-pronation": {
+  "merge": "wrist-curl",
+  "why": "Petit exercice avant-bras, proche des poignets"
+ },
+ "x-cable-incline-pushdown": {
+  "merge": "straight-arm-pulldown",
+  "why": "Bras tendus à la poulie, même mouvement"
+ },
+ "x-front-raise-and-pullover": {
+  "merge": "db-pullover",
+  "why": "Pull-over avec barre, variante du pull-over"
+ },
+ "x-wide-grip-decline-barbell-pullover": {
+  "merge": "db-pullover",
+  "why": "Pull-over couché, variante barre et banc"
+ },
+ "x-bent-arm-barbell-pullover": {
+  "merge": "db-pullover",
+  "why": "Pull-over bras fléchis, variante du pull-over"
+ },
+ "x-bent-arm-dumbbell-pullover": {
+  "merge": "db-pullover",
+  "why": "Pull-over haltère bras fléchis, même mouvement"
+ },
+ "x-rope-straight-arm-pulldown": {
+  "merge": "straight-arm-pulldown",
+  "why": "Bras tendus à la poulie, corde au lieu de barre"
+ },
+ "x-push-press": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, barre sur les épaules en appui avant; fléchir légèrement les genoux (dip), les étendre explosivement et utiliser l'élan pour pousser la barre au-dessus de la tête, bras verrouillés, puis redescendre aux épaules.",
+  "why": "Développé avec impulsion des jambes, geste distinct"
+ },
+ "x-push-press-behind-the-neck": {
+  "merge": "x-push-press",
+  "why": "Push press, simple variante de placement de barre"
+ },
+ "x-one-arm-kettlebell-push-press": {
+  "merge": "kb-press",
+  "why": "Développé kettlebell avec élan, variante"
+ },
+ "x-double-kettlebell-push-press": {
+  "merge": "kb-press",
+  "why": "Développé kettlebells avec élan, variante"
+ },
+ "x-3-4-sit-up": {
+  "merge": "sit-up",
+  "why": "Redressement assis à amplitude réduite"
+ },
+ "x-press-sit-up": {
+  "merge": "sit-up",
+  "why": "Redressement assis avec charge ajoutée"
+ },
+ "x-weighted-sit-ups-with-bands": {
+  "merge": "sit-up",
+  "why": "Redressement assis avec élastique ajouté"
+ },
+ "x-frog-sit-ups": {
+  "merge": "sit-up",
+  "why": "Redressement assis, jambes en grenouille"
+ },
+ "x-jackknife-sit-up": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé sur le dos, bras tendus derrière la tête et jambes tendues; relever simultanément buste et jambes pour toucher les pieds avec les mains en formant un V, puis redescendre sous contrôle.",
+  "why": "Redressement en V, mains aux pieds, courant"
+ },
+ "x-janda-sit-up": {
+  "merge": "sit-up",
+  "why": "Redressement assis, variante avec ischios contractés"
+ },
+ "x-bottoms-up": {
+  "merge": "leg-raise",
+  "why": "Relevé de bassin, variante de relevé de jambes"
+ },
+ "x-bent-knee-hip-raise": {
+  "merge": "leg-raise",
+  "why": "Relevé de bassin jambes fléchies, même mouvement"
+ },
+ "x-natural-glute-ham-raise": {
+  "keep": true,
+  "demo": "new",
+  "move": "Genoux au sol ou sur appui, chevilles bloquées; corps droit du genou à la tête, descendre le buste vers l'avant en gardant les hanches tendues, puis remonter en fléchissant les ischios et en poussant avec les mains.",
+  "why": "Glute-ham raise, flexion de hanche et genou distincte"
+ },
+ "x-smith-machine-hip-raise": {
+  "merge": "leg-raise",
+  "why": "Relevé de bassin, variante de relevé de jambes"
+ },
+ "x-lower-back-curl": {
+  "merge": "superman",
+  "why": "Extension du dos au sol, comme le superman"
+ },
+ "x-wind-sprints": {
+  "merge": "hanging-leg-raise",
+  "why": "Relevé de genoux suspendu, même mouvement"
+ },
+ "x-knee-hip-raise-on-parallel-bars": {
+  "keep": true,
+  "demo": "new",
+  "move": "Avant-bras posés sur les coussinets de la chaise romaine, dos contre le dossier, jambes pendantes; relever les genoux vers la poitrine en enroulant le bassin puis redescendre sans balancer.",
+  "why": "Relevé de genoux à la chaise romaine, courant"
+ },
+ "x-flat-bench-lying-leg-raise": {
+  "merge": "leg-raise",
+  "why": "Relevé de jambes allongé, sur banc"
+ },
+ "x-lying-face-down-plate-neck-resistance": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé sur le ventre, tête dépassant du banc, disque tenu sur l'arrière de la tête; fléchir et étendre le cou lentement en gardant le dos immobile.",
+  "why": "Renforcement du cou, représente tous les exercices de nuque"
+ },
+ "x-lying-face-up-plate-neck-resistance": {
+  "merge": "x-lying-face-down-plate-neck-resistance",
+  "why": "Renforcement de nuque avec disque, même mouvement"
+ },
+ "x-seated-head-harness-neck-resistance": {
+  "merge": "x-lying-face-down-plate-neck-resistance",
+  "why": "Renforcement de nuque avec charge, même idée"
+ },
+ "x-isometric-neck-exercise-front-and-back": {
+  "merge": "x-lying-face-down-plate-neck-resistance",
+  "why": "Exercice isométrique de nuque, groupe nuque"
+ },
+ "x-isometric-neck-exercise-sides": {
+  "merge": "x-lying-face-down-plate-neck-resistance",
+  "why": "Exercice isométrique de nuque, groupe nuque"
+ },
+ "x-exercise-ball-pull-in": {
+  "merge": "leg-raise",
+  "why": "Rentrée de genoux, variante de relevé de jambes"
+ },
+ "x-flat-bench-leg-pull-in": {
+  "merge": "leg-raise",
+  "why": "Rentrée de jambes, variante de relevé de jambes"
+ },
+ "x-seated-leg-tucks": {
+  "merge": "leg-raise",
+  "why": "Rentrées de genoux assis, petite variante"
+ },
+ "x-leg-pull-in": {
+  "merge": "leg-raise",
+  "why": "Rentrée de jambes, variante de relevé"
+ },
+ "x-seated-flat-bench-leg-pull-in": {
+  "merge": "leg-raise",
+  "why": "Rentrée de jambes assis, petite variante"
+ },
+ "x-tire-flip": {
+  "merge": "deadlift",
+  "why": "Strongman rare, proche du soulevé de terre"
+ },
+ "x-seated-barbell-twist": {
+  "merge": "russian-twist",
+  "why": "Rotation du tronc assis, même mouvement"
+ },
+ "x-medicine-ball-full-twist": {
+  "merge": "russian-twist",
+  "why": "Rotation du tronc avec ballon, même mouvement"
+ },
+ "x-torso-rotation": {
+  "merge": "russian-twist",
+  "why": "Rotation du buste, même mouvement"
+ },
+ "x-plate-twist": {
+  "merge": "russian-twist",
+  "why": "Rotation du tronc avec disque, même mouvement"
+ },
+ "x-external-rotation-with-band": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, coude plié à 90 degrés collé au flanc, élastique ancré à l'intérieur; tourner l'avant-bras vers l'extérieur en gardant le coude fixe, puis revenir lentement.",
+  "why": "Rotation externe de l'épaule, représente le groupe rotations"
+ },
+ "x-external-rotation": {
+  "merge": "x-external-rotation-with-band",
+  "why": "Rotation externe, version haltère du même geste"
+ },
+ "x-external-rotation-with-cable": {
+  "merge": "x-external-rotation-with-band",
+  "why": "Rotation externe, version poulie du même geste"
+ },
+ "x-cable-internal-rotation": {
+  "merge": "x-external-rotation-with-band",
+  "why": "Rotation de l'épaule, geste inverse très proche"
+ },
+ "x-internal-rotation-with-band": {
+  "merge": "x-external-rotation-with-band",
+  "why": "Rotation de l'épaule, geste inverse très proche"
+ },
+ "x-wrist-rotations-with-straight-bar": {
+  "merge": "wrist-curl",
+  "why": "Exercice de poignets, proche de la flexion"
+ },
+ "x-conans-wheel": {
+  "merge": "farmer-walk",
+  "why": "Strongman très rare, proche de la marche du fermier"
+ },
+ "x-wrist-roller": {
+  "merge": "wrist-curl",
+  "why": "Outil rare, travail des poignets"
+ },
+ "x-iliotibial-tract-smr": {
+  "merge": "pigeon",
+  "why": "Auto-massage rare, proche étirement hanche"
+ },
+ "x-lower-back-smr": {
+  "merge": "cat-cow",
+  "why": "Auto-massage rare, proche mobilité du dos"
+ },
+ "x-latissimus-dorsi-smr": {
+  "merge": "childs-pose",
+  "why": "Auto-massage rare, proche étirement dorsal"
+ },
+ "x-calves-smr": {
+  "merge": "calf-stretch",
+  "why": "Auto-massage rare, proche étirement mollets"
+ },
+ "x-quadriceps-smr": {
+  "merge": "quad-stretch",
+  "why": "Auto-massage rare, proche étirement quadriceps"
+ },
+ "x-rhomboids-smr": {
+  "merge": "shoulder-stretch",
+  "why": "Auto-massage rare, proche étirement haut du dos"
+ },
+ "x-barbell-ab-rollout": {
+  "merge": "ab-wheel",
+  "why": "Roulette abdominale avec barre, même mouvement"
+ },
+ "x-barbell-ab-rollout-on-knees": {
+  "merge": "ab-wheel",
+  "why": "Roulette abdominale, version sur genoux"
+ },
+ "x-barbell-rollout-from-bench": {
+  "merge": "ab-wheel",
+  "why": "Roulette abdominale, simple variante de départ"
+ },
+ "x-bodyweight-mid-row": {
+  "merge": "inverted-row",
+  "why": "Rowing inversé au poids du corps"
+ },
+ "x-sled-row": {
+  "merge": "machine-row",
+  "why": "Rowing à la machine, support différent"
+ },
+ "x-straight-bar-bench-mid-rows": {
+  "merge": "barbell-row",
+  "why": "Rowing barre, appui sur banc"
+ },
+ "x-bent-over-two-arm-long-bar-row": {
+  "merge": "barbell-row",
+  "why": "Rowing barre penché à deux mains"
+ },
+ "x-bent-over-one-arm-long-bar-row": {
+  "merge": "t-bar-row",
+  "why": "Rowing barre en pivot, comme T-bar"
+ },
+ "x-one-arm-long-bar-row": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout jambes écartées, buste penché, une main sur l'extrémité d'une barre ancrée au sol (landmine); tirer la barre vers la hanche en serrant l'omoplate puis redescendre.",
+  "why": "Rowing landmine à un bras, mouvement courant"
+ },
+ "x-barbell-rear-delt-row": {
+  "merge": "barbell-row",
+  "why": "Rowing barre, prise large, même mouvement"
+ },
+ "x-reverse-grip-bent-over-rows": {
+  "keep": true,
+  "demo": "new",
+  "move": "Buste penché, barre tenue en supination (paumes vers l'avant), coudes serrés; tirer la barre vers le bas du ventre puis redescendre sous contrôle.",
+  "why": "Rowing barre en supination, trajectoire différente"
+ },
+ "x-smith-machine-bent-over-row": {
+  "merge": "barbell-row",
+  "why": "Rowing penché, guidé par la Smith machine"
+ },
+ "x-lying-cambered-barbell-row": {
+  "merge": "barbell-row",
+  "why": "Rowing barre, variante de position"
+ },
+ "x-cable-rope-rear-delt-rows": {
+  "merge": "face-pull",
+  "why": "Tirage corde vers le visage, comme face pull"
+ },
+ "x-two-arm-kettlebell-row": {
+  "merge": "db-row",
+  "why": "Rowing avec poids libre, comme haltère"
+ },
+ "x-suspended-row": {
+  "merge": "inverted-row",
+  "why": "Rowing en suspension, même mouvement"
+ },
+ "x-bent-over-two-dumbbell-row": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, hanches en arrière, dos plat penché vers l'avant, un haltère dans chaque main bras tendus; tirer les deux haltères vers les hanches en serrant les omoplates puis redescendre.",
+  "why": "Rowing haltères buste penché, deux bras, courant"
+ },
+ "x-bent-over-two-dumbbell-row-with-palms-in": {
+  "merge": "x-bent-over-two-dumbbell-row",
+  "why": "Même rowing haltères, prise neutre"
+ },
+ "x-dumbbell-incline-row": {
+  "merge": "x-bent-over-two-dumbbell-row",
+  "why": "Rowing haltères, buste appuyé sur banc incliné"
+ },
+ "x-leverage-high-row": {
+  "merge": "machine-row",
+  "why": "Rowing à la machine, même mouvement"
+ },
+ "x-inverted-row-with-straps": {
+  "merge": "inverted-row",
+  "why": "Rowing inversé, avec sangles"
+ }
+}

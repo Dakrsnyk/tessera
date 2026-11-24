@@ -1,0 +1,404 @@
+{
+ "x-leverage-iso-row": {
+  "merge": "machine-row",
+  "why": "Rowing à la machine, variante de levier"
+ },
+ "x-alternating-kettlebell-row": {
+  "merge": "db-row",
+  "why": "Rowing à un bras, kettlebell comme haltère"
+ },
+ "x-one-arm-kettlebell-row": {
+  "merge": "db-row",
+  "why": "Rowing à un bras, kettlebell comme haltère"
+ },
+ "x-smith-machine-upright-row": {
+  "merge": "upright-row",
+  "why": "Rowing menton, variante de matériel"
+ },
+ "x-upright-row-with-bands": {
+  "merge": "upright-row",
+  "why": "Rowing menton, variante de matériel"
+ },
+ "x-dumbbell-one-arm-upright-row": {
+  "merge": "upright-row",
+  "why": "Rowing menton, variante de matériel"
+ },
+ "x-standing-dumbbell-upright-row": {
+  "merge": "upright-row",
+  "why": "Rowing menton, variante de matériel"
+ },
+ "x-upright-cable-row": {
+  "merge": "upright-row",
+  "why": "Rowing menton, variante de matériel"
+ },
+ "x-smith-machine-one-arm-upright-row": {
+  "merge": "upright-row",
+  "why": "Rowing menton, variante de matériel"
+ },
+ "x-elevated-cable-rows": {
+  "merge": "seated-cable-row",
+  "why": "Tirage poulie basse, variante de position"
+ },
+ "x-shotgun-row": {
+  "merge": "seated-cable-row",
+  "why": "Tirage poulie basse, variante de position"
+ },
+ "x-lying-t-bar-row": {
+  "merge": "t-bar-row",
+  "why": "T-bar avec buste appuyé"
+ },
+ "x-cable-russian-twists": {
+  "merge": "russian-twist",
+  "why": "Même rotation du tronc, version poulie"
+ },
+ "x-catch-and-overhead-throw": {
+  "merge": "wall-ball",
+  "why": "Lancer de médecine-ball, même geste global"
+ },
+ "x-stride-jump-crossover": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-lateral-box-jump": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-single-leg-lateral-hop": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-quick-leap": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-bench-jump": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-dumbbell-seated-box-jump": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-front-box-jump": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-hurdle-hops": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-front-cone-hops-or-hurdle-hops": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-lateral-cone-hops": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-side-hop-sprint": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-box-skip": {
+  "merge": "box-jump",
+  "why": "Saut pliométrique, variante de box jump"
+ },
+ "x-depth-jump-leap": {
+  "merge": "x-linear-depth-jump",
+  "why": "Même depth jump, représentant alphabétique"
+ },
+ "x-side-standing-long-jump": {
+  "merge": "x-standing-long-jump",
+  "why": "Saut en longueur, variante latérale"
+ },
+ "x-rocket-jump": {
+  "merge": "jump-squat",
+  "why": "Saut explosif sur place, variante"
+ },
+ "x-star-jump": {
+  "merge": "jump-squat",
+  "why": "Saut explosif sur place, variante"
+ },
+ "x-frog-hops": {
+  "merge": "jump-squat",
+  "why": "Saut explosif sur place, variante"
+ },
+ "x-scissors-jump": {
+  "merge": "jump-squat",
+  "why": "Saut explosif sur place, variante"
+ },
+ "x-knee-tuck-jump": {
+  "merge": "jump-squat",
+  "why": "Saut explosif sur place, variante"
+ },
+ "x-fast-skipping": {
+  "merge": "high-knees",
+  "why": "Skipping rapide proche des montées de genoux"
+ },
+ "x-single-cone-sprint-drill": {
+  "merge": "running",
+  "why": "Sprint de drill, proche de la course"
+ },
+ "x-bench-sprint": {
+  "merge": "mountain-climber",
+  "why": "Sprint sur banc, proche mountain climber"
+ },
+ "x-prowler-sprint": {
+  "merge": "sled-push",
+  "why": "Prowler est un traîneau poussé"
+ },
+ "x-overhead-slam": {
+  "merge": "x-one-arm-medicine-ball-slam",
+  "why": "Même slam au sol, représentant alphabétique"
+ },
+ "x-heaving-snatch-balance": {
+  "merge": "x-overhead-squat",
+  "why": "Snatch balance, squat bras tendus"
+ },
+ "x-log-lift": {
+  "merge": "ohp",
+  "why": "Strongman rare, proche du développé"
+ },
+ "x-atlas-stone-trainer": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-deadlift-with-chains": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-deadlift-with-bands": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-reverse-band-deadlift": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-snatch-deadlift": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-clean-deadlift": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-axle-deadlift": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-leverage-deadlift": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-rack-pull-with-bands": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-one-arm-side-deadlift": {
+  "merge": "deadlift",
+  "why": "Soulevé de terre, variante mineure"
+ },
+ "x-sumo-deadlift-with-chains": {
+  "merge": "sumo-deadlift",
+  "why": "Sumo avec chaînes ou élastiques"
+ },
+ "x-sumo-deadlift-with-bands": {
+  "merge": "sumo-deadlift",
+  "why": "Sumo avec chaînes ou élastiques"
+ },
+ "x-reverse-band-sumo-deadlift": {
+  "merge": "sumo-deadlift",
+  "why": "Sumo avec chaînes ou élastiques"
+ },
+ "x-car-deadlift": {
+  "merge": "x-trap-bar-deadlift",
+  "why": "Poignées latérales, proche barre hexagonale"
+ },
+ "x-rickshaw-deadlift": {
+  "merge": "x-trap-bar-deadlift",
+  "why": "Poignées latérales, proche barre hexagonale"
+ },
+ "x-stiff-legged-barbell-deadlift": {
+  "merge": "rdl",
+  "why": "Jambes tendues, même charnière que le roumain"
+ },
+ "x-smith-machine-stiff-legged-deadlift": {
+  "merge": "rdl",
+  "why": "Jambes tendues, même charnière que le roumain"
+ },
+ "x-wide-stance-stiff-legs": {
+  "merge": "rdl",
+  "why": "Jambes tendues, même charnière que le roumain"
+ },
+ "x-romanian-deadlift-from-deficit": {
+  "merge": "rdl",
+  "why": "Jambes tendues, même charnière que le roumain"
+ },
+ "x-stiff-legged-dumbbell-deadlift": {
+  "merge": "db-rdl",
+  "why": "Jambes tendues aux haltères"
+ },
+ "x-kettlebell-one-legged-deadlift": {
+  "merge": "single-leg-rdl",
+  "why": "Soulevé sur une jambe"
+ },
+ "x-cable-deadlifts": {
+  "merge": "cable-pull-through",
+  "why": "Charnière de hanche à la poulie"
+ },
+ "x-standing-cable-lift": {
+  "merge": "woodchop",
+  "why": "Diagonale à la poulie, bûcheron"
+ },
+ "x-lying-machine-squat": {
+  "merge": "leg-press",
+  "why": "Squat allongé machine, comme la presse à cuisses"
+ },
+ "x-front-squat-clean-grip": {
+  "merge": "front-squat",
+  "why": "Squat avant, variante de prise"
+ },
+ "x-front-barbell-squat-to-a-bench": {
+  "merge": "front-squat",
+  "why": "Squat avant, variante de prise"
+ },
+ "x-frankenstein-squat": {
+  "merge": "front-squat",
+  "why": "Squat avant, variante de prise"
+ },
+ "x-front-squats-with-two-kettlebells": {
+  "merge": "goblet-squat",
+  "why": "Squat avec charge devant ou haltères"
+ },
+ "x-dumbbell-squat": {
+  "merge": "goblet-squat",
+  "why": "Squat avec charge devant ou haltères"
+ },
+ "x-dumbbell-squat-to-a-bench": {
+  "merge": "goblet-squat",
+  "why": "Squat avec charge devant ou haltères"
+ },
+ "x-squat-with-chains": {
+  "merge": "back-squat",
+  "why": "Squat barre, variante mineure"
+ },
+ "x-squat-with-plate-movers": {
+  "merge": "back-squat",
+  "why": "Squat barre, variante mineure"
+ },
+ "x-squat-with-bands": {
+  "merge": "back-squat",
+  "why": "Squat barre, variante mineure"
+ },
+ "x-reverse-band-power-squat": {
+  "merge": "back-squat",
+  "why": "Squat barre, variante mineure"
+ },
+ "x-wide-stance-barbell-squat": {
+  "merge": "back-squat",
+  "why": "Squat barre, variante mineure"
+ },
+ "x-barbell-full-squat": {
+  "merge": "back-squat",
+  "why": "Squat barre, variante mineure"
+ },
+ "x-speed-squats": {
+  "merge": "back-squat",
+  "why": "Squat barre, variante mineure"
+ },
+ "x-jefferson-squats": {
+  "merge": "back-squat",
+  "why": "Squat barre, variante mineure"
+ },
+ "x-sit-squats": {
+  "merge": "deep-squat-hold",
+  "why": "Squat profond tenu en étirement"
+ },
+ "x-suspended-split-squat": {
+  "merge": "bulgarian-split",
+  "why": "Squat bulgare en suspension"
+ },
+ "x-smith-single-leg-split-squat": {
+  "merge": "x-smith-machine-squat",
+  "why": "Squat fendu guidé, proche squat Smith"
+ },
+ "x-split-squats": {
+  "merge": "lunge",
+  "why": "Fente, variante simple"
+ },
+ "x-barbell-side-split-squat": {
+  "merge": "lunge",
+  "why": "Fente, variante simple"
+ },
+ "x-split-squat-with-dumbbells": {
+  "merge": "lunge",
+  "why": "Fente, variante simple"
+ },
+ "x-trap-bar-deadlift": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout dans la barre hexagonale, prise neutre latérale, dos plat, extension hanches et genoux jusqu'au verrouillage, poids proche du corps",
+  "why": "Soulevé courant à la barre hexagonale"
+ },
+ "x-rack-pulls": {
+  "keep": true,
+  "demo": "new",
+  "move": "Barre sur taquets à hauteur des genoux, dos plat, extension des hanches jusqu'à la position debout, omoplates serrées, barre glisse sur les cuisses",
+  "why": "Soulevé partiel courant depuis des taquets"
+ },
+ "x-smith-machine-squat": {
+  "keep": true,
+  "demo": "new",
+  "move": "Barre guidée de la Smith machine sur les trapèzes, pieds légèrement devant la barre, flexion hanches et genoux jusqu'aux cuisses parallèles, trajectoire verticale",
+  "why": "Squat guidé courant en salle"
+ },
+ "x-weighted-sissy-squat": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout, talons relevés, genoux avancés et buste incliné en arrière en ligne droite, flexion des genoux seule, charge tenue contre la poitrine",
+  "why": "Mouvement distinct d'isolation des quadriceps"
+ },
+ "x-incline-bench-pull": {
+  "keep": true,
+  "demo": "new",
+  "move": "Allongé face contre un banc incliné, bras pendants avec haltères, tirage des coudes vers le haut le long du buste, omoplates serrées",
+  "why": "Rowing buste appuyé sur banc incliné"
+ },
+ "x-alternating-renegade-row": {
+  "keep": true,
+  "demo": "new",
+  "move": "Position de planche mains sur haltères ou kettlebells, pieds écartés, tirage alterné d'un coude vers la hanche sans pivoter le bassin",
+  "why": "Rowing en planche, distinct et courant"
+ },
+ "x-linear-depth-jump": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout sur un box, pas dans le vide, réception pieds joints amortie, rebond vertical immédiat maximal",
+  "why": "Pliométrie distincte : réception puis saut"
+ },
+ "x-standing-long-jump": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout pieds écartés largeur d'épaules, armé des bras et flexion, saut vers l'avant le plus loin possible, réception amortie sur deux pieds",
+  "why": "Saut horizontal distinct, test de puissance"
+ },
+ "x-one-arm-medicine-ball-slam": {
+  "keep": true,
+  "demo": "new",
+  "move": "Medicine ball à une main au-dessus de la tête, bras tendu, claquement du ballon au sol avec flexion hanches et genoux, reprise du ballon",
+  "why": "Slam distinct, mouvement de puissance"
+ },
+ "x-overhead-squat": {
+  "keep": true,
+  "demo": "new",
+  "move": "Barre tenue bras tendus au-dessus de la tête en prise large, flexion hanches et genoux en squat profond, buste vertical, barre au-dessus des pieds",
+  "why": "Squat bras tendus, mobilité et gainage distincts"
+ },
+ "x-deficit-deadlift": {
+  "keep": true,
+  "demo": "new",
+  "move": "Debout sur une plateforme surélevée de 5 à 10 cm, barre au sol plus bas que d'habitude, dos plat, extension hanches et genoux",
+  "why": "Soulevé en déficit, départ plus profond"
+ }
+}

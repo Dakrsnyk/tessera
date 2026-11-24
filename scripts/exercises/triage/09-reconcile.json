@@ -1,0 +1,94 @@
+{
+ "x-calf-press-on-the-leg-press-machine": {
+  "merge": "x-calf-press",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-natural-glute-ham-raise": {
+  "merge": "nordic-curl",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-power-snatch": {
+  "merge": "x-snatch",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-hang-snatch": {
+  "merge": "x-snatch",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-snatch-pull": {
+  "merge": "x-snatch",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-clean": {
+  "merge": "power-clean",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-reverse-grip-bent-over-rows": {
+  "merge": "barbell-row",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-one-arm-long-bar-row": {
+  "merge": "t-bar-row",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-underhand-cable-pulldowns": {
+  "merge": "lat-pulldown",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-one-arm-lat-pulldown": {
+  "merge": "lat-pulldown",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-kneeling-high-pulley-row": {
+  "merge": "lat-pulldown",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-push-up-wide": {
+  "merge": "push-up",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-push-ups-with-feet-on-an-exercise-ball": {
+  "merge": "decline-push-up",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-standing-leg-curl": {
+  "merge": "lying-leg-curl",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-platform-hamstring-slides": {
+  "merge": "x-ball-leg-curl",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-smith-machine-bench-press": {
+  "merge": "bench-press",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-smith-machine-squat": {
+  "merge": "back-squat",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-dumbbell-floor-press": {
+  "merge": "x-floor-press",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-cable-chest-press": {
+  "merge": "machine-chest-press",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-cable-shoulder-press": {
+  "merge": "machine-shoulder-press",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-standing-bradford-press": {
+  "merge": "x-standing-barbell-press-behind-neck",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-lying-bent-leg-groin": {
+  "merge": "x-adductor-groin",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ },
+ "x-knee-hip-raise-on-parallel-bars": {
+  "merge": "hanging-leg-raise",
+  "why": "Réconciliation entre lots (Chef, 2026-11-23)"
+ }
+}

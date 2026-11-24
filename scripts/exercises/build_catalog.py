@@ -26,6 +26,8 @@ WORK = os.path.join(ROOT, "scripts", "exercises", "work")
 TRANSLATIONS = os.path.join(ROOT, "scripts", "exercises", "translations")
 LIBRARY = os.path.join(ROOT, "Shared", "Domains", "ExerciseLibrary.swift")
 OUT = os.path.join(ROOT, "Shared", "Resources", "ExerciseCatalog.json")
+TRIAGE = os.path.join(ROOT, "scripts", "exercises", "triage")
+TECHNIQUES = os.path.join(ROOT, "scripts", "exercises", "techniques")
 CHUNK = 110
 LANGS = ["fr", "en", "es", "de", "it", "pt-BR", "ja"]
 
@@ -175,6 +177,63 @@ def build():
             if key in seen:
                 e["n"][lang] = f"{e['n'][lang]} ({e['n']['en']})"
             seen.add(e["n"][lang].lower())
+    # The triage (CEO, 2026-11-23: « enlever les exercices similaires »): every imported exercise is kept as a distinct
+    # movement, or merged into the exercise it is a variant of (its names in the 7 languages become that exercise's
+    # aliases; its id redirects there, so the sets already saved with it keep counting).
+    redirects = {}
+    decisions = {}
+    if os.path.isdir(TRIAGE):
+        for name in sorted(os.listdir(TRIAGE)):
+            if name.endswith(".json"):
+                decisions.update(json.load(open(os.path.join(TRIAGE, name), encoding="utf-8")))
+    if decisions:
+        by_id = {e["id"]: e for e in exercises}
+        missing = [i for i in by_id if i not in decisions]
+        if missing:
+            sys.exit(f"{len(missing)} exercises not triaged, e.g. {missing[:5]}")
+
+        def final(i, seen=()):
+            d = decisions.get(i)
+            if i in built_in or d is None or "merge" not in d:
+                return i
+            t = d["merge"]
+            if t in seen or t == i or (t not in by_id and t not in built_in):
+                return i   # a loop or an unknown target: kept
+            return final(t, seen + (i,))
+
+        for i, e in list(by_id.items()):
+            target = final(i)
+            if target == i:
+                continue
+            names = list(e["n"].values()) + e["a"]
+            if target in built_in:
+                extra[target] = unique(extra.get(target, []) + names)
+            else:
+                by_id[target]["a"] = unique(by_id[target]["a"] + names)
+            redirects[i] = target
+        exercises = [e for e in exercises if e["id"] not in redirects]
+        for e in exercises:
+            d = decisions.get(e["id"], {})
+            if d.get("demo") == "new":
+                e["move"] = d.get("move", "")
+        print(f"triage: {len(exercises)} kept, {len(redirects)} merged "
+              f"({sum(1 for t in redirects.values() if t in built_in)} into built-in exercises)")
+    # Techniques written for the kept exercises (scripts/exercises/techniques/NN.json: id -> {lang: {start, steps, …}}).
+    if os.path.isdir(TECHNIQUES):
+        tech = {}
+        for name in sorted(os.listdir(TECHNIQUES)):
+            if name.endswith(".json"):
+                tech.update(json.load(open(os.path.join(TECHNIQUES, name), encoding="utf-8")))
+        for e in exercises:
+            if e["id"] in tech:
+                e["tq"] = tech[e["id"]]
+    # A kept exercise with its own demonstration (scripts/demos/ex_catalog_NN.py) no longer borrows one.
+    demos_path = os.path.join(ROOT, "App", "Resources", "ExerciseDemos.json")
+    own = set(json.load(open(demos_path, encoding="utf-8"))["demos"]) if os.path.exists(demos_path) else set()
+    for e in exercises:
+        if e["id"] in own:
+            e.pop("demo", None)
+            e.pop("move", None)
     # An alias leads to one exercise only. A catalogue alias that is a name or alias of a built-in exercise, or a name
     # of another catalogue exercise, is dropped (the app looks in the built-in exercises first: they keep their history);
     # an alias two catalogue exercises share stays with the first one (code review, 2026-11-23).
@@ -203,7 +262,7 @@ def build():
     exercises.sort(key=lambda e: e["n"]["fr"].lower())
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     catalog = {"source": "free-exercise-db (The Unlicense, public domain), commit f00c92c7", "exercises": exercises,
-               "extraAliases": extra}
+               "extraAliases": extra, "redirects": redirects}
     json.dump(catalog, open(OUT, "w", encoding="utf-8", newline="\n"), ensure_ascii=False, separators=(",", ":"))
     print(f"{len(exercises)} new exercises, {sum(len(v) for v in extra.values())} more names (7 languages, duplicates) for {len(extra)} "
           f"built-in ones -> {OUT} ({os.path.getsize(OUT) // 1024} KB); total {len(exercises) + len(built_in)}")
