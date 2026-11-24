@@ -136,12 +136,8 @@ def body_items(cam, b, mode, lift=0.0):
             kn, an, to = b.knee[s], b.ankle[s], b.toe[s]
             for center, r, name in ((kn, 0.05, "genou"), (an, 0.033, "cheville")):
                 ball(f"{name} {tag}", center, r)
-            d = unit(to - an)
-            flat = np.array([d[0], 0.0, d[2]])
-            level = unit(flat) if np.linalg.norm(flat) > 1e-3 else d
-            up, lateral = np.array([0.0, 1.0, 0.0]), b.pelvis.r
-            ellipsoid(f"pied {tag}", an - level * 0.035 - up * 0.035, [level * 0.04, up * 0.03, lateral * 0.032])
-            ellipsoid(f"pied {tag}", lerp(an, to, 0.55) - up * 0.012, [d * 0.11, up * 0.026, lateral * 0.04])
+            for center, axes in sculpt.foot_axes(b, s):
+                ellipsoid(f"pied {tag}", center, axes)
     return out
 
 

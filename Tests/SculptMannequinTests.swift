@@ -86,6 +86,30 @@ final class SculptMannequinTests: XCTestCase {
         }
     }
 
+    /// No limb is a flat sheet (2026-11-24): with the elbow at a right angle the forearm's front lay along the forearm,
+    /// so the forearm and the hand of a runner were drawn as planes; a leg opened to the side was squashed the same way.
+    func testNoLimbIsAFlatSheet() throws {
+        for id in ExerciseDemos.ids {
+            let demo = try XCTUnwrap(ExerciseDemos.demo(for: id), id)
+            for p in [0.0, 0.33, 0.5, 0.83] {
+                let joints = try XCTUnwrap(demo.skeleton(at: p), id)
+                let body = try XCTUnwrap(Sculpt.Body(joints), id)
+                for (key, limb) in body.limbs {
+                    let span = limb.b - limb.a
+                    let size = (span * span).sum().squareRoot()
+                    guard size > 0.01 else { continue }
+                    let axis = span / size
+                    let front = limb.front - axis * (limb.front * axis).sum()
+                    let away = limb.away - axis * (limb.away * axis).sum()
+                    let c = Vec3(front.y * away.z - front.z * away.y, front.z * away.x - front.x * away.z,
+                                 front.x * away.y - front.y * away.x)
+                    let section = (c * c).sum().squareRoot()
+                    XCTAssertGreaterThan(section, 0.6, "\(id) \(key) at \(p): a section of \(section) of its size")
+                }
+            }
+        }
+    }
+
     func testTheExerciseMusclesMapToTheMannequin() {
         let bench = DemoMuscles(primary: [.chest], secondary: [.triceps, .shoulders])
         XCTAssertEqual(bench.primary, ["chest"])

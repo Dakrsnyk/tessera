@@ -109,11 +109,22 @@ class Body:
                 bend = fore - np.dot(fore, arm) * arm
                 # Straight arm: its front is the trunk's front made square to it (the biceps faces forward, as standing).
                 straight = c.f - np.dot(c.f, arm) * arm
-                front = unit(bend) if np.linalg.norm(bend) > 0.08 else (unit(straight) if np.linalg.norm(straight) > 0.2 else c.f)
+                if np.linalg.norm(bend) > 0.08:
+                    front = unit(bend)
+                elif np.linalg.norm(straight) > 0.2:
+                    front = unit(straight)
+                else:
+                    # A straight arm pointing forward or back: the biceps faces up. (The trunk's front, along the arm,
+                    # made the arm a flat sheet.)
+                    front = unit(c.u - np.dot(c.u, arm) * arm)
                 away = unit(np.cross(arm, front))
                 if np.dot(away, c.r * s) < 0:
                     away = -away
-                ffront = unit(front - np.dot(front, fore) * fore) if abs(np.dot(front, fore)) < 0.95 else front
+                # The forearm's front is the arm's front turned by the bend of the elbow: never along the forearm (at a
+                # right angle the arm's front IS the forearm's direction, and the forearm and the hand were flat sheets).
+                ffront = front * np.dot(fore, arm) - arm * np.dot(fore, front)
+                ffront = ffront - np.dot(ffront, fore) * fore
+                ffront = unit(ffront) if np.linalg.norm(ffront) > 0.2 else unit(np.cross(away, fore))
                 faway = unit(np.cross(fore, ffront))
                 if np.dot(faway, away) < 0:
                     faway = -faway
@@ -123,9 +134,20 @@ class Body:
                 p = b.pelvis
                 hip, kn, an = b.hip[s], b.knee[s], b.ankle[s]
                 thigh, shin = unit(kn - hip), unit(an - kn)
-                tf, sf = unit(np.cross(p.r, thigh)), unit(np.cross(p.r, shin))
-                self.limbs[("thigh", s)] = (hip, kn, tf, p.r * s, [(-0.04, 0.072), (0.08, 0.084), (0.2, 0.086), (0.45, 0.076), (0.75, 0.063), (0.92, 0.052), (1, 0.05)])
-                self.limbs[("shin", s)] = (kn, an, sf, p.r * s, [(0, 0.049), (0.12, 0.052), (0.3, 0.057), (0.5, 0.049), (0.75, 0.036), (0.92, 0.031), (1, 0.031)])
+                tf, sf = np.cross(p.r, thigh), np.cross(p.r, shin)
+                # A leg along the hips' axis (side split): its front is the pelvis's front made square to it.
+                tf = unit(tf) if np.linalg.norm(tf) > 0.2 else unit(p.f - np.dot(p.f, thigh) * thigh)
+                sf = unit(sf) if np.linalg.norm(sf) > 0.2 else unit(p.f - np.dot(p.f, shin) * shin)
+                # The outer side, square to the limb (the hips' axis itself squashed a leg opened to the side).
+                ta, sa = np.cross(thigh, tf), np.cross(shin, sf)
+                ta = ta if np.dot(ta, p.r * s) >= 0 else -ta
+                sa = sa if np.dot(sa, p.r * s) >= 0 else -sa
+                if abs(np.dot(thigh, p.r)) < 0.3:
+                    ta = p.r * s
+                if abs(np.dot(shin, p.r)) < 0.3:
+                    sa = p.r * s
+                self.limbs[("thigh", s)] = (hip, kn, tf, ta, [(-0.04, 0.072), (0.08, 0.084), (0.2, 0.086), (0.45, 0.076), (0.75, 0.063), (0.92, 0.052), (1, 0.05)])
+                self.limbs[("shin", s)] = (kn, an, sf, sa, [(0, 0.049), (0.12, 0.052), (0.3, 0.057), (0.5, 0.049), (0.75, 0.036), (0.92, 0.031), (1, 0.031)])
 
     def trunk_smooth(self, u, phi, s=1, lift=1.0):
         w, d = smooth_interp(TRUNK, u)
@@ -243,17 +265,43 @@ def skin(cam, body):
             d, z = ellipsoid(cam, g + dvec * 0.01 + ff * 0.02 - fa * 0.012, [dvec * 0.03, ff * 0.012, fa * 0.012])
             out.append((d, z - 0.004, None))
         if s in b.toe:
-            an, to = b.ankle[s], b.toe[s]
-            dvec = unit(to - an)
-            dvec_flat = unit(np.array([dvec[0], 0.0, dvec[2]])) if np.linalg.norm([dvec[0], dvec[2]]) > 1e-3 else dvec
-            side = b.pelvis.r
-            heel = an - dvec_flat * 0.035 - np.array([0, 0.035, 0])
-            d, z = ellipsoid(cam, heel, [dvec_flat * 0.04, np.array([0, 0.03, 0]), side * 0.032])
-            out.append((d, z, None))
-            mid = lerp(an, to, 0.55) - np.array([0, 0.012, 0])
-            d, z = ellipsoid(cam, mid, [dvec * 0.11, np.array([0, 0.026, 0]), side * 0.04])
-            out.append((d, z, None))
+            for center, axes in foot_axes(b, s):
+                d, z = ellipsoid(cam, center, axes)
+                out.append((d, z, None))
     return out
+
+
+def foot_axes(b, s):
+    """The heel and the foot as ellipsoids: [(center, [three axes])]."""
+    an, to = b.ankle[s], b.toe[s]
+    dvec = unit(to - an)
+    dvec_flat = unit(np.array([dvec[0], 0.0, dvec[2]])) if np.linalg.norm([dvec[0], dvec[2]]) > 1e-3 else dvec
+    up = np.array([0.0, 1.0, 0.0])
+    side = b.pelvis.r
+    # A foot on the ground is built level, its sole down. A foot that points up or down (the back foot of a stride, a
+    # handstand, a plank on the toes) takes its own top instead, toward the shin: built on the vertical, it was a flat sheet.
+    steep = min(1.0, max(0.0, (abs(float(dvec[1])) - 0.45) / 0.35))
+    steep = steep * steep * (3 - 2 * steep)
+    if steep > 0:
+        top = (b.knee[s] - an) if s in b.knee else up
+        top = top - np.dot(top, dvec) * dvec
+        if np.linalg.norm(top) < 0.15:
+            top = np.cross(side, dvec)
+        top = unit(top)
+        if np.dot(top, up) < 0.2:
+            steep = 1.0          # upside down (legs in the air): no blend with the vertical, they would cancel
+        up = unit(up * (1 - steep) + top * steep)
+        level = dvec_flat * (1 - steep) + dvec * steep
+        level = level - up * np.dot(level, up)
+        dvec_flat = unit(level) if np.linalg.norm(level) > 0.2 else dvec
+    # The foot's width, square to its length and its height (the hips' axis squashed a foot turned to the side).
+    if abs(float(np.dot(dvec_flat, np.cross(up, side)))) < 0.8 or abs(float(np.dot(dvec, np.cross(up, side)))) < 0.8:
+        across = np.cross(up, dvec)
+        if np.linalg.norm(across) > 0.2:
+            side = unit(across) if np.dot(across, side) >= 0 else -unit(across)
+    heel = an - dvec_flat * 0.035 - up * 0.035
+    mid = lerp(an, to, 0.55) - up * 0.012
+    return [(heel, [dvec_flat * 0.04, up * 0.03, side * 0.032]), (mid, [dvec * 0.11, up * 0.026, side * 0.04])]
 
 
 # --- Muscles: outlines from origin to insertion ------------------------------------------------------------

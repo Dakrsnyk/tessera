@@ -134,10 +134,23 @@ enum Sculpt {
                 let bend = fore - arm * dot(fore, arm)
                 // A straight arm: its front is the trunk's front made square to it (the biceps faces forward).
                 let straight = c.f - arm * dot(c.f, arm)
-                let front = length(bend) > 0.08 ? unit(bend) : (length(straight) > 0.2 ? unit(straight) : c.f)
+                let front: Vec3
+                if length(bend) > 0.08 {
+                    front = unit(bend)
+                } else if length(straight) > 0.2 {
+                    front = unit(straight)
+                } else {
+                    // A straight arm pointing forward or back: the biceps faces up. (The trunk's front, along the arm,
+                    // made the arm a flat sheet.)
+                    front = unit(c.u - arm * dot(c.u, arm))
+                }
                 var away = unit(cross(arm, front))
                 if dot(away, c.r * s) < 0 { away = away * -1 }
-                let ffront = abs(dot(front, fore)) < 0.95 ? unit(front - fore * dot(front, fore)) : front
+                // The forearm's front is the arm's front turned by the bend of the elbow: never along the forearm (at a
+                // right angle the arm's front IS the forearm's direction, and the forearm and the hand were flat sheets).
+                var turned = front * dot(fore, arm) - arm * dot(fore, front)
+                turned = turned - fore * dot(turned, fore)
+                let ffront = length(turned) > 0.2 ? unit(turned) : unit(cross(away, fore))
                 var faway = unit(cross(fore, ffront))
                 if dot(faway, away) < 0 { faway = faway * -1 }
                 limbs["arm\(side)"] = Limb(a: sh, b: el, front: front, away: away,
@@ -150,11 +163,19 @@ enum Sculpt {
                 guard let hp = hip[side], let kn = knee[side], let an = ankle[side] else { continue }
                 let thigh = unit(kn - hp)
                 let shin = unit(an - kn)
-                let tf = unit(cross(pelvis.r, thigh))
-                let sf = unit(cross(pelvis.r, shin))
-                limbs["thigh\(side)"] = Limb(a: hp, b: kn, front: tf, away: pelvis.r * s,
+                // A leg along the hips' axis (side split): its front is the pelvis's front made square to it.
+                let tCross = cross(pelvis.r, thigh), sCross = cross(pelvis.r, shin)
+                let tf = length(tCross) > 0.2 ? unit(tCross) : unit(pelvis.f - thigh * dot(pelvis.f, thigh))
+                let sf = length(sCross) > 0.2 ? unit(sCross) : unit(pelvis.f - shin * dot(pelvis.f, shin))
+                // The outer side, square to the limb (the hips' axis itself squashed a leg opened to the side).
+                var ta = cross(thigh, tf), sa = cross(shin, sf)
+                if dot(ta, pelvis.r * s) < 0 { ta = ta * -1 }
+                if dot(sa, pelvis.r * s) < 0 { sa = sa * -1 }
+                if abs(dot(thigh, pelvis.r)) < 0.3 { ta = pelvis.r * s }
+                if abs(dot(shin, pelvis.r)) < 0.3 { sa = pelvis.r * s }
+                limbs["thigh\(side)"] = Limb(a: hp, b: kn, front: tf, away: ta,
                                              profile: [(-0.04, 0.072), (0.08, 0.084), (0.2, 0.086), (0.45, 0.076), (0.75, 0.063), (0.92, 0.052), (1, 0.05)])
-                limbs["shin\(side)"] = Limb(a: kn, b: an, front: sf, away: pelvis.r * s,
+                limbs["shin\(side)"] = Limb(a: kn, b: an, front: sf, away: sa,
                                             profile: [(0, 0.049), (0.12, 0.052), (0.3, 0.057), (0.5, 0.049), (0.75, 0.036), (0.92, 0.031), (1, 0.031)])
             }
         }
@@ -484,9 +505,31 @@ enum Sculpt {
                 ball(an, 0.033, on: [Span(part: shin, lo: 1, hi: 1)], far: shade)
                 let dir = unit(to - an)
                 let flat = Vec3(dir.x, 0, dir.z)
-                let level = length(flat) > 1e-3 ? unit(flat) : dir
-                let up = Vec3(0, 1, 0)
-                let lateral = body.pelvis.r
+                var level = length(flat) > 1e-3 ? unit(flat) : dir
+                var up = Vec3(0, 1, 0)
+                var lateral = body.pelvis.r
+                // A foot on the ground is built level, its sole down. A foot that points up or down (the back foot of a
+                // stride, a handstand, a plank on the toes) takes its own top instead, toward the shin: built on the
+                // vertical, it was a flat sheet.
+                var steep = min(1.0, max(0.0, (abs(dir.y) - 0.45) / 0.35))
+                steep = steep * steep * (3 - 2 * steep)
+                if steep > 0 {
+                    var top = kn - an
+                    top = top - dir * dot(top, dir)
+                    if length(top) < 0.15 { top = cross(lateral, dir) }
+                    top = unit(top)
+                    // Upside down (legs in the air): no blend with the vertical, they would cancel.
+                    if dot(top, up) < 0.2 { steep = 1 }
+                    up = unit(up * (1 - steep) + top * steep)
+                    var along = level * (1 - steep) + dir * steep
+                    along = along - up * dot(along, up)
+                    level = length(along) > 0.2 ? unit(along) : dir
+                }
+                // The foot's width, square to its length and its height (the hips' axis squashed a foot turned to the side).
+                if abs(dot(level, cross(up, lateral))) < 0.8 || abs(dot(dir, cross(up, lateral))) < 0.8 {
+                    let across = cross(up, dir)
+                    if length(across) > 0.2 { lateral = dot(across, lateral) >= 0 ? unit(across) : unit(across) * -1 }
+                }
                 let foot = Part.foot + (side == 1 ? 0 : 1)
                 ellipsoid(an - level * 0.035 - up * 0.035, level * 0.04, up * 0.03, lateral * 0.032, part: foot, far: shade)
                 ellipsoid(mix(an, to, 0.55) - up * 0.012, dir * 0.11, up * 0.026, lateral * 0.04, part: foot, far: shade)
