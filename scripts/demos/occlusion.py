@@ -1,6 +1,6 @@
 """Draw-order errors between the sculpted mannequin and the equipment, in every demonstration (2026-11-24).
 
-    python3 scripts/demos/occlusion.py [ids…] [--min 15] [--mode app|old] [--cell 0.1] [--png]
+    python3 scripts/demos/occlusion.py [ids…] [--min 15] [--mode app|old] [--cell 0.1] [--lift 0.6] [--png]
 
 The app has no depth buffer: it paints the pieces of the body and of the equipment from the farthest to the nearest
 (ExerciseDemo.swift, SculptMannequin.swift). A big piece sorted by its middle can land on the wrong side of what it
@@ -9,7 +9,8 @@ nothing collides (collisions.py measures the real volumes).
 
 This tool paints every view of every demonstration twice at a small size: as the app does (`--mode app`: the body in
 slices, pads and bars cut in cells of `--cell` metres; `--mode old`: whole pieces, as before 2026-11-24) and with
-everything cut very fine, which is the truth. It prints, per demonstration, the worst area (cm² of the scene) where
+everything cut very fine, which is the truth. `--lift`: the share of its radius by which a volume is sorted nearer
+than its axis (`Sculpt.lift` in the app). It prints, per demonstration, the worst area (cm² of the scene) where
 the body and the equipment are painted in the wrong order. `--png` writes out/occlusion-<id>.png (app | truth | errors).
 """
 import glob
