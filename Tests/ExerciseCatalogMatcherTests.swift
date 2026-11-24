@@ -96,7 +96,9 @@ final class ExerciseCatalogMatcherTests: XCTestCase {
     /// their names and aliases (a saved set keeps counting for the exercise it always counted for).
     func testAnotherExerciseIsNeverTakenForThisOne() {
         XCTAssertNotEqual(ExerciseLibrary.match(name: "Curl inversé poulie")?.id, "cable-curl", "Reverse is another curl")
-        XCTAssertNotEqual(ExerciseLibrary.match(name: "Curl poulie basse allongé")?.id, "cable-curl", "Lying is another curl")
+        // « Lying » makes another exercise by the words alone (the triage of 2026-11-24 then merged the lying cable curl into the
+        // cable curl on purpose: its name is now an alias of it).
+        XCTAssertEqual(ExerciseMatcher.score(typed: ["curl", "cable", "lying"], name: ["curl", "cable"]), 0)
         XCTAssertEqual(ExerciseLibrary.match(name: "élévations latérales haltères")?.id, "lateral-raise", "Its own equipment, typed")
         XCTAssertEqual(ExerciseLibrary.match(name: "Développé incliné")?.id, "incline-bench")
         XCTAssertEqual(ExerciseLibrary.match(name: "cable crossover")?.id, "cable-fly", "A built-in alias stays with its exercise")
