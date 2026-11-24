@@ -2,7 +2,7 @@ import SwiftUI
 
 /// The small looping demonstration of the Fitness lists, 64 × 56 on its dark tile: an exercise's own figure, or the
 /// anatomy figure of a muscle group (« anatomy-<group> », the group in red, framed on it). Same drawing as the
-/// exercise sheet (`DemoRenderer`), 20 frames a second; still when Reduce Motion is on.
+/// exercise sheet (`DemoRenderer`: the sculpted mannequin), 15 frames a second (several loop at once); still when Reduce Motion is on.
 struct DemoThumbnail: View {
     let demoID: String
     var colorHex = MiniApp.fitness.colorHex
@@ -19,7 +19,7 @@ struct DemoThumbnail: View {
         let muscles = DemoMuscles.forDemo(demoID)
         Group {
             if let demo = ExerciseDemos.demo(for: demoID) {
-                TimelineView(.animation(minimumInterval: 1.0 / 20, paused: reduceMotion)) { timeline in
+                TimelineView(.animation(minimumInterval: 1.0 / 15, paused: reduceMotion)) { timeline in
                     let phase = demo.phase(at: reduceMotion ? 0 : timeline.date.timeIntervalSince(startedAt))
                     Canvas { context, size in
                         DemoRenderer.draw(demo, p: phase.p, view: 0, in: &context, size: size, palette: palette,
