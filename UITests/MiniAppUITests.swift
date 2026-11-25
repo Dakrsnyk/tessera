@@ -172,7 +172,7 @@ final class MiniAppUITests: XCTestCase {
         search.typeText("développé")
         XCTAssertTrue(element(containing: "Développé couché (barre)").waitForExistence(timeout: 5), "La recherche doit proposer les développés")
         // Since the triage of the catalogue (2026-11-23), « développé » finds about twenty exercises: the military press is
-        // further down the list, not drawn until scrolled. Found by a search of its own.
+        // further down the list, not drawn until scrolled: only the first one is looked for.
         XCTAssertTrue(app.staticTexts.count > 2, "La recherche doit proposer plusieurs développés")
         snapshot("fitness-search")
 
