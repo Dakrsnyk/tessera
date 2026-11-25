@@ -19669,7 +19669,7 @@
  "Mes données": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Home/DailyLayoutEditor.swift:159: case .invite: (tr(\"Mes données\"), \"plus\", \"8E8E93\")",
+   "App/Screens/Home/DailyLayoutEditor.swift:158: case .invite: (tr(\"Mes données\"), \"plus\", \"8E8E93\")",
    "App/Screens/Spaces/SpaceBuilderView.swift:129: Label(tr(\"Mes données\"), systemImage: \"square.and.pencil\")"
   ]
  },
@@ -31936,12 +31936,6 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:637: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))"
-  ]
- },
- "Top 3": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Home/DailyLayoutEditor.swift:158: case .priorities: (tr(\"Top 3\"), \"star.fill\", \"F5A524\")"
   ]
  },
  "Top 3 du jour": {

@@ -155,7 +155,6 @@ struct DailyLayoutEditor: View {
         case .steps: (tr("Pas"), "figure.walk", "12A4B5")
         case .budget: (tr("Budget"), "creditcard.fill", "2B9A66")
         case .reminders: (tr("À ne pas oublier"), "checklist", "6B7280")
-        case .priorities: (tr("Top 3"), "star.fill", "F5A524")
         case .invite: (tr("Mes données"), "plus", "8E8E93")
         case let .empty(category): (category.title, category.symbol, category.colorHex)
         case let .miniApp(raw, _):
