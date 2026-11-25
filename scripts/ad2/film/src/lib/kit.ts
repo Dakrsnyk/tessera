@@ -3,23 +3,22 @@
 import { getStaticFiles, staticFile } from "remotion";
 import * as THREE from "three";
 import { H, W } from "./brand";
+import { appleIcon, dockX, IOS, IOS_DOCK, iosCaptureName, toIOS } from "./iosHome";
 
 export type Rect = [number, number, number, number];
 
-/** The hero Home Screen: macros M, nextSet M, budgetLeft S + priorities S on a real Store setup. */
+/**
+ * The hero Home Screen: macros M, nextSet M, budgetLeft S + priorities S. Since 2026-11-11 the hero captures are recomposed on
+ * the measured iOS grid with real Apple icons (lib/iosHome.ts): the rects are those of the recomposed Home.
+ */
 export const HERO_WIDGETS: { kind: string; index: number; rect: Rect }[] = [
-  { kind: "macros", index: 0, rect: [57, 204, 1092, 510] },
-  { kind: "nextSet", index: 1, rect: [57, 813, 1092, 510] },
-  { kind: "budgetLeft", index: 2, rect: [57, 1422, 510, 510] },
-  { kind: "priorities", index: 3, rect: [638, 1421, 510, 510] },
+  { kind: "macros", index: 0, rect: toIOS([57, 204, 1092, 510]) },
+  { kind: "nextSet", index: 1, rect: toIOS([57, 813, 1092, 510]) },
+  { kind: "budgetLeft", index: 2, rect: toIOS([57, 1422, 510, 510]) },
+  { kind: "priorities", index: 3, rect: toIOS([638, 1421, 510, 510]) },
 ];
-/** Dock icons (indexes 4–7 of icons-<setup>.json), the same slots in every setup. */
-export const DOCK: Rect[] = [
-  [64, 2340, 222, 222],
-  [349, 2340, 222, 222],
-  [635, 2340, 222, 222],
-  [920, 2340, 222, 222],
-];
+/** The four Dock icons (real Apple apps, IOS_DOCK) on the measured iOS Dock. */
+export const DOCK: Rect[] = [0, 1, 2, 3].map((i) => [dockX(i, 4), IOS.dockIconTop, IOS.icon, IOS.icon] as Rect);
 
 /** The universes of S2, in the film's order: Aurora → Space → Paper → Neon → Minimal → Sunset. */
 export const UNIVERSES = [
@@ -99,8 +98,20 @@ const has = (path: string) => {
 };
 const otherLang = (l: KitLang): KitLang => (l === "fr" ? "en" : "fr");
 
+/** public/ioshome/<lang>/<name>.png: a Home capture of the app recomposed on the iOS grid with real Apple icons (null if none). */
+export const iosHomeSrc = (name: string, lang: KitLang = kitLang): string | null => {
+  const n = iosCaptureName(name);
+  if (!n) return null;
+  for (const l of [lang, otherLang(lang)]) if (has(`ioshome/${l}/${n}.png`)) return `ioshome/${l}/${n}.png`;
+  console.warn(`[ioshome-missing] ${n}: run scripts/ad2/ios_homes.sh`);
+  return null;
+};
+
 /** Which kit serves `name` (for check_assets and the Studio): "new" | "other-lang" | "alt" | "old" | "missing". */
 export const kitResolve = (name: string, lang: KitLang = kitLang): { path: string | null; source: "new" | "other-lang" | "alt" | "old" | "missing" } => {
+  // the app's Home captures (kit icons inside) are served recomposed with real Apple icons (lib/iosHome.ts, public/ioshome)
+  const ios = iosHomeSrc(name, lang);
+  if (ios) return { path: ios, source: "new" };
   const names = [name, ...(LEGACY[name] ? [LEGACY[name]] : []), ...(ALTERNATIVES[name] ?? [])];
   // the name itself first, in the new kit then the old, then its alternatives: a real capture beats a stand-in
   for (const [i, n] of names.entries()) {
@@ -160,7 +171,8 @@ export const seqName = (base: string, i: number, digits = 4) => `${base}-${Strin
 export const k = (file: string) => `kit/${file}`;
 export const heroHome = (u: string) => k(`home-hero-${u}.png`);
 export const heroWidget = (u: string, index: number) => k(`setup-hero-${u}-${index}.png`);
-export const dockIcon = (u: string, slot: number) => k(`icons-${u}-${slot + 4}.png`);
+/** Dock icon of a slot: a real Apple app (the same Dock in every universe). */
+export const dockIcon = (_u: string, slot: number) => appleIcon(IOS_DOCK[slot]);
 export const wall = (u: string) => k(UNIVERSES.find((x) => x.id === u)!.wall);
 
 /** Every file of one universe (home, its four widgets, its dock icons, its wallpaper). */

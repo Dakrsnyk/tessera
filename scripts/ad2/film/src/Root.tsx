@@ -7,7 +7,12 @@ import { SIZE } from "./lib/formats";
 import { PhoneTest } from "./scenes/PhoneTest";
 import { FilmMainV3Format, V3_LENGTH } from "./v3/FilmMainV3";
 import { FilmMainV4Format, V4_LENGTH } from "./v4/FilmMainV4";
+import { FilmMainV5Format, V5_LENGTH } from "./v5/FilmMainV5";
+import { FilmMainV5ShortFormat, V5S_LENGTH } from "./v5/short/FilmMainV5Short";
+import { FilmMainV5Part2Format, V5P2_LENGTH } from "./v5/part2/FilmMainV5Part2";
+import { LIB_COMPS } from "./v5/lib/registry";
 import { Film26, FILM26, Film26Id } from "./ad26/films";
+import { serieFolder } from "./v4/series/registry";
 
 
 const base: FormatProps = { format: "9x16", lang: "en" };
@@ -42,6 +47,17 @@ export const RemotionRoot: React.FC = () => {
       </Folder>
       <Folder name="V4">
         <Composition id="FilmMainV4" component={FilmMainV4Format} defaultProps={base} calculateMetadata={calc} durationInFrames={V4_LENGTH} fps={FPS} width={W} height={H} />
+      </Folder>
+      {serieFolder()}
+      <Folder name="V5">
+        <Composition id="FilmMainV5Part2" component={FilmMainV5Part2Format} defaultProps={base} calculateMetadata={calc} durationInFrames={V5P2_LENGTH} fps={FPS} width={W} height={H} />
+        <Composition id="FilmMainV5Short" component={FilmMainV5ShortFormat} defaultProps={base} calculateMetadata={calc} durationInFrames={V5S_LENGTH} fps={FPS} width={W} height={H} />
+        <Composition id="FilmMainV5" component={FilmMainV5Format} defaultProps={base} calculateMetadata={calc} durationInFrames={V5_LENGTH} fps={FPS} width={W} height={H} />
+      </Folder>
+      <Folder name="Lib">
+        {LIB_COMPS.map((c) => (
+          <Composition key={c.id} id={c.id} component={c.Format} defaultProps={base} calculateMetadata={calc} durationInFrames={c.length} fps={FPS} width={W} height={H} />
+        ))}
       </Folder>
       <Folder name="Principal">
         {/* Shots 1–3: f0–359. */}

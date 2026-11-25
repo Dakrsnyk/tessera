@@ -629,30 +629,62 @@
       "id": "EVERY",
       "text": "Everything that matters. One place.",
       "start": 9.95,
-      "max": 2.3
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "T1",
+      "text": "You'll be able to scan your meals,",
+      "start": 12.35,
+      "max": 1.6
+     }
+    ],
+    [
+     {
+      "id": "T2",
+      "text": "track your training,",
+      "start": 13.97,
+      "max": 1.1
+     }
+    ],
+    [
+     {
+      "id": "T3",
+      "text": "manage your finances,",
+      "start": 14.87,
+      "max": 1.2
+     }
+    ],
+    [
+     {
+      "id": "T4",
+      "text": "and more.",
+      "start": 16.07,
+      "max": 0.9
      }
     ],
     [
      {
       "id": "N1",
       "text": "Scan what you eat.",
-      "start": 12.33,
-      "max": 1.7
+      "start": 16.83,
+      "max": 2.3
      }
     ],
     [
      {
       "id": "N2",
       "text": "See what it adds up to.",
-      "start": 14.83,
-      "max": 2.2
+      "start": 21.0,
+      "max": 2.3
      }
     ],
     [
      {
       "id": "F1",
       "text": "Every exercise, move by move.",
-      "start": 17.33,
+      "start": 24.83,
       "max": 3.5
      }
     ],
@@ -660,7 +692,7 @@
      {
       "id": "F2",
       "text": "Every set, counted.",
-      "start": 21.33,
+      "start": 29.4,
       "max": 2.4
      }
     ],
@@ -668,7 +700,7 @@
      {
       "id": "HB",
       "text": "Build the habits that stick.",
-      "start": 24.33,
+      "start": 31.83,
       "max": 3.0
      }
     ],
@@ -676,7 +708,7 @@
      {
       "id": "FI",
       "text": "Know where your money stands.",
-      "start": 28.33,
+      "start": 35.83,
       "max": 3.0
      }
     ],
@@ -684,7 +716,7 @@
      {
       "id": "PL",
       "text": "Your week, at a glance.",
-      "start": 32.83,
+      "start": 40.33,
       "max": 3.0
      }
     ],
@@ -692,23 +724,23 @@
      {
       "id": "P1",
       "text": "Pick the widgets that matter.",
-      "start": 37.83,
-      "max": 2.4
+      "start": 45.33,
+      "max": 1.7
      }
     ],
     [
      {
       "id": "P2",
       "text": "Make them yours.",
-      "start": 40.33,
-      "max": 2.6
+      "start": 47.05,
+      "max": 2.0
      }
     ],
     [
      {
       "id": "HO",
       "text": "Your iPhone. Your way.",
-      "start": 51.83,
+      "start": 55.25,
       "max": 3.0
      }
     ],
@@ -716,8 +748,1902 @@
      {
       "id": "CL",
       "text": "Ardane. Your whole life. One place.",
-      "start": 63.5,
+      "start": 63.0,
       "max": 3.7
+     }
+    ]
+   ]
+  },
+  "v5p1": {
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Your life isn't one thing.",
+      "start": 0.6,
+      "max": 2.95
+     }
+    ],
+    [
+     {
+      "id": "H2",
+      "text": "Why manage it in ten different apps?",
+      "start": 3.6,
+      "max": 5.55
+     }
+    ],
+    [
+     {
+      "id": "MEET",
+      "text": "Meet Ardane.",
+      "start": 9.2,
+      "max": 0.7
+     }
+    ],
+    [
+     {
+      "id": "EVERY",
+      "text": "Everything that matters. One place.",
+      "start": 9.95,
+      "max": 2.35
+     }
+    ],
+    [
+     {
+      "id": "T1",
+      "text": "You'll be able to scan your meals,",
+      "start": 12.35,
+      "max": 1.57
+     }
+    ],
+    [
+     {
+      "id": "T2",
+      "text": "track your training,",
+      "start": 13.97,
+      "max": 0.85
+     }
+    ],
+    [
+     {
+      "id": "T3",
+      "text": "manage your finances,",
+      "start": 14.87,
+      "max": 1.15
+     }
+    ],
+    [
+     {
+      "id": "T4",
+      "text": "and more.",
+      "start": 16.07,
+      "max": 0.88
+     }
+    ],
+    [
+     {
+      "id": "N0",
+      "text": "Nutrition.",
+      "start": 17.0,
+      "max": 0.69
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Your day, at a glance.",
+      "start": 17.74,
+      "max": 2.01
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "Calories and macros.",
+      "start": 19.8,
+      "max": 2.08
+     }
+    ],
+    [
+     {
+      "id": "N3",
+      "text": "Snap a photo for an estimate.",
+      "start": 21.93,
+      "max": 4.95
+     }
+    ],
+    [
+     {
+      "id": "N4",
+      "text": "Or scan any barcode.",
+      "start": 26.93,
+      "max": 2.69
+     }
+    ],
+    [
+     {
+      "id": "N5",
+      "text": "See what it adds up to.",
+      "start": 29.67,
+      "max": 3.21
+     }
+    ],
+    [
+     {
+      "id": "N6",
+      "text": "Added to your day.",
+      "start": 32.93,
+      "max": 1.02
+     }
+    ],
+    [
+     {
+      "id": "N7",
+      "text": "Know how far to your goals.",
+      "start": 34.0,
+      "max": 1.45
+     }
+    ],
+    [
+     {
+      "id": "N8",
+      "text": "Set a weight goal.",
+      "start": 35.5,
+      "max": 2.95
+     }
+    ],
+    [
+     {
+      "id": "F0",
+      "text": "Fitness.",
+      "start": 38.5,
+      "max": 0.61
+     }
+    ],
+    [
+     {
+      "id": "F1",
+      "text": "Your workouts, at a glance.",
+      "start": 39.16,
+      "max": 2.72
+     }
+    ],
+    [
+     {
+      "id": "F2",
+      "text": "Build your own sessions from the library.",
+      "start": 41.93,
+      "max": 6.02
+     }
+    ],
+    [
+     {
+      "id": "F3",
+      "text": "Search, or browse by muscle.",
+      "start": 48.0,
+      "max": 2.58
+     }
+    ],
+    [
+     {
+      "id": "F4",
+      "text": "Every exercise comes with a demo.",
+      "start": 50.63,
+      "max": 2.99
+     }
+    ],
+    [
+     {
+      "id": "F5",
+      "text": "See your progress.",
+      "start": 53.67,
+      "max": 1.78
+     }
+    ],
+    [
+     {
+      "id": "B0",
+      "text": "Habits.",
+      "start": 55.5,
+      "max": 0.6
+     }
+    ],
+    [
+     {
+      "id": "B1",
+      "text": "Check in every day.",
+      "start": 56.15,
+      "max": 2.57
+     }
+    ],
+    [
+     {
+      "id": "B2",
+      "text": "Watch your streak grow.",
+      "start": 58.77,
+      "max": 4.68
+     }
+    ],
+    [
+     {
+      "id": "M0",
+      "text": "Finances.",
+      "start": 63.5,
+      "max": 0.73
+     }
+    ],
+    [
+     {
+      "id": "M1",
+      "text": "Your budget, at a glance.",
+      "start": 64.28,
+      "max": 1.2
+     }
+    ],
+    [
+     {
+      "id": "M2",
+      "text": "Log expenses and income.",
+      "start": 65.7,
+      "max": 0.73
+     }
+    ],
+    [
+     {
+      "id": "M3",
+      "text": "See every category.",
+      "start": 69.1,
+      "max": 2.98
+     }
+    ],
+    [
+     {
+      "id": "M4",
+      "text": "Charts that show where it all goes.",
+      "start": 72.13,
+      "max": 3.32
+     }
+    ],
+    [
+     {
+      "id": "P0",
+      "text": "Planning.",
+      "start": 75.5,
+      "max": 0.58
+     }
+    ],
+    [
+     {
+      "id": "P1",
+      "text": "Your week, at a glance.",
+      "start": 76.13,
+      "max": 2.45
+     }
+    ],
+    [
+     {
+      "id": "P2",
+      "text": "Your month, your events.",
+      "start": 78.63,
+      "max": 2.92
+     }
+    ],
+    [
+     {
+      "id": "P3",
+      "text": "And your tasks.",
+      "start": 81.6,
+      "max": 2.95
+     }
+    ],
+    [
+     {
+      "id": "END",
+      "text": "And much more.",
+      "start": 84.6,
+      "max": 4.55
+     }
+    ]
+   ]
+  },
+  "v5short": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Your life isn't one thing.",
+      "start": 0.56,
+      "max": 2.35
+     }
+    ],
+    [
+     {
+      "id": "H2",
+      "text": "Why manage it in ten different apps?",
+      "start": 2.9478,
+      "max": 4.72
+     }
+    ],
+    [
+     {
+      "id": "MEET",
+      "text": "Meet Ardane.",
+      "start": 7.7,
+      "max": 0.94
+     }
+    ],
+    [
+     {
+      "id": "EV1",
+      "text": "Everything that matters.",
+      "start": 8.6664,
+      "max": 1.47
+     }
+    ],
+    [
+     {
+      "id": "EV2",
+      "text": "One place.",
+      "start": 10.1644,
+      "max": 0.9
+     }
+    ],
+    [
+     {
+      "id": "NA",
+      "text": "Nutrition.",
+      "start": 11.097,
+      "max": 0.87
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Snap your meal.",
+      "start": 11.9945,
+      "max": 3.1
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "Calories and macros.",
+      "start": 15.1345,
+      "max": 2.2
+     }
+    ],
+    [
+     {
+      "id": "N3",
+      "text": "Or scan the barcode.",
+      "start": 17.3677,
+      "max": 1.9
+     }
+    ],
+    [
+     {
+      "id": "N4",
+      "text": "Track it.",
+      "start": 19.2966,
+      "max": 1.67
+     }
+    ],
+    [
+     {
+      "id": "FA",
+      "text": "Fitness.",
+      "start": 20.9961,
+      "max": 0.97
+     }
+    ],
+    [
+     {
+      "id": "F1",
+      "text": "Build your session.",
+      "start": 21.9987,
+      "max": 3.87
+     }
+    ],
+    [
+     {
+      "id": "F2",
+      "text": "Every exercise, demonstrated.",
+      "start": 25.9034,
+      "max": 4.07
+     }
+    ],
+    [
+     {
+      "id": "MA",
+      "text": "Finances.",
+      "start": 29.99,
+      "max": 0.97
+     }
+    ],
+    [
+     {
+      "id": "M1",
+      "text": "Budget. Spending. Trends.",
+      "start": 30.9987,
+      "max": 2.7
+     }
+    ],
+    [
+     {
+      "id": "PA",
+      "text": "Planning.",
+      "start": 33.7295,
+      "max": 0.97
+     }
+    ],
+    [
+     {
+      "id": "P1",
+      "text": "Your week, your month.",
+      "start": 34.7231,
+      "max": 2.27
+     }
+    ],
+    [
+     {
+      "id": "END",
+      "text": "And much more.",
+      "start": 37.021,
+      "max": 2.0
+     }
+    ]
+   ]
+  },
+  "v5part2": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "A1",
+      "text": "Now, arrange your widgets",
+      "start": 0.3585,
+      "max": 1.94
+     }
+    ],
+    [
+     {
+      "id": "A2",
+      "text": "and shape an interface that feels like you.",
+      "start": 2.3322,
+      "max": 7.54
+     }
+    ],
+    [
+     {
+      "id": "E1",
+      "text": "Endless ways to make it yours.",
+      "start": 9.901,
+      "max": 7.64
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 17.5644,
+      "max": 2.37
+     }
+    ]
+   ]
+  },
+  "lib-meet": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "M1",
+      "text": "Meet Ardane.",
+      "start": 1.0012,
+      "mark": 62,
+      "max": 1.2
+     }
+    ],
+    [
+     {
+      "id": "E1",
+      "text": "Everything that matters.",
+      "start": 2.233,
+      "mark": 136,
+      "max": 1.47
+     }
+    ],
+    [
+     {
+      "id": "E2",
+      "text": "One place.",
+      "start": 3.7312,
+      "mark": 226,
+      "max": 3.3
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 7.0644,
+      "mark": 426,
+      "max": 7.87
+     }
+    ]
+   ]
+  },
+  "lib-toomany": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Your life isn't one thing.",
+      "start": 0.5596,
+      "mark": 36,
+      "max": 2.35
+     }
+    ],
+    [
+     {
+      "id": "H2",
+      "text": "Why manage it in ten different apps?",
+      "start": 2.9475,
+      "mark": 179,
+      "max": 4.72
+     }
+    ],
+    [
+     {
+      "id": "MEET",
+      "text": "Meet Ardane.",
+      "start": 7.701,
+      "mark": 464,
+      "max": 0.94
+     }
+    ],
+    [
+     {
+      "id": "E1",
+      "text": "Everything that matters.",
+      "start": 8.6664,
+      "mark": 522,
+      "max": 1.47
+     }
+    ],
+    [
+     {
+      "id": "E2",
+      "text": "One place.",
+      "start": 10.1643,
+      "mark": 612,
+      "max": 1.7
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 11.8978,
+      "mark": 716,
+      "max": 3.04
+     }
+    ]
+   ]
+  },
+  "lib-scan": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Want to know what's on your plate?",
+      "start": 0.3585,
+      "mark": 24,
+      "max": 3.41,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Snap your meal.",
+      "start": 3.7943,
+      "mark": 230,
+      "max": 1.91,
+      "onset": 3.8333
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Calories and macros.",
+      "start": 5.7295,
+      "mark": 346,
+      "max": 2.57,
+      "onset": 5.7667
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Or scan the barcode.",
+      "start": 8.334,
+      "mark": 502,
+      "max": 2.67,
+      "onset": 8.3667
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "Track it.",
+      "start": 11.03,
+      "mark": 664,
+      "max": 6.0,
+      "onset": 11.0667
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 17.0644,
+      "mark": 1026,
+      "max": 81.91,
+      "onset": 17.1
+     }
+    ]
+   ]
+  },
+  "lib-movement": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Do you know what a good rep looks like?",
+      "start": 0.3662,
+      "mark": 24,
+      "max": 3.23,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "See every movement.",
+      "start": 3.6295,
+      "mark": 220,
+      "max": 3.31,
+      "onset": 3.6667
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Every exercise, demonstrated.",
+      "start": 6.9697,
+      "mark": 420,
+      "max": 4.29,
+      "onset": 7.0
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Then add it to your workout.",
+      "start": 11.2936,
+      "mark": 680,
+      "max": 2.53,
+      "onset": 11.3333
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "Follow your sets from the Lock Screen.",
+      "start": 13.853,
+      "mark": 836,
+      "max": 6.85,
+      "onset": 13.9333
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 20.7311,
+      "mark": 1246,
+      "max": 78.24,
+      "onset": 20.7667
+     }
+    ]
+   ]
+  },
+  "lib-widgets": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Satisfying? Watch this.",
+      "start": 0.3568,
+      "mark": 24,
+      "max": 2.68,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Pick your widgets.",
+      "start": 3.0672,
+      "mark": 186,
+      "max": 1.46,
+      "onset": 3.1
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Make them yours.",
+      "start": 4.5575,
+      "mark": 276,
+      "max": 4.71,
+      "onset": 4.6
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Endless ways to make it yours.",
+      "start": 9.3011,
+      "mark": 560,
+      "max": 5.73,
+      "onset": 9.3333
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 15.0644,
+      "mark": 906,
+      "max": 83.91,
+      "onset": 15.1
+     }
+    ]
+   ]
+  },
+  "lib-build": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "What if your iPhone looked like your life?",
+      "start": 0.3633,
+      "mark": 24,
+      "max": 2.9,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Build your own iPhone.",
+      "start": 3.2971,
+      "mark": 200,
+      "max": 2.3,
+      "onset": 3.3333
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Add your widgets.",
+      "start": 5.6303,
+      "mark": 340,
+      "max": 3.07,
+      "onset": 5.6667
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Add your apps.",
+      "start": 8.7332,
+      "mark": 526,
+      "max": 2.87,
+      "onset": 8.7667
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "Your iPhone. Your way.",
+      "start": 11.629,
+      "mark": 700,
+      "max": 3.3,
+      "onset": 11.6667
+     }
+    ],
+    [
+     {
+      "id": "L5",
+      "text": "Move them. Restyle them. Make it yours.",
+      "start": 14.9618,
+      "mark": 900,
+      "max": 10.91,
+      "onset": 15.0
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 25.8977,
+      "mark": 1556,
+      "max": 73.07,
+      "onset": 25.9333
+     }
+    ]
+   ]
+  },
+  "lib-style": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Your phone. Your colors.",
+      "start": 0.354,
+      "mark": 24,
+      "max": 2.38,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Your widgets. Your style.",
+      "start": 2.7639,
+      "mark": 168,
+      "max": 8.34,
+      "pause": 0.25,
+      "onset": 2.8
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Endless ways to make it yours.",
+      "start": 11.1344,
+      "mark": 670,
+      "max": 3.4,
+      "onset": 11.1667
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 14.5644,
+      "mark": 876,
+      "max": 84.41,
+      "onset": 14.6
+     }
+    ]
+   ]
+  },
+  "lib-apptowidget": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Your data. Right on your Home Screen.",
+      "start": 0.3549,
+      "mark": 24,
+      "max": 2.81,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Nutrition.",
+      "start": 3.197,
+      "mark": 194,
+      "max": 0.9,
+      "onset": 3.2333
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "In the app.",
+      "start": 4.1319,
+      "mark": 220,
+      "max": 2.63,
+      "onset": 4.167
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "On your Home Screen.",
+      "start": 6.7964,
+      "mark": 410,
+      "max": 2.18,
+      "onset": 6.8333
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "Finances.",
+      "start": 9.0039,
+      "mark": 544,
+      "max": 0.95,
+      "onset": 9.0667
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "In the app.",
+      "start": 9.9838,
+      "mark": 570,
+      "max": 2.62,
+      "onset": 10.0189
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "On your Home Screen.",
+      "start": 12.6297,
+      "mark": 760,
+      "max": 2.4,
+      "onset": 12.6667
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 15.0644,
+      "mark": 906,
+      "max": 83.91,
+      "onset": 15.1
+     }
+    ]
+   ]
+  },
+  "lib-onescreen": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "One screen. Five parts of your life.",
+      "start": 0.3659,
+      "mark": 24,
+      "max": 3.23,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Fitness.",
+      "start": 3.6295,
+      "mark": 220,
+      "max": 1.64,
+      "onset": 3.6667
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Nutrition.",
+      "start": 5.297,
+      "mark": 320,
+      "max": 1.61,
+      "onset": 5.3333
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Finances.",
+      "start": 6.9372,
+      "mark": 420,
+      "max": 1.66,
+      "onset": 7.0
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "Planning.",
+      "start": 8.6293,
+      "mark": 520,
+      "max": 1.64,
+      "onset": 8.6667
+     }
+    ],
+    [
+     {
+      "id": "L5",
+      "text": "Habits.",
+      "start": 10.2977,
+      "mark": 620,
+      "max": 1.63,
+      "onset": 10.3333
+     }
+    ],
+    [
+     {
+      "id": "L6",
+      "text": "One screen. Your whole life.",
+      "start": 11.9616,
+      "mark": 720,
+      "max": 3.24,
+      "onset": 12.0
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 15.2311,
+      "mark": 916,
+      "max": 83.74,
+      "onset": 15.2667
+     }
+    ]
+   ]
+  },
+  "lib-everything": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "What if one app held everything?",
+      "start": 0.3653,
+      "mark": 24,
+      "max": 2.5,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Nutrition.",
+      "start": 2.897,
+      "mark": 176,
+      "max": 0.9,
+      "onset": 2.9333
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Scan it.",
+      "start": 3.8277,
+      "mark": 206,
+      "max": 2.17,
+      "onset": 3.867
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Track it.",
+      "start": 6.03,
+      "mark": 364,
+      "max": 1.17,
+      "onset": 6.0667
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "Fitness.",
+      "start": 7.2295,
+      "mark": 436,
+      "max": 0.79,
+      "onset": 7.2667
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Pick an exercise.",
+      "start": 8.0514,
+      "mark": 440,
+      "max": 1.22,
+      "onset": 8.0845
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "Watch every rep.",
+      "start": 9.2997,
+      "mark": 560,
+      "max": 2.71,
+      "onset": 9.3333
+     }
+    ],
+    [
+     {
+      "id": "N3",
+      "text": "Finances.",
+      "start": 12.0372,
+      "mark": 726,
+      "max": 0.95,
+      "onset": 12.1
+     }
+    ],
+    [
+     {
+      "id": "L5",
+      "text": "Your budget.",
+      "start": 13.0144,
+      "mark": 750,
+      "max": 0.86,
+      "onset": 13.0522
+     }
+    ],
+    [
+     {
+      "id": "L6",
+      "text": "Your trends.",
+      "start": 13.9022,
+      "mark": 836,
+      "max": 2.13,
+      "onset": 13.9394
+     }
+    ],
+    [
+     {
+      "id": "N4",
+      "text": "Planning.",
+      "start": 16.0627,
+      "mark": 966,
+      "max": 0.76,
+      "onset": 16.1
+     }
+    ],
+    [
+     {
+      "id": "L7",
+      "text": "Your week.",
+      "start": 16.8477,
+      "mark": 990,
+      "max": 0.85,
+      "onset": 16.8877
+     }
+    ],
+    [
+     {
+      "id": "L8",
+      "text": "Your month.",
+      "start": 17.7274,
+      "mark": 1066,
+      "max": 2.04,
+      "onset": 17.7667
+     }
+    ],
+    [
+     {
+      "id": "E1",
+      "text": "One app. Everything.",
+      "start": 19.7979,
+      "mark": 1190,
+      "max": 79.17,
+      "onset": 19.8333
+     }
+    ]
+   ]
+  },
+  "lib-scanproduct": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Is that snack worth it?",
+      "start": 0.3632,
+      "mark": 24,
+      "max": 2.91,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 3.2987,
+      "mark": 200,
+      "max": 0.76,
+      "onset": 3.3333
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Nutrition.",
+      "start": 4.0874,
+      "mark": 246,
+      "max": 0.91,
+      "onset": 4.1237
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Scan the barcode.",
+      "start": 5.0226,
+      "mark": 260,
+      "max": 1.41,
+      "onset": 5.0574
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "See what's in it.",
+      "start": 6.4642,
+      "mark": 390,
+      "max": 2.03,
+      "onset": 6.5
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Log it in one tap.",
+      "start": 8.5232,
+      "mark": 514,
+      "max": 5.18,
+      "onset": 8.5667
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 13.7311,
+      "mark": 826,
+      "max": 85.24,
+      "onset": 13.7667
+     }
+    ]
+   ]
+  },
+  "lib-knoweat": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Do you really know what you eat?",
+      "start": 0.3647,
+      "mark": 24,
+      "max": 3.07,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 3.4654,
+      "mark": 210,
+      "max": 0.76,
+      "onset": 3.5
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Nutrition.",
+      "start": 4.2541,
+      "mark": 256,
+      "max": 0.9,
+      "onset": 4.2904
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Your day, at a glance.",
+      "start": 5.1832,
+      "mark": 270,
+      "max": 2.17,
+      "onset": 5.2241
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Your daily goals.",
+      "start": 7.3851,
+      "mark": 446,
+      "max": 2.47,
+      "onset": 7.4333
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Your weight goal.",
+      "start": 9.888,
+      "mark": 596,
+      "max": 4.98,
+      "onset": 9.9333
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 14.8978,
+      "mark": 896,
+      "max": 84.07,
+      "onset": 14.9333
+     }
+    ]
+   ]
+  },
+  "lib-nutrisimple": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Meals, goals, macros. Ten taps? Or one place.",
+      "start": 0.3624,
+      "mark": 24,
+      "max": 4.07,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 4.4654,
+      "mark": 270,
+      "max": 0.76,
+      "onset": 4.5
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Nutrition.",
+      "start": 5.2541,
+      "mark": 316,
+      "max": 0.9,
+      "onset": 5.2904
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Your week.",
+      "start": 6.1841,
+      "mark": 330,
+      "max": 1.41,
+      "onset": 6.2241
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Your goals.",
+      "start": 7.6261,
+      "mark": 460,
+      "max": 2.04,
+      "onset": 7.6667
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "All in one place.",
+      "start": 9.6984,
+      "mark": 584,
+      "max": 5.17,
+      "onset": 9.7333
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 14.8978,
+      "mark": 896,
+      "max": 84.07,
+      "onset": 14.9333
+     }
+    ]
+   ]
+  },
+  "lib-nutriday": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Breakfast. Lunch. Dinner. Tracked.",
+      "start": 0.364,
+      "mark": 24,
+      "max": 3.07,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 3.4654,
+      "mark": 210,
+      "max": 0.76,
+      "onset": 3.5
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Nutrition.",
+      "start": 4.2541,
+      "mark": 256,
+      "max": 0.89,
+      "onset": 4.2904
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Your day, meal by meal.",
+      "start": 5.176,
+      "mark": 264,
+      "max": 1.39,
+      "onset": 5.2241
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Snap your meal.",
+      "start": 6.597,
+      "mark": 358,
+      "max": 1.7,
+      "onset": 6.636
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Calories and macros.",
+      "start": 8.3295,
+      "mark": 502,
+      "max": 5.54,
+      "onset": 8.3667
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 13.8978,
+      "mark": 836,
+      "max": 85.07,
+      "onset": 13.9333
+     }
+    ]
+   ]
+  },
+  "lib-buildworkout": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Your workout. Your rules.",
+      "start": 0.3598,
+      "mark": 24,
+      "max": 2.58,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 2.9654,
+      "mark": 180,
+      "max": 0.76,
+      "onset": 3.0
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Fitness.",
+      "start": 3.7533,
+      "mark": 226,
+      "max": 0.79,
+      "onset": 3.7904
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Plan your week.",
+      "start": 4.5748,
+      "mark": 240,
+      "max": 1.96,
+      "onset": 4.6083
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Add exercises.",
+      "start": 6.564,
+      "mark": 396,
+      "max": 2.64,
+      "onset": 6.6
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Pick from the library.",
+      "start": 9.2327,
+      "mark": 556,
+      "max": 5.8,
+      "onset": 9.2667
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 15.0644,
+      "mark": 906,
+      "max": 83.91,
+      "onset": 15.1
+     }
+    ]
+   ]
+  },
+  "lib-trainsmarter": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Ready to train smarter?",
+      "start": 0.3626,
+      "mark": 24,
+      "max": 2.91,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 3.2987,
+      "mark": 200,
+      "max": 0.76,
+      "onset": 3.3333
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Fitness.",
+      "start": 4.0866,
+      "mark": 246,
+      "max": 0.79,
+      "onset": 4.1237
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Count every set.",
+      "start": 4.9107,
+      "mark": 254,
+      "max": 2.08,
+      "onset": 4.9416
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Follow your sets from the Lock Screen.",
+      "start": 7.0196,
+      "mark": 426,
+      "max": 4.07,
+      "onset": 7.1
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "See your progress.",
+      "start": 11.1243,
+      "mark": 670,
+      "max": 4.24,
+      "onset": 11.1667
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 15.3978,
+      "mark": 926,
+      "max": 83.57,
+      "onset": 15.4333
+     }
+    ]
+   ]
+  },
+  "lib-journey": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Day 1. Day 90.",
+      "start": 0.3295,
+      "mark": 24,
+      "max": 3.11,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 3.4654,
+      "mark": 210,
+      "max": 0.76,
+      "onset": 3.5
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Fitness.",
+      "start": 4.2533,
+      "mark": 256,
+      "max": 0.78,
+      "onset": 4.2904
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "See your progress.",
+      "start": 5.066,
+      "mark": 270,
+      "max": 2.03,
+      "onset": 5.1083
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Every session, logged.",
+      "start": 7.1308,
+      "mark": 430,
+      "max": 2.63,
+      "onset": 7.1667
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Your program, your pace.",
+      "start": 9.7913,
+      "mark": 590,
+      "max": 5.41,
+      "onset": 9.8333
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 15.2311,
+      "mark": 916,
+      "max": 83.74,
+      "onset": 15.2667
+     }
+    ]
+   ]
+  },
+  "lib-controlday": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Always behind schedule?",
+      "start": 0.3642,
+      "mark": 24,
+      "max": 2.9,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 3.2987,
+      "mark": 200,
+      "max": 0.76,
+      "onset": 3.3333
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Planning.",
+      "start": 4.0864,
+      "mark": 246,
+      "max": 0.74,
+      "onset": 4.1237
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "Your whole week, at a glance.",
+      "start": 4.8604,
+      "mark": 254,
+      "max": 4.31,
+      "onset": 4.9114
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Every task, in order.",
+      "start": 9.1974,
+      "mark": 554,
+      "max": 4.97,
+      "onset": 9.2333
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Plan the month ahead.",
+      "start": 14.1983,
+      "mark": 854,
+      "max": 14.34,
+      "onset": 14.2333
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 28.5644,
+      "mark": 1716,
+      "max": 70.41,
+      "onset": 28.6
+     }
+    ]
+   ]
+  },
+  "lib-knowmoney": {
+   "speed": 1.0,
+   "chunks": [
+    [
+     {
+      "id": "H1",
+      "text": "Do you really know where your money goes?",
+      "start": 0.3661,
+      "mark": 24,
+      "max": 3.07,
+      "onset": 0.4
+     }
+    ],
+    [
+     {
+      "id": "A1",
+      "text": "Ardane.",
+      "start": 3.4654,
+      "mark": 210,
+      "max": 0.73,
+      "onset": 3.5
+     }
+    ],
+    [
+     {
+      "id": "N1",
+      "text": "Finances.",
+      "start": 4.2276,
+      "mark": 256,
+      "max": 0.95,
+      "onset": 4.2904
+     }
+    ],
+    [
+     {
+      "id": "L1",
+      "text": "What's left this month.",
+      "start": 5.2042,
+      "mark": 264,
+      "max": 2.63,
+      "onset": 5.2426
+     }
+    ],
+    [
+     {
+      "id": "L2",
+      "text": "Where it all goes.",
+      "start": 7.8614,
+      "mark": 474,
+      "max": 3.34,
+      "onset": 7.9
+     }
+    ],
+    [
+     {
+      "id": "N2",
+      "text": "Business.",
+      "start": 11.2299,
+      "mark": 676,
+      "max": 0.78,
+      "onset": 11.2667
+     }
+    ],
+    [
+     {
+      "id": "L3",
+      "text": "Revenue, profit, MRR.",
+      "start": 12.04,
+      "mark": 684,
+      "max": 2.79,
+      "onset": 12.0799
+     }
+    ],
+    [
+     {
+      "id": "L4",
+      "text": "Sales and expenses.",
+      "start": 14.8563,
+      "mark": 894,
+      "max": 12.84,
+      "onset": 14.9
+     }
+    ],
+    [
+     {
+      "id": "C1",
+      "text": "Ardane. Your whole life. One place.",
+      "start": 27.7311,
+      "mark": 1666,
+      "max": 71.24,
+      "onset": 27.7667
      }
     ]
    ]

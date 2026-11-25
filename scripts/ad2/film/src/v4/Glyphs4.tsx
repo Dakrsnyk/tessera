@@ -1,7 +1,7 @@
 import { C } from "../lib/brand";
 
 /** Everyday moments as bold graphic glyphs (400 × 400 grid). Pure vector: no photo, no stock. */
-export type Kind = "sunrise" | "meal" | "weights" | "card" | "agenda" | "checklist" | "water" | "moon";
+export type Kind = "sunrise" | "meal" | "weights" | "card" | "agenda" | "checklist" | "water" | "moon" | "widget";
 
 const Defs: React.FC = () => (
   <defs>
@@ -120,6 +120,25 @@ const Art: React.FC<{ kind: Kind }> = ({ kind }) => {
           <circle cx="222" cy="280" r="8" fill="#fff" opacity="0.5" />
           <circle cx="214" cy="196" r="6" fill="#fff" opacity="0.5" />
           <path d="M200 6 C230 40 244 60 200 78 C156 60 170 40 200 6 Z" fill="#9BD4FF" />
+        </>
+      );
+    case "widget":
+      return (
+        <>
+          <rect x="34" y="62" width="332" height="276" rx="74" fill="url(#gs)" />
+          <rect x="34" y="62" width="332" height="276" rx="74" fill="none" stroke="#fff" strokeOpacity="0.28" strokeWidth="6" />
+          <circle cx="132" cy="200" r="58" fill="none" stroke="#fff" strokeOpacity="0.28" strokeWidth="20" />
+          <circle cx="132" cy="200" r="58" fill="none" stroke="#FF9500" strokeWidth="20" strokeLinecap="round" strokeDasharray="236 400" transform="rotate(-90 132 200)" />
+          {[
+            [148, "#FF4D4D", 74],
+            [192, "#FFD60A", 54],
+            [236, "#4E9BE0", 34],
+          ].map(([y, c, w], i) => (
+            <g key={i}>
+              <rect x="224" y={y as number} width="100" height="16" rx="8" fill="#fff" opacity="0.28" />
+              <rect x="224" y={y as number} width={w as number} height="16" rx="8" fill={c as string} />
+            </g>
+          ))}
         </>
       );
     case "moon":

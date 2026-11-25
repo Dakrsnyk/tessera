@@ -91,7 +91,19 @@ def write_results(out_path: Path, *, fake: bool, gpu: dict, variants: dict, timi
         w("## Affinage B : déroulement")
         h = finetune["hyper"]
         w(f"- {h['unfreeze_blocks']} derniers blocs sur 12 affinés (+ norme finale + tête), taux {h['base_lr']} (décroissance par couche {h['layer_decay']}), tête {h['head_lr']}, "
-          f"lots de {h['batch']}, poids de classe n^-{h['balance_alpha']}, lissage {h['label_smoothing']}, arrêt anticipé (patience {h['patience']}) sur la perte de validation.")
+          f"lots de {h['batch']}, poids de classe n^-{h['balance_alpha']}, lissage {h['label_smoothing']}, arrêt anticipé (patience {h['patience']}) sur "
+          + ("l'exactitude" if h.get("select") == "val_acc" else "la perte") + " de validation.")
+        if any(k in h for k in ("ema_decay", "mix_prob", "box_aug", "select", "warmup_epochs")):
+            parts = ["**recette v5**"]
+            if "ema_decay" in h:
+                parts.append(f"EMA des poids (décroissance demandée {h['ema_decay']} ; validation et point retenu avec les poids EMA)")
+            if "mix_prob" in h:
+                parts.append(f"Mixup (alpha {h['mixup_alpha']}) / CutMix (alpha {h['cutmix_alpha']}) alternés par lot, probabilité {h['mix_prob']}")
+            if h.get("box_aug") == "imperfect":
+                parts.append("augmentation « boîte imparfaite » (zoom 0,68-1,12, décalage 0,10)")
+            if "warmup_epochs" in h:
+                parts.append(f"échauffement {h['warmup_epochs']} époque(s), cosinus jusqu'à {h['lr_floor']} du taux")
+            w("- " + " ; ".join(parts) + ". Les pertes d'entraînement ne sont pas comparables à celles de v4 (Mixup / CutMix les augmentent).")
         w(f"- Appareil : {finetune['device']}{' (AMP fp16)' if finetune.get('amp') else ''} ; "
           + (f"{finetune['images_per_second']:.0f} images/s à l'entraînement ; " if finetune.get("images_per_second") else "")
           + f"{finetune['epochs_run']} époque(s) ; meilleure époque : **{finetune['best_epoch']}** (0 = la voie A).")

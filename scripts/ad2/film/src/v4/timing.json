@@ -1,11 +1,11 @@
 {
   "_doc": "FilmMainV4 (66 s = 3960 frames at 60 fps). Every key event in film frames (f); seconds = f / 60. Source of truth for the sound design. Sequences: hook 0-524, opening 524-660 (overlaps mini-apps by 30), mini-apps 630-2160 (each overlaps the next by 30 = the link transition), process 2160-3000, homes 3000-3660, close 3660-3960.",
   "fps": 60,
-  "length": 4050,
+  "length": 4020,
   "sequences": {
     "step1": {
       "from": 0,
-      "length": 720
+      "length": 990
     },
     "hook": {
       "from": 0,
@@ -13,39 +13,40 @@
     },
     "opening": {
       "from": 524,
-      "length": 226
+      "length": 496
     },
     "miniapps": {
-      "from": 720,
-      "length": 1530
+      "from": 990,
+      "length": 1710
     },
     "process": {
-      "from": 2250,
-      "length": 840
+      "from": 2700,
+      "length": 600
     },
     "homes": {
-      "from": 3090,
-      "length": 660
+      "from": 3300,
+      "length": 420
     },
     "close": {
-      "from": 3750,
+      "from": 3720,
       "length": 300
     },
-    "miniapps_note": "Nutrition 720-1050, Fitness 1020-1470, Habits 1440-1710, Finances 1680-1980, Planning 1950-2250 (30-frame overlaps)"
+    "miniapps_note": "Nutrition 990-1470, Fitness 1470-1920, Habits 1890-2160, Finances 2130-2430, Planning 2400-2700 (30-frame overlaps)"
   },
   "voice": {
     "H1": 36,
     "H2": 216,
     "meet": 552,
     "everything": 592,
-    "nutrition": 740,
-    "fitness": 1040,
-    "habits": 1460,
-    "finances": 1700,
-    "planning": 1970,
-    "process": 2270,
-    "homes": 3110,
-    "close": 3810
+    "nutrition": 1010,
+    "fitness": 1490,
+    "habits": 1910,
+    "finances": 2150,
+    "planning": 2420,
+    "process": 2720,
+    "homes": 3320,
+    "close": 3780,
+    "tease": 730
   },
   "hook": {
     "tick": [
@@ -200,185 +201,336 @@
     "wordEverything": 592,
     "breath": [
       630,
-      720
+      1020
     ],
     "breathNote": "90 frames: slow push on the phone, widgets levitate, \"One place.\" stays readable until 738",
-    "onePlaceReadableUntil": 738
+    "onePlaceReadableUntil": 738,
+    "openingTurn": "turn at constant speed over 226 frames (native 0-330), then a slow push to 1020"
   },
   "miniapps": [
     {
       "id": "nutrition",
-      "from": 720,
-      "length": 330,
-      "title": 740,
+      "from": 990,
+      "length": 480,
+      "title": 1010,
       "steps": [
         {
-          "f": 720,
-          "what": "scan screen, camera pushes to the square"
+          "f": 990,
+          "what": "scan screen"
         },
         {
-          "f": 794,
-          "what": "barcode enters the square, scan line 704-748"
+          "f": 1040,
+          "what": "barcode enters the square"
         },
         {
-          "f": 846,
-          "what": "food sheet: calories and macros highlighted"
+          "f": 1078,
+          "what": "scan line reads it (808-852)"
         },
         {
-          "f": 916,
-          "what": "day screen: orange calories ring highlighted"
+          "f": 1130,
+          "what": "food sheet (through black, 30 frames)"
         },
         {
-          "f": 958,
+          "f": 1194,
+          "what": "calories and macros highlighted"
+        },
+        {
+          "f": 1250,
+          "what": "day screen, orange calories ring"
+        },
+        {
+          "f": 1304,
+          "what": "ring highlighted"
+        },
+        {
+          "f": 1362,
           "what": "widgets rise: calories (orange) + macros"
         }
       ],
-      "linkOut": 1020
+      "linkOut": 1470
     },
     {
       "id": "fitness",
-      "from": 1020,
+      "from": 1470,
       "length": 450,
-      "title": 1040,
+      "title": 1490,
       "steps": [
         {
-          "f": 1020,
+          "f": 1470,
           "what": "exercise library, search highlighted"
         },
         {
-          "f": 1120,
+          "f": 1570,
           "what": "exercise sheet"
         },
         {
-          "f": 1146,
+          "f": 1596,
           "what": "exercise animation plays"
         },
         {
-          "f": 1260,
+          "f": 1710,
           "what": "workout session: Set done"
         },
         {
-          "f": 1318,
+          "f": 1768,
           "what": "sets counted"
         },
         {
-          "f": 1356,
+          "f": 1806,
           "what": "progress chart"
         }
       ],
-      "linkOut": 1440
+      "linkOut": 1890
     },
     {
       "id": "habits",
-      "from": 1440,
+      "from": 1890,
       "length": 270,
-      "title": 1460,
+      "title": 1910,
       "steps": [
         {
-          "f": 1440,
+          "f": 1890,
           "what": "habits"
         },
         {
-          "f": 1536,
+          "f": 1986,
           "what": "habit ticked"
         },
         {
-          "f": 1616,
+          "f": 2066,
           "what": "widgets rise"
         }
       ],
-      "linkOut": 1680
+      "linkOut": 2130
     },
     {
       "id": "finances",
-      "from": 1680,
+      "from": 2130,
       "length": 300,
-      "title": 1700,
+      "title": 2150,
       "steps": [
         {
-          "f": 1680,
+          "f": 2130,
           "what": "left this month"
         },
         {
-          "f": 1766,
+          "f": 2216,
           "what": "six-month chart"
         },
         {
-          "f": 1832,
+          "f": 2282,
           "what": "categories"
         },
         {
-          "f": 1908,
+          "f": 2358,
           "what": "widgets rise"
         }
       ],
-      "linkOut": 1950
+      "linkOut": 2400
     },
     {
       "id": "planning",
-      "from": 1950,
+      "from": 2400,
       "length": 300,
-      "title": 1970,
+      "title": 2420,
       "steps": [
         {
-          "f": 1950,
+          "f": 2400,
           "what": "week"
         },
         {
-          "f": 2020,
+          "f": 2470,
           "what": "events"
         },
         {
-          "f": 2070,
+          "f": 2520,
           "what": "month"
         },
         {
-          "f": 2174,
+          "f": 2624,
           "what": "widgets rise"
         }
       ],
-      "linkOut": 2220
+      "linkOut": 2670
     }
   ],
   "links": [
-    720,
-    1020,
-    1440,
-    1680,
-    1950,
-    2250
+    990,
+    1470,
+    1890,
+    2130,
+    2400,
+    2700
   ],
   "bladeWipes": [
-    846,
-    916,
-    1120,
-    1260,
-    1356,
-    1536,
-    1766,
-    1832,
-    2070
+    1130,
+    1250,
+    1570,
+    1710,
+    1806,
+    1986,
+    2216,
+    2282,
+    2520,
+    2734,
+    2763,
+    2791,
+    2823,
+    2879,
+    2923,
+    2963,
+    3011,
+    3060,
+    3103,
+    3137,
+    3405,
+    3510,
+    3615
   ],
   "close": {
-    "start": 3750,
-    "logoWhiteHalf": 3810,
-    "wordmark": 3846,
-    "cta": 3870,
-    "tagline": 3920,
-    "calmFrom": 4032,
-    "end": 4050,
+    "start": 3720,
+    "logoWhiteHalf": 3780,
+    "wordmark": 3816,
+    "cta": 3840,
+    "tagline": 3890,
+    "calmFrom": 4002,
+    "end": 4020,
     "overlapWithHomes": [
-      3734,
-      3750
+      3704,
+      3720
     ]
   },
   "cuts": [
-    720,
-    1020,
-    1440,
-    1680,
-    1950,
-    2250,
-    3090
-  ]
+    990,
+    1470,
+    1890,
+    2130,
+    2400,
+    2700,
+    3300
+  ],
+  "tease": {
+    "note": "phone with the widgets stays on screen, slow camera, widgets levitate; four sober lines under the phone, each on its spoken word",
+    "start": 730,
+    "end": 1000,
+    "sentence": "You'll be able to scan your meals, track your training, manage your finances, and more.",
+    "words": [
+      {
+        "w": "Scan your meals.",
+        "f": 784
+      },
+      {
+        "w": "Track your training.",
+        "f": 838
+      },
+      {
+        "w": "Manage your finances.",
+        "f": 898
+      },
+      {
+        "w": "And more.",
+        "f": 964
+      }
+    ]
+  },
+  "process": {
+    "speed": 1.4,
+    "note": "authored on 840 frames, played 1.4x faster at constant speed",
+    "screens": [
+      {
+        "f": 2700,
+        "what": "Store"
+      },
+      {
+        "f": 2734,
+        "what": "Store scrolls"
+      },
+      {
+        "f": 2763,
+        "what": "Store scrolls"
+      },
+      {
+        "f": 2791,
+        "what": "Store end"
+      },
+      {
+        "f": 2823,
+        "what": "My widgets"
+      },
+      {
+        "f": 2879,
+        "what": "editor"
+      },
+      {
+        "f": 2923,
+        "what": "Studio: content"
+      },
+      {
+        "f": 2963,
+        "what": "Studio: Aurora style (With Premium)"
+      },
+      {
+        "f": 3011,
+        "what": "Studio: Neon style"
+      },
+      {
+        "f": 3060,
+        "what": "Studio: colours"
+      },
+      {
+        "f": 3103,
+        "what": "Studio: background"
+      },
+      {
+        "f": 3137,
+        "what": "Home Screens: compose"
+      }
+    ],
+    "words": [
+      {
+        "w": "Pick.",
+        "f": 2700
+      },
+      {
+        "w": "Style.",
+        "f": 2823
+      },
+      {
+        "w": "Compose.",
+        "f": 3137
+      }
+    ]
+  },
+  "homes": {
+    "each": 105,
+    "wipe": 18,
+    "wipeFrames": 18,
+    "screens": [
+      {
+        "f": 3300,
+        "what": "blue + dark"
+      },
+      {
+        "f": 3405,
+        "what": "wine red + dark"
+      },
+      {
+        "f": 3510,
+        "what": "pink + violet"
+      },
+      {
+        "f": 3615,
+        "what": "white + silver"
+      }
+    ],
+    "changes": [
+      3405,
+      3510,
+      3615
+    ],
+    "title": {
+      "Your iPhone.": 3304,
+      "Your way.": 3324
+    }
+  }
 }

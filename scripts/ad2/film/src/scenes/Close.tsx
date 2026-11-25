@@ -33,6 +33,12 @@ export const Close: React.FC<{
   tagline?: string;
   /** A drawn screen (1206 × 2622) instead of a capture: read every frame. */
   screenCanvas?: () => HTMLCanvasElement | null;
+  /** Text of the pill under the tagline (default: the film's close.cta). */
+  cta?: string;
+  /** Size of the call-to-action pill (1 = the film's usual 32 px). */
+  ctaScale?: number;
+  /** The logo on the app icon's tile (turquoise → royal blue). */
+  tile?: boolean;
   /** Framing: lens (mm) and the phone's height as a fraction of the frame at the start and the end of the turn. */
   lens?: number;
   fraction0?: number;
@@ -43,6 +49,9 @@ export const Close: React.FC<{
   screenFile,
   tagline,
   screenCanvas,
+  cta,
+  ctaScale = 1,
+  tile = false,
   lens = 50,
   fraction0 = 0.632,
   fraction1 = 0.695,
@@ -94,28 +103,32 @@ export const Close: React.FC<{
         </AbsoluteFill>
       )}
       <AbsoluteFill style={{ scale: `${push}`, transformOrigin: `${LOGO.cx}px ${LOGO.cy}px` }}>
-        <ArdaneLogo {...LOGO} left={left} right={right} glow={glow} />
-        <Seam x={AXIS} top={lineTop} height={lineHeight} intensity={lineIntensity} />
+        <ArdaneLogo {...LOGO} left={left} right={right} glow={glow} tile={tile ? left : 0} />
+        <Seam x={AXIS} top={lineTop} height={lineHeight} intensity={tile ? lineIntensity * (1 - right) : lineIntensity} />
       </AbsoluteFill>
 
       <SplitText from={96} top={905} height={150}>
         <span style={type.wordmark}>Ardane</span>
       </SplitText>
-      <SplitText from={120} top={1212} height={76}>
+      <SplitText from={120} top={1212 - Math.round(40 * (ctaScale - 1))} height={Math.round(76 * ctaScale)}>
         <div
           style={{
             ...type.cta,
+            fontSize: Math.round(32 * ctaScale),
+            fontWeight: ctaScale > 1 ? 600 : type.cta.fontWeight,
+            letterSpacing: ctaScale > 1 ? "0.06em" : undefined,
             color: C.type1,
-            height: 76,
-            padding: "0 40px",
-            borderRadius: 38,
-            border: `1.5px solid rgba(255,255,255,0.55)`,
+            height: Math.round(76 * ctaScale),
+            padding: `0 ${Math.round(40 * ctaScale)}px`,
+            borderRadius: Math.round(38 * ctaScale),
+            border: `${ctaScale > 1 ? 2.5 : 1.5}px solid rgba(255,255,255,${ctaScale > 1 ? 0.8 : 0.55})`,
             display: "flex",
             alignItems: "center",
             boxSizing: "border-box",
+            whiteSpace: "nowrap",
           }}
         >
-          {t("close.cta")}
+          {cta ?? t("close.cta")}
         </div>
       </SplitText>
       <SplitText from={170} top={1062} height={56}>

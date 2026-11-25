@@ -43,7 +43,7 @@ VALID_MAX = 1500              # images de validation (prélevées dans train) ; 
 BENCH_TRAIN, BENCH_VALID = 320, 64   # taille du sous-ensemble de mesure du débit
 OP_THRESHOLD = 0.30           # seuil de confiance d'exploitation pour IoU / Dice par aliment (fixé d'avance, pas réglé sur le test)
 CLASS_AGNOSTIC = True         # une seule classe « food » : le segmenteur TROUVE les aliments, le classifieur les nomme (passage 2, 2026-11-03)
-WARM_START = ""               # Small : poids COCO officiels (le point de départ Nano ne convient pas à l'architecture Small)
+WARM_START = "rf-detr-seg-small-myfoodrepo.pth"   # passage 4 (2026-11-23) : repart du Small du passage 3 (8 époques, mAP de masque 0,526 et encore en hausse)
 EVAL_EXPORT_RESERVE_S = 45 * 60      # temps gardé après l'entraînement : évaluation + exports (par taille)
 RFDETR_VERSION = "1.11.2"
 SESSION_HOURS = 12.0          # plafond Kaggle d'une session : ne pas dépasser
@@ -192,7 +192,7 @@ def train_size(size, epochs):
     last = run / "last.ckpt"
     with kc.timed(ENV, name):
         out = seg_train.train(size, DS_DIR, run, epochs=epochs, batch_size=BATCH[size], num_workers=TRAIN_WORKERS, resume=last if last.exists() else None,
-                              pretrain_weights=WARM_FILE if size == "nano" else None,
+                              pretrain_weights=WARM_FILE if (WARM_FILE and size in WARM_FILE.name) else None,
                               can_continue=lambda s: ENV.budget.can_run(s + EVAL_EXPORT_RESERVE_S), persist_fn=lambda: kc.persist(ENV),
                               device=DEVICE)
     kc.mark_stage(ENV, name, done=not out["paused"], paused=out["paused"], epochs=epochs, epoch_seconds=out["epoch_seconds"])

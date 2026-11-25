@@ -17,6 +17,8 @@ pour comparer), puis une variante **B** plus précise (affinage partiel de DINOv
 3. **Variante B** : les derniers blocs de DINOv2 sont affinés (augmentations, arrêt anticipé sur la validation prélevée dans train), puis tête linéaire étalonnée sur les vecteurs affinés, export Core ML fp16 + int8.
 4. **Rapport** : `RESULTS.md` (Top-1, Top-3, ECE de A et de B sur le TEST officiel), modèles `.mlpackage` zippés, journaux, points de sauvegarde.
 
+**Recette v5** (classifieur 2026-11-23) : affinage B avec EMA des poids, Mixup / CutMix, échauffement + cosinus sur 20 époques au plus, 12 blocs, augmentation « boîte imparfaite », meilleure époque choisie sur l'exactitude de validation (patience 5). Interface identique à v4 (224 x 224, 346 classes, `probabilities` + `embedding` 768, int8).
+
 **Réglages** : cellule 2 seulement. **Durée attendue** : environ 2 à 3 h avec un GPU T4 (estimation, à confirmer par le premier passage ; le rapport donne les durées réelles). **Quota** : un passage consomme environ 2 à 4 h de GPU sur les 30 h de la semaine.
 **Reprise** : si la session s'arrête, relancer en ajoutant la SORTIE de la version précédente comme source de données (voir `scripts/ml/kaggle/README.md`) ; les étapes terminées sont sautées.
 
@@ -41,16 +43,25 @@ A_ALSO_MLP = True             # voie A : en plus de la tête linéaire, une têt
 B_ALSO_MLP = True             # variante B : en plus de la tête linéaire, une tête MLP sur les vecteurs affinés (exportée aussi)
 # Tête MLP : meilleur réglage du balayage CPU du 2026-11-03 (9 variantes, choix sur la VALIDATION, voir scripts/ml/README.md § 10)
 HEAD_MLP_ARGS = ["--hidden", "2048", "--dropout", "0.5", "--lr", "5e-4", "--wd", "0.05", "--balance-alpha", "0.5", "--label-smoothing", "0.1"]
-B_UNFREEZE_BLOCKS = 9         # derniers blocs de DINOv2 affinés (sur 12) ; passage 2 : 6 blocs progressaient encore à la 10e époque
-B_EPOCHS = 12                 # époques au plus (arrêt anticipé sur la validation) ; ViT-B : environ 3,5 fois plus lent par époque que le ViT-S
+# --- Recette v5 (2026-11-23) : mêmes données, classes, 224 x 224 et export que v4 ; seuls l'affinage B et ses réglages changent.
+#     Pour retrouver EXACTEMENT v4 : B_UNFREEZE_BLOCKS = 9, B_EPOCHS = 12, B_PATIENCE = 3, B_SELECT = "val_loss", B_EMA_DECAY = 0, B_MIX_PROB = 0,
+#     B_BOX_AUG = "v4", B_WARMUP_EPOCHS = 0, SESSION_HOURS = 11.
+B_UNFREEZE_BLOCKS = 12        # v4 : 9. Calcul : v4 = 620 s par époque (116 img/s + validation) ; 12 blocs = +1 / 6 de calcul (retour arrière sur 12 blocs au lieu de 9)
+                              # -> ~ 740 s avec l'EMA ; 20 époques = ~ 4,1 h (5,2 h même si 1,5 fois plus lent) ; session totale ~ 5,4 h < 8 h de budget. Repli : 9.
+B_EPOCHS = 20                 # époques au plus ; cosinus calé sur ce nombre
+B_SELECT = "val_acc"          # v4 : "val_loss". v4 s'est arrêté (patience 3) sur la perte alors que l'exactitude montait encore (67,55 -> 68,66 %)
+B_EMA_DECAY = 0.9998          # moyenne mobile des poids ; plafonnée à 1 - 4 / nombre_de_pas (adaptée à la durée) ; 0 = sans EMA (v4)
+B_MIX_PROB = 0.5              # probabilité par lot d'un Mixup (alpha 0,2) OU d'un CutMix (alpha 1,0), 50 / 50 ; 0 = sans (v4)
+B_BOX_AUG = "imperfect"       # « boîte imparfaite » : zoom 0,68-1,12 et décalage 0,10 (v4 : 0,72-1 et 0,08) car l'app recadre sur un masque prédit
+B_WARMUP_EPOCHS = 1.0         # échauffement linéaire sur 1 époque, puis cosinus (v4 : 200 pas)
 B_BATCH = 64 if BACKBONE == "vitb14" else 128   # ViT-B : lot réduit pour tenir dans les 16 Go du T4
 B_BASE_LR = 3e-5              # taux du dernier bloc ; décroît de 0,85 par bloc vers l'entrée
 B_HEAD_LR = 1e-4
-B_PATIENCE = 3                # époques sans amélioration de la perte de validation avant l'arrêt
+B_PATIENCE = 5                # époques sans amélioration (de B_SELECT, sur la validation) avant l'arrêt (v4 : 3)
 B_MAX_TRAIN = 0               # 0 = tout ; un nombre = sous-ensemble (essais)
 B_MAX_VAL = 0
 EXTRACT_BATCH = 256           # lot d'extraction des vecteurs (GPU)
-SESSION_HOURS = 12.0          # plafond Kaggle d'une session : ne pas dépasser
+SESSION_HOURS = 9.0           # budget interne d'une session (v5 : 9 h ; plafond Kaggle 12 h)
 RESERVE_HOURS = 1.0           # gardé pour les exports, les rapports et l'écriture de la sortie
 B_POST_SECONDS = 4200         # temps à garder après l'affinage B : vecteurs affinés + tête + export (estimation prudente : 40 min)
 VERSION_A, VERSION_B = ("0.3.0", "0.4.0") if ARDANE_LEVEL else ("0.1.0", "0.2.0")
@@ -256,6 +267,7 @@ else:
         with kc.timed(ENV, "B_finetune"):
             FT = ft.finetune(ENV.ml_root, DS, "head-linear.pt", FT_DIR, unfreeze_blocks=B_UNFREEZE_BLOCKS, epochs=B_EPOCHS, batch=B_BATCH,
                              base_lr=B_BASE_LR, head_lr=B_HEAD_LR, patience=B_PATIENCE, workers=0 if SMOKE_DIR else min(4, WORKERS),
+                             ema_decay=B_EMA_DECAY, mix_prob=B_MIX_PROB, select=B_SELECT, box_aug=B_BOX_AUG, warmup_epochs=B_WARMUP_EPOCHS,
                              device=DEVICE, amp=True, max_train=B_MAX_TRAIN, max_val=B_MAX_VAL,
                              can_continue=lambda seconds: ENV.budget.can_run(seconds + B_POST_SECONDS))
         kc.mark_stage(ENV, "B_finetune", done=(FT["status"] == "done"), status=FT["status"], best_epoch=FT["best_epoch"])

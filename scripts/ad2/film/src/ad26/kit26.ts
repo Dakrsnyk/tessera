@@ -1,5 +1,6 @@
 import type { Lang } from "../lib/i18n";
 import available from "./available.json";
+import { iosHomeSrc } from "../lib/kit";
 
 // Campaign 2026 captures: the new kit (public/kit2026/<lang>/<name>.png) first, then the old one (public/kit/<name>.png).
 // available.json is written by `render_all.py index` (it lists the files of both kits), so a missing capture is known
@@ -10,6 +11,9 @@ const NEW: Record<string, Set<string>> = Object.fromEntries(Object.entries(AV.ki
 
 /** Path (for staticFile) of a capture by name (no extension), or null when no kit has it. */
 export const kitSrc26 = (name: string, lang: Lang = "fr"): string | null => {
+  // the app's Home captures (kit icons inside) are served recomposed with real Apple icons (lib/iosHome.ts, public/ioshome)
+  const ios = iosHomeSrc(name, lang);
+  if (ios) return ios;
   if (NEW[lang]?.has(name)) return `kit2026/${lang}/${name}.png`;
   if (OLD.has(name)) return `kit/${name}.png`;
   return null;

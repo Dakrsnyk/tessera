@@ -1,8 +1,9 @@
-import { AbsoluteFill, Easing, Img, interpolate, interpolateColors, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, interpolateColors, staticFile, useCurrentFrame } from "remotion";
 import { Grain } from "../components/Grain";
 import { Seam } from "../components/Seam";
 import { AXIS, C, clamp, ease, H, INTER, W } from "../lib/brand";
 import { DOCK, kitUrl, type Rect } from "../lib/kit";
+import { appleIcon, IOS, IOS_CAPTURES, IOS_DOCK, iosFill, iosRect } from "../lib/iosHome";
 import { Tr } from "../lib/i18n";
 
 /**
@@ -12,7 +13,10 @@ import { Tr } from "../lib/i18n";
  * previous screen leaving back-left as the next arrives from the right, a Sapphire blade between two captures of
  * the same screen. Voice: « Pick the widgets that matter. Make them yours. » (≈ 0.3–4 s).
  */
-export const PROCESS_FRAMES = 840;
+/** Frames of the film. The sequence below is authored on 840 frames (ORIG) and played 1.4x faster, at a constant speed. */
+export const PROCESS_FRAMES = 600;
+const ORIG = 840;
+const SPEED = ORIG / PROCESS_FRAMES;
 
 const CARD_W = 640;
 const CARD_H = (CARD_W * 2622) / 1206;
@@ -54,18 +58,21 @@ const SCENES: Scene[] = [
 const WORDS = [
   { from: 0, to: 172, text: "Pick." },
   { from: 172, to: 612, text: "Style." },
-  { from: 612, to: PROCESS_FRAMES, text: "Compose." },
+  { from: 612, to: ORIG, text: "Compose." },
 ];
 const PREMIUM = [376, 504];
 const PUSH = 340;
-/** Where the pieces of home-crepuscule sit on the capture (measured on the pictures: scripts/ad2/kit_layout.py `find`). */
-const CREP_WIDGETS: Rect[] = [
-  [57, 204, 510, 510],
-  [639, 204, 510, 510],
-  [57, 813, 1092, 510],
-  [57, 1422, 510, 510],
+/**
+ * Where the pieces of home-crepuscule sit. Since 2026-11-11 the capture is recomposed as a real iPhone Home (lib/iosHome.ts,
+ * IOS_CAPTURES["home-crepuscule"]): the same widgets on the measured iOS grid, real Apple apps in the free cells and the Dock.
+ */
+const CREP = IOS_CAPTURES["home-crepuscule"];
+const CREP_WIDGETS: Rect[] = CREP.widgets.map((w) => iosRect(w.size, w.c, w.r));
+const CREP_FILL = iosFill(CREP_WIDGETS, CREP.widgets.map((w) => w.file));
+const CREP_ICONS: { r: Rect; name: string }[] = [
+  ...CREP_FILL.map((i) => ({ r: [i.x, i.y, IOS.icon, IOS.icon] as Rect, name: i.name })),
+  ...DOCK.map((r, i) => ({ r, name: IOS_DOCK[i] })),
 ];
-const CREP_ICONS: Rect[] = [[628, 1403, 222, 222], [901, 1404, 222, 222], [629, 1694, 222, 222], [902, 1695, 222, 222], ...DOCK]; // card px a screen travels when the Store scrolls
 
 /**
  * Nothing is ever cut by the edge of the phone: wherever a capture holds a scroller (chips, carousels, tiles under the
@@ -73,7 +80,7 @@ const CREP_ICONS: Rect[] = [[628, 1403, 222, 222], [901, 1404, 222, 222], [629, 
  * y0–y1 is the band; l / r fade the left / right edge over that many px; t / b fade the top / bottom of the band.
  * `c0`/`c1` is a plain top → bottom background; without it the screen's left gutter (6 px) is stretched across.
  */
-type Fade = { y0: number; y1: number; l?: number; r?: number; t?: number; b?: number; c0?: string; c1?: string };
+type Fade = { y0: number; y1: number; l?: number; r?: number; t?: number; b?: number; c0?: string; c1?: string; h?: boolean };
 const CHIPS = { c0: "#DEE7F0", c1: "#E5ECF4" };
 const FOOT = { y0: 2060, y1: 2300, b: 240 };
 const FADES: Record<string, Fade[]> = {
@@ -90,13 +97,15 @@ const FADES: Record<string, Fade[]> = {
     { y0: 0, y1: 650, r: 380 },
     { y0: 1220, y1: 1960, r: 200 },
   ],
-  mywidgets: [{ y0: 840, y1: 1190, r: 300 }],
-  "editor-v2": [{ y0: 940, y1: 1070, r: 380, ...CHIPS }],
-  "studio-content": [{ y0: 1085, y1: 1215, r: 140, ...CHIPS }],
-  "studio-style-aurora": [{ y0: 1085, y1: 1215, l: 220, r: 260, ...CHIPS }, { y0: 1215, y1: 1360, t: 140 }, FOOT],
-  "studio-style-neon": [{ y0: 1085, y1: 1215, l: 220, r: 260, ...CHIPS }, { y0: 1215, y1: 1360, t: 140 }, FOOT],
-  "studio-palette-gold": [{ y0: 1085, y1: 1215, l: 220, r: 330, ...CHIPS }, { y0: 1215, y1: 1330, t: 115 }, FOOT],
-  "studio-background": [{ y0: 1085, y1: 1215, l: 200, r: 220, ...CHIPS }, FOOT],
+  // the app truncates this title ("Next set + Consistency + Records +..."): the line is covered, the subtitle stays
+  mywidgets: [{ y0: 840, y1: 1190, r: 300 }, { y0: 1384, y1: 1452, l: 1206, h: true, c0: "#E9EFF6", c1: "#EBF1F7" }],
+  // chips that scroll sideways: whatever the capture cuts at its edges is covered by the row's own background (h = hard edge)
+  "editor-v2": [{ y0: 940, y1: 1070, r: 330, h: true, ...CHIPS }, { y0: 1085, y1: 1215, r: 290, h: true, ...CHIPS }],
+  "studio-content": [{ y0: 940, y1: 1070, r: 240, h: true, ...CHIPS }, { y0: 1085, y1: 1215, r: 290, h: true, ...CHIPS }],
+  "studio-style-aurora": [{ y0: 1078, y1: 1215, l: 178, r: 181, h: true, ...CHIPS }, { y0: 1215, y1: 1360, t: 140 }, FOOT],
+  "studio-style-neon": [{ y0: 1078, y1: 1215, l: 178, r: 181, h: true, ...CHIPS }, { y0: 1215, y1: 1360, t: 140 }, FOOT],
+  "studio-palette-gold": [{ y0: 1078, y1: 1215, l: 198, r: 46, h: true, ...CHIPS }, { y0: 1215, y1: 1330, t: 115 }, FOOT],
+  "studio-background": [{ y0: 1078, y1: 1215, l: 105, r: 105, h: true, ...CHIPS }, FOOT],
 };
 
 const blade = Easing.bezier(0.45, 0, 0.2, 1);
@@ -123,8 +132,8 @@ const Layer: React.FC<{ name: string; style?: React.CSSProperties }> = ({ name, 
         </div>,
       );
     };
-    if (f.r) addOver(`r${i}`, 1206 - f.r, f.y0, f.r, f.y1 - f.y0, "linear-gradient(to right, transparent 0%, black 55%)");
-    if (f.l) addOver(`l${i}`, 0, f.y0, f.l, f.y1 - f.y0, "linear-gradient(to left, transparent 0%, black 55%)");
+    if (f.r) addOver(`r${i}`, 1206 - f.r, f.y0, f.r, f.y1 - f.y0, `linear-gradient(to right, transparent 0%, black ${f.h ? 12 : 55}%)`);
+    if (f.l) addOver(`l${i}`, 0, f.y0, f.l, f.y1 - f.y0, `linear-gradient(to left, transparent 0%, black ${f.h ? 12 : 55}%)`);
     if (f.t) addOver(`t${i}`, 0, f.y0, 1206, f.t, "linear-gradient(to bottom, black 45%, transparent 100%)");
     if (f.b) addOver(`b${i}`, 0, f.y1 - f.b, 1206, f.b, "linear-gradient(to bottom, transparent 0%, black 55%)");
   });
@@ -136,14 +145,14 @@ const Layer: React.FC<{ name: string; style?: React.CSSProperties }> = ({ name, 
   );
 };
 
-const SceneCard: React.FC<{ scene: Scene; index: number; f: number }> = ({ scene, index, f }) => {
-  const nextStart = index < SCENES.length - 1 ? SCENES[index + 1].start : PROCESS_FRAMES + 99999;
+const SceneCard: React.FC<{ scene: Scene; index: number; f: number; fadeBlade?: boolean }> = ({ scene, index, f, fadeBlade }) => {
+  const nextStart = index < SCENES.length - 1 ? SCENES[index + 1].start : ORIG + 99999;
   const last = index === SCENES.length - 1;
   const lo = scene.start;
   if (f < lo - 1 || f > nextStart + TR) return null;
   const pin = interpolate(f, [lo, lo + TR + 6], [0, 1], { ...clamp, easing: ease.arrival });
   const pout = interpolate(f, [nextStart, nextStart + TR], [0, 1], { ...clamp, easing: Easing.bezier(0.5, 0, 0.75, 0.4) });
-  const fadeEnd = last ? interpolate(f, [PROCESS_FRAMES - 16, PROCESS_FRAMES], [0, 1], clamp) : 0;
+  const fadeEnd = last ? interpolate(f, [ORIG - 16, ORIG], [0, 1], clamp) : 0;
   const dir = 1 - pin; // 1 = just arrived from the right
   const x = dir * 190 - pout * 190;
   const ry = -dir * 20 + pout * 22;
@@ -175,8 +184,8 @@ const SceneCard: React.FC<{ scene: Scene; index: number; f: number }> = ({ scene
   const home = scene.compose ? interpolate(f, [lo + 150, lo + 176], [0, 1], { ...clamp, easing: blade }) : 0;
   const pieces: { src: string; r: [number, number, number, number]; i: number; r2?: number }[] = scene.compose
     ? [
-        ...CREP_WIDGETS.map((r, i) => ({ src: kitUrl(`setup-crepuscule-${i}`), r, i, r2: 66 })),
-        ...CREP_ICONS.map((r, i) => ({ src: kitUrl(`icons-crepuscule-${i}`), r, i: i + 4, r2: 0 })),
+        ...CREP_WIDGETS.map((r, i) => ({ src: kitUrl(CREP.widgets[i].file), r, i, r2: 66 * 0.9579 })),
+        ...CREP_ICONS.map((ic, i) => ({ src: staticFile(appleIcon(ic.name)), r: ic.r, i: i + 4, r2: 0 })),
       ]
     : [];
   const pieceLayers = pieces.map((p, n) => {
@@ -260,8 +269,8 @@ const SceneCard: React.FC<{ scene: Scene; index: number; f: number }> = ({ scene
           {scene.compose && home > 0 && home < 1 && <Seam x={CARD_W * home} top={0} height={CARD_H} spread={0.45} intensity={Math.sin(Math.PI * home)} />}
           {nxt && wp > 0 && mode === "blade" && (
             <>
-              <Layer name={nxt.n} style={{ clipPath: `inset(0 ${(1 - wp) * 100}% 0 0)` }} />
-              <Seam x={CARD_W * wp} top={0} height={CARD_H} spread={0.45} intensity={Math.sin(Math.PI * wp)} />
+              <Layer name={nxt.n} style={fadeBlade ? { opacity: wp } : { clipPath: `inset(0 ${(1 - wp) * 100}% 0 0)` }} />
+              <Seam x={CARD_W * wp} top={0} height={CARD_H} spread={0.45} intensity={Math.sin(Math.PI * wp) * (fadeBlade ? 0.6 : 1)} />
             </>
           )}
           {nxt && wp > 0 && mode === "push" && <Layer name={nxt.n} style={{ transform: `translateY(${(1 - wp) * PUSH}px)`, opacity: Math.min(1, wp * 1.6) }} />}
@@ -272,11 +281,13 @@ const SceneCard: React.FC<{ scene: Scene; index: number; f: number }> = ({ scene
   );
 };
 
-export const Process: React.FC = () => {
-  const f = useCurrentFrame();
+/** `map`: frame of the film -> frame of the 840-frame authoring (a film can play a part of the process faster); `bare` hides the big word and the eyebrow. */
+export const Process: React.FC<{ map?: (f: number) => number; bare?: boolean; fadeBlade?: boolean }> = ({ map, bare = false, fadeBlade = false }) => {
+  const raw = useCurrentFrame();
+  const f = map ? map(raw) : raw * SPEED;
   const glow = interpolateColors(
     f,
-    [0, 300, 376, 436, 504, 564, 612, PROCESS_FRAMES],
+    [0, 300, 376, 436, 504, 564, 612, ORIG],
     ["#2E6BD0", "#2E6BD0", "#2FA79A", "#C23AA0", "#C9A24A", "#4E9BE0", "#2E6BD0", "#2E6BD0"],
   );
   // The Sapphire line passes at every change of screen.
@@ -296,16 +307,16 @@ export const Process: React.FC = () => {
       <div style={{ position: "absolute", inset: 0, perspective: 1900, perspectiveOrigin: `${AXIS}px ${CY}px` }}>
         <div style={{ position: "absolute", inset: 0, transformStyle: "preserve-3d", transform: `rotateY(${camYaw}deg) rotateX(${camTilt}deg)`, transformOrigin: `${AXIS}px ${CY}px` }}>
           {SCENES.map((s, i) => (
-            <SceneCard key={i} scene={s} index={i} f={f} />
+            <SceneCard key={i} scene={s} index={i} f={f} fadeBlade={fadeBlade} />
           ))}
         </div>
       </div>
-      <div style={{ position: "absolute", left: 0, top: 80, width: W, textAlign: "center", fontFamily: INTER, fontWeight: 600, fontSize: 26, letterSpacing: "0.14em", textTransform: "uppercase", color: C.type2, fontVariationSettings: "'opsz' 14", opacity: eyebrowO }}>
+      <div style={{ display: bare ? "none" : undefined, position: "absolute", left: 0, top: 80, width: W, textAlign: "center", fontFamily: INTER, fontWeight: 600, fontSize: 26, letterSpacing: "0.14em", textTransform: "uppercase", color: C.type2, fontVariationSettings: "'opsz' 14", opacity: eyebrowO }}>
         {scene.label}
       </div>
-      {WORDS.map((w, i) => {
+      {(bare ? [] : WORDS).map((w, i) => {
         const inP = interpolate(f, [w.from + 4, w.from + 26], [0, 1], { ...clamp, easing: ease.split });
-        const outP = i === WORDS.length - 1 ? interpolate(f, [PROCESS_FRAMES - 30, PROCESS_FRAMES - 12], [0, 1], clamp) : interpolate(f, [w.to - 4, w.to + 14], [0, 1], clamp);
+        const outP = i === WORDS.length - 1 ? interpolate(f, [ORIG - 30, ORIG - 12], [0, 1], clamp) : interpolate(f, [w.to - 4, w.to + 14], [0, 1], clamp);
         if (f < w.from || outP >= 1) return null;
         return (
           <div

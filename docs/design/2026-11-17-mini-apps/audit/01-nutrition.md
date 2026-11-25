@@ -1,6 +1,8 @@
 # Audit : Nutrition
 
-Audit du 2026-11-17, fait en lecture seule sur le code de la branche `main` (dernier commit lu : `19f6eb1`). Rien n'a été modifié dans l'app.
+Audit du 2026-11-17, fait en lecture seule sur le code de la branche `main` (dernier commit lu : `e09123e` ; le code de Nutrition n'a pas changé depuis `c06fd60`). Rien n'a été modifié dans l'app.
+
+Vérification : les fichiers de Nutrition ont été relus en entier et les lignes citées recontrôlées. Les numéros E1 à E24, F1 à F64 et les problèmes 1 à 23 sont ceux de la première version de cet audit : ils ne changent pas, car les planches déjà commencées les citent. Ajouts de cette relecture, sans nouveau numéro : l'entrée « Repas » du Studio vers la recherche (E7, E11), le troisième libellé « Chercher » (problème 2), la perte du récapitulatif sans confirmation (problème 3), « kcal restantes » jamais négatif dans l'espace (problème 23), le rappel « Un verre d'eau ? » encore dans le code (section 9), les tailles des widgets (section 6). Quelques numéros de ligne corrigés (par exemple `ProfileTopics.swift:339`, `MiniApp.swift:39`, `ScanFoodWidgets.swift:109`, `SmartRemindersView.swift:74`). Reste incertain : les couleurs réelles de l'anneau à l'écran (problème 19).
 
 Où sont les fichiers cités (le nom court suffit ensuite, suivi du numéro de ligne) :
 
@@ -10,8 +12,9 @@ Où sont les fichiers cités (le nom court suffit ensuite, suivi du numéro de l
 | `NutritionSpace.swift`, `SpaceView.swift` | `App/Screens/Spaces/` |
 | `MiniApp.swift`, `MiniAppScaffold.swift`, `MiniAppSettings.swift`, `MiniAppToFill.swift`, `WeekSelector.swift` | `App/Screens/MiniApps/` |
 | `NutritionTargetsCard.swift`, `ProfileTopics.swift`, `DataItemViews.swift`, `SmartRemindersView.swift` | `App/Screens/Profile/` |
-| `DailySection.swift`, `MiniAppsRow.swift` | `App/Screens/Home/` |
-| `DailyBrief.swift`, `DailyDefaults.swift`, `Router.swift`, `AppModel.swift`, `NutrientFile.swift` | `App/Core/` |
+| `DailySection.swift`, `MiniAppsRow.swift`, `DailyLayoutRules.swift` | `App/Screens/Home/` |
+| `DailyBrief.swift`, `DailyDefaults.swift`, `DataItems.swift`, `Router.swift`, `AppModel.swift`, `NutrientFile.swift`, `ScreenshotMode.swift` | `App/Core/` |
+| `EditorView.swift` | `App/Screens/Editor/` |
 | `Nutrition.swift`, `NutritionSafety.swift`, `WeightPlan.swift`, `ScanRecap.swift`, `ScanQuota.swift`, `FoodDatabase.swift`, `Profile.swift` | `Shared/Domains/` |
 | `NutritionTiles.swift` | `Shared/Render/Tiles/` |
 | `KindCatalog.swift` | `Shared/Model/` |
@@ -39,11 +42,11 @@ Où sont les fichiers cités (le nom court suffit ensuite, suivi du numéro de l
 | E4 | « Idées » | `NutritionIdeasPage`, `NutritionPages.swift:381` | Carte « Des idées pour la suite de ta journée » seulement (`NutritionApp.swift:184`). | Choisir un aliment ou un plat qui tient dans ce qu'il reste, puis l'ajouter. |
 | E5 | « Historique » | `NutritionHistoryPage`, `NutritionPages.swift:474` | Ligne « Historique » (`NutritionApp.swift:284`). Vue « 7 jours » de la carte de Mon quotidien (`DailySection.swift:1720`). | Choisir une période, lire moyennes, graphiques, poids, jours. |
 | E6 | « Mes repas » | `NutritionSavedMealsPage`, `NutritionPages.swift:732` | Ligne « Mes repas » (`NutritionApp.swift:290`). | Voir les repas enregistrés, en ajouter un à la journée, en supprimer un. |
-| E7 | « Ajouter un aliment » (recherche) | `FoodSearchView`, `NutritionSpace.swift:139` | « Rechercher » ou « Ajouter un aliment » (`NutritionApp.swift:96`). « + » d'un repas (`NutritionApp.swift:123`). « Ajouter un aliment » de la page repas (`NutritionPages.swift:159`). Depuis le récapitulatif d'un scan, en mode choix (`ScanRecapView.swift:186`). C'est aussi l'écran qui reste quand on ferme le scanner. | Chercher, filtrer par famille, ouvrir le scanner, créer un aliment perso, reprendre un repas enregistré. Bouton « Fermer » en haut. 80 lignes au plus par liste (`NutritionSpace.swift:262`). Mode « choix » (ouvert par « Remplacer » ou « Ajouter un aliment » du récapitulatif, `ScanRecapView.swift:186`) : un aliment touché est rendu au récapitulatif au lieu d'être noté ; ni « Scanner » ni « Mes repas » n'y sont proposés (`NutritionSpace.swift:145-147`, `:205`, `:239`). |
+| E7 | « Ajouter un aliment » (recherche) | `FoodSearchView`, `NutritionSpace.swift:139` | « Rechercher » ou « Ajouter un aliment » (`NutritionApp.swift:96`). « + » d'un repas (`NutritionApp.swift:123`). « Ajouter un aliment » de la page repas (`NutritionPages.swift:159`). Depuis le récapitulatif d'un scan, en mode choix (`ScanRecapView.swift:186`). Dans le Studio, carte de données « Repas » › « Chercher » (`DataItemViews.swift:115`, affichée par `EditorView.swift:583` quand le widget lit les repas, `DataItems.swift:276-278`). C'est aussi l'écran qui reste quand on ferme le scanner. | Chercher, filtrer par famille, ouvrir le scanner, créer un aliment perso, reprendre un repas enregistré. Bouton « Fermer » en haut. 80 lignes au plus par liste (`NutritionSpace.swift:262`). Mode « choix » (ouvert par « Remplacer » ou « Ajouter un aliment » du récapitulatif, `ScanRecapView.swift:186`) : un aliment touché est rendu au récapitulatif au lieu d'être noté ; ni « Scanner » ni « Mes repas » n'y sont proposés (`NutritionSpace.swift:145-147`, `:205`, `:239`). |
 | E8 | Feuille de quantité (le titre est le nom de l'aliment) | `FoodLogSheet`, `NutritionSpace.swift:451` | Toucher un aliment dans la recherche (`NutritionSpace.swift:331`). Toucher une idée (`NutritionPages.swift:432`). | Régler la quantité et le repas, lire l'apport, « Enregistrer ». |
 | E9 | Feuille d'un repas enregistré (le titre est le nom du repas) | `SavedMealLogSheet`, `NutritionSpace.swift:555` | Recherche › « Mes repas » (`NutritionSpace.swift:334`). Page repas › « Mes repas » (`NutritionPages.swift:162`). Page « Mes repas » › « Ajouter à ma journée » (`NutritionPages.swift:776`). | Choisir le repas d'arrivée, lire les aliments et l'apport, « Enregistrer ». |
 | E10 | « Aliment perso » (création) | `CustomFoodEditor`, `NutritionSpace.swift:608` | Recherche › « Aliment perso » (`NutritionSpace.swift:212`). Scanner › « Créer cet aliment » (`FoodScanView.swift:165`, suite `NutritionSpace.swift:427`). | Saisir nom, portion et valeurs pour 100 g. |
-| E11 | Scanner « Code-barres ou aliments » (caméra) | `FoodScanView`, `FoodScanView.swift:27` ; caméra `ScanCameraView`, `FoodScanView.swift:528` ; cadre `ScanFrame`, `NutritionSpace.swift:721` | « Scanner » de l'écran principal (`NutritionApp.swift:91`) : la recherche s'ouvre, puis le scanner par-dessus (`NutritionSpace.swift:339`). « Scanner » dans la recherche (`NutritionSpace.swift:205`). Bouton « Scanner » de Mon quotidien (`DailySection.swift:621` et `:726`). Widgets et écran verrouillé (`tessera://scan-food`, `ArdaneApp.swift:123`). | Viser un code-barres (lu tout seul) ou photographier un plat. Choisir une photo. Régler le flash. Aller à la recherche. |
+| E11 | Scanner « Code-barres ou aliments » (caméra) | `FoodScanView`, `FoodScanView.swift:27` ; caméra `ScanCameraView`, `FoodScanView.swift:528` ; cadre `ScanFrame`, `NutritionSpace.swift:721` | « Scanner » de l'écran principal (`NutritionApp.swift:91`) : la recherche s'ouvre, puis le scanner par-dessus (`NutritionSpace.swift:339`). « Scanner » dans la recherche (`NutritionSpace.swift:205`). Bouton « Scanner » de Mon quotidien (`DailySection.swift:621` et `:726`). Widgets et écran verrouillé (`tessera://scan-food`, `ArdaneApp.swift:123`). Dans le Studio, carte de données « Repas » › « Scanner » (`DataItemViews.swift:114`). | Viser un code-barres (lu tout seul) ou photographier un plat. Choisir une photo. Régler le flash. Aller à la recherche. |
 | E12 | Accès à la caméra : « Utiliser la caméra » ou « Caméra désactivée » | `CameraAccessGate`, `CameraAccessGate.swift:14` | Avant la caméra tant que l'accès n'est pas donné, ou s'il est refusé (`FoodScanView.swift:142`). | « Continuer », « Plus tard », « Ouvrir Réglages », « Chercher ou créer l'aliment ». |
 | E13 | Scanner : attente et messages | attente `FoodScanView.swift:441` ; `ScanMessageView`, `FoodScanView.swift:470` | Après la lecture d'un code ou d'une photo (`FoodScanView.swift:150-216`). | Attendre, ou choisir une sortie : réessayer, créer l'aliment, chercher dans la liste, scanner à nouveau. |
 | E14 | « Récapitulatif » (du scan) | `ScanRecapView`, `ScanRecapView.swift:14` | Produit trouvé ou plat analysé (`FoodScanView.swift:154`). | Corriger les aliments et les quantités, confirmer les aliments peu sûrs, choisir le repas, « Ajouter au journal ». |
@@ -54,9 +57,9 @@ Où sont les fichiers cités (le nom court suffit ensuite, suivi du numéro de l
 | E19 | « Nutrition » (fiche de « Mes informations ») | `TopicEditorSheet`, `ProfileTopics.swift:749` | Cartes « À remplir » › « Calculer mes besoins » ou « Voir mes besoins » (`DataItemViews.swift:106`). Espace Nutrition › « Objectifs du jour » (`NutritionSpace.swift:110`). | Le même formulaire que E18, sans la ligne du rappel. |
 | E20 | Éditeur d'une cible (le titre est le nom du nutriment) | `NutritionTargetEditor`, `NutritionTargetsCard.swift:298` | Toucher une valeur de « Tes besoins par jour » (`NutritionTargetsCard.swift:141`). | Taper une valeur, « Enregistrer », ou « Revenir au calcul ». |
 | E21 | « Ton objectif de poids » (récapitulatif en feuille) | feuille `NutritionTargetsCard.swift:107` avec `WeightPlanSummaryView`, `WeightPlanSummaryView.swift:9` | « Calculé d'après ton plan » › « Voir le récapitulatif » (`NutritionTargetsCard.swift:36`). Le même récapitulatif est aussi posé dans E18 (`WeightPlanRecap`, `ProfileTopics.swift:940`). | Lire le plan, « Appliquer ce plan », « Utiliser cette durée », « Modifier l'objectif ». |
-| E22 | « Rappels » | `SmartRemindersView`, section Nutrition `SmartRemindersView.swift:73` | Ligne « Rappel des repas » de E18 (`MiniAppSettings.swift:95`). | Activer « Repas », choisir l'heure. |
+| E22 | « Rappels » | `SmartRemindersView`, section Nutrition `SmartRemindersView.swift:74` | Ligne « Rappel des repas » de E18 (`MiniAppSettings.swift:95`). | Activer « Repas », choisir l'heure. |
 | E23 | Offre Premium | `PaywallView` ; contextes `nutrients` (`NutrientViews.swift:5`) et `photoScanLimit` (`PaywallContext.swift:65`) ; carte `PremiumLockCard` (`PremiumLock.swift:5`) | Ligne verrouillée « Tous les nutriments ». Analyses de plat gratuites épuisées. « Découvrir Premium » de l'Historique. | Lire l'offre, s'abonner. Le même verrou « Nutriments » (`NutrientLockRow`, `NutrientViews.swift:17`) apparaît aussi dans la feuille de quantité, la modification d'un aliment noté, la création d'un aliment perso, « Idées » (fibres) et, par ligne verrouillée ou « Acides gras, minéraux et vitamines », dans « Tes besoins par jour » (`NutritionTargetsCard.swift:79`, `:141`). |
-| E24 | Espace Nutrition (données, côté Créer) | `NutritionSpaceSections`, `NutritionSpace.swift:5`, dans `SpaceView` (`SpaceView.swift:78`) | Studio › « Données de l'espace Nutrition » (`App/Screens/Editor/SpaceOptionsSection.swift:58`). Créateur d'espace › « Mes données » (`App/Screens/Spaces/SpaceBuilderView.swift:127`). Onglet Créer (`App/Screens/Spaces/CreateView.swift:35`, chemin exact à vérifier). | Un second tableau de bord : calories du jour, repas, « Favoris », « Objectifs ». |
+| E24 | Espace Nutrition (données, côté Créer) | `NutritionSpaceSections`, `NutritionSpace.swift:5`, dans `SpaceView` (`SpaceView.swift:78`) | Studio › « Données de l'espace Nutrition » (`App/Screens/Editor/SpaceOptionsSection.swift:58`). Créateur d'espace › « Mes données » (`App/Screens/Spaces/SpaceBuilderView.swift:127`). L'onglet Créer sait l'afficher (`App/Screens/Spaces/CreateView.swift:35`), mais pour Nutrition seul le mode capture l'y envoie (`ScreenshotMode.swift:157`) : un lien `tessera://space/nutrition` ouvre la mini-app (`Router.swift:168-171`). | Un second tableau de bord : calories du jour, repas, « Favoris », « Objectifs ». |
 
 Variantes sans écran à part : le scanner existe aussi sous forme de feuille de capture de test (`ScanFrameScreenshot`, `NutritionSpace.swift:780-830`, réservée aux captures, non comptée). Dans le récapitulatif du scan, une ligne se glisse aussi : « Supprimer » et « Remplacer » (`ScanRecapView.swift:67-78`).
 
@@ -95,7 +98,7 @@ Liste de référence. Colonne « Accès » : G = gratuit, P = Premium, G+P = gra
 | F5 | « À remplir » | `MiniAppToFill.swift:10` et `:41`, `DataItemViews.swift:106` | G | Cartes « Objectif calorique », « Objectifs de macros », compteur | « Calculer mes besoins » ouvre E19 |
 | F6 | Bouton « Scanner » | `NutritionApp.swift:91` | G | — | Ouvre le scanner pour le jour choisi. Absent sans caméra. |
 | F7 | Bouton « Rechercher » ou « Ajouter un aliment » | `NutritionApp.swift:96` | G | — | Ouvre la recherche pour le jour choisi |
-| F8 | Recherche d'aliments hors ligne | `FoodSearchView`, `NutritionSpace.swift:175-188` et `:261-271` | G | « Suggestions » (favoris, récents, aliments perso, table intégrée) ou « Résultats » (table intégrée, puis environ 8 900 aliments génériques) ; ligne « kcal / 100 g · P · G · L » | Taper, toucher un aliment |
+| F8 | Recherche d'aliments hors ligne | `FoodSearchView`, `NutritionSpace.swift:175-188` et `:261-271` | G | « Suggestions » (favoris, récents, aliments perso, table intégrée) ou « Résultats » (table intégrée, puis environ 8 900 aliments génériques : 8 926 selon `scripts/graph_map.py:383`, base non recomptée) ; ligne « kcal / 100 g · P · G · L » | Taper, toucher un aliment |
 | F9 | Filtres par famille | `NutritionSpace.swift:222-238`, `FoodDatabase.swift:4` | G | « Pour toi », « Fruits », « Légumes », « Féculents », « Protéines », « Produits laitiers », « Noix et graines », « Plats », « Collations », « Boissons », « Sauces et sucres » | Toucher une pastille |
 | F10 | Recherche de produits emballés (Open Food Facts) | `NutritionSpace.swift:272-300` et `:384-423` | G | Section « Produits emballés », attente, erreur, « Aucun produit trouvé » | « Chercher « … » dans les produits emballés », touche Rechercher du clavier, « Réessayer ». Jamais pendant la frappe. |
 | F11 | Feuille de quantité | `FoodLogSheet`, `NutritionSpace.swift:451-552` | G+P | Marque, valeurs pour 100 g, « Après ajout, il te restera … kcal », « Apport ». Fibres et autres nutriments : Premium. | Quantité en g, portions rapides (« ½ portion », portion habituelle, « 2 portions », « 100 g »), repas, « Enregistrer » |
@@ -108,7 +111,7 @@ Liste de référence. Colonne « Accès » : G = gratuit, P = Premium, G+P = gra
 | F18 | Flash du scanner | `ScanTorch.swift:7` et `:262` | G | « Flash automatique », « Flash activé », « Flash désactivé » | Toucher l'éclair. Le choix est gardé. En automatique, le flash s'allume seul s'il fait sombre. |
 | F19 | Explication avant la caméra | `CameraAccessGate.swift:49` et `:122` | G | « Pourquoi la caméra », « Ce qui reste sur ton iPhone », ou « Caméra désactivée » | « Continuer », « Plus tard », « Ouvrir Réglages » |
 | F20 | Sorties d'un code-barres | `FoodScanView.swift:158-204` et `:93-100` | G | « Produit introuvable », pas de connexion, « Service occupé », produit sans valeurs | « Créer cet aliment », « Chercher dans la liste », « Scanner à nouveau », « Réessayer », « Voir la fiche Open Food Facts » |
-| F21 | Récapitulatif modifiable du scan | `ScanRecapView.swift:14` | G | Chaque aliment avec une étiquette (« Vérifié », « Estimation », « Open Food Facts », « Aliment perso »), « Ton habitude », « peu sûr » ou « assez sûr », calories et macros, total (fourchette « ≈ 420–560 kcal »), « Objectifs » après ajout | Quantité (champ et boutons + −), « Remplacer », « Supprimer » (menu « … » ou geste de glisser), remplaçants en une touche, « Ajouter un aliment », repas, « Ajouter au journal » |
+| F21 | Récapitulatif modifiable du scan | `ScanRecapView.swift:14` | G | Chaque aliment avec une étiquette (« Vérifié », « Estimation », « Open Food Facts », « Aliment perso »), « Ton habitude », « peu sûr » ou « assez sûr », calories et macros, total (fourchette « ≈ 420–560 kcal »), « Objectifs » après ajout | Quantité (champ et boutons + −), « Remplacer », « Supprimer » (menu « … » ou geste de glisser), remplaçants en une touche (3 au plus par aliment, `MealPhotoAnalysis.swift:220`), « Ajouter un aliment », repas, « Ajouter au journal » |
 | F22 | « À confirmer » | `ScanRecapView.swift:93-121`, `ScanRecap.swift:429` | G | Aliments « peu sûr » ou « Peut-être sur la photo ». Ajouts possibles : « Huile de cuisson ? », « Beurre ? », « Sauce ? » | Toucher le bon aliment, « Ajouter », « Ignorer ». Rien n'est ajouté sans accord. |
 | F23 | Apprentissage local du scanner | `ScanRecap.swift:364`, `ScanRecapView.swift:242` | G | « Ton habitude », « Comme ton repas du 12 octobre » | Aucune : les corrections restent sur l'iPhone et améliorent les scans suivants |
 | F24 | Compteur d'analyses gratuites | `FoodScanView.swift:127-131` et `:281` | G (montré sans Premium) | « Encore 3 analyses de plat gratuites », « Analyses de plat gratuites utilisées » | À zéro, le déclencheur et la galerie ouvrent l'offre Premium |
@@ -136,8 +139,8 @@ Liste de référence. Colonne « Accès » : G = gratuit, P = Premium, G+P = gra
 | F46 | Historique : courbe « Poids » | `NutritionPages.swift:636-693` | P en pratique : il faut 2 pesées dans la période et au moins un jour noté (sinon l'état vide remplace tout, `NutritionPages.swift:537-546`) | Courbe, variation, courbe lissée sur 7 jours et ligne « Cible » s'il y a un objectif de poids | Lecture seule |
 | F47 | Historique : « Jour par jour » | `NutritionPages.swift:695-709` | P (il faut plus d'un jour) | Jusqu'à 31 jours, kcal ou « Rien de noté » | Toucher un jour : ouvre la Nutrition de ce jour |
 | F48 | Bouton « Mes paramètres » | `MiniAppSettings.swift:63` | G | — | Ouvre E18 |
-| F49 | « Rappel des repas » | `MiniAppSettings.swift:88-131`, `SmartRemindersView.swift:73` | G | Heure ou « Désactivé » | Ouvre « Rappels » : interrupteur « Repas », heure |
-| F50 | « Ton objectif » (partagé avec Fitness) | `ProfileTopics.swift:382`, `Profile.swift:205` | G | 9 choix, dont « Recomposition corporelle », « Prise de muscle », « Prise de masse », « Force », « Performance », « Endurance » | Choisir. Texte : « Le même pour Sport et Nutrition. » |
+| F49 | « Rappel des repas » | `MiniAppSettings.swift:88-131`, `SmartRemindersView.swift:74` | G | Heure ou « Désactivé » | Ouvre « Rappels » : interrupteur « Repas », heure |
+| F50 | « Ton objectif » (partagé avec Fitness) | `ProfileTopics.swift:382`, `Profile.swift:205` | G | 9 choix : « Perte de poids », « Sèche », « Maintien », « Recomposition corporelle », « Prise de muscle », « Prise de masse », « Force », « Performance », « Endurance » | Choisir. Texte : « Le même pour Sport et Nutrition. » |
 | F51 | « Ton poids cible » et durée | `WeightPlanQuestions`, `ProfileTopics.swift:847` | G | Champ « Poids cible », « Durée » en « Semaines », « Mois » ou « Date » | Saisir. Montré seulement pour une perte ou une prise. |
 | F52 | « Es-tu enceinte ou allaitante ? » | `LifeStageQuestion`, `ProfileTopics.swift:813` | G | « Adulte », « Enceinte », « Allaitante », « Je préfère ne pas répondre » | Choisir |
 | F53 | « Toi » : âge, taille, poids, genre | `ProfileTopics.swift:329-365` | G | Les quatre valeurs. Référence de calcul si le genre n'est ni femme ni homme. | Saisir. Le poids saisi ici alimente la courbe de poids. |
@@ -153,7 +156,7 @@ Liste de référence. Colonne « Accès » : G = gratuit, P = Premium, G+P = gra
 | F63 | Espace Nutrition (côté Créer) | `NutritionSpace.swift:94-123` | G | « Favoris » (liste), « Moyenne sur 7 jours », « Série de suivi », « Objectifs du jour » | Retirer un favori, ouvrir les objectifs |
 | F64 | Mentions des sources | `NutritionApp.swift:65`, `NutritionSpace.swift:267-298`, `ScanRecapView.swift:306-330`, `NutrientFile.swift:22` | G | Open Food Facts (ODbL), Fichier canadien sur les éléments nutritifs, USDA, « pas un avis médical » | Liens « openfoodfacts.org » et « ODbL » |
 
-Hors version publique : l'interrupteur « Contribuer à l'amélioration » du récapitulatif n'existe qu'en version de test (`ScanRecapView.swift:157`).
+Hors version publique : l'interrupteur « Contribuer à l'amélioration » du récapitulatif n'existe qu'en version de test (`ScanRecapView.swift:157`). L'analyse d'une photo en ligne est préparée mais éteinte dans le code (`MealPhotoAnalysis.swift:70`) : ne pas la dessiner.
 
 ## 5. Données et calculs
 
@@ -161,7 +164,7 @@ Hors version publique : l'interrupteur « Contribuer à l'amélioration » du r�
 
 - Les aliments notés : `FoodEntry` = date, repas, copie de l'aliment, grammes, origine (`Nutrition.swift:407`).
 - Les aliments perso, les favoris, les repas enregistrés (`NutritionState`, `Nutrition.swift:692`).
-- Le corps et les choix : âge, taille, poids (avec le journal des pesées `weightLog`), genre, objectif, niveau d'activité, situation (grossesse, allaitement), poids cible et date (`WeightPlan`, `WeightPlan.swift:10`).
+- Le corps et les choix : âge, taille, poids (avec le journal des pesées `weightLog`, une pesée par jour, `Profile.swift:481`), genre, objectif, niveau d'activité, situation (grossesse, allaitement), poids cible et date (`WeightPlan`, `WeightPlan.swift:10`).
 - Les cibles changées à la main (`customTargets`, « Personnalisé »).
 
 **Ce qui est gardé** (`NutritionState`, `Nutrition.swift:692-721`, dans l'App Group)
@@ -186,7 +189,7 @@ Hors version publique : l'interrupteur « Contribuer à l'amélioration » du r�
 | Jour « dans l'objectif » | à ± 10 % de l'objectif calorique | `Nutrition.swift:995`, `NutritionApp.swift:240` |
 | Série de suivi | jours de suite avec au moins un aliment | `Nutrition.swift:897` |
 | Prochain repas | reste partagé entre les repas principaux à venir | `Nutrition.swift:911` |
-| Idées | protéines ou fibres par calorie ; plats entre 45 % et 100 % du reste (le commentaire du code dit 60 % : à vérifier) | `Nutrition.swift:1025-1042` |
+| Idées | protéines ou fibres par calorie ; plats entre 45 % et 100 % du reste (le commentaire du code dit 60 %, le calcul dit 45 %) | `Nutrition.swift:1025-1042` |
 | Répartition | protéines × 4, glucides × 4, lipides × 9 | `NutritionPages.swift:600` |
 | Besoins | Mifflin-St Jeor × activité (1,2 / 1,375 / 1,55 / 1,725) × objectif (−15 %, −20 %, 0, +10 %, +15 % plafonné à 500 kcal), 1 400 kcal au moins | `Nutrition.swift:1175-1197` |
 | Macros | protéines en g par kg (1,2 à 2,2), plafonnées à 35 % des calories ; lipides 28 % ; glucides : le reste | `Nutrition.swift:1165`, `:1198-1200` |
@@ -202,6 +205,8 @@ Règles d'affichage qui viennent des données : « ≥ » devant un total incomp
 
 Poids : gardé en kg, montré en kg ou en lb selon le réglage (`NutritionPages.swift:638`).
 
+Calculs écrits mais pas encore branchés à l'écran : les fondations de mesure du scanner (assiette, volume, masse : `ScannerGeometry.swift`, `ScannerVolume.swift`, `ScannerMass.swift`, `ScannerEstimate.swift` dans `Shared/Domains/Scanner/`). Aucun écran ne les appelle (recherche dans `App/` et `Widgets/` ; même constat dans `scripts/graph_map.py:116`). Ne pas dessiner une pesée par la photo.
+
 ## 6. Liens
 
 **Carte de Mon quotidien**
@@ -212,25 +217,29 @@ Poids : gardé en kg, montré en kg ou en lb selon le réglage (`NutritionPages.
   2. « Repas » (« Repas du jour ») : kcal par repas et « Total 1 181 / 2 750 kcal » (`DailySection.swift:1662`).
   3. « 7 jours » (« Calories · 7 jours ») : barres et moyenne ; ouvre l'Historique (`DailySection.swift:1713`).
 - Sans objectif et sans aliment noté : carte vide avec « Donne ton objectif calorique ou scanne un repas : tes calories du jour apparaîtront ici. » (`DailyBrief.swift:228`, `:452-459`).
+- Rangée des mini-apps de l'Accueil : la pastille Nutrition dit « 1 181 kcal aujourd'hui » dès qu'un aliment est noté (`MiniAppsRow.swift:67-69`).
+- Le tutoriel entoure la carte Nutrition de Mon quotidien (`DailySection.swift:250`).
 
 **Widgets** (`KindCatalog.swift:155-162`, `NutritionTiles.swift`)
 
-- Gratuits : « Calories restantes », « Macros ».
-- Premium : « Protéines restantes », « Repas du jour », « Semaine nutrition », « Série de suivi », « Ajout rapide », « Prochain repas ».
+- Gratuits : « Calories restantes » (petit, moyen, écran verrouillé rond, rectangle et ligne), « Macros » (petit, moyen, rectangle de l'écran verrouillé).
+- Premium : « Protéines restantes » (petit, moyen, rond de l'écran verrouillé), « Repas du jour » (petit, moyen, grand), « Semaine nutrition » (petit, moyen, grand), « Série de suivi » (petit, moyen), « Ajout rapide » (petit, moyen, avec boutons), « Prochain repas » (petit, moyen).
+- Bouton « Scanner » dans l'en-tête de 7 de ces widgets, pas « Ajout rapide » (`NutritionTiles.swift:7` et `:57-59`).
 - Autres widgets Premium qui lisent la nutrition : « Conseil nutrition », « Ma journée », « Tableau fitness » (`KindCatalog.swift:261-268`).
-- Écran verrouillé : « Scanner un aliment », et un contrôle iOS 18 (`ScanFoodWidgets.swift:8` et `:107`). Pas de verrou Premium dans ce fichier.
+- Écran verrouillé : « Scanner un aliment » (rond et rectangle ; le rectangle montre aussi les calories du jour), et un contrôle iOS 18 (`ScanFoodWidgets.swift:8` et `:109`). Pas de verrou Premium dans ce fichier.
 
 **Autres mini-apps**
 
 - Fitness : un seul objectif pour les deux (« Le même pour Sport et Nutrition. », `ProfileTopics.swift:383`). Le niveau d'activité peut venir des séances par semaine (`AppModel.swift:1336`). Le poids sert aux deux.
 - « Mes informations » : mêmes données, mêmes formulaires (`MiniAppSettings.swift:3-8`).
+- Studio (côté Créer) : la carte de données « Repas » d'un widget Nutrition ouvre le scanner ou la recherche (`DataItemViews.swift:112-116`).
 
 **Notifications et rappels**
 
-- Rappel « Rien de noté aujourd'hui », à l'heure choisie (20 h par défaut), seulement si la personne a noté un repas dans la semaine (`SmartReminders.swift:46-56`).
+- Rappel « Rien de noté aujourd'hui », à l'heure choisie, seulement si la personne a noté un repas dans la semaine (`SmartReminders.swift:46-56`).
 - « Un dîner à noter ? », « Objectif calorique en vue », « Ta journée en calories », « Protéines du jour », « Bilan nutrition de la semaine » le dimanche (`NotificationEngine.swift:372-430`).
 - Encouragements après un repas (`Encouragements.swift:148`).
-- Demande de note de l'app après 3 jours de suivi (`Shared/Model/ReviewPrompt.swift:36`).
+- Trois jours de repas notés comptent comme un bon moment pour demander une note de l'app (`Shared/Model/ReviewPrompt.swift:36` et `:93`).
 
 **Liens profonds**
 
@@ -281,17 +290,17 @@ Poids : gardé en kg, montré en kg ou en lb selon le réglage (`NutritionPages.
 ## 8. Problèmes d'UX constatés aujourd'hui
 
 1. **Les calories mangées et l'objectif ne sont pas sur l'écran principal.** L'anneau ne montre que le reste (`NutritionApp.swift:323-336`). Le chiffre « mangé / objectif » se lit dans « Nutriments » (`NutritionPages.swift:276`) ou dans la vue « Repas » de Mon quotidien (`DailySection.swift:1691`).
-2. **Le scan par photo n'a ni entrée ni libellé à lui.** Le bouton s'appelle « Scanner » avec une icône de code-barres (`NutritionApp.swift:91`). L'écran s'appelle « Code-barres ou aliments » (`FoodScanView.swift:135`). Ailleurs on lit « Scanner un code-barres » (`NutritionSpace.swift:50`, `ScanFoodWidgets.swift:17`).
-3. **Annuler un scan demande deux fermetures.** Le scanner est une feuille posée sur la recherche. La croix renvoie à la recherche, qu'il faut fermer à son tour (`FoodScanView.swift:78`, `NutritionSpace.swift:339-348`).
+2. **Le scan par photo n'a ni entrée ni libellé à lui.** Le bouton s'appelle « Scanner » avec une icône de code-barres (`NutritionApp.swift:91`). L'écran s'appelle « Code-barres ou aliments » (`FoodScanView.swift:135`). Ailleurs on lit « Scanner un code-barres » (`NutritionSpace.swift:50`, `ScanFoodWidgets.swift:17`). La recherche, elle, porte trois noms : « Rechercher » (`NutritionApp.swift:96`), « Ajouter un aliment » (titre de l'écran, `NutritionSpace.swift:316`) et « Chercher » (carte « Repas » du Studio, `DataItemViews.swift:115`).
+3. **Sortir du scanner coûte cher.** Le scanner est une feuille posée sur la recherche : la croix renvoie à la recherche, qu'il faut fermer à son tour (`FoodScanView.swift:78`, `NutritionSpace.swift:339-348`). Dans le récapitulatif, « Annuler » et « Scanner à nouveau » effacent les corrections déjà faites, sans confirmation (`FoodScanView.swift:81`, `:432-437` ; limite connue, `docs/memoire/Chantiers.md:110`).
 4. **Un compte neuf voit quatre accès au même réglage.** Deux cartes « À remplir », la carte « Calcule tes besoins du jour » et « Mes paramètres » (`NutritionApp.swift:58`, `:62`, `:66`). Ils ouvrent deux feuilles différentes pour le même formulaire : « Nutrition » (`ProfileTopics.swift:749`) et « Mes paramètres » (`MiniAppSettings.swift:184`).
 5. **Deux blocs n'ont pas de titre.** La ligne « Tous les nutriments » (`NutritionApp.swift:150`) et la carte « Historique » / « Mes repas » / « Mes aliments » (`NutritionApp.swift:283`). « Repas » et « Calories de la semaine » en ont un.
-6. **L'historique, les repas enregistrés et les réglages sont sous le premier écran** (capture `tests/mini-app-nutrition.png`). La page « Idées » n'a qu'une entrée, et elle est conditionnelle : aujourd'hui, objectif connu, au moins un aliment noté, plus de 150 kcal restantes (`NutritionApp.swift:180-193`).
+6. **L'historique, les repas enregistrés et les réglages sont sous le premier écran** (capture `tests/mini-app-nutrition.png`). La page « Idées » n'a qu'une entrée, et elle est conditionnelle : aujourd'hui, objectif connu, au moins un aliment noté, plus de 150 kcal restantes (`NutritionApp.swift:62`, `:180-193`).
 7. **La semaine est montrée trois fois, avec deux définitions.** Écran principal : la semaine civile du jour choisi (`NutritionApp.swift:246`). Historique « 7 jours » et Mon quotidien « 7 jours » : les 7 derniers jours (`NutritionPages.swift:507`, `DailySection.swift:1718`). Les moyennes peuvent différer.
 8. **Deux règles pour « objectif atteint » sur le même écran.** La carte conseil : entre 50 kcal de trop et 150 kcal de reste (`NutritionApp.swift:183-197`). La semaine et l'historique : à ± 10 % (`NutritionApp.swift:240`, `Nutrition.swift:995`).
 9. **Le sélecteur calcule « jour dans l'objectif » mais ne le montre pas.** Un jour réussi et un jour simplement noté ont le même point plein (`NutritionApp.swift:235-241`, `WeekSelector.swift:133-141`).
 10. **Les favoris sont cachés.** On met en favori seulement en glissant un aliment déjà noté (`NutritionPages.swift:73-78`). Le libellé « Favori » ne change pas selon l'état. La mini-app n'a pas de liste des favoris : elle n'existe que dans l'espace (`NutritionSpace.swift:94-106`). Dans la recherche, rien ne distingue un favori (`NutritionSpace.swift:358-380`).
 11. **Des calculs existent mais la mini-app ne les montre pas.** La série de suivi (`Nutrition.swift:897`) et le prochain repas (`Nutrition.swift:911`) sont dans les widgets, Mon quotidien ou l'espace (`NutritionSpace.swift:118`, `DailySection.swift:751`), pas dans la mini-app.
-12. **Le poids est coupé en deux.** La courbe est dans l'Historique (`NutritionPages.swift:636`). La pesée se saisit dans « Mes paramètres » › « Toi » (`ProfileTopics.swift:341`). L'« Ajustement proposé » n'apparaît que dans « Mes paramètres » (`NutritionTargetsCard.swift:25`). L'écran principal ne dit rien de l'objectif de poids.
+12. **Le poids est coupé en deux.** La courbe est dans l'Historique (`NutritionPages.swift:636`). La pesée se saisit dans « Mes paramètres » › « Toi » (`ProfileTopics.swift:339`). L'« Ajustement proposé » n'apparaît que dans « Mes paramètres » (`NutritionTargetsCard.swift:25`). L'écran principal ne dit rien de l'objectif de poids.
 13. **« Mes paramètres » est une très longue feuille.** Jusqu'à 8 blocs à la suite : rappel, objectif, poids cible, grossesse, corps, activité, plan, besoins avec 34 cibles (`MiniAppSettings.swift:192-196`, `ProfileTopics.swift:461-486`).
 14. **Les suppressions ne suivent pas la même règle.** Un aliment perso demande une confirmation (`CustomFoodsView.swift:63`). Un repas enregistré et un aliment noté sont supprimés tout de suite, sans retour possible (`NutritionPages.swift:757`, `:68`, `:222`).
 15. **Un repas enregistré ne peut être ni renommé ni modifié.** Seulement ajouté ou supprimé (`NutritionPages.swift:747-769`).
@@ -302,11 +311,11 @@ Poids : gardé en kg, montré en kg ou en lb selon le réglage (`NutritionPages.
 20. **Un aliment noté ne peut pas changer de jour.** La feuille ne propose que la quantité et le repas (`NutritionPages.swift:200-205`).
 21. **L'objectif n'est pas daté.** L'Historique compare tous les jours passés à l'objectif d'aujourd'hui (`Nutrition.swift:994-995`).
 22. **L'Historique ouvre une deuxième copie de l'écran principal.** « Jour par jour » empile la même vue sur un autre jour, avec son propre sélecteur de semaine (`NutritionPages.swift:701`, `MiniApp.swift:172`).
-23. **Un second tableau de bord Nutrition existe côté Créer**, avec d'autres libellés (« Scanner un code-barres », « Objectifs du jour ») et la seule liste des favoris (`NutritionSpace.swift:5-124`).
+23. **Un second tableau de bord Nutrition existe côté Créer**, avec d'autres libellés (« Scanner un code-barres », « Objectifs du jour ») et la seule liste des favoris (`NutritionSpace.swift:5-124`). Il ne dit jamais « kcal en trop » : après un dépassement il montre « 0 kcal restantes » (`NutritionSpace.swift:18-21`).
 
 ## 9. Ce que la mission du PDG cite et qui n'existe pas
 
-1. **Hydratation.** La mini-app Eau a été retirée le 2026-10-15 (`docs/memoire/Decisions.md:13`, `AppModel.swift:810`). Aucun écran ne permet de noter l'eau. Les anciennes données restent dans le fichier (`Shared/Model/Content.swift:234`). Un ancien widget Eau ouvre l'Accueil (`Router.swift:163`).
+1. **Hydratation.** La mini-app Eau a été retirée le 2026-10-15 (`docs/memoire/Decisions.md:13`, `AppModel.swift:810`). Aucun écran ne permet de noter l'eau. Les anciennes données restent dans le fichier (`Shared/Model/Content.swift:234`). Un ancien widget Eau ouvre l'Accueil (`Router.swift:163`). Un rappel « Un verre d'eau ? » est encore dans le code, mais il ne part que si des verres sont notés le jour même, ce qu'aucun écran ne permet plus (`NotificationEngine.swift:430-435`).
 2. **Évolution des objectifs.** L'objectif calorique n'a pas d'historique : une seule valeur, celle d'aujourd'hui (`Nutrition.swift:693`, `:994`). Ce qui existe et s'en approche : la courbe de poids avec la ligne « Cible » (F46), l'« Ajustement proposé » (F56), le récapitulatif du plan (F55).
 3. **Une taille « Medium » distincte dans Mon quotidien.** Le code n'a que la demi-largeur et la pleine largeur (`DailyLayoutRules.swift:8`). Nutrition est en pleine largeur par défaut. À trancher avant de dessiner la carte.
 
@@ -316,9 +325,11 @@ Hors mission, pour mémoire : « Faire mes repas » (Premium) est une demande ou
 
 ## 10. Captures CI disponibles
 
+En bref : 13 captures de Nutrition existent. Elles ne sont plus dans `origin/ci-report` tel qu'il est aujourd'hui. Elles se lisent dans le commit précédent de cette branche, encore présent dans le dépôt local.
+
 **Dans `origin/ci-report` tel qu'il est aujourd'hui** (commit `170618c`, « Build 455 ») : aucune image. La branche ne contient que des fichiers texte (918 fichiers). Elle est réécrite à chaque run, et le dernier run n'a pas pris de capture.
 
-**Dans la version précédente de la branche, encore dans le dépôt local** (commit `9261911`, « Build 454 », run `[daily]`) : 13 captures de Nutrition. Lecture seule possible avec `git show 9261911:<chemin>`. Ce commit n'est plus qu'un ancien état de la branche : il peut disparaître. Un nouveau run avec captures (`[daily]` ou `[apps]`) les remettrait dans `origin/ci-report`.
+**Dans la version précédente de la branche, encore dans le dépôt local** (commit `9261911`, « Build 454 », run `[daily]`) : 13 captures de Nutrition. Lecture seule possible avec `git show 9261911:<chemin>`. Ce commit n'est plus tenu que par le journal local de la branche (`git reflog show origin/ci-report`) : il peut disparaître au prochain nettoyage de git. Un nouveau run avec captures (`[daily]` ou `[apps]`) les remettrait dans `origin/ci-report`.
 
 | Fichier | Ce qu'on y voit |
 |---|---|
@@ -340,14 +351,14 @@ Captures voisines du même commit : `home-light.jpg`, `home-dark.jpg`, `home-pag
 
 Plus ancien (commit `71cc0ee`, « Build 447 ») : `tests/data-entry-food-quantity.png`, `tests/data-entry-creator-after-food.png`, `tests/data-entry-editor-after-food.png`.
 
-**Aucune capture nulle part** pour : le scanner (caméra, flash, messages), le récapitulatif d'un scan, « Idées », « Mes aliments », l'éditeur d'une cible, le récapitulatif de l'objectif de poids, l'état sans Premium, un compte neuf dans la mini-app. Le simulateur n'a pas de caméra. Des écrans de test existent pour en produire (`-screenshotScreen scan-frame`, `scan-recap`, `scan-recap-photo`, `nutrition-plan`, `nutrition-ideas` : `App/Core/ScreenshotMode.swift:112`, `:183`, `:459`).
+**Aucune capture nulle part** pour : le scanner (caméra, flash, messages), le récapitulatif d'un scan, « Idées », « Mes aliments », l'éditeur d'une cible, le récapitulatif de l'objectif de poids, l'état sans Premium, un compte neuf dans la mini-app. Le simulateur n'a pas de caméra. Des écrans de test existent pour en produire (`-screenshotScreen scan-frame`, `scan-recap`, `scan-recap-photo`, `nutrition-plan`, `nutrition-ideas` : `App/Core/ScreenshotMode.swift:111`, `:120`, `:131`, `:183`).
 
 ## 11. Contraintes pour la conception
 
 **Ne rien perdre**
 
 1. Les 64 fonctions de la section 4 doivent toutes rester joignables. Les plus faciles à oublier : F2, F14, F20, F22, F23, F25, F31, F32, F36, F56, F57, F63, F64.
-2. Aucune fonction inventée : pas d'hydratation, pas d'historique des objectifs, pas de « Faire mes repas ». Si une planche en propose une, elle doit être marquée « nouvelle idée ».
+2. Aucune fonction inventée : pas d'hydratation, pas d'historique des objectifs, pas de « Faire mes repas », pas d'analyse en ligne, pas de pesée par la photo. Si une planche en propose une, elle doit être marquée « nouvelle idée ».
 
 **Données et calculs**
 
@@ -367,7 +378,7 @@ Plus ancien (commit `71cc0ee`, « Build 447 ») : `tests/data-entry-food-quantit
 
 **Couleurs**
 
-13. Anneau des calories orange, protéines rouge, glucides jaune, lipides bleu. Une seule source : `NutritionColors.swift` (demande du 2026-10-30, `docs/memoire/Demandes.md:235`). La couleur de la mini-app est `F08A24` (`MiniApp.swift:40`).
+13. Anneau des calories orange, protéines rouge, glucides jaune, lipides bleu. Une seule source : `NutritionColors.swift` (demande du 2026-10-30, `docs/memoire/Demandes.md:235`). La couleur de la mini-app est `F08A24` (`MiniApp.swift:39`).
 14. Toute couleur passe par la palette Cristal (`CristalPalette.swift:133`). Le dépassement d'une limite est en rouge d'alerte.
 
 **Premium**
@@ -389,9 +400,3 @@ Plus ancien (commit `71cc0ee`, « Build 447 ») : `tests/data-entry-food-quantit
 23. Les tests d'interface cherchent des identifiants : `nutrition-hero`, `nutrition-scan`, `nutrition-search`, `meal-breakfast`, `meal-add`, `food-row`, `entry-row`, `entry-delete`, `nutrition-nutrients`, `nutrition-saved`, `nutrition-history`, `miniapp-settings-edit`, `daily-nutrition-open`, `daily-scan` (`UITests/MiniAppUITests.swift:116-160`, `:499`). Une intégration future devra les garder ou mettre les tests à jour.
 24. Les textes sont traduits en 6 langues. Un libellé nouveau ou plus long doit tenir aussi en allemand et en japonais (voir le problème 17).
 25. Mon quotidien : la carte Nutrition a trois vues et un bouton « Scanner ». La mini-app et la carte doivent montrer les mêmes chiffres avec les mêmes mots (« kcal restantes », « kcal en trop », « kcal mangées »).
-
-## Relecture
-
-- Ajouté : les gestes de glisser de « Mes aliments » et du récapitulatif (« Supprimer », « Remplacer ») ; le mode « choix » de la recherche (sans « Scanner » ni « Mes repas ») et sa limite de 80 lignes ; les conditions d'affichage des trois blocs de « Idées » ; les autres endroits où le verrou « Nutriments » apparaît ; la feuille de capture de test, non comptée.
-- Corrigé : F46 (la courbe de poids disparaît aussi quand aucun jour n'est noté). Les autres affirmations vérifiées (dix-sept : lignes des sections 3, 4, 5 et 9, familles de filtres, 38 nutriments et 34 cibles, quota de 10, seuil 0,80, nettoyage à 400 jours, plafond 20 récents, 45 %, ± 10 %, champs Premium de la création) sont exactes. Les décomptes 24 écrans, 64 fonctions, 17 fonctions avec une partie Premium restent exacts.
-- Incertain : le chiffre « environ 8 900 aliments génériques » (source `scripts/graph_map.py`, base non recomptée) ; la présence de « Nutrition » dans Créer (`CreateView.swift:35`, déjà marquée à vérifier) ; les couleurs réelles de l'anneau sur capture (problème 19).

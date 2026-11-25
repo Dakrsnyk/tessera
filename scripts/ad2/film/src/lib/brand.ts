@@ -12,12 +12,12 @@ export const C = {
   void: "#000000",
   lifted: "#07101C",
   seamCore: "#FFFFFF",
-  /** Saphir identity (icon "ArdaneIcon": gradient 160deg #4E9BE0 -> #1B4A7A, halves white / #D6E9FA). */
+  /** Brand (icon "ArdaneIcon", 2026-11-05): gradient 160deg in oklab #17B3D0 (turquoise) -> #1D4E9E (royal blue), halves white / #D6E9FA. The names keep « sapphire » (the Sapphire line). */
   paleWarm: "#F2F8FE",
   pale: "#D6E9FA",
-  sapphire: "#4E9BE0",
-  sapphireDeep: "#1B4A7A",
-  sapphireBright: "#68B5F5",
+  sapphire: "#17B3D0",
+  sapphireDeep: "#1D4E9E",
+  sapphireBright: "#4FD3E8",
   type1: "#F5F5F7",
   type2: "#A1A1A6",
   type3: "#6E6E73",

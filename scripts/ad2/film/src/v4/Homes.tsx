@@ -10,6 +10,7 @@ import { asset } from "../lib/kit";
 import { Tr } from "../lib/i18n";
 import { drawBlade, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
+import { dockIconFiles, drawIosChrome, iconFiles, iosFill, toIOS } from "../lib/iosHome";
 import { back } from "../v3/fx";
 
 /**
@@ -17,8 +18,8 @@ import { back } from "../v3/fx";
  * dock are ONE capture, so widget colour and wallpaper always match). 165 frames each, one phone that turns through
  * each change (a blade of light between two captures), a blurred copy of the wallpaper as backdrop.
  */
-export const HOMES_FRAMES = 660;
-const EACH = 165;
+export const HOMES_FRAMES = 420;
+const EACH = 105;
 
 type Rect = [number, number, number, number];
 type Piece = { file: string; rect: Rect; label?: string };
@@ -36,14 +37,10 @@ type Spec = {
 
 const M = (file: string, y: number): Piece => ({ file, rect: [57, y, 1092, 510] });
 const S = (file: string, x: number, y: number): Piece => ({ file, rect: [x, y, 510, 510] });
-const GRID: Rect[] = [
-  [628, 1403, 222, 222],
-  [901, 1404, 222, 222],
-  [629, 1694, 222, 222],
-  [902, 1695, 222, 222],
-];
-const grid = (set: string, items: [number, string][]): Piece[] => items.map(([n, label], i) => ({ file: `kit/icons-${set}-${n}`, rect: GRID[i], label }));
-const dockOf = (set: string) => [4, 5, 6, 7].map((n) => `kit/icons-${set}-${n}`);
+/** The kit's icon sets are no longer drawn (2026-11-11): the free cells get real Apple apps (fillOf), the Dock is IOS_DOCK. */
+const grid = (_set: string, _items: [number, string][]): Piece[] => [];
+const dockOf = (_set: string) => dockIconFiles();
+const fillOf = (spec: Spec) => iosFill(spec.widgets.map((w) => toIOS(w.rect)), spec.widgets.map((w) => w.file));
 
 /**
  * The four identities, in the film's order: blue + dark, red + dark, pink + violet, white + silver. Each Home is built from
@@ -77,99 +74,29 @@ const HOMES: Spec[] = [
     dock: dockOf("etudes"),
   },
 ];
-const FILES = [...new Set(HOMES.flatMap((h) => [h.wall, ...h.widgets.map((w) => w.file), ...h.icons.map((w) => w.file), ...h.dock]))];
-const WIPE = 28;
+const FILES = [...new Set(HOMES.flatMap((h) => [h.wall, ...h.widgets.map((w) => w.file), ...(h.capture ? [] : iconFiles(fillOf(h))), ...h.dock]))];
+const WIPE = 18;
 
-const INK_DARK = "rgba(255,255,255,0.92)";
-const INK_LIGHT = "rgba(22,26,36,0.78)";
 
-/** Draws one Home (1206 × 2622) the way iOS lays it out: status bar, widgets with their caption, icons with their name, search, dock. */
+/**
+ * Draws one Home (1206 × 2622) as a REAL iPhone Home Screen (lib/iosHome.ts, since 2026-11-11): the same widgets on the measured
+ * iOS grid with « Ardane » under each, real Apple apps in the free cells, iOS status bar, Search pill and Dock of Apple apps.
+ */
 const drawHome = (ctx: CanvasRenderingContext2D, spec: Spec, imgs: Record<string, HTMLImageElement>) => {
   ctx.clearRect(0, 0, 1206, 2622);
   ctx.drawImage(imgs[spec.wall], 0, 0, 1206, 2622);
   if (spec.capture) return;
-  const ink = spec.dark ? INK_DARK : INK_LIGHT;
-  const font = (w: number, px: number) => `${w} ${px}px "Inter Ardane", -apple-system, Helvetica, Arial, sans-serif`;
-  // status bar
-  ctx.fillStyle = ink;
-  ctx.font = font(600, 58);
-  ctx.textAlign = "left";
-  ctx.textBaseline = "middle";
-  ctx.fillText("9:41", 126, 92);
-  ctx.fillStyle = "#000";
-  ctx.beginPath();
-  ctx.roundRect(420, 40, 364, 96, 48);
-  ctx.fill();
-  ctx.fillStyle = ink;
-  [14, 22, 30, 38].forEach((h, i) => {
-    ctx.beginPath();
-    ctx.roundRect(884 + i * 21, 106 - h, 12, h, 4);
-    ctx.fill();
+  const rects = spec.widgets.map((w) => toIOS(w.rect));
+  spec.widgets.forEach((w, i) => {
+    ctx.save();
+    ctx.shadowColor = "rgba(0,0,0,0.22)";
+    ctx.shadowBlur = 30;
+    ctx.shadowOffsetY = 14;
+    ctx.drawImage(imgs[w.file], ...rects[i]);
+    ctx.restore();
   });
-  ctx.strokeStyle = ink;
-  ctx.lineCap = "round";
-  ctx.lineWidth = 7;
-  [34, 23, 12].forEach((r) => {
-    ctx.beginPath();
-    ctx.arc(1004, 106, r, -Math.PI * 0.78, -Math.PI * 0.22);
-    ctx.stroke();
-  });
-  ctx.beginPath();
-  ctx.arc(1004, 104, 4, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.globalAlpha = 0.5;
-  ctx.lineWidth = 3.5;
-  ctx.beginPath();
-  ctx.roundRect(1049, 72, 76, 36, 11);
-  ctx.stroke();
-  ctx.globalAlpha = 1;
-  ctx.beginPath();
-  ctx.roundRect(1054, 77, 66, 26, 7);
-  ctx.fill();
-  ctx.globalAlpha = 0.5;
-  ctx.fillRect(1129, 83, 6, 14);
-  ctx.globalAlpha = 1;
-  // widgets + captions
-  ctx.textAlign = "center";
-  ctx.font = font(500, 34);
-  for (const w of spec.widgets) {
-    ctx.drawImage(imgs[w.file], ...w.rect);
-    ctx.fillStyle = ink;
-    ctx.fillText("Ardane", w.rect[0] + w.rect[2] / 2, w.rect[1] + w.rect[3] + 38);
-  }
-  // icons + names
-  for (const ic of spec.icons) {
-    ctx.drawImage(imgs[ic.file], ...ic.rect);
-    ctx.fillStyle = ink;
-    ctx.font = font(500, 34);
-    ctx.fillText(ic.label ?? "", ic.rect[0] + ic.rect[2] / 2, ic.rect[1] + ic.rect[3] + 36);
-  }
-  // search pill and dock plate
-  const glass = (x: number, y: number, w: number, h: number, r: number) => {
-    ctx.beginPath();
-    ctx.roundRect(x, y, w, h, r);
-    ctx.fillStyle = spec.dark ? "rgba(255,255,255,0.16)" : "rgba(255,255,255,0.55)";
-    ctx.fill();
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = spec.dark ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0.8)";
-    ctx.stroke();
-  };
-  glass(464, 2172, 278, 92, 46);
-  ctx.fillStyle = ink;
-  ctx.textAlign = "left";
-  ctx.font = font(500, 38);
-  ctx.fillText("Search", 560, 2220);
-  ctx.strokeStyle = ink;
-  ctx.lineWidth = 5;
-  ctx.beginPath();
-  ctx.arc(527, 2216, 13, 0, Math.PI * 2);
-  ctx.moveTo(537, 2226);
-  ctx.lineTo(547, 2236);
-  ctx.stroke();
-  glass(30, 2312, 1146, 282, 90);
-  spec.dock.forEach((f, i) => ctx.drawImage(imgs[f], DOCK_X[i], 2340, 222, 222));
+  drawIosChrome(ctx, imgs, { dark: spec.dark, icons: fillOf(spec), widgetLabels: rects, clear: false });
 };
-const DOCK_X = [64, 349, 635, 920];
 
 /** Which Home the last film frame shows: a Home that Close can continue from (see `HomeFlat`). */
 export const HOME_LAST = HOMES.length - 1;
@@ -244,9 +171,9 @@ export const Homes: React.FC = () => {
   const yaw = 9 * Math.sin((2 * Math.PI * f) / (2 * EACH));
   const pitch = 2.5 * Math.sin((2 * Math.PI * f) / 400 + 1);
   const fraction = interpolate(f, [0, HOMES_FRAMES], [0.6, 0.665], clamp);
-  const enter = interpolate(f, [0, 36], [0, 1], { ...clamp, easing: ease.arrival });
+  const enter = interpolate(f, [0, 24], [0, 1], { ...clamp, easing: ease.arrival });
   const exit = interpolate(f, [HOMES_FRAMES - 16, HOMES_FRAMES], [0, 1], clamp);
-  const sweep = interpolate(f, [0, 70], [0, 1], clamp) < 1 ? interpolate(f, [8, 70], [0, 1], clamp) : -1;
+  const sweep = interpolate(f, [0, 44], [0, 1], clamp) < 1 ? interpolate(f, [6, 44], [0, 1], clamp) : -1;
 
   const distance = PHONE.h / (2 * Math.tan(THREE.MathUtils.degToRad(lensFov(85)) / 2) * fraction);
   const dots = HOMES.map((h, k) => {
@@ -254,8 +181,8 @@ export const Homes: React.FC = () => {
     return k === 0 ? 1 - interpolate(f, [EACH - WIPE / 2, EACH + WIPE / 2], [0, 1], clamp) : on;
   });
 
-  const w1 = interpolate(f, [14, 34], [0, 1], { ...clamp, easing: back });
-  const w2 = interpolate(f, [58, 78], [0, 1], { ...clamp, easing: back });
+  const w1 = interpolate(f, [4, 20], [0, 1], { ...clamp, easing: back });
+  const w2 = interpolate(f, [24, 40], [0, 1], { ...clamp, easing: back });
   const titleOut = interpolate(f, [HOMES_FRAMES - 40, HOMES_FRAMES - 16], [0, 1], clamp);
   const word = (p: number, hi: boolean, text: string) => (
     <span
@@ -270,7 +197,7 @@ export const Homes: React.FC = () => {
       {text}
     </span>
   );
-  const pillIn = interpolate(f, [30, 54], [0, 1], { ...clamp, easing: ease.arrival }) * (1 - titleOut);
+  const pillIn = interpolate(f, [18, 36], [0, 1], { ...clamp, easing: ease.arrival }) * (1 - titleOut);
 
   return (
     <AbsoluteFill style={{ backgroundColor: C.void }}>

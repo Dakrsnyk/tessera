@@ -3,7 +3,7 @@ import { C } from "../lib/brand";
 // The app's mark (ArdaneHalf in App/Screens/Launch/LaunchView.swift), on its 100 × 100 grid.
 const LEFT = "47.5,19.3 47.5,55.4 34,86 16,86";
 const RIGHT = "52.5,19.3 84,86 66,86 52.5,55.4";
-/** The gap and the space between the legs: where the sapphire (#4E9BE0 → #1B4A7A) light lives. */
+/** The gap and the space between the legs: where the brand (#17B3D0 → #1D4E9E) light lives. */
 const GAP = "47.5,19.3 52.5,19.3 52.5,55.4 66,86 34,86 47.5,55.4";
 
 /** Gap of the « A » in the grid: slot from y 19.3 to 55.4, x 47.5 to 52.5. */
@@ -20,7 +20,25 @@ export const ArdaneLogo: React.FC<{
   left?: number;
   right?: number;
   glow?: number;
-}> = ({ size, cx, cy, left = 1, right = 1, glow = 1 }) => (
+  /** 0…1: the app icon's tile (turquoise → royal blue, rounded square) behind the « A »; the gap's own light then gives way to it. */
+  tile?: number;
+}> = ({ size, cx, cy, left = 1, right = 1, glow = 1, tile = 0 }) => (
+  <>
+  {tile > 0 && (
+    <div
+      style={{
+        position: "absolute",
+        left: cx - size / 2,
+        top: cy - size / 2,
+        width: size,
+        height: size,
+        borderRadius: size * 0.2237,
+        background: "linear-gradient(160deg in oklab, #17B3D0, #1D4E9E)",
+        opacity: tile,
+        boxShadow: `0 0 ${size * 0.22}px ${size * 0.02}px rgba(23,179,208,${0.28 * tile})`,
+      }}
+    />
+  )}
   <svg
     width={size}
     height={size}
@@ -39,10 +57,10 @@ export const ArdaneLogo: React.FC<{
         <feGaussianBlur stdDeviation="9" />
       </filter>
     </defs>
-    {glow > 0 && (
+    {glow * (1 - tile) > 0 && (
       <>
-        <polygon points={GAP} fill="url(#gap)" filter="url(#gapBloom)" opacity={0.32 * glow} />
-        <polygon points={GAP} fill="url(#gap)" filter="url(#gapSoft)" opacity={0.95 * glow} />
+        <polygon points={GAP} fill="url(#gap)" filter="url(#gapBloom)" opacity={0.32 * glow * (1 - tile)} />
+        <polygon points={GAP} fill="url(#gap)" filter="url(#gapSoft)" opacity={0.95 * glow * (1 - tile)} />
       </>
     )}
     {left > 0 && (
@@ -62,4 +80,5 @@ export const ArdaneLogo: React.FC<{
       />
     )}
   </svg>
+  </>
 );

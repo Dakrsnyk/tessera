@@ -9,6 +9,8 @@ Deux carnets Kaggle refont sur un GPU gratuit ce que `scripts/ml/` fait sur le C
 
 Les carnets sont **générés** à partir du code de `scripts/ml/` (`python scripts/ml/kaggle/build_notebooks.py`) : le code y est embarqué avec son empreinte SHA-256, aucun clone Git n'est nécessaire sur Kaggle. Ne pas les modifier à la main.
 
+> **Classifieur v5 (préparé le 2026-11-23, jamais lancé)** : le carnet `classifier/` applique la recette v5 à l'affinage B (EMA des poids, Mixup / CutMix, 12 blocs, 20 époques cosinus avec échauffement, boîte imparfaite, choix sur l'exactitude de validation, patience 5, session de 9 h) ; options dans `finetune_dinov2.py`, réglages en cellule 2 (valeurs v4 rappelées en commentaire) ; même interface Core ML que v4.
+
 > **État au 2026-11-02 : jamais exécutés sur Kaggle.** Ce qui est PROUVÉ en local (CPU, jeu factice, sous WSL) : voir § 8. Les durées Kaggle de ce document sont des estimations, pas des mesures.
 
 ## 1. Vérifier le compte Kaggle par téléphone (OBLIGATOIRE)

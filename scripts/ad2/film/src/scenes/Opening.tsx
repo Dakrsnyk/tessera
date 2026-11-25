@@ -1,4 +1,5 @@
 import { ThreeCanvas } from "@remotion/three";
+import { useMemo } from "react";
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import { FilmAudio } from "../components/FilmAudio";
 import { hookSeamMask, HookText } from "../components/Hook";
@@ -6,7 +7,8 @@ import { Grain } from "../components/Grain";
 import { CameraRig, lensFov, PHONE, Phone3D, StudioEnvironment } from "../components/Phone3D";
 import { Seam } from "../components/Seam";
 import { SplitText } from "../components/SplitText";
-import { AXIS, C, clamp, ease, H, type, W } from "../lib/brand";
+import { AXIS, C, clamp, ease, H, type, useFontsReady, W } from "../lib/brand";
+import { AURORA_FILES, AURORA_WIDGETS, drawAuroraHome } from "../v4/composeHome";
 import { HERO_WIDGETS, heroHome, heroWidget } from "../lib/kit";
 import { drawLifted, useCanvasTexture } from "../lib/useCanvas";
 import { useImages } from "../lib/useImages";
@@ -27,13 +29,33 @@ const TINT = "#43576A";
  * 3 · f240–359: push-in to 1.10×, rising 30 px; « Designed around you. » splits from the seam.
  */
 /** `hook`: the opening line of type, timed in the film's own frames (the opening's turn may be held under it). */
-export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: number }; lit?: boolean; words?: boolean; wake?: number; levitate?: boolean }> = ({ audio = true, hook, lit = false, words = true, wake = 120, levitate = false }) => {
+export const Opening: React.FC<{ audio?: boolean; hook?: { lines: string[]; to: number }; lit?: boolean; words?: boolean; wake?: number; levitate?: boolean; compose?: boolean }> = ({ audio = true, hook, lit = false, words = true, wake = 120, levitate = false, compose = false }) => {
   const outFrame = useCurrentFrame();
   const hookOn = hook ? interpolate(outFrame, [6, 14, hook.to + 6, hook.to + 26], [0, 1, 1, 0], clamp) : 0;
   const frame = useFilmFrame();
-  const images = useImages(FILES);
+  const images = useImages(compose ? AURORA_FILES : FILES);
+  const fontsOk = useFontsReady();
+  const composed = useMemo(() => {
+    if (!compose || !images || !fontsOk) return null;
+    const c = document.createElement("canvas");
+    c.width = 1206;
+    c.height = 2622;
+    drawAuroraHome(c.getContext("2d")!, images);
+    return c;
+  }, [compose, images, fontsOk]);
   const { ctx, texture: screen } = useCanvasTexture();
-  if (images) {
+  if (compose && images && composed) {
+    // Composed from the app's own pieces: nothing of the exported hero capture (its Next set widget is cropped).
+    ctx.drawImage(composed, 0, 0);
+    AURORA_WIDGETS.forEach((w, i) => {
+      const start = 150 + 12 * i;
+      const b = interpolate(frame, [start, start + 12, start + 30], [0, 1, 0], { ...clamp, easing: Easing.bezier(0.45, 0, 0.55, 1) });
+      const lev = levitate ? interpolate(frame, [236, 270], [0, 1], clamp) * (0.5 + 0.5 * Math.sin((frame - 236) / 24 + i * 1.1)) * 0.55 : 0;
+      const bb = Math.max(b, lev);
+      if (bb > 0) drawLifted(ctx, images[w.file], w.rect, bb);
+    });
+    screen.needsUpdate = true;
+  } else if (images && !compose) {
     // The hero Home (Aurora). « Breath » (f150–): each widget lifts 40 px in z and settles, 12 frames apart.
     ctx.drawImage(images[FILES[0]], 0, 0);
     HERO_WIDGETS.forEach((w, i) => {

@@ -9,6 +9,7 @@ enum DailyCategories {
     static var choices: [MiniApp] { MiniApp.offered.filter { $0 != .photos } }
 
     /// Cards of removed features (Top 3, Auto): never shown.
+    /// Old settings may still name them (order, sizes, hidden): `DailyDefaults.migrate` moves them once.
     static let removedTileIDs: Set<String> = ["priorities", "app-car"]
 
     /// The cards of Mon Quotidien that already stand for a mini-app.

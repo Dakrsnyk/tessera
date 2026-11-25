@@ -25,26 +25,26 @@ const wid = (src: string, w: number, top: number) => ({ src: `kit/${src}.png`, w
 
 const NUTRITION: AppDef = {
   title: "v3.nutrition",
-  subs: [{ at: 10, key: "v4.sub.nutrition1" }, { at: 160, key: "v4.sub.nutrition2" }],
+  subs: [{ at: 10, key: "v4.sub.nutrition1" }, { at: 200, key: "v4.sub.nutrition2" }],
   accent: "#FF9500",
-  length: 330,
+  length: 480,
   drift: [-46, 34],
   screens: [
-    { at: 0, src: "kit/scan-frame-dark.png", scan: { enter: 40, read: 74 } },
-    { at: 126, src: "kit/nut-2-dark.png", dip: true, cover: [[1000, 1052, 170, 66, "rgb(19,30,40)"]] },
-    { at: 196, src: "kit/nut-3-dark.png" },
+    { at: 0, src: "kit/scan-frame-dark.png", scan: { enter: 50, read: 88 } },
+    { at: 140, src: "kit/nut-2-dark.png", dip: true, cover: [[1000, 1052, 170, 66, "rgb(19,30,40)"]] },
+    { at: 260, src: "kit/nut-3-dark.png", span: 30 },
   ],
   cam: [
-    { at: 0, cx: 603, cy: 1311, z: 1 }, { at: 36, cx: 603, cy: 1311, z: 1 }, { at: 80, cx: 603, cy: 1252, z: 1.2 }, { at: 112, cx: 603, cy: 1252, z: 1.2 }, { at: 128, cx: 603, cy: 1311, z: 1 },
-    { at: 144, cx: 603, cy: 1311, z: 1 }, { at: 168, cx: 603, cy: 1850, z: 1.2 }, { at: 188, cx: 603, cy: 1850, z: 1.2 }, { at: 198, cx: 603, cy: 1311, z: 1 },
-    { at: 212, cx: 603, cy: 1311, z: 1 }, { at: 222, cx: 230, cy: 880, z: 1.2 }, { at: 232, cx: 230, cy: 880, z: 1.2 }, { at: 244, cx: 603, cy: 1311, z: 1 },
+    { at: 0, cx: 603, cy: 1311, z: 1 }, { at: 44, cx: 603, cy: 1311, z: 1 }, { at: 80, cx: 603, cy: 1252, z: 1.2 }, { at: 124, cx: 603, cy: 1252, z: 1.2 }, { at: 140, cx: 603, cy: 1311, z: 1 },
+    { at: 176, cx: 603, cy: 1311, z: 1 }, { at: 204, cx: 603, cy: 1850, z: 1.2 }, { at: 246, cx: 603, cy: 1850, z: 1.2 }, { at: 262, cx: 603, cy: 1311, z: 1 },
+    { at: 290, cx: 603, cy: 1311, z: 1 }, { at: 314, cx: 230, cy: 880, z: 1.2 }, { at: 344, cx: 230, cy: 880, z: 1.2 }, { at: 368, cx: 603, cy: 1311, z: 1 },
   ],
   hi: [
-    { from: 44, to: 118, rect: [235, 885, 735, 735], label: "Scan" },
-    { from: 150, to: 192, rect: [40, 1545, 1126, 625], label: "Calories and macros" },
-    { from: 210, to: 236, rect: [50, 710, 360, 350], label: "Calories left" },
+    { from: 70, to: 132, rect: [235, 885, 735, 735], label: "Scan" },
+    { from: 206, to: 250, rect: [40, 1545, 1126, 625], label: "Calories and macros" },
+    { from: 316, to: 348, rect: [50, 710, 360, 350], label: "Calories left" },
   ],
-  widgets: { at: 238, items: [wid("calories-s-dark", 560, 470), wid("macros-m-dark", 900, 1090)] },
+  widgets: { at: 372, items: [wid("calories-s-dark", 560, 470), wid("macros-m-dark", 900, 1090)] },
 };
 const FITNESS: AppDef = {
   title: "v3.fitness",
@@ -142,11 +142,11 @@ type Seg = { from: number; length: number; El: React.FC<any>; props?: Record<str
 /** Opening: the edge-on phone turns frontal; leaves sliding away while Nutrition takes over (30 frames of link). */
 const OpeningLeave: React.FC = () => {
   const f = useCurrentFrame();
-  const out = interpolate(f, [196, 226], [0, 1], { ...clamp, easing: Easing.bezier(0.6, 0, 0.9, 0.4) });
+  const out = interpolate(f, [466, 496], [0, 1], { ...clamp, easing: Easing.bezier(0.6, 0, 0.9, 0.4) });
   return (
     <AbsoluteFill style={{ transform: `translateX(${-out * 170}px)`, opacity: 1 - out, filter: `blur(${out * 10}px)` }}>
-      <TimeRemap input={[0, 100, 226]} output={[0, 250, 359]}>
-        <Opening audio={false} lit words={false} wake={20} levitate />
+      <TimeRemap input={[0, 226, 360, 496]} output={[0, 330, 350, 359]}>
+        <Opening audio={false} lit words={false} wake={20} levitate compose />
       </TimeRemap>
     </AbsoluteFill>
   );
@@ -225,10 +225,10 @@ const Texts: React.FC = () => {
   const f = useCurrentFrame();
   const t = useT();
   const V = T.voice;
-  const veil = interpolate(f, [528, 548, 712, 740], [0, 1, 1, 0], clamp);
+  const veil = interpolate(f, [528, 548, 990, 1016], [0, 1, 1, 0], clamp);
   const meetOut = interpolate(f, [V.everything - 16, V.everything - 4], [0, 1], clamp);
   const evOut = interpolate(f, [716, 738], [0, 1], clamp);
-  const demo = interpolate(f, [540, 560, 3730, 3750], [0, 0.9, 0.9, 0], clamp);
+  const demo = interpolate(f, [540, 560, 3700, 3720], [0, 0.9, 0.9, 0], clamp);
   return (
     <AbsoluteFill>
       <AbsoluteFill style={{ background: "linear-gradient(to bottom, transparent 54%, rgba(0,0,0,0.78) 70%, rgba(0,0,0,0.9) 100%)", opacity: veil * 0.9 }} />
@@ -239,6 +239,12 @@ const Texts: React.FC = () => {
           <KineticLine words={[{ t: t("v3.one"), at: V.everything + 16, hi: true }]} frame={f} top={1610} size={126} out={evOut} />
         </>
       )}
+      {T.tease.words.map((w, i) => {
+        const end = i < T.tease.words.length - 1 ? T.tease.words[i + 1].f - 6 : T.tease.end + 10;
+        if (f < w.f || f > end + 2) return null;
+        const out = interpolate(f, [end - 8, end], [0, 1], clamp);
+        return <KineticLine key={i} words={[{ t: t(`v4.tease.${i + 1}`), at: w.f, hi: i === T.tease.words.length - 1 }]} frame={f} top={1590} size={84} weight={600} out={out} />;
+      })}
       <div style={{ position: "absolute", left: 0, top: 1880, width: W, textAlign: "center", fontFamily: INTER, fontWeight: 600, fontSize: 22, letterSpacing: "0.16em", textTransform: "uppercase", color: C.type3, opacity: demo }}>
         {t("v3.demo")}
       </div>
@@ -248,14 +254,14 @@ const Texts: React.FC = () => {
 
 const SEGS: Seg[] = [
   { from: 0, length: 524, El: Hook4 },
-  { from: 524, length: 226, El: OpeningLeave },
-  { from: 720, length: 330, El: MiniApp, props: { app: NUTRITION } },
-  { from: 1020, length: 450, El: MiniApp, props: { app: FITNESS } },
-  { from: 1440, length: 270, El: MiniApp, props: { app: HABITS } },
-  { from: 1680, length: 300, El: MiniApp, props: { app: FINANCES } },
-  { from: 1950, length: 300, El: MiniApp, props: { app: PLANNING } },
-  { from: 2250, length: 840, El: Process },
-  { from: 3090, length: 660, El: Homes },
+  { from: 524, length: 496, El: OpeningLeave },
+  { from: 990, length: 480, El: MiniApp, props: { app: NUTRITION } },
+  { from: 1470, length: 450, El: MiniApp, props: { app: FITNESS } },
+  { from: 1890, length: 270, El: MiniApp, props: { app: HABITS } },
+  { from: 2130, length: 300, El: MiniApp, props: { app: FINANCES } },
+  { from: 2400, length: 300, El: MiniApp, props: { app: PLANNING } },
+  { from: 2700, length: 840, El: Process },
+  { from: 3300, length: 660, El: Homes },
 ];
 
 export const FilmMainV4: React.FC<{ silent?: boolean }> = ({ silent = false }) => {
@@ -275,7 +281,7 @@ export const FilmMainV4: React.FC<{ silent?: boolean }> = ({ silent = false }) =
           </Sequence>
         );
       })}
-      <Sequence from={3734} durationInFrames={316} layout="absolute-fill">
+      <Sequence from={3704} durationInFrames={316} layout="absolute-fill">
         <CloseOnHome />
       </Sequence>
       {T.cuts.map((c) => (
@@ -291,7 +297,7 @@ export const FilmMainV4: React.FC<{ silent?: boolean }> = ({ silent = false }) =
 };
 
 export const FilmMainV4Format: React.FC<FormatProps & { silent?: boolean }> = ({ format, lang, silent }) => (
-  <FormatFrame format={format} lang={lang} text={{ headline: "frame.main", sub: "frame.main.sub", show: 790, hide: 3730 }}>
+  <FormatFrame format={format} lang={lang} text={{ headline: "frame.main", sub: "frame.main.sub", show: 1040, hide: 3700 }}>
     <FilmMainV4 silent={silent} />
   </FormatFrame>
 );

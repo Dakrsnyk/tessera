@@ -3,6 +3,8 @@ import { interpolate } from "remotion";
 import { ArdaneLogo } from "../components/ArdaneLogo";
 import { C, clamp, INTER } from "../lib/brand";
 import { K, useL } from "./ctx";
+import { IOS } from "../lib/iosHome";
+import { IosChrome, IosLabel } from "../lib/IosChromeDom";
 
 /** A phone drawn in CSS 3D. Everything inside is authored in the 1206 × 2622 space of the captures. */
 export type Cam = { s: number; x: number; y: number; ry: number; rx: number; rz: number; o: number };
@@ -60,36 +62,38 @@ export const Phone: React.FC<{ cam?: Partial<Cam>; children?: React.ReactNode; o
 /* ------------------------------------------------ composed screens (1206 space) */
 export type Slot = { name: string; x?: number; y?: number; w?: number; size?: "m" | "s" | "l" };
 
-/** Home rows of the captures: medium widgets at x 57, w 1092; small ones 510 wide at x 57 / 638; rows every 609 from y 204. */
+/**
+ * Home rows on the measured iOS grid (lib/iosHome.ts, since 2026-11-11): medium widgets at x 81, w 1046; small ones 489 wide at
+ * x 81 / 638; a row (a pair of icon rows) every 602 from y 272.
+ */
 export const homeRect = (row: number, col: 0 | 1 | "full", size: "m" | "s" | "l"): { x: number; y: number; w: number } => {
-  const y = 204 + row * 609;
-  if (size === "s") return { x: col === 1 ? 638 : 57, y, w: 510 };
-  return { x: 57, y, w: 1092 };
+  const y = IOS.top + row * IOS.pair;
+  if (size === "s") return { x: col === 1 ? IOS.right : IOS.left, y, w: IOS.small };
+  return { x: IOS.left, y, w: IOS.medium[0] };
 };
 
-const StatusBar: React.FC<{ dark?: boolean }> = ({ dark }) => (
-  <>
-    <div style={{ position: "absolute", left: 420, top: 32, width: 366, height: 108, borderRadius: 54, background: "#000" }} />
-    <div style={{ position: "absolute", left: 150, top: 56, fontFamily: INTER, fontWeight: 650, fontSize: 70, color: dark ? "#fff" : "#111" }}>9:41</div>
-  </>
-);
-
-/** A Home Screen built from a wallpaper, real widget renders and the dock icons: what the 3 profiles and the gathers show. */
-export const HomeCompose: React.FC<{ wall: string; widgets: (Slot & { o?: number; dx?: number; dy?: number; sc?: number })[]; dock?: string; dark?: boolean }> = ({ wall, widgets, dock, dark = true }) => (
+/**
+ * A REAL iPhone Home Screen built from a wallpaper and real widget renders (the 3 profiles and the gathers): « Ardane » under each
+ * widget, iOS status bar, Search pill and a Dock of real Apple apps (`dock`, the kit's icon set of the old version, is ignored).
+ */
+export const HomeCompose: React.FC<{ wall: string; widgets: (Slot & { o?: number; dx?: number; dy?: number; sc?: number })[]; dock?: string; dark?: boolean }> = ({ wall, widgets, dark = true }) => (
   <>
     <K name={wall} style={{ position: "absolute", left: 0, top: 0 }} />
-    <StatusBar dark={dark} />
     {widgets.map((w, i) => {
-      const size = w.size ?? (/-s-/.test(w.name) ? "s" : "m");
-      const w0 = w.w ?? (size === "s" ? 510 : 1092);
+      const size = w.size ?? (/-s-/.test(w.name) ? "s" : /-l-/.test(w.name) ? "l" : "m");
+      const w0 = w.w ?? (size === "s" ? IOS.small : IOS.medium[0]);
+      const h0 = size === "s" ? w0 : size === "l" ? (w0 * 1146) / 1092 : (w0 * 510) / 1092;
       const sc = w.sc ?? 1;
       return (
-        <div key={i} style={{ position: "absolute", left: (w.x ?? 57) + (w.dx ?? 0), top: (w.y ?? 204) + (w.dy ?? 0), opacity: w.o ?? 1, transform: `scale(${sc})`, transformOrigin: "50% 50%", filter: "drop-shadow(0 6px 14px rgba(0,0,0,0.25))" }}>
-          <K name={w.name} w={w0} />
+        <div key={i} style={{ position: "absolute", left: (w.x ?? IOS.left) + (w.dx ?? 0), top: (w.y ?? IOS.top) + (w.dy ?? 0), opacity: w.o ?? 1, transform: `scale(${sc})`, transformOrigin: "50% 50%" }}>
+          <div style={{ filter: "drop-shadow(0 14px 30px rgba(0,0,0,0.22))" }}>
+            <K name={w.name} w={w0} />
+          </div>
+          <IosLabel x={0} y={h0 + 18} w={w0} text="Ardane" dark={dark} />
         </div>
       );
     })}
-    {dock && [0, 1, 2, 3].map((i) => <K key={i} name={`icons-${dock}-${i + 4}`} w={222} style={{ position: "absolute", left: [64, 349, 635, 920][i], top: 2340 }} />)}
+    <IosChrome dark={dark} />
   </>
 );
 

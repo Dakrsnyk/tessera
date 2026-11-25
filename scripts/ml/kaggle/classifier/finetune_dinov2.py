@@ -17,6 +17,10 @@ Ce que fait ce module :
      (`extract_features.py --backbone-weights`, `train_head.py`, `export_coreml.py --backbone-weights`) fonctionnent SANS changement : on
      ré-extrait les vecteurs avec le DINOv2 affiné (gelé), on ré-entraîne une tête linéaire étalonnée par température, et on exporte.
 
+Recette v5 (2026-11-23, options ; valeurs par défaut = comportement v4) : moyenne mobile exponentielle des poids (EMA, évaluée et retenue à la place des
+poids bruts), Mixup / CutMix alternés par lot, échauffement en époques, meilleure époque choisie sur l'EXACTITUDE de validation (patience en
+époques), augmentation « boîte imparfaite » (voir `augment`). Mêmes données, mêmes classes, mêmes 224 x 224 : l'interface de l'app ne change pas.
+
 Augmentations (sur le GPU, sur le lot) : zoom avant 0,72-1, translation et rotation légères (+-10 degrés), miroir horizontal, luminosité,
 contraste, saturation. Pas de retournement vertical (une assiette vue de dessus est tournée, mais l'app ne retourne pas la photo).
 """
@@ -74,8 +78,19 @@ def read_crops(work: Path, kept_names: list[str], classes: list[dict]):
 
 # --------------------------------------------------------------------------- augmentations (torch pur, sur le lot)
 
-def augment(x, zoom=(0.72, 1.0), rotate_deg=10.0, shift=0.08, flip=True, brightness=0.25, contrast=0.25, saturation=0.3):
-    """x : (B, 3, H, W) float 0..255 sur l'appareil de calcul. Retourne un lot de même forme, même plage."""
+# « Boîte imparfaite » (v5). L'app recadre sur la boîte d'un MASQUE PRÉDIT, pas sur une boîte humaine. Le réglage v4 (zoom 0,72-1, décalage 0,08 en
+# coordonnées normalisées = 4 % du côté) ne couvre que les boîtes trop SERRÉES (zoom avant) et de petits décalages ; il ne montre jamais un cadrage trop
+# LARGE (masque qui déborde sur le voisin, plats fusionnés) ni un décalage marqué. Le préréglage ajoute un peu de zoom arrière (jusqu'à 1,12 : la zone
+# hors photo est remplie de la couleur moyenne ImageNet, comme `ml_common.crop_square`) et un décalage de 0,10 (5 % du côté). Modéré à dessein : le
+# TEST officiel utilise des boîtes humaines, trop de zoom arrière y coûterait en précision. Ce préréglage n'est PAS mesurable sur ce test.
+BOX_AUG_V4 = {"zoom": (0.72, 1.0), "shift": 0.08}
+BOX_AUG_IMPERFECT = {"zoom": (0.68, 1.12), "shift": 0.10}
+IMAGENET_MEAN_255 = (0.485 * 255.0, 0.456 * 255.0, 0.406 * 255.0)   # = ml_common.IMAGENET_MEAN * 255 (couleur de remplissage des recadrages)
+
+
+def augment(x, zoom=(0.72, 1.0), rotate_deg=10.0, shift=0.08, flip=True, brightness=0.25, contrast=0.25, saturation=0.3, pad_mean=False):
+    """x : (B, 3, H, W) float 0..255 sur l'appareil de calcul. Retourne un lot de même forme, même plage.
+    pad_mean=False : bords réfléchis (v4, zoom <= 1 : jamais utilisés). True : zones hors image = couleur moyenne ImageNet (zoom arrière)."""
     import torch
     import torch.nn.functional as F
 
@@ -89,7 +104,11 @@ def augment(x, zoom=(0.72, 1.0), rotate_deg=10.0, shift=0.08, flip=True, brightn
     theta = torch.stack([torch.stack([scale * cos * sign, -scale * sin, tx], 1),
                          torch.stack([scale * sin * sign, scale * cos, ty], 1)], 1)           # (B, 2, 3)
     grid = F.affine_grid(theta, list(x.shape), align_corners=False)
-    y = F.grid_sample(x, grid, mode="bilinear", padding_mode="reflection", align_corners=False)
+    if pad_mean:
+        fill = torch.tensor(IMAGENET_MEAN_255, device=dev, dtype=x.dtype).view(1, 3, 1, 1)
+        y = F.grid_sample(x - fill, grid, mode="bilinear", padding_mode="zeros", align_corners=False) + fill
+    else:
+        y = F.grid_sample(x, grid, mode="bilinear", padding_mode="reflection", align_corners=False)
     gray = (0.299 * y[:, 0:1] + 0.587 * y[:, 1:2] + 0.114 * y[:, 2:3])
     y = gray + (y - gray) * (1.0 + torch.empty(b, 1, 1, 1, device=dev).uniform_(-saturation, saturation))
     mean = y.mean(dim=(1, 2, 3), keepdim=True)
@@ -154,6 +173,81 @@ def trainable_state(model) -> dict:
     return {k: v.detach().cpu().clone() for k, v in model.state_dict().items() if k in names}
 
 
+# --------------------------------------------------------------------------- EMA, Mixup / CutMix
+
+class Ema:
+    """Moyenne mobile exponentielle des paramètres ENTRAÎNÉS (le reste est gelé, donc identique). Décroissance : `decay` plafonnée à
+    1 - 1/max(10, total_steps / 4) (horizon d'au plus un quart de l'entraînement : adapté au nombre de pas) et réchauffée par (1+n)/(10+n),
+    pour que les premières époques ne soient pas écrasées par les poids de départ."""
+
+    def __init__(self, model, decay: float, total_steps: int):
+        import torch
+
+        self.names = [n for n, p in model.named_parameters() if p.requires_grad]
+        params = dict(model.named_parameters())
+        self.shadow = [params[n].detach().clone().float() for n in self.names]
+        self.decay = min(decay, 1.0 - 1.0 / max(10.0, total_steps / 4.0))
+        self.n = 0
+        self._torch = torch
+
+    def update(self, model) -> None:
+        torch = self._torch
+        params = dict(model.named_parameters())
+        self.n += 1
+        d = min(self.decay, (1.0 + self.n) / (10.0 + self.n))
+        with torch.no_grad():
+            torch._foreach_lerp_(self.shadow, [params[n].detach().float() for n in self.names], 1.0 - d)
+
+    def swap_in(self, model) -> list:
+        """Met les poids EMA dans le modèle ; retourne les poids bruts à remettre avec `restore`."""
+        torch = self._torch
+        params = dict(model.named_parameters())
+        raw = [params[n].detach().clone() for n in self.names]
+        with torch.no_grad():
+            for n, w in zip(self.names, self.shadow):
+                params[n].copy_(w)
+        return raw
+
+    def restore(self, model, raw: list) -> None:
+        torch = self._torch
+        params = dict(model.named_parameters())
+        with torch.no_grad():
+            for n, w in zip(self.names, raw):
+                params[n].copy_(w)
+
+    def state(self) -> dict:
+        return {n: w.detach().cpu().clone() for n, w in zip(self.names, self.shadow)}
+
+    def checkpoint(self) -> dict:
+        return {"state": self.state(), "n": self.n}
+
+    def load(self, ck: dict, device) -> None:
+        self.shadow = [ck["state"][n].to(device).float() for n in self.names]
+        self.n = ck["n"]
+
+
+def mix_batch(x, y, rng, mixup_alpha: float, cutmix_alpha: float, prob: float):
+    """Mixup OU CutMix (alternés, 50 / 50) sur ce lot avec la probabilité `prob`. Retourne (x, y_a, y_b, lam) : perte = lam*CE(y_a) + (1-lam)*CE(y_b)."""
+    import torch
+
+    if prob <= 0.0 or rng.random() >= prob:
+        return x, y, y, 1.0
+    perm = torch.randperm(x.shape[0], device=x.device)
+    if rng.random() < 0.5:                                   # Mixup : combinaison convexe des deux images
+        lam = float(rng.beta(mixup_alpha, mixup_alpha))
+        x = lam * x + (1.0 - lam) * x[perm]
+    else:                                                    # CutMix : un rectangle de l'autre image ; lam = aire réellement conservée
+        lam = float(rng.beta(cutmix_alpha, cutmix_alpha))
+        h, w = x.shape[2], x.shape[3]
+        ch, cw = int(h * math.sqrt(1.0 - lam)), int(w * math.sqrt(1.0 - lam))
+        cy, cx = int(rng.integers(0, h)), int(rng.integers(0, w))
+        y0, y1, x0, x1 = max(cy - ch // 2, 0), min(cy + ch // 2, h), max(cx - cw // 2, 0), min(cx + cw // 2, w)
+        x = x.clone()
+        x[:, :, y0:y1, x0:x1] = x[perm][:, :, y0:y1, x0:x1]
+        lam = 1.0 - ((y1 - y0) * (x1 - x0)) / float(h * w)
+    return x, y, y[perm], lam
+
+
 # --------------------------------------------------------------------------- boucle
 
 def evaluate(model, loader, device, use_amp: bool):
@@ -178,17 +272,23 @@ def finetune(ml_root: Path, dataset: str, head_file: str, out_dir: Path, *, unfr
              base_lr: float = 3e-5, head_lr: float = 1e-4, layer_decay: float = 0.85, weight_decay: float = 0.05,
              label_smoothing: float = 0.05, balance_alpha: float = 0.5, patience: int = 3, warmup_steps: int = 200,
              workers: int = 4, seed: int = 20261102, device: str = "auto", amp: bool = True, max_train: int = 0, max_val: int = 0,
-             can_continue=None, log=print) -> dict:
+             ema_decay: float = 0.0, mix_prob: float = 0.0, mixup_alpha: float = 0.2, cutmix_alpha: float = 1.0, select: str = "val_loss",
+             box_aug: str = "v4", warmup_epochs: float = 0.0, lr_floor: float = 0.05, can_continue=None, log=print) -> dict:
     """Affine et retourne un résumé. `can_continue(seconds_next_epoch)` -> bool : demandé avant chaque époque (budget de session).
 
     Reprise : si `out_dir/ckpt.pt` existe, l'entraînement repart de l'époque suivante (optimiseur, calendrier, meilleur état, historique
     restaurés). Les paramètres d'apprentissage doivent être les mêmes ; sinon le point de sauvegarde est ignoré (et le dit).
+    Options v5 (défauts = v4) : `ema_decay` > 0 active l'EMA (validation, point retenu et sortie = poids EMA) ; `mix_prob` > 0 active Mixup / CutMix ;
+    `select` = "val_acc" choisit la meilleure époque sur l'exactitude de validation (sinon la perte) ; `box_aug` = "imperfect" élargit zoom et
+    décalage ; `warmup_epochs` > 0 fixe l'échauffement en époques (sinon `warmup_steps`).
     Statut retourné : "done" (arrêt anticipé ou toutes les époques), "paused" (budget : relancer avec l'état de reprise).
     """
     import torch
     import torch.nn.functional as F
     from torch.utils.data import DataLoader
 
+    if select not in ("val_loss", "val_acc") or box_aug not in ("v4", "imperfect"):
+        raise ValueError("select : val_loss | val_acc ; box_aug : v4 | imperfect")
     t_start = time.time()
     out_dir.mkdir(parents=True, exist_ok=True)
     work = ml_root / "work" / dataset
@@ -230,6 +330,8 @@ def finetune(ml_root: Path, dataset: str, head_file: str, out_dir: Path, *, unfr
     val_loader = mk(val_paths, yva, False)
     steps_per_epoch = max(1, len(ytr) // batch)
     total_steps = steps_per_epoch * epochs
+    if warmup_epochs > 0:
+        warmup_steps = max(warmup_steps, int(round(warmup_epochs * steps_per_epoch)))
 
     groups = param_groups(model, base_lr, head_lr, layer_decay, weight_decay, unfreeze_blocks)
     opt = torch.optim.AdamW(groups, betas=(0.9, 0.999))
@@ -238,7 +340,7 @@ def finetune(ml_root: Path, dataset: str, head_file: str, out_dir: Path, *, unfr
         if step < warmup_steps:
             return (step + 1) / warmup_steps
         progress = (step - warmup_steps) / max(1, total_steps - warmup_steps)
-        return 0.05 + 0.95 * 0.5 * (1.0 + math.cos(math.pi * min(1.0, progress)))
+        return lr_floor + (1.0 - lr_floor) * 0.5 * (1.0 + math.cos(math.pi * min(1.0, progress)))
 
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
     ckpt_path = out_dir / "ckpt.pt"
@@ -246,8 +348,22 @@ def finetune(ml_root: Path, dataset: str, head_file: str, out_dir: Path, *, unfr
              "layer_decay": layer_decay, "weight_decay": weight_decay, "label_smoothing": label_smoothing,
              "balance_alpha": balance_alpha, "patience": patience, "warmup_steps": warmup_steps, "seed": seed,
              "n_train": int(len(ytr)), "n_val": int(len(yva)), "n_classes": n_classes}
+    ema = Ema(model, ema_decay, total_steps) if ema_decay > 0 else None
+    aug_kw = ({**BOX_AUG_IMPERFECT, "pad_mean": True} if box_aug == "imperfect" else {})
+    if ema_decay > 0:
+        hyper["ema_decay"] = ema_decay
+    if mix_prob > 0:
+        hyper.update({"mix_prob": mix_prob, "mixup_alpha": mixup_alpha, "cutmix_alpha": cutmix_alpha})
+    if select != "val_loss":
+        hyper["select"] = select
+    if box_aug != "v4":
+        hyper["box_aug"] = box_aug
+    if warmup_epochs > 0 or lr_floor != 0.05:
+        hyper.update({"warmup_epochs": warmup_epochs, "lr_floor": lr_floor})
+    if ema is not None:
+        log(f"[B] EMA des poids : décroissance effective {ema.decay:.5f} (demandée {ema_decay}), validation et point retenu avec les poids EMA")
     history: list[dict] = []
-    best = {"val_loss": float("inf"), "epoch": 0, "state": None}
+    best = {"val_loss": float("inf"), "val_acc": -1.0, "epoch": 0, "state": None}
     start_epoch, waited, step = 1, 0, 0
     epoch_seconds: list[float] = []
 
@@ -259,14 +375,16 @@ def finetune(ml_root: Path, dataset: str, head_file: str, out_dir: Path, *, unfr
             opt.load_state_dict(ck["opt"])
             scaler.load_state_dict(ck["scaler"])
             history, best, waited, step = ck["history"], ck["best"], ck["waited"], ck["step"]
+            if ema is not None:
+                ema.load(ck["ema"], dev)
             start_epoch, epoch_seconds = ck["epoch"] + 1, ck.get("epoch_seconds", [])
-            log(f"[B] reprise après l'époque {ck['epoch']} (meilleure : {best['epoch']}, perte de validation {best['val_loss']:.4f})")
+            log(f"[B] reprise après l'époque {ck['epoch']} (meilleure : {best['epoch']}, perte de validation {best['val_loss']:.4f}, exactitude {best.get('val_acc', -1.0):.4f})")
         else:
             log("[B] point de sauvegarde ignoré : les réglages ont changé.")
     if not history:
         v_loss, v_acc = evaluate(model, val_loader, dev, use_amp)
         history.append({"epoch": 0, "val_loss": v_loss, "val_acc": v_acc, "train_loss": None, "seconds": 0.0})
-        best = {"val_loss": v_loss, "epoch": 0, "state": trainable_state(model)}
+        best = {"val_loss": v_loss, "val_acc": v_acc, "epoch": 0, "state": trainable_state(model)}
         log(f"[B] époque 0 (= voie A) : perte de validation {v_loss:.4f}, exactitude {v_acc:.4f}")
 
     status = "done"
@@ -285,21 +403,27 @@ def finetune(ml_root: Path, dataset: str, head_file: str, out_dir: Path, *, unfr
         gen = torch.Generator().manual_seed(seed + epoch)
         loader = mk(train_paths, ytr, True, gen)
         model.train()
+        mix_rng = np.random.default_rng(seed * 1000 + epoch)
         loss_sum, seen, t_log = 0.0, 0, time.time()
         for bi, (xb, yb) in enumerate(loader):
             for g in opt.param_groups:
                 g["lr"] = g["base_lr"] * lr_factor(step)
             xb, yb = xb.to(dev, non_blocking=True).float(), yb.to(dev, non_blocking=True)
-            xb = augment(xb)
+            xb = augment(xb, **aug_kw)
+            xb, y_a, y_b, lam = mix_batch(xb, yb, mix_rng, mixup_alpha, cutmix_alpha, mix_prob)
             opt.zero_grad(set_to_none=True)
             with torch.autocast(device_type="cuda", dtype=torch.float16, enabled=use_amp):
                 logits = model["head"](model["feat"](xb))
-            loss = F.cross_entropy(logits.float(), yb, weight=class_w, label_smoothing=label_smoothing)
+            loss = F.cross_entropy(logits.float(), y_a, weight=class_w, label_smoothing=label_smoothing)
+            if lam < 1.0:
+                loss = lam * loss + (1.0 - lam) * F.cross_entropy(logits.float(), y_b, weight=class_w, label_smoothing=label_smoothing)
             scaler.scale(loss).backward()
             scaler.unscale_(opt)
             torch.nn.utils.clip_grad_norm_([p for p in model.parameters() if p.requires_grad], 1.0)
             scaler.step(opt)
             scaler.update()
+            if ema is not None:
+                ema.update(model)
             step += 1
             loss_sum += float(loss) * len(yb)
             seen += len(yb)
@@ -307,21 +431,32 @@ def finetune(ml_root: Path, dataset: str, head_file: str, out_dir: Path, *, unfr
                 log(f"    époque {epoch} lot {bi + 1}/{steps_per_epoch} : perte {loss_sum / seen:.4f} ; {100 * batch / (time.time() - t_log):.0f} img/s")
                 t_log = time.time()
         train_seconds = time.time() - t_epoch
-        v_loss, v_acc = evaluate(model, val_loader, dev, use_amp)
+        if ema is not None:
+            raw = ema.swap_in(model)
+            try:
+                v_loss, v_acc = evaluate(model, val_loader, dev, use_amp)
+            finally:
+                ema.restore(model, raw)
+        else:
+            v_loss, v_acc = evaluate(model, val_loader, dev, use_amp)
         seconds = time.time() - t_epoch
         epoch_seconds.append(seconds)
         images_per_second = seen / train_seconds
         history.append({"epoch": epoch, "val_loss": v_loss, "val_acc": v_acc, "train_loss": loss_sum / max(seen, 1), "seconds": round(seconds, 1)})
-        improved = v_loss < best["val_loss"] - 1e-5
+        if select == "val_acc":              # exactitude ; à égalité exacte, la perte la plus basse
+            improved = v_acc > best.get("val_acc", -1.0) + 1e-9 or (abs(v_acc - best.get("val_acc", -1.0)) <= 1e-9 and v_loss < best["val_loss"] - 1e-5)
+        else:
+            improved = v_loss < best["val_loss"] - 1e-5
         if improved:
-            best, waited = {"val_loss": v_loss, "epoch": epoch, "state": trainable_state(model)}, 0
+            best, waited = {"val_loss": v_loss, "val_acc": v_acc, "epoch": epoch, "state": ema.state() if ema is not None else trainable_state(model)}, 0
         else:
             waited += 1
         log(f"[B] époque {epoch}/{epochs} : perte d'entraînement {loss_sum / max(seen, 1):.4f}, perte de validation {v_loss:.4f}, "
             f"exactitude {v_acc:.4f}{' *' if improved else ''} ; {seconds:.0f} s ({images_per_second:.0f} img/s d'entraînement)")
         tmp = out_dir / "ckpt.tmp.pt"
         torch.save({"hyper": hyper, "epoch": epoch, "trainable": trainable_state(model), "opt": opt.state_dict(), "scaler": scaler.state_dict(),
-                    "history": history, "best": best, "waited": waited, "step": step, "epoch_seconds": epoch_seconds}, tmp)
+                    "history": history, "best": best, "waited": waited, "step": step, "epoch_seconds": epoch_seconds,
+                    **({"ema": ema.checkpoint()} if ema is not None else {})}, tmp)
         os.replace(tmp, ckpt_path)
 
     summary = {"status": status, "hyper": hyper, "history": history, "best_epoch": best["epoch"], "best_val_loss": best["val_loss"],

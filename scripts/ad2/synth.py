@@ -367,6 +367,17 @@ def cue_barcode():
     return _norm(out)
 
 
+def cue_morph():
+    """Morph glide: a soft rising sweep (band-passed air + a sine gliding 520 -> 1300 Hz), 0.5 s, peaking at 40 %."""
+    seconds = 0.5
+    t = t_axis(seconds)
+    env = envelope(seconds, [(0, 0), (0.2, 1), (0.5, 0)])
+    air = noise_band(seconds, 700, 6500, seed=61) * env
+    f = 520 * (1300 / 520) ** (t / seconds)
+    sine = np.sin(2 * np.pi * np.cumsum(f) / SR) * env * 0.35
+    return _norm(air + sine)
+
+
 if __name__ == "__main__":
     cue, out = sys.argv[1:3]
     audio = {"opening": cue_opening, "lock": cue_lock, "close": cue_close, "impact": cue_impact, "logo_in": cue_logo_in,

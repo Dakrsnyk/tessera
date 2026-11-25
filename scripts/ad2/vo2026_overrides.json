@@ -63,15 +63,68 @@
    },
    "EVERY": {
     "pause": 0.2,
-    "speed": 1.1
+    "speed": 1.15
    },
    "HO": {
     "pause": 0.3
    },
    "CL": {
     "pause": 0.3
+   },
+   "T3": {
+    "speed": 1.12
    }
-  }
+  },
+  "v5p1": {
+   "MEET": {
+    "speed": 1.05
+   },
+   "EVERY": {
+    "pause": 0.2,
+    "speed": 1.15
+   },
+   "T3": {
+    "speed": 1.12
+   },
+   "N0": {
+    "speed": 1.2
+   },
+   "F0": {
+    "speed": 1.2
+   },
+   "B0": {
+    "speed": 1.2
+   },
+   "M0": {
+    "speed": 1.2
+   },
+   "P0": {
+    "speed": 1.2
+   },
+   "F1": {
+    "speed": 1.0
+   }
+  },
+  "v5short": {
+   "M1": {
+    "pause": 0.25
+   }
+  },
+  "v5part2": {},
+  "lib-meet": {},
+  "lib-toomany": {},
+  "lib-scan": {},
+  "lib-movement": {},
+  "lib-widgets": {},
+  "lib-build": {},
+  "lib-style": {
+   "S1": {
+    "pause": 0.25
+   }
+  },
+  "lib-apptowidget": {},
+  "lib-onescreen": {},
+  "lib-everything": {}
  },
  "fr": {
   "main": {

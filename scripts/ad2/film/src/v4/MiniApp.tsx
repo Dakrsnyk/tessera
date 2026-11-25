@@ -23,6 +23,8 @@ export type Screen = {
   cover?: [number, number, number, number, string][];
   /** Cross through black instead of a blade (two screens never mix with cut text). */
   dip?: boolean;
+  /** Frames the change takes (default 16 for a blade, 30 for a dip). */
+  span?: number;
 };
 export type WidgetDef = { src: string; w: number; top: number };
 export type Cam = { at: number; cx: number; cy: number; z: number };
@@ -70,7 +72,7 @@ export const MiniApp: React.FC<{ app: AppDef }> = ({ app }) => {
   const outP = interpolate(f, [L - 30, L], [0, 1], { ...clamp, easing: Easing.bezier(0.6, 0, 0.9, 0.4) });
   const dx = (1 - inP) * 170 - outP * 170;
   const wAt = app.widgets ? app.widgets.at : 99999;
-  const rec = interpolate(f, [wAt - 8, wAt + 22], [0, 1], { ...clamp, easing: ease.transfer });
+  const rec = interpolate(f, [wAt - 10, wAt + 30], [0, 1], { ...clamp, easing: ease.transfer });
 
   // Which screen is up, which one the blade is bringing in.
   let cur = app.screens[0];
@@ -80,10 +82,11 @@ export const MiniApp: React.FC<{ app: AppDef }> = ({ app }) => {
   let dipping = false;
   for (let i = 1; i < app.screens.length; i++) {
     const s = app.screens[i];
-    if (f >= s.at + BLADE) cur = s;
+    const span = s.span ?? (s.dip ? 30 : BLADE);
+    if (f >= s.at + span) cur = s;
     else if (f >= s.at) {
       nxt = s;
-      wipe = interpolate(f, [s.at, s.at + BLADE], [0, 1], { easing: Easing.bezier(0.45, 0, 0.2, 1) });
+      wipe = interpolate(f, [s.at, s.at + span], [0, 1], { easing: Easing.bezier(0.45, 0, 0.2, 1) });
       wipeX = wipe;
       dipping = !!s.dip;
     }
@@ -279,7 +282,7 @@ export const MiniApp: React.FC<{ app: AppDef }> = ({ app }) => {
         {/* its widgets, whole, lifted off the screen */}
         {app.widgets &&
           app.widgets.items.map((w, i) => {
-            const p = interpolate(f, [wAt + 10 * i, wAt + 10 * i + 28], [0, 1], { ...clamp, easing: ease.lift });
+            const p = interpolate(f, [wAt + 14 * i, wAt + 14 * i + 46], [0, 1], { ...clamp, easing: ease.lift });
             if (p <= 0) return null;
             const float = Math.sin((f + i * 30) / 28) * 5;
             return (

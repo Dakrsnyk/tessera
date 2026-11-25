@@ -330,7 +330,7 @@ export const AvantApresFilm: React.FC = () => {
         <AbsoluteFill style={{ opacity: endP }}>
           <ArdaneLogo size={200} cx={540} cy={860} tile={1} glow={0} />
           <div style={{ position: "absolute", left: 0, right: 0, top: 990, textAlign: "center", color: C.type1, letterSpacing: -1, ...font(700, 80) }}>Ardane</div>
-          <div style={{ position: "absolute", left: 0, right: 0, top: 1100, textAlign: "center", color: C.type2, ...font(500, 40) }}>Coming soon to the App Store</div>
+          <div style={{ position: "absolute", left: 0, right: 0, top: 1100, textAlign: "center", color: C.type2, ...font(500, 40) }}>Available on the App Store</div>
           <div style={{ position: "absolute", left: 0, right: 0, top: 1180, textAlign: "center", color: C.type2, ...font(500, 30) }}>
             Some widgets and styles With Premium
           </div>

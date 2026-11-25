@@ -65,7 +65,7 @@ export const SplitText: React.FC<{
             height,
             background: C.seamCore,
             opacity: flash,
-            boxShadow: `0 0 12px 2px ${C.pale}, 0 0 40px 6px rgba(78,155,224,0.25)`,
+            boxShadow: `0 0 12px 2px ${C.pale}, 0 0 40px 6px rgba(23,179,208,0.25)`,
           }}
         />
       )}
