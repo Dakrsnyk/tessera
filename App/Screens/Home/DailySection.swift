@@ -1373,7 +1373,7 @@ private struct BudgetDayTile: View {
     }
 }
 
-/// « À ne pas oublier »: the tasks the person noted (it replaced the Top 3, PDG 2026-11-25). A tap on the circle
+/// « À ne pas oublier »: the tasks the person noted (it replaced the Top 3, PDG 2026-11-25; build 582). A tap on the circle
 /// checks the task; the field adds one; the footer opens the whole list (« Mes tâches »).
 private struct RemindersDayTile: View {
     let items: [DailyBrief.Reminder]
