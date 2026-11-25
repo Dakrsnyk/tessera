@@ -353,25 +353,23 @@ struct TileView: View {
         return tile.rows.contains { $0.detail != nil && $0.progress != nil } ? 3 : 4
     }
 
-    @ViewBuilder private var mediumPanel: some View {
+    /// Type-erased on purpose (2026-11-25): its type is not part of the widget's own type. The free version 572 crashed
+    /// on the Store and in Créer with a stack overflow of the main thread (1 MB) while the Swift runtime built the type
+    /// of this view: one more level of condition here (the rest bar above the buttons of « Prochaine série ») was one
+    /// too many under the 800 frames of a page of widgets. Do not turn it back into `some View`.
+    private var mediumPanel: AnyView {
         if prefersChosenChart && tile.buttons.isEmpty {
-            visual(compact: false)
-        } else if !tile.rows.isEmpty {
-            VStack(alignment: .leading, spacing: 0) {
-                TileRowsView(rows: rows(mediumRowLimit), context: context, compact: false)
-                Spacer(minLength: 0)
-                if !tile.buttons.isEmpty {
-                    // The rest of « Prochaine série » stays visible above its buttons, as a thin line.
-                    if hasVisual && isTimer {
-                        visual(compact: true)
-                            .frame(height: 8)
-                            .padding(.bottom, 5)
-                    }
-                    TileButtonsRow(buttons: Array(tile.buttons.prefix(2)), context: context)
-                }
-            }
-        } else if !tile.buttons.isEmpty {
-            VStack(spacing: 8) {
+            return AnyView(visual(compact: false))
+        }
+        if !tile.rows.isEmpty {
+            return AnyView(MediumRowsPanel(
+                rows: rows(mediumRowLimit), buttons: Array(tile.buttons.prefix(2)), context: context,
+                // The rest of « Prochaine série » stays visible above its buttons, as a thin line.
+                rest: hasVisual && isTimer && !tile.buttons.isEmpty ? AnyView(visual(compact: true)) : nil
+            ))
+        }
+        if !tile.buttons.isEmpty {
+            return AnyView(VStack(spacing: 8) {
                 Spacer(minLength: 0)
                 if hasVisual {
                     // The rest bar is a thin line: it doesn't take the height of a chart, so the bar and
@@ -380,12 +378,12 @@ struct TileView: View {
                         .frame(height: isTimer ? 10 : 44)
                 }
                 TileButtonsColumn(buttons: Array(tile.buttons.prefix(3)), context: context)
-            }
-        } else if hasVisual {
-            visual(compact: false)
-        } else {
-            Color.clear
+            })
         }
+        if hasVisual {
+            return AnyView(visual(compact: false))
+        }
+        return AnyView(Color.clear)
     }
 
     // MARK: Auto: large
@@ -1042,6 +1040,29 @@ struct TileButtonsRow: View {
                 TileActionButton(action: pair.element.action, isEnabled: context.isInteractive) {
                     TileButtonLabel(button: pair.element, style: context.style, expands: !iconOnly, iconOnly: iconOnly)
                 }
+            }
+        }
+    }
+}
+
+/// The right side of a medium widget that has lines: the lines, then (if any) the rest bar and the buttons.
+private struct MediumRowsPanel: View {
+    let rows: [TileRow]
+    let buttons: [TileButton]
+    let context: RenderContext
+    let rest: AnyView?
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            TileRowsView(rows: rows, context: context, compact: false)
+            Spacer(minLength: 0)
+            if !buttons.isEmpty {
+                if let rest {
+                    rest
+                        .frame(height: 8)
+                        .padding(.bottom, 5)
+                }
+                TileButtonsRow(buttons: buttons, context: context)
             }
         }
     }

@@ -504,6 +504,7 @@
 					FoundationModels,
 					"-weak_framework",
 					FinanceKit,
+					"-Wl,-stack_size,0x400000",
 				);
 				ENABLE_DEBUG_DYLIB = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = ArdaneIcon;
