@@ -20,6 +20,9 @@ enum WidgetCategory: String, CaseIterable, Codable, Identifiable {
 
     var id: String { rawValue }
 
+    /// The categories of the app today: Auto was removed (PDG, 2026-11-25).
+    static var offered: [WidgetCategory] { allCases.filter { $0 != .car } }
+
     var title: String {
         switch self {
         case .dashboards: tr("Tableaux de bord")
@@ -142,7 +145,8 @@ enum WidgetKind: String, CaseIterable, Codable, Identifiable {
 
     /// Widgets of features that were removed (the water mini-app): kept so saved data still reads, never
     /// offered again anywhere (catalog, Store, Créer, gallery). Saved ones are taken off at launch.
-    static let retired: Set<WidgetKind> = [.hydration]
+    /// Top 3 (`priorities`) and the Auto mini-app were removed the same way (PDG, 2026-11-25).
+    static let retired: Set<WidgetKind> = [.hydration, .priorities, .carCost, .nextService, .mileage, .fuelStats, .carDeadlines]
 
     var isRetired: Bool { Self.retired.contains(self) }
 

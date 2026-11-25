@@ -297,11 +297,11 @@ enum HomeSetupCatalog {
             icons: .solid(background: "FFFFFF", symbol: "3366FF"),
             rows: [
                 .widgets([small(.nextClass, .light, "3366FF"), small(.nextExam, .light, "3366FF")]),
-                .widgets([medium(.priorities, .light, "3366FF")]),
+                .widgets([medium(.tasks, .light, "3366FF")]),
                 .widgetAndApps(small(.semesterProgress, .light, "3366FF"), [.books, .notes, .calendar, .reminders], widgetFirst: true),
             ],
             dock: [.phone, .messages, .web, .files],
-            lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.priorities), circular(.nextExam), circular(.semesterProgress)])
+            lock: SetupLock(inline: inline(.nextClass), widgets: [rectangular(.tasks), circular(.nextExam), circular(.semesterProgress)])
         ),
         HomeSetup(
             id: "jade", name: tr("Jade"), tagline: tr("Calories, séance et régularité, aux couleurs d'Ardane."),
@@ -404,7 +404,7 @@ enum HomeSetupCatalog {
             icons: .solid(background: "FFFFFF", symbol: "E4533D"),
             rows: [
                 .widgets([medium(.tasks, .light, "FF6B57")]),
-                .widgets([small(.priorities, .light, "FF6B57"), small(.focus, .colorful, "FF6B57")]),
+                .widgets([small(.deadline, .light, "FF6B57"), small(.focus, .colorful, "FF6B57")]),
                 .widgetAndApps(small(.counter, .light, "FF6B57"), [.notes, .calendar, .reminders, .files], widgetFirst: true),
             ],
             dock: [.phone, .messages, .web, .mail],

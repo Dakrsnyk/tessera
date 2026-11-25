@@ -116,7 +116,7 @@ enum MiniAppSummary {
         let usage = MiniAppUsage.load()
         let interests = Set(model.profile.interests)
         let hidden = MiniAppUsage.hidden
-        let relevant = MiniApp.allCases.filter { app in
+        let relevant = MiniApp.offered.filter { app in
             !hidden.contains(app.rawValue) && (hasData(app, model) || !Set(interest(app)).isDisjoint(with: interests))
         }
         let shown = relevant.sorted { lhs, rhs in
@@ -128,7 +128,7 @@ enum MiniAppSummary {
             if leftData != rightData { return leftData }
             return (MiniApp.allCases.firstIndex(of: lhs) ?? 0) < (MiniApp.allCases.firstIndex(of: rhs) ?? 0)
         }
-        return (shown, MiniApp.allCases.filter { !shown.contains($0) })
+        return (shown, MiniApp.offered.filter { !shown.contains($0) })
     }
 }
 

@@ -143,11 +143,10 @@ enum DailyBrief {
             case .student: self = .studies
             case .budget: self = .budget
             case .habits: self = .habits
-            case .productivity: self = .priorities
+            case .productivity: self = .reminders
             case .business: self = .business
             case .travel: self = .travel
-            case .car: self = .car
-            case .investing, .markets, .life: return nil
+            case .investing, .markets, .life, .car: return nil
             }
         }
 
@@ -161,8 +160,7 @@ enum DailyBrief {
             case .finances: self = .budget
             case .business: self = .business
             case .travel: self = .travel
-            case .car: self = .car
-            case .photos: return nil
+            case .photos, .car: return nil
             }
         }
 
@@ -298,7 +296,7 @@ enum DailyBrief {
             switch self {
             // The default sizes are in `DailyDefaults.wide` (PDG, 2026-11-17): Nutrition, Fitness, Planning (its week
             // table), Habitudes and Top 3 across the width, the other cards at half width; « − » / « + » change that.
-            case .nutrition, .workout, .planning, .habits, .priorities, .invite: true
+            case .nutrition, .workout, .planning, .habits, .reminders, .invite: true
             case let .empty(category): DailyDefaults.wide.contains(category)
             default: false
             }
@@ -338,16 +336,11 @@ enum DailyBrief {
             add(.planning(items: planning), planning.isEmpty ? 40 : (soon ? 102 : (moment == .morning ? 90 : (moment == .day ? 86 : 70))))
         }
 
+        // « À ne pas oublier »: the tasks the person noted (the Top 3 is gone, PDG 2026-11-25). Always there, even
+        // empty: the card holds the quick add.
         let reminders = remindersTile(input)
-        if !reminders.isEmpty {
-            let urgent = reminders.contains { DateMath.isSameDay($0.date, now) && $0.date >= now }
-            add(.reminders(reminders), urgent ? 102 : (moment == .evening ? 72 : 84))
-        }
-
-        let priorities = priorityChecks(input.productivity, now: now)
-        if !priorities.isEmpty {
-            add(.priorities(priorities), moment == .evening ? 45 : 83)
-        }
+        let urgent = reminders.contains { $0.date < now.addingTimeInterval(86_400) }
+        add(.reminders(reminders), urgent ? 101 : (moment == .evening ? 72 : 84))
 
         let habits = input.content.habits.map { Check(id: $0.id.uuidString, title: $0.name, isDone: $0.isDone(on: now), colorHex: $0.colorHex, streak: $0.streak(asOf: now)) }
         if !habits.isEmpty {
@@ -546,7 +539,7 @@ enum DailyBrief {
 
     // MARK: Reminders
 
-    /// Dates not to miss soon: exams, homework, deadlines, bills, the car, a departure, the tasks left.
+    /// « À ne pas oublier »: the tasks the person noted and hasn't done, the ones due first (then the oldest).
     static func remindersTile(_ input: Input) -> [Reminder] {
         let now = input.now
         let calendar = DateMath.calendar
@@ -561,35 +554,18 @@ enum DailyBrief {
             default: return Fmt.weekday(date)
             }
         }
-        func within(_ date: Date, days: Int) -> Bool {
-            date >= todayStart && date < todayStart.addingTimeInterval(TimeInterval(days + 1) * 86_400)
+        let open = input.content.tasks.filter { !$0.isDone }.sorted { lhs, rhs in
+            switch (lhs.due, rhs.due) {
+            case let (l?, r?): return l < r
+            case (.some, .none): return true
+            case (.none, .some): return false
+            case (.none, .none): return lhs.createdAt < rhs.createdAt
+            }
         }
-        var reminders: [Reminder] = []
-        for exam in input.student.exams where within(exam.date, days: 1) && exam.date > now {
-            reminders.append(Reminder(id: exam.id.uuidString, title: tr("Examen : \(exam.title)"), when: when(exam.date, withTime: true), symbol: "pencil.and.list.clipboard", colorHex: "D6409F", date: exam.date, route: .page(.studiesExams)))
+        return open.prefix(5).map { task in
+            Reminder(id: task.id.uuidString, title: task.title, when: task.due.map { when($0, withTime: task.hasTime) } ?? "",
+                     symbol: "circle", colorHex: "6B7280", date: task.due ?? .distantFuture, route: nil)
         }
-        for work in input.student.assignments where !work.isDone && work.due < todayStart.addingTimeInterval(3 * 86_400) {
-            reminders.append(Reminder(id: work.id.uuidString, title: work.title, when: when(work.due, withTime: false), symbol: "doc.text", colorHex: "D6409F", date: work.due, route: .page(.studiesAssignments)))
-        }
-        for deadline in input.productivity.deadlines where within(deadline.date, days: 2) && deadline.date > now {
-            reminders.append(Reminder(id: deadline.id.uuidString, title: deadline.title, when: when(deadline.date, withTime: true), symbol: "flag.fill", colorHex: "6B7280", date: deadline.date, route: .app(.planning)))
-        }
-        for upcoming in BudgetMath.upcomingBills(input.budget, at: now, within: 3) {
-            reminders.append(Reminder(id: upcoming.bill.id.uuidString, title: upcoming.bill.name, when: "\(when(upcoming.due, withTime: false)) · \(TF.money(upcoming.bill.amount, input.currency))", symbol: "doc.text.fill", colorHex: "2F8F7A", date: upcoming.due, route: .page(.financesBills)))
-        }
-        for deadline in input.car.deadlines where deadline.doneOn == nil && within(deadline.date, days: 7) {
-            reminders.append(Reminder(id: deadline.id.uuidString, title: deadline.title, when: when(deadline.date, withTime: false), symbol: "car.fill", colorHex: "4B5563", date: deadline.date, route: .page(.carDeadlines)))
-        }
-        for trip in input.travel.trips where within(trip.start, days: 3) {
-            reminders.append(Reminder(id: trip.id.uuidString, title: tr("Départ pour \(trip.destination)"), when: when(trip.start, withTime: false), symbol: "airplane", colorHex: "12A4B5", date: trip.start, route: .app(.travel)))
-        }
-        var result = Array(reminders.sorted { $0.date < $1.date }.prefix(4))
-        let open = input.content.tasks.filter { !$0.isDone }
-        if !open.isEmpty && result.count < 4 {
-            let names = open.prefix(2).map(\.title).joined(separator: ", ")
-            result.append(Reminder(id: "tasks", title: Fmt.plural(open.count, tr("tâche à faire"), tr("tâches à faire")), when: names, symbol: "checklist", colorHex: "6B7280", date: .distantFuture, route: .page(.planningTasks)))
-        }
-        return result
     }
 
     // MARK: Invitations
@@ -604,7 +580,7 @@ enum DailyBrief {
             case .student where !ids.contains("planning") && input.student.courses.isEmpty && input.student.slots.isEmpty: .student
             case .budget where !ids.contains("budget"): .budget
             case .habits where !ids.contains("habits"): .habits
-            case .productivity where !ids.contains("priorities") && !ids.contains("reminders"): .productivity
+            case .productivity where !ids.contains("reminders"): .productivity
             default: nil
             }
         }

@@ -46,6 +46,9 @@ struct StoreCombo: Identifiable {
 
     var isPremium: Bool { makeDesign().usesPremiumFeatures }
 
+    /// No part of a removed feature (Top 3, Auto, the water): such a combo is never offered.
+    var isOffered: Bool { !parts.contains { $0.kind.isRetired } }
+
     /// « 2 widgets · Nutrition »
     var summary: String { tr("\(parts.count) widgets · \(category.title)") }
 }
@@ -67,7 +70,7 @@ enum StoreComboCatalog {
     static let all: [StoreCombo] = mediums + larges
 
     /// Two small widgets side by side, in a medium widget.
-    static let mediums: [StoreCombo] = firstMediums + moreMediums
+    static let mediums: [StoreCombo] = (firstMediums + moreMediums).filter(\.isOffered)
 
     private static let firstMediums: [StoreCombo] = [
         combo("jour-annee", tr("Jour et année"), tr("Où en est ta journée, et ton année."), .minimal, "2F8F7A",
@@ -181,7 +184,7 @@ enum StoreComboCatalog {
     ]
 
     /// Four small widgets, two medium ones, or one medium and two small, in a large widget.
-    static let larges: [StoreCombo] = firstLarges + moreLarges
+    static let larges: [StoreCombo] = (firstLarges + moreLarges).filter(\.isOffered)
 
     private static let firstLarges: [StoreCombo] = [
         combo("le-temps", tr("Le temps qui passe"), tr("L'heure, le mois, l'année et les vacances."), .minimal, "F2A33A",

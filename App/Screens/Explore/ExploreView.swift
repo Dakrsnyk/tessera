@@ -469,7 +469,7 @@ struct ExploreView: View {
                         router.exploreCategory = nil
                     }
                 }
-                ForEach(WidgetCategory.allCases.filter { $0 != router.exploreCategory }) { category in
+                ForEach(WidgetCategory.offered.filter { $0 != router.exploreCategory }) { category in
                     FilterChip(title: category.title, symbol: category.symbol, isSelected: false) {
                         router.exploreCategory = category
                     }

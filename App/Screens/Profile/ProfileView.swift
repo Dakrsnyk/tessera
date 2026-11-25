@@ -400,7 +400,7 @@ struct ProfileView: View {
             HStack(spacing: 10) {
                 stat(model.designs.count, model.designs.count > 1 ? tr("widgets") : tr("widget"))
                 stat(model.content.habits.count, model.content.habits.count > 1 ? tr("habitudes") : tr("habitude"))
-                stat(Space.allCases.filter { model.hasData(in: $0) }.count, tr("espaces actifs"))
+                stat(Space.offered.filter { model.hasData(in: $0) }.count, tr("espaces actifs"))
             }
         }
         .frame(maxWidth: .infinity)

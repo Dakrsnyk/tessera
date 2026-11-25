@@ -7,6 +7,9 @@ enum Space: String, CaseIterable, Identifiable, Codable {
 
     var id: String { rawValue }
 
+    /// The spaces of the app today: Auto was removed (PDG, 2026-11-25).
+    static var offered: [Space] { allCases.filter { $0 != .car } }
+
     var title: String {
         switch self {
         case .productivity: tr("Productivité")

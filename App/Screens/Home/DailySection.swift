@@ -452,6 +452,7 @@ private struct DailyTileView: View {
                         .font(caption == nil ? .caption : .headline)
                         .foregroundStyle(caption == nil ? Color.secondary : Color.primary)
                         .fixedSize(horizontal: false, vertical: true)
+                    MiniAppDayDetails(app: app)
                 }
                 .accessibilityIdentifier("daily-app-\(raw)")
             }
@@ -1239,6 +1240,71 @@ private struct StepsDayTile: View {
     }
 }
 
+/// What a mini-app card shows under its figure (PDG, 2026-11-25): Études, the classes entered; Business, two
+/// figures that matter (profit and orders of the month) next to the revenue of the caption. Nothing for the others.
+private struct MiniAppDayDetails: View {
+    let app: MiniApp
+    @Environment(AppModel.self) private var model
+    @Environment(\.appStyle) private var style
+
+    var body: some View {
+        switch app {
+        case .studies:
+            let courses = model.student.courses
+            if !courses.isEmpty {
+                VStack(alignment: .leading, spacing: 5) {
+                    ForEach(courses.prefix(5)) { course in
+                        HStack(spacing: 8) {
+                            Circle()
+                                .fill(style.cristal.category(course.colorHex))
+                                .frame(width: 8, height: 8)
+                            Text(course.name)
+                                .font(.subheadline)
+                                .lineLimit(1)
+                        }
+                    }
+                    if courses.count > 5 {
+                        Text("+\(courses.count - 5)")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .padding(.top, 2)
+            }
+        case .business:
+            if !model.business.sales.isEmpty {
+                let now = Date()
+                let currency = model.settings.currencyCode
+                let profit = BusinessMath.profit(model.business, month: now)
+                let kpis = BusinessMath.kpis(model.business, month: now)
+                VStack(alignment: .leading, spacing: 5) {
+                    figure(tr("Bénéfice"), (profit.profit < 0 ? "−" : "") + TF.money(abs(profit.profit), currency))
+                    if kpis.orders > 0 {
+                        figure(tr("Commandes"), Fmt.number(kpis.orders))
+                    }
+                }
+                .padding(.top, 2)
+            }
+        default:
+            EmptyView()
+        }
+    }
+
+    private func figure(_ title: String, _ value: String) -> some View {
+        HStack {
+            Text(title)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            Spacer(minLength: 6)
+            Text(value)
+                .font(.subheadline.weight(.semibold))
+                .lineLimit(1)
+        }
+    }
+}
+
+/// Finances (PDG, 2026-11-25): the balance with its curve over the month, then the next money in and out by date.
+/// Without anything that gives a balance, the old daily view (left per day, spent today).
 private struct BudgetDayTile: View {
     let spent: Double
     let perDayLeft: Double?
@@ -1247,113 +1313,156 @@ private struct BudgetDayTile: View {
 
     var body: some View {
         let currency = model.settings.currencyCode
-        DayCard(title: tr("Budget"), symbol: "creditcard.fill", colorHex: "2F8F7A", route: .space(.budget)) {
-            if let perDayLeft {
-                Text(TF.money(perDayLeft, currency))
+        let now = Date()
+        let budget = model.budget
+        let hasBalance = budget.openingBalance != nil || !budget.incomes.isEmpty || !budget.fixedFlows.isEmpty
+        let points = hasBalance ? BudgetMath.balanceHistory(budget, from: BudgetMath.monthInterval(now).start, now: now) : []
+        let upcoming = Array(BudgetMath.upcoming(budget, at: now, within: 30).prefix(3))
+        DayCard(title: tr("Finances"), symbol: "creditcard.fill", colorHex: "2F8F7A", route: .space(.budget)) {
+            if let current = points.last?.balance {
+                Text((current < 0 ? "−" : "") + TF.money(abs(current), currency))
                     .font(.title.weight(.bold))
+                    .foregroundStyle(current < 0 ? Color.red : .primary)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
-                Text(tr("à dépenser par jour d'ici la fin du mois"))
+                Text(tr("Solde"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                if points.count >= 2 {
+                    SparklineShape(values: points.map(\.balance))
+                        .stroke(style.cristal.category("2F8F7A"), style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
+                        .frame(height: 40)
+                        .padding(.vertical, 2)
+                        .accessibilityHidden(true)
+                }
+            } else {
+                if let perDayLeft {
+                    Text(TF.money(perDayLeft, currency))
+                        .font(.title.weight(.bold))
+                        .minimumScaleFactor(0.6)
+                        .lineLimit(1)
+                    Text(tr("à dépenser par jour d'ici la fin du mois"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                Text(tr("Dépensé aujourd'hui : \(TF.money(spent, currency))"))
+                    .font(perDayLeft == nil ? .headline : .caption.weight(.semibold))
+                    .foregroundStyle(perDayLeft == nil ? .primary : .secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            Text(tr("Dépensé aujourd'hui : \(TF.money(spent, currency))"))
-                .font(perDayLeft == nil ? .headline : .caption.weight(.semibold))
-                .foregroundStyle(perDayLeft == nil ? .primary : .secondary)
-                .fixedSize(horizontal: false, vertical: true)
-            // What was really spent the last seven days: no curve while nothing was spent.
-            let week = lastSevenDays
-            if week.contains(where: { $0 > 0 }) {
-                Spacer(minLength: 4)
-                SparklineShape(values: week)
-                    .stroke(style.cristal.category("2F8F7A"), style: StrokeStyle(lineWidth: 2.4, lineCap: .round, lineJoin: .round))
-                    .frame(height: 40)
-                    .accessibilityHidden(true)
+            ForEach(upcoming) { item in
+                HStack(spacing: 8) {
+                    Image(systemName: item.isIncome ? "arrow.down.circle.fill" : "arrow.up.circle.fill")
+                        .foregroundStyle(item.isIncome ? Color.green : style.cristal.category("2F8F7A"))
+                    Text(item.name)
+                        .font(.subheadline)
+                        .lineLimit(1)
+                    Spacer(minLength: 6)
+                    Text(item.days < 7 ? Fmt.weekday(item.due) : Fmt.shortDay(item.due))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .lineLimit(1)
+                    Text((item.isIncome ? "+" : "−") + TF.money(item.amount, currency))
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(item.isIncome ? Color.green : .primary)
+                        .lineLimit(1)
+                }
             }
         }
         .accessibilityIdentifier("daily-budget")
     }
-
-    /// The spending of each of the last seven days, today last.
-    private var lastSevenDays: [Double] {
-        let now = Date()
-        return (0..<7).reversed().map { back in
-            DateMath.calendar.date(byAdding: .day, value: -back, to: now).map { BudgetMath.spentToday(model.budget, at: $0) } ?? 0
-        }
-    }
 }
 
+/// « À ne pas oublier »: the tasks the person noted (it replaced the Top 3, PDG 2026-11-25). A tap on the circle
+/// checks the task; the field adds one; the footer opens the whole list (« Mes tâches »).
 private struct RemindersDayTile: View {
     let items: [DailyBrief.Reminder]
-    @Environment(\.appStyle) private var style
+    @Environment(AppModel.self) private var model
     @Environment(\.dailyCompact) private var compact
+    @State private var draft = ""
 
     var body: some View {
-        DayCard(title: tr("À ne pas oublier"), symbol: "bell.fill", colorHex: "4B5563") {
+        DayCard(title: tr("À ne pas oublier"), symbol: "checklist", colorHex: "6B7280", route: nil) {
             VStack(alignment: .leading, spacing: 7) {
+                if items.isEmpty {
+                    Text(tr("Aucune tâche"))
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
                 ForEach(items) { item in
-                    if let route = item.route {
-                        NavigationLink(value: route) { row(item) }
-                            .buttonStyle(.pressable)
-                    } else {
+                    Button {
+                        if let id = UUID(uuidString: item.id) {
+                            model.updateContent { $0.toggleTask(id) }
+                            Haptics.tap()
+                        }
+                    } label: {
                         row(item)
                     }
+                    .buttonStyle(.pressable)
+                    .accessibilityValue(tr("À faire"))
                 }
+                footer
             }
         }
         .accessibilityIdentifier("daily-reminders")
     }
 
-    @ViewBuilder private func row(_ item: DailyBrief.Reminder) -> some View {
-        if compact { compactRow(item) } else { wideRow(item) }
-    }
-
-    /// Half width: the reminder on two lines (its title, then when), the chevron kept at the end.
-    private func compactRow(_ item: DailyBrief.Reminder) -> some View {
+    private func row(_ item: DailyBrief.Reminder) -> some View {
         HStack(spacing: 8) {
-            Image(systemName: item.symbol)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(style.cristal.category(item.colorHex))
-                .frame(width: 18)
-            VStack(alignment: .leading, spacing: 1) {
-                Text(item.title)
-                    .font(.caption.weight(.semibold))
-                    .foregroundStyle(.primary)
-                    .lineLimit(2)
-                    .minimumScaleFactor(0.85)
+            Image(systemName: "circle")
+                .foregroundStyle(.secondary)
+            Text(item.title)
+                .font(compact ? .caption.weight(.semibold) : .subheadline)
+                .foregroundStyle(.primary)
+                .lineLimit(compact ? 2 : 1)
+            Spacer(minLength: 6)
+            if !item.when.isEmpty {
                 Text(item.when)
-                    .font(.caption2)
+                    .font(.caption)
                     .foregroundStyle(item.when == tr("En retard") ? Color.red : .secondary)
                     .lineLimit(1)
             }
-            Spacer(minLength: 0)
-            if item.route != nil {
-                Image(systemName: "chevron.right").font(.caption2.weight(.bold)).foregroundStyle(.tertiary)
-            }
         }
         .contentShape(Rectangle())
     }
 
-    private func wideRow(_ item: DailyBrief.Reminder) -> some View {
-        HStack(spacing: 10) {
-            Image(systemName: item.symbol)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundStyle(style.cristal.category(item.colorHex))
-                .frame(width: 20)
-            Text(item.title)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(.primary)
-                .lineLimit(1)
-            Spacer(minLength: 8)
-            Text(item.when)
-                .font(.caption)
-                .foregroundStyle(item.when == tr("En retard") ? Color.red : .secondary)
-                .lineLimit(1)
-            if item.route != nil {
-                Image(systemName: "chevron.right").font(.caption2.weight(.bold)).foregroundStyle(.tertiary)
+    /// The field to add a task in one gesture, and the way to the whole list.
+    private var footer: some View {
+        HStack(spacing: 8) {
+            TextField(tr("Ajouter une tâche"), text: $draft)
+                .font(.subheadline)
+                .submitLabel(.done)
+                .onSubmit(add)
+                .accessibilityIdentifier("daily-quick-task-field")
+            Button(action: add) {
+                Image(systemName: "plus.circle.fill")
+                    .font(.title3)
+                    .foregroundStyle(draft.trimmed.isEmpty ? Color.secondary : Color.accentColor)
             }
+            .buttonStyle(.pressable)
+            .disabled(draft.trimmed.isEmpty)
+            .accessibilityLabel(Text(tr("Ajouter une tâche")))
+            .accessibilityIdentifier("daily-quick-task-add")
+            NavigationLink(value: HomeRoute.page(.planningTasks)) {
+                Image(systemName: "chevron.right")
+                    .font(.caption2.weight(.bold))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 28, height: 28)
+                    .tapAreaOutset(4)
+            }
+            .buttonStyle(.pressable)
+            .accessibilityLabel(Text(tr("Mes tâches")))
+            .accessibilityIdentifier("daily-all-tasks")
         }
-        .contentShape(Rectangle())
+        .padding(.top, items.isEmpty ? 0 : 2)
+    }
+
+    private func add() {
+        let title = draft.trimmed
+        guard !title.isEmpty else { return }
+        model.updateContent { $0.tasks.append(TaskItem(title: title)) }
+        Haptics.tap()
+        draft = ""
     }
 }
 

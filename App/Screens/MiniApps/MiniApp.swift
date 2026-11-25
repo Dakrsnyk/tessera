@@ -6,6 +6,10 @@ enum MiniApp: String, CaseIterable, Identifiable, Hashable {
     case nutrition, fitness, planning, studies, finances, business, travel, car, photos
     var id: String { rawValue }
 
+    /// The mini-apps of the app today: Auto was removed (PDG, 2026-11-25); its case stays only so old saved
+    /// entries still read.
+    static var offered: [MiniApp] { allCases.filter { $0 != .car } }
+
     var title: String {
         switch self {
         case .nutrition: tr("Nutrition")

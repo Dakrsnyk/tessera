@@ -32,7 +32,8 @@ enum Interest: String, Codable, CaseIterable, Identifiable {
     /// The tiles of the grid of interests. Finance is no longer offered (PDG, 2026-11-22): Business leads to the
     /// finances page; an older account that picked it still sees its tile, to be able to untick it.
     static func offered(keeping selection: [Interest]) -> [Interest] {
-        allCases.filter { $0 != .finance || selection.contains(.finance) }
+        // Auto is removed (PDG, 2026-11-25): never offered, even to an account that had picked it.
+        allCases.filter { $0 != .car && ($0 != .finance || selection.contains(.finance)) }
     }
 
     var symbol: String {

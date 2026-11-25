@@ -5,8 +5,11 @@ import Foundation
 /// card with one figure from their data, or an invitation to fill them in. Nothing is made up.
 @MainActor
 enum DailyCategories {
-    /// The mini-apps that can be put in Mon Quotidien (the photos stay out of it).
-    static var choices: [MiniApp] { MiniApp.allCases.filter { $0 != .photos } }
+    /// The mini-apps that can be put in Mon Quotidien (the photos stay out of it; Auto is removed).
+    static var choices: [MiniApp] { MiniApp.offered.filter { $0 != .photos } }
+
+    /// Cards of removed features (Top 3, Auto): never shown.
+    static let removedTileIDs: Set<String> = ["priorities", "app-car"]
 
     /// The cards of Mon Quotidien that already stand for a mini-app.
     static func cardIDs(_ app: MiniApp) -> [String] {
@@ -53,7 +56,9 @@ enum DailyCategories {
         }
         let tiles = DailyBrief.completing(base, appCaptions: captions,
                                           empty: wanted(input: input, settings: model.settings))
-        return DailyBrief.inDefaultOrder(withWeekSchedule(tiles))
+        // Top 3 and Auto are gone (PDG, 2026-11-25): never a card of theirs, whatever an old setting says.
+        let kept = tiles.filter { !Self.removedTileIDs.contains($0.id) }
+        return DailyBrief.inDefaultOrder(withWeekSchedule(kept))
     }
 
     /// The week's schedule shows for everyone, Planning chosen at the start or not (PDG, 2026-11-16): without
@@ -86,7 +91,7 @@ enum DailyCategories {
 
     /// The category a `dailyAdded` entry stands for, in any of its forms (nil for an unknown entry).
     static func category(ofEntry entry: String) -> DailyBrief.Category? {
-        if entry == productivityKey { return .priorities }
+        if entry == productivityKey { return .reminders }
         if entry.hasPrefix(categoryPrefix) { return DailyBrief.Category(rawValue: String(entry.dropFirst(categoryPrefix.count))) }
         return MiniApp(rawValue: entry).flatMap { DailyBrief.Category(app: $0) }
     }

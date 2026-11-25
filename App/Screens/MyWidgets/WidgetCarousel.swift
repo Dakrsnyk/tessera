@@ -176,7 +176,7 @@ struct CategoryStrip: View {
         if favorites > 0 {
             options.append(Option(filter: .favorites, title: tr("Favoris"), symbol: "heart.fill", colorHex: "F2588F", count: favorites))
         }
-        for category in WidgetCategory.allCases {
+        for category in WidgetCategory.offered {
             let count = designs.filter { $0.kind.category == category }.count
             if count > 0 {
                 options.append(Option(filter: .category(category), title: category.title, symbol: category.symbol, colorHex: category.colorHex, count: count))

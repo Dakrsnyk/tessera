@@ -17,7 +17,7 @@ struct LockScreenCreator: View {
     /// Lock Screen widgets, grouped by the space whose data they show (general ones last).
     private var groups: [(title: String, items: [ShowcaseItem])] {
         let kinds = KindCatalog.all.map(\.kind).filter { !$0.isRetired && $0.supportsLockScreen && (!onlyInteractive || $0.isInteractive) }
-        var order: [Space?] = Space.allCases.map { Optional($0) }
+        var order: [Space?] = Space.offered.map { Optional($0) }
         order.append(nil)
         return order.compactMap { space in
             let items = kinds.filter { $0.space == space }.map { kind in

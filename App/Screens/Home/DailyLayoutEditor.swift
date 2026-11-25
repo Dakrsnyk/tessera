@@ -2,7 +2,7 @@ import SwiftUI
 
 /// « Mon Quotidien » arranged by hand, from Home: the order of the cards (drag), their size (half or
 /// full width) and which ones show. Every change is saved at once; « Disposition automatique » gives
-/// the order back to Ardane (the default order: Nutrition, Fitness, Planning, Habitudes, Top 3, then the others).
+/// the order back to Ardane (the default order: Nutrition, Fitness, Planning, Habitudes, À ne pas oublier, then the others).
 struct DailyLayoutEditor: View {
     /// Every card of Home, with data or empty (a dotted « Ajouter » card), in the default order.
     let available: [DailyBrief.Tile]
@@ -59,21 +59,6 @@ struct DailyLayoutEditor: View {
                         }
                         .accessibilityIdentifier("daily-category-\(app.rawValue)")
                     }
-                    // Productivité: the Top 3 card with a quick add, even without any task yet.
-                    Toggle(isOn: Binding(
-                        get: { DailyCategories.isProductivityShown(settings: settings) },
-                        set: { on in
-                            let hasTasks = !model.productivity.priorities.isEmpty
-                            model.updateSettings { DailyCategories.setProductivity(shown: on, hasTasks: hasTasks, in: &$0) }
-                        }
-                    )) {
-                        Label {
-                            Text(tr("Productivité"))
-                        } icon: {
-                            Image(systemName: "checklist").foregroundStyle(CristalPalette.of(style.id).category("F5A524"))
-                        }
-                    }
-                    .accessibilityIdentifier("daily-category-productivity")
                 } header: {
                     Text(tr("Catégories"))
                 } footer: {
@@ -91,7 +76,7 @@ struct DailyLayoutEditor: View {
                     }
                     .disabled(isAutomatic)
                 } footer: {
-                    Text(tr("Automatique : Nutrition, Fitness, Planning, Habitudes et Top 3, puis tes autres cartes en demi-largeur. Ce que tu as retiré ou ajouté reste tel quel."))
+                    Text(tr("Automatique : Nutrition, Fitness, Planning, Habitudes et À ne pas oublier, puis tes autres cartes en demi-largeur. Ce que tu as retiré ou ajouté reste tel quel."))
                 }
             }
             .styledList()
@@ -169,7 +154,7 @@ struct DailyLayoutEditor: View {
         case .habits: (tr("Habitudes"), "repeat", "7FA33A")
         case .steps: (tr("Pas"), "figure.walk", "12A4B5")
         case .budget: (tr("Budget"), "creditcard.fill", "2B9A66")
-        case .reminders: (tr("À ne pas oublier"), "bell.fill", "E5484D")
+        case .reminders: (tr("À ne pas oublier"), "checklist", "6B7280")
         case .priorities: (tr("Top 3"), "star.fill", "F5A524")
         case .invite: (tr("Mes données"), "plus", "8E8E93")
         case let .empty(category): (category.title, category.symbol, category.colorHex)

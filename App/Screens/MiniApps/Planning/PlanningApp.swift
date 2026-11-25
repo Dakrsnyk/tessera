@@ -68,8 +68,7 @@ struct PlanningAppView: View {
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("planning-today")
 
-            // 4. The tasks: the three priorities, then the counters.
-            priorities(now: now)
+            // 4. The tasks (the Top 3 was removed, PDG 2026-11-25), then the counters.
 
             VStack(alignment: .leading, spacing: 10) {
                 MiniSectionTitle(title: tr("Tâches"))

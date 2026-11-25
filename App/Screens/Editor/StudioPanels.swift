@@ -257,6 +257,14 @@ struct StudioColorsPanel: View {
                     ), supportsOpacity: false)
                     .labelsHidden()
                     .frame(minWidth: 44, minHeight: 44)
+                    // The free accents are free; a color picked by hand is Premium (saved through the offer).
+                    .overlay(alignment: .topTrailing) {
+                        if !model.isPremium {
+                            PremiumBadge(compact: true)
+                                .offset(x: 8, y: -6)
+                                .allowsHitTesting(false)
+                        }
+                    }
                 }
                 if !usesStyleColors {
                     Button {
