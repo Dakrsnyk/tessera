@@ -123,6 +123,9 @@ struct StyleDepth: ViewModifier {
             content
                 .shadow(color: Color.white.opacity(style.isDarkSurface ? 0.16 : 0.85), radius: 0, x: -0.8, y: -0.8)
                 .shadow(color: Color.black.opacity(style.isDarkSurface ? 0.6 : 0.25), radius: 0.6, x: 0.8, y: 0.9)
+        case .hardShadow:
+            let shift = max(2, offset)
+            content.shadow(color: style.shadowColor.opacity(min(1, opacity * 2.5)), radius: 0, x: shift, y: shift)
         }
     }
 }
@@ -170,7 +173,45 @@ struct StyleBorder: View {
                 ),
                 lineWidth: width
             )
+        case .pixel:
+            let block = max(3, width * 2)
+            PixelFrame(block: block).stroke(color, style: StrokeStyle(lineWidth: block, lineCap: .square, lineJoin: .miter))
         }
+    }
+}
+
+/// The widget's outline drawn in blocks: the rounded corners become staircases, kept inside the corner
+/// radius iOS gives the widget so that nothing is cut off.
+struct PixelFrame: Shape {
+    let block: CGFloat
+    var radius: CGFloat = 22
+
+    func path(in rect: CGRect) -> Path {
+        let inner = rect.insetBy(dx: block / 2, dy: block / 2)
+        guard inner.width > radius * 2, inner.height > radius * 2 else { return Path(inner) }
+        let steps = max(2, Int((radius / block).rounded()))
+        let step = radius / CGFloat(steps)
+        // The top left corner, from the left edge up to the top edge, as distances from the two sides:
+        // one horizontal band per step, from the lowest (against the side) to the highest.
+        var topLeft: [CGPoint] = []
+        for band in 0..<steps {
+            let bottom = radius - CGFloat(band) * step
+            let middle = bottom - step / 2
+            let away = radius - middle
+            let curve = radius - (radius * radius - away * away).squareRoot()
+            let x = (curve / step).rounded() * step
+            topLeft.append(CGPoint(x: x, y: bottom))
+            topLeft.append(CGPoint(x: x, y: bottom - step))
+        }
+        topLeft.append(CGPoint(x: radius, y: 0))
+        var points: [CGPoint] = topLeft.map { CGPoint(x: inner.minX + $0.x, y: inner.minY + $0.y) }
+        points += topLeft.reversed().map { CGPoint(x: inner.maxX - $0.x, y: inner.minY + $0.y) }
+        points += topLeft.map { CGPoint(x: inner.maxX - $0.x, y: inner.maxY - $0.y) }
+        points += topLeft.reversed().map { CGPoint(x: inner.minX + $0.x, y: inner.maxY - $0.y) }
+        var path = Path()
+        path.addLines(points)
+        path.closeSubpath()
+        return path
     }
 }
 
@@ -205,6 +246,9 @@ struct TextureView: View {
         case .waves: 0.3
         case .web: 0.4
         case .leaves: 0.22
+        case .scanlines: 0.26
+        case .halftone: 0.24
+        case .pixels: 0.1
         }
     }
 }
@@ -217,6 +261,41 @@ struct TexturePattern: Shape {
         switch kind {
         case .none:
             break
+        case .scanlines:
+            var y = rect.minY
+            while y < rect.maxY {
+                path.addRect(CGRect(x: rect.minX, y: y, width: rect.width, height: 2))
+                y += 5
+            }
+        case .halftone:
+            // Staggered dots, growing toward the bottom right corner.
+            let step: CGFloat = 7
+            var y = rect.minY + step / 2
+            var row = 0
+            while y < rect.maxY {
+                var x = rect.minX + (row.isMultiple(of: 2) ? step / 2 : step)
+                while x < rect.maxX {
+                    let progress = (x - rect.minX + y - rect.minY) / max(1, rect.width + rect.height)
+                    let size = 0.6 + progress * 4.4
+                    path.addEllipse(in: CGRect(x: x - size / 2, y: y - size / 2, width: size, height: size))
+                    x += step
+                }
+                y += step
+                row += 1
+            }
+        case .pixels:
+            let side: CGFloat = 6
+            var y = rect.minY
+            var row = 0
+            while y < rect.maxY {
+                var x = rect.minX + (row.isMultiple(of: 2) ? 0 : side)
+                while x < rect.maxX {
+                    path.addRect(CGRect(x: x, y: y, width: side, height: side))
+                    x += side * 2
+                }
+                y += side
+                row += 1
+            }
         case .dots:
             let step: CGFloat = 9
             var y = rect.minY + step / 2

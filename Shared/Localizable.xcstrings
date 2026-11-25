@@ -37037,60 +37037,13 @@
         }
       }
     },
-    "Automatique : Nutrition, Fitness, Planning, Habitudes et Top 3, puis tes autres cartes en demi-largeur. Ce que tu as retiré ou ajouté reste tel quel.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatisch: Ernährung, Fitness, Planung, Gewohnheiten und Top 3, danach deine übrigen Karten in halber Breite. Was du entfernt oder hinzugefügt hast, bleibt unverändert."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatic: Nutrition, Fitness, Planning, Habits and Top 3, then your other cards at half width. What you removed or added stays as it is."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automático: Nutrición, Fitness, Planificación, Hábitos y Top 3, y después tus otras tarjetas a media anchura. Lo que quitaste o añadiste se queda como está."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatique : Nutrition, Fitness, Planning, Habitudes et Top 3, puis tes autres cartes en demi-largeur. Ce que tu as retiré ou ajouté reste tel quel."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automatico: Nutrizione, Fitness, Pianificazione, Abitudini e Top 3, poi le altre schede a mezza larghezza. Ciò che hai rimosso o aggiunto resta com'è."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自動：栄養、フィットネス、プランニング、習慣、トップ3の順に並べ、そのほかのカードは半分の幅で続きます。削除または追加したものはそのままです。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Automático: Nutrição, Fitness, Planejamento, Hábitos e Top 3, depois seus outros cartões em meia largura. O que você removeu ou adicionou continua como está."
-          }
-        }
-      }
-    },
     "Automatique : Nutrition, Fitness, Planning, Habitudes et À ne pas oublier, puis tes autres cartes en demi-largeur. Ce que tu as retiré ou ajouté reste tel quel.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automatisch: Ernährung, Fitness, Planung, Gewohnheiten und Nicht vergessen, danach deine übrigen Karten in halber Breite. Was du entfernt oder hinzugefügt hast, bleibt unverändert."
+            "value": "Automatisch: Ernährung, Fitness, Planung, Gewohnheiten und Nicht vergessen, danach deine anderen Karten in halber Breite. Was du entfernt oder hinzugefügt hast, bleibt so."
           }
         },
         "en": {
@@ -37102,7 +37055,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automático: Nutrición, Fitness, Planificación, Hábitos y No olvides, y después tus otras tarjetas a media anchura. Lo que quitaste o añadiste se queda como está."
+            "value": "Automático: Nutrición, Fitness, Agenda, Hábitos y No olvidar, y después tus otras tarjetas a media anchura. Lo que quitaste o añadiste se queda igual."
           }
         },
         "fr": {
@@ -37114,19 +37067,19 @@
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automatico: Nutrizione, Fitness, Pianificazione, Abitudini e Da non dimenticare, poi le altre schede a mezza larghezza. Ciò che hai rimosso o aggiunto resta com'è."
+            "value": "Automatico: Nutrizione, Fitness, Agenda, Abitudini e Da non dimenticare, poi le altre schede a mezza larghezza. Ciò che hai tolto o aggiunto resta com'è."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "自動：栄養、フィットネス、プランニング、習慣、忘れずにの順に並べ、そのほかのカードは半分の幅で続きます。削除または追加したものはそのままです。"
+            "value": "自動：栄養、フィットネス、予定、習慣、忘れずにの順で、その他のカードは半分の幅で表示します。削除や追加した内容はそのままです。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Automático: Nutrição, Fitness, Planejamento, Hábitos e Não esqueça, depois seus outros cartões em meia largura. O que você removeu ou adicionou continua como está."
+            "value": "Automático: Nutrição, Fitness, Agenda, Hábitos e Não esquecer, depois seus outros cartões em meia largura. O que você removeu ou adicionou fica como está."
           }
         }
       }
@@ -39477,6 +39430,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Balance entre as pernas e depois use o impulso do quadril."
+          }
+        }
+      }
+    },
+    "Balayage": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanlinien"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scanlines"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Líneas CRT"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Balayage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scansione"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "走査線"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Varredura"
           }
         }
       }
@@ -88921,53 +88921,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Partida e voo"
-          }
-        }
-      }
-    },
-    "Départ pour %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abreise nach %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Departure for %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Salida a %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Départ pour %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Partenza per %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@へ出発"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Partida para %@"
           }
         }
       }
@@ -163702,6 +163655,53 @@
         }
       }
     },
+    "Ombre pleine": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Harter Schatten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hard shadow"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sombra sólida"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ombre pleine"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ombra piena"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "くっきり影"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sombra sólida"
+          }
+        }
+      }
+    },
     "Omelette nature": {
       "extractionState": "manual",
       "localizations": {
@@ -172910,6 +172910,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pistaches"
+          }
+        }
+      }
+    },
+    "Pixels": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixel"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixels"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Píxeles"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixels"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixel"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ピクセル"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pixels"
           }
         }
       }
@@ -241910,6 +241957,53 @@
         }
       }
     },
+    "Trame BD": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comicraster"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Halftone"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trama cómic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trame BD"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retino"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網点"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retícula"
+          }
+        }
+      }
+    },
     "Transformer l'écarté en développé.": {
       "extractionState": "manual",
       "localizations": {
@@ -246794,6 +246888,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Uma sombra marcada, mais contraste."
+          }
+        }
+      }
+    },
+    "Une ombre pleine et décalée, sans flou.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein harter, versetzter Schatten ohne Unschärfe."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A solid, offset shadow with no blur."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una sombra sólida y desplazada, sin desenfoque."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une ombre pleine et décalée, sans flou."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’ombra piena e spostata, senza sfocatura."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ぼかしのない、ずらした濃い影。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uma sombra sólida e deslocada, sem desfoque."
           }
         }
       }

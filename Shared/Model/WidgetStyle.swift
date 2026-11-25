@@ -142,6 +142,8 @@ enum Density: String, Codable, CaseIterable, Identifiable {
 
 enum BorderKind: String, Codable, CaseIterable, Identifiable {
     case none, solid, dashed, dotted, double, glow, gradient
+    /// Blocks with stepped corners (8-bit styles).
+    case pixel
     var id: String { rawValue }
 
     var title: String {
@@ -153,12 +155,15 @@ enum BorderKind: String, Codable, CaseIterable, Identifiable {
         case .double: tr("Double")
         case .glow: tr("Lumineuse")
         case .gradient: tr("Dégradé")
+        case .pixel: tr("Pixels")
         }
     }
 }
 
 enum DepthKind: String, Codable, CaseIterable, Identifiable {
     case none, soft, strong, glow, floating, embossed
+    /// A solid shadow, offset, without blur (neo-brutalism).
+    case hardShadow
     var id: String { rawValue }
 
     var title: String {
@@ -169,6 +174,7 @@ enum DepthKind: String, Codable, CaseIterable, Identifiable {
         case .glow: tr("Lueur")
         case .floating: tr("Flottant")
         case .embossed: tr("Relief")
+        case .hardShadow: tr("Ombre pleine")
         }
     }
 
@@ -180,6 +186,7 @@ enum DepthKind: String, Codable, CaseIterable, Identifiable {
         case .glow: tr("Les chiffres et les graphiques brillent.")
         case .floating: tr("Le contenu semble flotter au-dessus du fond.")
         case .embossed: tr("Un léger relief, comme gravé.")
+        case .hardShadow: tr("Une ombre pleine et décalée, sans flou.")
         }
     }
 }
@@ -318,6 +325,8 @@ enum TextureKind: String, Codable, CaseIterable, Identifiable {
     case none, grain, paper, dots, grid, lines, diagonal, noise
     // Motifs of the themed styles: space, snow, water, a web, foliage.
     case stars, snow, waves, web, leaves
+    // Screen and print motifs: CRT scan lines, comic-book halftone, 8-bit checkerboard.
+    case scanlines, halftone, pixels
     var id: String { rawValue }
 
     var title: String {
@@ -335,6 +344,9 @@ enum TextureKind: String, Codable, CaseIterable, Identifiable {
         case .waves: tr("Vagues")
         case .web: tr("Toile")
         case .leaves: tr("Feuillage")
+        case .scanlines: tr("Balayage")
+        case .halftone: tr("Trame BD")
+        case .pixels: tr("Pixels")
         }
     }
 }
