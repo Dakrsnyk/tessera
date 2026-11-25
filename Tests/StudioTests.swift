@@ -175,7 +175,7 @@ final class StudioTests: XCTestCase {
         let saved = model.saveStyle(named: "Mon thème", from: source)
         XCTAssertEqual(saved.style.hidden, [], "Hidden lines aren't part of a look")
 
-        var service = WidgetDesign(kind: .nextService)
+        var service = WidgetDesign(kind: .nextExam)
         service.style.hidden = ["footnote"]
         let budget = WidgetDesign(kind: .budgetLeft, themeID: .aurora)
         var withPhoto = WidgetDesign(kind: .caloriesLeft)
@@ -191,7 +191,7 @@ final class StudioTests: XCTestCase {
             XCTAssertEqual(design.style.border, .double)
             XCTAssertTrue(saved.matches(design))
         }
-        XCTAssertEqual(reopened.design(id: service.id)?.kind, .nextService, "The content stays")
+        XCTAssertEqual(reopened.design(id: service.id)?.kind, .nextExam, "The content stays")
         XCTAssertEqual(reopened.design(id: service.id)?.style.hidden, ["footnote"])
         XCTAssertEqual(reopened.design(id: withPhoto.id)?.background, .photo("mine.jpg"), "A widget's own photo is kept")
 
