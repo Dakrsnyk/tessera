@@ -17,7 +17,7 @@ enum DailyCategories {
         switch app {
         case .nutrition: ["nutrition"]
         case .fitness: ["workout"]
-        case .planning: ["planning", "priorities", "reminders", "habits"]
+        case .planning: ["planning", "reminders", "habits"]
         case .finances: ["budget"]
         default: []
         }
@@ -30,14 +30,9 @@ enum DailyCategories {
             choices.contains(app) && !cardIDs(app).contains(where: ids.contains)
         }
         .map { DailyBrief.Tile.miniApp($0.rawValue, caption: MiniAppSummary.caption($0, model, now: now)) }
-        // « Productivité » added by the person: the Top 3 card with its quick add, even with no task yet.
-        var productivity: [DailyBrief.Tile] = []
-        if added.contains(productivityKey) && !ids.contains("priorities") {
-            productivity = [.priorities(DailyBrief.priorityChecks(model.productivity, now: now))]
-        }
         let invites = tiles.filter { if case .invite = $0 { true } else { false } }
         let cards = tiles.filter { tile in !invites.contains(tile) }
-        return cards + extra + productivity + invites
+        return cards + extra + invites
     }
 
     /// The cards of Mon Quotidien before what the person hid or ordered: the cards with data (always), and
@@ -48,14 +43,11 @@ enum DailyCategories {
     static func home(model: AppModel, now: Date, steps: Int?) -> [DailyBrief.Tile] {
         let input = DailyBrief.Input(model: model, now: now, steps: steps)
         let brief = DailyBrief.tiles(input)
-        // Only the Productivité quick add still adds a card by hand: the mini-apps are all there already.
-        let quick = model.settings.dailyAdded.filter { $0 == productivityKey }
-        let base = adding(quick, to: brief, model: model, now: now)
         var captions: [DailyBrief.Category: String] = [:]
         for category in DailyBrief.Category.allCases {
             if let app = category.app, let caption = MiniAppSummary.caption(app, model, now: now) { captions[category] = caption }
         }
-        let tiles = DailyBrief.completing(base, appCaptions: captions,
+        let tiles = DailyBrief.completing(brief, appCaptions: captions,
                                           empty: wanted(input: input, settings: model.settings))
         // Top 3 and Auto are gone (PDG, 2026-11-25): never a card of theirs, whatever an old setting says.
         let kept = tiles.filter { !Self.removedTileIDs.contains($0.id) }
@@ -134,46 +126,19 @@ enum DailyCategories {
         }
     }
 
-    /// Reserved entry of `dailyAdded` for the Productivité card (not a mini-app: ignored when reading the mini-apps).
+    /// Old entry of `dailyAdded` (the removed Productivité quick add): it stands for « À ne pas oublier ».
     static let productivityKey = "quick-productivity"
-
-    /// Whether the Productivité entry is on: it was added and its card isn't hidden.
-    static func isProductivityShown(settings: AppSettings) -> Bool {
-        settings.dailyAdded.contains(productivityKey) && !settings.dailyHidden.contains("priorities")
-    }
-
-    /// Adds the Productivité card (back if it was hidden), or takes it off Mon Quotidien. Taken off, the Top 3
-    /// card is always hidden for real: it is never missing any more (an empty dotted card is its default), so
-    /// without this the switch would read off while the empty card stayed. `hasTasks` is kept for callers
-    /// but no longer changes the result.
-    static func setProductivity(shown: Bool, hasTasks: Bool, in settings: inout AppSettings) {
-        if shown {
-            if !settings.dailyAdded.contains(productivityKey) { settings.dailyAdded.append(productivityKey) }
-            settings.dailyHidden.removeAll { $0 == "priorities" }
-        } else {
-            settings.dailyAdded.removeAll { $0 == productivityKey }
-            if !settings.dailyHidden.contains("priorities") { settings.dailyHidden.append("priorities") }
-        }
-    }
-
-    /// The cards a mini-app owns. While « Productivité » is added, the Top 3 belongs to it, not to Planning:
-    /// turning one on or off doesn't move the other.
-    private static func ownCardIDs(_ app: MiniApp, settings: AppSettings) -> [String] {
-        let ids = cardIDs(app)
-        guard app == .planning, settings.dailyAdded.contains(productivityKey) else { return ids }
-        return ids.filter { $0 != "priorities" }
-    }
 
     /// Whether the mini-app is on Mon Quotidien: one of its cards shows and isn't hidden, or it was added.
     static func isShown(_ app: MiniApp, available: [DailyBrief.Tile], settings: AppSettings) -> Bool {
         let shown = available.map(\.id).filter { !settings.dailyHidden.contains($0) }
-        return shown.contains("app-\(app.rawValue)") || ownCardIDs(app, settings: settings).contains(where: shown.contains)
+        return shown.contains("app-\(app.rawValue)") || cardIDs(app).contains(where: shown.contains)
             || settings.dailyAdded.contains(app.rawValue)
     }
 
     /// Adds the mini-app (its cards come back if they were hidden), or takes it off Mon Quotidien.
     static func set(_ app: MiniApp, shown: Bool, in settings: inout AppSettings) {
-        let ids = ownCardIDs(app, settings: settings) + ["app-\(app.rawValue)"]
+        let ids = cardIDs(app) + ["app-\(app.rawValue)"]
         if shown {
             if !settings.dailyAdded.contains(app.rawValue) { settings.dailyAdded.append(app.rawValue) }
             settings.dailyHidden.removeAll { ids.contains($0) }

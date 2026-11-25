@@ -3,50 +3,9 @@ import SwiftUI
 struct ProductivitySpaceSections: View {
     @Environment(\.appStyle) private var style
     @Environment(AppModel.self) private var model
-    @State private var newPriority = ""
     @Environment(SpaceSheets.self) private var sheets: SpaceSheets?
 
     var body: some View {
-        Section {
-            ForEach(model.productivity.activePriorities) { item in
-                Button {
-                    Haptics.tap()
-                    model.update(\.productivity) { $0.togglePriority(item.id) }
-                } label: {
-                    Label {
-                        Text(item.title).foregroundStyle(Color.primary)
-                    } icon: {
-                        Image(systemName: "circle")
-                    }
-                }
-            }
-            .onDelete { offsets in
-                // Offsets are those of the active list: only those tasks are removed.
-                let active = model.productivity.activePriorities
-                let ids = offsets.compactMap { active[safe: $0]?.id }
-                model.update(\.productivity) { $0.priorities.removeAll { ids.contains($0.id) } }
-            }
-            NavigationLink {
-                CompletedPrioritiesView()
-            } label: {
-                ValueRow(title: tr("Mes tâches réalisées"), value: "\(model.productivity.completedPriorities.count)", symbol: "checkmark.circle")
-            }
-            .accessibilityIdentifier("completed-priorities-link")
-            if model.productivity.activePriorities.count < ProductivityState.maxPriorities {
-                HStack {
-                    TextField(tr("Nouvelle priorité"), text: $newPriority)
-                        .submitLabel(.done)
-                        .onSubmit(addPriority)
-                    Button(tr("Ajouter"), action: addPriority)
-                        .disabled(newPriority.trimmed.isEmpty)
-                }
-            }
-        } header: {
-            Text(tr("Top 3 du jour"))
-        } footer: {
-            Text(tr("Une tâche validée quitte le Top 3 et reste dans « Mes tâches réalisées »."))
-        }
-
         Section(tr("Tâches")) {
             NavigationLink {
                 TasksView()
@@ -153,63 +112,6 @@ struct ProductivitySpaceSections: View {
             ValueRow(title: tr("Cette semaine"), value: Fmt.minutes(ProductivityMath.focusMinutes(model.productivity, weekOf: Date())), symbol: "brain.head.profile")
             HintRow(text: tr("Chaque session lancée depuis le widget Focus compte ici."))
         }
-    }
-
-    private func addPriority() {
-        let title = newPriority.trimmed
-        guard !title.isEmpty else { return }
-        model.update(\.productivity) { _ = $0.addQuickTask(title, on: Date()) }
-        newPriority = ""
-    }
-}
-
-/// « Mes tâches réalisées »: the validated Top 3 tasks, the most recent first, with their completion date when
-/// known. They are never deleted; a touch puts one back among the active tasks (if the Top 3 has room).
-struct CompletedPrioritiesView: View {
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        let items = model.productivity.completedPriorities
-        List {
-            if items.isEmpty {
-                Section {
-                    HintRow(text: tr("Les tâches que tu valides dans ton Top 3 apparaîtront ici."))
-                }
-            } else {
-                Section {
-                    ForEach(items) { item in
-                        Button {
-                            Haptics.tap()
-                            model.update(\.productivity) { $0.togglePriority(item.id) }
-                        } label: {
-                            HStack(spacing: 12) {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(Color.accentColor)
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(item.title)
-                                        .strikethrough()
-                                        .foregroundStyle(Color.secondary)
-                                    if let date = item.completedAt {
-                                        Text(tr("Terminée le \(Fmt.format(date, template: "dMMMHHmm"))"))
-                                            .font(.caption)
-                                            .foregroundStyle(.tertiary)
-                                    }
-                                }
-                                Spacer(minLength: 0)
-                            }
-                            .contentShape(Rectangle())
-                        }
-                        .buttonStyle(.plain)
-                    }
-                } footer: {
-                    Text(tr("Touche une tâche pour la remettre dans ton Top 3."))
-                }
-            }
-        }
-        .styledList()
-        .navigationTitle(tr("Mes tâches réalisées"))
-        .navigationBarTitleDisplayMode(.inline)
-        .accessibilityIdentifier("completed-priorities")
     }
 }
 

@@ -11,7 +11,8 @@ enum InfoArea: String, CaseIterable, Identifiable {
     var symbol: String { space?.symbol ?? "gearshape.fill" }
     var colorHex: String { space?.colorHex ?? "6B7280" }
 
-    var items: [DataItem] { DataItem.allCases.filter { $0.area == self } }
+    /// The Top 3 is gone (PDG, 2026-11-25): never asked nor shown.
+    var items: [DataItem] { DataItem.allCases.filter { $0.area == self && $0 != .priorities } }
 
     /// The areas of the person's interests first, then the others in catalog order.
     static func ordered(preferring spaces: [Space]) -> [InfoArea] {
@@ -299,14 +300,14 @@ extension WidgetKind {
         case .carDeadlines: [.carDeadlines]
         case .myDay: [.calendar, .tasks, .kcalTarget]
         case .now: [.tasks, .kcalTarget, .routines, .monthlyBudget]
-        case .morning: [.calendar, .priorities]
+        case .morning: [.calendar, .tasks]
         case .fitnessDashboard: [.routines, .kcalTarget]
         case .moneyDashboard: [.monthlyBudget, .expenses]
         case .studentDashboard: [.timetable, .exams]
         case .aiSummary: [.kcalTarget, .tasks, .monthlyBudget]
         case .aiNutrition: [.kcalTarget, .meals]
         case .aiFinance: [.monthlyBudget, .expenses]
-        case .aiProductivity: [.tasks, .priorities]
+        case .aiProductivity: [.tasks]
         }
     }
 

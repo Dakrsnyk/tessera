@@ -90,7 +90,6 @@ struct DailySection: View {
         let hasData = automatic.contains { tile in
             switch tile {
             case .invite, .empty, .miniApp(_, caption: nil): false
-            case let .priorities(items) where items.isEmpty: false
             // The week's schedule is there for everyone: empty, it isn't something the person entered.
             case let .planning(items) where items.isEmpty: false
             default: true
@@ -440,7 +439,6 @@ private struct DailyTileView: View {
             }
         case let .budget(spent, perDay): BudgetDayTile(spent: spent, perDayLeft: perDay)
         case let .reminders(items): RemindersDayTile(items: items)
-        case let .priorities(items): PrioritiesDayTile(items: items)
         case let .invite(area): InviteDayTile(area: area)
         case let .empty(category):
             InviteCard(title: category.title, symbol: category.symbol, colorHex: category.colorHex, text: category.invitation,
@@ -1466,114 +1464,6 @@ private struct RemindersDayTile: View {
     }
 }
 
-private struct PrioritiesDayTile: View {
-    let items: [DailyBrief.Check]
-    @Environment(AppModel.self) private var model
-    @State private var draft = ""
-
-    /// Added from « + » as Productivité: the card gets its quick add (and no longer is one big link).
-    private var hasQuickAdd: Bool { model.settings.dailyAdded.contains(DailyCategories.productivityKey) }
-    private var canAdd: Bool { model.productivity.activePriorities.count < ProductivityState.maxPriorities }
-
-    var body: some View {
-        // No whole-card link: the footer holds the two ways out (« Mes tâches réalisées » and the whole Top 3).
-        DayCard(title: tr("Top 3"), symbol: "3.circle.fill", colorHex: "6B7280", route: nil) {
-            VStack(alignment: .leading, spacing: 6) {
-                ForEach(items) { item in
-                    Button {
-                        if let id = UUID(uuidString: item.id) {
-                            model.update(\.productivity) { $0.togglePriority(id) }
-                            Haptics.tap()
-                        }
-                    } label: {
-                        HStack(spacing: 8) {
-                            Image(systemName: item.isDone ? "checkmark.circle.fill" : "circle")
-                                .foregroundStyle(item.isDone ? Color.accentColor : .secondary)
-                            Text(item.title)
-                                .font(.subheadline)
-                                .strikethrough(item.isDone)
-                                .foregroundStyle(item.isDone ? .secondary : .primary)
-                                .lineLimit(1)
-                        }
-                    }
-                    .buttonStyle(.pressable)
-                    .accessibilityValue(item.isDone ? tr("Fait") : tr("À faire"))
-                    .accessibilityAddTraits(item.isDone ? .isSelected : [])
-                }
-                quickAdd
-            }
-        }
-        .accessibilityIdentifier("daily-priorities")
-    }
-
-    /// The field to add a task in one gesture (when added as Productivité), « Mes tâches réalisées » and the way to the whole Top 3.
-    private var quickAdd: some View {
-        HStack(spacing: 8) {
-            if hasQuickAdd && canAdd {
-                TextField(tr("Ajouter une tâche"), text: $draft)
-                    .font(.subheadline)
-                    .submitLabel(.done)
-                    .onSubmit(add)
-                    .accessibilityIdentifier("daily-quick-task-field")
-                Button(action: add) {
-                    Image(systemName: "plus.circle.fill")
-                        .font(.title3)
-                        .foregroundStyle(draft.trimmed.isEmpty ? Color.secondary : Color.accentColor)
-                }
-                .buttonStyle(.pressable)
-                .disabled(draft.trimmed.isEmpty)
-                .accessibilityLabel(Text(tr("Ajouter une tâche")))
-                .accessibilityIdentifier("daily-quick-task-add")
-            }
-            NavigationLink {
-                CompletedPrioritiesView()
-            } label: {
-                if hasQuickAdd && canAdd {
-                    Image(systemName: "checkmark.circle")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .frame(width: 28, height: 28)
-                        .tapAreaOutset(4)
-                } else {
-                    Label(tr("Mes tâches réalisées"), systemImage: "checkmark.circle")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                        .frame(minHeight: 28)
-                        .contentShape(Rectangle().inset(by: -8))
-                }
-            }
-            .buttonStyle(.pressable)
-            .accessibilityLabel(Text(tr("Mes tâches réalisées")))
-            .accessibilityIdentifier("daily-completed-tasks")
-            if !(hasQuickAdd && canAdd) {
-                Spacer(minLength: 0)
-            }
-            NavigationLink(value: HomeRoute.space(.productivity)) {
-                Image(systemName: "chevron.right")
-                    .font(.caption2.weight(.bold))
-                    .foregroundStyle(.secondary)
-                    .frame(width: 28, height: 28)
-                    .tapAreaOutset(4)
-            }
-            .buttonStyle(.pressable)
-            .accessibilityLabel(Text(tr("Top 3")))
-        }
-        .padding(.top, items.isEmpty ? 0 : 2)
-    }
-
-    /// Adds the task for today; the haptic only when it was accepted (not empty, not a double tap, room left).
-    private func add() {
-        var accepted = false
-        model.update(\.productivity) { accepted = $0.addQuickTask(draft, on: Date()) }
-        if accepted {
-            Haptics.tap()
-            draft = ""
-        }
-    }
-}
-
-/// An interest with nothing entered yet: an invitation, never a made-up figure.
 private struct InviteDayTile: View {
     let area: InfoArea
 

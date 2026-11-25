@@ -849,6 +849,8 @@ struct FinancesBillsPage: View {
             sheet = .bill(bill)
         case let .fixed(flow):
             sheet = .flow(model.content.money.items.first { $0.id == flow.id } ?? flow)
+        case let .planned(expense):
+            sheet = .detailExpense(expense)
         }
     }
 }
@@ -1099,6 +1101,7 @@ struct FinancesTrendsPage: View {
             analysis
         } else {
             MiniAppScroll {
+                FinancesBudgetSections()
                 PremiumLockCard(symbol: "chart.bar.xaxis", title: tr("L'analyse est dans Premium"),
                                 message: tr("Six mois d'un coup d'œil, tes moyennes et la comparaison avec le mois dernier. Tes opérations restent enregistrées : tout s'affiche dès que tu passes à Premium."))
             }
@@ -1114,6 +1117,8 @@ struct FinancesTrendsPage: View {
         let months = Array(BudgetMath.months(state, count: 6, at: now).drop(while: { $0.spent == 0 && $0.earned == 0 }))
         let past = months.dropLast().filter { $0.spent > 0 || $0.earned > 0 }
         MiniAppScroll {
+            FinancesBudgetSections()
+            monthDetail(state: state, now: now)
             if months.isEmpty {
                 Text(tr("Rien de noté pour l'instant : les mois apparaîtront ici dès la première opération."))
                     .font(.subheadline)
@@ -1146,6 +1151,52 @@ struct FinancesTrendsPage: View {
         }
         .navigationTitle(tr("Analyse"))
         .navigationBarTitleDisplayMode(.large)
+    }
+
+    // MARK: This month in detail
+
+    /// The daily average, where the month is heading at that pace, and the biggest spendings.
+    @ViewBuilder
+    private func monthDetail(state: BudgetState, now: Date) -> some View {
+        let month = BudgetMath.monthInterval(now)
+        let done = DateInterval(start: month.start, end: DateMath.nextMidnight(after: now))
+        let expenses = BudgetMath.expenses(state, in: done, now: now).filter { $0.date < done.end }
+        let total = expenses.reduce(0) { $0 + $1.amount }
+        if total > 0 {
+            let passed = max(1, DateMath.daysBetween(month.start, DateMath.startOfDay(now)) + 1)
+            let days = max(passed, DateMath.daysBetween(month.start, month.end))
+            let average = total / Double(passed)
+            VStack(alignment: .leading, spacing: 10) {
+                MiniSectionTitle(title: tr("En détail"), detail: Fmt.monthYear(now).capitalizedFirst)
+                HStack(spacing: 10) {
+                    MiniStat(title: tr("Par jour"), value: TF.money(average, currency))
+                    MiniStat(title: tr("Fin de mois prévue"), value: TF.money(average * Double(days), currency))
+                    MiniStat(title: tr("Opérations"), value: "\(expenses.count)")
+                }
+                MiniSectionTitle(title: tr("Plus grosses dépenses"))
+                MiniRowsCard {
+                    ForEach(Array(expenses.sorted { $0.amount > $1.amount }.prefix(5).enumerated()), id: \.element.id) { index, expense in
+                        if index > 0 { MiniDivider() }
+                        HStack(spacing: 8) {
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(expense.note.isEmpty ? (expense.merchant ?? tr("Dépense")) : expense.note)
+                                    .font(.body.weight(.medium))
+                                    .lineLimit(1)
+                                Text("\(Fmt.format(expense.date, template: "dMMM")) · \(Fmt.percent(expense.amount / total))")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer(minLength: 8)
+                            Text(TF.money(expense.amount, currency, decimals: 2))
+                                .font(.subheadline.weight(.semibold))
+                                .monospacedDigit()
+                        }
+                        .padding(.vertical, 8)
+                        .accessibilityElement(children: .combine)
+                    }
+                }
+            }
+        }
     }
 
     // MARK: This month against the last one

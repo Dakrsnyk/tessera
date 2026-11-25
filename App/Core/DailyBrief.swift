@@ -3,7 +3,7 @@ import Foundation
 /// « Mon Quotidien »: what matters today, built only from what the person entered. Nothing is
 /// shown for a part of their life they haven't told Ardane about, and never a made-up number:
 /// at most a discreet invitation for one of their interests. The default order is fixed
-/// (`DailyDefaults`: Nutrition, Fitness, Planning, Habitudes, Top 3, then the others); the scores
+/// (`DailyDefaults`: Nutrition, Fitness, Planning, Habitudes, À ne pas oublier, then the others); the scores
 /// of `tiles` (the moment of the day) only order the cards before that.
 enum DailyBrief {
     enum Moment: Equatable {
@@ -264,7 +264,6 @@ enum DailyBrief {
         case steps(steps: Int, goal: Int?)
         case budget(spentToday: Double, perDayLeft: Double?)
         case reminders([Reminder])
-        case priorities([Check])
         case invite(InfoArea)
         /// A category with nothing entered yet: a dotted card inviting to fill it, never a made-up figure.
         /// Same id as the card with data, so hiding it keeps it hidden when data comes.
@@ -281,7 +280,6 @@ enum DailyBrief {
             case .steps: "steps"
             case .budget: "budget"
             case .reminders: "reminders"
-            case .priorities: "priorities"
             case let .invite(area): "invite-\(area.rawValue)"
             case let .empty(category): category.tileID
             case let .miniApp(app, _): "app-\(app)"
@@ -387,11 +385,6 @@ enum DailyBrief {
         }
         for category in Category.defaultOrder where empty.contains(category) { append(.empty(category)) }
         return result
-    }
-
-    /// The active Top 3 as checks (empty without any task; a validated task is no longer here).
-    static func priorityChecks(_ state: ProductivityState, now: Date) -> [Check] {
-        state.activePriorities.prefix(ProductivityState.maxPriorities).map { Check(id: $0.id.uuidString, title: $0.title, isDone: $0.isDone(on: now)) }
     }
 
     /// The cards in the default order (`DailyDefaults.order`, fixed whatever the hour): a card of no category after

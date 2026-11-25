@@ -53,7 +53,21 @@ enum DailyDefaults {
 extension AppModel {
     /// Applies `DailyDefaults.migrate` through the usual way of saving the settings (once per install).
     func migrateDailyLayout() {
+        migrateTopThree()
         guard settings.dailyLayoutVersion < DailyDefaults.layoutVersion else { return }
         updateSettings { _ = DailyDefaults.migrate(&$0) }
+    }
+
+    /// The Top 3 is gone (PDG, 2026-11-25): what was in it becomes tasks (done ones stay done). Emptied
+    /// afterwards, so a second launch moves nothing.
+    func migrateTopThree() {
+        let old = productivity.priorities
+        guard !old.isEmpty else { return }
+        updateContent { content in
+            for item in old where !content.tasks.contains(where: { $0.id == item.id }) {
+                content.tasks.append(TaskItem(id: item.id, title: item.title, isDone: item.isCompleted, completedAt: item.completedAt))
+            }
+        }
+        update(\.productivity) { $0.priorities = [] }
     }
 }

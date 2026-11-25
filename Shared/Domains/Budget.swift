@@ -792,6 +792,8 @@ enum BudgetMath {
         enum Source: Hashable {
             case bill(Bill)
             case fixed(MoneyItem)
+            /// A spending the person noted for a coming day: it waits until then.
+            case planned(Expense)
         }
 
         let source: Source
@@ -803,6 +805,7 @@ enum BudgetMath {
             switch source {
             case let .bill(bill): "b-\(bill.id.uuidString)"
             case let .fixed(item): "f-\(item.id.uuidString)"
+            case let .planned(expense): "p-\(expense.id.uuidString)"
             }
         }
 
@@ -810,6 +813,7 @@ enum BudgetMath {
             switch source {
             case let .bill(bill): bill.name
             case let .fixed(item): item.name
+            case let .planned(expense): expense.note.isEmpty ? (expense.merchant ?? tr("Dépense")) : expense.note
             }
         }
 
@@ -817,6 +821,7 @@ enum BudgetMath {
             switch source {
             case let .bill(bill): bill.amount
             case let .fixed(item): item.amount
+            case let .planned(expense): expense.amount
             }
         }
 
@@ -847,6 +852,11 @@ enum BudgetMath {
             if let due = paymentDates(from: first, every: item.period.step, in: DateInterval(start: today, end: end), until: end).first {
                 items.append(UpcomingItem(source: .fixed(item), due: due, days: DateMath.daysBetween(today, DateMath.startOfDay(due))))
             }
+        }
+        // Noted ahead by the person: always listed, however far.
+        let tomorrow = DateMath.nextMidnight(after: date)
+        for expense in state.expenses where expense.date >= tomorrow {
+            items.append(UpcomingItem(source: .planned(expense), due: expense.date, days: DateMath.daysBetween(today, DateMath.startOfDay(expense.date))))
         }
         return items.sorted { $0.due == $1.due ? $0.name < $1.name : $0.due < $1.due }
     }

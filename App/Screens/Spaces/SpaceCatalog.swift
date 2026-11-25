@@ -50,7 +50,7 @@ enum SpaceCatalog {
     static func preset(for space: Space, format: WidgetFormat) -> [WidgetKind] {
         let pair: (medium: [WidgetKind], large: [WidgetKind])
         switch space {
-        case .productivity: pair = ([.priorities, .deadline], [.priorities, .deadline, .tasks])
+        case .productivity: pair = ([.tasks, .deadline], [.tasks, .deadline, .project])
         case .habits: pair = ([.habitStreak, .habits], [.habitStreak, .habitRate, .habits])
         case .nutrition: pair = ([.caloriesLeft, .macros], [.caloriesLeft, .macros, .mealsToday])
         case .fitness: pair = ([.todaysWorkout, .trainingStreak], [.todaysWorkout, .trainingStreak, .nextSet])
@@ -77,7 +77,7 @@ enum SpaceCatalog {
     static func examples(for space: Space) -> [SpaceExample] {
         let picks: [(WidgetKind, WidgetFamily)]
         switch space {
-        case .productivity: picks = [(.priorities, .systemSmall), (.tasks, .systemMedium)]
+        case .productivity: picks = [(.deadline, .systemSmall), (.tasks, .systemMedium)]
         case .habits: picks = [(.habits, .systemMedium), (.habitStreak, .systemSmall)]
         case .nutrition: picks = [(.caloriesLeft, .systemSmall), (.macros, .systemSmall), (.nextMeal, .systemSmall)]
         case .fitness: picks = [(.todaysWorkout, .systemMedium), (.trainingStreak, .systemSmall)]

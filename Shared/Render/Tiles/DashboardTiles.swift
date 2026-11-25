@@ -30,10 +30,10 @@ enum DashboardTiles {
         return TileRow(id: "tasks", title: open.first?.title ?? tr("Toutes les tâches sont faites"), value: tr("\(open.count) à faire"), symbol: "checklist")
     }
 
-    static func prioritiesRows(_ context: RenderContext) -> [TileRow] {
-        let now = context.date
-        return context.payload.domains.productivity.activePriorities.prefix(3).map { item in
-            TileRow(id: item.id.uuidString, title: item.title, isDone: item.isDone(on: now), action: .togglePriority(item.id.uuidString))
+    /// The first tasks still to do.
+    static func openTaskRows(_ context: RenderContext) -> [TileRow] {
+        context.payload.content.tasks.filter { !$0.isDone }.prefix(3).map { task in
+            TileRow(id: task.id.uuidString, title: task.title, symbol: "circle")
         }
     }
 
@@ -108,13 +108,13 @@ enum DashboardTiles {
             var tile = Tile(title: tr("Ce matin"), symbol: "sunrise")
             tile.value = TF.time(date, context)
             tile.caption = Fmt.longDay(date)
-            let priorities = prioritiesRows(context)
             var rows: [TileRow] = []
             if let event = eventRow(context) { rows.append(event) }
-            if priorities.isEmpty {
+            let open = openTaskRows(context)
+            if open.isEmpty {
                 if let tasks = tasksRow(context) { rows.append(tasks) }
             } else {
-                rows.append(contentsOf: priorities)
+                rows.append(contentsOf: open)
             }
             tile.rows = rows
             tile.detail = eventRow(context).map { "\($0.title) à \($0.value ?? "")" }
@@ -165,7 +165,7 @@ enum DashboardTiles {
         tile.caption = tr("Bonne journée")
         var rows: [TileRow] = []
         if let event = eventRow(context) { rows.append(event) }
-        rows.append(contentsOf: prioritiesRows(context))
+        rows.append(contentsOf: openTaskRows(context))
         if let budget = budgetRow(context) { rows.append(budget) }
         tile.rows = rows
         if tile.rows.count < 3, let tasks = tasksRow(context) { tile.rows.append(tasks) }

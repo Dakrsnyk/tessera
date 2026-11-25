@@ -94,6 +94,7 @@ struct FinancesDueRow: View {
         switch item.source {
         case let .bill(bill): bill.isSubscription ? tr("Abonnement") : tr("Facture")
         case let .fixed(flow): flow.isIncome ? tr("Revenu fixe") : tr("Dépense fixe")
+        case .planned: tr("En attente")
         }
     }
 }

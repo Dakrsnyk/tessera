@@ -4,13 +4,12 @@ import SwiftUI
 /// selector (the one date selector, `day` is the truth of the screen) and, for the current week, the card
 /// « Prochain événement ». On the sheet: the scale picker and the week as a table right under it, whose columns
 /// fall under the selector's days (a day, the month or the year instead with the picker or a pinch; a touch on a
-/// free time creates an event there), then the three priorities, the task counters, the projects,
+/// free time creates an event there), then the task counters, the projects,
 /// the calendar and the import as two rows, and « Mes infos » last (the studies and the focus are in the Études
 /// mini-app, the habits have their own page; no « À remplir » block here). The two actions « Nouvelle tâche » and « Nouvel événement » float above the tab bar.
 struct PlanningAppView: View {
     @Environment(AppModel.self) private var model
     @State private var events: [EventSnapshot] = []
-    @State private var newPriority = ""
     @State private var askingCalendar = false
     /// The day the agenda shows (today by default; any day before or after).
     @State private var day = Date()
@@ -259,76 +258,6 @@ struct PlanningAppView: View {
             .padding(.horizontal, 14)
             .miniCard()
         }
-    }
-
-    private func priorities(now: Date) -> some View {
-        let items = model.productivity.activePriorities
-        return VStack(alignment: .leading, spacing: 10) {
-            MiniSectionTitle(title: tr("Top 3 du jour"), detail: items.isEmpty ? nil : "\(items.count)/\(ProductivityState.maxPriorities)")
-            // The history of the priorities checked off (it was only on the Top 3 card of « Mon quotidien »).
-            NavigationLink {
-                CompletedPrioritiesView()
-            } label: {
-                HStack(spacing: 4) {
-                    Text(tr("Mes tâches réalisées"))
-                    Image(systemName: "chevron.right").font(.caption2.weight(.bold))
-                }
-                .font(.footnote.weight(.semibold))
-                .foregroundStyle(style.cristal.strong(accentHex))
-            }
-            .accessibilityIdentifier("planning-completed-priorities")
-            // Rows like the other lists of the mini-apps: a 34-point mark, the title, hairlines between.
-            MiniRowsCard {
-                ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
-                    if index > 0 { MiniDivider() }
-                    Button {
-                        Haptics.tap()
-                        model.update(\.productivity) { $0.togglePriority(item.id, on: now) }
-                    } label: {
-                        HStack(spacing: 12) {
-                            Image(systemName: "circle")
-                                .font(.title3)
-                                .foregroundStyle(.secondary)
-                                .frame(width: 34, height: 34)
-                            Text(item.title)
-                                .font(.body.weight(.medium))
-                                .foregroundStyle(.primary)
-                            Spacer(minLength: 8)
-                        }
-                        .padding(.vertical, 10)
-                        .contentShape(Rectangle())
-                    }
-                    .buttonStyle(.pressable)
-                    .contextMenu {
-                        Button(role: .destructive) {
-                            model.update(\.productivity) { $0.priorities.removeAll { $0.id == item.id } }
-                        } label: {
-                            Label(tr("Retirer"), systemImage: "trash")
-                        }
-                    }
-                }
-                if items.count < ProductivityState.maxPriorities {
-                    if !items.isEmpty { MiniDivider() }
-                    HStack(spacing: 12) {
-                        Image(systemName: "plus.circle")
-                            .font(.title3)
-                            .foregroundStyle(style.cristal.strong(accentHex))
-                            .frame(width: 34, height: 34)
-                        TextField(tr("Ajouter une priorité"), text: $newPriority)
-                            .submitLabel(.done)
-                            .onSubmit(addPriority)
-                    }
-                    .padding(.vertical, 10)
-                }
-            }
-        }
-    }
-
-    private func addPriority() {
-        let title = newPriority.trimmed
-        guard !title.isEmpty else { return }
-        model.update(\.productivity) { _ = $0.addQuickTask(title, on: Date()) }
-        newPriority = ""
     }
 }
 
