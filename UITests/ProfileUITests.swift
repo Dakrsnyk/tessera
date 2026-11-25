@@ -337,6 +337,27 @@ final class ProfileUITests: XCTestCase {
         snapshot("home-daily")
     }
 
+    /// Without Premium, the Store and Create open and stay open (2026-11-25: the free version 572 closed by itself
+    /// on the Store and when a widget was customized; the captures and the other tests all run with Premium).
+    func testAFreeUserOpensTheStoreAndCreate() {
+        launch(["-screenshotScreen", "home-free"])
+        XCTAssertTrue(app.buttons["daily-premium"].waitForExistence(timeout: 12), "Accueil sans Premium absent")
+        let bar = app.tabBars.firstMatch
+        XCTAssertTrue(bar.waitForExistence(timeout: 5), "Barre d'onglets absente")
+        for index in 0..<bar.buttons.count {
+            let tab = bar.buttons.element(boundBy: index)
+            let name = tab.label
+            tab.tap()
+            // Time to draw the page and its widgets, and to scroll it.
+            sleep(3)
+            XCTAssertEqual(app.state, .runningForeground, "L'app s'est fermée sur l'onglet « \(name) » sans Premium")
+            app.swipeUp()
+            sleep(2)
+            XCTAssertEqual(app.state, .runningForeground, "L'app s'est fermée en défilant l'onglet « \(name) » sans Premium")
+            snapshot("free-tab-\(index)")
+        }
+    }
+
     /// Without Premium, a gold « Premium » sign sits on the line of « Mon Quotidien »'s title and opens the offer;
     /// with Premium, it isn't there.
     func testThePremiumSignShowsOnlyWithoutPremium() {

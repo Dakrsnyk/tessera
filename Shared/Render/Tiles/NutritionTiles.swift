@@ -4,7 +4,7 @@ enum NutritionTiles {
     static let hint = tr("Note ton premier repas dans Ardane, espace Nutrition.")
 
     /// Nutrition widgets that open the scanner from their medium and large sizes.
-    static let scanKinds: Set<WidgetKind> = [.macros, .proteinLeft, .mealsToday, .nextMeal, .nutritionWeek, .nutritionStreak]
+    static let scanKinds: Set<WidgetKind> = [.caloriesLeft, .macros, .proteinLeft, .mealsToday, .nextMeal, .nutritionWeek, .nutritionStreak]
 
     /// Which daily targets the user actually gave (« Mes informations »). The others are never shown as theirs.
     struct Targets {

@@ -89,12 +89,13 @@ final class RestChimeBalanceTests: XCTestCase {
         let wide = FitnessTiles.nextSet(state, now: t0.addingTimeInterval(40), sessionRows: 2)
         XCTAssertEqual(wide.rows.count, 2, "The session beside the set in the medium size")
         XCTAssertEqual(wide.rows.filter(\.isHighlighted).count, 1)
-        // Nutrition: « Calories restantes » is free and shows only; « Macros » is Premium.
-        XCTAssertFalse(WidgetKind.caloriesLeft.isInteractive)
+        // Nutrition: « Calories restantes » is free and keeps its scanner (put back by the CEO on 2026-11-25);
+        // « Macros » is Premium.
+        XCTAssertTrue(WidgetKind.caloriesLeft.isInteractive)
         XCTAssertFalse(WidgetKind.caloriesLeft.isPremium)
         XCTAssertTrue(WidgetKind.macros.isPremium)
-        // No free widget of Nutrition or Fitness is interactive.
-        for kind in WidgetKind.freeKinds where kind.space == .nutrition || kind.space == .fitness {
+        // No free widget of Fitness is interactive.
+        for kind in WidgetKind.freeKinds where kind.space == .fitness {
             XCTAssertFalse(kind.isInteractive, kind.rawValue)
         }
     }
