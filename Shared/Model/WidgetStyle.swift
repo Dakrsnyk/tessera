@@ -325,7 +325,7 @@ enum TextureKind: String, Codable, CaseIterable, Identifiable {
     case none, grain, paper, dots, grid, lines, diagonal, noise
     // Motifs of the themed styles: space, snow, water, a web, foliage.
     case stars, snow, waves, web, leaves
-    // Screen and print motifs: CRT scan lines, comic-book halftone, 8-bit checkerboard.
+    // Screen and print motifs: CRT scan lines, comic-book halftone, 8-bit checkerboard (batch 1 of the 100 styles).
     case scanlines, halftone, pixels
     var id: String { rawValue }
 
