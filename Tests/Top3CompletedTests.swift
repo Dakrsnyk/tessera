@@ -23,7 +23,6 @@ final class Top3CompletedTests: XCTestCase {
         XCTAssertEqual(state.activePriorities.map(\.title), ["B"])
         XCTAssertEqual(state.completedPriorities.map(\.title), ["A"])
         XCTAssertEqual(state.completedPriorities.first?.completedAt, done)
-        XCTAssertEqual(DailyBrief.priorityChecks(state, now: done).map(\.title), ["B"], "Gone from Mon Quotidien")
         XCTAssertEqual(ProductivityTiles.priorities(state, now: done).rows.map(\.title), ["B"], "Gone from the widget")
     }
 

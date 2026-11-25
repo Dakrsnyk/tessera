@@ -356,7 +356,7 @@ final class DailyHomeTests: XCTestCase {
         var input = emptyInput()
         input.interests = [.productivity]
         var settings = AppSettings()
-        DailyCategories.setProductivity(shown: true, hasTasks: false, in: &settings)
+        settings.dailyAdded = [DailyCategories.productivityKey]
         XCTAssertEqual(DailyCategories.added(settings), [.reminders], "The old Productivité entry stands for « À ne pas oublier »")
         let found = ids(onScreen(input, settings: settings))
         XCTAssertFalse(found.contains("priorities"))

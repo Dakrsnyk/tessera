@@ -176,6 +176,31 @@ final class DailyDefaultsTests: XCTestCase {
         XCTAssertEqual(settings.dailyAdded, ["cat-reminders"])
     }
 
+    /// The Top 3 entered before becomes tasks, once; a done one stays done.
+    func testTheOldTopThreeBecomesTasks() {
+        let model = AppModel(store: SharedStore(directory: FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)))
+        model.update(\.productivity) {
+            _ = $0.addQuickTask("Appeler", on: self.wednesday(9))
+            _ = $0.addQuickTask("Payer", on: self.wednesday(10))
+            $0.togglePriority($0.priorities[1].id, on: self.wednesday(11))
+        }
+        model.migrateTopThree()
+        model.migrateTopThree()
+        XCTAssertTrue(model.productivity.priorities.isEmpty)
+        XCTAssertEqual(model.content.tasks.map(\.title), ["Appeler", "Payer"])
+        XCTAssertEqual(model.content.tasks.map(\.isDone), [false, true])
+    }
+
+    /// A spending noted for a coming day waits in « À venir ».
+    func testASpendingOfAComingDayIsUpcoming() {
+        var state = BudgetState()
+        state.add(Expense(amount: 40, categoryID: nil, note: "Cadeau", date: wednesday(9).addingTimeInterval(30 * 86_400)))
+        state.add(Expense(amount: 5, categoryID: nil, note: "Café", date: wednesday(9)))
+        let items = BudgetMath.upcoming(state, at: wednesday(12), within: 14)
+        XCTAssertEqual(items.map(\.name), ["Cadeau"])
+        XCTAssertEqual(items.first?.days, 30)
+    }
+
     func testMigrationRunsOnlyOnce() {
         var settings = AppSettings()
         XCTAssertTrue(DailyDefaults.migrate(&settings))

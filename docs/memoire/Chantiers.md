@@ -550,3 +550,9 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 - Textures `scanlines` (Balayage), `halftone` (Trame BD), `pixels` ; bordure `pixel` (`PixelFrame`) ; relief `hardShadow` (Ombre pleine) ; 6 langues.
 - CI : [unit] 585 vert ; **build interne 586 sur TestFlight** (« Internal Only » confirmé). Un commit vide n'a lancé aucun run.
 - **Reste** : voir le rendu sur l'iPhone (aucune capture faite) ; le relief n'a pas de sélecteur propre dans le Studio (utilisé par les styles) ; reste du §3 du catalogue puis les 100 styles.
+
+## Chantier 60 : Top 3 retiré, Finances (Solde, à venir, Analyse) — 2026-11-25
+- Top 3 retiré de l’interface ; ses entrées deviennent des tâches au lancement (`migrateTopThree`). Le modèle `ProductivityState.priorities`, le widget retiré et `Category.priorities` restent (lecture des anciennes données).
+- Finances : Solde dans la grande carte (toucher = opérations), Budget en tuile, dépense datée plus tard « En attente » dans « À venir », budget et catégories dans « Analyse », section « En détail » (par jour, fin de mois, plus grosses dépenses).
+- **Build interne 588** (« Internal Only »). Pas vu à l’écran, pas de relecture.
+- **Reste** : analyses à pousser davantage ; `UITests/MiniAppUITests` attend encore `finances-categories` sur la page d’accueil des Finances (à corriger avant un `[daily]`) ; 100 styles.

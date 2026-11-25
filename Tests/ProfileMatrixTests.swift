@@ -132,7 +132,6 @@ final class ProfileMatrixTests: XCTestCase {
         }
         model.setMonthlyBudget(500)
         model.update(\.budget) { $0.add(Expense(amount: 12, categoryID: nil, date: now)) }
-        model.update(\.productivity) { _ = $0.addQuickTask("Appeler", on: now) }
         model.setBusinessGoal(2_000)
         model.update(\.business) { $0.sales = [SalesEntry(date: now, amount: 1_000)] }
         model.update(\.travel) { $0.trips = [Trip(destination: "Rome", start: now.addingTimeInterval(12 * 86_400), end: now.addingTimeInterval(19 * 86_400))] }
@@ -797,7 +796,6 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertNil(DailyBrief.workoutTile(input), "No session")
         XCTAssertNil(DailyBrief.planningTile(input))
         XCTAssertTrue(DailyBrief.remindersTile(input).isEmpty)
-        XCTAssertTrue(DailyBrief.priorityChecks(model.productivity, now: now).isEmpty)
         XCTAssertTrue(input.budget.expenses.isEmpty, "No spending")
         XCTAssertFalse(model.profile.knows(.kcalTarget))
         XCTAssertFalse(model.profile.knows(.proteinTarget))
