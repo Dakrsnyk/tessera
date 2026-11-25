@@ -9,7 +9,7 @@ import XCTest
 /// `SharedGoalTests`, `StudiesMiniAppTests`…).
 @MainActor
 final class NightScenariosTests: XCTestCase {
-    private let five = ["nutrition", "workout", "planning", "habits", "priorities"]
+    private let five = ["nutrition", "workout", "planning", "habits", "reminders"]
 
     private func temporaryDirectory() -> URL {
         FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString, isDirectory: true)
@@ -28,6 +28,8 @@ final class NightScenariosTests: XCTestCase {
 
     private func isInvitation(_ tile: DailyBrief.Tile) -> Bool {
         if case .empty = tile { return true }
+        // « À ne pas oublier » is always there: without any task, it holds only the quick add.
+        if case let .reminders(items) = tile { return items.isEmpty }
         return false
     }
 
@@ -69,7 +71,7 @@ final class NightScenariosTests: XCTestCase {
         guard case let .planning(items) = tiles[2] else { return XCTFail("Planning is the week table") }
         XCTAssertTrue(items.isEmpty, "An empty week")
         XCTAssertTrue([0, 1, 3, 4].allSatisfy { isInvitation(tiles[$0]) }, "The others are dotted cards, with no figure")
-        XCTAssertEqual(DailyCategories.addable(shown: tiles), [.studies, .budget, .reminders, .steps, .business, .travel, .car],
+        XCTAssertEqual(DailyCategories.addable(shown: tiles), [.studies, .budget, .steps, .business, .travel],
                        "The « + » offers the rest, Études included")
     }
 
@@ -165,11 +167,11 @@ final class NightScenariosTests: XCTestCase {
         XCTAssertFalse(ids(tiles).contains("app-car"))
         XCTAssertTrue(tiles.prefix(5).allSatisfy(\.isWide), "The five are across the width")
         XCTAssertTrue(tiles.suffix(2).allSatisfy { !$0.isWide }, "The interests are at half width")
-        XCTAssertEqual(DailyCategories.addable(shown: tiles), [.studies, .reminders, .steps, .business, .car])
+        XCTAssertEqual(DailyCategories.addable(shown: tiles), [.studies, .steps, .business])
 
         // The person adds one more with the « + »: it comes at its place.
-        model.updateSettings { DailyCategories.add(.car, in: &$0) }
-        XCTAssertEqual(ids(screen(model)), five + ["budget", "app-travel", "app-car"])
+        model.updateSettings { DailyCategories.add(.steps, in: &$0) }
+        XCTAssertEqual(ids(screen(model)), five + ["budget", "steps", "app-travel"])
         // And takes a default card off: it stays off and the « + » offers it back.
         model.updateSettings { DailyCategories.remove(tileID: "habits", in: &$0) }
         XCTAssertFalse(ids(screen(model)).contains("habits"))
@@ -182,14 +184,14 @@ final class NightScenariosTests: XCTestCase {
         let model = AppModel(store: SharedStore(directory: temporaryDirectory()))
         model.update(\.profile) { $0.interests = [.productivity] }
         model.updateContent { $0.habits = [Habit(name: "Lire", symbol: "book", colorHex: "7FA33A")] }
-        model.update(\.productivity) { _ = $0.addQuickTask("Appeler", on: self.now) }
+        model.updateContent { $0.tasks = [TaskItem(title: "Appeler")] }
 
         let tiles = screen(model)
-        XCTAssertEqual(ids(tiles), five, "Planning, Habitudes and Top 3 are there, without any studies card")
+        XCTAssertEqual(ids(tiles), five, "Planning, Habitudes and « À ne pas oublier » are there, without any studies card")
         XCTAssertFalse(ids(tiles).contains("app-studies"))
         XCTAssertTrue(model.student.courses.isEmpty)
         let dotted = tiles.filter(isInvitation).map(\.id)
-        XCTAssertEqual(dotted, ["nutrition", "workout"], "Habits and the Top 3 hold data, the week is the Planning card")
+        XCTAssertEqual(dotted, ["nutrition", "workout"], "Habits and the tasks hold data, the week is the Planning card")
 
         // The mini-app is Planning's own: its questions and cards do not ask for courses or exams.
         XCTAssertEqual(MiniApp(space: .productivity), .planning)
@@ -248,8 +250,8 @@ final class NightScenariosTests: XCTestCase {
         XCTAssertEqual(model.settings.dailyLayoutVersion, DailyDefaults.layoutVersion)
         XCTAssertTrue(model.settings.dailyOrder.isEmpty)
         XCTAssertTrue(model.settings.dailyWide.isEmpty)
-        XCTAssertEqual(model.settings.dailyHidden, ["habits", "app-car"])
-        XCTAssertEqual(model.settings.dailyAdded, ["cat-travel", "quick-productivity", "business"])
+        XCTAssertEqual(model.settings.dailyHidden, ["habits"], "The Auto card goes with the mini-app")
+        XCTAssertEqual(model.settings.dailyAdded, ["cat-travel", "cat-reminders", "business"], "Productivité becomes « À ne pas oublier »")
         XCTAssertEqual(model.settings.dailyCardPages, ["nutrition": 1])
         XCTAssertEqual(model.settings.profileName, "Léa")
         XCTAssertEqual(model.settings.currencyCode, "EUR")
@@ -258,7 +260,7 @@ final class NightScenariosTests: XCTestCase {
 
         // Mon Quotidien: the five minus the removed Habitudes, Études (interest and classes), and the added ones.
         XCTAssertEqual(ids(screen(model)),
-                       ["nutrition", "workout", "planning", "priorities", "app-studies", "app-business", "app-travel"])
+                       ["nutrition", "workout", "planning", "reminders", "app-studies", "app-business", "app-travel"])
 
         // Profile: the goal is read from the two older fields, the calories typed by hand are untouched.
         XCTAssertEqual(model.profile.goal, .bulk)
@@ -276,11 +278,11 @@ final class NightScenariosTests: XCTestCase {
         XCTAssertEqual(model.content.habits.map(\.name), ["Lire"])
 
         // A second launch changes nothing, and an order the person sets afterwards is kept.
-        model.updateSettings { $0.dailyOrder = ["priorities"] }
+        model.updateSettings { $0.dailyOrder = ["reminders"] }
         let again = AppModel(store: store)
-        XCTAssertEqual(again.settings.dailyOrder, ["priorities"], "The migration runs once")
-        XCTAssertEqual(again.settings.dailyHidden, ["habits", "app-car"])
-        XCTAssertEqual(ids(screen(again)).first, "priorities")
+        XCTAssertEqual(again.settings.dailyOrder, ["reminders"], "The migration runs once")
+        XCTAssertEqual(again.settings.dailyHidden, ["habits"])
+        XCTAssertEqual(ids(screen(again)).first, "reminders")
     }
 
     /// The oldest accounts have only one of the two goal fields: each is read, neither is rewritten by reading.

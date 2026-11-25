@@ -24,14 +24,16 @@ final class DailyHomeTests: XCTestCase {
 
     private func isInvitation(_ tile: DailyBrief.Tile) -> Bool {
         if case .empty = tile { return true }
+        // « À ne pas oublier » is always there: without any task, it holds only the quick add.
+        if case let .reminders(items) = tile { return items.isEmpty }
         return false
     }
 
     /// What Home builds from an input and the settings (the pure part of `DailyCategories.home`).
     private func home(_ input: DailyBrief.Input, settings: AppSettings = AppSettings(),
                       captions: [DailyBrief.Category: String] = [:]) -> [DailyBrief.Tile] {
-        DailyBrief.completing(DailyBrief.tiles(input), appCaptions: captions,
-                              empty: DailyCategories.wanted(input: input, settings: settings))
+        DailyBrief.inDefaultOrder(DailyBrief.completing(DailyBrief.tiles(input), appCaptions: captions,
+                                                        empty: DailyCategories.wanted(input: input, settings: settings)))
     }
 
     /// What is on screen: Home with what the person removed and the order they chose applied.
@@ -40,10 +42,11 @@ final class DailyHomeTests: XCTestCase {
         DailyBrief.arranged(home(input, settings: settings, captions: captions), order: settings.dailyOrder, hidden: settings.dailyHidden)
     }
 
-    private var allIDs: [String] { DailyBrief.Category.allCases.map(\.tileID) }
+    /// Every card Mon Quotidien can show: the Top 3 and Auto are gone (PDG, 2026-11-25).
+    private var allIDs: [String] { DailyDefaults.order.map(\.tileID) }
 
     /// The five cards every account has, even empty (PDG, 2026-11-17), in their fixed order.
-    private let five = ["nutrition", "workout", "planning", "habits", "priorities"]
+    private let five = ["nutrition", "workout", "planning", "habits", "reminders"]
 
     /// Every card id in the fixed default order (what `arranged` gives without a hand order).
     private var orderedIDs: [String] { DailyDefaults.order.map(\.tileID) }
@@ -81,7 +84,7 @@ final class DailyHomeTests: XCTestCase {
         input.student.exams = [Exam(title: "Chimie", date: wednesday(16), room: "A-110")]
         input.content.habits = [Habit(name: "Lire", symbol: "book", colorHex: "7FA33A")]
         input.budget.expenses = [Expense(amount: 12, categoryID: nil, date: input.now)]
-        input.productivity.addQuickTask("Appeler", on: input.now)
+        input.content.tasks = [TaskItem(title: "Appeler")]
         input.steps = 4_000
         return input
     }
@@ -92,8 +95,9 @@ final class DailyHomeTests: XCTestCase {
         let tiles = onScreen(emptyInput())
         XCTAssertEqual(ids(tiles), five, "Nothing chosen, nothing filled: the five cards of every account, all empty")
         XCTAssertTrue(tiles.allSatisfy(isInvitation), "Never a made-up figure")
-        XCTAssertEqual(DailyCategories.addable(shown: tiles), [.studies, .budget, .reminders, .steps, .business, .travel, .car],
-                       "The « + » offers the others")
+        XCTAssertEqual(DailyCategories.addable(shown: tiles), [.studies, .budget, .steps, .business, .travel],
+                       "The « + » offers the others, never the Top 3 nor Auto")
+        XCTAssertEqual(tiles.last, .reminders([]), "No task: the card holds the quick add, nothing made up")
         for category in DailyBrief.Category.allCases {
             XCTAssertFalse(category.title.isEmpty)
             XCTAssertFalse(category.invitation.isEmpty, "\(category) says what to give")
@@ -110,14 +114,14 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertTrue(tiles.allSatisfy(isInvitation), "No data: only empty cards")
 
         input.interests = [.student, .habits, .productivity, .business, .travel, .car, .investing, .markets, .life]
-        XCTAssertEqual(ids(home(input)), five + ["app-studies", "app-business", "app-travel", "app-car"],
+        XCTAssertEqual(ids(home(input)), five + ["app-studies", "app-business", "app-travel"],
                        "More than two at once; the spaces without a card add none; a student gets Études")
     }
 
     func testTheCardsWithDataAreAlwaysThereAndTheInterestsComeAfterThem() {
         let tiles = onScreen(partialInput())
         XCTAssertEqual(ids(tiles), five, "Data, no interest: the filled cards and the empty ones of every account")
-        XCTAssertEqual(tiles.filter(isInvitation).count, 3, "Workout, Planning and Top 3 are empty; Nutrition and Habits hold data")
+        XCTAssertEqual(tiles.filter(isInvitation).count, 3, "Workout, Planning and « À ne pas oublier » are empty; Nutrition and Habits hold data")
 
         var input = partialInput()
         input.interests = [.fitness, .budget]
@@ -132,7 +136,8 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertFalse(tiles.contains(where: isInvitation), "Everything given: no dotted card")
         XCTAssertEqual(Set(ids(tiles)), Set(allIDs))
         XCTAssertEqual(tiles.count, allIDs.count)
-        XCTAssertTrue(tiles.contains(.miniApp("travel", caption: "Rome · J-12")), "Voyage, Auto and Business show their figure")
+        XCTAssertTrue(tiles.contains(.miniApp("travel", caption: "Rome · J-12")), "Voyage and Business show their figure")
+        XCTAssertFalse(ids(tiles).contains("app-car"), "Auto is gone, even with a figure")
         XCTAssertTrue(DailyCategories.addable(shown: tiles).isEmpty, "Everything is there: no « + »")
     }
 
@@ -225,7 +230,7 @@ final class DailyHomeTests: XCTestCase {
         input.interests = [.nutrition]
         var settings = AppSettings()
         DailyCategories.remove(tileID: "nutrition", in: &settings)
-        XCTAssertEqual(ids(onScreen(input, settings: settings)), ["workout", "planning", "habits", "priorities"])
+        XCTAssertEqual(ids(onScreen(input, settings: settings)), ["workout", "planning", "habits", "reminders"])
         XCTAssertEqual(DailyCategories.addable(shown: onScreen(input, settings: settings)).first, .nutrition, "It is back in the list of the « + »")
         DailyCategories.add(.nutrition, in: &settings)
         XCTAssertFalse(settings.dailyHidden.contains("nutrition"))
@@ -239,11 +244,11 @@ final class DailyHomeTests: XCTestCase {
         input.interests = [.nutrition, .habits]
         var settings = AppSettings()
         DailyCategories.remove(tileID: "nutrition", in: &settings)
-        XCTAssertEqual(ids(onScreen(input, settings: settings)), ["workout", "planning", "habits", "priorities"])
+        XCTAssertEqual(ids(onScreen(input, settings: settings)), ["workout", "planning", "habits", "reminders"])
         // The same card with data: still off.
         var filled = partialInput()
         filled.interests = [.nutrition, .habits]
-        XCTAssertEqual(ids(onScreen(filled, settings: settings)), ["workout", "planning", "habits", "priorities"], "Data does not bring a removed card back")
+        XCTAssertEqual(ids(onScreen(filled, settings: settings)), ["workout", "planning", "habits", "reminders"], "Data does not bring a removed card back")
         XCTAssertTrue(DailyCategories.addable(shown: onScreen(filled, settings: settings)).contains(.nutrition))
         // Removing the same one twice records it once.
         DailyCategories.remove(tileID: "nutrition", in: &settings)
@@ -265,11 +270,11 @@ final class DailyHomeTests: XCTestCase {
         settings.dailyAdded = ["business", "cat-business", "quick-productivity", "fitness", "cat-car"]
         DailyCategories.remove(tileID: "app-business", in: &settings)
         XCTAssertEqual(settings.dailyAdded, ["quick-productivity", "fitness", "cat-car"], "Both forms of Business gone, the others kept")
-        DailyCategories.remove(tileID: "priorities", in: &settings)
+        DailyCategories.remove(tileID: "reminders", in: &settings)
         DailyCategories.remove(tileID: "workout", in: &settings)
         XCTAssertEqual(settings.dailyAdded, ["cat-car"])
         XCTAssertEqual(DailyCategories.added(settings), [.car])
-        XCTAssertEqual(Set(settings.dailyHidden), ["app-business", "priorities", "workout"])
+        XCTAssertEqual(Set(settings.dailyHidden), ["app-business", "reminders", "workout"])
     }
 
     func testTheAutomaticLayoutNeverBringsBackARemovedCategory() {
@@ -294,7 +299,7 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertTrue(model.profile.knows(.kcalTarget))
         let tiles = DailyBrief.arranged(DailyCategories.home(model: model, now: wednesday(9), steps: nil),
                                         order: model.settings.dailyOrder, hidden: model.settings.dailyHidden)
-        XCTAssertEqual(ids(tiles), ["workout", "planning", "habits", "priorities"], "The others of every account stay")
+        XCTAssertEqual(ids(tiles), ["workout", "planning", "habits", "reminders"], "The others of every account stay")
         XCTAssertEqual(DailyCategories.addable(shown: tiles).first, .nutrition)
     }
 
@@ -347,17 +352,18 @@ final class DailyHomeTests: XCTestCase {
         XCTAssertTrue(model.completion.missing.contains { app.toFillItems.contains($0) && $0.area.miniApp == app })
     }
 
-    func testTakingProductiviteOffHidesTheEmptyTopThree() {
+    func testAnOldProductiviteEntryNeverBringsBackTheTopThree() {
         var input = emptyInput()
         input.interests = [.productivity]
         var settings = AppSettings()
         DailyCategories.setProductivity(shown: true, hasTasks: false, in: &settings)
-        XCTAssertTrue(ids(onScreen(input, settings: settings)).contains("priorities"))
-        DailyCategories.setProductivity(shown: false, hasTasks: false, in: &settings)
-        XCTAssertTrue(settings.dailyHidden.contains("priorities"))
-        XCTAssertFalse(ids(onScreen(input, settings: settings)).contains("priorities"), "No empty card behind an « off » switch")
-        DailyCategories.setProductivity(shown: true, hasTasks: false, in: &settings)
-        XCTAssertFalse(settings.dailyHidden.contains("priorities"))
+        XCTAssertEqual(DailyCategories.added(settings), [.reminders], "The old Productivité entry stands for « À ne pas oublier »")
+        let found = ids(onScreen(input, settings: settings))
+        XCTAssertFalse(found.contains("priorities"))
+        XCTAssertEqual(found.filter { $0 == "reminders" }.count, 1)
+        DailyCategories.remove(tileID: "reminders", in: &settings)
+        XCTAssertFalse(settings.dailyAdded.contains(DailyCategories.productivityKey))
+        XCTAssertFalse(ids(onScreen(input, settings: settings)).contains("reminders"), "Removed, it stays off")
     }
 
     // MARK: Hide, show, reorder (the same ids, empty or filled)
@@ -385,19 +391,19 @@ final class DailyHomeTests: XCTestCase {
         let order = ["workout", "nutrition"]
         let arranged = DailyBrief.arranged(home(emptyInput(), settings: everything), order: order, hidden: ["budget"])
         XCTAssertEqual(ids(arranged).prefix(2), ["workout", "nutrition"])
-        XCTAssertTrue(ids(arranged).contains("app-car"), "A category the settings never heard of shows")
+        XCTAssertTrue(ids(arranged).contains("app-travel"), "A category the settings never heard of shows")
         XCTAssertFalse(ids(arranged).contains("budget"), "A hidden one stays hidden")
         XCTAssertEqual(arranged.count, allIDs.count - 1)
     }
 
     func testReorderingMovesEmptyAndFilledCardsAlike() {
-        let order = ["app-car", "habits", "nutrition"]
+        let order = ["app-travel", "habits", "nutrition"]
         let empty = DailyBrief.arranged(home(emptyInput(), settings: everything), order: order, hidden: [])
-        XCTAssertEqual(ids(empty).prefix(3), ["app-car", "habits", "nutrition"])
+        XCTAssertEqual(ids(empty).prefix(3), ["app-travel", "habits", "nutrition"])
         XCTAssertEqual(empty.count, allIDs.count)
         // The same order once habits and nutrition hold data: same places.
         let filled = DailyBrief.arranged(home(partialInput(), settings: everything), order: order, hidden: [])
-        XCTAssertEqual(ids(filled).prefix(3), ["app-car", "habits", "nutrition"])
+        XCTAssertEqual(ids(filled).prefix(3), ["app-travel", "habits", "nutrition"])
         // Moved back to the automatic order: the fixed default order.
         XCTAssertEqual(ids(DailyBrief.arranged(home(emptyInput(), settings: everything), order: [], hidden: [])), orderedIDs)
     }
@@ -455,11 +461,11 @@ final class DailyHomeTests: XCTestCase {
         // A mini-app added from the editor, the Productivité quick add, an entry no one knows: old and new forms.
         let json = #"{"dailyAdded":["business","fitness","quick-productivity","bogus","cat-car","cat-nope","photos"],"dailyHidden":["budget"],"dailyOrder":["car"]}"#
         let settings = try JSONDecoder().decode(AppSettings.self, from: Data(json.utf8))
-        XCTAssertEqual(DailyCategories.added(settings), [.business, .workout, .priorities, .car], "Unknown entries are ignored, the others kept")
+        XCTAssertEqual(DailyCategories.added(settings), [.business, .workout, .reminders, .car], "Unknown entries are ignored, the others kept")
         var input = emptyInput()
         input.interests = [.budget]
         let tiles = onScreen(input, settings: settings)
-        XCTAssertEqual(Set(ids(tiles)), Set(five + ["app-business", "app-car"]), "The five of every account, the added ones; budget stays off")
+        XCTAssertEqual(Set(ids(tiles)), Set(five + ["app-business"]), "The five of every account and the added ones; budget stays off, Auto is gone")
         XCTAssertFalse(ids(tiles).contains("budget"), "What was hidden stays hidden")
         XCTAssertEqual(settings.dailyOrder, ["car"])
     }
@@ -469,16 +475,16 @@ final class DailyHomeTests: XCTestCase {
         let model = temporaryModel(directory)
         model.update(\.profile) { $0.interests = [.sport, .nutrition] }
         model.updateSettings {
-            DailyCategories.add(.car, in: &$0)
+            DailyCategories.add(.travel, in: &$0)
             DailyCategories.remove(tileID: "workout", in: &$0)
-            $0.dailyOrder = ["app-car", "nutrition"]
+            $0.dailyOrder = ["app-travel", "nutrition"]
         }
         let relaunched = temporaryModel(directory)
-        XCTAssertEqual(relaunched.settings.dailyAdded, ["cat-car"])
+        XCTAssertEqual(relaunched.settings.dailyAdded, ["cat-travel"])
         XCTAssertEqual(relaunched.settings.dailyHidden, ["workout"])
         let tiles = DailyBrief.arranged(DailyCategories.home(model: relaunched, now: wednesday(9), steps: nil),
                                         order: relaunched.settings.dailyOrder, hidden: relaunched.settings.dailyHidden)
-        XCTAssertEqual(ids(tiles), ["app-car", "nutrition", "planning", "habits", "priorities"],
+        XCTAssertEqual(ids(tiles), ["app-travel", "nutrition", "planning", "habits", "reminders"],
                        "The added card and the interest in their order, the removed one off, then the others in the default order")
         // Data arriving later doesn't bring the removed card back.
         relaunched.update(\.fitness) { $0.routines = [Routine(name: "Jambes", exercises: [ExerciseTemplate(name: "Squat", sets: 2, reps: 8, weight: 80)], weekdays: [3])] }

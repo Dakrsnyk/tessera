@@ -21,11 +21,11 @@ final class DailyBriefTests: XCTestCase {
 
     func testNothingEnteredShowsNoFigure() {
         var input = DailyBrief.Input(now: wednesday(9))
-        XCTAssertTrue(DailyBrief.tiles(input).isEmpty, "Without data, « Mon Quotidien » stays empty")
+        XCTAssertEqual(DailyBrief.tiles(input), [.reminders([])], "Without data, only the quick add of « À ne pas oublier »")
         // With interests but nothing entered: only discreet invitations, never numbers.
         input.interests = [.nutrition, .budget, .fitness]
         let tiles = DailyBrief.tiles(input)
-        XCTAssertEqual(ids(tiles), ["invite-nutrition", "invite-budget"], "At most two invitations")
+        XCTAssertEqual(ids(tiles), ["reminders", "invite-nutrition", "invite-budget"], "At most two invitations")
     }
 
     func testCaloriesLeftOnlyWithTheUsersTarget() {
@@ -80,13 +80,19 @@ final class DailyBriefTests: XCTestCase {
         XCTAssertTrue(items.isEmpty, "No class before next Wednesday: nothing to show this week")
     }
 
-    func testAnExamTodayComesFirst() {
+    func testAnExamTodayIsInThePlanningBeforeTheTasks() {
         var input = dayInput(at: wednesday(9))
         input.student.exams = [Exam(title: "Chimie", date: wednesday(16), room: "A-110")]
+        var task = TaskItem(title: "Appeler")
+        task.due = wednesday(16)
+        task.hasTime = true
+        input.content.tasks = [task]
         let tiles = DailyBrief.tiles(input)
-        guard case let .reminders(items)? = tiles.first(where: { $0.id == "reminders" }) else { return XCTFail("The exam is a reminder") }
-        XCTAssertEqual(items.first?.title, "Examen : Chimie")
-        XCTAssertEqual(items.first?.when, "Aujourd'hui 16:00")
+        // « À ne pas oublier » holds the person's tasks only (PDG, 2026-11-25); the exam is in the Planning.
+        guard case let .reminders(reminders)? = tiles.first(where: { $0.id == "reminders" }) else { return XCTFail("The task is a reminder") }
+        XCTAssertEqual(reminders.map(\.title), ["Appeler"])
+        XCTAssertEqual(reminders.first?.when, "Aujourd'hui 16:00")
+        XCTAssertLessThan(ids(tiles).firstIndex(of: "planning") ?? .max, ids(tiles).firstIndex(of: "reminders") ?? .min)
         guard case let .planning(items)? = tiles.first(where: { $0.id == "planning" }) else { return XCTFail() }
         XCTAssertTrue(items.contains { $0.isHighlighted && $0.title == "Examen : Chimie" })
     }
@@ -112,7 +118,7 @@ final class DailyBriefTests: XCTestCase {
         // Thursday: no session planned, Friday's is announced.
         var thursday = DailyBrief.Input(now: wednesday(9).addingTimeInterval(86_400))
         thursday.fitness.routines = [upper, legs]
-        guard case let .workout(rest)? = DailyBrief.tiles(thursday).first else { return XCTFail() }
+        guard case let .workout(rest)? = DailyBrief.tiles(thursday).first(where: { $0.id == "workout" }) else { return XCTFail() }
         XCTAssertEqual(rest.stage, .rest(nextName: "Haut du corps", nextDay: "Demain"))
     }
 
@@ -143,10 +149,10 @@ final class DailyBriefTests: XCTestCase {
     func testRowsPairHalfTiles() {
         let tiles: [DailyBrief.Tile] = [.steps(steps: 1, goal: 8), .invite(.budget), .reminders([]), .budget(spentToday: 3, perDayLeft: nil)]
         let rows = DailyBrief.rows(tiles).map { $0.map(\.id) }
-        XCTAssertEqual(rows, [["invite-budget"], ["steps", "reminders"], ["budget"]], "Reminders are half width since 2026-11-17")
-        // The habits, the session and the Top 3 are across the width (PDG, 2026-11-17).
-        let wide: [DailyBrief.Tile] = [.steps(steps: 1, goal: 8), .habits(done: 0, items: []), .priorities([]), .budget(spentToday: 3, perDayLeft: nil)]
-        XCTAssertEqual(DailyBrief.rows(wide).map { $0.map(\.id) }, [["habits"], ["priorities"], ["steps", "budget"]])
+        XCTAssertEqual(rows, [["invite-budget"], ["reminders"], ["steps", "budget"]], "« À ne pas oublier » is across the width")
+        // The habits, the session and the tasks are across the width (PDG, 2026-11-17).
+        let wide: [DailyBrief.Tile] = [.steps(steps: 1, goal: 8), .habits(done: 0, items: []), .reminders([]), .budget(spentToday: 3, perDayLeft: nil)]
+        XCTAssertEqual(DailyBrief.rows(wide).map { $0.map(\.id) }, [["habits"], ["reminders"], ["steps", "budget"]])
     }
 
     // MARK: One place for each value, example data only without it

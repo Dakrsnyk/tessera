@@ -2,11 +2,11 @@ import XCTest
 @testable import Ardane
 
 /// The default layout of « Mon Quotidien » (PDG, 2026-11-17): a fixed order for every account, Nutrition,
-/// Fitness, Planning, Habitudes and Top 3 across the width, then the other cards at half width; the move of the
+/// Fitness, Planning, Habitudes and « À ne pas oublier » across the width, then the other cards at half width; the move of the
 /// settings saved before to this layout, once.
 @MainActor
 final class DailyDefaultsTests: XCTestCase {
-    private let five = ["nutrition", "workout", "planning", "habits", "priorities"]
+    private let five = ["nutrition", "workout", "planning", "habits", "reminders"]
 
     private func wednesday(_ hour: Int) -> Date {
         DateMath.calendar.date(from: DateComponents(year: 2026, month: 9, day: 30, hour: hour))!
@@ -71,13 +71,13 @@ final class DailyDefaultsTests: XCTestCase {
         XCTAssertTrue(tiles.allSatisfy { isWide($0) })
     }
 
-    func testOtherInterestsComeAtHalfWidthAfterTheTop3() {
+    func testOtherInterestsComeAtHalfWidthAfterTheFive() {
         var input = DailyBrief.Input(now: wednesday(9))
         input.interests = [.car, .budget, .travel, .student, .business]
         let tiles = screen(input)
         let found = ids(tiles)
         XCTAssertEqual(Array(found.prefix(5)), five)
-        XCTAssertEqual(Set(found.dropFirst(5)), ["app-studies", "budget", "app-business", "app-travel", "app-car"])
+        XCTAssertEqual(Set(found.dropFirst(5)), ["app-studies", "budget", "app-business", "app-travel"], "Auto is gone, even for who chose it")
         for tile in tiles.dropFirst(5) { XCTAssertFalse(isWide(tile), tile.id) }
         for tile in tiles.prefix(5) { XCTAssertTrue(isWide(tile), tile.id) }
     }
@@ -109,9 +109,10 @@ final class DailyDefaultsTests: XCTestCase {
     }
 
     func testEveryCategoryIsInTheDefaultOrderOnce() {
-        XCTAssertEqual(Set(DailyDefaults.order), Set(DailyBrief.Category.allCases))
-        XCTAssertEqual(DailyDefaults.order.count, DailyBrief.Category.allCases.count)
-        XCTAssertEqual(Array(DailyDefaults.order.prefix(5)), [.nutrition, .workout, .planning, .habits, .priorities])
+        let offered = DailyBrief.Category.allCases.filter { $0 != .priorities && $0 != .car }
+        XCTAssertEqual(Set(DailyDefaults.order), Set(offered), "The Top 3 and Auto are gone (PDG, 2026-11-25)")
+        XCTAssertEqual(DailyDefaults.order.count, offered.count)
+        XCTAssertEqual(Array(DailyDefaults.order.prefix(5)), [.nutrition, .workout, .planning, .habits, .reminders])
     }
 
     // MARK: What the person removed
@@ -135,9 +136,9 @@ final class DailyDefaultsTests: XCTestCase {
 
     func testTheHandOrderStillWinsOverTheDefault() {
         var settings = AppSettings()
-        settings.dailyOrder = ["priorities", "nutrition"]
+        settings.dailyOrder = ["reminders", "nutrition"]
         let tiles = screen(DailyBrief.Input(now: wednesday(9)), settings: settings)
-        XCTAssertEqual(Array(ids(tiles).prefix(2)), ["priorities", "nutrition"])
+        XCTAssertEqual(Array(ids(tiles).prefix(2)), ["reminders", "nutrition"])
     }
 
     // MARK: Migration
@@ -160,6 +161,21 @@ final class DailyDefaultsTests: XCTestCase {
         XCTAssertEqual(settings.dailyCardPages, ["nutrition": 1])
     }
 
+    func testMigrationGivesTheTop3PlaceToTheReminders() {
+        var settings = AppSettings()
+        settings.dailyLayoutVersion = 1
+        settings.dailyOrder = ["app-car", "priorities", "reminders", "budget"]
+        settings.dailyWide = ["priorities": false, "reminders": true, "app-car": true]
+        settings.dailyHidden = ["priorities", "app-car"]
+        settings.dailyAdded = [DailyCategories.productivityKey, "cat-car", "car", "cat-priorities"]
+
+        XCTAssertTrue(DailyDefaults.migrate(&settings))
+        XCTAssertEqual(settings.dailyOrder, ["reminders", "budget"])
+        XCTAssertEqual(settings.dailyWide, ["reminders": false])
+        XCTAssertEqual(settings.dailyHidden, ["reminders"])
+        XCTAssertEqual(settings.dailyAdded, ["cat-reminders"])
+    }
+
     func testMigrationRunsOnlyOnce() {
         var settings = AppSettings()
         XCTAssertTrue(DailyDefaults.migrate(&settings))
@@ -179,7 +195,7 @@ final class DailyDefaultsTests: XCTestCase {
         DailyDefaults.migrate(&settings)
         XCTAssertTrue(settings.dailyOrder.isEmpty)
         XCTAssertEqual(settings.dailyHidden, ["habits"])
-        XCTAssertEqual(settings.dailyAdded, ["cat-car"])
+        XCTAssertTrue(settings.dailyAdded.isEmpty, "The Auto entry is dropped with the mini-app")
         // The version is saved and read back.
         let again = try JSONDecoder().decode(AppSettings.self, from: JSONEncoder().encode(settings))
         XCTAssertEqual(again.dailyLayoutVersion, DailyDefaults.layoutVersion)

@@ -72,11 +72,12 @@ final class CreateSizeFirstFlowTests: XCTestCase {
 
     func testCategoriesAreTimeThenSpacesThenPhotosWithoutDuplicate() {
         let all = CreateCategory.all(preferred: [])
-        XCTAssertEqual(all.count, Space.allCases.count + 2)
+        XCTAssertEqual(all.count, Space.offered.count + 2)
         XCTAssertEqual(all.first, .time)
         XCTAssertEqual(all.last, .photos)
         XCTAssertEqual(Set(all.map { $0.id }).count, all.count)
-        for space in Space.allCases { XCTAssertTrue(all.contains(.space(space)), "Espace absent : \(space.rawValue)") }
+        for space in Space.offered { XCTAssertTrue(all.contains(.space(space)), "Espace absent : \(space.rawValue)") }
+        XCTAssertFalse(all.contains(.space(.car)), "Auto est retiré (PDG, 2026-11-25)")
     }
 
     func testPreferredSpacesComeFirstWithoutDuplicates() {
@@ -85,7 +86,9 @@ final class CreateSizeFirstFlowTests: XCTestCase {
         XCTAssertEqual(all[1], .space(preferred[0]))
         XCTAssertEqual(all[2], .space(preferred[1]))
         XCTAssertEqual(Set(all.map { $0.id }).count, all.count)
-        XCTAssertEqual(all.count, Space.allCases.count + 2)
+        XCTAssertEqual(all.count, Space.offered.count + 2)
+        // Un ancien compte qui avait choisi Auto ne retrouve pas la catégorie.
+        XCTAssertEqual(CreateCategory.all(preferred: [.car] + preferred), all)
     }
 
     func testEveryCategoryOffersWidgetsInSmallExceptPhotos() {

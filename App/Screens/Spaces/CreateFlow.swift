@@ -36,7 +36,9 @@ enum CreateCategory: Hashable, Identifiable {
 
     /// The person's interests first, then the other spaces; « Heure et date » first, photos and quotes last.
     static func all(preferred: [Space]) -> [CreateCategory] {
-        let spaces = preferred + Space.offered.filter { !preferred.contains($0) }
+        // Un espace retiré (Auto) reste absent, même choisi autrefois dans les intérêts.
+        let chosen = preferred.filter { Space.offered.contains($0) }
+        let spaces = chosen + Space.offered.filter { !chosen.contains($0) }
         return [.time] + spaces.map { .space($0) } + [.photos]
     }
 

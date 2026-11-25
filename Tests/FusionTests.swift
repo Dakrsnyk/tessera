@@ -107,7 +107,11 @@ final class FusionTests: XCTestCase {
     }
 
     func testEverySpacePresetComposes() {
-        for space in Space.allCases {
+        // Auto est retiré : plus aucun widget à composer pour lui.
+        XCTAssertFalse(Space.offered.contains(.car))
+        XCTAssertTrue(SpaceCatalog.preset(for: .car, format: .medium).isEmpty)
+        XCTAssertTrue(SpaceCatalog.preset(for: .car, format: .large).isEmpty)
+        for space in Space.offered {
             for format in [WidgetFormat.medium, .large] {
                 let preset = SpaceCatalog.preset(for: space, format: format)
                 XCTAssertFalse(preset.isEmpty, "\(space) has no \(format) preset")

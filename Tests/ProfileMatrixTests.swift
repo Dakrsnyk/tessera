@@ -29,6 +29,8 @@ final class ProfileMatrixTests: XCTestCase {
 
     private func isEmptyCard(_ tile: DailyBrief.Tile) -> Bool {
         if case .empty = tile { return true }
+        // « À ne pas oublier » is always there: without any task, it holds only the quick add.
+        if case let .reminders(items) = tile { return items.isEmpty }
         return false
     }
 
@@ -38,13 +40,14 @@ final class ProfileMatrixTests: XCTestCase {
         return false
     }
 
-    /// The categories but the week's schedule, which is never a dotted card (its empty week stands in for it).
-    private var dottedCategories: [DailyBrief.Category] { DailyBrief.Category.defaultOrder.filter { $0 != .planning } }
+    /// The categories that can be a dotted card: not the week's schedule (its empty week stands in for it) nor
+    /// « À ne pas oublier » (always there with its quick add).
+    private var dottedCategories: [DailyBrief.Category] { DailyBrief.Category.defaultOrder.filter { $0 != .planning && $0 != .reminders } }
 
     /// The categories the « + » offers to an account that has only the five of every account (PDG, 2026-11-17).
     private var beyondTheFive: [DailyBrief.Category] { DailyBrief.Category.defaultOrder.filter { !DailyDefaults.alwaysPresent.contains($0) } }
 
-    private let five = ["nutrition", "workout", "planning", "habits", "priorities"]
+    private let five = ["nutrition", "workout", "planning", "habits", "reminders"]
 
     private func emptyCategories(_ tiles: [DailyBrief.Tile]) -> [DailyBrief.Category] {
         tiles.compactMap { tile in
@@ -117,7 +120,10 @@ final class ProfileMatrixTests: XCTestCase {
         model.update(\.fitness) {
             $0.routines = [Routine(name: "Jambes", exercises: [ExerciseTemplate(name: "Squat", sets: 2, reps: 8, weight: 80)], weekdays: [3])]
         }
-        model.updateContent { $0.habits = [Habit(name: "Lire", symbol: "book", colorHex: "7FA33A")] }
+        model.updateContent {
+            $0.habits = [Habit(name: "Lire", symbol: "book", colorHex: "7FA33A")]
+            $0.tasks = [TaskItem(title: "Appeler")]
+        }
         let course = Course(name: "Mathématiques")
         model.update(\.student) {
             $0.courses = [course]
@@ -172,7 +178,7 @@ final class ProfileMatrixTests: XCTestCase {
         XCTAssertEqual(shown.filter(isEmptyWeek).count, 1, "Planning is the week table")
         XCTAssertEqual(DailyBrief.rows(shown).count, 5, "The five are across the width")
         XCTAssertEqual(DailyCategories.addable(shown: shown), beyondTheFive, "The « + » offers every other category")
-        XCTAssertTrue(DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: nil)).isEmpty)
+        XCTAssertEqual(DailyBrief.tiles(DailyBrief.Input(model: model, now: now, steps: nil)), [.reminders([])], "No data: only the quick add")
     }
 
     func testEmptyProfileAddingEveryCategoryGivesOnlyEmptyCardsInTheDefaultOrder() {
@@ -181,7 +187,7 @@ final class ProfileMatrixTests: XCTestCase {
         let shown = tiles(model)
         XCTAssertEqual(emptyCategories(shown), dottedCategories, "The week's schedule is its empty week, not a dotted card")
         XCTAssertTrue(shown.allSatisfy { isEmptyCard($0) || isEmptyWeek($0) }, "Not one card with data")
-        XCTAssertEqual(shown.count, DailyBrief.Category.allCases.count, "Only dotted cards, not one card with data")
+        XCTAssertEqual(shown.count, DailyDefaults.order.count, "Only dotted cards, not one card with data")
         XCTAssertEqual(ids(shown), DailyBrief.Category.defaultOrder.map(\.tileID))
         XCTAssertTrue(DailyCategories.addable(shown: shown).isEmpty)
     }
@@ -191,10 +197,11 @@ final class ProfileMatrixTests: XCTestCase {
         let shown = tiles(model)
         // The fixed order (PDG, 2026-11-17), whatever the hour or the data: the five, then the budget interest.
         XCTAssertEqual(ids(shown), five + ["budget"])
-        XCTAssertEqual(emptyCategories(shown), [.workout, .priorities], "The sport interest waits for a program, the Top 3 for a task")
+        XCTAssertEqual(emptyCategories(shown), [.workout], "The sport interest waits for a program")
+        XCTAssertEqual(shown[4], .reminders([]), "No task: only the quick add")
         XCTAssertTrue(isEmptyWeek(shown[2]), "Nothing planned: an empty week")
         XCTAssertEqual(DailyCategories.addable(shown: shown),
-                       [.studies, .reminders, .steps, .business, .travel, .car],
+                       [.studies, .steps, .business, .travel],
                        "Everything not shown is in the « + », in the default order")
         guard case let .nutrition(nutrition)? = shown.first else { return XCTFail("The calorie target gives the nutrition card") }
         XCTAssertTrue(nutrition.knowsKcal)
@@ -211,15 +218,15 @@ final class ProfileMatrixTests: XCTestCase {
     func testCompleteProfileShowsEveryCategoryWithItsData() throws {
         let model = makeModel(.complete)
         let shown = tiles(model, steps: 4_000)
-        XCTAssertEqual(Set(ids(shown)), Set(DailyBrief.Category.allCases.map(\.tileID)))
-        XCTAssertEqual(shown.count, DailyBrief.Category.allCases.count, "Each category once")
+        XCTAssertEqual(Set(ids(shown)), Set(DailyDefaults.order.map(\.tileID)), "Never the Top 3 nor Auto, even with their data")
+        XCTAssertEqual(shown.count, DailyDefaults.order.count, "Each category once")
         XCTAssertTrue(emptyCategories(shown).isEmpty, "Everything is given: no dotted card")
         XCTAssertTrue(DailyCategories.addable(shown: shown).isEmpty, "Everything is there: no « + »")
         // The fixed order of every account, not the one of the hour (PDG, 2026-11-17).
         XCTAssertEqual(ids(shown), DailyDefaults.order.map(\.tileID))
         // The mini-apps without their own card show one figure from their data, in the default order.
         let apps = ids(shown).filter { $0.hasPrefix("app-") }
-        XCTAssertEqual(apps, ["app-studies", "app-business", "app-travel", "app-car"])
+        XCTAssertEqual(apps, ["app-studies", "app-business", "app-travel"])
         for tile in shown where tile.id.hasPrefix("app-") {
             guard case let .miniApp(_, caption) = tile else { return XCTFail("\(tile.id) is a mini-app card") }
             XCTAssertNotNil(caption, "\(tile.id) shows a figure from the person's data")
@@ -237,7 +244,7 @@ final class ProfileMatrixTests: XCTestCase {
             addEveryCategory(model)
             return emptyCategories(tiles(model, steps: steps(level))).count
         }
-        XCTAssertEqual(counts[0], DailyBrief.Category.allCases.count - 1, "Empty: every category but the week's schedule is a dotted card")
+        XCTAssertEqual(counts[0], dottedCategories.count, "Empty: every category that can be dotted is")
         XCTAssertLessThan(counts[1], counts[0])
         XCTAssertLessThan(counts[2], counts[1])
         XCTAssertEqual(counts[2], 0, "Complete: no dotted card left")
@@ -743,7 +750,7 @@ final class ProfileMatrixTests: XCTestCase {
             }
             let after = tiles(model, steps: steps(level))
             XCTAssertTrue(after.isEmpty, "\(level): every card is off")
-            XCTAssertEqual(Set(DailyCategories.addable(shown: after).map(\.tileID)), Set(DailyBrief.Category.allCases.map(\.tileID)),
+            XCTAssertEqual(Set(DailyCategories.addable(shown: after).map(\.tileID)), Set(DailyDefaults.order.map(\.tileID)),
                            "\(level): all back in the « + »")
             XCTAssertEqual(DataSnapshot(model), before, "\(level): nothing deleted from the mini-apps")
             XCTAssertEqual(MiniApp.allCases.map { model.toFillItems(in: $0) }, toFillBefore, "\(level): À remplir unchanged")
@@ -770,13 +777,13 @@ final class ProfileMatrixTests: XCTestCase {
         let before = DataSnapshot(model)
         XCTAssertTrue(ids(tiles(model)).contains("workout"))
         model.updateSettings { DailyCategories.remove(tileID: "workout", in: &$0) }
-        XCTAssertEqual(ids(tiles(model)), ["nutrition", "planning", "habits", "priorities", "budget"])
+        XCTAssertEqual(ids(tiles(model)), ["nutrition", "planning", "habits", "reminders", "budget"])
         XCTAssertEqual(model.profile.interests, [.nutrition, .sport, .budget], "The interest itself stays")
         XCTAssertEqual(DataSnapshot(model), before)
         XCTAssertEqual(DailyCategories.addable(shown: tiles(model)).first, .workout)
         // The week's schedule, shown to everyone, can be taken off too: it stays off and the « + » offers it again.
         model.updateSettings { DailyCategories.remove(tileID: "planning", in: &$0) }
-        XCTAssertEqual(ids(tiles(model)), ["nutrition", "habits", "priorities", "budget"])
+        XCTAssertEqual(ids(tiles(model)), ["nutrition", "habits", "reminders", "budget"])
         XCTAssertEqual(Array(DailyCategories.addable(shown: tiles(model)).prefix(2)), [.workout, .planning])
         XCTAssertEqual(DataSnapshot(model), before)
     }
@@ -837,7 +844,7 @@ final class ProfileMatrixTests: XCTestCase {
         // Only nutrition, the budget of today and the habit carry data; the other cards are dotted.
         let withData = shown.filter { !isEmptyCard($0) && !isEmptyWeek($0) }
         XCTAssertEqual(ids(withData), ["nutrition", "habits", "budget"], "In the fixed order")
-        XCTAssertEqual(emptyCategories(shown).count, DailyBrief.Category.allCases.count - 4, "All but the 3 with data and the week's schedule")
+        XCTAssertEqual(emptyCategories(shown).count, dottedCategories.count - 3, "All but the 3 with data")
         for app in [MiniApp.business, .travel, .car, .fitness, .planning] {
             XCTAssertNil(MiniAppSummary.caption(app, model, now: now), "\(app.rawValue) has nothing to say")
         }

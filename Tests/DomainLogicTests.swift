@@ -210,7 +210,9 @@ final class DomainLogicTests: XCTestCase {
             XCTAssertEqual(WidgetGroup.allCases.filter { $0.kinds.contains(kind) }.count, 1, "\(kind)")
         }
         XCTAssertEqual(Set(WidgetGroup.allCases.map(\.kindID)).count, WidgetGroup.allCases.count)
-        XCTAssertTrue((30...40).contains(WidgetKind.freeKinds.count), "Each mini-app keeps its essential widget free")
+        // 29 depuis le retrait du Top 3 et d'Auto (PDG, 2026-11-25).
+        XCTAssertTrue((29...40).contains(WidgetKind.freeKinds.count), "Each mini-app keeps its essential widget free")
+        XCTAssertTrue(WidgetKind.freeKinds.allSatisfy { !$0.isRetired }, "A removed widget is never offered")
         XCTAssertTrue((60...100).contains(WidgetKind.allCases.count - WidgetKind.freeKinds.count))
     }
 

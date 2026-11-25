@@ -118,15 +118,15 @@ final class QuickTaskTests: XCTestCase {
         XCTAssertEqual(tiles.map(\.id), ["priorities"])
     }
 
-    func testTheQuickAddEntryKeepsTheTopThreeOnMonQuotidienWithoutInterest() {
+    func testTheOldQuickAddEntryStandsForTheRemindersCard() {
         var settings = AppSettings()
         DailyCategories.setProductivity(shown: true, hasTasks: false, in: &settings)
-        XCTAssertEqual(DailyCategories.added(settings), [.priorities], "The Productivité entry counts as an added category")
-        // No interest, no task: the card still shows (empty Top 3 with its quick add), until it is taken off. Since
-        // 2026-11-17 the Top 3 is one of the five cards of every account (`wanted`), so only its removal hides it.
+        XCTAssertEqual(DailyCategories.added(settings), [.reminders], "The Productivité entry counts as an added category")
+        // The Top 3 is gone (PDG, 2026-11-25): « À ne pas oublier » is one of the five cards of every account
+        // (`wanted`), with or without this entry.
         let input = DailyBrief.Input(now: now)
         XCTAssertEqual(DailyCategories.wanted(input: input, settings: settings),
-                       [.nutrition, .workout, .planning, .habits, .priorities])
+                       [.nutrition, .workout, .planning, .habits, .reminders])
         DailyCategories.setProductivity(shown: false, hasTasks: false, in: &settings)
         XCTAssertTrue(DailyCategories.added(settings).isEmpty)
     }
