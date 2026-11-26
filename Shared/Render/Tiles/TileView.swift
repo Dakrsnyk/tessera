@@ -663,13 +663,14 @@ struct TileView: View {
             // Without a chart below them, the figures sit at the bottom: no empty half under one row of figures.
             if context.isSmall || (context.isMedium && !hasVisual) { Spacer(minLength: 0) }
             if context.isSmall {
-                // A small widget shows its main figure, then the others two by two when they fit (the three
-                // macros), else the main figure and one other.
+                // A small widget shows its main figure, then the others two by two.
                 let main = shown.first.map { [$0] } ?? []
                 let others = Array(stats.dropFirst().prefix(4))
                 let pairs = stride(from: 0, to: others.count, by: 2).map { Array(others[$0..<min($0 + 2, others.count)]) }
-                ViewThatFits(in: .vertical) {
-                    if others.count > 1 { statGrid([main] + pairs, value: 22, other: 15) }
+                // Two others side by side (one more row of two when dense). No ViewThatFits: it froze the rendering.
+                if others.count > 1 {
+                    statGrid([main] + Array(pairs.prefix(s.rowDelta > 0 ? 2 : 1)), value: 22, other: 15)
+                } else {
                     statGrid(chunks, value: 26, other: 17)
                 }
             } else {
@@ -838,28 +839,20 @@ struct TileView: View {
                     }
                 }
             } else if context.isSmall {
-                // A small widget: its main card, then every line that fits (the three macros as a list in one card),
-                // else two figures side by side, else one.
-                let lines = rows(4)
-                ViewThatFits(in: .vertical) {
-                    if lines.count > 1 {
-                        VStack(spacing: 6 * sp) {
-                            mainCard
-                            card { TileRowsView(rows: lines, context: context, compact: true) }
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
-                    if lines.count > 2 {
-                        VStack(spacing: 6 * sp) {
-                            mainCard
-                            card { TileRowsView(rows: Array(lines.prefix(2)), context: context, compact: true) }
-                                .fixedSize(horizontal: false, vertical: true)
-                        }
-                    }
-                    VStack(spacing: 6 * sp) {
-                        mainCard
-                        if let stat = others.first { HStack(spacing: 6 * sp) { statCard(stat) } }
-                        else if hasVisual { card { visual(compact: true) } }
+                // A small widget: its main card, then as many lines as its height holds in one card (two lines
+                // with bars, three without; more when dense). No ViewThatFits here: it froze the rendering.
+                let withBars = tile.rows.contains { $0.progress != nil }
+                let lines = Array(tile.rows.prefix(max(1, (withBars ? 2 : 3) + max(0, s.rowDelta / 2))))
+                if lines.count > 1 {
+                    mainCard
+                    card { TileRowsView(rows: lines, context: context, compact: true) }
+                        .fixedSize(horizontal: false, vertical: true)
+                } else {
+                    mainCard
+                    if let stat = others.first {
+                        HStack(spacing: 6 * sp) { statCard(stat) }
+                    } else if hasVisual {
+                        card { visual(compact: true) }
                     }
                 }
             } else {

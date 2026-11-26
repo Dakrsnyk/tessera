@@ -181,3 +181,4 @@ Erreurs déjà rencontrées, pour ne pas les refaire. Retour : [[Memoire]]
 
 - 2026-11-26 : **`StyleLibrary` est déjà le nom des « Mes styles » enregistrés** (`Shared/Model/WidgetStyle.swift`, fichier `StoreFile.styles`) : la bibliothèque des 500 styles s'appelle `StyleCatalog` (`Shared/Model/StyleLibrary.swift`). Avant un nouveau type, `grep -rn "struct X\|enum X\|class X"` dans tout le module.
 - 2026-11-26 : plusieurs agents dans le même dossier : jamais `git stash` (un agent l'a fait pour comparer `check_swift.py` et a failli emporter le travail des autres) ; `check_swift.py` sort 237 « Color(...) missing ['name'] » sous Windows, déjà présents à HEAD : bruit, pas une régression.
+- 2026-11-26 : **jamais de `ViewThatFits` dans le rendu des widgets** (TileView…) : déjà vu au Build 354, il a encore figé l'export des planches (pièce Cartes petit, run 604). Choisir le nombre de lignes par un calcul fixe (densité, barres ou non).
