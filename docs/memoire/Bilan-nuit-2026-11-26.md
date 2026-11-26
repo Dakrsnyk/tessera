@@ -57,7 +57,7 @@ Seuls les rapports de la CI GitHub prouvent qu'une chose compile ou que des test
 
 - L'outil Style, le Store et Finances › Analyse, sur le vrai téléphone : à toi de les voir dans le build interne.
 
-## Compromis assumés (à confirmer)
+## Compromis assumés (validés par le PDG le 2026-11-26)
 
 - Un utilisateur gratuit qui avait un ancien widget en Moderne, Carte, Doux, Compact, Sous-bois ou Glacier le voit passer en Minimal sur son écran d'accueil. L'app n'étant pas publiée, personne n'est touché.
 - Les anciens thèmes Premium (Aurore, Néon, Éditorial…) ne sont plus choisissables dans le Studio. Les widgets déjà faits les gardent.
