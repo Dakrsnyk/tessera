@@ -845,8 +845,12 @@ struct TileView: View {
                 let lines = Array(tile.rows.prefix(max(1, (withBars ? 2 : 3) + max(0, s.rowDelta / 2))))
                 if lines.count > 1 {
                     mainCard
-                    card { TileRowsView(rows: lines, context: context, compact: true) }
-                        .fixedSize(horizontal: false, vertical: true)
+                    // The lines at their own height (not card(), which takes all the height it is given).
+                    TileRowsView(rows: lines, context: context, compact: true)
+                        .padding(8 * sp)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(s.panel, in: RoundedRectangle(cornerRadius: s.blockRadius(12), style: .continuous))
+                        .styleDepth(s)
                 } else {
                     mainCard
                     if let stat = others.first {
@@ -992,7 +996,6 @@ struct TileRowsView: View {
                                 .lineLimit(1)
                         }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
                     if let value = row.value {
                         Text(value)
                             .font(s.text(compact ? 11 : 12, .semibold).monospacedDigit())
@@ -1970,10 +1973,12 @@ struct TimerRing: View {
 struct RowSplit: Layout {
     var gap: CGFloat = 6
 
+    private func finite(_ value: CGFloat) -> CGFloat { value.isFinite ? value : 0 }
+
     private func widths(_ width: CGFloat, _ subviews: Subviews) -> (title: CGFloat, value: CGFloat) {
         guard subviews.count > 1 else { return (width, 0) }
-        let title = subviews[0].sizeThatFits(.unspecified).width
-        let value = subviews[1].sizeThatFits(.unspecified).width
+        let title = finite(subviews[0].sizeThatFits(.unspecified).width)
+        let value = finite(subviews[1].sizeThatFits(.unspecified).width)
         let room = max(0, width - gap)
         guard room > 0 else { return (0, 0) }
         if title + value <= room { return (room - value, value) }
@@ -1982,14 +1987,14 @@ struct RowSplit: Layout {
     }
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-        let ideal = subviews.reduce(CGFloat(0)) { $0 + $1.sizeThatFits(.unspecified).width } + (subviews.count > 1 ? gap : 0)
+        let ideal = subviews.reduce(CGFloat(0)) { $0 + finite($1.sizeThatFits(.unspecified).width) } + (subviews.count > 1 ? gap : 0)
         // Measured without a limit (nil or infinite width), the line asks its natural width: an infinite answer
         // made SwiftUI measure again and again (the export froze, run 605).
         let width = proposal.width.flatMap { $0.isFinite ? $0 : nil } ?? ideal
         let (t, v) = widths(width, subviews)
         let heights = [subviews.first?.sizeThatFits(ProposedViewSize(width: t, height: proposal.height)).height ?? 0,
                        subviews.count > 1 ? subviews[1].sizeThatFits(ProposedViewSize(width: v, height: proposal.height)).height : 0]
-        return CGSize(width: width, height: heights.max() ?? 0)
+        return CGSize(width: width, height: finite(heights.max() ?? 0))
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
