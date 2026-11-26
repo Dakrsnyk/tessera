@@ -144,6 +144,8 @@ enum BorderKind: String, Codable, CaseIterable, Identifiable {
     case none, solid, dashed, dotted, double, glow, gradient
     /// Blocks with stepped corners (8-bit styles).
     case pixel
+    // Ticket with notches, stitched seam, 3D bevel, thin inner rule (watchmaking).
+    case ticket, stitched, bevel, inset
     var id: String { rawValue }
 
     var title: String {
@@ -156,6 +158,10 @@ enum BorderKind: String, Codable, CaseIterable, Identifiable {
         case .glow: tr("Lumineuse")
         case .gradient: tr("Dégradé")
         case .pixel: tr("Pixels")
+        case .ticket: tr("Ticket")
+        case .stitched: tr("Couture")
+        case .bevel: tr("Biseau")
+        case .inset: tr("Filet intérieur")
         }
     }
 }
@@ -164,6 +170,8 @@ enum DepthKind: String, Codable, CaseIterable, Identifiable {
     case none, soft, strong, glow, floating, embossed
     /// A solid shadow, offset, without blur (neo-brutalism).
     case hardShadow
+    /// A long, flat shadow at 45 degrees.
+    case longShadow
     var id: String { rawValue }
 
     var title: String {
@@ -175,6 +183,7 @@ enum DepthKind: String, Codable, CaseIterable, Identifiable {
         case .floating: tr("Flottant")
         case .embossed: tr("Relief")
         case .hardShadow: tr("Ombre pleine")
+        case .longShadow: tr("Ombre longue")
         }
     }
 
@@ -187,6 +196,7 @@ enum DepthKind: String, Codable, CaseIterable, Identifiable {
         case .floating: tr("Le contenu semble flotter au-dessus du fond.")
         case .embossed: tr("Un léger relief, comme gravé.")
         case .hardShadow: tr("Une ombre pleine et décalée, sans flou.")
+        case .longShadow: tr("Une longue ombre plate à 45°.")
         }
     }
 }
@@ -267,6 +277,7 @@ enum IconPosition: String, Codable, CaseIterable, Identifiable {
 
 enum TitleCase: String, Codable, CaseIterable, Identifiable {
     case theme, upper, normal, lower
+    case smallCaps
     var id: String { rawValue }
 
     var title: String {
@@ -275,6 +286,7 @@ enum TitleCase: String, Codable, CaseIterable, Identifiable {
         case .upper: tr("MAJUSCULES")
         case .normal: tr("Normal")
         case .lower: tr("minuscules")
+        case .smallCaps: tr("Petites capitales")
         }
     }
 }
@@ -327,6 +339,8 @@ enum TextureKind: String, Codable, CaseIterable, Identifiable {
     case stars, snow, waves, web, leaves
     // Screen and print motifs: CRT scan lines, comic-book halftone, 8-bit checkerboard (batch 1 of the 100 styles).
     case scanlines, halftone, pixels
+    // Watchmaking, stone, fabric and metal motifs.
+    case guilloche, marble, terrazzo, linen, topo, brushed, sunburst
     var id: String { rawValue }
 
     var title: String {
@@ -347,6 +361,13 @@ enum TextureKind: String, Codable, CaseIterable, Identifiable {
         case .scanlines: tr("Balayage")
         case .halftone: tr("Trame BD")
         case .pixels: tr("Pixels")
+        case .guilloche: tr("Guilloché")
+        case .marble: tr("Marbre")
+        case .terrazzo: tr("Terrazzo")
+        case .linen: tr("Lin")
+        case .topo: tr("Topographie")
+        case .brushed: tr("Métal brossé")
+        case .sunburst: tr("Rayons")
         }
     }
 }

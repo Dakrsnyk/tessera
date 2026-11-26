@@ -1144,6 +1144,7 @@ struct FinancesTrendsPage: View {
                 }
             }
             changes(state: state, now: now)
+            FinancesDeepAnalysis()
             findings(state: state, now: now)
             Text(tr("Moyennes calculées sur les mois terminés où tu as noté quelque chose."))
                 .font(.footnote)

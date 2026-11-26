@@ -868,3 +868,32 @@ widget camp-auto-carDeadlines-s-st-neon kind=carDeadlines family=small scale=4 t
 only camp-auto-nextService-m-st-light camp-auto-nextService-m-st-light-done camp-auto-nextService-m-st-dark-done camp-auto-nextService-m-st-minimal-done camp-auto-nextService-m-st-pastel-done camp-auto-nextService-m-st-blossom-done camp-auto-nextService-m-st-aurora-done camp-auto-nextService-m-st-neon-done camp-auto-fuelStats-s-st-light camp-auto-fuelStats-s-st-dark camp-auto-fuelStats-s-st-minimal camp-auto-fuelStats-s-st-pastel camp-auto-fuelStats-s-st-blossom camp-auto-fuelStats-s-st-aurora camp-auto-fuelStats-s-st-neon camp-auto-carDeadlines-s-st-light camp-auto-carDeadlines-s-st-dark camp-auto-carDeadlines-s-st-minimal camp-auto-carDeadlines-s-st-pastel camp-auto-carDeadlines-s-st-blossom camp-auto-carDeadlines-s-st-aurora camp-auto-carDeadlines-s-st-neon
 
 # --- Fin des exports de la nuit du 2026-11-22 (production arrêtée).
+
+# --- Planche des 500 styles (2026-11-26) : bibliothèque StyleLibrary, 20 styles par page (type styles, AdExport) ---
+styles styles-p01 page=1 per=20 kind=budgetLeft family=small scale=2
+styles styles-p02 page=2 per=20 kind=budgetLeft family=small scale=2
+styles styles-p03 page=3 per=20 kind=budgetLeft family=small scale=2
+styles styles-p04 page=4 per=20 kind=budgetLeft family=small scale=2
+styles styles-p05 page=5 per=20 kind=budgetLeft family=small scale=2
+styles styles-p06 page=6 per=20 kind=budgetLeft family=small scale=2
+styles styles-p07 page=7 per=20 kind=budgetLeft family=small scale=2
+styles styles-p08 page=8 per=20 kind=budgetLeft family=small scale=2
+styles styles-p09 page=9 per=20 kind=budgetLeft family=small scale=2
+styles styles-p10 page=10 per=20 kind=budgetLeft family=small scale=2
+styles styles-p11 page=11 per=20 kind=budgetLeft family=small scale=2
+styles styles-p12 page=12 per=20 kind=budgetLeft family=small scale=2
+styles styles-p13 page=13 per=20 kind=budgetLeft family=small scale=2
+styles styles-p14 page=14 per=20 kind=budgetLeft family=small scale=2
+styles styles-p15 page=15 per=20 kind=budgetLeft family=small scale=2
+styles styles-p16 page=16 per=20 kind=budgetLeft family=small scale=2
+styles styles-p17 page=17 per=20 kind=budgetLeft family=small scale=2
+styles styles-p18 page=18 per=20 kind=budgetLeft family=small scale=2
+styles styles-p19 page=19 per=20 kind=budgetLeft family=small scale=2
+styles styles-p20 page=20 per=20 kind=budgetLeft family=small scale=2
+styles styles-p21 page=21 per=20 kind=budgetLeft family=small scale=2
+styles styles-p22 page=22 per=20 kind=budgetLeft family=small scale=2
+styles styles-p23 page=23 per=20 kind=budgetLeft family=small scale=2
+styles styles-p24 page=24 per=20 kind=budgetLeft family=small scale=2
+styles styles-p25 page=25 per=20 kind=budgetLeft family=small scale=2
+styles styles-p26 page=26 per=20 kind=budgetLeft family=small scale=2
+only styles-p01 styles-p02 styles-p03 styles-p04 styles-p05 styles-p06 styles-p07 styles-p08 styles-p09 styles-p10 styles-p11 styles-p12 styles-p13 styles-p14 styles-p15 styles-p16 styles-p17 styles-p18 styles-p19 styles-p20 styles-p21 styles-p22 styles-p23 styles-p24 styles-p25 styles-p26

@@ -267,14 +267,14 @@ final class ProfileUITests: XCTestCase {
         XCTAssertFalse(nutritionShows("kcal restantes"), "Calories restantes sans objectif donné")
         XCTAssertFalse(app.staticTexts["à dépenser par jour d'ici la fin du mois"].exists, "Budget du jour sans budget donné")
         // A new account still has the five default cards (2026-11-17), always in the same order, empty or not.
-        let order = ["nutrition", "workout", "planning", "habits", "priorities"]
+        let order = ["nutrition", "workout", "planning", "habits", "reminders"]
         var tops: [CGFloat] = []
         for card in order {
             let found = app.descendants(matching: .any).matching(NSPredicate(format: "identifier IN %@", ["daily-\(card)", "daily-empty-\(card)"])).firstMatch
             XCTAssertTrue(found.waitForExistence(timeout: 8), "Carte « \(card) » absente d'un compte neuf")
             tops.append(found.frame.minY)
         }
-        XCTAssertEqual(tops, tops.sorted(), "Ordre des cartes d'un compte neuf : Nutrition, Fitness, Planning, Habitudes, Top 3 (\(tops))")
+        XCTAssertEqual(tops, tops.sorted(), "Ordre des cartes d'un compte neuf : Nutrition, Fitness, Planning, Habitudes, À ne pas oublier (\(tops))")
         snapshot("home-skipped")
     }
 

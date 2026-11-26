@@ -224,7 +224,7 @@ final class AdShotsUITests: XCTestCase {
         pause(1.5)
         shot("studio-content")
         styleChapter.tap()
-        guard app.buttons["studio-theme"].waitForExistence(timeout: 8) else { return }
+        guard app.buttons["studio-style"].waitForExistence(timeout: 8) else { return }
         pause(0.8)
         // « Thème »: the StylePreset grid (preset-<id>).
         if studioSection("theme") {

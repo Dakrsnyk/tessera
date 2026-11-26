@@ -65,7 +65,7 @@ extension AppModel {
         guard !old.isEmpty else { return }
         updateContent { content in
             for item in old where !content.tasks.contains(where: { $0.id == item.id }) {
-                content.tasks.append(TaskItem(id: item.id, title: item.title, isDone: item.isCompleted, completedAt: item.completedAt))
+                content.tasks.append(TaskItem(id: item.id, title: item.title, isDone: item.isCompleted, createdAt: item.createdAt ?? Date(), completedAt: item.completedAt))
             }
         }
         update(\.productivity) { $0.priorities = [] }

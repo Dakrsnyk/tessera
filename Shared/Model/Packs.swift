@@ -32,7 +32,7 @@ struct WidgetPack: Identifiable, Hashable {
     var group: PackGroup = .everyday
 
     var isPremium: Bool {
-        ThemeCatalog.theme(themeID).isPremium || kinds.contains(where: \.isPremium)
+        ThemeCatalog.theme(themeID).isPremium || kinds.contains { !$0.isRetired && $0.isPremium }
             || !Palette.freeAccents.contains { $0.hex == accentHex }
     }
 
@@ -42,7 +42,7 @@ struct WidgetPack: Identifiable, Hashable {
     }
 
     func designs() -> [WidgetDesign] {
-        kinds.map { kind in
+        kinds.filter { !$0.isRetired }.map { kind in
             var design = TemplateCatalog.template(for: kind)?.makeDesign() ?? WidgetDesign.starter(for: kind)
             design.name = kind.title
             design.themeID = themeID
@@ -55,8 +55,8 @@ struct WidgetPack: Identifiable, Hashable {
 
 enum PackCatalog {
     static let all: [WidgetPack] = [
-        WidgetPack(id: "morning", name: tr("Bien démarrer"), tagline: tr("Agenda, priorités et habitudes, dès le réveil."), symbol: "sunrise.fill",
-                   themeID: .glass, accentHex: "8C6CFF", kinds: [.now, .morning, .upNext, .priorities, .habitStreak, .tasks]),
+        WidgetPack(id: "morning", name: tr("Bien démarrer"), tagline: tr("Agenda, tâches et habitudes, dès le réveil."), symbol: "sunrise.fill",
+                   themeID: .glass, accentHex: "8C6CFF", kinds: [.now, .morning, .upNext, .habitStreak, .tasks]),
         WidgetPack(id: "student", name: tr("Étudiant"), tagline: tr("Cours, examens, devoirs et fiches de révision."), symbol: "graduationcap.fill",
                    themeID: .minimal, accentHex: "F2588F", kinds: [.nextClass, .nextExam, .assignments, .timetable, .flashcard, .semesterProgress]),
         WidgetPack(id: "athlete", name: tr("Sportif"), tagline: tr("Séance, séries, repos, calories et protéines."), symbol: "figure.strengthtraining.traditional",
@@ -77,12 +77,10 @@ enum PackCatalog {
                    themeID: .glass, accentHex: "2F8F7A", kinds: [.caloriesLeft, .macros, .proteinLeft, .mealsToday, .nutritionWeek, .nextMeal]),
         WidgetPack(id: "habits", name: tr("Bonnes habitudes"), tagline: tr("Routine, eau, séries, taux de réussite et rythme du jour."), symbol: "leaf.fill",
                    themeID: .minimal, accentHex: "8C6CFF", kinds: [.habits, .habitWeek, .habitStreak, .habitRate, .progress, .moonPhase]),
-        WidgetPack(id: "focus", name: tr("Concentration"), tagline: tr("Focus, travail profond, priorités et échéances."), symbol: "scope",
-                   themeID: .futuristic, accentHex: "3366FF", kinds: [.focus, .deepWork, .priorities, .deadline, .project, .tasks]),
+        WidgetPack(id: "focus", name: tr("Concentration"), tagline: tr("Focus, travail profond, tâches et échéances."), symbol: "scope",
+                   themeID: .futuristic, accentHex: "3366FF", kinds: [.focus, .deepWork, .deadline, .project, .tasks]),
         WidgetPack(id: "dates", name: tr("Dates importantes"), tagline: tr("Anniversaires, comptes à rebours et jours fériés."), symbol: "gift.fill",
                    themeID: .typography, accentHex: "F2588F", kinds: [.birthday, .countdown, .holiday, .calendar, .ageProgress, .note]),
-        WidgetPack(id: "car", name: tr("Ma voiture"), tagline: tr("Coût, entretien, kilométrage et carburant."), symbol: "car.fill",
-                   themeID: .dark, accentHex: "6B7280", kinds: [.carCost, .nextService, .mileage, .fuelStats, .carDeadlines, .clock]),
         WidgetPack(id: "gym", name: tr("Salle de sport"), tagline: tr("Séance, volume, records et mois d'entraînement."), symbol: "dumbbell.fill",
                    themeID: .futuristic, accentHex: "FF6B57", kinds: [.todaysWorkout, .weeklyVolume, .personalRecords, .workoutMonth, .caloriesBurned, .nextSet]),
         WidgetPack(id: "elegant", name: tr("Élégance"), tagline: tr("Serif et reflets dorés pour l'agenda et la journée."), symbol: "crown.fill",

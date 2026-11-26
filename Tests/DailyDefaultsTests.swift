@@ -189,6 +189,7 @@ final class DailyDefaultsTests: XCTestCase {
         XCTAssertTrue(model.productivity.priorities.isEmpty)
         XCTAssertEqual(model.content.tasks.map(\.title), ["Appeler", "Payer"])
         XCTAssertEqual(model.content.tasks.map(\.isDone), [false, true])
+        XCTAssertEqual(model.content.tasks[0].createdAt, wednesday(9), "The day it was added is kept")
     }
 
     /// A spending noted for a coming day waits in « À venir ».

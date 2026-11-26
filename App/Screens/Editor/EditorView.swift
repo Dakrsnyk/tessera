@@ -105,7 +105,7 @@ struct WidgetStudio: View {
         let first: StudioChapter = tool == nil || opening.isAccessory ? .content : .style
         _chapter = State(initialValue: first)
         _visitedChapters = State(initialValue: [first])
-        _section = State(initialValue: tool ?? .theme)
+        _section = State(initialValue: tool ?? .style)
         _sharesLook = State(initialValue: designs.count > 1 && designs.dropFirst().allSatisfy { $0.withLook(of: designs[0]) == $0 })
         isNew = request.isNew
         originals = designs
@@ -377,7 +377,7 @@ struct WidgetStudio: View {
                 if let comboNote, !comboNote.canUndo { self.comboNote = nil }
             }
             .onChange(of: sections) { _, shown in
-                if !shown.contains(section) { section = .theme }
+                if !shown.contains(section) { section = .style }
             }
             .onChange(of: sharesLook) { _, shares in
                 if shares { shareLook() }
@@ -656,8 +656,6 @@ struct WidgetStudio: View {
         case .size, .content:
             // In the chapter « Contenu », never a tool of « Style ».
             EmptyView()
-        case .theme:
-            StudioThemePanel(design: edited, input: input)
         case .style:
             StudioStylePanel(design: edited, input: input)
         case .colors:

@@ -144,71 +144,28 @@ struct StudioElementsPanel: View {
     }
 }
 
-// MARK: - Thème
-
-/// Complete themes: every setting at once (style, colors, background and border).
-struct StudioThemePanel: View {
-    @Binding var design: WidgetDesign
-    let input: StudioInput
-    @Environment(AppModel.self) private var model
-
-    var body: some View {
-        StudioNote(text: tr("Un thème règle tout d'un coup : style, couleurs, fond et bordure. Ensuite, la couleur principale ou une palette (Couleurs) repeint tout le widget."), symbol: "sparkles")
-        StudioPreviewGrid(
-            options: StylePreset.all,
-            input: input,
-            variant: { $0.applied(to: design) },
-            title: \.name,
-            subtitle: { $0.summary },
-            isSelected: { preset in
-                let applied = preset.applied(to: design)
-                return applied.themeID == design.themeID && applied.accentHex == design.accentHex
-                    && applied.background == design.background && applied.style.look == design.style.look
-            },
-            showsLock: { $0.isPremium && !model.isPremium },
-            identifier: { "preset-\($0.id)" },
-            select: { design = $0.applied(to: design) }
-        )
-    }
-}
-
 // MARK: - Style
 
-/// Styles: the look and the composition (layout, shapes, text, icons, depth); the colors stay.
+/// Styles (« Thème » and « Style » until the 2026-11-26, now one tool): each one a complete look, the 4 originals
+/// free, every other one Premium. Only the look changes: the content, the lines and the parts hidden stay.
 struct StudioStylePanel: View {
     @Binding var design: WidgetDesign
     let input: StudioInput
     @Environment(AppModel.self) private var model
 
     var body: some View {
-        StudioNote(text: tr("Un style change l'apparence et la composition : disposition, formes, texte, icônes, ombre. Tes couleurs restent."), symbol: "swatchpalette")
+        StudioNote(text: tr("Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur."), symbol: "swatchpalette")
         StudioPreviewGrid(
-            options: ThemeCatalog.all,
+            options: StyleLibrary.all,
             input: input,
-            variant: { theme in
-                var copy = design
-                copy.themeID = theme.id
-                return copy
-            },
+            variant: { $0.applied(to: design) },
             title: \.name,
-            subtitle: { $0.isPremium ? nil : tr("Gratuit") },
-            isSelected: { $0.id == design.themeID },
+            subtitle: { $0.summary },
+            isSelected: { $0.matches(design) },
             showsLock: { $0.isPremium && !model.isPremium },
-            identifier: { "theme-\($0.id.rawValue)" },
-            select: { design.themeID = $0.id }
+            identifier: { "style-\($0.id)" },
+            select: { design = $0.applied(to: design) }
         )
-        Button {
-            withAnimation {
-                let hidden = design.style.hidden
-                design.style = StyleOptions()
-                design.style.hidden = hidden
-            }
-        } label: {
-            Label(tr("Revenir aux réglages du style"), systemImage: "arrow.uturn.backward")
-                .frame(maxWidth: .infinity, minHeight: 44)
-        }
-        .buttonStyle(.bordered)
-        .disabled(design.style.look.isDefault)
     }
 }
 

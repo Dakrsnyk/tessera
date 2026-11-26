@@ -15,7 +15,8 @@ enum WidgetGroup: String, CaseIterable, Identifiable {
     var kinds: [WidgetKind] {
         switch self {
         case .dates: [.birthday, .holiday, .moonPhase, .weekView, .ageProgress]
-        case .focus: [.priorities, .counter, .project, .deadline, .deepWork]
+        // `.priorities` (Top 3) is retired: kept last so the group still owns it, never shown first.
+        case .focus: [.counter, .project, .deadline, .deepWork, .priorities]
         case .habitsPlus: [.habitStreak, .habitWeek, .habitRate]
         case .nutrition: [.caloriesLeft, .macros, .proteinLeft, .mealsToday, .nutritionWeek, .nutritionStreak, .quickFood, .nextMeal]
         case .fitness: [.todaysWorkout, .trainingStreak, .nextSet, .restTimer, .weeklyVolume, .personalRecords, .caloriesBurned, .workoutMonth]
@@ -55,7 +56,7 @@ enum WidgetGroup: String, CaseIterable, Identifiable {
     var summary: String {
         switch self {
         case .dates: tr("Anniversaire, jours fériés, lune et semaine.")
-        case .focus: tr("Top 3, compteurs, projets, échéances et deep work.")
+        case .focus: tr("Compteurs, projets, échéances et deep work.")
         case .habitsPlus: tr("Séries, semaine et taux de réussite de tes habitudes.")
         case .nutrition: tr("Calories, macros, repas et ajout rapide.")
         case .fitness: tr("Séance du jour, séries, repos, volume et records.")
@@ -81,7 +82,9 @@ enum WidgetGroup: String, CaseIterable, Identifiable {
     func defaultKind(for family: WidgetFamily) -> WidgetKind {
         // On the Lock Screen the schedule (the day's events, then tomorrow's) comes before « Prochain cours ».
         if self == .student, family == .accessoryRectangular || family == .accessoryInline, kinds.contains(.timetable) { return .timetable }
-        return kinds.first { $0.families.contains(family) } ?? flagship
+        // Retired widgets (Top 3, Auto) are never the default; a group with nothing left falls back to the clock.
+        let live = kinds.filter { !$0.isRetired }
+        return live.first { $0.families.contains(family) } ?? live.first ?? .clock
     }
 
     static func group(for kind: WidgetKind) -> WidgetGroup? {

@@ -230,7 +230,7 @@ enum DailyBrief {
             case .budget: tr("Donne ton budget du mois pour voir ce qu'il te reste chaque jour.")
             case .habits: tr("Ajoute une habitude à suivre chaque jour.")
             case .priorities: tr("Ajoute tes tâches ou ton top 3 du jour.")
-            case .reminders: tr("Examens, devoirs, factures, échéances : ce qui approche apparaîtra ici.")
+            case .reminders: tr("Ajoute tes tâches à ne pas oublier.")
             case .steps: tr("Autorise le compteur de pas : tes pas du jour apparaîtront ici.")
             case .business: tr("Note tes ventes : ton chiffre d'affaires du mois apparaîtra ici.")
             case .travel: tr("Ajoute un voyage : son compte à rebours apparaîtra ici.")

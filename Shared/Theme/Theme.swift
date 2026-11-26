@@ -210,7 +210,7 @@ enum ThemeCatalog {
     /// Styles that change the composition too, not only the colors.
     static let studioThemes: [WidgetTheme] = [
         WidgetTheme(
-            id: .modern, name: tr("Moderne"), tagline: tr("Net, doux, pastilles d'icônes"), isPremium: false,
+            id: .modern, name: tr("Moderne"), tagline: tr("Net, doux, pastilles d'icônes"), isPremium: true,
             background: .solid(.adaptive(light: "FFFFFF", dark: "17181B")),
             primary: .adaptive(light: "101114", dark: "F4F4F6"),
             secondary: .adaptive(light: "74757B", dark: "9A9BA1"),
@@ -220,7 +220,7 @@ enum ThemeCatalog {
             preset: preset { $0.iconStyle = .circle; $0.shape = .soft; $0.iconFamily = .filled }
         ),
         WidgetTheme(
-            id: .card, name: tr("Carte"), tagline: tr("Le contenu posé sur une carte"), isPremium: false,
+            id: .card, name: tr("Carte"), tagline: tr("Le contenu posé sur une carte"), isPremium: true,
             background: .solid(.adaptive(light: "E9ECF1", dark: "0B0C0F")),
             primary: .adaptive(light: "15171C", dark: "F2F3F5"),
             secondary: .adaptive(light: "656A73", dark: "979BA3"),
@@ -230,7 +230,7 @@ enum ThemeCatalog {
             preset: preset { $0.shape = .panel; $0.depth = .soft; $0.shadowOpacity = 0.25 }
         ),
         WidgetTheme(
-            id: .soft, name: tr("Doux"), tagline: tr("Formes rondes, tons tendres"), isPremium: false,
+            id: .soft, name: tr("Doux"), tagline: tr("Formes rondes, tons tendres"), isPremium: true,
             background: .solid(.adaptive(light: "F6F1FA", dark: "201C27")),
             primary: .adaptive(light: "2E2438", dark: "F3EEF8"),
             secondary: .adaptive(light: "776883", dark: "A99DB5"),
@@ -240,7 +240,7 @@ enum ThemeCatalog {
             preset: preset { $0.shape = .soft; $0.iconStyle = .circle; $0.chartThickness = 1.3 }
         ),
         WidgetTheme(
-            id: .compact, name: tr("Compact"), tagline: tr("Plus d'infos, moins d'espace"), isPremium: false,
+            id: .compact, name: tr("Compact"), tagline: tr("Plus d'infos, moins d'espace"), isPremium: true,
             background: .solid(.adaptive(light: "FFFFFF", dark: "141416")),
             primary: .adaptive(light: "111114", dark: "F5F5F7"),
             secondary: .adaptive(light: "757579", dark: "98989F"),
@@ -479,7 +479,7 @@ enum ThemeCatalog {
             preset: preset { $0.texture = .diagonal; $0.textureOpacity = 0.2; $0.layout = .graph; $0.chart = .line; $0.shape = .rounded }
         ),
         WidgetTheme(
-            id: .forest, name: tr("Sous-bois"), tagline: tr("Mousse, papier et titres à empattements"), isPremium: false,
+            id: .forest, name: tr("Sous-bois"), tagline: tr("Mousse, papier et titres à empattements"), isPremium: true,
             background: .solid(.adaptive(light: "EEF3EA", dark: "18221B")),
             primary: .adaptive(light: "1F3324", dark: "E6EFE3"),
             secondary: .adaptive(light: "5D7361", dark: "A3B8A6"),
@@ -520,7 +520,7 @@ enum ThemeCatalog {
             preset: preset { $0.texture = .grain; $0.textureOpacity = 0.4; $0.shape = .rounded; $0.iconStyle = .outline }
         ),
         WidgetTheme(
-            id: .glacier, name: tr("Glacier"), tagline: tr("Bleu de glace, net et lumineux"), isPremium: false,
+            id: .glacier, name: tr("Glacier"), tagline: tr("Bleu de glace, net et lumineux"), isPremium: true,
             background: .gradient(["E0F2FF", "A7C7E7"]),
             primary: .fixed("0F2A44"), secondary: .fixed("3A536B"),
             tint: .accent, panel: .fixed("FFFFFF", 0.5),
@@ -732,6 +732,7 @@ struct ResolvedStyle {
     var labelWeight: Font.Weight
     var uppercaseLabels: Bool
     var lowercaseLabels: Bool
+    var smallCapsLabels = false
     var alignment: ContentAlignment
     var showsTitle: Bool
     var showsDetails: Bool
@@ -891,6 +892,10 @@ struct ResolvedStyle {
         case .lower:
             self.uppercaseLabels = false
             self.lowercaseLabels = true
+        case .smallCaps:
+            self.uppercaseLabels = false
+            self.lowercaseLabels = false
+            self.smallCapsLabels = true
         }
         self.alignment = design.alignment
         self.showsTitle = design.showsTitle && !options.isHidden("title")
@@ -941,10 +946,13 @@ struct ResolvedStyle {
 
     /// The small title of a widget.
     func label(_ size: CGFloat) -> Font {
+        let font: Font
         if let customFont {
-            return FontCatalog.font(customFont, size: size * options.titleScale, bold: FontCatalog.isBold(labelWeight))
+            font = FontCatalog.font(customFont, size: size * options.titleScale, bold: FontCatalog.isBold(labelWeight))
+        } else {
+            font = .system(size: size * options.titleScale, weight: labelWeight, design: fontDesign)
         }
-        return .system(size: size * options.titleScale, weight: labelWeight, design: fontDesign)
+        return smallCapsLabels ? font.lowercaseSmallCaps() : font
     }
 
     func labelText(_ text: String) -> String {

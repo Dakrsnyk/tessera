@@ -147,6 +147,22 @@ final class AppearanceAndStoreTests: XCTestCase {
             XCTAssertGreaterThanOrEqual(pack.smallDesigns().count, 3, "\(pack.id) needs three small widgets for its card")
         }
         XCTAssertTrue(PackCatalog.all.contains { !$0.isPremium }, "Some packs stay free")
+        for pack in PackCatalog.all {
+            XCTAssertFalse(pack.kinds.contains { $0.isRetired }, "\(pack.id) offers a removed widget")
+            XCTAssertFalse(pack.designs().contains { $0.kind.isRetired }, "\(pack.id)")
+        }
+        XCTAssertNil(PackCatalog.pack("car"), "Auto is removed")
+    }
+
+    func testFocusGroupNeverDefaultsToARetiredWidget() {
+        for group in WidgetGroup.allCases {
+            for family in group.families {
+                XCTAssertFalse(group.defaultKind(for: family).isRetired, "\(group) \(family)")
+            }
+        }
+        XCTAssertFalse(WidgetGroup.focus.flagship.isRetired)
+        XCTAssertFalse(WidgetGroup.focus.defaultKind(for: .systemSmall).isRetired)
+        XCTAssertFalse(WidgetGroup.car.defaultKind(for: .systemSmall).isRetired)
     }
 
     func testThisWeeksEditionIsStableAllWeek() throws {

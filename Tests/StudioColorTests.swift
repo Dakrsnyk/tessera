@@ -189,7 +189,8 @@ final class StudioColorTests: XCTestCase {
     }
 
     func testOldSectionNamesStillOpen() {
-        XCTAssertEqual(StudioSection(name: "themes"), .theme)
+        XCTAssertEqual(StudioSection(name: "themes"), .style)
+        XCTAssertEqual(StudioSection(name: "theme"), .style, "Thème et Style ne font plus qu'un")
         XCTAssertEqual(StudioSection(name: "style"), .style)
         XCTAssertEqual(StudioSection(name: "colors"), .colors)
         XCTAssertNil(StudioSection(name: "layout"))

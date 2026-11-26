@@ -389,12 +389,12 @@ final class StudioUITests: XCTestCase {
         let height = app.frame.height > 200 ? app.frame.height : 874
 
         // A setting changed: the settings rise, the widget stays on screen, smaller.
-        section("theme")
+        section("style")
         settle(handle)
         XCTAssertEqual(handle.label, "Agrandir les réglages", "Ouvrir « Style » ne doit pas faire monter les réglages")
         // Measured in the same chapter as the raised settings: « Style » adds its row of tools above them.
         let lowered = scrollArea(height: height, bottomMargin: 125)
-        tapButton("preset-midnight")
+        tapButton("style-dark")
         XCTAssertTrue(waitUntil { handle.label == "Agrandir l'aperçu" }, "Les réglages ne montent pas quand on change un réglage")
         XCTAssertTrue(waitUntil { widget.frame.height < large * 0.8 }, "Le widget ne rapetisse pas quand les réglages montent")
         // The settings rise with a spring: measured where they end up, not on their way.
@@ -432,7 +432,7 @@ final class StudioUITests: XCTestCase {
     // MARK: Chapters and tools
 
     /// The tools of « Style » (the row under the chapters): « Taille » and « Contenu » are in the chapter « Contenu ».
-    private static let styleTools = ["theme", "style", "colors", "background", "border", "chart", "density", "myStyles"]
+    private static let styleTools = ["style", "colors", "background", "border", "chart", "density", "myStyles"]
 
     /// The tools are in a horizontal bar that centers the tool chosen: going one tool at a time, the next one is
     /// always on screen. Opens the chapter « Style » first.
@@ -460,8 +460,8 @@ final class StudioUITests: XCTestCase {
         reveal(element: name, named: "widget-name").tap()
         name.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: 30) + "Studio test\n")
 
-        section("theme")
-        tapButton("preset-midnight")
+        section("style")
+        tapButton("style-dark")
         snapshot("theme")
 
         // A palette changes every color; the arrows take it back and bring it again.

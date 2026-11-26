@@ -13,6 +13,8 @@ import WidgetKit
 /// - `widget <name> kind= family=small|medium|large|rect|circular|inline [theme=] [preset=] [palette=]
 ///   [accent=HEX] [recolor=HEX] [template=] [scheme=light|dark] [ink=HEX] [scale=] [render=image|snapshot]`:
 ///   the widget as `WidgetPreview` draws it in the app, transparent around its rounded shape.
+/// - `styles <name> [page=1] [per=20] kind= [family=small|medium|large] [scale=]`: a page of the style library as
+///   the Studio's Style tab shows it (one picture; a page past the end writes no file and says so).
 /// - `setupwidgets <name> setup= [wall=] [scale=]`: every widget of a Store setup as the setup draws it
 ///   (`<name>-<index>.png`, then the Lock Screen ones), and `<name>.json` (index, kind, family, place).
 /// - `home <name> setup= [wall=]`, `lock <name> setup= [wall=]`, `wall <name> wall=`: the Store's screens
@@ -81,6 +83,7 @@ enum AdExport {
         defer { StudentState.adCourseColors = nil }
         switch job.type {
         case "widget": return try await widget(job)
+        case "styles": return try await styles(job)
         case "setupwidgets": return try await setupWidgets(job)
         case "home": return try await screen(SetupHomeScreen(setup: storeSetup(job)), job)
         case "lock": return try await screen(SetupLockScreen(setup: storeSetup(job)), job)
@@ -241,6 +244,53 @@ enum AdExport {
         // Lock Screen widgets have gauges and bars UIKit may draw: a real snapshot unless the job says otherwise.
         let usesSnapshot = job.string("render").map { $0 == "snapshot" } ?? widgetFamily.isAccessory
         let (drawn, renderer) = await picture(view, width: size.width, height: size.height, scale: job.scale(defaultScale(widgetFamily)), snapshot: usesSnapshot)
+        try save(drawn, "\(job.name).png")
+        return AdOutcome(files: 1, note: renderer)
+    }
+
+    // MARK: - Style board
+
+    /// `styles <name> page=N per=20 kind= family=small|medium|large scale=`: page N of `StyleLibrary.all` as one picture,
+    /// like the Studio's Style tab (2 columns, preview, name, summary, lock). A page past the end writes no file.
+    private static func styles(_ job: AdJob) async throws -> AdOutcome {
+        guard let raw = job.string("kind"), let kind = WidgetKind(rawValue: raw) else {
+            throw AdFailure("unknown kind « \(job.string("kind") ?? "") »")
+        }
+        let familyText = job.string("family") ?? "small"
+        guard let widgetFamily = family(familyText),
+              let format = WidgetFormat.allCases.first(where: { $0.family == widgetFamily }) else {
+            throw AdFailure("unknown family « \(familyText) »")
+        }
+        let per = max(1, job.int("per", 20)), page = max(1, job.int("page", 1))
+        let pages = (StyleLibrary.all.count + per - 1) / per
+        guard page <= pages else { return AdOutcome(files: 0, note: "no page \(page): \(pages) pages of \(per) styles") }
+        let looks = Array(StyleLibrary.all.dropFirst((page - 1) * per).prefix(per))
+        let boardWidth: CGFloat = 402, margin: CGFloat = 16, gap: CGFloat = 10
+        let columnWidth = (boardWidth - 2 * margin - gap) / 2
+        let rows = stride(from: 0, to: looks.count, by: 2).map { Array(looks[$0..<min($0 + 2, looks.count)]) }
+        let board = VStack(alignment: .leading, spacing: 14) {
+            Text("Styles · page \(page)/\(pages)")
+                .font(.headline)
+            ForEach(rows.indices, id: \.self) { row in
+                HStack(alignment: .top, spacing: gap) {
+                    ForEach(rows[row]) { look in
+                        let design = look.applied(to: WidgetDesign(kind: kind, format: format))
+                        StudioPreviewTile(
+                            design: design, family: widgetFamily, payload: MK.payload(design),
+                            title: look.name, subtitle: look.summary, isSelected: false,
+                            showsLock: look.isPremium, width: columnWidth - 6
+                        )
+                        .frame(width: columnWidth)
+                    }
+                    if rows[row].count == 1 { Color.clear.frame(width: columnWidth, height: 1) }
+                }
+            }
+        }
+        .padding(margin)
+        .frame(width: boardWidth, alignment: .topLeading)
+        .background(Color(uiColor: .systemGroupedBackground))
+        .environment(\.colorScheme, .light)
+        let (drawn, renderer) = await picture(board, width: boardWidth, height: nil, scale: job.scale(2), snapshot: true)
         try save(drawn, "\(job.name).png")
         return AdOutcome(files: 1, note: renderer)
     }

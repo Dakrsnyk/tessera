@@ -126,6 +126,14 @@ struct StyleDepth: ViewModifier {
         case .hardShadow:
             let shift = max(2, offset)
             content.shadow(color: style.shadowColor.opacity(min(1, opacity * 2.5)), radius: 0, x: shift, y: shift)
+        case .longShadow:
+            // Each shadow casts the previous ones: offsets 1, 3, 7 then 13 points, in one flat 45 degree streak.
+            let tone = style.shadowColor.opacity(min(1, max(0.35, opacity * 2.5)))
+            content
+                .shadow(color: tone, radius: 0, x: 1, y: 1)
+                .shadow(color: tone, radius: 0, x: 2, y: 2)
+                .shadow(color: tone, radius: 0, x: 4, y: 4)
+                .shadow(color: tone, radius: 0, x: 6, y: 6)
         }
     }
 }
@@ -176,6 +184,30 @@ struct StyleBorder: View {
         case .pixel:
             let block = max(3, width * 2)
             PixelFrame(block: block).stroke(color, style: StrokeStyle(lineWidth: block, lineCap: .square, lineJoin: .miter))
+        case .ticket:
+            ZStack {
+                ContainerRelativeShape().strokeBorder(color, lineWidth: width)
+                TicketNotches().stroke(color, lineWidth: max(1, width))
+            }
+        case .stitched:
+            let inset = width * 2 + 4
+            let dash = [width * 3 + 3, width * 2 + 2]
+            ZStack {
+                ContainerRelativeShape().inset(by: inset)
+                    .strokeBorder(Color.black.opacity(0.22), style: StrokeStyle(lineWidth: width, dash: dash))
+                    .offset(x: 0.7, y: 0.7)
+                ContainerRelativeShape().inset(by: inset)
+                    .strokeBorder(color, style: StrokeStyle(lineWidth: width, dash: dash))
+            }
+        case .bevel:
+            let edge = max(2, width)
+            let dark = style.isDarkSurface
+            ZStack {
+                BevelFrame(edge: edge, light: true).fill(Color.white.opacity((dark ? 0.35 : 0.9) * o.borderOpacity))
+                BevelFrame(edge: edge, light: false).fill(Color.black.opacity((dark ? 0.7 : 0.4) * o.borderOpacity))
+            }
+        case .inset:
+            ContainerRelativeShape().inset(by: 7 + width).strokeBorder(color, lineWidth: max(0.5, width * 0.5))
         }
     }
 }
@@ -215,6 +247,49 @@ struct PixelFrame: Shape {
     }
 }
 
+/// Half circles cut into the left and right sides, like the stubs of a ticket.
+struct TicketNotches: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        let radius: CGFloat = 5
+        var y = rect.minY + 30
+        while y < rect.maxY - 30 {
+            path.move(to: CGPoint(x: rect.minX, y: y - radius))
+            path.addArc(center: CGPoint(x: rect.minX, y: y), radius: radius, startAngle: .degrees(-90), endAngle: .degrees(90), clockwise: false)
+            path.move(to: CGPoint(x: rect.maxX, y: y - radius))
+            path.addArc(center: CGPoint(x: rect.maxX, y: y), radius: radius, startAngle: .degrees(-90), endAngle: .degrees(90), clockwise: true)
+            y += 18
+        }
+        return path
+    }
+}
+
+/// Two sides of a frame in mitered strips: the top and left ones (light), or the bottom and right ones (dark).
+struct BevelFrame: Shape {
+    let edge: CGFloat
+    let light: Bool
+
+    func path(in rect: CGRect) -> Path {
+        let t = edge
+        var path = Path()
+        if light {
+            path.addLines([
+                CGPoint(x: rect.minX, y: rect.minY), CGPoint(x: rect.maxX, y: rect.minY),
+                CGPoint(x: rect.maxX - t, y: rect.minY + t), CGPoint(x: rect.minX + t, y: rect.minY + t),
+                CGPoint(x: rect.minX + t, y: rect.maxY - t), CGPoint(x: rect.minX, y: rect.maxY)
+            ])
+        } else {
+            path.addLines([
+                CGPoint(x: rect.maxX, y: rect.maxY), CGPoint(x: rect.minX, y: rect.maxY),
+                CGPoint(x: rect.minX + t, y: rect.maxY - t), CGPoint(x: rect.maxX - t, y: rect.maxY - t),
+                CGPoint(x: rect.maxX - t, y: rect.minY + t), CGPoint(x: rect.maxX, y: rect.minY)
+            ])
+        }
+        path.closeSubpath()
+        return path
+    }
+}
+
 // MARK: - Texture
 
 /// A fine pattern over the background: grain, paper, dots, grid, lines, stripes, noise, or the
@@ -249,6 +324,13 @@ struct TextureView: View {
         case .scanlines: 0.26
         case .halftone: 0.24
         case .pixels: 0.1
+        case .guilloche: 0.35
+        case .marble: 0.35
+        case .terrazzo: 0.3
+        case .linen: 0.28
+        case .topo: 0.35
+        case .brushed: 0.2
+        case .sunburst: 0.14
         }
     }
 }
@@ -295,6 +377,106 @@ struct TexturePattern: Shape {
                 }
                 y += side
                 row += 1
+            }
+        case .guilloche:
+            // A rosette of 36 interlaced circles around the center, as on a watch dial.
+            let center = CGPoint(x: rect.midX, y: rect.midY)
+            let big = max(rect.width, rect.height) * 0.5
+            let ring = big * 0.45
+            var rosette = Path()
+            for index in 0..<36 {
+                let angle = CGFloat(index) / 36 * .pi * 2
+                let middle = CGPoint(x: center.x + cos(angle) * ring, y: center.y + sin(angle) * ring)
+                rosette.addEllipse(in: CGRect(x: middle.x - big * 0.55, y: middle.y - big * 0.55, width: big * 1.1, height: big * 1.1))
+            }
+            path.addPath(rosette.strokedPath(StrokeStyle(lineWidth: 0.5)))
+        case .marble:
+            // Veins that drift downward, each step turning a little (fixed seed: always the same stone).
+            var generator = TextureRandom(seed: 89)
+            var veins = Path()
+            for _ in 0..<7 {
+                var point = CGPoint(x: rect.minX + CGFloat(generator.next()) * rect.width, y: rect.minY - 4)
+                var angle = CGFloat.pi / 2 + (CGFloat(generator.next()) - 0.5) * 1.2
+                veins.move(to: point)
+                for _ in 0..<80 {
+                    angle += (CGFloat(generator.next()) - 0.5) * 0.7
+                    angle = min(max(angle, 0.3), CGFloat.pi - 0.3)
+                    point = CGPoint(x: point.x + cos(angle) * 5, y: point.y + sin(angle) * 5)
+                    veins.addLine(to: point)
+                    if point.y > rect.maxY + 4 { break }
+                }
+            }
+            path.addPath(veins.strokedPath(StrokeStyle(lineWidth: 0.9, lineCap: .round, lineJoin: .round)))
+        case .terrazzo:
+            // Irregular chips of stone, scattered.
+            var generator = TextureRandom(seed: 144)
+            for _ in 0..<min(Int(rect.width * rect.height / 700), 160) {
+                let cx = rect.minX + CGFloat(generator.next()) * rect.width
+                let cy = rect.minY + CGFloat(generator.next()) * rect.height
+                let size = 2 + CGFloat(generator.next()) * 4
+                var chip = Path()
+                for corner in 0..<5 {
+                    let angle = (CGFloat(corner) + CGFloat(generator.next()) * 0.6) / 5 * .pi * 2
+                    let reach = size * (0.6 + CGFloat(generator.next()) * 0.6)
+                    let spot = CGPoint(x: cx + cos(angle) * reach, y: cy + sin(angle) * reach)
+                    if corner == 0 { chip.move(to: spot) } else { chip.addLine(to: spot) }
+                }
+                chip.closeSubpath()
+                path.addPath(chip)
+            }
+        case .linen:
+            // Two sets of fine threads crossing.
+            var y = rect.minY
+            while y < rect.maxY {
+                path.addRect(CGRect(x: rect.minX, y: y, width: rect.width, height: 0.5))
+                y += 3
+            }
+            var x = rect.minX + 1.5
+            while x < rect.maxX {
+                path.addRect(CGRect(x: x, y: rect.minY, width: 0.4, height: rect.height))
+                x += 3
+            }
+        case .topo:
+            // Contour lines: wobbly closed curves around a point near the top left.
+            let center = CGPoint(x: rect.minX + rect.width * 0.3, y: rect.minY + rect.height * 0.4)
+            let reach = hypot(rect.width, rect.height)
+            var contours = Path()
+            var radius: CGFloat = 8
+            while radius < reach {
+                var angle: CGFloat = 0
+                var first = true
+                while angle <= CGFloat.pi * 2 {
+                    let wobble = 4 * sin(3 * angle + radius / 10) + 3 * sin(5 * angle - radius / 7)
+                    let spot = CGPoint(x: center.x + cos(angle) * (radius + wobble), y: center.y + sin(angle) * (radius + wobble))
+                    if first { contours.move(to: spot); first = false } else { contours.addLine(to: spot) }
+                    angle += 0.15
+                }
+                contours.closeSubpath()
+                radius += 9
+            }
+            path.addPath(contours.strokedPath(StrokeStyle(lineWidth: 0.7, lineJoin: .round)))
+        case .brushed:
+            // Fine horizontal strokes of varying thickness, some missing.
+            var generator = TextureRandom(seed: 233)
+            var y = rect.minY
+            while y < rect.maxY {
+                if generator.next() > 0.35 {
+                    path.addRect(CGRect(x: rect.minX, y: y, width: rect.width, height: 0.3 + CGFloat(generator.next()) * 0.5))
+                }
+                y += 1.3
+            }
+        case .sunburst:
+            // Alternate wedges from the center, as on a satin dial.
+            let center = CGPoint(x: rect.midX, y: rect.midY)
+            let reach = hypot(rect.width, rect.height)
+            let wedges = 48
+            for index in stride(from: 0, to: wedges, by: 2) {
+                let a = CGFloat(index) / CGFloat(wedges) * .pi * 2
+                let b = CGFloat(index + 1) / CGFloat(wedges) * .pi * 2
+                path.move(to: center)
+                path.addLine(to: CGPoint(x: center.x + cos(a) * reach, y: center.y + sin(a) * reach))
+                path.addLine(to: CGPoint(x: center.x + cos(b) * reach, y: center.y + sin(b) * reach))
+                path.closeSubpath()
             }
         case .dots:
             let step: CGFloat = 9

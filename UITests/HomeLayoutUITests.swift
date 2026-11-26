@@ -176,7 +176,7 @@ extension ProfileUITests {
         func inside(_ corner: XCUIElement) -> XCUICoordinate {
             corner.coordinate(withNormalizedOffset: .zero).withOffset(CGVector(dx: 66, dy: 76))
         }
-        let others = ["planning", "workout", "habits", "steps", "budget", "priorities", "reminders"]
+        let others = ["planning", "workout", "habits", "steps", "budget", "reminders"]
             .map(corner)
             .filter { $0.exists && inMiddle($0.frame) }
         // The nearest row, its LEFT card: the wide card dropped onto it changed the order without moving anything on

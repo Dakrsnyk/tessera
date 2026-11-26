@@ -3,13 +3,13 @@ import WidgetKit
 
 /// The Widget Studio's sections, in the order a widget is usually made.
 enum StudioSection: String, CaseIterable, Identifiable {
-    case size, content, theme, style, colors, text, background, border, chart, density, myStyles
+    case size, content, style, colors, text, background, border, chart, density, myStyles
     var id: String { rawValue }
 
-    /// Also accepts the names of sections from earlier versions (« Thèmes »).
+    /// Also accepts the names of sections from earlier versions (« Thèmes », « Thème » : merged into « Style »).
     init?(name: String) {
-        if name == "themes" {
-            self = .theme
+        if name == "themes" || name == "theme" {
+            self = .style
         } else {
             self.init(rawValue: name)
         }
@@ -19,7 +19,6 @@ enum StudioSection: String, CaseIterable, Identifiable {
         switch self {
         case .size: tr("Taille")
         case .content: tr("Contenu")
-        case .theme: tr("Thème")
         case .style: tr("Style")
         case .colors: tr("Couleurs")
         case .text: tr("Texte")
@@ -35,7 +34,6 @@ enum StudioSection: String, CaseIterable, Identifiable {
         switch self {
         case .size: "aspectratio"
         case .content: "square.text.square"
-        case .theme: "sparkles"
         case .style: "swatchpalette"
         case .colors: "paintpalette"
         case .text: "textformat"

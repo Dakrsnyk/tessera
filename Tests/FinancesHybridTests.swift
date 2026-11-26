@@ -82,6 +82,14 @@ final class FinancesHybridTests: XCTestCase {
         XCTAssertEqual(month.first { $0.name == "Netflix" }?.isSubscription, true)
     }
 
+    func testPlannedExpensesFollowTheWindow() {
+        var state = BudgetState()
+        state.expenses = [Expense(amount: 20, categoryID: nil, date: now.addingTimeInterval(3 * 86_400)),
+                          Expense(amount: 90, categoryID: nil, date: now.addingTimeInterval(60 * 86_400))]
+        XCTAssertEqual(BudgetMath.upcoming(state, at: now, within: 30).map(\.amount), [20], "Beyond the window, a planned expense waits")
+        XCTAssertEqual(BudgetMath.upcoming(state, at: now, within: 400).map(\.amount), [20, 90])
+    }
+
     func testTheMonthAddsUpDayByDay() {
         var state = BudgetState()
         state.expenses = [Expense(amount: 100, categoryID: nil, date: date(11, 1)), Expense(amount: 50, categoryID: nil, date: date(11, 3))]

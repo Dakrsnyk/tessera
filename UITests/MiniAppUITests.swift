@@ -405,13 +405,23 @@ final class MiniAppUITests: XCTestCase {
         goBack()
         XCTAssertTrue(hero.waitForExistence(timeout: 8))
 
-        for (identifier, title) in [("finances-categories", "Catégories"), ("finances-bills", "Budget et récurrents"), ("finances-savings", "Épargne"), ("finances-trends", "Analyse")] {
+        for (identifier, title) in [("finances-bills", "Budget et récurrents"), ("finances-savings", "Épargne"), ("finances-trends", "Analyse")] {
             tap(app.buttons[identifier], title)
             XCTAssertTrue(app.navigationBars[title].waitForExistence(timeout: 8), "Page \(title) absente")
             snapshot(identifier)
             goBack()
             XCTAssertTrue(hero.waitForExistence(timeout: 8), "Retour depuis \(title)")
         }
+        // Les catégories sont dans « Analyse » (chantier 60) : on y va par cette page, puis on revient deux fois.
+        tap(app.buttons["finances-trends"], "Analyse")
+        XCTAssertTrue(app.navigationBars["Analyse"].waitForExistence(timeout: 8), "Page Analyse absente")
+        tap(app.buttons["finances-categories"], "Catégories")
+        XCTAssertTrue(app.navigationBars["Catégories"].waitForExistence(timeout: 8), "Page Catégories absente")
+        snapshot("finances-categories")
+        goBack()
+        XCTAssertTrue(app.navigationBars["Analyse"].waitForExistence(timeout: 8), "Retour vers Analyse depuis Catégories")
+        goBack()
+        XCTAssertTrue(hero.waitForExistence(timeout: 8), "Retour depuis Analyse")
         XCTAssertEqual(app.state, .runningForeground)
     }
 

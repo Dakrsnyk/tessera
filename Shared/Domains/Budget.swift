@@ -853,9 +853,9 @@ enum BudgetMath {
                 items.append(UpcomingItem(source: .fixed(item), due: due, days: DateMath.daysBetween(today, DateMath.startOfDay(due))))
             }
         }
-        // Noted ahead by the person: always listed, however far.
+        // Noted ahead by the person: listed like the others, inside the window.
         let tomorrow = DateMath.nextMidnight(after: date)
-        for expense in state.expenses where expense.date >= tomorrow {
+        for expense in state.expenses where expense.date >= tomorrow && expense.date < end {
             items.append(UpcomingItem(source: .planned(expense), due: expense.date, days: DateMath.daysBetween(today, DateMath.startOfDay(expense.date))))
         }
         return items.sorted { $0.due == $1.due ? $0.name < $1.name : $0.due < $1.due }

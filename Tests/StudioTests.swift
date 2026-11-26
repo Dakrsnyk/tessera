@@ -128,7 +128,7 @@ final class StudioTests: XCTestCase {
         XCTAssertEqual(ThemeCatalog.all.count, ThemeID.allCases.count)
         XCTAssertEqual(Set(ThemeCatalog.all.map(\.id)).count, ThemeCatalog.all.count)
         XCTAssertGreaterThanOrEqual(ThemeCatalog.all.count, 35)
-        XCTAssertGreaterThanOrEqual(ThemeCatalog.free.count, 8)
+        XCTAssertEqual(Set(ThemeCatalog.free.map { $0.id }), [.minimal, .light, .dark, .monochrome], "Gratuit : les 4 styles d'origine seulement")
         // The Studio styles change the composition too, not only the colors.
         let composing = ThemeCatalog.studioThemes.filter { !$0.preset.isDefault }
         XCTAssertEqual(composing.count, ThemeCatalog.studioThemes.count)
