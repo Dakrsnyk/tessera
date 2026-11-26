@@ -57,6 +57,9 @@ enum AdExport {
             lines.append("none\t-\t0\terror: Documents/ad_export.txt is missing or empty")
         }
         for job in jobs {
+            // The job about to start, so that a job that never ends (a layout that loops) is named in the CI report.
+            try? (lines + ["\(job.type)\t\(job.name)\t0\tstarted, not finished"]).joined(separator: "\n")
+                .write(to: folder.appendingPathComponent("progress.txt"), atomically: true, encoding: .utf8)
             let line: String
             do {
                 let outcome = try await perform(job)
