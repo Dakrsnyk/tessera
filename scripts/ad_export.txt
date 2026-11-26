@@ -365,7 +365,6 @@ widget priorities-s-blossom kind=priorities family=small scale=4 theme=blossom
 widget priorities-s-modern kind=priorities family=small scale=4 theme=modern
 widget priorities-s-business kind=priorities family=small scale=4 theme=business
 # --- 2026-11-10 : les six styles du planning Large, cours aux teintes du style (courses=…) ; ce run ne rend qu'eux
-only timetable-l-minimal timetable-l-dark timetable-l-pastel timetable-l-blossom timetable-l-modern timetable-l-business
 # --- 2026-11-10 (soir) : l'écran d'accueil « planning » (Forêt) décliné en cinq harmonies de couleurs : même disposition,
 # mêmes formes, seuls le fond, les icônes, l'accent et les cours changent (demande du PDG) ; ce run ne rend qu'eux
 home home-planning-ocean setup=planning-ocean scale=3 courses=ocean
@@ -373,10 +372,8 @@ home home-planning-night setup=planning-night scale=3 courses=indigo
 home home-planning-rose setup=planning-rose scale=3 courses=rose
 home home-planning-sand setup=planning-sand scale=3 courses=sand
 home home-planning-graphite setup=planning-graphite scale=3 courses=mono
-only home-planning-ocean home-planning-night home-planning-rose home-planning-sand home-planning-graphite
 # --- Demande cj-32a8f8e0 du QG marketing
 widget habits-l-paper kind=habits family=large scale=3 theme=paper
-only habits-l-paper
 # --- 2026-11-11 : pub « Voici ton téléphone… et voici le mien » (avant / après), visuels jamais montrés dans une pub.
 # Écran Sport et nutrition « Volt » : style Sport (noir, jaune fluo) ; écran Organisation « Glacier » (bleu de glace) ;
 # écran Finance et entreprise « Marine et or » : style Business, accent or. Données de démo de l'app.
@@ -404,7 +401,6 @@ widget profit-s-business kind=profit family=small scale=4 theme=business accent=
 widget revenueGoal-s-business kind=revenueGoal family=small scale=4 theme=business accent=E5B567
 widget budgetLeft-s-business kind=budgetLeft family=small scale=4 theme=business accent=E5B567
 widget spendingByCategory-m-business kind=spendingByCategory family=medium scale=3 theme=business accent=E5B567
-only todaysWorkout-m-sport weeklyVolume-m-sport workoutMonth-m-sport fitnessDashboard-m-sport calories-s-sport macros-s-sport personalRecords-s-sport upNext-l-glacier calendar-l-glacier myDay-l-glacier habitWeek-m-glacier tasks-s-glacier habits-s-glacier habitRate-s-glacier progress-s-glacier mrr-s-business mrr-m-business revenueTrend-m-business revenueTrend-l-business businessDashboard-m-business profit-s-business revenueGoal-s-business budgetLeft-s-business spendingByCategory-m-business
 # --- 2026-11-11 (suite) : agenda moyen Glacier, et Business avec un accent blanc (l'or donnait des barres olive sur le marine)
 widget upNext-m-glacier kind=upNext family=medium scale=3 theme=glacier
 widget revenueTrend-l-businessw kind=revenueTrend family=large scale=3 theme=business accent=E9EEF5
@@ -412,7 +408,6 @@ widget revenueTrend-m-businessw kind=revenueTrend family=medium scale=3 theme=bu
 widget mrr-s-businessw kind=mrr family=small scale=4 theme=business accent=E9EEF5
 widget budgetLeft-s-businessw kind=budgetLeft family=small scale=4 theme=business accent=E9EEF5
 widget spendingByCategory-m-businessw kind=spendingByCategory family=medium scale=3 theme=business accent=E9EEF5
-only upNext-m-glacier revenueTrend-l-businessw revenueTrend-m-businessw mrr-s-businessw budgetLeft-s-businessw spendingByCategory-m-businessw
 # --- 2026-11-11 (fin) : grands widgets pour la pub avant / après (le grand « ventes sur 30 jours » laisse une moitié vide)
 widget businessDashboard-l-businessw kind=businessDashboard family=large scale=3 theme=business accent=E9EEF5
 widget spendingByCategory-l-businessw kind=spendingByCategory family=large scale=3 theme=business accent=E9EEF5
@@ -421,7 +416,6 @@ widget fitnessDashboard-l-sport kind=fitnessDashboard family=large scale=3 theme
 widget weeklyVolume-l-sport kind=weeklyVolume family=large scale=3 theme=sport
 widget workoutMonth-l-sport kind=workoutMonth family=large scale=3 theme=sport
 widget nutritionWeek-m-sport kind=nutritionWeek family=medium scale=3 theme=sport
-only businessDashboard-l-businessw spendingByCategory-l-businessw businessKPIs-l-businessw fitnessDashboard-l-sport weeklyVolume-l-sport workoutMonth-l-sport nutritionWeek-m-sport
 # --- 2026-11-11 (soir) : pub avant / après, deux écrans de plus demandés par le PDG : Rose « Bien-être » (style Cerisier,
 # accent rose) et Émeraude « Voyage » (style Sous-bois sombre, accent émeraude). Widgets jamais montrés dans une pub.
 widget quote-m-blossom kind=quote family=medium scale=3 theme=blossom accent=F0508A
@@ -439,14 +433,11 @@ widget hotel-s-forest kind=hotel family=small scale=4 theme=forest scheme=dark a
 widget flight-m-forest kind=flight family=medium scale=3 theme=forest scheme=dark accent=34D399
 widget nextActivity-m-forest kind=nextActivity family=medium scale=3 theme=forest scheme=dark accent=34D399
 widget worldClock-m-forest kind=worldClock family=medium scale=3 theme=forest scheme=dark accent=34D399
-only quote-m-blossom hydration-s-blossom countdown-s-blossom birthday-s-blossom moonPhase-s-blossom mealsToday-m-blossom quote-m-soft tripCountdown-s-forest localTime-s-forest currency-s-forest tripProgress-s-forest hotel-s-forest flight-m-forest nextActivity-m-forest worldClock-m-forest
 # --- Demande cj-8e738099 du QG marketing
 widget priorities-m-light kind=priorities family=medium scale=3 theme=light
-only priorities-m-light
 # --- Demande cj-b254031f du QG marketing
 widget priorities-m-dark kind=priorities family=medium scale=3 theme=dark scheme=dark
 widget habitStreak-s-paper kind=habitStreak family=small scale=4 theme=paper
-only priorities-m-dark habitStreak-s-paper
 
 # --- Pub IRL Fitness v3 (2026-11-19) : le widget moyen combiné « Next set + Régularité » (15 reps · 3/3) en six coloris,
 # le dernier (Noir mat, accent rouge E5383B) est celui de l'écran d'accueil, avec trois widgets Fitness du même style ---
@@ -459,7 +450,6 @@ widget irl-nextSet-combo-matte kind=nextSet parts=nextSet+trainingStreak family=
 widget irl-weeklyVolume-m kind=weeklyVolume family=medium scale=3 theme=matteBlack accent=E5383B scheme=dark
 widget irl-restTimer-s kind=restTimer family=small scale=4 theme=matteBlack accent=E5383B scheme=dark
 widget irl-personalRecords-s kind=personalRecords family=small scale=4 theme=matteBlack accent=E5383B scheme=dark
-only irl-nextSet-combo-light irl-nextSet-combo-luxury irl-nextSet-combo-mars irl-nextSet-combo-neon irl-nextSet-combo-carbon irl-nextSet-combo-matte irl-weeklyVolume-m irl-restTimer-s irl-personalRecords-s
 
 # --- Campagne 2026-11 (2026-11-19) : widgets de l'app actuelle pour les écrans d'accueil des pubs par mini-app ---
 widget camp-caloriesLeft-s-light kind=caloriesLeft family=small scale=4 theme=light
@@ -501,13 +491,11 @@ widget camp-flight-m-light kind=flight family=medium scale=3 theme=light
 widget camp-hotel-s-light kind=hotel family=small scale=4 theme=light
 widget camp-nextActivity-m-light kind=nextActivity family=medium scale=3 theme=light
 widget camp-tripProgress-s-light kind=tripProgress family=small scale=4 theme=light
-only camp-caloriesLeft-s-light camp-macros-m-light camp-mealsToday-m-light camp-nutritionWeek-m-light camp-proteinLeft-s-light camp-macros-m-aurora camp-caloriesLeft-s-paper camp-budgetLeft-s-light camp-spendingByCategory-m-light camp-savingsGoal-s-light camp-billsUpcoming-m-light camp-moneyFlow-m-light camp-budgetLeft-s-liquidGlass camp-tasks-m-light camp-priorities-s-light camp-counter-s-light camp-tasks-s-light camp-timetable-l-light camp-timetable-m-light camp-nextClass-s-light camp-nextExam-s-light camp-assignments-m-light camp-semesterProgress-s-light camp-studyHours-s-light camp-habits-m-dark camp-habitStreak-s-dark camp-habitWeek-m-dark camp-hydration-s-dark camp-habitRate-s-dark camp-revenueTrend-m-light camp-mrr-s-light camp-revenueGoal-s-light camp-businessKPIs-m-light camp-profit-s-light camp-tripCountdown-s-light camp-flight-m-light camp-hotel-s-light camp-nextActivity-m-light camp-tripProgress-s-light
 
 # --- Pub IRL Fitness v4 (2026-11-19) : le Noir mat (boutons carrés) est remplacé par le Carbone (fond rayé, accent rouge) sur l'écran d'accueil ---
 widget irl-restTimer-s-carbon kind=restTimer family=small scale=4 theme=carbon accent=E5383B scheme=dark
 widget irl-personalRecords-s-carbon kind=personalRecords family=small scale=4 theme=carbon accent=E5383B scheme=dark
 widget irl-weeklyVolume-m-carbon kind=weeklyVolume family=medium scale=3 theme=carbon accent=E5383B scheme=dark
-only irl-restTimer-s-carbon irl-personalRecords-s-carbon irl-weeklyVolume-m-carbon
 
 # --- Pub Planning v2 (2026-11-19, plan du PDG) : deux pages d'écran d'accueil en clair (Planning grand + Top 3 ; Habitudes moyen + Planning petit + un autre petit) ---
 widget camp-habits-m-light kind=habits family=medium scale=3 theme=light
@@ -517,7 +505,6 @@ widget camp-timetable-s-light kind=timetable family=small scale=4 theme=light
 widget camp-calendar-s-light kind=calendar family=small scale=4 theme=light
 widget camp-habitStreak-s-light kind=habitStreak family=small scale=4 theme=light
 widget camp-upNext-l-light kind=upNext family=large scale=3 theme=light
-only camp-habits-m-light camp-habitWeek-m-light camp-upNext-s-light camp-timetable-s-light camp-calendar-s-light camp-habitStreak-s-light camp-upNext-l-light
 
 # --- Pub Planning v4 (2026-11-19) : plan Studio de 2 s, le grand Planning (emploi du temps) qui change de style dans l'aperçu
 # du Studio (capture studio-tt-light du 2026-11-18). Mêmes styles et teintes de cours que la série du 2026-11-10, app actuelle.
@@ -528,19 +515,16 @@ widget camp-timetable-l-modern kind=timetable family=large scale=3 theme=modern 
 widget camp-timetable-l-business kind=timetable family=large scale=3 theme=business courses=steel
 widget camp-timetable-l-minimal kind=timetable family=large scale=3 theme=minimal courses=ink
 widget camp-timetable-l-forest kind=timetable family=large scale=3 theme=light accent=7FA33A courses=forest
-only camp-timetable-l-dark camp-timetable-l-pastel camp-timetable-l-blossom camp-timetable-l-modern camp-timetable-l-business camp-timetable-l-minimal camp-timetable-l-forest
 
 # --- Pub Fitness organique v4 (2026-11-19) : l'Activité en direct dans la couleur d'app Rubis (Premium, rouge), comme la voit
 # un utilisateur qui l'a choisie (clé style= de live, AdExport.swift) ; « Repos [timer] » = « Rest » (plus « Rest day »). Saphir refait pour comparer.
 # (style= accepte tout nom d'AppStyleID : sapphire, ruby, cobalt… ; le plan montre alors une couleur d'app Premium)
 live live-ready-ruby state=ready set=3 sets=4 done=2 total=14 bg=real scheme=dark scale=3 style=ruby
 live live-ready-real2 state=ready set=3 sets=4 done=2 total=14 bg=real scheme=dark scale=3
-only live-ready-ruby live-ready-real2
 
 # --- Pub Fitness organique v4.2 (2026-11-20) : sur l'écran verrouillé, « Set done » touché puis le repos qui démarre (Rubis) :
 # l'état prêt (live-ready-ruby) puis le décompte juste après la série, une image par seconde de 120 à 116.
 live live-afterset-ruby from=120 to=116 set=4 sets=4 done=3 total=14 restTotal=120 bg=real scheme=dark scale=3 style=ruby
-only live-afterset-ruby
 
 # --- Pub Fitness organique v4.2 (2026-11-20) : widgets d'écran verrouillé sous l'heure (Planning, Nutrition, Fitness), app actuelle
 widget camp-lock-timetable-rect kind=timetable family=rect scale=4
@@ -548,7 +532,6 @@ widget camp-lock-upNext-rect kind=upNext family=rect scale=4
 widget camp-lock-caloriesLeft-circular kind=caloriesLeft family=circular scale=4
 widget camp-lock-trainingStreak-circular kind=trainingStreak family=circular scale=4
 widget camp-lock-nextSet-rect kind=nextSet family=rect scale=4
-only camp-lock-timetable-rect camp-lock-upNext-rect camp-lock-caloriesLeft-circular camp-lock-trainingStreak-circular camp-lock-nextSet-rect
 
 # --- Pub Planning organique v2 (2026-11-20) : cocher « Call the mechanic » dans le widget Tâches moyen (gratuit, interactif), avant / après,
 # accent Cobalt (couleur de base gratuite 3366FF) ; écran verrouillé : Tâches rectangulaire avant / après ; grand Planning et ses styles
@@ -560,41 +543,34 @@ widget camp-timetable-l-cobalt kind=timetable family=large scale=3 theme=light a
 widget camp-upNext-s-cobalt kind=upNext family=small scale=4 theme=light accent=3366FF
 widget camp-lock-tasks-rect kind=tasks family=rect scale=4
 widget camp-lock-tasks-rect-done kind=tasks family=rect scale=4 done=1
-only camp-tasks-m-cobalt camp-tasks-m-cobalt-done camp-timetable-l-cobalt camp-upNext-s-cobalt camp-lock-tasks-rect camp-lock-tasks-rect-done camp-lock-timetable-rect camp-lock-caloriesLeft-circular camp-timetable-l-light camp-timetable-l-dark camp-timetable-l-pastel camp-timetable-l-blossom camp-timetable-l-modern camp-timetable-l-business camp-timetable-l-minimal camp-timetable-l-forest camp-priorities-s-light camp-habits-m-light camp-timetable-s-light camp-tasks-s-light
 
 # --- Pub Habitudes organique v2 (2026-11-20) : le widget Habitudes moyen juste avant puis après le toucher (todo=1 : la dernière
 # habitude faite aujourd'hui décochée, clé ajoutée le 2026-11-20), et le widget Série, du même run.
 widget camp-habits-m-light-todo kind=habits family=medium scale=3 theme=light todo=1
 widget camp-habitStreak-s-light kind=habitStreak family=small scale=4 theme=light
-only camp-habits-m-light camp-habits-m-light-todo camp-habitStreak-s-light
 
 # --- Pub Nutrition organique v2 (2026-11-20) : widgets Nutrition actuels pour l'écran d'accueil (ceux de kit2026 datent du 2026-10-31)
 widget camp-caloriesLeft-s-light kind=caloriesLeft family=small scale=4 theme=light
 widget camp-macros-m-light kind=macros family=medium scale=3 theme=light
 widget camp-caloriesLeft-m-light kind=caloriesLeft family=medium scale=3 theme=light
-only camp-caloriesLeft-s-light camp-macros-m-light camp-caloriesLeft-m-light
 
 # --- Pub Finances organique v2 (2026-11-20) : widgets Finances actuels (les camp-* du run 44476436306 n'ont jamais été copiés)
 # et Dépense rapide avant / après le toucher (spent=1 : la première dépense rapide notée, clé ajoutée le 2026-11-20), même run.
 widget camp-quickExpense-s-light kind=quickExpense family=small scale=4 theme=light
 widget camp-quickExpense-s-light-spent kind=quickExpense family=small scale=4 theme=light spent=1
 widget camp-budgetLeft-s-light-spent kind=budgetLeft family=small scale=4 theme=light spent=1
-only camp-budgetLeft-s-light camp-budgetLeft-s-light-spent camp-quickExpense-s-light camp-quickExpense-s-light-spent camp-savingsGoal-s-light camp-spendingByCategory-m-light camp-billsUpcoming-m-light camp-moneyFlow-m-light camp-budgetLeft-s-liquidGlass
 
 # --- Pub Business organique v2 (2026-11-20) : widgets Business actuels pour l'écran d'accueil (Objectif du mois gratuit, les autres Premium)
-only camp-revenueGoal-s-light camp-revenueTrend-m-light camp-profit-s-light camp-businessKPIs-m-light camp-mrr-s-light
 
 # --- Pub Études organique v2 (2026-11-20) : widgets Études actuels (les camp-* d'Études n'avaient jamais été produits), Devoirs
 # avant / après un devoir rendu (done=N rend aussi les N premiers devoirs ouverts), widgets d'écran verrouillé, horaires du même run.
 widget camp-assignments-m-light-done kind=assignments family=medium scale=3 theme=light done=1
 widget camp-lock-nextClass-rect kind=nextClass family=rect scale=4
 widget camp-lock-nextExam-circular kind=nextExam family=circular scale=4
-only camp-nextClass-s-light camp-nextExam-s-light camp-assignments-m-light camp-assignments-m-light-done camp-semesterProgress-s-light camp-studyHours-s-light camp-lock-nextClass-rect camp-lock-nextExam-circular camp-timetable-l-light camp-timetable-s-light camp-lock-timetable-rect
 
 # --- Pub Business organique v3 (2026-11-20) : widgets Business dans l'accent Lilas (8C6CFF, couleur de base gratuite) de la mini-app
 widget camp-revenueGoal-s-lilac kind=revenueGoal family=small scale=4 theme=light accent=8C6CFF
 widget camp-revenueTrend-m-lilac kind=revenueTrend family=medium scale=3 theme=light accent=8C6CFF
-only camp-revenueGoal-s-lilac camp-revenueTrend-m-lilac
 
 # --- Pub Voyage organique v2 (2026-11-20) : widgets Voyage actuels, pendant le voyage comme les écrans de l'app (trip=ongoing,
 # clé ajoutée le 2026-11-20 : l'échantillon Voyage avant le départ ou en cours, quel que soit le type), et le décompte avant le départ.
@@ -605,7 +581,6 @@ widget camp-flight-m-light-ahead kind=flight family=medium scale=3 theme=light t
 widget camp-tripProgress-s-light-ongoing kind=tripProgress family=small scale=4 theme=light trip=ongoing
 widget camp-nextActivity-m-light-ongoing kind=nextActivity family=medium scale=3 theme=light trip=ongoing
 widget camp-hotel-s-light-ongoing kind=hotel family=small scale=4 theme=light trip=ongoing
-only camp-tripCountdown-s-light camp-flight-m-light camp-hotel-s-light camp-nextActivity-m-light camp-tripProgress-s-light camp-localTime-s-light camp-tripCountdown-s-light-ongoing camp-tripCountdown-s-light-ahead camp-flight-m-light-ahead camp-tripProgress-s-light-ongoing camp-nextActivity-m-light-ongoing camp-hotel-s-light-ongoing
 
 # --- Pub Voyage organique (2026-11-20) : « Next activity » réexporté après la traduction de « Today à 15:00 » (prochain run d'export)
 widget camp-nextActivity-m-light-ongoing2 kind=nextActivity family=medium scale=3 theme=light trip=ongoing
@@ -654,12 +629,10 @@ widget camp-tripCountdown-s-st-pastel kind=tripCountdown family=small scale=4 th
 widget camp-tripCountdown-s-st-blossom kind=tripCountdown family=small scale=4 theme=blossom trip=ongoing
 widget camp-tripCountdown-s-st-aurora kind=tripCountdown family=small scale=4 theme=aurora scheme=dark trip=ongoing
 widget camp-tripCountdown-s-st-neon kind=tripCountdown family=small scale=4 theme=neon scheme=dark trip=ongoing
-only camp-caloriesLeft-m-st-light camp-caloriesLeft-m-st-dark camp-caloriesLeft-m-st-minimal camp-caloriesLeft-m-st-pastel camp-caloriesLeft-m-st-blossom camp-caloriesLeft-m-st-aurora camp-caloriesLeft-m-st-neon camp-habits-m-st-light camp-habits-m-st-dark camp-habits-m-st-minimal camp-habits-m-st-pastel camp-habits-m-st-blossom camp-habits-m-st-aurora camp-habits-m-st-neon camp-budgetLeft-s-st-light camp-budgetLeft-s-st-dark camp-budgetLeft-s-st-minimal camp-budgetLeft-s-st-pastel camp-budgetLeft-s-st-blossom camp-budgetLeft-s-st-aurora camp-budgetLeft-s-st-neon camp-revenueGoal-s-st-light camp-revenueGoal-s-st-dark camp-revenueGoal-s-st-minimal camp-revenueGoal-s-st-pastel camp-revenueGoal-s-st-blossom camp-revenueGoal-s-st-aurora camp-revenueGoal-s-st-neon camp-assignments-m-st-light camp-assignments-m-st-dark camp-assignments-m-st-minimal camp-assignments-m-st-pastel camp-assignments-m-st-blossom camp-assignments-m-st-aurora camp-assignments-m-st-neon camp-tripCountdown-s-st-light camp-tripCountdown-s-st-dark camp-tripCountdown-s-st-minimal camp-tripCountdown-s-st-pastel camp-tripCountdown-s-st-blossom camp-tripCountdown-s-st-aurora camp-tripCountdown-s-st-neon
 
 # --- Pub Business organique v4 (2026-11-20) : Bénéfice et Indicateurs dans l'accent Lilas de la mini-app
 widget camp-profit-s-lilac kind=profit family=small scale=4 theme=light accent=8C6CFF
 widget camp-businessKPIs-m-lilac kind=businessKPIs family=medium scale=3 theme=light accent=8C6CFF
-only camp-profit-s-lilac camp-businessKPIs-m-lilac
 # --- Pub organique « Avant / après de l'écran d'accueil » (2026-11-20) : Planning petit (horaire du jour) dans les styles des autres widgets -st-
 widget camp-timetable-s-st-light kind=timetable family=small scale=4 theme=light
 widget camp-timetable-s-st-dark kind=timetable family=small scale=4 theme=dark scheme=dark
@@ -668,10 +641,8 @@ widget camp-timetable-s-st-pastel kind=timetable family=small scale=4 theme=past
 widget camp-timetable-s-st-blossom kind=timetable family=small scale=4 theme=blossom
 widget camp-timetable-s-st-aurora kind=timetable family=small scale=4 theme=aurora scheme=dark
 widget camp-timetable-s-st-neon kind=timetable family=small scale=4 theme=neon scheme=dark
-only camp-timetable-s-st-light camp-timetable-s-st-dark camp-timetable-s-st-minimal camp-timetable-s-st-pastel camp-timetable-s-st-blossom camp-timetable-s-st-aurora camp-timetable-s-st-neon
 # --- Pub organique « My day with Ardane » (2026-11-20) : reste du mois en Sombre après la dépense rapide (écran du soir cohérent avec 9:00 PM)
 widget camp-budgetLeft-s-st-dark-spent kind=budgetLeft family=small scale=4 theme=dark scheme=dark spent=1
-only camp-budgetLeft-s-st-dark-spent
 # --- Pub organique « Fade-in » v2 (2026-11-21) : écran d'accueil entier qui change de style ; le widget de chaque variante
 # dans les styles de sa variante, même jeu de données que son export Clair (done/spent/trip : l'état après le toucher) ---
 widget camp-assignments-m-st-aurora-done kind=assignments family=medium scale=3 theme=aurora scheme=dark done=1
@@ -718,11 +689,9 @@ widget camp-tripProgress-s-st-dark-ongoing kind=tripProgress family=small scale=
 widget camp-weeklyVolume-m-st-aurora kind=weeklyVolume family=medium scale=3 theme=aurora scheme=dark
 widget camp-weeklyVolume-m-st-dark kind=weeklyVolume family=medium scale=3 theme=dark scheme=dark
 widget camp-weeklyVolume-m-st-light kind=weeklyVolume family=medium scale=3 theme=light
-only camp-assignments-m-st-aurora-done camp-assignments-m-st-dark-done camp-businessKPIs-m-st-aurora camp-businessKPIs-m-st-dark camp-caloriesLeft-s-st-dark camp-caloriesLeft-s-st-pastel camp-habitStreak-s-st-dark camp-habitStreak-s-st-neon camp-habitWeek-m-st-aurora camp-habitWeek-m-st-dark camp-macros-m-st-aurora camp-macros-m-st-dark camp-nextClass-s-st-dark camp-nextClass-s-st-neon camp-nextSet-s-st-dark camp-nextSet-s-st-light camp-nextSet-s-st-neon camp-personalRecords-s-st-dark camp-personalRecords-s-st-light camp-personalRecords-s-st-neon camp-priorities-s-st-dark camp-priorities-s-st-pastel camp-quickExpense-s-st-dark-spent camp-quickExpense-s-st-neon-spent camp-revenueTrend-m-st-aurora camp-revenueTrend-m-st-dark camp-savingsGoal-s-st-blossom camp-savingsGoal-s-st-dark camp-spendingByCategory-m-st-aurora camp-spendingByCategory-m-st-dark camp-tasks-m-st-blossom camp-tasks-m-st-dark camp-tasks-m-st-dark-done camp-tasks-m-st-pastel-done camp-trainingStreak-s-st-dark camp-trainingStreak-s-st-light camp-trainingStreak-s-st-neon camp-tripCountdown-s-st-blossom-ahead camp-tripCountdown-s-st-dark-ahead camp-tripProgress-s-st-aurora-ongoing camp-tripProgress-s-st-dark-ongoing camp-weeklyVolume-m-st-aurora camp-weeklyVolume-m-st-dark camp-weeklyVolume-m-st-light
 # --- Pub organique « Fade-in » v2, variante 03 (2026-11-22) : avant/après du toucher en Clair, le même jour que les styles
 widget camp-quickExpense-s-st-light kind=quickExpense family=small scale=4 theme=light
 widget camp-quickExpense-s-st-light-spent kind=quickExpense family=small scale=4 theme=light spent=1
-only camp-quickExpense-s-st-light camp-quickExpense-s-st-light-spent camp-quickExpense-s-st-dark-spent camp-quickExpense-s-st-neon-spent
 # --- Pub organique « Guess my budget » (2026-11-22) : Finances en un seul run (avant/après la dépense rapide, styles après, écran verrouillé)
 widget camp-budgetLeft-s-st-minimal-spent kind=budgetLeft family=small scale=4 theme=minimal spent=1
 widget camp-budgetLeft-s-st-pastel-spent kind=budgetLeft family=small scale=4 theme=pastel spent=1
@@ -735,7 +704,6 @@ widget camp-quickExpense-s-st-blossom-spent kind=quickExpense family=small scale
 widget camp-quickExpense-s-st-aurora-spent kind=quickExpense family=small scale=4 theme=aurora scheme=dark spent=1
 widget camp-lock-budgetLeft-rect kind=budgetLeft family=rect scale=4
 widget camp-lock-budgetLeft-rect-spent kind=budgetLeft family=rect scale=4 spent=1
-only camp-budgetLeft-s-light camp-budgetLeft-s-light-spent camp-quickExpense-s-light camp-quickExpense-s-light-spent camp-budgetLeft-s-st-dark-spent camp-budgetLeft-s-st-minimal-spent camp-budgetLeft-s-st-pastel-spent camp-budgetLeft-s-st-blossom-spent camp-budgetLeft-s-st-aurora-spent camp-budgetLeft-s-st-neon-spent camp-quickExpense-s-st-dark-spent camp-quickExpense-s-st-neon-spent camp-quickExpense-s-st-minimal-spent camp-quickExpense-s-st-pastel-spent camp-quickExpense-s-st-blossom-spent camp-quickExpense-s-st-aurora-spent camp-lock-budgetLeft-rect camp-lock-budgetLeft-rect-spent
 # --- Pub organique « Scan it, don't type it » (2026-11-22) : Calories left avant et après « Add to log » du plat scanné (Pexels 34453034), un seul run
 widget camp-caloriesLeft-m-st-light-scan kind=caloriesLeft family=medium scale=3 theme=light meal=photo
 widget camp-caloriesLeft-m-st-dark-scan kind=caloriesLeft family=medium scale=3 theme=dark scheme=dark meal=photo
@@ -744,7 +712,6 @@ widget camp-caloriesLeft-m-st-pastel-scan kind=caloriesLeft family=medium scale=
 widget camp-caloriesLeft-m-st-blossom-scan kind=caloriesLeft family=medium scale=3 theme=blossom meal=photo
 widget camp-caloriesLeft-m-st-aurora-scan kind=caloriesLeft family=medium scale=3 theme=aurora scheme=dark meal=photo
 widget camp-caloriesLeft-m-st-neon-scan kind=caloriesLeft family=medium scale=3 theme=neon scheme=dark meal=photo
-only camp-caloriesLeft-m-st-light camp-caloriesLeft-m-st-light-scan camp-caloriesLeft-m-st-dark-scan camp-caloriesLeft-m-st-minimal-scan camp-caloriesLeft-m-st-pastel-scan camp-caloriesLeft-m-st-blossom-scan camp-caloriesLeft-m-st-aurora-scan camp-caloriesLeft-m-st-neon-scan
 # --- Pub organique « Next class, one glance » (2026-11-22) : Études en un seul run, un dimanche UTC (écran verrouillé, Prochain cours, Horaire du jour, Devoirs avant/après le toucher, 7 styles)
 widget camp-cours-lock-nextClass-rect kind=nextClass family=rect scale=4
 widget camp-cours-lock-timetable-rect kind=timetable family=rect scale=4
@@ -770,7 +737,6 @@ widget camp-cours-assignments-m-st-pastel-done kind=assignments family=medium sc
 widget camp-cours-assignments-m-st-blossom-done kind=assignments family=medium scale=3 theme=blossom done=1
 widget camp-cours-assignments-m-st-aurora-done kind=assignments family=medium scale=3 theme=aurora scheme=dark done=1
 widget camp-cours-assignments-m-st-neon-done kind=assignments family=medium scale=3 theme=neon scheme=dark done=1
-only camp-cours-lock-nextClass-rect camp-cours-lock-timetable-rect camp-cours-nextClass-s-st-light camp-cours-nextClass-s-st-dark camp-cours-nextClass-s-st-minimal camp-cours-nextClass-s-st-pastel camp-cours-nextClass-s-st-blossom camp-cours-nextClass-s-st-aurora camp-cours-nextClass-s-st-neon camp-cours-timetable-s-st-light camp-cours-timetable-s-st-dark camp-cours-timetable-s-st-minimal camp-cours-timetable-s-st-pastel camp-cours-timetable-s-st-blossom camp-cours-timetable-s-st-aurora camp-cours-timetable-s-st-neon camp-cours-assignments-m-st-light camp-cours-assignments-m-st-light-done camp-cours-assignments-m-st-dark-done camp-cours-assignments-m-st-minimal-done camp-cours-assignments-m-st-pastel-done camp-cours-assignments-m-st-blossom-done camp-cours-assignments-m-st-aurora-done camp-cours-assignments-m-st-neon-done
 # --- Pub organique « POV: my day on one screen » (2026-11-22) : Tâches moyen avant/après le toucher en Clair, puis l'état coché dans les styles de l'accueil, un seul run (Sombre et Pastel « done » existent plus haut)
 widget camp-tasks-m-st-light kind=tasks family=medium scale=3 theme=light
 widget camp-tasks-m-st-light-done kind=tasks family=medium scale=3 theme=light done=1
@@ -778,7 +744,6 @@ widget camp-tasks-m-st-minimal-done kind=tasks family=medium scale=3 theme=minim
 widget camp-tasks-m-st-blossom-done kind=tasks family=medium scale=3 theme=blossom done=1
 widget camp-tasks-m-st-aurora-done kind=tasks family=medium scale=3 theme=aurora scheme=dark done=1
 widget camp-tasks-m-st-neon-done kind=tasks family=medium scale=3 theme=neon scheme=dark done=1
-only camp-tasks-m-st-light camp-tasks-m-st-light-done camp-tasks-m-st-dark-done camp-tasks-m-st-minimal-done camp-tasks-m-st-pastel-done camp-tasks-m-st-blossom-done camp-tasks-m-st-aurora-done camp-tasks-m-st-neon-done
 # --- Pub organique « Leaving in… » (Voyage, 2026-11-22) : décompte avant le départ (trip=ahead) dans les 7 styles de l'accueil, puis le même accueil pendant le voyage (trip=ongoing), un seul run (aucun vol, hôtel ni activité : marques réelles)
 widget camp-depart-tripCountdown-m-st-light-ahead kind=tripCountdown family=medium scale=3 theme=light trip=ahead
 widget camp-depart-tripCountdown-m-st-dark-ahead kind=tripCountdown family=medium scale=3 theme=dark scheme=dark trip=ahead
@@ -816,17 +781,14 @@ widget camp-depart-currency-s-st-aurora-ahead kind=currency family=small scale=4
 widget camp-depart-currency-s-st-neon-ahead kind=currency family=small scale=4 theme=neon scheme=dark trip=ahead
 widget camp-depart-currency-s-st-light-ongoing kind=currency family=small scale=4 theme=light trip=ongoing
 widget camp-depart-currency-s-st-aurora-ongoing kind=currency family=small scale=4 theme=aurora scheme=dark trip=ongoing
-only camp-depart-tripCountdown-m-st-light-ahead camp-depart-tripCountdown-m-st-dark-ahead camp-depart-tripCountdown-m-st-minimal-ahead camp-depart-tripCountdown-m-st-pastel-ahead camp-depart-tripCountdown-m-st-blossom-ahead camp-depart-tripCountdown-m-st-aurora-ahead camp-depart-tripCountdown-m-st-neon-ahead camp-depart-tripCountdown-m-st-light-ongoing camp-depart-tripCountdown-m-st-aurora-ongoing camp-depart-tripCountdown-s-st-light-ahead camp-depart-tripCountdown-s-st-dark-ahead camp-depart-tripCountdown-s-st-minimal-ahead camp-depart-tripCountdown-s-st-pastel-ahead camp-depart-tripCountdown-s-st-blossom-ahead camp-depart-tripCountdown-s-st-aurora-ahead camp-depart-tripCountdown-s-st-neon-ahead camp-depart-tripCountdown-s-st-light-ongoing camp-depart-tripCountdown-s-st-aurora-ongoing camp-depart-tripProgress-s-st-light-ahead camp-depart-tripProgress-s-st-dark-ahead camp-depart-tripProgress-s-st-minimal-ahead camp-depart-tripProgress-s-st-pastel-ahead camp-depart-tripProgress-s-st-blossom-ahead camp-depart-tripProgress-s-st-aurora-ahead camp-depart-tripProgress-s-st-neon-ahead camp-depart-tripProgress-s-st-light-ongoing camp-depart-tripProgress-s-st-aurora-ongoing camp-depart-currency-s-st-light-ahead camp-depart-currency-s-st-dark-ahead camp-depart-currency-s-st-minimal-ahead camp-depart-currency-s-st-pastel-ahead camp-depart-currency-s-st-blossom-ahead camp-depart-currency-s-st-aurora-ahead camp-depart-currency-s-st-neon-ahead camp-depart-currency-s-st-light-ongoing camp-depart-currency-s-st-aurora-ongoing
 # --- Pub organique « Home screen inspo » (2026-11-22) : persona « budget queen » en Cerisier, café en un toucher (avant / après), un seul run
 widget camp-inspo-budgetLeft-s-st-blossom kind=budgetLeft family=small scale=4 theme=blossom
 widget camp-inspo-budgetLeft-s-st-blossom-spent kind=budgetLeft family=small scale=4 theme=blossom spent=1
 widget camp-inspo-quickExpense-s-st-blossom kind=quickExpense family=small scale=4 theme=blossom
 widget camp-inspo-quickExpense-s-st-blossom-spent kind=quickExpense family=small scale=4 theme=blossom spent=1
 widget camp-inspo-savingsGoal-s-st-blossom kind=savingsGoal family=small scale=4 theme=blossom
-only camp-inspo-budgetLeft-s-st-blossom camp-inspo-budgetLeft-s-st-blossom-spent camp-inspo-quickExpense-s-st-blossom camp-inspo-quickExpense-s-st-blossom-spent camp-inspo-savingsGoal-s-st-blossom
 
 # --- Pub organique « Before you unlock » (2026-11-22) : écran verrouillé (Calories en ligne, Horaire et Reste du mois en rectangle, avant / après la dépense rapide) et l'accueil en 7 styles, un seul run (toutes les pièces existent déjà)
-only lock-caloriesLeft-inline camp-cours-lock-timetable-rect camp-lock-budgetLeft-rect camp-lock-budgetLeft-rect-spent camp-quickExpense-s-light camp-quickExpense-s-light-spent camp-quickExpense-s-st-dark-spent camp-quickExpense-s-st-minimal-spent camp-quickExpense-s-st-pastel-spent camp-quickExpense-s-st-blossom-spent camp-quickExpense-s-st-aurora-spent camp-quickExpense-s-st-neon-spent camp-cours-timetable-s-st-light camp-cours-timetable-s-st-dark camp-cours-timetable-s-st-minimal camp-cours-timetable-s-st-pastel camp-cours-timetable-s-st-blossom camp-cours-timetable-s-st-aurora camp-cours-timetable-s-st-neon camp-caloriesLeft-m-st-light camp-caloriesLeft-m-st-dark camp-caloriesLeft-m-st-minimal camp-caloriesLeft-m-st-pastel camp-caloriesLeft-m-st-blossom camp-caloriesLeft-m-st-aurora camp-caloriesLeft-m-st-neon
 
 # --- Pub organique « Discipline edit » (2026-11-22) : Habitudes avant/après en Noir mat, puis l'état coché et l'objectif d'épargne en 5 styles sombres (accent rouge comme irl-nextSet-combo), un seul run
 widget camp-disc-habits-m-matte-todo kind=habits family=medium scale=3 theme=matteBlack accent=E5383B scheme=dark todo=1
@@ -840,7 +802,6 @@ widget camp-disc-savingsGoal-s-carbon kind=savingsGoal family=small scale=4 them
 widget camp-disc-savingsGoal-s-mars kind=savingsGoal family=small scale=4 theme=mars scheme=dark
 widget camp-disc-savingsGoal-s-luxury kind=savingsGoal family=small scale=4 theme=luxury scheme=dark
 widget camp-disc-savingsGoal-s-neon kind=savingsGoal family=small scale=4 theme=neon accent=E5383B scheme=dark
-only camp-disc-habits-m-matte-todo camp-disc-habits-m-matte camp-disc-habits-m-carbon camp-disc-habits-m-mars camp-disc-habits-m-luxury camp-disc-habits-m-neon camp-disc-savingsGoal-s-matte camp-disc-savingsGoal-s-carbon camp-disc-savingsGoal-s-mars camp-disc-savingsGoal-s-luxury camp-disc-savingsGoal-s-neon
 
 # --- Pub organique niche Auto « For people who forget their oil change » (2026-11-22) : Prochain entretien moyen avant/après « Fait aujourd'hui » (service=done), Carburant et Échéances auto en petit, en 7 styles, un seul run (carCost et mileage écartés : titre « Civic 2019 »)
 widget camp-auto-nextService-m-st-light kind=nextService family=medium scale=3 theme=light
@@ -865,7 +826,6 @@ widget camp-auto-carDeadlines-s-st-pastel kind=carDeadlines family=small scale=4
 widget camp-auto-carDeadlines-s-st-blossom kind=carDeadlines family=small scale=4 theme=blossom
 widget camp-auto-carDeadlines-s-st-aurora kind=carDeadlines family=small scale=4 theme=aurora scheme=dark
 widget camp-auto-carDeadlines-s-st-neon kind=carDeadlines family=small scale=4 theme=neon scheme=dark
-only camp-auto-nextService-m-st-light camp-auto-nextService-m-st-light-done camp-auto-nextService-m-st-dark-done camp-auto-nextService-m-st-minimal-done camp-auto-nextService-m-st-pastel-done camp-auto-nextService-m-st-blossom-done camp-auto-nextService-m-st-aurora-done camp-auto-nextService-m-st-neon-done camp-auto-fuelStats-s-st-light camp-auto-fuelStats-s-st-dark camp-auto-fuelStats-s-st-minimal camp-auto-fuelStats-s-st-pastel camp-auto-fuelStats-s-st-blossom camp-auto-fuelStats-s-st-aurora camp-auto-fuelStats-s-st-neon camp-auto-carDeadlines-s-st-light camp-auto-carDeadlines-s-st-dark camp-auto-carDeadlines-s-st-minimal camp-auto-carDeadlines-s-st-pastel camp-auto-carDeadlines-s-st-blossom camp-auto-carDeadlines-s-st-aurora camp-auto-carDeadlines-s-st-neon
 
 # --- Fin des exports de la nuit du 2026-11-22 (production arrêtée).
 
@@ -896,6 +856,30 @@ styles styles-p23 page=23 per=20 kind=budgetLeft family=small scale=2
 styles styles-p24 page=24 per=20 kind=budgetLeft family=small scale=2
 styles styles-p25 page=25 per=20 kind=budgetLeft family=small scale=2
 styles styles-p26 page=26 per=20 kind=budgetLeft family=small scale=2
+styles probe-small-centered-riche-gala page=1 per=1 cols=2 kind=todaysWorkout family=small ids=riche-gala scale=1
+styles probe-small-vertical-vint-sepia-gazette page=1 per=1 cols=2 kind=todaysWorkout family=small ids=vint-sepia-gazette scale=1
+styles probe-small-horizontal-prime-cobalt page=1 per=1 cols=2 kind=todaysWorkout family=small ids=prime-cobalt scale=1
+styles probe-small-cards-jeu-lootbox page=1 per=1 cols=2 kind=todaysWorkout family=small ids=jeu-lootbox scale=1
+styles probe-small-list-plaque-rivets page=1 per=1 cols=2 kind=todaysWorkout family=small ids=plaque-rivets scale=1
+styles probe-small-minimal-retro-vhs page=1 per=1 cols=2 kind=todaysWorkout family=small ids=retro-vhs scale=1
+styles probe-small-split-luxe-acier-or page=1 per=1 cols=2 kind=todaysWorkout family=small ids=luxe-acier-or scale=1
+styles probe-small-data-pixel-ecran-ambre page=1 per=1 cols=2 kind=todaysWorkout family=small ids=pixel-ecran-ambre scale=1
+styles probe-small-progress-aura-pulse page=1 per=1 cols=2 kind=todaysWorkout family=small ids=aura-pulse scale=1
+styles probe-small-graph-aura-braise page=1 per=1 cols=2 kind=todaysWorkout family=small ids=aura-braise scale=1
+styles probe-small-cards-ill-cartoon page=1 per=1 cols=2 kind=todaysWorkout family=small ids=ill-cartoon scale=1
+styles probe-small-minimal-jeu-pause page=1 per=1 cols=2 kind=todaysWorkout family=small ids=jeu-pause scale=1
+styles probe-medium-centered-riche-gala page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=riche-gala scale=1
+styles probe-medium-vertical-vint-sepia-gazette page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=vint-sepia-gazette scale=1
+styles probe-medium-horizontal-prime-cobalt page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=prime-cobalt scale=1
+styles probe-medium-cards-jeu-lootbox page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=jeu-lootbox scale=1
+styles probe-medium-list-plaque-rivets page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=plaque-rivets scale=1
+styles probe-medium-minimal-retro-vhs page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=retro-vhs scale=1
+styles probe-medium-split-luxe-acier-or page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=luxe-acier-or scale=1
+styles probe-medium-data-pixel-ecran-ambre page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=pixel-ecran-ambre scale=1
+styles probe-medium-progress-aura-pulse page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=aura-pulse scale=1
+styles probe-medium-graph-aura-braise page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=aura-braise scale=1
+styles probe-medium-cards-ill-cartoon page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=ill-cartoon scale=1
+styles probe-medium-minimal-jeu-pause page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=jeu-pause scale=1
 # --- 2026-11-26 : planche de contrôle de lisibilité, un style « à risque » par disposition × forme + styles signalés par le PDG ---
 styles check-todaysWorkout-small-p1 page=1 per=30 cols=2 kind=todaysWorkout family=small ids=y2k-paillettes,fer-forge,jeu-lootbox,brut-acide,sp-ring,luxe-guilloche,vint-apothicaire,brut-tampon,brut-theatre,neon-sign-open,jeu-fps,cyber-scanlines,vint-cyanotype,luxe-calibre,jeu-course,pixel-inverse,cockpit-alu,sp-donnees,ill-blueprint,aura-eclipse,retro-sunset80,aura-aube,cyber-code,prime-cobalt,bonbon,plaque-rivets,pixel-carte-memoire,mini-typo-seule,prime-terminal-pro,ballet-rose,cyber-matrice,cyber-hologramme,jeu-pause,retro-vhs,retro-jukebox,aura-pulse,retro-tv-crt,nat-aquarelle,pixel-arcade-nuit,aura-lune,aura-prisme,vint-cinema,ill-collage,luxe-acier-or,retro-diner,vint-sepia-gazette,jeu-rpg-parchemin,neon-bar-nuit,riche-marbre,nat-pierre,ill-cartoon,ill-craie,nat-lin,ill-crayon,nat-desert,nat-ceramique,y2k-nacre,sp-escalade,sp-ski scale=2
 styles check-todaysWorkout-small-p2 page=2 per=30 cols=2 kind=todaysWorkout family=small ids=y2k-paillettes,fer-forge,jeu-lootbox,brut-acide,sp-ring,luxe-guilloche,vint-apothicaire,brut-tampon,brut-theatre,neon-sign-open,jeu-fps,cyber-scanlines,vint-cyanotype,luxe-calibre,jeu-course,pixel-inverse,cockpit-alu,sp-donnees,ill-blueprint,aura-eclipse,retro-sunset80,aura-aube,cyber-code,prime-cobalt,bonbon,plaque-rivets,pixel-carte-memoire,mini-typo-seule,prime-terminal-pro,ballet-rose,cyber-matrice,cyber-hologramme,jeu-pause,retro-vhs,retro-jukebox,aura-pulse,retro-tv-crt,nat-aquarelle,pixel-arcade-nuit,aura-lune,aura-prisme,vint-cinema,ill-collage,luxe-acier-or,retro-diner,vint-sepia-gazette,jeu-rpg-parchemin,neon-bar-nuit,riche-marbre,nat-pierre,ill-cartoon,ill-craie,nat-lin,ill-crayon,nat-desert,nat-ceramique,y2k-nacre,sp-escalade,sp-ski scale=2
@@ -992,28 +976,4 @@ styles all-countdown-medium page=1 per=12 cols=1 kind=countdown family=medium id
 styles all-upNext-small page=1 per=12 cols=2 kind=upNext family=small ids=riche-gala,vint-sepia-gazette,prime-cobalt,jeu-lootbox,plaque-rivets,retro-vhs,luxe-acier-or,pixel-ecran-ambre,aura-pulse,aura-braise,ill-cartoon,jeu-pause scale=2
 styles all-upNext-medium page=1 per=12 cols=1 kind=upNext family=medium ids=riche-gala,vint-sepia-gazette,prime-cobalt,jeu-lootbox,plaque-rivets,retro-vhs,luxe-acier-or,pixel-ecran-ambre,aura-pulse,aura-braise,ill-cartoon,jeu-pause scale=2
 # --- 2026-11-26 : recherche de la pièce qui bloque l'export, un style par disposition ---
-styles probe-small-centered-riche-gala page=1 per=1 cols=2 kind=todaysWorkout family=small ids=riche-gala scale=1
-styles probe-small-vertical-vint-sepia-gazette page=1 per=1 cols=2 kind=todaysWorkout family=small ids=vint-sepia-gazette scale=1
-styles probe-small-horizontal-prime-cobalt page=1 per=1 cols=2 kind=todaysWorkout family=small ids=prime-cobalt scale=1
-styles probe-small-cards-jeu-lootbox page=1 per=1 cols=2 kind=todaysWorkout family=small ids=jeu-lootbox scale=1
-styles probe-small-list-plaque-rivets page=1 per=1 cols=2 kind=todaysWorkout family=small ids=plaque-rivets scale=1
-styles probe-small-minimal-retro-vhs page=1 per=1 cols=2 kind=todaysWorkout family=small ids=retro-vhs scale=1
-styles probe-small-split-luxe-acier-or page=1 per=1 cols=2 kind=todaysWorkout family=small ids=luxe-acier-or scale=1
-styles probe-small-data-pixel-ecran-ambre page=1 per=1 cols=2 kind=todaysWorkout family=small ids=pixel-ecran-ambre scale=1
-styles probe-small-progress-aura-pulse page=1 per=1 cols=2 kind=todaysWorkout family=small ids=aura-pulse scale=1
-styles probe-small-graph-aura-braise page=1 per=1 cols=2 kind=todaysWorkout family=small ids=aura-braise scale=1
-styles probe-small-cards-ill-cartoon page=1 per=1 cols=2 kind=todaysWorkout family=small ids=ill-cartoon scale=1
-styles probe-small-minimal-jeu-pause page=1 per=1 cols=2 kind=todaysWorkout family=small ids=jeu-pause scale=1
-styles probe-medium-centered-riche-gala page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=riche-gala scale=1
-styles probe-medium-vertical-vint-sepia-gazette page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=vint-sepia-gazette scale=1
-styles probe-medium-horizontal-prime-cobalt page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=prime-cobalt scale=1
-styles probe-medium-cards-jeu-lootbox page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=jeu-lootbox scale=1
-styles probe-medium-list-plaque-rivets page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=plaque-rivets scale=1
-styles probe-medium-minimal-retro-vhs page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=retro-vhs scale=1
-styles probe-medium-split-luxe-acier-or page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=luxe-acier-or scale=1
-styles probe-medium-data-pixel-ecran-ambre page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=pixel-ecran-ambre scale=1
-styles probe-medium-progress-aura-pulse page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=aura-pulse scale=1
-styles probe-medium-graph-aura-braise page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=aura-braise scale=1
-styles probe-medium-cards-ill-cartoon page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=ill-cartoon scale=1
-styles probe-medium-minimal-jeu-pause page=1 per=1 cols=1 kind=todaysWorkout family=medium ids=jeu-pause scale=1
 only probe-small-centered-riche-gala probe-small-vertical-vint-sepia-gazette probe-small-horizontal-prime-cobalt probe-small-cards-jeu-lootbox probe-small-list-plaque-rivets probe-small-minimal-retro-vhs probe-small-split-luxe-acier-or probe-small-data-pixel-ecran-ambre probe-small-progress-aura-pulse probe-small-graph-aura-braise probe-small-cards-ill-cartoon probe-small-minimal-jeu-pause probe-medium-centered-riche-gala probe-medium-vertical-vint-sepia-gazette probe-medium-horizontal-prime-cobalt probe-medium-cards-jeu-lootbox probe-medium-list-plaque-rivets probe-medium-minimal-retro-vhs probe-medium-split-luxe-acier-or probe-medium-data-pixel-ecran-ambre probe-medium-progress-aura-pulse probe-medium-graph-aura-braise probe-medium-cards-ill-cartoon probe-medium-minimal-jeu-pause all-todaysWorkout-small all-todaysWorkout-medium all-nextSet-small all-nextSet-medium all-personalRecords-small all-personalRecords-medium all-weeklyVolume-small all-weeklyVolume-medium all-caloriesLeft-small all-caloriesLeft-medium all-macros-small all-macros-medium all-mealsToday-small all-mealsToday-medium all-nutritionWeek-small all-nutritionWeek-medium all-budgetLeft-small all-budgetLeft-medium all-moneyFlow-small all-moneyFlow-medium all-spendingByCategory-small all-spendingByCategory-medium all-billsUpcoming-small all-billsUpcoming-medium all-subscriptions-small all-subscriptions-medium all-portfolio-small all-portfolio-medium all-watchlist-small all-watchlist-medium all-revenueGoal-small all-revenueGoal-medium all-businessKPIs-small all-businessKPIs-medium all-nextClass-small all-nextClass-medium all-assignments-small all-assignments-medium all-gradeAverage-small all-gradeAverage-medium all-tripCountdown-small all-tripCountdown-medium all-flight-small all-flight-medium all-carCost-small all-carCost-medium all-carDeadlines-small all-carDeadlines-medium all-tasks-small all-tasks-medium all-priorities-small all-priorities-medium all-habits-small all-habits-medium all-habitWeek-small all-habitWeek-medium all-hydration-small all-hydration-medium all-myDay-small all-myDay-medium all-fitnessDashboard-small all-fitnessDashboard-medium all-moneyDashboard-small all-moneyDashboard-medium all-countdown-small all-countdown-medium all-upNext-small all-upNext-medium
