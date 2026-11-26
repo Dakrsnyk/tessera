@@ -1009,6 +1009,12 @@ struct ResolvedStyle {
         }
     }
 
+    /// The corner of a block that holds text (a card, a class): a capsule there made circles of tall cards
+    /// and hid their text behind the curve, so it stays a rounded rectangle, rounder than the others.
+    func blockRadius(_ base: CGFloat) -> CGFloat {
+        options.shape == .capsule ? base * 2 : radius(base)
+    }
+
     var isPanel: Bool { options.shape == .panel }
 
     /// Resolves an icon to the chosen icon family (keeps the original when a variant doesn't exist).

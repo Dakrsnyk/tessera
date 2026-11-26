@@ -261,15 +261,20 @@ enum AdExport {
               let format = WidgetFormat.allCases.first(where: { $0.family == widgetFamily }) else {
             throw AdFailure("unknown family « \(familyText) »")
         }
+        // `ids=a,b,c`: only these styles (a check board), in that order; else every style, by pages.
+        let chosen = (job.string("ids") ?? "").split(separator: ",").compactMap { StyleCatalog.look(String($0)) }
+        let source = chosen.isEmpty ? StyleCatalog.all : chosen
         let per = max(1, job.int("per", 20)), page = max(1, job.int("page", 1))
-        let pages = (StyleCatalog.all.count + per - 1) / per
+        let pages = (source.count + per - 1) / per
         guard page <= pages else { return AdOutcome(files: 0, note: "no page \(page): \(pages) pages of \(per) styles") }
-        let looks = Array(StyleCatalog.all.dropFirst((page - 1) * per).prefix(per))
-        let boardWidth: CGFloat = 402, margin: CGFloat = 16, gap: CGFloat = 10
-        let columnWidth = (boardWidth - 2 * margin - gap) / 2
-        let rows = stride(from: 0, to: looks.count, by: 2).map { Array(looks[$0..<min($0 + 2, looks.count)]) }
+        let looks = Array(source.dropFirst((page - 1) * per).prefix(per))
+        // `cols=1` for medium widgets at their real width.
+        let cols = max(1, job.int("cols", 2))
+        let boardWidth: CGFloat = cols == 1 ? 370 : 402, margin: CGFloat = 16, gap: CGFloat = 10
+        let columnWidth = (boardWidth - 2 * margin - gap * CGFloat(cols - 1)) / CGFloat(cols)
+        let rows = stride(from: 0, to: looks.count, by: cols).map { Array(looks[$0..<min($0 + cols, looks.count)]) }
         let board = VStack(alignment: .leading, spacing: 14) {
-            Text("Styles · page \(page)/\(pages)")
+            Text("\(raw) · \(familyText) · page \(page)/\(pages)")
                 .font(.headline)
             ForEach(rows.indices, id: \.self) { row in
                 HStack(alignment: .top, spacing: gap) {
@@ -277,12 +282,12 @@ enum AdExport {
                         let design = look.applied(to: WidgetDesign(kind: kind, format: format))
                         StudioPreviewTile(
                             design: design, family: widgetFamily, payload: MK.payload(design),
-                            title: look.name, subtitle: look.summary, isSelected: false,
+                            title: look.name, subtitle: chosen.isEmpty ? look.summary : look.id, isSelected: false,
                             showsLock: look.isPremium, width: columnWidth - 6
                         )
                         .frame(width: columnWidth)
                     }
-                    if rows[row].count == 1 { Color.clear.frame(width: columnWidth, height: 1) }
+                    if rows[row].count < cols { Color.clear.frame(width: columnWidth, height: 1) }
                 }
             }
         }

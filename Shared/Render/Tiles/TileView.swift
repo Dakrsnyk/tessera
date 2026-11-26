@@ -249,7 +249,7 @@ struct TileView: View {
         content()
             .padding(8 * sp)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-            .background(s.panel, in: RoundedRectangle(cornerRadius: s.radius(12), style: .continuous))
+            .background(s.panel, in: RoundedRectangle(cornerRadius: s.blockRadius(12), style: .continuous))
             .styleDepth(s)
     }
 
@@ -630,9 +630,12 @@ struct TileView: View {
         let limit = max(1, (context.isSmall ? 2 : (context.isLarge ? 8 : 3)) + (context.isSmall ? 0 : s.rowDelta))
         let shown = Array(stats.prefix(limit))
         let chunks = stride(from: 0, to: shown.count, by: columns).map { Array(shown[$0..<min($0 + columns, shown.count)]) }
+        // One row of figures in a medium widget has the room for larger figures.
+        let oneRow = context.isMedium && chunks.count == 1 && !hasVisual
         return VStack(alignment: .leading, spacing: 8 * sp) {
             headerBlock
-            if context.isSmall { Spacer(minLength: 0) }
+            // Without a chart below them, the figures sit at the bottom: no empty half under one row of figures.
+            if context.isSmall || (context.isMedium && !hasVisual) { Spacer(minLength: 0) }
             Grid(alignment: .leading, horizontalSpacing: 12 * sp, verticalSpacing: 10 * sp) {
                 ForEach(Array(chunks.enumerated()), id: \.offset) { chunk in
                     GridRow {
@@ -640,7 +643,7 @@ struct TileView: View {
                             VStack(alignment: .leading, spacing: 1) {
                                 statLabel(stat)
                                 Text(stat.value)
-                                    .font(s.number(stat.id == "value" ? (context.isSmall ? 26 : 22) : (context.isSmall ? 17 : 18)))
+                                    .font(s.number(stat.id == "value" ? (context.isSmall ? 26 : (oneRow ? 26 : 22)) : (context.isSmall ? 17 : (oneRow ? 20 : 18))))
                                     .foregroundStyle(s.numberColor)
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.5)
@@ -835,7 +838,8 @@ struct TileView: View {
                     Text(stat.label)
                         .font(s.text(10, .medium))
                         .foregroundStyle(s.secondary)
-                        .lineLimit(1)
+                        .lineLimit(context.isSmall ? 1 : 2)
+                        .minimumScaleFactor(0.85)
                 }
                 Spacer(minLength: 0)
                 Text(stat.value)
@@ -894,30 +898,31 @@ struct TileRowsView: View {
                 } else if row.colorHex != nil {
                     Circle().fill(color).frame(width: 7, height: 7)
                 }
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(row.title)
-                        .font(s.text(compact ? 12 : 13, row.isHighlighted ? .semibold : .regular))
-                        .foregroundStyle(row.isDone == true ? s.secondary : s.primary)
-                        .strikethrough(row.isDone == true, color: s.secondary)
-                        // Short lists have room for a second line.
-                        .lineLimit(rows.count <= 3 ? 2 : 1)
-                        .minimumScaleFactor(0.8)
-                    if let detail = row.detail, !compact, s.showsDetails {
-                        Text(detail)
-                            .font(s.text(10))
-                            .foregroundStyle(s.secondary)
-                            .lineLimit(1)
+                RowSplit(gap: 6) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(row.title)
+                            .font(s.text(compact ? 12 : 13, row.isHighlighted ? .semibold : .regular))
+                            .foregroundStyle(row.isDone == true ? s.secondary : s.primary)
+                            .strikethrough(row.isDone == true, color: s.secondary)
+                            // Short lists have room for a second line.
+                            .lineLimit(rows.count <= 3 ? 2 : 1)
+                            .minimumScaleFactor(0.8)
+                        if let detail = row.detail, !compact, s.showsDetails {
+                            Text(detail)
+                                .font(s.text(10))
+                                .foregroundStyle(s.secondary)
+                                .lineLimit(1)
+                        }
                     }
-                }
-                Spacer(minLength: 4)
-                if let value = row.value {
-                    Text(value)
-                        .font(s.text(compact ? 11 : 12, .semibold).monospacedDigit())
-                        .foregroundStyle(row.isHighlighted ? s.accent : s.secondary)
-                        .lineLimit(1)
-                        .fixedSize()
-                        .layoutPriority(1)
-                        .privacySensitive(row.isSensitive)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    if let value = row.value {
+                        Text(value)
+                            .font(s.text(compact ? 11 : 12, .semibold).monospacedDigit())
+                            .foregroundStyle(row.isHighlighted ? s.accent : s.secondary)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.6)
+                            .privacySensitive(row.isSensitive)
+                    }
                 }
             }
             if let progress = row.progress {
@@ -1553,7 +1558,7 @@ struct ScheduleWeek: View {
                 let blockHeight = max(4, (block.end - block.start) * height)
                 let lines = Self.lines(height: blockHeight, hasRoom: block.room != nil)
                 // Without colors, a block in its color would be a solid white shape hiding its white text.
-                RoundedRectangle(cornerRadius: style.radius(3), style: .continuous)
+                RoundedRectangle(cornerRadius: style.blockRadius(3), style: .continuous)
                     .textBackdrop(Color(hex: block.colorHex), isAccented: style.isAccented)
                     .frame(height: blockHeight)
                     .overlay(alignment: .topLeading) {
@@ -1877,6 +1882,40 @@ struct TimerRing: View {
             }
             .gaugeStyle(.accessoryCircularCapacity)
             .widgetAccentable()
+        }
+    }
+}
+
+/// A line's name and its value side by side: when both don't fit, the value gives up its width first (smaller,
+/// then cut) but the name always keeps at least half the line. Before, the value never shrank and could leave its
+/// name a single letter (« D… 4 × 10 · 35 kg »).
+struct RowSplit: Layout {
+    var gap: CGFloat = 6
+
+    private func widths(_ width: CGFloat, _ subviews: Subviews) -> (title: CGFloat, value: CGFloat) {
+        guard subviews.count > 1 else { return (width, 0) }
+        let title = subviews[0].sizeThatFits(.unspecified).width
+        let value = subviews[1].sizeThatFits(.unspecified).width
+        let room = max(0, width - gap)
+        if title + value <= room { return (room - value, value) }
+        let valueWidth = min(value, max(room - min(title, room * 0.5), room * 0.3))
+        return (room - valueWidth, valueWidth)
+    }
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let ideal = subviews.reduce(CGFloat(0)) { $0 + $1.sizeThatFits(.unspecified).width } + (subviews.count > 1 ? gap : 0)
+        let width = proposal.width ?? ideal
+        let (t, v) = widths(width, subviews)
+        let heights = [subviews.first?.sizeThatFits(ProposedViewSize(width: t, height: proposal.height)).height ?? 0,
+                       subviews.count > 1 ? subviews[1].sizeThatFits(ProposedViewSize(width: v, height: proposal.height)).height : 0]
+        return CGSize(width: width, height: heights.max() ?? 0)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        let (t, v) = widths(bounds.width, subviews)
+        subviews.first?.place(at: CGPoint(x: bounds.minX, y: bounds.midY), anchor: .leading, proposal: ProposedViewSize(width: t, height: bounds.height))
+        if subviews.count > 1 {
+            subviews[1].place(at: CGPoint(x: bounds.maxX, y: bounds.midY), anchor: .trailing, proposal: ProposedViewSize(width: v, height: bounds.height))
         }
     }
 }
