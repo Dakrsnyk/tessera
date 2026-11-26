@@ -161,18 +161,26 @@ struct StudioStylePanel: View {
     private let tileWidth: CGFloat = 104
 
     var body: some View {
-        if let current = StyleCatalog.current(for: design) {
+        // One header for both cases (no swap between two views: they overlapped while changing style).
+        let current = StyleCatalog.current(for: design)
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "swatchpalette")
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
-                Text(current.name).font(.headline)
-                Text(current.summary)
+                if let current {
+                    Text(current.name).font(.headline)
+                }
+                Text(current?.summary ?? tr("Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
-            .accessibilityElement(children: .combine)
-        } else {
-            StudioNote(text: tr("Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur."), symbol: "swatchpalette")
+            .contentTransition(.opacity)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
         filters
         if let id = openFamily, let family = StyleCatalog.families.first(where: { $0.id == id }) {
             familyGrid(family)
