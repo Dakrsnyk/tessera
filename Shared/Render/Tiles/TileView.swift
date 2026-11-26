@@ -662,20 +662,8 @@ struct TileView: View {
             headerBlock
             // Without a chart below them, the figures sit at the bottom: no empty half under one row of figures.
             if context.isSmall || (context.isMedium && !hasVisual) { Spacer(minLength: 0) }
-            if context.isSmall {
-                // A small widget shows its main figure, then the others two by two.
-                let main = shown.first.map { [$0] } ?? []
-                let others = Array(stats.dropFirst().prefix(4))
-                let pairs = stride(from: 0, to: others.count, by: 2).map { Array(others[$0..<min($0 + 2, others.count)]) }
-                // Two others side by side (one more row of two when dense). No ViewThatFits: it froze the rendering.
-                if others.count > 1 {
-                    statGrid([main] + Array(pairs.prefix(s.rowDelta > 0 ? 2 : 1)), value: 22, other: 15)
-                } else {
-                    statGrid(chunks, value: 26, other: 17)
-                }
-            } else {
-                statGrid(chunks, value: oneRow ? 26 : 22, other: oneRow ? 20 : 18)
-            }
+            // Small: the main figure and one other, as before (a grid of pairs is left out until it is checked).
+            statGrid(chunks, value: context.isSmall ? 26 : (oneRow ? 26 : 22), other: context.isSmall ? 17 : (oneRow ? 20 : 18))
             if !context.isSmall, hasVisual {
                 visual(compact: context.isMedium)
                     .frame(minHeight: fillsHeight ? 110 : nil, maxHeight: fillsHeight ? .infinity : (context.isLarge ? 110 : 30))
@@ -704,7 +692,6 @@ struct TileView: View {
                                 .privacySensitive(tile.isSensitive)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .gridCellColumns(chunk.element.count == 1 && chunks.contains { $0.count > 1 } ? 2 : 1)
                     }
                 }
                 if chunk.offset < chunks.count - 1 {
