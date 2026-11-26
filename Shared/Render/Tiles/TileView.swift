@@ -838,50 +838,6 @@ struct TileView: View {
                         card { visual(compact: true) }
                     }
                 }
-            } else if context.isSmall {
-                // A small widget: its main card, then as many lines as its height holds in one card (two lines
-                // with bars, three without; more when dense). No ViewThatFits here: it froze the rendering.
-                let withBars = tile.rows.contains { $0.progress != nil }
-                let lines = Array(tile.rows.prefix(max(1, (withBars ? 2 : 3) + max(0, s.rowDelta / 2))))
-                if lines.count > 1 {
-                    mainCard
-                    // The lines at their own height (not card(), which takes all the height it is given), each on one
-                    // line: name, then value. TileRowsView here froze the export (runs 604 to 608).
-                    VStack(alignment: .leading, spacing: 4 * sp) {
-                        ForEach(lines) { row in
-                            HStack(spacing: 5) {
-                                if let hex = row.colorHex, !s.isAccented {
-                                    Circle().fill(Color(hex: hex)).frame(width: 5, height: 5)
-                                }
-                                Text(row.title)
-                                    .font(s.text(11))
-                                    .foregroundStyle(s.primary)
-                                    .lineLimit(1)
-                                    .layoutPriority(1)
-                                Spacer(minLength: 4)
-                                if let value = row.value {
-                                    Text(value)
-                                        .font(s.text(11, .semibold).monospacedDigit())
-                                        .foregroundStyle(s.secondary)
-                                        .lineLimit(1)
-                                        .minimumScaleFactor(0.6)
-                                        .privacySensitive(row.isSensitive)
-                                }
-                            }
-                        }
-                    }
-                        .padding(8 * sp)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(s.panel, in: RoundedRectangle(cornerRadius: s.blockRadius(12), style: .continuous))
-                        .styleDepth(s)
-                } else {
-                    mainCard
-                    if let stat = others.first {
-                        HStack(spacing: 6 * sp) { statCard(stat) }
-                    } else if hasVisual {
-                        card { visual(compact: true) }
-                    }
-                }
             } else {
                 mainCard
                 if context.isLarge && hasVisual {
