@@ -46,8 +46,8 @@ struct TileView: View {
                 }
             case .vertical: verticalLayout
             case .horizontal: horizontalLayout
-            case .minimal: minimalLayout
-            case .centered: centeredLayout
+            case .minimal: besideLines(minimalLayout)
+            case .centered: besideLines(centeredLayout)
             case .split: splitLayout
             case .data: dataLayout
             case .list: listLayout
@@ -545,6 +545,31 @@ struct TileView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: s.alignment == .center ? .center : .bottomLeading)
     }
 
+    /// A medium widget in Minimal or Focus: the figure on the left, the lines (the three macros, the session's
+    /// exercises) or the chart on the right, instead of two thirds left empty.
+    @ViewBuilder private func besideLines<Figure: View>(_ figure: Figure) -> some View {
+        if context.isMedium && (!tile.rows.isEmpty || hasVisual) {
+            HStack(alignment: .center, spacing: 14 * sp) {
+                figure
+                    .frame(maxWidth: .infinity)
+                Rectangle()
+                    .fill(s.secondary.opacity(0.22))
+                    .frame(width: 1)
+                    .padding(.vertical, 6)
+                Group {
+                    if !tile.rows.isEmpty {
+                        TileRowsView(rows: rows(4), context: context, compact: true)
+                    } else {
+                        visual(compact: true)
+                    }
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+        } else {
+            figure
+        }
+    }
+
     // MARK: Focus: icon and value at the center
 
     private var centeredLayout: some View {
@@ -626,9 +651,10 @@ struct TileView: View {
     }
 
     private var dataLayout: some View {
-        let columns = context.isSmall ? 1 : (context.isLarge ? 2 : 3)
-        let limit = max(1, (context.isSmall ? 2 : (context.isLarge ? 8 : 3)) + (context.isSmall ? 0 : s.rowDelta))
+        // A medium widget shows every figure that fits in two rows (the three macros, the session's exercises), not two.
+        let limit = max(1, (context.isSmall ? 2 : (context.isLarge ? 8 : 6)) + (context.isLarge ? s.rowDelta : 0))
         let shown = Array(stats.prefix(limit))
+        let columns = context.isSmall ? 1 : (context.isLarge ? 2 : (shown.count <= 4 ? max(1, shown.count) : 3))
         let chunks = stride(from: 0, to: shown.count, by: columns).map { Array(shown[$0..<min($0 + columns, shown.count)]) }
         // One row of figures in a medium widget has the room for larger figures.
         let oneRow = context.isMedium && chunks.count == 1 && !hasVisual
@@ -636,27 +662,18 @@ struct TileView: View {
             headerBlock
             // Without a chart below them, the figures sit at the bottom: no empty half under one row of figures.
             if context.isSmall || (context.isMedium && !hasVisual) { Spacer(minLength: 0) }
-            Grid(alignment: .leading, horizontalSpacing: 12 * sp, verticalSpacing: 10 * sp) {
-                ForEach(Array(chunks.enumerated()), id: \.offset) { chunk in
-                    GridRow {
-                        ForEach(chunk.element) { stat in
-                            VStack(alignment: .leading, spacing: 1) {
-                                statLabel(stat)
-                                Text(stat.value)
-                                    .font(s.number(stat.id == "value" ? (context.isSmall ? 26 : (oneRow ? 26 : 22)) : (context.isSmall ? 17 : (oneRow ? 20 : 18))))
-                                    .foregroundStyle(s.numberColor)
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.5)
-                                    .styleDepth(s)
-                                    .privacySensitive(tile.isSensitive)
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    }
-                    if chunk.offset < chunks.count - 1 {
-                        Rectangle().fill(s.secondary.opacity(0.18)).frame(height: 1).gridCellUnsizedAxes(.horizontal)
-                    }
+            if context.isSmall {
+                // A small widget shows its main figure, then the others two by two when they fit (the three
+                // macros), else the main figure and one other.
+                let main = shown.first.map { [$0] } ?? []
+                let others = Array(stats.dropFirst().prefix(4))
+                let pairs = stride(from: 0, to: others.count, by: 2).map { Array(others[$0..<min($0 + 2, others.count)]) }
+                ViewThatFits(in: .vertical) {
+                    if others.count > 1 { statGrid([main] + pairs, value: 22, other: 15) }
+                    statGrid(chunks, value: 26, other: 17)
                 }
+            } else {
+                statGrid(chunks, value: oneRow ? 26 : 22, other: oneRow ? 20 : 18)
             }
             if !context.isSmall, hasVisual {
                 visual(compact: context.isMedium)
@@ -668,6 +685,32 @@ struct TileView: View {
             if showsFootnote { footnoteText }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+    }
+
+    private func statGrid(_ chunks: [[Stat]], value: CGFloat, other: CGFloat) -> some View {
+        Grid(alignment: .leading, horizontalSpacing: 12 * sp, verticalSpacing: (context.isSmall ? 6 : 10) * sp) {
+            ForEach(Array(chunks.enumerated()), id: \.offset) { chunk in
+                GridRow {
+                    ForEach(chunk.element) { stat in
+                        VStack(alignment: .leading, spacing: 1) {
+                            statLabel(stat)
+                            Text(stat.value)
+                                .font(s.number(stat.id == "value" ? value : other))
+                                .foregroundStyle(s.numberColor)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.5)
+                                .styleDepth(s)
+                                .privacySensitive(tile.isSensitive)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .gridCellColumns(chunk.element.count == 1 && chunks.contains { $0.count > 1 } ? 2 : 1)
+                    }
+                }
+                if chunk.offset < chunks.count - 1 {
+                    Rectangle().fill(s.secondary.opacity(0.18)).frame(height: 1).gridCellUnsizedAxes(.horizontal)
+                }
+            }
+        }
     }
 
     // MARK: List: the lines first
@@ -767,15 +810,56 @@ struct TileView: View {
     // MARK: Cards: each information on its own card
 
     private var cardsLayout: some View {
-        let others = Array(stats.filter { $0.id != "value" }.prefix(max(0, (context.isLarge ? 4 : (context.isMedium ? 2 : 1)) + (context.isSmall ? 0 : s.rowDelta / 2))))
+        // A medium widget shows up to 4 figures beside the main one (the three macros, the session's exercises).
+        let others = Array(stats.filter { $0.id != "value" }.prefix(max(0, (context.isLarge ? 4 + s.rowDelta / 2 : (context.isMedium ? 4 : 1)))))
         return VStack(alignment: .leading, spacing: 6 * sp) {
             if !context.isSmall { headerBlock }
             if context.isMedium {
                 HStack(spacing: 6 * sp) {
                     mainCard.frame(maxWidth: .infinity)
-                    ForEach(others) { statCard($0) }
+                    if others.count > 2 {
+                        // Two rows of two beside the main card.
+                        let pairs = stride(from: 0, to: others.count, by: 2).map { Array(others[$0..<min($0 + 2, others.count)]) }
+                        VStack(spacing: 6 * sp) {
+                            ForEach(Array(pairs.enumerated()), id: \.offset) { pair in
+                                HStack(spacing: 6 * sp) {
+                                    ForEach(pair.element) { statCard($0, small: true) }
+                                    if pair.element.count == 1 { Color.clear.frame(maxWidth: .infinity) }
+                                }
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
+                        .layoutPriority(1)
+                    } else {
+                        ForEach(others) { statCard($0) }
+                    }
                     if others.isEmpty && hasVisual {
                         card { visual(compact: true) }
+                    }
+                }
+            } else if context.isSmall {
+                // A small widget: its main card, then every line that fits (the three macros as a list in one card),
+                // else two figures side by side, else one.
+                let lines = rows(4)
+                ViewThatFits(in: .vertical) {
+                    if lines.count > 1 {
+                        VStack(spacing: 6 * sp) {
+                            mainCard
+                            card { TileRowsView(rows: lines, context: context, compact: true) }
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    if lines.count > 2 {
+                        VStack(spacing: 6 * sp) {
+                            mainCard
+                            card { TileRowsView(rows: Array(lines.prefix(2)), context: context, compact: true) }
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    VStack(spacing: 6 * sp) {
+                        mainCard
+                        if let stat = others.first { HStack(spacing: 6 * sp) { statCard(stat) } }
+                        else if hasVisual { card { visual(compact: true) } }
                     }
                 }
             } else {
@@ -829,21 +913,22 @@ struct TileView: View {
         }
     }
 
-    private func statCard(_ stat: Stat) -> some View {
+    /// `small`: one of four figures in a medium widget, a line shorter and a size smaller.
+    private func statCard(_ stat: Stat, small: Bool = false) -> some View {
         card {
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: small ? 1 : 2) {
                 HStack(spacing: 4) {
                     // The line's own color as a dot: on the style's panels the amount keeps the style's number color.
                     if let color = stat.color { Circle().fill(color).frame(width: 6, height: 6) }
                     Text(stat.label)
                         .font(s.text(10, .medium))
                         .foregroundStyle(s.secondary)
-                        .lineLimit(context.isSmall ? 1 : 2)
+                        .lineLimit(context.isSmall || small ? 1 : 2)
                         .minimumScaleFactor(0.85)
                 }
                 Spacer(minLength: 0)
                 Text(stat.value)
-                    .font(s.number(context.isSmall ? 15 : 16))
+                    .font(s.number(context.isSmall ? 15 : (small ? 14 : 16)))
                     .foregroundStyle(s.numberColor)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
