@@ -845,8 +845,31 @@ struct TileView: View {
                 let lines = Array(tile.rows.prefix(max(1, (withBars ? 2 : 3) + max(0, s.rowDelta / 2))))
                 if lines.count > 1 {
                     mainCard
-                    // The lines at their own height (not card(), which takes all the height it is given).
-                    TileRowsView(rows: lines, context: context, compact: true)
+                    // The lines at their own height (not card(), which takes all the height it is given), each on one
+                    // line: name, then value. TileRowsView here froze the export (runs 604 to 608).
+                    VStack(alignment: .leading, spacing: 4 * sp) {
+                        ForEach(lines) { row in
+                            HStack(spacing: 5) {
+                                if let hex = row.colorHex, !s.isAccented {
+                                    Circle().fill(Color(hex: hex)).frame(width: 5, height: 5)
+                                }
+                                Text(row.title)
+                                    .font(s.text(11))
+                                    .foregroundStyle(s.primary)
+                                    .lineLimit(1)
+                                    .layoutPriority(1)
+                                Spacer(minLength: 4)
+                                if let value = row.value {
+                                    Text(value)
+                                        .font(s.text(11, .semibold).monospacedDigit())
+                                        .foregroundStyle(s.secondary)
+                                        .lineLimit(1)
+                                        .minimumScaleFactor(0.6)
+                                        .privacySensitive(row.isSensitive)
+                                }
+                            }
+                        }
+                    }
                         .padding(8 * sp)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .background(s.panel, in: RoundedRectangle(cornerRadius: s.blockRadius(12), style: .continuous))
