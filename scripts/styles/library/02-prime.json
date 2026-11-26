@@ -70,7 +70,7 @@
  {
   "id": "prime-platine",
   "name": "Platine Froid",
-  "summary": "Blanc froid, fines lignes, ultra léger",
+  "summary": "Blanc froid, lignes fines, très aéré",
   "theme": "light",
   "accent": "6C7A89",
   "bg": {
@@ -366,7 +366,7 @@
  {
   "id": "prime-argent",
   "name": "Argent",
-  "summary": "Reflet argenté clair, biseau, chiffres fins",
+  "summary": "Reflet argenté clair, biseau, chiffres nets",
   "theme": "dark",
   "accent": "6E7B8A",
   "bg": {
@@ -434,7 +434,7 @@
  {
   "id": "prime-capital",
   "name": "Capital",
-  "summary": "Ivoire, filet noir, serif fin, titre centré",
+  "summary": "Ivoire, filet noir, serif classique, centré",
   "theme": "light",
   "accent": "1A1A1A",
   "bg": {

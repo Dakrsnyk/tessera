@@ -118,7 +118,7 @@
  {
   "id": "mini-noir-pur",
   "name": "Noir pur",
-  "summary": "Noir OLED, chiffres fins, gris froid",
+  "summary": "Noir OLED, chiffres nets, gris froid",
   "theme": "minimal",
   "accent": "FFFFFF",
   "bg": {
@@ -416,7 +416,7 @@
  {
   "id": "mini-nuit-calme",
   "name": "Nuit calme",
-  "summary": "Bleu nuit sourd, lettres légères",
+  "summary": "Bleu nuit sourd, lettres sobres",
   "theme": "minimal",
   "accent": "8FA8D6",
   "bg": {
@@ -538,7 +538,7 @@
  {
   "id": "mini-sable",
   "name": "Dune douce",
-  "summary": "Dune douce, dégradé chaud, ombre longue",
+  "summary": "Dune douce, dégradé chaud, ombre décalée",
   "theme": "minimal",
   "accent": "B7794A",
   "bg": {
@@ -661,7 +661,7 @@
  {
   "id": "mini-brouillard",
   "name": "Brouillard",
-  "summary": "Gris bleuté vaporeux, texte très fin",
+  "summary": "Gris bleuté vaporeux, texte doux",
   "theme": "minimal",
   "accent": "7D8CA0",
   "bg": {

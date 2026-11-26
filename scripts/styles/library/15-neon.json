@@ -505,7 +505,7 @@
  {
   "id": "neon-halo-bleu",
   "name": "Halo bleu",
-  "summary": "Lueur diffuse sans bordure, chiffres fins",
+  "summary": "Lueur diffuse sans bordure, chiffres nets",
   "theme": "dark",
   "accent": "4D8DFF",
   "bg": {

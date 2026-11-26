@@ -2,7 +2,7 @@
  {
   "id": "aura-halo",
   "name": "Halo",
-  "summary": "Lueur rose douce, chiffres fins en minuscules",
+  "summary": "Lueur rose douce, chiffres nets en minuscules",
   "theme": "dark",
   "accent": "FF7AD9",
   "bg": {
@@ -276,7 +276,7 @@
  {
   "id": "aura-fievre",
   "name": "Fièvre",
-  "summary": "Rouge feu, ombre portée longue, gabarit étroit",
+  "summary": "Rouge feu, ombre dure décalée, format étroit",
   "theme": "dark",
   "accent": "FF5A3C",
   "bg": {
@@ -314,7 +314,7 @@
  {
   "id": "aura-brume",
   "name": "Brume",
-  "summary": "Verre dépoli, cartes flottantes, lettres fines",
+  "summary": "Verre dépoli, cartes flottantes, texte net",
   "theme": "dark",
   "accent": "404857",
   "bg": {

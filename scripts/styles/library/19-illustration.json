@@ -2,7 +2,7 @@
  {
   "id": "ill-bd",
   "name": "Bande dessinée",
-  "summary": "Trame de points, bulle, ombre dure",
+  "summary": "Trame de points, bulle, ombre douce",
   "theme": "light",
   "bg": {
    "kind": "color",

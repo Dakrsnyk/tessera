@@ -99,7 +99,7 @@
  {
   "id": "pixel-damier",
   "name": "Damier",
-  "summary": "Clair, trame de points et ombre dure",
+  "summary": "Clair, trame de points et relief marqué",
   "theme": "light",
   "accent": "E4002B",
   "bg": {

@@ -2507,7 +2507,7 @@
  "Acide": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:9608: list.append(StyleLook(id: \"brut-acide\", name: tr(\"Acide\"), summary: tr(\"Vert acide sur noir, ombre dure décalée\"), family: \"brutal\", themeID: .dark, accentHex: \"CCFF00\", background: .color(\"0B0B0B\"), "
+   "Shared/Model/StyleLibraryData.swift:9608: list.append(StyleLook(id: \"brut-acide\", name: tr(\"Acide\"), summary: tr(\"Vert acide sur noir, ombre douce\"), family: \"brutal\", themeID: .dark, accentHex: \"CCFF00\", background: .color(\"0B0B0B\"), font: ."
   ]
  },
  "Acide pantothénique (B5)": {
@@ -4461,7 +4461,7 @@
  "Argent": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:906: list.append(StyleLook(id: \"prime-argent\", name: tr(\"Argent\"), summary: tr(\"Reflet argenté clair, biseau, chiffres fins\"), family: \"prime\", themeID: .dark, accentHex: \"6E7B8A\", background: .gradient, f",
+   "Shared/Model/StyleLibraryData.swift:906: list.append(StyleLook(id: \"prime-argent\", name: tr(\"Argent\"), summary: tr(\"Reflet argenté clair, biseau, chiffres nets\"), family: \"prime\", themeID: .dark, accentHex: \"6E7B8A\", background: .gradient, f",
    "Shared/Render/Tiles/DashboardTiles.swift:214: var tile = Tile(title: tr(\"Argent\"), symbol: \"dollarsign.circle\")"
   ]
  },
@@ -5401,7 +5401,7 @@
  "Autocollant": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:6840: list.append(StyleLook(id: \"y2k-autocollant\", name: tr(\"Autocollant\"), summary: tr(\"Contour épais, couleurs vives, ombre longue\"), family: \"y2k\", themeID: .light, accentHex: \"FF3D81\", background: .colo"
+   "Shared/Model/StyleLibraryData.swift:6840: list.append(StyleLook(id: \"y2k-autocollant\", name: tr(\"Autocollant\"), summary: tr(\"Contour épais, couleurs vives, ombre dure\"), family: \"y2k\", themeID: .light, accentHex: \"FF3D81\", background: .color("
   ]
  },
  "Automatique": {
@@ -5794,7 +5794,7 @@
  "Bande dessinée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:10321: list.append(StyleLook(id: \"ill-bd\", name: tr(\"Bande dessinée\"), summary: tr(\"Trame de points, bulle, ombre dure\"), family: \"illustration\", themeID: .light, accentHex: \"E11D48\", background: .color(\"FFF"
+   "Shared/Model/StyleLibraryData.swift:10321: list.append(StyleLook(id: \"ill-bd\", name: tr(\"Bande dessinée\"), summary: tr(\"Trame de points, bulle, ombre douce\"), family: \"illustration\", themeID: .light, accentHex: \"E11D48\", background: .color(\"FF"
   ]
  },
  "Bande dégradée, capitales, bord à encoches": {
@@ -6404,10 +6404,10 @@
    "Shared/Model/StyleLibraryData.swift:1103: list.append(StyleLook(id: \"prime-indice\", name: tr(\"Indice\"), summary: tr(\"Blanc et trame de points, police géométrique\"), family: \"prime\", themeID: .light, accentHex: \"E4572E\", background: .color(\"FF"
   ]
  },
- "Blanc froid, fines lignes, ultra léger": {
+ "Blanc froid, lignes fines, très aéré": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:700: list.append(StyleLook(id: \"prime-platine\", name: tr(\"Platine Froid\"), summary: tr(\"Blanc froid, fines lignes, ultra léger\"), family: \"prime\", themeID: .light, accentHex: \"6C7A89\", background: .color(\""
+   "Shared/Model/StyleLibraryData.swift:700: list.append(StyleLook(id: \"prime-platine\", name: tr(\"Platine Froid\"), summary: tr(\"Blanc froid, lignes fines, très aéré\"), family: \"prime\", themeID: .light, accentHex: \"6C7A89\", background: .color(\"EE"
   ]
  },
  "Blanc glacé, flocons carrés, bleu net": {
@@ -6434,10 +6434,10 @@
    "Shared/Model/StyleLibraryData.swift:1530: list.append(StyleLook(id: \"luxe-perle\", name: tr(\"Perle\"), summary: tr(\"Blanc nacré, rangs de pois, Didot italique\"), family: \"luxe\", themeID: .dark, accentHex: \"B49A74\", background: .gradient, font: "
   ]
  },
- "Blanc perlé, reflets rose-vert, texte fin": {
+ "Blanc perlé, reflets rose-vert, italique net": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:6864: list.append(StyleLook(id: \"y2k-nacre\", name: tr(\"Nacre\"), summary: tr(\"Blanc perlé, reflets rose-vert, texte fin\"), family: \"y2k\", themeID: .light, accentHex: \"D58CE0\", background: .gradient, font: .t"
+   "Shared/Model/StyleLibraryData.swift:6864: list.append(StyleLook(id: \"y2k-nacre\", name: tr(\"Nacre\"), summary: tr(\"Blanc perlé, reflets rose-vert, italique net\"), family: \"y2k\", themeID: .light, accentHex: \"D58CE0\", background: .gradient, font:"
   ]
  },
  "Blanc pur": {
@@ -6596,10 +6596,10 @@
    "Shared/Model/StyleLibraryData.swift:1362: list.append(StyleLook(id: \"luxe-regate\", name: tr(\"Régate\"), summary: tr(\"Bleu marine, lignes de pont, blanc cassé\"), family: \"luxe\", themeID: .dark, accentHex: \"F4F1E8\", background: .gradient, font: "
   ]
  },
- "Bleu nuit sourd, lettres légères": {
+ "Bleu nuit sourd, lettres sobres": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:8986: list.append(StyleLook(id: \"mini-nuit-calme\", name: tr(\"Nuit calme\"), summary: tr(\"Bleu nuit sourd, lettres légères\"), family: \"minimal\", themeID: .minimal, accentHex: \"8FA8D6\", background: .color(\"0F1"
+   "Shared/Model/StyleLibraryData.swift:8986: list.append(StyleLook(id: \"mini-nuit-calme\", name: tr(\"Nuit calme\"), summary: tr(\"Bleu nuit sourd, lettres sobres\"), family: \"minimal\", themeID: .minimal, accentHex: \"8FA8D6\", background: .color(\"0F16"
   ]
  },
  "Bleu nuit étoilé, lune dorée, cochin italique": {
@@ -6662,10 +6662,10 @@
    "Shared/Model/StyleLibraryData.swift:1125: list.append(StyleLook(id: \"prime-compensation\", name: tr(\"Compensation\"), summary: tr(\"Bleu pâle, bord à encoches comme un titre\"), family: \"prime\", themeID: .light, accentHex: \"2F6F9F\", background: ."
   ]
  },
- "Bleu rayonnant, serif ultrafin, filet clair": {
+ "Bleu rayonnant, serif élégant, filet clair": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:1461: list.append(StyleLook(id: \"luxe-saphir\", name: tr(\"Cadran Saphir\"), summary: tr(\"Bleu rayonnant, serif ultrafin, filet clair\"), family: \"luxe\", themeID: .dark, accentHex: \"DCE8FF\", background: .gradie"
+   "Shared/Model/StyleLibraryData.swift:1461: list.append(StyleLook(id: \"luxe-saphir\", name: tr(\"Cadran Saphir\"), summary: tr(\"Bleu rayonnant, serif élégant, filet clair\"), family: \"luxe\", themeID: .dark, accentHex: \"DCE8FF\", background: .gradien"
   ]
  },
  "Bleu saphir, filet lumineux fin, cartes": {
@@ -7184,7 +7184,7 @@
  "Brouillard": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:9151: list.append(StyleLook(id: \"mini-brouillard\", name: tr(\"Brouillard\"), summary: tr(\"Gris bleuté vaporeux, texte très fin\"), family: \"minimal\", themeID: .minimal, accentHex: \"7D8CA0\", background: .gradie"
+   "Shared/Model/StyleLibraryData.swift:9151: list.append(StyleLook(id: \"mini-brouillard\", name: tr(\"Brouillard\"), summary: tr(\"Gris bleuté vaporeux, texte doux\"), family: \"minimal\", themeID: .minimal, accentHex: \"7D8CA0\", background: .gradient, "
   ]
  },
  "Brownie": {
@@ -7202,7 +7202,7 @@
  "Brume": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:270: list.append(StyleLook(id: \"aura-brume\", name: tr(\"Brume\"), summary: tr(\"Verre dépoli, cartes flottantes, lettres fines\"), family: \"aura\", themeID: .dark, accentHex: \"404857\", background: .glass, font:",
+   "Shared/Model/StyleLibraryData.swift:270: list.append(StyleLook(id: \"aura-brume\", name: tr(\"Brume\"), summary: tr(\"Verre dépoli, cartes flottantes, texte net\"), family: \"aura\", themeID: .dark, accentHex: \"404857\", background: .glass, font: .th",
    "Shared/Theme/Palette.swift:31: AccentSwatch(name: tr(\"Brume\"), hex: \"DDE3EA\"),",
    "Shared/Theme/Theme.swift:452: id: .mist, name: tr(\"Brume\"), tagline: tr(\"Pâle, léger, presque translucide\"), isPremium: true,"
   ]
@@ -7709,7 +7709,7 @@
  "Cadran Saphir": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:1461: list.append(StyleLook(id: \"luxe-saphir\", name: tr(\"Cadran Saphir\"), summary: tr(\"Bleu rayonnant, serif ultrafin, filet clair\"), family: \"luxe\", themeID: .dark, accentHex: \"DCE8FF\", background: .gradie"
+   "Shared/Model/StyleLibraryData.swift:1461: list.append(StyleLook(id: \"luxe-saphir\", name: tr(\"Cadran Saphir\"), summary: tr(\"Bleu rayonnant, serif élégant, filet clair\"), family: \"luxe\", themeID: .dark, accentHex: \"DCE8FF\", background: .gradien"
   ]
  },
  "Cadran ajouré, pointillés d'or sur gris foncé": {
@@ -8165,7 +8165,7 @@
  "Capital": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:950: list.append(StyleLook(id: \"prime-capital\", name: tr(\"Capital\"), summary: tr(\"Ivoire, filet noir, serif fin, titre centré\"), family: \"prime\", themeID: .light, accentHex: \"1A1A1A\", background: .color(\"F"
+   "Shared/Model/StyleLibraryData.swift:950: list.append(StyleLook(id: \"prime-capital\", name: tr(\"Capital\"), summary: tr(\"Ivoire, filet noir, serif classique, centré\"), family: \"prime\", themeID: .light, accentHex: \"1A1A1A\", background: .color(\"F"
   ]
  },
  "Capitales très larges, un seul trait d'or": {
@@ -9867,10 +9867,10 @@
    "Shared/Theme/Theme.swift:114: id: .light, name: tr(\"Clair\"), tagline: tr(\"Toujours lumineux\"), isPremium: false,"
   ]
  },
- "Clair, trame de points et ombre dure": {
+ "Clair, trame de points et relief marqué": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:4718: list.append(StyleLook(id: \"pixel-damier\", name: tr(\"Damier\"), summary: tr(\"Clair, trame de points et ombre dure\"), family: \"pixel\", themeID: .light, accentHex: \"E4002B\", background: .color(\"F2F2F2\"), "
+   "Shared/Model/StyleLibraryData.swift:4718: list.append(StyleLook(id: \"pixel-damier\", name: tr(\"Damier\"), summary: tr(\"Clair, trame de points et relief marqué\"), family: \"pixel\", themeID: .light, accentHex: \"E4002B\", background: .color(\"F2F2F2\""
   ]
  },
  "Classique": {
@@ -10640,10 +10640,10 @@
    "Shared/Model/StyleLibraryData.swift:8925: list.append(StyleLook(id: \"mini-brut\", name: tr(\"Brut\"), summary: tr(\"Contour noir épais, grotesque lourd\"), family: \"minimal\", themeID: .minimal, accentHex: \"111111\", background: .color(\"FFFFFF\"), fo"
   ]
  },
- "Contour épais, couleurs vives, ombre longue": {
+ "Contour épais, couleurs vives, ombre dure": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:6840: list.append(StyleLook(id: \"y2k-autocollant\", name: tr(\"Autocollant\"), summary: tr(\"Contour épais, couleurs vives, ombre longue\"), family: \"y2k\", themeID: .light, accentHex: \"FF3D81\", background: .colo"
+   "Shared/Model/StyleLibraryData.swift:6840: list.append(StyleLook(id: \"y2k-autocollant\", name: tr(\"Autocollant\"), summary: tr(\"Contour épais, couleurs vives, ombre dure\"), family: \"y2k\", themeID: .light, accentHex: \"FF3D81\", background: .color("
   ]
  },
  "Contrat de design": {
@@ -10704,7 +10704,7 @@
  "Coquette ruban": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:3539: list.append(StyleLook(id: \"coquette-ruban\", name: tr(\"Coquette ruban\"), summary: tr(\"Nœud de ruban, cadre rose, italique fin\"), family: \"girl\", themeID: .light, accentHex: \"E75A8D\", background: .gradi"
+   "Shared/Model/StyleLibraryData.swift:3539: list.append(StyleLook(id: \"coquette-ruban\", name: tr(\"Coquette ruban\"), summary: tr(\"Nœud de ruban, cadre rose, script cursif\"), family: \"girl\", themeID: .light, accentHex: \"E75A8D\", background: .grad"
   ]
  },
  "Corail": {
@@ -11951,7 +11951,7 @@
  "Damier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:4718: list.append(StyleLook(id: \"pixel-damier\", name: tr(\"Damier\"), summary: tr(\"Clair, trame de points et ombre dure\"), family: \"pixel\", themeID: .light, accentHex: \"E4002B\", background: .color(\"F2F2F2\"), "
+   "Shared/Model/StyleLibraryData.swift:4718: list.append(StyleLook(id: \"pixel-damier\", name: tr(\"Damier\"), summary: tr(\"Clair, trame de points et relief marqué\"), family: \"pixel\", themeID: .light, accentHex: \"E4002B\", background: .color(\"F2F2F2\""
   ]
  },
  "Damier, chromes, rouge cerise": {
@@ -13512,19 +13512,19 @@
  "Dune douce": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:9072: list.append(StyleLook(id: \"mini-sable\", name: tr(\"Dune douce\"), summary: tr(\"Dune douce, dégradé chaud, ombre longue\"), family: \"minimal\", themeID: .minimal, accentHex: \"B7794A\", background: .gradient"
+   "Shared/Model/StyleLibraryData.swift:9072: list.append(StyleLook(id: \"mini-sable\", name: tr(\"Dune douce\"), summary: tr(\"Dune douce, dégradé chaud, ombre décalée\"), family: \"minimal\", themeID: .minimal, accentHex: \"B7794A\", background: .gradien"
   ]
  },
- "Dune douce, dégradé chaud, ombre longue": {
+ "Dune douce, dégradé chaud, ombre décalée": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:9072: list.append(StyleLook(id: \"mini-sable\", name: tr(\"Dune douce\"), summary: tr(\"Dune douce, dégradé chaud, ombre longue\"), family: \"minimal\", themeID: .minimal, accentHex: \"B7794A\", background: .gradient"
+   "Shared/Model/StyleLibraryData.swift:9072: list.append(StyleLook(id: \"mini-sable\", name: tr(\"Dune douce\"), summary: tr(\"Dune douce, dégradé chaud, ombre décalée\"), family: \"minimal\", themeID: .minimal, accentHex: \"B7794A\", background: .gradien"
   ]
  },
  "Dune rose": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:10242: list.append(StyleLook(id: \"nat-dune\", name: tr(\"Dune rose\"), summary: tr(\"Dégradé pêche, horizon, Gill Sans léger\"), family: \"nature\", themeID: .light, accentHex: \"8A2E4A\", background: .gradient, font"
+   "Shared/Model/StyleLibraryData.swift:10242: list.append(StyleLook(id: \"nat-dune\", name: tr(\"Dune rose\"), summary: tr(\"Dégradé pêche, horizon, Gill Sans\"), family: \"nature\", themeID: .light, accentHex: \"8A2E4A\", background: .gradient, font: .sta"
   ]
  },
  "Dunes": {
@@ -13854,10 +13854,10 @@
    "Shared/Model/StyleLibraryData.swift:3976: list.append(StyleLook(id: \"miel-rose\", name: tr(\"Miel et rose\"), summary: tr(\"Dégradé pêche, glow chaud, minimal fin\"), family: \"girl\", themeID: .light, accentHex: \"F2889B\", background: .gradient, fon"
   ]
  },
- "Dégradé pêche, horizon, Gill Sans léger": {
+ "Dégradé pêche, horizon, Gill Sans": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:10242: list.append(StyleLook(id: \"nat-dune\", name: tr(\"Dune rose\"), summary: tr(\"Dégradé pêche, horizon, Gill Sans léger\"), family: \"nature\", themeID: .light, accentHex: \"8A2E4A\", background: .gradient, font"
+   "Shared/Model/StyleLibraryData.swift:10242: list.append(StyleLook(id: \"nat-dune\", name: tr(\"Dune rose\"), summary: tr(\"Dégradé pêche, horizon, Gill Sans\"), family: \"nature\", themeID: .light, accentHex: \"8A2E4A\", background: .gradient, font: .sta"
   ]
  },
  "Dégradé turquoise, nuages doux, lumière haute": {
@@ -16206,7 +16206,7 @@
  "Fièvre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:248: list.append(StyleLook(id: \"aura-fievre\", name: tr(\"Fièvre\"), summary: tr(\"Rouge feu, ombre portée longue, gabarit étroit\"), family: \"aura\", themeID: .dark, accentHex: \"FF5A3C\", background: .gradient, "
+   "Shared/Model/StyleLibraryData.swift:248: list.append(StyleLook(id: \"aura-fievre\", name: tr(\"Fièvre\"), summary: tr(\"Rouge feu, ombre dure décalée, format étroit\"), family: \"aura\", themeID: .dark, accentHex: \"FF5A3C\", background: .gradient, fo"
   ]
  },
  "Flash": {
@@ -17445,10 +17445,10 @@
    "Shared/Model/StyleLibraryData.swift:9006: list.append(StyleLook(id: \"mini-ardoise-fine\", name: tr(\"Ardoise fine\"), summary: tr(\"Gris ardoise, trait clair, données\"), family: \"minimal\", themeID: .minimal, accentHex: \"A9B7C6\", background: .colo"
   ]
  },
- "Gris bleuté vaporeux, texte très fin": {
+ "Gris bleuté vaporeux, texte doux": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:9151: list.append(StyleLook(id: \"mini-brouillard\", name: tr(\"Brouillard\"), summary: tr(\"Gris bleuté vaporeux, texte très fin\"), family: \"minimal\", themeID: .minimal, accentHex: \"7D8CA0\", background: .gradie"
+   "Shared/Model/StyleLibraryData.swift:9151: list.append(StyleLook(id: \"mini-brouillard\", name: tr(\"Brouillard\"), summary: tr(\"Gris bleuté vaporeux, texte doux\"), family: \"minimal\", themeID: .minimal, accentHex: \"7D8CA0\", background: .gradient, "
   ]
  },
  "Gris béton": {
@@ -17511,10 +17511,10 @@
    "Shared/Model/StyleLibraryData.swift:9193: list.append(StyleLook(id: \"mini-ecran-encre\", name: tr(\"Encre électronique\"), summary: tr(\"Gris papier E-ink, serif de lecture\"), family: \"minimal\", themeID: .minimal, accentHex: \"444444\", background:"
   ]
  },
- "Gris titane sablé, chiffres ultra fins": {
+ "Gris titane sablé, chiffres nets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:2459: list.append(StyleLook(id: \"titane-mat\", name: tr(\"Titane mat\"), summary: tr(\"Gris titane sablé, chiffres ultra fins\"), family: \"chrome\", themeID: .dark, accentHex: \"B9C2CF\", background: .gradient, fon"
+   "Shared/Model/StyleLibraryData.swift:2459: list.append(StyleLook(id: \"titane-mat\", name: tr(\"Titane mat\"), summary: tr(\"Gris titane sablé, chiffres nets\"), family: \"chrome\", themeID: .dark, accentHex: \"B9C2CF\", background: .gradient, font: .st"
   ]
  },
  "Gris titane, biseau net, colonnes de chiffres": {
@@ -17718,13 +17718,13 @@
  "Halo": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:59: list.append(StyleLook(id: \"aura-halo\", name: tr(\"Halo\"), summary: tr(\"Lueur rose douce, chiffres fins en minuscules\"), family: \"aura\", themeID: .dark, accentHex: \"FF7AD9\", background: .gradient, font:"
+   "Shared/Model/StyleLibraryData.swift:59: list.append(StyleLook(id: \"aura-halo\", name: tr(\"Halo\"), summary: tr(\"Lueur rose douce, chiffres nets en minuscules\"), family: \"aura\", themeID: .dark, accentHex: \"FF7AD9\", background: .gradient, font:"
   ]
  },
  "Halo bleu": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:8477: list.append(StyleLook(id: \"neon-halo-bleu\", name: tr(\"Halo bleu\"), summary: tr(\"Lueur diffuse sans bordure, chiffres fins\"), family: \"neon\", themeID: .dark, accentHex: \"4D8DFF\", background: .gradient,"
+   "Shared/Model/StyleLibraryData.swift:8477: list.append(StyleLook(id: \"neon-halo-bleu\", name: tr(\"Halo bleu\"), summary: tr(\"Lueur diffuse sans bordure, chiffres nets\"), family: \"neon\", themeID: .dark, accentHex: \"4D8DFF\", background: .gradient,"
   ]
  },
  "Haltères": {
@@ -18702,13 +18702,13 @@
  "Inox sablé": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:2657: list.append(StyleLook(id: \"inox-sable\", name: tr(\"Inox sablé\"), summary: tr(\"Inox satiné sans cadre, texte fin\"), family: \"chrome\", themeID: .light, accentHex: \"526071\", background: .color(\"C9CDD2\"), "
+   "Shared/Model/StyleLibraryData.swift:2657: list.append(StyleLook(id: \"inox-sable\", name: tr(\"Inox sablé\"), summary: tr(\"Inox satiné sans cadre, texte net\"), family: \"chrome\", themeID: .light, accentHex: \"526071\", background: .color(\"C9CDD2\"), "
   ]
  },
- "Inox satiné sans cadre, texte fin": {
+ "Inox satiné sans cadre, texte net": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:2657: list.append(StyleLook(id: \"inox-sable\", name: tr(\"Inox sablé\"), summary: tr(\"Inox satiné sans cadre, texte fin\"), family: \"chrome\", themeID: .light, accentHex: \"526071\", background: .color(\"C9CDD2\"), "
+   "Shared/Model/StyleLibraryData.swift:2657: list.append(StyleLook(id: \"inox-sable\", name: tr(\"Inox sablé\"), summary: tr(\"Inox satiné sans cadre, texte net\"), family: \"chrome\", themeID: .light, accentHex: \"526071\", background: .color(\"C9CDD2\"), "
   ]
  },
  "Inspire avant de descendre, expire en remontant.": {
@@ -18922,10 +18922,10 @@
    "Shared/Model/StyleLibraryData.swift:9132: list.append(StyleLook(id: \"mini-ivoire-or\", name: tr(\"Ivoire et or\"), summary: tr(\"Ivoire mat, filet doré, petite capitale\"), family: \"minimal\", themeID: .minimal, accentHex: \"A8864A\", background: .co"
   ]
  },
- "Ivoire, filet noir, serif fin, titre centré": {
+ "Ivoire, filet noir, serif classique, centré": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:950: list.append(StyleLook(id: \"prime-capital\", name: tr(\"Capital\"), summary: tr(\"Ivoire, filet noir, serif fin, titre centré\"), family: \"prime\", themeID: .light, accentHex: \"1A1A1A\", background: .color(\"F"
+   "Shared/Model/StyleLibraryData.swift:950: list.append(StyleLook(id: \"prime-capital\", name: tr(\"Capital\"), summary: tr(\"Ivoire, filet noir, serif classique, centré\"), family: \"prime\", themeID: .light, accentHex: \"1A1A1A\", background: .color(\"F"
   ]
  },
  "J-%@": {
@@ -19031,10 +19031,10 @@
    "Shared/Model/StyleLibraryData.swift:4361: list.append(StyleLook(id: \"pissenlit\", name: tr(\"Pissenlit\"), summary: tr(\"Jaune tendre, étoiles, spirales d'enfance\"), family: \"rose\", themeID: .light, accentHex: \"E8B923\", background: .gradient, fon"
   ]
  },
- "Jaune vif, trait noir, ombre dure": {
+ "Jaune vif, trait noir, aplats nets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:9223: list.append(StyleLook(id: \"brut-jaune\", name: tr(\"Néo-brutal\"), summary: tr(\"Jaune vif, trait noir, ombre dure\"), family: \"brutal\", themeID: .light, accentHex: \"000000\", background: .color(\"FFE14D\"), "
+   "Shared/Model/StyleLibraryData.swift:9223: list.append(StyleLook(id: \"brut-jaune\", name: tr(\"Néo-brutal\"), summary: tr(\"Jaune vif, trait noir, aplats nets\"), family: \"brutal\", themeID: .light, accentHex: \"000000\", background: .color(\"FFE14D\"),"
   ]
  },
  "Je n'ai pas trouvé de cours dans ce document. Essaie avec une photo plus nette, bien cadrée et sans reflet, ou avec le PDF.": {
@@ -21923,16 +21923,16 @@
    "Shared/Model/StyleLibraryData.swift:368: list.append(StyleLook(id: \"aura-neon-ange\", name: tr(\"Ange Néon\"), summary: tr(\"Lueur cyan et rose, texte à chasse fixe\"), family: \"aura\", themeID: .dark, accentHex: \"7CF2FF\", background: .gradient, f"
   ]
  },
- "Lueur diffuse sans bordure, chiffres fins": {
+ "Lueur diffuse sans bordure, chiffres nets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:8477: list.append(StyleLook(id: \"neon-halo-bleu\", name: tr(\"Halo bleu\"), summary: tr(\"Lueur diffuse sans bordure, chiffres fins\"), family: \"neon\", themeID: .dark, accentHex: \"4D8DFF\", background: .gradient,"
+   "Shared/Model/StyleLibraryData.swift:8477: list.append(StyleLook(id: \"neon-halo-bleu\", name: tr(\"Halo bleu\"), summary: tr(\"Lueur diffuse sans bordure, chiffres nets\"), family: \"neon\", themeID: .dark, accentHex: \"4D8DFF\", background: .gradient,"
   ]
  },
- "Lueur rose douce, chiffres fins en minuscules": {
+ "Lueur rose douce, chiffres nets en minuscules": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:59: list.append(StyleLook(id: \"aura-halo\", name: tr(\"Halo\"), summary: tr(\"Lueur rose douce, chiffres fins en minuscules\"), family: \"aura\", themeID: .dark, accentHex: \"FF7AD9\", background: .gradient, font:"
+   "Shared/Model/StyleLibraryData.swift:59: list.append(StyleLook(id: \"aura-halo\", name: tr(\"Halo\"), summary: tr(\"Lueur rose douce, chiffres nets en minuscules\"), family: \"aura\", themeID: .dark, accentHex: \"FF7AD9\", background: .gradient, font:"
   ]
  },
  "Lueurs roses sur fond noir": {
@@ -24273,7 +24273,7 @@
  "Nacre": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:6864: list.append(StyleLook(id: \"y2k-nacre\", name: tr(\"Nacre\"), summary: tr(\"Blanc perlé, reflets rose-vert, texte fin\"), family: \"y2k\", themeID: .light, accentHex: \"D58CE0\", background: .gradient, font: .t"
+   "Shared/Model/StyleLibraryData.swift:6864: list.append(StyleLook(id: \"y2k-nacre\", name: tr(\"Nacre\"), summary: tr(\"Blanc perlé, reflets rose-vert, italique net\"), family: \"y2k\", themeID: .light, accentHex: \"D58CE0\", background: .gradient, font:"
   ]
  },
  "Nanotech": {
@@ -24370,10 +24370,10 @@
    "Shared/Theme/Palette.swift:35: AccentSwatch(name: tr(\"Noir\"), hex: \"000000\"),"
   ]
  },
- "Noir OLED, chiffres fins, gris froid": {
+ "Noir OLED, chiffres nets, gris froid": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:8789: list.append(StyleLook(id: \"mini-noir-pur\", name: tr(\"Noir pur\"), summary: tr(\"Noir OLED, chiffres fins, gris froid\"), family: \"minimal\", themeID: .minimal, accentHex: \"FFFFFF\", background: .color(\"000"
+   "Shared/Model/StyleLibraryData.swift:8789: list.append(StyleLook(id: \"mini-noir-pur\", name: tr(\"Noir pur\"), summary: tr(\"Noir OLED, chiffres nets, gris froid\"), family: \"minimal\", themeID: .minimal, accentHex: \"FFFFFF\", background: .color(\"000"
   ]
  },
  "Noir absolu, rien d'autre qu'un grand chiffre": {
@@ -24482,7 +24482,7 @@
  "Noir pur": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:8789: list.append(StyleLook(id: \"mini-noir-pur\", name: tr(\"Noir pur\"), summary: tr(\"Noir OLED, chiffres fins, gris froid\"), family: \"minimal\", themeID: .minimal, accentHex: \"FFFFFF\", background: .color(\"000"
+   "Shared/Model/StyleLibraryData.swift:8789: list.append(StyleLook(id: \"mini-noir-pur\", name: tr(\"Noir pur\"), summary: tr(\"Noir OLED, chiffres nets, gris froid\"), family: \"minimal\", themeID: .minimal, accentHex: \"FFFFFF\", background: .color(\"000"
   ]
  },
  "Noir pur, couronne dorée, police étroite": {
@@ -25290,7 +25290,7 @@
  "Nuit calme": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:8986: list.append(StyleLook(id: \"mini-nuit-calme\", name: tr(\"Nuit calme\"), summary: tr(\"Bleu nuit sourd, lettres légères\"), family: \"minimal\", themeID: .minimal, accentHex: \"8FA8D6\", background: .color(\"0F1"
+   "Shared/Model/StyleLibraryData.swift:8986: list.append(StyleLook(id: \"mini-nuit-calme\", name: tr(\"Nuit calme\"), summary: tr(\"Bleu nuit sourd, lettres sobres\"), family: \"minimal\", themeID: .minimal, accentHex: \"8FA8D6\", background: .color(\"0F16"
   ]
  },
  "Nuit claire": {
@@ -25419,7 +25419,7 @@
  "Néo-brutal": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:9223: list.append(StyleLook(id: \"brut-jaune\", name: tr(\"Néo-brutal\"), summary: tr(\"Jaune vif, trait noir, ombre dure\"), family: \"brutal\", themeID: .light, accentHex: \"000000\", background: .color(\"FFE14D\"), "
+   "Shared/Model/StyleLibraryData.swift:9223: list.append(StyleLook(id: \"brut-jaune\", name: tr(\"Néo-brutal\"), summary: tr(\"Jaune vif, trait noir, aplats nets\"), family: \"brutal\", themeID: .light, accentHex: \"000000\", background: .color(\"FFE14D\"),"
   ]
  },
  "Néon": {
@@ -25491,10 +25491,10 @@
    "Shared/Model/StyleLibraryData.swift:8408: list.append(StyleLook(id: \"neon-arcade-tube\", name: tr(\"Salle de jeux\"), summary: tr(\"Néons sur moquette, pixels et glow\"), family: \"neon\", themeID: .dark, accentHex: \"47FFB0\", background: .color(\"0A0"
   ]
  },
- "Nœud de ruban, cadre rose, italique fin": {
+ "Nœud de ruban, cadre rose, script cursif": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:3539: list.append(StyleLook(id: \"coquette-ruban\", name: tr(\"Coquette ruban\"), summary: tr(\"Nœud de ruban, cadre rose, italique fin\"), family: \"girl\", themeID: .light, accentHex: \"E75A8D\", background: .gradi"
+   "Shared/Model/StyleLibraryData.swift:3539: list.append(StyleLook(id: \"coquette-ruban\", name: tr(\"Coquette ruban\"), summary: tr(\"Nœud de ruban, cadre rose, script cursif\"), family: \"girl\", themeID: .light, accentHex: \"E75A8D\", background: .grad"
   ]
  },
  "OK": {
@@ -27729,7 +27729,7 @@
  "Platine Froid": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:700: list.append(StyleLook(id: \"prime-platine\", name: tr(\"Platine Froid\"), summary: tr(\"Blanc froid, fines lignes, ultra léger\"), family: \"prime\", themeID: .light, accentHex: \"6C7A89\", background: .color(\""
+   "Shared/Model/StyleLibraryData.swift:700: list.append(StyleLook(id: \"prime-platine\", name: tr(\"Platine Froid\"), summary: tr(\"Blanc froid, lignes fines, très aéré\"), family: \"prime\", themeID: .light, accentHex: \"6C7A89\", background: .color(\"EE"
   ]
  },
  "Platine épuré, filet gris, capitales espacées": {
@@ -30416,10 +30416,10 @@
    "Shared/Domains/ExerciseLibrary.swift:396: steps: [tr(\"Ouvre les bras en arc de cercle jusqu'à l'étirement des pectoraux (ou de l'arrière des épaules pour l'oiseau).\"), tr(\"Referme en gardant l'angle des coudes.\")],"
   ]
  },
- "Reflet argenté clair, biseau, chiffres fins": {
+ "Reflet argenté clair, biseau, chiffres nets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:906: list.append(StyleLook(id: \"prime-argent\", name: tr(\"Argent\"), summary: tr(\"Reflet argenté clair, biseau, chiffres fins\"), family: \"prime\", themeID: .dark, accentHex: \"6E7B8A\", background: .gradient, f"
+   "Shared/Model/StyleLibraryData.swift:906: list.append(StyleLook(id: \"prime-argent\", name: tr(\"Argent\"), summary: tr(\"Reflet argenté clair, biseau, chiffres nets\"), family: \"prime\", themeID: .dark, accentHex: \"6E7B8A\", background: .gradient, f"
   ]
  },
  "Reflet brillant glossy, rouge cerise": {
@@ -31948,10 +31948,10 @@
    "Shared/Model/StyleLibraryData.swift:7237: list.append(StyleLook(id: \"vint-affiche\", name: tr(\"Affiche 1930\"), summary: tr(\"Rouge et crème, capitales condensées\"), family: \"vintage\", themeID: .light, accentHex: \"C7351F\", background: .color(\"F1"
   ]
  },
- "Rouge feu, ombre portée longue, gabarit étroit": {
+ "Rouge feu, ombre dure décalée, format étroit": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:248: list.append(StyleLook(id: \"aura-fievre\", name: tr(\"Fièvre\"), summary: tr(\"Rouge feu, ombre portée longue, gabarit étroit\"), family: \"aura\", themeID: .dark, accentHex: \"FF5A3C\", background: .gradient, "
+   "Shared/Model/StyleLibraryData.swift:248: list.append(StyleLook(id: \"aura-fievre\", name: tr(\"Fièvre\"), summary: tr(\"Rouge feu, ombre dure décalée, format étroit\"), family: \"aura\", themeID: .dark, accentHex: \"FF5A3C\", background: .gradient, fo"
   ]
  },
  "Rouge feu, vagues en blocs, cadre sombre": {
@@ -36735,7 +36735,7 @@
  "Titane mat": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:2459: list.append(StyleLook(id: \"titane-mat\", name: tr(\"Titane mat\"), summary: tr(\"Gris titane sablé, chiffres ultra fins\"), family: \"chrome\", themeID: .dark, accentHex: \"B9C2CF\", background: .gradient, fon"
+   "Shared/Model/StyleLibraryData.swift:2459: list.append(StyleLook(id: \"titane-mat\", name: tr(\"Titane mat\"), summary: tr(\"Gris titane sablé, chiffres nets\"), family: \"chrome\", themeID: .dark, accentHex: \"B9C2CF\", background: .gradient, font: .st"
   ]
  },
  "Titre": {
@@ -37933,10 +37933,10 @@
    "Shared/Model/StyleLibraryData.swift:9896: list.append(StyleLook(id: \"nat-lin\", name: tr(\"Toile de lin\"), summary: tr(\"Trame de lin écru, pointillé, Georgia\"), family: \"nature\", themeID: .light, accentHex: \"7A5C2E\", background: .color(\"E9DFCB\""
   ]
  },
- "Trame de points, bulle, ombre dure": {
+ "Trame de points, bulle, ombre douce": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:10321: list.append(StyleLook(id: \"ill-bd\", name: tr(\"Bande dessinée\"), summary: tr(\"Trame de points, bulle, ombre dure\"), family: \"illustration\", themeID: .light, accentHex: \"E11D48\", background: .color(\"FFF"
+   "Shared/Model/StyleLibraryData.swift:10321: list.append(StyleLook(id: \"ill-bd\", name: tr(\"Bande dessinée\"), summary: tr(\"Trame de points, bulle, ombre douce\"), family: \"illustration\", themeID: .light, accentHex: \"E11D48\", background: .color(\"FF"
   ]
  },
  "Trame rose et bleu, décalage d'impression": {
@@ -39221,7 +39221,7 @@
  "Verre dépoli": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:2974: list.append(StyleLook(id: \"verre-depoli\", name: tr(\"Verre dépoli\"), summary: tr(\"Verre mat, filet blanc, chiffres fins\"), family: \"verre\", themeID: .dark, accentHex: \"DCEBF8\", background: .glass, font"
+   "Shared/Model/StyleLibraryData.swift:2974: list.append(StyleLook(id: \"verre-depoli\", name: tr(\"Verre dépoli\"), summary: tr(\"Verre mat, filet blanc, chiffres nets\"), family: \"verre\", themeID: .dark, accentHex: \"DCEBF8\", background: .glass, font"
   ]
  },
  "Verre dépoli et reflets": {
@@ -39236,10 +39236,10 @@
    "Shared/Model/StyleLibraryData.swift:1037: list.append(StyleLook(id: \"prime-voile\", name: tr(\"Voile\"), summary: tr(\"Verre dépoli sobre, texte moyen, bords doux\"), family: \"prime\", themeID: .dark, accentHex: \"434951\", background: .glass, font: "
   ]
  },
- "Verre dépoli, cartes flottantes, lettres fines": {
+ "Verre dépoli, cartes flottantes, texte net": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:270: list.append(StyleLook(id: \"aura-brume\", name: tr(\"Brume\"), summary: tr(\"Verre dépoli, cartes flottantes, lettres fines\"), family: \"aura\", themeID: .dark, accentHex: \"404857\", background: .glass, font:"
+   "Shared/Model/StyleLibraryData.swift:270: list.append(StyleLook(id: \"aura-brume\", name: tr(\"Brume\"), summary: tr(\"Verre dépoli, cartes flottantes, texte net\"), family: \"aura\", themeID: .dark, accentHex: \"404857\", background: .glass, font: .th"
   ]
  },
  "Verre dépoli, grain de pixels fins": {
@@ -39290,10 +39290,10 @@
    "Shared/Theme/Theme.swift:253: id: .liquidGlass, name: tr(\"Liquid Glass\"), tagline: tr(\"Verre liquide et reflets\"), isPremium: true,"
   ]
  },
- "Verre mat, filet blanc, chiffres fins": {
+ "Verre mat, filet blanc, chiffres nets": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:2974: list.append(StyleLook(id: \"verre-depoli\", name: tr(\"Verre dépoli\"), summary: tr(\"Verre mat, filet blanc, chiffres fins\"), family: \"verre\", themeID: .dark, accentHex: \"DCEBF8\", background: .glass, font"
+   "Shared/Model/StyleLibraryData.swift:2974: list.append(StyleLook(id: \"verre-depoli\", name: tr(\"Verre dépoli\"), summary: tr(\"Verre mat, filet blanc, chiffres nets\"), family: \"verre\", themeID: .dark, accentHex: \"DCEBF8\", background: .glass, font"
   ]
  },
  "Verre minuit": {
@@ -39411,10 +39411,10 @@
    "Shared/Model/StyleLibraryData.swift:624: list.append(StyleLook(id: \"aura-pulse\", name: tr(\"Pulse\"), summary: tr(\"Vert acide sur noir, mono grasse, bord pixel\"), family: \"aura\", themeID: .dark, accentHex: \"B6FF3C\", background: .color(\"0C1208\""
   ]
  },
- "Vert acide sur noir, ombre dure décalée": {
+ "Vert acide sur noir, ombre douce": {
   "placeholders": 0,
   "uses": [
-   "Shared/Model/StyleLibraryData.swift:9608: list.append(StyleLook(id: \"brut-acide\", name: tr(\"Acide\"), summary: tr(\"Vert acide sur noir, ombre dure décalée\"), family: \"brutal\", themeID: .dark, accentHex: \"CCFF00\", background: .color(\"0B0B0B\"), "
+   "Shared/Model/StyleLibraryData.swift:9608: list.append(StyleLook(id: \"brut-acide\", name: tr(\"Acide\"), summary: tr(\"Vert acide sur noir, ombre douce\"), family: \"brutal\", themeID: .dark, accentHex: \"CCFF00\", background: .color(\"0B0B0B\"), font: ."
   ]
  },
  "Vert anglais, double filet crème, Iowan": {

@@ -2,7 +2,7 @@
  {
   "id": "brut-jaune",
   "name": "Néo-brutal",
-  "summary": "Jaune vif, trait noir, ombre dure",
+  "summary": "Jaune vif, trait noir, aplats nets",
   "theme": "light",
   "bg": {
    "kind": "color",
@@ -568,7 +568,7 @@
  {
   "id": "brut-acide",
   "name": "Acide",
-  "summary": "Vert acide sur noir, ombre dure décalée",
+  "summary": "Vert acide sur noir, ombre douce",
   "theme": "dark",
   "bg": {
    "kind": "color",

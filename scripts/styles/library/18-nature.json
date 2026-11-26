@@ -706,7 +706,7 @@
  {
   "id": "nat-dune",
   "name": "Dune rose",
-  "summary": "Dégradé pêche, horizon, Gill Sans léger",
+  "summary": "Dégradé pêche, horizon, Gill Sans",
   "theme": "light",
   "bg": {
    "kind": "gradient",

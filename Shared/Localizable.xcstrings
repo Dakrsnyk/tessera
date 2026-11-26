@@ -47612,49 +47612,49 @@
         }
       }
     },
-    "Blanc froid, fines lignes, ultra léger": {
+    "Blanc froid, lignes fines, très aéré": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kaltweiß, feine Linien, ultraleicht"
+            "value": "Kühles Weiß, feine Linien, luftig"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cool white, fine lines, ultra light"
+            "value": "Cool white, fine lines, airy"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blanco frío, líneas finas, ultraligero"
+            "value": "Blanco frío, líneas finas, aireado"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blanc froid, fines lignes, ultra léger"
+            "value": "Blanc froid, lignes fines, très aéré"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bianco freddo, linee sottili, ultraleggero"
+            "value": "Bianco freddo, linee sottili, arioso"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "クールホワイト、細い線、極細"
+            "value": "冷たい白、細い線、ゆとりある余白"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Branco frio, linhas finas, ultraleve"
+            "value": "Branco frio, linhas finas, arejado"
           }
         }
       }
@@ -47847,49 +47847,49 @@
         }
       }
     },
-    "Blanc perlé, reflets rose-vert, texte fin": {
+    "Blanc perlé, reflets rose-vert, italique net": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Perlweiß, rosa-grüner Schimmer, feine Schrift"
+            "value": "Perlweiß, rosa-grüner Glanz, klare Kursive"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pearl white, pink-green sheen, thin text"
+            "value": "Pearl white, pink-green sheen, crisp italic"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blanco perla, reflejos rosa y verde, texto fino"
+            "value": "Blanco perlado, reflejos rosa y verde, cursiva nítida"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blanc perlé, reflets rose-vert, texte fin"
+            "value": "Blanc perlé, reflets rose-vert, italique net"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bianco perla, riflessi rosa e verde, testo sottile"
+            "value": "Bianco perlato, riflessi rosa-verde, corsivo nitido"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "パールホワイト、ピンクと緑の光沢、細い文字"
+            "value": "パールホワイト、ピンクと緑の反射、くっきりしたイタリック"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Branco pérola, reflexos rosa e verde, texto fino"
+            "value": "Branco perolado, reflexos rosa e verde, itálico nítido"
           }
         }
       }
@@ -49116,49 +49116,49 @@
         }
       }
     },
-    "Bleu nuit sourd, lettres légères": {
+    "Bleu nuit sourd, lettres sobres": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gedämpftes Nachtblau, leichte Schrift"
+            "value": "Gedämpftes Nachtblau, schlichte Schrift"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Muted midnight blue, light lettering"
+            "value": "Muted midnight blue, plain lettering"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Azul noche apagado, letras ligeras"
+            "value": "Azul noche apagado, letras sobrias"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bleu nuit sourd, lettres légères"
+            "value": "Bleu nuit sourd, lettres sobres"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blu notte tenue, lettere leggere"
+            "value": "Blu notte spento, caratteri sobri"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "くすんだ夜の青、細い文字"
+            "value": "くすんだ夜の青、すっきりした文字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Azul-noite suave, letras leves"
+            "value": "Azul-noite discreto, letras sóbrias"
           }
         }
       }
@@ -49633,49 +49633,49 @@
         }
       }
     },
-    "Bleu rayonnant, serif ultrafin, filet clair": {
+    "Bleu rayonnant, serif élégant, filet clair": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Strahlendes Blau, hauchdünne Serife, helle Linie"
+            "value": "Strahlendes Blau, elegante Serife, helle Linie"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Radiant blue, ultra-thin serif, light rule"
+            "value": "Radiant blue, elegant serif, light rule"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Azul radiante, serif ultrafina, filete claro"
+            "value": "Azul radiante, serif elegante, filete claro"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bleu rayonnant, serif ultrafin, filet clair"
+            "value": "Bleu rayonnant, serif élégant, filet clair"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Blu radioso, serif sottilissimo, filetto chiaro"
+            "value": "Blu raggiante, serif elegante, filetto chiaro"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "輝く青、極細セリフ、明るい罫線"
+            "value": "輝く青、上品なセリフ、淡い罫線"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Azul radiante, serifa ultrafina, filete claro"
+            "value": "Azul radiante, serifa elegante, filete claro"
           }
         }
       }
@@ -73650,49 +73650,49 @@
         }
       }
     },
-    "Clair, trame de points et ombre dure": {
+    "Clair, trame de points et relief marqué": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hell, Punktraster und harter Schatten"
+            "value": "Hell, Punktraster und kräftiges Relief"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Light, dot halftone and hard shadow"
+            "value": "Light, dot pattern and bold relief"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claro, trama de puntos y sombra dura"
+            "value": "Claro, trama de puntos y relieve marcado"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Clair, trame de points et ombre dure"
+            "value": "Clair, trame de points et relief marqué"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Chiaro, retino a puntini e ombra netta"
+            "value": "Chiaro, trama di punti e rilievo marcato"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ライト、ドットのハーフトーンとくっきりした影"
+            "value": "明るい地、ドット網、はっきりした立体感"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Claro, retícula de pontos e sombra dura"
+            "value": "Claro, trama de pontos e relevo marcante"
           }
         }
       }
@@ -79384,49 +79384,49 @@
         }
       }
     },
-    "Contour épais, couleurs vives, ombre longue": {
+    "Contour épais, couleurs vives, ombre dure": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dicke Kontur, leuchtende Farben, langer Schatten"
+            "value": "Dicke Kontur, leuchtende Farben, harter Schatten"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Thick outline, bright colors, long shadow"
+            "value": "Thick outline, bright colors, hard shadow"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Contorno grueso, colores vivos, sombra larga"
+            "value": "Contorno grueso, colores vivos, sombra dura"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Contour épais, couleurs vives, ombre longue"
+            "value": "Contour épais, couleurs vives, ombre dure"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Contorno spesso, colori vivaci, ombra lunga"
+            "value": "Contorno spesso, colori vivaci, ombra netta"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "太い輪郭、鮮やかな色、ロングシャドウ"
+            "value": "太い輪郭、鮮やかな色、硬い影"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Contorno grosso, cores vivas, sombra longa"
+            "value": "Contorno grosso, cores vivas, sombra dura"
           }
         }
       }
@@ -101192,49 +101192,49 @@
         }
       }
     },
-    "Dune douce, dégradé chaud, ombre longue": {
+    "Dune douce, dégradé chaud, ombre décalée": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sanfte Düne, warmer Verlauf, langer Schatten"
+            "value": "Sanfte Düne, warmer Verlauf, versetzter Schatten"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Soft dune, warm gradient, long shadow"
+            "value": "Soft dune, warm gradient, offset shadow"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Duna suave, degradado cálido, sombra larga"
+            "value": "Duna suave, degradado cálido, sombra desplazada"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dune douce, dégradé chaud, ombre longue"
+            "value": "Dune douce, dégradé chaud, ombre décalée"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Duna morbida, sfumatura calda, ombra lunga"
+            "value": "Duna morbida, sfumatura calda, ombra sfalsata"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "やわらかな砂丘、暖かいグラデーション、長い影"
+            "value": "やさしい砂丘、暖かなグラデーション、ずらした影"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Duna suave, degradê quente, sombra longa"
+            "value": "Duna suave, degradê quente, sombra deslocada"
           }
         }
       }
@@ -103683,49 +103683,49 @@
         }
       }
     },
-    "Dégradé pêche, horizon, Gill Sans léger": {
+    "Dégradé pêche, horizon, Gill Sans": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Pfirsichverlauf, Horizont, leichte Gill Sans"
+            "value": "Pfirsichverlauf, Horizont, Gill Sans"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Peach gradient, horizon, light Gill Sans"
+            "value": "Peach gradient, horizon, Gill Sans"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Degradado melocotón, horizonte, Gill Sans ligera"
+            "value": "Degradado melocotón, horizonte, Gill Sans"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dégradé pêche, horizon, Gill Sans léger"
+            "value": "Dégradé pêche, horizon, Gill Sans"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sfumatura pesca, orizzonte, Gill Sans leggero"
+            "value": "Sfumatura pesca, orizzonte, Gill Sans"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ピーチのグラデーション、水平線、細いGill Sans"
+            "value": "ピーチのグラデーション、地平線、Gill Sans"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Degradê pêssego, horizonte, Gill Sans leve"
+            "value": "Degradê pêssego, horizonte, Gill Sans"
           }
         }
       }
@@ -130379,49 +130379,49 @@
         }
       }
     },
-    "Gris bleuté vaporeux, texte très fin": {
+    "Gris bleuté vaporeux, texte doux": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dunstiges Blaugrau, sehr feiner Text"
+            "value": "Dunstiges Blaugrau, weicher Text"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hazy bluish gray, very thin text"
+            "value": "Misty blue-gray, soft text"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gris azulado vaporoso, texto muy fino"
+            "value": "Gris azulado vaporoso, texto suave"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gris bleuté vaporeux, texte très fin"
+            "value": "Gris bleuté vaporeux, texte doux"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Grigio bluastro vaporoso, testo sottilissimo"
+            "value": "Grigio-blu nebbioso, testo morbido"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "霞んだ青灰色、極細の文字"
+            "value": "もやがかった青灰色、やわらかな文字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cinza azulado vaporoso, texto muito fino"
+            "value": "Cinza-azulado enevoado, texto suave"
           }
         }
       }
@@ -130896,49 +130896,49 @@
         }
       }
     },
-    "Gris titane sablé, chiffres ultra fins": {
+    "Gris titane sablé, chiffres nets": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sandgestrahltes Titangrau, hauchdünne Ziffern"
+            "value": "Sandgestrahltes Titangrau, klare Ziffern"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sandblasted titanium gray, ultra-thin digits"
+            "value": "Sandblasted titanium gray, crisp numbers"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gris titanio arenado, cifras ultrafinas"
+            "value": "Gris titanio arenado, cifras nítidas"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Gris titane sablé, chiffres ultra fins"
+            "value": "Gris titane sablé, chiffres nets"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Grigio titanio sabbiato, cifre ultrasottili"
+            "value": "Grigio titanio sabbiato, cifre nitide"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "サンド仕上げのチタングレー、極細の数字"
+            "value": "サンドブラストのチタングレー、くっきりした数字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Cinza-titânio jateado, números ultrafinos"
+            "value": "Cinza titânio jateado, números nítidos"
           }
         }
       }
@@ -139779,49 +139779,49 @@
         }
       }
     },
-    "Inox satiné sans cadre, texte fin": {
+    "Inox satiné sans cadre, texte net": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Satinierter Edelstahl ohne Rahmen, feiner Text"
+            "value": "Satinierter Stahl ohne Rahmen, klarer Text"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Satin stainless steel, no frame, fine text"
+            "value": "Satin steel, no frame, crisp text"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Acero inoxidable satinado sin marco, texto fino"
+            "value": "Acero satinado sin marco, texto nítido"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Inox satiné sans cadre, texte fin"
+            "value": "Inox satiné sans cadre, texte net"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Inox satinato senza cornice, testo sottile"
+            "value": "Acciaio satinato senza cornice, testo nitido"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "フレームなしのサテンステンレス、細い文字"
+            "value": "サテン仕上げのスチール、枠なし、くっきりした文字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Aço inox acetinado sem moldura, texto fino"
+            "value": "Aço acetinado sem moldura, texto nítido"
           }
         }
       }
@@ -141377,49 +141377,49 @@
         }
       }
     },
-    "Ivoire, filet noir, serif fin, titre centré": {
+    "Ivoire, filet noir, serif classique, centré": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Elfenbein, schwarze Linie, feine Serife, zentrierter Titel"
+            "value": "Elfenbein, schwarze Linie, klassische Serife, zentriert"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ivory, black rule, fine serif, centered title"
+            "value": "Ivory, black rule, classic serif, centered"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Marfil, filete negro, serif fina, título centrado"
+            "value": "Marfil, filete negro, serif clásica, centrado"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ivoire, filet noir, serif fin, titre centré"
+            "value": "Ivoire, filet noir, serif classique, centré"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Avorio, filetto nero, serif sottile, titolo centrato"
+            "value": "Avorio, filetto nero, serif classico, centrato"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "アイボリー、黒い罫線、細いセリフ体、中央のタイトル"
+            "value": "アイボリー、黒の罫線、クラシックなセリフ、中央配置"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Marfim, filete preto, serifa fina, título centralizado"
+            "value": "Marfim, filete preto, serifa clássica, centralizado"
           }
         }
       }
@@ -142176,49 +142176,49 @@
         }
       }
     },
-    "Jaune vif, trait noir, ombre dure": {
+    "Jaune vif, trait noir, aplats nets": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Leuchtendes Gelb, schwarze Linie, harter Schatten"
+            "value": "Leuchtendes Gelb, schwarze Linie, klare Flächen"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bright yellow, black stroke, hard shadow"
+            "value": "Bright yellow, black line, crisp flat color"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Amarillo vivo, trazo negro, sombra dura"
+            "value": "Amarillo vivo, trazo negro, colores planos nítidos"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jaune vif, trait noir, ombre dure"
+            "value": "Jaune vif, trait noir, aplats nets"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Giallo vivo, tratto nero, ombra netta"
+            "value": "Giallo vivo, tratto nero, campiture nitide"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ビビッドイエロー、黒い線、くっきりした影"
+            "value": "鮮やかな黄色、黒の線、くっきりしたベタ塗り"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Amarelo vivo, traço preto, sombra dura"
+            "value": "Amarelo vivo, traço preto, cores chapadas nítidas"
           }
         }
       }
@@ -164313,96 +164313,96 @@
         }
       }
     },
-    "Lueur diffuse sans bordure, chiffres fins": {
+    "Lueur diffuse sans bordure, chiffres nets": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Weiches Leuchten ohne Rand, feine Ziffern"
+            "value": "Diffuses Leuchten ohne Rand, klare Ziffern"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Soft glow, no border, fine digits"
+            "value": "Diffuse glow, no border, crisp numbers"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Brillo difuso sin borde, cifras finas"
+            "value": "Brillo difuso sin borde, cifras nítidas"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lueur diffuse sans bordure, chiffres fins"
+            "value": "Lueur diffuse sans bordure, chiffres nets"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bagliore diffuso senza bordo, cifre sottili"
+            "value": "Bagliore diffuso senza bordo, cifre nitide"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "枠なしのやわらかな光、細い数字"
+            "value": "枠なしのにじむ光、くっきりした数字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Brilho difuso sem borda, números finos"
+            "value": "Brilho difuso sem borda, números nítidos"
           }
         }
       }
     },
-    "Lueur rose douce, chiffres fins en minuscules": {
+    "Lueur rose douce, chiffres nets en minuscules": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Sanftes rosa Leuchten, feine Ziffern in Kleinbuchstaben"
+            "value": "Sanftes rosa Leuchten, klare Ziffern in Kleinbuchstaben"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Soft pink glow, thin lowercase digits"
+            "value": "Soft pink glow, crisp lowercase numbers"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Brillo rosa suave, cifras finas en minúsculas"
+            "value": "Brillo rosa suave, cifras nítidas en minúsculas"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lueur rose douce, chiffres fins en minuscules"
+            "value": "Lueur rose douce, chiffres nets en minuscules"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bagliore rosa soffuso, cifre sottili in minuscolo"
+            "value": "Bagliore rosa soffuso, cifre nitide in minuscolo"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "やわらかなピンクの光、細い小文字の数字"
+            "value": "やわらかなピンクの光、くっきりした小文字の数字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Brilho rosa suave, números finos em minúsculas"
+            "value": "Brilho rosa suave, números nítidos em minúsculas"
           }
         }
       }
@@ -182408,49 +182408,49 @@
         }
       }
     },
-    "Noir OLED, chiffres fins, gris froid": {
+    "Noir OLED, chiffres nets, gris froid": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "OLED-Schwarz, feine Ziffern, kaltes Grau"
+            "value": "OLED-Schwarz, klare Ziffern, kühles Grau"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "OLED black, thin digits, cool gray"
+            "value": "OLED black, crisp numbers, cool gray"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Negro OLED, cifras finas, gris frío"
+            "value": "Negro OLED, cifras nítidas, gris frío"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Noir OLED, chiffres fins, gris froid"
+            "value": "Noir OLED, chiffres nets, gris froid"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nero OLED, cifre sottili, grigio freddo"
+            "value": "Nero OLED, cifre nitide, grigio freddo"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "OLEDブラック、細い数字、クールグレー"
+            "value": "OLEDの黒、くっきりした数字、冷たいグレー"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Preto OLED, números finos, cinza frio"
+            "value": "Preto OLED, números nítidos, cinza frio"
           }
         }
       }
@@ -190492,49 +190492,49 @@
         }
       }
     },
-    "Nœud de ruban, cadre rose, italique fin": {
+    "Nœud de ruban, cadre rose, script cursif": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Schleife, rosa Rahmen, feine Kursive"
+            "value": "Schleife, rosa Rahmen, kursive Schreibschrift"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ribbon bow, pink frame, thin italic"
+            "value": "Ribbon bow, pink frame, cursive script"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lazo de cinta, marco rosa, cursiva fina"
+            "value": "Lazo de cinta, marco rosa, escritura cursiva"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Nœud de ruban, cadre rose, italique fin"
+            "value": "Nœud de ruban, cadre rose, script cursif"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fiocco di nastro, cornice rosa, corsivo sottile"
+            "value": "Fiocco di nastro, cornice rosa, corsivo calligrafico"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "リボンの結び目、ピンクの枠、細いイタリック"
+            "value": "リボンの結び目、ピンクの枠、筆記体"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Laço de fita, moldura rosa, itálico fino"
+            "value": "Laço de fita, moldura rosa, escrita cursiva"
           }
         }
       }
@@ -227387,49 +227387,49 @@
         }
       }
     },
-    "Reflet argenté clair, biseau, chiffres fins": {
+    "Reflet argenté clair, biseau, chiffres nets": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Heller Silberglanz, Facette, feine Ziffern"
+            "value": "Heller Silberglanz, Facette, klare Ziffern"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Light silver sheen, bevel, thin digits"
+            "value": "Light silver sheen, bevel, crisp numbers"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reflejo plateado claro, bisel, cifras finas"
+            "value": "Reflejo plateado claro, bisel, cifras nítidas"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reflet argenté clair, biseau, chiffres fins"
+            "value": "Reflet argenté clair, biseau, chiffres nets"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Riflesso argento chiaro, bisello, cifre sottili"
+            "value": "Riflesso argentato chiaro, smusso, cifre nitide"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "明るい銀の反射、面取り、細い数字"
+            "value": "明るい銀の光沢、面取り、くっきりした数字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reflexo prateado claro, chanfro, números finos"
+            "value": "Reflexo prateado claro, chanfro, números nítidos"
           }
         }
       }
@@ -238620,49 +238620,49 @@
         }
       }
     },
-    "Rouge feu, ombre portée longue, gabarit étroit": {
+    "Rouge feu, ombre dure décalée, format étroit": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Feuerrot, langer Schlagschatten, schmale Schrift"
+            "value": "Feuerrot, versetzter harter Schatten, schmales Format"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fire red, long drop shadow, narrow type"
+            "value": "Fire red, offset hard shadow, narrow format"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rojo fuego, sombra proyectada larga, tipografía estrecha"
+            "value": "Rojo fuego, sombra dura desplazada, formato estrecho"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rouge feu, ombre portée longue, gabarit étroit"
+            "value": "Rouge feu, ombre dure décalée, format étroit"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Rosso fuoco, lunga ombra proiettata, carattere stretto"
+            "value": "Rosso fuoco, ombra netta sfalsata, formato stretto"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ファイアレッド、長いドロップシャドウ、細身の書体"
+            "value": "燃える赤、ずらした硬い影、細身のレイアウト"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vermelho-fogo, sombra projetada longa, fonte estreita"
+            "value": "Vermelho fogo, sombra dura deslocada, formato estreito"
           }
         }
       }
@@ -283223,49 +283223,49 @@
         }
       }
     },
-    "Trame de points, bulle, ombre dure": {
+    "Trame de points, bulle, ombre douce": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Punktraster, Blase, harter Schatten"
+            "value": "Punktraster, Sprechblase, weicher Schatten"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Dot pattern, bubble, hard shadow"
+            "value": "Dot pattern, speech bubble, soft shadow"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trama de puntos, burbuja, sombra dura"
+            "value": "Trama de puntos, bocadillo, sombra suave"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trame de points, bulle, ombre dure"
+            "value": "Trame de points, bulle, ombre douce"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retino di punti, bolla, ombra dura"
+            "value": "Trama di punti, fumetto, ombra morbida"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "ドットパターン、吹き出し、くっきりした影"
+            "value": "ドット網、吹き出し、やわらかな影"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Retícula de pontos, bolha, sombra dura"
+            "value": "Trama de pontos, balão de fala, sombra suave"
           }
         }
       }
@@ -292952,49 +292952,49 @@
         }
       }
     },
-    "Verre dépoli, cartes flottantes, lettres fines": {
+    "Verre dépoli, cartes flottantes, texte net": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Milchglas, schwebende Karten, feine Buchstaben"
+            "value": "Mattglas, schwebende Karten, klarer Text"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Frosted glass, floating cards, thin letters"
+            "value": "Frosted glass, floating cards, crisp text"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vidrio esmerilado, tarjetas flotantes, letras finas"
+            "value": "Vidrio esmerilado, tarjetas flotantes, texto nítido"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verre dépoli, cartes flottantes, lettres fines"
+            "value": "Verre dépoli, cartes flottantes, texte net"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vetro smerigliato, schede fluttuanti, lettere sottili"
+            "value": "Vetro smerigliato, schede fluttuanti, testo nitido"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "すりガラス、浮かぶカード、細い文字"
+            "value": "すりガラス、浮かぶカード、くっきりした文字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vidro fosco, cartões flutuantes, letras finas"
+            "value": "Vidro fosco, cartões flutuantes, texto nítido"
           }
         }
       }
@@ -293375,49 +293375,49 @@
         }
       }
     },
-    "Verre mat, filet blanc, chiffres fins": {
+    "Verre mat, filet blanc, chiffres nets": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mattglas, weiße Linie, feine Ziffern"
+            "value": "Mattes Glas, weiße Linie, klare Ziffern"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Matte glass, white rule, thin digits"
+            "value": "Matte glass, white rule, crisp numbers"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vidrio mate, filete blanco, cifras finas"
+            "value": "Vidrio mate, filete blanco, cifras nítidas"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verre mat, filet blanc, chiffres fins"
+            "value": "Verre mat, filet blanc, chiffres nets"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vetro opaco, filetto bianco, cifre sottili"
+            "value": "Vetro opaco, filetto bianco, cifre nitide"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "マットガラス、白い罫線、細い数字"
+            "value": "マットなガラス、白の罫線、くっきりした数字"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vidro fosco, filete branco, números finos"
+            "value": "Vidro fosco, filete branco, números nítidos"
           }
         }
       }
@@ -294315,49 +294315,49 @@
         }
       }
     },
-    "Vert acide sur noir, ombre dure décalée": {
+    "Vert acide sur noir, ombre douce": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Säuregrün auf Schwarz, versetzter harter Schatten"
+            "value": "Giftgrün auf Schwarz, weicher Schatten"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Acid green on black, offset hard shadow"
+            "value": "Acid green on black, soft shadow"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde ácido sobre negro, sombra dura desplazada"
+            "value": "Verde ácido sobre negro, sombra suave"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Vert acide sur noir, ombre dure décalée"
+            "value": "Vert acide sur noir, ombre douce"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde acido su nero, ombra netta sfalsata"
+            "value": "Verde acido su nero, ombra morbida"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "黒地に酸性グリーン、ずらしたくっきりした影"
+            "value": "黒地に酸っぱい緑、やわらかな影"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Verde-ácido sobre preto, sombra dura deslocada"
+            "value": "Verde ácido sobre preto, sombra suave"
           }
         }
       }

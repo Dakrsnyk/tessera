@@ -674,7 +674,7 @@
  {
   "id": "y2k-autocollant",
   "name": "Autocollant",
-  "summary": "Contour épais, couleurs vives, ombre longue",
+  "summary": "Contour épais, couleurs vives, ombre dure",
   "theme": "light",
   "accent": "FF3D81",
   "bg": {
@@ -709,7 +709,7 @@
  {
   "id": "y2k-nacre",
   "name": "Nacre",
-  "summary": "Blanc perlé, reflets rose-vert, texte fin",
+  "summary": "Blanc perlé, reflets rose-vert, italique net",
   "theme": "light",
   "accent": "D58CE0",
   "bg": {
