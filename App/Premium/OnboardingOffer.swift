@@ -29,7 +29,7 @@ struct OnboardingOffer: View {
                         title
                         VStack(alignment: .leading, spacing: 8) {
                             perk(tr("Widgets illimités, tous les types"))
-                            perk(tr("\(StyleLibrary.all.count) styles et \(AppStyleID.allCases.count) couleurs d'app"))
+                            perk(tr("\(StyleCatalog.all.count) styles et \(AppStyleID.allCases.count) couleurs d'app"))
                             perk(tr("Statistiques, exercices, scans illimités"))
                         }
                     }
@@ -125,7 +125,7 @@ struct OnboardingOffer: View {
                     .rotationEffect(.degrees(place.angle))
                     .offset(x: place.x, y: place.y)
             }
-            Label(tr("+ \(StyleLibrary.premiumCount) styles"), systemImage: "sparkles")
+            Label(tr("+ \(StyleCatalog.premiumCount) styles"), systemImage: "sparkles")
                 .font(.footnote.weight(.bold))
                 .padding(.horizontal, 14)
                 .padding(.vertical, 12)

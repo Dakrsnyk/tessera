@@ -226,18 +226,11 @@ final class AdShotsUITests: XCTestCase {
         styleChapter.tap()
         guard app.buttons["studio-style"].waitForExistence(timeout: 8) else { return }
         pause(0.8)
-        // « Thème »: the StylePreset grid (preset-<id>).
-        if studioSection("theme") {
-            for preset in ["midnight", "ocean", "sunset", "cyber", "luxury"] where studioTap("preset-\(preset)") {
-                pause(1)
-                shot("studio-preset-\(preset)")
-            }
-        }
-        // « Style »: the 57 styles (theme-<ThemeID>), a lazy grid, in its order so it only scrolls down.
+        // « Style »: the 504 styles (style-<id>), a lazy grid, in its order so it only scrolls down.
         if studioSection("style") {
-            for theme in ["aurora", "liquidGlass", "neon", "editorial", "luxury", "paper", "synthwave", "space"] where studioTap("theme-\(theme)") {
+            for look in ["aura-halo", "luxe-guilloche", "chrome-liquide", "pixel-8bit", "cyber-neon-pluie", "retro-disco", "brut-jaune", "nat-montagne"] where studioTap("style-\(look)") {
                 pause(1)
-                shot("studio-style-\(theme)")
+                shot("studio-style-\(look)")
             }
         }
         // « Couleurs »: palettes (palette-<id>).

@@ -66,6 +66,20 @@ final class BudgetAnalysisTests: XCTestCase {
         XCTAssertEqual(projection.projected, 300 + 20 * 15 + 50, accuracy: 0.001)
     }
 
+    func testARentPaidOnTheFirstIsNotExtrapolated() throws {
+        var state = BudgetState()
+        // Rent on the 1st, a phone bill on the 25th, 300 noted by hand so far.
+        state.bills = [Bill(name: "Loyer", amount: 1_500, anchorDate: date(1, 1, 0)),
+                       Bill(name: "Téléphone", amount: 40, anchorDate: date(1, 25, 0))]
+        state.expenses = [spend(100, 9, 2), spend(200, 9, 14)]
+        let projection = try XCTUnwrap(BudgetAnalysis.projection(state, at: now))
+        XCTAssertEqual(projection.spentToDate, 1_800, accuracy: 0.001)
+        XCTAssertEqual(projection.notedToDate, 300, accuracy: 0.001)
+        XCTAssertEqual(projection.perDay, 20, accuracy: 0.001, "Seul ce qui est noté à la main donne le rythme")
+        XCTAssertEqual(projection.fixedAhead, 40, accuracy: 0.001, "Le téléphone du 25 est encore dû")
+        XCTAssertEqual(projection.projected, 1_800 + 20 * 15 + 40, accuracy: 0.001)
+    }
+
     func testProjectionOnTheLastDayIsWhatWasSpent() throws {
         var state = BudgetState()
         state.expenses = [spend(90, 9, 10)]

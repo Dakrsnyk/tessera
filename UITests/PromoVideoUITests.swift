@@ -216,8 +216,8 @@ final class PromoVideoUITests: XCTestCase {
         guard app.buttons["studio-style"].waitForExistence(timeout: 8) else { return }
         app.buttons["studio-style"].tap()
         pause(1)
-        for theme in ["neon", "luxury", "aurora", "paper", "liquidGlass", "sport"] {
-            let button = app.buttons["theme-\(theme)"].firstMatch
+        for look in ["aura-halo", "luxe-guilloche", "verre-depoli", "vint-sepia", "neon-enseigne", "sp-stade"] {
+            let button = app.buttons["style-\(look)"].firstMatch
             if tap(button, timeout: 3) { pause(1.1) }
         }
         let colors = app.buttons["studio-colors"]

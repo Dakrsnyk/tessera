@@ -250,7 +250,7 @@ enum AdExport {
 
     // MARK: - Style board
 
-    /// `styles <name> page=N per=20 kind= family=small|medium|large scale=`: page N of `StyleLibrary.all` as one picture,
+    /// `styles <name> page=N per=20 kind= family=small|medium|large scale=`: page N of `StyleCatalog.all` as one picture,
     /// like the Studio's Style tab (2 columns, preview, name, summary, lock). A page past the end writes no file.
     private static func styles(_ job: AdJob) async throws -> AdOutcome {
         guard let raw = job.string("kind"), let kind = WidgetKind(rawValue: raw) else {
@@ -262,9 +262,9 @@ enum AdExport {
             throw AdFailure("unknown family « \(familyText) »")
         }
         let per = max(1, job.int("per", 20)), page = max(1, job.int("page", 1))
-        let pages = (StyleLibrary.all.count + per - 1) / per
+        let pages = (StyleCatalog.all.count + per - 1) / per
         guard page <= pages else { return AdOutcome(files: 0, note: "no page \(page): \(pages) pages of \(per) styles") }
-        let looks = Array(StyleLibrary.all.dropFirst((page - 1) * per).prefix(per))
+        let looks = Array(StyleCatalog.all.dropFirst((page - 1) * per).prefix(per))
         let boardWidth: CGFloat = 402, margin: CGFloat = 16, gap: CGFloat = 10
         let columnWidth = (boardWidth - 2 * margin - gap) / 2
         let rows = stride(from: 0, to: looks.count, by: 2).map { Array(looks[$0..<min($0 + 2, looks.count)]) }

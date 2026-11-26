@@ -37,15 +37,20 @@ enum BudgetAnalysis {
     // MARK: End-of-month projection
 
     struct Projection: Hashable {
+        /// Everything spent so far this month: expenses noted and fixed payments already due.
         let spentToDate: Double
+        /// The part noted by hand: only it is extrapolated (a rent paid on the 1st is not a daily pace).
+        let notedToDate: Double
         let daysElapsed: Int
         let daysInMonth: Int
         /// What is already noted for the days still to come this month.
         let plannedAhead: Double
+        /// The fixed payments (bills, fixed costs) still due this month.
+        let fixedAhead: Double
         var daysLeft: Int { max(0, daysInMonth - daysElapsed) }
-        var perDay: Double { daysElapsed > 0 ? spentToDate / Double(daysElapsed) : 0 }
-        /// Spent to date + (spent to date / days elapsed) × days left + what is already noted ahead.
-        var projected: Double { spentToDate + perDay * Double(daysLeft) + plannedAhead }
+        var perDay: Double { daysElapsed > 0 ? notedToDate / Double(daysElapsed) : 0 }
+        /// Spent to date + (noted to date / days elapsed) × days left + noted ahead + fixed payments still due.
+        var projected: Double { spentToDate + perDay * Double(daysLeft) + plannedAhead + fixedAhead }
     }
 
     /// Nil while nothing is spent or planned this month.
@@ -53,12 +58,18 @@ enum BudgetAnalysis {
         let month = BudgetMath.monthInterval(now)
         let sofar = monthSoFar(now)
         let spent = BudgetMath.spent(state, in: sofar, now: now)
-        // Only what was noted by hand for a later day: the payments of fixed expenses are computed up to now.
+        let noted = state.expenses.filter { sofar.holds($0.date) }.reduce(0) { $0 + $1.amount }
+        // Noted by hand for a later day of the month, and the fixed payments that fall then.
         let ahead = state.expenses.filter { $0.date >= sofar.end && $0.date < month.end }.reduce(0) { $0 + $1.amount }
-        guard spent > 0 || ahead > 0 else { return nil }
+        let rest = DateInterval(start: min(sofar.end, month.end), end: month.end)
+        let fixedAhead = rest.duration > 0
+            ? BudgetMath.fixedExpenses(state, in: rest, now: month.end).filter { $0.date < month.end }.reduce(0) { $0 + $1.amount }
+            : 0
+        guard spent > 0 || ahead > 0 || fixedAhead > 0 else { return nil }
         let elapsed = max(1, DateMath.daysBetween(month.start, now) + 1)
         let days = max(elapsed, DateMath.daysBetween(month.start, month.end))
-        return Projection(spentToDate: spent, daysElapsed: elapsed, daysInMonth: days, plannedAhead: ahead)
+        return Projection(spentToDate: spent, notedToDate: min(noted, spent), daysElapsed: elapsed, daysInMonth: days,
+                          plannedAhead: ahead, fixedAhead: fixedAhead)
     }
 
     // MARK: Categories against last month and the 3 months before

@@ -1,7 +1,7 @@
 // GÉNÉRÉ par scripts/styles/library.py depuis scripts/styles/library/*.json : ne pas éditer à la main.
 import SwiftUI
 
-extension StyleLibrary {
+extension StyleCatalog {
     /// 500 styles en 20 familles (hors des 4 styles d'origine).
     static let generated: [StyleLook] = {
         var all: [StyleLook] = []

@@ -79,9 +79,9 @@ struct FinancesDeepAnalysis: View {
                 HStack(spacing: 10) {
                     MiniStat(title: tr("Fin de mois"), value: TF.money(projection.projected, currency))
                     MiniStat(title: tr("Rythme par jour"), value: TF.money(projection.perDay, currency))
-                    MiniStat(title: tr("Déjà noté à venir"), value: TF.money(projection.plannedAhead, currency))
+                    MiniStat(title: tr("Déjà noté à venir"), value: TF.money(projection.plannedAhead + projection.fixedAhead, currency))
                 }
-                formula(tr("Dépensé à ce jour + (dépensé ÷ jours écoulés) × jours restants + ce qui est déjà noté pour la suite : \(TF.money(projection.spentToDate, currency)) + (\(TF.money(projection.spentToDate, currency)) ÷ \(projection.daysElapsed)) × \(projection.daysLeft) + \(TF.money(projection.plannedAhead, currency))."))
+                formula(tr("Dépensé à ce jour + (noté à la main ÷ jours écoulés) × jours restants + déjà noté pour la suite + dépenses fixes encore dues : \(TF.money(projection.spentToDate, currency)) + (\(TF.money(projection.notedToDate, currency)) ÷ \(projection.daysElapsed)) × \(projection.daysLeft) + \(TF.money(projection.plannedAhead, currency)) + \(TF.money(projection.fixedAhead, currency))."))
                 if model.profile.knows(.monthlyBudget), model.budget.monthlyBudget > 0 {
                     let gap = projection.projected - model.budget.monthlyBudget
                     Text(gap > 0

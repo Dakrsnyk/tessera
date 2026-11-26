@@ -17,7 +17,7 @@ struct StyleLook: Identifiable, Hashable {
     let font: FontChoice
     let style: StyleOptions
 
-    var isFree: Bool { StyleLibrary.freeIDs.contains(id) }
+    var isFree: Bool { StyleCatalog.freeIDs.contains(id) }
     var isPremium: Bool { !isFree }
 
     /// The design in this style, its content and hidden parts untouched.
@@ -42,7 +42,7 @@ struct StyleLook: Identifiable, Hashable {
     }
 }
 
-enum StyleLibrary {
+enum StyleCatalog {
     /// The 4 original styles, the only free ones.
     static let freeIDs: Set<String> = ["minimal", "light", "dark", "monochrome"]
 

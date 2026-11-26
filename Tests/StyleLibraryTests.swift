@@ -5,29 +5,29 @@ import XCTest
 /// The 3-axes difference rule and the contrast are checked on the source by scripts/styles/library.py.
 final class StyleLibraryTests: XCTestCase {
     func testTheLibraryHasFiveHundredStylesAndFourFree() {
-        XCTAssertGreaterThanOrEqual(StyleLibrary.all.count, 504, "500 styles en plus des 4 d'origine")
-        XCTAssertEqual(StyleLibrary.all.filter(\.isFree).map(\.id), ["minimal", "light", "dark", "monochrome"])
-        XCTAssertEqual(StyleLibrary.premiumCount, StyleLibrary.all.count - 4)
+        XCTAssertGreaterThanOrEqual(StyleCatalog.all.count, 504, "500 styles en plus des 4 d'origine")
+        XCTAssertEqual(StyleCatalog.all.filter(\.isFree).map(\.id), ["minimal", "light", "dark", "monochrome"])
+        XCTAssertEqual(StyleCatalog.premiumCount, StyleCatalog.all.count - 4)
     }
 
     func testIdsAndNamesAreUnique() {
-        let ids = StyleLibrary.all.map(\.id)
+        let ids = StyleCatalog.all.map(\.id)
         XCTAssertEqual(Set(ids).count, ids.count, "Deux styles ont le même identifiant")
-        let names = StyleLibrary.all.map { $0.name.lowercased() }
+        let names = StyleCatalog.all.map { $0.name.lowercased() }
         XCTAssertEqual(Set(names).count, names.count, "Deux styles ont le même nom")
-        for look in StyleLibrary.all {
+        for look in StyleCatalog.all {
             XCTAssertFalse(look.name.isEmpty, look.id)
             XCTAssertFalse(look.summary.isEmpty, look.id)
-            XCTAssertEqual(StyleLibrary.look(look.id)?.id, look.id)
+            XCTAssertEqual(StyleCatalog.look(look.id)?.id, look.id)
         }
     }
 
     func testEveryPremiumStyleNeedsPremiumOnTheWidget() {
-        for look in StyleLibrary.all where look.isPremium {
+        for look in StyleCatalog.all where look.isPremium {
             let design = look.applied(to: WidgetDesign(kind: .budgetLeft, format: .small))
             XCTAssertTrue(design.usesPremiumFeatures, "\(look.id) doit demander Premium")
         }
-        for look in StyleLibrary.all where look.isFree {
+        for look in StyleCatalog.all where look.isFree {
             let design = look.applied(to: WidgetDesign(kind: .budgetLeft, format: .small))
             XCTAssertFalse(design.usesPremiumFeatures, "\(look.id) doit rester gratuit")
         }
@@ -37,7 +37,7 @@ final class StyleLibraryTests: XCTestCase {
         var design = WidgetDesign(kind: .macros, format: .medium)
         design.style.hidden = ["caption", "row:protein"]
         design.showsTitle = false
-        for look in StyleLibrary.all {
+        for look in StyleCatalog.all {
             let styled = look.applied(to: design)
             XCTAssertEqual(styled.kind, design.kind)
             XCTAssertEqual(styled.style.hidden, design.style.hidden, "\(look.id) a perdu les parties masquées")
@@ -50,7 +50,7 @@ final class StyleLibraryTests: XCTestCase {
         var design = WidgetDesign(kind: .note)
         design.accentHex = "FF2D55"
         for id in ["minimal", "light", "dark", "monochrome"] {
-            XCTAssertEqual(StyleLibrary.look(id)?.applied(to: design).accentHex, "FF2D55")
+            XCTAssertEqual(StyleCatalog.look(id)?.applied(to: design).accentHex, "FF2D55")
         }
     }
 

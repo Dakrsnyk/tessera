@@ -156,7 +156,7 @@ struct StudioStylePanel: View {
     var body: some View {
         StudioNote(text: tr("Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur."), symbol: "swatchpalette")
         StudioPreviewGrid(
-            options: StyleLibrary.all,
+            options: StyleCatalog.all,
             input: input,
             variant: { $0.applied(to: design) },
             title: \.name,

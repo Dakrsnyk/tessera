@@ -236,7 +236,7 @@ def gen():
         "// GÉNÉRÉ par scripts/styles/library.py depuis scripts/styles/library/*.json : ne pas éditer à la main.",
         "import SwiftUI",
         "",
-        "extension StyleLibrary {",
+        "extension StyleCatalog {",
         "    /// %d styles en %d familles (hors des 4 styles d'origine)." % (len(styles), len(families)),
         "    static let generated: [StyleLook] = {",
         "        var all: [StyleLook] = []",
