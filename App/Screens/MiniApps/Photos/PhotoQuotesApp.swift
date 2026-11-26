@@ -558,8 +558,12 @@ struct PhotoQuoteEditor: View {
         failed = 0
         var slots: [PhotoSlot] = []
         for item in items {
-            guard let data = try? await item.loadTransferable(type: Data.self), let image = SafeImage.decode(data, maxDimension: 2_400),
-                  let file = ImageStore.save(image, maxDimension: 1_200) else {
+            guard let data = try? await item.loadTransferable(type: Data.self),
+                  // Decoding and writing the photo stay off the main actor.
+                  let file = await Task.detached(priority: .userInitiated, operation: { () -> String? in
+                      guard let image = SafeImage.decode(data, maxDimension: 2_400) else { return nil }
+                      return ImageStore.save(image, maxDimension: 1_200)
+                  }).value else {
                 failed += 1
                 continue
             }

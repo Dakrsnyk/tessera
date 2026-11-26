@@ -111,7 +111,11 @@ final class AppModel {
                 content.habits = recolored
                 store.content = content
             }
-            UserDefaults.standard.set(true, forKey: HabitSuggestions.recoloredKey)
+            // Not while the content file can't be read yet (launch before the first unlock): `content` is then
+            // empty and the habits would never be recolored.
+            if !store.isUnreadable(.content) {
+                UserDefaults.standard.set(true, forKey: HabitSuggestions.recoloredKey)
+            }
         }
         migrateDailyLayout()
         insights = InsightCache.load()
@@ -523,6 +527,8 @@ final class AppModel {
     func updateSettings(_ change: (inout AppSettings) -> Void) {
         let before = settings
         change(&settings)
+        // Nothing changed: nothing is written and the widgets aren't reloaded.
+        guard settings != before else { return }
         store.settings = settings
         // Before any view reads the new settings, so rebuilt screens draw with the new style.
         AppStyle.current = AppStyle.style(settings.appStyle, isPremium: isPremium)
@@ -583,7 +589,10 @@ final class AppModel {
         var payload = WidgetPayload()
         payload.settings = settings
         payload.content = content
-        payload.crypto = crypto[design.options.coinID] ?? CryptoService.cached(design.options.coinID, currency: settings.cryptoCurrency).map { CryptoResult.ready($0) } ?? .unavailable(nil)
+        // crypto.json is only read for a design that shows a coin.
+        if DataNeeds.needs(for: design.kind).contains(.crypto) {
+            payload.crypto = crypto[design.options.coinID] ?? CryptoService.cached(design.options.coinID, currency: settings.cryptoCurrency).map { CryptoResult.ready($0) } ?? .unavailable(nil)
+        }
         payload.events = events
         var data = domains
         if design.kind == .marketOverview {

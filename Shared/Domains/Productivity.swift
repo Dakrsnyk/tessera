@@ -289,7 +289,9 @@ enum ProductivityMath {
     /// Focus minutes for each day of the current week, Monday first.
     static func focusByDay(_ state: ProductivityState, weekOf date: Date) -> [Double] {
         DateMath.week(containing: date).map { day in
-            let interval = DateInterval(start: DateMath.startOfDay(day), duration: 86_400)
+            // The real day (23 or 25 hours when the clocks change), not a fixed 24 hours.
+            let interval = DateMath.calendar.dateInterval(of: .day, for: day)
+                ?? DateInterval(start: DateMath.startOfDay(day), duration: 86_400)
             return focusMinutes(state, in: interval, now: date)
         }
     }

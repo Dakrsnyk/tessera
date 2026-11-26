@@ -64,6 +64,28 @@ enum SamplePayload {
     /// Kinds with a sample of their own below; every other kind gets the full sample data of the spaces.
     private static let ownSamples: Set<WidgetKind> = [.tasks, .habits, .hydration, .focus, .moneyFlow, .crypto, .upNext]
 
+    private static let habitDaysLock = NSLock()
+    private static var habitDaysCache: (key: String, days: [[String]])?
+
+    /// The days done of the three sample habits, built once a day (182 days each, rebuilt at every preview otherwise).
+    static func sampleHabitDays(now: Date) -> [[String]] {
+        let key = DateMath.dayKey(now)
+        habitDaysLock.lock(); defer { habitDaysLock.unlock() }
+        if let cached = habitDaysCache, cached.key == key { return cached.days }
+        let history: ((Int) -> Bool) -> [String] = { missed in
+            (0..<182).filter { !missed($0) }.map { offset in
+                DateMath.dayKey(DateMath.calendar.date(byAdding: .day, value: -offset, to: now) ?? now)
+            }
+        }
+        let days = [
+            history { $0 % 9 == 4 || $0 % 13 == 7 },
+            history { $0 % 3 == 1 || $0 % 10 == 5 },
+            history { $0 % 6 == 2 || $0 % 17 == 11 },
+        ]
+        habitDaysCache = (key, days)
+        return days
+    }
+
     static func make(for kind: WidgetKind, coinID: String = "bitcoin", now: Date = Date()) -> WidgetPayload {
         var payload = WidgetPayload()
         switch kind {
@@ -78,15 +100,11 @@ enum SamplePayload {
             // Today and the days before it, never days still ahead. About six months of history with a few missed days, so the
             // large widget (one square per day) looks lived-in in previews and ads instead of nearly empty (2026-11-11).
             // Every habit is done today; the first missed day sets each streak (4, 1 and 2 days).
-            let history: ((Int) -> Bool) -> [String] = { missed in
-                (0..<182).filter { !missed($0) }.map { offset in
-                    DateMath.dayKey(DateMath.calendar.date(byAdding: .day, value: -offset, to: now) ?? now)
-                }
-            }
+            let days = sampleHabitDays(now: now)
             payload.content.habits = [
-                Habit(name: tr("Méditer"), symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: history { $0 % 9 == 4 || $0 % 13 == 7 }),
-                Habit(name: tr("Sport"), symbol: "figure.run", colorHex: "FF6B57", completedDays: history { $0 % 3 == 1 || $0 % 10 == 5 }),
-                Habit(name: tr("Lecture"), symbol: "book.fill", colorHex: "2F8F7A", completedDays: history { $0 % 6 == 2 || $0 % 17 == 11 }),
+                Habit(name: tr("Méditer"), symbol: "brain.head.profile", colorHex: "8C6CFF", completedDays: days[0]),
+                Habit(name: tr("Sport"), symbol: "figure.run", colorHex: "FF6B57", completedDays: days[1]),
+                Habit(name: tr("Lecture"), symbol: "book.fill", colorHex: "2F8F7A", completedDays: days[2]),
             ]
         case .hydration:
             payload.content.hydration.add(5, on: now)

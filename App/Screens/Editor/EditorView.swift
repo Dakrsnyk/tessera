@@ -142,7 +142,7 @@ struct WidgetStudio: View {
     private func screen(_ input: StudioInput, sections: [StudioSection]) -> some View {
         VStack(spacing: 0) {
             // Always in view: every change shows at once.
-            stage
+            stage(input.payload)
                 .padding(.horizontal, 20)
                 .padding(.top, 6)
                 .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
@@ -175,7 +175,7 @@ struct WidgetStudio: View {
     }
 
     /// The widget, which the person acts on: a touch on a widget inside opens it (not on the Lock Screen).
-    private var stage: some View {
+    private func stage(_ payload: WidgetPayload) -> some View {
         StudioStage(
             design: design, family: $family, payload: payload, isExample: !model.hasOwnData(for: design),
             selectedPart: chapter == .content ? shownPanel.partIndex : nil, onPart: stagePartAction,
@@ -1235,8 +1235,11 @@ struct WidgetStudio: View {
                 photoItem = nil
             }
             guard let data = try? await item.loadTransferable(type: Data.self),
-                  let image = SafeImage.decode(data, maxDimension: 1_800),
-                  let name = ImageStore.save(image) else { return }
+                  // Decoding and writing the photo stay off the main actor.
+                  let name = await Task.detached(priority: .userInitiated, operation: { () -> String? in
+                      guard let image = SafeImage.decode(data, maxDimension: 1_800) else { return nil }
+                      return ImageStore.save(image)
+                  }).value else { return }
             photos.imported.append(name)
             if designs.indices.contains(target) { designs[target].background = .photo(name) }
         }

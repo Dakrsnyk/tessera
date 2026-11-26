@@ -60,11 +60,13 @@ enum ScheduleReader {
                 throw ScheduleImportError.unreadable
             }
             var pages: [SchedulePage] = []
+            // The screen is asked on the main actor (this runs off it).
+            let screenScale = await MainActor.run { UIScreen.main.scale }
             // One budget for the whole file: the extra passes of the last pages are skipped once it is spent.
             let deadline = Date().addingTimeInterval(timeBudget)
             for index in 0..<min(document.pageCount, maxPages) {
                 try Task.checkCancellation()
-                guard let page = document.page(at: index), let cgImage = render(page) else { continue }
+                guard let page = document.page(at: index), let cgImage = render(page, screenScale: screenScale) else { continue }
                 pages.append(try await recognize(cgImage, deadline: deadline))
             }
             guard !pages.isEmpty else { throw ScheduleImportError.unreadable }
@@ -133,6 +135,7 @@ enum ScheduleReader {
         let format = UIGraphicsImageRendererFormat.default()
         format.scale = 1
         format.opaque = true
+        format.preferredRange = .standard
         let renderer = UIGraphicsImageRenderer(size: target, format: format)
         let rendered = renderer.image { context in
             context.cgContext.interpolationQuality = .high
@@ -144,14 +147,14 @@ enum ScheduleReader {
     }
 
     /// A PDF page drawn as an image.
-    static func render(_ page: PDFPage) -> CGImage? {
+    static func render(_ page: PDFPage, screenScale: CGFloat) -> CGImage? {
         let bounds = page.bounds(for: .mediaBox)
         guard bounds.width > 1, bounds.height > 1 else { return nil }
         let turned = page.rotation % 180 != 0
         let width = turned ? bounds.height : bounds.width
         let height = turned ? bounds.width : bounds.height
         // `thumbnail` works in points and the image comes back at the screen scale: ask for fewer points.
-        let scale = 2400 / max(width, height) / max(1, UIScreen.main.scale)
+        let scale = 2400 / max(width, height) / max(1, screenScale)
         let size = CGSize(width: width * scale, height: height * scale)
         let thumbnail = page.thumbnail(of: size, for: .mediaBox)
         return upright(thumbnail)

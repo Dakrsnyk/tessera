@@ -157,10 +157,13 @@ final class SharedStore {
 
     /// Whether a file exists that can't be read or decoded right now (protected while the iPhone is
     /// locked, or damaged): a read-modify-write must then leave it alone rather than replace it.
-    private func isUnreadable(_ file: StoreFile) -> Bool {
+    func isUnreadable(_ file: StoreFile) -> Bool {
         let path = url(file)
         guard FileManager.default.fileExists(atPath: path.path) else { return false }
-        return (try? Data(contentsOf: path)) == nil
+        // Opening is enough to know the file can be read (protection class, permissions); no need to load it.
+        guard let handle = try? FileHandle(forReadingFrom: path) else { return true }
+        try? handle.close()
+        return false
     }
 
     func remove(_ file: StoreFile) {
@@ -267,11 +270,22 @@ final class SharedStore {
 
 /// Photo backgrounds, stored downscaled in the shared container so widgets stay within their memory budget.
 enum ImageStore {
-    private static var directory: URL {
-        let url = AppGroup.containerURL.appendingPathComponent("Tessera/Images", isDirectory: true)
-        try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
-        return url
+    private static let directory = AppGroup.containerURL.appendingPathComponent("Tessera/Images", isDirectory: true)
+
+    /// The folder, created when something is written (reads and listings don't need it to exist).
+    private static var writableDirectory: URL {
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        return directory
     }
+
+    /// The photos last read: a widget redrawn or a list scrolled doesn't decode the same JPEG again.
+    /// Decoded photos, in the app only: the widget extension has little memory and draws each photo once per timeline.
+    private static let cache: NSCache<NSString, UIImage>? = {
+        guard Bundle.main.bundleURL.pathExtension != "appex" else { return nil }
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 12
+        return cache
+    }()
 
     static func save(_ image: UIImage, maxDimension: CGFloat = 900) -> String? {
         let scale = min(1, maxDimension / max(image.size.width, image.size.height))
@@ -284,7 +298,7 @@ enum ImageStore {
         guard let data = resized.jpegData(compressionQuality: 0.82) else { return nil }
         let name = "\(UUID().uuidString).jpg"
         do {
-            try data.write(to: directory.appendingPathComponent(name), options: SharedStore.writingOptions)
+            try data.write(to: writableDirectory.appendingPathComponent(name), options: SharedStore.writingOptions)
             return name
         } catch {
             return nil
@@ -295,12 +309,16 @@ enum ImageStore {
     /// file of the App Group (« ../designs.json »).
     static func image(named name: String) -> UIImage? {
         guard isStoredName(name) else { return nil }
-        return UIImage(contentsOfFile: directory.appendingPathComponent(name).path)
+        if let cached = cache?.object(forKey: name as NSString) { return cached }
+        guard let image = UIImage(contentsOfFile: directory.appendingPathComponent(name).path) else { return nil }
+        cache?.setObject(image, forKey: name as NSString)
+        return image
     }
 
     static func delete(named name: String) {
         guard isStoredName(name) else { return }
-        try? FileManager.default.removeItem(at: directory.appendingPathComponent(name))
+        cache?.removeObject(forKey: name as NSString)
+        try?FileManager.default.removeItem(at: directory.appendingPathComponent(name))
     }
 
     /// The photos saved, for a backup.
@@ -316,7 +334,8 @@ enum ImageStore {
     /// Puts back a photo from a backup, only under a name the store gives itself and only if it is an image.
     static func restore(_ data: Data, named name: String) {
         guard isStoredName(name), SafeImage.isAcceptable(data) else { return }
-        try? data.write(to: directory.appendingPathComponent(name), options: SharedStore.writingOptions)
+        cache?.removeObject(forKey: name as NSString)
+        try? data.write(to: writableDirectory.appendingPathComponent(name), options: SharedStore.writingOptions)
     }
 
     /// The names `save` gives: a UUID and « .jpg ».
