@@ -1975,6 +1975,7 @@ struct RowSplit: Layout {
         let title = subviews[0].sizeThatFits(.unspecified).width
         let value = subviews[1].sizeThatFits(.unspecified).width
         let room = max(0, width - gap)
+        guard room > 0 else { return (0, 0) }
         if title + value <= room { return (room - value, value) }
         let valueWidth = min(value, max(room - min(title, room * 0.5), room * 0.3))
         return (room - valueWidth, valueWidth)
@@ -1982,7 +1983,9 @@ struct RowSplit: Layout {
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
         let ideal = subviews.reduce(CGFloat(0)) { $0 + $1.sizeThatFits(.unspecified).width } + (subviews.count > 1 ? gap : 0)
-        let width = proposal.width ?? ideal
+        // Measured without a limit (nil or infinite width), the line asks its natural width: an infinite answer
+        // made SwiftUI measure again and again (the export froze, run 605).
+        let width = proposal.width.flatMap { $0.isFinite ? $0 : nil } ?? ideal
         let (t, v) = widths(width, subviews)
         let heights = [subviews.first?.sizeThatFits(ProposedViewSize(width: t, height: proposal.height)).height ?? 0,
                        subviews.count > 1 ? subviews[1].sizeThatFits(ProposedViewSize(width: v, height: proposal.height)).height : 0]
@@ -1990,7 +1993,7 @@ struct RowSplit: Layout {
     }
 
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-        let (t, v) = widths(bounds.width, subviews)
+        let (t, v) = widths(bounds.width.isFinite ? bounds.width : 0, subviews)
         subviews.first?.place(at: CGPoint(x: bounds.minX, y: bounds.midY), anchor: .leading, proposal: ProposedViewSize(width: t, height: bounds.height))
         if subviews.count > 1 {
             subviews[1].place(at: CGPoint(x: bounds.maxX, y: bounds.midY), anchor: .trailing, proposal: ProposedViewSize(width: v, height: bounds.height))
