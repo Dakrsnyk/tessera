@@ -662,8 +662,14 @@ struct TileView: View {
             headerBlock
             // Without a chart below them, the figures sit at the bottom: no empty half under one row of figures.
             if context.isSmall || (context.isMedium && !hasVisual) { Spacer(minLength: 0) }
-            // Small: the main figure and one other, as before (a grid of pairs is left out until it is checked).
-            statGrid(chunks, value: context.isSmall ? 26 : (oneRow ? 26 : 22), other: context.isSmall ? 17 : (oneRow ? 20 : 18))
+            if context.isSmall && stats.count > 2 {
+                // Small: the main figure, then the others two by two (one row, two when dense).
+                let others = Array(stats.dropFirst().prefix(s.rowDelta > 0 ? 4 : 2))
+                let pairs = stride(from: 0, to: others.count, by: 2).map { Array(others[$0..<min($0 + 2, others.count)]) }
+                statGrid([[stats[0]]] + pairs, value: 22, other: 15)
+            } else {
+                statGrid(chunks, value: context.isSmall ? 26 : (oneRow ? 26 : 22), other: context.isSmall ? 17 : (oneRow ? 20 : 18))
+            }
             if !context.isSmall, hasVisual {
                 visual(compact: context.isMedium)
                     .frame(minHeight: fillsHeight ? 110 : nil, maxHeight: fillsHeight ? .infinity : (context.isLarge ? 110 : 30))
@@ -692,6 +698,8 @@ struct TileView: View {
                                 .privacySensitive(tile.isSensitive)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        // The main figure alone on its row spans the two columns of the pairs below it.
+                        .gridCellColumns(chunk.element.count == 1 && chunks.contains { $0.count > 1 } ? 2 : 1)
                     }
                 }
                 if chunk.offset < chunks.count - 1 {
@@ -825,6 +833,40 @@ struct TileView: View {
                         card { visual(compact: true) }
                     }
                 }
+            } else if context.isSmall && tile.rows.count > 1 {
+                // A small widget: the main card, then as many lines as its height holds (two with bars, three without,
+                // one more when dense), in a plain list at its own height. ViewThatFits, fixedSize on a card and
+                // TileRowsView here froze the rendering (runs 603 to 608).
+                let withBars = tile.rows.contains { $0.progress != nil }
+                let lines = Array(tile.rows.prefix((withBars ? 2 : 3) + (s.rowDelta > 0 ? 1 : 0)))
+                mainCard
+                VStack(alignment: .leading, spacing: 4 * sp) {
+                    ForEach(lines) { row in
+                        HStack(spacing: 5) {
+                            if let hex = row.colorHex, !s.isAccented {
+                                Circle().fill(Color(hex: hex)).frame(width: 5, height: 5)
+                            }
+                            Text(row.title)
+                                .font(s.text(11))
+                                .foregroundStyle(s.primary)
+                                .lineLimit(1)
+                                .layoutPriority(1)
+                            Spacer(minLength: 4)
+                            if let value = row.value {
+                                Text(value)
+                                    .font(s.text(11, .semibold).monospacedDigit())
+                                    .foregroundStyle(s.secondary)
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.6)
+                                    .privacySensitive(row.isSensitive)
+                            }
+                        }
+                    }
+                }
+                .padding(8 * sp)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(s.panel, in: RoundedRectangle(cornerRadius: s.blockRadius(12), style: .continuous))
+                .styleDepth(s)
             } else {
                 mainCard
                 if context.isLarge && hasVisual {
