@@ -232,7 +232,11 @@ struct StudioStylePanel: View {
                     LazyHStack(alignment: .top, spacing: 10) {
                         ForEach(looks) { tile($0) }
                     }
+                    // Room above and below for the borders, glows and selection ring of the previews.
+                    .padding(.vertical, 8)
                 }
+                // The previews' glows and shadows are drawn whole, not cut at the edges of the row.
+                .scrollClipDisabled()
                 .contentMargins(.horizontal, 20, for: .scrollContent)
                 .padding(.horizontal, -20)
             }

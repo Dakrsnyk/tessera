@@ -65,12 +65,12 @@ struct NutritionAppView: View {
             .cristalGlass(in: RoundedRectangle(cornerRadius: palette.radius, style: .continuous))
             .tourAnchor(.nutrition, 1)
         } sheet: {
-            // The sheet, by importance: the goal to set (while it is unknown), the card « Maintenant », the meals,
-            // the two doors, the note, the settings last.
+            // The sheet, by importance: the goal to set (while it is unknown), the meals, then the card « Maintenant »
+            // with its meal ideas under them (PDG, 2026-11-26), the two doors, the note, the settings last.
             if !known.kcal { goalCard }
             MiniAppToFillSection(app: .nutrition)
-            if isToday && known.kcal { nowCard(state: state, totals: totals, known: known, hasEntries: !entries.isEmpty) }
             meals(entries: entries)
+            if isToday && known.kcal { nowCard(state: state, totals: totals, known: known, hasEntries: !entries.isEmpty) }
             doors(state: state, known: known)
             MiniFootnote(text: tr("Valeurs indicatives, pas un avis médical. Aliments emballés : Open Food Facts (licence ODbL)."))
             MiniAppInfoSection(app: .nutrition)

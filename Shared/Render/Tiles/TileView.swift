@@ -219,6 +219,14 @@ struct TileView: View {
     /// The week's schedule fills the height the widget leaves (no empty half below it); the other charts keep their own.
     private var fillsHeight: Bool { tile.visual.isSchedule }
 
+    /// A month of dots or a habits × days grid: drawn in the height left (a strip of 30 points made them specks).
+    private var growsInRoom: Bool {
+        switch tile.visual {
+        case .month, .grid, .week: true
+        default: false
+        }
+    }
+
     private var hasVisual: Bool {
         if case .none = tile.visual { return false }
         return true
@@ -672,8 +680,9 @@ struct TileView: View {
             }
             if !context.isSmall, hasVisual {
                 visual(compact: context.isMedium)
-                    .frame(minHeight: fillsHeight ? 110 : nil, maxHeight: fillsHeight ? .infinity : (context.isLarge ? 110 : 30))
-                    .layoutPriority(fillsHeight ? 1 : 0)
+                    .frame(minHeight: fillsHeight ? 110 : (growsInRoom ? 40 : nil),
+                           maxHeight: fillsHeight || growsInRoom ? .infinity : (context.isLarge ? 110 : 30))
+                    .layoutPriority(fillsHeight || growsInRoom ? 1 : 0)
             }
             Spacer(minLength: 0)
             if context.isLarge { buttonsRow(3) }
@@ -871,8 +880,8 @@ struct TileView: View {
                 mainCard
                 if context.isLarge && hasVisual {
                     card { visual(compact: false) }
-                        .frame(minHeight: fillsHeight ? 110 : nil, maxHeight: fillsHeight ? .infinity : 110)
-                        .layoutPriority(fillsHeight ? 1 : 0)
+                        .frame(minHeight: fillsHeight ? 110 : nil, maxHeight: fillsHeight || growsInRoom ? .infinity : 110)
+                        .layoutPriority(fillsHeight || growsInRoom ? 1 : 0)
                 }
                 if !others.isEmpty {
                     let pairs = stride(from: 0, to: others.count, by: 2).map { Array(others[$0..<min($0 + 2, others.count)]) }
