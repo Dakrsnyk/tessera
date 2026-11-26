@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 /// One style of the Studio's « Style » tab: a complete look (base, colors, background, font and every setting at
 /// once). Only the look changes: the widget's content, structure and functions stay. Applying one keeps the parts the
@@ -63,4 +64,98 @@ enum StyleCatalog {
 
     /// The style a design is in, if it was applied and left unchanged.
     static func current(for design: WidgetDesign) -> StyleLook? { all.first { $0.matches(design) } }
+}
+
+/// A family of styles: one row of the Style tool, named above it.
+struct StyleFamily: Identifiable {
+    let id: String
+    let name: String
+}
+
+/// The filters above the Style tool's rows.
+enum StyleFilter: String, CaseIterable, Identifiable {
+    case all, free, dark, light, colorful
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .all: tr("Tous")
+        case .free: tr("Gratuits")
+        case .dark: tr("Sombres")
+        case .light: tr("Clairs")
+        case .colorful: tr("Colorés")
+        }
+    }
+
+    func includes(_ look: StyleLook) -> Bool {
+        switch self {
+        case .all: true
+        case .free: look.isFree
+        case .dark: StyleCatalog.isDark(look)
+        case .light: !StyleCatalog.isDark(look)
+        case .colorful: StyleCatalog.isColorful(look)
+        }
+    }
+}
+
+extension StyleCatalog {
+    /// The families in the order of their rows (the ids of `StyleLibraryData.swift`).
+    static let families: [StyleFamily] = [
+        StyleFamily(id: "aura", name: tr("Aura")),
+        StyleFamily(id: "prime", name: tr("Prestige")),
+        StyleFamily(id: "luxe", name: tr("Luxe")),
+        StyleFamily(id: "riche", name: tr("Opulence")),
+        StyleFamily(id: "chrome", name: tr("Chrome")),
+        StyleFamily(id: "verre", name: tr("Verre")),
+        StyleFamily(id: "girl", name: tr("Girly")),
+        StyleFamily(id: "rose", name: tr("Rose")),
+        StyleFamily(id: "pixel", name: tr("Pixel")),
+        StyleFamily(id: "gaming", name: tr("Gaming")),
+        StyleFamily(id: "cyberpunk", name: tr("Cyberpunk")),
+        StyleFamily(id: "y2k", name: tr("Y2K")),
+        StyleFamily(id: "vintage", name: tr("Vintage")),
+        StyleFamily(id: "retro", name: tr("Rétro")),
+        StyleFamily(id: "neon", name: tr("Néon")),
+        StyleFamily(id: "minimal", name: tr("Minimaliste")),
+        StyleFamily(id: "brutal", name: tr("Brutal")),
+        StyleFamily(id: "nature", name: tr("Nature")),
+        StyleFamily(id: "illustration", name: tr("Illustré")),
+        StyleFamily(id: "sport", name: tr("Sport")),
+    ]
+
+    private static let byFamily: [String: [StyleLook]] = Dictionary(grouping: generated, by: \.family)
+
+    static func looks(in family: String) -> [StyleLook] { byFamily[family] ?? [] }
+
+    /// Computed once: the filters run over 500 styles at each change.
+    private static let traits: [String: (dark: Bool, colorful: Bool)] = Dictionary(
+        all.map { look in (look.id, (dark: darkness(look), colorful: colorfulness(look))) },
+        uniquingKeysWith: { first, _ in first }
+    )
+
+    static func isDark(_ look: StyleLook) -> Bool { traits[look.id]?.dark ?? false }
+    static func isColorful(_ look: StyleLook) -> Bool { traits[look.id]?.colorful ?? false }
+
+    /// A dark style writes in light letters; the originals follow their theme.
+    private static func darkness(_ look: StyleLook) -> Bool {
+        if let text = look.style.textHex { return ColorMath.isLight(text) }
+        return look.themeID == .dark || look.themeID == .monochrome
+    }
+
+    /// A colorful style has a saturated background (flat, gradient or tinted glass).
+    private static func colorfulness(_ look: StyleLook) -> Bool {
+        let hexes: [String]
+        switch look.background {
+        case .color(let hex): hexes = [hex]
+        case .gradient: hexes = [look.style.gradient?.startHex, look.style.gradient?.endHex, look.accentHex].compactMap { $0 }
+        case .glass: hexes = [look.accentHex].compactMap { $0 }
+        default: hexes = []
+        }
+        return hexes.contains { hex in
+            var h: CGFloat = 0, s: CGFloat = 0, b: CGFloat = 0, a: CGFloat = 0
+            UIColor(Color(hex: hex)).getHue(&h, saturation: &s, brightness: &b, alpha: &a)
+            return s > 0.35 && b > 0.35
+        }
+    }
 }

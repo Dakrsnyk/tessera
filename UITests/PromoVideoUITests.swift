@@ -216,7 +216,8 @@ final class PromoVideoUITests: XCTestCase {
         guard app.buttons["studio-style"].waitForExistence(timeout: 8) else { return }
         app.buttons["studio-style"].tap()
         pause(1)
-        for look in ["aura-halo", "luxe-guilloche", "verre-depoli", "vint-sepia", "neon-enseigne", "sp-stade"] {
+        // The Aura row, right under the originals: the rows further down are only created once scrolled to.
+        for look in ["aura-halo", "aura-opale", "aura-aube", "aura-spirit", "aura-holo", "dark"] {
             let button = app.buttons["style-\(look)"].firstMatch
             if tap(button, timeout: 3) { pause(1.1) }
         }

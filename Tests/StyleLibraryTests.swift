@@ -59,4 +59,23 @@ final class StyleLibraryTests: XCTestCase {
         XCTAssertEqual(StudioSection(name: "themes"), .style)
         XCTAssertFalse(StudioSection.allCases.map(\.rawValue).contains("theme"))
     }
+
+    func testEveryStyleIsInANamedFamilyRow() {
+        let named = Set(StyleCatalog.families.map(\.id))
+        XCTAssertEqual(named.count, StyleCatalog.families.count)
+        let inRows = StyleCatalog.families.flatMap { StyleCatalog.looks(in: $0.id) }
+        XCTAssertEqual(inRows.count, StyleCatalog.all.count - StyleCatalog.originals.count, "Un style n'est dans aucune rangée")
+        XCTAssertTrue(StyleCatalog.families.allSatisfy { !$0.name.isEmpty && !StyleCatalog.looks(in: $0.id).isEmpty })
+    }
+
+    func testTheFiltersSortTheStyles() {
+        let dark = StyleCatalog.look("dark")!, light = StyleCatalog.look("light")!
+        XCTAssertTrue(StyleFilter.dark.includes(dark))
+        XCTAssertFalse(StyleFilter.dark.includes(light))
+        XCTAssertTrue(StyleFilter.light.includes(light))
+        XCTAssertEqual(StyleCatalog.all.filter(StyleFilter.free.includes).count, 4)
+        for filter in StyleFilter.allCases where filter != .free {
+            XCTAssertGreaterThan(StyleCatalog.all.filter(filter.includes).count, 20, "\(filter) montre trop peu de styles")
+        }
+    }
 }

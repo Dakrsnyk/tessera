@@ -148,24 +148,142 @@ struct StudioElementsPanel: View {
 
 /// Styles (« Thème » and « Style » until the 2026-11-26, now one tool): each one a complete look, the 4 originals
 /// free, every other one Premium. Only the look changes: the content, the lines and the parts hidden stay.
+/// The Style tool: the 4 free originals, then one row per family that scrolls sideways, filters and « Au hasard ».
+/// The previews stay small even for a medium widget, so more styles are in view.
 struct StudioStylePanel: View {
     @Binding var design: WidgetDesign
     let input: StudioInput
     @Environment(AppModel.self) private var model
+    @State private var filter: StyleFilter = .all
+    /// The family opened with « Voir tout »; nil shows the rows.
+    @State private var openFamily: String?
+
+    private let tileWidth: CGFloat = 104
 
     var body: some View {
-        StudioNote(text: tr("Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur."), symbol: "swatchpalette")
-        StudioPreviewGrid(
-            options: StyleCatalog.all,
-            input: input,
-            variant: { $0.applied(to: design) },
-            title: \.name,
-            subtitle: { $0.summary },
-            isSelected: { $0.matches(design) },
-            showsLock: { $0.isPremium && !model.isPremium },
-            identifier: { "style-\($0.id)" },
-            select: { design = $0.applied(to: design) }
-        )
+        if let current = StyleCatalog.current(for: design) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(current.name).font(.headline)
+                Text(current.summary)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .accessibilityElement(children: .combine)
+        } else {
+            StudioNote(text: tr("Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur."), symbol: "swatchpalette")
+        }
+        filters
+        if let id = openFamily, let family = StyleCatalog.families.first(where: { $0.id == id }) {
+            familyGrid(family)
+        } else {
+            LazyVStack(alignment: .leading, spacing: 20) {
+                row(title: tr("Originaux"), detail: tr("gratuits"), looks: StyleCatalog.originals.filter(filter.includes), family: nil)
+                ForEach(StyleCatalog.families) { family in
+                    let looks = StyleCatalog.looks(in: family.id).filter(filter.includes)
+                    row(title: family.name, detail: Fmt.plural(looks.count, tr("style"), tr("styles")), looks: looks, family: family.id)
+                }
+            }
+        }
+    }
+
+    private var filters: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(StyleFilter.allCases) { option in
+                    FilterChip(title: option.title, isSelected: filter == option) {
+                        Haptics.tap()
+                        withAnimation(.easeInOut(duration: 0.2)) { filter = option }
+                    }
+                    .accessibilityIdentifier("style-filter-\(option.rawValue)")
+                }
+                FilterChip(title: tr("Au hasard"), symbol: "dice", isSelected: false, action: surprise)
+                    .accessibilityIdentifier("style-random")
+            }
+        }
+        .contentMargins(.horizontal, 20, for: .scrollContent)
+        .padding(.horizontal, -20)
+    }
+
+    @ViewBuilder private func row(title: String, detail: String, looks: [StyleLook], family: String?) -> some View {
+        if !looks.isEmpty {
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(title).font(.title3.weight(.bold))
+                    Text(detail).font(.subheadline).foregroundStyle(.secondary)
+                    Spacer(minLength: 8)
+                    if let family {
+                        Button(tr("Voir tout")) {
+                            withAnimation(.easeInOut(duration: 0.25)) { openFamily = family }
+                        }
+                        .font(.subheadline.weight(.semibold))
+                        .accessibilityIdentifier("style-family-\(family)")
+                    }
+                }
+                ScrollView(.horizontal, showsIndicators: false) {
+                    LazyHStack(alignment: .top, spacing: 10) {
+                        ForEach(looks) { tile($0) }
+                    }
+                }
+                .contentMargins(.horizontal, 20, for: .scrollContent)
+                .padding(.horizontal, -20)
+            }
+        }
+    }
+
+    private func familyGrid(_ family: StyleFamily) -> some View {
+        let looks = StyleCatalog.looks(in: family.id).filter(filter.includes)
+        return VStack(alignment: .leading, spacing: 12) {
+            Button {
+                withAnimation(.easeInOut(duration: 0.25)) { openFamily = nil }
+            } label: {
+                Label(tr("Toutes les familles"), systemImage: "chevron.left")
+            }
+            .font(.subheadline.weight(.semibold))
+            .accessibilityIdentifier("style-families")
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(family.name).font(.title2.weight(.bold))
+                Text(Fmt.plural(looks.count, tr("style"), tr("styles"))).font(.subheadline).foregroundStyle(.secondary)
+            }
+            if looks.isEmpty {
+                Text(tr("Aucun style de cette famille avec ce filtre."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: tileWidth + 6), spacing: 10, alignment: .top)], spacing: 14) {
+                ForEach(looks) { tile($0) }
+            }
+        }
+    }
+
+    private func tile(_ look: StyleLook) -> some View {
+        let isSelected = look.matches(design)
+        return Button {
+            Haptics.tap()
+            withAnimation(.easeInOut(duration: 0.25)) { design = look.applied(to: design) }
+        } label: {
+            StudioPreviewTile(
+                design: look.applied(to: design), family: .systemSmall, payload: input.payload,
+                title: look.name, isSelected: isSelected,
+                showsLock: look.isPremium && !model.isPremium, width: tileWidth
+            )
+            .frame(width: tileWidth + 6)
+        }
+        .buttonStyle(.pressable)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(look.isPremium && !model.isPremium ? "\(look.name), Premium" : look.name))
+        .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
+        .accessibilityIdentifier("style-\(look.id)")
+    }
+
+    /// A style picked at random among those the filter shows.
+    private func surprise() {
+        guard let look = StyleCatalog.all.filter({ filter.includes($0) && !$0.matches(design) }).randomElement() else { return }
+        Haptics.tap()
+        withAnimation(.easeInOut(duration: 0.25)) {
+            design = look.applied(to: design)
+            if openFamily != nil { openFamily = look.isFree ? nil : look.family }
+        }
     }
 }
 

@@ -109,7 +109,8 @@ final class AdShotsUITests: XCTestCase {
             button.exists && button.isHittable && button.frame.maxY < height - 125
         }
         var drags = 0
-        while !reachable() && drags < 14 {
+        // The Style tool has 21 rows: the last families are about 3 800 pt down.
+        while !reachable() && drags < 40 {
             // Down to what is below (or not created yet), up to what scrolled away above.
             let isAbove = button.exists && button.frame.midY < height * 0.5
             let start = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: isAbove ? 0.55 : 0.74))
