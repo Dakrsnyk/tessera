@@ -91,7 +91,8 @@ final class AppearanceAndStoreTests: XCTestCase {
         for widget in items.map(\.widget) {
             XCTAssertTrue(widget.kind.families.contains(widget.family), "\(widget.kind) has no \(widget.family) size")
         }
-        XCTAssertEqual(StoreShowcase.allStyles.count, ThemeCatalog.all.count)
+        XCTAssertEqual(StoreShowcase.allStyles.count, Set(StyleCatalog.all.map(\.family)).count, "Un style par famille")
+        XCTAssertTrue(StoreShowcase.allStyles.allSatisfy { $0.look != nil })
     }
 
     func testCollectionsAreDistinctAndFilled() {

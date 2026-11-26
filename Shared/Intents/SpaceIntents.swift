@@ -338,8 +338,7 @@ struct TogglePriorityIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult {
-        guard let id = UUID(uuidString: priorityID) else { return .result() }
-        SharedStore.shared.update(ProductivityState.self) { $0.togglePriority(id) }
+        // Top 3 retired: a button of an old widget timeline can still call this, it does nothing but refresh.
         refreshWidgets()
         return .result()
     }

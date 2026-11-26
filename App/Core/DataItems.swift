@@ -270,7 +270,7 @@ extension WidgetKind {
         case .habits, .habitStreak, .habitWeek, .habitRate: [.habits]
         case .hydration: []
         case .deepWork: [.focusGoal]
-        case .priorities: [.priorities]
+        case .priorities: []
         case .project: [.projects]
         case .deadline: [.deadlines]
         case .counter: [.counters]

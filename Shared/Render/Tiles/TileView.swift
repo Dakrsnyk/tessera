@@ -952,8 +952,6 @@ struct TileActionButton<Label: View>: View {
             IntentButton(intent: QuickExpenseIntent(expenseID: id), isEnabled: isEnabled, label: label)
         case let .counter(id, delta):
             IntentButton(intent: CounterStepIntent(counterID: id, delta: delta), isEnabled: isEnabled, label: label)
-        case let .togglePriority(id):
-            IntentButton(intent: TogglePriorityIntent(priorityID: id), isEnabled: isEnabled, label: label)
         case let .toggleProjectTask(project, task):
             IntentButton(intent: ToggleProjectTaskIntent(projectID: project, taskID: task), isEnabled: isEnabled, label: label)
         case .revealCard:

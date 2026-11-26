@@ -13,7 +13,6 @@ enum TileAction: Hashable {
     case logFood(String)
     case quickExpense(String)
     case counter(String, Int)
-    case togglePriority(String)
     case toggleProjectTask(String, String)
     case revealCard
     case gradeCard(Bool)

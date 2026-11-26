@@ -159,7 +159,7 @@ struct DataItemRow: View {
                 if model.isFilled(.tasks) { link(tr("Gérer mes tâches")) { TasksView() } }
             }
         case .priorities:
-            link(model.isFilled(.priorities) ? tr("Voir mon top 3") : tr("Choisir mon top 3 du jour")) { SpaceView(space: .productivity, isEmbedded: true) }
+            EmptyView() // Top 3 retired: never offered (see `DataArea.items`).
         case .projects:
             buttons(add: tr("Nouveau projet"), space: model.isFilled(.projects) ? .productivity : nil) {
                 sheets?.open { ProjectEditor(project: Project(name: "")) }

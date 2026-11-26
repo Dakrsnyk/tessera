@@ -6,8 +6,16 @@ struct ShowcaseItem: Identifiable {
     let widget: SetupWidget
     let title: String
     let subtitle: String
+    /// A style of the Studio's « Style » tool applied on top of the widget (nil: the widget's own theme).
+    var look: StyleLook? = nil
 
-    var id: String { "\(widget.kind.rawValue)-\(widget.theme.rawValue)-\(widget.accent)-\(title)" }
+    var id: String { "\(widget.kind.rawValue)-\(widget.theme.rawValue)-\(widget.accent)-\(title)-\(look?.id ?? "")" }
+
+    /// The widget as shown and as opened in the Studio.
+    func makeDesign() -> WidgetDesign {
+        let design = widget.makeDesign()
+        return look?.applied(to: design) ?? design
+    }
 }
 
 /// A themed set of widgets, shown as a colored tile in the Store and as a page of its own.
@@ -50,16 +58,21 @@ enum StoreShowcase {
         item(.savingsGoal, .accessoryCircular, .minimal, "2F8F7A"),
     ]
 
-    /// The same countdown in each of the twelve styles.
+    /// The same countdown in a style of each family: the first of every family of `StyleCatalog`.
     static var allStyles: [ShowcaseItem] {
-        ThemeCatalog.all.enumerated().map { index, theme in
-            ShowcaseItem(
-                widget: SetupWidget(kind: .countdown, family: .systemSmall, theme: theme.id,
-                                    accent: Palette.freeAccents[index % Palette.freeAccents.count].hex, template: "countdown-holidays"),
-                title: theme.name,
-                subtitle: theme.isPremium ? tr("Premium") : tr("Gratuit")
-            )
-        }
+        var seen = Set<String>()
+        return StyleCatalog.all.filter { seen.insert($0.family).inserted }.map(styleItem)
+    }
+
+    /// The demonstration countdown in this style.
+    static func styleItem(_ look: StyleLook) -> ShowcaseItem {
+        ShowcaseItem(
+            widget: SetupWidget(kind: .countdown, family: .systemSmall, theme: look.themeID,
+                                accent: look.accentHex ?? Palette.defaultAccent, template: "countdown-holidays"),
+            title: look.name,
+            subtitle: look.isPremium ? tr("Premium") : tr("Gratuit"),
+            look: look
+        )
     }
 
     /// The same widget in each free color.
@@ -185,7 +198,7 @@ enum StoreShowcase {
             item(.weeklyVolume, .systemLarge, .futuristic, "3366FF"),
             item(.tasks, .systemLarge, .minimal, "2F8F7A"),
         ]),
-        StoreCollection(id: "styles", title: tr("Un widget, 12 styles"), subtitle: tr("Le même compte à rebours, dans chaque style."),
+        StoreCollection(id: "styles", title: tr("Un widget, \(StyleCatalog.all.count) styles"), subtitle: tr("Le même compte à rebours, dans un style de chaque famille."),
                         symbol: "paintbrush.fill", colorHex: "8C6CFF", items: allStyles),
         StoreCollection(id: "colors", title: tr("Toutes les couleurs"), subtitle: tr("Choisis la tienne, ou n'importe quelle autre avec Premium."),
                         symbol: "eyedropper.halffull", colorHex: "F2A33A", items: allColors),

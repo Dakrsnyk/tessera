@@ -819,7 +819,7 @@ struct MarketingStore: View {
 struct MarketingPlanning: View {
     var body: some View {
         MarketingShowcase(eyebrow: tr("Planning"), title: tr("Ta semaine,\nbien en main."), subtitle: tr("Horaire, tâches, habitudes, focus.")) {
-            MarketingFloating(kind: .priorities, theme: .dark, accent: "5B8DEF", width: 168)
+            MarketingFloating(kind: .tasks, theme: .dark, accent: "5B8DEF", width: 168)
                 .rotationEffect(.degrees(5))
                 .at(262, 730)
         }

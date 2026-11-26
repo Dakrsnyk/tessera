@@ -135,7 +135,7 @@ struct CollectionTile: View {
 
     var body: some View {
         let cover = collection.cover
-        let design = cover.widget.makeDesign()
+        let design = cover.makeDesign()
         ZStack(alignment: .bottomLeading) {
             ZStack {
                 Color(hex: collection.colorHex)
@@ -289,7 +289,7 @@ private struct ShowcaseTile: View {
     let isPremiumUser: Bool
 
     var body: some View {
-        let design = item.widget.makeDesign()
+        let design = item.makeDesign()
         VStack(alignment: .leading, spacing: 8) {
             WidgetPreview(design: design, family: item.widget.family, payload: SamplePayload.make(for: design))
             HStack(spacing: 6) {
@@ -327,7 +327,7 @@ struct StoreCollectionView: View {
             VStack(alignment: .leading, spacing: 26) {
                 cover
                 ShowcaseGrid(items: collection.items, isPremiumUser: model.isPremium) { item in
-                    router.openEditor(item.widget.makeDesign(), isNew: true)
+                    router.openEditor(item.makeDesign(), isNew: true)
                 }
             }
             .padding(.horizontal, 20)
@@ -504,14 +504,13 @@ enum StoreEdition {
         return packs[(week(now) * 7 + 3) % packs.count]
     }
 
-    /// The styles put forward in turn, one a week, starting with Espace the week of 5 October 2026.
-    static let weeklyStyles: [ThemeID] = [.space, .mars, .nature, .botanical, .ocean]
-
-    static func style(now: Date = Date()) -> WidgetTheme {
+    /// The style put forward, one a week, taken in the Premium styles of the Studio (a stride of 37 so that two weeks in a
+    /// row are never neighbours of the same family; 37 and the count of styles have no common divisor).
+    static func style(now: Date = Date()) -> StyleLook {
         let start = DateMath.calendar.date(from: DateComponents(year: 2026, month: 10, day: 5)) ?? now
         let weeks = Int((Double(DateMath.daysBetween(start, now)) / 7).rounded(.down))
-        let count = weeklyStyles.count
-        return ThemeCatalog.theme(weeklyStyles[((weeks % count) + count) % count])
+        let premium = StyleCatalog.all.filter(\.isPremium)
+        return premium[(((weeks * 37) % premium.count) + premium.count) % premium.count]
     }
 }
 
@@ -617,12 +616,12 @@ struct SeasonalCollection: View {
 
 /// The style of the week, across the page: three widgets dressed in it, its name and its mood.
 struct WeeklyStyleFeature: View {
-    let theme: WidgetTheme
+    let look: StyleLook
     let isPremiumUser: Bool
     let onOpen: () -> Void
 
     var body: some View {
-        let designs = [WidgetKind.clock, .moonPhase, .countdown].map { WidgetDesign(kind: $0, themeID: theme.id) }
+        let designs = [WidgetKind.clock, .moonPhase, .countdown].map { look.applied(to: WidgetDesign(kind: $0)) }
         Button(action: onOpen) {
             VStack(alignment: .leading, spacing: 14) {
                 HStack(spacing: 10) {
@@ -637,16 +636,16 @@ struct WeeklyStyleFeature: View {
                             .font(.caption.weight(.bold))
                             .tracking(1.1)
                             .foregroundStyle(Color.accentColor)
-                        Text(theme.name)
+                        Text(look.name)
                             .font(.title2.weight(.bold))
                             .foregroundStyle(.primary)
-                        Text(theme.tagline)
+                        Text(look.summary)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .fixedSize(horizontal: false, vertical: true)
                     }
                     Spacer(minLength: 6)
-                    if theme.isPremium && !isPremiumUser {
+                    if look.isPremium && !isPremiumUser {
                         PremiumBadge(compact: true)
                     }
                     Image(systemName: "chevron.right")

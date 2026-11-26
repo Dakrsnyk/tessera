@@ -29,11 +29,16 @@ final class StoreSeasonTests: XCTestCase {
         XCTAssertTrue(styles.allSatisfy { ThemeCatalog.theme($0).isPremium })
     }
 
-    func testSpaceIsTheStyleOfTheWeek() {
-        XCTAssertEqual(StoreEdition.style(now: date(2026, 10, 5)).id, .space)
-        XCTAssertEqual(StoreEdition.style(now: date(2026, 10, 9)).id, .space)
-        XCTAssertEqual(StoreEdition.style(now: date(2026, 10, 11)).id, .space)
-        XCTAssertNotEqual(StoreEdition.style(now: date(2026, 10, 12)).id, .space)
+    func testTheStyleOfTheWeekIsPremiumAndChangesEachWeek() {
+        let monday = StoreEdition.style(now: date(2026, 10, 5))
+        XCTAssertTrue(monday.isPremium)
+        XCTAssertEqual(StoreEdition.style(now: date(2026, 10, 11)).id, monday.id)
+        XCTAssertNotEqual(StoreEdition.style(now: date(2026, 10, 12)).id, monday.id)
+        XCTAssertNotNil(StyleCatalog.look(monday.id))
+        // The weekly step of 37 goes through every Premium style only if it shares no divisor with their count.
+        var (x, y) = (37, StyleCatalog.premiumCount)
+        while y != 0 { (x, y) = (y, x % y) }
+        XCTAssertEqual(x, 1, "Le pas de 37 doit être premier avec le nombre de styles Premium")
     }
 
     func testThemedWorldsHaveTheirHomeScreens() {

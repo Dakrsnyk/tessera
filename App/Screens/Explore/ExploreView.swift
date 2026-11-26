@@ -301,8 +301,8 @@ struct ExploreView: View {
             }
         }
         let style = StoreEdition.style()
-        WeeklyStyleFeature(theme: style, isPremiumUser: model.isPremium) {
-            themeFilter = style.id
+        WeeklyStyleFeature(look: style, isPremiumUser: model.isPremium) {
+            openStyle(style)
         }
         shelfRow(tr("À découvrir cette semaine")) {
             templateItems(TemplateCatalog.weeklyPick())
@@ -404,29 +404,47 @@ struct ExploreView: View {
         }
     }
 
-    /// Every style on two rows, the style of the week first: a tap shows all its widgets.
+    /// A style of every family on two rows, the style of the week first: a tap opens the Studio on a demonstration
+    /// widget in that style (Premium ones are tried there, then offered by the Studio as for any Premium widget).
     private var styleRows: some View {
-        let weekly = StoreEdition.style().id
-        let themes = ThemeCatalog.all.filter { $0.id == weekly } + ThemeCatalog.all.filter { $0.id != weekly }
+        let weekly = StoreEdition.style()
+        let looks = [weekly] + StoreShowcase.allStyles.compactMap(\.look).filter { $0.id != weekly.id }
         return VStack(alignment: .leading, spacing: 8) {
-            Text(tr("Touche un style pour voir tous ses widgets."))
+            Text(tr("Touche un style pour l'essayer sur un widget."))
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 20)
             ScrollView(.horizontal, showsIndicators: false) {
-                LazyHGrid(rows: [GridItem(.fixed(104), spacing: 14), GridItem(.fixed(104))], alignment: .top, spacing: 12) {
-                    ForEach(themes) { theme in
+                LazyHGrid(rows: [GridItem(.fixed(124), spacing: 14), GridItem(.fixed(124))], alignment: .top, spacing: 12) {
+                    ForEach(looks) { look in
+                        let design = StoreShowcase.styleItem(look).makeDesign()
                         Button {
-                            themeFilter = theme.id
+                            openStyle(look)
                         } label: {
-                            ThemeSwatch(theme: theme, accentHex: Palette.defaultAccent, isSelected: false, showsLock: theme.isPremium && !model.isPremium)
+                            VStack(spacing: 5) {
+                                WidgetPreview(design: design, family: .systemSmall, payload: SamplePayload.make(for: design), width: 86)
+                                    .overlay(alignment: .topTrailing) {
+                                        if look.isPremium && !model.isPremium { PremiumBadge(compact: true).padding(4) }
+                                    }
+                                Text(look.name)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                    .lineLimit(1)
+                            }
+                            .frame(width: 96)
                         }
                         .buttonStyle(.pressable)
+                        .accessibilityLabel(Text(tr("Style \(look.name)\(look.isPremium && !model.isPremium ? tr(", Premium") : "")")))
                     }
                 }
                 .padding(.horizontal, 20)
             }
         }
+    }
+
+    /// The Studio on the demonstration widget, in this style, on its « Style » tool.
+    private func openStyle(_ look: StyleLook) {
+        router.openEditor(StoreShowcase.styleItem(look).makeDesign(), isNew: true, section: StudioSection.style.rawValue)
     }
 
     /// Six chosen widgets from six different categories, chosen by the team: there are no download

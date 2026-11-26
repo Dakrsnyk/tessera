@@ -7,7 +7,6 @@ enum ProductivityTiles {
         let content = context.payload.content
         let target = context.options.targetID
         switch context.design.kind {
-        case .priorities: return priorities(state, now: now)
         case .project: return project(state, target: target, now: now)
         case .deadline: return deadline(state, target: target, now: now, context: context)
         case .deepWork: return deepWork(state, now: now)
@@ -17,24 +16,6 @@ enum ProductivityTiles {
         case .habitRate: return habitRate(content, now: now)
         default: return TileFactory.placeholder(context.design.kind)
         }
-    }
-
-    static func priorities(_ state: ProductivityState, now: Date) -> Tile {
-        // Validated tasks leave the widget (they stay stored in « Mes tâches réalisées »).
-        let items = Array(state.activePriorities.prefix(3))
-        guard !items.isEmpty else {
-            return .empty(tr("Top 3 du jour"), symbol: "3.circle", message: tr("Choisis tes trois priorités dans Ardane, espace Productivité."))
-        }
-        var tile = Tile(title: tr("Top 3 du jour"), symbol: "3.circle")
-        tile.value = "\(items.count)"
-        tile.caption = tr("priorités à faire")
-        tile.rows = items.map { item in
-            TileRow(id: item.id.uuidString, title: item.title, isDone: false, action: .togglePriority(item.id.uuidString))
-        }
-        tile.compactRows = true
-        tile.shortValue = "\(items.count)"
-        tile.inline = tr("Priorités à faire : \(items.count)")
-        return tile
     }
 
     static func project(_ state: ProductivityState, target: String?, now: Date) -> Tile {

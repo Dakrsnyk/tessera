@@ -70689,53 +70689,6 @@
         }
       }
     },
-    "Choisir mon top 3 du jour": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Top 3 des Tages wählen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick today's top 3"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elegir mi top 3 del día"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisir mon top 3 du jour"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scegli i miei top 3 di oggi"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日のトップ3を選ぶ"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolher meu top 3 do dia"
-          }
-        }
-      }
-    },
     "Choisir un PDF": {
       "extractionState": "manual",
       "localizations": {
@@ -71719,53 +71672,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Escolha suas fotos no Ardane"
-          }
-        }
-      }
-    },
-    "Choisis tes trois priorités dans Ardane, espace Productivité.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wähle deine drei Prioritäten in Ardane im Bereich Produktivität."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pick your three priorities in the Productivity space in Ardane."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Elige tus tres prioridades en el espacio Productividad de Ardane."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choisis tes trois priorités dans Ardane, espace Productivité."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scegli le tue tre priorità in Ardane, nello spazio Produttività."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ardaneの生産性スペースで3つの優先事項を選びましょう。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Escolha suas três prioridades no Ardane, no espaço Produtividade."
           }
         }
       }
@@ -77641,53 +77547,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Velocímetro, vermelho e branco, itálico"
-          }
-        }
-      }
-    },
-    "Compteur, focus, échéance et priorités.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zähler, Fokus, Frist und Prioritäten."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Counter, focus, deadline and priorities."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contador, enfoque, fecha límite y prioridades."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Compteur, focus, échéance et priorités."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contatore, focus, scadenza e priorità."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "カウンター、集中、締め切り、優先事項。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contador, foco, prazo e prioridades."
           }
         }
       }
@@ -113224,53 +113083,6 @@
         }
       }
     },
-    "Esprit clair": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Klarer Kopf"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clear mind"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mente clara"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Esprit clair"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mente lucida"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "クリアな頭"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mente clara"
-          }
-        }
-      }
-    },
     "Essai gratuit": {
       "extractionState": "manual",
       "localizations": {
@@ -143445,53 +143257,6 @@
         }
       }
     },
-    "Journée productive": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Produktiver Tag"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Productive day"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Día productivo"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Journée productive"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Giornata produttiva"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "生産的な一日"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dia produtivo"
-          }
-        }
-      }
-    },
     "Jours avant": {
       "extractionState": "manual",
       "localizations": {
@@ -155712,49 +155477,49 @@
         }
       }
     },
-    "Le même compte à rebours, dans chaque style.": {
+    "Le même compte à rebours, dans un style de chaque famille.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Derselbe Countdown, in jedem Stil."
+            "value": "Derselbe Countdown in einem Stil jeder Familie."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The same countdown, in every style."
+            "value": "The same countdown in a style from each family."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "La misma cuenta regresiva, en cada estilo."
+            "value": "La misma cuenta atrás en un estilo de cada familia."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Le même compte à rebours, dans chaque style."
+            "value": "Le même compte à rebours, dans un style de chaque famille."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Lo stesso conto alla rovescia, in ogni stile."
+            "value": "Lo stesso conto alla rovescia in uno stile per ogni famiglia."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "同じカウントダウンを、あらゆるスタイルで。"
+            "value": "各ファミリーのスタイルで見る同じカウントダウン。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "A mesma contagem regressiva, em cada estilo."
+            "value": "A mesma contagem regressiva em um estilo de cada família."
           }
         }
       }
@@ -217705,53 +217470,6 @@
         }
       }
     },
-    "Priorités à faire : %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Offene Prioritäten: %@"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Priorities to do: %@"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prioridades pendientes: %@"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Priorités à faire : %@"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Priorità da fare: %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "残りの優先事項：%@"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Prioridades a fazer: %@"
-          }
-        }
-      }
-    },
     "Prise d'escalade": {
       "extractionState": "manual",
       "localizations": {
@@ -263906,53 +263624,6 @@
         }
       }
     },
-    "Ta liste et tes trois priorités du jour.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Liste und deine drei Prioritäten des Tages."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your list and your three priorities of the day."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tu lista y tus tres prioridades del día."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ta liste et tes trois priorités du jour."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "La tua lista e le tue tre priorità del giorno."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "リストと、今日の優先事項3つ。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sua lista e suas três prioridades do dia."
-          }
-        }
-      }
-    },
     "Ta matinée": {
       "extractionState": "manual",
       "localizations": {
@@ -271469,53 +271140,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suas tarefas e seu próximo prazo."
-          }
-        }
-      }
-    },
-    "Tes tâches, ton top 3 et une séance de focus.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Deine Aufgaben, dein Top 3 und eine Fokus-Session."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your tasks, your top 3 and a focus session."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tus tareas, tu top 3 y una sesión de foco."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tes tâches, ton top 3 et une séance de focus."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le tue attività, il tuo top 3 e una sessione di focus."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "タスク、トップ3、フォーカスセッション。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suas tarefas, seu top 3 e uma sessão de foco."
           }
         }
       }
@@ -279369,49 +278993,49 @@
         }
       }
     },
-    "Touche un style pour voir tous ses widgets.": {
+    "Touche un style pour l'essayer sur un widget.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tippe auf einen Stil, um alle seine Widgets zu sehen."
+            "value": "Tippe auf einen Stil, um ihn an einem Widget zu testen."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tap a style to see all its widgets."
+            "value": "Tap a style to try it on a widget."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toca un estilo para ver todos sus widgets."
+            "value": "Toca un estilo para probarlo en un widget."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Touche un style pour voir tous ses widgets."
+            "value": "Touche un style pour l'essayer sur un widget."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tocca uno stile per vedere tutti i suoi widget."
+            "value": "Tocca uno stile per provarlo su un widget."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "スタイルをタップすると、そのウィジェットがすべて見られます。"
+            "value": "スタイルをタップして、ウィジェットで試せます。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Toque em um estilo para ver todos os seus widgets."
+            "value": "Toque em um estilo para testá-lo em um widget."
           }
         }
       }
@@ -285949,53 +285573,6 @@
         }
       }
     },
-    "Tâches et top 3": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Aufgaben und Top 3"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tasks and top 3"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tareas y top 3"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tâches et top 3"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Attività e top 3"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "タスクとトップ3"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tarefas e top 3"
-          }
-        }
-      }
-    },
     "Tâches faites aujourd'hui : %@": {
       "extractionState": "manual",
       "localizations": {
@@ -288675,49 +288252,49 @@
         }
       }
     },
-    "Un widget, 12 styles": {
+    "Un widget, %@ styles": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ein Widget, 12 Stile"
+            "value": "Ein Widget, %@ Stile"
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "One widget, 12 styles"
+            "value": "One widget, %@ styles"
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un widget, 12 estilos"
+            "value": "Un widget, %@ estilos"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un widget, 12 styles"
+            "value": "Un widget, %@ styles"
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Un widget, 12 stili"
+            "value": "Un widget, %@ stili"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "1つのウィジェット、12のスタイル"
+            "value": "1つのウィジェット、%@のスタイル"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Um widget, 12 estilos"
+            "value": "Um widget, %@ estilos"
           }
         }
       }
@@ -298353,53 +297930,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ver minhas necessidades"
-          }
-        }
-      }
-    },
-    "Voir mon top 3": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Meine Top 3 ansehen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "See my top 3"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver mi top 3"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voir mon top 3"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vedi i miei top 3"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "トップ3を見る"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ver meu top 3"
           }
         }
       }
@@ -315179,53 +314709,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "prioridades"
-          }
-        }
-      }
-    },
-    "priorités à faire": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "offene Prioritäten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "priorities to do"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "prioridades pendientes"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "priorités à faire"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "priorità da fare"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "残りの優先事項"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "prioridades a fazer"
           }
         }
       }
