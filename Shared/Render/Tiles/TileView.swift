@@ -638,14 +638,10 @@ struct TileView: View {
                     GridRow {
                         ForEach(chunk.element) { stat in
                             VStack(alignment: .leading, spacing: 1) {
-                                Text(s.labelText(stat.label))
-                                    .font(s.label(9))
-                                    .tracking(s.labelTracking * 0.6)
-                                    .foregroundStyle(s.secondary)
-                                    .lineLimit(1)
+                                statLabel(stat)
                                 Text(stat.value)
                                     .font(s.number(stat.id == "value" ? (context.isSmall ? 26 : 22) : (context.isSmall ? 17 : 18)))
-                                    .foregroundStyle(stat.color ?? s.numberColor)
+                                    .foregroundStyle(s.numberColor)
                                     .lineLimit(1)
                                     .minimumScaleFactor(0.5)
                                     .styleDepth(s)
@@ -818,17 +814,33 @@ struct TileView: View {
         }
     }
 
+    /// A stat's name, after a dot of its line's color: the amount keeps the style's number color (readable on its panels).
+    private func statLabel(_ stat: Stat) -> some View {
+        HStack(spacing: 4) {
+            if let color = stat.color { Circle().fill(color).frame(width: 5, height: 5) }
+            Text(s.labelText(stat.label))
+                .font(s.label(9))
+                .tracking(s.labelTracking * 0.6)
+                .foregroundStyle(s.secondary)
+                .lineLimit(1)
+        }
+    }
+
     private func statCard(_ stat: Stat) -> some View {
         card {
             VStack(alignment: .leading, spacing: 2) {
-                Text(stat.label)
-                    .font(s.text(10, .medium))
-                    .foregroundStyle(s.secondary)
-                    .lineLimit(1)
+                HStack(spacing: 4) {
+                    // The line's own color as a dot: on the style's panels the amount keeps the style's number color.
+                    if let color = stat.color { Circle().fill(color).frame(width: 6, height: 6) }
+                    Text(stat.label)
+                        .font(s.text(10, .medium))
+                        .foregroundStyle(s.secondary)
+                        .lineLimit(1)
+                }
                 Spacer(minLength: 0)
                 Text(stat.value)
                     .font(s.number(context.isSmall ? 15 : 16))
-                    .foregroundStyle(stat.color ?? s.numberColor)
+                    .foregroundStyle(s.numberColor)
                     .lineLimit(1)
                     .minimumScaleFactor(0.5)
                     .privacySensitive(tile.isSensitive)
