@@ -37,7 +37,7 @@
    "hex": "F6F1E7"
   },
   "font": "theme",
-  "fontName": "AppleSDGothicNeo-Thin",
+  "fontName": "AppleSDGothicNeo-Regular",
   "textHex": "2B2B2B",
   "secondaryHex": "6E6A62",
   "numberHex": "B3362B",
@@ -54,8 +54,8 @@
   "iconStyle": "none",
   "titleCase": "normal",
   "tracking": 3,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.2
  },
  {
@@ -126,7 +126,7 @@
    "hex": "000000"
   },
   "font": "theme",
-  "fontName": "HelveticaNeue-UltraLight",
+  "fontName": "HelveticaNeue",
   "textHex": "FFFFFF",
   "secondaryHex": "8E8E93",
   "numberHex": "FFFFFF",
@@ -138,8 +138,8 @@
   "iconStyle": "none",
   "titleCase": "upper",
   "tracking": 3,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.35
  },
  {
@@ -270,7 +270,7 @@
   "numberHex": "151515",
   "chartHex": "3C3C3C",
   "texture": "noise",
-  "textureOpacity": 0.3,
+  "textureOpacity": 0.22,
   "border": "inset",
   "borderHex": "3C3C3C",
   "borderWidth": 1,
@@ -299,9 +299,9 @@
    "dir": "up"
   },
   "font": "theme",
-  "fontName": "Avenir-Light",
+  "fontName": "Avenir-Book",
   "textHex": "2D3834",
-  "secondaryHex": "627069",
+  "secondaryHex": "4E5A54",
   "numberHex": "4C625A",
   "chartHex": "6B7F77",
   "depth": "floating",
@@ -312,8 +312,8 @@
   "iconStyle": "none",
   "titleCase": "lower",
   "tracking": 3,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.2
  },
  {
@@ -335,7 +335,7 @@
   "border": "solid",
   "borderHex": "000000",
   "borderWidth": 4,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "111111",
   "shape": "square",
   "layout": "cards",
@@ -346,7 +346,9 @@
   "tracking": 0,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.15
+  "valueScale": 1.15,
+  "shadowOpacity": 0.18,
+  "shadowOffset": 2
  },
  {
   "id": "mini-bauhaus",
@@ -364,7 +366,7 @@
   "secondaryHex": "4C4C5C",
   "numberHex": "E63B2E",
   "chartHex": "E63B2E",
-  "depth": "longShadow",
+  "depth": "hardShadow",
   "shadowHex": "E63B2E",
   "shape": "panel",
   "layout": "graph",
@@ -375,7 +377,9 @@
   "tracking": 1,
   "numberWeight": "bold",
   "titleWeight": "bold",
-  "valueScale": 1.1
+  "valueScale": 1.1,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "mini-papier-lin",
@@ -420,7 +424,7 @@
    "hex": "0F1626"
   },
   "font": "theme",
-  "fontName": "AvenirNext-UltraLight",
+  "fontName": "AvenirNext-Regular",
   "textHex": "E5ECFA",
   "secondaryHex": "8E9CBB",
   "numberHex": "BFD0F2",
@@ -433,8 +437,8 @@
   "iconStyle": "none",
   "titleCase": "lower",
   "tracking": 2,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.25
  },
  {
@@ -549,7 +553,7 @@
   "secondaryHex": "7C634A",
   "numberHex": "9A5F33",
   "chartHex": "B7794A",
-  "depth": "longShadow",
+  "depth": "hardShadow",
   "shadowHex": "B7794A",
   "shape": "rounded",
   "layout": "minimal",
@@ -560,7 +564,9 @@
   "tracking": 1,
   "numberWeight": "regular",
   "titleWeight": "medium",
-  "valueScale": 1.2
+  "valueScale": 1.2,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "mini-menthe",
@@ -614,11 +620,13 @@
   "chart": "pie",
   "density": "balanced",
   "iconStyle": "outline",
-  "titleCase": "upper",
-  "tracking": 3,
+  "titleCase": "smallCaps",
+  "tracking": 0.8,
   "numberWeight": "regular",
   "titleWeight": "regular",
-  "valueScale": 0.95
+  "valueScale": 0.95,
+  "titleScale": 0.86,
+  "textScale": 0.86
  },
  {
   "id": "mini-ivoire-or",
@@ -663,9 +671,9 @@
    "dir": "down"
   },
   "font": "theme",
-  "fontName": "HelveticaNeue-Light",
+  "fontName": "HelveticaNeue",
   "textHex": "28303B",
-  "secondaryHex": "5F6B7A",
+  "secondaryHex": "4C5662",
   "numberHex": "3C4A5C",
   "chartHex": "7D8CA0",
   "depth": "soft",
@@ -676,8 +684,8 @@
   "iconStyle": "none",
   "titleCase": "normal",
   "tracking": 2,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.15
  },
  {
@@ -707,10 +715,11 @@
   "density": "balanced",
   "iconStyle": "square",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "bold",
   "titleWeight": "bold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "mini-ecran-encre",

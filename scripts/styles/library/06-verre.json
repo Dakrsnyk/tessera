@@ -4,15 +4,15 @@
   "name": "Verre dépoli",
   "summary": "Verre mat, filet blanc, chiffres fins",
   "theme": "dark",
-  "accent": "BFE3FF",
+  "accent": "DCEBF8",
   "bg": {
    "kind": "glass"
   },
   "font": "standard",
-  "fontName": "HelveticaNeue-UltraLight",
-  "textHex": "FFFFFF",
-  "secondaryHex": "D5E3F0",
-  "numberHex": "BFE3FF",
+  "fontName": "HelveticaNeue",
+  "textHex": "12263A",
+  "secondaryHex": "34506B",
+  "numberHex": "1B5C96",
   "chartHex": "BFE3FF",
   "texture": "grain",
   "textureOpacity": 0.2,
@@ -26,7 +26,7 @@
   "chart": "line",
   "titleCase": "lower",
   "tracking": 0,
-  "numberWeight": "light",
+  "numberWeight": "regular",
   "titleWeight": "regular",
   "borderOpacity": 0.45,
   "valueScale": 1.2
@@ -44,13 +44,13 @@
    "dir": "down"
   },
   "font": "standard",
-  "fontName": "AvenirNext-UltraLight",
-  "textHex": "F4FAFF",
+  "fontName": "AvenirNext-Regular",
+  "textHex": "FFFFFF",
   "secondaryHex": "BBD9F0",
-  "numberHex": "A5D8FF",
+  "numberHex": "AEDCFF",
   "chartHex": "A5D8FF",
   "texture": "snow",
-  "textureOpacity": 0.45,
+  "textureOpacity": 0.22,
   "border": "inset",
   "borderHex": "CFE9FF",
   "borderWidth": 1.5,
@@ -61,8 +61,8 @@
   "chart": "ring",
   "titleCase": "lower",
   "tracking": 1,
-  "numberWeight": "light",
-  "titleWeight": "light"
+  "numberWeight": "regular",
+  "titleWeight": "medium"
  },
  {
   "id": "cristal",
@@ -116,7 +116,7 @@
   "numberHex": "FFB347",
   "chartHex": "FFB347",
   "texture": "web",
-  "textureOpacity": 0.5,
+  "textureOpacity": 0.22,
   "border": "double",
   "borderHex": "FFB347",
   "borderWidth": 1.5,
@@ -159,9 +159,10 @@
   "layout": "data",
   "chart": "comparison",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.8,
   "numberWeight": "medium",
-  "titleWeight": "semibold"
+  "titleWeight": "semibold",
+  "titleScale": 0.86
  },
  {
   "id": "verre-fume",
@@ -269,7 +270,7 @@
   "name": "Liquid clair",
   "summary": "Panneau de verre léger, lévitation, ring",
   "theme": "light",
-  "accent": "3A7BFF",
+  "accent": "DCE8FF",
   "bg": {
    "kind": "glass"
   },
@@ -277,7 +278,7 @@
   "fontName": "AvenirNext-Regular",
   "textHex": "111A2B",
   "secondaryHex": "3B4A63",
-  "numberHex": "3A7BFF",
+  "numberHex": "1C4FBF",
   "chartHex": "3A7BFF",
   "texture": "none",
   "textureOpacity": 0.2,
@@ -300,12 +301,12 @@
   "name": "Verre tinté",
   "summary": "Verre teinté ambre, liste, filet intérieur",
   "theme": "dark",
-  "accent": "FFC27A",
+  "accent": "664E31",
   "bg": {
    "kind": "glass"
   },
   "font": "standard",
-  "fontName": "HelveticaNeue-Light",
+  "fontName": "HelveticaNeue",
   "textHex": "FFF5E8",
   "secondaryHex": "EBCFAE",
   "numberHex": "FFC27A",
@@ -322,7 +323,7 @@
   "chart": "histogram",
   "titleCase": "upper",
   "tracking": 2,
-  "numberWeight": "light",
+  "numberWeight": "regular",
   "titleWeight": "regular",
   "borderOpacity": 0.6
  },
@@ -537,13 +538,13 @@
    "dir": "up"
   },
   "font": "standard",
-  "fontName": "AppleSDGothicNeo-Thin",
+  "fontName": "AppleSDGothicNeo-Regular",
   "textHex": "EAF1FF",
   "secondaryHex": "A9BAD6",
   "numberHex": "8EB8FF",
   "chartHex": "8EB8FF",
   "texture": "lines",
-  "textureOpacity": 0.3,
+  "textureOpacity": 0.22,
   "border": "none",
   "borderHex": "8EB8FF",
   "borderWidth": 1.5,
@@ -554,8 +555,8 @@
   "chart": "line",
   "titleCase": "lower",
   "tracking": 2,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.15
  },
  {
@@ -730,7 +731,7 @@
   "name": "Miroir d'eau",
   "summary": "Reflet inversé, glace claire, filets",
   "theme": "light",
-  "accent": "4C9AD6",
+  "accent": "DBEBF7",
   "bg": {
    "kind": "glass"
   },
@@ -738,10 +739,10 @@
   "fontName": "Futura-MediumItalic",
   "textHex": "10283C",
   "secondaryHex": "35546E",
-  "numberHex": "4C9AD6",
+  "numberHex": "356C96",
   "chartHex": "4C9AD6",
   "texture": "lines",
-  "textureOpacity": 0.25,
+  "textureOpacity": 0.22,
   "border": "dotted",
   "borderHex": "FFFFFF",
   "borderWidth": 1.5,

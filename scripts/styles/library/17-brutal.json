@@ -18,7 +18,7 @@
   "border": "solid",
   "borderHex": "000000",
   "borderWidth": 3,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "000000",
   "shape": "rounded",
   "layout": "split",
@@ -28,7 +28,9 @@
   "tracking": 1,
   "numberWeight": "black",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOpacity": 0.18,
+  "shadowOffset": 2
  },
  {
   "id": "brut-suisse",
@@ -231,7 +233,7 @@
   "border": "dashed",
   "borderHex": "1B2A8A",
   "borderWidth": 2,
-  "depth": "longShadow",
+  "depth": "hardShadow",
   "shadowHex": "FF48B0",
   "shape": "rounded",
   "layout": "centered",
@@ -241,7 +243,9 @@
   "tracking": 1,
   "numberWeight": "bold",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "brut-geant",
@@ -292,7 +296,7 @@
   "border": "dotted",
   "borderHex": "000000",
   "borderWidth": 3,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "0000FF",
   "shape": "soft",
   "layout": "cards",
@@ -302,7 +306,9 @@
   "tracking": 0,
   "numberWeight": "bold",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOpacity": 0.18,
+  "shadowOffset": 2
  },
  {
   "id": "brut-chantier",
@@ -454,7 +460,7 @@
   "border": "double",
   "borderHex": "111111",
   "borderWidth": 4,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "C8102E",
   "shape": "square",
   "layout": "split",
@@ -464,7 +470,9 @@
   "tracking": 2,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOpacity": 0.18,
+  "shadowOffset": 2
  },
  {
   "id": "brut-tampon",
@@ -576,7 +584,7 @@
   "border": "solid",
   "borderHex": "CCFF00",
   "borderWidth": 3,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "CCFF00",
   "shape": "soft",
   "layout": "cards",
@@ -586,7 +594,9 @@
   "tracking": 1,
   "numberWeight": "bold",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOpacity": 0.18,
+  "shadowOffset": 2
  },
  {
   "id": "brut-poche",
@@ -666,7 +676,7 @@
   "secondaryHex": "50617A",
   "numberHex": "D1342F",
   "chartHex": "D1342F",
-  "texture": "lines",
+  "texture": "grid",
   "textureOpacity": 0.1,
   "border": "gradient",
   "borderHex": "1A2B3C",
@@ -700,7 +710,7 @@
   "border": "solid",
   "borderHex": "1A0010",
   "borderWidth": 3,
-  "depth": "longShadow",
+  "depth": "hardShadow",
   "shadowHex": "1A0010",
   "shape": "capsule",
   "layout": "centered",
@@ -710,7 +720,9 @@
   "tracking": 0,
   "numberWeight": "heavy",
   "titleWeight": "semibold",
-  "valueScale": 1.2
+  "valueScale": 1.2,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "brut-theatre",
@@ -771,9 +783,10 @@
   "chart": "area",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.5,
   "numberWeight": "black",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.8
  }
 ]

@@ -35,13 +35,13 @@ extension StyleCatalog {
         var o = StyleOptions()
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "2A0F3D", endHex: "0B0614", direction: .radial, intensity: 1.0)
-        o.fontName = "AvenirNext-UltraLight"
+        o.fontName = "AvenirNext-Regular"
         o.textHex = "FFF1FA"
         o.secondaryHex = "D9A8C9"
         o.numberHex = "FF9AE1"
         o.chartHex = "FF7AD9"
         o.texture = .grain
-        o.textureOpacity = 0.25
+        o.textureOpacity = 0.22
         o.border = .glow
         o.borderHex = "FF7AD9"
         o.borderWidth = 1.5
@@ -52,7 +52,7 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .lower
         o.tracking = 1.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .medium
         o.valueScale = 1.15
         o.chart = .ring
@@ -142,12 +142,13 @@ extension StyleCatalog {
         o.layout = .cards
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .medium
         o.titleWeight = .bold
         o.valueScale = 1.0
         o.chart = .area
         o.iconStyle = .outline
+        o.titleScale = 0.86
         list.append(StyleLook(id: "aura-holo", name: tr("Holo"), summary: tr("Holographique doux, bord dégradé, cartes"), family: "aura", themeID: .dark, accentHex: "7CF0E0", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Cochin-Italic"
@@ -211,11 +212,12 @@ extension StyleCatalog {
         o.layout = .split
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 4.0
+        o.tracking = 0.8
         o.numberWeight = .light
         o.titleWeight = .regular
         o.valueScale = 1.0
         o.chart = .ring
+        o.titleScale = 0.86
         list.append(StyleLook(id: "aura-lune", name: tr("Lune"), summary: tr("Nuit bleue, halo d'argent, interlettrage large"), family: "aura", themeID: .dark, accentHex: "C8D6FF", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "2B0A0A", endHex: "5A1608", direction: .diagonal, intensity: 1.0)
@@ -226,12 +228,12 @@ extension StyleCatalog {
         o.chartHex = "FF5A3C"
         o.texture = .diagonal
         o.textureOpacity = 0.2
-        o.border = .solid
+        o.border = .double
         o.borderHex = "FF5A3C"
         o.borderWidth = 2.0
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "FF5A3C"
-        o.shape = .square
+        o.shape = .rounded
         o.layout = .horizontal
         o.density = .dense
         o.titleCase = .upper
@@ -241,9 +243,11 @@ extension StyleCatalog {
         o.valueScale = 1.3
         o.chart = .histogram
         o.iconStyle = .square
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "aura-fievre", name: tr("Fièvre"), summary: tr("Rouge feu, ombre portée longue, gabarit étroit"), family: "aura", themeID: .dark, accentHex: "FF5A3C", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-Thin"
+        o.fontName = "HelveticaNeue"
         o.textHex = "F5F8FF"
         o.secondaryHex = "B8C6E4"
         o.numberHex = "DCE6FF"
@@ -258,12 +262,12 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .lower
         o.tracking = 1.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.1
         o.chart = .sparkline
         o.iconStyle = .circle
-        list.append(StyleLook(id: "aura-brume", name: tr("Brume"), summary: tr("Verre dépoli, cartes flottantes, lettres fines"), family: "aura", themeID: .dark, accentHex: "9FB4D9", background: .glass, font: .theme, style: o))
+        list.append(StyleLook(id: "aura-brume", name: tr("Brume"), summary: tr("Verre dépoli, cartes flottantes, lettres fines"), family: "aura", themeID: .dark, accentHex: "404857", background: .glass, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "3A1118", endHex: "7A2A2A", direction: .radial, intensity: 1.0)
         o.fontName = "Marion-Regular"
@@ -401,12 +405,13 @@ extension StyleCatalog {
         o.layout = .cards
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.8
         o.numberWeight = .light
         o.titleWeight = .medium
         o.valueScale = 1.0
         o.chart = .pie
         o.iconStyle = .circle
+        o.titleScale = 0.86
         list.append(StyleLook(id: "aura-quartz", name: tr("Quartz"), summary: tr("Rose quartz, double filet, titres en capitales"), family: "aura", themeID: .light, accentHex: "F2A6C0", background: .color("FBE9F0"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "AvenirNext-Heavy"
@@ -547,13 +552,13 @@ extension StyleCatalog {
         o.iconStyle = .circle
         list.append(StyleLook(id: "aura-rosee", name: tr("Rosée"), summary: tr("Vert d'eau, flocons, couture au bord"), family: "aura", themeID: .dark, accentHex: "6FD3B0", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "AvenirNextCondensed-UltraLight"
+        o.fontName = "AvenirNextCondensed-Regular"
         o.textHex = "FFF6DD"
         o.secondaryHex = "BFAF86"
         o.numberHex = "F2C14E"
         o.chartHex = "F2C14E"
         o.texture = .sunburst
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .glow
         o.borderHex = "F2C14E"
         o.borderWidth = 2.0
@@ -564,7 +569,7 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .upper
         o.tracking = 3.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .medium
         o.valueScale = 1.3
         o.chart = .gauge
@@ -672,7 +677,7 @@ extension StyleCatalog {
         o.iconStyle = .square
         list.append(StyleLook(id: "prime-titane", name: tr("Titane"), summary: tr("Gris titane, biseau net, colonnes de chiffres"), family: "prime", themeID: .dark, accentHex: "8FA3B8", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-UltraLight"
+        o.fontName = "HelveticaNeue"
         o.textHex = "1B232C"
         o.secondaryHex = "56626E"
         o.numberHex = "2D3B4A"
@@ -687,8 +692,8 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .lower
         o.tracking = 0.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.3
         o.chart = .line
         o.iconStyle = .none
@@ -893,7 +898,7 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .upper
         o.tracking = 3.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .medium
         o.valueScale = 1.15
         o.chart = .ring
@@ -1029,7 +1034,7 @@ extension StyleCatalog {
         o.valueScale = 1.0
         o.chart = .area
         o.iconStyle = .circle
-        list.append(StyleLook(id: "prime-voile", name: tr("Voile"), summary: tr("Verre dépoli sobre, texte moyen, bords doux"), family: "prime", themeID: .dark, accentHex: "A7B7CB", background: .glass, font: .theme, style: o))
+        list.append(StyleLook(id: "prime-voile", name: tr("Voile"), summary: tr("Verre dépoli sobre, texte moyen, bords doux"), family: "prime", themeID: .dark, accentHex: "434951", background: .glass, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0D0B14", endHex: "1A1530", direction: .diagonal, intensity: 1.0)
         o.fontName = "AvenirNext-DemiBold"
@@ -1119,7 +1124,7 @@ extension StyleCatalog {
         o.iconStyle = .outline
         list.append(StyleLook(id: "prime-compensation", name: tr("Compensation"), summary: tr("Bleu pâle, bord à encoches comme un titre"), family: "prime", themeID: .light, accentHex: "2F6F9F", background: .color("E6EFF6"), font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "AvenirNext-UltraLight"
+        o.fontName = "AvenirNext-Regular"
         o.textHex = "FFFFFF"
         o.secondaryHex = "9A9A9A"
         o.numberHex = "FFFFFF"
@@ -1132,8 +1137,8 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .lower
         o.tracking = 0.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.4
         o.chart = .sparkline
         o.iconStyle = .none
@@ -1315,7 +1320,7 @@ extension StyleCatalog {
         o.numberHex = "EBCB74"
         o.chartHex = "D9B65C"
         o.texture = .stars
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .glow
         o.borderHex = "D9B65C"
         o.borderWidth = 1.0
@@ -1326,7 +1331,7 @@ extension StyleCatalog {
         o.density = .balanced
         o.titleCase = .normal
         o.tracking = 0.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .bold
         o.valueScale = 1.1
         o.chart = .pie
@@ -1413,7 +1418,7 @@ extension StyleCatalog {
         o.numberHex = "E0AE70"
         o.chartHex = "CD9B5C"
         o.texture = .web
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .solid
         o.borderHex = "CD9B5C"
         o.borderWidth = 0.75
@@ -1424,7 +1429,7 @@ extension StyleCatalog {
         o.density = .balanced
         o.titleCase = .lower
         o.tracking = 0.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .medium
         o.valueScale = 1.0
         o.chart = .evolution
@@ -1432,13 +1437,13 @@ extension StyleCatalog {
         list.append(StyleLook(id: "luxe-tourbillon", name: tr("Tourbillon"), summary: tr("Toile de mécanisme, noir bronze, filet fin"), family: "luxe", themeID: .dark, accentHex: "CD9B5C", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "123B8C", endHex: "071A4A", direction: .radial, intensity: 1.0)
-        o.fontName = "AvenirNext-UltraLight"
+        o.fontName = "AvenirNext-Regular"
         o.textHex = "F4F8FF"
         o.secondaryHex = "BCCDF0"
         o.numberHex = "FFFFFF"
         o.chartHex = "DCE8FF"
         o.texture = .sunburst
-        o.textureOpacity = 0.28
+        o.textureOpacity = 0.22
         o.border = .inset
         o.borderHex = "DCE8FF"
         o.borderWidth = 1.0
@@ -1446,12 +1451,13 @@ extension StyleCatalog {
         o.layout = .minimal
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 4.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.tracking = 0.8
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.3
         o.chart = .sparkline
         o.iconStyle = .none
+        o.titleScale = 0.86
         list.append(StyleLook(id: "luxe-saphir", name: tr("Cadran Saphir"), summary: tr("Bleu rayonnant, serif ultrafin, filet clair"), family: "luxe", themeID: .dark, accentHex: "DCE8FF", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "F6DDD2", endHex: "EBC2B2", direction: .diagonal, intensity: 1.0)
@@ -1479,7 +1485,7 @@ extension StyleCatalog {
         o.iconStyle = .circle
         list.append(StyleLook(id: "luxe-rose-or", name: tr("Or Rose"), summary: tr("Rose cuivré clair, toile, titres Optima"), family: "luxe", themeID: .dark, accentHex: "8F4A3A", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "AmericanTypewriter-Light"
+        o.fontName = "AmericanTypewriter"
         o.textHex = "F2E8D3"
         o.secondaryHex = "B9AB8D"
         o.numberHex = "E4C070"
@@ -1505,7 +1511,7 @@ extension StyleCatalog {
         o.fontName = "Didot-Italic"
         o.textHex = "3A2E20"
         o.secondaryHex = "6D5D49"
-        o.numberHex = "8C6B3A"
+        o.numberHex = "7E6034"
         o.chartHex = "B49A74"
         o.texture = .dots
         o.textureOpacity = 0.2
@@ -1516,7 +1522,7 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .normal
         o.tracking = 0.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         o.valueScale = 1.1
         o.chart = .dots
@@ -1719,12 +1725,13 @@ extension StyleCatalog {
         o.layout = .minimal
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 4.0
+        o.tracking = 0.8
         o.numberWeight = .light
         o.titleWeight = .regular
         o.valueScale = 1.25
         o.chart = .sparkline
         o.iconStyle = .none
+        o.titleScale = 0.86
         list.append(StyleLook(id: "luxe-noir-or", name: tr("Noir et Or"), summary: tr("Capitales très larges, un seul trait d'or"), family: "luxe", themeID: .dark, accentHex: "D4AF37", background: .color("050505"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Superclarendon-Light"
@@ -1843,12 +1850,13 @@ extension StyleCatalog {
         o.layout = .centered
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.8
         o.numberWeight = .medium
         o.titleWeight = .bold
         o.valueScale = 1.15
         o.chart = .gauge
         o.iconStyle = .none
+        o.titleScale = 0.86
         list.append(StyleLook(id: "riche-deco", name: tr("Art Déco"), summary: tr("Éventail d'or, double filet, symétrie"), family: "riche", themeID: .dark, accentHex: "D8B24C", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "BodoniSvtyTwoITCTT-Bold"
@@ -1928,7 +1936,7 @@ extension StyleCatalog {
         o.numberHex = "7A5A1C"
         o.chartHex = "B8913F"
         o.texture = .linen
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .solid
         o.borderHex = "B8913F"
         o.borderWidth = 1.0
@@ -1936,12 +1944,13 @@ extension StyleCatalog {
         o.layout = .minimal
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 4.0
-        o.numberWeight = .light
+        o.tracking = 0.8
+        o.numberWeight = .regular
         o.titleWeight = .medium
         o.valueScale = 1.3
         o.chart = .ring
         o.iconStyle = .circle
+        o.titleScale = 0.86
         list.append(StyleLook(id: "riche-monogramme", name: tr("Monogramme"), summary: tr("Fond lin, initiale suggérée par un cercle d'or"), family: "riche", themeID: .light, accentHex: "B8913F", background: .color("F4EFE6"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Charter-Roman"
@@ -2027,12 +2036,13 @@ extension StyleCatalog {
         o.layout = .horizontal
         o.density = .dense
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.0
         o.chart = .histogram
         o.iconStyle = .square
+        o.titleScale = 0.86
         list.append(StyleLook(id: "riche-emeraude-or", name: tr("Émeraude et Or"), summary: tr("Vert profond, rayures, filet d'or biseauté"), family: "riche", themeID: .dark, accentHex: "DDB85C", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "F7D9DF", endHex: "EFC1CB", direction: .up, intensity: 1.0)
@@ -2076,12 +2086,13 @@ extension StyleCatalog {
         o.layout = .horizontal
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .regular
         o.titleWeight = .bold
         o.valueScale = 1.0
         o.chart = .line
         o.iconStyle = .outline
+        o.titleScale = 0.86
         list.append(StyleLook(id: "riche-grand-hotel", name: tr("Grand Hôtel"), summary: tr("Vert bouteille, laiton, enseigne de façade"), family: "riche", themeID: .dark, accentHex: "D4B060", background: .color("12241C"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "IowanOldStyle-Italic"
@@ -2109,13 +2120,13 @@ extension StyleCatalog {
         list.append(StyleLook(id: "riche-bibliotheque", name: tr("Cuir et Bois"), summary: tr("Cuir et bois chaud, liste à la reliure"), family: "riche", themeID: .dark, accentHex: "D2A86A", background: .color("3A2316"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "070709", endHex: "16161E", direction: .radial, intensity: 1.0)
-        o.fontName = "AvenirNextCondensed-UltraLight"
+        o.fontName = "AvenirNextCondensed-Regular"
         o.textHex = "F7F7FA"
         o.secondaryHex = "B4B4C4"
         o.numberHex = "FFFFFF"
         o.chartHex = "FFFFFF"
         o.texture = .snow
-        o.textureOpacity = 0.4
+        o.textureOpacity = 0.22
         o.border = .glow
         o.borderHex = "FFFFFF"
         o.borderWidth = 0.75
@@ -2126,8 +2137,8 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .upper
         o.tracking = 3.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.25
         o.chart = .sparkline
         o.iconStyle = .none
@@ -2149,12 +2160,13 @@ extension StyleCatalog {
         o.layout = .split
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.0
         o.chart = .comparison
         o.iconStyle = .circle
+        o.titleScale = 0.86
         list.append(StyleLook(id: "riche-pourpre", name: tr("Pourpre Royal"), summary: tr("Pourpre dense, galons d'or, serif large"), family: "riche", themeID: .dark, accentHex: "E2C06A", background: .color("3A0F52"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "HiraMinProN-W3"
@@ -2214,7 +2226,7 @@ extension StyleCatalog {
         o.border = .inset
         o.borderHex = "C9CCD2"
         o.borderWidth = 0.75
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "000000"
         o.shape = .square
         o.layout = .minimal
@@ -2226,6 +2238,8 @@ extension StyleCatalog {
         o.valueScale = 1.3
         o.chart = .line
         o.iconStyle = .none
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "riche-ebene", name: tr("Ébène"), summary: tr("Ébène lustrée, filet argent fin, minimal"), family: "riche", themeID: .dark, accentHex: "C9CCD2", background: .color("101010"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "FBF4E1", endHex: "F0E2BC", direction: .down, intensity: 1.0)
@@ -2260,7 +2274,7 @@ extension StyleCatalog {
         o.numberHex = "D9E3F8"
         o.chartHex = "C7D3EE"
         o.texture = .diagonal
-        o.textureOpacity = 0.25
+        o.textureOpacity = 0.22
         o.border = .stitched
         o.borderHex = "C7D3EE"
         o.borderWidth = 1.5
@@ -2296,7 +2310,7 @@ extension StyleCatalog {
         o.valueScale = 1.1
         o.chart = .area
         o.iconStyle = .circle
-        list.append(StyleLook(id: "riche-ambre", name: tr("Ambre Doré"), summary: tr("Ambre fondu, verre doré, bord lumineux"), family: "riche", themeID: .dark, accentHex: "F0B24A", background: .glass, font: .theme, style: o))
+        list.append(StyleLook(id: "riche-ambre", name: tr("Ambre Doré"), summary: tr("Ambre fondu, verre doré, bord lumineux"), family: "riche", themeID: .dark, accentHex: "60471E", background: .glass, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Georgia"
         o.textHex = "2B261B"
@@ -2339,12 +2353,13 @@ extension StyleCatalog {
         o.layout = .centered
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .regular
         o.valueScale = 1.2
         o.chart = .ring
         o.iconStyle = .none
+        o.titleScale = 0.86
         list.append(StyleLook(id: "riche-gala", name: tr("Soirée de Gala"), summary: tr("Noir et rouge, strass, chiffres éclatants"), family: "riche", themeID: .dark, accentHex: "D9202E", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0F4A3C", endHex: "0A2E26", direction: .diagonal, intensity: 1.0)
@@ -2421,13 +2436,13 @@ extension StyleCatalog {
         list.append(StyleLook(id: "acier-brosse", name: tr("Acier brossé"), summary: tr("Métal brossé, biseau fin, barres nettes"), family: "chrome", themeID: .dark, accentHex: "8FA3BD", background: .color("2A2D33"), font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "1C1E22", endHex: "3C4046", direction: .up, intensity: 1.0)
-        o.fontName = "HelveticaNeue-Thin"
+        o.fontName = "HelveticaNeue"
         o.textHex = "F2F4F7"
         o.secondaryHex = "A9B0BB"
         o.numberHex = "B9C2CF"
         o.chartHex = "B9C2CF"
         o.texture = .noise
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .solid
         o.borderHex = "5B6069"
         o.borderWidth = 1.0
@@ -2438,8 +2453,8 @@ extension StyleCatalog {
         o.chart = .sparkline
         o.titleCase = .lower
         o.tracking = 0.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.25
         list.append(StyleLook(id: "titane-mat", name: tr("Titane mat"), summary: tr("Gris titane sablé, chiffres ultra fins"), family: "chrome", themeID: .dark, accentHex: "B9C2CF", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
@@ -2504,10 +2519,11 @@ extension StyleCatalog {
         o.layout = .list
         o.chart = .histogram
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .bold
         o.titleWeight = .heavy
         o.density = .dense
+        o.titleScale = 0.8
         list.append(StyleLook(id: "plaque-rivets", name: tr("Plaque rivetée"), summary: tr("Tôle sombre, rivets, ombre dure"), family: "chrome", themeID: .dark, accentHex: "F0B429", background: .color("383B40"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "ArialMT"
@@ -2619,13 +2635,13 @@ extension StyleCatalog {
         o.titleWeight = .semibold
         list.append(StyleLook(id: "miroir-argent", name: tr("Miroir argent"), summary: tr("Surface miroir claire, lévitation, capsule"), family: "chrome", themeID: .light, accentHex: "4B5E7E", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
-        o.fontName = "Helvetica-Light"
+        o.fontName = "Helvetica"
         o.textHex = "111418"
         o.secondaryHex = "3E4651"
-        o.numberHex = "526071"
+        o.numberHex = "4A5666"
         o.chartHex = "526071"
         o.texture = .noise
-        o.textureOpacity = 0.4
+        o.textureOpacity = 0.22
         o.border = .none
         o.borderHex = "526071"
         o.borderWidth = 1.5
@@ -2636,7 +2652,7 @@ extension StyleCatalog {
         o.chart = .progress
         o.titleCase = .lower
         o.tracking = 0.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         list.append(StyleLook(id: "inox-sable", name: tr("Inox sablé"), summary: tr("Inox satiné sans cadre, texte fin"), family: "chrome", themeID: .light, accentHex: "526071", background: .color("C9CDD2"), font: .standard, style: o))
         o = StyleOptions()
@@ -2678,10 +2694,11 @@ extension StyleCatalog {
         o.layout = .graph
         o.chart = .histogram
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.2
+        o.titleScale = 0.8
         list.append(StyleLook(id: "fonte-noire", name: tr("Fonte noire"), summary: tr("Fonte brute, bord pointillé, chiffres noirs"), family: "chrome", themeID: .dark, accentHex: "FF6A3D", background: .color("111111"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Georgia-Bold"
@@ -2809,9 +2826,10 @@ extension StyleCatalog {
         o.layout = .split
         o.chart = .bars
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .heavy
         o.titleWeight = .semibold
+        o.titleScale = 0.8
         list.append(StyleLook(id: "lame-acier", name: tr("Lame d'acier"), summary: tr("Diagonales aiguisées, tranchant sans courbe"), family: "chrome", themeID: .dark, accentHex: "C9D3E0", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Optima-ExtraBlack"
@@ -2836,13 +2854,13 @@ extension StyleCatalog {
         list.append(StyleLook(id: "tole-ondulee", name: tr("Tôle ondulée"), summary: tr("Tôle galvanisée, lignes en vagues, liste"), family: "chrome", themeID: .light, accentHex: "3E7CB1", background: .color("CFD4D9"), font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "F1F2F4", endHex: "DADDE2", direction: .down, intensity: 1.0)
-        o.fontName = "AvenirNextCondensed-UltraLight"
+        o.fontName = "AvenirNextCondensed-Regular"
         o.textHex = "16181C"
         o.secondaryHex = "4F5661"
-        o.numberHex = "69737E"
+        o.numberHex = "545C65"
         o.chartHex = "7C8794"
-        o.texture = .none
-        o.textureOpacity = 0.2
+        o.texture = .brushed
+        o.textureOpacity = 0.12
         o.border = .inset
         o.borderHex = "B7BCC4"
         o.borderWidth = 1.5
@@ -2853,7 +2871,7 @@ extension StyleCatalog {
         o.chart = .sparkline
         o.titleCase = .upper
         o.tracking = 4.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .medium
         o.valueScale = 1.3
         list.append(StyleLook(id: "platine", name: tr("Platine"), summary: tr("Platine épuré, filet gris, capitales espacées"), family: "chrome", themeID: .light, accentHex: "7C8794", background: .gradient, font: .standard, style: o))
@@ -2932,10 +2950,10 @@ extension StyleCatalog {
         var list: [StyleLook] = []
         var o = StyleOptions()
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-UltraLight"
-        o.textHex = "FFFFFF"
-        o.secondaryHex = "D5E3F0"
-        o.numberHex = "BFE3FF"
+        o.fontName = "HelveticaNeue"
+        o.textHex = "12263A"
+        o.secondaryHex = "34506B"
+        o.numberHex = "1B5C96"
         o.chartHex = "BFE3FF"
         o.texture = .grain
         o.textureOpacity = 0.2
@@ -2949,20 +2967,20 @@ extension StyleCatalog {
         o.chart = .line
         o.titleCase = .lower
         o.tracking = 0.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         o.borderOpacity = 0.45
         o.valueScale = 1.2
-        list.append(StyleLook(id: "verre-depoli", name: tr("Verre dépoli"), summary: tr("Verre mat, filet blanc, chiffres fins"), family: "verre", themeID: .dark, accentHex: "BFE3FF", background: .glass, font: .standard, style: o))
+        list.append(StyleLook(id: "verre-depoli", name: tr("Verre dépoli"), summary: tr("Verre mat, filet blanc, chiffres fins"), family: "verre", themeID: .dark, accentHex: "DCEBF8", background: .glass, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0E2A44", endHex: "1D5F8F", direction: .down, intensity: 1.0)
-        o.fontName = "AvenirNext-UltraLight"
-        o.textHex = "F4FAFF"
+        o.fontName = "AvenirNext-Regular"
+        o.textHex = "FFFFFF"
         o.secondaryHex = "BBD9F0"
-        o.numberHex = "A5D8FF"
+        o.numberHex = "AEDCFF"
         o.chartHex = "A5D8FF"
         o.texture = .snow
-        o.textureOpacity = 0.45
+        o.textureOpacity = 0.22
         o.border = .inset
         o.borderHex = "CFE9FF"
         o.borderWidth = 1.5
@@ -2973,8 +2991,8 @@ extension StyleCatalog {
         o.chart = .ring
         o.titleCase = .lower
         o.tracking = 1.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         list.append(StyleLook(id: "givre", name: tr("Givre"), summary: tr("Cristaux de givre, bleu glacé, centré"), family: "verre", themeID: .dark, accentHex: "A5D8FF", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "F4F8FF", endHex: "D4E2F7", direction: .diagonal, intensity: 1.0)
@@ -3006,7 +3024,7 @@ extension StyleCatalog {
         o.numberHex = "FFB347"
         o.chartHex = "FFB347"
         o.texture = .web
-        o.textureOpacity = 0.5
+        o.textureOpacity = 0.22
         o.border = .double
         o.borderHex = "FFB347"
         o.borderWidth = 1.5
@@ -3038,9 +3056,10 @@ extension StyleCatalog {
         o.layout = .data
         o.chart = .comparison
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.8
         o.numberWeight = .medium
         o.titleWeight = .semibold
+        o.titleScale = 0.86
         list.append(StyleLook(id: "prisme", name: tr("Prisme optique"), summary: tr("Dispersion arc-en-ciel, bord dégradé, données"), family: "verre", themeID: .dark, accentHex: "8AF3FF", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0A0B0D", endHex: "23262B", direction: .down, intensity: 1.0)
@@ -3114,7 +3133,7 @@ extension StyleCatalog {
         o.fontName = "AvenirNext-Regular"
         o.textHex = "111A2B"
         o.secondaryHex = "3B4A63"
-        o.numberHex = "3A7BFF"
+        o.numberHex = "1C4FBF"
         o.chartHex = "3A7BFF"
         o.texture = .none
         o.textureOpacity = 0.2
@@ -3131,9 +3150,9 @@ extension StyleCatalog {
         o.numberWeight = .medium
         o.titleWeight = .semibold
         o.borderOpacity = 0.7
-        list.append(StyleLook(id: "liquid-ios", name: tr("Liquid clair"), summary: tr("Panneau de verre léger, lévitation, ring"), family: "verre", themeID: .light, accentHex: "3A7BFF", background: .glass, font: .standard, style: o))
+        list.append(StyleLook(id: "liquid-ios", name: tr("Liquid clair"), summary: tr("Panneau de verre léger, lévitation, ring"), family: "verre", themeID: .light, accentHex: "DCE8FF", background: .glass, font: .standard, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-Light"
+        o.fontName = "HelveticaNeue"
         o.textHex = "FFF5E8"
         o.secondaryHex = "EBCFAE"
         o.numberHex = "FFC27A"
@@ -3150,10 +3169,10 @@ extension StyleCatalog {
         o.chart = .histogram
         o.titleCase = .upper
         o.tracking = 2.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         o.borderOpacity = 0.6
-        list.append(StyleLook(id: "verre-teinte-ambre", name: tr("Verre tinté"), summary: tr("Verre teinté ambre, liste, filet intérieur"), family: "verre", themeID: .dark, accentHex: "FFC27A", background: .glass, font: .standard, style: o))
+        list.append(StyleLook(id: "verre-teinte-ambre", name: tr("Verre tinté"), summary: tr("Verre teinté ambre, liste, filet intérieur"), family: "verre", themeID: .dark, accentHex: "664E31", background: .glass, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "EFFBF7", endHex: "BFE9DE", direction: .down, intensity: 1.0)
         o.fontName = "EuphemiaUCAS"
@@ -3289,13 +3308,13 @@ extension StyleCatalog {
         list.append(StyleLook(id: "serre-vitree", name: tr("Serre vitrée"), summary: tr("Vitres de serre, feuilles, pointillés"), family: "verre", themeID: .light, accentHex: "3F9E5B", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0B1220", endHex: "1B2A44", direction: .up, intensity: 1.0)
-        o.fontName = "AppleSDGothicNeo-Thin"
+        o.fontName = "AppleSDGothicNeo-Regular"
         o.textHex = "EAF1FF"
         o.secondaryHex = "A9BAD6"
         o.numberHex = "8EB8FF"
         o.chartHex = "8EB8FF"
         o.texture = .lines
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .none
         o.borderHex = "8EB8FF"
         o.borderWidth = 1.5
@@ -3306,8 +3325,8 @@ extension StyleCatalog {
         o.chart = .line
         o.titleCase = .lower
         o.tracking = 2.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.15
         list.append(StyleLook(id: "fenetre-pluie", name: tr("Fenêtre pluie"), summary: tr("Pluie sur la vitre, lignes fines, nuit"), family: "verre", themeID: .dark, accentHex: "8EB8FF", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
@@ -3426,10 +3445,10 @@ extension StyleCatalog {
         o.fontName = "Futura-MediumItalic"
         o.textHex = "10283C"
         o.secondaryHex = "35546E"
-        o.numberHex = "4C9AD6"
+        o.numberHex = "356C96"
         o.chartHex = "4C9AD6"
         o.texture = .lines
-        o.textureOpacity = 0.25
+        o.textureOpacity = 0.22
         o.border = .dotted
         o.borderHex = "FFFFFF"
         o.borderWidth = 1.5
@@ -3442,7 +3461,7 @@ extension StyleCatalog {
         o.tracking = 0.0
         o.numberWeight = .regular
         o.titleWeight = .semibold
-        list.append(StyleLook(id: "miroir-eau", name: tr("Miroir d'eau"), summary: tr("Reflet inversé, glace claire, filets"), family: "verre", themeID: .light, accentHex: "4C9AD6", background: .glass, font: .standard, style: o))
+        list.append(StyleLook(id: "miroir-eau", name: tr("Miroir d'eau"), summary: tr("Reflet inversé, glace claire, filets"), family: "verre", themeID: .light, accentHex: "DBEBF7", background: .glass, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "F7FAFF", endHex: "D9E5F2", direction: .down, intensity: 1.0)
         o.fontName = "Galvji"
@@ -3522,7 +3541,7 @@ extension StyleCatalog {
         o.fontName = "Didot-Italic"
         o.textHex = "4A2433"
         o.secondaryHex = "7C4F60"
-        o.numberHex = "A3687E"
+        o.numberHex = "825365"
         o.chartHex = "D98BA8"
         o.texture = .none
         o.textureOpacity = 0.2
@@ -3536,17 +3555,17 @@ extension StyleCatalog {
         o.chart = .sparkline
         o.titleCase = .smallCaps
         o.tracking = 2.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         list.append(StyleLook(id: "ballet-rose", name: tr("Ballet rose"), summary: tr("Rose poudré de danseuse, capitales fines"), family: "girl", themeID: .light, accentHex: "D98BA8", background: .color("F8E4EA"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "BradleyHandITCTT-Bold"
         o.textHex = "3D2A30"
         o.secondaryHex = "7A5560"
-        o.numberHex = "D2557F"
+        o.numberHex = "A84466"
         o.chartHex = "D2557F"
         o.texture = .lines
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .stitched
         o.borderHex = "D2557F"
         o.borderWidth = 1.5
@@ -3675,10 +3694,10 @@ extension StyleCatalog {
         o.fontName = "ChalkboardSE-Light"
         o.textHex = "3B2C66"
         o.secondaryHex = "6A5C8F"
-        o.numberHex = "8869BF"
+        o.numberHex = "6D5499"
         o.chartHex = "B58CFF"
         o.texture = .stars
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .dashed
         o.borderHex = "B58CFF"
         o.borderWidth = 1.5
@@ -3739,11 +3758,11 @@ extension StyleCatalog {
         o.gradient = GradientSpec(startHex: "FFFBF4", endHex: "F3E1E8", direction: .down, intensity: 1.0)
         o.fontName = "Cochin-Italic"
         o.textHex = "4A3039"
-        o.secondaryHex = "7E636B"
-        o.numberHex = "8D707E"
+        o.secondaryHex = "715960"
+        o.numberHex = "715A65"
         o.chartHex = "C9A0B4"
         o.texture = .dots
-        o.textureOpacity = 0.5
+        o.textureOpacity = 0.22
         o.border = .dotted
         o.borderHex = "E6CDD6"
         o.borderWidth = 3.0
@@ -3762,10 +3781,10 @@ extension StyleCatalog {
         o.fontName = "Noteworthy-Light"
         o.textHex = "52213A"
         o.secondaryHex = "86506A"
-        o.numberHex = "9D5C74"
+        o.numberHex = "7E4A5D"
         o.chartHex = "F28DB2"
         o.texture = .waves
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .none
         o.borderHex = "F28DB2"
         o.borderWidth = 1.5
@@ -3862,9 +3881,10 @@ extension StyleCatalog {
         o.layout = .list
         o.chart = .histogram
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
+        o.titleScale = 0.86
         list.append(StyleLook(id: "bureau-rose", name: tr("Bureau rose"), summary: tr("Planner rose, ligne et grille, titres gras"), family: "girl", themeID: .light, accentHex: "E85D9B", background: .color("FFF5F8"), font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "FFE8F4", endHex: "E8F4FF", direction: .across, intensity: 1.0)
@@ -3936,8 +3956,8 @@ extension StyleCatalog {
         o.gradient = GradientSpec(startHex: "FFE3D3", endHex: "FFC9D4", direction: .diagonal, intensity: 1.0)
         o.fontName = "GillSans-Italic"
         o.textHex = "5A2A2E"
-        o.secondaryHex = "8A5A5C"
-        o.numberHex = "9D5865"
+        o.secondaryHex = "7C5153"
+        o.numberHex = "7E4651"
         o.chartHex = "F2889B"
         o.texture = .none
         o.textureOpacity = 0.2
@@ -3982,8 +4002,8 @@ extension StyleCatalog {
         o.secondaryHex = "F0B7D9"
         o.numberHex = "FF4FA3"
         o.chartHex = "FF4FA3"
-        o.texture = .stars
-        o.textureOpacity = 0.5
+        o.texture = .dots
+        o.textureOpacity = 0.22
         o.border = .glow
         o.borderHex = "FF4FA3"
         o.borderWidth = 1.5
@@ -4022,13 +4042,13 @@ extension StyleCatalog {
         list.append(StyleLook(id: "charlotte", name: tr("Charlotte fraise"), summary: tr("Biscuit crème, fraises, couture rose"), family: "girl", themeID: .light, accentHex: "E8587E", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "231433", endHex: "0E0A1B", direction: .across, intensity: 1.0)
-        o.fontName = "AmericanTypewriter-Light"
+        o.fontName = "AmericanTypewriter"
         o.textHex = "FFEEF7"
         o.secondaryHex = "D7B1C7"
         o.numberHex = "FFB6D9"
         o.chartHex = "FFB6D9"
         o.texture = .snow
-        o.textureOpacity = 0.5
+        o.textureOpacity = 0.22
         o.border = .solid
         o.borderHex = "FFB6D9"
         o.borderWidth = 1.0
@@ -4039,7 +4059,7 @@ extension StyleCatalog {
         o.chart = .gauge
         o.titleCase = .lower
         o.tracking = 1.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .medium
         o.density = .compact
         list.append(StyleLook(id: "tulle-etoile", name: tr("Tulle étoilé"), summary: tr("Voile nuit rose, étoiles, bord fin"), family: "girl", themeID: .dark, accentHex: "FFB6D9", background: .gradient, font: .standard, style: o))
@@ -4077,7 +4097,7 @@ extension StyleCatalog {
         o.fontName = "TrebuchetMS-Bold"
         o.textHex = "5A2A40"
         o.secondaryHex = "8A5670"
-        o.numberHex = "B86B87"
+        o.numberHex = "93566C"
         o.chartHex = "F58FB4"
         o.texture = .dots
         o.textureOpacity = 0.2
@@ -4115,6 +4135,8 @@ extension StyleCatalog {
         o.tracking = 0.0
         o.numberWeight = .heavy
         o.titleWeight = .heavy
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "sorbet", name: tr("Sorbet"), summary: tr("Boules de sorbet, bandes franches, horizontal"), family: "rose", themeID: .light, accentHex: "FF8A5C", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "F1EBFF", endHex: "DCCEF5", direction: .down, intensity: 1.0)
@@ -4224,9 +4246,10 @@ extension StyleCatalog {
         o.layout = .list
         o.chart = .comparison
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
+        o.titleScale = 0.86
         list.append(StyleLook(id: "bonbon", name: tr("Bonbon"), summary: tr("Papier de bonbon, rayures, emballage"), family: "rose", themeID: .light, accentHex: "FF5FA2", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "FFF3F6", endHex: "FFD9E3", direction: .down, intensity: 1.0)
@@ -4341,10 +4364,10 @@ extension StyleCatalog {
         o.fontName = "GillSans"
         o.textHex = "15483A"
         o.secondaryHex = "3E6E5F"
-        o.numberHex = "2C866C"
+        o.numberHex = "236B56"
         o.chartHex = "3FBF9B"
         o.texture = .leaves
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .none
         o.borderHex = "3FBF9B"
         o.borderWidth = 1.5
@@ -4493,10 +4516,10 @@ extension StyleCatalog {
         o.fontName = "BodoniSvtyTwoITCTT-Book"
         o.textHex = "4A2A34"
         o.secondaryHex = "7C5A64"
-        o.numberHex = "AA7285"
+        o.numberHex = "885B6A"
         o.chartHex = "D58EA6"
         o.texture = .linen
-        o.textureOpacity = 0.5
+        o.textureOpacity = 0.22
         o.border = .none
         o.borderHex = "D58EA6"
         o.borderWidth = 1.5
@@ -4515,7 +4538,7 @@ extension StyleCatalog {
         o.fontName = "TrebuchetMS-Italic"
         o.textHex = "3E2A66"
         o.secondaryHex = "6E5C90"
-        o.numberHex = "8978B6"
+        o.numberHex = "6E6092"
         o.chartHex = "B7A0F2"
         o.texture = .none
         o.textureOpacity = 0.2
@@ -4537,10 +4560,10 @@ extension StyleCatalog {
         o.fontName = "AvenirNextCondensed-Regular"
         o.textHex = "50283A"
         o.secondaryHex = "82586A"
-        o.numberHex = "A76D81"
+        o.numberHex = "865767"
         o.chartHex = "EE9CB8"
         o.texture = .snow
-        o.textureOpacity = 0.5
+        o.textureOpacity = 0.22
         o.border = .inset
         o.borderHex = "EE9CB8"
         o.borderWidth = 1.5
@@ -4622,10 +4645,11 @@ extension StyleCatalog {
         o.chart = .bars
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .heavy
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "pixel-8bit", name: tr("8 bits"), summary: tr("Noir, vert phosphore, bordure en escalier"), family: "pixel", themeID: .dark, accentHex: "39FF14", background: .color("0A0A0A"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "9BBC0F", endHex: "8BAC0F", direction: .down, intensity: 1.0)
@@ -4810,7 +4834,7 @@ extension StyleCatalog {
         list.append(StyleLook(id: "pixel-pastel", name: tr("Pastel 8 bits"), summary: tr("Pastel bonbon, pixels roses, coins carrés"), family: "pixel", themeID: .light, accentHex: "FF6FB5", background: .color("FFEAF4"), font: .rounded, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "14001F", endHex: "000000", direction: .down, intensity: 1.0)
-        o.fontName = "Verdana-Bold"
+        o.fontName = "Menlo-Bold"
         o.textHex = "FFFFFF"
         o.secondaryHex = "D3A8C8"
         o.numberHex = "FF2E97"
@@ -4827,10 +4851,11 @@ extension StyleCatalog {
         o.chart = .progress
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .heavy
         o.valueScale = 1.0
+        o.titleScale = 0.8
         list.append(StyleLook(id: "pixel-arcade-nuit", name: tr("Salle d'arcade"), summary: tr("Noir profond, pixels magenta, ombre dure"), family: "pixel", themeID: .dark, accentHex: "FF2E97", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "ChalkboardSE-Regular"
@@ -4854,7 +4879,7 @@ extension StyleCatalog {
         o.valueScale = 1.0
         list.append(StyleLook(id: "pixel-feuille-papier", name: tr("Papier quadrillé"), summary: tr("Cahier à carreaux, crayon, pixels à la main"), family: "pixel", themeID: .light, accentHex: "2457C5", background: .color("F7F4E8"), font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-Light"
+        o.fontName = "HelveticaNeue"
         o.textHex = "FFFFFF"
         o.secondaryHex = "D5E3DF"
         o.numberHex = "6AF0C8"
@@ -4872,10 +4897,10 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .lower
         o.tracking = 1.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.3
-        list.append(StyleLook(id: "pixel-verre-sombre", name: tr("Verre à pixels"), summary: tr("Verre dépoli, grain de pixels fins"), family: "pixel", themeID: .dark, accentHex: "6AF0C8", background: .glass, font: .theme, style: o))
+        list.append(StyleLook(id: "pixel-verre-sombre", name: tr("Verre à pixels"), summary: tr("Verre dépoli, grain de pixels fins"), family: "pixel", themeID: .dark, accentHex: "2A6050", background: .glass, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Courier"
         o.textHex = "FFB000"
@@ -4883,7 +4908,7 @@ extension StyleCatalog {
         o.numberHex = "FFC940"
         o.chartHex = "FFB000"
         o.texture = .scanlines
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .solid
         o.borderHex = "FFB000"
         o.borderWidth = 2.0
@@ -4942,10 +4967,11 @@ extension StyleCatalog {
         o.chart = .area
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .medium
         o.titleWeight = .black
         o.valueScale = 1.05
+        o.titleScale = 0.8
         list.append(StyleLook(id: "pixel-neige", name: tr("Niveau de neige"), summary: tr("Blanc glacé, flocons carrés, bleu net"), family: "pixel", themeID: .light, accentHex: "1C7ED6", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "3B0A00", endHex: "120200", direction: .up, intensity: 1.0)
@@ -4993,6 +5019,8 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "pixel-cartouche", name: tr("Cartouche"), summary: tr("Étiquette crème, cadre noir, petites capitales"), family: "pixel", themeID: .light, accentHex: "B3261E", background: .color("EDE6D0"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Menlo-Italic"
@@ -5102,10 +5130,11 @@ extension StyleCatalog {
         o.chart = .evolution
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.5
         o.numberWeight = .heavy
         o.titleWeight = .black
         o.valueScale = 1.0
+        o.titleScale = 0.8
         list.append(StyleLook(id: "pixel-desert", name: tr("Désert pixel"), summary: tr("Sable, motifs losange, brun chaud"), family: "pixel", themeID: .light, accentHex: "B45309", background: .color("F3D9A4"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Galvji-Bold"
@@ -5123,10 +5152,11 @@ extension StyleCatalog {
         o.chart = .progress
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.8
         o.numberWeight = .black
         o.titleWeight = .heavy
         o.valueScale = 1.1
+        o.titleScale = 0.86
         list.append(StyleLook(id: "pixel-boss", name: tr("Boss"), summary: tr("Barre de vie rouge, cadre épais, titre massif"), family: "pixel", themeID: .dark, accentHex: "E02424", background: .color("1A0B0B"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "241B5E", endHex: "0B0822", direction: .across, intensity: 1.0)
@@ -5234,10 +5264,11 @@ extension StyleCatalog {
         o.chart = .bars
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.15
+        o.titleScale = 0.8
         list.append(StyleLook(id: "jeu-esport", name: tr("Esport"), summary: tr("Diagonales, vert acide, ombre longue"), family: "gaming", themeID: .dark, accentHex: "B6FF00", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Avenir-Black"
@@ -5328,10 +5359,11 @@ extension StyleCatalog {
         o.chart = .dots
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 4.0
+        o.tracking = 0.5
         o.numberWeight = .heavy
         o.titleWeight = .black
         o.valueScale = 1.15
+        o.titleScale = 0.8
         list.append(StyleLook(id: "jeu-arcade", name: tr("Borne d'arcade"), summary: tr("Néon jaune, damier sombre, titre en capitales"), family: "gaming", themeID: .dark, accentHex: "FFE600", background: .color("100A24"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Menlo-Bold"
@@ -5349,14 +5381,15 @@ extension StyleCatalog {
         o.chart = .histogram
         o.density = .dense
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .regular
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "jeu-score", name: tr("Tableau des scores"), summary: tr("Liste classée, chiffres gras, ocre sur nuit"), family: "gaming", themeID: .dark, accentHex: "FFB800", background: .color("0A1230"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "1A1A1E", endHex: "000000", direction: .radial, intensity: 1.0)
-        o.fontName = "HelveticaNeue-UltraLight"
+        o.fontName = "HelveticaNeue"
         o.textHex = "FFFFFF"
         o.secondaryHex = "C0C0C8"
         o.numberHex = "FFFFFF"
@@ -5370,8 +5403,8 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .upper
         o.tracking = 4.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.3
         list.append(StyleLook(id: "jeu-pause", name: tr("Menu de pause"), summary: tr("Voile sombre, filet blanc, minimalisme net"), family: "gaming", themeID: .dark, accentHex: "FFFFFF", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
@@ -5461,10 +5494,11 @@ extension StyleCatalog {
         o.chart = .line
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.8
         o.numberWeight = .regular
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "jeu-survie", name: tr("Survie"), summary: tr("Kaki usé, tampon, machine à écrire"), family: "gaming", themeID: .dark, accentHex: "C9B458", background: .color("2B2E20"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "15151A", endHex: "050507", direction: .up, intensity: 1.0)
@@ -5498,7 +5532,7 @@ extension StyleCatalog {
         o.numberHex = "D2B8FF"
         o.chartHex = "B48CFF"
         o.texture = .stars
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .glow
         o.borderHex = "B48CFF"
         o.borderWidth = 1.5
@@ -5533,10 +5567,11 @@ extension StyleCatalog {
         o.chart = .bars
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .heavy
         o.valueScale = 1.0
+        o.titleScale = 0.8
         list.append(StyleLook(id: "jeu-bloc", name: tr("Monde en blocs"), summary: tr("Cubes, biseau, vert herbe et terre"), family: "gaming", themeID: .dark, accentHex: "6BBE3F", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.textHex = "EFEFF1"
@@ -5619,10 +5654,11 @@ extension StyleCatalog {
         o.chart = .ring
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.2
+        o.titleScale = 0.8
         list.append(StyleLook(id: "jeu-victoire", name: tr("Victoire"), summary: tr("Or étincelant, rayons, titre capitales"), family: "gaming", themeID: .dark, accentHex: "FFD54A", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "HelveticaNeue-Medium"
@@ -5709,10 +5745,12 @@ extension StyleCatalog {
         o.chart = .evolution
         o.density = .dense
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 0.95
+        o.titleScale = 0.86
+        o.textScale = 0.86
         list.append(StyleLook(id: "jeu-kill-cam", name: tr("Rediffusion"), summary: tr("Bande rouge, sous-titres, gris cinéma"), family: "gaming", themeID: .dark, accentHex: "FF1744", background: .color("111114"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Menlo-Bold"
@@ -5783,7 +5821,7 @@ extension StyleCatalog {
         o.valueScale = 1.0
         list.append(StyleLook(id: "cyber-terminal", name: tr("Terminal"), summary: tr("Écran noir, texte vert, curseur machine"), family: "cyberpunk", themeID: .dark, accentHex: "33FF66", background: .color("020A04"), font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-Thin"
+        o.fontName = "HelveticaNeue"
         o.textHex = "E8FBFF"
         o.secondaryHex = "A5D6E6"
         o.numberHex = "5CE1FF"
@@ -5801,10 +5839,10 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .upper
         o.tracking = 4.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.3
-        list.append(StyleLook(id: "cyber-hologramme", name: tr("Hologramme"), summary: tr("Projection bleutée, transparence, cadre fin"), family: "cyberpunk", themeID: .dark, accentHex: "5CE1FF", background: .glass, font: .theme, style: o))
+        list.append(StyleLook(id: "cyber-hologramme", name: tr("Hologramme"), summary: tr("Projection bleutée, transparence, cadre fin"), family: "cyberpunk", themeID: .dark, accentHex: "255A66", background: .glass, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "DINCondensed-Bold"
         o.textHex = "FFFFFF"
@@ -5836,7 +5874,7 @@ extension StyleCatalog {
         o.numberHex = "6EA8FF"
         o.chartHex = "6EA8FF"
         o.texture = .scanlines
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .double
         o.borderHex = "6EA8FF"
         o.borderWidth = 2.0
@@ -5877,7 +5915,7 @@ extension StyleCatalog {
         list.append(StyleLook(id: "cyber-circuit", name: tr("Circuit imprimé"), summary: tr("Vert carte mère, filets et pastilles"), family: "cyberpunk", themeID: .dark, accentHex: "2DE38A", background: .color("072A1E"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "2A1450", endHex: "0A0716", direction: .up, intensity: 1.0)
-        o.fontName = "GillSans-Light"
+        o.fontName = "GillSans"
         o.textHex = "FFF3E0"
         o.secondaryHex = "D3BFE3"
         o.numberHex = "FFB454"
@@ -5895,8 +5933,8 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .lower
         o.tracking = 2.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.25
         list.append(StyleLook(id: "cyber-ville-nuit", name: tr("Ville la nuit"), summary: tr("Dégradé crépuscule, fenêtres allumées"), family: "cyberpunk", themeID: .dark, accentHex: "FFB454", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
@@ -5917,14 +5955,15 @@ extension StyleCatalog {
         o.chart = .gauge
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.8
         o.numberWeight = .semibold
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "cyber-vaisseau", name: tr("Interface de vaisseau"), summary: tr("Cockpit orange, jauges, cadres biseautés"), family: "cyberpunk", themeID: .dark, accentHex: "FF7A1A", background: .color("0D0F14"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "03130A", endHex: "000000", direction: .down, intensity: 1.0)
-        o.fontName = "Menlo-Italic"
+        o.fontName = "Menlo-Regular"
         o.textHex = "D6FFE4"
         o.secondaryHex = "79B890"
         o.numberHex = "8CFFB5"
@@ -5940,7 +5979,7 @@ extension StyleCatalog {
         o.density = .dense
         o.titleCase = .lower
         o.tracking = 1.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         o.valueScale = 1.05
         list.append(StyleLook(id: "cyber-donnees", name: tr("Flux de données"), summary: tr("Colonnes de chiffres, vert pâle, histogramme"), family: "cyberpunk", themeID: .dark, accentHex: "8CFFB5", background: .gradient, font: .theme, style: o))
@@ -6078,10 +6117,11 @@ extension StyleCatalog {
         o.chart = .bars
         o.density = .balanced
         o.titleCase = .smallCaps
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .semibold
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "cyber-corpo", name: tr("Corporation"), summary: tr("Blanc clinique, filet bleu, froid administratif"), family: "cyberpunk", themeID: .light, accentHex: "0A6CFF", background: .color("F3F6FA"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0C1400", endHex: "000000", direction: .across, intensity: 1.0)
@@ -6102,10 +6142,11 @@ extension StyleCatalog {
         o.chart = .dots
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .heavy
         o.valueScale = 1.1
+        o.titleScale = 0.8
         list.append(StyleLook(id: "cyber-virus", name: tr("Virus"), summary: tr("Vert toxique, noir, glitch de contour"), family: "cyberpunk", themeID: .dark, accentHex: "B2FF00", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Menlo-Regular"
@@ -6185,16 +6226,17 @@ extension StyleCatalog {
         o.chart = .ring
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 4.0
+        o.tracking = 0.8
         o.numberWeight = .light
         o.titleWeight = .regular
         o.valueScale = 1.15
+        o.titleScale = 0.86
         list.append(StyleLook(id: "cyber-orbite", name: tr("Apesanteur"), summary: tr("Espace profond, étoiles, anneau lumineux"), family: "cyberpunk", themeID: .dark, accentHex: "A0B6FF", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "AvenirNextCondensed-Heavy"
         o.textHex = "FFFFFF"
         o.secondaryHex = "BCBCC4"
-        o.numberHex = "FF2D2D"
+        o.numberHex = "FF5A5A"
         o.chartHex = "FF2D2D"
         o.texture = .diagonal
         o.textureOpacity = 0.12
@@ -6351,10 +6393,12 @@ extension StyleCatalog {
         o.chart = .bars
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.8
         o.numberWeight = .black
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
+        o.textScale = 0.86
         list.append(StyleLook(id: "y2k-chrome-bleu", name: tr("Chrome bleu"), summary: tr("Dégradé métallique, biseau, majuscules"), family: "y2k", themeID: .light, accentHex: "1C5FD6", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "FFD6F5", endHex: "C9F5FF", direction: .diagonal, intensity: 1.0)
@@ -6446,7 +6490,7 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .regular
         o.valueScale = 1.3
-        list.append(StyleLook(id: "y2k-transparent", name: tr("Plastique transparent"), summary: tr("Verre teinté violet, bords nets"), family: "y2k", themeID: .dark, accentHex: "C58CFF", background: .glass, font: .theme, style: o))
+        list.append(StyleLook(id: "y2k-transparent", name: tr("Plastique transparent"), summary: tr("Verre teinté violet, bords nets"), family: "y2k", themeID: .dark, accentHex: "624680", background: .glass, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "BFEBFF", endHex: "D8F7C8", direction: .down, intensity: 1.0)
         o.fontName = "Optima-Regular"
@@ -6478,7 +6522,7 @@ extension StyleCatalog {
         o.numberHex = "FF4FC3"
         o.chartHex = "FF4FC3"
         o.texture = .stars
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .dotted
         o.borderHex = "FF4FC3"
         o.borderWidth = 3.0
@@ -6489,10 +6533,11 @@ extension StyleCatalog {
         o.chart = .dots
         o.density = .compact
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .heavy
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "y2k-pop-neon", name: tr("Pop néon"), summary: tr("Rose bonbon, noir, étoiles et pointes"), family: "y2k", themeID: .dark, accentHex: "FF4FC3", background: .color("15001F"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "FFF0F8", endHex: "FFD3E8", direction: .radial, intensity: 1.0)
@@ -6522,11 +6567,11 @@ extension StyleCatalog {
         o.gradient = GradientSpec(startHex: "F5F7FA", endHex: "AEB6C2", direction: .diagonal, intensity: 1.0)
         o.fontName = "HelveticaNeue-CondensedBold"
         o.textHex = "1A2230"
-        o.secondaryHex = "4A5465"
+        o.secondaryHex = "3B4351"
         o.numberHex = "3A4658"
         o.chartHex = "5F6B7A"
         o.texture = .brushed
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .bevel
         o.borderHex = "7C8696"
         o.borderWidth = 2.5
@@ -6676,6 +6721,8 @@ extension StyleCatalog {
         o.numberWeight = .regular
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "y2k-fenetre", name: tr("Fenêtre 2000"), summary: tr("Barre de titre bleue, gris clair, biseau"), family: "y2k", themeID: .light, accentHex: "0A246A", background: .color("D4D0C8"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "FFF1B8", endHex: "FFC857", direction: .diagonal, intensity: 1.0)
@@ -6777,7 +6824,7 @@ extension StyleCatalog {
         o.border = .double
         o.borderHex = "FF3D81"
         o.borderWidth = 4.0
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "3A0A4F"
         o.shape = .rounded
         o.layout = .centered
@@ -6788,6 +6835,8 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .heavy
         o.valueScale = 1.1
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "y2k-autocollant", name: tr("Autocollant"), summary: tr("Contour épais, couleurs vives, ombre longue"), family: "y2k", themeID: .light, accentHex: "FF3D81", background: .color("FFF6B0"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "FFFFFF", endHex: "F1DDF3", direction: .diagonal, intensity: 1.0)
@@ -6973,10 +7022,11 @@ extension StyleCatalog {
         o.density = .balanced
         o.iconStyle = .square
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.8
         o.numberWeight = .heavy
         o.titleWeight = .bold
         o.valueScale = 1.05
+        o.titleScale = 0.86
         list.append(StyleLook(id: "vint-cinema", name: tr("Ticket cinéma"), summary: tr("Billet rouge à encoches, caractères larges"), family: "vintage", themeID: .light, accentHex: "B3261E", background: .color("F2E2C2"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Copperplate"
@@ -7031,7 +7081,7 @@ extension StyleCatalog {
         o.numberHex = "1A1A1A"
         o.chartHex = "222222"
         o.texture = .noise
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .solid
         o.borderHex = "1A1A1A"
         o.borderWidth = 0.8
@@ -7109,10 +7159,11 @@ extension StyleCatalog {
         o.density = .compact
         o.iconStyle = .none
         o.titleCase = .upper
-        o.tracking = 4.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 0.95
+        o.titleScale = 0.86
         list.append(StyleLook(id: "vint-telegramme", name: tr("Télégramme"), summary: tr("Bandes collées, capitales télégraphe"), family: "vintage", themeID: .light, accentHex: "8F2A1D", background: .color("F1E7C8"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "3A3732", endHex: "12110F", direction: .radial, intensity: 1.0)
@@ -7169,7 +7220,7 @@ extension StyleCatalog {
         o.chartHex = "C7351F"
         o.texture = .halftone
         o.textureOpacity = 0.12
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "C7351F"
         o.shape = .panel
         o.layout = .horizontal
@@ -7181,6 +7232,8 @@ extension StyleCatalog {
         o.numberWeight = .heavy
         o.titleWeight = .heavy
         o.valueScale = 1.3
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "vint-affiche", name: tr("Affiche 1930"), summary: tr("Rouge et crème, capitales condensées"), family: "vintage", themeID: .light, accentHex: "C7351F", background: .color("F1E4C4"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "EEEBD6", endHex: "D9DEBF", direction: .up, intensity: 1.0)
@@ -7316,10 +7369,11 @@ extension StyleCatalog {
         o.density = .compact
         o.iconStyle = .none
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .heavy
         o.valueScale = 1.1
+        o.titleScale = 0.8
         list.append(StyleLook(id: "vint-tampon", name: tr("Tampon encreur"), summary: tr("Cachet rouge en relief sur papier"), family: "vintage", themeID: .light, accentHex: "B02A22", background: .color("F3EAD3"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "241E18", endHex: "0E0B09", direction: .radial, intensity: 1.0)
@@ -7347,13 +7401,13 @@ extension StyleCatalog {
         o.valueScale = 1.2
         list.append(StyleLook(id: "vint-phonographe", name: tr("Phonographe"), summary: tr("Disque noir, étiquette crème, Optima"), family: "vintage", themeID: .dark, accentHex: "E3C27A", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "AmericanTypewriter-Light"
+        o.fontName = "AmericanTypewriter"
         o.textHex = "24291F"
         o.secondaryHex = "55604E"
         o.numberHex = "2E5640"
         o.chartHex = "3D6B4F"
         o.texture = .grid
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.shape = .square
         o.layout = .data
         o.chart = .pie
@@ -7497,7 +7551,7 @@ extension StyleCatalog {
         o.chartHex = "FF7A3D"
         o.texture = .sunburst
         o.textureOpacity = 0.3
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "FF7A3D"
         o.shape = .panel
         o.layout = .horizontal
@@ -7509,6 +7563,8 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .heavy
         o.valueScale = 1.25
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "retro-sunset80", name: tr("Sunset 80"), summary: tr("Soleil rayé, dégradé orange-magenta"), family: "retro", themeID: .dark, accentHex: "FF7A3D", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "1E1147", endHex: "0A0720", direction: .down, intensity: 1.0)
@@ -7530,10 +7586,11 @@ extension StyleCatalog {
         o.density = .compact
         o.iconStyle = .outline
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.1
+        o.titleScale = 0.8
         list.append(StyleLook(id: "retro-synthwave", name: tr("Synthwave doux"), summary: tr("Grille de fuite, rose et cyan tamisés"), family: "retro", themeID: .dark, accentHex: "5CE1E6", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "AvenirNext-Heavy"
@@ -7546,7 +7603,7 @@ extension StyleCatalog {
         o.border = .solid
         o.borderHex = "1B1B2F"
         o.borderWidth = 3.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "FF5A8A"
         o.shape = .square
         o.layout = .cards
@@ -7558,6 +7615,8 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.1
+        o.shadowOpacity = 0.18
+        o.shadowOffset = 2.0
         list.append(StyleLook(id: "retro-memphis", name: tr("Memphis"), summary: tr("Confettis géométriques, trait noir épais"), family: "retro", themeID: .light, accentHex: "FF5A8A", background: .color("FFF4C9"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "MarkerFelt-Wide"
@@ -7661,10 +7720,11 @@ extension StyleCatalog {
         o.density = .compact
         o.iconStyle = .none
         o.titleCase = .upper
-        o.tracking = 4.0
+        o.tracking = 0.8
         o.numberWeight = .heavy
         o.titleWeight = .medium
         o.valueScale = 1.4
+        o.titleScale = 0.86
         list.append(StyleLook(id: "retro-radioreveil", name: tr("Radio-réveil"), summary: tr("Segments rouges sur noir, volets"), family: "retro", themeID: .dark, accentHex: "FF3B30", background: .color("120A09"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Verdana"
@@ -7706,10 +7766,11 @@ extension StyleCatalog {
         o.density = .compact
         o.iconStyle = .square
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.05
+        o.titleScale = 0.86
         list.append(StyleLook(id: "retro-arcade", name: tr("Arcade 8 bits"), summary: tr("Pixels, bords crantés, jaune sur nuit"), family: "retro", themeID: .dark, accentHex: "FFE600", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Courier"
@@ -7758,6 +7819,8 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "retro-mac-classic", name: tr("Ordinateur beige"), summary: tr("Fenêtre beige, titre rayé, Chicago-like"), family: "retro", themeID: .light, accentHex: "111111", background: .color("E8E4D4"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "3A3A40", endHex: "18181C", direction: .down, intensity: 1.0)
@@ -7834,11 +7897,11 @@ extension StyleCatalog {
         o.gradient = GradientSpec(startHex: "D5D8DD", endHex: "B3B8C0", direction: .down, intensity: 1.0)
         o.fontName = "Verdana-Bold"
         o.textHex = "1B1D22"
-        o.secondaryHex = "4A4E57"
+        o.secondaryHex = "43464E"
         o.numberHex = "1B1D22"
         o.chartHex = "FFB400"
         o.texture = .brushed
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .bevel
         o.borderHex = "FFB400"
         o.borderWidth = 2.0
@@ -7872,10 +7935,11 @@ extension StyleCatalog {
         o.density = .balanced
         o.iconStyle = .square
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.1
+        o.titleScale = 0.8
         list.append(StyleLook(id: "retro-roller", name: tr("Patinoire 80"), summary: tr("Dalles vives, étoiles, bandes diagonales"), family: "retro", themeID: .light, accentHex: "7B3FE4", background: .color("FFE9F5"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "AmericanTypewriter-Condensed"
@@ -7884,7 +7948,7 @@ extension StyleCatalog {
         o.numberHex = "FFFFFF"
         o.chartHex = "7CFFB0"
         o.texture = .pixels
-        o.textureOpacity = 0.25
+        o.textureOpacity = 0.22
         o.border = .dotted
         o.borderHex = "7CFFB0"
         o.borderWidth = 2.0
@@ -7912,10 +7976,11 @@ extension StyleCatalog {
         o.density = .balanced
         o.iconStyle = .square
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "retro-airline", name: tr("Terminal 1968"), summary: tr("Panneau d'aéroport, ligne blanche, Gill"), family: "retro", themeID: .dark, accentHex: "FFFFFF", background: .color("1E2A38"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "HelveticaNeue-Bold"
@@ -7959,10 +8024,11 @@ extension StyleCatalog {
         o.density = .compact
         o.iconStyle = .outline
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "retro-gameboy", name: tr("Console verte"), summary: tr("Quatre verts, pixel, ombre dure"), family: "retro", themeID: .light, accentHex: "0F380F", background: .color("9BBC0F"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Futura-Bold"
@@ -8065,7 +8131,7 @@ extension StyleCatalog {
         o.valueScale = 1.2
         list.append(StyleLook(id: "neon-enseigne", name: tr("Enseigne"), summary: tr("Lettres script rose, tube sur mur noir"), family: "neon", themeID: .dark, accentHex: "FF3FA4", background: .color("0A0710"), font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "AvenirNext-UltraLight"
+        o.fontName = "AvenirNext-Regular"
         o.textHex = "E6FBFF"
         o.secondaryHex = "8FD5E3"
         o.numberHex = "19E6FF"
@@ -8082,8 +8148,8 @@ extension StyleCatalog {
         o.iconStyle = .none
         o.titleCase = .upper
         o.tracking = 3.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.3
         list.append(StyleLook(id: "neon-tube-double", name: tr("Double tube"), summary: tr("Deux tubes cyan concentriques"), family: "neon", themeID: .dark, accentHex: "19E6FF", background: .color("050B14"), font: .theme, style: o))
         o = StyleOptions()
@@ -8128,10 +8194,11 @@ extension StyleCatalog {
         o.density = .balanced
         o.iconStyle = .circle
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .heavy
         o.valueScale = 1.0
+        o.titleScale = 0.8
         list.append(StyleLook(id: "neon-casino", name: tr("Casino"), summary: tr("Ampoules dorées, bordure en pointillés"), family: "neon", themeID: .dark, accentHex: "FFC93A", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "AvenirNextCondensed-Heavy"
@@ -8156,6 +8223,8 @@ extension StyleCatalog {
         o.numberWeight = .heavy
         o.titleWeight = .black
         o.valueScale = 1.2
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "neon-motel", name: tr("Motel route 66"), summary: tr("Flèche rouge, VACANCY en capitales"), family: "neon", themeID: .dark, accentHex: "FF2D2D", background: .color("0B0A12"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "1D0B3A", endHex: "090217", direction: .across, intensity: 1.0)
@@ -8223,7 +8292,7 @@ extension StyleCatalog {
         o.valueScale = 1.0
         list.append(StyleLook(id: "neon-brique", name: tr("Néon sur brique"), summary: tr("Mur de briques, tube orange"), family: "neon", themeID: .dark, accentHex: "FF8A2B", background: .color("1B0F0C"), font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-Thin"
+        o.fontName = "HelveticaNeue"
         o.textHex = "FFFFFF"
         o.secondaryHex = "A0A0A0"
         o.numberHex = "FFFFFF"
@@ -8240,7 +8309,7 @@ extension StyleCatalog {
         o.iconStyle = .none
         o.titleCase = .lower
         o.tracking = 2.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         o.valueScale = 1.4
         list.append(StyleLook(id: "neon-minimal", name: tr("Néon minimal"), summary: tr("Un seul trait blanc fin sur noir pur"), family: "neon", themeID: .dark, accentHex: "FFFFFF", background: .color("000000"), font: .theme, style: o))
@@ -8251,7 +8320,7 @@ extension StyleCatalog {
         o.numberHex = "7DFFD6"
         o.chartHex = "C77DFF"
         o.texture = .noise
-        o.textureOpacity = 0.4
+        o.textureOpacity = 0.22
         o.border = .dashed
         o.borderHex = "C77DFF"
         o.borderWidth = 2.0
@@ -8331,10 +8400,11 @@ extension StyleCatalog {
         o.density = .dense
         o.iconStyle = .square
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "neon-arcade-tube", name: tr("Salle de jeux"), summary: tr("Néons sur moquette, pixels et glow"), family: "neon", themeID: .dark, accentHex: "47FFB0", background: .color("0A0F1F"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "130A24", endHex: "060310", direction: .down, intensity: 1.0)
@@ -8370,7 +8440,7 @@ extension StyleCatalog {
         o.chartHex = "41E8E0"
         o.texture = .sunburst
         o.textureOpacity = 0.2
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "41E8E0"
         o.shape = .soft
         o.layout = .horizontal
@@ -8382,10 +8452,12 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .medium
         o.valueScale = 1.2
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "neon-miami", name: tr("Miami"), summary: tr("Palmiers roses, bleu glacier, pastel néon"), family: "neon", themeID: .dark, accentHex: "41E8E0", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0B1D4A", endHex: "030610", direction: .radial, intensity: 1.0)
-        o.fontName = "AvenirNext-UltraLight"
+        o.fontName = "AvenirNext-Regular"
         o.textHex = "EAF1FF"
         o.secondaryHex = "9DB4E0"
         o.numberHex = "7FB0FF"
@@ -8399,8 +8471,8 @@ extension StyleCatalog {
         o.iconStyle = .none
         o.titleCase = .lower
         o.tracking = 1.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.35
         list.append(StyleLook(id: "neon-halo-bleu", name: tr("Halo bleu"), summary: tr("Lueur diffuse sans bordure, chiffres fins"), family: "neon", themeID: .dark, accentHex: "4D8DFF", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
@@ -8411,7 +8483,7 @@ extension StyleCatalog {
         o.numberHex = "FFC857"
         o.chartHex = "FF5A7A"
         o.texture = .linen
-        o.textureOpacity = 0.35
+        o.textureOpacity = 0.22
         o.border = .stitched
         o.borderHex = "FF5A7A"
         o.borderWidth = 2.0
@@ -8504,7 +8576,7 @@ extension StyleCatalog {
         o.numberHex = "FFE066"
         o.chartHex = "FFE066"
         o.texture = .grain
-        o.textureOpacity = 0.4
+        o.textureOpacity = 0.22
         o.border = .inset
         o.borderHex = "FFE066"
         o.borderWidth = 1.5
@@ -8559,10 +8631,11 @@ extension StyleCatalog {
         o.density = .balanced
         o.iconStyle = .circle
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .medium
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "neon-spectre", name: tr("Spectre"), summary: tr("Dégradé arc-en-ciel sur contour"), family: "neon", themeID: .dark, accentHex: "FF5CE1", background: .color("07040F"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Rockwell-Bold"
@@ -8583,10 +8656,11 @@ extension StyleCatalog {
         o.density = .compact
         o.iconStyle = .none
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .black
-        o.valueScale = 1.1
+        o.valueScale = 1.0
+        o.titleScale = 0.8
         list.append(StyleLook(id: "neon-marquee", name: tr("Marquee"), summary: tr("Cadre à ampoules, théâtre de Broadway"), family: "neon", themeID: .dark, accentHex: "FFD43B", background: .color("120A02"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "2C0A3E", endHex: "070212", direction: .radial, intensity: 1.0)
@@ -8638,7 +8712,7 @@ extension StyleCatalog {
         o.valueScale = 1.1
         list.append(StyleLook(id: "mini-suisse", name: tr("Suisse"), summary: tr("Grille nette, Helvetica gras, filet rouge"), family: "minimal", themeID: .minimal, accentHex: "E30613", background: .color("FFFFFF"), font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "AppleSDGothicNeo-Thin"
+        o.fontName = "AppleSDGothicNeo-Regular"
         o.textHex = "2B2B2B"
         o.secondaryHex = "6E6A62"
         o.numberHex = "B3362B"
@@ -8655,8 +8729,8 @@ extension StyleCatalog {
         o.iconStyle = .none
         o.titleCase = .normal
         o.tracking = 3.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.2
         list.append(StyleLook(id: "mini-japonais", name: tr("Japonais"), summary: tr("Papier washi, marge généreuse, trait fin"), family: "minimal", themeID: .minimal, accentHex: "B3362B", background: .color("F6F1E7"), font: .theme, style: o))
         o = StyleOptions()
@@ -8697,7 +8771,7 @@ extension StyleCatalog {
         o.valueScale = 1.15
         list.append(StyleLook(id: "mini-blanc-pur", name: tr("Blanc pur"), summary: tr("Blanc total, gris tendre, aucun bord"), family: "minimal", themeID: .minimal, accentHex: "111111", background: .color("FFFFFF"), font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-UltraLight"
+        o.fontName = "HelveticaNeue"
         o.textHex = "FFFFFF"
         o.secondaryHex = "8E8E93"
         o.numberHex = "FFFFFF"
@@ -8709,8 +8783,8 @@ extension StyleCatalog {
         o.iconStyle = .none
         o.titleCase = .upper
         o.tracking = 3.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.35
         list.append(StyleLook(id: "mini-noir-pur", name: tr("Noir pur"), summary: tr("Noir OLED, chiffres fins, gris froid"), family: "minimal", themeID: .minimal, accentHex: "FFFFFF", background: .color("000000"), font: .theme, style: o))
         o = StyleOptions()
@@ -8790,7 +8864,7 @@ extension StyleCatalog {
         o.numberHex = "151515"
         o.chartHex = "3C3C3C"
         o.texture = .noise
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .inset
         o.borderHex = "3C3C3C"
         o.borderWidth = 1.0
@@ -8808,9 +8882,9 @@ extension StyleCatalog {
         list.append(StyleLook(id: "mini-gris-beton", name: tr("Gris béton"), summary: tr("Béton lisse, chiffres lourds, bord inset"), family: "minimal", themeID: .minimal, accentHex: "3C3C3C", background: .color("BDBDBD"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "EDF1EE", endHex: "D5DDD8", direction: .up, intensity: 1.0)
-        o.fontName = "Avenir-Light"
+        o.fontName = "Avenir-Book"
         o.textHex = "2D3834"
-        o.secondaryHex = "627069"
+        o.secondaryHex = "4E5A54"
         o.numberHex = "4C625A"
         o.chartHex = "6B7F77"
         o.depth = .floating
@@ -8821,8 +8895,8 @@ extension StyleCatalog {
         o.iconStyle = .none
         o.titleCase = .lower
         o.tracking = 3.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.2
         list.append(StyleLook(id: "mini-zen", name: tr("Zen jardin"), summary: tr("Dégradé brume, cercle unique, silence"), family: "minimal", themeID: .minimal, accentHex: "6B7F77", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
@@ -8834,7 +8908,7 @@ extension StyleCatalog {
         o.border = .solid
         o.borderHex = "000000"
         o.borderWidth = 4.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "111111"
         o.shape = .square
         o.layout = .cards
@@ -8846,6 +8920,8 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.15
+        o.shadowOpacity = 0.18
+        o.shadowOffset = 2.0
         list.append(StyleLook(id: "mini-brut", name: tr("Brut"), summary: tr("Contour noir épais, grotesque lourd"), family: "minimal", themeID: .minimal, accentHex: "111111", background: .color("FFFFFF"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Futura-Bold"
@@ -8853,7 +8929,7 @@ extension StyleCatalog {
         o.secondaryHex = "4C4C5C"
         o.numberHex = "E63B2E"
         o.chartHex = "E63B2E"
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "E63B2E"
         o.shape = .panel
         o.layout = .graph
@@ -8865,6 +8941,8 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.1
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "mini-bauhaus", name: tr("Bauhaus"), summary: tr("Formes pleines, primaire, Futura"), family: "minimal", themeID: .minimal, accentHex: "E63B2E", background: .color("F5F0E1"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "IowanOldStyle-Roman"
@@ -8889,7 +8967,7 @@ extension StyleCatalog {
         o.valueScale = 1.0
         list.append(StyleLook(id: "mini-papier-lin", name: tr("Papier lin"), summary: tr("Fibre de lin, texte serif, filet léger"), family: "minimal", themeID: .minimal, accentHex: "7C6A55", background: .color("F2EDE3"), font: .theme, style: o))
         o = StyleOptions()
-        o.fontName = "AvenirNext-UltraLight"
+        o.fontName = "AvenirNext-Regular"
         o.textHex = "E5ECFA"
         o.secondaryHex = "8E9CBB"
         o.numberHex = "BFD0F2"
@@ -8902,8 +8980,8 @@ extension StyleCatalog {
         o.iconStyle = .none
         o.titleCase = .lower
         o.tracking = 2.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.25
         list.append(StyleLook(id: "mini-nuit-calme", name: tr("Nuit calme"), summary: tr("Bleu nuit sourd, lettres légères"), family: "minimal", themeID: .minimal, accentHex: "8FA8D6", background: .color("0F1626"), font: .theme, style: o))
         o = StyleOptions()
@@ -8977,7 +9055,7 @@ extension StyleCatalog {
         o.secondaryHex = "7C634A"
         o.numberHex = "9A5F33"
         o.chartHex = "B7794A"
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "B7794A"
         o.shape = .rounded
         o.layout = .minimal
@@ -8989,6 +9067,8 @@ extension StyleCatalog {
         o.numberWeight = .regular
         o.titleWeight = .medium
         o.valueScale = 1.2
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "mini-sable", name: tr("Dune douce"), summary: tr("Dune douce, dégradé chaud, ombre longue"), family: "minimal", themeID: .minimal, accentHex: "B7794A", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "AvenirNext-DemiBold"
@@ -9022,11 +9102,13 @@ extension StyleCatalog {
         o.chart = .pie
         o.density = .balanced
         o.iconStyle = .outline
-        o.titleCase = .upper
-        o.tracking = 3.0
+        o.titleCase = .smallCaps
+        o.tracking = 0.8
         o.numberWeight = .regular
         o.titleWeight = .regular
         o.valueScale = 0.95
+        o.titleScale = 0.86
+        o.textScale = 0.86
         list.append(StyleLook(id: "mini-contour", name: tr("Contour"), summary: tr("Cadre fin, vide au centre, Courier"), family: "minimal", themeID: .minimal, accentHex: "333333", background: .color("FFFFFF"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "BodoniSvtyTwoSCITCTT-Book"
@@ -9050,9 +9132,9 @@ extension StyleCatalog {
         list.append(StyleLook(id: "mini-ivoire-or", name: tr("Ivoire et or"), summary: tr("Ivoire mat, filet doré, petite capitale"), family: "minimal", themeID: .minimal, accentHex: "A8864A", background: .color("FBF7EC"), font: .theme, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "E9EDF2", endHex: "CFD6DF", direction: .down, intensity: 1.0)
-        o.fontName = "HelveticaNeue-Light"
+        o.fontName = "HelveticaNeue"
         o.textHex = "28303B"
-        o.secondaryHex = "5F6B7A"
+        o.secondaryHex = "4C5662"
         o.numberHex = "3C4A5C"
         o.chartHex = "7D8CA0"
         o.depth = .soft
@@ -9063,8 +9145,8 @@ extension StyleCatalog {
         o.iconStyle = .none
         o.titleCase = .normal
         o.tracking = 2.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.15
         list.append(StyleLook(id: "mini-brouillard", name: tr("Brouillard"), summary: tr("Gris bleuté vaporeux, texte très fin"), family: "minimal", themeID: .minimal, accentHex: "7D8CA0", background: .gradient, font: .theme, style: o))
         o = StyleOptions()
@@ -9084,10 +9166,11 @@ extension StyleCatalog {
         o.density = .balanced
         o.iconStyle = .square
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "mini-papier-kraft", name: tr("Kraft"), summary: tr("Carton brun, texte tamponné, mono"), family: "minimal", themeID: .minimal, accentHex: "5A3E24", background: .color("C9A877"), font: .theme, style: o))
         o = StyleOptions()
         o.fontName = "Georgia"
@@ -9124,7 +9207,7 @@ extension StyleCatalog {
         o.border = .solid
         o.borderHex = "000000"
         o.borderWidth = 3.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "000000"
         o.shape = .rounded
         o.layout = .split
@@ -9135,6 +9218,8 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.shadowOpacity = 0.18
+        o.shadowOffset = 2.0
         list.append(StyleLook(id: "brut-jaune", name: tr("Néo-brutal"), summary: tr("Jaune vif, trait noir, ombre dure"), family: "brutal", themeID: .light, accentHex: "000000", background: .color("FFE14D"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Helvetica-Bold"
@@ -9267,7 +9352,7 @@ extension StyleCatalog {
         o.border = .dashed
         o.borderHex = "1B2A8A"
         o.borderWidth = 2.0
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "FF48B0"
         o.shape = .rounded
         o.layout = .centered
@@ -9278,6 +9363,8 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "brut-riso", name: tr("Risographie"), summary: tr("Trame rose et bleu, décalage d'impression"), family: "brutal", themeID: .light, accentHex: "FF48B0", background: .color("FFF1E2"), font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0A0A0A", endHex: "222222", direction: .down, intensity: 1.0)
@@ -9307,7 +9394,7 @@ extension StyleCatalog {
         o.border = .dotted
         o.borderHex = "000000"
         o.borderWidth = 3.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "0000FF"
         o.shape = .soft
         o.layout = .cards
@@ -9318,6 +9405,8 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.shadowOpacity = 0.18
+        o.shadowOffset = 2.0
         list.append(StyleLook(id: "brut-anti", name: tr("Anti-design"), summary: tr("Magenta cru, pointillés, ombre bleue"), family: "brutal", themeID: .light, accentHex: "0000FF", background: .color("FF4DFF"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "DINAlternate-Bold"
@@ -9419,7 +9508,7 @@ extension StyleCatalog {
         o.border = .double
         o.borderHex = "111111"
         o.borderWidth = 4.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "C8102E"
         o.shape = .square
         o.layout = .split
@@ -9430,6 +9519,8 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.0
+        o.shadowOpacity = 0.18
+        o.shadowOffset = 2.0
         list.append(StyleLook(id: "brut-constructiviste", name: tr("Constructivisme"), summary: tr("Diagonales, rouge et noir, affiche d'agit-prop"), family: "brutal", themeID: .light, accentHex: "C8102E", background: .color("E8E2D0"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "AmericanTypewriter-Semibold"
@@ -9501,7 +9592,7 @@ extension StyleCatalog {
         o.border = .solid
         o.borderHex = "CCFF00"
         o.borderWidth = 3.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "CCFF00"
         o.shape = .soft
         o.layout = .cards
@@ -9512,6 +9603,8 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.shadowOpacity = 0.18
+        o.shadowOffset = 2.0
         list.append(StyleLook(id: "brut-acide", name: tr("Acide"), summary: tr("Vert acide sur noir, ombre dure décalée"), family: "brutal", themeID: .dark, accentHex: "CCFF00", background: .color("0B0B0B"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Palatino-Roman"
@@ -9561,7 +9654,7 @@ extension StyleCatalog {
         o.secondaryHex = "50617A"
         o.numberHex = "D1342F"
         o.chartHex = "D1342F"
-        o.texture = .lines
+        o.texture = .grid
         o.textureOpacity = 0.1
         o.border = .gradient
         o.borderHex = "1A2B3C"
@@ -9585,7 +9678,7 @@ extension StyleCatalog {
         o.border = .solid
         o.borderHex = "1A0010"
         o.borderWidth = 3.0
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "1A0010"
         o.shape = .capsule
         o.layout = .centered
@@ -9596,6 +9689,8 @@ extension StyleCatalog {
         o.numberWeight = .heavy
         o.titleWeight = .semibold
         o.valueScale = 1.2
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "brut-pop", name: tr("Pop brutal"), summary: tr("Rose bonbon, relief long, formes rondes"), family: "brutal", themeID: .light, accentHex: "1A0010", background: .color("FF8FB8"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "BodoniSvtyTwoITCTT-Bold"
@@ -9636,10 +9731,11 @@ extension StyleCatalog {
         o.chart = .area
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.titleScale = 0.8
         list.append(StyleLook(id: "brut-brique", name: tr("Brique"), summary: tr("Brique sombre, métal brossé, Superclarendon"), family: "brutal", themeID: .dark, accentHex: "FFC857", background: .color("6E2E22"), font: .standard, style: o))
         return list
     }
@@ -9714,10 +9810,10 @@ extension StyleCatalog {
         list.append(StyleLook(id: "nat-desert", name: tr("Dunes sèches"), summary: tr("Sable chaud, dunes en vagues, Optima"), family: "nature", themeID: .light, accentHex: "C25A1E", background: .color("F0D9B0"), font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "062A4A", endHex: "0E6A9A", direction: .up, intensity: 1.0)
-        o.fontName = "AvenirNext-UltraLight"
-        o.textHex = "F0FAFF"
-        o.secondaryHex = "BFE4F5"
-        o.numberHex = "7FE3FF"
+        o.fontName = "AvenirNext-Regular"
+        o.textHex = "FFFFFF"
+        o.secondaryHex = "C5E7F6"
+        o.numberHex = "B2EEFF"
         o.chartHex = "7FE3FF"
         o.texture = .waves
         o.textureOpacity = 0.2
@@ -9732,12 +9828,12 @@ extension StyleCatalog {
         o.density = .balanced
         o.titleCase = .lower
         o.tracking = 1.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         o.valueScale = 1.3
         list.append(StyleLook(id: "nat-ocean", name: tr("Océan"), summary: tr("Bleu abyssal, vagues, lumière lente"), family: "nature", themeID: .dark, accentHex: "7FE3FF", background: .gradient, font: .standard, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-Thin"
+        o.fontName = "HelveticaNeue"
         o.textHex = "2E2E2A"
         o.secondaryHex = "66665E"
         o.numberHex = "4A5A48"
@@ -9750,8 +9846,8 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .lower
         o.tracking = 3.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.15
         list.append(StyleLook(id: "nat-zen", name: tr("Jardin zen"), summary: tr("Sable ratissé, lignes, silence"), family: "nature", themeID: .light, accentHex: "4A5A48", background: .color("EFEBE0"), font: .standard, style: o))
         o = StyleOptions()
@@ -9805,7 +9901,7 @@ extension StyleCatalog {
         o.numberHex = "1B1B1B"
         o.chartHex = "1B1B1B"
         o.texture = .grain
-        o.textureOpacity = 0.4
+        o.textureOpacity = 0.22
         o.border = .bevel
         o.borderHex = "1B1B1B"
         o.borderWidth = 3.0
@@ -9816,10 +9912,11 @@ extension StyleCatalog {
         o.chart = .gauge
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .bold
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "nat-pierre", name: tr("Pierre"), summary: tr("Granit gris, biseau, capitales gravées"), family: "nature", themeID: .light, accentHex: "1B1B1B", background: .color("B8B8B2"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "IowanOldStyle-Roman"
@@ -9906,7 +10003,7 @@ extension StyleCatalog {
         o.valueScale = 1.0
         list.append(StyleLook(id: "nat-bauhaus", name: tr("Cercle carré"), summary: tr("Primaires, ombre jaune, Futura"), family: "nature", themeID: .light, accentHex: "D62718", background: .color("F2EBDD"), font: .standard, style: o))
         o = StyleOptions()
-        o.fontName = "HelveticaNeue-Light"
+        o.fontName = "HelveticaNeue"
         o.textHex = "1A1A1A"
         o.secondaryHex = "6E6E6E"
         o.numberHex = "1A1A1A"
@@ -9920,8 +10017,8 @@ extension StyleCatalog {
         o.density = .compact
         o.titleCase = .smallCaps
         o.tracking = 3.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.2
         list.append(StyleLook(id: "nat-galerie", name: tr("Galerie d'art"), summary: tr("Blanc muséal, cartel minuscule, grande marge"), family: "nature", themeID: .light, accentHex: "1A1A1A", background: .color("FFFFFF"), font: .standard, style: o))
         o = StyleOptions()
@@ -9943,6 +10040,8 @@ extension StyleCatalog {
         o.numberWeight = .bold
         o.titleWeight = .bold
         o.valueScale = 1.0
+        o.titleScale = 0.86
+        o.textScale = 0.86
         list.append(StyleLook(id: "nat-atelier", name: tr("Atelier d'artiste"), summary: tr("Toile écrue, tâches, Rockwell"), family: "nature", themeID: .light, accentHex: "B3402A", background: .color("DDD3C0"), font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "EAF6FF", endHex: "BFE0F5", direction: .down, intensity: 1.0)
@@ -9998,7 +10097,7 @@ extension StyleCatalog {
         o.numberHex = "D8F58A"
         o.chartHex = "D8F58A"
         o.texture = .noise
-        o.textureOpacity = 0.3
+        o.textureOpacity = 0.22
         o.border = .dotted
         o.borderHex = "D8F58A"
         o.borderWidth = 2.0
@@ -10126,10 +10225,10 @@ extension StyleCatalog {
         list.append(StyleLook(id: "nat-bambou", name: tr("Bambou"), summary: tr("Vert tendre, lignes verticales, Thonburi"), family: "nature", themeID: .light, accentHex: "3E7A3B", background: .color("E4EDD0"), font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "FBD9C4", endHex: "E89AA5", direction: .up, intensity: 1.0)
-        o.fontName = "GillSans-Light"
+        o.fontName = "GillSans"
         o.textHex = "3A1A22"
-        o.secondaryHex = "6A3A44"
-        o.numberHex = "8A2E4A"
+        o.secondaryHex = "5F343D"
+        o.numberHex = "6E253B"
         o.chartHex = "8A2E4A"
         o.shape = .soft
         o.layout = .horizontal
@@ -10137,7 +10236,7 @@ extension StyleCatalog {
         o.density = .balanced
         o.titleCase = .normal
         o.tracking = 0.0
-        o.numberWeight = .light
+        o.numberWeight = .regular
         o.titleWeight = .regular
         o.valueScale = 1.2
         list.append(StyleLook(id: "nat-dune", name: tr("Dune rose"), summary: tr("Dégradé pêche, horizon, Gill Sans léger"), family: "nature", themeID: .light, accentHex: "8A2E4A", background: .gradient, font: .standard, style: o))
@@ -10206,7 +10305,7 @@ extension StyleCatalog {
         o.border = .solid
         o.borderHex = "111111"
         o.borderWidth = 3.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "111111"
         o.shape = .soft
         o.layout = .cards
@@ -10217,6 +10316,8 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.shadowOpacity = 0.18
+        o.shadowOffset = 2.0
         list.append(StyleLook(id: "ill-bd", name: tr("Bande dessinée"), summary: tr("Trame de points, bulle, ombre dure"), family: "illustration", themeID: .light, accentHex: "E11D48", background: .color("FFF9D6"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Noteworthy-Bold"
@@ -10325,6 +10426,8 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "ill-manga", name: tr("Manga"), summary: tr("Noir et blanc, trames, cadre net"), family: "illustration", themeID: .light, accentHex: "000000", background: .color("FFFFFF"), font: .standard, style: o))
         o = StyleOptions()
         o.gradient = GradientSpec(startHex: "0B3D91", endHex: "0A2E6E", direction: .down, intensity: 1.0)
@@ -10448,7 +10551,7 @@ extension StyleCatalog {
         o.border = .pixel
         o.borderHex = "FFD93D"
         o.borderWidth = 3.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "FF4D6D"
         o.shape = .panel
         o.layout = .cards
@@ -10460,6 +10563,8 @@ extension StyleCatalog {
         o.titleWeight = .semibold
         o.valueScale = 1.0
         o.monospacedNumbers = true
+        o.shadowOpacity = 0.18
+        o.shadowOffset = 2.0
         list.append(StyleLook(id: "ill-pixel", name: tr("Pixel art"), summary: tr("Pixels francs, cadre pixel, 8 bits"), family: "illustration", themeID: .dark, accentHex: "FFD93D", background: .color("1A1033"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Marion-Bold"
@@ -10504,7 +10609,7 @@ extension StyleCatalog {
         o.valueScale = 1.3
         list.append(StyleLook(id: "ill-enfant", name: tr("Livre d'enfant"), summary: tr("Crème, grands chiffres ronds, Chalkboard"), family: "illustration", themeID: .light, accentHex: "2E7D4B", background: .color("FFF6DC"), font: .standard, style: o))
         o = StyleOptions()
-        o.fontName = "AvenirNext-UltraLight"
+        o.fontName = "AvenirNext-Regular"
         o.textHex = "1D2A33"
         o.secondaryHex = "55646E"
         o.numberHex = "C0392B"
@@ -10520,8 +10625,8 @@ extension StyleCatalog {
         o.density = .dense
         o.titleCase = .smallCaps
         o.tracking = 2.0
-        o.numberWeight = .light
-        o.titleWeight = .light
+        o.numberWeight = .regular
+        o.titleWeight = .medium
         o.valueScale = 1.0
         list.append(StyleLook(id: "ill-croquis", name: tr("Croquis d'archi"), summary: tr("Trait fin, repères, papier calque"), family: "illustration", themeID: .light, accentHex: "C0392B", background: .color("F3F6F8"), font: .standard, style: o))
         o = StyleOptions()
@@ -10571,7 +10676,7 @@ extension StyleCatalog {
         o.fontName = "PartyLetPlain"
         o.textHex = "3A0A1A"
         o.secondaryHex = "7A2A4A"
-        o.numberHex = "D81E5B"
+        o.numberHex = "C21B52"
         o.chartHex = "D81E5B"
         o.texture = .diagonal
         o.textureOpacity = 0.2
@@ -10670,10 +10775,11 @@ extension StyleCatalog {
         o.chart = .evolution
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 1.0
+        o.tracking = 0.8
         o.numberWeight = .black
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "ill-pulp", name: tr("Pulp"), summary: tr("Trame vieillie, double filet, Superclarendon"), family: "illustration", themeID: .light, accentHex: "C41E1E", background: .color("F2E2B8"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Didot-Italic"
@@ -10697,13 +10803,13 @@ extension StyleCatalog {
         o.valueScale = 1.0
         list.append(StyleLook(id: "ill-gravure", name: tr("Gravure"), summary: tr("Hachures fines, noir sur ivoire, Didot"), family: "illustration", themeID: .light, accentHex: "7A1F1F", background: .color("F4ECD8"), font: .standard, style: o))
         o = StyleOptions()
-        o.fontName = "Copperplate-Light"
+        o.fontName = "Copperplate"
         o.textHex = "FFF4E0"
         o.secondaryHex = "D8C8F0"
         o.numberHex = "FFB347"
         o.chartHex = "FFB347"
         o.texture = .web
-        o.textureOpacity = 0.4
+        o.textureOpacity = 0.22
         o.border = .solid
         o.borderHex = "FFB347"
         o.borderWidth = 3.0
@@ -10714,10 +10820,11 @@ extension StyleCatalog {
         o.chart = .pie
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .regular
         o.titleWeight = .regular
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "ill-verriere", name: tr("Verrière"), summary: tr("Plomb et éclats, Copperplate, halo doré"), family: "illustration", themeID: .dark, accentHex: "FFB347", background: .color("1B1034"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Optima-ExtraBlack"
@@ -10737,10 +10844,11 @@ extension StyleCatalog {
         o.chart = .gauge
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 3.0
+        o.tracking = 0.5
         o.numberWeight = .black
         o.titleWeight = .black
         o.valueScale = 1.0
+        o.titleScale = 0.8
         list.append(StyleLook(id: "ill-cinema", name: tr("Affiche ciné"), summary: tr("Écran noir, titre doré, rayon"), family: "illustration", themeID: .dark, accentHex: "FFC93C", background: .color("0F0F14"), font: .standard, style: o))
         return list
     }
@@ -11023,7 +11131,7 @@ extension StyleCatalog {
         o.border = .solid
         o.borderHex = "111111"
         o.borderWidth = 3.0
-        o.depth = .longShadow
+        o.depth = .hardShadow
         o.shadowHex = "111111"
         o.shape = .panel
         o.layout = .horizontal
@@ -11034,12 +11142,14 @@ extension StyleCatalog {
         o.numberWeight = .heavy
         o.titleWeight = .semibold
         o.valueScale = 1.25
+        o.shadowOffset = 2.0
+        o.shadowOpacity = 0.14
         list.append(StyleLook(id: "sp-peloton", name: tr("Peloton"), summary: tr("Jaune maillot, noir, relief long"), family: "sport", themeID: .light, accentHex: "111111", background: .color("FFE000"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "AmericanTypewriter-CondensedBold"
         o.textHex = "FFF2F2"
         o.secondaryHex = "E0B5B5"
-        o.numberHex = "FF3B3B"
+        o.numberHex = "FF7B7B"
         o.chartHex = "FF3B3B"
         o.border = .double
         o.borderHex = "FF3B3B"
@@ -11227,10 +11337,11 @@ extension StyleCatalog {
         o.chart = .bars
         o.density = .balanced
         o.titleCase = .upper
-        o.tracking = 2.0
+        o.tracking = 0.8
         o.numberWeight = .black
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.titleScale = 0.86
         list.append(StyleLook(id: "sp-podium", name: tr("Podium"), summary: tr("Or, biseau et reflet brossé"), family: "sport", themeID: .light, accentHex: "2A1D00", background: .color("D9B24A"), font: .standard, style: o))
         o = StyleOptions()
         o.fontName = "Baskerville-SemiBold"
@@ -11282,7 +11393,7 @@ extension StyleCatalog {
         o.border = .pixel
         o.borderHex = "00E5FF"
         o.borderWidth = 2.0
-        o.depth = .hardShadow
+        o.depth = .soft
         o.shadowHex = "FF2BD6"
         o.shape = .panel
         o.layout = .cards
@@ -11293,6 +11404,7 @@ extension StyleCatalog {
         o.numberWeight = .black
         o.titleWeight = .semibold
         o.valueScale = 1.0
+        o.shadowOpacity = 0.18
         list.append(StyleLook(id: "sp-arene", name: tr("Arène numérique"), summary: tr("Néon cyan, pixels, ombre magenta"), family: "sport", themeID: .dark, accentHex: "00E5FF", background: .gradient, font: .standard, style: o))
         return list
     }

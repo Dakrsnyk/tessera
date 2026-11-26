@@ -94,12 +94,13 @@
   "layout": "centered",
   "density": "compact",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.8,
   "numberWeight": "medium",
   "titleWeight": "bold",
   "valueScale": 1.15,
   "chart": "gauge",
-  "iconStyle": "none"
+  "iconStyle": "none",
+  "titleScale": 0.86
  },
  {
   "id": "riche-bordeaux-or",
@@ -221,7 +222,7 @@
   "numberHex": "7A5A1C",
   "chartHex": "B8913F",
   "texture": "linen",
-  "textureOpacity": 0.3,
+  "textureOpacity": 0.22,
   "border": "solid",
   "borderHex": "B8913F",
   "borderWidth": 1,
@@ -229,12 +230,13 @@
   "layout": "minimal",
   "density": "compact",
   "titleCase": "upper",
-  "tracking": 4,
-  "numberWeight": "light",
+  "tracking": 0.8,
+  "numberWeight": "regular",
   "titleWeight": "medium",
   "valueScale": 1.3,
   "chart": "ring",
-  "iconStyle": "circle"
+  "iconStyle": "circle",
+  "titleScale": 0.86
  },
  {
   "id": "riche-gaufre",
@@ -362,12 +364,13 @@
   "layout": "horizontal",
   "density": "dense",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "bold",
   "titleWeight": "bold",
   "valueScale": 1.0,
   "chart": "histogram",
-  "iconStyle": "square"
+  "iconStyle": "square",
+  "titleScale": 0.86
  },
  {
   "id": "riche-boudoir",
@@ -432,12 +435,13 @@
   "layout": "horizontal",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "regular",
   "titleWeight": "bold",
   "valueScale": 1.0,
   "chart": "line",
-  "iconStyle": "outline"
+  "iconStyle": "outline",
+  "titleScale": 0.86
  },
  {
   "id": "riche-bibliotheque",
@@ -486,13 +490,13 @@
    "dir": "radial"
   },
   "font": "theme",
-  "fontName": "AvenirNextCondensed-UltraLight",
+  "fontName": "AvenirNextCondensed-Regular",
   "textHex": "F7F7FA",
   "secondaryHex": "B4B4C4",
   "numberHex": "FFFFFF",
   "chartHex": "FFFFFF",
   "texture": "snow",
-  "textureOpacity": 0.4,
+  "textureOpacity": 0.22,
   "border": "glow",
   "borderHex": "FFFFFF",
   "borderWidth": 0.75,
@@ -503,8 +507,8 @@
   "density": "compact",
   "titleCase": "upper",
   "tracking": 3,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.25,
   "chart": "sparkline",
   "iconStyle": "none"
@@ -536,12 +540,13 @@
   "layout": "split",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.8,
   "numberWeight": "bold",
   "titleWeight": "bold",
   "valueScale": 1.0,
   "chart": "comparison",
-  "iconStyle": "circle"
+  "iconStyle": "circle",
+  "titleScale": 0.86
  },
  {
   "id": "riche-chateau",
@@ -632,7 +637,7 @@
   "border": "inset",
   "borderHex": "C9CCD2",
   "borderWidth": 0.75,
-  "depth": "longShadow",
+  "depth": "hardShadow",
   "shadowHex": "000000",
   "shape": "square",
   "layout": "minimal",
@@ -643,7 +648,9 @@
   "titleWeight": "medium",
   "valueScale": 1.3,
   "chart": "line",
-  "iconStyle": "none"
+  "iconStyle": "none",
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "riche-ivoire-dore",
@@ -700,7 +707,7 @@
   "numberHex": "D9E3F8",
   "chartHex": "C7D3EE",
   "texture": "diagonal",
-  "textureOpacity": 0.25,
+  "textureOpacity": 0.22,
   "border": "stitched",
   "borderHex": "C7D3EE",
   "borderWidth": 1.5,
@@ -720,7 +727,7 @@
   "name": "Ambre Doré",
   "summary": "Ambre fondu, verre doré, bord lumineux",
   "theme": "dark",
-  "accent": "F0B24A",
+  "accent": "60471E",
   "bg": {
    "kind": "glass"
   },
@@ -809,12 +816,13 @@
   "layout": "centered",
   "density": "compact",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.8,
   "numberWeight": "bold",
   "titleWeight": "regular",
   "valueScale": 1.2,
   "chart": "ring",
-  "iconStyle": "none"
+  "iconStyle": "none",
+  "titleScale": 0.86
  },
  {
   "id": "riche-jade",

@@ -61,10 +61,12 @@
   "chart": "bars",
   "density": "compact",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.8,
   "numberWeight": "black",
   "titleWeight": "bold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86,
+  "textScale": 0.86
  },
  {
   "id": "y2k-holo",
@@ -174,7 +176,7 @@
   "name": "Plastique transparent",
   "summary": "Verre teinté violet, bords nets",
   "theme": "dark",
-  "accent": "C58CFF",
+  "accent": "624680",
   "bg": {
    "kind": "glass"
   },
@@ -251,7 +253,7 @@
   "numberHex": "FF4FC3",
   "chartHex": "FF4FC3",
   "texture": "stars",
-  "textureOpacity": 0.35,
+  "textureOpacity": 0.22,
   "border": "dotted",
   "borderHex": "FF4FC3",
   "borderWidth": 3,
@@ -262,10 +264,11 @@
   "chart": "dots",
   "density": "compact",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "heavy",
   "titleWeight": "bold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "y2k-papillon",
@@ -317,11 +320,11 @@
   "font": "theme",
   "fontName": "HelveticaNeue-CondensedBold",
   "textHex": "1A2230",
-  "secondaryHex": "4A5465",
+  "secondaryHex": "3B4351",
   "numberHex": "3A4658",
   "chartHex": "5F6B7A",
   "texture": "brushed",
-  "textureOpacity": 0.35,
+  "textureOpacity": 0.22,
   "border": "bevel",
   "borderHex": "7C8696",
   "borderWidth": 2.5,
@@ -533,7 +536,9 @@
   "tracking": 0,
   "numberWeight": "regular",
   "titleWeight": "bold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "y2k-agrume",
@@ -687,7 +692,7 @@
   "border": "double",
   "borderHex": "FF3D81",
   "borderWidth": 4,
-  "depth": "longShadow",
+  "depth": "hardShadow",
   "shadowHex": "3A0A4F",
   "shape": "rounded",
   "layout": "centered",
@@ -697,7 +702,9 @@
   "tracking": 0,
   "numberWeight": "black",
   "titleWeight": "heavy",
-  "valueScale": 1.1
+  "valueScale": 1.1,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "y2k-nacre",

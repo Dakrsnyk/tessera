@@ -20,7 +20,7 @@
   "border": "solid",
   "borderHex": "111111",
   "borderWidth": 3,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "111111",
   "shape": "soft",
   "layout": "cards",
@@ -30,7 +30,9 @@
   "tracking": 1,
   "numberWeight": "black",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOpacity": 0.18,
+  "shadowOffset": 2
  },
  {
   "id": "ill-carnet",
@@ -189,7 +191,9 @@
   "tracking": 1,
   "numberWeight": "black",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "ill-blueprint",
@@ -374,7 +378,7 @@
   "border": "pixel",
   "borderHex": "FFD93D",
   "borderWidth": 3,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "FF4D6D",
   "shape": "panel",
   "layout": "cards",
@@ -385,7 +389,9 @@
   "numberWeight": "bold",
   "titleWeight": "semibold",
   "valueScale": 1.0,
-  "monospacedNumbers": true
+  "monospacedNumbers": true,
+  "shadowOpacity": 0.18,
+  "shadowOffset": 2
  },
  {
   "id": "ill-collage",
@@ -460,7 +466,7 @@
   },
   "accent": "C0392B",
   "font": "standard",
-  "fontName": "AvenirNext-UltraLight",
+  "fontName": "AvenirNext-Regular",
   "textHex": "1D2A33",
   "secondaryHex": "55646E",
   "numberHex": "C0392B",
@@ -476,8 +482,8 @@
   "density": "dense",
   "titleCase": "smallCaps",
   "tracking": 2,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.0
  },
  {
@@ -557,7 +563,7 @@
   "fontName": "PartyLetPlain",
   "textHex": "3A0A1A",
   "secondaryHex": "7A2A4A",
-  "numberHex": "D81E5B",
+  "numberHex": "C21B52",
   "chartHex": "D81E5B",
   "texture": "diagonal",
   "textureOpacity": 0.2,
@@ -696,10 +702,11 @@
   "chart": "evolution",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.8,
   "numberWeight": "black",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "ill-gravure",
@@ -743,13 +750,13 @@
   },
   "accent": "FFB347",
   "font": "standard",
-  "fontName": "Copperplate-Light",
+  "fontName": "Copperplate",
   "textHex": "FFF4E0",
   "secondaryHex": "D8C8F0",
   "numberHex": "FFB347",
   "chartHex": "FFB347",
   "texture": "web",
-  "textureOpacity": 0.4,
+  "textureOpacity": 0.22,
   "border": "solid",
   "borderHex": "FFB347",
   "borderWidth": 3,
@@ -760,10 +767,11 @@
   "chart": "pie",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "regular",
   "titleWeight": "regular",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "ill-cinema",
@@ -793,9 +801,10 @@
   "chart": "gauge",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.5,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.8
  }
 ]

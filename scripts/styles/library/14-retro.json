@@ -55,7 +55,7 @@
   "chartHex": "FF7A3D",
   "texture": "sunburst",
   "textureOpacity": 0.3,
-  "depth": "longShadow",
+  "depth": "hardShadow",
   "shadowHex": "FF7A3D",
   "shape": "panel",
   "layout": "horizontal",
@@ -66,7 +66,9 @@
   "tracking": 3,
   "numberWeight": "black",
   "titleWeight": "heavy",
-  "valueScale": 1.25
+  "valueScale": 1.25,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "retro-synthwave",
@@ -99,10 +101,11 @@
   "density": "compact",
   "iconStyle": "outline",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.5,
   "numberWeight": "bold",
   "titleWeight": "bold",
-  "valueScale": 1.1
+  "valueScale": 1.1,
+  "titleScale": 0.8
  },
  {
   "id": "retro-memphis",
@@ -125,7 +128,7 @@
   "border": "solid",
   "borderHex": "1B1B2F",
   "borderWidth": 3,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "FF5A8A",
   "shape": "square",
   "layout": "cards",
@@ -136,7 +139,9 @@
   "tracking": 1,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.1
+  "valueScale": 1.1,
+  "shadowOpacity": 0.18,
+  "shadowOffset": 2
  },
  {
   "id": "retro-cassette",
@@ -292,10 +297,11 @@
   "density": "compact",
   "iconStyle": "none",
   "titleCase": "upper",
-  "tracking": 4,
+  "tracking": 0.8,
   "numberWeight": "heavy",
   "titleWeight": "medium",
-  "valueScale": 1.4
+  "valueScale": 1.4,
+  "titleScale": 0.86
  },
  {
   "id": "retro-win95",
@@ -358,10 +364,11 @@
   "density": "compact",
   "iconStyle": "square",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.05
+  "valueScale": 1.05,
+  "titleScale": 0.86
  },
  {
   "id": "retro-tv-crt",
@@ -429,7 +436,9 @@
   "tracking": 0,
   "numberWeight": "bold",
   "titleWeight": "bold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "retro-boombox",
@@ -549,11 +558,11 @@
   "font": "theme",
   "fontName": "Verdana-Bold",
   "textHex": "1B1D22",
-  "secondaryHex": "4A4E57",
+  "secondaryHex": "43464E",
   "numberHex": "1B1D22",
   "chartHex": "FFB400",
   "texture": "brushed",
-  "textureOpacity": 0.35,
+  "textureOpacity": 0.22,
   "border": "bevel",
   "borderHex": "FFB400",
   "borderWidth": 2,
@@ -597,10 +606,11 @@
   "density": "balanced",
   "iconStyle": "square",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.5,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.1
+  "valueScale": 1.1,
+  "titleScale": 0.8
  },
  {
   "id": "retro-minitel",
@@ -619,7 +629,7 @@
   "numberHex": "FFFFFF",
   "chartHex": "7CFFB0",
   "texture": "pixels",
-  "textureOpacity": 0.25,
+  "textureOpacity": 0.22,
   "border": "dotted",
   "borderHex": "7CFFB0",
   "borderWidth": 2,
@@ -657,10 +667,11 @@
   "density": "balanced",
   "iconStyle": "square",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "bold",
   "titleWeight": "bold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "retro-flipclock",
@@ -724,10 +735,11 @@
   "density": "compact",
   "iconStyle": "outline",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.8,
   "numberWeight": "bold",
   "titleWeight": "bold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "retro-diner",

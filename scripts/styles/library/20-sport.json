@@ -404,7 +404,7 @@
   "border": "solid",
   "borderHex": "111111",
   "borderWidth": 3,
-  "depth": "longShadow",
+  "depth": "hardShadow",
   "shadowHex": "111111",
   "shape": "panel",
   "layout": "horizontal",
@@ -414,7 +414,9 @@
   "tracking": 2,
   "numberWeight": "heavy",
   "titleWeight": "semibold",
-  "valueScale": 1.25
+  "valueScale": 1.25,
+  "shadowOffset": 2,
+  "shadowOpacity": 0.14
  },
  {
   "id": "sp-ring",
@@ -430,7 +432,7 @@
   "fontName": "AmericanTypewriter-CondensedBold",
   "textHex": "FFF2F2",
   "secondaryHex": "E0B5B5",
-  "numberHex": "FF3B3B",
+  "numberHex": "FF7B7B",
   "chartHex": "FF3B3B",
   "border": "double",
   "borderHex": "FF3B3B",
@@ -700,10 +702,11 @@
   "chart": "bars",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "black",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "sp-golf",
@@ -787,7 +790,7 @@
   "border": "pixel",
   "borderHex": "00E5FF",
   "borderWidth": 2,
-  "depth": "hardShadow",
+  "depth": "soft",
   "shadowHex": "FF2BD6",
   "shape": "panel",
   "layout": "cards",
@@ -797,6 +800,7 @@
   "tracking": 1,
   "numberWeight": "black",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "shadowOpacity": 0.18
  }
 ]

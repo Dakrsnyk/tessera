@@ -92,10 +92,11 @@
   "chart": "bars",
   "density": "compact",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.5,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.15
+  "valueScale": 1.15,
+  "titleScale": 0.8
  },
  {
   "id": "jeu-rgb",
@@ -231,10 +232,11 @@
   "chart": "dots",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 4,
+  "tracking": 0.5,
   "numberWeight": "heavy",
   "titleWeight": "black",
-  "valueScale": 1.15
+  "valueScale": 1.15,
+  "titleScale": 0.8
  },
  {
   "id": "jeu-score",
@@ -262,10 +264,11 @@
   "chart": "histogram",
   "density": "dense",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "bold",
   "titleWeight": "regular",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "jeu-pause",
@@ -280,7 +283,7 @@
    "dir": "radial"
   },
   "font": "theme",
-  "fontName": "HelveticaNeue-UltraLight",
+  "fontName": "HelveticaNeue",
   "textHex": "FFFFFF",
   "secondaryHex": "C0C0C8",
   "numberHex": "FFFFFF",
@@ -294,8 +297,8 @@
   "density": "compact",
   "titleCase": "upper",
   "tracking": 4,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.3
  },
  {
@@ -427,10 +430,11 @@
   "chart": "line",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.8,
   "numberWeight": "regular",
   "titleWeight": "semibold",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.86
  },
  {
   "id": "jeu-course",
@@ -486,7 +490,7 @@
   "numberHex": "D2B8FF",
   "chartHex": "B48CFF",
   "texture": "stars",
-  "textureOpacity": 0.3,
+  "textureOpacity": 0.22,
   "border": "glow",
   "borderHex": "B48CFF",
   "borderWidth": 1.5,
@@ -532,10 +536,11 @@
   "chart": "bars",
   "density": "balanced",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.5,
   "numberWeight": "black",
   "titleWeight": "heavy",
-  "valueScale": 1.0
+  "valueScale": 1.0,
+  "titleScale": 0.8
  },
  {
   "id": "jeu-nuit-stream",
@@ -664,10 +669,11 @@
   "chart": "ring",
   "density": "compact",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.5,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.2
+  "valueScale": 1.2,
+  "titleScale": 0.8
  },
  {
   "id": "jeu-casque",
@@ -795,10 +801,12 @@
   "chart": "evolution",
   "density": "dense",
   "titleCase": "upper",
-  "tracking": 2,
+  "tracking": 0.8,
   "numberWeight": "bold",
   "titleWeight": "bold",
-  "valueScale": 0.95
+  "valueScale": 0.95,
+  "titleScale": 0.86,
+  "textScale": 0.86
  },
  {
   "id": "jeu-speedrun",

@@ -76,13 +76,13 @@
    "dir": "up"
   },
   "font": "standard",
-  "fontName": "HelveticaNeue-Thin",
+  "fontName": "HelveticaNeue",
   "textHex": "F2F4F7",
   "secondaryHex": "A9B0BB",
   "numberHex": "B9C2CF",
   "chartHex": "B9C2CF",
   "texture": "noise",
-  "textureOpacity": 0.3,
+  "textureOpacity": 0.22,
   "border": "solid",
   "borderHex": "5B6069",
   "borderWidth": 1,
@@ -93,8 +93,8 @@
   "chart": "sparkline",
   "titleCase": "lower",
   "tracking": 0,
-  "numberWeight": "light",
-  "titleWeight": "light",
+  "numberWeight": "regular",
+  "titleWeight": "medium",
   "valueScale": 1.25
  },
  {
@@ -191,10 +191,11 @@
   "layout": "list",
   "chart": "histogram",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.5,
   "numberWeight": "bold",
   "titleWeight": "heavy",
-  "density": "dense"
+  "density": "dense",
+  "titleScale": 0.8
  },
  {
   "id": "biseau-gris",
@@ -370,13 +371,13 @@
    "hex": "C9CDD2"
   },
   "font": "standard",
-  "fontName": "Helvetica-Light",
+  "fontName": "Helvetica",
   "textHex": "111418",
   "secondaryHex": "3E4651",
-  "numberHex": "526071",
+  "numberHex": "4A5666",
   "chartHex": "526071",
   "texture": "noise",
-  "textureOpacity": 0.4,
+  "textureOpacity": 0.22,
   "border": "none",
   "borderHex": "526071",
   "borderWidth": 1.5,
@@ -387,7 +388,7 @@
   "chart": "progress",
   "titleCase": "lower",
   "tracking": 0,
-  "numberWeight": "light",
+  "numberWeight": "regular",
   "titleWeight": "regular"
  },
  {
@@ -450,10 +451,11 @@
   "layout": "graph",
   "chart": "histogram",
   "titleCase": "upper",
-  "tracking": 1,
+  "tracking": 0.5,
   "numberWeight": "black",
   "titleWeight": "black",
-  "valueScale": 1.2
+  "valueScale": 1.2,
+  "titleScale": 0.8
  },
  {
   "id": "etain",
@@ -644,9 +646,10 @@
   "layout": "split",
   "chart": "bars",
   "titleCase": "upper",
-  "tracking": 3,
+  "tracking": 0.5,
   "numberWeight": "heavy",
-  "titleWeight": "semibold"
+  "titleWeight": "semibold",
+  "titleScale": 0.8
  },
  {
   "id": "tole-ondulee",
@@ -692,13 +695,13 @@
    "dir": "down"
   },
   "font": "standard",
-  "fontName": "AvenirNextCondensed-UltraLight",
+  "fontName": "AvenirNextCondensed-Regular",
   "textHex": "16181C",
   "secondaryHex": "4F5661",
-  "numberHex": "69737E",
+  "numberHex": "545C65",
   "chartHex": "7C8794",
-  "texture": "none",
-  "textureOpacity": 0.2,
+  "texture": "brushed",
+  "textureOpacity": 0.12,
   "border": "inset",
   "borderHex": "B7BCC4",
   "borderWidth": 1.5,
@@ -709,7 +712,7 @@
   "chart": "sparkline",
   "titleCase": "upper",
   "tracking": 4,
-  "numberWeight": "light",
+  "numberWeight": "regular",
   "titleWeight": "medium",
   "valueScale": 1.3
  },
