@@ -197,7 +197,7 @@ final class DailyDefaultsTests: XCTestCase {
         var state = BudgetState()
         state.add(Expense(amount: 40, categoryID: nil, note: "Cadeau", date: wednesday(9).addingTimeInterval(30 * 86_400)))
         state.add(Expense(amount: 5, categoryID: nil, note: "Café", date: wednesday(9)))
-        let items = BudgetMath.upcoming(state, at: wednesday(12), within: 14)
+        let items = BudgetMath.upcoming(state, at: wednesday(12), within: 400)   // the Finances screen keeps everything ahead
         XCTAssertEqual(items.map(\.name), ["Cadeau"])
         XCTAssertEqual(items.first?.days, 30)
     }

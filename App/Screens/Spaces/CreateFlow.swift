@@ -76,8 +76,8 @@ enum CreateCategory: Hashable, Identifiable {
     }
 
     /// One look for every widget of the category (PDG, 2026-11-22): the same example style across a section, a
-    /// different one from a section to the next (no two categories share a theme and an accent). Free themes and
-    /// accents only, so the widget opened in the Studio is the one shown, with or without Premium.
+    /// different one from a section to the next (no two categories share a theme and an accent). Free themes (the 4
+    /// original styles, 2026-11-26) and accents only, so the widget opened in the Studio is the one shown, with or without Premium.
     var look: (theme: ThemeID, accentHex: String) {
         switch self {
         case .time: return (.minimal, "3366FF")
@@ -85,17 +85,17 @@ enum CreateCategory: Hashable, Identifiable {
         case let .space(space):
             switch space {
             case .productivity: return (.monochrome, "6B7280")
-            case .habits: return (.forest, "7FA33A")
-            case .nutrition: return (.card, "F2A33A")
+            case .habits: return (.dark, "7FA33A")
+            case .nutrition: return (.light, "F2A33A")
             case .fitness: return (.dark, "FF6B57")
             case .budget: return (.light, "2F8F7A")
-            case .investing: return (.modern, "8C6CFF")
-            case .business: return (.compact, "F2A33A")
-            case .markets: return (.modern, "3366FF")
-            case .student: return (.soft, "F2588F")
-            case .travel: return (.glacier, "3366FF")
-            case .car: return (.compact, "6B7280")
-            case .life: return (.soft, "8C6CFF")
+            case .investing: return (.minimal, "8C6CFF")
+            case .business: return (.dark, "F2A33A")
+            case .markets: return (.light, "3366FF")
+            case .student: return (.light, "F2588F")
+            case .travel: return (.dark, "3366FF")
+            case .car: return (.minimal, "6B7280")
+            case .life: return (.light, "8C6CFF")
             }
         }
     }
