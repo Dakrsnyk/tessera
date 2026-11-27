@@ -1011,6 +1011,7 @@ struct SegmentsRoundChart: View {
     let style: ResolvedStyle
     var hole: CGFloat = 0.6
     var showsLegend = false
+    var legendLimit = 5
 
     var body: some View {
         let total = max(segments.reduce(0) { $0 + max(0, $1.value) }, 0.000_1)
@@ -1033,7 +1034,7 @@ struct SegmentsRoundChart: View {
             .aspectRatio(1, contentMode: .fit)
             if showsLegend {
                 VStack(alignment: .leading, spacing: 4) {
-                    ForEach(Array(segments.prefix(5).enumerated()), id: \.offset) { pair in
+                    ForEach(Array(segments.prefix(legendLimit).enumerated()), id: \.offset) { pair in
                         HStack(spacing: 5) {
                             Circle().fill(style.partColor(pair.element.colorHex, at: pair.offset)).frame(width: 7, height: 7)
                             Text(pair.element.label)
@@ -1041,11 +1042,10 @@ struct SegmentsRoundChart: View {
                                 .foregroundStyle(style.primary)
                                 .lineLimit(1)
                             Spacer(minLength: 2)
-                            if style.options.chartValues {
-                                Text(Fmt.percent(max(0, pair.element.value) / total))
-                                    .font(style.text(10, .semibold).monospacedDigit())
-                                    .foregroundStyle(style.secondary)
-                            }
+                            // The share is always written: a donut without it explains nothing.
+                            Text(Fmt.percent(max(0, pair.element.value) / total))
+                                .font(style.text(10, .semibold).monospacedDigit())
+                                .foregroundStyle(style.secondary)
                         }
                     }
                 }
@@ -1058,6 +1058,8 @@ struct SegmentsRoundChart: View {
 struct SegmentsBarsChart: View {
     let segments: [TileSegment]
     let style: ResolvedStyle
+    /// Each bar's name under it.
+    var showsNames = false
 
     var body: some View {
         let top = max(segments.map(\.value).max() ?? 0, 0.000_1)
@@ -1073,7 +1075,14 @@ struct SegmentsBarsChart: View {
                         }
                         RoundedRectangle(cornerRadius: style.radius(3), style: .continuous)
                             .fill(style.partColor(pair.element.colorHex, at: pair.offset))
-                            .frame(height: max(3, (geo.size.height - (style.options.chartValues ? 14 : 0)) * CGFloat(max(0, pair.element.value) / top)))
+                            .frame(height: max(3, (geo.size.height - (style.options.chartValues ? 14 : 0) - (showsNames ? 14 : 0)) * CGFloat(max(0, pair.element.value) / top)))
+                        if showsNames {
+                            Text(pair.element.label)
+                                .font(style.text(9))
+                                .foregroundStyle(style.secondary)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.6)
+                        }
                     }
                     .frame(maxWidth: .infinity)
                 }

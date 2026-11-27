@@ -158,7 +158,7 @@ struct TileView: View {
             } else {
                 // Words rather than a figure (a revision card, a session's name): up to three lines a little smaller,
                 // not one line cut after two letters (« Ce »).
-                let isWords = tile.value.count > 6 && tile.value.contains(" ") && !(tile.value.first?.isNumber ?? false)
+                let isWords = valueIsWords
                 HStack(alignment: .firstTextBaseline, spacing: 3) {
                     Text(tile.value)
                         .font(s.number(isWords ? size * 0.72 : size))
@@ -244,9 +244,91 @@ struct TileView: View {
         }
     }
 
+    /// A chart only where it can be read: in a small widget, a jagged curve without a single label says nothing, and a
+    /// part bar whose lines are shown instead has them as its legend (PDG, 2026-11-27). It is simply not drawn.
     private var hasVisual: Bool {
-        if case .none = tile.visual { return false }
-        return true
+        switch tile.visual {
+        case .none: return false
+        case let .line(values): return !(context.isSmall && Self.isJagged(values))
+        case .segments: return !(context.isSmall && !tile.rows.isEmpty)
+        default: return true
+        }
+    }
+
+    /// More than half of the points turn around: a saw tooth.
+    private static func isJagged(_ values: [Double]) -> Bool {
+        guard values.count >= 6 else { return false }
+        var turns = 0
+        for index in 1..<(values.count - 1) where (values[index] - values[index - 1]) * (values[index + 1] - values[index]) < 0 {
+            turns += 1
+        }
+        return turns * 2 > values.count - 2
+    }
+
+    /// The parts bar of a widget that also has its lines (Macros): the lines are its legend, with the amounts.
+    private var segmentsWithRows: Bool {
+        isSegments && !tile.rows.isEmpty && s.options.chart == .auto
+    }
+
+    private var valueIsWords: Bool {
+        tile.value.count > 6 && tile.value.contains(" ") && !(tile.value.first?.isNumber ?? false)
+    }
+
+    // MARK: Room (estimates fixed by size, never measured: ViewThatFits and measuring froze the app)
+
+    /// The height a widget really holds below its insets, by size (smallest usual iPhone, so nothing is cut there).
+    private var room: CGFloat { context.isLarge ? 296 : 118 }
+
+    private var headerCost: CGFloat {
+        (s.showsTitle || tile.headerButton != nil ? 17 : 0) + (s.showsTitle && showsIcon && s.options.iconPosition == .top ? 19 : 0)
+    }
+
+    private func valueCost(_ size: CGFloat) -> CGFloat {
+        guard hasValue else { return 0 }
+        return size * (valueIsWords ? 0.72 * 1.2 * CGFloat(min(3, max(1, (tile.value.count + 11) / 12))) : 1.2)
+    }
+
+    private func captionCost(_ lines: Int) -> CGFloat {
+        guard let caption = tile.caption else { return 0 }
+        let perLine = context.isLarge ? 48 : (context.isSmall ? 20 : 24)
+        return CGFloat(min(lines, max(1, (caption.count + perLine - 1) / perLine))) * 15
+    }
+
+    private var detailCost: CGFloat {
+        guard let detail = tile.detail, s.showsDetails else { return 0 }
+        return detail.count > 28 ? 28 : 14
+    }
+
+    private var footnoteCost: CGFloat { showsFootnote && tile.footnote != nil ? 24 : 0 }
+    private var buttonsCost: CGFloat { tile.buttons.isEmpty ? 0 : 38 }
+
+    private func rowCost(_ row: TileRow, compact: Bool) -> CGFloat {
+        (compact ? 15 : 16)
+            + (row.progress != nil ? (compact ? 6 : 7) : 0)
+            + (!compact && s.showsDetails && row.detail != nil ? 12 : 0)
+    }
+
+    /// The first `limit` lines that fit in what is left under `used` points of the widget: never a line cut at the bottom.
+    private func fitted(_ limit: Int, compact: Bool, used: CGFloat, from source: [TileRow]? = nil) -> [TileRow] {
+        let gap = (compact ? 5 : 7) * sp
+        var left = room - used
+        var result: [TileRow] = []
+        for row in (source ?? tile.rows).prefix(max(0, limit)) {
+            let cost = rowCost(row, compact: compact) + (result.isEmpty ? 0 : gap)
+            guard cost <= left else { break }
+            left -= cost
+            result.append(row)
+        }
+        return result
+    }
+
+    /// The height of a small chart in a widget that gives it a strip: the days under bars, the names under parts.
+    private func stripHeight(_ standard: CGFloat) -> CGFloat {
+        if chosenChartIsRound { return 64 }
+        if isRing { return 44 }
+        if isSegments { return 36 }
+        if case let .bars(_, labels, _) = tile.visual, !labels.isEmpty { return max(standard, 38) }
+        return standard
     }
 
     private var hasValue: Bool {
@@ -262,9 +344,9 @@ struct TileView: View {
         Array(tile.rows.prefix(max(0, limit + s.rowDelta)))
     }
 
-    private func visual(compact: Bool) -> some View {
+    private func visual(compact: Bool, namedByRows: Bool = false) -> some View {
         // The values written on a chart (end value, change, bar values) are amounts on money widgets.
-        TileVisualView(visual: tile.visual, context: context, compact: compact, ringHex: tile.ringHex)
+        TileVisualView(visual: tile.visual, context: context, compact: compact, ringHex: tile.ringHex, namedByRows: namedByRows)
             .privacySensitive(tile.isSensitive)
             .styleDepth(s)
     }
@@ -318,7 +400,7 @@ struct TileView: View {
         } else if tile.compactRows && !tile.rows.isEmpty && !prefersChosenChart {
             VStack(alignment: .leading, spacing: 6 * sp) {
                 headerBlock
-                TileRowsView(rows: rows(4), context: context, compact: true)
+                TileRowsView(rows: fitted(4 + s.rowDelta, compact: true, used: headerCost + 6 * sp), context: context, compact: true)
                 Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -329,7 +411,9 @@ struct TileView: View {
                 headerBlock
                 if hasValue { valueText(tile.value.count > 7 ? 22 : 28) }
                 captionText(lines: 1)
-                TileRowsView(rows: Array(tile.rows.prefix(2)), context: context, compact: true)
+                TileRowsView(rows: fitted(2 + s.rowDelta, compact: true,
+                                          used: headerCost + valueCost(tile.value.count > 7 ? 22 : 28) + captionCost(1) + 13 * sp + 4),
+                             context: context, compact: true)
                     .padding(.top, 4)
                 Spacer(minLength: 0)
             }
@@ -347,7 +431,7 @@ struct TileView: View {
                         .padding(.top, 6)
                 } else if hasVisual {
                     visual(compact: true)
-                        .frame(height: chosenChartIsRound ? 64 : (isRing ? 44 : 26))
+                        .frame(height: stripHeight(26))
                         .padding(.top, 6)
                 }
             }
@@ -400,7 +484,10 @@ struct TileView: View {
         }
         if !tile.rows.isEmpty {
             return AnyView(MediumRowsPanel(
-                rows: rows(mediumRowLimit), buttons: Array(tile.buttons.prefix(2)), context: context,
+                // As many lines as the panel holds under its title and above its buttons (and its rest bar), none cut.
+                rows: fitted(mediumRowLimit + s.rowDelta, compact: false,
+                             used: headerCost + 4 * sp + (tile.buttons.isEmpty ? 0 : buttonsCost + (hasVisual && isTimer ? 13 : 0))),
+                buttons: Array(tile.buttons.prefix(2)), context: context,
                 // The rest of « Prochaine série » stays visible above its buttons, as a thin line.
                 rest: hasVisual && isTimer && !tile.buttons.isEmpty ? AnyView(visual(compact: true)) : nil
             ))
@@ -436,12 +523,17 @@ struct TileView: View {
                 detailText
             }
             if hasVisual {
-                visual(compact: !tile.rows.isEmpty && isSegments && s.options.chart == .auto)
-                    .chartHeight(tile.rows.isEmpty ? 150 : (isSegments && s.options.chart == .auto ? 14 : 86), fills: fillsHeight || tile.rows.isEmpty)
+                visual(compact: segmentsWithRows, namedByRows: segmentsWithRows)
+                    .chartHeight(tile.rows.isEmpty ? 150 : (segmentsWithRows ? 14 : 86), fills: fillsHeight || tile.rows.isEmpty)
                     .clipped()
             }
             if !tile.rows.isEmpty {
-                TileRowsView(rows: rows(hasVisual ? 5 : 8), context: context, compact: false)
+                // What the chart, the figure and the buttons leave, in whole lines.
+                let chartCost: CGFloat = hasVisual ? (segmentsWithRows ? 14 : 86) + 10 * sp : 0
+                TileRowsView(rows: fitted((hasVisual ? 5 : 8) + s.rowDelta, compact: false,
+                                          used: headerCost + 10 * sp + valueCost(40) + captionCost(hasValue ? 3 : 6) + detailCost + 10 * sp
+                                              + chartCost + buttonsCost + footnoteCost),
+                             context: context, compact: false)
             }
             Spacer(minLength: 0)
             if !tile.buttons.isEmpty {
@@ -482,22 +574,34 @@ struct TileView: View {
 
     private var verticalStack: some View {
         let valueSize: CGFloat = context.isSmall ? 30 : (context.isLarge ? 46 : 34)
-        let chartHeight: CGFloat = context.isSmall ? 30 : (context.isLarge ? 120 : 42)
+        // A large widget's chart gives height to its lines (the widget's own subject) instead of leaving a tall chart alone.
+        let chartHeight: CGFloat = context.isSmall ? stripHeight(30) : (context.isLarge ? (tile.rows.isEmpty ? 120 : 80) : 42)
+        let showsChart = hasVisual && (tile.buttons.isEmpty || !context.isSmall)
+        let captionLines = context.isSmall || (context.isMedium && hasVisual) ? 2 : 3
+        // The lines (compact in small and medium) that fit under what is already shown, for a given chart height.
+        func rowsFor(chart: CGFloat) -> [TileRow] {
+            guard !tile.rows.isEmpty, context.isLarge || tile.buttons.isEmpty else { return [] }
+            let used = headerCost + valueCost(tile.value.count > 7 ? valueSize * 0.8 : valueSize) + captionCost(captionLines)
+                + (context.isSmall ? 0 : detailCost) + (showsChart ? chart : 0) + buttonsCost + (showsFootnote ? footnoteCost : 0) + 25 * sp
+            return fitted((context.isLarge ? (hasVisual ? 4 : 7) : 4) + s.rowDelta, compact: !context.isLarge, used: used)
+        }
+        // A parts bar whose lines fit under it is named by them (with their amounts), as a thin bar.
+        let thinRows = segmentsWithRows && showsChart ? rowsFor(chart: 14) : []
+        let named = !thinRows.isEmpty
+        let shownRows = named ? thinRows : rowsFor(chart: chartHeight)
         return VStack(alignment: s.horizontalAlignment, spacing: 5 * sp) {
             headerBlock
             if hasValue { valueText(tile.value.count > 7 ? valueSize * 0.8 : valueSize) }
-            captionText(lines: context.isSmall || (context.isMedium && hasVisual) ? 2 : 3)
+            captionText(lines: captionLines)
             if !context.isSmall { detailText }
-            if hasVisual && (tile.buttons.isEmpty || !context.isSmall) {
-                visual(compact: context.isSmall)
+            if showsChart {
+                visual(compact: context.isSmall || named, namedByRows: named)
                     // A large widget's chart takes the height left (bars on a third, two thirds empty below).
-                    .chartHeight(chartHeight, fills: fillsHeight || growsInRoom || (context.isLarge && tile.rows.isEmpty))
+                    .chartHeight(named ? 14 : chartHeight, fills: fillsHeight || growsInRoom || (context.isLarge && tile.rows.isEmpty))
                     .frame(maxWidth: .infinity)
             }
-            if context.isLarge && !tile.rows.isEmpty {
-                TileRowsView(rows: rows(hasVisual ? 4 : 7), context: context, compact: false)
-            } else if context.isMedium && !hasVisual && !tile.rows.isEmpty {
-                TileRowsView(rows: rows(2), context: context, compact: true)
+            if !shownRows.isEmpty {
+                TileRowsView(rows: shownRows, context: context, compact: !context.isLarge)
             }
             Spacer(minLength: 0)
             buttonsRow(context.isSmall ? 2 : 3)
@@ -525,21 +629,26 @@ struct TileView: View {
                 if let progress = tile.visual.progressValue {
                     miniProgress(progress)
                         .frame(width: context.isSmall ? 50 : 66, height: context.isSmall ? 50 : 66)
-                } else if let values = tile.visual.seriesValues {
-                    SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 2, showsEndDot: true)
+                } else if hasVisual, let values = tile.visual.seriesValues {
+                    SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 2, showsEndDot: true, showsEndValue: !context.isSmall)
                         .frame(width: context.isSmall ? 60 : 128, height: context.isSmall ? 38 : 58)
                         .styleDepth(s)
                 }
             }
+            // The lines (the widget's subject) that fit under the title, the figure and the chart.
+            let figureHeight = max(valueCost(context.isSmall ? 24 : (context.isLarge ? 38 : 30)) + captionCost(2),
+                                   tile.visual.progressValue != nil ? 66 : (hasVisual && tile.visual.seriesValues != nil ? 58 : 0))
+            let aboveRows = headerCost + 32 * sp + figureHeight + buttonsCost
             if context.isLarge {
-                if hasVisual && progressFraction == nil && tile.visual.seriesValues == nil {
+                let drawsChart = hasVisual && progressFraction == nil && tile.visual.seriesValues == nil
+                if drawsChart {
                     visual(compact: false).chartHeight(110, fills: fillsHeight)
                 }
                 if !tile.rows.isEmpty {
-                    TileRowsView(rows: rows(5), context: context, compact: false)
+                    TileRowsView(rows: fitted(5 + s.rowDelta, compact: false, used: aboveRows + (drawsChart ? 118 : 0)), context: context, compact: false)
                 }
             } else if context.isMedium && !tile.rows.isEmpty && tile.buttons.isEmpty {
-                TileRowsView(rows: rows(1), context: context, compact: true)
+                TileRowsView(rows: fitted(1 + s.rowDelta, compact: true, used: aboveRows), context: context, compact: true)
             }
             Spacer(minLength: 0)
             if !context.isSmall { buttonsRow(3) }
@@ -555,9 +664,13 @@ struct TileView: View {
         default:
             ZStack {
                 RingView(progress: progress, lineWidth: 6 * CGFloat(s.options.chartThickness), color: s.chart, track: s.options.chartFill ? s.track : .clear)
-                if s.options.chartValues {
-                    Text(Fmt.percent(progress)).font(s.text(10, .semibold).monospacedDigit()).foregroundStyle(s.primary)
-                }
+                // The ring always says its percentage: a ring alone explains nothing.
+                Text(Fmt.percent(progress))
+                    .font(s.text(10, .semibold).monospacedDigit())
+                    .foregroundStyle(s.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .padding(.horizontal, 8)
             }
             .styleDepth(s)
         }
@@ -597,9 +710,12 @@ struct TileView: View {
                     .padding(.vertical, 6)
                 Group {
                     if !tile.rows.isEmpty {
-                        TileRowsView(rows: rows(context.isLarge ? 8 : 4), context: context, compact: !context.isLarge)
+                        // The whole height is the lines' (the title sits in the figure's column): whole lines only.
+                        TileRowsView(rows: fitted((context.isLarge ? 8 : 4) + s.rowDelta, compact: !context.isLarge, used: 0),
+                                     context: context, compact: !context.isLarge)
                     } else {
-                        visual(compact: true)
+                        // Half the width and the whole height: room for the days, the values and the names of the parts.
+                        visual(compact: false)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -641,6 +757,13 @@ struct TileView: View {
                 if hasValue { valueText(context.isSmall ? 22 : (context.isLarge ? 36 : 30)) }
                 captionText(lines: context.isLarge ? 4 : 3)
                 if context.isLarge { detailText }
+                // A large widget has room under the figure for the widget's chart (its lines are in the other column).
+                if context.isLarge && hasVisual && !tile.rows.isEmpty && !fillsHeight {
+                    visual(compact: false)
+                        .frame(height: isSegments ? 120 : 90)
+                        .clipped()
+                        .padding(.top, 6)
+                }
                 Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -649,7 +772,9 @@ struct TileView: View {
                 .frame(width: 1)
             VStack(alignment: .leading, spacing: 6 * sp) {
                 if !tile.rows.isEmpty {
-                    TileRowsView(rows: rows(context.isSmall ? 3 : (context.isLarge ? 9 : 4)), context: context, compact: !context.isLarge)
+                    TileRowsView(rows: fitted((context.isSmall ? 3 : (context.isLarge ? 9 : 4)) + s.rowDelta, compact: !context.isLarge,
+                                              used: context.isSmall ? 0 : buttonsCost),
+                                 context: context, compact: !context.isLarge)
                 } else if hasVisual {
                     visual(compact: context.isSmall)
                 } else if let detail = tile.detail {
@@ -690,7 +815,9 @@ struct TileView: View {
 
     private var dataLayout: some View {
         // A medium widget shows every figure that fits in two rows (the three macros, the session's exercises), not two.
-        let limit = max(1, (context.isSmall ? 2 : (context.isLarge ? 8 : 6)) + (context.isLarge ? s.rowDelta : 0))
+        // Medium: one row of figures (four at most) under a chart, two rows without (a second row under the chart was cut off).
+        let limit = max(1, (context.isSmall ? 2 : (context.isLarge ? 8 : (hasVisual ? 4 : 6))) + (context.isLarge ? s.rowDelta : 0))
+        let named = isSegments && !tile.rows.isEmpty && s.options.chart == .auto
         let shown = Array(stats.prefix(limit))
         let columns = context.isSmall ? 1 : (context.isLarge ? 2 : (shown.count <= 4 ? max(1, shown.count) : 3))
         let chunks = stride(from: 0, to: shown.count, by: columns).map { Array(shown[$0..<min($0 + columns, shown.count)]) }
@@ -709,9 +836,9 @@ struct TileView: View {
                 statGrid(chunks, value: context.isSmall ? 26 : (oneRow ? 26 : 22), other: context.isSmall ? 17 : (oneRow ? 20 : 18))
             }
             if !context.isSmall, hasVisual {
-                visual(compact: context.isMedium)
+                visual(compact: context.isMedium, namedByRows: named)
                     .frame(minHeight: fillsHeight ? 110 : (growsInRoom ? 40 : nil),
-                           maxHeight: fillsHeight || growsInRoom ? .infinity : (context.isLarge ? 110 : 30))
+                           maxHeight: fillsHeight || growsInRoom ? .infinity : (context.isLarge ? 110 : (isSegments && !named ? 36 : 30)))
                     .layoutPriority(fillsHeight || growsInRoom ? 1 : 0)
             }
             Spacer(minLength: 0)
@@ -804,11 +931,13 @@ struct TileView: View {
             captionText(lines: context.isSmall ? 1 : 2)
             if context.isLarge {
                 let withProgress = tile.rows.filter { $0.progress != nil }
+                // Whole lines under the figure, the bar and the caption, above the buttons.
+                let used = headerCost + valueCost(40) + height + captionCost(2) + 30 * sp + 6 + buttonsCost
                 if !withProgress.isEmpty {
-                    TileRowsView(rows: Array(withProgress.prefix(4 + s.rowDelta)), context: context, compact: false)
+                    TileRowsView(rows: fitted(4 + s.rowDelta, compact: false, used: used, from: withProgress), context: context, compact: false)
                         .padding(.top, 6)
                 } else if !tile.rows.isEmpty {
-                    TileRowsView(rows: rows(4), context: context, compact: false)
+                    TileRowsView(rows: fitted(4 + s.rowDelta, compact: false, used: used), context: context, compact: false)
                         .padding(.top, 6)
                 }
                 Spacer(minLength: 0)
@@ -821,7 +950,9 @@ struct TileView: View {
     // MARK: Graph: the value and a large chart
 
     private var graphLayout: some View {
-        VStack(alignment: .leading, spacing: 6 * sp) {
+        // A parts bar is named by the widget's own lines (the macros with their grams) when there are some.
+        let named = segmentsWithRows && !context.isSmall
+        return VStack(alignment: .leading, spacing: 6 * sp) {
             headerBlock
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 if hasValue { valueText(context.isSmall ? 22 : (context.isLarge ? 36 : 26)) }
@@ -839,15 +970,21 @@ struct TileView: View {
                 }
                 .styleDepth(s)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if hasVisual {
-                visual(compact: context.isSmall)
+            } else if hasVisual && !(named && context.isMedium) {
+                visual(compact: context.isSmall || named, namedByRows: named)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
-                TileRowsView(rows: rows(context.isLarge ? 8 : 3), context: context, compact: !context.isLarge)
+                // No room for a chart and its legend in a medium widget: its own lines (with the amounts) instead of the bar.
+                TileRowsView(rows: fitted((context.isLarge ? 8 : 3) + s.rowDelta, compact: !context.isLarge,
+                                          used: headerCost + valueCost(context.isSmall ? 22 : (context.isLarge ? 36 : 26)) + 12 * sp),
+                             context: context, compact: !context.isLarge)
                 Spacer(minLength: 0)
             }
             if context.isLarge, hasVisual, !tile.rows.isEmpty {
-                TileRowsView(rows: rows(3), context: context, compact: true)
+                // Under the chart (which keeps the height left): the lines that fit, whole.
+                TileRowsView(rows: fitted(named ? 6 + s.rowDelta : 3, compact: !named,
+                                          used: headerCost + valueCost(36) + (named ? 30 : 90) + 18 * sp),
+                             context: context, compact: !named)
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
@@ -919,8 +1056,11 @@ struct TileView: View {
             } else {
                 mainCard
                 if context.isLarge && hasVisual {
-                    card { visual(compact: false) }
-                        .frame(minHeight: fillsHeight ? 110 : nil, maxHeight: fillsHeight || growsInRoom ? .infinity : 110)
+                    // The cards below name the parts of a bar: it stays thin; the chart is shorter when two rows of cards follow.
+                    let named = segmentsWithRows && !others.isEmpty
+                    card { visual(compact: named, namedByRows: named) }
+                        .frame(minHeight: fillsHeight ? 110 : nil,
+                               maxHeight: fillsHeight || growsInRoom ? .infinity : (named ? 50 : (others.count > 2 ? 85 : 110)))
                         .layoutPriority(fillsHeight || growsInRoom ? 1 : 0)
                 }
                 if !others.isEmpty {
@@ -1265,9 +1405,55 @@ struct TileVisualView: View {
     let context: RenderContext
     let compact: Bool
     var ringHex: String? = nil
+    /// The widget's own lines name the parts (the three macros under their bar): no legend of its own.
+    var namedByRows = false
 
     private var s: ResolvedStyle { context.style }
     private var thickness: CGFloat { CGFloat(s.options.chartThickness) }
+
+    /// Names of parts: more of them where there is room (fixed by size, never measured).
+    private var legendLimit: Int { compact ? 2 : (context.isMedium ? 3 : 5) }
+
+    /// Labels under the bars. A small chart keeps them only when they are few and short (three letters).
+    private func shownLabels(_ labels: [String]) -> [String] {
+        guard compact else { return labels }
+        guard labels.count <= 7, (labels.map(\.count).max() ?? 0) <= 12 else { return [] }
+        return labels.map { String($0.prefix(3)) }
+    }
+
+    /// The widget's own bar labels (the days), when it has some.
+    private var ownLabels: [String] {
+        if case let .bars(_, labels, _) = visual { return shownLabels(labels) }
+        return []
+    }
+
+    /// A ring: its percentage at the center when there is room, else beside it.
+    @ViewBuilder private func ring(_ progress: Double) -> some View {
+        if compact {
+            HStack(spacing: 6) {
+                RingView(progress: progress, lineWidth: 5 * thickness, color: s.chartColor(default: ringHex), track: s.options.chartFill ? s.track : .clear)
+                    .aspectRatio(1, contentMode: .fit)
+                Text(Fmt.percent(progress))
+                    .font(s.number(13))
+                    .foregroundStyle(s.numberColor)
+                    .lineLimit(1)
+                    .fixedSize()
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        } else {
+            ZStack {
+                RingView(progress: progress, lineWidth: 10 * thickness, color: s.chartColor(default: ringHex), track: s.options.chartFill ? s.track : .clear)
+                Text(Fmt.percent(progress))
+                    .font(s.number(18))
+                    .foregroundStyle(s.numberColor)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.5)
+                    .padding(.horizontal, 12)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
 
     var body: some View {
         let kind = s.options.chart
@@ -1285,13 +1471,7 @@ struct TileVisualView: View {
         case .none:
             EmptyView()
         case let .ring(progress):
-            ZStack {
-                RingView(progress: progress, lineWidth: (compact ? 5 : 10) * thickness, color: s.chartColor(default: ringHex), track: s.options.chartFill ? s.track : .clear)
-                if s.options.chartValues && !compact {
-                    Text(Fmt.percent(progress)).font(s.number(18)).foregroundStyle(s.numberColor)
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            ring(progress)
         case let .bar(progress):
             VStack {
                 Spacer(minLength: 0)
@@ -1299,17 +1479,24 @@ struct TileVisualView: View {
                 BarView(progress: progress, color: s.chart, track: s.track, height: height, radius: s.radius(height / 2))
             }
         case let .bars(values, labels, highlight):
-            BarsChart(values: values, labels: compact ? [] : labels, highlight: highlight, style: s)
+            BarsChart(values: values, labels: shownLabels(labels), highlight: highlight, style: s, showsValues: !compact)
         case let .line(values):
-            LineChart(values: values, style: s)
+            if compact {
+                LineChart(values: values, style: s)
+            } else {
+                // The last value written at the end of the line: a curve alone says nothing.
+                SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.18 : 0, lineWidth: 2 * thickness, showsEndDot: true, showsEndValue: true)
+            }
         case let .segments(segments):
-            SegmentsChart(segments: segments, showsLegend: !compact, style: s)
+            SegmentsChart(segments: segments, showsLegend: !namedByRows, style: s, inline: compact, legendLimit: legendLimit)
         case let .week(days):
             WeekStrip(days: days, showsLabels: !compact, style: s)
         case let .month(days, offset, marked, today):
             MonthDots(days: days, offset: offset, marked: marked, today: today, style: s)
         case let .grid(names, rows, colors):
-            HabitGrid(names: names, rows: rows, colors: colors, style: s)
+            // Fixed by size: a medium widget holds three habits (two when compact, four when dense), the large all six.
+            HabitGrid(names: names, rows: rows, colors: colors, style: s,
+                      maxRows: context.isLarge ? 6 : (context.isMedium ? 3 + (s.rowDelta > 0 ? 1 : s.rowDelta) : 3))
         case let .schedule(blocks, today, dates, first, last):
             ScheduleWeek(blocks: blocks, today: today, dates: dates, firstMinute: first, lastMinute: last, style: s)
         case let .symbol(name):
@@ -1349,16 +1536,18 @@ struct TileVisualView: View {
     }
 
     @ViewBuilder private func series(_ kind: ChartKind, values: [Double]) -> some View {
-        let showsValues = s.options.chartValues && !compact
+        // The values are written whenever the chart is not tiny: a chart without figures or labels explains nothing.
+        let showsValues = !compact
+        let labels = ownLabels
         switch kind {
         case .line:
             SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.18 : 0, lineWidth: 2 * thickness, showsEndDot: showsValues, showsEndValue: showsValues)
         case .area:
             SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.5 : 0.25, lineWidth: 1.5 * thickness, showsEndValue: showsValues)
         case .bars:
-            BarsChart(values: values, labels: [], highlight: values.indices.last, style: s, showsValues: showsValues)
+            BarsChart(values: values, labels: labels, highlight: values.indices.last, style: s, showsValues: showsValues)
         case .histogram:
-            BarsChart(values: values, labels: [], highlight: values.indices.last, style: s, showsValues: showsValues, spacing: 1, corner: 0.5)
+            BarsChart(values: values, labels: labels, highlight: values.indices.last, style: s, showsValues: showsValues, spacing: 1, corner: 0.5)
         case .dots:
             SeriesDotsChart(values: values, style: s, dotSize: (compact ? 4 : 6) * thickness)
         case .sparkline:
@@ -1376,16 +1565,10 @@ struct TileVisualView: View {
     }
 
     @ViewBuilder private func progress(_ kind: ChartKind, value: Double) -> some View {
-        let showsValues = s.options.chartValues && !compact
+        let showsValues = !compact
         switch kind {
         case .ring:
-            ZStack {
-                RingView(progress: value, lineWidth: (compact ? 5 : 10) * thickness, color: s.chartColor(default: ringHex), track: s.options.chartFill ? s.track : .clear)
-                if showsValues {
-                    Text(Fmt.percent(value)).font(s.number(18)).foregroundStyle(s.numberColor)
-                }
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            ring(value)
         case .pie:
             ProgressPieChart(progress: value, style: s, showsValue: showsValues)
         case .gauge:
@@ -1409,13 +1592,18 @@ struct TileVisualView: View {
     @ViewBuilder private func parts(_ kind: ChartKind, segments: [TileSegment]) -> some View {
         switch kind {
         case .ring:
-            SegmentsRoundChart(segments: segments, style: s, hole: 0.62, showsLegend: !compact)
+            SegmentsRoundChart(segments: segments, style: s, hole: 0.62, showsLegend: !namedByRows, legendLimit: legendLimit)
         case .pie:
-            SegmentsRoundChart(segments: segments, style: s, hole: 0, showsLegend: !compact)
+            SegmentsRoundChart(segments: segments, style: s, hole: 0, showsLegend: !namedByRows, legendLimit: legendLimit)
         case .bars:
-            SegmentsBarsChart(segments: segments, style: s)
+            if compact {
+                // Bars without names in a tiny strip: the colored strip with its names instead.
+                SegmentsChart(segments: segments, showsLegend: !namedByRows, style: s, inline: true)
+            } else {
+                SegmentsBarsChart(segments: segments, style: s, showsNames: !namedByRows)
+            }
         default:
-            SegmentsChart(segments: segments, showsLegend: !compact, style: s)
+            SegmentsChart(segments: segments, showsLegend: !namedByRows, style: s, inline: compact, legendLimit: legendLimit)
         }
     }
 }
@@ -1433,9 +1621,10 @@ struct BarsChart: View {
         let top = max(values.max() ?? 0, 0.000_1)
         let gap = spacing ?? (values.count > 14 ? 2 : 4) / CGFloat(style.options.chartThickness)
         let radius = corner ?? style.radius(values.count > 14 ? 1.5 : 3)
-        let labelled = showsValues && values.count <= 10
         VStack(spacing: 4) {
             GeometryReader { geo in
+                // The values above the bars only when the chart is tall enough to keep real bars under them.
+                let labelled = showsValues && values.count <= 10 && geo.size.height >= 56
                 HStack(alignment: .bottom, spacing: gap) {
                     ForEach(Array(values.enumerated()), id: \.offset) { pair in
                         let ratio = max(0, pair.element) / top
@@ -1502,10 +1691,13 @@ struct SegmentsChart: View {
     let segments: [TileSegment]
     let showsLegend: Bool
     let style: ResolvedStyle
+    /// A strip too small for the full legend: the names on one line (no percentages).
+    var inline = false
+    var legendLimit = 5
 
     var body: some View {
         let total = max(segments.reduce(0) { $0 + max(0, $1.value) }, 0.000_1)
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: inline ? 5 : 8) {
             GeometryReader { geo in
                 HStack(spacing: 2) {
                     ForEach(Array(segments.enumerated()), id: \.offset) { pair in
@@ -1518,9 +1710,23 @@ struct SegmentsChart: View {
                 .clipShape(RoundedRectangle(cornerRadius: style.radius(5 * CGFloat(style.options.chartThickness)), style: .continuous))
             }
             .frame(height: 10 * CGFloat(style.options.chartThickness))
-            if showsLegend {
+            if showsLegend && inline {
+                HStack(spacing: 6) {
+                    ForEach(Array(segments.prefix(3).enumerated()), id: \.offset) { pair in
+                        HStack(spacing: 3) {
+                            Circle().fill(style.partColor(pair.element.colorHex, at: pair.offset)).frame(width: 6, height: 6)
+                            Text(pair.element.label)
+                                .font(style.text(9))
+                                .foregroundStyle(style.primary)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.6)
+                        }
+                    }
+                    Spacer(minLength: 0)
+                }
+            } else if showsLegend {
                 VStack(alignment: .leading, spacing: 4) {
-                    ForEach(Array(segments.prefix(5).enumerated()), id: \.offset) { pair in
+                    ForEach(Array(segments.prefix(legendLimit).enumerated()), id: \.offset) { pair in
                         HStack(spacing: 6) {
                             Circle().fill(style.partColor(pair.element.colorHex, at: pair.offset)).frame(width: 7, height: 7)
                             Text(pair.element.label)
@@ -1755,6 +1961,8 @@ struct HabitGrid: View {
     let rows: [[Bool?]]
     let colors: [String]
     let style: ResolvedStyle
+    /// A medium widget holds three or four habits under its title and figure, not six (the last was cut off).
+    var maxRows = 6
 
     var body: some View {
         let symbols = DateMath.weekdaySymbols()
@@ -1768,7 +1976,7 @@ struct HabitGrid: View {
                         .frame(width: 13)
                 }
             }
-            ForEach(Array(rows.prefix(6).enumerated()), id: \.offset) { pair in
+            ForEach(Array(rows.prefix(max(1, maxRows)).enumerated()), id: \.offset) { pair in
                 let color = style.isAccented ? style.chart : Color(hex: colors[safe: pair.offset] ?? "7FA33A")
                 HStack(spacing: 3) {
                     Text(names[safe: pair.offset] ?? "")
