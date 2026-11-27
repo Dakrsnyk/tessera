@@ -33,6 +33,11 @@ final class StudioPhotoSession {
 /// the widgets inside; the size is chosen before) and « Style » (the look). The stage acts on
 /// the widget: a touch on a widget inside opens it, « + » adds one. Several widgets made together are edited one
 /// after the other and can share their look. Every change can be undone and redone.
+/// A frame kept outside SwiftUI's observation: writing it never redraws the view.
+final class FrameBox {
+    var rect: CGRect = .zero
+}
+
 struct WidgetStudio: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -55,7 +60,8 @@ struct WidgetStudio: View {
     @State private var photoItem: PhotosPickerItem?
     @State private var isImportingPhoto = false
     @State private var backgroundTab: BackgroundKind
-    @State private var previewFrame: CGRect = .zero
+    /// Where the preview is on screen, read only when saving (a reference, so animating the stage never redraws the Studio).
+    @State private var previewFrame = FrameBox()
     /// The tool open under the stage (never « Taille »; « Contenu » is the last tool).
     @State private var section: StudioSection
     /// Widgets made together wear the same look while this is on: a change to one goes to all.
@@ -137,7 +143,7 @@ struct WidgetStudio: View {
             stage(input.payload)
                 .padding(.horizontal, 20)
                 .padding(.top, 6)
-                .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame = $0 }
+                .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { previewFrame.rect = $0 }
             if designs.count > 1 { widgetSwitcher }
             if let comboNote {
                 StudioComboNoteView(note: comboNote, onUndo: undo, onClose: closeNote)
@@ -1185,7 +1191,7 @@ struct WidgetStudio: View {
             // A widget made: a good moment (a rating may be asked once the Studio has closed).
             model.celebrate()
             // The new widgets glide into « Mes widgets » as the Studio closes.
-            router.saveFlight = SaveFlight(designs: saved, source: previewFrame)
+            router.saveFlight = SaveFlight(designs: saved, source: previewFrame.rect)
             // The « Ajouter à l'écran d'accueil » guide after each of the first three saves, wherever the Studio was opened from.
             if model.settings.addGuideCount < 3 {
                 model.updateSettings { $0.addGuideCount += 1 }

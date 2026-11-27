@@ -342,19 +342,10 @@ struct WeekTimetable: View {
             let color = category(block.item.colorHex)
             let minutes = block.end - block.start
             let lines = Self.lines(height: height, minutes: minutes, hasPlace: block.item.place != nil)
-            // Without its place, the block as before the places.
-            let plainTime = Self.lines(height: height, minutes: minutes, hasPlace: false).time
             Group {
                 if lines.place, let place = block.item.place {
-                    // A name on two lines takes the room of the time, then of the place, rather than
-                    // being cut to its first line.
-                    ViewThatFits(in: .vertical) {
-                        if lines.time {
-                            blockText(block.item, place: place, time: true)
-                        }
-                        blockText(block.item, place: place, time: false)
-                        blockText(block.item, place: nil, time: plainTime)
-                    }
+                    // Fixed choice from the block height (no ViewThatFits: known trap, see Pieges-connus).
+                    blockText(block.item, place: place, time: lines.time)
                 } else {
                     blockText(block.item, place: nil, time: lines.time)
                 }

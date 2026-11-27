@@ -41,6 +41,35 @@ enum SamplePayload {
         guard design.isCombo, let lead = design.partDesigns.first else {
             return make(for: design.kind, coinID: design.options.coinID, now: now)
         }
+        let key = SampleKey(parts: design.partDesigns.map { Part(kind: $0.kind, coinID: $0.kind == .crypto ? $0.options.coinID : "") },
+                            language: Localization.language, slice: slice(now))
+        if let hit = cache.value(for: key) { return hit }
+        let payload = makeCombo(lead: lead, design: design, now: now)
+        cache.store(payload, for: key)
+        return payload
+    }
+
+    // Sample content depends on the kinds (and the coin for crypto), the language and the time (10-minute slices).
+    private struct Part: Hashable { let kind: WidgetKind; let coinID: String }
+    private struct SampleKey: Hashable { let parts: [Part]; let language: String; let slice: Int }
+
+    private static func slice(_ now: Date) -> Int { Int(now.timeIntervalSince1970 / 600) }
+
+    /// Bounded cache, safe from any thread. Dropping everything when full is enough: rebuilding is only slow, never wrong.
+    private final class SampleCache {
+        private let lock = NSLock()
+        private var storage: [SampleKey: WidgetPayload] = [:]
+        private let limit = Bundle.main.bundleURL.pathExtension == "appex" ? 24 : 120
+        func value(for key: SampleKey) -> WidgetPayload? { lock.lock(); defer { lock.unlock() }; return storage[key] }
+        func store(_ payload: WidgetPayload, for key: SampleKey) {
+            lock.lock(); defer { lock.unlock() }
+            if storage.count >= limit { storage.removeAll() }
+            storage[key] = payload
+        }
+    }
+    private static let cache = SampleCache()
+
+    private static func makeCombo(lead: WidgetDesign, design: WidgetDesign, now: Date) -> WidgetPayload {
         // A combined widget: the sample of its first widget, completed with what each other widget shows.
         var payload = make(for: lead.kind, coinID: lead.options.coinID, now: now)
         var hasDomains = !ownSamples.contains(lead.kind)
@@ -87,6 +116,14 @@ enum SamplePayload {
     }
 
     static func make(for kind: WidgetKind, coinID: String = "bitcoin", now: Date = Date()) -> WidgetPayload {
+        let key = SampleKey(parts: [Part(kind: kind, coinID: kind == .crypto ? coinID : "")], language: Localization.language, slice: slice(now))
+        if let hit = cache.value(for: key) { return hit }
+        let payload = build(kind: kind, coinID: coinID, now: now)
+        cache.store(payload, for: key)
+        return payload
+    }
+
+    private static func build(kind: WidgetKind, coinID: String, now: Date) -> WidgetPayload {
         var payload = WidgetPayload()
         switch kind {
         case .tasks:

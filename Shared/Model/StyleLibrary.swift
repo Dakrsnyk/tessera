@@ -36,10 +36,10 @@ struct StyleLook: Identifiable, Hashable {
 
     /// Whether the design is in this style (and nothing was changed since).
     func matches(_ design: WidgetDesign) -> Bool {
-        let applied = applied(to: design)
-        return applied.themeID == design.themeID && applied.accentHex == design.accentHex
-            && applied.background == design.background && applied.font == design.font
-            && applied.style.look == design.style.look
+        // Field by field, same as comparing applied(to:) but without copying the whole design.
+        themeID == design.themeID && (accentHex == nil || accentHex == design.accentHex)
+            && background == design.background && font == design.font
+            && style.look == design.style.look
     }
 }
 

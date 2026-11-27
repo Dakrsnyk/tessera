@@ -1,6 +1,11 @@
 import SwiftUI
 import WidgetKit
 
+/// Card frames kept outside SwiftUI's observation: scrolling writes them every frame, only the merge reads them.
+final class CardFrames {
+    var rects: [UUID: CGRect] = [:]
+}
+
 struct MyWidgetsView: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
@@ -17,7 +22,7 @@ struct MyWidgetsView: View {
     @State private var showsFusion = false
     @State private var paywall: PaywallContext?
     /// Where each selected card is on screen, for the merge animation.
-    @State private var cardFrames: [UUID: CGRect] = [:]
+    @State private var cardFrames = CardFrames()
     @State private var fusionRun: FusionRun?
 
     private var selectedDesigns: [WidgetDesign] { model.designs.filter { selectedIDs.contains($0.id) } }
@@ -445,7 +450,7 @@ struct MyWidgetsView: View {
         let hasRoom = model.canSave(adding: [merged], removing: keepsOriginals ? [] : orderedSelection)
         let needsPaywall = (merged.usesPremiumFeatures && !model.isPremium) || !hasRoom
         let sources = orderedSelection.map { design in
-            FusionRun.Source(design: design, payload: model.payload(for: design), frame: cardFrames[design.id] ?? .zero)
+            FusionRun.Source(design: design, payload: model.payload(for: design), frame: cardFrames.rects[design.id] ?? .zero)
         }
         // Once the sheet has slid away, the cards gather and merge.
         Task { @MainActor in
@@ -521,7 +526,7 @@ struct MyWidgetsView: View {
                     }
             }
             .buttonStyle(.pressable)
-            .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { cardFrames[design.id] = $0 }
+            .onGeometryChange(for: CGRect.self) { $0.frame(in: .global) } action: { cardFrames.rects[design.id] = $0 }
             .accessibilityLabel(Text(design.name))
             .accessibilityAddTraits(isSelected ? .isSelected : [])
         } else {
