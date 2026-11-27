@@ -236,7 +236,7 @@ struct ExploreView: View {
     /// « Embellir mon écran » opens the wallpapers.
     private var needsRow: some View {
         let needs: [(title: String, symbol: String, hex: String, category: WidgetCategory?)] = [
-            (tr("Ma journée"), "checklist", "6B7280", .productivity),
+            (tr("Ma journée"), "rectangle.3.group", "5B6CFF", .dashboards),
             (tr("Sport"), "dumbbell", "E5484D", .fitness),
             (tr("Manger mieux"), "fork.knife", "F08A24", .nutrition),
             (tr("Argent"), "creditcard", "2F8F7A", .finance),
@@ -291,7 +291,8 @@ struct ExploreView: View {
 
     /// Every mini-app that has widgets, the person's interests first.
     private var homeMiniApps: [WidgetCategory] {
-        let all = WidgetCategory.offered.filter { !WidgetKind.kinds(in: $0).isEmpty }
+        // No Productivity in the Store (PDG, 2026-11-26).
+        let all = WidgetCategory.offered.filter { $0 != .productivity && !WidgetKind.kinds(in: $0).isEmpty }
         return interests.filter(all.contains) + all.filter { !interests.contains($0) }
     }
 
@@ -433,7 +434,7 @@ struct ExploreView: View {
     /// The widgets to try first, then those of the Lock Screen.
     @ViewBuilder private var widgetRows: some View {
         LazyVStack(alignment: .leading, spacing: 30) {
-            ForEach(WidgetCategory.offered.filter { !WidgetKind.kinds(in: $0).isEmpty }) { category in
+            ForEach(WidgetCategory.offered.filter { $0 != .productivity && !WidgetKind.kinds(in: $0).isEmpty }) { category in
                 miniAppSection(category)
             }
         }
@@ -585,7 +586,7 @@ struct ExploreView: View {
                         router.exploreCategory = nil
                     }
                 }
-                ForEach(WidgetCategory.offered.filter { $0 != router.exploreCategory }) { category in
+                ForEach(WidgetCategory.offered.filter { $0 != router.exploreCategory && $0 != .productivity }) { category in
                     FilterChip(title: category.title, symbol: category.symbol, isSelected: false) {
                         router.exploreCategory = category
                     }

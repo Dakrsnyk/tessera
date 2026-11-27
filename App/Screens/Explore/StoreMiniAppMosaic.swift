@@ -2,52 +2,59 @@ import SwiftUI
 import WidgetKit
 
 /// A mini-app in the Store (PDG, 2026-11-26): its widgets as mosaics of three rows — small, medium, small, then a
-/// medium over two smalls beside a large one — that scroll sideways, seven mosaics (about 50 widgets). Each tile is a
-/// different kind, in the styles that suit the mini-app; the large ones are combined widgets (several widgets of the
-/// mini-app in one), except in Planning and Habits where a single large widget may stand alone.
+/// medium over two smalls beside a large one — seven mosaics (about 50 widgets) that scroll sideways one per swipe.
+/// Each tile is a different kind, in the styles that suit the mini-app; the large ones are combined widgets (several
+/// widgets of the mini-app in one), except in Planning and Habits where a single large widget may stand alone.
+/// The widgets are drawn once into still pictures (`MosaicPictures`): live widgets by the hundred made the Store lag.
 struct MiniAppMosaicRow: View {
     let category: WidgetCategory
     let isPremiumUser: Bool
     let open: (WidgetDesign) -> Void
+    @State private var rowWidth: CGFloat = 375
 
     static let mosaics = 7
 
     var body: some View {
+        // Each mosaic as wide as the screen less its margins and the edge of the next one (it shows the row scrolls).
+        let width = max(260, rowWidth - 56)
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(alignment: .top, spacing: 14) {
                 ForEach(0..<Self.mosaics, id: \.self) { block in
-                    MiniAppMosaic(category: category, block: block, isPremiumUser: isPremiumUser, open: open)
-                        // The next mosaic peeks at the edge: the row is seen to scroll.
-                        .containerRelativeFrame(.horizontal) { width, _ in width - 56 }
+                    MiniAppMosaic(category: category, block: block, width: width, isPremiumUser: isPremiumUser, open: open)
+                        .frame(width: width)
                 }
             }
             .scrollTargetLayout()
         }
-        .scrollTargetBehavior(.viewAligned)
+        // One swipe, one mosaic, in one movement.
+        .scrollTargetBehavior(.viewAligned(limitBehavior: .always))
         .contentMargins(.horizontal, 20, for: .scrollContent)
+        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { rowWidth = $0 }
     }
 }
 
 struct MiniAppMosaic: View {
     let category: WidgetCategory
     let block: Int
+    let width: CGFloat
     let isPremiumUser: Bool
     let open: (WidgetDesign) -> Void
-    @State private var width: CGFloat = 320
 
     /// One tile: the design to draw (a widget, or several combined) and its size.
     struct Pick {
+        let id: String
         let design: WidgetDesign
         let family: WidgetFamily
         let name: String
+        let isPremium: Bool
     }
 
     var body: some View {
         let gap: CGFloat = 10
-        let small = max(40, (width - 3 * gap) / 4)
+        let small = floor((width - 3 * gap) / 4)
         let wide = 2 * small + gap
         let picks = Self.picks(for: category, block: block)
-        VStack(spacing: gap) {
+        VStack(alignment: .leading, spacing: gap) {
             HStack(spacing: gap) {
                 tile(picks[0], width: small, height: small)
                 tile(picks[1], width: wide, height: small)
@@ -64,19 +71,18 @@ struct MiniAppMosaic: View {
                 tile(picks[6], width: wide, height: wide)
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .onGeometryChange(for: CGFloat.self) { $0.size.width } action: { width = $0 }
+        .frame(width: width, alignment: .leading)
     }
 
-    /// The widget drawn as large as its box allows, centered in it.
+    /// The widget's picture, as large as its box allows, centered in it.
     private func tile(_ pick: Pick, width: CGFloat, height: CGFloat) -> some View {
-        let fitted = min(width, height * pick.family.aspectRatio)
-        let locked = !isPremiumUser && pick.design.usesPremiumFeatures
+        let fitted = floor(min(width, height * pick.family.aspectRatio))
+        let locked = !isPremiumUser && pick.isPremium
         return Button {
             Haptics.tap()
             open(pick.design)
         } label: {
-            WidgetPreview(design: pick.design, family: pick.family, payload: SamplePayload.make(for: pick.design), width: fitted)
+            MosaicPicture(pick: pick, width: fitted)
                 .overlay(alignment: .topTrailing) {
                     if locked {
                         Image(systemName: "lock.fill")
@@ -123,9 +129,20 @@ struct MiniAppMosaic: View {
         return looks
     }
 
+    /// Worked out once per mosaic: the body asks again at every frame of a scroll.
+    @MainActor private static var cache: [String: [Pick]] = [:]
+
+    @MainActor static func picks(for category: WidgetCategory, block: Int) -> [Pick] {
+        let key = "\(category.rawValue)-\(block)"
+        if let known = cache[key] { return known }
+        let picks = makePicks(for: category, block: block)
+        cache[key] = picks
+        return picks
+    }
+
     /// The seven tiles of one mosaic: kinds of the mini-app turn by turn (each size only takes kinds that come in it,
     /// none twice in a mosaic), a new style for every tile of the row, a combined widget for the large one.
-    static func picks(for category: WidgetCategory, block: Int) -> [Pick] {
+    static func makePicks(for category: WidgetCategory, block: Int) -> [Pick] {
         let kinds = WidgetKind.kinds(in: category)
         let looks = looks(for: category)
         let slots: [WidgetFamily] = [.systemSmall, .systemMedium, .systemSmall, .systemMedium, .systemSmall, .systemSmall, .systemLarge]
@@ -140,15 +157,19 @@ struct MiniAppMosaic: View {
         }
         for (index, family) in slots.enumerated() {
             let look = looks[(block * slots.count + index) % max(1, looks.count)]
+            let id = "\(category.rawValue)-\(block)-\(index)"
             if family == .systemLarge, let combo = largeCombo(category: category, kinds: kinds, block: block) {
-                picks.append(Pick(design: look.applied(to: combo.makeDesign()), family: .systemLarge, name: combo.name))
+                let design = look.applied(to: combo.makeDesign())
+                picks.append(Pick(id: id, design: design, family: .systemLarge, name: combo.name, isPremium: design.usesPremiumFeatures))
                 continue
             }
             let chosen = kind(for: family, turn: index) ?? kind(for: .systemSmall, turn: index) ?? kinds.first ?? .note
             used.append(chosen)
             let shown = chosen.families.contains(family) ? family : (chosen.families.first ?? .systemSmall)
             let format = WidgetFormat.allCases.first { $0.family == shown } ?? .small
-            picks.append(Pick(design: look.applied(to: WidgetDesign(kind: chosen, format: format)), family: shown, name: chosen.title))
+            let design = look.applied(to: WidgetDesign(kind: chosen, format: format))
+            picks.append(Pick(id: id, design: design, family: shown, name: chosen.title,
+                              isPremium: design.usesPremiumFeatures || chosen.isPremium))
         }
         return picks
     }
@@ -183,5 +204,54 @@ struct MiniAppMosaic: View {
         let combo = StoreCombo(id: "mosaic-\(category.rawValue)-\(block)", name: category.title, tagline: "",
                                parts: parts, theme: .dark, accent: "F2A33A")
         return combo.format == .large ? combo : nil
+    }
+}
+
+/// A widget of the mosaic as a still picture, drawn once and kept: scrolling moves pictures, not live widgets.
+struct MosaicPicture: View {
+    let pick: MiniAppMosaic.Pick
+    let width: CGFloat
+    @Environment(\.colorScheme) private var scheme
+    @Environment(\.displayScale) private var scale
+    @State private var picture: UIImage?
+
+    private var key: String { "\(pick.id)-\(Int(width))-\(scheme == .dark ? "d" : "l")" }
+
+    var body: some View {
+        let height = floor(width / pick.family.aspectRatio)
+        Group {
+            if let picture {
+                Image(uiImage: picture)
+                    .resizable()
+                    .interpolation(.high)
+            } else {
+                RoundedRectangle(cornerRadius: WidgetMetrics.cornerRadius * width / WidgetMetrics.size(pick.family).width, style: .continuous)
+                    .fill(Color.primary.opacity(0.06))
+            }
+        }
+        .frame(width: width, height: height)
+        .task(id: key) {
+            picture = MosaicPictures.picture(for: pick, width: width, scheme: scheme, scale: scale, key: key)
+        }
+    }
+}
+
+@MainActor
+enum MosaicPictures {
+    private static let cache: NSCache<NSString, UIImage> = {
+        let cache = NSCache<NSString, UIImage>()
+        cache.countLimit = 400
+        return cache
+    }()
+
+    static func picture(for pick: MiniAppMosaic.Pick, width: CGFloat, scheme: ColorScheme, scale: CGFloat, key: String) -> UIImage? {
+        if let known = cache.object(forKey: key as NSString) { return known }
+        let view = WidgetPreview(design: pick.design, family: pick.family, payload: SamplePayload.make(for: pick.design), width: width)
+            .environment(\.colorScheme, scheme)
+        let renderer = ImageRenderer(content: view)
+        renderer.scale = scale
+        guard let image = renderer.uiImage else { return nil }
+        cache.setObject(image, forKey: key as NSString)
+        return image
     }
 }
