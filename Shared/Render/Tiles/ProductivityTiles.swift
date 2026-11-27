@@ -154,7 +154,8 @@ enum ProductivityTiles {
                 tile.rows = [TileRow(id: "rate", title: tr("Régularité sur 30 jours"), value: Fmt.percent(rate), symbol: "percent", progress: rate)]
             }
         }
-        if !habit.isDone(on: now) && !context.isSmall {
+        // « Fait » is Premium (CEO, 2026-11-26); the free « Habitudes » widget keeps its own buttons.
+        if !habit.isDone(on: now) && !context.isSmall && SharedStore.shared.premium.isPremium(at: now) {
             tile.buttons = [TileButton(title: tr("Fait"), symbol: "checkmark", action: .toggleHabit(habit.id.uuidString), isProminent: true)]
         }
         tile.gauge = min(1, Double(streak) / 30)

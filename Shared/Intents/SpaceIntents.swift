@@ -178,6 +178,23 @@ struct CancelWorkoutIntent: LiveActivityIntent {
     }
 }
 
+/// « Commencer » of the free « Séance du jour » widget: starts the session planned today, nothing more (no set is
+/// done: that is « Prochaine série », Premium). Does nothing when a session is under way or was done today.
+struct StartWorkoutIntent: LiveActivityIntent {
+    static var title: LocalizedStringResource = "Commencer la séance"
+    static var isDiscoverable = false
+    /// Runs from the Lock Screen without unlocking, and never opens the app.
+    static var authenticationPolicy: IntentAuthenticationPolicy { .alwaysAllowed }
+    static var openAppWhenRun: Bool { false }
+
+    init() {}
+
+    func perform() async throws -> some IntentResult {
+        await changeWorkout { _ = $0.startPlannedSession(at: Date()) }
+        return .result()
+    }
+}
+
 struct PauseRestIntent: LiveActivityIntent {
     static var title: LocalizedStringResource = "Mettre le repos en pause"
     static var isDiscoverable = false

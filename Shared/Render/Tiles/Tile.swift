@@ -10,6 +10,8 @@ enum TileAction: Hashable {
     case undoSet(WorkoutPosition?)
     /// Drops a session started by mistake, before any set (see `FitnessState.cancelActive`).
     case cancelWorkout
+    /// « Commencer » of « Séance du jour »: starts today's session, no set done (see `FitnessState.startPlannedSession`).
+    case startWorkout
     case logFood(String)
     case quickExpense(String)
     case counter(String, Int)

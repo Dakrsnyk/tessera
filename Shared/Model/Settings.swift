@@ -227,6 +227,9 @@ struct PremiumState: Codable, Hashable {
     /// Whether a real purchase is active (StoreKit), whatever the build.
     func hasPurchase(at date: Date = Date()) -> Bool {
         guard isActive else { return false }
+        // Clock set back before the last online check: the cache is not trusted until StoreKit re-verifies (audit
+        // 2026-11-26). Ten minutes of margin: the automatic time sync moves the clock back by a few seconds.
+        if let verifiedAt, date < verifiedAt.addingTimeInterval(-600) { return false }
         guard let expirationDate else { return true }
         return expirationDate.addingTimeInterval(Self.gracePeriod) > date
     }

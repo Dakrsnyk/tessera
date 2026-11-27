@@ -1077,6 +1077,8 @@ struct TileActionButton<Label: View>: View {
             IntentButton(intent: UndoSetIntent(expecting: position), isEnabled: isEnabled, label: label)
         case .cancelWorkout:
             IntentButton(intent: CancelWorkoutIntent(), isEnabled: isEnabled, label: label)
+        case .startWorkout:
+            IntentButton(intent: StartWorkoutIntent(), isEnabled: isEnabled, label: label)
         case let .logFood(id):
             IntentButton(intent: LogFoodIntent(foodID: id), isEnabled: isEnabled, label: label)
         case let .quickExpense(id):

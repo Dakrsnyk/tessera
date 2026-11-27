@@ -725,8 +725,25 @@ final class AppModel {
     /// reminders follow. Premium status isn't in a backup (it belongs to the App Store account).
     func restore(_ archive: DataBackup.Archive) {
         let previousHabits = content.habits.map(\.id)
+        let previousLimitedDesigns = limitedDesignCount
+        let previousHabitCount = content.habits.count
         DataBackup.restore(archive, store: store)
         reloadFromDisk()
+        // A backup never gives more than the free plan (or than this iPhone already had): the rest is not restored.
+        if !isPremium {
+            let designLimit = max(Self.freeDesignLimit, previousLimitedDesigns)
+            var counted = 0
+            let overflow = designs.filter { design in
+                guard Self.countsTowardFreeLimit(design) else { return false }
+                counted += 1
+                return counted > designLimit
+            }
+            delete(overflow)
+            let habitLimit = max(Self.freeHabitLimit, previousHabitCount)
+            if content.habits.count > habitLimit {
+                updateContent { $0.habits = Array($0.habits.prefix(habitLimit)) }
+            }
+        }
         let habits = Set(content.habits.map(\.id))
         for id in previousHabits where !habits.contains(id) { NotificationScheduler.cancelHabitReminder(id) }
         for habit in content.habits { NotificationScheduler.syncHabitReminder(habit) }

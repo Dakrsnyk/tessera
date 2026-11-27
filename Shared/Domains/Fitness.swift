@@ -568,6 +568,17 @@ struct FitnessState: Codable, Hashable {
         if session.isFinished { finishActive(at: date) }
         return session.sets.count > logged
     }
+
+    /// « Commencer » of « Séance du jour »: starts the routine planned for `date`, with no set done. Only when a
+    /// session is planned, none is under way and none was finished that day. Returns true when it started.
+    @discardableResult
+    mutating func startPlannedSession(at date: Date) -> Bool {
+        closeIdleSession(at: date)
+        guard active == nil || active?.isFinished == true, isScheduled(date), let planned = routine(for: date),
+              !FitnessMath.sessions(self).contains(where: { DateMath.isSameDay($0.start, date) && $0.isFinished }) else { return false }
+        startSession(planned, at: date)
+        return true
+    }
 }
 
 enum FitnessMath {

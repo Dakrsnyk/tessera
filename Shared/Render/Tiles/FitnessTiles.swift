@@ -85,10 +85,13 @@ enum FitnessTiles {
             tile.caption = tr("\(Fmt.plural(exercises.count, tr("exercice"), tr("exercices"))) · \(totalSets) séries")
         }
         tile.rows = sessionRows(exercises, active: active, doneToday: doneToday, system: system)
-        // The session at a glance, and nothing to press (CEO, 2026-11-24: the free widgets are not interactive): the
-        // session of the day and, once it has started, the exercise in progress. The sets are done from « Prochaine
-        // série » (Premium) or in the app.
+        // The session at a glance (CEO, 2026-11-24: the free widgets are not interactive): the session of the day and,
+        // once it has started, the exercise in progress. The only button is « Commencer » (CEO, 2026-11-26, free):
+        // it starts today's session, with no set done. The sets are done from « Prochaine série » (Premium) or in the app.
         tile.buttons = []
+        if planned, active == nil, !doneToday {
+            tile.headerButton = TileButton(title: tr("Commencer"), symbol: "play.fill", action: .startWorkout)
+        }
         if let active, let exercise = active.currentExercise {
             tile.detail = tr("\(exercise.name) · série \(active.setIndex + 1)/\(exercise.sets)")
         }
