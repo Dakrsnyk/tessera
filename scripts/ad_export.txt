@@ -976,7 +976,7 @@ styles all-countdown-medium page=1 per=12 cols=1 kind=countdown family=medium id
 styles all-upNext-small page=1 per=12 cols=2 kind=upNext family=small ids=riche-gala,vint-sepia-gazette,prime-cobalt,jeu-lootbox,plaque-rivets,retro-vhs,luxe-acier-or,pixel-ecran-ambre,aura-pulse,aura-braise,ill-cartoon,jeu-pause scale=2
 styles all-upNext-medium page=1 per=12 cols=1 kind=upNext family=medium ids=riche-gala,vint-sepia-gazette,prime-cobalt,jeu-lootbox,plaque-rivets,retro-vhs,luxe-acier-or,pixel-ecran-ambre,aura-pulse,aura-braise,ill-cartoon,jeu-pause scale=2
 # --- 2026-11-26 : recherche de la pièce qui bloque l'export, un style par disposition ---
-# --- 2026-11-26 : vérification de chaque widget, chaque taille, un style par disposition (10) ---
+# --- 2026-11-26 (relancée le 2026-11-27) : vérification de chaque widget, chaque taille, un style par disposition (10) ---
 styles v-small-clock page=1 per=10 cols=2 kind=clock family=small ids=riche-gala,vint-sepia-gazette,prime-cobalt,jeu-lootbox,plaque-rivets,retro-vhs,luxe-acier-or,pixel-ecran-ambre,aura-pulse,aura-braise scale=1
 styles v-small-calendar page=1 per=10 cols=2 kind=calendar family=small ids=riche-gala,vint-sepia-gazette,prime-cobalt,jeu-lootbox,plaque-rivets,retro-vhs,luxe-acier-or,pixel-ecran-ambre,aura-pulse,aura-braise scale=1
 styles v-small-worldClock page=1 per=10 cols=2 kind=worldClock family=small ids=riche-gala,vint-sepia-gazette,prime-cobalt,jeu-lootbox,plaque-rivets,retro-vhs,luxe-acier-or,pixel-ecran-ambre,aura-pulse,aura-braise scale=1
