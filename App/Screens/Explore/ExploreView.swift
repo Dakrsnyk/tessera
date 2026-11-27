@@ -278,6 +278,8 @@ struct ExploreView: View {
                         Image(systemName: "chevron.right").font(.caption.weight(.bold))
                     }
                     .font(.subheadline.weight(.semibold))
+                    .frame(minWidth: 44, minHeight: 44)
+                    .contentShape(Rectangle())
                 }
                 .accessibilityLabel(Text("\(tr("Tout voir")) : \(category.title)"))
                 .accessibilityIdentifier("store-miniapp-\(category.rawValue)")
@@ -331,6 +333,8 @@ struct ExploreView: View {
                                 Image(systemName: "chevron.right").font(.caption.weight(.bold))
                             }
                             .font(.subheadline.weight(.semibold))
+                            .frame(minWidth: 44, minHeight: 44)
+                            .contentShape(Rectangle())
                         }
                         .accessibilityLabel(Text("\(tr("Tout voir")) : \(title)"))
                     }
@@ -910,6 +914,8 @@ struct AisleHeader: View {
                             Image(systemName: "chevron.right").font(.caption.weight(.bold))
                         }
                         .font(.subheadline.weight(.semibold))
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
                     }
                     .accessibilityLabel(Text("\(tr("Tout voir")) : \(aisle.title)"))
                 }

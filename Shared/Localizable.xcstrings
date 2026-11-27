@@ -71271,7 +71271,7 @@
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Elige lo que te interesa y autoriza una sola vez: todas las mini-apps se benefician."
+            "value": "Elige lo que te interesa y autoriza una sola vez: todas las miniapps se benefician."
           }
         },
         "fr": {
@@ -71295,7 +71295,7 @@
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Escolha o que te interessa e autorize uma única vez: todos os mini-apps aproveitam."
+            "value": "Escolha o que te interessa e autorize uma única vez: todos os miniapps aproveitam."
           }
         }
       }
@@ -102420,7 +102420,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Freischalten und sichern"
+            "value": "Freischalten und speichern"
           }
         },
         "en": {
@@ -112337,7 +112337,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Widget sichern"
+            "value": "Widget speichern"
           }
         },
         "en": {
@@ -112384,7 +112384,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "%@ Widgets sichern"
+            "value": "%@ Widgets speichern"
           }
         },
         "en": {
@@ -138745,7 +138745,7 @@
         }
       }
     },
-    "Ils seront séparés. Pour les réunir en un seul widget, touche « + » sur le widget dans l'Atelier.": {
+    "Ils seront séparés. Pour les réunir en un seul widget, touche « + » sur le widget dans le Studio.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
@@ -138769,7 +138769,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ils seront séparés. Pour les réunir en un seul widget, touche « + » sur le widget dans l'Atelier."
+            "value": "Ils seront séparés. Pour les réunir en un seul widget, touche « + » sur le widget dans le Studio."
           }
         },
         "it": {
@@ -150266,7 +150266,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Braucht den Platz von %@ Symbolen"
+            "value": "Entspricht %@ App-Symbolen"
           }
         },
         "en": {
@@ -160830,7 +160830,7 @@
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "As mesmas informações em todo lugar: alteradas aqui, mudam também em “Minhas informações”, nos outros mini-apps e nos widgets."
+            "value": "As mesmas informações em todo lugar: alteradas aqui, mudam também em “Minhas informações”, nos outros miniapps e nos widgets."
           }
         }
       }
@@ -208076,7 +208076,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Planung ist schon auf deinem Startbildschirm, ob du sie wählst oder nicht."
+            "value": "Planung ist schon auf deinem Home-Bildschirm, ob du sie wählst oder nicht."
           }
         },
         "en": {
@@ -280826,7 +280826,7 @@
         }
       }
     },
-    "Touche un widget : l'Atelier s'ouvre aussitôt.": {
+    "Touche un widget : le Studio s'ouvre aussitôt.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
@@ -280850,7 +280850,7 @@
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Touche un widget : l'Atelier s'ouvre aussitôt."
+            "value": "Touche un widget : le Studio s'ouvre aussitôt."
           }
         },
         "it": {

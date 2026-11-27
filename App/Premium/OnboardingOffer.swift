@@ -95,13 +95,19 @@ struct OnboardingOffer: View {
                 }
             } label: {
                 Text(store.isRestoring ? tr("Restauration…") : tr("Restaurer"))
+                    .frame(minWidth: 44, minHeight: 44)
+                    .contentShape(Rectangle())
             }
             .disabled(store.isRestoring || store.purchasingID != nil)
             .accessibilityIdentifier("onboarding-offer-restore")
             Spacer()
-            Button(tr("Plus tard")) {
+            Button {
                 Haptics.tap()
                 onDone()
+            } label: {
+                Text(tr("Plus tard"))
+                    .frame(minWidth: 44, minHeight: 44)
+                    .contentShape(Rectangle())
             }
             .accessibilityIdentifier("onboarding-offer-later")
         }
@@ -157,6 +163,7 @@ struct OnboardingOffer: View {
             Image(systemName: "checkmark")
                 .font(.subheadline.weight(.bold))
                 .foregroundStyle(Color.accentColor)
+                .accessibilityHidden(true)
             Text(text)
                 .font(.body.weight(.semibold))
                 .fixedSize(horizontal: false, vertical: true)
@@ -270,8 +277,12 @@ struct OnboardingOffer: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
             HStack(spacing: 16) {
-                Button(tr("Conditions")) { openURL(PremiumConfiguration.termsURL) }
-                Button(tr("Confidentialité")) { openURL(PremiumConfiguration.privacyURL) }
+                Button { openURL(PremiumConfiguration.termsURL) } label: {
+                    Text(tr("Conditions")).frame(minWidth: 44, minHeight: 44).contentShape(Rectangle())
+                }
+                Button { openURL(PremiumConfiguration.privacyURL) } label: {
+                    Text(tr("Confidentialité")).frame(minWidth: 44, minHeight: 44).contentShape(Rectangle())
+                }
             }
             .font(.caption.weight(.medium))
             .foregroundStyle(.secondary)

@@ -689,14 +689,14 @@ private struct NutritionDayTile: View {
                                     .font(.title3.weight(.bold))
                                     .monospacedDigit()
                                 Text(left >= 0 ? tr("kcal restantes") : tr("kcal en trop"))
-                                    .font(.system(size: 10))
+                                    .font(.caption2)
                                     .foregroundStyle(.secondary)
                             } else {
                                 Text(TF.int(nutrition.eaten.kcal))
                                     .font(.title3.weight(.bold))
                                     .monospacedDigit()
                                 Text(tr("kcal mangées"))
-                                    .font(.system(size: 10))
+                                    .font(.caption2)
                                     .foregroundStyle(.secondary)
                             }
                         }

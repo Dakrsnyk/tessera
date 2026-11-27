@@ -272,7 +272,7 @@ struct SpaceBuilderView: View {
     private var widgetsSection: some View {
         EditorSection(title: tr("Widgets"), detail: widgetsDetail) {
             if separates {
-                Label(tr("Ils seront séparés. Pour les réunir en un seul widget, touche « + » sur le widget dans l'Atelier."), systemImage: "info.circle")
+                Label(tr("Ils seront séparés. Pour les réunir en un seul widget, touche « + » sur le widget dans le Studio."), systemImage: "info.circle")
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

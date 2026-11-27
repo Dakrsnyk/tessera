@@ -136,7 +136,7 @@ private struct AreaBadge: View {
                 .foregroundStyle(.primary)
                 .lineLimit(1)
             Text(missing == 0 ? "✓" : tr("À compléter"))
-                .font(.system(size: 10, weight: .semibold))
+                .font(.caption2.weight(.semibold))
                 .foregroundStyle(missing == 0 ? Color.accentColor : Color(light: "8A4B00", dark: "F5B25A"))
         }
         .frame(width: 76)

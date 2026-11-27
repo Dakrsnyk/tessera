@@ -318,6 +318,7 @@ struct StepTitle: View {
                 Image(systemName: symbol)
                     .font(.system(size: 22, weight: .semibold))
                     .foregroundStyle(.white)
+                    .accessibilityHidden(true)
                     .frame(width: 48, height: 48)
                     .background(Color(hex: colorHex), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                 if let greeting {
@@ -405,6 +406,7 @@ struct AddStepRow: View {
                     .foregroundStyle(Color.accentColor)
             }
             .frame(width: 40, height: 40)
+            .accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 2) {
                 Text(tr("Étape \(number)"))
                     .font(.caption.weight(.semibold))
@@ -414,6 +416,7 @@ struct AddStepRow: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
+        .accessibilityElement(children: .combine)
     }
 }
 

@@ -748,7 +748,7 @@ private struct PlacesCard: View {
                 .overlay(alignment: .topLeading) {
                     Text(verbatim: "\(index + 1)")
                         .font(.caption2.weight(.bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color(uiColor: .systemBackground))
                         .frame(width: 18, height: 18)
                         .background(Color.primary, in: Circle())
                         .padding(4)
@@ -787,7 +787,7 @@ private struct PlacesCard: View {
 
     /// What to know now: how to start, what is missing, how many places are left, or the limit.
     private var message: String? {
-        if draft.format == .small { return tr("Touche un widget : l'Atelier s'ouvre aussitôt.") }
+        if draft.format == .small { return tr("Touche un widget : le Studio s'ouvre aussitôt.") }
         if let blocker = draft.blocker { return blocker }
         let left = draft.room - draft.picked.count
         if draft.picked.isEmpty { return tr("Choisis jusqu'à \(draft.room) widgets : ils seront réunis en un seul.") }
