@@ -60,12 +60,10 @@
 4. **Geste réel**
    - Chaque action montre le doigt ou une onde de toucher, puis l'effet.
    - Plus de valeurs qui changent seules.
-5. **Carte de fin.** Garder le style choisi par l'utilisateur : « AVAILABLE ON THE APP STORE », 1,5 s. Le texte suit l'état réel de l'app :
-   - tant que l'app n'est pas en vente : « COMING SOON TO THE APP STORE » (`Faits-verifies.md` § 0, `Legendes-et-CTA.md`) ;
-   - aucun badge, aucun prix, aucun essai, aucun « Download » avant la mise en ligne.
-   - Prévoir une carte à deux variantes pour basculer en ne re-rendant que la fin.
-   - Un verbe (« Get Ardane ») est une proposition de la revue, pas une règle validée : le montrer en option.
-   - Jamais « free » ou « gratuit » sans nuance. Après la mise en ligne seulement : « Free download · Premium optional ».
+5. **Carte de fin « AVAILABLE ON THE APP STORE »**, 1,5 s, lisible, à la fin de CHAQUE vidéo. C'est la décision du PDG du 2026-11-27 : les vidéos sortent après la mise en vente, donc pas de « Coming soon ».
+   - Une fin sur l'icône seule ne suffit pas.
+   - Jamais « free » ni « gratuit » sans nuance.
+   - Un verbe (« Get Ardane ») reste une option à proposer, pas une règle.
 6. **Studio et personnalisation dans chaque vidéo**
    - Montrer l'accueil complet, puis zoomer sur le widget, faire l'action, et changer le style de tout l'accueil (règle validée).
    - Montrer l'essai gratuit du Studio : un utilisateur gratuit peut appliquer n'importe quel style Premium et le voir « Sur mon écran ». Seul « Enregistrer » est bloqué. C'est un argument fort et vrai.
@@ -227,3 +225,18 @@ Objectif de stock avant de publier à 4 par jour : environ 2 semaines d'avance.
 3. « Essaie tous les styles gratuitement » et « Ce que tu as gratuitement ».
 4. Les vidéos à modifier (section 4), les meilleures notes d'abord.
 5. Les 6 fadein refaites, puis les créations 4 à 6 et les images.
+
+## 9. Avancement (tenu par le Chef)
+- 2026-11-27 : carte « AVAILABLE ON THE APP STORE » vérifiée sur la dernière image de chaque vidéo du QG. Toutes l'ont, sauf les 30 fadein, qui finissent sur le logo seul. Les 7 vidéos « telles quelles » sont donc prêtes.
+- 2026-11-27 : **pub principale 28 s**, brouillon v0 envoyé au PDG pour validation. Planche : `~/ardane-tools/campaign/main28-org/planche-brouillon-v0.png` (images de Main Pub v2.5, source `~/ardane-tools/film/src/pub26/`). Déroulé :
+
+| Temps | Plan | Voix | Note |
+|---|---|---|---|
+| 0-3 s | Accroche : icônes qui se multiplient | « Why manage your life in ten different apps? » | nouvelle voix Kokoro `af_heart` |
+| 3-6,5 s | Accueil clair, puis sombre | « Meet Ardane. All your essentials on your home screen. » | pastille Premium lisible |
+| 6,5-11 s | Nutrition : Scan / Search, puis 1 672 → 1 569 | « Scan your food, or search for it. Your day updates. » | doigt sur Scan |
+| 11-15,5 s | Fitness : Set done, puis Live Activity sur l'écran verrouillé | « Track every set, even from your lock screen. » | gratuit |
+| 15,5-19 s | Planning : semaine, habitudes | « Your week, your tasks, your habits. » | 3 habitudes (gratuit) ou pastille |
+| 19-20,5 s | Défilé des autres mini-apps | « And much more. » | |
+| 20,5-26 s | Accueil Clair (gratuit), puis Aurora | « Make it yours. Try every style before you choose. » | pastille Premium sur Aurora |
+| 26-28,5 s | Carte finale | « Ardane. Your whole life. One place. » | AVAILABLE ON THE APP STORE |
