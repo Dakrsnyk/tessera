@@ -149,8 +149,11 @@ final class StudioUITests: XCTestCase {
         let button = app.buttons[identifier]
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Outil « \(name) » introuvable", file: file, line: line)
         // The tools scroll sideways (« Contenu » is the last one since 2026-11-26): bring the tool on screen first.
-        for direction in [true, false] where !button.isHittable {
-            for _ in 0..<3 where !button.isHittable {
+        // By its frame: isHittable fails (« Activation point invalid ») on a button scrolled off the screen.
+        let width = app.windows.firstMatch.frame.maxX
+        func onScreen() -> Bool { button.frame.minX >= 0 && button.frame.maxX <= width }
+        for direction in [true, false] where !onScreen() {
+            for _ in 0..<3 where !onScreen() {
                 let bar = app.scrollViews.containing(.button, identifier: identifier).firstMatch
                 if direction { bar.swipeRight() } else { bar.swipeLeft() }
             }
