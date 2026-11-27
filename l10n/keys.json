@@ -211,7 +211,7 @@
  "%@ : gratuit %@, Premium %@": {
   "placeholders": 3,
   "uses": [
-   "App/Premium/PaywallView.swift:231: .accessibilityLabel(Text(tr(\"\\(title) : gratuit \\(free), Premium \\(premium)\")))"
+   "App/Premium/PaywallView.swift:236: .accessibilityLabel(Text(tr(\"\\(title) : gratuit \\(free), Premium \\(premium)\")))"
   ]
  },
  "%@ L · %@/L · %@ km%@": {
@@ -891,8 +891,8 @@
   "uses": [
    "App/Core/DataItems.swift:417: case .monthlyBudget: return tr(\"\\(TF.money(budget.monthlyBudget, currency)) par mois\")",
    "App/Core/DataItems.swift:423: case .businessGoal: return tr(\"\\(TF.money(business.monthlyGoal, currency)) par mois\")",
-   "App/Premium/OnboardingOffer.swift:201: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
-   "App/Premium/PaywallView.swift:283: return tr(\"\\(product.displayPrice) par mois\")"
+   "App/Premium/OnboardingOffer.swift:202: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
+   "App/Premium/PaywallView.swift:288: return tr(\"\\(product.displayPrice) par mois\")"
   ]
  },
  "%@ par mois jusqu'au %@": {
@@ -932,13 +932,13 @@
  "%@ pour 12 mois": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:281: return tr(\"\\(product.displayPrice) pour 12 mois\")"
+   "App/Premium/PaywallView.swift:286: return tr(\"\\(product.displayPrice) pour 12 mois\")"
   ]
  },
  "%@ pour 12 mois, soit %@ par mois": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/PaywallView.swift:280: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
+   "App/Premium/PaywallView.swift:285: if let monthly = store.monthlyEquivalent(of: product) { return tr(\"\\(product.displayPrice) pour 12 mois, soit \\(monthly) par mois\") }"
   ]
  },
  "%@ prêts à poser d'un coup, avec leurs styles.": {
@@ -999,7 +999,7 @@
  "%@ styles et %@ couleurs d'app": {
   "placeholders": 2,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:32: perk(tr(\"\\(StyleCatalog.all.count) styles et \\(AppStyleID.allCases.count) couleurs d'app\"))"
+   "App/Premium/OnboardingOffer.swift:33: perk(tr(\"\\(StyleCatalog.all.count) styles et \\(AppStyleID.allCases.count) couleurs d'app\"))"
   ]
  },
  "%@ suivis cette semaine, dont %@ dans ta cible. Belle constance !": {
@@ -1469,7 +1469,7 @@
  "%@, une seule fois, sans abonnement": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/PaywallView.swift:285: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
+   "App/Premium/PaywallView.swift:290: return tr(\"\\(product.displayPrice), une seule fois, sans abonnement\")"
   ]
  },
  "%@, vers le %@": {
@@ -1520,7 +1520,7 @@
  "+ %@ styles": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:134: Label(tr(\"+ \\(StyleCatalog.premiumCount) styles\"), systemImage: \"sparkles\")"
+   "App/Premium/OnboardingOffer.swift:135: Label(tr(\"+ \\(StyleCatalog.premiumCount) styles\"), systemImage: \"sparkles\")"
   ]
  },
  "+ %@ à faire": {
@@ -2440,7 +2440,7 @@
  "Accueil": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:307: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
+   "App/ArdaneApp.swift:314: .tabItem { Label(tr(\"Accueil\"), systemImage: \"square.grid.2x2\") }"
   ]
  },
  "Accès au calendrier": {
@@ -2489,7 +2489,7 @@
  "Achat": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:48: .alert(tr(\"Achat\"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {",
+   "App/Premium/OnboardingOffer.swift:49: .alert(tr(\"Achat\"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {",
    "App/Premium/PaywallView.swift:54: .alert(tr(\"Achat\"), isPresented: Binding(get: { message != nil }, set: { if !$0 { message = nil } })) {"
   ]
  },
@@ -2690,7 +2690,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:292: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
-   "Shared/Render/Tiles/TileView.swift:1586: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
+   "Shared/Render/Tiles/TileView.swift:1629: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
   ]
  },
  "Adaptateur de prise": {
@@ -3866,7 +3866,7 @@
  "Analyse du plat sur ton iPhone…": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:153: progress(tr(\"Analyse du plat sur ton iPhone…\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:159: progress(tr(\"Analyse du plat sur ton iPhone…\"))"
   ]
  },
  "Analyse productivité": {
@@ -3881,10 +3881,16 @@
    "Shared/Model/WidgetGroup.swift:52: case .insights: tr(\"Analyses\")"
   ]
  },
+ "Analyses de plat": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:211: comparisonRow(tr(\"Analyses de plat\"), free: \"\\(PhotoScanQuota.freeLimit)\", premium: \"∞\")"
+  ]
+ },
  "Analyses de plat gratuites utilisées": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:129: if left == 0 { return tr(\"Analyses de plat gratuites utilisées\") }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:135: if left == 0 { return tr(\"Analyses de plat gratuites utilisées\") }"
   ]
  },
  "Analyses de plat illimitées": {
@@ -3984,7 +3990,7 @@
  "Annuel": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:208: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
+   "App/Premium/OnboardingOffer.swift:209: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
    "Shared/Domains/Budget.swift:53: var title: String { self == .monthly ? tr(\"Mensuel\") : tr(\"Annuel\") }"
   ]
  },
@@ -6276,8 +6282,8 @@
  "Bienvenue dans Ardane Premium !": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:301: message = tr(\"Bienvenue dans Ardane Premium !\")",
-   "App/Premium/PaywallView.swift:381: message = tr(\"Bienvenue dans Ardane Premium !\")"
+   "App/Premium/OnboardingOffer.swift:302: message = tr(\"Bienvenue dans Ardane Premium !\")",
+   "App/Premium/PaywallView.swift:386: message = tr(\"Bienvenue dans Ardane Premium !\")"
   ]
  },
  "Bilan": {
@@ -8142,7 +8148,7 @@
  "Caméra indisponible": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:231: title: tr(\"Caméra indisponible\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:237: title: tr(\"Caméra indisponible\"),"
   ]
  },
  "Canada": {
@@ -9203,8 +9209,8 @@
  "Chargement des offres…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:176: ProgressView(tr(\"Chargement des offres…\"))",
-   "App/Premium/PaywallView.swift:237: ProgressView(tr(\"Chargement des offres…\"))"
+   "App/Premium/OnboardingOffer.swift:177: ProgressView(tr(\"Chargement des offres…\"))",
+   "App/Premium/PaywallView.swift:242: ProgressView(tr(\"Chargement des offres…\"))"
   ]
  },
  "Chargement des états financiers…": {
@@ -9290,10 +9296,10 @@
  "Chercher dans la liste": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:166: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:180: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:193: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:202: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:172: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:186: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:199: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:208: plainButton(tr(\"Chercher dans la liste\")) { onFinish(.search) }"
   ]
  },
  "Chercher la ville (fuseau et devise)": {
@@ -9305,10 +9311,10 @@
  "Chercher ou créer l'aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:145: alternativeTitle: tr(\"Chercher ou créer l'aliment\"),",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:214: plainButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:234: prominentButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:301: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:151: alternativeTitle: tr(\"Chercher ou créer l'aliment\"),",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:220: plainButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:240: prominentButton(tr(\"Chercher ou créer l'aliment\")) { onFinish(.search) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:307: Label(tr(\"Chercher ou créer l'aliment\"), systemImage: \"magnifyingglass\")"
   ]
  },
  "Chercher une ville": {
@@ -9540,8 +9546,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/EditorView.swift:781: Text(BackgroundKind(design.background) == .photo ? tr(\"Changer de photo\") : tr(\"Choisir une photo\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:247: .accessibilityLabel(tr(\"Choisir une photo\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:251: .accessibilityLabel(tr(\"Choisir une photo\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:253: .accessibilityLabel(tr(\"Choisir une photo\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:257: .accessibilityLabel(tr(\"Choisir une photo\"))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:861: Text(tr(\"Choisir une photo\"))"
   ]
  },
@@ -10072,13 +10078,13 @@
  "Code-barres": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:278: Label(tr(\"Code-barres\"), systemImage: \"barcode.viewfinder\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:284: Label(tr(\"Code-barres\"), systemImage: \"barcode.viewfinder\")"
   ]
  },
  "Code-barres ou aliments": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:135: return tr(\"Code-barres ou aliments\")",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:141: return tr(\"Code-barres ou aliments\")",
    "App/Screens/Spaces/NutritionSpace.swift:786: .navigationTitle(tr(\"Code-barres ou aliments\"))"
   ]
  },
@@ -10514,8 +10520,8 @@
  "Conditions": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:281: Text(tr(\"Conditions\")).frame(minWidth: 44, minHeight: 44).contentShape(Rectangle())",
-   "App/Premium/PaywallView.swift:369: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
+   "App/Premium/OnboardingOffer.swift:282: Text(tr(\"Conditions\")).frame(minWidth: 44, minHeight: 44).contentShape(Rectangle())",
+   "App/Premium/PaywallView.swift:374: Button(tr(\"Conditions\")) { openURL(PremiumConfiguration.termsURL) }"
   ]
  },
  "Conditions d'utilisation": {
@@ -10534,8 +10540,8 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:928: MarketingHeadline(eyebrow: tr(\"Confidentialité\"), title: tr(\"Tes données\\nrestent à toi.\"), subtitle: tr(\"Sans compte, sans pub, sans suivi.\"))",
-   "App/Premium/OnboardingOffer.swift:284: Text(tr(\"Confidentialité\")).frame(minWidth: 44, minHeight: 44).contentShape(Rectangle())",
-   "App/Premium/PaywallView.swift:370: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
+   "App/Premium/OnboardingOffer.swift:285: Text(tr(\"Confidentialité\")).frame(minWidth: 44, minHeight: 44).contentShape(Rectangle())",
+   "App/Premium/PaywallView.swift:375: Button(tr(\"Confidentialité\")) { openURL(PremiumConfiguration.privacyURL) }",
    "App/Screens/Profile/ProfileView.swift:204: Label(tr(\"Confidentialité\"), systemImage: \"hand.raised\")"
   ]
  },
@@ -10694,8 +10700,8 @@
   "placeholders": 0,
   "uses": [
    "App/Components/PermissionExplainer.swift:219: Text(tr(\"Continuer\"))",
-   "App/Premium/OnboardingOffer.swift:261: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
-   "App/Premium/PaywallView.swift:347: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Premium/OnboardingOffer.swift:262: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Premium/PaywallView.swift:352: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
    "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:73: Text(tr(\"Continuer\")).frame(maxWidth: .infinity, minHeight: 44)"
   ]
  },
@@ -11100,7 +11106,7 @@
  "Couleurs": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:212: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:215: comparisonRow(tr(\"Couleurs\"), free: \"\\(Palette.freeAccents.count)\", premium: \"∞\")",
    "App/Screens/Editor/StudioComponents.swift:23: case .colors: tr(\"Couleurs\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:737: Text(tr(\"Couleurs\")).font(.headline)"
   ]
@@ -11717,7 +11723,7 @@
  "Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:163: detail: tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:169: detail: tr(\"Crée-le avec les valeurs de l'étiquette : le prochain scan le retrouvera.\")"
   ]
  },
  "Crée-les dans Ardane": {
@@ -11729,7 +11735,7 @@
  "Créer": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:311: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
+   "App/ArdaneApp.swift:318: .tabItem { Label(tr(\"Créer\"), systemImage: \"plus.square.on.square\") }",
    "App/Screens/Editor/EditorView.swift:127: if onChangeWidget != nil { return tr(\"Créer\") }",
    "App/Screens/Spaces/CreateFlow.swift:282: case .size: tr(\"Créer\")",
    "App/Screens/Tutorial/Tutorial.swift:57: case .create: tr(\"Créer\")"
@@ -11738,10 +11744,10 @@
  "Créer cet aliment": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:165: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:179: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:192: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:201: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(found)) }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:171: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:185: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:198: plainButton(tr(\"Créer cet aliment\")) { onFinish(.create(draft(for: code))) }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:207: prominentButton(tr(\"Créer cet aliment\")) { onFinish(.create(found)) }"
   ]
  },
  "Créer les %@ widgets séparés": {
@@ -12595,7 +12601,7 @@
  "Dernier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TileView.swift:1561: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
+   "Shared/Render/Tiles/TileView.swift:1594: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
   ]
  },
  "Dernier : %@, %@": {
@@ -14420,7 +14426,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/DataWidgets.swift:226: WLabel(text: mode == .net ? tr(\"Chaque mois\") : tr(\"Détail\"), style: s)",
-   "Shared/Render/Tiles/TileView.swift:811: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
+   "Shared/Render/Tiles/TileView.swift:834: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
   ]
  },
  "Détails": {
@@ -14618,7 +14624,7 @@
  "Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:143: reason: tr(\"Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:149: reason: tr(\"Elle lit le code-barres d'un aliment, ou photographie ton plat pour en estimer le contenu.\"),"
   ]
  },
  "Elle photographie ton horaire, sur papier ou sur un écran, pour en lire les cours et les heures.": {
@@ -14896,7 +14902,7 @@
  "Encore %@ analyses de plat gratuites": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:130: return left == 1 ? tr(\"Encore 1 analyse de plat gratuite\") : tr(\"Encore \\(left) analyses de plat gratuites\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:136: return left == 1 ? tr(\"Encore 1 analyse de plat gratuite\") : tr(\"Encore \\(left) analyses de plat gratuites\")"
   ]
  },
  "Encore %@ g de protéines pour atteindre ta cible.": {
@@ -14920,7 +14926,7 @@
  "Encore 1 analyse de plat gratuite": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:130: return left == 1 ? tr(\"Encore 1 analyse de plat gratuite\") : tr(\"Encore \\(left) analyses de plat gratuites\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:136: return left == 1 ? tr(\"Encore 1 analyse de plat gratuite\") : tr(\"Encore \\(left) analyses de plat gratuites\")"
   ]
  },
  "Encouragements": {
@@ -15210,7 +15216,7 @@
  "Essai gratuit": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:270: if store.introDescription(for: product) != nil { return tr(\"Essai gratuit\") }"
+   "App/Premium/PaywallView.swift:275: if store.introDescription(for: product) != nil { return tr(\"Essai gratuit\") }"
   ]
  },
  "Essaie un autre filtre.": {
@@ -15228,8 +15234,8 @@
  "Essayer %@ jours gratuits": {
   "placeholders": 1,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:261: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
-   "App/Premium/PaywallView.swift:347: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))"
+   "App/Premium/OnboardingOffer.swift:262: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))",
+   "App/Premium/PaywallView.swift:352: Text(trialDays.map { tr(\"Essayer \\($0) jours gratuits\") } ?? tr(\"Continuer\"))"
   ]
  },
  "Essayer avec un exemple": {
@@ -15380,7 +15386,7 @@
  "Exercices": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:210: comparisonRow(tr(\"Exercices\"), free: \"—\", premium: \"\\(ExerciseLibrary.all.count)\")",
+   "App/Premium/PaywallView.swift:213: comparisonRow(tr(\"Exercices\"), free: \"—\", premium: \"\\(ExerciseLibrary.all.count)\")",
    "App/Screens/MiniApps/Fitness/ExerciseLibraryViews.swift:139: .navigationTitle(onPick == nil ? tr(\"Exercices\") : tr(\"Ajouter un exercice\"))",
    "App/Screens/MiniApps/Fitness/FitnessApp.swift:508: shortcut(symbol: \"list.bullet\", title: tr(\"Exercices\"), value: HomeRoute.page(.fitnessLibrary), identifier: \"fitness-library\", premium: true)"
   ]
@@ -16455,13 +16461,14 @@
  "Fonds d'écran": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/PaywallView.swift:217: comparisonRow(tr(\"Fonds d'écran\"), free: \"\\(WallpaperCatalog.all.filter { !$0.isPremium }.count)\", premium: \"\\(WallpaperCatalog.all.count)\")",
    "App/Screens/Explore/ExploreView.swift:30: case .wallpapers: tr(\"Fonds d'écran\")"
   ]
  },
  "Fonds et polices": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:213: comparisonRow(tr(\"Fonds et polices\"), free: \"—\", premium: \"✓\")"
+   "App/Premium/PaywallView.swift:216: comparisonRow(tr(\"Fonds et polices\"), free: \"—\", premium: \"✓\")"
   ]
  },
  "Fonds photo, couleurs libres": {
@@ -17737,7 +17744,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:91: case .habits: tr(\"Habitudes\")",
-   "App/Premium/PaywallView.swift:209: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:210: comparisonRow(tr(\"Habitudes\"), free: \"\\(AppModel.freeHabitLimit)\", premium: \"∞\")",
    "App/Screens/Content/HabitsApp.swift:149: .navigationTitle(tr(\"Habitudes\"))",
    "App/Screens/Content/HabitsApp.swift:696: Text(tr(\"Habitudes\")).font(.body.weight(.medium))"
   ]
@@ -18426,6 +18433,7 @@
  "Icônes": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/PaywallView.swift:206: comparisonRow(tr(\"Icônes\"), free: \"1\", premium: \"\\(AppIconChoice.all.count)\")",
    "App/Screens/Editor/StudioPanels.swift:405: StudioColorRow(title: tr(\"Icônes\"), hex: $design.style.iconHex, fallback: style.icon)"
   ]
  },
@@ -18673,6 +18681,12 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessSources.swift:242: title: tr(\"Importer un fichier, avec Premium\"),"
+  ]
+ },
+ "Imports (horaire, CSV, Stripe)": {
+  "placeholders": 0,
+  "uses": [
+   "App/Premium/PaywallView.swift:218: comparisonRow(tr(\"Imports (horaire, CSV, Stripe)\"), free: \"—\", premium: \"✓\")"
   ]
  },
  "Impossible d'obtenir les taux de la BCE. Vérifie ta connexion, puis réessaie.": {
@@ -19145,7 +19159,7 @@
  "Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:210: ? tr(\"Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:216: ? tr(\"Je n'ai reconnu aucun aliment sur cette photo. Rapproche-toi du plat, ou cherche l'aliment dans la liste.\")"
   ]
  },
  "Je préfère ne pas répondre": {
@@ -19691,7 +19705,7 @@
  "L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:211: : tr(\"L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:217: : tr(\"L'analyse de la photo a échoué. Réessaie, ou cherche l'aliment dans la liste.\")"
   ]
  },
  "L'analyse est dans Premium": {
@@ -19715,7 +19729,7 @@
  "L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:144: privacy: tr(\"L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:150: privacy: tr(\"L'analyse se fait sur ton iPhone. Aucune photo n'est enregistrée ni envoyée ; seul le numéro d'un code-barres est envoyé à Open Food Facts pour trouver le produit.\"),"
   ]
  },
  "L'année avance": {
@@ -19965,7 +19979,7 @@
  "La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:232: message: tr(\"La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:238: message: tr(\"La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.\")"
   ]
  },
  "La capitalisation totale du marché et ses principaux actifs.": {
@@ -21020,7 +21034,7 @@
  "Le produit %@ n'est pas encore dans Open Food Facts.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:162: message: tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:168: message: tr(\"Le produit \\(code) n'est pas encore dans Open Food Facts.\"),"
   ]
  },
  "Le repos démarre tout seul.": {
@@ -21202,13 +21216,13 @@
  "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:363: ? tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonne"
+   "App/Premium/PaywallView.swift:368: ? tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonne"
   ]
  },
  "Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonnement dans les réglages de ton compte App Store. L'essai gratuit s'applique une seule fois par compte ; s'il n'est pas annulé au moins 24 h avant sa fin, l'abonnement est débité au prix normal. L'achat à vie est un paiement unique, sans renouvellement.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:364: : tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonne"
+   "App/Premium/PaywallView.swift:369: : tr(\"Les abonnements se renouvellent automatiquement, sauf annulation au moins 24 h avant la fin de la période en cours. Le paiement est débité sur ton compte Apple. Tu peux gérer ou annuler l'abonne"
   ]
  },
  "Les achats ne sont pas autorisés sur cet appareil.": {
@@ -22988,7 +23002,7 @@
  "Mensuel": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:208: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
+   "App/Premium/OnboardingOffer.swift:209: Text(yearly ? tr(\"Annuel\") : tr(\"Mensuel\"))",
    "Shared/Domains/Budget.swift:53: var title: String { self == .monthly ? tr(\"Mensuel\") : tr(\"Annuel\") }"
   ]
  },
@@ -23040,7 +23054,7 @@
  "Merci ! Tous les widgets et tous les styles sont débloqués.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:296: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
+   "App/Premium/PaywallView.swift:301: Text(tr(\"Merci ! Tous les widgets et tous les styles sont débloqués.\"))"
   ]
  },
  "Merci pour ton soutien": {
@@ -23285,7 +23299,7 @@
  "Mes widgets": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:319: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }",
+   "App/ArdaneApp.swift:326: .tabItem { Label(tr(\"Mes widgets\"), systemImage: \"rectangle.stack\") }",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:37: MiniSectionTitle(title: tr(\"Mes widgets\"),",
    "App/Screens/MyWidgets/MyWidgetsView.swift:102: .navigationTitle(isSelecting ? selectionTitle : tr(\"Mes widgets\"))",
    "App/Screens/Tutorial/Tutorial.swift:60: case .mine: tr(\"Mes widgets\")"
@@ -25522,6 +25536,7 @@
  "Nutriments": {
   "placeholders": 0,
   "uses": [
+   "App/Premium/PaywallView.swift:212: comparisonRow(tr(\"Nutriments\"), free: \"\\(Nutrient.free.count)\", premium: \"\\(Nutrient.allCases.count)\")",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:318: .navigationTitle(embedded ? tr(\"Bilan\") : tr(\"Nutriments\"))",
    "App/Screens/MiniApps/Nutrition/NutritionPages.swift:873: case .nutrients: tr(\"Nutriments\")"
   ]
@@ -25651,9 +25666,9 @@
  "OK": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:143: Button(tr(\"OK\")) { router.isIconPickerPresented = false }",
-   "App/ArdaneApp.swift:343: Button(tr(\"OK\")) { dismiss() }",
-   "App/Premium/OnboardingOffer.swift:49: Button(tr(\"OK\"), role: .cancel) {",
+   "App/ArdaneApp.swift:145: Button(tr(\"OK\")) { router.isIconPickerPresented = false }",
+   "App/ArdaneApp.swift:350: Button(tr(\"OK\")) { dismiss() }",
+   "App/Premium/OnboardingOffer.swift:50: Button(tr(\"OK\"), role: .cancel) {",
    "App/Premium/PaywallView.swift:55: Button(tr(\"OK\"), role: .cancel) {"
   ]
  },
@@ -26031,7 +26046,7 @@
  "Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:199: message: tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\")",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:205: message: tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\")",
    "App/Screens/Spaces/NutritionSpace.swift:652: : tr(\"Open Food Facts connaît ce produit, mais pas ses valeurs nutritives : recopie-les depuis l'étiquette.\"))"
   ]
  },
@@ -26044,7 +26059,7 @@
  "Open Food Facts reçoit trop de demandes en ce moment : le produit %@ n'a pas pu être cherché. Réessaie dans un instant.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:186: message: tr(\"Open Food Facts reçoit trop de demandes en ce moment : le produit \\(code) n'a pas pu être cherché. Réessaie dans un instant.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:192: message: tr(\"Open Food Facts reçoit trop de demandes en ce moment : le produit \\(code) n'a pas pu être cherché. Réessaie dans un instant.\")"
   ]
  },
  "Open Food Facts reçoit trop de demandes en ce moment. Réessaie dans un instant.": {
@@ -26493,7 +26508,7 @@
  "Paiement unique": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:272: if product.id == PremiumConfiguration.lifetimeID { return tr(\"Paiement unique\") }"
+   "App/Premium/PaywallView.swift:277: if product.id == PremiumConfiguration.lifetimeID { return tr(\"Paiement unique\") }"
   ]
  },
  "Paillettes": {
@@ -26920,7 +26935,7 @@
  "Pas de connexion : le produit %@ n'a pas pu être cherché.": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:173: message: tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:179: message: tr(\"Pas de connexion : le produit \\(code) n'a pas pu être cherché.\")"
   ]
  },
  "Pas de cours prévu": {
@@ -27598,8 +27613,8 @@
  "Photographier le plat": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:267: .accessibilityLabel(tr(\"Photographier le plat\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:285: Text(flashNotice ?? tr(\"Photographier le plat\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:273: .accessibilityLabel(tr(\"Photographier le plat\"))",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:291: Text(flashNotice ?? tr(\"Photographier le plat\"))"
   ]
  },
  "Photos": {
@@ -27614,7 +27629,7 @@
  "Photos et citations": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:208: comparisonRow(tr(\"Photos et citations\"), free: \"∞\", premium: \"∞\")",
+   "App/Premium/PaywallView.swift:209: comparisonRow(tr(\"Photos et citations\"), free: \"∞\", premium: \"∞\")",
    "App/Screens/MiniApps/MiniApp.swift:23: case .photos: tr(\"Photos et citations\")",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:50: .navigationTitle(tr(\"Photos et citations\"))",
    "App/Screens/Spaces/CreateFlow.swift:49: case .photos: tr(\"Photos et citations\")"
@@ -27887,13 +27902,13 @@
  "Plat": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:279: Label(tr(\"Plat\"), systemImage: \"fork.knife\")"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:285: Label(tr(\"Plat\"), systemImage: \"fork.knife\")"
   ]
  },
  "Plat non reconnu": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:208: title: tr(\"Plat non reconnu\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:214: title: tr(\"Plat non reconnu\"),"
   ]
  },
  "Platine": {
@@ -28192,7 +28207,7 @@
   "placeholders": 0,
   "uses": [
    "App/Components/PermissionExplainer.swift:228: Button(tr(\"Plus tard\")) { dismiss() }",
-   "App/Premium/OnboardingOffer.swift:108: Text(tr(\"Plus tard\"))",
+   "App/Premium/OnboardingOffer.swift:109: Text(tr(\"Plus tard\"))",
    "App/Screens/MiniApps/Nutrition/CameraAccessGate.swift:80: Text(tr(\"Plus tard\")).frame(maxWidth: .infinity, minHeight: 44)",
    "App/Screens/MiniApps/Nutrition/WeightPlanSummaryView.swift:272: PlanButton(title: tr(\"Plus tard\"), filled: false, accent: accent) {"
   ]
@@ -29493,8 +29508,8 @@
  "Produit introuvable": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:161: title: tr(\"Produit introuvable\"),",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:172: title: tr(\"Produit introuvable\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:167: title: tr(\"Produit introuvable\"),",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:178: title: tr(\"Produit introuvable\"),"
   ]
  },
  "Produits emballés": {
@@ -30400,7 +30415,7 @@
  "Recherche du produit %@…": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:151: progress(tr(\"Recherche du produit \\(code)…\"))"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:157: progress(tr(\"Recherche du produit \\(code)…\"))"
   ]
  },
  "Recherche sur Open Food Facts…": {
@@ -31199,14 +31214,14 @@
  "Restauration…": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:97: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
-   "App/Premium/PaywallView.swift:327: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/OnboardingOffer.swift:98: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
+   "App/Premium/PaywallView.swift:332: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:97: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
+   "App/Premium/OnboardingOffer.swift:98: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer\"))",
    "App/Screens/Profile/ProfileView.swift:322: Button(tr(\"Restaurer\"), role: .destructive) {"
   ]
  },
@@ -31219,7 +31234,7 @@
  "Restaurer mes achats": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:327: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
+   "App/Premium/PaywallView.swift:332: Text(store.isRestoring ? tr(\"Restauration…\") : tr(\"Restaurer mes achats\"))"
   ]
  },
  "Restaurer une sauvegarde": {
@@ -32438,7 +32453,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/ScreenshotMode.swift:555: .navigationTitle(mode == \"nutrition-plan\" ? tr(\"Ton objectif de poids\") : tr(\"Récapitulatif\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:134: if case .recap = stage { return tr(\"Récapitulatif\") }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:140: if case .recap = stage { return tr(\"Récapitulatif\") }"
   ]
  },
  "Récents": {
@@ -32487,10 +32502,10 @@
  "Réessayer": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:184: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
-   "App/Premium/PaywallView.swift:248: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
+   "App/Premium/OnboardingOffer.swift:185: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
+   "App/Premium/PaywallView.swift:253: Button(tr(\"Réessayer\")) { Task { await store.loadProducts() } }",
    "App/Screens/MiniApps/Business/BusinessSources.swift:360: Button(tr(\"Réessayer\")) { attempt += 1 }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:175: prominentButton(tr(\"Réessayer\")) {"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:181: prominentButton(tr(\"Réessayer\")) {"
   ]
  },
  "Régate": {
@@ -33327,8 +33342,8 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Nutrition/FoodScanView.swift:91: .accessibilityLabel(tr(\"Scanner à nouveau\"))",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:167: plainButton(tr(\"Scanner à nouveau\")) { rescan() }",
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:203: plainButton(tr(\"Scanner à nouveau\")) { rescan() }"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:173: plainButton(tr(\"Scanner à nouveau\")) { rescan() }",
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:209: plainButton(tr(\"Scanner à nouveau\")) { rescan() }"
   ]
  },
  "Sceau d'encre": {
@@ -33664,7 +33679,7 @@
  "Service occupé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:185: title: tr(\"Service occupé\"),"
+   "App/Screens/MiniApps/Nutrition/FoodScanView.swift:191: title: tr(\"Service occupé\"),"
   ]
  },
  "Ses dépenses, sa liste et les vols, hébergements et activités de ses dates seront aussi supprimés.": {
@@ -34352,13 +34367,13 @@
   "placeholders": 0,
   "uses": [
    "App/Premium/PaywallView.swift:167: (.history, \"chart.bar.xaxis\", tr(\"Statistiques détaillées\"), tr(\"Historique et tendances de tes repas, progression de tes charges, évolution de tes finances et de ton entreprise, régularité de tes hab",
-   "App/Premium/PaywallView.swift:211: comparisonRow(tr(\"Statistiques détaillées\"), free: \"—\", premium: \"✓\")"
+   "App/Premium/PaywallView.swift:214: comparisonRow(tr(\"Statistiques détaillées\"), free: \"—\", premium: \"✓\")"
   ]
  },
  "Statistiques, exercices, scans illimités": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:33: perk(tr(\"Statistiques, exercices, scans illimités\"))"
+   "App/Premium/OnboardingOffer.swift:34: perk(tr(\"Statistiques, exercices, scans illimités\"))"
   ]
  },
  "Statut « à payer », « prévu » ou « en attente » dans le fichier.": {
@@ -34394,7 +34409,7 @@
  "Store": {
   "placeholders": 0,
   "uses": [
-   "App/ArdaneApp.swift:315: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }",
+   "App/ArdaneApp.swift:322: .tabItem { Label(tr(\"Store\"), systemImage: \"bag\") }",
    "App/Core/MarketingShots.swift:638: MarketingHeadline(eyebrow: tr(\"Store\"), title: tr(\"\\(HomeSetupCatalog.all.count) écrans prêts\\nà installer.\"), subtitle: tr(\"Fond, widgets et icônes assortis, en un geste.\"))",
    "App/Core/MarketingShots.swift:813: MarketingShowcase(eyebrow: tr(\"Store\"), title: tr(\"Des styles\\npour tout.\"), subtitle: tr(\"Packs, collections, fonds d'écran.\")) {",
    "App/Screens/Explore/ExploreView.swift:135: .navigationTitle(tr(\"Store\"))"
@@ -34477,7 +34492,7 @@
  "Styles": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:206: comparisonRow(tr(\"Styles\"), free: \"\\(StyleCatalog.freeIDs.count)\", premium: \"\\(StyleCatalog.all.count)\")",
+   "App/Premium/PaywallView.swift:207: comparisonRow(tr(\"Styles\"), free: \"\\(StyleCatalog.freeIDs.count)\", premium: \"\\(StyleCatalog.all.count)\")",
    "App/Screens/Explore/ExploreView.swift:35: case .styles: tr(\"Styles\")"
   ]
  },
@@ -37104,8 +37119,8 @@
  "Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:304: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")",
-   "App/Premium/PaywallView.swift:383: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
+   "App/Premium/OnboardingOffer.swift:305: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")",
+   "App/Premium/PaywallView.swift:388: message = tr(\"Ton achat est en attente d'approbation. Premium s'activera dès qu'il sera validé.\")"
   ]
  },
  "Ton activité [business]": {
@@ -37846,13 +37861,13 @@
  "Tout Ardane,": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:75: Text(tr(\"Tout Ardane,\"))"
+   "App/Premium/OnboardingOffer.swift:76: Text(tr(\"Tout Ardane,\"))"
   ]
  },
  "Tout Ardane, sans limite": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:80: Text(tr(\"Tout Ardane, sans limite\"))"
+   "App/Premium/OnboardingOffer.swift:81: Text(tr(\"Tout Ardane, sans limite\"))"
   ]
  },
  "Tout Finance": {
@@ -38350,7 +38365,7 @@
  "Tu profites de Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:294: Text(tr(\"Tu profites de Premium\"))"
+   "App/Premium/PaywallView.swift:299: Text(tr(\"Tu profites de Premium\"))"
   ]
  },
  "Tu retrouveras tout dans Profil › Autorisations.": {
@@ -40417,13 +40432,13 @@
  "Widgets enregistrés": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/PaywallView.swift:207: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
+   "App/Premium/PaywallView.swift:208: comparisonRow(tr(\"Widgets enregistrés\"), free: \"\\(AppModel.freeDesignLimit)\", premium: \"∞\")"
   ]
  },
  "Widgets illimités, tous les types": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:31: perk(tr(\"Widgets illimités, tous les types\"))"
+   "App/Premium/OnboardingOffer.swift:32: perk(tr(\"Widgets illimités, tous les types\"))"
   ]
  },
  "Widgets intelligents": {
@@ -41636,7 +41651,7 @@
  "jour gratuit": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:76: Text(Fmt.plural(trialDays, tr(\"jour gratuit\"), tr(\"jours gratuits\")))",
+   "App/Premium/OnboardingOffer.swift:77: Text(Fmt.plural(trialDays, tr(\"jour gratuit\"), tr(\"jours gratuits\")))",
    "App/Premium/PremiumStore.swift:268: return tr(\"\\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
   ]
  },
@@ -41681,7 +41696,7 @@
  "jours gratuits": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:76: Text(Fmt.plural(trialDays, tr(\"jour gratuit\"), tr(\"jours gratuits\")))",
+   "App/Premium/OnboardingOffer.swift:77: Text(Fmt.plural(trialDays, tr(\"jour gratuit\"), tr(\"jours gratuits\")))",
    "App/Premium/PremiumStore.swift:268: return tr(\"\\(Fmt.plural(days, tr(\"jour gratuit\"), tr(\"jours gratuits\"))), puis \\(regular)\")"
   ]
  },
@@ -42151,7 +42166,7 @@
  "par mois": {
   "placeholders": 0,
   "uses": [
-   "App/Premium/OnboardingOffer.swift:201: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
+   "App/Premium/OnboardingOffer.swift:202: let detail = yearly ? store.monthlyEquivalent(of: product).map { tr(\"\\($0) par mois\") } : tr(\"par mois\")",
    "App/Screens/MiniApps/Car/CarApp.swift:290: MiniStat(title: tr(\"Coût réel\"), value: \"–\", detail: tr(\"par mois\"))",
    "App/Screens/MiniApps/Finances/FinancesPages.swift:728: MiniStat(title: tr(\"Abonnements\"), value: TF.money(BudgetMath.subscriptionsMonthly(state), currency), detail: tr(\"par mois\"))",
    "Shared/Model/Content.swift:286: case .month: tr(\"par mois\")"

@@ -116,12 +116,18 @@ struct FoodScanView: View {
 
     /// Dish analyses are free up to `PhotoScanQuota.freeLimit`, then Premium. Barcodes and the search are never limited.
     private var canAnalyzeDish: Bool {
-        PhotoScanQuota.canAnalyze(used: model.nutrition.photoScansUsed, isPremium: model.isPremium)
+        PhotoScanQuota.canAnalyze(used: scansUsed, isPremium: model.isPremium)
     }
+
+    /// The keychain keeps the count too: it outlives deleting and reinstalling the app, the data files don't.
+    private static let scansKeychainAccount = "nutrition.photoScansUsed"
+    /// Read once per screen: a keychain query on every redraw would be wasted.
+    @State private var keychainScansUsed = Int(SecretStore.read(FoodScanView.scansKeychainAccount) ?? "") ?? 0
+    private var scansUsed: Int { max(model.nutrition.photoScansUsed, keychainScansUsed) }
 
     /// Free analyses left, shown only to someone without Premium.
     private var freeAnalysesLeft: Int? {
-        model.isPremium ? nil : PhotoScanQuota.remaining(used: model.nutrition.photoScansUsed)
+        model.isPremium ? nil : PhotoScanQuota.remaining(used: scansUsed)
     }
 
     private var freeAnalysesText: String? {
@@ -428,7 +434,12 @@ struct FoodScanView: View {
             }
             // A free analysis is counted only when it found something (a failure or « nothing found » is free;
             // a barcode never counts).
-            if !model.isPremium { model.update(\.nutrition) { $0.photoScansUsed += 1 } }
+            if !model.isPremium {
+                let used = scansUsed + 1
+                model.update(\.nutrition) { $0.photoScansUsed = used }
+                _ = SecretStore.save(String(used), for: Self.scansKeychainAccount)
+                keychainScansUsed = used
+            }
             recap = analysis.recap
             zoneHints = analysis.zoneHints
             source = .photo

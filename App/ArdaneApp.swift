@@ -105,6 +105,8 @@ struct RootView: View {
     /// Installs from before « Mes informations »: the questions about the user, once.
     @State private var showsPersonalization = false
     @State private var galleryMode: String?
+    /// The welcome offer, back once three days after the setup (`WelcomeOfferReturn`).
+    @State private var showsWelcomeOfferAgain = false
 
     var body: some View {
         @Bindable var router = router
@@ -246,10 +248,15 @@ struct RootView: View {
                 showsStylePicker = true
             } else if !model.settings.hasCompletedProfileSetup {
                 showsPersonalization = true
+            } else if !model.isPremium && model.settings.hasSeenTutorial && WelcomeOfferReturn.takeIfDue() {
+                showsWelcomeOfferAgain = true
             } else {
                 // Left during the tour: it starts again, until it is finished or skipped.
                 startTutorialIfNeeded(after: 0.3)
             }
+        }
+        .fullScreenCover(isPresented: $showsWelcomeOfferAgain) {
+            OnboardingOffer { showsWelcomeOfferAgain = false }
         }
         .animation(.easeInOut(duration: 0.25), value: router.tutorialStep == nil)
         // A good moment (a workout finished, a goal reached, a widget made): perhaps a rating.
@@ -282,7 +289,7 @@ struct RootView: View {
     private var isCalmForReview: Bool {
         router.editor == nil && !router.isPaywallPresented && !router.isAddGuidePresented && router.saveFlight == nil
             && router.tutorialStep == nil && router.content == nil && !router.isFoodScanPresented
-            && !showsOnboarding && !showsPersonalization && !showsStylePicker && !showsLaunch
+            && !showsOnboarding && !showsPersonalization && !showsStylePicker && !showsLaunch && !showsWelcomeOfferAgain
             && (model.fitness.active.map { $0.isFinished } ?? true)
     }
 

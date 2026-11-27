@@ -28577,6 +28577,53 @@
         }
       }
     },
+    "Analyses de plat": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerichtanalysen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meal scans"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Análisis de platos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analyses de plat"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Analisi dei piatti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "料理の解析"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Análises de pratos"
+          }
+        }
+      }
+    },
     "Analyses de plat gratuites utilisées": {
       "extractionState": "manual",
       "localizations": {
@@ -139493,6 +139540,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Importe um arquivo, com o Premium"
+          }
+        }
+      }
+    },
+    "Imports (horaire, CSV, Stripe)": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importe (Stundenplan, CSV, Stripe)"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imports (schedule, CSV, Stripe)"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importaciones (horario, CSV, Stripe)"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Imports (horaire, CSV, Stripe)"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importazioni (orario, CSV, Stripe)"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み込み（時間割、CSV、Stripe）"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Importações (horário, CSV, Stripe)"
           }
         }
       }

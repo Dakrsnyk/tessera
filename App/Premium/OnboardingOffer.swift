@@ -4,7 +4,8 @@ import WidgetKit
 
 /// The offer at the end of the first launch (« Vitrine », chosen by the PDG on 2026-11-23): real widgets of the
 /// person's interests in the looks of Créer, what Premium adds, the yearly and the monthly plan side by side, and the
-/// free week. Shown once, after the notifications page, never blocking: « Plus tard » enters the app.
+/// free week. Shown after the notifications page, never blocking: « Plus tard » enters the app. It comes back once,
+/// three days later, for someone still without Premium (`WelcomeOfferReturn`, PDG 2026-11-27).
 struct OnboardingOffer: View {
     /// Called once: « Plus tard », a purchase, or Premium found by « Restaurer ».
     let onDone: () -> Void
@@ -307,5 +308,31 @@ struct OnboardingOffer: View {
         case let .failed(reason):
             message = reason
         }
+    }
+}
+
+/// « Plus tard » is not forever: the welcome offer comes back once, three days after the first setup is done, for a
+/// free user (PDG 2026-11-27; before, a Release user who tapped « Plus tard » never saw it again).
+enum WelcomeOfferReturn {
+    static let delay: TimeInterval = 3 * 86_400
+    private static let sinceKey = "tessera.welcomeOffer.since"
+    private static let returnedKey = "tessera.welcomeOffer.returned"
+
+    /// The rule alone, tested: due once the delay has passed, and only if it has not come back yet.
+    static func isDue(since: Date?, returned: Bool, now: Date) -> Bool {
+        guard let since, !returned else { return false }
+        return now.timeIntervalSince(since) >= delay
+    }
+
+    /// At each launch of a free user who has finished the setup. The first call starts the delay (existing installs
+    /// included); true once, when the offer comes back.
+    static func takeIfDue(defaults: UserDefaults = .standard, now: Date = .now) -> Bool {
+        guard let since = defaults.object(forKey: sinceKey) as? Date else {
+            defaults.set(now, forKey: sinceKey)
+            return false
+        }
+        guard isDue(since: since, returned: defaults.bool(forKey: returnedKey), now: now) else { return false }
+        defaults.set(true, forKey: returnedKey)
+        return true
     }
 }

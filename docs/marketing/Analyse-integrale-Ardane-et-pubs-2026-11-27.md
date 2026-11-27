@@ -161,6 +161,73 @@ Année 3: revenu 101 318 $  après pub 89 318 $  revenu/jour fin d'année 340 $
 - **Pubs corrigées** : presque à l'équilibre dès le mois 2, remboursée au mois 3, ≈ 112 $/jour fin d'an 1, ≈ 340 $/jour fin d'an 3.
 - Corriger les pubs (accroche, fin, honnêteté Premium, gestes réels) **double presque le revenu** : c'est le chantier le plus rentable avant d'augmenter le budget.
 
+### Variante : 2 posts par jour sur TikTok et 2 sur Instagram (contenus séparés)
+Hypothèses ajoutées : Instagram démarre plus bas (≈ 450 vues par Reel contre 800 sur TikTok, plafond 12 000 contre 20 000) ; le 2e post du jour et les photos (carrousels) font ≈ 80 % des vues d'une vidéo seule ; publier 2 fois par jour donne +2 points de croissance par mois (plus d'essais, l'algorithme apprend plus vite). La pub payée (1 000 $ CA/mois) ne change pas. La référence ci-dessous est recalculée avec les mêmes règles, d'où un léger écart avec le tableau précédent.
+
+## 1 vidéo/jour TikTok (référence) — Pubs actuelles (pub remboursée au mois 8)
+| Mois | Installs organiques | payés | bouche-à-oreille | total | nouveaux payeurs | abonnés | revenu net | après pub | cumul |
+| 1 | 48 | 200 | 0 | 248 | 9 | 9 | 422 $ | -578 $ | -578 $ |
+| 2 | 57 | 240 | 25 | 321 | 12 | 20 | 594 $ | -406 $ | -984 $ |
+| 3 | 67 | 280 | 32 | 379 | 15 | 32 | 754 $ | -246 $ | -1 230 $ |
+| 4 | 79 | 320 | 38 | 437 | 18 | 48 | 927 $ | -73 $ | -1 303 $ |
+| 6 | 110 | 400 | 50 | 559 | 25 | 87 | 1 334 $ | 334 $ | -849 $ |
+| 9 | 180 | 400 | 61 | 642 | 29 | 154 | 1 607 $ | 607 $ | 692 $ |
+| 12 | 296 | 400 | 72 | 768 | 35 | 231 | 1 980 $ | 980 $ | 3 227 $ |
+| 18 | 397 | 400 | 86 | 884 | 40 | 370 | 3 001 $ | 2 001 $ | 12 945 $ |
+| 24 | 532 | 400 | 100 | 1 033 | 46 | 506 | 3 727 $ | 2 727 $ | 27 358 $ |
+| 36 | 956 | 400 | 145 | 1 501 | 68 | 822 | 5 988 $ | 4 988 $ | 74 833 $ |
+An 1: revenu 15 227 $  après pub 3 227 $  66 $/jour fin d'année
+An 2: revenu 36 132 $  après pub 24 132 $  124 $/jour fin d'année
+An 3: revenu 59 475 $  après pub 47 475 $  200 $/jour fin d'année
+
+## 1 vidéo/jour TikTok (référence) — Pubs corrigées (pub remboursée au mois 3)
+| Mois | Installs organiques | payés | bouche-à-oreille | total | nouveaux payeurs | abonnés | revenu net | après pub | cumul |
+| 1 | 72 | 300 | 0 | 372 | 15 | 15 | 723 $ | -277 $ | -277 $ |
+| 2 | 87 | 360 | 45 | 492 | 21 | 34 | 1 032 $ | 32 $ | -245 $ |
+| 3 | 105 | 420 | 59 | 584 | 26 | 56 | 1 311 $ | 311 $ | 66 $ |
+| 4 | 128 | 480 | 70 | 678 | 31 | 83 | 1 614 $ | 614 $ | 679 $ |
+| 6 | 187 | 600 | 93 | 880 | 44 | 152 | 2 330 $ | 1 330 $ | 2 960 $ |
+| 9 | 331 | 600 | 118 | 1 049 | 52 | 271 | 2 909 $ | 1 909 $ | 8 079 $ |
+| 12 | 586 | 600 | 146 | 1 332 | 67 | 418 | 3 778 $ | 2 778 $ | 15 449 $ |
+| 18 | 785 | 600 | 183 | 1 569 | 78 | 700 | 5 750 $ | 4 750 $ | 39 477 $ |
+| 24 | 1 053 | 600 | 218 | 1 870 | 94 | 982 | 7 381 $ | 6 381 $ | 73 327 $ |
+| 36 | 1 800 | 600 | 326 | 2 726 | 136 | 1 651 | 12 024 $ | 11 024 $ | 180 583 $ |
+An 1: revenu 27 449 $  après pub 15 449 $  126 $/jour fin d'année
+An 2: revenu 69 877 $  après pub 57 877 $  246 $/jour fin d'année
+An 3: revenu 119 256 $  après pub 107 256 $  401 $/jour fin d'année
+
+## 2/jour TikTok + 2/jour Insta — Pubs actuelles (pub remboursée au mois 6)
+| Mois | Installs organiques | payés | bouche-à-oreille | total | nouveaux payeurs | abonnés | revenu net | après pub | cumul |
+| 1 | 120 | 200 | 0 | 320 | 11 | 11 | 544 $ | -456 $ | -456 $ |
+| 2 | 143 | 240 | 32 | 415 | 15 | 25 | 767 $ | -233 $ | -689 $ |
+| 3 | 170 | 280 | 41 | 491 | 19 | 42 | 977 $ | -23 $ | -712 $ |
+| 4 | 202 | 320 | 49 | 571 | 23 | 62 | 1 211 $ | 211 $ | -501 $ |
+| 6 | 286 | 400 | 66 | 752 | 34 | 115 | 1 788 $ | 788 $ | 767 $ |
+| 9 | 482 | 400 | 89 | 971 | 44 | 213 | 2 402 $ | 1 402 $ | 4 310 $ |
+| 12 | 814 | 400 | 119 | 1 333 | 60 | 343 | 3 355 $ | 2 355 $ | 10 321 $ |
+| 18 | 1 090 | 400 | 159 | 1 649 | 74 | 618 | 5 202 $ | 4 202 $ | 31 181 $ |
+| 24 | 1 461 | 400 | 198 | 2 059 | 93 | 910 | 7 088 $ | 6 088 $ | 62 564 $ |
+| 36 | 2 624 | 400 | 321 | 3 345 | 151 | 1 658 | 12 593 $ | 11 593 $ | 169 416 $ |
+An 1: revenu 22 321 $  après pub 10 321 $  112 $/jour fin d'année
+An 2: revenu 64 244 $  après pub 52 244 $  236 $/jour fin d'année
+An 3: revenu 118 852 $  après pub 106 852 $  420 $/jour fin d'année
+
+## 2/jour TikTok + 2/jour Insta — Pubs corrigées (pub remboursée au mois 2)
+| Mois | Installs organiques | payés | bouche-à-oreille | total | nouveaux payeurs | abonnés | revenu net | après pub | cumul |
+| 1 | 180 | 300 | 0 | 480 | 19 | 19 | 933 $ | -67 $ | -67 $ |
+| 2 | 219 | 360 | 58 | 637 | 27 | 44 | 1 336 $ | 336 $ | 270 $ |
+| 3 | 268 | 420 | 76 | 764 | 34 | 73 | 1 713 $ | 713 $ | 982 $ |
+| 4 | 326 | 480 | 92 | 898 | 41 | 109 | 2 136 $ | 1 136 $ | 2 118 $ |
+| 6 | 486 | 600 | 125 | 1 211 | 61 | 203 | 3 197 $ | 2 197 $ | 5 940 $ |
+| 9 | 882 | 600 | 178 | 1 660 | 83 | 387 | 4 537 $ | 3 537 $ | 15 081 $ |
+| 12 | 1 605 | 600 | 257 | 2 461 | 123 | 651 | 6 810 $ | 5 810 $ | 29 955 $ |
+| 18 | 2 150 | 600 | 359 | 3 110 | 155 | 1 240 | 10 587 $ | 9 587 $ | 78 476 $ |
+| 24 | 2 882 | 600 | 454 | 3 935 | 197 | 1 876 | 14 874 $ | 13 874 $ | 149 890 $ |
+| 36 | 4 433 | 600 | 675 | 5 708 | 285 | 3 418 | 24 895 $ | 23 895 $ | 383 926 $ |
+An 1: revenu 41 955 $  après pub 29 955 $  227 $/jour fin d'année
+An 2: revenu 131 935 $  après pub 119 935 $  496 $/jour fin d'année
+An 3: revenu 246 036 $  après pub 234 036 $  830 $/jour fin d'année
+
 ## 5. Actions, dans l'ordre
 1. Contrat « Paid Applications », mise en vente, questionnaire « App Privacy ».
 2. Corriger les pubs : affiche-09 et post-feed-11 ; refaire la principale en 25-30 s ; fin « Télécharge Ardane gratuitement » partout ; pastille Premium lisible ; un plan avec un style gratuit ; un geste réel par pub.

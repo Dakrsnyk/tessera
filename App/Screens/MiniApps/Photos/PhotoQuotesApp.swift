@@ -767,14 +767,15 @@ struct PhotoQuoteEditor: View {
             let hasPhoto = design.quoteBackground != nil
             VStack(alignment: .leading, spacing: 8) {
                 Text(tr("Fond")).font(.subheadline.weight(.semibold))
+                let backgroundPaywall = PaywallContext(
+                    symbol: "paintpalette.fill",
+                    title: tr("Couleurs de fond"),
+                    detail: tr("Premium ouvre toutes les couleurs de fond, comme dans le Studio."),
+                    perk: .styles
+                )
                 QuoteBackgroundSwatches(selectedHex: quote.wrappedValue.backgroundHex, isPremium: model.isPremium, strong: strong) { swatch, isLocked in
                     if isLocked {
-                        paywall = PaywallContext(
-                            symbol: "paintpalette.fill",
-                            title: tr("Couleurs de fond"),
-                            detail: tr("Premium ouvre toutes les couleurs de fond, comme dans le Studio."),
-                            perk: .styles
-                        )
+                        paywall = backgroundPaywall
                     } else {
                         quote.wrappedValue.backgroundHex = swatch.hex
                         quote.wrappedValue.textHex = readableTextHex(onBackground: swatch.hex)
@@ -782,9 +783,19 @@ struct PhotoQuoteEditor: View {
                 }
                 HStack(spacing: 12) {
                     // Any background color is Premium, as the locked swatches above (audit 2026-11-26: the free picker
-                    // went around them).
-                    ColorPicker(tr("Fond"), selection: colorBinding(\.backgroundHex), supportsOpacity: false)
-                        .disabled(!model.isPremium)
+                    // went around them). Without Premium a locked row opens the offer, instead of a silently disabled picker.
+                    if model.isPremium {
+                        ColorPicker(tr("Fond"), selection: colorBinding(\.backgroundHex), supportsOpacity: false)
+                    } else {
+                        Button { paywall = backgroundPaywall } label: {
+                            HStack {
+                                Text(tr("Fond")).foregroundStyle(Color.primary)
+                                Spacer()
+                                Image(systemName: "lock.fill").foregroundStyle(Color.premiumInk)
+                            }
+                        }
+                        .accessibilityLabel(Text(tr("Fond") + tr(", Premium")))
+                    }
                     ColorPicker(tr("Texte"), selection: colorBinding(\.textHex), supportsOpacity: false)
                 }
                 .font(.subheadline)
