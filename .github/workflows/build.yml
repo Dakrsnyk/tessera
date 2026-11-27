@@ -822,8 +822,11 @@ jobs:
           export KIT AD_LANG
           mkdir -p $KIT/shots $KIT/screens $KIT/export $KIT/logs
           APP=build/sim/Build/Products/Debug-iphonesimulator/Ardane.app
-          # The launch arguments of every capture: French (Canada) or English (Canada), the Saphir style.
-          ARGS=(-AppleLanguages "($AD_LANG)" -AppleLocale "$AD_LOCALE" -screenshotStyle sapphire)
+          # The launch arguments of every capture: French (Canada) or English (Canada), the app style of scripts/ad_style.txt
+          # (first line that is not a comment; Saphir when the file is missing). AD_STYLE reaches the UITests.
+          AD_STYLE=$(grep -vE '^[[:space:]]*(#|$)' scripts/ad_style.txt 2>/dev/null | head -1 | tr -d '[:space:]'); AD_STYLE=${AD_STYLE:-sapphire}
+          export AD_STYLE; echo "adkit: app style $AD_STYLE"
+          ARGS=(-AppleLanguages "($AD_LANG)" -AppleLocale "$AD_LOCALE" -screenshotStyle "$AD_STYLE")
 
           # 1) Real states played by UITests/AdShotsUITests, scene by scene. A loop in the background reads
           # the test log: at each new « ADSHOT <name> » line (the test then holds still about 2 s), it takes
@@ -856,7 +859,7 @@ jobs:
             : > "$LOG"
             watch_shots "$LOG" &
             WPID=$!
-            TEST_RUNNER_AD_APPEARANCE="$look" TEST_RUNNER_AD_LANG="$AD_LANG" xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug               -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage $AD_LANG -testRegion CA               -resultBundlePath "adkit-results/$tag.xcresult"               -only-testing:ArdaneUITests/AdShotsUITests/$scene ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO >> "$LOG" 2>&1 || true
+            TEST_RUNNER_AD_APPEARANCE="$look" TEST_RUNNER_AD_LANG="$AD_LANG" TEST_RUNNER_AD_STYLE="$AD_STYLE" xcodebuild test-without-building -project Ardane.xcodeproj -scheme Ardane -configuration Debug               -destination "id=$DEVICE" -derivedDataPath build/sim -testLanguage $AD_LANG -testRegion CA               -resultBundlePath "adkit-results/$tag.xcresult"               -only-testing:ArdaneUITests/AdShotsUITests/$scene ARCHS=arm64 ONLY_ACTIVE_ARCH=YES CODE_SIGNING_ALLOWED=NO >> "$LOG" 2>&1 || true
             touch "$LOG.end"
             wait $WPID 2>/dev/null || true
             rm -f "$LOG.end"

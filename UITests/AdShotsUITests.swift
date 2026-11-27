@@ -9,8 +9,9 @@ import XCTest
 final class AdShotsUITests: XCTestCase {
     private var app: XCUIApplication!
 
-    /// The app style of the films: Saphir, the default style of the app.
-    private static let style = "sapphire"
+    /// The app style of the films: `AD_STYLE` (`TEST_RUNNER_AD_STYLE`, read by the CI from scripts/ad_style.txt), else Saphir,
+    /// the default style of the app.
+    private static let style = ProcessInfo.processInfo.environment["AD_STYLE"].flatMap { $0.isEmpty ? nil : $0 } ?? "sapphire"
 
     /// `AD_APPEARANCE=dark` (`TEST_RUNNER_AD_APPEARANCE` for xcodebuild): the same scenes in that appearance,
     /// each shot named `<name>-dark`. The main film shows the app in Dark appearance, floating in black.

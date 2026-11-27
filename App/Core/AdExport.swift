@@ -11,7 +11,7 @@ import WidgetKit
 ///
 /// One job per line, `<type> <name> key=value…` (`%20` for a space in a value, `#` for a comment):
 /// - `widget <name> kind= family=small|medium|large|rect|circular|inline [theme=] [preset=] [palette=]
-///   [accent=HEX] [recolor=HEX] [template=] [scheme=light|dark] [ink=HEX] [scale=] [render=image|snapshot]`:
+///   [accent=HEX] [look=<style id>] [recolor=HEX] [template=] [scheme=light|dark] [ink=HEX] [scale=] [render=image|snapshot]`:
 ///   the widget as `WidgetPreview` draws it in the app, transparent around its rounded shape.
 /// - `styles <name> [page=1] [per=20] kind= [family=small|medium|large] [scale=]`: a page of the style library as
 ///   the Studio's Style tab shows it (one picture; a page past the end writes no file and says so).
@@ -184,6 +184,11 @@ enum AdExport {
         if let id = job.string("palette") {
             guard let palette = ColorPalette.palette(id) else { throw AdFailure("unknown palette « \(id) »") }
             design = palette.applied(to: design)
+        }
+        // `look=<id>`: one of the styles of the Style tab (StyleCatalog), applied as the Studio applies it.
+        if let id = job.string("look") {
+            guard let look = StyleCatalog.look(id) else { throw AdFailure("unknown look « \(id) »") }
+            design = look.applied(to: design)
         }
         if let hex = job.string("recolor") {
             guard isHex(hex) else { throw AdFailure("recolor « \(hex) » is not a 6-digit hex color") }
