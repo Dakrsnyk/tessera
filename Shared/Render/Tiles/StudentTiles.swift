@@ -8,11 +8,11 @@ enum StudentTiles {
         switch context.design.kind {
         case .nextClass: return nextClass(state, context: context)
         case .nextExam: return nextExam(state, context: context)
-        case .assignments: return assignments(state, now: context.date)
+        case .assignments: return assignments(state, now: context.date, large: context.isLarge)
         case .gradeAverage: return average(state)
-        case .semesterProgress: return semester(state, now: context.date)
+        case .semesterProgress: return semester(state, now: context.date, large: context.isLarge)
         case .flashcard: return flashcard(state, now: context.date)
-        case .studyHours: return studyHours(state, now: context.date)
+        case .studyHours: return studyHours(state, now: context.date, large: context.isLarge)
         case .timetable: return timetable(state, context: context)
         default: return TileFactory.placeholder(context.design.kind)
         }
@@ -79,7 +79,7 @@ enum StudentTiles {
             tile.visual = .timer(next.start, next.end)
         }
         let later = StudentMath.occurrences(state, on: next.start).filter { $0.start > next.start }
-        tile.rows = later.prefix(3).map { item in
+        tile.rows = later.prefix(context.isLarge ? 6 : 3).map { item in
             TileRow(id: item.slot.id.uuidString, title: state.title(of: item.slot), value: TF.time(item.start, context), detail: item.slot.room.isEmpty ? nil : tr("Salle \(item.slot.room)"), colorHex: state.colorHex(of: item.slot))
         }
         tile.inline = ongoing ? tr("\(courseTitle) en cours") : tr("\(courseTitle) à \(TF.time(next.start, context))")
@@ -99,7 +99,7 @@ enum StudentTiles {
         tile.caption = exam.title
         tile.detail = "\(Fmt.shortDay(exam.date)) à \(TF.time(exam.date, context))\(exam.room.isEmpty ? "" : " · \(exam.room)")"
         let later = state.exams.filter { $0.date > exam.date }.sorted { $0.date < $1.date }
-        tile.rows = later.prefix(3).map { item in
+        tile.rows = later.prefix(context.isLarge ? 6 : 3).map { item in
             TileRow(id: item.id.uuidString, title: item.title, value: Fmt.shortDay(item.date), colorHex: state.course(item.courseID)?.colorHex)
         }
         tile.gauge = max(0, 1 - Double(days) / 30)
@@ -108,7 +108,7 @@ enum StudentTiles {
         return tile
     }
 
-    static func assignments(_ state: StudentState, now: Date) -> Tile {
+    static func assignments(_ state: StudentState, now: Date, large: Bool = false) -> Tile {
         let open = StudentMath.openAssignments(state)
         guard !state.assignments.isEmpty else {
             return .empty(tr("Devoirs"), symbol: "doc.text", message: tr("Ajoute tes travaux à rendre dans Ardane, espace Études."))
@@ -121,7 +121,7 @@ enum StudentTiles {
         } else {
             tile.caption = tr("Tout est rendu")
         }
-        tile.rows = open.prefix(5).map { item in
+        tile.rows = open.prefix(large ? 8 : 5).map { item in
             TileRow(
                 id: item.id.uuidString, title: item.title,
                 value: TF.shortRelativeDay(item.due, from: now),
@@ -154,7 +154,7 @@ enum StudentTiles {
         return tile
     }
 
-    static func semester(_ state: StudentState, now: Date) -> Tile {
+    static func semester(_ state: StudentState, now: Date, large: Bool = false) -> Tile {
         guard let progress = StudentMath.semesterProgress(state, at: now), let end = state.semesterEnd else {
             return .empty(tr("Session"), symbol: "calendar.badge.clock", message: tr("Indique les dates de ta session dans Ardane, espace Études."))
         }
@@ -162,7 +162,11 @@ enum StudentTiles {
         var tile = Tile(title: tr("Session"), symbol: "calendar.badge.clock")
         tile.value = Fmt.percent(progress)
         tile.caption = tr("\(left) \(TF.days(left)) restants")
-        tile.detail = tr("Fin le \(Fmt.format(end, template: "dMMMM"))")
+        if large, let start = state.semesterStart {
+            tile.detail = tr("Du \(Fmt.format(start, template: "dMMM")) au \(Fmt.format(end, template: "dMMM"))")
+        } else {
+            tile.detail = tr("Fin le \(Fmt.format(end, template: "dMMMM"))")
+        }
         tile.visual = .bar(progress)
         tile.gauge = progress
         tile.shortValue = Fmt.percent(progress)
@@ -201,15 +205,25 @@ enum StudentTiles {
         return tile
     }
 
-    static func studyHours(_ state: StudentState, now: Date) -> Tile {
+    static func studyHours(_ state: StudentState, now: Date, large: Bool = false) -> Tile {
         let minutes = StudentMath.studyMinutes(state, weekOf: now)
         let goal = max(0.5, state.weeklyStudyGoalHours)
         var tile = Tile(title: tr("Heures d'étude"), symbol: "clock.badge.checkmark")
         tile.value = Fmt.minutes(minutes)
         tile.caption = tr("sur \(Fmt.hours(goal)) cette semaine")
-        tile.visual = .bars(StudentMath.studyByDay(state, weekOf: now), labels: TF.weekdayLetters(), highlight: TF.todayIndex(now))
+        // No bars while nothing was studied this week: an empty chart says nothing.
+        let byDay = StudentMath.studyByDay(state, weekOf: now)
+        if byDay.contains(where: { $0 > 0 }) {
+            tile.visual = .bars(byDay, labels: TF.weekdayLetters(), highlight: TF.todayIndex(now))
+        }
         tile.gauge = min(1, minutes / 60 / goal)
         tile.detail = tr("\(Fmt.percent(min(9.99, minutes / 60 / goal))) de l'objectif")
+        if large {
+            tile.rows = [
+                TileRow(id: "goal", title: tr("Objectif"), value: Fmt.hours(goal), symbol: "target"),
+                TileRow(id: "left", title: tr("Reste"), value: Fmt.hours(max(0, goal - minutes / 60)), symbol: "hourglass"),
+            ]
+        }
         tile.inline = tr("Étude \(Fmt.minutes(minutes))")
         return tile
     }

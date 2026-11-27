@@ -14,7 +14,7 @@ enum FitnessTiles {
         case .nextSet: return nextSet(state, now: now, system: system, sessionRows: context.isLarge ? 8 : (context.isMedium ? 2 : 0))
         case .restTimer: return restTimer(state, now: now, system: system)
         case .weeklyVolume: return weeklyVolume(state, now: now, system: system)
-        case .personalRecords: return records(state, system: system)
+        case .personalRecords: return records(state, system: system, large: context.isLarge)
         case .trainingStreak: return streak(state, now: now, knowsGoal: domains.knows(.weeklyWorkouts))
         case .caloriesBurned:
             // The estimate needs the user's weight: without it, no number is made up.
@@ -182,19 +182,21 @@ enum FitnessTiles {
         if let change = Stats.change(from: lastWeek, to: total) {
             tile.detail = tr("Sem. dernière : \(Units.loadText(kilograms: lastWeek, in: system, digits: 0)) (\(Fmt.signedPercent(change * 100, decimals: 0)))")
         }
-        tile.visual = .bars(days, labels: TF.weekdayLetters(), highlight: TF.todayIndex(now))
+        // No chart for a week with nothing lifted (empty bars tell nothing).
+        if total > 0 { tile.visual = .bars(days, labels: TF.weekdayLetters(), highlight: TF.todayIndex(now)) }
         tile.inline = tr("\(Units.loadText(kilograms: total, in: system, digits: 0)) cette semaine")
         return tile
     }
 
-    static func records(_ state: FitnessState, system: UnitSystem = .metric) -> Tile {
+    /// `large`: more records listed.
+    static func records(_ state: FitnessState, system: UnitSystem = .metric, large: Bool = false) -> Tile {
         let records = FitnessMath.records(state)
         guard let best = records.first else { return .empty(tr("Records"), symbol: "trophy.fill", message: tr("Tes records apparaîtront après ta première séance.")) }
         var tile = Tile(title: tr("Records"), symbol: "trophy.fill")
         tile.value = Units.loadText(kilograms: best.weight, in: system, digits: 0)
         tile.caption = tr("\(best.exercise) · \(best.reps) rép.")
         tile.detail = tr("1RM estimé : \(Units.loadText(kilograms: best.oneRepMax, in: system, digits: 0))")
-        tile.rows = records.prefix(6).map { record in
+        tile.rows = records.prefix(large ? 10 : 6).map { record in
             TileRow(id: record.exercise, title: record.exercise, value: tr("\(Units.loadText(kilograms: record.weight, in: system, digits: 0)) × \(record.reps)"), detail: tr("1RM ≈ \(Units.loadText(kilograms: record.oneRepMax, in: system, digits: 0))"), symbol: "trophy")
         }
         tile.inline = tr("\(best.exercise) : \(Units.loadText(kilograms: best.weight, in: system, digits: 0))")
@@ -237,7 +239,7 @@ enum FitnessTiles {
         tile.unit = "kcal"
         tile.caption = tr("estimées aujourd'hui")
         tile.detail = tr("Semaine : \(TF.int(week.reduce(0, +))) kcal")
-        tile.visual = .bars(week, labels: TF.weekdayLetters(), highlight: TF.todayIndex(now))
+        if week.contains(where: { $0 > 0 }) { tile.visual = .bars(week, labels: TF.weekdayLetters(), highlight: TF.todayIndex(now)) }
         tile.footnote = tr("Estimation selon la durée des séances et ton poids")
         tile.inline = tr("\(TF.int(today)) kcal brûlées")
         return tile

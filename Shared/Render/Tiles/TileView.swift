@@ -65,7 +65,8 @@ struct TileView: View {
         let layout = s.options.layout
         let hasButtons = !tile.buttons.isEmpty
         switch layout {
-        case .progress: return progressFraction == nil ? .vertical : .progress
+        // One progress only: several lines (three companies) reduced to one bar read « 100 % » and meant nothing.
+        case .progress: return (tile.visual.progressValue ?? (tile.rows.count == 1 ? tile.rows[0].progress : nil)) == nil ? .vertical : .progress
         // A bar alone (a set, a rest) makes no graph: half the widget stayed empty.
         case .graph:
             let drawable = (hasVisual && !isBarOnly) || !tile.rows.isEmpty
@@ -424,7 +425,7 @@ struct TileView: View {
             }
             if hasVisual {
                 visual(compact: !tile.rows.isEmpty && isSegments && s.options.chart == .auto)
-                    .chartHeight(tile.rows.isEmpty ? 150 : (isSegments && s.options.chart == .auto ? 14 : 86), fills: fillsHeight)
+                    .chartHeight(tile.rows.isEmpty ? 150 : (isSegments && s.options.chart == .auto ? 14 : 86), fills: fillsHeight || tile.rows.isEmpty)
                     .clipped()
             }
             if !tile.rows.isEmpty {
@@ -477,7 +478,8 @@ struct TileView: View {
             if !context.isSmall { detailText }
             if hasVisual && (tile.buttons.isEmpty || !context.isSmall) {
                 visual(compact: context.isSmall)
-                    .chartHeight(chartHeight, fills: fillsHeight || growsInRoom)
+                    // A large widget's chart takes the height left (bars on a third, two thirds empty below).
+                    .chartHeight(chartHeight, fills: fillsHeight || growsInRoom || (context.isLarge && tile.rows.isEmpty))
                     .frame(maxWidth: .infinity)
             }
             if context.isLarge && !tile.rows.isEmpty {
@@ -507,7 +509,8 @@ struct TileView: View {
                     captionText(lines: context.isSmall ? 2 : 2)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
-                if let progress = progressFraction {
+                // The widget's own progress only: the progress of one of its lines drew a ring that said nothing (« Ma journée »).
+                if let progress = tile.visual.progressValue {
                     miniProgress(progress)
                         .frame(width: context.isSmall ? 50 : 66, height: context.isSmall ? 50 : 66)
                 } else if let values = tile.visual.seriesValues {

@@ -38,10 +38,10 @@ enum TimeTiles {
         let now = context.date
         let life = context.payload.domains.life
         switch context.design.kind {
-        case .ageProgress: return age(life, now: now)
+        case .ageProgress: return age(life, now: now, large: context.isLarge)
         case .birthday: return birthday(context.design, life: life, now: now)
         case .weekView: return week(now: now)
-        case .holiday: return holiday(life, now: now)
+        case .holiday: return holiday(life, now: now, large: context.isLarge)
         case .moonPhase: return moon(now: now)
         default: return TileFactory.placeholder(context.design.kind)
         }
@@ -49,7 +49,7 @@ enum TimeTiles {
 
     private static let lifeHint = tr("Ajoute ta date de naissance dans Ardane, espace Ma vie.")
 
-    static func age(_ life: LifeState, now: Date) -> Tile {
+    static func age(_ life: LifeState, now: Date, large: Bool = false) -> Tile {
         guard let birthday = life.birthday else {
             return .empty(tr("Mon âge"), symbol: "person.crop.circle.badge.clock", message: lifeHint)
         }
@@ -64,6 +64,12 @@ enum TimeTiles {
         tile.detail = tr("\(Fmt.percent(fraction)) de ton année en cours")
         tile.visual = .bar(fraction)
         tile.gauge = fraction
+        if large {
+            tile.rows = [
+                TileRow(id: "next", title: tr("Prochain anniversaire"), value: Fmt.longDay(next.date), symbol: "gift"),
+                TileRow(id: "days", title: tr("Jours vécus"), value: Fmt.number(max(0, DateMath.daysBetween(birthday, now))), symbol: "calendar"),
+            ]
+        }
         tile.shortValue = "\(Int(age.rounded(.down)))"
         tile.inline = tr("\(TF.decimal(age, 2)) ans")
         return tile
@@ -136,9 +142,8 @@ enum TimeTiles {
             tile.value = Fmt.number(days)
             tile.caption = days > 1 ? tr("jours depuis") : tr("jour depuis")
             tile.detail = fullDate
-            let fraction = min(1, Double(days) / 365)
-            tile.visual = .ring(max(0.02, fraction))
-            tile.gauge = fraction
+            // Days since: no ring, the count has no end to fill toward.
+            tile.gauge = min(1, Double(days) / 365)
             tile.inline = tr("\(title) depuis \(days) j")
             tile.shortValue = Fmt.number(days)
         }
@@ -159,8 +164,8 @@ enum TimeTiles {
         return tile
     }
 
-    static func holiday(_ life: LifeState, now: Date) -> Tile {
-        let upcoming = Holidays.upcoming(life.holidayRegion, from: now, count: 5)
+    static func holiday(_ life: LifeState, now: Date, large: Bool = false) -> Tile {
+        let upcoming = Holidays.upcoming(life.holidayRegion, from: now, count: large ? 9 : 5)
         guard let next = upcoming.first else {
             return .empty(tr("Jour férié"), symbol: "sun.max", message: tr("Aucun jour férié trouvé."))
         }

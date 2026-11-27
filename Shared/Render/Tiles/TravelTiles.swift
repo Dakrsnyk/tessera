@@ -141,6 +141,12 @@ enum TravelTiles {
             TileRow(id: "back", title: "1 \(foreign)", value: "\(TF.decimal(1 / rate, 4)) \(home)", symbol: "arrow.left"),
             TileRow(id: "ten", title: Fmt.money(10, currency: foreign), value: Fmt.money(10 / rate, currency: home), symbol: "equal"),
         ]
+        if context.isLarge {
+            tile.rows += [
+                TileRow(id: "fifty", title: Fmt.money(50, currency: foreign), value: Fmt.money(50 / rate, currency: home), symbol: "equal"),
+                TileRow(id: "hundred", title: Fmt.money(100, currency: foreign), value: Fmt.money(100 / rate, currency: home), symbol: "equal"),
+            ]
+        }
         tile.detail = "1 \(home) = \(TF.decimal(rate, 4)) \(foreign)"
         tile.footnote = tr("Taux de référence BCE · \(Fmt.format(rates.fetchedAt, template: "dMMMM")) · Frankfurter")
         tile.inline = "1 \(home) = \(TF.decimal(rate, 3)) \(foreign)"
@@ -167,7 +173,6 @@ enum TravelTiles {
             tile.value = Fmt.number(length)
             tile.unit = tr("jours")
             tile.caption = tr("de voyage, départ \(TF.relativeDay(trip.start, from: now))")
-            tile.visual = .ring(0)
             tile.gauge = 0
             tile.shortValue = tr("J-\(days)")
         }
@@ -186,7 +191,7 @@ enum TravelTiles {
         tile.caption = tr("\(TF.relativeDay(activity.date, from: now).capitalizedFirst) à \(TF.time(activity.date, context, zone: zone))")
         tile.detail = activity.place.isEmpty ? nil : activity.place
         let later = state.activities.filter { $0.date > activity.date }.sorted { $0.date < $1.date }
-        tile.rows = later.prefix(4).map { item in
+        tile.rows = later.prefix(context.isLarge ? 8 : 4).map { item in
             TileRow(id: item.id.uuidString, title: item.title, value: Fmt.shortDay(item.date), detail: item.place.isEmpty ? nil : item.place, symbol: "mappin")
         }
         tile.inline = "\(activity.title) · \(TF.time(activity.date, context, zone: zone))"

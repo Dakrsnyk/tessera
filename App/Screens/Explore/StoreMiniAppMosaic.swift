@@ -264,6 +264,7 @@ struct StoreWidgetChoice: View {
     @Environment(AppModel.self) private var model
     @Environment(Router.self) private var router
     @Environment(\.dismiss) private var dismiss
+    @State private var isStyleSaved = false
 
     private var family: WidgetFamily { design.format?.family ?? .systemSmall }
 
@@ -276,29 +277,32 @@ struct StoreWidgetChoice: View {
             VStack(spacing: 4) {
                 Text(design.name.isEmpty ? design.kind.title : design.name)
                     .font(.title3.weight(.bold))
-                Text(tr("Tu pourras le modifier plus tard dans « Mes widgets »."))
+                Text(tr("Enregistre son style dans « Mes styles », ou ouvre le widget pour le personnaliser."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }
             VStack(spacing: 10) {
-                Button(action: saveAsIs) {
-                    Label(tr("Enregistrer ce style"), systemImage: "checkmark")
+                // The style goes into « Mes styles » (PDG, 2026-11-26), to dress any widget with it later.
+                Button(action: saveStyle) {
+                    Label(isStyleSaved ? tr("Style enregistré") : tr("Enregistrer le style"),
+                          systemImage: isStyleSaved ? "checkmark.circle.fill" : "paintpalette")
                         .font(.headline)
                         .frame(maxWidth: .infinity, minHeight: 50)
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.bordered)
                 .buttonBorderShape(.capsule)
+                .disabled(isStyleSaved)
                 .accessibilityIdentifier("store-choice-save")
                 Button {
                     dismiss()
                     router.openEditor(design, isNew: true)
                 } label: {
-                    Label(tr("Personnaliser"), systemImage: "slider.horizontal.3")
+                    Label(tr("Personnaliser ou modifier le widget"), systemImage: "slider.horizontal.3")
                         .font(.headline)
                         .frame(maxWidth: .infinity, minHeight: 50)
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(.borderedProminent)
                 .buttonBorderShape(.capsule)
                 .accessibilityIdentifier("store-choice-customize")
             }
@@ -309,21 +313,12 @@ struct StoreWidgetChoice: View {
         .presentationDragIndicator(.visible)
     }
 
-    /// Straight into « Mes widgets », as the Studio would save it: Premium settings and the free limit ask first.
-    private func saveAsIs() {
-        if design.usesPremiumFeatures && !model.isPremium {
-            dismiss()
-            router.showPaywall(.designs([design]))
-            return
-        }
-        let fitting = model.fitting([design])
-        guard !fitting.isEmpty else {
-            dismiss()
-            router.showPaywall(.designLimit)
-            return
-        }
-        _ = model.install(designs: fitting)
+    /// The style of this widget, kept in « Mes styles » under its name (Premium styles are kept too: they ask for
+    /// Premium when a widget is saved in them, as anywhere in the Studio).
+    private func saveStyle() {
+        let name = StyleCatalog.current(for: design)?.name ?? design.kind.title
+        _ = model.saveStyle(named: name, from: design)
         Haptics.success()
-        dismiss()
+        withAnimation { isStyleSaved = true }
     }
 }

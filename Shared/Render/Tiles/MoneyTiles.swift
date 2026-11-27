@@ -10,26 +10,32 @@ enum MoneyTiles {
         let target = context.options.targetID
         let clock = PriceClock(now: now, uses24Hour: context.settings.uses24HourClock)
         switch context.design.kind {
-        case .budgetLeft: return budgetLeft(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget))
+        case .budgetLeft: return budgetLeft(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget), isLarge: context.isLarge)
         case .spendingByCategory: return byCategory(data.budget, now: now, currency: currency, isLarge: context.isLarge)
-        case .billsUpcoming: return bills(data.budget, now: now, currency: currency)
-        case .savingsGoal: return savings(data.budget, target: target, now: now, currency: currency)
-        case .netWorth: return netWorth(data.budget, now: now, currency: currency)
-        case .balance: return balance(data.budget, now: now, currency: currency)
-        case .subscriptions: return subscriptions(data.budget, currency: currency)
-        case .quickExpense: return quickExpense(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget))
+        case .billsUpcoming: return bills(data.budget, now: now, currency: currency, isLarge: context.isLarge)
+        case .savingsGoal: return savings(data.budget, target: target, now: now, currency: currency, isLarge: context.isLarge)
+        case .netWorth: return netWorth(data.budget, now: now, currency: currency, isLarge: context.isLarge)
+        case .balance: return balance(data.budget, now: now, currency: currency, isLarge: context.isLarge)
+        case .subscriptions: return subscriptions(data.budget, currency: currency, isLarge: context.isLarge)
+        case .quickExpense: return quickExpense(data.budget, now: now, currency: currency, knowsBudget: data.knows(.monthlyBudget), isLarge: context.isLarge)
         case .portfolio: return portfolio(data, currency: currency, clock: clock, isLarge: context.isLarge)
-        case .allocation: return allocation(data, currency: currency)
+        case .allocation: return allocation(data, currency: currency, isLarge: context.isLarge)
         case .topMover: return topMover(data, currency: currency, clock: clock, isLarge: context.isLarge)
-        case .watchlist: return watchlist(data, currency: context.settings.cryptoCurrency.uppercased(), clock: clock, isSmall: context.isSmall)
+        case .watchlist: return watchlist(data, currency: context.settings.cryptoCurrency.uppercased(), clock: clock, isSmall: context.isSmall, isLarge: context.isLarge)
         case .marketOverview: return market(data, currency: context.settings.cryptoCurrency.uppercased(), clock: clock, isLarge: context.isLarge)
         default: return TileFactory.placeholder(context.design.kind)
         }
     }
 
+    /// A line or bars chart says something only when its values differ; a flat one is left out.
+    static func varies(_ values: [Double]) -> Bool {
+        guard let low = values.min(), let high = values.max() else { return false }
+        return high - low > 0.005
+    }
+
     // MARK: Budget
 
-    static func budgetLeft(_ state: BudgetState, now: Date, currency: String, knowsBudget: Bool = true) -> Tile {
+    static func budgetLeft(_ state: BudgetState, now: Date, currency: String, knowsBudget: Bool = true, isLarge: Bool = false) -> Tile {
         let spent = BudgetMath.spentThisMonth(state, at: now)
         guard knowsBudget else {
             // No budget given: what was spent, never a remainder of a made-up budget.
@@ -37,7 +43,7 @@ enum MoneyTiles {
             tile.value = TF.money(spent, currency)
             tile.caption = tr("dépensés ce mois-ci")
             tile.detail = tr("Budget mensuel à définir dans Ardane")
-            tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now).prefix(4).map { item in
+            tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now).prefix(isLarge ? 8 : 4).map { item in
                 TileRow(id: item.name, title: item.name, value: TF.money(item.amount, currency), colorHex: item.colorHex)
             }
             tile.shortValue = TF.money(spent, currency)
@@ -52,8 +58,13 @@ enum MoneyTiles {
         tile.caption = remaining >= 0 ? tr("soit \(TF.money(BudgetMath.perDayLeft(state, at: now), currency)) par jour") : tr("au-dessus du budget")
         tile.detail = tr("Dépensé : \(TF.money(spent, currency)) sur \(TF.money(budget, currency))")
         tile.visual = .bar(spent / budget)
-        tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now).prefix(4).map { item in
+        // The categories that weigh on what is left; a large widget adds the days still to go.
+        tile.rows = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now).prefix(isLarge ? 7 : 4).map { item in
             TileRow(id: item.name, title: item.name, value: TF.money(item.amount, currency), colorHex: item.colorHex)
+        }
+        if isLarge {
+            let daysLeft = BudgetMath.daysLeftInMonth(now)
+            tile.rows.append(TileRow(id: "days", title: tr("Jours restants"), value: "\(daysLeft)", symbol: "calendar"))
         }
         tile.gauge = max(0, 1 - spent / budget)
         tile.shortValue = TF.money(remaining, currency)
@@ -61,7 +72,7 @@ enum MoneyTiles {
         return tile
     }
 
-    static func byCategory(_ state: BudgetState, now: Date, currency: String, isLarge: Bool = true) -> Tile {
+    static func byCategory(_ state: BudgetState, now: Date, currency: String, isLarge: Bool = false) -> Tile {
         let items = BudgetMath.byCategory(state, in: BudgetMath.monthInterval(now), now: now)
         guard !items.isEmpty else { return .empty(tr("Dépenses"), symbol: "chart.bar.doc.horizontal", message: tr("Note tes dépenses dans Ardane, espace Budget.")) }
         let total = items.reduce(0) { $0 + $1.amount }
@@ -70,8 +81,8 @@ enum MoneyTiles {
         tile.caption = tr("\(Fmt.month(now)) · \(items.count) catégories")
         // Only a large widget has the width for the whole sentence; cut short, it would compare with the whole month.
         if isLarge { tile.detail = monthComparison(state, now: now, currency: currency) }
-        tile.visual = .segments(items.prefix(6).map { TileSegment(label: $0.name, value: $0.amount, colorHex: $0.colorHex) })
-        tile.rows = items.prefix(6).map { item -> TileRow in
+        tile.visual = .segments(items.prefix(isLarge ? 8 : 6).map { TileSegment(label: $0.name, value: $0.amount, colorHex: $0.colorHex) })
+        tile.rows = items.prefix(isLarge ? 8 : 6).map { item -> TileRow in
             let limit = item.category?.monthlyLimit ?? 0
             return TileRow(
                 id: item.name, title: item.name,
@@ -85,7 +96,7 @@ enum MoneyTiles {
         return tile
     }
 
-    static func bills(_ state: BudgetState, now: Date, currency: String) -> Tile {
+    static func bills(_ state: BudgetState, now: Date, currency: String, isLarge: Bool = false) -> Tile {
         let upcoming = BudgetMath.upcomingBills(state, at: now, within: 31)
         guard let next = upcoming.first else { return .empty(tr("Factures"), symbol: "doc.text", message: tr("Ajoute tes factures dans Ardane, espace Budget.")) }
         let total = upcoming.reduce(0) { $0 + $1.bill.amount }
@@ -93,7 +104,7 @@ enum MoneyTiles {
         tile.value = TF.money(next.bill.amount, currency, decimals: 2)
         tile.caption = "\(next.bill.name) · \(TF.relativeDay(next.due, from: now))"
         tile.detail = tr("30 prochains jours : \(TF.money(total, currency))")
-        tile.rows = upcoming.prefix(6).map { item in
+        tile.rows = upcoming.prefix(isLarge ? 8 : 5).map { item in
             TileRow(id: item.bill.id.uuidString, title: item.bill.name, value: TF.money(item.bill.amount, currency, decimals: 2), detail: item.days <= 7 ? TF.relativeDay(item.due, from: now).capitalizedFirst : Fmt.shortDay(item.due), symbol: item.bill.symbol, isHighlighted: item.days <= 2)
         }
         tile.compactRows = true
@@ -101,7 +112,7 @@ enum MoneyTiles {
         return tile
     }
 
-    static func savings(_ state: BudgetState, target: String?, now: Date, currency: String) -> Tile {
+    static func savings(_ state: BudgetState, target: String?, now: Date, currency: String, isLarge: Bool = false) -> Tile {
         guard let goal = state.goals.first(where: { $0.id.uuidString == target }) ?? state.goals.first else {
             return .empty(tr("Épargne"), symbol: "banknote", message: tr("Crée un objectif d'épargne dans Ardane, espace Budget."))
         }
@@ -109,23 +120,32 @@ enum MoneyTiles {
         tile.value = Fmt.percent(goal.progress)
         tile.caption = tr("\(TF.money(goal.saved, currency)) sur \(TF.money(goal.target, currency))")
         let left = max(0, goal.target - goal.saved)
+        var perMonth: Double?
         if let deadline = goal.deadline, left > 0 {
             let months = max(1, DateMath.calendar.dateComponents([.month], from: now, to: deadline).month ?? 1)
+            perMonth = left / Double(months)
             tile.detail = tr("\(TF.money(left / Double(months), currency)) par mois jusqu'au \(Fmt.format(deadline, template: "dMMMMyyyy"))")
         } else {
             tile.detail = left == 0 ? tr("Objectif atteint") : tr("Reste \(TF.money(left, currency))")
         }
         tile.visual = .ring(goal.progress)
-        tile.rows = state.goals.prefix(4).map { item in
-            TileRow(id: item.id.uuidString, title: item.name, value: Fmt.percent(item.progress), progress: item.progress)
+        // This goal only (other goals are other widgets): what is left and the pace to reach it; a large widget adds the whole count.
+        var rows: [TileRow] = []
+        if isLarge { rows.append(TileRow(id: "saved", title: tr("Épargné"), value: TF.money(goal.saved, currency), symbol: "banknote", isSensitive: true)) }
+        if isLarge { rows.append(TileRow(id: "target", title: tr("Objectif"), value: TF.money(goal.target, currency), symbol: "target", isSensitive: true)) }
+        if left > 0 { rows.append(TileRow(id: "left", title: tr("Reste à épargner"), value: TF.money(left, currency), symbol: "arrow.up.right", isSensitive: true)) }
+        if let perMonth { rows.append(TileRow(id: "permonth", title: tr("Par mois"), value: TF.money(perMonth, currency), symbol: "calendar", isSensitive: true)) }
+        if isLarge, let deadline = goal.deadline {
+            rows.append(TileRow(id: "deadline", title: tr("Échéance"), value: Fmt.format(deadline, template: "dMMMMyyyy"), symbol: "flag"))
         }
+        tile.rows = rows
         tile.gauge = goal.progress
         tile.shortValue = Fmt.percent(goal.progress)
         tile.inline = "\(goal.name) · \(Fmt.percent(goal.progress))"
         return tile
     }
 
-    static func netWorth(_ state: BudgetState, now: Date, currency: String) -> Tile {
+    static func netWorth(_ state: BudgetState, now: Date, currency: String, isLarge: Bool = false) -> Tile {
         guard !state.accounts.isEmpty else { return .empty(tr("Valeur nette"), symbol: "building.columns", message: tr("Ajoute tes comptes et tes dettes dans Ardane, espace Budget.")) }
         let worth = BudgetMath.netWorth(state)
         var tile = Tile(title: tr("Valeur nette"), symbol: "building.columns")
@@ -140,7 +160,14 @@ enum MoneyTiles {
         let assets = state.accounts.filter { !$0.isLiability }.reduce(0) { $0 + $1.balance }
         let debts = state.accounts.filter(\.isLiability).reduce(0) { $0 + $1.balance }
         tile.detail = tr("Actifs \(TF.money(assets, currency)) · Dettes \(TF.money(debts, currency))")
-        if history.count >= 2 { tile.visual = .line(Array(history.suffix(60))) }
+        if history.count >= 2, varies(history) { tile.visual = .line(Array(history.suffix(60))) }
+        if isLarge {
+            // The accounts behind the figure, the biggest first; the split above already says assets and debts.
+            tile.rows = state.accounts.sorted { $0.balance > $1.balance }.prefix(6).map { account in
+                TileRow(id: account.id.uuidString, title: account.name, value: (account.isLiability ? "−" : "") + TF.money(account.balance, currency),
+                        detail: account.isLiability ? tr("dette") : nil, isSensitive: true)
+            }
+        }
         tile.inline = tr("Valeur nette \(TF.money(worth, currency))")
         return tile
     }
@@ -148,7 +175,7 @@ enum MoneyTiles {
     /// « Solde »: the account's balance today, counted like the « Solde » figure of the Budget mini-app (from the
     /// « Solde de départ » when there is one, otherwise from zero at the start of the month), its move since the
     /// 1st and its line over the month.
-    static func balance(_ state: BudgetState, now: Date, currency: String) -> Tile {
+    static func balance(_ state: BudgetState, now: Date, currency: String, isLarge: Bool = false) -> Tile {
         let symbol = "chart.line.uptrend.xyaxis"
         let hasData = state.openingBalance != nil || !state.expenses.isEmpty || !state.incomes.isEmpty
             || !state.fixedFlows.isEmpty || !state.bills.isEmpty
@@ -170,12 +197,15 @@ enum MoneyTiles {
         let change = current - atStart
         tile.caption = abs(change) >= 1 ? tr("\(Fmt.signedMoney(change, currency: currency, decimals: 0)) ce mois-ci") : tr("aujourd'hui")
         tile.detail = tr("Revenus \(TF.money(earned, currency)) · Dépenses \(TF.money(spent, currency))")
-        if points.count >= 2 { tile.visual = .line(points.map(\.balance)) }
+        if points.count >= 2, varies(points.map(\.balance)) { tile.visual = .line(points.map(\.balance)) }
         tile.rows = [
             TileRow(id: "start", title: tr("Début du mois"), value: signed(atStart), symbol: "calendar"),
             TileRow(id: "in", title: tr("Revenus"), value: "+" + TF.money(earned, currency), symbol: "arrow.down.left"),
             TileRow(id: "out", title: tr("Dépenses"), value: (spent > 0 ? "−" : "") + TF.money(spent, currency), symbol: "arrow.up.right"),
         ]
+        if isLarge, points.count >= 2, let low = points.map(\.balance).min() {
+            tile.rows.append(TileRow(id: "low", title: tr("Point le plus bas"), value: signed(low), symbol: "arrow.down.to.line"))
+        }
         if state.openingBalance == nil {
             tile.footnote = tr("Sans solde de départ, le calcul part de zéro au début du mois.")
         }
@@ -215,7 +245,7 @@ enum MoneyTiles {
         return ("\(since) · \(amount)", trend)
     }
 
-    static func subscriptions(_ state: BudgetState, currency: String) -> Tile {
+    static func subscriptions(_ state: BudgetState, currency: String, isLarge: Bool = false) -> Tile {
         let subs = state.bills.filter(\.isSubscription)
         guard !subs.isEmpty else { return .empty(tr("Abonnements"), symbol: "repeat.circle", message: tr("Ajoute tes abonnements dans Ardane, espace Budget.")) }
         let monthly = BudgetMath.subscriptionsMonthly(state)
@@ -223,14 +253,14 @@ enum MoneyTiles {
         tile.value = TF.money(monthly, currency, decimals: 2)
         tile.unit = "/mois"
         tile.caption = tr("\(Fmt.plural(subs.count, tr("abonnement"), tr("abonnements"))) · \(TF.money(monthly * 12, currency))/an")
-        tile.rows = subs.sorted { $0.monthlyCost > $1.monthlyCost }.prefix(6).map { bill in
+        tile.rows = subs.sorted { $0.monthlyCost > $1.monthlyCost }.prefix(isLarge ? 8 : 5).map { bill in
             TileRow(id: bill.id.uuidString, title: bill.name, value: TF.money(bill.monthlyCost, currency, decimals: 2), symbol: bill.symbol)
         }
         tile.inline = tr("Abonnements \(TF.money(monthly, currency))/mois")
         return tile
     }
 
-    static func quickExpense(_ state: BudgetState, now: Date, currency: String, knowsBudget: Bool = true) -> Tile {
+    static func quickExpense(_ state: BudgetState, now: Date, currency: String, knowsBudget: Bool = true, isLarge: Bool = false) -> Tile {
         let today = BudgetMath.spentToday(state, at: now)
         guard !state.quickExpenses.isEmpty else {
             return .empty(tr("Dépense rapide"), symbol: "cart.badge.plus", message: tr("Crée tes dépenses habituelles (café, bus…) dans Ardane, espace Budget."))
@@ -241,7 +271,7 @@ enum MoneyTiles {
         tile.buttons = state.quickExpenses.prefix(3).map { quick in
             TileButton(title: quick.name, symbol: quick.symbol, action: .quickExpense(quick.id.uuidString))
         }
-        tile.rows = state.quickExpenses.prefix(4).map { quick in
+        tile.rows = state.quickExpenses.prefix(isLarge ? 8 : 4).map { quick in
             TileRow(id: quick.id.uuidString, title: quick.name, value: TF.money(quick.amount, currency, decimals: 2), symbol: "plus.circle.fill", action: .quickExpense(quick.id.uuidString))
         }
         tile.detail = knowsBudget ? tr("Reste du mois : \(TF.money(BudgetMath.remaining(state, at: now), currency))")
@@ -259,7 +289,7 @@ enum MoneyTiles {
         return parts.joined(separator: " · ")
     }
 
-    static func portfolio(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = true) -> Tile {
+    static func portfolio(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = false) -> Tile {
         let positions = PortfolioMath.positions(data.portfolio, prices: data.prices)
         guard !positions.isEmpty else { return .empty(tr("Portefeuille"), symbol: "chart.line.uptrend.xyaxis", message: tr("Ajoute tes placements dans Ardane, espace Placements.")) }
         let summary = PortfolioMath.summary(positions)
@@ -278,8 +308,8 @@ enum MoneyTiles {
             tile.trend = summary.gain >= 0
         }
         let history = data.portfolio.history.map(\.value)
-        if history.count >= 2 { tile.visual = .line(Array(history.suffix(60))) }
-        tile.rows = positions.sorted { $0.value > $1.value }.prefix(5).map { position in
+        if history.count >= 2, varies(history) { tile.visual = .line(Array(history.suffix(60))) }
+        tile.rows = positions.sorted { $0.value > $1.value }.prefix(isLarge ? 8 : 5).map { position in
             TileRow(
                 id: position.holding.id.uuidString,
                 title: position.holding.name,
@@ -297,7 +327,7 @@ enum MoneyTiles {
         return tile
     }
 
-    static func allocation(_ data: DomainData, currency: String) -> Tile {
+    static func allocation(_ data: DomainData, currency: String, isLarge: Bool = false) -> Tile {
         let positions = PortfolioMath.positions(data.portfolio, prices: data.prices)
         let parts = PortfolioMath.allocation(positions)
         let total = parts.reduce(0) { $0 + $1.value }
@@ -307,12 +337,19 @@ enum MoneyTiles {
         var tile = Tile(title: tr("Répartition"), symbol: "chart.pie")
         tile.value = Fmt.percent(largest.value / total)
         tile.caption = tr("en \(largest.kind.title.lowercased()) · total \(TF.money(total, currency))")
-        tile.visual = .segments(parts.map { TileSegment(label: $0.kind.title, value: $0.value, colorHex: $0.kind.colorHex) })
+        // A single class would be a bar of 100 %: no chart then, the line says it.
+        if parts.count >= 2 {
+            tile.visual = .segments(parts.map { TileSegment(label: $0.kind.title, value: $0.value, colorHex: $0.kind.colorHex) })
+        }
+        tile.rows = parts.sorted { $0.value > $1.value }.prefix(isLarge ? 8 : 4).map { part in
+            TileRow(id: part.kind.title, title: part.kind.title, value: Fmt.percent(part.value / total), detail: TF.money(part.value, currency),
+                    colorHex: part.kind.colorHex, progress: part.value / total)
+        }
         tile.footnote = disclaimer
         return tile
     }
 
-    static func topMover(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = true) -> Tile {
+    static func topMover(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = false) -> Tile {
         let positions = PortfolioMath.positions(data.portfolio, prices: data.prices)
         guard let mover = PortfolioMath.topMover(positions), let change = mover.change24h else {
             return .empty(tr("Plus forte variation"), symbol: "arrow.up.arrow.down", message: tr("Les variations apparaissent pour les placements cotés en direct."))
@@ -323,11 +360,20 @@ enum MoneyTiles {
         tile.trend = trend
         tile.caption = "\(mover.holding.name) · \(mover.period.label)"
         tile.detail = tr("Ta position : \(TF.money(mover.value, currency))")
+        if isLarge {
+            // The next biggest moves, to see the movement of the whole portfolio around the top one.
+            tile.rows = positions.filter { $0.change24h != nil && $0.holding.id != mover.holding.id }
+                .sorted { abs($0.change24h ?? 0) > abs($1.change24h ?? 0) }.prefix(5).compactMap { position -> TileRow? in
+                    guard let move = position.change24h else { return nil }
+                    return TileRow(id: position.holding.id.uuidString, title: position.holding.name, value: PriceChange.percent(move),
+                                   detail: TF.money(position.value, currency), colorHex: PriceChange.colorHex(move))
+                }
+        }
         tile.footnote = priceNote(data.prices.fetchedAt, clock: clock, isLarge: isLarge)
         return tile
     }
 
-    static func watchlist(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isSmall: Bool = false) -> Tile {
+    static func watchlist(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isSmall: Bool = false, isLarge: Bool = false) -> Tile {
         guard !data.quotes.isEmpty else {
             return .empty(tr("Liste de suivi"), symbol: "list.star", message: tr("Les cours s'affichent dès que la connexion est disponible."), emptySymbol: "wifi.slash")
         }
@@ -338,7 +384,7 @@ enum MoneyTiles {
         tile.trend = PriceChange.trend(first.change24h)
         // A small widget hides the lines' details: the change goes after the symbol, the price stays on the right.
         // Three lines leave the title two lines (« BTC » over « +1,45 % »).
-        tile.rows = data.quotes.prefix(isSmall ? 3 : 6).map { quote -> TileRow in
+        tile.rows = data.quotes.prefix(isSmall ? 3 : (isLarge ? 10 : 6)).map { quote -> TileRow in
             let change = PriceChange.percent(quote.change24h)
             return TileRow(
                 id: quote.id,
@@ -358,7 +404,7 @@ enum MoneyTiles {
         return tile
     }
 
-    static func market(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = true) -> Tile {
+    static func market(_ data: DomainData, currency: String, clock: PriceClock = PriceClock(), isLarge: Bool = false) -> Tile {
         guard let global = data.global else {
             return .empty(tr("Marché crypto"), symbol: "globe.americas", message: tr("Les données du marché s'affichent dès que la connexion est disponible."), emptySymbol: "wifi.slash")
         }
@@ -372,7 +418,7 @@ enum MoneyTiles {
             TileRow(id: "btc", title: tr("Dominance BTC"), value: Fmt.percent(global.bitcoinDominance / 100, decimals: 1), progress: global.bitcoinDominance / 100),
             TileRow(id: "eth", title: tr("Dominance ETH"), value: Fmt.percent(global.ethereumDominance / 100, decimals: 1), progress: global.ethereumDominance / 100),
         ]
-        for quote in data.quotes.prefix(3) {
+        for quote in data.quotes.prefix(isLarge ? 6 : 3) {
             rows.append(TileRow(id: quote.id, title: quote.symbol, value: Fmt.price(quote.price, currency: currency), detail: PriceChange.text(quote.change24h, .day24h, arrow: false)))
         }
         tile.rows = rows
