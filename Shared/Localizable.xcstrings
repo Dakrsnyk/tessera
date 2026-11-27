@@ -176815,6 +176815,53 @@
         }
       }
     },
+    "Modifier ou enregistrer le widget": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Widget bearbeiten oder speichern"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit or save the widget"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar o guardar el widget"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifier ou enregistrer le widget"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifica o salva il widget"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェットを編集・保存"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Editar ou salvar o widget"
+          }
+        }
+      }
+    },
     "Module des widgets": {
       "extractionState": "manual",
       "localizations": {
@@ -204823,53 +204870,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Personalizar os %@ widgets"
-          }
-        }
-      }
-    },
-    "Personnaliser ou modifier le widget": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Widget anpassen oder bearbeiten"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Customize or edit the widget"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personalizar o editar el widget"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personnaliser ou modifier le widget"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personalizza o modifica il widget"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ウィジェットをカスタマイズ・編集"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Personalizar ou editar o widget"
           }
         }
       }

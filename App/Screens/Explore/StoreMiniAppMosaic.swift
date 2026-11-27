@@ -298,8 +298,10 @@ struct StoreWidgetChoice: View {
                     dismiss()
                     router.openEditor(design, isNew: true)
                 } label: {
-                    Label(tr("Personnaliser ou modifier le widget"), systemImage: "slider.horizontal.3")
+                    Label(tr("Modifier ou enregistrer le widget"), systemImage: "slider.horizontal.3")
                         .font(.headline)
+                        // The text color made for the accent fill: white on the light accent was hard to read.
+                        .foregroundStyle(.onAccent)
                         .frame(maxWidth: .infinity, minHeight: 50)
                 }
                 .buttonStyle(.borderedProminent)

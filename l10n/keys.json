@@ -23623,6 +23623,12 @@
    "App/Screens/MiniApps/Travel/TravelHybrid.swift:199: MiniActionButton(title: tr(\"Modifier le voyage\"), symbol: \"pencil\", colorHex: Travel.accentHex, isProminent: false) { sheet = .trip(trip) }"
   ]
  },
+ "Modifier ou enregistrer le widget": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMiniAppMosaic.swift:301: Label(tr(\"Modifier ou enregistrer le widget\"), systemImage: \"slider.horizontal.3\")"
+  ]
+ },
  "Module des widgets": {
   "placeholders": 0,
   "uses": [
@@ -27409,12 +27415,6 @@
   "placeholders": 1,
   "uses": [
    "App/Screens/Spaces/SpaceBuilderView.swift:396: if format == .small && selection.count > 1 { return tr(\"Personnaliser les \\(selection.count) widgets\") }"
-  ]
- },
- "Personnaliser ou modifier le widget": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreMiniAppMosaic.swift:301: Label(tr(\"Personnaliser ou modifier le widget\"), systemImage: \"slider.horizontal.3\")"
   ]
  },
  "Personnalisé": {
