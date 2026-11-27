@@ -2690,7 +2690,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:292: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
-   "Shared/Render/Tiles/TileView.swift:1390: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
+   "Shared/Render/Tiles/TileView.swift:1403: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
   ]
  },
  "Adaptateur de prise": {
@@ -9666,6 +9666,12 @@
    "App/Screens/MyWidgets/MyWidgetsView.swift:74: message: tr(\"Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.\"),"
   ]
  },
+ "Choisis un widget ou sauvegarde son style.": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/StoreMiniAppMosaic.swift:280: Text(tr(\"Choisis un widget ou sauvegarde son style.\"))"
+  ]
+ },
  "Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués %@ s'utilisent directement : valider une série, cocher une habitude, ajouter un verre…": {
   "placeholders": 1,
   "uses": [
@@ -12584,7 +12590,7 @@
  "Dernier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TileView.swift:1359: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
+   "Shared/Render/Tiles/TileView.swift:1372: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
   ]
  },
  "Dernier : %@, %@": {
@@ -14409,7 +14415,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/DataWidgets.swift:226: WLabel(text: mode == .net ? tr(\"Chaque mois\") : tr(\"Détail\"), style: s)",
-   "Shared/Render/Tiles/TileView.swift:674: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
+   "Shared/Render/Tiles/TileView.swift:686: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
   ]
  },
  "Détails": {
@@ -14959,12 +14965,6 @@
   "uses": [
    "Shared/Domains/Profile.swift:198: case .endurance: tr(\"Endurance\")",
    "Shared/Model/StyleLibraryData.swift:11383: list.append(StyleLook(id: \"sp-endurance\", name: tr(\"Endurance\"), summary: tr(\"Aube orange, longue ligne, minimal\"), family: \"sport\", themeID: .dark, accentHex: \"FFD6B0\", background: .gradient, font: ."
-  ]
- },
- "Enregistre son style dans « Mes styles », ou ouvre le widget pour le personnaliser.": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/StoreMiniAppMosaic.swift:280: Text(tr(\"Enregistre son style dans « Mes styles », ou ouvre le widget pour le personnaliser.\"))"
   ]
  },
  "Enregistrer": {

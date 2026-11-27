@@ -72099,6 +72099,53 @@
         }
       }
     },
+    "Choisis un widget ou sauvegarde son style.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle ein Widget oder speichere seinen Stil."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick a widget or save its style."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige un widget o guarda su estilo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis un widget ou sauvegarde son style."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli un widget o salva il suo stile."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェットを選ぶか、スタイルだけを保存。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha um widget ou salve o estilo dele."
+          }
+        }
+      }
+    },
     "Choisis un widget, règle-le, puis ajoute-le depuis l'écran verrouillé de ton iPhone. Ceux marqués %@ s'utilisent directement : valider une série, cocher une habitude, ajouter un verre…": {
       "extractionState": "manual",
       "localizations": {
@@ -111904,53 +111951,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Resistência"
-          }
-        }
-      }
-    },
-    "Enregistre son style dans « Mes styles », ou ouvre le widget pour le personnaliser.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Speichere den Stil in „Meine Stile“ oder öffne das Widget, um es anzupassen."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Save its style to “My styles”, or open the widget to customize it."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Guarda su estilo en «Mis estilos» o abre el widget para personalizarlo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enregistre son style dans « Mes styles », ou ouvre le widget pour le personnaliser."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Salva il suo stile in «I miei stili» o apri il widget per personalizzarlo."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スタイルを「マイスタイル」に保存するか、ウィジェットを開いてカスタマイズ。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Salve o estilo em “Meus estilos” ou abra o widget para personalizá-lo."
           }
         }
       }

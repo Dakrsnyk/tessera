@@ -277,7 +277,7 @@ struct StoreWidgetChoice: View {
             VStack(spacing: 4) {
                 Text(design.name.isEmpty ? design.kind.title : design.name)
                     .font(.title3.weight(.bold))
-                Text(tr("Enregistre son style dans « Mes styles », ou ouvre le widget pour le personnaliser."))
+                Text(tr("Choisis un widget ou sauvegarde son style."))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
