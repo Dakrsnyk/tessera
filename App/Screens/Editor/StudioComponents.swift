@@ -46,104 +46,10 @@ enum StudioSection: String, CaseIterable, Identifiable {
     }
 }
 
-/// The Studio's two chapters, in the order a widget is usually made: what it shows (and the order of the widgets
-/// inside), and its look (the tools of `StudioSection` but « Taille » and « Contenu »).
-enum StudioChapter: String, CaseIterable, Identifiable {
+/// What the Studio's panel shows, derived from the tool open: « Contenu » (what the widget shows, the widgets inside)
+/// or a tool of the look. Not steps: the person never sees them.
+enum StudioChapter: String {
     case content, style
-    var id: String { rawValue }
-
-    var number: Int {
-        switch self {
-        case .content: return 1
-        case .style: return 2
-        }
-    }
-
-    var title: String {
-        switch self {
-        case .content: return tr("Contenu")
-        case .style: return tr("Style")
-        }
-    }
-
-    /// « Suivant › »: the chapter after this one (none after « Style »).
-    var next: StudioChapter? {
-        switch self {
-        case .content: return .style
-        case .style: return nil
-        }
-    }
-}
-
-/// The two chapters under the stage, on glass: a numbered badge each, a check once a chapter has been opened.
-/// The chapter open sits on a light capsule with its number filled (never the color alone).
-struct StudioChapterBar: View {
-    @Binding var selection: StudioChapter
-    let visited: Set<StudioChapter>
-    @Environment(\.appStyle) private var style
-
-    var body: some View {
-        HStack(spacing: 4) {
-            ForEach(StudioChapter.allCases) { chapter in
-                item(chapter)
-            }
-        }
-        .padding(4)
-        .cristalGlass(in: Capsule())
-    }
-
-    private func item(_ chapter: StudioChapter) -> some View {
-        let palette = CristalPalette.of(style.id)
-        let isSelected = chapter == selection
-        let isDone = !isSelected && visited.contains(chapter)
-        return Button {
-            Haptics.tap()
-            withAnimation(.easeInOut(duration: 0.2)) { selection = chapter }
-        } label: {
-            HStack(spacing: 6) {
-                // Hidden: VoiceOver reads the « checkmark » symbol as selected, and that trait would pass to the button.
-                badge(chapter, isSelected: isSelected, isDone: isDone, palette: palette)
-                    .accessibilityHidden(true)
-                Text(chapter.title)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(isSelected ? Color.primary : Color.secondary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
-            }
-            .padding(.horizontal, 6)
-            .frame(maxWidth: .infinity, minHeight: 44)
-            .background {
-                if isSelected {
-                    Capsule()
-                        .fill(palette.panelSolidColor)
-                        .shadow(color: Color.black.opacity(0.08), radius: 6, y: 2)
-                }
-            }
-            .contentShape(Capsule())
-        }
-        .buttonStyle(.pressable)
-        .accessibilityLabel(Text(chapter.title))
-        .accessibilityValue(isDone ? Text(tr("Fait")) : Text(verbatim: ""))
-        .accessibilityAddTraits(isSelected ? .isSelected : [])
-        .accessibilityIdentifier("studio-chapter-\(chapter.rawValue)")
-    }
-
-    @ViewBuilder private func badge(_ chapter: StudioChapter, isSelected: Bool, isDone: Bool, palette: CristalPalette) -> some View {
-        if isDone {
-            Image(systemName: "checkmark")
-                .font(.system(size: 11, weight: .heavy))
-                .foregroundStyle(palette.okColor)
-                .frame(width: 24, height: 24)
-                .background(palette.okColor.opacity(0.18), in: Circle())
-        } else {
-            Text(verbatim: "\(chapter.number)")
-                .font(.footnote.weight(.bold))
-                .monospacedDigit()
-                .foregroundStyle(isSelected ? AnyShapeStyle(.onAccent) : AnyShapeStyle(Color.secondary))
-                .frame(width: 24, height: 24)
-                .background(isSelected ? Color.accentColor : palette.tintColor, in: Circle())
-        }
-    }
 }
 
 /// A link at the top right of a panel (« Suivant › », « Fermer »).

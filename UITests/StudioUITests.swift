@@ -143,18 +143,18 @@ final class StudioUITests: XCTestCase {
         app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'stage-part-'"))
     }
 
-    /// Opens a chapter of the Studio (« content », « layout », « style ») and waits for it to be the one selected.
+    /// Opens a tool of the Studio (« content », « style »…) and waits for it to be the one selected.
     private func chapter(_ name: String, file: StaticString = #filePath, line: UInt = #line) {
-        let identifier = "studio-chapter-\(name)"
+        let identifier = "studio-\(name)"
         let button = app.buttons[identifier]
-        XCTAssertTrue(button.waitForExistence(timeout: 8), "Chapitre « \(name) » introuvable", file: file, line: line)
+        XCTAssertTrue(button.waitForExistence(timeout: 8), "Outil « \(name) » introuvable", file: file, line: line)
         if !button.isSelected { button.tap() }
         if !waitForSelection(identifier) {
             // The Studio may still be sliding in when the first touch lands: once more, with what the screen shows kept.
             snapshot("chapter-\(name)-first-touch")
             button.tap()
         }
-        XCTAssertTrue(waitForSelection(identifier), "Le chapitre \(name) ne s'ouvre pas", file: file, line: line)
+        XCTAssertTrue(waitForSelection(identifier), "L'outil \(name) ne s'ouvre pas", file: file, line: line)
     }
 
     /// In the choice of a widget to add, taps the first one that can be added now: not faded (a faded one says why
@@ -190,7 +190,7 @@ final class StudioUITests: XCTestCase {
             XCTAssertTrue(app.buttons[identifier].exists, "« \(identifier) » absent de la page des tailles")
         }
         // Not the Studio: no chapters, no « Changer de widget ».
-        XCTAssertFalse(app.buttons["studio-chapter-content"].exists, "Créer ne doit pas s'ouvrir sur le Studio")
+        XCTAssertFalse(app.buttons["studio-save"].exists, "Créer ne doit pas s'ouvrir sur le Studio")
         XCTAssertFalse(app.buttons["create-change"].exists)
         snapshot("create-start")
     }
@@ -219,7 +219,7 @@ final class StudioUITests: XCTestCase {
         XCTAssertFalse(app.buttons["create-pick-todaysWorkout"].isEnabled, "Un 3e widget est refusé en Moyen (2 au plus)")
         snapshot("create-pick-medium")
         go.tap()
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "« Personnaliser le widget » n'ouvre pas le Studio")
+        XCTAssertTrue(app.buttons["studio-save"].waitForExistence(timeout: 10), "« Personnaliser le widget » n'ouvre pas le Studio")
         XCTAssertTrue(waitUntil { partRows().count == 2 }, "Le Studio n'a pas un seul widget avec les 2 dedans (lignes : \(partRows().count))")
         goBack()
         XCTAssertTrue(go.waitForExistence(timeout: 8), "Le retour ne ramène pas aux widgets choisis")
@@ -232,7 +232,7 @@ final class StudioUITests: XCTestCase {
         openPicks(size: "small", category: "space-fitness")
         XCTAssertFalse(app.buttons["create-pick-go"].exists, "Pas de bouton en Petit : le toucher ouvre le Studio")
         reveal("create-pick-nextSet", bottomMargin: 210).tap()
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "Le toucher en Petit n'ouvre pas le Studio")
+        XCTAssertTrue(app.buttons["studio-save"].waitForExistence(timeout: 10), "Le toucher en Petit n'ouvre pas le Studio")
         XCTAssertTrue(app.buttons["stage-add"].waitForExistence(timeout: 8), "La scène n'est pas prête")
         XCTAssertEqual(partRows().count, 0, "Petit : un seul widget, sans zone de partie")
         let add = app.buttons["stage-add"]
@@ -255,7 +255,7 @@ final class StudioUITests: XCTestCase {
         openPicks(size: "medium", category: "space-fitness")
         reveal("create-pick-nextSet", bottomMargin: 210).tap()
         app.buttons["create-pick-go"].tap()
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "« Personnaliser le widget » n'ouvre pas le Studio")
+        XCTAssertTrue(app.buttons["studio-save"].waitForExistence(timeout: 10), "« Personnaliser le widget » n'ouvre pas le Studio")
         XCTAssertEqual(partRows().count, 0, "Moyen avec un seul widget : sans zone de partie")
         let add = app.buttons["stage-add"]
         XCTAssertTrue(add.waitForExistence(timeout: 8), "Le « + » de la scène est absent")
@@ -285,10 +285,8 @@ final class StudioUITests: XCTestCase {
         openPicks(size: "small", category: "space-fitness")
         reveal("create-pick-nextSet", bottomMargin: 210).tap()
         XCTAssertTrue(app.buttons["create-change"].waitForExistence(timeout: 15), "« Petit » n'ouvre pas le Studio")
-        // « Contenu » ends on « Suivant »: « Style » has the save button.
-        let next = app.buttons["studio-next"]
-        XCTAssertTrue(next.waitForExistence(timeout: 8), "Bouton Suivant absent")
-        next.tap()
+        // No steps: the Studio has the save button at once.
+        XCTAssertFalse(app.buttons["studio-next"].exists, "Il n'y a plus de bouton Suivant")
         let save = app.buttons["studio-save"]
         XCTAssertTrue(save.waitForExistence(timeout: 8), "Bouton Enregistrer absent")
         save.tap()
@@ -317,7 +315,7 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(element("create-places").waitForExistence(timeout: 8), "La page des widgets ne s'ouvre pas")
         reveal("create-pick-caloriesLeft", bottomMargin: 210).tap()
         app.buttons["create-pick-go"].tap()
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 10), "Le Studio n'est pas revenu")
+        XCTAssertTrue(app.buttons["studio-save"].waitForExistence(timeout: 10), "Le Studio n'est pas revenu")
         snapshot("create-atelier")
     }
 
@@ -328,7 +326,7 @@ final class StudioUITests: XCTestCase {
     /// with a note (a medium widget holds 2), the size stays the one chosen and the order is kept.
     func testCombinedWidgetLayoutAndAThirdWidgetIsRefused() {
         launch(["-screenshotScreen", "creator-nutrition"])
-        XCTAssertTrue(app.buttons["studio-chapter-content"].waitForExistence(timeout: 15), "Le Studio ne s'ouvre pas sur la composition de l'espace")
+        XCTAssertTrue(app.buttons["studio-save"].waitForExistence(timeout: 15), "Le Studio ne s'ouvre pas sur la composition de l'espace")
         XCTAssertTrue(waitUntil { partRows().count == 2 }, "La composition « Pour toi » réunit deux widgets (lignes : \(partRows().count))")
 
         // The order of the widgets is in « Contenu », under the name.
@@ -509,6 +507,8 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(edit.waitForExistence(timeout: 15), "Mes widgets absent")
         XCTAssertTrue(app.staticTexts["Studio test"].waitForExistence(timeout: 5), "Le widget enregistré est en tête de Mes widgets")
         edit.tap()
+        // The Studio opens on « Style »: the name is in the last tool, « Contenu ».
+        chapter("content")
         XCTAssertTrue(app.textFields["widget-name"].waitForExistence(timeout: 10))
         XCTAssertEqual(app.textFields["widget-name"].value as? String, "Studio test")
         section("colors")
@@ -526,24 +526,20 @@ final class StudioUITests: XCTestCase {
         launch(["-screenshotScreen", "studio-content"])
         XCTAssertTrue(app.textFields["widget-name"].waitForExistence(timeout: 15))
         // « Contenu » holds the content (the size is chosen before the Studio).
-        XCTAssertTrue(waitForSelection("studio-chapter-content"), "Le Studio s'ouvre sur « Contenu »")
+        XCTAssertTrue(waitForSelection("studio-content"), "Le Studio s'ouvre sur « Contenu » (outil demandé)")
         XCTAssertFalse(element("studio-size").exists, "« Taille » n'est plus dans « Contenu »")
         XCTAssertFalse(app.buttons["studio-chapter-layout"].exists, "« Disposition » n'existe plus")
-        XCTAssertTrue(app.buttons["studio-next"].exists, "« Suivant » est le bouton du bas dans « Contenu »")
-        XCTAssertTrue(element("studio-content").exists, "Le contenu est dans « Contenu »")
-        // « Style »: every tool opens; « Taille » and « Contenu » are no longer tools of the row.
+        XCTAssertFalse(app.buttons["studio-next"].exists, "Plus de bouton « Suivant »")
+        XCTAssertTrue(app.buttons["studio-save"].exists, "Le bouton du bas enregistre")
+        // Every tool opens; « Taille » is not one; « Contenu » is the last.
         for name in Self.styleTools {
             section(name)
             XCTAssertTrue(app.buttons["studio-\(name)"].isSelected, "La section \(name) ne s'ouvre pas")
             XCTAssertEqual(app.state, .runningForeground, "Section \(name)")
         }
         XCTAssertFalse(app.buttons["studio-size"].exists, "« Taille » n'est plus un outil de « Style »")
-        XCTAssertFalse(app.buttons["studio-content"].exists, "« Contenu » n'est plus un outil de « Style »")
-        XCTAssertTrue(app.buttons["studio-save"].exists, "Le bouton du bas enregistre dans « Style »")
-        // A chapter already seen says « Fait »: it doesn't pass for the chapter open (its check mark is hidden).
-        let seen = app.buttons["studio-chapter-content"]
-        XCTAssertFalse(seen.isSelected, "Un chapitre déjà vu passe pour le chapitre ouvert")
-        XCTAssertEqual(seen.value as? String, "Fait", "Un chapitre déjà vu ne dit pas « Fait »")
+        XCTAssertTrue(app.buttons["studio-save"].exists, "Le bouton du bas enregistre avec chaque outil")
+        XCTAssertTrue(app.buttons["studio-content"].exists, "« Contenu » est un outil de la barre")
         chapter("content")
         XCTAssertTrue(element("studio-content").waitForExistence(timeout: 8))
         // Only what the person asked to keep: no shape, text, icons, layout or depth sections.
@@ -589,9 +585,8 @@ final class StudioUITests: XCTestCase {
     /// A widget without a chart has no « Graphique » section.
     func testTheChartSectionOnlyShowsWithAChart() {
         launch(["-screenshotScreen", "studio-note"])
-        // « studio-note » opens on « Contenu »: the tools are in the chapter « Style ».
-        XCTAssertTrue(app.buttons["studio-chapter-style"].waitForExistence(timeout: 15))
-        chapter("style")
+        // « studio-note » opens on the tools of the look.
+        XCTAssertTrue(app.buttons["studio-style"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.buttons["studio-colors"].waitForExistence(timeout: 8))
         XCTAssertFalse(app.buttons["studio-chart"].exists, "Une note n'a pas de graphique")
     }

@@ -56,10 +56,7 @@ struct WidgetStudio: View {
     @State private var isImportingPhoto = false
     @State private var backgroundTab: BackgroundKind
     @State private var previewFrame: CGRect = .zero
-    /// The chapter open under the stage, and those already opened (a check on their badge).
-    @State private var chapter: StudioChapter
-    @State private var visitedChapters: Set<StudioChapter>
-    /// The tool open in « Style » (never « Taille » nor « Contenu », which are in the chapter « Contenu »).
+    /// The tool open under the stage (never « Taille »; « Contenu » is the last tool).
     @State private var section: StudioSection
     /// Widgets made together wear the same look while this is on: a change to one goes to all.
     @State private var sharesLook: Bool
@@ -98,14 +95,9 @@ struct WidgetStudio: View {
         if let asked = request.family, request.design.families.contains(asked) { opening = asked }
         _family = State(initialValue: opening)
         _backgroundTab = State(initialValue: BackgroundKind(request.design.background))
-        // « Contenu » (where « Taille » and « Contenu » now are), or « Style » on the tool the request names.
-        var tool: StudioSection?
-        if let asked = request.section.flatMap(StudioSection.init(name:)), asked != .size, asked != .content { tool = asked }
-        // A Lock Screen widget has « Contenu » only: iOS draws it in its own colors (PDG, 2026-11-16).
-        let first: StudioChapter = tool == nil || opening.isAccessory ? .content : .style
-        _chapter = State(initialValue: first)
-        _visitedChapters = State(initialValue: [first])
-        _section = State(initialValue: tool ?? .style)
+        // « Style » by default (also for « Taille », chosen before the Studio), or the tool the request names.
+        let asked = request.section.flatMap(StudioSection.init(name:))
+        _section = State(initialValue: asked == nil || asked == .size ? .style : asked!)
         _sharesLook = State(initialValue: designs.count > 1 && designs.dropFirst().allSatisfy { $0.withLook(of: designs[0]) == $0 })
         isNew = request.isNew
         originals = designs
@@ -154,14 +146,9 @@ struct WidgetStudio: View {
                     .transition(.opacity)
             }
             panelHandle
-            // On the Lock Screen, iOS draws widgets in its own colors: no « Style » to set, nothing to lay out,
-            // so « Contenu » alone, without the chapters (PDG, 2026-11-16).
+            // On the Lock Screen, iOS draws widgets in its own colors: « Contenu » alone, without the tools.
+            // No steps: the tools only, « Contenu » being the last one (PDG, 2026-11-26).
             if !isLockScreen {
-                StudioChapterBar(selection: $chapter, visited: visitedChapters)
-                    .padding(.horizontal, 20)
-                    .padding(.bottom, chapter == .style ? 0 : 8)
-            }
-            if chapter == .style && !isLockScreen {
                 StudioSectionBar(sections: Self.styleTools(sections), selection: $section)
             }
             Divider()
@@ -364,12 +351,7 @@ struct WidgetStudio: View {
                 partsPanel = .list
                 comboNote = nil
             }
-            .onChange(of: family) { _, shown in
-                // A Lock Screen size chosen: back to « Contenu », the only chapter there.
-                if shown.isAccessory && chapter != .content { chapter = .content }
-            }
             .onChange(of: chapter) { _, opened in
-                _ = visitedChapters.insert(opened)
                 // Leaving « Contenu »: its choice and widget panels close (opening a widget or the choice from
                 // elsewhere sets the panel along with the chapter, so only leaving resets it).
                 if opened != .content { partsPanel = .list }
@@ -420,9 +402,9 @@ struct WidgetStudio: View {
         return StudioSection.allCases.filter { $0 != .chart || chart != ChartFamily.none }
     }
 
-    /// The tools of « Style »: every section but « Taille » and « Contenu », which are in the chapter « Contenu ».
+    /// The tools: every section but « Taille », « Contenu » last.
     private static func styleTools(_ sections: [StudioSection]) -> [StudioSection] {
-        sections.filter { $0 != .size && $0 != .content }
+        sections.filter { $0 != .size && $0 != .content } + sections.filter { $0 == .content }
     }
 
     @ToolbarContentBuilder private var toolbarContent: some ToolbarContent {
@@ -511,7 +493,10 @@ struct WidgetStudio: View {
         return StudioInput(payload: payload, family: gridFamily, tile: tile)
     }
 
-    // MARK: Chapters
+    // MARK: Tools
+
+    /// What the panel shows, derived from the tool open: « Contenu », or a tool of the look. The Lock Screen has « Contenu » only.
+    private var chapter: StudioChapter { isLockScreen || section == .content ? .content : .style }
 
     @ViewBuilder private func chapterContent(_ input: StudioInput) -> some View {
         switch chapter {
@@ -534,11 +519,6 @@ struct WidgetStudio: View {
         case let .replacing(part):
             kindPicker(replacing: part)
         }
-    }
-
-    /// « Suivant » (bottom button) in « Contenu »: leads to « Style ». Never on the Lock Screen (no « Style »: it saves).
-    private var nextChapter: StudioChapter? {
-        isLockScreen || chapter != .content ? nil : chapter.next
     }
 
     /// What the widget shows, and the order of the widgets inside. The size is chosen before the Studio (Créer);
@@ -896,16 +876,16 @@ struct WidgetStudio: View {
     private var saveBar: some View {
         VStack(spacing: 0) {
             Divider()
-            Button(action: { if let nextChapter { goTo(nextChapter) } else { save() } }) {
-                Text(nextChapter == nil ? saveTitle : tr("Suivant"))
+            Button(action: save) {
+                Text(saveTitle)
                     .font(.headline)
-                    .foregroundStyle(hasChanges || nextChapter != nil ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.secondary))
+                    .foregroundStyle(hasChanges ? AnyShapeStyle(.onAccent) : AnyShapeStyle(.secondary))
                     .frame(maxWidth: .infinity, minHeight: 50)
             }
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.roundedRectangle(radius: 14))
-            .disabled(nextChapter == nil && !hasChanges)
-            .accessibilityIdentifier(nextChapter == nil ? "studio-save" : "studio-next")
+            .disabled(!hasChanges)
+            .accessibilityIdentifier("studio-save")
             .padding(.horizontal, 20)
             .padding(.vertical, 10)
         }
@@ -1060,15 +1040,11 @@ struct WidgetStudio: View {
         return { format in changeComboFormat(format) }
     }
 
-    private func goTo(_ next: StudioChapter) {
-        withAnimation(.easeInOut(duration: 0.2)) { chapter = next }
-    }
-
     /// A widget inside touched on the stage or in the list: its panel opens (a second touch on the stage closes it).
     private func openPart(_ part: Int) {
         let isOpen = chapter == .content && shownPanel == .part(part)
         withAnimation(.easeInOut(duration: 0.2)) {
-            chapter = .content
+            section = .content
             partsPanel = isOpen ? .list : .part(part)
         }
     }
@@ -1080,7 +1056,7 @@ struct WidgetStudio: View {
         if chapter == .content, let open = shownPanel.partIndex { back = .part(open) }
         withAnimation(.easeInOut(duration: 0.2)) {
             pickerBack = back
-            chapter = .content
+            section = .content
             partsPanel = panel
         }
     }

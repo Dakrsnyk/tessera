@@ -172,6 +172,9 @@ final class DataEntryUITests: XCTestCase {
 
     func testEditorKeepsItsChangesWhileLoggingFood() {
         launch(["-screenshotScreen", "editor-v2"])
+        // The Studio opens on its style tools (no « Contenu » step since 2026-11-26): the name is in the tool « Contenu ».
+        let contentTool = app.buttons["studio-content"].firstMatch
+        if contentTool.waitForExistence(timeout: 15) { contentTool.tap() }
         let name = app.textFields["widget-name"]
         XCTAssertTrue(name.waitForExistence(timeout: 15), "Éditeur absent")
         // The field can start under the bottom of the screen. Settings down, the middle of the screen is the large

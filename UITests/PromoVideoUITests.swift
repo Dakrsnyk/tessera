@@ -208,8 +208,8 @@ final class PromoVideoUITests: XCTestCase {
     func testVideoStudio() {
         playCapture(2)
         launch("studio-content")
-        // The Studio opens on « Contenu »: the tools are in the chapter « Style ».
-        let styleChapter = app.buttons["studio-chapter-style"]
+        // The Studio opens on « Contenu »: the tools are in the row, « Contenu » last.
+        let styleChapter = app.buttons["studio-style"]
         guard styleChapter.waitForExistence(timeout: 15) else { return }
         pause(1.5)
         styleChapter.tap()

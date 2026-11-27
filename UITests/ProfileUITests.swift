@@ -455,8 +455,6 @@ final class ProfileUITests: XCTestCase {
             }
         }
         snapshot("pack-studio-last")
-        // In « Contenu » the bottom button is « Suivant »: it leads to « Style », where it saves.
-        if app.buttons["studio-next"].exists { tapButton("studio-next") }
         tapButton("Enregistrer les 6 widgets")
         XCTAssertTrue(waitForDisappearance(first), "Le pack doit se fermer une fois enregistré")
         XCTAssertEqual(app.state, .runningForeground)
@@ -504,7 +502,7 @@ final class ProfileUITests: XCTestCase {
         XCTAssertTrue(next.waitForExistence(timeout: 15), "Le créateur n'a pas de bouton pour passer au Studio")
         XCTAssertTrue(app.segmentedControls.buttons["Moyen"].isSelected)
         next.tap()
-        // Créer opens its Studio on « Contenu »: the widgets of the combined widget are touch zones of the stage.
+        // Créer opens its Studio on « Style »; a touch on a widget of the stage opens « Contenu » on it: the widgets of the combined widget are touch zones of the stage.
         let content = app.descendants(matching: .any)["studio-content"]
         XCTAssertTrue(content.waitForExistence(timeout: 10), "Le Studio n'est pas ouvert")
         let part = app.buttons["stage-part-0"]
