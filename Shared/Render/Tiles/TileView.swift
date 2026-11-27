@@ -322,6 +322,18 @@ struct TileView: View {
                 Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        } else if !tile.rows.isEmpty && tile.buttons.isEmpty && !hasVisual {
+            // The figure under the title, then its first lines in the room left (« Bras », then the session's
+            // exercises), not a figure at the bottom under an empty middle (PDG, 2026-11-27).
+            VStack(alignment: .leading, spacing: 3 * sp) {
+                headerBlock
+                if hasValue { valueText(tile.value.count > 7 ? 22 : 28) }
+                captionText(lines: 1)
+                TileRowsView(rows: Array(tile.rows.prefix(2)), context: context, compact: true)
+                    .padding(.top, 4)
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         } else {
             VStack(alignment: s.horizontalAlignment, spacing: 3 * sp) {
                 headerBlock
@@ -936,9 +948,10 @@ struct TileView: View {
                         if s.showsTitle { WLabel(text: tile.title, style: s) }
                     }
                 }
-                Spacer(minLength: 0)
+                // The figure at the top of its card, under its name, not at the bottom of an empty card.
                 if hasValue { valueText(context.isSmall ? 26 : (context.isLarge ? 34 : 24)) }
-                captionText(lines: 1)
+                captionText(lines: context.isLarge ? 2 : 1)
+                Spacer(minLength: 0)
             }
         }
     }
@@ -968,13 +981,13 @@ struct TileView: View {
                         .lineLimit(context.isSmall || small ? 1 : 2)
                         .minimumScaleFactor(0.85)
                 }
-                Spacer(minLength: 0)
                 Text(stat.value)
                     .font(s.number(context.isSmall ? 15 : (small ? 14 : 16)))
                     .foregroundStyle(s.numberColor)
-                    .lineLimit(1)
+                    .lineLimit(context.isLarge ? 2 : 1)
                     .minimumScaleFactor(0.5)
                     .privacySensitive(tile.isSensitive)
+                Spacer(minLength: 0)
             }
         }
     }
