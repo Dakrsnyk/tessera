@@ -781,7 +781,10 @@ struct PhotoQuoteEditor: View {
                     }
                 }
                 HStack(spacing: 12) {
+                    // Any background color is Premium, as the locked swatches above (audit 2026-11-26: the free picker
+                    // went around them).
                     ColorPicker(tr("Fond"), selection: colorBinding(\.backgroundHex), supportsOpacity: false)
+                        .disabled(!model.isPremium)
                     ColorPicker(tr("Texte"), selection: colorBinding(\.textHex), supportsOpacity: false)
                 }
                 .font(.subheadline)

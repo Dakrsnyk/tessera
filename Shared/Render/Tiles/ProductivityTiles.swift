@@ -145,10 +145,12 @@ enum ProductivityTiles {
                 if let date = DateMath.calendar.date(byAdding: .day, value: day - 1, to: first), habit.isDone(on: date) { marked.insert(day) }
             }
             tile.visual = .month(days: days, offset: offset, marked: marked, today: DateMath.calendar.component(.day, from: now))
+            // The best streak and the regularity are Premium in the app: Premium here too, at every size (audit 2026-11-26).
+            let isPremium = SharedStore.shared.premium.isPremium(at: now)
             let best = bestStreak(habit, until: now)
-            if best > 0 { tile.detail = tr("Record : \(Fmt.plural(best, tr("jour"), tr("jours")))") }
+            if isPremium && best > 0 { tile.detail = tr("Record : \(Fmt.plural(best, tr("jour"), tr("jours")))") }
             // The regularity over the last 30 days, when there is a history (never a made-up percentage).
-            if context.isLarge, let rate = HabitHeatmap.rate(of: habit, asOf: now) {
+            if isPremium, context.isLarge, let rate = HabitHeatmap.rate(of: habit, asOf: now) {
                 tile.rows = [TileRow(id: "rate", title: tr("Régularité sur 30 jours"), value: Fmt.percent(rate), symbol: "percent", progress: rate)]
             }
         }

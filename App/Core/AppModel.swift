@@ -573,6 +573,9 @@ final class AppModel {
 
     /// Data for a preview inside the app: the user's real content and the latest fetched data.
     func payload(for design: WidgetDesign) -> WidgetPayload {
+        // A Premium kind of widget in a free account shows example data, never the person's own (security audit,
+        // 2026-11-26): its records, volume or grid were readable in every preview, at any size, without Premium.
+        if !isPremium && design.usesPremiumKind { return SamplePayload.make(for: design) }
         // A combined widget: the data of its first widget, plus what the others follow (coin, companies, markets).
         if design.isCombo, let first = design.partDesigns.first {
             var merged = payload(for: first)
