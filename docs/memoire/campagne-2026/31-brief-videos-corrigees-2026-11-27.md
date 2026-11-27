@@ -60,15 +60,59 @@
 4. **Geste réel**
    - Chaque action montre le doigt ou une onde de toucher, puis l'effet.
    - Plus de valeurs qui changent seules.
-5. **Fin avec un verbe**, alignée sur l'état réel de l'app le jour de la publication :
-   - avant la mise en ligne : « Coming soon on the App Store, free to download » ;
-   - après la mise en ligne : « Download Ardane free ».
-   - Aucun badge App Store ni « Download » avant la mise en ligne. Prévois une carte finale à deux variantes pour basculer sans re-rendre tout le film.
+5. **Carte de fin.** Garder le style choisi par l'utilisateur : « AVAILABLE ON THE APP STORE », 1,5 s. Le texte suit l'état réel de l'app :
+   - tant que l'app n'est pas en vente : « COMING SOON TO THE APP STORE » (`Faits-verifies.md` § 0, `Legendes-et-CTA.md`) ;
+   - aucun badge, aucun prix, aucun essai, aucun « Download » avant la mise en ligne.
+   - Prévoir une carte à deux variantes pour basculer en ne re-rendant que la fin.
+   - Un verbe (« Get Ardane ») est une proposition de la revue, pas une règle validée : le montrer en option.
+   - Jamais « free » ou « gratuit » sans nuance. Après la mise en ligne seulement : « Free download · Premium optional ».
 6. **Studio et personnalisation dans chaque vidéo**
    - Montrer l'accueil complet, puis zoomer sur le widget, faire l'action, et changer le style de tout l'accueil (règle validée).
    - Montrer l'essai gratuit du Studio : un utilisateur gratuit peut appliquer n'importe quel style Premium et le voir « Sur mon écran ». Seul « Enregistrer » est bloqué. C'est un argument fort et vrai.
 
-Durée : 20 à 30 s pour l'organique, 15 s pour les formats courts. Pas de voix off en organique. Le texte suit le rythme et les coupes tombent sur les temps mesurés.
+Durée : 20 à 30 s pour l'organique, 15 s pour les formats courts. Pas de voix off en organique ; la voix reste pour les pubs payées, sur le modèle de Main Pub v2.5.
+
+### Règles déjà validées (rappel, ne pas réinventer)
+- **Accroche** : plan réel de 1 à 1,5 s, app à 1,25 s, puis un iPhone entier qui monte sur l'écran verrouillé. L'ouverture dure 3 s au plus.
+- **Mise en scène** :
+  - Jamais un widget seul.
+  - Ordre : accueil complet avec de vraies icônes Apple, zoom, toucher puis effet, retour à l'accueil, puis changement de style de tout l'accueil.
+  - Icônes : `film/public/apple-icons/`, jamais Utilities, jamais deux fois la même.
+  - Mêmes widgets d'un style à l'autre, coupes franches, aucune double image.
+  - Pas de zoom puis dézoom entre deux fonctions d'une même mini-app.
+- **Couleur de la mini-app** sur le fond de la vidéo et sur le fond d'écran :
+  - Fitness : noir, rouge et gris. Le widget combiné Next set | Consistency sur fond rayé est validé.
+  - Planning : cyan.
+  - Finances : vert.
+  - Business : lilas.
+- **Écrans et texte** :
+  - écrans complets d'environ 2 s, seulement ceux qui servent l'histoire ;
+  - texte gros en 2 couleurs, une idée par plan ;
+  - texte qui défile mot à mot sur les plans réels ;
+  - dernier plan réel court avant la carte.
+- **Musique** :
+  - Pixabay, sans Content ID ;
+  - un seul morceau d'un bout à l'autre, départ à 0,2 s ;
+  - tempo mesuré, coupes sur les temps, drop sur l'arrivée de l'app ;
+  - environ −14 LUFS ;
+  - passages déjà pris : note 30, « Suivi de la nuit ». Ne pas les reprendre.
+- **Zone sûre** : aucun texte dans les 220 px du haut, ni dans les 380 px du bas, ni dans les 140 px de droite.
+- **Honnêteté** :
+  - Seulement de vrais exports ou captures, jamais recolorés.
+  - Une seule date d'export par mini-app, jamais deux chiffres différents d'une même mini-app.
+  - « Demo data » si besoin.
+  - Mots interdits : « AI », « 100% », « exact ».
+  - Aucune marque autre qu'Apple : pas d'écran Voyage Program (TP 258, Pastéis de Belém), attention à la voiture « Civic ».
+  - Aucun visage, aucun faux témoignage. Le téléphone en main est permis, mains seulement.
+  - Écrire « Cherry blossom », pas « Blossom ».
+- **`Faits-verifies.md` § 1 est périmé sur les styles** (« 10 gratuits sur 57 »). Au 2026-11-27 :
+  - 4 styles gratuits (Minimal, Clair, Sombre, Monochrome) sur 504 ;
+  - 29 types de widgets gratuits sur 90 ;
+  - source : analyse intégrale, section 2.
+- **Séries** :
+  - refaire un format qui marche au moins 10 fois, même musique, sujet différent ;
+  - jamais republier à l'identique ;
+  - deux structures proches (POV, Oddly satisfying) jamais à la suite.
 
 ## 4. Vidéos : quoi faire, une par une
 Les notes /10 viennent de la revue du 2026-11-27.
@@ -162,7 +206,14 @@ Objectif de stock avant de publier à 4 par jour : environ 2 semaines d'avance.
 - **Légendes** : un crochet distinct de l'image, et un appel à l'action cohérent avec le point 5.
 
 ## 7. Méthode et garde-fous
-1. **Brouillons d'abord.** Pour chaque pub créée ou refaite, envoyer à l'utilisateur 4 à 6 images clés (planche PNG, avec SendUserFile) et attendre son accord avant le rendu final. Ne rends jamais 30 vidéos d'un coup.
+1. **Méthode par film** (note 30, « Méthode ») :
+   - Script dans `notes.md`, critiqué contre la note 25.
+   - Planche de 8 à 12 images clés, regardée et corrigée.
+   - Brouillon à demi-taille, puis planche de contrôle (une image toutes les 0,5 s), regardée.
+   - Rendu final en 1080x1920 ; mesurer la durée et le niveau sonore (LUFS).
+   - 3 accroches de rechange.
+   - Avant tout rendu propre d'une pub nouvelle ou refondue, envoyer les images clés (PNG) à l'utilisateur.
+   - Ne rends jamais 30 vidéos d'un coup.
 2. **Une seule version par pub** dans `_imports/`, l'ancienne dans `_archives-variantes/`. Mettre à jour `photos/affiches-legendes.md` et les légendes.
 3. **Vérifier chaque rendu** (images regardées, pas de noir, durée, lisibilité de la pastille Premium) avant de le dire prêt. Aucune validation sans preuve.
 4. **Pas de CI en chaîne** pour des planches. Un nouveau kit de captures seulement s'il manque un écran.
