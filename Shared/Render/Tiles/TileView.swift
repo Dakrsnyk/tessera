@@ -58,20 +58,31 @@ struct TileView: View {
         }
     }
 
-    /// The chosen layout, or the closest one that has what it needs.
+    /// The chosen layout, or the closest one that has what it needs (checked on every widget in each layout,
+    /// 2026-11-26): a widget with buttons keeps them (a counter without « +1 » is useless), a widget of words (an AI
+    /// summary, a note) is never left with its title alone, and two columns never squeeze a small widget.
     private var effectiveLayout: LayoutKind {
-        switch s.options.layout {
-        case .progress: progressFraction == nil ? .vertical : .progress
-        // The graph layout draws no button: a medium widget that has some (« Prochaine série » with the session beside
-        // it) takes the vertical one, which keeps them.
-        case .graph: (hasVisual || !tile.rows.isEmpty) && !(context.isMedium && !tile.buttons.isEmpty) ? .graph : .vertical
-        case .list: tile.rows.isEmpty ? .vertical : .list
-        // Two columns of lines don't fit in a small widget: its chart can, its lines can't.
-        // Two columns in a small widget only for a chart that draws at any size (ring, bars, line, parts): a week of
-        // dots or a month in half a small widget was a speck above an empty column (« Série de suivi »).
-        case .split: context.isSmall && !(hasVisual && tile.rows.isEmpty && chartScales) ? .vertical : .split
-        case let layout: layout
+        let layout = s.options.layout
+        let hasButtons = !tile.buttons.isEmpty
+        switch layout {
+        case .progress: return progressFraction == nil ? .vertical : .progress
+        // A bar alone (a set, a rest) makes no graph: half the widget stayed empty.
+        case .graph:
+            let drawable = (hasVisual && !isBarOnly) || !tile.rows.isEmpty
+            return drawable && !(!context.isLarge && hasButtons) ? .graph : .vertical
+        case .list: return tile.rows.isEmpty ? .vertical : .list
+        case .split: return context.isSmall || (tile.rows.isEmpty && !hasVisual) ? .vertical : .split
+        case .data: return stats.count < 2 || tile.timer != nil || (context.isSmall && hasButtons) ? .vertical : .data
+        case .cards: return !hasValue || tile.timer != nil || (!context.isLarge && hasButtons) ? .vertical : .cards
+        case .centered, .minimal: return !hasValue || (!context.isLarge && hasButtons) ? .vertical : layout
+        case .horizontal: return context.isSmall && hasButtons ? .vertical : .horizontal
+        default: return layout
         }
+    }
+
+    private var isBarOnly: Bool {
+        if case .bar = tile.visual { return true }
+        return false
     }
 
     /// The person picked a chart: it is shown where the widget would otherwise show its lines.
@@ -223,14 +234,6 @@ struct TileView: View {
 
     /// The week's schedule fills the height the widget leaves (no empty half below it); the other charts keep their own.
     private var fillsHeight: Bool { tile.visual.isSchedule }
-
-    /// A chart that stays readable however narrow its column.
-    private var chartScales: Bool {
-        switch tile.visual {
-        case .ring, .bars, .line, .segments, .bar: true
-        default: false
-        }
-    }
 
     /// A month of dots or a habits × days grid: drawn in the height left (a strip of 30 points made them specks).
     private var growsInRoom: Bool {
@@ -470,7 +473,7 @@ struct TileView: View {
         return VStack(alignment: s.horizontalAlignment, spacing: 5 * sp) {
             headerBlock
             if hasValue { valueText(tile.value.count > 7 ? valueSize * 0.8 : valueSize) }
-            captionText(lines: context.isSmall ? 2 : 3)
+            captionText(lines: context.isSmall || (context.isMedium && hasVisual) ? 2 : 3)
             if !context.isSmall { detailText }
             if hasVisual && (tile.buttons.isEmpty || !context.isSmall) {
                 visual(compact: context.isSmall)
@@ -506,10 +509,10 @@ struct TileView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 if let progress = progressFraction {
                     miniProgress(progress)
-                        .frame(width: context.isSmall ? 46 : 60, height: context.isSmall ? 46 : 60)
+                        .frame(width: context.isSmall ? 50 : 66, height: context.isSmall ? 50 : 66)
                 } else if let values = tile.visual.seriesValues {
                     SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 2, showsEndDot: true)
-                        .frame(width: context.isSmall ? 50 : 96, height: context.isSmall ? 30 : 44)
+                        .frame(width: context.isSmall ? 60 : 128, height: context.isSmall ? 38 : 58)
                         .styleDepth(s)
                 }
             }
@@ -558,8 +561,8 @@ struct TileView: View {
             } else {
                 captionText(lines: 4)
             }
-            if hasValue && !context.isSmall {
-                captionText(lines: 1)
+            if hasValue {
+                captionText(lines: context.isSmall ? 1 : 2)
             }
             if context.isLarge { Spacer(minLength: 0) }
         }
@@ -569,7 +572,7 @@ struct TileView: View {
     /// A medium widget in Minimal or Focus: the figure on the left, the lines (the three macros, the session's
     /// exercises) or the chart on the right, instead of two thirds left empty.
     @ViewBuilder private func besideLines<Figure: View>(_ figure: Figure) -> some View {
-        if context.isMedium && (!tile.rows.isEmpty || hasVisual) {
+        if !context.isSmall && (!tile.rows.isEmpty || hasVisual) {
             HStack(alignment: .center, spacing: 14 * sp) {
                 figure
                     .frame(maxWidth: .infinity)
@@ -579,7 +582,7 @@ struct TileView: View {
                     .padding(.vertical, 6)
                 Group {
                     if !tile.rows.isEmpty {
-                        TileRowsView(rows: rows(4), context: context, compact: true)
+                        TileRowsView(rows: rows(context.isLarge ? 8 : 4), context: context, compact: !context.isLarge)
                     } else {
                         visual(compact: true)
                     }
@@ -601,9 +604,7 @@ struct TileView: View {
             }
             if hasValue { valueText(context.isSmall ? 30 : (context.isLarge ? 52 : 38)) }
             if s.showsTitle { WLabel(text: tile.title, style: s) }
-            if !context.isSmall {
-                captionText(lines: 2)
-            }
+            captionText(lines: context.isSmall ? 1 : 2)
             if context.isLarge, let progress = progressFraction {
                 BarView(progress: progress, color: s.chart, track: s.track, height: 8 * CGFloat(s.options.chartThickness), radius: s.radius(4))
                     .frame(maxWidth: 200)
@@ -619,12 +620,13 @@ struct TileView: View {
 
     private var splitLayout: some View {
         HStack(alignment: .top, spacing: 10 * sp) {
+            // The figure right under the title, not at the bottom of an empty column.
             VStack(alignment: .leading, spacing: 3 * sp) {
                 headerBlock
-                Spacer(minLength: 0)
                 if hasValue { valueText(context.isSmall ? 22 : (context.isLarge ? 36 : 30)) }
-                captionText(lines: context.isLarge ? 4 : 2)
+                captionText(lines: context.isLarge ? 4 : 3)
                 if context.isLarge { detailText }
+                Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             Rectangle()
@@ -749,7 +751,18 @@ struct TileView: View {
                         .privacySensitive(tile.isSensitive)
                 }
             }
-            TileRowsView(rows: rows(context.isSmall ? 4 : (context.isLarge ? 10 : 4)), context: context, compact: context.isSmall)
+            if context.isSmall && hasValue && tile.timer == nil {
+                Text([tile.value, tile.unit].compactMap { $0 }.joined(separator: " "))
+                    .font(s.number(20))
+                    .foregroundStyle(valueColor)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .privacySensitive(tile.isSensitive)
+            }
+            // Dense styles add lines, never more than the size holds (the sixth line was cut off).
+            let cap = context.isSmall ? (hasValue ? 3 : 4) : (context.isLarge ? 10 : 4)
+            TileRowsView(rows: Array(tile.rows.prefix(min(cap, max(1, (context.isLarge ? 10 : 4) + s.rowDelta)))),
+                         context: context, compact: context.isSmall)
             Spacer(minLength: 0)
             if !context.isSmall { buttonsRow(3) }
         }
@@ -847,7 +860,6 @@ struct TileView: View {
                             }
                         }
                         .frame(maxWidth: .infinity)
-                        .layoutPriority(1)
                     } else {
                         ForEach(others) { statCard($0) }
                     }
@@ -933,10 +945,10 @@ struct TileView: View {
         HStack(spacing: 4) {
             if let color = stat.color { Circle().fill(color).frame(width: 5, height: 5) }
             Text(s.labelText(stat.label))
-                .font(s.label(9))
-                .tracking(s.labelTracking * 0.6)
+                .font(s.label(10))
                 .foregroundStyle(s.secondary)
                 .lineLimit(1)
+                .minimumScaleFactor(0.8)
         }
     }
 

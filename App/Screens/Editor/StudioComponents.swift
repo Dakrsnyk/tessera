@@ -312,7 +312,8 @@ struct StudioPreviewTile: View {
                             .foregroundStyle(Color.premiumInk)
                             .padding(4)
                             .background(Color.premiumFill, in: Circle())
-                            .padding(6)
+                            // On the corner, outside the widget's content (it covered a figure aligned at the top right).
+                            .offset(x: 7, y: -7)
                     }
                 }
             VStack(spacing: 0) {
