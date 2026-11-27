@@ -13,6 +13,8 @@ struct ExploreView: View {
     @State private var isSearchPresented = false
     @State private var openedPack: WidgetPack?
     @State private var openedSetup: HomeSetup?
+    /// A widget of a mosaic touched: « Enregistrer ce style » or « Personnaliser ».
+    @State private var chosenWidget: WidgetDesign?
     @AppStorage(SetupFavorites.key) private var favoritesRaw = ""
 
     /// The aisles of the Store, from the week's picks to the styles. The wallpapers come last but one, just
@@ -136,6 +138,9 @@ struct ExploreView: View {
             }
             .sheet(item: $openedPack) { pack in
                 PackSheet(pack: pack)
+            }
+            .sheet(item: $chosenWidget) { design in
+                StoreWidgetChoice(design: design)
             }
             .searchable(text: $query, isPresented: $isSearchPresented, prompt: tr("Écrans, packs, lune, bitcoin…"))
             .onAppear(perform: consumeRequests)
@@ -323,7 +328,10 @@ struct ExploreView: View {
             }
             .padding(.horizontal, 20)
             MiniAppMosaicRow(category: category, isPremiumUser: model.isPremium) { design in
-                router.openEditor(design, isNew: true)
+                // A new widget each time: the mosaic keeps its designs, two saves make two widgets.
+                var copy = design
+                copy.id = UUID()
+                chosenWidget = copy
             }
         }
     }

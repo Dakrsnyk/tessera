@@ -255,3 +255,74 @@ enum MosaicPictures {
         return image
     }
 }
+
+/// What a touch on a widget of the Store offers (PDG, 2026-11-26): keep it as it is, in this style, straight into
+/// « Mes widgets », or open it in the Studio to change it first. Either way it can be changed later from « Mes widgets ».
+struct StoreWidgetChoice: View {
+    let design: WidgetDesign
+    @Environment(AppModel.self) private var model
+    @Environment(Router.self) private var router
+    @Environment(\.dismiss) private var dismiss
+
+    private var family: WidgetFamily { design.format?.family ?? .systemSmall }
+
+    var body: some View {
+        VStack(spacing: 18) {
+            WidgetPreview(design: design, family: family, payload: SamplePayload.make(for: design),
+                          width: family == .systemSmall ? 170 : 330)
+                .frame(maxHeight: 340)
+                .padding(.top, 26)
+            VStack(spacing: 4) {
+                Text(design.name.isEmpty ? design.kind.title : design.name)
+                    .font(.title3.weight(.bold))
+                Text(tr("Tu pourras le modifier plus tard dans « Mes widgets »."))
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
+            VStack(spacing: 10) {
+                Button(action: saveAsIs) {
+                    Label(tr("Enregistrer ce style"), systemImage: "checkmark")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, minHeight: 50)
+                }
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.capsule)
+                .accessibilityIdentifier("store-choice-save")
+                Button {
+                    dismiss()
+                    router.openEditor(design, isNew: true)
+                } label: {
+                    Label(tr("Personnaliser"), systemImage: "slider.horizontal.3")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity, minHeight: 50)
+                }
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.capsule)
+                .accessibilityIdentifier("store-choice-customize")
+            }
+            .padding(.horizontal, 24)
+            Spacer(minLength: 0)
+        }
+        .presentationDetents([.medium, .large])
+        .presentationDragIndicator(.visible)
+    }
+
+    /// Straight into « Mes widgets », as the Studio would save it: Premium settings and the free limit ask first.
+    private func saveAsIs() {
+        if design.usesPremiumFeatures && !model.isPremium {
+            dismiss()
+            router.showPaywall(.designs([design]))
+            return
+        }
+        let fitting = model.fitting([design])
+        guard !fitting.isEmpty else {
+            dismiss()
+            router.showPaywall(.designLimit)
+            return
+        }
+        _ = model.install(designs: fitting)
+        Haptics.success()
+        dismiss()
+    }
+}

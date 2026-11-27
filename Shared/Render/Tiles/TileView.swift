@@ -67,7 +67,9 @@ struct TileView: View {
         case .graph: (hasVisual || !tile.rows.isEmpty) && !(context.isMedium && !tile.buttons.isEmpty) ? .graph : .vertical
         case .list: tile.rows.isEmpty ? .vertical : .list
         // Two columns of lines don't fit in a small widget: its chart can, its lines can't.
-        case .split: context.isSmall && !(hasVisual && tile.rows.isEmpty) ? .vertical : .split
+        // Two columns in a small widget only for a chart that draws at any size (ring, bars, line, parts): a week of
+        // dots or a month in half a small widget was a speck above an empty column (« Série de suivi »).
+        case .split: context.isSmall && !(hasVisual && tile.rows.isEmpty && chartScales) ? .vertical : .split
         case let layout: layout
         }
     }
@@ -142,12 +144,15 @@ struct TileView: View {
                     .minimumScaleFactor(0.5)
                     .multilineTextAlignment(s.textAlignment)
             } else {
+                // Words rather than a figure (a revision card, a session's name): up to three lines a little smaller,
+                // not one line cut after two letters (« Ce »).
+                let isWords = tile.value.count > 6 && tile.value.contains(" ") && !(tile.value.first?.isNumber ?? false)
                 HStack(alignment: .firstTextBaseline, spacing: 3) {
                     Text(tile.value)
-                        .font(s.number(size))
+                        .font(s.number(isWords ? size * 0.72 : size))
                         .foregroundStyle(valueColor)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.45)
+                        .lineLimit(isWords ? 3 : 1)
+                        .minimumScaleFactor(isWords ? 0.7 : 0.45)
                     if showsUnit, let unit = tile.unit {
                         Text(unit)
                             .font(s.text(max(11, size * 0.38), .medium))
@@ -218,6 +223,14 @@ struct TileView: View {
 
     /// The week's schedule fills the height the widget leaves (no empty half below it); the other charts keep their own.
     private var fillsHeight: Bool { tile.visual.isSchedule }
+
+    /// A chart that stays readable however narrow its column.
+    private var chartScales: Bool {
+        switch tile.visual {
+        case .ring, .bars, .line, .segments, .bar: true
+        default: false
+        }
+    }
 
     /// A month of dots or a habits × days grid: drawn in the height left (a strip of 30 points made them specks).
     private var growsInRoom: Bool {
@@ -461,7 +474,7 @@ struct TileView: View {
             if !context.isSmall { detailText }
             if hasVisual && (tile.buttons.isEmpty || !context.isSmall) {
                 visual(compact: context.isSmall)
-                    .chartHeight(chartHeight, fills: fillsHeight)
+                    .chartHeight(chartHeight, fills: fillsHeight || growsInRoom)
                     .frame(maxWidth: .infinity)
             }
             if context.isLarge && !tile.rows.isEmpty {

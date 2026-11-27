@@ -264,6 +264,10 @@ enum AdExport {
               let format = WidgetFormat.allCases.first(where: { $0.family == widgetFamily }) else {
             throw AdFailure("unknown family « \(familyText) »")
         }
+        // A check board of every widget: a kind without this size, or no longer offered, is skipped quickly.
+        guard kind.families.contains(widgetFamily), !kind.isRetired else {
+            return AdOutcome(files: 0, note: "skipped: \(raw) has no \(familyText) size or is retired")
+        }
         // `ids=a,b,c`: only these styles (a check board), in that order; else every style, by pages.
         let chosen = (job.string("ids") ?? "").split(separator: ",").compactMap { StyleCatalog.look(String($0)) }
         let source = chosen.isEmpty ? StyleCatalog.all : chosen
