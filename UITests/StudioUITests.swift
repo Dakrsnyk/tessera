@@ -148,6 +148,13 @@ final class StudioUITests: XCTestCase {
         let identifier = "studio-\(name)"
         let button = app.buttons[identifier]
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Outil « \(name) » introuvable", file: file, line: line)
+        // The tools scroll sideways (« Contenu » is the last one since 2026-11-26): bring the tool on screen first.
+        for direction in [true, false] where !button.isHittable {
+            for _ in 0..<3 where !button.isHittable {
+                let bar = app.scrollViews.containing(.button, identifier: identifier).firstMatch
+                if direction { bar.swipeRight() } else { bar.swipeLeft() }
+            }
+        }
         if !button.isSelected { button.tap() }
         if !waitForSelection(identifier) {
             // The Studio may still be sliding in when the first touch lands: once more, with what the screen shows kept.
@@ -331,6 +338,7 @@ final class StudioUITests: XCTestCase {
 
         // The order of the widgets is in « Contenu », under the name.
         XCTAssertFalse(app.buttons["studio-chapter-layout"].exists, "« Disposition » n'existe plus")
+        chapter("content")
         let other = app.buttons["part-down-0"]
         XCTAssertTrue(other.waitForExistence(timeout: 8), "« Descendre » absent de l'ordre des widgets")
         let firstBefore = app.buttons["stage-part-0"].label

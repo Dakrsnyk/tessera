@@ -395,6 +395,13 @@ final class ProfileUITests: XCTestCase {
 
     func testTheEditorAsksForWhatTheWidgetNeeds() {
         launch(["-screenshotScreen", "editor-fresh"])
+        // The Studio opens on « Style » since 2026-11-26; what the widget needs is in « Contenu », the last tool.
+        let contentTool = app.buttons["studio-content"]
+        XCTAssertTrue(contentTool.waitForExistence(timeout: 12), "Le Studio n'est pas ouvert")
+        for _ in 0..<3 where !contentTool.isHittable {
+            app.scrollViews.containing(.button, identifier: "studio-content").firstMatch.swipeLeft()
+        }
+        contentTool.tap()
         XCTAssertTrue(app.otherElements["data-kcalTarget"].waitForExistence(timeout: 12), "L'éditeur doit demander l'objectif calorique")
         let example = app.staticTexts["Aperçu avec des données d'exemple"]
         XCTAssertTrue(example.exists, "Sans données, l'aperçu montre un exemple, identifié comme tel")

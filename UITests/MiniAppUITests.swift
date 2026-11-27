@@ -376,7 +376,7 @@ final class MiniAppUITests: XCTestCase {
 
     func testFinancesEditsAnExpenseAndOpensItsPages() {
         launch(["-screenshotScreen", "app-finances"])
-        let hero = app.otherElements["finances-hero"]
+        let hero = app.descendants(matching: .any)["finances-hero"] // a link (button) since 2026-11-25
         XCTAssertTrue(hero.waitForExistence(timeout: 12), "Mini-app Finances absente")
         snapshot("finances")
 
