@@ -214,6 +214,12 @@ struct ExploreView: View {
                 featuredRows
             }
             needsRow
+            // The widgets of three mini-apps (the person's interests first), each as a mosaic of its kinds and styles.
+            VStack(alignment: .leading, spacing: 30) {
+                ForEach(homeMiniApps) { category in
+                    miniAppSection(category)
+                }
+            }
             rayons
             VStack(alignment: .leading, spacing: 16) {
                 AisleHeader(aisle: .screens, action: seeAll(.screens))
@@ -278,6 +284,45 @@ struct ExploreView: View {
                 .padding(.horizontal, 20)
             }
         }
+    }
+
+    /// The three mini-apps of the home: the person's interests, completed by Nutrition, Fitness and Habits.
+    private var homeMiniApps: [WidgetCategory] {
+        var list = interests.filter { !WidgetKind.kinds(in: $0).isEmpty }
+        for category in [WidgetCategory.nutrition, .fitness, .wellbeing] where !list.contains(category) { list.append(category) }
+        return Array(list.prefix(3))
+    }
+
+    /// A mini-app: its name in its color, « Tout voir » (all its widgets), then its mosaic.
+    private func miniAppSection(_ category: WidgetCategory) -> some View {
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(alignment: .center, spacing: 12) {
+                Image(systemName: category.symbol)
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 40, height: 40)
+                    .background(Color(hex: category.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                Text(category.title)
+                    .font(.title2.weight(.bold))
+                    .accessibilityAddTraits(.isHeader)
+                Spacer(minLength: 6)
+                Button {
+                    router.exploreCategory = category
+                } label: {
+                    HStack(spacing: 3) {
+                        Text(tr("Tout voir"))
+                        Image(systemName: "chevron.right").font(.caption.weight(.bold))
+                    }
+                    .font(.subheadline.weight(.semibold))
+                }
+                .accessibilityLabel(Text("\(tr("Tout voir")) : \(category.title)"))
+                .accessibilityIdentifier("store-miniapp-\(category.rawValue)")
+            }
+            MiniAppMosaic(category: category, isPremiumUser: model.isPremium) { design in
+                router.openEditor(design, isNew: true)
+            }
+        }
+        .padding(.horizontal, 20)
     }
 
     /// The whole catalogue in six cards: what each rayon holds and how many; a tap opens the rayon.
@@ -449,8 +494,10 @@ struct ExploreView: View {
 
     /// The widgets to try first, then those of the Lock Screen.
     @ViewBuilder private var widgetRows: some View {
-        shelfRow(tr("Incontournables")) {
-            templateItems(essentials)
+        LazyVStack(alignment: .leading, spacing: 30) {
+            ForEach(WidgetCategory.offered.filter { !WidgetKind.kinds(in: $0).isEmpty }) { category in
+                miniAppSection(category)
+            }
         }
         shelfRow(tr("Écran verrouillé")) {
             ForEach(Array(StoreShowcase.lockScreen.enumerated()), id: \.element.id) { pair in
