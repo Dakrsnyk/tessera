@@ -1557,8 +1557,8 @@
  ", Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:544: .accessibilityLabel(Text(tr(\"Style \\(look.name)\\(look.isPremium && !model.isPremium ? tr(\", Premium\") : \"\")\")))",
-   "App/Screens/Explore/ExploreView.swift:823: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))",
+   "App/Screens/Explore/ExploreView.swift:500: .accessibilityLabel(Text(tr(\"Style \\(look.name)\\(look.isPremium && !model.isPremium ? tr(\", Premium\") : \"\")\")))",
+   "App/Screens/Explore/ExploreView.swift:779: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))",
    "App/Screens/Explore/StoreMiniAppMosaic.swift:101: .accessibilityLabel(Text(verbatim: pick.name + (locked ? tr(\", Premium\") : \"\")))",
    "App/Screens/Explore/WallpaperCollection.swift:61: var spokenName: String { name + (isPremium ? tr(\", Premium\") : \"\") }"
   ]
@@ -2287,7 +2287,7 @@
  "Aa": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:798: Text(tr(\"Aa\"))",
+   "App/Screens/Explore/ExploreView.swift:754: Text(tr(\"Aa\"))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:746: Text(\"Aa\")"
   ]
  },
@@ -4463,7 +4463,6 @@
  "Argent": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:247: (tr(\"Argent\"), \"creditcard\", \"2F8F7A\", .finance),",
    "Shared/Model/StyleLibraryData.swift:906: list.append(StyleLook(id: \"prime-argent\", name: tr(\"Argent\"), summary: tr(\"Reflet argenté clair, biseau, chiffres nets\"), family: \"prime\", themeID: .dark, accentHex: \"6E7B8A\", background: .gradient, f",
    "Shared/Render/Tiles/DashboardTiles.swift:268: var tile = Tile(title: tr(\"Argent\"), symbol: \"dollarsign.circle\")"
   ]
@@ -5061,7 +5060,7 @@
  "Aucun résultat": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:665: title: tr(\"Aucun résultat\"),"
+   "App/Screens/Explore/ExploreView.swift:621: title: tr(\"Aucun résultat\"),"
   ]
  },
  "Aucun style de cette famille avec ce filtre.": {
@@ -9666,6 +9665,12 @@
    "App/Screens/MyWidgets/MyWidgetsView.swift:74: message: tr(\"Choisis un modèle dans le Store, personnalise-le et enregistre-le. Il apparaîtra ici.\"),"
   ]
  },
+ "Choisis un widget ou sauvegarde son style": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:242: Text(tr(\"Choisis un widget ou sauvegarde son style\"))"
+  ]
+ },
  "Choisis un widget ou sauvegarde son style.": {
   "placeholders": 0,
   "uses": [
@@ -10194,7 +10199,7 @@
  "Combinaisons": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:699: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))",
+   "App/Screens/Explore/ExploreView.swift:655: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))",
    "App/Screens/Explore/StoreCombos.swift:339: .navigationTitle(tr(\"Combinaisons\"))"
   ]
  },
@@ -13677,7 +13682,7 @@
  "Débloquer avec Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:873: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))",
+   "App/Screens/Explore/ExploreView.swift:829: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))",
    "App/Screens/Explore/HomeSetupViews.swift:654: if needsPremium { return tr(\"Débloquer avec Premium\") }",
    "App/Screens/Explore/WallpaperCollection.swift:345: if needsPremium { return tr(\"Débloquer avec Premium\") }"
   ]
@@ -14640,12 +14645,6 @@
    "App/Core/MarketingShots.swift:855: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
   ]
  },
- "Embellir mon écran": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:250: (tr(\"Embellir mon écran\"), \"sparkles\", \"D6409F\", nil),"
-  ]
- },
  "Emplacement": {
   "placeholders": 0,
   "uses": [
@@ -15223,7 +15222,7 @@
  "Essaie un autre mot, ou retire un filtre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:666: message: tr(\"Essaie un autre mot, ou retire un filtre.\"),"
+   "App/Screens/Explore/ExploreView.swift:622: message: tr(\"Essaie un autre mot, ou retire un filtre.\"),"
   ]
  },
  "Essayer %@ jours gratuits": {
@@ -21632,7 +21631,7 @@
  "Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:856: Label(tr(\"Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.\"), systemImage: \"sparkles\")"
+   "App/Screens/Explore/ExploreView.swift:812: Label(tr(\"Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.\"), systemImage: \"sparkles\")"
   ]
  },
  "Les widgets qui l'affichent reviendront au modèle par défaut.": {
@@ -21656,7 +21655,7 @@
  "Les écrans d'accueil assortis": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:495: shelfRow(tr(\"Les écrans d'accueil assortis\")) {"
+   "App/Screens/Explore/ExploreView.swift:451: shelfRow(tr(\"Les écrans d'accueil assortis\")) {"
   ]
  },
  "Les épaules restent au-dessus des pieds.": {
@@ -22299,10 +22298,10 @@
  "Ma journée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:244: (tr(\"Ma journée\"), \"rectangle.3.group\", \"5B6CFF\", .dashboards),",
    "Shared/Data/Insights.swift:229: return Insight(title: tr(\"Ma journée\"), symbol: \"sparkles\", text: text, facts: facts, points: Array(facts.prefix(5)))",
    "Shared/Model/KindCatalog.swift:265: KindInfo(kind: .myDay, title: tr(\"Ma journée\"), summary: tr(\"L'heure, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.\"), category: .dashboards, symbol: \"sun.horizon\", isPremium",
-   "Shared/Model/Templates.swift:74: WidgetTemplate(id: \"progress-day\", name: tr(\"Ma journée\"), kind: .progress, themeID: .minimal, accentHex: \"3366FF\","
+   "Shared/Model/Templates.swift:74: WidgetTemplate(id: \"progress-day\", name: tr(\"Ma journée\"), kind: .progress, themeID: .minimal, accentHex: \"3366FF\",",
+   "Shared/Model/Templates.swift:125: WidgetTemplate(id: \"myday-glass\", name: tr(\"Ma journée\"), kind: .myDay, themeID: .glass, accentHex: \"8C6CFF\"),"
   ]
  },
  "Ma semaine": {
@@ -22577,12 +22576,6 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/Nutrition.swift:216: case .manganese: tr(\"Manganèse\")"
-  ]
- },
- "Manger mieux": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:246: (tr(\"Manger mieux\"), \"fork.knife\", \"F08A24\", .nutrition),"
   ]
  },
  "Mangue": {
@@ -26433,7 +26426,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:33: case .packs: tr(\"Packs\")",
-   "App/Screens/Explore/ExploreView.swift:705: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))",
+   "App/Screens/Explore/ExploreView.swift:661: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))",
    "App/Screens/Explore/StoreMagazine.swift:454: .navigationTitle(tr(\"Packs\"))"
   ]
  },
@@ -27402,7 +27395,7 @@
  "Personnaliser et ajouter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:873: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))"
+   "App/Screens/Explore/ExploreView.swift:829: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))"
   ]
  },
  "Personnaliser le widget": {
@@ -30014,12 +30007,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:533: Text(tr(\"Quatre à la fois\")).tag(false)"
-  ]
- },
- "Que veux-tu sur ton écran ?": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:253: Text(tr(\"Que veux-tu sur ton écran ?\"))"
   ]
  },
  "Quelle catégorie ?": {
@@ -34228,9 +34215,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
-   "App/Screens/Explore/ExploreView.swift:245: (tr(\"Sport\"), \"dumbbell\", \"E5484D\", .fitness),",
    "App/Screens/Home/DailySection.swift:916: case .rest: tr(\"Sport\")",
-   "Shared/Data/PayloadLoader.swift:106: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: days[1]),"
+   "Shared/Data/PayloadLoader.swift:106: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: days[1]),",
+   "Shared/Data/SampleData.swift:44: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: keys([1, 2, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 23, 25, 27])),"
   ]
  },
  "Sportif": {
@@ -34465,8 +34452,8 @@
  "Style %@%@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:544: .accessibilityLabel(Text(tr(\"Style \\(look.name)\\(look.isPremium && !model.isPremium ? tr(\", Premium\") : \"\")\")))",
-   "App/Screens/Explore/ExploreView.swift:823: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
+   "App/Screens/Explore/ExploreView.swift:500: .accessibilityLabel(Text(tr(\"Style \\(look.name)\\(look.isPremium && !model.isPremium ? tr(\", Premium\") : \"\")\")))",
+   "App/Screens/Explore/ExploreView.swift:779: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
   ]
  },
  "Style %@, Premium": {
@@ -37629,7 +37616,7 @@
  "Touche un style pour l'essayer sur un widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:520: Text(tr(\"Touche un style pour l'essayer sur un widget.\"))"
+   "App/Screens/Explore/ExploreView.swift:476: Text(tr(\"Touche un style pour l'essayer sur un widget.\"))"
   ]
  },
  "Touche un widget : l'Atelier s'ouvre aussitôt.": {
@@ -37877,7 +37864,7 @@
  "Tout afficher": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:667: actionTitle: tr(\"Tout afficher\")",
+   "App/Screens/Explore/ExploreView.swift:623: actionTitle: tr(\"Tout afficher\")",
    "App/Screens/Explore/HomeSetupViews.swift:504: actionTitle: tr(\"Tout afficher\")"
   ]
  },
@@ -37995,10 +37982,10 @@
  "Tout voir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:321: Text(tr(\"Tout voir\"))",
-   "App/Screens/Explore/ExploreView.swift:326: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(category.title)\"))",
-   "App/Screens/Explore/ExploreView.swift:374: Text(tr(\"Tout voir\"))",
-   "App/Screens/Explore/ExploreView.swift:379: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(title)\"))"
+   "App/Screens/Explore/ExploreView.swift:277: Text(tr(\"Tout voir\"))",
+   "App/Screens/Explore/ExploreView.swift:282: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(category.title)\"))",
+   "App/Screens/Explore/ExploreView.swift:330: Text(tr(\"Tout voir\"))",
+   "App/Screens/Explore/ExploreView.swift:335: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(title)\"))"
   ]
  },
  "Tout voir : Mes informations": {
@@ -40242,9 +40229,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:113: case .trip: tr(\"Voyage\")",
-   "App/Screens/Explore/ExploreView.swift:249: (tr(\"Voyage\"), \"airplane\", \"1E88C8\", .travel),",
    "App/Screens/MiniApps/MiniApp.swift:21: case .travel: tr(\"Voyage\")",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:113: .navigationTitle(tr(\"Voyage\"))"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:113: .navigationTitle(tr(\"Voyage\"))",
+   "App/Screens/Spaces/TravelCarLifeSpaces.swift:143: SheetForm(title: tr(\"Voyage\"), canSave: !trip.destination.trimmed.isEmpty && trip.end >= trip.start, onSave: save) {"
   ]
  },
  "Voyage au Japon": {
@@ -40405,7 +40392,7 @@
   "uses": [
    "App/Core/MarketingShots.swift:904: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
    "App/Screens/Explore/ExploreView.swift:31: case .widgets: tr(\"Widgets\")",
-   "App/Screens/Explore/ExploreView.swift:723: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/ExploreView.swift:679: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Spaces/SpaceBuilderView.swift:273: EditorSection(title: tr(\"Widgets\"), detail: widgetsDetail) {"
   ]
  },
@@ -40915,13 +40902,13 @@
  "combinaison": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:699: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
+   "App/Screens/Explore/ExploreView.swift:655: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
   ]
  },
  "combinaisons": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:699: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
+   "App/Screens/Explore/ExploreView.swift:655: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
   ]
  },
  "commande": {
@@ -42116,13 +42103,13 @@
  "pack": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:705: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
+   "App/Screens/Explore/ExploreView.swift:661: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
   ]
  },
  "packs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:705: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
+   "App/Screens/Explore/ExploreView.swift:661: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
   ]
  },
  "pain complet": {
@@ -43113,7 +43100,7 @@
   "uses": [
    "App/Premium/PaywallContext.swift:109: detail: tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) prêts à poser d'un coup, avec leurs styles.\"),",
    "App/Premium/PaywallContext.swift:120: detail: tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) assortis, à personnaliser et ajouter ensemble.\"),",
-   "App/Screens/Explore/ExploreView.swift:723: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/ExploreView.swift:679: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))"
   ]
  },
@@ -43134,7 +43121,7 @@
   "uses": [
    "App/Premium/PaywallContext.swift:109: detail: tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) prêts à poser d'un coup, avec leurs styles.\"),",
    "App/Premium/PaywallContext.swift:120: detail: tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) assortis, à personnaliser et ajouter ensemble.\"),",
-   "App/Screens/Explore/ExploreView.swift:723: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/ExploreView.swift:679: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))"
   ]
  },
@@ -43792,7 +43779,7 @@
   "uses": [
    "App/Core/MarketingShots.swift:637: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
    "App/Screens/Explore/ExploreView.swift:29: case .screens: tr(\"Écrans d'accueil\")",
-   "App/Screens/Explore/ExploreView.swift:677: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
+   "App/Screens/Explore/ExploreView.swift:633: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
    "App/Screens/Explore/HomeSetupViews.swift:524: .navigationTitle(tr(\"Écrans d'accueil\"))"
   ]
  },
@@ -44271,9 +44258,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DailyBrief.swift:194: case .studies: return tr(\"Études\")",
-   "App/Screens/Explore/ExploreView.swift:248: (tr(\"Études\"), \"graduationcap\", \"6D4AE8\", .student),",
    "App/Screens/Explore/HomeSetups.swift:295: id: \"etudes\", name: tr(\"Études\"), tagline: tr(\"Cours, examens et priorités sur papier pointillé.\"),",
-   "App/Screens/Home/MyInfoSection.swift:67: add(\"field\", \"graduationcap\", tr(\"Études\"), profile.studyField.trimmed.nonEmpty)"
+   "App/Screens/Home/MyInfoSection.swift:67: add(\"field\", \"graduationcap\", tr(\"Études\"), profile.studyField.trimmed.nonEmpty)",
+   "App/Screens/MiniApps/MiniApp.swift:18: case .studies: tr(\"Études\")"
   ]
  },
  "Étudiant": {
@@ -44426,13 +44413,13 @@
  "écran": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:677: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
+   "App/Screens/Explore/ExploreView.swift:633: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
   ]
  },
  "écrans": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:677: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
+   "App/Screens/Explore/ExploreView.swift:633: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
   ]
  },
  "élément": {

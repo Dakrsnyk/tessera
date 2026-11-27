@@ -237,61 +237,17 @@ struct ExploreView: View {
         .padding(.top, 2)
     }
 
-    /// « Que veux-tu sur ton écran ? »: a need opens the widgets of its mini-app (the Store's category filter);
-    /// « Embellir mon écran » opens the wallpapers.
+    /// Above the mini-apps (PDG, 2026-11-27): a widget can be taken, or only its style kept for any other widget.
     private var needsRow: some View {
-        let needs: [(title: String, symbol: String, hex: String, category: WidgetCategory?)] = [
-            (tr("Ma journée"), "rectangle.3.group", "5B6CFF", .dashboards),
-            (tr("Sport"), "dumbbell", "E5484D", .fitness),
-            (tr("Manger mieux"), "fork.knife", "F08A24", .nutrition),
-            (tr("Argent"), "creditcard", "2F8F7A", .finance),
-            (tr("Études"), "graduationcap", "6D4AE8", .student),
-            (tr("Voyage"), "airplane", "1E88C8", .travel),
-            (tr("Embellir mon écran"), "sparkles", "D6409F", nil),
-        ]
-        return VStack(alignment: .leading, spacing: 12) {
-            Text(tr("Que veux-tu sur ton écran ?"))
-                .font(.title3.weight(.bold))
-                .accessibilityAddTraits(.isHeader)
-                .padding(.horizontal, 20)
-                // What the tutorial lights up on « Le Store » (the rayons before 2026-11-26).
-                .background {
-                    Color.clear.tutorialTarget(.storeAisles, radius: 20)
-                }
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(Array(needs.enumerated()), id: \.offset) { pair in
-                        let need = pair.element
-                        Button {
-                            Haptics.tap()
-                            if let category = need.category {
-                                router.exploreCategory = category
-                            } else {
-                                router.storePath.append(.aisle(StoreAisle.wallpapers.rawValue))
-                            }
-                        } label: {
-                            HStack(spacing: 8) {
-                                Image(systemName: need.symbol)
-                                    .font(.footnote.weight(.bold))
-                                    .foregroundStyle(.white)
-                                    .frame(width: 30, height: 30)
-                                    .background(Color(hex: need.hex), in: Circle())
-                                Text(need.title)
-                                    .font(.subheadline.weight(.semibold))
-                                    .foregroundStyle(.primary)
-                            }
-                            .padding(.leading, 8)
-                            .padding(.trailing, 16)
-                            .frame(minHeight: 46)
-                            .cristalPanel(radius: 100)
-                        }
-                        .buttonStyle(.pressable)
-                        .accessibilityIdentifier("store-need-\(need.category?.rawValue ?? "wallpapers")")
-                    }
-                }
-                .padding(.horizontal, 20)
+        Text(tr("Choisis un widget ou sauvegarde son style"))
+            .font(.title3.weight(.bold))
+            .fixedSize(horizontal: false, vertical: true)
+            .accessibilityAddTraits(.isHeader)
+            .padding(.horizontal, 20)
+            // What the tutorial lights up on « Le Store ».
+            .background {
+                Color.clear.tutorialTarget(.storeAisles, radius: 20)
             }
-        }
     }
 
     /// Every mini-app that has widgets, the person's interests first.

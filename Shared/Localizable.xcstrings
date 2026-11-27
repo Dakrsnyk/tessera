@@ -72099,6 +72099,53 @@
         }
       }
     },
+    "Choisis un widget ou sauvegarde son style": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wähle ein Widget oder speichere seinen Stil"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick a widget or save its style"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Elige un widget o guarda su estilo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choisis un widget ou sauvegarde son style"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scegli un widget o salva il suo stile"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウィジェットを選ぶか、スタイルだけを保存"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Escolha um widget ou salve o estilo dele"
+          }
+        }
+      }
+    },
     "Choisis un widget ou sauvegarde son style.": {
       "extractionState": "manual",
       "localizations": {
@@ -109460,53 +109507,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Elas alimentam seus widgets."
-          }
-        }
-      }
-    },
-    "Embellir mon écran": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Bildschirm verschönern"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beautify my screen"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Embellecer mi pantalla"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Embellir mon écran"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abbellire lo schermo"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "画面を飾る"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Embelezar minha tela"
           }
         }
       }
@@ -169154,53 +169154,6 @@
         }
       }
     },
-    "Manger mieux": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Besser essen"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Eat better"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Comer mejor"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Manger mieux"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mangiare meglio"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "食生活を整える"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Comer melhor"
-          }
-        }
-      }
-    },
     "Mangue": {
       "extractionState": "manual",
       "localizations": {
@@ -224328,53 +224281,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Quatro por vez"
-          }
-        }
-      }
-    },
-    "Que veux-tu sur ton écran ?": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Was möchtest du auf deinem Bildschirm?"
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "What do you want on your screen?"
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "¿Qué quieres en tu pantalla?"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Que veux-tu sur ton écran ?"
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cosa vuoi sul tuo schermo?"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "画面に何を置きたい？"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "O que você quer na sua tela?"
           }
         }
       }
