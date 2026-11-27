@@ -278,7 +278,7 @@ final class LivePricesTests: XCTestCase {
         let difference = TF.money(200, "USD")
         XCTAssertEqual(MoneyTiles.monthComparison(state, now: now, currency: "USD"), tr("\(difference) de plus que le mois dernier à la même date"))
         // The sentence needs a large widget's width: cut short in a medium one, it would mislead.
-        XCTAssertEqual(MoneyTiles.byCategory(state, now: now, currency: "USD").detail, MoneyTiles.monthComparison(state, now: now, currency: "USD"))
+        XCTAssertEqual(MoneyTiles.byCategory(state, now: now, currency: "USD", isLarge: true).detail, MoneyTiles.monthComparison(state, now: now, currency: "USD"))
         XCTAssertNil(MoneyTiles.byCategory(state, now: now, currency: "USD", isLarge: false).detail)
     }
 }

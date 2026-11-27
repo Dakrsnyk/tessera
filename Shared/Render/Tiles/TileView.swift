@@ -31,30 +31,32 @@ struct TileView: View {
     private var s: ResolvedStyle { context.style }
     private var sp: CGFloat { s.spacing }
 
+    // Each layout behind AnyView: one view type holding all twelve layouts overflowed the stack (crash in the
+    // Studio and the tests, run 626, 2026-11-27: generic metadata too deep, huge frames in -Onone).
     var body: some View {
         if let empty = tile.empty {
             WidgetMessage(symbol: empty.symbol, title: empty.title, message: context.isSmall ? nil : empty.message, style: s)
         } else {
-            switch effectiveLayout {
-            case .auto:
-                if context.isLarge {
-                    large
-                } else if context.isMedium {
-                    medium
-                } else {
-                    small
-                }
-            case .vertical: verticalLayout
-            case .horizontal: horizontalLayout
-            case .minimal: besideLines(minimalLayout)
-            case .centered: besideLines(centeredLayout)
-            case .split: splitLayout
-            case .data: dataLayout
-            case .list: listLayout
-            case .progress: progressLayout
-            case .graph: graphLayout
-            case .cards: cardsLayout
-            }
+            layoutView
+        }
+    }
+
+    private var layoutView: AnyView {
+        switch effectiveLayout {
+        case .auto:
+            if context.isLarge { return AnyView(large) }
+            if context.isMedium { return AnyView(medium) }
+            return AnyView(small)
+        case .vertical: return AnyView(verticalLayout)
+        case .horizontal: return AnyView(horizontalLayout)
+        case .minimal: return AnyView(besideLines(minimalLayout))
+        case .centered: return AnyView(besideLines(centeredLayout))
+        case .split: return AnyView(splitLayout)
+        case .data: return AnyView(dataLayout)
+        case .list: return AnyView(listLayout)
+        case .progress: return AnyView(progressLayout)
+        case .graph: return AnyView(graphLayout)
+        case .cards: return AnyView(cardsLayout)
         }
     }
 
@@ -131,11 +133,12 @@ struct TileView: View {
         }
     }
 
-    @ViewBuilder private var headerBlock: some View {
-        VStack(alignment: s.horizontalAlignment, spacing: 4 * sp) {
+    /// Erased: it sits in every layout, its type was nested in each of them (stack overflow, run 626).
+    private var headerBlock: AnyView {
+        AnyView(VStack(alignment: s.horizontalAlignment, spacing: 4 * sp) {
             topIcon
             header
-        }
+        })
     }
 
     private var valueColor: Color {
