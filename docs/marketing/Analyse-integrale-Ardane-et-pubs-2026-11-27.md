@@ -228,6 +228,96 @@ An 1: revenu 41 955 $  après pub 29 955 $  227 $/jour fin d'année
 An 2: revenu 131 935 $  après pub 119 935 $  496 $/jour fin d'année
 An 3: revenu 246 036 $  après pub 234 036 $  830 $/jour fin d'année
 
+
+### Variante : 3 vidéos par jour, les mêmes sur TikTok, Instagram et Facebook (9 publications par jour)
+
+**Pas à pas du mois 1 (pubs corrigées)**
+
+1. **Vues.** Sur un même compte, la 2e vidéo du jour fait ≈ 80 % des vues de la 1re et la 3e ≈ 65 %.
+   - TikTok : 800 + 640 + 520 = 1 960 vues par jour, × 30 = **58 800**.
+   - Instagram : 450 + 360 + 293 = 1 103 par jour, × 30 = **33 075**.
+   - Facebook : 400 + 320 + 260 = 980 par jour, × 30 = **29 400**.
+   - Total : **121 275 vues** dans le mois.
+2. **Installations organiques.** Une vidéo corrigée fait installer 3 personnes pour 1 000 vues (0,3 %).
+   - TikTok : 58 800 × 0,003 = 176.
+   - Instagram : 33 075 × 0,003 = 99.
+   - Facebook : 29 400 × 0,003 × 0,6 = 53. Le facteur 0,6 vient d'un public plus âgé, avec plus d'Android, qui installe moins.
+   - Total : **329**.
+3. **Pub payée.** 1 000 $ CA ≈ 1 million de vues sponsorisées. À 0,03 % d'installation, cela donne **300 installations**, soit ≈ 3,33 $ CA chacune.
+4. **Bouche-à-oreille.** 12 % des installations du mois précédent : 0 au mois 1.
+5. **Installations totales :** 629. Avec **4 %** qui paient : **25 nouveaux abonnés**.
+6. **Argent net.** Apple garde 15 % ; on compte 1 $ US = 1,38 $ CA.
+   - 65 % d'annuels : 16,3 × 59,99 $ US × 0,85 × 1,38 = 16,3 × 70,37 $ CA = **1 150 $ CA**, payés d'avance.
+   - 35 % de mensuels : 8,8 × 6,99 × 0,85 × 1,38 = 8,8 × 8,20 $ CA = **72 $ CA**.
+   - Total : **1 222 $ CA**, moins 1 000 $ de pub = **+222 $ CA**.
+7. **Mois 2.**
+   - Des 8,8 mensuels, 35 % partent après leur 1er mois : il en reste 5,7.
+   - S'y ajoutent 12,2 nouveaux mensuels : 17,9 mensuels × 8,20 $ = 147 $.
+   - Plus 22,7 nouveaux annuels × 70,37 $ = 1 598 $.
+   - Total : **1 745 $ CA**.
+   - Chaque mois s'ajoute ainsi aux précédents.
+   - Départs des mensuels selon leur ancienneté : 35 % après le 1er mois, 20 % après le 2e, 12 % après le 3e, 8 % du 4e au 6e mois, puis 5 % par mois.
+   - Les annuels renouvellent à 50 % au 12e mois, puis à 70 %.
+
+**Hypothèses de vues**
+
+| Réseau | 1re vidéo au mois 1 | Croissance par mois, an 1 (pubs actuelles / corrigées) | Puis | Plafond moyen |
+|---|---:|---:|---:|---:|
+| TikTok | 800 | +19 % / +22 % | +5 % | 20 000 |
+| Instagram | 450 | +17 % / +20 % | +5 % | 12 000 |
+| Facebook | 400 | +14 % / +17 % | +4 % | 8 000 |
+
+La croissance comprend +2 points par mois : publier 3 fois par jour multiplie les essais.
+
+**Scénario « les vues stagnent »**
+
+Les vues montent de 1 % par mois au plus, avec un plafond de 1 500 vues sur TikTok, 900 sur Instagram et 800 sur Facebook. C'est le cas de beaucoup de comptes qui ne percent pas.
+
+| | Pubs actuelles | Pubs corrigées |
+|---|---:|---:|
+| Pub remboursée | mois 4 | mois 1 |
+| $ par jour, fin de l'an 1 | ≈ 64 $ | ≈ 109 $ |
+| $ par jour, fin de l'an 3 | ≈ 126 $ | ≈ 215 $ |
+
+**À savoir**
+- **Fichier propre partout.** Une même vidéo peut aller sur les 3 réseaux, mais il faut publier le fichier propre, sans le filigrane TikTok : Instagram et Facebook réduisent la portée d'une vidéo marquée.
+- **90 vidéos par mois.** C'est beaucoup. Mieux vaut des séries (même format, sujet différent) que 90 vidéos moyennes, et ne jamais republier la même vidéo sur le même réseau.
+- **Plus grande incertitude.** C'est la croissance des vues. Les taux (0,3 %, 4 à 5 %) sont à remplacer par les vrais chiffres après 4 semaines.
+
+## Pubs actuelles — pub remboursée au mois 4
+| Mois | Vues/vidéo TT · IG · FB | Vues du mois (3 réseaux) | Installs organiques | payés | bouche-à-oreille | total | % payants | nouveaux payeurs | abonnés actifs | revenu net $ CA | après pub | cumul |
+| 1 | 800 · 450 · 400 | 121 275 | 219 | 200 | 0 | 419 | 3.5 % | 15 | 15 | 713 | -287 | -287 |
+| 2 | 952 · 526 · 456 | 142 186 | 258 | 240 | 42 | 539 | 3.7 % | 20 | 33 | 998 | -2 | -289 |
+| 3 | 1 133 · 616 · 520 | 166 751 | 303 | 280 | 54 | 637 | 3.9 % | 25 | 55 | 1 266 | 266 | -23 |
+| 4 | 1 348 · 721 · 593 | 195 618 | 356 | 320 | 64 | 740 | 4.1 % | 30 | 81 | 1 570 | 570 | 547 |
+| 5 | 1 604 · 843 · 676 | 229 548 | 419 | 360 | 74 | 853 | 4.3 % | 37 | 112 | 1 921 | 921 | 1 469 |
+| 6 | 1 909 · 987 · 770 | 269 440 | 494 | 400 | 85 | 979 | 4.5 % | 44 | 149 | 2 328 | 1 328 | 2 797 |
+| 9 | 3 217 · 1 580 · 1 141 | 436 465 | 806 | 400 | 119 | 1 325 | 4.5 % | 60 | 282 | 3 265 | 2 265 | 8 577 |
+| 12 | 5 421 · 2 531 · 1 690 | 708 733 | 1 318 | 400 | 167 | 1 885 | 4.5 % | 85 | 466 | 4 718 | 3 718 | 18 128 |
+| 18 | 7 265 · 3 392 · 2 139 | 940 479 | 1 755 | 400 | 229 | 2 385 | 4.5 % | 107 | 867 | 7 373 | 6 373 | 50 051 |
+| 24 | 9 736 · 4 545 · 2 707 | 1 248 576 | 2 338 | 400 | 291 | 3 029 | 4.5 % | 136 | 1 304 | 10 300 | 9 300 | 97 877 |
+| 36 | 17 484 · 8 162 · 4 333 | 2 203 506 | 4 152 | 400 | 482 | 5 034 | 4.5 % | 227 | 2 444 | 18 727 | 17 727 | 260 710 |
+An 1: revenu 30 128 $, après pub 18 128 $, 157 $/jour fin d'année
+An 2: revenu 91 748 $, après pub 79 748 $, 343 $/jour fin d'année
+An 3: revenu 174 834 $, après pub 162 834 $, 624 $/jour fin d'année
+
+## Pubs corrigées — pub remboursée au mois 1
+| Mois | Vues/vidéo TT · IG · FB | Vues du mois (3 réseaux) | Installs organiques | payés | bouche-à-oreille | total | % payants | nouveaux payeurs | abonnés actifs | revenu net $ CA | après pub | cumul |
+| 1 | 800 · 450 · 400 | 121 275 | 329 | 300 | 0 | 629 | 4.0 % | 25 | 25 | 1 222 | 222 | 222 |
+| 2 | 976 · 540 · 468 | 145 824 | 396 | 360 | 75 | 832 | 4.2 % | 35 | 57 | 1 745 | 745 | 967 |
+| 3 | 1 191 · 648 · 548 | 175 392 | 478 | 420 | 100 | 998 | 4.4 % | 44 | 95 | 2 236 | 1 236 | 2 203 |
+| 4 | 1 453 · 778 · 641 | 211 013 | 577 | 480 | 120 | 1 176 | 4.6 % | 54 | 142 | 2 797 | 1 797 | 4 000 |
+| 5 | 1 772 · 933 · 750 | 253 938 | 696 | 540 | 141 | 1 377 | 4.8 % | 66 | 198 | 3 455 | 2 455 | 6 456 |
+| 6 | 2 162 · 1 120 · 877 | 305 678 | 840 | 600 | 165 | 1 605 | 5.0 % | 80 | 266 | 4 232 | 3 232 | 9 688 |
+| 9 | 3 926 · 1 935 · 1 405 | 534 026 | 1 478 | 600 | 245 | 2 323 | 5.0 % | 116 | 521 | 6 319 | 5 319 | 23 343 |
+| 12 | 7 129 · 3 344 · 2 250 | 935 100 | 2 607 | 600 | 369 | 3 576 | 5.0 % | 179 | 904 | 9 837 | 8 837 | 45 911 |
+| 18 | 9 554 · 4 481 · 2 846 | 1 240 760 | 3 471 | 600 | 530 | 4 601 | 5.0 % | 230 | 1 785 | 15 383 | 14 383 | 118 855 |
+| 24 | 12 803 · 6 005 · 3 602 | 1 647 093 | 4 624 | 600 | 679 | 5 903 | 5.0 % | 295 | 2 753 | 22 092 | 21 092 | 226 930 |
+| 36 | 20 000 · 10 783 · 5 766 | 2 686 399 | 7 551 | 600 | 1 089 | 9 240 | 5.0 % | 462 | 5 221 | 39 023 | 38 023 | 588 900 |
+An 1: revenu 57 911 $, après pub 45 911 $, 328 $/jour fin d'année
+An 2: revenu 193 019 $, après pub 181 019 $, 736 $/jour fin d'année
+An 3: revenu 373 970 $, après pub 361 970 $, 1 301 $/jour fin d'année
+
 ## 5. Actions, dans l'ordre
 1. Contrat « Paid Applications », mise en vente, questionnaire « App Privacy ».
 2. Corriger les pubs : affiche-09 et post-feed-11 ; refaire la principale en 25-30 s ; fin « Télécharge Ardane gratuitement » partout ; pastille Premium lisible ; un plan avec un style gratuit ; un geste réel par pub.
