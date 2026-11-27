@@ -148,16 +148,7 @@ final class StudioUITests: XCTestCase {
         let identifier = "studio-\(name)"
         let button = app.buttons[identifier]
         XCTAssertTrue(button.waitForExistence(timeout: 8), "Outil « \(name) » introuvable", file: file, line: line)
-        // The tools scroll sideways (« Contenu » is the last one since 2026-11-26): bring the tool on screen first.
-        // By its frame: isHittable fails (« Activation point invalid ») on a button scrolled off the screen.
-        let width = app.windows.firstMatch.frame.maxX
-        func onScreen() -> Bool { button.frame.minX >= 0 && button.frame.maxX <= width }
-        for direction in [true, false] where !onScreen() {
-            for _ in 0..<3 where !onScreen() {
-                let bar = app.scrollViews.containing(.button, identifier: identifier).firstMatch
-                if direction { bar.swipeRight() } else { bar.swipeLeft() }
-            }
-        }
+        button.scrollToolOnScreen(in: app)
         if !button.isSelected { button.tap() }
         if !waitForSelection(identifier) {
             // The Studio may still be sliding in when the first touch lands: once more, with what the screen shows kept.
@@ -441,7 +432,7 @@ final class StudioUITests: XCTestCase {
     // MARK: Chapters and tools
 
     /// The tools of « Style » (the row under the chapters): « Taille » and « Contenu » are in the chapter « Contenu ».
-    private static let styleTools = ["style", "colors", "background", "border", "chart", "density", "myStyles"]
+    private static let styleTools = ["style", "colors", "text", "background", "border", "chart", "density", "myStyles"]
 
     /// The tools are in a horizontal bar that centers the tool chosen: going one tool at a time, the next one is
     /// always on screen. Opens the chapter « Style » first.
@@ -453,6 +444,7 @@ final class StudioUITests: XCTestCase {
         while index != target {
             index += target > index ? 1 : -1
             let identifier = "studio-\(Self.styleTools[index])"
+            app.buttons[identifier].firstMatch.scrollToolOnScreen(in: app)
             app.buttons[identifier].firstMatch.tap()
             // A chip at the edge of the bar can miss its first tap while the bar is still moving.
             if !waitForSelection(identifier) { app.buttons[identifier].firstMatch.tap() }
@@ -553,8 +545,8 @@ final class StudioUITests: XCTestCase {
         XCTAssertTrue(app.buttons["studio-content"].exists, "« Contenu » est un outil de la barre")
         chapter("content")
         XCTAssertTrue(element("studio-content").waitForExistence(timeout: 8))
-        // Only what the person asked to keep: no shape, text, icons, layout or depth sections.
-        for gone in ["themes", "depth", "shape", "text", "icons", "layout"] {
+        // Only what the person asked to keep: no shape, icons, layout or depth sections (« Texte » is a tool again).
+        for gone in ["themes", "depth", "shape", "icons", "layout"] {
             XCTAssertFalse(app.buttons["studio-\(gone)"].exists, "La section \(gone) ne devrait plus exister")
         }
     }
