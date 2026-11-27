@@ -1,4 +1,4 @@
-# Bilan de la nuit du 2026-11-27 (en cours de rédaction)
+# Bilan de la nuit du 2026-11-27
 
 Plan validé par le PDG avant de dormir : finir les widgets (graphiques expliqués, place comblée par le sujet, plus de lignes coupées), vérifier tous les widgets, remettre les tests au vert, puis faire avancer Ardane (panel de 1000 clients avec les pubs du QG, fiche App Store, audits). Budget : 25 % de la limite hebdomadaire au plus.
 
@@ -25,10 +25,16 @@ Plan validé par le PDG avant de dormir : finir les widgets (graphiques expliqu�
 - Performance (agent, audit) : SamplePayload.make en cache (clé type+coinID+langue+tranche de 10 min, borné, sûr pour l'extension), previewFrame du Studio et cardFrames de Mes widgets sans redessin à chaque image, StyleLook.matches sans copie, ViewThatFits retiré du planning (WeekViews.swift).
 - Moteur des widgets (2 passes d'agent) : pourcentage sur anneaux/arcs, jours sous les barres (libellés en overlay), première et dernière valeur sur les courbes, légendes de répartition, lignes du sujet dans la place libre (Macros → Protéines/Glucides/Lipides), nombre de lignes calculé (room 118 pt petit/moyen, 296 pt grand, `fitted`), Semaine d'habitudes 3 lignes en moyen, phrases IA en entier, légendes sur 2 lignes, unité dégagée de l'ombre.
 - Vérifié : run 625 [adkit-img] VERT = tout compile ; 210 planches rendues et relues par 5 agents (docs/audits/Relecture-widgets-run625-2026-11-27.md) ; la 2e passe moteur (commit « Widgets après relecture ») n'est PAS encore compilée.
-- Tests : run 626 [daily] lancé sur le code avant la 2e passe (résultat à lire).
+- Tests : run 626 [daily] = 1825 tests réussis, 22 en échec. Cause principale trouvée : un PLANTAGE du rendu des widgets (pile débordée dans TileView : un seul type de vue contenait les 12 dispositions, 14 rapports de plantage dans le Studio, la création et un test de styles). Corrigé (chaque disposition et l'en-tête séparés par AnyView) dans le build interne 627. 1 test suivait l'ancien réglage de « Dépenses par catégorie » : corrigé.
+- Les autres échecs (tutoriel étape 7, pack qui ouvre le Studio, outils du Studio) suivent les plantages ; à confirmer par le prochain [daily].
 
 ## Reste à faire (ordre)
-1. Lire le résultat du run 626 ([daily]) : corriger les tests en échec (attendus : contenu des widgets changé cette nuit, lignes, Store).
-2. Pousser le commit « Widgets après relecture » avec un [interne] final (compile + TestFlight).
-3. Non traité (hors fichiers des agents) : calendrier en Focus (dernière ligne coupée, MonthGridView dans Shared/Render/Kinds/TimeWidgets.swift), « j »/« T4 »/« à » dans les données d'exemple anglaises, unités « GUS$/TUS$ », glyphes des polices décoratives (jeu-lootbox), petites colonnes du split, légende de Dépenses par catégorie qui chevauche la liste.
-4. Propositions pour le PDG (non codées) : carte « Crée ton premier widget » et tutoriel facultatif, vignettes de styles du Studio et écrans d'accueil du Store en images figées (perf), prix (4,99 $/mois – 39,99 $/an selon panel et ASO), pubs à corriger (« Série faite » Premium montré comme gratuit).
+1. Relancer un [daily] après le build 627 pour confirmer que les 22 échecs disparaissent avec le plantage.
+2. Non traité (hors fichiers des agents) : calendrier en Focus (dernière ligne coupée, MonthGridView dans Shared/Render/Kinds/TimeWidgets.swift), « j »/« T4 »/« à » dans les données d'exemple anglaises, unités « GUS$/TUS$ », glyphes des polices décoratives (jeu-lootbox), petites colonnes du split, légende de Dépenses par catégorie qui chevauche la liste.
+3. Propositions pour le PDG (non codées) : carte « Crée ton premier widget » et tutoriel facultatif, vignettes de styles du Studio et écrans d'accueil du Store en images figées (perf), prix (4,99 $/mois – 39,99 $/an selon panel et ASO), pubs à corriger (« Série faite » Premium montré comme gratuit).
+
+## Pour toi au réveil
+- Installe le build interne 627 (TestFlight › Ardane) : 2e passe des widgets + plantage corrigé. Si le Studio ou le Store se fermaient seuls sur 624, c'était ce plantage.
+- Décisions à prendre : prix (4,99 $/mois et 39,99 $/an recommandés), pub « Série faite » à corriger, questionnaire « App Privacy » dans App Store Connect.
+- Rappel : le dépôt GitHub est public pour la CI, repasse-le en privé dès que possible.
+- Budget utilisé cette nuit : environ 11 % de la limite hebdomadaire (plafond fixé : 25 %).
