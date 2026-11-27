@@ -206,21 +206,20 @@ struct ExploreView: View {
 
     /// Every aisle, one under the other: a header in the aisle's colour, then two scrolling rows
     /// (one for the Home Screens, which are big).
-    /// The Store's home (PDG, 2026-11-26, layout « A »): the showcase, the needs, the six rayons, the Home Screens
-    /// and the wallpapers. Everything else is one tap away, in its rayon.
+    /// The Store's home (PDG, 2026-11-26): the showcase, the needs, every mini-app with its mosaics of widgets, the
+    /// Home Screens and the wallpapers (no rayons any more).
     private func magazine(_ proxy: ScrollViewProxy) -> some View {
         VStack(alignment: .leading, spacing: 34) {
             VStack(alignment: .leading, spacing: 26) {
                 featuredRows
             }
             needsRow
-            // The widgets of three mini-apps (the person's interests first), each as a mosaic of its kinds and styles.
-            VStack(alignment: .leading, spacing: 30) {
+            // Every mini-app (the person's interests first), each with its mosaics of widgets that scroll sideways.
+            LazyVStack(alignment: .leading, spacing: 34) {
                 ForEach(homeMiniApps) { category in
                     miniAppSection(category)
                 }
             }
-            rayons
             VStack(alignment: .leading, spacing: 16) {
                 AisleHeader(aisle: .screens, action: seeAll(.screens))
                 setupsRow
@@ -250,6 +249,10 @@ struct ExploreView: View {
                 .font(.title3.weight(.bold))
                 .accessibilityAddTraits(.isHeader)
                 .padding(.horizontal, 20)
+                // What the tutorial lights up on « Le Store » (the rayons before 2026-11-26).
+                .background {
+                    Color.clear.tutorialTarget(.storeAisles, radius: 20)
+                }
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
                     ForEach(Array(needs.enumerated()), id: \.offset) { pair in
@@ -286,11 +289,10 @@ struct ExploreView: View {
         }
     }
 
-    /// The three mini-apps of the home: the person's interests, completed by Nutrition, Fitness and Habits.
+    /// Every mini-app that has widgets, the person's interests first.
     private var homeMiniApps: [WidgetCategory] {
-        var list = interests.filter { !WidgetKind.kinds(in: $0).isEmpty }
-        for category in [WidgetCategory.nutrition, .fitness, .wellbeing] where !list.contains(category) { list.append(category) }
-        return Array(list.prefix(3))
+        let all = WidgetCategory.offered.filter { !WidgetKind.kinds(in: $0).isEmpty }
+        return interests.filter(all.contains) + all.filter { !interests.contains($0) }
     }
 
     /// A mini-app: its name in its color, « Tout voir » (all its widgets), then its mosaic.
@@ -318,74 +320,10 @@ struct ExploreView: View {
                 .accessibilityLabel(Text("\(tr("Tout voir")) : \(category.title)"))
                 .accessibilityIdentifier("store-miniapp-\(category.rawValue)")
             }
-            MiniAppMosaic(category: category, isPremiumUser: model.isPremium) { design in
+            .padding(.horizontal, 20)
+            MiniAppMosaicRow(category: category, isPremiumUser: model.isPremium) { design in
                 router.openEditor(design, isNew: true)
             }
-        }
-        .padding(.horizontal, 20)
-    }
-
-    /// The whole catalogue in six cards: what each rayon holds and how many; a tap opens the rayon.
-    private var rayons: some View {
-        let items: [(aisle: StoreAisle, count: String)] = [
-            (.screens, Fmt.plural(HomeSetupCatalog.all.count, tr("écran", context: "home"), tr("écrans", context: "home"))),
-            (.widgets, Fmt.plural(WidgetKind.allCases.count, tr("widget"), tr("widgets"))),
-            (.styles, Fmt.plural(StyleCatalog.all.count, tr("style"), tr("styles"))),
-            (.packs, Fmt.plural(PackCatalog.all.count, tr("pack"), tr("packs"))),
-            (.wallpapers, Fmt.plural(WallpaperCatalog.all.count, tr("fond"), tr("fonds"))),
-            (.combos, Fmt.plural(StoreComboCatalog.all.count, tr("combiné"), tr("combinés"))),
-        ]
-        return VStack(alignment: .leading, spacing: 12) {
-            Text(tr("Rayons"))
-                .font(.title3.weight(.bold))
-                .accessibilityAddTraits(.isHeader)
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible())], spacing: 12) {
-                ForEach(Array(items.enumerated()), id: \.offset) { pair in
-                    let item = pair.element
-                    Button {
-                        Haptics.tap()
-                        open(item.aisle)
-                    } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Image(systemName: item.aisle.symbol)
-                                .font(.system(size: 17, weight: .semibold))
-                                .foregroundStyle(.white)
-                                .frame(width: 40, height: 40)
-                                .background(Color(hex: item.aisle.colorHex), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-                            Spacer(minLength: 10)
-                            Text(item.aisle.title)
-                                .font(.headline)
-                                .foregroundStyle(.primary)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.8)
-                            Text(item.count)
-                                .font(.footnote)
-                                .foregroundStyle(.secondary)
-                        }
-                        .padding(14)
-                        .frame(maxWidth: .infinity, minHeight: 128, alignment: .topLeading)
-                        .cristalPanel(radius: 22)
-                    }
-                    .buttonStyle(.pressable)
-                    .accessibilityElement(children: .combine)
-                    .accessibilityIdentifier("store-aisle-\(item.aisle.rawValue)")
-                }
-            }
-        }
-        .padding(.horizontal, 20)
-        // What the tutorial lights up on « Le Store »: the rayons.
-        .background {
-            Color.clear.tutorialTarget(.storeAisles, radius: 20)
-        }
-    }
-
-    /// A rayon: its own page (the Home Screens, combinations and packs have theirs; the others show their rows).
-    private func open(_ aisle: StoreAisle) {
-        switch aisle {
-        case .screens: router.storePath.append(.setups)
-        case .combos: router.storePath.append(.combos)
-        case .packs: router.storePath.append(.packs)
-        case .featured, .widgets, .themes, .wallpapers, .styles: router.storePath.append(.aisle(aisle.rawValue))
         }
     }
 
