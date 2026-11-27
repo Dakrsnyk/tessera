@@ -783,11 +783,13 @@ struct SeriesLineChart: View {
     var lineWidth: CGFloat = 2
     var showsEndDot = false
     var showsEndValue = false
+    /// The first value written at the start of the line: with the last one, the curve has two marks to read it by.
+    var showsStartValue = false
     var showsChange = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            if showsChange, let first = values.first, let last = values.last {
+            if showsChange, let first = values.first, let last = changeEnd {
                 let change = first == 0 ? 0 : (last - first) / abs(first)
                 HStack(spacing: 4) {
                     Image(systemName: change >= 0 ? "arrow.up.right" : "arrow.down.right")
@@ -828,9 +830,31 @@ struct SeriesLineChart: View {
                                 .position(x: max(12, end.x - 12), y: max(6, end.y - 9))
                         }
                     }
+                    if showsStartValue, let start = startPoint(in: rect), let first = values.first {
+                        // Under the line when it starts high, above it when it starts low: never on the line itself.
+                        Text(ChartText.short(first))
+                            .font(style.text(9, .medium).monospacedDigit())
+                            .foregroundStyle(style.secondary)
+                            .fixedSize()
+                            .position(x: start.x + 12, y: min(max(6, start.y < rect.midY ? start.y + 9 : start.y - 9), max(6, geo.size.height - 6)))
+                    }
                 }
             }
         }
+    }
+
+    /// The value the change is read up to: a last point at 0 is a day not started, so the last day with data counts
+    /// (« 95 → 0 » was a « −100 % » that meant nothing).
+    private var changeEnd: Double? {
+        guard let last = values.last else { return nil }
+        if last == 0, values.count > 2, let lastData = values.dropLast().last(where: { $0 != 0 }) { return lastData }
+        return last
+    }
+
+    private func startPoint(in rect: CGRect) -> CGPoint? {
+        guard values.count > 1, let low = values.min(), let high = values.max(), let first = values.first else { return nil }
+        let range = max(high - low, 0.000_001)
+        return CGPoint(x: rect.minX, y: rect.maxY - CGFloat((first - low) / range) * rect.height)
     }
 
     private func endPoint(in rect: CGRect) -> CGPoint? {

@@ -146,6 +146,21 @@ struct TileView: View {
         }
     }
 
+    /// The space between a figure and its unit: a hard or long shadow of the figure would otherwise cover the unit.
+    private var unitGap: CGFloat {
+        switch s.options.depth {
+        case .hardShadow: 3 + max(2, CGFloat(s.options.shadowOffset))
+        case .longShadow: 10
+        case .strong, .floating: 5
+        default: 3
+        }
+    }
+
+    /// Lines for the caption of a widget of words only (an AI sentence has no figure): the sentence takes the room.
+    private func wordsLines(_ normal: Int) -> Int {
+        hasValue ? normal : (context.isSmall ? 5 : (context.isLarge ? 8 : 3))
+    }
+
     @ViewBuilder private func valueText(_ size: CGFloat, showsUnit: Bool = true) -> some View {
         Group {
             if let timer = tile.timer {
@@ -159,7 +174,7 @@ struct TileView: View {
                 // Words rather than a figure (a revision card, a session's name): up to three lines a little smaller,
                 // not one line cut after two letters (« Ce »).
                 let isWords = valueIsWords
-                HStack(alignment: .firstTextBaseline, spacing: 3) {
+                HStack(alignment: .firstTextBaseline, spacing: unitGap) {
                     Text(tile.value)
                         .font(s.number(isWords ? size * 0.72 : size))
                         .foregroundStyle(valueColor)
@@ -186,6 +201,7 @@ struct TileView: View {
                 .font(s.text(12))
                 .foregroundStyle(s.secondary)
                 .lineLimit(lines)
+                .minimumScaleFactor(0.85)
                 .multilineTextAlignment(s.textAlignment)
                 // The sign already says it: VoiceOver doesn't read the arrow's name before the figure.
                 .accessibilityLabel(Text(caption.replacingOccurrences(of: "▲ ", with: "").replacingOccurrences(of: "▼ ", with: "")))
@@ -577,12 +593,12 @@ struct TileView: View {
         // A large widget's chart gives height to its lines (the widget's own subject) instead of leaving a tall chart alone.
         let chartHeight: CGFloat = context.isSmall ? stripHeight(30) : (context.isLarge ? (tile.rows.isEmpty ? 120 : 80) : 42)
         let showsChart = hasVisual && (tile.buttons.isEmpty || !context.isSmall)
-        let captionLines = context.isSmall || (context.isMedium && hasVisual) ? 2 : 3
+        let captionLines = wordsLines(context.isSmall || (context.isMedium && hasVisual) ? 2 : 3)
         // The lines (compact in small and medium) that fit under what is already shown, for a given chart height.
         func rowsFor(chart: CGFloat) -> [TileRow] {
             guard !tile.rows.isEmpty, context.isLarge || tile.buttons.isEmpty else { return [] }
             let used = headerCost + valueCost(tile.value.count > 7 ? valueSize * 0.8 : valueSize) + captionCost(captionLines)
-                + (context.isSmall ? 0 : detailCost) + (showsChart ? chart : 0) + buttonsCost + (showsFootnote ? footnoteCost : 0) + 25 * sp
+                + (context.isSmall ? 0 : detailCost) + (showsChart ? chart : 0) + buttonsCost + (showsFootnote ? footnoteCost : 0) + 21 * sp
             return fitted((context.isLarge ? (hasVisual ? 4 : 7) : 4) + s.rowDelta, compact: !context.isLarge, used: used)
         }
         // A parts bar whose lines fit under it is named by them (with their amounts), as a thin bar.
@@ -622,7 +638,7 @@ struct TileView: View {
                 }
                 VStack(alignment: .leading, spacing: 2) {
                     if hasValue { valueText(context.isSmall ? 24 : (context.isLarge ? 38 : 30)) }
-                    captionText(lines: context.isSmall ? 2 : 2)
+                    captionText(lines: wordsLines(2))
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 // The widget's own progress only: the progress of one of its lines drew a ring that said nothing (« Ma journée »).
@@ -630,13 +646,13 @@ struct TileView: View {
                     miniProgress(progress)
                         .frame(width: context.isSmall ? 50 : 66, height: context.isSmall ? 50 : 66)
                 } else if hasVisual, let values = tile.visual.seriesValues {
-                    SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 2, showsEndDot: true, showsEndValue: !context.isSmall)
-                        .frame(width: context.isSmall ? 60 : 128, height: context.isSmall ? 38 : 58)
+                    SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 2, showsEndDot: true, showsEndValue: true, showsStartValue: true)
+                        .frame(width: context.isSmall ? 64 : 128, height: context.isSmall ? 42 : 58)
                         .styleDepth(s)
                 }
             }
             // The lines (the widget's subject) that fit under the title, the figure and the chart.
-            let figureHeight = max(valueCost(context.isSmall ? 24 : (context.isLarge ? 38 : 30)) + captionCost(2),
+            let figureHeight = max(valueCost(context.isSmall ? 24 : (context.isLarge ? 38 : 30)) + captionCost(wordsLines(2)),
                                    tile.visual.progressValue != nil ? 66 : (hasVisual && tile.visual.seriesValues != nil ? 58 : 0))
             let aboveRows = headerCost + 32 * sp + figureHeight + buttonsCost
             if context.isLarge {
@@ -648,7 +664,8 @@ struct TileView: View {
                     TileRowsView(rows: fitted(5 + s.rowDelta, compact: false, used: aboveRows + (drawsChart ? 118 : 0)), context: context, compact: false)
                 }
             } else if context.isMedium && !tile.rows.isEmpty && tile.buttons.isEmpty {
-                TileRowsView(rows: fitted(1 + s.rowDelta, compact: true, used: aboveRows), context: context, compact: true)
+                // As many lines as the room under the figure holds (a bigger iPhone shows more than one), none cut.
+                TileRowsView(rows: fitted(3 + s.rowDelta, compact: true, used: aboveRows), context: context, compact: true)
             }
             Spacer(minLength: 0)
             if !context.isSmall { buttonsRow(3) }
@@ -659,8 +676,8 @@ struct TileView: View {
     /// A small ring (or the chosen progress chart) next to the value.
     @ViewBuilder private func miniProgress(_ progress: Double) -> some View {
         switch s.options.chart {
-        case .pie: ProgressPieChart(progress: progress, style: s)
-        case .gauge: GaugeArcChart(progress: progress, style: s, lineWidth: 6 * CGFloat(s.options.chartThickness))
+        case .pie: ProgressPieChart(progress: progress, style: s, showsValue: true)
+        case .gauge: GaugeArcChart(progress: progress, style: s, lineWidth: 6 * CGFloat(s.options.chartThickness), showsValue: true)
         default:
             ZStack {
                 RingView(progress: progress, lineWidth: 6 * CGFloat(s.options.chartThickness), color: s.chart, track: s.options.chartFill ? s.track : .clear)
@@ -690,7 +707,7 @@ struct TileView: View {
                 captionText(lines: 4)
             }
             if hasValue {
-                captionText(lines: context.isSmall ? 1 : 2)
+                captionText(lines: 2)
             }
             if context.isLarge { Spacer(minLength: 0) }
         }
@@ -728,14 +745,16 @@ struct TileView: View {
     // MARK: Focus: icon and value at the center
 
     private var centeredLayout: some View {
-        VStack(spacing: 5 * sp) {
+        // A small widget with a long caption gives its icon's line to a second caption line (fixed by the text, not measured).
+        let longCaption = context.isSmall && (tile.caption?.count ?? 0) > 20
+        return VStack(spacing: 5 * sp) {
             Spacer(minLength: 0)
-            if showsIcon {
+            if showsIcon && !longCaption {
                 StyledIcon(symbol: tile.symbol, style: s, size: context.isSmall ? 16 : 20)
             }
             if hasValue { valueText(context.isSmall ? 30 : (context.isLarge ? 52 : 38)) }
             if s.showsTitle { WLabel(text: tile.title, style: s) }
-            captionText(lines: context.isSmall ? 1 : 2)
+            captionText(lines: longCaption ? 2 : (context.isSmall ? 1 : 2))
             if context.isLarge, let progress = progressFraction {
                 BarView(progress: progress, color: s.chart, track: s.track, height: 8 * CGFloat(s.options.chartThickness), radius: s.radius(4))
                     .frame(maxWidth: 200)
@@ -744,6 +763,7 @@ struct TileView: View {
             Spacer(minLength: 0)
         }
         .multilineTextAlignment(.center)
+        .padding(.horizontal, 4)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
@@ -755,7 +775,7 @@ struct TileView: View {
             VStack(alignment: .leading, spacing: 3 * sp) {
                 headerBlock
                 if hasValue { valueText(context.isSmall ? 22 : (context.isLarge ? 36 : 30)) }
-                captionText(lines: context.isLarge ? 4 : 3)
+                captionText(lines: hasValue ? (context.isLarge ? 4 : 3) : (context.isLarge ? 10 : 5))
                 if context.isLarge { detailText }
                 // A large widget has room under the figure for the widget's chart (its lines are in the other column).
                 if context.isLarge && hasVisual && !tile.rows.isEmpty && !fillsHeight {
@@ -902,9 +922,16 @@ struct TileView: View {
                     .privacySensitive(tile.isSensitive)
             }
             // Dense styles add lines, never more than the size holds (the sixth line was cut off).
-            let cap = context.isSmall ? (hasValue ? 3 : 4) : (context.isLarge ? 10 : 4)
-            TileRowsView(rows: Array(tile.rows.prefix(min(cap, max(1, (context.isLarge ? 10 : 4) + s.rowDelta)))),
-                         context: context, compact: context.isSmall)
+            let cap = min(context.isSmall ? (hasValue ? 3 : 4) : (context.isLarge ? 10 : 4), max(1, (context.isLarge ? 10 : 4) + s.rowDelta))
+            if !hasValue && tile.caption != nil {
+                // A widget of words (an AI sentence): the sentence first, then the lines that fit under it.
+                let lines = context.isLarge ? 4 : 2
+                captionText(lines: lines)
+                TileRowsView(rows: fitted(cap, compact: context.isSmall, used: headerCost + 14 * sp + captionCost(lines)),
+                             context: context, compact: context.isSmall)
+            } else {
+                TileRowsView(rows: Array(tile.rows.prefix(cap)), context: context, compact: context.isSmall)
+            }
             Spacer(minLength: 0)
             if !context.isSmall { buttonsRow(3) }
         }
@@ -957,7 +984,7 @@ struct TileView: View {
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 if hasValue { valueText(context.isSmall ? 22 : (context.isLarge ? 36 : 26)) }
                 if !context.isSmall {
-                    captionText(lines: 1)
+                    captionText(lines: hasValue ? 1 : wordsLines(1))
                 }
             }
             if let progress = tile.visual.progressValue, s.options.chart == .auto {
@@ -976,7 +1003,8 @@ struct TileView: View {
             } else {
                 // No room for a chart and its legend in a medium widget: its own lines (with the amounts) instead of the bar.
                 TileRowsView(rows: fitted((context.isLarge ? 8 : 3) + s.rowDelta, compact: !context.isLarge,
-                                          used: headerCost + valueCost(context.isSmall ? 22 : (context.isLarge ? 36 : 26)) + 12 * sp),
+                                          used: headerCost + valueCost(context.isSmall ? 22 : (context.isLarge ? 36 : 26)) + 12 * sp
+                                              + (hasValue ? 0 : captionCost(wordsLines(1)))),
                              context: context, compact: !context.isLarge)
                 Spacer(minLength: 0)
             }
@@ -1104,7 +1132,7 @@ struct TileView: View {
                 .font(s.label(10))
                 .foregroundStyle(s.secondary)
                 .lineLimit(1)
-                .minimumScaleFactor(0.8)
+                .minimumScaleFactor(0.65)
         }
     }
 
@@ -1417,7 +1445,8 @@ struct TileVisualView: View {
     /// Labels under the bars. A small chart keeps them only when they are few and short (three letters).
     private func shownLabels(_ labels: [String]) -> [String] {
         guard compact else { return labels }
-        guard labels.count <= 7, (labels.map(\.count).max() ?? 0) <= 12 else { return [] }
+        // Many bars (a month of days): the days stay, `BarsChart` writes one in three under them.
+        guard (labels.map(\.count).max() ?? 0) <= 12 else { return [] }
         return labels.map { String($0.prefix(3)) }
     }
 
@@ -1476,17 +1505,18 @@ struct TileVisualView: View {
             VStack {
                 Spacer(minLength: 0)
                 let height = (compact ? 6 : 10) * thickness
-                BarView(progress: progress, color: s.chart, track: s.track, height: height, radius: s.radius(height / 2))
+                // A bar says how far along it is: its percentage beside it.
+                HStack(spacing: 6) {
+                    BarView(progress: progress, color: s.chart, track: s.track, height: height, radius: s.radius(height / 2))
+                    Text(Fmt.percent(progress)).font(s.text(compact ? 10 : 11, .bold).monospacedDigit()).foregroundStyle(s.chart).lineLimit(1).fixedSize()
+                }
             }
         case let .bars(values, labels, highlight):
             BarsChart(values: values, labels: shownLabels(labels), highlight: highlight, style: s, showsValues: !compact)
         case let .line(values):
-            if compact {
-                LineChart(values: values, style: s)
-            } else {
-                // The last value written at the end of the line: a curve alone says nothing.
-                SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.18 : 0, lineWidth: 2 * thickness, showsEndDot: true, showsEndValue: true)
-            }
+            // The first and the last value written on the line: a curve alone, without a day under it, says nothing.
+            SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? (compact ? 0.12 : 0.18) : 0,
+                            lineWidth: 2 * thickness, showsEndDot: true, showsEndValue: true, showsStartValue: true)
         case let .segments(segments):
             SegmentsChart(segments: segments, showsLegend: !namedByRows, style: s, inline: compact, legendLimit: legendLimit)
         case let .week(days):
@@ -1541,9 +1571,9 @@ struct TileVisualView: View {
         let labels = ownLabels
         switch kind {
         case .line:
-            SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.18 : 0, lineWidth: 2 * thickness, showsEndDot: showsValues, showsEndValue: showsValues)
+            SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.18 : 0, lineWidth: 2 * thickness, showsEndDot: true, showsEndValue: true, showsStartValue: true)
         case .area:
-            SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.5 : 0.25, lineWidth: 1.5 * thickness, showsEndValue: showsValues)
+            SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.5 : 0.25, lineWidth: 1.5 * thickness, showsEndValue: true, showsStartValue: true)
         case .bars:
             BarsChart(values: values, labels: labels, highlight: values.indices.last, style: s, showsValues: showsValues)
         case .histogram:
@@ -1551,7 +1581,7 @@ struct TileVisualView: View {
         case .dots:
             SeriesDotsChart(values: values, style: s, dotSize: (compact ? 4 : 6) * thickness)
         case .sparkline:
-            SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 1.4 * thickness, showsEndDot: true, showsEndValue: showsValues)
+            SeriesLineChart(values: values, style: s, fillOpacity: 0, lineWidth: 1.4 * thickness, showsEndDot: true, showsEndValue: true, showsStartValue: true)
         case .evolution:
             SeriesLineChart(values: values, style: s, fillOpacity: s.options.chartFill ? 0.18 : 0, lineWidth: 2 * thickness, showsEndDot: true, showsChange: !compact)
         case .comparison:
@@ -1570,17 +1600,27 @@ struct TileVisualView: View {
         case .ring:
             ring(value)
         case .pie:
-            ProgressPieChart(progress: value, style: s, showsValue: showsValues)
+            // Its percentage is always written, even in a strip: a pie or an arc alone explains nothing.
+            ProgressPieChart(progress: value, style: s, showsValue: true)
         case .gauge:
-            GaugeArcChart(progress: value, style: s, lineWidth: (compact ? 5 : 10) * thickness, showsValue: showsValues)
+            GaugeArcChart(progress: value, style: s, lineWidth: (compact ? 5 : 10) * thickness, showsValue: true)
         case .progress:
-            VStack(alignment: .leading, spacing: 4) {
-                Spacer(minLength: 0)
-                if showsValues {
-                    Text(Fmt.percent(value)).font(s.text(12, .bold).monospacedDigit()).foregroundStyle(s.chart)
+            if compact {
+                HStack(spacing: 6) {
+                    let height = 8 * thickness
+                    BarView(progress: value, color: s.chart, track: s.options.chartFill ? s.track : s.track.opacity(0.4), height: height, radius: s.radius(height / 2))
+                    Text(Fmt.percent(value)).font(s.text(11, .bold).monospacedDigit()).foregroundStyle(s.chart).lineLimit(1).fixedSize()
                 }
-                let height = (compact ? 8 : 14) * thickness
-                BarView(progress: value, color: s.chart, track: s.options.chartFill ? s.track : s.track.opacity(0.4), height: height, radius: s.radius(height / 2))
+                .frame(maxHeight: .infinity, alignment: .bottom)
+            } else {
+                VStack(alignment: .leading, spacing: 4) {
+                    Spacer(minLength: 0)
+                    if showsValues {
+                        Text(Fmt.percent(value)).font(s.text(12, .bold).monospacedDigit()).foregroundStyle(s.chart)
+                    }
+                    let height = 14 * thickness
+                    BarView(progress: value, color: s.chart, track: s.options.chartFill ? s.track : s.track.opacity(0.4), height: height, radius: s.radius(height / 2))
+                }
             }
         case .comparison:
             ComparisonChart(current: value, reference: 1, currentLabel: tr("Actuel"), referenceLabel: tr("Objectif"), style: s, asPercent: true)
@@ -1645,16 +1685,31 @@ struct BarsChart: View {
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
             }
+            if labels.isEmpty, values.count >= 3, let first = values.first, let last = values.last, values.count > 10 || !showsValues {
+                // No day names: at least the first and the last value, so the bars have two marks.
+                HStack {
+                    Text(ChartText.short(first))
+                    Spacer(minLength: 2)
+                    Text(ChartText.short(last))
+                }
+                .font(style.text(9).monospacedDigit())
+                .foregroundStyle(style.secondary)
+                .lineLimit(1)
+            }
             if !labels.isEmpty {
                 HStack(spacing: gap) {
                     ForEach(Array(labels.enumerated()), id: \.offset) { pair in
                         let shown = labels.count <= 8 || pair.offset % 3 == 0 || pair.offset == highlight
-                        Text(shown ? pair.element : " ")
-                            .font(style.text(9, pair.offset == highlight ? .bold : .regular))
-                            .foregroundStyle(pair.offset == highlight ? style.primary : style.secondary)
-                            .lineLimit(1)
-                            .fixedSize()
-                            .frame(maxWidth: .infinity)
+                        // In an overlay: a label wider than its bar (a day among thirty) must not widen the row.
+                        Color.clear
+                            .frame(maxWidth: .infinity, minHeight: 11, maxHeight: 11)
+                            .overlay {
+                                Text(shown ? pair.element : " ")
+                                    .font(style.text(9, pair.offset == highlight ? .bold : .regular))
+                                    .foregroundStyle(pair.offset == highlight ? style.primary : style.secondary)
+                                    .lineLimit(1)
+                                    .fixedSize()
+                            }
                     }
                 }
             }
