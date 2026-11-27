@@ -32,6 +32,8 @@ struct EditorRequest: Identifiable {
 enum StorePage: Hashable {
     case setups, combos, packs, collections
     case collection(String)
+    /// A rayon of the Store on its own page (widgets, styles, wallpapers): the raw value of `ExploreView.StoreAisle`.
+    case aisle(String)
 }
 
 enum ContentScreen: String, Identifiable {

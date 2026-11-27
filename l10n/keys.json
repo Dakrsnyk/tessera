@@ -20,7 +20,7 @@
  " Les marges, l'espacement et le nombre de lignes s'adaptent.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:541: StudioNote(text: design.effectiveStyle.density.summary + tr(\" Les marges, l'espacement et le nombre de lignes s'adaptent.\"))"
+   "App/Screens/Editor/StudioPanels.swift:553: StudioNote(text: design.effectiveStyle.density.summary + tr(\" Les marges, l'espacement et le nombre de lignes s'adaptent.\"))"
   ]
  },
  " Plus forte hausse : %@ (%@ de plus).": {
@@ -1345,7 +1345,7 @@
  "%@ × %@ kg": {
   "placeholders": 2,
   "uses": [
-   "App/Core/AdExport.swift:485: load: job.string(\"load\") ?? tr(\"\\(8) × \\(60) kg\"),",
+   "App/Core/AdExport.swift:493: load: job.string(\"load\") ?? tr(\"\\(8) × \\(60) kg\"),",
    "App/Core/MarketingShots.swift:134: load: tr(\"\\(8) × \\(60) kg\"),"
   ]
  },
@@ -1557,8 +1557,8 @@
  ", Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:437: .accessibilityLabel(Text(tr(\"Style \\(look.name)\\(look.isPremium && !model.isPremium ? tr(\", Premium\") : \"\")\")))",
-   "App/Screens/Explore/ExploreView.swift:716: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))",
+   "App/Screens/Explore/ExploreView.swift:548: .accessibilityLabel(Text(tr(\"Style \\(look.name)\\(look.isPremium && !model.isPremium ? tr(\", Premium\") : \"\")\")))",
+   "App/Screens/Explore/ExploreView.swift:827: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))",
    "App/Screens/Explore/WallpaperCollection.swift:61: var spokenName: String { name + (isPremium ? tr(\", Premium\") : \"\") }"
   ]
  },
@@ -2286,7 +2286,7 @@
  "Aa": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:691: Text(tr(\"Aa\"))",
+   "App/Screens/Explore/ExploreView.swift:802: Text(tr(\"Aa\"))",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:746: Text(\"Aa\")"
   ]
  },
@@ -2688,7 +2688,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/MiniApps/Business/BusinessApp.swift:292: LineMark(x: .value(\"Jour\", point.index), y: .value(\"Actuel\", point.current ?? 0), series: .value(\"Série\", tr(\"Actuel\")))",
-   "Shared/Render/Tiles/TileView.swift:1257: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
+   "Shared/Render/Tiles/TileView.swift:1360: ComparisonChart(current: value, reference: 1, currentLabel: tr(\"Actuel\"), referenceLabel: tr(\"Objectif\"), style: s, asPercent: true)"
   ]
  },
  "Adaptateur de prise": {
@@ -2774,7 +2774,7 @@
  "Afficher les valeurs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:512: Toggle(tr(\"Afficher les valeurs\"), isOn: $design.style.chartValues)"
+   "App/Screens/Editor/StudioPanels.swift:524: Toggle(tr(\"Afficher les valeurs\"), isOn: $design.style.chartValues)"
   ]
  },
  "Afficher mes pas": {
@@ -4139,7 +4139,7 @@
  "Apparence du graphique": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:508: StudioGroup(title: tr(\"Apparence du graphique\")) {"
+   "App/Screens/Editor/StudioPanels.swift:520: StudioGroup(title: tr(\"Apparence du graphique\")) {"
   ]
  },
  "Appeler le comptable": {
@@ -4177,13 +4177,13 @@
  "Appliquer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:736: Label(isApplied ? tr(\"Appliqué\") : tr(\"Appliquer\"), systemImage: isApplied ? \"checkmark\" : \"paintbrush\")"
+   "App/Screens/Editor/StudioPanels.swift:748: Label(isApplied ? tr(\"Appliqué\") : tr(\"Appliquer\"), systemImage: isApplied ? \"checkmark\" : \"paintbrush\")"
   ]
  },
  "Appliquer (%@)": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:803: Button(tr(\"Appliquer (\\(selection.count))\")) {"
+   "App/Screens/Editor/StudioPanels.swift:815: Button(tr(\"Appliquer (\\(selection.count))\")) {"
   ]
  },
  "Appliquer ce plan": {
@@ -4201,13 +4201,13 @@
  "Appliquer « %@ »": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:796: .navigationTitle(tr(\"Appliquer « \\(style.name) »\"))"
+   "App/Screens/Editor/StudioPanels.swift:808: .navigationTitle(tr(\"Appliquer « \\(style.name) »\"))"
   ]
  },
  "Appliqué": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:736: Label(isApplied ? tr(\"Appliqué\") : tr(\"Appliquer\"), systemImage: isApplied ? \"checkmark\" : \"paintbrush\")"
+   "App/Screens/Editor/StudioPanels.swift:748: Label(isApplied ? tr(\"Appliqué\") : tr(\"Appliquer\"), systemImage: isApplied ? \"checkmark\" : \"paintbrush\")"
   ]
  },
  "Apport": {
@@ -4461,6 +4461,7 @@
  "Argent": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Explore/ExploreView.swift:237: (tr(\"Argent\"), \"creditcard\", \"2F8F7A\", .finance),",
    "Shared/Model/StyleLibraryData.swift:906: list.append(StyleLook(id: \"prime-argent\", name: tr(\"Argent\"), summary: tr(\"Reflet argenté clair, biseau, chiffres nets\"), family: \"prime\", themeID: .dark, accentHex: \"6E7B8A\", background: .gradient, f",
    "Shared/Render/Tiles/DashboardTiles.swift:214: var tile = Tile(title: tr(\"Argent\"), symbol: \"dollarsign.circle\")"
   ]
@@ -4860,7 +4861,7 @@
  "Au hasard": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:200: FilterChip(title: tr(\"Au hasard\"), symbol: \"dice\", isSelected: false, action: surprise)",
+   "App/Screens/Editor/StudioPanels.swift:208: FilterChip(title: tr(\"Au hasard\"), symbol: \"dice\", isSelected: false, action: surprise)",
    "Shared/Model/PhotoQuote.swift:152: case .shuffled: tr(\"Au hasard\")"
   ]
  },
@@ -5052,13 +5053,13 @@
  "Aucun résultat": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:558: title: tr(\"Aucun résultat\"),"
+   "App/Screens/Explore/ExploreView.swift:669: title: tr(\"Aucun résultat\"),"
   ]
  },
  "Aucun style de cette famille avec ce filtre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:249: Text(tr(\"Aucun style de cette famille avec ce filtre.\"))"
+   "App/Screens/Editor/StudioPanels.swift:261: Text(tr(\"Aucun style de cette famille avec ce filtre.\"))"
   ]
  },
  "Aucun taux de la BCE pour la date de certaines opérations : date à venir, ou mal lue.": {
@@ -5562,7 +5563,7 @@
  "Autres widgets": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:747: Label(tr(\"Autres widgets\"), systemImage: \"square.stack\")"
+   "App/Screens/Editor/StudioPanels.swift:759: Label(tr(\"Autres widgets\"), systemImage: \"square.stack\")"
   ]
  },
  "Avance doucement le bassin vers l'avant.": {
@@ -6916,7 +6917,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioComponents.swift:26: case .border: tr(\"Bordure\")",
-   "App/Screens/Editor/StudioPanels.swift:469: StudioGroup(title: tr(\"Bordure\"), isPremium: !model.isPremium) {",
+   "App/Screens/Editor/StudioPanels.swift:481: StudioGroup(title: tr(\"Bordure\"), isPremium: !model.isPremium) {",
    "Shared/Model/WidgetStyle.swift:602: if border != .none { features.append(tr(\"Bordure\")) }"
   ]
  },
@@ -8366,7 +8367,7 @@
  "Cartes et surfaces": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:397: StudioColorRow(title: tr(\"Cartes et surfaces\"), hex: $design.style.panelHex, fallback: style.panel)"
+   "App/Screens/Editor/StudioPanels.swift:409: StudioColorRow(title: tr(\"Cartes et surfaces\"), hex: $design.style.panelHex, fallback: style.panel)"
   ]
  },
  "Cartes masquées et disposition automatique": {
@@ -9057,7 +9058,7 @@
  "Chaque couleur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:385: StudioGroup(title: tr(\"Chaque couleur\"), isPremium: !model.isPremium) {"
+   "App/Screens/Editor/StudioPanels.swift:397: StudioGroup(title: tr(\"Chaque couleur\"), isPremium: !model.isPremium) {"
   ]
  },
  "Chaque information sur sa petite carte.": {
@@ -9357,7 +9358,7 @@
  "Chiffres": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:391: StudioColorRow(title: tr(\"Chiffres\"), hex: $design.style.numberHex, fallback: style.numberColor)",
+   "App/Screens/Editor/StudioPanels.swift:403: StudioColorRow(title: tr(\"Chiffres\"), hex: $design.style.numberHex, fallback: style.numberColor)",
    "App/Screens/MiniApps/Car/CarApp.swift:274: MiniSectionTitle(title: tr(\"Chiffres\"))"
   ]
  },
@@ -10165,7 +10166,7 @@
  "Combinaisons": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:592: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))",
+   "App/Screens/Explore/ExploreView.swift:703: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))",
    "App/Screens/Explore/StoreCombos.swift:339: .navigationTitle(tr(\"Combinaisons\"))"
   ]
  },
@@ -11021,8 +11022,8 @@
   "uses": [
    "App/Screens/Content/HabitsView.swift:208: Section(tr(\"Couleur\")) {",
    "App/Screens/Editor/EditorView.swift:746: Text(tr(\"Couleur\")).tag(BackgroundKind.color)",
-   "App/Screens/Editor/StudioPanels.swift:475: StudioColorRow(title: tr(\"Couleur\"), hex: $design.style.borderHex, fallback: ResolvedStyle(design: design).borderColor)",
-   "App/Screens/Editor/StudioPanels.swift:513: StudioColorRow(title: tr(\"Couleur\"), hex: $design.style.chartHex, fallback: ResolvedStyle(design: design).chart)"
+   "App/Screens/Editor/StudioPanels.swift:487: StudioColorRow(title: tr(\"Couleur\"), hex: $design.style.borderHex, fallback: ResolvedStyle(design: design).borderColor)",
+   "App/Screens/Editor/StudioPanels.swift:525: StudioColorRow(title: tr(\"Couleur\"), hex: $design.style.chartHex, fallback: ResolvedStyle(design: design).chart)"
   ]
  },
  "Couleur 1": {
@@ -11052,14 +11053,14 @@
  "Couleur personnalisée": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:329: ColorPicker(tr(\"Couleur personnalisée\"), selection: Binding(",
+   "App/Screens/Editor/StudioPanels.swift:341: ColorPicker(tr(\"Couleur personnalisée\"), selection: Binding(",
    "Shared/Model/WidgetDesign.swift:165: if !Palette.freeAccents.contains(where: { $0.hex == accentHex }) { features.append(tr(\"Couleur personnalisée\")) }"
   ]
  },
  "Couleur principale": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:314: StudioGroup(title: tr(\"Couleur principale\"), detail: colorsDetail) {"
+   "App/Screens/Editor/StudioPanels.swift:326: StudioGroup(title: tr(\"Couleur principale\"), detail: colorsDetail) {"
   ]
  },
  "Couleurs": {
@@ -11091,7 +11092,7 @@
  "Couleurs du style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:310: return usesStyleColors ? tr(\"Couleurs du style\") : tr(\"Personnalisées\")"
+   "App/Screens/Editor/StudioPanels.swift:322: return usesStyleColors ? tr(\"Couleurs du style\") : tr(\"Personnalisées\")"
   ]
  },
  "Couleurs personnalisées": {
@@ -12560,7 +12561,7 @@
  "Dernier": {
   "placeholders": 0,
   "uses": [
-   "Shared/Render/Tiles/TileView.swift:1226: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
+   "Shared/Render/Tiles/TileView.swift:1329: ComparisonChart(current: last, reference: average, currentLabel: tr(\"Dernier\"), referenceLabel: tr(\"Moyenne\"), style: s)"
   ]
  },
  "Dernier : %@, %@": {
@@ -13646,7 +13647,7 @@
  "Débloquer avec Premium": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:766: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))",
+   "App/Screens/Explore/ExploreView.swift:877: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))",
    "App/Screens/Explore/HomeSetupViews.swift:654: if needsPremium { return tr(\"Débloquer avec Premium\") }",
    "App/Screens/Explore/WallpaperCollection.swift:345: if needsPremium { return tr(\"Débloquer avec Premium\") }"
   ]
@@ -14383,7 +14384,7 @@
   "placeholders": 0,
   "uses": [
    "Shared/Render/Kinds/DataWidgets.swift:226: WLabel(text: mode == .net ? tr(\"Chaque mois\") : tr(\"Détail\"), style: s)",
-   "Shared/Render/Tiles/TileView.swift:623: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
+   "Shared/Render/Tiles/TileView.swift:656: result.append(Stat(id: \"detail\", label: tr(\"Détail\"), value: detail))"
   ]
  },
  "Détails": {
@@ -14409,7 +14410,7 @@
  "Développé couché": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AdExport.swift:482: exercise: job.string(\"exercise\") ?? tr(\"Développé couché\"),",
+   "App/Core/AdExport.swift:490: exercise: job.string(\"exercise\") ?? tr(\"Développé couché\"),",
    "App/Core/MarketingShots.swift:131: exercise: tr(\"Développé couché\"),",
    "App/Screens/Spaces/LockScreenCreator.swift:121: exercise: tr(\"Développé couché\"), setNumber: 3, sets: 4, load: tr(\"8 × 60 kg\"),",
    "Shared/Data/SampleData.swift:139: ExerciseTemplate(name: tr(\"Développé couché\"), sets: 4, reps: 8, weight: 60, restSeconds: 120),"
@@ -14593,7 +14594,7 @@
  "Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:316: Text(tr(\"Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.\"))"
+   "App/Screens/Editor/StudioPanels.swift:328: Text(tr(\"Elle repeint tout le widget : fond, cartes, texte, chiffres, icônes, graphiques et bordure.\"))"
   ]
  },
  "Elle se pose sur l'avant-bras, coude collé au buste, main à hauteur du menton.": {
@@ -14606,6 +14607,12 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:855: MarketingHeadline(eyebrow: tr(\"Mini-apps\"), title: tr(\"8 mini-apps,\\nune seule app.\"), subtitle: tr(\"Elles nourrissent tes widgets.\"))"
+  ]
+ },
+ "Embellir mon écran": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:240: (tr(\"Embellir mon écran\"), \"sparkles\", \"D6409F\", nil),"
   ]
  },
  "Emplacement": {
@@ -14935,13 +14942,13 @@
    "App/Screens/Content/HabitsView.swift:258: Button(tr(\"Enregistrer\"), action: save)",
    "App/Screens/Content/MoneyView.swift:173: Button(tr(\"Enregistrer\"), action: save)",
    "App/Screens/Editor/EditorView.swift:918: if !isNew { return tr(\"Enregistrer\") }",
-   "App/Screens/Editor/StudioPanels.swift:679: Text(tr(\"Enregistrer\")).foregroundStyle(.onAccent)"
+   "App/Screens/Editor/StudioPanels.swift:691: Text(tr(\"Enregistrer\")).foregroundStyle(.onAccent)"
   ]
  },
  "Enregistrer ce look": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:662: StudioGroup(title: tr(\"Enregistrer ce look\")) {"
+   "App/Screens/Editor/StudioPanels.swift:674: StudioGroup(title: tr(\"Enregistrer ce look\")) {"
   ]
  },
  "Enregistrer ce repas": {
@@ -15179,7 +15186,7 @@
  "Essaie un autre mot, ou retire un filtre.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:559: message: tr(\"Essaie un autre mot, ou retire un filtre.\"),"
+   "App/Screens/Explore/ExploreView.swift:670: message: tr(\"Essaie un autre mot, ou retire un filtre.\"),"
   ]
  },
  "Essayer %@ jours gratuits": {
@@ -16801,7 +16808,7 @@
  "Gains, progression": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:402: StudioColorRow(title: tr(\"Positif\"), hex: $design.style.positiveHex, fallback: style.positive, detail: tr(\"Gains, progression\"))"
+   "App/Screens/Editor/StudioPanels.swift:414: StudioColorRow(title: tr(\"Positif\"), hex: $design.style.positiveHex, fallback: style.positive, detail: tr(\"Gains, progression\"))"
   ]
  },
  "Galerie d'art": {
@@ -16897,7 +16904,7 @@
  "Garde les couleurs, le fond, la bordure, le texte, les icônes et la disposition de ce widget sous un nom, pour les donner à d'autres widgets.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:664: Text(tr(\"Garde les couleurs, le fond, la bordure, le texte, les icônes et la disposition de ce widget sous un nom, pour les donner à d'autres widgets.\"))"
+   "App/Screens/Editor/StudioPanels.swift:676: Text(tr(\"Garde les couleurs, le fond, la bordure, le texte, les icônes et la disposition de ce widget sous un nom, pour les donner à d'autres widgets.\"))"
   ]
  },
  "Garde les côtes basses.": {
@@ -17361,7 +17368,7 @@
  "Graphiques": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:395: StudioColorRow(title: tr(\"Graphiques\"), hex: $design.style.chartHex, fallback: style.chart)"
+   "App/Screens/Editor/StudioPanels.swift:407: StudioColorRow(title: tr(\"Graphiques\"), hex: $design.style.chartHex, fallback: style.chart)"
   ]
  },
  "Graphite": {
@@ -17883,7 +17890,7 @@
  "Hausse et baisse": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:400: StudioGroup(title: tr(\"Hausse et baisse\"), isPremium: !model.isPremium) {"
+   "App/Screens/Editor/StudioPanels.swift:412: StudioGroup(title: tr(\"Hausse et baisse\"), isPremium: !model.isPremium) {"
   ]
  },
  "Hausse les épaules vers les oreilles.": {
@@ -17922,7 +17929,7 @@
  "Haut du corps": {
   "placeholders": 0,
   "uses": [
-   "App/Core/AdExport.swift:472: let attributes = WorkoutActivityAttributes(routineName: job.string(\"routine\") ?? tr(\"Haut du corps\"))",
+   "App/Core/AdExport.swift:480: let attributes = WorkoutActivityAttributes(routineName: job.string(\"routine\") ?? tr(\"Haut du corps\"))",
    "App/Core/MarketingShots.swift:129: WorkoutActivityAttributes(routineName: tr(\"Haut du corps\")),",
    "App/Screens/Spaces/LockScreenCreator.swift:119: let attributes = WorkoutActivityAttributes(routineName: tr(\"Haut du corps\"))",
    "Shared/Data/SampleData.swift:138: let upper = Routine(name: tr(\"Haut du corps\"), exercises: ["
@@ -18383,7 +18390,7 @@
  "Icônes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:393: StudioColorRow(title: tr(\"Icônes\"), hex: $design.style.iconHex, fallback: style.icon)"
+   "App/Screens/Editor/StudioPanels.swift:405: StudioColorRow(title: tr(\"Icônes\"), hex: $design.style.iconHex, fallback: style.icon)"
   ]
  },
  "Idées": {
@@ -18696,7 +18703,7 @@
  "Incontournables": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:339: shelfRow(tr(\"Incontournables\")) {"
+   "App/Screens/Explore/ExploreView.swift:450: shelfRow(tr(\"Incontournables\")) {"
   ]
  },
  "Inde": {
@@ -19909,7 +19916,7 @@
  "La bordure suit exactement le contour du widget, que iOS dessine lui-même.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:479: StudioNote(text: tr(\"La bordure suit exactement le contour du widget, que iOS dessine lui-même.\"))"
+   "App/Screens/Editor/StudioPanels.swift:491: StudioNote(text: tr(\"La bordure suit exactement le contour du widget, que iOS dessine lui-même.\"))"
   ]
  },
  "La caméra n'est pas disponible pour le moment. Tu peux chercher l'aliment dans la liste.": {
@@ -19945,7 +19952,7 @@
  "La couleur de chaque ligne (protéines, glucides, catégories…) se règle aussi dans Contenu.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:408: StudioNote(text: tr(\"La couleur de chaque ligne (protéines, glucides, catégories…) se règle aussi dans Contenu.\"))"
+   "App/Screens/Editor/StudioPanels.swift:420: StudioNote(text: tr(\"La couleur de chaque ligne (protéines, glucides, catégories…) se règle aussi dans Contenu.\"))"
   ]
  },
  "La dernière fois : %@ × %@": {
@@ -20071,7 +20078,7 @@
  "La police change tout le texte du widget : titres, chiffres et détails. Seules les polices déjà présentes sur l'iPhone sont proposées, elles s'affichent donc aussi sur l'écran d'accueil et l'écran verrouillé.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:582: StudioNote(text: tr(\"La police change tout le texte du widget : titres, chiffres et détails. Seules les polices déjà présentes sur l'iPhone sont proposées, elles s'affichent donc aussi sur l'écran d'a"
+   "App/Screens/Editor/StudioPanels.swift:594: StudioNote(text: tr(\"La police change tout le texte du widget : titres, chiffres et détails. Seules les polices déjà présentes sur l'iPhone sont proposées, elles s'affichent donc aussi sur l'écran d'a"
   ]
  },
  "La poussée des jambes lance la barre.": {
@@ -20626,7 +20633,7 @@
  "Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:793: Text(tr(\"Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée.\"))"
+   "App/Screens/Editor/StudioPanels.swift:805: Text(tr(\"Le contenu de chaque widget ne change pas : seuls les couleurs, le fond, la bordure, le texte, les icônes et la disposition changent. Une photo de fond est gardée.\"))"
   ]
  },
  "Le contenu posé sur une carte": {
@@ -21581,7 +21588,7 @@
  "Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:749: Label(tr(\"Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.\"), systemImage: \"sparkles\")"
+   "App/Screens/Explore/ExploreView.swift:860: Label(tr(\"Les widgets marqués « Exemple » montrent des données d'exemple. Tu donneras les tiennes dans le Studio, widget par widget.\"), systemImage: \"sparkles\")"
   ]
  },
  "Les widgets qui l'affichent reviendront au modèle par défaut.": {
@@ -21605,7 +21612,7 @@
  "Les écrans d'accueil assortis": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:388: shelfRow(tr(\"Les écrans d'accueil assortis\")) {"
+   "App/Screens/Explore/ExploreView.swift:499: shelfRow(tr(\"Les écrans d'accueil assortis\")) {"
   ]
  },
  "Les épaules restent au-dessus des pieds.": {
@@ -22248,10 +22255,10 @@
  "Ma journée": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Explore/ExploreView.swift:234: (tr(\"Ma journée\"), \"checklist\", \"6B7280\", .productivity),",
    "Shared/Data/Insights.swift:229: return Insight(title: tr(\"Ma journée\"), symbol: \"sparkles\", text: text, facts: facts, points: Array(facts.prefix(5)))",
    "Shared/Model/KindCatalog.swift:265: KindInfo(kind: .myDay, title: tr(\"Ma journée\"), summary: tr(\"L'heure, ton prochain rendez-vous, tes tâches et tes calories en un seul widget.\"), category: .dashboards, symbol: \"sun.horizon\", isPremium",
-   "Shared/Model/Templates.swift:74: WidgetTemplate(id: \"progress-day\", name: tr(\"Ma journée\"), kind: .progress, themeID: .minimal, accentHex: \"3366FF\",",
-   "Shared/Model/Templates.swift:125: WidgetTemplate(id: \"myday-glass\", name: tr(\"Ma journée\"), kind: .myDay, themeID: .glass, accentHex: \"8C6CFF\"),"
+   "Shared/Model/Templates.swift:74: WidgetTemplate(id: \"progress-day\", name: tr(\"Ma journée\"), kind: .progress, themeID: .minimal, accentHex: \"3366FF\","
   ]
  },
  "Ma semaine": {
@@ -22526,6 +22533,12 @@
   "placeholders": 0,
   "uses": [
    "Shared/Domains/Nutrition.swift:216: case .manganese: tr(\"Manganèse\")"
+  ]
+ },
+ "Manger mieux": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:236: (tr(\"Manger mieux\"), \"fork.knife\", \"F08A24\", .nutrition),"
   ]
  },
  "Mangue": {
@@ -23180,7 +23193,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioComponents.swift:29: case .myStyles: tr(\"Mes styles\")",
-   "App/Screens/Editor/StudioPanels.swift:689: StudioGroup(title: tr(\"Mes styles\"), detail: \"\\(model.savedStyles.count)\") {"
+   "App/Screens/Editor/StudioPanels.swift:701: StudioGroup(title: tr(\"Mes styles\"), detail: \"\\(model.savedStyles.count)\") {"
   ]
  },
  "Mes séances": {
@@ -23730,7 +23743,7 @@
   "placeholders": 0,
   "uses": [
    "App/Core/AppModel.swift:425: let style = SavedStyle(name: trimmed.isEmpty ? tr(\"Mon thème\") : trimmed, design: design)",
-   "App/Screens/Editor/StudioPanels.swift:668: TextField(tr(\"Mon thème\"), text: $newName)",
+   "App/Screens/Editor/StudioPanels.swift:680: TextField(tr(\"Mon thème\"), text: $newName)",
    "Shared/Model/WidgetStyle.swift:780: name = (try? c.decodeIfPresent(String.self, forKey: .name)) ?? tr(\"Mon thème\")"
   ]
  },
@@ -24651,7 +24664,7 @@
    "App/Screens/Content/HabitsView.swift:186: Section(tr(\"Nom\")) {",
    "App/Screens/Editor/EditorView.swift:731: EditorSection(title: tr(\"Nom\")) {",
    "App/Screens/Editor/EditorView.swift:1275: EditorSection(title: tr(\"Nom\")) {",
-   "App/Screens/Editor/StudioPanels.swift:652: TextField(tr(\"Nom\"), text: $renameText)"
+   "App/Screens/Editor/StudioPanels.swift:664: TextField(tr(\"Nom\"), text: $renameText)"
   ]
  },
  "Nom (abonnés, devis envoyés, NPS…)": {
@@ -25477,7 +25490,7 @@
  "Négatif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:404: StudioColorRow(title: tr(\"Négatif\"), hex: $design.style.negativeHex, fallback: style.negative, detail: tr(\"Pertes, dépassement\"))"
+   "App/Screens/Editor/StudioPanels.swift:416: StudioColorRow(title: tr(\"Négatif\"), hex: $design.style.negativeHex, fallback: style.negative, detail: tr(\"Pertes, dépassement\"))"
   ]
  },
  "Négliger l'échauffement.": {
@@ -25920,7 +25933,7 @@
  "Opacité": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:474: StudioSlider(title: tr(\"Opacité\"), value: $design.style.borderOpacity, range: 0.1...1)"
+   "App/Screens/Editor/StudioPanels.swift:486: StudioSlider(title: tr(\"Opacité\"), value: $design.style.borderOpacity, range: 0.1...1)"
   ]
  },
  "Opale": {
@@ -25969,7 +25982,7 @@
  "Options de %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:729: .accessibilityLabel(Text(tr(\"Options de \\(saved.name)\")))",
+   "App/Screens/Editor/StudioPanels.swift:741: .accessibilityLabel(Text(tr(\"Options de \\(saved.name)\")))",
    "App/Screens/MiniApps/Nutrition/ScanRecapView.swift:517: .accessibilityLabel(tr(\"Options de \\(line.food.name)\"))"
   ]
  },
@@ -26143,7 +26156,7 @@
  "Originaux": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:181: row(title: tr(\"Originaux\"), detail: tr(\"gratuits\"), looks: StyleCatalog.originals.filter(filter.includes), family: nil)"
+   "App/Screens/Editor/StudioPanels.swift:189: row(title: tr(\"Originaux\"), detail: tr(\"gratuits\"), looks: StyleCatalog.originals.filter(filter.includes), family: nil)"
   ]
  },
  "Ornement gravé, Bodoni petites capitales": {
@@ -26345,7 +26358,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Explore/ExploreView.swift:31: case .packs: tr(\"Packs\")",
-   "App/Screens/Explore/ExploreView.swift:598: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))",
+   "App/Screens/Explore/ExploreView.swift:709: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))",
    "App/Screens/Explore/StoreMagazine.swift:454: .navigationTitle(tr(\"Packs\"))"
   ]
  },
@@ -26436,14 +26449,14 @@
  "Palette %@": {
   "placeholders": 1,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:309: if let palette = ColorPalette.all.first(where: { $0.matches(design) }) { return tr(\"Palette \\(palette.name)\") }",
+   "App/Screens/Editor/StudioPanels.swift:321: if let palette = ColorPalette.all.first(where: { $0.matches(design) }) { return tr(\"Palette \\(palette.name)\") }",
    "App/Screens/Tutorial/TutorialOverlay.swift:323: .accessibilityLabel(Text(tr(\"Palette \\(palette.name)\")))"
   ]
  },
  "Palettes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:356: StudioGroup(title: tr(\"Palettes\"), detail: tr(\"Tout change d'un coup\"), isPremium: !model.isPremium) {"
+   "App/Screens/Editor/StudioPanels.swift:368: StudioGroup(title: tr(\"Palettes\"), detail: tr(\"Tout change d'un coup\"), isPremium: !model.isPremium) {"
   ]
  },
  "Pallof press": {
@@ -27313,7 +27326,7 @@
  "Personnaliser et ajouter": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:766: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))"
+   "App/Screens/Explore/ExploreView.swift:877: Text(needsPremium ? tr(\"Débloquer avec Premium\") : tr(\"Personnaliser et ajouter\"))"
   ]
  },
  "Personnaliser le widget": {
@@ -27345,7 +27358,7 @@
  "Personnalisées": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:310: return usesStyleColors ? tr(\"Couleurs du style\") : tr(\"Personnalisées\")"
+   "App/Screens/Editor/StudioPanels.swift:322: return usesStyleColors ? tr(\"Couleurs du style\") : tr(\"Personnalisées\")"
   ]
  },
  "Personne ou note (facultatif)": {
@@ -27376,7 +27389,7 @@
  "Pertes, dépassement": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:404: StudioColorRow(title: tr(\"Négatif\"), hex: $design.style.negativeHex, fallback: style.negative, detail: tr(\"Pertes, dépassement\"))"
+   "App/Screens/Editor/StudioPanels.swift:416: StudioColorRow(title: tr(\"Négatif\"), hex: $design.style.negativeHex, fallback: style.negative, detail: tr(\"Pertes, dépassement\"))"
   ]
  },
  "Petit": {
@@ -28286,7 +28299,7 @@
  "Police": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:557: StudioGroup(title: tr(\"Police\"), detail: \"\\(FontCatalog.available.count)\", isPremium: !model.isPremium) {"
+   "App/Screens/Editor/StudioPanels.swift:569: StudioGroup(title: tr(\"Police\"), detail: \"\\(FontCatalog.available.count)\", isPremium: !model.isPremium) {"
   ]
  },
  "Police %@": {
@@ -28298,7 +28311,7 @@
  "Police du style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:592: Text(tr(\"Police du style\"))"
+   "App/Screens/Editor/StudioPanels.swift:604: Text(tr(\"Police du style\"))"
   ]
  },
  "Police personnalisée": {
@@ -28508,7 +28521,7 @@
  "Positif": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:402: StudioColorRow(title: tr(\"Positif\"), hex: $design.style.positiveHex, fallback: style.positive, detail: tr(\"Gains, progression\"))"
+   "App/Screens/Editor/StudioPanels.swift:414: StudioColorRow(title: tr(\"Positif\"), hex: $design.style.positiveHex, fallback: style.positive, detail: tr(\"Gains, progression\"))"
   ]
  },
  "Position de départ": {
@@ -29914,6 +29927,12 @@
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:533: Text(tr(\"Quatre à la fois\")).tag(false)"
   ]
  },
+ "Que veux-tu sur ton écran ?": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:243: Text(tr(\"Que veux-tu sur ton écran ?\"))"
+  ]
+ },
  "Quelle catégorie ?": {
   "placeholders": 0,
   "uses": [
@@ -30230,6 +30249,7 @@
  "Rayons": {
   "placeholders": 0,
   "uses": [
+   "App/Screens/Explore/ExploreView.swift:293: Text(tr(\"Rayons\"))",
    "Shared/Model/WidgetStyle.swift:370: case .sunburst: tr(\"Rayons\")"
   ]
  },
@@ -30775,7 +30795,7 @@
  "Remplissage": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:511: Toggle(tr(\"Remplissage\"), isOn: $design.style.chartFill)"
+   "App/Screens/Editor/StudioPanels.swift:523: Toggle(tr(\"Remplissage\"), isOn: $design.style.chartFill)"
   ]
  },
  "Remplit le montant, la catégorie et la note": {
@@ -30817,14 +30837,14 @@
  "Renommer": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:654: Button(tr(\"Renommer\")) {",
-   "App/Screens/Editor/StudioPanels.swift:716: Button(tr(\"Renommer\"), systemImage: \"pencil\") {"
+   "App/Screens/Editor/StudioPanels.swift:666: Button(tr(\"Renommer\")) {",
+   "App/Screens/Editor/StudioPanels.swift:728: Button(tr(\"Renommer\"), systemImage: \"pencil\") {"
   ]
  },
  "Renommer le style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:651: .alert(tr(\"Renommer le style\"), isPresented: Binding(get: { renaming != nil }, set: { if !$0 { renaming = nil } })) {"
+   "App/Screens/Editor/StudioPanels.swift:663: .alert(tr(\"Renommer le style\"), isPresented: Binding(get: { renaming != nil }, set: { if !$0 { renaming = nil } })) {"
   ]
  },
  "Renouvellement le %@": {
@@ -31359,7 +31379,7 @@
  "Revenir aux couleurs du style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:349: Label(tr(\"Revenir aux couleurs du style\"), systemImage: \"arrow.uturn.backward\")"
+   "App/Screens/Editor/StudioPanels.swift:361: Label(tr(\"Revenir aux couleurs du style\"), systemImage: \"arrow.uturn.backward\")"
   ]
  },
  "Revenir en poussant les fesses vers l'arrière en premier.": {
@@ -34078,9 +34098,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/MarketingShots.swift:746: MarketingShowcase(eyebrow: tr(\"Sport\"), title: tr(\"Chaque série\\ncompte.\"), subtitle: tr(\"Séances, repos, records et progrès.\")) {",
+   "App/Screens/Explore/ExploreView.swift:235: (tr(\"Sport\"), \"dumbbell\", \"E5484D\", .fitness),",
    "App/Screens/Home/DailySection.swift:916: case .rest: tr(\"Sport\")",
-   "Shared/Data/PayloadLoader.swift:106: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: days[1]),",
-   "Shared/Data/SampleData.swift:44: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: keys([1, 2, 4, 6, 8, 9, 11, 13, 15, 16, 18, 20, 23, 25, 27])),"
+   "Shared/Data/PayloadLoader.swift:106: Habit(name: tr(\"Sport\"), symbol: \"figure.run\", colorHex: \"FF6B57\", completedDays: days[1]),"
   ]
  },
  "Sportif": {
@@ -34315,8 +34335,8 @@
  "Style %@%@": {
   "placeholders": 2,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:437: .accessibilityLabel(Text(tr(\"Style \\(look.name)\\(look.isPremium && !model.isPremium ? tr(\", Premium\") : \"\")\")))",
-   "App/Screens/Explore/ExploreView.swift:716: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
+   "App/Screens/Explore/ExploreView.swift:548: .accessibilityLabel(Text(tr(\"Style \\(look.name)\\(look.isPremium && !model.isPremium ? tr(\", Premium\") : \"\")\")))",
+   "App/Screens/Explore/ExploreView.swift:827: .accessibilityLabel(Text(tr(\"Style \\(theme.name)\\(showsLock ? tr(\", Premium\") : \"\")\")))"
   ]
  },
  "Style %@, Premium": {
@@ -34336,12 +34356,6 @@
   "uses": [
    "App/Premium/PaywallView.swift:206: comparisonRow(tr(\"Styles\"), free: \"\\(StyleCatalog.freeIDs.count)\", premium: \"\\(StyleCatalog.all.count)\")",
    "App/Screens/Explore/ExploreView.swift:33: case .styles: tr(\"Styles\")"
-  ]
- },
- "Styles · page %@/%@": {
-  "placeholders": 2,
-  "uses": [
-   "App/Core/AdExport.swift:272: Text(\"Styles · page \\(page)/\\(pages)\")"
   ]
  },
  "Styles, couleurs, photos, polices.": {
@@ -34475,7 +34489,7 @@
    "App/Screens/Content/HabitsView.swift:241: Button(tr(\"Supprimer\"), role: .destructive) {",
    "App/Screens/Content/MoneyView.swift:160: Button(tr(\"Supprimer\"), role: .destructive) {",
    "App/Screens/Editor/EditorView.swift:335: Button(tr(\"Supprimer\"), role: .destructive, action: deleteDesign)",
-   "App/Screens/Editor/StudioPanels.swift:720: Button(tr(\"Supprimer\"), systemImage: \"trash\", role: .destructive) {"
+   "App/Screens/Editor/StudioPanels.swift:732: Button(tr(\"Supprimer\"), systemImage: \"trash\", role: .destructive) {"
   ]
  },
  "Supprimer (toutes les semaines)": {
@@ -35665,7 +35679,7 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Editor/StudioComponents.swift:20: case .size: tr(\"Taille\")",
-   "App/Screens/Editor/StudioPanels.swift:432: StudioGroup(title: tr(\"Taille\")) {",
+   "App/Screens/Editor/StudioPanels.swift:444: StudioGroup(title: tr(\"Taille\")) {",
    "App/Screens/Explore/StoreCombos.swift:314: Picker(tr(\"Taille\"), selection: $size) {",
    "App/Screens/Home/DailyLayoutEditor.swift:110: Picker(tr(\"Taille\"), selection: Binding("
   ]
@@ -36384,7 +36398,7 @@
  "Tes styles apparaîtront ici. Un même style sur la nutrition, le budget et la forme donne un écran d'accueil cohérent.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:687: StudioNote(text: tr(\"Tes styles apparaîtront ici. Un même style sur la nutrition, le budget et la forme donne un écran d'accueil cohérent.\"), symbol: \"bookmark\")"
+   "App/Screens/Editor/StudioPanels.swift:699: StudioNote(text: tr(\"Tes styles apparaîtront ici. Un même style sur la nutrition, le budget et la forme donne un écran d'accueil cohérent.\"), symbol: \"bookmark\")"
   ]
  },
  "Tes séances de la semaine face à ton objectif, et ta série de semaines.": {
@@ -36525,14 +36539,14 @@
   "uses": [
    "App/Screens/Editor/KindOptionsSection.swift:153: EditorSection(title: tr(\"Texte\")) {",
    "App/Screens/Editor/StudioComponents.swift:24: case .text: tr(\"Texte\")",
-   "App/Screens/Editor/StudioPanels.swift:387: StudioColorRow(title: tr(\"Texte\"), hex: $design.style.textHex, fallback: style.primary)",
+   "App/Screens/Editor/StudioPanels.swift:399: StudioColorRow(title: tr(\"Texte\"), hex: $design.style.textHex, fallback: style.primary)",
    "App/Screens/MiniApps/Photos/PhotoQuotesApp.swift:785: ColorPicker(tr(\"Texte\"), selection: colorBinding(\\.textHex), supportsOpacity: false)"
   ]
  },
  "Texte secondaire": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:389: StudioColorRow(title: tr(\"Texte secondaire\"), hex: $design.style.secondaryHex, fallback: style.secondary)"
+   "App/Screens/Editor/StudioPanels.swift:401: StudioColorRow(title: tr(\"Texte secondaire\"), hex: $design.style.secondaryHex, fallback: style.secondary)"
   ]
  },
  "Texte vert sur noir, bloc mosaïque": {
@@ -37474,7 +37488,7 @@
  "Touche un style pour l'essayer sur un widget.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:413: Text(tr(\"Touche un style pour l'essayer sur un widget.\"))"
+   "App/Screens/Explore/ExploreView.swift:524: Text(tr(\"Touche un style pour l'essayer sur un widget.\"))"
   ]
  },
  "Touche un widget : l'Atelier s'ouvre aussitôt.": {
@@ -37722,7 +37736,7 @@
  "Tout afficher": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:560: actionTitle: tr(\"Tout afficher\")",
+   "App/Screens/Explore/ExploreView.swift:671: actionTitle: tr(\"Tout afficher\")",
    "App/Screens/Explore/HomeSetupViews.swift:504: actionTitle: tr(\"Tout afficher\")"
   ]
  },
@@ -37741,7 +37755,7 @@
  "Tout change d'un coup": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:356: StudioGroup(title: tr(\"Palettes\"), detail: tr(\"Tout change d'un coup\"), isPremium: !model.isPremium) {"
+   "App/Screens/Editor/StudioPanels.swift:368: StudioGroup(title: tr(\"Palettes\"), detail: tr(\"Tout change d'un coup\"), isPremium: !model.isPremium) {"
   ]
  },
  "Tout cocher": {
@@ -37840,10 +37854,10 @@
  "Tout voir": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:266: Text(tr(\"Tout voir\"))",
-   "App/Screens/Explore/ExploreView.swift:271: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(title)\"))",
-   "App/Screens/Explore/ExploreView.swift:846: Text(tr(\"Tout voir\"))",
-   "App/Screens/Explore/ExploreView.swift:851: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(aisle.title)\"))"
+   "App/Screens/Explore/ExploreView.swift:380: Text(tr(\"Tout voir\"))",
+   "App/Screens/Explore/ExploreView.swift:385: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(title)\"))",
+   "App/Screens/Explore/ExploreView.swift:957: Text(tr(\"Tout voir\"))",
+   "App/Screens/Explore/ExploreView.swift:962: .accessibilityLabel(Text(\"\\(tr(\"Tout voir\")) : \\(aisle.title)\"))"
   ]
  },
  "Tout voir : Mes informations": {
@@ -37904,7 +37918,7 @@
  "Toutes": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:560: FilterChip(title: tr(\"Toutes\"), isSelected: category == nil) {",
+   "App/Screens/Editor/StudioPanels.swift:572: FilterChip(title: tr(\"Toutes\"), isSelected: category == nil) {",
    "App/Screens/Explore/StoreCombos.swift:275: case .all: tr(\"Toutes\")",
    "App/Screens/Home/MiniAppsRow.swift:153: Button(tr(\"Toutes\")) { showingAll = true }"
   ]
@@ -37930,7 +37944,7 @@
  "Toutes les familles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:240: Label(tr(\"Toutes les familles\"), systemImage: \"chevron.left\")"
+   "App/Screens/Editor/StudioPanels.swift:252: Label(tr(\"Toutes les familles\"), systemImage: \"chevron.left\")"
   ]
  },
  "Toutes les habitudes": {
@@ -38626,7 +38640,7 @@
  "Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur.": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:174: StudioNote(text: tr(\"Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur.\"), symbol: \"swatch"
+   "App/Screens/Editor/StudioPanels.swift:175: Text(current?.summary ?? tr(\"Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur.\"))"
   ]
  },
  "Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.": {
@@ -39999,7 +40013,7 @@
  "Voir tout": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:216: Button(tr(\"Voir tout\")) {"
+   "App/Screens/Editor/StudioPanels.swift:224: Button(tr(\"Voir tout\")) {"
   ]
  },
  "Voiture": {
@@ -40075,9 +40089,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DataItems.swift:113: case .trip: tr(\"Voyage\")",
+   "App/Screens/Explore/ExploreView.swift:239: (tr(\"Voyage\"), \"airplane\", \"1E88C8\", .travel),",
    "App/Screens/MiniApps/MiniApp.swift:21: case .travel: tr(\"Voyage\")",
-   "App/Screens/MiniApps/Travel/TravelApp.swift:113: .navigationTitle(tr(\"Voyage\"))",
-   "App/Screens/Spaces/TravelCarLifeSpaces.swift:143: SheetForm(title: tr(\"Voyage\"), canSave: !trip.destination.trimmed.isEmpty && trip.end >= trip.start, onSave: save) {"
+   "App/Screens/MiniApps/Travel/TravelApp.swift:113: .navigationTitle(tr(\"Voyage\"))"
   ]
  },
  "Voyage au Japon": {
@@ -40238,7 +40252,7 @@
   "uses": [
    "App/Core/MarketingShots.swift:904: MarketingHeadline(eyebrow: tr(\"Widgets\"), title: tr(\"Plus de 100\\nwidgets.\"), subtitle: tr(\"Écran d'accueil et écran verrouillé.\"))",
    "App/Screens/Explore/ExploreView.swift:29: case .widgets: tr(\"Widgets\")",
-   "App/Screens/Explore/ExploreView.swift:616: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
+   "App/Screens/Explore/ExploreView.swift:727: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
    "App/Screens/Spaces/SpaceBuilderView.swift:273: EditorSection(title: tr(\"Widgets\"), detail: widgetsDetail) {"
   ]
  },
@@ -40748,13 +40762,25 @@
  "combinaison": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:592: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
+   "App/Screens/Explore/ExploreView.swift:703: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
   ]
  },
  "combinaisons": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:592: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
+   "App/Screens/Explore/ExploreView.swift:703: MagazineHeader(title: tr(\"Combinaisons\"), subtitle: Fmt.plural(combos.count, tr(\"combinaison\"), tr(\"combinaisons\")))"
+  ]
+ },
+ "combiné": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:290: (.combos, Fmt.plural(StoreComboCatalog.all.count, tr(\"combiné\"), tr(\"combinés\"))),"
+  ]
+ },
+ "combinés": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:290: (.combos, Fmt.plural(StoreComboCatalog.all.count, tr(\"combiné\"), tr(\"combinés\"))),"
   ]
  },
  "commande": {
@@ -41292,6 +41318,18 @@
    "App/Screens/Explore/HomeSetups.swift:55: case .money: tr(\"finances\")"
   ]
  },
+ "fond": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:289: (.wallpapers, Fmt.plural(WallpaperCatalog.all.count, tr(\"fond\"), tr(\"fonds\"))),"
+  ]
+ },
+ "fonds": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:289: (.wallpapers, Fmt.plural(WallpaperCatalog.all.count, tr(\"fond\"), tr(\"fonds\"))),"
+  ]
+ },
  "forfait par an ÷ 12": {
   "placeholders": 0,
   "uses": [
@@ -41301,7 +41339,7 @@
  "gratuits": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:181: row(title: tr(\"Originaux\"), detail: tr(\"gratuits\"), looks: StyleCatalog.originals.filter(filter.includes), family: nil)"
+   "App/Screens/Editor/StudioPanels.swift:189: row(title: tr(\"Originaux\"), detail: tr(\"gratuits\"), looks: StyleCatalog.originals.filter(filter.includes), family: nil)"
   ]
  },
  "ground beef": {
@@ -41942,13 +41980,15 @@
  "pack": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:598: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
+   "App/Screens/Explore/ExploreView.swift:288: (.packs, Fmt.plural(PackCatalog.all.count, tr(\"pack\"), tr(\"packs\"))),",
+   "App/Screens/Explore/ExploreView.swift:709: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
   ]
  },
  "packs": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:598: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
+   "App/Screens/Explore/ExploreView.swift:288: (.packs, Fmt.plural(PackCatalog.all.count, tr(\"pack\"), tr(\"packs\"))),",
+   "App/Screens/Explore/ExploreView.swift:709: MagazineHeader(title: tr(\"Packs\"), subtitle: Fmt.plural(packs.count, tr(\"pack\"), tr(\"packs\")))"
   ]
  },
  "pain complet": {
@@ -42108,7 +42148,7 @@
  "personnalisé": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:709: Text(\"\\(ThemeCatalog.theme(saved.themeID).name) · \\(saved.style.look.isDefault ? tr(\"réglages du style\") : tr(\"personnalisé\"))\")"
+   "App/Screens/Editor/StudioPanels.swift:721: Text(\"\\(ThemeCatalog.theme(saved.themeID).name) · \\(saved.style.look.isDefault ? tr(\"réglages du style\") : tr(\"personnalisé\"))\")"
   ]
  },
  "peu sûr": {
@@ -42420,7 +42460,7 @@
  "réglages du style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:709: Text(\"\\(ThemeCatalog.theme(saved.themeID).name) · \\(saved.style.look.isDefault ? tr(\"réglages du style\") : tr(\"personnalisé\"))\")"
+   "App/Screens/Editor/StudioPanels.swift:721: Text(\"\\(ThemeCatalog.theme(saved.themeID).name) · \\(saved.style.look.isDefault ? tr(\"réglages du style\") : tr(\"personnalisé\"))\")"
   ]
  },
  "salade verte": {
@@ -42541,15 +42581,17 @@
  "style": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:184: row(title: family.name, detail: Fmt.plural(looks.count, tr(\"style\"), tr(\"styles\")), looks: looks, family: family.id)",
-   "App/Screens/Editor/StudioPanels.swift:246: Text(Fmt.plural(looks.count, tr(\"style\"), tr(\"styles\"))).font(.subheadline).foregroundStyle(.secondary)"
+   "App/Screens/Editor/StudioPanels.swift:192: row(title: family.name, detail: Fmt.plural(looks.count, tr(\"style\"), tr(\"styles\")), looks: looks, family: family.id)",
+   "App/Screens/Editor/StudioPanels.swift:258: Text(Fmt.plural(looks.count, tr(\"style\"), tr(\"styles\"))).font(.subheadline).foregroundStyle(.secondary)",
+   "App/Screens/Explore/ExploreView.swift:287: (.styles, Fmt.plural(StyleCatalog.all.count, tr(\"style\"), tr(\"styles\"))),"
   ]
  },
  "styles": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:184: row(title: family.name, detail: Fmt.plural(looks.count, tr(\"style\"), tr(\"styles\")), looks: looks, family: family.id)",
-   "App/Screens/Editor/StudioPanels.swift:246: Text(Fmt.plural(looks.count, tr(\"style\"), tr(\"styles\"))).font(.subheadline).foregroundStyle(.secondary)"
+   "App/Screens/Editor/StudioPanels.swift:192: row(title: family.name, detail: Fmt.plural(looks.count, tr(\"style\"), tr(\"styles\")), looks: looks, family: family.id)",
+   "App/Screens/Editor/StudioPanels.swift:258: Text(Fmt.plural(looks.count, tr(\"style\"), tr(\"styles\"))).font(.subheadline).foregroundStyle(.secondary)",
+   "App/Screens/Explore/ExploreView.swift:287: (.styles, Fmt.plural(StyleCatalog.all.count, tr(\"style\"), tr(\"styles\"))),"
   ]
  },
  "sur %@": {
@@ -42937,8 +42979,8 @@
   "uses": [
    "App/Premium/PaywallContext.swift:109: detail: tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) prêts à poser d'un coup, avec leurs styles.\"),",
    "App/Premium/PaywallContext.swift:120: detail: tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) assortis, à personnaliser et ajouter ensemble.\"),",
-   "App/Screens/Explore/ExploreView.swift:616: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
-   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))"
+   "App/Screens/Explore/ExploreView.swift:286: (.widgets, Fmt.plural(WidgetKind.allCases.count, tr(\"widget\"), tr(\"widgets\"))),",
+   "App/Screens/Explore/ExploreView.swift:727: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))"
   ]
  },
  "widget ajouté": {
@@ -42958,8 +43000,8 @@
   "uses": [
    "App/Premium/PaywallContext.swift:109: detail: tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) prêts à poser d'un coup, avec leurs styles.\"),",
    "App/Premium/PaywallContext.swift:120: detail: tr(\"\\(Fmt.plural(designs.count, tr(\"widget\"), tr(\"widgets\"))) assortis, à personnaliser et ajouter ensemble.\"),",
-   "App/Screens/Explore/ExploreView.swift:616: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))",
-   "App/Screens/Explore/StoreMagazine.swift:81: Text(tr(\"\\(Fmt.plural(setup.widgets.count, tr(\"widget\"), tr(\"widgets\"))) · fond d'écran assorti\"))"
+   "App/Screens/Explore/ExploreView.swift:286: (.widgets, Fmt.plural(WidgetKind.allCases.count, tr(\"widget\"), tr(\"widgets\"))),",
+   "App/Screens/Explore/ExploreView.swift:727: MagazineHeader(title: tr(\"Widgets\"), subtitle: Fmt.plural(templates.count, tr(\"widget\"), tr(\"widgets\")))"
   ]
  },
  "widgets ajoutés": {
@@ -43098,12 +43140,6 @@
   "placeholders": 0,
   "uses": [
    "App/Screens/Home/MiniAppsRow.swift:230: Text(tr(\"À découvrir\"))"
-  ]
- },
- "À découvrir cette semaine": {
-  "placeholders": 0,
-  "uses": [
-   "App/Screens/Explore/ExploreView.swift:307: shelfRow(tr(\"À découvrir cette semaine\")) {"
   ]
  },
  "À définir": {
@@ -43616,7 +43652,7 @@
   "uses": [
    "App/Core/MarketingShots.swift:637: MarketingHeadline(eyebrow: tr(\"Écrans d'accueil\"), title: tr(\"Ton écran\\nd'accueil,\\ndéjà stylé.\"))",
    "App/Screens/Explore/ExploreView.swift:27: case .screens: tr(\"Écrans d'accueil\")",
-   "App/Screens/Explore/ExploreView.swift:570: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
+   "App/Screens/Explore/ExploreView.swift:681: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))",
    "App/Screens/Explore/HomeSetupViews.swift:524: .navigationTitle(tr(\"Écrans d'accueil\"))"
   ]
  },
@@ -43779,8 +43815,8 @@
  "Épaisseur": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Editor/StudioPanels.swift:473: StudioSlider(title: tr(\"Épaisseur\"), value: $design.style.borderWidth, range: 0.5...6, step: 0.5, format: { String(format: \"%.1f pt\", $0) })",
-   "App/Screens/Editor/StudioPanels.swift:510: StudioSlider(title: tr(\"Épaisseur\"), value: $design.style.chartThickness, range: 0.5...2.5, step: 0.1, format: { String(format: \"×%.1f\", $0) })"
+   "App/Screens/Editor/StudioPanels.swift:485: StudioSlider(title: tr(\"Épaisseur\"), value: $design.style.borderWidth, range: 0.5...6, step: 0.5, format: { String(format: \"%.1f pt\", $0) })",
+   "App/Screens/Editor/StudioPanels.swift:522: StudioSlider(title: tr(\"Épaisseur\"), value: $design.style.chartThickness, range: 0.5...2.5, step: 0.1, format: { String(format: \"×%.1f\", $0) })"
   ]
  },
  "Épargne": {
@@ -44089,9 +44125,9 @@
   "placeholders": 0,
   "uses": [
    "App/Core/DailyBrief.swift:194: case .studies: return tr(\"Études\")",
+   "App/Screens/Explore/ExploreView.swift:238: (tr(\"Études\"), \"graduationcap\", \"6D4AE8\", .student),",
    "App/Screens/Explore/HomeSetups.swift:295: id: \"etudes\", name: tr(\"Études\"), tagline: tr(\"Cours, examens et priorités sur papier pointillé.\"),",
-   "App/Screens/Home/MyInfoSection.swift:67: add(\"field\", \"graduationcap\", tr(\"Études\"), profile.studyField.trimmed.nonEmpty)",
-   "App/Screens/MiniApps/MiniApp.swift:18: case .studies: tr(\"Études\")"
+   "App/Screens/Home/MyInfoSection.swift:67: add(\"field\", \"graduationcap\", tr(\"Études\"), profile.studyField.trimmed.nonEmpty)"
   ]
  },
  "Étudiant": {
@@ -44244,13 +44280,25 @@
  "écran": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:570: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
+   "App/Screens/Explore/ExploreView.swift:681: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
+  ]
+ },
+ "écran [home]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:285: (.screens, Fmt.plural(HomeSetupCatalog.all.count, tr(\"écran\", context: \"home\"), tr(\"écrans\", context: \"home\"))),"
   ]
  },
  "écrans": {
   "placeholders": 0,
   "uses": [
-   "App/Screens/Explore/ExploreView.swift:570: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
+   "App/Screens/Explore/ExploreView.swift:681: MagazineHeader(title: tr(\"Écrans d'accueil\"), subtitle: Fmt.plural(setups.count, tr(\"écran\"), tr(\"écrans\")))"
+  ]
+ },
+ "écrans [home]": {
+  "placeholders": 0,
+  "uses": [
+   "App/Screens/Explore/ExploreView.swift:285: (.screens, Fmt.plural(HomeSetupCatalog.all.count, tr(\"écran\", context: \"home\"), tr(\"écrans\", context: \"home\"))),"
   ]
  },
  "élément": {
