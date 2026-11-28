@@ -1304,4 +1304,12 @@ widget timetable-l-look-ballet-rose-vertical kind=timetable family=large scale=3
 widget timetable-l-look-ballet-rose-auto kind=timetable family=large scale=3 look=ballet-rose layout=auto
 widget timetable-l-look-aura-spirit-vertical kind=timetable family=large scale=3 look=aura-spirit layout=vertical
 widget timetable-l-look-aura-spirit-auto kind=timetable family=large scale=3 look=aura-spirit layout=auto
-only timetable-l-look-ballet-rose-vertical timetable-l-look-ballet-rose-auto timetable-l-look-aura-spirit-vertical timetable-l-look-aura-spirit-auto
+# 2026-11-27 : pub principale v3, accueils comme les vidéos du PDG (Objectif S + icônes, Macros M, Habitudes M), 4 styles.
+widget revenueGoal-s-light kind=revenueGoal family=small scale=4 theme=light
+widget revenueGoal-s-look-ballet-rose kind=revenueGoal family=small scale=4 look=ballet-rose
+widget habits-m-look-ballet-rose kind=habits family=medium scale=3 look=ballet-rose
+widget revenueGoal-s-look-cyber-neon-pluie kind=revenueGoal family=small scale=4 look=cyber-neon-pluie
+widget habits-m-look-cyber-neon-pluie kind=habits family=medium scale=3 look=cyber-neon-pluie
+widget revenueGoal-s-look-aura-spirit kind=revenueGoal family=small scale=4 look=aura-spirit
+widget habits-m-look-aura-spirit kind=habits family=medium scale=3 look=aura-spirit
+only macros-m-light habits-m-light revenueGoal-s-light revenueGoal-s-look-ballet-rose habits-m-look-ballet-rose macros-m-look-ballet-rose revenueGoal-s-look-cyber-neon-pluie habits-m-look-cyber-neon-pluie macros-m-look-cyber-neon-pluie revenueGoal-s-look-aura-spirit habits-m-look-aura-spirit macros-m-look-aura-spirit
