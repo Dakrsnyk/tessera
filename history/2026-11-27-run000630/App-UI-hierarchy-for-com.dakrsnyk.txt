@@ -1,0 +1,153 @@
+Application, 0x11490d780, pid: 35475, label: 'Ardane' <App element pid: 35475>
+  Window (Main), 0x11490e2e0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4410895568.4>
+    Other, 0x114919390, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4410913424.5>
+      Other, 0x1149194b0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4410914448.6>
+        Other, 0x114919240, {{-402.0, -874.0}, {1206.0, 2622.0}} <AX element pid: 35475, elementOrHash.elementID: 4523259264.566>
+        Other, 0x1037ab700, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4410751088.7>
+          Other, 0x1149195d0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4717080736.8>
+            Other, 0x1149196f0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4410970944.9>
+              Other, 0x114919810, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4410972208.10>
+                Other, 0x114919930, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4407455408.12>
+                  Other, 0x114919a50, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4411004592.15>
+                    Other, 0x114919b70, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4718325536.18>
+                      Other, 0x114919c90, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4716587856.21>
+                        Other, 0x114919db0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4408826704.27>
+                          NavigationBar, 0x114919ed0, {{0.0, 62.0}, {402.0, 106.0}}, identifier: 'Créer' <AX element pid: 35475, elementOrHash.elementID: 4717434576.35>
+                            StaticText, 0x114919ff0, {{16.0, 119.7}, {88.3, 40.7}}, label: 'Créer' <AX element pid: 35475, elementOrHash.elementID: 4717694432.555>
+                          Other, 0x11491a110, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4408996144.36>
+                            Other, 0x11491a230, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4717321872.46>
+                              Other, 0x11491a350, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4716985408.59>
+                                Other, 0x11491a470, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4716422400.63>
+                                  Other, 0x11491a590, {{-194.4, 0.0}, {729.4, 882.3}} <AX element pid: 35475, elementOrHash.elementID: 4716025168.65>
+                                  ScrollView, 0x11491a6b0, {{0.0, 0.0}, {402.0, 874.0}}, identifier: 'create-start' <AX element pid: 35475, elementOrHash.elementID: 4432146944.66>
+                                    Other, 0x11491a7d0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4408302720.68>
+                                      Other, 0x11491a8f0, {{0.0, 0.0}, {402.0, 170.8}} <AX element pid: 35475, elementOrHash.elementID: 4410855280.84>
+                                      Other, 0x11491aa10, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 35475, elementOrHash.elementID: 4408965776.85>
+                                    Other, 0x11491ab30, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4408302304.69>
+                                      Other, 0x11491ac50, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 35475, elementOrHash.elementID: 4717114448.86>
+                                        Image, 0x11491ad70, {{-120.0, 731.0}, {642.0, 286.0}}, identifier: 'AdditionalDimmingOverlay' <AX element pid: 35475, elementOrHash.elementID: 4717560400.115>
+                                        Other, 0x11491ae90, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 35475, elementOrHash.elementID: 4716809104.116>
+                                          Other, 0x11491afb0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 35475, elementOrHash.elementID: 4409098592.157>
+                                        Other, 0x11491b0d0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 35475, elementOrHash.elementID: 4717541840.117>
+                                          Other, 0x11491b1f0, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 35475, elementOrHash.elementID: 4716569824.158>
+                                          Other, 0x11491b310, {{0.0, 726.2}, {402.0, 147.8}} <AX element pid: 35475, elementOrHash.elementID: 4717297584.562>
+                                    Other, 0x11491b430, {{0.0, 168.0}, {402.0, 677.7}} <AX element pid: 35475, elementOrHash.elementID: 4409020240.71>
+                                      StaticText, 0x11491b550, {{20.0, 172.0}, {302.7, 26.3}}, label: 'Quelle taille pour ton widget ?' <AX element pid: 35475, elementOrHash.elementID: 4716334176.87>
+                                      StaticText, 0x11491b670, {{20.0, 202.3}, {299.3, 38.0}}, label: 'Tu pourras y réunir plusieurs widgets d'une même catégorie.' <AX element pid: 35475, elementOrHash.elementID: 4410964176.88>
+                                      Button, 0x11491b790, {{20.0, 252.3}, {362.0, 136.3}}, identifier: 'create-size-small', label: 'Petit, L'essentiel en un coup d'œil., 1 widget, La place de 4 icônes' <AX element pid: 35475, elementOrHash.elementID: 4411147616.89>
+                                        Image, 0x11491b8b0, {{75.7, 287.3}, {66.7, 66.3}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 35475, elementOrHash.elementID: 4715786016.118>
+                                        StaticText, 0x11491b9d0, {{198.0, 266.3}, {44.0, 24.0}}, label: 'Petit' <AX element pid: 35475, elementOrHash.elementID: 4410958400.119>
+                                        StaticText, 0x11491baf0, {{198.0, 294.3}, {104.7, 33.7}}, label: 'L'essentiel en un coup d'œil.' <AX element pid: 35475, elementOrHash.elementID: 4410921728.120>
+                                        StaticText, 0x11491bc10, {{207.0, 338.0}, {50.7, 14.3}}, label: '1 widget' <AX element pid: 35475, elementOrHash.elementID: 4410944128.121>
+                                        StaticText, 0x11491bd30, {{198.0, 360.3}, {120.0, 14.3}}, label: 'La place de 4 icônes' <AX element pid: 35475, elementOrHash.elementID: 4411109680.122>
+                                        Image, 0x11491be50, {{360.7, 314.7}, {6.7, 11.7}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 35475, elementOrHash.elementID: 4715665072.123>
+                                      Button, 0x11491bf70, {{20.0, 398.7}, {362.0, 172.3}}, identifier: 'create-size-medium', label: 'Moyen, Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte., 1 ou 2 widgets, La place de 8 icônes' <AX element pid: 35475, elementOrHash.elementID: 4716031312.90>
+                                        Image, 0x11491c1c0, {{69.7, 479.7}, {10.3, 10.3}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 35475, elementOrHash.elementID: 4715502464.124>
+                                        Image, 0x11491c2e0, {{138.0, 479.7}, {10.3, 10.3}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 35475, elementOrHash.elementID: 4715473312.125>
+                                        StaticText, 0x11491c400, {{198.0, 412.7}, {63.0, 24.0}}, label: 'Moyen' <AX element pid: 35475, elementOrHash.elementID: 4715933568.126>
+                                        StaticText, 0x11491c520, {{198.0, 440.7}, {146.0, 69.7}}, label: 'Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte.' <AX element pid: 35475, elementOrHash.elementID: 4716018400.127>
+                                        StaticText, 0x11491c640, {{207.0, 520.3}, {86.3, 14.3}}, label: '1 ou 2 widgets' <AX element pid: 35475, elementOrHash.elementID: 4716322096.128>
+                                        StaticText, 0x11491c760, {{198.0, 542.7}, {120.0, 14.3}}, label: 'La place de 8 icônes' <AX element pid: 35475, elementOrHash.elementID: 4411319424.129>
+                                        Image, 0x11491c880, {{360.7, 479.0}, {6.7, 11.7}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 35475, elementOrHash.elementID: 4716166976.130>
+                                      Button, 0x11491c9a0, {{20.0, 581.0}, {362.0, 176.7}}, identifier: 'create-size-large', label: 'Grand, Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis., 1 à 4 widgets, La place de 16 icônes' <AX element pid: 35475, elementOrHash.elementID: 4716416864.91>
+                                        Image, 0x11491cbe0, {{69.7, 628.3}, {10.3, 10.3}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 35475, elementOrHash.elementID: 4716174016.131>
+                                        Image, 0x11491cd00, {{138.0, 628.3}, {10.3, 10.3}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 35475, elementOrHash.elementID: 4716011824.132>
+                                        Image, 0x11491ce20, {{69.7, 700.0}, {10.3, 10.3}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 35475, elementOrHash.elementID: 4716195232.133>
+                                        Image, 0x11491cf40, {{138.0, 700.0}, {10.3, 10.3}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 35475, elementOrHash.elementID: 4716385504.134>
+                                        StaticText, 0x11491d060, {{198.0, 597.2}, {57.7, 24.0}}, label: 'Grand' <AX element pid: 35475, elementOrHash.elementID: 4716385936.135>
+                                        StaticText, 0x11491d180, {{198.0, 625.2}, {143.3, 69.7}}, label: 'Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis.' <AX element pid: 35475, elementOrHash.elementID: 4716375744.136>
+                                        StaticText, 0x11491d2a0, {{207.0, 704.8}, {79.0, 14.3}}, label: '1 à 4 widgets' <AX element pid: 35475, elementOrHash.elementID: 4716376176.137>
+                                        StaticText, 0x11491d3c0, {{198.0, 727.2}, {126.0, 14.3}}, label: 'La place de 16 icônes' <AX element pid: 35475, elementOrHash.elementID: 4716376608.138>
+                                        Image, 0x11491d4e0, {{360.7, 663.7}, {6.7, 11.7}}, identifier: 'chevron.right', label: 'Suivant' <AX element pid: 35475, elementOrHash.elementID: 4716367760.139>
+                                      Button, 0x11491d600, {{97.7, 782.8}, {208.8, 18.0}}, identifier: 'create-lock', label: 'Widget d'écran verrouillé' <AX element pid: 35475, elementOrHash.elementID: 4716419504.92>
+                                        Image, 0x11491d720, {{97.7, 784.0}, {19.0, 15.7}}, identifier: 'lock.rectangle.on.rectangle', label: 'lock.rectangle.on.rectangle' <AX element pid: 35475, elementOrHash.elementID: 4716417760.140>
+                                        StaticText, 0x11491d840, {{97.7, 782.8}, {208.8, 18.0}}, label: 'Widget d'écran verrouillé' <AX element pid: 35475, elementOrHash.elementID: 4716418192.141>
+                                    Other, 0x11491d960, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Barre de défilement verticale, 2 pages', value: 0 % <AX element pid: 35475, elementOrHash.elementID: 4407542048.72>
+                                      Other, 0x11491da80, {{396.0, 119.0}, {3.0, 629.7}} <AX element pid: 35475, elementOrHash.elementID: 4522869376.93>
+                                    Other, 0x11491dba0, {{369.0, 116.0}, {30.0, 675.0}}, label: 'Barre de défilement verticale, 2 pages', value: 0 % <AX element pid: 35475, elementOrHash.elementID: 4407542048.72>
+                                      Other, 0x11491dcc0, {{396.0, 119.0}, {3.0, 629.7}} <AX element pid: 35475, elementOrHash.elementID: 4522869376.93>
+                          Other, 0x11491dde0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4409129840.37>
+                            Other, 0x11491df00, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4409132112.47>
+              Other, 0x11491e020, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 35475, elementOrHash.elementID: 4410815952.11>
+                Other, 0x11491e140, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4410989536.13>
+                  TabBar, 0x11491e260, {{0.0, 791.0}, {402.0, 83.0}}, label: 'Barre d’onglets' <AX element pid: 35475, elementOrHash.elementID: 4410974816.16>
+                    Other, 0x11491e380, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 35475, elementOrHash.elementID: 4410976640.19>
+                      Other, 0x11491e4a0, {{21.0, 791.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4407482352.22>
+                      Other, 0x11491e5c0, {{21.0, 791.0}, {360.0, 62.0}} <AX element pid: 35475, elementOrHash.elementID: 4410977056.23>
+                        Button, 0x11491e6e0, {{25.0, 795.0}, {102.3, 54.0}}, identifier: 'square.grid.2x2', label: 'Accueil' <AX element pid: 35475, elementOrHash.elementID: 4412886016.28>
+                          Image, 0x11491e800, {{63.0, 802.3}, {27.0, 25.0}}, identifier: 'square.grid.2x2.fill', label: 'grille 2x2' <AX element pid: 35475, elementOrHash.elementID: 4407304288.38>
+                        Button, 0x11491e920, {{108.2, 795.0}, {102.3, 54.0}}, identifier: 'plus.square.on.square', label: 'Créer', Selected <AX element pid: 35475, elementOrHash.elementID: 4412947456.29>
+                          Image, 0x11491ea40, {{144.2, 800.7}, {30.3, 29.7}}, identifier: 'plus.square.fill.on.square.fill', label: 'dupliquer' <AX element pid: 35475, elementOrHash.elementID: 4407358880.39>
+                        Button, 0x11491eb60, {{191.4, 795.0}, {102.3, 54.0}}, identifier: 'bag', label: 'Store' <AX element pid: 35475, elementOrHash.elementID: 4412995072.30>
+                          Image, 0x11491ec80, {{229.4, 801.3}, {26.3, 27.0}}, identifier: 'bag.fill', label: 'cabas' <AX element pid: 35475, elementOrHash.elementID: 4407392448.40>
+                        Button, 0x11491eda0, {{274.7, 795.0}, {102.3, 54.0}}, identifier: 'rectangle.stack', label: 'Mes widgets' <AX element pid: 35475, elementOrHash.elementID: 4412990976.31>
+                          Image, 0x11491eec0, {{310.7, 800.0}, {30.0, 31.3}}, identifier: 'rectangle.stack.fill', label: 'Album' <AX element pid: 35475, elementOrHash.elementID: 4407421152.41>
+                      Other, 0x11491efe0, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410990112.24>
+                        Other, 0x11491f100, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410991616.32>
+                          Other, 0x11491f220, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410978496.42>
+                          Other, 0x11491f340, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410992032.43>
+                            Other, 0x11491f460, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410994832.48>
+                              Other, 0x11491f580, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410995760.54>
+                                Other, 0x11491f6a0, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410997200.58>
+                              Other, 0x11491f7c0, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410992496.55>
+                            Other, 0x11491f8e0, {{108.2, 795.0}, {102.3, 54.0}} <AX element pid: 35475, elementOrHash.elementID: 4410994416.49>
+                Other, 0x11491fa00, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 35475, elementOrHash.elementID: 4410972816.14>
+                  Other, 0x11491fb20, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 35475, elementOrHash.elementID: 4407457776.17>
+                    Other, 0x11491fc40, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 35475, elementOrHash.elementID: 4407458640.20>
+                      Other, 0x11491fd60, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 35475, elementOrHash.elementID: 4407382224.25>
+                        Other, 0x11491fe80, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 35475, elementOrHash.elementID: 4408103008.33>
+                          Other, 0x11491ffa0, {{0.0, 791.0}, {402.0, 83.0}} <AX element pid: 35475, elementOrHash.elementID: 4407383264.44>
+    Other, 0x1149200c0, {{0.0, 0.0}, {402.0, 874.0}} <AX element pid: 35475, elementOrHash.elementID: 4537715424.563>
+      Other, 0x1149201e0, {{-402.0, -874.0}, {1206.0, 2622.0}} <AX element pid: 35475, elementOrHash.elementID: 4407709776.564>
+      Other, 0x114920300, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4411153328.565>
+        Other, 0x114920420, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4715966992.567>
+          Other, 0x114920540, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4716065200.568>
+            Other, 0x114920660, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4407533008.569>
+              Other, 0x114920780, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4715830192.570>
+                Other, 0x1149208a0, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4407436320.571>
+                  NavigationBar, 0x1149209c0, {{0.0, 78.0}, {402.0, 54.0}}, identifier: 'Ajouter un widget' <AX element pid: 35475, elementOrHash.elementID: 4858631152.572>
+                    StaticText, 0x114920ae0, {{130.7, 89.7}, {140.7, 20.7}}, label: 'Ajouter un widget' <AX element pid: 35475, elementOrHash.elementID: 4538010560.575>
+                    Other, 0x114920c00, {{290.7, 82.0}, {91.3, 36.0}}, label: 'Compris' <AX element pid: 35475, elementOrHash.elementID: 4432869888.576>
+                      Other, 0x114920d20, {{290.7, 82.0}, {91.3, 36.0}} <AX element pid: 35475, elementOrHash.elementID: 4718450096.579>
+                        Button, 0x114920e40, {{290.7, 82.0}, {91.3, 36.0}}, label: 'Compris' <AX element pid: 35475, elementOrHash.elementID: 4718336112.581>
+                  Other, 0x114920f60, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4407584976.573>
+                    Other, 0x114921080, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4716629984.577>
+                      Other, 0x1149211a0, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4411175984.580>
+                        Other, 0x1149212c0, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4717307600.582>
+                          Other, 0x1149213e0, {{-194.4, 62.0}, {729.4, 819.7}} <AX element pid: 35475, elementOrHash.elementID: 4408812736.583>
+                          ScrollView, 0x114921500, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4824716288.584>
+                            Other, 0x114921620, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4523298864.585>
+                              Other, 0x114921740, {{0.0, 62.0}, {402.0, 124.8}} <AX element pid: 35475, elementOrHash.elementID: 4716936672.589>
+                            Other, 0x114921860, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4523298448.586>
+                            Other, 0x114921980, {{0.0, 132.0}, {402.0, 667.7}} <AX element pid: 35475, elementOrHash.elementID: 4523297680.587>
+                              StaticText, 0x114921aa0, {{21.3, 152.0}, {345.0, 20.3}}, label: '« Calories restantes + Macros » est prêt' <AX element pid: 35475, elementOrHash.elementID: 4716873920.590>
+                              SegmentedControl, 0x114921bc0, {{20.0, 192.3}, {362.0, 31.0}} <AX element pid: 35475, elementOrHash.elementID: 4821727280.591>
+                                Button, 0x114921ce0, {{20.0, 192.3}, {181.0, 32.0}}, label: 'Écran d'accueil', Selected <AX element pid: 35475, elementOrHash.elementID: 4537838064.599>
+                                Button, 0x114921e00, {{201.0, 192.3}, {181.0, 32.0}}, label: 'Écran verrouillé' <AX element pid: 35475, elementOrHash.elementID: 4858721120.600>
+                              StaticText, 0x114921f20, {{40.0, 263.3}, {297.0, 54.3}}, label: 'Étape 1, Appuie longuement sur un espace vide de l'écran d'accueil' <AX element pid: 35475, elementOrHash.elementID: 4716807152.592>
+                                Image, 0x114922040, {{40.0, 270.7}, {40.0, 40.0}}, identifier: 'hand.tap', label: 'hand.tap' <AX element pid: 35475, elementOrHash.elementID: 4716959088.601>
+                                StaticText, 0x114922160, {{94.0, 263.3}, {43.0, 14.3}}, label: 'Étape 1' <AX element pid: 35475, elementOrHash.elementID: 4717091824.602>
+                                StaticText, 0x114922280, {{94.0, 279.7}, {243.0, 38.0}}, label: 'Appuie longuement sur un espace vide de l'écran d'accueil' <AX element pid: 35475, elementOrHash.elementID: 4717453904.603>
+                              StaticText, 0x1149223a0, {{40.0, 333.7}, {292.7, 54.3}}, label: 'Étape 2, Touche « Modifier » en haut, puis « Ajouter un widget »' <AX element pid: 35475, elementOrHash.elementID: 4717476320.593>
+                                Image, 0x1149224c0, {{40.0, 341.0}, {40.0, 40.0}}, identifier: 'plus', label: 'Ajouter' <AX element pid: 35475, elementOrHash.elementID: 4717349456.604>
+                                StaticText, 0x1149225e0, {{94.0, 333.7}, {44.7, 14.3}}, label: 'Étape 2' <AX element pid: 35475, elementOrHash.elementID: 4717201184.605>
+                                StaticText, 0x114922700, {{94.0, 350.0}, {238.7, 38.0}}, label: 'Touche « Modifier » en haut, puis « Ajouter un widget »' <AX element pid: 35475, elementOrHash.elementID: 4718420016.606>
+                              StaticText, 0x114922820, {{40.0, 404.0}, {308.7, 94.3}}, label: 'Étape 3, Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu'à la taille Moyen : « Calories restantes + Macros » y est' <AX element pid: 35475, elementOrHash.elementID: 4716965920.594>
+                                Image, 0x114922a60, {{40.0, 431.3}, {40.0, 40.0}}, identifier: 'magnifyingglass', label: 'Rechercher' <AX element pid: 35475, elementOrHash.elementID: 4717386128.607>
+                                StaticText, 0x114922b80, {{94.0, 404.0}, {45.0, 14.3}}, label: 'Étape 3' <AX element pid: 35475, elementOrHash.elementID: 4717073264.608>
+                                StaticText, 0x114922ca0, {{94.0, 420.3}, {254.7, 78.0}}, label: 'Cherche « Ardane », puis « Mes widgets », et fais défiler jusqu'à la taille Moyen : « Calories restantes + Macros » y est' <AX element pid: 35475, elementOrHash.elementID: 4718404640.609>
+                              StaticText, 0x114922ed0, {{40.0, 514.3}, {310.7, 54.3}}, label: 'Étape 4, Ajoute-le : il garde ce widget, même quand tu en crées d'autres' <AX element pid: 35475, elementOrHash.elementID: 4409182448.595>
+                                Image, 0x114922ff0, {{40.0, 521.7}, {40.0, 40.0}}, identifier: 'pin', label: 'Repère' <AX element pid: 35475, elementOrHash.elementID: 4716860320.610>
+                                StaticText, 0x114923110, {{94.0, 514.3}, {45.0, 14.3}}, label: 'Étape 4' <AX element pid: 35475, elementOrHash.elementID: 4716615968.611>
+                                StaticText, 0x114923230, {{94.0, 530.7}, {256.7, 38.0}}, label: 'Ajoute-le : il garde ce widget, même quand tu en crées d'autres' <AX element pid: 35475, elementOrHash.elementID: 4716669216.612>
+                              StaticText, 0x114923350, {{40.0, 584.7}, {318.7, 74.3}}, label: 'Étape 5, Une fois ajouté, touche le widget pendant que les icônes bougent pour choisir un autre de tes widgets' <AX element pid: 35475, elementOrHash.elementID: 4716618320.596>
+                                Image, 0x114923470, {{40.0, 602.0}, {40.0, 40.0}}, identifier: 'slider.horizontal.3', label: 'Modifier' <AX element pid: 35475, elementOrHash.elementID: 4717392960.613>
+                                StaticText, 0x114923590, {{94.0, 584.7}, {44.7, 14.3}}, label: 'Étape 5' <AX element pid: 35475, elementOrHash.elementID: 4717393392.614>
+                                StaticText, 0x1149236b0, {{94.0, 601.0}, {264.7, 58.0}}, label: 'Une fois ajouté, touche le widget pendant que les icônes bougent pour choisir un autre de tes widgets' <AX element pid: 35475, elementOrHash.elementID: 4717276336.615>
+                              StaticText, 0x1149237d0, {{35.7, 714.0}, {314.3, 51.8}}, label: 'Pour changer le contenu d'un widget déjà posé : appui long sur le widget, puis « Modifier le widget ».' <AX element pid: 35475, elementOrHash.elementID: 4716650800.597>
+                            Other, 0x1149238f0, {{369.0, 132.0}, {30.0, 680.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 % <AX element pid: 35475, elementOrHash.elementID: 4717291904.588>
+                              Other, 0x114923a10, {{396.0, 175.3}, {3.0, 639.7}} <AX element pid: 35475, elementOrHash.elementID: 4717292368.598>
+                            Other, 0x114923b30, {{369.0, 132.0}, {30.0, 680.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 % <AX element pid: 35475, elementOrHash.elementID: 4717291904.588>
+                              Other, 0x114923c50, {{396.0, 175.3}, {3.0, 639.7}} <AX element pid: 35475, elementOrHash.elementID: 4717292368.598>
+                  Other, 0x114923d70, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4407630208.574>
+                    Other, 0x114923e90, {{0.0, 62.0}, {402.0, 812.0}} <AX element pid: 35475, elementOrHash.elementID: 4522908320.578>

@@ -1,0 +1,601 @@
+run: 598
+commit: c9676902f72bc96bd3e490670f8332d7538bc907
+static: success
+simulator: success
+device: success
+tests: success
+ipa: none (the test IPA is no longer built or published)
+screenshots: success
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped
+---- errors ----
+OK: 4355 memberwise calls checked, 99 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 7012 texts in the code, 0 not in the catalog, 0 untranslated, 0 unused in the catalog
+---- tests ----
+Test Case '-[ArdaneTests.AccentedRenderingTests testADoneHabitStaysTheStrongerStateWithoutColors]' passed (0.006 seconds).
+Test Case '-[ArdaneTests.AccentedRenderingTests testFullColorStaysExactlyAsDesigned]' passed (0.528 seconds).
+Test Case '-[ArdaneTests.AccentedRenderingTests testOnlyTheAppearancesWithoutColorsChangeTheWidget]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AccentedRenderingTests testPartsOfAWholeStayApartWithoutColors]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.AccentedRenderingTests testTextOnAFilledShapeStaysReadableWithoutColors]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AccentedRenderingTests testTheStyleBecomesAnOpacityHierarchyWithoutColors]' passed (0.019 seconds).
+Test Case '-[ArdaneTests.AccentedRenderingTests testTodayStandsOutOfTheYearWithoutColors]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AnatomyFiguresTests testEveryMuscleGroupHasItsFigureFramedOnTheMuscle]' passed (0.092 seconds).
+Test Case '-[ArdaneTests.AnatomyFiguresTests testTheExerciseDemonstrationsAreUntouched]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.AnatomyFiguresTests testTheMuscleIsInRed]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AnatomyFiguresTests testTheProgressCategoriesShowTheirMuscles]' passed (0.012 seconds).
+Test Case '-[ArdaneTests.AppIconPremiumTests testAnIconAlreadyInPlaceIsKeptAndTheMainOneCanComeBack]' passed (0.017 seconds).
+Test Case '-[ArdaneTests.AppIconPremiumTests testPremiumChangesTheIconFreely]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppIconPremiumTests testWithoutPremiumOnlyAnotherIconIsLocked]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppPaletteTests testAutoModeIsNotTheCar]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppPaletteTests testBackgroundsKeepTheSameCharacterWhateverTheHue]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppPaletteTests testFormerStylesDecodeToTheirClosestColor]' passed (1.346 seconds).
+Test Case '-[ArdaneTests.AppPaletteTests testNewColorsDoNotStealFormerNamesAndGraphiteIsNeutral]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppPaletteTests testTextOnAPastelAccentInDarkModeIsDark]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppPaletteTests testTwelveColorsWithTheirExactHexInOrder]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppThemePremiumTests testAnOldSavedSettingKeepsItsValue]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.AppThemePremiumTests testEndOfPremiumKeepsTheSavedChoice]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.AppThemePremiumTests testFreePlanOnJadeShowsSaphir]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppThemePremiumTests testOnlySaphirIsFree]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppThemePremiumTests testPremiumKeepsItsColor]' passed (0.025 seconds).
+Test Case '-[ArdaneTests.AppThemePremiumTests testSaphirIsAlwaysAvailable]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppThemePremiumTests testSaphirIsTheDefault]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testAppIconsComeWithTheirPictureAndTheLogoFirst]' passed (0.014 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testCollectionsAreDistinctAndFilled]' passed (1.214 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testCombinationSampleShowsEveryPart]' passed (0.543 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testCombinationsFollowTheMergeRules]' passed (0.021 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testEveryStyleIsDefinedOnce]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testFocusGroupNeverDefaultsToARetiredWidget]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testPacksAreDistinctAndShowable]' passed (0.078 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testSettingsFromBeforeStylesDecodeWithDefaults]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testSetupsFitOnAPhone]' passed (0.069 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testSpaceExamplesUseSupportedSizes]' passed (0.010 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testStoreShelvesUseSupportedSizes]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testStyleAndProfileAreSaved]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testTheWeekTablePutsWhatOverlapsSideBySide]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.AppearanceAndStoreTests testThisWeeksEditionIsStableAllWeek]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testADifferentAmountOrMerchantIsNotADuplicate]' passed (0.024 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testADuplicateIsFoundEvenIfTheMerchantIsWrittenDifferently]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAGuessedCategoryNeedsReview]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAKeywordNeverPointsToADeletedCategory]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testALearnedRuleAppliesToTheSameMerchantOnly]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testALearnedRuleBeatsTheKeyword]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAManualExpenseIsNotTakenForAnApplePayDuplicate]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAManualExpenseIsUnchanged]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAmountsInFrenchAndEnglishFormats]' passed (0.655 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAmountsWithThousandsSeparators]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnApplePayExpenseIsRecorded]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnEmptyMerchantBecomesApplePay]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnExplicitForeignCurrencyIsKeptToBeChecked]' passed (0.147 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnIdenticalPaymentAfterTheWindowIsAdded]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnIdenticalPaymentInsideTheWindowIsADuplicate]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnOldBudgetWithoutTheNewFieldsDecodes]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnOldExpenseWithoutTheNewFieldsDecodes]' passed (0.148 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnUnknownMerchantHasNoCategory]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAnUnknownMerchantIsRecordedWithoutCategoryAndNeedsReview]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testApplePayAndManualExpensesCountTogether]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAQuickExpenseStillCreatesAPlainExpense]' passed (0.049 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testARecorderRunTwiceRecordsOnce]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testARefundIsIgnored]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testARefundIsNotAnExpenseAmount]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testAShoutedNameIsShownInProperCaseWithItsDigits]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testBudgetRoundTripKeepsTheRulesAndApplePayExpenses]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testBuiltInKeywordsGoToTheObviousDefaultCategory]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testBuiltInKeywordsPickAnExistingCategory]' passed (0.009 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testEmptyBudgetJSONHasNoRules]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testExpenseRoundTripKeepsTheNewFields]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testLearningAgainReplacesTheRule]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testLearningAMerchantCategoryIsUsedNextTime]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testLearningFromAnExpenseWithoutMerchantOrCategoryDoesNothing]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testLearningOverridesAKeywordCategory]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testMerchantNormalizationDropsTerminalNumberAndCity]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testMerchantNormalizationFoldsAccentsCaseAndSpaces]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testMerchantNormalizationOfNothing]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testRefundZeroAndUnreadableAmountsWriteNothing]' passed (0.017 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTheBudgetIsSavedAndReloadedThroughTheSharedStore]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTheCardIsOptional]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTheCurrencyOfTheSettingsAddsNothingToTheNote]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTheDuplicateWindowIsTwoMinutes]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTheOutcomeMessagesNameTheAmountAndTheShop]' passed (0.038 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTheRecorderWritesTheExpenseInTheSettingsCurrency]' passed (0.006 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTheSameMerchantWrittenDifferentlyNormalizesTheSame]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTheSameTransactionTwiceInARowIsRecordedOnce]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testTwoTriggersOfTheAutomationThroughTheStoreRecordOneExpense]' passed (0.029 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testUnusableAmountsAreIgnoredAndNothingIsAdded]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ApplePayExpenseTests testUnusableAmountsAreNeverInvented]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testAllowedGoalIsPure]' passed (0.006 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testALowBodyMassIndexNeverGetsADeficit]' passed (0.177 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testAMinorNeverGetsADeficit]' passed (0.024 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testAPhotoSharedByTwoWidgetsStaysWhenOneIsDeleted]' passed (0.256 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testAPremiumLookIsNotGivenWithoutPremium]' passed (0.247 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testARestoredBackupWithoutNutritionStillKeepsTheCount]' passed (0.114 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testChangingABackgroundKeepsAPhotoAnotherWidgetUses]' passed (0.079 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testNoGainFromAnObesityIndexButAdultsKeepTheirAim]' passed (0.096 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testOnlyTheCheckDateChangingWritesNothing]' passed (0.043 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testPregnancyAndBreastfeedingNeverGetADeficitOrASurplus]' passed (0.284 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testResetErasesTheStylesTheStepsAndTheMiniAppCounters]' passed (0.137 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testTheCalorieFloorAndTheRangesOfTheCalculation]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testTheCountOfFreeAnalysesNeverGoesDownWithABackup]' passed (0.024 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testTheCountOfFreeAnalysesSurvivesErasingTheData]' passed (3.771 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testTheLastFreeHabitIsTheLimitWithoutPremium]' passed (0.031 seconds).
+Test Case '-[ArdaneTests.Audit24AppModelTests testTheSheetGivesAFreeLookAndAsksForPremiumForAPremiumOne]' passed (0.275 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testABillOfThe31stKeepsItsDayAfterAShortMonth]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testAddingAnOperationNeverDeletesOldOnes]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testAPartialStripeReadDoesNotMoveTheSyncDateForward]' passed (1.731 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testAPriceInAnotherCurrencyIsConvertedOrLeftOut]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testAZeroPriceIsNotAPriceAndAPositionWithoutOneIsMarked]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testDeletingATripDeletesItsFlightsStaysAndActivities]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testThePreviousPeriodNeverSpillsIntoTheCurrentOne]' passed (0.058 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testTheTripBudgetIsReadWithTheLocaleThatWroteIt]' passed (0.022 seconds).
+Test Case '-[ArdaneTests.Audit24FinancesTests testWithoutABudgetTheQuickExpenseTileShowsWhatWasSpentNotARemainder]' passed (0.010 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testDoubleTapOnSkipExerciseSkipsOnlyOne]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testDueSwitchedOffClearsDateTimeAndRepeat]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testDueSwitchedOnWithoutTouchingThePickerIsSaved]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testFinishingAnIdleSessionLaterStillBoundsItsDuration]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testHabitEncodedFormatIsUnchanged]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testHabitFromAnOlderFormatWithoutAFieldIsStillRead]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testIdleSessionIsClosedWithoutCountingTheInactivity]' passed (0.029 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testIdleSessionWithoutSetIsDroppedAndAStaleButtonDoesNothing]' passed (1.062 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testLiveActivityIgnoresAnIdleSession]' passed (0.037 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testProductivityAndStudyTypesReadTheirHistoricalKeysOnly]' passed (0.029 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testRecordsSurviveBeyondThreeHundredSessions]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testRestAlertIsOfferedOnceWhateverTheAnswer]' passed (0.034 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testRestAlertIsOnlyPlannedForARestStillToCome]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24FitnessPlanningTests testSkippingTheLastExerciseArchivesTheFinishedSession]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24NutritionTests testCustomFoodCanBeEditedAndDeleted]' passed (0.008 seconds).
+Test Case '-[ArdaneTests.Audit24NutritionTests testCustomFoodValidation]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24NutritionTests testLoggedGramsAreClampedAndHugeStoredGramsDoNotCrash]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.Audit24NutritionTests testMissingFiberIsUnknownNotZero]' passed (0.041 seconds).
+Test Case '-[ArdaneTests.Audit24NutritionTests testQuickLogAndUpdateStayInsideTheLimits]' passed (0.721 seconds).
+Test Case '-[ArdaneTests.Audit24NutritionTests testTilesMarkAnIncompleteTotal]' passed (0.009 seconds).
+Test Case '-[ArdaneTests.Audit24NutritionTests testTotalsStayIncompleteWithAnUnknownMacro]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.Audit24PremiumTests testBillingGracePeriodKeepsAccessPastTheDate]' passed (0.085 seconds).
+Test Case '-[ArdaneTests.Audit24PremiumTests testEligibilityIsRecomputedAfterTheTrialIsClaimedElsewhere]' passed (1.620 seconds).
+Test Case '-[ArdaneTests.Audit24PremiumTests testExpiredRetryingOrRevokedSubscriptionHasNoAccess]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24PremiumTests testPurchaseErrorsHaveClearMessages]' passed (0.014 seconds).
+Test Case '-[ArdaneTests.Audit24PremiumTests testSubscriptionKeepsAccessUntilItsDate]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24PremiumTests testTermsLinkIsTheHostedPage]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.Audit24PrivacySensitiveTests testABillReminderCarriesNoAmount]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.Audit24PrivacySensitiveTests testNutritionFitnessAndPlanningWidgetsAreNotSensitive]' passed (0.721 seconds).
+Test Case '-[ArdaneTests.Audit24PrivacySensitiveTests testTheMoneyWidgetsAreMarkedSensitive]' passed (0.357 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testCountdownReminderIsKeptByAMergedWidgetAndNotOtherwise]' passed (0.009 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testCountdownReminderOfACombinedWidgetIsScheduled]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testEveryEngineKindHasARoute]' passed (0.017 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testMergedBackgroundWithoutAFileFallsBackToTheTheme]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testMergedWidgetKeepsItsBackgroundWhenTheOriginalsAreDeleted]' passed (0.017 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testNotificationsRouteToTheirScreen]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testPreviewMergeLeavesNoCopyBehind]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testRoomLeftForOtherReminders]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testSingleCountdownKeepsItsOwnIdentifierAndPastDaysGiveNothing]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testTheHistoryOnlyKeepsWhatIsPlanned]' passed (0.018 seconds).
+Test Case '-[ArdaneTests.Audit24WidgetsNotificationsTests testThePlanNeverPassesTheCeilingAndKeepsTheSoonest]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BackupOrphanPhotosTests testAForeignNameIsNotRestored]' passed (0.010 seconds).
+Test Case '-[ArdaneTests.BackupOrphanPhotosTests testARefusedBackupDeletesNothing]' passed (0.008 seconds).
+Test Case '-[ArdaneTests.BackupOrphanPhotosTests testRestoreDeletesOnlyTheOrphanPhotos]' passed (0.077 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testARentPaidOnTheFirstIsNotExtrapolated]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testBiggestRisesKeepOnlyRealRisesBiggestFirst]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testCategoryAverageIsTheMeanOfTheThreeEarlierMonthsAtTheSameDate]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testPriciestWeekdayIsNilWhenNothingWasSpent]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testProjectionIsNilWithoutAnySpending]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testProjectionKeepsTheCurrentPaceAndAddsWhatIsNotedAhead]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testProjectionOnTheFirstDayHasNoDivisionByZero]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testProjectionOnTheLastDayIsWhatWasSpent]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testSameLabelInThreeMonthsAtARegularAmountIsRecurring]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testSavingsIgnoresOtherMonths]' passed (0.007 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testSavingsRateIsIncomeMinusSpendingOverIncome]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testSavingsRateIsNegativeWhenSpendingExceedsIncome]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testSavingsRateWithoutIncomeIsNilAndEmptyMonthIsNil]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testTrendsWithoutHistoryHaveNoAverage]' passed (0.006 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testTwoOccurrencesInTheSameMonthDoNotMakeARecurrence]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testWeekdayAverageIsTheTotalOverTheNumberOfThatWeekday]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BudgetAnalysisTests testWeekdaysNeedEnoughHistory]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testABillOnThe31stFallsOnARealDayAndAYearlyOneCostsATwelfth]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testACategoryWithoutALimitHasNoRatioAndIsNeverOver]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testAMonthlyBudgetOfZeroNeverGoesNegativePerDayOrNotANumber]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testAnEmptyBudgetHasNothingSpentAndAllItsMonthLeft]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testAnExpenseAtMidnightOfTheFirstCountsInTheNewMonthOnly]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testAnExpenseJustBeforeMidnightOfTheLastDayStaysInItsMonth]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testAnExpenseWithAnUnknownCategoryIsKeptWithoutOne]' passed (0.078 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testAnIncomeAtMidnightOfTheFirstCountsInTheNewMonthOnly]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testAZeroAmountChangesNothingAndStillCountsAsAnExpense]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testSavingsGoalsIgnoreAnEmptyOrNegativePaymentAndStayWithinTheirBar]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BudgetBoundsTests testVeryLargeAmountsAddUpExactlyAndSurviveSaving]' passed (0.021 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testABalanceIsNeverAnAmount]' passed (0.018 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testAccountLinesAboveTheHeaderAndExcelSeparator]' passed (0.007 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testADebitWrittenNegativeIsStillACost]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testAFileImportedTheWrongWayRoundBeforeIsSetRight]' passed (0.009 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testAFileThatDoesntSayIsAskedAbout]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testANegativeAmountWithAnUnknownTypeIsACost]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testAPayPalExport]' passed (0.011 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testAQuickBooksTransactionList]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testASensColumnWithLetters]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testAShopifyExportIsStillSales]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testAStripeBalanceExport]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testATabFileWithSignsAndCurrencies]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testAWaveExportCountsEachEntryOnce]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testBNCMontantDebitCreditWithFrenchNumbers]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testDebitAndCreditColumnsOfEveryName]' passed (0.011 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testDesjardinsRetraitDepotSolde]' passed (0.006 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testNegativeAmountsInEveryForm]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testRBCWithItsCurrencyColumns]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testTDWithoutAHeader]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testTheCurrencyOfACell]' passed (0.030 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testTheEnterpriseTestFileIsRead]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testTheImportSummarySaysEachCount]' passed (0.014 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testTheReportedFileReadsItsExpensesAsExpenses]' passed (0.006 seconds).
+Test Case '-[ArdaneTests.BusinessCSVTests testTypeValuesSayTheDirection]' passed (0.008 seconds).
+Test Case '-[ArdaneTests.BusinessHybridTests testAGoalReachedLeavesNothingToSell]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BusinessHybridTests testNoGoalMeansNoShare]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BusinessHybridTests testTheGoalShareFollowsTheRevenueShown]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.BusinessHybridTests testWhatIsLeftIsSpreadOverTheDaysLeftInTheMonth]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testBodyWeightOfTheStateIsUsed]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testDayIsTheSumOfItsSessions]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testDeletedOrUnstartedSessionIsZero]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testHeavierWeightOfThePersonBurnsMore]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testLoadedSetsBurnMoreThanBodyweightSets]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testLongerSessionBurnsMore]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testMinutesOfTheDayCountOnlyThatDay]' passed (0.007 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testPassedSetsAddNothing]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testRestCountsLessThanWork]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testSessionLeftOpenDoesNotCountHoursOfInactivity]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testSessionWithoutSetIsZero]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testStepsOfTheWorkoutAreNotCountedTwice]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testTypicalHourIsPlausible]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testUnknownWeightGivesNoNumber]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CalorieModelTests testWorkSecondsOfASet]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.CarHybridTests testADeadlineDoneLeavesWhatComes]' passed (0.024 seconds).
+Test Case '-[ArdaneTests.CarHybridTests testADeadlineThatRepeatsMovesOneYear]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CarHybridTests testAnOldSaveStillDecodes]' passed (0.011 seconds).
+Test Case '-[ArdaneTests.CarHybridTests testARepeatingDeadlineLongPastCatchesUpWithToday]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.CarHybridTests testMarkingAServiceDoneKeepsEveryTime]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testAddingKeepsTheOptionsAndNamesOfTheParts]' passed (0.008 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testAddingNeverChangesTheSize]' passed (0.010 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testAddingToAMediumWidgetAloneMakesTwoSmallOnesInTheSameMedium]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testAddingToASmallWidgetIsRefusedWithItsReason]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testALargeWidgetAloneStaysLargeWhenItCan]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testALargeWidgetGrowsToFourWidgetsAtTheSameSize]' passed (0.084 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testAMediumWidgetHoldsTwoWidgetsAtMost]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testAnotherSpaceOrTheSameContentIsRefused]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testApplyingFollowsTheNameUntilItIsChanged]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testApplyingKeepsIdentityAndStyle]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testArrangementsOfAWidgetAloneIsItself]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testArrangementsOfFourSmallOnes]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testArrangementsOfOneMediumAndTwoSmallOnes]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testArrangementsOfTwoMediumOnes]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testArrangementsOfTwoSmallOnes]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testEditablePartsOfAWidgetAloneAndOfACombination]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testFifthWidgetIsRefused]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testFusionRefusalGivesAReasonOnlyWhenItCantMerge]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testMovingChangesTheOrderAndKeepsTheSizes]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testMovingFollowsTheOrderDrawnNotTheList]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testMovingOutOfRangeIsRefused]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testMovingTwoSmallOnesSwapsThem]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testRemovingKeepsTheOptionsOfTheOthers]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testRemovingKeepsTheSizeWhileWhatIsLeftFitsIt]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testRemovingLeavesAWidgetAloneAtTheNearestSizeItHas]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testReplacingAWidgetAlone]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testReplacingKeepsThePlace]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testReplacingKeepsTheSettingsOfTheOtherParts]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testReplacingNeverGrowsOrShrinksTheWidget]' passed (0.008 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testReplacingRefusesAnotherSpaceAndTheSameContent]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testTheLastWidgetCantBeRemoved]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.ComboEditingTests testTheLimitsAreThoseOfTheComposer]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testCountdownUntilAndSince]' passed (0.027 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testDaysBetweenIgnoresTimeOfDay]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testDeepLinkRoundTrip]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testDesignDecodingToleratesMissingFields]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testFreeDesignIsNotDowngraded]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testHabitStreakCountsConsecutiveDays]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testHydrationNeverGoesNegative]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testMoneyAccrual]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testMonthGridStartsOnMonday]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testPremiumStylingIsDowngradedForFreeUsers]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testTemplatesAreConsistent]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CoreLogicTests testYearProgressIsBounded]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateFlowTests testTheAddGuideCountIsKeptAndDefaultsToZero]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateFlowTests testTheProposalFallsBackToTheCaloriesLeft]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateFlowTests testTheProposalIsFreeForEverySpace]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testAPickedWidgetIsNeverRefusedEvenWhenFull]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testBackGoesUpOneStepAndKeepsTheSize]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testCategoriesAreTimeThenSpacesThenPhotosWithoutDuplicate]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testCategoryKindsForASizeAreFilteredByFamily]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testDraftsAreEqualOnlyWithTheSameSizeAndPicks]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testEachCategoryHasItsOwnFreeLook]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testEmptyDraftIsNotReadyAndHasNoDesign]' passed (0.006 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testEveryCategoryOffersWidgetsInSmallExceptPhotos]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testLargeAcceptsUpToFourAndRefusesAFifth]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testLargeFourSmallWidgetsMakeOneComboOfFourSmallParts]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testLargeOneWidgetWithALargeLayoutIsSingleAtLargeSize]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testLargeOneWidgetWithoutALargeLayoutExplainsWhatToDo]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testLargeThreeWidgetsHaveOneMediumRowAndTwoSmall]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testMediumAcceptsOneThenTwoAndRefusesAThird]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testMediumCanStopAtOneAndTheWidgetIsSingle]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testMediumRefusesASecondWidgetThatHasNoSmallSize]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testMediumTwoWidgetsMakeOneComboOfTwoSmallPartsInPickOrder]' passed (0.024 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testNoDuplicateInThePicks]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testPlacesTakenAndFreeAfterEachAddAndRemove]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testPlanRefusesTooManyWidgetsAtEverySize]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testPreferredSpacesComeFirstWithoutDuplicates]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testRoomPerSize]' passed (0.000 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testSmallDesignIsOneSingleSmallWidget]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testSmallHoldsOneWidgetAndANewPickReplacesTheOld]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testSmallTouchingThePickedWidgetKeepsItSoTheAtelierOpensAgain]' passed (0.172 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testStepsFollowSizeThenCategoryThenPick]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testTheCombinedWidgetIsOneDesignNamedAfterItsParts]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testTimeCategoryHasNoSpaceWidgets]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CreateSizeFirstFlowTests testTogglingAPickedWidgetTakesItOutAndFreesAPlace]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CristalPaletteTests testAppCategoryColors]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.CristalPaletteTests testContrastsOfAllTwelveColors]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CristalPaletteTests testDarkBackgroundCardAndActionComeFromAppStyle]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CristalPaletteTests testEachPaletteCarriesItsSeedShape]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CristalPaletteTests testTokensMatchTheReferenceTable]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testAGoalAlreadySetIsNotReplacedByTheOldStudyHours]' passed (0.081 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testFocusWidgetsOpenStudiesWithoutChangingTheirKind]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testResetKeepsTheCurrencyAndTheClockLikeTheUnit]' passed (0.032 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testTheBirthdayStartsFromTheBirthYearKnown]' passed (0.026 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testTheBodyShowsUnderNutritionOnlyWhenSportIsNotFollowed]' passed (0.044 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testTheConcentrationQuestionIsAskedOnceAndOnlyInStudies]' passed (0.042 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testTheOldStudyHoursAreTakenOverOnceWhenTheGoalWasNeverSet]' passed (0.033 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testTheStudiesCardSaysSomethingWhenThereAreClassesOnly]' passed (0.035 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testTheStudyHoursOfMyParametersAreTheGoalOfStudies]' passed (0.063 seconds).
+Test Case '-[ArdaneTests.CrossAppDataTests testTouchingTheActivityDeducedFromWorkoutsPinsNothing]' passed (0.045 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testAFileIsConvertedLineByLineAtTheRateOfItsDay]' passed (0.016 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testAmountsAreRoundedToTheCent]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testASyncWithoutConversionNeverUndoesAConversion]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testAWeekendTakesTheRateOfTheBusinessDayBefore]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testEntriesSavedBeforeTheConversionStillRead]' passed (0.060 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testImportingWithoutConversionNeverUndoesAConversion]' passed (0.006 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testOnlyTheCurrenciesWithoutARateStayAsTheyCame]' passed (0.009 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testStripeConvertsEachTransactionAndItsFees]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testTheMessageSaysWhyARateIsMissing]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.CurrencyConversionTests testWithoutARateNothingIsGuessed]' passed (0.008 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testAnExamTodayIsInThePlanningBeforeTheTasks]' passed (0.013 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testASessionStillToDoComesBeforeTheMealsFromTheAfternoon]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testAValueGivenForOneWidgetServesTheOthers]' passed (0.023 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testBudgetNeverUsesADefaultGoalAndWaterIsGone]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testCaloriesLeftOnlyWithTheUsersTarget]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testDefaultsNeverCountAsGiven]' passed (0.020 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testEveningStartsWithWhatIsLeftToEatAndTheHabits]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testEveryWidgetKnowsWhatItNeeds]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testHabitCardsCarryTheirOwnColorAndStreak]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testMealsComeFirstThenClassesInTheMorning]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testNothingEnteredShowsNoFigure]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testPreviewsShowExamplesUntilTheDataIsGiven]' passed (0.027 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testRowsPairHalfTiles]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyBriefTests testTheWorkoutFollowsTheSession]' passed (0.004 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testANewAccountHasTheFiveCardsAcrossTheWidth]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testARemovedCardStaysRemovedWithDataAndIsOfferedByThePlus]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testASessionInProgressDoesNotJumpTheQueue]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testASpendingOfAComingDayIsUpcoming]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testEveryCategoryIsInTheDefaultOrderOnce]' passed (0.007 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testMigrationClearsOrderAndSizesButKeepsTheRest]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testMigrationGivesTheTop3PlaceToTheReminders]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testMigrationRunsOnlyOnce]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testNoDuplicateIdentifier]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testOldSettingsWithoutTheVersionDecodeAsVersionZero]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testOtherInterestsComeAtHalfWidthAfterTheFive]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testPlanningDoesNotDependOnTheSurvey]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testStudentsWithClassesSeeStudiesWithoutChoosingIt]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testTheHandOrderStillWinsOverTheDefault]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testTheModelMigratesThroughTheNormalSaving]' passed (0.033 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testTheOldTopThreeBecomesTasks]' passed (0.048 seconds).
+Test Case '-[ArdaneTests.DailyDefaultsTests testTheOrderIsTheSameAtEveryHour]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testAddingACategoryWithThePlusShowsItEmptyAndLeavesTheList]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testAddingBringsBackARemovedCategory]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testAHiddenCategoryStaysHiddenWhenItReceivesData]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testAnAddedCategoryWithDataShowsItsDataAndTheListShrinksUntilThePlusIsGone]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testAnEmptyCardKeepsTheIdOfItsCardWithData]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testANewCategoryShowsAndAHiddenOneStaysHidden]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testAnOldProductiviteEntryNeverBringsBackTheTopThree]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testAppModelPersonalizesAfterTheFirstEntry]' passed (0.023 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testAppModelStartsWithNothingAndFollowsTheInterests]' passed (0.025 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testCompleteProfileHasNoInvitationAndEveryCategory]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testEveryEmptyCardOpensAMiniAppAndNeverAPagePerCategory]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testEveryInfoAreaHasADestinationOutsideTheOldPage]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testHidingAnEmptyCategoryAndShowingItAgain]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testLayoutSettingsRoundTrip]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testNoInterestAndNoDataShowsTheFiveDefaultCardsEmptyAndThePlusOffersTheRest]' passed (0.009 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testOldOrBrokenSettingsStillDecode]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testRemovingACardKeepsItOffEvenWhenItReceivesData]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testRemovingAlsoDropsTheOldFormsOfTheSameCategory]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testRemovingNeverTouchesTheMiniAppData]' passed (0.025 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testRemovingTakesAnAddedCategoryOffTheAddedList]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testReorderingMovesEmptyAndFilledCardsAlike]' passed (0.008 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testSettingsFromBeforeThePlusKeepWhatTheyHad]' passed (0.003 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheAutomaticLayoutNeverBringsBackARemovedCategory]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheCardsWithDataAreAlwaysThereAndTheInterestsComeAfterThem]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheCategoryTogglesOfTheEditorFollowTheCards]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheChoicesSurviveARelaunch]' passed (0.055 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheFillInCardOpensTheFirstMiniAppWithSomethingMissing]' passed (0.020 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheFillInCardSkipsMiniAppsWhoseMissingItemsNoBlockShows]' passed (0.030 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheInterestsOfTheFirstFormShowTheirEmptyCardsWithoutAnyCap]' passed (0.002 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheRemovedWeatherLeavesNoCardAndOldEntriesAreIgnored]' passed (0.005 seconds).
+Test Case '-[ArdaneTests.DailyHomeTests testTheWeekScheduleShowsForEveryone]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyLayoutRulesTests testAHalfCardDroppedOntoTheWideCardAboveGoesOverItWithItsRow]' passed (0.001 seconds).
+Test Case '-[ArdaneTests.DailyLayoutRulesTests testAMoveThatCannotShowChangesNothing]' passed (0.001 seconds).
+privacy manifest: app yes, widget yes
+alternate app icons in the app: 19
+---- widget extension bundle ----
+AbrilFatface-Regular.ttf
+AlexBrush-Regular.ttf
+Allura-Regular.ttf
+Almendra-Bold.ttf
+Almendra-Regular.ttf
+AmaticSC-Bold.ttf
+AmaticSC-Regular.ttf
+Anton-Regular.ttf
+ArchitectsDaughter-Regular.ttf
+ArchivoBlack-Regular.ttf
+ardane-ding.wav
+ArdaneWidgets
+Arizonia-Regular.ttf
+Audiowide-Regular.ttf
+Ballet-Variable.ttf
+Bangers-Regular.ttf
+BebasNeue-Regular.ttf
+BodoniModa-Variable.ttf
+BonheurRoyale-Regular.ttf
+Bungee-Regular.ttf
+Carattere-Regular.ttf
+Charm-Regular.ttf
+Chewy-Regular.ttf
+Cinzel-Variable.ttf
+CinzelDecorative-Black.ttf
+CinzelDecorative-Bold.ttf
+CinzelDecorative-Regular.ttf
+Comfortaa-Variable.ttf
+Cookie-Regular.ttf
+Corinthia-Regular.ttf
+Courgette-Regular.ttf
+CourierPrime-Bold.ttf
+CourierPrime-Regular.ttf
+CoveredByYourGrace.ttf
+DancingScript-Variable.ttf
+de.lproj
+DMSerifDisplay-Italic.ttf
+DMSerifDisplay-Regular.ttf
+en.lproj
+Engagement-Regular.ttf
+Ephesis-Regular.ttf
+es.lproj
+EuphoriaScript-Regular.ttf
+ExerciseCatalog.json
+Explora-Regular.ttf
+fr.lproj
+Fredoka-Variable.ttf
+Gloock-Regular.ttf
+GloriaHallelujah.ttf
+GrandHotel-Regular.ttf
+GreatVibes-Regular.ttf
+Gwendolyn-Regular.ttf
+Handlee-Regular.ttf
+HerrVonMuellerhoff-Regular.ttf
+HomemadeApple-Regular.ttf
+ImperialScript-Regular.ttf
+IndieFlower-Regular.ttf
+Info.plist
+Inspiration-Regular.ttf
+it.lproj
+Italiana-Regular.ttf
+Italianno-Regular.ttf
+ja.lproj
+JosefinSans-Variable.ttf
+JosefinSlab-Variable.ttf
+KaushanScript-Regular.ttf
+Kristi-Regular.ttf
+LaBelleAurore.ttf
+LeagueScript-Regular.ttf
+LibreBaskerville-Variable.ttf
+Licorice-Regular.ttf
+Limelight-Regular.ttf
+Lora-Variable.ttf
+LoveLight-Regular.ttf
+LoversQuarrel-Regular.ttf
+Marcellus-Regular.ttf
+MarckScript-Regular.ttf
+MeaCulpa-Regular.ttf
+Metadata.appintents
+Monoton-Regular.ttf
+MonsieurLaDoulaise-Regular.ttf
+MrDeHaviland-Regular.ttf
+MrsSaintDelafield-Regular.ttf
+MrsSheppards-Regular.ttf
+MsMadi-Regular.ttf
+Niconne-Regular.ttf
+Norican-Regular.ttf
+OleoScript-Regular.ttf
+OoohBaby-Regular.ttf
+Orbitron-Variable.ttf
+Oswald-Variable.ttf
+Ovo-Regular.ttf
+Pacifico-Regular.ttf
+Parisienne-Regular.ttf
+PassionsConflict-Regular.ttf
+PatrickHand-Regular.ttf
+PermanentMarker-Regular.ttf
+PetitFormalScript-Regular.ttf
+PinyonScript-Regular.ttf
+PirataOne-Regular.ttf
+Playball-Regular.ttf
+PlayfairDisplay-Variable.ttf
+PoiretOne-Regular.ttf
+Poppins-Bold.ttf
+Poppins-Regular.ttf
+PressStart2P-Regular.ttf
+PrivacyInfo.xcprivacy
+pt-BR.lproj
+Quicksand-Variable.ttf
+Qwigley-Regular.ttf
+QwitcherGrypen-Regular.ttf
+Raleway-Variable.ttf
+ReenieBeanie.ttf
+Righteous-Regular.ttf
+Rochester-Regular.ttf
+RockSalt-Regular.ttf
+RougeScript-Regular.ttf
+Sacramento-Regular.ttf
+Satisfy-Regular.ttf
+SeaweedScript-Regular.ttf
+SendFlowers-Regular.ttf
+Sevillana-Regular.ttf
+Shrikhand-Regular.ttf
+SpaceMono-Bold.ttf
+SpaceMono-Regular.ttf
+SpecialElite-Regular.ttf
+Tangerine-Bold.ttf
+Tangerine-Regular.ttf
+UnifrakturCook-Bold.ttf
+Updock-Regular.ttf
+Whisper-Regular.ttf
+WindSong-Medium.ttf
+WindSong-Regular.ttf
+Yellowtail-Regular.ttf
+extract.actionsdata
+version.json
+ExtractAppIntentsMetadata (in target 'ArdaneWidgets' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'Ardane' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'ArdaneTests' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'ArdaneUITests' from project 'Ardane')
+---- last lines ----
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCUnit.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCUIAutomation.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestCore.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTest.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTAutomationSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/Testing.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+Touch /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /usr/bin/touch -c /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+** TEST BUILD SUCCEEDED **
+

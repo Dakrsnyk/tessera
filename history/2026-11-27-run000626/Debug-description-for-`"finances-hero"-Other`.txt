@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  ↪︎Find: Descendants matching type Other
+    ↪︎Find: Elements matching predicate '"finances-hero" IN identifiers'

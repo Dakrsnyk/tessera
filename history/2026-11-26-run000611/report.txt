@@ -1,0 +1,61 @@
+run: 611
+commit: 3765127bc6af70a1e06790f2a5a2c427e62c14bb
+static: success
+simulator: cancelled
+device: skipped
+tests: skipped
+ipa: none (the test IPA is no longer built or published)
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped (images only: export, no shots, no screens)
+---- errors ----
+OK: 4379 memberwise calls checked, 99 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 7034 texts in the code, 0 not in the catalog, 0 untranslated, 1 unused in the catalog
+---- tests ----
+privacy manifest: app MISSING, widget MISSING
+alternate app icons in the app: 0
+---- widget extension bundle ----
+---- last lines ----
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/ArchitectsDaughter-Regular.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/ArchitectsDaughter-Regular.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/ArchitectsDaughter-Regular.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/Anton-Regular.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/Anton-Regular.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/Anton-Regular.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/AmaticSC-Regular.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/AmaticSC-Regular.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/AmaticSC-Regular.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/AmaticSC-Bold.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/AmaticSC-Bold.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/AmaticSC-Bold.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/Almendra-Regular.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/Almendra-Regular.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/Almendra-Regular.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/Almendra-Bold.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/Almendra-Bold.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/Almendra-Bold.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/Allura-Regular.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/Allura-Regular.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/Allura-Regular.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/AlexBrush-Regular.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/AlexBrush-Regular.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/AlexBrush-Regular.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CpResource /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex/AbrilFatface-Regular.ttf /Users/runner/work/tessera/tessera/Shared/Fonts/AbrilFatface-Regular.ttf (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -resolve-src-symlinks /Users/runner/work/tessera/tessera/Shared/Fonts/AbrilFatface-Regular.ttf /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.appex
+
+CompileXCStrings /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/ /Users/runner/work/tessera/tessera/Shared/Localizable.xcstrings (in target 'ArdaneWidgets' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /Applications/Xcode_26.3.app/Contents/Developer/usr/bin/xcstringstool compile --output-directory /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build /Users/runner/work/tessera/tessera/Shared/Localizable.xcstrings

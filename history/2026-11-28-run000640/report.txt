@@ -1,0 +1,504 @@
+run: 640
+commit: 98b94928d27f29c62dc40a5e877d2666a0afd5f5
+static: success
+simulator: success
+device: skipped
+tests: skipped
+ipa: none (the test IPA is no longer built or published)
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: success (images only: export, no shots, no screens)
+adkit-en: 0 shots (0 in-test copies), 0 screens, 300 export files
+---- adkit export (done.txt) ----
+widget	lock-caloriesLeft-inline	1	snapshot
+widget	irl-nextSet-combo-light	1	image
+widget	irl-nextSet-combo-luxury	1	image
+widget	irl-nextSet-combo-mars	1	image
+widget	irl-nextSet-combo-neon	1	image
+widget	irl-nextSet-combo-carbon	1	image
+widget	irl-nextSet-combo-matte	1	image
+widget	irl-weeklyVolume-m	1	image
+widget	irl-restTimer-s	1	image
+widget	irl-personalRecords-s	1	image
+widget	camp-caloriesLeft-s-light	1	image
+widget	camp-macros-m-light	1	image
+widget	camp-budgetLeft-s-light	1	image
+widget	camp-spendingByCategory-m-light	1	image
+widget	camp-savingsGoal-s-light	1	image
+widget	camp-billsUpcoming-m-light	1	image
+widget	camp-moneyFlow-m-light	1	image
+widget	camp-budgetLeft-s-liquidGlass	1	image
+widget	camp-tasks-m-light	1	image
+widget	camp-priorities-s-light	1	image
+widget	camp-tasks-s-light	1	image
+widget	camp-timetable-l-light	1	image
+widget	camp-timetable-m-light	1	image
+widget	camp-nextClass-s-light	1	image
+widget	camp-nextExam-s-light	1	image
+widget	camp-assignments-m-light	1	image
+widget	camp-semesterProgress-s-light	1	image
+widget	camp-studyHours-s-light	1	image
+widget	camp-revenueTrend-m-light	1	image
+widget	camp-mrr-s-light	1	image
+widget	camp-revenueGoal-s-light	1	image
+widget	camp-businessKPIs-m-light	1	image
+widget	camp-profit-s-light	1	image
+widget	camp-tripCountdown-s-light	1	image
+widget	camp-flight-m-light	1	image
+widget	camp-hotel-s-light	1	image
+widget	camp-nextActivity-m-light	1	image
+widget	camp-tripProgress-s-light	1	image
+widget	irl-restTimer-s-carbon	1	image
+widget	irl-personalRecords-s-carbon	1	image
+widget	irl-weeklyVolume-m-carbon	1	image
+widget	camp-habits-m-light	1	image
+widget	camp-habitWeek-m-light	1	image
+widget	camp-upNext-s-light	1	image
+widget	camp-timetable-s-light	1	image
+widget	camp-calendar-s-light	1	image
+widget	camp-habitStreak-s-light	1	image
+widget	camp-upNext-l-light	1	image
+widget	camp-timetable-l-dark	1	image
+widget	camp-timetable-l-pastel	1	image
+widget	camp-timetable-l-blossom	1	image
+widget	camp-timetable-l-modern	1	image
+widget	camp-timetable-l-business	1	image
+widget	camp-timetable-l-minimal	1	image
+widget	camp-timetable-l-forest	1	image
+live	live-ready-ruby	1	snapshot
+live	live-ready-real2	1	snapshot
+widget	camp-lock-timetable-rect	1	snapshot
+widget	camp-lock-upNext-rect	1	snapshot
+widget	camp-lock-caloriesLeft-circular	1	snapshot
+widget	camp-lock-trainingStreak-circular	1	snapshot
+widget	camp-lock-nextSet-rect	1	snapshot
+widget	camp-tasks-m-cobalt	1	image
+widget	camp-tasks-m-cobalt-done	1	image
+widget	camp-timetable-l-cobalt	1	image
+widget	camp-upNext-s-cobalt	1	image
+widget	camp-lock-tasks-rect	1	snapshot
+widget	camp-lock-tasks-rect-done	1	snapshot
+widget	camp-habits-m-light-todo	1	image
+widget	camp-habitStreak-s-light	1	image
+widget	camp-caloriesLeft-s-light	1	image
+widget	camp-macros-m-light	1	image
+widget	camp-caloriesLeft-m-light	1	image
+widget	camp-quickExpense-s-light	1	image
+widget	camp-quickExpense-s-light-spent	1	image
+widget	camp-budgetLeft-s-light-spent	1	image
+widget	camp-assignments-m-light-done	1	image
+widget	camp-lock-nextClass-rect	1	snapshot
+widget	camp-lock-nextExam-circular	1	snapshot
+widget	camp-revenueGoal-s-lilac	1	image
+widget	camp-revenueTrend-m-lilac	1	image
+widget	camp-localTime-s-light	1	image
+widget	camp-tripCountdown-s-light-ongoing	1	image
+widget	camp-tripCountdown-s-light-ahead	1	image
+widget	camp-flight-m-light-ahead	1	image
+widget	camp-tripProgress-s-light-ongoing	1	image
+widget	camp-nextActivity-m-light-ongoing	1	image
+widget	camp-hotel-s-light-ongoing	1	image
+widget	camp-caloriesLeft-m-st-light	1	image
+widget	camp-caloriesLeft-m-st-dark	1	image
+widget	camp-caloriesLeft-m-st-minimal	1	image
+widget	camp-caloriesLeft-m-st-pastel	1	image
+widget	camp-caloriesLeft-m-st-blossom	1	image
+widget	camp-caloriesLeft-m-st-aurora	1	image
+widget	camp-caloriesLeft-m-st-neon	1	image
+widget	camp-habits-m-st-light	1	image
+widget	camp-habits-m-st-dark	1	image
+widget	camp-habits-m-st-minimal	1	image
+widget	camp-habits-m-st-pastel	1	image
+widget	camp-habits-m-st-blossom	1	image
+widget	camp-habits-m-st-aurora	1	image
+widget	camp-habits-m-st-neon	1	image
+widget	camp-budgetLeft-s-st-light	1	image
+widget	camp-budgetLeft-s-st-dark	1	image
+widget	camp-budgetLeft-s-st-minimal	1	image
+widget	camp-budgetLeft-s-st-pastel	1	image
+widget	camp-budgetLeft-s-st-blossom	1	image
+widget	camp-budgetLeft-s-st-aurora	1	image
+widget	camp-budgetLeft-s-st-neon	1	image
+widget	camp-revenueGoal-s-st-light	1	image
+widget	camp-revenueGoal-s-st-dark	1	image
+widget	camp-revenueGoal-s-st-minimal	1	image
+widget	camp-revenueGoal-s-st-pastel	1	image
+widget	camp-revenueGoal-s-st-blossom	1	image
+widget	camp-revenueGoal-s-st-aurora	1	image
+widget	camp-revenueGoal-s-st-neon	1	image
+widget	camp-assignments-m-st-light	1	image
+widget	camp-assignments-m-st-dark	1	image
+widget	camp-assignments-m-st-minimal	1	image
+widget	camp-assignments-m-st-pastel	1	image
+widget	camp-assignments-m-st-blossom	1	image
+widget	camp-assignments-m-st-aurora	1	image
+widget	camp-assignments-m-st-neon	1	image
+widget	camp-tripCountdown-s-st-light	1	image
+widget	camp-tripCountdown-s-st-dark	1	image
+widget	camp-tripCountdown-s-st-minimal	1	image
+widget	camp-tripCountdown-s-st-pastel	1	image
+widget	camp-tripCountdown-s-st-blossom	1	image
+widget	camp-tripCountdown-s-st-aurora	1	image
+widget	camp-tripCountdown-s-st-neon	1	image
+widget	camp-profit-s-lilac	1	image
+widget	camp-businessKPIs-m-lilac	1	image
+widget	camp-timetable-s-st-light	1	image
+widget	camp-timetable-s-st-dark	1	image
+widget	camp-timetable-s-st-minimal	1	image
+widget	camp-timetable-s-st-pastel	1	image
+widget	camp-timetable-s-st-blossom	1	image
+widget	camp-timetable-s-st-aurora	1	image
+widget	camp-timetable-s-st-neon	1	image
+widget	camp-budgetLeft-s-st-dark-spent	1	image
+widget	camp-assignments-m-st-aurora-done	1	image
+widget	camp-assignments-m-st-dark-done	1	image
+widget	camp-businessKPIs-m-st-aurora	1	image
+widget	camp-businessKPIs-m-st-dark	1	image
+widget	camp-caloriesLeft-s-st-dark	1	image
+widget	camp-caloriesLeft-s-st-pastel	1	image
+widget	camp-habitStreak-s-st-dark	1	image
+widget	camp-habitStreak-s-st-neon	1	image
+widget	camp-habitWeek-m-st-aurora	1	image
+widget	camp-habitWeek-m-st-dark	1	image
+widget	camp-macros-m-st-aurora	1	image
+widget	camp-macros-m-st-dark	1	image
+widget	camp-nextClass-s-st-dark	1	image
+widget	camp-nextClass-s-st-neon	1	image
+widget	camp-nextSet-s-st-dark	1	image
+widget	camp-nextSet-s-st-light	1	image
+widget	camp-nextSet-s-st-neon	1	image
+widget	camp-personalRecords-s-st-dark	1	image
+widget	camp-personalRecords-s-st-light	1	image
+widget	camp-personalRecords-s-st-neon	1	image
+widget	camp-priorities-s-st-dark	1	image
+widget	camp-priorities-s-st-pastel	1	image
+widget	camp-quickExpense-s-st-dark-spent	1	image
+widget	camp-quickExpense-s-st-neon-spent	1	image
+widget	camp-revenueTrend-m-st-aurora	1	image
+widget	camp-revenueTrend-m-st-dark	1	image
+widget	camp-savingsGoal-s-st-blossom	1	image
+widget	camp-savingsGoal-s-st-dark	1	image
+widget	camp-spendingByCategory-m-st-aurora	1	image
+widget	camp-spendingByCategory-m-st-dark	1	image
+widget	camp-tasks-m-st-blossom	1	image
+widget	camp-tasks-m-st-dark	1	image
+widget	camp-tasks-m-st-dark-done	1	image
+widget	camp-tasks-m-st-pastel-done	1	image
+widget	camp-trainingStreak-s-st-dark	1	image
+widget	camp-trainingStreak-s-st-light	1	image
+widget	camp-trainingStreak-s-st-neon	1	image
+widget	camp-tripCountdown-s-st-blossom-ahead	1	image
+widget	camp-tripCountdown-s-st-dark-ahead	1	image
+widget	camp-tripProgress-s-st-aurora-ongoing	1	image
+widget	camp-tripProgress-s-st-dark-ongoing	1	image
+widget	camp-weeklyVolume-m-st-aurora	1	image
+widget	camp-weeklyVolume-m-st-dark	1	image
+widget	camp-weeklyVolume-m-st-light	1	image
+widget	camp-quickExpense-s-st-light	1	image
+widget	camp-quickExpense-s-st-light-spent	1	image
+widget	camp-budgetLeft-s-st-minimal-spent	1	image
+widget	camp-budgetLeft-s-st-pastel-spent	1	image
+widget	camp-budgetLeft-s-st-blossom-spent	1	image
+widget	camp-budgetLeft-s-st-aurora-spent	1	image
+widget	camp-budgetLeft-s-st-neon-spent	1	image
+widget	camp-quickExpense-s-st-minimal-spent	1	image
+widget	camp-quickExpense-s-st-pastel-spent	1	image
+widget	camp-quickExpense-s-st-blossom-spent	1	image
+widget	camp-quickExpense-s-st-aurora-spent	1	image
+widget	camp-lock-budgetLeft-rect	1	snapshot
+widget	camp-lock-budgetLeft-rect-spent	1	snapshot
+widget	camp-caloriesLeft-m-st-light-scan	1	image
+widget	camp-caloriesLeft-m-st-dark-scan	1	image
+widget	camp-caloriesLeft-m-st-minimal-scan	1	image
+widget	camp-caloriesLeft-m-st-pastel-scan	1	image
+widget	camp-caloriesLeft-m-st-blossom-scan	1	image
+widget	camp-caloriesLeft-m-st-aurora-scan	1	image
+widget	camp-caloriesLeft-m-st-neon-scan	1	image
+widget	camp-cours-lock-nextClass-rect	1	snapshot
+widget	camp-cours-lock-timetable-rect	1	snapshot
+widget	camp-cours-nextClass-s-st-light	1	image
+widget	camp-cours-nextClass-s-st-dark	1	image
+widget	camp-cours-nextClass-s-st-minimal	1	image
+widget	camp-cours-nextClass-s-st-pastel	1	image
+widget	camp-cours-nextClass-s-st-blossom	1	image
+widget	camp-cours-nextClass-s-st-aurora	1	image
+widget	camp-cours-nextClass-s-st-neon	1	image
+widget	camp-cours-timetable-s-st-light	1	image
+widget	camp-cours-timetable-s-st-dark	1	image
+widget	camp-cours-timetable-s-st-minimal	1	image
+widget	camp-cours-timetable-s-st-pastel	1	image
+widget	camp-cours-timetable-s-st-blossom	1	image
+widget	camp-cours-timetable-s-st-aurora	1	image
+widget	camp-cours-timetable-s-st-neon	1	image
+widget	camp-cours-assignments-m-st-light	1	image
+widget	camp-cours-assignments-m-st-light-done	1	image
+widget	camp-cours-assignments-m-st-dark-done	1	image
+widget	camp-cours-assignments-m-st-minimal-done	1	image
+widget	camp-cours-assignments-m-st-pastel-done	1	image
+widget	camp-cours-assignments-m-st-blossom-done	1	image
+widget	camp-cours-assignments-m-st-aurora-done	1	image
+widget	camp-cours-assignments-m-st-neon-done	1	image
+widget	camp-tasks-m-st-light	1	image
+widget	camp-tasks-m-st-light-done	1	image
+widget	camp-tasks-m-st-minimal-done	1	image
+widget	camp-tasks-m-st-blossom-done	1	image
+widget	camp-tasks-m-st-aurora-done	1	image
+widget	camp-tasks-m-st-neon-done	1	image
+widget	camp-depart-tripCountdown-m-st-light-ahead	1	image
+widget	camp-depart-tripCountdown-m-st-dark-ahead	1	image
+widget	camp-depart-tripCountdown-m-st-minimal-ahead	1	image
+widget	camp-depart-tripCountdown-m-st-pastel-ahead	1	image
+widget	camp-depart-tripCountdown-m-st-blossom-ahead	1	image
+widget	camp-depart-tripCountdown-m-st-aurora-ahead	1	image
+widget	camp-depart-tripCountdown-m-st-neon-ahead	1	image
+widget	camp-depart-tripCountdown-m-st-light-ongoing	1	image
+widget	camp-depart-tripCountdown-m-st-aurora-ongoing	1	image
+widget	camp-depart-tripCountdown-s-st-light-ahead	1	image
+widget	camp-depart-tripCountdown-s-st-dark-ahead	1	image
+widget	camp-depart-tripCountdown-s-st-minimal-ahead	1	image
+widget	camp-depart-tripCountdown-s-st-pastel-ahead	1	image
+widget	camp-depart-tripCountdown-s-st-blossom-ahead	1	image
+widget	camp-depart-tripCountdown-s-st-aurora-ahead	1	image
+widget	camp-depart-tripCountdown-s-st-neon-ahead	1	image
+widget	camp-depart-tripCountdown-s-st-light-ongoing	1	image
+widget	camp-depart-tripCountdown-s-st-aurora-ongoing	1	image
+widget	camp-depart-tripProgress-s-st-light-ahead	1	image
+widget	camp-depart-tripProgress-s-st-dark-ahead	1	image
+widget	camp-depart-tripProgress-s-st-minimal-ahead	1	image
+widget	camp-depart-tripProgress-s-st-pastel-ahead	1	image
+widget	camp-depart-tripProgress-s-st-blossom-ahead	1	image
+widget	camp-depart-tripProgress-s-st-aurora-ahead	1	image
+widget	camp-depart-tripProgress-s-st-neon-ahead	1	image
+widget	camp-depart-tripProgress-s-st-light-ongoing	1	image
+widget	camp-depart-tripProgress-s-st-aurora-ongoing	1	image
+widget	camp-depart-currency-s-st-light-ahead	1	image
+widget	camp-depart-currency-s-st-dark-ahead	1	image
+widget	camp-depart-currency-s-st-minimal-ahead	1	image
+widget	camp-depart-currency-s-st-pastel-ahead	1	image
+widget	camp-depart-currency-s-st-blossom-ahead	1	image
+widget	camp-depart-currency-s-st-aurora-ahead	1	image
+widget	camp-depart-currency-s-st-neon-ahead	1	image
+widget	camp-depart-currency-s-st-light-ongoing	1	image
+widget	camp-depart-currency-s-st-aurora-ongoing	1	image
+widget	camp-inspo-budgetLeft-s-st-blossom	1	image
+widget	camp-inspo-budgetLeft-s-st-blossom-spent	1	image
+widget	camp-inspo-quickExpense-s-st-blossom	1	image
+widget	camp-inspo-quickExpense-s-st-blossom-spent	1	image
+widget	camp-inspo-savingsGoal-s-st-blossom	1	image
+widget	camp-disc-habits-m-matte-todo	1	image
+widget	camp-disc-habits-m-matte	1	image
+widget	camp-disc-habits-m-carbon	1	image
+widget	camp-disc-habits-m-mars	1	image
+widget	camp-disc-habits-m-luxury	1	image
+widget	camp-disc-habits-m-neon	1	image
+widget	camp-disc-savingsGoal-s-matte	1	image
+widget	camp-disc-savingsGoal-s-carbon	1	image
+widget	camp-disc-savingsGoal-s-mars	1	image
+widget	camp-disc-savingsGoal-s-luxury	1	image
+widget	camp-disc-savingsGoal-s-neon	1	image
+widget	camp-auto-nextService-m-st-light	1	image
+widget	camp-auto-nextService-m-st-light-done	1	image
+widget	camp-auto-nextService-m-st-dark-done	1	image
+widget	camp-auto-nextService-m-st-minimal-done	1	image
+widget	camp-auto-nextService-m-st-pastel-done	1	image
+widget	camp-auto-nextService-m-st-blossom-done	1	image
+widget	camp-auto-nextService-m-st-aurora-done	1	image
+widget	camp-auto-nextService-m-st-neon-done	1	image
+widget	camp-auto-fuelStats-s-st-light	1	image
+widget	camp-auto-fuelStats-s-st-dark	1	image
+widget	camp-auto-fuelStats-s-st-minimal	1	image
+widget	camp-auto-fuelStats-s-st-pastel	1	image
+widget	camp-auto-fuelStats-s-st-blossom	1	image
+widget	camp-auto-fuelStats-s-st-aurora	1	image
+widget	camp-auto-fuelStats-s-st-neon	1	image
+---- errors ----
+OK: 4438 memberwise calls checked, 99 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+l10n sync: 7063 texts in the code, 0 not in the catalog, 0 untranslated, 0 unused in the catalog
+---- tests ----
+privacy manifest: app yes, widget yes
+alternate app icons in the app: 19
+---- widget extension bundle ----
+AbrilFatface-Regular.ttf
+AlexBrush-Regular.ttf
+Allura-Regular.ttf
+Almendra-Bold.ttf
+Almendra-Regular.ttf
+AmaticSC-Bold.ttf
+AmaticSC-Regular.ttf
+Anton-Regular.ttf
+ArchitectsDaughter-Regular.ttf
+ArchivoBlack-Regular.ttf
+ardane-ding.wav
+ArdaneWidgets
+Arizonia-Regular.ttf
+Audiowide-Regular.ttf
+Ballet-Variable.ttf
+Bangers-Regular.ttf
+BebasNeue-Regular.ttf
+BodoniModa-Variable.ttf
+BonheurRoyale-Regular.ttf
+Bungee-Regular.ttf
+Carattere-Regular.ttf
+Charm-Regular.ttf
+Chewy-Regular.ttf
+Cinzel-Variable.ttf
+CinzelDecorative-Black.ttf
+CinzelDecorative-Bold.ttf
+CinzelDecorative-Regular.ttf
+Comfortaa-Variable.ttf
+Cookie-Regular.ttf
+Corinthia-Regular.ttf
+Courgette-Regular.ttf
+CourierPrime-Bold.ttf
+CourierPrime-Regular.ttf
+CoveredByYourGrace.ttf
+DancingScript-Variable.ttf
+de.lproj
+DMSerifDisplay-Italic.ttf
+DMSerifDisplay-Regular.ttf
+en.lproj
+Engagement-Regular.ttf
+Ephesis-Regular.ttf
+es.lproj
+EuphoriaScript-Regular.ttf
+ExerciseCatalog.json
+Explora-Regular.ttf
+fr.lproj
+Fredoka-Variable.ttf
+Gloock-Regular.ttf
+GloriaHallelujah.ttf
+GrandHotel-Regular.ttf
+GreatVibes-Regular.ttf
+Gwendolyn-Regular.ttf
+Handlee-Regular.ttf
+HerrVonMuellerhoff-Regular.ttf
+HomemadeApple-Regular.ttf
+ImperialScript-Regular.ttf
+IndieFlower-Regular.ttf
+Info.plist
+Inspiration-Regular.ttf
+it.lproj
+Italiana-Regular.ttf
+Italianno-Regular.ttf
+ja.lproj
+JosefinSans-Variable.ttf
+JosefinSlab-Variable.ttf
+KaushanScript-Regular.ttf
+Kristi-Regular.ttf
+LaBelleAurore.ttf
+LeagueScript-Regular.ttf
+LibreBaskerville-Variable.ttf
+Licorice-Regular.ttf
+Limelight-Regular.ttf
+Lora-Variable.ttf
+LoveLight-Regular.ttf
+LoversQuarrel-Regular.ttf
+Marcellus-Regular.ttf
+MarckScript-Regular.ttf
+MeaCulpa-Regular.ttf
+Metadata.appintents
+Monoton-Regular.ttf
+MonsieurLaDoulaise-Regular.ttf
+MrDeHaviland-Regular.ttf
+MrsSaintDelafield-Regular.ttf
+MrsSheppards-Regular.ttf
+MsMadi-Regular.ttf
+Niconne-Regular.ttf
+Norican-Regular.ttf
+OleoScript-Regular.ttf
+OoohBaby-Regular.ttf
+Orbitron-Variable.ttf
+Oswald-Variable.ttf
+Ovo-Regular.ttf
+Pacifico-Regular.ttf
+Parisienne-Regular.ttf
+PassionsConflict-Regular.ttf
+PatrickHand-Regular.ttf
+PermanentMarker-Regular.ttf
+PetitFormalScript-Regular.ttf
+PinyonScript-Regular.ttf
+PirataOne-Regular.ttf
+Playball-Regular.ttf
+PlayfairDisplay-Variable.ttf
+PoiretOne-Regular.ttf
+Poppins-Bold.ttf
+Poppins-Regular.ttf
+PressStart2P-Regular.ttf
+PrivacyInfo.xcprivacy
+pt-BR.lproj
+Quicksand-Variable.ttf
+Qwigley-Regular.ttf
+QwitcherGrypen-Regular.ttf
+Raleway-Variable.ttf
+ReenieBeanie.ttf
+Righteous-Regular.ttf
+Rochester-Regular.ttf
+RockSalt-Regular.ttf
+RougeScript-Regular.ttf
+Sacramento-Regular.ttf
+Satisfy-Regular.ttf
+SeaweedScript-Regular.ttf
+SendFlowers-Regular.ttf
+Sevillana-Regular.ttf
+Shrikhand-Regular.ttf
+SpaceMono-Bold.ttf
+SpaceMono-Regular.ttf
+SpecialElite-Regular.ttf
+Tangerine-Bold.ttf
+Tangerine-Regular.ttf
+UnifrakturCook-Bold.ttf
+Updock-Regular.ttf
+Whisper-Regular.ttf
+WindSong-Medium.ttf
+WindSong-Regular.ttf
+Yellowtail-Regular.ttf
+extract.actionsdata
+version.json
+ExtractAppIntentsMetadata (in target 'ArdaneWidgets' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'Ardane' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'ArdaneTests' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'ArdaneUITests' from project 'Ardane')
+---- last lines ----
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCUnit.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCUIAutomation.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestCore.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTest.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTAutomationSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/Testing.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+Touch /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /usr/bin/touch -c /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+** TEST BUILD SUCCEEDED **
+

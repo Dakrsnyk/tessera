@@ -1,0 +1,2 @@
+SCORE OCR-employes propre corrects=11/11 lus=11 types=work,work,work,work,work,work,work,work,work,work,work dates=0
+SCORE OCR-employes flou corrects=11/11 lus=11 types=work,work,work,work,work,work,work,work,work,work,work dates=0

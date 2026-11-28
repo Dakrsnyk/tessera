@@ -1,0 +1,7 @@
+OCR-LINES rendez-vous propre [y=0.129 x=0.151 « Mes rendez-vous »]
+OCR-LINES rendez-vous propre [y=0.335 x=0.298 « Mardi 24 novembre 2026, 14 h 30 - Dentiste, Dr Roy »]
+OCR-LINES rendez-vous propre [y=0.512 x=0.329 « Jeudi 26 novembre 2026, 9 h - 10 h - Notaire, Me Tremblay »]
+OCR-LINES rendez-vous propre [y=0.683 x=0.405 « Vendredi 27 novembre 2026, 16 h 15 - Physiothérapie, Clinique Santé Plus »]
+SCORE OCR-rendez-vous propre corrects=3/3 lus=3 types=appointment,appointment,appointment dates=3
+OCR-DETAIL rendez-vous propre: manquants [], en trop []
+OCR-LUS rendez-vous propre: ["2|14:30-15:30|Dentiste|-|Dr Roy", "4|09:00-10:00|Notaire|-|Me Tremblay", "5|16:15-17:15|Physiothérapie|Clinique Santé Plus|-"]

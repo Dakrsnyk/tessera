@@ -1,0 +1,10 @@
+Failed to get matching snapshot: No matches found for Elements matching predicate '"stage-part-0" IN identifiers' from input {(
+    Button, label: 'Accueil',
+    Button, label: 'Créer', Selected,
+    Button, label: 'Store',
+    Button, label: 'Mes widgets',
+    Button, identifier: 'create-size-small', label: 'Petit, L'essentiel en un coup d'œil., 1 widget, La place de 4 icônes',
+    Button, identifier: 'create-size-medium', label: 'Moyen, Plus d'informations : un widget dans sa version moyenne, ou 2 widgets réunis côte à côte., 1 ou 2 widgets, La place de 8 icônes',
+    Button, identifier: 'create-size-large', label: 'Grand, Un tableau de bord de l'espace : un widget en grand, ou jusqu'à 4 widgets réunis., 1 à 4 widgets, La place de 16 icônes',
+    Button, identifier: 'create-lock', label: 'Widget d'écran verrouillé'
+)}

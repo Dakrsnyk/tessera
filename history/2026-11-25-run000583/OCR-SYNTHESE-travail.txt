@@ -1,0 +1,2 @@
+SCORE OCR-travail propre corrects=4/4 lus=4 types=work,work,work,work dates=0
+SCORE OCR-travail flou corrects=4/4 lus=4 types=work,work,work,work dates=0

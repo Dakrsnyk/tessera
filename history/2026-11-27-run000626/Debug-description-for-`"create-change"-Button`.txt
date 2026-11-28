@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  ↪︎Find: Descendants matching type Button
+    ↪︎Find: Elements matching predicate '"create-change" IN identifiers'

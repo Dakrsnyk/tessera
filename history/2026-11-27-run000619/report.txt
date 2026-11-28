@@ -1,0 +1,492 @@
+run: 619
+commit: ee43363558f2e77f07635846ebc377e54691c2d3
+static: success
+simulator: success
+device: skipped
+tests: skipped
+ipa: none (the test IPA is no longer built or published)
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: success (images only: export, no shots, no screens)
+adkit-en: 0 shots (0 in-test copies), 0 screens, 212 export files
+---- adkit export (done.txt) ----
+styles	v-small-clock	1	snapshot
+styles	v-small-calendar	1	snapshot
+styles	v-small-worldClock	1	snapshot
+styles	v-small-progress	1	snapshot
+styles	v-small-countdown	1	snapshot
+styles	v-small-yearDots	1	snapshot
+styles	v-small-ageProgress	1	snapshot
+styles	v-small-birthday	1	snapshot
+styles	v-small-weekView	1	snapshot
+styles	v-small-holiday	1	snapshot
+styles	v-small-moonPhase	1	snapshot
+styles	v-small-tasks	1	snapshot
+styles	v-small-habits	1	snapshot
+styles	v-small-focus	1	snapshot
+styles	v-small-upNext	1	snapshot
+styles	v-small-note	1	snapshot
+styles	v-small-priorities	0	skipped: priorities has no small size or is retired
+styles	v-small-project	1	snapshot
+styles	v-small-deadline	1	snapshot
+styles	v-small-deepWork	1	snapshot
+styles	v-small-counter	1	snapshot
+styles	v-small-hydration	0	skipped: hydration has no small size or is retired
+styles	v-small-habitStreak	1	snapshot
+styles	v-small-habitWeek	0	skipped: habitWeek has no small size or is retired
+styles	v-small-habitRate	1	snapshot
+styles	v-small-caloriesLeft	1	snapshot
+styles	v-small-macros	1	snapshot
+styles	v-small-proteinLeft	1	snapshot
+styles	v-small-mealsToday	1	snapshot
+styles	v-small-nutritionWeek	1	snapshot
+styles	v-small-nutritionStreak	1	snapshot
+styles	v-small-quickFood	1	snapshot
+styles	v-small-nextMeal	1	snapshot
+styles	v-small-todaysWorkout	1	snapshot
+styles	v-small-nextSet	1	snapshot
+styles	v-small-restTimer	1	snapshot
+styles	v-small-weeklyVolume	1	snapshot
+styles	v-small-personalRecords	1	snapshot
+styles	v-small-trainingStreak	1	snapshot
+styles	v-small-caloriesBurned	1	snapshot
+styles	v-small-workoutMonth	1	snapshot
+styles	v-small-moneyFlow	1	snapshot
+styles	v-small-budgetLeft	1	snapshot
+styles	v-small-spendingByCategory	1	snapshot
+styles	v-small-billsUpcoming	1	snapshot
+styles	v-small-savingsGoal	1	snapshot
+styles	v-small-netWorth	1	snapshot
+styles	v-small-subscriptions	1	snapshot
+styles	v-small-quickExpense	1	snapshot
+styles	v-small-balance	1	snapshot
+styles	v-small-crypto	1	snapshot
+styles	v-small-portfolio	1	snapshot
+styles	v-small-allocation	1	snapshot
+styles	v-small-topMover	1	snapshot
+styles	v-small-watchlist	1	snapshot
+styles	v-small-marketOverview	1	snapshot
+styles	v-small-revenueGoal	1	snapshot
+styles	v-small-revenueTrend	1	snapshot
+styles	v-small-profit	1	snapshot
+styles	v-small-businessKPIs	1	snapshot
+styles	v-small-mrr	1	snapshot
+styles	v-small-revenueToday	1	snapshot
+styles	v-small-businessDashboard	0	skipped: businessDashboard has no small size or is retired
+styles	v-small-companySnapshot	1	snapshot
+styles	v-small-companyRevenue	1	snapshot
+styles	v-small-companyStock	1	snapshot
+styles	v-small-companyCompare	0	skipped: companyCompare has no small size or is retired
+styles	v-small-nextClass	1	snapshot
+styles	v-small-nextExam	1	snapshot
+styles	v-small-assignments	1	snapshot
+styles	v-small-gradeAverage	1	snapshot
+styles	v-small-semesterProgress	1	snapshot
+styles	v-small-flashcard	1	snapshot
+styles	v-small-studyHours	1	snapshot
+styles	v-small-timetable	1	snapshot
+styles	v-small-tripCountdown	1	snapshot
+styles	v-small-flight	1	snapshot
+styles	v-small-hotel	1	snapshot
+styles	v-small-localTime	1	snapshot
+styles	v-small-currency	1	snapshot
+styles	v-small-tripProgress	1	snapshot
+styles	v-small-nextActivity	1	snapshot
+styles	v-small-nextService	0	skipped: nextService has no small size or is retired
+styles	v-small-mileage	0	skipped: mileage has no small size or is retired
+styles	v-small-fuelStats	0	skipped: fuelStats has no small size or is retired
+styles	v-small-myDay	0	skipped: myDay has no small size or is retired
+styles	v-small-now	1	snapshot
+styles	v-small-morning	0	skipped: morning has no small size or is retired
+styles	v-small-fitnessDashboard	0	skipped: fitnessDashboard has no small size or is retired
+styles	v-small-moneyDashboard	0	skipped: moneyDashboard has no small size or is retired
+styles	v-small-studentDashboard	0	skipped: studentDashboard has no small size or is retired
+styles	v-small-aiSummary	1	snapshot
+styles	v-small-aiNutrition	1	snapshot
+styles	v-small-aiFinance	1	snapshot
+styles	v-small-aiProductivity	1	snapshot
+styles	v-medium-clock	1	snapshot
+styles	v-medium-calendar	1	snapshot
+styles	v-medium-worldClock	1	snapshot
+styles	v-medium-progress	1	snapshot
+styles	v-medium-countdown	1	snapshot
+styles	v-medium-yearDots	1	snapshot
+styles	v-medium-ageProgress	1	snapshot
+styles	v-medium-birthday	1	snapshot
+styles	v-medium-weekView	1	snapshot
+styles	v-medium-holiday	1	snapshot
+styles	v-medium-moonPhase	1	snapshot
+styles	v-medium-tasks	1	snapshot
+styles	v-medium-habits	1	snapshot
+styles	v-medium-focus	1	snapshot
+styles	v-medium-upNext	1	snapshot
+styles	v-medium-note	1	snapshot
+styles	v-medium-priorities	0	skipped: priorities has no medium size or is retired
+styles	v-medium-project	1	snapshot
+styles	v-medium-deadline	1	snapshot
+styles	v-medium-deepWork	1	snapshot
+styles	v-medium-counter	1	snapshot
+styles	v-medium-hydration	0	skipped: hydration has no medium size or is retired
+styles	v-medium-habitStreak	1	snapshot
+styles	v-medium-habitWeek	1	snapshot
+styles	v-medium-habitRate	1	snapshot
+styles	v-medium-caloriesLeft	1	snapshot
+styles	v-medium-macros	1	snapshot
+styles	v-medium-proteinLeft	1	snapshot
+styles	v-medium-mealsToday	1	snapshot
+styles	v-medium-nutritionWeek	1	snapshot
+styles	v-medium-nutritionStreak	1	snapshot
+styles	v-medium-quickFood	1	snapshot
+styles	v-medium-nextMeal	1	snapshot
+styles	v-medium-todaysWorkout	1	snapshot
+styles	v-medium-nextSet	1	snapshot
+styles	v-medium-restTimer	1	snapshot
+styles	v-medium-weeklyVolume	1	snapshot
+styles	v-medium-personalRecords	1	snapshot
+styles	v-medium-trainingStreak	1	snapshot
+styles	v-medium-caloriesBurned	1	snapshot
+styles	v-medium-workoutMonth	1	snapshot
+styles	v-medium-moneyFlow	1	snapshot
+styles	v-medium-budgetLeft	1	snapshot
+styles	v-medium-spendingByCategory	1	snapshot
+styles	v-medium-billsUpcoming	1	snapshot
+styles	v-medium-savingsGoal	1	snapshot
+styles	v-medium-netWorth	1	snapshot
+styles	v-medium-subscriptions	1	snapshot
+styles	v-medium-quickExpense	1	snapshot
+styles	v-medium-balance	1	snapshot
+styles	v-medium-crypto	1	snapshot
+styles	v-medium-portfolio	1	snapshot
+styles	v-medium-allocation	1	snapshot
+styles	v-medium-topMover	1	snapshot
+styles	v-medium-watchlist	1	snapshot
+styles	v-medium-marketOverview	1	snapshot
+styles	v-medium-revenueGoal	1	snapshot
+styles	v-medium-revenueTrend	1	snapshot
+styles	v-medium-profit	1	snapshot
+styles	v-medium-businessKPIs	1	snapshot
+styles	v-medium-mrr	1	snapshot
+styles	v-medium-revenueToday	1	snapshot
+styles	v-medium-businessDashboard	1	snapshot
+styles	v-medium-companySnapshot	1	snapshot
+styles	v-medium-companyRevenue	1	snapshot
+styles	v-medium-companyStock	1	snapshot
+styles	v-medium-companyCompare	1	snapshot
+styles	v-medium-nextClass	1	snapshot
+styles	v-medium-nextExam	1	snapshot
+styles	v-medium-assignments	1	snapshot
+styles	v-medium-gradeAverage	1	snapshot
+styles	v-medium-semesterProgress	1	snapshot
+styles	v-medium-flashcard	1	snapshot
+styles	v-medium-studyHours	1	snapshot
+styles	v-medium-timetable	1	snapshot
+styles	v-medium-tripCountdown	1	snapshot
+styles	v-medium-flight	1	snapshot
+styles	v-medium-hotel	1	snapshot
+styles	v-medium-localTime	1	snapshot
+styles	v-medium-currency	1	snapshot
+styles	v-medium-tripProgress	1	snapshot
+styles	v-medium-nextActivity	1	snapshot
+styles	v-medium-nextService	0	skipped: nextService has no medium size or is retired
+styles	v-medium-mileage	0	skipped: mileage has no medium size or is retired
+styles	v-medium-fuelStats	0	skipped: fuelStats has no medium size or is retired
+styles	v-medium-myDay	1	snapshot
+styles	v-medium-now	1	snapshot
+styles	v-medium-morning	1	snapshot
+styles	v-medium-fitnessDashboard	1	snapshot
+styles	v-medium-moneyDashboard	1	snapshot
+styles	v-medium-studentDashboard	1	snapshot
+styles	v-medium-aiSummary	1	snapshot
+styles	v-medium-aiNutrition	1	snapshot
+styles	v-medium-aiFinance	1	snapshot
+styles	v-medium-aiProductivity	1	snapshot
+styles	v-large-clock	0	skipped: clock has no large size or is retired
+styles	v-large-calendar	1	image (snapshot failed)
+styles	v-large-worldClock	0	skipped: worldClock has no large size or is retired
+styles	v-large-progress	0	skipped: progress has no large size or is retired
+styles	v-large-countdown	0	skipped: countdown has no large size or is retired
+styles	v-large-yearDots	1	image (snapshot failed)
+styles	v-large-ageProgress	0	skipped: ageProgress has no large size or is retired
+styles	v-large-birthday	0	skipped: birthday has no large size or is retired
+styles	v-large-weekView	0	skipped: weekView has no large size or is retired
+styles	v-large-holiday	0	skipped: holiday has no large size or is retired
+styles	v-large-moonPhase	0	skipped: moonPhase has no large size or is retired
+styles	v-large-tasks	1	image (snapshot failed)
+styles	v-large-habits	1	image (snapshot failed)
+styles	v-large-focus	0	skipped: focus has no large size or is retired
+styles	v-large-upNext	1	image (snapshot failed)
+styles	v-large-note	1	image (snapshot failed)
+styles	v-large-priorities	0	skipped: priorities has no large size or is retired
+styles	v-large-project	1	image (snapshot failed)
+styles	v-large-deadline	0	skipped: deadline has no large size or is retired
+styles	v-large-deepWork	1	image (snapshot failed)
+styles	v-large-counter	0	skipped: counter has no large size or is retired
+styles	v-large-hydration	0	skipped: hydration has no large size or is retired
+styles	v-large-habitStreak	0	skipped: habitStreak has no large size or is retired
+styles	v-large-habitWeek	1	image (snapshot failed)
+styles	v-large-habitRate	0	skipped: habitRate has no large size or is retired
+styles	v-large-caloriesLeft	0	skipped: caloriesLeft has no large size or is retired
+styles	v-large-macros	0	skipped: macros has no large size or is retired
+styles	v-large-proteinLeft	0	skipped: proteinLeft has no large size or is retired
+styles	v-large-mealsToday	1	image (snapshot failed)
+styles	v-large-nutritionWeek	1	image (snapshot failed)
+styles	v-large-nutritionStreak	0	skipped: nutritionStreak has no large size or is retired
+styles	v-large-quickFood	0	skipped: quickFood has no large size or is retired
+styles	v-large-nextMeal	0	skipped: nextMeal has no large size or is retired
+styles	v-large-todaysWorkout	1	image (snapshot failed)
+styles	v-large-nextSet	0	skipped: nextSet has no large size or is retired
+styles	v-large-restTimer	0	skipped: restTimer has no large size or is retired
+styles	v-large-weeklyVolume	1	image (snapshot failed)
+styles	v-large-personalRecords	1	image (snapshot failed)
+styles	v-large-trainingStreak	0	skipped: trainingStreak has no large size or is retired
+styles	v-large-caloriesBurned	0	skipped: caloriesBurned has no large size or is retired
+styles	v-large-workoutMonth	1	image (snapshot failed)
+styles	v-large-moneyFlow	1	image (snapshot failed)
+styles	v-large-budgetLeft	0	skipped: budgetLeft has no large size or is retired
+styles	v-large-spendingByCategory	1	image (snapshot failed)
+styles	v-large-billsUpcoming	1	image (snapshot failed)
+styles	v-large-savingsGoal	0	skipped: savingsGoal has no large size or is retired
+styles	v-large-netWorth	0	skipped: netWorth has no large size or is retired
+styles	v-large-subscriptions	1	image (snapshot failed)
+styles	v-large-quickExpense	0	skipped: quickExpense has no large size or is retired
+styles	v-large-balance	1	image (snapshot failed)
+styles	v-large-crypto	0	skipped: crypto has no large size or is retired
+styles	v-large-portfolio	1	image (snapshot failed)
+styles	v-large-allocation	0	skipped: allocation has no large size or is retired
+styles	v-large-topMover	0	skipped: topMover has no large size or is retired
+styles	v-large-watchlist	1	image (snapshot failed)
+styles	v-large-marketOverview	0	skipped: marketOverview has no large size or is retired
+styles	v-large-revenueGoal	0	skipped: revenueGoal has no large size or is retired
+styles	v-large-revenueTrend	1	image (snapshot failed)
+styles	v-large-profit	0	skipped: profit has no large size or is retired
+styles	v-large-businessKPIs	1	image (snapshot failed)
+styles	v-large-mrr	0	skipped: mrr has no large size or is retired
+styles	v-large-revenueToday	0	skipped: revenueToday has no large size or is retired
+styles	v-large-businessDashboard	1	image (snapshot failed)
+styles	v-large-companySnapshot	0	skipped: companySnapshot has no large size or is retired
+styles	v-large-companyRevenue	1	image (snapshot failed)
+styles	v-large-companyStock	0	skipped: companyStock has no large size or is retired
+styles	v-large-companyCompare	1	image (snapshot failed)
+styles	v-large-nextClass	0	skipped: nextClass has no large size or is retired
+styles	v-large-nextExam	0	skipped: nextExam has no large size or is retired
+styles	v-large-assignments	1	image (snapshot failed)
+styles	v-large-gradeAverage	1	image (snapshot failed)
+styles	v-large-semesterProgress	0	skipped: semesterProgress has no large size or is retired
+styles	v-large-flashcard	0	skipped: flashcard has no large size or is retired
+styles	v-large-studyHours	1	image (snapshot failed)
+styles	v-large-timetable	1	image (snapshot failed)
+styles	v-large-tripCountdown	0	skipped: tripCountdown has no large size or is retired
+styles	v-large-flight	0	skipped: flight has no large size or is retired
+styles	v-large-hotel	0	skipped: hotel has no large size or is retired
+styles	v-large-localTime	0	skipped: localTime has no large size or is retired
+styles	v-large-currency	0	skipped: currency has no large size or is retired
+styles	v-large-tripProgress	0	skipped: tripProgress has no large size or is retired
+styles	v-large-nextActivity	0	skipped: nextActivity has no large size or is retired
+styles	v-large-nextService	0	skipped: nextService has no large size or is retired
+styles	v-large-mileage	0	skipped: mileage has no large size or is retired
+styles	v-large-fuelStats	0	skipped: fuelStats has no large size or is retired
+styles	v-large-myDay	1	image (snapshot failed)
+styles	v-large-now	1	image (snapshot failed)
+styles	v-large-morning	1	image (snapshot failed)
+styles	v-large-fitnessDashboard	1	image (snapshot failed)
+styles	v-large-moneyDashboard	1	image (snapshot failed)
+styles	v-large-studentDashboard	1	image (snapshot failed)
+styles	v-large-aiSummary	1	image (snapshot failed)
+styles	v-large-aiNutrition	0	skipped: aiNutrition has no large size or is retired
+styles	v-large-aiFinance	0	skipped: aiFinance has no large size or is retired
+styles	v-large-aiProductivity	0	skipped: aiProductivity has no large size or is retired
+---- errors ----
+OK: 4387 memberwise calls checked, 99 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+Not in the catalog (3):
+  Tu pourras le modifier plus tard dans « Mes widgets ».
+  Enregistrer ce style
+  Personnaliser
+l10n sync: 7038 texts in the code, 3 not in the catalog, 0 untranslated, 7 unused in the catalog
+---- tests ----
+privacy manifest: app yes, widget yes
+alternate app icons in the app: 19
+---- widget extension bundle ----
+AbrilFatface-Regular.ttf
+AlexBrush-Regular.ttf
+Allura-Regular.ttf
+Almendra-Bold.ttf
+Almendra-Regular.ttf
+AmaticSC-Bold.ttf
+AmaticSC-Regular.ttf
+Anton-Regular.ttf
+ArchitectsDaughter-Regular.ttf
+ArchivoBlack-Regular.ttf
+ardane-ding.wav
+ArdaneWidgets
+Arizonia-Regular.ttf
+Audiowide-Regular.ttf
+Ballet-Variable.ttf
+Bangers-Regular.ttf
+BebasNeue-Regular.ttf
+BodoniModa-Variable.ttf
+BonheurRoyale-Regular.ttf
+Bungee-Regular.ttf
+Carattere-Regular.ttf
+Charm-Regular.ttf
+Chewy-Regular.ttf
+Cinzel-Variable.ttf
+CinzelDecorative-Black.ttf
+CinzelDecorative-Bold.ttf
+CinzelDecorative-Regular.ttf
+Comfortaa-Variable.ttf
+Cookie-Regular.ttf
+Corinthia-Regular.ttf
+Courgette-Regular.ttf
+CourierPrime-Bold.ttf
+CourierPrime-Regular.ttf
+CoveredByYourGrace.ttf
+DancingScript-Variable.ttf
+de.lproj
+DMSerifDisplay-Italic.ttf
+DMSerifDisplay-Regular.ttf
+en.lproj
+Engagement-Regular.ttf
+Ephesis-Regular.ttf
+es.lproj
+EuphoriaScript-Regular.ttf
+ExerciseCatalog.json
+Explora-Regular.ttf
+fr.lproj
+Fredoka-Variable.ttf
+Gloock-Regular.ttf
+GloriaHallelujah.ttf
+GrandHotel-Regular.ttf
+GreatVibes-Regular.ttf
+Gwendolyn-Regular.ttf
+Handlee-Regular.ttf
+HerrVonMuellerhoff-Regular.ttf
+HomemadeApple-Regular.ttf
+ImperialScript-Regular.ttf
+IndieFlower-Regular.ttf
+Info.plist
+Inspiration-Regular.ttf
+it.lproj
+Italiana-Regular.ttf
+Italianno-Regular.ttf
+ja.lproj
+JosefinSans-Variable.ttf
+JosefinSlab-Variable.ttf
+KaushanScript-Regular.ttf
+Kristi-Regular.ttf
+LaBelleAurore.ttf
+LeagueScript-Regular.ttf
+LibreBaskerville-Variable.ttf
+Licorice-Regular.ttf
+Limelight-Regular.ttf
+Lora-Variable.ttf
+LoveLight-Regular.ttf
+LoversQuarrel-Regular.ttf
+Marcellus-Regular.ttf
+MarckScript-Regular.ttf
+MeaCulpa-Regular.ttf
+Metadata.appintents
+Monoton-Regular.ttf
+MonsieurLaDoulaise-Regular.ttf
+MrDeHaviland-Regular.ttf
+MrsSaintDelafield-Regular.ttf
+MrsSheppards-Regular.ttf
+MsMadi-Regular.ttf
+Niconne-Regular.ttf
+Norican-Regular.ttf
+OleoScript-Regular.ttf
+OoohBaby-Regular.ttf
+Orbitron-Variable.ttf
+Oswald-Variable.ttf
+Ovo-Regular.ttf
+Pacifico-Regular.ttf
+Parisienne-Regular.ttf
+PassionsConflict-Regular.ttf
+PatrickHand-Regular.ttf
+PermanentMarker-Regular.ttf
+PetitFormalScript-Regular.ttf
+PinyonScript-Regular.ttf
+PirataOne-Regular.ttf
+Playball-Regular.ttf
+PlayfairDisplay-Variable.ttf
+PoiretOne-Regular.ttf
+Poppins-Bold.ttf
+Poppins-Regular.ttf
+PressStart2P-Regular.ttf
+PrivacyInfo.xcprivacy
+pt-BR.lproj
+Quicksand-Variable.ttf
+Qwigley-Regular.ttf
+QwitcherGrypen-Regular.ttf
+Raleway-Variable.ttf
+ReenieBeanie.ttf
+Righteous-Regular.ttf
+Rochester-Regular.ttf
+RockSalt-Regular.ttf
+RougeScript-Regular.ttf
+Sacramento-Regular.ttf
+Satisfy-Regular.ttf
+SeaweedScript-Regular.ttf
+SendFlowers-Regular.ttf
+Sevillana-Regular.ttf
+Shrikhand-Regular.ttf
+SpaceMono-Bold.ttf
+SpaceMono-Regular.ttf
+SpecialElite-Regular.ttf
+Tangerine-Bold.ttf
+Tangerine-Regular.ttf
+UnifrakturCook-Bold.ttf
+Updock-Regular.ttf
+Whisper-Regular.ttf
+WindSong-Medium.ttf
+WindSong-Regular.ttf
+Yellowtail-Regular.ttf
+extract.actionsdata
+version.json
+ExtractAppIntentsMetadata (in target 'ArdaneWidgets' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'Ardane' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'ArdaneTests' from project 'Ardane')
+ExtractAppIntentsMetadata (in target 'ArdaneUITests' from project 'Ardane')
+---- last lines ----
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/lib/libXCTestSwiftSupport.dylib /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCUnit.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCUnit.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCUIAutomation.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCUIAutomation.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTestCore.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTestCore.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTest.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/XCTest.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/XCTAutomationSupport.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks/Testing.framework /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-copy -exclude .DS_Store -exclude CVS -exclude .svn -exclude .git -exclude .hg -exclude Headers -exclude PrivateHeaders -exclude Modules -exclude \*.tbd -resolve-src-symlinks /Applications/Xcode_26.3.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks/Testing.framework /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/Frameworks
+
+RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    builtin-RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+Touch /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /usr/bin/touch -c /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+** TEST BUILD SUCCEEDED **
+

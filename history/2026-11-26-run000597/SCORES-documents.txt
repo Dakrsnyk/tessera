@@ -1,0 +1,3 @@
+SCORE travail-liste bruit=0 P=1.00 R=1.00 E=1.00 attendus=3
+SCORE employes-par-jours bruit=0 P=1.00 R=1.00 E=1.00 attendus=11
+SCORE rendez-vous-fr bruit=0 P=1.00 R=1.00 E=1.00 attendus=2

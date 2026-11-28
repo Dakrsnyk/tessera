@@ -1,0 +1,28 @@
+Attributes: Button, 0x117530400, {{34.0, 1209.3}, {334.0, 56.7}}, identifier: 'studies-timetable', label: 'Horaire, 15 cours par semaine'
+Element subtree:
+ →Button, 0x117530400, {{34.0, 1209.3}, {334.0, 56.7}}, identifier: 'studies-timetable', label: 'Horaire, 15 cours par semaine'
+Path to element:
+ →Application, 0x11751e2a0, pid: 66681, label: 'Ardane'
+  ↳Window (Main), 0x11750de80, {{inf, inf}, {0.0, 0.0}}
+   ↳Other, 0x1175206d0, {{inf, inf}, {0.0, 0.0}}
+    ↳Other, 0x11750ae40, {{inf, inf}, {0.0, 0.0}}
+     ↳Other, 0x11752aa40, {{inf, inf}, {0.0, 0.0}}
+      ↳Other, 0x1064560c0, {{inf, inf}, {0.0, 0.0}}
+       ↳Other, 0x117515020, {{inf, inf}, {0.0, 0.0}}
+        ↳Other, 0x117519950, {{inf, inf}, {0.0, 0.0}}
+         ↳Other, 0x11751d130, {{inf, inf}, {0.0, 0.0}}
+          ↳Other, 0x11752f8c0, {{inf, inf}, {0.0, 0.0}}
+           ↳Other, 0x11752f9e0, {{inf, inf}, {0.0, 0.0}}
+            ↳Other, 0x11752fb00, {{inf, inf}, {0.0, 0.0}}
+             ↳Other, 0x11752fc20, {{inf, inf}, {0.0, 0.0}}
+              ↳Other, 0x11752fd40, {{inf, inf}, {0.0, 0.0}}
+               ↳Other, 0x11752fe60, {{inf, inf}, {0.0, 0.0}}
+                ↳Other, 0x11752ff80, {{inf, inf}, {0.0, 0.0}}
+                 ↳Other, 0x1175300a0, {{inf, inf}, {0.0, 0.0}}
+                  ↳ScrollView, 0x1175301c0, {{inf, inf}, {0.0, 0.0}}
+                   ↳Other, 0x1175302e0, {{inf, inf}, {0.0, 0.0}}
+                    ↳Button, 0x117530400, {{34.0, 1209.3}, {334.0, 56.7}}, identifier: 'studies-timetable', label: 'Horaire, 15 cours par semaine'
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  ↪︎Find: Descendants matching type Button
+    ↪︎Find: Elements matching predicate '"studies-timetable" IN identifiers'

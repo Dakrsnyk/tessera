@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'com.dakrsnyk.ardane'
+  ↪︎Find: Descendants matching type StaticText
+    ↪︎Find: Elements matching predicate '"tutorial-step" IN identifiers'

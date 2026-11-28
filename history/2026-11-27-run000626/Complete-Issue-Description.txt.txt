@@ -1,0 +1,1 @@
+Failed to failed to compute hit point for Button, {{-289.0, 284.0}, {68.0, 60.0}}, identifier: 'studio-style', label: 'Style': Activation point invalid and no suggested hit points based on element frame. (Underlying Error: Activation point invalid and no suggested hit points based on element frame)

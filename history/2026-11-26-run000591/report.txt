@@ -1,0 +1,257 @@
+run: 591
+commit: fa417b27aa7ddbd20b1fe942abe90771fc5a21e1
+static: success
+simulator: cancelled
+device: skipped
+tests: skipped
+ipa: none (the test IPA is no longer built or published)
+screenshots: skipped
+release: skipped
+testflight: skipped
+marketing: skipped
+videos: skipped
+adkit: skipped
+---- errors ----
+OK: 4355 memberwise calls checked, 99 widget kinds, 20 app icons, Release safety, internal Premium build and privacy manifest verified
+Not in the catalog (1017):
+  Styles · page %@/%@
+  Ajoute tes tâches à ne pas oublier.
+  Un style change tout l'aspect du widget : fond, police, formes, bordure et effets. Le contenu ne change pas. Ensuite, Couleurs repeint le style dans ta couleur.
+  Pas encore assez d'opérations pour une analyse détaillée : elle apparaît dès que tu as noté quelques dépenses et revenus.
+  Taux d'épargne
+  Part des revenus gardée
+  (revenus − dépenses) ÷ revenus, du 1er du mois à aujourd'hui : (%@ − %@) ÷ %@.
+  Aucun revenu noté ce mois-ci : le taux d'épargne ne peut pas être calculé. %@ dépensés.
+  Projection de fin de mois
+  Fin de mois
+  Rythme par jour
+  Déjà noté à venir
+  Dépensé à ce jour + (dépensé ÷ jours écoulés) × jours restants + ce qui est déjà noté pour la suite : %@ + (%@ ÷ %@) × %@ + %@.
+  %@ de plus que ton budget de %@.
+  %@ de moins que ton budget de %@.
+  Catégories face à leur moyenne
+  %@ · moyenne %@ · mois dernier %@
+  Écart = dépensé ce mois-ci − moyenne des %@ où tu as noté des dépenses, tous mesurés jusqu'au même moment du mois.
+  mois précédent
+  mois précédents
+  Plus grosses hausses
+  moyenne %@ → %@
+  Les trois catégories dont l'écart avec la moyenne est le plus grand vers le haut.
+  Dépenses récurrentes détectées
+  6 derniers mois
+  %@ mois sur 6
+  Même libellé noté dans au moins 3 mois différents, à des montants à 10 % près de leur médiane. Les factures et dépenses fixes déjà déclarées sont à part.
+  Jours de la semaine
+  dépense moyenne par jour
+  Dépense moyenne par jour de la semaine
+  %@ : %@ en moyenne
+  Le %@ est ton jour le plus dépensier : %@ en moyenne.
+  Total dépensé ce jour de la semaine ÷ nombre de ces jours, sur les 12 dernières semaines (ou depuis ta première dépense).
+  Agenda, tâches et habitudes, dès le réveil.
+  Focus, travail profond, tâches et échéances.
+  Halo
+  Lueur rose douce, chiffres fins en minuscules
+  Opale
+  Pastels nacrés, filet clair, serif italique
+  Aube pêche, arrondi plein, chiffres gras
+l10n sync: 7023 texts in the code, 1017 not in the catalog, 0 untranslated, 8 unused in the catalog
+/Users/runner/work/tessera/tessera/App/Core/AppModel.swift:103:29: error: instance method 'state' requires that 'StyleLibrary' conform to 'StoredState'
+/Users/runner/work/tessera/tessera/App/Core/AppModel.swift:423:15: error: instance method 'save' requires that 'StyleLibrary' conform to 'StoredState'
+/Users/runner/work/tessera/tessera/App/Core/AppModel.swift:430:15: error: instance method 'save' requires that 'StyleLibrary' conform to 'StoredState'
+/Users/runner/work/tessera/tessera/App/Core/AppModel.swift:435:15: error: instance method 'save' requires that 'StyleLibrary' conform to 'StoredState'
+/Users/runner/work/tessera/tessera/Shared/Model/StyleLibrary.swift:20:37: error: type 'StyleLibrary' has no member 'freeIDs'
+/Users/runner/work/tessera/tessera/Shared/Model/StyleLibrary.swift:45:6: error: invalid redeclaration of 'StyleLibrary'
+/Users/runner/work/tessera/tessera/Shared/Model/StyleLibrary.swift:56:47: error: cannot find 'generated' in scope
+/Users/runner/work/tessera/tessera/Shared/Model/StyleLibraryData.swift:4:11: error: 'StyleLibrary' is ambiguous for type lookup in this context
+/Users/runner/work/tessera/tessera/Shared/Model/WidgetStyle.swift:830:11: error: 'StyleLibrary' is ambiguous for type lookup in this context
+/Users/runner/work/tessera/tessera/Tests/Support/ScheduleFixtures.swift:3:18: error: Unable to find module dependency: 'Ardane'
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/Ardane.build/Objects-normal/arm64/Ardane.abi.json): No such file or directory (2) (in target 'Ardane' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/Ardane.build/Objects-normal/arm64/Ardane.swiftdoc): No such file or directory (2) (in target 'Ardane' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/Ardane.build/Objects-normal/arm64/Ardane.swiftmodule): No such file or directory (2) (in target 'Ardane' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/Ardane.build/Objects-normal/arm64/Ardane.swiftsourceinfo): No such file or directory (2) (in target 'Ardane' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneTests.build/Objects-normal/arm64/ArdaneTests.abi.json): No such file or directory (2) (in target 'ArdaneTests' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneTests.build/Objects-normal/arm64/ArdaneTests.swiftdoc): No such file or directory (2) (in target 'ArdaneTests' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneTests.build/Objects-normal/arm64/ArdaneTests.swiftmodule): No such file or directory (2) (in target 'ArdaneTests' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneTests.build/Objects-normal/arm64/ArdaneTests.swiftsourceinfo): No such file or directory (2) (in target 'ArdaneTests' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.abi.json): No such file or directory (2) (in target 'ArdaneWidgets' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.swiftdoc): No such file or directory (2) (in target 'ArdaneWidgets' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.swiftmodule): No such file or directory (2) (in target 'ArdaneWidgets' from project 'Ardane')
+error: lstat(/Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.swiftsourceinfo): No such file or directory (2) (in target 'ArdaneWidgets' from project 'Ardane')
+---- tests ----
+privacy manifest: app yes, widget yes
+alternate app icons in the app: 19
+---- widget extension bundle ----
+AbrilFatface-Regular.ttf
+AlexBrush-Regular.ttf
+Allura-Regular.ttf
+Almendra-Bold.ttf
+Almendra-Regular.ttf
+AmaticSC-Bold.ttf
+AmaticSC-Regular.ttf
+Anton-Regular.ttf
+ArchitectsDaughter-Regular.ttf
+ArchivoBlack-Regular.ttf
+ardane-ding.wav
+Arizonia-Regular.ttf
+Audiowide-Regular.ttf
+Ballet-Variable.ttf
+Bangers-Regular.ttf
+BebasNeue-Regular.ttf
+BodoniModa-Variable.ttf
+BonheurRoyale-Regular.ttf
+Bungee-Regular.ttf
+Carattere-Regular.ttf
+Charm-Regular.ttf
+Chewy-Regular.ttf
+Cinzel-Variable.ttf
+CinzelDecorative-Black.ttf
+CinzelDecorative-Bold.ttf
+CinzelDecorative-Regular.ttf
+Comfortaa-Variable.ttf
+Cookie-Regular.ttf
+Corinthia-Regular.ttf
+Courgette-Regular.ttf
+CourierPrime-Bold.ttf
+CourierPrime-Regular.ttf
+CoveredByYourGrace.ttf
+DancingScript-Variable.ttf
+de.lproj
+DMSerifDisplay-Italic.ttf
+DMSerifDisplay-Regular.ttf
+en.lproj
+Engagement-Regular.ttf
+Ephesis-Regular.ttf
+es.lproj
+EuphoriaScript-Regular.ttf
+ExerciseCatalog.json
+Explora-Regular.ttf
+fr.lproj
+Fredoka-Variable.ttf
+Gloock-Regular.ttf
+GloriaHallelujah.ttf
+GrandHotel-Regular.ttf
+GreatVibes-Regular.ttf
+Gwendolyn-Regular.ttf
+Handlee-Regular.ttf
+HerrVonMuellerhoff-Regular.ttf
+HomemadeApple-Regular.ttf
+ImperialScript-Regular.ttf
+IndieFlower-Regular.ttf
+Info.plist
+Inspiration-Regular.ttf
+it.lproj
+Italiana-Regular.ttf
+Italianno-Regular.ttf
+ja.lproj
+JosefinSans-Variable.ttf
+JosefinSlab-Variable.ttf
+KaushanScript-Regular.ttf
+Kristi-Regular.ttf
+LaBelleAurore.ttf
+LeagueScript-Regular.ttf
+LibreBaskerville-Variable.ttf
+Licorice-Regular.ttf
+Limelight-Regular.ttf
+Lora-Variable.ttf
+LoveLight-Regular.ttf
+LoversQuarrel-Regular.ttf
+Marcellus-Regular.ttf
+MarckScript-Regular.ttf
+MeaCulpa-Regular.ttf
+Monoton-Regular.ttf
+MonsieurLaDoulaise-Regular.ttf
+MrDeHaviland-Regular.ttf
+MrsSaintDelafield-Regular.ttf
+MrsSheppards-Regular.ttf
+MsMadi-Regular.ttf
+Niconne-Regular.ttf
+Norican-Regular.ttf
+OleoScript-Regular.ttf
+OoohBaby-Regular.ttf
+Orbitron-Variable.ttf
+Oswald-Variable.ttf
+Ovo-Regular.ttf
+Pacifico-Regular.ttf
+Parisienne-Regular.ttf
+PassionsConflict-Regular.ttf
+PatrickHand-Regular.ttf
+PermanentMarker-Regular.ttf
+PetitFormalScript-Regular.ttf
+PinyonScript-Regular.ttf
+PirataOne-Regular.ttf
+Playball-Regular.ttf
+PlayfairDisplay-Variable.ttf
+PoiretOne-Regular.ttf
+Poppins-Bold.ttf
+Poppins-Regular.ttf
+PressStart2P-Regular.ttf
+PrivacyInfo.xcprivacy
+pt-BR.lproj
+Quicksand-Variable.ttf
+Qwigley-Regular.ttf
+QwitcherGrypen-Regular.ttf
+Raleway-Variable.ttf
+ReenieBeanie.ttf
+Righteous-Regular.ttf
+Rochester-Regular.ttf
+RockSalt-Regular.ttf
+RougeScript-Regular.ttf
+Sacramento-Regular.ttf
+Satisfy-Regular.ttf
+SeaweedScript-Regular.ttf
+SendFlowers-Regular.ttf
+Sevillana-Regular.ttf
+Shrikhand-Regular.ttf
+SpaceMono-Bold.ttf
+SpaceMono-Regular.ttf
+SpecialElite-Regular.ttf
+Tangerine-Bold.ttf
+Tangerine-Regular.ttf
+UnifrakturCook-Bold.ttf
+Updock-Regular.ttf
+Whisper-Regular.ttf
+WindSong-Medium.ttf
+WindSong-Regular.ttf
+Yellowtail-Regular.ttf
+ExtractAppIntentsMetadata (in target 'ArdaneUITests' from project 'Ardane')
+---- last lines ----
+    cd /Users/runner/work/tessera/tessera
+    builtin-RegisterExecutionPolicyException /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+Touch /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest (in target 'ArdaneUITests' from project 'Ardane')
+    cd /Users/runner/work/tessera/tessera
+    /usr/bin/touch -c /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneUITests-Runner.app/PlugIns/ArdaneUITests.xctest
+
+** TEST BUILD FAILED **
+
+
+The following build commands failed:
+	EmitSwiftModule normal arm64 (in target 'ArdaneWidgets' from project 'Ardane')
+	SwiftEmitModule normal arm64 Emitting\ module\ for\ ArdaneWidgets (in target 'ArdaneWidgets' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.swiftmodule (in target 'ArdaneWidgets' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.swiftdoc (in target 'ArdaneWidgets' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.abi.json (in target 'ArdaneWidgets' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneWidgets.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneWidgets.build/Objects-normal/arm64/ArdaneWidgets.swiftsourceinfo (in target 'ArdaneWidgets' from project 'Ardane')
+	SwiftCompile normal arm64 Compiling\ StudyLiveActivity.swift,\ WorkoutLiveActivity.swift,\ Combo.swift,\ Content.swift,\ DesignOptions.swift,\ FontCatalog.swift,\ FontCatalogBundled.swift,\ KindCatalog.swift,\ LossyList.swift,\ Packs.swift,\ PhotoQuote.swift,\ ReviewPrompt.swift,\ Settings.swift,\ StyleColors.swift,\ StyleLibrary.swift,\ StyleLibraryData.swift,\ Templates.swift,\ Units.swift,\ WidgetDesign.swift,\ WidgetGroup.swift,\ WidgetKind.swift,\ WidgetStyle.swift /Users/runner/work/tessera/tessera/Shared/Live/StudyLiveActivity.swift /Users/runner/work/tessera/tessera/Shared/Live/WorkoutLiveActivity.swift /Users/runner/work/tessera/tessera/Shared/Model/Combo.swift /Users/runner/work/tessera/tessera/Shared/Model/Content.swift /Users/runner/work/tessera/tessera/Shared/Model/DesignOptions.swift /Users/runner/work/tessera/tessera/Shared/Model/FontCatalog.swift /Users/runner/work/tessera/tessera/Shared/Model/FontCatalogBundled.swift /Users/runner/work/tessera/tessera/Shared/Model/KindCatalog.swift /Users/runner/work/tessera/tessera/Shared/Model/LossyList.swift /Users/runner/work/tessera/tessera/Shared/Model/Packs.swift /Users/runner/work/tessera/tessera/Shared/Model/PhotoQuote.swift /Users/runner/work/tessera/tessera/Shared/Model/ReviewPrompt.swift /Users/runner/work/tessera/tessera/Shared/Model/Settings.swift /Users/runner/work/tessera/tessera/Shared/Model/StyleColors.swift /Users/runner/work/tessera/tessera/Shared/Model/StyleLibrary.swift /Users/runner/work/tessera/tessera/Shared/Model/StyleLibraryData.swift /Users/runner/work/tessera/tessera/Shared/Model/Templates.swift /Users/runner/work/tessera/tessera/Shared/Model/Units.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetDesign.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetGroup.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetKind.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetStyle.swift (in target 'ArdaneWidgets' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Model/StyleLibrary.swift (in target 'ArdaneWidgets' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Model/StyleLibraryData.swift (in target 'ArdaneWidgets' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Model/WidgetStyle.swift (in target 'ArdaneWidgets' from project 'Ardane')
+	EmitSwiftModule normal arm64 (in target 'Ardane' from project 'Ardane')
+	SwiftEmitModule normal arm64 Emitting\ module\ for\ Ardane (in target 'Ardane' from project 'Ardane')
+	SwiftCompile normal arm64 Compiling\ PhotoQuote.swift,\ ReviewPrompt.swift,\ Settings.swift,\ StyleColors.swift,\ StyleLibrary.swift,\ StyleLibraryData.swift,\ Templates.swift,\ Units.swift,\ WidgetDesign.swift,\ WidgetGroup.swift,\ WidgetKind.swift,\ WidgetStyle.swift,\ WorldCities.swift,\ DataWidgets.swift,\ PhotoQuoteWidgets.swift,\ ProductivityWidgets.swift,\ TimeWidgets.swift,\ BusinessTiles.swift,\ CarTiles.swift,\ DashboardTiles.swift,\ FitnessTiles.swift,\ HabitHeatmap.swift,\ MoneyTiles.swift /Users/runner/work/tessera/tessera/Shared/Model/PhotoQuote.swift /Users/runner/work/tessera/tessera/Shared/Model/ReviewPrompt.swift /Users/runner/work/tessera/tessera/Shared/Model/Settings.swift /Users/runner/work/tessera/tessera/Shared/Model/StyleColors.swift /Users/runner/work/tessera/tessera/Shared/Model/StyleLibrary.swift /Users/runner/work/tessera/tessera/Shared/Model/StyleLibraryData.swift /Users/runner/work/tessera/tessera/Shared/Model/Templates.swift /Users/runner/work/tessera/tessera/Shared/Model/Units.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetDesign.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetGroup.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetKind.swift /Users/runner/work/tessera/tessera/Shared/Model/WidgetStyle.swift /Users/runner/work/tessera/tessera/Shared/Model/WorldCities.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/DataWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/PhotoQuoteWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/ProductivityWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Kinds/TimeWidgets.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/BusinessTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/CarTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/DashboardTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/FitnessTiles.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/HabitHeatmap.swift /Users/runner/work/tessera/tessera/Shared/Render/Tiles/MoneyTiles.swift (in target 'Ardane' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Model/StyleLibrary.swift (in target 'Ardane' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Model/StyleLibraryData.swift (in target 'Ardane' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/Shared/Model/WidgetStyle.swift (in target 'Ardane' from project 'Ardane')
+	SwiftCompile normal arm64 Compiling\ AccessibilityHelpers.swift,\ Cristal.swift,\ CristalScreen.swift,\ PermissionExplainer.swift,\ Pressable.swift,\ SaveFlight.swift,\ SectionIndex.swift,\ StylePicker.swift,\ UIComponents.swift,\ AdExport.swift,\ AdScreens.swift,\ Agenda.swift,\ AppIcons.swift,\ AppModel.swift,\ AppModel+Debug.swift,\ DailyBrief.swift,\ DailyCategories.swift,\ DailyDefaults.swift,\ DataBackup.swift,\ DataItems.swift,\ DemoGallery.swift,\ HabitSuggestions.swift,\ MarketingShots.swift,\ NutrientFile.swift /Users/runner/work/tessera/tessera/App/Components/AccessibilityHelpers.swift /Users/runner/work/tessera/tessera/App/Components/Cristal.swift /Users/runner/work/tessera/tessera/App/Components/CristalScreen.swift /Users/runner/work/tessera/tessera/App/Components/PermissionExplainer.swift /Users/runner/work/tessera/tessera/App/Components/Pressable.swift /Users/runner/work/tessera/tessera/App/Components/SaveFlight.swift /Users/runner/work/tessera/tessera/App/Components/SectionIndex.swift /Users/runner/work/tessera/tessera/App/Components/StylePicker.swift /Users/runner/work/tessera/tessera/App/Components/UIComponents.swift /Users/runner/work/tessera/tessera/App/Core/AdExport.swift /Users/runner/work/tessera/tessera/App/Core/AdScreens.swift /Users/runner/work/tessera/tessera/App/Core/Agenda.swift /Users/runner/work/tessera/tessera/App/Core/AppIcons.swift /Users/runner/work/tessera/tessera/App/Core/AppModel.swift /Users/runner/work/tessera/tessera/App/Core/AppModel+Debug.swift /Users/runner/work/tessera/tessera/App/Core/DailyBrief.swift /Users/runner/work/tessera/tessera/App/Core/DailyCategories.swift /Users/runner/work/tessera/tessera/App/Core/DailyDefaults.swift /Users/runner/work/tessera/tessera/App/Core/DataBackup.swift /Users/runner/work/tessera/tessera/App/Core/DataItems.swift /Users/runner/work/tessera/tessera/App/Core/DemoGallery.swift /Users/runner/work/tessera/tessera/App/Core/HabitSuggestions.swift /Users/runner/work/tessera/tessera/App/Core/MarketingShots.swift /Users/runner/work/tessera/tessera/App/Core/NutrientFile.swift (in target 'Ardane' from project 'Ardane')
+	SwiftCompile normal arm64 /Users/runner/work/tessera/tessera/App/Core/AppModel.swift (in target 'Ardane' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/Ardane.build/Objects-normal/arm64/Ardane.swiftmodule (in target 'Ardane' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/Ardane.build/Objects-normal/arm64/Ardane.swiftdoc (in target 'Ardane' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/Ardane.build/Objects-normal/arm64/Ardane.abi.json (in target 'Ardane' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/Ardane.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/Ardane.build/Objects-normal/arm64/Ardane.swiftsourceinfo (in target 'Ardane' from project 'Ardane')
+	SwiftDriver ArdaneTests normal arm64 com.apple.xcode.tools.swift.compiler (in target 'ArdaneTests' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneTests.swiftmodule/arm64-apple-ios-simulator.swiftmodule /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneTests.build/Objects-normal/arm64/ArdaneTests.swiftmodule (in target 'ArdaneTests' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneTests.swiftmodule/arm64-apple-ios-simulator.swiftdoc /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneTests.build/Objects-normal/arm64/ArdaneTests.swiftdoc (in target 'ArdaneTests' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneTests.swiftmodule/arm64-apple-ios-simulator.abi.json /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneTests.build/Objects-normal/arm64/ArdaneTests.abi.json (in target 'ArdaneTests' from project 'Ardane')
+	Copy /Users/runner/work/tessera/tessera/build/sim/Build/Products/Debug-iphonesimulator/ArdaneTests.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo /Users/runner/work/tessera/tessera/build/sim/Build/Intermediates.noindex/Ardane.build/Debug-iphonesimulator/ArdaneTests.build/Objects-normal/arm64/ArdaneTests.swiftsourceinfo (in target 'ArdaneTests' from project 'Ardane')
+	Building project Ardane for testing with scheme Ardane
+(28 failures)
