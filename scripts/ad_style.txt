@@ -1,3 +1,3 @@
 # Style de l'app pour les captures pub ([adkit], [adkit-en], [adkit-img]) : un identifiant d'AppStyleID (Shared/Model/Settings.swift).
-# slate = « Graphite » (choix du PDG le 2026-11-27 pour la pub principale) ; sapphire = Saphir, le style par défaut de l'app.
+# slate = « Graphite » (choix du PDG le 2026-11-27 pour la pub principale) ; sapphire = Saphir (Premium) ; slate est aussi la couleur gratuite et par défaut de l'app depuis le 2026-11-27.
 slate
