@@ -1312,4 +1312,14 @@ widget revenueGoal-s-look-cyber-neon-pluie kind=revenueGoal family=small scale=4
 widget habits-m-look-cyber-neon-pluie kind=habits family=medium scale=3 look=cyber-neon-pluie
 widget revenueGoal-s-look-aura-spirit kind=revenueGoal family=small scale=4 look=aura-spirit
 widget habits-m-look-aura-spirit kind=habits family=medium scale=3 look=aura-spirit
-only macros-m-light habits-m-light revenueGoal-s-light revenueGoal-s-look-ballet-rose habits-m-look-ballet-rose macros-m-look-ballet-rose revenueGoal-s-look-cyber-neon-pluie habits-m-look-cyber-neon-pluie macros-m-look-cyber-neon-pluie revenueGoal-s-look-aura-spirit habits-m-look-aura-spirit macros-m-look-aura-spirit
+# 2026-11-27 : pub principale v4, 2 accueils de 0,6 s pendant « All your essentials on your home screen. » (Sport, Nutrition).
+widget nextSet-m-look-rouge-a-levres kind=nextSet family=medium scale=3 look=rouge-a-levres
+widget personalRecords-s-look-rouge-a-levres kind=personalRecords family=small scale=4 look=rouge-a-levres
+widget weeklyVolume-m-look-rouge-a-levres kind=weeklyVolume family=medium scale=3 look=rouge-a-levres
+widget nextSet-m-look-luxe-piste kind=nextSet family=medium scale=3 look=luxe-piste
+widget personalRecords-s-look-luxe-piste kind=personalRecords family=small scale=4 look=luxe-piste
+widget weeklyVolume-m-look-luxe-piste kind=weeklyVolume family=medium scale=3 look=luxe-piste
+widget caloriesLeft-s-look-aura-aube kind=caloriesLeft family=small scale=4 look=aura-aube
+widget mealsToday-m-look-aura-aube kind=mealsToday family=medium scale=3 look=aura-aube
+widget nutritionWeek-m-look-aura-aube kind=nutritionWeek family=medium scale=3 look=aura-aube
+only nextSet-m-look-rouge-a-levres personalRecords-s-look-rouge-a-levres weeklyVolume-m-look-rouge-a-levres nextSet-m-look-luxe-piste personalRecords-s-look-luxe-piste weeklyVolume-m-look-luxe-piste caloriesLeft-s-look-aura-aube mealsToday-m-look-aura-aube nutritionWeek-m-look-aura-aube
