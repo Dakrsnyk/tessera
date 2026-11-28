@@ -1,5 +1,5 @@
 # Écrans fixes de l'app pour les films, rendus par [adkit] dans report/adkit/screens/<fichier>.png
-# (iPhone 16 Pro, 1 206 × 2 622, barre d'état à 9:41, clair, français (anglais avec [adkit-en]), style Saphir, données démo).
+# (iPhone 16 Pro, 1 206 × 2 622, barre d'état à 9:41, clair, français (anglais avec [adkit-en]), style de scripts/ad_style.txt (Graphite par défaut), données démo).
 # Kit refait le 2026-11-18 (run [adkit-en] après la refonte Hybride des mini-apps, Build 467) : les captures
 # d'avant le 2026-11-12 montrent l'ancienne interface et ne doivent plus servir dans une pub.
 # Format : <fichier> <valeur de -screenshotScreen> [arguments de lancement en plus]

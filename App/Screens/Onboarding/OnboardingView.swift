@@ -357,7 +357,7 @@ private struct StyleStep: View {
                         .foregroundStyle(.secondary)
                     Text(tr("Choisis ton style"))
                         .font(.largeTitle.weight(.bold))
-                    Text(tr("Saphir est offert. Avec Premium, choisis parmi \(AppStyleID.allCases.count) couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."))
+                    Text(tr("Graphite est offert. Avec Premium, choisis parmi \(AppStyleID.allCases.count) couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)

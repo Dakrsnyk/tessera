@@ -8,7 +8,7 @@
 # live : state=rest|paused|ready rest | from to · paused · routine exercise set sets load done total restTotal
 #        bg=real|night|clear scheme w radius scale
 # demo : exercise view (indice ou nom : Profil, 3/4…) fps w h scale bg=clear|card|fill scheme accent
-# Style de l'app : Saphir (-screenshotStyle sapphire), langue : AD_LANG (fr par défaut, en avec [adkit-en]).
+# Style de l'app : celui de scripts/ad_style.txt (Graphite par défaut depuis le 2026-11-27, -screenshotStyle), langue : AD_LANG (fr par défaut, en avec [adkit-en]).
 # Échelles : 4 pour un petit widget (680 px), 3 pour moyen / grand (1 092 px de large), 4 pour l'écran verrouillé.
 # « only a b c » : ce run ne rend QUE ces pièces (la dernière ligne « only » compte) ; « only all » : tout le kit (une heure).
 # Le QG marketing en ajoute une à chaque demande, pour ne pas refaire les 214 pièces. Avant un run [adkit] complet : finir la liste par « only all ».

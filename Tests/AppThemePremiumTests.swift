@@ -1,16 +1,16 @@
 import XCTest
 @testable import Ardane
 
-/// Saphir is the default color and the only free one; the eleven others are Premium.
+/// Graphite is the default color and the only free one since 2026-11-27 (Saphir before); the others are Premium.
 @MainActor
 final class AppThemePremiumTests: XCTestCase {
-    func testSaphirIsTheDefault() throws {
-        XCTAssertEqual(AppSettings().appStyle, .sapphire)
-        XCTAssertEqual(AppStyleID.free, .sapphire)
+    func testGraphiteIsTheDefault() throws {
+        XCTAssertEqual(AppSettings().appStyle, .slate)
+        XCTAssertEqual(AppStyleID.free, .slate)
         let empty = try JSONDecoder().decode(AppSettings.self, from: Data("{}".utf8))
-        XCTAssertEqual(empty.appStyle, .sapphire)
+        XCTAssertEqual(empty.appStyle, .slate)
         let unknown = try JSONDecoder().decode(AppSettings.self, from: Data(#"{"appStyle":"nope"}"#.utf8))
-        XCTAssertEqual(unknown.appStyle, .sapphire)
+        XCTAssertEqual(unknown.appStyle, .slate)
     }
 
     func testAnOldSavedSettingKeepsItsValue() throws {
@@ -21,17 +21,23 @@ final class AppThemePremiumTests: XCTestCase {
         XCTAssertEqual(former.appStyle, .jade)
     }
 
-    func testOnlySaphirIsFree() {
-        XCTAssertFalse(AppStyleID.sapphire.isPremium)
+    func testOnlyGraphiteIsFree() {
+        XCTAssertFalse(AppStyleID.slate.isPremium)
         XCTAssertEqual(AppStyleID.allCases.filter(\.isPremium).count, AppStyleID.allCases.count - 1)
     }
 
-    func testFreePlanOnJadeShowsSaphir() {
-        XCTAssertEqual(AppStyleID.jade.effective(isPremium: false), .sapphire)
-        XCTAssertEqual(AppStyle.style(.jade, isPremium: false).id, .sapphire)
+    func testFreePlanOnJadeShowsGraphite() {
+        XCTAssertEqual(AppStyleID.jade.effective(isPremium: false), .slate)
+        XCTAssertEqual(AppStyle.style(.jade, isPremium: false).id, .slate)
         for id in AppStyleID.allCases {
-            XCTAssertEqual(id.effective(isPremium: false), .sapphire, "\(id)")
+            XCTAssertEqual(id.effective(isPremium: false), .slate, "\(id)")
         }
+    }
+
+    func testFreePlanSavedOnSaphirNowShowsGraphite() {
+        XCTAssertTrue(AppStyleID.sapphire.isPremium)
+        XCTAssertEqual(AppStyleID.sapphire.effective(isPremium: false), .slate)
+        XCTAssertEqual(AppStyleID.sapphire.effective(isPremium: true), .sapphire)
     }
 
     func testPremiumKeepsItsColor() {
@@ -41,15 +47,15 @@ final class AppThemePremiumTests: XCTestCase {
         XCTAssertEqual(AppStyle.style(.jade, isPremium: true).id, .jade)
     }
 
-    func testSaphirIsAlwaysAvailable() {
-        XCTAssertEqual(AppStyleID.sapphire.effective(isPremium: false), .sapphire)
-        XCTAssertEqual(AppStyleID.sapphire.effective(isPremium: true), .sapphire)
+    func testGraphiteIsAlwaysAvailable() {
+        XCTAssertEqual(AppStyleID.slate.effective(isPremium: false), .slate)
+        XCTAssertEqual(AppStyleID.slate.effective(isPremium: true), .slate)
     }
 
     func testEndOfPremiumKeepsTheSavedChoice() {
         var settings = AppSettings()
         settings.appStyle = .ruby
-        XCTAssertEqual(settings.appStyle.effective(isPremium: false), .sapphire)
+        XCTAssertEqual(settings.appStyle.effective(isPremium: false), .slate)
         XCTAssertEqual(settings.appStyle, .ruby, "Only the display changes: the choice comes back with Premium")
         XCTAssertEqual(settings.appStyle.effective(isPremium: true), .ruby)
     }

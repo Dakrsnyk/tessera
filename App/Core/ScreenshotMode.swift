@@ -42,7 +42,7 @@ enum ScreenshotMode {
         // Ads: `-screenshotCourseColors forest`, the demo courses drawn in the greens of a Home Screen.
         StudentState.adCourseColors = defaults.string(forKey: "screenshotCourseColors").flatMap(StudentState.adCourseColors(named:))
         model.updateSettings {
-            $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(named:)) ?? .sapphire
+            $0.appStyle = defaults.string(forKey: "screenshotStyle").flatMap(AppStyleID.init(named:)) ?? .free
             $0.appearance = defaults.string(forKey: "screenshotAppearance").flatMap(AppearanceMode.init(rawValue:)) ?? .system
             $0.hasChosenStyle = true
             $0.hasCompletedProfileSetup = true

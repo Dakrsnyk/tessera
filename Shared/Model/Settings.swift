@@ -40,15 +40,16 @@ enum AppStyleID: String, Codable, CaseIterable, Identifiable {
     /// A saved choice from before the new palette still decodes (to its closest color), never fails the settings.
     init(from decoder: Decoder) throws {
         let name = try decoder.singleValueContainer().decode(String.self)
-        self = AppStyleID(named: name) ?? .sapphire
+        self = AppStyleID(named: name) ?? Self.free
     }
 
     /// The only color of the free plan, and the default one. The others are Premium.
-    static let free: AppStyleID = .sapphire
+    /// Graphite since 2026-11-27 (PDG; Saphir before): a free plan saved on Saphir now shows Graphite.
+    static let free: AppStyleID = .slate
 
     var isPremium: Bool { self != Self.free }
 
-    /// The color actually drawn: a free plan shows Saphir whatever is saved (the saved choice is kept,
+    /// The color actually drawn: a free plan shows Graphite whatever is saved (the saved choice is kept,
     /// so it comes back with Premium), Premium shows its choice.
     func effective(isPremium premium: Bool) -> AppStyleID {
         (premium || !isPremium) ? self : Self.free
@@ -83,7 +84,7 @@ struct AppSettings: Codable, Hashable {
     var cryptoCurrency = "usd"
     var hasCompletedOnboarding = false
     var hydrationReminders = false
-    var appStyle: AppStyleID = .sapphire
+    var appStyle: AppStyleID = .free
     var appearance: AppearanceMode = .system
     /// Set once the style has been picked (at the first launch, or once after an update).
     var hasChosenStyle = false
@@ -172,7 +173,7 @@ struct AppSettings: Codable, Hashable {
         cryptoCurrency = (try? c.decodeIfPresent(String.self, forKey: .cryptoCurrency)) ?? "usd"
         hasCompletedOnboarding = (try? c.decodeIfPresent(Bool.self, forKey: .hasCompletedOnboarding)) ?? false
         hydrationReminders = (try? c.decodeIfPresent(Bool.self, forKey: .hydrationReminders)) ?? false
-        appStyle = (try? c.decodeIfPresent(AppStyleID.self, forKey: .appStyle)) ?? .sapphire
+        appStyle = (try? c.decodeIfPresent(AppStyleID.self, forKey: .appStyle)) ?? .free
         appearance = (try? c.decodeIfPresent(AppearanceMode.self, forKey: .appearance)) ?? .system
         hasChosenStyle = (try? c.decodeIfPresent(Bool.self, forKey: .hasChosenStyle)) ?? false
         profileName = (try? c.decodeIfPresent(String.self, forKey: .profileName)) ?? ""

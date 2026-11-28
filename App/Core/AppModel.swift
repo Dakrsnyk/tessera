@@ -711,7 +711,7 @@ final class AppModel {
     }
 
     func setStyle(_ style: AppStyleID) {
-        // Only Saphir is free: the same lock as everywhere (a free person never saves a Premium color).
+        // Only Graphite is free: the same lock as everywhere (a free person never saves a Premium color).
         guard style != settings.appStyle, isPremium || !style.isPremium else { return }
         updateSettings { $0.appStyle = style }
     }

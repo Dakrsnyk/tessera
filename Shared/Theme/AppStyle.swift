@@ -100,7 +100,7 @@ struct AppStyle: Identifiable {
         all.first { $0.id == id } ?? all[0]
     }
 
-    /// The style drawn for a saved choice: Saphir for a free plan whatever is saved.
+    /// The style drawn for a saved choice: Graphite for a free plan whatever is saved.
     static func style(_ id: AppStyleID, isPremium: Bool) -> AppStyle {
         style(id.effective(isPremium: isPremium))
     }

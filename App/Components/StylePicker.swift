@@ -70,7 +70,7 @@ struct AppStyleSwatch: View {
     }
 }
 
-/// Every color of the app, four per row. Picking one applies it right away; only Saphir is free, the others
+/// Every color of the app, four per row. Picking one applies it right away; only Graphite is free, the others
 /// carry a padlock and open the paywall for a free plan.
 struct AppStyleGrid: View {
     @Environment(AppModel.self) private var model
@@ -78,7 +78,7 @@ struct AppStyleGrid: View {
     var swatchSize: CGFloat = 54
 
     var body: some View {
-        // What is drawn: a free plan is on Saphir whatever is saved.
+        // What is drawn: a free plan is on Graphite whatever is saved.
         let shown = model.settings.appStyle.effective(isPremium: model.isPremium)
         LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 6), count: 4), spacing: 14) {
             ForEach(AppStyle.all) { style in
@@ -103,7 +103,7 @@ struct AppStyleGrid: View {
         PaywallContext(
             symbol: "paintpalette.fill",
             title: tr("Toutes les couleurs de l'app"),
-            detail: tr("Avec Premium, choisis la couleur d'Ardane parmi \(AppStyleID.allCases.count) et change-la quand tu veux. Saphir reste gratuit."),
+            detail: tr("Avec Premium, choisis la couleur d'Ardane parmi \(AppStyleID.allCases.count) et change-la quand tu veux. Graphite reste gratuit."),
             perk: .styles
         )
     }

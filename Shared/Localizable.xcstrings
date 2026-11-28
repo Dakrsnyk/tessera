@@ -41925,49 +41925,49 @@
         }
       }
     },
-    "Avec Premium, choisis la couleur d'Ardane parmi %@ et change-la quand tu veux. Saphir reste gratuit.": {
+    "Avec Premium, choisis la couleur d'Ardane parmi %@ et change-la quand tu veux. Graphite reste gratuit.": {
       "extractionState": "manual",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Mit Premium wählst du die Farbe von Ardane aus %@ und änderst sie jederzeit. Saphir bleibt kostenlos."
+            "value": "Mit Premium wählst du die Farbe von Ardane aus %@ und änderst sie jederzeit. Graphit bleibt kostenlos."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "With Premium, pick Ardane's color from %@ and change it whenever you like. Sapphire stays free."
+            "value": "With Premium, pick Ardane's color from %@ and change it whenever you like. Graphite stays free."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Con Premium, elige el color de Ardane entre %@ y cámbialo cuando quieras. Zafiro sigue siendo gratis."
+            "value": "Con Premium, elige el color de Ardane entre %@ y cámbialo cuando quieras. Grafito sigue siendo gratis."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Avec Premium, choisis la couleur d'Ardane parmi %@ et change-la quand tu veux. Saphir reste gratuit."
+            "value": "Avec Premium, choisis la couleur d'Ardane parmi %@ et change-la quand tu veux. Graphite reste gratuit."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Con Premium scegli il colore di Ardane tra %@ e lo cambi quando vuoi. Zaffiro resta gratuito."
+            "value": "Con Premium scegli il colore di Ardane tra %@ e lo cambi quando vuoi. Grafite resta gratuita."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "Premiumなら、Ardaneのカラーを%@色から選んで、いつでも変更できます。サファイアは無料のままです。"
+            "value": "Premiumなら、Ardaneのカラーを%@色から選んで、いつでも変更できます。グラファイトは無料のままです。"
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Com o Premium, escolha a cor do Ardane entre %@ e troque quando quiser. Safira continua grátis."
+            "value": "Com o Premium, escolha a cor do Ardane entre %@ e troque quando quiser. Grafite continua grátis."
           }
         }
       }
@@ -130140,6 +130140,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Grafite"
+          }
+        }
+      }
+    },
+    "Graphite est offert. Avec Premium, choisis parmi %@ couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
+      "extractionState": "manual",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graphit ist kostenlos. Mit Premium wählst du aus %@ Farben, jeweils hell und dunkel. Du kannst sie jederzeit in den Einstellungen ändern."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graphite is free. With Premium, choose from %@ colors, each in light and dark. You can change it anytime in Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grafito es gratis. Con Premium, elige entre %@ colores, cada uno en claro y oscuro. Podrás cambiarlo en cualquier momento en Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Graphite est offert. Avec Premium, choisis parmi %@ couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grafite è gratuita. Con Premium scegli tra %@ colori, ciascuno in chiaro e scuro. Potrai cambiarlo in qualsiasi momento in Impostazioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "グラファイトは無料です。Premiumなら%@色から選べ、それぞれライトとダークに対応。設定でいつでも変更できます。"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Grafite é grátis. Com o Premium, escolha entre %@ cores, cada uma em claro e escuro. Você pode trocar a qualquer momento em Ajustes."
           }
         }
       }
@@ -247264,53 +247311,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Safira"
-          }
-        }
-      }
-    },
-    "Saphir est offert. Avec Premium, choisis parmi %@ couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages.": {
-      "extractionState": "manual",
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saphir ist kostenlos. Mit Premium wählst du aus %@ Farben, jeweils hell und dunkel. Du kannst sie jederzeit in den Einstellungen ändern."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sapphire is free. With Premium, choose from %@ colors, each in light and dark. You can change it anytime in Settings."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zafiro es gratis. Con Premium, elige entre %@ colores, cada uno en claro y oscuro. Podrás cambiarlo en cualquier momento en Ajustes."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Saphir est offert. Avec Premium, choisis parmi %@ couleurs, chacune en clair et en sombre. Tu pourras en changer à tout moment dans Réglages."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zaffiro è gratuito. Con Premium scegli tra %@ colori, ciascuno in chiaro e scuro. Potrai cambiarlo in qualsiasi momento in Impostazioni."
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "サファイアは無料です。Premiumなら%@色から選べ、それぞれライトとダークに対応。設定でいつでも変更できます。"
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Safira é grátis. Com o Premium, escolha entre %@ cores, cada uma em claro e escuro. Você pode trocar a qualquer momento em Ajustes."
           }
         }
       }
