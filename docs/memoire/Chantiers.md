@@ -575,3 +575,14 @@ Mission complète : `Demandes.md`, « Mission de nuit du 2026-11-17 ». Décisio
 ## Corrections Premium et pubs — 2026-11-27
 - Fait : retour de l'offre de bienvenue, compteur de scans dans le trousseau, tableau de l'offre complet, fond des citations, affiche-09 et post-feed-11 (QG). Analyse : variante 2 posts/jour TikTok + 2 Instagram dans `docs/marketing/Analyse-integrale-Ardane-et-pubs-2026-11-27.md`.
 - Reste (pubs) : refaire la principale en 25-30 s, fin « Télécharge Ardane gratuitement », un style gratuit montré, un geste réel, rallonger 4 à 6 fadein. Politique de confidentialité : citer le compteur du trousseau.
+
+## Refonte de toutes les pubs avec l'app actuelle — nuit du 2026-11-28
+Demande du PDG : refaire toutes les pubs, même script, captures à jour (Graphite, widgets du 2026-11-27), fonds gardés, corrections du brief 31 (§ 3 et § 4), chaque pub vérifiée une à une.
+- Fait : 62 vidéos livrées au QG `_imports/` (une version par pub, anciennes dans `_archives-variantes/`), chacune contrôlée par le Chef sur sa planche `controle05` (une image / 0,5 s), -14,0 à -14,5 LUFS.
+  - Pub principale longue `Main-pub-all-your-essentials-v2.6` (56 s, calage et mix de v2.5, pastilles Premium or).
+  - 26 organiques : scan v2, nutrition v6, papier v2, planning v3, budget v2, finances v4, cours v2, voyage v4, battle v2, business v5, études v4, gym v2, huit v2, liste3 v2, lock v2, pov v2, satisfying v2, top5 v2, verrou v2, départ v2, fitness v5, inspo v2, journée v2, main v2, accueil v2, habitudes v4, tuto v2 ; affiches 03/04/06 v2 ; avant-après v6 ; 28 fadein v3 (11 et 28 retirées).
+  - Widgets : exports `[adkit-img]` du run 46120670839 (2026-11-28). Top 3 et Auto retirés de toutes les pubs.
+  - Défauts trouvés au contrôle du Chef et corrigés : Études marquait Modern et Forest « Free style » (ils sont Premium) ; satisfying écrivait le nom du style sur le Dock ; pub longue sans pastille Premium 0,6 s.
+- Reste :
+  - Écrans d'app (pas les widgets) : ceux du 11-18…11-22 (accent Saphir, anciennes dates Nov 20/22 dans planning, cours, huit), car les captures CI du run 633 sont ratées (voir Pieges-connus). Les refaire demande d'allonger l'attente de capture dans `build.yml` (autorisation du PDG).
+  - Pas de plan en style gratuit dans gym et avant-après (exports gratuits manquants) ; changement de style de tout l'accueil absent de plusieurs pubs ; variantes d'accroche b/c non refaites ; son mesuré, pas écouté.
