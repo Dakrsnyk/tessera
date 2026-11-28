@@ -1286,4 +1286,17 @@ widget macros-m-look-riche-marbre kind=macros family=medium scale=3 look=riche-m
 widget timetable-l-look-riche-marbre kind=timetable family=large scale=3 look=riche-marbre
 widget macros-m-look-mini-suisse kind=macros family=medium scale=3 look=mini-suisse
 widget timetable-l-look-mini-suisse kind=timetable family=large scale=3 look=mini-suisse
-only weekView-m-light tasks-s-light upNext-s-light habits-m-light macros-m-light timetable-l-light lock-minuit live-ready-night live-afterset-night macros-m-look-prime-graphite timetable-l-look-prime-graphite macros-m-look-prime-carte-noire timetable-l-look-prime-carte-noire macros-m-look-luxe-guilloche timetable-l-look-luxe-guilloche macros-m-look-verre-depoli timetable-l-look-verre-depoli macros-m-look-aura-spirit timetable-l-look-aura-spirit macros-m-look-aura-lune timetable-l-look-aura-lune macros-m-look-chrome-liquide timetable-l-look-chrome-liquide macros-m-look-nat-foret timetable-l-look-nat-foret macros-m-look-riche-marbre timetable-l-look-riche-marbre macros-m-look-mini-suisse timetable-l-look-mini-suisse
+# 2026-11-27 : pub principale v3, les 4 accueils de la fin (néon, rose, aurore) : candidats.
+widget macros-m-look-cyber-neon-pluie kind=macros family=medium scale=3 look=cyber-neon-pluie
+widget timetable-l-look-cyber-neon-pluie kind=timetable family=large scale=3 look=cyber-neon-pluie
+widget macros-m-look-chambre-ado kind=macros family=medium scale=3 look=chambre-ado
+widget timetable-l-look-chambre-ado kind=timetable family=large scale=3 look=chambre-ado
+widget macros-m-look-aura-neon-ange kind=macros family=medium scale=3 look=aura-neon-ange
+widget timetable-l-look-aura-neon-ange kind=timetable family=large scale=3 look=aura-neon-ange
+widget macros-m-look-pivoine kind=macros family=medium scale=3 look=pivoine
+widget timetable-l-look-pivoine kind=timetable family=large scale=3 look=pivoine
+widget macros-m-look-ballet-rose kind=macros family=medium scale=3 look=ballet-rose
+widget timetable-l-look-ballet-rose kind=timetable family=large scale=3 look=ballet-rose
+widget macros-m-look-aurore-vitre kind=macros family=medium scale=3 look=aurore-vitre
+widget timetable-l-look-aurore-vitre kind=timetable family=large scale=3 look=aurore-vitre
+only macros-m-look-cyber-neon-pluie timetable-l-look-cyber-neon-pluie macros-m-look-chambre-ado timetable-l-look-chambre-ado macros-m-look-aura-neon-ange timetable-l-look-aura-neon-ange macros-m-look-pivoine timetable-l-look-pivoine macros-m-look-ballet-rose timetable-l-look-ballet-rose macros-m-look-aurore-vitre timetable-l-look-aurore-vitre
