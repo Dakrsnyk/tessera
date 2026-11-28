@@ -1299,4 +1299,9 @@ widget macros-m-look-ballet-rose kind=macros family=medium scale=3 look=ballet-r
 widget timetable-l-look-ballet-rose kind=timetable family=large scale=3 look=ballet-rose
 widget macros-m-look-aurore-vitre kind=macros family=medium scale=3 look=aurore-vitre
 widget timetable-l-look-aurore-vitre kind=timetable family=large scale=3 look=aurore-vitre
-only macros-m-look-cyber-neon-pluie timetable-l-look-cyber-neon-pluie macros-m-look-chambre-ado timetable-l-look-chambre-ado macros-m-look-aura-neon-ange timetable-l-look-aura-neon-ange macros-m-look-pivoine timetable-l-look-pivoine macros-m-look-ballet-rose timetable-l-look-ballet-rose macros-m-look-aurore-vitre timetable-l-look-aurore-vitre
+# 2026-11-27 : pub principale v3, le calendrier en grand (PDG : « mal placé ») : même style, disposition changée comme dans le Studio.
+widget timetable-l-look-ballet-rose-vertical kind=timetable family=large scale=3 look=ballet-rose layout=vertical
+widget timetable-l-look-ballet-rose-auto kind=timetable family=large scale=3 look=ballet-rose layout=auto
+widget timetable-l-look-aura-spirit-vertical kind=timetable family=large scale=3 look=aura-spirit layout=vertical
+widget timetable-l-look-aura-spirit-auto kind=timetable family=large scale=3 look=aura-spirit layout=auto
+only timetable-l-look-ballet-rose-vertical timetable-l-look-ballet-rose-auto timetable-l-look-aura-spirit-vertical timetable-l-look-aura-spirit-auto
